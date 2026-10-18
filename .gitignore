@@ -1,0 +1,24 @@
+# Advanced Packaging Atlas - standalone repository.
+#
+# Tracked: code, config, schema, DevLog, the extraction database (CSV), evidence YAML, stage-1
+# deliverables and the per-source metadata references/<id>/source.json.
+# Local-only: licensed PDFs, extracted text/figures, pipeline caches, logs and secrets.
+
+# Secrets and environments
+.env
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Pipeline intermediates (regenerable). cache/ also holds the IEEE browser profile (session cookies).
+cache/
+logs/
+
+# Local-only source assets: cached PDFs carry an institutional licensed-download stamp; extracted text
+# and figures have source-specific rights. Recreate with scripts/ieee_fetch.py and scripts/extract_source.py.
+references/*/source.pdf
+references/*/text.md
+references/*/figures/
+references/_inbox/*
+!references/_inbox/README.md
