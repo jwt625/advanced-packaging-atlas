@@ -16,7 +16,10 @@ For each paper, one at a time, completely:
 3. Write rows into `data/_staging/<batch>/{papers,test_vehicles,components,stack_layers,interconnects,process_steps,electrical_interfaces,optical_interfaces,metrics}.csv`
    (copy headers from `data/_staging/TEMPLATE/`) and `data/_staging/<batch>/evidence/<paper_id>.yaml`.
 4. The papers row: source_status full_text, pages_read, verified_on (today), primary_bucket from the batch file unless
-   the full text clearly shows otherwise (say so in the report).
+   the full text clearly shows otherwise (say so in the report). Set `has_process_flow` (yes/no) from the full text:
+   yes if it describes an ordered fabrication/assembly flow or discrete process steps for at least one TV; no if it
+   only reports the finished stack or results. Yes requires `process_steps` rows; no requires an empty
+   `process_steps` table and `process_steps` in `evidence.not_reported`.
 
 ## Source quality
 If `references/<paper_id>/TEXT_LAYER_WARNING.md` exists, the PDF text layer was garbled and `text.md` holds tesseract

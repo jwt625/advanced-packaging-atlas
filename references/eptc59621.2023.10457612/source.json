@@ -1,0 +1,27 @@
+{
+ "paper_id": "eptc59621.2023.10457612",
+ "doi": "10.1109/eptc59621.2023.10457612",
+ "url": "https://doi.org/10.1109/eptc59621.2023.10457612",
+ "arnumber": "10457612",
+ "retrieved_on": "2026-10-19",
+ "access": "institutional subscription (local-only)",
+ "redistribution": "restricted_local_only",
+ "bytes": 5222282,
+ "sha256": "a17f0d1fb766b8edb34561c1d3dc1e1e402dd92411ed620cb0d2d2ca3d38eb93",
+ "pages": 4,
+ "text_chars": 19967,
+ "n_figure_files": 13,
+ "extracted_on": "2026-10-19",
+ "digit_ratio": 0.0512,
+ "common_word_ratio": 0.001,
+ "garbled_pages": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "garbled_text_layer": true,
+ "ocr_digit_ratio": 0.0319,
+ "ocr_common_word_ratio": 0.159,
+ "institutional_stamp": true
+}

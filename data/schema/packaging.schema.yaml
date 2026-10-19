@@ -1,6 +1,6 @@
 # Schema for the packaging extraction tables in data/. Single source of truth for scripts/validate_db.py.
 # Modeled on eo-modulator-atlas (data/schema/devices.schema.yaml). v1 2026-10-18; v2 2026-10-18 after pilots 1-3
-# (data/_staging/pilot_*/SCHEMA_FEEDBACK.md).
+# (data/_staging/pilot_*/SCHEMA_FEEDBACK.md); v2.1 2026-10-19 adds papers.has_process_flow.
 #
 # Rules (binding)
 #   (a) Empty cell = not reported in the source. Never estimate, never take numbers from memory, press, other papers,
@@ -43,7 +43,7 @@
 #       winner; list every alternative in the evidence `conflicts` list (field, values, locators, chosen, why).
 #   (l) A technology/brand name goes in `technology_name` only if the paper itself uses it; inferred mappings -> notes.
 #   (m) No emoji; ISO dates; no absolute local paths or private names in any file; notes <= 30 words, no long quotes.
-version: 2
+version: 2.1
 
 enums:
   basis: [measured, design_target, simulated, derived, author_estimate, stated, unspecified]
@@ -119,6 +119,7 @@ tables:
       source_status: {type: enum, enum: source_status, required: true}
       pages_read: {type: str}
       n_test_vehicles: {type: int}
+      has_process_flow: {type: enum, enum: yes_no}   # full-text decision: ordered flow or discrete process steps described
       verified_on: {type: date, required: true}
       notes: {type: str}
   test_vehicles:

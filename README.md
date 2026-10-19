@@ -103,7 +103,7 @@ Use Python 3.12+ and `uv`:
 ```sh
 uv sync                                                     # creates .venv from uv.lock
 uv run python scripts/ieee_fetch.py --login                 # sign in (institutional) once
-uv run python scripts/ieee_fetch.py --run --headed          # throttled retrieval, 60/day
+uv run python scripts/ieee_fetch.py --run --headed          # throttled retrieval, 60 per 2 h
 uv run python scripts/ingest_inbox.py                       # ingest manual (_inbox) downloads
 ```
 

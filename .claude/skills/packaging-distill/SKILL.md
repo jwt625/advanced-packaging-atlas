@@ -27,8 +27,11 @@ Read `data/schema/packaging.schema.yaml` first (v2): its rules (a)-(m) and enums
 6. Interconnects: every level the paper discloses (hybrid bond pads, microbumps, Cu pillars, C4, BGA, TSV/TGV/TDV,
    RDL vias): pitch, diameter, height/depth, count, metallurgy, bonding method and conditions (temp, pressure/force,
    time, anneal), alignment, resistance, yield.
-7. Process steps: the ordered flow as the paper describes it (seq), with category, material, equipment (only if named)
-   and conditions. Do not fill in "standard" steps the paper does not state.
+7. Process flow: after reading the full text, set `papers.has_process_flow` (yes/no). `yes` if the paper describes an
+   ordered fabrication/assembly flow, or discrete process steps, for at least one TV; `no` if it only reports the
+   finished stack or results. If yes, write `process_steps`: the ordered flow as the paper describes it (seq), with
+   category, material, equipment (only if named) and conditions. If no, leave `process_steps` empty and list
+   `process_steps` in `evidence.not_reported`. Do not fill in "standard" steps the paper does not state.
 8. Electrical interfaces (D2D/HBM PHY) only when the paper reports an electrical/protocol property: protocol as
    written (UCIe-S/A, BoW, AIB, HBM3/3E/4, custom), lane rate, lanes, aggregate BW, BW density (Tbps/mm shoreline,
    Tbps/mm2 areal), energy pJ/bit with `scope`, reach, bump pitch, channel line/space, insertion loss at frequency,
@@ -50,8 +53,9 @@ Read `data/schema/packaging.schema.yaml` first (v2): its rules (a)-(m) and enums
 2. Open the page renders (`figures/page_NN.png`, every page is rendered at 150 dpi; crop/upscale into your scratchpad if labels are small) for every figure/table that carries a dimension, stack drawing,
    process-flow schematic, cross-section or table you use. Read numbers from the image; do not guess.
 3. Build a ledger per TV: components, layers (top to bottom), interconnects, process flow, interfaces, metrics.
+   Decide `has_process_flow` from the full text (rule 7).
 4. Write rows to the staging CSVs (headers exactly as in `data/schema/packaging.schema.yaml`; copy the header lines
-   from `data/_staging/TEMPLATE/`), and `evidence/<paper_id>.yaml`:
+   from `data/_staging/TEMPLATE/`), including `papers.has_process_flow` (yes/no), and `evidence/<paper_id>.yaml`:
    ```yaml
    paper_id: ectc51909.2023.00174
    verified_on: 2026-10-18

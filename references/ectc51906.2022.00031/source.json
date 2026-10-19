@@ -1,0 +1,30 @@
+{
+ "paper_id": "ectc51906.2022.00031",
+ "doi": "10.1109/ectc51906.2022.00031",
+ "url": "https://doi.org/10.1109/ectc51906.2022.00031",
+ "arnumber": "9816704",
+ "retrieved_on": "2026-10-19",
+ "access": "institutional subscription (local-only)",
+ "redistribution": "restricted_local_only",
+ "bytes": 2395416,
+ "sha256": "ebbdab774dbae397122bdb3c05c8de7186f3e483a4aba9d02d20aabbf1ba610c",
+ "pages": 7,
+ "text_chars": 29833,
+ "n_figure_files": 14,
+ "extracted_on": "2026-10-19",
+ "digit_ratio": 0.2343,
+ "common_word_ratio": 0.006,
+ "garbled_pages": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7
+ ],
+ "garbled_text_layer": true,
+ "ocr_digit_ratio": 0.0321,
+ "ocr_common_word_ratio": 0.199,
+ "institutional_stamp": true
+}
