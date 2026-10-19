@@ -27,8 +27,27 @@ Spec: `init-prompt.md`. Plan, decisions and audit corrections: `DevLog/`.
 | `data/` | extraction database (`data/*.csv`), `data/evidence/*.yaml`, `data/schema/packaging.schema.yaml`, per-batch staging `data/_staging/` |
 | `outputs/` | stage-1 deliverables (`candidates.csv`, `cache_list.csv`, `triage_report.md`) |
 | `references/` | local source cache (`source.json` tracked; PDFs/text/figures local-only - see [references/README.md](references/README.md)) |
+| `app/` | SvelteKit web atlas (dashboard, table, explorer, about); reads `app/static/data/atlas.json` |
 | `.claude/skills/packaging-distill/SKILL.md` | the binding distillation skill |
 | `cache/`, `logs/` | local-only pipeline intermediates (git-ignored) |
+
+## Web atlas (`app/`)
+
+A static SvelteKit site that presents the extraction database: a dashboard of coverage, a sortable/
+expandable table of every test vehicle with an evidence drawer, and an explorer of the pitch,
+through-via, bump, area and disclosure panels. Published to GitHub Pages at
+<https://outside5sigma.com/advanced-packaging-atlas/> by [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
+
+```sh
+uv run python scripts/build_views.py     # regenerate app/static/data/atlas.json from data/*.csv
+cd app && pnpm install && pnpm dev       # local dev server
+cd app && pnpm build                     # production build into app/build
+```
+
+`scripts/build_views.py` is a faithful projection of the database: it computes derived headline
+extremes (finest pitch, smallest via, hottest process step, ...) by picking the matching extracted row
+and carrying that row's `basis`/`locator`, and never estimates a value.
+
 
 ## Deliverables (`outputs/`)
 

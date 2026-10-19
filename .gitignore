@@ -22,3 +22,8 @@ references/*/text.md
 references/*/figures/
 references/_inbox/*
 !references/_inbox/README.md
+
+# Front-end build artifacts (regenerable with `pnpm install && pnpm build` in app/).
+node_modules/
+app/build/
+app/.svelte-kit/
