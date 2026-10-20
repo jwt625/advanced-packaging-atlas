@@ -1,0 +1,4 @@
+flow_id,paper_id,flow_name,scope,level,tv_ids,build_seq,basis,source,overrides,locator,qualifiers,notes
+001c.147115-F1,001c.147115,"2.5D packaging: CoW process, module singulation, flip chip assembly (Sec. I)",generic_platform,fragments,001c.147115-a;001c.147115-b,1,stated,text,,p.1 Sec. I,,Generic 2.5D flow in introduction; TV assembly steps and conditions not disclosed.
+ectc51529.2024.00392-F1,ectc51529.2024.00392,Process Flow for Test Vehicle (Fig. 1),tv_build,full,ectc51529.2024.00392-a,1,stated,mixed,,p.2 Fig. 1; p.3 Sec. III; p.4 Sec. III.B-C; p.5 Sec. IV.A,,
+tcpmt.2025.3614186-F1,tcpmt.2025.3614186,"glass substrate double-sided SAP, chip-level adhesive assembly, BGA balling and board-level SMT (Sec. II.C, II.E)",tv_build,full,tcpmt.2025.3614186-a,1,stated,text,,p.2 Sec. II.C; p.3 Sec. II.E; p.4 Sec. II.E.3,,"SAP details referenced to [12], [23]; key steps summarized in the paper."

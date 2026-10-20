@@ -1,0 +1,35 @@
+paper_id: eptc62800.2024.10909809
+verified_on: 2026-10-20
+schema_version: 2.5
+source_files:
+  - references/eptc62800.2024.10909809/text.md
+  - references/eptc62800.2024.10909809/source.json
+  - references/eptc62800.2024.10909809/figures/page_01.png
+  - references/eptc62800.2024.10909809/figures/page_02.png
+  - references/eptc62800.2024.10909809/figures/page_03.png
+  - references/eptc62800.2024.10909809/figures/page_04.png
+figure_reading_method: >-
+  Page renders p.1-4 opened; 400 dpi re-renders of Fig. 4, Fig. 5 (profiler values, p-values) and Fig. 8 read for
+  numbers; candidates p02_fig3, p01_fig2, p02_table1, p03_fig4, p03_fig5 used; manual re-crops of Fig. 1, Fig. 6,
+  Fig. 7, Fig. 8 (candidates cut at bottom) opened.
+entries:
+  - {table: metrics, row_id: eptc62800.2024.10909809-a-m5, field: value, value: 132.965, unit: "%", basis: derived, locator: "p.3 Fig. 5(b)", note: "JMP profiler at High flow rate / Low current density, interval 122.2148-143.7152"}
+  - {table: metrics, row_id: eptc62800.2024.10909809-a-m13, field: value, value: 3, unit: "x Leg 2", basis: measured, locator: "p.4 Fig. 8(a)", note: "bar labels 3X, 1X, 4.2X, 2.6X; y-axis has no tick values"}
+  - {table: metrics, row_id: eptc62800.2024.10909809-a-m17, field: value, value: 16, unit: um, basis: measured, locator: "p.4 Fig. 8(b)", note: "mean diamonds read approx. 16 / 18.5 / 11 / 14 um for Legs 1-4"}
+derived: []
+conflicts: []
+excluded:
+  - "conventional FC-BGA core 400-800 um and >=400 um mechanically drilled resin-plug TH (background, Fig. 1 / Introduction)"
+  - "butterfly technique concept attributed to refs [1], [2]"
+  - "industry void criteria (void area max 30% of TH area; barrel thickness > 10 um) used only as pass_criterion"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - numeric flow rate (LPM/nozzle) and current density (ASD) values (only Low/High levels)
+  - substrate panel size, core material name, Cu foil and electroless Cu thickness
+  - plating bath concentrations, temperature; desmear and laser conditions
+  - absolute void occurrence rate; sample counts per leg
+  - reliability test results
+source_quality:
+  - "Table 2 equations are images; text layer has no content for them (ratios read from page render)."
+  - "Typo '2D-Xay' in source for 2D X-ray."

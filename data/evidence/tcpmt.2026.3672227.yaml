@@ -1,0 +1,59 @@
+paper_id: tcpmt.2026.3672227
+verified_on: 2026-10-20
+source_files:
+  - references/tcpmt.2026.3672227/text.md
+  - references/tcpmt.2026.3672227/source.json
+  - references/tcpmt.2026.3672227/figures/page_02.png
+  - references/tcpmt.2026.3672227/figures/page_03.png
+  - references/tcpmt.2026.3672227/figures/page_04.png
+  - references/tcpmt.2026.3672227/figures/page_05.png
+  - references/tcpmt.2026.3672227/figures/page_06.png
+  - references/tcpmt.2026.3672227/figures/page_07.png
+  - references/tcpmt.2026.3672227/figures/page_08.png
+  - references/tcpmt.2026.3672227/figures/img_p04_4.png
+  - references/tcpmt.2026.3672227/figures/img_p05_1.png
+  - references/tcpmt.2026.3672227/figures/img_p05_2.png
+  - references/tcpmt.2026.3672227/figures/img_p06_3.png
+  - references/tcpmt.2026.3672227/figures/img_p07_2.png
+  - references/tcpmt.2026.3672227/figures/img_p07_3.png
+  - references/tcpmt.2026.3672227/figures/img_p08_1.png
+figure_reading_method: >-
+  Bar labels in Fig. 8(e)(f), 9(b), 13, 15(b), 16(a)(b), 17(a) read from embedded images (img_p*) and candidate crops;
+  Fig. 8(f) labels re-checked on an enlarged crop of img_p04_4. Line plots (Fig. 4, 11) not digitized; only text values used.
+entries:
+  - {table: interconnects, row_id: tcpmt.2026.3672227-a-i1, field: height_um, value: 45, unit: um, basis: design_target, locator: "p.2 Table I; p.4 Sec. III.A", note: "C2 height 65 um = 45 Cu + 20 solder cap"}
+  - {table: metrics, row_id: tcpmt.2026.3672227-a-m32, field: value, value: 35.57, unit: um, basis: derived, locator: "p.4 Eq. (2)", note: "paper's own sum b + c = 20 + 15.57"}
+derived:
+  - {table: components, row_id: tcpmt.2026.3672227-a-c1, field: thickness_um, value: 775, formula: "0.775 mm x 1000", inputs: "p.2 Table I"}
+  - {table: components, row_id: tcpmt.2026.3672227-a-c2, field: thickness_um, value: 1964, formula: "1.964 mm x 1000", inputs: "p.2 Table I"}
+  - {table: components, row_id: tcpmt.2026.3672227-b-c1, field: thickness_um, value: 1964, formula: "1.964 mm x 1000", inputs: "p.2 Table I"}
+  - {table: components, row_id: tcpmt.2026.3672227-a-c3, field: thickness_um, value: 2500, formula: "2.5 mm x 1000", inputs: "p.2 Table I"}
+  - {table: stack_layers, row_id: tcpmt.2026.3672227-a-L01, field: thickness_um, value: 775, formula: "0.775 mm x 1000", inputs: "p.2 Table I"}
+  - {table: stack_layers, row_id: tcpmt.2026.3672227-a-L04, field: thickness_um, value: 2500, formula: "2.5 mm x 1000", inputs: "p.2 Table I"}
+  - {table: stack_layers, row_id: tcpmt.2026.3672227-a-L07, field: thickness_um, value: 1240, formula: "1.24 mm x 1000", inputs: "p.2 Sec. II.A"}
+  - {table: stack_layers, row_id: tcpmt.2026.3672227-b-L02, field: thickness_um, value: 1240, formula: "1.24 mm x 1000", inputs: "p.2 Sec. II.A"}
+  - {table: interconnects, row_id: tcpmt.2026.3672227-a-i2, field: diameter_um, value: 600, formula: "0.6 mm x 1000", inputs: "p.2 Table I"}
+  - {table: interconnects, row_id: tcpmt.2026.3672227-a-i2, field: pitch_um, value: 1000, formula: "1.0 mm x 1000", inputs: "p.2 Table I"}
+conflicts:
+  - {table: metrics, row_id: tcpmt.2026.3672227-a-m23, field: value, values: [23.8, 22.5, 23.5], locators: ["p.4 Fig. 8(f) label at 150 um", "p.5 Sec. III.B text 'decreases to 22.5 um as spacer height increases to 150 um'", "p.4 Fig. 8(e) Type 3 at 150 um"], chosen: 23.8, why: "figure labels win over text; Fig. 8(f) gives 22.5 at 200 um; Fig. 8(e) value kept on its own row"}
+  - {table: metrics, row_id: tcpmt.2026.3672227-a-m7, field: value, values: [-282, "~250 (cry-shaped)", "smile-shaped after ring attach"], locators: ["p.6 Fig. 13", "p.6 Sec. III.C (Fig. 12(a))", "p.6 Sec. III.D"], chosen: -282, why: "Fig. 13 labelled bar; text gives both shape conventions for the same stage"}
+  - {table: metrics, row_id: tcpmt.2026.3672227-a-m9, field: value, values: [244, "below 200"], locators: ["p.6 Fig. 13 (RAF after underfill)", "p.6 Sec. III.C (Fig. 12(a))"], chosen: 244, why: "Fig. 13 labelled bar; Sec. III.D also says RAF stays below 300 um"}
+  - {table: figures, row_id: tcpmt.2026.3672227-f03, field: label, values: ["(e) in caption", "(d) in image and text"], locators: ["p.5 Fig. 10 caption", "p.5 Sec. III.B"], chosen: "Fig. 10", why: "panel letter mismatch noted only"}
+  - {table: metrics, row_id: tcpmt.2026.3672227-a-m1, field: value, values: [86.9, "~80"], locators: ["p.6 Fig. 13", "p.6 Sec. III.D"], chosen: 86.9, why: "Fig. 13 labelled bar (RAF incoming substrate 74.4); text approximate"}
+excluded:
+  - "package sizes 85, 100, 102, 120 mm from refs [5]-[9]"
+  - "temperature-dependent CTE and modulus of the same TV (ref [7])"
+  - "Fig. 10(a)/12(a) 3D warpage colour-bar values (not tied to a stated stage value)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - die function/node, underfill and adhesive products, SOP solder alloy
+  - C2 bump count, BGA alloy, BGA reflow profile
+  - reflow time/ramp/atmosphere, underfill and adhesive cure times
+  - MCJ magnetic force and plate materials
+  - reliability sample counts
+  - "process_steps: tcpmt.2026.3672227-b (bare substrate characterized only; a flip-chip reflow profile was applied to study SOP geometry, no build)"
+notes: >-
+  Accepted author version (header 'REPLACE THIS LINE ...'); final pagination may differ. Warpage sign convention is
+  not defined; values entered as plotted. Final MCJ setting for the FCF+MCJ builds inferred as the optimized Type 3 with
+  200 um spacer (Fig. 8(h)).

@@ -1,0 +1,37 @@
+paper_id: ectc51846.2026.00034
+verified_on: 2026-10-20
+source_files:
+  - references/ectc51846.2026.00034/text.md
+  - references/ectc51846.2026.00034/source.json
+  - references/ectc51846.2026.00034/figures/page_02.png
+  - references/ectc51846.2026.00034/figures/page_03.png
+  - references/ectc51846.2026.00034/figures/page_04.png
+  - references/ectc51846.2026.00034/figures/page_05.png
+  - references/ectc51846.2026.00034/figures/page_06.png
+figure_reading_method: >-
+  Table 1 read from page render (manual crop); Fig. 3-8 candidate crops opened. Plot values not digitized except where
+  the text states them; Fig. 6 profile scales not used beyond the text tilt values.
+entries:
+  - {table: interconnects, row_id: ectc51846.2026.00034-a-i1, field: pitch_um, value: 40, unit: um, basis: design_target, locator: "p.2 Sec. I", note: "bump pitch 40 um, 15 um diameter"}
+  - {table: interconnects, row_id: ectc51846.2026.00034-a-i1, field: alignment_um, value: 0.6, unit: um, basis: measured, locator: "p.1 Abstract", note: "average misalignment less than 600 nm in X and Y, rotation < 0.05 deg, 43 devices"}
+  - {table: process_steps, row_id: ectc51846.2026.00034-F1-s03, field: temp_c, value: 325, unit: C, basis: design_target, locator: "p.4 Sec. II.B", note: "initial recipe 325 C incident for 1.5 s, 0.5 s ramps"}
+derived: []
+conflicts:
+  - {table: figures, row_id: ectc51846.2026.00034-f01, field: label, values: ["Fig. 2 (caption)", "Fig. 1 (text)"], locators: ["p.2 Fig. 2 caption", "p.2 Sec. II.A"], chosen: "Fig. 2", why: "rule (c): caption label cited; text swaps Fig. 1 and Fig. 2"}
+  - {table: metrics, row_id: ectc51846.2026.00034-b-m2, field: value, values: [190, "~196 (plot reading)"], locators: ["p.4 Sec. II.B", "p.3 Fig. 3(a)"], chosen: 190, why: "text value as stated (approx); plot read only by eye"}
+excluded:
+  - "LAB generic advantages (ms-s reflow, low force, smaller IMC) stated from literature [4,5]"
+  - "TCB force comparison attributed to ref [7]"
+  - "RF results of Ref. [1] (comparison only)"
+not_reported:
+  - electrical_interfaces (RF S-parameters of passive transitions kept in metrics)
+  - optical_interfaces
+  - interposer fabrication flow, RDL line/space, polymer name, Si resistivity
+  - microbump height, bump count, UBM details, solder thickness
+  - chiplet thickness, die count per interposer
+  - bonder model, laser wavelength/power, atmosphere
+  - DOE matrix values for time/temperature, yield, reliability
+  - "process_steps: ectc51846.2026.00034-b (blanket Si wafer used only for laser heating measurements; no build)"
+notes: >-
+  Acknowledgment names Qnity as materials supplier (ack; material not specified). Text figure numbering for Fig. 1/2
+  swapped relative to captions.

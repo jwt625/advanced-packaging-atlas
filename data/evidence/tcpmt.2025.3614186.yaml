@@ -1,0 +1,62 @@
+paper_id: tcpmt.2025.3614186
+verified_on: 2026-10-20
+source_files:
+  - references/tcpmt.2025.3614186/text.md
+  - references/tcpmt.2025.3614186/source.json
+  - references/tcpmt.2025.3614186/figures/page_02.png
+  - references/tcpmt.2025.3614186/figures/page_03.png
+  - references/tcpmt.2025.3614186/figures/page_04.png
+  - references/tcpmt.2025.3614186/figures/page_05.png
+  - references/tcpmt.2025.3614186/figures/page_06.png
+  - references/tcpmt.2025.3614186/figures/page_08.png
+  - references/tcpmt.2025.3614186/figures/page_09.png
+  - references/tcpmt.2025.3614186/figures/page_10.png
+figure_reading_method: >-
+  Fig. 15, 16, 18 and Table IV re-cropped in scratch (not kept) to read plotted values; plot readings are approx.
+entries:
+  - {table: stack_layers, row_id: tcpmt.2025.3614186-a-L05, field: material, value: "ABF GX-92", basis: stated, locator: "p.2 Sec. II.C", note: "text.md reads GX-922; page render shows GX-92 with footnote mark 2"}
+  - {table: metrics, row_id: tcpmt.2025.3614186-a-m4, field: value, value: 17.6, unit: "%", basis: measured, locator: "p.9 Fig. 11", note: "90th percentile also 17.5% at 600 cycles"}
+  - {table: metrics, row_id: tcpmt.2025.3614186-b-m7, field: unit, value: "MJ/m2/cycle", basis: simulated, locator: "p.10 Fig. 16", note: "axis label as printed; text calls it inelastic work density"}
+  - {table: metrics, row_id: tcpmt.2025.3614186-b-m8, field: unit, value: "MJ/m2/cycle", basis: simulated, locator: "p.10 Fig. 16", note: "axis label as printed; text calls it inelastic work density"}
+  - {table: metrics, row_id: tcpmt.2025.3614186-b-m9, field: unit, value: "MJ/m2/cycle", basis: simulated, locator: "p.10 Fig. 16", note: "axis label as printed; text calls it inelastic work density"}
+  - {table: components, row_id: tcpmt.2025.3614186-a-c1, field: notes, value: 55, unit: um, basis: design_target, locator: "p.2 Sec. II.A", note: "die-set micro-bump pitch stated; not formed on TV a (adhesive attach)"}
+derived:
+  - {table: components, row_id: tcpmt.2025.3614186-a-c4, field: thickness_um, value: 2000, formula: "2 mm x 1000", inputs: "p.3 Sec. II.D"}
+  - {table: stack_layers, row_id: tcpmt.2025.3614186-a-L11, field: thickness_um, value: 2000, formula: "2 mm x 1000", inputs: "p.3 Sec. II.D"}
+  - {table: interconnects, row_id: tcpmt.2025.3614186-a-i1, field: pitch_um, value: 1000, formula: "1 mm x 1000", inputs: "p.2 Table I"}
+  - {table: interconnects, row_id: tcpmt.2025.3614186-a-i2, field: bonding_time_s, value: 3600, formula: "60 min x 60", inputs: "p.3 Sec. II.E.1"}
+  - {table: process_steps, row_id: tcpmt.2025.3614186-F1-s15, field: time_s, value: 3600, formula: "60 min x 60", inputs: "p.3 Sec. II.E.1"}
+  - {table: process_steps, row_id: tcpmt.2025.3614186-F1-s25, field: time_s, value: 600, formula: "10 min x 60", inputs: "p.4 Sec. II.E.3"}
+  - {table: test_vehicles, row_id: tcpmt.2025.3614186-a, field: n_dies, value: 22, formula: "14 xPU-like dies + 8 HBM-like stacks", inputs: "p.4 Fig. 4 caption"}
+  - {table: metrics, row_id: tcpmt.2025.3614186-b-m2, field: value, value: 0.0106, formula: "1.06 x 10^-2", inputs: "p.9 Sec. IV.B"}
+  - {table: metrics, row_id: tcpmt.2025.3614186-b-m3, field: value, value: 0.0258, formula: "2.58 x 10^-2", inputs: "p.9 Sec. IV.B"}
+conflicts:
+  - {table: interconnects, row_id: tcpmt.2025.3614186-a-i1, field: count, values: [7404, 7405], locators: ["p.2 Table I; p.2 Sec. II.B", "p.1 Abstract"], chosen: 7404, why: "result table and body text beat abstract"}
+  - {table: metrics, row_id: tcpmt.2025.3614186-a-m5, field: value, values: [14.7, "below 12"], locators: ["p.9 Fig. 11 label at 600 TC", "p.8 Sec. IV.A"], chosen: 14.7, why: "measured plot label beats text"}
+  - {table: metrics, row_id: tcpmt.2025.3614186-a-m4, field: n_samples, values: [24, 47], locators: ["p.8 Sec. IV.A (24 daisy-chain loops)", "p.8 Table IV (n = 47)"], chosen: 24, why: "Fig. 11 statistics stated for 24 loops; Table IV n=47 kept on a-m7..a-m9"}
+  - {table: stack_layers, row_id: tcpmt.2025.3614186-b-L05, field: properties, values: ["CTE 3.80E-06 1/C (model)", "CTE 3.4 ppm/C (physical glass)"], locators: ["p.6 Table II", "p.2 Table I"], chosen: "3.80E-06 for model TV b, 3.4 for TV a", why: "different TVs; kept both"}
+  - {table: interconnects, row_id: tcpmt.2025.3614186-b-i1, field: pitch_um, values: [55, "not stated"], locators: ["p.2 Sec. II.A (representative xPU die set)", "p.4 Sec. III (model pitch not stated); p.5 Fig. 6 geometry about 135-140 um by scale bar"], chosen: null, why: "55 um belongs to the die set, not stated for the FE model; Fig. 6 pillar spacing larger; left empty"}
+excluded:
+  - "glass L/S 1-2 um and CTE 3-10 ppm/C attributed to refs [13]-[15]"
+  - "SAP process details referenced to [12] and [23] (only the summarized steps entered)"
+  - "Table III Anand constants (from ref [24]); Table V fatigue model constants (refs [34], [37])"
+  - "Table II PCB/Cu/IMC detailed properties beyond those noted (cited refs)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - organizations and affiliations (separate pipeline)
+  - "dielectric thickness, line/space and via sizes of the built glass substrate"
+  - "dielectric cure, sputter, plating and etch conditions; reflow profile beyond 255 C peak"
+  - "HBM batch-cure conditions; die material of xPU-like dies"
+  - "corner-fill material name; X-ray void percentages"
+  - "FE model bump/ball dimensions"
+  - "failures or Weibull data (test ongoing beyond 2000 cycles)"
+  - "process_steps: tcpmt.2025.3614186-b (simulation model, no build)"
+notes: >-
+  Physical TV has no first-level interconnects (adhesive only); FE model includes Cu-pillar first level and
+  underfill at both levels, so model and TV differ. Text calls the die adhesive "underfill adhesive" in Sec. III.C.
+revisions:
+  - {date: 2026-10-20, source: ingest_audit_D, row_id: tcpmt.2025.3614186-b-i1, change: "pitch_um 55 cleared, override pitch_um:design_target dropped, note rewritten; conflict entry added", reason: "55 um is the Sec. II.A die-set pitch, not stated for the FE model; Fig. 6 pillar spacing about 135-140 um by scale bar"}
+  - {date: 2026-10-20, source: ingest_audit_D, row_id: tcpmt.2025.3614186-a-c1, change: "notes: added stated die-set micro-bump pitch 55 um (Sec. II.A), not formed; evidence entry added", reason: "keep the stated die-set pitch on the physical die component instead of the model interconnect"}
+  - {date: 2026-10-20, source: ingest_audit_D, row_id: tcpmt.2025.3614186-b-m7, change: "evidence entry for unit MJ/m2/cycle moved from b-m10 to b-m7; matching entries added for b-m8, b-m9", reason: "b-m10 is the Andersson fatigue-life row (cycles); plastic-work rows from Fig. 16 are b-m7..b-m9"}
+  - {date: 2026-10-20, source: ingest_audit_D, row_id: tcpmt.2025.3614186-f02, change: "shows: removed '1 mm pitch'; now 'X-ray image of BGA solder joint array of 100x100 mm glass substrate assembled on 150x150 mm PCB'", reason: "pitch not visible in the X-ray or caption (from Table I)"}

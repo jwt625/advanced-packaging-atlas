@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+ectc51846.2026.00065,10.1109/ectc51846.2026.00065,AlN-based Chiplet Encapsulation: Enhancing Thermal Performance for High-density Heterogeneous Integration,2026,ECTC,thermal_pdn,thermal_pdn,3,"Drop-cast plus sputtered AlN chiplet encapsulation; 300 um chiplets, 100-900 um gaps test structures; thermal results modeled"
+eptc62800.2024.10909809,10.1109/eptc62800.2024.10909809,Influence of Flow Rate and Current Density on Copper Deposition in Through Hole,2024,EPTC,advanced_substrate,advanced_substrate,3,Thin-core substrate through-hole Cu fill vs flow rate and current density; 15 um Cu avoids large voids.
+ectc51846.2026.00103,10.1109/ectc51846.2026.00103,Study of SeWaRe Failure in a Glass-Core Substrate with Redistribution Layers,2026,ECTC,glass,glass,2,SeWaRe dicing fracture in 1000 um glass core with single-sided 6 RDL layers; experiments plus process-coupled simulation.

@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+ectc51906.2022.00360,10.1109/ectc51906.2022.00360,Demonstration and Comparison of Vertical Via-less Interconnects in Laminated Glass Panels from 40-170 GHz,2022,ECTC,glass,glass,3,"Via-less vertical links in 100 um glass with 15 um ABF or JSR dielectric each side, SAP RDL; 40-170 GHz."
+eptc67330.2025.11392196,10.1109/eptc67330.2025.11392196,2.5D Cryogenic Packaging for Advanced Quantum Processors,2025,EPTC,si_interposer,si_interposer,3,"2.5D cryogenic assembly: 100 um superconducting interposer, qubit chip top, passive bottom, Al wirebond to LTCC."
+eptc67330.2025.11392176,10.1109/eptc67330.2025.11392176,High-Density Interconnect Rdl-Fpc Hybrid Substrate for Compact Sip Packaging,2025,EPTC,advanced_substrate,advanced_substrate,3,"RDL-FPC hybrid on glass carrier: multilayer RDL, PID/PIC lamination, laser debond; ~150 um thick, Dk 2.8."

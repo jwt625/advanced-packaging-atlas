@@ -1,0 +1,47 @@
+paper_id: estc60143.2024.10712019
+verified_on: 2026-10-20
+source_files:
+  - references/estc60143.2024.10712019/text.md
+  - references/estc60143.2024.10712019/source.json
+  - references/estc60143.2024.10712019/figures/page_02.png
+  - references/estc60143.2024.10712019/figures/page_03.png
+  - references/estc60143.2024.10712019/figures/page_04.png
+  - references/estc60143.2024.10712019/figures/page_05.png
+  - references/estc60143.2024.10712019/figures/page_06.png
+figure_reading_method: >-
+  Fig. 3 and Fig. 10 stack-ups re-rendered at 400-450 dpi and read row by row. Fig. 4, 5 and 14 measurement labels
+  read from 400-500 dpi re-crops (comma decimals). Tables I and II read from page re-crops (split across columns/pages).
+derived:
+  - {table: process_steps, row_id: estc60143.2024.10712019-F1-s05, field: pressure_mpa, value: 2.6, formula: "260 N/cm2 x 0.01 MPa per N/cm2", inputs: "p.3 Sec. II.C"}
+  - {table: process_steps, row_id: estc60143.2024.10712019-F1-s05, field: time_s, value: 10800, formula: "180 min x 60", inputs: "p.3 Sec. II.C"}
+  - {table: components, row_id: estc60143.2024.10712019-a-c1, field: thickness_um, value: 618, formula: "0.618 mm x 1000", inputs: "p.2 Sec. II.A"}
+  - {table: components, row_id: estc60143.2024.10712019-a-c2, field: thickness_um, value: 1750, formula: "1.75 mm x 1000", inputs: "p.2 Sec. II.A"}
+  - {table: components, row_id: estc60143.2024.10712019-a-c4, field: thickness_um, value: 3920, formula: "3.92 mm x 1000", inputs: "p.2 Sec. II.A"}
+  - {table: components, row_id: estc60143.2024.10712019-b-c2, field: thickness_um, value: 1400, formula: "1.4 mm x 1000", inputs: "p.5 Sec. III.A"}
+conflicts:
+  - {table: test_vehicles, row_id: estc60143.2024.10712019-a, field: package_thickness_mm, values: [3.92, 3.952, 3.674, 3.701], locators: ["p.2 Sec. II.A", "p.2 Fig. 3", "p.3 Fig. 5 left", "p.3 Fig. 5 right"], chosen: 3.92, why: "design total stated in text (TV basis design_target); Fig. 3 design 3.952 +/-10%; measured cross-section totals kept as metrics a-m9, a-m10"}
+  - {table: components, row_id: estc60143.2024.10712019-a-c2, field: name, values: ["8-pin narrow-body SOIC", "SO-16"], locators: ["p.2 Sec. II.A", "p.3 Sec. II.D; p.3 Fig. 5"], chosen: "8-pin narrow-body SOIC", why: "architecture text gives package and size; SO-16 named only in characterization text/caption"}
+  - {table: metrics, row_id: estc60143.2024.10712019-b-m2, field: value, values: [178, 240], locators: ["p.5 Table II", "p.5 Sec. III.B"], chosen: 178, why: "result table over text; Table II DSC entry is identical to Table I and may be copied"}
+  - {table: stack_layers, row_id: estc60143.2024.10712019-b-L03, field: notes, values: ["3 um Cu foil", "1.5 um Cu foil with carrier"], locators: ["p.5 Sec. III.B", "p.5 Fig. 13"], chosen: "3 um", why: "text states this build; Fig. 13 is captioned 'Example of RCC'"}
+  - {table: stack_layers, row_id: estc60143.2024.10712019-b-L06, field: seq, values: ["7 RG740 rows per side drawn", "6 build-up layers per side"], locators: ["p.4 Fig. 10", "p.5 Sec. III.B"], chosen: "as drawn", why: "Fig. 10 draws an RG740 layer between L7/L8 and the etched core; text counts 6 laminations after the buried L7-L8 structure"}
+excluded:
+  - "Fine line/space under 10 um from ref [5]; typical mSAP 25/25 um statement (generic)"
+  - "Kirkendall void mechanism from refs [10], [11]"
+  - "Build-up TV design details of H. Garcia et al. [7]"
+  - "Fig. 9 mSAP flow reprinted from ref [6]: entered only as generic_platform flow F3"
+  - "Fig. 14 labels 258.4 and 1586.6 (no unit) and Cu labels 8/9/14/16/19 (unit not given) not entered"
+not_reported:
+  - electrical_interfaces (RF results not yet measured), optical_interfaces
+  - GaN transistor count; passive component types and count; PCB fabricator per TV
+  - "TV a steps after lamination: drilling, PTH plating, ENIG, solder mask, top passive assembly"
+  - soldering profile for embedded components; mSAP lamination and plating conditions
+  - design microvia diameters; dummy die size, bump type and assembly
+  - thermal stress conditions for Fig. 16
+  - "planned reliability flow (Fig. 17: reflow simulations, 500 cycles -55/+100 C, RF) not yet performed"
+source_quality:
+  - "Clean text layer; comma decimals. Candidate p06_fig14 bbox wrong (images on p.5). Tables I and II split across columns/pages."
+revisions:
+  - {date: 2026-10-20, source: ingest_audit_D, row_id: estc60143.2024.10712019-f11, change: "bbox_source candidate -> manual; bbox 0.0695,0.1413,0.4948,0.271 -> 0.0695,0.1413,0.4948,0.284; cand_id cleared; note added", reason: "candidate p06_fig15 clipped bottom image rows and the 100 um / 20 um scale bars (re-crop checked)"}
+  - {date: 2026-10-20, source: ingest_audit_D, row_id: estc60143.2024.10712019-f13, change: "bbox_source candidate -> manual; bbox y1 0.4201 -> 0.43; cand_id cleared; note added", reason: "candidate p05_fig12 clipped bottom floorplan border (re-crop checked)"}
+  - {date: 2026-10-20, source: ingest_audit_D, row_id: estc60143.2024.10712019-f09, change: "bbox y1 0.91 -> 0.918", reason: "panel labels 'Configuration 6c6' / 'Configuration full stacked' were half clipped at 0.91 (re-crop checked)"}
+  - {date: 2026-10-20, source: ingest_audit_D, row_id: estc60143.2024.10712019-b-m1, change: "statistic mean -> single", reason: "p.5 Table II peel strength gives '0,51 N/mm' without 'Average'; only Table I (a-m1) says Average"}

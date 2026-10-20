@@ -1,0 +1,38 @@
+paper_id: ectc51846.2026.00202
+verified_on: 2026-10-20
+source_files:
+  - references/ectc51846.2026.00202/text.md
+  - references/ectc51846.2026.00202/source.json
+  - references/ectc51846.2026.00202/figures/page_03.png
+  - references/ectc51846.2026.00202/figures/page_04.png
+  - references/ectc51846.2026.00202/figures/page_05.png
+  - references/ectc51846.2026.00202/figures/page_06.png
+figure_reading_method: >-
+  Table I re-cropped from page 5 and read directly (matches text values). Fig. 1, 2, 3, 6 opened as candidates or
+  re-crops; Fig. 6(c) re-rendered at 600 dpi (red dimension label illegible). Fig. 4/5 curves not digitised.
+derived:
+  - {table: process_steps, row_id: ectc51846.2026.00202-F1-s08, field: thickness_um, value: 0.2, formula: "200 nm / 1000", inputs: "p.2 Sec. II.A"}
+  - {table: stack_layers, row_id: ectc51846.2026.00202-a-L05, field: thickness_um, value: 0.2, formula: "200 nm / 1000", inputs: "p.2 Sec. II.A"}
+  - {table: stack_layers, row_id: ectc51846.2026.00202-b-L05, field: thickness_um, value: 0.2, formula: "200 nm / 1000", inputs: "p.2 Sec. II.A"}
+  - {table: process_steps, row_id: ectc51846.2026.00202-F2-s07, field: time_s, value: 240, formula: "4 min x 60", inputs: "p.4 Sec. II.B"}
+  - {table: process_steps, row_id: ectc51846.2026.00202-F2-s10, field: time_s, value: 120, formula: "2 min x 60", inputs: "p.4 Sec. II.B"}
+  - {table: process_steps, row_id: ectc51846.2026.00202-F2-s11, field: time_s, value: 180, formula: "3 min x 60", inputs: "p.4 Sec. II.B"}
+  - {table: process_steps, row_id: ectc51846.2026.00202-F2-s12, field: time_s, value: 1800, formula: "30 min x 60", inputs: "p.4 Sec. II.B"}
+conflicts:
+  - {table: process_steps, row_id: ectc51846.2026.00202-F1-s01, field: thickness_um, values: [525, 500], locators: ["p.2 Sec. II.A; p.3 Fig. 2(a)", "p.4 Fig. 3(a)"], chosen: 525, why: "text and flow figure state 525 +/- 25 um; Fig. 3(a) photo label '500 um' is rounded"}
+excluded:
+  - "Earlier tether-free uTP limited to 250 um thickness, ref [7]"
+  - "Thick Cu metallization up to 200 um: generic capability statement (Sec. I), not this device"
+  - "BEOL thermal budget <= 400 C and IVR 10-100 MHz switching targets (background)"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - BCB soft-bake and cure temperatures; resist and development conditions
+  - thicknesses of CZT cores, AlN, BCB ILDs, Cu tracks and passivation
+  - carrier debond / die release method after grinding
+  - trench etch process and trench lateral size; glass type and thickness
+  - transfer-printing placement accuracy, print force or speed
+  - "TV c: RDL dimensions, capacitor type, any electrical result (preliminary, to be published)"
+  - "Fig. 6(c) red dimension label (about 111 um) not entered: illegible and undefined"
+  - interconnects for TVs a and b (pads probed directly; inductors attached by adhesive only)
+source_quality:
+  - "Clean text layer. Table I values duplicated in text p.4-5 and consistent."

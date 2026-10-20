@@ -1,0 +1,37 @@
+paper_id: eptc67330.2025.11392196
+verified_on: 2026-10-20
+source_files:
+  - references/eptc67330.2025.11392196/text.md
+  - references/eptc67330.2025.11392196/source.json
+  - references/eptc67330.2025.11392196/figures/page_02.png
+  - references/eptc67330.2025.11392196/figures/page_03.png
+  - references/eptc67330.2025.11392196/figures/page_04.png
+  - references/eptc67330.2025.11392196/figures/page_05.png
+figure_reading_method: >-
+  Fig. 4 labels read from a 300 dpi re-crop in scratch; Tables I and II (images) read from candidate/manual crops.
+entries:
+  - {table: interconnects, row_id: eptc67330.2025.11392196-a-i1, field: height_um, value: 80.3, unit: um, basis: measured, locator: "p.4 Sec. III.B", note: "gap height for indium after flip chip, ~80.3 um"}
+  - {table: process_steps, row_id: eptc67330.2025.11392196-F2-s11, field: thickness_um, value: 110, unit: um, basis: design_target, locator: "p.2 Fig. 4", note: "label 110um on the panels after carrier bonding and grinding"}
+derived:
+  - {table: interconnects, row_id: eptc67330.2025.11392196-a-i4, field: diameter_um, value: 25.4, formula: "1 mil x 25.4 um/mil", inputs: "p.4 Sec. III.B '1mil aluminum wire'"}
+  - {table: metrics, row_id: eptc67330.2025.11392196-a-m2, field: value, value: 17.97, formula: "min of 20 values", inputs: "p.3 Table I"}
+  - {table: metrics, row_id: eptc67330.2025.11392196-a-m3, field: value, value: 23.77, formula: "max of 20 values", inputs: "p.3 Table I"}
+  - {table: process_steps, row_id: eptc67330.2025.11392196-F3-s07, field: time_s, value: 2400, formula: "40 min x 60 s/min", inputs: "p.4 Sec. III.B"}
+conflicts:
+  - {table: components, row_id: eptc67330.2025.11392196-a-c5, field: material, values: ["SMT 158M", "SMT158N"], locators: ["p.2 Sec. II.A; p.2 Fig. 2", "p.4 Sec. III.B"], chosen: "SMT 158M", why: "two of three mentions (text and schematic)"}
+  - {table: interconnects, row_id: eptc67330.2025.11392196-a-i3, field: metallurgy, values: ["Ta sidewall liner", "30-100 nm TiN / alpha-phase Ta liner"], locators: ["p.2 Sec. II.A", "p.2 Fig. 4"], chosen: "Ta sidewall liner", why: "text over schematic; figure label kept in notes"}
+  - {table: stack_layers, row_id: eptc67330.2025.11392196-a-L10, field: material, values: ["TiN 0.2 um", "TiN or Ta"], locators: ["p.2 Sec. II.A", "p.2 Fig. 4"], chosen: "TiN", why: "text over schematic"}
+excluded:
+  - "Superconducting transition temperatures Al 1.1 K, Ta 1.1 K, TiN 3.9 K (Fig. 10), attributed to ref [4]"
+  - "Fig. 1 generic 2.5D schematic from a website (not this build)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - indium bump pitch and count, Cu UBM thickness, TSV pitch and count
+  - flip-chip bonding temperature, force and time ('optimized' only)
+  - plasma power and time; cure details of die attach beyond 130 C 40 min
+  - Ti/Cu seed removal step for chip UBM (not stated; Fig. 3 ambiguous)
+  - cryogenic test temperature and number of samples; LTCC substrate size and layer count
+notes: >-
+  'Pre- and post-cryogenic testing show that samples survive the temperature up to 300K' (p.5) is ambiguous; recorded as
+  condition 'cryogenic test temperature not stated'. Fig. 4 shows 110 um after back-grind, then 100 um after reveal.

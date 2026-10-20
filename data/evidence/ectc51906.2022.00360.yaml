@@ -1,0 +1,32 @@
+paper_id: ectc51906.2022.00360
+verified_on: 2026-10-20
+source_files:
+  - references/ectc51906.2022.00360/text.md
+  - references/ectc51906.2022.00360/source.json
+  - references/ectc51906.2022.00360/figures/page_02.png
+  - references/ectc51906.2022.00360/figures/page_03.png
+  - references/ectc51906.2022.00360/figures/page_04.png
+  - references/ectc51906.2022.00360/figures/page_05.png
+figure_reading_method: >-
+  Tables I and II read from page renders and manual re-crops (text-layer table garbled); Fig. 2, 5, 6, 7 labels read
+  from candidate crops. Plot curves (Fig. 4, 9-12, 14) not digitized.
+entries:
+  - {table: interconnects, row_id: ectc51906.2022.00360-a-i1, field: alignment_um, value: 15, unit: um, basis: measured, locator: "p.3 Sec. III", note: "top to bottom alignment less than 15 um; applies to both stackups"}
+  - {table: metrics, row_id: ectc51906.2022.00360-a-m1, field: value_text, value: "128.9-170", unit: GHz, basis: measured, locator: "p.4 Table I", note: "10 dB BW, 70 um patch, ABF"}
+conflicts:
+  - {table: stack_layers, row_id: ectc51906.2022.00360-a-L01, field: thickness_um, values: [5, 6], locators: ["p.3 Sec. III deposited Cu 5+/-0.5 um", "p.2 Sec. II.A and p.2 Fig. 2 copper 6 um"], chosen: 5, why: "measured deposited thickness beats design text and schematic; same for -a-L07, -b-L01, -b-L09"}
+excluded:
+  - "ABF/glass/ABF stackup Dk 4.72 (+0.1) 60-170 GHz and Df 0.004-0.015 over 20-170 GHz, attributed to ref [12]"
+  - "JSR dielectric Dk 2.9 (10-40 GHz) and Df 0.004 at 40 GHz, attributed to ref [13]"
+not_reported:
+  - optical_interfaces
+  - process conditions (lamination, cure, plating temperatures, times, current density, exposure dose)
+  - panel size and number of panels or coupons
+  - seed metal for the ABF electroless route; drilling method for JSR alignment marks
+  - IL frequency for Table I/II values (in-band only)
+  - "Fig. 14 offset sweep: stackup and whether simulated or measured not stated; curve not digitized"
+  - "Fig. 4 conformal TPV S21: simulation-only comparison, not entered"
+  - measurement-setup foam (ECCOSTOCK) is fixture, not build; not entered
+notes: >-
+  Patch sizes 70/110/160/300 um are features on each stack; Fig. 6 shows 160/300 um on JSR and Fig. 7 shows 70/110 um
+  on ABF, while Tables I and II list all four patch sizes on both stackups.

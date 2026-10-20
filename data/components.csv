@@ -2165,3 +2165,93 @@ ectc51846.2026.00356-a-c2,ectc51846.2026.00356-a,substrate,no,no,glass-core subs
 ectc51846.2026.00356-a-c3,ectc51846.2026.00356-a,adhesive,no,yes,APTMS die-attach adhesion promoter,,,,,,,,,,3-aminopropyltrimethoxysilane (APTMS),,stated,text,,p.2 Sec. II; p.3 Sec. II.B,,Organosilane coupling agent between O2-plasma-activated ABF and native oxide of Si chiplet.
 estc60143.2024.10712091-a-c1,estc60143.2024.10712091-a,other,no,no,device wafer (Si with BEOL stack),,,,50,,,,,,Si,,design_target,text,,p.1 Sec. II.A; p.1 Fig. 2,,Grinding target thickness 50 um; initial thickness not stated.
 estc60143.2024.10712091-a-c2,estc60143.2024.10712091-a,other,no,no,temporary carrier wafer,,,,,,,,,,glass or silicon,,stated,text,,p.1 Sec. II.A,,"Carrier with bevel width Ac (model, Fig. 5)."
+ectc51846.2026.00065-a-c1,ectc51846.2026.00065-a,interposer,,,Si interposer,1,10,10,500,,,,,,Si,,design_target,text,,p.2 Sec. III; p.3 Fig. 3,,
+ectc51846.2026.00065-a-c2,ectc51846.2026.00065-a,dummy_die,yes,,chiplet with Ti/Cu/Au pillars,4,3,3,300,,,,,,Si,,design_target,text,count:figure_image;material:schematic,p.2 Sec. III; p.3 Fig. 3; p.3 Fig. 4(b),,Gaps approx. 100/400/900 um per test structure (metrics).
+ectc51846.2026.00065-b-c1,ectc51846.2026.00065-b,interposer,,,Si interposer with RDL,1,10,10,,,,,,,Si,,design_target,table,,p.4 Table I; p.4 Fig. 7(c),,Model input; interposer thickness Tint not stated.
+ectc51846.2026.00065-b-c2,ectc51846.2026.00065-b,dummy_die,yes,,chiplet (uniform heat source),4,3,3,,,,,,,Si,,design_target,table,,p.4 Table I; p.4 Fig. 7(a),,"Model input; thickness 100-300 um, gap 50-1000 um, 9 W each; two-chiplet model for parametric study."
+ectc51846.2026.00065-c-c1,ectc51846.2026.00065-c,interposer,,,Si interposer with RDL,1,10,10,,,,,,,Si,,design_target,table,,p.4 Table I; p.4 Fig. 7(d),,Model input.
+ectc51846.2026.00065-c-c2,ectc51846.2026.00065-c,dummy_die,yes,,chiplet (uniform heat source),4,3,3,,,,,,,Si,,design_target,table,,p.4 Table I; p.4 Fig. 7(b),,"Model input; thickness 100-300 um, gap 50-1000 um, 9 W each."
+ectc51846.2026.00065-c-c3,ectc51846.2026.00065-c,mold,,,epoxy molding compound encapsulant,,,,,,,,,,epoxy,,design_target,table,,p.4 Table I; p.4 Fig. 7(d),,Model input; k 0.5 W/m-K.
+ectc51846.2026.00065-d-c1,ectc51846.2026.00065-d,dummy_die,yes,,chiplet (uniform heat source),,3,3,,,,,,,Si,,design_target,table,,p.4 Table I; p.5 Fig. 11,,Model input; tgap 100 um.
+eptc62800.2024.10909809-a-c1,eptc62800.2024.10909809-a,substrate,,,substrate core with glass cloth and Cu foil,1,,,200,,,,,,core laminate with glass cloth,,design_target,text,material:schematic,p.2 Sec. Experimental Methodology; p.1 Fig. 2; p.2 Fig. 3,,Thickness = TH depth 200 um; glass cloth in upper and lower core areas.
+ectc51846.2026.00103-a-c1,ectc51846.2026.00103-a,substrate,,,glass core,1,100,100,1100,,,,,,AGC EN-A1 alkali-free alumina-borosilicate glass,Asahi Glass Company (AGC),design_target,text,,p.2 Sec. II.A,,
+ectc51846.2026.00103-b-c1,ectc51846.2026.00103-b,substrate,,,glass core,1,100,100,1000,,,,,,AGC EN-A1 alkali-free alumina-borosilicate glass,Asahi Glass Company (AGC),design_target,text,,p.2 Sec. II.A; p.4 Sec. IV.A,,
+ectc51846.2026.00103-c-c1,ectc51846.2026.00103-c,substrate,,,glass core (model),,,,1100,,,,,,Glass (AGC EN-A1),,design_target,text,,p.3 Sec. III.B.1; p.4 Table II,,
+ectc51846.2026.00103-d-c1,ectc51846.2026.00103-d,substrate,,,glass core (model),,,,1000,,,,,,EN-A1 glass,,design_target,text,,p.6 Sec. IV.C.1,,
+eptc67330.2025.11392276-a-c1,eptc67330.2025.11392276-a,interposer,no,no,200 mm undoped 4H monocrystalline SiC wafer,1,,,,,,,,,"4H-SiC, undoped, monocrystalline",,stated,text,,p.1 Sec. I; p.1 Sec. II.A,,Wafer thickness not stated.
+eptc67330.2025.11392276-b-c1,eptc67330.2025.11392276-b,interposer,no,no,200 mm undoped 4H monocrystalline SiC wafer,1,,,,,,,,,"4H-SiC, undoped, monocrystalline",,stated,text,,p.1 Sec. I; p.1 Sec. II.A,,Wafer thickness not stated.
+ectc51846.2026.00202-a-c1,ectc51846.2026.00202-a,inductor,no,yes,"thin-film Si-based micro-inductor (CZT cores, Cu windings)",6,1.5,0.5,60,,,,,,Si substrate; CZT/AlN laminated cores; electroplated Cu; BCB ILD,,design_target,text,,p.2 Sec. I; p.2 Sec. II.A; p.3 Sec. II.B; p.4 Sec. III,thickness_um:approx,Fabricated by the authors on 4-inch Si; thinned from 525 um.
+ectc51846.2026.00202-a-c2,ectc51846.2026.00202-a,substrate,no,no,Si substrate with pre-etched trenches,,,,,,,130,,,Si,,design_target,text,,p.1 Abstract; p.4 Sec. II.B; p.4 Fig. 3(c),,Trench etch process not described.
+ectc51846.2026.00202-a-c3,ectc51846.2026.00202-a,adhesive,no,no,diluted Intervia adhesive,,,,2.5,,,,,,Intervia diluted with PGMEA 2:1,,design_target,text,,p.4 Sec. II.B,,
+ectc51846.2026.00202-b-c1,ectc51846.2026.00202-b,inductor,no,no,"thin-film Si-based micro-inductor (CZT cores, Cu windings)",6,1.5,0.5,60,,,,,,Si substrate; CZT/AlN laminated cores; electroplated Cu; BCB ILD,,design_target,text,,p.2 Sec. I; p.2 Sec. II.A; p.3 Sec. II.B; p.4 Sec. III,thickness_um:approx,Fabricated by the authors on 4-inch Si; thinned from 525 um. Not embedded: surface-printed on glass.
+ectc51846.2026.00202-b-c2,ectc51846.2026.00202-b,substrate,no,no,glass substrate,,,,,,,,,,glass,,stated,text,,p.3 Fig. 2(f); p.4 Sec. II.B,,
+ectc51846.2026.00202-b-c3,ectc51846.2026.00202-b,adhesive,no,no,diluted Intervia adhesive,,,,2.5,,,,,,Intervia diluted with PGMEA 2:1,,design_target,text,,p.4 Sec. II.B,,
+ectc51846.2026.00202-c-c1,ectc51846.2026.00202-c,inductor,no,yes,transfer-printed micro-inductor in Si trench,,,,,,,,,,,,stated,caption,,p.6 Fig. 6(b)-(c); p.7 Sec. V,,
+ectc51846.2026.00202-c-c2,ectc51846.2026.00202-c,capacitor,no,yes,capacitor co-embedded in Si trench,,,,,,,,,,,,stated,caption,,p.6 Fig. 6(b),,Capacitor type and placement method not stated.
+ectc51846.2026.00202-c-c3,ectc51846.2026.00202-c,substrate,no,no,Si substrate with deep trenches,,,,,,,,,,Si,,stated,caption,,p.6 Fig. 6(a),,
+ectc51846.2026.00202-c-c4,ectc51846.2026.00202-c,adhesive,no,no,InterVia/BCB dielectric adhesive layer,,,,,,,,,,InterVia/BCB,,stated,figure_image,,p.6 Fig. 6(c),,
+estc60143.2024.10712019-a-c1,estc60143.2024.10712019-a,other,no,yes,"GaN transistor, bare die with SnAgCu 305 bumps",,6.05,2.3,618,,,,,,GaN,,design_target,text,,p.2 Sec. II; p.2 Sec. II.A,,Fast switching element; placed on layer 5. Count not stated.
+estc60143.2024.10712019-a-c2,estc60143.2024.10712019-a,other,no,yes,driver in 8-pin narrow-body SOIC package,,9.9,6.0,1750,,,,,,,,design_target,text,,p.2 Sec. II.A,,Placed on layer 3; Fig. 5 caption names it SO-16.
+estc60143.2024.10712019-a-c3,estc60143.2024.10712019-a,other,no,no,passive components on top layer,,,,,,,,,,,,stated,text,,p.2 Sec. II.A,,Types and count not stated.
+estc60143.2024.10712019-a-c4,estc60143.2024.10712019-a,pcb,no,no,6-layer solder-embedding PCB,,27.0,27.6,3920,,,,,,"R-1566S laminate / R-1551S prepreg (Panasonic), halogen-free epoxy",,design_target,text,,p.2 Sec. II.A; p.2 Sec. II.B,,Material produced and provided by Panasonic.
+estc60143.2024.10712019-b-c1,estc60143.2024.10712019-b,dummy_die,yes,no,daisy-chained dummy chips DIE_A to DIE_F,6,,,,,,,,,,,design_target,text,,p.5 Sec. III.A; p.5 Fig. 12,,"Representative of functional dies: 2100 bumps, 200 um pitch."
+estc60143.2024.10712019-b-c2,estc60143.2024.10712019-b,substrate,no,no,6-N-6 build-up substrate,,45,45,1400,,,,,,R-G740M RCC build-up (Panasonic); Megtron 6 core,,design_target,text,,p.4 Fig. 10; p.5 Sec. III.A-B,,
+001c.147115-a-c1,001c.147115-a,asic,yes,,mimic ASIC (logic),1,26,31,,,,,,,silicon,,design_target,mixed,,p.2 Table I; p.2 Fig. 3,,Full die thickness (value not stated); daisy-chain test nets.
+001c.147115-a-c2,001c.147115-a,hbm,yes,,HBM2 mimic,2,10,11,,,,,,,,,design_target,mixed,,p.2 Sec. II.A; p.2 Table I,,
+001c.147115-a-c3,001c.147115-a,dummy_die,yes,,dummy Si filler die,1,,,,,,,,,silicon,,stated,mixed,count:schematic,p.2 Sec. II.A; p.2 Fig. 3,,Count from Fig. 3 floorplan.
+001c.147115-a-c4,001c.147115-a,interposer,,,TSV silicon interposer,1,,,100,,,,,,silicon,,design_target,table,,p.2 Table I; p.2 Sec. II.A,,
+001c.147115-a-c5,001c.147115-a,substrate,,,organic package substrate,1,,,2000,,,,,,"ABF GZ-series build-up, T-glass core 1.2 mm",,design_target,table,,p.2 Table I,,16 layers; Table II: low CTE core.
+001c.147115-a-c6,001c.147115-a,lid,,,flat-top metal lid,1,71.5,71.5,3000,,,900,,,metal,,design_target,table,,p.2 Table I,,Lid feet 8 mm.
+001c.147115-a-c7,001c.147115-a,tim,,,TIM,1,,,,,,,,,,,stated,mixed,,p.3 Sec. II.C; p.2 Fig. 3,,
+001c.147115-a-c8,001c.147115-a,underfill,,,low Tg die underfill,,,,,,,,,,,,stated,mixed,,p.4 Sec. II.D; p.4 Table II,,Die (ASIC) underfill between top die and Si interposer.
+001c.147115-a-c9,001c.147115-a,adhesive,,,high modulus (high E) lid foot adhesive,,,,,,,,,,,,stated,mixed,,p.4 Sec. II.D; p.4 Table II,,
+001c.147115-b-c1,001c.147115-b,asic,yes,,mimic ASIC (logic),1,26,31,,,,,,,silicon,,design_target,mixed,,p.2 Table I; p.2 Fig. 3,,Full die thickness (value not stated); daisy-chain test nets.
+001c.147115-b-c2,001c.147115-b,hbm,yes,,HBM2 mimic,2,10,11,,,,,,,,,design_target,mixed,,p.2 Sec. II.A; p.2 Table I,,
+001c.147115-b-c3,001c.147115-b,dummy_die,yes,,dummy Si filler die,1,,,,,,,,,silicon,,stated,mixed,count:schematic,p.2 Sec. II.A; p.2 Fig. 3,,Count from Fig. 3 floorplan.
+001c.147115-b-c4,001c.147115-b,interposer,,,TSV silicon interposer,1,,,100,,,,,,silicon,,design_target,table,,p.2 Table I; p.2 Sec. II.A,,
+001c.147115-b-c5,001c.147115-b,substrate,,,organic package substrate,1,,,2000,,,,,,"ABF GZ-series build-up, T-glass core 1.2 mm",,design_target,table,,p.2 Table I,,16 layers; Table II: low CTE core.
+001c.147115-b-c6,001c.147115-b,lid,,,flat-top metal lid,1,71.5,71.5,3000,,,900,,,metal,,design_target,table,,p.2 Table I,,Lid feet 8 mm.
+001c.147115-b-c7,001c.147115-b,tim,,,TIM,1,,,,,,,,,,,stated,mixed,,p.3 Sec. II.C; p.2 Fig. 3,,
+001c.147115-b-c8,001c.147115-b,underfill,,,high Tg die underfill (alternative material),,,,,,,,,,,,stated,mixed,,p.4 Sec. II.D; p.4 Table II,,Die (ASIC) underfill between top die and Si interposer.
+001c.147115-b-c9,001c.147115-b,adhesive,,,low modulus (low E) lid foot adhesive,,,,,,,,,,,,stated,mixed,,p.4 Sec. II.D; p.4 Table II,,
+001c.147115-c-c1,001c.147115-c,asic,,,ASIC die (model),,,,,,,,,,,,simulated,schematic,,p.3 Fig. 5,,Die CTE 2.6 ppm/K (Fig. 5).
+001c.147115-c-c2,001c.147115-c,hbm,,,HBM (model),,,,,,,,,,,,simulated,schematic,,p.3 Fig. 4,,
+001c.147115-c-c3,001c.147115-c,interposer,,,Si interposer (model),,,,,,,,,,,,simulated,schematic,,p.3 Fig. 5,,
+001c.147115-c-c4,001c.147115-c,mold,,,CoW EMC (model),,,,,,,,,,,,simulated,schematic,,p.3 Fig. 5,,
+001c.147115-c-c5,001c.147115-c,underfill,,,ASIC UF and CoW UF (model),2,,,,,,,,,,,simulated,schematic,,p.3 Fig. 5,,Low Tg or high Tg die underfill legs.
+001c.147115-c-c6,001c.147115-c,lid,,,flat-top lid (model),,,,,,,,,,lid CTE 17 ppm/K,,simulated,schematic,,p.3 Fig. 4-5,,
+001c.147115-c-c7,001c.147115-c,stiffener,,,stiffener ring (model),,,,,,,,,,stiffener; SUS 430 in leg 7,,simulated,mixed,,p.3 Fig. 4; p.4 Table II,,Foot widths and thicknesses varied (abstract); values not stated.
+001c.147115-c-c8,001c.147115-c,adhesive,,,lid / stiffener adhesive (model),,,,,,,,,,,,simulated,table,,p.4 Table II,,High E or low E legs.
+001c.147115-c-c9,001c.147115-c,substrate,,,package substrate (model),,,,,,,,,,substrate CTE 17-18 ppm/K; core low CTE or ultra low CTE,,simulated,mixed,,p.3 Fig. 5; p.4 Table II,,Core thickness 1.2 or 1.4 mm.
+ectc51529.2024.00392-a-c1,ectc51529.2024.00392-a,dummy_die,yes,,dummy die with Cu pads,,2,3,,,,,,,,,design_target,text,,p.5 Sec. IV,,"7x17 um Cu pads, 3 um spacing (10 um pitch); 6 mm2 die."
+ectc51529.2024.00392-a-c2,ectc51529.2024.00392-a,substrate,,,Si wafer core with ABF GL-102 both sides,1,,,525,,,,,,<100> 4 inch Si wafer; ABF GL-102,,design_target,mixed,,p.3 Sec. III; p.4 Sec. III.C; p.2 Fig. 1,,
+tcpmt.2025.3614186-a-c1,tcpmt.2025.3614186-a,dummy_die,yes,,xPU-like die,14,18.5,18.5,750,,,,,,,,design_target,mixed,count:caption,p.2 Sec. II.A; p.4 Fig. 4,,Representative xPU die; count from Fig. 4 caption. Stated die-set micro-bump pitch 55 um (Sec. II.A); bumps not formed (adhesive attach).
+tcpmt.2025.3614186-a-c2,tcpmt.2025.3614186-a,hbm,yes,,HBM-like die stack (10 dies),8,10,10,500,,,,,,,,design_target,mixed,count:caption,p.2 Sec. II.A; p.4 Fig. 4,,"Ten 10x10 mm dies, 50 um each, adhesive-stacked; total 500 um."
+tcpmt.2025.3614186-a-c3,tcpmt.2025.3614186-a,substrate,,,glass core substrate,1,100,100,500,,,,,,"glass, CTE 3.4 ppm/C",Corning,design_target,mixed,,p.2 Table I; p.2 Sec. II.C,,thickness = glass core; double-sided SAP Cu RDL with ABF GX-92.
+tcpmt.2025.3614186-a-c4,tcpmt.2025.3614186-a,pcb,,,daisy-chain test PCB,1,150,150,2000,,,,,,"FR-4, CTE 17 ppm/C",,design_target,text,,p.3 Sec. II.D; p.3 Fig. 1,,2-layer build-up; NSMD pads 1 mm pitch; ENIG; single BGA site.
+tcpmt.2025.3614186-a-c5,tcpmt.2025.3614186-a,adhesive,,,epoxy die adhesive U8419-73CF3,,,,,,,,,,epoxy,NAMICS,stated,text,,p.3 Sec. II.E.1,,Used for die-to-glass and die-to-die (HBM stack) bonding; later called underfill adhesive (p.8).
+tcpmt.2025.3614186-a-c6,tcpmt.2025.3614186-a,underfill,,,corner-fill,4,,,,,,,,,,,stated,text,,p.4 Sec. II.E.3,,Dispensed at four corners of the glass substrate; material not named.
+tcpmt.2025.3614186-b-c1,tcpmt.2025.3614186-b,dummy_die,,,xPU die (model),1,,,,,,,,,silicon,,simulated,mixed,,p.4 Sec. III; p.5 Fig. 5; p.6 Table II,,Half-symmetry model; labelled GPU in Fig. 5.
+tcpmt.2025.3614186-b-c2,tcpmt.2025.3614186-b,hbm,,,"HBM stack (model, ten dies)",2,,,,,,,,,silicon,,simulated,mixed,,p.4 Sec. III; p.5 Fig. 5,,Bonded with die-attach material.
+tcpmt.2025.3614186-b-c3,tcpmt.2025.3614186-b,substrate,,,glass core substrate (model),,,,500,,,,,,glass,,simulated,text,,p.4 Sec. III,,Core thickness varied 300/500/700 um; 50 um polymer dielectric both sides.
+tcpmt.2025.3614186-b-c4,tcpmt.2025.3614186-b,pcb,,,PCB (model),,,,,,,,,,"PCB, orthotropic properties Table II",,simulated,mixed,,p.6 Table II; p.5 Fig. 7,,
+tcpmt.2025.3614186-b-c5,tcpmt.2025.3614186-b,underfill,,,bump underfill and BGA underfill (model),2,,,,,,,,,,,simulated,mixed,,p.4 Sec. III; p.6 Table II,,Underfill stress-free at 160 C cure temperature.
+ectc51906.2022.00360-a-c1,ectc51906.2022.00360-a,interposer,,,glass core,1,,,100,,,,,,EN-A1 glass,AGC Inc.,design_target,text,,p.1 Abstract; p.1 Sec. II.A; p.2 Fig. 2,,Paper calls the glass panel an interposer core.
+ectc51906.2022.00360-b-c1,ectc51906.2022.00360-b,interposer,,,glass core,1,,,100,,,,,,EN-A1 glass,AGC Inc.,design_target,text,,p.1 Abstract; p.1 Sec. II.A; p.2 Fig. 2,,Paper calls the glass panel an interposer core.
+eptc67330.2025.11392196-a-c1,eptc67330.2025.11392196-a,interposer,,,superconducting TSV interposer,1,15,15,100,,,,,,"Si with Ta-lined Cu TSV, Al front metal, TiN back metal",,design_target,text,,p.2 Sec. II.A; p.3 Sec. III.B; p.3 Fig. 9,,
+eptc67330.2025.11392196-a-c2,eptc67330.2025.11392196-a,other,,,qubit chip,1,10,10,100,,,,,,"Si, Al pads, Cu UBM",,design_target,text,,p.2 Sec. II.A; p.2 Fig. 3,,Flip-chip bonded on interposer top side; thickness from Fig. 3 caption and thinning step.
+eptc67330.2025.11392196-a-c3,eptc67330.2025.11392196-a,other,,,passive chip,1,5,5,100,,,,,,"Si, Al interconnects, Cu UBM",,design_target,text,,p.2 Sec. II.A; p.2 Fig. 2; p.2 Fig. 3,,"Flip-chip bonded on interposer bottom side ('Passive Chip with Al interconnects', Fig. 2)."
+eptc67330.2025.11392196-a-c4,eptc67330.2025.11392196-a,substrate,,,LTCC substrate,1,,,,,,,,,LTCC,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 2; p.4 Fig. 12,,
+eptc67330.2025.11392196-a-c5,eptc67330.2025.11392196-a,adhesive,,,die attach material,1,,,,,,,,,SMT 158M,,stated,text,,p.2 Sec. II.A; p.2 Fig. 2; p.4 Sec. III.B,,"Printed SMT 158M (p.2, Fig. 2) and SMT158N (p.4); see evidence conflicts."
+eptc67330.2025.11392176-a-c1,eptc67330.2025.11392176-a,stiffener,,,stainless steel (SUS) stiffener,1,,,,,,,,,stainless steel (SUS),,stated,text,,p.2 Sec. II; p.2 Fig. 1; p.3 Fig. 3,,Laminated to bottom side in connector and soldering regions; thickness not stated.
+eptc67330.2025.11392176-b-c1,eptc67330.2025.11392176-b,stiffener,,,stainless steel (SUS) stiffener,1,,,,,,,,,stainless steel (SUS),,stated,text,,p.2 Sec. II; p.2 Fig. 1; p.3 Fig. 3,,Laminated to bottom side in connector and soldering regions; thickness not stated.
+ectc51846.2026.00034-a-c1,ectc51846.2026.00034-a,other,,,InP D-band power amplifier chiplet,,2,1.4,,,,,,,InP,,design_target,text,material:stated,p.2 Sec. II.A; p.3 Sec. II.A,,Co-designed D-band PA; chiplet thermal budget ~250 C (Fig. 2).
+ectc51846.2026.00034-a-c2,ectc51846.2026.00034-a,interposer,,,imec 300 mm RF silicon interposer,,,,,,,,,,Si,,stated,text,,p.2 Sec. I; p.2 Sec. II.A; p.2 Fig. 2,,"Three thick Cu RDLs embedded in low-Dk, low-loss polymer."
+ectc51846.2026.00034-b-c1,ectc51846.2026.00034-b,other,,,Si blanket wafer with top-side two-sensor thermocouple,,,,,,,,,,Si,,stated,text,,p.3 Sec. II.B; p.4 Sec. II.B,,
+icep-iaac64884.2025.11002988-a-c1,icep-iaac64884.2025.11002988-a,substrate,,,glass substrate with plating seed layer,,,,,,,,,,glass,,stated,text,,p.1 Sec. II,,
+tcpmt.2026.3672227-a-c1,tcpmt.2026.3672227-a,unspecified,,,Si die,4,26,29,775,,,,,,Si,,design_target,table,,p.2 Table I; p.2 Sec. II.A,,"Four identical dies, symmetric about substrate centre; 40 mm die-to-die spacing (centre-to-centre, Fig. 1(a)); low-k BEOL."
+tcpmt.2026.3672227-a-c2,tcpmt.2026.3672227-a,substrate,,,18-layer organic substrate with low-CTE core,,,,1964,,,,,,"organic substrate, 1.24 mm low-CTE core",,design_target,table,,p.2 Table I; p.2 Sec. II.A,,
+tcpmt.2026.3672227-a-c3,tcpmt.2026.3672227-a,stiffener,,,Cu stiffener ring,,,,2500,,,,,,copper,,design_target,table,,p.2 Table I; p.2 Sec. II.A,,Width 8 mm; attached along substrate perimeter.
+tcpmt.2026.3672227-a-c4,tcpmt.2026.3672227-a,adhesive,,,stiffener ring adhesive,,,,,,,,,,,,stated,table,,p.2 Table I,,BLT 50-60 um (stack_layers).
+tcpmt.2026.3672227-a-c5,tcpmt.2026.3672227-a,underfill,,,capillary underfill,,,,,,,,,,,,stated,mixed,,p.2 Fig. 2; p.2 Sec. II.B,,
+tcpmt.2026.3672227-b-c1,tcpmt.2026.3672227-b,substrate,,,18-layer organic substrate with low-CTE core,,,,1964,,,,,,"organic substrate, 1.24 mm low-CTE core",,design_target,table,,p.2 Table I; p.3 Sec. II.C,,

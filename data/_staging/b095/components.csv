@@ -1,0 +1,14 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00065-a-c1,ectc51846.2026.00065-a,interposer,,,Si interposer,1,10,10,500,,,,,,Si,,design_target,text,,p.2 Sec. III; p.3 Fig. 3,,
+ectc51846.2026.00065-a-c2,ectc51846.2026.00065-a,dummy_die,yes,,chiplet with Ti/Cu/Au pillars,4,3,3,300,,,,,,Si,,design_target,text,count:figure_image;material:schematic,p.2 Sec. III; p.3 Fig. 3; p.3 Fig. 4(b),,Gaps approx. 100/400/900 um per test structure (metrics).
+ectc51846.2026.00065-b-c1,ectc51846.2026.00065-b,interposer,,,Si interposer with RDL,1,10,10,,,,,,,Si,,design_target,table,,p.4 Table I; p.4 Fig. 7(c),,Model input; interposer thickness Tint not stated.
+ectc51846.2026.00065-b-c2,ectc51846.2026.00065-b,dummy_die,yes,,chiplet (uniform heat source),4,3,3,,,,,,,Si,,design_target,table,,p.4 Table I; p.4 Fig. 7(a),,"Model input; thickness 100-300 um, gap 50-1000 um, 9 W each; two-chiplet model for parametric study."
+ectc51846.2026.00065-c-c1,ectc51846.2026.00065-c,interposer,,,Si interposer with RDL,1,10,10,,,,,,,Si,,design_target,table,,p.4 Table I; p.4 Fig. 7(d),,Model input.
+ectc51846.2026.00065-c-c2,ectc51846.2026.00065-c,dummy_die,yes,,chiplet (uniform heat source),4,3,3,,,,,,,Si,,design_target,table,,p.4 Table I; p.4 Fig. 7(b),,"Model input; thickness 100-300 um, gap 50-1000 um, 9 W each."
+ectc51846.2026.00065-c-c3,ectc51846.2026.00065-c,mold,,,epoxy molding compound encapsulant,,,,,,,,,,epoxy,,design_target,table,,p.4 Table I; p.4 Fig. 7(d),,Model input; k 0.5 W/m-K.
+ectc51846.2026.00065-d-c1,ectc51846.2026.00065-d,dummy_die,yes,,chiplet (uniform heat source),,3,3,,,,,,,Si,,design_target,table,,p.4 Table I; p.5 Fig. 11,,Model input; tgap 100 um.
+eptc62800.2024.10909809-a-c1,eptc62800.2024.10909809-a,substrate,,,substrate core with glass cloth and Cu foil,1,,,200,,,,,,core laminate with glass cloth,,design_target,text,material:schematic,p.2 Sec. Experimental Methodology; p.1 Fig. 2; p.2 Fig. 3,,Thickness = TH depth 200 um; glass cloth in upper and lower core areas.
+ectc51846.2026.00103-a-c1,ectc51846.2026.00103-a,substrate,,,glass core,1,100,100,1100,,,,,,AGC EN-A1 alkali-free alumina-borosilicate glass,Asahi Glass Company (AGC),design_target,text,,p.2 Sec. II.A,,
+ectc51846.2026.00103-b-c1,ectc51846.2026.00103-b,substrate,,,glass core,1,100,100,1000,,,,,,AGC EN-A1 alkali-free alumina-borosilicate glass,Asahi Glass Company (AGC),design_target,text,,p.2 Sec. II.A; p.4 Sec. IV.A,,
+ectc51846.2026.00103-c-c1,ectc51846.2026.00103-c,substrate,,,glass core (model),,,,1100,,,,,,Glass (AGC EN-A1),,design_target,text,,p.3 Sec. III.B.1; p.4 Table II,,
+ectc51846.2026.00103-d-c1,ectc51846.2026.00103-d,substrate,,,glass core (model),,,,1000,,,,,,EN-A1 glass,,design_target,text,,p.6 Sec. IV.C.1,,

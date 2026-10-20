@@ -1,0 +1,11 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00034-a-c1,ectc51846.2026.00034-a,other,,,InP D-band power amplifier chiplet,,2,1.4,,,,,,,InP,,design_target,text,material:stated,p.2 Sec. II.A; p.3 Sec. II.A,,Co-designed D-band PA; chiplet thermal budget ~250 C (Fig. 2).
+ectc51846.2026.00034-a-c2,ectc51846.2026.00034-a,interposer,,,imec 300 mm RF silicon interposer,,,,,,,,,,Si,,stated,text,,p.2 Sec. I; p.2 Sec. II.A; p.2 Fig. 2,,"Three thick Cu RDLs embedded in low-Dk, low-loss polymer."
+ectc51846.2026.00034-b-c1,ectc51846.2026.00034-b,other,,,Si blanket wafer with top-side two-sensor thermocouple,,,,,,,,,,Si,,stated,text,,p.3 Sec. II.B; p.4 Sec. II.B,,
+icep-iaac64884.2025.11002988-a-c1,icep-iaac64884.2025.11002988-a,substrate,,,glass substrate with plating seed layer,,,,,,,,,,glass,,stated,text,,p.1 Sec. II,,
+tcpmt.2026.3672227-a-c1,tcpmt.2026.3672227-a,unspecified,,,Si die,4,26,29,775,,,,,,Si,,design_target,table,,p.2 Table I; p.2 Sec. II.A,,"Four identical dies, symmetric about substrate centre; 40 mm die-to-die spacing (centre-to-centre, Fig. 1(a)); low-k BEOL."
+tcpmt.2026.3672227-a-c2,tcpmt.2026.3672227-a,substrate,,,18-layer organic substrate with low-CTE core,,,,1964,,,,,,"organic substrate, 1.24 mm low-CTE core",,design_target,table,,p.2 Table I; p.2 Sec. II.A,,
+tcpmt.2026.3672227-a-c3,tcpmt.2026.3672227-a,stiffener,,,Cu stiffener ring,,,,2500,,,,,,copper,,design_target,table,,p.2 Table I; p.2 Sec. II.A,,Width 8 mm; attached along substrate perimeter.
+tcpmt.2026.3672227-a-c4,tcpmt.2026.3672227-a,adhesive,,,stiffener ring adhesive,,,,,,,,,,,,stated,table,,p.2 Table I,,BLT 50-60 um (stack_layers).
+tcpmt.2026.3672227-a-c5,tcpmt.2026.3672227-a,underfill,,,capillary underfill,,,,,,,,,,,,stated,mixed,,p.2 Fig. 2; p.2 Sec. II.B,,
+tcpmt.2026.3672227-b-c1,tcpmt.2026.3672227-b,substrate,,,18-layer organic substrate with low-CTE core,,,,1964,,,,,,"organic substrate, 1.24 mm low-CTE core",,design_target,table,,p.2 Table I; p.3 Sec. II.C,,

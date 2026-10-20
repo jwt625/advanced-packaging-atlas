@@ -1,0 +1,54 @@
+layer_id,tv_id,structure,side,seq,layer_name,feature,material,material_class,layer_role,reinforcement,thickness_um,thickness_min_um,thickness_max_um,line_um,space_um,via_diameter_um,via_pitch_um,roughness_ra_um,repeat,properties,basis,source,overrides,locator,qualifiers,notes
+001c.147115-a-L01,001c.147115-a,tim_lid,single,1,flat-top metal lid,,metal,metal,thermal,,3000,,,,,,,,,,design_target,table,,p.2 Table I,,71.5x71.5 mm; cavity depth 0.9 mm; feet 8 mm.
+001c.147115-a-L02,001c.147115-a,tim_lid,single,2,TIM,,TIM,tim,thermal,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+001c.147115-a-L03,001c.147115-a,die,single,1,mimic ASIC silicon die,,silicon,silicon,device,,,,,,,,,,,,stated,mixed,,p.2 Fig. 3; p.2 Table I,,
+001c.147115-a-L04,001c.147115-a,underfill,single,1,die underfill,,low Tg die underfill,underfill,encapsulant,,,,,,,,,,,,stated,mixed,,p.2 Fig. 3; p.4 Table II,,
+001c.147115-a-L05,001c.147115-a,interposer,single,1,TSV silicon interposer,,silicon,silicon,core,,100,,,,,,,,,,design_target,table,,p.2 Table I,,
+001c.147115-a-L06,001c.147115-a,substrate_buildup,front,1,build-up layers,,ABF GZ-series,dielectric_polymer,dielectric,,,,,,,,,,,,stated,table,,p.2 Table I,,16 layers total; split per side not stated.
+001c.147115-a-L07,001c.147115-a,substrate_core,core,1,substrate core,,T-glass core,organic_laminate,core,,1200,,,,,,,,,,design_target,table,,p.2 Table I; p.4 Table II,,Low CTE core (Table II legs 1-2).
+001c.147115-a-L08,001c.147115-a,substrate_buildup,back,1,build-up layers,,ABF GZ-series,dielectric_polymer,dielectric,,,,,,,,,,,,stated,table,,p.2 Table I,,
+001c.147115-a-L09,001c.147115-a,tim_lid,single,3,lid foot adhesive,,high E lid foot adhesive,adhesive,adhesive,,,,,,,,,,,,stated,mixed,,p.3 Sec. II.C; p.4 Table II,,Lid foot to substrate edge.
+001c.147115-b-L01,001c.147115-b,tim_lid,single,1,flat-top metal lid,,metal,metal,thermal,,3000,,,,,,,,,,design_target,table,,p.2 Table I,,71.5x71.5 mm; cavity depth 0.9 mm; feet 8 mm.
+001c.147115-b-L02,001c.147115-b,tim_lid,single,2,TIM,,TIM,tim,thermal,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+001c.147115-b-L03,001c.147115-b,die,single,1,mimic ASIC silicon die,,silicon,silicon,device,,,,,,,,,,,,stated,mixed,,p.2 Fig. 3; p.2 Table I,,
+001c.147115-b-L04,001c.147115-b,underfill,single,1,die underfill,,high Tg die underfill,underfill,encapsulant,,,,,,,,,,,,stated,mixed,,p.2 Fig. 3; p.4 Table II,,
+001c.147115-b-L05,001c.147115-b,interposer,single,1,TSV silicon interposer,,silicon,silicon,core,,100,,,,,,,,,,design_target,table,,p.2 Table I,,
+001c.147115-b-L06,001c.147115-b,substrate_buildup,front,1,build-up layers,,ABF GZ-series,dielectric_polymer,dielectric,,,,,,,,,,,,stated,table,,p.2 Table I,,16 layers total; split per side not stated.
+001c.147115-b-L07,001c.147115-b,substrate_core,core,1,substrate core,,T-glass core,organic_laminate,core,,1200,,,,,,,,,,design_target,table,,p.2 Table I; p.4 Table II,,Low CTE core (Table II legs 1-2).
+001c.147115-b-L08,001c.147115-b,substrate_buildup,back,1,build-up layers,,ABF GZ-series,dielectric_polymer,dielectric,,,,,,,,,,,,stated,table,,p.2 Table I,,
+001c.147115-b-L09,001c.147115-b,tim_lid,single,3,lid foot adhesive,,low E lid foot adhesive,adhesive,adhesive,,,,,,,,,,,,stated,mixed,,p.3 Sec. II.C; p.4 Table II,,Lid foot to substrate edge.
+001c.147115-c-L01,001c.147115-c,tim_lid,single,1,lid or stiffener (STF),,metal lid / stiffener,metal,thermal,,,,,,,,,,,lid CTE 17 ppm/K,simulated,schematic,,p.3 Fig. 5,,
+001c.147115-c-L02,001c.147115-c,die,single,1,ASIC die,,silicon,silicon,device,,,,,,,,,,,CTE 2.6 ppm/K,simulated,schematic,,p.3 Fig. 5,,
+001c.147115-c-L03,001c.147115-c,mold,single,1,CoW EMC,,EMC,mold_compound,encapsulant,,,,,,,,,,,,simulated,schematic,,p.3 Fig. 5,,
+001c.147115-c-L04,001c.147115-c,underfill,single,1,ASIC UF,,die underfill (low Tg / high Tg legs),underfill,encapsulant,,,,,,,,,,,,simulated,mixed,,p.3 Fig. 5; p.4 Table II,,
+001c.147115-c-L05,001c.147115-c,interposer,single,1,Si interposer,,silicon,silicon,core,,,,,,,,,,,,simulated,schematic,,p.3 Fig. 5,,
+001c.147115-c-L06,001c.147115-c,underfill,single,2,CoW UF,,CoW underfill,underfill,encapsulant,,,,,,,,,,,,simulated,schematic,,p.3 Fig. 5,,
+001c.147115-c-L07,001c.147115-c,substrate_core,core,1,substrate core,,low CTE or ultra low CTE core,organic_laminate,core,,1200,1200,1400,,,,,,,substrate CTE 17-18 ppm/K (Fig. 5),simulated,mixed,,p.4 Table II; p.3 Fig. 5,,
+ectc51529.2024.00392-a-L01,ectc51529.2024.00392-a,die,single,1,dummy die,,,,device,,,,,,,,,,,,stated,mixed,,p.5 Sec. IV; p.5 Fig. 5(b),,
+ectc51529.2024.00392-a-L02,ectc51529.2024.00392-a,die,single,2,die Cu pads,"pad array, 2 pillars per pad",Cu,metal,bonding,,,,,,,,,,,,design_target,text,,p.5 Sec. IV; p.5 Fig. 5(b),,"7x17 um pads, 3 um spacing, 10 um pitch."
+ectc51529.2024.00392-a-L03,ectc51529.2024.00392-a,substrate_buildup,front,1,Si3N4 polish stop,,Si3N4 (ICPCVD 90 C),dielectric_inorganic,passivation,,0.2522,,,,,,,,,,measured,figure_image,,p.4 Fig. 3(a); p.3 Sec. III,,Text ~250 nm; CMP polish stop before 1 um dielectric recess; final presence not stated.
+ectc51529.2024.00392-a-L04,ectc51529.2024.00392-a,substrate_buildup,front,2,SiO2 dielectric with Cu pillars,Cu pillar array,SiO2 (ICPCVD 90 C); Ti/Cu pillars,dielectric_inorganic,dielectric,,,2.526,2.53,,,5,10,,,,measured,figure_image,via_diameter_um:design_target;via_pitch_um:design_target,p.4 Fig. 3(a); p.4 Fig. 4; p.3 Sec. III,,Text ~3 um; Fig. 4 after recess 2.505 um; ~1 um recess around pillars.
+ectc51529.2024.00392-a-L05,ectc51529.2024.00392-a,substrate_buildup,front,3,Si3N4 passivation,,Si3N4 (ICPCVD 90 C),dielectric_inorganic,passivation,,0.5115,,,,,,,,,,measured,figure_image,,p.4 Fig. 4; p.3 Sec. III,,Text ~500 nm; protects Cu metallization from silane.
+ectc51529.2024.00392-a-L06,ectc51529.2024.00392-a,substrate_buildup,front,4,organic build-up film,,ABF GL-102 (Ajinomoto),dielectric_polymer,dielectric,"silica filler ~80 vol%, mean 0.5 um, max 5 um",20,,,,,,,0.03,,,design_target,mixed,roughness_ra_um:measured,p.3 Sec. III; p.3 Sec. III.A; p.3 Fig. 2; p.2 Fig. 1,roughness_ra_um:lt,
+ectc51529.2024.00392-a-L07,ectc51529.2024.00392-a,substrate_core,core,1,Si wafer core,,<100> 4 inch Si wafer,silicon,core,,525,,,,,,,,,,design_target,mixed,,p.3 Sec. III; p.4 Sec. III.C; p.2 Fig. 1,,
+ectc51529.2024.00392-a-L08,ectc51529.2024.00392-a,substrate_buildup,back,1,organic build-up film,,ABF GL-102 (Ajinomoto),dielectric_polymer,dielectric,,20,,,,,,,,,,design_target,mixed,,p.3 Sec. III; p.2 Fig. 1,,
+tcpmt.2025.3614186-a-L01,tcpmt.2025.3614186-a,die,single,1,xPU-like die,,,,device,,750,,,,,,,,,,design_target,text,,p.2 Sec. II.A,,
+tcpmt.2025.3614186-a-L02,tcpmt.2025.3614186-a,die_stack,single,1,HBM-like die (x10),,,,device,,50,,,,,,,,10,,design_target,text,,p.2 Sec. II.A,,Laterally beside xPU dies; total stack 500 um.
+tcpmt.2025.3614186-a-L03,tcpmt.2025.3614186-a,bonding_interface,single,1,die adhesive,,epoxy adhesive U8419-73CF3 (NAMICS),adhesive,adhesive,,,,,,,,,,,,stated,text,,p.3 Sec. II.E.1,,
+tcpmt.2025.3614186-a-L04,tcpmt.2025.3614186-a,substrate_buildup,front,1,Cu pads and traces (RDL),,Ti adhesion / sputtered Cu seed / electroplated Cu,metal,conductor,,22,,,,,,,,,,design_target,mixed,,p.2 Table I; p.2 Sec. II.B; p.3 Sec. II.C,,"Table I RDL thickness 22 um, layer scope not defined; 2 metal layers total (one per side)."
+tcpmt.2025.3614186-a-L05,tcpmt.2025.3614186-a,substrate_buildup,front,2,polymer dielectric,,Ajinomoto ABF GX-92,dielectric_polymer,dielectric,,,,,,,,,,,,stated,text,,p.2 Sec. II.C,,Laminated on both sides; thickness of built TV not stated.
+tcpmt.2025.3614186-a-L06,tcpmt.2025.3614186-a,glass_core,core,1,glass core,,glass (Corning),glass,core,,500,,,,,,,,,CTE 3.4 ppm/C,design_target,mixed,,p.2 Table I; p.2 Sec. II.C,,
+tcpmt.2025.3614186-a-L07,tcpmt.2025.3614186-a,substrate_buildup,back,1,polymer dielectric,,Ajinomoto ABF GX-92,dielectric_polymer,dielectric,,,,,,,,,,,,stated,text,,p.2 Sec. II.C,,
+tcpmt.2025.3614186-a-L08,tcpmt.2025.3614186-a,substrate_buildup,back,2,Cu RDL and BGA pads,,Ti adhesion / sputtered Cu seed / electroplated Cu,metal,conductor,,22,,,,,,,,,,design_target,mixed,,p.2 Table I; p.3 Sec. II.C,,"Table I RDL thickness 22 um, layer scope not defined."
+tcpmt.2025.3614186-a-L09,tcpmt.2025.3614186-a,solder_mask,back,3,solder mask,,solder mask,dielectric_polymer,passivation,,,,,,,,,,,,stated,text,,p.3 Sec. II.C,,Patterned to expose BGA pads.
+tcpmt.2025.3614186-a-L10,tcpmt.2025.3614186-a,solder_mask,back,4,surface finish,,OSP,other,surface_finish,,,,,,,,,,,,stated,mixed,,p.2 Table I; p.3 Sec. II.C,,
+tcpmt.2025.3614186-a-L11,tcpmt.2025.3614186-a,other,single,1,PCB,"daisy chain, single BGA site, NSMD pads",FR-4,organic_laminate,core,,2000,,,,,,,,,CTE 17 ppm/C; 2-layer build-up; ENIG finish,design_target,text,,p.3 Sec. II.D,,
+tcpmt.2025.3614186-b-L01,tcpmt.2025.3614186-b,die,single,1,silicon die,,silicon,silicon,device,,,,,,,,,,,CTE 2.80E-06 1/C; E 131 GPa; G 50.38 GPa; nu 0.3,simulated,table,,p.6 Table II; p.5 Fig. 6,,
+tcpmt.2025.3614186-b-L02,tcpmt.2025.3614186-b,die,single,2,die passivation,,passivation,dielectric_inorganic,passivation,,,,,,,,,,,CTE 5.50E-07 1/C; E 75 GPa; nu 0.3,simulated,table,,p.6 Table II; p.5 Fig. 6,,
+tcpmt.2025.3614186-b-L03,tcpmt.2025.3614186-b,underfill,single,1,bump underfill,,underfill,underfill,encapsulant,,,,,,,,,,,CTE 3.10E-05 to 1.19E-04 1/C; E 9.4 GPa (-50 to 83 C) to 0.08 GPa (93-250 C),simulated,table,,p.6 Table II; p.5 Fig. 6,,
+tcpmt.2025.3614186-b-L04,tcpmt.2025.3614186-b,substrate_buildup,front,1,top dielectric layer,,polymer dielectric,dielectric_polymer,dielectric,,50,,,,,,,,,CTE 6.00E-05 to 1.30E-04 1/C; E 2.4 GPa; nu 0.29,simulated,mixed,,p.4 Sec. III; p.6 Table II,,
+tcpmt.2025.3614186-b-L05,tcpmt.2025.3614186-b,glass_core,core,1,glass core,,glass,glass,core,,500,300,700,,,,,,,CTE 3.80E-06 1/C; E 77 GPa; G 31.55 GPa; nu 0.22,simulated,mixed,,p.4 Sec. III; p.6 Table II,,"Cases 300, 500 and 700 um; 500 um baseline."
+tcpmt.2025.3614186-b-L06,tcpmt.2025.3614186-b,substrate_buildup,back,1,bottom dielectric layer,,polymer dielectric,dielectric_polymer,dielectric,,50,,,,,,,,,CTE 6.00E-05 to 1.30E-04 1/C; E 2.4 GPa; nu 0.29,simulated,mixed,,p.4 Sec. III; p.6 Table II; p.5 Fig. 7,,
+tcpmt.2025.3614186-b-L07,tcpmt.2025.3614186-b,solder_mask,back,2,solder mask,,solder mask,dielectric_polymer,passivation,,,,,,,,,,,CTE 6.00E-05 to 1.30E-04 1/C; E 2.4 GPa; nu 0.29,simulated,mixed,,p.4 Sec. III.A; p.6 Table II,,Solder masks on both substrate and PCB surfaces.
+tcpmt.2025.3614186-b-L08,tcpmt.2025.3614186-b,underfill,single,2,BGA underfill,,underfill,underfill,encapsulant,,,,,,,,,,,CTE 2.60E-05 to 1.03E-04 1/C; E 6 GPa (-50 to 155 C) to 0.06 GPa (165-250 C),simulated,table,,p.6 Table II; p.5 Fig. 7,,
+tcpmt.2025.3614186-b-L09,tcpmt.2025.3614186-b,other,single,1,PCB,,PCB,organic_laminate,core,,,,,,,,,,,"CTE in-plane 1.35E-05 1/C; E in-plane 22 GPa (-55/155 C), 2.2 GPa (165/250 C)",simulated,table,,p.6 Table II; p.5 Fig. 7,,

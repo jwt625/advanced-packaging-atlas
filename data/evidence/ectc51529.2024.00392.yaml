@@ -1,0 +1,44 @@
+paper_id: ectc51529.2024.00392
+verified_on: 2026-10-20
+source_files:
+  - references/ectc51529.2024.00392/text.md
+  - references/ectc51529.2024.00392/source.json
+  - references/ectc51529.2024.00392/figures/page_02.png
+  - references/ectc51529.2024.00392/figures/page_03.png
+  - references/ectc51529.2024.00392/figures/page_04.png
+  - references/ectc51529.2024.00392/figures/page_05.png
+figure_reading_method: >-
+  Fig. 1, 3(a), 4 and 5(b) re-rendered at 300 dpi in scratch (not kept) to read SEM and schematic labels.
+entries:
+  - {table: stack_layers, row_id: ectc51529.2024.00392-a-L03, field: thickness_um, value: 0.2522, unit: um, basis: measured, locator: "p.4 Fig. 3(a)", note: "252.2 nm label, two positions"}
+  - {table: stack_layers, row_id: ectc51529.2024.00392-a-L04, field: thickness_min_um, value: 2.526, unit: um, basis: measured, locator: "p.4 Fig. 3(a)", note: "labels 2.526 and 2.530 um as deposited"}
+  - {table: stack_layers, row_id: ectc51529.2024.00392-a-L05, field: thickness_um, value: 0.5115, unit: um, basis: measured, locator: "p.4 Fig. 4", note: "511.5 nm Si3N4 label"}
+  - {table: metrics, row_id: ectc51529.2024.00392-a-m2, field: value, value: 65.76, unit: N, basis: measured, locator: "p.5 Fig. 6(e)", note: "plot label 65.76975"}
+derived:
+  - {table: stack_layers, row_id: ectc51529.2024.00392-a-L03, field: thickness_um, value: 0.2522, formula: "252.2 nm / 1000", inputs: "p.4 Fig. 3(a)"}
+  - {table: stack_layers, row_id: ectc51529.2024.00392-a-L05, field: thickness_um, value: 0.5115, formula: "511.5 nm / 1000", inputs: "p.4 Fig. 4"}
+  - {table: stack_layers, row_id: ectc51529.2024.00392-a-L06, field: roughness_ra_um, value: 0.03, formula: "30 nm / 1000", inputs: "p.3 Fig. 2"}
+  - {table: process_steps, row_id: ectc51529.2024.00392-F1-s05, field: thickness_um, value: 0.5, formula: "~500 nm / 1000", inputs: "p.3 Sec. III"}
+  - {table: process_steps, row_id: ectc51529.2024.00392-F1-s07, field: thickness_um, value: 0.25, formula: "~250 nm / 1000", inputs: "p.3 Sec. III"}
+conflicts:
+  - {table: stack_layers, row_id: ectc51529.2024.00392-a-L04, field: thickness_um, values: ["~3 um", "2.526-2.530 um", "2.505 um"], locators: ["p.3 Sec. III", "p.4 Fig. 3(a)", "p.4 Fig. 4 (after recess)"], chosen: "2.526-2.530 um (min/max)", why: "measured cross-section of as-deposited film beats text"}
+  - {table: stack_layers, row_id: ectc51529.2024.00392-a-L03, field: thickness_um, values: [0.2522, 0.25], locators: ["p.4 Fig. 3(a)", "p.3 Sec. III"], chosen: 0.2522, why: "measured cross-section"}
+  - {table: stack_layers, row_id: ectc51529.2024.00392-a-L05, field: thickness_um, values: [0.5115, 0.5], locators: ["p.4 Fig. 4", "p.3 Sec. III"], chosen: 0.5115, why: "measured cross-section"}
+  - {table: process_steps, row_id: ectc51529.2024.00392-F1-s14, field: conditions, values: ["overburden 2-3 um above wafer surface", "6-8 um"], locators: ["p.4 Sec. III.C", "p.2 Fig. 1 schematic"], chosen: "2-3 um", why: "text beats schematic"}
+  - {table: process_steps, row_id: ectc51529.2024.00392-F1-s05, field: equipment, values: ["ICPCVD", "HDPCVD"], locators: ["p.4 Sec. III.B", "p.2 Fig. 1 label"], chosen: "ICPCVD", why: "text describes the ICP source explicitly"}
+  - {table: metrics, row_id: ectc51529.2024.00392-a-m8, field: value, values: ["~40 nm", "<50 nm"], locators: ["p.4 Sec. III.C", "p.2 Fig. 1"], chosen: 40, why: "measured text value; schematic gives bound"}
+excluded:
+  - "Table I organic vs BEOL wiring metrics (refs [1], [14])"
+  - "Table II polymer properties incl. ABF GL-102 CTE 20 ppm/K, 13 GPa, 250 C budget (refs [14], [15])"
+  - "Kumbhat et al. NCF Cu-Cu TCB 160 C, 21 N, 30 s (ref [11])"
+  - "Si-IF TCB throughput 1100 UPH (ref [4]); CCP PECVD 200-350 C (general)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - organizations and affiliations (separate pipeline)
+  - "ABF lamination and cure conditions; resist bake conditions; plating chemistry and current density"
+  - "Cu pillar height; die thickness and material; number of dies bonded; shear sample counts"
+  - "electrical resistance, yield and reliability of bonds; post-bond anneal (none, ABF limit <250 C)"
+notes: >-
+  Test vehicle has no metal layer on the polymer (paper assumes one exists). TV is a coupon on a 4 inch Si wafer core;
+  bonding force split 50/150 N recorded in process split and metrics.variant.

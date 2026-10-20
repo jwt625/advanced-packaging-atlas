@@ -1,0 +1,32 @@
+paper_id: eptc67330.2025.11392176
+verified_on: 2026-10-20
+source_files:
+  - references/eptc67330.2025.11392176/text.md
+  - references/eptc67330.2025.11392176/source.json
+  - references/eptc67330.2025.11392176/figures/page_02.png
+  - references/eptc67330.2025.11392176/figures/page_03.png
+  - references/eptc67330.2025.11392176/figures/page_04.png
+figure_reading_method: >-
+  Tables I-III and Fig. 1-5 read from page renders and candidate crops.
+entries:
+  - {table: metrics, row_id: eptc67330.2025.11392176-a-m1, field: value_text, value: "4 to 5", unit: mm, basis: measured, locator: "p.2 Sec. III.A", note: "measured warpage approximately 4 to 5 mm after fifth RDL layer"}
+derived:
+  - {table: process_steps, row_id: eptc67330.2025.11392176-F1-s01, field: thickness_um, value: 1100, formula: "1.1 mm x 1000 um/mm", inputs: "p.1 Sec. II glass carrier 510 x 515 x 1.1 mm"}
+  - {table: test_vehicles, row_id: eptc67330.2025.11392176-a, field: package_thickness_mm, value: 0.15, formula: "150 um / 1000", inputs: "p.2 Sec. II overall thickness approximately 150 um"}
+  - {table: test_vehicles, row_id: eptc67330.2025.11392176-b, field: package_thickness_mm, value: 0.15, formula: "150 um / 1000", inputs: "p.2 Sec. II overall thickness approximately 150 um"}
+conflicts:
+  - {table: stack_layers, row_id: eptc67330.2025.11392176-a-L04, field: properties, values: ["Dk 2.9 / Df 0.002 @ 25 GHz", "Dk 2.9 / Df 0.02 @ 25 GHz", "Dk 2.8 / Df 0.0060 @ 20 GHz"], locators: ["p.3 Table II", "p.1 Sec. I and Sec. II", "p.1 Abstract"], chosen: "Dk 2.9 / Df 0.002 @ 25 GHz", why: "result table over text and abstract"}
+  - {table: stack_layers, row_id: eptc67330.2025.11392176-a-L09, field: properties, values: ["stiffener CTE 31.2 ppm/C", "glass carrier CTE 31.2 ppm/C"], locators: ["p.3 Table II stiffener column", "p.3 Sec. III.B text"], chosen: "stiffener CTE 31.2 ppm/C", why: "table over text; text p.2 gives glass carrier CTE 9 ppm/C"}
+excluded:
+  - "Dk 2.9 and Df 0.02 at 25 GHz in the Introduction carries ref [2]; Table II value used"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - process temperatures, times, pressures (lamination, cure, plating, ENIG); laser wavelength and power
+  - SUS stiffener thickness; release film material; unit size and number of units per panel
+  - reflow profile for the delamination test; sample count for bending tests
+  - which PIC layout variant the reliability samples used
+notes: >-
+  Text states a 45 um RDL stack of five layers each 5 um Cu + 5 um PID (5 x 10 = 50 um); entered layer values as given.
+  Glass carrier CTE 9 ppm/C and Cu CTE 16.5 ppm/C from p.2 text. Table II stiffener column (E 1.9 GPa, Tg 65-75 C)
+  looks polymeric, while text names a stainless steel (SUS) stiffener; entered as printed.

@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+tcpmt.2025.3614186,10.1109/tcpmt.2025.3614186,Board-Level Reliability of 100 × 100 mm Large Glass Packages: Warpage and Thermomechanical Reliability for AI/HPC Applications,2026,TCPMT,glass,glass,2,"100x100 mm glass-substrate test vehicles, 7405 SAC305 balls on PCB; shadow moire warpage, thermal shock, FEA."
+001c.147115,10.4071/001c.147115,Module Stress Reduction for 2.5D TSV-based Heterogeneous Package,2025,IMAPS,si_interposer,si_interposer,3,"2.5D TSV module stress: lid/stiffener simulations, CoW test vehicle 72x72 mm package, 39x35 mm module."
+ectc51529.2024.00392,10.1109/ectc51529.2024.00392,Fine Pitch (≤ 10μm) Die to Wafer Cu-Cu TCB on Organic Polymer Build Up Films,2024,ECTC,advanced_substrate,advanced_substrate,3,90 C ICPCVD SiO2/Si3N4 on ABF GL-102 for <=10 um pitch D2W Cu-Cu TCB on organic build-up.

@@ -1,0 +1,34 @@
+paper_id: eptc67330.2025.11392276
+verified_on: 2026-10-20
+source_files:
+  - references/eptc67330.2025.11392276/text.md
+  - references/eptc67330.2025.11392276/source.json
+  - references/eptc67330.2025.11392276/figures/page_02.png
+  - references/eptc67330.2025.11392276/figures/page_03.png
+  - references/eptc67330.2025.11392276/figures/page_04.png
+figure_reading_method: >-
+  Fig. 2, 3, 4 re-rendered at 400 dpi; Fig. 3 SEM labels legible, Fig. 4 labels illegible (not used). Fig. 5 re-rendered
+  at 500 dpi; 120-min values and all CD/selectivity points read off the plot (depth +/-2 um, ER +/-0.01 um/min, CD and
+  SWA +/-0.2, selectivity +/-0.2). Fig. 6(c) table values read directly.
+entries:
+  - {table: metrics, row_id: eptc67330.2025.11392276-a-m15, field: value, value: 86, unit: um, basis: measured, locator: "p.3 Fig. 5", note: "120 min data point on TSV depth panel"}
+  - {table: metrics, row_id: eptc67330.2025.11392276-a-m12, field: value, value: 92.2, unit: deg, basis: measured, locator: "p.3 Fig. 3(a)", note: "label at via bottom corner; text SWA 87.8 deg = 180 - 92.2"}
+derived:
+  - {table: interconnects, row_id: eptc67330.2025.11392276-a-i1, field: aspect_ratio, value: 3, formula: "depth / diameter = 90 / 30", inputs: "p.1 Abstract; p.4 Sec. IV"}
+conflicts:
+  - {table: metrics, row_id: eptc67330.2025.11392276-a-m16, field: value, values: [111, 90], locators: ["p.3 Sec. III.E; p.3 Fig. 5", "p.4 Sec. IV"], chosen: 111, why: "results section and Fig. 5 give 111 um at 180 min; conclusion pairs 0.62 um/min with 'reaches 90 um' loosely"}
+  - {table: metrics, row_id: eptc67330.2025.11392276-a-m5, field: value, values: [26.7, 30], locators: ["p.3 Fig. 3(a)", "p.2 Sec. II.A"], chosen: 26.7, why: "measured X-SEM top CD vs 30 um design opening; design kept on interconnect a-i1"}
+excluded:
+  - "SF6/O2 and Ar-addition SiC etch background of refs [2], [3], [5], [6]"
+  - "Through-SiC via thermal stress analysis ref [1]; RF Si interposer platform ref [4]"
+  - "Liner/barrier/seed and Cu fill of TSiCVs (Sec. III.F): future integration, not performed"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - SiC wafer thickness; Ti/Cu seed thicknesses and deposition method
+  - Ar and O2 flow rates; chamber pressure per recipe (only low/high within 5-10 mT)
+  - via metallization and any reliability data
+  - "Fig. 2 SEM labels (12.01, 8.755, 7.840, 17.46, 36.96, 46.46, 29.39 um) not entered: caption does not define what they measure"
+  - "Fig. 4 dimension labels illegible at page-render resolution"
+  - "meaning of 'Slot' in Fig. 6 (text says one full wafer)"
+source_quality:
+  - "Clean text layer. Text refers to the full-wafer result as 'Figure 4'; it is Fig. 6. Fig. 1 caption gives no scale."

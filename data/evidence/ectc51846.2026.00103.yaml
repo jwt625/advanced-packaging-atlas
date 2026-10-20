@@ -1,0 +1,47 @@
+paper_id: ectc51846.2026.00103
+verified_on: 2026-10-20
+schema_version: 2.5
+source_files:
+  - references/ectc51846.2026.00103/text.md
+  - references/ectc51846.2026.00103/source.json
+  - references/ectc51846.2026.00103/figures/page_03.png
+  - references/ectc51846.2026.00103/figures/page_04.png
+  - references/ectc51846.2026.00103/figures/page_05.png
+  - references/ectc51846.2026.00103/figures/page_06.png
+  - references/ectc51846.2026.00103/figures/page_07.png
+figure_reading_method: >-
+  Page renders p.3-7 opened; candidates p05_fig5, p05_fig6, p06_fig7, p05_fig4, p04_fig2, p03_fig1 (panel e only),
+  p03_tablei, p04_fig3, p04_tableiii, p07_tableiv, p07_fig9 used; manual re-crops of Fig. 8 and Fig. 10 (candidates
+  cut at bottom) and Fig. 1(a)-(d) (separate block on p.3 left column) opened.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00103-d-m10, field: value, value: 451.5, unit: MPa, basis: simulated, locator: "p.7 Fig. 9", note: "legend '451.5 Max', Maximum Principal Stress 4, unit MPa"}
+  - {table: stack_layers, row_id: ectc51846.2026.00103-a-L01, field: thickness_um, value: 7, unit: um, basis: design_target, locator: "p.2 Sec. II.A", note: "7 um-thick electroplated copper layers; 42 um total for 6"}
+derived:
+  - {table: process_steps, row_id: ectc51846.2026.00103-F1-s10, field: current_density_ma_cm2, value: 11, formula: "1.1 A/dm2 x 10", inputs: "p.3 Sec. II.B"}
+  - {table: process_steps, row_id: ectc51846.2026.00103-F1-s02, field: time_s, value: 240, formula: "4 min x 60", inputs: "p.3 Sec. II.B"}
+  - {table: process_steps, row_id: ectc51846.2026.00103-F1-s03, field: time_s, value: 60, formula: "1 min x 60 (also s04)", inputs: "p.3 Sec. II.B"}
+  - {table: process_steps, row_id: ectc51846.2026.00103-F1-s05, field: time_s, value: 1800, formula: "30 min x 60 (also s06)", inputs: "p.3 Sec. II.B"}
+  - {table: process_steps, row_id: ectc51846.2026.00103-F1-s09, field: thickness_um, value: 0.25, formula: "50 nm Ti + 200 nm Cu = 250 nm / 1000", inputs: "p.3 Sec. II.B"}
+  - {table: stack_layers, row_id: ectc51846.2026.00103-a-L02, field: thickness_um, value: 0.2, formula: "200 nm / 1000 (L03: 50 nm -> 0.05; same for -b)", inputs: "p.3 Sec. II.B"}
+  - {table: components, row_id: ectc51846.2026.00103-a-c1, field: thickness_um, value: 1100, formula: "1.1 mm x 1000 (-b: 1 mm -> 1000)", inputs: "p.2 Sec. II.A"}
+conflicts:
+  - {table: test_vehicles, row_id: ectc51846.2026.00103-b, field: substrate_x_mm, values: [100, 10], locators: ["p.2 Sec. II.A; p.4 Sec. IV.A; p.5 Sec. IV.B", "p.5 Fig. 4 caption"], chosen: 100, why: "text repeatedly states 100 mm x 100 mm and 16 coupons of 25 x 25 mm"}
+  - {table: stack_layers, row_id: ectc51846.2026.00103-a-L01, field: thickness_um, values: [7, "5-7"], locators: ["p.2 Sec. II.A; p.3 Sec. III.B.1", "p.3 Sec. II.B"], chosen: 7, why: "stated layer design and 42 um total; plating text gives 5-7 um range (noted)"}
+  - {table: process_steps, row_id: ectc51846.2026.00103-F1-s11, field: target, values: ["6 RDLs", "repeated six more times (7)"], locators: ["p.2-3 Sec. II.A; p.3 total 90 um ABF / 42 um Cu", "p.3 Sec. II.B"], chosen: "6 RDLs", why: "totals 90 = 6 x 15 and 42 = 6 x 7"}
+excluded:
+  - "Table II material properties (CTE, modulus, Poisson ratio, yield, tangent modulus) cited from refs [12-13]"
+  - "Cu stress-free temperature 66.5 C from ref [11]"
+  - "glass critical ERR 8 J/m2 dry, 2 J/m2 wet from ref [7] (used only in notes)"
+  - "prior-work pullback, edge coating and 150-500 um substrate results (refs [2], [3], [7], [8])"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - interconnects (no vias, TGVs or pads described)
+  - lithography, seed etch and line/space of the SAP RDL
+  - dicing blade width and grit; measured sidewall roughness values (method only)
+  - counts of coupons per failure mode
+  - "process_steps: simulation models c, d (no build)"
+source_quality:
+  - "Fig. 4 caption '10 mm x 10 mm' contradicts text 100 mm x 100 mm."
+  - "Sec. IV.C refers to Table I for material properties (should be Table II) and Fig. 7 for the dicing schematic (should be Fig. 8)."
+  - "Affiliation printed 'George W. Wooduff School' (typo for Woodruff)."

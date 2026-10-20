@@ -1,0 +1,44 @@
+paper_id: 001c.147115
+verified_on: 2026-10-20
+source_files:
+  - references/001c.147115/text.md
+  - references/001c.147115/source.json
+  - references/001c.147115/figures/page_02.png
+  - references/001c.147115/figures/page_03.png
+  - references/001c.147115/figures/page_04.png
+figure_reading_method: >-
+  Fig. 7 re-rendered at 400 dpi in scratch (not kept) to read coplanarity labels; Fig. 6, 8, 9 bar labels read off page renders.
+entries:
+  - {table: metrics, row_id: 001c.147115-b-m2, field: value, value: 155.9, unit: um, basis: measured, locator: "p.4 Fig. 7", note: "Coplanarity = 155.9 microns, small label under 25 C map"}
+  - {table: components, row_id: 001c.147115-a-c6, field: notes, value: "lid feet 8 mm", basis: design_target, locator: "p.2 Table I", note: "foot width presumed; table says Lid feet: 8 mm"}
+derived:
+  - {table: test_vehicles, row_id: 001c.147115-a, field: n_dies, value: 4, formula: "1 mimic ASIC + 2 mimic HBM + 1 dummy Si filler", inputs: "p.2 Sec. II.A; p.2 Fig. 3"}
+  - {table: test_vehicles, row_id: 001c.147115-b, field: n_dies, value: 4, formula: "1 mimic ASIC + 2 mimic HBM + 1 dummy Si filler", inputs: "p.2 Sec. II.A; p.2 Fig. 3"}
+  - {table: components, row_id: 001c.147115-a-c4, field: thickness_um, value: 100, formula: "0.1 mm x 1000", inputs: "p.2 Table I"}
+  - {table: components, row_id: 001c.147115-a-c5, field: thickness_um, value: 2000, formula: "2.0 mm x 1000", inputs: "p.2 Table I"}
+  - {table: components, row_id: 001c.147115-a-c6, field: thickness_um, value: 3000, formula: "3 mm x 1000; cavity 0.9 mm x 1000 = 900", inputs: "p.2 Table I"}
+  - {table: interconnects, row_id: 001c.147115-a-i1, field: pitch_um, value: 1100, formula: "1.1 mm x 1000; ball 0.6 mm x 1000 = 600", inputs: "p.2 Table I"}
+  - {table: stack_layers, row_id: 001c.147115-a-L07, field: thickness_um, value: 1200, formula: "1.2 mm x 1000", inputs: "p.2 Table I"}
+conflicts:
+  - {table: metrics, row_id: 001c.147115-a-m1, field: condition, values: ["-65 to 125 C", "-65 to 150 C, 100X"], locators: ["p.2 Sec. II.A", "p.2 Fig. 3 annotation"], chosen: "both kept in condition text", why: "cannot resolve inside the paper"}
+  - {table: metrics, row_id: 001c.147115-c-m1, field: value, values: ["39% reduction", "71% normalized stress"], locators: ["p.4 Sec. II.D (39% reduction)", "p.3 Fig. 6 and p.4 Fig. 8 leg 2 (71% normalized)"], chosen: 39, why: "text value entered for the text claim; figure values entered as separate rows"}
+  - {table: components, row_id: 001c.147115-c-c7, field: material, values: ["SUS 430", "SUS 403"], locators: ["p.4 Table II", "p.5 conclusion 3"], chosen: "SUS 430", why: "table beats text"}
+  - {table: metrics, row_id: 001c.147115-b-m3, field: condition, values: ["peak 240 C (panel title)", "125 C / 260 C (caption)"], locators: ["p.4 Fig. 7 panel titles", "p.4 Fig. 7 caption"], chosen: "panel titles", why: "figure image beats caption"}
+excluded:
+  - "HBM ~4000 connections and <100 um logic-memory distance (general background)"
+  - "Fig. 1 packaging trend roadmap (generic)"
+  - "5 nm ASIC node and HBM3/3E/4 trend (abstract background)"
+  - "Fig. 7 temperature-curve values (axis unit not printed)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - organizations and affiliations (separate pipeline)
+  - "microbump, TSV and C4/Cu pillar dimensions"
+  - "underfill and adhesive product names, Tg, modulus and CTE values"
+  - "lid metal, TIM material, interposer x/y size, die thickness"
+  - "assembly steps and conditions of the TVs"
+  - "thermal cycle count to failure / pass; sample sizes"
+  - "stiffener foot widths and thicknesses of the simulation DOE"
+notes: >-
+  TV a = Table II leg 1 (crack), TV b = leg 2 (no crack) per p.4. Module size 39x35 mm only in abstract (TV notes).
+  Process flow level fragments: only the generic CoW-singulate-FC sequence of the introduction.

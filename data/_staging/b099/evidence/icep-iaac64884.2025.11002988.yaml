@@ -1,0 +1,28 @@
+paper_id: icep-iaac64884.2025.11002988
+verified_on: 2026-10-20
+source_files:
+  - references/icep-iaac64884.2025.11002988/text.md
+  - references/icep-iaac64884.2025.11002988/source.json
+  - references/icep-iaac64884.2025.11002988/figures/page_01.png
+  - references/icep-iaac64884.2025.11002988/figures/page_02.png
+figure_reading_method: >-
+  Tables 1-4 read from candidate crops and page render; Bossung curves (Fig. 1, 2) not digitized.
+entries:
+  - {table: process_steps, row_id: icep-iaac64884.2025.11002988-F1-s04, field: temp_c, value: 60, unit: C, basis: design_target, locator: "p.1 Sec. II", note: "PEB 60 C for 60 s"}
+derived:
+  - {table: process_steps, row_id: icep-iaac64884.2025.11002988-F1-s05, field: time_s, value: 1800, formula: "30 min x 60 s/min", inputs: "p.1 Sec. II"}
+conflicts:
+  - {table: metrics, row_id: icep-iaac64884.2025.11002988-a-m9, field: value, values: [17.5, 27.5], locators: ["p.2 Table 2 header (high NA 120 mJ/cm2)", "p.2 Table 1 (high NA 120 mJ/cm2)"], chosen: 17.5, why: "all five Table 2 ratios in that column (3.14, 2.86, 2.43, 1.86, 1.43) are computed from 17.5; Table 1 likely misprint"}
+excluded:
+  - "L/S 8/8 um mainstream production and 5/5 um verification level (industry background, Sec. I)"
+  - "lens resolution 3 um and 2 um L/S on 1 um liquid resist kept only as lens description in split"
+not_reported:
+  - interconnects (resist patterning only)
+  - electrical_interfaces
+  - optical_interfaces
+  - lens NA values, exposure tool model, wavelength
+  - seed layer material and deposition, DFR product, lamination conditions
+  - CD target band numeric limits, measurement tool model
+  - Cu plating, resist strip, seed etch (SAP steps assumed but not performed)
+notes: >-
+  Two-page extended abstract. Abstract states wiring formed at 6 and 8 um pitch, but only resist lines were patterned.

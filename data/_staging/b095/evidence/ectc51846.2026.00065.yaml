@@ -1,0 +1,46 @@
+paper_id: ectc51846.2026.00065
+verified_on: 2026-10-20
+schema_version: 2.5
+source_files:
+  - references/ectc51846.2026.00065/text.md
+  - references/ectc51846.2026.00065/source.json
+  - references/ectc51846.2026.00065/figures/page_02.png
+  - references/ectc51846.2026.00065/figures/page_03.png
+  - references/ectc51846.2026.00065/figures/page_04.png
+  - references/ectc51846.2026.00065/figures/page_05.png
+  - references/ectc51846.2026.00065/figures/page_06.png
+  - references/ectc51846.2026.00065/figures/page_07.png
+figure_reading_method: >-
+  Page renders p.2-7 opened; candidate crops p02_fig1, p02_fig2, p03_fig3, p03_fig4, p03_fig5, p03_fig6, p04_fig7,
+  p04_fig8, p04_tablei, p05_fig9, p05_fig10, p05_fig11, p06_fig12, p07_fig14 opened (contact sheet); all complete.
+entries:
+  - {table: interconnects, row_id: ectc51846.2026.00065-a-i1, field: pitch_min_um, value: 20, unit: um, basis: design_target, locator: "p.2 Sec. III; p.3 Fig. 4(a)", note: "pillars designed with pitches of 20 um and 100 um"}
+  - {table: metrics, row_id: ectc51846.2026.00065-b-m7, field: value, value: 90, unit: W/cm2, basis: simulated, locator: "p.5 Fig. 10", note: "bar height read off image, approx."}
+  - {table: metrics, row_id: ectc51846.2026.00065-c-m2, field: value, value: 57.5, unit: W/cm2, basis: simulated, locator: "p.5 Fig. 11", note: "bar heights 57.5 / 63 / 71.2 read off image; consistent with stated +9.5% and +13.3%"}
+derived:
+  - {table: interconnects, row_id: ectc51846.2026.00065-a-i1, field: bonding_time_s, value: 900, formula: "15 min x 60", inputs: "p.3 Sec. III"}
+  - {table: process_steps, row_id: ectc51846.2026.00065-F1-s04, field: time_s, value: 900, formula: "15 min x 60", inputs: "p.3 Sec. III"}
+  - {table: process_steps, row_id: ectc51846.2026.00065-F1-s05, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: ectc51846.2026.00065-F1-s09, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.2 Sec. II"}
+  - {table: stack_layers, row_id: ectc51846.2026.00065-a-L05, field: thickness_um, value: 0.01, formula: "10 nm / 1000", inputs: "p.2 Sec. III (Ti/Cu/Au 30/300/10 nm; same for L06-L10)"}
+  - {table: stack_layers, row_id: ectc51846.2026.00065-a-L11, field: thickness_um, value: 0.3, formula: "300 nm / 1000", inputs: "p.2 Sec. III"}
+  - {table: stack_layers, row_id: ectc51846.2026.00065-a-L03, field: thickness_um, value: 0.04, formula: "40 nm / 1000", inputs: "p.2 Sec. II"}
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00065-a-m2, field: value, values: ["approx. 150", ">150"], locators: ["p.3 Sec. III; p.4 Table I", "p.8 Sec. V"], chosen: "approx. 150", why: "results section and Table I over conclusion summary"}
+  - {table: metrics, row_id: ectc51846.2026.00065-b-m2, field: value, values: ["nearly 40 C", "more than 40 C"], locators: ["p.5 Sec. IV.B", "p.8 Sec. V"], chosen: "nearly 40 C (approx)", why: "results section over conclusion summary"}
+excluded:
+  - "EMC CTE >10 ppm/C, Si CTE 2.6 ppm/C, EMC k <0.5 W/m-K, SiO2 k <1.1 W/m-K, die shift 10-30 um, warpage values (refs [6], [7])"
+  - "sputtered AlN k >100 W/m-K attributed to ref [12]"
+  - "Rjc-to-amb 1.16 K-cm2/W from measured value in ref [16] (used only to set heff)"
+  - "mesh convergence at 501,430 elements (model setup detail)"
+  - "Fig. 13 thermal coupling and Fig. 15 victim Tj curves (trends only, no values stated in text)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - interposer RDL / TSV of the fabricated test structure (only in concept Fig. 1 and the thermal model)
+  - pillar height, diameter and count; bonding alignment; bond yield or resistance
+  - TCB tool; drop-cast solvent; sputter target and gas; polishing parameters
+  - final AlN infill thickness or overburden thickness; test structure package thickness
+  - "process_steps: model TVs b, c, d are simulation_model (no build)"
+  - reliability, warpage
+source_quality: []
