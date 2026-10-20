@@ -72,10 +72,15 @@ Read `data/schema/packaging.schema.yaml` first (v2.2): its rules (a)-(m) and enu
    not_reported: [electrical_interfaces, "bonding temperature"]   # what the paper does not disclose (short)
    ```
 5. Key figures (after the TVs exist, so `tv_ids` can be set):
-   - Choose 2-6 figures/tables (fewer only if the paper has fewer). Rank 1 is the figure that best shows the physical
-     build: cross-section > stack schematic > package photo. Then rank the process flow, the layout/floorplan, and the
-     figures/tables that most of your extracted values come from. Skip author photos, logos and generic roadmaps unless
-     nothing else exists. Set `reprinted: yes` for figures reprinted from cited work, and prefer the paper's own.
+   - Always include every figure that shows an actual schematic drawing (stack/structure cross-section drawing,
+     process-flow drawing, layout/floorplan) or an actual image of the build (SEM/TEM/FIB/optical cross-section or
+     top view, X-ray, CSAM, package/wafer/panel photo), however many there are (decision 2026-10-19, DevLog-005).
+     Add the data plots and tables that carry the values you extracted, by information content (no fixed count; skip
+     ones that add nothing). Minimum 2 per paper unless the paper has fewer figures.
+   - Rank 1 is the figure that best shows the physical build: cross-section image > stack schematic > package photo.
+     Then the process flow, layout/floorplan, other schematics and images, then plots/tables. Skip author photos,
+     logos and generic roadmaps. Set `reprinted: yes` for figures reprinted from cited work (still include them if they
+     are a schematic/image of this paper's build).
    - Start from `figures/candidates.json`. Open the candidate crop `figures/cand/<cand_id>.png` of every figure you
      choose. If it holds the whole figure (all panels, axes and labels) and little else, use `bbox_source: candidate`
      with the candidate's `cand_id` and `bbox` copied exactly.

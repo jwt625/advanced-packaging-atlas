@@ -20,7 +20,8 @@ For each paper, one at a time, completely:
    yes if it describes an ordered fabrication/assembly flow or discrete process steps for at least one TV; no if it
    only reports the finished stack or results. Yes requires `process_steps` rows; no requires an empty
    `process_steps` table and `process_steps` in `evidence.not_reported`.
-5. Key figures: 2-6 `figures` rows per paper per SKILL.md workflow step 5. Open every chosen crop (candidate png or
+5. Key figures per SKILL.md workflow step 5: every schematic drawing and every SEM/micrograph/X-ray/photo of the build,
+   plus the plots/tables that carry extracted values (no 6-figure cap). Open every chosen crop (candidate png or
    your manual re-crop); never cite a bbox you have not looked at. Re-crops and grid renders go in your scratch
    subfolder (`--out <session scratchpad>/<batch>/`).
 
