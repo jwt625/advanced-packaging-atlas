@@ -1,0 +1,37 @@
+paper_id: eptc59621.2023.10457912
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/eptc59621.2023.10457912/text.md
+  - references/eptc59621.2023.10457912/source.json
+  - references/eptc59621.2023.10457912/TEXT_LAYER_WARNING.md
+  - references/eptc59621.2023.10457912/figures/page_01.png
+  - references/eptc59621.2023.10457912/figures/page_02.png
+  - references/eptc59621.2023.10457912/figures/page_03.png
+  - references/eptc59621.2023.10457912/figures/page_04.png
+figure_reading_method: >-
+  OCR text verified against page renders; 300 dpi re-crops of Fig. 1, 2, 3, 4, 5, 6, 7 and a 600 dpi crop of the
+  Fig. 5(b) void-length label (25.86 um). CD/depth labels read from FIB-SEM annotations.
+entries:
+  - {table: metrics, row_id: eptc59621.2023.10457912-a-m2, field: value, value: 5.423, unit: um, basis: measured, locator: "p.2 Fig. 1(a)", note: "same image reused as Fig. 3(b)"}
+  - {table: metrics, row_id: eptc59621.2023.10457912-a-m4, field: value, value: 58.27, unit: um, basis: measured, locator: "p.2 Fig. 1(a)", note: "FIB-SEM depth label (cs)"}
+derived:
+  - {table: process_steps, row_id: eptc59621.2023.10457912-a-s08, field: time_s, value: 1800, formula: "30 min * 60", inputs: "p.2 Experimental Methods"}
+conflicts:
+  - {table: metrics, row_id: eptc59621.2023.10457912-a-m10, field: value, values: [25.86, 26], locators: ["p.3 Fig. 5(b)", "p.3 Results text"], chosen: 25.86, why: "measured FIB-SEM label over text approximation"}
+  - {table: interconnects, row_id: eptc59621.2023.10457912-a-i1, field: diameter_um/depth_um, values: ["6 x 55 (nominal)", "5.423 top / 5.207 bottom / 58.27 depth (FIB-SEM, POR)"], locators: ["p.1 Experimental Methods", "p.2 Fig. 1(a)"], chosen: "nominal kept in interconnect; measured values entered as metrics m2-m4", why: "different quantities (design vs as-measured); both retained"}
+excluded:
+  - "Wang et al. 20x65 um TSV coupon study (ref [5])"
+  - "Kim et al. aspect ratio up to 12 pulse plating (ref [6])"
+  - "Plating duration ~1-2 h per wafer and TSV cost share (refs [2,3])"
+  - "Typical TSV aspect ratio 5-10 (general statement)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - components (wafer-level process study; no packaged dies)
+  - "absolute current densities, plating times, pulse frequency/period, electrolyte product and supplier"
+  - "liner, barrier, seed, hard mask thicknesses; wafer thickness; equipment"
+  - "sample counts per split; TSV resistance; reliability tests"
+source_quality:
+  - "Garbled PDF text layer; text.md is tesseract OCR (figure labels garbled). All numbers checked against page renders."
+  - "candidates.json empty: no detected figure crops; all key figures cropped manually."

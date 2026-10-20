@@ -1,0 +1,39 @@
+paper_id: ectc51529.2024.00153
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00153/text.md
+  - references/ectc51529.2024.00153/source.json
+  - references/ectc51529.2024.00153/TEXT_LAYER_WARNING.md
+  - references/ectc51529.2024.00153/figures/page_01_220dpi.png
+  - references/ectc51529.2024.00153/figures/page_02_220dpi.png
+  - references/ectc51529.2024.00153/figures/page_03_220dpi.png
+  - references/ectc51529.2024.00153/figures/page_04_220dpi.png
+  - references/ectc51529.2024.00153/figures/page_05_220dpi.png
+  - references/ectc51529.2024.00153/figures/page_06_220dpi.png
+figure_reading_method: >-
+  text.md is tesseract OCR; every number checked on the 220 dpi page images. 250-600 dpi re-crops of Fig. 1, 7, 8, 9
+  (IMC labels), 10, 12. Fig. 4 transmittance plateau read off the plot (~90%).
+entries:
+  - {table: metrics, row_id: ectc51529.2024.00153-b-m1, field: value_text, value: "0.6-1.3", unit: um, basis: measured, locator: "p.4 Sec. III.A; p.4 Fig. 7(c)", note: "Fig. 7(c) labels 1.336, 0.8987, 0.5951 um"}
+  - {table: metrics, row_id: ectc51529.2024.00153-b-m2, field: value_text, value: "0.3-0.6", unit: um, basis: measured, locator: "p.5 Sec. III.A; p.5 Fig. 9(b)", note: "Fig. 9(b) labels 0.6437, 0.4251, 0.3643 um"}
+  - {table: process_steps, row_id: ectc51529.2024.00153-a-s06, field: conditions, value: "700 W, 5 s", unit: "W; s", basis: design_target, locator: "p.5 Sec. III.B", note: "homogenized laser power and irradiation time for LABC"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51529.2024.00153-a-m4, field: value, values: [130, "~1e2-1e3 (Fig. 5 minimum)"], locators: ["p.3 Sec. II.B", "p.4 Fig. 5"], chosen: 130, why: "explicit text value; plot read on log axis is imprecise"}
+  - {table: papers, row_id: ectc51529.2024.00153, field: first_author, values: ["Kwang-Seong Choi", "Jiho Joo"], locators: ["p.1 page image author block", "p.1 OCR text order"], chosen: "Kwang-Seong Choi", why: "OCR reordered author blocks; page image shows Kwang-Seong Choi first"}
+excluded:
+  - "LABC min. bump pitch 4 um (Table I, attributed to ETRI micro-display ref [11])"
+  - "TCB with NCF and MR with MuF characteristics (Table I, process step counts 3/8, >40 um pitch, >10 s TCB cycle time; general/ref [2,3])"
+  - "MR heating to 260 C (general description of mass reflow)"
+  - "600x600 mm panel example (generic statement)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - chiplet size, thickness, material; Si wafer diameter and thickness
+  - bump diameter for TV a (10 um stated only for the reflow study), pillar/cap heights, pad metallurgy on substrate wafer
+  - bonding pressure/force, post-cure conditions, NCF thickness
+  - alignment accuracy value, electrical resistance, yield, reliability test data
+  - laser power for bump reflow step, fluxless reflow conditions
+source_quality:
+  - "Garbled PDF text layer; text.md is OCR (author order scrambled). No figure candidates (candidates.json empty): all key figures manual."

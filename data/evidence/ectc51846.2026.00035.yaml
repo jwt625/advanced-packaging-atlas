@@ -1,0 +1,40 @@
+paper_id: ectc51846.2026.00035
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00035/text.md
+  - references/ectc51846.2026.00035/source.json
+  - references/ectc51846.2026.00035/figures/page_04.png
+  - references/ectc51846.2026.00035/figures/page_08.png
+  - references/ectc51846.2026.00035/figures/cand/p01_fig1.png
+  - references/ectc51846.2026.00035/figures/cand/p02_fig2.png
+  - references/ectc51846.2026.00035/figures/cand/p02_tablei.png
+  - references/ectc51846.2026.00035/figures/cand/p03_fig3.png
+  - references/ectc51846.2026.00035/figures/cand/p03_fig4.png
+  - references/ectc51846.2026.00035/figures/cand/p05_tableii.png
+  - references/ectc51846.2026.00035/figures/cand/p07_fig11.png
+  - references/ectc51846.2026.00035/figures/cand/p08_fig12.png
+  - references/ectc51846.2026.00035/figures/cand/p08_fig13.png
+figure_reading_method: >-
+  Page 7 grid; 220-250 dpi re-crops of Fig. 5, 6, 7, 10, 11 from source.pdf. Eye height / eye opening factor read from
+  the in-plot labels of Fig. 6 and 7 (all legible). Fig. 5 S21 at 50 GHz read against gridlines (+/-0.2 dB).
+entries:
+  - {table: stack_layers, row_id: ectc51846.2026.00035-c-L01, field: repeat, value: 3, unit: layers, basis: design_target, locator: "p.2 Sec. II.B.3", note: "three-layer signal structure, 4-3-4 distribution"}
+  - {table: interconnects, row_id: ectc51846.2026.00035-a-i1, field: notes, value: 21.7, unit: um, basis: design_target, locator: "p.2 Sec. II.B; p.3 Fig. 3(b)", note: "vertical row distance = 25 x sqrt3/2"}
+  - {table: metrics, row_id: ectc51846.2026.00035-c-m10, field: value, value: 11.5, unit: GHz, basis: simulated, locator: "p.1 Abstract", note: "-3 dB bandwidth Model C at 2.0 mm; only stated in abstract"}
+derived:
+  - {table: test_vehicles, row_id: ectc51846.2026.00035-d, field: n_dies, value: 3, formula: "Chiplet 1 + Chiplet 2 + bridge die", inputs: "p.7 Sec. IV.A"}
+conflicts: []
+excluded:
+  - "Initial PSB demonstrations: 40 um MicroPillar pitch, 142 um electrode pad pitch, 9.96 x 0.96 mm footprint, 720 um thickness (refs [1]-[2])"
+  - "300 mm panel productivity, automotive-grade reliability, mass reflow feasibility of previous works (refs [3]-[4])"
+  - "2 um via size / 5 um via pitch optimized RDL bridge features from ECTC 2025 (ref [5])"
+  - "40 um D2D pitch bridge-last productivity and reliability (ref [4])"
+  - "Model A/B oxide eye heights 'below 0.4 V' text statement (exact values from Fig. 7 entered instead)"
+not_reported:
+  - "prototype chiplet, bridge and package dimensions and thicknesses"
+  - "MicroPillar and tall pillar metallurgy; tall pillar size; bonding temperatures/forces"
+  - "prototype bridge RDL stack; measured electrical results (resistance, yield)"
+  - "energy per bit, aggregate bandwidth, BER"
+  - optical_interfaces
+  - "reliability data (stated as future work)"

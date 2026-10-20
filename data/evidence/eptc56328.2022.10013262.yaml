@@ -1,0 +1,44 @@
+paper_id: eptc56328.2022.10013262
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/eptc56328.2022.10013262/text.md
+  - references/eptc56328.2022.10013262/TEXT_LAYER_WARNING.md
+  - references/eptc56328.2022.10013262/source.json
+  - references/eptc56328.2022.10013262/figures/page_01_220dpi.png
+  - references/eptc56328.2022.10013262/figures/page_02_220dpi.png
+  - references/eptc56328.2022.10013262/figures/page_03_220dpi.png
+  - references/eptc56328.2022.10013262/figures/page_04_220dpi.png
+  - references/eptc56328.2022.10013262/figures/page_05_220dpi.png
+figure_reading_method: >-
+  text.md is tesseract OCR; every number re-read on the 220 dpi page renders (all 5 pages viewed). Fig. 3 table
+  re-cropped at 300 dpi and read cell by cell. Candidates p02_fig3, p03_fig6, p03_fig7, p03_fig8, p04_fig9, p05_fig13 opened.
+entries:
+  - {table: interconnects, row_id: eptc56328.2022.10013262-a-i1, field: pitch_um, value: 150, unit: um, basis: design_target, locator: "p.3 Sec. LDI and Tall Cu Post Patterning", note: "through mold Cu posts with a <150 um pitch"}
+  - {table: interconnects, row_id: eptc56328.2022.10013262-a-i1, field: diameter_um, value: 80, unit: um, basis: design_target, locator: "p.3 Sec. LDI and Tall Cu Post Patterning", note: "required CD imaging performance <80 um in >240 um thick resist"}
+  - {table: metrics, row_id: eptc56328.2022.10013262-b-m1, field: value, value: 73, unit: "%", basis: derived, locator: "p.4 Sec. Cost", note: "40 die per 300 mm wafer"}
+  - {table: metrics, row_id: eptc56328.2022.10013262-b-m2, field: value, value: 92, unit: "%", basis: derived, locator: "p.4 Sec. Cost", note: "256 die per 600 mm panel"}
+derived:
+  - {table: metrics, row_id: eptc56328.2022.10013262-e-m2, field: value, value: 0.25, formula: "250 nm / 1000", inputs: "p.1 Abstract"}
+  - {table: test_vehicles, row_id: eptc56328.2022.10013262-a, field: n_dies, value: 5, formula: "1 embedded active die + 4 chips-last dies", inputs: "p.3 Sec. LDI and Tall Cu Post Patterning"}
+conflicts:
+  - {table: interconnects, row_id: eptc56328.2022.10013262-c-i1, field: pitch_max_um, values: [40, 44], locators: ["p.5 Sec. Applications", "p.5 Fig. 13"], chosen: 40, why: "text over schematic label (rule k); Fig. 13 reads '20 x 44 um UHD bond-pad pitch'"}
+  - {table: metrics, row_id: eptc56328.2022.10013262-e-m38, field: value, values: [55, 45], locators: ["p.2 Fig. 3", "p.2 Sec. Adaptive Patterning (text before Fig. 3); p.1 Fig. 2"], chosen: 55, why: "Fig. 3 table gives Gen 1 bond pad pitch 55 um and Gen 1.5 45 um; text and Fig. 2 say Gen 1 45 um / 492 IO/mm2; table over text"}
+excluded:
+  - "Cu pillar flip chip 100 um / 105 IO/mm2, TSMC InFO 55 um / 314 IO/mm2, Intel EMIB 45 um / 492 IO/mm2 (other companies, Fig. 2)"
+  - "Reticle limit ~850 mm2 and reticle stitching defects (Fig. 1, ref [10])"
+  - "Customer package size range 36x36 to 85x85 mm (market statement)"
+  - "M-Series Gen 1 IO density 492 IO/mm2 (pitch conflicts with Fig. 3; not entered)"
+  - "Fig. 5 qualitative dry film vs liquid resist comparison (no numbers)"
+  - "Future LDI sources at 375 and 355 nm (no data)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - die sizes and thicknesses for all TVs; package size of TV a and c
+  - Cu post height, RDL thicknesses and dielectric materials for TV a
+  - bonding methods and conditions for chips-last attach
+  - warpage, reliability, yield data
+  - process steps for TV b, c, d (only format/cost or imaging results)
+source_quality:
+  - "PDF text layer garbled; OCR text used and all numbers checked on 220 dpi renders. OCR misreads e.g. '204m' for 20 um, '5y1m' for 5 um."
+  - "Paper refers to the embedded die interposer as 'Figure 5' in Applications; it is Fig. 6."

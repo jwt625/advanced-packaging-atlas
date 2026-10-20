@@ -1,0 +1,34 @@
+paper_id: ectc51529.2024.00164
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00164/text.md
+  - references/ectc51529.2024.00164/source.json
+  - references/ectc51529.2024.00164/figures/page_02.png
+  - references/ectc51529.2024.00164/figures/page_03.png
+  - references/ectc51529.2024.00164/figures/page_04.png
+  - references/ectc51529.2024.00164/figures/page_05.png
+figure_reading_method: >-
+  Page renders for all figures; 300 dpi re-crops of Fig. 2 (150 um label), Fig. 4 (table values) and Fig. 7 (bar labels).
+  Fig. 9 bar labels read from the candidate crop. All plotted values entered are printed data labels, not pixel reads.
+entries:
+  - {table: metrics, row_id: ectc51529.2024.00164-a-m7, field: value, value: 14.66, unit: W/mm2, basis: measured, locator: "p.4 Fig. 7", note: "text rounds to 14.7; abstract says 14.6"}
+derived:
+  - {table: components, row_id: ectc51529.2024.00164-a-c2, field: thickness_um, value: 775, formula: "150 um micropillar height + 625 um remaining C2 base", inputs: "p.2 Sec. II.C"}
+  - {table: components, row_id: ectc51529.2024.00164-c-c2, field: thickness_um, value: 775, formula: "150 um micropillar height + 625 um remaining C2 base", inputs: "p.2 Sec. II.C"}
+conflicts:
+  - {table: metrics, row_id: ectc51529.2024.00164-a-m7, field: value, values: [14.66, 14.7, 14.6], locators: ["p.4 Fig. 7", "p.4 Sec. IV.D; p.5 Sec. V", "p.1 Abstract"], chosen: 14.66, why: "plot data label; text values are roundings"}
+  - {table: metrics, row_id: ectc51529.2024.00164-c-m5, field: value, values: ["2 kW (3.2 W/mm2) at 4.5 LPM, 3.5 W", "2.6 W/mm2 at 5.1 LPM, 5 W for sealant-on-ribs TV"], locators: ["p.1 Abstract; p.5 Sec. V", "p.3 Sec. IV.C"], chosen: "headline entered on no-sealant TV c", why: "only Fig. 9 no-sealant sample reaches about 2 kW at 4.5 LPM; attribution is inferred"}
+excluded:
+  - "1.1 to 2.2 W/mm2 average die power density (2018-2023) and 20 W/mm2 projection from refs [1], [2]"
+  - "PUE 1.02 immersion [3], 250 kW/m2K jet impingement [5], 70-300 kPa nozzles [6], 215 W in 1.5 cm2 [9]"
+  - "PUE comparison values 1.15 cold plate / 1.02 immersion kept only in notes"
+not_reported:
+  - interconnects (no bump/TSV/bond-pad data; fusion bond is a non-electrical film)
+  - electrical_interfaces, optical_interfaces
+  - TTV thickness after thinning, wafer size, fusion bonding film material and bonding conditions
+  - micropillar pitch and gap, sealant product and cure, LIO material
+  - coolant inlet temperature in each experiment (40 C water stated as design point)
+  - TCG and HTS conditions/cycles, pressure values in the hydrostatic test
+source_quality:
+  - "Clean text layer. All candidates matched their figures; none needed a manual bbox."

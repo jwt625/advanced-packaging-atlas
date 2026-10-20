@@ -1,0 +1,42 @@
+paper_id: ectc51846.2026.00074
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00074/text.md
+  - references/ectc51846.2026.00074/source.json
+  - references/ectc51846.2026.00074/figures/page_02.png
+  - references/ectc51846.2026.00074/figures/page_03.png
+  - references/ectc51846.2026.00074/figures/page_04.png
+  - references/ectc51846.2026.00074/figures/page_05.png
+  - references/ectc51846.2026.00074/figures/cand/p02_fig1.png
+  - references/ectc51846.2026.00074/figures/cand/p03_tableii.png
+  - references/ectc51846.2026.00074/figures/cand/p03_fig5.png
+  - references/ectc51846.2026.00074/figures/cand/p05_fig11.png
+  - references/ectc51846.2026.00074/figures/cand/p05_fig12.png
+  - references/ectc51846.2026.00074/figures/cand/p05_fig13.png
+figure_reading_method: >-
+  Page renders; Fig. 5 and Fig. 6 legends re-cropped at 600 dpi (blurry: Fig. 5 min about -80.7 MPa, Fig. 6 max 60.37 MPa);
+  Fig. 11 re-cropped at 300 dpi (ABF and photoresist drawn on both sides, liner drawn). Table II read from candidate
+  crop (matches text.md). X-ray Figs. 8-10, 13-15 viewed for qualitative result only (no scale given).
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00074-e-m2, field: value, value: 60, unit: MPa, basis: simulated, locator: "p.3 Sec. IV.B; p.3 Fig. 6", note: "text 60 MPa; legend max 60.37 MPa"}
+  - {table: stack_layers, row_id: ectc51846.2026.00074-b-L04, field: thickness_um, value: 5, unit: um, basis: measured, locator: "p.4 Sec. IV.C", note: "'about 5 um' PL; characterization in prior work [12], thickness stated as measured here"}
+derived:
+  - {table: interconnects, row_id: ectc51846.2026.00074-e-i1, field: depth_um, value: 340, formula: "TGV depth = modeled glass-core thickness (through via)", inputs: "p.2 Sec. III.A"}
+conflicts:
+  - {table: stack_layers, row_id: ectc51846.2026.00074-d-L12, field: layer_name, values: ["text: ABF GX-92 laminated on top of the Cu layer", "Fig. 11: ABF GX92 drawn on both sides"], locators: ["p.4 Sec. IV.D", "p.5 Fig. 11"], chosen: "both rows entered; bottom ABF marked schematic-only", why: "text does not exclude bottom side; photoresist is stated double-sided"}
+  - {table: process_steps, row_id: ectc51846.2026.00074-d-s06, field: seq, values: ["text: Ti/Cu 50/150 nm seed deposited after ABF lamination, before patterning", "Fig. 11: no seed step after ABF"], locators: ["p.4 Sec. IV.D", "p.5 Fig. 11"], chosen: "text order", why: "text > schematic"}
+excluded:
+  - "Table I glass/Cu simulation properties (CTE 3.8/17.1 ppm/C, E 77/121 GPa, nu 0.22/0.3, Cu yield 172.38 MPa, tangent 1034.2 MPa) obtained from prior work [10]"
+  - "Liner conformality on TGV walls by micro-CT, FIB-SEM and multiphoton imaging reported in prior work [12]"
+  - "CTE-mismatch failure mechanisms of refs [3]-[7]; JEDEC thermal-shock limits of refs [13,14]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - glass type, glass thickness and TGV diameter/pitch/AR for the experimental TVs (AR 3 and 5 only for no-liner TGVs)
+  - polymer and inorganic liner chemistries, CVD/PECVD conditions
+  - plating current densities, plated Cu thickness, metal layer-1 thickness and pattern
+  - sample counts, electrical resistance or daisy-chain data before/after thermal shock
+  - Cu RDL plating on the ABF trial (only resist patterning shown); peel strength of no-liner Cu-glass interface
+source_quality:
+  - "Several candidates are offset vertically: p02_fig1, p05_fig11, p03_fig5 clip the bottom; p05_fig12 has blank top and clipped bottom; p03_fig4 bbox is wrong (0,0 to page corner). Manual crops used."
+  - "text.md renders 'um' as 'm' in Sec. IV.C-D (e.g. '5 m', '15 m'); read as um from page renders."

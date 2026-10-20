@@ -1,0 +1,46 @@
+paper_id: ectc51846.2026.00050
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00050/text.md
+  - references/ectc51846.2026.00050/source.json
+  - references/ectc51846.2026.00050/figures/page_02.png
+  - references/ectc51846.2026.00050/figures/page_03.png
+  - references/ectc51846.2026.00050/figures/page_04.png
+  - references/ectc51846.2026.00050/figures/page_05.png
+  - references/ectc51846.2026.00050/figures/cand/p02_fig1.png
+  - references/ectc51846.2026.00050/figures/cand/p03_fig5.png
+  - references/ectc51846.2026.00050/figures/cand/p04_fig11.png
+  - references/ectc51846.2026.00050/figures/cand/p04_fig13.png
+  - references/ectc51846.2026.00050/figures/cand/p04_fig14.png
+figure_reading_method: >-
+  Page renders plus 400 dpi re-crops from source.pdf of Fig. 5(b), 11, 12(a), 13, 14 and 16. Fig. 5(b) peak loads and
+  Fig. 16 voltages read against gridlines (+/-1 N, +/-10 mV). Fig. 11 offsets, Fig. 12(a) and Fig. 13 dimensions are
+  printed labels.
+entries:
+  - {table: components, row_id: ectc51846.2026.00050-a-c2, field: thickness_um, value: 60, unit: um, basis: measured, locator: "p.4 Fig. 13", note: "label '60 um-thick bridge chip' on cross-section; also 0.06 mm in Fig. 12(a)"}
+  - {table: metrics, row_id: ectc51846.2026.00050-d-m2, field: value, value: 34.5, unit: N, basis: measured, locator: "p.3 Fig. 5(b)", note: "Sample #1 first peak; second peak ~34 N"}
+  - {table: metrics, row_id: ectc51846.2026.00050-f-m1, field: value, value: 727, unit: mV, basis: simulated, locator: "p.5 Fig. 16", note: "DBHi (No TSV) curve flat after ~0.15 us; nominal 800 mV per text"}
+  - {table: metrics, row_id: ectc51846.2026.00050-g-m1, field: value, value: 790, unit: mV, basis: simulated, locator: "p.5 Fig. 16", note: "DBrM (TSV bridge) curve still ringing ~775-810 mV at 0.3 us; mean of ringing"}
+derived:
+  - {table: test_vehicles, row_id: ectc51846.2026.00050-a, field: n_dies, value: 3, formula: "2 main chips + 1 bridge", inputs: "p.4 Fig. 12(a)"}
+  - {table: test_vehicles, row_id: ectc51846.2026.00050-h, field: n_dies, value: 8, formula: "4 chips + 4 bridge dies", inputs: "p.3 Fig. 7 caption"}
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00050-a-m4, field: value, values: [1000, 2000], locators: ["p.4 Fig. 12, Fig. 13 captions (1000 cycles)", "p.4 Sec. II.B; p.1 Abstract (no electrical failures after 2000 cycles)"], chosen: "both kept: electrical 2000 cycles (m3), C-SAM and cross-section at 1000 cycles (m4, m5)", why: "different measurements"}
+  - {table: interconnects, row_id: ectc51846.2026.00050-a-i2, field: ic_type, values: ["Cu pillar (Fig. 12(a) label, abstract)", "C4 bumps (Sec. II.A text)"], locators: ["p.4 Fig. 12(a)", "p.2 Sec. II.A"], chosen: cu_pillar, why: "photo label and abstract"}
+  - {table: metrics, row_id: ectc51846.2026.00050-f-m1, field: tv label, values: ["Fig. 16 legend 'DBHi (No TSV)' and 'DBrM (TSV brige)'", "text compares non-TSV vs TSV bridge"], locators: ["p.5 Fig. 16", "p.5 Sec. II.D"], chosen: "non-TSV vs TSV bridge models", why: "text describes the comparison"}
+excluded:
+  - "DBHi technology details of refs [1,2] (only the DBHi reference builds measured here are entered)"
+  - "PWG optical engine and adiabatic coupling performance of refs [4,5]"
+  - "CPO context of ref [3]"
+not_reported:
+  - electrical_interfaces (UCIe/HBM mentioned only as motivation; no rate, energy or loss)
+  - main chip function, thickness and process node; bridge wiring L/S
+  - microbump metallurgy, diameter, height; bonding temperature/force/time for bridge and substrate bonding
+  - glue and underfill products and cure conditions
+  - substrate layer count and core; package lid details
+  - TC sample count; C-SAM result statement; die sizes for Fig. 11 builds
+  - PDN simulation inputs (current step, impedance values)
+  - optical loss, wavelength, channel count for PWG concept
+source_quality:
+  - "Candidate p04_fig12a holds Fig. 12(b),(c) C-SAM panels; Fig. 12(a) photo is lower-left column, cropped manually."

@@ -1,0 +1,41 @@
+paper_id: ectc51909.2023.00266
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00266/text.md
+  - references/ectc51909.2023.00266/source.json
+  - references/ectc51909.2023.00266/figures/page_01.png
+  - references/ectc51909.2023.00266/figures/page_02.png
+  - references/ectc51909.2023.00266/figures/page_03.png
+  - references/ectc51909.2023.00266/figures/page_04.png
+  - references/ectc51909.2023.00266/figures/page_05.png
+  - references/ectc51909.2023.00266/figures/cand/p02_fig2.png
+  - references/ectc51909.2023.00266/figures/cand/p03_fig7.png
+  - references/ectc51909.2023.00266/figures/cand/p03_fig9.png
+  - references/ectc51909.2023.00266/figures/cand/p03_tablei.png
+  - references/ectc51909.2023.00266/figures/cand/p04_fig11.png
+  - references/ectc51909.2023.00266/figures/cand/p04_fig13.png
+  - references/ectc51909.2023.00266/figures/cand/p04_fig15.png
+figure_reading_method: >-
+  Page renders at 150 dpi; Fig. 7 and Fig. 13 re-rendered at 300 dpi. Fig. 13 points read against 20 um gridlines
+  (+/-5 um). Fig. 11 yields read from the printed data table under the bars. Table I matches text.md.
+entries:
+  - {table: metrics, row_id: ectc51909.2023.00266-a-m8, field: value, value: 140, unit: um, basis: measured, locator: "p.4 Fig. 13", note: "first point at 25 C, about 139-140"}
+  - {table: metrics, row_id: ectc51909.2023.00266-a-m9, field: value, value: 43, unit: um, basis: measured, locator: "p.4 Fig. 13", note: "lowest points at 200-240 C, about 43-44"}
+  - {table: metrics, row_id: ectc51909.2023.00266-a-m12, field: value, value: 60.9, unit: um, basis: measured, locator: "p.4 Fig. 15", note: "measurement label in image"}
+derived: []
+conflicts:
+  - {table: test_vehicles, row_id: ectc51909.2023.00266-a, field: package_x_mm/package_y_mm, values: ["16 x 24 mm package size (Abstract)", "Chiplet size: 11mm x 16mm (Sec. II TV list)"], locators: ["p.1 Abstract", "p.2 Sec. II"], chosen: "16 x 24", why: "abstract explicitly says package size; 'chiplet size' in TV list may denote the SoC or another dimension, not stated"}
+  - {table: metrics, row_id: ectc51909.2023.00266-a-m8, field: scope, values: ["text: package level warpage showed convex warpage", "Fig. 13 legend: Warpage Mode Smiling, positive (+) sign"], locators: ["p.4 Sec. III.B", "p.4 Fig. 13"], chosen: "both recorded in scope", why: "sign convention not defined beyond the legend; no basis to override either"}
+excluded:
+  - "Chiplet market forecast $47.2B, CAGR 40.9% (Abstract, attributed to [4])"
+  - "TSMC cost-performance figure (Fig. 1, Source: TSMC) and InFO/CoWoS mentions"
+  - "600 mm x 600 mm PLP transfer: stated as future work, no build data"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - SoC die size and thickness; die thickness values in the 'thicker Si die' split; mold thickness
+  - RDL metal, passivation material and thickness, UBM stack, solder ball size/pitch/alloy
+  - Cu stud height and actual pitch on the TV (only Table I design-rule minima)
+  - package thickness; BLR sample count, board and failure criterion; yield definition
+  - measured panel warpage value (only 'within +/-3 mm spec')
+  - 2 um L/S pattern materials and process (Fig. 9 only)

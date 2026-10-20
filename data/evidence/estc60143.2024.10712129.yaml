@@ -1,0 +1,43 @@
+paper_id: estc60143.2024.10712129
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/estc60143.2024.10712129/text.md
+  - references/estc60143.2024.10712129/source.json
+  - references/estc60143.2024.10712129/figures/page_02.png
+  - references/estc60143.2024.10712129/figures/page_03.png
+  - references/estc60143.2024.10712129/figures/page_04.png
+  - references/estc60143.2024.10712129/figures/page_05.png
+  - references/estc60143.2024.10712129/figures/cand/p02_tablei.png
+  - references/estc60143.2024.10712129/figures/cand/p03_tableiv.png
+  - references/estc60143.2024.10712129/figures/cand/p04_fig11.png
+  - references/estc60143.2024.10712129/figures/cand/p04_fig14.png
+  - references/estc60143.2024.10712129/figures/cand/p04_fig15.png
+figure_reading_method: >-
+  All tables are images (text.md has only captions): Tables I-VII read from 300 dpi re-crops. Fig. 13 mounting scatter
+  read at 600 dpi. Fig. 15 bars read against 500 um gridlines (+/-30 um); delta labels 2030 and 108 um agree with bar
+  extremes (1070 - (-960); 455 - 345).
+entries:
+  - {table: metrics, row_id: estc60143.2024.10712129-f-m1, field: value, value: 360, unit: um, basis: measured, locator: "p.4 Fig. 13", note: "label 'Warpage = 0.36 mm after RDL formation'"}
+  - {table: interconnects, row_id: estc60143.2024.10712129-g-i3, field: height_um, value: 30, unit: um, basis: design_target, locator: "p.2 Table III", note: "Cu/SnAg = 30/25 bottom side"}
+  - {table: stack_layers, row_id: estc60143.2024.10712129-g-L07, field: thickness_um, value: 17, unit: um, basis: measured, locator: "p.3 Table IV", note: "actual; design 18"}
+derived:
+  - {table: test_vehicles, row_id: estc60143.2024.10712129-g, field: interposer_area_mm2, value: 2500, formula: "50 x 50", inputs: "p.2 Table III"}
+  - {table: test_vehicles, row_id: estc60143.2024.10712129-h, field: interposer_area_mm2, value: 2500, formula: "50 x 50", inputs: "p.2 Table III"}
+conflicts:
+  - {table: metrics, row_id: estc60143.2024.10712129-f-m2, field: value, values: ["text: die mounting offset < 20 um", "Fig. 13 scatter: one point at about (9, -22) um, others within y -9 to -20 um"], locators: ["p.4 Sec. III.B", "p.4 Fig. 13"], chosen: "22 (approx, plot)", why: "measured plot over text"}
+  - {table: metrics, row_id: estc60143.2024.10712129-f-m1, field: value, values: ["text: panel warpage < 400 um", "Fig. 13: 0.36 mm"], locators: ["p.4 Sec. III.B", "p.4 Fig. 13"], chosen: 360, why: "figure value consistent with text bound"}
+  - {table: test_vehicles, row_id: estc60143.2024.10712129-f, field: carrier_size_mm, values: ["510x515 mm", "515x510 mm"], locators: ["p.2 Sec. II.B", "p.1 Abstract; p.4 Sec. III.B"], chosen: "515x510", why: "majority of mentions; same panel"}
+  - {table: stack_layers, row_id: estc60143.2024.10712129-f-L01, field: line_um, values: ["abstract: 10 um wiring", "Sec. II.B: L/S 5/5 um; Sec. III.B: 5/5 and 10/10 um"], locators: ["p.1 Abstract", "p.2 Sec. II.B; p.4 Sec. III.B"], chosen: "5/5 and 10/10 rows", why: "body text"}
+  - {table: process_steps, row_id: estc60143.2024.10712129-e-s02, field: conditions, values: ["Ti 25 um, Cu 150 um as printed"], locators: ["p.2 Sec. II.B"], chosen: "kept as text only", why: "implausible for 1.5 um L/S SAP seed (likely nm); not converted or entered numerically"}
+excluded:
+  - "Three-layer RDL with L/S 2/2 um on large panel of ref [4]"
+  - "Si interposer cost/TSV limitations and organic interposer references [10]-[15]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - micro-bump TV wafer size, die thickness, interposer material, sample counts; flux-less TV design (A/B/C)
+  - RDL Cu thickness, dielectric products, via sizes; die-embedded die size, Cu pillar size, mold product
+  - 2.5D die counts, substrate layer count, core/build-up/SR products and CTE values, TSV details in Si interposer
+  - substrate warpage measurement temperature; TCT sample counts; stiffener study substrate (A or B)
+source_quality:
+  - "text.md contains no table bodies (tables are images). Fig. 7 had no candidate; manual crop. Text cites Table 1-7 numbering."

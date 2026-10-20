@@ -1,0 +1,41 @@
+paper_id: ectc51529.2024.00265
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00265/text.md
+  - references/ectc51529.2024.00265/source.json
+  - references/ectc51529.2024.00265/figures/page_02.png
+  - references/ectc51529.2024.00265/figures/page_03.png
+  - references/ectc51529.2024.00265/figures/page_04.png
+  - references/ectc51529.2024.00265/figures/page_05.png
+figure_reading_method: >-
+  300 dpi re-crops of Fig. 3, 4, 6, 7. Marker centers located by color-pixel runs per column window and converted
+  with detected gridline rows (Fig. 4: 0.598 px/um; Fig. 6: 0.400 px/um; Fig. 7: 0.2915 px/um). Overlapping markers
+  give +/-15-20 um. Fig. 9 Weibull x-axis carries no cycle values: only relative ordering entered.
+entries:
+  - {table: metrics, row_id: ectc51529.2024.00265-a-m4, field: value, value: 1035, unit: um, basis: measured, locator: "p.5 Fig. 6", note: "no-stiffener reference at 0 mm width"}
+derived:
+  - {table: interconnects, row_id: ectc51529.2024.00265-a-i2, field: pitch_um, value: 1000, formula: "1.0 mm x 1000 (unit conversion; same for -b..-d)", inputs: "p.2 Table I"}
+  - {table: components, row_id: ectc51529.2024.00265-a-c1, field: thickness_um, value: 725, formula: "t0.725 mm x 1000 (unit conversion; same for -b..-d and die layer)", inputs: "p.2 Table I"}
+  - {table: components, row_id: ectc51529.2024.00265-a-c2, field: thickness_um, value: 1800, formula: "t1.8 mm x 1000 (core 1.4 mm -> 1400 in stack_layers)", inputs: "p.2 Table I"}
+  - {table: components, row_id: ectc51529.2024.00265-a-c3, field: thickness_um, value: 2500, formula: "2.5 mm x 1000", inputs: "p.4 Sec. IV.B; p.3 Table III"}
+  - {table: components, row_id: ectc51529.2024.00265-a-c4, field: thickness_um, value: 150, formula: "0.15 mm glass beads -> 150 um adhesive", inputs: "p.3 Sec. III.B; p.4 Sec. IV.A"}
+  - {table: components, row_id: ectc51529.2024.00265-a-c6, field: thickness_um, value: 3200, formula: "t3.2 mm x 1000", inputs: "p.2 Table I"}
+  - {table: process_steps, row_id: ectc51529.2024.00265-a-s14, field: thickness_um, value: 250, formula: "0.25 mm x 1000", inputs: "p.4 Sec. III.D"}
+  - {table: metrics, row_id: ectc51529.2024.00265-d-m9, field: value, value: 430, formula: "0.43 mm x 1000", inputs: "p.4 Sec. IV.C"}
+  - {table: metrics, row_id: ectc51529.2024.00265-d-m10, field: value, value: 250, formula: "0.25 mm x 1000", inputs: "p.4 Sec. IV.C"}
+conflicts: []
+excluded:
+  - "Literature survey values: 6-2-6 layers, 95 um SRO at 180 um pitch, 0.63 mm balls, 75/90 mm substrates (refs [14], [15])"
+  - "1.4 vs 1.2 mm CCL warpage claim (ref [19]); 0.30 mm adhesive best fracture energy (ref [28]); NSMD 0.35 mm pad at 0.8 mm pitch (ref [22])"
+  - "TC ranges 0/+100 C and -40/+125 C of refs [22, 23, 38]; organic interposer 55 um pitch (refs [9, 10])"
+  - "Si CTE 3 ppm/K and motherboard 'typically around 15 ppm/K' (general statements)"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - build-up film, solder resist and CUF products; build-up layer thickness, L/S, via sizes
+  - reflow, cure and bonding temperatures/times; flux product
+  - stiffener outer dimensions; stiffener configuration of the Fig. 4 and Fig. 7 sample series
+  - BLR cycles to failure (Fig. 9 axis unlabelled), Weibull parameters, sample counts
+  - per-core stiffener delamination ratios
+source_quality:
+  - "Clean text layer. Candidate p04_fig5 covers all three panels of Fig. 5; manual bbox used for panel (a) photo."

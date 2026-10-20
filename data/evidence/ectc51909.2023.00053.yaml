@@ -1,0 +1,38 @@
+paper_id: ectc51909.2023.00053
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00053/text.md
+  - references/ectc51909.2023.00053/source.json
+  - references/ectc51909.2023.00053/figures/page_03.png
+  - references/ectc51909.2023.00053/figures/page_04.png
+  - references/ectc51909.2023.00053/figures/page_05.png
+  - references/ectc51909.2023.00053/figures/page_06.png
+figure_reading_method: >-
+  Page renders p.3-6 viewed; candidate crops p03_fig5, p03_fig6, p03_fig7, p04_fig8, p06_fig14 opened; Fig. 6 re-cropped
+  (candidate clipped bottom SEM row). Interface labels (A 20-20 um, B 55-55 um, C 20-55 um) read from Fig. 5 crop.
+entries:
+  - {table: interconnects, row_id: ectc51909.2023.00053-a-i1, field: pitch_min_um, value: 20, unit: um, basis: design_target, locator: "p.3 Sec. IV.A", note: "20 um x 30 um pitch array, 12 um diameter Cu studs"}
+  - {table: interconnects, row_id: ectc51909.2023.00053-a-i1, field: notes, value: "8 um spacing", unit: um, basis: design_target, locator: "p.4 Sec. IV.B", note: "Gen2 Cu stud design rule 12 um diameter with 8 um spacing"}
+  - {table: metrics, row_id: ectc51909.2023.00053-a-m2, field: value, value: 0.5, unit: um, basis: author_estimate, locator: "p.5 Sec. IV.B", note: "better than 500 nm at 3 sigma; converted nm -> um"}
+derived:
+  - {table: metrics, row_id: ectc51909.2023.00053-a-m2, field: value, value: 0.5, formula: "500 nm / 1000", inputs: "p.5 Sec. IV.B"}
+  - {table: test_vehicles, row_id: ectc51909.2023.00053-a, field: n_dies, value: 6, formula: "2 processor chiplets + 4 HBM footprint dies (Fig. 5 caption 'Six die')", inputs: "p.3 Sec. IV.A; p.3 Fig. 5"}
+conflicts: []
+excluded:
+  - "Intel EMIB 45 um die pad pitch / 492 IO/mm2 (ref [9]) and TSMC InFO-R 40 um / 545 IO/mm2 (ref [10])"
+  - "M-Series Gen 1 45 um pitch / 492 IO/mm2 (prior generation, not this TV)"
+  - "IC transistor density 520x vs package density 15x over 20 years (ref [3], Fig. 1)"
+  - "Roadmap to 10 um bond pad pitch (future, no data)"
+  - "Fig. 2/3 two-die AP example (from ref [8], not this TV)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - die sizes and thicknesses, process node, die-to-die gap
+  - encapsulant product, thickness, cure conditions
+  - Cu stud height; HBM footprint stud diameter
+  - PI thickness, cure conditions; RDL thickness and layer count on TV (RDL not yet built)
+  - BGA / ball pitch and size
+  - yield, warpage, reliability, electrical test results
+source_quality:
+  - "Clean text layer. Paper is a status report: TV processed only through PI via opening; RDL build-up stated as future work."

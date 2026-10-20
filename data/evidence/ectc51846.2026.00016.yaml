@@ -1,0 +1,40 @@
+paper_id: ectc51846.2026.00016
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00016/text.md
+  - references/ectc51846.2026.00016/source.json
+  - references/ectc51846.2026.00016/figures/page_02.png
+  - references/ectc51846.2026.00016/figures/page_03.png
+  - references/ectc51846.2026.00016/figures/page_04.png
+  - references/ectc51846.2026.00016/figures/page_05.png
+  - references/ectc51846.2026.00016/figures/page_06.png
+  - references/ectc51846.2026.00016/figures/cand/p02_fig1.png
+  - references/ectc51846.2026.00016/figures/cand/p02_fig2.png
+  - references/ectc51846.2026.00016/figures/cand/p03_fig3.png
+  - references/ectc51846.2026.00016/figures/cand/p03_fig4.png
+  - references/ectc51846.2026.00016/figures/cand/p04_fig6.png
+  - references/ectc51846.2026.00016/figures/cand/p06_fig11.png
+figure_reading_method: >-
+  400 dpi re-crops of Fig. 1, 2, 3 (dimension labels) and 4; Fig. 6, 7, 9, 10, 11 read from 150 dpi page renders
+  (legend extremes and printed labels only).
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00016-d-m1, field: value, value: 230, unit: um, basis: simulated, locator: "p.4 Fig. 6(a)", note: "label 230um @25C; contour 0.21758 to -0.012247 mm (P-V 229.8 um)"}
+  - {table: metrics, row_id: ectc51846.2026.00016-d-m2, field: value, value: 116, unit: um, basis: simulated, locator: "p.4 Fig. 6(b)", note: "label 116um @25C; contour 0.077544 to -0.038184 mm (P-V 115.7 um)"}
+  - {table: metrics, row_id: ectc51846.2026.00016-d-m6, field: value, value: 65, unit: C, basis: simulated, locator: "p.5 Fig. 9(b)", note: "legend max 64.82 C"}
+  - {table: stack_layers, row_id: ectc51846.2026.00016-b-L01, field: notes, value: "5um, 5um, 7.5um", basis: design_target, locator: "p.3 Fig. 3(a)", note: "gap labels not assigned to S-S or S-G spacing by the text; space_um left empty"}
+derived:
+  - {table: test_vehicles, row_id: ectc51846.2026.00016-a, field: interposer_area_mm2, value: 4108, formula: "x*y = 79*52", inputs: "p.2 Sec. III"}
+conflicts: []
+excluded:
+  - "Prior wafer-level OE packaging and through-package interconnects of refs [8]-[11]"
+  - "OIF CEI-448G / 224G signaling context of refs [12]-[16]; ~112 GHz Nyquist for 448G PAM4 (general)"
+  - "Microlens-assisted coupling concepts of ref [19]; vapor chamber wick of ref [18]"
+not_reported:
+  - die sizes and counts (xPU, HBM, EIC, PIC, bridge); package and substrate size and layers
+  - mold compound, RDL metal and polyimide products; back-side RDL dimensions; TMI and TSV dimensions
+  - bonding methods/conditions for bridge, PIC and top chiplets; solder bump pitch; underfill product
+  - carrier release step; measured warpage; measured thermal data; reliability; yield
+  - optical wavelength, fiber pitch, channel count; FAU adhesive product
+source_quality:
+  - "Candidates p02_fig1, p02_fig2, p03_fig3, p03_fig4 clip the bottom of the figure; manual bboxes used."

@@ -1,0 +1,40 @@
+paper_id: ectc51909.2023.00154
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00154/text.md
+  - references/ectc51909.2023.00154/source.json
+  - references/ectc51909.2023.00154/figures/page_02.png
+  - references/ectc51909.2023.00154/figures/page_03.png
+  - references/ectc51909.2023.00154/figures/page_04.png
+  - references/ectc51909.2023.00154/figures/page_05.png
+  - references/ectc51909.2023.00154/figures/page_06.png
+  - references/ectc51909.2023.00154/figures/cand/p02_fig2.png
+  - references/ectc51909.2023.00154/figures/cand/p02_fig3.png
+  - references/ectc51909.2023.00154/figures/cand/p03_fig4.png
+  - references/ectc51909.2023.00154/figures/cand/p04_fig8.png
+  - references/ectc51909.2023.00154/figures/cand/p05_fig11.png
+figure_reading_method: >-
+  Fig. 8 re-cropped at 400 dpi; warpage values are the printed data labels. Fig. 9(b) table values (25 locations)
+  read from the 150 dpi page render; mean 67.04 um recomputed, matches text 67 um. Fig. 6 label re-cropped at 400 dpi.
+entries:
+  - {table: metrics, row_id: ectc51909.2023.00154-a-m13, field: value, value: 30, unit: um, basis: derived, locator: "p.4 Fig. 8", note: "printed effective gap = substrate 79 - CM 49 at 217 C"}
+  - {table: interconnects, row_id: ectc51909.2023.00154-a-i7, field: height_um, value: 67, unit: um, basis: measured, locator: "p.4 Fig. 9(b)", note: "values 59-77 um at locations (1)-(25)"}
+derived:
+  - {table: test_vehicles, row_id: ectc51909.2023.00154-a, field: n_dies, value: 18, formula: "3 ASIC (incl. 3D-ASIC counted once) + 3 chiplets + 12 HBM", inputs: "p.2 Sec. II"}
+conflicts:
+  - {table: interconnects, row_id: ectc51909.2023.00154-a-i3, field: count, values: ["170,000", "170,000~180,000"], locators: ["p.2 Sec. II", "p.2 Table 1"], chosen: "170000 with qualifier ge", why: "table range lower bound equals text"}
+  - {table: interconnects, row_id: ectc51909.2023.00154-a-i4, field: count, values: ["about 11,000", "10,000~11,000"], locators: ["p.2 Sec. II", "p.2 Table 1"], chosen: "10000 with qualifier ge", why: "result table over text"}
+  - {table: metrics, row_id: ectc51909.2023.00154-a-m9, field: value, values: ["text: substrate slight change around 50 um at solidification", "Fig. 8 labels 79/70/57 um at 217/200/186 C"], locators: ["p.4 Sec. IV.B", "p.4 Fig. 8"], chosen: "plotted labels", why: "measured data labels over text summary"}
+  - {table: metrics, row_id: ectc51909.2023.00154-a-m24, field: result, values: ["Table 2: 27F/30 at TC1000", "text: electrical test passed; failures are UF cracks"], locators: ["p.6 Table 2", "p.5 Sec. IV.C"], chosen: "27F/30, result partial", why: "both kept: failures are optical UF-crack findings"}
+  - {table: figures, row_id: ectc51909.2023.00154-f01, field: caption, values: ["Fig. 11 caption repeats Fig. 10 caption (#(2), #(13), #(25))", "panels show HBM/3D-ASIC and 3D-ASIC hybrid-bond sections"], locators: ["p.5 Fig. 11", "p.5 Fig. 11 image"], chosen: "caption as printed, noted", why: "source caption error"}
+excluded:
+  - "2.5D interposer 52 x 55 mm (2860 mm2) with 2 ASICs + 8 HBMs, Fig. 1 trend from ref [3]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - interposer x/y in mm, package and substrate size, substrate thickness, stiffener material/height value
+  - TSV diameter/pitch/depth, Cu pillar diameter/pitch, microbump metallurgy, hybrid bond conditions (temp, anneal) and method (D2W/W2W)
+  - mold and underfill products, cure conditions, reflow profiles, core CTE value
+  - die thicknesses; FEM stress values; warpage sign convention
+source_quality:
+  - "Candidates p05_fig10/p05_fig11/p06_fig13 span page quadrants from the page edge (x0 or y0 = 0); Table 2 has no candidate."

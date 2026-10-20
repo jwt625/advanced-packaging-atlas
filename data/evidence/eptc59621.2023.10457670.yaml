@@ -1,0 +1,35 @@
+paper_id: eptc59621.2023.10457670
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/eptc59621.2023.10457670/text.md
+  - references/eptc59621.2023.10457670/source.json
+  - references/eptc59621.2023.10457670/figures/page_01.png
+  - references/eptc59621.2023.10457670/figures/page_02.png
+  - references/eptc59621.2023.10457670/figures/page_03.png
+  - references/eptc59621.2023.10457670/figures/page_04.png
+  - references/eptc59621.2023.10457670/figures/cand/p02_fig1.png
+  - references/eptc59621.2023.10457670/figures/cand/p02_fig3.png
+  - references/eptc59621.2023.10457670/figures/cand/p03_fig6.png
+  - references/eptc59621.2023.10457670/figures/cand/p04_fig10.png
+figure_reading_method: >-
+  Page renders at 150 dpi; Fig. 5 re-rendered at 300 dpi (bars read against 0.20 gridlines, +/-0.01); Fig. 10 wafer map
+  re-rendered at 400 dpi and all 73 printed values transcribed. Figs. 4 and 6 have no axis values (AU), trends only.
+  text.md pages 2-4 carry captions only; all figure content read from images.
+entries:
+  - {table: metrics, row_id: eptc59621.2023.10457670-a-m2, field: value, value: -0.15, unit: a.u., basis: measured, locator: "p.3 Fig. 5", note: "density A after BS RDL1, negative bar"}
+  - {table: metrics, row_id: eptc59621.2023.10457670-a-m5, field: value, value: 1.00, unit: a.u., basis: measured, locator: "p.3 Fig. 5", note: "density B after BS Passivation 1; normalization reference likely"}
+derived:
+  - {table: interconnects, row_id: eptc59621.2023.10457670-a-i1, field: aspect_ratio, value: 10, formula: "depth/diameter = 100/10", inputs: "p.1 TSI Process Fabrication"}
+  - {table: metrics, row_id: eptc59621.2023.10457670-a-m8, field: value, value: 29.44, formula: "mean of 73 wafer-map values (min 28.16, max 30.78, median 29.41, stdev 0.61)", inputs: "p.4 Fig. 10"}
+conflicts: []
+excluded:
+  - "Prior TSI multilayer demonstrations and temporary-bonding warpage study, refs [8]-[10] (no numbers taken)"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - final interposer thickness, carrier/temporary bond material, debond step
+  - BEOL line/space, via sizes, IMD and FS/BS passivation materials and thicknesses, UBM thicknesses
+  - backside RDL line/space and actual metal density values A and B
+  - absolute warpage values (all plots in AU or a.u.)
+  - daisy chain yield percentage and fail criterion; per-TSV resistance
+  - die attach / assembly (wafer-level only)

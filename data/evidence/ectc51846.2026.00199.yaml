@@ -1,0 +1,48 @@
+paper_id: ectc51846.2026.00199
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00199/text.md
+  - references/ectc51846.2026.00199/source.json
+  - references/ectc51846.2026.00199/figures/page_04.png
+  - references/ectc51846.2026.00199/figures/page_05.png
+  - references/ectc51846.2026.00199/figures/page_06.png
+  - references/ectc51846.2026.00199/figures/page_07.png
+  - references/ectc51846.2026.00199/figures/cand/p04_fig3.png
+  - references/ectc51846.2026.00199/figures/cand/p04_fig5.png
+  - references/ectc51846.2026.00199/figures/cand/p05_fig6.png
+  - references/ectc51846.2026.00199/figures/cand/p05_fig8.png
+  - references/ectc51846.2026.00199/figures/cand/p05_fig9.png
+  - references/ectc51846.2026.00199/figures/cand/p07_fig14.png
+figure_reading_method: >-
+  Fig. 8 re-cropped at 300 dpi and pass/fail cells counted per row; Fig. 9(a)/(b) re-cropped at 600 dpi and cell
+  labels read (min/max, SHORTED count); Fig. 5 at 500 dpi; Fig. 12(a) at 600 dpi; Fig. 2 at 400 dpi (bar labels);
+  Fig. 1 at 400 dpi.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00199-a-m6, field: value, value: 46, unit: coupons, basis: measured, locator: "p.5 Fig. 8(a)", note: "fail cells per row y8..y1: 3,2,0,2,3,6,0,2 = 18"}
+  - {table: metrics, row_id: ectc51846.2026.00199-a-m8, field: value, value: 29, unit: coupons, basis: measured, locator: "p.5 Fig. 8(b)", note: "fail cells per row y8..y1: 0,2,3,5,5,6,7,7 = 35"}
+  - {table: metrics, row_id: ectc51846.2026.00199-a-m5, field: value, value: 16, unit: coupons, basis: measured, locator: "p.5 Fig. 9(b)", note: "SHORTED cells: row1 8, row2 6, row3 1, row4 1; plus one NA at (3,8)"}
+  - {table: stack_layers, row_id: ectc51846.2026.00199-a-L03, field: thickness_um, value: 0.035, unit: um, basis: design_target, locator: "p.4 Sec. III.B; p.5 Sec. IV.A", note: "III.B '35 nm'; IV.A 'reduced from 50 nm to approximately 35 nm'"}
+derived:
+  - {table: metrics, row_id: ectc51846.2026.00199-a-m7, field: value, value: 71.9, formula: "46/64 x 100", inputs: "p.5 Fig. 8(a)"}
+  - {table: metrics, row_id: ectc51846.2026.00199-a-m9, field: value, value: 45.3, formula: "29/64 x 100", inputs: "p.5 Fig. 8(b)"}
+  - {table: test_vehicles, row_id: ectc51846.2026.00199-c, field: n_dies, value: 90, formula: "18 GPU dice + 72 HBM", inputs: "p.2 Sec. II.A; p.3 Sec. III"}
+  - {table: process_steps, row_id: ectc51846.2026.00199-a-s08, field: time_s, value: 1680, formula: "28 min x 60", inputs: "p.4 Sec. III.B"}
+  - {table: electrical_interfaces, row_id: ectc51846.2026.00199-b-e1, field: lane_rate_gbps, value: 32, formula: "32 GT/s per lane taken as 32 Gb/s (NRZ, 1 bit per transfer)", inputs: "p.6 Sec. IV.B"}
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00199-a-m4, field: value, values: ["text: width increases from 5 um to 8 um", "Fig. 9(b) cells up to 9.09 um"], locators: ["p.5 Sec. IV.A", "p.5 Fig. 9(b)"], chosen: 9.09, why: "measured map over text summary"}
+  - {table: metrics, row_id: ectc51846.2026.00199-c-m8, field: value, values: ["Abstract/Sec. V: saving up to 13 days (24% reduction)", "Sec. II.C: 4.3x reduction would shorten 54 days to 13 days"], locators: ["p.1 Abstract; p.7 Sec. V", "p.3 Sec. II.C"], chosen: "13 days saving", why: "stated twice as a saving; Sec. II.C wording inconsistent (54/4.3 = 12.6 days remaining)"}
+  - {table: stack_layers, row_id: ectc51846.2026.00199-b-L02, field: thickness_um, values: [10, 5], locators: ["p.6 Sec. IV.B.1 (simulated TCu)", "p.4 Sec. III.B (plating target)"], chosen: "10 for model TV b; 5 for fabricated TV a", why: "different TVs (simulation model vs fabricated panel)"}
+excluded:
+  - "Table I commercial package sizes and die counts (Intel/Nvidia products, refs [7]-[20])"
+  - "Llama-3 pretraining 54 days and 16K GPUs attributed to ref [2]"
+  - "NV-HBI 10 TB/s and NVL72 1.8 TB/s per GPU used as simulation inputs (vendor specs)"
+  - "glass CTE range 3-12 ppm/C attributed to ref [24]; UCIe on glass RDL of Kudo et al. [35]"
+  - "Fig. 13 Tx/Rx termination values are UCIe spec values from ref [36] (kept only as ei scope text)"
+not_reported:
+  - optical_interfaces
+  - microvia depth/pitch and daisy-chain resistance; pad sizes; ABF cure conditions; plating uniformity numbers other than Fig. 9
+  - warpage, reliability, measured electrical (AC) data; no die assembly
+  - which metal layer (M1 or M2) carries the DC test structures and the UCIe routing
+source_quality:
+  - "Clean text layer; all chosen candidates usable as-is."

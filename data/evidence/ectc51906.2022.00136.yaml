@@ -1,0 +1,46 @@
+paper_id: ectc51906.2022.00136
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51906.2022.00136/text.md
+  - references/ectc51906.2022.00136/source.json
+  - references/ectc51906.2022.00136/figures/page_02.png
+  - references/ectc51906.2022.00136/figures/page_03.png
+  - references/ectc51906.2022.00136/figures/page_05.png
+  - references/ectc51906.2022.00136/figures/page_06.png
+  - references/ectc51906.2022.00136/figures/page_07.png
+  - references/ectc51906.2022.00136/figures/cand/p02_fig2.png
+  - references/ectc51906.2022.00136/figures/cand/p02_fig4.png
+  - references/ectc51906.2022.00136/figures/cand/p05_fig15.png
+  - references/ectc51906.2022.00136/figures/cand/p06_table2.png
+  - references/ectc51906.2022.00136/figures/cand/p06_table3.png
+figure_reading_method: >-
+  400 dpi re-crops of Fig. 2, 3, 4, Fig. 15 (p.5 TV attributes), Fig. 15 (p.6 cross-section) and Table 3;
+  Table 2 and Tables 4/5 read from page renders. The p.6 cross-section embeds a ~400 px image: dimension labels
+  are illegible at any dpi, so no values were taken from it.
+entries:
+  - {table: interconnects, row_id: ectc51906.2022.00136-a-i1, field: pitch_um, value: 350, unit: um, basis: design_target, locator: "p.5 Fig. 15", note: "Pitch 0.35mm (unit conversion mm -> um)"}
+  - {table: stack_layers, row_id: ectc51906.2022.00136-a-L04, field: thickness_um, value: 25, unit: um, basis: design_target, locator: "p.3 Sec. III.A", note: "equipment capability requirement 25 +/- 15 um"}
+  - {table: metrics, row_id: ectc51906.2022.00136-a-m17, field: value, value: 70, unit: drops, basis: measured, locator: "p.7 Sec. IV", note: "first fail > 70 drops"}
+derived:
+  - {table: interconnects, row_id: ectc51906.2022.00136-a-i1, field: pitch_um, value: 350, formula: "unit conversion 0.35 mm x 1000", inputs: "p.5 Fig. 15"}
+conflicts:
+  - {table: figures, row_id: ectc51906.2022.00136-f01, field: label, values: ["Figure 15 (Test vehicle used in 600mm FOPLP)", "Figure 15 (Sample Cross section of FOPLP stack-up)"], locators: ["p.5", "p.6"], chosen: "both kept as printed", why: "duplicate figure number in the paper; page disambiguates"}
+  - {table: metrics, row_id: ectc51906.2022.00136-a-m17, field: test_standard, values: ["Table 6 (guideline)", "Table 4 (guideline)"], locators: ["p.7 Sec. IV text", "p.7 Table 4 caption"], chosen: "Table 4", why: "text cites a Table 6 that does not exist"}
+excluded:
+  - "300 mm round FOWLP baseline reliability samples (ref [1]); only 'no significant difference' stated"
+  - "Spin coat (Fig. 8, ref [5]), spin coater (Fig. 9, EV Group), vertical plating flow (Fig. 12, Semsysco), plating additives (Fig. 13, ref [2]): vendor/background illustrations"
+  - "Generic CuSO4/H2SO4/Cl- electrolyte composition (ref [2])"
+  - "Table 4 drop-count guideline by body size (JEDEC-type guideline, not product data)"
+  - "Fig. 1 wafer/panel die-count comparison image (no readable numbers)"
+not_reported:
+  - die size, die thickness, die count, fan-out ratio of the TV
+  - mold compound and polymer products, cure conditions
+  - RDL thickness/space, via sizes, seed metals for RDL/UBM
+  - ball count and diameter, ball attach reflow profile
+  - warpage values
+  - electrical_interfaces, optical_interfaces
+  - JEDEC standard numbers for CLR items
+source_quality:
+  - "Low-resolution embedded images; cross-section measurement labels illegible."
+  - "Candidate p06_table2 holds the p.6 cross-section image; p06_table3 is empty margin; Table 2/3 cropped manually."

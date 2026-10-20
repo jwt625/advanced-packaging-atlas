@@ -1,0 +1,39 @@
+paper_id: ectc51687.2025.00026
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00026/text.md
+  - references/ectc51687.2025.00026/source.json
+  - references/ectc51687.2025.00026/figures/page_02.png
+  - references/ectc51687.2025.00026/figures/page_03.png
+  - references/ectc51687.2025.00026/figures/page_04.png
+  - references/ectc51687.2025.00026/figures/page_05.png
+  - references/ectc51687.2025.00026/figures/cand/p04_fig11.png
+  - references/ectc51687.2025.00026/figures/cand/p04_fig12.png
+  - references/ectc51687.2025.00026/figures/cand/p05_fig13.png
+figure_reading_method: >-
+  150 dpi page renders for Figs. 2-15; manual re-crops of Fig. 4, 6(a), 14. Figs. 10, 12, 14 tables read from image.
+  Warpage axes in Figs. 5, 8, 13 carry no readable absolute values; warpage disclosed only as A/B-normalized mil.
+entries:
+  - {table: metrics, row_id: ectc51687.2025.00026-c-m1, field: value, value: 2.2, unit: "x A", basis: measured, locator: "p.4 Fig. 10", note: "Fig. 10 RT warp 2.2A for 5.5x Corner Window on 110x110"}
+  - {table: interconnects, row_id: ectc51687.2025.00026-a-i1, field: pitch_min_um, value: 35, unit: um, basis: design_target, locator: "p.2 Sec. II", note: "minimum SoC micro bump pitch"}
+derived:
+  - {table: test_vehicles, row_id: ectc51687.2025.00026-a, field: interposer_area_mm2, value: 4488, formula: "66*68 (CoW size)", inputs: "p.2 Sec. II"}
+  - {table: test_vehicles, row_id: ectc51687.2025.00026-a, field: n_dies, value: 16, formula: "4 SoC + 12 HBM", inputs: "p.2 Sec. I-II"}
+  - {table: test_vehicles, row_id: ectc51687.2025.00026-c, field: n_dies, value: 32, formula: "4 SoC + 20 HBM + 8 I/O", inputs: "p.2 Sec. II"}
+conflicts:
+  - {table: test_vehicles, row_id: ectc51687.2025.00026-c, field: notes, values: ["CoW 1.5x larger (Sec. II, III.B)", "CoW size ~1.8x enlarger (Sec. III.C)"], locators: ["p.2 Sec. II; p.4 Sec. III.B", "p.4 Sec. III.C"], chosen: "none entered (no mm size)", why: "inconsistent ratios; corner window CoW size not given in mm"}
+  - {table: test_vehicles, row_id: ectc51687.2025.00026-b, field: substrate size ratio, values: ["1.4x bigger (Sec. III.B)", "~1.3x (Sec. III.C, Fig. 10)"], locators: ["p.4 Sec. III.B", "p.4 Sec. III.C; p.4 Fig. 10"], chosen: "110x110 mm as stated", why: "absolute sizes entered; ratios not entered"}
+excluded:
+  - "CoWoS-R 2 products >99% yield; TCG2500x, TCC2500x, uHAST396+TCB2000x, TCB1000 on 3.3x-reticle TV (other TVs/products)"
+  - "CoW join yield up to 99.5% with different vendor HBM ('from CoWoS-R experience', not this TV)"
+  - "Fig. 1 interposer vs substrate body size roadmap (generic)"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - absolute warpage values (only A, B normalized); HT temperature
+  - die sizes and thicknesses, HBM stack height, IPD count, interposer thickness, RDL dielectric product
+  - ubump/C4 diameter, height, metallurgy; ubump bonding method and conditions
+  - substrate layer count, core, thickness; ring and compensation layer material/size/thickness
+  - underfill products and cure conditions; carrier type; sample counts
+source_quality:
+  - "No candidate for Fig. 6; Fig. 4 and Fig. 14 candidate crops cut off the bottom; manual crops used."

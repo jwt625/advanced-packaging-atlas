@@ -1,0 +1,34 @@
+paper_id: eptc59621.2023.10457652
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/eptc59621.2023.10457652/text.md
+  - references/eptc59621.2023.10457652/source.json
+  - references/eptc59621.2023.10457652/TEXT_LAYER_WARNING.md
+  - references/eptc59621.2023.10457652/figures/page_01_220dpi.png
+  - references/eptc59621.2023.10457652/figures/page_02_220dpi.png
+  - references/eptc59621.2023.10457652/figures/page_03_220dpi.png
+  - references/eptc59621.2023.10457652/figures/page_04_220dpi.png
+figure_reading_method: >-
+  OCR text (garbled PDF text layer); every number checked against the 220 dpi page renders. Fig. 8/9 fit equations,
+  Fig. 4 legend maxima and Fig. 10 markers read from page renders and re-crops; plot peaks read +/-0.05 *M.
+entries:
+  - {table: metrics, row_id: eptc59621.2023.10457652-a-m1, field: value, value: 3.37, unit: "*M", basis: simulated, locator: "p.2 Fig. 4", note: "legend max of step 1 X contour; text ~3.4*M"}
+  - {table: metrics, row_id: eptc59621.2023.10457652-a-m13, field: value, value: 0.055, unit: "*M/die", basis: measured, locator: "p.3 Fig. 9", note: "grey fit label y = 0.055x + 0.0722 for tested Y offset"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: eptc59621.2023.10457652-a-m13, field: value, values: [0.055, 0.056], locators: ["p.3 Fig. 9", "p.3 text"], chosen: 0.055, why: "fit label on plot for tested Y line; text rounds both lines to ~0.056*M"}
+  - {table: metrics, row_id: eptc59621.2023.10457652-a-m3, field: locator, values: ["text 'Figure 6' (X) / 'Figure 7' (Y) / 'Figure 8' (max)", "captions Fig. 5 / Fig. 6 / Fig. 7"], locators: ["p.2 text", "p.2-3 captions"], chosen: "caption labels", why: "rule (c): cite caption label"}
+excluded:
+  - "Wafer-level die shift studies of refs [2]-[5]; warpage optimisation of MC/die from ref [1]"
+not_reported:
+  - "M (die shift specification in um): all die shifts are normalized; absolute values not disclosed"
+  - "die size/thickness, carrier plate and tape material/thickness/CTE/modulus, MC product and properties"
+  - "molding temperature, molding pressure settings, cure conditions"
+  - interconnects
+  - electrical_interfaces
+  - optical_interfaces
+  - "number of tested panels/dies, test method for die shift"
+source_quality:
+  - "Text layer garbled; text.md is tesseract OCR (OCR misreads e.g. Fig. 9 fit labels). No figure candidates detected; all key-figure bboxes manual."
+  - "Multiphysics section reuses figure numbers 'Fig 1' and 'Fig 2' on p.4."
