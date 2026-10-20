@@ -31,10 +31,12 @@ def main() -> int:
         print(f"not in data/papers.csv: {sorted(pids - known)}")
         return 1
     tv2p = {r["tv_id"]: r["paper_id"] for r in read(data, "test_vehicles")[1]}
+    f2p = {r["flow_id"]: r["paper_id"] for r in read(data, "process_flows")[1]}  # v2.4: steps hang off flows
     (out / "evidence").mkdir(parents=True)
     counts = {}
     for table, ts in TABLES.items():
-        rows = [r for r in read(data, table)[1] if (r.get("paper_id") or tv2p.get(r.get("tv_id", ""))) in pids]
+        rows = [r for r in read(data, table)[1]
+                if (r.get("paper_id") or tv2p.get(r.get("tv_id") or "") or f2p.get(r.get("flow_id") or "")) in pids]
         with (out / f"{table}.csv").open("w", newline="") as f:
             w = csv.DictWriter(f, fieldnames=list(ts["columns"]))
             w.writeheader()

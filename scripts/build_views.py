@@ -9,6 +9,12 @@ reported stay absent, and every reported number keeps the basis/source/locator i
 Derived headline fields (minimum pitch, via diameter, ...) are computed by picking the most extreme
 *matching* row and carrying that row's provenance; they never invent a number.
 
+Process flows (schema v2.4): process_steps hang off process_flows. Each TV's `rows.process_steps` is the projection
+of every flow linked to the TV (process_flows.tv_ids): the flow's shared steps plus that TV's delta steps (v2.5: a
+delta's tv_id is a ';' list), ordered by (build_seq, flow number, route, seq), with the flow's name and a delta marker
+added; build_seq falls back to the flow number when empty (v2.4 data). Papers carry `process_flows` (with build_seq)
+and `process_flow_level`. Without process_flows.csv (v2.3 data) steps are grouped by tv_id as before.
+
 Usage: uv run python scripts/build_views.py [--out PATH]
 """
 
@@ -291,7 +297,8 @@ def headline(tv: dict[str, str], layers: list[dict], ics: list[dict], steps: lis
     setv("bond_pressure_mpa", _maxrow(ics, "bonding_pressure_mpa"))
     setv("anneal_temp_max_c", _maxrow(ics, "anneal_temp_c"))
     h["n_process_steps"] = len(steps)
-    setv("proc_temp_max_c", _maxrow(steps, "temp_c"))
+    setv("proc_temp_max_c", max((x for x in (_maxrow(steps, "temp_c"), _maxrow(steps, "temp_c_max")) if x),
+                                key=lambda x: x[0], default=None))  # set point or profile peak (v2.4)
 
     # --- electrical / optical interfaces
     setv("energy_min_pj_per_bit", min_row(eis, "energy_pj_per_bit", tkey="protocol"))
@@ -393,7 +400,40 @@ def columns_meta() -> dict[str, list[dict]]:
                 "enum": cspec.get("enum"),
                 "required": bool(cspec.get("required")),
             })
+            if tname == "process_steps" and cname == "flow_id":
+                # view-only columns added by the per-TV flow projection (not in the CSV)
+                cols.append({"name": "flow_name", "label": "Flow", "type": "str", "enum": None, "required": False})
+                cols.append({"name": "delta", "label": "TV-specific step", "type": "enum", "enum": "yes_no",
+                             "required": False})
         out[tname] = cols
+    return out
+
+
+def flow_number(fid: str) -> int:
+    m = re.search(r"-F(\d+)$", fid)
+    return int(m.group(1)) if m else 10**6
+
+
+def flow_order(f: dict) -> tuple[int, int]:
+    """(build_seq, flow number); build_seq defaults to the flow number (v2.4 data has no build_seq)."""
+    n = flow_number(s(f.get("flow_id")))
+    bs = ival(f.get("build_seq"))
+    return (bs if bs is not None else n, n)
+
+
+def project_flows(flows: list[dict], steps: list[dict]) -> dict[str, list[dict]]:
+    """Per-TV process view: shared steps of every linked flow plus the TV's deltas, by (build_seq, flow, route, seq)."""
+    by_flow: dict[str, list[dict]] = {}
+    for r in steps:
+        by_flow.setdefault(s(r.get("flow_id")), []).append(r)
+    out: dict[str, list[dict]] = {}
+    for f in sorted(flows, key=flow_order):
+        fid = s(f.get("flow_id"))
+        rows = sorted(by_flow.get(fid, []), key=lambda r: (s(r.get("route")), ival(r.get("seq")) or 0))
+        for tv in split_list(f.get("tv_ids")):
+            out.setdefault(tv, []).extend(
+                {**r, "flow_name": s(f.get("flow_name")), "delta": "yes" if s(r.get("tv_id")) else ""}
+                for r in rows if not split_list(r.get("tv_id")) or tv in split_list(r.get("tv_id")))
     return out
 
 
@@ -414,13 +454,37 @@ def build() -> dict:
     papers_raw = read_csv("papers")
     tvs_raw = read_csv("test_vehicles")
     children = {t: read_csv(t) for t in CHILD_TABLES}
+    flows_raw = read_csv("process_flows")
 
     by_tv: dict[str, dict[str, list[dict]]] = {}
     for t, rows in children.items():
+        if t == "process_steps" and flows_raw:
+            by_tv[t] = project_flows(flows_raw, rows)
+            continue
         m: dict[str, list[dict]] = {}
         for r in rows:
             m.setdefault(s(r.get("tv_id")), []).append(r)
         by_tv[t] = m
+    steps_by_flow: dict[str, list[dict]] = {}
+    for r in children["process_steps"]:
+        steps_by_flow.setdefault(s(r.get("flow_id")), []).append(r)
+    flows_by_paper: dict[str, list[dict]] = {}
+    for f in flows_raw:
+        fs = steps_by_flow.get(s(f.get("flow_id")), [])
+        flows_by_paper.setdefault(s(f.get("paper_id")), []).append(compact({
+            "flow_id": s(f.get("flow_id")),
+            "flow_name": s(f.get("flow_name")),
+            "scope": s(f.get("scope")),
+            "level": s(f.get("level")),
+            "tv_ids": split_list(f.get("tv_ids")),
+            "build_seq": flow_order(f)[0],
+            "n_steps": sum(1 for r in fs if not s(r.get("tv_id"))),
+            "n_deltas": sum(1 for r in fs if s(r.get("tv_id"))),
+            "basis": s(f.get("basis")),
+            "source": s(f.get("source")),
+            "locator": s(f.get("locator")),
+            "notes": s(f.get("notes")),
+        }))
 
     # integrity / distribution counts
     def count_by(rows: list[dict], key: str) -> dict[str, int]:
@@ -438,14 +502,55 @@ def build() -> dict:
                 out[v] = out.get(v, 0) + 1
         return out
 
+    # ---- organizations, sites and per-author affiliations (DevLog-006; optional tables)
+    org_rows = {s(r.get("org_name")): r for r in read_csv("organizations")}
+    sites: list[dict] = []
+    site_idx: dict[tuple[str, str, str], int] = {}
+    n_sites_unresolved = 0
+    for r in read_csv("org_sites"):
+        lat, lon = num(r.get("lat")), num(r.get("lon"))
+        if s(r.get("precision")) == "unresolved" or lat is None or lon is None:
+            n_sites_unresolved += 1
+            continue  # recorded, but no coordinates: no pin
+        for loc in [s(r.get("locality"))] + [x.strip() for x in s(r.get("locality_variants")).split(";") if x.strip()]:
+            site_idx[(s(r.get("org_name")), loc, s(r.get("country")))] = len(sites)  # printed spelling variants
+        sites.append({
+            "id": len(sites),
+            "org": s(r.get("org_name")),
+            "locality": s(r.get("locality")),
+            "country": s(r.get("country")),
+            "lat": lat,
+            "lon": lon,
+            "precision": s(r.get("precision")),
+            "source": s(r.get("source")),
+            "source_ref": s(r.get("source_ref")),
+        })
+    aff_by_paper: dict[str, list[dict[str, str]]] = {}
+    for r in read_csv("author_affiliations"):
+        aff_by_paper.setdefault(s(r.get("paper_id")), []).append(r)
+    for rs in aff_by_paper.values():
+        rs.sort(key=lambda r: (ival(r.get("author_index")) or 0, ival(r.get("aff_order")) or 0))
+
+    # canonical org names per paper in byline order (first author's affiliations first)
+    orgs_canonical: dict[str, list[str]] = {
+        pid: list(dict.fromkeys(s(r.get("org_name")) for r in rs if s(r.get("org_name"))))
+        for pid, rs in aff_by_paper.items()
+    }
     orgs: dict[str, int] = {}
-    for p in papers_raw:
-        for o in split_list(p.get("orgs")):
+    for names in orgs_canonical.values():
+        for o in names:
             orgs[o] = orgs.get(o, 0) + 1
 
     papers_out: list[dict] = []
     tvs_out: list[dict] = []
     warnings: list[str] = []
+    paper_ids = {s(p.get("paper_id")) for p in papers_raw}
+    for pid, rs in aff_by_paper.items():
+        if pid not in paper_ids:
+            warnings.append(f"author_affiliations: paper {pid!r} not in papers.csv")
+        for r in rs:
+            if org_rows and s(r.get("org_name")) not in org_rows:
+                warnings.append(f"{pid}: organization {s(r.get('org_name'))!r} not in organizations.csv")
 
     tv_by_paper: dict[str, list[dict]] = {}
     for tv in tvs_raw:
@@ -475,6 +580,8 @@ def build() -> dict:
             "source_status": s(p.get("source_status")),
             "pages_read": s(p.get("pages_read")),
             "n_test_vehicles": ival(p.get("n_test_vehicles")),
+            "process_flow_level": s(p.get("process_flow_level")),
+            "has_process_flow": s(p.get("has_process_flow")),
             "verified_on": s(p.get("verified_on")),
             "orgs": split_list(p.get("orgs")),
             "notes": s(p.get("notes")),
@@ -483,8 +590,17 @@ def build() -> dict:
             "evidence": ev,
         })
         # list fields are part of the app contract; compact() drops empties, so restore them
-        row["orgs"] = split_list(p.get("orgs"))
+        row["orgs"] = split_list(p.get("orgs"))  # printed, provenance only
+        row["orgs_canonical"] = orgs_canonical.get(pid, [])
+        # one entry per printed author x affiliation with a placeable site: a = author index (1-based),
+        # n = author as printed, s = site id, k = kind; unresolved sites stay in the CSV but get no pin
+        row["affil"] = [
+            {"a": ival(r.get("author_index")), "n": s(r.get("author")), "s": site_idx[k], "k": s(r.get("kind"))}
+            for r in aff_by_paper.get(pid, [])
+            if (k := (s(r.get("org_name")), s(r.get("locality")), s(r.get("country")))) in site_idx
+        ]
         row["tables_present"] = sorted(tables_present)
+        row["process_flows"] = flows_by_paper.get(pid, [])
         papers_out.append(row)
 
     for tv in tvs_raw:
@@ -548,10 +664,18 @@ def build() -> dict:
         "stack_layers": len(children["stack_layers"]),
         "interconnects": len(children["interconnects"]),
         "process_steps": len(children["process_steps"]),
+        "process_flows": len(flows_raw),
         "electrical_interfaces": len(children["electrical_interfaces"]),
         "optical_interfaces": len(children["optical_interfaces"]),
         "metrics": len(children["metrics"]),
         "organizations": len(orgs),
+        "organizations_listed": len(org_rows),
+        "author_affiliations": sum(len(rs) for rs in aff_by_paper.values()),
+        "papers_with_affiliations": sum(1 for p in papers_out if p["orgs_canonical"]),
+        "affiliations_located": sum(len(p["affil"]) for p in papers_out),
+        "papers_located": sum(1 for p in papers_out if p["affil"]),
+        "sites": len(sites),
+        "sites_unresolved": n_sites_unresolved,
     }
     counts["rows_total"] = sum(counts[t] for t in CHILD_TABLES)
     counts["papers_with_evidence"] = sum(1 for p in papers_out if p.get("evidence"))
@@ -568,6 +692,7 @@ def build() -> dict:
         "per_source": count_by(tvs_raw, "source"),
         "per_ic_type": count_by(children["interconnects"], "ic_type"),
         "per_step_category": count_by(children["process_steps"], "category"),
+        "per_process_flow_level": count_by(papers_raw, "process_flow_level"),
         "per_metric_category": count_by(children["metrics"], "category"),
         "per_material_class": count_by(children["stack_layers"], "material_class"),
         "per_structure": count_by(children["stack_layers"], "structure"),
@@ -596,8 +721,19 @@ def build() -> dict:
         "columns": columns_meta(),
         "papers": papers_out,
         "tvs": tvs_out,
+        "sites": sites,
+        "org_aliases": org_aliases(),
         "warnings": warnings,
     })
+
+
+def org_aliases() -> dict[str, str]:
+    """Variant name -> canonical org_name from config/org_aliases.yaml (lets old filter URLs map forward)."""
+    path = ROOT / "config" / "org_aliases.yaml"
+    if not path.exists():
+        return {}
+    doc = yaml.safe_load(path.read_text()) or {}
+    return {str(v): str(k) for k, vs in doc.items() for v in (vs or []) if str(v) != str(k)}
 
 
 def main() -> None:
@@ -610,7 +746,11 @@ def main() -> None:
     size = args.out.stat().st_size / 1e6
     c = doc["integrity"]["counts"]
     print(f"wrote {args.out} ({size:.2f} MB): {c['papers']} papers, {c['test_vehicles']} test vehicles, "
-          f"{c['rows_total']} child rows")
+          f"{c['rows_total']} child rows; {c['sites']} sites ({c['sites_unresolved']} unresolved, no pin), "
+          f"{c['affiliations_located']}/{c['author_affiliations']} affiliations located on "
+          f"{c['papers_located']} papers; {len(doc.get('warnings', []))} warnings")
+    for w in doc.get("warnings", []):
+        print("warning:", w)
 
 
 if __name__ == "__main__":

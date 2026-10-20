@@ -1,1 +1,1 @@
-step_id,tv_id,flow_name,seq,category,step,performed,target,material,equipment,temp_c,time_s,pressure_mpa,thickness_um,conditions,result,basis,source,overrides,locator,qualifiers,notes
+step_id,flow_id,tv_id,route,seq,category,step_kind,step_basis,step,performed,target,material,equipment,temp_c,temp_c_max,time_s,ramp_c_per_min,pressure_mpa,force_n,atmosphere,dose_mj_cm2,current_density_ma_cm2,thickness_in_um,thickness_um,conditions,split,result,basis,source,overrides,locator,qualifiers,notes

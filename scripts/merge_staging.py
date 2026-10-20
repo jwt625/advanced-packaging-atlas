@@ -1,7 +1,9 @@
 """Merge a validated staging batch into data/ (coordinator only). Dry run by default.
 
 Conflicts: a staged key already in data/<table>.csv (re-distilling a paper requires --replace, which drops all
-existing rows of the staged paper_ids first). Validation must report 0 errors before --apply writes anything.
+existing rows of the staged paper_ids first, only in the tables the staging dir contains). Validation must report 0 errors before --apply writes anything.
+Rows resolve to their paper by paper_id, else tv_id (test_vehicles), else flow_id (process_flows, v2.4). The dry run
+writes nothing; data/ tables missing from the schema's list are created only on --apply.
 
 Usage: uv run python scripts/merge_staging.py data/_staging/<batch> [--apply] [--replace]
 """
@@ -26,19 +28,17 @@ def main() -> int:
     a = ap.parse_args()
     st = ROOT / a.staging
     data = ROOT / "data"
-    for table, ts in TABLES.items():  # make sure data/ tables exist
-        p = data / f"{table}.csv"
-        if not p.exists():
-            p.write_text(",".join(ts["columns"]) + "\n")
     errs, warns = validate(st, base=data)
     staged_papers = {r["paper_id"] for r in read(st, "papers")[1]}
-    existing_tv = {r["tv_id"]: r["paper_id"] for r in read(data, "test_vehicles")[1]}
+    tv2p = {t["tv_id"]: t["paper_id"] for t in read(st, "test_vehicles")[1]}
+    tv2p.update({r["tv_id"]: r["paper_id"] for r in read(data, "test_vehicles")[1]})
+    f2p = {f["flow_id"]: f["paper_id"] for f in read(st, "process_flows")[1]}
+    f2p.update({f["flow_id"]: f["paper_id"] for f in read(data, "process_flows")[1]})
 
     def paper_of(table: str, r: dict) -> str:
         if "paper_id" in r and r["paper_id"]:
             return r["paper_id"]
-        return existing_tv.get(r.get("tv_id", ""), "") or next(
-            (t["paper_id"] for t in read(st, "test_vehicles")[1] if t["tv_id"] == r.get("tv_id")), "")
+        return tv2p.get(r.get("tv_id") or "", "") or f2p.get(r.get("flow_id") or "", "")
 
     conflicts = []
     for table, ts in TABLES.items():
@@ -54,7 +54,13 @@ def main() -> int:
     print(f"{len(errs)} validation errors, {len(warns)} warnings, {len(conflicts)} conflicts; papers: {sorted(staged_papers)}")
     if errs or conflicts or not a.apply:
         return 1 if (errs or conflicts) else 0
+    for table, ts in TABLES.items():  # make sure data/ tables exist
+        p = data / f"{table}.csv"
+        if not p.exists():
+            p.write_text(",".join(ts["columns"]) + "\n")
     for table, ts in TABLES.items():
+        if not (st / f"{table}.csv").exists():
+            continue  # table not staged: base rows untouched, also under --replace (exports may predate a table)
         hdr, base_rows = read(data, table)
         if a.replace:
             base_rows = [r for r in base_rows if paper_of(table, r) not in staged_papers]
