@@ -3,6 +3,9 @@
 Checks: headers, required columns, types (int/float/date/enum/list), enum membership, unique keys, parent references,
 id prefixes (child ids start with their parent id), locator format ("p.N" with N <= pages in text.md), qualifier
 syntax, evidence YAML (paper_id, derived entries reference existing rows), and that paper references exist.
+figures (v2.2): bbox format/range, page range, tv_ids belong to the paper, rank unique per paper, cand_id present in
+references/<paper_id>/figures/candidates.json. A staging dir holding only figures.csv (backfill for merged papers) needs
+no papers.csv.
 
 Usage: uv run python scripts/validate_db.py                 # data/
        uv run python scripts/validate_db.py --staging data/_staging/<batch>
@@ -80,7 +83,7 @@ def validate(d: Path, base: Path | None = None) -> tuple[list[str], list[str]]:
     for table, ts in TABLES.items():
         hdr, rows = read(d, table)
         if not hdr:
-            if table == "papers":
+            if table == "papers" and not (d / "figures.csv").exists():
                 errs.append(f"{table}.csv missing")
             continue
         expected = list(ts["columns"])
@@ -183,6 +186,34 @@ def validate(d: Path, base: Path | None = None) -> tuple[list[str], list[str]]:
         n_tv = sum(1 for t in data.get("test_vehicles", []) if t["paper_id"] == pid)
         if r.get("n_test_vehicles") and int(r["n_test_vehicles"]) != n_tv:
             errs.append(f"papers: {pid} n_test_vehicles={r['n_test_vehicles']} but {n_tv} test_vehicles rows")
+    # figures
+    tv_paper = dict(tv2p)
+    fig_seen: set[tuple[str, str]] = set()
+    for r in data.get("figures", []):
+        fid, pid = r["fig_id"], r["paper_id"]
+        try:
+            bb = [float(x) for x in r["bbox"].split(",")]
+            if len(bb) != 4 or not (0 <= bb[0] < bb[2] <= 1 and 0 <= bb[1] < bb[3] <= 1):
+                errs.append(f"figures: {fid} bbox '{r['bbox']}' not x0<x1, y0<y1 within 0..1")
+        except ValueError:
+            errs.append(f"figures: {fid} bbox '{r['bbox']}' is not 4 comma-separated numbers")
+        np_ = pages_of(pid)
+        if np_ and r["page"].isdigit() and not 1 <= int(r["page"]) <= np_:
+            errs.append(f"figures: {fid} page {r['page']} out of range 1..{np_}")
+        for tv in filter(None, (x.strip() for x in (r.get("tv_ids") or "").split(";"))):
+            if tv_paper.get(tv) != pid:
+                errs.append(f"figures: {fid} tv_id {tv} is not a test vehicle of {pid}")
+        if (pid, r["rank"]) in fig_seen:
+            errs.append(f"figures: {fid} duplicate rank {r['rank']} for {pid}")
+        fig_seen.add((pid, r["rank"]))
+        if r.get("bbox_source") == "candidate":
+            cj = ROOT / "references" / pid / "figures" / "candidates.json"
+            ids = {c["cand_id"] for c in yaml.safe_load(cj.read_text())} if cj.exists() else set()
+            if r.get("cand_id") not in ids:
+                errs.append(f"figures: {fid} cand_id '{r.get('cand_id')}' not in {pid} candidates.json")
+        for col, lim in (("caption", 30), ("shows", 25)):
+            if len((r.get(col) or "").split()) > lim:
+                warns.append(f"figures: {fid} {col} > {lim} words")
     # privacy
     for p in d.rglob("*"):
         if p.is_file() and p.suffix in (".csv", ".yaml", ".md"):

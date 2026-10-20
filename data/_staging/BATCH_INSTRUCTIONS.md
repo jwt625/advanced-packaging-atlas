@@ -1,11 +1,11 @@
-# Batch distillation instructions (shared contract, 2026-10-18)
+# Batch distillation instructions (shared contract, 2026-10-18; key figures added 2026-10-19, DevLog-005)
 
 You distill advanced-packaging papers into table rows. Work from the project root (the directory containing `data/`,
 `scripts/`, `references/`). No emoji. Never invent: an empty cell means not reported. Do not use git. No network.
 
 ## Read first
 1. `.claude/skills/packaging-distill/SKILL.md` (binding)
-2. `data/schema/packaging.schema.yaml` (columns, enums, rules a-l)
+2. `data/schema/packaging.schema.yaml` (v2.2: columns, enums, rules a-m, `figures` table)
 3. Worked examples once they exist: `data/_staging/pilot_*/` (and their `REVIEW.md` if present)
 
 ## Your task
@@ -13,13 +13,21 @@ Your batch file `data/_staging/batches/<batch>.csv` lists paper_ids (with title,
 For each paper, one at a time, completely:
 1. If `references/<paper_id>/text.md` is missing: status needs_download; move on.
 2. Read the whole text.md; open the page renders for every figure/table you take a number from.
-3. Write rows into `data/_staging/<batch>/{papers,test_vehicles,components,stack_layers,interconnects,process_steps,electrical_interfaces,optical_interfaces,metrics}.csv`
+3. Write rows into `data/_staging/<batch>/{papers,test_vehicles,components,stack_layers,interconnects,process_steps,electrical_interfaces,optical_interfaces,metrics,figures}.csv`
    (copy headers from `data/_staging/TEMPLATE/`) and `data/_staging/<batch>/evidence/<paper_id>.yaml`.
 4. The papers row: source_status full_text, pages_read, verified_on (today), primary_bucket from the batch file unless
    the full text clearly shows otherwise (say so in the report). Set `has_process_flow` (yes/no) from the full text:
    yes if it describes an ordered fabrication/assembly flow or discrete process steps for at least one TV; no if it
    only reports the finished stack or results. Yes requires `process_steps` rows; no requires an empty
    `process_steps` table and `process_steps` in `evidence.not_reported`.
+5. Key figures: 2-6 `figures` rows per paper per SKILL.md workflow step 5. Open every chosen crop (candidate png or
+   your manual re-crop); never cite a bbox you have not looked at. Re-crops and grid renders go in your scratch
+   subfolder (`--out <session scratchpad>/<batch>/`).
+
+## Figures-only batches (backfill for merged papers)
+If your batch file has `mode` = `figures_only`, the paper is already in `data/`: read its rows there
+(`data/test_vehicles.csv` etc., for `tv_ids` and to know which figures the values came from) and write only
+`data/_staging/<batch>/figures.csv`. Do not write papers.csv, other tables or evidence.
 
 ## Source quality
 If `references/<paper_id>/TEXT_LAYER_WARNING.md` exists, the PDF text layer was garbled and `text.md` holds tesseract
@@ -33,6 +41,6 @@ listed in your report). Write only inside `data/_staging/<batch>/`. Never edit `
 scripts, other batches, or `references/`.
 
 ## BATCH_REPORT.md (in your staging dir)
-Per paper: status, rows per table, figures opened (file names), judgment calls, fields not reported, anything wrong
-with the source (truncated, wrong paper, scanned). Final message: short per-paper status, validator output, blockers,
+Per paper: status, rows per table, figures opened (file names), key figures (fig_id, label, kind, candidate/manual),
+judgment calls, fields not reported, anything wrong with the source (truncated, wrong paper, scanned). Final message: short per-paper status, validator output, blockers,
 schema gaps you hit (bullets).

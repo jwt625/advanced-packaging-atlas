@@ -78,23 +78,29 @@ git-ignored intermediates. API keys and contact email live in `.env` (git-ignore
 
 ## Extraction database (`data/`)
 
-`data/*.csv` holds nine tables - `papers`, `test_vehicles`, `components`, `stack_layers`,
-`interconnects`, `process_steps`, `electrical_interfaces`, `optical_interfaces`, `metrics` - defined by
-`data/schema/packaging.schema.yaml` (columns, enums, rules a-m). Every row carries `basis`, `source`
-and a `locator`; derived values and conflicts live in `data/evidence/<paper_id>.yaml`.
+`data/*.csv` holds ten tables - `papers`, `test_vehicles`, `components`, `stack_layers`,
+`interconnects`, `process_steps`, `electrical_interfaces`, `optical_interfaces`, `metrics`, `figures` -
+defined by `data/schema/packaging.schema.yaml` (v2.2: columns, enums, rules a-m). Every value row carries
+`basis`, `source` and a `locator`; derived values and conflicts live in `data/evidence/<paper_id>.yaml`.
+`figures` holds 2-6 key figures per paper (page, bbox, kind, depicted TVs, caption, hover text). The crops
+themselves stay local-only (`references/<id>/figures/key/`) because the sources are licensed.
 
 Batch extraction follows [.claude/skills/packaging-distill/SKILL.md](.claude/skills/packaging-distill/SKILL.md)
 and [data/_staging/BATCH_INSTRUCTIONS.md](data/_staging/BATCH_INSTRUCTIONS.md), then merges and validates:
 
 ```sh
+uv run python scripts/figure_candidates.py --all             # detect figure/table regions (local-only)
 uv run python scripts/make_extract_batches.py --size 3      # stage batches
+uv run python scripts/make_extract_batches.py --figures-backfill --size 6   # key figures for merged papers
 uv run python scripts/merge_staging.py data/_staging/<batch> --apply
 uv run python scripts/validate_db.py                        # 0 errors expected
+uv run python scripts/crop_figures.py                       # render key-figure crops from data/figures.csv
 ```
 
-Stage-2 status, the pending schema v2.1 items and the ranked defect list are in
-[DevLog-001](DevLog/DevLog-001-fulltext-cache-and-extraction.md) and
-[DevLog/audits/audit_x1_2026-10-18.md](DevLog/audits/audit_x1_2026-10-18.md).
+Stage-2 status and the key-figure design are in
+[DevLog-005](DevLog/DevLog-005-batch-extraction-and-key-figures.md). The pending schema v2.x items and the
+ranked defect list are in [DevLog/audits/audit_x1_2026-10-18.md](DevLog/audits/audit_x1_2026-10-18.md)
+and [DevLog/audits/schema_gaps_2026-10-19.md](DevLog/audits/schema_gaps_2026-10-19.md).
 
 ## Setup and retrieval
 
@@ -103,7 +109,7 @@ Use Python 3.12+ and `uv`:
 ```sh
 uv sync                                                     # creates .venv from uv.lock
 uv run python scripts/ieee_fetch.py --login                 # sign in (institutional) once
-uv run python scripts/ieee_fetch.py --run --headed          # throttled retrieval, 60 per 2 h
+uv run python scripts/ieee_fetch.py --run --headed          # throttled retrieval, 60 per 2 h, 30 per run
 uv run python scripts/ingest_inbox.py                       # ingest manual (_inbox) downloads
 ```
 

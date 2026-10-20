@@ -1,14 +1,15 @@
 ---
 name: packaging-distill
-description: Distill an advanced-packaging paper (cached full text) into verified rows of the packaging tables (papers, test_vehicles, components, stack_layers, interconnects, process_steps, electrical_interfaces, optical_interfaces, metrics) with page/figure locators. Use when extracting or auditing a paper in this project.
+description: Distill an advanced-packaging paper (cached full text) into verified rows of the packaging tables (papers, test_vehicles, components, stack_layers, interconnects, process_steps, electrical_interfaces, optical_interfaces, metrics, figures) with page/figure locators, plus the paper's key figures. Use when extracting or auditing a paper in this project.
 ---
 
 # Advanced-packaging distillation
 
 Input: one paper_id whose full text is cached in `references/<paper_id>/` (`text.md` page-delimited, `figures/page_NN.png`
-page renders, `figures/img_pNN_k.png` embedded images, `source.json`). Output: rows for that paper in the staging
+page renders, `figures/img_pNN_k.png` embedded images, `figures/candidates.json` + `figures/cand/<cand_id>.png` detected
+figure/table crops, `source.json`). Output: rows for that paper in the staging
 directory named by the task (`data/_staging/<batch>/<table>.csv`) plus `evidence/<paper_id>.yaml`.
-Read `data/schema/packaging.schema.yaml` first (v2): its rules (a)-(m) and enums are binding and override this file if they disagree.
+Read `data/schema/packaging.schema.yaml` first (v2.2): its rules (a)-(m) and enums are binding and override this file if they disagree.
 
 ## Hard rules
 1. Empty cell = not reported. Never estimate, never use memory, press, other papers, reviews or the triage abstract.
@@ -47,6 +48,7 @@ Read `data/schema/packaging.schema.yaml` first (v2): its rules (a)-(m) and enums
 13. Conflicts inside the paper: measured cross-section/photo > result table > text > schematic; enter the winner and
     list all alternatives in the evidence `conflicts` list. Numbers attributed to cited prior work: not entered
     (list them in `excluded`). Suppliers named only in acknowledgments: allowed, note "ack".
+14. Key figures (`figures` table, workflow step 5): location and description only; crops are never written into the repo.
 
 ## Workflow per paper
 1. Read `source.json` and the whole `text.md`. Note the paper's TVs/builds.
@@ -69,9 +71,34 @@ Read `data/schema/packaging.schema.yaml` first (v2): its rules (a)-(m) and enums
    excluded: ["desmear roughness 300-500 nm attributed to ref [10]"]
    not_reported: [electrical_interfaces, "bonding temperature"]   # what the paper does not disclose (short)
    ```
-5. Run `uv run python scripts/validate_db.py --staging data/_staging/<batch>` until 0 errors.
-6. Report per paper: status (distilled | no_tv_rows | failed), row counts per table, figures opened, judgment calls,
-   not-reported list.
+5. Key figures (after the TVs exist, so `tv_ids` can be set):
+   - Choose 2-6 figures/tables (fewer only if the paper has fewer). Rank 1 is the figure that best shows the physical
+     build: cross-section > stack schematic > package photo. Then rank the process flow, the layout/floorplan, and the
+     figures/tables that most of your extracted values come from. Skip author photos, logos and generic roadmaps unless
+     nothing else exists. Set `reprinted: yes` for figures reprinted from cited work, and prefer the paper's own.
+   - Start from `figures/candidates.json`. Open the candidate crop `figures/cand/<cand_id>.png` of every figure you
+     choose. If it holds the whole figure (all panels, axes and labels) and little else, use `bbox_source: candidate`
+     with the candidate's `cand_id` and `bbox` copied exactly.
+   - If the crop is cut, merged with a neighbour, or missing (garbled or OCR captions often are), use
+     `bbox_source: manual`. Render `uv run python scripts/crop_figures.py --paper <id> --grid <page> --out <scratch>`,
+     read the bbox fractions off the grid, re-crop with `--page <page> --bbox x0,y0,x1,y1 --out <scratch>`, and open
+     that image to confirm. Leave a small margin; include panel labels, exclude body text where possible.
+     Several re-crops in one call: `--paper <id> --spec 3:0.08,0.10,0.49,0.42 --spec 5:... --out <scratch>`.
+   - A figure split across columns or pages: one bbox around the panels that carry the structure/data, `page` = the
+     page of those panels (not the caption page if they differ); name the left-out panels in `notes`.
+   - Row fields:
+     - `fig_id`: `<paper_id>-f01` in rank order.
+     - `label`: as printed ("Fig. 3(b)", "Table II").
+     - `page`: the text.md page index.
+     - `kind`: what the figure mainly shows.
+     - `tv_ids`: the TVs it depicts (`;`-separated, empty = paper-level).
+     - `caption`: as printed, cut to <= 30 words with "...".
+     - `shows`: your own words, <= 25 words. Name the structure and the key labelled dimensions/materials visible,
+       e.g. "FIB cross-section of 3-layer RDL on Si bridge; 2/2 um L/S, PI dielectric, Cu pillar on top". This is
+       the hover text, so make it specific and factual: nothing that is not in the figure or its caption.
+6. Run `uv run python scripts/validate_db.py --staging data/_staging/<batch>` until 0 errors.
+7. Report per paper: status (distilled | no_tv_rows | failed), row counts per table, figures opened, key figures chosen
+   (fig_id, label, kind, candidate or manual), judgment calls, not-reported list.
 
 ## Pitfalls
 Pitch vs line/space vs diameter confusion; "2/2 um" = line/space; "x um pitch" vs "x um bump"; um vs mm; panel vs unit

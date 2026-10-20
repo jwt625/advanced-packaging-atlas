@@ -1,6 +1,7 @@
 # Schema for the packaging extraction tables in data/. Single source of truth for scripts/validate_db.py.
 # Modeled on eo-modulator-atlas (data/schema/devices.schema.yaml). v1 2026-10-18; v2 2026-10-18 after pilots 1-3
-# (data/_staging/pilot_*/SCHEMA_FEEDBACK.md); v2.1 2026-10-19 adds papers.has_process_flow.
+# (data/_staging/pilot_*/SCHEMA_FEEDBACK.md); v2.1 2026-10-19 adds papers.has_process_flow; v2.2 2026-10-19 adds the
+# figures table (key figures: location + description; crops stay local-only, DevLog-005).
 #
 # Rules (binding)
 #   (a) Empty cell = not reported in the source. Never estimate, never take numbers from memory, press, other papers,
@@ -43,7 +44,7 @@
 #       winner; list every alternative in the evidence `conflicts` list (field, values, locators, chosen, why).
 #   (l) A technology/brand name goes in `technology_name` only if the paper itself uses it; inferred mappings -> notes.
 #   (m) No emoji; ISO dates; no absolute local paths or private names in any file; notes <= 30 words, no long quotes.
-version: 2.1
+version: 2.2
 
 enums:
   basis: [measured, design_target, simulated, derived, author_estimate, stated, unspecified]
@@ -93,6 +94,11 @@ enums:
   statistic: [single, mean, median, max, min, typical, range, percentile, other]
   result: [pass, fail, partial, na]
   yes_no: ["yes", "no"]
+  figure_kind: [cross_section, stack_schematic, process_flow, package_photo, top_view_layout, micrograph, xray_csam,
+                warpage_plot, reliability_plot, electrical_plot, optical_plot, thermal_plot, mechanical_plot,
+                simulation_result,
+                data_table, block_diagram, other]
+  bbox_source: [candidate, manual]
 
 common: &common
   basis: {type: enum, enum: basis, required: true}
@@ -318,3 +324,21 @@ tables:
       scope: {type: str}                             # what the value covers (per joint, per chain, sign convention)
       reference_tv_id: {type: str}                   # for ratios vs another TV
       <<: *common
+  figures:
+    key: fig_id
+    parent: {table: papers, column: paper_id}
+    columns:
+      fig_id: {type: str, required: true}            # <paper_id>-f01, numbered by rank
+      paper_id: {type: str, required: true}
+      rank: {type: int, required: true}              # 1 = best view of the physical build; unique per paper
+      label: {type: str, required: true}             # as printed: "Fig. 3(b)", "Table II"
+      page: {type: int, required: true}              # text.md page index (as in locators)
+      kind: {type: enum, enum: figure_kind, required: true}
+      tv_ids: {type: list}                           # TVs the figure depicts; empty = paper-level
+      bbox: {type: str, required: true}              # "x0,y0,x1,y1" fractions of page width/height, top-left origin
+      bbox_source: {type: enum, enum: bbox_source, required: true}
+      cand_id: {type: str}                           # references/<paper_id>/figures/candidates.json id, if candidate
+      caption: {type: str}                           # as printed, <= 30 words ("..." if cut)
+      shows: {type: str, required: true}             # own words, <= 25 words: hover text
+      reprinted: {type: enum, enum: yes_no}          # reprinted from cited work
+      notes: {type: str}
