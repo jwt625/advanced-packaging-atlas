@@ -1,0 +1,49 @@
+paper_id: ectc51909.2023.00252
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00252/text.md
+  - references/ectc51909.2023.00252/source.json
+  - references/ectc51909.2023.00252/figures/page_01.png
+  - references/ectc51909.2023.00252/figures/page_02.png
+  - references/ectc51909.2023.00252/figures/page_03.png
+  - references/ectc51909.2023.00252/figures/page_04.png
+  - references/ectc51909.2023.00252/figures/page_05.png
+  - references/ectc51909.2023.00252/figures/page_06.png
+  - references/ectc51909.2023.00252/figures/cand/p02_fig1.png
+  - references/ectc51909.2023.00252/figures/cand/p02_fig3.png
+  - references/ectc51909.2023.00252/figures/cand/p02_fig4.png
+  - references/ectc51909.2023.00252/figures/cand/p03_fig8.png
+  - references/ectc51909.2023.00252/figures/cand/p06_tablei.png
+figure_reading_method: >-
+  text.md holds a font-shifted (garbled) layer plus a readable layer with OCR-like errors (e.g. "SSW", "1x14").
+  Every number checked on page renders; 200-400 dpi re-crops of the abstract, Fig. 7 and Fig. 8 S-parameter tables
+  and Fig. 13 (test-structure dimensions). Tables I/II read from the p.6 render.
+entries:
+  - {table: components, row_id: ectc51909.2023.00252-a-c1, field: process_node, value: "130nm 8SW RF SOI", basis: stated, locator: "p.1 Abstract", note: "text.md OCR reads 'SSW'; render shows 8SW"}
+  - {table: metrics, row_id: ectc51909.2023.00252-a-m3, field: value, value: 18.826, unit: dB, basis: simulated, locator: "p.3 Fig. 8", note: "text: gain drop 0.12 dB vs 18.95 baseline"}
+  - {table: metrics, row_id: ectc51909.2023.00252-a-m4, field: value, value: -3.377, unit: dB, basis: simulated, locator: "p.3 Fig. 8", note: "text: IL drop 0.33 dB vs -3.049 baseline"}
+  - {table: interconnects, row_id: ectc51909.2023.00252-c-i1, field: resistance_mohm, value: 92, unit: mohm, basis: derived, locator: "p.6 Table II", note: "0.092 ohm at both 1.96 and 2.15 GHz"}
+derived:
+  - {table: interconnects, row_id: ectc51909.2023.00252-c-i1, field: resistance_mohm, value: 92, formula: "unit conversion 0.092 ohm x 1000", inputs: "p.6 Table II"}
+  - {table: interconnects, row_id: ectc51909.2023.00252-a-i3, field: count, value: 9, formula: "12 ball sites - 3 removed (2 middle, 1 left edge)", inputs: "p.5 Sec. III; p.4 Fig. 10 (9 labelled balls)"}
+  - {table: interconnects, row_id: ectc51909.2023.00252-b-i3, field: count, value: 12, formula: "16 ball sites - 4 middle removed", inputs: "p.5 Sec. III; p.4 Fig. 10 (12 labelled balls)"}
+conflicts:
+  - {table: test_vehicles, row_id: ectc51909.2023.00252-b, field: package_y_mm, values: [1.44, 1.4], locators: ["p.2 Sec. II (1400 um x 1440 um)", "p.2 Fig. 2; p.3 Fig. 5; p.4-5 Sec. III (1.4x1.4 mm)"], chosen: 1.4, why: "Fig. 2 labels and all later text/captions give 1.4x1.4 mm; p.4 '1.4x14' is a typo"}
+  - {table: metrics, row_id: ectc51909.2023.00252-a-m13, field: value, values: [0.4, 0.5], locators: ["p.4 Sec. III (about 400 um)", "p.5 Sec. IV (0.5 mm, both designs)"], chosen: 0.5, why: "explicit statement for both designs in the dimension summary; both text"}
+  - {table: metrics, row_id: ectc51909.2023.00252-c-m19, field: value, values: [0.2, 0.15], locators: ["p.1 Abstract (below 0.2 dB at 2 GHz)", "p.7 Sec. V (less than 0.15 dB worst case)"], chosen: 0.2, why: "abstract states the measured test-structure loss; 0.15 dB in conclusion matches the expected package loss estimate (entered on -a)"}
+  - {table: process_steps, row_id: ectc51909.2023.00252-a-s03, field: step, values: ["via-last TSV from front side", "TSV first process"], locators: ["p.2 Fig. 4 caption; p.3 Sec. II", "p.6 Sec. V"], chosen: "via-last", why: "figure caption and Sec. II both say via-last; conclusion wording differs"}
+excluded:
+  - "FOWLP and high-resistivity Si interposer RF SiP background of refs [2]-[5]"
+  - "Detailed via-last TSV process integration of ref [6] (only the Fig. 4 sketch entered)"
+not_reported:
+  - electrical_interfaces (RF analog path; no D2D PHY properties)
+  - optical_interfaces
+  - die thicknesses, SOI/HRSi thickness, TSV depth, RDL line width/space and dielectric material
+  - Cu pillar pitch/diameter/height, bonding method and conditions
+  - solder ball alloy/diameter, mold product
+  - whether the functional 3D module was built (functional test stated as future work)
+  - reliability, warpage, thermal data
+source_quality:
+  - "Text layer partly garbled (font-shifted copy) and the readable copy has OCR-like errors; page renders are clean."
+  - "No candidate for Fig. 13; other candidates usable as-is."

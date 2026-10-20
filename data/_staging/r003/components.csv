@@ -1,0 +1,75 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51687.2025.00052-b-c1,ectc51687.2025.00052-b,pic,,,photonic integrated circuit (PIC) chip with adiabatic PWG couplers and flip chip bumps,1,8,10,,,,,,,,,design_target,text,,p.4 Sec. V.A; p.3 Sec. V,,"Designed by IBM; built by IBM or trusted supplier. Thickness, node not given."
+ectc51687.2025.00052-b-c2,ectc51687.2025.00052-b,substrate,,,base substrate,1,17,17,,,,,,,,,design_target,text,,p.4 Sec. V.A; p.5 Fig. 6,,
+ectc51687.2025.00052-b-c3,ectc51687.2025.00052-b,other,,,"polymer optical waveguide (PWG), 12 channels, 50 um to 250 um pitch fan-out",1,,,,,,,,,,,stated,text,,p.3 Sec. V; p.6 Sec. V.E,,PWG material and dimensions not given; no waveguide enum.
+ectc51687.2025.00052-b-c4,ectc51687.2025.00052-b,connector,,,"pluggable ferrule (MT ferrule compatible), 12 SMF at 250 um pitch",1,,,,,,,,,,,stated,text,,p.3 Sec. V; p.8 Sec. VI,,
+ectc51687.2025.00052-b-c5,ectc51687.2025.00052-b,lid,,,module lid attached to substrate and ferrule,1,,,,,,,,,,,stated,text,,p.3 Sec. V; p.5 Sec. V.D; p.6 Sec. V.D,,"Protection, thermal heat sink and mechanical support of ferrule; material not given."
+ectc51687.2025.00052-b-c6,ectc51687.2025.00052-b,underfill,,,PIC flip chip underfill,,,,,,,,,,,,stated,table,,p.5 Table 2,,
+ectc51687.2025.00052-b-c7,ectc51687.2025.00052-b,adhesive,,,optical adhesive for PIC-PWG and ferrule bonds,,,,,,,,,,,,stated,table,,p.5 Table 2; p.5 Sec. V.B,,"RI, viscosity, modulus characterized (Table 1); values not given."
+ectc51687.2025.00052-b-c8,ectc51687.2025.00052-b,pcb,,,printed circuit board (test card),1,,,,,,,,,,,stated,text,,p.3 Sec. V,,
+ectc51687.2025.00052-c-c1,ectc51687.2025.00052-c,pic,,,photonic integrated circuit (PIC) chip with adiabatic PWG couplers and flip chip bumps,1,8,10,,,,,,,,,design_target,text,,p.4 Sec. V.A; p.3 Sec. V,,"Designed by IBM; built by IBM or trusted supplier. Thickness, node not given."
+ectc51687.2025.00052-c-c2,ectc51687.2025.00052-c,substrate,,,base substrate with cut-out under PWG,1,17,17,,,,,,,,,design_target,text,,p.4 Sec. V.A; p.5 Fig. 6; p.6 Fig. 7,,
+ectc51687.2025.00052-c-c3,ectc51687.2025.00052-c,other,,,"polymer optical waveguide (PWG), 12 channels, 50 um to 250 um pitch fan-out",1,,,,,,,,,,,stated,text,,p.3 Sec. V; p.6 Sec. V.E,,PWG material and dimensions not given; no waveguide enum.
+ectc51687.2025.00052-c-c4,ectc51687.2025.00052-c,connector,,,"pluggable ferrule (MT ferrule compatible), 12 SMF at 250 um pitch",1,,,,,,,,,,,stated,text,,p.3 Sec. V; p.8 Sec. VI,,
+ectc51687.2025.00052-c-c5,ectc51687.2025.00052-c,lid,,,module lid attached to substrate and ferrule,1,,,,,,,,,,,stated,text,,p.3 Sec. V; p.5 Sec. V.D; p.6 Sec. V.D,,"Protection, thermal heat sink and mechanical support of ferrule; material not given."
+ectc51687.2025.00052-c-c6,ectc51687.2025.00052-c,underfill,,,PIC flip chip underfill,,,,,,,,,,,,stated,table,,p.5 Table 2,,
+ectc51687.2025.00052-c-c7,ectc51687.2025.00052-c,adhesive,,,optical adhesive for PIC-PWG and ferrule bonds,,,,,,,,,,,,stated,table,,p.5 Table 2; p.5 Sec. V.B,,"RI, viscosity, modulus characterized (Table 1); values not given."
+ectc51687.2025.00052-c-c8,ectc51687.2025.00052-c,pcb,,,printed circuit board (test card),1,,,,,,,,,,,stated,text,,p.3 Sec. V,,
+ectc51687.2025.00052-d-c1,ectc51687.2025.00052-d,pic,,,PIC chips,3,,,,,,,,,,,stated,text,,p.6 Sec. V.E; p.7 Fig. 12,,
+ectc51687.2025.00052-d-c2,ectc51687.2025.00052-d,connector,,,pluggable ferrules,3,,,,,,,,,,,stated,figure_image,,p.7 Fig. 12,,Three ferrules visible in photo.
+ectc51687.2025.00052-e-c1,ectc51687.2025.00052-e,other,,,polymer optical waveguide (PWG) prototype at <20-25 um pitch,,,,,,,,,,,,stated,text,,p.3 Sec. V; p.7 Sec. V.E,,
+ectc51687.2025.00026-a-c1,ectc51687.2025.00026-a,logic_soc,,,SoC,4,,,,,,,150,,,,design_target,text,,p.2 Sec. II; p.2 Fig. 4,,gap_um = SoC die-to-die gap.
+ectc51687.2025.00026-a-c2,ectc51687.2025.00026-a,hbm,,,HBM4,12,,,,,,,,,,,design_target,text,,p.2 Sec. I; p.2 Fig. 4,,
+ectc51687.2025.00026-a-c3,ectc51687.2025.00026-a,ipd,,,IPD,,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. I,,"Count, size not given."
+ectc51687.2025.00026-a-c4,ectc51687.2025.00026-a,interposer,,,CoWoS-R RDL interposer (CoW die),1,66,68,,,,,,,polymer dielectric film + Cu RDL,,design_target,text,,p.2 Sec. II; p.2 Sec. III.A,,x/y = CoW size.
+ectc51687.2025.00026-a-c5,ectc51687.2025.00026-a,substrate,,,package substrate (SBT),1,97.3,95,,,,,,,,,design_target,text,,p.2 Sec. II,,Layer count and core not given.
+ectc51687.2025.00026-a-c6,ectc51687.2025.00026-a,underfill,,,UF1 (CoW underfill),,,,,,,,,,,,stated,text,,p.3 Sec. III.A; p.5 Sec. V,,Product not given.
+ectc51687.2025.00026-a-c7,ectc51687.2025.00026-a,underfill,,,oS underfill,,,,,,,,,,,,stated,text,,p.4 Sec. III.B,,Product not given.
+ectc51687.2025.00026-b-c1,ectc51687.2025.00026-b,substrate,,,package substrate (SBT),1,110,110,,,,,,,,,design_target,text,,p.4 Sec. III.C; p.4 Fig. 10,,
+ectc51687.2025.00026-c-c1,ectc51687.2025.00026-c,logic_soc,,,SoC,4,,,,,,,,,,,design_target,text,,p.2 Sec. II; p.2 Fig. 4,,
+ectc51687.2025.00026-c-c2,ectc51687.2025.00026-c,hbm,,,HBM,20,,,,,,,,,,,design_target,text,,p.2 Sec. II; p.2 Fig. 4,,
+ectc51687.2025.00026-c-c3,ectc51687.2025.00026-c,io_die,,,I/O,8,,,,,,,,,,,design_target,text,,p.2 Sec. II,,
+ectc51687.2025.00026-c-c4,ectc51687.2025.00026-c,substrate,,,package substrate (SBT),1,110,110,,,,,,,,,design_target,text,,p.4 Sec. III.C; p.4 Fig. 10,,
+ectc51687.2025.00026-d-c1,ectc51687.2025.00026-d,other,,,warpage compensation layer,1,,,,,,,,,,,stated,mixed,,p.4 Sec. IV; p.4 Fig. 11,,"Attached onto substrate around CoW; material, size, thickness not given."
+ectc51687.2025.00026-d-c2,ectc51687.2025.00026-d,stiffener,,,ring,1,,,,,,,,,,,stated,mixed,,p.4 Sec. IV; p.5 Fig. 13(a),,Attached after compensation layer (Fig. 13 stages).
+ectc51687.2025.00026-d-c3,ectc51687.2025.00026-d,substrate,,,package substrate (SBT),1,110,110,,,,,,,,,design_target,text,,p.4 Sec. IV; p.4 Fig. 12,,
+ectc51687.2025.00026-e-c1,ectc51687.2025.00026-e,other,,,warpage compensation layer,1,,,,,,,,,,,stated,text,,p.4 Sec. IV; p.4 Fig. 12,,
+ectc51687.2025.00026-e-c2,ectc51687.2025.00026-e,substrate,,,package substrate (SBT),1,110,110,,,,,,,,,design_target,table,,p.4 Fig. 12,,
+ectc51687.2025.00028-a-c1,ectc51687.2025.00028-a,logic_soc,,,automotive SoC die (CPU big core block),1,,,,,,,,,,,stated,schematic,,p.4 Fig. 7; p.4 Sec. V,,Actual automotive SoC per text; die size not stated.
+ectc51687.2025.00028-a-c2,ectc51687.2025.00028-a,substrate,,,thick-core organic substrate (FC-BGA),1,,,1000,,,,,,,,design_target,text,,p.1 Abstract; p.2 Sec. I,thickness_um:gt,thickness_um = core thickness 'over 1 mm'.
+ectc51687.2025.00028-a-c3,ectc51687.2025.00028-a,capacitor,,,"Si-cap as DSC, 510 nF",1,0.5,1.26,100,,,,,,,,design_target,table,,p.4 Table I,,Capacitance 510 nF (Table I). Mounted beside die on substrate top.
+ectc51687.2025.00028-b-c1,ectc51687.2025.00028-b,logic_soc,,,automotive SoC die (CPU big core block),1,,,,,,,,,,,stated,schematic,,p.4 Fig. 7; p.4 Sec. V,,Actual automotive SoC per text; die size not stated.
+ectc51687.2025.00028-b-c2,ectc51687.2025.00028-b,substrate,,,thick-core organic substrate (FC-BGA),1,,,1000,,,,,,,,design_target,text,,p.1 Abstract; p.2 Sec. I,thickness_um:gt,thickness_um = core thickness 'over 1 mm'. Core perforated for embedded capacitor.
+ectc51687.2025.00028-b-c3,ectc51687.2025.00028-b,capacitor,,yes,"DASC (Si-cap + DAF + dummy silicon) as eCAP, 510 nF",1,0.5,1.26,1200,,,,,,,,design_target,table,,p.4 Table I; p.2 Fig. 2,,Total DASC thickness must equal core thickness (text).
+ectc51687.2025.00028-b-c4,ectc51687.2025.00028-b,dtc,,,silicon capacitor (DTC) part of DASC,1,,,780,,,,,,,,design_target,text,,p.2 Sec. II.B; p.1 Abstract,,Assumed by authors equal to 12-inch wafer thickness.
+ectc51687.2025.00028-b-c5,ectc51687.2025.00028-b,die_attach_film,,,DAF on Si-cap wafer back side,1,,,,,,,,,,,stated,text,,p.2 Sec. II.B; p.2 Fig. 2,,
+ectc51687.2025.00028-b-c6,ectc51687.2025.00028-b,dummy_die,,,dummy silicon (wafer) on DAF,1,,,,,,,,,Si,,stated,text,,p.2 Sec. II.B; p.2 Fig. 2,,Thickness not stated.
+ectc51687.2025.00028-c-c1,ectc51687.2025.00028-c,logic_soc,,,automotive SoC die (CPU big core block),1,,,,,,,,,,,stated,schematic,,p.4 Fig. 7; p.4 Sec. V,,Actual automotive SoC per text; die size not stated.
+ectc51687.2025.00028-c-c2,ectc51687.2025.00028-c,substrate,,,thick-core organic substrate (FC-BGA),1,,,1000,,,,,,,,design_target,text,,p.1 Abstract; p.2 Sec. I,thickness_um:gt,thickness_um = core thickness 'over 1 mm'. Core perforated for embedded capacitor.
+ectc51687.2025.00028-c-c3,ectc51687.2025.00028-c,capacitor,,yes,"SSSC, 8 stacked Si-cap layers, 4080 nF, mounted rotated 90 deg",1,0.5,1.26,1200,,,,,,,,design_target,table,,p.4 Table I; p.4 Sec. V; p.3 Fig. 4,,Thickness set by Si-cap x-y size (text). Double-sided connection.
+ectc51687.2025.00028-c-c4,ectc51687.2025.00028-c,dtc,,,silicon capacitor wafer layers in SSSC,8,,,,,,,,,,,design_target,text,,p.4 Sec. V; p.3 Sec. III.A,,N x capacitance for N stacked layers.
+ectc51687.2025.00028-c-c5,ectc51687.2025.00028-c,dummy_die,,,"dummy wafer (first layer, ground to low profile)",1,,,,,,,,,Si,,stated,text,,p.3 Sec. III.B; p.3 Fig. 5,,
+ectc51687.2025.00028-c-c6,ectc51687.2025.00028-c,adhesive,,,NCF between layers,,,,,,,,,,,,stated,text,,p.3 Sec. III.A; p.1 Abstract,,
+ectc51687.2025.00028-c-c7,ectc51687.2025.00028-c,mold,,,MUF molding between Si-cap layers,,,,,,,,,,,,stated,text,,p.3 Sec. III.A; p.3 Sec. III.B,,Fills empty space to prevent cracks in thin Si-cap layers.
+ectc51687.2025.00027-a-c1,ectc51687.2025.00027-a,logic_soc,yes,,Die A (mock of logic chip),2,20,20,675,,,,,,Si,,design_target,table,,p.2 Sec. II.A; p.2 Table II,,Si thickness 0.675 mm in Table II.
+ectc51687.2025.00027-a-c2,ectc51687.2025.00027-a,hbm,yes,,Die B (mock of high bandwidth memory),8,10,8,675,,,,,,Si,,design_target,table,,p.2 Sec. II.A; p.2 Table II,,Si thickness 0.675 mm shared with Die A in Table II.
+ectc51687.2025.00027-a-c3,ectc51687.2025.00027-a,interposer,,,Si interposer,1,42,46,100,,,,,,Si,,design_target,text,,p.2 Sec. II.B; p.2 Table I,,Backside ground to 100 um after molding and carrier bonding.
+ectc51687.2025.00027-a-c4,ectc51687.2025.00027-a,substrate,,,Substrate A (8-2-8 build-up),1,120,120,,,,,,,,"SHINKO ELECTRIC INDUSTRIES CO., LTD.",design_target,text,,p.2 Sec. II.A; p.2 Sec. II.B,,Substrate CTE 11.97 ppm/C as stated; materials and thickness not reported.
+ectc51687.2025.00027-a-c5,ectc51687.2025.00027-a,pcb,,,28-layer PCB (CCL and prepreg),1,160,160,,,,,,,copper clad laminate and prepreg,,design_target,text,,p.2 Sec. II.A; p.3 Sec. II.B,,Batch lamination with vacuum press VH-2347 (KITAGAWA SEIKI).
+ectc51687.2025.00027-a-c6,ectc51687.2025.00027-a,stiffener,,,"stiffener (sizes S, M, L, L', LL)",1,,,2000,,,,,,SUS430 (all sizes); Cu (size S only),,design_target,mixed,material:table,p.3 Sec. II.B; p.3 Table III,,"Widths X/Y (mm): LL 34/36, L' 28/30, L 29/29, M 24/24, S 19/19 (Table III). Fixed with silicone glue."
+ectc51687.2025.00027-a-c7,ectc51687.2025.00027-a,mold,,,epoxy molding compound (EMC),1,,,,,,,,,EMC,,stated,text,,p.2 Sec. II.B,,Compression molded over dies on interposer; top ground 200 um to expose dies.
+ectc51687.2025.00027-a-c8,ectc51687.2025.00027-a,underfill,,,top CUF (die to interposer),1,,,,,,,,,capillary underfill,,stated,text,,p.2 Sec. II.B,,
+ectc51687.2025.00027-a-c9,ectc51687.2025.00027-a,underfill,,,bottom CUF (interposer to substrate),1,,,,,,,,,capillary underfill,,stated,text,,p.3 Sec. II.B,,
+ectc51687.2025.00027-a-c10,ectc51687.2025.00027-a,adhesive,,,stiffener attach glue,1,,,,,,,,,silicone glue,,stated,text,,p.3 Sec. II.B,,
+ectc51687.2025.00027-b-c1,ectc51687.2025.00027-b,logic_soc,yes,,Die A (mock of logic chip),2,20,20,675,,,,,,Si,,design_target,table,,p.2 Sec. II.A; p.2 Table II,,Si thickness 0.675 mm in Table II.
+ectc51687.2025.00027-b-c2,ectc51687.2025.00027-b,hbm,yes,,Die B (mock of high bandwidth memory),8,10,8,675,,,,,,Si,,design_target,table,,p.2 Sec. II.A; p.2 Table II,,Si thickness 0.675 mm shared with Die A in Table II.
+ectc51687.2025.00027-b-c3,ectc51687.2025.00027-b,interposer,,,Si interposer,1,42,46,100,,,,,,Si,,design_target,text,,p.2 Sec. II.B; p.2 Table I,,Backside ground to 100 um after molding and carrier bonding.
+ectc51687.2025.00027-b-c4,ectc51687.2025.00027-b,substrate,,,Substrate B (8-2-8 build-up),1,120,120,,,,,,,,"SHINKO ELECTRIC INDUSTRIES CO., LTD.",design_target,text,,p.2 Sec. II.A; p.2 Sec. II.B,,Substrate CTE 12.81 ppm/C as stated; materials and thickness not reported.
+ectc51687.2025.00027-b-c5,ectc51687.2025.00027-b,pcb,,,28-layer PCB (CCL and prepreg),1,160,160,,,,,,,copper clad laminate and prepreg,,design_target,text,,p.2 Sec. II.A; p.3 Sec. II.B,,Batch lamination with vacuum press VH-2347 (KITAGAWA SEIKI).
+ectc51687.2025.00027-b-c6,ectc51687.2025.00027-b,stiffener,,,"stiffener (sizes S, M, L, L', LL)",1,,,2000,,,,,,SUS430 (all sizes); Cu (size S only),,design_target,mixed,material:table,p.3 Sec. II.B; p.3 Table III,,"Widths X/Y (mm): LL 34/36, L' 28/30, L 29/29, M 24/24, S 19/19 (Table III). Fixed with silicone glue."
+ectc51687.2025.00027-b-c7,ectc51687.2025.00027-b,mold,,,epoxy molding compound (EMC),1,,,,,,,,,EMC,,stated,text,,p.2 Sec. II.B,,Compression molded over dies on interposer; top ground 200 um to expose dies.
+ectc51687.2025.00027-b-c8,ectc51687.2025.00027-b,underfill,,,top CUF (die to interposer),1,,,,,,,,,capillary underfill,,stated,text,,p.2 Sec. II.B,,
+ectc51687.2025.00027-b-c9,ectc51687.2025.00027-b,underfill,,,bottom CUF (interposer to substrate),1,,,,,,,,,capillary underfill,,stated,text,,p.3 Sec. II.B,,
+ectc51687.2025.00027-b-c10,ectc51687.2025.00027-b,adhesive,,,stiffener attach glue,1,,,,,,,,,silicone glue,,stated,text,,p.3 Sec. II.B,,
+ectc51687.2025.00027-c-c1,ectc51687.2025.00027-c,stiffener,,,"stiffener (simulated sizes S, M, L)",1,,,,,,,,,SUS430 (CTE 11 ppm/C) or Cu (CTE 17 ppm/C),,design_target,text,,p.3 Sec. III.A; p.4 Fig. 2(c),,"Thickness 1, 1.5, 2 mm; width 19 (S), 24 (M), 29 (L) mm; Cu only size S in Fig. 2(c)."
+ectc51687.2025.00027-c-c2,ectc51687.2025.00027-c,substrate,,,substrate (Substrate B core properties),1,120,120,,,,,,,,,design_target,mixed,,p.3 Sec. II.E; p.3 Table IV; p.4 Fig. 2(a),,"Core: modulus 33 GPa, CTE a1 6.9 / a2 0.1 ppm/C, Tg 293 C (Table IV); substrate CTE 12.81 ppm/C (text)."

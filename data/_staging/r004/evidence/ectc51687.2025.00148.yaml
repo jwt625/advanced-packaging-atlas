@@ -1,0 +1,39 @@
+paper_id: ectc51687.2025.00148
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00148/text.md
+  - references/ectc51687.2025.00148/source.json
+  - references/ectc51687.2025.00148/figures/page_02.png
+  - references/ectc51687.2025.00148/figures/page_03.png
+  - references/ectc51687.2025.00148/figures/page_04.png
+  - references/ectc51687.2025.00148/figures/page_05.png
+  - references/ectc51687.2025.00148/figures/cand/p02_tablei.png
+  - references/ectc51687.2025.00148/figures/cand/p02_tableii.png
+figure_reading_method: >-
+  Page grids and 300-400 dpi re-crops from source.pdf. Fig. 4 marker positions located by color-pixel centroids
+  (y scale from gridlines, ~91 px per 100 um, read +/-5 um); Fig. 6/7/8 bar tops read against gridlines (+/-2 units).
+  Fig. 2 and Fig. 1 labels read at 300 dpi. Tables I/II match text.md.
+entries:
+  - {table: metrics, row_id: ectc51687.2025.00148-a-m4, field: value, value: 83, unit: um, basis: measured, locator: "p.3 Fig. 4", note: "Leg 1 STI 50 C; Leg 2/3 STI 50 C markers overlap near 73"}
+  - {table: metrics, row_id: ectc51687.2025.00148-a-m5, field: value, value: -90, unit: um, basis: measured, locator: "p.3 Fig. 4", note: "Leg 1 STI marker hidden under Leg 2 STI marker (-89) at 250 C"}
+  - {table: stack_layers, row_id: ectc51687.2025.00148-a-L06, field: line_um, value: 30, unit: um, basis: design_target, locator: "p.2 Fig. 2", note: "label 'Line W/S =30/50um, 15umt'"}
+derived:
+  - {table: interconnects, row_id: ectc51687.2025.00148-a-i1, field: count, value: 1440, formula: "32 pads x 45 units (9 x 5)", inputs: "p.2 Sec. II.A"}
+  - {table: interconnects, row_id: ectc51687.2025.00148-b-i1, field: count, value: 1440, formula: "32 pads x 45 units (9 x 5)", inputs: "p.2 Sec. II.A"}
+  - {table: interconnects, row_id: ectc51687.2025.00148-c-i1, field: count, value: 1440, formula: "32 pads x 45 units (9 x 5)", inputs: "p.2 Sec. II.A"}
+conflicts:
+  - {table: metrics, row_id: ectc51687.2025.00148-b-m11, field: value_text, values: ["text: order of effectiveness Leg 2 << Leg 1 < Leg 3", "Fig. 10 crack depth Leg1 117, Leg2 52, Leg3 206 um"], locators: ["p.5 Sec. III.E", "p.5 Fig. 10"], chosen: "Fig. 10 depths", why: "measured; text ordering is in crack depth (smaller = better), consistent with Fig. 10"}
+  - {table: metrics, row_id: ectc51687.2025.00148-a-m9, field: value, values: ["text: stiffener significantly improved crack resistance", "Fig. 8 TC1500 crack rates 56/72/97% vs Fig. 6 81/37/91% (Leg 2 higher with stiffener)"], locators: ["p.4 Sec. III.D", "p.4 Fig. 6; p.4 Fig. 8"], chosen: "plotted values", why: "figure data entered as read; text claim holds at TC500 for all legs, at TC1500 only for Leg 1"}
+excluded:
+  - "120x120 mm 2.5D package, SR crack and stacked-via studies of refs [1]-[5] (no numbers taken)"
+  - "UF shrinkage mechanism attributed to ref [8]"
+  - "Generic SAP flow in Introduction (lamination, cure, laser drill, desmear, electroless/electrolytic Cu) attributed to ref [6]; not entered as this paper's steps"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - die material and bump bonding method/conditions; underfill properties; stiffener attach material
+  - SR product and thickness; ABF-GCP thickness (only generic ABF 40 um label); core Cu thickness
+  - total substrate thickness; package thickness; sample counts; TC standard and dwell; crack-rate denominator
+  - substrate-only warpage values (Fig. 3 maps only, no scale values)
+source_quality:
+  - "Figs. 1-10 had no candidates except Fig. 5 (caption 'Figure  N' with double space likely missed); manual crops used."

@@ -1,0 +1,38 @@
+paper_id: ectc51846.2026.00115
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00115/text.md
+  - references/ectc51846.2026.00115/source.json
+  - references/ectc51846.2026.00115/figures/page_03.png
+  - references/ectc51846.2026.00115/figures/page_06.png
+  - references/ectc51846.2026.00115/figures/cand/p02_fig1.png
+  - references/ectc51846.2026.00115/figures/cand/p03_fig2.png
+  - references/ectc51846.2026.00115/figures/cand/p03_fig3.png
+  - references/ectc51846.2026.00115/figures/cand/p05_fig6.png
+  - references/ectc51846.2026.00115/figures/cand/p05_fig7.png
+  - references/ectc51846.2026.00115/figures/cand/p06_fig8.png
+  - references/ectc51846.2026.00115/figures/cand/p06_fig9.png
+  - references/ectc51846.2026.00115/figures/cand/p07_fig10.png
+figure_reading_method: >-
+  Page grids for p.3 and p.6; manual re-crops of Fig. 2 and Fig. 9; 250 dpi crop of p.2 right column to read the
+  HJ-model parameters (text layer garbled the equation exponents: hc = 1.25e8 W/m2K). Fig. 6 values read from the
+  printed data labels; Fig. 3(e) FIB thickness labels read from the candidate crop.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00115-a-m12, field: value, value: 200, unit: nm, basis: measured, locator: "p.3 Fig. 3(e)", note: "text ~200 nm; FIB labels 222.7, 186.1, 212.3, 206.2, 208.1 nm"}
+  - {table: metrics, row_id: ectc51846.2026.00115-a-m10, field: value, value: 355, unit: nm, basis: measured, locator: "p.5 Fig. 6", note: "label 355+/-25; text 355 nm at 30 min"}
+derived: []
+conflicts: []
+excluded:
+  - "Bulk Cu-diamond conductivities from refs [18]-[25] (609, 552, 600, 557, 615, 588 W/mK) and TDTR particle conductivity 400-2000 W/mK of refs [26], [27]"
+  - "Glass/Si/Cu conductivities (1, 150, 400 W/mK) and diamond 1200-2000 W/mK, CTE 1e-6/K cited from refs [9], [17], [18]"
+  - "HJ inputs kp 774.6-1366 W/mK (ref [27]) and hc 1.25e8 W/m2K (ref [23]) kept only as model conditions in metrics.condition"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - measured thermal conductivity of the TGV fill or any thermal test
+  - TGV pitch, count, taper, wafer size, glass product, Ti/Cu seed thicknesses
+  - injection vacuum level and time, electroplating chemistry and current densities, electroless bath composition
+  - measured diamond volume fraction; electrical resistance; reliability
+source_quality:
+  - "Text layer garbles equation symbols (exponents, subscripts); values confirmed on page render."
+  - "Candidate p03_fig2 cuts the (h)-(j) labels; p06_fig9 spans full width and includes the preceding caption; p07_fig10 clips the x-axis."

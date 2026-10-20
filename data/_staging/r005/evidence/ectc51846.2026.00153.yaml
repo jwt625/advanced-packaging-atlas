@@ -1,0 +1,50 @@
+paper_id: ectc51846.2026.00153
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00153/text.md
+  - references/ectc51846.2026.00153/source.json
+  - references/ectc51846.2026.00153/figures/page_02.png
+  - references/ectc51846.2026.00153/figures/page_03.png
+  - references/ectc51846.2026.00153/figures/page_04.png
+  - references/ectc51846.2026.00153/figures/page_05.png
+  - references/ectc51846.2026.00153/figures/page_06.png
+  - references/ectc51846.2026.00153/figures/cand/p02_fig1.png
+  - references/ectc51846.2026.00153/figures/cand/p03_fig3.png
+  - references/ectc51846.2026.00153/figures/cand/p04_tableii.png
+  - references/ectc51846.2026.00153/figures/cand/p04_fig6.png
+  - references/ectc51846.2026.00153/figures/cand/p05_fig9.png
+  - references/ectc51846.2026.00153/figures/cand/p06_tableiv.png
+figure_reading_method: >-
+  400 dpi re-crops of Figs. 6-9; marker centers read against the -4..4 mm axis (~54-56 px/mm), +/-0.1 mm.
+  Overlapping duplicate samples entered once with n_samples 2. Tables II-IV read from page renders and candidates.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00153-e-m5, field: value, value: 1.29, unit: mm, basis: measured, locator: "p.4 Fig. 6", note: "510 x 515_1 few days after PMC (green diamond)"}
+  - {table: metrics, row_id: ectc51846.2026.00153-d-m1, field: value, value: -3.84, unit: mm, basis: measured, locator: "p.5 Fig. 9", note: "0.6 mmt markers at before PMC, both samples overlap"}
+derived:
+  - {table: components, row_id: ectc51846.2026.00153-a-c3, field: thickness_um, value: 300, formula: "0.3 mm x 1000 (unit conversion)", inputs: "p.4 Table II"}
+  - {table: components, row_id: ectc51846.2026.00153-d-c3, field: thickness_um, value: 600, formula: "0.6 mm x 1000 (unit conversion)", inputs: "p.4 Table II; p.5 Sec. IV.D"}
+  - {table: components, row_id: ectc51846.2026.00153-b-c4, field: thickness_um, value: 150, formula: "0.15 mm x 1000 (unit conversion)", inputs: "p.3 Sec. III.A.2"}
+  - {table: process_steps, row_id: ectc51846.2026.00153-a-s04, field: time_s, value: 3600, formula: "60 min x 60 (unit conversion); same for all pressure-oven and PMC steps", inputs: "p.3 Sec. III.A.2-3"}
+  - {table: process_steps, row_id: ectc51846.2026.00153-f-s03, field: time_s, value: 300, formula: "5 min x 60 (unit conversion)", inputs: "p.6 Sec. V.A"}
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00153-c-m3, field: value, values: ["text: decreased to around 0.5 mm", "plot: about -0.3 mm"], locators: ["p.5 Sec. IV.C", "p.5 Fig. 8"], chosen: -0.28, why: "measured plot over text"}
+  - {table: metrics, row_id: ectc51846.2026.00153-e-m5, field: value, values: ["Sec. III.B text: warpage <1 mm across all sizes after molding for small CTE difference", "Sec. IV.A text: <1.5 mm for 510 x 515", "plot: +1.29 and +1.01 mm"], locators: ["p.3 Sec. III.B", "p.4 Sec. IV.A", "p.4 Fig. 6"], chosen: 1.29, why: "measured plot; Sec. III.B '<1 mm' not consistent with plotted few-days values"}
+excluded:
+  - "Photonic debond throughput >60 wph (theoretical), <100 ms debond time, minimal ash: method features attributed to refs [4]-[6]"
+  - "Table I comparison of solvent/thermal/mechanical/laser/Xe flash release methods (generic, throughput ranges)"
+  - "12-inch wafer debonding comparison and die-shift results of previous work refs [4], [6]"
+  - "Si CTE 2.6 ppm/K, ref [7]"
+not_reported:
+  - interconnects
+  - electrical_interfaces
+  - optical_interfaces
+  - glass carrier thickness, TBF thickness, metal layer material and thickness, bare glass type/thickness
+  - warpage measurement tool, temperature and panel definition of warpage (max-min); sample count beyond two markers
+  - Xe flash pulse duration/count; detaping conditions; cure conditions for panel-to-panel coupon (stated 'similar')
+judgment_calls:
+  - "Six TVs: each EMC type/thickness, chip presence, panel size and the panel-to-panel coupon is a distinct stack."
+  - "Glass carrier metal (light-to-heat) layer added to stacks from the Fig. 1 mechanism schematic; the text calls the coupon a three-layer structure."
+  - "Chip bonding step kept with performed=no for EMC-only coupons; pressure-oven cure left blank (not stated whether applied without chips)."
+  - "fan_out_panel class for chip-first coupons is an inference (paper: 'simplified assessment assuming chip-first assembly')."
+  - "buckets add organic_rdl_fanout because the coupons emulate chip-first FO-PLP; primary_bucket panel kept."

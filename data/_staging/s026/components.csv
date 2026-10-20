@@ -1,0 +1,65 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+iedm50572.2025.11353491-a-c1,iedm50572.2025.11353491-a,pic,,,PIC,,,,,,,,,,,,stated,text,,p.1 Sec. II-III,,
+iedm50572.2025.11353491-a-c2,iedm50572.2025.11353491-a,substrate,,,organic substrate without cut-out area,,,,,,,,,,organic laminate,,stated,text,,p.1 Sec. II; p.3 Fig. 1,,
+iedm50572.2025.11353491-a-c3,iedm50572.2025.11353491-a,other,,,single-mode polymer waveguide (PWG),,,,,,,,,,polymer,,stated,text,,p.1 Sec. III; p.3 Fig. 2,,Adiabatically coupled to PIC surface; other end in fiber ferrule.
+iedm50572.2025.11353491-a-c4,iedm50572.2025.11353491-a,adhesive,,,optical adhesive (PIC-PWG bond),,,,,,,,,,,,stated,text,,p.1 Sec. III,,Product not named.
+iedm50572.2025.11353491-a-c5,iedm50572.2025.11353491-a,connector,,,ferrule (fiber connector at package edge),,,,,,,,,,,,stated,mixed,,p.1 Sec. I; p.2 Sec. III; p.3 Fig. 1,,
+iedm50572.2025.11353491-a-c6,iedm50572.2025.11353491-a,lid,,,lid,,,,,,,,,,,,stated,figure_image,,p.3 Fig. 1(a),,Lid visible in photo only.
+iedm50572.2025.11353491-b-c1,iedm50572.2025.11353491-b,pic,,,PIC,,,,,,,,,,,,stated,text,,p.1 Sec. II-III,,
+iedm50572.2025.11353491-b-c2,iedm50572.2025.11353491-b,substrate,,,organic substrate with cut-out area,,,,,,,,,,organic laminate,,stated,text,,p.1 Sec. II; p.3 Fig. 1,,
+iedm50572.2025.11353491-b-c3,iedm50572.2025.11353491-b,other,,,single-mode polymer waveguide (PWG),,,,,,,,,,polymer,,stated,text,,p.1 Sec. III; p.3 Fig. 2,,Adiabatically coupled to PIC surface; other end in fiber ferrule.
+iedm50572.2025.11353491-b-c4,iedm50572.2025.11353491-b,adhesive,,,optical adhesive (PIC-PWG bond),,,,,,,,,,,,stated,text,,p.1 Sec. III,,Product not named.
+iedm50572.2025.11353491-b-c5,iedm50572.2025.11353491-b,connector,,,ferrule (fiber connector at package edge),,,,,,,,,,,,stated,mixed,,p.1 Sec. I; p.2 Sec. III; p.3 Fig. 1,,
+iedm50572.2025.11353491-b-c6,iedm50572.2025.11353491-b,lid,,,lid,,,,,,,,,,,,stated,text,,p.1 Sec. II,,Module-to-lid assembly stated for Type-B.
+iedm50572.2025.11353491-c-c1,iedm50572.2025.11353491-c,substrate,,,package substrate with three cut-outs,,,,,,,,,,organic laminate,,stated,mixed,name:figure_image,p.2 Sec. V; p.4 Fig. 11,,Substrate material from Sec. II (organic); 3 cut-outs from photo.
+iedm50572.2025.11353491-c-c2,iedm50572.2025.11353491-c,connector,,,ferrule ports,3,,,,,,,,,,,stated,mixed,,p.2 Sec. V; p.4 Fig. 11,,
+iedm50572.2025.11353491-c-c3,iedm50572.2025.11353491-c,other,,,single-mode polymer waveguides (PWG),,,,,,,,,,,,stated,mixed,,p.2 Sec. V; p.4 Fig. 11,,
+iedm50572.2025.11353491-d-c1,iedm50572.2025.11353491-d,substrate,,,laminate,,,,,,,,,,,,simulated,schematic,,p.4 Fig. 8,,
+iedm50572.2025.11353491-d-c2,iedm50572.2025.11353491-d,pic,,,Si (die),,,,,,,,,,Si,,simulated,schematic,,p.4 Fig. 8,,"Labelled ""Si"" in model."
+iedm50572.2025.11353491-d-c3,iedm50572.2025.11353491-d,other,,,PWG,,,,,,,,,,,,simulated,schematic,,p.4 Fig. 8,,
+iedm50572.2025.11353491-d-c4,iedm50572.2025.11353491-d,connector,,,ferrule,,,,,,,,,,,,simulated,schematic,,p.4 Fig. 8,,
+iedm50572.2025.11353491-d-c5,iedm50572.2025.11353491-d,other,,,glass (ferrule part),,,,,,,,,,glass,,simulated,schematic,,p.4 Fig. 8(a),,
+iedm50572.2025.11353491-e-c1,iedm50572.2025.11353491-e,dummy_die,yes,,silicon substrate,,,,,,,,,,Si,,stated,schematic,,p.3 Fig. 3,,
+iedm50572.2025.11353491-e-c2,iedm50572.2025.11353491-e,other,,,PWG,,,,,,,,,,,,stated,schematic,,p.3 Fig. 3,,
+iedm50572.2025.11353491-e-c3,iedm50572.2025.11353491-e,adhesive,,,optical adhesive (candidate),,,,,,,,,,,,stated,schematic,,p.3 Fig. 3; p.1 Sec. III,,Several candidate adhesives evaluated; representative result shown.
+iedm50572.2025.11353491-f-c1,iedm50572.2025.11353491-f,other,,,PWG,,,,,,,,,,,,stated,schematic,,p.3 Fig. 5,,
+tcpmt.2025.3557232-a-c1,tcpmt.2025.3557232-a,interposer,,,borosilicate glass substrate,1,,,300,,,,,,borosilicate glass,Taiwan Foresight Company Ltd.,design_target,text,,p.1 Abstract; p.3 Sec. III.B; p.8 Ack.,,Glass samples provided by Taiwan Foresight (ack).
+ectc51529.2024.00021-a-c1,ectc51529.2024.00021-a,hbm,,,"DRAM core die (top die), 16-high stack",16,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Fig. 1(b); p.2 Fig. 3,,"Die size, thickness and process node not reported."
+ectc51529.2024.00021-a-c2,ectc51529.2024.00021-a,base_die,,,bottom wafer (D2W target),,,,,,,,,,,,stated,schematic,,p.2 Fig. 3(b),,Shown in Fig. 3 as the wafer receiving the die stacks; function (base logic die) not stated.
+vlsitechnologyandcir46783.2024.10631478-a-c1,vlsitechnologyandcir46783.2024.10631478-a,cpu,,,CPU chiplet (with own 3-plate HDMIM),1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1; p.2 Fig. 7,,
+vlsitechnologyandcir46783.2024.10631478-a-c2,vlsitechnologyandcir46783.2024.10631478-a,gpu,,,GPU chiplet (no own HDMIM),1,,,,,,,,,,,stated,mixed,,p.2 Fig. 1; p.2 Fig. 7; p.1 GPU Performance,,
+vlsitechnologyandcir46783.2024.10631478-a-c3,vlsitechnologyandcir46783.2024.10631478-a,logic_soc,,,SOC chiplet (no HDMIM),1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1; p.2 Fig. 7,,
+vlsitechnologyandcir46783.2024.10631478-a-c4,vlsitechnologyandcir46783.2024.10631478-a,interposer,,,"passive Si-Interposer (base die) with TSVs, M1-M3 and HDMIM",1,,,,,,,,,Si,,stated,mixed,,p.1 Fabrication; p.2 Fig. 1; p.2 Fig. 5,,Called Base Die in Fig. 5. Thickness not stated; TSV height 75 um (Fig. 3).
+vlsitechnologyandcir46783.2024.10631478-a-c5,vlsitechnologyandcir46783.2024.10631478-a,capacitor,,yes,"interposer HDMIM (between M2-M3), 57.7 uF",1,,,,,,,,,high-k oxide between TiN electrodes,,stated,mixed,,p.2 Fig. 7(a); p.1 Fabrication,,"Shared by CPU, SOC and GPU chiplets."
+vlsitechnologyandcir46783.2024.10631478-a-c6,vlsitechnologyandcir46783.2024.10631478-a,capacitor,,yes,"3-plate HDMIM in CPU die (between top 2 metal layers), 5.4 uF",1,,,,,,,,,2 high-k layers between 3 TiN layers,,stated,mixed,,p.2 Fig. 7(a); p.2 Fig. 6,,CPU-die HDMIM described with citation [2]; density values excluded.
+vlsitechnologyandcir46783.2024.10631478-a-c7,vlsitechnologyandcir46783.2024.10631478-a,substrate,,,package substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1; p.2 Fig. 5,,Layer count and size not reported.
+icept59018.2023.10492317-a-c1,icept59018.2023.10492317-a,unspecified,,yes,Si-Die,500000,,,,,,,,,Si,,stated,mixed,,p.1 Sec. II; p.1 Fig. 2,count:gt,Count = units per panel ('more than half million'). Die size not given.
+icept59018.2023.10492317-a-c2,icept59018.2023.10492317-a,mold,,,MC (mold compound),,,,,,,,,,MC,,stated,mixed,,p.1 Fig. 2; p.1 Sec. III,,Compression molded; product not stated.
+icept59018.2023.10492317-a-c3,icept59018.2023.10492317-a,other,,,carrier plate,,,,,,,,,,,,stated,mixed,,p.1 Sec. III; p.2 Fig. 3,,Temporary; panel released after molding. Material not stated.
+icept59018.2023.10492317-a-c4,icept59018.2023.10492317-a,adhesive,,,tape,,,,,,,,,,,,stated,mixed,,p.1 Sec. I; p.2 Fig. 3,,Die bonding tape on carrier plate (Fig. 3); product not stated.
+icept59018.2023.10492317-b-c1,icept59018.2023.10492317-b,unspecified,,,Die,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3; p.2 Fig. 4,,
+icept59018.2023.10492317-b-c2,icept59018.2023.10492317-b,adhesive,,,Tape,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+icept59018.2023.10492317-b-c3,icept59018.2023.10492317-b,other,,,Carrier Plate,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+icept59018.2023.10492317-b-c4,icept59018.2023.10492317-b,mold,,,MC,,,,,,,,,,,,stated,schematic,,p.2 Fig. 4,,
+ectc51687.2025.00049-a-c1,ectc51687.2025.00049-a,bridge,yes,,"standard Si bridge with top side Cu pillar structures, emulating TSV-type bridge",1,,,,,,,,,Si,,stated,text,,p.2 Sec. II.B; p.2 Fig. 2,,Bottom side Cu-pillar/solder added by semi-additive process. Bridge dimensions and thickness not stated.
+ectc51687.2025.00049-a-c2,ectc51687.2025.00049-a,substrate,,,Si substrate with UBM/Sn pads and alignment squares,1,,,,,,,,,Si,,stated,text,,p.2 Sec. II.B; p.4 Sec. III.B,,Used instead of organic substrate (designs not available).
+ectc51687.2025.00049-b-c1,ectc51687.2025.00049-b,bridge,yes,,"standard Si bridge with top side Cu pillar structures, emulating TSV-type bridge",1,,,,,,,,,Si,,stated,text,,p.2 Sec. II.B; p.2 Fig. 2,,Bottom side Cu-pillar/solder added by semi-additive process. Bridge dimensions and thickness not stated.
+ectc51687.2025.00049-b-c2,ectc51687.2025.00049-b,substrate,,,Si substrate with UBM/Sn pads and alignment squares,1,,,,,,,,,Si,,stated,text,,p.2 Sec. II.B; p.4 Sec. III.B,,Used instead of organic substrate (designs not available).
+ectc51687.2025.00049-c-c1,ectc51687.2025.00049-c,unspecified,,,"Si chip (Chip A, Chip B)",2,,,,,,,,,Si,,stated,mixed,,p.2 Fig. 1; p.3 Sec. II.D,,Linear elastic properties in FEM; dimensions not given.
+ectc51687.2025.00049-c-c2,ectc51687.2025.00049-c,bridge,,,"two-sided bonding Si bridge (TSV-type, bottom solder joints)",1,,,,,,,,,Si,,stated,text,,p.3 Sec. II.D; p.4 Sec. II.D,,
+ectc51687.2025.00049-c-c3,ectc51687.2025.00049-c,substrate,,,"organic laminate (core + build-up, solder resist)",1,,,,,,,,,,,stated,mixed,,p.3 Sec. II.D; p.3 Fig. 6(f); p.4 Sec. II.D,,Temperature-dependent linear properties for core and build-up; equivalent properties for circuitry layers.
+ectc51687.2025.00049-c-c4,ectc51687.2025.00049-c,lid,,,copper lid,1,,,,,,,,,Cu,,stated,text,,p.4 Sec. II.D; p.2 Fig. 1,,Plastic properties assumed.
+ectc51687.2025.00049-c-c5,ectc51687.2025.00049-c,underfill,,,underfill,,,,,,,,,,,,stated,mixed,,p.2 Fig. 1; p.3 Fig. 6(f); p.3 Sec. II.D,,Product not stated.
+ectc51687.2025.00049-c-c6,ectc51687.2025.00049-c,tim,,,thermal interface material,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,Shown in Fig. 1 module concept only; not stated whether included in FEM model.
+ectc51687.2025.00049-d-c1,ectc51687.2025.00049-d,unspecified,,,"Si chip (Chip A, Chip B)",2,,,,,,,,,Si,,stated,mixed,,p.2 Fig. 1; p.3 Sec. II.D,,Linear elastic properties in FEM; dimensions not given.
+ectc51687.2025.00049-d-c2,ectc51687.2025.00049-d,bridge,,,single-sided bonding Si bridge,1,,,,,,,,,Si,,stated,text,,p.3 Sec. II.D; p.4 Sec. II.D,,
+ectc51687.2025.00049-d-c3,ectc51687.2025.00049-d,substrate,,,"organic laminate (core + build-up, solder resist)",1,,,,,,,,,,,stated,mixed,,p.3 Sec. II.D; p.3 Fig. 6(f); p.4 Sec. II.D,,Temperature-dependent linear properties for core and build-up; equivalent properties for circuitry layers.
+ectc51687.2025.00049-d-c4,ectc51687.2025.00049-d,lid,,,copper lid,1,,,,,,,,,Cu,,stated,text,,p.4 Sec. II.D; p.2 Fig. 1,,Plastic properties assumed.
+ectc51687.2025.00049-d-c5,ectc51687.2025.00049-d,underfill,,,underfill,,,,,,,,,,,,stated,mixed,,p.2 Fig. 1; p.3 Fig. 6(f); p.3 Sec. II.D,,Product not stated.
+ectc51687.2025.00049-d-c6,ectc51687.2025.00049-d,tim,,,thermal interface material,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,Shown in Fig. 1 module concept only; not stated whether included in FEM model.
+ectc51906.2022.00053-a-c1,ectc51906.2022.00053-a,capacitor,,yes,multi-terminal Si capacitor (planarized Cu pads),,3.07,2.07,100,,,,,,Si with dielectric layer; Cu pads on Al pads,,design_target,text,,p.2 Sec. II.A; p.2 Fig. 3,,77 Cu pads; two-layer (dielectric + Si) structure gives initial warpage. Die marking shows muRata logo (Fig. 3a). Count per interposer not stated.
+ectc51906.2022.00053-a-c2,ectc51906.2022.00053-a,dummy_die,,yes,dummy Si,,,,,,,,,,Si,,stated,mixed,,p.3 Sec. II.B; p.2 Fig. 4(b),,Thinned together with mold resin.
+ectc51906.2022.00053-a-c3,ectc51906.2022.00053-a,interposer,,,Si base wafer (thinned),1,,,20,,,,,,Si,,design_target,text,,p.3 Sec. II.B,,"300 mm, thinned from 775 um by grinding and polishing; fiducial marks for die placement."
+ectc51906.2022.00053-a-c4,ectc51906.2022.00053-a,mold,,no,epoxy mold resin (compression molded),,,,,,,,,,epoxy resin,,stated,text,,p.3 Sec. II.B; p.2 Fig. 4(d),,Product not stated.
+ectc51906.2022.00053-a-c5,ectc51906.2022.00053-a,adhesive,,,permanent adhesive CYCLOTENE 3022-46 (CYC),,,,5,,,,,,CYCLOTENE 3022-46,DOW,design_target,text,,p.3 Sec. II.B,,Spin-on; B-stage bake to control curing extent.
+ectc51906.2022.00053-a-c6,ectc51906.2022.00053-a,other,,,carrier wafer,1,,,775,,,,,,Si,,design_target,text,,p.3 Sec. II.B,,300 mm; bonded on mold side for handling; attach adhesive not named.

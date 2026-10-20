@@ -1,0 +1,78 @@
+paper_id: ectc51529.2024.00094
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00094/text.md
+  - references/ectc51529.2024.00094/source.json
+  - references/ectc51529.2024.00094/figures/page_02.png
+  - references/ectc51529.2024.00094/figures/page_03.png
+  - references/ectc51529.2024.00094/figures/page_04.png
+  - references/ectc51529.2024.00094/figures/page_05.png
+  - references/ectc51529.2024.00094/figures/page_06.png
+  - references/ectc51529.2024.00094/figures/cand/p02_tablei.png
+  - references/ectc51529.2024.00094/figures/cand/p02_tableii.png
+  - references/ectc51529.2024.00094/figures/cand/p02_fig1.png
+  - references/ectc51529.2024.00094/figures/cand/p04_fig5.png
+  - references/ectc51529.2024.00094/figures/cand/p04_fig6.png
+  - references/ectc51529.2024.00094/figures/cand/p05_fig7.png
+figure_reading_method: >-
+  text.md unit glyphs are garbled (um/mm rendered as private-use characters); every dimension checked against page
+  renders and Table I/II candidate crops. Fig. 7 IMC values read off a 450 dpi re-render (+/- ~0.1 um); Fig. 5(a)
+  gap label 9.92 um confirmed on 450 dpi re-render.
+entries:
+  - {table: interconnects, row_id: ectc51529.2024.00094-a-i1, field: bonding_temp_c, value: 260, unit: C, basis: design_target, locator: "p.4 Sec. III.B", note: "260 C, 10 s, 5 N for the initial bonding test; later optimized values not disclosed"}
+  - {table: interconnects, row_id: ectc51529.2024.00094-a-i1, field: count, value: 515337, unit: ea, basis: design_target, locator: "p.2 Table I", note: "bump count; per chip assumed from table layout, not stated"}
+derived:
+  - {table: process_steps, row_id: ectc51529.2024.00094-a-s07, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.2 Sec. II.A"}
+  - {table: process_steps, row_id: ectc51529.2024.00094-b-s07, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.2 Sec. II.A"}
+  - {table: process_steps, row_id: ectc51529.2024.00094-c-s07, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.2 Sec. II.A"}
+conflicts:
+  - {table: interconnects, row_id: ectc51529.2024.00094-a-i1, field: diameter_um, values: [7, 7.5], locators: ["p.2 Sec. II.A", "p.2 Table I"], chosen: 7.5, why: "table over text"}
+  - {table: metrics, row_id: ectc51529.2024.00094-a-m5, field: value, values: [0.7, "about 1"], locators: ["p.3 Fig. 2(a)", "p.3 Sec. II.C"], chosen: 0.7, why: "plot label over text"}
+  - {table: metrics, row_id: ectc51529.2024.00094-a-m8, field: value_text, values: ["0.7-1.3 (Leg1), 0.2-0.4 (Leg2) on plot", "about 1 um both legs"], locators: ["p.5 Fig. 7", "p.4 Sec. IV.A"], chosen: "plot values", why: "measured plot over text"}
+excluded:
+  - "TCB bonding temperature 240-260 C, NCP/NCF force 200-450 N, MR/LAB force 5-50 N (general background, ref [17])"
+  - "FLOLA force 10-50 N for 5x5 to 60x60 mm chips (general capability statement, not this TV)"
+  - "Ni IMC volume shrinkage 11.3% attributed to ref [21]; H radical mechanism refs [19], [20]; Fig. 4 reprinted from [19], [20]"
+  - "1-2 um misalignment 'commonly observed' (general statement, not measured on this TV)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - identity of metal M and diffusion-barrier material
+  - underfill product, seed thicknesses, number of chips per coupon
+  - optimized bonding temperature/force/time, alignment accuracy
+  - electrical resistance or daisy-chain yield (none measured)
+source_quality:
+  - "text.md unit characters garbled (um and mm), numbers intact."
+  - "Fig. 6 caption labels '(b) Leg3 (M-SnAg), (a) Leg3 (Cu-SnAg)' are typos; Fig. 7 legend says Leg2 Ni-SnAg / Leg3 M-BM-SnAg vs text Leg1/Leg2."
+revisions:
+  - date: 2026-10-19
+    source: "sibling_dup"
+    row_id: "ectc51529.2024.00094-a-m1"
+    change: "scope 'as-plated bump, all legs' -> 'as-plated bump; applies to TVs a, b, c'"
+    reason: "p.3 Sec. III.A gives one range 'regardless legs'; no per-leg values"
+  - date: 2026-10-19
+    source: "sibling_dup"
+    row_id: "ectc51529.2024.00094-b-m1"
+    change: "deleted (copy of ectc51529.2024.00094-a-m1)"
+    reason: "p.3 Sec. III.A gives one range 'regardless legs'; no per-leg values"
+  - date: 2026-10-19
+    source: "sibling_dup"
+    row_id: "ectc51529.2024.00094-c-m1"
+    change: "deleted (copy of ectc51529.2024.00094-a-m1)"
+    reason: "p.3 Sec. III.A gives one range 'regardless legs'; no per-leg values"
+  - date: 2026-10-19
+    source: "x2B"
+    row_id: "ectc51529.2024.00094-a-m2"
+    change: "scope 'initial bonding test, all legs' -> 'initial bonding test; applies to TVs a, b, c'"
+    reason: "p.4 Sec. IV: one BLT-variance sentence for all legs (also flagged in audit_x2B)"
+  - date: 2026-10-19
+    source: "x2B"
+    row_id: "ectc51529.2024.00094-b-m2"
+    change: "deleted (copy of ectc51529.2024.00094-a-m2)"
+    reason: "p.4 Sec. IV: one BLT-variance sentence for all legs (also flagged in audit_x2B)"
+  - date: 2026-10-19
+    source: "x2B"
+    row_id: "ectc51529.2024.00094-c-m2"
+    change: "deleted (copy of ectc51529.2024.00094-a-m2)"
+    reason: "p.4 Sec. IV: one BLT-variance sentence for all legs (also flagged in audit_x2B)"

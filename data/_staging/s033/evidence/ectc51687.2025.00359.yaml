@@ -1,0 +1,39 @@
+paper_id: ectc51687.2025.00359
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00359/text.md
+  - references/ectc51687.2025.00359/source.json
+  - references/ectc51687.2025.00359/figures/page_02.png
+  - references/ectc51687.2025.00359/figures/page_03.png
+  - references/ectc51687.2025.00359/figures/page_04.png
+  - references/ectc51687.2025.00359/figures/page_05.png
+  - references/ectc51687.2025.00359/figures/cand/p02_fig2.png
+  - references/ectc51687.2025.00359/figures/cand/p03_fig5.png
+  - references/ectc51687.2025.00359/figures/cand/p04_fig7.png
+  - references/ectc51687.2025.00359/figures/cand/p04_fig11.png
+  - references/ectc51687.2025.00359/figures/cand/p05_fig11_2.png
+figure_reading_method: >-
+  600-1200 dpi re-crops of Fig. 5 SEM measurement labels; 300 dpi re-crops of Fig. 6 and Fig. 7 scatter plots read
+  against 1 um gridlines (+/-0.2 um). Table I (laser specs) read from page render.
+entries:
+  - {table: interconnects, row_id: ectc51687.2025.00359-a-i1, field: aspect_ratio, value: 3, unit: "", basis: measured, locator: "p.3 Sec. III.1; p.3 Fig. 5(a)", note: "stated as confirmed by cross-section"}
+  - {table: interconnects, row_id: ectc51687.2025.00359-a-i1, field: depth_um, value: 10, unit: um, basis: design_target, locator: "p.2 Sec. II.A", note: "ABF thickness"}
+  - {table: process_steps, row_id: ectc51687.2025.00359-a-s02, field: conditions, value: "G300K 75 mJ, 4000 Hz, 300 W", unit: "", basis: stated, locator: "p.2 Table I", note: "laser spec, not the via process recipe"}
+derived: []
+conflicts:
+  - {table: figures, row_id: ectc51687.2025.00359-f06, field: label, values: ["Fig. 11 (printed, p.5)", "Fig. 12 (text)"], locators: ["p.5", "p.4 Sec. III.3"], chosen: "Fig. 11", why: "printed label used; duplicate of p.4 Fig. 11"}
+  - {table: metrics, row_id: ectc51687.2025.00359-a-m3, field: value_text, values: ["3.5 um (text)", "3.57-3.73 um (SEM labels)"], locators: ["p.3 Sec. III.1", "p.3 Fig. 5(a)"], chosen: "both kept", why: "3.5 um is the nominal via size in text; labels are per-via measurements"}
+excluded:
+  - "CO2 laser limit ~40 um vias [3]; UV-YAG 5 um vias [4]; Gigaphoton prior 3 um vias [5]"
+  - "Prior result for 15 um vias: taper kept within +/-80 um focus offset with PET vs +/-20 um without [6]"
+  - "Existing lithography excimer laser specs (10 mJ, 4000 Hz, 40 W) in Table I (comparison equipment)"
+not_reported:
+  - components, electrical_interfaces, optical_interfaces
+  - via pitch; Cu layer thickness; wafer size; ABF grade name
+  - ablation fluence and pulse count actually used; desmear gas ratio, power, pressure
+  - Ti and Cu seed thicknesses; plating chemistry and current density
+  - reliability, resistance, yield statistics
+source_quality:
+  - "Fig. 5(b) measurement labels are low resolution; top-diameter values approximate."
+  - "Figure label Fig. 11 used twice (p.4 Cu plating cross-section, p.5 dual damascene); text calls the latter Fig. 12 and also says 'shown in Fig. 10' for plating."

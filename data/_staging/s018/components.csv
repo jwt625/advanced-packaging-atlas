@@ -1,0 +1,47 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51687.2025.00178-c-c1,ectc51687.2025.00178-c,unspecified,,,chip (Si),2,23,28,775,,,,,,Si,,design_target,text,,p.3 Sec. II.B; p.3 Fig. 5,,Simulation input; present only in 'after chip assembly' stage. 0.775 mm -> 775 um.
+ectc51687.2025.00178-c-c2,ectc51687.2025.00178-c,underfill,,,underfill resin,,,,,,,,,,,,stated,text,,p.3 Sec. II.B,,Stress-free temperature 150 C = UF cure temperature (simulation input).
+ectc51687.2025.00178-d-c1,ectc51687.2025.00178-d,unspecified,,,chip (Si),2,23,28,775,,,,,,Si,,design_target,text,,p.3 Sec. II.B; p.3 Fig. 5,,Simulation input; present only in 'after chip assembly' stage. 0.775 mm -> 775 um.
+ectc51687.2025.00178-d-c2,ectc51687.2025.00178-d,underfill,,,underfill resin,,,,,,,,,,,,stated,text,,p.3 Sec. II.B,,Stress-free temperature 150 C = UF cure temperature (simulation input).
+ectc51687.2025.00178-e-c1,ectc51687.2025.00178-e,unspecified,,,chip (Si),2,23,28,775,,,,,,Si,,design_target,text,,p.3 Sec. II.B; p.3 Fig. 5,,Simulation input; present only in 'after chip assembly' stage. 0.775 mm -> 775 um.
+ectc51687.2025.00178-e-c2,ectc51687.2025.00178-e,underfill,,,underfill resin,,,,,,,,,,,,stated,text,,p.3 Sec. II.B,,Stress-free temperature 150 C = UF cure temperature (simulation input).
+ectc51687.2025.00178-f-c1,ectc51687.2025.00178-f,unspecified,,,chip (Si),2,23,28,775,,,,,,Si,,design_target,text,,p.3 Sec. II.B; p.3 Fig. 5,,Simulation input; present only in 'after chip assembly' stage. 0.775 mm -> 775 um.
+ectc51687.2025.00178-f-c2,ectc51687.2025.00178-f,underfill,,,underfill resin,,,,,,,,,,,,stated,text,,p.3 Sec. II.B,,Stress-free temperature 150 C = UF cure temperature (simulation input).
+ectc51687.2025.00178-i-c1,ectc51687.2025.00178-i,substrate,,,glass core build-up substrate with TGV,1,77.5,75.0,,,,,,,glass core (Low CTE or Middle CTE) + build-up resin,,design_target,table,,p.4 Table 1,,
+ectc51909.2023.00219-a-c1,ectc51909.2023.00219-a,dummy_die,yes,,top chip (daisy chain / Kelvin TEG),,17,24,,,,,,,,,design_target,schematic,,p.4 Fig. 12; p.2 Table I,,"Fig. 12 inset 17x24 mm; Table I chip area 410 (printed 'mm', i.e. mm2). Thickness not stated."
+ectc51909.2023.00219-a-c2,ectc51909.2023.00219-a,other,,,base wafer,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 5,,Wafer size/material not stated.
+ectc51909.2023.00219-b-c1,ectc51909.2023.00219-b,other,,,top wafer,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 5,,
+ectc51909.2023.00219-b-c2,ectc51909.2023.00219-b,other,,,base wafer,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 5,,
+ectc51906.2022.00181-a-c1,ectc51906.2022.00181-a,asic,,,ASIC die (top die),1,,,50,,,,,,,,design_target,mixed,,p.2 Table I; p.2 Sec. Test Vehicle Introduction,,Die area 70 mm2 (Table I); x/y not given.
+ectc51906.2022.00181-a-c2,ectc51906.2022.00181-a,other,,,memory die (bottom die),1,,,50,,,,,,,,design_target,mixed,,p.2 Table I; p.2 Sec. Test Vehicle Introduction,,Die area 110 mm2 (Table I); memory type not stated.
+ectc51906.2022.00181-a-c3,ectc51906.2022.00181-a,underfill,,,underfill between dies (and oS underfill),2,,,,,,,,,,,stated,text,,p.2 Sec. 3DIC Process Flow,,Products not stated.
+ectc51906.2022.00181-a-c4,ectc51906.2022.00181-a,mold,,,first molding (chip module) and second molding (package),2,,,,,,,,,,,stated,text,,p.2 Sec. 3DIC Process Flow; p.2 Fig. 3,,Mold compounds not stated.
+ectc51906.2022.00181-a-c5,ectc51906.2022.00181-a,substrate,,,package substrate,1,,,,,,,,,,,stated,mixed,,p.2 Sec. 3DIC Process Flow; p.2 Fig. 3,,Size and layer count not stated; substrate made by an unnamed supplier (ack).
+ectc51906.2022.00008-a-c1,ectc51906.2022.00008-a,logic_soc,,,split SOC dies,2,,,,,,,,,,,design_target,text,,p.4 Sec. III.A,,
+ectc51906.2022.00008-a-c2,ectc51906.2022.00008-a,hbm,,,HBM,2,,,,,,,,,,,design_target,text,,p.4 Sec. III.A,,HBM3 eye diagram reported in Fig. 4(a); generation of the built TV not stated.
+ectc51906.2022.00008-a-c3,ectc51906.2022.00008-a,interposer,,,"organic interposer (RDL, TSV-less)",1,32,35,,,,,,,,,design_target,text,,p.4 Sec. III.A; p.2 Table I,,
+ectc51906.2022.00008-a-c4,ectc51906.2022.00008-a,ipd,,no,known-good high capacitance density IPD (de-cap) on interposer landside,20,,,,,,,,,,,design_target,text,,p.4 Sec. III.A; p.4 Fig. 7(b),,IPD area consumes ~8% of C4 bumps; C4 pattern re-arranged to retain full I/O count.
+ectc51906.2022.00008-a-c5,ectc51906.2022.00008-a,substrate,,,package substrate,1,55,55,,,,,,,,,design_target,text,,p.4 Sec. III.A,,x/y = stated package size 55x55 mm.
+ectc51906.2022.00008-a-c6,ectc51906.2022.00008-a,underfill,,,CoW underfill and oS underfill,2,,,,,,,,,,,stated,text,,p.4 Sec. III.A; p.5 Sec. III.D,,CSAM shows void-free underfill; products not stated.
+ectc51906.2022.00008-b-c1,ectc51906.2022.00008-b,logic_soc,,,split SOC dies,2,,,,,,,,,,,stated,text,,p.4 Sec. III.B,,
+ectc51906.2022.00008-b-c2,ectc51906.2022.00008-b,bridge,,,"Si-based connection block (landside, interfaces two split SOC dies)",,,,,,,,,,Si-based,,stated,text,,p.3 Sec. II.B; p.4 Sec. III.B; p.4 Fig. 6(b),,"0.8/0.8 um routing, 24 um ubump pitch; count not stated. Assembled on landside like a discrete IPD."
+ectc51906.2022.00008-b-c3,ectc51906.2022.00008-b,ipd,,no,discrete IPD (landside),2,,,,,,,,,,,design_target,text,,p.4 Sec. III.B; p.5 Fig. 10(a),,
+ectc51906.2022.00008-b-c4,ectc51906.2022.00008-b,interposer,,,organic interposer,,,,,,,,,,,,stated,text,,p.4 Sec. III.B,,
+ectc51906.2022.00008-c-c1,ectc51906.2022.00008-c,interposer,,,organic interposer CoW module (no landside chiplets),,,,,,,,,,,,stated,caption,,p.5 Fig. 11,,
+ectc51906.2022.00140-a-c1,ectc51906.2022.00140-a,asic,,,"ASIC / AP (Application Processor), Die 1",1,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. 2.2; p.2 Fig. 3,,"Size, node, emulator status not reported."
+ectc51906.2022.00140-a-c2,ectc51906.2022.00140-a,hbm,,,"HBM, Die 2",1,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. 2.2; p.2 Fig. 3,,
+ectc51906.2022.00140-a-c3,ectc51906.2022.00140-a,mold,,,over-mold (chip last molding),,,,,,,,,,,,stated,mixed,,p.2 Sec. 2.1; p.2 Fig. 2,,Mold compound not named.
+ectc51906.2022.00140-a-c4,ectc51906.2022.00140-a,substrate,,,substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,Only shown in Fig. 3 schematic; no details.
+ectc51906.2022.00140-a-c5,ectc51906.2022.00140-a,other,,,"organic carrier (temporary, released after molding)",1,,,,,,,,,organic carrier,,stated,mixed,,p.2 Sec. 2.1; p.4 Fig. 9; p.5 Fig. 10,,
+ectc51906.2022.00140-b-c1,ectc51906.2022.00140-b,asic,,,"ASIC / AP (Application Processor), Die 1",1,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. 2.2; p.2 Fig. 3,,"Size, node, emulator status not reported."
+ectc51906.2022.00140-b-c2,ectc51906.2022.00140-b,hbm,,,"HBM, Die 2",1,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. 2.2; p.2 Fig. 3,,
+ectc51906.2022.00140-b-c3,ectc51906.2022.00140-b,mold,,,over-mold (chip last molding),,,,,,,,,,,,stated,mixed,,p.2 Sec. 2.1; p.2 Fig. 2,,Mold compound not named.
+ectc51906.2022.00140-b-c4,ectc51906.2022.00140-b,substrate,,,substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,Only shown in Fig. 3 schematic; no details.
+ectc51906.2022.00140-b-c5,ectc51906.2022.00140-b,other,,,"organic carrier (temporary, released after molding)",1,,,,,,,,,organic carrier,,stated,mixed,,p.2 Sec. 2.1; p.4 Fig. 9; p.5 Fig. 10,,
+ectc51846.2026.00389-a-c1,ectc51846.2026.00389-a,substrate,,,glass substrate,1,,,200,,,,,,AGC EN-1 glass,AGC Inc. (ack),design_target,text,,p.3 Sec. III; p.6 Acknowledgment,,Bare glass; ABF supplied by Ajinomoto (ack).
+ectc51846.2026.00389-b-c1,ectc51846.2026.00389-b,substrate,,,glass substrate,1,,,200,,,,,,AGC EN-1 glass,AGC Inc. (ack),design_target,text,,p.3 Sec. III; p.6 Acknowledgment,,Bare glass; ABF supplied by Ajinomoto (ack).
+ectc51846.2026.00134-a-c1,ectc51846.2026.00134-a,bridge,,yes,EMIB (Embedded Multi-die Interconnect Bridge),2,,,,,,,,,Si,,stated,text,,p.3 Sec. III; p.4 Fig. 8(a),,Embedded in the top layers for fine die-to-die interconnect; bridge size and depth not reported.
+ectc51846.2026.00134-a-c2,ectc51846.2026.00134-a,substrate,,,glass core substrate (24-layer),1,,,,,,,,,glass core; wet SAP RDL,,stated,text,,p.3 Sec. III; p.4 Fig. 8,,"Glass type, core thickness and unit size not reported."
+ectc51846.2026.00134-e-c1,ectc51846.2026.00134-e,stiffener,,,stiffener (organic reference),1,,,,,,,,,,,stated,figure_image,,p.4 Fig. 7,,Only the label 'Organic with Stiffener'.
+ectc51909.2023.00190-a-c1,ectc51909.2023.00190-a,other,,,top wafer (thinned after bonding),1,,,,,,,,,Si,,stated,mixed,,p.2 Fig. 1; p.3 Sec. II.E,,"Top Si removed by edge trim, partial grind and Si CMP."
+ectc51909.2023.00190-a-c2,ectc51909.2023.00190-a,other,,,bottom wafer (300 mm),1,,,,,,,,,Si,,design_target,text,,p.1 Abstract; p.5 Sec. II.F,,

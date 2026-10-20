@@ -1,0 +1,33 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00183-a-c1,ectc51846.2026.00183-a,other,yes,,upper wafer (Cu-Cu daisy-chain test module),1,,,,,,,,,Si,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 3,,Device content not described.
+ectc51846.2026.00183-a-c2,ectc51846.2026.00183-a,other,yes,,lower wafer (Cu-Cu daisy-chain test module),1,,,,,,,,,Si,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 3,,
+ectc51846.2026.00365-a-c1,ectc51846.2026.00365-a,unspecified,,,tiles (2x2),4,,,,,,,,,,,stated,caption,,p.2 Fig. 2(a),,
+ectc51846.2026.00365-d-c1,ectc51846.2026.00365-d,underfill,,,"capillary underfill, material A and material B (B lower viscosity)",,,,,,,,,,,,stated,text,,p.3 Sec. IV.A; p.3 Fig. 4,,
+ectc51846.2026.00365-e-c1,ectc51846.2026.00365-e,underfill,,,"capillary underfill formulations 1, 2, 3",,,,,,,,,,,,stated,text,,p.3 Sec. IV.A; p.4 Table I,,
+ectc51846.2026.00365-f-c1,ectc51846.2026.00365-f,unspecified,,,tiles (2x3),6,,,,,,,,,,,stated,caption,,p.4 Fig. 5,,
+ectc51846.2026.00365-g-c1,ectc51846.2026.00365-g,unspecified,,,"tiles (2x4), each approximately full reticle size",8,,,,,,,,,,,stated,text,,p.4 Sec. IV.B,,
+ectc51846.2026.00365-h-c1,ectc51846.2026.00365-h,hbm,,,HBM,12,,,,,,,,,,,stated,text,,p.4 Sec. V,,
+ectc51846.2026.00365-h-c2,ectc51846.2026.00365-h,unspecified,,,non-HBM dies (type not stated),6,,,,,,,,,,,stated,text,count:derived,p.4 Sec. V,,18 dies total minus 12 HBM.
+ectc51846.2026.00365-h-c3,ectc51846.2026.00365-h,bridge,,,EMIB bridge (fine-pitch bridge region),,,,,,,,,,,,stated,text,,p.4 Sec. V,,Bridge count not stated.
+ectc51846.2026.00365-h-c4,ectc51846.2026.00365-h,underfill,,,new encapsulation (underfill) material,,,,,,,,,,,,stated,text,,p.4 Sec. V,,
+ectc51846.2026.00365-i-c1,ectc51846.2026.00365-i,unspecified,,,tiles (2x4),8,,,,,,,,,,,stated,text,,p.5 Sec. V; p.5 Fig. 8,,
+ectc51846.2026.00365-i-c2,ectc51846.2026.00365-i,underfill,,,new encapsulating material,,,,,,,,,,,,stated,text,,p.5 Sec. V,,
+ectc51846.2026.00365-j-c1,ectc51846.2026.00365-j,unspecified,,,Foveros 3D die complex,,32,62,,,,,,,,,design_target,text,,p.5 Sec. V,x_mm:approx;y_mm:approx,
+ectc51846.2026.00365-j-c2,ectc51846.2026.00365-j,mold,,,mold material on die edge,,,,,,,,,,,,stated,text,,p.5 Sec. V,,
+ectc51846.2026.00365-k-c1,ectc51846.2026.00365-k,unspecified,,,Foveros die complex,,51,65,,,,,,,,,design_target,text,,p.5 Sec. V,x_mm:approx;y_mm:approx,
+ectc51846.2026.00365-k-c2,ectc51846.2026.00365-k,base_die,,,active base die,,,,,,,,,,,,stated,text,,p.5 Sec. V,,Base die count and size not stated.
+ectc51906.2022.00031-a-c1,ectc51906.2022.00031-a,dummy_die,yes,,"Cap die (top, links close daisy chain)",1,8,12,50,,,,,,Si,,design_target,text,,p.2 Sec. II.A; p.3 Sec. II.B,,Thinned to 50 um; backside not polished.
+ectc51906.2022.00031-a-c2,ectc51906.2022.00031-a,dummy_die,yes,,Logic host wafer (die site),1,8,12,,,,,,,Si,,design_target,text,x_mm:derived;y_mm:derived,p.2 Sec. II.A; p.3 Sec. II.B,,"Host wafer, DBI face up; x/y from 8 x 12 mm test vehicle die (inferred same footprint). Thickness not stated."
+ectc51906.2022.00031-b-c1,ectc51906.2022.00031-b,dummy_die,yes,,"Cap die (top, links close daisy chain)",1,8,12,50,,,,,,Si,,design_target,text,,p.2 Sec. II.A; p.3 Sec. II.B,,Thinned to 50 um; backside not polished.
+ectc51906.2022.00031-b-c2,ectc51906.2022.00031-b,dummy_die,yes,,"Thru die (TSV + DBI pads only, pass-through)",1,8,12,50,,,,,,Si,Fraunhofer IZM-ASSID (TSV wafers),design_target,text,,p.2 Sec. II.A; p.3 Sec. II.B,,
+ectc51906.2022.00031-b-c3,ectc51906.2022.00031-b,dummy_die,yes,,Logic host wafer (die site),1,8,12,,,,,,,Si,,design_target,text,x_mm:derived;y_mm:derived,p.2 Sec. II.A; p.3 Sec. II.B,,"Host wafer, DBI face up; x/y from 8 x 12 mm test vehicle die (inferred same footprint). Thickness not stated."
+ectc51906.2022.00031-c-c1,ectc51906.2022.00031-c,dummy_die,yes,,"Cap die (top, links close daisy chain)",1,8,12,50,,,,,,Si,,design_target,text,,p.2 Sec. II.A; p.3 Sec. II.B,,Thinned to 50 um; backside not polished.
+ectc51906.2022.00031-c-c2,ectc51906.2022.00031-c,dummy_die,yes,,"Thru die (TSV + DBI pads only, pass-through)",4,8,12,50,,,,,,Si,Fraunhofer IZM-ASSID (TSV wafers),design_target,text,,p.2 Sec. II.A; p.3 Sec. II.B,,
+ectc51906.2022.00031-c-c3,ectc51906.2022.00031-c,dummy_die,yes,,Logic host wafer (die site),1,8,12,,,,,,,Si,,design_target,text,x_mm:derived;y_mm:derived,p.2 Sec. II.A; p.3 Sec. II.B,,"Host wafer, DBI face up; x/y from 8 x 12 mm test vehicle die (inferred same footprint). Thickness not stated."
+ectc51906.2022.00031-d-c1,ectc51906.2022.00031-d,dummy_die,yes,,"Cap die (top, links close daisy chain)",1,8,12,50,,,,,,Si,,design_target,text,,p.2 Sec. II.A; p.3 Sec. II.B,,Thinned to 50 um; backside not polished.
+ectc51906.2022.00031-d-c2,ectc51906.2022.00031-d,dummy_die,yes,,"Thru die (TSV + DBI pads only, pass-through)",7,8,12,50,,,,,,Si,Fraunhofer IZM-ASSID (TSV wafers),design_target,text,,p.2 Sec. II.A; p.3 Sec. II.B,,
+ectc51906.2022.00031-d-c3,ectc51906.2022.00031-d,dummy_die,yes,,Logic host wafer (die site),1,8,12,,,,,,,Si,,design_target,text,x_mm:derived;y_mm:derived,p.2 Sec. II.A; p.3 Sec. II.B,,"Host wafer, DBI face up; x/y from 8 x 12 mm test vehicle die (inferred same footprint). Thickness not stated."
+ectc51846.2026.00187-a-c1,ectc51846.2026.00187-a,dummy_die,yes,,top wafer (daisy-chain TV),1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,"Probing pad, pad via, top metal, top via and SiCN bonding layer; top-wafer Si not drawn."
+ectc51846.2026.00187-a-c2,ectc51846.2026.00187-a,dummy_die,yes,,bottom wafer (daisy-chain TV),1,,,,,,,,,Silicon substrate,,stated,schematic,,p.2 Fig. 1,,
+ectc51846.2026.00187-b-c1,ectc51846.2026.00187-b,dummy_die,yes,,top wafer (daisy-chain TV),1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,"Probing pad, pad via, top metal, top via and SiCN bonding layer; top-wafer Si not drawn."
+ectc51846.2026.00187-b-c2,ectc51846.2026.00187-b,dummy_die,yes,,bottom wafer (daisy-chain TV),1,,,,,,,,,Silicon substrate,,stated,schematic,,p.2 Fig. 1,,

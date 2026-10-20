@@ -245,3 +245,55 @@ Backups of data/ before each merge: `cache/backups/data_before_*.zip` (local-onl
 Scope correction (Wentao, 23:00): retrieval/caching is not part of this work. At 23:00 I started a retrieval
 session (tmux `apa-ieee-9`) by mistake; it was killed while still waiting at login. No download, no run log.
 "Ingestion" = distilling already-cached papers: 239 cached, 239 ingested, 0 pending.
+
+## Process-flow review (decision 2), 2026-10-19 23:08
+
+Two fresh-context reviewers, read-only (`DevLog/audits/process_flow_review_{A,B}_2026-10-19.md`).
+- Sample: 18 `yes` papers stratified by step count (<=8: 8, 9-25: 6, >25: 4), plus all 8 `no` papers.
+- Content: no invented steps, chemistry or conditions in about 290 rows. Named misses: 1 missing step and a few
+  conditions or thicknesses not on the step (5 bath temperature, starting ABF thickness, named tools).
+- `no` calls: 8/8 correct. `yes` calls: 3 papers disclose only fragments (00125, 00093, itherm 9190542), the
+  same level as some `no` papers. The flag in practice means "has any step row".
+- Structural failures, which are the real problem:
+  - Identical flows copied onto sibling TVs. DB-wide estimates: 752 rows (17%, review A) and 284 exact
+    duplicates in 18 papers (review B).
+  - Sibling/split TVs left with no steps: DB-wide 142 physical TVs in 77 `yes` papers.
+  - Tests, inspections and preconditioning logged as steps: 357-368 rows.
+  - 388 `other` category rows.
+  - Alternative routes flattened into one seq: 44 TVs carry more than one flow_name.
+  - Order imposed where the paper states none.
+  - Conditions only in free text: 8.2% of rows have a temperature, time or pressure; `performed` is empty in
+    4062/4441 rows.
+- Both reviewers recommend:
+  - A graded disclosure field (full | ordered | fragments | none) instead of yes/no.
+  - A shared flow defined once and referenced by TVs, with per-TV deltas.
+  - step_kind fab/inspection/test, with tests moving to metrics.
+  - More typed condition columns (force, atmosphere, dose, current density) and branch/route support.
+  - A targeted re-pass over the `yes` papers, piloted on the reviewed papers using their miss lists as
+    expected diffs.
+- Status: proposal for Wentao (schema change); not applied.
+
+## Revision pass (decisions 1 and 3), launched 2026-10-19 23:10
+
+- New key-figure rule in SKILL.md step 5 and BATCH_INSTRUCTIONS.md: always keep every schematic drawing and every
+  image of the build (SEM/TEM/FIB/optical, X-ray, CSAM, photo); plots/tables by information content; no cap.
+- `scripts/export_paper.py`: exports every row of the given papers (all tables + evidence) into a staging dir.
+  Merged back with `merge_staging.py --replace`. The round trip was tested on 2 papers (0 errors, 0 conflicts).
+- Batches, all 239 papers exported:
+  - r000-r013, audit fixes + figures: 70 papers, each with a `REVISION_MANIFEST.md` naming its audits.
+    - 34 papers named in audit_x1/x2A/x2B.
+    - 36 papers with sibling-identical metric groups: 97 groups / 226 rows by an exact-match script.
+      Agents judge each group as a genuine per-TV value or a copy.
+  - s000-s021, figures supplement only: 169 papers. Only figures.csv may change; the coordinator diffs the
+    other tables before merging.
+- Process-flow rows are fixed only where an audit names a defect; restructuring waits for the decision above.
+- Workflow `wf_6cf0197a-596`: 4 revision workers plus 3 affiliation workers (DevLog-006).
+
+## Decision (Wentao, 2026-10-19 23:13)
+
+- Process-flow proposal approved: schema v2.4 with a graded disclosure, shared flows with per-TV deltas, tests out
+  of the flow, typed conditions and routes. Then a re-pass over the `yes` papers, piloted on the 18 reviewed papers.
+  It runs after the revision pass merges, so the papers are not edited concurrently.
+- Work through the TODO lists one by one. Example of the organization problem: the table shows multiple TSMC
+  spellings, because `papers.orgs` is the printed string. Fix: show the canonical organizations from DevLog-006
+  in the app and keep the printed form for provenance.

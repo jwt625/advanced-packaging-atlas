@@ -1,0 +1,78 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51909.2023.00150-a-c1,ectc51909.2023.00150-a,fpga,no,no,FPGA,1,29,12,,,,,,,Si,,design_target,table,,p.2 Table I; p.1 Abstract,,"Abstract: approximately 29 x 12 mm, more than 188,000 pads at 40 um pitch. Thickness not stated."
+ectc51909.2023.00150-a-c2,ectc51909.2023.00150-a,hbm,no,no,HBM2,1,11.9,7.8,,,,,,,,,design_target,table,,p.2 Table I,,Bump pitch 55 um.
+ectc51909.2023.00150-a-c3,ectc51909.2023.00150-a,asic,no,no,IBM AI chip,1,6,3,,,,,,,,,design_target,table,,p.2 Table I,,Bump pitch 150 um.
+ectc51909.2023.00150-a-c4,ectc51909.2023.00150-a,interposer,,,organic interposer with fine-pitch RDL,1,26,34,,,,,,,organic thin film (4 high density layers),,design_target,table,,p.2 Table I; p.2 Sec. II.A,,Top pads ENEPIG (Ni/Pd/Au). Dielectric and thickness not stated.
+ectc51909.2023.00150-a-c5,ectc51909.2023.00150-a,substrate,,,build-up substrate,1,55,55,,,,,,,,,design_target,table,,p.2 Table I; p.2 Sec. II.A,,"7-2-7: 7 top wiring layers, 2 around core, 7 bottom."
+ectc51909.2023.00150-a-c6,ectc51909.2023.00150-a,underfill,,,underfill (UF),,,,,,,,,,,,stated,text,,p.5 Sec. II.D,,Process optimized; dispensed before cooling. Material not stated.
+ectc51909.2023.00150-a-c7,ectc51909.2023.00150-a,lid,,,lid,1,,,,,,,,,,,stated,mixed,,p.5 Sec. II.D; p.6 Fig. 14(a),,Attached to substrate surface after chip bonding; material not stated.
+ectc51909.2023.00150-a-c8,ectc51909.2023.00150-a,pcb,,,evaluation board,1,,,,,,,,,,,stated,mixed,,p.5 Sec. II.D; p.6 Fig. 14(b),,Module mounted for power-on test.
+ectc51909.2023.00150-b-c1,ectc51909.2023.00150-b,dummy_die,yes,no,FPGA-size chip without device layers,1,29,12,,,,,,,,,design_target,text,x_mm:table;y_mm:table,p.2 Sec. II.A; p.2 Table I,,Same size and same bump array as FPGA (40 um pitch).
+ectc51909.2023.00091-a-c1,ectc51909.2023.00091-a,logic_soc,yes,,SoC (top die),2,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.3 Sec. II.A,,"Mechanical TV; non-functional die inferred from 'mechanical TV'. Size, thickness, node not given."
+ectc51909.2023.00091-a-c2,ectc51909.2023.00091-a,hbm,yes,,HBM2E,4,,,,,,,,,,,design_target,table,,p.3 Table 1; p.3 Sec. II.A,,Mechanical TV. Stack height and size not given.
+ectc51909.2023.00091-a-c3,ectc51909.2023.00091-a,dummy_die,yes,,dummy Si (top die layer),8,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.3 Sec. II.A; p.3 Fig. 6(b),,Equivalent 3.8x reticle dummy Si added to mimic a 5.4x reticle (4500 mm2) interposer.
+ectc51909.2023.00091-a-c4,ectc51909.2023.00091-a,bridge,,yes,LSI (local Si interconnect),6,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.3 Sec. II.A; p.2 Sec. II,,Embedded in SC-RDL module; features same as ref [7] incl. eDTC. Size not given.
+ectc51909.2023.00091-a-c5,ectc51909.2023.00091-a,ipd,,yes,IPD,45,,,,,,,,,,,design_target,text,,p.3 Table 1; p.3 Sec. II.A,,2.9 mm2 each; embedded between B/S SC-RDL and organic substrate (in uBGA layer).
+ectc51909.2023.00091-a-c6,ectc51909.2023.00091-a,substrate,,,"organic substrate 3-2-3, 1.4 mm core",1,91,91,,,,,,,organic,,design_target,table,,p.3 Table 1; p.3 Sec. II.A,,Simplified substrate; size equal to SC-RDL/package size.
+ectc51909.2023.00091-a-c7,ectc51909.2023.00091-a,mold,,,side mold extended to package substrate edge,,,,,,,,,,,,stated,text,,p.2 Sec. II,,Mold material and thickness not given.
+ectc51909.2023.00091-a-c8,ectc51909.2023.00091-a,lid,,,lid,1,91,91,2000,,,,,,,,design_target,figure_image,,p.3 Table 1; p.3 Fig. 6(c),,Fig. 6(c) label 'Lid: 91mmx91mmx2mm'. Material not given.
+ectc51909.2023.00091-b-c1,ectc51909.2023.00091-b,logic_soc,yes,,SoC (top die),6,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.4 Sec. II.B,,"Mechanical TV; non-functional die inferred from 'mechanical TV'. Size, thickness, node not given."
+ectc51909.2023.00091-b-c2,ectc51909.2023.00091-b,hbm,yes,,HBM2E,12,,,,,,,,,,,design_target,table,,p.3 Table 1; p.4 Sec. II.B,,Mechanical TV. Stack height and size not given.
+ectc51909.2023.00091-b-c3,ectc51909.2023.00091-b,bridge,,yes,LSI (local Si interconnect),18,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.4 Sec. II.B; p.2 Sec. II,,Embedded in SC-RDL module; features same as ref [7] incl. eDTC. Size not given.
+ectc51909.2023.00091-b-c4,ectc51909.2023.00091-b,ipd,,yes,IPD,45,,,,,,,,,,,design_target,text,,p.3 Table 1; p.4 Sec. II.B,,2.9 mm2 each; embedded between B/S SC-RDL and organic substrate (in uBGA layer).
+ectc51909.2023.00091-b-c5,ectc51909.2023.00091-b,substrate,,,"organic substrate 3-2-3, 1.4 mm core",1,91,91,,,,,,,organic,,design_target,table,,p.3 Table 1; p.4 Sec. II.B,,Simplified substrate; size equal to SC-RDL/package size.
+ectc51909.2023.00091-b-c6,ectc51909.2023.00091-b,mold,,,side mold extended to package substrate edge,,,,,,,,,,,,stated,text,,p.2 Sec. II,,Mold material and thickness not given.
+ectc51909.2023.00091-b-c7,ectc51909.2023.00091-b,stiffener,,,stiffener ring,1,,,,,,,,,,,design_target,figure_image,,p.3 Table 1; p.4 Fig. 7(c); p.4 Fig. 7(d),,Fig. 7(c) label 'Ring: 18mm-12mm-2mm'; meaning of the three values not defined. No TIM1 needed.
+ectc51909.2023.00154-a-c1,ectc51909.2023.00154-a,asic,yes,,3D-ASIC (large top die Cu-Cu hybrid bonded F2F to small bottom die with TSV),1,25,19,,,,,60,,,,design_target,table,,p.2 Table 1; p.2 Sec. II; p.2 Fig. 3,,Daisy-chain test chip. 25x19 mm per Table 1 'ASIC (3D ASIC)'. Top die larger than bottom die. gap_um = chip-to-chip gap on interposer.
+ectc51909.2023.00154-a-c2,ectc51909.2023.00154-a,asic,yes,,ASIC (2D),2,25,19,,,,,60,,,,design_target,mixed,,p.2 Sec. II; p.2 Table 1,,Daisy-chain test chips.
+ectc51909.2023.00154-a-c3,ectc51909.2023.00154-a,other,,,chiplet,3,8.4,6.0,,,,,60,,,,design_target,mixed,,p.2 Sec. II; p.2 Table 1,,Function not stated.
+ectc51909.2023.00154-a-c4,ectc51909.2023.00154-a,hbm,,,"HBM3 (Gen3), 8 core dies on buffer die",12,11,11,,,,,60,,,,design_target,mixed,,p.2 Sec. II; p.2 Table 1,,
+ectc51909.2023.00154-a-c5,ectc51909.2023.00154-a,interposer,,,Si interposer with TSV (molded),1,,,110,,,,,,Si,,design_target,text,,p.1 Abstract; p.3 Sec. III,,4x reticle size; final thickness on 1st glass carrier.
+ectc51909.2023.00154-a-c6,ectc51909.2023.00154-a,substrate,,,"build-up organic substrate, 14 layers (6-2-6), extremely low CTE core",1,,,,,,,,,,,stated,mixed,,p.2 Sec. II; p.2 Table 1,,Core material/CTE value not named; Cu layer design optimized.
+ectc51909.2023.00154-a-c7,ectc51909.2023.00154-a,stiffener,,,"stiffener (foot width 10 x 3.5 mm, height above substrate thickness)",1,,,,,,,,,,,design_target,mixed,,p.2 Sec. II; p.2 Table 1; p.3 Sec. III,,Attached with adhesive; material not stated.
+ectc51909.2023.00154-a-c8,ectc51909.2023.00154-a,mold,,,"wafer-level mold, partially removed to expose die backsides",,,,,,,,,,,,stated,text,,p.3 Sec. III,,
+ectc51909.2023.00154-a-c9,ectc51909.2023.00154-a,underfill,,,"UF (CoW), wafer-level underfill",,,,,,,,,,,,stated,mixed,,p.3 Sec. III; p.5 Fig. 11,,
+ectc51909.2023.00154-a-c10,ectc51909.2023.00154-a,underfill,,,"UF (interposer), CM-to-substrate underfill",,,,,,,,,,,,stated,mixed,,p.3 Sec. III; p.5 Fig. 11,,
+ectc51909.2023.00154-a-c11,ectc51909.2023.00154-a,adhesive,,,stiffener adhesive,,,,,,,,,,,,stated,text,,p.3 Sec. III,,
+ectc51909.2023.00153-a-c1,ectc51909.2023.00153-a,dummy_die,yes,,large die,1,15,20,775,,,,,,,,design_target,table,,p.2 Table I,,Full-area bump array. Gap between chips 50~60 um (Fig. 3). Die material not stated.
+ectc51909.2023.00153-a-c2,ectc51909.2023.00153-a,dummy_die,yes,,small die,4,5,10,775,,,,,,,,design_target,table,count:text,p.2 Table I; p.2 Sec. II.A; p.2 Fig. 3,,Full-area bump array; 4 small dies per interposer.
+ectc51909.2023.00153-a-c3,ectc51909.2023.00153-a,interposer,,,silicon interposer,1,30,30,775,,,,,,silicon,,design_target,table,,p.2 Table II; p.2 Sec. II.A,,Heterogeneous microbump layout matching both die types; Cu bumps 5 um.
+ectc51909.2023.00153-a-c4,ectc51909.2023.00153-a,underfill,,,CUF (capillary underfill),,,,,,,,,,CUF (product not stated),,stated,text,,p.3 Sec. II.D,,
+ectc51909.2023.00153-b-c1,ectc51909.2023.00153-b,dummy_die,yes,,large die,1,15,20,775,,,,,,,,design_target,table,,p.2 Table I,,Full-area bump array. Gap between chips 50~60 um (Fig. 3). Die material not stated.
+ectc51909.2023.00153-b-c2,ectc51909.2023.00153-b,dummy_die,yes,,small die,4,5,10,775,,,,,,,,design_target,table,count:text,p.2 Table I; p.2 Sec. II.A; p.2 Fig. 3,,Full-area bump array; 4 small dies per interposer.
+ectc51909.2023.00153-b-c3,ectc51909.2023.00153-b,interposer,,,silicon interposer,1,30,30,775,,,,,,silicon,,design_target,table,,p.2 Table II; p.2 Sec. II.A,,Heterogeneous microbump layout matching both die types; Cu bumps 5 um.
+ectc51909.2023.00153-b-c4,ectc51909.2023.00153-b,underfill,,,CUF (capillary underfill),,,,,,,,,,CUF (product not stated),,stated,text,,p.3 Sec. II.D,,
+ectc51909.2023.00153-c-c1,ectc51909.2023.00153-c,dummy_die,yes,,large die,1,15,20,775,,,,,,,,design_target,table,,p.2 Table I,,Full-area bump array. Gap between chips 50~60 um (Fig. 3). Die material not stated.
+ectc51909.2023.00153-c-c2,ectc51909.2023.00153-c,dummy_die,yes,,small die,4,5,10,775,,,,,,,,design_target,table,count:text,p.2 Table I; p.2 Sec. II.A; p.2 Fig. 3,,Full-area bump array; 4 small dies per interposer.
+ectc51909.2023.00153-c-c3,ectc51909.2023.00153-c,interposer,,,silicon interposer,1,30,30,775,,,,,,silicon,,design_target,table,,p.2 Table II; p.2 Sec. II.A,,Heterogeneous microbump layout matching both die types; Cu bumps 5 um.
+ectc51909.2023.00153-c-c4,ectc51909.2023.00153-c,underfill,,,CUF (capillary underfill),,,,,,,,,,CUF (product not stated),,stated,text,,p.3 Sec. II.D,,
+ectc51909.2023.00153-d-c1,ectc51909.2023.00153-d,dummy_die,yes,,large die,1,15,20,775,,,,,,,,design_target,table,,p.2 Table I,,Full-area bump array. Gap between chips 50~60 um (Fig. 3). Die material not stated.
+ectc51909.2023.00153-d-c2,ectc51909.2023.00153-d,dummy_die,yes,,small die,4,5,10,775,,,,,,,,design_target,table,count:text,p.2 Table I; p.2 Sec. II.A; p.2 Fig. 3,,Full-area bump array; 4 small dies per interposer.
+ectc51909.2023.00153-d-c3,ectc51909.2023.00153-d,interposer,,,silicon interposer,1,30,30,775,,,,,,silicon,,design_target,table,,p.2 Table II; p.2 Sec. II.A,,Heterogeneous microbump layout matching both die types; Cu bumps 5 um.
+ectc51909.2023.00153-d-c4,ectc51909.2023.00153-d,underfill,,,CUF (capillary underfill),,,,,,,,,,CUF (product not stated),,stated,text,,p.3 Sec. II.D,,
+ectc51909.2023.00135-a-c1,ectc51909.2023.00135-a,logic_soc,,,SoC,2,27,18,,,,,,,,,design_target,table,,p.2 Table I; p.2 Fig. 3,,One SoC per interposer.
+ectc51909.2023.00135-a-c2,ectc51909.2023.00135-a,hbm,,,HBM2E,8,11,10,,,,,,,,,design_target,table,,p.2 Table I; p.2 Fig. 3,,HBM module: base die + stacked DRAM with TSV/microbumps and side mold (p.2 Sec. III.A).
+ectc51909.2023.00135-a-c3,ectc51909.2023.00135-a,interposer,,,"Si TSV interposer, 1.5 reticle",2,,,100,,,,,,silicon,,design_target,table,,p.2 Table I; p.4 Table II; p.1 Fig. 1,,Exact x/y not stated. CTE ~4 ppm/K (p.3 Sec. III.E).
+ectc51909.2023.00135-a-c4,ectc51909.2023.00135-a,substrate,,,organic substrate,1,85,85,,,,,,,,,design_target,table,,p.2 Table I,,Layer count and core not stated. CTE ~15 ppm/K (p.3 Sec. III.E).
+ectc51909.2023.00135-a-c5,ectc51909.2023.00135-a,stiffener,,,copper stiffener ring,1,,,,,,,,,copper,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,For warpage control. Dimensions not stated.
+ectc51909.2023.00135-a-c6,ectc51909.2023.00135-a,mold,,,epoxy mold compound between SoC and memory dies,1,,,,,,,,,epoxy mold compound,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,
+ectc51909.2023.00135-a-c7,ectc51909.2023.00135-a,underfill,,,UF1 (die to interposer),1,,,,,,,,,,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,
+ectc51909.2023.00135-a-c8,ectc51909.2023.00135-a,underfill,,,UF2 (interposer to substrate),1,,,,,,,,,,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,CTE ~20 ppm/K (p.3 Sec. III.E).
+ectc51909.2023.00135-b-c1,ectc51909.2023.00135-b,logic_soc,,,SoC,2,27,18,,,,,,,,,design_target,table,,p.2 Table I; p.2 Fig. 3,,One SoC per interposer.
+ectc51909.2023.00135-b-c2,ectc51909.2023.00135-b,hbm,,,HBM2E,4,11,10,,,,,,,,,design_target,table,,p.2 Table I; p.2 Fig. 3,,HBM module: base die + stacked DRAM with TSV/microbumps and side mold (p.2 Sec. III.A).
+ectc51909.2023.00135-b-c3,ectc51909.2023.00135-b,dummy_die,,,dummy filler die,4,,,,,,,,,silicon,,stated,mixed,,p.2 Fig. 3; p.3 Sec. III.D,,"At interposer corners, 2 per interposer. Size not stated."
+ectc51909.2023.00135-b-c4,ectc51909.2023.00135-b,interposer,,,"Si TSV interposer, 1.5 reticle",2,,,100,,,,,,silicon,,design_target,table,,p.2 Table I; p.4 Table II; p.1 Fig. 1,,Exact x/y not stated. CTE ~4 ppm/K (p.3 Sec. III.E).
+ectc51909.2023.00135-b-c5,ectc51909.2023.00135-b,substrate,,,organic substrate,1,85,85,,,,,,,,,design_target,table,,p.2 Table I,,Layer count and core not stated. CTE ~15 ppm/K (p.3 Sec. III.E).
+ectc51909.2023.00135-b-c6,ectc51909.2023.00135-b,stiffener,,,copper stiffener ring,1,,,,,,,,,copper,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,For warpage control. Dimensions not stated.
+ectc51909.2023.00135-b-c7,ectc51909.2023.00135-b,mold,,,epoxy mold compound between SoC and memory dies,1,,,,,,,,,epoxy mold compound,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,
+ectc51909.2023.00135-b-c8,ectc51909.2023.00135-b,underfill,,,UF1 (die to interposer),1,,,,,,,,,,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,
+ectc51909.2023.00135-b-c9,ectc51909.2023.00135-b,underfill,,,UF2 (interposer to substrate),1,,,,,,,,,,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,CTE ~20 ppm/K (p.3 Sec. III.E).
+ectc51909.2023.00135-c-c1,ectc51909.2023.00135-c,logic_soc,,,SoC,2,27,18,,,,,,,,,design_target,table,,p.2 Table I; p.2 Fig. 3,,One SoC per interposer.
+ectc51909.2023.00135-c-c2,ectc51909.2023.00135-c,hbm,,,HBM2E,4,11,10,,,,,,,,,design_target,table,,p.2 Table I; p.2 Fig. 3,,HBM module: base die + stacked DRAM with TSV/microbumps and side mold (p.2 Sec. III.A).
+ectc51909.2023.00135-c-c3,ectc51909.2023.00135-c,dummy_die,,,dummy filler die,4,,,,,,,,,silicon,,stated,mixed,,p.2 Fig. 3; p.3 Sec. III.D,,"At interposer corners, 2 per interposer. Size not stated."
+ectc51909.2023.00135-c-c4,ectc51909.2023.00135-c,interposer,,,"Si TSV interposer, 1.5 reticle",2,,,50,,,,,,silicon,,design_target,table,,p.2 Table I; p.4 Table II; p.1 Fig. 1,,Exact x/y not stated. CTE ~4 ppm/K (p.3 Sec. III.E).
+ectc51909.2023.00135-c-c5,ectc51909.2023.00135-c,substrate,,,organic substrate,1,85,85,,,,,,,,,design_target,table,,p.2 Table I,,Layer count and core not stated. CTE ~15 ppm/K (p.3 Sec. III.E).
+ectc51909.2023.00135-c-c6,ectc51909.2023.00135-c,stiffener,,,copper stiffener ring,1,,,,,,,,,copper,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,For warpage control. Dimensions not stated.
+ectc51909.2023.00135-c-c7,ectc51909.2023.00135-c,mold,,,epoxy mold compound between SoC and memory dies,1,,,,,,,,,epoxy mold compound,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,
+ectc51909.2023.00135-c-c8,ectc51909.2023.00135-c,underfill,,,UF1 (die to interposer),1,,,,,,,,,,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,
+ectc51909.2023.00135-c-c9,ectc51909.2023.00135-c,underfill,,,UF2 (interposer to substrate),1,,,,,,,,,,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,CTE ~20 ppm/K (p.3 Sec. III.E).

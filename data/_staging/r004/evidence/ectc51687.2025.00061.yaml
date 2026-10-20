@@ -1,0 +1,36 @@
+paper_id: ectc51687.2025.00061
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00061/text.md
+  - references/ectc51687.2025.00061/source.json
+  - references/ectc51687.2025.00061/figures/page_03.png
+  - references/ectc51687.2025.00061/figures/page_04.png
+  - references/ectc51687.2025.00061/figures/page_05.png
+  - references/ectc51687.2025.00061/figures/cand/p03_fig5.png
+  - references/ectc51687.2025.00061/figures/cand/p04_fig11.png
+  - references/ectc51687.2025.00061/figures/cand/p04_fig12.png
+  - references/ectc51687.2025.00061/figures/cand/p05_fig14.png
+  - references/ectc51687.2025.00061/figures/cand/p05_fig15.png
+  - references/ectc51687.2025.00061/figures/cand/p05_fig16.png
+figure_reading_method: >-
+  Page renders of p.3-5; 400 dpi re-crops of Fig. 5 (labels), Fig. 7 (no axis values) and Fig. 12 (step labels).
+entries:
+  - {table: optical_interfaces, row_id: ectc51687.2025.00061-a-o1, field: channels, value: 56, unit: couplers, basis: design_target, locator: "p.1 Abstract", note: "'3 FAUs (56 couplers, 127um pitch)'"}
+  - {table: metrics, row_id: ectc51687.2025.00061-a-m4, field: value, value: 2, unit: um, basis: unspecified, locator: "p.4 Sec. IV.A", note: "uniform die thickness of +/- 2 um"}
+derived:
+  - {table: test_vehicles, row_id: ectc51687.2025.00061-a, field: n_dies, value: 9, formula: "1 FPGA + 2 data converters + 3 EIC + 3 PIC", inputs: "p.2 Sec. II; p.3 Fig. 5"}
+conflicts: []
+excluded:
+  - "Fig. 1 reach/bandwidth comparison reproduced from PIPES program (ref [2])"
+  - "Figs. 2-4 example CPO architectures from refs [2], [11], [12]"
+  - "Plasma trenching facet method of refs [22], [23]; TCB profile optimization of ref [24]; LT solder benefits of refs [25], [26]"
+not_reported:
+  - electrical_interfaces
+  - die sizes and thicknesses (except 50 um capability); substrate size, layers, materials
+  - bump pitch, diameter, height, metallurgy; EMIB pitch value; bonding temperatures, forces, times
+  - underfill, TIM, lid products; BGA pitch and alloy
+  - wavelength, coupling loss, fiber type, alignment method
+  - warpage, stress values (model figures carry no numbers); reliability tests; sample counts for yield loss
+source_quality:
+  - "Model figures (Fig. 6-8) have no numeric axes or colour-bar values."

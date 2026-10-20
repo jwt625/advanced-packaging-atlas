@@ -1,0 +1,45 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51687.2025.00323-a-c1,ectc51687.2025.00323-a,dummy_die,,,"top chip (F2B CoW, face-down)",,17,24,150,,,,,,,,design_target,text,,p.3 Sec. II.A; p.2 Fig. 5,,Test chip with Kelvin and daisy-chain structures for 3 pad configurations; component_type dummy_die inferred. Thickness 0.15 mm.
+ectc51687.2025.00323-a-c2,ectc51687.2025.00323-a,dummy_die,,,"middle wafer (thinned, TSV, backside Cu pads)",1,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 4(c); p.2 Fig. 5,,"F2F WoW bonded to bottom wafer, then thinned; TSVs and backside Cu pads. Thickness not stated."
+ectc51687.2025.00323-a-c3,ectc51687.2025.00323-a,dummy_die,,,bottom wafer,1,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 5,,200 mm wafer (Fig. 6 caption).
+ectc51846.2026.00062-a-c1,ectc51846.2026.00062-a,dummy_die,yes,,"3D die 5x5 mm (front pillars, backside pads)",,5,5,525,,,,,,,,design_target,text,,p.2 Sec. II; p.2 Sec. II.A; p.4 Fig. 8(a),,"~250,000 pillars per die; up to triple stacked on twelve peripheral Si-IF sites. Passive, no TSVs; thickness approximately 525 um."
+ectc51846.2026.00062-a-c2,ectc51846.2026.00062-a,dummy_die,yes,,"3D die 10x10 mm (front pillars, backside pads)",,10,10,525,,,,,,,,design_target,text,,p.2 Sec. II; p.2 Sec. II.A; p.4 Fig. 8(a),,"~1,000,000 pillars per die; double stacked on central Si-IF site."
+ectc51846.2026.00062-a-c3,ectc51846.2026.00062-a,substrate,,,Si-IF base substrate,,,,,,,,,,Si (Silicon-Interconnect Fabric),,stated,text,,p.4 Sec. III.B; p.4 Fig. 8(a),,Central 10x10 mm site plus twelve 5x5 mm peripheral sites.
+ectc51846.2026.00062-b-c1,ectc51846.2026.00062-b,dummy_die,yes,,10x10 mm 3D die,,10,10,525,,,,,,,,design_target,text,,p.3 Sec. III.A; p.2 Sec. II,,
+ectc51846.2026.00062-b-c2,ectc51846.2026.00062-b,substrate,,,blanket copper substrate,,,,,,,,,,Cu (blanket),,stated,text,,p.3 Sec. III.A,,
+ectc51846.2026.00062-c-c1,ectc51846.2026.00062-c,dummy_die,yes,,2D die (front pads + pillars),1,2,2,525,,,,,,,,design_target,mixed,,p.3 Sec. II.B; p.3 Fig. 4,,21 probe-able daisy chains of 90 pillars.
+ectc51846.2026.00062-c-c2,ectc51846.2026.00062-c,dummy_die,yes,,3D die (pads + pillars both sides),1,3,3,525,,,,,,,,design_target,mixed,,p.3 Sec. II.B; p.3 Fig. 4; p.5 Sec. IV.A,,33 probe-able daisy chains of 140 pillars; backside probe pads 60x60 um.
+ectc51846.2026.00062-c-c3,ectc51846.2026.00062-c,substrate,,,Si-IF base substrate,,,,525,,,,,,Si (Silicon-Interconnect Fabric),,design_target,schematic,,p.3 Fig. 4; p.3 Sec. II.B,,Probe pads 60x60 um.
+eptc62800.2024.10909872-a-c1,eptc62800.2024.10909872-a,hbm,,,HBM,12,,,,,,,,,,,design_target,schematic,,p.1 Sec. 2-1; p.1 Fig. 1,,Real or dummy not stated.
+eptc62800.2024.10909872-a-c2,eptc62800.2024.10909872-a,logic_soc,,,Logic chip,2,,,,,,,,,,,design_target,schematic,,p.1 Sec. 2-1; p.1 Fig. 1,,
+eptc62800.2024.10909872-a-c3,eptc62800.2024.10909872-a,unspecified,,,Chiplet,2,,,,,,,,,,,design_target,schematic,,p.1 Sec. 2-1; p.1 Fig. 1,,Chiplet function not stated; placed at the two short ends of the floor plan.
+eptc62800.2024.10909872-a-c4,eptc62800.2024.10909872-a,interposer,,,6-layer RDL interposer (4.3x reticle),1,51,68,,,,,,,,,design_target,text,,p.1 Sec. 1; p.1 Sec. 2,,Size from the 4.3x reticle (51x68 mm2) figure in Sec. 1.
+eptc62800.2024.10909872-a-c5,eptc62800.2024.10909872-a,mold,,,mold,,,,,,,,,,,,stated,text,,p.2 Sec. 2-2; p.2 Fig. 2,,Mold compound not named.
+eptc62800.2024.10909872-a-c6,eptc62800.2024.10909872-a,other,,,organic carrier,1,,,,,,,,,organic carrier,,stated,text,,p.2 Sec. 2-2; p.3 Sec. 3-2-2,,Temporary carrier; absent in final Fig. 2 panel. CTE/thickness not given.
+eptc62800.2024.10909872-b-c1,eptc62800.2024.10909872-b,other,,,organic carrier,1,,,,,,,,,organic carrier,,stated,text,,p.3 Sec. 3-2-2,,Carrier selected after Table 1 study; type not named.
+ectc51529.2024.00258-a-c1,ectc51529.2024.00258-a,other,,,12-inch SOI wafer (device wafer),1,,,,,,,,,SOI: 75 nm Si on 2000 A BOX,,design_target,text,,p.2 Sec. II,,
+ectc51529.2024.00258-a-c2,ectc51529.2024.00258-a,other,,,Si carrier wafer,1,,,,,,,,,Si with pre-deposited oxide,,stated,text,,p.2 Sec. II; p.2 Fig. 2,,
+ectc51846.2026.00227-a-c1,ectc51846.2026.00227-a,logic_soc,,,top die (full-thickness logic type die),1,6.4,3.7,775,,,,,,Si,,design_target,text,,p.3 Sec. II.A,x_mm:approx;y_mm:approx,Whether functional or daisy-chain not stated.
+ectc51846.2026.00227-a-c2,ectc51846.2026.00227-a,interposer,,,thin Si interposer (interposer die),1,,,100,,,,,,Si,,design_target,text,,p.3 Sec. II.A; p.5 Fig. 16(b),,Diced slightly larger than top die (by 2 mm) for underfill dispensing; TSV labelled in Fig. 16(b).
+ectc51846.2026.00227-a-c3,ectc51846.2026.00227-a,substrate,,,organic laminate substrate with pre-tinned solder,1,21,21,800,,,,,,,,design_target,text,,p.3 Sec. II.A,,Thickness stated 0.8 mm. Layer count not given.
+ectc51846.2026.00227-a-c4,ectc51846.2026.00227-a,underfill,,,underfill (product not stated),,,,,,,,,,,,stated,mixed,,p.3 Sec. II.A; p.5 Fig. 16(a),,Underfill fillet labelled in cross-section.
+ectc51846.2026.00227-b-c1,ectc51846.2026.00227-b,other,,,top die with Cu/Ni/Cu/SnAg microbumps (short-loop bumping wafer),1,,,,,,,,,,,stated,text,,p.3 Sec. II.A,,Die size not given.
+ectc51846.2026.00227-b-c2,ectc51846.2026.00227-b,other,,,bottom die with Cu/Ni/Cu pads (short-loop bumping wafer),1,,,,,,,,,,,stated,text,,p.3 Sec. II.A,,Die size not given.
+ectc51529.2024.00087-a-c1,ectc51529.2024.00087-a,substrate,,,organic substrate panel with blanket dielectric,1,510,515,,,,,,,,,design_target,text,,p.1 Sec. II; p.2 Sec. III.A,,
+ectc51529.2024.00087-b-c1,ectc51529.2024.00087-b,substrate,,,substrate panel with dielectric layers and Cu vias,1,510,515,,,,,,,,,design_target,text,,p.4 Sec. III.D,,
+ectc51529.2024.00087-b-c2,ectc51529.2024.00087-b,bridge,,yes,embedded bridge dies (rectangular features in panel photo),,,,,,,,,,,,stated,mixed,,p.4 Sec. III.D; p.4 Fig. 7(a),,"Count, size and material not stated."
+tcpmt.2026.3650893-a-c1,tcpmt.2026.3650893-a,dummy_die,yes,,top die with through-holes,1,5,5,,,,,,,silicon,,design_target,text,material:schematic,p.2 Sec. II.A; p.2 Fig. 3(a),,140 um pitch Cu I/Os; 165 um pitch through-holes.
+tcpmt.2026.3650893-a-c2,tcpmt.2026.3650893-a,dummy_die,yes,,bottom substrate,1,10,10,,,,,,,silicon,,design_target,text,material:schematic,p.2 Sec. II.A; p.2 Fig. 3(a),,
+tcpmt.2026.3650893-a-c3,tcpmt.2026.3650893-a,underfill,,,vapor-phase MOF underfill,,,,,,,,,,ZIF-8 MOF (from ALD ZnO),,stated,text,,p.2 Sec. II.B; p.3 Sec. III.C,,Shear tested before/after MOF underfill (Fig. 8); MOF recipe for this TV not stated.
+tcpmt.2026.3650893-b-c1,tcpmt.2026.3650893-b,dummy_die,yes,,die without through-holes,,,,,,,,,,,,stated,text,,p.2 Sec. II.C,,
+tcpmt.2026.3650893-c-c1,tcpmt.2026.3650893-c,dummy_die,yes,,top die (multipitch),1,2,2,,,,,,,silicon,,design_target,text,material:figure_image,p.2 Sec. III.A; p.2 Fig. 5(a); p.3 Fig. 7(b),,Daisy chains and Kelvin structures; electrical readout pads.
+tcpmt.2026.3650893-c-c2,tcpmt.2026.3650893-c,dummy_die,yes,,bottom substrate,1,,,,,,,,,silicon with SiO2,,measured,figure_image,,p.3 Fig. 7(c),,Size not stated.
+tcpmt.2026.3650893-c-c3,tcpmt.2026.3650893-c,underfill,,,vapor-phase MOF underfill,,,,,,,,,,ZIF-8 MOF (ALD ZnO seed + 2-methylimidazole conversion),,stated,text,,p.2 Sec. II.B; p.2 Sec. III.A,,7 supercycles fill the 1 um die-to-substrate gap.
+ectc51529.2024.00321-a-c1,ectc51529.2024.00321-a,dummy_die,yes,yes,dummy Si chips,729,,,,,,,,,Si,,design_target,text,,p.1 Sec. II.A; p.3 Sec. III.C; p.3 Fig. 7,,9x9 shots; Si/EMC volume ratio 27.8%. Chip size not stated.
+ectc51529.2024.00321-a-c2,ectc51529.2024.00321-a,die_attach_film,,,DAF,,,,,,,,,,,,stated,text,,p.1 Sec. II.A,,
+ectc51529.2024.00321-a-c3,ectc51529.2024.00321-a,mold,,,liquid type EMC (compression molded),,,,,,,,,,EMC liquid type,,stated,text,,p.4 Sec. III.E; p.3 Sec. III.D,,"Table I: E 15.0 GPa, alpha1 1.60e-5/K, alpha2 4.80e-5/K (simulation inputs)."
+ectc51529.2024.00321-a-c4,ectc51529.2024.00321-a,other,,,glass carrier (Glass C),,,,,,,,,,Glass C,,design_target,text,,p.4 Sec. III.E; p.2 Fig. 4,,"Temporary carrier with releasable bonding layer; CTE 8.60e-6/K, E 71.6 GPa."
+ectc51529.2024.00321-g-c1,ectc51529.2024.00321-g,mold,,,EMC liquid type (sim),,,,,,,,,,liquid type EMC,,design_target,table,,p.3 Table I,,"E 15.0 GPa; alpha1 1.60e-5, alpha2 4.80e-5 /K."
+ectc51529.2024.00321-g-c2,ectc51529.2024.00321-g,mold,,,EMC granule type 1 (sim),,,,,,,,,,granule type 1 EMC,,design_target,table,,p.3 Table I,,"E 18.4 GPa; alpha1 9.00e-6, alpha2 4.20e-5 /K."
+ectc51529.2024.00321-g-c3,ectc51529.2024.00321-g,mold,,,EMC granule type 2 (sim),,,,,,,,,,granule type 2 EMC,,design_target,table,,p.3 Table I,,"E 15.2 GPa; alpha1 9.00e-6, alpha2 5.10e-5 /K."
+ectc51529.2024.00321-g-c4,ectc51529.2024.00321-g,mold,,,EMC film type (sim),,,,,,,,,,film type EMC,,design_target,table,,p.3 Table I,,"E 15.1 GPa; alpha1 6.00e-6, alpha2 5.00e-5 /K."

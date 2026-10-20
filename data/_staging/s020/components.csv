@@ -1,0 +1,50 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+icep58572.2023.10129695-d-c1,icep58572.2023.10129695-d,other,,,8 inch Si wafer (RDL carrier),1,,,,,,,,,Si,,stated,text,,p.2 Sec. III; p.2 Fig. 3,,
+ectc51846.2026.00016-a-c1,ectc51846.2026.00016-a,logic_soc,yes,,xPU (compute) representative chiplet,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. III; p.3 Sec. III; p.2 Fig. 1,,Emulates xPU/HBM/OE interfaces per Sec. II.
+ectc51846.2026.00016-a-c2,ectc51846.2026.00016-a,hbm,yes,,HBM (memory) representative chiplet,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. III; p.3 Sec. III; p.2 Fig. 1,,Emulates xPU/HBM/OE interfaces per Sec. II.
+ectc51846.2026.00016-a-c3,ectc51846.2026.00016-a,eic,yes,,"OE EIC (driver/TIA), flip-chip above embedded PIC",,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. III; p.3 Sec. III; p.2 Fig. 1,,Emulates xPU/HBM/OE interfaces per Sec. II.
+ectc51846.2026.00016-a-c4,ectc51846.2026.00016-a,pic,,yes,"PIC with edge couplers, embedded in molded interposer",,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. III; p.3 Sec. III; p.2 Fig. 1,,
+ectc51846.2026.00016-a-c5,ectc51846.2026.00016-a,bridge,,yes,"fine-pitch interconnect Si bridge, 4 RDL layers, TSVs",,,,,,,,,,Si,,stated,text,,p.2 Sec. II; p.2 Sec. III; p.3 Sec. III; p.2 Fig. 1,,
+ectc51846.2026.00016-a-c6,ectc51846.2026.00016-a,interposer,,,RDL-first molded interposer,,79,52,,,,,,,,,design_target,text,,p.2 Sec. III; p.2 Fig. 2,,
+ectc51846.2026.00016-a-c7,ectc51846.2026.00016-a,mold,,,wafer-level mold (interposer body),,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. III; p.3 Sec. III; p.2 Fig. 1,,
+ectc51846.2026.00016-a-c8,ectc51846.2026.00016-a,substrate,,,organic substrate,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. III; p.3 Sec. III; p.2 Fig. 1,,
+ectc51846.2026.00016-a-c9,ectc51846.2026.00016-a,underfill,,,underfill under top chiplets,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. III; p.3 Sec. III; p.2 Fig. 1,,
+ectc51846.2026.00016-a-c10,ectc51846.2026.00016-a,fiber_array,,,fiber attach unit (FAU) at PIC edge,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. III; p.3 Sec. III; p.2 Fig. 1,,
+ectc51846.2026.00016-d-c1,ectc51846.2026.00016-d,stiffener,,,stainless-steel stiffener (modelled),,,,,,,,,,stainless steel,,simulated,text,,p.4 Sec. V; p.4 Fig. 6(b),,Dimensions not stated.
+ectc51846.2026.00016-d-c2,ectc51846.2026.00016-d,tim,,,TIM (assumed in thermal model),,,,150,,,,,,"TIM, k ~5.5 W/m-K",,design_target,text,,p.5 Sec. V,thickness_um:approx,Assumed model input.
+ectc51846.2026.00016-d-c3,ectc51846.2026.00016-d,heat_spreader,,,thin vapor chamber heat spreader,,248,258,,,,,,,equivalent in-plane k of several thousand W/m-K (model),,design_target,text,,p.5 Sec. V; p.5 Fig. 8,,
+ectc51846.2026.00016-d-c4,ectc51846.2026.00016-d,other,,,customized Cu air-cooled heat sink with four 120x120 mm fans,,,,,,,,,,Cu,,design_target,text,,p.5 Sec. V; p.5 Fig. 8,,
+ectc51846.2026.00016-d-c5,ectc51846.2026.00016-d,pcb,,,evaluation board,,,,,,,,,,,,stated,schematic,,p.5 Fig. 8; p.5 Sec. V,,
+ectc51846.2026.00016-e-c1,ectc51846.2026.00016-e,pic,,,PIC with edge couplers,,,,,,,,,,,,stated,text,,p.5 Sec. VI,,
+ectc51846.2026.00016-e-c2,ectc51846.2026.00016-e,fiber_array,,,fiber attach unit (FA),,,,,,,,,,,,stated,mixed,,p.5 Sec. VI; p.6 Fig. 10,,
+ectc51846.2026.00016-e-c3,ectc51846.2026.00016-e,adhesive,,,"UV-curable adhesive, refractive index 1.38-1.5",,,,,,,,,,UV-curable adhesive,,stated,text,,p.5 Sec. VI; p.6 Fig. 10,,
+ectc51846.2026.00016-f-c1,ectc51846.2026.00016-f,lens,,,"microlens at edge-coupler facet, ROC 300 um",1,,,,,,,,,,,design_target,text,,p.6 Sec. VI; p.6 Fig. 11,,Attach adhesive: reflow-compatible high-temperature adhesive proposed.
+ectc51846.2026.00016-f-c2,ectc51846.2026.00016-f,lens,,,matching fiber-side lens,1,,,,,,,,,,,stated,text,,p.6 Sec. VI; p.6 Fig. 11,,
+ectc51846.2026.00016-f-c3,ectc51846.2026.00016-f,pic,,,Silicon EC (edge coupler) chip,,,,,,,,,,,,stated,schematic,,p.6 Fig. 11,,
+ectc51909.2023.00179-a-c1,ectc51909.2023.00179-a,dram,,,HBM DRAM core chips (8Hi),8,,,58,,,,,,Si,,design_target,caption,material:stated,p.2 Fig. 1; p.1 Abstract,,58 um is the Fig. 1 equal-thickness comparison case; actual device chip thickness not otherwise stated. x/y not reported.
+ectc51909.2023.00179-a-c2,ectc51909.2023.00179-a,base_die,,,HBM base wafer (base die),,,,,,,,,,,,stated,text,,p.2 Sec. II.C,,Base wafer carries solder; anneal limited below 200 C to limit its IMC growth and DRAM refresh degradation.
+ectc51909.2023.00179-a-c3,ectc51909.2023.00179-a,mold,,,low CTE EMC (proxy SiP package),,,,,,,,,,low CTE epoxy molding compound,,stated,text,,p.4 Sec. II.E; p.4 Fig. 11,,Used in proxy package for SiP; avoids delamination at EMC/chip triple point. Product and CTE not given.
+ectc51909.2023.00179-b-c1,ectc51909.2023.00179-b,dram,,,HBM DRAM core chips (8Hi),8,,,58,,,,,,,,design_target,caption,,p.2 Fig. 1,,Equal 58 um chip thickness assumed in Fig. 1 comparison.
+ectc51909.2023.00179-b-c2,ectc51909.2023.00179-b,underfill,,,molded underfill (MR-MUF),,,,,,,,,,,,stated,text,,p.4 Sec. II.E; p.4 Fig. 12,,Material and thermal conductivity not given for this TV.
+ectc51909.2023.00151-a-c1,ectc51909.2023.00151-a,base_die,,,Base (Logic) chip,1,10.8,9.8,,,,,,,,,design_target,text,,p.2 Sec. II.B; p.2 Fig. 3,,Bonded as base logic wafer; thickness not reported.
+ectc51909.2023.00151-a-c2,ectc51909.2023.00151-a,dram,,,Core (Memory) chips,7,10.5,9.5,,,,,,,,,design_target,text,count:schematic,p.2 Sec. II.B; p.2 Fig. 3,,Thickness not reported.
+ectc51909.2023.00151-a-c3,ectc51909.2023.00151-a,dram,,,Top (Memory) chip (thick),1,10.5,9.5,,,,,,,,,design_target,text,count:schematic,p.2 Sec. II.B; p.2 Fig. 3; p.2 Sec. III.A,,Described as thick top memory chip; thickness not given.
+ectc51909.2023.00151-a-c4,ectc51909.2023.00151-a,underfill,,,"MUF (molded underfill, LMC C based)",,,,,,,,,,"liquid epoxy molding compound LMC C based; filler 77%, max 3 um; SRA -20%, LMC resin +20%",,stated,text,,p.1 Sec. II.A; p.2 Sec. II.A,,"Optimized MUF: CTE a1 18 ppm/C, modulus 11 GPa."
+ectc51909.2023.00151-b-c1,ectc51909.2023.00151-b,hbm,,,MR-MUF 8Hi HBM,1,,,,,,,,,,,stated,text,,p.4 Sec. III.C,,
+ectc51909.2023.00151-b-c2,ectc51909.2023.00151-b,interposer,,,Si interposer,,,,,,,,,,Si,,stated,text,,p.4 Sec. III.C,,
+ectc51909.2023.00151-b-c3,ectc51909.2023.00151-b,substrate,,,organic substrate,,,,,,,,,,,,stated,text,,p.4 Sec. III.C,,
+ectc51909.2023.00151-c-c1,ectc51909.2023.00151-c,dram,,,memory chips (8Hi),8,,,,,,,,,,,stated,text,,p.4 Sec. III.C,,
+ectc51909.2023.00151-c-c2,ectc51909.2023.00151-c,underfill,,,non-conductive film (NCF),,,,,,,,,,,,stated,text,,p.1 Sec. I,,
+ectc51909.2023.00266-a-c1,ectc51909.2023.00266-a,logic_soc,,,Monolithic SoC,1,,,,,,,60,,,,design_target,text,,p.2 Sec. II,gap_um:ge,"gap_um = min die-to-die spacing (design); 60.9 um measured after mold (Fig. 15, metrics). Die size not given."
+ectc51909.2023.00266-a-c2,ectc51909.2023.00266-a,dummy_die,,,Structural silicon die 2x8 mm,,2,8,,,,,,,silicon,,design_target,text,,p.2 Sec. II,,8 structural Si dies in total across two sizes; count per size not given.
+ectc51909.2023.00266-a-c3,ectc51909.2023.00266-a,dummy_die,,,Structural silicon die 7x3 mm,,7,3,,,,,,,silicon,,design_target,text,,p.2 Sec. II,,8 structural Si dies in total across two sizes; count per size not given.
+ectc51909.2023.00266-a-c4,ectc51909.2023.00266-a,mold,,no,"Compression mold compound (EMC), 6-sided die protection",,,,,,,,,,mold compound (EMC),,stated,text,,p.2 Sec. II; p.5 Sec. V,,Product and thickness not given.
+ectc51909.2023.00266-a-c5,ectc51909.2023.00266-a,underfill,,,Board-level underfill for BLR,,,,,,,,,,,,stated,text,,p.4 Sec. IV,,Material not given.
+ectc51687.2025.00051-a-c1,ectc51687.2025.00051-a,bridge,,yes,EMIB-T TSV bridge die,3,,,,,,,,,silicon,,design_target,text,,p.4 Sec. IV; p.4 Fig. 5,,Thin TSV bridge with solder joints and underfill to cavity pads (Sec. III.C). Size and thickness not given.
+ectc51687.2025.00051-a-c2,ectc51687.2025.00051-a,substrate,,,HDI package substrate with bridge cavities,,77,56,,,,,,,,,design_target,text,,p.4 Sec. IV; p.3 Fig. 4,,Package form factor 77x56 mm; substrate stack and core not given.
+ectc51687.2025.00051-a-c3,ectc51687.2025.00051-a,underfill,,,Underfill between TSV bridge die back side and substrate cavity,,,,,,,,,,,,stated,text,,p.4 Sec. III.C,,Material not given.
+ectc51687.2025.00051-a-c4,ectc51687.2025.00051-a,logic_soc,,,"Top dies (Die 1, Die 2 in cross-section)",,,,,,,,,,,,stated,figure_image,,p.4 Fig. 5,,"Die type, count and size not given; total Si ~2x reticle."
+ectc51687.2025.00051-b-c1,ectc51687.2025.00051-b,bridge,,yes,EMIB (Embedded Multi-die Interconnect Bridge) Si bridge,,,,,,,,,,silicon,,stated,schematic,,p.2 Fig. 3; p.4 Fig. 5,,Placed into cavity of HDI build-up substrate; no TSV.
+ectc51687.2025.00051-b-c2,ectc51687.2025.00051-b,substrate,,,HDI build-up substrate with cavity,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+ectc51687.2025.00051-b-c3,ectc51687.2025.00051-b,logic_soc,,,"Top dies (Die 1, Die 2 in cross-section)",,,,,,,,,,,,stated,figure_image,,p.4 Fig. 5,,Die type and size not given.
+ectc51687.2025.00051-c-c1,ectc51687.2025.00051-c,bridge,,yes,EMIB-T TSV bridge die,14,,,,,,,,,silicon,,stated,schematic,,p.3 Fig. 4,,

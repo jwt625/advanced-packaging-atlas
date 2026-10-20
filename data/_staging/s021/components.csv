@@ -1,0 +1,61 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+eptc59621.2023.10457670-a-c1,eptc59621.2023.10457670-a,interposer,,,Through Si interposer (TSI) wafer,1,,,,,,,,,Si,,design_target,text,,p.1 TSI Process Fabrication,,300 mm wafer; thinned by grinding to reveal TSVs; final thickness not given.
+eptc59621.2023.10457670-a-c2,eptc59621.2023.10457670-a,other,,,Si substrate carrier wafer (temporary bond),,,,,,,,,,Si,,stated,text,,p.1 TSI Process Fabrication; p.2 Fig. 1,,Temporary bonding material not given.
+eptc59621.2023.10457670-b-c1,eptc59621.2023.10457670-b,interposer,,,BEOL-only Si wafer (no TSV),,,,,,,,,,Si,,stated,text,,p.3 text; p.3 Fig. 6,,
+ectc51909.2023.00252-a-c1,ectc51909.2023.00252-a,other,,,"LNA die (bottom die, RF SOI)",1,0.985,0.75,,,,,,130nm 8SW RF SOI,,GlobalFoundries,design_target,mixed,,p.1 Abstract; p.1 Sec. II; p.2 Fig. 1,,LNA for UMTS downlink at 2100 MHz; inductors face PCB side. Thickness not stated.
+ectc51909.2023.00252-a-c2,ectc51909.2023.00252-a,other,,,BAW duplexer die (top die),1,1.175,0.525,,,,,,,,Qorvo,design_target,mixed,,p.1 Abstract; p.1 Sec. II; p.2 Fig. 1,,"UMTS IMT duplexer: uplink 1920-1980 MHz, downlink 2110-2170 MHz. Attached face-to-back on LNA backside."
+ectc51909.2023.00252-a-c3,ectc51909.2023.00252-a,mold,,,mold compound,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 3; p.2 Fig. 4,,Product not stated.
+ectc51909.2023.00252-b-c1,ectc51909.2023.00252-b,other,,,"LNA die (bottom die, RF SOI)",1,0.985,0.75,,,,,,130nm 8SW RF SOI,,GlobalFoundries,design_target,mixed,,p.1 Abstract; p.1 Sec. II; p.2 Fig. 1,,LNA for UMTS downlink at 2100 MHz; inductors face PCB side. Thickness not stated.
+ectc51909.2023.00252-b-c2,ectc51909.2023.00252-b,other,,,BAW duplexer die (top die),1,1.175,0.525,,,,,,,,Qorvo,design_target,mixed,,p.1 Abstract; p.1 Sec. II; p.2 Fig. 1,,"UMTS IMT duplexer: uplink 1920-1980 MHz, downlink 2110-2170 MHz. Attached face-to-back on LNA backside."
+ectc51909.2023.00252-b-c3,ectc51909.2023.00252-b,mold,,,mold compound,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 3; p.2 Fig. 4,,Product not stated.
+eptc67330.2025.11392593-a-c1,eptc67330.2025.11392593-a,asic,,,NPU,3,,,,,,,,,,,design_target,text,,p.2 Sec. II.A; p.2 Fig. 1(b),,Neural processing unit dies; flip-chip bonded.
+eptc67330.2025.11392593-a-c2,eptc67330.2025.11392593-a,hbm,,,HBM stack,6,,,,,,,,,,,design_target,text,,p.1 Abstract; p.2 Fig. 1(b),,HBM generation not stated.
+eptc67330.2025.11392593-a-c3,eptc67330.2025.11392593-a,bridge,,yes,"Si bridge die, NPU-to-HBM (73 um bump pitch)",6,,,,,,,,,silicon,,design_target,schematic,,p.2 Fig. 1(b); p.3 Sec. III.A,,Count from six 'Bridge die' labels in Fig. 1(b). Bridge size not given.
+eptc67330.2025.11392593-a-c4,eptc67330.2025.11392593-a,bridge,,yes,"Si bridge die, NPU-to-NPU (45 um UCIe bump pitch)",2,,,,,,,,,silicon,,design_target,schematic,,p.2 Fig. 1(b); p.3 Sec. III.A,,Count from two unlabeled shaded rectangles at NPU-NPU boundaries in Fig. 1(b); also seen in SAT Fig. 4.
+eptc67330.2025.11392593-a-c5,eptc67330.2025.11392593-a,interposer,,,fan-out embedded bridge die interposer,1,49,49,,,,,,,,,design_target,text,,p.2 Sec. II.A,,
+eptc67330.2025.11392593-a-c6,eptc67330.2025.11392593-a,die_attach_film,,,DAF (bridge die bonding),,,,,,,,,,,,stated,text,,p.3 Sec. IV.A,,Product not stated.
+eptc67330.2025.11392593-a-c7,eptc67330.2025.11392593-a,mold,,no,Mold 1 (interposer molding compound),,,,,,,,,,molding compound,,stated,mixed,,p.2 Sec. II.B; p.3 Fig. 2(d),,Product not stated.
+eptc67330.2025.11392593-a-c8,eptc67330.2025.11392593-a,mold,,,"molded underfill (MUF), EMC",,,,,,,,,,EMC,,stated,text,,p.4 Sec. IV.C,,Compression molding; product not stated.
+eptc67330.2025.11392593-a-c9,eptc67330.2025.11392593-a,substrate,,,package substrate,1,,,,,,,,,,,stated,mixed,,p.2 Sec. II.B; p.2 Fig. 1(a),,Size and layer count not stated.
+eptc67330.2025.11392593-b-c1,eptc67330.2025.11392593-b,logic_soc,,,SoC dies,10,,,,,,,,,,,design_target,text,,p.4 Sec. V.A; p.4 Fig. 7(b),,Per 300x300 mm panel.
+eptc67330.2025.11392593-b-c2,eptc67330.2025.11392593-b,bridge,,yes,Si bridge die,,,,,,,,,,silicon,,stated,text,,p.4 Sec. V.A,,
+eptc67330.2025.11392593-b-c3,eptc67330.2025.11392593-b,mold,,,MUF,,,,,,,,,,,,stated,text,,p.4 Sec. V.A,,
+ectc51909.2023.00048-a-c1,ectc51909.2023.00048-a,interposer,,,Si photonic (active) interposer,,,,100,,,,,AIM Photonics low-loss Si photonics process (modified base MPW),Si,,design_target,text,,p.1 Abstract; p.2 Sec. I; p.3 Sec. II.B,thickness_um:approx,Thinned to approximately 100 um to reveal TSVs.
+ectc51909.2023.00048-a-c2,ectc51909.2023.00048-a,pic,,yes,"Si photonics wafer layers (1 Si + 2 SiN waveguide levels, PDs, modulators, 2 Cu routing levels)",,,,,,,,,,,,stated,text,,p.3 Sec. II.B,,Oxide bonded to interposer wafer; SOI substrate removed.
+ectc51909.2023.00048-a-c3,ectc51909.2023.00048-a,eic,,,EIC (flip-chip on interposer top),,,,,,,,,,,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 2(c); p.3 Sec. II.B,,Example attach shown; die size not stated.
+ectc51909.2023.00048-a-c4,ectc51909.2023.00048-a,laser,,,III-V laser in interposer trench,,,,,,,,,,,,stated,text,,p.1 Abstract; p.3 Sec. II.C,,
+ectc51909.2023.00048-a-c5,ectc51909.2023.00048-a,fiber_array,,,edge-coupled fiber array,,,,,,,,,,,,stated,mixed,,p.1 Abstract; p.2 Fig. 2(b),,PDK interface; no attach results reported.
+ectc51909.2023.00048-a-c6,ectc51909.2023.00048-a,pcb,,,PCB (BGA attach),,,,,,,,,,,,stated,mixed,,p.3 Sec. II.B; p.2 Fig. 2(b),,
+ectc51909.2023.00048-b-c1,ectc51909.2023.00048-b,laser,,,DFB laser (III-V),1,,,,,,,,,,,stated,mixed,,p.5 Sec. III.C; p.6 Fig. 8(b),,
+ectc51687.2025.00131-a-c1,ectc51687.2025.00131-a,logic_soc,yes,,SoC thermal test die (heaters + 5 Kelvin RTDs),4,13.0,25.9,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.2 Fig. 2,,RTDs at 4 corners and center. Backside is the coolant-wetted surface; micropillars on backside per flow (Fig. 3a).
+ectc51687.2025.00131-a-c2,ectc51687.2025.00131-a,hbm,yes,,HBM thermal test die,8,11.0,11.0,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.2 Fig. 2,,
+ectc51687.2025.00131-a-c3,ectc51687.2025.00131-a,interposer,,,CoWoS-R organic interposer,1,,,,,,,,,,,stated,text,,p.2 Sec. II,,Size and RDL layers not given.
+ectc51687.2025.00131-a-c4,ectc51687.2025.00131-a,substrate,,,package substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1(b); p.2 Fig. 3(c),,
+ectc51687.2025.00131-a-c5,ectc51687.2025.00131-a,adhesive,,,elastomeric sealant (1-D line on each SoC periphery),4,,,,,,,,,dispensable polymer-based elastomer adhesive,,stated,text,count:schematic,p.2 Sec. I; p.2 Sec. II; p.2 Fig. 2(b),,Forms leak-proof plenum per SoC; count = one ring per SoC as drawn in Fig. 2(b). Product not named.
+ectc51687.2025.00131-a-c6,ectc51687.2025.00131-a,lid,,,lid with inlet/outlet openings per SoC compartment,1,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Fig. 1(b),,Labelled LID in Fig. 1(b); material not stated.
+ectc51687.2025.00131-a-c7,ectc51687.2025.00131-a,micro_cooler,,,manifold (single inlet and outlet),1,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Fig. 1(b),,Distributes flow uniformly across the 4 cooling compartments; assembled after reflow.
+ectc51687.2025.00131-a-c8,ectc51687.2025.00131-a,tim,,,TIM between HBM and lid,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1(b),,Shown only in schematic; material not stated.
+ectc51687.2025.00131-b-c1,ectc51687.2025.00131-b,logic_soc,yes,,SoC thermal test die with backside micropillar array,4,13.0,25.9,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Sec. III.B,,Micropillar dimensions not reported.
+ectc51687.2025.00131-c-c1,ectc51687.2025.00131-c,logic_soc,yes,,0.8X reticle single test die,1,,,,,,,,,,,stated,mixed,,p.4 Sec. IV.B; p.5 Table I,,
+ectc51687.2025.00131-c-c2,ectc51687.2025.00131-c,lid,,,metal lid,1,,,,,,,,,metal (unspecified),,stated,text,,p.4 Sec. IV.B,,
+ectc51687.2025.00131-c-c3,ectc51687.2025.00131-c,adhesive,,,elastomeric sealant,,,,,,,,,,,,stated,text,,p.4 Sec. IV.B,,
+ectc51529.2024.00207-a-c1,ectc51529.2024.00207-a,asic,,yes,"ASIC device (Si die, package bottom side)",,,,,,,,,,,,stated,mixed,,p.1 Abstract; p.2 Fig. 1; p.3 Table II,,Count not stated. Thickness after bottom mold grinding masked as '~3x-~5x um' (Table II).
+ectc51529.2024.00207-a-c2,ectc51529.2024.00207-a,other,,yes,"passive components (1210, 0402, 0201, 01005), top side",80,,,,,,,,,,,design_target,text,name:table,p.1 Sec. I; p.4 Table III,count:gt,'over than 80pcs'; types from Table III.
+ectc51529.2024.00207-a-c3,ectc51529.2024.00207-a,substrate,,,3-layer ETS (embedded trace substrate),1,,,85,,,,,,ETS; ENIG pad finish,,design_target,text,,p.1 Abstract; p.1 Sec. I; p.4 Sec. III,,"Ultra-thin 3L, total height 85 um."
+ectc51529.2024.00207-a-c4,ectc51529.2024.00207-a,mold,,,top side molding EMC (MUF),1,,,,,,,,,EMC (product not stated),,stated,mixed,,p.2 Fig. 1; p.3 Sec. III,,
+ectc51529.2024.00207-a-c5,ectc51529.2024.00207-a,mold,,,bottom side molding EMC (with TMV),1,,,,,,,,,EMC (product not stated),,stated,mixed,,p.2 Fig. 1; p.4 Sec. IV,,
+ectc51529.2024.00207-b-c1,ectc51529.2024.00207-b,other,,,"passive components (1210, 0402, 0201, 01005)",,,,,,,,,,,,stated,table,,p.4 Table III,,
+ectc51529.2024.00207-b-c2,ectc51529.2024.00207-b,substrate,,,3-layer ETS with Cu OSP pads,,,,85,,,,,,ETS; Cu OSP pad finish,,design_target,text,,p.1 Sec. I; p.3 Sec. III; p.3 Fig. 7,,
+ectc51846.2026.00346-a-c1,ectc51846.2026.00346-a,asic,yes,,ASIC test chip (EIC),1,,,,,,,,,,,stated,text,,p.3 Sec. II.A; p.2 Fig. 3,,Test chip with passive daisy chains; size not given.
+ectc51846.2026.00346-a-c2,ectc51846.2026.00346-a,hbm,yes,,HBM test chips,2,,,,,,,,,,,stated,text,,p.3 Sec. II.A; p.2 Fig. 3,,
+ectc51846.2026.00346-a-c3,ectc51846.2026.00346-a,pic,,,PIC interposer (1x reticle) with TDV + open TSV,1,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.3 Sec. II.B,,PIC serves photonic link and passive interposer for EIC and HBM; TDVs formed in PIC fab.
+ectc51846.2026.00346-a-c4,ectc51846.2026.00346-a,other,,,optical glass block (through-mold optical path),1,,,,,,,,,glass (Si/Glass in Fig. 1),,stated,mixed,,p.3 Sec. II.B; p.2 Fig. 1; p.2 Fig. 3,,Over PIC grating region; top exposed by mold grind for FAU attach.
+ectc51846.2026.00346-a-c5,ectc51846.2026.00346-a,substrate,,,organic substrate (HDI),1,,,,,,,,,,,stated,text,,p.3 Sec. II.A; p.4 Sec. III.A,,Layer count and size not given.
+ectc51846.2026.00346-a-c6,ectc51846.2026.00346-a,stiffener,,,stiffener ring,1,,,,,,,,,,,stated,text,,p.3 Sec. II.A; p.3 Sec. II.B,,Placed on substrate to control warpage.
+ectc51846.2026.00346-a-c7,ectc51846.2026.00346-a,mold,,,topside overmold (EMC) on PIC wafer,,,,,,,,,,,,stated,text,,p.3 Sec. II.B; p.3 Fig. 5(b),,Ground to expose top dies and optical block.
+ectc51846.2026.00346-a-c8,ectc51846.2026.00346-a,mold,,,reconstitution overmold (PIC on carrier wafer),,,,,,,,,,,,stated,mixed,,p.3 Sec. II.B; p.3 Fig. 5(a),,
+ectc51846.2026.00346-a-c9,ectc51846.2026.00346-a,underfill,,,"underfill, EIC/HBM to PIC",,,,,,,,,,,,stated,text,,p.3 Sec. II.B,,
+ectc51846.2026.00346-a-c10,ectc51846.2026.00346-a,underfill,,,"underfill, die stack to substrate",,,,,,,,,,,,stated,text,,p.3 Sec. II.B; p.3 Fig. 5(b),,
+ectc51846.2026.00346-a-c11,ectc51846.2026.00346-a,adhesive,,,index-matching optical adhesive (optical epoxy) with dam,,,,,,,,,,index-matching optical epoxy,,stated,text,,p.3 Sec. II.B; p.4 Sec. III.B; p.4 Fig. 9,,Dam structure keeps overflow out of PIC microbump region. Product not named.
+ectc51846.2026.00346-a-c12,ectc51846.2026.00346-a,capacitor,,,die side capacitors,,,,,,,,,,,,stated,schematic,,p.3 Fig. 4,,Rows of capacitors on substrate drawn in top view; count not stated.
+ectc51909.2023.00008-a-c1,ectc51909.2023.00008-a,other,yes,,face-to-face bonded wafer pair with daisy-chain test structures,2,,,,,,,,,,,stated,text,,p.3 Sec. IV; p.3 Sec. V,,Chains of various lengths incl. 400k; wafer size and node not stated.

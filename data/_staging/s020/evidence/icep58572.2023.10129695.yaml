@@ -1,0 +1,33 @@
+paper_id: icep58572.2023.10129695
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/icep58572.2023.10129695/text.md
+  - references/icep58572.2023.10129695/source.json
+  - references/icep58572.2023.10129695/figures/page_01.png
+  - references/icep58572.2023.10129695/figures/page_02.png
+  - references/icep58572.2023.10129695/figures/cand/p01_fig1.png
+  - references/icep58572.2023.10129695/figures/cand/p02_fig2.png
+  - references/icep58572.2023.10129695/figures/cand/p02_fig2_2.png
+  - references/icep58572.2023.10129695/figures/cand/p02_fig3.png
+  - references/icep58572.2023.10129695/figures/cand/p02_fig4.png
+figure_reading_method: >-
+  Page renders plus 300 dpi re-crops of Table I, Fig. 2 (B-HAST), Fig. 4 and Fig. 5; candidates for Fig. 1-4 viewed.
+  B-HAST insulation resistance read coarsely off a log axis.
+entries:
+  - {table: stack_layers, row_id: icep58572.2023.10129695-a-L01, field: via_diameter_um, value: 8, unit: um, basis: design_target, locator: "p.1 Fig. 1", note: "label Phi8um"}
+  - {table: metrics, row_id: icep58572.2023.10129695-c-m1, field: pass_criterion, value: "1.0E+6 ohm", basis: stated, locator: "p.2 Fig. 2 (B-HAST)", note: "failure criteria printed in figure"}
+derived: []
+conflicts:
+  - {table: stack_layers, row_id: icep58572.2023.10129695-a-L01, field: properties, values: ["Table I target curing temperature '>180 C'", "text: low curing temperature, thermal cure at 150 C"], locators: ["p.1 Table I", "p.1 Sec. II"], chosen: "150 C cure (process step); Table I cure target not entered", why: "Table entry contradicts the stated low-cure advantage; likely sign typo, left out"}
+excluded:
+  - "Photo PI CTE ca. 50-60 ppm and cure ca. 250 C, epoxy film cure ~150 C and CTE 15-25 ppm, photo SR CTE ca. 40-50 ppm (conventional materials, Table I / Introduction)"
+  - "UV laser difficulty below 20 um SRO and ~6 vias per laser shot (general statements, not this film)"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - film product name; measured Dk/Df/Tg of the developed film (only targets in Table I)
+  - substrates of coupons a-c and e; layer 2/3 thicknesses and via diameter in the RDL
+  - exposure dose, development time, cure time, SAP seed/plating details
+  - warpage values; B-HAST sample counts; adhesion values (qualitative only)
+source_quality:
+  - "Two captions numbered Fig. 2 (SRO test and B-HAST); no candidate for Fig. 5."

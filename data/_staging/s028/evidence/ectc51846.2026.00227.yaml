@@ -1,0 +1,39 @@
+paper_id: ectc51846.2026.00227
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00227/text.md
+  - references/ectc51846.2026.00227/source.json
+  - references/ectc51846.2026.00227/figures/page_03.png
+  - references/ectc51846.2026.00227/figures/page_04.png
+  - references/ectc51846.2026.00227/figures/page_05.png
+  - references/ectc51846.2026.00227/figures/cand/p03_fig3.png
+  - references/ectc51846.2026.00227/figures/cand/p03_fig4.png
+  - references/ectc51846.2026.00227/figures/cand/p03_fig5.png
+  - references/ectc51846.2026.00227/figures/cand/p05_fig12.png
+  - references/ectc51846.2026.00227/figures/cand/p05_fig13.png
+  - references/ectc51846.2026.00227/figures/cand/p05_fig16.png
+figure_reading_method: >-
+  150 dpi page renders and candidate crops. Fig. 4 bump diameter read from SEM label (12 um). Fig. 7 bars read against
+  axis ticks (+/-0.1 wt%). Fig. 12 profile has no numeric axes.
+entries:
+  - {table: interconnects, row_id: ectc51846.2026.00227-b-i1, field: diameter_um, value: 12, unit: um, basis: measured, locator: "p.3 Fig. 4", note: "red SEM dimension label on single reflowed bump"}
+  - {table: metrics, row_id: ectc51846.2026.00227-a-m1, field: value, value: 65, unit: "%", basis: measured, locator: "p.3 Sec. III.A", note: "'about 65% reduction in oxygen species'"}
+derived:
+  - {table: interconnects, row_id: ectc51846.2026.00227-a-i2, field: count, value: 943, formula: "41 x 23 C4 array on laminate", inputs: "p.3 Sec. II.A"}
+  - {table: components, row_id: ectc51846.2026.00227-a-c3, field: thickness_um, value: 800, formula: "0.8 mm x 1000 (unit conversion)", inputs: "p.3 Sec. II.A"}
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00227-a-m5, field: condition, values: ["-40 to 125 C", "-50 to 125 C"], locators: ["p.5 Sec. III.C", "p.1 Abstract"], chosen: "-40 to 125 C", why: "results section describing the test; abstract summary differs"}
+excluded:
+  - "Fig. 1 plasma-assisted fluxless TCB concept reprinted from ref [4]"
+  - "sub-20 um TCB and sub-1 um hybrid bonding pitch trends attributed to refs [7], [14]"
+  - "formic acid, micro-scrub and wet pre-treatment fluxless methods from refs [25]-[36]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - numeric TCB temperature, force, time; AOR time-1 and scanning speed values; plasma power and gas flow
+  - interposer x/y size, TSV dimensions, laminate layer count, underfill product and cure
+  - 25 um TV die sizes, die thickness, bump height, bump count, metal layer thicknesses
+  - electrical resistance or yield; reliability sample count (stated only as 'few'); TC standard and dwell
+source_quality:
+  - "Fig. 16 caption order (a-c north/center/south) differs from panel labels (d) South, (f) North."
+  - "Text cites Fig. 12 for IMC result; the cross-section is Fig. 13."

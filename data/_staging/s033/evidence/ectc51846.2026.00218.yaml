@@ -1,0 +1,47 @@
+paper_id: ectc51846.2026.00218
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00218/text.md
+  - references/ectc51846.2026.00218/source.json
+  - references/ectc51846.2026.00218/figures/cand/p02_fig1.png
+  - references/ectc51846.2026.00218/figures/cand/p03_fig3.png
+  - references/ectc51846.2026.00218/figures/cand/p03_fig4.png
+  - references/ectc51846.2026.00218/figures/cand/p04_fig5.png
+  - references/ectc51846.2026.00218/figures/cand/p04_fig6.png
+  - references/ectc51846.2026.00218/figures/cand/p05_fig8.png
+  - references/ectc51846.2026.00218/figures/cand/p06_fig10.png
+  - references/ectc51846.2026.00218/figures/cand/p06_fig11.png
+  - references/ectc51846.2026.00218/figures/cand/p06_fig12.png
+  - references/ectc51846.2026.00218/figures/cand/p07_fig13.png
+  - references/ectc51846.2026.00218/figures/cand/p07_fig14.png
+  - references/ectc51846.2026.00218/figures/cand/p07_fig15.png
+  - references/ectc51846.2026.00218/figures/cand/p07_fig16.png
+figure_reading_method: >-
+  Candidate crops viewed for Fig. 1, 3, 4, 5, 6, 8, 10-16. Fig. 4(c) overlay values printed on the plot. Fig. 11
+  thickness labels (~6 um SiO2, ~4 um Si) read from SEM. Fig. 12 medians read at 50% cumulative (+/-0.005 ohm).
+  Fig. 6 re-cropped (manual) to drop a line of body text. Table 1 values match text.md.
+entries:
+  - {table: interconnects, row_id: ectc51846.2026.00218-a-i1, field: alignment_um, value: 1.104, unit: um, basis: measured, locator: "p.3 Fig. 4(c)", note: "max of dX 0.899 and dY 1.104 um (|mean|+3 sigma); same value on i1-i4"}
+  - {table: metrics, row_id: ectc51846.2026.00218-b-m1, field: value, value: 0.19, unit: ohm, basis: measured, locator: "p.6 Fig. 12", note: "blue series at 50% about 0.189 ohm"}
+  - {table: metrics, row_id: ectc51846.2026.00218-b-m2, field: value, value: 0.19, unit: ohm, basis: measured, locator: "p.6 Fig. 12", note: "pink series at 50% about 0.191 ohm"}
+derived:
+  - {table: process_steps, row_id: ectc51846.2026.00218-a-s10, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.3 Sec. III.B"}
+  - {table: interconnects, row_id: ectc51846.2026.00218-a-i1, field: anneal_time_min, value: 120, formula: "2 h x 60", inputs: "p.3 Sec. III.B"}
+  - {table: interconnects, row_id: ectc51846.2026.00218-a-i1, field: resistance_mohm, value: 290, formula: "0.29 ohm x 1000 (i2-i4: 0.88, 0.87, 1.1 ohm)", inputs: "p.5 Sec. III.D"}
+conflicts:
+  - {table: interconnects, row_id: ectc51846.2026.00218-a-i1, field: alignment_um, values: ["<1 um (3 sigma)", "dX 0.899 um, dY 1.104 um (|mean|+3 sigma)"], locators: ["p.3 Sec. III.B; p.8 Sec. V", "p.3 Fig. 4(c)"], chosen: 1.104, why: "measured plot annotation over text summary"}
+  - {table: interconnects, row_id: ectc51846.2026.00218-a-i1, field: yield_pct, values: ["over 95% for pitches above 2 um", "5 um: higher than 90%; 3 um: around 90%"], locators: ["p.1 Abstract", "p.5 Sec. III.D"], chosen: "results-section values", why: "result section over abstract; Fig. 8(a) curves reach about 95%"}
+  - {table: stack_layers, row_id: ectc51846.2026.00218-b-L03, field: thickness_um, values: [4, 15], locators: ["p.6 Fig. 11", "p.6 Sec. IV.A"], chosen: 4, why: "SEM label '~4um Si top die' (measured) over stated 15 um thinning target; 15 um kept on component as design target"}
+excluded:
+  - "2 um pitch D2W demonstrated elsewhere (refs [5], [12])"
+  - "~0.6 ohm link resistance for 5 um pitch with simple damascene on earlier in-house wafers (comparison, not this TV)"
+  - "1 um x 6 um HD TSV results of ref [11]"
+  - "TV2 full build (design only; not fabricated)"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - bonding tool name, bonding force/temperature, surface activation and cleaning chemistry
+  - dielectric thicknesses, barrier/seed materials, MZ line width
+  - DC link counts per pitch in total, pitch of the 136k-link DC in the IDGF loop
+  - TOV and HD TSV electrical results (pending)
+source_quality: []

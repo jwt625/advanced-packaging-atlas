@@ -1,0 +1,54 @@
+paper_id: ectc32696.2021.00033
+verified_on: 2026-10-18
+source_files:
+  - references/ectc32696.2021.00033/text.md
+  - references/ectc32696.2021.00033/source.json
+  - references/ectc32696.2021.00033/figures/page_02.png
+  - references/ectc32696.2021.00033/figures/page_03.png
+  - references/ectc32696.2021.00033/figures/page_04.png
+  - references/ectc32696.2021.00033/figures/page_05.png
+figure_reading_method: >-
+  Page renders p.2-p.5 opened; Table I (p.3), Table II and Fig. 8 (p.4) re-rendered from source.pdf at 4-5x zoom in the scratchpad.
+entries:
+  - {table: test_vehicles, row_id: ectc32696.2021.00033-a, field: interposer_x_mm, value: 51, unit: mm, basis: design_target, locator: "p.2 Fig. 3; p.2 Sec. III", note: "InFO size 51x42 mm2"}
+  - {table: interconnects, row_id: ectc32696.2021.00033-a-i1, field: pitch_um, value: 36, unit: um, basis: design_target, locator: "p.2 Fig. 3", note: "D2D IO pitch"}
+  - {table: electrical_interfaces, row_id: ectc32696.2021.00033-f-e1, field: insertion_loss_db, value: 0.09, unit: dB, basis: simulated, locator: "p.4 Fig. 8", note: "S21 read about -0.09 dB at 30 GHz (stagger); via1 about -0.09; via2 about -0.07"}
+  - {table: metrics, row_id: ectc32696.2021.00033-a-m4, field: value, value: 3, unit: x, basis: measured, locator: "p.3 Table I", note: "Exp. warpage at 250 C normalized to TV-1"}
+derived: []
+conflicts:
+  - {table: test_vehicles, row_id: ectc32696.2021.00033-a, field: interposer_area_mm2, values: [2100, 2142], locators: ["p.1 Abstract; p.3 Table I; p.5 Table VI (2100 mm2)", "p.2 Fig. 3 (51x42 mm2 = 2142)"], chosen: 2100, why: "printed area value; 2142 is own arithmetic"}
+  - {table: metrics, row_id: ectc32696.2021.00033-a-m1, field: value, values: ["D2D connection >95% (abstract)", "95% electrical yield in average (Sec. IV.A)"], locators: ["p.1 Abstract", "p.3 Sec. IV.A"], chosen: "95 mean", why: "body text more specific"}
+  - {table: metrics, row_id: ectc32696.2021.00033-a-m9, field: value, values: ["7.3x (Table II)", "7 times (text)"], locators: ["p.4 Table II", "p.3 Sec. IV.C"], chosen: 7.3, why: "table over text"}
+  - {table: metrics, row_id: ectc32696.2021.00033-f-m6, field: value, values: ["4-tier 0.97x vs stagger 0.54x (= 80% higher)", "text: 4-tier 45% higher line strain than stagger (0.78/0.54 = 1.44 matches 3-tier)"], locators: ["p.4 Table V", "p.4 Sec. V.A"], chosen: "table values", why: "table over text; text figure likely refers to 3-tier"}
+  - {table: metrics, row_id: ectc32696.2021.00033-a-m18, field: value, values: ["1.12x ring vs 1.40x lid (Table VI): 20% relative decrease", "text: edge C4 strain decreased 28%"], locators: ["p.5 Table VI", "p.5 Sec. V.B"], chosen: 1.12, why: "table; 28% equals the absolute normalized difference 1.40-1.12"}
+  - {table: test_vehicles, row_id: ectc32696.2021.00033-a, field: notes, values: ["Fig. 9 caption repeats Fig. 8 caption (S11/S21)", "Fig. 9 content is PDN power/ground RDL plane stack"], locators: ["p.4 Fig. 9"], chosen: "content", why: "caption copy error in source"}
+excluded:
+  - "network switch capacity 6.4 to 25.6 Tb/s (market background)"
+  - "InFO_oS previously offered up to 1.5x reticle (prior generation, ref [6])"
+  - "TIM1 thermal resistance concern for lid-type structure (ref [10])"
+  - "ELK CPI advantage of InFO over flip chip (ref [8])"
+  - "MCM 15/15 um and 34 lines/mm entered only as comparison scope text, not as a TV"
+not_reported:
+  - chiplet sizes, thicknesses, process nodes; mold compound and PM dielectric products and thicknesses
+  - RDL Cu thickness, via diameters, via pitch; dielectric layer count
+  - C4 diameter, height, alloy, count; FCB conditions; underfill
+  - absolute warpage values (only normalized), measurement method; absolute DCR/ACR/ACL; absolute chain resistance
+  - substrate layer count; heat spreader material and outer size; reliability sample sizes
+  - optical_interfaces; D2D data rate/energy (no PHY reported)
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: "ectc32696.2021.00033-a-c5", change: "x_mm: '12' -> ''; y_mm: '12' -> ''; notes: 'Table VI 'HS foot width 12x12'; text '12mm width ring' (optimized by modeling). x/y = foot width, not outer size. Material not given.' -> 'HS foot width 12x12 mm (Table VI); text '12mm width ring', optimized by modeling. Outer size and material not given.'", reason: "audit_x1 item 8 (column semantics): x_mm/y_mm held the heat-spreader foot width (Table VI), not component size; interim fix moves it to notes"}
+  - {date: 2026-10-19, source: audit_x1, row_id: "ectc32696.2021.00033-e-c1", change: "x_mm: '10' -> ''; y_mm: '10' -> ''; notes: 'x/y = HS foot width 10x10 mm.' -> 'HS foot width 10x10 mm (Table VI). Outer size not given.'", reason: "audit_x1 item 8 (column semantics): x_mm/y_mm held the heat-spreader foot width (Table VI), not component size; interim fix moves it to notes"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc32696.2021.00033-f02", change: "renumbered from ectc32696.2021.00033-f03 (rank re-ordered)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc32696.2021.00033-f03", change: "added Fig. 5 p.3 top_view_layout (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc32696.2021.00033-f04", change: "added Fig. 7 p.3 xray_csam (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc32696.2021.00033-f05", change: "added Table III p.4 stack_schematic (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc32696.2021.00033-f06", change: "added Fig. 9 p.4 stack_schematic (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc32696.2021.00033-f07", change: "renumbered from ectc32696.2021.00033-f02 (rank re-ordered)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc32696.2021.00033-f08", change: "renumbered from ectc32696.2021.00033-f04 (rank re-ordered)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc32696.2021.00033-f09", change: "renumbered from ectc32696.2021.00033-f05 (rank re-ordered)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc32696.2021.00033-f10", change: "renumbered from ectc32696.2021.00033-f06 (rank re-ordered)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc32696.2021.00033-f11", change: "added Table II p.4 data_table (manual)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc32696.2021.00033-f12", change: "added Fig. 8 p.4 electrical_plot (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc32696.2021.00033-f13", change: "added Table IV p.4 data_table (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc32696.2021.00033-f14", change: "added Table V p.4 data_table (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc32696.2021.00033-f15", change: "added Fig. 6 p.3 electrical_plot (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}

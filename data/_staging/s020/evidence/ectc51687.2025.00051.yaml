@@ -1,0 +1,32 @@
+paper_id: ectc51687.2025.00051
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00051/text.md
+  - references/ectc51687.2025.00051/source.json
+  - references/ectc51687.2025.00051/figures/page_02.png
+  - references/ectc51687.2025.00051/figures/page_03.png
+  - references/ectc51687.2025.00051/figures/page_04.png
+  - references/ectc51687.2025.00051/figures/cand/p02_fig2.png
+  - references/ectc51687.2025.00051/figures/cand/p03_fig4.png
+  - references/ectc51687.2025.00051/figures/cand/p04_fig5.png
+  - references/ectc51687.2025.00051/figures/cand/p04_tablei.png
+figure_reading_method: >-
+  Page renders at 150 dpi; Fig. 3 re-cropped from p.3. Figures are schematics, renders and photos without dimension
+  labels; all numbers come from text and Table I.
+entries:
+  - {table: test_vehicles, row_id: ectc51687.2025.00051-c, field: name, value: "14-Bridge EMIB-T Package TV", unit: "", basis: stated, locator: "p.3 Fig. 4", note: "photo label in step 2 panel"}
+derived: []
+conflicts: []
+excluded:
+  - "Ref [9]: SI and bandwidth density analyses (20 Tb/s/mm) not entered"
+  - "Capability claims without data: UCIe-A data rate scaling to 32 Gbps or higher, HBM4/4e integration (Sec. II); not entered as electrical_interfaces"
+  - "Roadmap values (Fig. 6, Sec. IV): package sizes ~50x50 to ~120x120 mm, ~250x250 mm, >12x reticle, 30+ bridges, 55/45/40/25 um pitch; product examples, no TV data"
+  - "In-flight TVs (HLFF, 30+ bridges, >8X reticle top Si): data expected H2'25, not reported"
+not_reported:
+  - electrical_interfaces, optical_interfaces, stack_layers
+  - TSV diameter, depth, pitch and bridge thickness/size; bridge count of EMIB example
+  - bump type, metallurgy and height; solder joint and underfill materials; cavity pad finish
+  - substrate layer count, core, dielectric; top die types and sizes; HBM count on the TV
+  - reliability sample counts, pass criteria and BHAST bias
+  - PDN resistance or voltage-drop numbers

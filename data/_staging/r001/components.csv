@@ -1,0 +1,29 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc32696.2021.00166-a-c1,ectc32696.2021.00166-a,dummy_die,yes,,"top die (passive, daisy-chain)",,,,,,,,,,,,stated,mixed,,p.5 Fig. 7; p.5 Fig. 8; p.5 Sec. IV.A,,Modular design; assembled die sizes 15 to 190 mm2.
+ectc32696.2021.00166-a-c2,ectc32696.2021.00166-a,base_die,yes,,"base die / bottom wafer (passive, daisy-chain test pads)",,,,,,,,,,,,stated,mixed,,p.5 Fig. 7; p.5 Fig. 8; p.6 Fig. 10,,
+ectc32696.2021.00166-b-c1,ectc32696.2021.00166-b,unspecified,,,top die (Top Die 1-4),4,,,,,,,,Intel 10nm FinFET,,,stated,mixed,,p.5 Sec. IV.B; p.5 Fig. 9,,Node stated for the test chip as a whole; die function not stated.
+ectc32696.2021.00166-b-c2,ectc32696.2021.00166-b,base_die,,,base die,1,,,,,,,,Intel 10nm FinFET,,,stated,mixed,,p.5 Sec. IV.B; p.5 Fig. 9,,Node stated for the test chip as a whole.
+ectc32696.2021.00166-b-c3,ectc32696.2021.00166-b,substrate,,,package,1,,,,,,,,,,,stated,schematic,,p.5 Fig. 9(a),,Illustrative view label only.
+ectc32696.2021.00166-e-c1,ectc32696.2021.00166-e,unspecified,,,"top dies (Circuit 1, Circuit 2)",2,,,,,,,,,,,stated,schematic,,p.4 Fig. 5(a),,
+ectc32696.2021.00166-e-c2,ectc32696.2021.00166-e,interposer,,,passive interposer,1,,,,,,,,,Si,,stated,mixed,material:schematic,p.3 Sec. III.B; p.4 Fig. 5(a),,
+ectc51529.2024.00093-a-c1,ectc51529.2024.00093-a,substrate,,,TGV glass core,,,,300,,,,,,alkali-free glass,,design_target,text,,p.4 Sec. II.C,,
+ectc51529.2024.00093-b-c1,ectc51529.2024.00093-b,substrate,,,TGV glass core,,,,400,,,,,,alkali-free glass,,design_target,text,,p.4 Sec. II.C,,
+ectc51529.2024.00093-c-c1,ectc51529.2024.00093-c,substrate,,,TGV glass core,,,,400,,,,,,alkali-free glass,,design_target,text,,p.4 Sec. II.C,,
+ectc51529.2024.00093-d-c1,ectc51529.2024.00093-d,substrate,,,TGV glass core,,,,400,,,,,,alkali-free glass,,design_target,text,,p.3 Sec. II.B,,
+ectc51529.2024.00093-e-c1,ectc51529.2024.00093-e,substrate,,,TGV glass core,,,,400,,,,,,alkali-free glass,,design_target,text,,p.3 Sec. II.B,,
+ectc51529.2024.00093-f-c1,ectc51529.2024.00093-f,substrate,,,TGV glass core,,,,400,,,,,,alkali-free glass,,design_target,text,,p.3 Sec. II.B,,
+ectc51529.2024.00092-a-c1,ectc51529.2024.00092-a,substrate,,,laser modified glass coupon,1,,,200,,,,,,borosilicate glass,,design_target,text,,p.2 Sec. II.B,,Glass type: text says chemistry optimized for borosilicate glass etching.
+ectc51529.2024.00092-b-c1,ectc51529.2024.00092-b,substrate,,,blanket glass panel,,510,515,400,,,,,,glass,Absolics,design_target,text,,p.4 Sec. III.A; p.3 Sec. II.C; p.5 Acknowledgments,,Absolics supplied glass panels (ack).
+ectc51529.2024.00092-b-c2,ectc51529.2024.00092-b,other,,,proprietary 12-panel carrier,1,,,,,,,,,"Titanium, coated",,stated,text,,p.4 Sec. III.C,,Minimal panel contact points; coating chosen after 24 h bath exposure and ICP-MS.
+ectc32696.2021.00174-a-c1,ectc32696.2021.00174-a,unspecified,,,"single die (Cu studs on passivation openings, face up)",1,,,,,,,,,Si,,stated,text,,p.2 Sec. II; p.3 Sec. III; p.2 Fig. 7,,"Die function, size and thickness not given; target apps PMIC, RF, single die."
+ectc32696.2021.00174-a-c2,ectc32696.2021.00174-a,mold,,,compression mold compound (6-sided die protection),1,,,,,,,,,mold compound,,stated,text,,p.2 Sec. II; p.3 Sec. III; p.4 Sec. III,,Mold compound not named.
+ectc32696.2021.00174-c-c1,ectc32696.2021.00174-c,pcb,,,1 mm JEDEC test board,1,,,,,,,,,,,design_target,text,,p.2 Sec. I,,Board thickness 1 mm stated; shared by all BLR models.
+ectc51529.2024.00049-a-c1,ectc51529.2024.00049-a,logic_soc,,,SoC,4,32,21,,,,,150,,,,design_target,table,gap_um:text,p.2 Fig. 2; p.2 Sec. III,,gap_um = SoC die-to-die (D2D) gap.
+ectc51529.2024.00049-a-c2,ectc51529.2024.00049-a,hbm,,,HBM (HBM3 size in Fig. 2; HBM3/4 in Fig. 1),12,11,11,,,,,,,,,design_target,table,,p.2 Fig. 2; p.2 Fig. 1,,
+ectc51529.2024.00049-a-c3,ectc51529.2024.00049-a,ipd,,,IPD (land-side),248,0.7,0.9,,,,,,,,,design_target,mixed,,p.2 Sec. III; p.2 Fig. 2,,248 IPDs totaling 400 uF (text). DTC generation used not stated.
+ectc51529.2024.00049-a-c4,ectc51529.2024.00049-a,interposer,,,9L RDL interposer (CoW),1,66,68,,,,,,,low Dk dielectric polymer / Cu RDL,,design_target,text,,p.2 Sec. III; p.1 Sec. II,,
+ectc51529.2024.00049-a-c5,ectc51529.2024.00049-a,substrate,,,8-2-8 package substrate (SBT),1,97.3,95,,,,,,,,,design_target,text,,p.2 Sec. III; p.2 Fig. 2,,Fig. 2 table and abstract round to 97x95 mm.
+ectc51529.2024.00049-a-c6,ectc51529.2024.00049-a,stiffener,,,ring,1,,,,,,,,,SUS430,,stated,table,,p.2 Fig. 2; p.2 Sec. III,,
+ectc51529.2024.00049-c-c1,ectc51529.2024.00049-c,ipd,,,IPD,140,,,,,,,,,,,stated,text,,p.4 Sec. VI,,
+ectc51529.2024.00049-d-c1,ectc51529.2024.00049-d,logic_soc,,,SoC,4,,,,,,,,,,,stated,figure_image,,p.2 Fig. 1,,
+ectc51529.2024.00049-d-c2,ectc51529.2024.00049-d,hbm,,,HBM3,8,,,,,,,,,,,stated,figure_image,,p.2 Fig. 1,,

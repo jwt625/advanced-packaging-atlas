@@ -1,0 +1,39 @@
+paper_id: ectc51529.2024.00011
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00011/text.md
+  - references/ectc51529.2024.00011/source.json
+  - references/ectc51529.2024.00011/figures/page_03.png
+  - references/ectc51529.2024.00011/figures/page_04.png
+  - references/ectc51529.2024.00011/figures/page_05.png
+  - references/ectc51529.2024.00011/figures/page_06.png
+figure_reading_method: >-
+  Page renders p.3-6 viewed in full; 300 dpi re-crops of Fig. 10, 12, 16; 450 dpi re-crops of the Fig. 16 warpage
+  chart (values read by pixel scale, +/-0.3 mm), Table 1 and Table 2; candidates p03_fig10, p04_fig12, p05_fig16,
+  p05_fig19 opened. Text layer renders 'um' as 'Pm' on p.3 (20Pm, 42Pm, 35Pm, 7Pm); confirmed as um on the page image.
+entries:
+  - {table: interconnects, row_id: ectc51529.2024.00011-a-i3, field: pitch_um, value: 400, unit: um, basis: design_target, locator: "p.4 Table 1", note: "Package Pin Pitch"}
+  - {table: stack_layers, row_id: ectc51529.2024.00011-a-L04, field: line_um, value: 20, unit: um, basis: design_target, locator: "p.4 Table 1", note: "RDL L/S 20/12 um, 9 um thick"}
+  - {table: metrics, row_id: ectc51529.2024.00011-a-m4, field: value, value: 2.1, unit: mm, basis: measured, locator: "p.5 Fig. 16", note: "w/ structural, 2nd panelization read point"}
+derived: []
+conflicts:
+  - {table: interconnects, row_id: ectc51529.2024.00011-a-i3, field: height_um, values: [35, 25], locators: ["p.3 Sec. II; p.7 Sec. IV", "p.3 Fig. 10"], chosen: 35, why: "text > schematic; Fig. 10 labels the LGA/flag level 0.025 mm"}
+  - {table: metrics, row_id: ectc51529.2024.00011-a-m14, field: n_samples, values: [40, 80], locators: ["p.6 Table 2", "p.5 Sec. III.C; p.6 Sec. IV"], chosen: 40, why: "result table > text; text says 80 units for all tests; Table 2 lists 40 for TC and uHAST, 80 for precon and HTS"}
+  - {table: metrics, row_id: ectc51529.2024.00011-a-m15, field: n_samples, values: [40, 80], locators: ["p.6 Table 2", "p.5 Sec. III.C; p.6 Sec. IV"], chosen: 40, why: "result table > text; text says 80 units for all tests; Table 2 lists 40 for TC and uHAST, 80 for precon and HTS"}
+  - {table: process_steps, row_id: ectc51529.2024.00011-a-s03, field: notes, values: ["70 x 250 mm strips", "75 x 250 mm strips"], locators: ["p.1 Abstract", "p.2 Fig. 2; p.4 Sec. III; p.6 Sec. III.D"], chosen: "75 x 250 mm", why: "body text and figures repeatedly state 75 x 250 mm"}
+  - {table: test_vehicles, row_id: ectc51529.2024.00011-a, field: package_thickness_mm, values: [0.85, 0.849], locators: ["p.4 Table 1", "p.3 Fig. 10"], chosen: 0.85, why: "table > schematic (rounding)"}
+excluded:
+  - "leadframe market CAGR 6.9%, 1.7% 2020 growth, 15.8% post-pandemic rise (market background)"
+  - "traditional QFN process flow, 75x250 mm leadframe strip standard of ref [2], QFN wettable-flank step cut of ref [3]"
+  - "QFN leadframe lead times 4-12 weeks (supply chain background)"
+  - "600 mm FOPLP 6-sided protection results of refs [4,5]"
+not_reported:
+  - die x/y and function (only 8 mm2 area), structural die size, Cu stud diameter
+  - mold compound and SMS products, laminate material, LDI tool, plating conditions, cure/mold conditions
+  - warpage measurement method/temperature and sign convention
+  - board-level reliability data; electrical performance
+  - electrical_interfaces, optical_interfaces
+source_quality:
+  - "Candidates p04_table1 and p06_table2 cover only the table captions; tables re-cropped manually."
+  - "Text layer garbles micro sign as 'P' on p.3."

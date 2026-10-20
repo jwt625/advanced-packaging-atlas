@@ -1,0 +1,49 @@
+paper_id: ectc51846.2026.00416
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00416/text.md
+  - references/ectc51846.2026.00416/source.json
+  - references/ectc51846.2026.00416/figures/page_02.png
+  - references/ectc51846.2026.00416/figures/page_03.png
+  - references/ectc51846.2026.00416/figures/page_04.png
+  - references/ectc51846.2026.00416/figures/page_05.png
+  - references/ectc51846.2026.00416/figures/page_06.png
+  - references/ectc51846.2026.00416/figures/page_07.png
+  - references/ectc51846.2026.00416/figures/cand/p03_fig2.png
+  - references/ectc51846.2026.00416/figures/cand/p03_fig3.png
+  - references/ectc51846.2026.00416/figures/cand/p05_fig12.png
+  - references/ectc51846.2026.00416/figures/cand/p06_fig13.png
+  - references/ectc51846.2026.00416/figures/cand/p07_fig16.png
+figure_reading_method: >-
+  Page renders p.2-7; 300 dpi re-crops of Fig. 3 (4c heating profile), Fig. 4 (RP waveform) and Fig. 6 (plateaus read
+  against 20 um gridlines, +/-3 um). Manual re-crops of Fig. 2, 3, 7, 12, 13, 16 viewed to confirm bboxes.
+  Via count 12 counted on Fig. 16(a)-(c) X-ray images.
+entries:
+  - {table: interconnects, row_id: ectc51846.2026.00416-a-i1, field: count, value: 12, unit: ea, basis: measured, locator: "p.7 Fig. 16", note: "3 rows of 4 vias in each X-ray image"}
+  - {table: process_steps, row_id: ectc51846.2026.00416-a-s14, field: conditions, value: "+1 mA/cm2 x5 (2.5 ms on/off), -2 mA/cm2 x2 (~2 ms)", basis: design_target, locator: "p.3 Fig. 4", note: "read from waveform plot; unit as printed on axis"}
+  - {table: process_steps, row_id: ectc51846.2026.00416-a-s06, field: conditions, value: "ramp 40 to ~100 C by 40 s, hold to 70 s, down to ~60 C at 90 s", basis: design_target, locator: "p.3 Fig. 3 (4c)", note: "stage profile plot"}
+derived:
+  - {table: process_steps, row_id: ectc51846.2026.00416-a-s08, field: time_s, value: 14400, formula: "4 h x 3600", inputs: "p.2 Sec. II.B"}
+conflicts:
+  - {table: components, row_id: ectc51846.2026.00416-a-c2, field: thickness_um, values: [10, 8], locators: ["p.2 Sec. II.A", "p.6 Sec. III.E"], chosen: 10, why: "product thickness as supplied; ~8 um is the authors' cross-section estimate (entered as metric)"}
+  - {table: components, row_id: ectc51846.2026.00416-a-c1, field: thickness_um, values: ["~110 um average (Sec. II.A)", "110 + 30 um (abstract)", "FET incl. DAF ~120 +/- 30 um (Sec. III.B)"], locators: ["p.2 Sec. II.A", "p.1 Abstract", "p.4 Sec. III.B"], chosen: 110, why: "materials section states the chip's average thickness"}
+  - {table: metrics, row_id: ectc51846.2026.00416-a-m4, field: value_text, values: ["~10-12 um (Sec. III.D, Fig. 12)", "~10 um (abstract, conclusion)"], locators: ["p.5 Sec. III.D", "p.1 Abstract"], chosen: "~10-12", why: "result section"}
+  - {table: metrics, row_id: ectc51846.2026.00416-a-m6, field: value_text, values: ["top 175-190 / bottom 90-120 um (cross-section)", "top 212 / bottom 140 um (optical after seed)"], locators: ["p.6 Sec. III.E", "p.6 Sec. III.F"], chosen: "both entered as separate metrics", why: "different methods; authors note optical diameters are higher"}
+  - {table: interconnects, row_id: ectc51846.2026.00416-a-i1, field: depth_um, values: ["~200 um (cross-section t)", "~220 um via height (Fig. 7)", "200 um glass vias (abstract)"], locators: ["p.6 Sec. III.E", "p.4 Sec. III.B", "p.1 Abstract"], chosen: 200, why: "cross-section thickness used for taper; 220 um entered as metric"}
+  - {table: process_steps, row_id: ectc51846.2026.00416-a-s13, field: conditions, values: ["4-8 h (methods)", "3.5 h THF sample (Fig. 16)"], locators: ["p.2 Sec. II.B", "p.7 Fig. 16(a)"], chosen: "both noted", why: "different statements for DC duration"}
+  - {table: metrics, row_id: ectc51846.2026.00416-a-m17, field: value_text, values: ["thermal-shock TV overburden ~100 um (Sec. III.H)", "no delamination for >250 um overburden (Conclusion)"], locators: ["p.7 Sec. III.H", "p.7 Sec. IV"], chosen: "both entered", why: "thermal shock on ~100 um sample; >250 um refers to plating experiments (20 h RP)"}
+excluded:
+  - "TGV kz increase 9 to >200 W/mK (Gupta et al., ref [8]); SiOxNy adhesion >7.5 N/cm (ref [10]); 250 C SiOxNy processing (ref [10])"
+  - "Glass panel embedding approaches of refs [3]-[7] (50 um core, 100 um glass support)"
+  - ">1 A/mm2 current density (ref [2]); glass CTE 3-20 ppm/C range (ref [1])"
+  - "Fig. 1 rationale schematic (liquid cooling, SMD, PCB, TIM): concept, not built"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "die x/y size, cavity x/y size, via pitch, coupon dimension in mm (only '1-inch')"
+  - "thermal performance (no thermal resistance or temperature measurement)"
+  - "SiOxNy deposition temperature and gases; plating chemistry suppliers; sample counts for thermal shock"
+  - "electrical connection to source/gate pads (no front-side RDL described)"
+source_quality:
+  - "All chosen-figure candidates on p.3, p.5, p.6, p.7 are clipped at the bottom (shifted up ~0.01-0.02 page height); Fig. 7 has no candidate; all 6 key figures manual."

@@ -1,0 +1,62 @@
+paper_id: ectc.2011.5898527
+verified_on: 2026-10-18
+source_files:
+  - references/ectc.2011.5898527/text.md
+  - references/ectc.2011.5898527/source.json
+  - references/ectc.2011.5898527/source.pdf
+  - references/ectc.2011.5898527/figures/page_01.png
+  - references/ectc.2011.5898527/figures/page_02.png
+  - references/ectc.2011.5898527/figures/page_03.png
+  - references/ectc.2011.5898527/figures/page_04.png
+  - references/ectc.2011.5898527/figures/page_05.png
+figure_reading_method: >-
+  Tables 1-5 read from page renders (text-layer table extraction garbled); Fig. 4 Shadow Moire panels re-rendered at
+  600 dpi in scratch (not kept): embedded images too low resolution, axis values illegible, only shape recorded.
+  SEM scale bars in Fig. 1 and Fig. 9 not used for dimensions.
+entries:
+  - {table: interconnects, row_id: ectc.2011.5898527-a-i2, field: aspect_ratio, value: 10, unit: "-", basis: design_target, locator: "p.5 Conclusions", note: "TSV processes established for aspect ratio up to 10"}
+  - {table: metrics, row_id: ectc.2011.5898527-b-m1, field: value, value: -2.39, unit: mil, basis: simulated, locator: "p.3 Table 3", note: "COC after ubump UF; smiley face per text"}
+derived:
+  - {table: metrics, row_id: ectc.2011.5898527-a-m8, field: value, value: 203.2, formula: "8 mil x 25.4 um/mil", inputs: "p.3 Sec. a"}
+  - {table: metrics, row_id: ectc.2011.5898527-b-m1, field: value, value: -60.706, formula: "-2.39 mil x 25.4 um/mil", inputs: "p.3 Table 3"}
+  - {table: metrics, row_id: ectc.2011.5898527-b-m2, field: value, value: 335.28, formula: "13.2 mil x 25.4 um/mil", inputs: "p.3 Table 3"}
+  - {table: metrics, row_id: ectc.2011.5898527-b-m3, field: value, value: 162.56, formula: "6.4 mil x 25.4 um/mil", inputs: "p.3 Table 3"}
+  - {table: metrics, row_id: ectc.2011.5898527-b-m5, field: value, value: 205.74, formula: "8.1 mil x 25.4 um/mil", inputs: "p.3 Table 3"}
+  - {table: metrics, row_id: ectc.2011.5898527-b-m7, field: value, value: 113.03, formula: "4.45 mil x 25.4 um/mil", inputs: "p.3 Table 3"}
+conflicts:
+  - {table: metrics, row_id: ectc.2011.5898527-a-m2, field: value, values: [264, 248], locators: ["p.5 Reliability Assessment text 264 hours", "p.5 Fig. 8(b) caption After 248hr HAST"], chosen: 264, why: "text states 264 h twice; caption is a single label"}
+  - {table: components, row_id: ectc.2011.5898527-a-c4, field: thickness_um, values: [1000, "1200-1300"], locators: ["p.3 Sec. a optimum ~1 mm for 42.5 mm package", "p.3 Sec. a ~1.2-1.3 mm for 45x45 mm package"], chosen: 1000, why: "TV is the 42.5x42.5 mm package"}
+excluded:
+  - "TSV typical 10-20 um diameter, 50-100 um depth (generic industry statement in Introduction)"
+  - "L/S 0.8/0.8 um silicon module (ref [2] title)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - die thickness, microbump count, bump diameter and height, UBM stack
+  - TSV depth explicitly, TSV pitch, interposer RDL layer count and line/space
+  - COC and C4 bonding method, temperature, force
+  - underfill products (UF-A/B/C coded), flux products
+  - sample counts for HAST and TC, electromigration results (mentioned in abstract only)
+  - Shadow Moire numeric values (illegible), substrate layer count, lid material grade
+notes: >-
+  Table 4 values given without units or cycle count ("after x cycles"). Abstract mentions electro-migration testing
+  but no EM data are reported. TC written as "TCB".
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: "ectc.2011.5898527-a-m8", change: "value: '8' -> '203.2'; unit: 'mil' -> 'um'; notes: '' -> 'As printed: 8 mil.'", reason: "audit_x1 item 13: warpage kept in mil, not comparable; rule (e) exact conversion mil->um x25.4, as printed kept in notes"}
+  - {date: 2026-10-19, source: audit_x1, row_id: "ectc.2011.5898527-b-m1", change: "value: '-2.39' -> '-60.706'; unit: 'mil' -> 'um'; notes: '' -> 'As printed: -2.39 mil.'", reason: "audit_x1 item 13: warpage kept in mil, not comparable; rule (e) exact conversion mil->um x25.4, as printed kept in notes"}
+  - {date: 2026-10-19, source: audit_x1, row_id: "ectc.2011.5898527-b-m2", change: "value: '13.2' -> '335.28'; unit: 'mil' -> 'um'; notes: '' -> 'As printed: 13.2 mil.'", reason: "audit_x1 item 13: warpage kept in mil, not comparable; rule (e) exact conversion mil->um x25.4, as printed kept in notes"}
+  - {date: 2026-10-19, source: audit_x1, row_id: "ectc.2011.5898527-b-m3", change: "value: '6.4' -> '162.56'; unit: 'mil' -> 'um'; notes: '' -> 'As printed: 6.4 mil.'", reason: "audit_x1 item 13: warpage kept in mil, not comparable; rule (e) exact conversion mil->um x25.4, as printed kept in notes"}
+  - {date: 2026-10-19, source: audit_x1, row_id: "ectc.2011.5898527-b-m5", change: "value: '8.1' -> '205.74'; unit: 'mil' -> 'um'; notes: '' -> 'As printed: 8.1 mil.'", reason: "audit_x1 item 13: warpage kept in mil, not comparable; rule (e) exact conversion mil->um x25.4, as printed kept in notes"}
+  - {date: 2026-10-19, source: audit_x1, row_id: "ectc.2011.5898527-b-m7", change: "value: '4.45' -> '113.03'; unit: 'mil' -> 'um'; notes: '' -> 'As printed: 4.45 mil.'", reason: "audit_x1 item 13: warpage kept in mil, not comparable; rule (e) exact conversion mil->um x25.4, as printed kept in notes"}
+  - {date: 2026-10-19, source: audit_x1, row_id: "ectc.2011.5898527-a-s16", change: "basis: 'stated' -> 'design_target'; overrides: 'temp_c:design_target' -> ''", reason: "audit_x1 item 14: numeric process condition (150 C UF cure) should carry basis design_target; row basis set, override now redundant"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2011.5898527-f01", change: "notes: 'Fig. 1 split across pages: (a),(b) on p.1, (c) ubumps on p.2 left out; caption on p.2' -> 'Fig. 1 split across pages: (a),(b) on p.1; (c) ubumps on p.2 is a separate row; caption on p.2'", reason: "Fig. 1(c) now its own figure row"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2011.5898527-f02", change: "added Fig. 1(c) p.2 cross_section (manual)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2011.5898527-f03", change: "renumbered from ectc.2011.5898527-f02 (rank re-ordered)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2011.5898527-f05", change: "added Fig. 8 p.5 xray_csam (manual)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2011.5898527-f06", change: "added Fig. 5 p.4 simulation_result (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2011.5898527-f07", change: "renumbered from ectc.2011.5898527-f03 (rank re-ordered)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2011.5898527-f08", change: "renumbered from ectc.2011.5898527-f05 (rank re-ordered)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2011.5898527-f09", change: "added Fig. 4 p.3 warpage_plot (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2011.5898527-f10", change: "added Table 4 p.4 data_table (manual)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2011.5898527-f11", change: "renumbered from ectc.2011.5898527-f06 (rank re-ordered)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2011.5898527-f12", change: "added Table 2 p.2 data_table (manual)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying tables added"}

@@ -1,0 +1,90 @@
+layer_id,tv_id,structure,side,seq,layer_name,feature,material,material_class,layer_role,reinforcement,thickness_um,thickness_min_um,thickness_max_um,line_um,space_um,via_diameter_um,via_pitch_um,roughness_ra_um,repeat,properties,basis,source,overrides,locator,qualifiers,notes
+iedm50572.2025.11353491-a-L01,iedm50572.2025.11353491-a,photonic,single,1,single-mode PWG,,polymer,dielectric_polymer,optical,,,,,,,,,,,,stated,text,,p.1 Sec. III,,
+iedm50572.2025.11353491-a-L02,iedm50572.2025.11353491-a,photonic,single,2,optical adhesive,,optical adhesive,adhesive,adhesive,,,,,,,,,,,,stated,text,,p.1 Sec. III,,
+iedm50572.2025.11353491-a-L03,iedm50572.2025.11353491-a,die,single,1,PIC,,,silicon,device,,,,,,,,,,,,stated,mixed,,p.1 Sec. III; p.4 Fig. 8,,Si from FEM model label.
+iedm50572.2025.11353491-a-L04,iedm50572.2025.11353491-a,substrate_core,single,1,organic substrate (laminate),,,organic_laminate,core,,,,,,,,,,,,stated,text,,p.1 Sec. II,,Layer count/thickness not given.
+iedm50572.2025.11353491-b-L01,iedm50572.2025.11353491-b,photonic,single,1,single-mode PWG,,polymer,dielectric_polymer,optical,,,,,,,,,,,,stated,text,,p.1 Sec. III,,
+iedm50572.2025.11353491-b-L02,iedm50572.2025.11353491-b,photonic,single,2,optical adhesive,,optical adhesive,adhesive,adhesive,,,,,,,,,,,,stated,text,,p.1 Sec. III,,
+iedm50572.2025.11353491-b-L03,iedm50572.2025.11353491-b,die,single,1,PIC,,,silicon,device,,,,,,,,,,,,stated,mixed,,p.1 Sec. III; p.4 Fig. 8,,Si from FEM model label.
+iedm50572.2025.11353491-b-L04,iedm50572.2025.11353491-b,substrate_core,single,1,organic substrate (laminate),,,organic_laminate,core,,,,,,,,,,,,stated,text,,p.1 Sec. II,,Layer count/thickness not given.
+iedm50572.2025.11353491-e-L01,iedm50572.2025.11353491-e,coupon,single,1,PWG,,polymer,dielectric_polymer,optical,,,,,,,,,,,,stated,schematic,,p.3 Fig. 3,,
+iedm50572.2025.11353491-e-L02,iedm50572.2025.11353491-e,coupon,single,2,optical adhesive,,optical adhesive,adhesive,adhesive,,,,,,,,,,,,stated,schematic,,p.3 Fig. 3,,
+iedm50572.2025.11353491-e-L03,iedm50572.2025.11353491-e,coupon,single,3,silicon substrate,,Si,silicon,carrier,,,,,,,,,,,,stated,schematic,,p.3 Fig. 3,,
+tcpmt.2025.3557232-a-L01,tcpmt.2025.3557232-a,glass_core,front,1,electroplated Cu (double-sided),,Cu,metal,conductor,,,,,,,,,,,,stated,text,,p.6 Sec. V,,Overburden thickness not given; overplated at via opening for 60 min SLE.
+tcpmt.2025.3557232-a-L02,tcpmt.2025.3557232-a,glass_core,front,2,electroless Cu (SLE),,"Cu (electroless, HCHO bath)",metal,seed,,,,,,,,,,,,stated,text,,p.4 Sec. IV.A; p.5 Fig. 6,,Top-surface thickness 3.8-10.4 um vs SLE time (metrics).
+tcpmt.2025.3557232-a-L03,tcpmt.2025.3557232-a,glass_core,front,3,PVD Cu seed,,Cu,metal,seed,,0.3,,,,,,,,,,design_target,text,,p.3 Sec. III.A,,
+tcpmt.2025.3557232-a-L04,tcpmt.2025.3557232-a,glass_core,front,4,PVD Ti adhesion,,Ti,metal,adhesion,,0.05,,,,,,,,,,design_target,text,,p.3 Sec. III.A,,
+tcpmt.2025.3557232-a-L05,tcpmt.2025.3557232-a,glass_core,core,1,borosilicate glass core,20 um straight TGV array,borosilicate glass,glass,core,,300,,,,,20,,,,,design_target,text,,p.1 Abstract; p.3 Sec. III.B,,
+tcpmt.2025.3557232-a-L06,tcpmt.2025.3557232-a,glass_core,back,1,PVD Ti adhesion,,Ti,metal,adhesion,,0.05,,,,,,,,,,design_target,text,,p.3 Sec. III.A,,Double-sided PVD.
+tcpmt.2025.3557232-a-L07,tcpmt.2025.3557232-a,glass_core,back,2,PVD Cu seed,,Cu,metal,seed,,0.3,,,,,,,,,,design_target,text,,p.3 Sec. III.A,,
+tcpmt.2025.3557232-a-L08,tcpmt.2025.3557232-a,glass_core,back,3,electroless Cu (SLE),,Cu (electroless),metal,seed,,,,,,,,,,,,stated,text,,p.3 Sec. III.A; p.3 Fig. 1(d),,
+tcpmt.2025.3557232-a-L09,tcpmt.2025.3557232-a,glass_core,back,4,electroplated Cu (double-sided),,Cu,metal,conductor,,,,,,,,,,,,stated,text,,p.3 Fig. 1(e); p.6 Sec. V,,
+ectc51529.2024.00021-a-L01,ectc51529.2024.00021-a,bonding_interface,single,1,bonding oxide,oxide field,oxide,dielectric_inorganic,bonding,,,,,,,,,,,,stated,text,,p.1 Sec. I; p.2 Fig. 2,,Oxide-oxide bond at room temperature after plasma and DI rinse; oxide type and thickness not given.
+ectc51529.2024.00021-a-L02,ectc51529.2024.00021-a,bonding_interface,single,1,Cu pad,Cu pad,Cu,metal,bonding,,,,,,,,,,,,stated,text,,p.1 Sec. I; p.2 Fig. 2,,Cu-Cu bond formed by Cu expansion and diffusion during anneal. Pad size/pitch not reported.
+ectc51529.2024.00021-a-L03,ectc51529.2024.00021-a,die,single,1,BEOL under Cu pad,high-density and low-density BEOL regions,,unspecified,conductor,,,,,,,,,,,,stated,mixed,,p.3 Sec. III.C; p.4 Fig. 8; p.4 Fig. 9,,BEOL density changes oxide profile around pads after heat treatment.
+ectc51529.2024.00021-b-L01,ectc51529.2024.00021-b,bonding_interface,single,1,CVD A,dielectric around pad,CVD A,dielectric_inorganic,bonding,,,,,,,,,,,,stated,schematic,,p.3 Fig. 6,,Label only; material class inferred (CVD film adjacent to Cu pad). Thin unlabeled cap layer drawn on top.
+ectc51529.2024.00021-b-L02,ectc51529.2024.00021-b,bonding_interface,single,2,CVD B,dielectric around pad,CVD B,dielectric_inorganic,dielectric,,,,,,,,,,,,stated,schematic,,p.3 Fig. 6,,Label only; material class inferred.
+ectc51529.2024.00021-b-L03,ectc51529.2024.00021-b,bonding_interface,single,1,Cu pad,Cu pad (spans CVD A and CVD B),Cu,metal,bonding,,,,,,,,,,,,stated,schematic,,p.3 Fig. 6,,Pad volume and expansion indicated; no dimensions.
+ectc51529.2024.00021-b-L04,ectc51529.2024.00021-b,die,single,1,BEOL,,,unspecified,conductor,,,,,,,,,,,,stated,schematic,,p.3 Fig. 6,,BEOL structure varied as Schemes #1-#5.
+vlsitechnologyandcir46783.2024.10631478-a-L01,vlsitechnologyandcir46783.2024.10631478-a,die,single,1,top die (chiplet),,,silicon,device,,,,,,,,,,,,stated,schematic,,p.2 Fig. 5,,
+vlsitechnologyandcir46783.2024.10631478-a-L02,vlsitechnologyandcir46783.2024.10631478-a,interposer_rdl,front,1,M3,,metal (not stated),metal,conductor,,,,,,,,,,,,stated,schematic,,p.2 Fig. 4; p.2 Fig. 2,,Fig. 2 caption: M3 2000 um pitch as printed (units doubtful; not entered).
+vlsitechnologyandcir46783.2024.10631478-a-L03,vlsitechnologyandcir46783.2024.10631478-a,interposer_rdl,front,2,ILD between M2-M3,ILD,,dielectric_inorganic,dielectric,,,,,,,,,,,,stated,text,,p.1 Fabrication; p.2 Fig. 4,,Material not stated; class inferred. Holds 1 um deep HDMIM trenches.
+vlsitechnologyandcir46783.2024.10631478-a-L04,vlsitechnologyandcir46783.2024.10631478-a,interposer_rdl,front,2,HDMIM,HDMIM trench capacitor (1 um deep trenches),high-k oxide between TiN electrodes,other,device,,,,,,,,,,,,stated,text,,p.1 Fabrication; p.2 Fig. 4,,Accessed through M2-3 Via2.
+vlsitechnologyandcir46783.2024.10631478-a-L05,vlsitechnologyandcir46783.2024.10631478-a,interposer_rdl,front,3,M2,,metal (not stated),metal,conductor,,,,,,,,,,,,stated,schematic,,p.2 Fig. 4; p.2 Fig. 2,,Fig. 2 caption: M1-2 1080 um pitch as printed (units doubtful; not entered).
+vlsitechnologyandcir46783.2024.10631478-a-L06,vlsitechnologyandcir46783.2024.10631478-a,interposer_rdl,front,4,M1,,metal (not stated),metal,conductor,,,,,,,,,,,,stated,schematic,,p.2 Fig. 4; p.2 Fig. 2,,Three wide-pitch interconnect metal layers in total.
+vlsitechnologyandcir46783.2024.10631478-a-L07,vlsitechnologyandcir46783.2024.10631478-a,interposer,core,1,Si base substrate,TSV field,Si,silicon,core,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3; p.2 Fig. 4,,TSV length 75 um (Fig. 3); substrate thickness not stated.
+icept59018.2023.10492317-a-L01,icept59018.2023.10492317-a,fan_out_rdl,single,1,Cu trace,,Cu,metal,conductor,,,,,,,,,,,,stated,schematic,,p.1 Fig. 2,,
+icept59018.2023.10492317-a-L02,icept59018.2023.10492317-a,fan_out_rdl,single,2,Film,,Film,unspecified,dielectric,,,,,,,,,,,,stated,schematic,,p.1 Fig. 2,,Dielectric film; material not stated. Unlabeled pads (blue) below not entered.
+icept59018.2023.10492317-a-L03,icept59018.2023.10492317-a,die,single,1,Si-Die,,Si,silicon,device,,,,,,,,,,,,stated,schematic,,p.1 Fig. 2,,
+icept59018.2023.10492317-a-L04,icept59018.2023.10492317-a,mold,single,1,MC (die sides and bottom),,MC,mold_compound,encapsulant,,,,,,,,,,,,stated,schematic,,p.1 Fig. 2,,
+icept59018.2023.10492317-b-L01,icept59018.2023.10492317-b,die,single,1,Die,,Die,silicon,device,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,Model 1 (steps 1-2) stack.
+icept59018.2023.10492317-b-L02,icept59018.2023.10492317-b,other,single,1,Tape,,Tape,adhesive,adhesive,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,Model 1 (steps 1-2) stack.
+icept59018.2023.10492317-b-L03,icept59018.2023.10492317-b,other,single,2,Carrier Plate,,Carrier Plate,unspecified,carrier,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,Model 1 (steps 1-2) stack.
+icept59018.2023.10492317-b-L04,icept59018.2023.10492317-b,mold,single,1,"MC (model 2, step 3)",,MC,mold_compound,encapsulant,,,,,,,,,,,,stated,schematic,,p.2 Fig. 4,,"Model 2 (step 3): dies in MC, carrier removed."
+ectc51687.2025.00049-a-L01,ectc51687.2025.00049-a,bridge,single,1,Si bridge,top side Cu pillar + solder structures,Si,silicon,device,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.B; p.2 Fig. 2,,
+ectc51687.2025.00049-a-L02,ectc51687.2025.00049-a,bridge,single,2,bottom adhesion layer,,TiW,metal,adhesion,,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,Step 3 of Fig. 2; thickness not given.
+ectc51687.2025.00049-a-L03,ectc51687.2025.00049-a,bridge,single,3,bottom seed layer,,Cu,metal,seed,,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,Step 4 of Fig. 2; etched outside pillars (step 10).
+ectc51687.2025.00049-a-L04,ectc51687.2025.00049-a,bridge,single,4,bridge pillar UBM,bottom pillars,Cu/Ni/Cu,metal,conductor,,4,,,,,,,,,,design_target,text,,p.2 Sec. II.B,,
+ectc51687.2025.00049-a-L05,ectc51687.2025.00049-a,bonding_interface,single,1,bridge pillar solder,bottom pillars,Sn,solder,bonding,,15,,,,,,,,,,design_target,text,,p.2 Sec. II.B,,
+ectc51687.2025.00049-a-L06,ectc51687.2025.00049-a,coupon,single,1,substrate pad solder,,Sn,solder,bonding,,2,,,,,,,,,,design_target,text,,p.2 Sec. II.B,,
+ectc51687.2025.00049-a-L07,ectc51687.2025.00049-a,coupon,single,2,substrate pad UBM,,UBM,metal,conductor,,4,,,,,,,,,,design_target,text,,p.2 Sec. II.B,,UBM composition on substrate not stated.
+ectc51687.2025.00049-a-L08,ectc51687.2025.00049-a,coupon,single,3,Si substrate,,Si,silicon,carrier,,,,,,,,,,,,stated,text,,p.4 Sec. III.B,,
+ectc51687.2025.00049-b-L01,ectc51687.2025.00049-b,bridge,single,1,Si bridge,top side Cu pillar + solder structures,Si,silicon,device,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.B; p.2 Fig. 2,,
+ectc51687.2025.00049-b-L02,ectc51687.2025.00049-b,bridge,single,2,bottom adhesion layer,,TiW,metal,adhesion,,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,Step 3 of Fig. 2; thickness not given.
+ectc51687.2025.00049-b-L03,ectc51687.2025.00049-b,bridge,single,3,bottom seed layer,,Cu,metal,seed,,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,Step 4 of Fig. 2; etched outside pillars (step 10).
+ectc51687.2025.00049-b-L04,ectc51687.2025.00049-b,bridge,single,4,bridge pillar UBM,bottom pillars,Cu/Ni/Cu,metal,conductor,,4,,,,,,,,,,design_target,text,,p.2 Sec. II.B,,
+ectc51687.2025.00049-b-L05,ectc51687.2025.00049-b,bonding_interface,single,1,bridge pillar solder,bottom pillars,Sn,solder,bonding,,15,,,,,,,,,,design_target,text,,p.2 Sec. II.B,,
+ectc51687.2025.00049-b-L06,ectc51687.2025.00049-b,coupon,single,1,substrate pad solder,,Sn,solder,bonding,,2,,,,,,,,,,design_target,text,,p.2 Sec. II.B,,
+ectc51687.2025.00049-b-L07,ectc51687.2025.00049-b,coupon,single,2,substrate pad UBM,,UBM,metal,conductor,,4,,,,,,,,,,design_target,text,,p.2 Sec. II.B,,UBM composition on substrate not stated.
+ectc51687.2025.00049-b-L08,ectc51687.2025.00049-b,coupon,single,3,Si substrate,,Si,silicon,carrier,,,,,,,,,,,,stated,text,,p.4 Sec. III.B,,
+ectc51687.2025.00049-c-L01,ectc51687.2025.00049-c,tim_lid,single,1,Cu lid,,Cu,metal,cap,,,,,,,,,,,,stated,text,,p.4 Sec. II.D; p.3 Fig. 6(a),,Plastic properties.
+ectc51687.2025.00049-c-L02,ectc51687.2025.00049-c,die,single,1,Si chip,,Si,silicon,device,,,,,,,,,,,,stated,schematic,,p.3 Fig. 6(f),,
+ectc51687.2025.00049-c-L03,ectc51687.2025.00049-c,bonding_interface,single,1,uC4/underfill (chip to bridge),,uC4 solder + underfill (equivalent properties),other,bonding,,,,,,,,,,,,stated,mixed,,p.3 Fig. 6(f); p.4 Sec. II.D,,Equivalent-property layer.
+ectc51687.2025.00049-c-L04,ectc51687.2025.00049-c,bridge,single,1,Si Bridge,,Si,silicon,device,,,,,,,,,,,,stated,schematic,,p.3 Fig. 6(f),,
+ectc51687.2025.00049-c-L05,ectc51687.2025.00049-c,bonding_interface,single,2,layer under Si bridge (underfill + solder joints),,underfill + solder joints (equivalent properties),other,bonding,,,,,,,,,,,,stated,text,,p.4 Sec. II.D; p.3 Fig. 6(f),,Fig. 6(f) labels the bridge/laminate layer 'C4/underfill'.
+ectc51687.2025.00049-c-L06,ectc51687.2025.00049-c,solder_mask,single,1,solder resist,,solder resist,dielectric_polymer,passivation,,,,,,,,,,,,stated,schematic,,p.3 Fig. 6(f),,
+ectc51687.2025.00049-c-L07,ectc51687.2025.00049-c,substrate_buildup,single,1,build-up,,build-up material,dielectric_polymer,dielectric,,,,,,,,,,,,stated,mixed,,p.3 Fig. 6(f); p.4 Sec. II.D,,Temperature-dependent linear properties; circuitry layers as equivalent properties.
+ectc51687.2025.00049-c-L08,ectc51687.2025.00049-c,substrate_core,single,1,laminate core,,laminate core,organic_laminate,core,,,,,,,,,,,,stated,text,,p.4 Sec. II.D,,
+ectc51687.2025.00049-d-L01,ectc51687.2025.00049-d,tim_lid,single,1,Cu lid,,Cu,metal,cap,,,,,,,,,,,,stated,text,,p.4 Sec. II.D; p.3 Fig. 6(a),,Plastic properties.
+ectc51687.2025.00049-d-L02,ectc51687.2025.00049-d,die,single,1,Si chip,,Si,silicon,device,,,,,,,,,,,,stated,schematic,,p.3 Fig. 6(f),,
+ectc51687.2025.00049-d-L03,ectc51687.2025.00049-d,bonding_interface,single,1,uC4/underfill (chip to bridge),,uC4 solder + underfill (equivalent properties),other,bonding,,,,,,,,,,,,stated,mixed,,p.3 Fig. 6(f); p.4 Sec. II.D,,Equivalent-property layer.
+ectc51687.2025.00049-d-L04,ectc51687.2025.00049-d,bridge,single,1,Si Bridge,,Si,silicon,device,,,,,,,,,,,,stated,schematic,,p.3 Fig. 6(f),,
+ectc51687.2025.00049-d-L05,ectc51687.2025.00049-d,bonding_interface,single,2,layer under Si bridge (underfill),,underfill,underfill,encapsulant,,,,,,,,,,,,stated,text,,p.4 Sec. II.D; p.3 Fig. 6(f),,Fig. 6(f) labels the bridge/laminate layer 'C4/underfill'.
+ectc51687.2025.00049-d-L06,ectc51687.2025.00049-d,solder_mask,single,1,solder resist,,solder resist,dielectric_polymer,passivation,,,,,,,,,,,,stated,schematic,,p.3 Fig. 6(f),,
+ectc51687.2025.00049-d-L07,ectc51687.2025.00049-d,substrate_buildup,single,1,build-up,,build-up material,dielectric_polymer,dielectric,,,,,,,,,,,,stated,mixed,,p.3 Fig. 6(f); p.4 Sec. II.D,,Temperature-dependent linear properties; circuitry layers as equivalent properties.
+ectc51687.2025.00049-d-L08,ectc51687.2025.00049-d,substrate_core,single,1,laminate core,,laminate core,organic_laminate,core,,,,,,,,,,,,stated,text,,p.4 Sec. II.D,,
+eptc59621.2023.10457912-a-L01,eptc59621.2023.10457912-a,die,single,1,hard mask,,low-stress SiO2,dielectric_inorganic,other,,,,,,,,,,,,stated,text,,p.1 Experimental Methods,,Hard mask for Si etch; thickness not given.
+eptc59621.2023.10457912-a-L02,eptc59621.2023.10457912-a,die,single,2,Si wafer,"6x55 um TSV array, pattern density <1%",Si,silicon,device,,,,,,,6,,,,,design_target,text,,p.1 Experimental Methods,,Wafer thickness not given.
+eptc59621.2023.10457912-a-L03,eptc59621.2023.10457912-a,die,single,3,TSV liner,,SiO2,dielectric_inorganic,dielectric,,,,,,,,,,,,stated,text,,p.1-2 Experimental Methods,,CVD on via sidewalls; thickness not given.
+eptc59621.2023.10457912-a-L04,eptc59621.2023.10457912-a,die,single,4,TSV barrier,,Ta,metal,barrier,,,,,,,,,,,,stated,text,,p.1-2 Experimental Methods,,PVD; thickness not given.
+eptc59621.2023.10457912-a-L05,eptc59621.2023.10457912-a,die,single,5,TSV seed,,Cu,metal,seed,,,,,,,,,,,,stated,text,,p.1-2 Experimental Methods,,PVD; thickness not given.
+eptc59621.2023.10457912-a-L06,eptc59621.2023.10457912-a,die,single,6,TSV fill,,electroplated Cu,metal,conductor,,,,,,,,,,,,stated,text,,p.2 Experimental Methods,,"Commercial acidic Cu electrolyte with accelerator, inhibitor, leveller."
+ectc51906.2022.00053-a-L01,ectc51906.2022.00053-a,interposer_rdl,single,1,RDL,,,,conductor,,,,,,,,,,,,stated,mixed,,p.3 Sec. II.B; p.5 Fig. 8; p.5 Fig. 9(b),,Material/thickness not stated; dual-damascene interconnects mentioned (Sec. I).
+ectc51906.2022.00053-a-L02,ectc51906.2022.00053-a,interposer,single,1,Si base wafer,,Si,silicon,core,,20,,,,,10,,,,,design_target,text,via_diameter_um:measured;via_diameter_um:figure_image,p.3 Sec. II.B; p.5 Fig. 8,,via_diameter_um = TSV 10 um label in Fig. 8.
+ectc51906.2022.00053-a-L03,ectc51906.2022.00053-a,bonding_interface,single,1,permanent adhesive layer,,CYCLOTENE 3022-46 (DOW),adhesive,adhesive,,5,,,,,,,,,,design_target,text,,p.3 Sec. II.B; p.5 Fig. 8,,Fig. 8 SEM label 5 um.
+ectc51906.2022.00053-a-L04,ectc51906.2022.00053-a,die,single,1,Cu pads + dielectric (planarized),,Cu / dielectric material,metal,conductor,,,,,,,,,,,,stated,text,,p.3 Sec. II.A; p.2 Fig. 3(b),,"Cu electroplated on Al pads, dielectric filled between pads, co-planarized."
+ectc51906.2022.00053-a-L05,ectc51906.2022.00053-a,die,single,2,Al pad,,Al,metal,conductor,,,,,,,,,,,,stated,mixed,,p.3 Sec. II.A; p.5 Fig. 9(b),,
+ectc51906.2022.00053-a-L06,ectc51906.2022.00053-a,die,single,3,Si capacitor,,Si,silicon,device,,100,,,,,,,,,,design_target,text,,p.2 Sec. II.A,,
+ectc51906.2022.00053-a-L07,ectc51906.2022.00053-a,mold,single,1,mold resin,,epoxy resin,mold_compound,encapsulant,,,,,,,,,,,,stated,text,,p.3 Sec. II.B; p.2 Fig. 4(d),,Laterally around capacitors and dummy Si; thinned with dummy Si.
+ectc51906.2022.00053-a-L08,ectc51906.2022.00053-a,other,single,1,carrier bonding adhesive,,adhesive (not named),adhesive,adhesive,,,,,,,,,,,,stated,figure_image,,p.5 Fig. 8,,
+ectc51906.2022.00053-a-L09,ectc51906.2022.00053-a,other,single,2,carrier wafer,,Si,silicon,carrier,,775,,,,,,,,,,design_target,text,,p.3 Sec. II.B,,

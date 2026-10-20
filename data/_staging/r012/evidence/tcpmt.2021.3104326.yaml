@@ -1,0 +1,41 @@
+paper_id: tcpmt.2021.3104326
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/tcpmt.2021.3104326/text.md
+  - references/tcpmt.2021.3104326/source.json
+  - references/tcpmt.2021.3104326/figures/cand/p02_fig1.png
+  - references/tcpmt.2021.3104326/figures/cand/p02_fig2.png
+  - references/tcpmt.2021.3104326/figures/cand/p03_fig3.png
+  - references/tcpmt.2021.3104326/figures/cand/p04_fig4.png
+  - references/tcpmt.2021.3104326/figures/cand/p05_fig5.png
+  - references/tcpmt.2021.3104326/figures/cand/p05_fig6.png
+  - references/tcpmt.2021.3104326/figures/cand/p06_tablei.png
+figure_reading_method: >-
+  All seven candidate crops opened; each holds the full figure/table. Resistance values taken from Table I image (text
+  layer drops the Omega symbol: "100.5 m" = 100.5 mOhm) and Sec. III text; no values read off plot axes.
+entries:
+  - {table: interconnects, row_id: tcpmt.2021.3104326-a-i1, field: resistance_mohm, value: 47.8, unit: mOhm, basis: measured, locator: "p.6 Table I", note: "SnAg-based Kelvin at 300 K"}
+  - {table: interconnects, row_id: tcpmt.2021.3104326-c-i1, field: alignment_um, value: 0.5, unit: um, basis: measured, locator: "p.5 Sec. IV", note: "slight misalignment <= 500 nm on FIB-SEM"}
+  - {table: interconnects, row_id: tcpmt.2021.3104326-c-i2, field: count, value: 16, unit: ea, basis: design_target, locator: "p.5 Fig. 6 caption", note: "16 vias per half link"}
+derived:
+  - {table: process_steps, row_id: tcpmt.2021.3104326-b-s07, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: tcpmt.2021.3104326-c-s10, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.2 Sec. II"}
+  - {table: interconnects, row_id: tcpmt.2021.3104326-c-i1, field: anneal_time_min, value: 120, formula: "2 h x 60", inputs: "p.2 Sec. II"}
+  - {table: stack_layers, row_id: tcpmt.2021.3104326-a-L02, field: thickness_um, value: 0.85, formula: "850 nm / 1000", inputs: "p.2 Sec. II"}
+  - {table: interconnects, row_id: tcpmt.2021.3104326-c-i2, field: diameter_um, value: 0.5, formula: "500 nm / 1000", inputs: "p.5 Fig. 6 caption"}
+conflicts:
+  - {table: interconnects, row_id: tcpmt.2021.3104326-a-i1, field: bonding_temp_c, values: ["260 C reflow of top wafer before dicing (p.2)", "260 C reflow at end of stacking (p.4)"], locators: ["p.2 Sec. II", "p.4 Sec. IV"], chosen: 260, why: "p.4 ties IMC formation to the 260 C stacking reflow; p.2 says only 'conventional mass reflow' for the stacking step"}
+excluded:
+  - "Indium bump pitch limit 7.5 um (ref [11])"
+  - "10 um pitch D2W and <=1 um pitch W2W Cu/SiO2 hybrid bonding (refs [17], [18])"
+  - "0-500 mT magnetic field results and ~2 mT SnAg hysteresis (authors' prior work ref [22])"
+  - "CTE values of Cu, TiN, SiO2 (ref [28]); Cu RRR literature ranges (refs [31], [32]); Tc literature values Al ~1.2 K, Sn 3.7 K, TiN up to 6 K"
+  - "Underfill qualification to 77 K reported in prior work (not re-measured here)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "die and wafer thicknesses (SnAg); total joint height after reflow"
+  - "bonding force/pressure, alignment tool, HB bonding temperature; plasma activation details"
+  - "underfill product; per-chain yield"
+  - "thermal conductivity of interconnects (future work)"

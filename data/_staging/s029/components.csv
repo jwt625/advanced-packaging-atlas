@@ -1,0 +1,23 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+icep61562.2024.10535587-a-c1,icep61562.2024.10535587-a,unspecified,,yes,"singulated device die with Cu studs, face-up",,,,,,,,,,,,stated,text,,p.1 Sec. II ASE FOPLP process flow,,Six-side protection by mold; no PI stress buffer on native wafer.
+icep61562.2024.10535587-a-c2,icep61562.2024.10535587-a,mold,,,EMC over-mold (stress buffer layer),,,,,,,,,,EMC,,stated,text,,p.1 Sec. II ASE FOPLP process flow,,
+vlsitechnologyandcir65830.2026.11577374-a-c1,vlsitechnologyandcir65830.2026.11577374-a,dram,,,custom DRAM die (layers DRAM-1..DRAM-8),8,11.1,15.4,,,,,,,,,design_target,mixed,count:figure_image,p.1 Sec. Design and Structure; p.2 Fig. 4; p.3 Fig. 7,,15.4x11.1 mm2; 4K row x 32 col x 196 I/O; 1.125 GB array per die; GCTL interface per die. Si substrate ~3 um.
+vlsitechnologyandcir65830.2026.11577374-a-c2,vlsitechnologyandcir65830.2026.11577374-a,base_die,,,Logic wafer (base layer) with VHMLInK interface IP,1,,,,,,,,,Si,,stated,mixed,,p.1 Sec. Design and Structure; p.2 Fig. 3,,Interface IP global and tower parts; bypass to external interface.
+tcpmt.2025.3628798-a-c1,tcpmt.2025.3628798-a,dummy_die,yes,,STCA top die (daisy chain / Kelvin / EM test die),,,,,,,,,,Si,,stated,mixed,,p.5 Fig. 15; p.6 Sec. IV.A; p.6 Sec. IV.B,,Full-thickness dies; die size not stated.
+tcpmt.2025.3628798-a-c2,tcpmt.2025.3628798-a,dummy_die,yes,,landing coupon (D2C) or 300 mm landing wafer (D2W),,30,30,,,,,,,Si,,design_target,caption,,p.6 Fig. 19,,x/y = D2C coupon 3x3 cm (caption); D2W also on full 300 mm wafer.
+tcpmt.2025.3628798-a-c3,tcpmt.2025.3628798-a,underfill,,,"wafer-level underfill (spin-coated polymer, bumps revealed by CMP)",,,,,,,,,,spin-coated polymer (type not named),,stated,text,,p.5 Sec. III.B; p.5 Fig. 15,,"Polymer type, Tg and product not reported."
+tcpmt.2025.3628798-b-c1,tcpmt.2025.3628798-b,dummy_die,yes,,top die with Ni/Sn bumps,,,,,,,,,,Si,,stated,text,,p.6 Sec. IV.A; p.7 Fig. 22,,Die size not stated.
+tcpmt.2025.3628798-b-c2,tcpmt.2025.3628798-b,dummy_die,yes,,landing coupon or 300 mm landing wafer,,30,30,,,,,,,Si,,design_target,caption,,p.6 Fig. 19,,x/y = D2C coupon 3x3 cm.
+tcpmt.2025.3628798-b-c3,tcpmt.2025.3628798-b,underfill,,,capillary underfill (CUF),,,,,,,,,,CUF (product not named),,stated,text,,p.2 Sec. I; p.7 Sec. IV.C,,Dispensed and cured after TCB.
+tcpmt.2025.3628798-c-c1,tcpmt.2025.3628798-c,dummy_die,yes,,landing wafer (full-thickness Si),,,,,,,,,,Si,,stated,schematic,,p.3 Fig. 7,,
+tcpmt.2025.3628798-d-c1,tcpmt.2025.3628798-d,dummy_die,yes,,In-bumped test chips (In-In bonded pair),,,,,,,,,,,,stated,text,,p.10 Sec. V.B; p.11 Sec. V.C; p.11 Fig. 34,,Chip sizes and count not stated.
+ectc51687.2025.00326-a-c1,ectc51687.2025.00326-a,interposer,,,panel-level multilayer RDL interposer,,320,320,,,,,,,Cu / photosensitive dielectric,,design_target,text,,p.1 Sec. II.A; p.2 Fig. 3,,x/y = glass carrier/panel size.
+ectc51687.2025.00090-a-c1,ectc51687.2025.00090-a,unspecified,,,Chip 1 (center),2,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,Count read from floor plan (two halves of Chip 1 block); chip types not labelled in Fig. 1.
+ectc51687.2025.00090-a-c2,ectc51687.2025.00090-a,unspecified,,,Chip 2 (side columns),12,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,6 per side in floor plan; likely HBM (Fig. 2 shows ASIC + HBM) but not labelled.
+ectc51687.2025.00090-a-c3,ectc51687.2025.00090-a,unspecified,,,Chip 3 (top/bottom of Chip 1),2,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,
+ectc51687.2025.00090-a-c4,ectc51687.2025.00090-a,asic,,,ASIC,,,,,,,,,,,,stated,text,,p.3 Sec. III.B; p.2 Fig. 2,,ASIC size more than twice HBM; minimum 45 um bump pitch in ASIC area.
+ectc51687.2025.00090-a-c5,ectc51687.2025.00090-a,hbm,,,HBM,,,,,,,,,,,,stated,text,,p.3 Sec. III.B; p.2 Fig. 2; p.4 Sec. IV,,Count: 'more than 12 HBM chips' (conclusion).
+ectc51687.2025.00090-a-c6,ectc51687.2025.00090-a,mold,,,mold compound (molded and ground),,,,,,,,,,,,stated,text,,p.2 Sec. II.B,,
+ectc51687.2025.00090-a-c7,ectc51687.2025.00090-a,pcb,,,PCB (substrate) for unit assembly,,,,,,,,,,,,stated,text,,p.2 Sec. II.B; p.2 Fig. 2,,
+ectc51687.2025.00090-a-c8,ectc51687.2025.00090-a,other,,,1st carrier (CTE type selected by simulation),,,,,,,,,,,,stated,text,,p.3 Sec. III.C; p.4 Table 1,,Carrier types A/B/C (low/middle/high CTE); A highlighted in Table 1. Material not stated.
+icep-iaac64884.2025.11002987-a-c1,icep-iaac64884.2025.11002987-a,dummy_die,yes,,12 inch Si wafer with daisy-chain Cu UBM pads,1,,,,,,,,,Si,,stated,text,,p.1 Sec. II; p.2 Sec. II,,"Wafer and die thickness, die size not given."

@@ -1,0 +1,64 @@
+paper_id: ectc51687.2025.00027
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00027/text.md
+  - references/ectc51687.2025.00027/source.json
+  - references/ectc51687.2025.00027/figures/page_02.png
+  - references/ectc51687.2025.00027/figures/page_03.png
+  - references/ectc51687.2025.00027/figures/page_04.png
+  - references/ectc51687.2025.00027/figures/page_05.png
+  - references/ectc51687.2025.00027/figures/page_06.png
+  - references/ectc51687.2025.00027/figures/cand/p02_fig1.png
+  - references/ectc51687.2025.00027/figures/cand/p02_tablei.png
+  - references/ectc51687.2025.00027/figures/cand/p04_fig2.png
+  - references/ectc51687.2025.00027/figures/cand/p04_fig3.png
+  - references/ectc51687.2025.00027/figures/cand/p05_tablev.png
+  - references/ectc51687.2025.00027/figures/cand/p06_fig7.png
+figure_reading_method: >-
+  Fig. 3 re-cropped at 300 dpi; coplanarity values from colour-pixel marker centroids against the plot frame
+  (800 um = 439 px), +/-15 um where markers overlap; categories are 30-100 C in 10 C steps then 105-200 C in 5 C steps (28 points).
+  SUS430_M markers at 195 C overlap SUS430_L/S lines and were not entered. Fig. 2(c) bar data labels read directly.
+  Tables I, II, III, IV, V, VI read from page renders; match text.md.
+entries:
+  - {table: interconnects, row_id: ectc51687.2025.00027-a-i1, field: pitch_um, value: 40, unit: um, basis: design_target, locator: "p.2 Table II", note: "Table I front pad pitch 0.04 mm agrees"}
+  - {table: interconnects, row_id: ectc51687.2025.00027-a-i2, field: height_um, value: 30, unit: um, basis: design_target, locator: "p.2 Table I", note: "Cu 30 + SnAg 25 = 55 um total stated in text"}
+derived:
+  - {table: test_vehicles, row_id: ectc51687.2025.00027-a, field: interposer_area_mm2, value: 1932, formula: "42 x 46", inputs: "p.2 Table I"}
+  - {table: test_vehicles, row_id: ectc51687.2025.00027-b, field: interposer_area_mm2, value: 1932, formula: "42 x 46", inputs: "p.2 Table I"}
+  - {table: components, row_id: ectc51687.2025.00027-a-c1, field: thickness_um, value: 675, formula: "0.675 mm x 1000", inputs: "p.2 Table II"}
+  - {table: interconnects, row_id: ectc51687.2025.00027-a-i2, field: pitch_um, value: 150, formula: "0.15 mm x 1000", inputs: "p.2 Table I"}
+  - {table: interconnects, row_id: ectc51687.2025.00027-a-i3, field: diameter_um, value: 500, formula: "0.5 mm x 1000", inputs: "p.3 Sec. II.B"}
+  - {table: process_steps, row_id: ectc51687.2025.00027-a-s19, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.3 Sec. II.B"}
+  - {table: process_steps, row_id: ectc51687.2025.00027-a-s21, field: time_s, value: 1800, formula: "0.5 h x 3600", inputs: "p.3 Sec. II.B"}
+  - {table: components, row_id: ectc51687.2025.00027-a-c6, field: thickness_um, value: 2000, formula: "2.0 mm x 1000", inputs: "p.3 Sec. II.B"}
+conflicts:
+  - {table: metrics, row_id: ectc51687.2025.00027-b-m19, field: value_text, values: ["text: No. 1 to No. 11 were successfully bonded", "Table V: No. 11 substrate B bridged and failed"], locators: ["p.5 Sec. III.C", "p.5 Table V"], chosen: "Table V", why: "result table; next sentence of the text also says No. 11 substrate B bridged"}
+  - {table: metrics, row_id: ectc51687.2025.00027-a-m9, field: scope, values: ["abstract: substrate warpage < 200 um at 160-200 C", "Fig. 3: Cu_S curve stays above 250 um in that range"], locators: ["p.1 Abstract", "p.4 Fig. 3"], chosen: "statement kept, scoped to SUS430 stiffeners", why: "plot shows the bound holds only for SUS430"}
+  - {table: test_vehicles, row_id: ectc51687.2025.00027-c, field: notes, values: ["Sec. III.A: CTE mismatch SUS430 vs Cu explains Substrate B behaviour", "Sec. III.B: substrate B with Cu stiffener had smaller mismatch than substrate A with SUS430"], locators: ["p.3 Sec. III.A", "p.4 Sec. III.B"], chosen: "not entered as a metric", why: "qualitative text, internally inconsistent"}
+excluded:
+  - "Previous 120x120 mm TV assembly and board mounting failure of ref [1]"
+  - "LTS peak reflow 190 C or below vs SAC > 250 C (general statement citing refs [12][13])"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "microbump/C4/BGA counts; TCB temperature, force, time"
+  - "substrate layer thicknesses, materials, core thickness, total package thickness (measured by microscope but not given)"
+  - "absolute warpage sign convention in Fig. 3 (coplanarity, unsigned); measured warpage of CoW before substrate attach"
+  - "TCT sample counts; resistance values"
+  - "EMC, CUF and glue product names; interposer RDL/TSV details"
+source_quality:
+  - "Reference [1] in the list is a template placeholder (Eason et al. 1955), not the authors' prior paper."
+  - "Candidate p02_fig1 clips the PCB label; p06_fig7 covers only a sliver of Fig. 7; no candidate for Table VI caption issues (p06_tablevi exists, not chosen)."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51687.2025.00027-b-m8, change: "deleted (copy of a-m9)", reason: "abstract states substrate warpage < 200 um at 160-200 C once, not split by substrate"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51687.2025.00027-a-m9, change: "scope prefixed 'applies to TVs a, b (abstract, not split by substrate)'; notes updated", reason: "single row for the paper-level claim"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51687.2025.00027-a-m11..a-m34 / b-m9..b-m32, change: "kept (16 manifest groups: a-m11..m17/b-m9..m15, a-m23..m29/b-m21..m27, a-m33..m34/b-m31..m32)", reason: "Tables V and VI give separate Substrate A and Substrate B columns; identical outcomes are genuine per-TV values"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00027-figures, change: "renumbered f02 -> f01 (Fig. 7); f01 -> f02 (Fig. 1); f03 -> f06 (Table I); f04 -> f09 (Fig. 3); f05 -> f10 (Table V); f06 -> f12 (Fig. 2)", reason: "re-rank under key-figure rule 2026-10-19 (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00027-f03, change: "added Fig. 5 (stack_schematic, manual)", reason: "test-line cross-section drawing"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00027-f04, change: "added Fig. 4 (package_photo, manual)", reason: "package photos with S/M/L stiffeners"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00027-f05, change: "added Fig. 6 (xray_csam, manual)", reason: "X-ray CT images of the build"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00027-f07, change: "added Table II (data_table, candidate)", reason: "source of die/microbump rows"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00027-f08, change: "added Table III (data_table, manual)", reason: "stiffener widths used in variants"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00027-f11, change: "added Table VI (data_table, manual)", reason: "source of TCT rows a-m23..m34, b-m21..m32"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00027-f13, change: "added Table IV (data_table, candidate)", reason: "simulation material properties of TV c"}
