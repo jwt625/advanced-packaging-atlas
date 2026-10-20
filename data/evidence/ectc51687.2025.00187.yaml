@@ -37,3 +37,6 @@ not_reported:
   - reliability and junction-to-case thermal measurements (stated as future work)
 source_quality:
   - "Candidates p02_fig2 and p06_fig14a include a sliver of body text; p05_fig10 clips the bottom of steps 3-4 (manual bboxes used)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00187-F1, change: step_basis of all steps set to stated_in_flow, reason: order from Fig. 10 steps 1-4 and Sec. III.A}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00187-F1-s06", change: "target: \"\" -> \"lid 74 x 74 mm, 1 mm thick\"", reason: "lid size and thickness stated (p.2 Sec. II.A.1); stated targets go on the step"}

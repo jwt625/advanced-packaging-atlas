@@ -15,7 +15,7 @@ entries:
   - {table: components, row_id: ectc51909.2023.00333-a-c1, field: cavity_depth_um, value: 207.57, unit: um, basis: measured, locator: "p.3 Sec. III.B", note: "depth at the measured point = bonded ARC substrate thickness"}
   - {table: components, row_id: ectc51909.2023.00333-a-c1, field: gap_um, value: 50, unit: um, basis: design_target, locator: "p.3 Sec. III.B", note: "cavity designed with an extra 50 um on each edge"}
   - {table: metrics, row_id: ectc51909.2023.00333-a-m4, field: value, value: 78.54, unit: deg, basis: measured, locator: "p.4 Fig. 6", note: "angle label on cross-section"}
-  - {table: process_steps, row_id: ectc51909.2023.00333-a-s07, field: temp_c, value: 70, unit: C, basis: design_target, locator: "p.4 Sec. III.C", note: "hot roller process at 70 C"}
+  - {table: process_steps, row_id: ectc51909.2023.00333-F1-s07, field: temp_c, value: 70, unit: C, basis: design_target, locator: "p.4 Sec. III.C", note: "hot roller process at 70 C"}
   - {table: metrics, row_id: ectc51909.2023.00333-b-m1, field: value, value: 10.12, unit: "", basis: measured, locator: "p.1 Abstract", note: "dielectric constant 10.12+/-0.061 over 3-170 GHz; abstract only"}
 derived: []
 conflicts:
@@ -35,3 +35,24 @@ not_reported:
   - GX-92P cure temperature and time; lamination pressure/temperature/time; ABF cure/reflow conditions
   - fs-laser wavelength, power, pulse duration, repetition rate; LTHC release laser parameters
   - warpage, reliability, thermal, yield; RF test structure details behind the abstract numbers
+  - "process_steps: ectc51909.2023.00333-b (transmission-line coupon values appear only in the abstract; its fabrication is not described)"
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00333, change: "papers.notes trimmed 32 -> 28 words", reason: "audit_x1 item 15 (rule m, notes <= 30 words)"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00333-F1-s07, change: "none", reason: "audit_x1 item 14: temp_c 70 (hot roller, p.4 Sec. III.C) already carries override temp_c:design_target"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00333-f07, change: "added Fig. 2 (stack_schematic, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00333-F1, change: "flow_name and locator revised", reason: "Fig. 3 a-f and Fig. 7 are the flow figures"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00333-F1, change: "step_basis stated_in_flow on all steps s01-s12", reason: "order stated in Sec. III and Fig. 3/Fig. 7"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00333-F1-s02, change: "equipment O2 plasma etching chamber (from conditions)", reason: "named tool goes in equipment"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00333-F1-s03, change: "target (object name) cleared, object moved to step; equipment vacuum laminator", reason: "target holds geometry only; named tool"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00333-F1-s04, change: "target (object name) cleared, object moved to step; equipment vacuum laminator", reason: "target holds geometry only; named tool"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00333-F1-s05, change: "equipment high-temperature oven", reason: "named tool type (p.3 Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00333-F1-s06, change: "equipment femtosecond laser drill; target cavity design (die 2.54 mm + 50 um per edge)", reason: "p.3 Sec. III.B stated design geometry"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00333-F1-s07, change: "equipment hot roller", reason: "named tool type (p.4 Sec. III.C)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00333-F1-s08, change: "category assembly -> temporary_bonding; equipment vacuum laminator (from conditions)", reason: "mounting on LTHC temporary release film"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00333-F1-s09, change: "equipment flip-chip bonder (from conditions)", reason: "named tool"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00333-F1-s12, change: "equipment laser", reason: "p.4 Sec. III.C laser release"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51909.2023.00333-F1-s03", change: "conditions: '' -> 'bottom ARC 120 um thick (Corning)'", reason: "supplied bottom ARC thickness stated (p.3 Sec. III.A); was only in step text"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51909.2023.00333-F1-s04", change: "conditions: '' -> 'top ARC 80 um thick (Corning)'", reason: "supplied top ARC thickness stated (p.3 Sec. III.A); was only in step text"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51909.2023.00333-F1-s05", change: "target: '' -> 'GX-92P bond line 5.4772 um (SEM, Fig. 4)'; result: 'bonded ARC, Fig. 4 SEM 5.4772 um GX-92P' -> 'bonded ARC (Fig. 4)'; overrides: '' -> 'target:measured'", reason: "measured bonding-layer thickness from Fig. 4 SEM label moved from result to target with measured override (matches stack_layers a-L03)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51909.2023.00333-F1-s07", change: "conditions: 'laser-active side facing carrier' -> 'laser-active side facing carrier; glass carrier 1000 um thick'", reason: "stated carrier thickness (p.3 Sec. II.C); was only in step text"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51909.2023.00333-F1-s09", change: "material: '' -> 'TTC-1002 thermal test chip (Thermal Engineering Associates)'; conditions: '' -> 'die 2.54 x 2.54 mm, 200 um thick'", reason: "stated embedded die and thickness (p.3 Sec. II.D)"}

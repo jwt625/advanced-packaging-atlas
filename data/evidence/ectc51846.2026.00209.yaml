@@ -13,13 +13,13 @@ figure_reading_method: >-
 entries:
   - {table: metrics, row_id: ectc51846.2026.00209-a-m4, field: value, value: 411.285, unit: um, basis: measured, locator: "p.3 Fig. 4", note: "marker [1] top width"}
   - {table: metrics, row_id: ectc51846.2026.00209-a-m5, field: value, value: 228.144, unit: um, basis: measured, locator: "p.3 Fig. 4", note: "marker [2] bottom width"}
-  - {table: process_steps, row_id: ectc51846.2026.00209-a-s01, field: conditions, value: "kerf 25 um; pattern offset 12.5 um", unit: um, basis: design_target, locator: "p.2 Sec. IV", note: "kerf measured from a single linear pass"}
+  - {table: process_steps, row_id: ectc51846.2026.00209-F1-s01, field: conditions, value: "kerf 25 um; pattern offset 12.5 um", unit: um, basis: design_target, locator: "p.2 Sec. IV", note: "kerf measured from a single linear pass"}
 derived:
   - {table: components, row_id: ectc51846.2026.00209-a-c1, field: thickness_um, value: 1000, formula: "1 mm * 1000", inputs: "p.4 Sec. VII"}
   - {table: components, row_id: ectc51846.2026.00209-a-c2, field: thickness_um, value: 150, formula: "0.15 mm * 1000", inputs: "p.2 Sec. III"}
   - {table: stack_layers, row_id: ectc51846.2026.00209-d-L01, field: thickness_um, value: 20, formula: "0.020 mm * 1000", inputs: "p.3 Sec. VI"}
-  - {table: process_steps, row_id: ectc51846.2026.00209-a-s05, field: time_s, value: 1800, formula: "30 min * 60", inputs: "p.4 Sec. VII"}
-  - {table: process_steps, row_id: ectc51846.2026.00209-a-s09, field: time_s, value: 3600, formula: "60 min * 60", inputs: "p.4 Sec. VII"}
+  - {table: process_steps, row_id: ectc51846.2026.00209-F1-s05, field: time_s, value: 1800, formula: "30 min * 60", inputs: "p.4 Sec. VII"}
+  - {table: process_steps, row_id: ectc51846.2026.00209-F1-s09, field: time_s, value: 3600, formula: "60 min * 60", inputs: "p.4 Sec. VII"}
   - {table: metrics, row_id: ectc51846.2026.00209-c-m2, field: value, value: 2.34, formula: "paper's own ratio to bulk Cu resistivity", inputs: "p.3 Sec. VI"}
 conflicts:
   - {table: components, row_id: ectc51846.2026.00209-a-c1, field: x_mm, values: [22, 25], locators: ["p.4 Sec. VII", "p.2 Sec. III"], chosen: 22, why: "text vs text; p.4 describes the demonstrator build itself"}
@@ -39,3 +39,54 @@ not_reported:
 source_quality:
   - "Fig. 4 marker [3] 81.961 um not explained in text; profile height axis not interpreted."
   - "Paste names written inconsistently (CL83A, CL83-A, CLA83A; US-202A, US-202)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s08", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s09", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F2-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F2-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F2-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F2-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F2-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F3-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F3-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F3-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F3-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F3-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F3-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. IV, VI, VII text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s03", change: "step_basis: 'stated_in_flow' -> 'inferred_order'", reason: "repass: base-slide print is parallel to coverslip drilling; relative order not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s03", change: "notes: '' -> 'Placed after coverslip drilling; paper gives no order between the two substrates.'", reason: "repass: base-slide print is parallel to coverslip drilling; relative order not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s01", change: "target: 'coverslip vias 400 um design' -> 'via outer diameter 400 um'", reason: "repass: target = stated geometry (Fig. 1 outer diameter 400 um)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s03", change: "thickness_um: '20' -> ''", reason: "repass: 20 um is the thickness after sintering -> result of sinter step s05"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s03", change: "result: '20 +/- 2.5 um thick after sinter' -> ''", reason: "repass: 20 um is the thickness after sintering -> result of sinter step s05"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s03", change: "overrides: 'thickness_um:measured' -> ''", reason: "repass: 20 um is the thickness after sintering -> result of sinter step s05"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s05", change: "thickness_um: '' -> '20'", reason: "repass: 20 +/- 2.5 um thickness after sintering moved here from s03"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s05", change: "result: '' -> '20 +/- 2.5 um thick after sinter'", reason: "repass: 20 +/- 2.5 um thickness after sintering moved here from s03"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s05", change: "overrides: '' -> 'thickness_um:measured;result:measured'", reason: "repass: 20 +/- 2.5 um thickness after sintering moved here from s03"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F3", change: "tv_ids: 'ectc51846.2026.00209-e' -> 'ectc51846.2026.00209-e;ectc51846.2026.00209-d'", reason: "repass: d adhesion pads built in the same Sec. VI sample flow (delta print step); shared mount"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F3", change: "flow_name: 'adhesion sample (Sec. VI)' -> 'adhesion samples (Sec. VI)'", reason: "repass: d adhesion pads built in the same Sec. VI sample flow (delta print step); shared mount"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F3-s01", change: "tv_id: '' -> 'ectc51846.2026.00209-e'", reason: "repass: e-specific steps become deltas when d joins the flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F3-s02", change: "tv_id: '' -> 'ectc51846.2026.00209-e'", reason: "repass: e-specific steps become deltas when d joins the flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F3-s03", change: "tv_id: '' -> 'ectc51846.2026.00209-e'", reason: "repass: e-specific steps become deltas when d joins the flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F3-s04", change: "tv_id: '' -> 'ectc51846.2026.00209-e'", reason: "repass: e-specific steps become deltas when d joins the flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F3-s01", change: "target: '' -> '5 mm x 5 mm x 0.020 mm pad'", reason: "repass: pad geometry into target"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F3-s01", change: "step: 'print 5x5x0.020 mm US-202A pad on borosilicate' -> 'print US-202A pad on borosilicate'", reason: "repass: pad geometry into target"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F3-s06", change: "deleted", reason: "repass: ASTM D3359 tape test is a post-build test; results already in metrics d-m1, d-m2, e-m1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F3-s07", change: "added: print pad on borosilicate substrate", reason: "repass: TV d (15 x 15 mm pads) had no flow; Sec. VI states print on separate borosilicate substrates"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F4", change: "added flow: four-point probe samples (Sec. VII)", reason: "repass: TV c (four-point probe samples) had no flow; Sec. VII states printing in both pastes"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F4-s01", change: "added: microdispense four pads with connecting traces", reason: "repass: four-point probe sample print (Sec. VII)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F4-s02", change: "added: sinter printed pattern in muffle furnace", reason: "repass: per-paste sinter conditions stated in Sec. VII; 4PP metrics use them"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F5", change: "added flow: laser-drilled via array (Sec. IV, Fig. 2)", reason: "repass: TV f (via array, Fig. 2) had no flow; only the drilling is described"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F5-s01", change: "added: fs-laser drill via array in borosilicate glass", reason: "repass: via array drilling (Fig. 2 caption; Sec. IV laser system)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s01", change: "conditions: '1064 nm' dropped (only in product names); add '22 x 22 x 0.15 mm No. 1 borosilicate coverslips'", reason: "v016 value_not_in_paper (audit A); target_missing_preexisting a-L02 (p.4 Sec. VII)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F1-s03", change: "conditions add base slide 1 mm thick (22 x 75 x 1 mm p.4 / 25 x 75 x 1 mm p.2)", reason: "v016 target_missing_preexisting a-L05"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F2", change: "level ordered -> full", reason: "v016 flow_level (audit A): s03 typed 250 C / 60 min sinter (p.4 Sec. VII)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F2-s01", change: "conditions '22 x 22 x 0.15 mm borosilicate coverslip'", reason: "v016 target_missing_preexisting b-L02 (p.4 Sec. VII)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F4-s02", change: "temp_c_max 500 (highest split temperature)", reason: "v016 split_temp_untyped (audit A; validator)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00209-F4-s01", change: "conditions add 'US-202A traces 20 +/- 2.5 um thick after sintering'", reason: "v016 target_missing c-L01 (p.3 Sec. VII)"}

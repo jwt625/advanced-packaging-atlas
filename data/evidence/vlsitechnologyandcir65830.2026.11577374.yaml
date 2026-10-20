@@ -30,3 +30,12 @@ not_reported:
   - "measured data rate or energy (0.7 pJ/bit, 0.25 Tb/s/mm2, 0.35 W/mm2 are abstract claims)"
 source_quality:
   - "Clean text layer; candidates are full grid cells and contain each whole figure."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir65830.2026.11577374-F1", change: "step_basis stated_in_flow (s04 inferred_order)", reason: "order from Fig. 2 and p.1 text"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir65830.2026.11577374-F1-s01", change: "target 'oxide trench 85x10 um2'", reason: "p.2 Fig. 6 caption"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir65830.2026.11577374-F1-s02", change: "step notes F2F", reason: "p.2 Fig. 6 interface labels"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir65830.2026.11577374-F1-s04", change: "kept as inline_inspection (CSAM during stacking); position inferred", reason: "p.2 Fig. 5 'CSAM check during 9-layer stacking process'"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir65830.2026.11577374-F1-s05", change: "thickness_um 3 (approx) per DRAM tier; up to 1+8 stack", reason: "p.1 Sec. Design and Structure; p.3 Fig. 7"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir65830.2026.11577374-F1-s06", change: "target 'TSV pitch <20 um'; conditions 13.7K TSVs per layer", reason: "p.1 Sec. Experimental and Reliability Results"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir65830.2026.11577374-F1-s01", change: "category 'other' kept; notes added", reason: "p.1 Sec. Design and Structure / Exp. Results state only 'DRAM wafer with oxide trench (Flatness < 10nm)'; no etch, fill or CMP stated"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir65830.2026.11577374-F1-s07", change: "category 'other' -> 'rdl_layer'", reason: "p.1 Sec. Design and Structure: 'Backside interconnection are formed for pad-out at final' (backside routing/pad metal)"}

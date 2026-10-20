@@ -32,5 +32,19 @@ not_reported:
   - die x/y size, Cu pad pitch and count, passivation material and thickness, TSV dimensions
   - bond force/time/temperature, anneal time, plasma gases and power, wafer size
   - reliability test durations and sample counts; thermal resistance absolute values and method
+  - "process_steps: ectc51909.2023.00179-b (MR-MUF reference stack; build not described)"
 source_quality:
   - "No Fig. 3 in the paper (numbering jumps from Fig. 2 to Fig. 4). Table 1 had no candidate; manual crop used."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00179-F1-s01, change: 'material set: Cu pads (redesigned) in low-outgassing passivation film', reason: 'p.3 Sec. II.D: low-outgassing passivation film, redesigned Cu pad, optimized CMP'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00179-F1-s02, change: cure splits moved from conditions to split; C' corrected to C, reason: p.2 Fig. 2 prints the last column as C; parameter sweep belongs in split}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00179-F1-s03, change: category other -> bumping; step names backside pad formation, reason: 'p.1 Sec. I and p.2 Sec. II.A: backside pads formed on each layer'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00179-F1-s05, change: step_basis inferred_order, reason: paper does not state dicing position relative to de-bonding}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00179-F1-s09, change: 'equipment: all-in-one stacking equipment', reason: 'p.4 Sec. II.D: cleaning applied in all-in-one equipment immediately before bonding'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00179-F1-s10, change: 'equipment: C2W bonder, convex bond tool', reason: 'p.3 Sec. II.D; p.3 Fig. 7, Fig. 10'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00179-F1-s12, change: step_basis inferred_order, reason: proxy SiP molding position not stated (p.4 Sec. II.E)}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00179-b, change: process_steps not_reported entry added, reason: reference MR-MUF stack; build not described}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00179-F1-s02", change: "temp_c_max: '' -> '210'", reason: "split names cure temperatures 210/190/200/200/190 C (Fig. 2); temp_c_max = highest per v2.5; selected condition not stated so temp_c stays empty"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00179-F1-s07", change: "category other kept (no change)", reason: "remounting (p.4 Sec. II.D) is a die re-mount after dicing to remove dicing particles; no step_category matches a remount/transfer"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00179-F1-s08", change: "time_s left empty (no change)", reason: "24 h (p.2 Sec. II.B) is the tolerated plasma-to-stack Q-time window, not the plasma process duration"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00179-F1", change: "stack_layers a-L01 58 um not placed on a step (no change)", reason: "58 um is the Fig. 1 schematic comparison case ('in case of same chip thickness of 58um'); no thinning step is stated for the build"}

@@ -14,10 +14,10 @@ figure_reading_method: >-
 entries:
   - {table: metrics, row_id: ectc51906.2022.00303-a-m2, field: value, value: 26, unit: ratio, basis: simulated, locator: "p.3 Fig. 3(b)", note: "dielet-side curve end point at 20 mm, between 25 and 30 gridlines"}
   - {table: metrics, row_id: ectc51906.2022.00303-b-m4, field: value, value: 1.13, unit: mm, basis: derived, locator: "p.3 Fig. 4(b)", note: "line end at 10 mm slightly above 1.1 gridline"}
-  - {table: process_steps, row_id: ectc51906.2022.00303-e-s02, field: conditions, value: "200 C; 0.06 s/10 s; 0.7 A/cycle; 50 cycles", basis: design_target, locator: "p.6 Fig. 8(a), Fig. 8(c) title"}
+  - {table: process_steps, row_id: ectc51906.2022.00303-F3-s02, field: conditions, value: "200 C; 0.06 s/10 s; 0.7 A/cycle; 50 cycles", basis: design_target, locator: "p.6 Fig. 8(a), Fig. 8(c) title"}
 derived:
   - {table: stack_layers, row_id: ectc51906.2022.00303-e-L04, field: thickness_um, value: 0.003, formula: "3 nm / 1000", inputs: "p.5 Sec. IV col. 2; p.6 Sec. V"}
-  - {table: process_steps, row_id: ectc51906.2022.00303-e-s02, field: thickness_um, value: 0.003, formula: "3 nm / 1000", inputs: "p.5 Sec. IV col. 2"}
+  - {table: process_steps, row_id: ectc51906.2022.00303-F3-s02, field: thickness_um, value: 0.003, formula: "3 nm / 1000", inputs: "p.5 Sec. IV col. 2"}
   - {table: components, row_id: ectc51906.2022.00303-c-c3, field: thickness_um, value: 4000, formula: "<4 mm * 1000", inputs: "p.2 Fig. 1(a)"}
 conflicts:
   - {table: interconnects, row_id: ectc51906.2022.00303-d-i1, field: notes (TPV width), values: ["500 um width (abstract)", "703 um (Fig. 7e)", "1175 um (Fig. 7a)", "500-800 um inter-dielet spacing design"], locators: ["p.1 Abstract", "p.5 Fig. 7(e)", "p.5 Fig. 7(a)", "p.4 Sec. IV"], chosen: "Fig. 7 labels recorded as metrics; no width column filled", why: "measured cross-section labels; abstract value is a design summary"}
@@ -41,3 +41,20 @@ not_reported:
   - AC/PDN impedance, IR drop values, decap values
 notes: >-
   Primary bucket thermal_pdn kept; si_interposer added (Si-IF). TPV has no interconnect_type enum, entered as other.
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00303-c, change: "notes now start 'Design concept, not built (tv_kind other until a design_concept enum exists).'", reason: "audit_x1 item 12 (envisioned design under tv_kind other); interim fix, schema enum pending"}
+  - {date: 2026-10-19, source: audit_x1, row_id: "ectc51906.2022.00303-F1-s01..s11", change: "performed set to no (was empty); note 'Proposed flow for the unbuilt concept.' added", reason: "Fig. 5 flow is proposed for the envisioned TV c; only parts were executed, on coupons d and e"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F1", change: "scope tv_build -> generic_platform; level fragments -> ordered", reason: "Fig. 5(a)-(f) is an ordered proposed flow with materials (ALD Al2O3, PECVD SiO2, CHF3 ICP-RIE) for the unbuilt concept"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F1-s01", change: "category other -> carrier_prep", reason: "Si-IF provision is step (1) of the Fig. 5 flow (contract convention)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F1/F2/F3", change: "row-id targets moved to notes ('Forms <row_id>'); targets hold geometry only", reason: "contract convention: target = stated geometry"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F2-s01", change: "thickness_um 100 -> target (mesa height, not wafer thickness); dielet sizes and spacing added to target; 525 um wafer in conditions", reason: "p.4 Sec. IV; p.5 Fig. 6(a)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F2-s08", change: "deleted (cross-section measurement, not a build step)", reason: "information already in metrics d-m2..d-m10 (cut 1/cut 2, Fig. 7)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F3-s02", change: "conditions 'A/cycle' spelled 'Angstrom/cycle'", reason: "p.6 Fig. 8(a) unit is Angstrom per cycle"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F3-s01/s03", change: "s01 conditions add 500 um dielet/interposer with thin oxide; s03 material TMAH -> Al2O3 (TMAH to conditions)", reason: "p.5 Sec. IV col. 2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F1/F2/F3", change: "step_basis stated_in_flow; performed yes on executed F2/F3 steps (F2-s07, F3-s06 stay no)", reason: "p.4 Sec. III; p.4-6 Sec. IV"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F1-s01", change: "target RDL < 30 um; > 500 um Si support in conditions", reason: "p.2 Fig. 1(a) concept labels"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F2-s01", change: "thickness_in_um 525; target adds measured 123 um mesa step and 410 um remaining Si", reason: "p.4 Sec. IV 525 um wafers; p.5 Fig. 7(b),(e),(f)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F2-s04", change: "200 um moved to thickness_in_um (as spun); thickness_um 203 (measured)", reason: "p.5 Sec. IV '200 um of SU-8 was spun'; p.5 Fig. 7(a),(b) 203 um"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F2-s06", change: "target Cu TPV fill 277 um (measured)", reason: "p.5 Fig. 7(a),(b); text 'around 280 um' kept in thickness_um"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F3-s05", change: "target 500 um deep TPVs; 510 um SU-8 wall measured", reason: "p.6 Fig. 9 caption; p.6 Fig. 9(b)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F3-s02", change: "no change (time_s not typed)", reason: "pulse/purge 0.06 s/10 s are per-cycle TMA and H2O pulse and purge times (multi-valued), not one step time (p.6 Fig. 8(a))"}

@@ -33,6 +33,17 @@ not_reported:
   - conventional (M1) substrate dimensions; inductor values; MLCC counts; switching frequency, Vin
   - whether Fig. 2/Fig. 9 impedances are measured or simulated; sample counts; reliability data
   - meaning of the '1 mm' annotation in Fig. 3(a) (not entered)
+  - "process_steps: ectc51529.2024.00170-a (M1 module assembly not described as steps; only structure: two substrates stacked by Cu pin connection, Sec. III)"
+  - "process_steps: ectc51529.2024.00170-b (M2 module assembly not described as steps; only structure: two substrates stacked by Cu pin connection, Sec. III)"
+  - "process_steps: ectc51529.2024.00170-c (M3 module assembly not described as steps; only structure: two substrates stacked by Cu pin connection, Sec. III)"
+  - "process_steps: ectc51529.2024.00170-d (M4 module assembly not described as steps; only structure: two substrates stacked by Cu pin connection, Sec. III)"
 source_quality:
   - "Affiliation lines in text.md are font-garbled ('0XUDWD...' = Murata ...); read from page render."
   - "Candidate p03_fig7 merges Fig. 7 with the Fig. 8 caption; Fig. 8 had no candidate (manual crop)."
+revisions:
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00170-F1", change: "tv_ids 'ectc51529.2024.00170-e' -> 'ectc51529.2024.00170-e;ectc51529.2024.00170-f'", reason: "Sec. II iPaS construction applies to the 1 mF iPaS example of Fig. 2 (TV f) as well"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00170-F1-s04", change: "category 'other' -> 'rdl_layer'; conditions '' -> 'laser via connection'; step 'construct several RDL on top and bottom sides with laser via connection' -> 'construct several RDL on top and bottom sides'", reason: "category (v2.4 rdl_layer); laser via as written"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00170-F1", change: "step_basis stated_in_flow set on 4 steps (others as revised)", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00170", change: "process_flow_level ordered confirmed (Sec. II order, no conditions); M1-M4 listed in not_reported", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00170-F1-s01", change: "category other kept; note added", reason: "cavity-forming method not stated (p.2 Sec. II); no matching category"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00170-F1-s03", change: "category other kept; note added", reason: "resin sealing method not stated (p.2 Sec. II); molding/lamination would be invented"}

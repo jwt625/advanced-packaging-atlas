@@ -28,7 +28,7 @@ conflicts:
   - {table: papers, row_id: ectc51906.2022.00140, field: notes, values: ["abstract/Sec. 2.3: ASIC", "Sec. 2.2/Fig. 3: AP (Application Processor)"], locators: ["p.1 Abstract; p.2 Sec. 2.3", "p.2 Sec. 2.2; p.2 Fig. 3"], chosen: "ASIC / AP", why: "same die named two ways"}
   - {table: metrics, row_id: ectc51906.2022.00140-c-m10, field: value_text, values: ["Sec. 3.3: L/S 0.9/0.9 um patterned", "Conclusion: reliable results even to L/S 1/1 um"], locators: ["p.5 Sec. 3.3", "p.5 Sec. 4"], chosen: "both kept (0.9 um patterned with 80 nm undercut; 1/1 um called reliable)", why: "not contradictory"}
 excluded:
-  - "Chip-first flow description and DoF/flatness advantages cited to refs [1]-[3]"
+  - "DoF/flatness advantages of chip last cited to refs [1]-[3]"
   - "PID shrinkage mechanism cited to refs [5], [6]"
   - "Authors' previous chip-first L/S 2/2 um mass-production study (no numbers taken)"
 not_reported:
@@ -39,3 +39,18 @@ not_reported:
   - sample counts for undulation and yield; warpage sign convention
 source_quality:
   - "Abstract has garbled glyphs ('2.5D chip last', '1 ASIC'). Fig. 1 candidate fine; candidates p04_fig8 and p05_fig10 clip bottom edge, p05_fig12 slightly clipped; no candidate in json for Fig. 2 (cand png exists)."
+revisions:
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51906.2022.00140-F1", change: "flow renamed; tv_ids a -> a;b; steps rebuilt as shared + TV deltas (s01-s20)", reason: "repass review A miss 2: TV b used the same chip-last flow with T-shape UBM and optimized exposure (p.5 Fig. 10, Sec. 3.2)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51906.2022.00140-F1-s01", change: "old s01 'form RDL incl. UBM and bonding pads on carrier' split into TV deltas s01 (a: planar UBM, thickness_um 11, Fig. 8 split) and s02 (b: T-shape UBM 8 um, stopper metal, PID release layer, organic carrier)", reason: "repass review A miss 5 (UBM 11 um only in notes; organic carrier not named) and miss 2 (TV b build)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51906.2022.00140-F1-s03", change: "old s02 PID coat 8.5 um made a TV a delta; s04 added as TV b delta without thickness", reason: "repass: 8.5 um PID target stated for the as-is (11 um UBM) build only (p.3 Fig. 5)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51906.2022.00140-F1-s05", change: "added PID exposure and development (via opening) before cure, step_basis inferred_order", reason: "repass review A miss 1: PID is photo-imageable; exposure/development before cure in p.3 Fig. 6, via opening in Fig. 7(b)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51906.2022.00140-F1-s08", change: "PR coat 7 um made a TV a delta; s09 added for TV b (PR thickness optimized, value not stated)", reason: "repass: conclusion (p.5 Sec. 4) says PR thickness, NA and dose were optimized for the improved build"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51906.2022.00140-F1-s10", change: "exposure split into TV deltas s10 (a) and s11 (b); NA split 0.12/0.16/0.18/0.24 removed from it", reason: "repass review A miss 3: NA split belongs to the resolution study (TV c), moved to F2-s01 split"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51906.2022.00140-F1-s07", change: "material 'Ti seed (Fig. 12b)' cleared; Ti noted as TV c only", reason: "repass: Ti seed is shown on the TV c resolution coupon, not stated for TVs a/b"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51906.2022.00140-F1-s13", change: "target 'L/S 2/2 um D2D lines, > 6 mm long' added", reason: "repass rule 7: stated dimension on the step (p.1 Abstract, p.2 Sec. 2.2)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51906.2022.00140-F1-s16", change: "AVI kept as step_kind inline_inspection with step_basis inferred_order", reason: "repass: in-flow inspection of fine patterns; position not stated"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51906.2022.00140-F2", change: "new flow for TV c (resolution coupon): exposure with NA split, SAP on Ti seed, seed etch (80 nm undercut)", reason: "repass review A miss 3: NA split on the TV that ran it"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51906.2022.00140-F3", change: "new comparison flow for TV d (chip-first, 7 steps, generic_description)", reason: "repass review A miss 4: p.2 Sec. 2.1 and Fig. 2 (left) describe the chip-first flow of TV d"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51906.2022.00140", change: "evidence excluded: 'Chip-first flow description and DoF/flatness advantages cited to refs [1]-[3]' -> 'DoF/flatness advantages of chip last cited to refs [1]-[3]'", reason: "repass: the chip-first flow text (p.2 Sec. 2.1) carries no citation; only the DoF/flatness sentence cites [1-3]"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00140-F1-s02", change: "v021: conditions 'Cu >= 8 um ... over 1000 h HTS' moved to notes as design rationale; time_s left empty", reason: "1000 h HTS is the reliability target the UBM thickness is designed for (p.4 Sec. 3.2), not a process time"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00140-F1-s20", change: "v021 category_other reviewed: kept other; notes cite the text", reason: "p.2 Sec. 2.1 'final backend processing is completed' without detail; no specific category stated"}

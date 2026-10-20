@@ -26,7 +26,7 @@ entries:
   - {table: metrics, row_id: ectc51846.2026.00218-b-m1, field: value, value: 0.19, unit: ohm, basis: measured, locator: "p.6 Fig. 12", note: "blue series at 50% about 0.189 ohm"}
   - {table: metrics, row_id: ectc51846.2026.00218-b-m2, field: value, value: 0.19, unit: ohm, basis: measured, locator: "p.6 Fig. 12", note: "pink series at 50% about 0.191 ohm"}
 derived:
-  - {table: process_steps, row_id: ectc51846.2026.00218-a-s10, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.3 Sec. III.B"}
+  - {table: process_steps, row_id: ectc51846.2026.00218-F1-s10, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.3 Sec. III.B"}
   - {table: interconnects, row_id: ectc51846.2026.00218-a-i1, field: anneal_time_min, value: 120, formula: "2 h x 60", inputs: "p.3 Sec. III.B"}
   - {table: interconnects, row_id: ectc51846.2026.00218-a-i1, field: resistance_mohm, value: 290, formula: "0.29 ohm x 1000 (i2-i4: 0.88, 0.87, 1.1 ohm)", inputs: "p.5 Sec. III.D"}
 conflicts:
@@ -45,3 +45,11 @@ not_reported:
   - DC link counts per pitch in total, pitch of the 136k-link DC in the IDGF loop
   - TOV and HD TSV electrical results (pending)
 source_quality: []
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00218-F1-s01", change: "composite split: MZ level (s01, rdl_layer) then new F1-s14 SiCN/SiO2 deposition (seq 2); s02..s13 seq +1", reason: "text: 'Once MZ level is achieved, SiCN and SiO2 layers are deposited'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00218-F1-s02", change: "target 'via CD 0.5 um'; F1-s03 target pad size range and pitches", reason: "stated geometry (p.2 Sec. III.A, p.5 Table 1)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00218-F1-s09", change: "target 'bond pitch 5/3/2/1 um'", reason: "stated geometry on step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00218-F3-s02", change: "target TOV 4 x 9 um; F4-s02 target HD TSV 2 x 6 um; F1-s13/F2-s02 target die thickness", reason: "stated geometry on step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00218-F4-s03", change: "composite split: isolation deposition (s03), new etch back (s07), new barrier/seed (s08); s04..s06 seq +2", reason: "text gives the order (p.7 Sec. IV.C)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00218-F1-s13", change: "result += 'bottom wafer ~775 um, combined thickness ~783 um'", reason: "v017 target_missing_preexisting a-L09: p.3 Sec. III.B states bottom wafer ~775 um and combined 783 um after thinning; bottom wafer is not processed by any step, so value is recorded as the thinning result context, not a target"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00218-F2-s04", change: "thickness_um '' -> 6 (approx); result += 'SEM post CMP at die edge: SiO2 encapsulation ~6 um, Si top die ~4 um (Fig. 11)'; locator += 'p.6 Fig. 11'", reason: "v017 target_missing b-L01/b-L03: Fig. 11 SEM labels post CMP; die ~4 um kept in result only (conflicts with stated 15 um thinning target on F2-s02, see conflicts)"}

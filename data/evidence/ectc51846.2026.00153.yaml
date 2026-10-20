@@ -25,8 +25,10 @@ derived:
   - {table: components, row_id: ectc51846.2026.00153-a-c3, field: thickness_um, value: 300, formula: "0.3 mm x 1000 (unit conversion)", inputs: "p.4 Table II"}
   - {table: components, row_id: ectc51846.2026.00153-d-c3, field: thickness_um, value: 600, formula: "0.6 mm x 1000 (unit conversion)", inputs: "p.4 Table II; p.5 Sec. IV.D"}
   - {table: components, row_id: ectc51846.2026.00153-b-c4, field: thickness_um, value: 150, formula: "0.15 mm x 1000 (unit conversion)", inputs: "p.3 Sec. III.A.2"}
-  - {table: process_steps, row_id: ectc51846.2026.00153-a-s04, field: time_s, value: 3600, formula: "60 min x 60 (unit conversion); same for all pressure-oven and PMC steps", inputs: "p.3 Sec. III.A.2-3"}
-  - {table: process_steps, row_id: ectc51846.2026.00153-f-s03, field: time_s, value: 300, formula: "5 min x 60 (unit conversion)", inputs: "p.6 Sec. V.A"}
+  - {table: process_steps, row_id: ectc51846.2026.00153-F1-s13, field: time_s, value: 3600, formula: "60 min x 60 (unit conversion); same for all pressure-oven and PMC steps", inputs: "p.3 Sec. III.A.2-3"}
+  - {table: process_steps, row_id: ectc51846.2026.00153-F2-s03, field: time_s, value: 300, formula: "5 min x 60 (unit conversion)", inputs: "p.6 Sec. V.A"}
+  - {table: process_steps, row_id: ectc51846.2026.00153-F1-s24, field: dose_mj_cm2, value: 5500, formula: "5.5 J/cm2 x 1000 (unit conversion)", inputs: "p.3 Sec. III.A.4"}
+  - {table: process_steps, row_id: ectc51846.2026.00153-F2-s05, field: dose_mj_cm2, value: 5500, formula: "5.5 J/cm2 x 1000 (unit conversion); same conditions as chip-first", inputs: "p.6 Sec. V.B; p.3 Sec. III.A.4"}
 conflicts:
   - {table: metrics, row_id: ectc51846.2026.00153-c-m3, field: value, values: ["text: decreased to around 0.5 mm", "plot: about -0.3 mm"], locators: ["p.5 Sec. IV.C", "p.5 Fig. 8"], chosen: -0.28, why: "measured plot over text"}
   - {table: metrics, row_id: ectc51846.2026.00153-e-m5, field: value, values: ["Sec. III.B text: warpage <1 mm across all sizes after molding for small CTE difference", "Sec. IV.A text: <1.5 mm for 510 x 515", "plot: +1.29 and +1.01 mm"], locators: ["p.3 Sec. III.B", "p.4 Sec. IV.A", "p.4 Fig. 6"], chosen: 1.29, why: "measured plot; Sec. III.B '<1 mm' not consistent with plotted few-days values"}
@@ -42,9 +44,60 @@ not_reported:
   - glass carrier thickness, TBF thickness, metal layer material and thickness, bare glass type/thickness
   - warpage measurement tool, temperature and panel definition of warpage (max-min); sample count beyond two markers
   - Xe flash pulse duration/count; detaping conditions; cure conditions for panel-to-panel coupon (stated 'similar')
+  - "process_steps: pressure-oven cure (Fig. 3(2)) for EMC-only coupons ectc51846.2026.00153-a, -c, -d, -e not stated (only for chip-mounted coupons)"
 judgment_calls:
   - "Six TVs: each EMC type/thickness, chip presence, panel size and the panel-to-panel coupon is a distinct stack."
   - "Glass carrier metal (light-to-heat) layer added to stacks from the Fig. 1 mechanism schematic; the text calls the coupon a three-layer structure."
   - "Chip bonding step kept with performed=no for EMC-only coupons; pressure-oven cure left blank (not stated whether applied without chips)."
   - "fan_out_panel class for chip-first coupons is an inference (paper: 'simplified assessment assuming chip-first assembly')."
   - "buckets add organic_rdl_fanout because the coupons emulate chip-first FO-PLP; primary_bucket panel kept."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00153-a-m3", change: "kept (no change)", reason: "CTE difference follows each build's EMC (LW 0.2, 400ZHF 1.2 ppm/K; p.4 Sec. IV.A, p.5 Sec. IV.C): build property, genuine per-TV"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00153-b-m4", change: "kept (no change)", reason: "CTE difference follows each build's EMC (LW 0.2, 400ZHF 1.2 ppm/K; p.4 Sec. IV.A, p.5 Sec. IV.C): build property, genuine per-TV"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00153-e-m7", change: "kept (no change)", reason: "CTE difference follows each build's EMC (LW 0.2, 400ZHF 1.2 ppm/K; p.4 Sec. IV.A, p.5 Sec. IV.C): build property, genuine per-TV"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00153-c-m4", change: "kept (no change)", reason: "CTE difference follows each build's EMC (LW 0.2, 400ZHF 1.2 ppm/K; p.4 Sec. IV.A, p.5 Sec. IV.C): build property, genuine per-TV"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00153-d-m4", change: "kept (no change)", reason: "CTE difference follows each build's EMC (LW 0.2, 400ZHF 1.2 ppm/K; p.4 Sec. IV.A, p.5 Sec. IV.C): build property, genuine per-TV"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00153-a-m4", change: "kept (no change)", reason: "p.4 Table II gives a separate 'No damage' result and photos per 320 mm coupon row: genuine per-TV result"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00153-b-m5", change: "kept (no change)", reason: "p.4 Table II gives a separate 'No damage' result and photos per 320 mm coupon row: genuine per-TV result"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00153-c-m5", change: "kept (no change)", reason: "p.4 Table II gives a separate 'No damage' result and photos per 320 mm coupon row: genuine per-TV result"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00153-f04", change: "added Table III p.4 package_photo (manual)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00153-f05", change: "renumbered from ectc51846.2026.00153-f06 (rank 6 -> 5)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00153-f06", change: "added Fig. 4 p.3 package_photo (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00153-f07", change: "added Fig. 5 p.4 micrograph (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00153-f08", change: "renumbered from ectc51846.2026.00153-f05 (rank 5 -> 8)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00153-f09", change: "added Fig. 7 p.5 warpage_plot (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00153-f10", change: "added Fig. 8 p.5 warpage_plot (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00153-f11", change: "renumbered from ectc51846.2026.00153-f04 (rank 4 -> 11)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s01", change: "made shared step (tv_id cleared); carrier size moved to split; step_basis stated_in_flow", reason: "identical lamination step copied on 5 TVs; only carrier size differs (p.2 Sec. III.A.1)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s02", change: "deleted (merged into F1-s01)", reason: "duplicate of shared lamination step F1-s01 (sibling copy)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s03", change: "deleted (merged into F1-s01)", reason: "duplicate of shared lamination step F1-s01 (sibling copy)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s04", change: "deleted (merged into F1-s01)", reason: "duplicate of shared lamination step F1-s01 (sibling copy)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s05", change: "deleted (merged into F1-s01)", reason: "duplicate of shared lamination step F1-s01 (sibling copy)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s06", change: "step_basis stated_in_flow; note on category other", reason: "Fig. 3(1) lamination & cut"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s08", change: "kept as TV-b delta; typed temp_c 150 (head), equipment chip bonder (Fig. 3(2) label), target chip pitch", reason: "p.3 Sec. III.A.2, Fig. 3(2); p.5 Sec. IV.B 14.6 mm pitch 9x9"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s07", change: "deleted (redundant performed=no delta)", reason: "performed=no copies of chip bonding on EMC-only coupons; the step exists only as TV-b delta F1-s08"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s09", change: "deleted (redundant performed=no delta)", reason: "performed=no copies of chip bonding on EMC-only coupons; the step exists only as TV-b delta F1-s08"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s10", change: "deleted (redundant performed=no delta)", reason: "performed=no copies of chip bonding on EMC-only coupons; the step exists only as TV-b delta F1-s08"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s11", change: "deleted (redundant performed=no delta)", reason: "performed=no copies of chip bonding on EMC-only coupons; the step exists only as TV-b delta F1-s08"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s13", change: "kept as TV-b delta; step_basis stated_in_flow", reason: "p.3 Sec. III.A.2 cure follows chip mounting"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s12", change: "deleted (not stated for this TV)", reason: "pressure-oven cure is stated after chip mounting; not stated for EMC-only coupons a, c, d, e (listed in not_reported)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s14", change: "deleted (not stated for this TV)", reason: "pressure-oven cure is stated after chip mounting; not stated for EMC-only coupons a, c, d, e (listed in not_reported)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s15", change: "deleted (not stated for this TV)", reason: "pressure-oven cure is stated after chip mounting; not stated for EMC-only coupons a, c, d, e (listed in not_reported)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s16", change: "deleted (not stated for this TV)", reason: "pressure-oven cure is stated after chip mounting; not stated for EMC-only coupons a, c, d, e (listed in not_reported)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s17", change: "made shared step; EMC type/thickness and pressure per variant moved to split (pressure_mpa, thickness_um cleared)", reason: "same molding step on 5 TVs differing only by EMC, thickness, pressure (p.3 Sec. III.A.3)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s18", change: "deleted (merged into F1-s17)", reason: "duplicate of shared molding step F1-s17 (per-variant values in its split)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s19", change: "deleted (merged into F1-s17)", reason: "duplicate of shared molding step F1-s17 (per-variant values in its split)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s20", change: "deleted (merged into F1-s17)", reason: "duplicate of shared molding step F1-s17 (per-variant values in its split)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s21", change: "deleted (merged into F1-s17)", reason: "duplicate of shared molding step F1-s17 (per-variant values in its split)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s22", change: "step_basis stated_in_flow", reason: "p.3 Sec. III.A.3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s23", change: "deleted (moved to metrics; already present)", reason: "warpage measurement is a measurement, not a build step; values already in metrics a-m1..e-m6"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s24", change: "typed dose_mj_cm2 5500; step_basis stated_in_flow", reason: "p.3 Sec. III.A.4 5.5 J/cm2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s25", change: "step_basis stated_in_flow", reason: "p.3 Sec. III.A.5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s26", change: "step_basis stated_in_flow", reason: "p.3 Sec. III.A.6"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s27", change: "deleted (moved to metrics; already present)", reason: "post-debond ash check is an evaluation, not in Fig. 3 flow; result already in metric b-m6"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1", change: "locator trimmed to flow sources", reason: "warpage/ash rows removed from flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F2", change: "step_basis stated_in_flow on all steps; F2-s05 typed dose_mj_cm2 5500", reason: "p.6 Sec. V.A: same flow as Fig. 3 except chip bonding and molding"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s13", change: "derived time_s entry re-pointed from deleted F1-s12", reason: "F1-s12 deleted; F1-s13 is the remaining pressure-oven cure row"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s06", change: "none (category other kept)", reason: "pass B: film trimming around carrier edges (p.2 Sec. III.A.1) has no matching step_category"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F2-s02", change: "none (category other kept)", reason: "pass B: film trimming around carrier edges (p.2 Sec. III.A.1) has no matching step_category"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00153-F1-s17", change: "none (pressure_mpa left empty)", reason: "pass B: pressure is not single-valued: 4.0 MPa (320 mm panel, a-d) / 7.0 MPa (510x515 mm panel, e), p.3 Sec. III.A.3; kept in conditions and split"}

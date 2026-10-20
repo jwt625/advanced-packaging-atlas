@@ -36,4 +36,14 @@ not_reported:
   - substrate layer count, build-up materials, total thickness; absolute package warpage values
   - reliability sample counts; number of reflows in the pre-optimization failure test; FEA model details
 source_quality:
-  - "text.md p.1 Abstract renders the '>=' sign (U+2A7E) as a dotless i ('ı65x65mm2'); page image read instead. No other garbling."
+  - "text.md p.1 Abstract renders the '>=' sign (U+2A7E) as a dotless i (U+0131) before '65x65mm2'; page image read instead. No other garbling."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51906.2022.00232-b-m3, change: "deleted (copy of a-m3)", reason: "p.3 Sec. III.C states trace cracking after multi-reflow for TV1 and TV2 jointly; no per-TV result"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51906.2022.00232-a-m3, change: "scope set to 'applies to TVs a, b'; notes added", reason: "single row for a claim stated for both builds"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00232, change: "papers.notes trimmed from 32 to 28 words", reason: "audit_x1 item 15, rule (m) notes <= 30 words"}
+  - {date: 2026-10-19, source: audit_x1, row_id: evidence.source_quality, change: "non-ASCII dotless-i quote replaced by its code point name", reason: "audit_x1 sec. 7 hygiene (non-ASCII in this evidence file)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00232-F1, change: "flows re-keyed: old F2 (module, tv c) -> F1 'chip-first fan-out module (Sec. II)' with tv_ids a;b;c, level ordered; old F1 (substrate attach, tv a;b) -> F2, level fragments -> ordered", reason: "review B miss 3: module flow was not linked to TV1/TV2; one sequential flow (module then substrate attach, p.1-2 Sec. II) split into two flows so build order follows flow order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00232-F1-s01..s04", change: "renumbered from ectc51906.2022.00232-F2-s01..s04; step_basis stated_in_flow", reason: "flow re-keying; order stated in p.1-2 Sec. II"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00232-F1-s03, change: "category other -> rdl_layer; target '3 RDL layers; W/S 2/2, 2/2, 5/5 um; after redesign min width 2.2 um, thickness 2.3 um, via-to-turn >18 um'; locator adds p.2 Table II, p.4 Sec. III.C", reason: "v2.4 category; stated targets on the step (p.2 Table II, p.4 Sec. III.C)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00232-F1-s04, change: "category ball_attach -> bumping; step 'form C4 Cu pillar bumps'; target '130 um pitch'; locator adds p.2 Table II", reason: "review B miss 1: pillar bumping is not ball attach"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00232-F2-s01, change: "renumbered from ectc51906.2022.00232-F1-s01; step_basis stated_in_flow; target '130 um pitch Cu pillar bumps'; locator adds p.2 Table II", reason: "flow re-keying; stated pitch on the step"}

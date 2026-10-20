@@ -21,7 +21,6 @@ derived:
   - {table: components, row_id: ectc51529.2024.00265-a-c3, field: thickness_um, value: 2500, formula: "2.5 mm x 1000", inputs: "p.4 Sec. IV.B; p.3 Table III"}
   - {table: components, row_id: ectc51529.2024.00265-a-c4, field: thickness_um, value: 150, formula: "0.15 mm glass beads -> 150 um adhesive", inputs: "p.3 Sec. III.B; p.4 Sec. IV.A"}
   - {table: components, row_id: ectc51529.2024.00265-a-c6, field: thickness_um, value: 3200, formula: "t3.2 mm x 1000", inputs: "p.2 Table I"}
-  - {table: process_steps, row_id: ectc51529.2024.00265-a-s14, field: thickness_um, value: 250, formula: "0.25 mm x 1000", inputs: "p.4 Sec. III.D"}
   - {table: metrics, row_id: ectc51529.2024.00265-d-m9, field: value, value: 430, formula: "0.43 mm x 1000", inputs: "p.4 Sec. IV.C"}
   - {table: metrics, row_id: ectc51529.2024.00265-d-m10, field: value, value: 250, formula: "0.25 mm x 1000", inputs: "p.4 Sec. IV.C"}
 conflicts: []
@@ -39,3 +38,59 @@ not_reported:
   - per-core stiffener delamination ratios
 source_quality:
   - "Clean text layer. Candidate p04_fig5 covers all three panels of Fig. 5; manual bbox used for panel (a) photo."
+revisions:
+  - date: 2026-10-19
+    source: "x2A"
+    row_id: "ectc51529.2024.00265-a-m21"
+    change: "scope '' -> 'applies to TVs a, b, c, d (cores not distinguished)'"
+    reason: "x2A defect 1: p.5 Sec. IV.E states 150 um adhesive result once, no per-core result"
+  - date: 2026-10-19
+    source: "x2A"
+    row_id: "ectc51529.2024.00265-b-m9"
+    change: "deleted (copy of ectc51529.2024.00265-a-m21)"
+    reason: "x2A defect 1: p.5 Sec. IV.E states 150 um adhesive result once, no per-core result"
+  - date: 2026-10-19
+    source: "x2A"
+    row_id: "ectc51529.2024.00265-c-m5"
+    change: "deleted (copy of ectc51529.2024.00265-a-m21)"
+    reason: "x2A defect 1: p.5 Sec. IV.E states 150 um adhesive result once, no per-core result"
+  - date: 2026-10-19
+    source: "x2A"
+    row_id: "ectc51529.2024.00265-d-m13"
+    change: "deleted (copy of ectc51529.2024.00265-a-m21)"
+    reason: "x2A defect 1: p.5 Sec. IV.E states 150 um adhesive result once, no per-core result"
+  - date: 2026-10-19
+    source: "x2A"
+    row_id: "ectc51529.2024.00265-a-m22"
+    change: "value_text 'stiffener separated in an early cycle count' -> 'reference stiffener separated in an early cycle count; delaminated-sample ratio higher on lower-CTE cores'; result 'fail' -> empty; notes 'Delaminated ratio higher on lower-CTE cores; per-core ratios not given.' -> 'Per-core delamination ratios not given; no per-core pass/fail stated (audit x2A).'"
+    reason: "x2A defect 1: paper gives no per-core result; core A (highest CTE) fail was asserted without support"
+  - date: 2026-10-19
+    source: "x2A"
+    row_id: "ectc51529.2024.00265-a-m22"
+    change: "scope '' -> 'applies to TVs a, b, c, d; per-core ratios not given'"
+    reason: "x2A defect 1: one paper-level statement copied to four cores"
+  - date: 2026-10-19
+    source: "x2A"
+    row_id: "ectc51529.2024.00265-b-m10"
+    change: "deleted (copy of ectc51529.2024.00265-a-m22)"
+    reason: "x2A defect 1: one paper-level statement copied to four cores"
+  - date: 2026-10-19
+    source: "x2A"
+    row_id: "ectc51529.2024.00265-c-m6"
+    change: "deleted (copy of ectc51529.2024.00265-a-m22)"
+    reason: "x2A defect 1: one paper-level statement copied to four cores"
+  - date: 2026-10-19
+    source: "x2A"
+    row_id: "ectc51529.2024.00265-d-m14"
+    change: "deleted (copy of ectc51529.2024.00265-a-m22)"
+    reason: "x2A defect 1: one paper-level statement copied to four cores"
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00265-F1-s08", change: "category other -> assembly; bead diameters moved from notes to split", reason: "repass: parameter sweep on this step (p.3 Sec. III.B, p.4 Fig. 4)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00265-F1-s10", change: "stiffener thickness/width study moved from notes to split; locator + Table III", reason: "repass: parameter sweep on this step (p.3 Table III)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00265-F1-s12", change: "target 'ball diameter 0.6 mm; BGA pitch 1.0 mm' added; locator + Table I", reason: "repass: stated geometry on the step"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00265-F1-s14", change: "thickness_um 250 -> target 'spacer thickness 0.25 mm'; derived entry removed", reason: "repass: spacer thickness is not a result thickness of the build"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00265-F1-s19", change: "deleted (temperature cycling)", reason: "repass: reliability test; condition and results already in metrics a-m20..a-m22, b-m8, c-m4, d-m12"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00265-F1-s13", change: "category other -> dispense", reason: "v006 manifest: solder paste printing on motherboard (p.4 Fig. 3, Sec. III.D); no print category, dispense is the closest"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00265-F1-s17", change: "category other -> assembly", reason: "v006 manifest: removal of the 0.25 mm Si spacers after BGA reflow is a board-assembly handling step (p.4 Fig. 3)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00265-F1-s01", change: "thickness_um 725 (design); locator + p.2 Table I", reason: "v006 manifest: p.2 Table I chip t0.725 mm (bump height excluded); no thinning stated, so diced chip thickness"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00265-F1-s03", change: "target 'flip-chip pitch 200 um; bump diameter 90 um (Cu 30 um + Sn-Ag 15 um)' (design); locator + p.2 Table I", reason: "v006 manifest: p.2 Table I bump 200 um pitch / 90 um diameter; p.2 Sec. II.B flip-chip pitch 0.2 mm"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00265-a-L08;ectc51529.2024.00265-b-L08;ectc51529.2024.00265-c-L08;ectc51529.2024.00265-d-L08", change: "no change (CCL core 1400 um not put on a step)", reason: "v006 manifest: the substrate enters Fig. 3 as a finished input; no step in F1 forms or changes the core"}

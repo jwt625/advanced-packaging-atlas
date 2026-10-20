@@ -37,6 +37,13 @@ not_reported:
   - via diameters/depths for TV; front-side Cu thickness; L/S
   - reliability test conditions and sample counts; warpage values
   - thermal simulation tool and boundary conditions beyond Ta 25 C, 1.4 W, JEDEC
+  - "process_steps: ectc51846.2026.00117-c (single-sided SESUB baseline; flow not described)"
 source_quality:
   - "Unnumbered, uncaptioned cross-section image on p.5 (no scale bar). No candidate for it."
   - "Candidate p04_fig9 bbox spans the page corner (0,0)."
+revisions:
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00117", change: "process_flow_level ordered -> fragments; has_process_flow yes -> no", reason: "repass rule 7: only a list of critical steps (Sec. II) and generic SESUB statements; no stated sequence or conditions"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00117-F1", change: "level ordered -> fragments; flow_name and notes rewritten", reason: "repass: as above"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00117-F1", change: "steps s01-s05 step_basis -> generic_description", reason: "repass: fragments are generic statements in reading order"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00117-F1-s05", change: "target (backside Cu > 45 um; slot vias 2x2 to 5x5 mm), plating capability, and void-free fill result added; locator + Conclusion", reason: "repass: stated in p.4 Conclusion"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00117-c", change: "not_reported 'process_steps: c' added", reason: "repass: single-sided SESUB baseline flow not described"}

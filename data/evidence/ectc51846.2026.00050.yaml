@@ -42,5 +42,18 @@ not_reported:
   - TC sample count; C-SAM result statement; die sizes for Fig. 11 builds
   - PDN simulation inputs (current step, impedance values)
   - optical loss, wavelength, channel count for PWG concept
+  - "process_steps: ectc51846.2026.00050-c (DBHi reference build; its process is in refs [1,2], not described here)"
 source_quality:
   - "Candidate p04_fig12a holds Fig. 12(b),(c) C-SAM panels; Fig. 12(a) photo is lower-left column, cropped manually."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00050-F1", change: "split: steps s05-s07 moved to new flow F3; tv_ids a -> a;b;d;e;h;i; renamed", reason: "sub-assembly d and coupons i only receive die-edge gluing (Sec. II.A, Fig. 5, 9, 10); b, e, h are DBrM packages (Sec. II.B, II.C)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00050-F1-s01..s04", change: "step_basis stated_in_flow; s01 equipment chip-placement tool; s02 equipment from conditions, split die clearance/edge material", reason: "p.2 Sec. II.A, Fig. 2, Fig. 9, Fig. 10"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00050-F1-s05;ectc51846.2026.00050-F1-s06;ectc51846.2026.00050-F1-s07", change: "deleted; re-created as F3-s01..s03", reason: "flow split (F1 reconstitution / F3 assembly)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00050-F3", change: "added flow (tv_ids a;b;e;h)", reason: "Fig. 1 stages after reconstitution; ids of F1/F2 not renumbered"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00050-F3-s01..s03", change: "added (from F1-s05..s07) with split pitches per TV and TV e notes", reason: "p.2 Fig. 1; p.4 Fig. 11, 12(a), 14; p.1 Abstract; p.5 Fig. 17"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00050-F2", change: "scope tv_build -> generic_platform; steps performed=no, step_basis stated_in_flow", reason: "p.5 Sec. II.E describes the PWG flow as possible; TV j is a concept with no build results"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00050-F4", change: "added fragment flow F4 (s01 micro bump plating, s02 thin wafer support system) for TV e", reason: "p.6 Acknowledgment states both processes for dual-side-bump bridge chip fabrication"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00050-F3-s02", change: "split removed; row made delta for a;b;h (chip Cu pillars / C4 to laminate); 150 um Cu pillar pitch for a kept in conditions; qualifiers split:caption cleared", reason: "split encoded different joints (a Cu pillar 150 um vs e bridge bottom bumps 175 um), not a parameter sweep; pitch stated only for a (p.4 Fig. 12(a); p.1 Abstract)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00050-F3-s04", change: "added delta for e: substrate bonding of chips and bridge bottom-side solder bumps (175 um pitch) to laminate, molten-solder self-alignment, no underfill during assembly", reason: "p.4 Sec. II.C and Fig. 14(c); p.1 Abstract"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00050-F4", change: "build_seq 4 -> 1 (parallel with F1); F1, F3, F4 notes updated", reason: "bridge-chip fabrication is independent of die-edge gluing and precedes F3 bridge bonding (Fig. 14(a)-(c)); F1 -> F3 order verified (p.2 Sec. II.A, Fig. 1)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00050-F3-s01", change: "conditions: bridge chip 3.35 x 2.5 x 0.06 mm / 60 um-thick for a", reason: "target_missing_preexisting a-L02: stated in p.4 Fig. 12(a) and Fig. 13; no thinning step disclosed, so kept as input dimension in conditions"}

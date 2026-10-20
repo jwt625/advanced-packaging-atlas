@@ -45,3 +45,14 @@ not_reported:
   - HBM die count per stack, HBM generation actually assembled (Fig. 2 says HBM3 size; Fig. 1 says HBM3/4)
 source_quality:
   - "Tables I-III have no candidates; table titles garbled in text.md; values read from renders."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51529.2024.00049-a-m4", change: "scope: '' -> 'applies to TVs a, b, c (9L, 8L, 7L)'; notes: '' -> 'Sec. VI: 5.5x TV passed POC hammer test on 7/8/9L; one statement for all three builds.'", reason: "p.4 Sec. VI: one statement 'passed POC hammer test on 7/8/9L', no per-build result; kept once on first TV"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51529.2024.00049-b-m2", change: "row deleted", reason: "copy of the single 7/8/9L POC hammer statement (p.4 Sec. VI); kept once on -a-m4 with scope"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51529.2024.00049-c-m1", change: "row deleted", reason: "copy of the single 7/8/9L POC hammer statement (p.4 Sec. VI); kept once on -a-m4 with scope"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51529.2024.00049-f04", change: "added Fig. 6 p.3 micrograph (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51529.2024.00049-f05", change: "renumbered from ectc51529.2024.00049-f06 (rank 6 -> 5)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51529.2024.00049-f06", change: "renumbered from ectc51529.2024.00049-f04 (rank 4 -> 6)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51529.2024.00049-f07", change: "renumbered from ectc51529.2024.00049-f05 (rank 5 -> 7)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51529.2024.00049-f08", change: "added Fig. 4 p.3 data_table (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51529.2024.00049-f09", change: "added Fig. 5 p.3 data_table (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots/tables added"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00049", change: "process_flow_level none confirmed; no flows or steps added", reason: "full text and Figs. 1-7 read: only 'leveraging InFO process to form RDL interposer from 6L to 9L' (p.2 Sec. IV.A, p.4 Sec. V), no step named"}

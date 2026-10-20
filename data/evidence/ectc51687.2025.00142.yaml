@@ -23,10 +23,13 @@ entries:
   - {table: interconnects, row_id: ectc51687.2025.00142-c-i1, field: anneal_time_min, value: 240, unit: min, basis: design_target, locator: "p.6 Table II", note: "best split 4 h at 240 C"}
 derived:
   - {table: interconnects, row_id: ectc51687.2025.00142-c-i1, field: anneal_time_min, value: 240, formula: "4 h x 60", inputs: "p.6 Table II"}
-  - {table: process_steps, row_id: ectc51687.2025.00142-c-s03, field: time_s, value: 14400, formula: "4 h x 3600", inputs: "p.6 Table II"}
+  - {table: process_steps, row_id: ectc51687.2025.00142-F3-s03, field: time_s, value: 14400, formula: "4 h x 3600", inputs: "p.6 Table II"}
   - {table: stack_layers, row_id: ectc51687.2025.00142-a-L01, field: thickness_um, value: 0.01, formula: "10 nm / 1000", inputs: "p.6 Sec. V"}
-  - {table: process_steps, row_id: ectc51687.2025.00142-a-s11, field: thickness_um, value: 0.01, formula: "10 nm / 1000", inputs: "p.6 Sec. V"}
+  - {table: process_steps, row_id: ectc51687.2025.00142-F1-s11, field: thickness_um, value: 0.01, formula: "10 nm / 1000", inputs: "p.6 Sec. V"}
   - {table: stack_layers, row_id: ectc51687.2025.00142-b-L03, field: thickness_um, value: 0.25, formula: "250 nm / 1000", inputs: "p.3 Sec. II"}
+  - {table: process_steps, row_id: ectc51687.2025.00142-F2-s03, field: thickness_um, value: 0.25, formula: "250 nm / 1000", inputs: "p.3 Sec. II"}
+  - {table: process_steps, row_id: ectc51687.2025.00142-F2-s04, field: time_s, value: 600, formula: 10 min x 60, inputs: p.3 Sec. II}
+  - {table: process_steps, row_id: ectc51687.2025.00142-F2-s07, field: time_s, value: 300, formula: 5 min x 60, inputs: p.3 Sec. II}
 conflicts:
   - {table: metrics, row_id: ectc51687.2025.00142-c-m3, field: value, values: [55.64, 61.60], locators: ["p.5 Fig. 9 (240 C 1 h, temperature study)", "p.6 Fig. 10 (1 h at 240 C, time study)"], chosen: "both entered as separate variants", why: "separate experiments with nominally identical conditions"}
   - {table: stack_layers, row_id: ectc51687.2025.00142-a-L03, field: material, values: ["text: oxide nitride oxide stack", "Fig. 3 5b: nitride-oxide-nitride"], locators: ["p.4 Sec. III", "p.2 Fig. 3"], chosen: "layers as labelled in Fig. 8 (SiO2 over Si3N4)", why: "measured cross-section"}
@@ -45,3 +48,74 @@ not_reported:
 source_quality:
   - "Text refers to 'Figure 5a/5b-c' for the grinding data whose caption is Fig. 6(a)-(c); caption labels used in locators."
   - "All six chosen candidates clipped axis titles, scale bars or bottom label bar, or included the caption; manual crops used."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F1, change: step_basis of all steps set to stated_in_flow except ectc51687.2025.00142-F3-s01, reason: 'order from Fig. 3 (F1/F2), Sec. IV (F3), Sec. III.A/III.B text (F4/F5)'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2, change: step_basis of all steps set to stated_in_flow except ectc51687.2025.00142-F3-s01, reason: 'order from Fig. 3 (F1/F2), Sec. IV (F3), Sec. III.A/III.B text (F4/F5)'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F3, change: step_basis of all steps set to stated_in_flow except ectc51687.2025.00142-F3-s01, reason: 'order from Fig. 3 (F1/F2), Sec. IV (F3), Sec. III.A/III.B text (F4/F5)'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F4, change: step_basis of all steps set to stated_in_flow except ectc51687.2025.00142-F3-s01, reason: 'order from Fig. 3 (F1/F2), Sec. IV (F3), Sec. III.A/III.B text (F4/F5)'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F5, change: step_basis of all steps set to stated_in_flow except ectc51687.2025.00142-F3-s01, reason: 'order from Fig. 3 (F1/F2), Sec. IV (F3), Sec. III.A/III.B text (F4/F5)'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F1, change: 'level: ''ordered'' -> ''full''', reason: 'ordered flow with materials, 90 C ICPCVD, grinding grit/removal, etch chemistry'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2, change: 'level: ''ordered'' -> ''full''', reason: 'ordered flow with materials, thicknesses and CMP time/slurry ratios'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F4, change: 'level: ''fragments'' -> ''full''', reason: ordered lamination -> grinding with grit and removal conditions; not isolated fragments}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F1-s01, change: 'conditions: '''' -> ''4 inch Si wafer, 525 um (Fig. 3)''', reason: carrier stated in Fig. 3 step 1}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F1-s02, change: 'target: '''' -> ''L/S 7/3 um''', reason: 'stated trace geometry (Sec. III.B, Fig. 8)'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F1-s02, change: 'result: '''' -> ''traces about 5.7 um thick (Fig. 8)''', reason: stated result thickness}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F1-s02, change: 'locator: ''p.4 Sec. III; p.2 Fig. 3 (2b)'' -> ''p.4 Sec. III; p.2 Fig. 3 (2b); p.5 Sec. III.B; p.5 Fig. 8''', reason: added locators}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F1-s04, change: 'equipment: '''' -> ''grinding tool (grinding wheel)''', reason: named tool type (Sec. III.A)}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F1-s05, change: 'equipment: '''' -> ''ICPCVD''', reason: tool type stated}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F1-s07, change: 'target: '''' -> ''pillar diameter 5 um; pitch 10 um''', reason: 'stated pillar geometry (Sec. I, Fig. 3 6b)'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F1-s09, change: 'step: ''Cu damascene pillar formation (5 um dia, 10 um pitch)'' -> ''Cu damascene pillar formation''', reason: geometry moved to target}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F1-s09, change: 'target: '''' -> ''diameter 5 um; pitch 10 um''', reason: 'convention: geometry in target'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F1-s11, change: 'equipment: '''' -> ''ALD''', reason: tool type stated}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2-s01, change: 'conditions: '''' -> ''4 inch Si wafer, 525 um (Fig. 3)''', reason: carrier stated in Fig. 3 step 1}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2-s03, change: 'temp_c: '''' -> ''90''', reason: low-temperature ICPCVD at 90 C (Sec. I); same deposition as F1-s05}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2-s03, change: 'equipment: '''' -> ''ICPCVD''', reason: tool type stated}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2-s03, change: 'locator: ''p.3 Sec. II; p.2 Fig. 3 (3a)'' -> ''p.3 Sec. II; p.2 Fig. 3 (3a); p.2 Sec. I''', reason: added temperature locator}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2-s04, change: 'step: ''two-step oxide CMP planarization'' -> ''oxide CMP, coarse polish''', reason: two-step CMP split into coarse and fine rows (Sec. II gives the order)}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2-s04, change: 'time_s: '''' -> ''600''', reason: 10 min -> 600 s}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2-s04, change: 'conditions: ''10 min, colloidal silica:DI 1:1 (~800 nm removed); then 5 min, 1:4 (150 nm removed)'' -> ''10 min; colloidal silica:DI water 1:1; ~800 nm removed''', reason: fine-polish conditions moved to new row}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2-s04, change: 'result: ''RMS roughness about 10-15 nm; about 1 um removed (estimated)'' -> ''large non-uniformity''', reason: final result moved to fine polish row}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2-s04, change: 'material: '''' -> ''colloidal silica slurry''', reason: slurry stated}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2-s07, change: 'added: fine CMP step (5 min, 1:4, 150 nm) split out of F2-s04', reason: 'Sec. II states a second, finer polish after the 10 min polish'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2-s05, change: 'seq: ''5'' -> ''6''', reason: after inserted fine-polish row}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2-s05, change: 'temp_c: '''' -> ''90''', reason: low-temperature ICPCVD at 90 C (Sec. I)}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2-s05, change: 'equipment: '''' -> ''ICPCVD''', reason: tool type stated}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2-s05, change: 'locator: ''p.3 Sec. II; p.2 Fig. 3 (5a)'' -> ''p.3 Sec. II; p.2 Fig. 3 (5a); p.2 Sec. I''', reason: added temperature locator}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2-s06, change: 'seq: ''6'' -> ''7''', reason: after inserted fine-polish row}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2-s06, change: 'target: '''' -> ''pitch 10 um''', reason: Fig. 3 (6a) label}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F3-s01, change: 'step_basis: '''' -> ''inferred_order''', reason: formic acid clean is in-situ with the tack (Sec. IV); placed before tack}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F3-s01, change: 'notes: '''' -> ''In-situ with die tack (Sec. IV); listed first.''', reason: explain inferred order}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F3-s02, change: 'target: '''' -> ''pitch <=10 um''', reason: stated assembly pitch (Sec. IV)}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F3-s02, change: 'conditions: ''interface temperature 250 C'' -> ''interface temperature 250 C; 2x2 mm dies''', reason: die size stated (Sec. IV)}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F3-s03, change: 'conditions: ''splits: 200/240/300 C for 1 h; 240 C for 1/2/4 h'' -> ''no pressure, high vacuum; best split 240 C 4 h''', reason: splits moved to split column}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F3-s03, change: 'split: '''' -> ''200/240/300 C for 1 h (Table I); 240 C for 1/2/4 h (Table II)''', reason: parameter sweep on this step}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F3-s03, change: 'atmosphere: '''' -> ''vacuum''', reason: high vacuum stated}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F3-s03, change: 'equipment: '''' -> ''wafer-to-wafer bonder''', reason: named tool type (Sec. IV)}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F4-s02, change: 'equipment: '''' -> ''grinding tool (grinding wheel)''', reason: named tool type (Sec. III.A)}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F4-s02, change: 'split: '''' -> ''grit and grinding time varied in optimization''', reason: Sec. III.A process optimizations}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F5-s02, change: 'target: '''' -> ''test via 16 um''', reason: 'Fig. 7 caption: 16 um test via structures'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F5-s02, change: 'locator: ''p.5 Sec. III.B'' -> ''p.5 Sec. III.B; p.4 Fig. 7''', reason: added target locator}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F5-s03, change: 'conditions: ''fluorine-based, no O2, Ar added, higher RIE power; 2, 4, 8, 12, 16 min splits; later reduced Ar flow'' -> ''fluorine-based, no O2, Ar added, higher RIE power; later reduced Ar flow''', reason: times moved to split}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F5-s03, change: 'split: '''' -> ''etch time 2/4/8/12/16 min''', reason: parameter sweep on this step (Fig. 7(a)-(e))}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F5-s03, change: 'equipment: '''' -> ''RIE''', reason: tool type stated}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2-s04, change: derived entry added for time_s, reason: unit conversion min -> s}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00142-F2-s07, change: derived entry added for time_s, reason: unit conversion min -> s}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00142-F1-s09", change: "category: 'other' -> 'bumping'", reason: "manifest category_other: damascene Cu pillar (bond terminal) formation; bumping per DB convention for pillar formation; fill/planarization method not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00142-F1-s09", change: "thickness_um: '' -> '3.8'", reason: "manifest target_missing a-L02: pillar/oxide height label 3.8 um measured in Fig. 8 FIB (p.5)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00142-F1-s09", change: "overrides: '' -> 'thickness_um:measured'", reason: "thickness is a measured FIB label"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00142-F1-s02", change: "thickness_um: '8' -> '5.7'", reason: "manifest target_missing a-L04: trace thickness approximately 5.7 um stated (p.5 Sec. III.B, Fig. 8); 4-8 um is the plating range, kept in conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00142-F1-s02", change: "qualifiers: 'thickness_um:le' -> 'thickness_um:approx'", reason: "approximately 5.7 um"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00142-F1-s02", change: "overrides: 'thickness_um:design_target' -> 'thickness_um:measured'", reason: "Fig. 8 FIB measurement"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00142-F1-s02", change: "conditions: '4-8 um Cu plated' -> '4-8 um Cu plated (range consistent with conventional build-up, Sec. III)'", reason: "clarify that 4-8 um is the stated plating range"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00142-F2-s03", change: "step: 'low-temperature ICPCVD nitride then oxide gap fill' -> 'low-temperature ICPCVD nitride liner over SAP traces'", reason: "manifest target_missing b-L03: composite nitride+oxide step split; text gives order 250 nm nitride then 4 um oxide (p.3 Sec. II; Fig. 3 (3a))"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00142-F2-s03", change: "material: 'Si3N4 250 nm / SiO2 4 um' -> 'Si3N4'", reason: "split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00142-F2-s03", change: "thickness_um: '4' -> '0.25'", reason: "250 nm nitride (p.3 Sec. II); derived 250 nm / 1000"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00142-F2-s03", change: "overrides: 'thickness_um:design_target' -> ''", reason: "design value stated in text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00142-F2-s03", change: "result: 'up to 2 um topography over Cu features (Fig. 4)' -> ''", reason: "topography result belongs to the oxide step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00142-F2-s08", change: "added step seq 4 (deposition_cvd: ICPCVD SiO2 gap fill 4 um, 90 C)", reason: "split from F2-s03; p.3 Sec. II \"250 nm of nitride 4 um of oxide was deposited using low temperature ICPCVD\""}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00142-F2-s04", change: "seq: '4' -> '5'", reason: "seq shifted after splitting F2-s03"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00142-F2-s07", change: "seq: '5' -> '6'", reason: "seq shifted after splitting F2-s03"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00142-F2-s05", change: "seq: '6' -> '7'", reason: "seq shifted after splitting F2-s03"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00142-F2-s06", change: "seq: '7' -> '8'", reason: "seq shifted after splitting F2-s03"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00142-F3-s02", change: "target: 'pitch <=10 um' -> 'pitch <=10 um; substrate Cu pillar diameter 5 um'", reason: "manifest target_missing c-i1: 5 um diameter (10 um pitch) Cu pillars stated as the hybrid-layer critical dimension bonded by Cu-Cu TCB (p.2 Sec. I)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00142-F3-s02", change: "locator: 'p.5 Sec. IV; p.5 Table I; p.6 Table II' -> 'p.5 Sec. IV; p.5 Table I; p.6 Table II; p.2 Sec. I'", reason: "added locator for pillar diameter"}

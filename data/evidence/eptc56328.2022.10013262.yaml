@@ -38,7 +38,32 @@ not_reported:
   - Cu post height, RDL thicknesses and dielectric materials for TV a
   - bonding methods and conditions for chips-last attach
   - warpage, reliability, yield data
-  - process steps for TV b, c, d (only format/cost or imaging results)
+  - process steps for TV b, c (only format/cost or design); TV d imaging fragments only
+  - "process_steps: eptc56328.2022.10013262-b (cost-model customer TV; only format efficiency, no build steps)"
 source_quality:
   - "PDF text layer garbled; OCR text used and all numbers checked on 220 dpi renders. OCR misreads e.g. '204m' for 20 um, '5y1m' for 5 um."
   - "Paper refers to the embedded die interposer as 'Figure 5' in Applications; it is Fig. 6."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F1", change: "step_basis stated_in_flow on all steps", reason: "p.2 Sec. Photo Process gives the dry-film order (lamination, exposure, coversheet removal, aqueous develop); p.3: Cu post 'used a dry film as discussed earlier'; chips last at end of flow, then lid"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F1-s01", change: "thickness_um 240 (qualifier gt) from conditions; throughput dropped from conditions (already metrics -e-m3)", reason: "p.3 Sec. LDI and Tall Cu Post Patterning: resist thickness of >240 um"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F1-s02", change: "CD/AR/pitch moved from conditions to target; conditions keep 405 nm", reason: "p.3: 4:1 aspect ratio, through mold Cu posts <150 um pitch, CD imaging <80 um; p.1 LDI 405 nm"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F1-s03", change: "category other -> lithography", reason: "coversheet removal is part of the dry-film lithography sequence (p.2 Sec. Photo Process)"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F2", change: "scope tv_build -> generic_platform; renamed; split into routes '300 mm round' and '600 mm panel'", reason: "p.4 Fig. 10 shows two format flows (300 mm round initial production; 600 mm square) for the M-Series platform"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F2-s01", change: "category other -> carrier_prep; shared by both routes", reason: "p.4 Fig. 10: customer device wafer (200 or 300 mm) is step (1) of both format rows"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F2-s02", change: "route '600 mm panel' seq 1", reason: "p.4 Fig. 10 bottom row"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F2-s03", change: "route '600 mm panel' seq 2; step text = Fig. 10 label; category other -> rdl_layer", reason: "p.4 Fig. 10 'Fan-Out'; p.4 text: lithography, metal deposition on the complete 600 mm area"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F2-s04", change: "route '600 mm panel' seq 3; target four 300 mm square sub-panels", reason: "p.4 Sec. 600mm Large Panel Format; Fig. 10 Quartering"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F2-s05", change: "route '600 mm panel' seq 4; category test -> other, step_kind fab (BE2 back-end; final test itself is not a step)", reason: "p.4 Fig. 10 box 'Quartering to 300mm for final test & BE2'; BE2 not defined in the paper"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F2-s06", change: "added (panelization into 300 mm round format), route '300 mm round' seq 1", reason: "p.4 Fig. 10 top row '300mm round initial production format'"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F2-s07", change: "added (fan-out on 300 mm round panel), route '300 mm round' seq 2", reason: "p.4 Fig. 10 top row '300mm round initial production format'"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F2-s08", change: "added (final test and BE2 at 300 mm round), route '300 mm round' seq 3", reason: "p.4 Fig. 10 top row '300mm round initial production format'"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F3", change: "added generic_platform flow (Adaptive Patterning sequence)", reason: "p.2 Sec. Adaptive Patterning states the ordered AP sequence; previously not captured"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F3-s01", change: "added (die attach and mold (reconstituted panel))", reason: "p.2 Fig. 4 label; p.2 Sec. Adaptive Patterning"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F3-s02", change: "added (planarization prior to RDL and via build-up (planar EMC surface))", reason: "p.3 Sec. LDI and Fine Pitch Patterning; p.3 Fig. 8"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F3-s03", change: "added (measure each die location within the panel)", reason: "p.2 Sec. Adaptive Patterning"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F3-s04", change: "added (generate unit-specific design fitting the as-built panel (real-time design tool))", reason: "p.2 Sec. Adaptive Patterning"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F3-s05", change: "added (LDI exposure of unit-specific adaptive pattern on every device)", reason: "p.2 Sec. Adaptive Patterning; p.1 Abstract"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F4", change: "added fragments flow for TV d", reason: "p.3-4: 2 um L/S liquid-resist and 5 um polyimide via imaging at 405 nm; TV d had no flow"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F4-s01;eptc56328.2022.10013262-F4-s02", change: "added (2 um L/S resist imaging; 5 um polyimide via imaging)", reason: "p.3-4 text and Fig. 9 labels"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F2-s02", change: "category 'other' -> 'molding'; notes '' -> 'Category inferred: Fig. 10 'Panelization' = reconstituted panel after die attach and mold (Fig. 4 label).'", reason: "manifest category_other: panelization forms the molded reconstituted panel (p.2 Fig. 4 'after die attach and mold')"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc56328.2022.10013262-F2-s06", change: "category 'other' -> 'molding'; notes '' -> 'Category inferred: Fig. 10 'Panelization' = reconstituted panel after die attach and mold (Fig. 4 label).'", reason: "manifest category_other: panelization forms the molded reconstituted panel (p.2 Fig. 4 'after die attach and mold')"}

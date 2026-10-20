@@ -17,7 +17,7 @@ figure_reading_method: >-
 entries:
   - {table: metrics, row_id: ectc51529.2024.00153-b-m1, field: value_text, value: "0.6-1.3", unit: um, basis: measured, locator: "p.4 Sec. III.A; p.4 Fig. 7(c)", note: "Fig. 7(c) labels 1.336, 0.8987, 0.5951 um"}
   - {table: metrics, row_id: ectc51529.2024.00153-b-m2, field: value_text, value: "0.3-0.6", unit: um, basis: measured, locator: "p.5 Sec. III.A; p.5 Fig. 9(b)", note: "Fig. 9(b) labels 0.6437, 0.4251, 0.3643 um"}
-  - {table: process_steps, row_id: ectc51529.2024.00153-a-s06, field: conditions, value: "700 W, 5 s", unit: "W; s", basis: design_target, locator: "p.5 Sec. III.B", note: "homogenized laser power and irradiation time for LABC"}
+  - {table: process_steps, row_id: ectc51529.2024.00153-F1-s06, field: conditions, value: "700 W, 5 s", unit: "W; s", basis: design_target, locator: "p.5 Sec. III.B", note: "homogenized laser power and irradiation time for LABC"}
 derived: []
 conflicts:
   - {table: metrics, row_id: ectc51529.2024.00153-a-m4, field: value, values: [130, "~1e2-1e3 (Fig. 5 minimum)"], locators: ["p.3 Sec. II.B", "p.4 Fig. 5"], chosen: 130, why: "explicit text value; plot read on log axis is imprecise"}
@@ -37,3 +37,11 @@ not_reported:
   - laser power for bump reflow step, fluxless reflow conditions
 source_quality:
   - "Garbled PDF text layer; text.md is OCR (author order scrambled). No figure candidates (candidates.json empty): all key figures manual."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00153", change: "process_flow_level ordered -> full", reason: "LABC flow (Sec. II.A) with materials and bonding conditions (700 W, 5 s, ~260 C peak); laser reflow 2 s"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00153-F1", change: "level ordered -> full; s01-s03 inferred_order, s04-s07 stated_in_flow", reason: "Sec. II.A gives lamination, sawing, LABC, post-cure order; bump prep order placed by us"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00153-F1-s06", change: "temp_c 260 -> temp_c_max 260 (approx, measured); equipment; target '20 um pitch'", reason: "p.5 Fig. 11 pyrometer peak; p.1 Fig. 1 quartz block, align camera, homogenized laser"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00153-F2", change: "routes: shared s01-s02; route 'homogenized laser + water-soluble laser epoxy flux' s03-s05 (seq 1-3); route 'fluxless reflow (formic acid)' new s06; flow_name, locator", reason: "p.4 Fig. 7 and p.5 Fig. 8 are alternative reflow routes on the same bump wafer"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00153-F3", change: "deleted flow F3 and F3-s01 (content moved to F2-s06)", reason: "merged as a route of F2 (same TV b)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00153-F2-s04", change: "equipment 'homogenized laser'", reason: "p.4 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00153-F2-s01", change: "target '' -> '20 um pitch; 10 um diameter bump array'; locator + p.2 Sec. I", reason: "p.4 Fig. 7/Sec. III.A 20 um pitch Cu pillar bumps; p.2 Sec. I '10um-diameter bump array' with homogenized laser + laser epoxy flux (interconnects b-i1)"}

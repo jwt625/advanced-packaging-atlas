@@ -27,3 +27,11 @@ not_reported:
 source_quality:
   - "p.1 footer reads '2022 23rd ICEPT' while header/DOI give 2023 24th ICEPT (template remnant); p.4 contains leftover IEEE template text."
   - "Candidate bboxes are shifted (p01_fig1 includes author block and cuts the panel; others include blank space); all key figures manual."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "icept59018.2023.10492317-F1-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "numbered main process steps (p.1 Sec. III)"}
+  - {date: 2026-10-20, source: repass, row_id: "icept59018.2023.10492317-F1-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "numbered main process steps (p.1 Sec. III)"}
+  - {date: 2026-10-20, source: repass, row_id: "icept59018.2023.10492317-F1-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "numbered main process steps (p.1 Sec. III)"}
+  - {date: 2026-10-20, source: repass, row_id: "icept59018.2023.10492317-F1-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "numbered main process steps (p.1 Sec. III)"}
+  - {date: 2026-10-20, source: repass, row_id: "icept59018.2023.10492317-F1-s02", change: "material: '' -> 'tape'", reason: "die/tape/carrier plate stack shown in Fig. 3 model"}
+  - {date: 2026-10-20, source: repass, row_id: "icept59018.2023.10492317-F1-s03", change: "material: '' -> 'mold compound (MC)'", reason: "MC named as mold compound (Sec. I, Fig. 4)"}
+  - {date: 2026-10-20, source: repass, row_id: "icept59018.2023.10492317-F1-s05", change: "added: ball drop", reason: "Abstract names a ball drop step affected by die shift"}

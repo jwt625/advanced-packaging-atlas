@@ -40,3 +40,48 @@ not_reported:
   - signaling TV trace length and line/space
   - reliability, warpage, thermal, yield numbers
   - optical_interfaces
+  - "process_steps: ectc.2016.201-b (only the void-free underfill result is shown, Fig. 7; its build flow is not described)"
+  - "process_steps: ectc.2016.201-c (signaling TV stated as designed and fabricated; no fabrication steps given)"
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F1", change: "scope: 'tv_build' -> 'generic_platform'", reason: "repass: Sec. III is the high-level EMIB platform flow, not one build"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2", change: "scope: 'tv_build' -> 'generic_platform'", reason: "repass: Sec. III is the high-level EMIB platform flow, not one build"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F1-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. III text / Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F1-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. III text / Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F1-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. III text / Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. III text / Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. III text / Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. III text / Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. III text / Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. III text / Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. III text / Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. III text / Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s08", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. III text / Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s09", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. III text / Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F3-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order stated in Sec. III text / Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F1-s01", change: "target: '' -> 'up to 4 routing metal layers + pad layer; M1-M4 2/2 um L/S; Via1-Via3 2 um (dual damascene)'", reason: "repass: stated bridge metal geometry (Table II) onto the step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F1-s01", change: "locator: 'p.6 Sec. III; p.6 Sec. III(a)' -> 'p.6 Sec. III; p.6 Sec. III(a); p.5 Table II'", reason: "repass: stated bridge metal geometry (Table II) onto the step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F1-s01", change: "overrides: '' -> 'target:design_target'", reason: "repass: stated bridge metal geometry (Table II) onto the step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F1-s01", change: "notes: '' -> 'Category other: BEOL fab, not package RDL.'", reason: "repass: stated bridge metal geometry (Table II) onto the step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s07", change: "category: 'other' -> 'bumping'", reason: "repass: bump formation is bumping; listed among enabling processes (e), not in the Fig. 5 sequence"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s07", change: "step_basis: 'stated_in_flow' -> 'inferred_order'", reason: "repass: bump formation is bumping; listed among enabling processes (e), not in the Fig. 5 sequence"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s07", change: "notes: 'Bump side (die or substrate) not stated.' -> 'Placed before chip attach; bump side (die or substrate) not stated.'", reason: "repass: bump formation is bumping; listed among enabling processes (e), not in the Fig. 5 sequence"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s05", change: "step: 'fine via drilling in bridge region and coarse via drilling elsewhere' -> '(fine + coarse) via drilling: fine vias in bridge region, coarse elsewhere'", reason: "repass: Fig. 5 label as written"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s05", change: "notes: 'Drilling method not stated.' -> 'Drilling method not stated (category other).'", reason: "repass: Fig. 5 label as written"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s09", change: "conditions: '' -> 'capillary'", reason: "repass: underfill mode into conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-c-m2", change: "condition: '' -> 'GSSG RF probing on surface pads on both sides of the bridge; 4-port S-parameters with network analyzer'", reason: "repass: measurement method moved from deleted step F3-s01"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F3-s01", change: "deleted", reason: "repass: S-parameter probing is a measurement; results already in metrics c-m1, c-m2 (method moved to c-m2 condition)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F3", change: "deleted flow (only step was a measurement)", reason: "repass: tests are metrics, not flows"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s01", change: "seq: '4' -> '1'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s02", change: "seq: '5' -> '2'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s03", change: "seq: '6' -> '3'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s04", change: "seq: '7' -> '4'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s05", change: "seq: '8' -> '5'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s06", change: "seq: '9' -> '6'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s07", change: "seq: '10' -> '7'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s08", change: "seq: '11' -> '8'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s09", change: "seq: '12' -> '9'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F1-s01", change: "category: 'other' -> 'rdl_layer'; notes: 'Category other: BEOL fab, not package RDL.' -> 'Bridge Si BEOL routing layers by fab back-end process (Table II), not package RDL.'", reason: "manifest v000 category_other (audit_B): bridge BEOL routing metal layers (Table II: up to 4 routing layers, 2/2 um, dual damascene vias) are the wiring-layer category"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s01", change: "notes: '' -> 'Composite organic build-up; sub-steps not stated, so category other.'", reason: "manifest v000 category_other: kept other; composite build-up, sub-steps not stated (p.6 Sec. III)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s02", change: "no change (category other kept)", reason: "manifest v000 category_other: cavity formation method not stated (p.6 Sec. III(c)); no category fits without inference"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s05", change: "notes: 'Drilling method not stated (category other).' -> 'Fig. 5 '(Fine + Coarse) Via Drilling'; laser not stated, so category other.'", reason: "manifest v000 category_other: laser_drill proposal not applied; Fig. 5 and text say 'via drilling'/'via formation' without naming laser"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2016.201-F2-s07", change: "target: '' -> 'fine pitch 55 um (bridge region); coarse pitch 130 um'; locator: 'p.6 Sec. III(e); p.7 Fig. 6' -> 'p.6 Sec. III(e); p.7 Fig. 6; p.5 Fig. 4(a)'; overrides: '' -> 'target:figure_image'", reason: "manifest v000 target_missing a-i1/a-i2: '55um bump pitch' and '130um bump pitch' labels in Fig. 4(a) SEM inset (re-read at 4x crop)"}

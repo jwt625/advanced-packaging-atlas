@@ -35,3 +35,43 @@ not_reported:
   - reflow, TCB, cure temperatures and times; dispense pressure, dot count, dot volume
   - thermal cycling standard, pass criterion, dwell; assembly yield number
   - warpage, electrical performance; electrical_interfaces, optical_interfaces
+  - "process_steps: ectc51906.2022.00106-c (slit test sample only used for dot-size measurement; its fabrication is not described)"
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00106-a-c1, change: "gap_um 150 -> empty; notes point to -a-m7", reason: "audit_x1 item 4: 150 um gap copied in c1 and m7; kept once as -a-m7 (tied to jet dispense, p.1 Abstract, p.4 Sec. V)"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00106-b-c1, change: "gap_um 150 -> empty; gap note removed", reason: "audit_x1 item 4: copy on sibling TV; the paper ties the gap to the CUF jetting build"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00106-a-i1, change: "ic_type c4 -> microbump; notes 'As written: fine pitch C4, uC4, micro joint'", reason: "audit_x1 item 10 interim fix: 75 um bridge bumps named uC4 / micro joint (p.1 Abstract, p.2 Fig. 1(a) label uC4)"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00106-b-i1, change: "ic_type c4 -> microbump; notes 'As written: fine pitch C4, uC4'", reason: "audit_x1 item 10"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00106, change: "papers.notes trimmed from 33 to 24 words", reason: "audit_x1 item 15 (rule m)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00106-figures, change: "renumbered f03 -> f04 (Fig. 2), f04 -> f07 (Fig. 7), f05 -> f09 (Fig. 6), f06 -> f11 (Table III)", reason: "re-rank under key-figure rule 2026-10-19 (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00106-f03, change: "added Fig. 3 (package_photo, manual)", reason: "photo of Si handler subassembly; source of -a-m11"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00106-f05, change: "added Fig. 8 (xray_csam, manual)", reason: "SAT image of the build; source of -a-m4"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00106-f06, change: "added Fig. 9 (micrograph, manual)", reason: "fillet image of the build; source of -a-m5"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00106-f08, change: "added Fig. 4 (other, manual)", reason: "jig drawing and first-trial result photo; source of -a-m10"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00106-f10, change: "added Fig. 5 (other, manual)", reason: "nozzle drawing and high-speed images; source of -c-m5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106", change: "process_flow_level ordered confirmed", reason: "Fig. 2 ordered flows, no temperatures/times/pressures stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F1", change: "name/locator/notes; shared module steps moved to F5", reason: "Fig. 2: both routes share mass reflow, underfill, lid attach"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F1", change: "s01-s05: step_basis stated_in_flow", reason: "order from p.3 Sec. IV text and Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F1-s06", change: "deleted (SAT of uC4 area and fillet)", reason: "post-cure evaluation, not a step; results already in metrics a-m4, a-m5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F1-s07", change: "deleted; now F5-s01 (shared)", reason: "Fig. 2 shared post-branch step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F1-s08", change: "deleted; now F5-s02 (shared)", reason: "Fig. 2 shared post-branch step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F1-s09", change: "deleted; now F5-s03 (shared)", reason: "Fig. 2 shared post-branch step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F1-s10", change: "deleted (thermal cycling -40 to 125 C)", reason: "reliability test, not a step; results already in metrics a-m1, a-m2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F3", change: "scope tv_build -> comparison; name/notes", reason: "p.2 Sec. II: process (a) is the reference process"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F3-s03", change: "deleted; now F5-s01 (shared)", reason: "Fig. 2 shared post-branch step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F3-s04", change: "deleted; now F5-s02 (shared)", reason: "Fig. 2 shared post-branch step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F3-s05", change: "deleted; now F5-s03 (shared)", reason: "Fig. 2 shared post-branch step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F5", change: "added shared flow (tv_ids ectc51906.2022.00106-a;ectc51906.2022.00106-b) with s01 mass reflow, s02 underfill, s03 lid attach", reason: "Fig. 2; p.2 Sec. II 'for both processes'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F4-s01", change: "deleted (high-speed camera imaging)", reason: "measurement, not a step; shutter and nozzle diameters moved to metric c-m5 condition"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F4-s02", change: "deleted (jet shots into slit)", reason: "dot-size measurement procedure; values already in metrics c-m1..c-m4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F4", change: "deleted (no build steps left); ectc51906.2022.00106-c listed in not_reported", reason: "slit sample fabrication not described"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-c-m5", change: "condition adds 1/250000 s and nozzle 150 um OD / 50 um ID", reason: "p.3 Fig. 5 labels (moved from deleted F4-s01)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F2", change: "deleted; its step F2-s01 moved to F1-s11 as route 'first trial: jet from C4 side (abandoned)'", reason: "manifest v020 build_seq_unverified: the first trial (p.3 Sec. IV) is an alternative CUF dispense on the F1 s01-s03 subassembly, not a flow built after F1; alternatives on the same TV are routes inside one flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F2-s01", change: "deleted; now ectc51906.2022.00106-F1-s11 (route, seq 1), notes updated", reason: "see F2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F1-s04", change: "route 'jet through chip gap (adopted)', seq 4 -> 1; conditions add processor chip thickness 725 um (Fig. 7 label)", reason: "route split with F1-s11 (p.3 Sec. IV; p.4 Sec. V); manifest target_missing_preexisting a-L02: p.4 Fig. 7 labels 725 um chip and 150 um gap"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F1-s05", change: "route 'jet through chip gap (adopted)', seq 5 -> 2", reason: "route split with F1-s11"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F1", change: "locator adds p.3 Fig. 4; notes name the two routes", reason: "first-trial step now in F1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-a", change: "build_seq confirmed after F2 removal: F1 (subassembly) 1, F5 (module assembly) 5", reason: "Fig. 2: bridge subassembly before reflow to laminate, underfill and lid (p.2 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F1-s02", change: "target '75 um pitch uC4'", reason: "manifest v020 target_missing a-i1: p.2 Sec. II 'The bridge C4 pitch used for this study was 75 um'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F3-s02", change: "target '75 um pitch uC4'", reason: "manifest v020 target_missing b-i1: p.2 Sec. II (75 um bridge C4 pitch)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-F5-s01", change: "target '150 um pitch C4'", reason: "manifest v020 target_missing b-i2 (and a-i2): p.1 Abstract / p.2 Sec. II standard pitch bumps 150 um connect processor chips to laminate"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00106-b-L02", change: "not applied (725 um chip thickness on TV b steps)", reason: "manifest target_missing_preexisting b-L02: 725 um is a Fig. 7 label of the CUF gap-jet drawing; no step of F3/F5 forms or states the chip thickness"}

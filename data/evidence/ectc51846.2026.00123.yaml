@@ -44,3 +44,6 @@ not_reported:
 source_quality:
   - "Text layer clean. Candidates p07_tableii/p07_tableiii clip the last table row slightly; re-cropped manually."
   - "Fig. 2(e) caption names three quantities but shows four annotations without mapping; entered as four unassigned dimensions."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00123-F1", change: "step_basis stated_in_flow on s01-s12", reason: "p.3 Fig. 3 numbered flow; p.4-5 Sec. II"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00123", change: "process_flow_level ordered confirmed", reason: "Fig. 3 ordered flow; no temperature/time/pressure values"}

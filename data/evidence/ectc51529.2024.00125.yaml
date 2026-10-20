@@ -32,3 +32,11 @@ not_reported:
 source_quality:
   - "Figures 3 and 4 are absent (numbering jumps from Fig. 2 to Fig. 5)."
   - "Candidate p03_table1 bbox is below the table (section heading only)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00125-F1", change: "flow_name 'SoIC W2W test vehicle build and test' -> 'SoIC W2W test vehicle build'", reason: "WAT and C-SAM rows removed (metrics)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00125-F1-s01", change: "category other -> rdl_layer; target BPM CD/pitch added; step_basis inferred_order", reason: "p.4 Sec. IV TV design CD/pitch; order not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00125-F1-s02", change: "conditions -> split (bonder POR/next generation; incoming wafer process unoptimized/optimized); equipment set", reason: "process splits compared in Sec. III, Figs. 5-6"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00125-F1-s04", change: "row deleted (C-SAM of bonded wafer pair)", reason: "characterization of bond uniformity, not placed in the flow; result already in metrics ectc51529.2024.00125-a-m4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00125-F1-s08", change: "row deleted (wafer acceptance test, Kelvin and daisy-chain resistance)", reason: "electrical test; results already in metrics ectc51529.2024.00125-a-m5..a-m10"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00125-F1-s03,s05..s07", change: "step_basis stated_in_flow; seq renumbered 4-6 after deletions", reason: "p.4 Sec. IV: bond, anneal, thin to reveal TSVs, form WAT probe pads"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00125-F1-s07", change: "category other -> rdl_layer", reason: "p.4 Sec. IV: WAT probe pads are a metal pad layer formed on top of the revealed TSVs (pad metallization; method not stated); not TSV formation or via etch (TSVs already exist, revealed in s06)"}

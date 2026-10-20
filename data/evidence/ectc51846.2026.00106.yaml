@@ -12,7 +12,7 @@ figure_reading_method: >-
   6, 7 opened. Garbled text-layer passages (p.3 mask widths, p.4 fan-out paragraph) read from the page images.
 entries:
   - {table: metrics, row_id: ectc51846.2026.00106-a-m4, field: value, value: 5e-22, unit: m2/s, basis: derived, locator: "p.2 Fig. 3; p.4 Sec. IV", note: "Fig. 3 label 'D(110 C) ~ 5E-22 m2/s'"}
-  - {table: process_steps, row_id: ectc51846.2026.00106-a-s02, field: conditions, value: "T=325..425 C", unit: C, basis: stated, locator: "p.3 Fig. 4", note: "schematic label; exact process temperature not stated in text"}
+  - {table: process_steps, row_id: ectc51846.2026.00106-F1-s04, field: conditions, value: "T=325..425 C", unit: C, basis: stated, locator: "p.3 Fig. 4", note: "schematic label; exact process temperature not stated in text"}
 derived:
   - {table: components, row_id: ectc51846.2026.00106-a-c1, field: thickness_um, value: 700, formula: "0.7 mm x 1000", inputs: "p.3 Sec. III"}
   - {table: stack_layers, row_id: ectc51846.2026.00106-a-L02, field: thickness_um, value: 700, formula: "0.7 mm x 1000", inputs: "p.3 Sec. III"}
@@ -33,3 +33,17 @@ not_reported:
   - sample counts for bend and fan-out measurements
 source_quality:
   - "Text layer garbled on p.2 (Fig. 3 labels) and p.3-4 (some symbol-font words); verified against page images."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s01", change: "tv_id: 'ectc51846.2026.00106-a' -> ''; step_basis: '' -> 'stated_in_flow'; conditions: '' -> '150 mm diameter, 0.7 mm thick glass wafers'; split: '' -> 'mask opening width: 90 deg bend section 3/4.5/6/9 um (-b); spatially varying openings in curved sections (-c); straight-section width not stated'", reason: "same mask step for all TVs (one wafer); per-TV mask opening widths moved to split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s02", change: "deleted", reason: "duplicate of shared mask step s01 (differs only by mask opening; now in s01 split)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s03", change: "deleted", reason: "duplicate of shared mask step s01 (differs only by mask opening; now in s01 split)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s04", change: "step_basis: '' -> 'stated_in_flow'; notes: '' -> 'Ion exchange; no matching step_category. Exact temperature not stated (Fig. 4 range).'", reason: "order stated in Fig. 4; no step_category for ion exchange"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Fig. 4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Fig. 4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s07", change: "step_basis: '' -> 'stated_in_flow'; equipment: '' -> 'laser'", reason: "order stated ('Finally', p.3); laser named"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s04", change: "category: 'other' -> 'ion_exchange'", reason: "pass B: ion_exchange added to step_category (DevLog-007)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s06", change: "category: 'other' -> 'ion_exchange'", reason: "pass B: ion_exchange added to step_category (DevLog-007)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s04", change: "notes: 'Ion exchange; no matching step_category. Exact temperature not stated (Fig. 4 range).' -> 'Exact temperature not stated (Fig. 4 range 325..425 C; range kept in conditions, untyped).'", reason: "category now ion_exchange; temperature is a range only, so not typed"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s06", change: "notes: 'Buries the Ag-rich core (Fig. 4 schematic).' -> 'Buries the Ag-rich core (Fig. 4 schematic). Exact temperature not stated (Fig. 4 range; untyped).'", reason: "temperature is a range only, so not typed"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1", change: "level: 'full' -> 'ordered'", reason: "pass B level_regrade: no typed process condition; only a 325..425 C range in Fig. 4 (rule 7: full needs a typed condition)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106", change: "process_flow_level: 'full' -> 'ordered'", reason: "pass B level_regrade: no typed process condition in any step (Fig. 4 gives a 325..425 C range only)"}

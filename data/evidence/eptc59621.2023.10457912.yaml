@@ -16,7 +16,7 @@ entries:
   - {table: metrics, row_id: eptc59621.2023.10457912-a-m2, field: value, value: 5.423, unit: um, basis: measured, locator: "p.2 Fig. 1(a)", note: "same image reused as Fig. 3(b)"}
   - {table: metrics, row_id: eptc59621.2023.10457912-a-m4, field: value, value: 58.27, unit: um, basis: measured, locator: "p.2 Fig. 1(a)", note: "FIB-SEM depth label (cs)"}
 derived:
-  - {table: process_steps, row_id: eptc59621.2023.10457912-a-s08, field: time_s, value: 1800, formula: "30 min * 60", inputs: "p.2 Experimental Methods"}
+  - {table: process_steps, row_id: eptc59621.2023.10457912-F1-s08, field: time_s, value: 1800, formula: "30 min * 60", inputs: "p.2 Experimental Methods"}
 conflicts:
   - {table: metrics, row_id: eptc59621.2023.10457912-a-m10, field: value, values: [25.86, 26], locators: ["p.3 Fig. 5(b)", "p.3 Results text"], chosen: 25.86, why: "measured FIB-SEM label over text approximation"}
   - {table: interconnects, row_id: eptc59621.2023.10457912-a-i1, field: diameter_um/depth_um, values: ["6 x 55 (nominal)", "5.423 top / 5.207 bottom / 58.27 depth (FIB-SEM, POR)"], locators: ["p.1 Experimental Methods", "p.2 Fig. 1(a)"], chosen: "nominal kept in interconnect; measured values entered as metrics m2-m4", why: "different quantities (design vs as-measured); both retained"}
@@ -35,3 +35,11 @@ not_reported:
 source_quality:
   - "Garbled PDF text layer; text.md is tesseract OCR (figure labels garbled). All numbers checked against page renders."
   - "candidates.json empty: no detected figure crops; all key figures cropped manually."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457912-F1-s09", change: "deleted (cross-sectional FIB-SEM of filled/partially filled TSVs)", reason: "failure-analysis cut/measurement, not a step; results already in metrics a-m2..a-m18"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457912-F1-s01..s08", change: "target '300 mm Si wafer' (object name) cleared; wafer size moved into s01 step text; step_basis stated_in_flow", reason: "target holds stated geometry only; order stated in Experimental Methods"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457912-F1-s03", change: "target 6 x 55 um TSV, pattern density <1%", reason: "stated geometry on the step"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457912-F1-s07", change: "current-density/pulse/duty-cycle splits moved from conditions to split", reason: "parameter sweep on this step"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457912-F1-s08", change: "anneal temperature split 300/350/400 C moved to split", reason: "parameter sweep on this step"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457912", change: "process_flow_level ordered kept", reason: "ordered via-middle flow; only anneal has absolute conditions, plating given as relative current density"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457912-F1-s08", change: "temp_c_max '' -> '400'", reason: "validator split_temp_untyped: highest split temperature 400 C (p.2 Experimental Methods; p.4)"}

@@ -35,3 +35,9 @@ not_reported:
 source_quality:
   - "Fig. 8 caption repeats 'Measured small signal response'; the image and text show the optical waveform test setup."
   - "Section headings garbled in text layer (font encoding); Fig. 4 caption reads 'Fig.' without number in text.md. No candidate isolates Fig. 4 or Fig. 5 (p03_fig5 spans the column)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00019-F1-s01..s03", change: "step_basis -> generic_description (s03 was inferred_order)", reason: "fragments paper: isolated statements in reading order (rule 7)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00019-F1-s01", change: "material 'Au stud' moved from notes to material (Fig. 6(a) label); source text -> mixed", reason: "stated material on the step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00019-F2", change: "scope tv_build -> generic_platform; F2 steps step_basis generic_description", reason: "concept connector assembly, not executed (TV b is a simulation model)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00019-F2-s03", change: "added step: receptacle plate fabricated as single molded component", reason: "stated in Sec. II.A, missing from rows"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00019-F2", change: "tv_ids b kept; notes state tv_ids = TV the concept is shown for", reason: "v012 flow_tv_ids item: rule n v2.5 defines generic_platform tv_ids as the TVs the flow is shown for; Fig. 2 connector concept belongs to the proposed package b (p.2 Sec. II.A)"}

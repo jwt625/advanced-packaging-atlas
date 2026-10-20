@@ -25,13 +25,13 @@ entries:
 derived:
   - {table: test_vehicles, row_id: ectc51846.2026.00096-a, field: n_dies, value: 3, formula: "chip-1 + chip-2 + cap chip", inputs: "p.1 Fig. 1; p.2 Fig. 2(f)"}
   - {table: interconnects, row_id: ectc51846.2026.00096-a-i1, field: aspect_ratio, value: 10, formula: "300/30", inputs: "p.1 Table 1"}
-  - {table: process_steps, row_id: ectc51846.2026.00096-a-s33, field: time_s, value: 900, formula: "15 min x 60", inputs: "p.4 Fig. 12 Step 1"}
+  - {table: process_steps, row_id: ectc51846.2026.00096-F2-s03, field: time_s, value: 900, formula: "15 min x 60", inputs: "p.4 Fig. 12 Step 1"}
   - {table: test_vehicles, row_id: ectc51846.2026.00096-a, field: carrier_size_mm, value: 300, formula: "12-inch wafer = 300 mm standard wafer", inputs: "p.3 Fig. 5; p.6 Sec. VIII"}
 conflicts:
   - {table: metrics, row_id: ectc51846.2026.00096-a-m1, field: unit, values: ["157 W/cm2 heat flux (abstract)", "157 W power (Sec. VII, VIII)", "~1.67 W/mm2 heat flux at 0.7 L/min (Fig. 16)"], locators: ["p.1 Abstract", "p.6 Sec. VII", "p.6 Fig. 16"], chosen: "157 W (text) plus Fig. 16 points separately", why: "body text and conclusion state power; heat-flux area not given so no conversion"}
   - {table: metrics, row_id: ectc51846.2026.00096-a-m2, field: unit, values: ["187 W/cm2 (abstract)", "187 W (text)", "~2.01 W/mm2 (Fig. 16)"], locators: ["p.1 Abstract", "p.6 Sec. VII", "p.6 Fig. 16"], chosen: "187 W", why: "as above"}
   - {table: metrics, row_id: ectc51846.2026.00096-a-m3, field: value, values: ["344 W/cm2 (text)", "~3.75 W/mm2 total (Fig. 16)"], locators: ["p.6 Sec. VII", "p.6 Fig. 16"], chosen: 344, why: "text value; Fig. 16 total entered separately"}
-  - {table: process_steps, row_id: ectc51846.2026.00096-a-s28, field: step, values: ["laser debonding (Fig. 2(e))", "Si carrier chosen; laser debond described for glass carriers (Sec. V)"], locators: ["p.2 Fig. 2(e)", "p.4 Sec. V"], chosen: "laser debonding as labelled", why: "only stated debond step"}
+  - {table: process_steps, row_id: ectc51846.2026.00096-F1-s28, field: step, values: ["laser debonding (Fig. 2(e))", "Si carrier chosen; laser debond described for glass carriers (Sec. V)"], locators: ["p.2 Fig. 2(e)", "p.4 Sec. V"], chosen: "laser debonding as labelled", why: "only stated debond step"}
   - {table: interconnects, row_id: ectc51846.2026.00096-a-i1, field: diameter_um, values: [30, 30.5], locators: ["p.1 Table 1", "p.2 Fig. 3 SEM"], chosen: 30, why: "design row; SEM 30.5/27.4/297 um entered as metrics"}
 excluded:
   - "Pin-fin design optimization (refs [27, 35]) and prior RTD characterization (refs [31, 35]) not re-entered"
@@ -48,3 +48,41 @@ not_reported:
 source_quality:
   - "Text layer clean. Fig. 12 spans p.4 (steps 1-6) and p.5 (steps 7-14) with caption on p.5. Table 2 right column truncated in the PDF itself."
   - "Candidates p01_fig1 and p02_fig3 include body text; no candidate for Fig. 2 (two-column split)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F1-s02", change: "target 'TSV diameter 30 um'; F1-s03 target 'TSV 30 um x 300 um deep'", reason: "stated geometry on step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F1-s13", change: "target from Table 2 spec limits", reason: "stated geometry on step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F1-s15", change: "target from Table 2 spec; F1-s16 thickness_um 4.25 (measured mean)", reason: "stated geometry and result thickness on steps"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F1-s19", change: "target spec 7.47-9.13 um; thickness_um 8.73 (measured mean)", reason: "Table 2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F1-s26", change: "thickness_um 250 cleared; etch depth and pin-fin geometry moved to target", reason: "250 um is the etch depth, not the result thickness"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F1-s23", change: "composite split: new F1-s48 degas, F1-s49 Ar plasma clean before F1-s23 PVD seed; F1-s24..s30 seq +2", reason: "text lists the in-situ sequence (p.4 Sec. V)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F1", change: "renamed to wafer fabrication (Fig. 2(a)-(e)); level full -> ordered; assembly moved to new F2", reason: "assembly (Fig. 12) is a later sub-flow; wafer flow has materials/dimensions but no temperature/time"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2", change: "new flow: chip-to-chip stacking and PCB assembly (Fig. 12), level full", reason: "sub-flow following the wafer flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s01", change: "moved from ectc51846.2026.00096-F1-s31", reason: "assembly sub-flow split into F2 (Fig. 12)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s02", change: "moved from ectc51846.2026.00096-F1-s32", reason: "assembly sub-flow split into F2 (Fig. 12)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s03", change: "moved from ectc51846.2026.00096-F1-s33", reason: "assembly sub-flow split into F2 (Fig. 12)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s04", change: "moved from ectc51846.2026.00096-F1-s34", reason: "assembly sub-flow split into F2 (Fig. 12)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s05", change: "moved from ectc51846.2026.00096-F1-s35", reason: "assembly sub-flow split into F2 (Fig. 12)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s06", change: "moved from ectc51846.2026.00096-F1-s36", reason: "assembly sub-flow split into F2 (Fig. 12)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s07", change: "moved from ectc51846.2026.00096-F1-s37", reason: "assembly sub-flow split into F2 (Fig. 12)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s08", change: "moved from ectc51846.2026.00096-F1-s38", reason: "assembly sub-flow split into F2 (Fig. 12)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s09", change: "moved from ectc51846.2026.00096-F1-s39", reason: "assembly sub-flow split into F2 (Fig. 12)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s10", change: "moved from ectc51846.2026.00096-F1-s40", reason: "assembly sub-flow split into F2 (Fig. 12)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s11", change: "moved from ectc51846.2026.00096-F1-s41", reason: "assembly sub-flow split into F2 (Fig. 12)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s14", change: "moved from ectc51846.2026.00096-F1-s42", reason: "assembly sub-flow split into F2 (Fig. 12)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s15", change: "moved from ectc51846.2026.00096-F1-s43", reason: "assembly sub-flow split into F2 (Fig. 12)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s16", change: "moved from ectc51846.2026.00096-F1-s44", reason: "assembly sub-flow split into F2 (Fig. 12)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s17", change: "moved from ectc51846.2026.00096-F1-s45", reason: "assembly sub-flow split into F2 (Fig. 12)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s18", change: "moved from ectc51846.2026.00096-F1-s47", reason: "assembly sub-flow split into F2 (Fig. 12)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s07", change: "thickness_um 50 cleared, kept in conditions as flux thickness", reason: "50 um is the flux film thickness, not a build result thickness"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s09", change: "245 C moved temp_c -> temp_c_max", reason: "stated as reflow peak temperature"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s11", change: "composite Step 11 split into flux pin transfer (s11), ball mount (new s12), reflow (new s13)", reason: "Fig. 12 Step 11 lists three operations in order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s18", change: "equipment 'EOS M 290 (manifold 3D printing)'", reason: "named tool, p.5 Sec. VI"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F1-s46", change: "deleted (resistance test after Step 14)", reason: "post-build test; already metric ectc51846.2026.00096-a-m31"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2-s03", change: "evidence derived entry re-pointed from F1-s33", reason: "step moved to F2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F1-s13", change: "result: '' -> 'Table 2: heater width 198.43-200.57 um (avg 199.89); sensor width 18.91-20.40 um (avg 19.82)'", reason: "pass B target_missing L06: measured sensor width 19.82 um (Table 2) recorded as step result"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F1-s13", change: "overrides: '' -> 'result:measured'", reason: "result values are measured (Table 2)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F1-s13", change: "locator: 'p.3 Sec. IV; p.2 Fig. 2(b)' -> 'p.3 Sec. IV; p.2 Fig. 2(b); p.3 Table 2'", reason: "Table 2 cited"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F1-s15", change: "result: '' -> 'Table 2: passivation opening 97.29-101.44 um (avg 99.62)'", reason: "pass B target_missing L07: measured passivation opening 99.62 um (Table 2) recorded as step result"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F1-s15", change: "overrides: '' -> 'result:measured'", reason: "result values are measured (Table 2)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F1-s15", change: "locator: 'p.3 Sec. IV; p.2 Fig. 2(b)' -> 'p.3 Sec. IV; p.2 Fig. 2(b); p.3 Table 2'", reason: "Table 2 cited"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00096-F2", change: "notes: '' -> 'build_seq 2 confirmed: stacking uses chips diced at the end of F1.'", reason: "pass B build_seq_unverified: F1 wafer flow ends with dicing (Sec. V); F2 stacks those chips (Sec. VI)"}

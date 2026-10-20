@@ -40,3 +40,13 @@ not_reported:
   - daisy-chain resistance values; MicroPillar edge offset in um
 source_quality:
   - "text.md Table 1 lost the numeric values; values read from the page image."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00013-F1-s01", change: "category deposition_other -> carrier_prep; carrier glass (soda-lime, CTE 8-9 ppm/K) and 300 mm square panel added", reason: "p.3 Sec. III; p.2 Sec. III, Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00013-F1-s02", change: "category other -> bumping; Table 1 pitch/diameter/thickness to target; thickness_um 10 cleared (pillar height, not a layer)", reason: "p.4 Table 1; rule 7"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00013-F1-s04;ectc51529.2024.00013-F1-s05", change: "thickness_um 700 moved from molding to backside grinding (Table 1 final 1st mold thickness equals chiplet thickness)", reason: "p.4 Table 1; Fig. 3 order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00013-F1-s08", change: "category other -> bumping; Table 1 pitch/diameter/thickness to target; thickness_um cleared", reason: "p.4 Table 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00013-F1-s09", change: "atmosphere forming_gas (paper: 'forming gas (formic acid)'); target 40 um pitch; temporary-fixing placement split out to new s13", reason: "p.2 Sec. III"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00013-F1-s13", change: "new step: bridge-die placement with temporary fixing adhesive (split from s09)", reason: "p.2 Sec. III: special adhesive for temporary fixing of chips before fluxless reflow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00013-F1-s10;ectc51529.2024.00013-F1-s11", change: "thickness_um 120 moved from 2nd molding to grind/electrode exposure (Table 1 final 2nd mold thickness)", reason: "p.4 Table 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00013-F1-s12", change: "target: module size and total thickness (Table 1)", reason: "rule 7 stated geometry on the step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00013-F1-s01..s12", change: "step_basis stated_in_flow; seq of s09-s12 shifted for new s13", reason: "Fig. 3 order"}

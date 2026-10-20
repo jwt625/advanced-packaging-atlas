@@ -33,3 +33,10 @@ not_reported:
   - absolute bonding accuracy, thickness deviation and panel warpage values; sample counts
 source_quality:
   - "Fig. 2.2 and Fig. 3.5 candidate crops cut off bottom content; manual crops used."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00048", change: "process_flow_level ordered confirmed", reason: "Fig. 2.3 ordered flow; no temperatures/times/pressures"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00048-F1", change: "step_basis stated_in_flow on s01-s08, s10", reason: "p.2 Sec. II.B; p.2 Fig. 2.3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00048-F1-s01", change: "category sap_msap -> rdl_layer", reason: "RDL method not stated (p.2 Sec. II.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00048-F1-s06", change: "category sap_msap -> rdl_layer", reason: "RDL method not stated (p.2 Sec. II.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00048-F1-s07", change: "conditions 'panel-level mass reflow; chips 11x11 mm2' (step_id kept, template-referenced)", reason: "p.4 Sec. III.D"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00048-F1-s09", change: "deleted; moved to metrics a-m18", reason: "X-ray, electrical inspection and cross-section are verification analyses, not build steps"}

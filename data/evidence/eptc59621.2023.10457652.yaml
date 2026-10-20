@@ -32,3 +32,9 @@ not_reported:
 source_quality:
   - "Text layer garbled; text.md is tesseract OCR (OCR misreads e.g. Fig. 9 fit labels). No figure candidates detected; all key-figure bboxes manual."
   - "Multiphysics section reuses figure numbers 'Fig 1' and 'Fig 2' on p.4."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457652-F1-s02", change: "deleted (heat from room temperature to molding temperature); folded into s03 conditions", reason: "a temperature ramp before molding, not a separate build step; p.1 Sec. Configuration step 1"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457652-F1-s03", change: "pressure_mpa 6.5 (measured plateau, approx) and sensor equipment added; pre-mold heating in conditions; seq 3 -> 2", reason: "p.4 Multiphysics section and p.4 Fig. 1 (measured mold pressure); value also in metrics a-m23"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457652-F1-s05", change: "step_basis generic_description; seq 5 -> 4", reason: "abstract mention only"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457652-F1", change: "flow_name; step_basis stated_in_flow on s01, s03, s04; seq renumbered", reason: "three-step process order in Sec. Configuration"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457652", change: "process_flow_level ordered confirmed", reason: "ordered die-bond, mold, release steps; only measured mold pressure as a condition"}

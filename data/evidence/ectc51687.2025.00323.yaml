@@ -35,3 +35,14 @@ not_reported:
   - wafer/die thicknesses other than 0.15 mm top chip; TSV diameter/depth; F2F WoW pitch
   - Kelvin resistance values (axes unlabelled); EM sample counts and failure criterion; chip count per wafer
   - CMP slurry and inhibitor composition
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00323-F1", change: "step_basis stated_in_flow on Fig. 4 steps (s06 stays inferred_order); object-name targets cleared on s01-s04, s07, s10, s11", reason: "p.2 Sec. II.A and Fig. 4(a)-(h) state the order; target = stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00323-F1-s05", change: "target 'middle wafer' -> 'F2B CoW pads 3.0/6.0, 1.4/2.8, 1.0/2.0 um pad/pitch'", reason: "p.2 Sec. II.A, Fig. 5: three pad/pitch configurations on the F2B CoW TV"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00323-F1-s06", change: "split moved from conditions to split column; target object name -> pad geometry", reason: "p.4 Sec. II.C, Fig. 9 vs Fig. 12: conventional vs advanced (oxidation-inhibitor slurry) CMP is a process split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00323-F1-s07", change: "target cleared; thickness_um 150 (top chip 0.15 mm) moved from notes", reason: "p.3 Sec. II.A: top chip 17 x 24 mm, thickness = 0.15 mm"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00323-F1-s08", change: "target 'top wafer' -> 'top chip 17 x 24 mm'", reason: "p.3 Sec. II.A chip size"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00323-F1-s09", change: "target object name -> '3.0/6.0, 1.4/2.8, 1.0/2.0 um pad/pitch'", reason: "p.2 Sec. II.A, Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00323-F1-s12", change: "deleted (probing)", reason: "electrical test, not a step; Kelvin yields already in metrics ectc51687.2025.00323-a-m4..m9"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00323-F1-s01", change: "category: \"other\" -> \"rdl_layer\"", reason: "front-side electrode and Cu pad metallization (p.2 Sec. II.A, Fig. 4(a)); pad/wiring layer formation maps to rdl_layer as elsewhere in the DB"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00323-F1-s05", change: "category: \"other\" -> \"rdl_layer\"", reason: "backside Cu pad layer on middle wafer (p.2 Fig. 4(c)); same mapping as other backside Cu pad formation rows"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00323-F1-s11", change: "category: \"other\" -> \"rdl_layer\"", reason: "probing contact pad metal layer (p.2 Fig. 4(h)); pad layer formation"}

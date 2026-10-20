@@ -24,7 +24,8 @@ derived:
   - {table: interconnects, row_id: ectc51846.2026.00130-a-i1, field: resistance_mohm, value: 1500, formula: "1.5 ohm x 1000", inputs: "p.5 Sec. III.E"}
   - {table: interconnects, row_id: ectc51846.2026.00130-b-i1, field: resistance_mohm, value: 9600, formula: "9.6 ohm x 1000", inputs: "p.3 Sec. III.C"}
   - {table: interconnects, row_id: ectc51846.2026.00130-a-i1, field: alignment_um, value: 0.08, formula: "80 nm / 1000", inputs: "p.2 Sec. II.B"}
-  - {table: process_steps, row_id: ectc51846.2026.00130-a-sp03, field: time_s, value: 300, formula: "5 min x 60", inputs: "p.4 Sec. III.D"}
+  - {table: process_steps, row_id: ectc51846.2026.00130-F3-s03, field: time_s, value: 300, formula: "5 min x 60", inputs: "p.4 Sec. III.D"}
+  - {table: process_steps, row_id: ectc51846.2026.00130-F4-s01, field: time_s, value: 300, formula: "5 min x 60", inputs: "p.4 Sec. III.D"}
 conflicts:
   - {table: metrics, row_id: ectc51846.2026.00130-a-m1, field: value, values: [98, ">95 (Intro)", "91 (Fig. 7, PVD TaN/Ta at 20M)"], locators: ["p.5 Sec. III.E; p.1 Abstract", "p.1 Sec. I", "p.3 Fig. 7"], chosen: 98, why: "final result in Sec. III.E and Fig. 13; Fig. 7 is the barrier-study stage (entered separately)"}
   - {table: metrics, row_id: ectc51846.2026.00130-a-m13, field: value_text, values: ["no leakage up to 25 V (Sec. III.E)", "<100 pA at 30 V (Intro, Conclusion)"], locators: ["p.4 Sec. III.E", "p.1 Sec. I; p.5 Sec. IV"], chosen: "both entered as separate rows", why: "different statements, structures not tied"}
@@ -38,5 +39,25 @@ not_reported:
   - "pad/via diameters, layer thicknesses, dielectric materials other than SiCN, Cu fill method"
   - "plasma chemistries (Cond. A-C), anneal thermal profiles and ambients (X, Y), bonding force/temperature"
   - "wafer size in text (300 mm read from Fig. 4 axes); number of wafers; die size; offset-array data"
+  - "process_steps: ectc51846.2026.00130-c (blanket post-CMP Cu film for XPS; no flow described)"
 source_quality:
   - "Clean 5-page text layer. No candidates for Fig. 2 and Fig. 5; Fig. 12 candidate on p.5 is wrong (image is on p.4)."
+revisions:
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00130-F1", change: "tv_ids a -> a;b; level full -> ordered", reason: "repass: TV b built with the same flow (barrier split); module has materials/tools but no conditions"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00130-F2", change: "tv_ids a -> a;b; level full -> ordered", reason: "repass: as F1"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00130-F3", change: "tv_ids a -> a;b; flow_name -> 'bond module and post bond module (Fig. 2a)'", reason: "repass: TV b bonded and processed with the same modules"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00130-F1-s08", change: "barrier variants moved from conditions to split; material generalised", reason: "repass convention: per-variant value in split on the shared step"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00130-F2-s08", change: "barrier variants moved from conditions to split; material generalised", reason: "repass convention: per-variant value in split on the shared step"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00130-F3-s01", change: "plasma Cond. A-C moved to split", reason: "repass: parameter sweep on this step (p.3 Fig. 6)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00130-F3-s03", change: "5 min vs 1 h soak moved to split", reason: "repass: parameter sweep on this step (p.4 Fig. 10)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00130-F3-s11", change: "deleted (E-test)", reason: "repass: measurement, not a step; results already in metrics a-m1..a-m4, a-m13..a-m16"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00130-F3-s12", change: "deleted (post-process TEM); information moved to new metric a-m17", reason: "repass: failure-analysis/verification cut is a metric, not a step"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00130-a-m17", change: "added (post-process cross-section TEM verification)", reason: "repass: moved from F3-s12"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00130-F4", change: "added flow 'coupon anneal study (Sec. III.D)' (fragments, tv_ids d) with step F4-s01", reason: "repass: TV d anneal stated (Pyra, 400 C 5 min soak, 3 profiles x 2 ambients) but was in no flow"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00130-c", change: "not_reported 'process_steps: c' added", reason: "repass: blanket Cu film coupon has no described flow"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00130-F1-s07", change: "target 'bond pad pitch 0.45 um (450 nm)'", reason: "pass B target_missing a-L08, b-L02, a-i1, a-i2, b-i1: p.2 Sec. II.A bond pad pitch 450 nm (V1 bond layer, bottom wafer)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00130-F2-s07", change: "target 'bond pad pitch 0.45 um (450 nm)'", reason: "pass B target_missing a-L05, b-L01: p.2 Sec. II.A bond pad pitch 450 nm (V1P bond layer, top wafer)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00130-F3-s02", change: "target 'bond pad pitch 0.45 um (450 nm)'", reason: "pass B target_missing a-i1, a-i2, b-i1: W2W hybrid bond at 450 nm pitch (p.2 Sec. II.A)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00130-F1", change: "build_seq 1 (tie with F2); notes 'parallel'", reason: "pass B build_seq_unverified a, b: Fig. 2a shows bottom and top wafer fabrication side by side, both feeding the bond module"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00130-F2", change: "build_seq 2 -> 1 (tie with F1); notes 'parallel'", reason: "Fig. 2a: top wafer built in parallel with bottom wafer"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00130-F3", change: "build_seq 3 -> 2", reason: "Fig. 2a: bond and post-bond modules follow both wafer flows"}

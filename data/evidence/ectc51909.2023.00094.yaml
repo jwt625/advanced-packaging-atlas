@@ -33,3 +33,9 @@ not_reported:
   - mold material names, modulus, CTE values; carrier material and thickness; mold thicknesses
   - die sizes and thicknesses; die attach method; molding temperature, pressure, cure conditions
   - bridge dies (omitted in TVs); sample counts for panel warpage
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00094-F1-s02", change: "deleted (Z-height warpage measurement, not a build step)", reason: "results already in metrics a-m1..a-m3, b-m1..b-m8 (scope: range of Z height; die Z with panel chucked)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00094-F2-s02", change: "deleted (Z-height warpage measurement, not a build step)", reason: "results already in metrics a-m1..a-m3, b-m1..b-m8 (scope: range of Z height; die Z with panel chucked)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00094-F2-s04", change: "deleted (Z-height warpage measurement, not a build step)", reason: "results already in metrics a-m1..a-m3, b-m1..b-m8 (scope: range of Z height; die Z with panel chucked)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00094-F2-s06", change: "deleted (Z-height warpage measurement, not a build step)", reason: "results already in metrics a-m1..a-m3, b-m1..b-m8 (scope: range of Z height; die Z with panel chucked)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00094-F1/F2", change: "splits added (F1-s01 mold material/carrier CTE/mold thickness; F2 carrier CTE, die thickness, overmold stress index per Table I); step_basis stated_in_flow, performed yes", reason: "p.2 Sec. II; p.2-3 Sec. III.A; p.3 Table I"}

@@ -33,3 +33,29 @@ not_reported:
   - optical_interfaces
 source_quality:
   - "All 8 figure candidates hold the full figure; Fig. 2 axis label says um while caption says mm."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F1-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F1-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F1-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F1-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F1-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F1-s03", change: "equipment: '' -> 'panel stepper with large-area projector lens; panel chuck plate'", reason: "named tool type to equipment; pattern sizes are a sweep on the exposure (p.3 Sec. IV.A; p.2 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F1-s03", change: "conditions: 'large-area projector lens; dose not stated' -> '18-reticle (14,940 mm2) field per shot; 4x4 shot pattern (16 shots); dose not stated'", reason: "named tool type to equipment; pattern sizes are a sweep on the exposure (p.3 Sec. IV.A; p.2 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F1-s03", change: "split: '' -> 'L/S 1.6/1.5/1.4/1.3/1.2 um'", reason: "named tool type to equipment; pattern sizes are a sweep on the exposure (p.3 Sec. IV.A; p.2 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s03", change: "equipment: '' -> 'panel stepper with large-area projector lens'", reason: "focus offsets are a parameter sweep on the exposure (p.4 Fig. 8); dose already typed; tool to equipment"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s03", change: "target: '' -> 'L/S 1.5 um'", reason: "focus offsets are a parameter sweep on the exposure (p.4 Fig. 8); dose already typed; tool to equipment"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s03", change: "conditions: 'dose 120 mJ/cm2; focus -30 to +8 um (Fig. 8)' -> 'exposure over 18-reticle field'", reason: "focus offsets are a parameter sweep on the exposure (p.4 Fig. 8); dose already typed; tool to equipment"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s03", change: "split: '' -> 'focus offset -30 to +8 um, about 2 um steps (Fig. 8)'", reason: "focus offsets are a parameter sweep on the exposure (p.4 Fig. 8); dose already typed; tool to equipment"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s03", change: "overrides: 'conditions:figure_image' -> 'split:figure_image'", reason: "focus offsets are a parameter sweep on the exposure (p.4 Fig. 8); dose already typed; tool to equipment"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F1-s05", change: "deleted step 'optical microscopy of patterns at center and four corners of 18-reticle field'", reason: "optical-microscope inspection is the experiment's measurement, not a build step; already in metrics ectc51846.2026.00198-a-m1/-a-m2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s06", change: "deleted step 'cross-sectional SEM of patterns'", reason: "cross-section SEM is a measurement; covered by metrics ectc51846.2026.00198-b-m3 (tool SU5000 moved to its condition)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s07", change: "deleted step 'linewidth measurement across 18-reticle area by optical profilometer; Bossung analysis'", reason: "linewidth/Bossung measurement is a result; covered by metrics ectc51846.2026.00198-b-m1/-b-m2 (profilometer moved to b-m1 condition)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-b-m3", change: "condition: '' -> 'cross-sectional SEM (SU5000, read from Fig. 6 image banner)'", reason: "SEM tool from deleted step ectc51846.2026.00198-F2-s06 (p.3 Fig. 6)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-b-m1", change: "condition: '1.5 um L/S, 6 um PXi/XI resist, 120 mJ/cm2' -> '1.5 um L/S, 6 um PXi/XI resist, 120 mJ/cm2; linewidth by optical profilometer, Bossung curve'", reason: "measurement method from deleted step ectc51846.2026.00198-F2-s07 (p.2-3 Sec. III.B)"}

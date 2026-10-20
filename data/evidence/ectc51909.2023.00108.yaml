@@ -20,3 +20,5 @@ excluded:
   - "SoIC bond performance claims attributed to refs [3], [4]"
   - "InFO_oS 2/2 um RDL and CoWoS_S 0.4/0.4 um BEOL described with refs [5], [6]; Table II values kept as this paper's comparison"
 not_reported: [process_steps, "die/interposer/package dimensions", "waveguide material, cross-section, number of layers", "absolute bandwidth, energy pJ/bit, lane rate", "wavelength/band", "bump pitches", "measurement vs simulation basis of all loss numbers", reliability, thermal, warpage]
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00108, change: "process_flow_level none confirmed; no flows", reason: "platform/concept paper; no fabrication or assembly step stated for any TV"}

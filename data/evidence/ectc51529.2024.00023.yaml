@@ -21,6 +21,7 @@ entries:
   - {table: stack_layers, row_id: ectc51529.2024.00023-b-L01, field: thickness_um, value: 2.45, unit: um, basis: measured, locator: "p.4 Fig. 6", note: "SIMS depth of SiO2 region boundary"}
   - {table: metrics, row_id: ectc51529.2024.00023-c-m1, field: value, value: 1.43, unit: dB, basis: simulated, locator: "p.4 Fig. 7", note: "TE 2000 um taper at 200 nm"}
 derived:
+  - {table: process_steps, row_id: ectc51529.2024.00023-F1-s02, field: thickness_um, value: 50000, formula: "50 mm x 1000 (unit conversion, basis design_target)", inputs: "p.3 Sec. III (50 mm thick boules)"}
   - {table: metrics, row_id: ectc51529.2024.00023-d-m3, field: unit, value: "m2/s", formula: "diffusivity unit printed as m/s2; corrected to m2/s (unit label only)", inputs: "p.2 Sec. II.B; p.2 Table 1"}
 conflicts:
   - {table: optical_interfaces, row_id: ectc51529.2024.00023-c-o1, field: coupling_loss_db, values: ["< 0.5 dB", "< 1 dB"], locators: ["p.1 Abstract; p.4 Sec. V.B; p.4 Conclusion", "p.4 Sec. V.B (after Fig. 8)"], chosen: "< 0.5 dB", why: "stated three times and supported by Fig. 7 (3000 um taper, <= 200 nm)"}
@@ -42,3 +43,16 @@ not_reported:
   - "measured diffusivity of the new glass"
 source_quality:
   - "Fig. 5 caption wrong (repeats Fig. 3 topic); Fig. 8 caption fragmentary; diffusivity unit printed m/s2."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00023-F1", change: "step_basis stated_in_flow on s01-s11", reason: "p.3 Sec. III ('melted, refined, and then cast ... annealed and then sliced'); p.1-2 Sec. II.A ('First ... Then ... Next ... The last step'); p.3 Sec. IV ('After wafer processing')"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00023-F1-s01", change: "material/conditions: high-purity raw materials to reduce tramp Pt, Rh, Fe", reason: "p.3 Sec. III"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00023-F1-s02", change: "target '154 mm diameter boule'; thickness_um 50000 (50 mm); basis design_target; conditions cleared", reason: "p.3 Sec. III; unit conversion mm -> um"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00023-F1-s04", change: "target '150 mm diameter wafers'", reason: "p.3 Sec. III"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00023-F1-s05", change: "notes: mask material not stated", reason: "evidence not_reported"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00023-F1-s11", change: "equipment 'laser'", reason: "p.3 Sec. IV: laser cut end-faces"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00023-F2-s01", change: "step_basis generic_description; thickness_um 2.45 (measured, ToF-SIMS, approx)", reason: "p.4 Fig. 6 SiO2/glass interface depth (same value as stack layer b-L01)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00023-F1-s04", change: "category other -> carrier_prep", reason: "manifest v002 category_other (audit B): slicing and finishing to 150 mm wafers is substrate provision, p.3 Sec. III, Fig. 4(d)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00023-F1-s08", change: "category other -> ion_exchange", reason: "manifest v002 category_other; ion_exchange added to step_category (DevLog-007 coordinator decision); p.2 Sec. II.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00023-F1-s10", change: "category other -> ion_exchange", reason: "manifest v002 category_other; second (Na) ion-exchange, p.2 Sec. II.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00023-F1-s01", change: "no change (category other kept)", reason: "manifest v002 category_other: glass melting/refining has no matching step_category"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00023-F1-s02", change: "no change (category other kept)", reason: "manifest v002 category_other: casting glass boules has no matching step_category"}

@@ -34,3 +34,5 @@ not_reported:
   - "whether Fig. 8 eye diagrams are simulated or measured"
 source_quality:
   - "Candidates p04_fig9 (SBT row) and p04_fig10 (x-axis labels) clipped at the bottom; manual crops used."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00047", change: "process_flow_level none confirmed (no change)", reason: "full text read: no fabrication/assembly steps; Fig. 6 compares POR vs KY RDL dimensions only"}

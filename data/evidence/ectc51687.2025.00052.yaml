@@ -38,3 +38,39 @@ not_reported:
   - alignment method (passive vs active) for PIC-PWG; MFD; polarization; wavelength of IL figures beyond O-band sweep
   - n_samples and pass criteria of JEDEC tests; thermo-mechanical stress values (Fig. 5 contour, no scale values)
   - electrical_interfaces (no data rate or energy reported)
+  - "process_steps: ectc51687.2025.00052-d (3-PIC module; its assembly sequence is not given, Table 2 covers the single-PIC TVs)"
+  - "process_steps: ectc51687.2025.00052-e (reduced-pitch PWG prototype hardware; build not described)"
+  - "reflow profiles, underfill/adhesive cure conditions and surface-treatment methods of the Table 2 steps"
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51687.2025.00052-e-m1, change: "qualifiers '' -> 'value:lt'", reason: "p.4 Sec. V.A 'less than 30 dB cross-talk in simulations' (rule d)"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51687.2025.00052-b-o1, change: "coupling_loss_db 2.0 -> empty; scope cleared; basis measured -> design_target, source figure_image -> text; overrides cleared; Fig. 8 removed from locator", reason: "2.0 dB is the full PIC-to-SMF link IL (Fig. 8(d)), not a coupler loss; it remains in metrics b-m2 (interim fix, no link_loss_db column)"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51687.2025.00052-c-o1, change: "same as b-o1", reason: "2.0 dB link IL remains in metrics c-m2 (Fig. 8(e))"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51687.2025.00052-a, change: "not changed (tv_kind other, pooled carrier)", reason: "audit fix needs a 'pooled' tv_kind not in schema v2.3; TV notes already state it is not a separate build"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00052-figures, change: "renumbered f03 -> f02 (Table 2); f02 -> f04 (Fig. 4); f04 -> f07 (Fig. 8); f05 -> f09 (Fig. 10)", reason: "re-rank under key-figure rule 2026-10-19 (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00052-f03, change: "added Fig. 3 (stack_schematic, manual)", reason: "CAD drawings of both single-PIC TVs; candidate held only the bottom drawings"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00052-f05, change: "added Fig. 7 (package_photo, candidate)", reason: "photo of optics-last module with substrate cut-out"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00052-f08, change: "added Fig. 9 (optical_plot, candidate)", reason: "source of a-m7"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00052-f10, change: "added Fig. 11 (optical_plot, candidate)", reason: "source of b-m3, c-m3"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-F1-s01, change: "deleted", reason: "preconditioning (1-3 lead-free reflows, pre-bake) before JEDEC stress is not a build step; kept in the JEDEC metric conditions"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-F1-s02, change: "deleted", reason: "preconditioning (1-3 lead-free reflows, pre-bake) before JEDEC stress is not a build step; kept in the JEDEC metric conditions"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-F1, change: "deleted (flow held only preconditioning rows)", reason: "preconditioning before JEDEC stress moved to metrics conditions"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-a-m4, change: "condition: '110 C, 1000 h' -> '110 C, 1000 h, after 1-3 lead-free reflows and pre-bake'", reason: "preconditioning moved from deleted flow F1 (p.6 Sec. V.E)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-a-m5, change: "condition: '85 C/85% RH, 1000 h' -> '85 C/85% RH, 1000 h, after 1-3 lead-free reflows and pre-bake'", reason: "preconditioning moved from deleted flow F1 (p.6 Sec. V.E)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-a-m6, change: "condition: '-40 C, 500 h' -> '-40 C, 500 h, after 1-3 lead-free reflows and pre-bake'", reason: "preconditioning moved from deleted flow F1 (p.6 Sec. V.E)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-a-m8, change: "condition: 'DTC -40/+125 C up to 1000 cycles; T&H 85 C/85% RH up to 1000 h; LTS -40 C up to 500 h; HTS 110 or 125 C up to 1000 h' -> 'DTC -40/+125 C up to 1000 cycles; T&H 85 C/85% RH up to 1000 h; LTS -40 C up to 500 h; HTS 110 or 125 C up to 1000 h; preconditioning: 1-3 lead-free reflow cycles and pre-bake'", reason: "preconditioning moved from deleted flow F1 (p.6 Sec. V.E)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-F2-s12, change: "deleted", reason: "final module test is a measurement; IL results are in metrics b-m1..m3"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-F3-s13, change: "deleted", reason: "final module test is a measurement; IL results are in metrics c-m1..m3"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-F2-s01, change: "notes: '' -> 'Table 2 combines inspection and preclean in one step.'", reason: "Table 2 step combines inspection and preclean"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-F2-s04, change: "target: '' -> '50 um waveguide pitch, 12 channels'; material: '' -> 'adhesive'", reason: "stated PIC-PWG pitch (Sec. V) on the step"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-F2-s05, change: "step_kind: '' -> 'inline_inspection'; notes: '' -> 'In-flow test after PIC-PWG attach; known-good component pre-test (Sec. V.D).'", reason: "in-flow pre-test kept as inline step (Table 2 step 5)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-F2-s07, change: "target: '' -> '150 um pitch flip-chip bumps'; material: '' -> 'lead-free solder'", reason: "stated flip-chip bump pitch (Sec. V) on the step"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-F2-s11, change: "target: '' -> '500 um pitch micro-BGA'; material: '' -> 'lead-free solder balls'", reason: "stated micro-BGA pitch (Sec. V) on the step"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-F3-s02, change: "target: '' -> '150 um pitch flip-chip bumps'; material: '' -> 'lead-free solder'", reason: "stated flip-chip bump pitch (Sec. V) on the step"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-F3-s06, change: "target: '' -> '500 um pitch micro-BGA'; material: '' -> 'lead-free solder balls'", reason: "stated micro-BGA pitch (Sec. V) on the step"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-F3-s01, change: "notes: '' -> 'Table 2 combines inspection and clean in one step.'", reason: "Table 2 step combines inspection and clean"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-F3-s07, change: "notes: '' -> ''Inspection/Precision' as written in Table 2.'", reason: "label kept as written"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-F3-s10, change: "target: '' -> '50 um waveguide pitch, 12 channels'", reason: "stated PIC-PWG pitch (Sec. V) on the step"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-F2, change: "locator: 'p.5 Table 2' -> 'p.5 Table 2; p.6 Sec. V.D'; notes: '' -> 'Table 2 'examples of process sequence steps'; no conditions given.'", reason: "flow source"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-F3, change: "locator: 'p.5 Table 2' -> 'p.5 Table 2; p.6 Sec. V.D'; notes: '' -> 'Table 2 'examples of process sequence steps'; no conditions given.'", reason: "flow source"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-d, change: "listed in not_reported as process_steps", reason: "3-PIC module assembly sequence not given (p.7 Sec. V.E)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00052-e, change: "listed in not_reported as process_steps", reason: "PWG pitch-reduction prototype build not described (p.7 Sec. V.E)"}

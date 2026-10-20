@@ -15,7 +15,7 @@ entries:
   - {table: interconnects, row_id: ectc51906.2022.00055-d-i1, field: depth_um, value: 240.18, unit: um, basis: measured, locator: "p.2 Fig. 2", note: "glass thickness label; TGV is through"}
   - {table: interconnects, row_id: ectc51906.2022.00055-d-i1, field: aspect_ratio, value: 14.3, unit: "", basis: measured, locator: "p.2 Fig. 2", note: "label 14.30; text 'over 14'"}
 derived:
-  - {table: process_steps, row_id: ectc51906.2022.00055-a-s02, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: ectc51906.2022.00055-F1-s02, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.2 Sec. II"}
 conflicts:
   - {table: components, row_id: ectc51906.2022.00055-b-c2, field: x_mm, values: [0.92, 0.84], locators: ["p.3 Table I", "p.3 Sec. III text"], chosen: 0.92, why: "result/design table over text"}
   - {table: components, row_id: ectc51906.2022.00055-b-c1, field: y_mm, values: [1.04, 1.05], locators: ["p.3 Sec. III", "p.1 Abstract"], chosen: 1.04, why: "body text design description; abstract likely rounded/typo"}
@@ -35,3 +35,48 @@ not_reported:
   - reliability, warpage, thermal data
 source_quality:
   - "Candidates p02_fig2, p02_fig3, p02_fig4 and p04_fig10 clip labels or include the neighbouring caption; re-cropped manually."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51906.2022.00055-a-m4, change: "scope 'HFSS with vs without ferrite core' -> '...; applies to TVs a, b'; notes added", reason: "p.4 Sec. III/V state the 4-6x increase once for both inductor types; no per-type values"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51906.2022.00055-b-m4, change: "deleted (copy of -a-m4)", reason: "identical claim copied onto sibling TV"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00055-figures, change: "renumbered f02 -> f04 (Fig. 3), f03 -> f05 (Fig. 4), f04 -> f08 (Table I), f05 -> f09 (Fig. 10)", reason: "re-rank under key-figure rule 2026-10-19 (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00055-f02, change: "added Fig. 1 (stack_schematic, manual)", reason: "cross-section schematic of the proposed IVR package (TV c)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00055-f03, change: "added Fig. 7 (package_photo, manual)", reason: "photos of fabricated type 1/2 inductors"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00055-f07, change: "added Fig. 6 (other, candidate)", reason: "3-D structure drawing with Table I dimension labels"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00055-f10, change: "added Fig. 12 (electrical_plot, candidate)", reason: "efficiency curves behind -c-m1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1", change: "tv_ids: 'ectc51906.2022.00055-a' -> 'ectc51906.2022.00055-a;ectc51906.2022.00055-b;ectc51906.2022.00055-c'; notes: '' -> 'TV c continues with F2 (module RDL build-up and assembly).'", reason: "type 2 coupon (-b) built on the same 340 um glass by the Fig. 3 flow (p.3 Sec. III); IVR module (-c) uses the embedded type 1 inductor substrate (p.4 Sec. IV)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 3 flow and Sec. II text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 3 flow and Sec. II text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 3 flow and Sec. II text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 3 flow and Sec. II text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 3 flow and Sec. II text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 3 flow and Sec. II text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 3 flow and Sec. II text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s08", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 3 flow and Sec. II text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s09", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 3 flow and Sec. II text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s01", change: "notes: 'Same flow used for type 2 (-b) and IVR substrate (-c).' -> ''", reason: "notes referred to sibling TVs; now covered by flow tv_ids"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s02", change: "equipment: '' -> 'furnace'; conditions: 'furnace' -> ''", reason: "named tool type to equipment"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s05", change: "step: 'Cu electroplating of TGVs and surfaces' -> 'Cu electroplating with TGV via filling, except ferrite cavity area'", reason: "Fig. 3 step 3 and Fig. 4(b) 'VIA filling Cu plating'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s07", change: "conditions: 'vacuum' -> ''", reason: "duplicate of typed atmosphere"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s08", change: "thickness_in_um: '' -> '340'", reason: "glass 340 um as fabricated, 300 um after CMP (p.3-4 Sec. III)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s09", change: "category: 'other' -> 'rdl_layer'; notes: '' -> 'TV c: build-up continues to 4 layers (F2).'", reason: "Fig. 3 step 6 is RDL build-up (v2.4 category)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F2-s01", change: "deleted: ferrite-core embedded glass substrate per Fig. 3 flow (see -a)", reason: "placeholder restating the Fig. 3 substrate; TV c now linked to F1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F2-s02", change: "step_basis: '' -> 'stated_in_flow'; step: '4-layer RDL build-up by ABF lamination' -> '4-layer RDL build-up by ABF lamination (winding lines and soldering pads)'", reason: "Sec. IV: winding lines and soldering pads formed by 4-layer build-up"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F2-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "same Sec. IV statement"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F2-s04", change: "step_basis: '' -> 'inferred_order'; notes: 'Reflow conditions not stated.' -> 'Reflow conditions not stated. Placed after RDL build-up (soldering pads formed by it).'", reason: "assembly after RDL not stated explicitly"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F2-s05", change: "added: IVR module assembled on a test board", reason: "Fig. 11(b) caption 'assembly on a test board'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F2-s02", change: "seq: 2 -> 1", reason: "order per paper (new/moved steps)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F2-s03", change: "seq: 3 -> 2", reason: "order per paper (new/moved steps)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F2-s04", change: "seq: 4 -> 3", reason: "order per paper (new/moved steps)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F2-s05", change: "seq: 5 -> 4", reason: "order per paper (new/moved steps)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F3-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "Sec. II states exposure, anneal, etch in order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F3-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "Sec. II states exposure, anneal, etch in order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F3-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "Sec. II states exposure, anneal, etch in order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s03", change: "split: '' -> 'TGV diameter: type 1 (a, c) 80 um / type 2 (b) 25 um'", reason: "p.3 Table I DTGV 80 um (type 1) / 25 um (type 2); TGVs and cavity formed by this etch (p.2 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s03", change: "locator: 'p.2 Sec. II; p.2 Fig. 4(a)' -> 'p.2 Sec. II; p.2 Fig. 4(a); p.3 Table I'", reason: "Table I added"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s06", change: "conditions: '' -> 'ferrite core thickness 220 um (Table I TFR; Fig. 4(d) T = 220 um)'", reason: "p.3 Table I; p.2 Fig. 4(d): mounted core thickness"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s06", change: "locator: 'p.2 Sec. II; p.3 Sec. III' -> 'p.2 Sec. II; p.3 Sec. III; p.3 Table I; p.2 Fig. 4(d)'", reason: "Table I, Fig. 4(d) added"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s09", change: "split: '' -> 'metal-1 line/space: type 1 (a, c) 100/50 um / type 2 (b) 40/20 um'", reason: "p.3 Table I Wm/Sm 100/50 um (type 1), 40/20 um (type 2); first RDL metal forms the solenoid winding (p.2 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F1-s09", change: "locator: 'p.2 Sec. II; p.2 Fig. 3' -> 'p.2 Sec. II; p.2 Fig. 3; p.3 Table I'", reason: "Table I added"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F3-s03", change: "target: '' -> 'TGV avg dia 16.8 um, AR 14.3 through 240 um glass (Fig. 2 label 240.18 um)'", reason: "p.2 Sec. II; p.2 Fig. 2 and caption: average diameter 16.8 um on 240 um glass, AR 14.3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F3-s03", change: "locator: 'p.2 Sec. II' -> 'p.2 Sec. II; p.2 Fig. 2'", reason: "Fig. 2 added"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00055-F2", change: "notes: '' -> 'Follows F1 for TV c (module RDL build-up on the F1 substrate).'", reason: "build_seq confirmed: 4-layer RDL build-up and assembly (p.4 Sec. IV) follow the Fig. 3 substrate flow"}

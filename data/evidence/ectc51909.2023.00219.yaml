@@ -33,3 +33,15 @@ not_reported:
 source_quality:
   - "Figure label text in text.md is font-garbled; all values read from page renders."
   - "Candidates p02_fig5 and p04_fig14 include body-text lines (manual re-crops used)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F1-s04", change: "category cleaning -> surface_treatment; step 'top chip pretreatment after dicing (dust removal)'", reason: "both Fig. 5 'Pretreatment' boxes get one category; dust-removal focus kept in conditions (p.3 Sec. II.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F1", change: "step_basis stated_in_flow (s02 backgrinding stays inferred_order); non-dimension targets cleared", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F2", change: "scope tv_build -> comparison", reason: "proven WoW process of the reference structure (TV b)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F2-s02", change: "now top wafer pretreatment (split from old F2-s03 'pretreatment of top and base wafers')", reason: "Fig. 5 draws separate top and base pretreatment"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F2-s03", change: "now base wafer planarization (was F2-s02)", reason: "order top then base, as in F1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F2-s04", change: "now base wafer pretreatment (split from old F2-s03)", reason: "Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F2-s05", change: "now WoW Cu-Cu hybrid bonding (was F2-s04)", reason: "renumbered"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F2-s06", change: "now WoW bonding anneal (was F2-s05)", reason: "renumbered"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219", change: "process_flow_level ordered confirmed", reason: "Fig. 5 order, no conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F1-s07", change: "target '' -> '6 um pitch'; locator + p.1 Abstract", reason: "manifest target_missing a-i1: 6 um-pitch CoW Cu-Cu connections (Abstract, Fig. 11)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F2-s05", change: "target '' -> '6 um pitch'; source schematic -> mixed; locator + p.4 Fig. 11", reason: "manifest target_missing b-i1: Fig. 11 caption 6 um-pitch daisy chain for CoW and WoW"}

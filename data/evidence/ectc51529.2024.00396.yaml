@@ -25,7 +25,7 @@ entries:
   - {table: metrics, row_id: ectc51529.2024.00396-a-m15, field: value, value: 5.75, unit: nm, basis: measured, locator: "p.4 Fig. 4", note: "pixel read"}
   - {table: metrics, row_id: ectc51529.2024.00396-a-m16, field: value, value: 6.26, unit: nm, basis: measured, locator: "p.4 Fig. 4", note: "pixel read"}
 derived:
-  - {table: process_steps, row_id: ectc51529.2024.00396-a-s14, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.4 Sec. III.D"}
+  - {table: process_steps, row_id: ectc51529.2024.00396-F1-s14, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.4 Sec. III.D"}
   - {table: interconnects, row_id: ectc51529.2024.00396-a-i1, field: anneal_time_min, value: 120, formula: "2 h x 60", inputs: "p.4 Sec. III.D"}
 conflicts:
   - {table: metrics, row_id: ectc51529.2024.00396-a-m17, field: value, values: ["<0.2 nm", "<0.3 nm"], locators: ["p.3 Sec. III.C", "p.1 Abstract"], chosen: "<0.2 nm", why: "results section statement tied to the AFM measurement; abstract value is the looser summary"}
@@ -42,3 +42,16 @@ not_reported:
   - "bow sign convention; number of wafers; roughness parameter (Ra/Rq)"
 source_quality:
   - "Candidates p04_fig5 and p04_fig6 include a line of body text at the top; manual crops used. Fig. 4 y-axis label '-2' garbled in text layer."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00396-F1-s16", change: "redefined: C-SAM of bonded interface before anneal (inline_inspection), moved between bonding (s13) and anneal (s14); overlay part dropped", reason: "Sec. III.D places C-SAM between RT bonding and 250 C anneal; overlay results already in metrics a-m21, a-m22"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00396-F1-s17", change: "deleted (dicing into 5x5 mm pieces for X-SEM)", reason: "failure-analysis sample prep, not a build step; recorded in metrics a-m23 condition"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00396-F1-s18", change: "deleted (X-SEM / FIB-SEM and EDS of bond interface)", reason: "post-build failure-analysis cut; result already in metrics a-m23"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00396-F1-s05", change: "mask geometry moved from conditions to target (6 um pitch, 3 um pad); step names SUSS track", reason: "target holds stated geometry; p.2 Sec. II"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00396-F1-s11", change: "reworded to pre-bond inline AFM; result moved here from s10; bow note", reason: "p.2 Sec. II (fully automated inline AFM); p.3 Sec. III.C"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00396-F1", change: "object-name targets cleared (s01-s10, s12); results that duplicate metrics cleared on s01, s13, s14; s10 equipment CMP with endpoint detection; step_basis stated_in_flow; seq renumbered", reason: "target holds stated geometry only; order from Fig. 1, Fig. 3, Sec. II"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00396-F1-s15", change: "category other kept", reason: "paper does not state the removal method"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00396-F2-s05", change: "deleted (C-SAM after anneal)", reason: "post-build measurement; results already in metrics b-m2, b-m4, b-m6"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00396-F2-s01", change: "cleaning variants moved to split; target cleared", reason: "p.3 Sec. III.A, Fig. 2: three cleaning splits"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00396-F2", change: "flow_name; locator; step_basis stated_in_flow; s03 kept as inline_inspection", reason: "Sec. III.A: bond, C-SAM, anneal, C-SAM"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00396", change: "process_flow_level full confirmed", reason: "Fig. 1 ordered damascene and bonding flow with tools, 6 um pitch, RT bond, 250 C 2 h anneal"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00396-F1-s15", change: "target 'glass wafer' cleared (object name, already in step); category other kept", reason: "v006 manifest: target = stated geometry only; removal method not stated (p.2 Fig. 1(h), p.4 Sec. III.D)"}

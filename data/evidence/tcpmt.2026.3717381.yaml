@@ -42,3 +42,17 @@ not_reported:
   - reliability, warpage, thermal data
 source_quality:
   - "Accepted author version (not final pagination). Affiliation block absent from text layer."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2026.3717381-F1, change: "tv_ids + TV b; notes", reason: "frontend b is built from the same stacked glass array (p.6 Sec. IV)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2026.3717381-F1, change: "step_basis set to stated_in_flow on steps without one", reason: "order is stated in the paper's flow text/figure"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2026.3717381-F2, change: "step_basis set to stated_in_flow on steps without one", reason: "order is stated in the paper's flow text/figure"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2026.3717381-F1-s04, change: "target: '' -> 'TGV diameter 50 um (Dtgv)'; locator: 'p.3 Sec. III.A; p.2 Fig. 3(b)' -> 'p.3 Sec. III.A; p.2 Fig. 3(b); p.3 Table I'", reason: "stated TGV diameter"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2026.3717381-F1-s08, change: "category: 'other' -> 'deposition_other'", reason: "PI solder mask is a dielectric deposition; method not stated"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2026.3717381-F1-s10, change: "target: '' -> 'vacuum gap 30 um (hvac); seal ring width 50 um'; locator: 'p.3 Sec. III.A; p.2 Fig. 3(g)' -> 'p.3 Sec. III.A; p.2 Fig. 3(g); p.3 Sec. III.B; p.4 Sec. III.D'", reason: "stated geometry produced by bonding"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2026.3717381-F1-s12, change: "result: '' -> '479 Cu pillars, height 26.8 um, diameter 48 um; SnAg bump height 11.17 um (measured)'; locator: 'p.3 Sec. III.A; p.2 Fig. 3(h)' -> 'p.3 Sec. III.A; p.2 Fig. 3(h); p.5 Sec. IV; p.5 Fig. 15(b)'", reason: "measured result of the pillar/bump step"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2026.3717381-F1-s02, change: "category 'other' kept", reason: "polishing method of the glass wafer not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3717381-F1-s02", change: "category 'other' -> 'grinding_thinning'; notes: method not stated", reason: "p.3 Sec. III.A 'polishing' of the glass wafer; no CMP stated, so the mechanical-removal category"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3717381-F1-s01", change: "conditions '' -> 'upper glass wafer 150 um thick (hg1, Table I); 8-inch wafer'", reason: "p.3 Table I hg1 = 150 um; p.5 Sec. IV 8-inch wafer; position (input vs post-polish) not stated, so conditions not thickness columns"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3717381-F1-s07", change: "conditions '' -> 'lower glass wafer 150 um thick (hg2, Table I)'; target '' -> 'EIML signal line width 80 um on MOG3'", reason: "p.3 Table I hg2 = 150 um; p.3 Sec. III.B EIML width 80 um for 50 ohm, on MOG3 of the lower wafer (Fig. 4)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3717381-F1-s12", change: "target '' -> 'Cu pillar diameter 48 um, height 26.8 um; SnAg bump height 11.17 um (measured)'", reason: "p.5 Sec. IV pillar geometry stated (measured values; no design target given)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3717381-F2", change: "build_seq 2 confirmed (F1 = 1) for TV b", reason: "p.5-6 Sec. IV: glass array fabricated (F1) then mounted on the Si wafer by reflow and attached to PCB (F2)"}

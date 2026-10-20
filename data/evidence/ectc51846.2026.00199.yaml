@@ -27,7 +27,8 @@ derived:
   - {table: metrics, row_id: ectc51846.2026.00199-a-m7, field: value, value: 71.9, formula: "46/64 x 100", inputs: "p.5 Fig. 8(a)"}
   - {table: metrics, row_id: ectc51846.2026.00199-a-m9, field: value, value: 45.3, formula: "29/64 x 100", inputs: "p.5 Fig. 8(b)"}
   - {table: test_vehicles, row_id: ectc51846.2026.00199-c, field: n_dies, value: 90, formula: "18 GPU dice + 72 HBM", inputs: "p.2 Sec. II.A; p.3 Sec. III"}
-  - {table: process_steps, row_id: ectc51846.2026.00199-a-s08, field: time_s, value: 1680, formula: "28 min x 60", inputs: "p.4 Sec. III.B"}
+  - {table: process_steps, row_id: ectc51846.2026.00199-F1-s08, field: time_s, value: 1680, formula: "28 min x 60", inputs: "p.4 Sec. III.B"}
+  - {table: process_steps, row_id: ectc51846.2026.00199-F1-s08, field: current_density_ma_cm2, value: 10, formula: "1 A/dm2 = 1000 mA / 100 cm2 = 10 mA/cm2", inputs: "p.4 Sec. III.B"}
   - {table: electrical_interfaces, row_id: ectc51846.2026.00199-b-e1, field: lane_rate_gbps, value: 32, formula: "32 GT/s per lane taken as 32 Gb/s (NRZ, 1 bit per transfer)", inputs: "p.6 Sec. IV.B"}
 conflicts:
   - {table: metrics, row_id: ectc51846.2026.00199-a-m4, field: value, values: ["text: width increases from 5 um to 8 um", "Fig. 9(b) cells up to 9.09 um"], locators: ["p.5 Sec. IV.A", "p.5 Fig. 9(b)"], chosen: 9.09, why: "measured map over text summary"}
@@ -46,3 +47,15 @@ not_reported:
   - which metal layer (M1 or M2) carries the DC test structures and the UCIe routing
 source_quality:
   - "Clean text layer; all chosen candidates usable as-is."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00199-F1, change: "locator adds p.4 Fig. 5", reason: "Fig. 5 stack-up schematic is the flow's result drawing"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00199-F1-s01..s18", change: "step_basis stated_in_flow", reason: "order stated in p.4 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00199-F1-s01, change: "atmosphere o2", reason: "O2 plasma pretreatment (p.4 Sec. III.B)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00199-F1-s02, change: "atmosphere vacuum; locator adds p.4 Fig. 5", reason: "'vacuum-laminated' (p.4 Sec. III.B)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00199-F1-s04, change: "conditions add 'Ti reduced from 50 nm to about 35 nm to shorten Ti dry etch'", reason: "p.5 Sec. IV.A process-development context"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00199-F1-s06, change: "target 'L/S 5/5, 10/10, 20/20, 30/30 um test structures; UCIe-S traces L/S 10/15 um (metal layer not stated)'; locator adds p.4 Sec. III.A", reason: "stated pattern targets (p.4 Sec. III.A); the paper does not say which metal layer carries them"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00199-F1-s08, change: "current_density_ma_cm2 10 (1 A/dm2 kept in conditions)", reason: "typed condition; derived entry logged"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00199-F1-s12, change: "notes: Fig. 5 shows the second 15 um ABF on both sides, text says over M1 only; locator adds p.4 Fig. 5", reason: "review B miss 1"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00199-F1-s13, change: "via diameters moved from conditions to target 'microvia diameters 20, 30, 40, 50 um (M1-M2 daisy chains)'", reason: "stated dimensions go in target (p.4 Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00199-F1-s01", change: "material 'glass panel (Corning Inc.)'; conditions add 'bare 1 mm thick 200x200 mm glass panel, CTE 7.8 ppm/C'", reason: "v016 target_missing_preexisting a-L13: input glass stated p.4 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00199-F1-s06", change: "target adds UCIe-S x8 bump pitch 130 um", reason: "v016 target_missing a-i5: p.4 Sec. III.A 'Bump pitch of 130 um'"}

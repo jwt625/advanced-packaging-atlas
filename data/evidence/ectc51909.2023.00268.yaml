@@ -28,3 +28,16 @@ not_reported:
   - stitching overlay error in um (only qualitative SEM shapes)
 source_quality:
   - "Clean text layer; all six chosen candidates usable as-is."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00268-F1", change: "step_basis stated_in_flow on s01-s08; tv_ids a;b;c (SAP flow shared by all experiments)", reason: "p.2-3 Sec. 2: 'All experiments' on the PLP platform; SAP steps 'in series'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00268-F1-s02", change: "PR-thickness note moved from conditions to result; equipment 'coating machine'", reason: "p.3 Sec. 3.2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00268-F1-s03", change: "now TV a delta: exposure of L/S 1.5/1.5 um lines; target, equipment", reason: "p.3 Sec. 2; p.3 Fig. 5; exposure differs per TV"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00268-F1-s08", change: "now TV a delta; AOI limit resolution moved to equipment", reason: "p.3 Sec. 2; p.4 Fig. 8: AOI after seed etch on TV a"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00268-F2-s01", change: "deleted", reason: "merged into ectc51909.2023.00268-F1 as TV b exposure delta ectc51909.2023.00268-F1-s09 (flow F2 duplicated the SAP flow)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00268-F2-s02", change: "deleted", reason: "cross-section SEM is a measurement; covered by metrics ectc51909.2023.00268-b-m8 and Fig. 7"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00268-F3-s01", change: "deleted", reason: "merged into ectc51909.2023.00268-F1 as TV c exposure delta ectc51909.2023.00268-F1-s10 (flow F3 duplicated the SAP flow)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00268-F1-s09", change: "added", reason: "p.3 Sec. 2, 3.1; Fig. 6-7: NA split exposure on process-window samples (from deleted F2-s01)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00268-F1-s10", change: "added", reason: "p.4 Sec. 3.3; p.5 Fig. 11: stitched exposure (from deleted F3-s01)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00268-F2", change: "deleted", reason: "flow emptied (test rows moved to metrics or merged into F1)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00268-F3", change: "deleted", reason: "flow emptied (test rows moved to metrics or merged into F1)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00268-F1", change: "flow_name; locator; notes", reason: "merge of F2/F3 into F1"}

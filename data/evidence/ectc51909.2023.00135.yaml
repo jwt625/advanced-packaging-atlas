@@ -38,3 +38,22 @@ not_reported:
   - increased C4 bump height value of the optimized TV2
 source_quality:
   - "Clean text layer; all figure candidates usable as-is."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00135-a-m12, change: "scope -> 'applies to TVs a, b'; notes updated", reason: "kept as the single row of the shared statement"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00135-b-m15, change: "deleted (copy of a-m12: 20% corner stress reduction, interposer 100 -> 50 um)", reason: "p.3 Sec. III.E states one value \"for both test vehicles\"; per-TV values exist only as Fig. 9 bars (a-m10/11, b-m13/14)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00135-a-m3; ectc51909.2023.00135-b-m5; ectc51909.2023.00135-c-m1, change: "none (kept)", reason: "MSL4 Pass: p.4 Table II gives a separate result per column (TV1 100 um, TV2 100 um, TV2 50 um)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00135-a-m4; ectc51909.2023.00135-b-m6; ectc51909.2023.00135-c-m2, change: "none (kept)", reason: "uHAST 264 h Pass: p.4 Table II gives a separate result per column (TV1 100 um, TV2 100 um, TV2 50 um)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00135-a-m5; ectc51909.2023.00135-c-m3, change: "none (kept)", reason: "TCG 1000 cycles Pass (b is Fail): p.4 Table II gives a separate result per column (TV1 100 um, TV2 100 um, TV2 50 um)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00135-a-m6; ectc51909.2023.00135-b-m8; ectc51909.2023.00135-c-m4, change: "none (kept)", reason: "HTS 1000 h Pass: p.4 Table II gives a separate result per column (TV1 100 um, TV2 100 um, TV2 50 um)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f01, change: "added Fig. 12 (cross_section, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f03, change: "added Fig. 11 (top_view_layout, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f05, change: "added Fig. 13 (cross_section, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f06, change: "added Fig. 14 (cross_section, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f08, change: "added Fig. 6 (cross_section, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f09, change: "added Fig. 5 (cross_section, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f10, change: "added Fig. 2 (package_photo, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f13, change: "added Table I (data_table, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f14, change: "added Fig. 8 (simulation_result, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f15, change: "added Fig. 9 (simulation_result, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-figures, change: "re-ranked: Fig. 1 f01 -> f04, Fig. 7 f05 -> f07, Fig. 4 f03 -> f11, Table II f04 -> f12, Fig. 10 f06 -> f16", reason: "rank order per SKILL.md step 5 after additions"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51909.2023.00135", change: "process_flow_level none confirmed; no flows or steps", reason: "full text read: only finished-stack description (UF1/UF2, mold, ring), FEA and JEDEC tests; no fab or assembly sequence"}

@@ -19,9 +19,7 @@ figure_reading_method: >-
 entries:
   - {table: test_vehicles, row_id: ectc51909.2023.00151-a, field: n_dies, value: 9, unit: ea, basis: stated, locator: "p.2 Fig. 3", note: "Base(Logic) + 7 Core(Memory) + Top(Memory)"}
 derived:
-  - {table: process_steps, row_id: ectc51909.2023.00151-d-s02, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.2 Fig. 2 'PMC : 150C 1hr'"}
-  - {table: process_steps, row_id: ectc51909.2023.00151-e-s02, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.2 Fig. 2"}
-  - {table: process_steps, row_id: ectc51909.2023.00151-f-s02, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.2 Fig. 2"}
+  - {table: process_steps, row_id: ectc51909.2023.00151-F3-s02, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.2 Fig. 2 'PMC : 150C 1hr'"}
 conflicts:
   - {table: metrics, row_id: ectc51909.2023.00151-b-m1, field: locator, values: ["text cites 'Table I' for reliability", "reliability table printed as Table II"], locators: ["p.4 Sec. III.C", "p.4 Table II"], chosen: "Table II", why: "Table I is the LMC property table"}
 excluded:
@@ -32,5 +30,23 @@ not_reported:
   - bump pitch, diameter, count, solder alloy; reflow peak temperature/profile; chip thicknesses
   - mold pressure and vacuum values; wafer diameter; Si interposer and substrate dimensions; sample counts
   - TC-NCF test vehicle details
+  - "process_steps: ectc51909.2023.00151-c (TC-NCF reference HBM; build process not described)"
 source_quality:
   - "Fig. 13 candidate p04_fig13 spans both panels (not chosen). All chosen candidates used as-is."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00151", change: "process_flow_level ordered -> full", reason: "best flow F3 (blanket coupon: mold 120 C 400 s, PMC 150 C 1 h, 550 um) is full; main MR-MUF flow F1 stays ordered (no temperatures/times)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00151-F1", change: "tv_ids ectc51909.2023.00151-a -> ectc51909.2023.00151-a;ectc51909.2023.00151-b", reason: "proxy package b contains the MR-MUF 8Hi HBM built with F1 (p.4 Sec. III.C)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00151-F1-s01", change: "other -> surface_treatment", reason: "flux dipping before core chip mount (Fig. 4(a))"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00151-F1-s02", change: "vertical/planar mount order moved from conditions to split", reason: "p.3 Sec. III.A; Fig. 7"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00151-F1-s03", change: "warpage window removed from conditions (already metrics a-m1, a-m2)", reason: "do not duplicate metrics"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00151-F1-s04", change: "dispense patterns moved from conditions to split", reason: "p.3 Sec. III.B; Fig. 12"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00151-F1-s05", change: "material MUF (LMC C based); face-up/face-down split", reason: "p.2 Sec. II.A; p.3 Sec. III.B; Fig. 10"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00151-F1", change: "s01-s05: step_basis stated_in_flow", reason: "order from p.2 Sec. II.B and Fig. 4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00151-F2", change: "name; step_basis generic_description on s01", reason: "single statement, no sequence"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00151-F3", change: "level fragments -> full; name", reason: "Fig. 2 inset gives mold then PMC with temperature, time, thickness"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00151-F3-s01", change: "material LMC; split LMC A/B/C per TV; conditions 775 um Si wafer", reason: "Fig. 2 inset; one shared step for TVs d, e, f"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00151-F3-s02", change: "conditions as written 'PMC 150 C 1 hr'", reason: "Fig. 2 inset"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00151", change: "duplicate derived entries for F3-s02 time_s collapsed to one", reason: "converter folded three sibling copies"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00151-c", change: "listed in not_reported process_steps", reason: "TC-NCF reference HBM build not described"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00151-F1-s05", change: "target: chip-to-chip gap fill 15 um", reason: "p.2 Sec. II.B: chip to chip gap height 15 um, filled by MUF in step (c) (Fig. 4); closes target_missing a-L03"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00151-b", change: "build_seq confirmed: F1 (1) -> F2 (2); F2 notes state the order", reason: "p.4 Sec. III.C: the 8Hi HBM (F1) was assembled with Si interposer and organic substrate"}

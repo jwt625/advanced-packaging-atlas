@@ -20,7 +20,7 @@ derived:
   - {table: interconnects, row_id: ectc51529.2024.00057-a-i3, field: alignment_um, value: 1.029, formula: "1029 nm / 1000", inputs: "p.3 Fig. 5(b)"}
 conflicts:
   - {table: metrics, row_id: ectc51529.2024.00057-a-m4, field: value, values: [1029, "< 1000"], locators: ["p.3 Fig. 5(b)", "p.3 Sec. II.C text and Fig. 5 caption"], chosen: 1029, why: "measured overlay header in figure; text says below 1 um on both axes"}
-  - {table: process_steps, row_id: ectc51529.2024.00057-a-s03, field: step, values: ["tier 2 and tier 3 F2F first", "tier 1 and tier 2 F2F first"], locators: ["p.2 Sec. II.B; p.2 Fig. 3(a)", "p.1 Abstract"], chosen: "tier 2 and tier 3 F2F first", why: "body text and process-flow figure agree"}
+  - {table: process_steps, row_id: ectc51529.2024.00057-F1-s03, field: step, values: ["tier 2 and tier 3 F2F first", "tier 1 and tier 2 F2F first"], locators: ["p.2 Sec. II.B; p.2 Fig. 3(a)", "p.1 Abstract"], chosen: "tier 2 and tier 3 F2F first", why: "body text and process-flow figure agree"}
   - {table: stack_layers, row_id: ectc51529.2024.00057-a-L06, field: layer_name, values: ["F2F interface between tier 3 and tier 2", "Fig. 1(b) labels top interface Face-to-Back, bottom Face-to-Face"], locators: ["p.2 Fig. 3(g); p.4 Fig. 10(a)", "p.2 Fig. 1(b)"], chosen: "F2F top (tier 3/tier 2), F2B bottom (tier 2/tier 1)", why: "process flow, FIB-SEM Fig. 10 captions and text agree; Fig. 1(b) labels appear swapped"}
 excluded:
   - "TSV resistance 0.504 ohm in Table 1 (taken from ref [13]); kept only inside the derived Table 1 totals note"
@@ -34,3 +34,11 @@ not_reported:
   - reliability testing
 source_quality:
   - "No candidate for Table 2 (p.6). Candidate p03_fig6 includes a sliver of body text at the top edge (accepted)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00057-F1-s01", change: "target pad/via geometry added", reason: "Sec. II.A design dimensions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00057-F1-s02", change: "step_basis inferred_order", reason: "CMP is not drawn in Fig. 3; order inferred"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00057-F1-s06", change: "target TSV 1x10 um AR 10:1", reason: "Sec. II.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00057-F1-s07", change: "target pad geometry added", reason: "Sec. II.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00057-F1-s01", change: "category other -> rdl_layer", reason: "manifest v002 category_other: MZ/HBV/HBM Cu damascene metal levels (p.2 Sec. II.B, Fig. 2); damascene levels are rdl_layer elsewhere in the DB"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00057-F1-s07", change: "category other -> rdl_layer", reason: "manifest v002 category_other: HBM Cu damascene bonding pad level on the TSV side (p.3 Sec. II.B, Fig. 3(d))"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00057-F1-s10", change: "category other kept; notes: removal method not stated", reason: "manifest v002 category_other: p.3 Sec. II.B and Fig. 3(f) give no method (grind/etch), so no specific category"}

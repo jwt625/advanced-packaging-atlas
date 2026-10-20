@@ -39,3 +39,10 @@ not_reported:
   - electrical resistance, reliability, anneal/Cu pumping (future work)
 source_quality:
   - "Clean text layer; figure plots are embedded rasters (no vector data)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3557232-F1", change: "step_basis stated_in_flow on all steps", reason: "Fig. 1(a)-(e) and Sec. III-V order"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3557232-F1-s02", change: "material, Bessel beam generator equipment, target 20 um via diameter", reason: "p.3 Sec. III.B; p.4 Fig. 3"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3557232-F1-s03", change: "target via geometry (20 um, 300 um, AR 15) moved from result", reason: "p.3 Sec. III.B; p.4 Fig. 4"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3557232-F1-s08", change: "SLE time sweep moved from conditions to split", reason: "p.5 Sec. IV.B"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3557232-F1-s09", change: "plating setup as equipment (Fig. 2); plating time 16 h/20 h sweep to split", reason: "p.3 Fig. 2; p.7 Fig. 13"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3557232-F1-s10", change: "deleted (moved to metrics; already present)", reason: "SEM/EDX cross-section analysis is a measurement; results already in metrics a-m1..a-m29"}

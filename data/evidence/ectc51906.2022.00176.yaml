@@ -30,3 +30,15 @@ not_reported:
   - dielectric bonding layer material, surface activation, bonding force/dwell/over-travel values, thermal budget temperatures T1/T2, anneal
   - bonding accuracy spec, count of bonds per chain, resistance specification, absolute Rc values
   - EM, SM, VBD results; preconditioning; warpage; thermal
+  - "process_steps: ectc51906.2022.00176-b (9 um SoIC1 reference; build flow not described, only POR thermal budget T1 in the FEM table)"
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00176", change: "process_flow_level ordered confirmed; TV b listed in not_reported", reason: "Sec. III.A/C give the step order without numeric conditions (T2, force, dwell not disclosed)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00176-F1-s11", change: "WAT row deleted; content already in metrics a-m3..m5 (70 test dies, 24 daisy chains each)", reason: "post-build electrical measurement, not a step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00176-F1-s07", change: "step_basis inferred_order; others stated_in_flow", reason: "p.3 Sec. III.C states fiducial marks on TD and BW but not their place in the flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00176-F1-s02", change: "target 3 um bond pitch full-array pads (bond density 100K/mm2)", reason: "p.2-3 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00176-F1-s09", change: "target 6 x 6 mm2 top die (bottom die 16 x 16 mm2)", reason: "p.3 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00176-F1-s10", change: "equipment high-accuracy wafer bonder with IR fiducial imaging", reason: "p.3 Sec. III.C, Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00176-F1-s01", change: "v021: target 'TD wafer; BW' cleared (object names; also s03-s07); s03-s06 step text gets 'on TD wafer and BW'; s08 target 'TD wafer' and s10 target 'TD on BW' cleared (object already in step text)", reason: "target holds stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00176-F1-s01", change: "v021: category other -> device_fab", reason: "p.2 Sec. III.A BEOL metal stack processing of TD wafer and BW is wafer device fab, not package RDL"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00176-F1-s06", change: "v021 category_other reviewed: kept other", reason: "p.3 Sec. III.A 'pad exposure' method not stated (CMP or etch not asserted)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00176-F1-s07", change: "v021 category_other reviewed: kept other (audit_B proposal lithography not applied); notes updated", reason: "p.3 Sec. III.C states fiducial marks are fabricated on TD and BW, not how"}

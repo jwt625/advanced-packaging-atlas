@@ -31,6 +31,10 @@ excluded:
   - "Pathfinding for 12X reticle and ~50X reticle panel-sized packages (future)"
   - "EMIB core vs bridge bump pitch 'tens of microns to over a hundred microns' (generic, not tied to a TV)"
 not_reported:
+  - "process_steps: ectc51846.2026.00365-a (flow-distance layout only, no process statement)"
+  - "process_steps: ectc51846.2026.00365-b (flow-distance layout only, no process statement)"
+  - "process_steps: ectc51846.2026.00365-c (flow-distance layout only, no process statement)"
+  - "process_steps: ectc51846.2026.00365-k (recent 4X reticle Foveros TV, no encapsulation statement)"
   - stack_layers
   - interconnects (bump pitches, counts, metallurgy)
   - electrical_interfaces
@@ -40,3 +44,37 @@ not_reported:
   - sample counts for reliability; Temperature Cycling B temperature range
 source_quality:
   - "Fig. 7 and Fig. 9 candidates are labelled (a) but their bboxes cover all panels; used as-is."
+revisions:
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-h, change: "overrides += package_x_mm, package_y_mm, reticle_multiple, n_dies, n_hbm :design_target", reason: "numeric cells under row basis stated (x2B defect 3); evidence entry already design_target"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-i, change: "overrides += reticle_multiple:design_target; n_dies:design_target", reason: "numeric cells under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-j, change: "overrides += reticle_multiple:design_target", reason: "numeric cell under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-k, change: "overrides += reticle_multiple:design_target", reason: "numeric cell under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-a, change: "overrides += n_dies:design_target", reason: "same fix applied to the other numeric TV cells under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-f, change: "overrides += n_dies:design_target", reason: "same fix applied to the other numeric TV cells under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-g, change: "overrides += n_dies:design_target", reason: "same fix applied to the other numeric TV cells under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-a-c1, change: "overrides += count:design_target", reason: "same fix applied to numeric component counts under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-f-c1, change: "overrides += count:design_target", reason: "same fix applied to numeric component counts under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-g-c1, change: "overrides += count:design_target", reason: "same fix applied to numeric component counts under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-h-c1, change: "overrides += count:design_target", reason: "same fix applied to numeric component counts under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-i-c1, change: "overrides += count:design_target", reason: "same fix applied to numeric component counts under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-g-m1, change: "qualifiers value:le -> empty", reason: "redundant with statistic max; d6 = 3.4 mm in p.4 Fig. 6(a) is the measured maximum (x2B section 3)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00365-figures, change: "re-ranked: Fig. 9 f05 -> f03, Fig. 6 f04 -> f05, Table I f03 -> f09; f01, f02, f06 unchanged", reason: "images before tables (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00365-f04, change: "added Fig. 8 (package_photo, candidate)", reason: "top view and CSAM of TV i; source of i-m1"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00365-f07, change: "added Fig. 4 (package_photo, candidate)", reason: "flow-test package images of TV d; source of d-m1"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00365-f08, change: "added Fig. 5 (package_photo, candidate)", reason: "voiding image of TV f; source of f-m1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00365-F1-s01", change: "step_basis generic_description; split 'underfill material A / B'", reason: "p.3 Sec. IV.A; Fig. 4: materials A and B compared on the same dispense"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00365-F2-s01", change: "step_basis generic_description; split 'formulation 1/2/3'", reason: "p.3 Sec. IV.A; p.4 Table I: three formulations on the same TV"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00365-F2-s02", change: "step_basis generic_description", reason: "fragments flow (rule 7)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00365-F2-s03", change: "deleted", reason: "post-cure CSAM evaluation of flow distance and voiding is a measurement; covered by metric ectc51846.2026.00365-e-m9"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00365-F3-s01", change: "step_basis generic_description; split dispense location/quantity/timing", reason: "p.4 Sec. IV.B: void reduced by optimizing dispense location, quantity and timing"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00365-F4-s01", change: "step_basis generic_description", reason: "fragments flow (rule 7)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00365-F4-s02", change: "cure condition sweep moved from conditions to split; step_basis generic_description", reason: "p.4 Sec. IV.B; p.4 Fig. 6: two cure conditions on the same TV"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00365-F4-s03", change: "deleted", reason: "CSAM void imaging is a measurement; covered by metrics ectc51846.2026.00365-g-m1, -g-m2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00365-F5-s01", change: "added", reason: "p.2 Sec. III.B; p.3 Fig. 3: KOZ barrier applied on substrate (generic statement)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00365-F5-s02", change: "added", reason: "p.4 Sec. IV.B: multi-location / die-to-die-spacing dispense (generic statement)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00365-F6-s01", change: "added", reason: "p.4-5 Sec. V: new encapsulation material and process on the demonstration packages"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00365-F6-s02", change: "added", reason: "p.5 Sec. V: optimized cure condition stated for the Foveros 2X reticle package"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00365-F5", change: "added", reason: "generic statements on KOZ barrier and dispense strategy (Sec. III.B, IV.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00365-F6", change: "added", reason: "Sec. V demonstration packages encapsulated with the new material/process"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00365", change: "not_reported += process_steps: ectc51846.2026.00365-a; process_steps: ectc51846.2026.00365-b; process_steps: ectc51846.2026.00365-c; process_steps: ectc51846.2026.00365-k", reason: "rule 7 coverage of physical TVs"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00365-F5-s01", change: "none", reason: "pass B category_other: Sec. III.B / Fig. 3 give no barrier material or application method; no existing category fits, kept other (note already states this)"}

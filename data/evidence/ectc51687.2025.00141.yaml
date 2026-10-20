@@ -38,3 +38,14 @@ not_reported:
   - chain length for Fig. 9(a) and post-improvement HTS chain; sample counts
 source_quality:
   - "Fig. 6 split across columns (panels a-f left, g right with caption) and had no candidate; Fig. 9 split across pages 5-6."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141", change: "process_flow_level ordered confirmed (no temperatures/times); 1 flow, 11 steps unchanged in count; step_basis set on all steps", reason: "p.4 Sec. III.B, Fig. 6(a)-(g) give the order; no conditions disclosed"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141-F1-s01", change: "target object names removed on s01, s02, s08, s09, s11; panel labels added to step text", reason: "target holds stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141-F1-s03", change: "target TSV 6 um pitch", reason: "p.4 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141-F1-s04", change: "target L/S 0.18/0.18 um (0.36 um pitch) on s04-s06; step_basis inferred_order", reason: "p.2 Sec. II.A; sub-steps of Fig. 6(c), order within (c) not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141-F1-s07", change: "target and thickness_um < 1 um (qualifier lt); material Cu with barrier metal", reason: "p.3 Sec. II.B: low-profile structure thickness less than 1 um"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141-F1-s10", change: "target micro-bump 20 um dia / 40 um min pitch, 15k per logic chip", reason: "p.3 Table I"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141-F1-s11", change: "step_basis inferred_order", reason: "dicing only implied by Fig. 5 diced device"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141-F1-s07", change: "category: 'other' -> 'rdl_layer'", reason: "manifest category_other: Cu pad base substrate formed by damascene in the same layer as the backside signal wiring (p.3 Sec. II.B); rdl_layer per DB convention for damascene metal layers"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141-F1-s08", change: "category: 'other' -> 'device_fab'", reason: "manifest category_other: on-chip lens is a CIS sensor (device) element (p.4 Sec. III.B, Fig. 6(e)); method not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141-F1-s09", change: "category kept other", reason: "manifest category_other: pad-area opening method not stated (p.4 Sec. III.B, Fig. 6(f))"}

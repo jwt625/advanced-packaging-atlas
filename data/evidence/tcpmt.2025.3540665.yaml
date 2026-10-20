@@ -14,8 +14,7 @@ entries:
   - {table: interconnects, row_id: tcpmt.2025.3540665-a-i1, field: pad_x_um, value: 5, unit: um, basis: design_target, locator: "p.1 Sec. I", note: "square microbumps 5 x 5 um, 15 um pitch"}
 derived:
   - {table: interconnects, row_id: tcpmt.2025.3540665-a-i1, field: bonding_time_s, value: 300, formula: "5 min * 60", inputs: "p.2 Sec. II"}
-  - {table: process_steps, row_id: tcpmt.2025.3540665-a-s13, field: time_s, value: 300, formula: "5 min * 60", inputs: "p.2 Sec. II"}
-  - {table: process_steps, row_id: tcpmt.2025.3540665-a-s08, field: time_s, value: 540, formula: "9 min * 60", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: tcpmt.2025.3540665-F1-s08, field: time_s, value: 540, formula: "9 min * 60", inputs: "p.2 Sec. II"}
   - {table: stack_layers, row_id: tcpmt.2025.3540665-a-L08, field: thickness_um, value: 0.2, formula: "200 nm / 1000", inputs: "p.1 Sec. II"}
   - {table: stack_layers, row_id: tcpmt.2025.3540665-a-L07, field: thickness_um, value: 0.05, formula: "50 nm / 1000", inputs: "p.1 Sec. II"}
   - {table: stack_layers, row_id: tcpmt.2025.3540665-a-L06, field: thickness_um, value: 0.12, formula: "120 nm / 1000", inputs: "p.1 Sec. II"}
@@ -35,3 +34,27 @@ not_reported:
   - optical_interfaces
 source_quality:
   - "Text layer drops the Ohm symbol; chip size units printed as um (typo)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1, change: "locator: 'p.1 Sec. II; p.2 Sec. II; p.2 Fig. 2; p.2 Sec. III; p.3 Fig. 3' -> 'p.1 Sec. II; p.2 Sec. II'", reason: "test/characterization locators removed with the moved rows"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1-s01, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text (initialized/then/afterward/subsequently/finally)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1-s02, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text (initialized/then/afterward/subsequently/finally)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1-s03, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text (initialized/then/afterward/subsequently/finally)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1-s04, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text (initialized/then/afterward/subsequently/finally)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1-s05, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text (initialized/then/afterward/subsequently/finally)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1-s06, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text (initialized/then/afterward/subsequently/finally)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1-s07, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text (initialized/then/afterward/subsequently/finally)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1-s08, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text (initialized/then/afterward/subsequently/finally)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1-s09, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text (initialized/then/afterward/subsequently/finally)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1-s10, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text (initialized/then/afterward/subsequently/finally)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1-s11, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text (initialized/then/afterward/subsequently/finally)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1-s12, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text (initialized/then/afterward/subsequently/finally)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1-s13, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text (initialized/then/afterward/subsequently/finally)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1-s14, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text (initialized/then/afterward/subsequently/finally)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1-s13, change: "temp_c: '170' -> ''; time_s: '300' -> ''; ramp_c_per_min: '' -> '25'; conditions: 'ambient air; bonding accuracy +/-1 um; ramp 25 C/min; splits 170 C 5 min, 150 C 5 min, 150 C 2 h' -> 'ambient air; bonding accuracy +/-1 um; aligned and contacted at 15 MPa, then ramp 25 C/min to bonding temperature and hold'; split: '' -> 'bonding: 170 C 5 min / 150 C 5 min / 150 C 2 h'", reason: "typed ramp; bonding temperature/time are a variant sweep -> split"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1-s14, change: "category: 'other' -> 'bonding'; conditions: 'cooling 10 C/min' -> 'cooling 10 C/min to room temperature; pressure released'", reason: "cool-down and pressure release are part of the bond cycle"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1-s15, change: "deleted", reason: "post-bond SEM/FIB/EDS is failure analysis/characterization; already in metrics -a-m17..m21"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1-s16, change: "deleted", reason: "I-V characterization is a measurement; already in metrics -a-m1..m16 (tool noted on -a-m1)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-a-m1, change: "notes: '' -> 'Measured with Agilent B1500 semiconductor parameter analyzer (all electrical rows).'", reason: "measurement tool kept from deleted step F1-s16"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3540665-F1-s13, change: "evidence derived entry for time_s removed", reason: "time_s cleared; bonding time now in split"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3540665-F1-s05;F1-s06;F1-s07", change: "target: '' -> '5x5 um square microbumps, 15 um pitch'; locator + p.1 Sec. I", reason: "v033 target_missing (audit_A): 'square microbumps with a size of 5 x 5 um and a pitch size of 15 um' (p.1 Sec. I; Abstract) are the bumps these Cu/Sn/In plating steps build"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3540665-F1-s13", change: "temp_c_max: '' -> 170 (split text kept)", reason: "v033 split_temp_untyped: split holds 170 C / 150 C bonding temperatures (p.2 Sec. II); temp_c_max = highest per schema v2.5"}

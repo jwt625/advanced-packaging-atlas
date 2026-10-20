@@ -26,7 +26,7 @@ excluded:
   - "Fig. 2 normalized RC curves and Fig. 5(b) line density vs L/S and 3-6 RDL layers (generic design study, not this TV)"
   - "Table I organic vs Si interposer comparison (Si interposer column: TSV, embedded DTC iCap)"
 not_reported:
-  - process_steps
+  - "process flow: fragments only (F1, 4 statements); no sequence or conditions"
   - optical_interfaces
   - RDL layer count, thicknesses, via sizes and dielectric product for this TV; interposer thickness
   - top-die ubump pitch, die sizes, HBM generation of the built TV, substrate layers
@@ -34,3 +34,8 @@ not_reported:
   - reliability sample counts and preconditioning level; whether the eye diagram is measured or simulated
 source_quality:
   - "All candidates used as-is; none clipped."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00008", change: "process_flow_level none -> fragments (has_process_flow stays no)", reason: "reviews A and B grade FRAGMENTS: landside IPD attach, Si block assembly, underfill, oS join stated without sequence"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00008-F1;ectc51906.2022.00008-F1-s01;ectc51906.2022.00008-F1-s02;ectc51906.2022.00008-F1-s03;ectc51906.2022.00008-F1-s04", change: "added fragment flow (tv a;b) with 4 generic_description rows in reading order (s01 delta for b)", reason: "rule 7 fragments; p.3 Sec. II.B, p.4 Sec. III.A-B, p.5 Sec. III.C"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00008", change: "not_reported 'process_steps' reworded to fragments", reason: "flow now exists"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00008", change: "3x mass reflow and precon kept in metrics a-m3..a-m5; CSAM underfill check kept in metrics a-m14 (no step rows)", reason: "post-build tests and inspections are metrics"}

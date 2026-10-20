@@ -21,7 +21,7 @@ derived:
   - {table: metrics, row_id: ectc51906.2022.00309-a-m2, field: value, value: 230.7, formula: "75.7 - (-155.0)", inputs: "p.4 Fig. 12 25 C colorbar"}
   - {table: metrics, row_id: ectc51906.2022.00309-a-m3, field: value, value: 54.1, formula: "29.9 - (-24.2)", inputs: "p.4 Fig. 12 260 C colorbar"}
 conflicts:
-  - {table: process_steps, row_id: ectc51906.2022.00309-a-s06, field: seq, values: ["text: SAP (seed, PR, plating, strip, seed etch) then photo-dielectric", "Fig. 4: seed deposition, passivation coating/patterning, RDL plating"], locators: ["p.2 Sec. II.C", "p.2 Fig. 4"], chosen: "text order", why: "text gives the detailed sub-steps; schematic order ambiguous"}
+  - {table: process_steps, row_id: ectc51906.2022.00309-F1-s06, field: seq, values: ["text: SAP (seed, PR, plating, strip, seed etch) then photo-dielectric", "Fig. 4: seed deposition, passivation coating/patterning, RDL plating"], locators: ["p.2 Sec. II.C", "p.2 Fig. 4"], chosen: "text order", why: "text gives the detailed sub-steps; schematic order ambiguous"}
   - {table: test_vehicles, row_id: ectc51906.2022.00309-a, field: substrate_layer_count, values: ["7-2-7 (Table 1)", "16 layers substrate (text)"], locators: ["p.2 Table 1", "p.3 Sec. II.D"], chosen: "7-2-7 (16 layers)", why: "consistent (7+2+7=16); both kept"}
   - {table: components, row_id: ectc51906.2022.00309-a-c7, field: name, values: ["ring type heat sink (Table 1, text)", "stiffener ring (Abstract)"], locators: ["p.2 Table 1; p.3 Sec. II.D", "p.1 Abstract"], chosen: "both in name", why: "same ring element described two ways"}
 excluded:
@@ -35,3 +35,13 @@ not_reported:
   - micro bump height/metallurgy, FCB and CoS bonding conditions, CoS underfill product
   - C4 'diameter 70 x 90 um' meaning, BGA pitch, substrate core thickness
   - RDL leakage, sheet resistance and via chain values, sample counts for reliability, warpage sign convention
+revisions:   # 2026-10-19: audit_x1 item 10 (a-i1/a-i2 typed microbump) disputed, see REVISION_REPORT.md
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00309-F1-s03, change: "target L/S 2/2 um (from conditions)", reason: "target holds stated geometry"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00309-F1-s07, change: "target via 10 um bottom diameter (from conditions)", reason: "target holds stated geometry"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00309-F1-s09, change: "category other -> rdl_layer; target 3 RDL layers; thickness_um 30 (fanout build-up); conditions stacked or staggered vias", reason: "p.2: 30 um fanout thickness built by RDLs; abstract: stacking or stagger via process"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00309-F1-s11, change: "electrical measurements (RDL leakage, sheet resistance, via chain) removed from the step; AOI kept as inline_inspection; step_basis inferred_order", reason: "measurements are metrics; moved to a-m13"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00309-a-m13, change: "added (moved from process step F1-s11)", reason: "post-process electrical measurement is a metric, not a step"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00309-F2-s01, change: "category other -> bumping; reflow split out to s11; target bump diameters and pitches", reason: "composite step; Table 1/2 geometry"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00309-F2-s11, change: "added: solder reflow of hybrid bumps (seq 2); s02-s10 seq +1", reason: "p.2 Sec. II.B: after solder reflow process coplanarity confirmed"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00309-F2-s07, change: "category ball_attach -> bumping; target C4 130 um pitch, 70 x 90 um diameter; material Cu pillar with solder", reason: "C4 Cu pillar bumping on fanout; Table 1 geometry"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00309-F2, change: "step_basis set on all steps; s02-s04, s08 step text/targets refined", reason: "order stated in p.3 Sec. II.D and Fig. 5"}

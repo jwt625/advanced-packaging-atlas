@@ -30,3 +30,18 @@ not_reported:
   - TDV diameter/depth/aspect ratio/metal; solder bump dimensions
   - oxide thickness value, PECVD conditions, warpage absolute values and sign convention
   - reliability tests, electrical yield, resistance
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: iedm45625.2022.10019499-F1-s05, change: "deleted (AFM post-CMP topography)", reason: "characterization, not a build step; already metric a-m2"}
+  - {date: 2026-10-20, source: repass, row_id: iedm45625.2022.10019499-F3-s03, change: "deleted (optical/cross-pol imaging of chiplet corners)", reason: "characterization, not a build step; already metric c-m8; F3-s04 seq 4 -> 3"}
+  - {date: 2026-10-20, source: repass, row_id: iedm45625.2022.10019499-F2, change: "scope tv_build -> generic_platform; routes 'solder bump' (s09-s11, seq 1-3) and 'hybrid bonding layer' (new s12)", reason: "Fig. 11 basic QMC flow; Sec. IV.A gives solder bump plating or another HB layer as alternatives"}
+  - {date: 2026-10-20, source: repass, row_id: iedm45625.2022.10019499-F2-s12, change: "added: form another hybrid bonding layer to attach to another chip", reason: "stated alternative route p.2 Sec. IV.A"}
+  - {date: 2026-10-20, source: repass, row_id: iedm45625.2022.10019499-F1-s01..s07, change: "step_basis: s01-s03, s07 inferred_order; s04, s06 stated_in_flow; target '3 um pitch' on s03, s06", reason: "Sec. III lists changes, only CMP -> bonding order stated"}
+  - {date: 2026-10-20, source: repass, row_id: iedm45625.2022.10019499-F3-s02, change: "split PECVD recipes (Fig. 13); conditions", reason: "parameter sweep on the step"}
+  - {date: 2026-10-20, source: repass, row_id: iedm45625.2022.10019499-F3-s04, change: "split slurries (Fig. 16); conditions", reason: "parameter sweep on the step"}
+  - {date: 2026-10-20, source: repass, row_id: iedm45625.2022.10019499, change: "process_flow_level ordered confirmed", reason: "Fig. 11 ordered flow, no temperatures/times/pressures stated"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45625.2022.10019499-F1-s01", change: "category other -> rdl_layer", reason: "metal stack (vias, overlays) above final metal is BEOL wiring (p.2 Sec. III; p.3 Fig. 7); audit B maps BEOL wiring to rdl_layer"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45625.2022.10019499-F1-s03", change: "category other -> rdl_layer", reason: "damascene HB pad layer (p.1-2 Sec. III); damascene bond-pad layers are rdl_layer in this database"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45625.2022.10019499-F2-s05", change: "category other -> rdl_layer", reason: "hybrid bonding layer = damascene bond-pad layer (p.1 Sec. III, p.2 Sec. IV.A; Fig. 11 (5))"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45625.2022.10019499-F2-s12", change: "category other -> rdl_layer", reason: "hybrid bonding layer = damascene bond-pad layer (p.1 Sec. III, p.2 Sec. IV.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45625.2022.10019499-F2-s05", change: "target '' -> 'D2D interconnect pitch < 3 um (> ~100K connections/mm2; stated capability)'", reason: "target_missing b-i1: p.2 Sec. IV.A 'creating and bonding scalable die to die interconnects below 3 um (or more than ~100K connections/mm2)'"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45625.2022.10019499-F2-s06", change: "target '' -> 'D2D interconnect pitch < 3 um (> ~100K connections/mm2; stated capability)'", reason: "target_missing b-i1: p.2 Sec. IV.A 'creating and bonding scalable die to die interconnects below 3 um (or more than ~100K connections/mm2)'"}

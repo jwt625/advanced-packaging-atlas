@@ -36,3 +36,14 @@ not_reported:
   - yield, warpage, reliability, electrical test results
 source_quality:
   - "Clean text layer. Paper is a status report: TV processed only through PI via opening; RDL build-up stated as future work."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00053", change: "process_flow_level ordered confirmed (few conditions); 1 flow, 28 -> 27 steps; step_basis stated_in_flow on all steps", reason: "Fig. 7 and Sec. IV.B give the ordered M-Series flow; TV executed through PI via opening"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00053-F1-s25", change: "deleted: wafer/panel final electrical test (performed no)", reason: "test is not a build step; no result reported"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00053-F1-s28", change: "deleted: pack in tape and reel or trays (performed no)", reason: "shipping pack does not change the build"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00053-F1-s29", change: "added: repeat dielectric and RDL/UBM build-up per layer (1-2 simple, 3-5 advanced HI), performed no; s20 split; later seqs shifted +1", reason: "Fig. 7 shows Strip & Etch and Repeat per layer as separate boxes; p.4 Sec. IV.B layer counts"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00053-F1-s01", change: "target object name removed", reason: "target holds stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00053-F1-s02", change: "target Cu stud geometry (12 um dia, 8 um spacing, 20 x 30 um array; 60 um on 180 um pitch); also s03", reason: "p.3 Sec. IV.A; p.4 Sec. IV.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00053-F1-s18", change: "target L/S 2/2 um moved from conditions; LDI 405 nm conditions", reason: "p.4 Sec. IV.B, Fig. 8a"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00053-F1-s15", change: "conditions: PI supports 6 um via openings", reason: "p.4 Sec. IV.B, Fig. 8b"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00053-F1-s02", change: "target: added 55 um pitch (HBM footprint die Cu studs); also s03", reason: "p.3 Sec. IV.A, Fig. 6b: HBM footprint die studs on JEDEC 55 um pitch, built by the same wafer-prep Cu stud steps"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00053-F1-s13", change: "category other kept; note explains software GDSII-generation step", reason: "p.4 Sec. IV.B, Fig. 13: AP design software step has no matching step_category"}

@@ -40,3 +40,25 @@ not_reported:
   - Part-4 average loss (only plotted), which samples/wavelength for Part 3
 source_quality:
   - "Candidates for Fig. 4, 5, 6, 8 cut the x-axis titles; pie-chart candidates cut at the bottom."
+revisions:
+  - {date: 2026-10-19, source: audit_x2A, row_id: "ectc51687.2025.00284-F1-s02", change: "equipment '6-axis alignment system' -> empty; conditions 'active alignment' kept", reason: "p.2 Sec. II.A names the 6-axis control system as part of the optical measurement set-up, not the attach tool"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "ectc51687.2025.00284-F1-s03", change: "equipment '6-axis alignment system' -> empty; conditions 'active alignment' kept", reason: "p.2 Sec. II.A names the 6-axis control system as part of the optical measurement set-up, not the attach tool"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "ectc51687.2025.00284-b-m1", change: "n_samples 216 -> 18; '216 data points' moved into condition", reason: "p.4 Fig. 8 caption: 216 data points; p.4 Sec. III.D: total 18 test samples"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "ectc51687.2025.00284-f02", change: "tv_ids a -> a;b", reason: "Fig. 2 shows interfaces 4-5, which are TV b (p.4 Sec. III.D-E)"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f01", change: "re-ranked Fig. 2: ectc51687.2025.00284-f02 -> ectc51687.2025.00284-f01", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f02", change: "re-ranked Fig. 3: ectc51687.2025.00284-f01 -> ectc51687.2025.00284-f02", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f03", change: "added Fig. 1 (stack_schematic, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f04", change: "re-ranked Fig. 4: ectc51687.2025.00284-f03 -> ectc51687.2025.00284-f04", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f05", change: "re-ranked Fig. 8: ectc51687.2025.00284-f04 -> ectc51687.2025.00284-f05", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f06", change: "re-ranked Fig. 6: ectc51687.2025.00284-f05 -> ectc51687.2025.00284-f06", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f07", change: "re-ranked Fig. 5: ectc51687.2025.00284-f06 -> ectc51687.2025.00284-f07", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f08", change: "added Fig. 7 (other, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f09", change: "added Fig. 9 (other, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f10", change: "added Fig. 10 (other, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00284-F1-s01", change: "composite module-fabrication step split: iFAU build is new F1-s05 (fiber_prep, 127 um pitch)", reason: "p.2 Sec. II.A; p.3 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00284-F1-s05", change: "added iFAU fabrication step", reason: "p.2 Sec. II.A; p.3 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00284-F1-s04", change: "deleted (optical loss measurement); set-up added to condition of metric a-m5", reason: "measurements are metrics; loss values already in metrics/optical_interfaces"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00284-F2", change: "added fragments flow for wafer-level TV b", reason: "p.3 Sec. III.B; p.4 Sec. III.D; TV b was in no flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00284-F1", change: "step_basis filled on all steps of F1; seq renumbered in flow order where steps were added/removed", reason: "schema v2.4 step_basis; order from the paper's flow figure/table/text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00284-F1-s01", change: "category: \"other\" -> \"device_fab\"", reason: "photonic chip wafer fabrication (COI / COUPE-like couplers on N28 tools, p.2 Sec. II.A; p.3 Sec. III.B); device_fab added to step_category in v2.5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00284-F2-s01", change: "category: \"other\" -> \"device_fab\"", reason: "advanced couplers and SiN WGs fabricated on 300 mm wafer with N28 tools (p.3 Sec. III.B); device_fab added in v2.5"}

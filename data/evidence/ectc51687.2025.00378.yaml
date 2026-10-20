@@ -26,6 +26,7 @@ derived:
   - {table: stack_layers, row_id: ectc51687.2025.00378-a-L05, field: roughness_ra_um, value: 0.12, formula: "120 nm / 1000", inputs: "p.2 Sec. III.A"}
   - {table: stack_layers, row_id: ectc51687.2025.00378-a-L02, field: thickness_um, value: 0.25, formula: "250 nm / 1000", inputs: "p.5 Sec. III.C"}
   - {table: stack_layers, row_id: ectc51687.2025.00378-a-L03, field: thickness_um, value: 0.05, formula: "50 nm / 1000", inputs: "p.5 Sec. III.C"}
+  - {table: process_steps, row_id: ectc51687.2025.00378-F2-s12, field: thickness_um, value: 0.3, formula: "Ti 0.050 + Cu 0.250", inputs: "p.5 Sec. III.C"}
 conflicts:
   - {table: components, row_id: ectc51687.2025.00378-a-c1, field: thickness_um, values: ["<30", "~20-30", 25], locators: ["p.2 Table I", "p.2 Sec. II", "p.5 Fig. 8"], chosen: 25, why: "measured cross-section; table/text kept in stack_layers L10 range"}
   - {table: interconnects, row_id: ectc51687.2025.00378-a-i1, field: diameter_um, values: [40, 41.66, 42, 43, 44], locators: ["p.4 Fig. 7 caption", "p.4 Fig. 7", "p.5 Fig. 8"], chosen: 40, why: "row basis is design target; measured diameters entered as metrics"}
@@ -42,3 +43,28 @@ not_reported:
   - reliability, warpage, thermal data
 source_quality:
   - "Typo 'ptich' in Sec. II; Fig. 4 caption and text describe before/after but caption title says 'optimized'."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378", change: "process_flow_level full confirmed", reason: "Fig. 1 10-step flow with layer thicknesses, laser, seed, litho and develop conditions (Sec. II-III)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F1", change: "flow_name 'chip thinning and singulation' -> 'chip fabrication, partial dicing and back-grinding (Sec. II)'", reason: "p.2 Sec. II: chips fabricated, partially diced, then back-ground; F1 precedes F2 pick-and-place"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2", change: "locator drops p.5 Table III", reason: "daisy-chain measurement row removed from the flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F1-s01", change: "category other -> bumping; pad geometry and pitches moved to target; material Cu; basis design_target", reason: "p.2 Sec. II and Table I: 15 um-thick, 70 um Cu bump pads, 100/250 um daisy-chain pitch"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F1-s02", change: "dicing depth moved conditions -> target", reason: "p.2 Sec. II 'partially diced to around 30 um in depth from the top side'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F1-s03", change: "thickness_in_um 500, thickness_um 30 (approx); 'resulting chips ~20-30 um' moved conditions -> result", reason: "p.2 Sec. II: 500 um-thick wafers ground to approximately 30 um; resulting 20-30 um"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2-s06", change: "pulse-width range and mask/no-mask comparison moved to split; result Ra 120 nm with masking layer", reason: "p.2 Sec. III.A 'wide range of pulse duration 256-1500 fs was used'; p.3 Fig. 2(a)/(b)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2-s09", change: "target 15 um dielectric above pads; before/after lamination optimization as split", reason: "p.4 Sec. III.B 'uniform target thickness of 15 um'; p.4 Figs. 4-5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2-s11", change: "target 40 um diameter (from step text); result top ~42 / bottom ~38 um; before/after optimization as split; equipment full name", reason: "p.4 Sec. III.C (OPTEC, same system as cavity ablation p.2 Sec. III.A); p.4 Figs. 6-7; p.5 Sec. III.C"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2-s12", change: "equipment 'DC magnetron sputter'", reason: "p.5 Sec. III.C 'DC magnetron sputtering'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2-s19", change: "deleted (DC daisy-chain resistance measurement)", reason: "post-build measurement, not a step; values already in metrics ectc51687.2025.00378-a-m12..m24 (Table III, 75% yield)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F1", change: "step_basis stated_in_flow on all steps", reason: "order stated in the paper's flow figure/text (DevLog-007 re-pass)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2", change: "step_basis stated_in_flow on all steps", reason: "order stated in the paper's flow figure/text (DevLog-007 re-pass)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378", change: "process_flow_level 'full' -> 'ordered'", reason: "manifest full_without_typed_condition: no temperature, time, pressure, force, dose or current density stated anywhere (lamination/cure/plating values withheld, p.3 Sec. III.B); vacuum atmosphere alone is ordered (audit A rule)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2", change: "level 'full' -> 'ordered'", reason: "no stated temperature/time/pressure in the flow; vacuum atmosphere only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2-s02", change: "atmosphere '' -> 'vacuum'", reason: "stated 'vacuum laminating/laminated' (p.2 Sec. III; p.2 Sec. III.A; p.3 Sec. III.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2-s04", change: "atmosphere '' -> 'vacuum'", reason: "stated 'vacuum laminating/laminated' (p.2 Sec. III; p.2 Sec. III.A; p.3 Sec. III.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2-s09", change: "atmosphere '' -> 'vacuum'", reason: "stated 'vacuum laminating/laminated' (p.2 Sec. III; p.2 Sec. III.A; p.3 Sec. III.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2-s12", change: "material 'Ti 50 nm / Cu 250 nm' -> 'Ti/Cu'", reason: "manifest target_missing a-L02/a-L03: stated seed thicknesses (p.5 Sec. III.C) on the step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2-s12", change: "target '' -> 'Ti 50 nm / Cu 250 nm'", reason: "manifest target_missing a-L02/a-L03: stated seed thicknesses (p.5 Sec. III.C) on the step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2-s12", change: "thickness_um '' -> '0.3'", reason: "manifest target_missing a-L02/a-L03: stated seed thicknesses (p.5 Sec. III.C) on the step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2-s01", change: "conditions '' -> 'glass core 100 x 100 mm, 400 um thick'", reason: "manifest target_missing_preexisting a-L07: stated glass core size/thickness (p.2 Sec. II, Table II) on the first step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2-s01", change: "locator 'p.3 Fig. 1' -> 'p.3 Fig. 1; p.2 Sec. II; p.2 Table II'", reason: "locator for added core thickness"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-a", change: "build_seq confirmed (F1 = 1, F2 = 2); no change", reason: "manifest build_seq_unverified: chips are made, thinned and singulated (Sec. II) before pick-and-place in F2 (Sec. III.B)"}

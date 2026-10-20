@@ -35,3 +35,13 @@ not_reported:
   - reliability testing beyond 300 C TCB survival
 source_quality:
   - "No candidate for Fig. 5; Fig. 3 candidate clipped bottom label."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00014, change: "process_flow_level full -> ordered (flow F1 level ordered)", reason: "ordered Sec. III sequence; only condition is TCB 300 C for a few seconds"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00014-F1-s12, change: "deleted (electro-optical characterization)", reason: "measurement, not a build step; results already in metrics a-m1..m5 and optical_interfaces a-o1"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00014-F1-s04, change: "category electroplating -> deposition_other", reason: "paper says 'gold plating' only"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00014-F1-s01..s11, change: "step_basis stated_in_flow (s09 stays inferred_order); equipment 'deep RIE' (s02), 'laser-assisted etching' (s06); s08 material stud bumps", reason: "order and tools stated in p.3 Sec. III"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00014-F1-s01", change: "category: 'other' -> 'device_fab'", reason: "PIC fabrication in commercial MPW process is device fabrication (p.3 Sec. III); category in schema v2.5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00014-F1-s03", change: "category: 'other' -> 'lithography'", reason: "two-photon polymerization 3D printing is direct-write photolithography of the UV-curable resin; the paper groups it with two-photon grayscale lithography (p.3 Sec. III; p.5 Sec. V.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00014-F1-s07", change: "category: 'other' -> 'lithography'", reason: "two-photon polymerization 3D printing is direct-write photolithography of the UV-curable resin; the paper groups it with two-photon grayscale lithography (p.3 Sec. III; p.5 Sec. V.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00014-F1-s05", change: "category: 'other' -> 'laser_modification'", reason: "femtosecond-laser local refractive-index modification of glass (p.3 Sec. III); category in schema v2.5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00014-F1-s03;ectc51687.2025.00014-F1-s07", change: "notes: '' -> 'Two-photon polymerization 3D printing (direct laser write) of permanent resin lens; category lithography.'", reason: "documents the category choice"}

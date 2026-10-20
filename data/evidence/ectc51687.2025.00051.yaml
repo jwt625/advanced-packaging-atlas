@@ -30,3 +30,15 @@ not_reported:
   - substrate layer count, core, dielectric; top die types and sizes; HBM count on the TV
   - reliability sample counts, pass criteria and BHAST bias
   - PDN resistance or voltage-drop numbers
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00051", change: "process_flow_level ordered confirmed", reason: "Fig. 3/4 numbered steps, no conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00051-F1", change: "tv_ids + ectc51687.2025.00051-c; step_basis stated_in_flow (s04 stays inferred_order)", reason: "p.3 Fig. 4 step 2 photo is the 14-bridge EMIB-T package TV"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00051-F1-s05", change: "split: s05 'dielectric layer encapsulation of TSV bridge die' + new s08 'via formation to TSV bridge die pads'; s06/s07 seq 7/8", reason: "p.3 Fig. 4 step 3 shows two panels (encapsulation, then vias). s05 id kept (3D template ref)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00051-F1-s06", change: "category other -> bumping; notes", reason: "Fig. 3 step 4 surface layer and FLI bumps (SEM shows bumps). id kept (3D template ref)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00051-F2", change: "scope tv_build -> comparison; step_basis stated_in_flow", reason: "EMIB baseline flow compared with EMIB-T (Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00051-F2-s03", change: "split: s03 'dielectric layer encapsulation of EMIB bridge die' + new s06 'via formation'; s04/s05 seq 5/6", reason: "p.3 Fig. 3 step 3 two panels"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00051-F2-s04", change: "category other -> bumping", reason: "Fig. 3 step 4 surface layer and FLI bumps"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00051-F1-s01", change: "category: 'other' -> 'carrier_prep'", reason: "v008 category_other: substrate provision shown as Fig. 3 step (1) (convention: carrier_prep); build-up method not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00051-F2-s01", change: "category: 'other' -> 'carrier_prep'", reason: "v008 category_other: substrate provision shown as Fig. 3 step (1) (convention: carrier_prep); build-up method not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00051-F1-s06", change: "target: '' -> '45 um D2D interconnect pitch (TV a; TV c not stated)'", reason: "v008 target_missing a-i1: EMIB-T TV D2D interconnect pitch @ 45 um (p.4 Sec. IV)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00051-F2-s04", change: "target: '' -> '45 um bump pitch'", reason: "v008 target_missing b-i1: 45 um bump pitch EMIB example (p.2 Sec. III.A; Fig. 3 caption)"}

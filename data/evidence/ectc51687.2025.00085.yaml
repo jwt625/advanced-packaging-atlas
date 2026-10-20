@@ -24,7 +24,7 @@ entries:
 derived: []
 conflicts:
   - {table: metrics, row_id: ectc51687.2025.00085-c-m1, field: value, values: [0.0108, 0.0109], locators: ["p.3 Table 2", "p.3 Table 4 (Experiment)"], chosen: "both entered (m1 Table 2, m7 Table 4)", why: "same sample, two tables; rounding"}
-  - {table: process_steps, row_id: ectc51687.2025.00085-c-s06, field: step, values: ["indium TIM supplied in paste form", "metal sheet TIM soldered between dies and lid"], locators: ["p.2 Sec. III para 1", "p.2 Sec. III para 2"], chosen: "not resolved; noted", why: "text inconsistent"}
+  - {table: process_steps, row_id: ectc51687.2025.00085-F1-s06, field: step, values: ["indium TIM supplied in paste form", "metal sheet TIM soldered between dies and lid"], locators: ["p.2 Sec. III para 1", "p.2 Sec. III para 2"], chosen: "not resolved; noted", why: "text inconsistent"}
   - {table: metrics, row_id: ectc51687.2025.00085-d-m4, field: notes, values: ["Fig. 8 x-axis 'TIM1 BLT thickness (mm)'", "text BLT 25-200 um"], locators: ["p.4 Fig. 8", "p.4 Sec. V.A"], chosen: "um", why: "text and 200 um BLT statement"}
   - {table: metrics, row_id: ectc51687.2025.00085-c-m2, field: value, values: ["power inputs over 1200W at Tj 105 C (abstract)", "1866 W (Table 2)"], locators: ["p.1 Abstract", "p.3 Table 2"], chosen: 1866, why: "result table"}
   - {table: test_vehicles, row_id: ectc51687.2025.00085-a, field: n_dies, values: ["4 SoC dies x 4 heater groups (text)", "16 SoC blocks SoC1-SoC16 drawn (Fig. 2)", "2 SOC in Fig. 1 schematic"], locators: ["p.2 Sec. II", "p.2 Fig. 2", "p.1 Fig. 1"], chosen: "4 SoC + 8 HBM = 12", why: "text explicit; Fig. 2 labels heater groups"}
@@ -38,5 +38,11 @@ not_reported:
   - lid material, TIM2 material, underfill material, BLT of graphite and liquid-metal TIMs
   - sample counts, reliability data, warpage
   - indium TIM reflow temperature/profile, BSM thickness
+  - "process_steps: ectc51687.2025.00085-a (graphite film TIM assembly not described)"
+  - "process_steps: ectc51687.2025.00085-b (liquid metal gel TIM assembly not described)"
 source_quality:
   - "Tables 1-5 are images, not in text.md. Candidates p02_fig2, p02_table1, p03_table3, p04_fig9 are cut at the bottom; manual crops used."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00085-F1-s06", change: "thickness_um 200 (metal TIM BLT, design_target override)", reason: "p.3 Sec. IV.B: 'metal TIM ... BLT of 200um'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00085-F1", change: "step_basis stated_in_flow on s01-s06; notes", reason: "p.2 Sec. III gives the order (then, followed by, finally)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00085", change: "process_flow_level ordered confirmed; TVs a, b listed in not_reported", reason: "only the metal TIM assembly is described"}

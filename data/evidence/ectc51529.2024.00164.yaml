@@ -30,5 +30,18 @@ not_reported:
   - micropillar pitch and gap, sealant product and cure, LIO material
   - coolant inlet temperature in each experiment (40 C water stated as design point)
   - TCG and HTS conditions/cycles, pressure values in the hydrostatic test
+  - "process_steps: ectc51529.2024.00164-e (sealant reliability sample construction not described)"
 source_quality:
   - "Clean text layer. All candidates matched their figures; none needed a manual bbox."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00164-F1-s08", change: "150 um moved from thickness_um to target (pillar height, not result thickness); pillar size and 625 um base added", reason: "p.2 Sec. II.B-C"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00164-F1", change: "tv_ids a -> a;c", reason: "p.4 Sec. IV.F: TV c is the same IMC-Si/TTV build with ribs kept free of sealant"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00164-F1-s11", change: "made TV-a delta (sealant on ribs)", reason: "attach step differs for TV c"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00164-F1-s13", change: "added TV-c delta (ribs free of sealant), replacing F3-s01", reason: "merge of converter flow F3 into F1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00164-F3", change: "flow deleted; its only step is now F1-s13", reason: "TV c uses F1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00164-F1-s12", change: "deleted (mount on pin socket/PCB, connect PFA tubes)", reason: "thermal test set-up, not a build step; socket/PCB in components a-c5, b-c4, c-c5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00164-F2-s01", change: "deleted (lithography 'not performed')", reason: "p.4 Sec. IV.E states only that DRIE was bypassed"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00164-F1", change: "step_basis filled on all steps of F1, F2; seq renumbered in flow order where steps were added/removed", reason: "schema v2.4 step_basis; order from the paper's flow figure/table/text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00164-F1-s02", change: "conditions 'WoW fusion bonding (Fig. 2(b)); temporary carrier' added", reason: "p.2 Fig. 2(b) caption; p.2 Sec. II.C"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00164-F1-s04", change: "conditions 'WoW fusion bonding' added", reason: "p.2 Fig. 2(c) caption"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00164-F2-s02", change: "seq renumbered 2->1 after F2-s01 deletion; step text clarified", reason: "p.4 Sec. IV.E"}

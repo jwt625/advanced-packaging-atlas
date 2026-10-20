@@ -34,3 +34,31 @@ not_reported:
   - "energy per bit, data-rate test, BER"
   - "reliability, warpage, yield"
   - "fiber attach, MFD, fiber type"
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F1-s03, change: "step_basis: '' -> 'inferred_order'; notes: '' -> 'Text: implants before and after waveguide patterning; one row placed here.'", reason: "implants occur before and after waveguide patterning; single row placed after patterning"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F1-s07, change: "equipment: '' -> 'PECVD'", reason: "named method as equipment"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F1-s09, change: "target: '' -> 'TiN 600 nm above Si waveguides'; step: 'TiN metallic heaters 600 nm above Si waveguides' -> 'TiN metallic heater formation'", reason: "stated geometry on the step"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s01, change: "seq: '11' -> '1'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s02, change: "seq: '12' -> '2'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s03, change: "seq: '13' -> '3'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s04, change: "seq: '14' -> '4'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s05, change: "seq: '15' -> '5'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s06, change: "seq: '16' -> '6'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s07, change: "seq: '17' -> '7'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s08, change: "seq: '18' -> '8'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s09, change: "seq: '19' -> '9'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s10, change: "seq: '20' -> '10'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s11, change: "seq: '21' -> '11'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s12, change: "seq: '22' -> '12'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s13, change: "seq: '23' -> '13'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s14, change: "seq: '24' -> '14'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s01, change: "category: 'other' -> 'etch_other'; step: 'receive Leti wafer with TSV keep-out zones; open original I/O pads' -> 'open original I/O pads on received CEA-Leti wafer; identify TSV keep-out zones'", reason: "step 1 action is opening the original I/O pads (category other -> etch_other)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s02, change: "target: '' -> '10 um diameter, 100 um depth'; material: '' -> 'Cu'; conditions: 'via-last; 10 um diameter design; Cu fill (Sec. II.B)' -> 'via-last; dry etch through BEOL stack and bulk Si'; locator: 'p.4 Sec. III.B; p.3 Fig. 6 step 2' -> 'p.4 Sec. III.B; p.3 Fig. 6 step 2; p.2 Sec. II.B'", reason: "stated TSV geometry as target; Cu fill as material"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s05, change: "category: 'deposition_other' -> 'rdl_layer'", reason: "RDL formation category"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s11, change: "category: 'deposition_other' -> 'rdl_layer'", reason: "RDL formation category"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s09, change: "notes: '' -> 'Final thickness not stated; TSV processes optimized for 100 um Si thickness (Sec. II.B).'", reason: "final thickness context (Sec. II.B)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F1-s03, change: "category other -> device_fab", reason: "ion implantation is FEOL device processing; device_fab in step_category (coordinator decision DevLog-007)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F1-s06, change: "category other -> device_fab", reason: "silicidation of device contact areas (p.2 Sec. III.A) is FEOL device processing"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F1-s10, change: "category other -> device_fab", reason: "PIC foundry BEOL (contacts, two metal levels), not a package RDL"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F1-s01, change: "thickness_in_um '' -> 0.3; conditions + 'starting 200 mm SOI wafer: 300 nm Si layer, 2 um BOX'", reason: "manifest target_missing a-L08/a-L09: p.2 Sec. III.A SOI 300 nm / BOX 2 um"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-a, change: "build_seq F1=1, F2=2 confirmed", reason: "p.2 Sec. III: fully processed CEA-Leti SiPh wafers sent to Fraunhofer IZM for TSV post-processing"}

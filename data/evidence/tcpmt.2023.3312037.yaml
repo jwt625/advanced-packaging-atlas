@@ -33,3 +33,13 @@ not_reported:
 source_quality:
   - "Table I (comparison of UOD solutions) is image-only; text.md has only the caption. Read from the p.4 render."
   - "text.md clean otherwise (typos 'Fevores', 'Froveros' are in the original)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3312037-F1-s09", change: "step added (chiplet attach, seq 1, inferred_order)", reason: "p.6 'tight process control in chiplet attach and wafer-level underfill dispense'; chiplets are underfilled at wafer level"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3312037-F1-s01..s08", change: "seq +1 after new s09; step_basis set (s03, s06 inferred_order); s04 equipment 'laser ablation'", reason: "p.5 Sec. V: underfill chiplets then wafer-level mold; trench after BSM and before singulation; solder TIM after underfilling"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3312037-F2; tcpmt.2023.3312037-F3; tcpmt.2023.3312037-F4", change: "scope tv_build -> generic_platform; tv_ids a -> empty", reason: "candidate HVM routes compared in Table I; trench selected, these were never run on the PVC package (steps performed=no)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3312037-F3-s01", change: "split 'dispense / dip transfer'; step_basis generic_description", reason: "p.5 two potential process options"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3312037-F4-s01; tcpmt.2023.3312037-F4-s02", change: "composite step split: s01 reconstitution (temporary_bonding), new s02 coating with split", reason: "p.5 Sec. IV gives reconstitution then wafer-level coating"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3312037-F5..tcpmt.2023.3312037-F8", change: "flow_name 'lab POC coupon' -> per-coupon names; F8 level fragments -> ordered", reason: "distinguish the four coupon flows; F8 text states coating then 'after underfill dispensing'"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3312037-F5-s02", change: "target from Fig. 6(a) (150 um width, >20 um depth, 50 um ledge); equipment 'laser ablation'", reason: "stated target trench dimensions (also in metrics -b-m2..m4)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3312037-F6-s01", change: "split 'control / treated'; step_basis inferred_order", reason: "TV c compares control and treated samples; order coating-before-underfill not stated explicitly"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3312037-F7; tcpmt.2023.3312037-F8", change: "step_basis set (F7 inferred_order; F8 stated_in_flow, s01 equipment 'Q-tip')", reason: "p.4 Sec. III.D 'applied ... using a Q-tip. After underfill dispensing'"}

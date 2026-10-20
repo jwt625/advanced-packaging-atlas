@@ -20,7 +20,7 @@ derived:
   - {table: components, row_id: ectc51529.2024.00133-a-c1, field: thickness_um, value: 400, formula: "0.4 mm x 1000", inputs: "p.2 Sec. II"}
   - {table: stack_layers, row_id: ectc51529.2024.00133-a-L04, field: thickness_um, value: 400, formula: "0.4 mm x 1000", inputs: "p.2 Sec. II"}
 conflicts:
-  - {table: process_steps, row_id: ectc51529.2024.00133-a-s05, field: conditions, values: ["text: 4th-harmonic pulse width <10 ps, 266 nm power 50 W", "Fig. 4 table: pulse duration (FWHM) <15 ps, power >50 W"], locators: ["p.3 Sec. III", "p.3 Fig. 4"], chosen: "Fig. 4 table values", why: "specification table; text alternatives noted in row notes"}
+  - {table: process_steps, row_id: ectc51529.2024.00133-F1-s05, field: conditions, values: ["text: 4th-harmonic pulse width <10 ps, 266 nm power 50 W", "Fig. 4 table: pulse duration (FWHM) <15 ps, power >50 W"], locators: ["p.3 Sec. III", "p.3 Fig. 4"], chosen: "Fig. 4 table values", why: "specification table; text alternatives noted in row notes"}
 excluded:
   - "Intel Si-interposer RDL via 2 um (refs [4]-[5])"
   - "CO2 laser 40 um vias (ref [6]); UV laser 5 um via (ref [8])"
@@ -34,3 +34,15 @@ not_reported:
   - reliability data
 source_quality:
   - "Clean text layer; all candidate crops correct (Table I crop excludes the title line only)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51529.2024.00133-F1, change: "locator adds p.1 Sec. II; p.4 Fig. 5-7 -> p.4 Fig. 7", reason: "5 um ABF input stated on p.1; inspection row removed"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51529.2024.00133-F1-s06, change: "deleted (OM/SEM top view and cross-section of vias)", reason: "post-build characterization, not in the Fig. 1 flow; its result is already in metrics ectc51529.2024.00133-a-m2 (3 um diameter) and -a-m3 (slightly tapered, no Cu damage)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51529.2024.00133-F1-s01, change: "category other -> carrier_prep; step_basis stated_in_flow", reason: "Fig. 1 step (1) glass substrate; v2.4 category"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00133-F1-s02..s05", change: "step_basis stated_in_flow", reason: "order from Fig. 1 (1)-(5) and p.2 Sec. II"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51529.2024.00133-F1-s03, change: "target 'Cu lines 10 um wide, 30 um spacing'; locator adds p.4 Sec. IV", reason: "review B miss 2: trimmed Cu geometry stated in p.4 Sec. IV"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51529.2024.00133-F1-s04, change: "thickness_in_um 5 (override design_target); locator adds p.1 Sec. II; notes updated", reason: "review B miss 1: 'A 5 um ABF was applied' (p.1-p.2 Sec. II), result about 3 um on Cu"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51529.2024.00133-F1-s05, change: "target '3 um via diameter, 5 um pitch grid'; locator adds p.4 Fig. 7", reason: "stated target on the step (p.4 Sec. IV, Fig. 7 caption)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00133", change: "process_flow_level full -> ordered (has_process_flow yes unchanged)", reason: "v2.5 rule: full needs a typed process condition; paper gives only laser specs (266 nm, 1 MHz, >50 W, <15 ps pulse) and tools, no temperature/time/pressure/atmosphere/dose (p.2 Sec. II; p.3 Fig. 4)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00133-F1", change: "level full -> ordered", reason: "no typed process condition in any step (same reason as paper)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00133-F1-s01", change: "thickness_um '' -> 400", reason: "p.2 Sec. II: D 263 glass 50 x 50 x 0.4 mm (stack_layers a-L04)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00133-F1-s04", change: "target '' -> 'ABF about 3 um on Cu / about 6 um on glass'", reason: "p.2 Sec. II: 'about 3 um on copper and 6 um on the glass region' (stack_layers a-L01, a-L02)"}

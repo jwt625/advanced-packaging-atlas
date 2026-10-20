@@ -33,6 +33,17 @@ not_reported:
   - chip bonding method, bump type/pitch, mold compound, carrier CTE and thickness
   - C4 bump data (not yet formed); electrical measurements; reliability data
   - sample count for line width and undulation statistics; normalization of Table 1 warpage %
+  - "process_steps: eptc62800.2024.10909872-c (UBM DOE legs: only different UBM Cu thickness and via designs stated, no process steps)"
 source_quality:
   - "Clean 4-page text layer; Fig. 7 panels on p.3 with caption on p.4 (candidate p04_fig7 held only the caption)."
   - "Caption characters garbled in text.md (um rendered as Thai glyph); read from page renders."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "eptc62800.2024.10909872-F1", change: "step_basis stated_in_flow (s02 inferred_order)", reason: "order from Sec. 2-2 and Fig. 2 panels"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc62800.2024.10909872-F1", change: "locator \"p.2 Sec. 2-2; p.2 Sec. 3-1; p.1 Sec. 1; p.3 Sec. 3.3; p.4 Fig. 7; p.2 Fig. 2\" -> \"p.2 Fig. 2; p.2 Sec. 2-2; p.2 Sec. 3-1; p.1 Sec. 1; p.3 Sec. 3.3; p.4 Fig. 7\"", reason: "flow drawn in Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc62800.2024.10909872-F1-s01", change: "step \"form UBM on organic carrier\" -> \"form UBM on organic carrier (SAP)\"; locator \"p.2 Sec. 2-2; p.2 Sec. 3-1\" -> \"p.2 Sec. 2-2; p.2 Fig. 2; p.2 Sec. 3-1\"; conditions \"SAP; Cu thickness and via design selected from Leg1-6 DOE\" -> \"SAP; UBM Cu thickness and via design selected from Leg1-6 DOE\"", reason: "Fig. 2 panel 1 shows UBM on carrier first"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc62800.2024.10909872-F1-s02", change: "step \"expose RDL L/S 2/2 um at panel level\" -> \"expose multi-layer RDL L/S 2/2 um at panel level\"; target (empty) -> \"L/S 2/2 um\"; step_basis \"stated_in_flow\" -> \"inferred_order\"; notes (empty) -> \"Litho for each fine RDL layer of s03; placed before s03, order not stated.\"", reason: "lithography of the fine RDL layers is part of s03 stacking; paper gives no separate order; L/S is the stated target"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc62800.2024.10909872-F1-s03", change: "category \"sap_msap\" -> \"rdl_layer\"; target \"6 layers\" -> (empty); locator \"p.2 Sec. 2-2; p.1 Sec. 1\" -> \"p.2 Sec. 2-2; p.2 Fig. 2; p.1 Sec. 1\"", reason: "v2.4 category rdl_layer; layer count is not geometry"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc62800.2024.10909872-F1-s07", change: "category \"ball_attach\" -> \"bumping\"", reason: "v2.4 category bumping"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc62800.2024.10909872-F2", change: "added flow for short-loop panel TV b", reason: "p.3 Sec. 3-2-2 states a short loop to the outermost RDL layer"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc62800.2024.10909872-F2-s01", change: "added: RDL process up to the outermost layer on organic carrier (short loop)", reason: "short-loop statement p.3 Sec. 3-2-2"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc62800.2024.10909872-c", change: "added not_reported process_steps entry", reason: "p.2 Sec. 3-1 / Fig. 3 give no process steps for the legs"}

@@ -34,10 +34,12 @@ derived:
   - {table: test_vehicles, row_id: ectc51529.2024.00322-d, field: n_dies, value: 52, formula: "52 Die-A + 0 Die-B", inputs: "p.3 Table III"}
   - {table: test_vehicles, row_id: ectc51529.2024.00322-e, field: n_dies, value: 88, formula: "68 Die-A + 20 Die-B", inputs: "p.3 Table III"}
   - {table: test_vehicles, row_id: ectc51529.2024.00322-f, field: n_dies, value: 100, formula: "92 Die-A + 8 Die-B", inputs: "p.3 Table III"}
-  - {table: process_steps, row_id: ectc51529.2024.00322-a-s02, field: time_s, value: 1800, formula: "30 min x 60", inputs: "p.4 Table IV"}
-  - {table: process_steps, row_id: ectc51529.2024.00322-a-s03, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.4 Table IV"}
-  - {table: process_steps, row_id: ectc51529.2024.00322-a-s05, field: time_s, value: 18000, formula: "5 h x 3600", inputs: "p.4 Table V"}
-  - {table: process_steps, row_id: ectc51529.2024.00322-b-s03, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.4 Table V"}
+  - {table: process_steps, row_id: ectc51529.2024.00322-F1-s02, field: time_s, value: 1800, formula: "30 min x 60", inputs: "p.4 Table IV"}
+  - {table: process_steps, row_id: ectc51529.2024.00322-F1-s03, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.4 Table IV"}
+  - {table: process_steps, row_id: ectc51529.2024.00322-F1-s05, field: time_s, value: 18000, formula: "5 h x 3600", inputs: "p.4 Table V"}
+  - {table: process_steps, row_id: ectc51529.2024.00322-F2-s03, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.4 Table V"}
+  - {table: process_steps, row_id: ectc51529.2024.00322-F1-s04, field: force_n, value: 300000, formula: "300 kN x 1000", inputs: "p.4 Table V"}
+  - {table: process_steps, row_id: ectc51529.2024.00322-F2-s02, field: force_n, value: 300000, formula: "300 kN x 1000", inputs: "p.4 Table V"}
 conflicts:
   - {table: metrics, row_id: ectc51529.2024.00322-b-m5, field: value, values: [-640, "around -600"], locators: ["p.5 Fig. 10", "p.5 Sec. III.B"], chosen: -640, why: "plotted result over rounded text"}
   - {table: metrics, row_id: ectc51529.2024.00322-a-m4, field: value, values: [-1210, "around -1200"], locators: ["p.5 Fig. 10", "p.5 Sec. III.B"], chosen: -1210, why: "plotted result; consistent"}
@@ -54,3 +56,16 @@ not_reported:
   - "warpage measurement temperature; sample counts; reliability tests"
 source_quality:
   - "Candidates p03_fig3 and p03_fig4 cut the bottom of the figures; manual crops used. Table candidates start below the first title line."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00322", change: "process_flow_level full confirmed", reason: "Fig. 1 flows with Tables IV-V dispense/mold/cure conditions; Fig. 4 ordered 13-box flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00322-F3", change: "merged into F2 (F2 tv_ids b;c); F3 and its rows s01-s04 deleted; LCMUF-A/LCMUF-B as split on F2-s02/s03", reason: "LCMUF-A and LCMUF-B run the identical LCMUF route of Fig. 1 / Table V; only the material differs"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00322-F2-s04", change: "grinding made a TV-b delta; thickness_in_um 895", reason: "p.5 Sec. III.B states grinding for CUF+EMC-A and LCMUF-A only; Table V mold 895 um (775 um after grinding)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00322-F1-s07;ectc51529.2024.00322-F2-s05;ectc51529.2024.00322-F3-s04", change: "fill inspection rows (SAT, IR microscope, SEM) deleted; content already in metrics a-m1..m3, b-m1..m4, c-m1", reason: "post-build evaluation, not placed in the Fig. 1 flow; SEM cut is failure analysis"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00322-F1-s01;ectc51529.2024.00322-F2-s01", change: "category assembly -> bonding; target bump gap ~12 um; split bump pitch 20/15 um", reason: "p.2 Sec. II.A: 'bump gap after bump bonding was designed to be around 12 um'; Tables I-II pitches"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00322-F1-s04;ectc51529.2024.00322-F2-s02", change: "force_n 300000 typed from 'molding pressure 300 kN'; equipment WCM330MS on F1-s04", reason: "p.4 Table V; p.3 Sec. II.C"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00322-F1-s02;ectc51529.2024.00322-F1-s03", change: "equipment: jet dispenser FAD2500 (Musashi Engineering); pressure oven", reason: "p.3 Sec. II.C; p.4 Table IV"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00322-F1-s06", change: "thickness_in_um 895", reason: "p.4 Table V mold thickness 895 um (775 um after grinding)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00322-F4-s06", change: "thickness_in_um 775", reason: "p.3 Table III Si wafer 775 um (100 um after grinding)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00322-F1;ectc51529.2024.00322-F2;ectc51529.2024.00322-F4", change: "flow names as in the paper; step_basis stated_in_flow on all steps", reason: "order from Fig. 1, Fig. 4 and Sec. II.B/II.C text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00322-F4-s01", change: "target 'DAF thickness 20 um' (design); material 'DAF (20 um)' -> 'DAF'", reason: "v006 manifest: p.3 Table III DAF thickness 20 um"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00322-c-L02;ectc51529.2024.00322-c-L04", change: "no change (die and interposer 775 um not put on an F2 step)", reason: "v006 manifest: incoming die/interposer thickness (p.2 Tables I-II); no F2 step forms or changes it (mold grind stated only for b)"}

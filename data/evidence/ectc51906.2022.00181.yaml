@@ -32,3 +32,17 @@ not_reported:
   - TSV dimensions (vias only drawn in Fig. 3)
 source_quality:
   - "Candidate p04_fig11 clips the SEM panels; p03_tableiii merged with Fig. 9 (manual re-crops used)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00181-F1-s01, change: "target: 'bottom wafer' -> ''", reason: "target holds stated geometry only; object name moved to step text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00181-F1-s02, change: "target: 'top die on bottom wafer' -> '20 um pitch, 13 um diameter ubump'; locator: 'p.2 Sec. 3DIC Process Flow; p.2 Fig. 3' -> 'p.2 Sec. 3DIC Process Flow; p.2 Fig. 3; p.2 Table I'", reason: "target = stated ubump pitch/diameter (Table I)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00181-F1-s03, change: "target: 'chip module' -> ''; step: 'underfill into ubump space' -> 'underfill into ubump space of chip module'", reason: "target holds stated geometry only; object name moved to step text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00181-F1-s04, change: "target: 'chip module' -> ''; step: 'MD1: first molding' -> 'MD1: first molding of chip module'", reason: "target holds stated geometry only; object name moved to step text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00181-F1-s05, change: "target: 'chip module' -> ''; step: 'LP: lapping to target thickness' -> 'LP: lapping of chip module to target thickness'; notes: '' -> 'Target thickness not stated; dies are 50 um thick (Table I text).'", reason: "target holds stated geometry only; object name moved to step text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00181-F1-s06, change: "target: 'chip module' -> ''", reason: "target holds stated geometry only; object name moved to step text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00181-F1-s07, change: "target: 'chip module' -> ''", reason: "target holds stated geometry only; object name moved to step text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00181-F1-s08, change: "target: 'chip module on substrate' -> ''; category: 'reflow' -> 'bonding'; step: 'DB2: on-substrate (oS) die bond reflow of chip module' -> 'DB2: on-substrate (oS) die bond of chip module by reflow'", reason: "target holds stated geometry only; object name moved to step text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00181-F1-s09, change: "target: 'package' -> ''", reason: "target holds stated geometry only; object name moved to step text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00181-F1-s10, change: "target: 'package' -> ''; step: 'MD2: second molding' -> 'MD2: second molding of package'", reason: "target holds stated geometry only; object name moved to step text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00181-F1-s11, change: "target: 'package' -> ''", reason: "target holds stated geometry only; object name moved to step text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00181-F1-s02", change: "no change (235 C not typed)", reason: "Table II 235 C is a generic MR vs TCB comparison, not stated as this TV's reflow profile"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00181-a-L01;ectc51906.2022.00181-a-L05", change: "no change", reason: "50 um die thickness is an input die property (Table I text); lapping target thickness not stated (p.2 Sec. 3DIC Process Flow)"}

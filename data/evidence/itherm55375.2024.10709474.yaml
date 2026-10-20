@@ -38,3 +38,9 @@ not_reported:
 source_quality:
   - "Text layer clean. Candidates p02_fig1, p03_fig5 and p04_fig9 clip labels (manual re-crops); Fig. 2 and Fig. 3/6/8 have no candidates."
   - "Text says manifold has 4 inlets and 3 outlets; Fig. 2(d) labels only one inlet and one outlet (entered per text)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: itherm55375.2024.10709474-F1-s01, change: target 'fin and slit wafers' moved to step text, reason: target holds stated geometry only}
+  - {date: 2026-10-20, source: repass, row_id: itherm55375.2024.10709474-F1-s08, change: 'target -> fin geometry (depth 400 um, Table I sizes); thickness_um 400 cleared', reason: '400 um is etch depth, not result thickness; p.2 Sec. II.A, Table I'}
+  - {date: 2026-10-20, source: repass, row_id: itherm55375.2024.10709474-F1-s12, change: target 18 mm x 20 mm, reason: p.3 Sec. III.A heater size}
+  - {date: 2026-10-20, source: repass, row_id: itherm55375.2024.10709474-F1-s14, change: step_basis inferred_order, reason: black paint position vs fixture assembly not stated}
+  - {date: 2026-10-20, source: repass, row_id: "itherm55375.2024.10709474-F1-s08", change: "target 'fin depth 400 um (350 um Si left); Lp 0.2 mm, Lf 0.4 mm, Wf 0.1 mm, Wc 0.1 mm, 2theta 60 deg' -> 'fin depth 400 um (350 um Si left); slits through 300 um thick slit wafer; Lp 0.2 mm, Lf 0.4 mm, Wf 0.1 mm, Wc 0.1 mm, 2theta 60 deg'", reason: "manifest target_missing a-L08: slit wafer thickness 300 um stated p.2 Sec. II.A (slit depth through wafer)"}

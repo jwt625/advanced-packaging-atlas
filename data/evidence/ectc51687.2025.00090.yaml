@@ -35,3 +35,13 @@ not_reported:
   - microbump diameter/height/metallurgy, bonding method and conditions; C4 dimensions
   - mold and PID product names; carrier material
   - absolute panel warpage values (Fig. 7 has no axis values); reliability sample count
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00090", change: "process_flow_level ordered confirmed", reason: "Fig. 2 ordered flow; no temperatures, times or pressures given"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00090-F1", change: "notes (Fig. 2 boxes; carrier removal not described)", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00090-F1-s01", change: "other -> carrier_prep", reason: "Fig. 2 step 'Carrier'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00090-F1-s02", change: "step_basis inferred_order; UBM DOE legs in split", reason: "p.2 Sec. III.A, Fig. 3; order from 'RDL on the thick Cu UBM pad'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00090-F1-s03", change: "target L/S 2/2 um; result cleared (already metrics a-m1..a-m7); inferred_order", reason: "do not duplicate metrics"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00090-F1-s04", change: "sap_msap -> electroplating; pad design split; result cleared (metrics a-m9, a-m10)", reason: "p.3 Sec. III.B 'plating thickness variation of the pads'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00090-F1-s05", change: "target min 45 um bump pitch", reason: "p.3 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00090-F1-s08", change: "ball_attach -> bumping", reason: "Fig. 2 'C4 Stud Bumps'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00090-F1", change: "s01, s05-s09: step_basis stated_in_flow", reason: "order from Fig. 2 and p.2 Sec. II.B"}

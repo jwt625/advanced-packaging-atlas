@@ -25,3 +25,11 @@ not_reported:
   - warpage, thermal cycling, bend test and electrical results (claimed only)
 source_quality:
   - "Clean text layer; short platform paper with qualitative claims; candidates for all 4 figures correct."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00140-F1", change: "scope tv_build -> generic_platform (also F2); step_basis stated_in_flow", reason: "Sec. 3-4 describe the InfinityBoard platform flow, not a specific build"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00140-F1-s05", change: "metallization options in split", reason: "p.2 Sec. 3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00140-F2", change: "masking/etching C-L split per Fig. 2: added s08 (C), s09 (G), s10 (H-I), s11 (L); s02 now D-F, s03 now J-K; seq renumbered", reason: "p.3 Fig. 2 gives the finer order; text p.3 Sec. 4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00140-F2-s07", change: "category other -> rdl_layer; step reworded", reason: "p.3 Sec. 4; Fig. 3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00140-F3", change: "added fragments flow for TV b (DRIE/metallization demos)", reason: "p.3 Fig. 1; p.3 Fig. 4; p.4 Sec. 4; TV b was in no flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00140-F3-s01", change: "added rows s01-s05 (DRIE trench L/S ~5 um, metallization, CMP, fine-line DRIE 2.4/0.6 um, 15 um DRIE via)", reason: "p.3 Sec. 4; p.4 Sec. 4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00140-F2-s03", change: "target 'L/S <2/<2 um (stated platform capability, sub-2 um)'", reason: "pass B target_missing a-L02: AnyLayer ET enables sub-2 um line/space (p.1 Abstract; p.2 Sec. 2); a platform claim, no demonstrated 2/2 um sample in this flow"}

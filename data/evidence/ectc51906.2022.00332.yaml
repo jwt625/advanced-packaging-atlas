@@ -43,3 +43,12 @@ not_reported:
   - reliability tests
 source_quality:
   - "Garbled PDF text layer; text.md is OCR. All numbers verified on page images. candidates.json empty: all figure bboxes manual."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00332-F1-s04, change: "step_kind empty -> inline_inspection (KGD probing)", reason: "pre-bond die selection the paper places in the flow; no values to move"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00332-F1-s05, change: "atmosphere other (in-situ formic acid vapor); split bond pitch UDSP 9.8 um / GF-TS < 10 um", reason: "typed condition; per-variant value in split"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00332-F1-s02, change: "conditions add 'Si-IF links in two metal layers (2x2 UDSP Si-IF)'", reason: "stated p.3 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00332-F2, change: "level fragments -> ordered; s04 step text 'with modified detection parameters' moved to notes", reason: "order layer 1 -> scan -> layer 2 -> scan stated (Fig. 4(b),(c)); Fig. 4(a) layer not stated"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00332-F1-s01..F2-s04, change: "step_basis stated_in_flow", reason: "order stated in Sec. II.C and III"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00332-F1-s02", change: "category other -> rdl_layer", reason: "Si-IF Cu wiring layer by BEOL Cu damascene/dual damascene per metal layer (p.3 Sec. II.C); composite wiring-layer formation"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00332-F2-s01", change: "category other -> rdl_layer", reason: "Si-IF metal layer 1 fabrication (p.3-4 Sec. II.C; Fig. 4(b)); composite wiring-layer formation"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00332-F2-s03", change: "category other -> rdl_layer", reason: "Si-IF metal layer 2 fabrication (p.4 Fig. 4(c)); composite wiring-layer formation"}

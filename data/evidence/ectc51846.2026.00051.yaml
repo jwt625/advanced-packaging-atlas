@@ -41,3 +41,7 @@ not_reported:
   - "process_steps for TVs a, c, d (only the 25 um building blocks are listed for TV b)"
 source_quality:
   - "Candidates p03_fig3 and p03_fig4 are empty (no graphics); p03_fig5, p04_fig6, p04_fig7, p05_fig9, p05_fig10 clip axis labels or edges."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00051", change: "process_flow_level ordered -> fragments; has_process_flow yes -> no; F1 level ordered -> fragments", reason: "Sec. II.A.ii lists innovation areas a)-d) needed for 25 um pitch, not a build sequence; no conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00051-F1-s01..s05", change: "step_basis generic_description; s04 other -> bumping", reason: "fragments, reading order (rule 7)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00051-F1-s02", change: "category other kept; notes explain", reason: "substrate via to embedded bridge pad (not a TSV, so not tsv_tgv_formation); via method (laser/etch) and metallization method not stated (p.3 Sec. II.A.ii (b))"}

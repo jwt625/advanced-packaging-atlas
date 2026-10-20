@@ -33,3 +33,11 @@ not_reported:
   - absolute warpage values (all plots in AU or a.u.)
   - daisy chain yield percentage and fail criterion; per-TSV resistance
   - die attach / assembly (wafer-level only)
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: eptc59621.2023.10457670-F1, change: "source text -> mixed; locator adds p.2 Fig. 1, p.3 Fig. 4; notes added", reason: "review B miss 4: Fig. 1 flow schematic not cited; Fig. 4 stages give the finer order"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457670-F1-s06..s10", change: "old s06 'fabricate 5 layers of Cu dual-damascene BEOL' (other) split into Metal 1..Metal 5 rows (rdl_layer, 1 um each)", reason: "Fig. 4 (p.3) lists Metal 1-5 as separate stages; rule: split composite steps when a figure gives a finer order"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457670-F1-s18..s21", change: "old s14 'fabricate 2 layers of 3 um Cu RDL ... with polymer-based passivation' (other) split into RDL1, BS passivation 1, RDL2, BS passivation 2; split 'BS RDL metal density A / B (Fig. 5)' on RDL1", reason: "review B miss 1: Fig. 4/5 (p.3) order RDL1, passivation 1, RDL2, passivation 2; Fig. 5 compares two designed RDL densities"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457670-F1-s11..s17, s22", change: "renumbered from old s07..s13, s15; step_basis stated_in_flow; Fig. 1/Fig. 4 locators added", reason: "split above; review B miss 4"}
+  - {date: 2026-10-20, source: repass, row_id: eptc59621.2023.10457670-F1-s01, change: "target 'TSV 10 um diameter, pitch 50/100 um, pattern density around 0.60%'; conditions '300 mm wafer; via-first'; step_basis stated_in_flow", reason: "review B miss 3: stated targets (p.1 TSI Process Fabrication)"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457670-F1-s02..s05", change: "step_basis stated_in_flow; locator adds p.2 Fig. 1 Step 1", reason: "review B miss 4"}
+  - {date: 2026-10-20, source: repass, row_id: eptc59621.2023.10457670-F2, change: "added flow 'BEOL-only wafer without TSV (Fig. 6)', scope comparison, level ordered, tv_ids b, 7 steps (Metal 1-5, FS passivation, FS UBM)", reason: "review B miss 2: TV b had no flow; p.3 text and Fig. 6 give its stages"}

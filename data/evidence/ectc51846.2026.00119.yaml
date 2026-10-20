@@ -37,5 +37,23 @@ not_reported:
   - "substrate build-up materials and size for L/S 20/20 comb coupon; coupon footprint for thermal test"
   - "lamination pressure/time; exposure dose used for embeddability coupon (only post-UV); filler type and absolute content"
   - "Fig. 9(a) values above 5 W (series meaning not labelled); b-HAST test standard name"
+  - "process_steps: ectc51846.2026.00119-b (reference SR coating of the b-HAST comb substrate not described)"
 source_quality:
   - "Section numbering and some typos (comfirmed, substate, 'edge/AL'); clean text layer otherwise."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F1..F5 steps", change: "step_basis -> stated_in_flow; target object names (L/S 20/20 substrate, CCL, SR coupon) cleared", reason: "order stated in Sec. II.A/II.B text; target holds stated geometry only (contract convention)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F1-s01", change: "atmosphere -> vacuum", reason: "p.2 Sec. II.A 'vacuum laminated'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F2-s01", change: "atmosphere -> vacuum", reason: "p.2 Sec. II.A 'vacuum laminated'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F2-s02", change: "dose sweep moved to split; conditions keep 365 nm", reason: "p.2 Sec. II.A 50-250 mJ/cm2; p.4 Fig. 7 caption 85 mJ/cm2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F2-s03", change: "target -> opening dia 100 um", reason: "p.2 Sec. I target spec; p.4 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F5-s02", change: "dose_mj_cm2 1000 typed", reason: "p.2 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F5-s04", change: "category other -> debonding", reason: "peeling cured film off its Cu foil carrier"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F1-s04", change: "deleted (SEM cross-section)", reason: "failure-analysis/measurement, not a build step; result already in metrics ectc51846.2026.00119-a-m1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F2-s06", change: "deleted (SEM of openings)", reason: "measurement; results already in metrics ectc51846.2026.00119-c-m1..m3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F3-s02", change: "deleted (clamp coupon in heater/heat-sink fixture, PI tape)", reason: "test setup, not a build step; PI tape added to metrics d-m1, e-m1, f-m1 condition"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F3-s03", change: "deleted (constant power, IR thermography)", reason: "measurement; power range 1-20 W added to metrics d-m1, e-m1, f-m1 condition"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F4-s02", change: "deleted (melt viscosity measurement)", reason: "measurement; rheometer name added to metrics h-m7..h-m11 condition"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F5-s05", change: "deleted (Cp, density, diffusivity measurement)", reason: "measurement; instruments added to metrics h-m1..h-m6 condition"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F2-s03", change: "result 'opening dia 105/99/103 um top/middle/bottom (measured, Fig. 7)'; overrides result:measured", reason: "pass B target_missing c-L01: 105 um is the measured top opening (p.4 Sec. III.A), so it goes in result; target stays the stated 100 um"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F4", change: "build_seq 5 -> tie: F4 = 1, F5 = 1; notes 'parallel'", reason: "pass B build_seq_unverified h: melt-viscosity specimen (Sec. II.A) and Cp/density/diffusivity specimen (Sec. II.B) are independent preparations with no order between them"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F5", change: "build_seq 5 -> 1 (tie with F4); notes 'parallel'", reason: "see F4"}

@@ -43,3 +43,14 @@ not_reported:
   - warpage measurement method, temperature, sign convention, and process step of the segment values
   - die shift magnitudes; void counts or areas; reliability data for this build
   - electrical_interfaces, optical_interfaces
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375887-F1-s01", change: "category other -> carrier_prep", reason: "incoming wafer is step (1) of Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375887-F1-s02", change: "category other -> bumping; target 'Cu stud' removed (object name, already in step text)", reason: "target holds geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375887-F1-s04", change: "conditions marked as proposed; failure-mechanism text moved from result to notes", reason: "compensation is a proposed mitigation (Fig. 7), not a stated condition"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375887-F1-s05", change: "Table 2 mold thickness range added as split; mechanism moved result -> notes; dispense optimization marked proposed", reason: "stated evaluation-plan variable on the molding step"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375887-F1-s08", change: "equipment added (mask-less laser direct imaging)", reason: "named tool type on p.3"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375887-F1-s11", change: "category other -> rdl_layer; equipment added", reason: "RDL patterned with adaptive LDI (p.3)"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375887-F1-s14", change: "category other -> bumping", reason: "UBM formation for solder balls"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375887-F1-s17", change: "deleted 'probe testing of segments' (test row, no value; segmentation purpose kept in s15 conditions)", reason: "tests are not steps; no metric content to move"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375887-F1-s01..iwlpc52010.2020.9375887-F1-s20", change: "step_basis set (stated_in_flow from Fig. 5/Fig. 10 order; s15 generic_description; s06, s18-s20 inferred_order)", reason: "rule 7 step_basis"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375887-F1-s20", change: "category other kept (reviewed)", reason: "p.1 Table 1 lists 'Backside epoxy' only; application method (laminate/coat/print) not stated, so no specific category applies"}

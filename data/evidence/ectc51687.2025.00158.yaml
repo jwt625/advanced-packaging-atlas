@@ -37,3 +37,15 @@ not_reported:
   - measured package warpage, reliability tests, sample counts
 source_quality:
   - "Clean text layer. Fig. 7 caption printed at the top of the right column, separate from its images (bottom-left of p.4). Fig. 6/7 captions carry a copied tail 'behavior for various Si thickness of bridge die with TSV'."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F1", change: "step_basis stated_in_flow on all steps of F1-F2", reason: "order from Fig. 2 / Fig. 3 and Sec. II.B-C text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F1-s07", change: "category \"other\" -> \"deposition_other\"; notes (empty) -> \"PI formation method not stated.\"", reason: "v2.4 category for PI layer formation"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F1-s08", change: "category \"other\" -> \"bumping\"", reason: "v2.4 category bumping"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F2-s02", change: "conditions \"MR vs TCB compared; TCB gave proper stand-off (Fig. 6)\" -> (empty); split (empty) -> \"attach method: MR / TCB\"; result (empty) -> \"TCB selected: proper stand-off (MR: low stand-off, squeeze-out)\"", reason: "MR vs TCB comparison is a split on this step; outcome to result"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F2-s06", change: "category \"electroplating\" -> \"rdl_layer\"; target (empty) -> \"L/S 5/5 um\"; conditions \"3 RDL layers, L/S 5/5 um\" -> \"3 RDL layers\"", reason: "v2.4 category rdl_layer; stated L/S as target"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F2-s11", change: "category \"other\" -> \"bumping\"; target (empty) -> \"130 um pitch\"; locator \"p.2 Sec. II.C; p.3 Fig. 3\" -> \"p.2 Sec. II.C; p.3 Fig. 3; p.2 Sec. II.A\"", reason: "v2.4 category bumping; stated pitch ('C4 micro-bump pitch 130um', p.2 Sec. II.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F2-s16", change: "conditions \"MR vs TCB compared; TCB selected (Fig. 7, 8)\" -> (empty); split (empty) -> \"attach method: MR / TCB\"; result (empty) -> \"TCB selected: good joints (MR: non-wet, cold joints at module edge)\"", reason: "MR vs TCB comparison is a split on this step; outcome to result"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F2", change: "seq renumbered 1..17 within flow", reason: "seq restarted per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F2-s01", change: "category: 'other' -> 'bumping'", reason: "manifest category_other: Cu pillar formation on carrier; bumping per DB convention for pillar formation (method not stated)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F1", change: "build_seq 1 confirmed; notes added", reason: "manifest build_seq_unverified: Sec. II.C attaches the TSV bridge dies made by the Fig. 2 flow (Sec. II.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F2", change: "build_seq 2 confirmed; notes added", reason: "manifest build_seq_unverified: F2 consumes F1 output"}

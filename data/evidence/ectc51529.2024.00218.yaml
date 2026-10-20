@@ -38,3 +38,11 @@ not_reported:
   - exact TDDB lifetime value (only exceeds 10-year target)
 source_quality:
   - "Typos in source ('Vehecle', 'DISCUTTION', 'Dintance'); text otherwise clean."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00218", change: "process_flow_level ordered confirmed", reason: "Fig. 3 and Sec. II.A give the order; no bonding/anneal/thinning conditions disclosed"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00218-F1-s12", change: "test row (electrical measurement, SIV 175 C 1000 h, controlled-IV/TDDB 105 C) deleted; content already in metrics a-m1..m12, a-m18..m24", reason: "post-build measurements and reliability tests are metrics"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00218-F1-s05", change: "target 6 um pitch, dia 2.5 +/- 0.5 um; split TSV dia 2.0/2.5/3.0 um chains, 1.8-3.3 um single TSV", reason: "p.2 Sec. II.B; p.3 Sec. III.A; Fig. 7 legend"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00218-F1-s06", change: "category other -> rdl_layer; target backside Cu pads for 1 um pitch F2B bonding", reason: "p.2 Sec. II.A: backside copper interconnects and pads on middle wafer"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00218-F1-s02;ectc51529.2024.00218-F1-s08", change: "target 1 um pitch F2F / F2B Cu-Cu connections", reason: "p.2 Sec. II.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00218-F1", change: "flow_name 'Process flow of WoWoW integration (Fig. 3)'; step_basis stated_in_flow on s01-s11", reason: "Fig. 3 caption; Sec. II.A order; anneal stated as part of each bonding process (p.4)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00218-F1-s01;ectc51529.2024.00218-F1-s07", change: "category other kept; note added", reason: "'nicely flattening' method not named (p.2 Sec. II.A, Fig. 3); cmp would be invented"}

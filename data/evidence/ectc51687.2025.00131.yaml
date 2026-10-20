@@ -32,3 +32,11 @@ not_reported:
   - sample counts for reliability tests
 source_quality:
   - "Fig. 9 candidate includes Table I footnote; Fig. 5 candidate includes a text sliver. Others usable."
+revisions:
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00131-F1-s01", change: "target 'SoC dies' -> ''; step 'form micropillar arrays on SoC die backside' -> 'etch micropillar arrays on SoC die backside'", reason: "target holds geometry only; object name moved to step"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00131-F1-s04", change: "category 'other' -> 'bumping'", reason: "category (v2.4 bumping)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00131-F1", change: "step_basis stated_in_flow set on 9 steps (others as revised)", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00131-F2", change: "added flow 'single-die sealant + metal lid TV (Sec. IV.B)' (tv_ids ectc51687.2025.00131-c)", reason: "TV c build stated: sealant dispensed on a single-die TV, then metal lid assembled (p.4 Sec. IV.B)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00131-F2-s01", change: "added: 'dispense sealant on single-die test vehicle'", reason: "TV c build (p.4 Sec. IV.B)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00131-F2-s02", change: "added: 'assemble metal lid'", reason: "TV c build (p.4 Sec. IV.B)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00131", change: "process_flow_level ordered confirmed (Fig. 3 order; no conditions)", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}

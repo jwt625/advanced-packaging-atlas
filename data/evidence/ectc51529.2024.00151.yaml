@@ -31,6 +31,7 @@ excluded:
   - "FOCoS-CF/CL qualification at L/S 2/2 um and up to 4 RDLs, and FOCoS-Bridge L/S < 1/1 um, cited to ref [4]"
   - "LAB process-window limitation cited to ref [5]; PVD mechanism cited to ref [8]"
 not_reported:
+  - "TV-1 chip-module build flow before CoS (only Fig. 8 TCB stated for TV-1)"
   - electrical_interfaces, optical_interfaces
   - die sizes and thicknesses, HBM generation, bridge size for TV-2, RDL/via dimensions beyond L/S
   - microbump pitch for TV-2, C4 pitch for TV-2, Cu pillar height/diameter, BGA pitch, substrate layer count
@@ -38,3 +39,41 @@ not_reported:
   - absolute warpage values; reliability sample counts; specific JEDEC standard numbers
 source_quality:
   - "Candidates usable as-is for all chosen figures; p06_fig16 bbox extends to page edge (x1=1.0) with blank margin."
+revisions:
+  - date: 2026-10-19
+    source: "sibling_dup"
+    row_id: "ectc51529.2024.00151-a-m7"
+    change: "scope '' -> 'applies to TVs a, b'"
+    reason: "p.6 Sec. IV.D: 'both TVs pass time zero O/S test', one statement, no per-TV values"
+  - date: 2026-10-19
+    source: "sibling_dup"
+    row_id: "ectc51529.2024.00151-b-m7"
+    change: "deleted (copy of ectc51529.2024.00151-a-m7)"
+    reason: "p.6 Sec. IV.D: 'both TVs pass time zero O/S test', one statement, no per-TV values"
+  - date: 2026-10-19
+    source: "sibling_dup"
+    row_id: "ectc51529.2024.00151-a-m8"
+    change: "scope '' -> 'applies to TVs a, b; Fig. 14(a)/(b) and Fig. 15 top/bottom image each TV'"
+    reason: "p.6 Sec. IV.C: no-shift / no cold joint / SOH-in-spec stated once for both TVs"
+  - date: 2026-10-19
+    source: "sibling_dup"
+    row_id: "ectc51529.2024.00151-b-m8"
+    change: "deleted (copy of ectc51529.2024.00151-a-m8)"
+    reason: "p.6 Sec. IV.C: no-shift / no cold joint / SOH-in-spec stated once for both TVs"
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00151-F1", change: "flow deleted with F1-s01..s05 (TCB for TV-1 only)", reason: "the Fig. 8 TCB flow is one flow for both TVs; re-created as F3 with tv_ids a;b (F3 numbered after the TV-2 module flow F2 in build order)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00151-F1-s05", change: "deleted time-zero O/S test", reason: "test; already in metrics ectc51529.2024.00151-a-m7 (applies to TVs a, b)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00151-F2-s12", change: "deleted F2-s12..s15 (TCB steps copied onto TV-2)", reason: "now shared F3-s01..s04"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00151-F2-s16", change: "deleted F2-s16 passive assembly and F2-s17 BGA ball mount", reason: "moved to F3-s05/s06 as TV-2 deltas after CoS (Fig. 1 step 6)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00151-F2-s18", change: "deleted time-zero O/S test", reason: "test; already in metrics ectc51529.2024.00151-a-m7"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00151-F2-s19", change: "added: prepare wafer carrier (seq 1); F2-s01..s11 seq +1", reason: "p.2 Sec. II.A 'First, a wafer carrier is prepared'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00151-F2-s05", change: "category other -> rdl_layer", reason: "3P3M RDL/PI build"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00151-F2-s09", change: "category other -> bumping", reason: "C4 formation"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00151-F2", change: "flow_name, locator, notes; step_basis stated_in_flow", reason: "Fig. 1 steps 1-5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00151-F3", change: "added flow: TCB chip-on-substrate (Fig. 8) tv_ids a;b, s01-s04 shared, s05-s06 TV-2 deltas (inferred_order)", reason: "p.4 Sec. II.E; p.2 Sec. II.A step 6"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00151-F4", change: "added comparison flow: mass reflow CoS (substrate prep, CM placement, reflow), performed no, no TVs", reason: "p.3 Sec. II.C; Fig. 5(a)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00151", change: "process_flow_level ordered confirmed", reason: "ordered flows, no numeric conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00151-F2-s05", change: "target '' -> 'L/S 8/8 um'; locator + p.5 Sec. III.B", reason: "p.5 Sec. III.B TV-2 RDL L/S 8/8 um (F2 is TV-2 only)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00151-F3-s03", change: "target '' -> 'C4 pitch 150 um (stated for TV-1 only)'; locator + p.5 Sec. III.A", reason: "p.5 Sec. III.A 'C4 bump pitches are 150 um' (TV-1); TV-2 C4 pitch not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00151-F2", change: "build_seq 2 -> 1", reason: "order confirmed: Fig. 1 steps 1-5 (module build, F2) precede step 6 CoS (F3), p.2 Sec. II.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00151-F3", change: "build_seq 3 -> 2; note on order", reason: "p.2 Sec. II.A 'Finally, the CM is ready to be attached to the organic substrate' after F2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00151-a-L04", change: "not applied: TV-1 RDL L/S 10/10 um and microbump pitch 55 um (a-i1) not put on a step", reason: "TV-1 module build (RDL, CoW2 FCB) is not described: Fig. 1 / Sec. II.A is the BSM flow (TV-2, F2); TV-1 is only in F3 (CoS TCB); assigning TV-1 to F2 would be inferred"}

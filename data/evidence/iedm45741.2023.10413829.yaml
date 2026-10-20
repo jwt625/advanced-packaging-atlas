@@ -31,6 +31,8 @@ excluded:
   - "SiCN choice, no outgassing and 350 C Cu bulge-out mechanism attributed to refs [6], [7]; CMP process of ref [5]; TDDB method ref [9]"
   - "pad spacing ratios 0.436 P (square grid) and 0.510 P (hexagonal grid) in Fig. 1 are geometric design relations, noted not entered"
 not_reported:
+  - "process_steps: iedm45741.2023.10413829-b (bonded SiCN/SiCN nanoindentation coupon; only post-bond anneal temperatures stated, kept as metrics conditions)"
+  - "process_steps: iedm45741.2023.10413829-c (SiO2/SiO2 reference coupon; only the 200 C post-bond anneal stated, kept as metric condition)"
   - components (no die/wafer dimensions), electrical_interfaces, optical_interfaces
   - wafer thickness after thinning, SiCN thickness, pad height (only recess), TSV dimensions
   - bonding temperature/force/time; anneal actually applied to the TV (only 250/350 C rationale)
@@ -39,3 +41,19 @@ not_reported:
 source_quality:
   - "OCR text (garbled PDF text layer); figure numbers verified on 220/300 dpi renders. candidates.json empty: all key-figure bboxes manual."
   - "OCR caption 'equa PAD' in Fig. 16 is printed so in the PDF."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413829", change: "process_flow_level full -> ordered", reason: "Fig. 4 is an ordered step list; only named bonder, CMP results and a generic 250 C anneal statement, no TV conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413829-F1", change: "level full -> ordered; notes on top/bottom wafer columns", reason: "few conditions; Fig. 4 shows parallel top/bottom wafer columns with identical steps"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413829-F1-s01", change: "category other -> deposition_other; notes", reason: "PMD is a dielectric deposition level; method not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413829-F1-s05", change: "target (pitch, CD ranges) and split equal/unequal PAD added", reason: "Fig. 2 caption: 2 process options evaluated; Fig. 3 CDs; Sec. II.A hexagonal grid"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413829-F1-s06", change: "category electroplating -> deposition_other", reason: "plating not stated in the paper (old category was a placeholder)"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413829-F1-s08", change: "material Cu/SiCN added", reason: "Sec. II.B: SiCN chosen as bonding dielectric"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413829-F1-s09", change: "step_basis generic_description; 350 C statement moved into conditions", reason: "anneal is a generic statement, not part of the Fig. 4 flow"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413829-F1-s12", change: "deleted (E-test)", reason: "post-build electrical test; Kelvin/daisy-chain results already in metrics a-m4..a-m15"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413829-b", change: "added 'process_steps: <tv_id>' to not_reported", reason: "bonded coupon; no flow disclosed beyond anneal temperatures (in metrics)"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413829-c", change: "added 'process_steps: <tv_id>' to not_reported", reason: "reference coupon; no flow disclosed beyond the 200 C anneal (in metric)"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413829-F1-s05", change: "target 'PAD pitch 400-700 nm, hexagonal grid, circular pads; PAD CD top 200-395 nm, bottom 225-400 nm' -> 'PAD pitch 400 nm / 450 nm / 500 nm / 700 nm (range 400-700 nm), hexagonal grid, circular pads; PAD CD top 200-395 nm, bottom 225-400 nm; equal PAD CD 226 nm at 400 nm pitch; unequal PAD top 200 nm / bottom 300 nm at 500 nm pitch'", reason: "manifest target_missing a-i1/i2/i3/i6/i7: pitches 400/500/700 nm (p.2 Sec. III.C, p.4 Fig. 10), 450 nm (p.4 Fig. 13 legend), equal CD 226 nm (p.4 Fig. 16), unequal 200/300 nm (p.4 Fig. 15)"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413829-F1-s05", change: "locator 'p.3 Fig. 4; p.1 Sec. II.A; p.3 Fig. 1; p.3 Fig. 2; p.3 Fig. 3' -> 'p.3 Fig. 4; p.1 Sec. II.A; p.3 Fig. 1; p.3 Fig. 2; p.3 Fig. 3; p.2 Sec. III.C; p.4 Fig. 13; p.4 Fig. 15; p.4 Fig. 16'", reason: "sources of added pitch/CD targets"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413829-F1-s03", change: "category other kept (reviewed)", reason: "Metal1 damascene level; Fig. 4 names the level only, no method; no step_category fits a whole BEOL metal level (repo convention: BEOL levels stay other)"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413829-F1-s04", change: "category other kept (reviewed)", reason: "Via1 level; Fig. 4 names the level only, no method; no step_category fits a whole BEOL via level (repo convention: other)"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413829-F1-s11", change: "category other kept (reviewed)", reason: "Fig. 4 'Backside processing' is unspecified (no operations named); no specific category applies"}

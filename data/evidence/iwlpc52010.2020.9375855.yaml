@@ -35,3 +35,23 @@ not_reported:
   - Cu pillar diameter/height, solder cap; substrate layer count and materials; mold compound product
   - warpage data (named as purpose only); thermal; yield numbers
   - optical_interfaces
+  - "process_steps: TSV/thinning order and conditions; CoW bond, molding, Cu pillar attach and underfill conditions"
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: "iwlpc52010.2020.9375855-a-m11", change: "scope -> 'X-Cube height incl. Cu pillar; applies to TVs a, b'; copy iwlpc52010.2020.9375855-b-m1 deleted", reason: "p.3 Sec. X-Cube Test Vehicles and Fig. 3 ('details of package and functional test vehicles'): one 0.67 mm height for both TVs, no per-TV value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "iwlpc52010.2020.9375855-b-m1", change: "deleted (copy of iwlpc52010.2020.9375855-a-m11)", reason: "p.3 Sec. X-Cube Test Vehicles and Fig. 3 ('details of package and functional test vehicles'): one 0.67 mm height for both TVs, no per-TV value"}
+  - {date: 2026-10-19, source: figures, row_id: "iwlpc52010.2020.9375855-f03", change: "added Fig. 2 (stack_schematic, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "iwlpc52010.2020.9375855-f04", change: "re-ranked Fig. 4: iwlpc52010.2020.9375855-f05 -> iwlpc52010.2020.9375855-f04", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "iwlpc52010.2020.9375855-f05", change: "re-ranked Fig. 10: iwlpc52010.2020.9375855-f06 -> iwlpc52010.2020.9375855-f05", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "iwlpc52010.2020.9375855-f06", change: "re-ranked Fig. 6: iwlpc52010.2020.9375855-f04 -> iwlpc52010.2020.9375855-f06", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "iwlpc52010.2020.9375855-f07", change: "re-ranked Table 1: iwlpc52010.2020.9375855-f03 -> iwlpc52010.2020.9375855-f07", reason: "re-rank after additions"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375855-F1", change: "tv_ids add iwlpc52010.2020.9375855-b; flow_name -> 'X-Cube package and functional TV flow (p.3-p.4)'", reason: "p.3 X-Cube Test Vehicles: molding, sawing and substrate mount stated for both TVs; Fig. 3 shows both"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375855-F1-s01", change: "target 'logic wafer' -> 'TSV 4 um diameter, 50 um pitch (7nm TSV)'; notes explain inferred position", reason: "p.3 X-Cube Test Vehicles; order not stated (step_basis inferred_order)"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375855-F1-s02", change: "added logic wafer thinning (inferred_order)", reason: "p.3 What is X-Cube: 'on the thinned wafer'"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375855-F1-s03", change: "renumbered from F1-s02 (CoW solder bonding); stated_in_flow; non-dimension target cleared", reason: "thinning row inserted"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375855-F1-s04", change: "renumbered from F1-s03 (wafer level molding); stated_in_flow; target cleared", reason: "thinning row inserted"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375855-F1-s05", change: "renumbered from F1-s04 (sawing); stated_in_flow; target cleared", reason: "thinning row inserted"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375855-F1-s06", change: "renumbered from F1-s05 (substrate mount); target 'Cu pillar pitch 125 um; X-Cube height with Cu pillar 0.67 mm'", reason: "p.3 X-Cube Test Vehicles, Fig. 3; stated dimensions go on the step"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375855-F2", change: "added generic_platform flow 2.5D CoW assembly (Fig. 1(a)), 3 steps, performed no, no tv_ids", reason: "p.2 text and Fig. 1 describe the flow; no TV of this paper built with it"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375855-F3", change: "added generic_platform flow 2.5D CoS assembly (Fig. 1(b)), 2 steps, performed no, no tv_ids", reason: "p.2 text and Fig. 1 describe the flow; interim test kept in conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375855", change: "process_flow_level ordered confirmed", reason: "ordered steps, no conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "iwlpc52010.2020.9375855-a-i4;iwlpc52010.2020.9375855-b-i4", change: "no step added (not applicable)", reason: "p.3: 0.4 mm BGA pitch is a package attribute; the paper states no ball-attach step and board mount is future ('will be mounted'); adding a step would invent it"}

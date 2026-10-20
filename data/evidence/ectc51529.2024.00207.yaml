@@ -26,6 +26,14 @@ not_reported:
   - ball size/pitch, TMV diameter/depth; EMC/MUF products; mold, cure, reflow conditions
   - numeric die thickness (masked '~5x um'), numeric SOH (relative only), C4 planarity values (no axis)
   - reliability test names, conditions and sample counts (only 'passed reliability qualifications')
+  - "process_steps: ectc51529.2024.00207-b (Cu OSP SOH DOE leg; no assembly flow given beyond pad finish and solder paste)"
 source_quality:
   - "Tables I-V are raster images; numbers read from renders. Fig. 9 caption duplicates Fig. 8 caption (printed so)."
   - "Fig. 5 candidate included the Fig. 4 caption line; Table IV candidate spans to the page edge."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51529.2024.00207-F1-s13, change: 'deleted: final test (FT)', reason: 'test, not a build step; no value to move to metrics'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51529.2024.00207-F1-s09, change: split UV vs CO2 laser, reason: p.4 Table IV/V laser ablation DOE}
+  - {date: 2026-10-20, source: repass, row_id: ectc51529.2024.00207-F2, change: scope tv_build -> comparison, reason: Fig. 3(a) Bottom Die First is the compared flow}
+  - {date: 2026-10-20, source: repass, row_id: ectc51529.2024.00207-F2-s01, change: category other -> ball_attach, reason: Fig. 3(a) step 1 Pre-Ball & Flux Clean}
+  - {date: 2026-10-20, source: repass, row_id: ectc51529.2024.00207-F2-s10, change: 'composite split: s10 laser marking; new s11 laser ablation, s12 ball placement, s13 reflow, s14 singulation; FT omitted', reason: Fig. 3(a) step 10 gives the order}
+  - {date: 2026-10-20, source: repass, row_id: ectc51529.2024.00207-b, change: process_steps not_reported entry added, reason: SOH DOE leg; no assembly flow given for Cu OSP builds}

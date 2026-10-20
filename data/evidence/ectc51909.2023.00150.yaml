@@ -27,7 +27,7 @@ entries:
 derived:
   - {table: test_vehicles, row_id: ectc51909.2023.00150-a, field: interposer_area_mm2, value: 884, formula: "x*y = 26*34", inputs: "p.2 Table I interposer size 26 mm x 34 mm"}
 conflicts:
-  - {table: process_steps, row_id: ectc51909.2023.00150-a-s12, field: notes, values: ["IMS", "solder transfer method"], locators: ["p.1 Abstract (IMS developed to form solder)", "p.6 Sec. III (solder transfer method developed)"], chosen: "both flows recorded; method used for the final FPGA build not stated", why: "Sec. II.D says only 'newly developed solder deposition technique'"}
+  - {table: process_steps, row_id: ectc51909.2023.00150-F5-s01, field: notes, values: ["IMS", "solder transfer method"], locators: ["p.1 Abstract (IMS developed to form solder)", "p.6 Sec. III (solder transfer method developed)"], chosen: "both routes recorded (F2 route A solder transfer, route B IMS); method used for the final FPGA build not stated", why: "Sec. II.D says only 'newly developed solder deposition technique'"}
 excluded:
   - "Fig. 12 process temperatures (25 C / 250 C axis) and flux/UF-cure sequence: figure attributed to ref [12]."
   - "IMS process details and volume-control method: refs [9-11]."
@@ -42,3 +42,39 @@ not_reported:
   - interposer-to-substrate joint type/pitch; BGA pitch
   - lid material; reliability testing; numeric yield
   - warpage magnitude in Fig. 3 (3D plot not readable)
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00150-a-i3, change: "ic_type microbump kept (disputed); notes and locator now cite the micro bump naming", reason: "x1 item 10 calls it a 150 um C4; p.1 Fig. 1(b) labels FPGA/AI chip joints \"Micro bump\" and the Abstract says Cu-pillar micro-bump solder joints"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-f03, change: "added Fig. 12 (process_flow, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-f06, change: "added Fig. 11 (cross_section, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-f07, change: "added Fig. 5 (cross_section, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-f08, change: "added Fig. 7 (cross_section, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-f09, change: "added Fig. 8 (cross_section, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-f10, change: "added Fig. 14 (package_photo, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-f13, change: "added Fig. 3 (warpage_plot, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-f14, change: "added Fig. 6 (warpage_plot, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-f15, change: "added Fig. 9 (other, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-figures, change: "re-ranked: Fig. 10 f03 -> f02, Fig. 2 f05 -> f04, Fig. 1 f02 -> f05, Table I f04 -> f11, Fig. 4 f06 -> f12", reason: "rank order per SKILL.md step 5 after additions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F1", change: "renamed; level ordered -> fragments; post-solder assembly steps moved to F5", reason: "F1 mixed pre- and post-solder-deposition steps; flows follow build order (F1, F2/F3, F5)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F1-s01", change: "target held a row id -> notes; seq 2 (reading order)", reason: "target is geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F2", change: "seq restarted 1-4 (was 3-6)", reason: "seq is per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F3", change: "seq restarted 1-5 (was 7-11)", reason: "seq is per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F2-s01", change: "category other -> bumping", reason: "solder formed on the dummy transfer chip"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F3-s03", change: "category deposition_other -> bumping", reason: "IMS is a solder bumping method (Sec. II.C)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F1-s03", change: "moved to ectc51909.2023.00150-F5-s01 (target row ids -> notes; targets from Table I)", reason: "post-solder-deposition assembly is its own flow after F2/F3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F1-s04", change: "moved to ectc51909.2023.00150-F5-s02 (target row ids -> notes; targets from Table I)", reason: "post-solder-deposition assembly is its own flow after F2/F3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F1-s05", change: "moved to ectc51909.2023.00150-F5-s03 (target row ids -> notes; targets from Table I)", reason: "post-solder-deposition assembly is its own flow after F2/F3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F1-s07", change: "moved to ectc51909.2023.00150-F5-s04 (target row ids -> notes; targets from Table I)", reason: "post-solder-deposition assembly is its own flow after F2/F3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F1-s08", change: "moved to ectc51909.2023.00150-F5-s05 (target row ids -> notes; targets from Table I)", reason: "post-solder-deposition assembly is its own flow after F2/F3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F5-s06", change: "added board-mount step", reason: "Sec. II.D: module mounted on evaluation board (test itself is metric a-m18)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F1-s06", change: "deleted (cross-section, 3D X-ray, electrical test)", reason: "post-bond characterization; results in metrics a-m15..a-m17"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F1-s09", change: "deleted (power-on test); board mount kept as F5-s06", reason: "test result already metric a-m18"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F3-s01", change: "moved to ectc51909.2023.00150-F2-s05 (route B IMS, seq 1)", reason: "F3 was an alternative solder-deposition route on the same TV a; routes live inside one flow (audit_B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F3-s02", change: "moved to ectc51909.2023.00150-F2-s06 (route B IMS, seq 2)", reason: "F3 was an alternative solder-deposition route on the same TV a; routes live inside one flow (audit_B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F3-s03", change: "moved to ectc51909.2023.00150-F2-s07 (route B IMS, seq 3)", reason: "F3 was an alternative solder-deposition route on the same TV a; routes live inside one flow (audit_B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F3-s04", change: "moved to ectc51909.2023.00150-F2-s08 (route B IMS, seq 4)", reason: "F3 was an alternative solder-deposition route on the same TV a; routes live inside one flow (audit_B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F3-s05", change: "moved to ectc51909.2023.00150-F2-s09 (route B IMS, seq 5)", reason: "F3 was an alternative solder-deposition route on the same TV a; routes live inside one flow (audit_B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F3", change: "flow deleted; steps merged into F2 as route B IMS; F2 steps route A solder transfer; F2 renamed", reason: "audit_B alternative_flow_same_tv: Process A and B are alternative routes on TV a (p.5 Fig. 10)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F2", change: "routes A/B; flow_name, locator, notes updated", reason: "p.5 Fig. 10(a)/(b)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-a", change: "build_seq confirmed: F1 (1) -> F2 (2) -> F5 (5); F3 removed", reason: "Sec. II.C-D: solder deposited on interposer-substrate pads, then FPGA TCB, UF, other chips, lid, BGA, board"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-F4-s01", change: "target 40 um pitch", reason: "p.2 Sec. II.A: dummy chip has the same bump array as the FPGA (40 um, Table I); closes target_missing b-i1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00150-a-L04", change: "none: L/S 2/2 um not put on a step", reason: "target_missing not applicable: interposer RDL fabrication is not described (interposer supplied; p.2 Sec. II.A, Table I); no step produces the RDL"}

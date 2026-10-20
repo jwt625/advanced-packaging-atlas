@@ -37,8 +37,14 @@ excluded:
   - "RI/Si interposer up to 4x (~3300 mm2), 65 mm longer dimension; 5-6x estimate 75-85 mm (ref [7] / estimate)"
   - "C4 pitch 100-130 um flux cleaning concern (general)"
 not_reported:
-  - process flow (only 'process feasibility check with good wafer warpage control'); process_steps empty
+  - "process flow: fragments only (B/S RDL processing statement, F1); no sequence or conditions; otherwise only 'process feasibility check with good wafer warpage control'"
   - ubump pitch/size/metallurgy for the TVs; F/S RDL L/S; RDL dielectric product and thicknesses; Cu thickness
   - die sizes and thicknesses, LSI size, IPD x/y, mold and TIM materials, package thickness
   - warpage measurement method and sign convention; reliability test temperatures/humidity, preconditioning
   - electrical_interfaces (Fig. 5 attributed to ref [6]); optical_interfaces (CPO mentioned as potential only)
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00091, change: "papers.notes trimmed 31 -> 28 words (dropped \"TSMC\", \"and\", \"name\")", reason: "x1 item 15: notes over 30 words"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00091", change: "process_flow_level none -> fragments (has_process_flow stays no)", reason: "reviews A and B grade FRAGMENTS: generic process statements, no sequence (p.2 Sec. II, p.3 Sec. II.A-B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00091-F1;ectc51909.2023.00091-F1-s01", change: "added fragment flow (generic_platform, tv a;b) with one generic_description row: 6 B/S RDL processed at 11 um L/S", reason: "rule 7: fragments get one row per statement; p.2 Sec. II 'processed with 11 um Cu line width and space'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00091", change: "not_reported 'process_steps empty' entry reworded to fragments", reason: "flow now exists"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00091", change: "MR6x preconditioning and reliability tests left in metrics (no step rows)", reason: "post-build tests are metrics (rule 7)"}

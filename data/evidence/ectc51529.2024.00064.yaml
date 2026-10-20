@@ -29,7 +29,7 @@ conflicts:
   - {table: metrics, row_id: ectc51529.2024.00064-a-m27, field: value, values: ["top chip area expanded 4.2% (text, Fig. 6 caption, conclusion)", "Chip area 5% (Fig. 6(a) label)", "fillet minimized to 4.2% of top chip area (abstract)"], locators: ["p.5 Sec. III.2", "p.5 Fig. 6(a)", "p.1 Abstract"], chosen: 4.2, why: "text and caption agree; abstract wording differs in meaning"}
   - {table: metrics, row_id: ectc51529.2024.00064-a-m28, field: value, values: ["6k more bumps total (5k + 1k)", "increased the bump count to 5 k (conclusion)"], locators: ["p.5 Sec. III.2", "p.5 Sec. IV"], chosen: 6000, why: "results section explicit sum"}
   - {table: metrics, row_id: ectc51529.2024.00064-a-m7, field: value, values: ["matched within 12% / error below 12% (text, caption)", "PV3 label 12.2% (Fig. 3(b))"], locators: ["p.3 Sec. III.2", "p.3 Fig. 3(b)"], chosen: 12.2, why: "plotted label"}
-  - {table: process_steps, row_id: ectc51529.2024.00064-a-s04, field: conditions, values: ["optimal NCF thickness 1.03C umT (text)", "1.06C (Fig. 3(c) axis)"], locators: ["p.3 Sec. III.2", "p.3 Fig. 3(c)"], chosen: "neither entered (normalized/obfuscated)", why: "values given only as multiples of undisclosed C"}
+  - {table: process_steps, row_id: ectc51529.2024.00064-F1-s04, field: conditions, values: ["optimal NCF thickness 1.03C umT (text)", "1.06C (Fig. 3(c) axis)"], locators: ["p.3 Sec. III.2", "p.3 Fig. 3(c)"], chosen: "neither entered (normalized/obfuscated)", why: "values given only as multiples of undisclosed C"}
 excluded:
   - "NCF TC-bonding mass production in memory products, ref [5]"
   - "Solder-to-NCF heat conductivity advantage, ref [7]; squeeze flow model, ref [8]; stress mechanism, ref [6]"
@@ -46,3 +46,12 @@ not_reported:
 source_quality:
   - "Several process values deliberately obfuscated (Force A/B/C, viscosity B, thickness C)."
   - "All six candidates were usable as-is."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00064-F1-s01", change: "category other -> carrier_prep", reason: "'1. Wafer' is step (1) of Fig. 1(a)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00064-F1-s02", change: "split added (NCF thickness per PV, NCF viscosity)", reason: "stated NCF variables on the lamination step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00064-F1-s04", change: "optimization window moved conditions -> split; result 'assembly yield over 97%' removed (metric a-m1)", reason: "sweep in split; measured yield is a metric"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00064-F1-s05", change: "deleted electrical wafer test (daisy chain); yield already in metrics a-m1 (>97%) and a-m2 (99.61%)", reason: "tests are metrics, not steps"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00064-F1-s06", change: "deleted optical scope / X-ray inspection row; I/O sweep moved to new metric a-m31, test-bump result already a-m30", reason: "post-bond characterization, not placed inside the flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00064-a-m31", change: "added from deleted step F1-s06", reason: "moved test information to metrics"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00064-F1-s04", change: "temp_c_max '' -> 380 (split text kept)", reason: "manifest v002 split_temp_untyped: optimization window 300~380 C (p.2 Sec. II); rule: split temperatures set temp_c_max"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00064-F1-s01", change: "target: I/O bumps 25 um pitch, 12 um height (Ni 3 + SnAg 9 um); test bumps 5 um height, 32 um dia on 50x50 um pad; locator + p.4 Fig. 5(b), 5(c); overrides target:mixed", reason: "manifest v002 target_missing a-i1 (25 um pitch, p.1-2 Sec. II) and a-i2 (32 um, Fig. 5(c) label); heights p.2 Sec. II, p.4 Sec. III.2"}

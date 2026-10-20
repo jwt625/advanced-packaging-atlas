@@ -19,14 +19,15 @@ figure_reading_method: >-
 entries:
   - {table: metrics, row_id: ectc51846.2026.00176-a-m7, field: value, value: 58.9, unit: um, basis: measured, locator: "p.2 Fig. 5", note: "panel label 'Reflow temp 260 C 58.9 um'"}
 derived:
-  - {table: process_steps, row_id: ectc51846.2026.00176-a-s15, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.2 Sec. II.B"}
-  - {table: process_steps, row_id: ectc51846.2026.00176-a-s37, field: time_s, value: 86400, formula: "24 h x 3600", inputs: "p.3 Sec. III"}
+  - {table: process_steps, row_id: ectc51846.2026.00176-F2-s06, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.2 Sec. II.B"}
+  - {table: process_steps, row_id: ectc51846.2026.00176-F4-s05, field: time_s, value: 86400, formula: "24 h x 3600", inputs: "p.3 Sec. III"}
+  - {table: process_steps, row_id: ectc51846.2026.00176-F3-s09, field: force_n, value: 147.1, formula: "15 kgf x 9.80665 = 147.1 N", inputs: "p.2 Sec. II.C snap cure force 15 kg"}
 conflicts:
   - {table: metrics, row_id: ectc51846.2026.00176-a-m2, field: value, values: [11.8, 11.75], locators: ["p.2 Table 1", "p.2 Sec. II.B"], chosen: 11.8, why: "result table over text (rounding)"}
   - {table: metrics, row_id: ectc51846.2026.00176-a-m7, field: value, values: ["58.9 um at 260 C (Fig. 5)", "~56 um at 250 C reflow (text)"], locators: ["p.2 Fig. 5", "p.2 Sec. II.B"], chosen: "58.9 um at 260 C", why: "measured plot labels over text; text value may refer to the 56.6 um cool-down 25 C panel"}
   - {table: optical_interfaces, row_id: ectc51846.2026.00176-a-o1, field: coupling_loss_db, values: [0.43, -0.43], locators: ["p.3 Sec. III", "p.4 Sec. V"], chosen: 0.43, why: "schema stores loss as positive dB; summary uses negative sign"}
-  - {table: process_steps, row_id: ectc51846.2026.00176-a-s33, field: seq, values: ["Fig. 2: epoxy dispense before active alignment", "text: epoxy used after alignment to fix FAU"], locators: ["p.2 Fig. 2", "p.3 Sec. III"], chosen: "Fig. 2 order", why: "flow figure gives explicit order; text compatible with dispense then cure after alignment"}
-  - {table: process_steps, row_id: ectc51846.2026.00176-a-s37, field: conditions, values: ["Fig. 2: in-situ UV cure + thermal cure", "text: batch UV initiation, 24 h at 25 C"], locators: ["p.2 Fig. 2", "p.3 Sec. III"], chosen: "text values (25 C, 24 h)", why: "text gives numbers; figure label kept in step name"}
+  - {table: process_steps, row_id: ectc51846.2026.00176-F4-s01, field: seq, values: ["Fig. 2: epoxy dispense before active alignment", "text: epoxy used after alignment to fix FAU"], locators: ["p.2 Fig. 2", "p.3 Sec. III"], chosen: "Fig. 2 order", why: "flow figure gives explicit order; text compatible with dispense then cure after alignment"}
+  - {table: process_steps, row_id: ectc51846.2026.00176-F4-s05, field: conditions, values: ["Fig. 2: in-situ UV cure + thermal cure", "text: batch UV initiation, 24 h at 25 C"], locators: ["p.2 Fig. 2", "p.3 Sec. III"], chosen: "text values (25 C, 24 h)", why: "text gives numbers; figure label kept in step name"}
 excluded:
   - "Photonic engine 8-lambda WDM architecture details of ref [1]"
 not_reported:
@@ -38,3 +39,103 @@ not_reported:
   - "MFD of PIC and fiber, wavelength in nm"
 source_quality:
   - "Candidates p02_fig2, p02_fig5, p03_fig7 clip bottom rows/panels; p04_fig10 bbox points to a page corner."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F1-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F1-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F1-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F1-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F1-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F1-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F1-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F1-s08", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F1-s09", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s08", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s09", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s10", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s11", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s12", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s08", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s09", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s10", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s11", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F4-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F4-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F4-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F4-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F4-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F4-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "repass: order from Fig. 2 flow and Sec. II-III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F1-s06", change: "category: 'other' -> 'rdl_layer'", reason: "repass: category other -> rdl_layer (2X RDL)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F1-s07", change: "category: 'lithography' -> 'bumping'", reason: "repass: C4 bumping step is bumping"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s05", change: "conditions: '' -> 'at wafer level, post reflow and clean'", reason: "repass: stated condition moved to conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s12", change: "category: 'other' -> 'carrier_prep'", reason: "repass: category other -> carrier_prep (tape-frame mount before 3D wafer dicing)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s01", change: "step: '3D wafer dicing, 50 um kerf blade, single pass' -> '3D wafer dicing'", reason: "repass: named tool and condition onto typed columns"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s01", change: "equipment: '' -> 'dicing blade, 50 um kerf'", reason: "repass: named tool and condition onto typed columns"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s01", change: "conditions: '' -> 'single pass'", reason: "repass: named tool and condition onto typed columns"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s05", change: "conditions: '' -> 'dispensed perpendicular to waveguide facet; dispense length, height and volume controlled'", reason: "repass: stated dispense controls moved to conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s05", change: "notes: 'Dispense length/height/volume controlled; solder dam blocks facet.' -> 'Solder dam along the facet blocks UF; fillet only on non-waveguide side.'", reason: "repass: stated dispense controls moved to conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s07", change: "conditions: '' -> 'O2/Ar plasma'", reason: "repass: plasma gas into conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s09", change: "force_n: '' -> '147.1'", reason: "repass: typed force from snap cure force 15 kg (kgf x 9.80665)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s09", change: "conditions: '' -> 'snap cure force 15 kg'", reason: "repass: typed force from snap cure force 15 kg (kgf x 9.80665)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s09", change: "overrides: 'temp_c:design_target;time_s:design_target' -> 'temp_c:design_target;time_s:design_target;force_n:design_target'", reason: "repass: typed force from snap cure force 15 kg (kgf x 9.80665)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s09", change: "notes: 'Snap cure force 15 kg. TIM coverage/adhesion checked with T-Scan.' -> 'TIM coverage/adhesion checked with T-Scan.'", reason: "repass: typed force from snap cure force 15 kg (kgf x 9.80665)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s10", change: "step: 'LSC attach: solder screen print on substrate back and mass reflow' -> 'solder screen print on substrate back side'", reason: "repass: split composite LSC step; text gives order (screen print, then LSC mass reflow)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s10", change: "category: 'reflow' -> 'deposition_other'", reason: "repass: split composite LSC step; text gives order (screen print, then LSC mass reflow)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s10", change: "temp_c: '250' -> ''", reason: "repass: split composite LSC step; text gives order (screen print, then LSC mass reflow)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s10", change: "overrides: 'temp_c:design_target' -> ''", reason: "repass: split composite LSC step; text gives order (screen print, then LSC mass reflow)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s12", change: "added: land side capacitor (LSC) attach to substrate bottom by mass reflow", reason: "repass: split composite LSC step (text: solder printed, then LSCs added by mass reflow at 250 C)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s11", change: "step_kind: '' -> 'inline_inspection'", reason: "repass: package e-test sits inside the Fig. 2 flow (before fiber attach); kept as in-flow test, yield in metrics m13"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F4-s02", change: "conditions: '' -> '6 axes; loopbacks; O-band SLD, TE0 IL monitored'", reason: "repass: alignment monitoring moved to conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F4-s02", change: "notes: 'O-band SLD, TE0 IL monitored.' -> ''", reason: "repass: alignment monitoring moved to conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F4-s03", change: "equipment: '' -> 'oven'", reason: "repass: cure conditions as written; oven named in text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F4-s03", change: "conditions: '' -> 'in-situ UV cure + thermal batch cure (oven post-bake)'", reason: "repass: cure conditions as written; oven named in text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F4-s04", change: "conditions: '' -> 'capillary; batch'", reason: "repass: dispense mode into conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F4-s04", change: "step: 'optical adhesive dispense on FAU facets (capillary), batch' -> 'optical adhesive dispense on FAU facets'", reason: "repass: dispense mode into conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F4-s05", change: "conditions: '' -> 'batch UV initiation; 24 h at 25 C'", reason: "repass: UV initiation as condition"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F4-s06", change: "deleted", reason: "repass: final IL measurement and 80 C final bake are post-build measurement/screen; already in optical_interfaces o1 (0.43 dB/facet) and metrics m16/m17"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s01", change: "seq: '10' -> '1'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s02", change: "seq: '11' -> '2'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s03", change: "seq: '12' -> '3'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s04", change: "seq: '13' -> '4'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s05", change: "seq: '14' -> '5'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s06", change: "seq: '15' -> '6'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s07", change: "seq: '16' -> '7'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s08", change: "seq: '17' -> '8'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s09", change: "seq: '18' -> '9'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s10", change: "seq: '19' -> '10'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s11", change: "seq: '20' -> '11'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F2-s12", change: "seq: '21' -> '12'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s01", change: "seq: '22' -> '1'", reason: "repass: seq restarts per flow; LSC split inserted before e-test"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s02", change: "seq: '23' -> '2'", reason: "repass: seq restarts per flow; LSC split inserted before e-test"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s03", change: "seq: '24' -> '3'", reason: "repass: seq restarts per flow; LSC split inserted before e-test"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s04", change: "seq: '25' -> '4'", reason: "repass: seq restarts per flow; LSC split inserted before e-test"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s05", change: "seq: '26' -> '5'", reason: "repass: seq restarts per flow; LSC split inserted before e-test"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s06", change: "seq: '27' -> '6'", reason: "repass: seq restarts per flow; LSC split inserted before e-test"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s07", change: "seq: '28' -> '7'", reason: "repass: seq restarts per flow; LSC split inserted before e-test"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s08", change: "seq: '29' -> '8'", reason: "repass: seq restarts per flow; LSC split inserted before e-test"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s09", change: "seq: '30' -> '9'", reason: "repass: seq restarts per flow; LSC split inserted before e-test"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s10", change: "seq: '31' -> '10'", reason: "repass: seq restarts per flow; LSC split inserted before e-test"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F3-s11", change: "seq: '32' -> '12'", reason: "repass: seq restarts per flow; LSC split inserted before e-test"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F4-s01", change: "seq: '33' -> '1'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F4-s02", change: "seq: '34' -> '2'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F4-s03", change: "seq: '35' -> '3'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F4-s04", change: "seq: '36' -> '4'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F4-s05", change: "seq: '37' -> '5'", reason: "repass: seq restarts per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F1-s03", change: "target: '' -> 'TSV 10 um CD, 126 um deep'", reason: "pass B: stated TSV geometry (p.1 Sec. I) on the reveal step; was only in notes; also in interconnects a-i2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F1-s03", change: "notes: 'TSV 126 um deep, 10 um CD.' -> 'TSVs pre-formed in the Passage wafer (p.1 Sec. I); this step exposes them.'", reason: "pass B: geometry moved from notes to target"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F1-s03", change: "locator: 'p.1 Sec. II.A; p.2 Fig. 2' -> 'p.1 Sec. II.A; p.2 Fig. 2; p.1 Sec. I'", reason: "pass B: source of the added target"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F1-s03", change: "overrides: '' -> 'target:design_target'", reason: "pass B: TSV CD/depth are design values"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00176-F1", change: "notes: '' -> 'Build order F1 -> F2 -> F3 -> F4 (build_seq 1-4) verified from Fig. 2 arrows; package e-test precedes fiber attach.'", reason: "pass B build_seq_unverified: p.2 Fig. 2 arrows and text (p.1-3 Sec. II-III) give TSV reveal/bumping -> CoW -> substrate attach -> fiber attach; default build_seq confirmed"}

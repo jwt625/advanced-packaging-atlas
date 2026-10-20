@@ -40,3 +40,10 @@ not_reported:
 notes: >-
   Table 2 service-condition column repeats Table 1 labels (T/C-C 200X...), a source error; text gives conditions F, A, D.
   Primary bucket si_interposer kept.
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2013.6575597-F1", change: "split: F1 keeps modules (a)-(d) (s01-s11), tv_ids a -> a;b;d; modules (e)-(f) moved to new F2", reason: "paper lists modules (a)-(f); TV d (CoW wafer) is built by (a)-(d) only; TV b is the same component (p.4 Board Level Reliability (a))"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2013.6575597-F1-s01..s11", change: "targets holding row ids replaced by stated geometry or cleared; s06 other -> rdl_layer, s07/s08 other -> bumping; s04 split Process-1/2; step_basis stated_in_flow", reason: "rule 7: target = stated geometry; p.1 Test Vehicle and Fabrication; p.3 Reliability of TSV"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2013.6575597-F2-s01 (old)", change: "deleted (Level-3 preconditioning)", reason: "pre-test preconditioning is a test condition, already in metrics a-m2..a-m4 condition (p.4 Component Level Reliability)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2013.6575597-F2", change: "flow id reused (old F2 'reliability' preconditioning flow removed): modules (e)-(f), tv_ids a;b, level ordered", reason: "later sub-flow after CoW bonding gets its own flow in build order (contract convention)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2013.6575597-F1-s12;ectc.2013.6575597-F1-s13;ectc.2013.6575597-F1-s14;ectc.2013.6575597-F1-s15", change: "moved to ectc.2013.6575597-F2-s01..s04 (seq 1-4); s01 split Process-1/2 reveal; s02 electroplating -> bumping, target 200 um pitch; row-id targets cleared", reason: "modules (e)-(f) split from F1; no evidence entries referenced the old ids"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2013.6575597-F3;ectc.2013.6575597-F4", change: "flow names set; F4 step: 'dispense' removed (not stated), UF split moved to split; step_basis generic_description", reason: "p.4 Power Cycling Test; p.5 Mechanical Shock Test"}

@@ -22,15 +22,12 @@ entries:
   - {table: metrics, row_id: ectc51909.2023.00274-b-m3, field: value, value: 1.6, unit: ohm, basis: measured, locator: "p.7 Fig. 11(c)", note: "full chain bar read at about 1.60 ohm"}
   - {table: metrics, row_id: ectc51909.2023.00274-a-m1, field: notes, value: "148-184 N box", unit: N, basis: measured, locator: "p.5 Fig. 6(a)", note: "plot read of whiskers"}
 derived:
-  - {table: process_steps, row_id: ectc51909.2023.00274-a-s10, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.3 Sec. II.B"}
+  - {table: process_steps, row_id: ectc51909.2023.00274-F1-s10, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.3 Sec. II.B"}
   - {table: interconnects, row_id: ectc51909.2023.00274-a-i1, field: anneal_time_min, value: 60, formula: "1 h x 60", inputs: "p.3 Sec. II.B"}
-  - {table: process_steps, row_id: ectc51909.2023.00274-a-s12, field: time_s, value: 345600, formula: "96 h x 3600", inputs: "p.4 Sec. II.B"}
   - {table: stack_layers, row_id: ectc51909.2023.00274-a-L01, field: thickness_um, value: 0.015, formula: "15 nm / 1000", inputs: "p.3 Sec. II.B"}
   - {table: stack_layers, row_id: ectc51909.2023.00274-a-L06, field: thickness_um, value: 0.4, formula: "400 nm / 1000", inputs: "p.3 Sec. II.B"}
   - {table: stack_layers, row_id: ectc51909.2023.00274-a-L07, field: thickness_um, value: 0.2, formula: "200 nm / 1000", inputs: "p.3 Sec. II.B"}
-  - {table: stack_layers, row_id: ectc51909.2023.00274-b-L09, field: thickness_um, value: 0.22, formula: "Ti 20 nm + Cu 200 nm", inputs: "p.5 Sec. III.A"}
-  - {table: stack_layers, row_id: ectc51909.2023.00274-c-L09, field: thickness_um, value: 0.22, formula: "Ti 20 nm + Cu 200 nm", inputs: "p.5 Sec. III.A"}
-  - {table: process_steps, row_id: ectc51909.2023.00274-b-s01, field: thickness_um, value: 0.22, formula: "Ti 20 nm + Cu 200 nm", inputs: "p.5 Sec. III.A"}
+  - {table: process_steps, row_id: ectc51909.2023.00274-F2-s01, field: thickness_um, value: 0.22, formula: "Ti 20 nm + Cu 200 nm", inputs: "p.5 Sec. III.A"}
   - {table: stack_layers, row_id: ectc51909.2023.00274-b-L05, field: thickness_um, value: 100, formula: "SU8 thickness = dielet height (100 um)", inputs: "p.6 Sec. III.A; p.5 Sec. III.A"}
   - {table: stack_layers, row_id: ectc51909.2023.00274-c-L05, field: thickness_um, value: 200, formula: "SU8 thickness = dielet height (200 um)", inputs: "p.6 Sec. III.A; p.5 Sec. III.A"}
   - {table: components, row_id: ectc51909.2023.00274-b-c4, field: thickness_um, value: 100, formula: "SU8 thickness = dielet height (100 um)", inputs: "p.6 Sec. III.A"}
@@ -53,3 +50,33 @@ not_reported:
   - TPV count per assembly beyond per-chain; resistance for 200 um dielet build
   - electrical_interfaces (no D2D PHY property); optical_interfaces
   - HEMT/IVR electrical efficiency (not built)
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00274-a-L03; ectc51909.2023.00274-a-L04, change: "via_pitch_um 10 cleared; pad/pillar pitch moved to notes", reason: "audit_x1 item 8: via_pitch_um held the Cu pad/pillar pitch, not a via pitch"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00274-b-L09; ectc51909.2023.00274-c-L09, change: "thickness_um 0.22 and override cleared; Ti/Cu 20/200 nm moved to notes; derived entries removed", reason: "audit_x1 item 8: 0.22 um is the dielet Ti/Cu lift-off pattern, not a bond-interface thickness"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00274-d, change: "tv_kind simulation_model -> other; notes 'design concept'", reason: "audit_x1 item 12: envisioned GaN-IF system, not built and not simulated; values are author estimates (interim for design_concept)"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00274-b-m2, change: "scope 'applies to TVs b, c'; notes updated", reason: "p.6 Sec. III.B: 'two different samples' with no per-build result; one row on first TV"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00274-c-m2, change: "row deleted (copy of b-m2)", reason: "audit_x1 item 4 / sibling_dup: copied statement on 200 um build"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F1-s01", change: "category deposition_other -> carrier_prep; step_basis stated_in_flow", reason: "step (1) 'Preparation of GaN-on-Si wafers' of Fig. 3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F1-s03", change: "category other -> rdl_layer; step_basis stated_in_flow", reason: "damascene Cu wire/pillar layer (Fig. 3 step 3)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F1-s04", change: "category other -> rdl_layer; temp_c 300 (lt, schematic) and target '10 um pad pitch' added; step_basis stated_in_flow", reason: "p.3 text: the Fig. 3 damascene step (<300 C) was performed on both wafers; Fig. 4(d) inset 10 um pitch pads"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F1-s03", change: "target '10 um pillar pitch' added", reason: "Fig. 4(c) inset: bonding pillars with 10 um pitch"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F1-s05", change: "thickness_um 0.2 cleared -> target '200 nm dielectric recess'; step_basis inferred_order", reason: "0.2 um is a recess depth, not a result thickness; text does not state when the recess was made"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F1-s06", change: "target '2x2 mm dielets' added; step_basis stated_in_flow", reason: "p.3 Sec. II.B 'diced into 2x2 mm2 pieces'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F1-s09", change: "'100 um inter-dielet spacing' moved from conditions to target; step_basis stated_in_flow", reason: "stated geometry the placement produces"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F1-s02", change: "step_basis stated_in_flow", reason: "order from Fig. 3 / Sec. II.B text sequence"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F1-s07", change: "step_basis stated_in_flow", reason: "order from Fig. 3 / Sec. II.B text sequence"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F1-s08", change: "step_basis stated_in_flow", reason: "order from Fig. 3 / Sec. II.B text sequence"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F1-s10", change: "step_basis stated_in_flow", reason: "order from Fig. 3 / Sec. II.B text sequence"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F1-s11", change: "step_basis stated_in_flow", reason: "order from Fig. 3 / Sec. II.B text sequence"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F1-s12", change: "row deleted (UHAST 130 C/85%RH/96 h then repeat shear and four-probe tests)", reason: "post-build reliability test; already in metrics ectc51909.2023.00274-a-m2 and -a-m4 (same condition, standard)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F2", change: "tv_ids b -> b;c", reason: "p.5 Sec. III.A: 100 um and 200 um thick dielet wafers processed in the same Fig. 8 flow; two samples measured (p.6)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F2-s01", change: "dielet wafer thickness 100/200 um moved from conditions to split; step_basis stated_in_flow", reason: "per-TV value on a shared step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F2-s02", change: "target '5x5 mm dielets' added; step_basis stated_in_flow", reason: "p.5 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F2-s03", change: "category other -> rdl_layer; object name '500 um 4-inch Si wafer' moved from target to conditions; step_basis stated_in_flow", reason: "target holds geometry only; single damascene wiring layer"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F2-s04", change: "target '9.85x9.85 mm', thickness_um 600 (PCB) set; step_basis stated_in_flow", reason: "p.5 Sec. III.A PCB size and thickness"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F2-s08", change: "split 'SU8 thickness = dielet height: b 100 um / c 200 um' added", reason: "p.6 Sec. III.A SU8 coated to the dielets' height"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F2-s10", change: "category etch_dry -> descum", reason: "SU8 residue descum in TPVs (schema v2.4 category)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F2-s14", change: "category other -> bumping; equipment 'stencil'", reason: "solder paste screen printing through a stencil (p.6 Sec. III.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F2-s05..s18", change: "step_basis stated_in_flow on all F2 steps", reason: "order from Fig. 8 and Sec. III.A text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00274-F1-s12", change: "derived entry (time_s 345600 = 96 h x 3600) removed", reason: "row deleted; the 96 h is kept in metrics -a-m2/-a-m4 condition"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51909.2023.00274-F1-s02", change: "category: 'other' -> 'device_fab'", reason: "HEMT device and contact fabrication is device_fab (in schema v2.5 enum); step stays performed: no"}

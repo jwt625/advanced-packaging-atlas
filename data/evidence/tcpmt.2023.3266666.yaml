@@ -33,3 +33,17 @@ not_reported:
   - microchannel etch tool/chemistry, glass layer thicknesses, frit product and firing profile, solder reflow profile and exact Pb-Sn composition
   - Ti/Cu/Ni/Au thicknesses, laminate size/layer count, C4 count and diameter
   - warpage, thermal-cycling reliability, n_samples per cooler for Fig. 8/11 (only 'a number of' and 'six')
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3266666-F2", change: "flow deleted", reason: "its only row was a test"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3266666-F2-s01", change: "deleted (four-point RTD sensor calibration)", reason: "measurement, not a step; already in metrics a-m47..a-m50"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3266666-F1-s01", change: "target added (fin/channel geometry, seal region)", reason: "stated geometry on the step (p.1 Sec. II.A, Fig. 1(b))"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3266666-F1-s02", change: "category other -> cmp; step_basis inferred_order", reason: "glass polished flat (method not stated); glass branch parallel to Si etch"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3266666-F1-s03", change: "equipment water jet cutting; step_basis inferred_order; category other kept (no category for water-jet patterning)", reason: "p.2 Sec. II.A"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3266666-F1-s07", change: "target 150 um pitch C4 moved from conditions", reason: "stated geometry on the step"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3266666-F1-s08", change: "step_basis inferred_order", reason: "external manifold position in the build order is not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3266666-F1-s04..s06", change: "step_basis stated_in_flow", reason: "order stated in text (joined cooler, then back-side metallization, then wafer attach)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3266666", change: "process_flow_level ordered kept", reason: "ordered build with materials but no temperatures, times or pressures"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3266666-F1-s01", change: "target: added '~475 um Si left below channels'; locator + p.7 Sec. III", reason: "v033 target_missing a-L07: p.7 Sec. III '~475 um of Si below the microchannels' is the base the channel etch leaves"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3266666-F1-s06", change: "conditions: '' -> 'thermal test wafer full thickness, 775 um Si (p.7 Sec. III)'; locator + p.7 Sec. III", reason: "v033 target_missing_preexisting a-L03: p.7 Sec. III '775 um of Si in the thermal wafer' (full-thickness wafer attached in this step)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3266666-F1-s03", change: "category kept 'other'; notes: reason added", reason: "v033 category_other: water-jet cutting of glass (p.2 Sec. II.A) matches no schema v2.5 step category"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3266666-a-L02", change: "no step change (not applicable)", reason: "v033 target_missing: the ~2.7 um SiO2 (p.7 Sec. III) belongs to the 45-nm thermal test wafer BEOL; the paper describes no step that deposits it"}

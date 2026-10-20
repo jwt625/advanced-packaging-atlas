@@ -33,3 +33,20 @@ not_reported:
   - u-bump, Cu pillar and BGA pitch/size/alloy; reflow profile; underfill/EMC/TIM/lid materials
   - ETR dielectric trade name, thickness, cure conditions; barrier metal; exposure dose; package-level L/S
   - BHAST comb L/S and failure criterion; JEDEC standard numbers; pass criteria; warpage; yield values
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00218-F1-s01", change: "deleted (structure/cross-reference; covered by F2)", reason: "cross-reference restating the 4-layer ETR build; ETR flow F2 now lists TV a in tv_ids"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00218-F1", change: "step_basis stated_in_flow; seq renumbered after F1-s01 removal; F1-s11 UV laser as equipment", reason: "p.5 Sec. IV text order, Fig. 8 (1)-(4)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00218-F1-s17", change: "deleted (moved to metrics; already present)", reason: "cross-section/X-ray/SAT of joints is post-build analysis; result already in metric a-m5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00218-F2", change: "tv_ids b -> a;b;c;d", reason: "S-SWIFT package (a) and BHAST comb coupons (c, d) are built with the ETR process (p.5 Sec. IV; p.6 Sec. V)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00218-F2-s01", change: "dielectric variant (prototype c / modified a, d) and coating-level sweep to split; step_basis", reason: "p.4 Fig. 4; p.6 Table I"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00218-F2-s04", change: "thickness_um 3.93 cleared (overburden, not a layer result; metric b-m10) and kept in result", reason: "p.4 Fig. 6"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00218-F2-s05", change: "over-CMP sweep to split; equipment single CMP platen", reason: "p.4-5 Sec. III; Fig. 7(a)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00218-F2-s06", change: "etch-time sweep 14/24/48 s to split", reason: "p.4 Fig. 7(b)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00218-F2-s08", change: "category other -> rdl_layer; layer count per TV in split", reason: "Fig. 1(c) 'Next layer'; p.3 Fig. 3; p.6 Sec. V"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00218-F3-s01", change: "deleted (structure-only; covered by F2)", reason: "'fabricate 2 layers of ETR with comb circuits' restates the coupon structure (stack_layers ectc51906.2022.00218-c-L01/L02); TV c now in F2 tv_ids"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00218-F3", change: "flow deleted", reason: "its only row was structure-only; TV c linked to ETR flow F2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00218-F4-s01", change: "deleted (structure-only; covered by F2)", reason: "'fabricate 2 layers of ETR with comb circuits' restates the coupon structure (stack_layers ectc51906.2022.00218-d-L01/L02); TV d now in F2 tv_ids"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00218-F4", change: "flow deleted", reason: "its only row was structure-only; TV d linked to ETR flow F2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00218-F2;ectc51906.2022.00218-F1", change: "build_seq F2 2 -> 1, F1 1 -> 2", reason: "p.5 Fig. 8 step (1) Multi-ETR precedes chip attach; p.5 Sec. IV 'Four layers of ETR were stacked on the silicon wafer' first"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00218-F2-s01", change: "split reduced to coating-level sweep; per-TV dielectric (prototype c / modified a, d) moved to notes", reason: "split is a parameter sweep on the step (p.4 Fig. 4); dielectric per TV from p.6 Sec. V, Table I"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00218-F2-s02", change: "target L/S 2/1 um, via 3.15/1.64 um, via patterns 3.72/4.9/7.26 um, stacked via 2 um CD", reason: "p.3 Fig. 2(a)-(c); p.3 Fig. 3; p.3 Sec. II"}

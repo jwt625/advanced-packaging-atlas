@@ -24,15 +24,16 @@ entries:
   - {table: interconnects, row_id: ectc51846.2026.00062-c-i1, field: bonding_temp_c, value: 380, unit: C, basis: design_target, locator: "p.5 Table II", note: "tacking (bond head) temp; 250 C at interface"}
 derived:
   - {table: stack_layers, row_id: ectc51846.2026.00062-a-L05, field: thickness_um, value: 0.25, formula: "250 nm / 1000", inputs: "p.2 Fig. 1(2) label"}
-  - {table: process_steps, row_id: ectc51846.2026.00062-a-s09, field: thickness_um, value: 0.15, formula: "~150 nm / 1000", inputs: "p.2 Fig. 1(7)"}
-  - {table: process_steps, row_id: ectc51846.2026.00062-c-s12, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.5 Table II"}
+  - {table: process_steps, row_id: ectc51846.2026.00062-F1-s04, field: thickness_um, value: 0.25, formula: "250 nm / 1000", inputs: "p.2 Fig. 1(2) label"}
+  - {table: process_steps, row_id: ectc51846.2026.00062-F3-s03, field: thickness_um, value: 0.25, formula: "250 nm / 1000", inputs: "p.3 Fig. 4(2) label"}
+  - {table: process_steps, row_id: ectc51846.2026.00062-F3-s12, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.5 Table II"}
   - {table: interconnects, row_id: ectc51846.2026.00062-c-i1, field: anneal_time_min, value: 60, formula: "1 h x 60", inputs: "p.5 Table II"}
   - {table: metrics, row_id: ectc51846.2026.00062-c-m1, field: value, value: 8.4, formula: "0.0084 um x 1000", inputs: "p.5 Fig. 9 bar height"}
 conflicts:
   - {table: metrics, row_id: ectc51846.2026.00062-b-m3, field: value, values: ["25 kgf (Table I, DoE #3)", "shear strength 250 N (Abstract, Conclusion)"], locators: ["p.4 Table I", "p.1 Abstract; p.6 Sec. V"], chosen: "25 kgf", why: "result table; 25 kgf = 245 N, text rounds to 250 N"}
   - {table: metrics, row_id: ectc51846.2026.00062-a-m3, field: value, values: ["0.138 um (Fig. 2b profilometry label)", "~150 nm (text, Fig. 2 caption, Fig. 1 step 7)"], locators: ["p.2 Fig. 2(b)", "p.2 Sec. II.A"], chosen: 0.138, why: "measured image label; ~150 nm kept as process target in step a-s09"}
   - {table: metrics, row_id: ectc51846.2026.00062-c-m1, field: value, values: ["RMS < 7 nm consistently (Sec. II.B)", "Fig. 9 unbonded bar ~8.4 nm"], locators: ["p.3 Sec. II.B", "p.5 Fig. 9"], chosen: 8.4, why: "plotted measurement over text; both noted"}
-  - {table: process_steps, row_id: ectc51846.2026.00062-a-s04, field: seq, values: ["text: SiN passivation after pillar damascene", "Fig. 1 step 2: PECVD nitride with FDRIE before damascene"], locators: ["p.2 Sec. II.A", "p.2 Fig. 1"], chosen: "text order", why: "text over schematic"}
+  - {table: process_steps, row_id: ectc51846.2026.00062-F1-s04, field: seq, values: ["text: SiN passivation after pillar damascene", "Fig. 1 step 2: PECVD nitride with FDRIE before damascene"], locators: ["p.2 Sec. II.A", "p.2 Fig. 1"], chosen: "text order", why: "text over schematic"}
   - {table: interconnects, row_id: ectc51846.2026.00062-c-i1, field: pitch_um, values: ["20 um pitch (text, Table/Fig. 10)", "Fig. 5(b) caption: ~5 um pillars with 15 um space; SEM label 18.73 um; text 'sub-20 um pitch'"], locators: ["p.5 Sec. IV.A", "p.3 Fig. 5(b)"], chosen: 20, why: "stated design pitch; 18.73 um label endpoints unclear, not entered as metric"}
 excluded:
   - "Batch anneal atmosphere and H.T. conditions of ref [12] (not restated)"
@@ -47,3 +48,18 @@ not_reported:
 source_quality:
   - "Most candidates shifted up by ~0.015-0.025 page height (include preceding heading, clip bottom); Fig. 2, 5, 8, 10 had no candidate; p03_fig3 is a caption-only box."
   - "Fig. 3 SEM also carries a 772.1 nm vertical label whose meaning is not stated; not entered."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00062-F1", change: "tv_ids a -> a;b; flow_name updated", reason: "DoE dies (10x10 mm, 10 um pitch) are the mechanical TV dies of Fig. 1 (Sec. II.A, III.A); die fabrication is shared"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00062-F2", change: "flow deleted; F2-s01 plasma folded into shared F1-s11; F2-s02 moved to F1-s15 (delta tv b, split per Table I)", reason: "duplicate of the shared die fabrication/plasma steps; only the bonding differs for TV b"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00062-F2-s03", change: "deleted (die shear test)", reason: "post-build test; already in metrics b-m1..b-m3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00062-F3-s11; ectc51846.2026.00062-F3-s13", change: "deleted (daisy-chain continuity, pre/post-anneal 4-point resistance)", reason: "measurements, not steps; already in metrics c-m5..c-m10"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00062-F1-s12", change: "tv_id set to a (delta); split into first-tier TCB to Si-IF (s12) and new sequential stacking step s14; equipment K&S APTURA", reason: "assembly differs between TV a and DoE coupon b; Sec. III.B gives primary attachment then sequential stacking"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00062-F1-s13", change: "added post-dicing cleaning step (seq 11)", reason: "p.2 Sec. II.A: blade dicing required targeted post-dicing cleaning"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00062-F1-s01..s15; ectc51846.2026.00062-F3-s01..s12", change: "target object names (die wafer, front, backside, ...) cleared, sides moved into step text; step_basis stated_in_flow", reason: "target holds stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00062-F1-s03; ectc51846.2026.00062-F3-s04; ectc51846.2026.00062-F3-s06", change: "category other -> bumping / rdl_layer / rdl_layer; targets 10 um pitch, 5x5 um pillars at 20 um pitch, 16/4 um L/S", reason: "damascene pillar and pad layers; geometry from p.2 Sec. II.A, p.3 Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00062-F1-s09; ectc51846.2026.00062-F3-s07", change: "thickness_um (0.15 / 1) cleared; value moved to target as pillar protrusion", reason: "value is the pillar protrusion, not a layer thickness"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00062-F3-s09; ectc51846.2026.00062-F3-s10", change: "pressure_mpa 50 / 100 typed; equipment K&S APAMA C2W", reason: "Table II bonding force given in MPa"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00062-F1-s04; ectc51846.2026.00062-F3-s03", change: "derived entries added for 250 nm -> 0.25 um", reason: "unit conversion"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00062", change: "process_flow_level full kept", reason: "Fig. 1 and Fig. 4 ordered flows with thicknesses, bonding force/temperature/time and anneal"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00062-F1-s15", change: "temp_c_max 400 (highest bond head temperature of the split); temp_c left empty; chuck 180 C kept in conditions", reason: "Table I DoE bond head 300/350/400 C at chuck 180 C (p.4); temp_c on bonding rows is the bond head temperature (cf. F1-s12)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00062-F1-s03", change: "target + pillar diameter ~6.151 um (measured); locator + p.2 Fig. 2(a)", reason: "p.2 Sec. II.A: pillars approximately 6.151 um in diameter, slightly larger than expected, pitch ~10 um"}

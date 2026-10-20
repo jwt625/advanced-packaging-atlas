@@ -26,5 +26,11 @@ not_reported:
   - optical adhesive product; bonding/curing conditions; solder/bump details
   - T&H conditions; absolute peel and pull strengths; sample counts
   - FEM material properties and stress values (unlabelled color scale)
+  - "process_steps: iedm50572.2025.11353491-e (peel coupon; only 'PWG bonded with optical adhesive on Si substrate' shown, no sequence or conditions)"
+  - "process_steps: iedm50572.2025.11353491-f (pull-test sample construction not described)"
 source_quality:
   - "Garbled PDF text layer; text.md is tesseract OCR. Figure labels in OCR are scrambled; read from 220 dpi renders."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "iedm50572.2025.11353491-F2", change: "tv_ids b -> b;c; step_basis stated_in_flow", reason: "p.2 Sec. V: 3-port cut-out package demonstrates the optics-last assembly"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm50572.2025.11353491-F1", change: "step_basis stated_in_flow", reason: "p.1 Sec. II"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm50572.2025.11353491-F2-s01", change: "note: joining method not named; 260 C peak not typed", reason: "p.2 Sec. IV statement is generic FEM condition"}

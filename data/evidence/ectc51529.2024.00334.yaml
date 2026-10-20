@@ -27,14 +27,14 @@ derived:
   - {table: interconnects, row_id: ectc51529.2024.00334-a-i2, field: alignment_um, value: 0.08, formula: "80 nm / 1000", inputs: "p.3 Sec. III.D"}
   - {table: interconnects, row_id: ectc51529.2024.00334-a-i1, field: pitch_um, value: 0.5, formula: "500 nm / 1000", inputs: "p.2 Sec. II.A"}
   - {table: interconnects, row_id: ectc51529.2024.00334-a-i2, field: pitch_um, value: 0.3, formula: "300 nm / 1000", inputs: "p.2 Sec. II.A"}
-  - {table: process_steps, row_id: ectc51529.2024.00334-a-s18, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.5 Fig. 11 caption"}
+  - {table: process_steps, row_id: ectc51529.2024.00334-F1-s18, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.5 Fig. 11 caption"}
 conflicts:
   - {table: metrics, row_id: ectc51529.2024.00334-a-m19, field: value, values: [15.6, 14.8], locators: ["p.4 Fig. 10", "p.4 Sec. III.G"], chosen: 15.6, why: "result plot label over text; text may be a different statistic"}
   - {table: metrics, row_id: ectc51529.2024.00334-a-m20, field: value, values: [8.7, 7.9], locators: ["p.4 Fig. 10", "p.4 Sec. III.G"], chosen: 8.7, why: "result plot label over text"}
   - {table: metrics, row_id: ectc51529.2024.00334-a-m21, field: value, values: [6.2, 6.1], locators: ["p.4 Fig. 10", "p.4 Sec. III.G"], chosen: 6.2, why: "result plot label over text"}
   - {table: metrics, row_id: ectc51529.2024.00334-a-m16, field: variant, values: ["3k chains (Fig. 9 table)", "5k chains (Fig. 9 caption)", "up to 3,000 vertical links (Sec. II.A)"], locators: ["p.4 Fig. 9", "p.4 Fig. 9 caption", "p.2 Sec. II.A"], chosen: "3k", why: "table and design text agree"}
   - {table: metrics, row_id: ectc51529.2024.00334-a-m18, field: value, values: ["49% (Fig. 9, Sec. III.F)", "up to 50% (Sec. IV)"], locators: ["p.4 Fig. 9", "p.5 Sec. IV"], chosen: 49, why: "result table"}
-  - {table: process_steps, row_id: ectc51529.2024.00334-a-s07, field: equipment, values: ["EVG40 NT2", "EVG NT30"], locators: ["p.3 Sec. III.D", "p.3 Fig. 4 caption"], chosen: "both kept in cell", why: "cannot resolve from the paper"}
+  - {table: process_steps, row_id: ectc51529.2024.00334-F1-s07, field: equipment, values: ["EVG40 NT2", "EVG NT30"], locators: ["p.3 Sec. III.D", "p.3 Fig. 4 caption"], chosen: "both kept in cell", why: "cannot resolve from the paper"}
 excluded:
   - "3 um pitch CIS hybrid bonding (ref [1]); <100 nm pitch roadmap for stacked FETs (IMEC roadmap, ref [2], Fig. 1)"
   - "first structural demonstration and 0.1 um pitch extendibility (ref [3]; no data shown in this paper)"
@@ -47,3 +47,14 @@ not_reported:
   - "bond strength values"
 source_quality:
   - "Candidate p02_fig2 points at the page header (bbox y 0-0.07); p04_fig9 cuts the yield row; p04_fig10a includes a text sliver. Manual crops used."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00334-F1-s01", change: "category deposition_cvd -> deposition_other; step_basis inferred_order", reason: "paper does not state the deposition method; module order only listed in the abstract"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00334-F1-s02;ectc51529.2024.00334-F1-s03;ectc51529.2024.00334-F1-s04", change: "step_basis inferred_order", reason: "abstract lists bond dielectric, metallization, CMP, surface treatment; no stated sequence"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00334-F1-s08", change: "deleted (C-SAM old vs new CMP)", reason: "comparative evaluation not placed in the build flow; already metric a-m8 (p.3 Fig. 6)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00334-F1-s09", change: "target 'top Si wafer' cleared (object name, already in step)", reason: "rule 7: target = stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00334-F1-s10", change: "thickness_in_um 775", reason: "p.3 Sec. III.D: full 775 um top Si wafer before removal"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00334-F1-s18", change: "conditions 'N2' cleared (typed atmosphere n2); note select coupons", reason: "p.4-5 Sec. III.H"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00334-F1-s16", change: "deleted (DC IV via-chain test); Keysight B1500 and 0.1 V step added to condition of metrics a-m13..a-m18", reason: "post-build electrical test is a metric; yield metrics with pass criterion already exist (p.2 Sec. II.C)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00334-F1-s01..s18", change: "step_basis set on all rows", reason: "rule 7"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00334-F1-s09", change: "category other -> grinding_thinning", reason: "v006 manifest: bevel edge trim before bulk grind (p.2 Sec. II.B); tool not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00334-F1-s02", change: "target 'via chain pitch 0.5 um and 0.3 um macros (Cu density 13-50%)' (design)", reason: "v006 manifest: p.1-2 Sec. II.A macros at 500 nm and 300 nm pitch, Cu density 13-50%"}

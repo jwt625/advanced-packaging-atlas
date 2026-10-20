@@ -23,10 +23,10 @@ entries:
 derived:
   - {table: stack_layers, row_id: tcpmt.2025.3599484-a-L02, field: thickness_um, value: 0.15, formula: "1500 A x 1e-4", inputs: "p.7 Sec. IV"}
   - {table: stack_layers, row_id: tcpmt.2025.3599484-a-L03, field: thickness_um, value: 0.05, formula: "500 A x 1e-4", inputs: "p.7 Sec. IV"}
-  - {table: process_steps, row_id: tcpmt.2025.3599484-a-s07, field: thickness_um, value: 0.05, formula: "500 A x 1e-4", inputs: "p.7 Sec. IV"}
-  - {table: process_steps, row_id: tcpmt.2025.3599484-a-s08, field: thickness_um, value: 0.15, formula: "1500 A x 1e-4", inputs: "p.7 Sec. IV"}
-  - {table: process_steps, row_id: tcpmt.2025.3599484-a-s02, field: time_s, value: 180, formula: "3 min x 60", inputs: "p.7 Sec. IV"}
-  - {table: process_steps, row_id: tcpmt.2025.3599484-a-s05, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.7 Sec. IV"}
+  - {table: process_steps, row_id: tcpmt.2025.3599484-F1-s07, field: thickness_um, value: 0.05, formula: "500 A x 1e-4", inputs: "p.7 Sec. IV"}
+  - {table: process_steps, row_id: tcpmt.2025.3599484-F1-s08, field: thickness_um, value: 0.15, formula: "1500 A x 1e-4", inputs: "p.7 Sec. IV"}
+  - {table: process_steps, row_id: tcpmt.2025.3599484-F1-s02, field: time_s, value: 180, formula: "3 min x 60", inputs: "p.7 Sec. IV"}
+  - {table: process_steps, row_id: tcpmt.2025.3599484-F1-s05, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.7 Sec. IV"}
 conflicts:
   - {table: interconnects, row_id: tcpmt.2025.3599484-a-i1, field: diameter_um, values: [3, 1.5], locators: ["p.3 Sec. II.B.1", "p.7 Fig. 9(b); p.7 Sec. IV.A"], chosen: 1.5, why: "measured cross-section; 3 um is the value used for the Table I calculation"}
   - {table: stack_layers, row_id: tcpmt.2025.3599484-a-L04, field: thickness_um, values: ["3 (target, achieved)", "3.3-3.5 dielectric opening depth (Fig. 8)", "3.9 (EM ETR sample)"], locators: ["p.7 Sec. IV", "p.7 Sec. III.D", "p.8 Sec. V"], chosen: 3, why: "stated final layer thickness; others entered as metrics"}
@@ -42,3 +42,33 @@ not_reported:
   - measured S-parameters (only HFSS simulation)
 source_quality:
   - "Candidates p03_fig1 and p04_fig4 start at the page top and include the running header; manual crops used."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F1, change: "tv_ids + TV c; locator + p.4 Sec. II.C, Fig. 4(b); notes", reason: "Ti-capped trace is an ETR built with this flow, then capped (p.9 Sec. V)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F3, change: "notes: follows F1", reason: "sub-flow after the ETR flow"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F1, change: "step_basis set to stated_in_flow on steps without one", reason: "order is stated in the paper's flow text/figure"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F1-s02, change: "equipment: '' -> 'hotplate'", reason: "named tool"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F1-s03, change: "equipment: '' -> 'I-line (365 nm) projection stepper, NA 0.18, 1:1'; target: '' -> 'trace and dielectric 3 um each; trench W/S 2/1 to 20/20 um (Fig. 8); vias 1.5-3.0 um'; locator: 'p.7 Sec. IV; p.6 Sec. III.B' -> 'p.7 Sec. IV; p.6 Sec. III.B; p.6 Fig. 8; p.7 Fig. 9(a)'", reason: "stated targets and named tool on the step"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F1-s05, change: "atmosphere: '' -> 'n2'; equipment: '' -> 'furnace'; conditions: '' -> 'nitrogen-purged furnace, 2 h at 250 C'", reason: "typed atmosphere and named tool"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F1-s06, change: "category: 'surface_treatment' -> 'descum'", reason: "O2 plasma via clean is a descum (category added in v2.4)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F1-s07, change: "equipment: '' -> 'sputter'; conditions: '' -> '500 A'", reason: "original unit kept; tool type"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F1-s08, change: "equipment: '' -> 'sputter'; conditions: '' -> '1500 A'", reason: "original unit kept; tool type"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F1-s10, change: "conditions: '' -> 'Ti seed as CMP stop layer'", reason: "stated stop layer"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F1-s11, change: "thickness_um: '' -> '3'", reason: "result thickness stated ('3-um-thick Cu and dielectric layers were achieved')"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F1-s02, change: "category 'other' kept", reason: "soft bake has no step_category value"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F2, change: "step_basis set to stated_in_flow on steps without one", reason: "order is stated in the paper's flow text/figure"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F2-s06, change: "step_basis: '' -> 'generic_description'", reason: "seed step comes from the generic SAP description (Sec. II.B.2), not the Sec. IV SAP sequence"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F3-s01, change: "step_basis: '' -> 'generic_description'", reason: "single statement (fragment)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F3-s01, change: "category 'other' kept", reason: "deposition/patterning method of the Ti cap not stated"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F4, change: "flow added", reason: "Fig. 4(a) gives the conventional dual-mask ETR flow as a distinct ordered comparison flow"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F4-s01, change: "step added", reason: "Fig. 4(a) comparison flow step"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F4-s02, change: "step added", reason: "Fig. 4(a) comparison flow step"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F4-s03, change: "step added", reason: "Fig. 4(a) comparison flow step"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F4-s04, change: "step added", reason: "Fig. 4(a) comparison flow step"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3599484-F4-s05, change: "step added", reason: "Fig. 4(a) comparison flow step"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3599484-F1-s02", change: "category: 'other' -> 'lithography'; notes: '' -> 'Pre-exposure soft bake of the photosensitive dielectric (lithography module).'", reason: "category_other reviewed: pre-exposure soft bake of the photosensitive dielectric is part of the photolithography sequence (p.7 Sec. IV)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3599484-F3-s01", change: "notes: 'Deposition/patterning method not described.' -> 'Deposition/patterning method not described; category kept other (method unknown).'", reason: "category_other reviewed: Ti cap deposition/patterning method not described (p.9 Sec. V); no category can be assigned without inventing the method; kept other"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3599484-F4-s05", change: "category: 'other' -> 'cmp'; locator: 'p.4 Fig. 4(a) step (5)' -> 'p.4 Fig. 4(a) step (5); p.1 Sec. I'; notes: 'Removal method not named in Fig. 4(a).' -> 'Fig. 4(a) names only Cu overburden removal; Sec. I states conventional damascene ETR is planarized through CMP.'", reason: "category_other reviewed: conventional (damascene) ETR top surface is planarized by CMP (p.1 Sec. I)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3599484-F1-s03", change: "target: 'trace and dielectric 3 um each; trench W/S 2/1 to 20/20 um (Fig. 8); vias 1.5-3.0 um' -> 'trace and dielectric 3 um each; trench W/S 2/1 to 20/20 um (Fig. 8); vias 1.5-3.0 um; stacked vias 5 um and 2 um base diameter (Fig. 9(c)(d)), 20 um (Fig. 9(e)); routing vias 10 um diameter at 50 um pitch, L/S 2/2 and 2/1 um (Fig. 10)'; locator: 'p.7 Sec. IV; p.6 Sec. III.B; p.6 Fig. 8; p.7 Fig. 9(a)' -> 'p.7 Sec. IV; p.6 Sec. III.B; p.6 Fig. 8; p.7 Fig. 9(a); p.7 Fig. 9(c)(d)(e); p.8 Fig. 10'", reason: "stated via targets of TV a: four-stacked pad-less vias 5 and 2 um base diameter (Fig. 9(c)(d)), 20 um stacked vias (Fig. 9(e)), routing-test vias 10 um at 50 um pitch (Fig. 10)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3599484-F2-s02", change: "target: '' -> 'vias 10 um diameter at 50 um pitch'; locator: 'p.7 Sec. IV' -> 'p.7 Sec. IV; p.7 Sec. IV.B; p.8 Fig. 10(a)'", reason: "stated SAP via target of TV b: 10 um vias at 50 um pitch (p.7 Sec. IV.B; p.8 Fig. 10(a))"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3599484-F2-s07", change: "target: '' -> 'L/S 2/2 um; via capture 15 um'; locator: 'p.7 Sec. IV' -> 'p.7 Sec. IV; p.7 Sec. IV.B; p.8 Fig. 10(a)'", reason: "stated SAP trace target of TV b: 2/2 um L/S, 15 um via capture size (p.7 Sec. IV.B; p.8 Fig. 10(a))"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3599484-F3", change: "build_seq confirmed: TV c F1 (build_seq 1) then F3 (build_seq 3); no change", reason: "Ti cap over the ETR top surface (p.9 Sec. V) can only follow the ETR layer build of F1"}

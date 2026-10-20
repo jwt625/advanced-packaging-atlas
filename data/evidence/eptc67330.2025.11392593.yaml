@@ -36,3 +36,18 @@ not_reported:
   - wafer size of FOWLP route
 source_quality:
   - "Clean text layer. Candidates matched all nine figures."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F1-s01", change: "category other -> carrier_prep", reason: "carrier preparation is step 1 of the flow"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F1-s05", change: "geometry moved conditions -> target", reason: "target holds stated geometry"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F1-s06", change: "equipment flip-chip bonder", reason: "Sec. IV.A: flip-chip bonder used for DAF bridge embedding"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F1-s10", change: "category other -> rdl_layer", reason: "two metal + two passivation layers"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F1-s11", change: "category other -> bumping; target pitch/diameter/height", reason: "Sec. II.A/III.A micro-bump dimensions"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F1-s18", change: "category other -> bumping", reason: "C4 bump formation"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F2-s01", change: "category other -> rdl_layer", reason: "RDL formation on 600 mm panel"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F2-s08", change: "category other -> bumping; performed yes", reason: "C4 bump formation; consistent with other F2 rows"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F1-s07", change: "deleted (inspection)", reason: "SAT void check (metric a-m1); not placed in the Fig. 2 / Sec. II.B flow; result already a metric"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F1-s15", change: "deleted (inspection)", reason: "SAT of MUF fill (metric a-m2); not placed in the Fig. 2 / Sec. II.B flow; result already a metric"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F1-s13", change: "deleted (cross-section); moved to metric a-m3", reason: "failure-analysis cut after bonding is a measurement"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-a-m3", change: "added from deleted step F1-s13", reason: "keep the cross-section check as a metric"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F2-s02", change: "notes: '' -> 'Cu post formation method not stated for the panel route (F1-s05 electroplates Cu posts).'", reason: "manifest category_other: p.4 Sec. V.A states only 'forming the RDLs and Cu posts'; method not stated for the panel route, category 'other' kept"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F1-s10", change: "target: '' -> 'L/S 7/7 um'; overrides: '' -> 'target:design_target'; locator: 'p.2 Sec. II.B; p.3 Fig. 2(e)' -> 'p.2 Sec. II.B; p.3 Fig. 2(e); p.2 Sec. II.A; p.5 Sec. VII'", reason: "manifest target_missing L04: 7/7 um L/S stated for 'a single RDL' (p.2 Sec. II.A; conclusion); assigned to the backside (top-side) RDL as in stack_layers L04, assignment conflict already logged"}

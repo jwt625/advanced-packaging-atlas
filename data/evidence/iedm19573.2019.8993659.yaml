@@ -33,3 +33,9 @@ not_reported:
   - TCB temperature, force, time; alignment accuracy numbers
   - electrical measurements (resistance, yield numbers), reliability tests
   - electrical_interfaces (no protocol, data rate or energy), optical_interfaces
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "iedm19573.2019.8993659-F1-s03", change: "deleted (side view, cross-section and top-view X-ray); X-ray result already in metrics a-m2; cross-section result moved to a-m9", reason: "post-assembly measurement, not a step"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm19573.2019.8993659-a-m9", change: "added: well formed microbumps and C4 bumps (side view, cross-section)", reason: "moved from deleted step F1-s03; p.4 Fig. 7(a)-(b)"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm19573.2019.8993659-F1", change: "level fragments -> ordered; object-name targets cleared; Z/XY placement strategy into s01 conditions; step_basis stated_in_flow", reason: "Sec. IV: bottom die placed by TCB, afterwards top dies attached by TCB"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm19573.2019.8993659-F2", change: "flow_name; step_basis stated_in_flow; notes", reason: "Fig. 8 caption order: pillars, place bottom dies, deposit dielectric"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm19573.2019.8993659", change: "process_flow_level ordered confirmed", reason: "two short ordered assembly sequences, no process conditions"}

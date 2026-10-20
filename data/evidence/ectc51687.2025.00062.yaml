@@ -24,6 +24,7 @@ excluded:
   - "CoWoS organic interposer evolution of ref [5]; FOWLP warpage of refs [6]-[8]"
   - "Table I qualitative comparison of copper, photonic SOTA and OMIB (no numbers)"
 not_reported:
+  - "process_steps: ectc51687.2025.00062-b (optical test sub-assembly: only the setup is shown, Fig. 9; glue A/B legend in Fig. 10; build steps not described)"
   - electrical_interfaces (only a 1.8 Tbps/mm2 architecture claim, entered as metric)
   - die sizes, thicknesses, interposer size in mm, package size, substrate layers
   - microbump, TSV, Cu pillar and C4 pitch/diameter/height/metallurgy; bonding conditions
@@ -32,3 +33,12 @@ not_reported:
   - warpage values (Fig. 7 has no numeric axis); yield and reliability data (future work)
 source_quality:
   - "Several candidate bboxes span a full column/quadrant (p03_fig5, p04_fig6) or include body text (p02_fig3); no candidate for Fig. 9."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00062-F1-s12", change: "split 'form bottom PSV and RDL layers' into s12 PSV3, s28 RDL2, s29 PSV4; s13..s27 seq +2", reason: "p.4 Fig. 7(a) step #5 'PSV3 + RDL2 + PSV4'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00062-F1-s01", change: "category other -> rdl_layer; material 'PSV; Cu' -> 'PSV'", reason: "RDL metal not named in the paper"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00062-F1-s02", change: "category other -> rdl_layer", reason: "opening in PSV/RDL; method not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00062-F1-s03", change: "category other -> deposition_other", reason: "PI PSV dam"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00062-F1-s04", change: "category other -> bumping (also s05, s13, s16)", reason: "uPad, tall Cu pillar, C4, microbump formation"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00062-F1", change: "step_basis stated_in_flow on all rows except s23 (inferred_order)", reason: "Sec. II.B text and Fig. 5 order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00062-b", change: "listed in not_reported as process_steps", reason: "optical test sub-assembly build not described"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00062", change: "process_flow_level ordered confirmed", reason: "full order given, no conditions"}

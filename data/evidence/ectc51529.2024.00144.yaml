@@ -23,3 +23,5 @@ excluded:
   - "OE on interposer better EE than substrate, attributed to ref [11]"
   - "10^-18 BER requirement for disaggregated memory from ref [21] (kept only as a Table II condition)"
 not_reported: [optical_interfaces, process_steps, "absolute SoIC and microbump pitches", "pad sizes", "die sizes", "interposer line/space and thickness", "absolute energy per bit", "absolute laser power", "coupler type and coupling loss", "number of wavelengths", "measured hardware data"]
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00144", change: "process_flow_level none confirmed; no flows", reason: "simulation-only paper (HSPICE/ADS models); no fabrication or assembly step stated"}

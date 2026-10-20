@@ -35,3 +35,22 @@ not_reported:
   - uC4 bump diameter, height, count; Cu pillar pitch, diameter, height for the build; chip thickness; chip gap
   - TCB temperature, force, time; reflow profile; underfill and NCP materials; laminate layer count/core
   - thermal cycling conditions and post-cycling results; warpage; absolute FEM stress/strain values
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00180-a-m6/-b-m6, -a-m8/-b-m8, -a-m9/-b-m9, -a-m10/-b-m10, change: "none: kept all rows", reason: "genuine per-TV values: p.4 Table I has separate T&R and NCP columns (both Excellent/Excellent/Optimal/Yes)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00180-d-m3; ectc51909.2023.00180-e-m3, change: "none: kept both rows", reason: "genuine per-case values: p.6 Fig. 19 plots separate bars for case 2 and case 3 (both about 1.0)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00180-F1-s01", change: "target 'bridge chip' cleared; step_basis inferred_order", reason: "target holds stated geometry only; thinning not in Fig. 9 order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00180-F1-s04", change: "atmosphere=other (formic acid, controlled atmosphere, no flux kept in conditions)", reason: "typed condition"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00180-F1-s06", change: "atmosphere=other (formic acid, controlled atmosphere, no flux kept in conditions)", reason: "typed condition"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00180-F1-s08", change: "target 'organic laminate' moved into step text", reason: "target holds stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00180-F1-s11", change: "deleted (T0 daisy-chain test)", reason: "post-build test, not a step; already in metrics ectc51909.2023.00180-a-m13..m18"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00180-F2-s01", change: "deleted; NCP material moved to F2-s02 (seq 1)", reason: "paper states an NCP TCB assembly process, not a separate NCP dispense step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00180-F2-s03", change: "seq 3 -> 2; F2-s04 seq 4 -> 3", reason: "re-sequenced after merging F2-s01"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00180-F1-s03", change: "target: '' -> 'uC4 pitch 30-75 um (stated range)'", reason: "manifest target_missing a-i1/b-i1: bridge uC4 pitch 30-75 um stated (p.1 Abstract; p.2 Sec. II); joints formed by this bonding step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00180-F1-s05", change: "target: '' -> 'uC4 pitch 30-75 um (stated range)'", reason: "manifest target_missing a-i1/b-i1: bridge uC4 pitch 30-75 um stated (p.1 Abstract; p.2 Sec. II); joints formed by this bonding step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00180-F2-s02", change: "target: '' -> 'uC4 pitch 30-75 um (stated range)'", reason: "manifest target_missing a-i1/b-i1: bridge uC4 pitch 30-75 um stated (p.1 Abstract; p.2 Sec. II); joints formed by this bonding step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00180-F2-s02", change: "seq: '1' -> '2'", reason: "re-sequenced after adding F2-s05 (bridge thinning) as seq 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00180-F2-s03", change: "seq: '2' -> '3'", reason: "re-sequenced after adding F2-s05 (bridge thinning) as seq 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00180-F2-s04", change: "seq: '3' -> '4'", reason: "re-sequenced after adding F2-s05 (bridge thinning) as seq 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00180-F2-s05", change: "added: Si bridge thinning, thickness_um 60, seq 1", reason: "manifest target_missing_preexisting b-L06: surface-DBHi uses the 60 um thinned bridge (p.1 Abstract; p.2 Sec. II); TV b's flow had no thinning step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00180-F1", change: "laminate LW/LS 9/12 um (a-L09, b-L09) not placed on a step (no change)", reason: "standard purchased laminate (p.2 Sec. II); no laminate fabrication step is in the flows"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00180-F1-s03", change: "locator: appended '; p.2 Sec. II' (also F1-s05, F2-s02)", reason: "source of the 30-75 um uC4 pitch target"}

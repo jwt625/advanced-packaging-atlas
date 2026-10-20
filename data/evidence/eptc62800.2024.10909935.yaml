@@ -31,3 +31,12 @@ not_reported:
 source_quality:
   - "Text cites 'Fig. 15. b)' for the DICD mean; it is Fig. 10(b). Fig. 9 caption repeats labels c), d) for panels g), h)."
   - "Fig. 9 split: panels a-f bottom-left of p.4, g-h top-right of p.4; Fig. 10 a-b on p.4, c on p.5."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: eptc62800.2024.10909935, change: process_flow_level full -> ordered (also flow F1 level), reason: 'no bake, develop or etch conditions, no dose value; ordered litho/etch steps with few conditions'}
+  - {date: 2026-10-20, source: repass, row_id: eptc62800.2024.10909935-F1-s01, change: hard mask on/off moved to split; step_basis inferred_order, reason: incoming-substrate split; deposition order not stated}
+  - {date: 2026-10-20, source: repass, row_id: eptc62800.2024.10909935-F1-s02, change: 'merged with s03: one resist coat step, resist/thickness in split', reason: 'CAR vs Novolac are alternative variants of the same step, not sequential steps'}
+  - {date: 2026-10-20, source: repass, row_id: eptc62800.2024.10909935-F1-s03, change: deleted (merged into s02), reason: 'alternative resist, not an additional step'}
+  - {date: 2026-10-20, source: repass, row_id: eptc62800.2024.10909935-F1-s05, change: target 1 um CD; pitch N / Nx5 split; FEM and 5-wafer batch conditions, reason: p.1 Sec. Experimental Setup; p.4 Sec. F}
+  - {date: 2026-10-20, source: repass, row_id: eptc62800.2024.10909935-F1-s07, change: batch develop condition, reason: p.4 Sec. F}
+  - {date: 2026-10-20, source: repass, row_id: eptc62800.2024.10909935-F1-s09, change: target 'TSV holes' -> '1 um CD'; result etch depth 14 / 20.3 um, reason: target holds stated geometry; depths p.5 Fig. 11 (also interconnects i1/i2)}
+  - {date: 2026-10-20, source: repass, row_id: eptc62800.2024.10909935-F1-s11, change: 'deleted: post-etch CDSEM/X-SEM measurement', reason: 'post-build measurement after strip; FICD values already in metrics m3-m4, m7-m8, m11-m12, m16-m18, m21-m22, m25-m26, m30-m32; depth in interconnects'}

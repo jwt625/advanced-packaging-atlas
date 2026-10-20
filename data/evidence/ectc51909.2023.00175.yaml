@@ -31,3 +31,12 @@ not_reported:
   - tall Cu pillar diameter; C4 pitch/size/alloy; substrate layer count; lid material; BGA
   - absolute warpage values with sign convention (only a.u./normalized and abstract <100 um)
   - reliability n_samples, pass criteria; electrical test data; electrical_interfaces; optical_interfaces
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00175-a-m1, change: "scope set to 'applies to TVs a, b (abstract names no module)'; notes updated", reason: "abstract <100 um claim names no module; one row on first TV"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00175-b-m1, change: "row deleted (copy of a-m1)", reason: "audit_x1 item 4 / sibling_dup: copied abstract claim on mTV2"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00175-F1, change: "step_basis set to stated_in_flow on steps without one", reason: "order is stated in the paper's flow text/figure"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00175-F1-s04, change: "category: 'other' -> 'rdl_layer'", reason: "RDL layer step (category added in v2.4)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00175-F1-s05, change: "target: '' -> 'ubump pitch: ASIC 50 um, HBM 55 um'; locator: 'p.2 Sec. II.B; p.2 Fig. 2' -> 'p.2 Sec. II.B; p.2 Fig. 2; p.2 Table 1'", reason: "stated ubump pitch"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00175-F1-s07, change: "tv_id: 'ectc51909.2023.00175-a' -> ''; material: 'CUF' -> ''; split: '' -> 'mTV1: CUF (capillary underfill, Fig. 6(c) label) / mTV2: type not stated'; locator: 'p.2 Sec. II.B; p.2 Fig. 2' -> 'p.2 Sec. II.B; p.2 Fig. 2; p.4 Fig. 6(c)'", reason: "converter split one step into two TV deltas differing only by the CUF label; one shared step with split"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00175-F1-s08, change: "row deleted (merged into shared F1-s07)", reason: "duplicate underfill delta for mTV2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00175-F1-s01", change: "result: '' -> 'mTV1 x-section: carrier tall Cu pillars 135 um high at 260 um pitch; connect die height ~70 um, Cu stud ~5 um'", reason: "manifest target_missing items a-i4 (260 um pitch) and a-L06 (70 um): p.4 Sec. IV.A, Fig. 6(a),(b) measured on mTV1; pillars pre-exist on the carrier and the die is placed as received, so these are recorded as observed results, not step targets"}

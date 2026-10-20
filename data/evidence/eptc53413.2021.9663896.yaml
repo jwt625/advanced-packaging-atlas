@@ -35,3 +35,17 @@ not_reported:
   - RDL line/space and thickness for Gen 1 production, layer count, UBM and solder ball dimensions
   - LDI tool model for Gen 1 and Gen 2, molding conditions, die attach tool, cure conditions
   - yield values (electrical), warpage, reliability, thermal; electrical_interfaces; optical_interfaces
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "eptc53413.2021.9663896", change: "process_flow_level full -> ordered (has_process_flow stays yes)", reason: "no temperature, time, pressure or other process condition stated anywhere in the paper (rule 7: ordered = few or no conditions)"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc53413.2021.9663896-F2", change: "level full -> ordered", reason: "no process conditions stated (p.1-2 Sec. M-Series Process Flow, Fig. 2)"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc53413.2021.9663896-F1", change: "step_basis stated_in_flow on s01-s03", reason: "p.3 Sec. Die Shift: chip-attach, molding, post-mold scanner measurement in that order"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc53413.2021.9663896-F2", change: "step_basis stated_in_flow on all steps", reason: "order from Fig. 2 and Fig. 3 and p.1-2 text"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc53413.2021.9663896-F1-s01", change: "compensation variants moved from conditions to split", reason: "p.4 Sec. Die Placement Compensation Method; p.5 Table 1"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc53413.2021.9663896-F1-s04", change: "step_basis generic_description; target '300 mm square segments'; note that sawing of the die-shift panels is not stated", reason: "p.3 Sec. 600mm Format describes the generic panel layout"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc53413.2021.9663896-F2-s03", change: "target 'Cu stud 30 um diameter (Gen 1)'", reason: "p.6 Sec. Adaptive Patterning to the Rescue; Fig. 20 (custom PMIC, TV b)"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc53413.2021.9663896-F2-s14", change: "target '15 um dielectric via on 30 um Cu stud; 7.5 um enclosure'; conditions on enclosure rule", reason: "p.6 Sec. Adaptive Patterning to the Rescue; Fig. 20"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc53413.2021.9663896-F3", change: "added fragments flow for TV d (Gen 2 LDI demo)", reason: "p.7 Fig. 22 and text: 2 um L/S in positive-tone liquid photoresist, 5 um vias in positive-tone polyimide; TV d was in no flow"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc53413.2021.9663896-F3-s01", change: "added: LDI patterning of positive-tone liquid photoresist, target 2 um L/S", reason: "p.7 Fig. 22"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc53413.2021.9663896-F3-s02", change: "added: LDI patterning of positive-tone polyimide, target 5 um via", reason: "p.7 Fig. 22"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc53413.2021.9663896-F2-s01", change: "target 'device wafer' cleared (object name, not geometry); moved into step text", reason: "re-pass convention: target holds stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc53413.2021.9663896-F2-s13", change: "equipment '' -> 'proprietary real-time design tool'; notes '' -> 'Design/data step (Fig. 3), no physical layer; category kept other (rdl_layer would misclassify).'", reason: "manifest category_other: computational unit-specific design step, keep other; tool named p.2 Sec. M-Series Package and Adaptive Patterning"}

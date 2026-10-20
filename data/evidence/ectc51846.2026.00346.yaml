@@ -27,7 +27,7 @@ derived:
   - {table: electrical_interfaces, row_id: ectc51846.2026.00346-c-e3, field: insertion_loss_db, value: 0.110, formula: "loss = -(plotted -0.110 dB)", inputs: "p.6 Fig. 15"}
 conflicts:
   - {table: metrics, row_id: ectc51846.2026.00346-c-m4, field: value_text, values: ["Fig. 15: Case3 (modified RDL) has lower IL than Case2", "Sec. III.D TDR paragraph: 'Case3 becomes more lossy due to thin RDL trace'"], locators: ["p.6 Fig. 15", "p.6 Sec. III.D"], chosen: "Fig. 15 IL values; TDR row qualitative only", why: "plot markers and the ~40% improvement sentence agree; lossy remark likely vs Case1 TSV"}
-  - {table: process_steps, row_id: ectc51846.2026.00346-a-s06, field: conditions, values: ["PECVD", "CVD"], locators: ["p.3 Fig. 5(a)", "p.4 Sec. III.A"], chosen: "both recorded", why: "consistent (PECVD is a CVD)"}
+  - {table: process_steps, row_id: ectc51846.2026.00346-F1-s06, field: conditions, values: ["PECVD", "CVD"], locators: ["p.3 Fig. 5(a)", "p.4 Sec. III.A"], chosen: "both recorded", why: "consistent (PECVD is a CVD)"}
 excluded:
   - "1 Tbps/mm2 bandwidth density: OMM solution-level claim (p.2), not a property of the passive daisy-chain TV"
   - "COUPE comparison attributed to ref [3]; photonic design elements of ref [14]"
@@ -43,3 +43,8 @@ not_reported:
   - substrate_to_board interconnect
 source_quality:
   - "Clean text layer. Fig. 7 caption labels panels (a) and (ii). Fig. 10 box plots have no numeric axes. Fig. 6 photo carries a product marking not mentioned in text (not used)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00346-F1, change: "step_basis set to stated_in_flow on steps without one", reason: "order is stated in the paper's flow text/figure"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00346-F1-s11, change: "target: '' -> 'min C4 pitch 160 um'; locator: 'p.3 Sec. II.B; p.3 Fig. 5(a)' -> 'p.3 Sec. II.B; p.3 Fig. 5(a); p.2 Fig. 3'", reason: "stated C4 pitch"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00346-F1-s12, change: "target: '' -> 'min microbump pitch 40 um'; locator: 'p.3 Sec. II.B; p.3 Fig. 5(b)' -> 'p.3 Sec. II.B; p.3 Fig. 5(b); p.2 Fig. 3'", reason: "stated microbump pitch"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00346-F1-s01", change: "target 'PIC wafer' -> ''; step 'TDV formation: ...' -> 'TDV formation in PIC wafer: etch and plate vias through BOX during PIC fab'", reason: "v017 target_no_number: object name moved to step; no TDV dimension stated for TV a (p.3 Sec. II.B)"}

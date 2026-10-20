@@ -29,8 +29,9 @@ derived:
   - {table: test_vehicles, row_id: ectc51529.2024.00155-d, field: interposer_area_mm2, value: 1932, formula: "42 x 46", inputs: "p.2 Table II"}
   - {table: test_vehicles, row_id: ectc51529.2024.00155-f, field: carrier_size_mm, value: 300, formula: "12-inch wafer = 300 mm", inputs: "p.2 Sec. II.B"}
   - {table: interconnects, row_id: ectc51529.2024.00155-a-i3, field: diameter_um, value: 500, formula: "0.5 mm x 1000", inputs: "p.3 Sec. II.E"}
-  - {table: process_steps, row_id: ectc51529.2024.00155-a-s22, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.3 Sec. II.E"}
-  - {table: process_steps, row_id: ectc51529.2024.00155-a-s23, field: time_s, value: 1800, formula: "0.5 h x 3600", inputs: "p.3 Sec. II.E"}
+  - {table: process_steps, row_id: ectc51529.2024.00155-F1-s22, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.3 Sec. II.E"}
+  - {table: process_steps, row_id: ectc51529.2024.00155-F1-s23, field: time_s, value: 1800, formula: "0.5 h x 3600", inputs: "p.3 Sec. II.E"}
+  - {table: process_steps, row_id: ectc51529.2024.00155-F1-s04, field: time_s, value: 3600, formula: "60 min x 60 (upper bound, within 60 min)", inputs: "p.4 Table V"}
 conflicts:
   - {table: components, row_id: ectc51529.2024.00155-a-c5, field: material, values: ["SUS430", "SUS404"], locators: ["p.1 Abstract; p.5 Sec. III.C", "p.7 Sec. III.E"], chosen: SUS430, why: "SUS404 appears once, evidently a typo"}
   - {table: papers, row_id: ectc51529.2024.00155, field: table labels, values: ["text: Table I = interposer, Table II = dies", "captions: Table I = Die A/B, Table II = interposer"], locators: ["p.2 Sec. II.B", "p.2 Table I; p.2 Table II"], chosen: "caption labels", why: "rule (c)"}
@@ -50,3 +51,27 @@ not_reported:
   - stiffener outer dimensions
 source_quality:
   - "Candidate p02_tablei cut the header row (manual re-crop); p07_fig15 held only panels (e),(f) (manual re-crop)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F1", change: "tv_ids a -> a;b;c;d;e; name/locator rewritten; PCB fabrication and PCB bonding moved to new F3", reason: "TV2-4 and the Cu-stiffener substrate (e) use the same interposer/substrate flow (p.3 Sec. II.E, p.6 Table VI, p.5 Fig. 11); PCB steps apply to TV1-4 only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F2", change: "composite placeholder row replaced by explicit steps; name/locator updated", reason: "Fig. 2 and Fig. 7 give the LCMUF route step by step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F3", change: "new flow (TV1-4): PCB fabrication + package-substrate-to-PCB bonding", reason: "Fig. 2 'Bonding substrate' sub-flow after F1; TV e was not bonded to a PCB"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F1-s01", change: "category other -> electroless; pad pitch/diameter to target; Ni/Au thicknesses to material; step_basis stated_in_flow", reason: "p.2 Table II; Fig. 2 step 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F1-s02", change: "category electroplating -> bumping; target pitch/diameter/heights; step_basis inferred_order", reason: "p.2 Table I; not in Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F1-s03", change: "step_basis; target; conditions TCB", reason: "p.2 Sec. II.B; Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F1-s04", change: "methods moved to split; time_s 3600 (le, 'within 60 min'); basis stated", reason: "p.4 Table V; Fig. 4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F1-s05", change: "step_basis stated_in_flow", reason: "Fig. 2 (I)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F1-s06", change: "step_basis stated_in_flow", reason: "p.4 Fig. 7 stage order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F1-s08", change: "thickness_um 200 cleared (200 um is the removed amount, not the result); conditions 'grinding amount 200 um'", reason: "p.2 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F1-s12", change: "category electroplating -> bumping; pitch/diameter/height to target; thickness_um 55 cleared (bump height, not a layer)", reason: "p.3 Sec. II.B; p.2 Table II"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F1-s15", change: "deleted (shadow moire warpage measurement)", reason: "measurement, not a build step; values already in metrics a-m1..m11, f-m1..m8, c-m1..m2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F1-s16", change: "category other -> carrier_prep; substrate A/B to split", reason: "Fig. 2 'Fabricating substrate'; p.6 Table VI"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F1-s17", change: "deleted; PCB lamination re-entered as F3-s01", reason: "PCB applies to TV1-4 only (F3)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F1-s23", change: "stiffener material/footprint per TV to split; 2.0 mm thickness to target; conditions as written", reason: "p.6 Table VI; p.5 Fig. 11"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F1-s25", change: "deleted; re-entered as F3-s02", reason: "PCB bonding applies to TV1-4 only (F3)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F1-s26", change: "deleted; composite split into F3-s03..s06", reason: "p.3 Sec. II.F lists mount, solder bonding, flux cleaning, position check"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F1-s27", change: "deleted (TCT reliability test)", reason: "post-build test; already in metrics a-m25, a-m26"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F2-s03", change: "deleted composite placeholder; replaced by F2-s05..s15", reason: "Fig. 2 and Fig. 7 give the steps"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F2-s05..s15", change: "new rows: pad formation, die microbumps, PMC, IR check, die exposure, carrier attach, Si grind, dielectric, backside bumps, debond, singulation", reason: "Fig. 2 (II) shares these steps; Fig. 7 LCMUF series confirms PMC to debonding; p.5 Fig. 8 single-piece LCMUF module"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F2-s01;ectc51529.2024.00155-F2-s02;ectc51529.2024.00155-F2-s04", change: "seq 3/4/14; step_basis stated_in_flow; equipment and TCB/Table III conditions; s04 result moved from step text to result", reason: "Fig. 2 order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F3-s01..s06", change: "new rows: PCB lamination, solder paste print, mount, reflow, flux clean, X-ray CT", reason: "p.3 Sec. II.D, II.F (same way as Sec. II.E); TV1-4 only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00155-F1-s07;s09-s11;s13-s14;s18-s22;s24", change: "step_basis stated_in_flow; equipment written with tool type; s14 category dicing -> singulation; s22 conditions as written; s24 target 0.5 mm balls; seq renumbered 1-22 after deletions", reason: "Fig. 2 order; p.2-3 Sec. II.B, II.E"}

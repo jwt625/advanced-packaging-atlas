@@ -32,5 +32,16 @@ not_reported:
   - RDL line/space, dielectric material, layer thicknesses; unit (package) size; EMIB size
   - sample counts for TSC; warpage metric definition and sample size for Fig. 7
   - overlay and X-Y dimensional change numbers (Fig. 6 axes unreadable/unlabelled)
+  - "process_steps: ectc51846.2026.00134-d (method and order of waveguide and TGH formation for the Fig. 10 test substrate not stated; technique only described generically, F3)"
 source_quality:
   - "Candidates missing for Fig. 3; p03_fig4 held only part of Fig. 4(a); p03_fig5 and p04_fig8 cover single panels of column-split figures; p02_fig1 clipped the (d) label."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00134-F1-s01", change: "equipment 'ultrashort-pulse laser'", reason: "LAE uses ultrashort, high-peak laser pulses (p.2 Sec. II.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00134-F1-s03", change: "conditions 'panel scale'; result 'void-free, fully Cu-filled'; locator adds Fig. 3", reason: "p.2 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00134-F1-s04", change: "conditions 'panel scale, on traditional organic substrate lines'; locator adds Fig. 5", reason: "p.3 Sec. III"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00134-F2-s01", change: "route 'through-glass hole' seq 1; composite LAE split (etch moved to new s04); AR sweep in split; equipment set", reason: "LAE = laser modification then selective etching (p.2 Sec. II.A); holes and cavities are separate routes of the demo coupon"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00134-F2-s04", change: "added (split from s01)", reason: "p.2 Sec. II.A: laser-modified regions are etched selectively to form the TGHs"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00134-F2-s02", change: "route 'cavity' seq 1 (s03 route 'cavity' seq 2); cavity variants in split", reason: "p.2 Sec. II.A, Fig. 2: laser trepanning combined with selective etching"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00134-F3", change: "added flow F3 (generic_platform, fragments) with step F3-s01", reason: "p.4-5 Sec. VI describes laser direct writing of waveguides in glass"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00134-d", change: "listed in not_reported as process_steps", reason: "build of the Fig. 10 test substrate not described"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00134-F3-s01", change: "category other -> laser_modification", reason: "pass B category_other: ultrashort-pulse laser direct writing changes the glass refractive index locally (p.4-5 Sec. VI); laser_modification added in schema v2.5"}

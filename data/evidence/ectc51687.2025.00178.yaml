@@ -43,5 +43,17 @@ not_reported:
   - glass CTE values and products; build-up resin product, thickness per layer; organic core product/thickness
   - TGV formation method; daisy-chain absolute resistance
   - temperature load of the SEWARE stress simulation; DIC sample size
+  - "process_steps: ectc51687.2025.00178-a, ectc51687.2025.00178-b (positional-accuracy/DIC samples; only the generic layer-by-layer build-up statement)"
 source_quality:
   - "Candidate p03_fig8 clipped the x-axis title; p03_fig6 included the Fig. 5 caption tail; no candidate for Fig. 18 (caption 'Fig,18')."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00178, change: "process_flow_level: 'full' -> 'fragments'; has_process_flow: 'yes' -> 'no'", reason: "rule 7: only isolated statements (TGV Cu fill, generic layer-by-layer lamination, coupon resin + edge coat); no ordered build flow"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00178-F1, change: "level: 'ordered' -> 'fragments'", reason: "fragments: two stated fab actions on the coupon, no sequence beyond resin then reflow test"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00178-F2, change: "level: 'full' -> 'fragments'; locator: 'p.4 Sec. III.B; p.4 Table 1; p.4 Fig. 14; p.2 Sec. II.A; p.2 Sec. II.B; p.5 Sec. III.C; p.5 Fig. 16' -> 'p.2 Sec. II.A; p.4 Sec. III.B; p.4 Table 1; p.4 Fig. 14'", reason: "fragments: TGV Cu fill and generic build-up statement only; reflow-test locators removed"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00178-F1-s01, change: "step_basis: '' -> 'generic_description'", reason: "fragments flow: statement-level step"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00178-F1-s02, change: "step_basis: '' -> 'generic_description'; conditions: 'split: w/ vs w/o edge coating' -> ''; split: '' -> 'edge coating: w/ vs w/o'; notes: '' -> 'Order vs resin formation not stated.'", reason: "variant sweep moved to split; fragments flow"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00178-F1-s03, change: "deleted", reason: "post-build 10x 260 C reflow test is a test, not a build step; already in metrics -h-m1/-h-m2"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00178-F2-s01, change: "step_basis: '' -> 'generic_description'; target: '' -> 'TGV dia 90 um, min pitch 175 um, AR 1:11'; overrides: '' -> 'target:design_target'; notes: '' -> 'Order vs build-up not stated; TGV formation method not reported.'", reason: "stated TGV geometry on the fill step (Table 1); fragments flow"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00178-F2-s02, change: "step_basis: '' -> 'generic_description'", reason: "generic Sec. II.A statement; fragments flow"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00178-F2-s03, change: "deleted", reason: "5x 260 C reflow is a reliability pre-check, not a build step; already in metrics -i-m3"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00178, change: "not_reported: added process_steps entry", reason: "uncovered physical TV(s) documented"}
