@@ -1,24 +1,27 @@
-# Schema gaps reported by extraction agents, run of 2026-10-19 (DevLog-005)
+# Schema gaps reported by extraction agents, 2026-10-19 (DevLog-005)
 
-Verbatim per-batch reports from the structured results of workflow runs `wf_04a3c288-a69` and `wf_88564222-150`
-(b021-b070, f001-f009). Each note is filed under the first theme it matches. Nothing here has been acted on;
-this is input for the schema v2.x discussion (see also DevLog/audits/audit_x1_2026-10-18.md section 5).
+Verbatim per-batch reports from the structured results of workflow runs `wf_04a3c288-a69`, `wf_88564222-150`
+and `wf_76e78bac-aab` (b021-b080, f001-f009). Each note is filed under the first theme it matches. Nothing here
+has been acted on; input for the schema v2.x discussion (see also DevLog/audits/audit_x1_2026-10-18.md section 5
+and the audit_x2 files).
+
+Total: 256 notes.
 
 | theme | notes |
 |---|---|
-| Interconnect taxonomy (ic_type / level / bonding_method) | 39 |
-| Figures table (figure_kind, labels, candidates) | 30 |
-| Metric ranges, spreads, statistics | 18 |
-| TV model (package_class, tv_kind, pooled, concept/roadmap) | 17 |
-| Assembly stage, splits, DOE legs | 13 |
-| Process steps (step_category, flow structure) | 12 |
+| Interconnect taxonomy (ic_type / level / bonding_method) | 46 |
+| Figures table (figure_kind, labels, candidates) | 39 |
+| Metric ranges, spreads, statistics | 22 |
+| TV model (package_class, tv_kind, pooled, concept/roadmap) | 20 |
+| Assembly stage, splits, DOE legs | 14 |
+| Process steps (step_category, flow structure) | 13 |
 | Relative / normalized values | 5 |
-| Stack-layer and via geometry fields | 11 |
-| Components, materials, properties | 9 |
-| Interfaces and thermal | 7 |
-| Other | 45 |
+| Stack-layer and via geometry fields | 15 |
+| Components, materials, properties | 14 |
+| Interfaces and thermal | 9 |
+| Other | 59 |
 
-## Interconnect taxonomy (ic_type / level / bonding_method) (39)
+## Interconnect taxonomy (ic_type / level / bonding_method) (46)
 
 - b021: No interconnect_type for mm-scale backside slot or multi-circle thermal vias (ectc51846.2026.00117), so ic_type other was used with pad_x/pad_y for the slot size. There are also no min/max columns for pad size.
 - b022: Approximate plot-read values for cumulative distributions use statistic=median plus a value:approx qualifier; there is no field for read-off uncertainty other than notes
@@ -59,8 +62,15 @@ this is input for the schema v2.x discussion (see also DevLog/audits/audit_x1_20
 - b066: No package_class or interconnect_level for chip-to-chip bonding test coupons or unbonded wafer bump coupons; used microbump_3d / die_stack_internal / other.
 - b069: No bonding_method enum for SLID/TLP bonding (used tcb)
 - b070: No interconnect_level/ic_type for a non-electrical wafer-level seal bond (Cu-Sn slit-to-fin wafer bond) or pressure-contact probes; used level/type other.
+- b072: interconnect_level has no chip-to-chip (non-hybrid) option; self-assembled nanosolder chip-to-chip joints entered as level other, ic_type other.
+- b074: interconnect_level has no non-hybrid wafer-to-wafer (Cu-Sn-Cu SLID glass-to-glass) level, and no level for an antenna array on a Si-wafer package; used other
+- b074: interconnect_type has no through-oxide via (TOV); used other
+- b076: interconnects has no field for post-bond (deformed) bump diameter; entered as a geometry metric
+- b078: No interconnect_level for interposer-to-interposer (stacked SLSI Cu-Sn bond) or glass-layer-to-glass-layer joints; used level other.
+- b078: No interconnect_type or bonding_method for Cu-Sn SLID/IMC bonding or sintered Ag paste joints (used other / sintering).
+- b079: Process splits given only in relative units (seed thickness % of POR, current density % of optimum) have no numeric column. They are recorded in metrics.variant and process_steps.conditions text.
 
-## Figures table (figure_kind, labels, candidates) (30)
+## Figures table (figure_kind, labels, candidates) (39)
 
 - b021: figures.label has no convention for uncaptioned images. 'Unnumbered figure (p.5)' was used.
 - b022: figure_kind has no value for void-inspection wafer maps or alignment/overlay scatter plots (used 'other' for 00219 Fig. 7 and Fig. 13)
@@ -83,6 +93,11 @@ this is input for the schema v2.x discussion (see also DevLog/audits/audit_x1_20
 - b067: No figure_kind for process recipe profiles (T/P vs time) or litho Bossung/CD plots; used process_flow and other.
 - b068: No figure_kind for a CAD/3D design rendering (00302 Fig. 2 filed as top_view_layout).
 - b069: No figure_kind for yield/bar charts (used other)
+- b073: No figure_kind for process/geometry data plots (CD uniformity bar charts, via diameter vs focus offset); used 'other'.
+- b074: figure_kind has no alignment/overlay scatter kind; used mechanical_plot / xray_csam
+- b076: No figure_kind for surface-analysis depth profiles (XPS/ToF-SIMS) or wafer overlay maps; used other
+- b078: No figure_kind for a confocal/profilometer depth profile through a via (used other).
+- b079: figure_kind has no process-characterization or metrology plot value (Cu shell thickness vs plating time; lithography CD box plots). Used 'other'.
 - f001: No figure_kind for metrology or process-result plots (overlay box plot, lithography resolution map by coupon), so 'other' was used.
 - f002: No figure_kind for dispense/process metrology such as the jetted dot-size slit test (ectc51906.2022.00106 Fig. 6), so it is recorded as 'other' with a note
 - f003: figure_kind has no value for measurement-setup figures; Fig. 7 of ectc51529.2024.00093 was tagged as `other`.
@@ -92,8 +107,12 @@ this is input for the schema v2.x discussion (see also DevLog/audits/audit_x1_20
 - f005: figure_kind has no scanning acoustic microscopy (SAM) value; the SAM image was filed under xray_csam
 - f006: Candidate detection mislabels OCR'd figure numbers (p07_fig1 = Fig. 11) and fails on boxed IEDM layouts; no field flags a wrong candidate label
 - f006: No figure_kind for adhesion/shear or link-power analysis; Fig. 6 (ectc51909.2023.00274) shear+V-I filed as reliability_plot
+- f007: figure_kind has no value for process-metrology plots (dishing depth, peel strength); none was needed in this batch, so 'other' was not used.
+- f008: No figure_kind for general metrology plots such as photoresist thickness profiles; used other
+- f008: No figure_kind for process-condition profiles (bonding temperature/load vs time) or process fixtures; used other
+- f009: No figure_kind for hydraulic/flow plots (pressure drop vs flow rate, tcpmt.2023.3266666 Fig. 8); would need 'other'
 
-## Metric ranges, spreads, statistics (18)
+## Metric ranges, spreads, statistics (22)
 
 - b028: No std-dev column in metrics: std. dev. entered as separate rows with statistic 'other' (66 metric rows for 00012).
 - b029: Paper-level reliability results without sample counts or standards (00049 Table III, 00136 Table 3) fit only as pass/fail value_text metrics.
@@ -113,8 +132,12 @@ this is input for the schema v2.x discussion (see also DevLog/audits/audit_x1_20
 - b067: metrics.value cannot hold ranges read off scatter plots; used value_text plus statistic=range.
 - b068: No metric/statistic slot for '+/-' uncertainty paired with a mean (coupling loss 1.756 +/- 0.029 dB had to be split into two metric rows).
 - b070: No component_type for a coolant manifold or slit/distribution layer distinct from micro_cooler; used micro_cooler for slit wafer and other for manifold.
+- b071: interconnects has no diameter range or top/bottom diameter columns: tapered TGV top 175-190 / bottom 90-120 um went to metrics value_text (ectc51846.2026.00416).
+- b072: No range columns for bonding/process temperature (e.g. 205-210 C, 210-220 C); kept in notes/conditions with temp_c blank.
+- b073: Interconnects lack diameter min/max columns (TGV radius range 60-80 um kept in notes).
+- b078: interconnects.resistance_mohm holds one value; a reported range (0.620-0.840 ohm per via) has no min/max columns, so it went to metrics.
 
-## TV model (package_class, tv_kind, pooled, concept/roadmap) (17)
+## TV model (package_class, tv_kind, pooled, concept/roadmap) (20)
 
 - b026: No home for platform-level design-rule roadmaps or tool/process throughput claims that belong to no physical build; used a tv_kind 'other' pseudo-TV (eptc56328.2022.10013262-e).
 - b026: papers.has_process_flow cannot say that the flow is generic (platform) rather than TV-specific.
@@ -133,8 +156,11 @@ this is input for the schema v2.x discussion (see also DevLog/audits/audit_x1_20
 - b066: No package_class for lithography/plating process test builds (resist on panel); used other.
 - b067: Equipment-characterization papers (ion source, exposure tool, cure oven) have no natural home: tool metrics hung on a tv_kind=other TV with package_class=other.
 - b068: No component_type for a power stage IC / DrMOS (filed as other); package_class has no DC-DC / power module class (filed as other).
+- b074: No package_class for a die-level via-last TSV on a temporary carrier, or for a glass antenna array stacked on a Si package; used other
+- b076: optical waveguide coupons (no electrical layers) have no good package_class; used photonic_interposer as inferred
+- b080: No package_class for bare TSV test wafers or for a 3D die stack with embedded microfluidic cooling (used other)
 
-## Assembly stage, splits, DOE legs (13)
+## Assembly stage, splits, DOE legs (14)
 
 - b021: Assembly stage (substrate only vs after chip assembly) and material splits that the paper treats as options of one design (glass Low/Middle CTE) have no dedicated column, so they went into metrics.variant. This repeats the b020 judgment call.
 - b024: Per-wafer-split rows (TiN thickness, CD, ESL) live in metrics.variant only; nothing ties a split to the interconnect/layer rows it changes.
@@ -148,9 +174,10 @@ this is input for the schema v2.x discussion (see also DevLog/audits/audit_x1_20
 - b055: Stack layers cannot mark that one build-up/SR thickness applies to both sides without a side split; duplicated front/back rows with a note.
 - b057: No clean way to record many simulation configurations (18 CoWoS package x HBM height x bonding scheme combinations) without TV explosion; kept as metrics.variant on 2 simulation TVs
 - b058: No way to attach process-split yields to interconnect rows; split data kept in metrics.variant
+- b071: Several process splits change a layer that is later removed (sacrificial Cu barrier, no-barrier ablation). Rule f does not say whether this counts as a new TV; I kept them as variants.
 - f001: A figure split across pages (ectc.2011.5898527 Fig. 1: panels (a),(b) on p.1, (c) on p.2) can carry only one page and bbox, so panel (c) was dropped and noted.
 
-## Process steps (step_category, flow structure) (12)
+## Process steps (step_category, flow structure) (13)
 
 - b023: No step_category for bump/C4/Cu pillar formation when the method is not stated (used other); no category for PR coat (used lithography).
 - b026: process_steps has no field for flow-level state such as 'TV built only up to step N'; used performed=no on later steps of a generic flow.
@@ -164,6 +191,7 @@ this is input for the schema v2.x discussion (see also DevLog/audits/audit_x1_20
 - b065: no field for laser bonding parameters (laser power W) in interconnects; kept in process_steps.conditions
 - b068: No step_category for ion exchange or femtosecond-laser glass modification (SLE), so these were filed as other.
 - b070: No oxidation step_category; used deposition_other.
+- b075: step_category lacks mechanical drilling and laser cutting of sheets; used 'other'.
 
 ## Relative / normalized values (5)
 
@@ -173,7 +201,7 @@ this is input for the schema v2.x discussion (see also DevLog/audits/audit_x1_20
 - b051: No convention for normalized or unit-free values: die shift stored as multiples of an undisclosed spec M, with unit 'M' or 'M per die'.
 - b052: Normalized-only process conditions (cure temperature and pressure) can only go in free-text conditions.
 
-## Stack-layer and via geometry fields (11)
+## Stack-layer and via geometry fields (15)
 
 - b024: No line-pitch column in stack_layers (BPR pitch 105 nm) and no slit-length field for non-circular vias (400 nm slit nTSV); both kept in notes.
 - b024: stack_layers has only roughness_ra_um; RMS roughness (Rq) had to go into properties text.
@@ -186,8 +214,12 @@ this is input for the schema v2.x discussion (see also DevLog/audits/audit_x1_20
 - b053: No stack_layers structure for a backside RDL on a die (BS RDL on an HBM-type base die): used structure 'die' with seq top-down, side single.
 - b065: stack_layers cannot express interleaved repeated RDL/passivation stacks (3 metal + 4 passivation) other than two rows with repeat
 - b066: stack_layers seq assumes vertical stacking; radial TSV liners (SiO2/Ta/seed/fill) do not fit, so the seq order was noted as radial.
+- b072: No column/enum for temporary carrier wafers or bonding layers: carriers entered as component_type other and stack_layers structure other with layer_role carrier.
+- b073: No interconnect columns for via top vs bottom diameter or taper angle; entered as metrics.
+- b075: stack_layers.structure has no good fit for a magnetic-core/dielectric/winding sandwich inside an organic substrate (embedded inductor); used 'other'.
+- b079: stack_layers seq is defined top-down only. For via sidewall liners (seed/barrier/liner inside a TGV/TSV) I ordered seq from the via centre outward within the feature, and the notes say so.
 
-## Components, materials, properties (9)
+## Components, materials, properties (14)
 
 - b024: electrical_interfaces has no per-length loss field (dB/mm) and needs a protocol, so material/channel IL-vs-frequency data from RF characterization papers went to metrics.
 - b027: No component_type for a PMIC or buck-regulator controller (`ivr` means an integrated regulator). Used `other`.
@@ -198,8 +230,13 @@ this is input for the schema v2.x discussion (see also DevLog/audits/audit_x1_20
 - b055: No component_type for image sensor die (BI-CIS); used other.
 - b056: component_type has no thermal test chip (TTC); used 'other' with is_emulator yes
 - b066: No metric_category for material/microstructure properties (porosity, grain size, etch rate); used other.
+- b071: No component_type for a discrete power MOSFET or a photodetector (used other), and no structure value for a laser hard-mask or barrier film on a coupon.
+- b072: Material-level properties (paste DSC peaks, viscosity minimum, particle size) have no paper-level home; attached to one TV with scope 'applies to all TVs'.
+- b075: component_type has no magnetic_core value; embedded magnetic cores entered as 'other' with material and supplier.
+- b077: No component_type for a test heater or working fluid; used other plus material text.
+- b080: No component_type for a cap/sealing die or a coolant manifold (used other)
 
-## Interfaces and thermal (7)
+## Interfaces and thermal (9)
 
 - b034: No dedicated home for a via/vertical-path insertion loss that is not a protocol interface; used electrical_interfaces with protocol unspecified, following the ectc.2019.00095 precedent
 - b037: TIM1 coverage % has no natural metric_category (entered as thermal for the measured SAM value, geometry for the design table)
@@ -208,8 +245,10 @@ this is input for the schema v2.x discussion (see also DevLog/audits/audit_x1_20
 - b047: optical_interfaces has only mfd_fiber_um; no field for the MFD of an on-substrate glass waveguide (put in notes)
 - b049: electrical_interfaces.lanes is ambiguous for multi-interface systems (per interface vs total); used per-interface count with a note.
 - b054: electrical_interfaces has no field for -3 dB bandwidth or eye height; entered as metrics.
+- b071: electrical_interfaces is shaped for D2D/HBM PHYs. A single-lane EML driver path (substrate -> TGV -> EAM, 212.5 Gbps PAM4, 89 GHz EO bandwidth) fits poorly: protocol other, bandwidth went to metrics.
+- b071: optical_interfaces has no field for spot radius or alignment tolerance (+/-0.77 um at 1 dB). Both went to notes and metrics.
 
-## Other (45)
+## Other (59)
 
 - b021: No field to state whether a figure-derived value is measured or simulated when the text and the figure disagree (Fig. 11 in 00117). basis unspecified was used and the conflict is logged in evidence.
 - b022: No column for die area when only mm2 is given and not x/y (00181 die areas 70/110 mm2 and 00219 Table I 410 mm2 are in notes only)
@@ -252,7 +291,21 @@ this is input for the schema v2.x discussion (see also DevLog/audits/audit_x1_20
 - b068: Embedded discrete capacitor array internal stack has no natural structure enum (used die).
 - b069: No interconnects column for anneal pressure (batch anneal <150 MPa put in notes)
 - b070: Dimensionless metrics (COP) have no unit convention; unit left empty.
+- b072: No field for a temporary/permanent bond distinction or debond method on interconnects/process; recorded via step category debonding/temporary_bonding and notes.
+- b073: No component columns for passive capacitance/ESL/ESR (DTC 2.8 uF); entered as metrics.
+- b074: No table for RF/antenna performance (S11 bandwidth, gain, beam scan, line loss in dB/mm); entered as metrics category electrical
+- b075: No metric field for model-vs-measured pairs; model predictions (Lmon/Lphy, DCR model) entered as separate metric rows with basis simulated/derived.
+- b075: carrier_size_mm cannot hold inch-specified wafers cleanly (4 inch Si wafer); left empty, stated in notes.
+- b076: No metric_category for material/microstructure analysis (grain size, oxide thickness, interdiffusion); used other
+- b076: bonding_temp_c cannot express 'room temperature' without a number; left blank and put in notes
+- b077: No metric_category for material rheology or process compatibility (melt viscosity); used other.
+- b077: Non-electrical hermetic Si-Si fusion seal has no natural interconnect level; recorded as a process step and a bonding stack layer.
+- b077: Unsigned coplanarity and signed warpage can only be told apart through the scope text.
+- b078: interconnects.count is ambiguous between per-die and total (HV-ASIC 541 per ASIC x 16 ASICs); noted in notes.
+- b079: No column for a via-filler particle size or volume fraction (e.g. 20 um diamond, 50 vol%). Recorded in metrics (geometry) and notes.
+- b080: figures table allows one page/bbox per figure; Fig. 12 of ectc51846.2026.00096 spans two pages (steps 1-6 on p.4 left out, named in notes)
 - f002: No guidance on reprinted when a caption credits a company ('Source: DECA') with no reference number; recorded reprinted=no with a note
 - f004: Multi-panel figures that mix a photo, SAM images and a histogram (ectc51529.2024.00227 Fig. 6/8) fit no single kind; entered as xray_csam with the panels listed in notes.
 - f005: Figures that combine a yield plot with an SEM cross-section (00179 Fig. 14) can take only one kind; filed as electrical_plot
 - f006: Combined figures (schematic + warpage map + photo, e.g. ectc51909.2023.00091 Fig. 6/7) need a single kind; used stack_schematic
+- f009: Mixed-panel POC figures (schematic + top view + cross-section) forced into a single kind; chose cross_section

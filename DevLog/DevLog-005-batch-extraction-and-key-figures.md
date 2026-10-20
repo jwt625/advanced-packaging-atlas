@@ -1,6 +1,6 @@
 # DevLog-005: batch extraction of the cached backlog and key figures
 
-Date: 2026-10-19. Follows DevLog-004 (`has_process_flow`). Status: in progress (last update 2026-10-19 22:29).
+Date: 2026-10-19. Follows DevLog-004 (`has_process_flow`). Status: extraction round complete; review items open (last update 2026-10-19 22:55).
 
 ## Request (Wentao, 2026-10-19)
 
@@ -66,10 +66,13 @@ regenerated from `source.pdf` at any time.
 - [x] Pilot: 1 batch (3 papers) end to end, coordinator review of rows and crops.
 - [x] Full run: pending papers in batches of 3, at most 7 subagents at once (b021-b070 done, 145 papers).
 - [x] Figures backfill for the 58 merged papers (figures-only batches f000-f009).
-- [ ] Merge, validate (0 errors), fresh-context audit sample, `build_views.py`.
-      - Done: merge of everything finished, final crops, `build_views.py` smoke run.
-      - Running: audit x2 (A/B).
-- [ ] Follow-up round for papers cached by retrieval batch 5 (31 saved, ended 22:05): b071-b080, run 3 running.
+- [x] Merge, validate (0 errors), fresh-context audit sample (x2A/x2B), final crops, `build_views.py`.
+- [ ] Decide on the audit x2 findings and the rule questions (figure cap, `has_process_flow` threshold); apply fixes.
+- [ ] Detector: 36% of figure rows needed a manual bbox (501/1410). Agents report bottom-clipped candidates on
+      some papers (ectc51846.2026.00416 and 00424, where all 6 were manual). Investigate the caption-edge clipping.
+- [ ] App: project `figures` into `atlas.json` and build hover/expand (crops local-only; publishing needs a rights
+      decision).
+- [x] Follow-up round for papers cached by retrieval batch 5 (31 saved, ended 22:05): b071-b080 merged.
 - [ ] Text-layer flags. Agents reported 11 papers with partly garbled text layers and no `TEXT_LAYER_WARNING.md`:
       ectc51529.2024.00094, ectc51906.2022.00140, ectc51909.2023.00023, 00048, 00153, 00155, 00174, 00252,
       tcpmt.2021.3104326, vlsitechnologyandcir46783.2024.10631441 and 10631478.
@@ -166,3 +169,79 @@ Pilot-reported schema gaps (not acted on; for the v2.1/v2.2 schema discussion):
 - 22:29 `crop_figures.py`: 1233 crops in `references/*/figures/key/` (local-only, 27 s).
   `build_views.py`: atlas.json 7.25 MB, 209 papers. Figures are not projected yet (the app hover work is a
   later step).
+- 22:38 audits x2A/x2B done (read-only; files `DevLog/audits/audit_x2A_2026-10-19.md`, `audit_x2B_2026-10-19.md`).
+
+## Audit x2 summary (2026-10-19)
+
+| | x2A | x2B | audit_x1 (2026-10-18) |
+|---|---|---|---|
+| rows checked | ~476 / 584 | ~188 / 404 | ~364 / 1193 |
+| wrong numeric transcription | 0 | 0 | 0 |
+| flagged rows | 30 (6.3%) | 16 (8.5%) | ~49 (13%) |
+| content-changing | 10 (2.1%) | 2 (1.1%) | 20 (5.5%) |
+| key-figure crops opened | 36 | 36 | n/a |
+| key-figure defects | 8 (5 substantive) | 2 | n/a |
+
+- Dominant defect class, still: one statement copied onto sibling TVs.
+  - x2A: 00265 adhesion pass/fail on all four cores; 3312037-b-i1 resistance copied onto the underfill build.
+  - x2B: 00154-a-c1..c4 gap 60 um.
+  - DB-wide: 63 groups / 145 rows in 29 papers (audit_x1: 23/49).
+- Other content defects:
+  - Generic-model values attached to a TV (00026-a-m9..m11).
+  - Spec limit stored as a measurement (00026-a-m1).
+  - Alignment bound true for only 93% of cases (00183-a-i1..i3).
+  - Guessed ic_type (00061-a-i1).
+  - Inferred technology_name (10457909-c).
+- Key figures:
+  - All 72 sampled crops have the right page, label and kind, and none cuts its figure.
+  - Defects: rank 1 breaks the cross-section > schematic > photo order twice; `shows` names things not in the
+    figure three times; one incomplete `tv_ids`; excess margins three times; one crop cuts panel labels; important
+    figures were left out in 00265 and 00026.
+  - DB-wide: no box under 1% or over 70% of the page; no duplicate figures; 2-6 per paper everywhere.
+- Findings that bear on the rules:
+  - 194/209 papers (93%) have exactly 6 figures, so agents fill to the cap.
+  - `has_process_flow` is 201 yes / 8 no and does not separate fabrication-flow papers from results papers: a
+    few generic steps or cure read-outs satisfy the literal rule. Borderline examples: 10457909, 00365.
+  - 447 metrics rows hold numbers only in value_text, and about 180 would become numeric with value_min/value_max.
+  - The audit_x1 fixes are still not applied (00174 DECA rows, 00052-e-m1, 00093-a-m1, 6575597 ranks, 00244 copies).
+- Recommendations from the auditors:
+  - Validator warnings for sibling duplicates and for the rank-1 kind order.
+  - A script that checks each cited number appears on its cited page.
+  - `performed=no` for proposed flows.
+  - Metrics value_min/value_max.
+- None of the fixes are applied. They need a decision together with the audit_x1 / schema v2.x items.
+- 22:55 run 3 complete (10/10, 0 failed); merged b071-b080. Crops for the 177 new figure rows rendered;
+  `build_views.py` -> atlas.json 8.41 MB.
+- 22:55 `schema_gaps_2026-10-19.md` regenerated over all three runs: 256 notes. Largest themes: interconnect
+  taxonomy 46, figures table 39, metric ranges 22, TV model 20.
+
+## Final state of this round (2026-10-19 22:55)
+
+| item | value |
+|---|---|
+| papers in `data/papers.csv` | 239 (58 before this DevLog), all `full_text` |
+| `has_process_flow` | 231 yes, 8 no |
+| test vehicles / components / stack layers | 770 / 1885 / 3277 |
+| interconnects / process steps / metrics | 1008 / 4441 / 6057 |
+| electrical / optical interfaces | 71 / 53 |
+| key figures | 1410 rows on all 239 papers (909 candidate bbox, 501 manual); crops local in `references/*/figures/key/` |
+| validator on `data/` | 0 errors, 0 warnings |
+| batches | b020-b080 and f000-f009; every batch report is in `data/_staging/<batch>/BATCH_REPORT.md` |
+| agents | 3 workflow runs (66 batch agents incl. 3 finish-mode), 2 pilots and 2 audits; 0 failures after the usage-limit restart |
+| retrieval backlog | 61 of 300 not cached: 59 subscription (10 p1, 12 p2, 37 p3), 2 OA. `data/manual_downloads.md` covers the IMAPS/IWLPC ones |
+
+Backups of data/ before each merge: `cache/backups/data_before_*.zip` (local-only).
+
+## Decisions (Wentao, 2026-10-19 23:00)
+
+1. Key figures: always keep the figures, especially those with an actual schematic drawing or an SEM/micrograph
+   image. Rule change: every figure showing a schematic drawing (stack, structure, process flow, layout) or a
+   micrograph (SEM/TEM/FIB/optical cross-section, X-ray, CSAM) is a key figure. The 6-figure cap no longer applies
+   to these. Data plots and tables are still chosen by information content.
+2. `has_process_flow`: the goal is to capture process-flow information, not to separate papers by a label.
+   Sample the `yes` papers and inspect whether they have a proper process flow and whether it was captured.
+3. Fix the audit issues (audit_x1, audit_x2A, audit_x2B).
+
+Scope correction (Wentao, 23:00): retrieval/caching is not part of this work. At 23:00 I started a retrieval
+session (tmux `apa-ieee-9`) by mistake; it was killed while still waiting at login. No download, no run log.
+"Ingestion" = distilling already-cached papers: 239 cached, 239 ingested, 0 pending.
