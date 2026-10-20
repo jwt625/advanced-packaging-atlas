@@ -38,3 +38,24 @@ not_reported:
   - "energy per bit, aggregate bandwidth, BER"
   - optical_interfaces
   - "reliability data (stated as future work)"
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00035-a-m13", change: "scope: '' -> 'applies to TVs a, b, c'", reason: "p.5 Sec. III.B.4 'all models maintain crosstalk levels below -20 dB': one statement for all models, no per-model value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00035-b-m13", change: "deleted (copy of a-m13)", reason: "same single all-model crosstalk statement; kept once on a-m13 with scope"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00035-c-m9", change: "deleted (copy of a-m13)", reason: "same single all-model crosstalk statement; kept once on a-m13 with scope"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00035-a-m14", change: "scope: '' -> 'applies to TVs a, b'", reason: "p.5 Sec. III.C.1.b 'In Model A and B ... dropping to 0.6 Vp-p': one joint statement, no per-model value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00035-b-m14", change: "deleted (copy of a-m14)", reason: "joint Model A/B statement kept once on a-m14 with scope"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00035-a-m9", change: "kept (also b-m9)", reason: "p.5 Table II lists Model A and Model B in separate rows with their own DCR/inductance cells: genuine per-TV values"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00035-a-m10", change: "kept (also b-m10)", reason: "p.5 Table II lists Model A and Model B in separate rows with their own DCR/inductance cells: genuine per-TV values"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00035-a-m11", change: "kept (also b-m11)", reason: "p.5 Table II lists Model A and Model B in separate rows with their own DCR/inductance cells: genuine per-TV values"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00035-a-m12", change: "kept (also b-m12)", reason: "p.5 Table II lists Model A and Model B in separate rows with their own DCR/inductance cells: genuine per-TV values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f03", change: "added Fig. 10 p.7 top_view_layout (manual)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f04", change: "added Fig. 3 p.3 top_view_layout (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f05", change: "added Fig. 12 p.8 micrograph (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f06", change: "renumbered from ectc51846.2026.00035-f03 (rank 3 -> 6)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f07", change: "added Fig. 4 p.3 stack_schematic (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f08", change: "added Fig. 2 p.2 top_view_layout (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f09", change: "renumbered from ectc51846.2026.00035-f04 (rank 4 -> 9)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f10", change: "renumbered from ectc51846.2026.00035-f06 (rank 6 -> 10)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f11", change: "added Fig. 6 p.4 electrical_plot (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f12", change: "added Fig. 7 p.5 electrical_plot (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f13", change: "renumbered from ectc51846.2026.00035-f05 (rank 5 -> 13)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}

@@ -1,0 +1,73 @@
+paper_id: eptc67330.2025.11392132
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/eptc67330.2025.11392132/text.md
+  - references/eptc67330.2025.11392132/source.json
+  - references/eptc67330.2025.11392132/figures/page_01.png
+  - references/eptc67330.2025.11392132/figures/page_02.png
+  - references/eptc67330.2025.11392132/figures/page_03.png
+  - references/eptc67330.2025.11392132/figures/page_04.png
+  - references/eptc67330.2025.11392132/figures/page_05.png
+  - references/eptc67330.2025.11392132/figures/page_06.png
+  - references/eptc67330.2025.11392132/figures/cand/p02_fig3.png
+  - references/eptc67330.2025.11392132/figures/cand/p03_fig4.png
+  - references/eptc67330.2025.11392132/figures/cand/p03_fig5.png
+  - references/eptc67330.2025.11392132/figures/cand/p03_tablei.png
+  - references/eptc67330.2025.11392132/figures/cand/p04_fig8.png
+  - references/eptc67330.2025.11392132/figures/cand/p05_fig10.png
+figure_reading_method: >-
+  Figs. 8, 10, 11 re-cropped at 300 dpi; peak values read against gridlines (+/-5 W/m-K). Fig. 3(c) re-cropped at
+  600 dpi: groove symbols w_g, p_g, h_g, delta shown without numbers. Table I from candidate crop matches text.md.
+entries:
+  - {table: metrics, row_id: eptc67330.2025.11392132-a-m3, field: value, value: 200, unit: W/m-K, basis: measured, locator: "p.4 Sec. III.A", note: "Fig. 8 Groove X Pillar X maximum ~205 at 10.5 W"}
+  - {table: metrics, row_id: eptc67330.2025.11392132-d-m1, field: value, value: 613, unit: W/m-K, basis: measured, locator: "p.5 Sec. III.C", note: "Fig. 10 Sample #1 and Fig. 11 Case #3 at 22 W read ~612"}
+derived:
+  - {table: test_vehicles, row_id: eptc67330.2025.11392132-a, field: package_thickness_mm, value: 0.4, formula: "400 um / 1000", inputs: "p.3 Table I"}
+  - {table: test_vehicles, row_id: eptc67330.2025.11392132-b, field: package_thickness_mm, value: 0.4, formula: "400 um / 1000", inputs: "p.3 Table I"}
+  - {table: test_vehicles, row_id: eptc67330.2025.11392132-c, field: package_thickness_mm, value: 0.4, formula: "400 um / 1000", inputs: "p.3 Table I"}
+  - {table: test_vehicles, row_id: eptc67330.2025.11392132-d, field: package_thickness_mm, value: 0.3, formula: "300 um / 1000", inputs: "p.3 Table I"}
+  - {table: process_steps, row_id: eptc67330.2025.11392132-F1-s14, field: pressure_mpa, value: 1.3e-7, formula: "0.13 Pa x 1e-6", inputs: "p.3 Sec. II.C"}
+conflicts:
+  - {table: test_vehicles, row_id: eptc67330.2025.11392132-b, field: name, values: ["Table I: Case #2 has enhancement features (grooves and pillars)", "Sec. III.A: Case #2-1 grooves only, Case #2-2 grooves and pillars"], locators: ["p.3 Table I", "p.4 Sec. III.A"], chosen: "split into TVs b and c", why: "results section and Fig. 8 legend distinguish the two builds"}
+  - {table: metrics, row_id: eptc67330.2025.11392132-b-m4, field: value, values: [400, 422], locators: ["p.4 Sec. III.A text 'around 400'", "p.4 Fig. 8 max"], chosen: "both entered (saturation text, peak figure)", why: "different parameters"}
+  - {table: metrics, row_id: eptc67330.2025.11392132-b-m5, field: value, values: [19, 20], locators: ["p.4 Sec. III.A 'drops beyond 19W'", "p.4 Sec. III.A 'dry-out above ~20W'"], chosen: 19, why: "first statement; both approximate"}
+excluded:
+  - "Diameter ratio 3:1 optimum from ref [9]; groove dimensions from ref [10]; pillar dimension selection from refs [11-15]"
+  - "Fig. 1(a) typical PHP from ref [8]; Fig. 9 liquid film images from ref [10]"
+  - "R245fa and 50% fill choice from ref [8] (entered only as the build condition used here)"
+  - "Fig. 12 HBM-Logic-HSD SiP concept (no build, no numbers)"
+not_reported:
+  - interconnects (Si-Si fusion bond recorded as process step and bonding layer)
+  - electrical_interfaces
+  - optical_interfaces
+  - "groove width/pitch/height values; exact pillar d/h/pitch (only ~10 um order); individual die thicknesses"
+  - "fusion bond anneal temperature/time; DRIE recipe; wafer size"
+  - "sample counts for Cases #1-#2; thin-film materials; SAT void statistics"
+  - "process_steps: eptc67330.2025.11392132-e (visualization sample with glass top plate; fabrication not described)"
+source_quality:
+  - "Typos in source (Precess, Feburary); otherwise clean text layer."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: eptc67330.2025.11392132-a-m1, change: "scope \"all 400 um cases\" -> \"applies to TVs a, b, c ...\"; copies b-m1, c-m1 deleted", reason: "p.4 Sec. III.A: \"for all cases ... begins to increase sharply above ... 2W\", one statement, no per-case value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: eptc67330.2025.11392132-b-m2, change: "kept as the one row; scope -> \"Case #2 (applies to TVs b, c) ...\"; copies a-m2, c-m2 deleted", reason: "p.5 Sec. III.B states 150/400 um (37.5%) for Case #2 only; Case #2 covers TVs b and c"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: eptc67330.2025.11392132-a-m2, change: "deleted", reason: "copy of a claim kept once (see the kept row)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: eptc67330.2025.11392132-b-m1, change: "deleted", reason: "copy of a claim kept once (see the kept row)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: eptc67330.2025.11392132-c-m1, change: "deleted", reason: "copy of a claim kept once (see the kept row)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: eptc67330.2025.11392132-c-m2, change: "deleted", reason: "copy of a claim kept once (see the kept row)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: eptc67330.2025.11392132-figures, change: "re-ranked: Table I f04 -> f09, Fig. 8 f05 -> f10, Fig. 10 f06 -> f11", reason: "key-figure rule 2026-10-19: rank 1 build view, then process flow, layout, other schematics/images, then plots/tables"}
+  - {date: 2026-10-19, source: figure_rule, row_id: eptc67330.2025.11392132-f04, change: "added Fig. 1 (xray_csam, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: eptc67330.2025.11392132-f05, change: "added Fig. 6 (xray_csam, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: eptc67330.2025.11392132-f06, change: "added Fig. 2 (package_photo, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: eptc67330.2025.11392132-f07, change: "added Fig. 7 (other, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: eptc67330.2025.11392132-f08, change: "added Fig. 12 (stack_schematic, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: eptc67330.2025.11392132-f12, change: "added Fig. 11 (thermal_plot, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392132-F1-s01", change: "target 'Si wafer 1' -> channel width 300/150 um; split channel height 150/120 um and sidewall grooves by case", reason: "p.2 Sec. II.B; p.3 Sec. II.C, Table I"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392132-F1-s02", change: "category etch_dry -> carrier_prep, performed no -> yes, step reworded as bare-wafer provision; target cleared", reason: "a bare second wafer is provided, not an etch that is skipped (p.3 Sec. II.C; p.4 Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392132-F1-s03", change: "category etch_dry -> carrier_prep, performed no -> yes, step reworded as bare-wafer provision; target cleared", reason: "a bare second wafer is provided, not an etch that is skipped (p.3 Sec. II.C; p.4 Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392132-F1-s04", change: "target 'Si wafer 2' -> pillar d/h/pitch ~10 um; Bosch in conditions", reason: "p.2 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392132-F1-s05", change: "target 'Si wafer 2' -> pillar d/h/pitch ~10 um; Bosch in conditions", reason: "p.2 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392132-F1-s07", change: "TV delta (a) -> shared step with split 't 400 um (Case #1, #2) / 300 um (Case #3)'; thickness_um moved to split", reason: "per-variant value on the same step goes in split (contract convention); p.3 Table I"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392132-F1-s08", change: "deleted (merged into shared F1-s07 with split)", reason: "identical grind step differing only by thickness value"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392132-F1-s09", change: "deleted (merged into shared F1-s07 with split)", reason: "identical grind step differing only by thickness value"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392132-F1-s10", change: "deleted (merged into shared F1-s07 with split)", reason: "identical grind step differing only by thickness value"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392132-F1", change: "non-geometry targets cleared (s06, s11-s17); s11 target heater 6x6 mm, 9 RTDs/side; s12 target 25 x 30 mm; s14 atmosphere vacuum; step_basis stated_in_flow, performed yes", reason: "p.2 Sec. II.B; p.3 Sec. II.C"}

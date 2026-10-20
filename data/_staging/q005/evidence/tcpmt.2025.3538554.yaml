@@ -1,0 +1,64 @@
+paper_id: tcpmt.2025.3538554
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/tcpmt.2025.3538554/text.md
+  - references/tcpmt.2025.3538554/source.json
+  - references/tcpmt.2025.3538554/figures/page_02.png
+  - references/tcpmt.2025.3538554/figures/page_03.png
+  - references/tcpmt.2025.3538554/figures/page_04.png
+  - references/tcpmt.2025.3538554/figures/page_05.png
+  - references/tcpmt.2025.3538554/figures/page_06.png
+  - references/tcpmt.2025.3538554/figures/page_07.png
+  - references/tcpmt.2025.3538554/figures/page_08.png
+figure_reading_method: >-
+  Tables I-VI read from page renders (text layer drops them); Table III and Fig. 2 re-cropped at 250-400 dpi (scratch)
+  to map layer letters A-W to their stack positions; Fig. 3 re-cropped manually; candidate crops p06_fig6, p04_fig2,
+  p08_fig13, p08_fig11 opened.
+entries:
+  - {table: stack_layers, row_id: tcpmt.2025.3538554-a-L01, field: seq, value: "A,N,B,O,C,P,core+D,Q,E,R,F,G,H,S,I,T,core+J,U,K,V,L,W,M", unit: "", basis: design_target, locator: "p.4 Fig. 2", note: "top-down order read from Fig. 2 leader lines"}
+  - {table: components, row_id: tcpmt.2025.3538554-b-c1, field: notes, value: "pitch 500 um; pad dia 280 um; 4114 pads", unit: um, basis: design_target, locator: "p.2 Table I", note: "Table I row"}
+  - {table: metrics, row_id: tcpmt.2025.3538554-a-m2, field: value, value: 99.5, unit: "%", basis: measured, locator: "p.8 Sec. VI.B", note: "398 of 400 conducting (paper: 'two electric interconnections are disabled')"}
+derived:
+  - {table: test_vehicles, row_id: tcpmt.2025.3538554-a, field: interposer_area_mm2, value: 2480.04, formula: "49.8*49.8", inputs: "p.5 Sec. III.B"}
+  - {table: test_vehicles, row_id: tcpmt.2025.3538554-b, field: interposer_area_mm2, value: 2480.04, formula: "49.8*49.8", inputs: "p.5 Sec. III.B"}
+  - {table: test_vehicles, row_id: tcpmt.2025.3538554-b, field: n_dies, value: 17, formula: "1 MMA chip + 16 HV-ASICs", inputs: "p.2 Table I"}
+  - {table: components, row_id: tcpmt.2025.3538554-b-c1, field: thickness_um, value: 400, formula: "0.4 mm * 1000", inputs: "p.2 Table I"}
+  - {table: components, row_id: tcpmt.2025.3538554-b-c2, field: thickness_um, value: 6000, formula: "6 mm * 1000", inputs: "p.2 Table I"}
+  - {table: components, row_id: tcpmt.2025.3538554-b-c3, field: thickness_um, value: 750, formula: "0.75 mm * 1000", inputs: "p.2 Table I"}
+  - {table: components, row_id: tcpmt.2025.3538554-b-c4, field: thickness_um, value: 300, formula: "0.3 mm * 1000", inputs: "p.2 Table I"}
+  - {table: process_steps, row_id: tcpmt.2025.3538554-F2-s05, field: time_s, value: 600, formula: "10 min * 60", inputs: "p.3 Sec. II.A"}
+  - {table: process_steps, row_id: tcpmt.2025.3538554-F2-s04, field: time_s, value: 600, formula: "10 min * 60", inputs: "p.3 Sec. II.A"}
+  - {table: metrics, row_id: tcpmt.2025.3538554-a-m6, field: value, value: 3.5, formula: "paper's volume-weighted calculation (method of ref [21])", inputs: "p.7 Table IV"}
+conflicts:
+  - {table: components, row_id: tcpmt.2025.3538554-b-c1, field: thickness_um, values: [400, 500], locators: ["p.2 Table I; p.1 Abstract; p.3 Sec. II.B", "p.2 Sec. I"], chosen: 400, why: "table and two text mentions agree on 0.4 mm"}
+excluded:
+  - "TSMC 0.4/0.4 um L/S (ref [13]) and conventional 10/10 um (ref [19]) as prior art"
+  - "typical Cu-fill TSV aspect ratio 5:1-10:1 (refs [10],[11])"
+  - "dummy Si interposer of the authors' previous paper [20]"
+  - "Table IV/V material constants are inputs from refs [22]-[24] (kept only as layer properties/notes)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "Cu-Sn bonding temperature, pressure, time and bonding level"
+  - "TSV count; RDL via sizes; line/space of RDL-5 to RDL-8"
+  - "blind-hole etch method, thinning method, CMP steps"
+  - "module-level electrical test, reliability tests, measured MMA chip warpage after packaging"
+source_quality:
+  - "Tables I-VI are images; text layer omits them. RDL-7 resistance printed as 'about 80 mOhm' (text layer drops the symbol)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3538554-F1-s20", change: "deleted (sputter 3000 A Al temporary short); kept in metrics tcpmt.2025.3538554-a-m2 condition; derived entry for its thickness_um removed", reason: "test preparation for the conductance yield test, not a build step"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3538554-F1-s21", change: "deleted (two-probe conductance test); result already in metrics a-m2", reason: "measurement, not a step"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3538554-F1-s22", change: "deleted (Al removal with acetum); moved to metrics a-m2 condition", reason: "test clean-up, not a build step; p.8 Sec. VI.B"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3538554-a-m2", change: "condition adds Al removal with acetum and no pad damage", reason: "keeps detail of deleted steps F1-s20, s22"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3538554-F1-s10", change: "now 1 um SiO2 only (Fig. 3(l)); Cu fourth RDL split to s23", reason: "Fig. 3(l)-(m) give the order"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3538554-F1-s23", change: "added: 1 um Cu fourth RDL (Fig. 3(m))", reason: "split from s10"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3538554-F1-s11", change: "now debond only; temporary bond of the other side split to s24", reason: "Sec. III.B: debond, followed by temporary bond"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3538554-F1-s24", change: "added: temporary bond of other SLSI side to another handle wafer (Fig. 3(n))", reason: "split from s11"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3538554-F1-s01", change: "thickness_um 170 -> target 30 um diameter, 170 um deep (AR 5.7:1)", reason: "hole depth is a target geometry, not a layer thickness; p.3 Sec. III.A, p.4 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3538554-F1-s19", change: "target 49.8 x 49.8 x 0.387 mm", reason: "p.5 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3538554-F1", change: "categories rdl_layer on s04, s06, s09, s23; step_basis stated_in_flow; seq renumbered 1-21; tv_ids add tcpmt.2025.3538554-b", reason: "Fig. 3 order; the module TV b is built on the DLSSI made by this flow"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3538554-F1-s14", change: "category other kept (repeat of (a)-(o) on second wafer)", reason: "Fig. 3(q) is a repeat instruction, no single category"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3538554-F2", change: "targets (ball diameters) on s01, s02; chuck/no-clamp condition on s03-s05; step_basis stated_in_flow; flow_name", reason: "p.3 Sec. II.A steps 1-5"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3538554", change: "process_flow_level full confirmed; F1 ordered (thicknesses only), F2 full (reflow 260 C/175 C, 10 min)", reason: "Fig. 3 and Sec. II.A"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2025.3538554-F2-s05", change: "evidence derived entry added for time_s 600 (10 min * 60), replacing the entry of deleted F1-s20", reason: "every derived cell is logged; p.3 Sec. II.A"}

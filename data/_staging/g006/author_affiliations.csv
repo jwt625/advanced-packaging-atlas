@@ -1,1 +1,228 @@
 aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+vlsitechnologyandcir65830.2026.11577374-a01-1,vlsitechnologyandcir65830.2026.11577374,1,S. Morein,1,primary,SAIMEMORY Corp.,,Tokyo,JP,,paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a02-1,vlsitechnologyandcir65830.2026.11577374,2,P. Mahji,1,primary,Intel Corporation,,"Santa Clara, CA",US,printed: Intel,paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a03-1,vlsitechnologyandcir65830.2026.11577374,3,W. Gilmore,1,primary,Intel Corporation,,"Santa Clara, CA",US,printed: Intel,paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a04-1,vlsitechnologyandcir65830.2026.11577374,4,C.-L. Lu,1,primary,Powerchip Semiconductor Manufacturing Corporation,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a05-1,vlsitechnologyandcir65830.2026.11577374,5,S.C. Lin,1,primary,Powerchip Semiconductor Manufacturing Corporation,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a06-1,vlsitechnologyandcir65830.2026.11577374,6,C.H. Chuang,1,primary,Powerchip Semiconductor Manufacturing Corporation,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a07-1,vlsitechnologyandcir65830.2026.11577374,7,C.F. Sung,1,primary,Powerchip Semiconductor Manufacturing Corporation,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a08-1,vlsitechnologyandcir65830.2026.11577374,8,C.H. Chen,1,primary,Powerchip Semiconductor Manufacturing Corporation,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a09-1,vlsitechnologyandcir65830.2026.11577374,9,C.W. Huang,1,primary,Powerchip Semiconductor Manufacturing Corporation,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a10-1,vlsitechnologyandcir65830.2026.11577374,10,Y.L. Chang,1,primary,Powerchip Semiconductor Manufacturing Corporation,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a11-1,vlsitechnologyandcir65830.2026.11577374,11,S.-Z. Chang,1,primary,Powerchip Semiconductor Manufacturing Corporation,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a12-1,vlsitechnologyandcir65830.2026.11577374,12,Chris Liu,1,primary,AP Memory,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a13-1,vlsitechnologyandcir65830.2026.11577374,13,HN Hcueh,1,primary,AP Memory,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a14-1,vlsitechnologyandcir65830.2026.11577374,14,Hamy Yeh,1,primary,AP Memory,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a15-1,vlsitechnologyandcir65830.2026.11577374,15,PT Chen,1,primary,AP Memory,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a16-1,vlsitechnologyandcir65830.2026.11577374,16,Wenliang Chen,1,primary,AP Memory,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+tcpmt.2025.3628798-a01-1,tcpmt.2025.3628798,1,Jaber Derakhshandeh,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a02-1,tcpmt.2025.3628798,2,Eric Beyne,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a03-1,tcpmt.2025.3628798,3,Tom Cochet,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a04-1,tcpmt.2025.3628798,4,Vladimir Cherman,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a05-1,tcpmt.2025.3628798,5,Anish Dangol,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a06-1,tcpmt.2025.3628798,6,Dieter H. Cuypers,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a07-1,tcpmt.2025.3628798,7,Aldrin Vaquilar,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a08-1,tcpmt.2025.3628798,8,Jens Rip,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a09-1,tcpmt.2025.3628798,9,John Slabbekoorn,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a10-1,tcpmt.2025.3628798,10,Akito Hiro,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a11-1,tcpmt.2025.3628798,11,Prathamesh Dhakras,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a12-1,tcpmt.2025.3628798,12,Karl Ceulemans,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a13-1,tcpmt.2025.3628798,13,Tassawar Hussain,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a13-2,tcpmt.2025.3628798,13,Tassawar Hussain,2,additional,KU Leuven,,Leuven,BE,joint Ph.D. student with KU Leuven and IMEC per biography,paper,p.13 biography
+tcpmt.2025.3628798-a14-1,tcpmt.2025.3628798,14,Samuel Suhard,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a15-1,tcpmt.2025.3628798,15,Gerald Beyer,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+ectc51687.2025.00326-a01-1,ectc51687.2025.00326,1,Masashi Minami,1,primary,Resonac Corporation,,Kawasaki,JP,,paper,p.1 affiliations
+ectc51687.2025.00326-a02-1,ectc51687.2025.00326,2,Sachiko Matsushita,1,primary,Resonac Corporation,,Kawasaki,JP,,paper,p.1 affiliations
+ectc51687.2025.00326-a03-1,ectc51687.2025.00326,3,Sadaaki Katoh,1,primary,Resonac Corporation,,Kawasaki,JP,,paper,p.1 affiliations
+ectc51906.2022.00113-a01-1,ectc51906.2022.00113,1,Dail Rim,1,primary,SK hynix Inc.,R&D Center,Icheon,KR,"printed: SK Hynix Semiconductor Co., LTD; single shared block",paper,p.1 affiliations
+ectc51906.2022.00113-a02-1,ectc51906.2022.00113,2,Byeongho Lee,1,primary,SK hynix Inc.,R&D Center,Icheon,KR,"printed: SK Hynix Semiconductor Co., LTD; single shared block",paper,p.1 affiliations
+ectc51906.2022.00113-a03-1,ectc51906.2022.00113,3,Jinwon Park,1,primary,SK hynix Inc.,R&D Center,Icheon,KR,"printed: SK Hynix Semiconductor Co., LTD; single shared block",paper,p.1 affiliations
+ectc51906.2022.00113-a04-1,ectc51906.2022.00113,4,Changhyeon Cho,1,primary,SK hynix Inc.,R&D Center,Icheon,KR,"printed: SK Hynix Semiconductor Co., LTD; single shared block",paper,p.1 affiliations
+ectc51906.2022.00113-a05-1,ectc51906.2022.00113,5,Jiho Kang,1,primary,SK hynix Inc.,R&D Center,Icheon,KR,"printed: SK Hynix Semiconductor Co., LTD; single shared block",paper,p.1 affiliations
+ectc51906.2022.00113-a06-1,ectc51906.2022.00113,6,Ilseop Jin,1,primary,SK hynix Inc.,R&D Center,Icheon,KR,"printed: SK Hynix Semiconductor Co., LTD; single shared block",paper,p.1 affiliations
+ectc51846.2026.00365-a01-1,ectc51846.2026.00365,1,Yang Guo,1,primary,Intel Corporation,Assembly test and technology development,"Chandler, AZ",US,author grid; order row-major per page render,paper,p.1 affiliations
+ectc51846.2026.00365-a02-1,ectc51846.2026.00365,2,Ziyin Lin,1,primary,Intel Corporation,Assembly test and technology development,"Chandler, AZ",US,author grid; order row-major per page render,paper,p.1 affiliations
+ectc51846.2026.00365-a03-1,ectc51846.2026.00365,3,John C. Decker,1,primary,Intel Corporation,Assembly test and technology development,"Chandler, AZ",US,author grid; order row-major per page render,paper,p.1 affiliations
+ectc51846.2026.00365-a04-1,ectc51846.2026.00365,4,James Breyfogle,1,primary,Intel Corporation,Assembly test and technology development,"Chandler, AZ",US,author grid; order row-major per page render,paper,p.1 affiliations
+ectc51846.2026.00365-a05-1,ectc51846.2026.00365,5,Eylul Simsek,1,primary,Intel Corporation,Assembly test and technology development,"Chandler, AZ",US,author grid; order row-major per page render,paper,p.1 affiliations
+ectc51846.2026.00365-a06-1,ectc51846.2026.00365,6,Hsin-yu Li,1,primary,Intel Corporation,Assembly test and technology development,"Chandler, AZ",US,author grid; order row-major per page render,paper,p.1 affiliations
+ectc51846.2026.00365-a07-1,ectc51846.2026.00365,7,Yiqun Bai,1,primary,Intel Corporation,Assembly test and technology development,"Chandler, AZ",US,author grid; order row-major per page render,paper,p.1 affiliations
+ectc51846.2026.00365-a08-1,ectc51846.2026.00365,8,Chengzi Huang,1,primary,Intel Corporation,Assembly test and technology development,"Chandler, AZ",US,author grid; order row-major per page render,paper,p.1 affiliations
+ectc51846.2026.00365-a09-1,ectc51846.2026.00365,9,Wen Yang,1,primary,Intel Corporation,Assembly test and technology development,"Chandler, AZ",US,author grid; order row-major per page render,paper,p.1 affiliations
+ectc51687.2025.00090-a01-1,ectc51687.2025.00090,1,Da-Hee KIM,1,primary,Samsung Electronics,,Cheonan-si,KR,"printed: Samsung Electronics Co., Ltd.",paper,p.1 affiliations
+ectc51687.2025.00090-a02-1,ectc51687.2025.00090,2,Myung-Do Cho,1,primary,Samsung Electronics,,Yongin Si,KR,"printed: Samsung Electronics Co., Ltd.",paper,p.1 affiliations
+ectc51687.2025.00090-a03-1,ectc51687.2025.00090,3,Young-Chan Ko,1,primary,Samsung Electronics,,Yongin Si,KR,"printed: Samsung Electronics Co., Ltd.",paper,p.1 affiliations
+ectc51687.2025.00090-a04-1,ectc51687.2025.00090,4,Jae-Young Choi,1,primary,Samsung Electronics,,Yongin Si,KR,"printed: Samsung Electronics Co., Ltd.",paper,p.1 affiliations
+ectc51687.2025.00090-a05-1,ectc51687.2025.00090,5,Younchan Choi,1,primary,Samsung Electronics,,Yongin Si,KR,"printed: Samsung Electronics Co., Ltd.",paper,p.1 affiliations
+ectc51687.2025.00090-a06-1,ectc51687.2025.00090,6,Seok Won Lee,1,primary,Samsung Electronics,,Yongin Si,KR,"printed: Samsung Electronics Co, Ltd",paper,p.1 affiliations
+ectc51687.2025.00090-a07-1,ectc51687.2025.00090,7,Wonkyoung Choi,1,primary,Samsung Electronics,,Yongin Si,KR,"printed: Samsung Electronics Co, Ltd",paper,p.1 affiliations
+ectc51687.2025.00090-a08-1,ectc51687.2025.00090,8,Dae-Woo Kim,1,primary,Samsung Electronics,,Yongin Si,KR,"printed: Samsung Electronics Co, Ltd",paper,p.1 affiliations
+ectc51906.2022.00031-a01-1,ectc51906.2022.00031,1,Jeremy A. Theil,1,primary,Xperi Corporation,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a02-1,ectc51906.2022.00031,2,Thomas Workman,1,primary,Xperi Corporation,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a03-1,ectc51906.2022.00031,3,Dominik Suwito,1,primary,Xperi Corporation,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a04-1,ectc51906.2022.00031,4,Laura Mirkarimi,1,primary,Xperi Corporation,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a05-1,ectc51906.2022.00031,5,Gill Fountain,1,primary,Xperi Corporation,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a06-1,ectc51906.2022.00031,6,KM Bang,1,primary,Xperi Corporation,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a07-1,ectc51906.2022.00031,7,Guilian Gao,1,primary,Xperi Corporation,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a08-1,ectc51906.2022.00031,8,Bongsub Lee,1,primary,Xperi Corporation,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a09-1,ectc51906.2022.00031,9,Pawel Mrozek,1,primary,Xperi Corporation,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a10-1,ectc51906.2022.00031,10,Cyprian Uzoh,1,primary,Xperi Corporation,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a11-1,ectc51906.2022.00031,11,Michael Huynh,1,primary,Xperi Corporation,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a12-1,ectc51906.2022.00031,12,Oliver Zhao,1,primary,Xperi Corporation,,San Jose,US,single shared block,paper,p.1 affiliations
+tcpmt.2021.3104326-a01-1,tcpmt.2021.3104326,1,Candice Thomas,1,primary,CEA-Leti,,Grenoble,FR,"printed: CEA, LETI, Universite Grenoble Alpes; UGA not split out",paper,p.1 footnote
+tcpmt.2021.3104326-a02-1,tcpmt.2021.3104326,2,Jean Charbonnier,1,primary,CEA-Leti,,Grenoble,FR,"printed: CEA, LETI, Universite Grenoble Alpes; UGA not split out",paper,p.1 footnote
+tcpmt.2021.3104326-a03-1,tcpmt.2021.3104326,3,Arnaud Garnier,1,primary,CEA-Leti,,Grenoble,FR,"printed: CEA, LETI, Universite Grenoble Alpes; UGA not split out",paper,p.1 footnote
+tcpmt.2021.3104326-a04-1,tcpmt.2021.3104326,4,Nicolas Bresson,1,primary,CEA-Leti,,Grenoble,FR,"printed: CEA, LETI, Universite Grenoble Alpes; UGA not split out",paper,p.1 footnote
+tcpmt.2021.3104326-a05-1,tcpmt.2021.3104326,5,David Bouchu,1,primary,CEA-Leti,,Grenoble,FR,"printed: CEA, LETI, Universite Grenoble Alpes; UGA not split out",paper,p.1 footnote
+tcpmt.2021.3104326-a06-1,tcpmt.2021.3104326,6,Stéphane Moreau,1,primary,CEA-Leti,,Grenoble,FR,"printed: CEA, LETI, Universite Grenoble Alpes; UGA not split out",paper,p.1 footnote
+tcpmt.2021.3104326-a07-1,tcpmt.2021.3104326,7,Frédéric Gustavo,1,primary,CEA-IRIG,,Grenoble,FR,"printed: CEA, Interdisciplinary Research Institute of Grenoble (IRIG), Universite Grenoble Alpes",paper,p.1 footnote
+tcpmt.2021.3104326-a08-1,tcpmt.2021.3104326,8,Maud Vinet,1,primary,CEA-Leti,,Grenoble,FR,"printed: CEA, LETI, Universite Grenoble Alpes; UGA not split out",paper,p.1 footnote
+icep-iaac64884.2025.11002987-a01-1,icep-iaac64884.2025.11002987,1,Jia Sang Weng,1,primary,"Advanced Semiconductor Engineering, Inc.",,Kaohsiung,TW,,paper,p.1 affiliations
+icep-iaac64884.2025.11002987-a02-1,icep-iaac64884.2025.11002987,2,Cong-Wei Chen,1,primary,"Advanced Semiconductor Engineering, Inc.",,Kaohsiung,TW,,paper,p.1 affiliations
+icep-iaac64884.2025.11002987-a03-1,icep-iaac64884.2025.11002987,3,Shih Yu Wang,1,primary,"Advanced Semiconductor Engineering, Inc.",,Kaohsiung,TW,,paper,p.1 affiliations
+icep-iaac64884.2025.11002987-a04-1,icep-iaac64884.2025.11002987,4,Ping-Feng Yang,1,primary,"Advanced Semiconductor Engineering, Inc.",,Kaohsiung,TW,,paper,p.1 affiliations
+icep-iaac64884.2025.11002987-a05-1,icep-iaac64884.2025.11002987,5,Jen-Kuang Fang,1,primary,"Advanced Semiconductor Engineering, Inc.",,Kaohsiung,TW,,paper,p.1 affiliations
+ectc51909.2023.00023-a01-1,ectc51909.2023.00023,1,Laura Mirkarimi,1,primary,Adeia Inc.,,"San Jose, CA",US,"printed: Adeia, Inc.; author grid, row-major per page render",paper,p.1 affiliations
+ectc51909.2023.00023-a02-1,ectc51909.2023.00023,2,Thomas Workman,1,primary,Adeia Inc.,,"San Jose, CA",US,"printed: Adeia, Inc.; author grid, row-major per page render",paper,p.1 affiliations
+ectc51909.2023.00023-a03-1,ectc51909.2023.00023,3,Jeremy Theil,1,primary,Adeia Inc.,,"San Jose, CA",US,"printed: Adeia, Inc.; author grid, row-major per page render",paper,p.1 affiliations
+ectc51909.2023.00023-a04-1,ectc51909.2023.00023,4,Gill Fountain,1,primary,Adeia Inc.,,"San Jose, CA",US,"printed: Adeia, Inc.; author grid, row-major per page render",paper,p.1 affiliations
+ectc51909.2023.00023-a05-1,ectc51909.2023.00023,5,KM Bang,1,primary,Adeia Inc.,,"San Jose, CA",US,"printed: Adeia, Inc.; author grid, row-major per page render",paper,p.1 affiliations
+ectc51909.2023.00023-a06-1,ectc51909.2023.00023,6,Oliver Zhao,1,primary,Adeia Inc.,,"San Jose, CA",US,"printed: Adeia, Inc.; author grid, row-major per page render",paper,p.1 affiliations
+ectc51909.2023.00023-a07-1,ectc51909.2023.00023,7,Bongsub Lee,1,primary,Adeia Inc.,,"San Jose, CA",US,"printed: Adeia, Inc.; author grid, row-major per page render",paper,p.1 affiliations
+ectc51909.2023.00023-a08-1,ectc51909.2023.00023,8,Cyprian Uzoh,1,primary,Adeia Inc.,,"San Jose, CA",US,"printed: Adeia, Inc.; author grid, row-major per page render",paper,p.1 affiliations
+ectc51909.2023.00023-a09-1,ectc51909.2023.00023,9,Dominik Suwito,1,primary,Adeia Inc.,,"San Jose, CA",US,"printed: Adeia, Inc.; author grid, row-major per page render",paper,p.1 affiliations
+ectc51909.2023.00023-a10-1,ectc51909.2023.00023,10,Guilian Gao,1,primary,Adeia Inc.,,"San Jose, CA",US,"printed: Adeia, Inc.; author grid, row-major per page render",paper,p.1 affiliations
+estc60143.2024.10712070-a01-1,estc60143.2024.10712070,1,Adil Shehzad,1,primary,Fraunhofer Institute for Reliability and Microintegration IZM,IZM-ASSID,Dresden,DE,author grid; order row-major per page render (text layer column-major),paper,p.1 affiliations
+estc60143.2024.10712070-a02-1,estc60143.2024.10712070,2,Maksym Myndyk,1,primary,Fraunhofer Institute for Reliability and Microintegration IZM,IZM-ASSID,Dresden,DE,author grid; order row-major per page render (text layer column-major),paper,p.1 affiliations
+estc60143.2024.10712070-a03-1,estc60143.2024.10712070,3,Manuela Junghaehnel,1,primary,Fraunhofer Institute for Reliability and Microintegration IZM,IZM-ASSID,Dresden,DE,author grid; order row-major per page render (text layer column-major),paper,p.1 affiliations
+estc60143.2024.10712070-a04-1,estc60143.2024.10712070,4,Juliana Panchenko,1,primary,Fraunhofer Institute for Reliability and Microintegration IZM,IZM-ASSID,Dresden,DE,author grid; order row-major per page render (text layer column-major),paper,p.1 affiliations
+estc60143.2024.10712070-a04-2,estc60143.2024.10712070,4,Juliana Panchenko,2,additional,Technische Universität Dresden,Institute of Electronic Packaging Technology,Dresden,DE,printed: Technische Universitaet Dresden,paper,p.1 affiliations
+ectc51687.2025.00095-a01-1,ectc51687.2025.00095,1,Teck Chong Lee,1,primary,"Advanced Semiconductor Engineering, Inc.",,Kaohsiung,TW,,paper,p.1 affiliations
+ectc51687.2025.00095-a02-1,ectc51687.2025.00095,2,Yungshun Chang,1,primary,"Advanced Semiconductor Engineering, Inc.",,Kaohsiung,TW,,paper,p.1 affiliations
+ectc51687.2025.00095-a03-1,ectc51687.2025.00095,3,Chih-Pin Hung,1,primary,"Advanced Semiconductor Engineering, Inc.",,Kaohsiung,TW,,paper,p.1 affiliations
+ectc51687.2025.00095-a04-1,ectc51687.2025.00095,4,Lihong Cao,1,primary,"Advanced Semiconductor Engineering, Inc.",,Austin,US,"printed Austin, USA (email domain aseus.com)",paper,p.1 affiliations
+ectc51687.2025.00095-a05-1,ectc51687.2025.00095,5,Owen Yang,1,primary,"Advanced Semiconductor Engineering, Inc.",,Kaohsiung,TW,,paper,p.1 affiliations
+ectc51687.2025.00095-a06-1,ectc51687.2025.00095,6,Simon YL Huang,1,primary,"Advanced Semiconductor Engineering, Inc.",,Kaohsiung,TW,,paper,p.1 affiliations
+ectc51687.2025.00095-a07-1,ectc51687.2025.00095,7,Yihsien Wu,1,primary,"Advanced Semiconductor Engineering, Inc.",,Kaohsiung,TW,,paper,p.1 affiliations
+ectc51529.2024.00076-a01-1,ectc51529.2024.00076,1,Pablo Renaud,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; UGA not split out",paper,p.1 affiliations
+ectc51529.2024.00076-a02-1,ectc51529.2024.00076,2,Christophe Dubarry,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; UGA not split out",paper,p.1 affiliations
+ectc51529.2024.00076-a03-1,ectc51529.2024.00076,3,Nicolas Bresson,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; UGA not split out",paper,p.1 affiliations
+ectc51529.2024.00076-a04-1,ectc51529.2024.00076,4,Edouard Deschaseaux,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; UGA not split out",paper,p.1 affiliations
+ectc51529.2024.00076-a05-1,ectc51529.2024.00076,5,Frank Fournel,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; UGA not split out",paper,p.1 affiliations
+ectc51529.2024.00076-a06-1,ectc51529.2024.00076,6,Christophe Morales,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; UGA not split out",paper,p.1 affiliations
+ectc51529.2024.00076-a07-1,ectc51529.2024.00076,7,Karine Abadie,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; UGA not split out",paper,p.1 affiliations
+ectc51529.2024.00076-a08-1,ectc51529.2024.00076,8,Candice Thomas,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; UGA not split out",paper,p.1 affiliations
+ectc51529.2024.00076-a09-1,ectc51529.2024.00076,9,Jean Charbonnier,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; UGA not split out",paper,p.1 affiliations
+ectc51529.2024.00153-a01-1,ectc51529.2024.00153,1,Kwang-Seong Choi,1,primary,Electronics and Telecommunications Research Institute,Superintelligence Creative Laboratory,Daejeon,KR,"printed: ETRI; 4x3 grid, row-major per page render (text layer differs)",paper,p.1 affiliations
+ectc51529.2024.00153-a02-1,ectc51529.2024.00153,2,Jiho Joo,1,primary,Electronics and Telecommunications Research Institute,Superintelligence Creative Laboratory,Daejeon,KR,"printed: ETRI; 4x3 grid, row-major per page render (text layer differs)",paper,p.1 affiliations
+ectc51529.2024.00153-a03-1,ectc51529.2024.00153,3,Gwang-Mun Choi,1,primary,Electronics and Telecommunications Research Institute,Superintelligence Creative Laboratory,Daejeon,KR,"printed: ETRI; 4x3 grid, row-major per page render (text layer differs)",paper,p.1 affiliations
+ectc51529.2024.00153-a04-1,ectc51529.2024.00153,4,Jungho Shin,1,primary,Electronics and Telecommunications Research Institute,Superintelligence Creative Laboratory,Daejeon,KR,"printed: ETRI; 4x3 grid, row-major per page render (text layer differs)",paper,p.1 affiliations
+ectc51529.2024.00153-a05-1,ectc51529.2024.00153,5,Chanmi Lee,1,primary,Electronics and Telecommunications Research Institute,Superintelligence Creative Laboratory,Daejeon,KR,"printed: ETRI; 4x3 grid, row-major per page render (text layer differs)",paper,p.1 affiliations
+ectc51529.2024.00153-a06-1,ectc51529.2024.00153,6,Ki-Seok Jang,1,primary,Electronics and Telecommunications Research Institute,Superintelligence Creative Laboratory,Daejeon,KR,"printed: ETRI; 4x3 grid, row-major per page render (text layer differs)",paper,p.1 affiliations
+ectc51529.2024.00153-a07-1,ectc51529.2024.00153,7,Jin-Hyuk Oh,1,primary,Electronics and Telecommunications Research Institute,Superintelligence Creative Laboratory,Daejeon,KR,"printed: ETRI; 4x3 grid, row-major per page render (text layer differs)",paper,p.1 affiliations
+ectc51529.2024.00153-a08-1,ectc51529.2024.00153,8,Ho-Gyeong Yun,1,primary,Electronics and Telecommunications Research Institute,Superintelligence Creative Laboratory,Daejeon,KR,"printed: ETRI; 4x3 grid, row-major per page render (text layer differs)",paper,p.1 affiliations
+ectc51529.2024.00153-a09-1,ectc51529.2024.00153,9,Seok Hwan Moon,1,primary,Electronics and Telecommunications Research Institute,Superintelligence Creative Laboratory,Daejeon,KR,"printed: ETRI; 4x3 grid, row-major per page render (text layer differs)",paper,p.1 affiliations
+ectc51529.2024.00153-a10-1,ectc51529.2024.00153,10,Ji Eun Jung,1,primary,Electronics and Telecommunications Research Institute,Superintelligence Creative Laboratory,Daejeon,KR,"printed: ETRI; 4x3 grid, row-major per page render (text layer differs)",paper,p.1 affiliations
+ectc51529.2024.00153-a11-1,ectc51529.2024.00153,11,Gaeun Lee,1,primary,Electronics and Telecommunications Research Institute,Superintelligence Creative Laboratory,Daejeon,KR,"printed: ETRI; 4x3 grid, row-major per page render (text layer differs)",paper,p.1 affiliations
+ectc51529.2024.00153-a12-1,ectc51529.2024.00153,12,Yong-Sung Eom,1,primary,Electronics and Telecommunications Research Institute,Superintelligence Creative Laboratory,Daejeon,KR,"printed: ETRI; 4x3 grid, row-major per page render (text layer differs)",paper,p.1 affiliations
+ectc51846.2026.00008-a01-1,ectc51846.2026.00008,1,Teck Chong Lee,1,primary,"Advanced Semiconductor Engineering, Inc.",,Kaohsiung,TW,,paper,p.1 affiliations
+ectc51846.2026.00008-a02-1,ectc51846.2026.00008,2,Yungshun Chang,1,primary,"Advanced Semiconductor Engineering, Inc.",,Kaohsiung,TW,,paper,p.1 affiliations
+ectc51846.2026.00008-a03-1,ectc51846.2026.00008,3,Ping-Feng Yang,1,primary,"Advanced Semiconductor Engineering, Inc.",,Kaohsiung,TW,,paper,p.1 affiliations
+ectc51846.2026.00008-a04-1,ectc51846.2026.00008,4,Lihong Cao,1,primary,"Advanced Semiconductor Engineering, Inc.",,Austin,US,"printed Austin, USA",paper,p.1 affiliations
+ectc51846.2026.00008-a05-1,ectc51846.2026.00008,5,Wiwy Wudjud,1,primary,"Advanced Semiconductor Engineering, Inc.",,Austin,US,"printed Austin, USA",paper,p.1 affiliations
+ectc51846.2026.00008-a06-1,ectc51846.2026.00008,6,Powei Lu,1,primary,"Advanced Semiconductor Engineering, Inc.",,Kaohsiung,TW,,paper,p.1 affiliations
+ectc51846.2026.00008-a07-1,ectc51846.2026.00008,7,Yihsien Wu,1,primary,"Advanced Semiconductor Engineering, Inc.",,Kaohsiung,TW,,paper,p.1 affiliations
+ectc51529.2024.00057-a01-1,ectc51529.2024.00057,1,Stéphane Nicolas,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; 4x3 grid row-major per render (text layer column-major)",paper,p.1 affiliations
+ectc51529.2024.00057-a02-1,ectc51529.2024.00057,2,Jerzy-Javier Suarez-Berru,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; 4x3 grid row-major per render (text layer column-major)",paper,p.1 affiliations
+ectc51529.2024.00057-a03-1,ectc51529.2024.00057,3,Nicolas Bresson,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; 4x3 grid row-major per render (text layer column-major)",paper,p.1 affiliations
+ectc51529.2024.00057-a04-1,ectc51529.2024.00057,4,Carole Socquet-Clerc,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; 4x3 grid row-major per render (text layer column-major)",paper,p.1 affiliations
+ectc51529.2024.00057-a05-1,ectc51529.2024.00057,5,Myriam Assous,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; 4x3 grid row-major per render (text layer column-major)",paper,p.1 affiliations
+ectc51529.2024.00057-a06-1,ectc51529.2024.00057,6,Stéphan Borel,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; 4x3 grid row-major per render (text layer column-major)",paper,p.1 affiliations
+ectc51529.2024.00057-a07-1,ectc51529.2024.00057,7,Rémi Vélard,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; 4x3 grid row-major per render (text layer column-major)",paper,p.1 affiliations
+ectc51529.2024.00057-a08-1,ectc51529.2024.00057,8,Jérôme Dechamp,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; 4x3 grid row-major per render (text layer column-major)",paper,p.1 affiliations
+ectc51529.2024.00057-a09-1,ectc51529.2024.00057,9,Renan Bouis,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; 4x3 grid row-major per render (text layer column-major)",paper,p.1 affiliations
+ectc51529.2024.00057-a10-1,ectc51529.2024.00057,10,Antonio Roman,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; 4x3 grid row-major per render (text layer column-major)",paper,p.1 affiliations
+ectc51529.2024.00057-a11-1,ectc51529.2024.00057,11,Karine Abadie,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; 4x3 grid row-major per render (text layer column-major)",paper,p.1 affiliations
+ectc51529.2024.00057-a12-1,ectc51529.2024.00057,12,Damien Hebras,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, LETI; 4x3 grid row-major per render (text layer column-major)",paper,p.1 affiliations
+ectc51687.2025.00226-a01-1,ectc51687.2025.00226,1,Takuma Nakagawa,1,primary,Mitsubishi Materials Corporation,,Hyogo-ken,JP,printed: Mitsubishi Materials Corporration (sic); locality is a prefecture,paper,p.1 affiliations
+ectc51687.2025.00226-a02-1,ectc51687.2025.00226,2,Daiki Furuyama,1,primary,Mitsubishi Materials Corporation,,Hyogo-ken,JP,printed: Mitsubishi Materials Corporration (sic); locality is a prefecture,paper,p.1 affiliations
+ectc51687.2025.00226-a03-1,ectc51687.2025.00226,3,Takuma Katase,1,primary,Mitsubishi Materials Corporation,,Hyogo-ken,JP,printed: Mitsubishi Materials Corporration (sic); locality is a prefecture,paper,p.1 affiliations
+ectc51687.2025.00226-a04-1,ectc51687.2025.00226,4,Sho Nakagawa,1,primary,Mitsubishi Materials Corporation,,Hyogo-ken,JP,printed: Mitsubishi Materials Corporration (sic); locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00194-a01-1,ectc51846.2026.00194,1,Ksenija Varga,1,primary,EV Group,,St. Florian am Inn,AT,,paper,p.1 affiliations
+ectc51846.2026.00194-a02-1,ectc51846.2026.00194,2,Lisa Berger,1,primary,EV Group,,St. Florian am Inn,AT,,paper,p.1 affiliations
+ectc51846.2026.00194-a03-1,ectc51846.2026.00194,3,Tobias Zenger,1,primary,EV Group,,St. Florian am Inn,AT,,paper,p.1 affiliations
+ectc51846.2026.00194-a04-1,ectc51846.2026.00194,4,Hajime Furutani,1,primary,Asahi Kasei Corporation,,Shizuoka,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00194-a05-1,ectc51846.2026.00194,5,Masayuki Kishino,1,primary,Asahi Kasei Corporation,,Shizuoka,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51687.2025.00071-a01-1,ectc51687.2025.00071,1,Shuhang Lyu,1,primary,Purdue University,Brick Nanotechnology Center and School of Mechanical Engineering,"West Lafayette, IN",US,"unit printed 'Brick' as given; no country printed, US from city",paper,p.1 affiliations
+ectc51687.2025.00071-a02-1,ectc51687.2025.00071,2,Thomas Beechem,1,primary,Purdue University,Brick Nanotechnology Center and School of Mechanical Engineering,"West Lafayette, IN",US,"unit printed 'Brick' as given; no country printed, US from city",paper,p.1 affiliations
+ectc51687.2025.00071-a03-1,ectc51687.2025.00071,3,Tiwei Wei,1,primary,Purdue University,Brick Nanotechnology Center and School of Mechanical Engineering,"West Lafayette, IN",US,"unit printed 'Brick' as given; no country printed, US from city",paper,p.1 affiliations
+icep-iaac64884.2025.11002958-a01-1,icep-iaac64884.2025.11002958,1,A. Higashi,1,primary,"ULVAC, Inc.","PE-Semiconductor Technology Research Department, Institute of Advanced Technology",Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+icep-iaac64884.2025.11002958-a02-1,icep-iaac64884.2025.11002958,2,A. Ihori,1,primary,"ULVAC, Inc.","Advanced Electronics Equipment Division, Institute of Semiconductor & Electro",Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+icep-iaac64884.2025.11002958-a03-1,icep-iaac64884.2025.11002958,3,T. Yuze,1,primary,"ULVAC, Inc.","PE-Semiconductor Technology Research Department, Institute of Advanced Technology",Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+icep-iaac64884.2025.11002958-a04-1,icep-iaac64884.2025.11002958,4,T. Terasawa,1,primary,"ULVAC, Inc.","PE-Semiconductor Technology Research Department, Institute of Advanced Technology",Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+icep-iaac64884.2025.11002958-a05-1,icep-iaac64884.2025.11002958,5,M. Wakai,1,primary,"ULVAC, Inc.","PE-Semiconductor Technology Research Department, Institute of Advanced Technology",Chiba,JP,printed locality is a prefecture,paper,p.1 affiliations
+icep-iaac64884.2025.11002958-a06-1,icep-iaac64884.2025.11002958,6,Y. Morikawa,1,primary,"ULVAC, Inc.","PE-Semiconductor Technology Research Department, Institute of Advanced Technology",Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00198-a01-1,ectc51846.2026.00198,1,Naoya Sohara,1,primary,USHIO Inc.,,Gotenba,JP,"printed: 1-90, Komakado, Gotenba, Shizuoka",paper,p.1 affiliations
+ectc51846.2026.00198-a02-1,ectc51846.2026.00198,2,Toshimitsu Arai,1,primary,USHIO Inc.,,Gotenba,JP,"printed: 1-90, Komakado, Gotenba, Shizuoka",paper,p.1 affiliations
+ectc51846.2026.00198-a03-1,ectc51846.2026.00198,3,Ryotaro Takahashi,1,primary,USHIO Inc.,,Gotenba,JP,"printed: 1-90, Komakado, Gotenba, Shizuoka",paper,p.1 affiliations
+ectc51846.2026.00198-a04-1,ectc51846.2026.00198,4,Naoki Goto,1,primary,USHIO Inc.,,Gotenba,JP,"printed: 1-90, Komakado, Gotenba, Shizuoka",paper,p.1 affiliations
+ectc51846.2026.00198-a05-1,ectc51846.2026.00198,5,Hirosuke Takamatsu,1,primary,USHIO Inc.,,Gotenba,JP,"printed: 1-90, Komakado, Gotenba, Shizuoka",paper,p.1 affiliations
+ectc51846.2026.00012-a01-1,ectc51846.2026.00012,1,Huan-Ping Su,1,primary,Ableprint Technology Co. Ltd.,,Hsinchu,TW,printed: HsinChu,paper,p.1 affiliations
+ectc51846.2026.00012-a02-1,ectc51846.2026.00012,2,Ming-Hua Hsu,1,primary,Ableprint Technology Co. Ltd.,,Hsinchu,TW,printed: HsinChu,paper,p.1 affiliations
+ectc51846.2026.00012-a03-1,ectc51846.2026.00012,3,Chih-Horng Horng,1,primary,Ableprint Technology Co. Ltd.,,Hsinchu,TW,printed: HsinChu,paper,p.1 affiliations
+ectc51529.2024.00170-a01-1,ectc51529.2024.00170,1,Shuhei Yamada,1,primary,"Murata Manufacturing Co., Ltd.",,Kyoto,JP,text layer font-shifted; read on page render,paper,p.1 affiliations
+ectc51529.2024.00170-a02-1,ectc51529.2024.00170,2,Nobuyoshi Adachi,1,primary,"Murata Manufacturing Co., Ltd.",,Kyoto,JP,text layer font-shifted; read on page render,paper,p.1 affiliations
+ectc51529.2024.00170-a03-1,ectc51529.2024.00170,3,Kazuki Itoyama,1,primary,"Murata Manufacturing Co., Ltd.",,Kyoto,JP,text layer font-shifted; read on page render,paper,p.1 affiliations
+ectc51529.2024.00170-a04-1,ectc51529.2024.00170,4,Keito Yonemori,1,primary,Murata Electronics North America Inc.,,"San Jose, CA",US,text layer font-shifted; read on page render,paper,p.1 affiliations
+ectc51529.2024.00170-a05-1,ectc51529.2024.00170,5,Tatsuya Kitamura,1,primary,"Murata Manufacturing Co., Ltd.",,Kyoto,JP,text layer font-shifted; read on page render,paper,p.1 affiliations
+ectc51529.2024.00170-a06-1,ectc51529.2024.00170,6,Koshi Himeda,1,primary,"Murata Manufacturing Co., Ltd.",,Kyoto,JP,text layer font-shifted; read on page render,paper,p.1 affiliations
+ectc51529.2024.00170-a07-1,ectc51529.2024.00170,7,Atsushi Yamamoto,1,primary,"Murata Manufacturing Co., Ltd.",,Kyoto,JP,text layer font-shifted; read on page render,paper,p.1 affiliations
+ectc51846.2026.00302-a01-1,ectc51846.2026.00302,1,Maurice L. Haffner,1,primary,Fraunhofer Institute for Reliability and Microintegration IZM,,Berlin,DE,printed: Fraunhofer IZM,paper,p.1 affiliations
+ectc51846.2026.00302-a02-1,ectc51846.2026.00302,2,Tom Chojne,1,primary,Technische Universität Berlin,,Berlin,DE,printed: Technical University of Berlin,paper,p.1 affiliations
+ectc51846.2026.00302-a03-1,ectc51846.2026.00302,3,Julian Schwietering,1,primary,Fraunhofer Institute for Reliability and Microintegration IZM,,Berlin,DE,printed: Fraunhofer IZM,paper,p.1 affiliations
+ectc51846.2026.00302-a04-1,ectc51846.2026.00302,4,Hashem Al-Shami,1,primary,Fraunhofer Institute for Reliability and Microintegration IZM,,Berlin,DE,printed: Fraunhofer IZM,paper,p.1 affiliations
+ectc51846.2026.00302-a05-1,ectc51846.2026.00302,5,Ulrike Ganesh,1,primary,Fraunhofer Institute for Reliability and Microintegration IZM,,Berlin,DE,printed: Fraunhofer IZM,paper,p.1 affiliations
+ectc51846.2026.00074-a01-1,ectc51846.2026.00074,1,Meghna Narayanan,1,primary,Georgia Institute of Technology,"3D Systems Packaging Research Center, School of Material Science and Engineering",Atlanta,US,,paper,p.1 affiliations
+ectc51846.2026.00074-a02-1,ectc51846.2026.00074,2,Pragna Bhaskar,1,primary,Georgia Institute of Technology,3D Systems Packaging Research Center,Atlanta,US,,paper,p.1 affiliations
+ectc51846.2026.00074-a03-1,ectc51846.2026.00074,3,Kaushik Godbole,1,primary,Georgia Institute of Technology,George W. Woodruff School of Mechanical Engineering,Atlanta,US,,paper,p.1 affiliations
+ectc51846.2026.00074-a04-1,ectc51846.2026.00074,4,Lakshmi Narasimha Vijay Kumar,1,primary,Georgia Institute of Technology,Institute for Matter and Systems,Atlanta,US,,paper,p.1 affiliations
+ectc51846.2026.00074-a05-1,ectc51846.2026.00074,5,Lila Dahal,1,primary,Georgia Institute of Technology,Institute for Matter and Systems,Atlanta,US,,paper,p.1 affiliations
+ectc51846.2026.00074-a06-1,ectc51846.2026.00074,6,Durga Gajula,1,primary,Georgia Institute of Technology,Institute for Matter and Systems,Atlanta,US,,paper,p.1 affiliations
+ectc51846.2026.00074-a07-1,ectc51846.2026.00074,7,Kyoung-Sik Moon,1,primary,Georgia Institute of Technology,"3D Systems Packaging Research Center, School of Material Science and Engineering",Atlanta,US,,paper,p.1 affiliations
+ectc51846.2026.00074-a08-1,ectc51846.2026.00074,8,Muhannad Bakir,1,primary,Georgia Institute of Technology,"3D Systems Packaging Research Center, School of Electrical and Computer Engineering",Atlanta,US,,paper,p.1 affiliations
+ectc51846.2026.00074-a09-1,ectc51846.2026.00074,9,Suresh K. Sitaraman,1,primary,Georgia Institute of Technology,George W. Woodruff School of Mechanical Engineering,Atlanta,US,,paper,p.1 affiliations
+ectc51846.2026.00074-a10-1,ectc51846.2026.00074,10,Mark Losego,1,primary,Georgia Institute of Technology,"3D Systems Packaging Research Center, School of Material Science and Engineering",Atlanta,US,,paper,p.1 affiliations
+ectc51846.2026.00074-a11-1,ectc51846.2026.00074,11,Mohanalingam Kathaperumal,1,primary,Georgia Institute of Technology,"3D Systems Packaging Research Center, School of Electrical and Computer Engineering",Atlanta,US,,paper,p.1 affiliations
+ectc51529.2024.00106-a01-1,ectc51529.2024.00106,1,Koen Kennes,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51529.2024.00106-a02-1,ectc51529.2024.00106,2,Ye Lin,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51529.2024.00106-a03-1,ectc51529.2024.00106,3,Samuel Suhard,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51529.2024.00106-a04-1,ectc51529.2024.00106,4,Pieter Bex,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51529.2024.00106-a05-1,ectc51529.2024.00106,5,Dieter H. Cuypers,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51529.2024.00106-a06-1,ectc51529.2024.00106,6,Alice Guerrero,1,primary,"Brewer Science, Inc.",,"Rolla, MO",US,,paper,p.1 affiliations
+ectc51529.2024.00106-a07-1,ectc51529.2024.00106,7,Dennis Bumueller,1,primary,SUSS MicroTec Lithography GmbH,,Sternenfels,DE,,paper,p.1 affiliations
+ectc51529.2024.00106-a08-1,ectc51529.2024.00106,8,Alain Phommahaxay,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51529.2024.00106-a09-1,ectc51529.2024.00106,9,Gerald Beyer,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51529.2024.00106-a10-1,ectc51529.2024.00106,10,Eric Beyne,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+tcpmt.2025.3540665-a01-1,tcpmt.2025.3540665,1,O. Golim,1,primary,Aalto University,Department of Electrical Engineering and Automation,Espoo,FI,,paper,p.1 footnote
+tcpmt.2025.3540665-a02-1,tcpmt.2025.3540665,2,V. Vuorinen,1,primary,Aalto University,Department of Electrical Engineering and Automation,Espoo,FI,,paper,p.1 footnote
+tcpmt.2025.3540665-a03-1,tcpmt.2025.3540665,3,M. Paulasto-Kröckel,1,primary,Aalto University,Department of Electrical Engineering and Automation,Espoo,FI,,paper,p.1 footnote
+iedm45741.2023.10413759-a01-1,iedm45741.2023.10413759,1,Haoxiang Ren,1,primary,"University of California, Los Angeles","UCLA Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS), Henry Samueli School of Engineering","Los Angeles, CA",US,single shared block,paper,p.1 affiliations
+iedm45741.2023.10413759-a02-1,iedm45741.2023.10413759,2,Krutikesh Sahoo,1,primary,"University of California, Los Angeles","UCLA Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS), Henry Samueli School of Engineering","Los Angeles, CA",US,single shared block,paper,p.1 affiliations
+iedm45741.2023.10413759-a03-1,iedm45741.2023.10413759,3,Ziyi Guo,1,primary,"University of California, Los Angeles","UCLA Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS), Henry Samueli School of Engineering","Los Angeles, CA",US,single shared block,paper,p.1 affiliations
+iedm45741.2023.10413759-a04-1,iedm45741.2023.10413759,4,Rishi Pugazhendhi,1,primary,"University of California, Los Angeles","UCLA Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS), Henry Samueli School of Engineering","Los Angeles, CA",US,single shared block,paper,p.1 affiliations
+iedm45741.2023.10413759-a05-1,iedm45741.2023.10413759,5,Zachary Wong,1,primary,"University of California, Los Angeles","UCLA Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS), Henry Samueli School of Engineering","Los Angeles, CA",US,single shared block,paper,p.1 affiliations
+iedm45741.2023.10413759-a06-1,iedm45741.2023.10413759,6,Tianyu Xiang,1,primary,"University of California, Los Angeles","UCLA Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS), Henry Samueli School of Engineering","Los Angeles, CA",US,single shared block,paper,p.1 affiliations
+iedm45741.2023.10413759-a07-1,iedm45741.2023.10413759,7,Timothy S. Fisher,1,primary,"University of California, Los Angeles","UCLA Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS), Henry Samueli School of Engineering","Los Angeles, CA",US,single shared block,paper,p.1 affiliations
+iedm45741.2023.10413759-a08-1,iedm45741.2023.10413759,8,Subramanian S. Iyer,1,primary,"University of California, Los Angeles","UCLA Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS), Henry Samueli School of Engineering","Los Angeles, CA",US,single shared block,paper,p.1 affiliations
+itherm55375.2024.10709474-a01-1,itherm55375.2024.10709474,1,Jianyu Feng,1,primary,"Institute of Microelectronics, Chinese Academy of Sciences",,Beijing,CN,single shared block,paper,p.1 affiliations
+itherm55375.2024.10709474-a02-1,itherm55375.2024.10709474,2,Chuan Chen,1,primary,"Institute of Microelectronics, Chinese Academy of Sciences",,Beijing,CN,single shared block,paper,p.1 affiliations
+itherm55375.2024.10709474-a03-1,itherm55375.2024.10709474,3,Rong Fu,1,primary,"Institute of Microelectronics, Chinese Academy of Sciences",,Beijing,CN,single shared block,paper,p.1 affiliations
+itherm55375.2024.10709474-a04-1,itherm55375.2024.10709474,4,Liqiang Cao,1,primary,"Institute of Microelectronics, Chinese Academy of Sciences",,Beijing,CN,single shared block,paper,p.1 affiliations
+itherm55375.2024.10709474-a05-1,itherm55375.2024.10709474,5,Qidong Wang,1,primary,"Institute of Microelectronics, Chinese Academy of Sciences",,Beijing,CN,single shared block,paper,p.1 affiliations
+itherm55375.2024.10709474-a06-1,itherm55375.2024.10709474,6,Fengze Hou,1,primary,"Institute of Microelectronics, Chinese Academy of Sciences",,Beijing,CN,single shared block,paper,p.1 affiliations
+tcpmt.2025.3610036-a01-1,tcpmt.2025.3610036,1,Fuhan Liu,1,primary,Georgia Institute of Technology,3-D Systems Packaging Research Center,"Atlanta, GA",US,,paper,p.1 footnote
+tcpmt.2025.3610036-a02-1,tcpmt.2025.3610036,2,Rui Zhang,1,primary,Georgia Institute of Technology,3-D Systems Packaging Research Center,"Atlanta, GA",US,,paper,p.1 footnote
+tcpmt.2025.3610036-a03-1,tcpmt.2025.3610036,3,Kanno Kimiyuki,1,primary,JSR Corporation,,Yokkaichi,JP,name order as printed,paper,p.1 footnote
+tcpmt.2025.3610036-a04-1,tcpmt.2025.3610036,4,Joon Woo Kim,1,primary,Georgia Institute of Technology,3-D Systems Packaging Research Center,"Atlanta, GA",US,,paper,p.1 footnote
+tcpmt.2025.3610036-a05-1,tcpmt.2025.3610036,5,Madhavan Swaminathan,1,primary,Pennsylvania State University,Center for Heterogeneous Integration of Micro Electronic Systems,"State College, PA",US,,paper,p.1 footnote
+tcpmt.2025.3610036-a06-1,tcpmt.2025.3610036,6,Rao R. Tummala,1,primary,Georgia Institute of Technology,3-D Systems Packaging Research Center,"Atlanta, GA",US,,paper,p.1 footnote

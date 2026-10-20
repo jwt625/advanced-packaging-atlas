@@ -1,0 +1,23 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00119-a-c1,ectc51846.2026.00119-a,substrate,,,"substrate with comb-shaped Cu wiring, L/S 20/20 um",1,,,,,,,,,,,design_target,text,,p.3 Sec. II.C; p.3 Fig. 4,,Substrate materials and size not reported.
+ectc51846.2026.00119-b-c1,ectc51846.2026.00119-b,substrate,,,"substrate with comb-shaped Cu wiring, L/S 20/20 um",1,,,,,,,,,,,design_target,text,,p.3 Sec. II.C; p.3 Fig. 4,,
+ectc51846.2026.00119-c-c1,ectc51846.2026.00119-c,other,,,copper clad laminate (CCL),1,,,,,,,,,CCL,,stated,text,,p.2 Sec. II.A,,
+ectc51846.2026.00119-d-c1,ectc51846.2026.00119-d,other,,,HTCSR-2 SR coupon,1,,,200,,,,,,HTCSR-2 (1.0 W/mK),,design_target,text,,p.3 Sec. II.B,,
+ectc51846.2026.00119-d-c2,ectc51846.2026.00119-d,cold_plate,,,water-cooled copper heat sink,1,,,,,,,,,Cu,,stated,text,,p.2 Sec. II.B; p.3 Fig. 3(a),,
+ectc51846.2026.00119-d-c3,ectc51846.2026.00119-d,other,,,constant-power copper coil heater,1,,,,,,,,,Cu,,stated,text,,p.2 Sec. II.B; p.3 Fig. 3(a),,
+ectc51846.2026.00119-e-c1,ectc51846.2026.00119-e,other,,,HTCSR-1 SR coupon,1,,,200,,,,,,HTCSR-1 (0.7 W/mK),,design_target,text,,p.3 Sec. II.B,,
+ectc51846.2026.00119-e-c2,ectc51846.2026.00119-e,cold_plate,,,water-cooled copper heat sink,1,,,,,,,,,Cu,,stated,text,,p.2 Sec. II.B; p.3 Fig. 3(a),,
+ectc51846.2026.00119-e-c3,ectc51846.2026.00119-e,other,,,constant-power copper coil heater,1,,,,,,,,,Cu,,stated,text,,p.2 Sec. II.B; p.3 Fig. 3(a),,
+ectc51846.2026.00119-f-c1,ectc51846.2026.00119-f,other,,,Reference SR coupon,1,,,200,,,,,,Reference package SR (0.2 W/mK),,design_target,text,,p.3 Sec. II.B,,
+ectc51846.2026.00119-f-c2,ectc51846.2026.00119-f,cold_plate,,,water-cooled copper heat sink,1,,,,,,,,,Cu,,stated,text,,p.2 Sec. II.B; p.3 Fig. 3(a),,
+ectc51846.2026.00119-f-c3,ectc51846.2026.00119-f,other,,,constant-power copper coil heater,1,,,,,,,,,Cu,,stated,text,,p.2 Sec. II.B; p.3 Fig. 3(a),,
+ectc51846.2026.00119-g-c1,ectc51846.2026.00119-g,other,,,heat source (disc),1,25,25,200,,,,,,,,design_target,text,,p.3 Sec. II.B,,"25 mm diameter, 0.2 mm thick; x/y = diameter."
+ectc51846.2026.00119-g-c2,ectc51846.2026.00119-g,tim,,,TIM,1,25,25,20,,,,,,,,design_target,text,,p.3 Sec. II.B,,Same 25 mm diameter as heat source.
+ectc51846.2026.00119-g-c3,ectc51846.2026.00119-g,cold_plate,,,copper cold plate,1,,,,,,,,,"Cu, k 400 W/(m K)",,design_target,text,,p.3 Sec. II.B,,
+ectc51846.2026.00134-a-c1,ectc51846.2026.00134-a,bridge,,yes,EMIB (Embedded Multi-die Interconnect Bridge),2,,,,,,,,,Si,,stated,text,,p.3 Sec. III; p.4 Fig. 8(a),,Embedded in the top layers for fine die-to-die interconnect; bridge size and depth not reported.
+ectc51846.2026.00134-a-c2,ectc51846.2026.00134-a,substrate,,,glass core substrate (24-layer),1,,,,,,,,,glass core; wet SAP RDL,,stated,text,,p.3 Sec. III; p.4 Fig. 8,,"Glass type, core thickness and unit size not reported."
+ectc51846.2026.00134-e-c1,ectc51846.2026.00134-e,stiffener,,,stiffener (organic reference),1,,,,,,,,,,,stated,figure_image,,p.4 Fig. 7,,Only the label 'Organic with Stiffener'.
+ectc51846.2026.00140-a-c1,ectc51846.2026.00140-a,substrate,,,glass panel core with TGVs,,,,,,,,,,"glass (BF33, EXG or D263 named as laser-compatible types)",,stated,text,,p.2 Sec. 2; p.2 Sec. 3,,Specific glass used for any build not stated.
+ectc51846.2026.00115-a-c1,ectc51846.2026.00115-a,interposer,,,borosilicate glass core,1,,,1000,,,,,,borosilicate glass,,design_target,text,,p.5 Sec. III.B; p.3 Sec. III,,Glass product name not given.
+ectc51846.2026.00115-a-c2,ectc51846.2026.00115-a,other,,,TiC-coated diamond particles (TGV filler),,,,,,,,,,"diamond, ~200 nm TiC coating, electroless Cu shell",Element Six Inc.,stated,text,,p.3 Sec. III.A; p.5 Sec. III.A; p.7 Sec. V,,Particle diameter 20 um (design); target loading 50 vol%. Supplier for the diamond particles.
+ectc51846.2026.00115-b-c1,ectc51846.2026.00115-b,other,,,Cu-encapsulated TiC-coated diamond particles,,,,,,,,,,"diamond, TiC coating, 30 min electroless Cu shell",Element Six Inc.,stated,text,,p.5 Sec. III.B; p.3 Sec. III.A,,Same particles as TGV fill.

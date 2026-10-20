@@ -1,0 +1,49 @@
+paper_id: ectc51846.2026.00062
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00062/text.md
+  - references/ectc51846.2026.00062/source.json
+  - references/ectc51846.2026.00062/figures/page_02.png
+  - references/ectc51846.2026.00062/figures/page_03.png
+  - references/ectc51846.2026.00062/figures/page_04.png
+  - references/ectc51846.2026.00062/figures/page_05.png
+  - references/ectc51846.2026.00062/figures/page_06.png
+  - references/ectc51846.2026.00062/figures/cand/p02_fig1.png
+  - references/ectc51846.2026.00062/figures/cand/p03_fig4.png
+  - references/ectc51846.2026.00062/figures/cand/p04_tablei.png
+  - references/ectc51846.2026.00062/figures/cand/p05_tableii.png
+figure_reading_method: >-
+  Page renders at 150 dpi; 300 dpi re-crops of Fig. 1, 2, 3, 4, 5, 11 to read SEM/profilometry labels.
+  Fig. 9 bar heights read against y gridlines (0.025 um full scale, +/-0.0005 um). Fig. 11 CDF extremes and
+  CDF=0.5 crossings read against x ticks (+/-0.3 ohm left panel 3D die +/-0.5 ohm).
+entries:
+  - {table: interconnects, row_id: ectc51846.2026.00062-a-i1, field: diameter_um, value: 6.151, unit: um, basis: measured, locator: "p.2 Sec. II.A; p.2 Fig. 2(a)", note: "pillars slightly larger than expected; design diameter not stated"}
+  - {table: interconnects, row_id: ectc51846.2026.00062-a-i1, field: alignment_um, value: 3, unit: um, basis: measured, locator: "p.4 Fig. 8(b)", note: "caption: 2-3 um misalignment due to lithography overlay; upper bound entered"}
+  - {table: interconnects, row_id: ectc51846.2026.00062-a-i1, field: pad_x_um, value: 7, unit: um, basis: design_target, locator: "p.2 Sec. II.A", note: "nominal 7 x 17 um backside pad; measured 6.099/5.072 x 15.26 um (Fig. 3)"}
+  - {table: interconnects, row_id: ectc51846.2026.00062-c-i1, field: bonding_temp_c, value: 380, unit: C, basis: design_target, locator: "p.5 Table II", note: "tacking (bond head) temp; 250 C at interface"}
+derived:
+  - {table: stack_layers, row_id: ectc51846.2026.00062-a-L05, field: thickness_um, value: 0.25, formula: "250 nm / 1000", inputs: "p.2 Fig. 1(2) label"}
+  - {table: process_steps, row_id: ectc51846.2026.00062-F1-s09, field: thickness_um, value: 0.15, formula: "~150 nm / 1000", inputs: "p.2 Fig. 1(7)"}
+  - {table: process_steps, row_id: ectc51846.2026.00062-F3-s12, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.5 Table II"}
+  - {table: interconnects, row_id: ectc51846.2026.00062-c-i1, field: anneal_time_min, value: 60, formula: "1 h x 60", inputs: "p.5 Table II"}
+  - {table: metrics, row_id: ectc51846.2026.00062-c-m1, field: value, value: 8.4, formula: "0.0084 um x 1000", inputs: "p.5 Fig. 9 bar height"}
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00062-b-m3, field: value, values: ["25 kgf (Table I, DoE #3)", "shear strength 250 N (Abstract, Conclusion)"], locators: ["p.4 Table I", "p.1 Abstract; p.6 Sec. V"], chosen: "25 kgf", why: "result table; 25 kgf = 245 N, text rounds to 250 N"}
+  - {table: metrics, row_id: ectc51846.2026.00062-a-m3, field: value, values: ["0.138 um (Fig. 2b profilometry label)", "~150 nm (text, Fig. 2 caption, Fig. 1 step 7)"], locators: ["p.2 Fig. 2(b)", "p.2 Sec. II.A"], chosen: 0.138, why: "measured image label; ~150 nm kept as process target in step a-s09"}
+  - {table: metrics, row_id: ectc51846.2026.00062-c-m1, field: value, values: ["RMS < 7 nm consistently (Sec. II.B)", "Fig. 9 unbonded bar ~8.4 nm"], locators: ["p.3 Sec. II.B", "p.5 Fig. 9"], chosen: 8.4, why: "plotted measurement over text; both noted"}
+  - {table: process_steps, row_id: ectc51846.2026.00062-F1-s04, field: seq, values: ["text: SiN passivation after pillar damascene", "Fig. 1 step 2: PECVD nitride with FDRIE before damascene"], locators: ["p.2 Sec. II.A", "p.2 Fig. 1"], chosen: "text order", why: "text over schematic"}
+  - {table: interconnects, row_id: ectc51846.2026.00062-c-i1, field: pitch_um, values: ["20 um pitch (text, Table/Fig. 10)", "Fig. 5(b) caption: ~5 um pillars with 15 um space; SEM label 18.73 um; text 'sub-20 um pitch'"], locators: ["p.5 Sec. IV.A", "p.3 Fig. 5(b)"], chosen: 20, why: "stated design pitch; 18.73 um label endpoints unclear, not entered as metric"}
+excluded:
+  - "Batch anneal atmosphere and H.T. conditions of ref [12] (not restated)"
+  - "Contact-resistance order of magnitude in refs [7, 12]"
+  - "Prior Au-Au, Cu-Cu, Au-Cu, Al-Cu TCB results (refs [6]-[11])"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - Si-IF wiring, pad dimensions and pitch for mechanical TV; pillar height (only protrusion)
+  - mechanical-TV backside pad thickness beyond 50/500 nm Ti/Cu; design pillar diameter
+  - DoE sample counts; shear test method; reliability testing
+  - anneal atmosphere; total pillar count of electrical TV dies; yield of daisy chains
+source_quality:
+  - "Most candidates shifted up by ~0.015-0.025 page height (include preceding heading, clip bottom); Fig. 2, 5, 8, 10 had no candidate; p03_fig3 is a caption-only box."
+  - "Fig. 3 SEM also carries a 772.1 nm vertical label whose meaning is not stated; not entered."

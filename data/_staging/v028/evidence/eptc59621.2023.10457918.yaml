@@ -1,0 +1,49 @@
+paper_id: eptc59621.2023.10457918
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/eptc59621.2023.10457918/text.md
+  - references/eptc59621.2023.10457918/source.json
+  - references/eptc59621.2023.10457918/TEXT_LAYER_WARNING.md
+  - references/eptc59621.2023.10457918/figures/page_01_220dpi.png
+  - references/eptc59621.2023.10457918/figures/page_02_220dpi.png
+  - references/eptc59621.2023.10457918/figures/page_03_220dpi.png
+  - references/eptc59621.2023.10457918/figures/page_04_220dpi.png
+figure_reading_method: >-
+  OCR text verified against 220 dpi page images; Tab. 2-4 (garbled in OCR) read from 300 dpi re-crops of source.pdf.
+  Processor count checked by counting boxes in Fig. 6 and labels in the unnumbered Fig. 7 drawing (2.1-2.6, 4.1-4.4).
+entries:
+  - {table: components, row_id: eptc59621.2023.10457918-a-c2, field: count, value: 10, unit: ea, basis: design_target, locator: "p.1 Introduction; p.3 Fig. 6; p.3 Fig. 7", note: "10 red boxes / labels"}
+derived:
+  - {table: test_vehicles, row_id: eptc59621.2023.10457918-a, field: n_dies, value: 109, formula: "5 interposer + 10 processor + 94 optical", inputs: "p.1 Introduction"}
+  - {table: interconnects, row_id: eptc59621.2023.10457918-a-i1, field: depth_um, value: 150, formula: "TGV depth = wafer thickness", inputs: "p.1 Abstract"}
+  - {table: process_steps, row_id: eptc59621.2023.10457918-F1-s02, field: conditions, value: 254, formula: "10 mil x 25.4 um", inputs: "p.2 Sec. 2; p.3 Sec. 4"}
+  - {table: process_steps, row_id: eptc59621.2023.10457918-F1-s03, field: conditions, value: 152.4, formula: "6 mil x 25.4 um", inputs: "p.3 Sec. 4"}
+  - {table: process_steps, row_id: eptc59621.2023.10457918-F1-s04, field: conditions, value: 101.6, formula: "4 mil x 25.4 um", inputs: "p.3 Sec. 4"}
+conflicts:
+  - {table: components, row_id: eptc59621.2023.10457918-a-c2, field: count, values: [10, 12], locators: ["p.1 Introduction; p.3 Fig. 6; p.3 Fig. 7", "p.3 Sec. 4"], chosen: 10, why: "Intro count and both layout drawings show 10"}
+  - {table: metrics, row_id: eptc59621.2023.10457918-a-m3, field: value_text, values: ["error a -0.78", "30.441-31.18 = -0.739"], locators: ["p.4 Tab. 2"], chosen: "as printed", why: "table entered verbatim"}
+  - {table: metrics, row_id: eptc59621.2023.10457918-a-m9, field: value_text, values: ["error a 1.74", "8.29-6.5 = 1.79"], locators: ["p.4 Tab. 4"], chosen: "as printed", why: "table entered verbatim"}
+  - {table: metrics, row_id: eptc59621.2023.10457918-a-m14, field: value_text, values: ["interposer 3.2 edged (text)", "Tab. 2 sample 2 edged"], locators: ["p.3 Results", "p.4 Tab. 2"], chosen: "both kept", why: "chip IDs vs table sample numbers not mapped by paper"}
+excluded:
+  - "Mechanical dicing, manual cleaving, stealth dicing (50 um wafers) and die-edge cracking results of refs [1], [2], [4], [5]"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "glass type, TGV diameter/pitch, metallization and passivation materials and thicknesses"
+  - "solder material, reflow conditions (future paper)"
+  - "absolute vacuum pressure; stencil used per measured sample"
+  - "yield percentage"
+source_quality:
+  - "Garbled text layer; tesseract OCR (Tab. 2-4 unreadable in OCR, read from images). Fig. 3 and Fig. 7 captions absent; an unlabelled photo of diced interposers on p.3."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457918-F1-s01..s07,s09..s12", change: "step_basis -> stated_in_flow", reason: "order from Tab. 1 stages 1-5 and numbered Sec. 1-7 / Sec. 4 text"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457918-F1-s01", change: "category other -> carrier_prep", reason: "wafer mounting in vacuum-chuck holder is the first stage of Tab. 1 dicing (jig/vacuum setup)"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457918-F1-s08", change: "split: 'burr cleaning, filing and edge chamfer' -> 'burr cleaning' (stage 1 Dicing)", reason: "p.2 Tab. 1 places burr cleaning under 1. Dicing and filing/edge chamfer under 2. Pick/Shift"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457918-F1-s13", change: "added (split from s08): filing, edge chamfer, seq 9", reason: "p.2 Tab. 1 stage 2 item"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457918-F1-s09..s12", change: "seq 9..12 -> 10..13", reason: "make room for added s13 (ids not renumbered)"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457918-F1-s10", change: "conditions added: stencil aperture/pitch/thickness, alignment setup", reason: "p.2 Tab. 1 stage 3 items; p.3 Sec. 7"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457918-F1-s01", change: "thickness_in_um '' -> '150'; locator 'p.2 Sec. 1; p.2 Sec. 3; p.2 Fig. 2' -> 'p.2 Sec. 1; p.2 Sec. 3; p.2 Fig. 2; p.1 Abstract'", reason: "manifest target_missing_preexisting a-L02: 150 um glass wafer thickness (p.1 Abstract) as input thickness"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457918-F1-s10", change: "target '' -> 'LightKonnect LGA 500 um pitch, 300 um bump; processor BGA 150 um pitch, 70 um bump; interposer 800 um pitch, 400 um bump'; locator 'p.3 Sec. 6; p.3 Sec. 7; p.2 Tab. 1' -> 'p.3 Sec. 6; p.3 Sec. 7; p.2 Tab. 1; p.1 Introduction'; notes '' -> 'Dispensing forms the bumps (Sec. 7); per-chip pitch/bump sizes from p.1 Introduction.'", reason: "manifest target_missing a-i2/a-i3/a-i4: stated bump pitch/size the dispensing step forms"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457918-F1", change: "level 'full' -> 'ordered'", reason: "validator full_without_typed_condition: no stated typed condition (vacuum changes are relative 0.2-0.25 bar decrements)"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc59621.2023.10457918", change: "process_flow_level 'full' -> 'ordered'", reason: "validator full_without_typed_condition: ordered flow with tools/stencils but no typed condition; has_process_flow stays yes"}

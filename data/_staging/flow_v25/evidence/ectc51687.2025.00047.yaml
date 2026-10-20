@@ -1,0 +1,38 @@
+paper_id: ectc51687.2025.00047
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00047/text.md
+  - references/ectc51687.2025.00047/source.json
+  - references/ectc51687.2025.00047/figures/page_02.png
+  - references/ectc51687.2025.00047/figures/page_03.png
+  - references/ectc51687.2025.00047/figures/page_04.png
+  - references/ectc51687.2025.00047/figures/page_05.png
+figure_reading_method: >-
+  Candidates p03_fig6, p03_fig8, p04_tablei, p04_fig9, p04_fig10, p05_fig12 opened; Fig. 9 and Fig. 10 re-cropped
+  (candidates clipped). Fig. 8(a) markers read on 230 px per UI scale (+/-0.01 UI); 1.6 and 2.0 um values taken from the
+  printed eye-diagram labels in Fig. 8(b), which agree with the plot.
+entries:
+  - {table: metrics, row_id: ectc51687.2025.00047-d-m1, field: value, value: 0.59, unit: UI, basis: unspecified, locator: "p.3 Fig. 8(a)", note: "L/S 1.4 um, 8 Gbps, read from plot"}
+derived:
+  - {table: test_vehicles, row_id: ectc51687.2025.00047-a, field: n_dies, value: 16, formula: "4 SoC + 12 HBM", inputs: "p.4 Sec. IV.A"}
+  - {table: test_vehicles, row_id: ectc51687.2025.00047-b, field: n_dies, value: 16, formula: "4 SoC + 12 HBM", inputs: "p.4 Fig. 9"}
+conflicts:
+  - {table: test_vehicles, row_id: ectc51687.2025.00047-a, field: substrate_x_mm, values: [97.3, 97], locators: ["p.4 Sec. IV.A", "p.4 Fig. 9"], chosen: 97.3, why: "same build; Fig. 9 spec table value appears rounded"}
+  - {table: test_vehicles, row_id: ectc51687.2025.00047-b, field: substrate_x_mm, values: [97.3, 97], locators: ["p.4 Sec. IV.A", "p.4 Fig. 9"], chosen: 97.3, why: "same build; Fig. 9 spec table value appears rounded"}
+excluded:
+  - "UCIe lane speed 4-32 Gbps, up to 1000 lines/mm, channel up to 2 mm (specification background, Fig. 1-2)"
+  - "HBM4 6.4-10 Gbps and up to 1200 lines/mm (background, Fig. 1-2); Fig. 3 customized-HBM concept"
+  - "Fig. 4 normalized line density per layer vs pad CD and Fig. 7 normalized RC vs line length (normalized curves; only Table I/Fig. 5 example counts entered)"
+  - "CoWoS evolution of refs [1]-[8]; SI/PI references [9]-[12]"
+not_reported:
+  - process_steps (no fabrication or assembly flow described; KY process content not disclosed)
+  - optical_interfaces
+  - RDL and PM thicknesses, dielectric product and Dk/Df, RDL layer count of KY TV
+  - absolute line/via resistance values, capacitance values, microbump diameter/metallurgy
+  - warpage values, reliability results (stated as ongoing), package thickness
+  - "whether Fig. 8 eye diagrams are simulated or measured"
+source_quality:
+  - "Candidates p04_fig9 (SBT row) and p04_fig10 (x-axis labels) clipped at the bottom; manual crops used."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00047", change: "process_flow_level none confirmed (no change)", reason: "full text read: no fabrication/assembly steps; Fig. 6 compares POR vs KY RDL dimensions only"}

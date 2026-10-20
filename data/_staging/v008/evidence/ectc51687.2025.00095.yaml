@@ -1,0 +1,74 @@
+paper_id: ectc51687.2025.00095
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00095/text.md
+  - references/ectc51687.2025.00095/source.json
+  - references/ectc51687.2025.00095/figures/page_02.png
+  - references/ectc51687.2025.00095/figures/page_03.png
+  - references/ectc51687.2025.00095/figures/page_04.png
+figure_reading_method: >-
+  Page renders p.2-4 viewed; candidates p02_tablei, p02_fig1, p03_tableiii, p03_tablev, p03_fig2, p04_fig5, p04_fig6 opened;
+  manual re-crops of Fig. 1 (p.2) and Fig. 2 (p.3). Tables I, III, IV, VIII, IX read from images (agree with text.md).
+entries:
+  - {table: interconnects, row_id: ectc51687.2025.00095-a-i4, field: height_um, value: 120, unit: um, basis: measured, locator: "p.3 Sec. IV.A", note: "'up to 120um are feasible'"}
+  - {table: interconnects, row_id: ectc51687.2025.00095-a-i2, field: diameter_um, value: 10, unit: um, basis: design_target, locator: "p.3 Sec. IV.C", note: "passivation via opening"}
+derived: []
+conflicts: []
+excluded:
+  - "TCB process flow attribution: Fig. 1 cited to ref [2]; steps entered (qualitative), no conditions from [2]"
+  - "chiplet/HBM architecture context of ref [1]"
+  - "Table II LDI advantages/disadvantages (qualitative, no numbers)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - panel dimensions beyond '300mm', module/package/substrate/die sizes and thicknesses
+  - bump, C4, ball and pillar pitch/diameter; RDL via sizes except 10 um opening; RDL metal and dielectric products
+  - warpage values (discussed qualitatively only), TTV value, TCB temperature/force/time
+  - reliability conditions (TC range, uHAST/HTST temperatures), MR3X/MR6X definition, TV-2 sample counts
+source_quality:
+  - "Table VI image sits at top of p.3 right column while its caption is at the bottom of p.3 left column; candidate p03_tablevi bbox points at the caption corner (wrong)."
+  - "Candidates p02_fig1 and p03_fig2 clip the bottom of the figure."
+  - "Tables VII and VI share the caption 'CU REVEAL RESULT'; Table VII shows via landing."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1, change: "flow_name: 'FOCoS Bridge on 300 mm panel (Sec. II.B, II.E, Fig. 1)' -> 'FOCoS Bridge fan-out chip module on 300 mm panel (Sec. II.B)'; locator: 'p.2 Sec. II.B; p.3 Sec. IV.A; p.3 Sec. IV.B; p.2 Sec. II.D; p.3 Sec. IV.C; p.3 Sec. IV.D; p.3 Sec. IV.E; p.4 Fig. 3; p.2 Fig. 1; p.2 Sec. II.E; p.4 Sec. IV.F; p.4 Fig. 4' -> 'p.2 Sec. II.B; p.2 Sec. II.D; p.3 Table III; p.3 Sec. IV.A; p.3 Sec. IV.B; p.3 Sec. IV.C; p.3 Sec. IV.D; p.3 Sec. IV.E; p.4 Fig. 3'", reason: "module-to-substrate attach split out into F3"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s01, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s02, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s03, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s04, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s05, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s06, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s07, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s08, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s09, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s10, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s11, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s12, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s13, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s01, change: "category: 'other' -> 'carrier_prep'", reason: "carrier preparation category"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s05, change: "equipment: '' -> 'grinding wheel'", reason: "named tool type"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s06, change: "category: 'lithography' -> 'rdl_layer'; equipment: '' -> 'LDI'; target: '' -> '8/8 um L/S; 10 um passivation via opening'; overrides: '' -> 'target:design_target'; conditions: 'LDI; 2 top RDL L/S 8/8 um; 3 top passivation; 10 um via opening' -> '2 top RDL layers; 3 top passivation layers (Table III)'; locator: 'p.2 Sec. II.B; p.2 Sec. II.D; p.3 Sec. IV.C; p.3 Sec. IV.D' -> 'p.2 Sec. II.B; p.2 Sec. II.D; p.3 Table III; p.3 Sec. IV.C; p.3 Sec. IV.D'", reason: "RDL build-up category; stated L/S, via opening and LDI"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s11, change: "category: 'other' -> 'bumping'", reason: "C4 formation is bumping"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s14, change: "deleted", reason: "module-to-substrate TCB attach is a later sub-flow; moved to F3 (contract convention)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s15, change: "deleted", reason: "module-to-substrate TCB attach is a later sub-flow; moved to F3 (contract convention)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s16, change: "deleted", reason: "module-to-substrate TCB attach is a later sub-flow; moved to F3 (contract convention)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s17, change: "deleted", reason: "module-to-substrate TCB attach is a later sub-flow; moved to F3 (contract convention)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F1-s18, change: "deleted", reason: "module-to-substrate TCB attach is a later sub-flow; moved to F3 (contract convention)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F3, change: "added", reason: "module-to-substrate attach sub-flow (Sec. II.B final sentence, Sec. II.E, Fig. 1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F3-s01, change: "added", reason: "replaces ectc51687.2025.00095-F1-s14 (moved to sub-flow F3)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F3-s02, change: "added", reason: "replaces ectc51687.2025.00095-F1-s15 (moved to sub-flow F3)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F3-s03, change: "added", reason: "replaces ectc51687.2025.00095-F1-s16 (moved to sub-flow F3)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F3-s04, change: "added", reason: "replaces ectc51687.2025.00095-F1-s17 (moved to sub-flow F3)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F3-s05, change: "added", reason: "replaces ectc51687.2025.00095-F1-s18 (moved to sub-flow F3)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F2-s01, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.C text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F2-s02, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.C text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F2-s03, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.C text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F2-s04, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.C text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F2-s05, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.C text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F2-s06, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.C text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F2-s07, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.C text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F2-s08, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II.C text"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F2-s01, change: "category: 'other' -> 'carrier_prep'", reason: "carrier preparation category"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00095-F2-s02, change: "category: 'lithography' -> 'rdl_layer'; target: '' -> '5/5 um L/S'; overrides: '' -> 'target:design_target'; conditions: '3 RDL L/S 5/5 um; 4 passivation layers (Table IV); patterning method not stated for TV-2' -> '3 RDL layers; 4 passivation layers (Table IV); patterning method not stated for TV-2'", reason: "RDL build-up category; stated L/S"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00095-F3-s02", change: "category: 'other' -> 'dispense'", reason: "v008 category_other: flux dipping is flux application (dip transfer by bond head, p.2 Fig. 1 step 2); grouped with flux jetting s01"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00095-F3", change: "notes: build_seq 3 confirmed (after F1)", reason: "v008 build_seq_unverified: Sec. II.B orders module flow then TCB attach"}

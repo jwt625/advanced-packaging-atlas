@@ -25,7 +25,8 @@ derived:
   - {table: stack_layers, row_id: tcpmt.2021.3104326-a-L02, field: thickness_um, value: 0.85, formula: "850 nm / 1000", inputs: "p.2 Sec. II"}
   - {table: interconnects, row_id: tcpmt.2021.3104326-c-i2, field: diameter_um, value: 0.5, formula: "500 nm / 1000", inputs: "p.5 Fig. 6 caption"}
 conflicts:
-  - {table: interconnects, row_id: tcpmt.2021.3104326-a-i1, field: bonding_temp_c, values: ["260 C reflow of top wafer before dicing (p.2)", "260 C reflow at end of stacking (p.4)"], locators: ["p.2 Sec. II", "p.4 Sec. IV"], chosen: 260, why: "p.4 ties IMC formation to the 260 C stacking reflow; p.2 says only 'conventional mass reflow' for the stacking step"}
+  - {table: interconnects, row_id: tcpmt.2021.3104326-a-i1, field: bonding_temp_c, values: ["260 C reflow of top wafer before dicing (p.2)", "260 C reflow at end of stacking (p.5)"], locators: ["p.2 Sec. II", "p.5 Sec. IV"], chosen: 260, why: "p.5 ties IMC formation to the 260 C stacking reflow; p.2 says only 'conventional mass reflow' for the stacking step"}
+  - {table: metrics, row_id: tcpmt.2021.3104326-a-m10, field: value, values: [11.7, "about 11.0 (lowest warm-up point)"], locators: ["p.6 Table I; p.4 Sec. III", "p.3 Fig. 3(d)"], chosen: 11.7, why: "rule (k): result table and text over plot read"}
 excluded:
   - "Indium bump pitch limit 7.5 um (ref [11])"
   - "10 um pitch D2W and <=1 um pitch W2W Cu/SiO2 hybrid bonding (refs [17], [18])"
@@ -39,3 +40,17 @@ not_reported:
   - "bonding force/pressure, alignment tool, HB bonding temperature; plasma activation details"
   - "underfill product; per-chain yield"
   - "thermal conductivity of interconnects (future work)"
+revisions:
+  - {date: 2026-10-19, source: audit_x2A, row_id: "tcpmt.2021.3104326-b-i1", change: "resistance_mohm 47.8 -> empty (overrides cleared); locator p.4 Sec. IV -> p.5 Sec. IV", reason: "p.3 Fig. 3 caption: data obtained on assemblies without underfill; 47.8 mOhm (p.6 Table I) is the no-underfill Kelvin value; b-m2 keeps the 'similar' statement"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "tcpmt.2021.3104326-a-i1", change: "locator p.4 Sec. IV -> p.5 Sec. IV; notes 'per p.4' -> 'per p.5'", reason: "260 C stacking-reflow statement is after the page-5 marker (p.5 Sec. IV)"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "tcpmt.2021.3104326-a-s05", change: "locator p.4 Sec. IV -> p.5 Sec. IV; notes (p.4) -> (p.5)", reason: "260 C stacking-reflow statement is on p.5 Sec. IV"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "tcpmt.2021.3104326-b-s05", change: "locator p.4 Sec. IV -> p.5 Sec. IV; notes (p.4) -> (p.5)", reason: "260 C stacking-reflow statement is on p.5 Sec. IV"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "tcpmt.2021.3104326-c-i1", change: "height_um 0.5 -> empty; pad thickness moved to notes; override height_um:caption removed", reason: "p.5 Fig. 6 caption: 0.5 um is the bonding-pad thickness per side, not a joint height; c-L05/c-L06 already hold it"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "tcpmt.2021.3104326-a-m10", change: "value 11.7 kept; conflicts entry added (Table I 11.7 vs Fig. 3(d) lowest point ~11.0 mOhm)", reason: "rule (k): result table over plot read; p.3 Fig. 3(d) lowest warm-up point reads about 11.0 mOhm"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "tcpmt.2021.3104326-a-i1", change: "evidence conflicts entry locator p.4 Sec. IV -> p.5 Sec. IV", reason: "same p.5 locator fix"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2021.3104326-f01", change: "re-ranked Fig. 5: tcpmt.2021.3104326-f02 -> tcpmt.2021.3104326-f01", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "tcpmt.2021.3104326-f03", change: "shows 'SiN liners' -> 'SiN dielectric layers arrowed'", reason: "p.5 Fig. 6(b) arrows label SiN dielectric layers; liners are Ti/TiN per p.2 Sec. II"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2021.3104326-f02", change: "re-ranked Fig. 6: tcpmt.2021.3104326-f03 -> tcpmt.2021.3104326-f02", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2021.3104326-f03", change: "re-ranked Fig. 2: tcpmt.2021.3104326-f01 -> tcpmt.2021.3104326-f03", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2021.3104326-f07", change: "added Fig. 4 (electrical_plot, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "tcpmt.2021.3104326-f01", change: "rank 1 Fig. 2 stack schematic -> Fig. 5 FIB-SEM cross-section (Fig. 2 now f03, Fig. 6 f02)", reason: "rule: cross-section image > stack schematic; Fig. 5/6 are FIB-SEM cross-sections of the built links"}

@@ -1,0 +1,12 @@
+flow_id,paper_id,flow_name,scope,level,tv_ids,build_seq,basis,source,overrides,locator,qualifiers,notes
+ectc.2016.201-F1,ectc.2016.201,bridge fabrication,generic_platform,ordered,ectc.2016.201-a,1,stated,text,,p.6 Sec. III; p.6 Sec. III(a); p.6 Sec. III(b),,
+ectc.2016.201-F2,ectc.2016.201,EMIB substrate and assembly (Fig. 5),generic_platform,ordered,ectc.2016.201-a,2,stated,mixed,,p.6 Sec. III; p.6 Sec. III(c); p.6 Fig. 5; p.6 Sec. III(d); p.6 Sec. III(e); p.7 Fig. 6; p.7 Fig. 7,,
+ectc.2019.00-29-F1,ectc.2019.00-29,test chip Cu pillar bumping (Sec. II.B),tv_build,ordered,ectc.2019.00-29-a,1,stated,text,,p.3 Sec. II.B; p.3 Fig. 4; p.3 Fig. 5,,
+ectc.2019.00-29-F2,ectc.2019.00-29,RDL-1st process integration flow (Fig. 6),tv_build,full,ectc.2019.00-29-a,2,stated,text,,p.3 Sec. III.A; p.3 Fig. 6(a)-(i); p.4 Sec. IV.A-B; p.6 Sec. IV.D; p.7 Sec. V.A; p.7 Fig. 20; p.7-8 Sec. V.B,,
+ectc.2019.00-29-F3,ectc.2019.00-29,photo-dielectric via-opening LDI DOE (Sec. IV.B),tv_build,ordered,ectc.2019.00-29-b,3,stated,text,,p.4 Sec. IV.B; p.5 Sec. IV.B; p.5 Fig. 9-12,,
+ectc.2019.00-29-F4,ectc.2019.00-29,photoresist LW/LS LDI DOE (Sec. IV.C),tv_build,ordered,ectc.2019.00-29-c,4,stated,text,,p.5 Sec. IV.C; p.6 Sec. IV.C; p.6 Fig. 13-17,,
+ectc.2019.00095-F1,ectc.2019.00095,SoIC integration flow (Fig. 2),generic_platform,ordered,ectc.2019.00095-a;ectc.2019.00095-b;ectc.2019.00095-c;ectc.2019.00095-d,1,stated,mixed,,p.2 Sec. II; p.2 Fig. 2; p.2 Sec. IV,,SoIC column of Fig. 2; KGDs used (p.2 Sec. II). b-d: SoIC stacking demos (Fig. 3a-c); InFO_PoP integration is a TV a delta.
+ectc.2019.00095-F2,ectc.2019.00095,typical 3DIC flow (Fig. 2),comparison,ordered,ectc.2019.00095-e,2,stated,schematic,,p.2 Fig. 2,,
+ectc.2011.5898527-F1,ectc.2011.5898527,TSV interposer (via-first/via-middle),tv_build,ordered,ectc.2011.5898527-a,1,stated,text,,p.1 Introduction; p.5 Conclusions; p.1 Abstract; p.2 Table 1,,"Steps and order from Introduction 'Typically ...' text (p.1); Conclusions (p.5) confirm DRIE, thermal oxide, barrier/seed, Cu fill, CMP for AR <= 10, so tv_ids a kept."
+ectc.2011.5898527-F2,ectc.2011.5898527,assembly,tv_build,ordered,ectc.2011.5898527-a,2,stated,text,,p.1 Introduction; p.2 Table 1; p.2 Package Warpage; p.3 Table 3; p.3 Sec. a; p.5 Reliability Assessment,,
+ectc32696.2021.00033-F1,ectc32696.2021.00033,InFO_oS 2.5x TV flow (as stated),tv_build,ordered,ectc32696.2021.00033-a,1,stated,mixed,,p.5 Sec. VI; p.1 Abstract; p.2 Sec. II; p.2 Sec. III; p.3 Sec. IV.B; p.3 Fig. 7; p.2 Fig. 4(c); p.5 Table VI; p.3 Sec. IV.A; p.3 Fig. 6,,

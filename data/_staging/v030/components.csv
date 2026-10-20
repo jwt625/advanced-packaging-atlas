@@ -1,0 +1,16 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+icep58572.2023.10129684-a-c1,icep58572.2023.10129684-a,mold,,,epoxy compound panel 600x600 mm,1,600,600,,,,,,,epoxy compound,,design_target,text,,p.1 Sec. II,,Embedded die content and thickness not given.
+icep58572.2023.10129684-b-c1,icep58572.2023.10129684-b,mold,,,epoxy compound panel 300x300 mm (with frame),1,300,300,,,,,,,epoxy compound,,design_target,text,,p.1 Sec. II; p.1 Fig. 1(b),,
+icep58572.2023.10129684-c-c1,icep58572.2023.10129684-c,substrate,,,standard substrate,1,95,240,150,,,,,,,,design_target,text,,p.2 Sec. III,thickness_um:approx,
+icep-iaac64884.2025.11002987-a-c1,icep-iaac64884.2025.11002987-a,dummy_die,yes,,12 inch Si wafer with daisy-chain Cu UBM pads,1,,,,,,,,,Si,,stated,text,,p.1 Sec. II; p.2 Sec. II,,"Wafer and die thickness, die size not given."
+icep-iaac64884.2025.11002958-b-c1,icep-iaac64884.2025.11002958-b,other,,,Th-SiO2 / Si test pieces,25,,,,,,,,,thermal SiO2 on Si,,design_target,text,,p.2 Sec. II; p.2 Fig. 5,,5 x 5 grid; piece size not stated.
+icep-iaac64884.2025.11002958-b-c2,icep-iaac64884.2025.11002958-b,substrate,,,510 x 515 mm panel substrate (carrier for test pieces),1,515,510,,,,,,,,,design_target,mixed,,p.2 Sec. II; p.2 Fig. 5,,Material not stated.
+icep-iaac64884.2025.11002958-c-c1,icep-iaac64884.2025.11002958-c,substrate,,,ABF flat substrate,1,,,,,,,,,Ajinomoto Build-up Film (ABF),,stated,text,,p.2 Sec. II; p.2 Fig. 6,,"ABF grade, thickness and core not stated; preheated before pretreatment."
+icep-iaac64884.2025.11002958-d-c1,icep-iaac64884.2025.11002958-d,substrate,,,alkali-free glass flat substrate,1,,,,,,,,,alkali-free glass,,stated,text,,p.2 Sec. II,,Glass product and thickness not stated.
+icep-iaac64884.2025.11002958-e-c1,icep-iaac64884.2025.11002958-e,substrate,,,alkali-free glass flat substrate,1,,,,,,,,,alkali-free glass,,stated,text,,p.2 Sec. II,,Glass product and thickness not stated.
+icep-iaac64884.2025.11002958-f-c1,icep-iaac64884.2025.11002958-f,substrate,,,glass substrate with hourglass TGVs,1,50,40,430,,,,,,glass (type not stated),,design_target,text,,p.2 Sec. II,,
+icep55381.2022.9795565-b-c1,icep55381.2022.9795565-b,other,,,"top die (Si, damascene BEOL, Ni/Sn bumps)",,,,,,,,,,Si,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,Die size not reported.
+icep55381.2022.9795565-b-c2,icep55381.2022.9795565-b,other,,,"bottom wafer (Si, damascene BEOL, Al probe pads, Co/Sn bumps in oxide cavities)",1,,,,,,,,,Si,,stated,text,,p.1 Sec. II; p.2 Sec. III.B; p.1 Fig. 1,,
+icep55381.2022.9795565-c-c1,icep55381.2022.9795565-c,other,,,"top die (Si, damascene BEOL, Ni/Sn bumps)",,,,,,,,,,Si,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,Die size not reported.
+icep55381.2022.9795565-c-c2,icep55381.2022.9795565-c,other,,,"bottom wafer (Si, damascene BEOL, Al probe pads, Co/Sn bumps in oxide cavities)",1,,,,,,,,,Si,,stated,text,,p.1 Sec. II; p.2 Sec. III.B; p.1 Fig. 1,,
+icep55381.2022.9795565-c-c3,icep55381.2022.9795565-c,underfill,,,capillary underfill (CUF),,,,,,,,,,,,stated,text,,p.2 Sec. III.D,,Product and cure conditions not stated.

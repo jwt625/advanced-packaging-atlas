@@ -1,0 +1,61 @@
+paper_id: ectc51529.2024.00151
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00151/text.md
+  - references/ectc51529.2024.00151/source.json
+  - references/ectc51529.2024.00151/figures/page_02.png
+  - references/ectc51529.2024.00151/figures/page_03.png
+  - references/ectc51529.2024.00151/figures/page_04.png
+  - references/ectc51529.2024.00151/figures/page_05.png
+  - references/ectc51529.2024.00151/figures/page_06.png
+  - references/ectc51529.2024.00151/figures/cand/p02_fig1.png
+  - references/ectc51529.2024.00151/figures/cand/p03_fig2.png
+  - references/ectc51529.2024.00151/figures/cand/p05_fig10.png
+  - references/ectc51529.2024.00151/figures/cand/p05_fig13.png
+  - references/ectc51529.2024.00151/figures/cand/p06_tableii.png
+  - references/ectc51529.2024.00151/figures/cand/p06_fig16.png
+figure_reading_method: >-
+  Page renders at 150 dpi and candidate crops. Fig. 9 TCB profile has no numeric axes; Fig. 13 gives only relative
+  warpage (1x, 1.9x, 1.5x); Fig. 12(b) SEM has no thickness labels.
+entries:
+  - {table: components, row_id: ectc51529.2024.00151-a-c3, field: count, value: 8, unit: ea, basis: stated, locator: "p.5 Sec. III.A; p.5 Fig. 10", note: "8 dashed bridge boxes in Fig. 10 agree"}
+derived: []
+conflicts:
+  - {table: stack_layers, row_id: ectc51529.2024.00151-a-L04, field: notes, values: ["1-layer RDL", "2P2M"], locators: ["p.5 Sec. III.A", "p.6 Sec. IV.B"], chosen: "both noted; no layer count entered", why: "metal/passivation counting convention not defined"}
+  - {table: stack_layers, row_id: ectc51529.2024.00151-b-L08, field: notes, values: ["2-layer RDL", "3P3M"], locators: ["p.5 Sec. III.B; p.6 Fig. 16 '2-RDL'", "p.2 Sec. II.A; p.2 Fig. 1; p.6 Sec. IV.B"], chosen: "both noted; no layer count entered", why: "counting convention not defined"}
+  - {table: test_vehicles, row_id: ectc51529.2024.00151-b, field: reticle_multiple, values: ["more than 3X (abstract)", "almost 2x (Sec. III)", "more than 2x (Sec. V)"], locators: ["p.1 Abstract", "p.5 Sec. III", "p.6 Sec. V"], chosen: "not entered", why: "three inconsistent statements"}
+  - {table: test_vehicles, row_id: ectc51529.2024.00151-a, field: interposer_x_mm, values: ["'2 fan-out size of 31 x 47 mm2 module'", "Fig. 13 FO size 47 x 31"], locators: ["p.5 Sec. III.A", "p.5 Fig. 13"], chosen: "31 x 47 single FO module", why: "Fig. 10 and Fig. 13 show one module per TV"}
+  - {table: papers, row_id: ectc51529.2024.00151, field: notes, values: ["text: scenarios 1, 5 and 7 low risk", "Table I: scenarios 1, 5 and 9 low risk"], locators: ["p.3 Sec. II.B", "p.3 Table I"], chosen: "not entered (qualitative)", why: "Table I internally consistent (same shape = low risk)"}
+excluded:
+  - "FOCoS-CF/CL qualification at L/S 2/2 um and up to 4 RDLs, and FOCoS-Bridge L/S < 1/1 um, cited to ref [4]"
+  - "LAB process-window limitation cited to ref [5]; PVD mechanism cited to ref [8]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - die sizes and thicknesses, HBM generation, bridge size for TV-2, RDL/via dimensions beyond L/S
+  - microbump pitch for TV-2, C4 pitch for TV-2, Cu pillar height/diameter, BGA pitch, substrate layer count
+  - TCB temperature, force, time; BSM metals and thicknesses; mold/underfill products
+  - absolute warpage values; reliability sample counts; specific JEDEC standard numbers
+source_quality:
+  - "Candidates usable as-is for all chosen figures; p06_fig16 bbox extends to page edge (x1=1.0) with blank margin."
+revisions:
+  - date: 2026-10-19
+    source: "sibling_dup"
+    row_id: "ectc51529.2024.00151-a-m7"
+    change: "scope '' -> 'applies to TVs a, b'"
+    reason: "p.6 Sec. IV.D: 'both TVs pass time zero O/S test', one statement, no per-TV values"
+  - date: 2026-10-19
+    source: "sibling_dup"
+    row_id: "ectc51529.2024.00151-b-m7"
+    change: "deleted (copy of ectc51529.2024.00151-a-m7)"
+    reason: "p.6 Sec. IV.D: 'both TVs pass time zero O/S test', one statement, no per-TV values"
+  - date: 2026-10-19
+    source: "sibling_dup"
+    row_id: "ectc51529.2024.00151-a-m8"
+    change: "scope '' -> 'applies to TVs a, b; Fig. 14(a)/(b) and Fig. 15 top/bottom image each TV'"
+    reason: "p.6 Sec. IV.C: no-shift / no cold joint / SOH-in-spec stated once for both TVs"
+  - date: 2026-10-19
+    source: "sibling_dup"
+    row_id: "ectc51529.2024.00151-b-m8"
+    change: "deleted (copy of ectc51529.2024.00151-a-m8)"
+    reason: "p.6 Sec. IV.C: no-shift / no cold joint / SOH-in-spec stated once for both TVs"

@@ -1,0 +1,29 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc32862.2020.00185-a01-1,ectc32862.2020.00185,1,Vempati Srinivasa Rao,1,primary,A*STAR Institute of Microelectronics,,Singapore,SG,,paper,p.1 affiliations
+ectc32862.2020.00185-a02-1,ectc32862.2020.00185,2,Chong Ser Choong,1,primary,A*STAR Institute of Microelectronics,,Singapore,SG,,paper,p.1 affiliations
+ectc32862.2020.00185-a03-1,ectc32862.2020.00185,3,Kazunori Yamamoto,1,primary,A*STAR Institute of Microelectronics,,Singapore,SG,,paper,p.1 affiliations
+ectc32696.2021.00315-a01-1,ectc32696.2021.00315,1,Soohyun Nam,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+ectc32696.2021.00315-a02-1,ectc32696.2021.00315,2,Younglyong Kim,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+ectc32696.2021.00315-a03-1,ectc32696.2021.00315,3,Aeni Jang,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+ectc32696.2021.00315-a04-1,ectc32696.2021.00315,4,Inhyo Hwang,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+ectc32696.2021.00315-a05-1,ectc32696.2021.00315,5,Sungwoo Park,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+ectc32696.2021.00315-a06-1,ectc32696.2021.00315,6,Su-Chang Lee,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+ectc32696.2021.00315-a07-1,ectc32696.2021.00315,7,Dae-Woo Kim,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+ectc32696.2021.00166-a01-1,ectc32696.2021.00166,1,Adel Elsherbini,1,primary,Intel,Technology Development - Components Research,"Chandler, AZ",US,country from printed city,paper,p.1 affiliations (page render; OCR text layer)
+ectc32696.2021.00166-a02-1,ectc32696.2021.00166,2,Shawna Liff,1,primary,Intel,Assembly & Test Technology Development,"Chandler, AZ",US,country from printed city,paper,p.1 affiliations (page render; OCR text layer)
+ectc32696.2021.00166-a03-1,ectc32696.2021.00166,3,Johanna Swan,1,primary,Intel,Technology Development - Components Research,"Chandler, AZ",US,country from printed city,paper,p.1 affiliations (page render; OCR text layer)
+ectc32696.2021.00166-a04-1,ectc32696.2021.00166,4,Kimin Jun,1,primary,Intel,Technology Development - Components Research,"Hillsboro, OR",US,country from printed city,paper,p.1 affiliations (page render; OCR text layer)
+ectc32696.2021.00166-a05-1,ectc32696.2021.00166,5,Sathya Tiagaraj,1,primary,Intel,Design Engineering Group,"Santa Clara, CA",US,country from printed city,paper,p.1 affiliations (page render; OCR text layer)
+ectc32696.2021.00166-a06-1,ectc32696.2021.00166,6,Gerald Pasdast,1,primary,Intel,Design Engineering Group,"Santa Clara, CA",US,country from printed city; printed Intel Coporation (sic),paper,p.1 affiliations (page render; OCR text layer)
+ectc32696.2021.00174-a01-1,ectc32696.2021.00174,1,Jacinta Aman Lim,1,primary,nepes,,,US,"multi-site block, no per-author mapping; org from email domain nepes.co.kr; country = first printed address",paper,p.1 affiliations
+ectc32696.2021.00174-a02-1,ectc32696.2021.00174,2,Yun-Mook Park,1,primary,nepes,,,US,"multi-site block, no per-author mapping; org from email domain nepes.co.kr; country = first printed address",paper,p.1 affiliations
+ectc32696.2021.00174-a03-1,ectc32696.2021.00174,3,Edil De Vera,1,primary,nepes,,,US,"multi-site block, no per-author mapping; org from email domain nepes.co.kr; country = first printed address",paper,p.1 affiliations
+ectc32696.2021.00174-a04-1,ectc32696.2021.00174,4,Byung-Cheol Kim,1,primary,nepes,,,US,"multi-site block, no per-author mapping; org from email domain nepes.co.kr; country = first printed address",paper,p.1 affiliations
+ectc32696.2021.00174-a05-1,ectc32696.2021.00174,5,Brett Dunlap,1,primary,nepes,,,US,"multi-site block, no per-author mapping; org from email domain nepes.co.kr; country = first printed address",paper,p.1 affiliations
+ectc51529.2024.00011-a01-1,ectc51529.2024.00011,1,Jacinta Aman Lim,1,primary,nepes,,San Diego,US,printed: nepes Corporation,paper,p.1 affiliations (page render; absent from text layer)
+ectc51529.2024.00011-a02-1,ectc51529.2024.00011,2,Jane Lee,1,primary,nepes,,San Diego,US,printed: nepes Corporation,paper,p.1 affiliations (page render; absent from text layer)
+ectc51529.2024.00011-a03-1,ectc51529.2024.00011,3,Hyun-Jin Shin,1,primary,nepes,,Chungcheongbuk-do,KR,printed: nepes Corporation; locality is a province as printed,paper,p.1 affiliations (page render; absent from text layer)
+ectc51529.2024.00011-a04-1,ectc51529.2024.00011,4,YunMook Park,1,primary,nepes,,Chungcheongbuk-do,KR,printed: nepes Corporation; locality is a province as printed,paper,p.1 affiliations (page render; absent from text layer)
+ectc51529.2024.00011-a05-1,ectc51529.2024.00011,5,Robin Davis,1,primary,Deca Technologies,,Tempe,US,printed: DECA,paper,p.1 affiliations (page render; absent from text layer)
+ectc51529.2024.00011-a06-1,ectc51529.2024.00011,6,YoungMo Lee,1,primary,nepes,,Chungcheongbuk-do,KR,printed: nepes Corporation; locality is a province as printed,paper,p.1 affiliations (page render; absent from text layer)
+ectc51529.2024.00011-a07-1,ectc51529.2024.00011,7,Brett Dunlap,1,primary,nepes,,"Phoenix, AZ",US,printed: nepes Corporation; country from printed city,paper,p.1 affiliations (page render; absent from text layer)

@@ -35,3 +35,15 @@ not_reported:
   - reflow, TCB, cure temperatures and times; dispense pressure, dot count, dot volume
   - thermal cycling standard, pass criterion, dwell; assembly yield number
   - warpage, electrical performance; electrical_interfaces, optical_interfaces
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00106-a-c1, change: "gap_um 150 -> empty; notes point to -a-m7", reason: "audit_x1 item 4: 150 um gap copied in c1 and m7; kept once as -a-m7 (tied to jet dispense, p.1 Abstract, p.4 Sec. V)"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00106-b-c1, change: "gap_um 150 -> empty; gap note removed", reason: "audit_x1 item 4: copy on sibling TV; the paper ties the gap to the CUF jetting build"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00106-a-i1, change: "ic_type c4 -> microbump; notes 'As written: fine pitch C4, uC4, micro joint'", reason: "audit_x1 item 10 interim fix: 75 um bridge bumps named uC4 / micro joint (p.1 Abstract, p.2 Fig. 1(a) label uC4)"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00106-b-i1, change: "ic_type c4 -> microbump; notes 'As written: fine pitch C4, uC4'", reason: "audit_x1 item 10"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00106, change: "papers.notes trimmed from 33 to 24 words", reason: "audit_x1 item 15 (rule m)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00106-figures, change: "renumbered f03 -> f04 (Fig. 2), f04 -> f07 (Fig. 7), f05 -> f09 (Fig. 6), f06 -> f11 (Table III)", reason: "re-rank under key-figure rule 2026-10-19 (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00106-f03, change: "added Fig. 3 (package_photo, manual)", reason: "photo of Si handler subassembly; source of -a-m11"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00106-f05, change: "added Fig. 8 (xray_csam, manual)", reason: "SAT image of the build; source of -a-m4"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00106-f06, change: "added Fig. 9 (micrograph, manual)", reason: "fillet image of the build; source of -a-m5"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00106-f08, change: "added Fig. 4 (other, manual)", reason: "jig drawing and first-trial result photo; source of -a-m10"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00106-f10, change: "added Fig. 5 (other, manual)", reason: "nozzle drawing and high-speed images; source of -c-m5"}

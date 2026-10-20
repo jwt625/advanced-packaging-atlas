@@ -1,0 +1,66 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51909.2023.00155-a-c1,ectc51909.2023.00155-a,logic_soc,yes,,Die A (mock of logic chip),1,21.9,21.9,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-a-c2,ectc51909.2023.00155-a,hbm,yes,,Die B (mock of HBM chip),4,10,8,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-a-c3,ectc51909.2023.00155-a,dummy_die,,,filler die 11 x 50 mm2,,11,50,,,,,,,,,design_target,mixed,,p.5 Sec. III.C; p.5 Fig. 9,,Modified design adopted to cut warpage; count not stated.
+ectc51909.2023.00155-a-c4,ectc51909.2023.00155-a,dummy_die,,,filler die 4 x 23 mm2,,4,23,,,,,,,,,design_target,mixed,,p.5 Sec. III.C; p.5 Fig. 9,,Count not stated.
+ectc51909.2023.00155-a-c5,ectc51909.2023.00155-a,die_attach_film,,,DAF for filler dies,,,,20,,,,,,,,design_target,text,,p.5 Sec. III.C,,
+ectc51909.2023.00155-a-c6,ectc51909.2023.00155-a,interposer,,,silicon interposer,1,50,50,200,,,,,,silicon; SiN insulating layer on top,,design_target,table,,p.2 Table 2; p.6 Table 10,,Measured 194 um (Table 10). No TSV described.
+ectc51909.2023.00155-a-c7,ectc51909.2023.00155-a,mold,,,granular EMC (compression mold),,,,698,,,,,,granular epoxy molding compound,,design_target,table,,p.6 Table 10; p.3 Table 7,,Mold thickness design; measured 694 um.
+ectc51909.2023.00155-a-c8,ectc51909.2023.00155-a,underfill,,,CUF under dies,,,,,,,,,,capillary underfill,,stated,text,,p.3 Sec. II.D; p.3 Table 6,,
+ectc51909.2023.00155-a-c9,ectc51909.2023.00155-a,underfill,,,CUF interposer-substrate,,,,,,,,,,capillary underfill,,stated,text,,p.4 Sec. II.H,,
+ectc51909.2023.00155-a-c10,ectc51909.2023.00155-a,substrate,,,"package Substrate-A (4/2/4 build-up, CCL core 2.8 ppm/C)",1,100,100,1600,,,,,,CCL core (2.8 ppm/C); build-up films,"SHINKO ELECTRIC INDUSTRIES CO., LTD.",design_target,table,supplier:text,p.2 Table 3; p.3 Sec. II.F; p.6 Table 11,,Measured total thickness 1.6 mm (Table 11). thickness_um converted from 1.6 mm.
+ectc51909.2023.00155-a-c11,ectc51909.2023.00155-a,stiffener,,,Cu stiffener,1,,,2000,,,,,,Cu,,design_target,text,,p.4 Sec. II.H; p.7 Sec. III.G,,"Attached with silicone glue, cured 130 C 1 h. Lateral size not given."
+ectc51909.2023.00155-a-c12,ectc51909.2023.00155-a,pcb,,,"motherboard (CCL 18.0 ppm/C, batch lamination)",1,150,150,2800,,,,,,CCL and prepregs,,design_target,table,,p.2 Table 4; p.7 Table 12,,Measured thickness 2.7 mm (Table 12).
+ectc51909.2023.00155-b-c1,ectc51909.2023.00155-b,logic_soc,yes,,Die A (mock of logic chip),1,21.9,21.9,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-b-c2,ectc51909.2023.00155-b,hbm,yes,,Die B (mock of HBM chip),4,10,8,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-b-c3,ectc51909.2023.00155-b,dummy_die,,,filler die 11 x 50 mm2,,11,50,,,,,,,,,design_target,mixed,,p.5 Sec. III.C; p.5 Fig. 9,,Modified design adopted to cut warpage; count not stated.
+ectc51909.2023.00155-b-c4,ectc51909.2023.00155-b,dummy_die,,,filler die 4 x 23 mm2,,4,23,,,,,,,,,design_target,mixed,,p.5 Sec. III.C; p.5 Fig. 9,,Count not stated.
+ectc51909.2023.00155-b-c5,ectc51909.2023.00155-b,die_attach_film,,,DAF for filler dies,,,,20,,,,,,,,design_target,text,,p.5 Sec. III.C,,
+ectc51909.2023.00155-b-c6,ectc51909.2023.00155-b,interposer,,,silicon interposer,1,50,50,200,,,,,,silicon; SiN insulating layer on top,,design_target,table,,p.2 Table 2; p.6 Table 10,,Measured 194 um (Table 10). No TSV described.
+ectc51909.2023.00155-b-c7,ectc51909.2023.00155-b,mold,,,granular EMC (compression mold),,,,698,,,,,,granular epoxy molding compound,,design_target,table,,p.6 Table 10; p.3 Table 7,,Mold thickness design; measured 694 um.
+ectc51909.2023.00155-b-c8,ectc51909.2023.00155-b,underfill,,,CUF under dies,,,,,,,,,,capillary underfill,,stated,text,,p.3 Sec. II.D; p.3 Table 6,,
+ectc51909.2023.00155-b-c9,ectc51909.2023.00155-b,underfill,,,CUF interposer-substrate,,,,,,,,,,capillary underfill,,stated,text,,p.4 Sec. II.H,,
+ectc51909.2023.00155-b-c10,ectc51909.2023.00155-b,substrate,,,"package Substrate-B (4/2/4 build-up, CCL core 0.7 ppm/C)",1,100,100,1600,,,,,,CCL core (0.7 ppm/C); build-up films,"SHINKO ELECTRIC INDUSTRIES CO., LTD.",design_target,table,supplier:text,p.2 Table 3; p.3 Sec. II.F; p.6 Table 11,,Measured total thickness 1.6 mm (Table 11). thickness_um converted from 1.6 mm.
+ectc51909.2023.00155-b-c11,ectc51909.2023.00155-b,stiffener,,,Cu stiffener,1,,,2000,,,,,,Cu,,design_target,text,,p.4 Sec. II.H; p.7 Sec. III.G,,"Attached with silicone glue, cured 130 C 1 h. Lateral size not given."
+ectc51909.2023.00155-b-c12,ectc51909.2023.00155-b,pcb,,,"motherboard (CCL 18.0 ppm/C, batch lamination)",1,150,150,2800,,,,,,CCL and prepregs,,design_target,table,,p.2 Table 4; p.7 Table 12,,Measured thickness 2.7 mm (Table 12).
+ectc51909.2023.00155-c-c1,ectc51909.2023.00155-c,logic_soc,yes,,Die A (mock of logic chip),1,21.9,21.9,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-c-c2,ectc51909.2023.00155-c,hbm,yes,,Die B (mock of HBM chip),4,10,8,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-c-c3,ectc51909.2023.00155-c,interposer,,,silicon interposer (wafer level),,50,50,,,,,,,silicon,,design_target,text,,p.2 Sec. II.A,,
+ectc51909.2023.00155-c-c4,ectc51909.2023.00155-c,mold,,,liquid EMC (MUF),,,,,,,,,,liquid epoxy molding compound,,stated,table,,p.3 Table 7,,
+ectc51909.2023.00155-d-c1,ectc51909.2023.00155-d,logic_soc,yes,,Die A (mock of logic chip),1,21.9,21.9,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-d-c2,ectc51909.2023.00155-d,hbm,yes,,Die B (mock of HBM chip),4,10,8,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-d-c3,ectc51909.2023.00155-d,interposer,,,silicon interposer (FEM),,50,50,,,,,,,silicon,,simulated,text,,p.3 Sec. II.E; p.3 Fig. 3,,
+ectc51909.2023.00155-d-c4,ectc51909.2023.00155-d,mold,,,EMC (FEM),,,,,,,,,,EMC (visco-elastic),,simulated,text,,p.3 Sec. II.E; p.3 Table 8,,
+ectc51909.2023.00155-d-c5,ectc51909.2023.00155-d,underfill,,,CUF (FEM),,,,,,,,,,CUF (visco-elastic),,simulated,text,,p.3 Sec. II.E; p.3 Table 8,,
+ectc51909.2023.00053-a-c1,ectc51909.2023.00053-a,logic_soc,,yes,"processor chiplet (U1, U2)",2,,,,,,,,,,,stated,mixed,,p.3 Sec. IV.A; p.3 Fig. 5; p.3 Fig. 6,,"Chips-first, face up, encapsulated. Size, thickness, node not reported; whether active silicon not stated."
+ectc51909.2023.00053-a-c2,ectc51909.2023.00053-a,hbm,yes,yes,HBM footprint die (U3-U6),4,,,,,,,,,,,stated,mixed,,p.3 Sec. IV.A; p.3 Fig. 5; p.3 Fig. 6,,Simulated HBM footprint with JEDEC 55 um pitch Cu studs; actual HBM to be mounted chips-last.
+ectc51909.2023.00053-a-c3,ectc51909.2023.00053-a,mold,,no,encapsulant (reconstituted wafer),,,,,,,,,,EMC or other dielectric (product not stated),,stated,text,,p.1 Abstract; p.3 Sec. IV.B,,Encapsulates active surface and sidewalls (face-up chips-first).
+ectc51909.2023.00151-a-c1,ectc51909.2023.00151-a,base_die,,,Base (Logic) chip,1,10.8,9.8,,,,,,,,,design_target,text,,p.2 Sec. II.B; p.2 Fig. 3,,Bonded as base logic wafer; thickness not reported.
+ectc51909.2023.00151-a-c2,ectc51909.2023.00151-a,dram,,,Core (Memory) chips,7,10.5,9.5,,,,,,,,,design_target,text,count:schematic,p.2 Sec. II.B; p.2 Fig. 3,,Thickness not reported.
+ectc51909.2023.00151-a-c3,ectc51909.2023.00151-a,dram,,,Top (Memory) chip (thick),1,10.5,9.5,,,,,,,,,design_target,text,count:schematic,p.2 Sec. II.B; p.2 Fig. 3; p.2 Sec. III.A,,Described as thick top memory chip; thickness not given.
+ectc51909.2023.00151-a-c4,ectc51909.2023.00151-a,underfill,,,"MUF (molded underfill, LMC C based)",,,,,,,,,,"liquid epoxy molding compound LMC C based; filler 77%, max 3 um; SRA -20%, LMC resin +20%",,stated,text,,p.1 Sec. II.A; p.2 Sec. II.A,,"Optimized MUF: CTE a1 18 ppm/C, modulus 11 GPa."
+ectc51909.2023.00151-b-c1,ectc51909.2023.00151-b,hbm,,,MR-MUF 8Hi HBM,1,,,,,,,,,,,stated,text,,p.4 Sec. III.C,,
+ectc51909.2023.00151-b-c2,ectc51909.2023.00151-b,interposer,,,Si interposer,,,,,,,,,,Si,,stated,text,,p.4 Sec. III.C,,
+ectc51909.2023.00151-b-c3,ectc51909.2023.00151-b,substrate,,,organic substrate,,,,,,,,,,,,stated,text,,p.4 Sec. III.C,,
+ectc51909.2023.00151-c-c1,ectc51909.2023.00151-c,dram,,,memory chips (8Hi),8,,,,,,,,,,,stated,text,,p.4 Sec. III.C,,
+ectc51909.2023.00151-c-c2,ectc51909.2023.00151-c,underfill,,,non-conductive film (NCF),,,,,,,,,,,,stated,text,,p.1 Sec. I,,
+ectc51909.2023.00150-a-c1,ectc51909.2023.00150-a,fpga,no,no,FPGA,1,29,12,,,,,,,Si,,design_target,table,,p.2 Table I; p.1 Abstract,,"Abstract: approximately 29 x 12 mm, more than 188,000 pads at 40 um pitch. Thickness not stated."
+ectc51909.2023.00150-a-c2,ectc51909.2023.00150-a,hbm,no,no,HBM2,1,11.9,7.8,,,,,,,,,design_target,table,,p.2 Table I,,Bump pitch 55 um.
+ectc51909.2023.00150-a-c3,ectc51909.2023.00150-a,asic,no,no,IBM AI chip,1,6,3,,,,,,,,,design_target,table,,p.2 Table I,,Bump pitch 150 um.
+ectc51909.2023.00150-a-c4,ectc51909.2023.00150-a,interposer,,,organic interposer with fine-pitch RDL,1,26,34,,,,,,,organic thin film (4 high density layers),,design_target,table,,p.2 Table I; p.2 Sec. II.A,,Top pads ENEPIG (Ni/Pd/Au). Dielectric and thickness not stated.
+ectc51909.2023.00150-a-c5,ectc51909.2023.00150-a,substrate,,,build-up substrate,1,55,55,,,,,,,,,design_target,table,,p.2 Table I; p.2 Sec. II.A,,"7-2-7: 7 top wiring layers, 2 around core, 7 bottom."
+ectc51909.2023.00150-a-c6,ectc51909.2023.00150-a,underfill,,,underfill (UF),,,,,,,,,,,,stated,text,,p.5 Sec. II.D,,Process optimized; dispensed before cooling. Material not stated.
+ectc51909.2023.00150-a-c7,ectc51909.2023.00150-a,lid,,,lid,1,,,,,,,,,,,stated,mixed,,p.5 Sec. II.D; p.6 Fig. 14(a),,Attached to substrate surface after chip bonding; material not stated.
+ectc51909.2023.00150-a-c8,ectc51909.2023.00150-a,pcb,,,evaluation board,1,,,,,,,,,,,stated,mixed,,p.5 Sec. II.D; p.6 Fig. 14(b),,Module mounted for power-on test.
+ectc51909.2023.00150-b-c1,ectc51909.2023.00150-b,dummy_die,yes,no,FPGA-size chip without device layers,1,29,12,,,,,,,,,design_target,text,x_mm:table;y_mm:table,p.2 Sec. II.A; p.2 Table I,,Same size and same bump array as FPGA (40 um pitch).
+ectc51909.2023.00154-a-c1,ectc51909.2023.00154-a,asic,yes,,3D-ASIC (large top die Cu-Cu hybrid bonded F2F to small bottom die with TSV),1,25,19,,,,,,,,,design_target,table,,p.2 Table 1; p.2 Sec. II; p.2 Fig. 3,,Daisy-chain test chip. 25x19 mm per Table 1 'ASIC (3D ASIC)'. Top die larger than bottom die. Chip gap: see a-m27.
+ectc51909.2023.00154-a-c2,ectc51909.2023.00154-a,asic,yes,,ASIC (2D),2,25,19,,,,,,,,,design_target,mixed,,p.2 Sec. II; p.2 Table 1,,Daisy-chain test chips.
+ectc51909.2023.00154-a-c3,ectc51909.2023.00154-a,other,,,chiplet,3,8.4,6.0,,,,,,,,,design_target,mixed,,p.2 Sec. II; p.2 Table 1,,Function not stated.
+ectc51909.2023.00154-a-c4,ectc51909.2023.00154-a,hbm,,,"HBM3 (Gen3), 8 core dies on buffer die",12,11,11,,,,,,,,,design_target,mixed,,p.2 Sec. II; p.2 Table 1,,
+ectc51909.2023.00154-a-c5,ectc51909.2023.00154-a,interposer,,,Si interposer with TSV (molded),1,,,110,,,,,,Si,,design_target,text,,p.1 Abstract; p.3 Sec. III,,4x reticle size; final thickness on 1st glass carrier.
+ectc51909.2023.00154-a-c6,ectc51909.2023.00154-a,substrate,,,"build-up organic substrate, 14 layers (6-2-6), extremely low CTE core",1,,,,,,,,,,,stated,mixed,,p.2 Sec. II; p.2 Table 1,,Core material/CTE value not named; Cu layer design optimized.
+ectc51909.2023.00154-a-c7,ectc51909.2023.00154-a,stiffener,,,"stiffener (foot width 10 x 3.5 mm, height above substrate thickness)",1,,,,,,,,,,,design_target,mixed,,p.2 Sec. II; p.2 Table 1; p.3 Sec. III,,Attached with adhesive; material not stated.
+ectc51909.2023.00154-a-c8,ectc51909.2023.00154-a,mold,,,"wafer-level mold, partially removed to expose die backsides",,,,,,,,,,,,stated,text,,p.3 Sec. III,,
+ectc51909.2023.00154-a-c9,ectc51909.2023.00154-a,underfill,,,"UF (CoW), wafer-level underfill",,,,,,,,,,,,stated,mixed,,p.3 Sec. III; p.5 Fig. 11,,
+ectc51909.2023.00154-a-c10,ectc51909.2023.00154-a,underfill,,,"UF (interposer), CM-to-substrate underfill",,,,,,,,,,,,stated,mixed,,p.3 Sec. III; p.5 Fig. 11,,
+ectc51909.2023.00154-a-c11,ectc51909.2023.00154-a,adhesive,,,stiffener adhesive,,,,,,,,,,,,stated,text,,p.3 Sec. III,,

@@ -1,0 +1,33 @@
+paper_id: ectc51846.2026.00008
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00008/text.md
+  - references/ectc51846.2026.00008/source.json
+  - references/ectc51846.2026.00008/figures/page_03.png
+  - references/ectc51846.2026.00008/figures/page_04.png
+  - references/ectc51846.2026.00008/figures/page_05.png
+figure_reading_method: >-
+  Page renders p.3-5; candidates p03_fig1, p03_tablev, p04_tableviii, p05_fig5, p05_tablexi opened; manual re-crops of
+  Fig. 1 (candidate cut at bottom, includes heading) and Table VI (candidate p03_tablevi points at caption on p.3; table
+  image is on p.4).
+entries:
+  - {table: test_vehicles, row_id: ectc51846.2026.00008-a, field: interposer_x_mm, value: 17, unit: mm, basis: design_target, locator: "p.1 Abstract", note: "FO interposer 'around 17 x 25 mm2'"}
+  - {table: metrics, row_id: ectc51846.2026.00008-a-m1, field: value, value: 5, unit: um, basis: measured, locator: "p.4 Sec. IV.C", note: "placement accuracy +/-5 um"}
+derived: []
+conflicts:
+  - {table: stack_layers, row_id: ectc51846.2026.00008-a-L05, field: repeat, values: [3, 4], locators: ["p.3 Table V; p.3 Sec. IV.A text; p.5 Sec. V", "p.3 Fig. 1 'Step1: 4P4M'; p.3 Sec. IV.A heading '4P4M'"], chosen: 3, why: "table and text state 3-layer RDL; 4P4M may count an extra metal (e.g. pad) layer, not explained"}
+excluded:
+  - "LDI, slit coating, laser dicing advantage/disadvantage Tables I-III (qualitative; Table I cites ref [2])"
+  - "laser dicing die-strength claim attributed to ref [3]"
+  - "Table IV wafer row 1.0 baseline (used as reference in scope)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - die sizes, thicknesses, process node; package thickness; substrate
+  - RDL dielectric material, thicknesses, via sizes; Cu thickness
+  - flip-chip bump type, pitch, size, metallurgy; bonding method and conditions
+  - underfill, EMC and carrier products; cure conditions; solder ball size/pitch
+  - warpage values, electrical test results beyond pass/fail, reliability standards
+source_quality:
+  - "p.5 text contains an unfilled editorial placeholder '[Package Size, e.g., 17x25mm]'. Page numbering 1-6 (no proceedings page range)."

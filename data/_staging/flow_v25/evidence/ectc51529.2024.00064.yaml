@@ -1,0 +1,55 @@
+paper_id: ectc51529.2024.00064
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00064/text.md
+  - references/ectc51529.2024.00064/source.json
+  - references/ectc51529.2024.00064/figures/page_02.png
+  - references/ectc51529.2024.00064/figures/page_03.png
+  - references/ectc51529.2024.00064/figures/page_04.png
+  - references/ectc51529.2024.00064/figures/page_05.png
+  - references/ectc51529.2024.00064/figures/cand/p02_fig1.png
+  - references/ectc51529.2024.00064/figures/cand/p03_fig2.png
+  - references/ectc51529.2024.00064/figures/cand/p03_fig3.png
+  - references/ectc51529.2024.00064/figures/cand/p04_fig4.png
+  - references/ectc51529.2024.00064/figures/cand/p04_fig5.png
+  - references/ectc51529.2024.00064/figures/cand/p05_fig6.png
+figure_reading_method: >-
+  Page renders p.2-5 plus 300 dpi re-crops of Fig. 1, 2, 3(b), 4, 5(a), 5(b-c), 6. Fig. 2 NCF thickness read on the
+  right axis (11-17 um, ~80 px/um at 300 dpi, +/-0.2 um). Fig. 3(b) force axis has no numbers; only the printed % labels
+  are used. Fig. 5(c) labels (50 um, 32 um) and Fig. 6(b) SEM labels (25 um, 12 um) read at 300 dpi.
+entries:
+  - {table: interconnects, row_id: ectc51529.2024.00064-a-i2, field: diameter_um, value: 32, unit: um, basis: design_target, locator: "p.4 Fig. 5(c)", note: "label on test bump in 3D surface image"}
+  - {table: interconnects, row_id: ectc51529.2024.00064-a-i2, field: pad_x_um, value: 50, unit: um, basis: design_target, locator: "p.4 Fig. 5(c)", note: "two '50um' labels along square pad edges"}
+  - {table: metrics, row_id: ectc51529.2024.00064-a-m2, field: value, value: 99.61, unit: "%", basis: measured, locator: "p.4 Fig. 5(a)", note: "wafer-map footer 'YLD:99.61%'"}
+derived:
+  - {table: interconnects, row_id: ectc51529.2024.00064-a-i1, field: height_um, value: 3, formula: "Ni pillar 3 um (cap_height_um = SnAg 9 um); total bump 12 um", inputs: "p.2 Sec. II"}
+conflicts:
+  - {table: metrics, row_id: ectc51529.2024.00064-a-m1, field: value, values: ["over 97% (abstract, text, conclusion)", "over 98% (Fig. 5 caption)", "YLD 99.61% (Fig. 5(a) wafer map)"], locators: ["p.1 Abstract; p.4 Sec. III.2; p.5 Sec. IV", "p.4 Fig. 5", "p.4 Fig. 5(a)"], chosen: "97 gt in m1; 99.61 recorded separately in m2", why: "authors' stated claim kept; wafer-map label is one wafer"}
+  - {table: metrics, row_id: ectc51529.2024.00064-a-m27, field: value, values: ["top chip area expanded 4.2% (text, Fig. 6 caption, conclusion)", "Chip area 5% (Fig. 6(a) label)", "fillet minimized to 4.2% of top chip area (abstract)"], locators: ["p.5 Sec. III.2", "p.5 Fig. 6(a)", "p.1 Abstract"], chosen: 4.2, why: "text and caption agree; abstract wording differs in meaning"}
+  - {table: metrics, row_id: ectc51529.2024.00064-a-m28, field: value, values: ["6k more bumps total (5k + 1k)", "increased the bump count to 5 k (conclusion)"], locators: ["p.5 Sec. III.2", "p.5 Sec. IV"], chosen: 6000, why: "results section explicit sum"}
+  - {table: metrics, row_id: ectc51529.2024.00064-a-m7, field: value, values: ["matched within 12% / error below 12% (text, caption)", "PV3 label 12.2% (Fig. 3(b))"], locators: ["p.3 Sec. III.2", "p.3 Fig. 3(b)"], chosen: 12.2, why: "plotted label"}
+  - {table: process_steps, row_id: ectc51529.2024.00064-F1-s04, field: conditions, values: ["optimal NCF thickness 1.03C umT (text)", "1.06C (Fig. 3(c) axis)"], locators: ["p.3 Sec. III.2", "p.3 Fig. 3(c)"], chosen: "neither entered (normalized/obfuscated)", why: "values given only as multiples of undisclosed C"}
+excluded:
+  - "NCF TC-bonding mass production in memory products, ref [5]"
+  - "Solder-to-NCF heat conductivity advantage, ref [7]; squeeze flow model, ref [8]; stress mechanism, ref [6]"
+  - "Fig. 3(c) Cpk table and optimal force 1.5B N at 1.03C umT: obfuscated normalized units (A, B, C)"
+  - "Fig. 2 inner volume values: left-axis labels (8.0E8, 1.1E9, 1.3E9, 1.6E9, 1.8E9) on equally spaced gridlines are inconsistent; not entered"
+  - "Fig. 3(a) alpha curves: model parameter, not entered"
+  - "beta = 5e-6 x bump count + 0.516 (model fit, not a package value)"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - chip sizes, chip thicknesses, wafer diameter, TSV dimensions (TSV mentioned generically), bottom pad metallurgy
+  - per-PV bump counts (only 30k-100K range), NCF product name, mold material
+  - exact TCB temperature/force/time per PV (only 300-380 C and 100-300 N optimization window)
+  - reliability results, warpage, electrical resistance values
+source_quality:
+  - "Several process values deliberately obfuscated (Force A/B/C, viscosity B, thickness C)."
+  - "All six candidates were usable as-is."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00064-F1-s01", change: "category other -> carrier_prep", reason: "'1. Wafer' is step (1) of Fig. 1(a)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00064-F1-s02", change: "split added (NCF thickness per PV, NCF viscosity)", reason: "stated NCF variables on the lamination step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00064-F1-s04", change: "optimization window moved conditions -> split; result 'assembly yield over 97%' removed (metric a-m1)", reason: "sweep in split; measured yield is a metric"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00064-F1-s05", change: "deleted electrical wafer test (daisy chain); yield already in metrics a-m1 (>97%) and a-m2 (99.61%)", reason: "tests are metrics, not steps"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00064-F1-s06", change: "deleted optical scope / X-ray inspection row; I/O sweep moved to new metric a-m31, test-bump result already a-m30", reason: "post-bond characterization, not placed inside the flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00064-a-m31", change: "added from deleted step F1-s06", reason: "moved test information to metrics"}

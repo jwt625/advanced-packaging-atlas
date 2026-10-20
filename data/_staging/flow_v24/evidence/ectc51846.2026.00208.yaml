@@ -1,0 +1,41 @@
+paper_id: ectc51846.2026.00208
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00208/text.md
+  - references/ectc51846.2026.00208/source.json
+  - references/ectc51846.2026.00208/figures/cand/p02_fig1.png
+  - references/ectc51846.2026.00208/figures/cand/p03_fig4.png
+  - references/ectc51846.2026.00208/figures/cand/p03_fig5.png
+  - references/ectc51846.2026.00208/figures/cand/p03_fig7.png
+  - references/ectc51846.2026.00208/figures/cand/p05_fig10.png
+  - references/ectc51846.2026.00208/figures/cand/p05_fig11.png
+  - references/ectc51846.2026.00208/figures/cand/p05_fig13.png
+  - references/ectc51846.2026.00208/figures/cand/p06_fig14.png
+figure_reading_method: >-
+  Candidate crops viewed directly (all clean). EL-Ni thickness labels per panel read from Fig. 5 (text layer lists
+  them out of panel order). Pillar diameter and 1 mm depth read from Fig. 14 labels.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00208-a-m1, field: value, value: 1.05, unit: um, basis: measured, locator: "p.3 Fig. 5(a)", note: "Phi100 um panel"}
+  - {table: metrics, row_id: ectc51846.2026.00208-a-m4, field: value, value: 0.27, unit: um, basis: measured, locator: "p.3 Fig. 5(d)", note: "Phi10 um panel"}
+derived:
+  - {table: interconnects, row_id: ectc51846.2026.00208-a-i1, field: count, value: 1600, formula: "40 x 40 array", inputs: "p.2 Sec. II.A"}
+  - {table: interconnects, row_id: ectc51846.2026.00208-a-i2, field: count, value: 1600, formula: "40 x 40 array", inputs: "p.2 Sec. II.A"}
+  - {table: interconnects, row_id: ectc51846.2026.00208-a-i3, field: count, value: 1600, formula: "40 x 40 array", inputs: "p.2 Sec. II.A"}
+  - {table: interconnects, row_id: ectc51846.2026.00208-a-i4, field: count, value: 1600, formula: "40 x 40 array", inputs: "p.2 Sec. II.A"}
+  - {table: process_steps, row_id: ectc51846.2026.00208-F1-s04, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.2 Sec. II.A"}
+  - {table: process_steps, row_id: ectc51846.2026.00208-F1-s14, field: time_s, value: 12600, formula: "3.5 h x 3600", inputs: "p.4 Sec. III.B"}
+  - {table: process_steps, row_id: ectc51846.2026.00208-F1-s15, field: time_s, value: 50400, formula: "14 h x 3600", inputs: "p.6 Sec. III.B.2"}
+conflicts:
+  - {table: components, row_id: ectc51846.2026.00208-b-c2, field: notes, values: ["Phi75 um Cu pillar", "Phi74 um Cu pillar"], locators: ["p.3 Fig. 4", "p.6 Fig. 14 caption and label"], chosen: 74, why: "photo/cross-section label and caption over schematic"}
+  - {table: process_steps, row_id: ectc51846.2026.00208-F1-s13, field: step, values: ["Sec. II.A: Ti/Cu 40/500 nm sputtered onto EL-Ni", "Sec. III.A: sputtered Cu adhesion layer between glass and EL-Ni"], locators: ["p.3 Sec. II.A", "p.4 Sec. III.A"], chosen: "both entered (s03 and s13)", why: "two distinct Cu layers described; s03 position in flow inferred"}
+  - {table: process_steps, row_id: ectc51846.2026.00208-F1-s14, field: conditions, values: ["initial conditions list single-sided agitation", "Fig. 9/10 captions: without agitation"], locators: ["p.4 Sec. III.B", "p.4 Fig. 9; p.5 Fig. 10"], chosen: "text conditions entered; metrics variant uses captions", why: "unresolved inside paper"}
+excluded:
+  - "Cu-oxide/glass fracture stress up to ~4 GPa attributed to refs [19], [20]"
+  - "Current-density literature comparisons of refs [22]-[30]"
+  - "Kaijo high-speed Cu pillar mounter (Fig. 15): shown as a scalable option, not stated as used for the TV"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - glass type, wafer diameter, TGV taper; Cu adhesion layer thickness; electroless and Cu bath compositions (EL-Ni chemicals Meltex, ack)
+  - via resistance, reliability, Cu pillar length, pillar count/pitch, resin product and cure
+  - quantitative seam size or fill ratio

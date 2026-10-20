@@ -1,0 +1,49 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc.2019.00095-a-c1,ectc.2019.00095-a,logic_soc,,,SoIC logic-on-logic chiplet stack,,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. IV,,"Number of tiers, die sizes, nodes not reported for this TV."
+ectc.2019.00095-b-c1,ectc.2019.00095-b,unspecified,,,small chiplets of different sizes,,,,,,,,,,,,stated,figure_image,,p.2 Fig. 3(a),,
+ectc.2019.00095-c-c1,ectc.2019.00095-c,unspecified,,,large chiplets (same size),,,,,,,,,,,,stated,figure_image,,p.2 Fig. 3(b),,
+ectc.2019.00095-d-c1,ectc.2019.00095-d,logic_soc,,,Logic1,1,,,,,,,,,,,stated,figure_image,,p.2 Fig. 3(c),,Label read from photo.
+ectc.2019.00095-d-c2,ectc.2019.00095-d,logic_soc,,,Logic2,1,,,,,,,,,,,stated,figure_image,,p.2 Fig. 3(c),,Label read from photo.
+ectc.2019.00095-d-c3,ectc.2019.00095-d,logic_soc,,,Logic3,1,,,,,,,,,,,stated,figure_image,,p.2 Fig. 3(c),,Label read from photo.
+ectc.2019.00095-e-c1,ectc.2019.00095-e,logic_soc,,,SOC-1 (top),1,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,
+ectc.2019.00095-e-c2,ectc.2019.00095-e,logic_soc,,,SOC-2 (bottom),1,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,
+ectc.2019.00095-e-c3,ectc.2019.00095-e,underfill,,,underfill,,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,
+ectc.2019.00095-f-c1,ectc.2019.00095-f,logic_soc,,,SoC1,1,,,,,,,,,,,stated,schematic,,p.3 Fig. 9,,
+ectc.2019.00095-f-c2,ectc.2019.00095-f,logic_soc,,,SoC2,1,,,,,,,,,,,stated,schematic,,p.3 Fig. 9,,
+ectc.2019.00095-f-c3,ectc.2019.00095-f,substrate,,,Substrate,,,,,,,,,,,,stated,schematic,,p.3 Fig. 9,,
+ectc51906.2022.00031-a-c1,ectc51906.2022.00031-a,dummy_die,yes,,"Cap die (top, links close daisy chain)",1,8,12,50,,,,,,Si,,design_target,text,,p.2 Sec. II.A; p.3 Sec. II.B,,Thinned to 50 um; backside not polished.
+ectc51906.2022.00031-a-c2,ectc51906.2022.00031-a,dummy_die,yes,,Logic host wafer (die site),1,8,12,,,,,,,Si,,design_target,text,x_mm:derived;y_mm:derived,p.2 Sec. II.A; p.3 Sec. II.B,,"Host wafer, DBI face up; x/y from 8 x 12 mm test vehicle die (inferred same footprint). Thickness not stated."
+ectc51906.2022.00031-b-c1,ectc51906.2022.00031-b,dummy_die,yes,,"Cap die (top, links close daisy chain)",1,8,12,50,,,,,,Si,,design_target,text,,p.2 Sec. II.A; p.3 Sec. II.B,,Thinned to 50 um; backside not polished.
+ectc51906.2022.00031-b-c2,ectc51906.2022.00031-b,dummy_die,yes,,"Thru die (TSV + DBI pads only, pass-through)",1,8,12,50,,,,,,Si,Fraunhofer IZM-ASSID (TSV wafers),design_target,text,,p.2 Sec. II.A; p.3 Sec. II.B,,
+ectc51906.2022.00031-b-c3,ectc51906.2022.00031-b,dummy_die,yes,,Logic host wafer (die site),1,8,12,,,,,,,Si,,design_target,text,x_mm:derived;y_mm:derived,p.2 Sec. II.A; p.3 Sec. II.B,,"Host wafer, DBI face up; x/y from 8 x 12 mm test vehicle die (inferred same footprint). Thickness not stated."
+ectc51906.2022.00031-c-c1,ectc51906.2022.00031-c,dummy_die,yes,,"Cap die (top, links close daisy chain)",1,8,12,50,,,,,,Si,,design_target,text,,p.2 Sec. II.A; p.3 Sec. II.B,,Thinned to 50 um; backside not polished.
+ectc51906.2022.00031-c-c2,ectc51906.2022.00031-c,dummy_die,yes,,"Thru die (TSV + DBI pads only, pass-through)",4,8,12,50,,,,,,Si,Fraunhofer IZM-ASSID (TSV wafers),design_target,text,,p.2 Sec. II.A; p.3 Sec. II.B,,
+ectc51906.2022.00031-c-c3,ectc51906.2022.00031-c,dummy_die,yes,,Logic host wafer (die site),1,8,12,,,,,,,Si,,design_target,text,x_mm:derived;y_mm:derived,p.2 Sec. II.A; p.3 Sec. II.B,,"Host wafer, DBI face up; x/y from 8 x 12 mm test vehicle die (inferred same footprint). Thickness not stated."
+ectc51906.2022.00031-d-c1,ectc51906.2022.00031-d,dummy_die,yes,,"Cap die (top, links close daisy chain)",1,8,12,50,,,,,,Si,,design_target,text,,p.2 Sec. II.A; p.3 Sec. II.B,,Thinned to 50 um; backside not polished.
+ectc51906.2022.00031-d-c2,ectc51906.2022.00031-d,dummy_die,yes,,"Thru die (TSV + DBI pads only, pass-through)",7,8,12,50,,,,,,Si,Fraunhofer IZM-ASSID (TSV wafers),design_target,text,,p.2 Sec. II.A; p.3 Sec. II.B,,
+ectc51906.2022.00031-d-c3,ectc51906.2022.00031-d,dummy_die,yes,,Logic host wafer (die site),1,8,12,,,,,,,Si,,design_target,text,x_mm:derived;y_mm:derived,p.2 Sec. II.A; p.3 Sec. II.B,,"Host wafer, DBI face up; x/y from 8 x 12 mm test vehicle die (inferred same footprint). Thickness not stated."
+eptc67330.2025.11392108-a-c1,eptc67330.2025.11392108-a,other,,yes,"RF IC CSP, mmWave radar sensor (TI-IWRL6432 WCSP)",1,4.5,4.9,625,,,,,,,TI,design_target,text,,p.3 Sec. IV.A; p.4 Sec. V; p.1 Abstract,,"Commercial CSP, 57-60 GHz, SAC305 balls; sits in B substrate cavity. RF IC has no component_type enum."
+eptc67330.2025.11392108-a-c2,eptc67330.2025.11392108-a,substrate,,,A substrate (antenna substrate),1,8,5.5,450,,,,,,,,design_target,schematic,x_mm:text;y_mm:text,p.2 Fig. 3; p.3 Fig. 6(d); p.3 Sec. IV.A,,"Symmetric build-up with core, made in panel format; carries 2T3R patch antenna array, area 4.3x6.9 mm."
+eptc67330.2025.11392108-a-c3,eptc67330.2025.11392108-a,interposer,,,B substrate (interposer) with cavity and coaxial vias,1,,,800,,,,,,,,design_target,schematic,,p.2 Fig. 3; p.3 Fig. 6(d); p.2 Sec. II,,Organic core substrate; cavity made after A/B bonding to house CSP; cavity size not given.
+eptc67330.2025.11392108-a-c4,eptc67330.2025.11392108-a,substrate,,,C substrate (IC carrier) with fine-line fan-out,1,,,230,,,,,,,,design_target,schematic,,p.2 Fig. 3; p.3 Fig. 6(d); p.2 Sec. II,thickness_um:approx,Fig. 6(d) '~0.23' span assigned to C substrate; line/space not given.
+eptc67330.2025.11392108-a-c5,eptc67330.2025.11392108-a,underfill,,,underfill (CSP/C and A-B unit/C gaps),2,,,,,,,,,,,stated,text,,p.3 Sec. IV.A; p.3 Fig. 7,,Dispensed and cured in pressure oven; material not given.
+eptc67330.2025.11392108-b-c1,eptc67330.2025.11392108-b,substrate,,,A substrate (antenna substrate),,,,,,,,,,,,stated,text,,p.4 Sec. VI; p.5 Fig. 15,,
+eptc67330.2025.11392108-b-c2,eptc67330.2025.11392108-b,interposer,,,B substrate (interposer),,,,,,,,,,,,stated,text,,p.4 Sec. VI; p.5 Fig. 15,,
+ectc51529.2024.00021-a-c1,ectc51529.2024.00021-a,hbm,,,"DRAM core die (top die), 16-high stack",16,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Fig. 1(b); p.2 Fig. 3,,"Die size, thickness and process node not reported."
+ectc51529.2024.00021-a-c2,ectc51529.2024.00021-a,base_die,,,bottom wafer (D2W target),,,,,,,,,,,,stated,schematic,,p.2 Fig. 3(b),,Shown in Fig. 3 as the wafer receiving the die stacks; function (base logic die) not stated.
+ectc51687.2025.00049-a-c1,ectc51687.2025.00049-a,bridge,yes,,"standard Si bridge with top side Cu pillar structures, emulating TSV-type bridge",1,,,,,,,,,Si,,stated,text,,p.2 Sec. II.B; p.2 Fig. 2,,Bottom side Cu-pillar/solder added by semi-additive process. Bridge dimensions and thickness not stated.
+ectc51687.2025.00049-a-c2,ectc51687.2025.00049-a,substrate,,,Si substrate with UBM/Sn pads and alignment squares,1,,,,,,,,,Si,,stated,text,,p.2 Sec. II.B; p.4 Sec. III.B,,Used instead of organic substrate (designs not available).
+ectc51687.2025.00049-b-c1,ectc51687.2025.00049-b,bridge,yes,,"standard Si bridge with top side Cu pillar structures, emulating TSV-type bridge",1,,,,,,,,,Si,,stated,text,,p.2 Sec. II.B; p.2 Fig. 2,,Bottom side Cu-pillar/solder added by semi-additive process. Bridge dimensions and thickness not stated.
+ectc51687.2025.00049-b-c2,ectc51687.2025.00049-b,substrate,,,Si substrate with UBM/Sn pads and alignment squares,1,,,,,,,,,Si,,stated,text,,p.2 Sec. II.B; p.4 Sec. III.B,,Used instead of organic substrate (designs not available).
+ectc51687.2025.00049-c-c1,ectc51687.2025.00049-c,unspecified,,,"Si chip (Chip A, Chip B)",2,,,,,,,,,Si,,stated,mixed,,p.2 Fig. 1; p.3 Sec. II.D,,Linear elastic properties in FEM; dimensions not given.
+ectc51687.2025.00049-c-c2,ectc51687.2025.00049-c,bridge,,,"two-sided bonding Si bridge (TSV-type, bottom solder joints)",1,,,,,,,,,Si,,stated,text,,p.3 Sec. II.D; p.4 Sec. II.D,,
+ectc51687.2025.00049-c-c3,ectc51687.2025.00049-c,substrate,,,"organic laminate (core + build-up, solder resist)",1,,,,,,,,,,,stated,mixed,,p.3 Sec. II.D; p.3 Fig. 6(f); p.4 Sec. II.D,,Temperature-dependent linear properties for core and build-up; equivalent properties for circuitry layers.
+ectc51687.2025.00049-c-c4,ectc51687.2025.00049-c,lid,,,copper lid,1,,,,,,,,,Cu,,stated,text,,p.4 Sec. II.D; p.2 Fig. 1,,Plastic properties assumed.
+ectc51687.2025.00049-c-c5,ectc51687.2025.00049-c,underfill,,,underfill,,,,,,,,,,,,stated,mixed,,p.2 Fig. 1; p.3 Fig. 6(f); p.3 Sec. II.D,,Product not stated.
+ectc51687.2025.00049-c-c6,ectc51687.2025.00049-c,tim,,,thermal interface material,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,Shown in Fig. 1 module concept only; not stated whether included in FEM model.
+ectc51687.2025.00049-d-c1,ectc51687.2025.00049-d,unspecified,,,"Si chip (Chip A, Chip B)",2,,,,,,,,,Si,,stated,mixed,,p.2 Fig. 1; p.3 Sec. II.D,,Linear elastic properties in FEM; dimensions not given.
+ectc51687.2025.00049-d-c2,ectc51687.2025.00049-d,bridge,,,single-sided bonding Si bridge,1,,,,,,,,,Si,,stated,text,,p.3 Sec. II.D; p.4 Sec. II.D,,
+ectc51687.2025.00049-d-c3,ectc51687.2025.00049-d,substrate,,,"organic laminate (core + build-up, solder resist)",1,,,,,,,,,,,stated,mixed,,p.3 Sec. II.D; p.3 Fig. 6(f); p.4 Sec. II.D,,Temperature-dependent linear properties for core and build-up; equivalent properties for circuitry layers.
+ectc51687.2025.00049-d-c4,ectc51687.2025.00049-d,lid,,,copper lid,1,,,,,,,,,Cu,,stated,text,,p.4 Sec. II.D; p.2 Fig. 1,,Plastic properties assumed.
+ectc51687.2025.00049-d-c5,ectc51687.2025.00049-d,underfill,,,underfill,,,,,,,,,,,,stated,mixed,,p.2 Fig. 1; p.3 Fig. 6(f); p.3 Sec. II.D,,Product not stated.
+ectc51687.2025.00049-d-c6,ectc51687.2025.00049-d,tim,,,thermal interface material,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,Shown in Fig. 1 module concept only; not stated whether included in FEM model.

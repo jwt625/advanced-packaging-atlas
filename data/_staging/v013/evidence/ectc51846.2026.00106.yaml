@@ -1,0 +1,49 @@
+paper_id: ectc51846.2026.00106
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00106/text.md
+  - references/ectc51846.2026.00106/source.json
+  - references/ectc51846.2026.00106/figures/page_02.png
+  - references/ectc51846.2026.00106/figures/page_03.png
+  - references/ectc51846.2026.00106/figures/page_04.png
+figure_reading_method: >-
+  Page renders p.2-4 viewed; Fig. 6 re-cropped at 300 dpi to read bend-loss points; candidate crops of Fig. 1, 3, 4, 5,
+  6, 7 opened. Garbled text-layer passages (p.3 mask widths, p.4 fan-out paragraph) read from the page images.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00106-a-m4, field: value, value: 5e-22, unit: m2/s, basis: derived, locator: "p.2 Fig. 3; p.4 Sec. IV", note: "Fig. 3 label 'D(110 C) ~ 5E-22 m2/s'"}
+  - {table: process_steps, row_id: ectc51846.2026.00106-F1-s04, field: conditions, value: "T=325..425 C", unit: C, basis: stated, locator: "p.3 Fig. 4", note: "schematic label; exact process temperature not stated in text"}
+derived:
+  - {table: components, row_id: ectc51846.2026.00106-a-c1, field: thickness_um, value: 700, formula: "0.7 mm x 1000", inputs: "p.3 Sec. III"}
+  - {table: stack_layers, row_id: ectc51846.2026.00106-a-L02, field: thickness_um, value: 700, formula: "0.7 mm x 1000", inputs: "p.3 Sec. III"}
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00106-c-m12, field: value, values: [8.2, 8], locators: ["p.4 Sec. III", "p.1 Abstract"], chosen: 8.2, why: "body text more specific than abstract"}
+  - {table: metrics, row_id: ectc51846.2026.00106-c-m6, field: value, values: [1.3, 1.5], locators: ["p.4 Sec. III", "p.4 Fig. 7 readout (2.3 - 0.77 dB)"], chosen: 1.3, why: "1.5 is my own difference of plotted points; text value kept, plotted endpoints entered separately (c-m4, c-m5)"}
+  - {table: metrics, row_id: ectc51846.2026.00106-c-m1, field: condition, values: ["~12.5 cm total length", "propagation 0.04 dB/cm x 12.5 cm = 0.5 dB would leave ~0.1 dB for two facets"], locators: ["p.4 Sec. III"], chosen: "~12.5 cm (as written)", why: "possible unit typo (mm?); not resolvable from the paper"}
+excluded:
+  - "5 um electrical lines in glass cavities attributed to ref [9]"
+  - "Commercial glass B previous-work context of ref [10] (only its Fig. 3 model curve value kept as comparison metric)"
+  - "Expanded-beam coupling approaches of refs [4]-[7]; evanescent chip coupling with detachable connector of ref [8]"
+not_reported:
+  - interconnects (no electrical structures built; RDL/TGV/micro-bumps only in Fig. 1 concept)
+  - electrical_interfaces
+  - glass composition, CTE, liquidus viscosity value; mask material and deposition method
+  - IOX times and exact temperatures per step; waveguide core width/depth; MFD; polarization
+  - mask opening widths of the straight sections and of the fan-out designs
+  - sample counts for bend and fan-out measurements
+source_quality:
+  - "Text layer garbled on p.2 (Fig. 3 labels) and p.3-4 (some symbol-font words); verified against page images."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s01", change: "tv_id: 'ectc51846.2026.00106-a' -> ''; step_basis: '' -> 'stated_in_flow'; conditions: '' -> '150 mm diameter, 0.7 mm thick glass wafers'; split: '' -> 'mask opening width: 90 deg bend section 3/4.5/6/9 um (-b); spatially varying openings in curved sections (-c); straight-section width not stated'", reason: "same mask step for all TVs (one wafer); per-TV mask opening widths moved to split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s02", change: "deleted", reason: "duplicate of shared mask step s01 (differs only by mask opening; now in s01 split)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s03", change: "deleted", reason: "duplicate of shared mask step s01 (differs only by mask opening; now in s01 split)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s04", change: "step_basis: '' -> 'stated_in_flow'; notes: '' -> 'Ion exchange; no matching step_category. Exact temperature not stated (Fig. 4 range).'", reason: "order stated in Fig. 4; no step_category for ion exchange"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Fig. 4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Fig. 4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s07", change: "step_basis: '' -> 'stated_in_flow'; equipment: '' -> 'laser'", reason: "order stated ('Finally', p.3); laser named"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s04", change: "category: 'other' -> 'ion_exchange'", reason: "pass B: ion_exchange added to step_category (DevLog-007)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s06", change: "category: 'other' -> 'ion_exchange'", reason: "pass B: ion_exchange added to step_category (DevLog-007)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s04", change: "notes: 'Ion exchange; no matching step_category. Exact temperature not stated (Fig. 4 range).' -> 'Exact temperature not stated (Fig. 4 range 325..425 C; range kept in conditions, untyped).'", reason: "category now ion_exchange; temperature is a range only, so not typed"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1-s06", change: "notes: 'Buries the Ag-rich core (Fig. 4 schematic).' -> 'Buries the Ag-rich core (Fig. 4 schematic). Exact temperature not stated (Fig. 4 range; untyped).'", reason: "temperature is a range only, so not typed"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106-F1", change: "level: 'full' -> 'ordered'", reason: "pass B level_regrade: no typed process condition; only a 325..425 C range in Fig. 4 (rule 7: full needs a typed condition)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00106", change: "process_flow_level: 'full' -> 'ordered'", reason: "pass B level_regrade: no typed process condition in any step (Fig. 4 gives a 325..425 C range only)"}

@@ -1,0 +1,45 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc.2013.6575597-a01-1,ectc.2013.6575597,1,Larry Lin,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc.2013.6575597-a02-1,ectc.2013.6575597,2,Tung-Chin Yeh,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc.2013.6575597-a03-1,ectc.2013.6575597,3,Jyun-Lin Wu,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc.2013.6575597-a04-1,ectc.2013.6575597,4,Gary Lu,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc.2013.6575597-a05-1,ectc.2013.6575597,5,Tsung-Fu Tsai,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc.2013.6575597-a06-1,ectc.2013.6575597,6,Larry Chen,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc.2013.6575597-a07-1,ectc.2013.6575597,7,An-Tai Xu,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00092-a01-1,ectc51529.2024.00092,1,Sung Jin Kim,1,primary,Absolics,,"Covington, Georgia",US,,paper,p.1 affiliations
+ectc51529.2024.00092-a02-1,ectc51529.2024.00092,2,Venugopal Govindarajulu,1,primary,Yield Engineering Systems,,"Chandler, Arizona",US,,paper,p.1 affiliations
+ectc51529.2024.00092-a03-1,ectc51529.2024.00092,3,Coby Tao,1,primary,Yield Engineering Systems,,"Chandler, Arizona",US,,paper,p.1 affiliations
+ectc51529.2024.00092-a04-1,ectc51529.2024.00092,4,Aneelman Brar,1,primary,Yield Engineering Systems,,"Chandler, Arizona",US,,paper,p.1 affiliations
+ectc51529.2024.00092-a05-1,ectc51529.2024.00092,5,Zia Karim,1,primary,Yield Engineering Systems,,"Fremont, California",US,,paper,p.1 affiliations
+ectc51529.2024.00334-a01-1,ectc51529.2024.00334,1,Tyler Sherwood,1,primary,Applied Materials,,"Albany, NY",US,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51529.2024.00334-a02-1,ectc51529.2024.00334,2,Raghuveer Patlolla,1,primary,Applied Materials,,"Albany, NY",US,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51529.2024.00334-a03-1,ectc51529.2024.00334,3,Dylan McIntyre,1,primary,Applied Materials,,"Albany, NY",US,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51529.2024.00334-a04-1,ectc51529.2024.00334,4,Taketo Sekine,1,primary,Applied Materials,,"Santa Clara, CA",US,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51529.2024.00334-a05-1,ectc51529.2024.00334,5,Raghav Sreenivasan,1,primary,Applied Materials,,"Santa Clara, CA",US,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51529.2024.00334-a06-1,ectc51529.2024.00334,6,Yoocharn Jeon,1,primary,Applied Materials,,"Albany, NY",US,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51529.2024.00334-a07-1,ectc51529.2024.00334,7,Ryan Ley,1,primary,Applied Materials,,"Santa Clara, CA",US,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51529.2024.00334-a08-1,ectc51529.2024.00334,8,Gernot Probst,1,primary,EV Group,,St. Florian am Inn,AT,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51529.2024.00334-a09-1,ectc51529.2024.00334,9,Jason Appell,1,primary,Applied Materials,,"Albany, NY",US,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51529.2024.00334-a10-1,ectc51529.2024.00334,10,Amit Prakash,1,primary,Applied Materials,,"Santa Clara, CA",US,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51529.2024.00334-a11-1,ectc51529.2024.00334,11,Masha Gorchichko,1,primary,Applied Materials,,"Santa Clara, CA",US,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51529.2024.00334-a12-1,ectc51529.2024.00334,12,Barbara Weis,1,primary,EV Group,,St. Florian am Inn,AT,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51846.2026.00051-a01-1,ectc51846.2026.00051,1,Tarek Ibrahim,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a02-1,ectc51846.2026.00051,2,Zhiguo Qian,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a03-1,ectc51846.2026.00051,3,Jianyong Xie,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a04-1,ectc51846.2026.00051,4,Yidnekachew Mekonnen,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a05-1,ectc51846.2026.00051,5,Jung Kyu Han,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a06-1,ectc51846.2026.00051,6,Ali Lehaf,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a07-1,ectc51846.2026.00051,7,Tchefor Ndukum,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a08-1,ectc51846.2026.00051,8,Siddarth Kumar,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a09-1,ectc51846.2026.00051,9,Jason Gamba,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a10-1,ectc51846.2026.00051,10,Kaladhar Radhakrishnan,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a11-1,ectc51846.2026.00051,11,Kemal Aygün,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a12-1,ectc51846.2026.00051,12,Rahul Manepalli,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00208-a01-1,ectc51846.2026.00208,1,Chang Liu,1,primary,Tohoku University,,Sendai,JP,,paper,p.1 affiliations
+ectc51846.2026.00208-a02-1,ectc51846.2026.00208,2,Kiyoharu Mori,1,primary,Tohoku University,,Sendai,JP,email domain t-microtec.com; only Tohoku University printed,paper,p.1 affiliations
+ectc51846.2026.00208-a03-1,ectc51846.2026.00208,3,Jiayi Shen,1,primary,Tohoku University,,Sendai,JP,,paper,p.1 affiliations
+ectc51846.2026.00208-a04-1,ectc51846.2026.00208,4,Bungo Tanaka,1,primary,Tohoku University,,Sendai,JP,,paper,p.1 affiliations
+ectc51846.2026.00208-a05-1,ectc51846.2026.00208,5,Hidenori Miyauchi,1,primary,Micro Technology,,Tokyo,JP,,paper,p.1 affiliations
+ectc51846.2026.00208-a06-1,ectc51846.2026.00208,6,Murugesan Mariappan,1,primary,Tohoku University,,Sendai,JP,,paper,p.1 affiliations
+ectc51846.2026.00208-a07-1,ectc51846.2026.00208,7,Tetsu Tanaka,1,primary,Tohoku University,,Sendai,JP,,paper,p.1 affiliations
+ectc51846.2026.00208-a08-1,ectc51846.2026.00208,8,Takafumi Fukushima,1,primary,Tohoku University,,Sendai,JP,,paper,p.1 affiliations

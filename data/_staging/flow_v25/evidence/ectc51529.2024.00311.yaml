@@ -1,0 +1,63 @@
+paper_id: ectc51529.2024.00311
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00311/text.md
+  - references/ectc51529.2024.00311/source.json
+  - references/ectc51529.2024.00311/figures/page_02.png
+  - references/ectc51529.2024.00311/figures/page_03.png
+  - references/ectc51529.2024.00311/figures/page_04.png
+figure_reading_method: >-
+  Candidates p02_fig1, p02_fig2, p03_fig3, p03_fig4, p04_fig7a, p04_fig8 opened. Fig. 4 bar heights read from the
+  candidate crop (10.5 px per MPa, +/-0.3 MPa). Fig. 7(e) re-cropped at 500 dpi: log decade 98.5 px; daisy-chain main
+  CDF step at 10^1.66 (about 46 ohm), Kelvin at 10^-1.54 (about 0.029 ohm). Fig. 1 peak read +/-3 C.
+entries:
+  - {table: interconnects, row_id: ectc51529.2024.00311-a-i1, field: resistance_mohm, value: 29, unit: mohm, basis: measured, locator: "p.4 Fig. 7(e)", note: "Kelvin single-bump CDF median, read on log axis"}
+  - {table: interconnects, row_id: ectc51529.2024.00311-a-i1, field: yield_pct, value: 100, unit: "%", basis: measured, locator: "p.3 Sec. IV", note: "20 um pitch daisy chains, 9 dies x 8 chains"}
+derived:
+  - {table: interconnects, row_id: ectc51529.2024.00311-a-i1, field: bonding_force_n, value: 39.2, formula: "4 kgf x 9.80665 N/kgf", inputs: "p.3 Sec. IV"}
+  - {table: interconnects, row_id: ectc51529.2024.00311-a-i1, field: resistance_mohm, value: 29, formula: "0.029 ohm x 1000", inputs: "p.4 Fig. 7(e)"}
+  - {table: process_steps, row_id: ectc51529.2024.00311-F1-s06, field: time_s, value: 60, formula: "1 min x 60", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: ectc51529.2024.00311-F1-s10, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.3 Sec. IV"}
+  - {table: process_steps, row_id: ectc51529.2024.00311-F1-s08, field: force_n, value: 39.2266, formula: "4 kgf x 9.80665 N/kgf", inputs: "p.3 Sec. IV"}
+  - {table: process_steps, row_id: ectc51529.2024.00311-F1-s08, field: ramp_c_per_min, value: 6000, formula: "100 C/s x 60 s/min", inputs: "p.3 Sec. IV"}
+  - {table: metrics, row_id: ectc51529.2024.00311-a-m10, field: n_samples, value: 72, formula: "9 dies x 8 daisy chains per die", inputs: "p.3 Sec. IV"}
+conflicts:
+  - {table: metrics, row_id: ectc51529.2024.00311-a-m1, field: value, values: [140, 145], locators: ["p.2 Sec. II", "p.2 Fig. 1"], chosen: 145, why: "measured plot over text; text '140 C' appears rounded"}
+  - {table: metrics, row_id: ectc51529.2024.00311-a-m10, field: value, values: ["almost 100%", "100%"], locators: ["p.1 Abstract", "p.3 Sec. IV"], chosen: 100, why: "results section states 100% electrical yield"}
+excluded:
+  - "Spacer-bump TCB process window and Ni/Sn bump process of refs [2], [4]"
+  - "Flux dipping challenges of ref [3]; MEC chemistry background of ref [5]"
+  - "10 um pitch microbump scaling of ref [1]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - bump diameters, die thicknesses, landing wafer size, landing die size
+  - passivation chemistry composition and thickness; shelf-life duration
+  - TCB stage temperature, bonding atmosphere, alignment accuracy in um
+  - reliability test standards, sample counts per test, EM test results
+  - "die shear statistic (mean vs single) and sample counts"
+source_quality:
+  - "Clean text layer; all candidates usable as-is (Fig. 7 candidate labelled 7(a) covers all panels)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F1-s01", change: "category: 'other' -> 'rdl_layer'; step_basis: '' -> 'stated_in_flow'; notes: '' -> 'UBM damascene metallization of the top-die wafer; layers not dimensioned.'", reason: "category from review flag (other); order stated in Sec. III"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F1-s02", change: "step_basis: '' -> 'stated_in_flow'; target: '' -> 'Ni/Sn 2/4 um solder bumps, 3 um Ni spacer bumps; 20 um pitch shown (Fig. 3(a))'", reason: "order stated in Sec. III; stated bump dimensions on the step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F1-s03", change: "step_basis: '' -> 'stated_in_flow'; target: '' -> '7.2 x 7.2 mm dies'", reason: "order stated in Sec. III; stated die size"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F1-s04", change: "category: 'other' -> 'bumping'; step_basis: '' -> 'inferred_order'; target: '' -> 'Cu bump height 5 um; DC/Kelvin/EM/TM structures at 20, 10, 7, 5 um pitch'; notes: '' -> 'Landing-wafer branch, parallel to top-die steps s01-s03; placed before landing clean.'", reason: "category from review flag (other); landing-wafer branch order vs top-die steps not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F1-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II/IV"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F1-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II/IV"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F1-s09", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II/IV"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F1-s10", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II/IV"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F1-s06", change: "step_basis: '' -> 'stated_in_flow'; equipment: '' -> 'single-wafer wet process tool or spin coating tool (stated as usable)'; conditions: 'single-wafer wet tool or spin-coating tool stated as usable' -> ''", reason: "order stated in Sec. II; named tool types moved to equipment"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F1-s08", change: "step_basis: '' -> 'stated_in_flow'; ramp_c_per_min: '' -> '6000'; force_n: '' -> '39.2266'; time_s: '' -> '6'; conditions: 'bond-head ramp 100 C/s; force 1-4 kgf; 6 or 12 s; electrical lot 4 kgf, 6 s; no flux, no top-die treatment' -> 'bond-head 325 C, ramp 100 C/s; electrical lot 4 kgf, 6 s on 3 x 3 cm coupons with 9 dies; no flux dipping, no top-die treatment'; split: '' -> 'force 1-4 kgf, time 6 or 12 s (die-shear lots, Fig. 4); electrical lot 4 kgf, 6 s'", reason: "typed conditions from p.3 Sec. IV (kgf -> N, C/s -> C/min); die-shear sweep in split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F1-s11", change: "deleted", reason: "post-build electrical test and SAM: not a step; results already in metrics a-m10, a-m11, a-m12, a-m16"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F1-s12", change: "deleted", reason: "failure-analysis cleave for X-SEM: not a step; X-SEM results already in metrics a-m13 to a-m16"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F2-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F2-s02", change: "step_basis: '' -> 'stated_in_flow'; conditions: 'passivated sample only (split: cleaned vs passivated)' -> ''; split: '' -> 'passivated sample only; MS6020-cleaned sample kept as control'", reason: "per-sample variant in split (passivated vs cleaned control)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F2-s03", change: "deleted", reason: "2 h/100 C ambient exposure is the re-oxidation test stress, not a build step; condition moved to metrics b-m1, b-m2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F2-s04", change: "deleted", reason: "XPS depth profiling is a measurement; results already in metrics b-m1, b-m2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F2", change: "flow_name: 'XPS re-oxidation test (Sec. II)' -> 'blanket Cu clean and wet passivation for XPS coupons (Sec. II)'", reason: "flow builds the XPS coupons; test exposure and XPS moved to metrics"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F1", change: "locator: 'p.2 Sec. III; p.3 Fig. 3(a); p.2 Sec. II; p.3 Fig. 6; p.3 Sec. IV; p.4 Fig. 8' -> 'p.2 Sec. II; p.2 Sec. III; p.3 Fig. 3(a); p.3 Sec. IV'", reason: "test/cleave rows removed"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-b-m1", change: "condition: 'first seconds of sputtering' -> 'exposure 2 h at 100 C in ambient atmosphere; first seconds of sputtering'", reason: "moved from deleted step F2-s03"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-b-m2", change: "condition: '' -> 'exposure 2 h at 100 C in ambient atmosphere'", reason: "moved from deleted step F2-s03"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F2-s03", change: "evidence derived entry for time_s removed", reason: "row deleted (test stress); F1-s08 force_n and ramp conversions added"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00311-F2", change: "locator: 'p.2 Sec. II; p.2 Fig. 2' -> 'p.2 Sec. II'", reason: "Fig. 2 (XPS result) no longer backs a step"}

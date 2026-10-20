@@ -1,0 +1,37 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00365-a-c1,ectc51846.2026.00365-a,unspecified,,,tiles (2x2),4,,,,,,,,,,,stated,caption,count:design_target,p.2 Fig. 2(a),,
+ectc51846.2026.00365-d-c1,ectc51846.2026.00365-d,underfill,,,"capillary underfill, material A and material B (B lower viscosity)",,,,,,,,,,,,stated,text,,p.3 Sec. IV.A; p.3 Fig. 4,,
+ectc51846.2026.00365-e-c1,ectc51846.2026.00365-e,underfill,,,"capillary underfill formulations 1, 2, 3",,,,,,,,,,,,stated,text,,p.3 Sec. IV.A; p.4 Table I,,
+ectc51846.2026.00365-f-c1,ectc51846.2026.00365-f,unspecified,,,tiles (2x3),6,,,,,,,,,,,stated,caption,count:design_target,p.4 Fig. 5,,
+ectc51846.2026.00365-g-c1,ectc51846.2026.00365-g,unspecified,,,"tiles (2x4), each approximately full reticle size",8,,,,,,,,,,,stated,text,count:design_target,p.4 Sec. IV.B,,
+ectc51846.2026.00365-h-c1,ectc51846.2026.00365-h,hbm,,,HBM,12,,,,,,,,,,,stated,text,count:design_target,p.4 Sec. V,,
+ectc51846.2026.00365-h-c2,ectc51846.2026.00365-h,unspecified,,,non-HBM dies (type not stated),6,,,,,,,,,,,stated,text,count:derived,p.4 Sec. V,,18 dies total minus 12 HBM.
+ectc51846.2026.00365-h-c3,ectc51846.2026.00365-h,bridge,,,EMIB bridge (fine-pitch bridge region),,,,,,,,,,,,stated,text,,p.4 Sec. V,,Bridge count not stated.
+ectc51846.2026.00365-h-c4,ectc51846.2026.00365-h,underfill,,,new encapsulation (underfill) material,,,,,,,,,,,,stated,text,,p.4 Sec. V,,
+ectc51846.2026.00365-i-c1,ectc51846.2026.00365-i,unspecified,,,tiles (2x4),8,,,,,,,,,,,stated,text,count:design_target,p.5 Sec. V; p.5 Fig. 8,,
+ectc51846.2026.00365-i-c2,ectc51846.2026.00365-i,underfill,,,new encapsulating material,,,,,,,,,,,,stated,text,,p.5 Sec. V,,
+ectc51846.2026.00365-j-c1,ectc51846.2026.00365-j,unspecified,,,Foveros 3D die complex,,32,62,,,,,,,,,design_target,text,,p.5 Sec. V,x_mm:approx;y_mm:approx,
+ectc51846.2026.00365-j-c2,ectc51846.2026.00365-j,mold,,,mold material on die edge,,,,,,,,,,,,stated,text,,p.5 Sec. V,,
+ectc51846.2026.00365-k-c1,ectc51846.2026.00365-k,unspecified,,,Foveros die complex,,51,65,,,,,,,,,design_target,text,,p.5 Sec. V,x_mm:approx;y_mm:approx,
+ectc51846.2026.00365-k-c2,ectc51846.2026.00365-k,base_die,,,active base die,,,,,,,,,,,,stated,text,,p.5 Sec. V,,Base die count and size not stated.
+ectc51906.2022.00072-a-c1,ectc51906.2022.00072-a,pic,,,90WG PIC with 12-Ch Vgroove array and O-band metamaterial SSC,1,,,,,,,,90 nm SOI,"SOI, ~150 nm top Si on 2 um BOX",GLOBALFOUNDRIES,stated,text,,p.2 Sec. I; p.2 Sec. II.A; p.3 Fig. 1,,"Monolithic CMOS + photonics (modulator, Ge-PD, WG); die size and thickness not stated."
+ectc51906.2022.00072-a-c2,ectc51906.2022.00072-a,fiber_array,,,12-Ch single mode optical fiber ribbon,1,,,,,,,,,standard single mode fiber,,stated,text,,p.2 Sec. II.A; p.5 Sec. IV; p.5 Fig. 4,,"12 fibers; cladding 125 um, coating 250 um diameter; cleaved fiber array end; pigtail."
+ectc51906.2022.00072-a-c3,ectc51906.2022.00072-a,fiber_lid,,,fiber lid,1,,,,,,,,,,,stated,text,,p.5 Sec. IV,,Presses fibers into Vgroove array; stays in assembly; shields vacuum head from adhesive. Material not stated.
+ectc51906.2022.00072-a-c4,ectc51906.2022.00072-a,submount,,,Si-submount,1,,,,,,,,,Si,,stated,figure_image,,p.5 Fig. 4,,Figure label only; PIC-to-submount attach and dimensions not stated.
+ectc51906.2022.00072-a-c5,ectc51906.2022.00072-a,adhesive,,,optical adhesive (index matching),,,,,,,,,,,,stated,mixed,,p.3 Fig. 1(c); p.5 Sec. IV,,Fills Vgroove-to-suspended-SSC undercut; matched to mode coupler design. Product not stated.
+ectc51906.2022.00072-a-c6,ectc51906.2022.00072-a,adhesive,,,structural adhesive,,,,,,,,,,,,stated,text,,p.5 Sec. IV,,"Secures fiber position in Vgroove; UV tacked in placement tool, then oven cured. Product not stated."
+ectc51906.2022.00072-a-c7,ectc51906.2022.00072-a,adhesive,,,strain-relief adhesive,,,,,,,,,,,,stated,text,,p.5 Sec. IV,,Fixes longer side of ribbon to package. Product not stated.
+ectc51909.2023.00268-a-c1,ectc51909.2023.00268-a,logic_soc,,,application processor (AP),1,,,,,,,,,,,stated,text,,p.3 Sec. 2; p.3 Fig. 5,,Design site; size not stated.
+ectc51909.2023.00268-a-c2,ectc51909.2023.00268-a,hbm,,,HBM,1,,,,,,,,,,,stated,text,,p.3 Sec. 2; p.3 Fig. 5,,Design site; size not stated.
+ectc51909.2023.00268-a-c3,ectc51909.2023.00268-a,substrate,,,substrate,1,,,,,,,,,,,stated,schematic,,p.3 Fig. 5,,
+ectc51529.2024.00023-a-c1,ectc51529.2024.00023-a,substrate,,,optimized alkali glass wafer with IOX waveguides,1,,,,,,,,,"alkali glass (new composition, high-purity batch, low tramp Pt/Rh/Fe)",,stated,text,,p.3 Sec. III,,150 mm wafers; thickness not stated.
+ectc51529.2024.00023-b-c1,ectc51529.2024.00023-b,substrate,,,alkali glass substrate,1,,,,,,,,,alkali glass,,stated,text,,p.3 Sec. V.A,,
+ectc51529.2024.00023-c-c1,ectc51529.2024.00023-c,pic,,,PIC with SiN waveguides,,,,,,,,,,"Si substrate, BOX, SiO2, SiN",,stated,schematic,,p.3 Fig. 5; p.4 Sec. V.B,,
+ectc51529.2024.00023-c-c2,ectc51529.2024.00023-c,adhesive,,,optical adhesive between PIC and glass,,,,0.5,,,,,,,,design_target,text,,p.4 Sec. V.B,,
+ectc51529.2024.00023-c-c3,ectc51529.2024.00023-c,substrate,,,glass substrate with IOX waveguide and barrier layer,,,,,,,,,,alkali glass,,stated,schematic,,p.3 Fig. 5,,
+tcpmt.2026.3740312-a-c1,tcpmt.2026.3740312-a,dummy_die,yes,,top Si chip with Nb routing and UBM/In bumps,1,,,,,,,,,Si,,stated,schematic,,p.2 Fig. 1(b),,Chip size and thickness not stated.
+tcpmt.2026.3740312-a-c2,tcpmt.2026.3740312-a,dummy_die,yes,,bottom Si chip with Nb routing and UBM/In bumps,1,,,,,,,,,high-resistivity Si,,stated,mixed,,p.2 Fig. 1(b); p.2 Sec. II.A,,High-resistivity Si wafer stated for the Nb deposition.
+tcpmt.2026.3740312-b-c1,tcpmt.2026.3740312-b,dummy_die,yes,,top Si chip with Nb routing and UBM/In bumps,1,,,,,,,,,Si,,stated,schematic,,p.2 Fig. 1(b),,Chip size and thickness not stated.
+tcpmt.2026.3740312-b-c2,tcpmt.2026.3740312-b,dummy_die,yes,,bottom Si chip with Nb routing and UBM/In bumps,1,,,,,,,,,high-resistivity Si,,stated,mixed,,p.2 Fig. 1(b); p.2 Sec. II.A,,High-resistivity Si wafer stated for the Nb deposition.
+tcpmt.2026.3740312-c-c1,tcpmt.2026.3740312-c,dummy_die,yes,,top Si chip with Nb routing and UBM/In bumps,1,,,,,,,,,Si,,stated,schematic,,p.2 Fig. 1(b),,Chip size and thickness not stated.
+tcpmt.2026.3740312-c-c2,tcpmt.2026.3740312-c,dummy_die,yes,,bottom Si chip with Nb routing and UBM/In bumps,1,,,,,,,,,high-resistivity Si,,stated,mixed,,p.2 Fig. 1(b); p.2 Sec. II.A,,High-resistivity Si wafer stated for the Nb deposition.

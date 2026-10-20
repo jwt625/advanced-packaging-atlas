@@ -1,0 +1,41 @@
+paper_id: ectc51529.2024.00125
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00125/text.md
+  - references/ectc51529.2024.00125/source.json
+  - references/ectc51529.2024.00125/figures/page_02.png
+  - references/ectc51529.2024.00125/figures/page_03.png
+  - references/ectc51529.2024.00125/figures/page_04.png
+  - references/ectc51529.2024.00125/figures/page_05.png
+figure_reading_method: >-
+  Page renders p.2-5 viewed in full; candidates p02_fig2, p03_fig6, p03_fig7, p04_fig8, p05_fig10 opened; Table 1
+  re-cropped manually (candidate held only the section heading). All plots are normalized (no absolute axis values),
+  so only trends and the text-stated inflection points were entered.
+entries:
+  - {table: interconnects, row_id: ectc51529.2024.00125-a-i1, field: pitch_um, value: 0.2, unit: um, basis: design_target, locator: "p.4 Sec. IV", note: "BPM CD/pitch 0.1/0.2 um"}
+  - {table: metrics, row_id: ectc51529.2024.00125-a-m1, field: value, value: 2.5, unit: x, basis: measured, locator: "p.3 Sec. III", note: "overlay mean + 3 sigma improved 2.5x vs unoptimized incoming wafer process"}
+derived: []
+conflicts:
+  - {table: figures, row_id: ectc51529.2024.00125-f06, field: caption, values: ["Fig. 5 caption", "Fig. 6 caption"], locators: ["p.3 Fig. 5", "p.3 Fig. 6"], chosen: "both captions identical as printed", why: "Fig. 5 caption describes recipe + incoming wafer but its legend is POR vs next generation bonder; text clarifies Fig. 5 = bonder, Fig. 6 = incoming wafer process"}
+excluded:
+  - "0.4 um bond pitch SoIC bandwidth density / EEP results of ref [5]"
+  - "3D V-Cache micron-scale SoIC product of ref [4]"
+  - "PPA gains from bond pitch shrink of refs [6,7]; EEP formula from ref [8]"
+not_reported:
+  - wafer size, wafer thickness, TSV dimensions
+  - bond pad metal and dielectric materials; dielectric k values of schemes A/B
+  - bonding temperature, pressure, time; anneal time; bonder model
+  - absolute overlay (nm) mean/3 sigma, absolute Kelvin/daisy-chain resistance, absolute yield
+  - whether Table 1 values are simulated or measured
+  - electrical_interfaces, optical_interfaces
+source_quality:
+  - "Figures 3 and 4 are absent (numbering jumps from Fig. 2 to Fig. 5)."
+  - "Candidate p03_table1 bbox is below the table (section heading only)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00125-F1", change: "flow_name 'SoIC W2W test vehicle build and test' -> 'SoIC W2W test vehicle build'", reason: "WAT and C-SAM rows removed (metrics)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00125-F1-s01", change: "category other -> rdl_layer; target BPM CD/pitch added; step_basis inferred_order", reason: "p.4 Sec. IV TV design CD/pitch; order not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00125-F1-s02", change: "conditions -> split (bonder POR/next generation; incoming wafer process unoptimized/optimized); equipment set", reason: "process splits compared in Sec. III, Figs. 5-6"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00125-F1-s04", change: "row deleted (C-SAM of bonded wafer pair)", reason: "characterization of bond uniformity, not placed in the flow; result already in metrics ectc51529.2024.00125-a-m4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00125-F1-s08", change: "row deleted (wafer acceptance test, Kelvin and daisy-chain resistance)", reason: "electrical test; results already in metrics ectc51529.2024.00125-a-m5..a-m10"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00125-F1-s03,s05..s07", change: "step_basis stated_in_flow; seq renumbered 4-6 after deletions", reason: "p.4 Sec. IV: bond, anneal, thin to reveal TSVs, form WAT probe pads"}

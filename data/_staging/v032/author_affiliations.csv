@@ -1,0 +1,35 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+iwlpc52010.2020.9375855-a01-1,iwlpc52010.2020.9375855,1,Max Min,1,primary,Samsung Electronics,"General Foundry, Americas Office","San Jose, CA",US,,paper,p.1 affiliations
+iwlpc52010.2020.9375855-a02-1,iwlpc52010.2020.9375855,2,Sylvie Kadivar,1,primary,Samsung Electronics,"General Foundry, Americas Office","San Jose, CA",US,,paper,p.1 affiliations
+iwlpc52010.2020.9375887-a01-1,iwlpc52010.2020.9375887,1,Jacinta Aman Lim,1,primary,nepes,,,US,"multi-site block, no per-author mapping; printed: Nepes; country = first printed site",paper,p.1 affiliations
+iwlpc52010.2020.9375887-a02-1,iwlpc52010.2020.9375887,2,YunMook Park,1,primary,nepes,,,US,"multi-site block, no per-author mapping; printed: Nepes; country = first printed site",paper,p.1 affiliations
+iwlpc52010.2020.9375887-a03-1,iwlpc52010.2020.9375887,3,Byung Cheol Kim,1,primary,nepes,,,US,"multi-site block, no per-author mapping; printed: Nepes; country = first printed site",paper,p.1 affiliations
+iwlpc52010.2020.9375887-a04-1,iwlpc52010.2020.9375887,4,Edil Devera,1,primary,nepes,,,US,"multi-site block, no per-author mapping; printed: Nepes; country = first printed site",paper,p.1 affiliations
+tcpmt.2021.3104326-a01-1,tcpmt.2021.3104326,1,Candice Thomas,1,primary,CEA-Leti,,Grenoble,FR,"printed: CEA, LETI, Universite Grenoble Alpes; UGA not split out",paper,p.1 footnote
+tcpmt.2021.3104326-a02-1,tcpmt.2021.3104326,2,Jean Charbonnier,1,primary,CEA-Leti,,Grenoble,FR,"printed: CEA, LETI, Universite Grenoble Alpes; UGA not split out",paper,p.1 footnote
+tcpmt.2021.3104326-a03-1,tcpmt.2021.3104326,3,Arnaud Garnier,1,primary,CEA-Leti,,Grenoble,FR,"printed: CEA, LETI, Universite Grenoble Alpes; UGA not split out",paper,p.1 footnote
+tcpmt.2021.3104326-a04-1,tcpmt.2021.3104326,4,Nicolas Bresson,1,primary,CEA-Leti,,Grenoble,FR,"printed: CEA, LETI, Universite Grenoble Alpes; UGA not split out",paper,p.1 footnote
+tcpmt.2021.3104326-a05-1,tcpmt.2021.3104326,5,David Bouchu,1,primary,CEA-Leti,,Grenoble,FR,"printed: CEA, LETI, Universite Grenoble Alpes; UGA not split out",paper,p.1 footnote
+tcpmt.2021.3104326-a06-1,tcpmt.2021.3104326,6,Stéphane Moreau,1,primary,CEA-Leti,,Grenoble,FR,"printed: CEA, LETI, Universite Grenoble Alpes; UGA not split out",paper,p.1 footnote
+tcpmt.2021.3104326-a07-1,tcpmt.2021.3104326,7,Frédéric Gustavo,1,primary,CEA-IRIG,,Grenoble,FR,"printed: CEA, Interdisciplinary Research Institute of Grenoble (IRIG), Universite Grenoble Alpes",paper,p.1 footnote
+tcpmt.2021.3104326-a08-1,tcpmt.2021.3104326,8,Maud Vinet,1,primary,CEA-Leti,,Grenoble,FR,"printed: CEA, LETI, Universite Grenoble Alpes; UGA not split out",paper,p.1 footnote
+iedm45741.2023.10413829-a01-1,iedm45741.2023.10413829,1,Soon-Aik Chew,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+iedm45741.2023.10413829-a02-1,iedm45741.2023.10413829,2,Boyao Zhang,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+iedm45741.2023.10413829-a03-1,iedm45741.2023.10413829,3,Kris Vanstreels,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+iedm45741.2023.10413829-a04-1,iedm45741.2023.10413829,4,Emmanuel Chery,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+iedm45741.2023.10413829-a05-1,iedm45741.2023.10413829,5,Joke De Messemaeker,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+iedm45741.2023.10413829-a06-1,iedm45741.2023.10413829,6,Liesbeth Witters,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+iedm45741.2023.10413829-a07-1,iedm45741.2023.10413829,7,Koen Van Sever,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+iedm45741.2023.10413829-a08-1,iedm45741.2023.10413829,8,Serena Iacovo,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+iedm45741.2023.10413829-a09-1,iedm45741.2023.10413829,9,Sven Dewilde,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+iedm45741.2023.10413829-a10-1,iedm45741.2023.10413829,10,Michele Stucchi,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+iedm45741.2023.10413829-a11-1,iedm45741.2023.10413829,11,Joeri De Vos,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+iedm45741.2023.10413829-a12-1,iedm45741.2023.10413829,12,Gerald Beyer,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+iedm45741.2023.10413829-a13-1,iedm45741.2023.10413829,13,Andy Miller,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+iedm45741.2023.10413829-a14-1,iedm45741.2023.10413829,14,Eric Beyne,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+itherm55375.2024.10709474-a01-1,itherm55375.2024.10709474,1,Jianyu Feng,1,primary,"Institute of Microelectronics, Chinese Academy of Sciences",,Beijing,CN,single shared block,paper,p.1 affiliations
+itherm55375.2024.10709474-a02-1,itherm55375.2024.10709474,2,Chuan Chen,1,primary,"Institute of Microelectronics, Chinese Academy of Sciences",,Beijing,CN,single shared block,paper,p.1 affiliations
+itherm55375.2024.10709474-a03-1,itherm55375.2024.10709474,3,Rong Fu,1,primary,"Institute of Microelectronics, Chinese Academy of Sciences",,Beijing,CN,single shared block,paper,p.1 affiliations
+itherm55375.2024.10709474-a04-1,itherm55375.2024.10709474,4,Liqiang Cao,1,primary,"Institute of Microelectronics, Chinese Academy of Sciences",,Beijing,CN,single shared block,paper,p.1 affiliations
+itherm55375.2024.10709474-a05-1,itherm55375.2024.10709474,5,Qidong Wang,1,primary,"Institute of Microelectronics, Chinese Academy of Sciences",,Beijing,CN,single shared block,paper,p.1 affiliations
+itherm55375.2024.10709474-a06-1,itherm55375.2024.10709474,6,Fengze Hou,1,primary,"Institute of Microelectronics, Chinese Academy of Sciences",,Beijing,CN,single shared block,paper,p.1 affiliations

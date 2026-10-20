@@ -37,3 +37,18 @@ not_reported:
   - substrate-only warpage values (Fig. 3 maps only, no scale values)
 source_quality:
   - "Figs. 1-10 had no candidates except Fig. 5 (caption 'Figure  N' with double space likely missed); manual crops used."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00148-a-m6", change: "scope -> 'all legs; stiffener dominates warpage; applies to TVs a, b, c'; copies ectc51687.2025.00148-b-m6, ectc51687.2025.00148-c-m6 deleted", reason: "p.4 Sec. III.D: 'almost no change in warpage behavior before and after TCT' is one statement for all legs"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00148-b-m6", change: "deleted (copy of ectc51687.2025.00148-a-m6)", reason: "p.4 Sec. III.D single all-leg statement; no per-leg value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00148-c-m6", change: "deleted (copy of ectc51687.2025.00148-a-m6)", reason: "p.4 Sec. III.D single all-leg statement; no per-leg value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00148-b-m4;ectc51687.2025.00148-c-m4", change: "kept both (no change)", reason: "p.3 Fig. 4: separate Leg 2 and Leg 3 stiffener markers at 50 C, both read about 73 um (overlap noted in rows)"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f03", change: "re-ranked Fig. 10: ectc51687.2025.00148-f06 -> ectc51687.2025.00148-f03", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f04", change: "added Fig. 5 (micrograph, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f05", change: "re-ranked Table II: ectc51687.2025.00148-f03 -> ectc51687.2025.00148-f05", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f06", change: "added Table I (data_table, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f07", change: "added Fig. 3 (warpage_plot, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f08", change: "re-ranked Fig. 4: ectc51687.2025.00148-f04 -> ectc51687.2025.00148-f08", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f09", change: "added Fig. 7 (warpage_plot, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f10", change: "added Fig. 9 (warpage_plot, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f11", change: "re-ranked Fig. 6: ectc51687.2025.00148-f05 -> ectc51687.2025.00148-f11", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f12", change: "added Fig. 8 (reliability_plot, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}

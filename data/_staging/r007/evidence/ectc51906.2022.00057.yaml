@@ -28,6 +28,11 @@ conflicts:
   - {table: interconnects, row_id: ectc51906.2022.00057-b-i2, field: pitch_um, values: [1.4, 1], locators: ["p.5 Sec. 3-3; p.5 Fig. 14; p.1 Abstract", "p.4 Sec. 3-1 ('introduction of 1um pitch Cu-Cu hybrid bonding to face-to-back')"], chosen: 1.4, why: "measured cross-section and abstract/conclusion state 1.4 um"}
   - {table: metrics, row_id: ectc51906.2022.00057-c-m3, field: variant, values: ["Cu-Pad size (nm) axis label", "pad size in um per text"], locators: ["p.2 Fig. 4", "p.2 Sec. 2-1"], chosen: "um", why: "text: about 10 nm expansion for pads larger than 4 um; 500 nm pad corresponds to 1 um pitch"}
   - {table: metrics, row_id: ectc51906.2022.00057-c-m2, field: value, values: ["less than 4 nm (text)", "about 4.0 nm (Fig. 4 point at 0.5)"], locators: ["p.2 Sec. 2-1", "p.2 Fig. 4"], chosen: "4 (lt)", why: "text states the bound; figure consistent within reading error"}
+  - {table: metrics, row_id: ectc51906.2022.00057-a-m12, field: value, values: [0.7, 0.9], locators: ["p.3 Fig. 8 read at 1 decade/gridline (1E-1 and 1E+11 labels, 12 gridlines)", "p.3 Fig. 8 read piecewise via the 1E+6 label (7 decades over 6 gridlines)"], chosen: 0.7, why: "axis inconsistent: 1E-1, 1E+6, 1E+11 sit 6 gridlines apart each (7 vs 5 decades); outer labels give a uniform 1 decade/gridline; 400 dpi pixel re-read 2026-10-19 gives 0.68 vs 0.93"}
+  - {table: metrics, row_id: ectc51906.2022.00057-a-m13, field: value, values: [8.0e7, 2.3e8], locators: ["p.3 Fig. 8 at 1 decade/gridline (median 10^7.8-10^7.9; 1-99% 7E5-1.2E9)", "p.3 Fig. 8 piecewise via 1E+6 label (median 10^8.4; 1-99% 5E6-2.6E9)"], chosen: 8.0e7, why: "same axis inconsistency; order of magnitude only; qualitative result 'immensely lowered' unaffected"}
+  - {table: interconnects, row_id: ectc51906.2022.00057-a-i1, field: resistance_mohm, values: [700, 900], locators: ["p.3 Fig. 8 uniform calibration", "p.3 Fig. 8 piecewise calibration"], chosen: 700, why: "follows -a-m12; see the axis inconsistency above"}
+source_quality:
+  - "Fig. 8 x-axis labels 1E-1, 1E+6, 1E+11 are equally spaced (6 gridlines each), which no uniform log axis allows; resistance reads are order-of-magnitude (audit_x1 item 5)."
 excluded:
   - "Fig. 1 CIS evolution and Fig. 2 typical three-layer structure: generic/cited [6], [10]; only via-last TSV note used"
   - "Cu pumping grain-boundary diffusion mechanism attributed to ref [12]"
@@ -38,3 +43,19 @@ not_reported:
   - bonding temperature/pressure, anneal temperature/time, alignment, dielectric of three-wafer module
   - pad size/protrusion at 1.4 um F2B, TSV diameter/depth, thinned Si thickness, absolute TTV
   - number of chains measured, leakage bias voltage, numeric yield, reliability tests
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00057-a-m12, change: "notes widened: axis inconsistency, 0.7 (1 decade/gridline) vs about 0.9 (piecewise); conflicts entry added", reason: "audit_x1 item 5; Fig. 8 re-read at 400 dpi: 1E-1/1E+6/1E+11 labels 6 gridlines apart each"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00057-a-m13, change: "notes widened: medians 7E7-8E7 vs about 2E8, spreads under both calibrations; conflicts entry added", reason: "audit_x1 item 5"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00057-a-i1, change: "notes: resistance about 0.9 ohm under alternate calibration; conflicts entry for resistance_mohm added; value 700 kept", reason: "audit_x1 item 5"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00057-f07, change: "notes: appended axis-inconsistency remark (bbox unchanged)", reason: "audit_x1 item 5 / section 6 item 11 figure-quality flag"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00057-b, change: "carrier_format wafer_200mm -> empty; carrier_size_mm 200 -> empty; notes rewritten", reason: "audit_x1 item 9: p.4 Sec. 3-2 states 200 mm wafers only for the thinning evaluations, not for the module"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00057-b-m1, change: "condition '' -> '200 mm wafers (thinning evaluation, Sec. 3-2)'", reason: "audit_x1 item 9: moves the 200 mm statement to the rows it belongs to"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00057-b-m2, change: "condition '' -> '200 mm wafers (thinning evaluation, Sec. 3-2)'", reason: "audit_x1 item 9"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00057-figures, change: "renumbered f03 -> f02 (Fig. 3), f02 -> f04 (Fig. 10), f06 -> f05 (Fig. 13), f04 -> f07 (Fig. 8), f05 -> f11 (Fig. 4)", reason: "re-rank under key-figure rule 2026-10-19 (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00057-f03, change: "added Fig. 2 (stack_schematic, candidate, reprinted yes)", reason: "three-wafer stack drawing (ref [10]); concept of TV b"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00057-f06, change: "added Fig. 6 (micrograph, candidate)", reason: "SEM pad-surface images; source of -a-m4..m7"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00057-f08, change: "added Fig. 9 (electrical_plot, manual)", reason: "source of -a-m14"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00057-f09, change: "added Fig. 5 (other, candidate)", reason: "source of -a-m1..m3"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00057-f10, change: "added Fig. 7 (other, manual)", reason: "source of -a-m9, -a-m10"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00057-f12, change: "added Fig. 11 (other, candidate)", reason: "thickness profile behind -b-m1"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00057-f13, change: "added Fig. 12 (other, manual)", reason: "edge profile and delta definition behind -b-m2"}

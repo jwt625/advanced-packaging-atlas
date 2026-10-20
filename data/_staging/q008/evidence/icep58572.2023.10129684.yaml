@@ -1,0 +1,37 @@
+paper_id: icep58572.2023.10129684
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/icep58572.2023.10129684/text.md
+  - references/icep58572.2023.10129684/source.json
+  - references/icep58572.2023.10129684/figures/page_01.png
+  - references/icep58572.2023.10129684/figures/page_02.png
+  - references/icep58572.2023.10129684/figures/cand/p01_fig1.png
+  - references/icep58572.2023.10129684/figures/cand/p02_fig3.png
+  - references/icep58572.2023.10129684/figures/cand/p02_fig4.png
+  - references/icep58572.2023.10129684/figures/cand/p02_fig5.png
+figure_reading_method: >-
+  Page renders and candidates; manual re-crops of Fig. 3, 4, 5. Figures carry no dimensions; all numbers from text.
+entries:
+  - {table: interconnects, row_id: icep58572.2023.10129684-b-i1, field: diameter_um, value: 55, unit: um, basis: design_target, locator: "p.2 Sec. III", note: "55 um micro balls"}
+derived: []
+conflicts: []
+excluded:
+  - "~40% area utilization gain of square panel vs wafer (general introduction claim, not a result of this work)"
+  - "Reference [1] cited for the 600x600 mm panel-level trend"
+not_reported:
+  - stack_layers (no layer stack, die content or panel thickness disclosed)
+  - electrical_interfaces, optical_interfaces
+  - solder ball alloy, ball pitch on the TVs, pad finish, flux type, reflow profile
+  - panel mold compound product, embedded die details, warpage sign convention and metrology
+  - numeric yield and TTV for the 95x240 mm substrate test
+source_quality:
+  - "2-page extended abstract; few quantitative results. Candidate crops for Fig. 3, 4, 5 were clipped or padded (manual re-crops)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "icep58572.2023.10129684", change: "process_flow_level full -> ordered (has_process_flow yes kept); F1, F2 level full/fragments -> ordered", reason: "ordered saw and ball-mount sequences with tools named but no temperature, time, pressure or other numeric conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "icep58572.2023.10129684-F1;icep58572.2023.10129684-F2", change: "flow_name set (Panel Saw process; micro ball mount process)", reason: "p.1 Sec. II names the Panel Saw process; p.2 Sec. II micro ball process"}
+  - {date: 2026-10-20, source: repass, row_id: "icep58572.2023.10129684-F2", change: "tv_ids b -> b;c; F2-s01 (300x300 mm warpage tuning) made a TV-b delta", reason: "p.2 Sec. III: 55 um micro ball process also run on the 95x240 mm standard substrate (TV c); warpage tuning only for the 300x300 mm panel"}
+  - {date: 2026-10-20, source: repass, row_id: "icep58572.2023.10129684-F2-s02", change: "category other -> ball_attach; material flux", reason: "flat printing flux coating is the first step of the micro ball process (p.2 Sec. II, Fig. 4)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep58572.2023.10129684-F2-s03", change: "target 55 um micro balls; notes", reason: "p.2 Sec. III"}
+  - {date: 2026-10-20, source: repass, row_id: "icep58572.2023.10129684-F2-s04", change: "step_basis inferred_order", reason: "reflow known only from Fig. 5 caption 'after reflow process'"}
+  - {date: 2026-10-20, source: repass, row_id: "icep58572.2023.10129684-F1-s02", change: "target 300 x 300 mm panels (4 pcs); step_basis stated_in_flow on F1/F2 steps", reason: "p.1 Sec. II"}

@@ -1,0 +1,81 @@
+paper_id: ectc51906.2022.00057
+verified_on: 2026-10-18
+schema_version: 2
+source_files:
+  - references/ectc51906.2022.00057/text.md
+  - references/ectc51906.2022.00057/source.json
+  - references/ectc51906.2022.00057/source.pdf
+  - references/ectc51906.2022.00057/figures/page_01.png
+  - references/ectc51906.2022.00057/figures/page_02.png
+  - references/ectc51906.2022.00057/figures/page_03.png
+  - references/ectc51906.2022.00057/figures/page_04.png
+  - references/ectc51906.2022.00057/figures/page_05.png
+figure_reading_method: >-
+  Page renders 1-5 viewed; Fig. 5, 6, 7, 8, 9 re-rendered from source.pdf at 300 dpi and read by pixel calibration
+  against axis ticks/gridlines (Fig. 8: 12 decade gridlines 1E-1..1E+11, 37.4 px/decade; Fig. 9: 4 decades
+  1E-14..1E-10, 112.9 px/decade). Bar values about +-0.1 nm; log reads about +-0.1 decade.
+entries:
+  - {table: interconnects, row_id: ectc51906.2022.00057-a-i1, field: pad_x_um, value: 0.5, unit: um, basis: design_target, locator: "p.2 Sec. 2-1", note: "500 nm pad size corresponds to 1 um pitch"}
+  - {table: interconnects, row_id: ectc51906.2022.00057-a-i1, field: count, value: 200000, unit: connections, basis: design_target, locator: "p.3 Fig. 8 caption", note: "per daisy chain; comb-comb TEG also 200K"}
+  - {table: metrics, row_id: ectc51906.2022.00057-a-m12, field: value, value: 0.7, unit: ohm/unit, basis: measured, locator: "p.3 Fig. 8", note: "circles centred about 0.84 decade above 1E-1"}
+  - {table: metrics, row_id: ectc51906.2022.00057-a-m13, field: value, value: 8.0e7, unit: ohm/unit, basis: measured, locator: "p.3 Fig. 8", note: "50% squares about 10^7.9; 1% about 10^5.9; 99% about 10^9.1"}
+  - {table: metrics, row_id: ectc51906.2022.00057-a-m14, field: value, value: 9.0e-13, unit: A, basis: measured, locator: "p.3 Fig. 9", note: "50% about 10^-12.06; min about 10^-13.2; max about 10^-11.5"}
+derived:
+  - {table: interconnects, row_id: ectc51906.2022.00057-a-i1, field: resistance_mohm, value: 700, formula: "0.7 ohm x 1000 (unit conversion)", inputs: "p.3 Fig. 8 advanced integration median"}
+  - {table: metrics, row_id: ectc51906.2022.00057-b-m1, field: value, value: 0.33, formula: "1/3 (fraction to decimal)", inputs: "p.4 Sec. 3-2 'about 1/3'"}
+  - {table: metrics, row_id: ectc51906.2022.00057-b-m2, field: value, value: 0.2, formula: "1/5 (fraction to decimal)", inputs: "p.4 Sec. 3-2 'less than 1/5'"}
+conflicts:
+  - {table: interconnects, row_id: ectc51906.2022.00057-b-i2, field: pitch_um, values: [1.4, 1], locators: ["p.5 Sec. 3-3; p.5 Fig. 14; p.1 Abstract", "p.4 Sec. 3-1 ('introduction of 1um pitch Cu-Cu hybrid bonding to face-to-back')"], chosen: 1.4, why: "measured cross-section and abstract/conclusion state 1.4 um"}
+  - {table: metrics, row_id: ectc51906.2022.00057-c-m3, field: variant, values: ["Cu-Pad size (nm) axis label", "pad size in um per text"], locators: ["p.2 Fig. 4", "p.2 Sec. 2-1"], chosen: "um", why: "text: about 10 nm expansion for pads larger than 4 um; 500 nm pad corresponds to 1 um pitch"}
+  - {table: metrics, row_id: ectc51906.2022.00057-c-m2, field: value, values: ["less than 4 nm (text)", "about 4.0 nm (Fig. 4 point at 0.5)"], locators: ["p.2 Sec. 2-1", "p.2 Fig. 4"], chosen: "4 (lt)", why: "text states the bound; figure consistent within reading error"}
+  - {table: metrics, row_id: ectc51906.2022.00057-a-m12, field: value, values: [0.7, 0.9], locators: ["p.3 Fig. 8 read at 1 decade/gridline (1E-1 and 1E+11 labels, 12 gridlines)", "p.3 Fig. 8 read piecewise via the 1E+6 label (7 decades over 6 gridlines)"], chosen: 0.7, why: "axis inconsistent: 1E-1, 1E+6, 1E+11 sit 6 gridlines apart each (7 vs 5 decades); outer labels give a uniform 1 decade/gridline; 400 dpi pixel re-read 2026-10-19 gives 0.68 vs 0.93"}
+  - {table: metrics, row_id: ectc51906.2022.00057-a-m13, field: value, values: [8.0e7, 2.3e8], locators: ["p.3 Fig. 8 at 1 decade/gridline (median 10^7.8-10^7.9; 1-99% 7E5-1.2E9)", "p.3 Fig. 8 piecewise via 1E+6 label (median 10^8.4; 1-99% 5E6-2.6E9)"], chosen: 8.0e7, why: "same axis inconsistency; order of magnitude only; qualitative result 'immensely lowered' unaffected"}
+  - {table: interconnects, row_id: ectc51906.2022.00057-a-i1, field: resistance_mohm, values: [700, 900], locators: ["p.3 Fig. 8 uniform calibration", "p.3 Fig. 8 piecewise calibration"], chosen: 700, why: "follows -a-m12; see the axis inconsistency above"}
+source_quality:
+  - "Fig. 8 x-axis labels 1E-1, 1E+6, 1E+11 are equally spaced (6 gridlines each), which no uniform log axis allows; resistance reads are order-of-magnitude (audit_x1 item 5)."
+excluded:
+  - "Fig. 1 CIS evolution and Fig. 2 typical three-layer structure: generic/cited [6], [10]; only via-last TSV note used"
+  - "Cu pumping grain-boundary diffusion mechanism attributed to ref [12]"
+  - "Fig. 11 and Fig. 12 absolute values: y axes in a.u."
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - wafer diameter of the two-wafer test module (200 mm stated only for thinning evaluations)
+  - bonding temperature/pressure, anneal temperature/time, alignment, dielectric of three-wafer module
+  - pad size/protrusion at 1.4 um F2B, TSV diameter/depth, thinned Si thickness, absolute TTV
+  - number of chains measured, leakage bias voltage, numeric yield, reliability tests
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00057-a-m12, change: "notes widened: axis inconsistency, 0.7 (1 decade/gridline) vs about 0.9 (piecewise); conflicts entry added", reason: "audit_x1 item 5; Fig. 8 re-read at 400 dpi: 1E-1/1E+6/1E+11 labels 6 gridlines apart each"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00057-a-m13, change: "notes widened: medians 7E7-8E7 vs about 2E8, spreads under both calibrations; conflicts entry added", reason: "audit_x1 item 5"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00057-a-i1, change: "notes: resistance about 0.9 ohm under alternate calibration; conflicts entry for resistance_mohm added; value 700 kept", reason: "audit_x1 item 5"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00057-f07, change: "notes: appended axis-inconsistency remark (bbox unchanged)", reason: "audit_x1 item 5 / section 6 item 11 figure-quality flag"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00057-b, change: "carrier_format wafer_200mm -> empty; carrier_size_mm 200 -> empty; notes rewritten", reason: "audit_x1 item 9: p.4 Sec. 3-2 states 200 mm wafers only for the thinning evaluations, not for the module"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00057-b-m1, change: "condition '' -> '200 mm wafers (thinning evaluation, Sec. 3-2)'", reason: "audit_x1 item 9: moves the 200 mm statement to the rows it belongs to"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00057-b-m2, change: "condition '' -> '200 mm wafers (thinning evaluation, Sec. 3-2)'", reason: "audit_x1 item 9"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00057-figures, change: "renumbered f03 -> f02 (Fig. 3), f02 -> f04 (Fig. 10), f06 -> f05 (Fig. 13), f04 -> f07 (Fig. 8), f05 -> f11 (Fig. 4)", reason: "re-rank under key-figure rule 2026-10-19 (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00057-f03, change: "added Fig. 2 (stack_schematic, candidate, reprinted yes)", reason: "three-wafer stack drawing (ref [10]); concept of TV b"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00057-f06, change: "added Fig. 6 (micrograph, candidate)", reason: "SEM pad-surface images; source of -a-m4..m7"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00057-f08, change: "added Fig. 9 (electrical_plot, manual)", reason: "source of -a-m14"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00057-f09, change: "added Fig. 5 (other, candidate)", reason: "source of -a-m1..m3"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00057-f10, change: "added Fig. 7 (other, manual)", reason: "source of -a-m9, -a-m10"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00057-f12, change: "added Fig. 11 (other, candidate)", reason: "thickness profile behind -b-m1"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00057-f13, change: "added Fig. 12 (other, manual)", reason: "edge profile and delta definition behind -b-m2"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00057-F1, change: "locator: 'p.3 Sec. 2-2 C; p.3 Fig. 7; p.2 Sec. 2-2 A; p.2 Fig. 5; p.2 Sec. 2-2 B; p.3 Fig. 6; p.2 Sec. 2-1; p.3 Sec. 2-3; p.3 Fig. 8; p.3 Fig. 9' -> 'p.2 Sec. 2-1; p.2 Sec. 2-2 A; p.2 Fig. 5; p.2 Sec. 2-2 B; p.3 Fig. 6; p.3 Sec. 2-2 C; p.3 Fig. 7; p.3 Sec. 2-3'", reason: "test locators removed with moved row"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00057-F2, change: "locator: 'p.4 Fig. 10(a); p.4 Fig. 10(b); p.4 Sec. 3-2; p.5 Sec. 4; p.4 Sec. 3-1; p.4 Fig. 10(c); p.5 Sec. 3-3; p.4 Fig. 10(d); p.5 Fig. 13; p.5 Fig. 14' -> 'p.4 Fig. 10(a)-(d); p.4 Sec. 3-1; p.4 Sec. 3-2; p.5 Sec. 3-3; p.5 Sec. 4'", reason: "SAM/HAADF-STEM locators removed with moved rows"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00057-F1-s01, change: "target: 'Cu connection pads' -> ''; conditions: 'splits: conventional ECD; new ECD process A (changed Cu component, grain size reduced 16%)' -> ''; split: '' -> 'ECD: conventional / new ECD process A (Cu grain size -16%)'", reason: "target held an object name; process variants -> split"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00057-F1-s02, change: "step: 'Cu CMP of connection pad layer' -> 'Cu CMP of connection pad layer to protrude Cu pads above SiO2 field'; target: 'Cu pads and SiO2 field' -> ''; conditions: 'splits: conventional slurry; slurry A; slurry B (low Cu removal rate relative to SiO2)' -> ''; split: '' -> 'slurry: conventional / A / B (low Cu removal rate vs SiO2)'; step_basis: '' -> 'stated_in_flow'", reason: "target held an object name; slurry variants -> split; CMP before wet stated"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00057-F1-s03, change: "step: 'additional wet process after Cu CMP to recess SiO2 field' -> 'additional wet process after Cu CMP to recess SiO2 field around Cu pads'; target: 'SiO2 field' -> ''; conditions: 'splits: wet process A (main component dilute HF); wet process B (main component organic solvent)' -> ''; split: '' -> 'wet: none / A (dilute HF) / B (organic solvent)'; step_basis: '' -> 'stated_in_flow'", reason: "target held an object name; wet variants -> split"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00057-F1-s04, change: "step: 'wafer-level face-to-face Cu-Cu hybrid bonding' -> 'wafer-level face-to-face Cu-Cu hybrid bonding (two-wafer test module)'; target: '' -> '1 um pitch; 0.5 um pads'; overrides: '' -> 'target:design_target'; step_basis: '' -> 'stated_in_flow'", reason: "stated pitch/pad size of the 1 um F2F bond on the bonding step"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00057-F1-s05, change: "step_basis: '' -> 'stated_in_flow'", reason: "anneal after bonding stated (Sec. 2-1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00057-F1-s06, change: "deleted", reason: "electrical test is a measurement; already in metrics -a-m12..m14"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00057-F2-s01, change: "step_basis: '' -> 'stated_in_flow'; locator: 'p.4 Fig. 10(a)' -> 'p.4 Fig. 10(a); p.5 Sec. 3-3'; notes: '' -> 'Protruded Cu pads applied to both F2F and F2B interfaces (Sec. 3-3).'", reason: "Fig. 10(a); protruded pads used at F2F interface too (Sec. 3-3)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00057-F2-s02, change: "target: 'middle wafer backside' -> ''; step_basis: '' -> 'stated_in_flow'; notes: '' -> 'Grinding, CMP, wet etch order from Sec. 3-2 and Sec. 4.'", reason: "target held an object name; order from Fig. 10(b) and Sec. 3-2"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00057-F2-s03, change: "target: 'middle wafer backside' -> ''; step_basis: '' -> 'stated_in_flow'", reason: "target held an object name"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00057-F2-s04, change: "target: 'middle wafer backside' -> ''; step_basis: '' -> 'stated_in_flow'", reason: "target held an object name"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00057-F2-s05, change: "step_basis: '' -> 'stated_in_flow'", reason: "Fig. 10(c)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00057-F2-s06, change: "step: 'backside Cu connection pad formation (protruded pads)' -> 'backside Cu connection pad formation on middle wafer (protruded pads)'; target: 'middle wafer backside' -> ''; step_basis: '' -> 'stated_in_flow'", reason: "target held an object name; Fig. 10(c)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00057-F2-s10, change: "added", reason: "Sec. 3-1 states the mating Cu pads are fabricated on the bottom-wafer frontside; missing step"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00057-F2-s07, change: "seq: '7' -> '8'; target: '' -> '1.4 um pitch'; overrides: '' -> 'target:measured'; step_basis: '' -> 'stated_in_flow'; locator: 'p.4 Sec. 3-1; p.4 Fig. 10(d)' -> 'p.4 Sec. 3-1; p.4 Fig. 10(d); p.5 Sec. 3-3; p.5 Fig. 14'", reason: "stated F2B connection pitch on the bonding step; seq after new bottom-wafer pad step"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00057-F2-s08, change: "deleted", reason: "SAM of the finished stack is post-build characterization; already in metrics -b-m4"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00057-F2-s09, change: "deleted", reason: "HAADF-STEM cross section is failure analysis; already in metrics -b-m5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00057-F2-s06", change: "category: 'other' -> 'rdl_layer'", reason: "category_other review: Cu connection (hybrid-bond) pad layer formation; rdl_layer as for other HB pad-layer steps (p.4 Sec. 3-1)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00057-F2-s10", change: "category: 'other' -> 'rdl_layer'", reason: "category_other review: Cu connection (hybrid-bond) pad layer formation; rdl_layer as for other HB pad-layer steps (p.4 Sec. 3-1)"}

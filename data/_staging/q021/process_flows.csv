@@ -1,0 +1,8 @@
+flow_id,paper_id,flow_name,scope,level,tv_ids,basis,source,overrides,locator,qualifiers,notes
+ectc51687.2025.00009-F1,ectc51687.2025.00009,MLV process (Sec. III.A),tv_build,ordered,ectc51687.2025.00009-a,stated,mixed,,p.3 Sec. III.A; p.4 Fig. 8; p.4 Sec. III.A; p.4 Fig. 9; p.4 Fig. 10; p.4 Fig. 11; p.3 Sec. III; p.4 Sec. III.B; p.5 Fig. 12,,
+tcpmt.2021.3104326-F1,tcpmt.2021.3104326,SnAg microbump D2W assembly (Sec. II),tv_build,full,tcpmt.2021.3104326-a;tcpmt.2021.3104326-b,stated,text,,p.2 Sec. II; p.5 Sec. IV,,
+tcpmt.2021.3104326-F2,tcpmt.2021.3104326,Cu/SiO2 hybrid bonding D2W (Sec. II),tv_build,full,tcpmt.2021.3104326-c,stated,text,,p.2 Sec. II; p.3 Sec. II,,
+ectc51846.2026.00389-F1,ectc51846.2026.00389,SAP on ABF/glass (Sec. III),tv_build,ordered,ectc51846.2026.00389-a;ectc51846.2026.00389-b,stated,text,,p.3 Sec. III,,
+eptc59621.2023.10457612-F1,eptc59621.2023.10457612,"wafer-level front-side heater/sensor and back-side microchannel flow (Fig. 2, 3)",tv_build,ordered,eptc59621.2023.10457612-a,stated,text,,p.1 Methodology; p.2 Fig. 2(a); p.2 Sec. I; p.2 Fig. 2(b); p.2 Fig. 2(c); p.2 Fig. 2(d); p.2 Fig. 2(e); p.2 Fig. 2(f); p.1-2 Methodology; p.2 Fig. 3(g); p.3 Sec. II; p.2 Fig. 3(h); p.2 Fig. 3(i); p.2 Fig. 3(j); p.3 Sec. III; p.2 Fig. 3(k); p.3 Sec. IV; p.2 Fig. 3(l),,
+ectc51687.2025.00326-F1,ectc51687.2025.00326,"panel SAP RDL (Sec. II.A-C, Fig. 1)",tv_build,ordered,ectc51687.2025.00326-a;ectc51687.2025.00326-b,stated,mixed,,p.1 Sec. II.A; p.2 Fig. 2; p.2 Sec. II.A; p.2 Table I; p.2 Fig. 1; p.2 Sec. II.B; p.2 Sec. II.C,,
+ectc51687.2025.00326-F3,ectc51687.2025.00326,"damascene wiring (Sec. II.D, Fig. 4)",tv_build,ordered,ectc51687.2025.00326-c,stated,mixed,,p.2 Sec. II.D; p.3 Fig. 4,,

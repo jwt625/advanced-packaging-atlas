@@ -31,3 +31,6 @@ not_reported:
   - tall Cu pillar diameter; C4 pitch/size/alloy; substrate layer count; lid material; BGA
   - absolute warpage values with sign convention (only a.u./normalized and abstract <100 um)
   - reliability n_samples, pass criteria; electrical test data; electrical_interfaces; optical_interfaces
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00175-a-m1, change: "scope set to 'applies to TVs a, b (abstract names no module)'; notes updated", reason: "abstract <100 um claim names no module; one row on first TV"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00175-b-m1, change: "row deleted (copy of a-m1)", reason: "audit_x1 item 4 / sibling_dup: copied abstract claim on mTV2"}

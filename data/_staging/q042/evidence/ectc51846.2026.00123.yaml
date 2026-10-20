@@ -1,0 +1,49 @@
+paper_id: ectc51846.2026.00123
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00123/text.md
+  - references/ectc51846.2026.00123/source.json
+  - references/ectc51846.2026.00123/figures/page_02.png
+  - references/ectc51846.2026.00123/figures/page_03.png
+  - references/ectc51846.2026.00123/figures/page_04.png
+  - references/ectc51846.2026.00123/figures/page_05.png
+  - references/ectc51846.2026.00123/figures/page_07.png
+  - references/ectc51846.2026.00123/figures/cand/p03_fig2.png
+  - references/ectc51846.2026.00123/figures/cand/p03_fig3.png
+  - references/ectc51846.2026.00123/figures/cand/p07_tableii.png
+  - references/ectc51846.2026.00123/figures/cand/p07_tableiii.png
+figure_reading_method: >-
+  Fig. 2(a),(b),(e) re-cropped at 400 dpi for layer labels (15/30 um ABF, 6 um Cu, 0.2 mm chip, 0.3 mm glass) and
+  the four optical dimension annotations. Fig. 6 and Tables II/III re-cropped at 150 dpi; table values match text.md.
+entries:
+  - {table: interconnects, row_id: ectc51846.2026.00123-a-i1, field: total_length_um, value: 57, unit: um, basis: design_target, locator: "p.1 Abstract", note: "vertical interconnection height from capacitor pads to top RDL; equals 30+6+15+6 um stack"}
+  - {table: interconnects, row_id: ectc51846.2026.00123-a-i1, field: pitch_um, value: 200, unit: um, basis: design_target, locator: "p.4 Sec. II", note: "200 um pad pitch of the capacitor; vias sit above pads"}
+  - {table: components, row_id: ectc51846.2026.00123-a-c1, field: name, value: "55 terminals", basis: stated, locator: "p.8 Sec. Conclusion", note: "terminal count"}
+derived: []
+conflicts:
+  - {table: components, row_id: ectc51846.2026.00123-a-c1, field: thickness_um, values: [210, 200], locators: ["p.1 Abstract", "p.3 Sec. II; p.3 Fig. 2 caption; p.3 Fig. 2(b) 0.2 mm"], chosen: 200, why: "body text, caption and schematic give 200 um die with 10 um pad height; abstract 210 um likely includes pads"}
+  - {table: metrics, row_id: ectc51846.2026.00123-a-m6, field: value, values: [11.2, 11], locators: ["p.7 Table III", "p.7 Sec. IV text 'approximately 11 pH'"], chosen: 11.2, why: "result table > text"}
+  - {table: metrics, row_id: ectc51846.2026.00123-a-m7, field: value, values: [2.678, 2.673], locators: ["p.7 Table III", "p.7 Fig. 6(b) marker m1"], chosen: 2.678, why: "result table"}
+  - {table: metrics, row_id: ectc51846.2026.00123-a-m10, field: value, values: [0.0081, 0.010], locators: ["p.7 Table III (8.1 mOhm)", "p.7 Fig. 6(b) marker m3 (0.010 Ohm, curve not specified)"], chosen: "8.1 mOhm", why: "result table"}
+  - {table: metrics, row_id: ectc51846.2026.00123-a-m1, field: value, values: ["2 mOhm", "< 5 mOhm"], locators: ["p.7 Table II", "p.1 Abstract"], chosen: "2 mOhm", why: "abstract is a bound of the same result"}
+excluded:
+  - "Reported DTC capacitance range nF to 2.8 uF, thickness 50-300 um, density up to 3,500 nF/mm2 attributed to refs [5], [18], [19]"
+  - "Lateral parasitic inductance on the order of nH (prior glass-embedded DTC, ref [5]); sub-10-pH lateral inductance from simulation in ref [5]"
+  - "Fig. 1(a) 5 MHz 3-phase 12-1 V IVPD architecture from ref [2] (t < 300 um label)"
+  - "Fig. 5(d) model impedance profiles (0.78 uF: ESR 10 mOhm, ESL 11.5 pH, SRF 50 MHz; 2.8 uF: ESR 60 mOhm, ESL 1.22 nH, SRF 20 MHz) used only to illustrate VNA accuracy windows from ref [23]"
+  - "VNA accuracy windows (1-port ~1 Ohm-2 kOhm, 2-port shunt ~1 mOhm-225 Ohm, -88 to -0.9 dB) from ref [23]"
+not_reported:
+  - electrical_interfaces (PDN test structure, no data link)
+  - optical_interfaces
+  - die x/y size, cavity x/y size, glass panel/wafer size
+  - microvia diameters, via count, DAF product/thickness, Cu pad metal
+  - lamination and cure temperatures/pressures, laser parameters, equipment
+  - lateral impedance Z_E-I, Z_E-W measurements (future work)
+  - reliability, warpage, thermal data
+source_quality:
+  - "Text layer clean. Candidates p07_tableii/p07_tableiii clip the last table row slightly; re-cropped manually."
+  - "Fig. 2(e) caption names three quantities but shows four annotations without mapping; entered as four unassigned dimensions."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00123-F1", change: "step_basis stated_in_flow on s01-s12", reason: "p.3 Fig. 3 numbered flow; p.4-5 Sec. II"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00123", change: "process_flow_level ordered confirmed", reason: "Fig. 3 ordered flow; no temperature/time/pressure values"}

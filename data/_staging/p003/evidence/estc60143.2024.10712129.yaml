@@ -1,0 +1,79 @@
+paper_id: estc60143.2024.10712129
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/estc60143.2024.10712129/text.md
+  - references/estc60143.2024.10712129/source.json
+  - references/estc60143.2024.10712129/figures/page_02.png
+  - references/estc60143.2024.10712129/figures/page_03.png
+  - references/estc60143.2024.10712129/figures/page_04.png
+  - references/estc60143.2024.10712129/figures/page_05.png
+  - references/estc60143.2024.10712129/figures/cand/p02_tablei.png
+  - references/estc60143.2024.10712129/figures/cand/p03_tableiv.png
+  - references/estc60143.2024.10712129/figures/cand/p04_fig11.png
+  - references/estc60143.2024.10712129/figures/cand/p04_fig14.png
+  - references/estc60143.2024.10712129/figures/cand/p04_fig15.png
+figure_reading_method: >-
+  All tables are images (text.md has only captions): Tables I-VII read from 300 dpi re-crops. Fig. 13 mounting scatter
+  read at 600 dpi. Fig. 15 bars read against 500 um gridlines (+/-30 um); delta labels 2030 and 108 um agree with bar
+  extremes (1070 - (-960); 455 - 345).
+entries:
+  - {table: metrics, row_id: estc60143.2024.10712129-f-m1, field: value, value: 360, unit: um, basis: measured, locator: "p.4 Fig. 13", note: "label 'Warpage = 0.36 mm after RDL formation'"}
+  - {table: interconnects, row_id: estc60143.2024.10712129-g-i3, field: height_um, value: 30, unit: um, basis: design_target, locator: "p.2 Table III", note: "Cu/SnAg = 30/25 bottom side"}
+  - {table: stack_layers, row_id: estc60143.2024.10712129-g-L07, field: thickness_um, value: 17, unit: um, basis: measured, locator: "p.3 Table IV", note: "actual; design 18"}
+derived:
+  - {table: test_vehicles, row_id: estc60143.2024.10712129-g, field: interposer_area_mm2, value: 2500, formula: "50 x 50", inputs: "p.2 Table III"}
+  - {table: test_vehicles, row_id: estc60143.2024.10712129-h, field: interposer_area_mm2, value: 2500, formula: "50 x 50", inputs: "p.2 Table III"}
+conflicts:
+  - {table: metrics, row_id: estc60143.2024.10712129-f-m2, field: value, values: ["text: die mounting offset < 20 um", "Fig. 13 scatter: one point at about (9, -22) um, others within y -9 to -20 um"], locators: ["p.4 Sec. III.B", "p.4 Fig. 13"], chosen: "22 (approx, plot)", why: "measured plot over text"}
+  - {table: metrics, row_id: estc60143.2024.10712129-f-m1, field: value, values: ["text: panel warpage < 400 um", "Fig. 13: 0.36 mm"], locators: ["p.4 Sec. III.B", "p.4 Fig. 13"], chosen: 360, why: "figure value consistent with text bound"}
+  - {table: test_vehicles, row_id: estc60143.2024.10712129-f, field: carrier_size_mm, values: ["510x515 mm", "515x510 mm"], locators: ["p.2 Sec. II.B", "p.1 Abstract; p.4 Sec. III.B"], chosen: "515x510", why: "majority of mentions; same panel"}
+  - {table: stack_layers, row_id: estc60143.2024.10712129-f-L01, field: line_um, values: ["abstract: 10 um wiring", "Sec. II.B: L/S 5/5 um; Sec. III.B: 5/5 and 10/10 um"], locators: ["p.1 Abstract", "p.2 Sec. II.B; p.4 Sec. III.B"], chosen: "5/5 and 10/10 rows", why: "body text"}
+  - {table: process_steps, row_id: estc60143.2024.10712129-F3-s02, field: conditions, values: ["Ti 25 um, Cu 150 um as printed"], locators: ["p.2 Sec. II.B"], chosen: "kept as text only", why: "implausible for 1.5 um L/S SAP seed (likely nm); not converted or entered numerically"}
+excluded:
+  - "Three-layer RDL with L/S 2/2 um on large panel of ref [4]"
+  - "Si interposer cost/TSV limitations and organic interposer references [10]-[15]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - micro-bump TV wafer size, die thickness, interposer material, sample counts; flux-less TV design (A/B/C)
+  - RDL Cu thickness, dielectric products, via sizes; die-embedded die size, Cu pillar size, mold product
+  - 2.5D die counts, substrate layer count, core/build-up/SR products and CTE values, TSV details in Si interposer
+  - substrate warpage measurement temperature; TCT sample counts; stiffener study substrate (A or B)
+source_quality:
+  - "text.md contains no table bodies (tables are images). Fig. 7 had no candidate; manual crop. Text cites Table 1-7 numbering."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: "estc60143.2024.10712129-a-m1", change: "scope -> '15 um bump pitch; applies to TVs a, b'; copy estc60143.2024.10712129-b-m1 deleted", reason: "p.3 Sec. III.A: one statement for '15 um bump pitch' (TV-A and TV-B both 15 um); Fig. 8 does not name the TV; no per-TV result"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "estc60143.2024.10712129-b-m1", change: "deleted (copy of estc60143.2024.10712129-a-m1)", reason: "p.3 Sec. III.A: one statement for '15 um bump pitch' (TV-A and TV-B both 15 um); Fig. 8 does not name the TV; no per-TV result"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "estc60143.2024.10712129-g-m1;estc60143.2024.10712129-g-m2;estc60143.2024.10712129-h-m1;estc60143.2024.10712129-h-m2;estc60143.2024.10712129-h-m3", change: "kept all (no change)", reason: "p.5 Table VII gives Pass/Fail per substrate (A = TV g, B = TV h) per cycle count and test line: genuine per-TV cells"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f02", change: "added Fig. 16 (cross_section, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f03", change: "added Fig. 18 (cross_section, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f04", change: "added Fig. 10 (cross_section, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f05", change: "added Fig. 8 (cross_section, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f06", change: "added Fig. 9 (cross_section, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f07", change: "added Fig. 12 (cross_section, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f08", change: "re-ranked Fig. 11: estc60143.2024.10712129-f06 -> estc60143.2024.10712129-f08", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f09", change: "added Fig. 17 (stack_schematic, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f10", change: "re-ranked Fig. 7: estc60143.2024.10712129-f02 -> estc60143.2024.10712129-f10", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f11", change: "added Fig. 3 (process_flow, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f12", change: "added Fig. 4 (process_flow, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f13", change: "added Fig. 5 (process_flow, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f14", change: "added Fig. 6 (process_flow, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f15", change: "re-ranked Table I: estc60143.2024.10712129-f03 -> estc60143.2024.10712129-f15", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f16", change: "added Fig. 13 (warpage_plot, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f17", change: "re-ranked Fig. 15: estc60143.2024.10712129-f05 -> estc60143.2024.10712129-f17", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f18", change: "added Table VII (data_table, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f19", change: "re-ranked Table IV: estc60143.2024.10712129-f04 -> estc60143.2024.10712129-f19", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f20", change: "added Table II (data_table, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f21", change: "added Table III (data_table, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "estc60143.2024.10712129-f22", change: "added Table V (data_table, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-20, source: repass, row_id: "estc60143.2024.10712129", change: "process_flow_level full (unchanged); flows 6 -> 5 (old F1/F2 merged; F3-F6 renumbered F2-F5)", reason: "re-pass"}
+  - {date: 2026-10-20, source: repass, row_id: "estc60143.2024.10712129-F1", change: "old F1 (CUF+EMC) and F2 (MUF) merged into one flow with shared TCB + flux clean and routes 'CUF+EMC' / 'MUF'; 'CUF skipped' row added (performed no)", reason: "review B misses 1 and 3: copies on a/b/c and flattened seq 1-7; Fig. 3 shows the branch and 'CUF skip'"}
+  - {date: 2026-10-20, source: repass, row_id: "estc60143.2024.10712129-F3", change: "resist step split into resist formation, UV exposure (i-line stepper), development; seed etch category etch_wet -> etch_other; L/S 1.5/1.5 um as target", reason: "Fig. 5 shows exposure and developing as separate steps; etch method not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "estc60143.2024.10712129-F3", change: "deleted former step F4-s07 (inspection: OM/SEM of wiring defects and width)", reason: "post-build measurement; values and method already in metrics e-m1..e-m3"}
+  - {date: 2026-10-20, source: repass, row_id: "estc60143.2024.10712129-F4-s09", change: "target 'L/S 5/5 and 10/10 um'; result records both formed", reason: "review B miss 5: p.4 Sec. III.B and abstract"}
+  - {date: 2026-10-20, source: repass, row_id: "estc60143.2024.10712129-F5", change: "tv_ids g;h -> g;h;i", reason: "review B miss 2: TV i is the same Fig. 7 build (stiffener study, p.4 Sec. III.C)"}
+  - {date: 2026-10-20, source: repass, row_id: "estc60143.2024.10712129-F5-s07;estc60143.2024.10712129-F5-s09;estc60143.2024.10712129-F5-s11;estc60143.2024.10712129-F5-s12", change: "targets from tables: interposer 200 um after grinding, Cu/SnAg 30/25 um 75 um dia 150 um pitch bumps, 50 x 50 mm interposer, 150 um substrate bump pitch", reason: "review B miss 4 (p.2 Table III, p.3 Table IV)"}
+  - {date: 2026-10-20, source: repass, row_id: "estc60143.2024.10712129-F5-s01;estc60143.2024.10712129-F5-s08;estc60143.2024.10712129-F5-s09", change: "categories other -> rdl_layer (pad layers) / bumping", reason: "new step_category values (review B pattern 4)"}
+  - {date: 2026-10-20, source: repass, row_id: "estc60143.2024.10712129-F5-s14;estc60143.2024.10712129-F5-s15;estc60143.2024.10712129-F5-s16", change: "stiffener: delta rows g, h (selected t=2.0 mm, w=20.5 mm) and i (design split); ball mount (pitch 1000 um) and motherboard bonding: delta rows g, h only", reason: "review B miss 4; p.4 Sec. III.C: stiffener study precedes ball mounting, Fig. 15 for i"}
+  - {date: 2026-10-20, source: repass, row_id: "estc60143.2024.10712129-F5-s02", change: "target microbump pitch 40/35 um from Table II", reason: "rule 7 targets"}
+  - {date: 2026-10-20, source: repass, row_id: "estc60143.2024.10712129", change: "all rows: step_basis set; step ids renumbered", reason: "schema v2.4 re-pass"}

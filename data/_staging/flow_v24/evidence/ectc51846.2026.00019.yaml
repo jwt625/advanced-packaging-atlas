@@ -1,0 +1,37 @@
+paper_id: ectc51846.2026.00019
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00019/text.md
+  - references/ectc51846.2026.00019/source.json
+  - references/ectc51846.2026.00019/figures/page_02.png
+  - references/ectc51846.2026.00019/figures/page_03.png
+  - references/ectc51846.2026.00019/figures/page_04.png
+  - references/ectc51846.2026.00019/figures/cand/p02_fig1.png
+  - references/ectc51846.2026.00019/figures/cand/p03_fig3.png
+  - references/ectc51846.2026.00019/figures/cand/p04_fig6.png
+  - references/ectc51846.2026.00019/figures/cand/p04_fig7.png
+  - references/ectc51846.2026.00019/figures/cand/p04_fig9.png
+figure_reading_method: >-
+  Page renders p.2-4; 300 dpi re-crops of Fig. 5, 6 and 7. Fig. 5 peak insertion loss read against the 0.5 dB
+  gridlines (+/-0.03 dB). Fig. 6(a) 'Au stud' label read at 300 dpi.
+entries:
+  - {table: optical_interfaces, row_id: ectc51846.2026.00019-b-o1, field: coupling_loss_db, value: 0.72, unit: dB, basis: simulated, locator: "p.3 Fig. 5", note: "peak of simulated IL curve at zero displacement"}
+  - {table: components, row_id: ectc51846.2026.00019-b-c1, field: thickness_um, value: 90, unit: um, basis: design_target, locator: "p.3 Fig. 3", note: "EML height dimension label in simulation schematic"}
+derived: []
+conflicts: []
+excluded:
+  - "110 GHz flip-chip EML small-signal response (ref [8]); >100 Gbaud EML operation (refs [6], [7])"
+  - "200/400 Gbps per lane inter-GPU link trend (intro, no source data)"
+  - "Fig. 8 setup block diagram (AWG M8199, PDFA, TEC): instruments only"
+not_reported:
+  - process_steps beyond three prototype assembly statements (no conditions)
+  - "Glass-IP size, thickness, glass type; TGV diameter, pitch, depth; RDL L/S and layer count"
+  - "EML and PD die sizes; bump type, pitch, metallurgy and bonding conditions"
+  - "package substrate size, layers, material; termination resistor value"
+  - "measured optical coupling or fiber attach (simulation only); wavelength; channel count"
+  - "thermal values (thermal path is qualitative)"
+  - "energy per bit, reach, BER"
+source_quality:
+  - "Fig. 8 caption repeats 'Measured small signal response'; the image and text show the optical waveform test setup."
+  - "Section headings garbled in text layer (font encoding); Fig. 4 caption reads 'Fig.' without number in text.md. No candidate isolates Fig. 4 or Fig. 5 (p03_fig5 spans the column)."

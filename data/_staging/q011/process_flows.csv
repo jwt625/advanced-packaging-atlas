@@ -1,0 +1,6 @@
+flow_id,paper_id,flow_name,scope,level,tv_ids,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00035-F1,ectc51846.2026.00035,PSB bridge-last process (Fig. 11),tv_build,ordered,ectc51846.2026.00035-d,stated,mixed,,p.7 Sec. IV.B; p.7 Fig. 11; p.8 Fig. 12,,
+ectc51906.2022.00061-F1,ectc51906.2022.00061,Ga/X-alloy assisted bonding coupon (Fig. 2),tv_build,full,ectc51906.2022.00061-a,stated,mixed,,p.2 Sec. II.A; p.2 Sec. II.B; p.2 Fig. 2; p.1 Abstract,,
+ectc51687.2025.00378-F1,ectc51687.2025.00378,"chip fabrication, partial dicing and back-grinding (Sec. II)",tv_build,ordered,ectc51687.2025.00378-a,stated,text,,p.2 Sec. II,,
+ectc51687.2025.00378-F2,ectc51687.2025.00378,chiplet embedding (Fig. 1),tv_build,full,ectc51687.2025.00378-a,stated,mixed,,p.3 Fig. 1; p.2 Sec. III; p.2 Sec. III.A; p.3 Fig. 2; p.3 Sec. III.B; p.4 Sec. III.B; p.4 Sec. III.C; p.4 Fig. 6; p.4 Fig. 7; p.5 Sec. III.C,,
+ectc51846.2026.00156-F1,ectc51846.2026.00156,microfluidic cooling integration (Sec. III.A),tv_build,ordered,ectc51846.2026.00156-a,stated,text,,p.2 Sec. III.A,,

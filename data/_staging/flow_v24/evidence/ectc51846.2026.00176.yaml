@@ -1,0 +1,40 @@
+paper_id: ectc51846.2026.00176
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00176/text.md
+  - references/ectc51846.2026.00176/source.json
+  - references/ectc51846.2026.00176/figures/page_01.png
+  - references/ectc51846.2026.00176/figures/page_02.png
+  - references/ectc51846.2026.00176/figures/page_03.png
+  - references/ectc51846.2026.00176/figures/page_04.png
+  - references/ectc51846.2026.00176/figures/cand/p01_fig1.png
+  - references/ectc51846.2026.00176/figures/cand/p02_fig2.png
+  - references/ectc51846.2026.00176/figures/cand/p02_fig5.png
+  - references/ectc51846.2026.00176/figures/cand/p03_fig7.png
+  - references/ectc51846.2026.00176/figures/cand/p03_table2.png
+figure_reading_method: >-
+  Fig. 2 flow labels and Fig. 5 warpage labels read from 400 dpi re-crops; Fig. 7 re-cropped at 400-800 dpi (die/PIC
+  thickness and solder-height labels illegible, not entered); Fig. 9 axes read at 400 dpi; Tables 1-2 match text.md.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00176-a-m7, field: value, value: 58.9, unit: um, basis: measured, locator: "p.2 Fig. 5", note: "panel label 'Reflow temp 260 C 58.9 um'"}
+derived:
+  - {table: process_steps, row_id: ectc51846.2026.00176-F2-s06, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.2 Sec. II.B"}
+  - {table: process_steps, row_id: ectc51846.2026.00176-F4-s05, field: time_s, value: 86400, formula: "24 h x 3600", inputs: "p.3 Sec. III"}
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00176-a-m2, field: value, values: [11.8, 11.75], locators: ["p.2 Table 1", "p.2 Sec. II.B"], chosen: 11.8, why: "result table over text (rounding)"}
+  - {table: metrics, row_id: ectc51846.2026.00176-a-m7, field: value, values: ["58.9 um at 260 C (Fig. 5)", "~56 um at 250 C reflow (text)"], locators: ["p.2 Fig. 5", "p.2 Sec. II.B"], chosen: "58.9 um at 260 C", why: "measured plot labels over text; text value may refer to the 56.6 um cool-down 25 C panel"}
+  - {table: optical_interfaces, row_id: ectc51846.2026.00176-a-o1, field: coupling_loss_db, values: [0.43, -0.43], locators: ["p.3 Sec. III", "p.4 Sec. V"], chosen: 0.43, why: "schema stores loss as positive dB; summary uses negative sign"}
+  - {table: process_steps, row_id: ectc51846.2026.00176-F4-s01, field: seq, values: ["Fig. 2: epoxy dispense before active alignment", "text: epoxy used after alignment to fix FAU"], locators: ["p.2 Fig. 2", "p.3 Sec. III"], chosen: "Fig. 2 order", why: "flow figure gives explicit order; text compatible with dispense then cure after alignment"}
+  - {table: process_steps, row_id: ectc51846.2026.00176-F4-s05, field: conditions, values: ["Fig. 2: in-situ UV cure + thermal cure", "text: batch UV initiation, 24 h at 25 C"], locators: ["p.2 Fig. 2", "p.3 Sec. III"], chosen: "text values (25 C, 24 h)", why: "text gives numbers; figure label kept in step name"}
+excluded:
+  - "Photonic engine 8-lambda WDM architecture details of ref [1]"
+not_reported:
+  - electrical_interfaces (SerDes protocol, energy, bandwidth density not given; BER entered as metric)
+  - "die and PIC sizes/thicknesses (Fig. 7(a) labels illegible), substrate x/y and layer count, wafer size"
+  - "micro bump and C4 pitch/diameter, RDL dimensions, module reflow temperature, UF cure conditions"
+  - "warpage sign per temperature (only shape trend in text); post-UF warpage values"
+  - "thermal cycling conditions and results; final bake duration; numeric BER/eye margins"
+  - "MFD of PIC and fiber, wavelength in nm"
+source_quality:
+  - "Candidates p02_fig2, p02_fig5, p03_fig7 clip bottom rows/panels; p04_fig10 bbox points to a page corner."

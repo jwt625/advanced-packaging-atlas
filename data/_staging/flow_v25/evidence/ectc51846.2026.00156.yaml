@@ -1,0 +1,44 @@
+paper_id: ectc51846.2026.00156
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00156/text.md
+  - references/ectc51846.2026.00156/source.json
+  - references/ectc51846.2026.00156/figures/cand/p02_fig1.png
+  - references/ectc51846.2026.00156/figures/cand/p03_fig3.png
+  - references/ectc51846.2026.00156/figures/cand/p03_fig4.png
+  - references/ectc51846.2026.00156/figures/cand/p03_fig5.png
+  - references/ectc51846.2026.00156/figures/cand/p03_fig6.png
+  - references/ectc51846.2026.00156/figures/cand/p03_fig7.png
+figure_reading_method: >-
+  Figs. 3-7 are vector charts in source.pdf: bar rectangles and marker centers extracted with pymupdf get_drawings()
+  and scaled by tick-label positions (zero at bar base). Fig. 3 MF bars are pattern fills (not in drawings): tops read
+  from an 8x render by green-pixel scan. Values agree with text statements (GPU <0.02 C/W, FOM ranges, Fig. 7 points).
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00156-a-m38, field: value, value: 0.0164, unit: C/W, basis: measured, locator: "p.3 Fig. 7", note: "text rounds to 0.017 C/W at 1 LPM"}
+  - {table: metrics, row_id: ectc51846.2026.00156-a-m41, field: value, value: 65.8, unit: kPa, basis: measured, locator: "p.3 Fig. 7", note: "text 66 kPa at 1.5 LPM"}
+derived:
+  - {table: process_steps, row_id: ectc51846.2026.00156-F1-s08, field: time_s, value: 2400, formula: "40 min x 60 s/min", inputs: "p.2 Sec. III.A"}
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00156-a-m25, field: value, values: ["Intro: up to 3 times lower GPU temperature rise and 1.5 times lower on HBM", "Fig. 6 max GPU FOM 0.598 (2.5x), Abstract: up to 60% GPU, ~35% HBM"], locators: ["p.1 Sec. I", "p.3 Fig. 6; p.1 Abstract"], chosen: "Fig. 6 FOM values", why: "measured plot; intro ratio not traceable to a plotted value"}
+  - {table: metrics, row_id: ectc51846.2026.00156-a-m14, field: notes, values: ["Text: Figs. 3 and 4 trends identical", "Fig. 3 and Fig. 4 bar patterns differ across tests"], locators: ["p.3 Sec. IV", "p.3 Fig. 3; p.3 Fig. 4"], chosen: "plotted values", why: "figure data entered as read"}
+excluded:
+  - "H100/MI300X 700-1000 W per module and >1 kW/cm2 hotspot flux attributed to ref [1]"
+  - "Biomimetic embedded microfluidic results of refs [3]-[6]"
+not_reported:
+  - electrical_interfaces, optical_interfaces, interconnects
+  - die sizes and thicknesses, HBM count, package/substrate/interposer dimensions
+  - gasket material, manifold dimensions, TIM bond-line thickness, laser-etch conditions
+  - coolant composition; inlet-temperature sweep (35-45 C) results not shown; Table 1 has no numbers
+  - Si reliability vehicle dimensions and channel geometry, sample counts, TC dwell/standard
+  - "process_steps: ectc51846.2026.00156-b (OEM traditional cold plate reference; assembly not described)"
+  - "process_steps: ectc51846.2026.00156-c (Si vehicle with vertical microchannels; fabrication not described, ref [7])"
+  - "process_steps: ectc51846.2026.00156-d (Si control vehicle; fabrication not described, ref [7])"
+source_quality:
+  - "Author block lists e-mail addresses in a shuffled order relative to names; first author taken from name order."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00156", change: "process_flow_level ordered confirmed", reason: "Sec. III.A ordered assembly sequence; only TIM conditioning carries conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00156-F1-s01", change: "target 'GPU SoC die' -> channel geometry (from conditions); override conditions -> target:design_target", reason: "p.2 Sec. III.A; target holds geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00156-F1-s07", change: "kept as step_kind inline_inspection (category test)", reason: "p.2 Sec. III.A places leak testing inside the assembly sequence before TIM conditioning; no result to move"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00156-F1", change: "step_basis stated_in_flow on all steps", reason: "order stated in the paper's flow figure/text (DevLog-007 re-pass)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00156", change: "not_reported += process_steps for TVs b, c, d", reason: "physical TVs without a described build flow"}

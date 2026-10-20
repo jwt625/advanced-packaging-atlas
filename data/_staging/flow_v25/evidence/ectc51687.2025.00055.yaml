@@ -1,0 +1,46 @@
+paper_id: ectc51687.2025.00055
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00055/text.md
+  - references/ectc51687.2025.00055/source.json
+  - references/ectc51687.2025.00055/figures/page_02.png
+  - references/ectc51687.2025.00055/figures/page_03.png
+  - references/ectc51687.2025.00055/figures/page_04.png
+  - references/ectc51687.2025.00055/figures/cand/p01_fig1.png
+  - references/ectc51687.2025.00055/figures/cand/p02_fig2.png
+  - references/ectc51687.2025.00055/figures/cand/p02_fig4.png
+  - references/ectc51687.2025.00055/figures/cand/p03_tablei.png
+  - references/ectc51687.2025.00055/figures/cand/p03_fig5.png
+  - references/ectc51687.2025.00055/figures/cand/p04_fig6.png
+figure_reading_method: >-
+  Fig. 6 values are the printed bar data labels (read from candidate p04_fig6 and page_04 render); bars with no label
+  are absent from the chart and were not entered. Tables I/II match text.md and the page render. RTV/CTV thermal
+  resistances from text (Fig. 4 agrees).
+entries:
+  - {table: metrics, row_id: ectc51687.2025.00055-c-m4, field: value, value: -0.762, unit: C-mm2/W, basis: measured, locator: "p.2 Sec. II.B; p.2 Fig. 4", note: "text 0.762; Fig. 4 t-test difference -0.76000"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51687.2025.00055-f-m1, field: value, values: ["Table I F2B SoIC-CS 0.36X of SoIC (64% lower; Sec. II.B)", "Abstract: 37% lower than SoIC"], locators: ["p.3 Table I; p.2 Sec. II.B", "p.1 Abstract"], chosen: 0.36, why: "result table and body text agree; abstract 37% not traceable to any table"}
+excluded:
+  - "AMD 3D V-Cache adoption of SoIC (ref [6]); BEOL/bonding-layer thermal contributors (ref [9])"
+  - "Abstract summary numbers (77%, 37%, 16%, >1.2 W/mm2) not entered separately; 77% and 16% follow from Tables I/II, >1.2 from Fig. 6"
+not_reported:
+  - process_steps (no fabrication or bonding flow described; has_process_flow = no)
+  - electrical_interfaces, optical_interfaces (Table II is relative R/C/BW/EE only, no protocol or absolute rate)
+  - bond pitch, pad size, C-Layer material and thickness (only 'microns-thick'), die sizes, TSV dimensions, bonding conditions
+  - daisy-chain absolute resistance and yield percentage; RTV/CTV laminate layer thickness and specimen count per wafer
+  - case-study package dimensions beyond areas; TIM properties; lid and interposer materials
+source_quality:
+  - "Clean text layer; Sec. II header misspelled 'VALIDAITON' in source."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00055-b-m1", change: "kept (genuine per-TV); locator Fig. 3 -> Fig. 3(a)", reason: "p.2 Fig. 3 shows a separate C-SAM wafer map per TV: (a) Reference TV, (b) C-Layer TV"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00055-c-m1", change: "kept (genuine per-TV); locator Fig. 3 -> Fig. 3(b)", reason: "p.2 Fig. 3 shows a separate C-SAM wafer map per TV: (a) Reference TV, (b) C-Layer TV"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00055-e-m3;ectc51687.2025.00055-f-m3", change: "kept both (no change)", reason: "p.3 Table II gives bonding density per scheme: SoIC 1X, SoIC-CS 1X (genuine per-TV table cells)"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00055-f03", change: "added Fig. 3 (xray_csam, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00055-f04", change: "re-ranked Fig. 2: ectc51687.2025.00055-f03 -> ectc51687.2025.00055-f04", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00055-f05", change: "re-ranked Fig. 4: ectc51687.2025.00055-f04 -> ectc51687.2025.00055-f05", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00055-f06", change: "re-ranked Table I: ectc51687.2025.00055-f05 -> ectc51687.2025.00055-f06", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00055-f07", change: "added Table II (data_table, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00055-f08", change: "re-ranked Fig. 6: ectc51687.2025.00055-f06 -> ectc51687.2025.00055-f08", reason: "re-rank after additions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00055", change: "process_flow_level none confirmed; no flows", reason: "full text read: only bonding-scheme structure (C-Layer replaces dielectric), C-SAM and thermal/electrical evaluation; no fabrication or assembly step stated"}

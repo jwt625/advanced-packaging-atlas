@@ -1,0 +1,79 @@
+paper_id: icep61562.2024.10535587
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/icep61562.2024.10535587/text.md
+  - references/icep61562.2024.10535587/source.json
+  - references/icep61562.2024.10535587/figures/page_01.png
+  - references/icep61562.2024.10535587/figures/page_02.png
+  - references/icep61562.2024.10535587/figures/candidates.json
+figure_reading_method: >-
+  Page renders; 200 dpi re-crops of Fig. 2, 3, 4; 500 dpi re-crop of Fig. 5 (source raster is low resolution, per-lot
+  labels partly illegible, so only the text-stated 99% and 0.07-15.27% values are entered).
+entries:
+  - {table: metrics, row_id: icep61562.2024.10535587-a-m1, field: scope, value: "98.4-99.9", unit: "%", basis: measured, locator: "p.2 Fig. 5", note: "orange 'AP Yield' labels read approx 99.68, 99.90, 99.59, 99.22, 99.71, 98.41, 99.37, 99.84, 99.57, 99.84, 99.56, 99.12, 99.10; low-res, not entered as values"}
+derived: []
+conflicts:
+  - {table: process_steps, row_id: icep61562.2024.10535587-F1-s02, field: seq, values: ["text order: sputter seed, electroplate Cu studs, pattern thick photoresist, etch photoresist", "Fig. 2: Cu Stud Pattern and Plate"], locators: ["p.1 Sec. II", "p.2 Fig. 2"], chosen: "pattern before plate", why: "Fig. 2 order and physical sequence; text order listed as written in notes"}
+excluded:
+  - "Conclusion, acknowledgment and reference sections are unedited conference-template text (no content)"
+  - "SEMI standards activity, OHT/EFEM/robot design (no numbers besides FOUP >60 kg)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "package/die size, die thickness, number of RDL layers, dielectric material, via size, Cu stud size, ball size/pitch"
+  - "mold compound product, carrier material, cure and reflow conditions, LDI tool"
+  - "die shift magnitude in um, yield definition, lot/sample counts"
+  - "reliability and warpage data"
+source_quality:
+  - "Two-page paper with template boilerplate in Sec. IV onward; title lacks a subject word; Fig. 5 is a low-resolution raster."
+  - "Candidate p02_fig5 bbox points at the page header (0.49-1.0, 0-0.06); p02_fig2 clips the cross-section icons; p02_fig3 (first) is a fragment."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F1-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F1-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F1-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F1-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F1-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F1-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F1-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F2-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F2-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F2-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F2-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F2-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F2-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F2-s01", change: "seq: '8' -> '1'", reason: "seq restarts at 1 in each sub-flow (flows F1-F4 carry the build order)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F2-s02", change: "seq: '9' -> '2'", reason: "seq restarts at 1 in each sub-flow (flows F1-F4 carry the build order)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F2-s03", change: "seq: '10' -> '3'", reason: "seq restarts at 1 in each sub-flow (flows F1-F4 carry the build order)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F2-s04", change: "seq: '11' -> '4'", reason: "seq restarts at 1 in each sub-flow (flows F1-F4 carry the build order)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F2-s05", change: "seq: '12' -> '5'", reason: "seq restarts at 1 in each sub-flow (flows F1-F4 carry the build order)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F2-s06", change: "seq: '13' -> '6'", reason: "seq restarts at 1 in each sub-flow (flows F1-F4 carry the build order)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F3-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F3-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F3-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F3-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F3-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F3-s01", change: "seq: '14' -> '1'", reason: "seq restarts at 1 in each sub-flow (flows F1-F4 carry the build order)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F3-s02", change: "seq: '15' -> '2'", reason: "seq restarts at 1 in each sub-flow (flows F1-F4 carry the build order)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F3-s03", change: "seq: '16' -> '3'", reason: "seq restarts at 1 in each sub-flow (flows F1-F4 carry the build order)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F3-s04", change: "seq: '17' -> '4'", reason: "seq restarts at 1 in each sub-flow (flows F1-F4 carry the build order)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F3-s05", change: "seq: '18' -> '5'", reason: "seq restarts at 1 in each sub-flow (flows F1-F4 carry the build order)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F4-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F4-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F4-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F4-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from p.2 Fig. 2 and p.1 Sec. II flow text"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F4-s01", change: "seq: '19' -> '1'", reason: "seq restarts at 1 in each sub-flow (flows F1-F4 carry the build order)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F4-s02", change: "seq: '20' -> '2'", reason: "seq restarts at 1 in each sub-flow (flows F1-F4 carry the build order)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F4-s03", change: "seq: '21' -> '3'", reason: "seq restarts at 1 in each sub-flow (flows F1-F4 carry the build order)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F4-s04", change: "seq: '22' -> '4'", reason: "seq restarts at 1 in each sub-flow (flows F1-F4 carry the build order)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F2-s01", change: "equipment: '' -> 'new-type high-accuracy die bond equipment'", reason: "named tool from p.2 Sec. III ('new type equipment' for die bond)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F2-s01", change: "material: '' -> 'reusable temporary carrier'", reason: "named tool from p.2 Sec. III ('new type equipment' for die bond)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F2-s01", change: "locator: 'p.1 Sec. II ASE FOPLP process flow; p.2 Fig. 2' -> 'p.1 Sec. II ASE FOPLP process flow; p.2 Fig. 2; p.2 Sec. III'", reason: "named tool from p.2 Sec. III ('new type equipment' for die bond)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F2-s02", change: "target: '' -> '600 mm x 600 mm panel (SEMI standard)'", reason: "panel size is stated geometry the molding step produces (p.1 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F2-s02", change: "conditions: 'SEMI standard 600 mm panel' -> ''", reason: "panel size is stated geometry the molding step produces (p.1 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F2-s06", change: "equipment: '' -> 'high-precision, high-speed optical scanner'", reason: "named tool type to equipment (p.2 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F3-s02", change: "category: 'electroplating' -> 'rdl_layer'", reason: "composite RDL pattern+plate step; tool and stated L/S capability go on the step (p.1 Abstract; p.1 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F3-s02", change: "equipment: '' -> 'mask-less laser direct imaging (LDI), adaptive patterning'", reason: "composite RDL pattern+plate step; tool and stated L/S capability go on the step (p.1 Abstract; p.1 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F3-s02", change: "target: '' -> 'L/S 10/10 um (stated capability)'", reason: "composite RDL pattern+plate step; tool and stated L/S capability go on the step (p.1 Abstract; p.1 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F3-s02", change: "conditions: 'per-unit pattern adjusted for die shift' -> 'per-unit pattern adjusted for measured die shift'", reason: "composite RDL pattern+plate step; tool and stated L/S capability go on the step (p.1 Abstract; p.1 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535587-F3-s02", change: "locator: 'p.1 Sec. II ASE FOPLP process flow; p.2 Fig. 2' -> 'p.1 Sec. II ASE FOPLP process flow; p.2 Fig. 2; p.1 Abstract'", reason: "composite RDL pattern+plate step; tool and stated L/S capability go on the step (p.1 Abstract; p.1 Sec. II)"}

@@ -1,0 +1,50 @@
+paper_id: tcpmt.2021.3123384
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/tcpmt.2021.3123384/text.md
+  - references/tcpmt.2021.3123384/source.json
+  - references/tcpmt.2021.3123384/figures/page_05.png
+  - references/tcpmt.2021.3123384/figures/page_06.png
+  - references/tcpmt.2021.3123384/figures/page_07.png
+  - references/tcpmt.2021.3123384/figures/page_08.png
+  - references/tcpmt.2021.3123384/figures/page_09.png
+  - references/tcpmt.2021.3123384/figures/cand/p02_fig2.png
+  - references/tcpmt.2021.3123384/figures/cand/p03_fig3.png
+  - references/tcpmt.2021.3123384/figures/cand/p03_fig4.png
+  - references/tcpmt.2021.3123384/figures/cand/p04_tablei.png
+  - references/tcpmt.2021.3123384/figures/cand/p04_fig5.png
+  - references/tcpmt.2021.3123384/figures/cand/p04_fig6.png
+  - references/tcpmt.2021.3123384/figures/cand/p08_fig16.png
+  - references/tcpmt.2021.3123384/figures/cand/p07_fig13.png
+  - references/tcpmt.2021.3123384/figures/cand/p09_fig19.png
+figure_reading_method: >-
+  Tables I-IV read from page renders (Table III candidate cut after 2 rows, Table IV candidate title only; re-cropped).
+  Fig. 20 chip count (8) and resistance span read from page_09 render. No dimensions read off scale bars.
+entries:
+  - {table: metrics, row_id: tcpmt.2021.3123384-b-m8, field: value, value: 101.4, unit: um/h, basis: simulated, locator: "p.6 Table IV", note: "JMP model prediction; third column 'Max' is measured minus model"}
+  - {table: process_steps, row_id: tcpmt.2021.3123384-F2-s08, field: conditions, value: "chamber 50 C", unit: C, basis: design_target, locator: "p.5 Table III", note: "row printed as 'Hamber Temperature'"}
+derived:
+  - {table: interconnects, row_id: tcpmt.2021.3123384-g-i2, field: resistance_mohm, value: 1000, formula: "about 1 ohm x 1000 (unit conversion); paper: 1.96 ohm / two TSiCVs", inputs: "p.9 Sec. V"}
+  - {table: process_steps, row_id: tcpmt.2021.3123384-F2-s07, field: time_s, value: 1200, formula: "20 min x 60", inputs: "p.5 Table III"}
+  - {table: process_steps, row_id: tcpmt.2021.3123384-F2-s08, field: time_s, value: 3600, formula: "60 min x 60", inputs: "p.5 Table III"}
+  - {table: stack_layers, row_id: tcpmt.2021.3123384-b-L02, field: thickness_um, value: 0.2, formula: "200 nm / 1000", inputs: "p.5 Sec. II.B"}
+  - {table: stack_layers, row_id: tcpmt.2021.3123384-b-L03, field: thickness_um, value: 0.3, formula: "300 nm / 1000", inputs: "p.5 Sec. II.B"}
+conflicts:
+  - {table: metrics, row_id: tcpmt.2021.3123384-a-m1, field: parameter, values: ["Fig. 3 caption: etch rate for 80 um vias", "Fig. 3 legend plots 40, 80 and 120 um vias"], locators: ["p.3 Fig. 3"], chosen: "text values for 80 um vias", why: "text gives 80 um maxima explicitly"}
+excluded:
+  - "SiC electronics >500 C operation (ref [1]); 3C-SiC piezoresistive suitability (ref [2])"
+  - "Microtrenching causes attributed to refs [5], [6]"
+  - "PECVD below 350 / 200 C deposition temperatures (generic, ref [7])"
+  - "Via first/middle/last schematic Fig. 11 (generic TSV concepts)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - via pitch and count for TSiCV arrays (except 36-via array)
+  - PECVD liner material and thickness; BCB product name
+  - solder alloy, bump diameter, flip-chip and TCB bonding temperature/force/time
+  - die and interposer x/y sizes; sensor membrane thickness
+  - reliability testing
+source_quality:
+  - "Table III candidate crop cut after 2 of 5 rows; Table IV candidate title only; Table II has no candidate."
+  - "Text uses ohm symbol dropped in text layer (1.96 ohm, 1 ohm) confirmed on page_09."

@@ -1,0 +1,32 @@
+paper_id: ectc51687.2025.00095
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00095/text.md
+  - references/ectc51687.2025.00095/source.json
+  - references/ectc51687.2025.00095/figures/page_02.png
+  - references/ectc51687.2025.00095/figures/page_03.png
+  - references/ectc51687.2025.00095/figures/page_04.png
+figure_reading_method: >-
+  Page renders p.2-4 viewed; candidates p02_tablei, p02_fig1, p03_tableiii, p03_tablev, p03_fig2, p04_fig5, p04_fig6 opened;
+  manual re-crops of Fig. 1 (p.2) and Fig. 2 (p.3). Tables I, III, IV, VIII, IX read from images (agree with text.md).
+entries:
+  - {table: interconnects, row_id: ectc51687.2025.00095-a-i4, field: height_um, value: 120, unit: um, basis: measured, locator: "p.3 Sec. IV.A", note: "'up to 120um are feasible'"}
+  - {table: interconnects, row_id: ectc51687.2025.00095-a-i2, field: diameter_um, value: 10, unit: um, basis: design_target, locator: "p.3 Sec. IV.C", note: "passivation via opening"}
+derived: []
+conflicts: []
+excluded:
+  - "TCB process flow attribution: Fig. 1 cited to ref [2]; steps entered (qualitative), no conditions from [2]"
+  - "chiplet/HBM architecture context of ref [1]"
+  - "Table II LDI advantages/disadvantages (qualitative, no numbers)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - panel dimensions beyond '300mm', module/package/substrate/die sizes and thicknesses
+  - bump, C4, ball and pillar pitch/diameter; RDL via sizes except 10 um opening; RDL metal and dielectric products
+  - warpage values (discussed qualitatively only), TTV value, TCB temperature/force/time
+  - reliability conditions (TC range, uHAST/HTST temperatures), MR3X/MR6X definition, TV-2 sample counts
+source_quality:
+  - "Table VI image sits at top of p.3 right column while its caption is at the bottom of p.3 left column; candidate p03_tablevi bbox points at the caption corner (wrong)."
+  - "Candidates p02_fig1 and p03_fig2 clip the bottom of the figure."
+  - "Tables VII and VI share the caption 'CU REVEAL RESULT'; Table VII shows via landing."

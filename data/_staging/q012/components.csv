@@ -1,0 +1,71 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00153-a-c1,ectc51846.2026.00153-a,other,,,Glass carrier (soda glass),1,,,,,,,,,"commercially available soda glass, CTE 9.2 ppm/K",,stated,text,,p.2 Sec. III.A; p.2 Sec. III.A.1,,Panel carrier; thickness not reported. Metal light-to-heat conversion layer on carrier (Fig. 1).
+ectc51846.2026.00153-a-c2,ectc51846.2026.00153-a,adhesive,,,Temporary bonding film TM-420 (TBF),1,,,,,,,,,TM-420,Resonac,stated,text,,p.2 Sec. III.A,,Thickness not reported.
+ectc51846.2026.00153-a-c3,ectc51846.2026.00153-a,mold,,,EMC CEL-410-HF40-LW series (LW),1,,,300.0,,,,,,CEL-410-HF40-LW series (LW),Resonac,design_target,mixed,material:text,p.2 Sec. III.A; p.4 Table II,,Compression-molded EMC; CTE 9 ppm/K (LW) or 8 ppm/K (400ZHF).
+ectc51846.2026.00153-a-c4,ectc51846.2026.00153-a,other,,,Support tape for TBF detaping,1,,,,,,,,,ELP UE-111AJR,Nitto Denko Corporation,stated,text,,p.3 Sec. III.A.6,,"Process tape, removed with TBF."
+ectc51846.2026.00153-b-c1,ectc51846.2026.00153-b,other,,,Glass carrier (soda glass),1,,,,,,,,,"commercially available soda glass, CTE 9.2 ppm/K",,stated,text,,p.2 Sec. III.A; p.2 Sec. III.A.1,,Panel carrier; thickness not reported. Metal light-to-heat conversion layer on carrier (Fig. 1).
+ectc51846.2026.00153-b-c2,ectc51846.2026.00153-b,adhesive,,,Temporary bonding film TM-420 (TBF),1,,,,,,,,,TM-420,Resonac,stated,text,,p.2 Sec. III.A,,Thickness not reported.
+ectc51846.2026.00153-b-c3,ectc51846.2026.00153-b,mold,,,EMC CEL-410-HF40-LW series (LW),1,,,300.0,,,,,,CEL-410-HF40-LW series (LW),Resonac,design_target,mixed,material:text,p.2 Sec. III.A; p.4 Table II,,Compression-molded EMC; CTE 9 ppm/K (LW) or 8 ppm/K (400ZHF).
+ectc51846.2026.00153-b-c4,ectc51846.2026.00153-b,dummy_die,yes,yes,Si dummy chip,81,7.3,7.3,150,,,,,,Si,,design_target,text,,p.3 Sec. III.A.2; p.5 Sec. IV.B,,"9 x 9 grid at 14.6 mm pitch on 320 mm panel, mounted on TBF and molded in EMC."
+ectc51846.2026.00153-b-c5,ectc51846.2026.00153-b,other,,,Support tape for TBF detaping,1,,,,,,,,,ELP UE-111AJR,Nitto Denko Corporation,stated,text,,p.3 Sec. III.A.6,,"Process tape, removed with TBF."
+ectc51846.2026.00153-c-c1,ectc51846.2026.00153-c,other,,,Glass carrier (soda glass),1,,,,,,,,,"commercially available soda glass, CTE 9.2 ppm/K",,stated,text,,p.2 Sec. III.A; p.2 Sec. III.A.1,,Panel carrier; thickness not reported. Metal light-to-heat conversion layer on carrier (Fig. 1).
+ectc51846.2026.00153-c-c2,ectc51846.2026.00153-c,adhesive,,,Temporary bonding film TM-420 (TBF),1,,,,,,,,,TM-420,Resonac,stated,text,,p.2 Sec. III.A,,Thickness not reported.
+ectc51846.2026.00153-c-c3,ectc51846.2026.00153-c,mold,,,EMC CEL-400ZHF series (400ZHF),1,,,300.0,,,,,,CEL-400ZHF series (400ZHF),Resonac,design_target,mixed,material:text,p.2 Sec. III.A; p.4 Table II,,Compression-molded EMC; CTE 9 ppm/K (LW) or 8 ppm/K (400ZHF).
+ectc51846.2026.00153-c-c4,ectc51846.2026.00153-c,other,,,Support tape for TBF detaping,1,,,,,,,,,ELP UE-111AJR,Nitto Denko Corporation,stated,text,,p.3 Sec. III.A.6,,"Process tape, removed with TBF."
+ectc51846.2026.00153-d-c1,ectc51846.2026.00153-d,other,,,Glass carrier (soda glass),1,,,,,,,,,"commercially available soda glass, CTE 9.2 ppm/K",,stated,text,,p.2 Sec. III.A; p.2 Sec. III.A.1,,Panel carrier; thickness not reported. Metal light-to-heat conversion layer on carrier (Fig. 1).
+ectc51846.2026.00153-d-c2,ectc51846.2026.00153-d,adhesive,,,Temporary bonding film TM-420 (TBF),1,,,,,,,,,TM-420,Resonac,stated,text,,p.2 Sec. III.A,,Thickness not reported.
+ectc51846.2026.00153-d-c3,ectc51846.2026.00153-d,mold,,,EMC CEL-400ZHF series (400ZHF),1,,,600.0,,,,,,CEL-400ZHF series (400ZHF),Resonac,design_target,mixed,material:text,p.2 Sec. III.A; p.4 Table II,,Compression-molded EMC; CTE 9 ppm/K (LW) or 8 ppm/K (400ZHF).
+ectc51846.2026.00153-d-c4,ectc51846.2026.00153-d,other,,,Support tape for TBF detaping,1,,,,,,,,,ELP UE-111AJR,Nitto Denko Corporation,stated,text,,p.3 Sec. III.A.6,,"Process tape, removed with TBF."
+ectc51846.2026.00153-e-c1,ectc51846.2026.00153-e,other,,,Glass carrier (soda glass),1,,,,,,,,,"commercially available soda glass, CTE 9.2 ppm/K",,stated,text,,p.2 Sec. III.A; p.2 Sec. III.A.1,,Panel carrier; thickness not reported. Metal light-to-heat conversion layer on carrier (Fig. 1).
+ectc51846.2026.00153-e-c2,ectc51846.2026.00153-e,adhesive,,,Temporary bonding film TM-420 (TBF),1,,,,,,,,,TM-420,Resonac,stated,text,,p.2 Sec. III.A,,Thickness not reported.
+ectc51846.2026.00153-e-c3,ectc51846.2026.00153-e,mold,,,EMC CEL-410-HF40-LW series (LW),1,,,300.0,,,,,,CEL-410-HF40-LW series (LW),Resonac,design_target,mixed,material:text,p.2 Sec. III.A; p.4 Table III,,Compression-molded EMC; CTE 9 ppm/K (LW) or 8 ppm/K (400ZHF).
+ectc51846.2026.00153-e-c4,ectc51846.2026.00153-e,other,,,Support tape for TBF detaping,1,,,,,,,,,ELP UE-111AJR,Nitto Denko Corporation,stated,text,,p.3 Sec. III.A.6,,"Process tape, removed with TBF."
+ectc51846.2026.00153-f-c1,ectc51846.2026.00153-f,other,,,Glass carrier (soda glass),1,,,,,,,,,"commercially available soda glass, CTE 9.2 ppm/K",,stated,text,,p.2 Sec. III.A; p.6 Sec. V.A,,Panel carrier; thickness not reported. Metal light-to-heat conversion layer on carrier (Fig. 1).
+ectc51846.2026.00153-f-c2,ectc51846.2026.00153-f,adhesive,,,Temporary bonding film TM-420 (TBF),1,,,,,,,,,TM-420,Resonac,stated,text,,p.2 Sec. III.A,,Thickness not reported.
+ectc51846.2026.00153-f-c3,ectc51846.2026.00153-f,other,,,Support tape for TBF detaping,1,,,,,,,,,ELP UE-111AJR,Nitto Denko Corporation,stated,text,,p.3 Sec. III.A.6,,"Process tape, removed with TBF. Use inferred from 'same flow as Fig. 3'."
+ectc51846.2026.00153-f-c4,ectc51846.2026.00153-f,other,,,"Bare glass (device-equivalent, simulates panel interposer)",1,,,,,,,,,glass,,stated,text,,p.6 Sec. V.A,,Glass type and thickness not reported.
+ectc51906.2022.00218-a-c1,ectc51906.2022.00218-a,asic,,,ASIC,,,,,,,,,,,,stated,mixed,,p.5 Sec. IV; p.6 Fig. 10,,"Size, thickness, node not given."
+ectc51906.2022.00218-a-c2,ectc51906.2022.00218-a,hbm,,,HBMs,,,,,,,,,,,,stated,mixed,,p.5 Sec. IV; p.6 Fig. 10,,Plural 'HBMs'; count and generation not given.
+ectc51906.2022.00218-a-c3,ectc51906.2022.00218-a,interposer,,,HDFO module with 4-layer ETR (organic RDL interposer),,,,,,,,,,,,stated,mixed,,p.5 Sec. IV; p.5 Fig. 8; p.6 Fig. 10,,Built on Si wafer later removed by grinding + dry etch.
+ectc51906.2022.00218-a-c4,ectc51906.2022.00218-a,mold,,no,"epoxy mold compound (EMC), ground to expose chips",,,,,,,,,,EMC,,stated,text,,p.5 Sec. IV,,
+ectc51906.2022.00218-a-c5,ectc51906.2022.00218-a,underfill,,,"capillary underfill, chips to ETR",,,,,,,,,,,,stated,text,,p.5 Sec. IV,,
+ectc51906.2022.00218-a-c6,ectc51906.2022.00218-a,underfill,,,"underfill, module to substrate",,,,,,,,,,,,stated,text,,p.5 Sec. IV,,
+ectc51906.2022.00218-a-c7,ectc51906.2022.00218-a,substrate,,,laminate substrate,,,,,,,,,,,,stated,text,,p.5 Sec. IV; p.5 Fig. 9(c),,Layer count and size not given.
+ectc51906.2022.00218-a-c8,ectc51906.2022.00218-a,lid,,,lid (front side),,,,,,,,,,,,stated,mixed,,p.5 Sec. IV; p.5 Fig. 9(d),,
+ectc51906.2022.00218-a-c9,ectc51906.2022.00218-a,tim,,,TIM between exposed chips and lid,,,,,,,,,,,,stated,text,,p.5 Sec. IV,,
+ectc51906.2022.00218-b-c1,ectc51906.2022.00218-b,other,,,Si wafer (ETR build carrier),,,,,,,,,,Si,,stated,mixed,,p.2 Fig. 1(c); p.4 Fig. 4,,300 mm inferred from Fig. 4 axis.
+ectc51687.2025.00047-a-c1,ectc51687.2025.00047-a,logic_soc,,,SoC,4,32,21,,,,,150,,,,design_target,table,gap_um:text,p.4 Fig. 9; p.4 Sec. IV.A,,Listed under 'TD' in Fig. 9. gap = SoC die-to-die gap.
+ectc51687.2025.00047-a-c2,ectc51687.2025.00047-a,hbm,,,HBM3,12,11,11,,,,,,,,,design_target,table,,p.4 Fig. 9; p.4 Sec. IV.A,,Listed under 'TD' in Fig. 9.
+ectc51687.2025.00047-a-c3,ectc51687.2025.00047-a,interposer,,,CoWoS-R RDL interposer (CoW),1,66,68,,,,,,,polymer dielectric film and Cu RDL,,design_target,text,,p.4 Sec. IV.A,,Size given as CoW size.
+ectc51687.2025.00047-a-c4,ectc51687.2025.00047-a,substrate,,,SBT,1,97.3,95,,,,,,,,,design_target,text,,p.4 Sec. IV.A; p.4 Fig. 9,,Fig. 9: 97 x 95 mm.
+ectc51687.2025.00047-a-c5,ectc51687.2025.00047-a,stiffener,,,ring,1,,,,,,,,,SUS430,,stated,text,,p.4 Sec. IV.A,,
+ectc51687.2025.00047-b-c1,ectc51687.2025.00047-b,logic_soc,,,SoC,4,32,21,,,,,150,,,,design_target,table,gap_um:text,p.4 Fig. 9; p.4 Sec. IV.A,,Listed under 'TD' in Fig. 9. gap = SoC die-to-die gap.
+ectc51687.2025.00047-b-c2,ectc51687.2025.00047-b,hbm,,,HBM3,12,11,11,,,,,,,,,design_target,table,,p.4 Fig. 9; p.4 Sec. IV.A,,Listed under 'TD' in Fig. 9.
+ectc51687.2025.00047-b-c3,ectc51687.2025.00047-b,interposer,,,CoWoS-R RDL interposer (CoW),1,66,68,,,,,,,polymer dielectric film and Cu RDL,,design_target,text,,p.4 Sec. IV.A,,Size given as CoW size.
+ectc51687.2025.00047-b-c4,ectc51687.2025.00047-b,substrate,,,SBT,1,97.3,95,,,,,,,,,design_target,text,,p.4 Sec. IV.A; p.4 Fig. 9,,Fig. 9: 97 x 95 mm.
+ectc51687.2025.00047-b-c5,ectc51687.2025.00047-b,stiffener,,,ring,1,,,,,,,,,SUS430,,stated,text,,p.4 Sec. IV.A,,
+iedm50572.2025.11353491-a-c1,iedm50572.2025.11353491-a,pic,,,PIC,,,,,,,,,,,,stated,text,,p.1 Sec. II-III,,
+iedm50572.2025.11353491-a-c2,iedm50572.2025.11353491-a,substrate,,,organic substrate without cut-out area,,,,,,,,,,organic laminate,,stated,text,,p.1 Sec. II; p.3 Fig. 1,,
+iedm50572.2025.11353491-a-c3,iedm50572.2025.11353491-a,other,,,single-mode polymer waveguide (PWG),,,,,,,,,,polymer,,stated,text,,p.1 Sec. III; p.3 Fig. 2,,Adiabatically coupled to PIC surface; other end in fiber ferrule.
+iedm50572.2025.11353491-a-c4,iedm50572.2025.11353491-a,adhesive,,,optical adhesive (PIC-PWG bond),,,,,,,,,,,,stated,text,,p.1 Sec. III,,Product not named.
+iedm50572.2025.11353491-a-c5,iedm50572.2025.11353491-a,connector,,,ferrule (fiber connector at package edge),,,,,,,,,,,,stated,mixed,,p.1 Sec. I; p.2 Sec. III; p.3 Fig. 1,,
+iedm50572.2025.11353491-a-c6,iedm50572.2025.11353491-a,lid,,,lid,,,,,,,,,,,,stated,figure_image,,p.3 Fig. 1(a),,Lid visible in photo only.
+iedm50572.2025.11353491-b-c1,iedm50572.2025.11353491-b,pic,,,PIC,,,,,,,,,,,,stated,text,,p.1 Sec. II-III,,
+iedm50572.2025.11353491-b-c2,iedm50572.2025.11353491-b,substrate,,,organic substrate with cut-out area,,,,,,,,,,organic laminate,,stated,text,,p.1 Sec. II; p.3 Fig. 1,,
+iedm50572.2025.11353491-b-c3,iedm50572.2025.11353491-b,other,,,single-mode polymer waveguide (PWG),,,,,,,,,,polymer,,stated,text,,p.1 Sec. III; p.3 Fig. 2,,Adiabatically coupled to PIC surface; other end in fiber ferrule.
+iedm50572.2025.11353491-b-c4,iedm50572.2025.11353491-b,adhesive,,,optical adhesive (PIC-PWG bond),,,,,,,,,,,,stated,text,,p.1 Sec. III,,Product not named.
+iedm50572.2025.11353491-b-c5,iedm50572.2025.11353491-b,connector,,,ferrule (fiber connector at package edge),,,,,,,,,,,,stated,mixed,,p.1 Sec. I; p.2 Sec. III; p.3 Fig. 1,,
+iedm50572.2025.11353491-b-c6,iedm50572.2025.11353491-b,lid,,,lid,,,,,,,,,,,,stated,text,,p.1 Sec. II,,Module-to-lid assembly stated for Type-B.
+iedm50572.2025.11353491-c-c1,iedm50572.2025.11353491-c,substrate,,,package substrate with three cut-outs,,,,,,,,,,organic laminate,,stated,mixed,name:figure_image,p.2 Sec. V; p.4 Fig. 11,,Substrate material from Sec. II (organic); 3 cut-outs from photo.
+iedm50572.2025.11353491-c-c2,iedm50572.2025.11353491-c,connector,,,ferrule ports,3,,,,,,,,,,,stated,mixed,,p.2 Sec. V; p.4 Fig. 11,,
+iedm50572.2025.11353491-c-c3,iedm50572.2025.11353491-c,other,,,single-mode polymer waveguides (PWG),,,,,,,,,,,,stated,mixed,,p.2 Sec. V; p.4 Fig. 11,,
+iedm50572.2025.11353491-d-c1,iedm50572.2025.11353491-d,substrate,,,laminate,,,,,,,,,,,,simulated,schematic,,p.4 Fig. 8,,
+iedm50572.2025.11353491-d-c2,iedm50572.2025.11353491-d,pic,,,Si (die),,,,,,,,,,Si,,simulated,schematic,,p.4 Fig. 8,,"Labelled ""Si"" in model."
+iedm50572.2025.11353491-d-c3,iedm50572.2025.11353491-d,other,,,PWG,,,,,,,,,,,,simulated,schematic,,p.4 Fig. 8,,
+iedm50572.2025.11353491-d-c4,iedm50572.2025.11353491-d,connector,,,ferrule,,,,,,,,,,,,simulated,schematic,,p.4 Fig. 8,,
+iedm50572.2025.11353491-d-c5,iedm50572.2025.11353491-d,other,,,glass (ferrule part),,,,,,,,,,glass,,simulated,schematic,,p.4 Fig. 8(a),,
+iedm50572.2025.11353491-e-c1,iedm50572.2025.11353491-e,dummy_die,yes,,silicon substrate,,,,,,,,,,Si,,stated,schematic,,p.3 Fig. 3,,
+iedm50572.2025.11353491-e-c2,iedm50572.2025.11353491-e,other,,,PWG,,,,,,,,,,,,stated,schematic,,p.3 Fig. 3,,
+iedm50572.2025.11353491-e-c3,iedm50572.2025.11353491-e,adhesive,,,optical adhesive (candidate),,,,,,,,,,,,stated,schematic,,p.3 Fig. 3; p.1 Sec. III,,Several candidate adhesives evaluated; representative result shown.
+iedm50572.2025.11353491-f-c1,iedm50572.2025.11353491-f,other,,,PWG,,,,,,,,,,,,stated,schematic,,p.3 Fig. 5,,
+tcpmt.2025.3557232-a-c1,tcpmt.2025.3557232-a,interposer,,,borosilicate glass substrate,1,,,300,,,,,,borosilicate glass,Taiwan Foresight Company Ltd.,design_target,text,,p.1 Abstract; p.3 Sec. III.B; p.8 Ack.,,Glass samples provided by Taiwan Foresight (ack).

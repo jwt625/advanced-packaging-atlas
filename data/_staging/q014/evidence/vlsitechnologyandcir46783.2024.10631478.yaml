@@ -1,0 +1,45 @@
+paper_id: vlsitechnologyandcir46783.2024.10631478
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/vlsitechnologyandcir46783.2024.10631478/text.md
+  - references/vlsitechnologyandcir46783.2024.10631478/source.json
+  - references/vlsitechnologyandcir46783.2024.10631478/figures/page_01.png
+  - references/vlsitechnologyandcir46783.2024.10631478/figures/page_02.png
+figure_reading_method: >-
+  Page renders and grid of p.2; 300 dpi re-crops of Fig. 3-7 and Table 1; Table 2, Table 3 and Fig. 8-12 read from the
+  150 dpi page render (Table 2 values 13/13/23/25/18/90 match the OCR copy in text.md).
+entries:
+  - {table: interconnects, row_id: vlsitechnologyandcir46783.2024.10631478-a-i1, field: diameter_um, value: 18, unit: um, basis: design_target, locator: "p.1 Fabrication; p.2 Fig. 5", note: "text 18 um diameter; Fig. 5 label 18um CD"}
+  - {table: interconnects, row_id: vlsitechnologyandcir46783.2024.10631478-a-i3, field: depth_um, value: 75, unit: um, basis: measured, locator: "p.2 Fig. 3", note: "SEM annotation"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: vlsitechnologyandcir46783.2024.10631478-a-m13, field: basis, values: ["simulated (section describes a simulation)", "'measured magnitude' wording"], locators: ["p.1 GPU Performance", "p.1 GPU Performance"], chosen: simulated, why: "paragraph and Fig. 9 present simulation results"}
+excluded:
+  - "CPU-die HDMIM capacitance density 376 fF/um2 and per-capacitor 219/157 fF/um2 (cited to ref [2])"
+  - "HDMIM in CPU die reliability statement (cited to ref [3])"
+  - "Face-to-face responsiveness rationale (ref [1])"
+  - "LPDDR5/DDR5 8 GHz data rate and 200 MHz clock (generic context, not this TV)"
+not_reported:
+  - die and interposer sizes, interposer thickness, package size, substrate layer count
+  - TSV pitch, metal line/space and thicknesses, high-k material name
+  - bonding method and conditions for SIB/MLB, underfill, PSB metallurgy
+  - temperature-cycling cycle count, sample counts
+  - electrical_interfaces (no D2D lane rate/energy/bandwidth), optical_interfaces
+source_quality:
+  - "p.1 text layer is font-encoded (unreadable) followed by an OCR copy with errors (e.g. 36!lm, l IOurn); all numbers verified on page renders."
+  - "Fig. 2 caption prints M1-2 1080um and M3 2000um pitch; units implausible for interposer metal, not entered."
+  - "Page-2 candidates are mislabelled or offset (p02_table1 shows Fig. 7, p02_fig3 shows Fig. 2 + Fig. 3, p02_fig4 covers Fig. 1/4/5); all key figures manual."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir46783.2024.10631478-F1-s01", change: "step_basis: '' -> 'stated_in_flow'; target: '' -> 'TSV 9 um diameter, 75 um deep (Fig. 3)'; locator: 'p.1 Fabrication; p.2 Fig. 2' -> 'p.1 Fabrication; p.2 Fig. 2; p.2 Fig. 3'", reason: "re-pass: order stated in Fig. 2 (interposer fabrication steps) and p.1 Fabrication; TSV geometry from Fig. 3 on the step"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir46783.2024.10631478-F1-s02", change: "step_basis: '' -> 'inferred_order'", reason: "re-pass: Fig. 3 caption lists liner, barrier, Cu gapfill; sub-step order by structure"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir46783.2024.10631478-F1-s03", change: "step_basis: '' -> 'inferred_order'", reason: "re-pass: Fig. 3 caption lists liner, barrier, Cu gapfill; sub-step order by structure"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir46783.2024.10631478-F1-s04", change: "step_basis: '' -> 'inferred_order'", reason: "re-pass: Fig. 3 caption lists liner, barrier, Cu gapfill; sub-step order by structure"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir46783.2024.10631478-F1-s05", change: "step_basis: '' -> 'stated_in_flow'; category: 'other' -> 'rdl_layer'; notes: 'HDMIM inserted between M2 and M3.' -> 'HDMIM inserted between M2 and M3. Fig. 2 caption prints M1-2 1080 um, M3 2000 um pitch (units doubtful, not entered).'", reason: "re-pass: order stated in Fig. 2 (interposer fabrication steps) and p.1 Fabrication; category other -> rdl_layer"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir46783.2024.10631478-F1-s06", change: "step_basis: '' -> 'stated_in_flow'; target: '' -> '1 um deep trenches'", reason: "re-pass: order stated in Fig. 2 (interposer fabrication steps) and p.1 Fabrication; trench depth on the step"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir46783.2024.10631478-F1-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "re-pass: order stated in Fig. 2 (interposer fabrication steps) and p.1 Fabrication"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir46783.2024.10631478-F1-s08", change: "step_basis: '' -> 'stated_in_flow'; category: 'other' -> 'bumping'; target: '' -> 'SIB 18 um diameter, 36 um minimum pitch'; notes: '18 um diameter, 36 um minimum pitch.' -> ''", reason: "re-pass: order stated in Fig. 2 (interposer fabrication steps) and p.1 Fabrication; category other -> bumping; stated SIB geometry on the step"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir46783.2024.10631478-F1-s09", change: "step_basis: '' -> 'stated_in_flow'; material: '' -> 'top-die Cu/Ni/solder bump to SIB'", reason: "re-pass: order stated in Fig. 2 (interposer fabrication steps) and p.1 Fabrication; top-die bump metallurgy from Fig. 5 caption"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir46783.2024.10631478-F1-s10", change: "step_basis: '' -> 'stated_in_flow'", reason: "re-pass: order stated in Fig. 2 (interposer fabrication steps) and p.1 Fabrication"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir46783.2024.10631478-F1-s11", change: "step_basis: '' -> 'stated_in_flow'; category: 'other' -> 'bumping'; target: '' -> 'PSB 70 um diameter, 110 um minimum pitch'; notes: '70 um diameter, 110 um minimum pitch.' -> ''", reason: "re-pass: order stated in Fig. 2 (interposer fabrication steps) and p.1 Fabrication; category other -> bumping; stated PSB geometry on the step"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir46783.2024.10631478-F1-s12", change: "step_basis: '' -> 'stated_in_flow'", reason: "re-pass: order stated in Fig. 2 (interposer fabrication steps) and p.1 Fabrication"}

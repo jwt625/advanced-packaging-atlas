@@ -1,0 +1,37 @@
+paper_id: ectc51687.2025.00356
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00356/text.md
+  - references/ectc51687.2025.00356/source.json
+  - references/ectc51687.2025.00356/figures/cand/p02_fig2.png
+  - references/ectc51687.2025.00356/figures/cand/p03_fig3.png
+  - references/ectc51687.2025.00356/figures/cand/p03_fig4.png
+  - references/ectc51687.2025.00356/figures/cand/p03_fig5.png
+  - references/ectc51687.2025.00356/figures/cand/p04_fig6.png
+  - references/ectc51687.2025.00356/figures/cand/p04_fig7.png
+  - references/ectc51687.2025.00356/figures/cand/p04_fig8.png
+figure_reading_method: >-
+  450 dpi re-crops of Fig. 3 and Fig. 8(a-e) to read CD/depth labels; 500 dpi crop of Fig. 2(a) with mean markers
+  converted by pixel scale (~0.96 px/nm, +/-10 nm). Fig. 2(b) uniformity read against gridlines (+/-1%).
+entries:
+  - {table: metrics, row_id: ectc51687.2025.00356-a-m30, field: value, value: 15.66, unit: um, basis: measured, locator: "p.4 Fig. 8(a)", note: "label 15.66 um (cs)"}
+  - {table: metrics, row_id: ectc51687.2025.00356-a-m5, field: value, value: 1030, unit: nm, basis: measured, locator: "p.2 Fig. 2(a)", note: "mean marker ~1027 nm"}
+derived: []
+conflicts: []
+excluded:
+  - "Standard TSV CD 3-10 um / AR up to 10 used only as a comparison (no build in paper)"
+  - "Fig. 3(a) label 8.10 um (baseline etch panel; meaning not explained in text)"
+  - "HBM hybrid bonding and 1 um CD industry roadmap of ref [11]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - TSV pitch, wafer thickness, hard mask/liner/barrier/seed absolute thicknesses (seed only as % of POR)
+  - etch recipe parameters, absolute current densities, pulse frequency, anneal conditions, CMP slurry
+  - TSV resistance, yield counts, reliability
+source_quality:
+  - "Fig. 7(a) and Fig. 8(a) show the same image (identical labels)."
+  - "Candidate p03_fig3 includes the section heading above the figure."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00356-F1-s02", change: "step text 'i-line stepper' -> 'stepper' (i-line not stated); resist/thickness/density/substrate sweep moved from conditions to split", reason: "p.2 Sec. III.A names only the Ultratech AP200/300 stepper"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00356-F1-s12", change: "deleted (FIB cross-section SEM, failure-analysis cut)", reason: "void results already in metrics a-m11..a-m22"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00356-F1", change: "s01 300 mm wafer to conditions; s03 target 1x15 um AR 15, density <1%; splits on s03 (etch recipe), s07 (seed % POR), s08 (duty cycle), s09 (current density, anode distribution); CVD/PVD method in conditions; step_basis stated_in_flow, performed yes", reason: "p.2 Sec. II; p.3 Sec. III.B-D; p.4 Sec. III.D"}

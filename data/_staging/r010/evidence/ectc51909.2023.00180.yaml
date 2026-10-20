@@ -35,3 +35,6 @@ not_reported:
   - uC4 bump diameter, height, count; Cu pillar pitch, diameter, height for the build; chip thickness; chip gap
   - TCB temperature, force, time; reflow profile; underfill and NCP materials; laminate layer count/core
   - thermal cycling conditions and post-cycling results; warpage; absolute FEM stress/strain values
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00180-a-m6/-b-m6, -a-m8/-b-m8, -a-m9/-b-m9, -a-m10/-b-m10, change: "none: kept all rows", reason: "genuine per-TV values: p.4 Table I has separate T&R and NCP columns (both Excellent/Excellent/Optimal/Yes)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00180-d-m3; ectc51909.2023.00180-e-m3, change: "none: kept both rows", reason: "genuine per-case values: p.6 Fig. 19 plots separate bars for case 2 and case 3 (both about 1.0)"}

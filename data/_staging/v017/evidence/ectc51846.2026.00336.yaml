@@ -1,0 +1,81 @@
+paper_id: ectc51846.2026.00336
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00336/text.md
+  - references/ectc51846.2026.00336/source.json
+  - references/ectc51846.2026.00336/figures/page_02.png
+  - references/ectc51846.2026.00336/figures/page_03.png
+  - references/ectc51846.2026.00336/figures/page_04.png
+  - references/ectc51846.2026.00336/figures/page_05.png
+  - references/ectc51846.2026.00336/figures/cand/p02_tableii.png
+  - references/ectc51846.2026.00336/figures/cand/p03_fig1.png
+  - references/ectc51846.2026.00336/figures/cand/p03_fig2.png
+  - references/ectc51846.2026.00336/figures/cand/p04_fig3.png
+figure_reading_method: >-
+  Fig. 2(a)-(c) re-cropped at 300 dpi; Weibull 0.5 crossings read by pixel position (x 7.27 px/ohm, +/-2 ohm).
+  Fig. 5 bar tops read against axis (2.75 px per K/mW, +/-2 K/mW). TEM dimension labels read from Fig. 2(b),(c).
+entries:
+  - {table: interconnects, row_id: ectc51846.2026.00336-a-i1, field: resistance_mohm, value: 14000, unit: mohm, basis: measured, locator: "p.3 Fig. 2(a)", note: "Weibull 0.5 crossing ~14 ohm; Mo arrow tail"}
+  - {table: interconnects, row_id: ectc51846.2026.00336-a-i2, field: resistance_mohm, value: 27000, unit: mohm, basis: measured, locator: "p.3 Fig. 2(a)", note: "~27 ohm"}
+  - {table: interconnects, row_id: ectc51846.2026.00336-b-i1, field: resistance_mohm, value: 32000, unit: mohm, basis: measured, locator: "p.3 Fig. 2(a)", note: "~32 ohm; Mo arrow head ~31"}
+  - {table: interconnects, row_id: ectc51846.2026.00336-b-i2, field: resistance_mohm, value: 72000, unit: mohm, basis: measured, locator: "p.3 Fig. 2(a)", note: "~72 ohm; TiN/W arrow head ~71"}
+  - {table: interconnects, row_id: ectc51846.2026.00336-a-i1, field: diameter_um, value: 0.042, unit: um, basis: design_target, locator: "p.2 Sec. II.A", note: "TEM Fig. 2(b): 32 top, 42 mid, 50 nm bottom; height 200 nm"}
+derived:
+  - {table: process_steps, row_id: ectc51846.2026.00336-F1-s08, field: thickness_um, value: 0.01, formula: "10 nm / 1000", inputs: "p.2 Table II"}
+  - {table: process_steps, row_id: ectc51846.2026.00336-F1-s13, field: thickness_um, value: 0.25, formula: "250 nm / 1000 (remaining Si)", inputs: "p.2 Table II; p.3 Sec. II.B"}
+  - {table: interconnects, row_id: ectc51846.2026.00336-a-i1, field: resistance_mohm, value: 14000, formula: "14 ohm x 1000", inputs: "p.3 Fig. 2(a)"}
+  - {table: interconnects, row_id: ectc51846.2026.00336-a-i2, field: resistance_mohm, value: 27000, formula: "27 ohm x 1000", inputs: "p.3 Fig. 2(a)"}
+  - {table: interconnects, row_id: ectc51846.2026.00336-b-i1, field: resistance_mohm, value: 32000, formula: "32 ohm x 1000", inputs: "p.3 Fig. 2(a)"}
+  - {table: interconnects, row_id: ectc51846.2026.00336-b-i2, field: resistance_mohm, value: 72000, formula: "72 ohm x 1000", inputs: "p.3 Fig. 2(a)"}
+  - {table: interconnects, row_id: ectc51846.2026.00336-a-i1, field: diameter_um, value: 0.042, formula: "42 nm / 1000", inputs: "p.2 Sec. II.A"}
+  - {table: interconnects, row_id: ectc51846.2026.00336-a-i4, field: diameter_um, value: 0.05, formula: "50 nm / 1000", inputs: "p.2 Sec. II.A"}
+  - {table: interconnects, row_id: ectc51846.2026.00336-b-i1, field: depth_um, value: 0.24, formula: "240 nm / 1000", inputs: "p.4 Sec. III.A; p.3 Fig. 2(c)"}
+  - {table: stack_layers, row_id: ectc51846.2026.00336-a-L04, field: thickness_um, value: 0.25, formula: "250 nm / 1000", inputs: "p.3 Sec. II.B"}
+  - {table: process_steps, row_id: ectc51846.2026.00336-F2-s16, field: thickness_um, value: 0.005, formula: "5 nm / 1000", inputs: "p.3 Sec. II.B"}
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00336-a-m6, field: value, values: [50, 60], locators: ["p.1 Abstract", "p.5 Fig. 5"], chosen: 60, why: "measured bar in Fig. 5 (Fig. 4(b) distribution median ~56); abstract rounds to 50"}
+  - {table: process_steps, row_id: ectc51846.2026.00336-F2-s16, field: thickness_um, values: [0.005, 0.01], locators: ["p.3 Sec. II.B; p.2 Table II (TDV #1: 5 nm)", "p.2 Table II (TDV-BPR-nTSV: 10 nm)"], chosen: 0.005, why: "10 nm applies to the TDV-BPR-nTSV row, not TDV #1"}
+excluded:
+  - "TDV daisy-chain yield >90% (attributed to ref [11])"
+  - "Individual TDV/BPR/nTSV component measurements of ref [10]; full process flows in refs [10], [11]"
+  - "BSPDN thermal impact limited to 5 % (ref [14]); lateral heat spreading penalty (ref [6])"
+  - "Frontside hybrid bonding 250 nm pitch / TDV 120 nm pitch (ref [11] title only)"
+not_reported:
+  - components
+  - electrical_interfaces
+  - optical_interfaces
+  - wafer diameter, die/array sizes, TDV/nTSV pitch, BSM/M0 materials and thicknesses
+  - bonding stack and wafer bonding conditions, carrier wafer
+  - which TDV thinning approach (#1 or #2) the measured samples used
+  - reliability data
+source_quality:
+  - "Fig. 4/5 captions partly clipped in text layer ('g. 5.'); Fig. 5 has no candidate."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51846.2026.00336-b-m8, change: "deleted (copy of a-m8: heater/sensor active Si line length 5 um)", reason: "p.5 Sec. IV states one design for the dedicated thermal structures of both schemes; no per-build value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51846.2026.00336-a-m8, change: "scope -> 'applies to TVs a, b (dedicated thermal structures of both schemes)'", reason: "kept as the single row for the shared statement"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00336-figures, change: "re-ranked: Table I f05 -> f04, Fig. 2 f03 -> f05, Fig. 5 f04 -> f06, Fig. 3 f06 -> f07", reason: "layout and schematics before plots (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00336-f03, change: "added Fig. 4 (top_view_layout, candidate)", reason: "thermal test-structure layout; source of a-m6, b-m6, a-m8"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F1", change: "split: converter-merged flow of TVs a and b; F1 now TDV-BPR-nTSV (tv_ids a only), b's deltas moved to F2 route 'ultimate #1'", reason: "p.2 Table II: three distinct thinning approaches; b's ultimate #1 and #2 are alternative routes of the TDV scheme"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F1-s02", change: "deleted; moved to F2-s11 (route ultimate #1)", reason: "flow split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F1-s07", change: "deleted; moved to F2-s15 (route ultimate #1)", reason: "flow split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F1-s09", change: "deleted; moved to F2-s16 (route ultimate #1); evidence derived/conflicts re-pointed", reason: "flow split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F1-s14", change: "deleted; moved to F2-s21 (route ultimate #1)", reason: "flow split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F1-s16", change: "deleted; moved to F2-s22 (route ultimate #1)", reason: "flow split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F1-s18", change: "deleted; moved to F2-s23 (route ultimate #1)", reason: "flow split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F1", change: "a-delta rows s01, s06, s08, s13, s15, s17 made shared (tv_id cleared); seq renumbered 1-13; step_basis stated_in_flow", reason: "single-TV flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F1-s01", change: "SiGe ESL 10/20 nm moved to split", reason: "p.2 Table II"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F1-s06", change: "target 'BPR trench CD 42 nm; slit nTSV CD 50 nm; square TDV CD 42 nm'", reason: "p.2 Sec. II.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F1-s10", change: "fill metal Mo / TiN/W in split", reason: "p.3 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F1-s12", change: "thickness_in_um 775; conditions '775 um to 2-3 um'", reason: "p.2 Table II"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F1-s13", change: "thickness_um 0.25 (approx, remaining Si)", reason: "p.2 Table II; p.3 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F1-s19", change: "added wafer bonding step (inferred_order)", reason: "bonding-stack deposition (p.3 Sec. II.B) and FS-to-BS flip in Table II schematics"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F2", change: "flow renamed 'TDV scheme, ultimate wafer thinning #1 / #2'; existing rows s01-s10 get route 'ultimate #2'; route 'ultimate #1' added (s11-s23)", reason: "p.2 Table II; p.3 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F2-s04", change: "target 'TDV bottom 50 nm above STI floor'", reason: "p.3 Sec. II.B; p.2 Table II"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F2-s05", change: "fill metal Mo / TiN/W in split", reason: "p.3 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F2-s07", change: "thickness_in_um 775; conditions grinding only", reason: "p.2 Table II"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F2-s10", change: "conditions: HOCPE for BSM lithography", reason: "p.2 Sec. II.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F2-s24", change: "added wafer bonding step on route ultimate #2 (inferred_order)", reason: "p.2 Sec. II.A 'bonding distortions'; p.3 Sec. II.B bonding stack"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F2-s11", change: "added route ultimate #1 rows s11-s23 (frontside steps, liner, fill, bonding stack, bonding, grinding + in-situ CMP, selective wet etch, knock-off CMP, BSM litho with HOCPE)", reason: "p.3 Sec. II.B; p.2 Table II; p.2 Sec. II.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F1-s05", change: "category other -> device_fab (also F2-s03, F2-s14)", reason: "v017 category_other: front-end lithography-masked doping (p.3 Sec. II.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00336-F2-s15", change: "target 'TDV landing on STI floor' -> '' (already in step text)", reason: "v017 target_no_number: object/location, not a stated dimension"}

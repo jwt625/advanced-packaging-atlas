@@ -1,0 +1,77 @@
+paper_id: tcpmt.2021.3104326
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/tcpmt.2021.3104326/text.md
+  - references/tcpmt.2021.3104326/source.json
+  - references/tcpmt.2021.3104326/figures/cand/p02_fig1.png
+  - references/tcpmt.2021.3104326/figures/cand/p02_fig2.png
+  - references/tcpmt.2021.3104326/figures/cand/p03_fig3.png
+  - references/tcpmt.2021.3104326/figures/cand/p04_fig4.png
+  - references/tcpmt.2021.3104326/figures/cand/p05_fig5.png
+  - references/tcpmt.2021.3104326/figures/cand/p05_fig6.png
+  - references/tcpmt.2021.3104326/figures/cand/p06_tablei.png
+figure_reading_method: >-
+  All seven candidate crops opened; each holds the full figure/table. Resistance values taken from Table I image (text
+  layer drops the Omega symbol: "100.5 m" = 100.5 mOhm) and Sec. III text; no values read off plot axes.
+entries:
+  - {table: interconnects, row_id: tcpmt.2021.3104326-a-i1, field: resistance_mohm, value: 47.8, unit: mOhm, basis: measured, locator: "p.6 Table I", note: "SnAg-based Kelvin at 300 K"}
+  - {table: interconnects, row_id: tcpmt.2021.3104326-c-i1, field: alignment_um, value: 0.5, unit: um, basis: measured, locator: "p.5 Sec. IV", note: "slight misalignment <= 500 nm on FIB-SEM"}
+  - {table: interconnects, row_id: tcpmt.2021.3104326-c-i2, field: count, value: 16, unit: ea, basis: design_target, locator: "p.5 Fig. 6 caption", note: "16 vias per half link"}
+derived:
+  - {table: process_steps, row_id: tcpmt.2021.3104326-F1-s07, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: tcpmt.2021.3104326-F2-s10, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.2 Sec. II"}
+  - {table: interconnects, row_id: tcpmt.2021.3104326-c-i1, field: anneal_time_min, value: 120, formula: "2 h x 60", inputs: "p.2 Sec. II"}
+  - {table: stack_layers, row_id: tcpmt.2021.3104326-a-L02, field: thickness_um, value: 0.85, formula: "850 nm / 1000", inputs: "p.2 Sec. II"}
+  - {table: interconnects, row_id: tcpmt.2021.3104326-c-i2, field: diameter_um, value: 0.5, formula: "500 nm / 1000", inputs: "p.5 Fig. 6 caption"}
+conflicts:
+  - {table: interconnects, row_id: tcpmt.2021.3104326-a-i1, field: bonding_temp_c, values: ["260 C reflow of top wafer before dicing (p.2)", "260 C reflow at end of stacking (p.5)"], locators: ["p.2 Sec. II", "p.5 Sec. IV"], chosen: 260, why: "p.5 ties IMC formation to the 260 C stacking reflow; p.2 says only 'conventional mass reflow' for the stacking step"}
+  - {table: metrics, row_id: tcpmt.2021.3104326-a-m10, field: value, values: [11.7, "about 11.0 (lowest warm-up point)"], locators: ["p.6 Table I; p.4 Sec. III", "p.3 Fig. 3(d)"], chosen: 11.7, why: "rule (k): result table and text over plot read"}
+excluded:
+  - "Indium bump pitch limit 7.5 um (ref [11])"
+  - "10 um pitch D2W and <=1 um pitch W2W Cu/SiO2 hybrid bonding (refs [17], [18])"
+  - "0-500 mT magnetic field results and ~2 mT SnAg hysteresis (authors' prior work ref [22])"
+  - "CTE values of Cu, TiN, SiO2 (ref [28]); Cu RRR literature ranges (refs [31], [32]); Tc literature values Al ~1.2 K, Sn 3.7 K, TiN up to 6 K"
+  - "Underfill qualification to 77 K reported in prior work (not re-measured here)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "die and wafer thicknesses (SnAg); total joint height after reflow"
+  - "bonding force/pressure, alignment tool, HB bonding temperature; plasma activation details"
+  - "underfill product; per-chain yield"
+  - "thermal conductivity of interconnects (future work)"
+revisions:
+  - {date: 2026-10-19, source: audit_x2A, row_id: "tcpmt.2021.3104326-b-i1", change: "resistance_mohm 47.8 -> empty (overrides cleared); locator p.4 Sec. IV -> p.5 Sec. IV", reason: "p.3 Fig. 3 caption: data obtained on assemblies without underfill; 47.8 mOhm (p.6 Table I) is the no-underfill Kelvin value; b-m2 keeps the 'similar' statement"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "tcpmt.2021.3104326-a-i1", change: "locator p.4 Sec. IV -> p.5 Sec. IV; notes 'per p.4' -> 'per p.5'", reason: "260 C stacking-reflow statement is after the page-5 marker (p.5 Sec. IV)"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "tcpmt.2021.3104326-F1-s05", change: "locator p.4 Sec. IV -> p.5 Sec. IV; notes (p.4) -> (p.5)", reason: "260 C stacking-reflow statement is on p.5 Sec. IV"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "tcpmt.2021.3104326-F1-s05", change: "locator p.4 Sec. IV -> p.5 Sec. IV; notes (p.4) -> (p.5)", reason: "260 C stacking-reflow statement is on p.5 Sec. IV"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "tcpmt.2021.3104326-c-i1", change: "height_um 0.5 -> empty; pad thickness moved to notes; override height_um:caption removed", reason: "p.5 Fig. 6 caption: 0.5 um is the bonding-pad thickness per side, not a joint height; c-L05/c-L06 already hold it"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "tcpmt.2021.3104326-a-m10", change: "value 11.7 kept; conflicts entry added (Table I 11.7 vs Fig. 3(d) lowest point ~11.0 mOhm)", reason: "rule (k): result table over plot read; p.3 Fig. 3(d) lowest warm-up point reads about 11.0 mOhm"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "tcpmt.2021.3104326-a-i1", change: "evidence conflicts entry locator p.4 Sec. IV -> p.5 Sec. IV", reason: "same p.5 locator fix"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2021.3104326-f01", change: "re-ranked Fig. 5: tcpmt.2021.3104326-f02 -> tcpmt.2021.3104326-f01", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "tcpmt.2021.3104326-f03", change: "shows 'SiN liners' -> 'SiN dielectric layers arrowed'", reason: "p.5 Fig. 6(b) arrows label SiN dielectric layers; liners are Ti/TiN per p.2 Sec. II"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2021.3104326-f02", change: "re-ranked Fig. 6: tcpmt.2021.3104326-f03 -> tcpmt.2021.3104326-f02", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2021.3104326-f03", change: "re-ranked Fig. 2: tcpmt.2021.3104326-f01 -> tcpmt.2021.3104326-f03", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2021.3104326-f07", change: "added Fig. 4 (electrical_plot, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "tcpmt.2021.3104326-f01", change: "rank 1 Fig. 2 stack schematic -> Fig. 5 FIB-SEM cross-section (Fig. 2 now f03, Fig. 6 f02)", reason: "rule: cross-section image > stack schematic; Fig. 5/6 are FIB-SEM cross-sections of the built links"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F1-s01", change: "target 'top wafer' -> 'Cu pillar 10 um diameter; 20 um pitch'; notes '10 um diameter.' -> ''", reason: "stated pillar diameter/pitch moved to target; target held object names; moved to step text (target = stated geometry only)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F1-s02", change: "target 'bottom wafer' -> ''", reason: "target held object names; moved to step text (target = stated geometry only)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F1-s03", change: "step 'reflow top wafer to hemispheric solder shape' -> 'reflow top-wafer microbumps to hemispheric solder shape'; target 'top wafer microbumps' -> ''", reason: "target held object names; moved to step text (target = stated geometry only)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F1-s04", change: "target 'top wafer' -> '4.0 x 5.6 mm dies'", reason: "target held object names; moved to step text (target = stated geometry only); die size is the stated geometry"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F1-s05", change: "step 'flip dies and solder to bottom wafer by conventional mass reflow' -> 'flip top dies and solder to bottom wafer (die-to-wafer) by conventional mass reflow'; target 'die-to-wafer' -> ''; temp_c '' -> '260'; notes 'IMC formed during 260 C reflow at end of stacking (p.5).' -> '260 C stacking reflow per p.5 Sec. IV; p.2 states only conventional mass reflow.'", reason: "p.5 Sec. IV: IMC formed during reflow at 260 C at the end of stacking; target held object names; moved to step text (target = stated geometry only)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F2-s02", change: "target '' -> 'routing lines 12 um wide; vias 500 nm diameter; bond pads 5 x 5 um at 20 um pitch'; locator 'p.2 Sec. II' -> 'p.2 Sec. II; p.5 Fig. 6'", reason: "stated level geometries (p.2 Sec. II; p.5 Fig. 6 caption) added as target"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F2-s05", change: "category 'electroplating' -> 'deposition_pvd'; step 'Cu filling by plasma vapor deposition and ECD' -> 'Cu deposition by plasma vapor deposition'", reason: "composite step split: text gives PVD then ECD (p.2 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F2-s12", change: "added step seq 6: Cu filling by ECD", reason: "split from F2-s05 (PVD then ECD, p.2 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F2-s06", change: "seq '6' -> '7'", reason: "seq shifted after F2-s05 split"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F2-s07", change: "seq '7' -> '8'", reason: "seq shifted after F2-s05 split"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F2-s08", change: "seq '8' -> '9'", reason: "seq shifted after F2-s05 split"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F2-s09", change: "seq '9' -> '10'", reason: "seq shifted after F2-s05 split"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F2-s10", change: "seq '10' -> '11'", reason: "seq shifted after F2-s05 split"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F2-s11", change: "seq '11' -> '12'", reason: "seq shifted after F2-s05 split"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F2-s07", change: "target 'top wafer' -> '4.0 x 5.6 mm dies'", reason: "target held object names; moved to step text (target = stated geometry only); die size is the stated geometry"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F2-s08", change: "step 'extra die cleaning to remove dicing particles' -> 'extra cleaning of top dies to remove dicing particles'; target 'top dies' -> ''", reason: "target held object names; moved to step text (target = stated geometry only)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F2-s09", change: "step 'align and stack top die on bottom substrate (direct Cu/SiO2 hybrid bonding)' -> 'align and stack top die on bottom substrate (die-to-wafer direct Cu/SiO2 hybrid bonding)'; target 'die-to-wafer' -> ''", reason: "target held object names; moved to step text (target = stated geometry only)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F2-s11", change: "step 'thin top die' -> 'thin top die to 10 um'; target 'top die' -> ''", reason: "target held object names; moved to step text (target = stated geometry only)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F2", change: "level ordered -> full", reason: "ordered damascene/bonding flow with materials (Ti/TiN 10 nm) and conditions (400 C, 2 h)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F1", change: "step_basis set to stated_in_flow on 7 steps", reason: "order given in the paper's flow text/figure"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2021.3104326-F2", change: "step_basis set to stated_in_flow on 11 steps", reason: "order given in the paper's flow text/figure"}

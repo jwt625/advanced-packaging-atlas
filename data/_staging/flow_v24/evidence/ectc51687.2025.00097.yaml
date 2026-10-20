@@ -1,0 +1,77 @@
+paper_id: ectc51687.2025.00097
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00097/text.md
+  - references/ectc51687.2025.00097/source.json
+  - references/ectc51687.2025.00097/figures/page_01.png
+  - references/ectc51687.2025.00097/figures/page_02.png
+  - references/ectc51687.2025.00097/figures/page_03.png
+  - references/ectc51687.2025.00097/figures/page_04.png
+  - references/ectc51687.2025.00097/figures/page_05.png
+  - references/ectc51687.2025.00097/figures/page_06.png
+  - references/ectc51687.2025.00097/figures/cand/p06_fig17.png
+  - references/ectc51687.2025.00097/figures/cand/p05_fig13.png
+  - references/ectc51687.2025.00097/figures/cand/p03_table1.png
+  - references/ectc51687.2025.00097/figures/cand/p04_fig8.png
+  - references/ectc51687.2025.00097/figures/cand/p04_fig10.png
+  - references/ectc51687.2025.00097/figures/cand/p05_fig12.png
+  - references/ectc51687.2025.00097/figures/cand/p06_fig14.png
+figure_reading_method: >-
+  Page renders p.1-6 at 150 dpi; candidate crops for Figs. 8, 10, 12, 13, 14, 17 and Table 1; manual re-crop of
+  Table 1. Figures carry layer labels only (no scale bars read, no numeric axes).
+entries:
+  - {table: components, row_id: ectc51687.2025.00097-d-c1, field: thickness_um, value: 775, unit: um, basis: design_target, locator: "p.3 Sec. II", note: "approximately 775 um full-thickness wafer"}
+  - {table: process_steps, row_id: ectc51687.2025.00097-F4-s05, field: thickness_um, value: 30, unit: um, basis: design_target, locator: "p.3 Sec. II; p.3 Fig. 6", note: "around 30 um; Fig. 6 label 'Carrier wafer thinned to 30um'"}
+  - {table: metrics, row_id: ectc51687.2025.00097-a-m4, field: value, value: 0.2, unit: um, basis: design_target, locator: "p.2 Sec. II", note: "less than 200nm TTV, stated as usual practice"}
+derived:
+  - {table: metrics, row_id: ectc51687.2025.00097-a-m4, field: value, value: 0.2, formula: "200 nm / 1000 = 0.2 um (unit conversion)", inputs: "p.2 Sec. II"}
+conflicts: []
+excluded:
+  - "Fig. 1 HBM W2W core-wafer flow and Fig. 2 CMOS/Array W2W flow: product concepts being developed, no data; not entered as TVs"
+  - "Fig. 3 industrial wafer support systems (thermal slide, chemical dissolution, peel-off, laser ablation) from ref [2]"
+  - "Fig. 4 organic glue cracks and 'glues take up to 200C': general statement on existing systems, no TV"
+  - "Release-layer mirror-reflection concept attributed to refs [3], [4]; film peel-off attributed to ref [5]"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - wafer diameter, carrier and device wafer thicknesses (except Device 1 <2 um)
+  - bonding layer materials and thicknesses (except release stack total <1 um)
+  - Cu pad pitch/size, hybrid-bond metallurgy, bonding temperature, pressure, anneal temperature/time
+  - laser wavelength, pulse energy, pitch and focus values; photonic flash energy; adhesive product names
+  - absolute bond energies, measured TTV, yield numbers
+judgment_calls:
+  - "One TV per carrier technology A/B/C (different temporary-bond stack and carrier); sacrificial flow of Fig. 5 kept as baseline TV d."
+  - "Generic Fig. 13 flow and Figs. 14-16 results (CSAM void free, Device 1 <2 um) hold for A, B and C (conclusion); entered once on TV a with scope 'applies to TVs a, b, c' (2026-10-19); wafer-to-technology mapping in Figs. 14-16 not stated."
+  - "Fig. 17 X-section attached to TV a (technology not stated; inorganic, thin temporary layer)."
+  - "Permanent bond entered as wafer_to_wafer_hybrid level with ic_type unspecified; only 'hydrophilic bonding' and SiO2 transit layer are described (bonding_method fusion for TV a)."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-a-m1", change: "scope -> 'applies to TVs a, b, c'; copies ectc51687.2025.00097-b-m1, ectc51687.2025.00097-c-m1 deleted", reason: "p.6 Sec. IV/V: CSAM void free stated for all temporary bonds; Fig. 14 wafer-to-technology mapping not stated"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-b-m1", change: "deleted (copy of ectc51687.2025.00097-a-m1)", reason: "p.6 Sec. IV/V: CSAM void free stated for all temporary bonds; Fig. 14 wafer-to-technology mapping not stated"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-c-m1", change: "deleted (copy of ectc51687.2025.00097-a-m1)", reason: "p.6 Sec. IV/V: CSAM void free stated for all temporary bonds; Fig. 14 wafer-to-technology mapping not stated"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-a-m2", change: "scope -> 'applies to TVs a, b, c'; copies ectc51687.2025.00097-b-m2, ectc51687.2025.00097-c-m2 deleted", reason: "p.6 Sec. IV/V: Device 1 thinned <2 um stated for the bonded pairs generally; Fig. 15 mapping not stated"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-b-m2", change: "deleted (copy of ectc51687.2025.00097-a-m2)", reason: "p.6 Sec. IV/V: Device 1 thinned <2 um stated for the bonded pairs generally; Fig. 15 mapping not stated"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-c-m2", change: "deleted (copy of ectc51687.2025.00097-a-m2)", reason: "p.6 Sec. IV/V: Device 1 thinned <2 um stated for the bonded pairs generally; Fig. 15 mapping not stated"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-a-m3", change: "scope -> 'W2W permanent bonding excursion requirement; applies to TVs a, b, c'; copies ectc51687.2025.00097-b-m3, ectc51687.2025.00097-c-m3 deleted", reason: "p.2 Sec. II: 350 C / 2 h is a general W2W requirement, not a per-carrier value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-b-m3", change: "deleted (copy of ectc51687.2025.00097-a-m3)", reason: "p.2 Sec. II: 350 C / 2 h is a general W2W requirement, not a per-carrier value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-c-m3", change: "deleted (copy of ectc51687.2025.00097-a-m3)", reason: "p.2 Sec. II: 350 C / 2 h is a general W2W requirement, not a per-carrier value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-a-m4", change: "scope -> 'Device 1 thinned to <2 um; applies to TVs a, b, c'; copies ectc51687.2025.00097-b-m4, ectc51687.2025.00097-c-m4 deleted", reason: "p.2 Sec. II: <200 nm TTV is the usual practice for W2W, not a per-carrier value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-b-m4", change: "deleted (copy of ectc51687.2025.00097-a-m4)", reason: "p.2 Sec. II: <200 nm TTV is the usual practice for W2W, not a per-carrier value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-c-m4", change: "deleted (copy of ectc51687.2025.00097-a-m4)", reason: "p.2 Sec. II: <200 nm TTV is the usual practice for W2W, not a per-carrier value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-a-m5", change: "scope -> 'applies to TVs a, b, c'; copies ectc51687.2025.00097-b-m5, ectc51687.2025.00097-c-m5 deleted", reason: "p.2 Sec. I: bonding layer TTV <1 um is a general carrier-bond requirement, not a per-carrier value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-b-m5", change: "deleted (copy of ectc51687.2025.00097-a-m5)", reason: "p.2 Sec. I: bonding layer TTV <1 um is a general carrier-bond requirement, not a per-carrier value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-c-m5", change: "deleted (copy of ectc51687.2025.00097-a-m5)", reason: "p.2 Sec. I: bonding layer TTV <1 um is a general carrier-bond requirement, not a per-carrier value"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f03", change: "added Fig. 7 (process_flow, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f04", change: "added Fig. 5 (process_flow, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f05", change: "re-ranked Fig. 8: ectc51687.2025.00097-f04 -> ectc51687.2025.00097-f05", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f06", change: "re-ranked Fig. 10: ectc51687.2025.00097-f05 -> ectc51687.2025.00097-f06", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f07", change: "re-ranked Fig. 12: ectc51687.2025.00097-f06 -> ectc51687.2025.00097-f07", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f08", change: "added Fig. 9 (stack_schematic, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f09", change: "added Fig. 11 (micrograph, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f10", change: "added Fig. 6 (package_photo, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f11", change: "added Fig. 14 (xray_csam, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f12", change: "added Fig. 15 (package_photo, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f13", change: "added Fig. 16 (package_photo, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f14", change: "added Fig. 1 (process_flow, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f15", change: "added Fig. 2 (process_flow, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f16", change: "re-ranked Table 1: ectc51687.2025.00097-f03 -> ectc51687.2025.00097-f16", reason: "re-rank after additions"}

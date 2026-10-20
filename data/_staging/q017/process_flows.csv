@@ -1,0 +1,16 @@
+flow_id,paper_id,flow_name,scope,level,tv_ids,basis,source,overrides,locator,qualifiers,notes
+ectc32696.2021.00174-F1,ectc32696.2021.00174,"600 mm chip-first face-up FOPLP (Sec. II-III, Fig. 5)",tv_build,ordered,ectc32696.2021.00174-a,stated,mixed,,p.2 Sec. II; p.3 Sec. III; p.3 Fig. 8; p.4 Sec. III; p.4 Table 3; p.4 Table 4; p.4 Fig. 12; p.2 Fig. 6; p.2 Sec. I; p.3 Sec. II; p.2 Fig. 5; p.5 Fig. 13,,
+ectc51909.2023.00274-F1,ectc51909.2023.00274,dielet-on-GaN-IF assembly (Fig. 3),tv_build,full,ectc51909.2023.00274-a,stated,mixed,,p.3 Sec. II.B; p.3 Fig. 3; p.4 Fig. 4(d); p.4 Fig. 4(b); p.4 Sec. II.B,,
+ectc51909.2023.00274-F2,ectc51909.2023.00274,dielet-side PDN integration (Fig. 8),tv_build,ordered,ectc51909.2023.00274-b;ectc51909.2023.00274-c,stated,mixed,,p.5 Sec. III.A; p.5 Fig. 8; p.6 Fig. 9(a); p.6 Sec. III.A; p.6 Fig. 9(b); p.6 Fig. 9(c); p.6 Fig. 9(d); p.6 Fig. 9(e); p.6 Fig. 9(f); p.6 Fig. 10(b),,
+tcpmt.2023.3312037-F1,tcpmt.2023.3312037,PVC Foveros wafer to package flow with HVM trench (Sec. IV-V),tv_build,ordered,tcpmt.2023.3312037-a,stated,text,,p.5 Sec. V; p.2 Sec. II; p.4 Sec. IV; p.5 Sec. IV; p.3 Sec. III.A,,
+tcpmt.2023.3312037-F2,tcpmt.2023.3312037,candidate alternative: hydrophobic coating on thinner die top (Sec. IV),generic_platform,fragments,,stated,text,,p.4 Sec. IV; p.4 Table I,,
+tcpmt.2023.3312037-F3,tcpmt.2023.3312037,candidate alternative: hydrophobic barrier on thinner die edge (Sec. IV),generic_platform,fragments,,stated,text,,p.5 Sec. IV; p.4 Table I,,
+tcpmt.2023.3312037-F4,tcpmt.2023.3312037,candidate alternative: hydrophobic sidewall coating on thicker die (Sec. IV),generic_platform,fragments,,stated,text,,p.5 Sec. IV; p.4 Table I,,
+tcpmt.2023.3312037-F5,tcpmt.2023.3312037,"trench POC coupon (Sec. III.A, Fig. 6)",tv_build,ordered,tcpmt.2023.3312037-b,stated,text,,p.3 Sec. III.A; p.3 Fig. 6,,
+tcpmt.2023.3312037-F6,tcpmt.2023.3312037,"hydrophobic top-side coating POC coupon (Sec. III.B, Fig. 7)",tv_build,fragments,tcpmt.2023.3312037-c,stated,text,,p.3 Sec. III.B; p.3 Fig. 7,,
+tcpmt.2023.3312037-F7,tcpmt.2023.3312037,"hydrophobic barrier POC coupon (Sec. III.C, Fig. 8)",tv_build,fragments,tcpmt.2023.3312037-d,stated,text,,p.3 Sec. III.C; p.4 Fig. 8,,
+tcpmt.2023.3312037-F8,tcpmt.2023.3312037,"hydrophobic sidewall coating POC coupon (Sec. III.D, Fig. 9)",tv_build,ordered,tcpmt.2023.3312037-e,stated,text,,p.4 Sec. III.D; p.4 Fig. 9,,
+ectc51529.2024.00125-F1,ectc51529.2024.00125,SoIC W2W test vehicle build (Sec. IV),tv_build,ordered,ectc51529.2024.00125-a,stated,mixed,,p.4 Sec. IV; p.3 Sec. III; p.1 Abstract; p.3 Fig. 7,,
+ectc51846.2026.00227-F1,ectc51846.2026.00227,"3D TV assembly (Sec. II.A, III.A)",tv_build,ordered,ectc51846.2026.00227-a,stated,mixed,,p.3 Sec. II.A; p.3 Sec. III.A; p.1 Abstract; p.4 Sec. III.A; p.5 Fig. 12; p.5 Fig. 16(a); p.4 Fig. 9; p.4 Fig. 10,,
+ectc51846.2026.00227-F2,ectc51846.2026.00227,"25 um pitch microbump short-loop bumping and bonding (Sec. II.A, III.B)",tv_build,ordered,ectc51846.2026.00227-b,stated,mixed,,p.3 Sec. II.A; p.3 Fig. 4; p.4 Sec. III.B; p.5 Sec. III.B; p.5 Fig. 12; p.5 Fig. 13,,
+ectc51846.2026.00227-F3,ectc51846.2026.00227,"AOR oxide removal on Cu-oxide coupons (Sec. III, Fig. 5)",tv_build,fragments,ectc51846.2026.00227-c,stated,text,,p.3 Sec. III; p.3 Fig. 5,,Single treatment step; oxide growth method and AOR scan speeds not given.

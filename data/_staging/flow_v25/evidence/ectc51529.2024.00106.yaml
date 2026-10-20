@@ -1,0 +1,62 @@
+paper_id: ectc51529.2024.00106
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00106/text.md
+  - references/ectc51529.2024.00106/source.json
+  - references/ectc51529.2024.00106/figures/page_03.png
+  - references/ectc51529.2024.00106/figures/page_04.png
+  - references/ectc51529.2024.00106/figures/page_05.png
+  - references/ectc51529.2024.00106/figures/cand/p01_fig1.png
+  - references/ectc51529.2024.00106/figures/cand/p02_fig2.png
+  - references/ectc51529.2024.00106/figures/cand/p03_fig3.png
+  - references/ectc51529.2024.00106/figures/cand/p03_fig4.png
+  - references/ectc51529.2024.00106/figures/cand/p04_fig8.png
+  - references/ectc51529.2024.00106/figures/cand/p05_fig10.png
+  - references/ectc51529.2024.00106/figures/cand/p05_fig11.png
+figure_reading_method: >-
+  Candidate crops for Fig. 1-4, 8, 10, 11; 400-500 dpi re-crops of Fig. 1 (SiCN labels), Fig. 6 (stack insets),
+  Fig. 10 (bar heights read +/-1%) and Fig. 11 (SEM scale bar 4 um, 25000x).
+entries:
+  - {table: metrics, row_id: ectc51529.2024.00106-b-m1, field: value, value: 93, unit: "%", basis: measured, locator: "p.3 Sec. II", note: "tier 2 transfer yields of four stacks: 93, 92, 84, 64%; not mapped to D01-D04"}
+  - {table: metrics, row_id: ectc51529.2024.00106-a-m3, field: value, value: 99, unit: "%", basis: measured, locator: "p.3 Fig. 4", note: "Fig. 4 black bars read D01 ~98.7, D02 ~99.3, D03 ~98.3, D04 ~96.5"}
+  - {table: metrics, row_id: ectc51529.2024.00106-b-m3, field: value, value: 60, unit: "%", basis: measured, locator: "p.3 Fig. 4", note: "Fig. 4 blue bars read D01 ~82.6, D02 ~75, D03 ~86.3, D04 ~62; green D01 ~90.5, D02 ~85.4, D03 ~91, D04 ~84.3"}
+derived:
+  - {table: metrics, row_id: ectc51529.2024.00106-a-m8, field: value, value: 0.045, formula: "45 nm / 1000", inputs: "p.4 Sec. II"}
+conflicts:
+  - {table: metrics, row_id: ectc51529.2024.00106-b-m4, field: value, values: [85, 86.3], locators: ["p.3 Sec. II text", "p.3 Fig. 4 D03 blue bar"], chosen: 85, why: "text range entered; bar reading approximate and slightly above text max"}
+  - {table: metrics, row_id: ectc51529.2024.00106-a-m3, field: value, values: [99, 98], locators: ["p.3 Sec. II", "p.5 Sec. III"], chosen: 99, why: "two text statements for different scopes (tier 1 only vs summary over tiers); both entered as separate rows (a-m3, a-m5)"}
+excluded:
+  - "50 um and 775 um die transfer with near 100% yield (refs [5]-[10])"
+  - "1-4% die damage with LRL only; 7 um pitch daisy chains/kelvin up to 80% yield (ref [5])"
+  - "mechanical debond transfer yields up to unity on Si carriers (refs [9], [10])"
+not_reported:
+  - die size, die count per wafer, wafer diameter
+  - bonding dielectric thickness, SiCN deposition method, bond/clean/activation conditions
+  - full-loop die thickness, TSV dimensions, HB pad size, electrical results
+  - electrical_interfaces
+  - optical_interfaces
+  - reliability
+source_quality:
+  - "Clean text layer. Fig. 6/7 stack inset labels (HT/LT SiCN) too small to read reliably; text 'low temperature SiCN' used for backside."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106", change: "process_flow_level full -> ordered", reason: "ordered flow with named materials/tools and 50 um target but no bond/clean conditions; only anneal 'up to 350 C'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106-F1", change: "tv_ids ectc51529.2024.00106-a -> ectc51529.2024.00106-a;ectc51529.2024.00106-b;ectc51529.2024.00106-c; level ordered; name", reason: "tier 1 transfer is the first tier of the N=3 and N=4 stacks (p.2-4 Sec. II-III)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106-F2", change: "tv_ids ectc51529.2024.00106-b -> ectc51529.2024.00106-b;ectc51529.2024.00106-c; level ordered; name/notes", reason: "tier 2 transfer is also part of the N=4 stack (best N=3 stack used, p.4 Sec. III)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106-F3", change: "level ordered; name/notes/locator", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106-F4", change: "level ordered; notes/locator", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106-F1", change: "s01-s14: step_basis stated_in_flow", reason: "order from p.2 Sec. II text and Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106-F1-s12", change: "aligned/non-aligned bonding moved from notes to split", reason: "p.4 Sec. II: one additional N=2 stack aligned"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106-F1-s14", change: "other -> cleaning", reason: "Fig. 2 'Debonding & cleaning'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106-F1-s15", change: "deleted (SAM/IR yield and alignment measurement)", reason: "measurement, not a step; values already in metrics a-m1..a-m8"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106-F2-s01", change: "other -> die_attach; now tier 2 die prep and placement by reference to F1", reason: "old row restated the tier 1 prerequisite, now covered by F1 tv_ids"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106-F2-s04", change: "now laser debond only", reason: "LRL/AL strip split into F2-s06"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106-F2-s05", change: "deleted (SAM bond yield, IR alignment)", reason: "measurement, not a step; values already in metrics b-m1..b-m8"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106-F2-s06", change: "added strip of LRL and acoustic layer", reason: "p.2 Sec. II"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106-F3-s01", change: "other -> die_attach; now tier 3 die prep and placement by reference to F1", reason: "old row restated the prerequisite, now covered by F1/F2 tv_ids"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106-F3-s04", change: "now laser debond only", reason: "LRL/AL strip split into F3-s06"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106-F3-s05", change: "deleted (SAM bond yield, IR die-transfer count)", reason: "measurement, not a step; values already in metrics c-m1..c-m3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106-F3-s06", change: "added strip of LRL and acoustic layer", reason: "p.2 Sec. II"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106-F4-s04", change: "now tier 1 transfer only", reason: "composite 'tier 1 then tier 2' split; tier 2 in F4-s07"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106-F4-s07", change: "added tier 2 transfer (B2F), seq 5; anneal s05 -> seq 6", reason: "p.5 Sec. IV; Fig. 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00106-F4-s06", change: "deleted (cross-sectional SEM)", reason: "failure-analysis cut, not a step; result already in metric d-m1"}

@@ -1,0 +1,66 @@
+paper_id: ectc51846.2026.00035
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00035/text.md
+  - references/ectc51846.2026.00035/source.json
+  - references/ectc51846.2026.00035/figures/page_04.png
+  - references/ectc51846.2026.00035/figures/page_08.png
+  - references/ectc51846.2026.00035/figures/cand/p01_fig1.png
+  - references/ectc51846.2026.00035/figures/cand/p02_fig2.png
+  - references/ectc51846.2026.00035/figures/cand/p02_tablei.png
+  - references/ectc51846.2026.00035/figures/cand/p03_fig3.png
+  - references/ectc51846.2026.00035/figures/cand/p03_fig4.png
+  - references/ectc51846.2026.00035/figures/cand/p05_tableii.png
+  - references/ectc51846.2026.00035/figures/cand/p07_fig11.png
+  - references/ectc51846.2026.00035/figures/cand/p08_fig12.png
+  - references/ectc51846.2026.00035/figures/cand/p08_fig13.png
+figure_reading_method: >-
+  Page 7 grid; 220-250 dpi re-crops of Fig. 5, 6, 7, 10, 11 from source.pdf. Eye height / eye opening factor read from
+  the in-plot labels of Fig. 6 and 7 (all legible). Fig. 5 S21 at 50 GHz read against gridlines (+/-0.2 dB).
+entries:
+  - {table: stack_layers, row_id: ectc51846.2026.00035-c-L01, field: repeat, value: 3, unit: layers, basis: design_target, locator: "p.2 Sec. II.B.3", note: "three-layer signal structure, 4-3-4 distribution"}
+  - {table: interconnects, row_id: ectc51846.2026.00035-a-i1, field: notes, value: 21.7, unit: um, basis: design_target, locator: "p.2 Sec. II.B; p.3 Fig. 3(b)", note: "vertical row distance = 25 x sqrt3/2"}
+  - {table: metrics, row_id: ectc51846.2026.00035-c-m10, field: value, value: 11.5, unit: GHz, basis: simulated, locator: "p.1 Abstract", note: "-3 dB bandwidth Model C at 2.0 mm; only stated in abstract"}
+derived:
+  - {table: test_vehicles, row_id: ectc51846.2026.00035-d, field: n_dies, value: 3, formula: "Chiplet 1 + Chiplet 2 + bridge die", inputs: "p.7 Sec. IV.A"}
+conflicts: []
+excluded:
+  - "Initial PSB demonstrations: 40 um MicroPillar pitch, 142 um electrode pad pitch, 9.96 x 0.96 mm footprint, 720 um thickness (refs [1]-[2])"
+  - "300 mm panel productivity, automotive-grade reliability, mass reflow feasibility of previous works (refs [3]-[4])"
+  - "2 um via size / 5 um via pitch optimized RDL bridge features from ECTC 2025 (ref [5])"
+  - "40 um D2D pitch bridge-last productivity and reliability (ref [4])"
+  - "Model A/B oxide eye heights 'below 0.4 V' text statement (exact values from Fig. 7 entered instead)"
+not_reported:
+  - "prototype chiplet, bridge and package dimensions and thicknesses"
+  - "MicroPillar and tall pillar metallurgy; tall pillar size; bonding temperatures/forces"
+  - "prototype bridge RDL stack; measured electrical results (resistance, yield)"
+  - "energy per bit, aggregate bandwidth, BER"
+  - optical_interfaces
+  - "reliability data (stated as future work)"
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00035-a-m13", change: "scope: '' -> 'applies to TVs a, b, c'", reason: "p.5 Sec. III.B.4 'all models maintain crosstalk levels below -20 dB': one statement for all models, no per-model value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00035-b-m13", change: "deleted (copy of a-m13)", reason: "same single all-model crosstalk statement; kept once on a-m13 with scope"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00035-c-m9", change: "deleted (copy of a-m13)", reason: "same single all-model crosstalk statement; kept once on a-m13 with scope"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00035-a-m14", change: "scope: '' -> 'applies to TVs a, b'", reason: "p.5 Sec. III.C.1.b 'In Model A and B ... dropping to 0.6 Vp-p': one joint statement, no per-model value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00035-b-m14", change: "deleted (copy of a-m14)", reason: "joint Model A/B statement kept once on a-m14 with scope"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00035-a-m9", change: "kept (also b-m9)", reason: "p.5 Table II lists Model A and Model B in separate rows with their own DCR/inductance cells: genuine per-TV values"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00035-a-m10", change: "kept (also b-m10)", reason: "p.5 Table II lists Model A and Model B in separate rows with their own DCR/inductance cells: genuine per-TV values"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00035-a-m11", change: "kept (also b-m11)", reason: "p.5 Table II lists Model A and Model B in separate rows with their own DCR/inductance cells: genuine per-TV values"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51846.2026.00035-a-m12", change: "kept (also b-m12)", reason: "p.5 Table II lists Model A and Model B in separate rows with their own DCR/inductance cells: genuine per-TV values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f03", change: "added Fig. 10 p.7 top_view_layout (manual)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f04", change: "added Fig. 3 p.3 top_view_layout (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f05", change: "added Fig. 12 p.8 micrograph (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f06", change: "renumbered from ectc51846.2026.00035-f03 (rank 3 -> 6)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f07", change: "added Fig. 4 p.3 stack_schematic (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f08", change: "added Fig. 2 p.2 top_view_layout (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f09", change: "renumbered from ectc51846.2026.00035-f04 (rank 4 -> 9)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f10", change: "renumbered from ectc51846.2026.00035-f06 (rank 6 -> 10)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f11", change: "added Fig. 6 p.4 electrical_plot (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f12", change: "added Fig. 7 p.5 electrical_plot (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00035-f13", change: "renumbered from ectc51846.2026.00035-f05 (rank 5 -> 13)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00035", change: "process_flow_level full -> ordered (has_process_flow stays yes)", reason: "Fig. 11 9-step order with materials/tools and pillar geometry only; no temperature, time, pressure or force stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00035-F1", change: "level full -> ordered; locator condensed to p.7 Sec. IV.B; p.7 Fig. 11; p.8 Fig. 12", reason: "no process conditions stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00035-F1-s01", change: "target '25 um pitch MicroPillars' -> '25 um pitch; 12 um diameter; 13 um height' (from conditions); carrier moved material -> conditions; override target:design_target", reason: "p.7 Sec. IV.B 'designed with a diameter of 12 um and a height of 13 um'; target holds geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00035-F1-s10", change: "kept as step_kind inline_inspection (category test); step text names probing via tall pillars", reason: "Fig. 11 step 8 'Grinding and electrical test' places the test inside the flow before singulation; no result reported, nothing to move to metrics"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00035-F1", change: "step_basis stated_in_flow on all steps", reason: "order stated in the paper's flow figure/text (DevLog-007 re-pass)"}

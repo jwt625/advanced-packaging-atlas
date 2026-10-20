@@ -1,0 +1,51 @@
+paper_id: ectc51529.2024.00321
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00321/text.md
+  - references/ectc51529.2024.00321/source.json
+  - references/ectc51529.2024.00321/figures/page_02.png
+  - references/ectc51529.2024.00321/figures/page_03.png
+  - references/ectc51529.2024.00321/figures/page_04.png
+  - references/ectc51529.2024.00321/figures/cand/p02_fig1.png
+  - references/ectc51529.2024.00321/figures/cand/p02_fig2.png
+  - references/ectc51529.2024.00321/figures/cand/p02_fig4.png
+  - references/ectc51529.2024.00321/figures/cand/p03_fig8.png
+  - references/ectc51529.2024.00321/figures/cand/p03_fig10.png
+  - references/ectc51529.2024.00321/figures/cand/p04_fig13.png
+figure_reading_method: >-
+  300-400 dpi re-crops of Fig. 1, 2, 3, 4, 8, 9, 10, 11, 14 and Table I. Warpage values are printed labels.
+  Fig. 14 center lines read by pixel position (y 4-11 um axis, ~77 px/um at 400 dpi; +/-0.05 um).
+entries:
+  - {table: metrics, row_id: ectc51529.2024.00321-a-m5, field: value, value: 5.27, unit: um, basis: measured, locator: "p.4 Fig. 14", note: "green line in 5 um box"}
+  - {table: metrics, row_id: ectc51529.2024.00321-a-m6, field: value, value: 7.24, unit: um, basis: measured, locator: "p.4 Fig. 14", note: "green line in 7 um box"}
+  - {table: metrics, row_id: ectc51529.2024.00321-a-m7, field: value, value: 10.22, unit: um, basis: measured, locator: "p.4 Fig. 14", note: "green line in 10 um box"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51529.2024.00321-a-m1, field: value, values: ["+730 um after molding for final build (Sec. III.E)", "+730 um is also the Fig. 4 film-EMC Glass C value after PMC", "Sec. IV: warpage before RDL was convex (negative per Fig. 10 liquid EMC -1550 um)"], locators: ["p.4 Sec. III.E", "p.2 Fig. 4", "p.4 Sec. IV; p.3 Fig. 10"], chosen: 730, why: "only explicit value for the final build; sign/shape inconsistency kept in notes"}
+  - {table: metrics, row_id: ectc51529.2024.00321-e-m1, field: value, values: ["simulation predicted granule EMC optimum (Fig. 9)", "measured liquid EMC most convex (Fig. 10)"], locators: ["p.3 Fig. 9", "p.3 Fig. 10"], chosen: "both entered under their TVs", why: "simulated vs measured, authors attribute to stress relaxation (liquid) and lamination edge stress (film)"}
+excluded:
+  - "Glass CTE warpage tendency consistent with ref [9] (no numbers)"
+  - "Si/EMC volume ratio effect attributed to Lin et al. ref [10]"
+  - "Previous panel-size RDL interposer fabrication of ref [8]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - "chip x/y size; Cu pillar pitch/diameter; RDL layer count, dielectric product and thickness (final build)"
+  - "glass thickness for real panels (1100 um only in simulation model); EMC product names; PMC/molding conditions"
+  - "warpage measurement method/equipment; sample counts; the 320 x 320 mm panel named in the abstract (no data)"
+  - "chip count for Fig. 4 and Fig. 10 panels; EMC type for Fig. 8 panels; glass type for Fig. 6 and Fig. 10 panels"
+source_quality:
+  - "Clean 5-page text layer; Table I text not extracted to text.md (read from image). All chosen figures had good candidates."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00321", change: "process_flow_level full -> ordered", reason: "Fig. 1 + Sec. II.A give ordered steps with materials/equipment but no temperatures, times or pressures"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00321-F1", change: "tv_ids a -> a;b;c;d;e;f; level full -> ordered; flow_name renamed", reason: "Sec. II.B: warpage test panels 'fabricated in the same way'; Sec. III.A 'following the process in Fig. 1' (review B miss 2)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00321-F1-s01", change: "category other -> carrier_prep; glass type per TV in notes", reason: "new step_category value"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00321-F1-s05", change: "split 8x8/9x9 shots added; locator + p.3 Sec. III.C, Fig. 7; 9x9 note moved from conditions to notes", reason: "review B miss 1: 9x9 shots come from Fig. 7"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00321-F1-s06;ectc51529.2024.00321-F1-s07", change: "new delta steps (tv a, tv f): outer-area Cu plating masking moved out of plating-step conditions", reason: "p.2-3 Sec. III.B, p.4 Sec. III.E: a adopted it; f is the with/without split (review B miss 2)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00321-F1-s08", change: "Cu pillar plating: target 100 um set; plating-prevention text moved to delta steps", reason: "rule 7: stated target on the step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00321-F1-s10", change: "die mount: split 576/729 chips added", reason: "p.3 Sec. III.C, Fig. 7"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00321-F1-s11;ectc51529.2024.00321-F1-s12;ectc51529.2024.00321-F1-s13;ectc51529.2024.00321-F1-s14;ectc51529.2024.00321-F1-s15", change: "molding split into per-TV delta rows: a liquid compression; b/c/d film EMC lamination (Fig. 4); e EMC-type split", reason: "p.2 Sec. III.A, p.3 Sec. III.D, p.4 Sec. III.E (review B miss 2)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00321-F1-s16;ectc51529.2024.00321-F1-s17;ectc51529.2024.00321-F1-s18;ectc51529.2024.00321-F1-s19", change: "PMC now delta rows for b, c, d, e; removed from tv a", reason: "PMC stated only for Fig. 4 film panels (p.2 Sec. III.A) and liquid panel (p.3 Sec. III.D); not stated for the final build"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00321-F1-s20;ectc51529.2024.00321-F1-s21;ectc51529.2024.00321-F1-s22;ectc51529.2024.00321-F1-s23", change: "grind, dielectric patterning, SAP RDL, seed etch are delta rows of tv a; RDL L/S moved from conditions to target", reason: "Only the final build received RDL (p.4 Sec. III.E)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00321-F1", change: "deleted former step F1-s15 (inspection: in-plane Cu width by optical microscope at 147 points; cross-section SEM); method added to metrics a-m8/a-m9 condition", reason: "post-build measurement, not a step; values already in a-m5..a-m9"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00321-F1", change: "all rows: step_basis set; step ids renumbered", reason: "schema v2.4 re-pass"}

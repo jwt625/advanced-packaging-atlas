@@ -1,0 +1,60 @@
+paper_id: ectc51529.2024.00096
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00096/text.md
+  - references/ectc51529.2024.00096/source.json
+  - references/ectc51529.2024.00096/figures/cand/p01_fig1.png
+  - references/ectc51529.2024.00096/figures/cand/p02_fig2.png
+  - references/ectc51529.2024.00096/figures/cand/p02_fig3.png
+  - references/ectc51529.2024.00096/figures/cand/p03_fig5.png
+  - references/ectc51529.2024.00096/figures/cand/p03_fig6.png
+  - references/ectc51529.2024.00096/figures/cand/p03_fig7.png
+  - references/ectc51529.2024.00096/figures/cand/p04_fig8.png
+  - references/ectc51529.2024.00096/figures/cand/p04_fig9.png
+figure_reading_method: >-
+  Candidate crops for all figures; 400-600 dpi re-crops of Fig. 6(A) (0.8 um label) and Fig. 5 (SEM CD labels
+  illegible, not used). Fig. 7 medians read from log-axis pixel positions (decade ~203 px), +/-10%.
+entries:
+  - {table: metrics, row_id: ectc51529.2024.00096-a-m1, field: value, value: 9, unit: ohm/mm, basis: measured, locator: "p.3 Fig. 7 (left)", note: "LELE CDF steep section at ~9 ohm/mm"}
+  - {table: metrics, row_id: ectc51529.2024.00096-b-m1, field: value, value: 6, unit: ohm/mm, basis: measured, locator: "p.3 Fig. 7 (left)", note: "greyscale CDF steep section at ~6 ohm/mm"}
+  - {table: stack_layers, row_id: ectc51529.2024.00096-a-L01, field: line_um, value: 2, unit: um, basis: design_target, locator: "p.3 Fig. 7; p.4 Sec. V", note: "Fig. 7 label 'Pitch = 4 um', text 2 um line/space"}
+derived:
+  - {table: stack_layers, row_id: ectc51529.2024.00096-a-L02, field: thickness_um, value: 0.05, formula: "500 A x 1e-4 um/A", inputs: "p.2 Fig. 2 'SiN 500A'"}
+  - {table: stack_layers, row_id: ectc51529.2024.00096-a-L04, field: thickness_um, value: 0.05, formula: "500 A x 1e-4 um/A", inputs: "p.2 Fig. 2 'SiN 500A'"}
+  - {table: process_steps, row_id: ectc51529.2024.00096-F1-s03, field: thickness_um, value: 0.05, formula: "500 A x 1e-4", inputs: "p.2 Fig. 2"}
+  - {table: process_steps, row_id: ectc51529.2024.00096-F1-s06, field: thickness_um, value: 0.05, formula: "500 A x 1e-4", inputs: "p.2 Fig. 2"}
+  - {table: process_steps, row_id: ectc51529.2024.00096-F2-s02, field: time_s, value: 120, formula: "2 min x 60", inputs: "p.3 Sec. IV"}
+  - {table: process_steps, row_id: ectc51529.2024.00096-F2-s06, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.3 Sec. IV"}
+conflicts:
+  - {table: stack_layers, row_id: ectc51529.2024.00096-b-L04, field: material, values: ["Cu/Ti", "Al"], locators: ["p.3 Sec. IV", "p.1 Fig. 1 schematic"], chosen: "Cu/Ti", why: "text describing the greyscale wafer beats generic schematic; Al bottom electrode stated only for LELE"}
+  - {table: metrics, row_id: ectc51529.2024.00096-a-m4, field: value_text, values: ["devices >100 ohm excluded as non-yielding", "CDF extends to ~1e4 ohm"], locators: ["p.4 Sec. V", "p.4 Fig. 8"], chosen: "plotted range", why: "measured plot; text exclusion noted"}
+  - {table: metrics, row_id: ectc51529.2024.00096-c-m1, field: locator, values: ["text: 'Fig. 8 inset', 'Fig. 8 shows the relative current density'", "caption Fig. 9"], locators: ["p.4 Sec. V", "p.4 Fig. 9"], chosen: "Fig. 9", why: "caption label (rule c)"}
+excluded:
+  - "LELE further processing details in ref [2] (Hsiang-Yao et al., EPTC 2023)"
+  - "Greyscale dual damascene demonstrations of refs [3], [4]; material screening details in ref [5]"
+  - "Screening targets (coat <5 um, resolution <2 um, sidewall >70 deg, cure <250 C, shrink <15%, modulus >1.5, Dk <3): criteria, not measured properties of the chosen PI"
+  - "DLT capability claim of 2 um with roadmap to sub-micron (vendor statement)"
+  - "Table I qualitative comparison of SAP/LELE/greyscale (no numbers)"
+not_reported:
+  - components (wafer-level coupons, no dies)
+  - electrical_interfaces, optical_interfaces
+  - polyimide product names, Dk/Df/CTE/modulus of the chosen polymers
+  - barrier/seed and Cu thicknesses; Al/Cu-Ti/SiO2 thickness for greyscale TV; cure conditions for LELE polymers
+  - DLT exposure doses and wavelength; RIE power/pressure; CMP conditions
+  - number of devices per CDF; BTS duration
+  - "process_steps: ectc51529.2024.00096-c (capacitor coupon build sequence not described; only the with/without Ti barrier split, p.4 Sec. V)"
+source_quality:
+  - "Text cites Fig. 8 for the capacitor BTS data that the caption labels Fig. 9."
+  - "Fig. 5 SEM CD labels are too small to read at the cached resolution."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00096-F1;ectc51529.2024.00096-F2", change: "flow names/locators/notes cleaned", reason: "repass"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00096-F1-s01;ectc51529.2024.00096-F1-s02;ectc51529.2024.00096-F1-s04;ectc51529.2024.00096-F1-s05", change: "thickness_um 1 (approx) moved from coat rows to cure rows (stated as post-cure thickness)", reason: "p.2 Sec. III '~1um thickness post-cure'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00096-F1-s07;ectc51529.2024.00096-F1-s09", change: "Fig. 2 1 um labels moved from notes to target; s07 adds the 1-10 um pitch test-structure range", reason: "rule 7: stated dimensions on the step (p.2 Fig. 2; p.2 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00096-F1-s01..s14", change: "step_basis stated_in_flow (s11 inferred_order); SiN 'low-temperature CVD' in conditions", reason: "Fig. 2 steps 1-8; p.2 Sec. III"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00096-F2-s02", change: "category other -> lithography (post-apply bake of the photosensitive PI)", reason: "p.3 Sec. IV"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00096-F2-s03", change: "deleted (design-to-size resolution test)", reason: "litho setup test, not a build step; bias values already in metrics b-m9, b-m10; resulting design pre-bias moved to F2-s04 conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00096-F2-s04", change: "target 2/2 um L/S and 1-5 um vias; dose choice and design pre-bias added to conditions", reason: "p.3 Sec. IV; p.4 Sec. V"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00096-F2-s06", change: "atmosphere air (ambient), temp_c_max 250, thickness_in_um 3.3 / thickness_um 3 (approx; moved from result)", reason: "p.3 Sec. IV"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00096-F2-s09;ectc51529.2024.00096-F2-s10", change: "post-CMP top-down inspection split from CMP into new inline_inspection row s10 (result moved)", reason: "p.3 Sec. IV places it after CMP"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00096-F1-s09", change: "target: '1 um via opening (Fig. 2 label)' -> '1 um via opening (Fig. 2 label); Kelvin test vias incl. 5 um diameter (Sec. V)'; locator: + 'p.4 Sec. V'; notes: '' -> 'Only the 5 um LELE vias yielded (Sec. V); other designed via sizes not listed for LELE.'", reason: "pass B target_missing a-i1: p.4 Sec. V 'LELE via resistance varies across wafer with only 5 um dimensions yielding'"}

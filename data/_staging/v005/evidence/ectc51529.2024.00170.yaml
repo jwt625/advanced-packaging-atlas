@@ -1,0 +1,49 @@
+paper_id: ectc51529.2024.00170
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00170/text.md
+  - references/ectc51529.2024.00170/source.json
+  - references/ectc51529.2024.00170/figures/page_01.png
+  - references/ectc51529.2024.00170/figures/page_02.png
+  - references/ectc51529.2024.00170/figures/page_03.png
+  - references/ectc51529.2024.00170/figures/page_04.png
+  - references/ectc51529.2024.00170/figures/cand/p02_fig1.png
+  - references/ectc51529.2024.00170/figures/cand/p02_fig3a.png
+  - references/ectc51529.2024.00170/figures/cand/p02_fig4.png
+  - references/ectc51529.2024.00170/figures/cand/p03_tablei.png
+  - references/ectc51529.2024.00170/figures/cand/p04_fig10.png
+figure_reading_method: >-
+  Page renders plus re-crops of Fig. 3 and Fig. 8 (150 dpi) and Fig. 10 (400 dpi). Fig. 8(a) droop values are printed
+  labels (143 mV, 129 mV). Fig. 10 efficiency markers read against 5-point gridlines (~15 px per point at 400 dpi),
+  +/-0.5 point. Fig. 2 and Fig. 9 log-scale impedance curves not digitized; text values used.
+entries:
+  - {table: metrics, row_id: ectc51529.2024.00170-a-m1, field: value, value: 143, unit: mV, basis: measured, locator: "p.3 Fig. 8(a)", note: "printed label on M1 droop arrow"}
+  - {table: metrics, row_id: ectc51529.2024.00170-b-m1, field: value, value: 129, unit: mV, basis: measured, locator: "p.3 Fig. 8(a)", note: "printed label on M2 droop arrow"}
+  - {table: test_vehicles, row_id: ectc51529.2024.00170-b, field: package_thickness_mm, value: 4.5, unit: mm, basis: design_target, locator: "p.2 Sec. III; p.2 Fig. 4", note: "text 'approximately 4.5 mm'; abstract '5 mm or less'"}
+derived: []
+conflicts: []
+excluded:
+  - ">1000 A accelerator current demand and VPD concept attributed to refs [1]-[5]"
+  - "Voltage droop dependence on PDN impedance attributed to refs [6,7]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - RDL layer count, dielectric and Cu thicknesses, via and PTH dimensions, core material and thickness
+  - Cu pin dimensions and pitch; module-to-board interconnect type (balls drawn in Fig. 4 unlabelled)
+  - conventional (M1) substrate dimensions; inductor values; MLCC counts; switching frequency, Vin
+  - whether Fig. 2/Fig. 9 impedances are measured or simulated; sample counts; reliability data
+  - meaning of the '1 mm' annotation in Fig. 3(a) (not entered)
+  - "process_steps: ectc51529.2024.00170-a (M1 module assembly not described as steps; only structure: two substrates stacked by Cu pin connection, Sec. III)"
+  - "process_steps: ectc51529.2024.00170-b (M2 module assembly not described as steps; only structure: two substrates stacked by Cu pin connection, Sec. III)"
+  - "process_steps: ectc51529.2024.00170-c (M3 module assembly not described as steps; only structure: two substrates stacked by Cu pin connection, Sec. III)"
+  - "process_steps: ectc51529.2024.00170-d (M4 module assembly not described as steps; only structure: two substrates stacked by Cu pin connection, Sec. III)"
+source_quality:
+  - "Affiliation lines in text.md are font-garbled ('0XUDWD...' = Murata ...); read from page render."
+  - "Candidate p03_fig7 merges Fig. 7 with the Fig. 8 caption; Fig. 8 had no candidate (manual crop)."
+revisions:
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00170-F1", change: "tv_ids 'ectc51529.2024.00170-e' -> 'ectc51529.2024.00170-e;ectc51529.2024.00170-f'", reason: "Sec. II iPaS construction applies to the 1 mF iPaS example of Fig. 2 (TV f) as well"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00170-F1-s04", change: "category 'other' -> 'rdl_layer'; conditions '' -> 'laser via connection'; step 'construct several RDL on top and bottom sides with laser via connection' -> 'construct several RDL on top and bottom sides'", reason: "category (v2.4 rdl_layer); laser via as written"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00170-F1", change: "step_basis stated_in_flow set on 4 steps (others as revised)", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00170", change: "process_flow_level ordered confirmed (Sec. II order, no conditions); M1-M4 listed in not_reported", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00170-F1-s01", change: "category other kept; note added", reason: "cavity-forming method not stated (p.2 Sec. II); no matching category"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00170-F1-s03", change: "category other kept; note added", reason: "resin sealing method not stated (p.2 Sec. II); molding/lamination would be invented"}

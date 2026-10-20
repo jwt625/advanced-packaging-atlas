@@ -1,0 +1,243 @@
+org_name,locality,country,verdict,wikidata_search,nominatim_query,locality_fix,confidence,reason
+TSMC,Hsinchu,TW,ok,,,,high,TSMC Fab 7 in Hsinchu Science Park; printed addresses are in Hsinchu Science Park
+imec,Leuven,BE,ok,,,,high,"imec Kapeldreef 75 campus, matches printed address"
+A*STAR Institute of Microelectronics,Singapore,SG,weak,Institute of Microelectronics,"2 Fusionopolis Way, Singapore 138634",,high,"city fallback; printed address 2 Fusionopolis Way, Innovis #08-02, Singapore 138634"
+Intel,"Chandler, AZ",US,ok,,,,high,Intel Chandler campus
+CEA-Leti,Grenoble,FR,ok,,,,medium,"point on CEA Grenoble Presqu'ile campus; Wikidata item has no English label, set source_label manually"
+ASE,Kaohsiung,TW,ok,,,,high,"ASE K11 in Nanzih Technology Industrial Park (former Nanzih EPZ), matches printed Nanzih address"
+Intel,Chandler,US,ok,,,,high,Intel Chandler campus
+Resonac Corporation,Kawasaki,JP,weak,,,,low,"city fallback; Packaging Solution Center building not printed, not identified offline"
+Sony Semiconductor Solutions Corporation,Kanagawa,JP,weak,,ソニー 厚木テクノロジーセンター,,medium,"prefecture centroid; Sony Semiconductor Solutions HQ is Atsugi Technology Center, Kanagawa"
+Samsung Electronics,Cheonan-si,KR,weak,,삼성전자 천안캠퍼스,,medium,city fallback; Samsung Cheonan campus (TSP/AVP packaging site)
+Intel,"Hillsboro, Oregon",US,ok,,,,high,"Intel Ronler Acres, Hillsboro"
+IBM,Kawasaki,JP,weak,,"IBM, Shin-Kawasaki, Kawasaki",,low,"city fallback; IBM Research - Tokyo is in Kawasaki, building not printed"
+Intel,,US,wrong,,,,high,"no city printed; Austin office is arbitrary. Split: 00051-a10 Oregon, 00187-a07 Arizona; iedm45625 rows unresolved"
+Applied Materials,"Santa Clara, CA",US,ok,,,,high,Applied Materials Santa Clara (Bowers Ave) campus; 28.7 km is from a county-centroid locality centre
+Intel,"Hillsboro, OR",US,ok,,,,high,"Intel Ronler Acres, Hillsboro"
+Georgia Institute of Technology,Atlanta,US,ok,,,,high,Georgia Tech main campus
+"University of California, Los Angeles","Los Angeles, CA",US,ok,,,,high,UCLA Westwood campus
+Georgia Institute of Technology,"Atlanta, GA",US,ok,,,,high,Georgia Tech main campus
+JOINT2,Kawasaki,JP,weak,,,,low,"city fallback; JOINT2 printed with Resonac Kawasaki, building not identified offline"
+ASE,Kaohsiung City,TW,unresolved,,,Kaohsiung,high,"'Kaohsiung City' fails settlement lookup; printed Nanzih EPZ, merges with ASE Kaohsiung site"
+Intel,"Chandler, Arizona",US,ok,,,,high,Intel Chandler campus
+Amkor Technology,Incheon,KR,ok,,,,high,"Amkor K5 Songdo, Incheon; R&D centre site"
+Corning Incorporated,"Corning, NY",US,ok,,,,medium,"Corning HQ, Corning NY; R&D (Sullivan Park) is a few km away"
+IBM,Bromont,CA,ok,,,,high,IBM Bromont plant
+Murata Manufacturing,Kyoto,JP,ok,,,,high,"Murata HQ, Nagaokakyo, Kyoto prefecture"
+EV Group,St. Florian am Inn,AT,ok,,,,high,"EV Group HQ, St. Florian am Inn"
+nepes,"San Diego, CA",US,weak,,"9808 Scranton Road, San Diego, CA 92121",,high,"city fallback; printed address 9808 Scranton Road, San Diego, CA 92121"
+nepes,"Binan, Laguna",PH,weak,,"Laguna Technopark, Binan, Laguna",,high,"city fallback; printed 100 East Main Ave, Laguna Technopark, Binan"
+IBM,"Yorktown Heights, NY",US,weak,Thomas J. Watson Research Center,"Thomas J. Watson Research Center, Yorktown Heights",,high,city fallback; unit IBM T. J. Watson Research Center
+Tohoku University,Sendai,JP,ok,,,,high,"Tohoku University (Katahira), Sendai"
+nepes,Cheongju,KR,weak,,"Gwahaksaneop 3-ro, Ochang-eup, Cheongju",,medium,city fallback; nepes Ochang address printed in ectc32696.2021.00174
+Samsung Electronics,"Chonan-Si, Chungcheongnam-do",KR,weak,,삼성전자 천안캠퍼스,,medium,city fallback; Samsung Cheonan campus; Chonan is a Cheonan spelling variant
+Samsung Electronics,Hwaseong-si,KR,ok,,,,high,Samsung Hwaseong campus
+Samsung Electronics,Yongin Si,KR,ok,,,,high,"Samsung Giheung campus, Yongin"
+MediaTek,Hsinchu,TW,ok,,,,high,"MediaTek HQ, Hsinchu Science Park"
+Electronics and Telecommunications Research Institute,Daejeon,KR,ok,,,,high,ETRI Daejeon
+Fraunhofer IZM,Berlin,DE,ok,,,,high,Fraunhofer IZM Berlin (13355 printed)
+Xperi Corporation,San Jose,US,ok,,,,low,no facility named in print or known offline; city centre appropriate
+GlobalFoundries,"Hopewell Junction, NY",US,weak,,"GlobalFoundries, East Fishkill",,medium,city fallback; GF Fab 10 East Fishkill campus is in Hopewell Junction
+TSMC,,TW,weak,,,,medium,"no address printed; Fab 7 in Hsinchu Science Park stands for HQ, not a printed site"
+"Institute of Microelectronics, Chinese Academy of Sciences",Beijing,CN,weak,Institute of Microelectronics of the Chinese Academy of Sciences,中国科学院微电子研究所,,medium,"city fallback; IME CAS, Beijing 100029 printed (Chaoyang)"
+"Ajinomoto Fine-Techno Co., Inc.",Kanagawa,JP,weak,,"味の素ファインテクノ, 川崎市",,low,"prefecture centroid; Ajinomoto Fine-Techno site believed in Kawasaki, not printed"
+Intel,Hillsboro,US,ok,,,,high,"Intel Ronler Acres, Hillsboro"
+Samsung Electronics,Chonan-Si,KR,weak,,삼성전자 천안캠퍼스,,medium,city fallback; Samsung Cheonan campus; Chonan spelling variant
+Applied Materials,"Albany, NY",US,ok,,,,high,Applied Materials META Center at Albany NanoTech
+SK hynix,Ichon-si,KR,wrong,,,Icheon-si,high,'Ichon-si' matched a settlement ~120 km from Icheon; same SK hynix Icheon campus as other rows
+SK hynix,Icheon,KR,ok,,,,high,"SK hynix Icheon campus, Bubal-eup"
+SPIL,Taichung,TW,weak,,"矽品精密工業, 潭子區, 臺中市",,medium,"city fallback; printed No. 153 Sec. 3 Chung-Shan Rd, Tantzu, Taichung 427"
+Adeia Inc.,"San Jose, CA",US,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Tokyo Institute of Technology,Kanagawa,JP,wrong,,"Suzukakedai Campus, Yokohama",,medium,"Ookayama (Tokyo) chosen; printed Kanagawa = Suzukakedai campus, Yokohama"
+Applied Materials,"Santa Clara, California",US,ok,,,,high,Applied Materials Santa Clara campus
+"Sumitomo Electric Industries, Ltd.",Kanagawa,JP,weak,,住友電気工業 横浜製作所,,medium,prefecture centroid; Sumitomo Electric Kanagawa R&D is Yokohama Works
+IBM,"Albany, NY",US,wrong,,"Albany NanoTech Complex, Fuller Road, Albany",,high,historic downtown 'IBM Building' office; IBM Research Albany is at Albany NanoTech
+SCHMID Group,Freudenstadt,DE,weak,,"Gebr. Schmid, Freudenstadt",,medium,city fallback; SCHMID Group HQ (Gebr. SCHMID GmbH) in Freudenstadt
+USHIO Inc.,Gotenba,JP,weak,,ウシオ電機 御殿場事業所,,medium,"city fallback; printed 1-90 Komakado, Gotenba 412-0038 (USHIO Gotenba division)"
+Amkor Technology,Vila do Conde,PT,ok,,,,high,"Amkor Portugal, Vila do Conde"
+Deca Technologies,"Tempe, AZ",US,weak,,"7855 River Parkway, Tempe, AZ 85284",,high,"city fallback; printed 7855 River Parkway, STE 250, Tempe, AZ 85284"
+Applied Materials,Singapore,SG,ok,,,,medium,"Applied Materials Singapore, Upper Changi Road North"
+National Institute of Advanced Industrial Science and Technology,Tsukuba,JP,ok,,,,high,AIST Tsukuba
+Samsung Electronics,"Cheonan-si, Chungcheongnam-Do",KR,weak,,삼성전자 천안캠퍼스,,medium,city fallback; Samsung Cheonan campus
+China Academy of Engineering Physics,Mianyang,CN,weak,,"中国工程物理研究院, 绵阳市",,low,city fallback; CAEP Mianyang 621999 printed; campus not identified offline
+Powerchip Semiconductor Manufacturing Corporation,Hsinchu,TW,weak,,"力晶, 新竹科學園區",,low,city fallback; PSMC HQ in Hsinchu Science Park
+Pennsylvania State University,University Park,US,wrong,,,"University Park, PA",high,"'University Park' matched University Park, Texas; Penn State resolves once state added"
+Marvell Technology,Santa Clara,US,ok,,,,high,"Marvell HQ, Santa Clara"
+China Academy of Engineering Physics,Chengdu,CN,weak,,,,low,"city fallback; Microsystem and Terahertz Research Center, Chengdu 610200, site not identified offline"
+Tsinghua University,Beijing,CN,ok,,,,high,Tsinghua main campus
+Intel,"Santa Clara, CA",US,wrong,,"Robert Noyce Building, Santa Clara",,medium,label is McAfee building; Intel HQ is the Robert Noyce Building nearby
+IBM,Albany,US,wrong,,"Albany NanoTech Complex, Fuller Road, Albany",,high,downtown 'IBM Building'; IBM Research - Albany is at Albany NanoTech
+ASE,Austin,US,wrong,,"Austin, Texas",,medium,UT Aerospace Engineering Building (ASE acronym); ASE US site not identified; force city centre
+Resonac Corporation,"Kawasaki, Kanagawa",JP,weak,,,,low,city fallback; Resonac Kawasaki building not identified offline
+Celestial AI,Santa Clara,US,wrong,,"Santa Clara, Santa Clara County, California",,medium,"point is Santa Clara County centroid, 25 km south of the city"
+Purdue University,"West Lafayette, IN",US,ok,,,,high,Purdue West Lafayette campus
+Micron Technology,"Boise, Idaho",US,ok,,,,high,"Micron HQ campus, Boise"
+Intel,Hsinchu,TW,ok,,,,medium,Intel Hsinchu office
+Unimicron,Hsinchu,TW,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Sciperio,Orlando,US,ok,,,,low,no facility named in print or known offline; city centre appropriate
+SK hynix,Icheon-si,KR,ok,,,,high,SK hynix Icheon campus
+Shanghai Institute of Microsystem and Information Technology,Shanghai,CN,ok,,,,high,SIMIT Changning campus; Shanghai 200050 printed
+nepes,"Cheongju-si, Chungbuk",KR,weak,,"Gwahaksaneop 3-ro, Ochang-eup, Cheongju",,high,"city fallback; printed 116 Gwahaksaneop 3-ro, Ochang-eup, Cheongju-si"
+Samsung Electronics,"Hwaseong-si, Gyeonggi-do",KR,ok,,,,high,"Samsung Hwaseong campus; printed 1 Samsungjeonja-ro, 18448"
+Mitsubishi Electric Corporation,Hyogo,JP,wrong,,"三菱電機 先端技術総合研究所, 尼崎市",,low,Mitsubishi Electric Mobility (subsidiary) Sanda site; actual Hyogo site not printed
+Corning Incorporated,Asan,KR,weak,,,,low,city fallback; Corning Technology Center Korea site in Asan not identified offline
+"Shinko Electric Industries Co., Ltd.",Nagano,JP,weak,,"新光電気工業, 長野市",,medium,prefecture centroid; Shinko HQ is in Nagano city
+DuPont,"Marlborough, MA",US,ok,,,,high,"DuPont (former Shipley) campus, Marlborough"
+"Taiyo Ink Mfg. Co., Ltd.",Saitama,JP,weak,,"太陽インキ製造, 嵐山町",,low,"prefecture-area point; Taiyo Ink main site believed Ranzan, Saitama; not printed"
+nepes,"Cheongan-myeon, Goesan-gun",KR,ok,,,,medium,"township centre; printed 13-4 Jocheon-ri, Cheongan-myeon, within a few km"
+Research Foundation for the State University of New York,"Albany, NY",US,weak,,"Albany NanoTech Complex, Fuller Road, Albany",,medium,"RF SUNY downtown office; same block as SUNY Poly, authors at Albany NanoTech"
+SUNY Polytechnic Institute,"Albany, NY",US,ok,,,,high,CNSE / Albany NanoTech complex
+IBM,"East Fishkill, NY",US,weak,,"IBM East Fishkill, Hopewell Junction",,low,city fallback; IBM East Fishkill site (shared with GF Fab 10)
+"University of California, Los Angeles",Los Angeles,US,ok,,,,high,UCLA Westwood campus
+LightSpeed Photonics Private Limited,Singapore,SG,weak,,"111 Somerset Road, Singapore 238164",,high,"city fallback; printed 111 Somerset Road, #08-10A, Singapore 238164"
+Unimicron,Hsinchu County,TW,ok,,,,low,no facility named in print or known offline; city centre appropriate
+"ULVAC, Inc.",Kanagawa,JP,weak,,"アルバック, 茅ヶ崎市",,medium,"prefecture centroid; printed 253-8543 = ULVAC HQ, Chigasaki"
+"Taiyo Ink Mfg. Co., Ltd.",,JP,unresolved,,,,high,no address printed; no identifiable site
+University of Chinese Academy of Sciences,Beijing,CN,ok,,,,high,UCAS Yuquan Road campus; Beijing 100049 printed
+AP Memory,Hsinchu,TW,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Xilinx,"San Jose, CA",US,ok,,,,high,"Xilinx campus, 2100 Logic Drive printed"
+Dai Nippon Printing,Kashiwa,JP,weak,,,,low,city fallback; DNP Kashiwa facility not identified offline
+IBM,"Bromont, Quebec",CA,ok,,,,high,IBM Bromont plant
+ELSPES,"Hwaseong, Gyeonggi",KR,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Mitsubishi Materials Corporation,Hyogo-ken,JP,weak,,三菱マテリアル 三田工場,,low,prefecture centroid; Mitsubishi Materials Hyogo site not printed
+DuPont,Miaoli,TW,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Mitsubishi Electric Corporation,Kanagawa,JP,weak,,"三菱電機 情報技術総合研究所, 鎌倉市",,low,prefecture centroid; Mitsubishi Electric Kanagawa site not printed
+AOI Electronics,Takamatsu,JP,weak,,"アオイ電子, 高松市",,low,city fallback; AOI Electronics HQ is in Takamatsu
+Dai Nippon Printing,Chiba,JP,weak,,,,low,city/prefecture fallback; DNP Chiba facility not identified offline
+Resonac Corporation,Ibaraki,JP,weak,,,,low,prefecture-level point; Resonac Ibaraki site not printed
+Corintis SA,Lausanne,CH,weak,,"EPFL Innovation Park, Lausanne",,low,"city fallback; Corintis is an EPFL spin-off, site not printed"
+Nopion,Suwon,KR,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Korea Electronics Technology Institute,Seongnam,KR,ok,,,,high,KETI Seongnam (Pangyo)
+GlobalFoundries,"Malta, NY",US,ok,,,,high,"GF Fab 8, Luther Forest Technology Campus, Malta"
+Analog Photonics,"Boston, MA",US,ok,,,,medium,"Analog Photonics, Boston"
+IBM,,US,wrong,,,NY,medium,"Durham NC office; printed 'IBM Systems, NY, U.S.A.' (state only)"
+SK hynix,Seoul-si,KR,unresolved,,,Seoul,high,'Seoul-si' fails settlement lookup; site in Seoul not identifiable
+National Institute of Advanced Industrial Science and Technology,Tsukuba-shi,JP,ok,,,,high,AIST Tsukuba
+STMicroelectronics,Singapore,SG,wrong,,"629 Lorong 4/6 Toa Payoh, Singapore 319521",,high,"Loyang plant chosen; printed address is 629 Lorong 4/6 Toa Payoh, Singapore 319521"
+Fraunhofer IZM,Dresden,DE,weak,,"Fraunhofer IZM-ASSID, Moritzburg",,medium,city fallback; IZM-ASSID (unit printed) is in Moritzburg near Dresden
+Peking University,Beijing,CN,wrong,,"北京大学软件与微电子学院, 大兴区",,medium,"Yanyuan main campus; printed School of Software and Microelectronics, Beijing 102600 (Daxing)"
+nepes,San Diego,US,weak,,"9808 Scranton Road, San Diego, CA 92121",,medium,city fallback; nepes San Diego address printed in ectc32696.2021.00174
+nepes,Chungcheongbuk-do,KR,weak,,,,medium,province centroid; printed province only
+AOI Electronics,Kagawa,JP,weak,,"アオイ電子, 高松市",,low,"prefecture centroid; AOI Electronics HQ is in Takamatsu, Kagawa"
+Yield Engineering Systems,"Chandler, Arizona",US,ok,,,,low,no facility named in print or known offline; city centre appropriate
+The University of Tokyo,Chiba,JP,wrong,,"Kashiwa Campus, University of Tokyo, Kashiwa",,high,Hongo (Tokyo) chosen; printed Chiba with issp email = Kashiwa campus
+Renesas Electronics Corporation,Taichung,TW,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Université de Sherbrooke,Sherbrooke,CA,ok,,,,high,Universite de Sherbrooke main campus
+CNRS,Sherbrooke,CA,weak,Université de Sherbrooke,,,high,"city fallback; LN2 printed in same block as 3IT, Universite de Sherbrooke; co-locate"
+Sony Semiconductor Manufacturing Corporation,Kumamoto,JP,weak,,"Kumamoto Technology Center, Kikuyo",,medium,city fallback; Sony Semiconductor Manufacturing Kumamoto TEC in Kikuyo
+Gigaphoton,Tochigi,JP,weak,,"ギガフォトン, 小山市",,medium,"prefecture centroid; Gigaphoton HQ is in Oyama, Tochigi"
+Ableprint Technology Co. Ltd.,Hsinchu,TW,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Microsoft Corporation,"Redmond, WA",US,weak,Microsoft Redmond campus,"Microsoft Campus, Redmond",,medium,city fallback; Microsoft Redmond campus
+Hanyang University,Seoul,KR,ok,,,,high,Hanyang Seoul campus
+Technische Universität Berlin,Berlin,DE,ok,,,,high,TU Berlin main campus
+ASM International,Leuven,BE,weak,,"Kapeldreef 75, Leuven",,high,"city fallback; printed 'ASM, Belgium, Kapeldreef 75, Leuven' (at imec)"
+Pennsylvania State University,State College,US,ok,,,,high,Penn State University Park campus
+Ajinomoto Fine-Techno USA Corporation,Cupertino,US,ok,,,,low,no facility named in print or known offline; city centre appropriate
+National Taiwan University,Taipei City,TW,ok,,,Taipei,medium,NTU main campus; 'Taipei City' fails settlement lookup so no distance check ran
+Showa Denko Materials,Kawasaki,JP,weak,,,,low,city fallback; Packaging Solution Center building not identified offline
+nepes hayyim,Laguna,PH,weak,,"Laguna Technopark, Binan, Laguna",,medium,province centroid; nepes Laguna Technopark address printed in other nepes papers
+IBM,"Yorktown Heights / Albany, NY",US,unresolved,Thomas J. Watson Research Center,"Thomas J. Watson Research Center, Yorktown Heights","Yorktown Heights, NY",medium,two cities printed; unit is T. J. Watson Research Center (Yorktown Heights)
+nepes hayyim,Binan,PH,weak,,"Laguna Technopark, Binan, Laguna",,medium,city fallback; nepes Laguna Technopark address printed in other nepes papers
+Unimicron,Taoyuan,TW,ok,,,,medium,"Unimicron plant, Luzhu, Taoyuan"
+"Shinko Electric Industries Co., Ltd.",,JP,unresolved,,,,high,only 'Japan' printed; no identifiable site
+STMicroelectronics,Agrate,IT,wrong,,"STMicroelectronics, Agrate Brianza",Agrate Brianza,high,'Agrate' matched Agrate Conturbia (Novara); ST site is Agrate Brianza
+Aalto University,Espoo,FI,ok,,,,high,"Aalto Otaniemi campus, 02150 Espoo printed"
+"University of California, San Diego","La Jolla, CA",US,ok,,,,high,"UC San Diego, La Jolla"
+Beijing National Research Center for Information Science and Technology,Beijing,CN,weak,Tsinghua University,,,high,city fallback; BNRist is hosted at Tsinghua University; co-locate
+SK hynix,San Jose,US,ok,,,,high,"SK hynix America, North 1st Street, San Jose"
+Deca Technologies,Tempe,US,weak,,"7855 River Parkway, Tempe, AZ 85284",,medium,city fallback; Deca Tempe address printed in eptc53413.2021.9663896
+IBM,East Fishkill,US,weak,,"IBM East Fishkill, Hopewell Junction",,low,city fallback; IBM East Fishkill site
+"MEC Co., Ltd.",Amagasaki,JP,weak,,"メック株式会社, 尼崎市",,low,city fallback; MEC HQ in Amagasaki
+FICT LIMITED,Nagano,JP,weak,,,,low,prefecture centroid; printed 'Nagano' ambiguous; FICT site not identified offline
+Fukuoka University,Fukuoka,JP,ok,,,,high,Fukuoka University Nanakuma campus
+Fukuoka IST,Fukuoka,JP,weak,,"三次元半導体研究センター, 糸島市",,low,prefecture centroid; unit 3D semiconductor research center (Itoshima)
+A*STAR Institute of Materials Research and Engineering,Singapore,SG,weak,,"Innovis, Fusionopolis Way, Singapore",,medium,"city fallback; IMRE is in Innovis, Fusionopolis (same building as IME)"
+"University of California, Los Angeles","Los Angeles, California",US,ok,,,,high,UCLA Westwood campus
+Kulicke & Soffa,"Fort Washington, PA",US,ok,,,,high,"Kulicke & Soffa, Fort Washington PA"
+Intel,Livingston,GB,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Resonac Corporation,Kanagawa,JP,weak,,,,low,prefecture centroid; Resonac Kanagawa site not printed
+Resonac Corporation,Chiba,JP,weak,,,,low,city/prefecture fallback; Resonac Chiba site not printed
+Microsoft Corporation,"Mountain View, CA",US,weak,,"Microsoft Silicon Valley Campus, Mountain View",,medium,"city fallback; Microsoft Silicon Valley campus, Mountain View"
+Lightmatter,Arizona,US,weak,,,,high,state centroid; only 'Arizona' printed
+Asahi Kasei Corporation,Shizuoka,JP,weak,,"旭化成 富士支社, 富士市",,low,city fallback; Asahi Kasei Shizuoka site not printed (Fuji works likely)
+ASMPT,Yishun,SG,ok,,,,high,ASMPT 2 Yishun Avenue 7
+ASMPT,Tsing Yi,HK,ok,,,,medium,"ASMPT HQ, Tsing Yi"
+Thin Film Technology Corporation,"North Mankato, MN",US,ok,,,,low,no facility named in print or known offline; city centre appropriate
+DISCO Corporation,Tokyo,JP,weak,,"株式会社ディスコ, 大田区",,low,"city fallback; DISCO HQ in Ota-ku, Tokyo"
+Industrial Technology Research Institute,Hsinchu,TW,ok,,,,high,"ITRI Chung Hsing campus, Zhudong, Hsinchu"
+National Cheng Kung University,Tainan,TW,ok,,,,high,NCKU Tainan
+Showa Denko Materials,"Chikusei, Ibaraki",JP,weak,,"下館事業所, 筑西市",,medium,"city fallback; Laminate Materials R&D at Shimodate works, Chikusei"
+MediaTek,"San Jose, CA",US,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Amkor Technology,"Tempe, AZ",US,ok,,,,high,"Amkor HQ, ASU Research Park, Tempe"
+SK hynix,Dongtan-si,KR,ok,,,,low,Dongtan (Hwaseong) centre; no facility named in print or known offline; city centre appropriate
+SK hynix,Suwon-si,KR,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Pennsylvania State University,"University Park, PA",US,ok,,,,high,Penn State University Park campus
+Corning Incorporated,Corning,US,ok,,,,medium,"Corning HQ, Corning NY"
+Korea Advanced Institute of Science and Technology,Daejeon-si,KR,wrong,,,Daejeon,high,"'Daejeon-si' matched a place in Gyeongbuk, 190 km away; KAIST resolves with 'Daejeon'"
+AGC Inc.,,JP,wrong,,,,high,no city printed; Amagasaki factory is arbitrary; should be unresolved
+IBM,NY,US,weak,Thomas J. Watson Research Center,"Thomas J. Watson Research Center, Yorktown Heights",,high,state centroid; unit printed IBM Research - Watson Research Center
+Samsung Electronics,"San Jose, CA",US,ok,,,,high,"Samsung DSA, North 1st Street, San Jose"
+nepes,"Phoenix, AZ",US,ok,,,,low,no facility named in print or known offline; city centre appropriate
+IBM,Yorktown Heights,US,weak,Thomas J. Watson Research Center,"Thomas J. Watson Research Center, Yorktown Heights",,high,city fallback; unit IBM Research - Yorktown Heights
+Absolics,"Covington, Georgia",US,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Yield Engineering Systems,"Fremont, California",US,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Applied Materials,"Cambridge, MA",US,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Applied Materials,Taichung City,TW,unresolved,,,Taichung,high,'Taichung City' fails settlement lookup
+"Brewer Science, Inc.","Rolla, MO",US,weak,,"2401 Brewer Drive, Rolla, MO 65401",,high,"city fallback; printed 2401 Brewer Drive, Rolla, MO 65401"
+SUSS MicroTec Lithography GmbH,Sternenfels,DE,weak,,"Ferdinand-von-Steinbeis-Ring 10, 75447 Sternenfels",,high,"city fallback; printed Ferdinand-von-Steinbeis-Ring 10, 75447 Sternenfels"
+Spectronix Co.,Osaka,JP,ok,,,,low,no facility named in print or known offline; city centre appropriate
+The University of Tokyo,Tokyo,JP,ok,,,,high,University of Tokyo Hongo campus
+JOINT2,Shimodate,JP,unresolved,,"下館事業所, 筑西市","Chikusei, Ibaraki",high,Shimodate merged into Chikusei (2005); not a settlement in OSM
+Resonac Corporation,Shimodate,JP,unresolved,,"下館事業所, 筑西市","Chikusei, Ibaraki",high,Shimodate merged into Chikusei (2005); Resonac Shimodate works
+Murata Electronics North America Inc.,"San Jose, CA",US,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Renesas Electronics Corporation,Germering,DE,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Resonac Corporation,"Chikusei, Ibaraki",JP,weak,,"下館事業所, 筑西市",,medium,city fallback; Resonac Shimodate works in Chikusei
+Intel,Santa Clara,US,wrong,,"Robert Noyce Building, Santa Clara",,medium,label is McAfee building; Intel HQ is the Robert Noyce Building nearby
+Institute of Science Tokyo,Kanagawa,JP,wrong,,"Suzukakedai Campus, Yokohama",,medium,Ookayama (Tokyo) chosen; printed Kanagawa = Suzukakedai campus
+Micron Technology,Taichung,TW,weak,,,,low,city fallback; Micron Taichung site not identified offline
+Intel,Munich,DE,ok,,,,medium,"Intel Deutschland, Feldkirchen (Munich area)"
+WinTech Nano-Technology Services,Singapore,SG,ok,,,,low,no facility named in print or known offline; city centre appropriate
+AOI Electronics,Tokyo,JP,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Institute of Science Tokyo,Yokohama,JP,wrong,,"Suzukakedai Campus, Yokohama",,medium,Ookayama (Tokyo) chosen; printed Yokohama = Suzukakedai campus
+IBM,"Yorktown, NY",US,weak,Thomas J. Watson Research Center,"Thomas J. Watson Research Center, Yorktown Heights",,high,town centre; unit IBM Research - Watson Research Center
+Corning Incorporated,Berlin,DE,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Taiwan Foresight,"Jhubei City, Hsinchu County",TW,ok,,,,low,Jhubei centre; printed street line garbled; no facility named in print or known offline; city centre appropriate
+Applied Materials,,KR,unresolved,,,,high,only 'South Korea' printed; no identifiable site
+Resonac Corporation,"San Jose, CA",US,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Microsoft Corporation,"Hillsboro, OR",US,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Microsoft Corporation,Calgary,CA,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Microsoft Corporation,Nantes,FR,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Lightmatter,Boston,US,ok,,,,medium,"Lightmatter, downtown Boston"
+PHIX Photonics Assembly,Enschede,NL,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Amkor Technology,Arizona,US,weak,,,,high,state centroid; only 'Arizona' printed
+Micro Technology,Tokyo,JP,ok,,,,low,no facility named in print or known offline; city centre appropriate
+Embry-Riddle Aeronautical University,Daytona Beach,US,ok,,,,high,ERAU Daytona Beach campus
+"Ajinomoto Co., Inc.",Tokyo,JP,ok,,,,high,"Ajinomoto HQ, Chuo-ku, Tokyo"
+GlobalFoundries,"Burlington, VT",US,weak,,"GlobalFoundries Fab 9, Essex Junction",,medium,city fallback; GF Fab 9 is in Essex Junction near Burlington
+GlobalFoundries,"Santa Clara, CA",US,wrong,,"Santa Clara, Santa Clara County, California",,medium,"point is Santa Clara County centroid, 25 km south of the city"
+IBM,,JP,wrong,,,Kawasaki,medium,"Hiroshima office; unit IBM Research - Tokyo, printed with Kawasaki in 4 other papers"
+SK hynix,Hanam-si,KR,ok,,,,low,no facility named in print or known offline; city centre appropriate
+GlobalFoundries,Bangalore,IN,ok,,,,medium,"GlobalFoundries, Manyata Tech Park, Bengaluru"
+Qorvo,San Jose,US,ok,,,,medium,"Qorvo, Orchard Drive, North San Jose"
+nepes laweh,Cheongan-myeon,KR,ok,,,,medium,township centre; nepes Cheongan-myeon site within a few km
+Kobe University,Kobe-shi,JP,ok,,,,high,Kobe University Rokkodai
+Singapore Polytechnic,Singapore,SG,ok,,,,high,"Singapore Polytechnic, Dover Road"
+Technische Universität Dresden,Dresden,DE,ok,,,,high,TU Dresden main campus
+"ULVAC, Inc.",Chiba,JP,weak,,,,low,city/prefecture fallback; ULVAC Chiba site not printed
+Intel,,MY,weak,,,,medium,"no city printed; Kulim plant is one of two Intel Malaysia sites (Penang, Kulim)"
+iNEMI,Shanghai,CN,ok,,,,low,no facility named in print or known offline; city centre appropriate
+STMicroelectronics,Muar,MY,weak,,"STMicroelectronics, Tanjung Agas, Muar",,low,city fallback; ST Muar plant
+CEA-IRIG,Grenoble,FR,ok,,,,high,CEA Grenoble campus (IRIG item)
+University of Applied Science Berlin,Berlin,DE,weak,,,,low,HTW Berlin Wilhelminenhof building; printed name ambiguous (HTW or BHT)
+IBM,"Rochester, MN",US,ok,,,,high,IBM Rochester campus
+ASML,"Wilton, CT",US,ok,,,,high,"ASML Wilton, 77 Danbury Road"
+National Center for Advanced Packaging,Wuxi,CN,ok,,,,high,NCAP Wuxi
+Shanghai Aircraft Design and Research Institute,Shanghai,CN,weak,,上海飞机设计研究院,,medium,"city fallback; COMAC Shanghai Aircraft Design and Research Institute, Pudong"
+Apple,"Cupertino, CA",US,weak,,"Apple Park, Cupertino",,high,Apple Park Visitor Center point but precision recorded as city
+Sogang University,Seoul,KR,ok,,,,high,"Sogang University, Seoul 04107"
+JSR Corporation,Yokkaichi,JP,weak,,JSR 四日市工場,,medium,city fallback; printed Yokkaichi 510-8552 = JSR Yokkaichi plant
+Pennsylvania State University,"State College, PA",US,ok,,,,high,Penn State University Park campus
+KU Leuven,Leuven,BE,ok,,,,high,"KU Leuven, Leuven"
+ASM International,Helsinki,FI,ok,,,,low,no facility named in print or known offline; city centre appropriate
+KLA Corporation,Newport,GB,weak,,"SPTS Technologies, Newport",,medium,city fallback; KLA Newport site is SPTS Technologies
+SAIMEMORY Corp.,Tokyo,JP,ok,,,,low,no facility named in print or known offline; city centre appropriate

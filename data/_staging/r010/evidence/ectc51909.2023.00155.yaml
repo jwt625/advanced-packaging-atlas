@@ -54,3 +54,6 @@ not_reported:
 source_quality:
   - "text.md body garbled by a constant character shift (not flagged as garbled in source.json); each page also has a second garbled copy. Page renders are clean."
   - "Fig. 9 had no candidate; Fig. 1 has a spurious page-1 candidate (p01_fig1 is body text)."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00155-a-m1; ectc51909.2023.00155-b-m1, change: "none: kept both rows", reason: "genuine per-TV values: p.8 Table 13 lists TV1 and TV2 rows separately (3 each, 15/15 pass line A)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00155-a-m2; ectc51909.2023.00155-b-m2, change: "none: kept both rows", reason: "genuine per-TV values: p.8 Table 13 lists TV1 and TV2 rows separately (15/15 pass line B)"}

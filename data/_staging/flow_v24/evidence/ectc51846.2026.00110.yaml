@@ -1,0 +1,47 @@
+paper_id: ectc51846.2026.00110
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00110/text.md
+  - references/ectc51846.2026.00110/source.json
+  - references/ectc51846.2026.00110/figures/page_01.png
+  - references/ectc51846.2026.00110/figures/page_02.png
+  - references/ectc51846.2026.00110/figures/page_03.png
+  - references/ectc51846.2026.00110/figures/page_04.png
+  - references/ectc51846.2026.00110/figures/page_05.png
+  - references/ectc51846.2026.00110/figures/cand/p02_fig2.png
+  - references/ectc51846.2026.00110/figures/cand/p02_fig3.png
+  - references/ectc51846.2026.00110/figures/cand/p03_fig4.png
+  - references/ectc51846.2026.00110/figures/cand/p03_fig5.png
+  - references/ectc51846.2026.00110/figures/cand/p04_fig6.png
+  - references/ectc51846.2026.00110/figures/cand/p04_fig7.png
+figure_reading_method: >-
+  Candidate crops for Fig. 2-7 and page renders; Fig. 7 re-cropped at 400 dpi to read HTS/THS bars (+/-0.002) and
+  Delta markers (+/-0.02%) against gridlines.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00110-c-m3, field: value, value: 3.0, unit: "%", basis: measured, locator: "p.4 Fig. 7", note: "THS 500 h Delta marker at about the initial level; text gives no THS value"}
+  - {table: metrics, row_id: ectc51846.2026.00110-b-m4, field: value, value: -32.3, unit: dB, basis: measured, locator: "p.5 Sec. IV", note: "Fig. 5 point at 10 um for Delta 2.3% agrees (~-32)"}
+derived: []
+conflicts: []
+excluded:
+  - "UCIe shoreline bandwidth target 1317 GB/s/mm (ref [3])"
+  - "Residual-layer issue in imprint lithography (ref [4]); bending loss vs Delta dependence (ref [5]); polymer index drift (ref [6])"
+  - "Plasma etching / RIE post-processing (mentioned as options, not performed)"
+not_reported:
+  - electrical_interfaces
+  - glass type and thickness; waveguide core height; cladding structure of fabricated samples; residual layer thickness
+  - propagation loss, coupling loss, insertion loss values
+  - imprint resin products, mold material, cure conditions; THS bias (test named after bias-life standard, bias not stated)
+  - sample counts for crosstalk and reliability tests
+source_quality:
+  - "Fig. 8 caption duplicates Fig. 7 caption ('Refractive index variations...') though it plots bending loss vs Delta."
+revisions:
+  - {date: 2026-10-19, source: audit_x2A, row_id: "ectc51846.2026.00110-F4-s01", change: "performed: '' -> 'no'", reason: "audit_x2A defect 8: Fig. 6 flow 'is proposed' (p.3 Sec. III.A) and 'is expected to' reduce residual layer (p.4); not executed"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "ectc51846.2026.00110-F4-s02", change: "performed: '' -> 'no'", reason: "audit_x2A defect 8: Fig. 6 flow 'is proposed' (p.3 Sec. III.A) and 'is expected to' reduce residual layer (p.4); not executed"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "ectc51846.2026.00110-F4-s03", change: "performed: '' -> 'no'", reason: "audit_x2A defect 8: Fig. 6 flow 'is proposed' (p.3 Sec. III.A) and 'is expected to' reduce residual layer (p.4); not executed"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "ectc51846.2026.00110-F4-s04", change: "performed: '' -> 'no'", reason: "audit_x2A defect 8: Fig. 6 flow 'is proposed' (p.3 Sec. III.A) and 'is expected to' reduce residual layer (p.4); not executed"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00110-f04", change: "added Fig. 1 p.1 other (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00110-f05", change: "renumbered from ectc51846.2026.00110-f04 (rank 4 -> 5)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00110-f06", change: "renumbered from ectc51846.2026.00110-f05 (rank 5 -> 6)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00110-f07", change: "renumbered from ectc51846.2026.00110-f06 (rank 6 -> 7)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00110-f08", change: "added Fig. 8 p.5 simulation_result (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}

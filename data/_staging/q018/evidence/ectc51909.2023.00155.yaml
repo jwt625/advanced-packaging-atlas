@@ -1,0 +1,77 @@
+paper_id: ectc51909.2023.00155
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00155/text.md
+  - references/ectc51909.2023.00155/source.json
+  - references/ectc51909.2023.00155/figures/page_01.png
+  - references/ectc51909.2023.00155/figures/page_02.png
+  - references/ectc51909.2023.00155/figures/page_03.png
+  - references/ectc51909.2023.00155/figures/page_04.png
+  - references/ectc51909.2023.00155/figures/page_05.png
+  - references/ectc51909.2023.00155/figures/page_06.png
+  - references/ectc51909.2023.00155/figures/page_07.png
+  - references/ectc51909.2023.00155/figures/page_08.png
+figure_reading_method: >-
+  text.md body is a font-shifted text layer (each character offset by 29 code points) that is not flagged in
+  source.json; decoded in the session scratchpad for reading only, then every number checked against the 150 dpi page
+  renders (Tables 1-13, Fig. 1, 3, 4, 7, 9, 15, 16, 18). Fig. 3 re-cropped at 300 dpi for labels.
+entries:
+  - {table: interconnects, row_id: ectc51909.2023.00155-a-i1, field: bonding_temp_c, value: 440, unit: C, basis: design_target, locator: "p.3 Table 5", note: "bonding temperature setting; actual max temperature 250 C; stage 100 C"}
+  - {table: interconnects, row_id: ectc51909.2023.00155-a-i3, field: bonding_temp_c, value: 233.2, unit: C, basis: measured, locator: "p.7 Fig. 15", note: "peak package substrate temperature during interposer reflow, label on plot"}
+  - {table: interconnects, row_id: ectc51909.2023.00155-a-i2, field: count, value: 13744, unit: ea, basis: design_target, locator: "p.2 Table 1", note: "Die B column; per die or total for 4 dies not stated"}
+derived:
+  - {table: test_vehicles, row_id: ectc51909.2023.00155-a, field: interposer_area_mm2, value: 2500, formula: "50 x 50 mm", inputs: "p.2 Table 2"}
+  - {table: test_vehicles, row_id: ectc51909.2023.00155-b, field: interposer_area_mm2, value: 2500, formula: "50 x 50 mm", inputs: "p.2 Table 2"}
+  - {table: interconnects, row_id: ectc51909.2023.00155-a-i5, field: depth_um, value: 1300, formula: "through-hole depth = core thickness 1.3 mm", inputs: "p.2 Table 3"}
+  - {table: interconnects, row_id: ectc51909.2023.00155-b-i5, field: depth_um, value: 1300, formula: "through-hole depth = core thickness 1.3 mm", inputs: "p.2 Table 3"}
+  - {table: components, row_id: ectc51909.2023.00155-a-c10, field: thickness_um, value: 1600, formula: "unit conversion 1.6 mm x 1000", inputs: "p.2 Table 3"}
+  - {table: components, row_id: ectc51909.2023.00155-a-c11, field: thickness_um, value: 2000, formula: "unit conversion 2.0 mm x 1000", inputs: "p.4 Sec. II.H"}
+  - {table: components, row_id: ectc51909.2023.00155-a-c12, field: thickness_um, value: 2800, formula: "unit conversion 2.8 mm x 1000", inputs: "p.2 Table 4"}
+  - {table: stack_layers, row_id: ectc51909.2023.00155-a-L17, field: thickness_um, value: 1300, formula: "unit conversion 1.3 mm x 1000", inputs: "p.2 Table 3"}
+  - {table: process_steps, row_id: ectc51909.2023.00155-F1-s13, field: time_s, value: 18000, formula: "unit conversion 5 h x 3600", inputs: "p.3 Table 7"}
+  - {table: process_steps, row_id: ectc51909.2023.00155-F2-s04, field: time_s, value: 7200, formula: "unit conversion 2 h x 3600", inputs: "p.4 Sec. II.H"}
+  - {table: process_steps, row_id: ectc51909.2023.00155-F3-s05, field: time_s, value: 7200, formula: "unit conversion 2 h x 3600", inputs: "p.4 Sec. II.H"}
+  - {table: process_steps, row_id: ectc51909.2023.00155-F3-s08, field: time_s, value: 3600, formula: "unit conversion 1 h x 3600", inputs: "p.4 Sec. II.H"}
+  - {table: process_steps, row_id: ectc51909.2023.00155-F4-s03, field: time_s, value: 3600, formula: "unit conversion 1 h x 3600", inputs: "p.3 Table 7"}
+  - {table: stack_layers, row_id: ectc51909.2023.00155-a-L06, field: thickness_um, value: 0.15, formula: "unit conversion 150 nm / 1000", inputs: "p.2 Sec. II.B"}
+  - {table: stack_layers, row_id: ectc51909.2023.00155-a-L07, field: thickness_um, value: 0.025, formula: "unit conversion 25 nm / 1000", inputs: "p.2 Sec. II.B"}
+  - {table: stack_layers, row_id: ectc51909.2023.00155-a-L11, field: thickness_um, value: 0.1, formula: "unit conversion 100 nm / 1000", inputs: "p.4 Sec. II.H"}
+  - {table: stack_layers, row_id: ectc51909.2023.00155-a-L12, field: thickness_um, value: 0.5, formula: "unit conversion 500 nm / 1000", inputs: "p.4 Sec. II.H"}
+  - {table: process_steps, row_id: ectc51909.2023.00155-F1-s12, field: force_n, value: 294000, formula: "294 kN x 1000", inputs: "p.3 Table 7 (Pressure (kN), CUF + C-mold)"}
+  - {table: process_steps, row_id: ectc51909.2023.00155-F4-s02, field: force_n, value: 570000, formula: "570 kN x 1000", inputs: "p.3 Table 7 (Pressure (kN), MUF)"}
+conflicts:
+  - {table: metrics, row_id: ectc51909.2023.00155-a-m13, field: value, values: [34, 33], locators: ["p.6 Table 10", "p.6 Sec. III.D text"], chosen: 34, why: "result table over text (Cu bump height after reflow)"}
+  - {table: metrics, row_id: ectc51909.2023.00155-a-m14, field: value, values: [25, 32], locators: ["p.6 Table 10", "p.6 Sec. III.D text"], chosen: 25, why: "result table over text (SnAg height after reflow)"}
+excluded:
+  - "2.1D/2.3D/2.5D and CoWoS background of refs [1]-[9]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - TSV or other through-interposer path (test line B reaches the interposer bottom only)
+  - die-to-interposer gap design value, EMC/CUF/build-up/SR product names
+  - CUF cure conditions under dies, filler-die count, DAF product, filler-die attach step position in the flow
+  - interposer-with-molded-dies measured warpage values (method stated, values not given)
+  - Cu thickness in substrate, layer count of motherboard, stiffener lateral size, package total thickness
+  - warpage sign convention for Table 11 substrate warpage
+source_quality:
+  - "text.md body garbled by a constant character shift (not flagged as garbled in source.json); each page also has a second garbled copy. Page renders are clean."
+  - "Fig. 9 had no candidate; Fig. 1 has a spurious page-1 candidate (p01_fig1 is body text)."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00155-a-m1; ectc51909.2023.00155-b-m1, change: "none: kept both rows", reason: "genuine per-TV values: p.8 Table 13 lists TV1 and TV2 rows separately (3 each, 15/15 pass line A)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00155-a-m2; ectc51909.2023.00155-b-m2, change: "none: kept both rows", reason: "genuine per-TV values: p.8 Table 13 lists TV1 and TV2 rows separately (15/15 pass line B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00155-F1", change: "tv_ids a -> a;b (also F2, F3)", reason: "p.7 Sec. III.G: TVs with Substrate-A and Substrate-B prepared by the same method; Table 13 TV1/TV2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00155-F1", change: "step_basis stated_in_flow on F1-F4 rows (Fig. 4 order, numbered text steps), except F1-s16, F3-s01, F3-s02 inferred_order", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00155-F1-s01", change: "target 'interposer top' cleared; object name moved to step", reason: "target holds geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00155-F1-s04", change: "target '27 x 27 um2 pad'", reason: "p.2 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00155-F1-s16", change: "added: filler (dummy) die attach with 20 um DAF, inferred_order before C-mold; F1-s12..s15 seq +1", reason: "p.5 Sec. III.C: modified design with DAF-attached dummy dies adopted; position not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00155-F1-s12", change: "force_n 294000 (Table 7 'Pressure (kN)' 294 kept in conditions)", reason: "typed column; kN -> N"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00155-F4-s02", change: "force_n 570000 (Table 7 'Pressure (kN)' 570 kept in conditions)", reason: "typed column; kN -> N"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00155-F2", change: "seq restarted 1-16 (was 16-31); F3 seq 1-9", reason: "seq per flow; step_ids unchanged"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00155-F2-s08", change: "target '75 um dia, 150 um pitch'", reason: "p.4 Sec. II.H; p.5 Sec. III.D"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00155-F2-s11", change: "target 'Cu 30 um / SnAg 25 um bump height (design)'", reason: "p.2 Table 2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00155-F3-s06", change: "deleted test row (O/S test positions 1-5, X-ray / cross-section)", reason: "test, not a step; already in metrics ectc51909.2023.00155-a-m23 and a-m15"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00155-F3-s11", change: "deleted test row (O/S test positions 6-10)", reason: "test, not a step; already in metrics ectc51909.2023.00155-a-m24"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00155-F3-s01", change: "split core CTE Substrate-A 2.8 / Substrate-B 0.7 ppm/C; step_basis inferred_order", reason: "p.2 Sec. II.A; Table 3; not drawn in Fig. 4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00155-F3-s03", change: "temp_c 233.2 -> temp_c_max 233.2", reason: "measured reflow profile peak (p.7 Fig. 15)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00155-F3-s09", change: "equipment OLS4100-LAT moved to conditions (measurement tool); target '600 um dia balls'", reason: "p.4 Sec. II.H"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00155", change: "process_flow_level full confirmed", reason: "Fig. 4 ordered flow with Table 5-7 conditions"}

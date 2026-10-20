@@ -1,0 +1,65 @@
+paper_id: ectc51846.2026.00183
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00183/text.md
+  - references/ectc51846.2026.00183/source.json
+  - references/ectc51846.2026.00183/figures/page_02.png
+  - references/ectc51846.2026.00183/figures/page_03.png
+  - references/ectc51846.2026.00183/figures/page_04.png
+  - references/ectc51846.2026.00183/figures/page_05.png
+  - references/ectc51846.2026.00183/figures/page_06.png
+  - references/ectc51846.2026.00183/figures/cand/p02_fig3.png
+  - references/ectc51846.2026.00183/figures/cand/p02_fig4.png
+  - references/ectc51846.2026.00183/figures/cand/p03_fig5.png
+  - references/ectc51846.2026.00183/figures/cand/p04_fig8.png
+  - references/ectc51846.2026.00183/figures/cand/p05_fig10.png
+  - references/ectc51846.2026.00183/figures/cand/p06_fig14.png
+figure_reading_method: >-
+  Fig. 10 panels re-cropped at 250 dpi; markers read against 10% gridlines (+/-2%). Fig. 5 bars read against 0.2 ticks
+  (+/-0.02). Fig. 14 shifts read against 5-ohm gridlines. Fig. 11 (log resistance CDFs) and Fig. 15 (no time values) not digitized.
+entries:
+  - {table: interconnects, row_id: ectc51846.2026.00183-a-i1, field: yield_pct, value: 96, unit: "%", basis: measured, locator: "p.5 Fig. 10(a)", note: "black square at 50M links"}
+  - {table: interconnects, row_id: ectc51846.2026.00183-a-i2, field: yield_pct, value: 88, unit: "%", basis: measured, locator: "p.5 Fig. 10(b)", note: "black square at 50M links; text approximately 90%"}
+  - {table: interconnects, row_id: ectc51846.2026.00183-a-i3, field: yield_pct, value: 79, unit: "%", basis: measured, locator: "p.5 Fig. 10(c)", note: "black square at 50M links; text 80%"}
+derived: []
+conflicts:
+  - {table: interconnects, row_id: ectc51846.2026.00183-a-i1, field: yield_pct, values: [100, "nearly 100", 96], locators: ["p.1 Abstract", "p.4 Sec. IV.A", "p.5 Fig. 10(a)"], chosen: 96, why: "measured plot; abstract rounds to 100%"}
+  - {table: metrics, row_id: ectc51846.2026.00183-a-m54, field: value, values: ["nearly 0%", 8], locators: ["p.4 Sec. IV.A", "p.5 Fig. 10(c)"], chosen: 8, why: "measured plot (improved CMP, 0.4 um pitch, 50M links)"}
+  - {table: metrics, row_id: ectc51846.2026.00183-a-m18, field: value, values: ["about 75%", 73], locators: ["p.4 Sec. IV.A", "p.5 Fig. 10(a)"], chosen: 73, why: "measured plot"}
+excluded:
+  - "Fig. 1 CIS evolution and Fig. 2 pitch-shrink history (IEDM 2016, ISSCC 2018, EDTM 2019, IITC 2021, ECTC 2024) from refs [8]-[12]"
+  - "0.2 um pitch Cu-Cu reports of refs [13]-[16]"
+  - "Fig. 12 Cu thermal expansion vs pad size, attributed to ref [18]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - wafer size; die/chip size; pad shape; via, wiring and pad thicknesses; Ta barrier thickness; SiO2 thickness
+  - absolute recess depth (only normalized); CMP and wet process conditions; bonding tool, temperature, pressure; anneal time
+  - per-link resistance (only chain CDFs, Fig. 11); EM stress current and temperature, failure times
+  - sample counts for yield, SM and EM
+source_quality:
+  - "Fig. 11 caption reads '0.8-um-pitch' in its title but lists panels (a)-(c) for 0.8/0.6/0.4 um."
+  - "Text lists link counts 500K, 1M, 10M, 25M, 50M; Fig. 10 also has 5M."
+revisions:
+  - {date: 2026-10-19, source: audit_x2A, row_id: ectc51846.2026.00183-a-i1, change: "alignment_um 0.1 (qualifier alignment_um:le, override alignment_um:measured) -> empty; notes point to a-m5", reason: "p.3 Sec. III.B: misalignment <=100 nm in 93% of cases only, pooled W2W result; a-m5 holds it (x2A defect 5)"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: ectc51846.2026.00183-a-i2, change: "alignment_um 0.1 (qualifier alignment_um:le, override alignment_um:measured) -> empty; notes point to a-m5", reason: "p.3 Sec. III.B: misalignment <=100 nm in 93% of cases only, pooled W2W result; a-m5 holds it (x2A defect 5)"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: ectc51846.2026.00183-a-i3, change: "alignment_um 0.1 (qualifier alignment_um:le, override alignment_um:measured) -> empty; notes point to a-m5", reason: "p.3 Sec. III.B: misalignment <=100 nm in 93% of cases only, pooled W2W result; a-m5 holds it (x2A defect 5)"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: ectc51846.2026.00183-a-i1, change: "evidence entries/derived for alignment_um removed", reason: "cell cleared"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: ectc51846.2026.00183-f01, change: "Fig. 8 bbox 0.0889,0.0108,0.5013,0.4629 (candidate p04_fig8) -> 0.10,0.088,0.50,0.463 (manual)", reason: "blank page-top margin (x2A section 4)"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: ectc51846.2026.00183-f03, change: "Fig. 4 bbox 0.4935,0.7086,1.0,0.8228 (candidate p02_fig4) -> 0.56,0.715,0.85,0.818 (manual)", reason: "bbox ran to page edge x1=1.0 (x2A section 4)"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: ectc51846.2026.00183-f07, change: "Fig. 10 (was f04) bbox 0.0,0.1418,0.5065,0.7326 (candidate p05_fig10) -> 0.105,0.168,0.47,0.72 (manual)", reason: "x0=0 blank margin and clipped text line at top (x2A section 4)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00183-figures, change: "renumbered f04 -> f07 (Fig. 10), f05 -> f08 (Fig. 5), f06 -> f10 (Fig. 14); f01-f03 unchanged", reason: "re-rank under key-figure rule 2026-10-19 (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00183-f04, change: "added Fig. 9 (micrograph, candidate)", reason: "EDS map images of the bonded 0.4 um pitch build"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00183-f05, change: "added Fig. 6 (xray_csam, manual)", reason: "SAM images of bonded wafers; source of a-m4"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00183-f06, change: "added Fig. 13 (stack_schematic, candidate)", reason: "drawing of SM test chain structures; context of a-m62, a-m63"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00183-f09, change: "added Fig. 7 (other, candidate)", reason: "misalignment scatter; source of a-m5"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00183-f11, change: "added Fig. 15 (reliability_plot, candidate)", reason: "EM result plot; context of a-m64"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00183-F1, change: "locator: 'p.2 Sec. II.A; p.2 Fig. 3; p.3 Fig. 5; p.3 Sec. III.A; p.3 Sec. III.B; p.3 Fig. 6; p.3 Fig. 7' -> 'p.2 Sec. II.A; p.2 Fig. 3; p.3 Sec. III.A'; notes: '' -> 'Fig. 3: identical pad-formation sequence on upper and lower wafers, then W2W bonding and anneal.'", reason: "measurement locators removed; Fig. 3 shows the same pad-formation sequence on both wafers"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00183-F1-s01, change: "notes: '' -> 'Text: Cu wires, vertical interconnections and pads; Fig. 3 begins at trench/via formation over existing wiring.'", reason: "text order: wiring first, Fig. 3 starts at trench/via formation over existing wiring"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00183-F1-s02, change: "step: 'trench/via formation for Cu pads and vias' -> 'trench/via formation for Cu pads and vias (upper and lower wafers)'; target: '' -> 'Cu pads 0.4/0.3/0.2 um at 0.8/0.6/0.4 um pitch'; overrides: '' -> 'target:design_target'; locator: 'p.2 Fig. 3' -> 'p.2 Fig. 3; p.2 Sec. II.B; p.4 Sec. IV.A'", reason: "stated pad geometry (p.2 Sec. II.B, p.4 Sec. IV.A) on the step that defines the pads; both wafers (Fig. 3)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00183-F1-s03, change: "step: 'barrier metal/Cu seed PVD' -> 'barrier metal/Cu seed PVD (upper and lower wafers)'", reason: "both wafers (Fig. 3)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00183-F1-s04, change: "step: 'Cu electrochemical deposition to fill via pads' -> 'Cu electrochemical deposition to fill via pads (upper and lower wafers)'", reason: "both wafers (Fig. 3)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00183-F1-s05, change: "step: 'Cu/barrier metal CMP' -> 'Cu/barrier metal CMP (upper and lower wafers)'; conditions: 'split: conventional vs improved CMP (details not given)' -> 'CMP details not given'; split: '' -> 'conventional CMP / improved CMP'", reason: "process split moved to typed split column; both wafers (Fig. 3)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00183-F1-s06, change: "conditions: 'only in combined improved CMP + wet split; chemistry not given' -> 'chemistry not given'; split: '' -> 'conventional and improved-CMP runs: wet process not optimized / combined run: optimized wet process'", reason: "split is a step variant on the same TV (p.3 Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00183-F1, change: "step_basis filled on all steps of this flow: 'stated_in_flow' on rows without one", reason: "repass: order stated in the paper's flow text/figure"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00183-F1-s01", change: "category: 'other' -> 'rdl_layer'", reason: "pass B: Cu wires, vertical interconnections and pads on the wafer surface (p.2 Sec. II.A) are wiring layers; rdl_layer as for other BEOL wiring steps"}

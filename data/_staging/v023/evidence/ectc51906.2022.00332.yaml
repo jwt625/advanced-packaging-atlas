@@ -1,0 +1,54 @@
+paper_id: ectc51906.2022.00332
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51906.2022.00332/text.md
+  - references/ectc51906.2022.00332/TEXT_LAYER_WARNING.md
+  - references/ectc51906.2022.00332/source.json
+  - references/ectc51906.2022.00332/figures/page_01.png
+  - references/ectc51906.2022.00332/figures/page_02.png
+  - references/ectc51906.2022.00332/figures/page_03.png
+  - references/ectc51906.2022.00332/figures/page_04.png
+  - references/ectc51906.2022.00332/figures/page_05.png
+  - references/ectc51906.2022.00332/figures/page_06.png
+figure_reading_method: >-
+  text.md is tesseract OCR; every number checked against page renders (150 dpi) and 300 dpi re-crops of Fig. 3 and
+  page crops of Fig. 4, 5, 6, 7 and Table I. OCR errors corrected (e.g. colour-bar top 0.03055 not 0.03085; BER 1e-16;
+  '<=' signs in render where OCR shows '<').
+entries:
+  - {table: electrical_interfaces, row_id: ectc51906.2022.00332-b-e1, field: energy_pj_per_bit, value: 0.38, unit: pJ/bit, basis: measured, locator: "p.5 Sec. III.B", note: "text: reported in [13] for this 2x2 UDSP assembly at 0.8 V, 1.1 GHz; title claims < 0.4 pJ/bit"}
+  - {table: metrics, row_id: ectc51906.2022.00332-a-m2, field: value, value: 41.8, unit: ps, basis: measured, locator: "p.5 Fig. 6", note: "first marker at 0.50 V"}
+derived:
+  - {table: electrical_interfaces, row_id: ectc51906.2022.00332-a-e1, field: latency_ns, value: 0.0178, formula: "17.8 ps / 1000", inputs: "p.5 Fig. 6 caption"}
+  - {table: electrical_interfaces, row_id: ectc51906.2022.00332-b-e1, field: lane_rate_gbps, value: 1.1, formula: "1.1 GHz clock x 1 bit/cycle (SDR)", inputs: "p.5 Sec. III.B; p.5 Table I"}
+  - {table: electrical_interfaces, row_id: ectc51906.2022.00332-b-e1, field: aggregate_bw_tbps, value: 0.4928, formula: "492.8 Gbps / 1000", inputs: "p.5 Table I"}
+  - {table: electrical_interfaces, row_id: ectc51906.2022.00332-b-e1, field: reach_mm, value: 0.35, formula: "350 um / 1000", inputs: "p.3 Sec. II.B; p.3 Fig. 3(b)"}
+conflicts:
+  - {table: electrical_interfaces, row_id: ectc51906.2022.00332-a-e1, field: lane_rate_gbps, values: ["3 Gbps/link", "max data-transfer frequency about 2.8 GHz"], locators: ["p.1 Abstract", "p.5 Sec. III.A"], chosen: 3, why: "only explicit data rate; 2.8 GHz kept as metric a-m3"}
+  - {table: components, row_id: ectc51906.2022.00332-b-c2, field: gap_um, values: [59, "< 60", "<= 60"], locators: ["p.3 Fig. 3(c)", "p.3 Fig. 3 caption", "p.6 Sec. IV"], chosen: 59, why: "measured micrograph label"}
+excluded:
+  - "400 um SuperCHIPS link < 20 ps and < 0.04 pJ/bit characterized in ref [12]"
+  - "Si-IF link insertion loss better than -2 dB and crosstalk better than -15 dB to 16 GHz (ref [14])"
+  - "> 1 Tbps/mm at 4 Gbps per link; links up to 10 GHz (ref [14]); 8 Tbps/mm at 10 Gbps/pin (projection)"
+  - "Dielet pad to Si-IF pillar misalignment <= 1 um shown in previous works [5], [7]"
+  - "Fig. 2(a) 5.5 x 5.5 mm GF-TS assembly photo reprinted from [12]"
+  - "s-FOM values of other protocols (refs [3], [17]-[27]); Fig. 8 SuperCHIPS value not read (log axis, no label)"
+  - "Full-wafer Cu-Cu, Au-Au, Cu-Au TCB assemblies of refs [5]-[7]"
+not_reported:
+  - optical_interfaces
+  - TCB temperature, force, time, ambient details (refer to [5])
+  - Si-IF dielectric, metal thickness, line/space of this build (4 um wire pitch stated generally)
+  - GF-TS dielet size and its Si-IF pitch beyond '< 10 um'
+  - dielet thickness, Si-IF thickness, assembly yield numbers
+  - reliability tests
+source_quality:
+  - "Garbled PDF text layer; text.md is OCR. All numbers verified on page images. candidates.json empty: all figure bboxes manual."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00332-F1-s04, change: "step_kind empty -> inline_inspection (KGD probing)", reason: "pre-bond die selection the paper places in the flow; no values to move"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00332-F1-s05, change: "atmosphere other (in-situ formic acid vapor); split bond pitch UDSP 9.8 um / GF-TS < 10 um", reason: "typed condition; per-variant value in split"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00332-F1-s02, change: "conditions add 'Si-IF links in two metal layers (2x2 UDSP Si-IF)'", reason: "stated p.3 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00332-F2, change: "level fragments -> ordered; s04 step text 'with modified detection parameters' moved to notes", reason: "order layer 1 -> scan -> layer 2 -> scan stated (Fig. 4(b),(c)); Fig. 4(a) layer not stated"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00332-F1-s01..F2-s04, change: "step_basis stated_in_flow", reason: "order stated in Sec. II.C and III"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00332-F1-s02", change: "category other -> rdl_layer", reason: "Si-IF Cu wiring layer by BEOL Cu damascene/dual damascene per metal layer (p.3 Sec. II.C); composite wiring-layer formation"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00332-F2-s01", change: "category other -> rdl_layer", reason: "Si-IF metal layer 1 fabrication (p.3-4 Sec. II.C; Fig. 4(b)); composite wiring-layer formation"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00332-F2-s03", change: "category other -> rdl_layer", reason: "Si-IF metal layer 2 fabrication (p.4 Fig. 4(c)); composite wiring-layer formation"}

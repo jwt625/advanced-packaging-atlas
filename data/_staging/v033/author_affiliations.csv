@@ -1,0 +1,44 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+tcpmt.2025.3538554-a01-1,tcpmt.2025.3538554,1,Minli Cai,1,primary,Shanghai Institute of Microsystem and Information Technology,State Key Laboratory of Transducer Technology,Shanghai,CN,"printed: ..., Chinese Academy of Sciences",paper,p.1 footnote
+tcpmt.2025.3538554-a01-2,tcpmt.2025.3538554,1,Minli Cai,2,additional,University of Chinese Academy of Sciences,School of Graduate Study,Beijing,CN,,paper,p.1 footnote
+tcpmt.2025.3538554-a02-1,tcpmt.2025.3538554,2,Biyun Ling,1,primary,Shanghai Institute of Microsystem and Information Technology,State Key Laboratory of Transducer Technology,Shanghai,CN,"printed: ..., Chinese Academy of Sciences",paper,p.1 footnote
+tcpmt.2025.3538554-a03-1,tcpmt.2025.3538554,3,Dalong Chen,1,primary,Shanghai Institute of Microsystem and Information Technology,State Key Laboratory of Transducer Technology,Shanghai,CN,"printed: ..., Chinese Academy of Sciences",paper,p.1 footnote
+tcpmt.2025.3538554-a04-1,tcpmt.2025.3538554,4,Yuhu Xia,1,primary,Shanghai Institute of Microsystem and Information Technology,State Key Laboratory of Transducer Technology,Shanghai,CN,"printed: ..., Chinese Academy of Sciences",paper,p.1 footnote
+tcpmt.2025.3538554-a04-2,tcpmt.2025.3538554,4,Yuhu Xia,2,additional,University of Chinese Academy of Sciences,School of Graduate Study,Beijing,CN,,paper,p.1 footnote
+tcpmt.2025.3538554-a05-1,tcpmt.2025.3538554,5,Hao Wang,1,primary,Shanghai Aircraft Design and Research Institute,,Shanghai,CN,"printed: Shanghai Aircraft Design and Research Institute, COMAC",paper,p.1 footnote
+tcpmt.2025.3538554-a06-1,tcpmt.2025.3538554,6,Yuwei Han,1,primary,Shanghai Institute of Microsystem and Information Technology,State Key Laboratory of Transducer Technology,Shanghai,CN,"printed: ..., Chinese Academy of Sciences",paper,p.1 footnote
+tcpmt.2025.3538554-a06-2,tcpmt.2025.3538554,6,Yuwei Han,2,additional,University of Chinese Academy of Sciences,School of Graduate Study,Beijing,CN,,paper,p.1 footnote
+tcpmt.2025.3538554-a07-1,tcpmt.2025.3538554,7,Yaming Wu,1,primary,Shanghai Institute of Microsystem and Information Technology,State Key Laboratory of Transducer Technology,Shanghai,CN,"printed: ..., Chinese Academy of Sciences",paper,p.1 footnote
+tcpmt.2025.3538554-a07-2,tcpmt.2025.3538554,7,Yaming Wu,2,additional,University of Chinese Academy of Sciences,School of Graduate Study,Beijing,CN,,paper,p.1 footnote
+tcpmt.2021.3123384-a01-1,tcpmt.2021.3123384,1,Piotr Mackowiak,1,primary,Fraunhofer IZM,Wafer Level System Integration,Berlin,DE,printed: Fraunhofer-Institut fur Zuverlassigkeit und Mikrointegration (IZM),paper,p.1 footnote
+tcpmt.2021.3123384-a02-1,tcpmt.2021.3123384,2,Kolja Erbacher,1,primary,Fraunhofer IZM,Wafer Level System Integration,Berlin,DE,printed: Fraunhofer-Institut fur Zuverlassigkeit und Mikrointegration (IZM),paper,p.1 footnote
+tcpmt.2021.3123384-a03-1,tcpmt.2021.3123384,3,Michael Schiffer,1,primary,Fraunhofer IZM,Wafer Level System Integration,Berlin,DE,printed: Fraunhofer-Institut fur Zuverlassigkeit und Mikrointegration (IZM),paper,p.1 footnote
+tcpmt.2021.3123384-a04-1,tcpmt.2021.3123384,4,Charles-Alix Manier,1,primary,Fraunhofer IZM,Wafer Level System Integration,Berlin,DE,printed: Fraunhofer-Institut fur Zuverlassigkeit und Mikrointegration (IZM),paper,p.1 footnote
+tcpmt.2021.3123384-a05-1,tcpmt.2021.3123384,5,Michael Töpper,1,primary,Fraunhofer IZM,Wafer Level System Integration,Berlin,DE,printed: Fraunhofer-Institut fur Zuverlassigkeit und Mikrointegration (IZM),paper,p.1 footnote
+tcpmt.2021.3123384-a06-1,tcpmt.2021.3123384,6,Ha-Duong Ngo,1,primary,University of Applied Science Berlin,Department of Microsystems Engineering,Berlin,DE,as printed; full institution name not given,paper,p.1 footnote
+tcpmt.2021.3123384-a07-1,tcpmt.2021.3123384,7,Martin Schneider-Ramelow,1,primary,Technische Universität Berlin,Technologien der Mikroperipherik,Berlin,DE,,paper,p.1 footnote
+tcpmt.2021.3123384-a08-1,tcpmt.2021.3123384,8,Klaus-Dieter Lang,1,primary,Technische Universität Berlin,Technologien der Mikroperipherik,Berlin,DE,,paper,p.1 footnote
+tcpmt.2023.3266666-a01-1,tcpmt.2023.3266666,1,Evan G. Colgan,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a02-1,tcpmt.2023.3266666,2,Kai Schleupen,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a03-1,tcpmt.2023.3266666,3,Phillip Mann,1,primary,IBM,Midrange Systems,"Rochester, MN",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a04-1,tcpmt.2023.3266666,4,Robert P. Kuder,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a05-1,tcpmt.2023.3266666,5,Jae-Woong Nah,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a06-1,tcpmt.2023.3266666,6,Katsuyuki Sakuma,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a06-2,tcpmt.2023.3266666,6,Katsuyuki Sakuma,2,additional,Tohoku University,Department of Biomedical Engineering,Sendai,JP,visiting professor; city from his degree line in same biography,paper,p.9 biography
+tcpmt.2023.3266666-a07-1,tcpmt.2023.3266666,7,Victor Alvarez,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a08-1,tcpmt.2023.3266666,8,Lavanya Turlapati,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a09-1,tcpmt.2023.3266666,9,Danny C. Wong,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a10-1,tcpmt.2023.3266666,10,Stanislav Lukashov,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a11-1,tcpmt.2023.3266666,11,Steve Cordes,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,printed as former affiliation (was with),paper,p.1 footnote
+tcpmt.2023.3266666-a11-2,tcpmt.2023.3266666,11,Steve Cordes,2,present_address,ASML,,"Wilton, CT",US,printed: ASML Wilton,paper,p.1 footnote
+tcpmt.2023.3266666-a12-1,tcpmt.2023.3266666,12,James L. Speidell,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+tcpmt.2025.3540665-a01-1,tcpmt.2025.3540665,1,O. Golim,1,primary,Aalto University,Department of Electrical Engineering and Automation,Espoo,FI,,paper,p.1 footnote
+tcpmt.2025.3540665-a02-1,tcpmt.2025.3540665,2,V. Vuorinen,1,primary,Aalto University,Department of Electrical Engineering and Automation,Espoo,FI,,paper,p.1 footnote
+tcpmt.2025.3540665-a03-1,tcpmt.2025.3540665,3,M. Paulasto-Kröckel,1,primary,Aalto University,Department of Electrical Engineering and Automation,Espoo,FI,,paper,p.1 footnote
+tcpmt.2024.3443855-a01-1,tcpmt.2024.3443855,1,Rui Cao,1,primary,University of Chinese Academy of Sciences,School of Integrated Circuits,Beijing,CN,,paper,p.1 footnote
+tcpmt.2024.3443855-a02-1,tcpmt.2024.3443855,2,Huimin He,1,primary,"Institute of Microelectronics, Chinese Academy of Sciences",System Packaging and Integration Technology Center,Beijing,CN,printed: Institute of Microelectronics of the Chinese Academy of Sciences,paper,p.1 footnote
+tcpmt.2024.3443855-a03-1,tcpmt.2024.3443855,3,Lijun Chen,1,primary,National Center for Advanced Packaging,,Wuxi,CN,,paper,p.1 footnote
+tcpmt.2024.3443855-a04-1,tcpmt.2024.3443855,4,Chengyi Liao,1,primary,"Institute of Microelectronics, Chinese Academy of Sciences",System Packaging and Integration Technology Center,Beijing,CN,printed: Institute of Microelectronics of the Chinese Academy of Sciences,paper,p.1 footnote
+tcpmt.2024.3443855-a05-1,tcpmt.2024.3443855,5,Fengman Liu,1,primary,"Institute of Microelectronics, Chinese Academy of Sciences",System Packaging and Integration Technology Center,Beijing,CN,printed: Institute of Microelectronics of the Chinese Academy of Sciences,paper,p.1 footnote
+tcpmt.2024.3443855-a06-1,tcpmt.2024.3443855,6,Liqiang Cao,1,primary,"Institute of Microelectronics, Chinese Academy of Sciences",System Packaging and Integration Technology Center,Beijing,CN,printed: Institute of Microelectronics of the Chinese Academy of Sciences,paper,p.1 footnote
+tcpmt.2024.3443855-a07-1,tcpmt.2024.3443855,7,Qidong Wang,1,primary,"Institute of Microelectronics, Chinese Academy of Sciences",System Packaging and Integration Technology Center,Beijing,CN,printed: Institute of Microelectronics of the Chinese Academy of Sciences,paper,p.1 footnote

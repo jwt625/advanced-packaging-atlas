@@ -1,0 +1,33 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51906.2022.00140-a-c1,ectc51906.2022.00140-a,asic,,,"ASIC / AP (Application Processor), Die 1",1,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. 2.2; p.2 Fig. 3,,"Size, node, emulator status not reported."
+ectc51906.2022.00140-a-c2,ectc51906.2022.00140-a,hbm,,,"HBM, Die 2",1,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. 2.2; p.2 Fig. 3,,
+ectc51906.2022.00140-a-c3,ectc51906.2022.00140-a,mold,,,over-mold (chip last molding),,,,,,,,,,,,stated,mixed,,p.2 Sec. 2.1; p.2 Fig. 2,,Mold compound not named.
+ectc51906.2022.00140-a-c4,ectc51906.2022.00140-a,substrate,,,substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,Only shown in Fig. 3 schematic; no details.
+ectc51906.2022.00140-a-c5,ectc51906.2022.00140-a,other,,,"organic carrier (temporary, released after molding)",1,,,,,,,,,organic carrier,,stated,mixed,,p.2 Sec. 2.1; p.4 Fig. 9; p.5 Fig. 10,,
+ectc51906.2022.00140-b-c1,ectc51906.2022.00140-b,asic,,,"ASIC / AP (Application Processor), Die 1",1,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. 2.2; p.2 Fig. 3,,"Size, node, emulator status not reported."
+ectc51906.2022.00140-b-c2,ectc51906.2022.00140-b,hbm,,,"HBM, Die 2",1,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. 2.2; p.2 Fig. 3,,
+ectc51906.2022.00140-b-c3,ectc51906.2022.00140-b,mold,,,over-mold (chip last molding),,,,,,,,,,,,stated,mixed,,p.2 Sec. 2.1; p.2 Fig. 2,,Mold compound not named.
+ectc51906.2022.00140-b-c4,ectc51906.2022.00140-b,substrate,,,substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,Only shown in Fig. 3 schematic; no details.
+ectc51906.2022.00140-b-c5,ectc51906.2022.00140-b,other,,,"organic carrier (temporary, released after molding)",1,,,,,,,,,organic carrier,,stated,mixed,,p.2 Sec. 2.1; p.4 Fig. 9; p.5 Fig. 10,,
+ectc51906.2022.00176-a-c1,ectc51906.2022.00176-a,dummy_die,yes,,"top die (TD), daisy chain and Kelvin test die",1,6,6,,,,,,,Si,,design_target,text,,p.3 Sec. III.A; p.1 Abstract,,Thinned and diced from TD wafer with BEOL metal stack; thickness and node not given.
+ectc51906.2022.00176-a-c2,ectc51906.2022.00176-a,dummy_die,yes,,bottom wafer (BW) die,1,16,16,,,,,,,Si,,design_target,text,,p.3 Sec. III.A,,BW processed with BEOL metal stack and bond pad tier; wafer diameter and thickness not given.
+ectc51906.2022.00142-b-c1,ectc51906.2022.00142-b,dummy_die,yes,no,silicon chip,1,20,20,725,,,,,,Si,,design_target,text,count:figure_image,p.2 Sec. II.D; p.2 Fig. 3(b),,Plain silicon chip in FC-BGA mock-up; 20 x 20 x t0.725 mm; count 1 per package from Fig. 3(b) photo.
+ectc51906.2022.00142-b-c2,ectc51906.2022.00142-b,underfill,,,underfill,,,,,,,,,,,,stated,text,,p.2 Sec. II.D,,Material and dispense method not stated.
+ectc51906.2022.00142-c-c1,ectc51906.2022.00142-c,dummy_die,yes,no,silicon chip,1,20,20,725,,,,,,Si,,design_target,text,count:figure_image,p.2 Sec. II.D; p.2 Fig. 3(b),,Plain silicon chip in FC-BGA mock-up; 20 x 20 x t0.725 mm; count 1 per package from Fig. 3(b) photo.
+ectc51906.2022.00142-c-c2,ectc51906.2022.00142-c,underfill,,,underfill,,,,,,,,,,,,stated,text,,p.2 Sec. II.D,,Material and dispense method not stated.
+ectc51906.2022.00136-a-c1,ectc51906.2022.00136-a,unspecified,,yes,die with Cu studs (6-sided mold protection),1,,,,,,,,,,,stated,schematic,,p.2 Fig. 4; p.2 Sec. II,,"Die function, size and thickness not stated; count inferred from single-die stack-up schematic."
+ectc51906.2022.00136-a-c2,ectc51906.2022.00136-a,mold,,,compression mold compound,1,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Fig. 4,,Same mold compound as 300 mm FOWLP; product not stated.
+ectc51906.2022.00179-a-c1,ectc51906.2022.00179-a,dummy_die,yes,,"top die (full thickness, FS Ni/Sn bumps + Ni spacer bumps)",,,,,,,,,,Si,,stated,mixed,,p.2 Sec. III; p.2 Fig. 4,,"Daisy chain, Kelvin and EM test structures."
+ectc51906.2022.00179-a-c2,ectc51906.2022.00179-a,dummy_die,yes,,landing die (Ni/Cu pads),,,,,,,,,,Si,,stated,mixed,,p.2 Sec. III; p.2 Fig. 4,,
+ectc51906.2022.00179-a-c3,ectc51906.2022.00179-a,underfill,,,capillary underfill (CUF),,,,,,,,,,,,stated,text,,p.2 Sec. III; p.5 Sec. VI,,Product not named; incomplete fill between 5 um pitch bumps.
+ectc51906.2022.00179-b-c1,ectc51906.2022.00179-b,dummy_die,yes,,"top die (50 um thin, FS Ni/Sn bumps, BS M1B/VIA1B)",,,,50,,,,,,Si,,design_target,text,,p.1 Sec. III; p.2 Sec. III; p.2 Fig. 4,,
+ectc51906.2022.00179-b-c2,ectc51906.2022.00179-b,dummy_die,yes,,landing die (Ni/Cu pads),,,,,,,,,,Si,,stated,mixed,,p.2 Sec. III; p.2 Fig. 4,,
+ectc51906.2022.00179-b-c3,ectc51906.2022.00179-b,underfill,,,capillary underfill (CUF),,,,,,,,,,,,stated,text,,p.2 Sec. III,,
+ectc51906.2022.00179-b-c4,ectc51906.2022.00179-b,other,,,"glass carrier (temporary, laser debonded)",,,,,,,,,,glass,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,
+ectc51906.2022.00179-c-c1,ectc51906.2022.00179-c,other,,,"device wafer (TSV-middle, thinned)",1,,,50,,,,,,Si,,design_target,text,,p.1 Sec. III; p.3 Sec. IV,,300 mm.
+ectc51906.2022.00179-c-c2,ectc51906.2022.00179-c,other,,,glass carrier wafer (temporary),1,,,,,,,,,glass,,stated,text,,p.1 Sec. II; p.3 Sec. IV,,
+ectc51906.2022.00179-c-c3,ectc51906.2022.00179-c,adhesive,,,temporary bonding material (TBM) with laser release layer,,,,,,,,,,TBM (product not named); laser release layer,,stated,text,,p.1 Sec. II; p.3 Sec. IV,,"TBM coated on carrier, release layer on device wafer. Thermal budget value not stated."
+ectc51906.2022.00179-d-c1,ectc51906.2022.00179-d,dummy_die,yes,,stacked B2F dies (tiers T0-T3 shown),5,,,,,,,,,Si,,stated,mixed,,p.4 Sec. V; p.5 Sec. V; p.5 Fig. 14,,Die thickness not stated for this maskset.
+ectc51906.2022.00179-e-c1,ectc51906.2022.00179-e,dummy_die,yes,,STCA top die (full thickness),,,,,,,,,,Si,,stated,schematic,,p.6 Fig. 19,,
+ectc51906.2022.00179-e-c2,ectc51906.2022.00179-e,dummy_die,yes,,STCB landing die (Ni/Cu pads),,,,,,,,,,Si,,stated,schematic,,p.6 Fig. 19,,
+ectc51906.2022.00179-e-c3,ectc51906.2022.00179-e,underfill,,,wafer-level photo-patternable polymer as underfill,,,,,,,,,,,,stated,mixed,,p.6 Sec. VII; p.6 Fig. 19; p.6 Fig. 20,,Product not named.

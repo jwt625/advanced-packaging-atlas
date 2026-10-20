@@ -1,0 +1,52 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc51529.2024.00023-a01-1,ectc51529.2024.00023,1,Lars Brusberg,1,primary,Corning Research and Development,,"Corning, NY",US,,paper,p.1 affiliations
+ectc51529.2024.00023-a02-1,ectc51529.2024.00023,2,Matthew J. Dejneka,1,primary,Corning Research and Development,,"Corning, NY",US,,paper,p.1 affiliations
+ectc51529.2024.00023-a03-1,ectc51529.2024.00023,3,Chukwudi A. Okoro,1,primary,Corning Research and Development,,"Corning, NY",US,,paper,p.1 affiliations
+ectc51529.2024.00023-a04-1,ectc51529.2024.00023,4,David J. McEnroe,1,primary,Corning Research and Development,,"Corning, NY",US,,paper,p.1 affiliations
+ectc51529.2024.00023-a05-1,ectc51529.2024.00023,5,Aramais R. Zakharian,1,primary,Corning Research and Development,,"Corning, NY",US,,paper,p.1 affiliations
+ectc51529.2024.00023-a06-1,ectc51529.2024.00023,6,Chad C. Terwilliger,1,primary,Corning Research and Development,,"Corning, NY",US,,paper,p.1 affiliations
+ectc51846.2026.00365-a01-1,ectc51846.2026.00365,1,Yang Guo,1,primary,Intel,Assembly test and technology development,"Chandler, AZ",US,author grid; order row-major per page render,paper,p.1 affiliations
+ectc51846.2026.00365-a02-1,ectc51846.2026.00365,2,Ziyin Lin,1,primary,Intel,Assembly test and technology development,"Chandler, AZ",US,author grid; order row-major per page render,paper,p.1 affiliations
+ectc51846.2026.00365-a03-1,ectc51846.2026.00365,3,John C. Decker,1,primary,Intel,Assembly test and technology development,"Chandler, AZ",US,author grid; order row-major per page render,paper,p.1 affiliations
+ectc51846.2026.00365-a04-1,ectc51846.2026.00365,4,James Breyfogle,1,primary,Intel,Assembly test and technology development,"Chandler, AZ",US,author grid; order row-major per page render,paper,p.1 affiliations
+ectc51846.2026.00365-a05-1,ectc51846.2026.00365,5,Eylul Simsek,1,primary,Intel,Assembly test and technology development,"Chandler, AZ",US,author grid; order row-major per page render,paper,p.1 affiliations
+ectc51846.2026.00365-a06-1,ectc51846.2026.00365,6,Hsin-yu Li,1,primary,Intel,Assembly test and technology development,"Chandler, AZ",US,author grid; order row-major per page render,paper,p.1 affiliations
+ectc51846.2026.00365-a07-1,ectc51846.2026.00365,7,Yiqun Bai,1,primary,Intel,Assembly test and technology development,"Chandler, AZ",US,author grid; order row-major per page render,paper,p.1 affiliations
+ectc51846.2026.00365-a08-1,ectc51846.2026.00365,8,Chengzi Huang,1,primary,Intel,Assembly test and technology development,"Chandler, AZ",US,author grid; order row-major per page render,paper,p.1 affiliations
+ectc51846.2026.00365-a09-1,ectc51846.2026.00365,9,Wen Yang,1,primary,Intel,Assembly test and technology development,"Chandler, AZ",US,author grid; order row-major per page render,paper,p.1 affiliations
+ectc51906.2022.00072-a01-1,ectc51906.2022.00072,1,Jae Kyu Cho,1,primary,GlobalFoundries,,"Malta, NY",US,,paper,p.1 affiliations
+ectc51906.2022.00072-a02-1,ectc51906.2022.00072,2,Benjamin Fasano,1,primary,GlobalFoundries,,"Hopewell Junction, NY",US,,paper,p.1 affiliations
+ectc51906.2022.00072-a03-1,ectc51906.2022.00072,3,Vaishnavi Karra,1,primary,GlobalFoundries,,"Hopewell Junction, NY",US,,paper,p.1 affiliations
+ectc51906.2022.00072-a04-1,ectc51906.2022.00072,4,Alberto Cestero,1,primary,GlobalFoundries,,"Hopewell Junction, NY",US,,paper,p.1 affiliations
+ectc51906.2022.00072-a05-1,ectc51906.2022.00072,5,Norman Robson,1,primary,GlobalFoundries,,"Hopewell Junction, NY",US,,paper,p.1 affiliations
+ectc51906.2022.00072-a06-1,ectc51906.2022.00072,6,George (Zhuo-Jie) Wu,1,primary,GlobalFoundries,,"Hopewell Junction, NY",US,,paper,p.1 affiliations
+ectc51906.2022.00072-a07-1,ectc51906.2022.00072,7,Thomas Houghton,1,primary,GlobalFoundries,,"Hopewell Junction, NY",US,,paper,p.1 affiliations
+ectc51906.2022.00072-a08-1,ectc51906.2022.00072,8,Takako Hirokawa,1,primary,GlobalFoundries,,"Malta, NY",US,,paper,p.1 affiliations
+ectc51906.2022.00072-a09-1,ectc51906.2022.00072,9,Yusheng Bian,1,primary,GlobalFoundries,,"Malta, NY",US,,paper,p.1 affiliations
+ectc51906.2022.00072-a10-1,ectc51906.2022.00072,10,Koushik Ramachandra,1,primary,GlobalFoundries,,"Hopewell Junction, NY",US,,paper,p.1 affiliations
+ectc51906.2022.00072-a11-1,ectc51906.2022.00072,11,George Parker,1,primary,GlobalFoundries,,"Burlington, VT",US,,paper,p.1 affiliations
+ectc51906.2022.00072-a12-1,ectc51906.2022.00072,12,Ian Melville,1,primary,GlobalFoundries,,"Hopewell Junction, NY",US,,paper,p.1 affiliations
+ectc51906.2022.00072-a13-1,ectc51906.2022.00072,13,Daniel Berger,1,primary,GlobalFoundries,,"Hopewell Junction, NY",US,,paper,p.1 affiliations
+ectc51906.2022.00072-a14-1,ectc51906.2022.00072,14,Vikas Gupta,1,primary,GlobalFoundries,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51906.2022.00072-a15-1,ectc51906.2022.00072,15,John Pellerin,1,primary,GlobalFoundries,,"Malta, NY",US,,paper,p.1 affiliations
+ectc51906.2022.00072-a16-1,ectc51906.2022.00072,16,Ken Giewont,1,primary,GlobalFoundries,,"Hopewell Junction, NY",US,,paper,p.1 affiliations
+ectc51906.2022.00072-a17-1,ectc51906.2022.00072,17,Karen Nummy,1,primary,GlobalFoundries,,"Hopewell Junction, NY",US,,paper,p.1 affiliations
+ectc51906.2022.00072-a18-1,ectc51906.2022.00072,18,Dave Riggs,1,primary,GlobalFoundries,,"Hopewell Junction, NY",US,,paper,p.1 affiliations
+ectc51906.2022.00072-a19-1,ectc51906.2022.00072,19,Alexsander Janta-Polczynski,1,primary,IBM,,Bromont,CA,,paper,p.1 affiliations
+ectc51906.2022.00072-a20-1,ectc51906.2022.00072,20,Richard Langlois,1,primary,IBM,,Bromont,CA,,paper,p.1 affiliations
+ectc51909.2023.00268-a01-1,ectc51909.2023.00268,1,Yoonyoung Jeon,1,primary,Samsung Electronics,AVP Engineering Team,Cheonan-si,KR,"printed: Samsung Electronics Co., Ltd, Cheonan-si Chungcheongnam-do",paper,p.1 affiliations (page image)
+ectc51909.2023.00268-a02-1,ectc51909.2023.00268,2,Youngmin Kim,1,primary,Samsung Electronics,AVP Engineering Team,Cheonan-si,KR,"printed: Samsung Electronics Co., Ltd, Cheonan-si Chungcheongnam-do",paper,p.1 affiliations (page image)
+ectc51909.2023.00268-a03-1,ectc51909.2023.00268,3,Hyundong Lee,1,primary,Samsung Electronics,AVP Engineering Team,Cheonan-si,KR,"printed: Samsung Electronics Co., Ltd, Cheonan-si Chungcheongnam-do",paper,p.1 affiliations (page image)
+ectc51909.2023.00268-a04-1,ectc51909.2023.00268,4,Minji Kim,1,primary,Samsung Electronics,AVP Engineering Team,Cheonan-si,KR,"printed: Samsung Electronics Co., Ltd, Cheonan-si Chungcheongnam-do",paper,p.1 affiliations (page image)
+ectc51909.2023.00268-a05-1,ectc51909.2023.00268,5,Changbo Lee,1,primary,Samsung Electronics,AVP Engineering Team,Cheonan-si,KR,"printed: Samsung Electronics Co., Ltd, Cheonan-si Chungcheongnam-do",paper,p.1 affiliations (page image)
+ectc51909.2023.00268-a06-1,ectc51909.2023.00268,6,Joon Seok Oh,1,primary,Samsung Electronics,AVP Engineering Team,Cheonan-si,KR,"printed: Samsung Electronics Co., Ltd, Cheonan-si Chungcheongnam-do",paper,p.1 affiliations (page image)
+tcpmt.2026.3740312-a01-1,tcpmt.2026.3740312,1,Jiexun Yu,1,primary,Tsinghua University,School of Integrated Circuits,Beijing,CN,byline from page image (absent in text layer),paper,p.1 footnote
+tcpmt.2026.3740312-a02-1,tcpmt.2026.3740312,2,Liangliang Yang,1,primary,Tsinghua University,School of Integrated Circuits,Beijing,CN,byline from page image (absent in text layer),paper,p.1 footnote
+tcpmt.2026.3740312-a03-1,tcpmt.2026.3740312,3,Yongbo Wu,1,primary,Tsinghua University,School of Integrated Circuits,Beijing,CN,byline from page image (absent in text layer),paper,p.1 footnote
+tcpmt.2026.3740312-a04-1,tcpmt.2026.3740312,4,Qian Wang,1,primary,Tsinghua University,School of Integrated Circuits,Beijing,CN,byline from page image (absent in text layer),paper,p.1 footnote
+tcpmt.2026.3740312-a04-2,tcpmt.2026.3740312,4,Qian Wang,2,additional,Beijing National Research Center for Information Science and Technology,,Beijing,CN,,paper,p.1 footnote
+tcpmt.2026.3740312-a05-1,tcpmt.2026.3740312,5,Kaixiang Mao,1,primary,Tsinghua University,School of Integrated Circuits,Beijing,CN,byline from page image (absent in text layer),paper,p.1 footnote
+tcpmt.2026.3740312-a06-1,tcpmt.2026.3740312,6,Wei Chen,1,primary,Tsinghua University,School of Integrated Circuits,Beijing,CN,byline from page image (absent in text layer),paper,p.1 footnote
+tcpmt.2026.3740312-a06-2,tcpmt.2026.3740312,6,Wei Chen,2,additional,Beijing National Research Center for Information Science and Technology,,Beijing,CN,,paper,p.1 footnote
+tcpmt.2026.3740312-a07-1,tcpmt.2026.3740312,7,Jian Cai,1,primary,Tsinghua University,School of Integrated Circuits,Beijing,CN,byline from page image (absent in text layer),paper,p.1 footnote
+tcpmt.2026.3740312-a07-2,tcpmt.2026.3740312,7,Jian Cai,2,additional,Beijing National Research Center for Information Science and Technology,,Beijing,CN,,paper,p.1 footnote

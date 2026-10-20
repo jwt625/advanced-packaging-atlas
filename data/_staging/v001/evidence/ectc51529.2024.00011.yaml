@@ -1,0 +1,59 @@
+paper_id: ectc51529.2024.00011
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00011/text.md
+  - references/ectc51529.2024.00011/source.json
+  - references/ectc51529.2024.00011/figures/page_03.png
+  - references/ectc51529.2024.00011/figures/page_04.png
+  - references/ectc51529.2024.00011/figures/page_05.png
+  - references/ectc51529.2024.00011/figures/page_06.png
+figure_reading_method: >-
+  Page renders p.3-6 viewed in full; 300 dpi re-crops of Fig. 10, 12, 16; 450 dpi re-crops of the Fig. 16 warpage
+  chart (values read by pixel scale, +/-0.3 mm), Table 1 and Table 2; candidates p03_fig10, p04_fig12, p05_fig16,
+  p05_fig19 opened. Text layer renders 'um' as 'Pm' on p.3 (20Pm, 42Pm, 35Pm, 7Pm); confirmed as um on the page image.
+entries:
+  - {table: interconnects, row_id: ectc51529.2024.00011-a-i3, field: pitch_um, value: 400, unit: um, basis: design_target, locator: "p.4 Table 1", note: "Package Pin Pitch"}
+  - {table: stack_layers, row_id: ectc51529.2024.00011-a-L04, field: line_um, value: 20, unit: um, basis: design_target, locator: "p.4 Table 1", note: "RDL L/S 20/12 um, 9 um thick"}
+  - {table: metrics, row_id: ectc51529.2024.00011-a-m4, field: value, value: 2.1, unit: mm, basis: measured, locator: "p.5 Fig. 16", note: "w/ structural, 2nd panelization read point"}
+derived: []
+conflicts:
+  - {table: interconnects, row_id: ectc51529.2024.00011-a-i3, field: height_um, values: [35, 25], locators: ["p.3 Sec. II; p.7 Sec. IV", "p.3 Fig. 10"], chosen: 35, why: "text > schematic; Fig. 10 labels the LGA/flag level 0.025 mm"}
+  - {table: metrics, row_id: ectc51529.2024.00011-a-m14, field: n_samples, values: [40, 80], locators: ["p.6 Table 2", "p.5 Sec. III.C; p.6 Sec. IV"], chosen: 40, why: "result table > text; text says 80 units for all tests; Table 2 lists 40 for TC and uHAST, 80 for precon and HTS"}
+  - {table: metrics, row_id: ectc51529.2024.00011-a-m15, field: n_samples, values: [40, 80], locators: ["p.6 Table 2", "p.5 Sec. III.C; p.6 Sec. IV"], chosen: 40, why: "result table > text; text says 80 units for all tests; Table 2 lists 40 for TC and uHAST, 80 for precon and HTS"}
+  - {table: process_steps, row_id: ectc51529.2024.00011-F1-s03, field: notes, values: ["70 x 250 mm strips", "75 x 250 mm strips"], locators: ["p.1 Abstract", "p.2 Fig. 2; p.4 Sec. III; p.6 Sec. III.D"], chosen: "75 x 250 mm", why: "body text and figures repeatedly state 75 x 250 mm"}
+  - {table: test_vehicles, row_id: ectc51529.2024.00011-a, field: package_thickness_mm, values: [0.85, 0.849], locators: ["p.4 Table 1", "p.3 Fig. 10"], chosen: 0.85, why: "table > schematic (rounding)"}
+excluded:
+  - "leadframe market CAGR 6.9%, 1.7% 2020 growth, 15.8% post-pandemic rise (market background)"
+  - "traditional QFN process flow, 75x250 mm leadframe strip standard of ref [2], QFN wettable-flank step cut of ref [3]"
+  - "QFN leadframe lead times 4-12 weeks (supply chain background)"
+  - "600 mm FOPLP 6-sided protection results of refs [4,5]"
+not_reported:
+  - die x/y and function (only 8 mm2 area), structural die size, Cu stud diameter
+  - mold compound and SMS products, laminate material, LDI tool, plating conditions, cure/mold conditions
+  - warpage measurement method/temperature and sign convention
+  - board-level reliability data; electrical performance
+  - electrical_interfaces, optical_interfaces
+source_quality:
+  - "Candidates p04_table1 and p06_table2 cover only the table captions; tables re-cropped manually."
+  - "Text layer garbles micro sign as 'P' on p.3."
+revisions:
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00011-F1", change: "tv_ids a -> a;b; notes added", reason: "repass: TV b (no structural Si, FOR 3.5) built with the same panel flow (p.5 Sec. III.B, Fig. 16)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00011-F1-s01", change: "category other -> bumping", reason: "repass: Cu stud formation on wafer"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00011-F1-s03", change: "split 'structural Si: a 2 dies / b none' added", reason: "repass convention: per-variant value in split"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00011-F1-s08", change: "target RDL L/S 20/12 um and thickness_um 9 added (Table 1)", reason: "repass: stated geometry on the step"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00011-F1-s09", change: "target Cu stump 120 x 180 um added (Table 1)", reason: "repass: stated geometry on the step"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00011-F1-s12", change: "target LGA 200 x 380 um, 400 um pitch, 40 leads, Cu 35 um above mold added", reason: "repass: stated geometry on the step (Table 1, Sec. II)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00011-F1-s13", change: "seq 13 -> 14 (after segment singulation s14, now seq 13); thickness_um 7 added", reason: "repass: Fig. 6 places Pad Finish after Segment Saw; SMS 7 um (p.3 Sec. II)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00011-F1-s19", change: "step_basis -> inferred_order", reason: "repass: strip saw position relative to marking not stated"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00011-F1-s21", change: "deleted (strip open/short test)", reason: "repass: electrical test, result already in metric a-m11"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51529.2024.00011-F2", change: "added generic_platform flow 'RDL based LGA process flow (Fig. 6)' with 17 steps (F2-s01..s17)", reason: "repass: distinct platform flow drawn in p.2 Fig. 6; Strip Test, Tape & Reel and Board Mount omitted"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00011-F2-s08", change: "category: 'other' -> 'electroplating'", reason: "v001 category_other: Cu stump formed with the first RDL plating process (p.4 Sec. III); matches F1-s09"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00011-F2-s12", change: "category: 'other' -> 'electroplating'", reason: "v001 category_other: LGA leads formed by a copper plating process (p.4 Sec. III; p.7 Sec. IV); matches F1-s12"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00011-F2-s16", change: "category: 'other' -> 'laser_marking'", reason: "v001 category_other: backend 'laser marking' (p.4 Sec. III); matches F1-s17"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00011-F1-s06", change: "target: '' -> '1st EMC over die 25 um at Cu stud level (Fig. 10)'", reason: "v001 target_missing a-L05/b-L05: Fig. 10 stack-up 0.025 mm Cu stud level above the die"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00011-F1-s11", change: "target: '' -> '2nd EMC / Cu stump level 34 um (Fig. 10)'", reason: "v001 target_missing a-L03/b-L03: Fig. 10 stack-up 0.034 mm Cu stump / 2nd EMC level"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00011-F1-s15", change: "target: '' -> 'die and 1st EMC level 665 um (Fig. 10)'", reason: "v001 target_missing a-L07/b-L07 (and preexisting L06): Fig. 10 stack-up 0.665 mm die/1st EMC level"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00011-F1-s15", change: "notes: '' -> 'Assignment of the 665 um level to this backgrind inferred: Fig. 10 shows the die backside flush with the 1st EMC on the 100 um backside laminate; no wafer backgrind stated in the TV flow.'", reason: "flag inferred assignment"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00011-F1-s16", change: "thickness_um: '' -> '100'", reason: "v001 target_missing a-L08/b-L08: Fig. 10 bottom layer 0.100 mm"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00011-F1-s16", change: "notes: '' -> 'Fig. 10 bottom 0.100 mm layer; mapping to the backside laminate inferred (as stack layer L08).'", reason: "flag inferred mapping"}

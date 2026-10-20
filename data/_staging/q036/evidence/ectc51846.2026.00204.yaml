@@ -1,0 +1,69 @@
+paper_id: ectc51846.2026.00204
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00204/text.md
+  - references/ectc51846.2026.00204/source.json
+  - references/ectc51846.2026.00204/figures/page_02.png
+  - references/ectc51846.2026.00204/figures/page_03.png
+  - references/ectc51846.2026.00204/figures/page_04.png
+  - references/ectc51846.2026.00204/figures/page_05.png
+  - references/ectc51846.2026.00204/figures/page_06.png
+  - references/ectc51846.2026.00204/figures/cand/p04_fig5.png
+  - references/ectc51846.2026.00204/figures/cand/p05_fig10.png
+  - references/ectc51846.2026.00204/figures/cand/p04_fig7.png
+  - references/ectc51846.2026.00204/figures/cand/p02_fig1.png
+  - references/ectc51846.2026.00204/figures/cand/p03_fig4.png
+  - references/ectc51846.2026.00204/figures/cand/p06_fig12.png
+figure_reading_method: >-
+  Page renders p.2-6; 400 dpi re-crops of Fig. 2(b) and Fig. 12(b). Fig. 2(b) plateaus read against the 50-300 C
+  axis (~1.58 px/C at 400 dpi crop scale, +/-3 C). Fig. 12(b) peaks read against 0-24 MPa axis (+/-0.3 MPa).
+  Fig. 8 DSC peak temperatures are printed labels. Fig. 10 gaps are printed labels.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00204-c-m10, field: value, value: 20.4, unit: MPa, basis: measured, locator: "p.6 Fig. 12(b)", note: "black curve peak, 0.5 N"}
+  - {table: metrics, row_id: ectc51846.2026.00204-c-m11, field: value, value: 22.8, unit: MPa, basis: measured, locator: "p.6 Fig. 12(b)", note: "red curve peak, 1.0 N"}
+  - {table: metrics, row_id: ectc51846.2026.00204-c-m13, field: value, value: 258, unit: C, basis: measured, locator: "p.3 Fig. 2(b)", note: "280 C setting; plateau drifts ~255 to ~260 C"}
+derived:
+  - {table: interconnects, row_id: ectc51846.2026.00204-c-i2, field: bonding_time_s, value: 120, formula: "2 min x 60 (unit conversion)", inputs: "p.5 Sec. III.C.1"}
+  - {table: interconnects, row_id: ectc51846.2026.00204-c-i3, field: bonding_time_s, value: 120, formula: "2 min x 60 (unit conversion)", inputs: "p.5 Sec. III.C.1"}
+  - {table: process_steps, row_id: ectc51846.2026.00204-F2-s03, field: time_s, value: 120, formula: "2 min x 60 (unit conversion)", inputs: "p.5 Sec. III.C.1"}
+conflicts:
+  - {table: stack_layers, row_id: ectc51846.2026.00204-a-L02, field: thickness_um, values: [3, 3.5], locators: ["p.3 Fig. 4(a) 'Pad height: 3um' profile", "p.2 Sec. II.B '~3.5 um' Ti/Cu/Au for 20 and 40 um pitch"], chosen: 3, why: "measured profile over text"}
+  - {table: stack_layers, row_id: ectc51846.2026.00204-b-L02, field: material, values: ["Ti/Cu/Ni/Au", "Ti/Ni/Cu/Au"], locators: ["p.4 Fig. 5(b) label", "p.2 Sec. II.B"], chosen: "Ti/Cu/Ni/Au", why: "label on measured cross-section image over text"}
+  - {table: metrics, row_id: ectc51846.2026.00204-c-m1, field: value, values: ["~1 um bonding layer (hot plate, Fig. 5)", "~2.9 um solder layer (TCB, Fig. 10)"], locators: ["p.4 Sec. III.A", "p.5 Sec. III.C.1"], chosen: "both kept as separate variants", why: "different bonding routes, not a true conflict"}
+excluded:
+  - "Roadmap pitches (<10 um by 2028), HBM 20 um pitch / 5 um stack spacing, HBM4E 10 um pitch, ref [1]"
+  - "Sn-Ag nanoparticle paste stencil printing at ~500 um pitch, ref [10]"
+  - "Comparison of 20-23 MPa with MUF/NCF-assisted Cu-pillar joints (no values given)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - chip thickness, pad diameter per pitch (5-10 um given jointly), pad count per chip except ~40,000 XRM sites (20 um chip)
+  - TC bonding temperature for the Fig. 10-12 samples; bonding pressure in MPa
+  - electrical resistance / daisy-chain continuity, reliability tests, yield statistics
+  - die shear sample count; nanoparticle loading in paste; which alloy (Sn or Sn-Ag-Cu) used per bond test
+judgment_calls:
+  - "Three TVs by pad pitch / chip build: 40 um bump-only coupon, 10 um 10x10 mm chip pair, 20 um 4.6x4.6 mm chip pair; hot-plate vs TCB and 0.5 vs 1.0 N are variants of TV c."
+  - "Paste-material metrics (DSC, viscosity, particle size) attached to TV c with scope 'applies to all TVs'."
+  - "Interconnect level/type 'other' (chip-to-chip self-assembled nanosolder joint; not a microbump or Cu pillar)."
+  - "Electrical insulation statement entered as author_estimate (EDS-based, no electrical test)."
+revisions:
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00204-F1-s04", change: "tv_id 'ectc51846.2026.00204-a' -> ''; temp_c '' -> '205'; temp_c_max '' -> '210'; conditions '205-210 C, within 5 s' -> '205-210 C (stated range), within 5 s'; result 'bumps formed along electrode pattern; bump height <1 um' -> 'bumps formed along electrode pattern at 40 and 10 um pitch; bump height <1 um (Fig. 4(a) profile)'; locator 'p.2 Sec. II.B; p.3 Sec. III.A' -> 'p.2 Sec. II.B; p.3 Sec. III.A; p.3 Fig. 4'", reason: "bumping identical for a, b, c (Sec. II.B one condition): delta -> shared step; 205-210 C range typed"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00204-F1-s05", change: "deleted (sibling copy: 'Bumping (self-assembly of nanosolder on pads) on hot plate')", reason: "duplicate of shared bumping step F1-s04"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00204-F1-s06", change: "deleted (sibling copy: 'Bumping (self-assembly of nanosolder on pads) on hot plate')", reason: "duplicate of shared bumping step F1-s04"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00204-F1-s07", change: "deleted (measurement: 'Bump pattern and thickness profile by 3D laser scanning microscope')", reason: "laser-microscope measurement (Sec. II.D characterization), already metrics ectc51846.2026.00204-a-m1..m3"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00204-F1-s10", change: "deleted (measurement: 'Cross-section FE-SEM and EDS mapping')", reason: "cross-section SEM/EDS is failure analysis, already metrics ectc51846.2026.00204-b-m2, b-m3"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00204-F1-s11", change: "deleted (measurement: 'Cross-section FE-SEM and EDS mapping; XRM over whole chip')", reason: "SEM/EDS and XRM are characterization, already metrics ectc51846.2026.00204-c-m1, c-m2"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00204-F1-s08", change: "temp_c '' -> '210'; temp_c_max '' -> '220'; conditions '210-220 C, ~40 s, near-zero (low) pressure' -> '210-220 C (stated range), ~40 s, near-zero (low) pressure'", reason: "210-220 C range typed; delta kept because TV a is bump-only (no bonding)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00204-F1-s09", change: "temp_c '' -> '210'; temp_c_max '' -> '220'; conditions '210-220 C, ~40 s, near-zero (low) pressure' -> '210-220 C (stated range), ~40 s, near-zero (low) pressure'", reason: "210-220 C range typed; delta kept because TV a is bump-only (no bonding)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00204-F1", change: "flow_name 'hot-plate bumping and bonding (Sec. II.B)' -> 'nanosolder paste, hot-plate bumping and bonding (Sec. II.A-B)'; locator 'p.2 Sec. II.A; p.2 Sec. II.B; p.3 Sec. III.A; p.3 Sec. II.D; p.3 Fig. 4; p.4 Sec. III.A; p.4 Fig. 5; p.4 Fig. 6' -> 'p.2 Sec. II.A; p.2 Sec. II.B; p.3 Sec. III.A; p.3 Fig. 4; p.4 Sec. III.A; p.4 Fig. 5'", reason: "flow covers paste prep, coating, hot-plate bumping (a, b, c) and hot-plate bonding deltas (b, c)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00204-F1", change: "step_basis stated_in_flow set on 6 steps (others as revised)", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00204-F2-s01", change: "seq '7' -> '1'", reason: "seq restarts in flow"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00204-F2-s02", change: "seq '8' -> '2'", reason: "seq restarts in flow"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00204-F2-s03", change: "seq '9' -> '3'; split '' -> 'bonding force 0.5 N / 1.0 N'; conditions '0.5 N or 1.0 N, 2 min; bonding temperature not stated' -> '2 min; bonding temperature not stated'", reason: "force sweep 0.5/1.0 N goes in split (p.5 Sec. III.C.1, Fig. 10)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00204-F2-s04", change: "deleted (measurement: 'Cross-section SEM and EDS mapping of TC-bonded interface')", reason: "cross-section SEM/EDS is failure analysis, already metrics ectc51846.2026.00204-c-m3..m8"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00204-F2-s05", change: "deleted (test: 'Die shear test')", reason: "die shear is a post-build test, already metrics ectc51846.2026.00204-c-m9..m11"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00204-F2", change: "locator 'p.2 Sec. II.C; p.2 Fig. 1(a); p.3 Sec. II.C; p.2 Fig. 1(b); p.5 Sec. III.C.1; p.5 Fig. 10; p.6 Fig. 11; p.3 Sec. II.D; p.6 Fig. 12' -> 'p.2 Sec. II.C; p.2 Fig. 1(a); p.2 Fig. 1(b); p.3 Sec. II.C; p.5 Sec. III.C.1; p.5 Fig. 10'", reason: "locators of removed test rows dropped"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00204-F2", change: "step_basis stated_in_flow set on 3 steps (others as revised)", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00204", change: "process_flow_level full confirmed (temperatures, times, force, tools stated)", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00204-F1-s04", change: "category 'reflow' -> 'bumping'", reason: "v2.4 bumping category: hot-plate self-assembled bump formation (p.2 Sec. II.B)"}

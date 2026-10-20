@@ -48,3 +48,15 @@ not_reported:
   - Sample #1 ACR and Q (NA in Table IV)
 source_quality:
   - "Candidates p03_fig3 (label fragment) and p05_fig4 (partial) unusable; no candidate for Table IV; manual crops used."
+revisions:
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f03", change: "renumbered from tcpmt.2025.3557745-f05 (rank 5 -> 3)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f04", change: "renumbered from tcpmt.2025.3557745-f03 (rank 3 -> 4)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f05", change: "added Fig. 2 p.3 stack_schematic (manual) at rank 5", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f06", change: "added Table I p.4 stack_schematic (candidate) at rank 6", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f07", change: "added Fig. 1 p.1 block_diagram (candidate) at rank 7", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f08", change: "renumbered from tcpmt.2025.3557745-f04 (rank 4 -> 8)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f09", change: "renumbered from tcpmt.2025.3557745-f06 (rank 6 -> 9)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f10", change: "added Fig. 8 p.7 electrical_plot (candidate) at rank 10", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f11", change: "added Fig. 7 p.6 electrical_plot (candidate) at rank 11", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f12", change: "added Table V p.8 data_table (manual) at rank 12", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f13", change: "added Table III p.6 data_table (candidate) at rank 13", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}

@@ -34,3 +34,10 @@ not_reported:
   - warpage, stress values (model figures carry no numbers); reliability tests; sample counts for yield loss
 source_quality:
   - "Model figures (Fig. 6-8) have no numeric axes or colour-bar values."
+revisions:
+  - {date: 2026-10-19, source: audit_x2B, row_id: "ectc51687.2025.00061-a-i1", change: "ic_type microbump -> unspecified; metallurgy solder kept with note 'inferred from FAR'", reason: "p.3 Fig. 5 labels only 'EMIB pitch'; p.4 Sec. IV.B names solder bumps only for EIC-PIC; FAR implies solder"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: "ectc51687.2025.00061-a-m1", change: "variant 'after pre-screen thermal bake (original TCB profile)' -> 'incoming substrates after pre-screen bake at solder melting temperature'", reason: "p.5 Sec. IV.C: pre-screen bake precedes TCB, so no TCB profile applies to the ~50% figure"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00061-f06", change: "added Fig. 10 (xray_csam, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00061-f07", change: "re-ranked Fig. 14: ectc51687.2025.00061-f06 -> ectc51687.2025.00061-f07", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00061-f08", change: "added Fig. 9 (micrograph, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00061-f09", change: "added Fig. 13 (package_photo, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}

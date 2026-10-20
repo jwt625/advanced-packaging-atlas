@@ -1,0 +1,103 @@
+paper_id: ectc51909.2023.00009
+verified_on: 2026-10-18
+schema_version: 2
+source_files:
+  - references/ectc51909.2023.00009/text.md
+  - references/ectc51909.2023.00009/source.json
+  - references/ectc51909.2023.00009/figures/page_02.png
+  - references/ectc51909.2023.00009/figures/page_03.png
+  - references/ectc51909.2023.00009/figures/page_04.png
+  - references/ectc51909.2023.00009/figures/page_05.png
+  - references/ectc51909.2023.00009/figures/page_06.png
+  - references/ectc51909.2023.00009/figures/page_07.png
+  - references/ectc51909.2023.00009/figures/page_08.png
+locator_notes:
+  - "No page_01.png render exists (page 1 is text only: title, abstract, Sec. I-II start)."
+  - "Fig. 11, 20, 21, 26, 27 re-rendered from source.pdf at 250-300 dpi in scratch for label/axis reading."
+entries:
+  - {table: interconnects, row_id: ectc51909.2023.00009-a-i2, field: resistance_mohm, value: 21, unit: mOhm, basis: measured, locator: "p.8 Sec. IV.B", note: "(21 +/- 3) mOhm Kelvin, 12 um TSV"}
+  - {table: interconnects, row_id: ectc51909.2023.00009-a-i2, field: yield_pct, value: 95, unit: "%", basis: measured, locator: "p.1 Abstract; p.8 Sec. V", note: "'greater than 95 %'"}
+  - {table: interconnects, row_id: ectc51909.2023.00009-a-i3, field: resistance_mohm, value: 2100, unit: mOhm, basis: measured, locator: "p.7 Fig. 26", note: "VIA 1 CDF 50% at ~2.1 Ohm (range ~1.7-2.4)"}
+  - {table: interconnects, row_id: ectc51909.2023.00009-a-i4, field: resistance_mohm, value: 2250, unit: mOhm, basis: measured, locator: "p.7 Fig. 26", note: "VIA 2 CDF 50% at ~2.25 Ohm (range ~2.0-3.5)"}
+  - {table: interconnects, row_id: ectc51909.2023.00009-a-i5, field: resistance_mohm, value: 1400, unit: mOhm, basis: measured, locator: "p.7 Fig. 26", note: "VIA 3 CDF 50% at ~1.4 Ohm; 75% knee ~1.5 Ohm"}
+  - {table: metrics, row_id: ectc51909.2023.00009-a-m6, field: value, value: 3.0e-8, unit: A, basis: measured, locator: "p.6 Fig. 20", note: "dark current at -1 V between 1e-8 and 1e-7 gridlines"}
+  - {table: metrics, row_id: ectc51909.2023.00009-a-m18, field: value, value: 26.3, unit: mOhm, basis: measured, locator: "p.8 Fig. 27", note: "11 um CDF 50%; 13 um CDF 50% ~16.8 mOhm"}
+  - {table: metrics, row_id: ectc51909.2023.00009-a-m22, field: value, value: 93.4, unit: um, basis: measured, locator: "p.4 Fig. 11", note: "SEM labels 93.4 um depth; 11.9/11.0/9.9 um CD top/mid/bottom"}
+derived:
+  - {table: process_steps, row_id: ectc51909.2023.00009-F1-s16, field: thickness_um, value: 0.11, formula: "Ti 10 nm + TiN 100 nm = 110 nm = 0.11 um", inputs: "p.3 Sec. III.A"}
+  - {table: interconnects, row_id: ectc51909.2023.00009-a-i7, field: pitch_um, value: 80, formula: "bump diameter + space = 40 + 40", inputs: "p.5 Sec. III.E.3"}
+  - {table: stack_layers, row_id: ectc51909.2023.00009-a-L12, field: thickness_um, value: 0.11, formula: "Ti 10 nm + TiN 100 nm = 110 nm = 0.11 um", inputs: "p.3 Sec. III.A"}
+  - {table: stack_layers, row_id: ectc51909.2023.00009-a-L24, field: thickness_um, value: 0.3, formula: "Ti 100 nm + Cu 200 nm = 0.3 um", inputs: "p.5 Sec. III.E.2"}
+  - {table: stack_layers, row_id: ectc51909.2023.00009-a-L28, field: thickness_um, value: 0.6, formula: "Ti 200 nm + Cu 400 nm = 0.6 um", inputs: "p.5 Sec. III.E.3"}
+  - {table: interconnects, row_id: ectc51909.2023.00009-a-i3, field: resistance_mohm, value: 2100, formula: "2.1 Ohm x 1000 (unit conversion, basis kept)", inputs: "p.7 Fig. 26"}
+  - {table: interconnects, row_id: ectc51909.2023.00009-a-i4, field: resistance_mohm, value: 2250, formula: "2.25 Ohm x 1000 (unit conversion, basis kept)", inputs: "p.7 Fig. 26"}
+  - {table: interconnects, row_id: ectc51909.2023.00009-a-i5, field: resistance_mohm, value: 1400, formula: "1.4 Ohm x 1000 (unit conversion, basis kept)", inputs: "p.7 Fig. 26"}
+  - {table: process_steps, row_id: ectc51909.2023.00009-F5-s16, field: time_s, value: 10800, formula: "3 h x 3600 (unit conversion)", inputs: "p.5 Sec. III.E.2"}
+  - {table: "nm->um conversions", formula: "x nm / 1000 for all stack_layers thickness/via cells (60, 300, 600, 540, 1500, 500, 20, 310, 300, 165, 65, 800 nm; 300/750 nm vias)", inputs: "p.3-p.5 Sec. III"}
+  - {table: process_steps, row_id: ectc51909.2023.00009-F1-s03, field: thickness_in_um, value: 0.31, formula: "310 nm / 1000", inputs: "p.3 Sec. III.A"}
+  - {table: process_steps, row_id: ectc51909.2023.00009-F2-s04, field: thickness_um, value: 0.3, formula: "300 nm / 1000", inputs: "p.4 Sec. III.B"}
+  - {table: process_steps, row_id: ectc51909.2023.00009-F2-s11, field: thickness_um, value: 0.1, formula: "100 nm / 1000", inputs: "p.4 Sec. III.B"}
+  - {table: process_steps, row_id: ectc51909.2023.00009-F3-s06, field: thickness_um, value: 0.5, formula: "500 nm / 1000", inputs: "p.5 Sec. III.C"}
+  - {table: process_steps, row_id: ectc51909.2023.00009-F3-s09, field: thickness_um, value: 0.6, formula: "600 nm / 1000", inputs: "p.5 Sec. III.C"}
+conflicts:
+  - {table: interconnects, row_id: ectc51909.2023.00009-a-i2, field: resistance_mohm, values: ["below 22", "21 +/- 3"], locators: ["p.1 Abstract", "p.8 Sec. IV.B"], chosen: 21, why: "result text over abstract summary"}
+  - {table: metrics, row_id: ectc51909.2023.00009-a-m22, field: value, values: [100, 93.4], locators: ["p.4 Sec. III.B (TSV 100 um thick)", "p.4 Fig. 11 SEM after DRIE"], chosen: "100 design in interconnects; 93.4 measured in metrics", why: "different quantities (design TSV height vs Si etch depth label)"}
+  - {table: metrics, row_id: ectc51909.2023.00009-a-m10, field: value, values: [18, 27, 20], locators: ["p.6 Sec. IV.A (1 V)", "p.6 Sec. IV.A (2 V)", "p.8 Sec. V (1.5 V)"], chosen: "all entered as bias variants", why: "different bias points"}
+  - {table: stack_layers, row_id: ectc51909.2023.00009-a-L16, field: thickness_um, values: [0.31, 0.3], locators: ["p.3 Sec. III.A SOI film 310 nm", "p.3 Sec. III.A waveguide 300 nm"], chosen: "both: film 310 nm, waveguide 300 nm as separate feature rows", why: "different features"}
+  - {table: interconnects, row_id: ectc51909.2023.00009-a-i3, field: diameter_um, values: ["300 nm width square", "300 nm diameter"], locators: ["p.4 Sec. III.C", "p.7 Sec. IV.B"], chosen: 0.3, why: "same value; shape wording differs"}
+excluded:
+  - "Ref [2] active-interposer metrics (0.6 ns/mm, 3 Tb/s/mm2, 156 mW/mm2) appear only in the reference list title."
+  - "POPSTAR architecture performance claims (bandwidth, latency, power) attributed to ref [3]; backside cavity tuning-power benefit to ref [10]."
+  - "SOI platform description attributed to ref [11]."
+not_reported:
+  - electrical_interfaces (no data rate, energy per bit or protocol; 10 Gbit/s is a stated capability, not measured)
+  - interposer die size, BEOL dielectric thicknesses for Via 1/2 other than 540 nm, metal patterning method
+  - u-pillar/bump bonding to dies (system not assembled), BGA details
+  - implant species/doses, anneal temperatures (except TSV 400 C and LTC 230 C), etch chemistries except SF6 nail reveal
+  - fiber attach and coupling to fiber (only 'Fiber Coupling' label in Fig. 1)
+  - warpage, reliability, thermal metrics
+  - "process_steps: ectc51909.2023.00009-b (ONoC system assembly not described; system still in fabrication)"
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F1", change: "flow_name \"front-end photonic\" -> \"Front-end photonic (Sec. III.A; Fig. 4 blocks 1-2)\"; locator \"p.3 Sec. III.A; p.3 Fig. 5; p.3 Fig. 6(b); p.3 Fig. 8; p.3 Fig. 9; p.4 Fig. 10\" -> \"p.2 Fig. 4; p.3 Sec. III.A; p.3 Fig. 5; p.3 Fig. 6(b); p.3 Fig. 8; p.3 Fig. 9; p.4 Fig. 10\"", reason: "flow named after the paper's section and Fig. 4 building block; Fig. 4 is the schematic process flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F2", change: "flow_name \"TSV middle\" -> \"TSV middle (Sec. III.B; Fig. 4 block 3)\"; locator \"p.4 Sec. III.B; p.4 Fig. 11; p.4 Fig. 12(a); p.4 Fig. 12(b); p.4 Fig. 13; p.4 Fig. 14\" -> \"p.2 Fig. 4; p.4 Sec. III.B; p.4 Fig. 11; p.4 Fig. 12(a); p.4 Fig. 12(b); p.4 Fig. 13; p.4 Fig. 14\"", reason: "flow named after the paper's section and Fig. 4 building block; Fig. 4 is the schematic process flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F3", change: "flow_name \"BEOL\" -> \"BEOL (Sec. III.C; Fig. 4 block 4)\"; locator \"p.4 Sec. III.C; p.5 Fig. 15; p.5 Sec. III.C\" -> \"p.2 Fig. 4; p.4 Sec. III.C; p.5 Fig. 15; p.5 Sec. III.C\"", reason: "flow named after the paper's section and Fig. 4 building block; Fig. 4 is the schematic process flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F4", change: "flow_name \"u-pillars\" -> \"u-pillars (Sec. III.D; Fig. 4 block 4)\"; locator \"p.5 Sec. III.D\" -> \"p.2 Fig. 4; p.5 Sec. III.D\"", reason: "flow named after the paper's section and Fig. 4 building block; Fig. 4 is the schematic process flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F5", change: "flow_name \"backside\" -> \"Backside: thinning, Cu nail reveal, RDL, cavities, passivation, bumps, debond (Sec. III.E; Fig. 4 blocks 5-8)\"; locator \"p.5 Sec. III.E.1; p.5 Fig. 17; p.5 Sec. III.E.2; p.5 Fig. 18(a); p.5 Fig. 18(b); p.5 Sec. III.E.3\" -> \"p.2 Fig. 4; p.5 Sec. III.E.1; p.5 Fig. 17; p.5 Sec. III.E.2; p.5 Fig. 18(a); p.5 Fig. 18(b); p.5 Sec. III.E.3\"", reason: "flow named after the paper's section and Fig. 4 building block; Fig. 4 is the schematic process flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F2", change: "level \"ordered\" -> \"full\"", reason: "TSV flow carries materials, dimensions and the 400 C anneal (rule 7 full)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F1", change: "step_basis stated_in_flow on all steps of F1-F5 (except F2-s01 inferred_order)", reason: "order stated in Sec. III text and Fig. 4 building blocks"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F1-s03", change: "step \"Si patterned to 3 thicknesses (waveguide 300 nm, Rib slab 165 nm, Deep-Rib slab 65 nm)\" -> \"Si patterned to 3 thicknesses (Si3N4 hard mask)\"; target (empty) -> \"waveguide 300 nm; Rib slab 165 nm; Deep-Rib slab 65 nm\"; thickness_in_um (empty) -> \"0.31\"; basis \"stated\" -> \"design_target\"", reason: "Si layer and etch-level thicknesses stated in Sec. III.A / Fig. 5; input SOI film 310 nm"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F1-s16", change: "target (empty) -> \"Ti 10 nm / TiN 100 nm\"; notes \"10 nm Ti / 100 nm TiN.\" -> (empty)", reason: "stated heater stack geometry"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F1-s21", change: "target \"ectc51909.2023.00009-a-i6\" -> \"300 nm diameter contacts\"; locator \"p.3 Sec. III.A; p.3 Fig. 9\" -> \"p.3 Sec. III.A; p.3 Fig. 9; p.4 Sec. III.B\"", reason: "target holds stated geometry, not row ids (contract convention); 300 nm W contact diameter stated p.4 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F2-s01", change: "step_basis \"stated_in_flow\" -> \"inferred_order\"; notes (empty) -> \"Resist patterning implied before RIE/DRIE (Sec. III.B); order placed.\"", reason: "photoresist patterning implied by 'through patterned photoresist'; order not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F2-s02", change: "target \"ectc51909.2023.00009-a-i2\" -> (empty)", reason: "target holds stated geometry, not row ids (contract convention)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F2-s03", change: "step \"Si DRIE, Bosch process, 12 um diameter x 100 um\" -> \"Si DRIE, Bosch process\"; target \"ectc51909.2023.00009-a-i2\" -> \"12 um diameter x 100 um depth\"", reason: "target holds stated geometry, not row ids (contract convention); stated TSV geometry"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F2-s04", change: "step \"TSV isolation: 300 nm SACVD + 100 nm PECVD SiO2\" -> \"TSV isolation: SACVD SiO2\"; thickness_um (empty) -> \"0.3\"", reason: "composite split per stated order (300 nm SACVD then 100 nm PECVD)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F2-s11", change: "added: TSV isolation: PECVD SiO2", reason: "split from s04: second isolation layer stated in Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F2-s05", change: "step \"Ti PVD adhesion, TiN CVD barrier, Cu PVD seed\" -> \"Ti PVD adherence layer\"; material \"Ti/TiN/Cu\" -> \"Ti\"", reason: "composite split per stated deposition sequence (Ti PVD, TiN CVD, Cu PVD)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F2-s12", change: "added: TiN CVD barrier", reason: "split from s05: TiN CVD barrier stated in sequence"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F2-s13", change: "added: Cu PVD seed layer", reason: "split from s05: Cu PVD seed stated in sequence"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F2", change: "seq renumbered 1..13 within flow", reason: "seq restarted per flow; split rows inserted"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F3-s03", change: "target (empty) -> \"300 nm square contacts\"", reason: "stated contact geometry"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F3-s05", change: "target (empty) -> \"750 nm square contacts; Via 3 interlayer 1.5 um\"", reason: "stated Via 3 geometry"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F3-s06", change: "step \"Final passivation: planarized 500 nm SiO2 PECVD + 600 nm SiN PECVD\" -> \"Final passivation: planarized 500 nm SiO2 PECVD\"; material \"SiO2/SiN\" -> \"SiO2\"; thickness_um (empty) -> \"0.5\"", reason: "composite split per stated order (500 nm SiO2 then 600 nm SiN)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F3-s09", change: "added: Final passivation: 600 nm SiN PECVD", reason: "split from s06: SiN layer of the final passivation"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F3", change: "seq renumbered 1..9 within flow", reason: "seq restarted per flow; split row inserted"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F4-s02", change: "target (empty) -> \"CD 20 um, pitch 20 um\"", reason: "stated pillar CD and pitch"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F4-s03", change: "target \"ectc51909.2023.00009-a-i1\" -> \"Cu 5 um / Ni 2 um / Au 0.3 um\"", reason: "target holds stated geometry, not row ids (contract convention)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F4", change: "seq renumbered 1..5 within flow", reason: "seq restarted per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F5-s01", change: "conditions (empty) -> \"725 um bulk Si carrier\"", reason: "stated carrier"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F5-s05", change: "target \"ectc51909.2023.00009-a-i2\" -> (empty)", reason: "target holds stated geometry, not row ids (contract convention); nail height already in result"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F5-s09", change: "target (empty) -> \"L/S 10/10 um\"", reason: "stated RDL L/S"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F5-s11", change: "target \"ectc51909.2023.00009-a-L25\" -> (empty)", reason: "target holds stated geometry, not row ids (contract convention); Cu thickness already in thickness_um"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F5-s14", change: "target \"ectc51909.2023.00009-a-L22\" -> \"40 um diameter, bulk Si to BOX\"", reason: "target holds stated geometry, not row ids (contract convention); stated cavity geometry"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F5-s18", change: "target (empty) -> \"40 um bump diameter, 40 um space\"", reason: "stated bump geometry"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F5-s19", change: "target \"ectc51909.2023.00009-a-i7\" -> \"Cu 5 um / Ni 2 um / SnAg 17 um\"", reason: "target holds stated geometry, not row ids (contract convention)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F5-s20", change: "step \"Resist stripped and seed etched\" -> \"Resist stripped\"", reason: "composite split (strip then seed etch, Sec. III.E.3)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F5-s23", change: "added: Bump seed layer etched", reason: "split from s20: seed etch stated after resist strip"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F5", change: "seq renumbered 1..23 within flow", reason: "seq restarted per flow; split row inserted"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-b", change: "added not_reported process_steps entry", reason: "package TV b is a design not yet assembled (p.8 Sec. V)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F1-s01", change: "category other -> device_fab", reason: "ion implantation for MRR PN/PIN junctions and access paths (p.3 Sec. III.A); device_fab added to step_category (DevLog-007 pass B decision 1)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F1-s04", change: "category other -> device_fab", reason: "additional implantation on MRR slab (p.3 Sec. III.A); device_fab added to step_category (DevLog-007 pass B decision 1)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F1-s16", change: "thickness_um '' -> 0.11", reason: "heater stack Ti 10 nm / TiN 100 nm stated (p.3 Sec. III.A); same value as stack_layers L12; derived entry added"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F1-s24", change: "added carrier_prep step seq 1 (SOI substrate, 310 nm Si on 800 nm BOX); F1-s01..s23 seq +1", reason: "starting substrate stated at the start of the front-end flow (p.3 Sec. III.A); covers stack_layers L20 BOX 0.8 um"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00009-F1;ectc51909.2023.00009-F2;ectc51909.2023.00009-F3;ectc51909.2023.00009-F4;ectc51909.2023.00009-F5", change: "build_seq 1-5 confirmed, no change", reason: "Fig. 4 (p.2) blocks 1-8 and Sec. III order: front-end photonic, TSV middle, BEOL / u-pillars, backside"}

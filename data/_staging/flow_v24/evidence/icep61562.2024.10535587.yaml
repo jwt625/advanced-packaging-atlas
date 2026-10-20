@@ -1,0 +1,30 @@
+paper_id: icep61562.2024.10535587
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/icep61562.2024.10535587/text.md
+  - references/icep61562.2024.10535587/source.json
+  - references/icep61562.2024.10535587/figures/page_01.png
+  - references/icep61562.2024.10535587/figures/page_02.png
+  - references/icep61562.2024.10535587/figures/candidates.json
+figure_reading_method: >-
+  Page renders; 200 dpi re-crops of Fig. 2, 3, 4; 500 dpi re-crop of Fig. 5 (source raster is low resolution, per-lot
+  labels partly illegible, so only the text-stated 99% and 0.07-15.27% values are entered).
+entries:
+  - {table: metrics, row_id: icep61562.2024.10535587-a-m1, field: scope, value: "98.4-99.9", unit: "%", basis: measured, locator: "p.2 Fig. 5", note: "orange 'AP Yield' labels read approx 99.68, 99.90, 99.59, 99.22, 99.71, 98.41, 99.37, 99.84, 99.57, 99.84, 99.56, 99.12, 99.10; low-res, not entered as values"}
+derived: []
+conflicts:
+  - {table: process_steps, row_id: icep61562.2024.10535587-F1-s02, field: seq, values: ["text order: sputter seed, electroplate Cu studs, pattern thick photoresist, etch photoresist", "Fig. 2: Cu Stud Pattern and Plate"], locators: ["p.1 Sec. II", "p.2 Fig. 2"], chosen: "pattern before plate", why: "Fig. 2 order and physical sequence; text order listed as written in notes"}
+excluded:
+  - "Conclusion, acknowledgment and reference sections are unedited conference-template text (no content)"
+  - "SEMI standards activity, OHT/EFEM/robot design (no numbers besides FOUP >60 kg)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "package/die size, die thickness, number of RDL layers, dielectric material, via size, Cu stud size, ball size/pitch"
+  - "mold compound product, carrier material, cure and reflow conditions, LDI tool"
+  - "die shift magnitude in um, yield definition, lot/sample counts"
+  - "reliability and warpage data"
+source_quality:
+  - "Two-page paper with template boilerplate in Sec. IV onward; title lacks a subject word; Fig. 5 is a low-resolution raster."
+  - "Candidate p02_fig5 bbox points at the page header (0.49-1.0, 0-0.06); p02_fig2 clips the cross-section icons; p02_fig3 (first) is a fragment."

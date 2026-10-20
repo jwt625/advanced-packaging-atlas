@@ -1,0 +1,56 @@
+paper_id: ectc51909.2023.00023
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00023/text.md
+  - references/ectc51909.2023.00023/source.json
+  - references/ectc51909.2023.00023/figures/cand/p02_fig1.png
+  - references/ectc51909.2023.00023/figures/cand/p02_fig3.png
+  - references/ectc51909.2023.00023/figures/cand/p03_fig4.png
+  - references/ectc51909.2023.00023/figures/cand/p04_fig6.png
+  - references/ectc51909.2023.00023/figures/cand/p04_fig7.png
+  - references/ectc51909.2023.00023/figures/cand/p04_fig8.png
+  - references/ectc51909.2023.00023/figures/cand/p05_fig9.png
+  - references/ectc51909.2023.00023/figures/cand/p06_fig10.png
+  - references/ectc51909.2023.00023/figures/cand/p06_fig11.png
+  - references/ectc51909.2023.00023/figures/cand/p06_fig12.png
+  - references/ectc51909.2023.00023/figures/cand/p06_fig13.png
+  - references/ectc51909.2023.00023/figures/cand/p07_fig14.png
+figure_reading_method: >-
+  Candidate crops opened for Figs. 1, 3, 4, 6-14 (all complete). Text layer renders the micro sign as "P" ("3.5 Pm" =
+  3.5 um) and sigma as "V". Pad height 3.5 um read from the Fig. 3 SEM label; Lot 2 50 um edge-row yield (96%) and the
+  Fig. 14 fit equation read off the images.
+entries:
+  - {table: interconnects, row_id: ectc51909.2023.00023-a-i1, field: height_um, value: 3.5, unit: um, basis: measured, locator: "p.2 Fig. 3", note: "vertical DBI pad dimension label on SEM"}
+  - {table: interconnects, row_id: ectc51909.2023.00023-a-i1, field: anneal_temp_c, value: 250, unit: C, basis: design_target, locator: "p.4 Sec. IV.D", note: "flow states 250-300 C; 250 C sufficient"}
+  - {table: interconnects, row_id: ectc51909.2023.00023-a-i2, field: count, value: 5, unit: ea, basis: design_target, locator: "p.6 Sec. V.B", note: "all five vias connecting a DBI pad to RDL; 3 visible per pad in Fig. 3/7 cross-sections"}
+  - {table: metrics, row_id: ectc51909.2023.00023-a-m26, field: value, value: 96, unit: "%", basis: measured, locator: "p.5 Fig. 9", note: "Lot 2 at 50 um; Lot 1 100, Lot 3 ~98.9, Lot 4 ~98.3"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51909.2023.00023-a-m19, field: value, values: ["65% on center chains (p.5 Sec. IV.F)", "20-35% yield loss in center main array (p.5 Sec. V)", "~80% for main center chain (p.7 Sec. VI)"], locators: ["p.5 Sec. IV.F", "p.5 Sec. V", "p.7 Sec. VI"], chosen: 80, why: "conclusion summary; 65% appears to be the worst lot within the 65-99% lot range; Lot 3 Fig. 11 center ~82%"}
+  - {table: metrics, row_id: ectc51909.2023.00023-a-m4, field: value, values: [0.31, 0.33], locators: ["p.3 Sec. IV.A-B", "p.7 Sec. VI"], chosen: 0.31, why: "results section with +/- 0.05 um; conclusion rounds to ~0.33"}
+  - {table: process_steps, row_id: ectc51909.2023.00023-F1-s08, field: conditions, values: ["250 to 300 C batch furnace (p.3)", "250 C sufficient (p.4)"], locators: ["p.3 Sec. III", "p.4 Sec. IV.D"], chosen: "both kept in conditions", why: "not contradictory; anneal temperature per lot not given"}
+excluded:
+  - "W2W 2 um pitch [4,5] and YMTC 1 um pitch [6]; Besi Chameo Ultra-Plus availability"
+  - "Prior test vehicles: >4 million interconnects with >93% yield; 15 um pads no edge degradation to 85 um [11]; 80% offset rule for 2-10 um pads [12]"
+  - "80% offset minimum pad diameter ~3.75 um derived from prior experiments [7]"
+  - "Rule-of-thumb alignment 0.1-0.25x pad diameter; authors' 3 sigma < 25% pad diameter guideline (analysis, not a measurement)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "bonding temperature, force, time; activation chemistry; anneal time"
+  - "substrate wafer thickness; isolation oxide thickness; via diameter; total link count per die (only 0.5 million / 517,000 center)"
+  - "absolute chain or per-link resistance values; reliability testing"
+source_quality:
+  - "Micro and sigma symbols garbled in text layer (P, V); numbers verified against figure labels where present."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00023", change: "process_flow_level full confirmed; 1 flow, 12 -> 8 steps; step_basis stated_in_flow on all steps", reason: "p.3 Sec. III gives the ordered flow with thickness, anneal range and named bonder"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00023-F1-s09", change: "deleted: post-anneal IR alignment / vernier distortion measurement; method appended to metrics a-m1..a-m4, a-m6..a-m8 condition", reason: "post-build measurement, not a build step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00023-F1-s10", change: "deleted: daisy-chain electrical test; 6 full + 28 sub-chains per die appended to a-m17, a-m18 condition", reason: "post-build test is metrics"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00023-F1-s11", change: "deleted: CSAM void detection after anneal; method appended to a-m11 condition (a-m11..a-m13 hold results)", reason: "post-build inspection of the finished stack, results are metrics"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00023-F1-s12", change: "deleted: cross-section / EBAC / FIB-SEM of selected die; new metric a-m33 holds the failure-analysis finding", reason: "failure-analysis cut is metrics, not a step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00023-a-m33", change: "added: root cause of open links (partial or missing Cu in DBI pad / via layer, 1-3 per site)", reason: "p.6 Sec. V.B, Fig. 12; information from deleted step s12"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00023-F1-s01", change: "category other -> rdl_layer; target object names -> stated geometry (RDL 0.9 um, VIA 0.5 um, DBI 3.5 um / 7 um pitch); Tower moved from equipment to conditions", reason: "p.2 Sec. II.A, II.D; target holds geometry; Tower is a foundry, not a tool"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00023-F1-s02", change: "target object name removed (moved to step text); also s03-s07", reason: "target holds stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00023-F1-s07", change: "conditions: programmable offset fine-tuned per lot", reason: "p.3 Sec. IV.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00023-F1-s08", change: "equipment batch furnace; result from Fig. 7 SEM", reason: "p.3 Sec. III; p.4 Sec. IV.D"}

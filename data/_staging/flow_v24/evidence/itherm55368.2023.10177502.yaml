@@ -1,0 +1,50 @@
+paper_id: itherm55368.2023.10177502
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/itherm55368.2023.10177502/text.md
+  - references/itherm55368.2023.10177502/source.json
+  - references/itherm55368.2023.10177502/figures/page_02.png
+  - references/itherm55368.2023.10177502/figures/page_03.png
+  - references/itherm55368.2023.10177502/figures/page_04.png
+  - references/itherm55368.2023.10177502/figures/page_05.png
+  - references/itherm55368.2023.10177502/figures/page_06.png
+  - references/itherm55368.2023.10177502/figures/page_08.png
+  - references/itherm55368.2023.10177502/figures/cand/p04_fig4.png
+  - references/itherm55368.2023.10177502/figures/cand/p07_fig9.png
+  - references/itherm55368.2023.10177502/figures/cand/p08_fig10.png
+figure_reading_method: >-
+  Page renders at 150 dpi; re-crops of Fig. 1(a), Fig. 3, Table I (150 dpi) and Fig. 9, Fig. 10 (300 dpi).
+  Fig. 9 stress maxima read from printed labels. Fig. 10 points read against gridlines (+/-0.5 on left axis);
+  right-axis zero sits at left-axis ~5.
+entries:
+  - {table: test_vehicles, row_id: itherm55368.2023.10177502-a, field: package_thickness_mm, value: 22.5, unit: mm, basis: design_target, locator: "p.2 Sec. II.A; p.2 Fig. 1(a)", note: "60 x 60 x 22.5 mm packaged TTV"}
+  - {table: components, row_id: itherm55368.2023.10177502-a-c4, field: thickness_um, value: 20000, unit: um, basis: design_target, locator: "p.2 Fig. 1(a)", note: "label '20 mm' on LTCC pedestal"}
+  - {table: interconnects, row_id: itherm55368.2023.10177502-a-i1, field: anneal_temp_c, value: 600, unit: C, basis: design_target, locator: "p.3 Sec. II.B", note: "600 C for 5 min after SDB, before next operation"}
+derived:
+  - {table: test_vehicles, row_id: itherm55368.2023.10177502-a, field: n_dies, value: 32, formula: "16 TTCs on L3 + 16 on L5", inputs: "p.1 Sec. I ('16 pieces @ 5 V, 16 pieces @ 3.3 V', 4 x 4 x 2)"}
+  - {table: interconnects, row_id: itherm55368.2023.10177502-a-i1, field: count, value: 3, formula: "SDB bonds L2-L3, L1-L23, L4-L5", inputs: "p.3 Sec. II.B steps 5-7"}
+  - {table: components, row_id: itherm55368.2023.10177502-a-c4, field: thickness_um, value: 20000, formula: "20 mm x 1000", inputs: "p.2 Fig. 1(a)"}
+  - {table: process_steps, row_id: itherm55368.2023.10177502-F1-s01, field: time_s, value: 300, formula: "5 min x 60", inputs: "p.3 Sec. II.B"}
+  - {table: process_steps, row_id: itherm55368.2023.10177502-F1-s06, field: time_s, value: 300, formula: "5 min x 60", inputs: "p.3 Sec. II.B"}
+  - {table: process_steps, row_id: itherm55368.2023.10177502-F1-s18, field: time_s, value: 3600, formula: "60 min x 60", inputs: "p.3 Sec. II.B"}
+conflicts:
+  - {table: metrics, row_id: itherm55368.2023.10177502-a-m1, field: value, values: ["25.6 (Table I, unit printed kW/cm2-C; Table II kW/m2-C)", "24.8 kW/m2-C (text, Sec. III.C)", "25 +/- 1.5 kW/(m2-C) (Conclusion)", "25 kW/m2-C (Abstract)", "Fig. 10 experiment at 200 W/cm2 ~24.6 on axis labelled W/cm2-C"], locators: ["p.6 Table I", "p.8 Sec. III.C", "p.8 Sec. IV", "p.1 Abstract", "p.8 Fig. 10"], chosen: 25.6, why: "result table labelled experimental; unit kW/m2-C taken from Table II, text and conclusion (Table I and Fig. 10 units disagree)"}
+  - {table: metrics, row_id: itherm55368.2023.10177502-a-m2, field: value, values: ["text: dT L3 2.6, L5 3.1, L3-L5 4.8 C at 200 W/cm2", "Fig. 10 experiment points at 200 W/cm2 read approx: L3 3.0, L5 2.7, L3-L5 3.7 C; at 240 W/cm2: L3 4.1, L5 3.1, L3-L5 4.7 C"], locators: ["p.8 Sec. III.C; p.8 Sec. IV", "p.8 Fig. 10"], chosen: "text values", why: "stated values repeated in Abstract, Table I (4.8) and Conclusion; dual-axis figure reading uncertain"}
+  - {table: stack_layers, row_id: itherm55368.2023.10177502-a-L03, field: properties, values: ["branch length 3 mm (text)", "3500 um (Table I)"], locators: ["p.2 Sec. II.A", "p.6 Table I"], chosen: "3500 um", why: "table over text"}
+  - {table: components, row_id: itherm55368.2023.10177502-a-c1, field: notes, values: ["16 pieces @ 5 V and 16 @ 3.3 V (Sec. I)", "power supply 3.3 V (L3) (Fig. 2b)", "differential voltages L3/L5 8 V and 16 V (Sec. II.A)"], locators: ["p.1 Sec. I", "p.2 Fig. 2(b)", "p.3 Sec. II.A"], chosen: "noted, no numeric field", why: "supply vs differential voltage not reconciled in paper"}
+excluded:
+  - "Si fracture stress 3.5-4.4 GPa attributed to ref [27]"
+  - "Qloss 5-10 % of PW (sentence cites ref [21])"
+  - "Table II comparison values for refs [29]-[33]"
+  - "Au-Au bonding lower residual stress claim attributed to ref [20]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - TTC size, material and power per chip; TTC attach material
+  - Au-Au bond pressure and time; SDB pressure and time; solder alloy for LTCC reflow
+  - metal film thicknesses (printed values '50/500 um' and '500 um' implausible; not entered)
+  - through-hole diameters other than 2 mm power pillars; RDL line/space
+  - reliability testing; warpage
+source_quality:
+  - "Units inconsistent for heat transfer coefficient (kW/cm2-C, kW/m2-C, W/cm2-C) across Table I, Table II, Fig. 10, text."
+  - "Candidates p04_fig3 and p05_fig5 are caption-only boxes (bbox at page top-left, no graphics); Fig. 1, 3, 8 had no usable candidate; p06_tablei covers only table header."

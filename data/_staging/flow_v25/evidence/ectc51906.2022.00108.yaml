@@ -1,0 +1,49 @@
+paper_id: ectc51906.2022.00108
+verified_on: 2026-10-18
+schema_version: 2
+source_files:
+  - references/ectc51906.2022.00108/text.md
+  - references/ectc51906.2022.00108/source.json
+  - references/ectc51906.2022.00108/source.pdf
+  - references/ectc51906.2022.00108/figures/page_01.png
+  - references/ectc51906.2022.00108/figures/page_02.png
+  - references/ectc51906.2022.00108/figures/page_03.png
+  - references/ectc51906.2022.00108/figures/page_04.png
+  - references/ectc51906.2022.00108/figures/page_05.png
+figure_reading_method: >-
+  All five page renders viewed. Fig. 4, 5, 6 and Table I re-rendered from source.pdf at 450 dpi, Fig. 7 at 300 dpi.
+  Warpage values are the printed bar data labels (Fig. 4-8); Fig. 3 bars match Table I. Fig. 2 and inset warpage
+  profiles have illegible axes and were not used for numbers.
+entries:
+  - {table: metrics, row_id: ectc51906.2022.00108-a-m9, field: value, value: 203, unit: um, basis: measured, locator: "p.4 Fig. 5; p.4 Fig. 6", note: "Stiff B 1T RT; Fig. 4 label rendered as 203/208 (blurred)"}
+  - {table: test_vehicles, row_id: ectc51906.2022.00108-a, field: interposer_area_mm2, value: 2800, unit: mm2, basis: design_target, locator: "p.1 Abstract", note: "'2800mm2 size Si interposer'"}
+derived:
+  - {table: stack_layers, row_id: ectc51906.2022.00108-a-L03, field: thickness_min_um, value: 700, formula: "0.7 mm x 1000 (unit conversion; 'T' = mm per 'Stiff A, 3mmT')", inputs: "p.4 Fig. 5; p.5 Sec. III.C"}
+  - {table: stack_layers, row_id: ectc51906.2022.00108-a-L03, field: thickness_max_um, value: 3000, formula: "3 mm x 1000 (unit conversion)", inputs: "p.4 Fig. 5"}
+  - {table: stack_layers, row_id: ectc51906.2022.00108-b-L04, field: thickness_um, value: 1200, formula: "1.2 mm x 1000 (unit conversion)", inputs: "p.3 Table I; p.3 Sec. III.A '1.2mmT'"}
+conflicts:
+  - {table: test_vehicles, row_id: ectc51906.2022.00108-a, field: interposer_area_mm2, values: ["2800", ">2800"], locators: ["p.1 Abstract", "p.1 Sec. I"], chosen: 2800, why: "abstract states the size; Sec. I gives a bound; no qualifier applied"}
+  - {table: metrics, row_id: ectc51906.2022.00108-b-m3, field: value, values: ["0.82 (Table I RT, LEG2)", "15% reduction (text, RT, 1.2 to 1.4 mm core)"], locators: ["p.3 Table I", "p.3 Sec. III.A"], chosen: 0.82, why: "table value; text 15% matches the HT entry 0.85"}
+  - {table: metrics, row_id: ectc51906.2022.00108-a-m9, field: value, values: [203, 208], locators: ["p.4 Fig. 5; p.4 Fig. 6", "p.3 Fig. 4 (blurred label)"], chosen: 203, why: "two clear labels agree"}
+  - {table: metrics, row_id: ectc51906.2022.00108-a-m32, field: locator, values: ["Fig. 8 (second caption with this number)", "Fig. 9 (text)"], locators: ["p.5 caption", "p.5 Sec. III.C"], chosen: "caption label cited with note", why: "rule (c)"}
+excluded:
+  - "MIoS structure introduction and Fig. 1 build attributed to ref [3] (2021); used only for TV identity"
+  - "CoWoS volume-market statement [1]; large-package warpage challenges [2]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - interposer x/y, die sizes, HBM stack height, bump pitches at all levels, substrate layer count and build value of core
+  - stiffener and adhesive material names, absolute moduli/CTE, HT measurement temperature, warpage axis unit and measurement method
+  - flip chip bond temperature, stiffener attach temperature other than press cure split, TC cycle count, sample counts
+  - note: Adhesive A (267/134) and Reflow x1 (225/193) bars equal Stiff C 1.5 mm and Stiff B 1 mm 180 C values; builds not stated
+revisions:
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00108-figures, change: "renumbered f02 -> f01 (Fig. 2), f01 -> f02 (Fig. 1), f06 -> f03 (Fig. 8 p.5), f03 -> f05 (Fig. 5), f05 -> f06 (Fig. 7), f04 -> f08 (Table I)", reason: "rank rule 2026-10-19: stack schematic > package photo"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00108-f04, change: "added Fig. 6 (warpage_plot, candidate)", reason: "contains press-cure head schematic; source of -a-m9, -a-m10, -a-m15, -a-m16"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00108-f07, change: "added Fig. 8 p.4 (warpage_plot, candidate)", reason: "source of -a-m23..m28"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00108-f09, change: "added Table III (data_table, candidate)", reason: "source of -a-m33..m41"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00108-f10, change: "added Table II (data_table, candidate)", reason: "source of -a-c7 relative modulus/CTE notes"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00108", change: "process_flow_level ordered -> fragments; has_process_flow yes -> no", reason: "paper gives no ordered flow: flip chip mount, stiffener attach and press cure are isolated statements"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00108-F1", change: "level fragments; flow_name, locator, notes; all steps generic_description", reason: "rule 7 fragments: one row per statement in reading order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00108-F1-s04", change: "deleted (repeated reflow x1/x2/x5 rework simulation)", reason: "post-build thermal stress test; already in metrics -a-m23..m29 (p.4 Fig. 8)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00108-F1-s05", change: "deleted (thermal cycling condition B)", reason: "reliability test; already in metric -a-m32"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00108-F1-s02", change: "split 'Stiff A 0.7/1/3 mm; Stiff B 0.78/1 mm; Stiff C 1/1.5 mm; Adhesive A/B/C'; locator + Fig. 5, 7; notes", reason: "p.4 Fig. 5 bar labels (400 dpi crop), Fig. 7"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00108-F1-s03", change: "temp_c 150 and conditions cleared; split 'press cure 150 C / 180 C (Stiff B 1 mm)'", reason: "p.4 Fig. 6: per-variant values go in split"}

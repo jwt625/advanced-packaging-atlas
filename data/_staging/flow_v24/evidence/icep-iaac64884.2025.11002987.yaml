@@ -1,0 +1,34 @@
+paper_id: icep-iaac64884.2025.11002987
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/icep-iaac64884.2025.11002987/text.md
+  - references/icep-iaac64884.2025.11002987/source.json
+  - references/icep-iaac64884.2025.11002987/figures/page_01.png
+  - references/icep-iaac64884.2025.11002987/figures/page_02.png
+  - references/icep-iaac64884.2025.11002987/figures/cand/p01_fig1.png
+  - references/icep-iaac64884.2025.11002987/figures/cand/p01_fig2.png
+  - references/icep-iaac64884.2025.11002987/figures/cand/p01_fig3.png
+  - references/icep-iaac64884.2025.11002987/figures/cand/p02_fig4.png
+figure_reading_method: >-
+  Both page renders opened; Fig. 4(c) SEM re-cropped at 400 dpi: scale-bar label and data bar are illegible, so no
+  dimension was read from the image. All numbers are from text (70 um pad width, 70 um ball, < 150 um, 100%).
+entries:
+  - {table: interconnects, row_id: icep-iaac64884.2025.11002987-a-i1, field: pitch_um, value: 150, unit: um, basis: design_target, locator: "p.2 Sec. II; p.2 Sec. IV", note: "'fine-pitch (< 150um)'; exact pitch not given"}
+  - {table: interconnects, row_id: icep-iaac64884.2025.11002987-a-i1, field: diameter_um, value: 70, unit: um, basis: design_target, locator: "p.2 Sec. III", note: "commercial 70 um micro ball (pre-reflow size)"}
+derived:
+  - {table: test_vehicles, row_id: icep-iaac64884.2025.11002987-a, field: carrier_size_mm, value: 300, formula: "12 inch wafer = 300 mm nominal", inputs: "p.1 Sec. II"}
+conflicts: []
+excluded:
+  - "8 inch, 12 inch, 300x300 mm and 700x700 mm fan-out format statements (industry context in abstract)"
+  - "Cu pillar plating cost argument (no numbers)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "ball alloy composition; exact ball pitch; UBM Cu and seed thicknesses; reflow temperature profile; flux product"
+  - "wafer/die thickness and die size; number of wafers/balls behind 100% yield"
+  - "panel die bond, molding and grinding results (proposed next step only)"
+  - "electrical daisy-chain results; reliability"
+source_quality:
+  - "Non-native English, 2-page paper; page 2 header 'ASE Confidential / Security-C'."
+  - "Fig. 4 split across columns: (a),(b) bottom of left column, (c) top of right column; candidate covered only (c) plus header."

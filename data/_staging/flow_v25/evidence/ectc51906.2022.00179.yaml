@@ -1,0 +1,79 @@
+paper_id: ectc51906.2022.00179
+verified_on: 2026-10-18
+schema_version: 2
+source_files:
+  - references/ectc51906.2022.00179/text.md
+  - references/ectc51906.2022.00179/source.json
+  - references/ectc51906.2022.00179/source.pdf
+  - references/ectc51906.2022.00179/figures/page_01.png
+  - references/ectc51906.2022.00179/figures/page_02.png
+  - references/ectc51906.2022.00179/figures/page_03.png
+  - references/ectc51906.2022.00179/figures/page_04.png
+  - references/ectc51906.2022.00179/figures/page_05.png
+  - references/ectc51906.2022.00179/figures/page_06.png
+figure_reading_method: >-
+  All six page renders viewed. Fig. 2, 3, 5, 6, 10, 11, 13, 14, 15 re-rendered from source.pdf at 400-600 dpi, Fig. 4, 9,
+  16, 17 at 300 dpi. CDF plots read by pixel calibration: y from 0/100% tick rows, log x from panel frame edges
+  (Fig. 15: 108.5-108.8 px/decade). Plateau levels about +-2%; log reads about +-0.05 decade; Fig. 14 box means about +-3%.
+entries:
+  - {table: interconnects, row_id: ectc51906.2022.00179-a-i1, field: diameter_um, value: 13, unit: um, basis: design_target, locator: "p.2 Fig. 2", note: "panel label '20um pitch (13um diameter)'; 10/7, 7/5, 5/3 likewise"}
+  - {table: interconnects, row_id: ectc51906.2022.00179-a-i1, field: count, value: 300, unit: bumps, basis: design_target, locator: "p.5 Sec. VI; p.5 Fig. 15 legend", note: "600/840/1200 for 10/7/5 um"}
+  - {table: interconnects, row_id: ectc51906.2022.00179-a-i1, field: resistance_mohm, value: 27, unit: mohm, basis: measured, locator: "p.5 Fig. 15 Kelvin panel", note: "median x 444 px -> 10^-1.57 ohm; 10 um 10^-1.40; 7 um 10^-1.02; 5 um 10^-0.67"}
+  - {table: interconnects, row_id: ectc51906.2022.00179-b-i1, field: cap_height_um, value: 3.5, unit: um, basis: measured, locator: "p.2 Sec. III; p.2 Fig. 3", note: "Sn left for bonding after BS processing; Ni UBM 2 um remaining"}
+  - {table: metrics, row_id: ectc51906.2022.00179-a-m8, field: value, value: 46, unit: "%", basis: measured, locator: "p.5 Fig. 15", note: "5 um green daisy-chain CDF jumps at about 46%"}
+  - {table: metrics, row_id: ectc51906.2022.00179-c-m2, field: value, value: 292, unit: um, basis: measured, locator: "p.3 Fig. 9", note: "bar top; error bar about 252-332"}
+  - {table: metrics, row_id: ectc51906.2022.00179-c-m3, field: value, value: 149, unit: um, basis: measured, locator: "p.3 Fig. 9", note: "bar top; error bar about 120-179"}
+derived:
+  - {table: process_steps, row_id: ectc51906.2022.00179-F1-s02, field: force_n, value: 9.81, formula: "1 kgf x 9.80665 N/kgf (unit conversion)", inputs: "p.2 Sec. III '1kgf'"}
+  - {table: interconnects, row_id: ectc51906.2022.00179-a-i1, field: bonding_force_n, value: 9.81, formula: "1 kgf x 9.80665 N/kgf (unit conversion)", inputs: "p.2 Sec. III '1kgf'; same for a-i2..i4, b-i1..i4"}
+  - {table: interconnects, row_id: ectc51906.2022.00179-c-i1, field: aspect_ratio, value: 10, formula: "depth/diameter = 50/5", inputs: "p.3 Sec. IV '5 by 50 TSV'"}
+conflicts:
+  - {table: metrics, row_id: ectc51906.2022.00179-a-m8, field: value, values: ["50% (text)", "about 46% (Fig. 15 CDF)"], locators: ["p.5 Sec. VI", "p.5 Fig. 15"], chosen: 46, why: "result plot over text (rule k); text likely rounded"}
+  - {table: metrics, row_id: ectc51906.2022.00179-a-m25, field: condition, values: ["TCT 970 cycles (text, Fig. 17 header)", "TCT 1000 cycles (Fig. 16 legend)"], locators: ["p.5 Sec. VI; p.6 Fig. 17", "p.5 Fig. 16"], chosen: "970 cycles", why: "text and Fig. 17 agree; both values listed in condition"}
+  - {table: metrics, row_id: ectc51906.2022.00179-a-m21, field: condition, values: ["three reflows at 265 C for 10 min (text)", "Reflow 250 C for 5 min (Fig. 17 header)"], locators: ["p.5 Sec. VI", "p.6 Fig. 17"], chosen: "both listed", why: "cannot resolve; condition cell carries both"}
+  - {table: metrics, row_id: ectc51906.2022.00179-a-m30, field: value, values: ["5% drop after HTS at 10 um (Fig. 16)", "yield remains same for 20 and 10 um (text)"], locators: ["p.5 Fig. 16", "p.5 Sec. VI"], chosen: 5, why: "result plot over text"}
+  - {table: metrics, row_id: ectc51906.2022.00179-a-m1, field: value, values: ["Fig. 5 CDF plateaus 98/84/78/5%", "Fig. 15 yields 100/100/100/46-50%"], locators: ["p.2 Fig. 5", "p.5 Fig. 15"], chosen: "both entered as separate variants", why: "different F2F bonding lots (Sec. III vs reliability set); not merged"}
+  - {table: test_vehicles, row_id: ectc51906.2022.00179-d, field: n_dies, values: ["N=5 die (vertical collective text)", "tiers T01/T12/T23 in Fig. 14; T34 label in Fig. 18"], locators: ["p.5 Sec. V", "p.5 Fig. 14; p.6 Fig. 18"], chosen: 5, why: "text value; consistent with T34 label"}
+excluded:
+  - "Ni UBM low IMC and Cu-on-Ni fast IMC rationale attributed to refs [3-10]"
+  - "Spacer bump concept attributed to refs [3-4]"
+  - "Fig. 6 Kelvin resistances: two series from 4-point design limitation; not entered as values"
+  - "Fig. 5 and Fig. 6 Kelvin/EM CDF plateaus: entered only daisy-chain levels; Kelvin/EM resistances taken from Fig. 15"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - die x/y sizes, landing die thickness, die thickness in the N>2 maskset
+  - bump heights for F2F dies and BS bumps, BS bump diameters, Ni/Cu pad dimensions
+  - TCB time and full profile, CUF product and cure, alignment accuracy value
+  - TBM product and thermal budget temperature, laser wavelength, dielectric type
+  - embedded-bump polymer product and thickness, embedded-bump yield
+  - warpage sign convention (wafer bow only)
+revisions:  # 2026-10-19: audit_x1 names this paper only as verified OK or as schema-coverage examples; no row change
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179", change: "process_flow_level full confirmed", reason: "Fig. 1 + Sec. IV ordered BS flow with temperatures; TCB 1 kgf/250 C"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F1", change: "tv_ids a -> a;b; renamed; level ordered -> full", reason: "p.2 Sec. III: D2W TCB (1 kgf, 250 C, flux dip) and CUF stated once for F2B 50 um and F2F full-thickness samples"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F1-s01", change: "tv_id a (delta; b's FS bumps are F3-s35); target pitch/diameter from Fig. 2 labels", reason: "p.2 Fig. 2 '20um pitch (13um dia)' etc.; p.2 Sec. III top die Ni/Sn bumps"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F1-s02", change: "shared by a and b (replaces F2-s15); force_n 9.81 from 1 kgf; step text", reason: "p.2 Sec. III 'Besi ... 1kgf and 250oC as interface temperature'; landing die NiCu pad"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F1-s03", change: "shared by a and b (replaces F2-s16)", reason: "p.2 Sec. III 'After TCB, CUF is applied and cured'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F1-s04", change: "deleted (electrical test)", reason: "post-build measurement; values already in metrics a-m1..a-m20 (150 structures on 9 stacked dies)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F2", change: "flow deleted with steps F2-s01..s16", reason: "same wafer flow as F3 (Sec. IV 'processing for B2F and F2B wafers'); b linked to F3 (FS bump plating as delta F3-s35) and to F1 (TCB, CUF)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F3", change: "tv_ids c -> b;c; renamed; Fig. 1 locators", reason: "Fig. 1 F2B flow and Sec. IV B2F/F2B wafer processing are one flow; BS bumping only for B2F (c)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F3-s35", change: "added: TV b delta (was F2-s01)", reason: "p.1 Sec. II 'FS layers processing followed by semi-additive bump plating'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F3-s23", change: "tv_id c (B2F delta); seq renumbered", reason: "p.1 Sec. II 'For back to face flow microbumps can be formed on the BS as well'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F3-s24", change: "tv_id c (B2F delta); seq renumbered", reason: "p.1 Sec. II 'For back to face flow microbumps can be formed on the BS as well'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F3-s25", change: "tv_id c (B2F delta); seq renumbered", reason: "p.1 Sec. II 'For back to face flow microbumps can be formed on the BS as well'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F3-s26", change: "tv_id c (B2F delta); seq renumbered", reason: "p.1 Sec. II 'For back to face flow microbumps can be formed on the BS as well'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F3-s27", change: "tv_id c (B2F delta); seq renumbered", reason: "p.1 Sec. II 'For back to face flow microbumps can be formed on the BS as well'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F3-s28", change: "tv_id c (B2F delta); seq renumbered", reason: "p.1 Sec. II 'For back to face flow microbumps can be formed on the BS as well'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F3-s29", change: "tv_id c (B2F delta); seq renumbered", reason: "p.1 Sec. II 'For back to face flow microbumps can be formed on the BS as well'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F3-s30", change: "tv_id c (B2F delta); seq renumbered", reason: "p.1 Sec. II 'For back to face flow microbumps can be formed on the BS as well'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F3-s01", change: "target '5 x 50 um TSV'", reason: "p.3 Sec. IV '5 by 50 TSV middle process'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F3-s11", change: "step 'lithography and etch' -> 'dielectric etch'; target CD 1 um / 540 nm (moved from CMP result)", reason: "p.1 Abstract lists etching, not lithography; p.4 Sec. IV '1um and 540nm cds'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F3-s17", change: "step 'lithography and etch' -> 'dielectric etch'; target CD 1 um / 540 nm (moved from CMP result)", reason: "p.1 Abstract lists etching, not lithography; p.4 Sec. IV '1um and 540nm cds'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F3-s25", change: "target 'pitch 20/10/7/5 um (single mask)'", reason: "p.4 Sec. IV; p.4 Fig. 12"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F3-s28", change: "target 'pitch 20/10/7/5 um (single mask)'", reason: "p.4 Sec. IV; p.4 Fig. 12"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F3-s30", change: "target 'pitch 20/10/7/5 um (single mask)'", reason: "p.4 Sec. IV; p.4 Fig. 12"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F3-s33", change: "step 'wet cleaning after laser debond'; conditions from F2-s13", reason: "p.1 Sec. II 'wet cleaning'; p.1 Sec. III extra cleaning of glue residue"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F4-s01", change: "route labels 'sequential' / 'vertical collective', seq 1 each", reason: "p.4-5 Sec. V: stacking done in sequential and vertical collective form (alternatives, similar yield)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F4-s02", change: "route labels 'sequential' / 'vertical collective', seq 1 each", reason: "p.4-5 Sec. V: stacking done in sequential and vertical collective form (alternatives, similar yield)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F5-s02", change: "deleted (polymer patterning)", reason: "not stated: Sec. VII says only that photo-patternable polymer is applied; rule 7 no unstated standard steps"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F5-s01", change: "s03 seq 3 -> 2; s01 target pitch 20/10/7/5 um", reason: "p.6 Fig. 20 labels"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00179-F5-s03", change: "s03 seq 3 -> 2; s01 target pitch 20/10/7/5 um", reason: "p.6 Fig. 20 labels"}

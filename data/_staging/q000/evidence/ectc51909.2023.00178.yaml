@@ -1,0 +1,51 @@
+paper_id: ectc51909.2023.00178
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00178/text.md
+  - references/ectc51909.2023.00178/source.json
+  - references/ectc51909.2023.00178/figures/page_02.png
+  - references/ectc51909.2023.00178/figures/page_03.png
+  - references/ectc51909.2023.00178/figures/page_04.png
+  - references/ectc51909.2023.00178/figures/page_05.png
+figure_reading_method: >-
+  Page renders and candidate crops (Fig. 1, 3, 4, 6, 7, Table I). Fig. 4 resistance values and Fig. 7 CDF extents read
+  off plots (+/- 2 mOhm, +/- 0.02 CDF).
+entries:
+  - {table: interconnects, row_id: ectc51909.2023.00178-a-i1, field: yield_pct, value: 98, unit: "%", basis: measured, locator: "p.4 Sec. IV.A", note: "Test3, 210 chains"}
+derived:
+  - {table: metrics, row_id: ectc51909.2023.00178-a-m5, field: value, value: 50, formula: "authors' conversion of misalignment within 1 um to pad contact area (>50%)", inputs: "p.3 Sec. III.B"}
+conflicts:
+  - {table: metrics, row_id: ectc51909.2023.00178-b-m2, field: condition, values: ["30 C/60% RH 196 h, 260 C reflow 3 cy", "bake 125 C 24 h / TH 60 C 60% 40 h / reflow 260 C 3 cy"], locators: ["p.5 Table I", "p.4 Sec. IV.B text"], chosen: "30 C/60% RH 196 h, 260 C reflow 3 cy", why: "result table over text"}
+  - {table: interconnects, row_id: ectc51909.2023.00178-a-i1, field: yield_pct, values: ["98", "over 98"], locators: ["p.4 Sec. IV.A", "p.1 Abstract; p.5 Sec. V"], chosen: 98, why: "results section value; no qualifier"}
+  - {table: metrics, row_id: ectc51909.2023.00178-a-m8, field: value_text, values: ["0.027", "0.0271"], locators: ["p.2 Eq. (1)", "p.2 Fig. 2 fit label"], chosen: "0.027", why: "equation as printed; label noted"}
+excluded:
+  - "X-Cube and SAINT-S micro-bump 3D stacking (refs [5], [6])"
+  - "resistance maintained to 20% contact area (ref [13])"
+  - "IR imaging tool / misalignment TEG and particle-void method from refs [12], [14]; Fig. 5 particle-void fits (method of ref [14], no package numbers used)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - dielectric material, pad shape, Cu pad thickness, dishing target value and measured dishing (nm)
+  - bonding temperature/force, anneal temperature/time, wafer size, die sizes for large/small top, die thicknesses
+  - TSV or backside interconnect details, chip-to-substrate joint type, PCB layer count, BGA pitch
+  - absolute chain resistance (Fig. 7 R axis unlabelled), pass criterion for reliability
+source_quality:
+  - "Clean text layer. Table I text not in text.md (image only); read from render/candidate."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00178-F1-s01", change: "step_basis: '' -> 'stated_in_flow'; split: '' -> 'Test1 dishing target not met; Test2 and Test3 dishing target met'", reason: "order stated in Fig. 1(a); Test1/Test2 dishing split (Sec. IV.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00178-F1-s02", change: "deleted", reason: "AFM dishing measurement is characterization outside the Fig. 1(a) flow; moved to metrics a-m11"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00178-F1-s03", change: "step_basis: '' -> 'stated_in_flow'; split: '' -> 'Test3 with void-defect minimization; Test1 and Test2 with many voids'", reason: "order stated in Fig. 1(a) ('Particle control'); Test3 void minimization (Sec. IV.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00178-F1-s04", change: "step_basis: '' -> 'inferred_order'; notes: '' -> 'Order vs saw and plasma not stated; cleaning not in Fig. 1(a).'", reason: "cleaning not in Fig. 1(a); placed after saw"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00178-F1-s05", change: "step_basis: '' -> 'stated_in_flow'; atmosphere: '' -> 'o2'", reason: "order stated in Fig. 1(a); O2 typed"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00178-F1-s06", change: "step_basis: '' -> 'stated_in_flow'; equipment: '' -> 'bonding alignment tool (developed for fine pitch)'; conditions: 'developed alignment tool and alignment key design' -> 'alignment key design developed; dielectric bonding occurs first'; target: '' -> '2 um pad, 4 um pitch'; split: '' -> 'Test3 with improved bonding accuracy; Test1 and Test2 low accuracy'", reason: "order stated in Fig. 1(a); named tool and stated pad geometry on the step; Test3 accuracy split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00178-F1-s07", change: "step_basis: '' -> 'stated_in_flow'; conditions: 'conditions not stated' -> 'Cu-Cu bonding forms during anneal; conditions not stated'", reason: "order stated in Fig. 1(a)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00178-F1-s08", change: "deleted", reason: "IR misalignment measurement and 2D/SAT void study are characterization, not steps; misalignment already in metrics a-m4; particle-void data excluded (method/figure of ref [14])"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00178-F2-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. IV.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00178-F2-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. IV.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00178-F2-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. IV.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00178-F2-s01", change: "notes: 'Preceded by D2W HCB flow of -a with Test3 condition.' -> 'Follows F1 (D2W HCB) with Test3 condition.'", reason: "flow now follows F1 for -b/-c"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00178-F1", change: "tv_ids: 'ectc51909.2023.00178-a' -> 'ectc51909.2023.00178-a;ectc51909.2023.00178-b;ectc51909.2023.00178-c'; locator: 'p.2 Sec. II; p.2 Fig. 1(a); p.3 Sec. III.A; p.3 Fig. 3; p.3 Sec. III.C; p.5 Sec. V; p.3 Sec. III.B; p.3 Sec. III.B-C' -> 'p.2 Sec. II; p.2 Fig. 1(a); p.3 Sec. III.A-C; p.4 Sec. IV.A; p.5 Sec. V'", reason: "packages -b/-c are built with the D2W HCB flow (Test3) before F2 (Sec. IV.A-B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00178-F2", change: "notes: '' -> 'Follows F1 (Test3 condition).'", reason: "sub-flow after F1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00178-a-m11", change: "added", reason: "moved from deleted step ectc51909.2023.00178-F1-s02"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00178-a-m12", change: "added", reason: "moved from deleted step ectc51909.2023.00178-F1-s02"}

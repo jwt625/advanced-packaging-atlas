@@ -1,0 +1,45 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+eptc59621.2023.10457909-a-c1,eptc59621.2023.10457909-a,unspecified,,yes,Silicon die,,,,250,,,,,,silicon,,design_target,table,,p.1 Table 1; p.1 Fig. 1,,Model input; die size and count not given. Fan-out ratio varied by die size (p.3).
+eptc59621.2023.10457909-a-c2,eptc59621.2023.10457909-a,mold,,,"CPD (compound, EMC, includes die)",,,,300,,,,,,EMC (product not named),,design_target,table,,p.1 Table 1; p.2 Table 2,,"Baseline 0.3 mm; split 0.3/0.6/0.8 mm in metrics.variant. CTE 25-35 ppm/C, modulus 2.2-3.0 GPa (Table 1)."
+eptc59621.2023.10457909-a-c3,eptc59621.2023.10457909-a,other,,,BS film (backside film),,,,50,,,,,,,,design_target,table,,p.1 Table 1; p.1 Fig. 1,,Backside film below die and CPD; material not named.
+eptc59621.2023.10457909-b-c1,eptc59621.2023.10457909-b,unspecified,,yes,"Silicon die (no Cu pillar, face down)",,,,,,,,,,silicon,,stated,text,,p.3 Sec. 4; p.3 Fig. 9; p.4 Sec. 5,,Same model materials as M-series (p.3); thickness for aWLP not restated.
+eptc59621.2023.10457909-b-c2,eptc59621.2023.10457909-b,mold,,,CPD (compound),,,,,,,,,,EMC (product not named),,stated,text,,p.3 Sec. 4; p.3 Fig. 9,,No BS film in aWLP.
+iedm19573.2019.8993637-a-c1,iedm19573.2019.8993637-a,logic_soc,,,Top Die (logic),1,,,,,,,,,,,stated,mixed,,p.1 Sec. I; p.3 Fig. 1; p.3 Fig. 2,,"High-performance logic chiplet, face down on base die; node and size not given."
+iedm19573.2019.8993637-a-c2,iedm19573.2019.8993637-a,base_die,,,base die (22FFL with TSV-mid),1,,,75,,,,,22FFL,Si,,design_target,text,,p.1 Sec. I; p.1 Sec. II.B; p.2 Sec. II.C,thickness_um:approx,Ground to approximately 75 um to reveal TSVs; thickness set by product needs and Cu fill aspect ratio.
+iedm19573.2019.8993637-a-c3,iedm19573.2019.8993637-a,substrate,,,package,,,,,,,,,,,,stated,mixed,,p.1 Sec. I; p.3 Fig. 1,,Package type not described.
+ectc51846.2026.00050-a-c1,ectc51846.2026.00050-a,unspecified,,,main chip,2,19,19,,,,,,,,,design_target,figure_image,,p.4 Fig. 12(a); p.4 Table 1,,Chip function not stated; with 150 um-pitch Cu pillar bumps.
+ectc51846.2026.00050-a-c2,ectc51846.2026.00050-a,bridge,,,Si bridge chip,1,3.35,2.5,60,,,,,,Si,,design_target,figure_image,thickness_um:measured,p.4 Fig. 12(a); p.4 Fig. 13,,60 um thickness also labelled on cross-section (Fig. 13).
+ectc51846.2026.00050-a-c3,ectc51846.2026.00050-a,substrate,,,organic laminate substrate,1,68.5,68.5,2000,,,,,,,,design_target,figure_image,,p.4 Fig. 12(a); p.4 Fig. 13,,Layer count and core not stated; no Cu wire in build-up under bridge in this TV.
+ectc51846.2026.00050-a-c4,ectc51846.2026.00050-a,adhesive,,,die-edge glue,1,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 1,,Dispensed with standard underfill dispensing tools; product not stated.
+ectc51846.2026.00050-a-c5,ectc51846.2026.00050-a,underfill,,,underfill,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,Final underfill and cure; product not stated.
+ectc51846.2026.00050-b-c1,ectc51846.2026.00050-b,bridge,,,Si bridge with 75 um-pitch micro bumps,1,,,,,,,,,Si,,stated,caption,,p.4 Fig. 11,,
+ectc51846.2026.00050-b-c2,ectc51846.2026.00050-b,adhesive,,,die-edge glue,1,,,,,,,,,,,stated,text,,p.4 Sec. II.B,,
+ectc51846.2026.00050-c-c1,ectc51846.2026.00050-c,bridge,,,Si bridge with 75 um-pitch micro bumps,1,,,,,,,,,Si,,stated,caption,,p.4 Fig. 11,,
+ectc51846.2026.00050-c-c2,ectc51846.2026.00050-c,underfill,,,underfill in uC4 (bridge) area,1,,,,,,,,,,,stated,schematic,,p.3 Fig. 4; p.2 Sec. II.A,,
+ectc51846.2026.00050-d-c1,ectc51846.2026.00050-d,unspecified,,,edge-glued chips (bending beam),,,,725,,,,,,,,design_target,schematic,,p.3 Fig. 5(a),,0.725 mm sample thickness label; chip count and size not stated.
+ectc51846.2026.00050-d-c2,ectc51846.2026.00050-d,adhesive,,,die-edge glue,1,,,,,,,,,,,stated,text,,p.2 Sec. II.A,,
+ectc51846.2026.00050-e-c1,ectc51846.2026.00050-e,bridge,,,Si bridge chip with dual-side solder bumps (TSV omitted),1,,,,,,,,,Si,"JCU (micro bump plating, ack); 3M Japan (thin wafer support system, ack)",stated,caption,,p.4 Fig. 14,,
+ectc51846.2026.00050-h-c1,ectc51846.2026.00050-h,unspecified,,,main chip,4,19,19,,,,,,,,,design_target,caption,,p.3 Fig. 7,,
+ectc51846.2026.00050-h-c2,ectc51846.2026.00050-h,bridge,,,bridge die,4,,,,,,,,,,,stated,caption,,p.3 Fig. 7,,
+ectc51846.2026.00050-i-c1,ectc51846.2026.00050-i,adhesive,,,die-edge glue,1,,,,,,,25,,,,measured,figure_image,,p.3 Fig. 9; p.2 Sec. II.A,,gap_um = narrowest chip clearance shown (Fig. 9); supported range 25-450 um (text).
+ectc51846.2026.00050-i-c2,ectc51846.2026.00050-i,mold,,,epoxy mold resin die edge (molded die),,,,,,,,,,,,stated,figure_image,,p.3 Fig. 10,,Mold-edged die next to Si die; stacked-memory-like edge.
+ectc51846.2026.00050-j-c1,ectc51846.2026.00050-j,pic,,,EIC/PIC with polymer waveguide (PWG),,,,,,,,,,,,stated,schematic,,p.5 Fig. 17; p.5 Fig. 18(b),,
+ectc51846.2026.00050-j-c2,ectc51846.2026.00050-j,other,,,single-mode polymer waveguide (PWG),,,,,,,,,,,,stated,text,,p.5 Sec. II.E,,
+eptc59621.2023.10457918-a-c1,eptc59621.2023.10457918-a,interposer,,,trapezoidal glass interposer die,5,61.35,27,150,,,,,,glass with Cu-filled TGV,,design_target,mixed,x_mm:table;y_mm:table,p.1 Introduction; p.4 Tab. 2; p.3 Fig. 7,,"Trapezoid: bases 31.18 and 61.35 mm, height 27 mm, angles 60/120 deg (Tab. 2 'Actual')."
+eptc59621.2023.10457918-a-c2,eptc59621.2023.10457918-a,logic_soc,,,processor chip (glass die),10,16.1,14.6,150,,,,,,glass with TGV,,design_target,mixed,x_mm:table;y_mm:table,p.1 Introduction; p.4 Tab. 3; p.3 Fig. 7,,"Count conflict: 10 (Intro, Fig. 6/7) vs '12 square processor chips' (Sec. 4)."
+eptc59621.2023.10457918-a-c3,eptc59621.2023.10457918-a,pic,,,LightKonnect optics chip (glass die),94,6.5,4,150,,,,,,glass with TGV,,design_target,mixed,x_mm:table;y_mm:table,p.1 Introduction; p.4 Tab. 4,,component_type from 'Optics'/'optical chips'; LightKonnect named in paper.
+ectc51846.2026.00119-a-c1,ectc51846.2026.00119-a,substrate,,,"substrate with comb-shaped Cu wiring, L/S 20/20 um",1,,,,,,,,,,,design_target,text,,p.3 Sec. II.C; p.3 Fig. 4,,Substrate materials and size not reported.
+ectc51846.2026.00119-b-c1,ectc51846.2026.00119-b,substrate,,,"substrate with comb-shaped Cu wiring, L/S 20/20 um",1,,,,,,,,,,,design_target,text,,p.3 Sec. II.C; p.3 Fig. 4,,
+ectc51846.2026.00119-c-c1,ectc51846.2026.00119-c,other,,,copper clad laminate (CCL),1,,,,,,,,,CCL,,stated,text,,p.2 Sec. II.A,,
+ectc51846.2026.00119-d-c1,ectc51846.2026.00119-d,other,,,HTCSR-2 SR coupon,1,,,200,,,,,,HTCSR-2 (1.0 W/mK),,design_target,text,,p.3 Sec. II.B,,
+ectc51846.2026.00119-d-c2,ectc51846.2026.00119-d,cold_plate,,,water-cooled copper heat sink,1,,,,,,,,,Cu,,stated,text,,p.2 Sec. II.B; p.3 Fig. 3(a),,
+ectc51846.2026.00119-d-c3,ectc51846.2026.00119-d,other,,,constant-power copper coil heater,1,,,,,,,,,Cu,,stated,text,,p.2 Sec. II.B; p.3 Fig. 3(a),,
+ectc51846.2026.00119-e-c1,ectc51846.2026.00119-e,other,,,HTCSR-1 SR coupon,1,,,200,,,,,,HTCSR-1 (0.7 W/mK),,design_target,text,,p.3 Sec. II.B,,
+ectc51846.2026.00119-e-c2,ectc51846.2026.00119-e,cold_plate,,,water-cooled copper heat sink,1,,,,,,,,,Cu,,stated,text,,p.2 Sec. II.B; p.3 Fig. 3(a),,
+ectc51846.2026.00119-e-c3,ectc51846.2026.00119-e,other,,,constant-power copper coil heater,1,,,,,,,,,Cu,,stated,text,,p.2 Sec. II.B; p.3 Fig. 3(a),,
+ectc51846.2026.00119-f-c1,ectc51846.2026.00119-f,other,,,Reference SR coupon,1,,,200,,,,,,Reference package SR (0.2 W/mK),,design_target,text,,p.3 Sec. II.B,,
+ectc51846.2026.00119-f-c2,ectc51846.2026.00119-f,cold_plate,,,water-cooled copper heat sink,1,,,,,,,,,Cu,,stated,text,,p.2 Sec. II.B; p.3 Fig. 3(a),,
+ectc51846.2026.00119-f-c3,ectc51846.2026.00119-f,other,,,constant-power copper coil heater,1,,,,,,,,,Cu,,stated,text,,p.2 Sec. II.B; p.3 Fig. 3(a),,
+ectc51846.2026.00119-g-c1,ectc51846.2026.00119-g,other,,,heat source (disc),1,25,25,200,,,,,,,,design_target,text,,p.3 Sec. II.B,,"25 mm diameter, 0.2 mm thick; x/y = diameter."
+ectc51846.2026.00119-g-c2,ectc51846.2026.00119-g,tim,,,TIM,1,25,25,20,,,,,,,,design_target,text,,p.3 Sec. II.B,,Same 25 mm diameter as heat source.
+ectc51846.2026.00119-g-c3,ectc51846.2026.00119-g,cold_plate,,,copper cold plate,1,,,,,,,,,"Cu, k 400 W/(m K)",,design_target,text,,p.3 Sec. II.B,,

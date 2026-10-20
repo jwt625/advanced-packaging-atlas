@@ -1,0 +1,145 @@
+org_name,org_type,country,region,parent_org,notes
+A*STAR,government_lab,SG,southeast_asia,,"printed: A*STAR (Agency for Science, Technology and Research); parent of IME; merged names: Agency for Science, Technology and Research"
+A*STAR Institute of Materials Research and Engineering,research_institute,SG,southeast_asia,A*STAR,"printed: Institute of Materials Research and Engineering (IMRE), Agency for Science, Technology and Research (A*STAR)"
+A*STAR Institute of Microelectronics,research_institute,SG,southeast_asia,A*STAR,"printed: Institute of Microelectronics, A*STAR (Agency for Science, Technology and Research); merged names: Institute of Microelectronics, A*STAR"
+Aalto University,university,FI,europe,,printed: Aalto University
+Ableprint Technology,company,TW,east_asia,,printed: Ableprint Technology Co. Ltd.
+Absolics,company,US,north_america,,printed: Absolics Inc.
+Adeia,company,US,north_america,,"printed: Adeia, Inc."
+AGC,company,JP,east_asia,,printed: AGC Inc.
+Ajinomoto,company,JP,east_asia,,"printed: Ajinomoto Co., Inc."
+Ajinomoto Fine-Techno,company,JP,east_asia,Ajinomoto,"printed: Ajinomoto Fine-Techno Co., Inc.; Ajinomoto Fine-Techno Co. Inc.; parent from printed name (parent brand + qualifier)"
+Ajinomoto Fine-Techno USA,company,US,north_america,Ajinomoto Fine-Techno,printed: Ajinomoto Fine-Techno USA Corporation; parent from printed name (parent brand + qualifier)
+Amkor Technology,company,US,north_america,,"OSAT; printed: Amkor Technology; Amkor Technology,Inc.; Amkor Technology Korea is its own org (parent_org = this org)"
+Amkor Technology Korea,company,KR,east_asia,Amkor Technology,"printed: Amkor Technology Korea; Amkor Technology Korea, Inc.; parent from printed name (parent brand + qualifier)"
+Analog Photonics,company,US,north_america,,printed: Analog Photonics
+AOI Electronics,company,JP,east_asia,,printed: AOI Electronics
+AP Memory,company,TW,east_asia,,printed: AP Memory
+Apple,company,US,north_america,,printed: Apple Inc. (present address)
+Applied Materials,company,US,north_america,,"printed: Applied Materials, Inc.; merged names: Applied Materials, Inc."
+Asahi Kasei,company,JP,east_asia,,printed: Asahi Kasei Corporation
+ASE,company,TW,east_asia,,"OSAT; printed: Advanced Semiconductor Engineering Inc.; ASE Group; Advanced Semiconductor Engineering (ASE) Group; ASE Technology; merged names: ASE Group; Advanced Semiconductor Engineering; Advanced Semiconductor Engineering, Inc."
+ASM Belgium,company,BE,europe,ASM International,"printed: ASM Belgium (Leuven, Belgium); parent from printed name (parent brand + qualifier)"
+ASM International,company,NL,europe,,"printed: ASM, Belgium (vlsitechnologyandcir46783.2024.10631441); ASM, Helsinki, Finland; ASM Belgium moved to its own org"
+ASML,company,NL,europe,,printed: ASML Wilton (present address)
+ASMPT,company,HK,east_asia,,brand parent of the printed entities ASMPT Technology Hong Kong Limited and ASMPT Singapore Pte. Ltd; not printed alone; HQ not printed: country HK unverified placeholder
+ASMPT Singapore,company,SG,southeast_asia,ASMPT,"printed: ASMPT Singapore Pte. Ltd (Yishun, Singapore); parent from printed name (parent brand + qualifier)"
+ASMPT Technology Hong Kong,company,HK,east_asia,ASMPT,"printed: ASMPT Technology Hong Kong Limited (Tsing Yi, Hong Kong); parent from printed name (parent brand + qualifier)"
+Beijing National Research Center for Information Science and Technology,research_institute,CN,east_asia,,printed: Beijing National Research Center for Information Science and Technology; host relation not printed
+Brewer Science,company,US,north_america,,"printed: Brewer Science, Inc."
+CEA,government_lab,FR,europe,,parent of CEA-Leti; not printed as a separate affiliation in this batch
+CEA-IRIG,research_institute,FR,europe,CEA,"printed: CEA, Interdisciplinary Research Institute of Grenoble (IRIG), Universite Grenoble Alpes"
+CEA-Leti,research_institute,FR,europe,CEA,"printed: CEA-Leti, Univ Grenoble Alpes"
+Celestial AI,company,US,north_america,,printed: Celestial AI Inc.
+China Academy of Engineering Physics,government_lab,CN,east_asia,,printed units: Microsystem and Terahertz Research Center (Chengdu); Institute of Electronic Engineering (Mianyang)
+Chinese Academy of Sciences,government_lab,CN,east_asia,,parent of IMECAS; not printed as a separate affiliation
+CNRS,government_lab,FR,europe,,"printed: Laboratoire Nanotechnologies Nanosystèmes (LN2) CNRS (lab sited in Sherbrooke, Canada)"
+COMAC,company,CN,east_asia,,printed: COMAC; parent of Shanghai Aircraft Design and Research Institute; not used directly in rows
+Corintis,company,CH,europe,,printed: Corintis SA
+Corning,company,US,north_america,,"printed: Corning Incorporated; Corning Technology Center Korea kept as unit (facility name, no legal entity printed)"
+Corning Optical Communication,company,DE,europe,Corning,"printed: Corning Optical Communication GmbH & Co. KG (Berlin, Germany); parent from printed name (parent brand + qualifier)"
+Corning Research and Development,company,US,north_america,Corning,printed: Corning Research and Development Corporation; Corning Research & Development Corporation; parent from printed name (parent brand + qualifier)
+Dai Nippon Printing,company,JP,east_asia,,"printed: DNP Co., Ltd.; merged names: Dai Nippon Printing Co., Ltd."
+Deca Technologies,company,US,north_america,,printed: Deca Technologies Inc.; merged names: Deca Technologies Inc.
+DISCO,company,JP,east_asia,,printed: DISCO Corporation
+DuPont,company,US,north_america,,printed: DuPont Electronics & Industrial (kept as unit)
+Electronics and Telecommunications Research Institute,research_institute,KR,east_asia,,printed: ETRI
+ELSPES,company,KR,east_asia,,printed: ELSPES Inc.
+Embry-Riddle Aeronautical University,university,US,north_america,,printed: Embry-Riddle Aeronautical Institute (sic; email erau.edu)
+EV Group,company,AT,europe,,printed: EV Group
+FICT,company,JP,east_asia,,printed: FICT LIMITED
+Fraunhofer IZM,research_institute,DE,europe,Fraunhofer-Gesellschaft,printed: Fraunhofer-Institut fur Zuverlassigkeit und Mikrointegration (IZM); merged names: Fraunhofer Institute for Reliability and Microintegration IZM
+Fraunhofer-Gesellschaft,research_institute,DE,europe,,parent row only
+Fukuoka IST,research_institute,JP,east_asia,,"printed: Fukuoka IST (Industry, science, and technology), 3D semiconductor research center"
+Fukuoka University,university,JP,east_asia,,"printed: Fukuoka University, IMAP (Institute of Microelectronics Assembling and Packaging)"
+Georgia Institute of Technology,university,US,north_america,,printed: Georgia Institute of Technology; Georgia Intitute of Technology (sic)
+Gigaphoton,company,JP,east_asia,,printed: Gigaphopton Inc. (sic); email domain gigaphoton.com
+GlobalFoundries,foundry,US,north_america,,printed: Globalfoundries Inc.
+Hanyang University,university,KR,east_asia,,printed: Hanyang University
+IBM,company,US,north_america,,printed: IBM; IBM T. J. Watson Research Center; IBM Research - Tokyo; IBM Research - Albany; IBM Research; IBM Systems; IBM Sysytems (sic); IBM Canada moved to its own org
+IBM Canada,company,CA,north_america,IBM,"printed: IBM Canada (Bromont, Canada); parent from printed name (parent brand + qualifier)"
+imec,research_institute,BE,europe,,"printed: imec; Imec, vzw"
+Industrial Technology Research Institute,research_institute,TW,east_asia,,printed: Industrial Technology Research Institute
+iNEMI,consortium,US,north_america,,printed: iNEMI Shanghai
+"Institute of Microelectronics, Chinese Academy of Sciences",research_institute,CN,east_asia,Chinese Academy of Sciences,printed: The Institute of Microelectronics of the Chinese Academy of Sciences
+Institute of Science Tokyo,university,JP,east_asia,,printed: Institute of Science Tokyo
+Intel,company,US,north_america,,printed: Intel Corporation; Intel Corp.; Intel Coporation (sic); merged names: Intel Corporation
+JOINT2,consortium,JP,east_asia,,printed: Consortium JOINT2 (Jisso Open Innovation Network of Tops 2)
+JSR,company,JP,east_asia,,printed: JSR Corporation
+KLA,company,US,north_america,,printed: KLA Corp
+Kobe University,university,JP,east_asia,,printed: Kobe University
+Korea Advanced Institute of Science and Technology,university,KR,east_asia,,printed: Korea Advanced Institute of Science and Technology
+Korea Electronics Technology Institute,research_institute,KR,east_asia,,"printed: Korea Electronic Technology Institute, KETI"
+KU Leuven,university,BE,europe,,printed: KU Leuven (biography only)
+Kulicke & Soffa,company,US,north_america,,"printed: Kulicke & Soffa Industries, Inc. (Fort Washington, PA, USA); HQ not printed: country = printed affiliation country"
+Lightmatter,company,US,north_america,,printed: Lightmatter
+LightSpeed Photonics,company,SG,southeast_asia,,printed: LightSpeed Photonics Private Limited. (Singapore address); HQ country from printed address
+Marvell Technology,company,US,north_america,,"printed: Marvell Technology, Inc."
+MEC,company,JP,east_asia,,"printed: MEC Co., Ltd"
+MediaTek,company,TW,east_asia,,printed: MediaTek Inc.
+Micro Technology,company,JP,east_asia,,printed: Micro Technology (email microtc.com)
+Micron Technology,company,US,north_america,,"printed: Micron Technology, Inc."
+Microsoft,company,US,north_america,,printed: Microsoft
+Mitsubishi Electric,company,JP,east_asia,,printed: Mitsubishi Electric Co.
+Mitsubishi Materials,company,JP,east_asia,,printed: Mitsubishi Materials Corporration (sic)
+Murata Electronics North America,company,US,north_america,Murata Manufacturing,"printed: Murata Electronics North America, Inc. (font-shifted text layer, decoded); parent from printed name (parent brand + qualifier)"
+Murata Manufacturing,company,JP,east_asia,,"printed: Murata Manufacturing Co., Ltd.; merged names: Murata Manufacturing Co., Ltd."
+National Center for Advanced Packaging,other,CN,east_asia,,"printed: National Center for Advanced Packaging, Wuxi (email ncap-cn.com); org type not printed"
+National Cheng Kung University,university,TW,east_asia,,printed: National Cheng Kung University
+National Institute of Advanced Industrial Science and Technology,government_lab,JP,east_asia,,printed: National Institute of Advanced Industrial Science and Technology (AIST)
+National Taiwan University,university,TW,east_asia,,printed: National Taiwan University
+nepes,company,KR,east_asia,,"printed: Nepes (sites San Diego, CA, USA and Binan, Laguna, Philippines); merged names: Nepes; nepes Corporation"
+nepes hayyim,company,PH,southeast_asia,nepes,printed: nepes hayyim; nepes hayyim Corporation; parent from printed name (parent brand + qualifier)
+nepes laweh,company,KR,east_asia,nepes,"printed: nepes laweh (Cheongan-myeon, Korea; email nepes.co.kr); parent from printed name (parent brand + qualifier)"
+Nopion,company,KR,east_asia,,"printed: Nopion Co.,Ltd"
+Peking University,university,CN,east_asia,,printed: Peking University
+Pennsylvania State University,university,US,north_america,,printed: Pennsylvania State University
+PHIX Photonics Assembly,company,NL,europe,,printed: PHIX Photonics Assembly
+Powerchip Semiconductor Manufacturing,foundry,TW,east_asia,,printed: Powerchip Semiconductor Manufacturing Corporation
+Purdue University,university,US,north_america,,printed: Purdue University
+Qorvo,company,US,north_america,,printed: Qorvo
+Renesas Electronics,company,JP,east_asia,,printed: Renesas Electronics Corporation
+Research Foundation for the State University of New York,other,US,north_america,,printed: The Research Foundation for State University of New York
+Resonac,company,JP,east_asia,,printed: Resonac Corporation
+SAIMEMORY,company,JP,east_asia,,printed: SAIMEMORY Corp.
+Samsung Electronics,company,KR,east_asia,,"printed: Samsung Electronics Co. Ltd; merged names: Samsung Electronics Co., Ltd."
+SCHMID Group,company,DE,europe,,printed: SCHMID Group
+Sciperio,company,US,north_america,,"printed: Sciperio, Inc."
+Shanghai Aircraft Design and Research Institute,research_institute,CN,east_asia,COMAC,"printed: Shanghai Aircraft Design and Research Institute, COMAC"
+Shanghai Institute of Microsystem and Information Technology,research_institute,CN,east_asia,Chinese Academy of Sciences,"printed: Shanghai Institute of Microsystem and Information Technology, Chinese Academy of Sciences"
+Shinko Electric Industries,company,JP,east_asia,,"printed: Shinko Electric Industries Co. Ltd.; Shinko Electric Industries Co., Ltd"
+Showa Denko Materials,company,JP,east_asia,,"printed: Showa Denko Materials Co., Ltd."
+Singapore Polytechnic,university,SG,southeast_asia,,polytechnic (closest org_type university); printed: Singapore Polytechnic
+SK hynix,company,KR,east_asia,,"printed: SK hynix Inc.; SK Hynix Semiconductor Co., LTD (ectc51906.2022.00113, Icheon); merged names: SK hynix Inc.; SK hynix America moved to its own org"
+SK hynix America,company,US,north_america,SK hynix,"printed: SK hynix America Inc. (San Jose, USA); parent from printed name (parent brand + qualifier)"
+Sogang University,university,KR,east_asia,,printed: Sogang University
+Sony Semiconductor Manufacturing,company,JP,east_asia,,"printed: Sony Semiconductor Manufacturing Corporation (Kumamoto, Japan); parent not printed, not set"
+Sony Semiconductor Solutions,company,JP,east_asia,,printed: Sony Semiconductor Solutions Corporation
+Spectronix,company,JP,east_asia,,printed: Spectronix Co.
+SPIL,company,TW,east_asia,,"printed: Siliconware Precision Industries Co. Ltd.; SPIL; merged names: Siliconware Precision Industries Co., Ltd."
+STMicroelectronics,company,CH,europe,,printed: STMicroelectronics (Singapore address); HQ Geneva not printed
+Sumitomo Electric Industries,company,JP,east_asia,,"printed: Sumitomo Electric Industries, Ltd."
+SUNY Polytechnic Institute,university,US,north_america,,printed: State University of New York Polytechnic Institute; Stat University of New York Polytechnic Institute (sic)
+SUSS MicroTec Lithography,company,DE,europe,,"printed: SUSS MicroTec Lithography GmbH; corporate parent not printed, not set"
+Taiwan Foresight,company,TW,east_asia,,"printed: Taiwan Foresight Co., Ltd."
+Taiyo Ink Mfg.,company,JP,east_asia,,"printed: Taiyo Ink MFG. Co., Ltd"
+Technische Universität Berlin,university,DE,europe,,printed: Technische Universität Berlin
+Technische Universität Dresden,university,DE,europe,,printed: Technische Universitaet Dresden
+The University of Tokyo,university,JP,east_asia,,printed: The University of Tokyo
+Thin Film Technology,company,US,north_america,,printed: Thin Film Technology Corporation
+Tohoku University,university,JP,east_asia,,from biography (visiting professor)
+Tokyo Institute of Technology,university,JP,east_asia,,printed: Tokyo Institute of Technology (2024 ECTC paper; predecessor of Institute of Science Tokyo)
+Tsinghua University,university,CN,east_asia,,printed: Tsinghua University
+TSMC,foundry,TW,east_asia,,"printed: Taiwan Semiconductor Manufacturing Company Ltd.; Taiwan Semiconductor Manufacturing Company, Ltd.; Taiwan Semiconductor Manufacturing Company; TSMC; merged names: Taiwan Semiconductor Manufacturing Company"
+ULVAC,company,JP,east_asia,,"printed: ULVAC, Inc.; ULVAC, inc."
+Unimicron,company,TW,east_asia,,substrate maker; printed: Unimicron; Unimicron Technology Co.
+University of Applied Science Berlin,university,DE,europe,,printed: University of Applied Science Berlin (exact institution not named)
+"University of California, Los Angeles",university,US,north_america,,printed: UCLA
+"University of California, San Diego",university,US,north_america,,"printed: University of California, San Diego"
+University of Chinese Academy of Sciences,university,CN,east_asia,,printed: University of Chinese Academy of Sciences; parent relation to CAS not printed
+Université de Sherbrooke,university,CA,north_america,,printed: Université de Sherbrooke ; unit 3IT
+USHIO,company,JP,east_asia,,printed: USHIO.Inc
+WinTech Nano-Technology Services,company,SG,southeast_asia,,printed: WinTech Nano-Technology Services Pte. Ltd.
+Xilinx,company,US,north_america,,"printed: Xilinx, Inc."
+Xperi,company,US,north_america,,printed: Xperi Corporation
+Yield Engineering Systems,company,US,north_america,,printed: Yield Engineering Systems

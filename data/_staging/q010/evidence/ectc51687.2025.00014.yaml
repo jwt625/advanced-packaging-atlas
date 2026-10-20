@@ -1,0 +1,42 @@
+paper_id: ectc51687.2025.00014
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00014/text.md
+  - references/ectc51687.2025.00014/source.json
+  - references/ectc51687.2025.00014/figures/page_02.png
+  - references/ectc51687.2025.00014/figures/page_03.png
+  - references/ectc51687.2025.00014/figures/page_04.png
+  - references/ectc51687.2025.00014/figures/page_05.png
+  - references/ectc51687.2025.00014/figures/cand/p02_fig3.png
+  - references/ectc51687.2025.00014/figures/cand/p03_fig4.png
+  - references/ectc51687.2025.00014/figures/cand/p04_fig6.png
+  - references/ectc51687.2025.00014/figures/cand/p04_fig7.png
+  - references/ectc51687.2025.00014/figures/cand/p04_fig8.png
+figure_reading_method: >-
+  Values taken from text and confirmed against Fig. 6-9 candidate crops; Fig. 5 and Fig. 3 re-cropped from page renders.
+  Fig. 9 on/off power levels read approximately from the plot (notes only).
+entries:
+  - {table: optical_interfaces, row_id: ectc51687.2025.00014-a-o1, field: coupling_loss_db, value: 1.6, unit: dB, basis: measured, locator: "p.4 Sec. IV.C", note: "text gives -1.6 dB coupling efficiency; entered as positive loss"}
+derived:
+  - {table: metrics, row_id: ectc51687.2025.00014-a-m6, field: value, value: 0.4, formula: "2 x 0.2 dB as stated", inputs: "p.5 Sec. V.A"}
+conflicts: []
+excluded:
+  - "Ideal coupling efficiency 0.8 dB (reported for similar free-form mirror, ref [25])"
+  - "Laser-assisted etching Ra of several hundred nm (ref [22])"
+  - "Evanescent coupling taper length of several mm (ref [12]); 0.1 um waveguide alignment need (ref [11])"
+  - "Fig. 1/2 ASIC + PIC on glass-on-organic platform (concept, no data)"
+not_reported:
+  - electrical_interfaces
+  - PIC, glass substrate and module dimensions; glass type and thickness
+  - stud bump metal, pitch, count; bonding force and exact time
+  - number of optical channels, fiber pitch, fiber type
+  - lens dimensions; sample configuration used for Fig. 8 position sweep
+  - reliability testing beyond 300 C TCB survival
+source_quality:
+  - "No candidate for Fig. 5; Fig. 3 candidate clipped bottom label."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00014, change: "process_flow_level full -> ordered (flow F1 level ordered)", reason: "ordered Sec. III sequence; only condition is TCB 300 C for a few seconds"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00014-F1-s12, change: "deleted (electro-optical characterization)", reason: "measurement, not a build step; results already in metrics a-m1..m5 and optical_interfaces a-o1"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00014-F1-s04, change: "category electroplating -> deposition_other", reason: "paper says 'gold plating' only"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00014-F1-s01..s11, change: "step_basis stated_in_flow (s09 stays inferred_order); equipment 'deep RIE' (s02), 'laser-assisted etching' (s06); s08 material stud bumps", reason: "order and tools stated in p.3 Sec. III"}

@@ -1,0 +1,47 @@
+paper_id: ectc51909.2023.00219
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00219/text.md
+  - references/ectc51909.2023.00219/source.json
+  - references/ectc51909.2023.00219/figures/page_02.png
+  - references/ectc51909.2023.00219/figures/page_03.png
+  - references/ectc51909.2023.00219/figures/page_04.png
+  - references/ectc51909.2023.00219/figures/page_05.png
+figure_reading_method: >-
+  Page renders plus 300 dpi re-crops of Fig. 5, 10, 11, 12, 15; candidates p02_tablei, p03_fig7, p04_fig12, p04_fig13,
+  p04_fig14, p05_fig16 opened. Cumulative-plot medians read by eye at the 50% line (+/-0.02 Ohm).
+entries:
+  - {table: components, row_id: ectc51909.2023.00219-a-c1, field: x_mm, value: 17, unit: mm, basis: design_target, locator: "p.4 Fig. 12 inset", note: "chip width"}
+  - {table: components, row_id: ectc51909.2023.00219-a-c1, field: y_mm, value: 24, unit: mm, basis: design_target, locator: "p.4 Fig. 12 inset", note: "chip height; edge site 4 mm / 1 mm from corner edges"}
+  - {table: interconnects, row_id: ectc51909.2023.00219-a-i2, field: resistance_mohm, value: 90, unit: mOhm, basis: measured, locator: "p.3 Fig. 10", note: "0.09 Ohm median read off plot; Kelvin, 3 um pad"}
+derived:
+  - {table: interconnects, row_id: ectc51909.2023.00219-a-i2, field: resistance_mohm, value: 90, formula: "0.09 Ohm x 1000", inputs: "p.3 Fig. 10"}
+  - {table: interconnects, row_id: ectc51909.2023.00219-b-i2, field: resistance_mohm, value: 90, formula: "0.09 Ohm x 1000", inputs: "p.3 Fig. 10"}
+conflicts:
+  - {table: components, row_id: ectc51909.2023.00219-a-c1, field: chip_area_mm2, values: [410, 408], locators: ["p.2 Table I", "p.4 Fig. 12 inset 17x24 mm"], chosen: "x/y 17x24 entered; 410 in notes", why: "rounded inset dimensions vs table area; Table I unit printed as mm"}
+excluded:
+  - "Table I columns [5]-[8] ECTC2021 chip areas, pitches, yields (cited work)"
+  - "Fig. 3 pitch/chip-area trend points of refs [2]-[9]"
+  - "Fig. 1 CIS evolution and Fig. 2 WoW/CoW overview (generic)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - wafer diameter, die and wafer thicknesses, Cu pad diameter for 6 um pitch chains, bonding dielectric thickness
+  - pretreatment recipe, bonding conditions (temperature, force, time, atmosphere), anneal temperature/time
+  - SIV exact temperature, EM temperature and current density, number of chains/samples tested
+source_quality:
+  - "Figure label text in text.md is font-garbled; all values read from page renders."
+  - "Candidates p02_fig5 and p04_fig14 include body-text lines (manual re-crops used)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F1-s04", change: "category cleaning -> surface_treatment; step 'top chip pretreatment after dicing (dust removal)'", reason: "both Fig. 5 'Pretreatment' boxes get one category; dust-removal focus kept in conditions (p.3 Sec. II.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F1", change: "step_basis stated_in_flow (s02 backgrinding stays inferred_order); non-dimension targets cleared", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F2", change: "scope tv_build -> comparison", reason: "proven WoW process of the reference structure (TV b)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F2-s02", change: "now top wafer pretreatment (split from old F2-s03 'pretreatment of top and base wafers')", reason: "Fig. 5 draws separate top and base pretreatment"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F2-s03", change: "now base wafer planarization (was F2-s02)", reason: "order top then base, as in F1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F2-s04", change: "now base wafer pretreatment (split from old F2-s03)", reason: "Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F2-s05", change: "now WoW Cu-Cu hybrid bonding (was F2-s04)", reason: "renumbered"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F2-s06", change: "now WoW bonding anneal (was F2-s05)", reason: "renumbered"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219", change: "process_flow_level ordered confirmed", reason: "Fig. 5 order, no conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F1-s07", change: "target '' -> '6 um pitch'; locator + p.1 Abstract", reason: "manifest target_missing a-i1: 6 um-pitch CoW Cu-Cu connections (Abstract, Fig. 11)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00219-F2-s05", change: "target '' -> '6 um pitch'; source schematic -> mixed; locator + p.4 Fig. 11", reason: "manifest target_missing b-i1: Fig. 11 caption 6 um-pitch daisy chain for CoW and WoW"}

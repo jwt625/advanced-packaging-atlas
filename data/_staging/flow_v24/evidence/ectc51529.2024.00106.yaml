@@ -1,0 +1,41 @@
+paper_id: ectc51529.2024.00106
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00106/text.md
+  - references/ectc51529.2024.00106/source.json
+  - references/ectc51529.2024.00106/figures/page_03.png
+  - references/ectc51529.2024.00106/figures/page_04.png
+  - references/ectc51529.2024.00106/figures/page_05.png
+  - references/ectc51529.2024.00106/figures/cand/p01_fig1.png
+  - references/ectc51529.2024.00106/figures/cand/p02_fig2.png
+  - references/ectc51529.2024.00106/figures/cand/p03_fig3.png
+  - references/ectc51529.2024.00106/figures/cand/p03_fig4.png
+  - references/ectc51529.2024.00106/figures/cand/p04_fig8.png
+  - references/ectc51529.2024.00106/figures/cand/p05_fig10.png
+  - references/ectc51529.2024.00106/figures/cand/p05_fig11.png
+figure_reading_method: >-
+  Candidate crops for Fig. 1-4, 8, 10, 11; 400-500 dpi re-crops of Fig. 1 (SiCN labels), Fig. 6 (stack insets),
+  Fig. 10 (bar heights read +/-1%) and Fig. 11 (SEM scale bar 4 um, 25000x).
+entries:
+  - {table: metrics, row_id: ectc51529.2024.00106-b-m1, field: value, value: 93, unit: "%", basis: measured, locator: "p.3 Sec. II", note: "tier 2 transfer yields of four stacks: 93, 92, 84, 64%; not mapped to D01-D04"}
+  - {table: metrics, row_id: ectc51529.2024.00106-a-m3, field: value, value: 99, unit: "%", basis: measured, locator: "p.3 Fig. 4", note: "Fig. 4 black bars read D01 ~98.7, D02 ~99.3, D03 ~98.3, D04 ~96.5"}
+  - {table: metrics, row_id: ectc51529.2024.00106-b-m3, field: value, value: 60, unit: "%", basis: measured, locator: "p.3 Fig. 4", note: "Fig. 4 blue bars read D01 ~82.6, D02 ~75, D03 ~86.3, D04 ~62; green D01 ~90.5, D02 ~85.4, D03 ~91, D04 ~84.3"}
+derived:
+  - {table: metrics, row_id: ectc51529.2024.00106-a-m8, field: value, value: 0.045, formula: "45 nm / 1000", inputs: "p.4 Sec. II"}
+conflicts:
+  - {table: metrics, row_id: ectc51529.2024.00106-b-m4, field: value, values: [85, 86.3], locators: ["p.3 Sec. II text", "p.3 Fig. 4 D03 blue bar"], chosen: 85, why: "text range entered; bar reading approximate and slightly above text max"}
+  - {table: metrics, row_id: ectc51529.2024.00106-a-m3, field: value, values: [99, 98], locators: ["p.3 Sec. II", "p.5 Sec. III"], chosen: 99, why: "two text statements for different scopes (tier 1 only vs summary over tiers); both entered as separate rows (a-m3, a-m5)"}
+excluded:
+  - "50 um and 775 um die transfer with near 100% yield (refs [5]-[10])"
+  - "1-4% die damage with LRL only; 7 um pitch daisy chains/kelvin up to 80% yield (ref [5])"
+  - "mechanical debond transfer yields up to unity on Si carriers (refs [9], [10])"
+not_reported:
+  - die size, die count per wafer, wafer diameter
+  - bonding dielectric thickness, SiCN deposition method, bond/clean/activation conditions
+  - full-loop die thickness, TSV dimensions, HB pad size, electrical results
+  - electrical_interfaces
+  - optical_interfaces
+  - reliability
+source_quality:
+  - "Clean text layer. Fig. 6/7 stack inset labels (HT/LT SiCN) too small to read reliably; text 'low temperature SiCN' used for backside."

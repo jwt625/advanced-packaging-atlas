@@ -1,0 +1,58 @@
+paper_id: ectc51909.2023.00135
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00135/text.md
+  - references/ectc51909.2023.00135/source.json
+  - references/ectc51909.2023.00135/figures/page_01.png
+  - references/ectc51909.2023.00135/figures/page_02.png
+  - references/ectc51909.2023.00135/figures/page_03.png
+  - references/ectc51909.2023.00135/figures/page_04.png
+  - references/ectc51909.2023.00135/figures/page_05.png
+figure_reading_method: >-
+  Page renders for all figures; 300 dpi re-crops of Fig. 8, 9, 10 bar charts with bar tops converted via gridline
+  pixel positions (+/-0.01). Fig. 4 values and Fig. 7 bump heights are printed labels. Candidate crops opened for
+  Fig. 1, 3, 4, 7, 10 and Table II.
+entries:
+  - {table: metrics, row_id: ectc51909.2023.00135-b-m10, field: value, value: 65, unit: um, basis: measured, locator: "p.3 Fig. 7(a)", note: "printed arrow label on C4 joint cross-section (Cu pillar + solder)"}
+  - {table: metrics, row_id: ectc51909.2023.00135-b-m11, field: value, value: 85, unit: um, basis: measured, locator: "p.3 Fig. 7(b)", note: "printed arrow label; standard bump height"}
+derived:
+  - {table: test_vehicles, row_id: ectc51909.2023.00135-a, field: n_dies, value: 10, formula: "2 interposers x (1 SoC + 4 HBM)", inputs: "p.2 Sec. II text; p.2 Fig. 3"}
+  - {table: test_vehicles, row_id: ectc51909.2023.00135-a, field: n_hbm, value: 8, formula: "2 x 4 HBM", inputs: "p.2 Fig. 3"}
+  - {table: test_vehicles, row_id: ectc51909.2023.00135-b, field: n_dies, value: 10, formula: "2 x (1 SoC + 2 HBM + 2 dummy)", inputs: "p.2 Fig. 3"}
+  - {table: test_vehicles, row_id: ectc51909.2023.00135-b, field: n_hbm, value: 4, formula: "2 x 2 HBM", inputs: "p.2 Fig. 3"}
+  - {table: test_vehicles, row_id: ectc51909.2023.00135-c, field: n_dies, value: 10, formula: "same floorplan as TV2", inputs: "p.2 Fig. 3; p.4 Table II"}
+  - {table: test_vehicles, row_id: ectc51909.2023.00135-c, field: n_hbm, value: 4, formula: "same floorplan as TV2", inputs: "p.2 Fig. 3"}
+  - {table: interconnects, row_id: ectc51909.2023.00135-a-i3, field: pitch_um, value: 1000, formula: "1.0 mm x 1000 (unit conversion; same for -b, -c)", inputs: "p.2 Table I"}
+conflicts:
+  - {table: metrics, row_id: ectc51909.2023.00135-b-m7, field: value_text, values: ["TV2 failed after TCG 200 cycles (text)", "TV2 100 um Fail at TCG 1000 cycles (Table II)"], locators: ["p.2 Sec. III.B", "p.4 Table II"], chosen: "both entered as separate rows", why: "not contradictory; Table II reports the 1000-cycle test outcome"}
+excluded:
+  - "References [1]-[4] (CoWoS background) contribute no numbers"
+not_reported:
+  - process_steps (no fabrication or assembly flow; finished stack only)
+  - electrical_interfaces, optical_interfaces
+  - interposer x/y in mm (only '1.5 reticle'), interposer RDL, TSV dimensions
+  - microbump diameter/height/metallurgy; C4 diameter; BGA ball size; bonding conditions
+  - substrate layer count, core, thickness; stiffener dimensions; mold/underfill products
+  - warpage measurement method; sample counts for reliability tests
+  - increased C4 bump height value of the optimized TV2
+source_quality:
+  - "Clean text layer; all figure candidates usable as-is."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00135-a-m12, change: "scope -> 'applies to TVs a, b'; notes updated", reason: "kept as the single row of the shared statement"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00135-b-m15, change: "deleted (copy of a-m12: 20% corner stress reduction, interposer 100 -> 50 um)", reason: "p.3 Sec. III.E states one value \"for both test vehicles\"; per-TV values exist only as Fig. 9 bars (a-m10/11, b-m13/14)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00135-a-m3; ectc51909.2023.00135-b-m5; ectc51909.2023.00135-c-m1, change: "none (kept)", reason: "MSL4 Pass: p.4 Table II gives a separate result per column (TV1 100 um, TV2 100 um, TV2 50 um)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00135-a-m4; ectc51909.2023.00135-b-m6; ectc51909.2023.00135-c-m2, change: "none (kept)", reason: "uHAST 264 h Pass: p.4 Table II gives a separate result per column (TV1 100 um, TV2 100 um, TV2 50 um)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00135-a-m5; ectc51909.2023.00135-c-m3, change: "none (kept)", reason: "TCG 1000 cycles Pass (b is Fail): p.4 Table II gives a separate result per column (TV1 100 um, TV2 100 um, TV2 50 um)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00135-a-m6; ectc51909.2023.00135-b-m8; ectc51909.2023.00135-c-m4, change: "none (kept)", reason: "HTS 1000 h Pass: p.4 Table II gives a separate result per column (TV1 100 um, TV2 100 um, TV2 50 um)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f01, change: "added Fig. 12 (cross_section, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f03, change: "added Fig. 11 (top_view_layout, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f05, change: "added Fig. 13 (cross_section, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f06, change: "added Fig. 14 (cross_section, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f08, change: "added Fig. 6 (cross_section, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f09, change: "added Fig. 5 (cross_section, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f10, change: "added Fig. 2 (package_photo, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f13, change: "added Table I (data_table, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f14, change: "added Fig. 8 (simulation_result, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-f15, change: "added Fig. 9 (simulation_result, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00135-figures, change: "re-ranked: Fig. 1 f01 -> f04, Fig. 7 f05 -> f07, Fig. 4 f03 -> f11, Table II f04 -> f12, Fig. 10 f06 -> f16", reason: "rank order per SKILL.md step 5 after additions"}

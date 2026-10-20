@@ -1,0 +1,62 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+tcpmt.2026.3740312-a01-1,tcpmt.2026.3740312,1,Jiexun Yu,1,primary,Tsinghua University,School of Integrated Circuits,Beijing,CN,byline from page image (absent in text layer),paper,p.1 footnote
+tcpmt.2026.3740312-a02-1,tcpmt.2026.3740312,2,Liangliang Yang,1,primary,Tsinghua University,School of Integrated Circuits,Beijing,CN,byline from page image (absent in text layer),paper,p.1 footnote
+tcpmt.2026.3740312-a03-1,tcpmt.2026.3740312,3,Yongbo Wu,1,primary,Tsinghua University,School of Integrated Circuits,Beijing,CN,byline from page image (absent in text layer),paper,p.1 footnote
+tcpmt.2026.3740312-a04-1,tcpmt.2026.3740312,4,Qian Wang,1,primary,Tsinghua University,School of Integrated Circuits,Beijing,CN,byline from page image (absent in text layer),paper,p.1 footnote
+tcpmt.2026.3740312-a04-2,tcpmt.2026.3740312,4,Qian Wang,2,additional,Beijing National Research Center for Information Science and Technology,,Beijing,CN,,paper,p.1 footnote
+tcpmt.2026.3740312-a05-1,tcpmt.2026.3740312,5,Kaixiang Mao,1,primary,Tsinghua University,School of Integrated Circuits,Beijing,CN,byline from page image (absent in text layer),paper,p.1 footnote
+tcpmt.2026.3740312-a06-1,tcpmt.2026.3740312,6,Wei Chen,1,primary,Tsinghua University,School of Integrated Circuits,Beijing,CN,byline from page image (absent in text layer),paper,p.1 footnote
+tcpmt.2026.3740312-a06-2,tcpmt.2026.3740312,6,Wei Chen,2,additional,Beijing National Research Center for Information Science and Technology,,Beijing,CN,,paper,p.1 footnote
+tcpmt.2026.3740312-a07-1,tcpmt.2026.3740312,7,Jian Cai,1,primary,Tsinghua University,School of Integrated Circuits,Beijing,CN,byline from page image (absent in text layer),paper,p.1 footnote
+tcpmt.2026.3740312-a07-2,tcpmt.2026.3740312,7,Jian Cai,2,additional,Beijing National Research Center for Information Science and Technology,,Beijing,CN,,paper,p.1 footnote
+tcpmt.2026.3708099-a01-1,tcpmt.2026.3708099,1,J. Zou,1,primary,China Academy of Engineering Physics,Microsystem and Terahertz Research Center,Chengdu,CN,,paper,p.1 footnote
+tcpmt.2026.3708099-a01-2,tcpmt.2026.3708099,1,J. Zou,2,additional,China Academy of Engineering Physics,Institute of Electronic Engineering,Mianyang,CN,,paper,p.1 footnote
+tcpmt.2026.3708099-a02-1,tcpmt.2026.3708099,2,L. Liu,1,primary,China Academy of Engineering Physics,Microsystem and Terahertz Research Center,Chengdu,CN,,paper,p.1 footnote
+tcpmt.2026.3708099-a02-2,tcpmt.2026.3708099,2,L. Liu,2,additional,China Academy of Engineering Physics,Institute of Electronic Engineering,Mianyang,CN,,paper,p.1 footnote
+tcpmt.2026.3708099-a03-1,tcpmt.2026.3708099,3,W. Xie,1,primary,China Academy of Engineering Physics,Microsystem and Terahertz Research Center,Chengdu,CN,,paper,p.1 footnote
+tcpmt.2026.3708099-a03-2,tcpmt.2026.3708099,3,W. Xie,2,additional,China Academy of Engineering Physics,Institute of Electronic Engineering,Mianyang,CN,,paper,p.1 footnote
+tcpmt.2026.3708099-a04-1,tcpmt.2026.3708099,4,X. Li,1,primary,China Academy of Engineering Physics,Institute of Electronic Engineering,Mianyang,CN,email domain njust.edu.cn; only CAEP printed,paper,p.1 footnote
+tcpmt.2026.3708099-a05-1,tcpmt.2026.3708099,5,X. Luo,1,primary,China Academy of Engineering Physics,Microsystem and Terahertz Research Center,Chengdu,CN,,paper,p.1 footnote
+tcpmt.2026.3708099-a05-2,tcpmt.2026.3708099,5,X. Luo,2,additional,China Academy of Engineering Physics,Institute of Electronic Engineering,Mianyang,CN,,paper,p.1 footnote
+tcpmt.2026.3708099-a06-1,tcpmt.2026.3708099,6,T. Gong,1,primary,China Academy of Engineering Physics,Microsystem and Terahertz Research Center,Chengdu,CN,,paper,p.1 footnote
+tcpmt.2026.3708099-a06-2,tcpmt.2026.3708099,6,T. Gong,2,additional,China Academy of Engineering Physics,Institute of Electronic Engineering,Mianyang,CN,,paper,p.1 footnote
+tcpmt.2026.3708099-a07-1,tcpmt.2026.3708099,7,C. Ma,1,primary,China Academy of Engineering Physics,Microsystem and Terahertz Research Center,Chengdu,CN,,paper,p.1 footnote
+tcpmt.2026.3708099-a07-2,tcpmt.2026.3708099,7,C. Ma,2,additional,China Academy of Engineering Physics,Institute of Electronic Engineering,Mianyang,CN,,paper,p.1 footnote
+tcpmt.2026.3708099-a08-1,tcpmt.2026.3708099,8,J. Li,1,primary,China Academy of Engineering Physics,Microsystem and Terahertz Research Center,Chengdu,CN,,paper,p.1 footnote
+tcpmt.2026.3708099-a08-2,tcpmt.2026.3708099,8,J. Li,2,additional,China Academy of Engineering Physics,Institute of Electronic Engineering,Mianyang,CN,,paper,p.1 footnote
+vlsitechnologyandcir65830.2026.11577374-a01-1,vlsitechnologyandcir65830.2026.11577374,1,S. Morein,1,primary,SAIMEMORY,,Tokyo,JP,,paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a02-1,vlsitechnologyandcir65830.2026.11577374,2,P. Mahji,1,primary,Intel,,"Santa Clara, CA",US,printed: Intel,paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a03-1,vlsitechnologyandcir65830.2026.11577374,3,W. Gilmore,1,primary,Intel,,"Santa Clara, CA",US,printed: Intel,paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a04-1,vlsitechnologyandcir65830.2026.11577374,4,C.-L. Lu,1,primary,Powerchip Semiconductor Manufacturing,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a05-1,vlsitechnologyandcir65830.2026.11577374,5,S.C. Lin,1,primary,Powerchip Semiconductor Manufacturing,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a06-1,vlsitechnologyandcir65830.2026.11577374,6,C.H. Chuang,1,primary,Powerchip Semiconductor Manufacturing,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a07-1,vlsitechnologyandcir65830.2026.11577374,7,C.F. Sung,1,primary,Powerchip Semiconductor Manufacturing,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a08-1,vlsitechnologyandcir65830.2026.11577374,8,C.H. Chen,1,primary,Powerchip Semiconductor Manufacturing,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a09-1,vlsitechnologyandcir65830.2026.11577374,9,C.W. Huang,1,primary,Powerchip Semiconductor Manufacturing,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a10-1,vlsitechnologyandcir65830.2026.11577374,10,Y.L. Chang,1,primary,Powerchip Semiconductor Manufacturing,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a11-1,vlsitechnologyandcir65830.2026.11577374,11,S.-Z. Chang,1,primary,Powerchip Semiconductor Manufacturing,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a12-1,vlsitechnologyandcir65830.2026.11577374,12,Chris Liu,1,primary,AP Memory,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a13-1,vlsitechnologyandcir65830.2026.11577374,13,HN Hcueh,1,primary,AP Memory,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a14-1,vlsitechnologyandcir65830.2026.11577374,14,Hamy Yeh,1,primary,AP Memory,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a15-1,vlsitechnologyandcir65830.2026.11577374,15,PT Chen,1,primary,AP Memory,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a16-1,vlsitechnologyandcir65830.2026.11577374,16,Wenliang Chen,1,primary,AP Memory,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir46783.2024.10631441-a01-1,vlsitechnologyandcir46783.2024.10631441,1,P. Zhao,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a02-1,vlsitechnologyandcir46783.2024.10631441,2,L. Witters,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a03-1,vlsitechnologyandcir46783.2024.10631441,3,A. Jourdain,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a04-1,vlsitechnologyandcir46783.2024.10631441,4,M. Stucchi,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a05-1,vlsitechnologyandcir46783.2024.10631441,5,N. Jourdan,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a06-1,vlsitechnologyandcir46783.2024.10631441,6,J.W. Maes,1,primary,ASM International,,Leuven,BE,"superscript 1: ASM, Belgium, Kapeldreef 75, Leuven",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a07-1,vlsitechnologyandcir46783.2024.10631441,7,H. Bana,1,primary,ASM International,,Leuven,BE,"superscript 1: ASM, Belgium, Kapeldreef 75, Leuven",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a08-1,vlsitechnologyandcir46783.2024.10631441,8,C. Zhu,1,primary,ASM International,,Helsinki,FI,"superscript 2: ASM, Helsinki, Finland",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a09-1,vlsitechnologyandcir46783.2024.10631441,9,R. Chukka,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a10-1,vlsitechnologyandcir46783.2024.10631441,10,F. Sebaai,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a11-1,vlsitechnologyandcir46783.2024.10631441,11,K. Vandersmissen,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a12-1,vlsitechnologyandcir46783.2024.10631441,12,N. Heylen,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a13-1,vlsitechnologyandcir46783.2024.10631441,13,D. Montero,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a14-1,vlsitechnologyandcir46783.2024.10631441,14,S. Wang,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a15-1,vlsitechnologyandcir46783.2024.10631441,15,K. D'Have,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a16-1,vlsitechnologyandcir46783.2024.10631441,16,F. Schleicher,1,primary,KLA,,Newport,GB,"superscript 3: KLA Corp, Newport, U.K.",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a17-1,vlsitechnologyandcir46783.2024.10631441,17,J. De Vos,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a18-1,vlsitechnologyandcir46783.2024.10631441,18,G. Beyer,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a19-1,vlsitechnologyandcir46783.2024.10631441,19,A. Miller,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a20-1,vlsitechnologyandcir46783.2024.10631441,20,E. Beyne,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)

@@ -46,3 +46,17 @@ not_reported:
   - "sample counts for Cases #1-#2; thin-film materials; SAT void statistics"
 source_quality:
   - "Typos in source (Precess, Feburary); otherwise clean text layer."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: eptc67330.2025.11392132-a-m1, change: "scope \"all 400 um cases\" -> \"applies to TVs a, b, c ...\"; copies b-m1, c-m1 deleted", reason: "p.4 Sec. III.A: \"for all cases ... begins to increase sharply above ... 2W\", one statement, no per-case value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: eptc67330.2025.11392132-b-m2, change: "kept as the one row; scope -> \"Case #2 (applies to TVs b, c) ...\"; copies a-m2, c-m2 deleted", reason: "p.5 Sec. III.B states 150/400 um (37.5%) for Case #2 only; Case #2 covers TVs b and c"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: eptc67330.2025.11392132-a-m2, change: "deleted", reason: "copy of a claim kept once (see the kept row)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: eptc67330.2025.11392132-b-m1, change: "deleted", reason: "copy of a claim kept once (see the kept row)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: eptc67330.2025.11392132-c-m1, change: "deleted", reason: "copy of a claim kept once (see the kept row)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: eptc67330.2025.11392132-c-m2, change: "deleted", reason: "copy of a claim kept once (see the kept row)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: eptc67330.2025.11392132-figures, change: "re-ranked: Table I f04 -> f09, Fig. 8 f05 -> f10, Fig. 10 f06 -> f11", reason: "key-figure rule 2026-10-19: rank 1 build view, then process flow, layout, other schematics/images, then plots/tables"}
+  - {date: 2026-10-19, source: figure_rule, row_id: eptc67330.2025.11392132-f04, change: "added Fig. 1 (xray_csam, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: eptc67330.2025.11392132-f05, change: "added Fig. 6 (xray_csam, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: eptc67330.2025.11392132-f06, change: "added Fig. 2 (package_photo, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: eptc67330.2025.11392132-f07, change: "added Fig. 7 (other, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: eptc67330.2025.11392132-f08, change: "added Fig. 12 (stack_schematic, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: eptc67330.2025.11392132-f12, change: "added Fig. 11 (thermal_plot, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}

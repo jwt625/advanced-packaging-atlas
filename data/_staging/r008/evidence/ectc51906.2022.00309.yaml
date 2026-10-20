@@ -35,3 +35,4 @@ not_reported:
   - micro bump height/metallurgy, FCB and CoS bonding conditions, CoS underfill product
   - C4 'diameter 70 x 90 um' meaning, BGA pitch, substrate core thickness
   - RDL leakage, sheet resistance and via chain values, sample counts for reliability, warpage sign convention
+revisions: []   # 2026-10-19: audit_x1 item 10 (a-i1/a-i2 typed microbump) disputed, see REVISION_REPORT.md

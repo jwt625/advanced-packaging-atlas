@@ -1,0 +1,40 @@
+paper_id: ectc51687.2025.00007
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00007/text.md
+  - references/ectc51687.2025.00007/source.json
+  - references/ectc51687.2025.00007/figures/page_02.png
+  - references/ectc51687.2025.00007/figures/page_03.png
+  - references/ectc51687.2025.00007/figures/page_04.png
+figure_reading_method: >-
+  Page renders p.2-4 viewed in full; candidates p02_fig1, p02_fig2, p02_fig3, p02_tablei, p03_fig4, p04_tableii opened;
+  Fig. 4 re-cropped (candidate lacked panel a) and abrupt-failure times read off the arrowed traces (+/-5 h).
+entries:
+  - {table: stack_layers, row_id: ectc51687.2025.00007-a-L03, field: line_um, value: 5, unit: um, basis: design_target, locator: "p.2 Table I", note: "EM pattern width"}
+  - {table: metrics, row_id: ectc51687.2025.00007-a-m7, field: value, value: 1e-12, unit: A, basis: measured, locator: "p.3 Sec. III.B", note: "leakage remained below 1e-12 A"}
+derived: []
+conflicts:
+  - {table: stack_layers, row_id: ectc51687.2025.00007-a-L04, field: space_um, values: ["3 (abstract '5x3 um'; Sec. II.B 'spacing of 3 um')", "2/3 (Table I; Sec. III.B)"], locators: ["p.1 Abstract", "p.2 Sec. II.B", "p.2 Table I", "p.3 Sec. III.B"], chosen: "both 2 and 3 um as separate features", why: "result table and Sec. III.B list both spaces"}
+  - {table: metrics, row_id: ectc51687.2025.00007-a-m7, field: locator, values: ["Fig. 8 (a) and (b) in text", "Fig. 8 (b) and (c) in caption"], locators: ["p.3 Sec. III.B", "p.4 Fig. 8"], chosen: "caption labels (b) 2 um, (c) 3 um", why: "schema rule (c): cite caption label"}
+  - {table: stack_layers, row_id: ectc51687.2025.00007-a-L03, field: feature, values: ["EM lengths 200-2000 um (abstract says EM and TDDB patterns 200-2000 um)", "TDDB length 50 um"], locators: ["p.1 Abstract", "p.2 Table I"], chosen: "Table I", why: "result table > text"}
+excluded:
+  - "EM surface-diffusion mechanism of electroplated Cu films reported by Kang et al. ref [9]"
+  - "general RDL / passivation background of refs [1-8]"
+not_reported:
+  - layer thicknesses (RDL Cu, SiNx, seed, bump); barrier/seed metals; PECVD conditions
+  - back bump pitch/diameter/height; stack bonding method and conditions; die sizes and thicknesses; TSV dimensions
+  - EM failure criterion, sample counts; TDDB duration beyond plotted 100 s axis
+  - reliability sample counts, preconditioning, HAST bias, JEDEC document numbers
+  - electrical_interfaces, optical_interfaces
+source_quality:
+  - "Candidate p03_fig4 crops only panels (b) and (c); Fig. 8 panels labelled (b),(c) with no (a)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00007-F1", change: "step_basis inferred_order on s01-s04; notes", reason: "coupon order follows the Sec. II.A dual plating method; Fig. 3 is a cross-section only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00007-F1-s01", change: "target 'line width 5 um'; split EM/TDDB pattern lengths and spaces", reason: "p.2 Table I"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00007-F1-s02", change: "target '4 um via'", reason: "p.2 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00007-F1-s04", change: "category other -> rdl_layer; target '60 x 60 um2 pad'", reason: "p.2 Sec. II.B; Fig. 3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00007-F2", change: "step_basis stated_in_flow on s01-s08", reason: "Sec. II.A text and Fig. 1 numbered order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00007-F2-s03", change: "target 'RDL width 5 um, lengths 22-571 um'", reason: "p.4 Sec. III.C"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00007-F2-s07", change: "category other -> bumping", reason: "Ni/Au back bump formation"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00007", change: "process_flow_level ordered confirmed", reason: "ordered flow, no process conditions"}

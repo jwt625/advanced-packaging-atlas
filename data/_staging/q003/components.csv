@@ -1,0 +1,48 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+vlsitechnologyandcir46769.2022.9830182-a-c1,vlsitechnologyandcir46769.2022.9830182-a,logic_soc,,,"logic chiplets (xPU: GPU, CPU, AI accelerator, ASIC)",,,,,,,,,,,,stated,mixed,,p.1 Sec. Technology and Architecture; p.2 Fig. 1(a),,
+vlsitechnologyandcir46769.2022.9830182-a-c2,vlsitechnologyandcir46769.2022.9830182-a,other,,,memory cubes (3D cache / HBM),,,,,,,,,,,,stated,mixed,,p.1 Sec. Technology and Architecture; p.2 Fig. 1(a),,SoIC bond also used inside the memory cube.
+vlsitechnologyandcir46769.2022.9830182-a-c3,vlsitechnologyandcir46769.2022.9830182-a,interposer,,,silicon interposer (five BEOL metal layers),,,,,,,,,,Si,,stated,text,,p.1 Sec. Technology and Architecture,,
+vlsitechnologyandcir46769.2022.9830182-b-c1,vlsitechnologyandcir46769.2022.9830182-b,interposer,,,silicon interposer with BEOL lines,,,,,,,,,,Si,,stated,mixed,,p.1 Sec. Electrical Characterization and Verification; p.2 Fig. 3,,
+vlsitechnologyandcir46769.2022.9830182-c-c1,vlsitechnologyandcir46769.2022.9830182-c,logic_soc,,,dies with N5 inverter-based lite I/O drivers (TX and RX),,,,,,,,,N5,,,stated,mixed,,p.1 Sec. STCO A; p.2 Fig. 5(a),,Lower ESD load (C_ESD) with SoIC bond.
+vlsitechnologyandcir46769.2022.9830182-c-c2,vlsitechnologyandcir46769.2022.9830182-c,interposer,,,SoIC interposer,,,,,,,,,,Si,,stated,mixed,,p.1 Sec. STCO A; p.2 Fig. 4,,
+vlsitechnologyandcir46769.2022.9830182-d-c1,vlsitechnologyandcir46769.2022.9830182-d,logic_soc,,,dies with N5 inverter-based lite I/O drivers (TX and RX),,,,,,,,,N5,,,stated,mixed,,p.1 Sec. STCO A; p.2 Fig. 5(a),,
+vlsitechnologyandcir46769.2022.9830182-d-c2,vlsitechnologyandcir46769.2022.9830182-d,interposer,,,microbump interposer,,,,,,,,,,Si,,stated,mixed,,p.1 Sec. STCO A; p.2 Fig. 4,,
+vlsitechnologyandcir46769.2022.9830182-e-c1,vlsitechnologyandcir46769.2022.9830182-e,logic_soc,,,processing core with N5 router,,,,,,,,,N5,,,stated,mixed,,p.1 Sec. STCO B; p.2 Fig. 6(a)-(b),,
+vlsitechnologyandcir46769.2022.9830182-f-c1,vlsitechnologyandcir46769.2022.9830182-f,logic_soc,,,processing core with N5 router,,,,,,,,,N5,,,stated,mixed,,p.1 Sec. STCO B; p.2 Fig. 6(a)-(b),,
+vlsitechnologyandcir46769.2022.9830182-g-c1,vlsitechnologyandcir46769.2022.9830182-g,sram,,,SRAM tiers of 4-Hi cube (64MB total),4,,,,,,,,N7,,,stated,mixed,,p.1 Sec. STCO C; p.2 Fig. 7(b),,
+vlsitechnologyandcir46769.2022.9830182-h-c1,vlsitechnologyandcir46769.2022.9830182-h,sram,,,2D SRAM (64MB),1,,,,,,,,N7,,,stated,mixed,,p.1 Sec. STCO C; p.2 Fig. 7(a),,
+vlsitechnologyandcir46769.2022.9830182-i-c1,vlsitechnologyandcir46769.2022.9830182-i,base_die,,,HBM base die,1,,,,,,,,,,,stated,mixed,,p.2 Fig. 8,,
+vlsitechnologyandcir46769.2022.9830182-i-c2,vlsitechnologyandcir46769.2022.9830182-i,hbm,,,HBM core dies (12-Hi cube),12,,,,,,,,,,,stated,mixed,,p.1 Sec. STCO D; p.2 Fig. 8,,
+vlsitechnologyandcir46769.2022.9830182-j-c1,vlsitechnologyandcir46769.2022.9830182-j,base_die,,,HBM base die,1,,,,,,,,,,,stated,mixed,,p.2 Fig. 8,,
+vlsitechnologyandcir46769.2022.9830182-j-c2,vlsitechnologyandcir46769.2022.9830182-j,hbm,,,HBM core dies (12-Hi cube),12,,,,,,,,,,,stated,mixed,,p.1 Sec. STCO D; p.2 Fig. 8,,
+ectc.2016.201-a-c1,ectc.2016.201-a,bridge,,yes,Si bridge die,,2,2,75,,,,,,"Si with multi-layer thick BEOL metals, no TSV",,design_target,table,thickness_um:text,p.5 Table II; p.6 Sec. III(b); p.4 Sec. II,thickness_um:lt,Size range 2x2 to 8x8 mm (current; larger possible); x/y = lower bound. Bridges per package >5 possible.
+ectc.2016.201-a-c2,ectc.2016.201-a,substrate,,,organic FCBGA package substrate,,,,,,,,,,organic build-up substrate,,stated,text,,p.4 Sec. II; p.5 Fig. 4(a); p.6 Sec. III,,
+ectc.2016.201-a-c3,ectc.2016.201-a,adhesive,,,bridge cavity adhesive,,,,,,,,,,adhesive,,stated,text,,p.6 Sec. III,,Holds bridge in cavity; material not named.
+ectc.2016.201-a-c4,ectc.2016.201-a,underfill,,,capillary epoxy underfill,,,,,,,,,,epoxy underfill,,stated,text,,p.6 Sec. III,,Void-free filling between fine and coarse pitch regions.
+ectc.2016.201-a-c5,ectc.2016.201-a,unspecified,,,Si dies (DIE 1-3 in schematic),3,,,,,,,,,,,stated,schematic,,p.5 Fig. 4(a),,
+ectc.2016.201-b-c1,ectc.2016.201-b,unspecified,,,"dies (1 large, 4 small per photo)",5,,,,,,,,,,,stated,caption,name:figure_image,p.7 Fig. 7; p.5 Fig. 4(b),,
+ectc.2016.201-b-c2,ectc.2016.201-b,bridge,,yes,EMIB Si bridges,4,,,,,,,,,,,stated,caption,,p.7 Fig. 7,,
+ectc.2016.201-b-c3,ectc.2016.201-b,underfill,,,epoxy underfill,,,,,,,,,,epoxy underfill,,stated,text,,p.6 Sec. III; p.7 Fig. 7,,
+ectc.2016.201-c-c1,ectc.2016.201-c,bridge,,yes,EMIB Si bridge (signal pair),,,,,,,,,,,,stated,text,,p.7 Sec. IV,,
+ectc51529.2024.00128-a-c1,ectc51529.2024.00128-a,dummy_die,yes,,"top wafer test chip (bond layer + routing metal, daisy chains)",,,,,,,,,,Si,,stated,text,,p.3 Sec. III.A; p.4 Sec. IV.B; p.5 Sec. IV.C,,Backside Si removed by grinding and CMP after bonding to reveal metal for probing.
+ectc51529.2024.00128-a-c2,ectc51529.2024.00128-a,dummy_die,yes,,"bottom wafer test chip (bond layer + routing metal, daisy chains)",,,,,,,,,,Si,,stated,text,,p.3 Sec. III.A; p.5 Sec. IV.C,,Upper and lower pad sizes equal.
+ectc51846.2026.00176-a-c1,ectc51846.2026.00176-a,asic,,,"ASIC top die chiplets (ASIC, SerDes, thermal test chip)",15,,,,,,,,,,,design_target,text,,p.1 Abstract; p.1 Sec. II.B; p.2 Fig. 3,,"Fig. 3 labels ASIC 1-3, SerDes, Thermal test chip. Sizes not given; Fig. 7(a) thickness label illegible."
+ectc51846.2026.00176-a-c2,ectc51846.2026.00176-a,pic,,,"Passage photonic interposer (TSV PIC, 4 stitched tiles)",1,,,,,,,,,Si,,stated,text,,p.1 Sec. I; p.1 Fig. 1,,"32 waveguides per tile at 127 um pitch; 126 um deep TSVs, 10 um CD. Supplier: AMKOR assembly (author affiliation)."
+ectc51846.2026.00176-a-c3,ectc51846.2026.00176-a,substrate,,,organic substrate (7200 mm2),1,,,,,,,,,organic,,design_target,text,,p.1 Abstract; p.1 Fig. 1,,Layer count and x/y not given.
+ectc51846.2026.00176-a-c4,ectc51846.2026.00176-a,underfill,,,"POR underfill (wafer level, CoW)",,,,,,,,,,POR underfill qualified for 2.5D/3D,,stated,text,,p.2 Sec. II.B,,"Batch cured 160 C, 2 h."
+ectc51846.2026.00176-a-c5,ectc51846.2026.00176-a,mold,,,POR epoxy molding compound (wafer mold),,,,,,,,,,EMC qualified for 2.5D; Tg 150 C,,stated,text,,p.2 Sec. II.B,,Mold Tg 150 C stated in warpage discussion.
+ectc51846.2026.00176-a-c6,ectc51846.2026.00176-a,underfill,,,lower viscosity POR UF (module to substrate),,,,,,,,,,lower viscosity version of POR UF,,stated,text,,p.2 Sec. II.C,,Dispensed perpendicular to waveguide facet; fillet only on non-waveguide side.
+ectc51846.2026.00176-a-c7,ectc51846.2026.00176-a,other,,,solder dam along optical waveguide facet,,,,,,,,,,solder,,stated,text,,p.2 Sec. II.C; p.3 Fig. 6,,Inhibits UF flow onto facet.
+ectc51846.2026.00176-a-c8,ectc51846.2026.00176-a,tim,,,high-k TIM,,,,,,,,,,high-k TIM,,stated,text,,p.2 Sec. II.C; p.1 Fig. 1,,Dispensed on top dies.
+ectc51846.2026.00176-a-c9,ectc51846.2026.00176-a,lid,,,IHS lid,1,,,,,,,,,,,stated,schematic,,p.1 Fig. 1; p.2 Sec. II.C,,
+ectc51846.2026.00176-a-c10,ectc51846.2026.00176-a,adhesive,,,silicone-based structural lid attach adhesive,,,,,,,,,,silicone-based structural adhesive,,stated,text,,p.2 Sec. II.C,,"Snap cure 150 C, 15 kg, 300 s."
+ectc51846.2026.00176-a-c11,ectc51846.2026.00176-a,capacitor,,,land side capacitors,,,,,,,,,,,,stated,text,,p.2 Sec. II.C,,"Screen-printed solder, mass reflow 250 C."
+ectc51846.2026.00176-a-c12,ectc51846.2026.00176-a,fiber_array,,,"polarization-maintaining FAU (16 fibers, 127 um pitch, MT ferrule)",8,,,,,,,,,PM fiber,,design_target,text,,p.3 Sec. III; p.1 Sec. I,,Four banks x two FAUs; PHIX Photonics Assembly co-author.
+ectc51846.2026.00176-a-c13,ectc51846.2026.00176-a,adhesive,,,low-shrinkage silica-filled epoxy (FAU mechanical fix/strain relief),,,,,,,,,,silica-filled epoxy,,stated,text,,p.3 Sec. III,,
+ectc51846.2026.00176-a-c14,ectc51846.2026.00176-a,adhesive,,,low-RI silicone index-matching adhesive (RI ~1.4),,,,,,,,,,silicone,,stated,text,,p.3 Sec. III,,"Batch UV initiation, 24 h at 25 C cure."
+ectc51846.2026.00209-a-c1,ectc51846.2026.00209-a,interposer,,,base circuit layer: borosilicate microscope slide,1,22,75,1000,,,,,,borosilicate glass,,design_target,text,,p.4 Sec. VII; p.2 Sec. III,,Width 22 mm on p.4 vs 25 mm on p.2 (conflict). 1 mm = 1000 um conversion.
+ectc51846.2026.00209-a-c2,ectc51846.2026.00209-a,interposer,,,second-layer No. 1 borosilicate coverslips with laser vias,2,22,22,150,,,,,,borosilicate glass,,design_target,text,,p.2 Sec. III; p.2 Sec. IV; p.4 Sec. VII,,Left: ground plane with vias; right: circuitry and components. Placed on opposite ends of base.
+ectc51846.2026.00209-a-c3,ectc51846.2026.00209-a,other,,,Bluetooth sensor circuit components (passive and active),,,,,,,,,,,,stated,text,,p.4 Sec. VII; p.4 Fig. 8; p.1 Sec. I,,"Component part numbers, sizes and count not stated."
+ectc51846.2026.00209-b-c1,ectc51846.2026.00209-b,interposer,,,No. 1 borosilicate coverslip with laser vias,1,22,22,150,,,,,,borosilicate glass,,design_target,text,,p.4 Sec. VII,,
+ectc51846.2026.00209-d-c1,ectc51846.2026.00209-d,substrate,,,borosilicate glass substrate,,,,,,,,,,borosilicate glass,,stated,text,,p.3 Sec. VI,,Mounted on alumina base plate for tape test; glass size not stated.
+ectc51846.2026.00209-e-c1,ectc51846.2026.00209-e,substrate,,,borosilicate glass substrate,,,,,,,,,,borosilicate glass,,stated,text,,p.3 Sec. VI,,Mounted on alumina base plate for tape test.

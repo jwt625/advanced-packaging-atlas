@@ -1,0 +1,36 @@
+paper_id: ectc51529.2024.00133
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00133/text.md
+  - references/ectc51529.2024.00133/source.json
+  - references/ectc51529.2024.00133/figures/page_02.png
+  - references/ectc51529.2024.00133/figures/page_03.png
+  - references/ectc51529.2024.00133/figures/page_04.png
+  - references/ectc51529.2024.00133/figures/cand/p02_tablei.png
+  - references/ectc51529.2024.00133/figures/cand/p03_fig4.png
+  - references/ectc51529.2024.00133/figures/cand/p04_fig7.png
+figure_reading_method: >-
+  Page renders at 150 dpi and candidate crops; Fig. 7 scale-bar labels (3, 5, 30 um) and Fig. 4 spec table read
+  from the candidate crops. Table I matches text.md.
+entries:
+  - {table: stack_layers, row_id: ectc51529.2024.00133-a-L03, field: space_um, value: 30, unit: um, basis: design_target, locator: "p.4 Sec. IV; p.4 Fig. 7(b)", note: "text 'spaced 30 micrometers apart'; Fig. 7(b) bar spans the gap between Cu lines"}
+  - {table: components, row_id: ectc51529.2024.00133-a-c1, field: thickness_um, value: 400, unit: um, basis: design_target, locator: "p.2 Sec. II", note: "0.4 mm"}
+derived:
+  - {table: components, row_id: ectc51529.2024.00133-a-c1, field: thickness_um, value: 400, formula: "0.4 mm x 1000", inputs: "p.2 Sec. II"}
+  - {table: stack_layers, row_id: ectc51529.2024.00133-a-L04, field: thickness_um, value: 400, formula: "0.4 mm x 1000", inputs: "p.2 Sec. II"}
+conflicts:
+  - {table: process_steps, row_id: ectc51529.2024.00133-F1-s05, field: conditions, values: ["text: 4th-harmonic pulse width <10 ps, 266 nm power 50 W", "Fig. 4 table: pulse duration (FWHM) <15 ps, power >50 W"], locators: ["p.3 Sec. III", "p.3 Fig. 4"], chosen: "Fig. 4 table values", why: "specification table; text alternatives noted in row notes"}
+excluded:
+  - "Intel Si-interposer RDL via 2 um (refs [4]-[5])"
+  - "CO2 laser 40 um vias (ref [6]); UV laser 5 um via (ref [8])"
+  - "sub-6 um and sub-4 um DUV vias in 5 um ABF (refs [9]-[10])"
+  - "1064 nm fundamental >200 W (laser source detail, not a packaging value)"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - via bottom diameter, taper angle, via count, yield; via metallization
+  - laser fluence, pulses per via, scan speed (AI-optimized parameters not disclosed)
+  - ABF grade/product name, lamination temperature/pressure, cure conditions
+  - reliability data
+source_quality:
+  - "Clean text layer; all candidate crops correct (Table I crop excludes the title line only)."

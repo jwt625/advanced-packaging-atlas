@@ -35,3 +35,7 @@ not_reported:
   - GX-92P cure temperature and time; lamination pressure/temperature/time; ABF cure/reflow conditions
   - fs-laser wavelength, power, pulse duration, repetition rate; LTHC release laser parameters
   - warpage, reliability, thermal, yield; RF test structure details behind the abstract numbers
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00333, change: "papers.notes trimmed 32 -> 28 words", reason: "audit_x1 item 15 (rule m, notes <= 30 words)"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00333-a-s07, change: "none", reason: "audit_x1 item 14: temp_c 70 (hot roller, p.4 Sec. III.C) already carries override temp_c:design_target"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00333-f07, change: "added Fig. 2 (stack_schematic, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}

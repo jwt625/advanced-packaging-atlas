@@ -1,0 +1,55 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51529.2024.00322-a-c1,ectc51529.2024.00322-a,logic_soc,yes,,large die (mimics logic),1,15,20,775,,,,,,Si,,design_target,table,,p.2 Sec. II.A; p.2 Table I,,
+ectc51529.2024.00322-a-c2,ectc51529.2024.00322-a,hbm,yes,,small die (mimics HBM),4,5,10,775,,,,,,Si,,design_target,table,,p.2 Sec. II.A; p.2 Table I,,
+ectc51529.2024.00322-a-c3,ectc51529.2024.00322-a,interposer,,,Si interposer (on 12-inch wafer),1,30,30,775,,,,,,Si,,design_target,table,,p.2 Sec. II.A; p.2 Table II,,
+ectc51529.2024.00322-a-c4,ectc51529.2024.00322-a,underfill,,,CUF (capillary underfill),,,,,,,,,,CUF,,stated,mixed,,p.4 Table VI; p.3 Sec. II.C,,"filler 69 wt%, avg filler 1 um, Tg 131 C, CTE(<Tg) 21 ppm/C, E(<Tg) 10 GPa"
+ectc51529.2024.00322-a-c5,ectc51529.2024.00322-a,mold,,,solid EMC-A,,,,,,,,,,solid EMC-A (warpage suppression additive),,stated,mixed,,p.5 Sec. III.B; p.4 Table VI; p.4 Sec. II.D,,"filler 84 wt%, avg filler 12 um, Tg 168 C, CTE(<Tg) 8 ppm/C, E(<Tg) 13 GPa"
+ectc51529.2024.00322-b-c1,ectc51529.2024.00322-b,logic_soc,yes,,large die (mimics logic),1,15,20,775,,,,,,Si,,design_target,table,,p.2 Sec. II.A; p.2 Table I,,
+ectc51529.2024.00322-b-c2,ectc51529.2024.00322-b,hbm,yes,,small die (mimics HBM),4,5,10,775,,,,,,Si,,design_target,table,,p.2 Sec. II.A; p.2 Table I,,
+ectc51529.2024.00322-b-c3,ectc51529.2024.00322-b,interposer,,,Si interposer (on 12-inch wafer),1,30,30,775,,,,,,Si,,design_target,table,,p.2 Sec. II.A; p.2 Table II,,
+ectc51529.2024.00322-b-c4,ectc51529.2024.00322-b,mold,,,LCMUF-A (liquid compression mold underfill; fills gap and overmolds),,,,,,,,,,LCMUF-A,,stated,mixed,,p.4 Table VI; p.3 Sec. II.C,,"filler 77 wt%, avg filler 0.3 um, Tg 129 C, CTE(<Tg) 23 ppm/C, E(<Tg) 11 GPa"
+ectc51529.2024.00322-c-c1,ectc51529.2024.00322-c,logic_soc,yes,,large die (mimics logic),1,15,20,775,,,,,,Si,,design_target,table,,p.2 Sec. II.A; p.2 Table I,,
+ectc51529.2024.00322-c-c2,ectc51529.2024.00322-c,hbm,yes,,small die (mimics HBM),4,5,10,775,,,,,,Si,,design_target,table,,p.2 Sec. II.A; p.2 Table I,,
+ectc51529.2024.00322-c-c3,ectc51529.2024.00322-c,interposer,,,Si interposer (on 12-inch wafer),1,30,30,775,,,,,,Si,,design_target,table,,p.2 Sec. II.A; p.2 Table II,,
+ectc51529.2024.00322-c-c4,ectc51529.2024.00322-c,mold,,,LCMUF-B (liquid compression mold underfill; fills gap and overmolds),,,,,,,,,,LCMUF-B,,stated,mixed,,p.4 Table VI; p.3 Sec. II.C,,"filler 83.5 wt%, avg filler 1.7 um, Tg 154 C, CTE(<Tg) 13 ppm/C, E(<Tg) 14 GPa"
+ectc51529.2024.00322-d-c1,ectc51529.2024.00322-d,dummy_die,yes,,Si Die-A,52,20,25,775,,,,,,Si,,design_target,table,,p.3 Table III; p.3 Fig. 3,,"Fig. 3 gaps: 10 mm and 5 mm between dies, 2.5 mm to quadrant edge."
+ectc51529.2024.00322-d-c2,ectc51529.2024.00322-d,interposer,yes,,12-inch Si wafer (interposer stand-in),1,,,775,,,,,,Si,,design_target,table,,p.3 Table III; p.3 Fig. 3,,Ground to 100 um after glass bonding.
+ectc51529.2024.00322-d-c3,ectc51529.2024.00322-d,die_attach_film,,,DAF,,,,20,,,,,,DAF (product not stated),,design_target,table,,p.3 Table III; p.3 Fig. 3,,
+ectc51529.2024.00322-d-c4,ectc51529.2024.00322-d,mold,,,solid EMC-B,,,,,,,,,,solid EMC-B,,stated,text,,p.5 Sec. III.C; p.4 Table VI,,"filler 85 wt%, avg filler 12 um, Tg 185 C, CTE(<Tg) 9 ppm/C, E(<Tg) 16 GPa"
+ectc51529.2024.00322-d-c5,ectc51529.2024.00322-d,other,,,glass temporary carrier,,,,,,,,,,"glass, 3.7 ppm/C",,stated,schematic,,p.2 Sec. II.B; p.6 Fig. 12,,"Bonded after EMC grinding, debonded before singulation; CTE label from Fig. 12 schematic."
+ectc51529.2024.00322-e-c1,ectc51529.2024.00322-e,dummy_die,yes,,Si Die-A,68,20,25,775,,,,5000,,Si,,design_target,table,gap_um:schematic,p.3 Table III; p.3 Fig. 3,,"Fig. 3 gaps: 5 mm between dies, 2.5 mm to quadrant edge."
+ectc51529.2024.00322-e-c2,ectc51529.2024.00322-e,dummy_die,yes,,Si Die-B,20,15,15,775,,,,,,Si,,design_target,table,,p.3 Table III; p.3 Fig. 3,,
+ectc51529.2024.00322-e-c3,ectc51529.2024.00322-e,interposer,yes,,12-inch Si wafer (interposer stand-in),1,,,775,,,,,,Si,,design_target,table,,p.3 Table III; p.3 Fig. 3,,Ground to 100 um after glass bonding.
+ectc51529.2024.00322-e-c4,ectc51529.2024.00322-e,die_attach_film,,,DAF,,,,20,,,,,,DAF (product not stated),,design_target,table,,p.3 Table III; p.3 Fig. 3,,
+ectc51529.2024.00322-e-c5,ectc51529.2024.00322-e,mold,,,solid EMC-B,,,,,,,,,,solid EMC-B,,stated,text,,p.5 Sec. III.C; p.4 Table VI,,"filler 85 wt%, avg filler 12 um, Tg 185 C, CTE(<Tg) 9 ppm/C, E(<Tg) 16 GPa"
+ectc51529.2024.00322-e-c6,ectc51529.2024.00322-e,other,,,glass temporary carrier,,,,,,,,,,"glass, 3.7 ppm/C",,stated,schematic,,p.2 Sec. II.B; p.6 Fig. 12,,"Bonded after EMC grinding, debonded before singulation; CTE label from Fig. 12 schematic."
+ectc51529.2024.00322-f-c1,ectc51529.2024.00322-f,dummy_die,yes,,Si Die-A,92,20,25,775,,,,2500,,Si,,design_target,table,gap_um:schematic,p.3 Table III; p.3 Fig. 3,,"Fig. 3 gaps: 2.5 mm between dies, 1.25 mm to quadrant edge."
+ectc51529.2024.00322-f-c2,ectc51529.2024.00322-f,dummy_die,yes,,Si Die-B,8,15,15,775,,,,,,Si,,design_target,table,,p.3 Table III; p.3 Fig. 3,,
+ectc51529.2024.00322-f-c3,ectc51529.2024.00322-f,interposer,yes,,12-inch Si wafer (interposer stand-in),1,,,775,,,,,,Si,,design_target,table,,p.3 Table III; p.3 Fig. 3,,Ground to 100 um after glass bonding.
+ectc51529.2024.00322-f-c4,ectc51529.2024.00322-f,die_attach_film,,,DAF,,,,20,,,,,,DAF (product not stated),,design_target,table,,p.3 Table III; p.3 Fig. 3,,
+ectc51529.2024.00322-f-c5,ectc51529.2024.00322-f,mold,,,solid EMC-B,,,,,,,,,,solid EMC-B,,stated,text,,p.5 Sec. III.C; p.4 Table VI,,"filler 85 wt%, avg filler 12 um, Tg 185 C, CTE(<Tg) 9 ppm/C, E(<Tg) 16 GPa"
+ectc51529.2024.00322-f-c6,ectc51529.2024.00322-f,other,,,glass temporary carrier,,,,,,,,,,"glass, 3.7 ppm/C",,stated,schematic,,p.2 Sec. II.B; p.6 Fig. 12,,"Bonded after EMC grinding, debonded before singulation; CTE label from Fig. 12 schematic."
+ectc51687.2025.00055-a-c1,ectc51687.2025.00055-a,base_die,,,bottom die (daisy chain),1,,,,,,,,,,,stated,text,,p.2 Sec. II.A,,
+ectc51687.2025.00055-a-c2,ectc51687.2025.00055-a,dummy_die,yes,,top die (daisy chain),1,,,,,,,,,,,stated,text,,p.2 Sec. II.A,,
+ectc51687.2025.00055-g-c1,ectc51687.2025.00055-g,gpu,,,"GPU (500 W each, 800 mm2 area)",2,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(a),,Area 800 mm2 each (x/y not given).
+ectc51687.2025.00055-g-c2,ectc51687.2025.00055-g,hbm,,,HBM cube (8/12/16-hi DRAM on base die),8,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(a),,"Base die 143 mm2, DRAM core 131 mm2 heated 0.015 W/mm2; base die blocks PHY, TSV, Compute."
+ectc51687.2025.00055-g-c3,ectc51687.2025.00055-g,interposer,,,interposer (3000 mm2),1,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(a),,
+ectc51687.2025.00055-g-c4,ectc51687.2025.00055-g,substrate,,,package substrate (5000 mm2),1,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(a),,
+ectc51687.2025.00055-g-c5,ectc51687.2025.00055-g,lid,,,"lid (2 mm thick, 5000 mm2)",1,,,2000,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(a),,
+ectc51687.2025.00055-g-c6,ectc51687.2025.00055-g,tim,,,TIM1,1,,,,,,,,,,,stated,schematic,,p.3 Sec. III.A; p.3 Fig. 5(a),,
+ectc51687.2025.00055-g-c7,ectc51687.2025.00055-g,tim,,,TIM2 (grease),1,,,,,,,,,grease,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(a),,
+ectc51687.2025.00055-g-c8,ectc51687.2025.00055-g,cold_plate,,,"micro-channeled cold plate (DLC), 40 C DI water at 4 LPM",1,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(a),,Slightly larger than CoWoS substrate.
+ectc51687.2025.00055-h-c1,ectc51687.2025.00055-h,gpu,,,"GPU (500 W each, 800 mm2 area)",2,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(b),,Area 800 mm2 each (x/y not given).
+ectc51687.2025.00055-h-c2,ectc51687.2025.00055-h,hbm,,,HBM cube (8/12/16-hi DRAM on base die),8,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(b),,"Base die 143 mm2, DRAM core 131 mm2 heated 0.015 W/mm2; base die blocks PHY, TSV, Compute."
+ectc51687.2025.00055-h-c3,ectc51687.2025.00055-h,interposer,,,interposer (3000 mm2),1,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(b),,
+ectc51687.2025.00055-h-c4,ectc51687.2025.00055-h,substrate,,,package substrate (5000 mm2),1,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(b),,
+ectc51687.2025.00055-h-c5,ectc51687.2025.00055-h,tim,,,TIM2 (grease),1,,,,,,,,,grease,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(b),,
+ectc51687.2025.00055-h-c6,ectc51687.2025.00055-h,cold_plate,,,"micro-channeled cold plate (DLC), 40 C DI water at 4 LPM",1,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(b),,Slightly larger than CoWoS substrate.
+ectc51906.2022.00176-a-c1,ectc51906.2022.00176-a,dummy_die,yes,,"top die (TD), daisy chain and Kelvin test die",1,6,6,,,,,,,Si,,design_target,text,,p.3 Sec. III.A; p.1 Abstract,,Thinned and diced from TD wafer with BEOL metal stack; thickness and node not given.
+ectc51906.2022.00176-a-c2,ectc51906.2022.00176-a,dummy_die,yes,,bottom wafer (BW) die,1,16,16,,,,,,,Si,,design_target,text,,p.3 Sec. III.A,,BW processed with BEOL metal stack and bond pad tier; wafer diameter and thickness not given.
+icep58572.2023.10129684-a-c1,icep58572.2023.10129684-a,mold,,,epoxy compound panel 600x600 mm,1,600,600,,,,,,,epoxy compound,,design_target,text,,p.1 Sec. II,,Embedded die content and thickness not given.
+icep58572.2023.10129684-b-c1,icep58572.2023.10129684-b,mold,,,epoxy compound panel 300x300 mm (with frame),1,300,300,,,,,,,epoxy compound,,design_target,text,,p.1 Sec. II; p.1 Fig. 1(b),,
+icep58572.2023.10129684-c-c1,icep58572.2023.10129684-c,substrate,,,standard substrate,1,95,240,150,,,,,,,,design_target,text,,p.2 Sec. III,thickness_um:approx,
+ectc51529.2024.00218-a-c1,ectc51529.2024.00218-a,dummy_die,yes,,"top wafer (frontside BEOL, daisy-chain wiring, probing pads)",1,,,,,,,,,Si,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 2,,Thinned from backside after 2nd bonding; thickness not stated.
+ectc51529.2024.00218-a-c2,ectc51529.2024.00218-a,dummy_die,yes,,"middle wafer (frontside p-well Si resistors, via-last TSVs, backside Cu pads)",1,,,3,,,,,,Si,,design_target,text,,p.2 Sec. II.A; p.2 Sec. II.B; p.2 Fig. 2,,thickness_um = Si thickness after backside thinning.
+ectc51529.2024.00218-a-c3,ectc51529.2024.00218-a,dummy_die,yes,,"bottom wafer (frontside BEOL, Cu pads)",1,,,,,,,,,Si,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 2,,

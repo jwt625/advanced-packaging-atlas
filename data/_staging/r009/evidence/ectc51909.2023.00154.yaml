@@ -38,3 +38,18 @@ not_reported:
   - die thicknesses; FEM stress values; warpage sign convention
 source_quality:
   - "Candidates p05_fig10/p05_fig11/p06_fig13 span page quadrants from the page edge (x0 or y0 = 0); Table 2 has no candidate."
+revisions:
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51909.2023.00154-a-c1, change: "gap_um 60 -> empty", reason: "one paper statement (\"The gap of the each chip was 60um\", p.2 Sec. II) copied on four component rows; kept once as metric a-m27"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51909.2023.00154-a-c2, change: "gap_um 60 -> empty", reason: "one paper statement (\"The gap of the each chip was 60um\", p.2 Sec. II) copied on four component rows; kept once as metric a-m27"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51909.2023.00154-a-c3, change: "gap_um 60 -> empty", reason: "one paper statement (\"The gap of the each chip was 60um\", p.2 Sec. II) copied on four component rows; kept once as metric a-m27"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51909.2023.00154-a-c4, change: "gap_um 60 -> empty", reason: "one paper statement (\"The gap of the each chip was 60um\", p.2 Sec. II) copied on four component rows; kept once as metric a-m27"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51909.2023.00154-a-m27, change: "added: chip-to-chip gap 60 um, design_target, p.2 Sec. II", reason: "single home for the gap statement (x2B defect 4 fix)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00154-f03, change: "added Fig. 5 (top_view_layout, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00154-f06, change: "added Fig. 10 (cross_section, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00154-f07, change: "added Fig. 13 (cross_section, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00154-f08, change: "added Fig. 7 (xray_csam, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00154-f09, change: "added Fig. 6 (other, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00154-f10, change: "added Fig. 12 (simulation_result, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00154-f12, change: "added Fig. 9 (other, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00154-f13, change: "added Table 1 (data_table, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00154-figures, change: "re-ranked: Fig. 4 f03 -> f02, Fig. 2 f02 -> f04, Fig. 3 f04 -> f05, Fig 8 f05 -> f11, Table 2 f06 -> f14", reason: "rank order per SKILL.md step 5 after additions"}

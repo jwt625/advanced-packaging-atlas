@@ -1,0 +1,36 @@
+paper_id: ectc51846.2026.00134
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00134/text.md
+  - references/ectc51846.2026.00134/source.json
+  - references/ectc51846.2026.00134/figures/page_02.png
+  - references/ectc51846.2026.00134/figures/page_03.png
+  - references/ectc51846.2026.00134/figures/page_04.png
+  - references/ectc51846.2026.00134/figures/page_05.png
+  - references/ectc51846.2026.00134/figures/cand/p02_fig1.png
+  - references/ectc51846.2026.00134/figures/cand/p04_fig7.png
+  - references/ectc51846.2026.00134/figures/cand/p04_fig8.png
+  - references/ectc51846.2026.00134/figures/cand/p05_fig10.png
+figure_reading_method: >-
+  Page renders at 150 dpi; 300 dpi re-crops of Fig. 1, 3, 4, 5(a), 6 and 8(a,b). Fig. 7 values (64 um, 143 um) are
+  printed labels. Fig. 6 and Fig. 10(b) carry no readable numeric axes.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00134-a-m1, field: value, value: 64, unit: um, basis: measured, locator: "p.4 Fig. 7", note: "label under glass map; color bar title Mean(260C)"}
+  - {table: metrics, row_id: ectc51846.2026.00134-e-m1, field: value, value: 143, unit: um, basis: measured, locator: "p.4 Fig. 7", note: "label under organic-with-stiffener map"}
+  - {table: metrics, row_id: ectc51846.2026.00134-c-m2, field: value, value: 1, unit: mm, basis: design_target, locator: "p.2 Fig. 2(b)", note: "label '1 mm' through cavity"}
+derived: []
+conflicts:
+  - {table: test_vehicles, row_id: ectc51846.2026.00134-a, field: substrate_layer_count, values: ["10-2-10", "24-layer"], locators: ["p.1 Abstract", "p.3 Sec. III; p.3 Fig. 5; p.4 Sec. V; p.4 Fig. 8"], chosen: "10-2-10", why: "only layer-count notation given; 24-layer kept in name/notes; the two are not reconciled in the paper"}
+excluded:
+  - "Laser direct-written waveguide capabilities (<0.1 dB/cm, <20 um pitch, >300 nm bandwidth) stated for the technique with ref [16]; not tied to this paper's measurement"
+  - "LAE mechanism (refs [14], [15]); CPO benefits (ref [11]); glass photonic platforms (refs [12], [13])"
+  - "Fig. 9 conceptual opto-electronic glass core package (concept only)"
+not_reported:
+  - electrical_interfaces, optical_interfaces (no coupler, wavelength or absolute IL)
+  - TGV diameter, pitch, depth, taper angle values; glass type and core thickness
+  - RDL line/space, dielectric material, layer thicknesses; unit (package) size; EMIB size
+  - sample counts for TSC; warpage metric definition and sample size for Fig. 7
+  - overlay and X-Y dimensional change numbers (Fig. 6 axes unreadable/unlabelled)
+source_quality:
+  - "Candidates missing for Fig. 3; p03_fig4 held only part of Fig. 4(a); p03_fig5 and p04_fig8 cover single panels of column-split figures; p02_fig1 clipped the (d) label."

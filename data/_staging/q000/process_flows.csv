@@ -1,0 +1,11 @@
+flow_id,paper_id,flow_name,scope,level,tv_ids,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00110-F1,ectc51846.2026.00110,waveguide patterning,tv_build,fragments,ectc51846.2026.00110-a,stated,text,,p.1 Sec. II; p.2 Sec. II,,
+ectc51846.2026.00110-F2,ectc51846.2026.00110,waveguide patterning,tv_build,fragments,ectc51846.2026.00110-b,stated,text,,p.3 Sec. III.A,,
+ectc51846.2026.00110-F3,ectc51846.2026.00110,reliability film preparation,tv_build,fragments,ectc51846.2026.00110-c,stated,text,,p.4 Sec. III.B,,
+ectc51846.2026.00110-F4,ectc51846.2026.00110,proposed residual-layer reduction flow (Fig. 6),generic_platform,ordered,ectc51846.2026.00110-e,stated,mixed,,p.4 Fig. 6; p.4 Sec. III.A,,"Proposed flow; not executed, no results reported."
+tcpmt.2025.3557745-F1,tcpmt.2025.3557745,"dual-core spiral inductor fabrication (Fig. 4, Sec. II.C)",tv_build,ordered,tcpmt.2025.3557745-a,stated,mixed,,p.5 Sec. II.C; p.5 Fig. 4(a); p.5 Fig. 4(b); p.6 Sec. III; p.5 Fig. 4(c); p.5 Fig. 4(d); p.6 Sec. II.C; p.5 Fig. 4(e),,
+ectc51909.2023.00178-F1,ectc51909.2023.00178,"D2W HCB process (Fig. 1(a), Sec. II-III)",tv_build,ordered,ectc51909.2023.00178-a;ectc51909.2023.00178-b;ectc51909.2023.00178-c,stated,text,,p.2 Sec. II; p.2 Fig. 1(a); p.3 Sec. III.A-C; p.4 Sec. IV.A; p.5 Sec. V,,
+ectc51909.2023.00178-F2,ectc51909.2023.00178,package assembly after HCB (Sec. IV.A),tv_build,ordered,ectc51909.2023.00178-b;ectc51909.2023.00178-c,stated,text,,p.4 Sec. IV.A,,Follows F1 (Test3 condition).
+ectc51529.2024.00311-F1,ectc51529.2024.00311,fluxless D2W TCB flow (Sec. III-IV),tv_build,full,ectc51529.2024.00311-a,stated,text,,p.2 Sec. II; p.2 Sec. III; p.3 Fig. 3(a); p.3 Sec. IV,,
+ectc51529.2024.00311-F2,ectc51529.2024.00311,blanket Cu clean and wet passivation for XPS coupons (Sec. II),tv_build,ordered,ectc51529.2024.00311-b,stated,text,,p.2 Sec. II,,
+ectc51846.2026.00106-F1,ectc51846.2026.00106,"two-step thermal ion-exchange waveguide process (Sec. III, Fig. 4)",tv_build,full,ectc51846.2026.00106-a;ectc51846.2026.00106-b;ectc51846.2026.00106-c,stated,mixed,,p.3 Sec. III; p.3 Fig. 4,,

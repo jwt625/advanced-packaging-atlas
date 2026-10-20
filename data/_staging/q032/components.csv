@@ -1,0 +1,30 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51906.2022.00057-a-c1,ectc51906.2022.00057-a,unspecified,,,upper wafer (face-to-face),1,,,,,,,,,Si,,stated,text,,p.2 Sec. 2-1; p.3 Sec. 2-3,,Device content not stated; test module with daisy chain and comb-comb TEG.
+ectc51906.2022.00057-a-c2,ectc51906.2022.00057-a,unspecified,,,lower wafer (face-to-face),1,,,,,,,,,Si,,stated,text,,p.2 Sec. 2-1; p.3 Sec. 2-3,,
+ectc51906.2022.00057-b-c1,ectc51906.2022.00057-b,unspecified,,,top wafer (face down),1,,,,,,,,,Si,,stated,schematic,,p.4 Fig. 10; p.5 Fig. 14,,Removed ('washed out') before HAADF-STEM analysis.
+ectc51906.2022.00057-b-c2,ectc51906.2022.00057-b,unspecified,,,"middle wafer (thinned, TSVs, backside Cu pads)",1,,,,,,,,,Si,,stated,mixed,,p.4 Sec. 3-1; p.4 Fig. 10; p.4 Sec. 3-2,,Thinned middle-wafer Si thickness not given (plots in a.u.).
+ectc51906.2022.00057-b-c3,ectc51906.2022.00057-b,unspecified,,,bottom wafer (face up),1,,,,,,,,,Si,,stated,mixed,,p.4 Sec. 3-1; p.4 Fig. 10,,
+ectc51687.2025.00178-c-c1,ectc51687.2025.00178-c,unspecified,,,chip (Si),2,23,28,775,,,,,,Si,,design_target,text,,p.3 Sec. II.B; p.3 Fig. 5,,Simulation input; present only in 'after chip assembly' stage. 0.775 mm -> 775 um.
+ectc51687.2025.00178-c-c2,ectc51687.2025.00178-c,underfill,,,underfill resin,,,,,,,,,,,,stated,text,,p.3 Sec. II.B,,Stress-free temperature 150 C = UF cure temperature (simulation input).
+ectc51687.2025.00178-d-c1,ectc51687.2025.00178-d,unspecified,,,chip (Si),2,23,28,775,,,,,,Si,,design_target,text,,p.3 Sec. II.B; p.3 Fig. 5,,Simulation input; present only in 'after chip assembly' stage. 0.775 mm -> 775 um.
+ectc51687.2025.00178-d-c2,ectc51687.2025.00178-d,underfill,,,underfill resin,,,,,,,,,,,,stated,text,,p.3 Sec. II.B,,Stress-free temperature 150 C = UF cure temperature (simulation input).
+ectc51687.2025.00178-e-c1,ectc51687.2025.00178-e,unspecified,,,chip (Si),2,23,28,775,,,,,,Si,,design_target,text,,p.3 Sec. II.B; p.3 Fig. 5,,Simulation input; present only in 'after chip assembly' stage. 0.775 mm -> 775 um.
+ectc51687.2025.00178-e-c2,ectc51687.2025.00178-e,underfill,,,underfill resin,,,,,,,,,,,,stated,text,,p.3 Sec. II.B,,Stress-free temperature 150 C = UF cure temperature (simulation input).
+ectc51687.2025.00178-f-c1,ectc51687.2025.00178-f,unspecified,,,chip (Si),2,23,28,775,,,,,,Si,,design_target,text,,p.3 Sec. II.B; p.3 Fig. 5,,Simulation input; present only in 'after chip assembly' stage. 0.775 mm -> 775 um.
+ectc51687.2025.00178-f-c2,ectc51687.2025.00178-f,underfill,,,underfill resin,,,,,,,,,,,,stated,text,,p.3 Sec. II.B,,Stress-free temperature 150 C = UF cure temperature (simulation input).
+ectc51687.2025.00178-i-c1,ectc51687.2025.00178-i,substrate,,,glass core build-up substrate with TGV,1,77.5,75.0,,,,,,,glass core (Low CTE or Middle CTE) + build-up resin,,design_target,table,,p.4 Table 1,,
+ectc51909.2023.00266-a-c1,ectc51909.2023.00266-a,logic_soc,,,Monolithic SoC,1,,,,,,,60,,,,design_target,text,,p.2 Sec. II,gap_um:ge,"gap_um = min die-to-die spacing (design); 60.9 um measured after mold (Fig. 15, metrics). Die size not given."
+ectc51909.2023.00266-a-c2,ectc51909.2023.00266-a,dummy_die,,,Structural silicon die 2x8 mm,,2,8,,,,,,,silicon,,design_target,text,,p.2 Sec. II,,8 structural Si dies in total across two sizes; count per size not given.
+ectc51909.2023.00266-a-c3,ectc51909.2023.00266-a,dummy_die,,,Structural silicon die 7x3 mm,,7,3,,,,,,,silicon,,design_target,text,,p.2 Sec. II,,8 structural Si dies in total across two sizes; count per size not given.
+ectc51909.2023.00266-a-c4,ectc51909.2023.00266-a,mold,,no,"Compression mold compound (EMC), 6-sided die protection",,,,,,,,,,mold compound (EMC),,stated,text,,p.2 Sec. II; p.5 Sec. V,,Product and thickness not given.
+ectc51909.2023.00266-a-c5,ectc51909.2023.00266-a,underfill,,,Board-level underfill for BLR,,,,,,,,,,,,stated,text,,p.4 Sec. IV,,Material not given.
+ectc51687.2025.00095-a-c1,ectc51687.2025.00095-a,logic_soc,,,SoC-1 and SoC-2 chiplets,10,,,,,,,,,,,stated,table,,p.3 Table III; p.2 Sec. III.A,,
+ectc51687.2025.00095-a-c2,ectc51687.2025.00095-a,bridge,,yes,thin Si bridge die with Cu studs,10,,,,,,,,,Si,,stated,table,,p.3 Table III; p.2 Sec. II.B,,"Attached on panel, molded, Cu studs revealed by grinding."
+ectc51687.2025.00095-a-c3,ectc51687.2025.00095-a,underfill,,,CoP underfill (CoP UF),,,,,,,,,,,,stated,mixed,,p.2 Sec. II.B; p.4 Fig. 5,,Product not stated.
+ectc51687.2025.00095-a-c4,ectc51687.2025.00095-a,mold,,,two-layer molding (bridge-level mold; top-die mold),,,,,,,,,,,,stated,text,,p.2 Sec. II.B; p.2 Sec. II.E,,Mold compound product not stated.
+ectc51687.2025.00095-a-c5,ectc51687.2025.00095-a,substrate,,,package substrate (chip module attached by TCB),,,,,,,,,,,,stated,text,,p.2 Sec. II.B; p.2 Sec. II.E; p.2 Fig. 1,,Substrate size and layers not stated.
+ectc51687.2025.00095-b-c1,ectc51687.2025.00095-b,logic_soc,,,SoC-1 and SoC-2 dies,2,,,,,,,,,,,stated,table,,p.3 Table IV; p.2 Sec. II.C,,
+ectc51687.2025.00095-b-c2,ectc51687.2025.00095-b,underfill,,,CoP underfill,,,,,,,,,,,,stated,text,,p.2 Sec. II.C,,
+ectc51687.2025.00095-b-c3,ectc51687.2025.00095-b,mold,,,mold over SoC dies (ground to reveal die tops),,,,,,,,,,,,stated,text,,p.2 Sec. II.C,,
+tcpmt.2025.3540665-a-c1,tcpmt.2025.3540665-a,dummy_die,yes,,"device chip (Kelvin, two-bump, 6x6 daisy-chain test structures)",1,,,,,,,,,n-doped Si (100 mm wafer),,stated,text,,p.1 Sec. I-II,,Size printed as '6 x 6 um' (unit evidently wrong); not entered. Support bumps of same size/pitch around test structures.
+tcpmt.2025.3540665-a-c2,tcpmt.2025.3540665-a,dummy_die,yes,,cap chip,1,,,,,,,,,,,stated,text,,p.1 Sec. II,,"Size printed as '4 x 4 um' (unit evidently wrong); not entered. Same wafer process implied, not stated separately."

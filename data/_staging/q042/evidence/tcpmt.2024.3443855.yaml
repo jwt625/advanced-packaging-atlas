@@ -1,0 +1,62 @@
+paper_id: tcpmt.2024.3443855
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/tcpmt.2024.3443855/text.md
+  - references/tcpmt.2024.3443855/source.json
+  - references/tcpmt.2024.3443855/figures/page_02.png
+  - references/tcpmt.2024.3443855/figures/page_03.png
+  - references/tcpmt.2024.3443855/figures/page_04.png
+  - references/tcpmt.2024.3443855/figures/page_05.png
+  - references/tcpmt.2024.3443855/figures/page_06.png
+  - references/tcpmt.2024.3443855/figures/page_07.png
+  - references/tcpmt.2024.3443855/figures/page_08.png
+  - references/tcpmt.2024.3443855/figures/cand/p03_fig2.png
+  - references/tcpmt.2024.3443855/figures/cand/p07_fig16.png
+  - references/tcpmt.2024.3443855/figures/cand/p08_fig17.png
+  - references/tcpmt.2024.3443855/figures/cand/p08_fig19.png
+figure_reading_method: >-
+  Page renders plus 300-400 dpi re-crops from source.pdf of Fig. 7(b), 11, 14(d), 16(c)(d), 17 (TSV and VIA panels),
+  19. Fig. 11 AV1 points located against the 66%/99% gridlines (+/-2%); Fig. 19 Sample 6 AV4 bar read +/-2%.
+entries:
+  - {table: interconnects, row_id: tcpmt.2024.3443855-a-i3, field: diameter_um, value: 9.676, unit: um, basis: measured, locator: "p.8 Fig. 17", note: "V1 (top) = V3 = 9.676 um, V2 = 9.862 um; H1 = 99.74 um"}
+  - {table: stack_layers, row_id: tcpmt.2024.3443855-a-L08, field: line_um, value: 10.87, unit: um, basis: measured, locator: "p.7 Fig. 16(d)", note: "labels Width=10.87 um (twice), Space=9.83 and 10.35 um"}
+  - {table: metrics, row_id: tcpmt.2024.3443855-a-m1, field: n_samples, value: 9, unit: ea, basis: measured, locator: "p.8 Fig. 19", note: "samples 1-9 on x-axis; 8/9 = 89%"}
+derived:
+  - {table: test_vehicles, row_id: tcpmt.2024.3443855-a, field: interposer_area_mm2, value: 440, formula: "22 x 20 mm", inputs: "p.7 Sec. IV.A"}
+  - {table: interconnects, row_id: tcpmt.2024.3443855-a-i3, field: aspect_ratio, value: 10, formula: "design depth / diameter = 100 / 10", inputs: "p.3 Sec. II.B"}
+  - {table: process_steps, row_id: tcpmt.2024.3443855-F1-s04, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.6 Sec. III.B"}
+conflicts:
+  - {table: interconnects, row_id: tcpmt.2024.3443855-a-i1, field: diameter_um, values: [26.2, 30], locators: ["p.8 Fig. 17; p.9 Sec. V", "p.3 Sec. II.B; p.3 Fig. 2; p.8 Sec. IV.A (30 +/- 4)"], chosen: 26.2, why: "measured cross-section; 30 um is the design value"}
+  - {table: interconnects, row_id: tcpmt.2024.3443855-a-i1, field: height_um, values: [18.8, 18], locators: ["p.8 Fig. 17", "p.3 Sec. II.B; p.8 Sec. IV.A (18 +/- 2)"], chosen: 18.8, why: "measured cross-section"}
+  - {table: interconnects, row_id: tcpmt.2024.3443855-a-i2, field: diameter_um, values: [77.6, 80], locators: ["p.8 Fig. 17", "p.3 Sec. II.B; p.8 Sec. IV.A (80 +/- 4)"], chosen: 77.6, why: "measured cross-section"}
+  - {table: interconnects, row_id: tcpmt.2024.3443855-a-i2, field: height_um, values: [77.3, 80], locators: ["p.8 Fig. 17", "p.3 Sec. II.B; p.8 Sec. IV.A (80 +/- 3)"], chosen: 77.3, why: "measured cross-section"}
+  - {table: interconnects, row_id: tcpmt.2024.3443855-a-i3, field: diameter_um, values: [9.676, 10], locators: ["p.8 Fig. 17", "p.3 Sec. II.B; p.8 Sec. IV.A"], chosen: 9.676, why: "measured cross-section (top); 10 um design / 'about 10 um' text"}
+  - {table: interconnects, row_id: tcpmt.2024.3443855-a-i3, field: depth_um, values: [99.74, 100, 102.9], locators: ["p.8 Fig. 17", "p.3 Sec. II.B", "p.5 Fig. 7(b) (etched, before fill)"], chosen: 99.74, why: "measured on finished die"}
+excluded:
+  - "SiO2 hardness ~9 GPa vs SiOCH ~2 GPa and modulus ~80 vs ~10 GPa, attributed to ref [20]"
+  - "Via-middle active interposers of AMD/Intel/STM and backside via-last work of IMEC/CEA-LETI/A*STAR (refs [5]-[13])"
+  - "Water dielectric constant ~78 (ref [19])"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - microbump and C4 pitch, bump metallurgy, TSV fill metal and RDL metal (not named), PI product and thickness
+  - wafer diameter, PED size/node, substrate details; die-to-interposer assembly (planned only)
+  - DRIE, PECVD, plating, CMP, anneal, temporary bonding and laser conditions; equipment
+  - warpage, thermal, signal-integrity data
+source_quality:
+  - "Candidates p04_fig4 (legend only), p05_fig6 (bottom row only) and p08_fig17 (left column only) were truncated; manual crops used."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2024.3443855", change: "process_flow_level full confirmed", reason: "Fig. 4 and Fig. 6 ordered flow; 350 C 1 h bake, DRIE, PECVD"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2024.3443855-F1-s01", change: "category other -> carrier_prep", reason: "Fig. 4(a) start wafer is flow step (a)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2024.3443855-F1-s04", change: "equipment oven; split with/without bake", reason: "p.6 Sec. III.B DOE Re vs Ro; 'bake the wafer in an oven'"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2024.3443855-F1-s06", change: "s06 split into resist coat (Fig. 6(d)) and new s25 TSV lithography (Fig. 6(e))", reason: "p.5 Fig. 6(d)-(e)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2024.3443855-F1-s25", change: "s06 split into resist coat (Fig. 6(d)) and new s25 TSV lithography (Fig. 6(e))", reason: "p.5 Fig. 6(d)-(e)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2024.3443855-F1-s26", change: "added: clean after TSV DRIE", reason: "p.5 Sec. III.B 'cleaned ... after each etching step'"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2024.3443855-F1-s17", change: "target microbump 30/18 um, C4 80/80 um (diameter/height, design)", reason: "p.3 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2024.3443855-F1-s21", change: "target microbump 30/18 um, C4 80/80 um (diameter/height, design)", reason: "p.3 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2024.3443855-F1-s20", change: "s20 split into M1_B RDL (Fig. 4(i)) and new s27 C4 bump pads (Fig. 4(j))", reason: "p.4 Fig. 4(i)(j)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2024.3443855-F1-s27", change: "s20 split into M1_B RDL (Fig. 4(i)) and new s27 C4 bump pads (Fig. 4(j))", reason: "p.4 Fig. 4(i)(j)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2024.3443855-F1-s23", change: "route 'blade saw then laser grooving (Fig. 13)'; thickness_um cleared (cut depths moved to result)", reason: "cut depth is not a layer thickness; p.7 Fig. 14(d)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2024.3443855-F1-s24", change: "route 'blade saw then laser grooving (Fig. 13)'; thickness_um cleared (cut depths moved to result)", reason: "cut depth is not a layer thickness; p.7 Fig. 14(d)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2024.3443855-F1-s28", change: "added route 'laser grooving then blade saw (Fig. 12)'", reason: "p.6 Sec. III.C; p.7 Fig. 12 results of the executed alternative"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2024.3443855-F1-s29", change: "added route 'laser grooving then blade saw (Fig. 12)'", reason: "p.6 Sec. III.C; p.7 Fig. 12 results of the executed alternative"}

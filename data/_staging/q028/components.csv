@@ -1,0 +1,40 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00092-a-c1,ectc51846.2026.00092-a,logic_soc,yes,,"SoC thermal test die (4 SoC heater groups, 5 thermal sensors each)",4,,,,,,,,,,,design_target,text,,p.4 Sec. III.A; p.4 Fig. 7,,16 SoC heater groups parallel-connected in PCB for uniform heating; total SoC area about 1.6X reticle.
+ectc51846.2026.00092-a-c2,ectc51846.2026.00092-a,hbm,yes,,HBM thermal test die (single HBM heater group),8,,,,,,,,,,,design_target,text,,p.4 Sec. III.A; p.4 Fig. 7,,
+ectc51846.2026.00092-a-c3,ectc51846.2026.00092-a,interposer,,,"CoWoS-R organic interposer, 3.3X reticle",1,,,,,,,,,organic interposer,,design_target,text,,p.3 Sec. I.B; p.4 Sec. III.A,,
+ectc51846.2026.00092-a-c4,ectc51846.2026.00092-a,substrate,,,package substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,Shown in schematic only; no details.
+ectc51846.2026.00092-a-c5,ectc51846.2026.00092-a,lid,,,"lid with inlet, outlet and manifold for liquid distribution",1,,,,,,,,,,,stated,text,,p.3 Sec. I.B; p.2 Fig. 1,,Material not stated.
+ectc51846.2026.00092-a-c6,ectc51846.2026.00092-a,adhesive,,,warpage-tolerant sealant at periphery of cooling area (die to lid),,,,,,,,,,,,stated,text,,p.3 Sec. II; p.5 Sec. IV.A,,"Selected for elongation, adhesion, coolant resistance; product not named."
+ectc51846.2026.00092-a-c7,ectc51846.2026.00092-a,micro_cooler,,no,"Si micropillar array formed on SoC backside (direct-to-silicon, DI water coolant)",4,,,,,,,,,Si,,stated,text,,p.2 Sec. I.A; p.2 Fig. 2; p.4 Sec. III.A,,Pillar dimensions not reported.
+ectc51846.2026.00092-b-c1,ectc51846.2026.00092-b,logic_soc,yes,,"SoC thermal test die (4 SoC heater groups, 5 thermal sensors each)",4,,,,,,,,,,,design_target,text,,p.4 Sec. III.A; p.4 Fig. 7,,16 SoC heater groups parallel-connected in PCB for uniform heating; total SoC area about 1.6X reticle.
+ectc51846.2026.00092-b-c2,ectc51846.2026.00092-b,hbm,yes,,HBM thermal test die (single HBM heater group),8,,,,,,,,,,,design_target,text,,p.4 Sec. III.A; p.4 Fig. 7,,
+ectc51846.2026.00092-b-c3,ectc51846.2026.00092-b,interposer,,,"CoWoS-R organic interposer, 3.3X reticle",1,,,,,,,,,organic interposer,,design_target,text,,p.3 Sec. I.B; p.4 Sec. III.A,,
+ectc51846.2026.00092-b-c4,ectc51846.2026.00092-b,substrate,,,package substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,Shown in schematic only; no details.
+ectc51846.2026.00092-b-c5,ectc51846.2026.00092-b,tim,,,TIM1.5 phase change material,,,,,,,,,,"PCM, 8 W/m-K",,stated,text,,p.4 Sec. III.B,,
+ectc51846.2026.00092-b-c6,ectc51846.2026.00092-b,cold_plate,,,commercial cold plate,1,,,,,,,,,,,stated,text,,p.4 Sec. III.B,,
+ectc51846.2026.00092-c-c1,ectc51846.2026.00092-c,logic_soc,yes,,"SoC thermal test die (4 SoC heater groups, 5 thermal sensors each)",4,,,,,,,,,,,design_target,text,,p.4 Sec. III.A; p.4 Fig. 7,,16 SoC heater groups parallel-connected in PCB for uniform heating; total SoC area about 1.6X reticle.
+ectc51846.2026.00092-c-c2,ectc51846.2026.00092-c,hbm,yes,,HBM thermal test die (single HBM heater group),8,,,,,,,,,,,design_target,text,,p.4 Sec. III.A; p.4 Fig. 7,,
+ectc51846.2026.00092-c-c3,ectc51846.2026.00092-c,interposer,,,"CoWoS-R organic interposer, 3.3X reticle",1,,,,,,,,,organic interposer,,design_target,text,,p.3 Sec. I.B; p.4 Sec. III.A,,
+ectc51846.2026.00092-c-c4,ectc51846.2026.00092-c,substrate,,,package substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,Shown in schematic only; no details.
+ectc51846.2026.00092-c-c5,ectc51846.2026.00092-c,tim,,,TIM1 (TSMC POR),,,,,,,,,,TSMC POR,,stated,text,,p.4 Sec. III.B,,
+ectc51846.2026.00092-c-c6,ectc51846.2026.00092-c,lid,,,lid,1,,,,,,,,,,,stated,text,,p.4 Sec. III.B,,
+ectc51846.2026.00092-c-c7,ectc51846.2026.00092-c,tim,,,TIM2 phase change material,,,,,,,,,,"PCM, 8 W/m-K",,stated,text,,p.4 Sec. III.B,,
+ectc51846.2026.00092-c-c8,ectc51846.2026.00092-c,cold_plate,,,commercial cold plate,1,,,,,,,,,,,stated,text,,p.4 Sec. III.B,,
+ectc51687.2025.00233-a-c1,ectc51687.2025.00233-a,substrate,,,glass substrate with TGVs,1,,,400,,,,,,glass,,design_target,text,,p.3 Sec. III.A,,Glass type/supplier not stated; 0.4 mm.
+ectc51687.2025.00233-b-c1,ectc51687.2025.00233-b,substrate,,,glass core,1,77,77,400,,,,,,glass,,design_target,mixed,,p.3 Sec. III.B; p.4 Sec. III.B; p.3 Fig. 2(c),,0.4 mm (text; Fig. 2(c) label 'Glass core 0.4mm'). Glass type not stated. TV fabricated by Unimicron NBD1 team (ack).
+ectc51687.2025.00012-a-c1,ectc51687.2025.00012-a,logic_soc,,,XPU compute die (center),1,,,,,,,,,,,stated,mixed,,p.1 Sec. II; p.2 Fig. 1,,Die size and node not reported.
+ectc51687.2025.00012-a-c2,ectc51687.2025.00012-a,pic,,,Optical I/O (OIO) chiplet,2,,,,,,,,,,external Si suppliers (unnamed),stated,text,,p.2 Sec. II,,"Overhangs substrate edge; 24 edge ports (8 laser in, 8 Tx, 8 Rx); metamaterial SSC + etched V-grooves. Details in refs [10-12]."
+ectc51687.2025.00012-a-c3,ectc51687.2025.00012-a,bridge,,yes,EMIB (embedded multi-die interconnect bridge),,,,,,,,,,,,stated,mixed,,p.1 Sec. I; p.2 Fig. 1,,Bridge count and size not reported.
+ectc51687.2025.00012-a-c4,ectc51687.2025.00012-a,substrate,,,package substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,Size and layer count not reported.
+ectc51687.2025.00012-a-c5,ectc51687.2025.00012-a,fiber_array,,,"24-channel FAU, 1x24 PM fiber array fanning out to 2x12 MTP/MT ferrule",2,,,,,,,,,,,stated,text,count:figure_image,p.2 Sec. II; p.2 Fig. 1; p.2 Fig. 2; p.3 Sec. III,,Count: one per OIO chiplet (Fig. 2 photo; 'two FAUs tested at once'). Standard and reflow-compatible versions; several suppliers.
+ectc51687.2025.00012-a-c6,ectc51687.2025.00012-a,fiber_lid,,,lid on FAU fibers,,,,,,,,,,,,stated,text,,p.2 Sec. III,,Mechanical support; bonded with mechanical adhesive.
+ectc51687.2025.00012-a-c7,ectc51687.2025.00012-a,heat_spreader,,,heat spreader,1,,,,,,,,,,,stated,text,,p.2 Sec. III,,FAU bonded to heat spreader with mechanical adhesive.
+ectc51687.2025.00012-a-c8,ectc51687.2025.00012-a,underfill,,,underfill,,,,,,,,,,,,stated,text,,p.2 Sec. III,,Product not reported.
+ectc51687.2025.00012-a-c9,ectc51687.2025.00012-a,adhesive,,,mechanical adhesive(s),,,,,,,,,,,,stated,text,,p.2 Sec. III,,"Bond fiber and lid to OIO chiplet, FAU to heat spreader; selection in ref [13]."
+ectc51687.2025.00012-a-c10,ectc51687.2025.00012-a,adhesive,,,optical adhesive(s),,,,,,,,,,,,stated,text,,p.2 Sec. III,,Index matching between SSC and fiber tip.
+ectc51687.2025.00012-b-c1,ectc51687.2025.00012-b,pic,,,Optical I/O (OIO) chiplet,4,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Fig. 2,,
+ectc51687.2025.00012-c-c1,ectc51687.2025.00012-c,pic,,,Optical I/O (OIO) chiplet,6,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Fig. 2,,
+icep61562.2024.10535587-a-c1,icep61562.2024.10535587-a,unspecified,,yes,"singulated device die with Cu studs, face-up",,,,,,,,,,,,stated,text,,p.1 Sec. II ASE FOPLP process flow,,Six-side protection by mold; no PI stress buffer on native wafer.
+icep61562.2024.10535587-a-c2,icep61562.2024.10535587-a,mold,,,EMC over-mold (stress buffer layer),,,,,,,,,,EMC,,stated,text,,p.1 Sec. II ASE FOPLP process flow,,
+ectc51846.2026.00198-a-c1,ectc51846.2026.00198-a,substrate,,,glass panel substrate,1,510,515,1100,,,,,,glass (type not stated),,design_target,text,,p.2 Sec. III.A,,Thickness given as t 1.1 mm.
+ectc51846.2026.00198-b-c1,ectc51846.2026.00198-b,substrate,,,"silicon wafer, TTV <1 um",1,,,,,,,,,Si,,stated,text,,p.2 Sec. III.B,,Diameter and thickness not stated.

@@ -1,0 +1,48 @@
+paper_id: icep55381.2022.9795565
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/icep55381.2022.9795565/text.md
+  - references/icep55381.2022.9795565/source.json
+  - references/icep55381.2022.9795565/figures/page_01.png
+  - references/icep55381.2022.9795565/figures/page_02.png
+  - references/icep55381.2022.9795565/figures/cand/p01_fig1.png
+  - references/icep55381.2022.9795565/figures/cand/p01_fig2.png
+  - references/icep55381.2022.9795565/figures/cand/p02_fig3.png
+  - references/icep55381.2022.9795565/figures/cand/p02_fig4.png
+  - references/icep55381.2022.9795565/figures/cand/p02_fig5.png
+figure_reading_method: >-
+  Fig. 5 CDF re-cropped at 600 dpi: legend bump counts and CDF top (~94-95%) read; single-bump resistance values
+  not entered (low-resolution log axis). Fig. 1 labels read at 600 dpi. Fig. 2 pitch/diameter labels from candidate crop.
+entries:
+  - {table: interconnects, row_id: icep55381.2022.9795565-c-i1, field: count, value: 300, unit: bumps, basis: stated, locator: "p.2 Fig. 5", note: "legend '20um pitch 300 bumps'"}
+  - {table: interconnects, row_id: icep55381.2022.9795565-c-i3, field: count, value: 840, unit: bumps, basis: stated, locator: "p.2 Fig. 5", note: "legend '7um pitch 840 bumps'"}
+derived:
+  - {table: process_steps, row_id: icep55381.2022.9795565-F3-s05, field: time_s, value: 60, formula: "1 min x 60", inputs: "p.1 Sec. II"}
+  - {table: process_steps, row_id: icep55381.2022.9795565-F2-s02, field: time_s, value: 60, formula: "1 min x 60", inputs: "p.1 Sec. II"}
+  - {table: process_steps, row_id: icep55381.2022.9795565-F1-s02, field: time_s, value: 60, formula: "1 min x 60", inputs: "p.1 Sec. III.A"}
+conflicts:
+  - {table: metrics, row_id: icep55381.2022.9795565-c-m1, field: value, values: [95, 90], locators: ["p.1 Abstract; p.2 Fig. 5", "p.2 Sec. III.D"], chosen: 95, why: "measured CDF plot tops at ~94-95% for all three pitches, agrees with abstract"}
+excluded:
+  - "IMC insertion bonding concept and isothermal TCB throughput argument (refs [1]-[3]); 270 C 1 min CoSn3 transfer also cited to ref [1] but performed here"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - die sizes, cavity depth/diameter, oxide thickness, Ni/Sn thicknesses, UBM material
+  - TCB force/pressure/time, CUF product and cure conditions, alignment accuracy values
+  - single-bump resistance values (CDF axis too coarse to read reliably)
+  - bottom wafer size (300 mm stated for top wafer only)
+source_quality:
+  - "Two-page extended abstract; all five candidates clean."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "icep55381.2022.9795565-F3-s09", change: "deleted test row 'electrical test of single-bump connections'; content already in metrics icep55381.2022.9795565-c-m1..m3 (single-bump yield, n per pitch)", reason: "post-build measurement is a metric, not a step"}
+  - {date: 2026-10-20, source: repass, row_id: "icep55381.2022.9795565-F1-s01", change: "target '' -> 'pitch 20/10/7/5 um; diameter 13/7/5/3 um'", reason: "p.1 Fig. 2(a) labels pitch/diameter of the plated bumps"}
+  - {date: 2026-10-20, source: repass, row_id: "icep55381.2022.9795565-F2-s01", change: "material 'Co 1 um / Sn 0.5, 1, 2 um' -> 'Co/Sn'; split '' -> 'Co/Sn 1/0.5, 1/1, 1/2 um'; target '' -> 'pitch 20/10/7 um'", reason: "per-variant Sn thickness belongs in split; pitches from p.2 Sec. III.B, Fig. 3"}
+  - {date: 2026-10-20, source: repass, row_id: "icep55381.2022.9795565-F3-s04", change: "target '' -> 'pitch 20/10/7 um'", reason: "pitches of the electrical samples (p.2 Sec. III.D, Fig. 5)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep55381.2022.9795565-F3-s03", change: "material 'Al' -> 'Al (probing pads)'", reason: "material as written"}
+  - {date: 2026-10-20, source: repass, row_id: "icep55381.2022.9795565-F1*", change: "step_basis set to stated_in_flow on rows without one", reason: "rule 7 step_basis"}
+  - {date: 2026-10-20, source: repass, row_id: "icep55381.2022.9795565-F2*", change: "step_basis set to stated_in_flow on rows without one", reason: "rule 7 step_basis"}
+  - {date: 2026-10-20, source: repass, row_id: "icep55381.2022.9795565-F3*", change: "step_basis set to stated_in_flow on rows without one", reason: "rule 7 step_basis"}
+  - {date: 2026-10-20, source: repass, row_id: "icep55381.2022.9795565-F1", change: "level fragments -> ordered", reason: "two stated, ordered steps (plate, then 270 C 1 min pre-IMC); Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "icep55381.2022.9795565-F3", change: "notes added (parallel top/bottom wafer branches)", reason: "p.1 Sec. II"}
+  - {date: 2026-10-20, source: repass, row_id: "icep55381.2022.9795565-F3", change: "locator adds p.1 Fig. 1", reason: "layer schematic of top/bottom wafers"}
+  - {date: 2026-10-20, source: repass, row_id: "icep55381.2022.9795565", change: "process_flow_level full confirmed (provisional full); has_process_flow yes", reason: "ordered flow with materials and conditions (270 C 1 min pre-IMC, 150 C TCB, CUF), Sec. II-III"}

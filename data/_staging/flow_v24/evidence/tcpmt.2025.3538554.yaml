@@ -1,0 +1,48 @@
+paper_id: tcpmt.2025.3538554
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/tcpmt.2025.3538554/text.md
+  - references/tcpmt.2025.3538554/source.json
+  - references/tcpmt.2025.3538554/figures/page_02.png
+  - references/tcpmt.2025.3538554/figures/page_03.png
+  - references/tcpmt.2025.3538554/figures/page_04.png
+  - references/tcpmt.2025.3538554/figures/page_05.png
+  - references/tcpmt.2025.3538554/figures/page_06.png
+  - references/tcpmt.2025.3538554/figures/page_07.png
+  - references/tcpmt.2025.3538554/figures/page_08.png
+figure_reading_method: >-
+  Tables I-VI read from page renders (text layer drops them); Table III and Fig. 2 re-cropped at 250-400 dpi (scratch)
+  to map layer letters A-W to their stack positions; Fig. 3 re-cropped manually; candidate crops p06_fig6, p04_fig2,
+  p08_fig13, p08_fig11 opened.
+entries:
+  - {table: stack_layers, row_id: tcpmt.2025.3538554-a-L01, field: seq, value: "A,N,B,O,C,P,core+D,Q,E,R,F,G,H,S,I,T,core+J,U,K,V,L,W,M", unit: "", basis: design_target, locator: "p.4 Fig. 2", note: "top-down order read from Fig. 2 leader lines"}
+  - {table: components, row_id: tcpmt.2025.3538554-b-c1, field: notes, value: "pitch 500 um; pad dia 280 um; 4114 pads", unit: um, basis: design_target, locator: "p.2 Table I", note: "Table I row"}
+  - {table: metrics, row_id: tcpmt.2025.3538554-a-m2, field: value, value: 99.5, unit: "%", basis: measured, locator: "p.8 Sec. VI.B", note: "398 of 400 conducting (paper: 'two electric interconnections are disabled')"}
+derived:
+  - {table: test_vehicles, row_id: tcpmt.2025.3538554-a, field: interposer_area_mm2, value: 2480.04, formula: "49.8*49.8", inputs: "p.5 Sec. III.B"}
+  - {table: test_vehicles, row_id: tcpmt.2025.3538554-b, field: interposer_area_mm2, value: 2480.04, formula: "49.8*49.8", inputs: "p.5 Sec. III.B"}
+  - {table: test_vehicles, row_id: tcpmt.2025.3538554-b, field: n_dies, value: 17, formula: "1 MMA chip + 16 HV-ASICs", inputs: "p.2 Table I"}
+  - {table: components, row_id: tcpmt.2025.3538554-b-c1, field: thickness_um, value: 400, formula: "0.4 mm * 1000", inputs: "p.2 Table I"}
+  - {table: components, row_id: tcpmt.2025.3538554-b-c2, field: thickness_um, value: 6000, formula: "6 mm * 1000", inputs: "p.2 Table I"}
+  - {table: components, row_id: tcpmt.2025.3538554-b-c3, field: thickness_um, value: 750, formula: "0.75 mm * 1000", inputs: "p.2 Table I"}
+  - {table: components, row_id: tcpmt.2025.3538554-b-c4, field: thickness_um, value: 300, formula: "0.3 mm * 1000", inputs: "p.2 Table I"}
+  - {table: process_steps, row_id: tcpmt.2025.3538554-F1-s20, field: thickness_um, value: 0.3, formula: "3000 A / 10000", inputs: "p.8 Sec. VI.B"}
+  - {table: process_steps, row_id: tcpmt.2025.3538554-F2-s04, field: time_s, value: 600, formula: "10 min * 60", inputs: "p.3 Sec. II.A"}
+  - {table: metrics, row_id: tcpmt.2025.3538554-a-m6, field: value, value: 3.5, formula: "paper's volume-weighted calculation (method of ref [21])", inputs: "p.7 Table IV"}
+conflicts:
+  - {table: components, row_id: tcpmt.2025.3538554-b-c1, field: thickness_um, values: [400, 500], locators: ["p.2 Table I; p.1 Abstract; p.3 Sec. II.B", "p.2 Sec. I"], chosen: 400, why: "table and two text mentions agree on 0.4 mm"}
+excluded:
+  - "TSMC 0.4/0.4 um L/S (ref [13]) and conventional 10/10 um (ref [19]) as prior art"
+  - "typical Cu-fill TSV aspect ratio 5:1-10:1 (refs [10],[11])"
+  - "dummy Si interposer of the authors' previous paper [20]"
+  - "Table IV/V material constants are inputs from refs [22]-[24] (kept only as layer properties/notes)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "Cu-Sn bonding temperature, pressure, time and bonding level"
+  - "TSV count; RDL via sizes; line/space of RDL-5 to RDL-8"
+  - "blind-hole etch method, thinning method, CMP steps"
+  - "module-level electrical test, reliability tests, measured MMA chip warpage after packaging"
+source_quality:
+  - "Tables I-VI are images; text layer omits them. RDL-7 resistance printed as 'about 80 mOhm' (text layer drops the symbol)."

@@ -28,3 +28,6 @@ not_reported:
   - panel size, sample counts, measurement area definition beyond max-min displacement
 source_quality:
   - "Page 2 candidates (p02_fig3..fig6) are shifted upward: each includes the preceding caption/heading and clips the x-axis labels; manual crops used."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: "icep-iaac64884.2025.11003038-e-m4", change: "scope -> 'applies to TVs e, g (Samples 3, 4; OCS refs f, h)'; copy icep-iaac64884.2025.11003038-g-m4 deleted", reason: "p.2 Sec. III: 'GCS warpage was 2.5 - 5x lower than OCS for 4-metal-layers substrates at peak temperature' is one statement for Samples 3 and 4"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "icep-iaac64884.2025.11003038-g-m4", change: "deleted (copy of icep-iaac64884.2025.11003038-e-m4)", reason: "p.2 Sec. III: 'GCS warpage was 2.5 - 5x lower than OCS for 4-metal-layers substrates at peak temperature' is one statement for Samples 3 and 4"}

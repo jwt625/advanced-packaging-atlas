@@ -1,0 +1,33 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51687.2025.00378-a-c1,ectc51687.2025.00378-a,dummy_die,yes,yes,dummy test die with daisy-chain bump pads (516 peripheral + 216 center),1,5,5,25,,,29,,,"Si (500 um wafer, thinned)",,design_target,table,thickness_um:measured;cavity_depth_um:measured,p.2 Sec. II; p.2 Table I; p.5 Fig. 8; p.3 Fig. 2(b),,"Thickness 25 um from Fig. 8 cross-section; Table I <30 um, text ~20-30 um. Cavity depth 29.0 um profilometer (masked ablation). Cavity x/y not given."
+ectc51687.2025.00378-a-c2,ectc51687.2025.00378-a,substrate,,,glass core,1,100,100,400,,,,,,glass (type not stated),,design_target,mixed,,p.2 Sec. II; p.2 Table II,,Glass type/CTE not stated.
+ectc51687.2025.00378-a-c3,ectc51687.2025.00378-a,adhesive,,,bonding material (locally applied in cavity),,,,,,,,,,,,stated,text,,p.3 Sec. III.B,,Material and thickness not stated.
+ectc51687.2025.00326-a-c1,ectc51687.2025.00326-a,interposer,,,panel-level multilayer RDL interposer,,320,320,,,,,,,Cu / photosensitive dielectric,,design_target,text,,p.1 Sec. II.A; p.2 Fig. 3,,x/y = glass carrier/panel size.
+ectc51846.2026.00012-a-c1,ectc51846.2026.00012-a,other,,,Si wafer carrier,1,300,,,,,,,,Si,,design_target,text,,p.2 Sec. II.B,,x_mm = wafer diameter 300 mm.
+ectc51846.2026.00012-a-c2,ectc51846.2026.00012-a,unspecified,,yes,distributed chips,,,,,,,,,,,,stated,text,,p.2 Sec. II.B,,"'chip-distributed carriers'; chip type, size, count not stated."
+ectc51846.2026.00012-a-c3,ectc51846.2026.00012-a,mold,,,epoxy molding compound (compression molded),,,,,,,,,,EMC,,stated,text,,p.2 Sec. II.B,,"Product, thickness and properties not stated."
+ectc51846.2026.00012-b-c1,ectc51846.2026.00012-b,other,,,glass panel carrier,1,510,515,,,,,,,glass,,design_target,text,,p.2 Sec. II.B,,
+ectc51846.2026.00012-b-c2,ectc51846.2026.00012-b,unspecified,,yes,distributed chips,,,,,,,,,,,,stated,text,,p.2 Sec. II.B,,
+ectc51846.2026.00012-b-c3,ectc51846.2026.00012-b,mold,,,epoxy molding compound (compression molded),,,,,,,,,,EMC,,stated,text,,p.2 Sec. II.B; p.4 Sec. III.B,,
+ectc51846.2026.00012-c-c1,ectc51846.2026.00012-c,substrate,,,ABF build-up substrate,1,118,115,,,,,,,ABF on glass-reinforced epoxy core,,design_target,text,,p.2 Sec. II.B,,
+ectc51846.2026.00016-a-c1,ectc51846.2026.00016-a,logic_soc,yes,,xPU (compute) representative chiplet,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. III; p.3 Sec. III; p.2 Fig. 1,,Emulates xPU/HBM/OE interfaces per Sec. II.
+ectc51846.2026.00016-a-c2,ectc51846.2026.00016-a,hbm,yes,,HBM (memory) representative chiplet,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. III; p.3 Sec. III; p.2 Fig. 1,,Emulates xPU/HBM/OE interfaces per Sec. II.
+ectc51846.2026.00016-a-c3,ectc51846.2026.00016-a,eic,yes,,"OE EIC (driver/TIA), flip-chip above embedded PIC",,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. III; p.3 Sec. III; p.2 Fig. 1,,Emulates xPU/HBM/OE interfaces per Sec. II.
+ectc51846.2026.00016-a-c4,ectc51846.2026.00016-a,pic,,yes,"PIC with edge couplers, embedded in molded interposer",,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. III; p.3 Sec. III; p.2 Fig. 1,,
+ectc51846.2026.00016-a-c5,ectc51846.2026.00016-a,bridge,,yes,"fine-pitch interconnect Si bridge, 4 RDL layers, TSVs",,,,,,,,,,Si,,stated,text,,p.2 Sec. II; p.2 Sec. III; p.3 Sec. III; p.2 Fig. 1,,
+ectc51846.2026.00016-a-c6,ectc51846.2026.00016-a,interposer,,,RDL-first molded interposer,,79,52,,,,,,,,,design_target,text,,p.2 Sec. III; p.2 Fig. 2,,
+ectc51846.2026.00016-a-c7,ectc51846.2026.00016-a,mold,,,wafer-level mold (interposer body),,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. III; p.3 Sec. III; p.2 Fig. 1,,
+ectc51846.2026.00016-a-c8,ectc51846.2026.00016-a,substrate,,,organic substrate,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. III; p.3 Sec. III; p.2 Fig. 1,,
+ectc51846.2026.00016-a-c9,ectc51846.2026.00016-a,underfill,,,underfill under top chiplets,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. III; p.3 Sec. III; p.2 Fig. 1,,
+ectc51846.2026.00016-a-c10,ectc51846.2026.00016-a,fiber_array,,,fiber attach unit (FAU) at PIC edge,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. III; p.3 Sec. III; p.2 Fig. 1,,
+ectc51846.2026.00016-d-c1,ectc51846.2026.00016-d,stiffener,,,stainless-steel stiffener (modelled),,,,,,,,,,stainless steel,,simulated,text,,p.4 Sec. V; p.4 Fig. 6(b),,Dimensions not stated.
+ectc51846.2026.00016-d-c2,ectc51846.2026.00016-d,tim,,,TIM (assumed in thermal model),,,,150,,,,,,"TIM, k ~5.5 W/m-K",,design_target,text,,p.5 Sec. V,thickness_um:approx,Assumed model input.
+ectc51846.2026.00016-d-c3,ectc51846.2026.00016-d,heat_spreader,,,thin vapor chamber heat spreader,,248,258,,,,,,,equivalent in-plane k of several thousand W/m-K (model),,design_target,text,,p.5 Sec. V; p.5 Fig. 8,,
+ectc51846.2026.00016-d-c4,ectc51846.2026.00016-d,other,,,customized Cu air-cooled heat sink with four 120x120 mm fans,,,,,,,,,,Cu,,design_target,text,,p.5 Sec. V; p.5 Fig. 8,,
+ectc51846.2026.00016-d-c5,ectc51846.2026.00016-d,pcb,,,evaluation board,,,,,,,,,,,,stated,schematic,,p.5 Fig. 8; p.5 Sec. V,,
+ectc51846.2026.00016-e-c1,ectc51846.2026.00016-e,pic,,,PIC with edge couplers,,,,,,,,,,,,stated,text,,p.5 Sec. VI,,
+ectc51846.2026.00016-e-c2,ectc51846.2026.00016-e,fiber_array,,,fiber attach unit (FA),,,,,,,,,,,,stated,mixed,,p.5 Sec. VI; p.6 Fig. 10,,
+ectc51846.2026.00016-e-c3,ectc51846.2026.00016-e,adhesive,,,"UV-curable adhesive, refractive index 1.38-1.5",,,,,,,,,,UV-curable adhesive,,stated,text,,p.5 Sec. VI; p.6 Fig. 10,,
+ectc51846.2026.00016-f-c1,ectc51846.2026.00016-f,lens,,,"microlens at edge-coupler facet, ROC 300 um",1,,,,,,,,,,,design_target,text,,p.6 Sec. VI; p.6 Fig. 11,,Attach adhesive: reflow-compatible high-temperature adhesive proposed.
+ectc51846.2026.00016-f-c2,ectc51846.2026.00016-f,lens,,,matching fiber-side lens,1,,,,,,,,,,,stated,text,,p.6 Sec. VI; p.6 Fig. 11,,
+ectc51846.2026.00016-f-c3,ectc51846.2026.00016-f,pic,,,Silicon EC (edge coupler) chip,,,,,,,,,,,,stated,schematic,,p.6 Fig. 11,,

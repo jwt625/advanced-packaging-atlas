@@ -1,0 +1,66 @@
+paper_id: ectc51687.2025.00071
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00071/text.md
+  - references/ectc51687.2025.00071/source.json
+  - references/ectc51687.2025.00071/figures/page_02.png
+  - references/ectc51687.2025.00071/figures/page_03.png
+  - references/ectc51687.2025.00071/figures/page_04.png
+  - references/ectc51687.2025.00071/figures/page_05.png
+  - references/ectc51687.2025.00071/figures/cand/p02_fig1.png
+  - references/ectc51687.2025.00071/figures/cand/p03_fig4.png
+  - references/ectc51687.2025.00071/figures/cand/p04_fig5.png
+  - references/ectc51687.2025.00071/figures/cand/p04_fig6.png
+  - references/ectc51687.2025.00071/figures/cand/p04_fig7.png
+  - references/ectc51687.2025.00071/figures/cand/p05_fig8.png
+figure_reading_method: >-
+  Fig. 6 (red mean markers) and Fig. 8 (bar tops and error bars) read from 300 dpi re-crops against gridlines
+  (+/-3 MPa, +/-0.03 um). Fig. 9 range read from page render.
+entries:
+  - {table: interconnects, row_id: ectc51687.2025.00071-a-i1, field: aspect_ratio, value: 4, unit: "-", basis: design_target, locator: "p.2 Sec. II", note: "AR 4:1"}
+  - {table: process_steps, row_id: ectc51687.2025.00071-F1-s10, field: conditions, value: "iF 3.5, iR -10 mA/cm2; tF 90, tR 10 ms", unit: "mA/cm2; ms", basis: design_target, locator: "p.2 Fig. 3 caption"}
+derived:
+  - {table: interconnects, row_id: ectc51687.2025.00071-a-i1, field: depth_um, value: 12, formula: "AR x diameter = 4 x 3", inputs: "p.2 Sec. II"}
+  - {table: interconnects, row_id: ectc51687.2025.00071-b-i1, field: depth_um, value: 21, formula: "AR x diameter = 7 x 3", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: ectc51687.2025.00071-F1-s02, field: split, value: "12 / 21 / 30", formula: "etch depth = AR x diameter (4, 7, 10 x 3 um)", inputs: "p.2 Sec. II"}
+  - {table: interconnects, row_id: ectc51687.2025.00071-c-i1, field: depth_um, value: 30, formula: "AR x diameter = 10 x 3", inputs: "p.2 Sec. II; consistent with Fig. 9(b) z axis to ~30 um"}
+  - {table: stack_layers, row_id: ectc51687.2025.00071-a-L01, field: thickness_um, value: 12, formula: "TSV depth = AR x 3 um", inputs: "p.2 Sec. II"}
+  - {table: stack_layers, row_id: ectc51687.2025.00071-b-L01, field: thickness_um, value: 21, formula: "TSV depth = AR x 3 um", inputs: "p.2 Sec. II"}
+  - {table: stack_layers, row_id: ectc51687.2025.00071-c-L01, field: thickness_um, value: 30, formula: "TSV depth = AR x 3 um", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: ectc51687.2025.00071-F1-s13, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.3 Sec. II.B"}
+  - {table: interconnects, row_id: ectc51687.2025.00071-a-i1, field: anneal_time_min, value: 60, formula: "1 h x 60", inputs: "p.3 Sec. II.B"}
+  - {table: interconnects, row_id: ectc51687.2025.00071-b-i1, field: anneal_time_min, value: 60, formula: "1 h x 60", inputs: "p.3 Sec. II.B"}
+  - {table: interconnects, row_id: ectc51687.2025.00071-c-i1, field: anneal_time_min, value: 60, formula: "1 h x 60", inputs: "p.3 Sec. II.B"}
+conflicts:
+  - {table: metrics, row_id: ectc51687.2025.00071-a-m1, field: value, values: ["~100 MPa (abstract)", "~86 MPa plotted mean peak (Fig. 6a)"], locators: ["p.1 Abstract", "p.4 Fig. 6"], chosen: 86, why: "plotted mean of 10 line scans; abstract value likely raw-scatter peak"}
+  - {table: metrics, row_id: ectc51687.2025.00071-a-m2, field: value, values: ["Results: pulse-reverse (7:1, 10:1) grains smaller than DC (4:1) before anneal", "Conclusions: DC-plated grain size notably smaller than pulse-reverse"], locators: ["p.4 Sec. III.B", "p.5 Sec. IV"], chosen: "Fig. 8 values (DC 1.65 um > PR ~1.0 um pre-anneal)", why: "plot agrees with Results text"}
+excluded:
+  - "Grain size ~ half TSV diameter for 1-5 um TSVs from prior work ref [27]"
+  - "Global bending / local shrinkage stress decomposition of ref [27]"
+  - "Detailed process development of ref [10]"
+  - "Raman stress coefficient D = -3.6 cm-1/GPa (calibration from ref [26]); 14 MPa resolution kept only as a note"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - components
+  - wafer size and substrate thickness, TSV count per array
+  - electroless Cu thickness, plating bath chemistry, CMP conditions, etch tool
+  - electrical resistance, thermal-cycling reliability
+  - DC plating time for AR 4:1
+source_quality:
+  - "Candidates p04_fig6 and p05_fig8 clip axis labels, p04_fig7 includes the section heading: manual crops used."
+revisions:
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00071-F1", change: "flow_name 'TSV fabrication AR 4:1 (Fig. 1, Sec. II)' -> 'TSV fabrication (Fig. 1, Sec. II)'; notes rewritten", reason: "repass: one flow for all three ARs"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00071-F1-s10", change: "conditions: removed 'average 2.2 mA/cm2'; notes and locator (p.4 Sec. III.B) updated", reason: "repass review A miss 1: average current and 5 h fill stated only for AR 10:1 (p.2 Sec. II.A); pulse-reverse for 7:1 from p.4 Sec. III.B"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00071-F1-s11", change: "split 'DC 1-5 mA/cm2 ...' added; current_density_ma_cm2 2.2 (average) typed; locator adds Fig. 2", reason: "repass review A miss 2: DC current sweep on AR 10:1 (p.2 Sec. II.A, Fig. 2) explains the plating choice"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00071-F1-s01", change: "target '3 um diameter, 6 um pitch' added", reason: "repass rule 7: stated dimensions on the step (p.2 Sec. II)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00071-F1-s02", change: "conditions 'Bosch process' added to etch deltas s02-s04", reason: "repass: process named in Fig. 1 caption"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00071", change: "evidence derived: removed two duplicate derived entries for F1-s13 time_s", reason: "repass: identical entries"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00071-F1-s02", change: "tv_id 'ectc51687.2025.00071-a' -> '' (shared); target '3 um diameter, AR 4:1' -> '3 um diameter'; split '' -> 'AR 4:1 / 7:1 / 10:1 (TV a / b / c); etch depth 12 / 21 / 30 um (derived, AR x 3 um)'; locator + p.2 Sec. II", reason: "v008 identical_delta_text: same Bosch etch for a/b/c, only AR/depth differs -> split on shared step; covers L01 thickness 12/21/30 (target_missing_preexisting)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00071-F1-s03", change: "deleted (merged into ectc51687.2025.00071-F1-s02)", reason: "v008 identical_delta_text: AR differs only by variant -> split on s02"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00071-F1-s04", change: "deleted (merged into ectc51687.2025.00071-F1-s02)", reason: "v008 identical_delta_text: AR differs only by variant -> split on s02"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00071-F1-s10", change: "tv_id 'ectc51687.2025.00071-b' -> 'ectc51687.2025.00071-b;ectc51687.2025.00071-c'; split '' -> 'average current / fill time: AR 10:1 (c) 2.2 mA/cm2, 5 h; AR 7:1 (b) not stated; DC 1-5 mA/cm2 on AR 10:1 (Fig. 2): pores < 2.5, pinch-off >= 2.5 mA/cm2; pulse-reverse adopted'; locator, notes; conditions keeps waveform (Fig. 3)", reason: "v008 identical_delta_text: one pulse-reverse delta for b and c; c-only average 2.2 mA/cm2 and 5 h fill moved to split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00071-F1-s11", change: "deleted (merged into ectc51687.2025.00071-F1-s10); typed current_density_ma_cm2 2.2 and time_s 18000 dropped (in s10 split text)", reason: "v008 identical_delta_text: same pulse-reverse step for b and c"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00071-F1", change: "notes rewritten for merged s02 and s10", reason: "v008 identical_delta_text fixes"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00071-F1-s10", change: "evidence entry for Fig. 3 waveform re-pointed s11 -> s10; derived time_s 18000 (s11) removed; derived split depth added for s02", reason: "v008 merges"}

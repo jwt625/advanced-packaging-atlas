@@ -1,0 +1,51 @@
+paper_id: eptc67330.2025.11392593
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/eptc67330.2025.11392593/text.md
+  - references/eptc67330.2025.11392593/source.json
+  - references/eptc67330.2025.11392593/figures/cand/p02_fig1.png
+  - references/eptc67330.2025.11392593/figures/cand/p03_fig2.png
+  - references/eptc67330.2025.11392593/figures/cand/p03_fig3.png
+  - references/eptc67330.2025.11392593/figures/cand/p03_fig4.png
+  - references/eptc67330.2025.11392593/figures/cand/p04_fig5.png
+  - references/eptc67330.2025.11392593/figures/cand/p04_fig6.png
+  - references/eptc67330.2025.11392593/figures/cand/p04_fig7.png
+  - references/eptc67330.2025.11392593/figures/cand/p04_fig8.png
+  - references/eptc67330.2025.11392593/figures/cand/p05_fig9.png
+figure_reading_method: >-
+  All nine figure candidates opened; Fig. 9 re-cropped at 450 dpi to read axes. Figures carry no scale bars or
+  dimension labels; all dimensions come from text.
+entries:
+  - {table: components, row_id: eptc67330.2025.11392593-a-c3, field: count, value: 6, unit: ea, basis: design_target, locator: "p.2 Fig. 1(b)", note: "six 'Bridge die' labels"}
+  - {table: components, row_id: eptc67330.2025.11392593-a-c4, field: count, value: 2, unit: ea, basis: design_target, locator: "p.2 Fig. 1(b); p.3 Fig. 4", note: "unlabeled shaded rectangles between NPUs; same positions in SAT"}
+derived:
+  - {table: test_vehicles, row_id: eptc67330.2025.11392593-a, field: interposer_area_mm2, value: 2401, formula: "49 x 49", inputs: "p.2 Sec. II.A"}
+conflicts:
+  - {table: stack_layers, row_id: eptc67330.2025.11392593-a-L04, field: repeat, values: ["single RDL with 7/7 um L/S (Sec. II.A)", "two metal layers and two passivation layers (Sec. II.B)", "front-side and backside RDL in Fig. 2(a)/(e)"], locators: ["p.2 Sec. II.A", "p.2 Sec. II.B", "p.3 Fig. 2"], chosen: 2, why: "process-flow text more specific; 7/7 assignment to a specific RDL unclear"}
+  - {table: metrics, row_id: eptc67330.2025.11392593-c-m1, field: value, values: ["text/caption: ~34% IL improvement at 40 GHz", "Fig. 9(a): curves end near -0.019 and -0.039 dB at 40 GHz (~50% if red = coaxial)"], locators: ["p.4 Sec. VI", "p.5 Fig. 9(a)"], chosen: 34, why: "legend does not identify which curve is coaxial; authors' stated value entered"}
+  - {table: figures, row_id: eptc67330.2025.11392593-f01, field: caption, values: ["caption: (b) HBM die", "image label: NPU over Bridge die"], locators: ["p.4 Fig. 5"], chosen: "caption as printed", why: "noted in figure notes"}
+excluded:
+  - "Si interposer, FOWLP, PLP and chiplet cost statements of refs [1]-[6]"
+  - "600 mm panel better matching for bigger chips (ref [5])"
+not_reported:
+  - die sizes and thicknesses, bridge size, interposer thickness, mold thickness, Cu post exact height
+  - microbump metallurgy, bonding temperature/force/time, flux type, MUF and DAF products, cure conditions
+  - substrate size and layers, C4 pitch/size, package size
+  - warpage, reliability, yield numbers; electrical measurements (coaxial post simulation only)
+  - wafer size of FOWLP route
+source_quality:
+  - "Clean text layer. Candidates matched all nine figures."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F1-s01", change: "category other -> carrier_prep", reason: "carrier preparation is step 1 of the flow"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F1-s05", change: "geometry moved conditions -> target", reason: "target holds stated geometry"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F1-s06", change: "equipment flip-chip bonder", reason: "Sec. IV.A: flip-chip bonder used for DAF bridge embedding"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F1-s10", change: "category other -> rdl_layer", reason: "two metal + two passivation layers"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F1-s11", change: "category other -> bumping; target pitch/diameter/height", reason: "Sec. II.A/III.A micro-bump dimensions"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F1-s18", change: "category other -> bumping", reason: "C4 bump formation"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F2-s01", change: "category other -> rdl_layer", reason: "RDL formation on 600 mm panel"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F2-s08", change: "category other -> bumping; performed yes", reason: "C4 bump formation; consistent with other F2 rows"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F1-s07", change: "deleted (inspection)", reason: "SAT void check (metric a-m1); not placed in the Fig. 2 / Sec. II.B flow; result already a metric"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F1-s15", change: "deleted (inspection)", reason: "SAT of MUF fill (metric a-m2); not placed in the Fig. 2 / Sec. II.B flow; result already a metric"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-F1-s13", change: "deleted (cross-section); moved to metric a-m3", reason: "failure-analysis cut after bonding is a measurement"}
+  - {date: 2026-10-20, source: repass, row_id: "eptc67330.2025.11392593-a-m3", change: "added from deleted step F1-s13", reason: "keep the cross-section check as a metric"}

@@ -1,0 +1,93 @@
+paper_id: ectc51529.2024.00094
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00094/text.md
+  - references/ectc51529.2024.00094/source.json
+  - references/ectc51529.2024.00094/figures/page_02.png
+  - references/ectc51529.2024.00094/figures/page_03.png
+  - references/ectc51529.2024.00094/figures/page_04.png
+  - references/ectc51529.2024.00094/figures/page_05.png
+  - references/ectc51529.2024.00094/figures/page_06.png
+  - references/ectc51529.2024.00094/figures/cand/p02_tablei.png
+  - references/ectc51529.2024.00094/figures/cand/p02_tableii.png
+  - references/ectc51529.2024.00094/figures/cand/p02_fig1.png
+  - references/ectc51529.2024.00094/figures/cand/p04_fig5.png
+  - references/ectc51529.2024.00094/figures/cand/p04_fig6.png
+  - references/ectc51529.2024.00094/figures/cand/p05_fig7.png
+figure_reading_method: >-
+  text.md unit glyphs are garbled (um/mm rendered as private-use characters); every dimension checked against page
+  renders and Table I/II candidate crops. Fig. 7 IMC values read off a 450 dpi re-render (+/- ~0.1 um); Fig. 5(a)
+  gap label 9.92 um confirmed on 450 dpi re-render.
+entries:
+  - {table: interconnects, row_id: ectc51529.2024.00094-a-i1, field: bonding_temp_c, value: 260, unit: C, basis: design_target, locator: "p.4 Sec. III.B", note: "260 C, 10 s, 5 N for the initial bonding test; later optimized values not disclosed"}
+  - {table: interconnects, row_id: ectc51529.2024.00094-a-i1, field: count, value: 515337, unit: ea, basis: design_target, locator: "p.2 Table I", note: "bump count; per chip assumed from table layout, not stated"}
+derived:
+  - {table: process_steps, row_id: ectc51529.2024.00094-F1-s09, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.2 Sec. II.A"}
+  - {table: process_steps, row_id: ectc51529.2024.00094-F1-s09, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.2 Sec. II.A"}
+  - {table: process_steps, row_id: ectc51529.2024.00094-F1-s09, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.2 Sec. II.A"}
+conflicts:
+  - {table: interconnects, row_id: ectc51529.2024.00094-a-i1, field: diameter_um, values: [7, 7.5], locators: ["p.2 Sec. II.A", "p.2 Table I"], chosen: 7.5, why: "table over text"}
+  - {table: metrics, row_id: ectc51529.2024.00094-a-m5, field: value, values: [0.7, "about 1"], locators: ["p.3 Fig. 2(a)", "p.3 Sec. II.C"], chosen: 0.7, why: "plot label over text"}
+  - {table: metrics, row_id: ectc51529.2024.00094-a-m8, field: value_text, values: ["0.7-1.3 (Leg1), 0.2-0.4 (Leg2) on plot", "about 1 um both legs"], locators: ["p.5 Fig. 7", "p.4 Sec. IV.A"], chosen: "plot values", why: "measured plot over text"}
+excluded:
+  - "TCB bonding temperature 240-260 C, NCP/NCF force 200-450 N, MR/LAB force 5-50 N (general background, ref [17])"
+  - "FLOLA force 10-50 N for 5x5 to 60x60 mm chips (general capability statement, not this TV)"
+  - "Ni IMC volume shrinkage 11.3% attributed to ref [21]; H radical mechanism refs [19], [20]; Fig. 4 reprinted from [19], [20]"
+  - "1-2 um misalignment 'commonly observed' (general statement, not measured on this TV)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - identity of metal M and diffusion-barrier material
+  - underfill product, seed thicknesses, number of chips per coupon
+  - optimized bonding temperature/force/time, alignment accuracy
+  - electrical resistance or daisy-chain yield (none measured)
+source_quality:
+  - "text.md unit characters garbled (um and mm), numbers intact."
+  - "Fig. 6 caption labels '(b) Leg3 (M-SnAg), (a) Leg3 (Cu-SnAg)' are typos; Fig. 7 legend says Leg2 Ni-SnAg / Leg3 M-BM-SnAg vs text Leg1/Leg2."
+revisions:
+  - date: 2026-10-19
+    source: "sibling_dup"
+    row_id: "ectc51529.2024.00094-a-m1"
+    change: "scope 'as-plated bump, all legs' -> 'as-plated bump; applies to TVs a, b, c'"
+    reason: "p.3 Sec. III.A gives one range 'regardless legs'; no per-leg values"
+  - date: 2026-10-19
+    source: "sibling_dup"
+    row_id: "ectc51529.2024.00094-b-m1"
+    change: "deleted (copy of ectc51529.2024.00094-a-m1)"
+    reason: "p.3 Sec. III.A gives one range 'regardless legs'; no per-leg values"
+  - date: 2026-10-19
+    source: "sibling_dup"
+    row_id: "ectc51529.2024.00094-c-m1"
+    change: "deleted (copy of ectc51529.2024.00094-a-m1)"
+    reason: "p.3 Sec. III.A gives one range 'regardless legs'; no per-leg values"
+  - date: 2026-10-19
+    source: "x2B"
+    row_id: "ectc51529.2024.00094-a-m2"
+    change: "scope 'initial bonding test, all legs' -> 'initial bonding test; applies to TVs a, b, c'"
+    reason: "p.4 Sec. IV: one BLT-variance sentence for all legs (also flagged in audit_x2B)"
+  - date: 2026-10-19
+    source: "x2B"
+    row_id: "ectc51529.2024.00094-b-m2"
+    change: "deleted (copy of ectc51529.2024.00094-a-m2)"
+    reason: "p.4 Sec. IV: one BLT-variance sentence for all legs (also flagged in audit_x2B)"
+  - date: 2026-10-19
+    source: "x2B"
+    row_id: "ectc51529.2024.00094-c-m2"
+    change: "deleted (copy of ectc51529.2024.00094-a-m2)"
+    reason: "p.4 Sec. IV: one BLT-variance sentence for all legs (also flagged in audit_x2B)"
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00094-F1-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "step order from Fig. 1 / Sec. II.A"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00094-F1-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "step order from Fig. 1 / Sec. II.A"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00094-F1-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "step order from Fig. 1 / Sec. II.A"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00094-F1-s08", change: "step_basis: '' -> 'stated_in_flow'", reason: "step order from Fig. 1 / Sec. II.A"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00094-F1-s09", change: "step_basis: '' -> 'stated_in_flow'", reason: "step order from Fig. 1 / Sec. II.A"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00094-F1-s02", change: "step_basis: '' -> 'stated_in_flow'; target: '' -> '14 um pitch; 7.5 um CD; 7 um total height'", reason: "stated bump geometry belongs on the plating step (p.2 Table I); order from Fig. 1"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00094-F1-s03", change: "step_basis: '' -> 'stated_in_flow'; target: '' -> '14 um pitch; 7.5 um CD; 7 um total height'", reason: "stated bump geometry belongs on the plating step (p.2 Table I); order from Fig. 1"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00094-F1-s04", change: "step_basis: '' -> 'stated_in_flow'; target: '' -> '14 um pitch; 7.5 um CD; 7 um total height'", reason: "stated bump geometry belongs on the plating step (p.2 Table I); order from Fig. 1"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00094-F1-s05", change: "target: '' -> '11x11 mm chips'", reason: "stated chip size the dicing step produces (p.2 Fig. 1)"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00094-F1-s07", change: "step_basis: '' -> 'stated_in_flow'; equipment: 'FLOLA bonder (laser through transparent bonding tool)' -> 'FLOLA bonder: homogenized laser through transparent glass bonding tool'", reason: "Fig. 2(b) labels a transparent glass bonding tool; order from Fig. 1"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00094-F1-s08", change: "conditions: '' -> 'dispensed on coupon wafer; chip-to-coupon gap approx. 9-13 um'", reason: "stated input gap (p.2 Sec. I)"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00094-F1-s10", change: "deleted step 'SAT T-mode inspection of underfill'", reason: "SAT T-mode after encapsulation is a post-build check not in the Fig. 1 flow; result already in metrics ectc51529.2024.00094-a-m4"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00094-F1-s11", change: "deleted step 'iso-thermal aging (HTS) at 150 C and 180 C for 2000 h'", reason: "HTS aging is a reliability test; conditions and results already in metrics a-m8..a-m12, b-m3..b-m6, c-m3..c-m5"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00094-F1-s12", change: "deleted step 'destructive analysis: grinding and polishing, FE-SEM and EDS'", reason: "destructive cross-section (grinding/polishing, FE-SEM, EDS) is failure analysis; results already in IMC metrics"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00094-F1", change: "flow_name: 'FLOLA chip-on-coupon assembly and HTS (Fig. 1)' -> 'FLOLA chip-on-coupon assembly (Fig. 1)'; locator: 'p.2 Sec. II.A; p.2 Fig. 1; p.2 Table II; p.3 Sec. III.B; p.4 Sec. III.B; p.3 Fig. 2(b); p.2 Sec. I; p.4 Sec. III.C; p.4 Fig. 5(b); p.4 Sec. IV.A' -> 'p.2 Sec. II.A; p.2 Fig. 1; p.2 Table I; p.2 Table II; p.3 Sec. III.B; p.3 Fig. 2(b); p.4 Sec. III.B; p.4 Sec. III.C; p.1 Sec. I'; notes: '' -> 'Fig. 1 also lists HTS and destructive analysis; those are tests (metrics). Bonding 260 C/10 s/5 N = initial condition.'", reason: "flow re-pass: HTS and destructive analysis removed from the build flow"}

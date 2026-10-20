@@ -1,0 +1,41 @@
+paper_id: tcpmt.2025.3557232
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/tcpmt.2025.3557232/text.md
+  - references/tcpmt.2025.3557232/source.json
+  - references/tcpmt.2025.3557232/figures/cand/p03_fig1.png
+  - references/tcpmt.2025.3557232/figures/cand/p04_fig4.png
+  - references/tcpmt.2025.3557232/figures/cand/p05_fig6.png
+  - references/tcpmt.2025.3557232/figures/cand/p05_fig7.png
+  - references/tcpmt.2025.3557232/figures/cand/p05_fig8.png
+  - references/tcpmt.2025.3557232/figures/cand/p05_fig9.png
+  - references/tcpmt.2025.3557232/figures/cand/p07_fig15.png
+  - references/tcpmt.2025.3557232/figures/cand/p08_fig17.png
+  - references/tcpmt.2025.3557232/figures/img_p05_1.png
+  - references/tcpmt.2025.3557232/figures/img_p05_4.png
+  - references/tcpmt.2025.3557232/figures/img_p05_5.png
+  - references/tcpmt.2025.3557232/figures/img_p05_6.png
+figure_reading_method: >-
+  Figs. 6, 8, 9 (embedded raster plots img_p05_4/6/5): marker centroids by color mask + erosion; y scale from axis
+  zero row and top tick (14, 5, 4 um), +/-0.05 um. Fig. 7: 400 dpi re-crop, markers calibrated on the text values
+  17.87 (10 min) and 3.71 um (90 min); zero row check agrees within 1 px. Fig. 4(c) labels read at 500 dpi.
+entries:
+  - {table: metrics, row_id: tcpmt.2025.3557232-a-m17, field: value, value: 3.23, unit: um, basis: measured, locator: "p.5 Fig. 8", note: "text: maximum 3.2 um at 30 min"}
+  - {table: metrics, row_id: tcpmt.2025.3557232-a-m2, field: value, value: 19.56, unit: um, basis: measured, locator: "p.4 Fig. 4(c)", note: "SEM label partly covered by marker"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: tcpmt.2025.3557232-a-m23, field: value, values: [1.51, 1.6], locators: ["p.5 Fig. 9", "p.6 Sec. IV.B"], chosen: 1.51, why: "plotted measured value; text says around 1.6 um"}
+  - {table: metrics, row_id: tcpmt.2025.3557232-a-m22, field: value, values: [2.76, "~3.2 (implied: 60-min 1.6 um is half of 30-min)"], locators: ["p.5 Fig. 9", "p.6 Sec. IV.B"], chosen: 2.76, why: "plotted measured value"}
+excluded:
+  - "Table I and Fig. 18 state-of-the-art TGV diameters/ARs from refs [11]-[30] (incl. AR 12 at 30 um, 10 um AR 12 in 118 um glass)"
+  - "Glass 10x interconnect density vs organic (general claim)"
+  - "Electroless vs electroplated Cu reliability equivalence attributed to ref [31]"
+not_reported:
+  - electrical_interfaces, optical_interfaces, components beyond the glass
+  - TGV pitch and via densities (lower/higher) in numbers; wafer size; glass product grade
+  - laser pulse energy/count, KOH concentration/temperature/time
+  - electroless and electroplating bath compositions, plating current density and standard plating time
+  - electrical resistance, reliability, anneal/Cu pumping (future work)
+source_quality:
+  - "Clean text layer; figure plots are embedded rasters (no vector data)."

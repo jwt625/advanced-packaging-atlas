@@ -1,0 +1,105 @@
+paper_id: tcpmt.2025.3628798
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/tcpmt.2025.3628798/text.md
+  - references/tcpmt.2025.3628798/source.json
+  - references/tcpmt.2025.3628798/figures/candidates.json
+  - references/tcpmt.2025.3628798/figures/cand/p03_fig5.png
+  - references/tcpmt.2025.3628798/figures/cand/p03_fig6.png
+  - references/tcpmt.2025.3628798/figures/cand/p03_fig7.png
+  - references/tcpmt.2025.3628798/figures/cand/p03_fig8.png
+  - references/tcpmt.2025.3628798/figures/cand/p04_fig9.png
+  - references/tcpmt.2025.3628798/figures/cand/p04_fig10.png
+  - references/tcpmt.2025.3628798/figures/cand/p04_fig11.png
+  - references/tcpmt.2025.3628798/figures/cand/p04_fig12.png
+  - references/tcpmt.2025.3628798/figures/cand/p04_fig13.png
+  - references/tcpmt.2025.3628798/figures/cand/p05_fig14.png
+  - references/tcpmt.2025.3628798/figures/cand/p05_fig15.png
+  - references/tcpmt.2025.3628798/figures/cand/p05_fig16.png
+  - references/tcpmt.2025.3628798/figures/cand/p06_tablei.png
+  - references/tcpmt.2025.3628798/figures/cand/p06_fig17.png
+  - references/tcpmt.2025.3628798/figures/cand/p06_fig18.png
+  - references/tcpmt.2025.3628798/figures/cand/p06_fig19.png
+  - references/tcpmt.2025.3628798/figures/cand/p07_fig20.png
+  - references/tcpmt.2025.3628798/figures/cand/p07_fig21.png
+  - references/tcpmt.2025.3628798/figures/cand/p07_fig22.png
+  - references/tcpmt.2025.3628798/figures/cand/p08_fig23.png
+  - references/tcpmt.2025.3628798/figures/cand/p08_fig26.png
+  - references/tcpmt.2025.3628798/figures/cand/p09_tableii.png
+  - references/tcpmt.2025.3628798/figures/cand/p09_fig28.png
+  - references/tcpmt.2025.3628798/figures/cand/p09_fig29.png
+  - references/tcpmt.2025.3628798/figures/cand/p10_fig31.png
+  - references/tcpmt.2025.3628798/figures/cand/p11_fig33.png
+  - references/tcpmt.2025.3628798/figures/cand/p11_fig34.png
+  - references/tcpmt.2025.3628798/figures/cand/p11_fig35.png
+figure_reading_method: >-
+  Candidate crops (all complete for the figures used). Bump and pad diameters from SEM panel titles of Figs. 10, 11,
+  16, 17 ("20um pitch (7um dia)" etc.). Fig. 13 bars read against 1 um gridlines (+/-0.1 um). Fig. 20 legend read
+  for pitches and daisy-chain bump counts; yields taken from the text, not read off the CDF plateaus.
+entries:
+  - {table: interconnects, row_id: tcpmt.2025.3628798-a-i1, field: pad_x_um, value: 16, unit: um, basis: design_target, locator: "p.4 Fig. 10", note: "landing pad diameter at 20 um pitch; 9/6/4 um at 10/7/5 um pitch"}
+  - {table: interconnects, row_id: tcpmt.2025.3628798-a-i1, field: diameter_um, value: 7, unit: um, basis: design_target, locator: "p.4 Fig. 11", note: "top solder bump diameter; 4/3/2 um at 10/7/5 um pitch"}
+derived:
+  - {table: interconnects, row_id: tcpmt.2025.3628798-a-i1, field: bonding_force_n, value: 39.2, formula: "4 kgf x 9.80665 N/kgf (unit conversion)", inputs: "p.6 Sec. IV.A"}
+  - {table: interconnects, row_id: tcpmt.2025.3628798-b-i1, field: bonding_force_n, value: 19.6, formula: "2 kgf x 9.80665 N/kgf (unit conversion)", inputs: "p.5 Sec. IV.A"}
+  - {table: components, row_id: tcpmt.2025.3628798-a-c2, field: x_mm, value: 30, formula: "3 cm x 10 (unit conversion)", inputs: "p.6 Fig. 19 caption"}
+  - {table: stack_layers, row_id: tcpmt.2025.3628798-a-L03, field: thickness_um, value: 0.16, formula: "TiW 0.01 + Cu 0.15", inputs: "p.3 Sec. III.A"}
+  - {table: process_steps, row_id: tcpmt.2025.3628798-F1-s10, field: time_s, value: 300, formula: "5 min x 60 (unit conversion)", inputs: "p.5 Sec. III.B"}
+  - {table: process_steps, row_id: tcpmt.2025.3628798-F3-s01, field: force_n, value: 39.23, formula: "4 kgf x 9.80665 N/kgf (unit conversion)", inputs: "p.6 Sec. IV.A"}
+  - {table: process_steps, row_id: tcpmt.2025.3628798-F5-s03, field: force_n, value: 19.61, formula: "2 kgf x 9.80665 N/kgf (unit conversion)", inputs: "p.5 Sec. IV.A"}
+conflicts:
+  - {table: stack_layers, row_id: tcpmt.2025.3628798-a-L04, field: thickness_um, values: [2, 0.5], locators: ["p.4 Sec. III.B", "p.5 Fig. 15"], chosen: 2, why: "text > schematic; Fig. 15 labels Ni 500 nm under Sn 4 um"}
+  - {table: metrics, row_id: tcpmt.2025.3628798-a-m11, field: value, values: [25, 28.3, 50], locators: ["p.3 Sec. II", "p.3 Fig. 6 (bottom bump)", "p.3 Fig. 6 (bottom UBM)"], chosen: 25, why: "text > schematic; Fig. 6 densities are for the bump-to-bump (28.3%) and bump-to-pad (50%) cases"}
+  - {table: metrics, row_id: tcpmt.2025.3628798-a-m4, field: value, values: [300, 450], locators: ["p.5 Sec. III.B (SEM, Fig. 17)", "p.5 Sec. III.B (AFM, Fig. 18)"], chosen: "both entered as separate rows", why: "different metrology"}
+  - {table: metrics, row_id: tcpmt.2025.3628798-a-m7, field: value, values: ["~6 um optical (Fig. 12)", "4.1-5.2 um SEM (Fig. 13)"], locators: ["p.4 Fig. 12", "p.4 Fig. 13"], chosen: "both entered", why: "different tools and samples"}
+  - {table: metrics, row_id: tcpmt.2025.3628798-d-m1, field: value, values: ["150 C onset (text)", "caption: reflow at 140 C; panels 140/160/180 C"], locators: ["p.10 Sec. V.C", "p.11 Fig. 33"], chosen: 150, why: "text statement of observed onset"}
+excluded:
+  - "3-D interconnect roadmap pitches (Fig. 2, ref [3]); industry D2W >= 20 um, W2W 200 nm R&D target; TSV 10x100, 5x50, 5x8 um (general/roadmap, not this TV)"
+  - "In-In 20 um pitch RT electrical yield 95% and 300-connection Kelvins/daisy chains (Fig. 35, attributed to ref [18]); conclusion's 100% yield for 20 um In bumps (conflicts with 95% and refers to the same data)"
+  - "Electroplated In superconducting Tc ~3 K (ref [18]); In plating process development (ref [17])"
+  - "In bonding ~170 C in air / 100 C with vacuum Ar milling, In melting point 156 C, InOx ~10 nm (general statements, not a reported bond)"
+  - "Qubit/interposer/CMOS 3-D stacks (Figs. 29-30): concept schematics without dimensions"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - die sizes and thicknesses (only 'full thickness'), landing coupon thickness
+  - polymer WLUF and CUF products, Tg, cure profiles; photo-patternable bake conditions
+  - bonding time, bonding pressure, CUF sample yield, n_samples for reliability, EM results (ongoing)
+  - In-In bonding temperature/force for the Fig. 34 samples
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F1, change: "tv_ids: 'tcpmt.2025.3628798-a' -> 'tcpmt.2025.3628798-a;tcpmt.2025.3628798-b'; level: 'ordered' -> 'full'; notes: '' -> 's01-s08 semiadditive Ni/Sn + Ni spacer bumping (a, b); s09-s12 WLUF CMP reveal only for a (deltas); F4 = photo-patternable alternative.'", reason: "top-wafer bumping (s01-s08) is shared by TV a (WLUF) and TV b (CUF, Sec. III.B first method); WLUF steps s09-s12 made a-deltas; level full (partial cure 150 C 5 min, thicknesses)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F1-s02, change: "target: '' -> 'solder bump diameter 7 / 4 / 3 / 2 um at 20 / 10 / 7 / 5 um pitch'; locator: 'p.4 Sec. III.B' -> 'p.4 Sec. III.B; p.4 Fig. 11'", reason: "stated top-bump diameters per pitch (Fig. 11 panel titles) on the patterning step"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F1-s04, change: "target: '' -> 'solder bump height 6 um (Ni 2 um + Sn 4 um)'; locator: 'p.3 Sec. III.A; p.4 Sec. III.B' -> 'p.3 Sec. III.A; p.4 Sec. III.B; p.5 Sec. III.B'", reason: "stated bump height target (p.5 Sec. III.B) on the plating step"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F1-s05, change: "step_basis: '' -> 'inferred_order'; notes: '' -> 'Same seed for two lithography + plating steps (Sec. III.B); solder-before-spacer order not stated.'", reason: "order of solder vs spacer lithography/plating not stated"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F1-s06, change: "target: '' -> 'spacer bump height 3 um'; step_basis: '' -> 'inferred_order'", reason: "stated spacer height as target; order not stated"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F1-s09, change: "tv_id: '' -> 'tcpmt.2025.3628798-a'", reason: "WLUF CMP-reveal route applies to TV a only (TV b is CUF without WLUF)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F1-s10, change: "tv_id: '' -> 'tcpmt.2025.3628798-a'", reason: "WLUF CMP-reveal route applies to TV a only (TV b is CUF without WLUF)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F1-s11, change: "tv_id: '' -> 'tcpmt.2025.3628798-a'", reason: "WLUF CMP-reveal route applies to TV a only (TV b is CUF without WLUF)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F1-s12, change: "tv_id: '' -> 'tcpmt.2025.3628798-a'", reason: "WLUF CMP-reveal route applies to TV a only (TV b is CUF without WLUF)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F1-s09, change: "conditions: '' -> 'coated 1 um thicker than bump height'; step: 'spin-coat non-photo-patternable polymer 1 um thicker than bump height' -> 'spin-coat non-photo-patternable polymer (WLUF)'", reason: "stated coating rule moved to conditions"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F2-s01, change: "seq: '13' -> '1'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F2-s02, change: "seq: '14' -> '2'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F2-s03, change: "seq: '15' -> '3'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F2-s04, change: "seq: '16' -> '4'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F2-s05, change: "seq: '17' -> '5'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F2-s06, change: "seq: '18' -> '6'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F2-s02, change: "target: '' -> 'pad diameter 16 / 9 / 6 / 4 um at 20 / 10 / 7 / 5 um pitch'; locator: 'p.3 Sec. III.A' -> 'p.3 Sec. III.A; p.4 Fig. 10'", reason: "stated landing-pad diameters per pitch (Fig. 10 panel titles) on the UBM lithography step"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F2-s03, change: "thickness_um: '1.8' -> ''; target: '' -> 'opening depth 1.8 um'; notes: 'Etch type not stated.' -> 'Etch type not stated; 1.8 um arrow from oxide top to opening floor (Fig. 9 step 2).'", reason: "Fig. 9 step 2 label 1.8 um marks the etched opening depth, not a result layer thickness"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F3-s01, change: "seq: '19' -> '1'; force_n: '' -> '39.23'; step_basis: '' -> 'stated_in_flow'", reason: "kgf -> N (x 9.80665) typed; seq restarted at 1"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F3, change: "notes: '' -> 'Bonds F1 top dies (WLUF) onto the F2 damascene landing wafer or 3x3 cm coupon.'", reason: "build-order note"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F4-s01, change: "seq: '20' -> '1'", reason: "seq restarted at 1 within this flow"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F4-s02, change: "seq: '21' -> '2'", reason: "seq restarted at 1 within this flow"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F4-s03, change: "seq: '22' -> '3'", reason: "seq restarted at 1 within this flow"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F4, change: "notes: '' -> 'Alternative WLUF route after F1 s01-s08 instead of F1 s09-s12; executed on wafers (Fig. 14).'", reason: "relation to F1 noted"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F5-s02, change: "step: 'metal oxide reduction split: flux dipping, wet passivation of landing wafer, or atmospheric plasma with reducing gas' -> 'metal oxide reduction before/during TCB'; split: '' -> 'flux dipping (in TCB tool) / wet passivation of landing wafer / atmospheric plasma with reducing gas'; step_basis: '' -> 'inferred_order'", reason: "oxide-reduction variants as split; order relative to dicing not stated"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F5-s03, change: "force_n: '' -> '19.61'", reason: "kgf -> N (x 9.80665) typed"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F5-s05, change: "step_basis: '' -> 'generic_description'", reason: "cure stated only in the generic CUF approach (Sec. I)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F5, change: "notes: '' -> 'Follows F1 s01-s08 (bumping without WLUF): dice, TCB, then CUF (Sec. III.B first method).'", reason: "relation to F1 noted"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F6-s04, change: "target: '' -> 'bump height 5 um; 20 um pitch TV'; locator: 'p.3 Sec. III.A' -> 'p.3 Sec. III.A; p.3 Fig. 7; p.3 Fig. 8'", reason: "stated plating height and TV pitch on the step"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F7-s01, change: "step_basis: '' -> 'generic_description'", reason: "qubit-first description (p.10 Sec. V.B) is generic"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F7-s06, change: "added (UBM deposition (qubit-first: after AlOx plasma clean))", reason: "p.10 Sec. V.B states plasma cleaning before UBM deposition and In plating on UBM"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F7-s02, change: "seq: '2' -> '3'; target: '' -> '20 / 10 / 7 / 5 um pitch'; conditions: '' -> '300 mm wafers'; locator: 'p.10 Sec. V.B' -> 'p.10 Sec. V.B; p.10 Fig. 31'; notes: '300 mm wafers; plating developed in ref [17].' -> 'Plating process developed in ref [17].'", reason: "seq shifted after added UBM step; stated pitches as target"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F7-s03, change: "seq: '3' -> '4'", reason: "seq shifted"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F7-s04, change: "seq: '4' -> '5'; conditions: 'temperature DOE 140/160/180 C (Fig. 33)' -> 'atmospheric Ar/H2 plasma in TCB tool'; split: '' -> 'plasma clean temperature 140 / 160 / 180 C (Fig. 33)'; atmosphere: '' -> 'other'", reason: "temperature DOE moved to split; plasma gas typed"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2025.3628798-F7-s05, change: "seq: '5' -> '6'; atmosphere: '' -> 'air'", reason: "bonding in air stated (p.11 Sec. V.C)"}

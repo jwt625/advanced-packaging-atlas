@@ -1,0 +1,41 @@
+paper_id: vlsitechnologyandcir65830.2026.11577374
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/vlsitechnologyandcir65830.2026.11577374/text.md
+  - references/vlsitechnologyandcir65830.2026.11577374/source.json
+  - references/vlsitechnologyandcir65830.2026.11577374/figures/page_02.png
+  - references/vlsitechnologyandcir65830.2026.11577374/figures/page_03.png
+  - references/vlsitechnologyandcir65830.2026.11577374/figures/candidates.json
+figure_reading_method: >-
+  Page renders; 350 dpi re-crops of Fig. 6 and Fig. 7 to read SEM labels (3um Si substrate, contact rings, TSV-1/2/3,
+  F2B/F2F). Fig. 4 dimension labels and Fig. 5 '300mm' wafer labels read from candidate crops and page render.
+entries:
+  - {table: interconnects, row_id: vlsitechnologyandcir65830.2026.11577374-a-i1, field: count, value: 13700, unit: ea, basis: design_target, locator: "p.1 text; p.2 Fig. 4", note: "'13.7Kea' per layer"}
+  - {table: interconnects, row_id: vlsitechnologyandcir65830.2026.11577374-a-i1, field: notes, value: "TSV-1 DRAM1-2, TSV-2 DRAM3-5, TSV-3 DRAM6-8", basis: measured, locator: "p.3 Fig. 7; p.3 Fig. 12", note: "dashed set boundaries and Fig. 12 '2/3/3 DRAM stack' labels"}
+  - {table: test_vehicles, row_id: vlsitechnologyandcir65830.2026.11577374-a, field: carrier_size_mm, value: 300, unit: mm, basis: stated, locator: "p.2 Fig. 5", note: "CSAM wafer-map labels '300mm'"}
+  - {table: components, row_id: vlsitechnologyandcir65830.2026.11577374-a-c1, field: x_mm, value: 11.1, unit: mm, basis: design_target, locator: "p.2 Fig. 4", note: "layout width 11.1 mm, height 15.4 mm; text '15.4x11.1 mm2'"}
+derived: []
+conflicts:
+  - {table: papers, row_id: vlsitechnologyandcir65830.2026.11577374, field: notes, values: ["title: 9-layer / 9 wafers", "abstract: 8-stacked cube", "Fig. 7: 1+8 Logic/DRAM"], locators: ["p.1 title", "p.1 Abstract", "p.3 Fig. 7"], chosen: "1 logic + 8 DRAM = 9 wafers", why: "consistent once logic wafer counted"}
+  - {table: interconnects, row_id: vlsitechnologyandcir65830.2026.11577374-a-i1, field: notes, values: ["text: via-in-one TSV etch through all the wafer layers", "Fig. 7/12: three TSV segments through 2-3 DRAMs; full 8-DRAM via stated as ultimate goal"], locators: ["p.1 Sec. Design and Structure", "p.3 Fig. 7; p.3 Fig. 12"], chosen: "segmented (Fig. 7/12)", why: "measured cross-section"}
+excluded:
+  - "CoW microbump HBM and WoW hybrid-bond HBM of refs [2]-[5] (context only)"
+not_reported:
+  - optical_interfaces
+  - "fusion bonding conditions (temperature, anneal, alignment), bonding tool"
+  - "TSV diameter, depth, aspect ratio, metallurgy and liner; absolute resistance values (normalized only)"
+  - "logic wafer thickness, DRAM BEoL thickness, oxide thickness; pad-out metallurgy"
+  - "EM stress temperature/current; TC condition details beyond 'TC-C1000'; sample counts"
+  - "measured data rate or energy (0.7 pJ/bit, 0.25 Tb/s/mm2, 0.35 W/mm2 are abstract claims)"
+source_quality:
+  - "Clean text layer; candidates are full grid cells and contain each whole figure."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir65830.2026.11577374-F1", change: "step_basis stated_in_flow (s04 inferred_order)", reason: "order from Fig. 2 and p.1 text"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir65830.2026.11577374-F1-s01", change: "target 'oxide trench 85x10 um2'", reason: "p.2 Fig. 6 caption"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir65830.2026.11577374-F1-s02", change: "step notes F2F", reason: "p.2 Fig. 6 interface labels"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir65830.2026.11577374-F1-s04", change: "kept as inline_inspection (CSAM during stacking); position inferred", reason: "p.2 Fig. 5 'CSAM check during 9-layer stacking process'"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir65830.2026.11577374-F1-s05", change: "thickness_um 3 (approx) per DRAM tier; up to 1+8 stack", reason: "p.1 Sec. Design and Structure; p.3 Fig. 7"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir65830.2026.11577374-F1-s06", change: "target 'TSV pitch <20 um'; conditions 13.7K TSVs per layer", reason: "p.1 Sec. Experimental and Reliability Results"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir65830.2026.11577374-F1-s01", change: "category 'other' kept; notes added", reason: "p.1 Sec. Design and Structure / Exp. Results state only 'DRAM wafer with oxide trench (Flatness < 10nm)'; no etch, fill or CMP stated"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir65830.2026.11577374-F1-s07", change: "category 'other' -> 'rdl_layer'", reason: "p.1 Sec. Design and Structure: 'Backside interconnection are formed for pad-out at final' (backside routing/pad metal)"}

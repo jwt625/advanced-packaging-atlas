@@ -1,0 +1,36 @@
+paper_id: iedm50572.2025.11353491
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/iedm50572.2025.11353491/text.md
+  - references/iedm50572.2025.11353491/TEXT_LAYER_WARNING.md
+  - references/iedm50572.2025.11353491/figures/page_01_220dpi.png
+  - references/iedm50572.2025.11353491/figures/page_02_220dpi.png
+  - references/iedm50572.2025.11353491/figures/page_03_220dpi.png
+  - references/iedm50572.2025.11353491/figures/page_04_220dpi.png
+figure_reading_method: >-
+  OCR text; every number (<1.2-2.0 dB, 12 channels, 24/200 h, 150 C/1000 h, 260 C) checked against 150 dpi re-crops
+  of p.1-2 text columns. No candidates.json entries; all key figures cropped manually from page grids and viewed.
+entries:
+  - {table: optical_interfaces, row_id: iedm50572.2025.11353491-a-o1, field: coupling_loss_db, value: 2.0, unit: dB, basis: measured, locator: "p.1 Abstract; p.2 Sec. III", note: "range <1.2 to 2.0 dB; upper bound entered with qualifier le"}
+derived: []
+conflicts:
+  - {table: optical_interfaces, row_id: iedm50572.2025.11353491-a-o1, field: coupling_loss_db, values: ["text: <1.2 to 2.0 dB PIC-PWG-SMF", "Fig. 7 (reprinted [6]): IL per facet ~2-3.5 dB over 1260-1360 nm"], locators: ["p.2 Sec. III", "p.3 Fig. 7"], chosen: "text range", why: "Fig. 7 is reprinted from cited work and its scope (per facet, which structure) differs; not entered"}
+excluded:
+  - "Fig. 7 insertion-loss spectra (reprinted from ref [6], text attributes to ref [7]); only the paper's own summary range entered"
+  - "Fig. 1 photos reprinted from ref [2] (used for TV identification only)"
+not_reported:
+  - electrical_interfaces
+  - package, substrate, die, PWG and ferrule dimensions; substrate layer count
+  - PWG material, core size, mode-field diameter, waveguide pitch, wavelength (text)
+  - optical adhesive product; bonding/curing conditions; solder/bump details
+  - T&H conditions; absolute peel and pull strengths; sample counts
+  - FEM material properties and stress values (unlabelled color scale)
+  - "process_steps: iedm50572.2025.11353491-e (peel coupon; only 'PWG bonded with optical adhesive on Si substrate' shown, no sequence or conditions)"
+  - "process_steps: iedm50572.2025.11353491-f (pull-test sample construction not described)"
+source_quality:
+  - "Garbled PDF text layer; text.md is tesseract OCR. Figure labels in OCR are scrambled; read from 220 dpi renders."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "iedm50572.2025.11353491-F2", change: "tv_ids b -> b;c; step_basis stated_in_flow", reason: "p.2 Sec. V: 3-port cut-out package demonstrates the optics-last assembly"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm50572.2025.11353491-F1", change: "step_basis stated_in_flow", reason: "p.1 Sec. II"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm50572.2025.11353491-F2-s01", change: "note: joining method not named; 260 C peak not typed", reason: "p.2 Sec. IV statement is generic FEM condition"}

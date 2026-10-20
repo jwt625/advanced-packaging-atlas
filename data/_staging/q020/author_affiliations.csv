@@ -1,0 +1,49 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc51687.2025.00052-a01-1,ectc51687.2025.00052,1,John U. Knickerbocker,1,primary,IBM,IBM Research,"Yorktown Heights, NY",US,,paper,p.1 affiliations
+ectc51687.2025.00052-a02-1,ectc51687.2025.00052,2,Jean Benoit Herou,1,primary,IBM,IBM Infrastructure,"Bromont, Quebec",CA,,paper,p.1 affiliations
+ectc51687.2025.00052-a03-1,ectc51687.2025.00052,3,Adrian Paz Ramos,1,primary,IBM,IBM Infrastructure,"Bromont, Quebec",CA,,paper,p.1 affiliations
+ectc51687.2025.00052-a04-1,ectc51687.2025.00052,4,Hsianghan Hsu,1,primary,IBM,IBM Research,"Albany, NY",US,,paper,p.1 affiliations
+ectc51687.2025.00052-a05-1,ectc51687.2025.00052,5,Neng Liu,1,primary,IBM,IBM Research,"Albany, NY",US,,paper,p.1 affiliations
+ectc51687.2025.00052-a06-1,ectc51687.2025.00052,6,Yoichi Taira,1,primary,IBM,IBM Research,Kawasaki,JP,,paper,p.1 affiliations
+ectc51687.2025.00052-a07-1,ectc51687.2025.00052,7,Chinami Marushima,1,primary,IBM,IBM Research,Kawasaki,JP,,paper,p.1 affiliations
+ectc51687.2025.00052-a08-1,ectc51687.2025.00052,8,Sayuri Kohara,1,primary,IBM,IBM Research,Kawasaki,JP,,paper,p.1 affiliations
+ectc51687.2025.00052-a09-1,ectc51687.2025.00052,9,Hiroki Mori,1,primary,IBM,IBM Research,Kawasaki,JP,,paper,p.1 affiliations
+ectc51687.2025.00052-a10-1,ectc51687.2025.00052,10,Mark Schultz,1,primary,IBM,IBM Research,"Yorktown Heights, NY",US,,paper,p.1 affiliations
+ectc51687.2025.00052-a11-1,ectc51687.2025.00052,11,Akihiro Horibe,1,primary,IBM,IBM Research,Kawasaki,JP,,paper,p.1 affiliations
+ectc51687.2025.00052-a12-1,ectc51687.2025.00052,12,Hidetoshi Numata,1,primary,IBM,IBM Research,Kawasaki,JP,,paper,p.1 affiliations
+ectc51906.2022.00181-a01-1,ectc51906.2022.00181,1,Jay Li,1,primary,SPIL,,Taichung,TW,,paper,p.1 affiliations
+ectc51906.2022.00181-a02-1,ectc51906.2022.00181,2,Wei Jhen Chen,1,primary,SPIL,,Taichung,TW,,paper,p.1 affiliations
+ectc51906.2022.00181-a03-1,ectc51906.2022.00181,3,Joe Lin,1,primary,SPIL,,Taichung,TW,,paper,p.1 affiliations
+ectc51906.2022.00181-a04-1,ectc51906.2022.00181,4,Mu Hsuan Chan,1,primary,SPIL,,Taichung,TW,,paper,p.1 affiliations
+ectc51906.2022.00181-a05-1,ectc51906.2022.00181,5,Tank Lo,1,primary,SPIL,,Taichung,TW,,paper,p.1 affiliations
+ectc51906.2022.00181-a06-1,ectc51906.2022.00181,6,Bruce Xu,1,primary,SPIL,,Taichung,TW,,paper,p.1 affiliations
+ectc51906.2022.00181-a07-1,ectc51906.2022.00181,7,Liang Yih Hung,1,primary,SPIL,,Taichung,TW,,paper,p.1 affiliations
+ectc51906.2022.00181-a08-1,ectc51906.2022.00181,8,Nicholas Kao,1,primary,SPIL,,Taichung,TW,,paper,p.1 affiliations
+ectc51906.2022.00181-a09-1,ectc51906.2022.00181,9,Don Son Jiang,1,primary,SPIL,,Taichung,TW,,paper,p.1 affiliations
+ectc51906.2022.00181-a10-1,ectc51906.2022.00181,10,Yu-Po Wang,1,primary,SPIL,,Taichung,TW,,paper,p.1 affiliations
+ectc51909.2023.00230-a01-1,ectc51909.2023.00230,1,Bogdan Sirbu,1,primary,Fraunhofer IZM,,Berlin,DE,,paper,p.1 affiliations
+ectc51909.2023.00230-a02-1,ectc51909.2023.00230,2,Kai Zoschke,1,primary,Fraunhofer IZM,,Berlin,DE,,paper,p.1 affiliations
+ectc51909.2023.00230-a03-1,ectc51909.2023.00230,3,Stéphane Bernabé,1,primary,CEA-Leti,,Grenoble,FR,,paper,p.1 affiliations
+ectc51909.2023.00230-a04-1,ectc51909.2023.00230,4,Quentin Wilmart,1,primary,CEA-Leti,,Grenoble,FR,,paper,p.1 affiliations
+ectc51909.2023.00230-a05-1,ectc51909.2023.00230,5,Tolga Tekin,1,primary,Fraunhofer IZM,,Berlin,DE,,paper,p.1 affiliations
+estc60143.2024.10712070-a01-1,estc60143.2024.10712070,1,Adil Shehzad,1,primary,Fraunhofer IZM,IZM-ASSID,Dresden,DE,author grid; order row-major per page render (text layer column-major),paper,p.1 affiliations
+estc60143.2024.10712070-a02-1,estc60143.2024.10712070,2,Maksym Myndyk,1,primary,Fraunhofer IZM,IZM-ASSID,Dresden,DE,author grid; order row-major per page render (text layer column-major),paper,p.1 affiliations
+estc60143.2024.10712070-a03-1,estc60143.2024.10712070,3,Manuela Junghaehnel,1,primary,Fraunhofer IZM,IZM-ASSID,Dresden,DE,author grid; order row-major per page render (text layer column-major),paper,p.1 affiliations
+estc60143.2024.10712070-a04-1,estc60143.2024.10712070,4,Juliana Panchenko,1,primary,Fraunhofer IZM,IZM-ASSID,Dresden,DE,author grid; order row-major per page render (text layer column-major),paper,p.1 affiliations
+estc60143.2024.10712070-a04-2,estc60143.2024.10712070,4,Juliana Panchenko,2,additional,Technische Universität Dresden,Institute of Electronic Packaging Technology,Dresden,DE,printed: Technische Universitaet Dresden,paper,p.1 affiliations
+tcpmt.2025.3628798-a01-1,tcpmt.2025.3628798,1,Jaber Derakhshandeh,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a02-1,tcpmt.2025.3628798,2,Eric Beyne,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a03-1,tcpmt.2025.3628798,3,Tom Cochet,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a04-1,tcpmt.2025.3628798,4,Vladimir Cherman,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a05-1,tcpmt.2025.3628798,5,Anish Dangol,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a06-1,tcpmt.2025.3628798,6,Dieter H. Cuypers,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a07-1,tcpmt.2025.3628798,7,Aldrin Vaquilar,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a08-1,tcpmt.2025.3628798,8,Jens Rip,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a09-1,tcpmt.2025.3628798,9,John Slabbekoorn,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a10-1,tcpmt.2025.3628798,10,Akito Hiro,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a11-1,tcpmt.2025.3628798,11,Prathamesh Dhakras,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a12-1,tcpmt.2025.3628798,12,Karl Ceulemans,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a13-1,tcpmt.2025.3628798,13,Tassawar Hussain,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a13-2,tcpmt.2025.3628798,13,Tassawar Hussain,2,additional,KU Leuven,,Leuven,BE,joint Ph.D. student with KU Leuven and IMEC per biography,paper,p.13 biography
+tcpmt.2025.3628798-a14-1,tcpmt.2025.3628798,14,Samuel Suhard,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote
+tcpmt.2025.3628798-a15-1,tcpmt.2025.3628798,15,Gerald Beyer,1,primary,imec,,Leuven,BE,printed: IMEC,paper,p.1 footnote

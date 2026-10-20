@@ -40,3 +40,21 @@ not_reported:
   - sample counts for reliability; Temperature Cycling B temperature range
 source_quality:
   - "Fig. 7 and Fig. 9 candidates are labelled (a) but their bboxes cover all panels; used as-is."
+revisions:
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-h, change: "overrides += package_x_mm, package_y_mm, reticle_multiple, n_dies, n_hbm :design_target", reason: "numeric cells under row basis stated (x2B defect 3); evidence entry already design_target"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-i, change: "overrides += reticle_multiple:design_target; n_dies:design_target", reason: "numeric cells under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-j, change: "overrides += reticle_multiple:design_target", reason: "numeric cell under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-k, change: "overrides += reticle_multiple:design_target", reason: "numeric cell under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-a, change: "overrides += n_dies:design_target", reason: "same fix applied to the other numeric TV cells under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-f, change: "overrides += n_dies:design_target", reason: "same fix applied to the other numeric TV cells under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-g, change: "overrides += n_dies:design_target", reason: "same fix applied to the other numeric TV cells under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-a-c1, change: "overrides += count:design_target", reason: "same fix applied to numeric component counts under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-f-c1, change: "overrides += count:design_target", reason: "same fix applied to numeric component counts under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-g-c1, change: "overrides += count:design_target", reason: "same fix applied to numeric component counts under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-h-c1, change: "overrides += count:design_target", reason: "same fix applied to numeric component counts under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-i-c1, change: "overrides += count:design_target", reason: "same fix applied to numeric component counts under basis stated (x2B defect 3)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51846.2026.00365-g-m1, change: "qualifiers value:le -> empty", reason: "redundant with statistic max; d6 = 3.4 mm in p.4 Fig. 6(a) is the measured maximum (x2B section 3)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00365-figures, change: "re-ranked: Fig. 9 f05 -> f03, Fig. 6 f04 -> f05, Table I f03 -> f09; f01, f02, f06 unchanged", reason: "images before tables (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00365-f04, change: "added Fig. 8 (package_photo, candidate)", reason: "top view and CSAM of TV i; source of i-m1"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00365-f07, change: "added Fig. 4 (package_photo, candidate)", reason: "flow-test package images of TV d; source of d-m1"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00365-f08, change: "added Fig. 5 (package_photo, candidate)", reason: "voiding image of TV f; source of f-m1"}

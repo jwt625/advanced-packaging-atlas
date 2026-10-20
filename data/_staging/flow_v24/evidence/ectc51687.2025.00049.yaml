@@ -1,0 +1,41 @@
+paper_id: ectc51687.2025.00049
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00049/text.md
+  - references/ectc51687.2025.00049/source.json
+  - references/ectc51687.2025.00049/figures/page_02.png
+  - references/ectc51687.2025.00049/figures/page_03.png
+  - references/ectc51687.2025.00049/figures/page_04.png
+  - references/ectc51687.2025.00049/figures/page_05.png
+  - references/ectc51687.2025.00049/figures/page_06.png
+  - references/ectc51687.2025.00049/figures/page_07.png
+figure_reading_method: >-
+  Page renders plus 300-400 dpi re-crops of Fig. 2, 3, 6(e-f), 13, 15(c), 17(c), 18(d), 19(e). Relative FEM bars read
+  against gridlines (+/-0.02). Table I and Table II read from text and candidate crops.
+entries:
+  - {table: interconnects, row_id: ectc51687.2025.00049-a-i2, field: total_length_um, value: 25, unit: um, basis: design_target, locator: "p.2 Sec. II.B", note: "bridge bottom to substrate distance dictated by application"}
+  - {table: interconnects, row_id: ectc51687.2025.00049-a-i2, field: alignment_um, value: 2, unit: um, basis: measured, locator: "p.5 Sec. III.B", note: "lateral misalignment below 2 um in all instances (1-4 pillars per corner)"}
+  - {table: metrics, row_id: ectc51687.2025.00049-a-m4, field: value, value: 225, unit: um, basis: measured, locator: "p.5 Fig. 13", note: "plateau of profilometer trace; inset schematic labels 225 um"}
+derived:
+  - {table: test_vehicles, row_id: ectc51687.2025.00049-c, field: n_dies, value: 3, formula: "2 Si chips + 1 Si bridge", inputs: "p.3 Sec. II.D"}
+  - {table: test_vehicles, row_id: ectc51687.2025.00049-d, field: n_dies, value: 3, formula: "2 Si chips + 1 Si bridge", inputs: "p.3 Sec. II.D"}
+  - {table: metrics, row_id: ectc51687.2025.00049-b-m7, field: value, value: 37.5, formula: "paper's own: 30 um offset / 80 um pillar", inputs: "p.5 Sec. III.C"}
+  - {table: metrics, row_id: ectc51687.2025.00049-b-m8, field: value, value: 25, formula: "paper's own: 20 um offset / 80 um pillar ('at least 25%')", inputs: "p.7 Sec. IV"}
+conflicts:
+  - {table: stack_layers, row_id: ectc51687.2025.00049-c-L05, field: material, values: ["underfill + solder joints composite (text)", "C4/underfill (Fig. 6(f) label)"], locators: ["p.4 Sec. II.D", "p.3 Fig. 6(f)"], chosen: "text", why: "text explicitly defines layer under bridge per configuration"}
+excluded:
+  - "Generic Si bridge solutions EMIB, EFB, DBHi of refs [6]-[8]"
+  - "37.5% offset 'approaching the physical limit of capillary forces' per ref [12] (only the paper's own ratio entered)"
+  - "Fig. 8 force vs initial solder thickness curves (no values stated in text; trend only)"
+  - "Fig. 16 bridge z-displacement curves (text: almost identical; not entered)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "bridge, chip, substrate and package dimensions and thicknesses"
+  - "reflow temperature profile, tacking agent product, CR200 thickness, TiW/Cu seed thickness"
+  - "number of bridges assembled for the corner-pillar tests"
+  - "FEM model dimensions, bump pitches, material property values; absolute stress/warpage values (relative only)"
+  - "reliability testing (stated as future work)"
+source_quality:
+  - "Clean text layer. Candidate crops for Fig. 2, 3, 13, 17 clip bottom labels; Fig. 10 candidate has blank margin but holds the full figure."

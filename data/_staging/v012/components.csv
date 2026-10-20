@@ -1,0 +1,56 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00050-a-c1,ectc51846.2026.00050-a,unspecified,,,main chip,2,19,19,,,,,,,,,design_target,figure_image,,p.4 Fig. 12(a); p.4 Table 1,,Chip function not stated; with 150 um-pitch Cu pillar bumps.
+ectc51846.2026.00050-a-c2,ectc51846.2026.00050-a,bridge,,,Si bridge chip,1,3.35,2.5,60,,,,,,Si,,design_target,figure_image,thickness_um:measured,p.4 Fig. 12(a); p.4 Fig. 13,,60 um thickness also labelled on cross-section (Fig. 13).
+ectc51846.2026.00050-a-c3,ectc51846.2026.00050-a,substrate,,,organic laminate substrate,1,68.5,68.5,2000,,,,,,,,design_target,figure_image,,p.4 Fig. 12(a); p.4 Fig. 13,,Layer count and core not stated; no Cu wire in build-up under bridge in this TV.
+ectc51846.2026.00050-a-c4,ectc51846.2026.00050-a,adhesive,,,die-edge glue,1,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 1,,Dispensed with standard underfill dispensing tools; product not stated.
+ectc51846.2026.00050-a-c5,ectc51846.2026.00050-a,underfill,,,underfill,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,Final underfill and cure; product not stated.
+ectc51846.2026.00050-b-c1,ectc51846.2026.00050-b,bridge,,,Si bridge with 75 um-pitch micro bumps,1,,,,,,,,,Si,,stated,caption,,p.4 Fig. 11,,
+ectc51846.2026.00050-b-c2,ectc51846.2026.00050-b,adhesive,,,die-edge glue,1,,,,,,,,,,,stated,text,,p.4 Sec. II.B,,
+ectc51846.2026.00050-c-c1,ectc51846.2026.00050-c,bridge,,,Si bridge with 75 um-pitch micro bumps,1,,,,,,,,,Si,,stated,caption,,p.4 Fig. 11,,
+ectc51846.2026.00050-c-c2,ectc51846.2026.00050-c,underfill,,,underfill in uC4 (bridge) area,1,,,,,,,,,,,stated,schematic,,p.3 Fig. 4; p.2 Sec. II.A,,
+ectc51846.2026.00050-d-c1,ectc51846.2026.00050-d,unspecified,,,edge-glued chips (bending beam),,,,725,,,,,,,,design_target,schematic,,p.3 Fig. 5(a),,0.725 mm sample thickness label; chip count and size not stated.
+ectc51846.2026.00050-d-c2,ectc51846.2026.00050-d,adhesive,,,die-edge glue,1,,,,,,,,,,,stated,text,,p.2 Sec. II.A,,
+ectc51846.2026.00050-e-c1,ectc51846.2026.00050-e,bridge,,,Si bridge chip with dual-side solder bumps (TSV omitted),1,,,,,,,,,Si,"JCU (micro bump plating, ack); 3M Japan (thin wafer support system, ack)",stated,caption,,p.4 Fig. 14,,
+ectc51846.2026.00050-h-c1,ectc51846.2026.00050-h,unspecified,,,main chip,4,19,19,,,,,,,,,design_target,caption,,p.3 Fig. 7,,
+ectc51846.2026.00050-h-c2,ectc51846.2026.00050-h,bridge,,,bridge die,4,,,,,,,,,,,stated,caption,,p.3 Fig. 7,,
+ectc51846.2026.00050-i-c1,ectc51846.2026.00050-i,adhesive,,,die-edge glue,1,,,,,,,25,,,,measured,figure_image,,p.3 Fig. 9; p.2 Sec. II.A,,gap_um = narrowest chip clearance shown (Fig. 9); supported range 25-450 um (text).
+ectc51846.2026.00050-i-c2,ectc51846.2026.00050-i,mold,,,epoxy mold resin die edge (molded die),,,,,,,,,,,,stated,figure_image,,p.3 Fig. 10,,Mold-edged die next to Si die; stacked-memory-like edge.
+ectc51846.2026.00050-j-c1,ectc51846.2026.00050-j,pic,,,EIC/PIC with polymer waveguide (PWG),,,,,,,,,,,,stated,schematic,,p.5 Fig. 17; p.5 Fig. 18(b),,
+ectc51846.2026.00050-j-c2,ectc51846.2026.00050-j,other,,,single-mode polymer waveguide (PWG),,,,,,,,,,,,stated,text,,p.5 Sec. II.E,,
+ectc51846.2026.00019-a-c1,ectc51846.2026.00019-a,laser,,,"EML (DFB-LD + EAM + spot-size converter), flip-chip electrodes",1,,,,,,,,,,,stated,text,,p.4 Sec. III.B; p.4 Fig. 6(a),,Anode/cathode for DFB-LD and EAM on chip surface.
+ectc51846.2026.00019-a-c2,ectc51846.2026.00019-a,interposer,,,Glass-IP with TGVs; DFB-LD drive wiring on surface,1,,,,,,,,,glass,,stated,text,,p.4 Sec. III.B; p.4 Fig. 6,,
+ectc51846.2026.00019-a-c3,ectc51846.2026.00019-a,substrate,,,package substrate with straight HF transmission lines,1,,,,,,,,,,,stated,text,,p.4 Sec. III.B; p.4 Fig. 6(b),,Pad larger than designed caused ~60 GHz dip.
+ectc51846.2026.00019-a-c4,ectc51846.2026.00019-a,other,,,termination chip resistors on substrate backside,,,,,,,,,,,,stated,text,,p.4 Sec. III.B; p.4 Fig. 6(b),,Mounted with AuSn solder; count and value not stated.
+ectc51846.2026.00019-b-c1,ectc51846.2026.00019-b,laser,,,"EML (Tx), flip-chip",,,,90,,,,,,,,design_target,schematic,,p.3 Fig. 3; p.2 Fig. 1,,90 um is the EML height label in the simulation schematic.
+ectc51846.2026.00019-b-c2,ectc51846.2026.00019-b,other,,,"surface-illuminated photodetector (Rx), flip-chip",,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Fig. 1,,
+ectc51846.2026.00019-b-c3,ectc51846.2026.00019-b,eic,,yes,"driver (DRV) EIC, backside of Glass-IP",,,,,,,,,,,,stated,schematic,,p.2 Fig. 1; p.2 Sec. II.B,,Shown inside the mold layer under the Glass-IP.
+ectc51846.2026.00019-b-c4,ectc51846.2026.00019-b,eic,,yes,"TIA EIC, backside of Glass-IP",,,,,,,,,,,,stated,schematic,,p.2 Fig. 1; p.2 Sec. II.B,,
+ectc51846.2026.00019-b-c5,ectc51846.2026.00019-b,interposer,,,"Glass-IP with RDLs, TGVs and thermal vias",,,,,,,,,,glass,,stated,text,,p.2 Sec. II; p.2 Sec. II.C,,
+ectc51846.2026.00019-b-c6,ectc51846.2026.00019-b,other,,,45 deg micro-prism mirror (passive image-recognition placement),,,,,,,,,,,,design_target,schematic,,p.3 Fig. 3; p.2 Sec. II.A,,
+ectc51846.2026.00019-b-c7,ectc51846.2026.00019-b,lens,,,micro-lens array (collimating; actively aligned),,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 2,,
+ectc51846.2026.00019-b-c8,ectc51846.2026.00019-b,connector,,,"detachable fiber connector with mirror + focusing lens, mating molded receptacle plate",,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 2,,
+ectc51846.2026.00019-b-c9,ectc51846.2026.00019-b,mold,,,mold (backside EIC layer; optical-path shielding),,,,,,,,,,,,stated,mixed,,p.2 Fig. 1; p.2 Sec. II.A,,
+ectc51846.2026.00019-b-c10,ectc51846.2026.00019-b,other,,,heat-transfer block (HTB),,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. II.C,,
+ectc51846.2026.00019-b-c11,ectc51846.2026.00019-b,heat_spreader,,,heat spreader,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. II.C,,
+ectc51846.2026.00019-b-c12,ectc51846.2026.00019-b,substrate,,,package substrate (high-density),,,,,,,,,,,,stated,schematic,,p.2 Fig. 1; p.2 Sec. II.B,,
+ectc51846.2026.00024-a-c1,ectc51846.2026.00024-a,dummy_die,yes,,top chip with 3 um Cu/dielectric bond pads,,,,,,,,,,Si with fine-grained ECP Cu pads,,stated,text,,p.5 Sec. III.B.2,,"Chip size, thickness, count not stated."
+ectc51846.2026.00024-a-c2,ectc51846.2026.00024-a,other,,,300 mm target wafer with 3 um Cu/dielectric bond pads,1,,,,,,,,,Si,,stated,text,,p.2 Sec. II.B,,
+ectc51846.2026.00024-b-c1,ectc51846.2026.00024-b,other,,,300 mm Si bonding wafer with damascene Cu/dielectric pads,2,,,,,,,,,Si,,design_target,text,,p.2 Sec. II.B; p.5 Fig. 7,,
+ectc51846.2026.00051-a-c1,ectc51846.2026.00051-a,bridge,,yes,EMIB-T embedded Si bridge with TSVs,,,,50,,,,,,Si,,stated,text,thickness_um:design_target,p.1 Sec. I; p.2 Fig. 1(b),thickness_um:approx,~50 um thickness stated for EMIB bridges generally (Sec. I); count and size not given for this TV.
+ectc51846.2026.00051-a-c2,ectc51846.2026.00051-a,unspecified,,,top dies (2x reticle Si content),,,,,,,,,,,,stated,caption,,p.3 Fig. 3 caption; p.2 Sec. II.A.i,,Die count and sizes not stated.
+ectc51846.2026.00051-a-c3,ectc51846.2026.00051-a,substrate,,,organic package substrate (EMIB),,,,,,,,,,,,stated,text,,p.1 Sec. I,,Layer count and size not stated.
+ectc51846.2026.00051-b-c1,ectc51846.2026.00051-b,bridge,,yes,EMIB-T bridge with TSVs,1,3,18,50,,,,,,Si,,design_target,text,,p.3 Sec. II.A.ii; p.3 Fig. 4(b); p.1 Sec. I,thickness_um:approx,Attached to bump pattern in substrate cavity (TCB). Thickness: generic EMIB ~50 um (Sec. I).
+ectc51846.2026.00051-b-c2,ectc51846.2026.00051-b,unspecified,,,1x reticle top dies,2,,,,,,,,,,,design_target,text,,p.3 Sec. II.A.ii,,Die function not stated.
+ectc51846.2026.00051-b-c3,ectc51846.2026.00051-b,substrate,,,organic package substrate with bridge cavity,,,,,,,,,,,,stated,caption,,p.3 Fig. 4(a)-(b),,Size and layer count not stated.
+ectc51846.2026.00051-c-c1,ectc51846.2026.00051-c,substrate,,,quarter-panel EMIB-T package substrate,1,240,240,,,,,,,,,design_target,schematic,,p.4 Fig. 6; p.3 Sec. II.B,,Fig. 6 shows arrays of die sites; bridge count not stated.
+ectc51846.2026.00051-d-c1,ectc51846.2026.00051-d,bridge,,yes,EMIB-T bridge die with TSV arrays and on-bridge MIM capacitors,,,,,,,,,,Si,,design_target,text,,p.5 Sec. III.B; p.5 Fig. 9,,MIM 500 nF/mm2 between Metal 1 and Metal 2.
+ectc51846.2026.00051-d-c2,ectc51846.2026.00051-d,hbm,,,HBM4e (HBM4E DRAM),,,,,,,,,,,,stated,text,,p.4 Sec. III.A; p.5 Fig. 10,,Modeled interface/PDN only.
+ectc51846.2026.00051-d-c3,ectc51846.2026.00051-d,capacitor,,,on-bridge MIM capacitor,,,,,,,,,,,,design_target,text,,p.5 Sec. III.B; p.5 Fig. 9,,500 nF/mm2; see metrics.
+ectc51846.2026.00062-a-c1,ectc51846.2026.00062-a,dummy_die,yes,,"3D die 5x5 mm (front pillars, backside pads)",,5,5,525,,,,,,,,design_target,text,,p.2 Sec. II; p.2 Sec. II.A; p.4 Fig. 8(a),,"~250,000 pillars per die; up to triple stacked on twelve peripheral Si-IF sites. Passive, no TSVs; thickness approximately 525 um."
+ectc51846.2026.00062-a-c2,ectc51846.2026.00062-a,dummy_die,yes,,"3D die 10x10 mm (front pillars, backside pads)",,10,10,525,,,,,,,,design_target,text,,p.2 Sec. II; p.2 Sec. II.A; p.4 Fig. 8(a),,"~1,000,000 pillars per die; double stacked on central Si-IF site."
+ectc51846.2026.00062-a-c3,ectc51846.2026.00062-a,substrate,,,Si-IF base substrate,,,,,,,,,,Si (Silicon-Interconnect Fabric),,stated,text,,p.4 Sec. III.B; p.4 Fig. 8(a),,Central 10x10 mm site plus twelve 5x5 mm peripheral sites.
+ectc51846.2026.00062-b-c1,ectc51846.2026.00062-b,dummy_die,yes,,10x10 mm 3D die,,10,10,525,,,,,,,,design_target,text,,p.3 Sec. III.A; p.2 Sec. II,,
+ectc51846.2026.00062-b-c2,ectc51846.2026.00062-b,substrate,,,blanket copper substrate,,,,,,,,,,Cu (blanket),,stated,text,,p.3 Sec. III.A,,
+ectc51846.2026.00062-c-c1,ectc51846.2026.00062-c,dummy_die,yes,,2D die (front pads + pillars),1,2,2,525,,,,,,,,design_target,mixed,,p.3 Sec. II.B; p.3 Fig. 4,,21 probe-able daisy chains of 90 pillars.
+ectc51846.2026.00062-c-c2,ectc51846.2026.00062-c,dummy_die,yes,,3D die (pads + pillars both sides),1,3,3,525,,,,,,,,design_target,mixed,,p.3 Sec. II.B; p.3 Fig. 4; p.5 Sec. IV.A,,33 probe-able daisy chains of 140 pillars; backside probe pads 60x60 um.
+ectc51846.2026.00062-c-c3,ectc51846.2026.00062-c,substrate,,,Si-IF base substrate,,,,525,,,,,,Si (Silicon-Interconnect Fabric),,design_target,schematic,,p.3 Fig. 4; p.3 Sec. II.B,,Probe pads 60x60 um.

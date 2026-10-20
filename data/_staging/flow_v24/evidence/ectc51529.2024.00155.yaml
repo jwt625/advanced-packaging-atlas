@@ -1,0 +1,52 @@
+paper_id: ectc51529.2024.00155
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00155/text.md
+  - references/ectc51529.2024.00155/source.json
+  - references/ectc51529.2024.00155/figures/page_02.png
+  - references/ectc51529.2024.00155/figures/page_03.png
+  - references/ectc51529.2024.00155/figures/page_04.png
+  - references/ectc51529.2024.00155/figures/page_05.png
+  - references/ectc51529.2024.00155/figures/page_06.png
+  - references/ectc51529.2024.00155/figures/page_07.png
+  - references/ectc51529.2024.00155/figures/cand/p02_fig1.png
+  - references/ectc51529.2024.00155/figures/cand/p02_fig2.png
+  - references/ectc51529.2024.00155/figures/cand/p02_tablei.png
+  - references/ectc51529.2024.00155/figures/cand/p02_tableii.png
+  - references/ectc51529.2024.00155/figures/cand/p06_fig13.png
+figure_reading_method: >-
+  Page renders; 400-450 dpi re-crops from source.pdf of Fig. 7, 8, 11, 12, the Fig. 13 label lines and Fig. 15.
+  Fig. 7 bars read +/-50 um, Fig. 8 markers +/-3 um, Fig. 11 markers +/-15 um, Fig. 12 bars +/-5 um. Fig. 13
+  coplanarity/max/min are printed labels. Tables I, II, IV-VII checked against renders.
+entries:
+  - {table: interconnects, row_id: ectc51529.2024.00155-a-i2, field: total_length_um, value: 55, unit: um, basis: design_target, locator: "p.3 Sec. II.B", note: "text 'total height of 55 um'; Table II Cu 30 + SnAg 25"}
+  - {table: metrics, row_id: ectc51529.2024.00155-a-m1, field: value, value: -1630, unit: um, basis: measured, locator: "p.4 Fig. 7", note: "EMC bar after Mold; sign per plot icons"}
+derived:
+  - {table: test_vehicles, row_id: ectc51529.2024.00155-a, field: interposer_area_mm2, value: 1932, formula: "42 x 46", inputs: "p.2 Table II"}
+  - {table: test_vehicles, row_id: ectc51529.2024.00155-b, field: interposer_area_mm2, value: 1932, formula: "42 x 46", inputs: "p.2 Table II"}
+  - {table: test_vehicles, row_id: ectc51529.2024.00155-c, field: interposer_area_mm2, value: 1932, formula: "42 x 46", inputs: "p.2 Table II"}
+  - {table: test_vehicles, row_id: ectc51529.2024.00155-d, field: interposer_area_mm2, value: 1932, formula: "42 x 46", inputs: "p.2 Table II"}
+  - {table: test_vehicles, row_id: ectc51529.2024.00155-f, field: carrier_size_mm, value: 300, formula: "12-inch wafer = 300 mm", inputs: "p.2 Sec. II.B"}
+  - {table: interconnects, row_id: ectc51529.2024.00155-a-i3, field: diameter_um, value: 500, formula: "0.5 mm x 1000", inputs: "p.3 Sec. II.E"}
+  - {table: process_steps, row_id: ectc51529.2024.00155-F1-s22, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.3 Sec. II.E"}
+  - {table: process_steps, row_id: ectc51529.2024.00155-F1-s23, field: time_s, value: 1800, formula: "0.5 h x 3600", inputs: "p.3 Sec. II.E"}
+conflicts:
+  - {table: components, row_id: ectc51529.2024.00155-a-c5, field: material, values: ["SUS430", "SUS404"], locators: ["p.1 Abstract; p.5 Sec. III.C", "p.7 Sec. III.E"], chosen: SUS430, why: "SUS404 appears once, evidently a typo"}
+  - {table: papers, row_id: ectc51529.2024.00155, field: table labels, values: ["text: Table I = interposer, Table II = dies", "captions: Table I = Die A/B, Table II = interposer"], locators: ["p.2 Sec. II.B", "p.2 Table I; p.2 Table II"], chosen: "caption labels", why: "rule (c)"}
+  - {table: metrics, row_id: ectc51529.2024.00155-f-m7, field: value, values: ["Fig. 8 LCMUF +32 um at 23 C (convex)", "text: interposer concave at room temperature"], locators: ["p.5 Fig. 8", "p.4 Sec. III.B"], chosen: 32, why: "measured plot; text holds for EMC (-67 um)"}
+  - {table: components, row_id: ectc51529.2024.00155-a-c5, field: name, values: ["28 mm longitudinal x 30 mm lateral (abstract)", "X,Y = 30, 28 (Fig. 1)", "'30 mm x 28 mm' (Fig. 13, 14, Sec. III.E) vs '28 mm x 30 mm' (Table VI, VII, Fig. 11, 15)"], locators: ["p.1", "p.2 Fig. 1", "p.6-7"], chosen: "28 mm x 30 mm (same stiffener, order varies)", why: "same build"}
+excluded:
+  - "100 mm x 100 mm 2.5D TV results of ref [1]"
+  - "Fig. 10 FEM color-bar ranges (-1420 to 320 um, -98 to 2 um) are legend scales, not per-case values"
+  - "Fig. 14 diagonal warpage profiles (qualitative M- vs V-shape entered via notes only)"
+not_reported:
+  - electrical_interfaces; optical_interfaces
+  - Table III molding conditions (referenced in text, absent from this copy)
+  - TSV in interposer (not mentioned although backside bumps are formed); interposer RDL layers and L/S
+  - substrate total thickness and per-layer dimensions (thickness measured but not given); PCB thickness
+  - CUF, EMC, LCMUF product names (LCMUF supplier NAMICS only); TCB temperature/force/time; reflow profile
+  - X-ray CT position accuracy values; TCT sample count; resistance values
+  - stiffener outer dimensions
+source_quality:
+  - "Candidate p02_tablei cut the header row (manual re-crop); p07_fig15 held only panels (e),(f) (manual re-crop)."

@@ -1,0 +1,41 @@
+paper_id: ectc51687.2025.00187
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00187/text.md
+  - references/ectc51687.2025.00187/source.json
+  - references/ectc51687.2025.00187/figures/page_02.png
+  - references/ectc51687.2025.00187/figures/page_03.png
+  - references/ectc51687.2025.00187/figures/page_04.png
+  - references/ectc51687.2025.00187/figures/page_05.png
+  - references/ectc51687.2025.00187/figures/page_06.png
+figure_reading_method: >-
+  400 dpi re-crops of Fig. 2, Fig. 3, Table I, Fig. 8, Fig. 9(a), Fig. 9(b). Fig. 9 labelled values transcribed;
+  unlabelled UF1 stress bars (POR, STIM) and the REF point read from gridline pixel positions (+/-3 MPa).
+  Fig. 12 and Fig. 14 printed values transcribed from candidate crops.
+entries:
+  - {table: stack_layers, row_id: ectc51687.2025.00187-a-L02, field: thickness_min_um, value: 51.5, unit: um, basis: measured, locator: "p.6 Fig. 14(a)", note: "hybrid TIM position 1; max 72.3 at position 2 (center)"}
+  - {table: stack_layers, row_id: ectc51687.2025.00187-b-L02, field: thickness_min_um, value: 81.4, unit: um, basis: measured, locator: "p.6 Fig. 14(a)", note: "LM only position 2; max 98 at position 4"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51687.2025.00187-a-m7, field: value_text, values: ["periphery BLT within 50-60 um (text)", "position 3 BLT 61.7 um (Fig. 14(a))"], locators: ["p.5 Sec. III.B.3", "p.6 Fig. 14(a)"], chosen: "both entered (avg 56.4 um from text; per-position values from figure)", why: "figure value slightly outside the stated range"}
+  - {table: metrics, row_id: ectc51687.2025.00187-a-m17, field: basis, values: ["legend: 'Moire warp at RT' / 'Moire warp at HT' (measured)", "text: Fig. 9(a) shows package warpage simulation results"], locators: ["p.4 Fig. 9(a) legend", "p.4 Sec. II.B.2"], chosen: unspecified, why: "paper is internally inconsistent; applies to all orange bars and the HT square (-a m17-m19, -c m3-m4, -d m4-m6)"}
+  - {table: metrics, row_id: ectc51687.2025.00187-a-m16, field: value, values: ["text: optimized structure meets warpage criteria at RT", "Fig. 9(a): simulated RT warpage 262 um at BLT 80 um vs 250 um spec"], locators: ["p.4 Sec. II.B.2", "p.4 Fig. 9(a)"], chosen: 262, why: "plotted value entered; result left blank"}
+  - {table: components, row_id: ectc51687.2025.00187-a-c3, field: x_mm, values: ["50 x 32 mm (text)", "32243.04 x 49947.2, units not stated (Table I)"], locators: ["p.2 Sec. II.A.1", "p.3 Table I"], chosen: "50 x 32", why: "text with units; Table I consistent if in um"}
+excluded:
+  - "TIM class numbers in Introduction: PTIM 3-10 W/mK, 10-100 Kmm2/W; indium STIM 71-86 W/mK, 5 Kmm2/W; LM 30-50 W/mK (general/literature)"
+  - "Hotspots up to 3 W/mm2 (abstract, general statement, no TV)"
+  - "Peak power density 2-4x average (ref [1])"
+  - "Fig. 4(b) maximum 88 C thermal contour: TIM1 case of this contour not stated"
+  - "Fig. 6 Tj,max values in arbitrary units (only the coverage/BLT criteria stated in text are entered)"
+not_reported:
+  - interconnects (no bump/pillar/C4/BGA pitch, size or metallurgy disclosed)
+  - electrical_interfaces, optical_interfaces
+  - lid material, TIM1/adhesive/dam product names, TIM thermal conductivity, cure temperatures and times
+  - RDL layer count/L/S, molding and underfill materials, substrate thickness, die thicknesses
+  - warpage temperature for HT and sign convention; sample counts
+  - reliability and junction-to-case thermal measurements (stated as future work)
+source_quality:
+  - "Candidates p02_fig2 and p06_fig14a include a sliver of body text; p05_fig10 clips the bottom of steps 3-4 (manual bboxes used)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00187-F1, change: step_basis of all steps set to stated_in_flow, reason: order from Fig. 10 steps 1-4 and Sec. III.A}

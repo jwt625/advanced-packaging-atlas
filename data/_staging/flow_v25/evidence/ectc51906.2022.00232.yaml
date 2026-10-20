@@ -1,0 +1,49 @@
+paper_id: ectc51906.2022.00232
+verified_on: 2026-10-18
+schema_version: 2
+source_files:
+  - references/ectc51906.2022.00232/text.md
+  - references/ectc51906.2022.00232/source.json
+  - references/ectc51906.2022.00232/figures/page_01.png
+  - references/ectc51906.2022.00232/figures/page_02.png
+  - references/ectc51906.2022.00232/figures/page_03.png
+  - references/ectc51906.2022.00232/figures/page_04.png
+  - references/ectc51906.2022.00232/figures/page_05.png
+figure_reading_method: >-
+  Page renders 1-5 viewed at 150 dpi; Tables I-V and the Fig. 4 / Fig. 6 value cells checked against the images.
+  Fig. 9, 10, 13, 14 cross-sections and Fig. 7 FEA have no scale bars or values; used qualitatively only.
+entries:
+  - {table: metrics, row_id: ectc51906.2022.00232-c-m1, field: value, value: 69, unit: um, basis: measured, locator: "p.2 Fig. 4", note: "Exp. 25 C cell; text agrees (69 um convex)"}
+  - {table: metrics, row_id: ectc51906.2022.00232-b-m1, field: value, value: 1.3, unit: ratio, basis: measured, locator: "p.3 Fig. 6", note: "TV1 = 1x; text 30% higher"}
+  - {table: metrics, row_id: ectc51906.2022.00232-b-m2, field: value, value: 1.6, unit: ratio, basis: measured, locator: "p.3 Fig. 6", note: "TV1 = 1x; text 60% higher"}
+derived:
+  - {table: test_vehicles, row_id: ectc51906.2022.00232-a, field: interposer_area_mm2, value: 1387.68, formula: "x*y = 41.3*33.6", inputs: "p.2 Table I fan-out module size"}
+  - {table: test_vehicles, row_id: ectc51906.2022.00232-b, field: interposer_area_mm2, value: 1387.68, formula: "x*y = 41.3*33.6", inputs: "p.2 Table I fan-out module size"}
+  - {table: test_vehicles, row_id: ectc51906.2022.00232-c, field: interposer_area_mm2, value: 1387.68, formula: "x*y = 41.3*33.6", inputs: "p.2 Table II fan-out module size"}
+  - {table: components, row_id: ectc51906.2022.00232-a-c5, field: thickness_um, value: 2500, formula: "2.5 mm * 1000", inputs: "p.2 Table I ring thickness"}
+  - {table: stack_layers, row_id: ectc51906.2022.00232-a-L10, field: thickness_um, value: 1400, formula: "1.4 mm * 1000", inputs: "p.2 Table I core thickness"}
+conflicts:
+  - {table: test_vehicles, row_id: ectc51906.2022.00232-c, field: package_x_mm, values: ["41 x 33 mm (text)", "41.3 x 33.6 mm (Tables I, II)"], locators: ["p.1 Sec. II", "p.2 Table I; p.2 Table II"], chosen: "41.3 x 33.6", why: "table over text (rule k)"}
+excluded:
+  - "silicon interposer / TSV cost and chiplet yield claims attributed to refs [1-6]"
+  - "RDL stress constrained by die gap mechanism attributed in part to ref [7] (qualitative, not entered)"
+  - "Abstract: main challenges for packages >= 65x65 mm2 (general statement, no build)"
+not_reported:
+  - electrical_interfaces (no D2D data rate, loss or energy), optical_interfaces
+  - die, mold and module thickness; reconstituted wafer size; carrier type; debond step
+  - RDL dielectric material and thickness; Cu RDL thickness before redesign; via sizes
+  - C4 Cu pillar diameter/height, solder cap, bonding conditions; underfill product; BGA pitch
+  - substrate layer count, build-up materials, total thickness; absolute package warpage values
+  - reliability sample counts; number of reflows in the pre-optimization failure test; FEA model details
+source_quality:
+  - "text.md p.1 Abstract renders the '>=' sign (U+2A7E) as a dotless i (U+0131) before '65x65mm2'; page image read instead. No other garbling."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51906.2022.00232-b-m3, change: "deleted (copy of a-m3)", reason: "p.3 Sec. III.C states trace cracking after multi-reflow for TV1 and TV2 jointly; no per-TV result"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51906.2022.00232-a-m3, change: "scope set to 'applies to TVs a, b'; notes added", reason: "single row for a claim stated for both builds"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00232, change: "papers.notes trimmed from 32 to 28 words", reason: "audit_x1 item 15, rule (m) notes <= 30 words"}
+  - {date: 2026-10-19, source: audit_x1, row_id: evidence.source_quality, change: "non-ASCII dotless-i quote replaced by its code point name", reason: "audit_x1 sec. 7 hygiene (non-ASCII in this evidence file)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00232-F1, change: "flows re-keyed: old F2 (module, tv c) -> F1 'chip-first fan-out module (Sec. II)' with tv_ids a;b;c, level ordered; old F1 (substrate attach, tv a;b) -> F2, level fragments -> ordered", reason: "review B miss 3: module flow was not linked to TV1/TV2; one sequential flow (module then substrate attach, p.1-2 Sec. II) split into two flows so build order follows flow order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00232-F1-s01..s04", change: "renumbered from ectc51906.2022.00232-F2-s01..s04; step_basis stated_in_flow", reason: "flow re-keying; order stated in p.1-2 Sec. II"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00232-F1-s03, change: "category other -> rdl_layer; target '3 RDL layers; W/S 2/2, 2/2, 5/5 um; after redesign min width 2.2 um, thickness 2.3 um, via-to-turn >18 um'; locator adds p.2 Table II, p.4 Sec. III.C", reason: "v2.4 category; stated targets on the step (p.2 Table II, p.4 Sec. III.C)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00232-F1-s04, change: "category ball_attach -> bumping; step 'form C4 Cu pillar bumps'; target '130 um pitch'; locator adds p.2 Table II", reason: "review B miss 1: pillar bumping is not ball attach"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51906.2022.00232-F2-s01, change: "renumbered from ectc51906.2022.00232-F1-s01; step_basis stated_in_flow; target '130 um pitch Cu pillar bumps'; locator adds p.2 Table II", reason: "flow re-keying; stated pitch on the step"}

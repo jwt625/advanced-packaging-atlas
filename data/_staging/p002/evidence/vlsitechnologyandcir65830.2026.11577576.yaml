@@ -1,0 +1,46 @@
+paper_id: vlsitechnologyandcir65830.2026.11577576
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/vlsitechnologyandcir65830.2026.11577576/text.md
+  - references/vlsitechnologyandcir65830.2026.11577576/source.json
+  - references/vlsitechnologyandcir65830.2026.11577576/figures/page_02.png
+  - references/vlsitechnologyandcir65830.2026.11577576/figures/page_03.png
+  - references/vlsitechnologyandcir65830.2026.11577576/figures/candidates.json
+figure_reading_method: >-
+  Page renders plus 200 dpi re-crops of Fig. 1, 2, 3, 4, 5, 6, 8 and Fig. 7. Bar labels (Fig. 6, 8(c)) and Fig. 2
+  point labels read directly; Fig. 4 and Fig. 7 have no numeric resistance/warpage axis.
+entries:
+  - {table: interconnects, row_id: vlsitechnologyandcir65830.2026.11577576-a-i1, field: bonding_temp_c, value: 260, unit: C, basis: design_target, locator: "p.2 Fig. 1(c)", note: "label 'One-Time Batch Reflow (~260C)'"}
+  - {table: test_vehicles, row_id: vlsitechnologyandcir65830.2026.11577576-b, field: n_hbm, value: 8, unit: ea, basis: stated, locator: "p.2 Fig. 5(a)", note: "4 HBM above and 4 below two central logic dies"}
+  - {table: metrics, row_id: vlsitechnologyandcir65830.2026.11577576-a-m6, field: value, value: 0.7, unit: normalized, basis: design_target, locator: "p.2 Fig. 2", note: "4th point; stack-count series reads 8, 8, 8, 12, >16"}
+derived:
+  - {table: test_vehicles, row_id: vlsitechnologyandcir65830.2026.11577576-a, field: package_thickness_mm, value: 0.72, formula: "720 um / 1000", inputs: "p.1 Sec. HBM Package Development Challenges"}
+conflicts:
+  - {table: metrics, row_id: vlsitechnologyandcir65830.2026.11577576-a-m2, field: locator, values: ["text: C-SAM T0 and post pre-condition shown in Fig. 3(b)", "caption: T0 (b), Post-Precondition (c)"], locators: ["p.1 text", "p.2 Fig. 3 caption"], chosen: "caption labels", why: "rule (c): cite caption label"}
+excluded:
+  - "Table I HBM2E-HBM4 roadmap (density, capacity, I/O count, I/O speed, max BW, package size 12.4x11 mm2 for HBM4): generation summary, not tied to MTV4"
+  - "Intro bandwidth 2048 GB/s for HBM4 (roadmap)"
+  - "Package-interaction stress mechanisms attributed to refs [4], [5]; CoWoS interposer scaling of ref [3]"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "die size, die thickness (only normalized), microbump pitch/diameter/metallurgy, gap height in um"
+  - "MUF/EMC product, flux, die-attach tool, reflow profile beyond ~260C"
+  - "pre-condition, uHAST and TC conditions, cycles, sample counts; daisy-chain resistance values"
+  - "simulation package size, substrate layers, stiffener width, material properties, absolute stress and warpage values"
+source_quality:
+  - "Candidates p02_fig1, p02_fig3, p02_fig5, p03_fig8 bboxes end ~0.01-0.02 page height early, clipping panel labels; manual bboxes used."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: "vlsitechnologyandcir65830.2026.11577576-b-m4", change: "scope: 'diagonal scan center to corner, 0-~55 mm; warpage axis unlabeled' -> 'diagonal scan center to corner, 0-~55 mm; warpage axis unlabeled; applies to TVs b, c, d'", reason: "sibling_dup: one comparative statement for the three simulated packages (p.1 text, Fig. 7), no per-build values; kept once on first TV with scope"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "vlsitechnologyandcir65830.2026.11577576-c-m5", change: "deleted (copy of vlsitechnologyandcir65830.2026.11577576-b-m4)", reason: "sibling_dup: one comparative statement for the three simulated packages (p.1 text, Fig. 7), no per-build values; kept once on first TV with scope"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "vlsitechnologyandcir65830.2026.11577576-d-m5", change: "deleted (copy of vlsitechnologyandcir65830.2026.11577576-b-m4)", reason: "sibling_dup: one comparative statement for the three simulated packages (p.1 text, Fig. 7), no per-build values; kept once on first TV with scope"}
+  - {date: 2026-10-19, source: figures, row_id: "vlsitechnologyandcir65830.2026.11577576-f04", change: "renumbered from vlsitechnologyandcir65830.2026.11577576-f05 (rank 5 -> 4)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "vlsitechnologyandcir65830.2026.11577576-f05", change: "renumbered from vlsitechnologyandcir65830.2026.11577576-f04 (rank 4 -> 5)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "vlsitechnologyandcir65830.2026.11577576-f07", change: "added Fig. 7 p.3 warpage_plot (manual) at rank 7", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "vlsitechnologyandcir65830.2026.11577576-f08", change: "added Fig. 2 p.2 other (manual) at rank 8", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir65830.2026.11577576-F1, change: "scope tv_build -> generic_platform; flow_name 'MR-MUF HBM chip stacking (Fig. 1)'; locator adds p.1 Introduction; notes added", reason: "review B miss 1: Fig. 1 is the MR-MUF process of record since HBM2E (p.1, Fig. 1 caption), MTV4-specific changes undisclosed"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir65830.2026.11577576-F1-s01..s04", change: "step_basis stated_in_flow", reason: "order given by Fig. 1(a)-(d)"}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir65830.2026.11577576-F1-s02, change: "conditions add panel label 'Air' (meaning not stated)", reason: "Fig. 1(b) label recorded as written; not typed as atmosphere because its meaning is ambiguous"}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir65830.2026.11577576-F1-s04, change: "conditions 'Fig. 1(d)' -> 'Fig. 1(d): wafer-level molding; MUF (EMC)'", reason: "Fig. 1(d) labels"}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir65830.2026.11577576, change: "process_flow_level ordered confirmed", reason: "4 ordered steps from Fig. 1 with one condition (~260 C)"}

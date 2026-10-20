@@ -1,0 +1,54 @@
+paper_id: ectc51906.2022.00303
+verified_on: 2026-10-18
+source_files:
+  - references/ectc51906.2022.00303/text.md
+  - references/ectc51906.2022.00303/source.json
+  - references/ectc51906.2022.00303/figures/page_02.png
+  - references/ectc51906.2022.00303/figures/page_03.png
+  - references/ectc51906.2022.00303/figures/page_04.png
+  - references/ectc51906.2022.00303/figures/page_05.png
+  - references/ectc51906.2022.00303/figures/page_06.png
+figure_reading_method: >-
+  Fig. 1(a), Fig. 4, Fig. 7 and Fig. 8 re-rendered at 300-450 dpi from source.pdf in scratch (not kept) to read
+  dimension labels and plot end points. Fig. 3(b) read from page render.
+entries:
+  - {table: metrics, row_id: ectc51906.2022.00303-a-m2, field: value, value: 26, unit: ratio, basis: simulated, locator: "p.3 Fig. 3(b)", note: "dielet-side curve end point at 20 mm, between 25 and 30 gridlines"}
+  - {table: metrics, row_id: ectc51906.2022.00303-b-m4, field: value, value: 1.13, unit: mm, basis: derived, locator: "p.3 Fig. 4(b)", note: "line end at 10 mm slightly above 1.1 gridline"}
+  - {table: process_steps, row_id: ectc51906.2022.00303-F3-s02, field: conditions, value: "200 C; 0.06 s/10 s; 0.7 A/cycle; 50 cycles", basis: design_target, locator: "p.6 Fig. 8(a), Fig. 8(c) title"}
+derived:
+  - {table: stack_layers, row_id: ectc51906.2022.00303-e-L04, field: thickness_um, value: 0.003, formula: "3 nm / 1000", inputs: "p.5 Sec. IV col. 2; p.6 Sec. V"}
+  - {table: process_steps, row_id: ectc51906.2022.00303-F3-s02, field: thickness_um, value: 0.003, formula: "3 nm / 1000", inputs: "p.5 Sec. IV col. 2"}
+  - {table: components, row_id: ectc51906.2022.00303-c-c3, field: thickness_um, value: 4000, formula: "<4 mm * 1000", inputs: "p.2 Fig. 1(a)"}
+conflicts:
+  - {table: interconnects, row_id: ectc51906.2022.00303-d-i1, field: notes (TPV width), values: ["500 um width (abstract)", "703 um (Fig. 7e)", "1175 um (Fig. 7a)", "500-800 um inter-dielet spacing design"], locators: ["p.1 Abstract", "p.5 Fig. 7(e)", "p.5 Fig. 7(a)", "p.4 Sec. IV"], chosen: "Fig. 7 labels recorded as metrics; no width column filled", why: "measured cross-section labels; abstract value is a design summary"}
+  - {table: stack_layers, row_id: ectc51906.2022.00303-d-L03, field: thickness_um, values: [277, 280, 100], locators: ["p.5 Fig. 7(b)", "p.5 Sec. IV around 280 um", "p.6 Sec. V (100 um thick) Cu"], chosen: 277, why: "measured cross-section; conclusion value not reconciled in paper"}
+  - {table: stack_layers, row_id: ectc51906.2022.00303-d-L02, field: thickness_um, values: [123, 100], locators: ["p.5 Fig. 7(e)-(f)", "p.4 Sec. IV 100 um-thickness squares"], chosen: 123, why: "measured cross-section"}
+  - {table: stack_layers, row_id: ectc51906.2022.00303-d-L04, field: thickness_um, values: [203, 200], locators: ["p.5 Fig. 7(a)-(b)", "p.5 Sec. IV"], chosen: 203, why: "measured cross-section"}
+  - {table: stack_layers, row_id: ectc51906.2022.00303-e-L05, field: thickness_um, values: [510, 500], locators: ["p.6 Fig. 9(b)", "p.6 Fig. 9 caption; p.6 Sec. V"], chosen: 510, why: "measured cross-section"}
+  - {table: stack_layers, row_id: ectc51906.2022.00303-e-L04, field: thickness_um, values: [0.003, 0.0035, 0.0033], locators: ["p.5 text 3 nm", "p.6 Fig. 8(a) 0.7 A/cycle x 50 cycles", "p.6 Fig. 8(c) AFM step"], chosen: 0.003, why: "text design value; AFM step kept as metric e-m2"}
+  - {table: metrics, row_id: ectc51906.2022.00303-a-m1, field: value, values: ["die < 5x5 mm (Sec. II)", "die < 25 mm2 (abstract, conclusion)"], locators: ["p.2 Sec. II", "p.1 Abstract; p.6 Sec. V"], chosen: 5, why: "consistent (5x5 = 25 mm2)"}
+excluded:
+  - "Si-IF sub-10 um fine-pitch Cu-Cu bonding (ref [3])"
+  - "CPP and FlexCon design (ref [6]); two-phase flash cooling (ref [8]); SuperCHIPS protocol (ref [7])"
+  - "cutting-edge chips 0.5-1 W/mm2 (general statement)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - Si-IF metal material and dielectric; TSV dimensions for substrate-side model
+  - fusion anneal temperature/time; oxide thickness; bond alignment accuracy
+  - Ti/Cu seed thickness; Cu plating chemistry, current density, time; SU-8 grade and cure
+  - wafer diameter for surrogate; thermal cycle count for SU-8 test
+  - AC/PDN impedance, IR drop values, decap values
+notes: >-
+  Primary bucket thermal_pdn kept; si_interposer added (Si-IF). TPV has no interconnect_type enum, entered as other.
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00303-c, change: "notes now start 'Design concept, not built (tv_kind other until a design_concept enum exists).'", reason: "audit_x1 item 12 (envisioned design under tv_kind other); interim fix, schema enum pending"}
+  - {date: 2026-10-19, source: audit_x1, row_id: "ectc51906.2022.00303-F1-s01..s11", change: "performed set to no (was empty); note 'Proposed flow for the unbuilt concept.' added", reason: "Fig. 5 flow is proposed for the envisioned TV c; only parts were executed, on coupons d and e"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F1", change: "scope tv_build -> generic_platform; level fragments -> ordered", reason: "Fig. 5(a)-(f) is an ordered proposed flow with materials (ALD Al2O3, PECVD SiO2, CHF3 ICP-RIE) for the unbuilt concept"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F1-s01", change: "category other -> carrier_prep", reason: "Si-IF provision is step (1) of the Fig. 5 flow (contract convention)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F1/F2/F3", change: "row-id targets moved to notes ('Forms <row_id>'); targets hold geometry only", reason: "contract convention: target = stated geometry"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F2-s01", change: "thickness_um 100 -> target (mesa height, not wafer thickness); dielet sizes and spacing added to target; 525 um wafer in conditions", reason: "p.4 Sec. IV; p.5 Fig. 6(a)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F2-s08", change: "deleted (cross-section measurement, not a build step)", reason: "information already in metrics d-m2..d-m10 (cut 1/cut 2, Fig. 7)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F3-s02", change: "conditions 'A/cycle' spelled 'Angstrom/cycle'", reason: "p.6 Fig. 8(a) unit is Angstrom per cycle"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F3-s01/s03", change: "s01 conditions add 500 um dielet/interposer with thin oxide; s03 material TMAH -> Al2O3 (TMAH to conditions)", reason: "p.5 Sec. IV col. 2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00303-F1/F2/F3", change: "step_basis stated_in_flow; performed yes on executed F2/F3 steps (F2-s07, F3-s06 stay no)", reason: "p.4 Sec. III; p.4-6 Sec. IV"}

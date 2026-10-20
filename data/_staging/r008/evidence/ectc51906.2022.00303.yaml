@@ -41,3 +41,6 @@ not_reported:
   - AC/PDN impedance, IR drop values, decap values
 notes: >-
   Primary bucket thermal_pdn kept; si_interposer added (Si-IF). TPV has no interconnect_type enum, entered as other.
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00303-c, change: "notes now start 'Design concept, not built (tv_kind other until a design_concept enum exists).'", reason: "audit_x1 item 12 (envisioned design under tv_kind other); interim fix, schema enum pending"}
+  - {date: 2026-10-19, source: audit_x1, row_id: "ectc51906.2022.00303-c-s01..s11", change: "performed set to no (was empty); note 'Proposed flow for the unbuilt concept.' added", reason: "Fig. 5 flow is proposed for the envisioned TV c; only parts were executed, on coupons d and e"}

@@ -1,0 +1,56 @@
+paper_id: ectc51846.2026.00119
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00119/text.md
+  - references/ectc51846.2026.00119/source.json
+  - references/ectc51846.2026.00119/figures/page_02.png
+  - references/ectc51846.2026.00119/figures/page_03.png
+  - references/ectc51846.2026.00119/figures/page_04.png
+  - references/ectc51846.2026.00119/figures/page_05.png
+  - references/ectc51846.2026.00119/figures/cand/p02_fig2.png
+  - references/ectc51846.2026.00119/figures/cand/p03_fig5.png
+  - references/ectc51846.2026.00119/figures/cand/p04_fig6.png
+  - references/ectc51846.2026.00119/figures/cand/p04_fig7a.png
+  - references/ectc51846.2026.00119/figures/cand/p05_fig9a.png
+  - references/ectc51846.2026.00119/figures/cand/p05_fig10.png
+figure_reading_method: >-
+  Figs. 5, 9(a), 10 re-cropped at 300 dpi. Fig. 5 minima read on log axis (106 px per decade), +/-0.05 decade.
+  Fig. 10 end-of-test resistance read on log axis (58 px per decade), +/-0.1 decade. Fig. 9(a) has solid and
+  dashed series per SR without a legend distinction; only the 5 W HTCSR-1 point (both series coincide) was read.
+  Fig. 8 Sa values are printed numbers.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00119-d-m1, field: value, value: 72, unit: C, basis: measured, locator: "p.4 Sec. III.B", note: "Fig. 9(a) solid HTCSR-2 point at 5 W agrees (~72); dashed ~66"}
+derived: []
+conflicts:
+  - {table: stack_layers, row_id: ectc51846.2026.00119-a-L01, field: properties, values: ["Fig. 6 caption: HTCSR-2 (1.2 W/(m K))", "Fig. 9 caption and Sec. III.B: HTCSR-2 = 1.0 W/(m K)"], locators: ["p.4 Fig. 6", "p.5 Fig. 9; p.4 Sec. III.B"], chosen: "embeddability film = 1.2 W/mK grade (Sec. III.A text); thermal-test HTCSR-2 = 1.0 W/mK", why: "text of each section"}
+  - {table: metrics, row_id: ectc51846.2026.00119-h-m14, field: value, values: ["text: Sa about one-tenth of liquid-type thermally conductive SRs", "Fig. 8: 0.11 vs 0.79 um (ratio 0.14)"], locators: ["p.4 Sec. III.A", "p.4 Fig. 8"], chosen: "Fig. 8 values", why: "measured values printed in figure"}
+  - {table: metrics, row_id: ectc51846.2026.00119-g-m2, field: variant, values: ["Sec. III.B simulation reference called 'FR-4 reference'", "experiment reference is 0.2 W/mK package SR (Reference 1)"], locators: ["p.4 Sec. III.B", "p.5 Fig. 9 caption"], chosen: "as written (FR-4 reference)", why: "cannot resolve from paper"}
+  - {table: papers, row_id: ectc51846.2026.00119, field: notes, values: ["title: 1.0 W/(m K)", "abstract/conclusion: 1.2 W/(m K) isotropic at 20 um"], locators: ["p.1 title", "p.1 Abstract; p.5 Sec. IV"], chosen: "both grades recorded as variants", why: "different formulations (HTCSR-2 thermal test vs 1.2 grade process tests)"}
+excluded:
+  - "25 um graphite sheet + 20 um adhesive spreading layer of ref [9]"
+  - "Interfacial resistance 4.3E-3 W/(mm2 K) is taken from ref [12] (kept only as model input note)"
+not_reported:
+  - interconnects
+  - electrical_interfaces
+  - optical_interfaces
+  - "substrate build-up materials and size for L/S 20/20 comb coupon; coupon footprint for thermal test"
+  - "lamination pressure/time; exposure dose used for embeddability coupon (only post-UV); filler type and absolute content"
+  - "Fig. 9(a) values above 5 W (series meaning not labelled); b-HAST test standard name"
+  - "process_steps: ectc51846.2026.00119-b (reference SR coating of the b-HAST comb substrate not described)"
+source_quality:
+  - "Section numbering and some typos (comfirmed, substate, 'edge/AL'); clean text layer otherwise."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F1..F5 steps", change: "step_basis -> stated_in_flow; target object names (L/S 20/20 substrate, CCL, SR coupon) cleared", reason: "order stated in Sec. II.A/II.B text; target holds stated geometry only (contract convention)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F1-s01", change: "atmosphere -> vacuum", reason: "p.2 Sec. II.A 'vacuum laminated'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F2-s01", change: "atmosphere -> vacuum", reason: "p.2 Sec. II.A 'vacuum laminated'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F2-s02", change: "dose sweep moved to split; conditions keep 365 nm", reason: "p.2 Sec. II.A 50-250 mJ/cm2; p.4 Fig. 7 caption 85 mJ/cm2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F2-s03", change: "target -> opening dia 100 um", reason: "p.2 Sec. I target spec; p.4 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F5-s02", change: "dose_mj_cm2 1000 typed", reason: "p.2 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F5-s04", change: "category other -> debonding", reason: "peeling cured film off its Cu foil carrier"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F1-s04", change: "deleted (SEM cross-section)", reason: "failure-analysis/measurement, not a build step; result already in metrics ectc51846.2026.00119-a-m1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F2-s06", change: "deleted (SEM of openings)", reason: "measurement; results already in metrics ectc51846.2026.00119-c-m1..m3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F3-s02", change: "deleted (clamp coupon in heater/heat-sink fixture, PI tape)", reason: "test setup, not a build step; PI tape added to metrics d-m1, e-m1, f-m1 condition"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F3-s03", change: "deleted (constant power, IR thermography)", reason: "measurement; power range 1-20 W added to metrics d-m1, e-m1, f-m1 condition"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F4-s02", change: "deleted (melt viscosity measurement)", reason: "measurement; rheometer name added to metrics h-m7..h-m11 condition"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00119-F5-s05", change: "deleted (Cp, density, diffusivity measurement)", reason: "measurement; instruments added to metrics h-m1..h-m6 condition"}

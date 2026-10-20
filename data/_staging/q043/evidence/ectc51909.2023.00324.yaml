@@ -1,0 +1,56 @@
+paper_id: ectc51909.2023.00324
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00324/text.md
+  - references/ectc51909.2023.00324/source.json
+  - references/ectc51909.2023.00324/TEXT_LAYER_WARNING.md
+  - references/ectc51909.2023.00324/figures/page_01_220dpi.png
+  - references/ectc51909.2023.00324/figures/page_02_220dpi.png
+  - references/ectc51909.2023.00324/figures/page_03_220dpi.png
+figure_reading_method: >-
+  text.md is tesseract OCR; every number checked on the 220 dpi page renders. Fig. 6 labels (89.760 um, 6.171 um) read
+  from candidate crop; Fig. 10 range read from 150 dpi re-crop.
+entries:
+  - {table: stack_layers, row_id: ectc51909.2023.00324-a-L03, field: thickness_um, value: 6.171, unit: um, basis: measured, locator: "p.2 Fig. 6", note: "confocal height label [2]"}
+  - {table: stack_layers, row_id: ectc51909.2023.00324-a-L03, field: line_um, value: 89.76, unit: um, basis: measured, locator: "p.2 Fig. 6", note: "label [1] 89.760 um, ridge width"}
+derived: []
+conflicts:
+  - {table: optical_interfaces, row_id: ectc51909.2023.00324-a-o1, field: coupling_loss_db, values: [0.45, 0.5], locators: ["p.2 Sec. II.B; p.2 Fig. 5", "p.3 Sec. III"], chosen: 0.45, why: "measured cutback fit intercept 0.9 dB for two facets; 0.5 dB is a rounded restatement"}
+  - {table: stack_layers, row_id: ectc51909.2023.00324-a-L03, field: thickness_um, values: [6.171, 6, 10], locators: ["p.2 Fig. 6", "p.3 Sec. II.B (~6 um)", "p.1 Abstract (less than 10 um)"], chosen: 6.171, why: "measured profile"}
+excluded:
+  - "3 dB larger coupling loss of previous self-align work (ref [4]); 2 dB improvement vs that work"
+  - "V-/U-groove heights of several tens to hundred um (refs [5]-[8])"
+  - "Broadcom/Tencent CPO switch, >100 fibers, 51.2 Tbps (introduction context)"
+not_reported:
+  - electrical_interfaces
+  - interconnects (optical-only sub-assembly)
+  - cladding thicknesses, polymer product names, substrate thickness and size
+  - waveguide count/pitch on the sample, MFD, polarization
+  - absolute push load (Fig. 7 in a.u.), UV adhesive product and cure dose
+  - number of assembled samples
+source_quality:
+  - "Garbled PDF text layer; OCR text with errors (e.g. '10-pym', 'tum'); numbers verified on renders."
+  - "Candidates p03_fig8 and p03_fig10 cut the figures (shifted down); re-cropped manually."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324, change: 'process_flow_level: ''full'' -> ''ordered''', reason: 'rule 7: ordered flow with materials/equipment but no temperature, time, dose or force anywhere'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1, change: 'level: ''full'' -> ''ordered''', reason: same as paper level}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1-s01, change: 'category: ''other'' -> ''molding''', reason: plastic molding of the connector part (Sec. II.A); not an encapsulation step}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1-s01, change: 'step_basis: '''' -> ''inferred_order''', reason: connector is molded separately; placed first by section order (Sec. II.A before II.B)}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1-s01, change: 'notes: '''' -> ''Connector part molded separately (co-axial mold, ref [3]); order vs substrate fab not stated.''', reason: explain inferred order}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1, change: step_basis of all steps set to stated_in_flow except ectc51909.2023.00324-F1-s01, reason: 'order from Fig. 3 steps 1-4 and Sec. II.B/II.C sequence words (after that, finally, first, next)'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1-s01, change: 'target: ''connector'' -> ''''', reason: 'convention: target holds stated geometry only, not object names (object already named in step)'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1-s02, change: 'target: ''glass-epoxy substrate'' -> ''''', reason: 'convention: target holds stated geometry only, not object names (object already named in step)'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1-s03, change: 'target: ''core layer'' -> ''''', reason: 'convention: target holds stated geometry only, not object names (object already named in step)'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1-s04, change: 'target: ''top cladding'' -> ''''', reason: 'convention: target holds stated geometry only, not object names (object already named in step)'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1-s05, change: 'target: ''top cladding'' -> ''''', reason: 'convention: target holds stated geometry only, not object names (object already named in step)'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1-s06, change: 'target: ''substrate'' -> ''''', reason: 'convention: target holds stated geometry only, not object names (object already named in step)'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1-s07, change: 'target: ''waveguide end facet'' -> ''''', reason: 'convention: target holds stated geometry only, not object names (object already named in step)'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1-s08, change: 'target: ''connector'' -> ''''', reason: 'convention: target holds stated geometry only, not object names (object already named in step)'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1-s09, change: 'target: ''connector'' -> ''''', reason: 'convention: target holds stated geometry only, not object names (object already named in step)'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1-s10, change: 'target: ''connector'' -> ''''', reason: 'convention: target holds stated geometry only, not object names (object already named in step)'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1-s11, change: 'target: ''connector'' -> ''''', reason: 'convention: target holds stated geometry only, not object names (object already named in step)'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1-s02, change: 'step: ''spin coating of bottom cladding layer and UV curing'' -> ''spin coating of bottom cladding layer on glass-epoxy substrate and UV curing''', reason: object name moved from target into step}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1-s07, change: 'step: ''expose optical end facet with dicing saw'' -> ''expose optical waveguide end facet with dicing saw''', reason: object name moved from target into step}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1-s03, change: 'result: '''' -> ''WG core 8.6 x 8.2 um (W x H, measured, Fig. 4); guiding ridge ~6.171 um high, 89.76 um wide (Fig. 6)''', reason: measured geometry produced by the core lithography (already in stack_layers L03)}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00324-F1-s03, change: 'locator: ''p.2 Sec. II.B; p.2 Fig. 3'' -> ''p.2 Sec. II.B; p.2 Fig. 3; p.2 Fig. 4; p.2 Fig. 6''', reason: added result locators}

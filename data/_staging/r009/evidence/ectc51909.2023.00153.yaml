@@ -43,3 +43,17 @@ not_reported:
   - wafer size for bump fabrication; sample counts for shear test
 source_quality:
   - "Table bodies (I-IV) missing from text layer; read from page renders. Table numerals garbled in text.md."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51909.2023.00153-b-m2; ectc51909.2023.00153-d-m2, change: "none (kept)", reason: "bump space 5 um is per build: p.2 Fig. 5 gives A/B per TV (15-10, 10-5 um) and p.4 Sec. III.C names TV-2 and TV-4"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00153-f03, change: "added Fig. 8 (process_flow, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00153-f04, change: "added Fig. 3 (top_view_layout, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00153-f06, change: "added Fig. 13 (cross_section, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00153-f07, change: "added Fig. 9 (micrograph, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00153-f08, change: "added Fig. 2 (package_photo, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00153-f10, change: "added Fig. 6 (micrograph, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00153-f11, change: "added Fig. 14 (micrograph, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00153-f12, change: "added Fig. 7 (micrograph, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00153-f15, change: "added Table II (data_table, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00153-f16, change: "added Table III (data_table, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00153-f17, change: "added Table IV (data_table, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00153-figures, change: "re-ranked: Fig. 4 f03 -> f02, Fig. 5 f02 -> f05, Fig. 12 f05 -> f09, Fig. 11 f06 -> f13, Table I f04 -> f14", reason: "rank order per SKILL.md step 5 after additions"}

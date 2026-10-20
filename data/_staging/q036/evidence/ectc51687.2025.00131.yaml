@@ -1,0 +1,42 @@
+paper_id: ectc51687.2025.00131
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00131/text.md
+  - references/ectc51687.2025.00131/source.json
+  - references/ectc51687.2025.00131/figures/page_02.png
+  - references/ectc51687.2025.00131/figures/page_03.png
+  - references/ectc51687.2025.00131/figures/page_04.png
+  - references/ectc51687.2025.00131/figures/page_05.png
+figure_reading_method: >-
+  Page renders p.2-5; candidate crops p02_fig1, p02_fig2, p02_fig3, p03_fig5, p04_fig7, p05_tablei, p05_fig9; re-crops of
+  Fig. 5 and Fig. 9 (plus 400 dpi Fig. 9 plot area). Fig. 9 log axis calibrated on the 1e-7/1e-6/1e-5 ticks; the Qcr_He
+  dashed line reads 4.4e-6, matching the text.
+entries:
+  - {table: test_vehicles, row_id: ectc51687.2025.00131-a, field: n_dies, value: 12, unit: ea, basis: design_target, locator: "p.2 Sec. II", note: "4 SoC + 8 HBM thermal test dies"}
+  - {table: metrics, row_id: ectc51687.2025.00131-a-m4, field: value, value: 3, unit: kW, basis: measured, locator: "p.3 Fig. 5", note: "caption '> 3 kW'; Sample A top point ~3.2 kW at ~18.4 LPM"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51687.2025.00131-a-m9, field: condition, values: ["HTS read at 200/500/1000 h", "HTS read at 168/500/1000 h"], locators: ["p.4 Sec. IV.A", "p.5 Fig. 9"], chosen: "1000 h endpoint only", why: "endpoint agrees in Table I; intermediate read points differ between text and figure"}
+  - {table: metrics, row_id: ectc51687.2025.00131-b-m1, field: basis, values: ["abstract/conclusion: integrated system can dissipate up to 3.4 kW", "Sec. III.B: 3.4 kW at 10 LPM from simulation of micropillar arrays"], locators: ["p.1 Abstract", "p.3 Sec. III.B"], chosen: simulated, why: "Sec. III.B and Fig. 5 legend state micropillar curve is simulation; measured max is unpatterned ~3.2 kW"}
+excluded:
+  - "0.8X TTV IMC-Si results of ref [5]: 2 kW, 3.2 W/mm2 uniform, 18 W/mm2 hot spot with 1 kW background; 0.8X curves in Fig. 6"
+  - "RTD temperature coefficient calibration (mean 3.8e-3, std 9.0e-6): metrology, not a package metric"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - interposer and substrate size, package size, layer counts, RDL dimensions
+  - micropillar geometry (pitch, diameter, height); protection film and sealant products; lid/manifold materials
+  - bump/C4/BGA dimensions and metallurgy; reflow and cure conditions
+  - SoC-to-lid gap nominal value; pressure drop; thermal resistance values
+  - sample counts for reliability tests
+source_quality:
+  - "Fig. 9 candidate includes Table I footnote; Fig. 5 candidate includes a text sliver. Others usable."
+revisions:
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00131-F1-s01", change: "target 'SoC dies' -> ''; step 'form micropillar arrays on SoC die backside' -> 'etch micropillar arrays on SoC die backside'", reason: "target holds geometry only; object name moved to step"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00131-F1-s04", change: "category 'other' -> 'bumping'", reason: "category (v2.4 bumping)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00131-F1", change: "step_basis stated_in_flow set on 9 steps (others as revised)", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00131-F2", change: "added flow 'single-die sealant + metal lid TV (Sec. IV.B)' (tv_ids ectc51687.2025.00131-c)", reason: "TV c build stated: sealant dispensed on a single-die TV, then metal lid assembled (p.4 Sec. IV.B)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00131-F2-s01", change: "added: 'dispense sealant on single-die test vehicle'", reason: "TV c build (p.4 Sec. IV.B)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00131-F2-s02", change: "added: 'assemble metal lid'", reason: "TV c build (p.4 Sec. IV.B)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51687.2025.00131", change: "process_flow_level ordered confirmed (Fig. 3 order; no conditions)", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}

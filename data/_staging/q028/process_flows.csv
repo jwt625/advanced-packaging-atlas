@@ -1,0 +1,13 @@
+flow_id,paper_id,flow_name,scope,level,tv_ids,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00092-F1,ectc51846.2026.00092,Integrated CoWoS-R flow with micropillar loop (Fig. 3),tv_build,ordered,ectc51846.2026.00092-a,stated,text,,p.2 Fig. 3; p.3 Sec. I.B; p.3 Fig. 5; p.2 Sec. I.A; p.3 Fig. 4; p.5 Sec. IV.A; p.2 Fig. 1,,
+ectc51687.2025.00233-F1,ectc51687.2025.00233,DF-PID TGV filling test (Sec. III.A),tv_build,ordered,ectc51687.2025.00233-a,stated,text,,p.3 Sec. III.A; p.3 Fig. 2(a)-(b),,
+ectc51687.2025.00233-F2,ectc51687.2025.00233,"CYCLOTENE DF-PID build-up on TGV glass (Fig. 1, Sec. II.B)",tv_build,full,ectc51687.2025.00233-b,stated,mixed,,p.3 Fig. 1; p.3 Sec. III.A; p.3 Fig. 3(a); p.2 Sec. II.B; p.3 Sec. II.B; p.1 Abstract; p.4 Sec. III.B,,
+ectc51687.2025.00012-F1,ectc51687.2025.00012,"MCP assembly (standard EMIB flow), FAU attach last, active alignment (baseline)",tv_build,ordered,ectc51687.2025.00012-a,stated,text,,p.2 Sec. III,,
+ectc51687.2025.00012-F2,ectc51687.2025.00012,"FAU attach, passive alignment (DOE split)",tv_build,ordered,ectc51687.2025.00012-a,stated,text,,p.3 Sec. III,,"DOE leg: replaces F1-s06/s07 (active FAU attach, lid) for the passive-alignment units; F1-s01..s05 precede."
+icep61562.2024.10535587-F1,icep61562.2024.10535587,ASE FOPLP: Wafer Prep,tv_build,ordered,icep61562.2024.10535587-a,stated,text,,p.1 Sec. II ASE FOPLP process flow; p.2 Fig. 2,,
+icep61562.2024.10535587-F2,icep61562.2024.10535587,ASE FOPLP: Panelization,tv_build,ordered,icep61562.2024.10535587-a,stated,text,,p.1 Sec. II ASE FOPLP process flow; p.2 Fig. 2,,
+icep61562.2024.10535587-F3,icep61562.2024.10535587,ASE FOPLP: Fan-out,tv_build,ordered,icep61562.2024.10535587-a,stated,mixed,,p.2 Fig. 2; p.1 Sec. II ASE FOPLP process flow,,
+icep61562.2024.10535587-F4,icep61562.2024.10535587,ASE FOPLP: Package Finishing,tv_build,ordered,icep61562.2024.10535587-a,stated,schematic,,p.2 Fig. 2,,
+ectc51846.2026.00198-F1,ectc51846.2026.00198,panel resolution test (Sec. III.A),tv_build,ordered,ectc51846.2026.00198-a,stated,mixed,,p.2 Sec. III.A; p.3 Fig. 3; p.3 Sec. IV.A; p.3 Fig. 4; p.3 Fig. 5,,
+ectc51846.2026.00198-F2,ectc51846.2026.00198,process margin evaluation (Sec. III.B),tv_build,full,ectc51846.2026.00198-b,stated,mixed,,p.2 Sec. III.B; p.4 Fig. 8; p.3 Fig. 6; p.3 Sec. III,,
+ectc51846.2026.00092-F2,ectc51846.2026.00092,POR CoWoS Flow (Fig. 3),comparison,ordered,,stated,schematic,,p.2 Fig. 3,,Baseline POR flow without micropillar loop; paper does not state which TTVs used it.

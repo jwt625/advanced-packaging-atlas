@@ -1,0 +1,68 @@
+paper_id: ectc51687.2025.00326
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00326/text.md
+  - references/ectc51687.2025.00326/source.json
+  - references/ectc51687.2025.00326/figures/candidates.json
+  - references/ectc51687.2025.00326/figures/page_02.png
+  - references/ectc51687.2025.00326/figures/page_03.png
+  - references/ectc51687.2025.00326/figures/page_04.png
+  - references/ectc51687.2025.00326/figures/page_05.png
+  - references/ectc51687.2025.00326/figures/cand/p02_fig1.png
+  - references/ectc51687.2025.00326/figures/cand/p03_fig5.png
+  - references/ectc51687.2025.00326/figures/cand/p05_fig10.png
+figure_reading_method: >-
+  Page renders (150 dpi) and manual re-crops of Figs. 3, 5, 6, 8, 10. Fig. 8 mean/sigma and Fig. 7 U values and Fig. 10
+  Sa/Sz are printed labels; Fig. 5 yield is the printed label 'Yield = 98.3%'. Fig. 6/12 time axes carry no tick values.
+entries:
+  - {table: metrics, row_id: ectc51687.2025.00326-a-m1, field: value, value: 1.49, unit: um, basis: measured, locator: "p.4 Fig. 8(a)", note: "Layer 3 sigma 0.04; Layer 2 1.49/0.07; Layer 1 1.47/0.08"}
+derived:
+  - {table: stack_layers, row_id: ectc51687.2025.00326-b-L04, field: thickness_um, value: 0.175, formula: "Ti 0.025 + Cu 0.150", inputs: "p.1 Sec. II.A"}
+conflicts:
+  - {table: metrics, row_id: ectc51687.2025.00326-b-m1, field: value, values: [98.3, "over 95", "over 98"], locators: ["p.3 Fig. 5(a)", "p.3 Sec. III.A", "p.5 Sec. IV"], chosen: 98.3, why: "measured plot label > text"}
+  - {table: metrics, row_id: ectc51687.2025.00326-a-m4, field: locator, values: ["text: Fig 10", "caption: Fig. 9"], locators: ["p.3 Sec. III.C", "p.4 Fig. 9"], chosen: "Fig. 9", why: "rule (c): cite caption label; text calls the daisy-chain plot Fig 10"}
+excluded:
+  - "L/S 2/2 um multilayer interposer of ref [5] (previous paper)"
+  - "Protective-material SAP structure details (ref [5]); only its b-HAST trace in Fig. 12 entered (TV d)"
+  - "Bossung-curve CD values (Fig. 2, simulation; exposure step 10 mJ/cm2) not entered as metrics"
+not_reported:
+  - "process_steps: ectc51687.2025.00326-d (protective-material SAP structure from ref [5]; process not described in this paper)"
+  - electrical_interfaces
+  - optical_interfaces
+  - die assembly / bumps (no top dies; despite abstract 'assembled')
+  - Cu wiring height for the 1.5/1.5 interposer, dielectric thickness used, dielectric and resist product names
+  - cure temperature/time, plating chemistry details, glass carrier thickness
+  - b-HAST time axis values and failure criterion
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F1-s01", change: "step 'form photosensitive base dielectric on glass carrier' -> 'form photosensitive base dielectric on 320 x 320 mm glass carrier'; target '320 x 320 mm glass carrier' -> ''; locator 'p.1 Sec. II.A' -> 'p.1 Sec. II.A; p.2 Fig. 1'", reason: "target held object names; moved to step text (target = stated geometry only)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F1-s03", change: "target '' -> 'L/S 1.5/1.5 um'; equipment 'i-line stepper (Ushio Inc. demo unit)' -> 'i-line stepper (Ushio Inc. demo unit); development machine'; split '' -> 'TV b test wiring: meander L/S 1.5/1.5 to 10/10 um; comb L/S 1.5/1.5, 2/2, 3/3 um'; locator 'p.1 Sec. II.A; p.2 Fig. 2' -> 'p.1 Sec. II.A; p.2 Fig. 2; p.2 Fig. 1; p.2 Sec. II.B; p.3 Sec. III.B'", reason: "stated L/S on step; development machine named; TV b test-wiring L/S range as split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F1-s06", change: "split '' -> 'TV b SAP wiring (Sec. III.D): standard etchant / etchant with roughness-reducing agent'; locator 'p.2 Sec. II.A' -> 'p.2 Sec. II.A; p.4 Sec. III.D'", reason: "Sec. III.D: SAP wiring of TV b also made with an etchant containing a roughness-reducing agent"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F1-s08", change: "tv_id '' -> 'ectc51687.2025.00326-a'", reason: "multilayer stacking applies only to interposer TV a; TV b (Sec. II.B-C) uses the single-layer part of Fig. 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F1-s09", change: "tv_id '' -> 'ectc51687.2025.00326-a'", reason: "multilayer stacking applies only to interposer TV a; TV b (Sec. II.B-C) uses the single-layer part of Fig. 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F1-s10", change: "tv_id '' -> 'ectc51687.2025.00326-a'", reason: "multilayer stacking applies only to interposer TV a; TV b (Sec. II.B-C) uses the single-layer part of Fig. 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F1-s11", change: "tv_id '' -> 'ectc51687.2025.00326-a'", reason: "multilayer stacking applies only to interposer TV a; TV b (Sec. II.B-C) uses the single-layer part of Fig. 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F1-s12", change: "tv_id '' -> 'ectc51687.2025.00326-a'", reason: "multilayer stacking applies only to interposer TV a; TV b (Sec. II.B-C) uses the single-layer part of Fig. 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F1-s13", change: "tv_id '' -> 'ectc51687.2025.00326-a'", reason: "multilayer stacking applies only to interposer TV a; TV b (Sec. II.B-C) uses the single-layer part of Fig. 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F1-s14", change: "tv_id '' -> 'ectc51687.2025.00326-a'", reason: "multilayer stacking applies only to interposer TV a; TV b (Sec. II.B-C) uses the single-layer part of Fig. 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F1-s09", change: "target '' -> 'via ~8 um diameter'; locator 'p.2 Sec. II.A' -> 'p.2 Sec. II.A; p.2 Fig. 1'", reason: "stated via diameter (Fig. 1 label 'Via 8 um', text ~8 um) as target"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F1-s13", change: "target '' -> 'L/S 1.5/1.5 um'", reason: "stated L/S on step (Fig. 1)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F1-s14", change: "category 'other' -> 'rdl_layer'; step 'third layer formed by the same method' -> 'form third wiring layer by the same method'", reason: "flagged other_category; step adds the third RDL layer"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F1-s15", change: "added step seq 8: cover L/S 1.5/1.5 um comb wiring with photosensitive dielectric", reason: "moved from deleted F2-s02 as TV b delta (Sec. II.C)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F1", change: "tv_ids + TV b; level full -> ordered; flow_name adds Sec. II.B-C", reason: "Sec. II.B-C: test wiring formed per Fig. 1 flow; no temperature/time/pressure stated anywhere in the flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F2-s01", change: "deleted step 'SAP meander and comb wiring per Fig. 1 flow'", reason: "restated the Fig. 1 flow; TV b now linked to F1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F2-s02", change: "deleted step 'cover comb wiring with photosensitive dielectric'", reason: "moved to F1-s15 as TV b delta"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F2", change: "flow deleted", reason: "duplicate of the Fig. 1 flow (F1); TV b linked to F1 with a delta"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F3-s01", change: "step 'form photosensitive base dielectric on wafer (1st exposure, develop, cure)' -> 'coat photosensitive base dielectric on wafer'; source 'mixed' -> 'text'", reason: "composite step split per Fig. 4 (1st exposure, 1st develop, 1st cure)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F3-s07", change: "added step seq 2: 1st exposure and 1st development of via openings", reason: "split from F3-s01 per Fig. 4; not performed (vias not opened, Sec. II.D)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F3-s08", change: "added step seq 3: 1st cure of base dielectric", reason: "split from F3-s01 per Fig. 4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F3-s02", change: "seq '2' -> '4'", reason: "seq after F3-s01 split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F3-s03", change: "seq '3' -> '5'; step 'trench patterning with i-line stepper and developer (2nd develop, 2nd cure)' -> 'trench 2nd exposure and 2nd development with i-line stepper and developer'; notes '' -> 'Fig. 4 panel 3 label reads 'Electro Plating / Resist Striping' but drawing shows 2nd dielectric UV exposure.'", reason: "seq after split; 2nd cure split out per Fig. 4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F3-s09", change: "added step seq 6: 2nd cure of trench dielectric", reason: "split from F3-s03 per Fig. 4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F3-s04", change: "seq '4' -> '7'", reason: "seq after splits"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F3-s05", change: "seq '5' -> '8'", reason: "seq after splits"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F3-s06", change: "seq '6' -> '9'; target '' -> 'L/S 1.5/1.5 um'", reason: "seq after splits; stated L/S as target"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F1", change: "step_basis set to stated_in_flow on 14 steps", reason: "order given in the paper's flow text/figure"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326-F3", change: "step_basis set to stated_in_flow on 6 steps", reason: "order given in the paper's flow text/figure"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326", change: "process_flow_level full -> ordered", reason: "ordered SAP/damascene flows with materials and tools but no temperature/time/pressure"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00326", change: "not_reported + process_steps: ectc51687.2025.00326-d", reason: "physical TV without a described build flow"}

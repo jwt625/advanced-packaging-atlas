@@ -1,0 +1,55 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc51687.2025.00014-a01-1,ectc51687.2025.00014,1,Yasutaka Mizuno,1,primary,Sumitomo Electric Industries,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51687.2025.00014-a02-1,ectc51687.2025.00014,2,Kunio Kobayashi,1,primary,Sumitomo Electric Industries,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51687.2025.00014-a03-1,ectc51687.2025.00014,3,Shingo Nakamura,1,primary,Sumitomo Electric Industries,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51687.2025.00014-a04-1,ectc51687.2025.00014,4,Masaki Migita,1,primary,Sumitomo Electric Industries,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51687.2025.00014-a05-1,ectc51687.2025.00014,5,Hajime Arao,1,primary,Sumitomo Electric Industries,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51687.2025.00014-a06-1,ectc51687.2025.00014,6,Tetsuya Nakanishi,1,primary,Sumitomo Electric Industries,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51687.2025.00014-a07-1,ectc51687.2025.00014,7,Hiroshi Uemura,1,primary,Sumitomo Electric Industries,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51687.2025.00014-a08-1,ectc51687.2025.00014,8,Keiji Tanaka,1,primary,Sumitomo Electric Industries,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51687.2025.00014-a09-1,ectc51687.2025.00014,9,Katsumi Uesaka,1,primary,Sumitomo Electric Industries,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51687.2025.00014-a10-1,ectc51687.2025.00014,10,Mami Miyairi,1,primary,FICT,,Nagano,JP,"printed locality: Nagano, Japan (city or prefecture)",paper,p.1 affiliations
+ectc51687.2025.00014-a11-1,ectc51687.2025.00014,11,Yoshikatsu Ishizuki,1,primary,FICT,,Nagano,JP,"printed locality: Nagano, Japan (city or prefecture)",paper,p.1 affiliations
+ectc51687.2025.00014-a12-1,ectc51687.2025.00014,12,Yoichiro Kurita,1,primary,Institute of Science Tokyo,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51687.2025.00027-a01-1,ectc51687.2025.00027,1,Kazue Hirano,1,primary,JOINT2,,Kawasaki,JP,"printed: Consortium JOINT2 (Jisso Open Innovation Network of Tops 2), Resonac Corporation",paper,p.1 affiliations
+ectc51687.2025.00027-a01-2,ectc51687.2025.00027,1,Kazue Hirano,2,additional,Resonac,,Kawasaki,JP,same printed block as JOINT2,paper,p.1 affiliations
+ectc51687.2025.00027-a02-1,ectc51687.2025.00027,2,Dongchul Kang,1,primary,JOINT2,,Kawasaki,JP,"printed: Consortium JOINT2 (Jisso Open Innovation Network of Tops 2), Resonac Corporation",paper,p.1 affiliations
+ectc51687.2025.00027-a02-2,ectc51687.2025.00027,2,Dongchul Kang,2,additional,Resonac,,Kawasaki,JP,same printed block as JOINT2,paper,p.1 affiliations
+ectc51687.2025.00027-a03-1,ectc51687.2025.00027,3,Masaki Takahashi,1,primary,JOINT2,,Kawasaki,JP,"printed: Consortium JOINT2 (Jisso Open Innovation Network of Tops 2), Resonac Corporation",paper,p.1 affiliations
+ectc51687.2025.00027-a03-2,ectc51687.2025.00027,3,Masaki Takahashi,2,additional,Resonac,,Kawasaki,JP,same printed block as JOINT2,paper,p.1 affiliations
+ectc51687.2025.00027-a04-1,ectc51687.2025.00027,4,Motoo Aoyama,1,primary,JOINT2,,Kawasaki,JP,"printed: Consortium JOINT2 (Jisso Open Innovation Network of Tops 2), Resonac Corporation",paper,p.1 affiliations
+ectc51687.2025.00027-a04-2,ectc51687.2025.00027,4,Motoo Aoyama,2,additional,Resonac,,Kawasaki,JP,same printed block as JOINT2,paper,p.1 affiliations
+ectc51687.2025.00027-a05-1,ectc51687.2025.00027,5,Yuji Inui,1,primary,JOINT2,,Kawasaki,JP,"printed: Consortium JOINT2 (Jisso Open Innovation Network of Tops 2), Resonac Corporation",paper,p.1 affiliations
+ectc51687.2025.00027-a05-2,ectc51687.2025.00027,5,Yuji Inui,2,additional,Resonac,,Kawasaki,JP,same printed block as JOINT2,paper,p.1 affiliations
+ectc51687.2025.00027-a06-1,ectc51687.2025.00027,6,Takahiro Iseki,1,primary,JOINT2,,Kawasaki,JP,"printed: Consortium JOINT2 (Jisso Open Innovation Network of Tops 2), Resonac Corporation",paper,p.1 affiliations
+ectc51687.2025.00027-a06-2,ectc51687.2025.00027,6,Takahiro Iseki,2,additional,Resonac,,Kawasaki,JP,same printed block as JOINT2,paper,p.1 affiliations
+ectc51687.2025.00027-a07-1,ectc51687.2025.00027,7,Sadaaki Katoh,1,primary,JOINT2,,Kawasaki,JP,"printed: Consortium JOINT2 (Jisso Open Innovation Network of Tops 2), Resonac Corporation",paper,p.1 affiliations
+ectc51687.2025.00027-a07-2,ectc51687.2025.00027,7,Sadaaki Katoh,2,additional,Resonac,,Kawasaki,JP,same printed block as JOINT2,paper,p.1 affiliations
+ectc51687.2025.00049-a01-1,ectc51687.2025.00049,1,Thomas Lesueur,1,primary,Université de Sherbrooke,Institut Interdisciplinaire d'Innovation Technologique (3IT),Sherbrooke,CA,,paper,p.1 affiliations
+ectc51687.2025.00049-a01-2,ectc51687.2025.00049,1,Thomas Lesueur,2,additional,CNRS,Laboratoire Nanotechnologies Nanosystèmes (LN2),Sherbrooke,CA,"printed in same block as 3IT, Université de Sherbrooke",paper,p.1 affiliations
+ectc51687.2025.00049-a02-1,ectc51687.2025.00049,2,David Danovitch,1,primary,Université de Sherbrooke,Institut Interdisciplinaire d'Innovation Technologique (3IT),Sherbrooke,CA,,paper,p.1 affiliations
+ectc51687.2025.00049-a02-2,ectc51687.2025.00049,2,David Danovitch,2,additional,CNRS,Laboratoire Nanotechnologies Nanosystèmes (LN2),Sherbrooke,CA,"printed in same block as 3IT, Université de Sherbrooke",paper,p.1 affiliations
+ectc51687.2025.00049-a03-1,ectc51687.2025.00049,3,Dominique Drouin,1,primary,Université de Sherbrooke,Institut Interdisciplinaire d'Innovation Technologique (3IT),Sherbrooke,CA,,paper,p.1 affiliations
+ectc51687.2025.00049-a03-2,ectc51687.2025.00049,3,Dominique Drouin,2,additional,CNRS,Laboratoire Nanotechnologies Nanosystèmes (LN2),Sherbrooke,CA,"printed in same block as 3IT, Université de Sherbrooke",paper,p.1 affiliations
+ectc51687.2025.00049-a04-1,ectc51687.2025.00049,4,Isabel de Sousa,1,primary,IBM Canada,,Bromont,CA,,paper,p.1 affiliations
+ectc51687.2025.00049-a05-1,ectc51687.2025.00049,5,Divya Taneja,1,primary,IBM Canada,,Bromont,CA,,paper,p.1 affiliations
+ectc51687.2025.00049-a06-1,ectc51687.2025.00049,6,Akihiro Horibe,1,primary,IBM,IBM Research - Tokyo,Kawasaki,JP,,paper,p.1 affiliations
+ectc51687.2025.00049-a07-1,ectc51687.2025.00049,7,Sayuri Kohara,1,primary,IBM,IBM Research - Tokyo,Kawasaki,JP,,paper,p.1 affiliations
+ectc51687.2025.00026-a01-1,ectc51687.2025.00026,1,Yu-Hsiang Hu,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00026-a02-1,ectc51687.2025.00026,2,Chien-Hsun Lee,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00026-a03-1,ectc51687.2025.00026,3,Jyun-Siang Peng,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00026-a04-1,ectc51687.2025.00026,4,Hsin-Yu Chen,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00026-a05-1,ectc51687.2025.00026,5,Pei-Hsuan Lee,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00026-a06-1,ectc51687.2025.00026,6,Jowett Li,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00026-a07-1,ectc51687.2025.00026,7,J. Shieh,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00026-a08-1,ectc51687.2025.00026,8,Eric Chen,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00026-a09-1,ectc51687.2025.00026,9,M.C. Yew,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00026-a10-1,ectc51687.2025.00026,10,Shin-Puu Jeng,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00026-a11-1,ectc51687.2025.00026,11,Kathy Yan,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00026-a12-1,ectc51687.2025.00026,12,Jun He,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00028-a01-1,ectc51687.2025.00028,1,Kyojin Hwang,1,primary,Samsung Electronics,S.LSI Business,Hwaseong-si,KR,printed: Samsung Electronics Co. Ltd.,paper,p.1 affiliations
+ectc51687.2025.00028-a02-1,ectc51687.2025.00028,2,Woobin Jung,1,primary,Samsung Electronics,S.LSI Business,Hwaseong-si,KR,printed: Samsung Electronics Co. Ltd.,paper,p.1 affiliations
+ectc51687.2025.00028-a03-1,ectc51687.2025.00028,3,Heejung Choi,1,primary,Samsung Electronics,S.LSI Business,Hwaseong-si,KR,printed: Samsung Electronics Co. Ltd.,paper,p.1 affiliations
+ectc51687.2025.00028-a04-1,ectc51687.2025.00028,4,Heeseok Lee,1,primary,Samsung Electronics,S.LSI Business,Hwaseong-si,KR,printed: Samsung Electronics Co. Ltd.,paper,p.1 affiliations
+ectc51687.2025.00028-a05-1,ectc51687.2025.00028,5,Junso Pak,1,primary,Samsung Electronics,S.LSI Business,Hwaseong-si,KR,printed: Samsung Electronics Co. Ltd.,paper,p.1 affiliations
+ectc51687.2025.00028-a06-1,ectc51687.2025.00028,6,Kisu Joo,1,primary,Samsung Electronics,S.LSI Business,Hwaseong-si,KR,printed: Samsung Electronics Co. Ltd.,paper,p.1 affiliations

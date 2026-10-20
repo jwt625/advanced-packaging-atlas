@@ -1,0 +1,68 @@
+paper_id: ectc51687.2025.00226
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00226/text.md
+  - references/ectc51687.2025.00226/source.json
+  - references/ectc51687.2025.00226/figures/page_03.png
+  - references/ectc51687.2025.00226/figures/page_04.png
+  - references/ectc51687.2025.00226/figures/page_05.png
+  - references/ectc51687.2025.00226/figures/page_06.png
+  - references/ectc51687.2025.00226/figures/cand/p02_fig1.png
+  - references/ectc51687.2025.00226/figures/cand/p05_fig5.png
+  - references/ectc51687.2025.00226/figures/cand/p06_fig6.png
+  - references/ectc51687.2025.00226/figures/cand/p04_fig4.png
+figure_reading_method: >-
+  Tables I and II read from page renders and manual crops. Fig. 3, 4, 6 values read from 300 dpi re-crops against
+  gridlines (+/-2 MPa for Fig. 3/4, +/-0.05 ohm for Fig. 6).
+entries:
+  - {table: test_vehicles, row_id: ectc51687.2025.00226-e, field: interconnect count, value: 64, unit: ea, basis: design_target, locator: "p.2 Sec. II", note: "8x8 bumps of phi 75 um on Cu pads"}
+  - {table: interconnects, row_id: ectc51687.2025.00226-c-i1, field: bonding_time_s, value: 60, unit: s, basis: design_target, locator: "p.2 Sec. II", note: "1 min compression at 20 MPa, 300 C, reduction atmosphere"}
+derived:
+  - {table: metrics, row_id: ectc51687.2025.00226-a-m2, field: value, value: 43.5, formula: "authors' Eq. (1): (actual - theoretical)/actual x 100; value as printed in Table I", inputs: "p.2 Eq. (1); p.3 Table I"}
+  - {table: process_steps, row_id: ectc51687.2025.00226-F1-s05, field: time_s, value: 60, formula: "1 min x 60", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: ectc51687.2025.00226-F1-s08, field: time_s, value: 60, formula: "1 min x 60", inputs: "p.2 Sec. II"}
+  - {table: interconnects, row_id: ectc51687.2025.00226-c-i1, field: bonding_time_s, value: 60, formula: "1 min x 60", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: ectc51687.2025.00226-F1-s04, field: current_density_ma_cm2, value: 10, formula: "1.0 ASD = 1.0 A/dm2 x 10", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: ectc51687.2025.00226-F1-s06, field: current_density_ma_cm2, value: 10, formula: "1.0 ASD = 1.0 A/dm2 x 10", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: ectc51687.2025.00226-F1-s10, field: time_s, value: 60, formula: "1 min x 60", inputs: "p.2 Sec. II"}
+conflicts:
+  - {table: metrics, row_id: ectc51687.2025.00226-c-m3, field: value, values: ["3x NP-Cu/Ni (text)", "18.7 vs 3.7 MPa plotted (~5x)"], locators: ["p.4 Sec. III.b", "p.4 Fig. 4"], chosen: 18.7, why: "plotted measurement over text"}
+  - {table: metrics, row_id: ectc51687.2025.00226-e-m4, field: value_text, values: ["NP-Cu/Ni/Ag resistance 'almost the same' as Ni/SnAg", "2.1 vs 1.6 ohm"], locators: ["p.5 Sec. III", "p.5 Table II"], chosen: 2.1, why: "result table"}
+  - {table: metrics, row_id: ectc51687.2025.00226-b-m1, field: ordering, values: ["text lists order 'NP-Cu/SnAg, NP-Cu/Ni, NP-Cu and NP-Cu/SnAg' (typo)", "Fig. 3 curves"], locators: ["p.4 Sec. III.b", "p.4 Fig. 3"], chosen: "Fig. 3 readings", why: "plot"}
+excluded:
+  - "Prior NP-Cu shear-strength mechanism (sintering + additive reduction) attributed to ref [19]"
+  - "Co-electroplating + dealloying NP-Cu routes of refs [16], [17]"
+  - "Theoretical Ag deposition volume 2.9x Cu (stoichiometric argument, not a measurement); thickness ratio 1.18x NP-Cu/Ag vs NP-Cu not entered separately"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - bump pitch (fine-pitch claimed; pitch not stated for phi 7 um bumps)
+  - chip sizes, thicknesses and materials of shear and bump-to-bump coupons
+  - bonding conditions of the Fig. 5 bump-to-bump samples
+  - bonder/plating equipment, wafer size
+  - reliability stress (thermal aging, TC, EM stated as future work)
+  - sample counts for shear and resistance
+source_quality:
+  - "No candidates for Table I and Table II; manual crops used."
+  - "Table II B' electrical resistance cell is blank; Fig. 6 gives row resistances for B'."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00226-F1", change: "tv_ids \"ectc51687.2025.00226-a\" -> \"ectc51687.2025.00226-a;ectc51687.2025.00226-b;ectc51687.2025.00226-c;ectc51687.2025.00226-d\"; notes (empty) -> \"Fig. 1 bump process applies to all porous bumps; b adds a 5 um Cu pillar, c and d add bonding (deltas).\"", reason: "Fig. 1 is the process of all multilayer porous bumps; b-d bumps plated at the same conditions (p.2 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00226-F2", change: "level \"ordered\" -> \"full\"; notes (empty) -> \"Ref. 1 (Sn) and Ref. 2 (Ni/SnAg) solder references: only Table II bonding conditions given.\"", reason: "materials, thicknesses and Table II bonding conditions disclosed (rule 7 full)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00226-F1", change: "step_basis stated_in_flow on all steps of F1 and F2", reason: "order from Fig. 1 (1)-(5) and p.2 Sec. II text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00226-F1-s01", change: "notes (empty) -> \"Fig. 1 (1) pretreatment. Ti 100 nm / Cu 500 nm stated for a; not stated for b-d.\"", reason: "seed thicknesses stated for the etch-test wafer only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00226-F1-s02", change: "target \"phi 7 um openings\" -> \"phi 7 um\"; split (empty) -> \"bump pattern: phi 7 um (a, c top chip, d) / phi 25 um (b); c bottom chip unpatterned\"", reason: "pattern diameter differs by TV: split on the shared step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00226-F1-s09", change: "added: plate 5 um Cu pillar on phi 25 um pattern", reason: "b coupon: 5 um Cu pillar plated before porous bumps (p.2 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00226-F1-s03", change: "notes \"Single-step NP-Cu plating, no dealloying.\" -> \"Single-step NP-Cu plating, no dealloying. Theoretical 3.5 um total; two ASD values not typed.\"", reason: "step plating at two current densities kept as written (no single typed value)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00226-F1-s04", change: "current_density_ma_cm2 (empty) -> \"10\"; conditions \"1.0 ASD; theoretical 1.0 um; conditions B, C\" -> \"1.0 ASD; theoretical 1.0 um\"; split (empty) -> \"Ni-capped variants only: NP-Cu/Ni (B), NP-Cu/Ni/Ag (C)\"", reason: "1.0 ASD typed (x10 mA/cm2); variants as split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00226-F1-s05", change: "conditions \"immersion 1 min at RT; conditions A, C (after Ni for C)\" -> \"immersion 1 min at room temp\"; split (empty) -> \"Ag variants only: NP-Cu/Ag (A), NP-Cu/Ni/Ag (C, after Ni)\"", reason: "variants as split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00226-F1-s06", change: "current_density_ma_cm2 (empty) -> \"10\"; conditions \"1.0 ASD; theoretical 2.0 um; condition D\" -> \"1.0 ASD; theoretical 2.0 um\"; split (empty) -> \"SnAg variant only: NP-Cu/SnAg (D)\"", reason: "1.0 ASD typed (x10 mA/cm2); variant as split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00226-F1-s10", change: "added: bond top chip (phi 7 um porous bumps) to unbumped bottom chip", reason: "c coupon bonding conditions stated p.2 Sec. II and p.4 Sec. III.b"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00226-F1-s11", change: "added: bump-to-bump bonding of phi 7 um porous bumps (NP-Cu/Ni/Ag; NP-Cu/SnAg)", reason: "d coupon: bump-to-bump bonding stated p.2 Sec. II and p.4 Sec. III.b"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00226-F1", change: "seq renumbered 1..10 within flow", reason: "b Cu-pillar delta inserted at seq 3; c/d bonding deltas at seq 10"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00226-F2-s02", change: "target (empty) -> \"phi 75 um, 8x8 (64)\"", reason: "stated pad geometry"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00226-F2-s03", change: "split (empty) -> \"NP-Cu/Ni 3.5/1.0 um (A); NP-Cu/Ni/Ag 3.5/1.0/- um (B, B'); NP-Cu/SnAg 3.5/2.0 um (C, D)\"; locator \"p.2 Sec. II\" -> \"p.2 Sec. II; p.5 Table II\"", reason: "metallurgy variants of Table II as split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00226-F2-s05", change: "atmosphere (empty) -> \"other\"; conditions \"Table II: 250-300 C, 10-50 MPa, 60-600 s per condition\" -> \"with flux; reduction atmosphere\"; split (empty) -> \"C/MPa/s: Ref.1 Sn 250/0.2/15; Ref.2 Ni/SnAg 300/0.5/180; A 300/20/180; B 300/20/180; B' 300/50/600; C 300/20/60; D 250/10/60\"", reason: "Table II bonding conditions are a sweep: split; reduction atmosphere typed other"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00226-F2-s06", change: "deleted (measure overall chain resistance and resistance between rows)", reason: "post-build electrical measurement; values already in metrics ectc51687.2025.00226-e-m1..m10"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00226-F1-s01", change: "target: \"\" -> \"Ti 100 nm / Cu 500 nm\"", reason: "stated barrier/seed thicknesses (p.2 Sec. II) go on the step as target"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00226-F2-s01", change: "target: \"\" -> \"Ti 30 nm / Cu 100 nm\"", reason: "stated Ti/Cu thicknesses of the daisy-chain wafers (p.2 Sec. II) go on the step as target"}

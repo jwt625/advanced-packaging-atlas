@@ -1,0 +1,80 @@
+paper_id: ectc51687.2025.00076
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00076/text.md
+  - references/ectc51687.2025.00076/source.json
+  - references/ectc51687.2025.00076/figures/page_02.png
+  - references/ectc51687.2025.00076/figures/page_03.png
+  - references/ectc51687.2025.00076/figures/page_04.png
+  - references/ectc51687.2025.00076/figures/page_05.png
+  - references/ectc51687.2025.00076/figures/page_06.png
+  - references/ectc51687.2025.00076/figures/page_07.png
+  - references/ectc51687.2025.00076/figures/cand/p07_tablei.png
+figure_reading_method: >-
+  Page renders plus grid renders of p.4, 6, 7; 400 dpi re-crop of Fig. 4(a) labels; Table I from candidate crop;
+  Fig. 5(b) marker values read from inset labels (m1 19.48 MHz, |Z| 0.066 ohm).
+entries:
+  - {table: interconnects, row_id: ectc51687.2025.00076-a-i1, field: depth_um, value: 30, unit: um, basis: design_target, locator: "p.4 Fig. 3 caption", note: "via height 30 um = ABF thickness"}
+  - {table: interconnects, row_id: ectc51687.2025.00076-c-i1, field: notes, value: "60-80", unit: um, basis: design_target, locator: "p.1 Abstract", note: "TGV radius range; no diameter column range, kept in notes"}
+derived:
+  - {table: interconnects, row_id: ectc51687.2025.00076-a-i1, field: diameter_um, value: 100, formula: "2 x radius 50 um", inputs: "p.4 Fig. 3 caption"}
+  - {table: stack_layers, row_id: ectc51687.2025.00076-a-L02, field: via_diameter_um, value: 100, formula: "2 x radius 50 um", inputs: "p.4 Fig. 3 caption"}
+  - {table: interconnects, row_id: ectc51687.2025.00076-b-i1, field: diameter_um, value: 134, formula: "2 x max top radius 67 um", inputs: "p.4 Sec. III.A"}
+  - {table: stack_layers, row_id: ectc51687.2025.00076-b-L04, field: via_diameter_um, value: 134, formula: "2 x 67 um", inputs: "p.4 Sec. III.A"}
+  - {table: interconnects, row_id: ectc51687.2025.00076-b-i2, field: diameter_um, value: 155, formula: "2 x top radius 77.5 um", inputs: "p.4 Sec. III.A; p.7 Sec. IV"}
+  - {table: stack_layers, row_id: ectc51687.2025.00076-b-L02, field: via_diameter_um, value: 155, formula: "2 x 77.5 um", inputs: "p.4 Sec. III.A"}
+  - {table: interconnects, row_id: ectc51687.2025.00076-b-i2, field: total_length_um, value: 45, formula: "via1 30 um + via2 15 um", inputs: "p.4 Sec. III.A; p.4 Fig. 4(c)"}
+  - {table: components, row_id: ectc51687.2025.00076-a-c1, field: cavity_x_mm, value: 1.61, formula: "1.6 mm + 10 um", inputs: "p.2 Fig. 1(b); p.6 Sec. IV"}
+  - {table: components, row_id: ectc51687.2025.00076-a-c1, field: cavity_y_mm, value: 1.81, formula: "1.8 mm + 10 um", inputs: "p.2 Fig. 1(b); p.6 Sec. IV"}
+  - {table: components, row_id: ectc51687.2025.00076-a-c1, field: gap_um, value: 5, formula: "10 um oversize / 2 per side (nominal, centered)", inputs: "p.6 Sec. IV"}
+  - {table: components, row_id: ectc51687.2025.00076-b-c1, field: cavity_x_mm, value: 1.61, formula: "same as -a-c1", inputs: "p.2 Fig. 1(b); p.6 Sec. IV"}
+  - {table: components, row_id: ectc51687.2025.00076-b-c1, field: cavity_y_mm, value: 1.81, formula: "same as -a-c1", inputs: "p.2 Fig. 1(b); p.6 Sec. IV"}
+  - {table: components, row_id: ectc51687.2025.00076-b-c1, field: gap_um, value: 5, formula: "same as -a-c1", inputs: "p.6 Sec. IV"}
+  - {table: process_steps, row_id: ectc51687.2025.00076-F1-s08, field: thickness_um, value: 0.05, formula: "50 nm x 1e-3", inputs: "p.7 Sec. IV"}
+  - {table: process_steps, row_id: ectc51687.2025.00076-F1-s09, field: thickness_um, value: 0.2, formula: "200 nm x 1e-3", inputs: "p.7 Sec. IV"}
+  - {table: process_steps, row_id: ectc51687.2025.00076-F1-s05, field: time_s, value: 1800, formula: "30 min x 60", inputs: "p.7 Sec. IV"}
+  - {table: process_steps, row_id: ectc51687.2025.00076-F1-s06, field: time_s, value: 1800, formula: "30 min x 60", inputs: "p.7 Sec. IV"}
+conflicts:
+  - {table: interconnects, row_id: ectc51687.2025.00076-a-i1, field: diameter_um, values: ["50 um copper vias (text)", "50 um radius (caption) -> 100 um diameter"], locators: ["p.3 Sec. III.A", "p.4 Fig. 3 caption"], chosen: 100, why: "caption states radius explicitly; consistent with 67 um max radius design rule at 200 um pitch in Design 2"}
+  - {table: interconnects, row_id: ectc51687.2025.00076-b-i2, field: notes, values: ["bottom radius ~73 um", "bottom radius 70.5 um"], locators: ["p.4 Sec. III.A", "p.7 Sec. IV"], chosen: "both in notes", why: "two text values for the same via; 73 um matches 72 deg taper over 15 um"}
+  - {table: stack_layers, row_id: ectc51687.2025.00076-b-L01, field: layer_name, values: ["top Cu = GND (text, Fig. 4(b))", "top Cu = Source (Fig. 4(a) label)"], locators: ["p.4 Sec. III.A; p.4 Fig. 4(b)", "p.4 Fig. 4(a)"], chosen: "GND", why: "text > schematic; Fig. 4(b) agrees with text"}
+  - {table: components, row_id: ectc51687.2025.00076-a-c1, field: thickness_um, values: [210, "50-210 (abstract)", "70-210 (Fig. 4(b))"], locators: ["p.2 Fig. 1(b)", "p.1 Abstract", "p.4 Fig. 4(b)"], chosen: 210, why: "chip used in this study per caption; ranges describe the product family/concept"}
+excluded:
+  - "Prior DTC results: 440 nF/mm2 [9]; <1 pH ESL, 43.7 nF, 65-800 mOhm [10]; glass DTC 68 nF/mm2, 10 pH, 315 mOhm [15]; titanate 20-30 nF/mm2 [16]"
+  - "ELSPES 1,500 nF/mm2 density and 2,000 nF/mm2 under development [18]-[19] (vendor references)"
+  - "Fig. 2 3D-stacked IVR architecture from previous work [2] (1-2 kW load, 100x130 mm package, 25x40 mm IVR, GaN switches)"
+  - "SOLT calibration kit values (C-open 5.0 fF, L-short 12.0 pH, L-load 6.0 pH) in Fig. 6(b): test equipment, not TV"
+  - "Future-work concept: <90 um DTCs in 90 um ABF stack (3 x 30 um ABF)"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - glass type/CTE, ABF grade for the eCAP coupons (GL102 named only for IVR architecture), carrier size and format
+  - laser types and parameters, plating chemistry, seed etch method, PR product
+  - TGV pitch, depth, count; whether the TGV flow was fabricated
+  - measured ESR/ESL of embedded DTC (future work), reliability, warpage, yield
+source_quality:
+  - "Fig. 4(a) top/middle Cu labels (Source/GND) are swapped relative to text and Fig. 4(b)."
+  - "Only Table I and Fig. 1 had candidates for the chosen figures besides Fig. 2 and Fig. 8; Figs. 3, 4, 7, 10 needed manual bboxes."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1, change: "notes rewritten", reason: "Design 2 is simulated only (p.4 Sec. III.B; p.1 Abstract)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F2, change: "notes added", reason: "build order and status"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1, change: "step_basis set to stated_in_flow on steps without one", reason: "order is stated in the paper's flow text/figure"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F2, change: "step_basis set to stated_in_flow on steps without one", reason: "order is stated in the paper's flow text/figure"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1-s02, change: "equipment: '' -> 'laser'", reason: "tool type"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1-s03, change: "equipment: '' -> 'pick-and-place equipment'", reason: "named tool"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1-s04, change: "equipment: '' -> 'lamination tool'", reason: "named tool"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1-s05, change: "notes: '30 min; groove depth <5 um over die-glass gap after cure.' -> '30 min.'", reason: "groove depth moved to the result of the cure sequence (s06)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1-s06, change: "result: '' -> 'groove depth <5 um over die-glass gap'", reason: "stated result after cure"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1-s07, change: "equipment: '' -> 'laser'; target: '' -> 'via 1 height 30 um; 200 um pad pitch'; split: '' -> 'via 1 top radius: Design 1 50 um / Design 2 max 67 um (bottom ~58 um)'; locator: 'p.7 Sec. IV; p.4 Sec. III.A' -> 'p.7 Sec. IV; p.4 Sec. III.A; p.4 Fig. 3'", reason: "stated via geometry; per-design value in split"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1-s08, change: "equipment: '' -> 'sputter'; conditions: '' -> '50 nm'", reason: "original unit kept; tool type"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1-s09, change: "equipment: '' -> 'sputter'; conditions: '' -> '200 nm'", reason: "original unit kept; tool type"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1-s11, change: "split: '' -> 'Design 1: horizontal traces ~100 um x 1.5 mm / Design 2: source plate'; locator: 'p.7 Sec. IV; p.7 Fig. 10(b) step 5' -> 'p.7 Sec. IV; p.7 Fig. 10(b) step 5; p.3 Sec. III.A'", reason: "per-design pattern in split"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1-s14, change: "performed: '' -> 'no'", reason: "Design 2 not fabricated (simulation only)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1-s15, change: "performed: '' -> 'no'", reason: "Design 2 not fabricated (simulation only)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1-s16, change: "performed: '' -> 'no'", reason: "Design 2 not fabricated (simulation only)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1-s17, change: "performed: '' -> 'no'", reason: "Design 2 not fabricated (simulation only)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1-s18, change: "performed: '' -> 'no'", reason: "Design 2 not fabricated (simulation only)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1-s19, change: "performed: '' -> 'no'", reason: "Design 2 not fabricated (simulation only)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1-s20, change: "performed: '' -> 'no'", reason: "Design 2 not fabricated (simulation only)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1-s21, change: "performed: '' -> 'no'", reason: "Design 2 not fabricated (simulation only)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51687.2025.00076-F1-s16, change: "equipment: '' -> 'laser'; target: '' -> 'via 2 top radius ~77.5 um (8 um larger than via 1); bottom radius 70.5 um'; conditions: 'top radius ~77.5 um, 72 deg taper' -> '72 deg via taper'", reason: "via geometry is a target, taper a condition"}

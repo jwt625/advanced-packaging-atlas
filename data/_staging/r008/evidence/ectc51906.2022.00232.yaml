@@ -36,4 +36,9 @@ not_reported:
   - substrate layer count, build-up materials, total thickness; absolute package warpage values
   - reliability sample counts; number of reflows in the pre-optimization failure test; FEA model details
 source_quality:
-  - "text.md p.1 Abstract renders the '>=' sign (U+2A7E) as a dotless i ('ı65x65mm2'); page image read instead. No other garbling."
+  - "text.md p.1 Abstract renders the '>=' sign (U+2A7E) as a dotless i (U+0131) before '65x65mm2'; page image read instead. No other garbling."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51906.2022.00232-b-m3, change: "deleted (copy of a-m3)", reason: "p.3 Sec. III.C states trace cracking after multi-reflow for TV1 and TV2 jointly; no per-TV result"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51906.2022.00232-a-m3, change: "scope set to 'applies to TVs a, b'; notes added", reason: "single row for a claim stated for both builds"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51906.2022.00232, change: "papers.notes trimmed from 32 to 28 words", reason: "audit_x1 item 15, rule (m) notes <= 30 words"}
+  - {date: 2026-10-19, source: audit_x1, row_id: evidence.source_quality, change: "non-ASCII dotless-i quote replaced by its code point name", reason: "audit_x1 sec. 7 hygiene (non-ASCII in this evidence file)"}

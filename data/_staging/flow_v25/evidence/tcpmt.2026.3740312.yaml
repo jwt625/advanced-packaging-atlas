@@ -1,0 +1,54 @@
+paper_id: tcpmt.2026.3740312
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/tcpmt.2026.3740312/text.md
+  - references/tcpmt.2026.3740312/source.json
+  - references/tcpmt.2026.3740312/figures/page_02.png
+  - references/tcpmt.2026.3740312/figures/page_03.png
+  - references/tcpmt.2026.3740312/figures/page_05.png
+  - references/tcpmt.2026.3740312/figures/page_06.png
+  - references/tcpmt.2026.3740312/figures/page_07.png
+figure_reading_method: >-
+  Page renders p.2, 3, 5, 6, 7 viewed; candidate crops of Fig. 1, 5, 6, 7, 8, 9 opened; 300 dpi re-crops of Fig. 1(b),
+  Fig. 6(g) (bump height profile) and Fig. 8 (CDF bar labels).
+entries:
+  - {table: interconnects, row_id: tcpmt.2026.3740312-a-i1, field: count, value: 1152, unit: pairs, basis: design_target, locator: "p.1 Abstract", note: "daisy-chain test vehicle with 1152 bonding pairs"}
+  - {table: interconnects, row_id: tcpmt.2026.3740312-a-i1, field: diameter_um, value: 50, unit: um, basis: design_target, locator: "p.5 Sec. III.B", note: "'original 50um In bump system' for R-T tests"}
+  - {table: interconnects, row_id: tcpmt.2026.3740312-c-i1, field: height_um, value: 4.1, unit: um, basis: measured, locator: "p.5 Fig. 6(g)", note: "profile plateau about 4.1 um, read +/-0.2 um"}
+derived: []
+conflicts:
+  - {table: interconnects, row_id: tcpmt.2026.3740312-c-i1, field: height_um, values: [4.1, 5], locators: ["p.5 Fig. 6(g)", "p.2 Sec. I"], chosen: 4.1, why: "measured profile of 10 um bumps beats the general 5 um-thick text statement (kept for the 50 um TV)"}
+  - {table: metrics, row_id: tcpmt.2026.3740312-a-m3, field: scope, values: ["resistance per link", "daisy chain resistance"], locators: ["p.5 Sec. III.B (both phrases)"], chosen: "daisy chain", why: "R-M section gives ~200 ohm chain normal-state resistance consistent with Fig. 7(a)"}
+excluded:
+  - "AuIn alloy Tc 0.4-0.6 K (refs [23], [24])"
+  - "Josephson-junction-compatible temperature <150 C (refs [18], [19]); In oxide removal methods (refs [12], [20]-[22])"
+  - "electroplated In with Cu seed interface distribution (ref [13]); NbOx/TiOx resistivity trends (refs [30], [31])"
+  - "In melting point 156.6 C and ideal Tc values 9.25 K / 3.4 K (handbook values, used only as notes)"
+not_reported:
+  - "process_steps: tcpmt.2026.3740312-e (Nb/Ti/In stack named only; deposition steps and thicknesses not stated)"
+  - electrical_interfaces, optical_interfaces
+  - chip sizes and thicknesses; bump pitch of the 50 um daisy chain; number of chains/chips
+  - bonding force, pressure, time; Nb/UBM patterning method; Nb/Ti/Au deposition method (sputter vs evaporation)
+  - per-joint resistance; critical field values (Fig. 10 shown without stated numbers)
+  - measurement temperature of the Fig. 8 CDF; sample1 bump size
+source_quality:
+  - "Accepted author version (not final). Text layer clean; no TEXT_LAYER_WARNING."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3740312-F1-s01", change: "step_basis stated_in_flow", reason: "p.2 Sec. II.A 'Firstly'"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3740312-F1-s02", change: "step_basis stated_in_flow; split sample2 vs sample1 oxide removal; notes", reason: "p.3 Sec. II.A; p.6 Sec. III.C; p.7 Sec. III.D: sample1 Nb not thoroughly cleaned"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3740312-F1-s03", change: "Ti thickness per variant moved to split (300 nm a, c / 40 nm b); thickness_um cleared; step_basis stated_in_flow", reason: "p.3 Sec. II.A; p.6 Sec. III.D; convention: per-variant value in split"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3740312-F1-s04", change: "step_basis stated_in_flow", reason: "p.3 Sec. II.A 'in sequence'"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3740312-F1-s05", change: "step_basis inferred_order; target bump openings; split per TV; conditions bi-layer resist", reason: "p.3 Sec. II.A-B; p.2 Fig. 1(c)-(g)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3740312-F1-s06", change: "step_basis stated_in_flow; conditions add no strict pretreatment before evaporation", reason: "p.3 Sec. II.A"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3740312-F1-s07", change: "step_basis stated_in_flow", reason: "p.3 Sec. II.A 'After forming the In bumps'"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3740312-F1-s08", change: "step_basis stated_in_flow; conditions add calibration-tool cleaning", reason: "p.4 Sec. II.B fourth alignment strategy"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3740312-F1-s09", change: "deleted", reason: "cryogenic R-T, thermal cycling and R-M measurements are tests; covered by metrics tcpmt.2026.3740312-a-m1..m7"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3740312-F2-s01", change: "added", reason: "p.2 Sec. II.A: Nb routing layer for the In-on-Nb check (TV d)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3740312-F2-s02", change: "added", reason: "p.3 Sec. II.A; p.2 Fig. 2: In e-beam evaporated directly on Nb without barrier"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3740312-F1", change: "tv_ids add -b, -c; flow_name drops 'sample2'; notes", reason: "p.7 Sec. III.D: sample1 differs only by the two process optimizations; Sec. II.B/III.A 10 um bumps use the same UBM and RT bonding"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3740312-F2", change: "added", reason: "p.2-3 Sec. II.A: In directly on Nb check (TV d)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3740312-a-m7", change: "condition add 'PPMS' from deleted step F1-s09", reason: "p.5 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3740312", change: "not_reported += process_steps: tcpmt.2026.3740312-e", reason: "rule 7 coverage of physical TVs"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3740312", change: "not_reported: 'sample1 ... bonding conditions' dropped", reason: "sample1 shares the F1 bonding step (Sec. III.D: differs only by Ar clean and Ti thickness)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3740312-F1", change: "locator: test sections (p.5 Sec. III.B, p.7 Sec. III.E) dropped; p.6 Sec. III.C added", reason: "test step moved to metrics; sample1 process difference cited"}

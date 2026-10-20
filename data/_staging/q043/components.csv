@@ -1,0 +1,44 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51687.2025.00187-a-c1,ectc51687.2025.00187-a,asic,,,ASIC die,4,31,12,,,,,,,,,design_target,text,,p.2 Sec. II.A.1; p.2 Fig. 2,,
+ectc51687.2025.00187-a-c2,ectc51687.2025.00187-a,bridge,,yes,Si bridge die (embedded),3,2.36,6.36,,,,,,,silicon,,design_target,text,,p.2 Sec. II.A.1; p.2 Fig. 2,,
+ectc51687.2025.00187-a-c3,ectc51687.2025.00187-a,interposer,,,FO-EB fanout chip module (RDL + molding with embedded bridges),1,50,32,,,,,,,,,design_target,text,,p.2 Sec. II.A.1; p.2 Fig. 2,,Table I lists module 32243.04 x 49947.2 (units not stated).
+ectc51687.2025.00187-a-c4,ectc51687.2025.00187-a,substrate,,,8-2-8 substrate with low CTE core,1,75,75,,,,,,,,,design_target,text,,p.2 Sec. II.A.1,,
+ectc51687.2025.00187-a-c5,ectc51687.2025.00187-a,lid,,,forged lid,1,74,74,1000,,,,,,,,design_target,text,,p.2 Sec. II.A.1,,Lid material not stated. Attached to substrate with adhesive.
+ectc51687.2025.00187-a-c6,ectc51687.2025.00187-a,tim,,,TIM1 center: silicone-based TIM with liquid metal filler,1,,,,,,,,,silicone matrix with liquid metal filler,,stated,text,,p.3 Sec. II.A.2; p.5 Sec. III.B.1; p.5 Fig. 11,,Covers ASIC die top surface.
+ectc51687.2025.00187-a-c7,ectc51687.2025.00187-a,tim,,,TIM1 periphery: adhesive-type PTIM,1,,,,,,,,,adhesive-type polymer TIM,,stated,text,,p.3 Sec. II.A.2; p.5 Sec. III.B.1; p.5 Fig. 11,,Between Molding 1 and lid around the LM TIM.
+ectc51687.2025.00187-a-c8,ectc51687.2025.00187-a,adhesive,,,dam (dispensed adhesive around fanout chip module),1,,,,,,,,,,,stated,mixed,,p.4 Sec. II.B.1; p.4 Fig. 8(b); p.4 Sec. III.A,,Height matches chip module + TIM; couples lid and substrate.
+ectc51687.2025.00187-a-c9,ectc51687.2025.00187-a,adhesive,,,lid adhesive,1,,,,,,,,,,,stated,text,,p.2 Sec. II.A.1; p.4 Sec. III.A,,
+ectc51687.2025.00187-a-c10,ectc51687.2025.00187-a,mold,,,Molding 1 (around ASIC dies),1,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,
+ectc51687.2025.00187-a-c11,ectc51687.2025.00187-a,mold,,,Molding 2 (embeds bridges),1,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,
+ectc51687.2025.00187-a-c12,ectc51687.2025.00187-a,underfill,,,Underfill 1,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,
+ectc51687.2025.00187-a-c13,ectc51687.2025.00187-a,underfill,,,Underfill 2,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,
+ectc51687.2025.00187-b-c1,ectc51687.2025.00187-b,asic,,,ASIC die,4,31,12,,,,,,,,,design_target,text,,p.2 Sec. II.A.1; p.2 Fig. 2,,
+ectc51687.2025.00187-b-c2,ectc51687.2025.00187-b,bridge,,yes,Si bridge die (embedded),3,2.36,6.36,,,,,,,silicon,,design_target,text,,p.2 Sec. II.A.1; p.2 Fig. 2,,
+ectc51687.2025.00187-b-c3,ectc51687.2025.00187-b,interposer,,,FO-EB fanout chip module (RDL + molding with embedded bridges),1,50,32,,,,,,,,,design_target,text,,p.2 Sec. II.A.1; p.2 Fig. 2,,Table I lists module 32243.04 x 49947.2 (units not stated).
+ectc51687.2025.00187-b-c4,ectc51687.2025.00187-b,substrate,,,8-2-8 substrate with low CTE core,1,75,75,,,,,,,,,design_target,text,,p.2 Sec. II.A.1,,
+ectc51687.2025.00187-b-c5,ectc51687.2025.00187-b,lid,,,forged lid,1,74,74,1000,,,,,,,,design_target,text,,p.2 Sec. II.A.1,,Lid material not stated. Attached to substrate with adhesive.
+ectc51687.2025.00187-b-c6,ectc51687.2025.00187-b,tim,,,TIM1: silicone-based TIM with liquid metal filler (LM only),1,,,,,,,,,silicone matrix with liquid metal filler,,stated,text,,p.3 Sec. II.A.2; p.3 Fig. 5(a); p.5 Fig. 12,,Applied over the whole module top.
+ectc51687.2025.00187-b-c7,ectc51687.2025.00187-b,adhesive,,,lid adhesive,1,,,,,,,,,,,stated,text,,p.2 Sec. II.A.1; p.4 Sec. III.A,,
+ectc51687.2025.00187-b-c8,ectc51687.2025.00187-b,mold,,,Molding 1 (around ASIC dies),1,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,
+ectc51687.2025.00187-b-c9,ectc51687.2025.00187-b,mold,,,Molding 2 (embeds bridges),1,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,
+ectc51687.2025.00187-b-c10,ectc51687.2025.00187-b,underfill,,,Underfill 1,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,
+ectc51687.2025.00187-b-c11,ectc51687.2025.00187-b,underfill,,,Underfill 2,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,
+ectc51687.2025.00187-c-c1,ectc51687.2025.00187-c,asic,,,ASIC die,4,31,12,,,,,,,,,design_target,text,,p.2 Sec. II.A.1; p.2 Fig. 2,,
+ectc51687.2025.00187-c-c2,ectc51687.2025.00187-c,bridge,,yes,Si bridge die (embedded),3,2.36,6.36,,,,,,,silicon,,design_target,text,,p.2 Sec. II.A.1; p.2 Fig. 2,,
+ectc51687.2025.00187-c-c3,ectc51687.2025.00187-c,interposer,,,FO-EB fanout chip module (RDL + molding with embedded bridges),1,50,32,,,,,,,,,design_target,text,,p.2 Sec. II.A.1; p.2 Fig. 2,,Table I lists module 32243.04 x 49947.2 (units not stated).
+ectc51687.2025.00187-c-c4,ectc51687.2025.00187-c,substrate,,,8-2-8 substrate with low CTE core,1,75,75,,,,,,,,,design_target,text,,p.2 Sec. II.A.1,,
+ectc51687.2025.00187-c-c5,ectc51687.2025.00187-c,lid,,,forged lid,1,74,74,1000,,,,,,,,design_target,text,,p.2 Sec. II.A.1,,Lid material not stated. Attached to substrate with adhesive.
+ectc51687.2025.00187-c-c6,ectc51687.2025.00187-c,tim,,,TIM1: polymer TIM (POR PTIM),1,,,,,,,,,polymer TIM (product not stated),,stated,text,,p.4 Sec. II.B.1; p.4 Fig. 8(a); p.4 Fig. 9,,BLT 85 um in FEA case.
+ectc51687.2025.00187-c-c7,ectc51687.2025.00187-c,adhesive,,,lid adhesive,1,,,,,,,,,,,stated,text,,p.2 Sec. II.A.1; p.4 Sec. III.A,,
+ectc51687.2025.00187-d-c1,ectc51687.2025.00187-d,asic,,,ASIC die,4,31,12,,,,,,,,,design_target,text,,p.2 Sec. II.A.1; p.2 Fig. 2,,
+ectc51687.2025.00187-d-c2,ectc51687.2025.00187-d,bridge,,yes,Si bridge die (embedded),3,2.36,6.36,,,,,,,silicon,,design_target,text,,p.2 Sec. II.A.1; p.2 Fig. 2,,
+ectc51687.2025.00187-d-c3,ectc51687.2025.00187-d,interposer,,,FO-EB fanout chip module (RDL + molding with embedded bridges),1,50,32,,,,,,,,,design_target,text,,p.2 Sec. II.A.1; p.2 Fig. 2,,Table I lists module 32243.04 x 49947.2 (units not stated).
+ectc51687.2025.00187-d-c4,ectc51687.2025.00187-d,substrate,,,8-2-8 substrate with low CTE core,1,75,75,,,,,,,,,design_target,text,,p.2 Sec. II.A.1,,
+ectc51687.2025.00187-d-c5,ectc51687.2025.00187-d,lid,,,forged lid,1,74,74,1000,,,,,,,,design_target,text,,p.2 Sec. II.A.1,,Lid material not stated. Attached to substrate with adhesive.
+ectc51687.2025.00187-d-c6,ectc51687.2025.00187-d,tim,,,TIM1: indium-based solder TIM (STIM),1,,,,,,,,,indium-based solder TIM,,stated,text,,p.3 Sec. II.A.2; p.4 Fig. 8(a); p.4 Fig. 9,,BLT 180 and 230 um in FEA cases.
+ectc51687.2025.00187-d-c7,ectc51687.2025.00187-d,adhesive,,,lid adhesive,1,,,,,,,,,,,stated,text,,p.2 Sec. II.A.1; p.4 Sec. III.A,,
+ectc51909.2023.00324-a-c1,ectc51909.2023.00324-a,connector,,no,"plastic-molded optical connector (2 MT guide holes, 2 half-pipe self-alignment grooves)",1,,,,,,,,,plastic (molded),,stated,text,,p.2 Sec. II.A; p.1 Fig. 2,,Guide hole and groove pairs from co-axial molding part; compatible with standard 12-ch MT-ferrule SMF connector.
+ectc51909.2023.00324-a-c2,ectc51909.2023.00324-a,substrate,,no,glass-epoxy substrate,1,,,,,,,,,glass-epoxy,,stated,text,,p.2 Sec. II.B; p.2 Fig. 3,,Thickness and size not reported.
+ectc51909.2023.00324-a-c3,ectc51909.2023.00324-a,adhesive,,,UV adhesive (connector fixing),,,,,,,,,,UV adhesive,,stated,text,,p.3 Sec. II.C; p.3 Fig. 9,,Amount and adhesion points optimized against cure-shrinkage displacement; product not named.
+ectc51687.2025.00142-c-c1,ectc51687.2025.00142-c,dummy_die,,,Si die with Cu pads,,2,2,,,,,,,Si,,design_target,text,,p.5 Sec. IV; p.6 Fig. 11,,5 dies assessed per split; die function not stated (inferred test die).
+ectc51687.2025.00142-c-c2,ectc51687.2025.00142-c,substrate,,,hybrid wiring layer substrate on 4 inch Si wafer,,,,,,,,,,"ABF GL-102 / ICPCVD SiO2, Si3N4 / Cu",,stated,mixed,,p.6 Fig. 11; p.4 Sec. III,,Thermal budget 250 C (Sec. IV).

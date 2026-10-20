@@ -1,0 +1,54 @@
+paper_id: icep-iaac64884.2025.11003038
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/icep-iaac64884.2025.11003038/text.md
+  - references/icep-iaac64884.2025.11003038/source.json
+  - references/icep-iaac64884.2025.11003038/figures/page_01.png
+  - references/icep-iaac64884.2025.11003038/figures/page_02.png
+figure_reading_method: >-
+  Figs. 3-6 re-cropped at 400 dpi from source.pdf; marker centroids located by color (green circle = glass, red
+  triangle = organic) and converted with gridline y-scale (153 px per 100 um for Figs. 3-4, 92 px per 100 um for
+  Figs. 5-6); read +/-5 um. Overlapping markers reported as one value or a narrow range.
+entries:
+  - {table: metrics, row_id: icep-iaac64884.2025.11003038-h-m2, field: value_text, value: "-290 to -265", unit: um, basis: measured, locator: "p.2 Fig. 6", note: "Sample 4 organic at 260 C first reflow; second reflow -266 to -241"}
+  - {table: metrics, row_id: icep-iaac64884.2025.11003038-f-m2, field: value_text, value: "-245 to -213", unit: um, basis: measured, locator: "p.2 Fig. 5", note: "Sample 3 organic at 260 C first reflow; second reflow -217 to -181"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: icep-iaac64884.2025.11003038-e-m1, field: value_text, values: ["text: warpage increased to 100 um at RT for both GCS and OCS (Samples 3 and 4)", "Fig. 5/6 plotted 25 C initial: S3 glass 45-84, organic 42-99; S4 glass 36-43, organic 59-79 um"], locators: ["p.2 Sec. III", "p.2 Fig. 5; p.2 Fig. 6"], chosen: "plotted values", why: "measured plot over text summary"}
+  - {table: metrics, row_id: icep-iaac64884.2025.11003038-g-m2, field: value_text, values: ["text: GCS warpage at hot temperature 100 um concave", "Fig. 5/6 plotted 260 C: S3 glass -96 to -37, S4 glass -37 to -32 um"], locators: ["p.2 Sec. III", "p.2 Fig. 5; p.2 Fig. 6"], chosen: "plotted values", why: "measured plot over text summary"}
+  - {table: metrics, row_id: icep-iaac64884.2025.11003038-h-m2, field: value_text, values: ["text: OCS minimum warpage -250 um at 260 C", "Fig. 6 plotted -290 to -265 um (S4), Fig. 5 -245 to -213 um (S3)"], locators: ["p.2 Sec. III", "p.2 Fig. 5; p.2 Fig. 6"], chosen: "plotted values", why: "measured plot over text summary"}
+excluded:
+  - "Glass substrate benefits and challenges cited to refs [1]-[3]"
+  - "Shadow moire method details of ref [4]"
+not_reported:
+  - electrical_interfaces, optical_interfaces, components (bare coupons, no die)
+  - glass and organic core products, CTE and modulus values; build-up and SR products and thicknesses
+  - Cu thicknesses and densities, via dimensions, core via (TGV/PTH) presence
+  - panel size, sample counts, measurement area definition beyond max-min displacement
+source_quality:
+  - "Page 2 candidates (p02_fig3..fig6) are shifted upward: each includes the preceding caption/heading and clips the x-axis labels; manual crops used."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: "icep-iaac64884.2025.11003038-e-m4", change: "scope -> 'applies to TVs e, g (Samples 3, 4; OCS refs f, h)'; copy icep-iaac64884.2025.11003038-g-m4 deleted", reason: "p.2 Sec. III: 'GCS warpage was 2.5 - 5x lower than OCS for 4-metal-layers substrates at peak temperature' is one statement for Samples 3 and 4"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "icep-iaac64884.2025.11003038-g-m4", change: "deleted (copy of icep-iaac64884.2025.11003038-e-m4)", reason: "p.2 Sec. III: 'GCS warpage was 2.5 - 5x lower than OCS for 4-metal-layers substrates at peak temperature' is one statement for Samples 3 and 4"}
+  - {date: 2026-10-20, source: repass, row_id: "icep-iaac64884.2025.11003038", change: "process_flow_level ordered -> fragments; has_process_flow yes -> no", reason: "paper states only panel-level fabrication, stack-up stages (Fig. 2) and dicing; no ordered fab flow, no conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "icep-iaac64884.2025.11003038-F1", change: "tv_ids -> all 8 coupons (a-h); renamed; level fragments", reason: "converter grouped Samples 1+3 and 2+4 into two flows; the stages differ by build-up/SR lamination, now TV deltas of one flow"}
+  - {date: 2026-10-20, source: repass, row_id: "icep-iaac64884.2025.11003038-F2", change: "flow deleted with steps F2-s01..s06", reason: "merged into F1 (shared fabrication and dicing; build-up and solder-resist lamination as TV deltas F1-s03..s10)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep-iaac64884.2025.11003038-F1-s01", change: "step text, material, target '400 um core', step_basis generic_description", reason: "p.1 Sec. II: 400 um core, glass and organic core materials; Fig. 1/2 2-metal-layer core"}
+  - {date: 2026-10-20, source: repass, row_id: "icep-iaac64884.2025.11003038-F1-s02", change: "seq 2 -> 4; target 37.5x37.5 mm coupon; step_basis generic_description", reason: "p.1 Abstract"}
+  - {date: 2026-10-20, source: repass, row_id: "icep-iaac64884.2025.11003038-F1-s03", change: "added: TV c delta, build-up lamination (was F2-s02)", reason: "p.1 Sec. II 'only Sample 2 has the build-up material'; p.2 Sec. III 'build-up layers being laminated'"}
+  - {date: 2026-10-20, source: repass, row_id: "icep-iaac64884.2025.11003038-F1-s04", change: "added: TV d delta, build-up lamination (was F2-s03)", reason: "p.1 Sec. II 'only Sample 2 has the build-up material'; p.2 Sec. III 'build-up layers being laminated'"}
+  - {date: 2026-10-20, source: repass, row_id: "icep-iaac64884.2025.11003038-F1-s05", change: "added: TV e delta, 1-2-1 build-up stage", reason: "p.1 Sec. II 'Sample 3 & 4 are four-metal-layers substrate'; Fig. 1 1-2-1 structure with build-up"}
+  - {date: 2026-10-20, source: repass, row_id: "icep-iaac64884.2025.11003038-F1-s06", change: "added: TV f delta, 1-2-1 build-up stage", reason: "p.1 Sec. II 'Sample 3 & 4 are four-metal-layers substrate'; Fig. 1 1-2-1 structure with build-up"}
+  - {date: 2026-10-20, source: repass, row_id: "icep-iaac64884.2025.11003038-F1-s07", change: "added: TV g delta, 1-2-1 build-up stage", reason: "p.1 Sec. II 'Sample 3 & 4 are four-metal-layers substrate'; Fig. 1 1-2-1 structure with build-up"}
+  - {date: 2026-10-20, source: repass, row_id: "icep-iaac64884.2025.11003038-F1-s08", change: "added: TV h delta, 1-2-1 build-up stage", reason: "p.1 Sec. II 'Sample 3 & 4 are four-metal-layers substrate'; Fig. 1 1-2-1 structure with build-up"}
+  - {date: 2026-10-20, source: repass, row_id: "icep-iaac64884.2025.11003038-F1-s09", change: "added: TV g delta, solder resist lamination (was F2-s04)", reason: "p.1 Sec. II 'only solder resist material laminated on Sample 4'"}
+  - {date: 2026-10-20, source: repass, row_id: "icep-iaac64884.2025.11003038-F1-s10", change: "added: TV h delta, solder resist lamination (was F2-s05)", reason: "p.1 Sec. II 'only solder resist material laminated on Sample 4'"}
+  - {date: 2026-10-20, source: flow_v25, row_id: "icep-iaac64884.2025.11003038-F1-s03", change: "tv_id icep-iaac64884.2025.11003038-c -> icep-iaac64884.2025.11003038-c;icep-iaac64884.2025.11003038-d; folded icep-iaac64884.2025.11003038-F1-s04", reason: "schema v2.5: a delta row lists every TV it applies to; the rows were identical except tv_id and locator"}
+  - {date: 2026-10-20, source: flow_v25, row_id: "icep-iaac64884.2025.11003038-F1-s04", change: "deleted: folded into icep-iaac64884.2025.11003038-F1-s03 (tv_id icep-iaac64884.2025.11003038-d added to its list)", reason: "schema v2.5: a delta row lists every TV it applies to; the rows were identical except tv_id and locator"}
+  - {date: 2026-10-20, source: flow_v25, row_id: "icep-iaac64884.2025.11003038-F1-s05", change: "tv_id icep-iaac64884.2025.11003038-e -> icep-iaac64884.2025.11003038-e;icep-iaac64884.2025.11003038-f;icep-iaac64884.2025.11003038-g;icep-iaac64884.2025.11003038-h; folded icep-iaac64884.2025.11003038-F1-s06, icep-iaac64884.2025.11003038-F1-s07, icep-iaac64884.2025.11003038-F1-s08", reason: "schema v2.5: a delta row lists every TV it applies to; the rows were identical except tv_id and locator"}
+  - {date: 2026-10-20, source: flow_v25, row_id: "icep-iaac64884.2025.11003038-F1-s06", change: "deleted: folded into icep-iaac64884.2025.11003038-F1-s05 (tv_id icep-iaac64884.2025.11003038-f added to its list)", reason: "schema v2.5: a delta row lists every TV it applies to; the rows were identical except tv_id and locator"}
+  - {date: 2026-10-20, source: flow_v25, row_id: "icep-iaac64884.2025.11003038-F1-s07", change: "deleted: folded into icep-iaac64884.2025.11003038-F1-s05 (tv_id icep-iaac64884.2025.11003038-g added to its list)", reason: "schema v2.5: a delta row lists every TV it applies to; the rows were identical except tv_id and locator"}
+  - {date: 2026-10-20, source: flow_v25, row_id: "icep-iaac64884.2025.11003038-F1-s08", change: "deleted: folded into icep-iaac64884.2025.11003038-F1-s05 (tv_id icep-iaac64884.2025.11003038-h added to its list)", reason: "schema v2.5: a delta row lists every TV it applies to; the rows were identical except tv_id and locator"}
+  - {date: 2026-10-20, source: flow_v25, row_id: "icep-iaac64884.2025.11003038-F1-s09", change: "tv_id icep-iaac64884.2025.11003038-g -> icep-iaac64884.2025.11003038-g;icep-iaac64884.2025.11003038-h; folded icep-iaac64884.2025.11003038-F1-s10", reason: "schema v2.5: a delta row lists every TV it applies to; the rows were identical except tv_id and locator"}
+  - {date: 2026-10-20, source: flow_v25, row_id: "icep-iaac64884.2025.11003038-F1-s10", change: "deleted: folded into icep-iaac64884.2025.11003038-F1-s09 (tv_id icep-iaac64884.2025.11003038-h added to its list)", reason: "schema v2.5: a delta row lists every TV it applies to; the rows were identical except tv_id and locator"}

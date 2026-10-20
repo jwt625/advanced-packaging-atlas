@@ -1,0 +1,66 @@
+paper_id: ectc51687.2025.00148
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00148/text.md
+  - references/ectc51687.2025.00148/source.json
+  - references/ectc51687.2025.00148/figures/page_02.png
+  - references/ectc51687.2025.00148/figures/page_03.png
+  - references/ectc51687.2025.00148/figures/page_04.png
+  - references/ectc51687.2025.00148/figures/page_05.png
+  - references/ectc51687.2025.00148/figures/cand/p02_tablei.png
+  - references/ectc51687.2025.00148/figures/cand/p02_tableii.png
+figure_reading_method: >-
+  Page grids and 300-400 dpi re-crops from source.pdf. Fig. 4 marker positions located by color-pixel centroids
+  (y scale from gridlines, ~91 px per 100 um, read +/-5 um); Fig. 6/7/8 bar tops read against gridlines (+/-2 units).
+  Fig. 2 and Fig. 1 labels read at 300 dpi. Tables I/II match text.md.
+entries:
+  - {table: metrics, row_id: ectc51687.2025.00148-a-m4, field: value, value: 83, unit: um, basis: measured, locator: "p.3 Fig. 4", note: "Leg 1 STI 50 C; Leg 2/3 STI 50 C markers overlap near 73"}
+  - {table: metrics, row_id: ectc51687.2025.00148-a-m5, field: value, value: -90, unit: um, basis: measured, locator: "p.3 Fig. 4", note: "Leg 1 STI marker hidden under Leg 2 STI marker (-89) at 250 C"}
+  - {table: stack_layers, row_id: ectc51687.2025.00148-a-L06, field: line_um, value: 30, unit: um, basis: design_target, locator: "p.2 Fig. 2", note: "label 'Line W/S =30/50um, 15umt'"}
+derived:
+  - {table: interconnects, row_id: ectc51687.2025.00148-a-i1, field: count, value: 1440, formula: "32 pads x 45 units (9 x 5)", inputs: "p.2 Sec. II.A"}
+  - {table: interconnects, row_id: ectc51687.2025.00148-b-i1, field: count, value: 1440, formula: "32 pads x 45 units (9 x 5)", inputs: "p.2 Sec. II.A"}
+  - {table: interconnects, row_id: ectc51687.2025.00148-c-i1, field: count, value: 1440, formula: "32 pads x 45 units (9 x 5)", inputs: "p.2 Sec. II.A"}
+conflicts:
+  - {table: metrics, row_id: ectc51687.2025.00148-b-m11, field: value_text, values: ["text: order of effectiveness Leg 2 << Leg 1 < Leg 3", "Fig. 10 crack depth Leg1 117, Leg2 52, Leg3 206 um"], locators: ["p.5 Sec. III.E", "p.5 Fig. 10"], chosen: "Fig. 10 depths", why: "measured; text ordering is in crack depth (smaller = better), consistent with Fig. 10"}
+  - {table: metrics, row_id: ectc51687.2025.00148-a-m9, field: value, values: ["text: stiffener significantly improved crack resistance", "Fig. 8 TC1500 crack rates 56/72/97% vs Fig. 6 81/37/91% (Leg 2 higher with stiffener)"], locators: ["p.4 Sec. III.D", "p.4 Fig. 6; p.4 Fig. 8"], chosen: "plotted values", why: "figure data entered as read; text claim holds at TC500 for all legs, at TC1500 only for Leg 1"}
+excluded:
+  - "120x120 mm 2.5D package, SR crack and stacked-via studies of refs [1]-[5] (no numbers taken)"
+  - "UF shrinkage mechanism attributed to ref [8]"
+  - "Generic SAP flow in Introduction (lamination, cure, laser drill, desmear, electroless/electrolytic Cu) attributed to ref [6]; not entered as this paper's steps"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - die material and bump bonding method/conditions; underfill properties; stiffener attach material
+  - SR product and thickness; ABF-GCP thickness (only generic ABF 40 um label); core Cu thickness
+  - total substrate thickness; package thickness; sample counts; TC standard and dwell; crack-rate denominator
+  - substrate-only warpage values (Fig. 3 maps only, no scale values)
+source_quality:
+  - "Figs. 1-10 had no candidates except Fig. 5 (caption 'Figure  N' with double space likely missed); manual crops used."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00148-a-m6", change: "scope -> 'all legs; stiffener dominates warpage; applies to TVs a, b, c'; copies ectc51687.2025.00148-b-m6, ectc51687.2025.00148-c-m6 deleted", reason: "p.4 Sec. III.D: 'almost no change in warpage behavior before and after TCT' is one statement for all legs"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00148-b-m6", change: "deleted (copy of ectc51687.2025.00148-a-m6)", reason: "p.4 Sec. III.D single all-leg statement; no per-leg value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00148-c-m6", change: "deleted (copy of ectc51687.2025.00148-a-m6)", reason: "p.4 Sec. III.D single all-leg statement; no per-leg value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00148-b-m4;ectc51687.2025.00148-c-m4", change: "kept both (no change)", reason: "p.3 Fig. 4: separate Leg 2 and Leg 3 stiffener markers at 50 C, both read about 73 um (overlap noted in rows)"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f03", change: "re-ranked Fig. 10: ectc51687.2025.00148-f06 -> ectc51687.2025.00148-f03", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f04", change: "added Fig. 5 (micrograph, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f05", change: "re-ranked Table II: ectc51687.2025.00148-f03 -> ectc51687.2025.00148-f05", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f06", change: "added Table I (data_table, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f07", change: "added Fig. 3 (warpage_plot, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f08", change: "re-ranked Fig. 4: ectc51687.2025.00148-f04 -> ectc51687.2025.00148-f08", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f09", change: "added Fig. 7 (warpage_plot, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f10", change: "added Fig. 9 (warpage_plot, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f11", change: "re-ranked Fig. 6: ectc51687.2025.00148-f05 -> ectc51687.2025.00148-f11", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00148-f12", change: "added Fig. 8 (reliability_plot, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00148-F1", change: "step_basis stated_in_flow on all steps", reason: "p.2 Sec. II.B states the order (SAP build-up, then SR exposure/development, then ENIG); p.3 Sec. III states the stages (substrate, after UF, after stiffener)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00148-F1-s01", change: "TV delta (tv a) -> shared step; per-leg dielectric moved to split; Fig. 2 design geometry to target; core in conditions", reason: "per-variant value on the same step goes in split (re-pass convention); p.2 Table II legs; p.2 Fig. 2 labels; p.2 Sec. II.A 1.2 mm core"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00148-F1-s02", change: "deleted (Leg2 delta copy of the SAP build-up step)", reason: "merged into shared step ectc51687.2025.00148-F1-s01 with split (only the dielectric differs)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00148-F1-s03", change: "deleted (Leg3 delta copy of the SAP build-up step)", reason: "merged into shared step ectc51687.2025.00148-F1-s01 with split (only the dielectric differs)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00148-F1-s04", change: "target 'C4 pad 300 um pitch, 150 um pad, 120 um SR opening (SMD)'", reason: "p.2 Fig. 2 labels (C4 pad, SR open: SMD)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00148-F1-s06", change: "target '300 um bump pitch'; die and bump spec in material", reason: "p.2 Sec. II.A: Cu pillar 25 um + SnAg 20 um, 100 um diameter, 300 um pitch; 27x15 mm STAC TEG 550 um"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00148-F1-s07", change: "conditions 'UF-filled assembly cured at 165 C'", reason: "p.3 Sec. III.A text wording kept with typed temp_c"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00148-F1-s08", change: "stiffener dimensions in material; chip-to-stiffener distance to target", reason: "p.2 Sec. II.A; p.2 Fig. 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00148-F1-s06", change: "target: '300 um bump pitch' -> '300 um bump pitch; bump diameter 100 um'", reason: "manifest target_missing i1: Cu pillar diameter 100 um stated (p.2 Sec. II.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00148-F1-s06", change: "material: 'STAC TEG 27x15 mm, 550 um thick; Cu pillar 25 um + SnAg 20 um, 100 um diameter' -> 'STAC TEG chip (Waltz); Cu pillar 25 um + SnAg 20 um bumps'", reason: "chip dimensions moved from material to conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00148-F1-s06", change: "conditions: '' -> 'STAC TEG 27x15 mm (9x5 units of 3x3 mm), 550 um thick'", reason: "manifest target_missing_preexisting L01: 550 um chip thickness (input die) in conditions (p.2 Sec. II.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00148-F1-s01", change: "conditions: 'on 1.2 mm 795G core (4-2-4)' -> 'on 1.2 mm 795G core (4-2-4) with core TH 200 um diameter at 500 um pitch (Fig. 2)'", reason: "manifest target_missing L07/i4: core TH geometry from Fig. 2 recorded as input core description; core fabrication is not described as a step"}

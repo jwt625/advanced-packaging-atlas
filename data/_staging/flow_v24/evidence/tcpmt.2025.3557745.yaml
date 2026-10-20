@@ -1,0 +1,62 @@
+paper_id: tcpmt.2025.3557745
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/tcpmt.2025.3557745/text.md
+  - references/tcpmt.2025.3557745/source.json
+  - references/tcpmt.2025.3557745/figures/page_03.png
+  - references/tcpmt.2025.3557745/figures/page_04.png
+  - references/tcpmt.2025.3557745/figures/page_05.png
+  - references/tcpmt.2025.3557745/figures/page_06.png
+  - references/tcpmt.2025.3557745/figures/page_07.png
+  - references/tcpmt.2025.3557745/figures/page_08.png
+  - references/tcpmt.2025.3557745/figures/cand/p05_fig5.png
+  - references/tcpmt.2025.3557745/figures/cand/p05_tableii.png
+  - references/tcpmt.2025.3557745/figures/cand/p06_fig6.png
+figure_reading_method: >-
+  Tables I-V are images only (text layer empty); read from page renders and a 300 dpi re-crop of Table II.
+  Fig. 5(b), 6(b), 6(c) labels read at 300 dpi; layer assignment of each thickness label from arrow positions,
+  cross-checked: Table II tCu = mean of the two winding thicknesses (S2 (9.95+26.6)/2 = 18.3; S3 (14.9+18.7)/2 = 16.8)
+  and tgap ~ sum of labelled gap layers (S3 147.8 um vs 150 um). Fig. 8(d) efficiency read +/-1%.
+entries:
+  - {table: stack_layers, row_id: tcpmt.2025.3557745-b-L03, field: thickness_um, value: 9.95, unit: um, basis: measured, locator: "p.6 Fig. 6(b)", note: "upper winding; lower 26.6 um"}
+  - {table: stack_layers, row_id: tcpmt.2025.3557745-c-L04, field: thickness_um, value: 26.4, unit: um, basis: measured, locator: "p.6 Fig. 6(c)", note: "interpreted as dielectric between windings"}
+derived:
+  - {table: metrics, row_id: tcpmt.2025.3557745-a-m6, field: value, value: 120, formula: "0.12 mm x 1000", inputs: "p.5 Table II"}
+  - {table: metrics, row_id: tcpmt.2025.3557745-b-m6, field: value, value: 110, formula: "0.11 mm x 1000", inputs: "p.5 Table II"}
+  - {table: metrics, row_id: tcpmt.2025.3557745-c-m6, field: value, value: 150, formula: "0.15 mm x 1000", inputs: "p.5 Table II"}
+  - {table: components, row_id: tcpmt.2025.3557745-a-c2, field: thickness_um, value: 200, formula: "tcore 0.2 mm x 1000", inputs: "p.5 Table II"}
+  - {table: components, row_id: tcpmt.2025.3557745-b-c2, field: thickness_um, value: 245, formula: "tcore 0.245 mm x 1000", inputs: "p.5 Table II"}
+  - {table: components, row_id: tcpmt.2025.3557745-c-c2, field: thickness_um, value: 200, formula: "tcore 0.2 mm x 1000", inputs: "p.5 Table II"}
+  - {table: stack_layers, row_id: tcpmt.2025.3557745-a-L05, field: line_um, value: 375, formula: "w 0.375 mm x 1000; s 0.05 mm -> 50 um", inputs: "p.5 Table II"}
+  - {table: stack_layers, row_id: tcpmt.2025.3557745-b-L03, field: line_um, value: 175, formula: "w 0.175 mm x 1000; s 0.025 mm -> 25 um", inputs: "p.5 Table II"}
+conflicts:
+  - {table: metrics, row_id: tcpmt.2025.3557745-c-m16, field: value, values: ["Table V: 40 um Cu -> 36 mOhm", "text: 36 um trace -> 40 mOhm"], locators: ["p.8 Table V", "p.8 Sec. IV"], chosen: "Table V", why: "result table over text; text appears to swap the numbers"}
+  - {table: metrics, row_id: tcpmt.2025.3557745-c-m14, field: value, values: ["Table V ~75%", "Fig. 8(d) about 75-82% over duty cycle", "abstract 75-80%"], locators: ["p.8 Table V", "p.7 Fig. 8(d)", "p.1 Abstract"], chosen: "both entered as separate rows", why: "different conditions (single point vs duty-cycle sweep)"}
+  - {table: stack_layers, row_id: tcpmt.2025.3557745-a-L02, field: thickness_um, values: ["ABF GX-92 film 5 um (text)", "measured gap dielectrics 21.5-60.9 um (Fig. 6)"], locators: ["p.6 Sec. III", "p.6 Fig. 6(b)(c)"], chosen: "measured per layer; 5 um kept as film thickness in lamination step", why: "film thickness vs built dielectric layers"}
+excluded:
+  - "Prior-work inductor data in Sec. I and Table IV rows for refs [1], [7], [8], [11], [22] (air-core, stripline, coax, toroids)"
+  - "Toroid with same core: 0.1 A saturation (ref [11])"
+  - "Series two-winding configuration (Table I): modelled only, not fabricated; monomial coefficients not entered"
+  - "300 W / 12 V / 24 A integrated power delivery example (architecture illustration)"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - FR4 substrate thickness, cavity size, inductor outer dimensions (only 9 mm2 footprint)
+  - lamination temperature/pressure/time, plating conditions, cure, drilling method, equipment
+  - via diameters, microvia size, solder joint details on the regulator board
+  - reliability, warpage and thermal data
+  - Sample #1 ACR and Q (NA in Table IV)
+source_quality:
+  - "Candidates p03_fig3 (label fragment) and p05_fig4 (partial) unusable; no candidate for Table IV; manual crops used."
+revisions:
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f03", change: "renumbered from tcpmt.2025.3557745-f05 (rank 5 -> 3)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f04", change: "renumbered from tcpmt.2025.3557745-f03 (rank 3 -> 4)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f05", change: "added Fig. 2 p.3 stack_schematic (manual) at rank 5", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f06", change: "added Table I p.4 stack_schematic (candidate) at rank 6", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f07", change: "added Fig. 1 p.1 block_diagram (candidate) at rank 7", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f08", change: "renumbered from tcpmt.2025.3557745-f04 (rank 4 -> 8)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f09", change: "renumbered from tcpmt.2025.3557745-f06 (rank 6 -> 9)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f10", change: "added Fig. 8 p.7 electrical_plot (candidate) at rank 10", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f11", change: "added Fig. 7 p.6 electrical_plot (candidate) at rank 11", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f12", change: "added Table V p.8 data_table (manual) at rank 12", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2025.3557745-f13", change: "added Table III p.6 data_table (candidate) at rank 13", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}

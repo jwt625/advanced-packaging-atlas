@@ -1,0 +1,51 @@
+paper_id: ectc51687.2025.00158
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00158/text.md
+  - references/ectc51687.2025.00158/source.json
+  - references/ectc51687.2025.00158/figures/page_02.png
+  - references/ectc51687.2025.00158/figures/page_03.png
+  - references/ectc51687.2025.00158/figures/page_04.png
+figure_reading_method: >-
+  Page renders p.2-4 viewed; candidates p02_fig1, p02_fig2, p03_fig3, p03_fig5 opened; 300 dpi re-crops of Fig. 4 and
+  Fig. 5 (values read off gridlines, +/-1 um; x positions 25, 90, 150, 260 C from axis scale); manual crops of Fig. 6 and
+  Fig. 7 (no usable candidates).
+entries:
+  - {table: interconnects, row_id: ectc51687.2025.00158-a-i1, field: pitch_um, value: 130, unit: um, basis: design_target, locator: "p.2 Sec. II.A", note: "'C4 micro-bump pitch 130um'"}
+  - {table: metrics, row_id: ectc51687.2025.00158-a-m22, field: value, value: 0.28, unit: x, basis: simulated, locator: "p.3 Fig. 4", note: "72% reduction vs TMV path"}
+derived:
+  - {table: test_vehicles, row_id: ectc51687.2025.00158-a, field: n_dies, value: 10, formula: "2 modules x (1 ASIC + 4 HBM3), top dies only", inputs: "p.2 Sec. II.A"}
+  - {table: test_vehicles, row_id: ectc51687.2025.00158-a, field: n_hbm, value: 8, formula: "2 modules x 4 HBM3", inputs: "p.2 Sec. II.A"}
+  - {table: components, row_id: ectc51687.2025.00158-a-c3, field: count, value: 8, formula: "2 modules x 4 bridges", inputs: "p.2 Sec. II.A"}
+  - {table: components, row_id: ectc51687.2025.00158-a-c4, field: count, value: 20, formula: "2 modules x 10 IPD", inputs: "p.2 Sec. II.A"}
+  - {table: components, row_id: ectc51687.2025.00158-a-c1, field: count, value: 2, formula: "2 modules x 1 ASIC", inputs: "p.2 Sec. II.A"}
+  - {table: components, row_id: ectc51687.2025.00158-a-c2, field: count, value: 8, formula: "2 modules x 4 HBM3", inputs: "p.2 Sec. II.A"}
+conflicts:
+  - {table: test_vehicles, row_id: ectc51687.2025.00158-a, field: notes, values: ["14 dies embedded (4 bridges + 10 IPD)", "a total of 14 embedded bridge dies"], locators: ["p.1 Abstract", "p.2 Sec. I"], chosen: "4 bridges + 10 IPD per module", why: "Sec. II.A and Fig. 1 floorplan show 4 bridge and 10 IPD dies per module"}
+excluded:
+  - "TCB on fan-out embedded bridge of ref [2]"
+  - "Thermal dissipation improvement claims (no data)"
+not_reported:
+  - electrical_interfaces (only simulated normalized R/L, entered as metrics)
+  - optical_interfaces
+  - die sizes and thicknesses, bridge thickness as built, FO module x/y
+  - TSV diameter/depth/pitch, Cu stud and Cu pillar dimensions, microbump pitch
+  - RDL dielectric material and thicknesses
+  - TCB and MR conditions (temperature, force, time), underfill and mold products
+  - substrate layer count, lid material, BGA pitch
+  - measured package warpage, reliability tests, sample counts
+source_quality:
+  - "Clean text layer. Fig. 7 caption printed at the top of the right column, separate from its images (bottom-left of p.4). Fig. 6/7 captions carry a copied tail 'behavior for various Si thickness of bridge die with TSV'."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F1", change: "step_basis stated_in_flow on all steps of F1-F2", reason: "order from Fig. 2 / Fig. 3 and Sec. II.B-C text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F1-s07", change: "category \"other\" -> \"deposition_other\"; notes (empty) -> \"PI formation method not stated.\"", reason: "v2.4 category for PI layer formation"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F1-s08", change: "category \"other\" -> \"bumping\"", reason: "v2.4 category bumping"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F2-s02", change: "conditions \"MR vs TCB compared; TCB gave proper stand-off (Fig. 6)\" -> (empty); split (empty) -> \"attach method: MR / TCB\"; result (empty) -> \"TCB selected: proper stand-off (MR: low stand-off, squeeze-out)\"", reason: "MR vs TCB comparison is a split on this step; outcome to result"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F2-s06", change: "category \"electroplating\" -> \"rdl_layer\"; target (empty) -> \"L/S 5/5 um\"; conditions \"3 RDL layers, L/S 5/5 um\" -> \"3 RDL layers\"", reason: "v2.4 category rdl_layer; stated L/S as target"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F2-s11", change: "category \"other\" -> \"bumping\"; target (empty) -> \"130 um pitch\"; locator \"p.2 Sec. II.C; p.3 Fig. 3\" -> \"p.2 Sec. II.C; p.3 Fig. 3; p.2 Sec. II.A\"", reason: "v2.4 category bumping; stated pitch ('C4 micro-bump pitch 130um', p.2 Sec. II.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F2-s16", change: "conditions \"MR vs TCB compared; TCB selected (Fig. 7, 8)\" -> (empty); split (empty) -> \"attach method: MR / TCB\"; result (empty) -> \"TCB selected: good joints (MR: non-wet, cold joints at module edge)\"", reason: "MR vs TCB comparison is a split on this step; outcome to result"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F2", change: "seq renumbered 1..17 within flow", reason: "seq restarted per flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F2-s01", change: "category: 'other' -> 'bumping'", reason: "manifest category_other: Cu pillar formation on carrier; bumping per DB convention for pillar formation (method not stated)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F1", change: "build_seq 1 confirmed; notes added", reason: "manifest build_seq_unverified: Sec. II.C attaches the TSV bridge dies made by the Fig. 2 flow (Sec. II.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00158-F2", change: "build_seq 2 confirmed; notes added", reason: "manifest build_seq_unverified: F2 consumes F1 output"}

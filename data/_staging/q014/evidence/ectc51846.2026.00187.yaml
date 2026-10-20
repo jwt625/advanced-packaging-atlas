@@ -1,0 +1,56 @@
+paper_id: ectc51846.2026.00187
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00187/text.md
+  - references/ectc51846.2026.00187/source.json
+  - references/ectc51846.2026.00187/figures/page_02.png
+  - references/ectc51846.2026.00187/figures/page_03.png
+  - references/ectc51846.2026.00187/figures/page_04.png
+  - references/ectc51846.2026.00187/figures/page_05.png
+  - references/ectc51846.2026.00187/figures/page_06.png
+figure_reading_method: >-
+  Page renders p.2-6 viewed; candidate crops of Fig. 1, 2, 4, 5, 6, 8 opened; 300 dpi re-crops of Fig. 6(a), 7 and 8
+  for yield points and log-axis resistance medians (pixel position vs 1E5/1E6 ticks, about +/-15%).
+entries:
+  - {table: interconnects, row_id: ectc51846.2026.00187-a-i1, field: alignment_um, value: 0.05, unit: um, basis: measured, locator: "p.5 Fig. 5(b); p.6 Fig. 6(c)", note: "95% overlay 50 nm (demo wafer), 53 nm (yield wafer)"}
+  - {table: interconnects, row_id: ectc51846.2026.00187-a-i1, field: yield_pct, value: 80, unit: "%", basis: measured, locator: "p.6 Fig. 6(b) caption", note: "Fig. 6(a) point reads about 81%"}
+  - {table: interconnects, row_id: ectc51846.2026.00187-a-i2, field: diameter_um, value: 0.2, unit: um, basis: design_target, locator: "p.4 Fig. 4(e)", note: "400nm (200nm) pitch (pad) size"}
+derived:
+  - {table: test_vehicles, row_id: ectc51846.2026.00187-a, field: carrier_size_mm, value: 300, formula: "overlay-map axes span -150..150 mm", inputs: "p.4 Fig. 4(d); p.5 Fig. 5(a)"}
+  - {table: interconnects, row_id: ectc51846.2026.00187-a-i1, field: pitch_um, value: 0.3, formula: "300 nm / 1000", inputs: "p.3 Fig. 2"}
+  - {table: interconnects, row_id: ectc51846.2026.00187-a-i1, field: anneal_time_min, value: 120, formula: "2 h x 60", inputs: "p.3 Fig. 2 caption"}
+  - {table: process_steps, row_id: ectc51846.2026.00187-F1-s07, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.3 Fig. 2 caption"}
+conflicts:
+  - {table: interconnects, row_id: ectc51846.2026.00187-a-i1, field: alignment_um, values: [0.05, 0.053], locators: ["p.5 Fig. 5(b)", "p.6 Fig. 6(c)"], chosen: 0.05, why: "text and conclusion state ~50 nm achieved; 53 nm is the 95% overlay of the Fig. 6 yield wafer (entered as metric)"}
+  - {table: metrics, row_id: ectc51846.2026.00187-a-m5, field: value, values: [81, ">80", 80], locators: ["p.6 Fig. 6(a) readout", "p.5 Sec. III.C", "p.6 Fig. 6(b) caption"], chosen: 81, why: "plotted point; all consistent"}
+  - {table: metrics, row_id: ectc51846.2026.00187-a-m4, field: value, values: [92, ">80 (text, 400 and 300 nm)"], locators: ["p.6 Fig. 6(a)", "p.5 Sec. III.C"], chosen: 92, why: "plotted point"}
+excluded:
+  - "500 nm-pitch W2W results of refs [1], [2], [11]; CMP hardware and interfacial diffusion layer from refs [1], [2]"
+  - "quarter-pitch misalignment guideline and asymmetric pad results of ref [13]"
+  - "best published W2W alignment ~50 nm (industry reports)"
+  - "300-400 C conventional hybrid bonding anneal and <200-250 C requirements (background, refs [5], [6])"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - layer thicknesses, SiCN and oxide thickness, via height, Cu recess, roughness
+  - die/chip size, wafer size in text (300 mm read from map axes)
+  - plasma activation gas/power, bonding force, anneal atmosphere
+  - pad sizes at 800 and 1000 nm pitch; via chain sample counts; per-link resistance
+  - post-bond integration steps (thinning, probe pad formation)
+source_quality:
+  - "Clean text layer. Fig. 7(b) prints no yields. Sec. III.B header misspelled 'overlaly'."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51846.2026.00187-a-m1, change: "none (kept a-m1 and b-m1)", reason: "p.6 Fig. 6(a) plots separate FG Cu and Std Cu points at 1000 nm pitch, both at 100%: genuine per-TV values"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00187-figures, change: "re-ranked: Fig. 2 f02 -> f01, Fig. 1 f01 -> f02, Fig. 6 f03 -> f04, Fig. 4 f04 -> f05, Fig. 8 f05 -> f06, Fig. 5 f06 -> f08", reason: "rank 1 = cross-section image over stack schematic (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00187-f03, change: "added Fig. 3 (cross_section, candidate)", reason: "TEM/PED images of bonded vias; context of a-m21, b-m6"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00187-f07, change: "added Fig. 7 (reliability_plot, candidate)", reason: "source of a-m22, a-m23, a-m26..a-m28"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00187-F1", change: "tv_ids: 'ectc51846.2026.00187-a' -> 'ectc51846.2026.00187-a;ectc51846.2026.00187-b'; notes: '' -> 'FG Cu (a) and standard Cu (b) differ only in the via-fill plating step (TV delta rows).'", reason: "standard-Cu TV b is built with the same flow; only the Cu plating chemistry differs (p.4 Sec. III.A, p.5 Sec. III.C)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00187-F1-s01", change: "step_basis: '' -> 'inferred_order'; notes: 'Deposition method not stated.' -> 'Deposition method not stated. Placed first: Fig. 1 shows the bonding vias through the SiCN layer.'", reason: "re-pass: order of Sec. II.B-D (SiCN film, CMP, plating) is not stated as a sequence"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00187-F1-s02", change: "tv_id: '' -> 'ectc51846.2026.00187-a'; step_basis: '' -> 'inferred_order'", reason: "re-pass: FG Cu plating is TV a only (TV b uses standard Cu); order inferred as for s01"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00187-F1-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "re-pass: order stated in Sec. II.E-F (activation, rinse, RT bond, anneal, post-bond integration)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00187-F1-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "re-pass: order stated in Sec. II.E-F (activation, rinse, RT bond, anneal, post-bond integration)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00187-F1-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "re-pass: order stated in Sec. II.E-F (activation, rinse, RT bond, anneal, post-bond integration)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00187-F1-s08", change: "step_basis: '' -> 'stated_in_flow'", reason: "re-pass: order stated in Sec. II.E-F (activation, rinse, RT bond, anneal, post-bond integration)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00187-F1-s07", change: "step_basis: '' -> 'stated_in_flow'; split: '' -> '210 C / 350 C, 2 h each'", reason: "re-pass: two anneal temperatures used in this study are a split on the shared step (p.3 Fig. 2; p.5 Sec. III.C)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00187-F1-s09", change: "deleted (whole-wafer 100K-link via chain electrical test)", reason: "re-pass: measurement, not a fab step; results already in metrics a-m1..m5 and b-m1..m5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00187-F1-s10", change: "added: standard Cu electroplating, bonding via fill", reason: "re-pass: TV b plating step (standard ECD Cu) was missing; TV b now linked to F1"}

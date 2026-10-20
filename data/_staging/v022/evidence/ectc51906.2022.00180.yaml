@@ -1,0 +1,77 @@
+paper_id: ectc51906.2022.00180
+verified_on: 2026-10-18
+schema_version: 2
+source_files:
+  - references/ectc51906.2022.00180/text.md
+  - references/ectc51906.2022.00180/source.json
+  - references/ectc51906.2022.00180/figures/page_01.png
+  - references/ectc51906.2022.00180/figures/page_02.png
+  - references/ectc51906.2022.00180/figures/page_03.png
+  - references/ectc51906.2022.00180/figures/page_04.png
+  - references/ectc51906.2022.00180/figures/page_05.png
+  - references/ectc51906.2022.00180/figures/page_06.png
+  - references/ectc51906.2022.00180/source.pdf   # high-dpi clips (scratch only) of Figs. 2, 3, 5(a), 6, 7, 8, 9, 11(b), 12(c), 13 for label legibility
+entries:
+  - {table: interconnects, row_id: ectc51906.2022.00180-a-i3, field: notes, value: 96, unit: um, basis: measured, locator: "p.4 Fig. 7", note: "annotated span between adjacent 3D joints; endpoints not center-to-center, not entered as pitch"}
+  - {table: interconnects, row_id: ectc51906.2022.00180-a-i3, field: notes, value: 25, unit: um, basis: measured, locator: "p.4 Fig. 7", note: "joint width in cross-section; pillar design diameter 20 um kept in diameter_um"}
+  - {table: stack_layers, row_id: ectc51906.2022.00180-b-L06, field: thickness_um, value: 50, unit: um, basis: design_target, locator: "p.5 Fig. 9", note: "schematic label spans whole top build-up (DL1+DL2 with M1/M2); DL1 alone not given"}
+  - {table: metrics, row_id: ectc51906.2022.00180-a-m1, field: value, value: 50, unit: um, basis: design_target, locator: "p.1 Sec. I", note: "intro design goal <50 um interconnect length via RDL via stacks"}
+derived:
+  - {table: test_vehicles, row_id: ectc51906.2022.00180-b, field: interposer_area_mm2, value: 2500, formula: "x*y = 50*50", inputs: "p.5 Sec. IV; p.5 Fig. 9"}
+conflicts:
+  - {table: test_vehicles, row_id: ectc51906.2022.00180-a, field: package_x_mm, values: [15, 20], locators: ["p.2 Sec. II-A-2; p.4 Fig. 6(c); p.4 Fig. 7", "p.2 Fig. 3(a)"], chosen: 15, why: "x-ray/cross-section photo and text over schematic"}
+  - {table: components, row_id: ectc51906.2022.00180-a-c1, field: y_mm, values: [10, 10.1], locators: ["p.2 Sec. II-A-2", "p.2 Fig. 2"], chosen: 10, why: "text over layout schematic"}
+  - {table: components, row_id: ectc51906.2022.00180-a-c1, field: gap_um, values: [92, 100], locators: ["p.3 Sec. II-B; p.4 Fig. 7", "p.2 Sec. II-A-2; p.5 Sec. IV"], chosen: 92, why: "measured cross-section over design text"}
+  - {table: components, row_id: ectc51906.2022.00180-a-c2, field: thickness_um, values: [775, 750], locators: ["p.4 Fig. 7", "p.2 Fig. 3(a)"], chosen: 775, why: "measured cross-section over schematic"}
+  - {table: interconnects, row_id: ectc51906.2022.00180-a-i1, field: pitch_min_um, values: ["10;20;30", "20;40"], locators: ["p.2 Sec. II-A-2", "p.2 Fig. 2"], chosen: "10;20;30 (min 10, max 30, vias at 20 per p.5)", why: "text over layout schematic"}
+  - {table: stack_layers, row_id: ectc51906.2022.00180-b-L09, field: thickness_um, values: [260, 200], locators: ["p.6 Fig. 13; p.5 Fig. 9", "p.3 Sec. III-A-2"], chosen: 260, why: "measured cross-section over text"}
+  - {table: components, row_id: ectc51906.2022.00180-b-c4, field: thickness_um, values: [260, 200], locators: ["p.6 Fig. 13", "p.3 Sec. III-A-2"], chosen: 260, why: "measured cross-section over text"}
+  - {table: process_steps, row_id: ectc51906.2022.00180-F3-s11, field: material, values: ["TOK", "Hitachi Chemicals"], locators: ["p.3 Sec. III-B", "p.5 Ack."], chosen: "TOK", why: "method text over acknowledgment"}
+excluded:
+  - "desmear roughness ~300-500 nm, attributed to ref [10] (p.3)"
+  - "package sizes up to ~100x100 mm possible for TV-2 architecture, attributed to ref [8] (p.2)"
+not_reported:
+  - "RDL line/space for any layer"
+  - "TCB temperature, force, time; underfill material and cure"
+  - "ABF grade and cure for TV-2; DL1 thickness; second ABF lamination for DL1/DL4"
+  - "microvia diameters in TV-2; via-in-via dimensions"
+  - "bump metallurgy for TV-2 SoC/HBM emulators"
+  - "BGA ball alloy; TV-1 BGA ball size/pitch"
+  - "package thickness; glass grade/CTE"
+  - electrical_interfaces
+  - optical_interfaces
+  - "daisy-chain resistance, warpage values, reliability tests, thermal data, yield"
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F1;ectc51906.2022.00180-F2;ectc51906.2022.00180-F3", change: "step_basis stated_in_flow on all steps (order from Fig. 4 / Fig. 10 and Sec. II-B, III-B text)", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F1-s03", change: "target 'ectc51906.2022.00180-a-L05' (row id) -> 'D2D pad arrays 10, 20, 30 um pitch'", reason: "p.2 Sec. II-A-2: fine-pitch die-to-die pad array (10, 20 and 30 um pitch); target = stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F1-s01", change: "material/conditions kept; input wafer thickness_in_um 300", reason: "p.2 Sec. II-A-1: 300 um-thick double-side polished Si wafer"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F2-s01", change: "target row id cleared -> '10.4 x 10.4 mm cavities'; thickness_um 300 cleared (it is the cavity-glass input, stack 300+10+50 um kept in conditions)", reason: "p.2 Sec. II-B; p.4 Fig. 5(a); target = stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F2-s03", change: "spacing/gap moved from conditions to target", reason: "p.2 Sec. II-A-2, II-B: stated placement geometry belongs in target"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F2-s04", change: "target row id cleared", reason: "target = stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F2-s05", change: "target row id cleared; equipment 'laser' from Fig. 4 step 4 label (schematic override)", reason: "p.3 Fig. 4 step 4 \"Laser drill vias to expose die pads\""}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F2-s06", change: "target row id cleared", reason: "target = stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F2-s07", change: "target row id cleared", reason: "target = stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F2-s10", change: "target row id cleared; HBM pillar spec moved to material", reason: "p.2 Sec. II-A-1: HBM emulator 20 um diameter pillar, 10 um Cu + 20 um SnAg (input bumps, not produced by TCB)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F2-s11", change: "target row id cleared", reason: "target = stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F2-s12", change: "deleted (x-ray and cross-section of assembled package)", reason: "post-build measurement/FA, not a step; values already in metrics ectc51906.2022.00180-a-m1 (<45 um), -a-m2 (~92 um) and interconnects -a-i1 diameter 16 um measured"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F3-s01", change: "TGV diameter/pitch moved from conditions to target; input glass thickness_in_um 200", reason: "p.3 Sec. III-A-2: 200 um glass panels, TGVs 100 um diameter, 300 um pitch"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F3-s02", change: "cavity geometry moved from conditions to target; row id cleared", reason: "p.3 Sec. III-A-2, III-B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F3-s04", change: "target row id cleared", reason: "target = stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F3-s05", change: "target row id cleared", reason: "target = stated geometry only (via dimensions not reported)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F3-s07", change: "target row id cleared", reason: "target = stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F3-s08", change: "target row id cleared", reason: "target = stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F3-s10", change: "target row id cleared; seed thicknesses typed note kept in conditions", reason: "target = stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F3-s12", change: "target row id cleared", reason: "target = stated geometry only (5 um plated height kept in thickness_um)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F3-s15", change: "target row id cleared", reason: "target = stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F3-s16", change: "target row id -> 'microbump pitch 35 um (D2D I/O), 55 um (HBM I/O), 150 um (P/G I/O)'", reason: "p.1 Abstract; p.5 Fig. 8(a),(c) pitch labels"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F3-s18", change: "target row id -> 'BGA 800 um pitch, 650 um diameter'", reason: "p.5 Fig. 9 schematic labels"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F3-s19", change: "deleted (x-ray after die attach and cross-section)", reason: "post-build image/FA, not a step; content is structural (100 um embedded die, RDL and blind microvias) already in components/interconnects -b-i6; no numeric value to move"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F2;ectc51906.2022.00180-F3", change: "flow locators consolidated; x-ray/cross-section figures removed", reason: "inspection rows deleted; Fig. 8/9 added for target labels"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F3-s04", change: "atmosphere vacuum; 20 um moved thickness_um -> thickness_in_um (as laminated); target DL3 30 um measured", reason: "'vacuum lamination process' p.3 Sec. III-B; 20 um ABF each side Fig. 11(b); DL3 30 um Fig. 13; paper full needs a typed condition"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F2", change: "level full -> ordered", reason: "no typed process condition stated for the TV-1 flow (TCB temperature/force/time not reported); paper stays full via F3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F2-s04", change: "30 um moved to thickness_in_um (as laminated); thickness_um 15 (measured over embedded die)", reason: "p.3 Sec. II-B 30 um ABF GX-T62; p.4 Fig. 7 inset '15 um ABF'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F2-s05", change: "target 16 um via diameter (measured), 20 um via pitch", reason: "p.4 Fig. 7; p.5 Sec. IV"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F2-s10", change: "target 55 um bump pitch (HBM IO), 20 um pillar diameter", reason: "p.2 Fig. 2 'HBM IO (55 um pitch)'; p.2 Fig. 3(a); p.2 Sec. II-A-1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F3-s05", change: "target microvia pitch 50 / 40 um (embedded-die pad pitch)", reason: "p.3 Sec. III-A-2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-F1;ectc51906.2022.00180-F2", change: "build_seq 1/2 confirmed (no change)", reason: "die prep (Sec. II-A-1) yields the DAF-laminated dies embedded in F2-s03"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00180-b-L09;ectc51906.2022.00180-b-L14", change: "no step change", reason: "260 um is a measured final core thickness conflicting with the stated 200 um panel input on F3-s01 (conflict logged); DL1/DL4 lamination is not described in the paper, so no step carries the 25 um DL4"}

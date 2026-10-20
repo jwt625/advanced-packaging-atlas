@@ -46,3 +46,4 @@ not_reported:
   - TBM product and thermal budget temperature, laser wavelength, dielectric type
   - embedded-bump polymer product and thickness, embedded-bump yield
   - warpage sign convention (wafer bow only)
+revisions: []   # 2026-10-19: audit_x1 names this paper only as verified OK or as schema-coverage examples; no row change

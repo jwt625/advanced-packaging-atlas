@@ -44,3 +44,14 @@ not_reported:
 source_quality:
   - "Low-resolution embedded images; cross-section measurement labels illegible."
   - "Candidate p06_table2 holds the p.6 cross-section image; p06_table3 is empty margin; Table 2/3 cropped manually."
+revisions:
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00136-figures, change: "renumbered f03 -> f06 (Figure 2), f04 -> f08 (Figure 15 p.5), f05 -> f18 (Table 2), f06 -> f19 (Table 3)", reason: "re-rank under key-figure rule 2026-10-19 (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00136-f03, change: "added Figure 14 (package_photo, candidate)", reason: "photo of plated 600 mm panel"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00136-f04, change: "added Figure 6 (package_photo, candidate)", reason: "photo of top-ground 600 mm panel"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00136-f05, change: "added Figure 11 (package_photo, candidate)", reason: "photo of 200 mm test panel (TV b)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00136-f07, change: "added Figure 3 (process_flow, candidate)", reason: "round vs square panel flow drawing incl. segment saw (-a-s16)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00136-f09, change: "added Figure 1 (top_view_layout, candidate)", reason: "wafer-on-panel layout drawing (context of -a-m20)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00136-f10, change: "added Figure 7 (micrograph, candidate)", reason: "Cu stud images after top grind and acid clean (-a-s10)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00136-f11..f17, change: "added Figures 16-22 (xray_csam, candidate)", reason: "CSAM images of the build after each CLR test (-a-m10..m16)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00136-f20, change: "added Table 5 (data_table, manual)", reason: "source of -a-m17, -a-m18"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00136-f21, change: "added Table 1 (data_table, manual)", reason: "format/equipment table cited by process steps"}

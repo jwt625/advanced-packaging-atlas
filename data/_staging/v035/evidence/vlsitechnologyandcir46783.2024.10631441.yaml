@@ -1,0 +1,72 @@
+paper_id: vlsitechnologyandcir46783.2024.10631441
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/vlsitechnologyandcir46783.2024.10631441/text.md
+  - references/vlsitechnologyandcir46783.2024.10631441/source.json
+  - references/vlsitechnologyandcir46783.2024.10631441/figures/page_01.png
+  - references/vlsitechnologyandcir46783.2024.10631441/figures/page_02.png
+figure_reading_method: >-
+  p.1 text layer is font-shifted (unreadable) with an OCR-like second copy missing digits; all p.1 numbers re-read from
+  220 dpi re-crops of the page render. p.2 (all figures) read from 300-500 dpi re-crops. Fig. 9 box-plot medians and
+  Fig. 6 TTV medians read against gridlines (pixel scale from axis labels); Fig. 9(c) 50% points on log axis.
+entries:
+  - {table: metrics, row_id: vlsitechnologyandcir46783.2024.10631441-a-m1, field: value, value: 51, unit: ohm/um, basis: measured, locator: "p.2 Fig. 9(a)", note: "wafer D median, +/-2"}
+  - {table: metrics, row_id: vlsitechnologyandcir46783.2024.10631441-a-m7, field: value, value: 28, unit: ohm/link, basis: measured, locator: "p.2 Fig. 9(c)", note: "50% point, log x axis 10-50"}
+  - {table: interconnects, row_id: vlsitechnologyandcir46783.2024.10631441-a-i1, field: alignment_um, value: 0.07, unit: um, basis: measured, locator: "p.1 text; p.2 Fig. 5(a)", note: "max overlay vector BSM1 over BPR, 'up to 70nm'"}
+  - {table: stack_layers, row_id: vlsitechnologyandcir46783.2024.10631441-b-L04, field: properties, value: "Mo 10 uohm-cm", basis: stated, locator: "p.1 Sec. Molybdenum versus TiN/W", note: "OCR copy reads 'Inuohm-cm'; render shows 10"}
+derived:
+  - {table: interconnects, row_id: vlsitechnologyandcir46783.2024.10631441-a-i1, field: alignment_um, value: 0.07, formula: "70 nm / 1000", inputs: "p.1 Sec. Frontside Slit nTSV Fabrication"}
+  - {table: stack_layers, row_id: vlsitechnologyandcir46783.2024.10631441-a-L03, field: via_diameter_um, value: 0.036, formula: "36 nm / 1000", inputs: "p.2 Fig. 9 caption"}
+conflicts:
+  - {table: stack_layers, row_id: vlsitechnologyandcir46783.2024.10631441-a-L04, field: line_um, values: ["below 36 nm", "36 nm"], locators: ["p.1 Sec. Frontside Slit nTSV Fabrication", "p.2 Fig. 9 caption"], chosen: 0.036, why: "caption states the CD of the measured wafers; text bound kept in notes"}
+  - {table: stack_layers, row_id: vlsitechnologyandcir46783.2024.10631441-a-L04, field: line_um, values: [28, 30, 36], locators: ["p.2 Fig. 3 Cut B / Fig. 4(a) TEM labels 28 nm", "p.2 Fig. 1(b) TEM label 30 nm", "p.2 Fig. 9 caption 36 nm"], chosen: 0.036, why: "TEM labels do not say which wafer; caption gives the default CD of the electrical wafers"}
+excluded:
+  - "Fig. 1(a) rectangular BS-patterned nTSV option and its 45 nm TEM: prior implementation of ref [6]"
+  - "50 nm SiGe ESL previous thinning flow of ref [9] (kept only as the Fig. 6 comparison variant)"
+  - "HOCPE requirement for BS-patterned nTSVs (ref [6])"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - components
+  - wafer diameter, nTSV depth/height, remaining device Si thickness, BSM1 width/thickness
+  - carrier bonding method and bond layer
+  - deposition methods for liner, metal fill and BS dielectric; anneal conditions
+  - sample counts per wafer for Fig. 9
+source_quality:
+  - "p.1 PDF text layer garbled (font-shifted) with a partial OCR copy; numbers verified on the page render."
+  - "No candidate crop holds a single whole figure: p02_fig3 spans Fig. 1+3, p02_fig7 spans Fig. 5+7, p02_fig2 is cut on the left."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: "vlsitechnologyandcir46783.2024.10631441-a-m18", change: "locator: 'p.2 Fig. 8; p.1 Sec. Molybdenum versus TiN/W' -> 'p.2 Fig. 8(a); p.1 Sec. Molybdenum versus TiN/W'", reason: "sibling_dup judged genuine: Fig. 8 shows a separate EDS map per fill, (a) TiN/W and (b) Mo; locator narrowed to the panel"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "vlsitechnologyandcir46783.2024.10631441-b-m8", change: "locator: 'p.2 Fig. 8; p.1 Sec. Molybdenum versus TiN/W' -> 'p.2 Fig. 8(b); p.1 Sec. Molybdenum versus TiN/W'", reason: "sibling_dup judged genuine: Fig. 8 shows a separate EDS map per fill, (a) TiN/W and (b) Mo; locator narrowed to the panel"}
+  - {date: 2026-10-19, source: figures, row_id: "vlsitechnologyandcir46783.2024.10631441-f02", change: "added Fig. 4 p.2 cross_section (manual) at rank 2", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "vlsitechnologyandcir46783.2024.10631441-f03", change: "renumbered from vlsitechnologyandcir46783.2024.10631441-f02 (rank 2 -> 3)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "vlsitechnologyandcir46783.2024.10631441-f04", change: "renumbered from vlsitechnologyandcir46783.2024.10631441-f03 (rank 3 -> 4)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "vlsitechnologyandcir46783.2024.10631441-f06", change: "added Fig. 8 p.2 cross_section (manual) at rank 6", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "vlsitechnologyandcir46783.2024.10631441-f07", change: "added Fig. 5 p.2 other (manual) at rank 7", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "vlsitechnologyandcir46783.2024.10631441-f08", change: "renumbered from vlsitechnologyandcir46783.2024.10631441-f04 (rank 4 -> 8)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "vlsitechnologyandcir46783.2024.10631441-f09", change: "renumbered from vlsitechnologyandcir46783.2024.10631441-f06 (rank 6 -> 9)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "vlsitechnologyandcir46783.2024.10631441-f10", change: "added Fig. 10 p.2 simulation_result (manual) at rank 10", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1, change: step_basis of all steps set to stated_in_flow except vlsitechnologyandcir46783.2024.10631441-F1-s19, reason: 'order from Fig. 2 step list (FS a-d, bonding to carrier, BS e-h) and Sec. Frontside Slit nTSV Fabrication'}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1-s01, change: 'conditions: ''ESL 20 nm or 10 nm (wafer F 10 nm); previous work 50 nm'' -> ''undoped, buried; grown in-situ with NS stack''', reason: 'ESL thickness moved to split; 50 nm is the previous flow of ref [9] (excluded)'}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1-s01, change: 'split: '''' -> ''SiGe ESL 20 nm / 10 nm (wafer F 10 nm)''', reason: per-variant ESL thickness on the shared step (convention)}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1-s01, change: 'locator: ''p.1 Sec. Frontside Slit nTSV Fabrication; p.1 Sec. Silicon Thinning; p.2 Fig. 2'' -> ''p.1 Sec. Frontside Slit nTSV Fabrication; p.1 Sec. Silicon Thinning; p.2 Fig. 2; p.2 Fig. 6; p.2 Fig. 9''', reason: added split locators}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1-s03, change: 'target: '''' -> ''BPR pitch 105 nm; BPR CD 36 nm (text: below 36 nm)''', reason: stated target geometry (p.1 text; Fig. 9 caption)}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1-s03, change: 'split: '''' -> ''BPR/top nTSV CD 36 nm / 28 nm (wafer F)''', reason: 'Fig. 9 caption/label: CD 36 nm unless stated; wafer F 28 nm CD'}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1-s03, change: 'overrides: '''' -> ''target:design_target''', reason: target is a design value}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1-s03, change: 'locator: ''p.1 Sec. Frontside Slit nTSV Fabrication; p.2 Fig. 2(a)'' -> ''p.1 Sec. Frontside Slit nTSV Fabrication; p.2 Fig. 2(a); p.2 Fig. 9''', reason: added target locator}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1-s05, change: 'target: '''' -> ''slit length 400 nm along BPR''', reason: stated slit geometry (p.1 text)}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1-s05, change: 'overrides: '''' -> ''target:design_target''', reason: target is a design value}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1-s07, change: 'material: ''TiN/W (TiN barrier 2.5 or 5 nm)'' -> ''TiN/W''', reason: barrier thickness moved to split}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1-s07, change: 'split: '''' -> ''TiN barrier 2.5 nm (wafers D, D*, F) / 5 nm (wafer E)''', reason: per-wafer barrier thickness on the TiN/W delta (Fig. 9(a) labels)}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1-s07, change: 'locator: ''p.1 Sec. Frontside Slit nTSV Fabrication; p.1 Sec. Molybdenum versus TiN/W; p.2 Fig. 2'' -> ''p.1 Sec. Frontside Slit nTSV Fabrication; p.1 Sec. Molybdenum versus TiN/W; p.2 Fig. 2; p.2 Fig. 9(a)''', reason: added split locator}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1-s14, change: 'thickness_in_um: '''' -> ''775''', reason: Fig. 7(a) schematic labels 775 um Si before thinning}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1-s14, change: 'overrides: ''thickness_um:design_target'' -> ''thickness_um:design_target;thickness_in_um:schematic''', reason: input thickness from schematic}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1-s15, change: 'conditions: ''removes remaining 3 um Si, stops on SiGe ESL'' -> ''wet etch of remaining 3 um Si, stops on 10 nm SiGe ESL (Fig. 7 caption); selective to SiO2 liner''', reason: Fig. 7 caption wording}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1-s20, change: 'seq: ''19'' -> ''18''', reason: BSM1 damascene patterning precedes the 'preclean before BSM1 deposition' (text)}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1-s19, change: 'seq: ''18'' -> ''19''', reason: 'preclean is before BSM1 metal deposition, i.e. after damascene patterning'}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1-s19, change: 'step_basis: '''' -> ''inferred_order''', reason: text says preclean before BSM1 deposition; position after patterning inferred from damascene sequence}
+  - {date: 2026-10-20, source: repass, row_id: vlsitechnologyandcir46783.2024.10631441-F1-s19, change: 'notes: '''' -> ''Placed between BSM1 patterning and metal fill (text: preclean before BSM1 deposition); not in Fig. 2 list.''', reason: explain inferred order}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir46783.2024.10631441-F1-s07", change: "step text 'simultaneous metal fill of nTSV and BPR' -> 'simultaneous TiN/W fill of nTSV and BPR (TiN barrier + W)'", reason: "delta rows s07/s08 had identical text; the fill process differs per TV (p.1 Sec. Molybdenum versus TiN/W)"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir46783.2024.10631441-F1-s08", change: "step text 'simultaneous metal fill of nTSV and BPR' -> 'simultaneous barrier-free Mo fill of nTSV and BPR'", reason: "delta rows s07/s08 had identical text; the fill process differs per TV (p.1 Sec. Molybdenum versus TiN/W)"}
+  - {date: 2026-10-20, source: repass, row_id: "vlsitechnologyandcir46783.2024.10631441-F1-s12", change: "category 'other' -> 'device_fab'", reason: "continued FEOL nanosheet device processing per refs [3,8] (p.1); device_fab is in schema v2.5"}

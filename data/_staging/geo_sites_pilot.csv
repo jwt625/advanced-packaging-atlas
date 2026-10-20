@@ -1,0 +1,4 @@
+site_id,org_name,locality,country,lat,lon,precision,source,source_ref,source_label,verified_on,notes
+tsmc-hsinchu,TSMC,Hsinchu,TW,24.77731,120.99304,building,nominatim,osm:way/187807201,"台積電七廠, 園區三路, 新竹科學園區, 葫蘆肚, 雙溪村, 寶山鄉, 新竹縣, 30076, 臺灣",2026-10-19,4.1 km from locality centre
+imec-leuven,imec,Leuven,BE,50.86539,4.67956,campus,nominatim,osm:way/37342567,"IMEC, 75, Kapeldreef, Heverlee, Leuven, Vlaams-Brabant, Vlaanderen, 3001, België / Belgique / Belgien",2026-10-19,2.2 km from locality centre
+a-star-institute-of-microelectronics-singapore,A*STAR Institute of Microelectronics,Singapore,SG,1.28992,103.85191,city,nominatim,,locality centre: Singapore,2026-10-19,institution not resolved; locality centre

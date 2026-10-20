@@ -1,0 +1,41 @@
+paper_id: ectc51846.2026.00209
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00209/text.md
+  - references/ectc51846.2026.00209/source.json
+  - references/ectc51846.2026.00209/figures/page_02.png
+  - references/ectc51846.2026.00209/figures/page_03.png
+  - references/ectc51846.2026.00209/figures/page_04.png
+figure_reading_method: >-
+  Page renders p.2-4 and candidate crops p02_fig2, p03_fig3, p03_fig4, p04_fig7, p04_fig8, p04_fig9; Fig. 4 marker
+  values read from the candidate crop.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00209-a-m4, field: value, value: 411.285, unit: um, basis: measured, locator: "p.3 Fig. 4", note: "marker [1] top width"}
+  - {table: metrics, row_id: ectc51846.2026.00209-a-m5, field: value, value: 228.144, unit: um, basis: measured, locator: "p.3 Fig. 4", note: "marker [2] bottom width"}
+  - {table: process_steps, row_id: ectc51846.2026.00209-F1-s01, field: conditions, value: "kerf 25 um; pattern offset 12.5 um", unit: um, basis: design_target, locator: "p.2 Sec. IV", note: "kerf measured from a single linear pass"}
+derived:
+  - {table: components, row_id: ectc51846.2026.00209-a-c1, field: thickness_um, value: 1000, formula: "1 mm * 1000", inputs: "p.4 Sec. VII"}
+  - {table: components, row_id: ectc51846.2026.00209-a-c2, field: thickness_um, value: 150, formula: "0.15 mm * 1000", inputs: "p.2 Sec. III"}
+  - {table: stack_layers, row_id: ectc51846.2026.00209-d-L01, field: thickness_um, value: 20, formula: "0.020 mm * 1000", inputs: "p.3 Sec. VI"}
+  - {table: process_steps, row_id: ectc51846.2026.00209-F1-s05, field: time_s, value: 1800, formula: "30 min * 60", inputs: "p.4 Sec. VII"}
+  - {table: process_steps, row_id: ectc51846.2026.00209-F1-s09, field: time_s, value: 3600, formula: "60 min * 60", inputs: "p.4 Sec. VII"}
+  - {table: metrics, row_id: ectc51846.2026.00209-c-m2, field: value, value: 2.34, formula: "paper's own ratio to bulk Cu resistivity", inputs: "p.3 Sec. VI"}
+conflicts:
+  - {table: components, row_id: ectc51846.2026.00209-a-c1, field: x_mm, values: [22, 25], locators: ["p.4 Sec. VII", "p.2 Sec. III"], chosen: 22, why: "text vs text; p.4 describes the demonstrator build itself"}
+  - {table: metrics, row_id: ectc51846.2026.00209-c-m1, field: parameter, values: ["resistance (abstract, ohm*m)", "resistivity"], locators: ["p.1 Abstract", "p.3 Sec. VI"], chosen: resistivity, why: "unit ohm*m is a resistivity"}
+excluded:
+  - "100 um via diameters demonstrated in ref [5]"
+  - "US-202A resistivity 2.14e-8 ohm*m achieved previously, ref [6]"
+  - "micron-sized silver flake paste comparison, ref [7]"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "via count, via pitch and trace line/space in the demonstrator"
+  - "alignment accuracy of stacked coverslips"
+  - "CL83A layer thickness; interlayer bondline thickness"
+  - "number of via resistance samples; RF or functional test results of the Bluetooth demonstrator"
+  - "reliability testing"
+source_quality:
+  - "Fig. 4 marker [3] 81.961 um not explained in text; profile height axis not interpreted."
+  - "Paste names written inconsistently (CL83A, CL83-A, CLA83A; US-202A, US-202)."

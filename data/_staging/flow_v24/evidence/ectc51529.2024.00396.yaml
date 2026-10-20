@@ -1,0 +1,44 @@
+paper_id: ectc51529.2024.00396
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00396/text.md
+  - references/ectc51529.2024.00396/source.json
+  - references/ectc51529.2024.00396/figures/page_04.png
+  - references/ectc51529.2024.00396/figures/cand/p02_fig1.png
+  - references/ectc51529.2024.00396/figures/cand/p03_fig2.png
+  - references/ectc51529.2024.00396/figures/cand/p03_fig3.png
+  - references/ectc51529.2024.00396/figures/cand/p04_fig4.png
+  - references/ectc51529.2024.00396/figures/cand/p04_fig5.png
+  - references/ectc51529.2024.00396/figures/cand/p04_fig6.png
+figure_reading_method: >-
+  Fig. 3 bow values are data labels (also in text layer). Fig. 4 box-plot center lines located by pixel scan of the
+  candidate crop (y-axis 46.9 px/nm from tick labels 0 and 8), read +/-0.2 nm. Fig. 1 layer labels (SiN, SiO2) read
+  from a 300 dpi re-crop. Fig. 2, 5, 6 viewed from candidate crops and 300 dpi re-crops (qualitative only).
+entries:
+  - {table: interconnects, row_id: ectc51529.2024.00396-a-i1, field: pitch_um, value: 6, unit: um, basis: design_target, locator: "p.2 Sec. II", note: "stepper mask designed with 6 um pitch and 3 um pad; abstract says ~6 um"}
+  - {table: interconnects, row_id: ectc51529.2024.00396-a-i1, field: alignment_um, value: 1.5, unit: um, basis: measured, locator: "p.4 Sec. III.D", note: "maximum ~1.5 um at wafer edge; ~<50 nm at center"}
+  - {table: metrics, row_id: ectc51529.2024.00396-a-m11, field: value, value: -0.66, unit: nm, basis: measured, locator: "p.4 Fig. 4", note: "pixel read; entered rounded to 0.1 nm"}
+  - {table: metrics, row_id: ectc51529.2024.00396-a-m12, field: value, value: 2.36, unit: nm, basis: measured, locator: "p.4 Fig. 4", note: "pixel read"}
+  - {table: metrics, row_id: ectc51529.2024.00396-a-m13, field: value, value: 0.86, unit: nm, basis: measured, locator: "p.4 Fig. 4", note: "pixel read"}
+  - {table: metrics, row_id: ectc51529.2024.00396-a-m14, field: value, value: 6.09, unit: nm, basis: measured, locator: "p.4 Fig. 4", note: "pixel read"}
+  - {table: metrics, row_id: ectc51529.2024.00396-a-m15, field: value, value: 5.75, unit: nm, basis: measured, locator: "p.4 Fig. 4", note: "pixel read"}
+  - {table: metrics, row_id: ectc51529.2024.00396-a-m16, field: value, value: 6.26, unit: nm, basis: measured, locator: "p.4 Fig. 4", note: "pixel read"}
+derived:
+  - {table: process_steps, row_id: ectc51529.2024.00396-F1-s14, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.4 Sec. III.D"}
+  - {table: interconnects, row_id: ectc51529.2024.00396-a-i1, field: anneal_time_min, value: 120, formula: "2 h x 60", inputs: "p.4 Sec. III.D"}
+conflicts:
+  - {table: metrics, row_id: ectc51529.2024.00396-a-m17, field: value, values: ["<0.2 nm", "<0.3 nm"], locators: ["p.3 Sec. III.C", "p.1 Abstract"], chosen: "<0.2 nm", why: "results section statement tied to the AFM measurement; abstract value is the looser summary"}
+  - {table: metrics, row_id: ectc51529.2024.00396-a-m18, field: value, values: ["90% void-free (abstract)", "no voids except systematic design voids after bonding; void-free after anneal (Sec. III.D, Fig. 5)"], locators: ["p.1 Abstract", "p.4 Sec. III.D"], chosen: "both entered", why: "different statements (area fraction vs qualitative C-SAM); not reconcilable from the paper"}
+  - {table: metrics, row_id: ectc51529.2024.00396-a-m9, field: value, values: ["glass dishing <5 nm (text)", "glass dishing -0.7 to 2.4 nm (Fig. 4)"], locators: ["p.3 Sec. III.C", "p.4 Fig. 4"], chosen: "both entered", why: "consistent: figure values satisfy the text bound"}
+excluded:
+  - "Glass Young's modulus 73.6 GPa (attributed to ref [17])"
+  - "10x interconnect density on glass (ref [14]); 50% less pattern distortion (refs [12,13])"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - "Cu-Cu daisy-chain or contact resistance; electrical yield"
+  - "glass type/CTE value, wafer thicknesses, dielectric and Cu pad thicknesses, barrier metal"
+  - "plasma power/time, bonding force, blanket-bond anneal conditions, cleaning chemistries"
+  - "bow sign convention; number of wafers; roughness parameter (Ra/Rq)"
+source_quality:
+  - "Candidates p04_fig5 and p04_fig6 include a line of body text at the top; manual crops used. Fig. 4 y-axis label '-2' garbled in text layer."

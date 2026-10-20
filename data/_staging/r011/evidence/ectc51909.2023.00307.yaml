@@ -37,3 +37,11 @@ not_reported:
   - bump pitch and count, BBM-TSV dimensions, BCB thickness, Ti thickness, support glass and glue products
   - bonding atmosphere/tool, underfill (resin in Fig. 9 only for cross-section), reliability, yield
   - warpage measurement temperature and sign convention
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00307, change: "papers.notes trimmed 32 -> 29 words", reason: "audit_x1 item 15 (rule m, notes <= 30 words); OCR text flag added per BATCH_INSTRUCTIONS"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00307-a-s14, change: "none", reason: "audit_x1 item 14: temp_c 149.85 (423 K, p.2 Sec. II) already carries override temp_c:design_target; numeric cell is design_target"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00307-a-s22, change: "none", reason: "audit_x1 item 14: temp_c 179.85 / time_s 3600 (453 K, 1 h, p.2 Sec. II) already carry design_target overrides"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00307-figures, change: "re-ranked: Fig. 3 f03 -> f02, Fig. 8 f02 -> f03, Fig. 6 f04 -> f05, Fig. 7 f05 -> f07, Fig. 5 f06 -> f08", reason: "key-figure rule 2026-10-19: rank 1 build view, then process flow, layout, other schematics/images, then plots/tables"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00307-f04, change: "added Fig. 2 (stack_schematic, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00307-f06, change: "added Fig. 4 (micrograph, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00307-f09, change: "added Table I (data_table, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}

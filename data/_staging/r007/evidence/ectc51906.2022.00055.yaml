@@ -35,3 +35,11 @@ not_reported:
   - reliability, warpage, thermal data
 source_quality:
   - "Candidates p02_fig2, p02_fig3, p02_fig4 and p04_fig10 clip labels or include the neighbouring caption; re-cropped manually."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51906.2022.00055-a-m4, change: "scope 'HFSS with vs without ferrite core' -> '...; applies to TVs a, b'; notes added", reason: "p.4 Sec. III/V state the 4-6x increase once for both inductor types; no per-type values"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51906.2022.00055-b-m4, change: "deleted (copy of -a-m4)", reason: "identical claim copied onto sibling TV"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00055-figures, change: "renumbered f02 -> f04 (Fig. 3), f03 -> f05 (Fig. 4), f04 -> f08 (Table I), f05 -> f09 (Fig. 10)", reason: "re-rank under key-figure rule 2026-10-19 (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00055-f02, change: "added Fig. 1 (stack_schematic, manual)", reason: "cross-section schematic of the proposed IVR package (TV c)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00055-f03, change: "added Fig. 7 (package_photo, manual)", reason: "photos of fabricated type 1/2 inductors"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00055-f07, change: "added Fig. 6 (other, candidate)", reason: "3-D structure drawing with Table I dimension labels"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00055-f10, change: "added Fig. 12 (electrical_plot, candidate)", reason: "efficiency curves behind -c-m1"}

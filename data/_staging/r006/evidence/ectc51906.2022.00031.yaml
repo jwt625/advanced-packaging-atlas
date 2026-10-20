@@ -51,3 +51,17 @@ not_reported:
   - per-layer cumulative void-free yields for layers 1-4 (only read approximately from Fig. 8 bars; not entered)
 source_quality:
   - "Scanned-quality text layer garbled; text.md is tesseract OCR (note 'OCR text' in papers.notes). No figure candidates were detected (candidates.json empty); all key figures manual."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51906.2022.00031-b-m3, change: "deleted (copy of a-m4: no link resistance dependence on distance from die edge)", reason: "p.5 Sec. III.D gives one statement for every stack type; no per-build value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51906.2022.00031-c-m6, change: "deleted (copy of a-m4)", reason: "same statement"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51906.2022.00031-a-m4, change: "scope -> 'applies to TVs a, b, c'; notes added", reason: "kept as the single row; Fig. 12 plots D2W, 2-die, 5-die only"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-figures, change: "re-ranked: Fig. 6 f03 -> f04, Fig. 4 f02 -> f05, Fig. 10 f04 -> f09, Fig. 13 f05 -> f13, Table I f06 -> f15", reason: "layouts before other schematics/images, then plots/tables (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f02, change: "added Fig. 2 (top_view_layout, manual)", reason: "die floor plan"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f03, change: "added Fig. 3 (top_view_layout, manual)", reason: "edge daisy-chain layout"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f06, change: "added Fig. 5 (stack_schematic, manual)", reason: "LTxC stack drawing"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f07, change: "added Fig. 1 (package_photo, manual)", reason: "photo of 8-die stack"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f08, change: "added Fig. 9 (xray_csam, manual)", reason: "CSAM of D2W and 5-die stack"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f10, change: "added Fig. 11 (electrical_plot, manual)", reason: "source of a-m1, a-m2"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f11, change: "added Fig. 8 (other, manual)", reason: "source of c-m3, c-m4"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f12, change: "added Fig. 12 (electrical_plot, manual)", reason: "source of a-m4"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f14, change: "added Fig. 14 (electrical_plot, manual)", reason: "source of a-m5, d-m3, d-m4"}

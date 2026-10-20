@@ -1,0 +1,41 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc51529.2024.00011-a01-1,ectc51529.2024.00011,1,Jacinta Aman Lim,1,primary,nepes,,San Diego,US,printed: nepes Corporation,paper,p.1 affiliations (page render; absent from text layer)
+ectc51529.2024.00011-a02-1,ectc51529.2024.00011,2,Jane Lee,1,primary,nepes,,San Diego,US,printed: nepes Corporation,paper,p.1 affiliations (page render; absent from text layer)
+ectc51529.2024.00011-a03-1,ectc51529.2024.00011,3,Hyun-Jin Shin,1,primary,nepes,,Chungcheongbuk-do,KR,printed: nepes Corporation; locality is a province as printed,paper,p.1 affiliations (page render; absent from text layer)
+ectc51529.2024.00011-a04-1,ectc51529.2024.00011,4,YunMook Park,1,primary,nepes,,Chungcheongbuk-do,KR,printed: nepes Corporation; locality is a province as printed,paper,p.1 affiliations (page render; absent from text layer)
+ectc51529.2024.00011-a05-1,ectc51529.2024.00011,5,Robin Davis,1,primary,Deca Technologies,,Tempe,US,printed: DECA,paper,p.1 affiliations (page render; absent from text layer)
+ectc51529.2024.00011-a06-1,ectc51529.2024.00011,6,YoungMo Lee,1,primary,nepes,,Chungcheongbuk-do,KR,printed: nepes Corporation; locality is a province as printed,paper,p.1 affiliations (page render; absent from text layer)
+ectc51529.2024.00011-a07-1,ectc51529.2024.00011,7,Brett Dunlap,1,primary,nepes,,"Phoenix, AZ",US,printed: nepes Corporation; country from printed city,paper,p.1 affiliations (page render; absent from text layer)
+ectc51529.2024.00265-a01-1,ectc51529.2024.00265,1,Hirokazu Noma,1,primary,Resonac,,"Kawasaki, Kanagawa",JP,,paper,p.1 affiliations (page image)
+ectc51529.2024.00265-a02-1,ectc51529.2024.00265,2,Masaki Takahashi,1,primary,Resonac,,"Kawasaki, Kanagawa",JP,,paper,p.1 affiliations (page image)
+ectc51529.2024.00265-a03-1,ectc51529.2024.00265,3,Nene Hatakeyama,1,primary,Resonac,,"Kawasaki, Kanagawa",JP,,paper,p.1 affiliations (page image)
+ectc51529.2024.00265-a04-1,ectc51529.2024.00265,4,Yuichi Yanaka,1,primary,Resonac,,"Kawasaki, Kanagawa",JP,,paper,p.1 affiliations (page image)
+ectc51529.2024.00265-a05-1,ectc51529.2024.00265,5,Akito Fukui,1,primary,Resonac,,"Kawasaki, Kanagawa",JP,,paper,p.1 affiliations (page image)
+ectc51529.2024.00265-a06-1,ectc51529.2024.00265,6,Keita Johno,1,primary,Resonac,,"Chikusei, Ibaraki",JP,,paper,p.1 affiliations (page image)
+ectc51529.2024.00265-a07-1,ectc51529.2024.00265,7,Hitoshi Onozeki,1,primary,Resonac,,"Kawasaki, Kanagawa",JP,,paper,p.1 affiliations (page image)
+ectc51846.2026.00117-a01-1,ectc51846.2026.00117,1,Sheng Li,1,primary,ASE,,Kaohsiung City,TW,,paper,p.1 affiliations
+ectc51846.2026.00117-a02-1,ectc51846.2026.00117,2,Chu Jie Yang,1,primary,ASE,,Kaohsiung City,TW,,paper,p.1 affiliations
+ectc51846.2026.00117-a03-1,ectc51846.2026.00117,3,Min Lung Huang,1,primary,ASE,,Kaohsiung City,TW,,paper,p.1 affiliations
+ectc51846.2026.00117-a04-1,ectc51846.2026.00117,4,Yue Nung Lin,1,primary,ASE,,Kaohsiung City,TW,,paper,p.1 affiliations
+ectc51846.2026.00117-a05-1,ectc51846.2026.00117,5,Jen Kuang Fang,1,primary,ASE,,Kaohsiung City,TW,,paper,p.1 affiliations
+ectc51846.2026.00130-a01-1,ectc51846.2026.00130,1,Ying Trickett,1,primary,Applied Materials,,"Albany, NY",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a02-1,ectc51846.2026.00130,2,Roger Quon,1,primary,Applied Materials,,"Albany, NY",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a03-1,ectc51846.2026.00130,3,Yoocharn Jeon,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a04-1,ectc51846.2026.00130,4,Amit Prakash,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a05-1,ectc51846.2026.00130,5,Raghav Sreenivasan,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a06-1,ectc51846.2026.00130,6,Raghuveer Patlolla,1,primary,Applied Materials,,"Albany, NY",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a07-1,ectc51846.2026.00130,7,Joan Chung,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a08-1,ectc51846.2026.00130,8,Ju Seon Goo,1,primary,Applied Materials,,,KR,no city printed; printed: South Korea,paper,p.1 affiliations
+ectc51846.2026.00130-a09-1,ectc51846.2026.00130,9,Sang Jin Kim,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a10-1,ectc51846.2026.00130,10,Norman Tam,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a11-1,ectc51846.2026.00130,11,Shashank Sharma,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a12-1,ectc51846.2026.00130,12,Jeremiah Hebding,1,primary,Applied Materials,,"Albany, NY",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a13-1,ectc51846.2026.00130,13,Siddarth Krishnan,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a14-1,ectc51846.2026.00130,14,Michael Chudzik,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a15-1,ectc51846.2026.00130,15,Barabara Weis,1,primary,EV Group,,St. Florian am Inn,AT,,paper,p.1 affiliations
+ectc51846.2026.00130-a16-1,ectc51846.2026.00130,16,David Goldberger,1,primary,EV Group,,St. Florian am Inn,AT,,paper,p.1 affiliations
+ectc51909.2023.00307-a01-1,ectc51909.2023.00307,1,Naoya Watanabe,1,primary,National Institute of Advanced Industrial Science and Technology,,Tsukuba-shi,JP,byline order read row-major from page-1 image,paper,p.1 affiliations
+ectc51909.2023.00307-a02-1,ectc51909.2023.00307,2,Yuuki Araga,1,primary,National Institute of Advanced Industrial Science and Technology,,Tsukuba-shi,JP,,paper,p.1 affiliations
+ectc51909.2023.00307-a03-1,ectc51909.2023.00307,3,Haruo Shimamoto,1,primary,National Institute of Advanced Industrial Science and Technology,,Tsukuba-shi,JP,,paper,p.1 affiliations
+ectc51909.2023.00307-a04-1,ectc51909.2023.00307,4,Makoto Nagata,1,primary,Kobe University,"Graduate School of Science, Technology and Innovation",Kobe-shi,JP,,paper,p.1 affiliations
+ectc51909.2023.00307-a05-1,ectc51909.2023.00307,5,Katsuya Kikuchi,1,primary,National Institute of Advanced Industrial Science and Technology,,Tsukuba-shi,JP,,paper,p.1 affiliations

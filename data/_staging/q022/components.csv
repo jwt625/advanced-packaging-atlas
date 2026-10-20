@@ -1,0 +1,24 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51687.2025.00026-a-c1,ectc51687.2025.00026-a,logic_soc,,,SoC,4,,,,,,,150,,,,design_target,text,,p.2 Sec. II; p.2 Fig. 4,,gap_um = SoC die-to-die gap.
+ectc51687.2025.00026-a-c2,ectc51687.2025.00026-a,hbm,,,HBM4,12,,,,,,,,,,,design_target,text,,p.2 Sec. I; p.2 Fig. 4,,
+ectc51687.2025.00026-a-c3,ectc51687.2025.00026-a,ipd,,,IPD,,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. I,,"Count, size not given."
+ectc51687.2025.00026-a-c4,ectc51687.2025.00026-a,interposer,,,CoWoS-R RDL interposer (CoW die),1,66,68,,,,,,,polymer dielectric film + Cu RDL,,design_target,text,,p.2 Sec. II; p.2 Sec. III.A,,x/y = CoW size.
+ectc51687.2025.00026-a-c5,ectc51687.2025.00026-a,substrate,,,package substrate (SBT),1,97.3,95,,,,,,,,,design_target,text,,p.2 Sec. II,,Layer count and core not given.
+ectc51687.2025.00026-a-c6,ectc51687.2025.00026-a,underfill,,,UF1 (CoW underfill),,,,,,,,,,,,stated,text,,p.3 Sec. III.A; p.5 Sec. V,,Product not given.
+ectc51687.2025.00026-a-c7,ectc51687.2025.00026-a,underfill,,,oS underfill,,,,,,,,,,,,stated,text,,p.4 Sec. III.B,,Product not given.
+ectc51687.2025.00026-b-c1,ectc51687.2025.00026-b,substrate,,,package substrate (SBT),1,110,110,,,,,,,,,design_target,text,,p.4 Sec. III.C; p.4 Fig. 10,,
+ectc51687.2025.00026-c-c1,ectc51687.2025.00026-c,logic_soc,,,SoC,4,,,,,,,,,,,design_target,text,,p.2 Sec. II; p.2 Fig. 4,,
+ectc51687.2025.00026-c-c2,ectc51687.2025.00026-c,hbm,,,HBM,20,,,,,,,,,,,design_target,text,,p.2 Sec. II; p.2 Fig. 4,,
+ectc51687.2025.00026-c-c3,ectc51687.2025.00026-c,io_die,,,I/O,8,,,,,,,,,,,design_target,text,,p.2 Sec. II,,
+ectc51687.2025.00026-c-c4,ectc51687.2025.00026-c,substrate,,,package substrate (SBT),1,110,110,,,,,,,,,design_target,text,,p.4 Sec. III.C; p.4 Fig. 10,,
+ectc51687.2025.00026-d-c1,ectc51687.2025.00026-d,other,,,warpage compensation layer,1,,,,,,,,,,,stated,mixed,,p.4 Sec. IV; p.4 Fig. 11,,"Attached onto substrate around CoW; material, size, thickness not given."
+ectc51687.2025.00026-d-c2,ectc51687.2025.00026-d,stiffener,,,ring,1,,,,,,,,,,,stated,mixed,,p.4 Sec. IV; p.5 Fig. 13(a),,Attached after compensation layer (Fig. 13 stages).
+ectc51687.2025.00026-d-c3,ectc51687.2025.00026-d,substrate,,,package substrate (SBT),1,110,110,,,,,,,,,design_target,text,,p.4 Sec. IV; p.4 Fig. 12,,
+ectc51687.2025.00026-e-c1,ectc51687.2025.00026-e,other,,,warpage compensation layer,1,,,,,,,,,,,stated,text,,p.4 Sec. IV; p.4 Fig. 12,,
+ectc51687.2025.00026-e-c2,ectc51687.2025.00026-e,substrate,,,package substrate (SBT),1,110,110,,,,,,,,,design_target,table,,p.4 Fig. 12,,
+ectc51846.2026.00134-a-c1,ectc51846.2026.00134-a,bridge,,yes,EMIB (Embedded Multi-die Interconnect Bridge),2,,,,,,,,,Si,,stated,text,,p.3 Sec. III; p.4 Fig. 8(a),,Embedded in the top layers for fine die-to-die interconnect; bridge size and depth not reported.
+ectc51846.2026.00134-a-c2,ectc51846.2026.00134-a,substrate,,,glass core substrate (24-layer),1,,,,,,,,,glass core; wet SAP RDL,,stated,text,,p.3 Sec. III; p.4 Fig. 8,,"Glass type, core thickness and unit size not reported."
+ectc51846.2026.00134-e-c1,ectc51846.2026.00134-e,stiffener,,,stiffener (organic reference),1,,,,,,,,,,,stated,figure_image,,p.4 Fig. 7,,Only the label 'Organic with Stiffener'.
+ectc51529.2024.00017-a-c1,ectc51529.2024.00017-a,dummy_die,yes,,"top die (test chiplet with daisy chains, local alignment marks at each corner)",,6.2,7.7,,,,,,,,,design_target,figure_image,,p.2 Fig. 1(b); p.2 Sec. II.A,,Dimensions labelled on optical image. Singulated from top wafer by plasma dicing; MFZ around each chiplet.
+ectc51529.2024.00017-a-c2,ectc51529.2024.00017-a,base_die,yes,,base wafer (half-reticle field with 8 bonding sites),,,,,,,,,,,,stated,mixed,,p.2 Fig. 1(b); p.2 Sec. II.A,,Wafer size and thickness not stated; daisy chains run between top die and base wafer.
+icep-iaac64884.2025.11002987-a-c1,icep-iaac64884.2025.11002987-a,dummy_die,yes,,12 inch Si wafer with daisy-chain Cu UBM pads,1,,,,,,,,,Si,,stated,text,,p.1 Sec. II; p.2 Sec. II,,"Wafer and die thickness, die size not given."

@@ -1,0 +1,56 @@
+paper_id: ectc51909.2023.00048
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00048/text.md
+  - references/ectc51909.2023.00048/source.json
+  - references/ectc51909.2023.00048/figures/page_02.png
+  - references/ectc51909.2023.00048/figures/page_03.png
+  - references/ectc51909.2023.00048/figures/page_04.png
+  - references/ectc51909.2023.00048/figures/page_05.png
+  - references/ectc51909.2023.00048/figures/page_06.png
+  - references/ectc51909.2023.00048/figures/cand/p02_fig2.png
+  - references/ectc51909.2023.00048/figures/cand/p03_fig3.png
+  - references/ectc51909.2023.00048/figures/cand/p03_fig4.png
+  - references/ectc51909.2023.00048/figures/cand/p05_fig6.png
+  - references/ectc51909.2023.00048/figures/cand/p06_fig8.png
+figure_reading_method: >-
+  Page renders 2-6 read in full. 400 dpi re-crops of Fig. 2(d), Fig. 3, Fig. 5 and Fig. 8. Fig. 5 bars read by pixel
+  scale (65 px per 100 um, +/-10 um). Fig. 8(a) coupling loss read on right axis (+/-0.1 dB). Fig. 2(d) loss read +/-0.1 dB/mm.
+entries:
+  - {table: optical_interfaces, row_id: ectc51909.2023.00048-b-o1, field: coupling_loss_db, value: 1.6, unit: dB, basis: measured, locator: "p.6 Fig. 8(a)", note: "curve minimum ~1.57 dB near 115-120 mA"}
+  - {table: metrics, row_id: ectc51909.2023.00048-a-m4, field: value, value: -5, unit: um, basis: measured, locator: "p.4 Fig. 5", note: "high-induced-bow final equals Si removal value (no stress relief)"}
+derived:
+  - {table: metrics, row_id: ectc51909.2023.00048-b-m1, field: value_check, value: 0.38, formula: "(6.89 - 6.13) / 2", inputs: "p.6 Fig. 8(c) gap labels; authors' stated bound 0.4 um entered"}
+conflicts:
+  - {table: optical_interfaces, row_id: ectc51909.2023.00048-b-o1, field: coupling_loss_db, values: [1.5, 1.6], locators: ["p.5 Sec. III.C 'approaching 1.5 dB'", "p.6 Sec. IV '<1.6 dB'; p.6 Fig. 8(a) ~1.6"], chosen: 1.6, why: "measured plot"}
+  - {table: process_steps, row_id: ectc51909.2023.00048-F2-s08, field: seq, values: ["Fig. 4: wire bond then fiber attach", "text: fiber attachment and wire-bonding complete the assembly"], locators: ["p.3 Fig. 4", "p.3 Sec. II.B"], chosen: "Fig. 4 order", why: "flow chart is explicit"}
+  - {table: process_steps, row_id: ectc51909.2023.00048-F2-s04, field: step, values: ["fab text: thin wafer transferred to dicing tape and singulated", "packaging text: wafer-level bumping, then de-bond and singulate"], locators: ["p.3 Sec. II.B (both)"], chosen: "single singulation step in packaging flow after bumping and de-bond", why: "avoid duplicating singulation"}
+excluded:
+  - "Table I bond energies for Low T TEOS, High T TEOS, SiN, SiCN (adapted from ref [15])"
+  - "Prior PIC-CMOS wafer stack integration of ref [11]; laser attach procedure details of ref [13]"
+  - "Architecture background (pluggable, OBO, CPO) of refs [2], [10]"
+not_reported:
+  - electrical_interfaces
+  - interposer die size, TSV diameter/pitch, RDL line/space and thickness, layer thicknesses in Fig. 3
+  - anneal temperature/time, bonding conditions, Cu pillar and solder bump dimensions, BGA pitch
+  - laser wavelength, polarization, fiber-array coupling loss, fiber pitch
+  - wafer bow sign convention; sample counts
+source_quality:
+  - "text.md has a shifted-glyph duplicate of the text plus an OCR-like layer with digit errors (e.g. '11m' for um, '§' for ~); all numbers checked on page renders. No TEXT_LAYER_WARNING present."
+  - "No candidate for Fig. 5; candidate p02_fig2 includes a cut caption line."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00048-F1-s02", change: "target 'Cu TSV 100 um'; bow split moved from conditions to split", reason: "stated geometry on step; parameter sweep in split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00048-F1-s05", change: "bond-energy statement moved from conditions to result", reason: "it is an outcome, not a condition (metric a-m15 already holds it)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00048-F1-s13", change: "applied-to-wafers text moved to split; step_basis inferred_order", reason: "per-variant application is a split; order vs TOV etch not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00048-F1-s14", change: "TOV depth moved from conditions to target", reason: "stated geometry on step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00048-F1-s16", change: "category other -> rdl_layer (also F1-s19)", reason: "wiring/RDL level formation"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00048-F1-s18", change: "thickness_um=100 (approx)", reason: "'wafer thinning to approximately 100 um' p.3 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00048-F2-s01", change: "category deposition_other -> bumping (also F2-s02)", reason: "wafer-level Cu pillar / solder bump formation"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00048-F2-s10", change: "deleted (Test box of Fig. 4)", reason: "test is not a step; no test result reported (package test is future work)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00048-F2", change: "scope tv_build -> generic_platform; note added", reason: "Fig. 4 is the platform flow; full package assembly/test not reported as done"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00048-F1", change: "level full -> ordered", reason: "ordered steps with materials/tools but no temperature, time or pressure anywhere"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00048", change: "process_flow_level full -> ordered (has_process_flow stays yes)", reason: "no process conditions (temperature/time/pressure) disclosed for any step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00048-F1-s01", change: "category other -> device_fab", reason: "PIC wafer fabricated in AIM low-loss SiPh process (waveguides, implants, PDs, contacts, Cu routing; p.3 Sec. II.B); device_fab added to step_category"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00048-F1-s13", change: "category kept other; note added", reason: "stress relief method not stated (p.4 Sec. III.A); no matching category"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00048-F1-s23", change: "category kept other; note added", reason: "bulk Si removal method not stated (p.3 Sec. II.B); no matching category"}

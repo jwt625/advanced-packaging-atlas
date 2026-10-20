@@ -1,0 +1,25 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51529.2024.00133-a-c1,ectc51529.2024.00133-a,substrate,,,SCHOTT D 263 glass substrate (polished),1,50,50,400,,,,,,SCHOTT D 263 glass,SCHOTT,design_target,text,,p.2 Sec. II,,0.4 mm converted to 400 um.
+ectc51529.2024.00128-a-c1,ectc51529.2024.00128-a,dummy_die,yes,,"top wafer test chip (bond layer + routing metal, daisy chains)",,,,,,,,,,Si,,stated,text,,p.3 Sec. III.A; p.4 Sec. IV.B; p.5 Sec. IV.C,,Backside Si removed by grinding and CMP after bonding to reveal metal for probing.
+ectc51529.2024.00128-a-c2,ectc51529.2024.00128-a,dummy_die,yes,,"bottom wafer test chip (bond layer + routing metal, daisy chains)",,,,,,,,,,Si,,stated,text,,p.3 Sec. III.A; p.5 Sec. IV.C,,Upper and lower pad sizes equal.
+ectc51529.2024.00125-a-c1,ectc51529.2024.00125-a,other,yes,,thinned wafer with revealed TSVs and WAT probe pads,1,,,,,,,,,,,stated,text,,p.4 Sec. IV,,Test wafer with Kelvin and daisy-chain structures; which wafer (top/bottom) is thinned not stated.
+ectc51529.2024.00125-a-c2,ectc51529.2024.00125-a,other,yes,,F2F bonded partner wafer,1,,,,,,,,,,,stated,text,,p.4 Sec. IV,,Test wafer; thickness and material stack not stated.
+ectc51529.2024.00151-a-c1,ectc51529.2024.00151-a,asic,,,ASIC,2,,,,,,,,,,,stated,text,,p.5 Sec. III.A; p.5 Fig. 10,,
+ectc51529.2024.00151-a-c2,ectc51529.2024.00151-a,hbm,,,HBM,8,,,,,,,,,,,stated,text,,p.5 Sec. III.A; p.5 Fig. 10,,Generation and stack height not stated.
+ectc51529.2024.00151-a-c3,ectc51529.2024.00151-a,bridge,,yes,Si bridge die (embedded in FO-RDL),8,6.2,6.4,,,,,,,Si,,design_target,text,,p.5 Sec. III.A; p.5 Fig. 10,,
+ectc51529.2024.00151-a-c4,ectc51529.2024.00151-a,substrate,,,FCBGA organic substrate,1,70,78,,,,,,,,,design_target,text,,p.5 Sec. III.A,,Package dimension 70x78 mm; layer count not reported.
+ectc51529.2024.00151-a-c5,ectc51529.2024.00151-a,mold,,,top mold and bottom mold,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2,,Compounds not named.
+ectc51529.2024.00151-a-c6,ectc51529.2024.00151-a,underfill,,,CoW UF (top underfill),,,,,,,,,,,,stated,mixed,,p.3 Fig. 2; p.6 Fig. 16,,
+ectc51529.2024.00151-a-c7,ectc51529.2024.00151-a,underfill,,,CoS UF (bottom underfill),,,,,,,,,,,,stated,mixed,,p.3 Fig. 2; p.6 Fig. 16,,
+ectc51529.2024.00151-b-c1,ectc51529.2024.00151-b,logic_soc,,,SoC-1,2,,,,,,,,,,,stated,text,,p.5 Sec. III.B; p.5 Fig. 12(a),,
+ectc51529.2024.00151-b-c2,ectc51529.2024.00151-b,logic_soc,,,SoC-2,8,,,,,,,,,,,stated,text,,p.5 Sec. III.B,,Function of SoC-2 not stated.
+ectc51529.2024.00151-b-c3,ectc51529.2024.00151-b,bridge,,yes,Si bridge die (embedded in FO-RDL),10,,,,,,,,,Si,,stated,text,,p.5 Sec. III.B; p.1 Abstract,,
+ectc51529.2024.00151-b-c4,ectc51529.2024.00151-b,substrate,,,"organic substrate (top build-up, core, bottom build-up)",1,76.5,80,,,,,,,,,design_target,text,,p.5 Sec. III.B; p.2 Fig. 1,,
+ectc51529.2024.00151-b-c5,ectc51529.2024.00151-b,mold,,,top mold and bottom mold,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2,,
+ectc51529.2024.00151-b-c6,ectc51529.2024.00151-b,underfill,,,CoW UF (top underfill),,,,,,,,,,,,stated,mixed,,p.3 Fig. 2; p.6 Fig. 16,,
+ectc51529.2024.00151-b-c7,ectc51529.2024.00151-b,underfill,,,CoS UF (bottom underfill),,,,,,,,,,,,stated,mixed,,p.3 Fig. 2; p.6 Fig. 16,,
+ectc51529.2024.00151-b-c8,ectc51529.2024.00151-b,other,,,passive components,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 1,,Type/count not stated.
+ectc51529.2024.00153-a-c1,ectc51529.2024.00153-a,dummy_die,yes,,"chiplet (test chiplet with four-probe, daisy chain, comb patterns)",2,,,,,,,,,,,design_target,text,,p.5 Sec. III.B; p.6 Fig. 12(a),,"No passivation above RDL. Size, thickness and material not stated."
+ectc51529.2024.00153-a-c2,ectc51529.2024.00153-a,substrate,,,Si substrate wafer,1,,,,,,,,,Si,,stated,text,,p.5 Sec. III.B; p.6 Sec. IV,,"Pads >500,000 at 20 um pitch, no passivation above RDL. Diameter not stated."
+ectc51529.2024.00153-a-c3,ectc51529.2024.00153-a,underfill,,,Laser NCF (pre-applied underfill film),1,,,,,,,,,"epoxy, reducing agent (carboxylic acid), curing agent, catalyst",ETRI (in-house development),stated,text,,p.3 Sec. II.B; p.4 Sec. II.B; p.5 Fig. 10(b),,Transparent UV-Vis-NIR; not cured during LABC (post-cure). Thickness calculated to avoid excessive fillet; value not given.
+ectc51529.2024.00153-b-c1,ectc51529.2024.00153-b,dummy_die,yes,,bumped chiplet wafer,1,,,,,,,,,,,stated,text,,p.4 Sec. III.A; p.4 Fig. 7,,"Cu pillars with Ni and SnAg solder caps, 20 um pitch."

@@ -1,0 +1,81 @@
+paper_id: tcpmt.2026.3708099
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/tcpmt.2026.3708099/text.md
+  - references/tcpmt.2026.3708099/figures/page_02.png
+  - references/tcpmt.2026.3708099/figures/page_03.png
+  - references/tcpmt.2026.3708099/figures/page_04.png
+  - references/tcpmt.2026.3708099/figures/page_05.png
+  - references/tcpmt.2026.3708099/figures/cand/p03_fig2.png
+  - references/tcpmt.2026.3708099/figures/cand/p03_fig4.png
+  - references/tcpmt.2026.3708099/figures/cand/p04_fig6.png
+  - references/tcpmt.2026.3708099/figures/cand/p05_fig9.png
+  - references/tcpmt.2026.3708099/figures/cand/p05_fig10.png
+figure_reading_method: >-
+  450 dpi re-crops: Fig. 4 bar labels read as printed; Fig. 6 bar tops read against 20 MPa gridlines (+/-2 MPa,
+  pixel scale 5.41 px/MPa); Fig. 9 grain-size bars against 0.2 um gridlines (+/-0.03 um); Fig. 2(b) annotations;
+  Fig. 7 'max' labels at 600 dpi. Table I (rendered as image in PDF) read from a manual crop.
+entries:
+  - {table: metrics, row_id: tcpmt.2026.3708099-b-m1, field: variant, value: "0.4 ASD thinned", basis: measured, locator: "p.3 Fig. 4", note: "stacked top/bottom bars attributed to thinned (through-via) samples; legend lists only 0.4/0.5 ASD, Bottom, Top"}
+  - {table: metrics, row_id: tcpmt.2026.3708099-d-m1, field: value, value: 0.393, unit: um, basis: measured, locator: "p.3 Fig. 4", note: "0.11 bottom + 0.283 top"}
+  - {table: metrics, row_id: tcpmt.2026.3708099-c-m3, field: value, value: 425, unit: MPa, basis: measured, locator: "p.4 Fig. 6", note: "0.5 ASD unannealed; Fig. 9 stress marker ~426 agrees"}
+derived:
+  - {table: interconnects, row_id: tcpmt.2026.3708099-a-i1, field: aspect_ratio, value: 4.29, formula: "depth/diameter = 300/70", inputs: "p.2 Sec. II.A"}
+  - {table: interconnects, row_id: tcpmt.2026.3708099-b-i1, field: aspect_ratio, value: 4.29, formula: "depth/diameter = 300/70", inputs: "p.2 Sec. II.A"}
+  - {table: interconnects, row_id: tcpmt.2026.3708099-c-i1, field: aspect_ratio, value: 4.29, formula: "depth/diameter = 300/70", inputs: "p.2 Sec. II.A"}
+  - {table: interconnects, row_id: tcpmt.2026.3708099-d-i1, field: aspect_ratio, value: 4.29, formula: "depth/diameter = 300/70", inputs: "p.2 Sec. II.A"}
+  - {table: process_steps, row_id: tcpmt.2026.3708099-F1-s05, field: time_s, value: 36000, formula: "10 h x 3600", inputs: "p.2 Sec. II.C"}
+  - {table: process_steps, row_id: tcpmt.2026.3708099-F1-s16, field: time_s, value: 10800, formula: "3 h x 3600", inputs: "p.2 Sec. II.E"}
+  - {table: "process_steps", row_id: "tcpmt.2026.3708099-F1-s05", field: "split", value: "4 / 5 mA/cm2", formula: "A/dm2 x 10 = mA/cm2: 0.4 x 10 = 4; 0.5 x 10 = 5", inputs: "p.2 Sec. II.C (0.4 and 0.5 ASD)"}
+conflicts:
+  - {table: metrics, row_id: tcpmt.2026.3708099-a-m8, field: value, values: [306, 306.045], locators: ["p.3 Sec. III.A", "p.3 Fig. 2(b)"], chosen: 306, why: "same measurement; text rounding (also 73 vs 72.717, 26 vs 26.081)"}
+  - {table: metrics, row_id: tcpmt.2026.3708099-c-m2, field: value, values: [1.154, "~1.15 (Fig. 9 expansion marker)"], locators: ["p.3 Fig. 4", "p.5 Fig. 9"], chosen: 1.154, why: "printed bar label"}
+excluded:
+  - "CTE of Si 2.5e-6/C and Cu 17.5e-6/C attributed to ref [13]"
+  - "Raman constants (520.5 cm-1, 434 MPa cm) used as method inputs, not results"
+  - "~0.35 Tm self-diffusion threshold and Hall-Petch reasoning (refs [27], [29])"
+  - "Fig. 5 stress maps (color scale 200-600 MPa) not digitized beyond Fig. 6 averages"
+  - "Fig. 3 profilometer traces (no numeric extraction beyond Fig. 4)"
+  - "Fig. 2(b) top annotation 'Distance 24.x01 um' (digits partly unreadable, meaning not stated)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - components (bare TSV wafers)
+  - TSV count per wafer/unit, SiP unit size
+  - DRIE tool, PEPVD tool, plating tool, anneal atmosphere details beyond 'anaerobic oven'
+  - electrical resistance, electromigration, thermal cycling (future work)
+  - sample counts and statistic behind error bars; 0.4 ASD thinned stress and grain data
+source_quality:
+  - "Text layer clean. Table I is an image in the PDF (no candidate); read from manual crop. Section/figure labels consistent."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: "tcpmt.2026.3708099-a-m12", change: "scope: '' -> 'applies to TVs a, b, c, d'", reason: "sibling_dup: one process-variation sentence (p.2 Sec. II.A) for all etched wafers, no per-build values; kept once on first TV with scope"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "tcpmt.2026.3708099-b-m8", change: "deleted (copy of tcpmt.2026.3708099-a-m12)", reason: "sibling_dup: one process-variation sentence (p.2 Sec. II.A) for all etched wafers, no per-build values; kept once on first TV with scope"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "tcpmt.2026.3708099-c-m10", change: "deleted (copy of tcpmt.2026.3708099-a-m12)", reason: "sibling_dup: one process-variation sentence (p.2 Sec. II.A) for all etched wafers, no per-build values; kept once on first TV with scope"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "tcpmt.2026.3708099-d-m11", change: "deleted (copy of tcpmt.2026.3708099-a-m12)", reason: "sibling_dup: one process-variation sentence (p.2 Sec. II.A) for all etched wafers, no per-build values; kept once on first TV with scope"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "tcpmt.2026.3708099-a-m14", change: "locator: 'p.5 Sec. III.C; p.5 Fig. 10' -> 'p.5 Sec. III.C'", reason: "sibling_dup judged genuine (p.5 Sec. III.C names 0.4, 0.5 and 0.5 thinned samples separately); locator narrowed to the panel that shows this build (Fig. 10 has no 0.4-ASD panel)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "tcpmt.2026.3708099-c-m12", change: "locator: 'p.5 Sec. III.C; p.5 Fig. 10' -> 'p.5 Sec. III.C; p.5 Fig. 10(c)'", reason: "sibling_dup judged genuine (p.5 Sec. III.C names 0.4, 0.5 and 0.5 thinned samples separately); locator narrowed to the panel that shows this build (Fig. 10 has no 0.4-ASD panel)"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "tcpmt.2026.3708099-d-m12", change: "locator: 'p.5 Sec. III.C; p.5 Fig. 10' -> 'p.5 Sec. III.C; p.5 Fig. 10(d)'", reason: "sibling_dup judged genuine (p.5 Sec. III.C names 0.4, 0.5 and 0.5 thinned samples separately); locator narrowed to the panel that shows this build (Fig. 10 has no 0.4-ASD panel)"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2026.3708099-f02", change: "added Fig. 1 p.2 top_view_layout (candidate) at rank 2", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2026.3708099-f03", change: "renumbered from tcpmt.2026.3708099-f06 (rank 6 -> 3)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2026.3708099-f04", change: "added Fig. 8 p.5 micrograph (candidate) at rank 4", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2026.3708099-f05", change: "renumbered from tcpmt.2026.3708099-f02 (rank 2 -> 5)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2026.3708099-f06", change: "renumbered from tcpmt.2026.3708099-f03 (rank 3 -> 6)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2026.3708099-f07", change: "added Fig. 3 p.3 mechanical_plot (candidate) at rank 7", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2026.3708099-f08", change: "added Fig. 5 p.4 mechanical_plot (candidate) at rank 8", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2026.3708099-f09", change: "renumbered from tcpmt.2026.3708099-f04 (rank 4 -> 9)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2026.3708099-f10", change: "renumbered from tcpmt.2026.3708099-f05 (rank 5 -> 10)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-19, source: figures, row_id: "tcpmt.2026.3708099-f11", change: "added Fig. 7 p.4 simulation_result (candidate) at rank 11", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; rank re-ordered"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3708099-F1-s01", change: "target set (aperture 70 um, depth 300 um, pitch 210 um); equipment 'DRIE system (Bosch process)'; wafer 4-in/500 um added to conditions; locator narrowed", reason: "stated geometry and tool belong on the step (p.2 Sec. II.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3708099-F1-s03", change: "equipment 'PEPVD'; locator narrowed (also s02, s04)", reason: "deposition method stated as plasma-enhanced PVD (p.2 Sec. II.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3708099-F1-s05", change: "tv_id a -> '' (shared by TVs a-d); current density as split '0.4 ASD = 4 mA/cm2 (a, b) / 0.5 ASD = 5 mA/cm2 (c, d)'; result lists both fills", reason: "identical plating step differing only in current density by variant: split on the shared step (repass convention)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3708099-F1-s06", change: "deleted (TV b delta folded into shared tcpmt.2026.3708099-F1-s05 with split)", reason: "duplicate of the plating step except current density"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3708099-F1-s07", change: "deleted (TV c delta folded into shared tcpmt.2026.3708099-F1-s05 with split)", reason: "duplicate of the plating step except current density"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3708099-F1-s08", change: "deleted (TV d delta folded into shared tcpmt.2026.3708099-F1-s05 with split)", reason: "duplicate of the plating step except current density"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3708099-F1-s09", change: "equipment 'mechanical thinning system'; locators narrowed (s09-s11)", reason: "named tool type stated (p.2 Sec. II.D)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3708099-F1-s12", change: "deleted (performed=no delta for unthinned TV a)", reason: "step absent for this TV; the delta rows on TVs b and d carry it"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3708099-F1-s14", change: "deleted (performed=no delta for unthinned TV c)", reason: "step absent for this TV; the delta rows on TVs b and d carry it"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3708099-F1-s13", change: "thickness_in_um 500 (also s15); performed 'yes' -> ''", reason: "input wafer thickness 500 um (p.2 Sec. II.A); thinned samples per Table I"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3708099-F1-s16", change: "ramp_c_per_min 1 typed; equipment 'anaerobic oven'; anneal temperature sweep moved from conditions to split", reason: "typed conditions and split per repass contract (p.2 Sec. II.E, Table I)"}
+  - {date: 2026-10-20, source: flow_v25, row_id: "tcpmt.2026.3708099-F1-s13", change: "tv_id tcpmt.2026.3708099-b -> tcpmt.2026.3708099-b;tcpmt.2026.3708099-d; folded tcpmt.2026.3708099-F1-s15", reason: "schema v2.5: a delta row lists every TV it applies to; the rows were identical except tv_id and locator"}
+  - {date: 2026-10-20, source: flow_v25, row_id: "tcpmt.2026.3708099-F1-s15", change: "deleted: folded into tcpmt.2026.3708099-F1-s13 (tv_id tcpmt.2026.3708099-d added to its list)", reason: "schema v2.5: a delta row lists every TV it applies to; the rows were identical except tv_id and locator"}

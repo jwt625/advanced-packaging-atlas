@@ -1,0 +1,41 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc51687.2025.00047-a01-1,ectc51687.2025.00047,1,Kathy Yan,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00047-a02-1,ectc51687.2025.00047,2,Yu-Hsiang Hu,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00047-a03-1,ectc51687.2025.00047,3,Chien-Hsun Lee,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00047-a04-1,ectc51687.2025.00047,4,Hsin-Yu Chen,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00047-a05-1,ectc51687.2025.00047,5,Mon-Sen Liu,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00047-a06-1,ectc51687.2025.00047,6,Eric Chen,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00047-a07-1,ectc51687.2025.00047,7,M.C. Yew,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00047-a08-1,ectc51687.2025.00047,8,C.K. Hsu,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00047-a09-1,ectc51687.2025.00047,9,Shin-Puu Jeng,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51687.2025.00047-a10-1,ectc51687.2025.00047,10,Jun He,1,primary,TSMC,,Hsinchu,TW,printed: Hishchu (sic),paper,p.1 affiliations (page image)
+ectc51846.2026.00153-a01-1,ectc51846.2026.00153,1,Motohiro Negishi,1,primary,Resonac,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00153-a02-1,ectc51846.2026.00153,2,Yuta Akasu,1,primary,Resonac,,Ibaraki,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00153-a03-1,ectc51846.2026.00153,3,Koji Yukimatsu,1,primary,Resonac,,Ibaraki,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00153-a04-1,ectc51846.2026.00153,4,Emi Miyazawa,1,primary,Resonac,,Ibaraki,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00153-a05-1,ectc51846.2026.00153,5,Tetsuya Enomoto,1,primary,Resonac,,Ibaraki,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00153-a06-1,ectc51846.2026.00153,6,Tomohiro Ohkubo,1,primary,Resonac,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00153-a07-1,ectc51846.2026.00153,7,Saeko Ogawa,1,primary,Resonac,,Chiba,JP,"printed locality Chiba (city or prefecture, ambiguous)",paper,p.1 affiliations
+ectc51846.2026.00153-a08-1,ectc51846.2026.00153,8,Masanori Natsukawa,1,primary,Resonac,,Chiba,JP,"printed locality Chiba (city or prefecture, ambiguous)",paper,p.1 affiliations
+ectc51846.2026.00153-a09-1,ectc51846.2026.00153,9,Tomohiko Kotake,1,primary,Resonac,,"San Jose, CA",US,"printed: San jose CA, USA",paper,p.1 affiliations
+ectc51906.2022.00218-a01-1,ectc51906.2022.00218,1,SangHyun Jin,1,primary,Amkor Technology Korea,R&D,Incheon,KR,"byline order read row-major from page-1 image (2-column grid); printed: Amkor Technology Korea, Inc.",paper,p.1 affiliations
+ectc51906.2022.00218-a02-1,ectc51906.2022.00218,2,WonChul Do,1,primary,Amkor Technology Korea,R&D,Incheon,KR,"printed: Amkor Technology Korea, Inc.",paper,p.1 affiliations
+ectc51906.2022.00218-a03-1,ectc51906.2022.00218,3,JinSuk Jeong,1,primary,Amkor Technology Korea,R&D,Incheon,KR,"printed: Amkor Technology Korea, Inc.",paper,p.1 affiliations
+ectc51906.2022.00218-a04-1,ectc51906.2022.00218,4,HyunGoo Cha,1,primary,Amkor Technology Korea,R&D,Incheon,KR,"printed: Amkor Technology Korea, Inc.",paper,p.1 affiliations
+ectc51906.2022.00218-a05-1,ectc51906.2022.00218,5,YunKyung Jeong,1,primary,Amkor Technology Korea,R&D,Incheon,KR,"printed: Amkor Technology Korea, Inc.",paper,p.1 affiliations
+ectc51906.2022.00218-a06-1,ectc51906.2022.00218,6,JinYoung Khim,1,primary,Amkor Technology Korea,R&D,Incheon,KR,"printed: Amkor Technology Korea, Inc.",paper,p.1 affiliations
+iedm50572.2025.11353491-a01-1,iedm50572.2025.11353491,1,A. Horibe,1,primary,IBM,IBM Research – Tokyo,Kawasaki,JP,superscript 1,paper,p.1 affiliations (page image)
+iedm50572.2025.11353491-a02-1,iedm50572.2025.11353491,2,Y. Taira,1,primary,IBM,IBM Research – Tokyo,Kawasaki,JP,superscript 1,paper,p.1 affiliations (page image)
+iedm50572.2025.11353491-a03-1,iedm50572.2025.11353491,3,S. Kohara,1,primary,IBM,IBM Research – Tokyo,Kawasaki,JP,superscript 1,paper,p.1 affiliations (page image)
+iedm50572.2025.11353491-a04-1,iedm50572.2025.11353491,4,C. Marushima,1,primary,IBM,IBM Research – Tokyo,Kawasaki,JP,superscript 1,paper,p.1 affiliations (page image)
+iedm50572.2025.11353491-a05-1,iedm50572.2025.11353491,5,H. Mori,1,primary,IBM,IBM Research – Tokyo,Kawasaki,JP,superscript 1,paper,p.1 affiliations (page image)
+iedm50572.2025.11353491-a06-1,iedm50572.2025.11353491,6,H. Numata,1,primary,IBM,IBM Research – Tokyo,Kawasaki,JP,superscript 1,paper,p.1 affiliations (page image)
+iedm50572.2025.11353491-a07-1,iedm50572.2025.11353491,7,J.B. Heroux,1,primary,IBM,IBM Infrastructure,"Bromont, Quebec",CA,superscript 2,paper,p.1 affiliations (page image)
+iedm50572.2025.11353491-a08-1,iedm50572.2025.11353491,8,A. Paz Ramos,1,primary,IBM,IBM Infrastructure,"Bromont, Quebec",CA,superscript 2,paper,p.1 affiliations (page image)
+iedm50572.2025.11353491-a09-1,iedm50572.2025.11353491,9,H. Hsu,1,primary,IBM,IBM Research – Albany,"Albany, NY",US,superscript 3,paper,p.1 affiliations (page image)
+iedm50572.2025.11353491-a10-1,iedm50572.2025.11353491,10,N. Liu,1,primary,IBM,IBM Research – Albany,"Albany, NY",US,superscript 3,paper,p.1 affiliations (page image)
+iedm50572.2025.11353491-a11-1,iedm50572.2025.11353491,11,M. Schultz,1,primary,IBM,IBM Research – Watson Research Center,NY,US,superscript 4; printed locality is a state (NY); no city printed,paper,p.1 affiliations (page image)
+iedm50572.2025.11353491-a12-1,iedm50572.2025.11353491,12,J. Knickerbocker,1,primary,IBM,IBM Research – Watson Research Center,NY,US,superscript 4; printed locality is a state (NY); no city printed,paper,p.1 affiliations (page image)
+tcpmt.2025.3557232-a01-1,tcpmt.2025.3557232,1,Ye Yang,1,primary,Purdue University,School of Mechanical Engineering,"West Lafayette, IN",US,,paper,p.1 footnote
+tcpmt.2025.3557232-a02-1,tcpmt.2025.3557232,2,Kelly E. Lahaie,1,primary,Purdue University,School of Mechanical Engineering,"West Lafayette, IN",US,,paper,p.1 footnote
+tcpmt.2025.3557232-a03-1,tcpmt.2025.3557232,3,Tiwei Wei,1,primary,Purdue University,School of Mechanical Engineering,"West Lafayette, IN",US,,paper,p.1 footnote

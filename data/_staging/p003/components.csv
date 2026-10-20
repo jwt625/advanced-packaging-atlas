@@ -1,0 +1,79 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51909.2023.00091-a-c1,ectc51909.2023.00091-a,logic_soc,yes,,SoC (top die),2,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.3 Sec. II.A,,"Mechanical TV; non-functional die inferred from 'mechanical TV'. Size, thickness, node not given."
+ectc51909.2023.00091-a-c2,ectc51909.2023.00091-a,hbm,yes,,HBM2E,4,,,,,,,,,,,design_target,table,,p.3 Table 1; p.3 Sec. II.A,,Mechanical TV. Stack height and size not given.
+ectc51909.2023.00091-a-c3,ectc51909.2023.00091-a,dummy_die,yes,,dummy Si (top die layer),8,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.3 Sec. II.A; p.3 Fig. 6(b),,Equivalent 3.8x reticle dummy Si added to mimic a 5.4x reticle (4500 mm2) interposer.
+ectc51909.2023.00091-a-c4,ectc51909.2023.00091-a,bridge,,yes,LSI (local Si interconnect),6,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.3 Sec. II.A; p.2 Sec. II,,Embedded in SC-RDL module; features same as ref [7] incl. eDTC. Size not given.
+ectc51909.2023.00091-a-c5,ectc51909.2023.00091-a,ipd,,yes,IPD,45,,,,,,,,,,,design_target,text,,p.3 Table 1; p.3 Sec. II.A,,2.9 mm2 each; embedded between B/S SC-RDL and organic substrate (in uBGA layer).
+ectc51909.2023.00091-a-c6,ectc51909.2023.00091-a,substrate,,,"organic substrate 3-2-3, 1.4 mm core",1,91,91,,,,,,,organic,,design_target,table,,p.3 Table 1; p.3 Sec. II.A,,Simplified substrate; size equal to SC-RDL/package size.
+ectc51909.2023.00091-a-c7,ectc51909.2023.00091-a,mold,,,side mold extended to package substrate edge,,,,,,,,,,,,stated,text,,p.2 Sec. II,,Mold material and thickness not given.
+ectc51909.2023.00091-a-c8,ectc51909.2023.00091-a,lid,,,lid,1,91,91,2000,,,,,,,,design_target,figure_image,,p.3 Table 1; p.3 Fig. 6(c),,Fig. 6(c) label 'Lid: 91mmx91mmx2mm'. Material not given.
+ectc51909.2023.00091-b-c1,ectc51909.2023.00091-b,logic_soc,yes,,SoC (top die),6,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.4 Sec. II.B,,"Mechanical TV; non-functional die inferred from 'mechanical TV'. Size, thickness, node not given."
+ectc51909.2023.00091-b-c2,ectc51909.2023.00091-b,hbm,yes,,HBM2E,12,,,,,,,,,,,design_target,table,,p.3 Table 1; p.4 Sec. II.B,,Mechanical TV. Stack height and size not given.
+ectc51909.2023.00091-b-c3,ectc51909.2023.00091-b,bridge,,yes,LSI (local Si interconnect),18,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.4 Sec. II.B; p.2 Sec. II,,Embedded in SC-RDL module; features same as ref [7] incl. eDTC. Size not given.
+ectc51909.2023.00091-b-c4,ectc51909.2023.00091-b,ipd,,yes,IPD,45,,,,,,,,,,,design_target,text,,p.3 Table 1; p.4 Sec. II.B,,2.9 mm2 each; embedded between B/S SC-RDL and organic substrate (in uBGA layer).
+ectc51909.2023.00091-b-c5,ectc51909.2023.00091-b,substrate,,,"organic substrate 3-2-3, 1.4 mm core",1,91,91,,,,,,,organic,,design_target,table,,p.3 Table 1; p.4 Sec. II.B,,Simplified substrate; size equal to SC-RDL/package size.
+ectc51909.2023.00091-b-c6,ectc51909.2023.00091-b,mold,,,side mold extended to package substrate edge,,,,,,,,,,,,stated,text,,p.2 Sec. II,,Mold material and thickness not given.
+ectc51909.2023.00091-b-c7,ectc51909.2023.00091-b,stiffener,,,stiffener ring,1,,,,,,,,,,,design_target,figure_image,,p.3 Table 1; p.4 Fig. 7(c); p.4 Fig. 7(d),,Fig. 7(c) label 'Ring: 18mm-12mm-2mm'; meaning of the three values not defined. No TIM1 needed.
+estc60143.2024.10712129-a-c1,estc60143.2024.10712129-a,dummy_die,yes,,large die (mimics logic),1,15,20,,,,,,,,,design_target,figure_image,,p.2 Fig. 2,,Cu pillar + Ni barrier + SnAg solder bumps.
+estc60143.2024.10712129-a-c2,estc60143.2024.10712129-a,dummy_die,yes,,small die (mimics memory),4,5,10,,,,,,,,,design_target,figure_image,count:schematic,p.2 Fig. 2,,Count of 4 per site from layout drawing.
+estc60143.2024.10712129-a-c3,estc60143.2024.10712129-a,interposer,yes,,interposer wafer with Cu pads,,,,,,,,,,,,stated,table,,p.2 Table I,,Interposer material and wafer size not stated.
+estc60143.2024.10712129-b-c1,estc60143.2024.10712129-b,dummy_die,yes,,large die (mimics logic),1,15,20,,,,,,,,,design_target,figure_image,,p.2 Fig. 2,,Cu pillar + Ni barrier + SnAg solder bumps.
+estc60143.2024.10712129-b-c2,estc60143.2024.10712129-b,dummy_die,yes,,small die (mimics memory),4,5,10,,,,,,,,,design_target,figure_image,count:schematic,p.2 Fig. 2,,Count of 4 per site from layout drawing.
+estc60143.2024.10712129-b-c3,estc60143.2024.10712129-b,interposer,yes,,interposer wafer with Cu pads,,,,,,,,,,,,stated,table,,p.2 Table I,,Interposer material and wafer size not stated.
+estc60143.2024.10712129-c-c1,estc60143.2024.10712129-c,dummy_die,yes,,large die (mimics logic),1,15,20,,,,,,,,,design_target,figure_image,,p.2 Fig. 2,,Cu pillar + Ni barrier + SnAg solder bumps.
+estc60143.2024.10712129-c-c2,estc60143.2024.10712129-c,dummy_die,yes,,small die (mimics memory),4,5,10,,,,,,,,,design_target,figure_image,count:schematic,p.2 Fig. 2,,Count of 4 per site from layout drawing.
+estc60143.2024.10712129-c-c3,estc60143.2024.10712129-c,interposer,yes,,interposer wafer with Cu pads,,,,,,,,,,,,stated,table,,p.2 Table I,,Interposer material and wafer size not stated.
+estc60143.2024.10712129-f-c1,estc60143.2024.10712129-f,dummy_die,,yes,embedded Si chip,700,,,,,,,,,Si,,measured,text,,p.4 Sec. III.B; p.2 Fig. 6; p.4 Fig. 12,count:gt,More than 700 dies mounted per panel; die size and function not stated; is_emulator not stated.
+estc60143.2024.10712129-f-c2,estc60143.2024.10712129-f,die_attach_film,,,DAF,,,,,,,,,,DAF,,stated,text,,p.2 Sec. II.B; p.4 Fig. 12,,Cured in pressure oven.
+estc60143.2024.10712129-f-c3,estc60143.2024.10712129-f,mold,,,compression mold (EMC),,,,,,,,,,EMC,,stated,mixed,,p.2 Sec. II.B; p.2 Fig. 6,,
+estc60143.2024.10712129-g-c1,estc60143.2024.10712129-g,dummy_die,,,Die A,,21.9,21.9,675,,,,,,,,design_target,table,,p.2 Table II,,is_emulator and count not stated.
+estc60143.2024.10712129-g-c2,estc60143.2024.10712129-g,dummy_die,,,Die B,,10,8,675,,,,,,,,design_target,table,,p.2 Table II,,is_emulator and count not stated.
+estc60143.2024.10712129-g-c3,estc60143.2024.10712129-g,dummy_die,yes,,dummy dies (reduce EMC area and interposer warpage),,,,,,,,,,,,stated,text,,p.4 Sec. III.C,,
+estc60143.2024.10712129-g-c4,estc60143.2024.10712129-g,interposer,,,silicon interposer,,50,50,200,,,,,,Si,,design_target,table,,p.2 Table III,,
+estc60143.2024.10712129-g-c5,estc60143.2024.10712129-g,substrate,,,package substrate-A,,100,100,1600,,,,,,,,measured,table,,p.3 Table IV,,Actual value = design 1.6 mm. Core material not named.
+estc60143.2024.10712129-g-c6,estc60143.2024.10712129-g,stiffener,,,"Cu stiffener (selected t=2.0 mm, w=20.5 mm)",,,,2000,,,,,,Cu,,design_target,mixed,,p.4 Sec. III.C; p.3 Fig. 7; p.4 Fig. 15,,Selected design from stiffener study; use in TCT build follows the sequential Sec. III.C narrative.
+estc60143.2024.10712129-g-c7,estc60143.2024.10712129-g,pcb,,,motherboard,,150,150,2800,,,,,,,,design_target,table,,p.3 Table V,,
+estc60143.2024.10712129-g-c8,estc60143.2024.10712129-g,underfill,,,CUF (die-interposer and interposer-substrate),,,,,,,,,,CUF,,stated,mixed,,p.3 Fig. 7; p.4 Sec. III.C,,
+estc60143.2024.10712129-g-c9,estc60143.2024.10712129-g,mold,,,EMC (C-mold on interposer),,,,,,,,,,EMC,,stated,mixed,,p.3 Fig. 7; p.4 Sec. III.C,,
+estc60143.2024.10712129-h-c1,estc60143.2024.10712129-h,dummy_die,,,Die A,,21.9,21.9,675,,,,,,,,design_target,table,,p.2 Table II,,is_emulator and count not stated.
+estc60143.2024.10712129-h-c2,estc60143.2024.10712129-h,dummy_die,,,Die B,,10,8,675,,,,,,,,design_target,table,,p.2 Table II,,is_emulator and count not stated.
+estc60143.2024.10712129-h-c3,estc60143.2024.10712129-h,dummy_die,yes,,dummy dies (reduce EMC area and interposer warpage),,,,,,,,,,,,stated,text,,p.4 Sec. III.C,,
+estc60143.2024.10712129-h-c4,estc60143.2024.10712129-h,interposer,,,silicon interposer,,50,50,200,,,,,,Si,,design_target,table,,p.2 Table III,,
+estc60143.2024.10712129-h-c5,estc60143.2024.10712129-h,substrate,,,package substrate-B,,100,100,1600,,,,,,,,measured,table,,p.3 Table IV,,Actual value = design 1.6 mm. Core material not named.
+estc60143.2024.10712129-h-c6,estc60143.2024.10712129-h,stiffener,,,"Cu stiffener (selected t=2.0 mm, w=20.5 mm)",,,,2000,,,,,,Cu,,design_target,mixed,,p.4 Sec. III.C; p.3 Fig. 7; p.4 Fig. 15,,Selected design from stiffener study; use in TCT build follows the sequential Sec. III.C narrative.
+estc60143.2024.10712129-h-c7,estc60143.2024.10712129-h,pcb,,,motherboard,,150,150,2800,,,,,,,,design_target,table,,p.3 Table V,,
+estc60143.2024.10712129-h-c8,estc60143.2024.10712129-h,underfill,,,CUF (die-interposer and interposer-substrate),,,,,,,,,,CUF,,stated,mixed,,p.3 Fig. 7; p.4 Sec. III.C,,
+estc60143.2024.10712129-h-c9,estc60143.2024.10712129-h,mold,,,EMC (C-mold on interposer),,,,,,,,,,EMC,,stated,mixed,,p.3 Fig. 7; p.4 Sec. III.C,,
+ectc32862.2020.00185-a-c1,ectc32862.2020.00185-a,dummy_die,yes,yes,daisy-chain Si test die,1,7,7,700,,,,,,Si; peripheral Al bond pads,,design_target,table,thickness_um:text,p.2 Table 1; p.2 Sec. II; p.5 Sec. IV.B,,"1585 bond pads, 60 um pitch, 40 um pad, 30 um opening."
+ectc32862.2020.00185-a-c2,ectc32862.2020.00185-a,mold,,no,granular molding compound EMC G1,,,,,,,,,,EMC G1 (granular),,stated,table,,p.3 Table 2; p.3 Sec. IV.A; p.5 Sec. IV.B,,Tg 195 C; filler loading 77 wt%; filler cut point 20 um; CTE1/CTE2 10/58 ppm/C
+ectc32862.2020.00185-a-c3,ectc32862.2020.00185-a,other,,,glass panel carrier (removed after PMC),1,625,615,1100,,,,,,"glass, CTE 3.6 ppm",,design_target,text,,p.2 Sec. III; p.2 Sec. IV.A; p.5 Sec. IV.B,,CTE unit written as ppm.
+ectc32862.2020.00185-a-c4,ectc32862.2020.00185-a,adhesive,,,thermal release mold tape N1 / M1,,,,,,,,,,"thermal release tape (N1, M1)",,stated,text,,p.2 Sec. IV.A; p.2 Fig. 3,,"Two tapes evaluated; temporary, released at 150 C and peeled off."
+ectc32862.2020.00185-b-c1,ectc32862.2020.00185-b,mold,,,granular molding compound EMC G1,,,,,,,,,,EMC G1 (granular),,stated,table,,p.3 Table 2; p.3 Fig. 5(a-b),,Tg 195 C; filler loading 77 wt%; filler cut point 20 um; CTE1/CTE2 10/58 ppm/C
+ectc32862.2020.00185-b-c2,ectc32862.2020.00185-b,other,,,glass panel carrier,,,,,,,,,,glass,,stated,text,,p.3 Sec. IV.A,,Size not stated for blanket molding.
+ectc32862.2020.00185-c-c1,ectc32862.2020.00185-c,mold,,,liquid molding compound EMC L3,,,,,,,,,,EMC L3 (liquid),,stated,table,,p.3 Table 2; p.3 Fig. 5(c-d),,Tg 165 C; filler loading 81 wt%; filler cut point 5 um; CTE1/CTE2 12/45 ppm/C
+ectc32862.2020.00185-c-c2,ectc32862.2020.00185-c,other,,,glass panel carrier,,,,,,,,,,glass,,stated,text,,p.3 Sec. IV.A,,Size not stated for blanket molding.
+ectc32862.2020.00185-d-c1,ectc32862.2020.00185-d,mold,,,"mold sheet EMC F2A, 630 x 470 x 0.2 mm sheets",,630,470,200,,,,,,EMC F2A (sheet),,design_target,text,material:table,p.3 Table 2; p.4 Sec. IV.A; p.4 Fig. 7,,Tg 190 C; filler loading 81 wt%; filler cut point 10 um; CTE1/CTE2 8/50 ppm/C
+ectc32862.2020.00185-d-c2,ectc32862.2020.00185-d,other,,,glass panel carrier,1,650,550,1100,,,,,,"glass, CTE 3.6",,design_target,text,,p.4 Sec. IV.A; p.4 Fig. 7,,
+ectc32862.2020.00185-e-c1,ectc32862.2020.00185-e,mold,,,"mold sheet EMC F2A, 630 x 470 x 0.2 mm sheets",,630,470,200,,,,,,EMC F2A (sheet),,design_target,text,material:table,p.3 Table 2; p.4 Sec. IV.A; p.4 Fig. 7,,Tg 190 C; filler loading 81 wt%; filler cut point 10 um; CTE1/CTE2 8/50 ppm/C
+ectc32862.2020.00185-e-c2,ectc32862.2020.00185-e,other,,,glass panel carrier,1,650,550,1100,,,,,,"glass, CTE 3.6",,design_target,text,,p.4 Sec. IV.A; p.4 Fig. 7,,
+ectc32862.2020.00185-e-c3,ectc32862.2020.00185-e,dummy_die,yes,yes,Si die,,,,700,,,,,,Si,,design_target,schematic,,p.5 Fig. 10,,Die size and count not stated for sheet-molded panels.
+ectc32862.2020.00185-e-c4,ectc32862.2020.00185-e,adhesive,,,thermal release mold tape N1 / M1,,,,,,,,,,"thermal release tape (N1, M1)",,stated,table,,p.4 Table 4; p.5 Table 5,,
+ectc51906.2022.00008-a-c1,ectc51906.2022.00008-a,logic_soc,,,split SOC dies,2,,,,,,,,,,,design_target,text,,p.4 Sec. III.A,,
+ectc51906.2022.00008-a-c2,ectc51906.2022.00008-a,hbm,,,HBM,2,,,,,,,,,,,design_target,text,,p.4 Sec. III.A,,HBM3 eye diagram reported in Fig. 4(a); generation of the built TV not stated.
+ectc51906.2022.00008-a-c3,ectc51906.2022.00008-a,interposer,,,"organic interposer (RDL, TSV-less)",1,32,35,,,,,,,,,design_target,text,,p.4 Sec. III.A; p.2 Table I,,
+ectc51906.2022.00008-a-c4,ectc51906.2022.00008-a,ipd,,no,known-good high capacitance density IPD (de-cap) on interposer landside,20,,,,,,,,,,,design_target,text,,p.4 Sec. III.A; p.4 Fig. 7(b),,IPD area consumes ~8% of C4 bumps; C4 pattern re-arranged to retain full I/O count.
+ectc51906.2022.00008-a-c5,ectc51906.2022.00008-a,substrate,,,package substrate,1,55,55,,,,,,,,,design_target,text,,p.4 Sec. III.A,,x/y = stated package size 55x55 mm.
+ectc51906.2022.00008-a-c6,ectc51906.2022.00008-a,underfill,,,CoW underfill and oS underfill,2,,,,,,,,,,,stated,text,,p.4 Sec. III.A; p.5 Sec. III.D,,CSAM shows void-free underfill; products not stated.
+ectc51906.2022.00008-b-c1,ectc51906.2022.00008-b,logic_soc,,,split SOC dies,2,,,,,,,,,,,stated,text,,p.4 Sec. III.B,,
+ectc51906.2022.00008-b-c2,ectc51906.2022.00008-b,bridge,,,"Si-based connection block (landside, interfaces two split SOC dies)",,,,,,,,,,Si-based,,stated,text,,p.3 Sec. II.B; p.4 Sec. III.B; p.4 Fig. 6(b),,"0.8/0.8 um routing, 24 um ubump pitch; count not stated. Assembled on landside like a discrete IPD."
+ectc51906.2022.00008-b-c3,ectc51906.2022.00008-b,ipd,,no,discrete IPD (landside),2,,,,,,,,,,,design_target,text,,p.4 Sec. III.B; p.5 Fig. 10(a),,
+ectc51906.2022.00008-b-c4,ectc51906.2022.00008-b,interposer,,,organic interposer,,,,,,,,,,,,stated,text,,p.4 Sec. III.B,,
+ectc51906.2022.00008-c-c1,ectc51906.2022.00008-c,interposer,,,organic interposer CoW module (no landside chiplets),,,,,,,,,,,,stated,caption,,p.5 Fig. 11,,
+ectc51529.2024.00321-a-c1,ectc51529.2024.00321-a,dummy_die,yes,yes,dummy Si chips,729,,,,,,,,,Si,,design_target,text,,p.1 Sec. II.A; p.3 Sec. III.C; p.3 Fig. 7,,9x9 shots; Si/EMC volume ratio 27.8%. Chip size not stated.
+ectc51529.2024.00321-a-c2,ectc51529.2024.00321-a,die_attach_film,,,DAF,,,,,,,,,,,,stated,text,,p.1 Sec. II.A,,
+ectc51529.2024.00321-a-c3,ectc51529.2024.00321-a,mold,,,liquid type EMC (compression molded),,,,,,,,,,EMC liquid type,,stated,text,,p.4 Sec. III.E; p.3 Sec. III.D,,"Table I: E 15.0 GPa, alpha1 1.60e-5/K, alpha2 4.80e-5/K (simulation inputs)."
+ectc51529.2024.00321-a-c4,ectc51529.2024.00321-a,other,,,glass carrier (Glass C),,,,,,,,,,Glass C,,design_target,text,,p.4 Sec. III.E; p.2 Fig. 4,,"Temporary carrier with releasable bonding layer; CTE 8.60e-6/K, E 71.6 GPa."
+ectc51529.2024.00321-g-c1,ectc51529.2024.00321-g,mold,,,EMC liquid type (sim),,,,,,,,,,liquid type EMC,,design_target,table,,p.3 Table I,,"E 15.0 GPa; alpha1 1.60e-5, alpha2 4.80e-5 /K."
+ectc51529.2024.00321-g-c2,ectc51529.2024.00321-g,mold,,,EMC granule type 1 (sim),,,,,,,,,,granule type 1 EMC,,design_target,table,,p.3 Table I,,"E 18.4 GPa; alpha1 9.00e-6, alpha2 4.20e-5 /K."
+ectc51529.2024.00321-g-c3,ectc51529.2024.00321-g,mold,,,EMC granule type 2 (sim),,,,,,,,,,granule type 2 EMC,,design_target,table,,p.3 Table I,,"E 15.2 GPa; alpha1 9.00e-6, alpha2 5.10e-5 /K."
+ectc51529.2024.00321-g-c4,ectc51529.2024.00321-g,mold,,,EMC film type (sim),,,,,,,,,,film type EMC,,design_target,table,,p.3 Table I,,"E 15.1 GPa; alpha1 6.00e-6, alpha2 5.00e-5 /K."

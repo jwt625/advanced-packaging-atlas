@@ -1,0 +1,43 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc51846.2026.00176-a01-1,ectc51846.2026.00176,1,Sufi Rizwan Ahmed,1,primary,Lightmatter,,Arizona,US,printed locality is a state,paper,p.1 affiliations
+ectc51846.2026.00176-a02-1,ectc51846.2026.00176,2,Sandeep Sane,1,primary,Lightmatter,,Arizona,US,printed locality is a state,paper,p.1 affiliations
+ectc51846.2026.00176-a03-1,ectc51846.2026.00176,3,Reza Baghdadi,1,primary,Lightmatter,,Boston,US,,paper,p.1 affiliations
+ectc51846.2026.00176-a04-1,ectc51846.2026.00176,4,Bradley Snyder,1,primary,PHIX Photonics Assembly,,Enschede,NL,,paper,p.1 affiliations
+ectc51846.2026.00176-a05-1,ectc51846.2026.00176,5,Suresh Jayaraman,1,primary,Amkor Technology,,Arizona,US,printed locality is a state; printed: AMKOR,paper,p.1 affiliations
+ectc51846.2026.00156-a01-1,ectc51846.2026.00156,1,M. Baris Dogruoz,1,primary,Microsoft,,"Mountain View, CA",US,byline order row-major from page image; text layer column-major; printed: Microsoft; printed email under this name is samajety@ (swapped with Majety),paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a02-1,ectc51846.2026.00156,2,Sashikanth Majety,1,primary,Microsoft,,"Hillsboro, OR",US,byline order row-major from page image; text layer column-major; printed: Microsoft; printed email under this name is barisdogruoz@ (swapped with Dogruoz),paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a03-1,ectc51846.2026.00156,3,Venkata Chivukula,1,primary,Microsoft,,"Mountain View, CA",US,byline order row-major from page image; text layer column-major; printed: Microsoft,paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a04-1,ectc51846.2026.00156,4,Cam Turner,1,primary,Microsoft,,Calgary,CA,byline order row-major from page image; text layer column-major; printed: Microsoft,paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a05-1,ectc51846.2026.00156,5,Bharath Ramakrishnan,1,primary,Microsoft,,"Redmond, WA",US,byline order row-major from page image; text layer column-major; printed: Microsoft,paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a06-1,ectc51846.2026.00156,6,Husam Alissa,1,primary,Microsoft,,"Redmond, WA",US,byline order row-major from page image; text layer column-major; printed: Microsoft,paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a07-1,ectc51846.2026.00156,7,Srikant Bharadwaj,1,primary,Microsoft,,"Redmond, WA",US,byline order row-major from page image; text layer column-major; printed: Microsoft,paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a08-1,ectc51846.2026.00156,8,Camille Couturier,1,primary,Microsoft,,Nantes,FR,byline order row-major from page image; text layer column-major; printed: Microsoft,paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a09-1,ectc51846.2026.00156,9,Malik Fahrni,1,primary,Corintis,,Lausanne,CH,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a10-1,ectc51846.2026.00156,10,Yann Meier,1,primary,Corintis,,Lausanne,CH,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a11-1,ectc51846.2026.00156,11,Remco Van Erp,1,primary,Corintis,,Lausanne,CH,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a12-1,ectc51846.2026.00156,12,Samuel Higginbotham,1,primary,Corintis,,Lausanne,CH,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51846.2026.00153-a01-1,ectc51846.2026.00153,1,Motohiro Negishi,1,primary,Resonac,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00153-a02-1,ectc51846.2026.00153,2,Yuta Akasu,1,primary,Resonac,,Ibaraki,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00153-a03-1,ectc51846.2026.00153,3,Koji Yukimatsu,1,primary,Resonac,,Ibaraki,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00153-a04-1,ectc51846.2026.00153,4,Emi Miyazawa,1,primary,Resonac,,Ibaraki,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00153-a05-1,ectc51846.2026.00153,5,Tetsuya Enomoto,1,primary,Resonac,,Ibaraki,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00153-a06-1,ectc51846.2026.00153,6,Tomohiro Ohkubo,1,primary,Resonac,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00153-a07-1,ectc51846.2026.00153,7,Saeko Ogawa,1,primary,Resonac,,Chiba,JP,"printed locality Chiba (city or prefecture, ambiguous)",paper,p.1 affiliations
+ectc51846.2026.00153-a08-1,ectc51846.2026.00153,8,Masanori Natsukawa,1,primary,Resonac,,Chiba,JP,"printed locality Chiba (city or prefecture, ambiguous)",paper,p.1 affiliations
+ectc51846.2026.00153-a09-1,ectc51846.2026.00153,9,Tomohiko Kotake,1,primary,Resonac,,"San Jose, CA",US,"printed: San jose CA, USA",paper,p.1 affiliations
+ectc51846.2026.00187-a01-1,ectc51846.2026.00187,1,Kai Ma,1,primary,Applied Materials,,"Santa Clara, CA",US,"printed: Applied Materials, Inc.",paper,p.1 affiliations
+ectc51846.2026.00187-a02-1,ectc51846.2026.00187,2,Nikolaos Bekiaris,1,primary,Applied Materials,,"Santa Clara, CA",US,"printed: Applied Materials, Inc.",paper,p.1 affiliations
+ectc51846.2026.00187-a03-1,ectc51846.2026.00187,3,Jingting (Nicole) Chen,1,primary,Applied Materials,,"Santa Clara, CA",US,"printed: Applied Materials, Inc.",paper,p.1 affiliations
+ectc51846.2026.00187-a04-1,ectc51846.2026.00187,4,Jing Xu,1,primary,Applied Materials,,"Santa Clara, CA",US,"printed: Applied Materials, Inc.",paper,p.1 affiliations
+ectc51846.2026.00187-a05-1,ectc51846.2026.00187,5,Huixiong Dai,1,primary,Applied Materials,,"Santa Clara, CA",US,"printed: Applied Materials, Inc.",paper,p.1 affiliations
+ectc51846.2026.00187-a06-1,ectc51846.2026.00187,6,Jakob Haimberger,1,primary,EV Group,,St. Florian am Inn,AT,,paper,p.1 affiliations
+ectc51846.2026.00187-a07-1,ectc51846.2026.00187,7,David Goldberger,1,primary,EV Group,,St. Florian am Inn,AT,,paper,p.1 affiliations
+ectc51846.2026.00187-a08-1,ectc51846.2026.00187,8,Gernot Probst,1,primary,EV Group,,St. Florian am Inn,AT,,paper,p.1 affiliations
+ectc51846.2026.00187-a09-1,ectc51846.2026.00187,9,Thomas Uhrmann,1,primary,EV Group,,St. Florian am Inn,AT,,paper,p.1 affiliations
+ectc51846.2026.00187-a10-1,ectc51846.2026.00187,10,Markus Wimplinger,1,primary,EV Group,,St. Florian am Inn,AT,,paper,p.1 affiliations
+ectc51846.2026.00183-a01-1,ectc51846.2026.00183,1,Yukako Ikegami,1,primary,Sony Semiconductor Solutions,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51846.2026.00183-a02-1,ectc51846.2026.00183,2,Ken Arano,1,primary,Sony Semiconductor Solutions,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51846.2026.00183-a03-1,ectc51846.2026.00183,3,Masanori Chiyozono,1,primary,Sony Semiconductor Solutions,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51846.2026.00183-a04-1,ectc51846.2026.00183,4,Kengo Kotoo,1,primary,Sony Semiconductor Solutions,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51846.2026.00183-a05-1,ectc51846.2026.00183,5,Kan Shimizu,1,primary,Sony Semiconductor Solutions,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51846.2026.00183-a06-1,ectc51846.2026.00183,6,Yoshihisa Kagawa,1,primary,Sony Semiconductor Solutions,,Kanagawa,JP,,paper,p.1 affiliations

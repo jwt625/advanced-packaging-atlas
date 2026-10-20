@@ -1,1 +1,39 @@
 org_name,org_type,country,region,parent_org,notes
+SAIMEMORY Corp.,company,JP,east_asia,,printed: SAIMEMORY Corp.
+Intel Corporation,company,US,north_america,,printed: Intel; Intel Corporation
+Powerchip Semiconductor Manufacturing Corporation,foundry,TW,east_asia,,printed: Powerchip Semiconductor Manufacturing Corporation
+AP Memory,company,TW,east_asia,,printed: AP Memory
+imec,research_institute,BE,europe,,printed: IMEC; imec
+KU Leuven,university,BE,europe,,printed: KU Leuven (biography only)
+Resonac Corporation,company,JP,east_asia,,printed: Resonac Corporation
+SK hynix Inc.,company,KR,east_asia,,"printed: SK Hynix Semiconductor Co., LTD"
+Samsung Electronics,company,KR,east_asia,,"printed: Samsung Electronics Co., Ltd.; Samsung Electronics Co, Ltd"
+Xperi Corporation,company,US,north_america,,printed: Xperi Corporation
+Adeia Inc.,company,US,north_america,,"printed: Adeia, Inc."
+CEA,government_lab,FR,europe,,parent of CEA-Leti and CEA-IRIG; printed: Commissariat a l'Energie Atomique et aux Energies Alternatives (CEA)
+CEA-Leti,research_institute,FR,europe,CEA,"printed: Univ. Grenoble Alpes, CEA, LETI; CEA, Laboratoire d'Electronique et des Technologies de l'Information (LETI), Universite Grenoble Alpes"
+CEA-IRIG,research_institute,FR,europe,CEA,"printed: CEA, Interdisciplinary Research Institute of Grenoble (IRIG), Universite Grenoble Alpes"
+"Advanced Semiconductor Engineering, Inc.",company,TW,east_asia,,"OSAT; printed: Advanced Semiconductor Engineering, Inc."
+Fraunhofer-Gesellschaft,research_institute,DE,europe,,parent of Fraunhofer IZM; not printed separately
+Fraunhofer Institute for Reliability and Microintegration IZM,research_institute,DE,europe,Fraunhofer-Gesellschaft,printed: Fraunhofer Institute for Reliability and Microintegration IZM-ASSID (Dresden); Fraunhofer IZM (Berlin)
+Technische Universität Dresden,university,DE,europe,,printed: Technische Universitaet Dresden
+Technische Universität Berlin,university,DE,europe,,printed: Technical University of Berlin
+Electronics and Telecommunications Research Institute,research_institute,KR,east_asia,,printed: ETRI
+Mitsubishi Materials Corporation,company,JP,east_asia,,printed: Mitsubishi Materials Corporration (sic)
+EV Group,company,AT,europe,,printed: EV Group
+Asahi Kasei Corporation,company,JP,east_asia,,printed: Asahi Kasei Corporation
+Purdue University,university,US,north_america,,printed: Purdue University
+"ULVAC, Inc.",company,JP,east_asia,,"printed: ULVAC, Inc.; ULVAC, inc."
+USHIO Inc.,company,JP,east_asia,,printed: USHIO Inc.
+Ableprint Technology Co. Ltd.,company,TW,east_asia,,printed: Ableprint Technology Co. Ltd.
+"Murata Manufacturing Co., Ltd.",company,JP,east_asia,,"printed: Murata Manufacturing Co., Ltd."
+Murata Electronics North America Inc.,company,US,north_america,"Murata Manufacturing Co., Ltd.",printed: Murata Electronics North America Inc.
+Georgia Institute of Technology,university,US,north_america,,printed: Georgia Institute of Technology
+"Brewer Science, Inc.",company,US,north_america,,"printed: Brewer Science, Inc."
+SUSS MicroTec Lithography GmbH,company,DE,europe,,"printed: SUSS MicroTec Lithography GmbH; corporate parent not printed, not set"
+Aalto University,university,FI,europe,,printed: Aalto University
+"University of California, Los Angeles",university,US,north_america,,"printed: University of California, Los Angeles; UCLA CHIPS"
+Chinese Academy of Sciences,government_lab,CN,east_asia,,parent of IMECAS; not printed as a separate affiliation
+"Institute of Microelectronics, Chinese Academy of Sciences",research_institute,CN,east_asia,Chinese Academy of Sciences,"printed: Institute of Microelectronics, Chinese Academy of Sciences"
+JSR Corporation,company,JP,east_asia,,printed: JSR Corporation
+Pennsylvania State University,university,US,north_america,,printed: Pennsylvania State University

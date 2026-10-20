@@ -1,0 +1,57 @@
+paper_id: iedm45741.2023.10413759
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/iedm45741.2023.10413759/text.md
+  - references/iedm45741.2023.10413759/source.json
+  - references/iedm45741.2023.10413759/TEXT_LAYER_WARNING.md
+  - references/iedm45741.2023.10413759/figures/page_02_220dpi.png
+  - references/iedm45741.2023.10413759/figures/page_03_220dpi.png
+  - references/iedm45741.2023.10413759/figures/page_04_220dpi.png
+figure_reading_method: >-
+  OCR text; all body numbers checked against 150-200 dpi re-crops of the PDF (p.2 Sec. II.B). Page 3-4 figures read
+  from 200-300 dpi re-crops: Fig. 4 labels, Fig. 5, Fig. 6 (profile, read +/-2 MPa / +/-3 C), Fig. 8 SEM labels,
+  Fig. 9/10 bars, Fig. 14(a)-(c), Fig. 15, Fig. 16 bars, Fig. 17(e) bar.
+entries:
+  - {table: interconnects, row_id: iedm45741.2023.10413759-a-i1, field: pitch_um, value: 10, unit: um, basis: design_target, locator: "p.3 Fig. 4(c)", note: "label '10 um bonding pitch'"}
+  - {table: interconnects, row_id: iedm45741.2023.10413759-a-i1, field: pad_x_um, value: 7, unit: um, basis: design_target, locator: "p.3 Fig. 4(d)", note: "label '7 um pad size' on dielet Cu pattern; pad shape oblong, other dimension not given"}
+  - {table: metrics, row_id: iedm45741.2023.10413759-c-m1, field: value, value: 25, unit: C, basis: measured, locator: "p.4 Fig. 14(c)", note: "markers 0.2-0.7 W/mm2 read 25, 31, 41.5, 49, 58, 66 C; consistent with Fig. 14(b) end-of-transient values"}
+derived:
+  - {table: test_vehicles, row_id: iedm45741.2023.10413759-a, field: carrier_size_mm, value: 100, formula: "4 inch wafer -> 100 mm nominal", inputs: "p.3 Fig. 4 caption"}
+  - {table: stack_layers, row_id: iedm45741.2023.10413759-a-L08, field: thickness_um, value: 0.4, formula: "400 nm / 1000", inputs: "p.3 Fig. 8(e)"}
+  - {table: stack_layers, row_id: iedm45741.2023.10413759-a-L09, field: thickness_um, value: 0.25, formula: "250 nm / 1000", inputs: "p.3 Fig. 8(e)"}
+  - {table: stack_layers, row_id: iedm45741.2023.10413759-a-L01, field: thickness_um, value: 0.01, formula: "10 nm / 1000", inputs: "p.2 Sec. II.B"}
+  - {table: process_steps, row_id: iedm45741.2023.10413759-F1-s07, field: thickness_um, value: 0.01, formula: "10 nm / 1000", inputs: "p.2 Sec. II.B"}
+conflicts:
+  - {table: interconnects, row_id: iedm45741.2023.10413759-a-i1, field: pitch_um, values: [10, "sub-10 / <10"], locators: ["p.3 Fig. 4(c)", "title; p.1 Sec. I"], chosen: 10, why: "only explicit pitch label in the paper; title/intro give a bound"}
+  - {table: test_vehicles, row_id: iedm45741.2023.10413759-b, field: substrate, values: ["4-inch silicon wafer", "GaN/Si-IF"], locators: ["p.4 Fig. 17(a),(d)", "p.4 Fig. 17(e) caption; p.2 Sec. III.B"], chosen: "silicon wafer", why: "photo caption and cross-section labels say Si substrate"}
+excluded:
+  - "1 A/mm2 at <1 V delivery and 12-48 V input (abstract capability claim, no measurement)"
+  - "Fig. 3 gate-loop ringing/switching-loss simulations (EPC2036 model; no packaging dimensions)"
+  - "Fig. 12/13 PDN power-loss and impedance simulations (OCR-illegible absolute values; architecture comparison only)"
+  - "dielet-side PDN experimental details in ref [10]; two-step Cu-Cu bonding refs [4,5]; ALD encapsulation ref [8]"
+not_reported:
+  - dielet count on GaN wafer, dielet thickness, SiO2 thicknesses, RDL layer count
+  - tacking and anneal exact values (only upper bounds and Fig. 6 profile), anneal time
+  - number of samples for shear test
+  - solder alloy, SU8-via and PCB dimensions for dielet-side PDN
+  - electrical_interfaces
+  - optical_interfaces
+  - warpage
+  - "process_steps: iedm45741.2023.10413759-c (ceramic heater on 4-inch wafer; no fabrication or assembly steps described)"
+source_quality:
+  - "Garbled text layer; text.md is tesseract OCR. Page 3-4 figure text heavily garbled; all values read from images."
+  - "No candidates.json entries; all key-figure bboxes manual."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413759", change: "process_flow_level full confirmed; TV c listed in not_reported", reason: "Fig. 5/6 give ordered steps with T/P bounds and times; heater coupon has no build steps"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413759-F1-s02", change: "category other -> rdl_layer; target '10 um bonding pitch; 7 um pad size'", reason: "p.3 Fig. 4(c),(d) labels"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413759-F1-s03", change: "category other -> bonding", reason: "alignment in the bonder tacking period (p.3 Fig. 6)"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413759-F1", change: "step_basis stated_in_flow on s01-s07; s01 notes skipped", reason: "p.3 Fig. 5 numbered flow; Fig. 6 tacking sub-steps"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413759-F2-s05", change: "split: s05 'SU8 descum' (category descum) + new s10 'SiO2 and Al2O3 etching' (etch_other)", reason: "p.4 Fig. 15 bullet 'SU8 descum; SiO2 & Al2O3 etching' names two steps in order"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413759-F2-s07", change: "split: s07 'solder paste screen printing' (bumping) + new s11 'reflow of printed solder paste' (reflow); seq renumbered 6-11", reason: "p.4 Fig. 15 bullet 'Solder paste screen printing and reflow'"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413759-F2-s04", change: "split 'SU8 100/200 um; w/o vs w/ segmented pattern + process optimization'; locator + p.4 Fig. 16", reason: "p.4 Fig. 16 SU8 stress study"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413759-F2", change: "step_basis stated_in_flow on all rows", reason: "p.4 Fig. 15 integration process flow"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413759-F1-s01", change: "category other -> device_fab", reason: "GaN HEMT front-end fabrication (p.3 Fig. 5; skipped in this work, performed no)"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413759-F1-s05", change: "conditions '~233 C' -> '~240 C'", reason: "value_misread (audit B): p.3 Fig. 6 interface-temperature plateau lies on the 240 C gridline (re-read at 2x zoom); typed temp_c 250 lt unchanged"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413759-F1-s02", change: "target + 'Cu pad 2 um (dielet); Cu pillar 3 um on Cu pad 2 um (GaN/Si-IF) (Fig. 8(c) SEM labels)'; locator + p.3 Fig. 8(c)", reason: "target_missing a-L04/L05/L06: Cu pad/pillar thicknesses labeled in p.3 Fig. 8(c) are produced by the RDL/pad fabrication step"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45741.2023.10413759-F1-s07", change: "derived entry added: thickness_um 0.01 = 10 nm / 1000", reason: "derived_entry_missing (audit B); p.2 Sec. II.B ALD Al2O3 thin layer (10 nm)"}

@@ -1,0 +1,33 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51529.2024.00093-a-c1,ectc51529.2024.00093-a,substrate,,,TGV glass core,,,,300,,,,,,alkali-free glass,,design_target,text,,p.4 Sec. II.C,,
+ectc51529.2024.00093-b-c1,ectc51529.2024.00093-b,substrate,,,TGV glass core,,,,400,,,,,,alkali-free glass,,design_target,text,,p.4 Sec. II.C,,
+ectc51529.2024.00093-c-c1,ectc51529.2024.00093-c,substrate,,,TGV glass core,,,,400,,,,,,alkali-free glass,,design_target,text,,p.4 Sec. II.C,,
+ectc51529.2024.00093-d-c1,ectc51529.2024.00093-d,substrate,,,TGV glass core,,,,400,,,,,,alkali-free glass,,design_target,text,,p.3 Sec. II.B,,
+ectc51529.2024.00093-e-c1,ectc51529.2024.00093-e,substrate,,,TGV glass core,,,,400,,,,,,alkali-free glass,,design_target,text,,p.3 Sec. II.B,,
+ectc51529.2024.00093-f-c1,ectc51529.2024.00093-f,substrate,,,TGV glass core,,,,400,,,,,,alkali-free glass,,design_target,text,,p.3 Sec. II.B,,
+ectc51846.2026.00074-a-c1,ectc51846.2026.00074-a,substrate,,,TGV glass substrate,1,,,,,,,,,glass (type not stated),Asahi Glass Corporation,stated,text,,p.6 Acknowledgment; p.2 Sec. II.A,,Supplier from acknowledgment (ack): 'providing TGV glass substrates'.
+ectc51846.2026.00074-b-c1,ectc51846.2026.00074-b,substrate,,,TGV glass substrate,1,,,,,,,,,glass (type not stated),Asahi Glass Corporation,stated,text,,p.6 Acknowledgment; p.2 Sec. II.A,,Supplier from acknowledgment (ack): 'providing TGV glass substrates'.
+ectc51846.2026.00074-c-c1,ectc51846.2026.00074-c,substrate,,,TGV glass substrate,1,,,,,,,,,glass (type not stated),Asahi Glass Corporation,stated,text,,p.6 Acknowledgment; p.2 Sec. II.A,,Supplier from acknowledgment (ack): 'providing TGV glass substrates'.
+ectc51846.2026.00074-d-c1,ectc51846.2026.00074-d,substrate,,,TGV glass substrate,1,,,,,,,,,glass (type not stated),Asahi Glass Corporation,stated,text,,p.6 Acknowledgment; p.2 Sec. II.A,,Supplier from acknowledgment (ack): 'providing TGV glass substrates'.
+ectc51846.2026.00074-e-c1,ectc51846.2026.00074-e,substrate,,,glass core sub-section (model),1,,,340,,,,,,glass (linear elastic),,design_target,text,,p.2 Sec. III.A; p.3 Table I,,Model properties in Table I are from prior work [10] (not entered).
+itherm45881.2020.9190542-a-c1,itherm45881.2020.9190542-a,logic_soc,yes,,"thermal die (Die-1, Die-2)",2,21.78,16.25,,,,,,,,MediaTek in-house,design_target,table,,p.2 Table 1; p.2 Sec. Development; p.2 Sec. Experiment,,Heater and thermal sensor designed in; Table 1 lists as SOC. Text gives 16.26 mm (conflict).
+itherm45881.2020.9190542-a-c2,itherm45881.2020.9190542-a,interposer,,,InFO die (fan-out),1,22.78,34.0,,,,,,,,,design_target,table,,p.2 Table 1; p.2 Fig. 1,,Fan-out by 3 fine-line RDL; molding around dies.
+itherm45881.2020.9190542-a-c3,itherm45881.2020.9190542-a,substrate,,,BGA substrate,1,62.5,62.5,,,,,,,,,design_target,table,,p.2 Table 1; p.2 Fig. 2,,Layer count and core not given.
+itherm45881.2020.9190542-a-c4,itherm45881.2020.9190542-a,lid,,,metal lid (heat sink lid or ring),1,,,,,,,,,metal,,stated,mixed,,p.1 Introduction; p.2 Sec. Development; p.2 Fig. 2,,For warpage control and heat spreading; lid cavity depth used to set BLT.
+itherm45881.2020.9190542-a-c5,itherm45881.2020.9190542-a,tim,,,TIM1 (die to lid),,,,60,,,,,,"gel (3.2, 6.0 W/mK) or film (25.0, 30.0 W/mK) per variant",,design_target,table,,p.2 Table 1; p.2 Table 2; p.4 Table 4,,Film types: graphite/CNT class (text). BLT 60 baseline; 140 um tested; 30-120 um considered.
+itherm45881.2020.9190542-a-c6,itherm45881.2020.9190542-a,adhesive,,,lid adhesive,,,,,,,,,,,,stated,mixed,,p.2 Sec. Development; p.2 Fig. 2,,Thickness used to control BLT; value not given.
+itherm45881.2020.9190542-a-c7,itherm45881.2020.9190542-a,mold,,,Molding,,,,,,,,,,,,stated,schematic,,p.2 Fig. 2; p.3 Fig. 5,,
+itherm45881.2020.9190542-a-c8,itherm45881.2020.9190542-a,other,,,Resistor (on substrate),,,,,,,,,,,,stated,schematic,,p.2 Fig. 1; p.2 Fig. 2,,
+itherm45881.2020.9190542-a-c9,itherm45881.2020.9190542-a,pcb,,,thermal test PCB,1,,,,,,,,,,,stated,mixed,,p.2 Sec. Experiment; p.2 Fig. 3,,Test board with connectors to power supply and DAQ.
+itherm45881.2020.9190542-b-c1,itherm45881.2020.9190542-b,logic_soc,yes,,"thermal die (Die-1, Die-2) model",2,,,,,,,,,,,simulated,text,,p.5 Sec. Discussion; p.5 Table 7,,Same validated TTV package model.
+itherm45881.2020.9190542-b-c2,itherm45881.2020.9190542-b,heat_spreader,,,vapor-chamber based heat sink,1,,,,,,,,,,,simulated,mixed,,p.5 Sec. Discussion; p.5 Fig. 13,,Dimensions and ThetaCA not given.
+ectc51906.2022.00140-a-c1,ectc51906.2022.00140-a,asic,,,"ASIC / AP (Application Processor), Die 1",1,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. 2.2; p.2 Fig. 3,,"Size, node, emulator status not reported."
+ectc51906.2022.00140-a-c2,ectc51906.2022.00140-a,hbm,,,"HBM, Die 2",1,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. 2.2; p.2 Fig. 3,,
+ectc51906.2022.00140-a-c3,ectc51906.2022.00140-a,mold,,,over-mold (chip last molding),,,,,,,,,,,,stated,mixed,,p.2 Sec. 2.1; p.2 Fig. 2,,Mold compound not named.
+ectc51906.2022.00140-a-c4,ectc51906.2022.00140-a,substrate,,,substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,Only shown in Fig. 3 schematic; no details.
+ectc51906.2022.00140-a-c5,ectc51906.2022.00140-a,other,,,"organic carrier (temporary, released after molding)",1,,,,,,,,,organic carrier,,stated,mixed,,p.2 Sec. 2.1; p.4 Fig. 9; p.5 Fig. 10,,
+ectc51906.2022.00140-b-c1,ectc51906.2022.00140-b,asic,,,"ASIC / AP (Application Processor), Die 1",1,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. 2.2; p.2 Fig. 3,,"Size, node, emulator status not reported."
+ectc51906.2022.00140-b-c2,ectc51906.2022.00140-b,hbm,,,"HBM, Die 2",1,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. 2.2; p.2 Fig. 3,,
+ectc51906.2022.00140-b-c3,ectc51906.2022.00140-b,mold,,,over-mold (chip last molding),,,,,,,,,,,,stated,mixed,,p.2 Sec. 2.1; p.2 Fig. 2,,Mold compound not named.
+ectc51906.2022.00140-b-c4,ectc51906.2022.00140-b,substrate,,,substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,Only shown in Fig. 3 schematic; no details.
+ectc51906.2022.00140-b-c5,ectc51906.2022.00140-b,other,,,"organic carrier (temporary, released after molding)",1,,,,,,,,,organic carrier,,stated,mixed,,p.2 Sec. 2.1; p.4 Fig. 9; p.5 Fig. 10,,

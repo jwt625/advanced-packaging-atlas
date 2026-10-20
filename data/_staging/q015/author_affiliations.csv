@@ -1,0 +1,30 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc32696.2021.00033-a01-1,ectc32696.2021.00033,1,Y. P. Chiang,1,primary,TSMC,Research and Development,Hsinchu,TW,,paper,p.1 affiliations
+ectc32696.2021.00033-a02-1,ectc32696.2021.00033,2,S. P. Tai,1,primary,TSMC,Research and Development,Hsinchu,TW,,paper,p.1 affiliations
+ectc32696.2021.00033-a03-1,ectc32696.2021.00033,3,W. C. Wu,1,primary,TSMC,Research and Development,Hsinchu,TW,,paper,p.1 affiliations
+ectc32696.2021.00033-a04-1,ectc32696.2021.00033,4,John Yeh,1,primary,TSMC,Research and Development,Hsinchu,TW,,paper,p.1 affiliations
+ectc32696.2021.00033-a05-1,ectc32696.2021.00033,5,C. T. Wang,1,primary,TSMC,Research and Development,Hsinchu,TW,,paper,p.1 affiliations
+ectc32696.2021.00033-a06-1,ectc32696.2021.00033,6,Douglas C. H. Yu,1,primary,TSMC,Research and Development,Hsinchu,TW,,paper,p.1 affiliations
+ectc51687.2025.00063-a01-1,ectc51687.2025.00063,1,Seong-Ho Seok,1,primary,Corning,Corning Technology Center Korea,Asan,KR,,paper,p.1 affiliations
+ectc51687.2025.00063-a02-1,ectc51687.2025.00063,2,Bo-Kyung Kong,1,primary,Corning,Corning Technology Center Korea,Asan,KR,,paper,p.1 affiliations
+ectc51687.2025.00063-a03-1,ectc51687.2025.00063,3,Lars Brusberg,1,primary,Corning Research and Development,,"Corning, NY",US,,paper,p.1 affiliations
+ectc51687.2025.00063-a04-1,ectc51687.2025.00063,4,Lucas W. Yeary,1,primary,Corning Research and Development,,"Corning, NY",US,,paper,p.1 affiliations
+ectc51687.2025.00063-a05-1,ectc51687.2025.00063,5,Jung-Hyun Noh,1,primary,Corning,Corning Technology Center Korea,Asan,KR,,paper,p.1 affiliations
+ectc51687.2025.00063-a06-1,ectc51687.2025.00063,6,Han-Kyom Lee,1,primary,Corning,Corning Technology Center Korea,Asan,KR,,paper,p.1 affiliations
+ectc51687.2025.00063-a07-1,ectc51687.2025.00063,7,Kyeong-Gon Choi,1,primary,Corning,Corning Technology Center Korea,Asan,KR,,paper,p.1 affiliations
+ectc51687.2025.00063-a08-1,ectc51687.2025.00063,8,Daniel W Levesque,1,primary,Corning Research and Development,,"Corning, NY",US,,paper,p.1 affiliations
+ectc51906.2022.00055-a01-1,ectc51906.2022.00055,1,Jein Yu,1,primary,Korea Electronics Technology Institute,ICT Device/Packaging Research Center,Seongnam,KR,"printed: Korea Electronic Technology Institute, KETI; 2-column grid read row-major; text layer is column-major (Yu, Han, Kim, Yook)",paper,p.1 affiliations (page image)
+ectc51906.2022.00055-a02-1,ectc51906.2022.00055,2,Dongsu Kim,1,primary,Korea Electronics Technology Institute,ICT Device/Packaging Research Center,Seongnam,KR,"printed: Korea Electronic Technology Institute, KETI; 2-column grid read row-major; text layer is column-major (Yu, Han, Kim, Yook)",paper,p.1 affiliations (page image)
+ectc51906.2022.00055-a03-1,ectc51906.2022.00055,3,Insub Han,1,primary,Korea Electronics Technology Institute,ICT Device/Packaging Research Center,Seongnam,KR,"printed: Korea Electronic Technology Institute, KETI; 2-column grid read row-major; text layer is column-major (Yu, Han, Kim, Yook)",paper,p.1 affiliations (page image)
+ectc51906.2022.00055-a04-1,ectc51906.2022.00055,4,Jongmin Yook,1,primary,Korea Electronics Technology Institute,ICT Device/Packaging Research Center,Seongnam,KR,"printed: Korea Electronic Technology Institute, KETI; 2-column grid read row-major; text layer is column-major (Yu, Han, Kim, Yook)",paper,p.1 affiliations (page image)
+icept59018.2023.10492317-a01-1,icept59018.2023.10492317,1,Bin GU,1,primary,STMicroelectronics,,Singapore,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+icept59018.2023.10492317-a02-1,icept59018.2023.10492317,2,Jing-en LUAN,1,primary,STMicroelectronics,,Singapore,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+icept59018.2023.10492317-a03-1,icept59018.2023.10492317,3,Daniela SPINI,1,primary,STMicroelectronics,,Agrate,IT,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+icept59018.2023.10492317-a04-1,icept59018.2023.10492317,4,Samuele ZALAFFI,1,primary,STMicroelectronics,,Agrate,IT,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+icept59018.2023.10492317-a05-1,icept59018.2023.10492317,5,Marco Rovitto,1,primary,STMicroelectronics,,Agrate,IT,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+icept59018.2023.10492317-a06-1,icept59018.2023.10492317,6,Chun-hao CHEN,1,primary,STMicroelectronics,,Muar,MY,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+itherm55368.2023.10177502-a01-1,itherm55368.2023.10177502,1,Xiaoliang Zhao,1,primary,Peking University,School of Software and Microelectronics,Beijing,CN,,paper,p.1 affiliations
+itherm55368.2023.10177502-a02-1,itherm55368.2023.10177502,2,Penghuai Shu,1,primary,Peking University,School of Software and Microelectronics,Beijing,CN,,paper,p.1 affiliations
+itherm55368.2023.10177502-a03-1,itherm55368.2023.10177502,3,Wei Li,1,primary,Peking University,School of Software and Microelectronics,Beijing,CN,,paper,p.1 affiliations
+itherm55368.2023.10177502-a04-1,itherm55368.2023.10177502,4,Zhenyu Wang,1,primary,Peking University,School of Software and Microelectronics,Beijing,CN,,paper,p.1 affiliations
+itherm55368.2023.10177502-a05-1,itherm55368.2023.10177502,5,Xiaobin Zhang,1,primary,"Institute of Microelectronics, Chinese Academy of Sciences",,Beijing,CN,,paper,p.1 affiliations

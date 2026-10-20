@@ -1,0 +1,47 @@
+paper_id: iedm45625.2022.10019499
+verified_on: 2026-10-18
+source_files:
+  - references/iedm45625.2022.10019499/text.md
+  - references/iedm45625.2022.10019499/source.json
+  - references/iedm45625.2022.10019499/figures/page_03.png
+  - references/iedm45625.2022.10019499/figures/page_04.png
+figure_reading_method: >-
+  Page renders p.3-p.4 opened; Figs. 5, 6, 7-9, 13, 15-16 and 19 re-rendered from source.pdf at 3-9x in the scratchpad.
+  All plots except Fig. 8 (Contact Area %) and Fig. 5 (IO/mm2, IO/um) are normalized (A.U.).
+entries:
+  - {table: interconnects, row_id: iedm45625.2022.10019499-a-i1, field: pitch_um, value: 3, unit: um, basis: design_target, locator: "p.1 Sec. III; p.3 Fig. 7 label '3 um Pitch'; p.3 Fig. 10(a) label '3 um'", note: "scaled from 9 um"}
+  - {table: interconnects, row_id: iedm45625.2022.10019499-b-i1, field: density_per_mm2, value: 100000, unit: 1/mm2, basis: design_target, locator: "p.2 Sec. IV.A", note: "'below 3 um (or more than ~100K connections/mm2)'"}
+  - {table: metrics, row_id: iedm45625.2022.10019499-e-m7, field: value, value: 58, unit: A.U., basis: simulated, locator: "p.3 Fig. 6(b)", note: "log axis 0.1-100; bar between 10 and 100, read ~50-60"}
+  - {table: metrics, row_id: iedm45625.2022.10019499-c-m3, field: value_text, value: "slightly below max allowed", unit: "", basis: measured, locator: "p.4 Fig. 13", note: "Recipe 3 bar top just under the red dashed max-allowed line"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: iedm45625.2022.10019499-e-m2, field: value, values: ["up to 10X power reduction (text)", "Fig. 6(a) HB 3 um optimistic scaling ~0.05 of solder (~20X)", "Fig. 6(a) HB 3 um no digital scaling ~0.22 (~4.5X)"], locators: ["p.1 Abstract; p.1 Sec. II", "p.3 Fig. 6(a)"], chosen: "10 (text, le)", why: "text claim entered; plot bars entered separately as e-m3..m6; ratio arithmetic not entered"}
+excluded:
+  - "Fig. 1 generic feature sizes (silicon 10-100s nm vs packaging 1-10s um) - generic comparison, not a build"
+  - "ODI architecture (ref [2]) and prior 9 um pitch hybrid bonding on Intel process (ref [3]) details"
+  - "metal ion drift failure criterion (ref [6])"
+  - "UCIe modular interface (ref [5]) - in development, no electrical data"
+not_reported:
+  - electrical_interfaces (no absolute data rate, pJ/bit or bandwidth; UCIe interface only planned)
+  - optical_interfaces
+  - die/chiplet x-y sizes and thicknesses (except chiplets 20+ um), carrier/wafer diameter, process node
+  - HB pad diameter, pad metal and dielectric materials, bonding layer thickness, recess values (only 1X/2X/4X)
+  - bonding temperature, force, time; anneal temperature/time; alignment accuracy
+  - TDV diameter/depth/aspect ratio/metal; solder bump dimensions
+  - oxide thickness value, PECVD conditions, warpage absolute values and sign convention
+  - reliability tests, electrical yield, resistance
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: iedm45625.2022.10019499-F1-s05, change: "deleted (AFM post-CMP topography)", reason: "characterization, not a build step; already metric a-m2"}
+  - {date: 2026-10-20, source: repass, row_id: iedm45625.2022.10019499-F3-s03, change: "deleted (optical/cross-pol imaging of chiplet corners)", reason: "characterization, not a build step; already metric c-m8; F3-s04 seq 4 -> 3"}
+  - {date: 2026-10-20, source: repass, row_id: iedm45625.2022.10019499-F2, change: "scope tv_build -> generic_platform; routes 'solder bump' (s09-s11, seq 1-3) and 'hybrid bonding layer' (new s12)", reason: "Fig. 11 basic QMC flow; Sec. IV.A gives solder bump plating or another HB layer as alternatives"}
+  - {date: 2026-10-20, source: repass, row_id: iedm45625.2022.10019499-F2-s12, change: "added: form another hybrid bonding layer to attach to another chip", reason: "stated alternative route p.2 Sec. IV.A"}
+  - {date: 2026-10-20, source: repass, row_id: iedm45625.2022.10019499-F1-s01..s07, change: "step_basis: s01-s03, s07 inferred_order; s04, s06 stated_in_flow; target '3 um pitch' on s03, s06", reason: "Sec. III lists changes, only CMP -> bonding order stated"}
+  - {date: 2026-10-20, source: repass, row_id: iedm45625.2022.10019499-F3-s02, change: "split PECVD recipes (Fig. 13); conditions", reason: "parameter sweep on the step"}
+  - {date: 2026-10-20, source: repass, row_id: iedm45625.2022.10019499-F3-s04, change: "split slurries (Fig. 16); conditions", reason: "parameter sweep on the step"}
+  - {date: 2026-10-20, source: repass, row_id: iedm45625.2022.10019499, change: "process_flow_level ordered confirmed", reason: "Fig. 11 ordered flow, no temperatures/times/pressures stated"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45625.2022.10019499-F1-s01", change: "category other -> rdl_layer", reason: "metal stack (vias, overlays) above final metal is BEOL wiring (p.2 Sec. III; p.3 Fig. 7); audit B maps BEOL wiring to rdl_layer"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45625.2022.10019499-F1-s03", change: "category other -> rdl_layer", reason: "damascene HB pad layer (p.1-2 Sec. III); damascene bond-pad layers are rdl_layer in this database"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45625.2022.10019499-F2-s05", change: "category other -> rdl_layer", reason: "hybrid bonding layer = damascene bond-pad layer (p.1 Sec. III, p.2 Sec. IV.A; Fig. 11 (5))"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45625.2022.10019499-F2-s12", change: "category other -> rdl_layer", reason: "hybrid bonding layer = damascene bond-pad layer (p.1 Sec. III, p.2 Sec. IV.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45625.2022.10019499-F2-s05", change: "target '' -> 'D2D interconnect pitch < 3 um (> ~100K connections/mm2; stated capability)'", reason: "target_missing b-i1: p.2 Sec. IV.A 'creating and bonding scalable die to die interconnects below 3 um (or more than ~100K connections/mm2)'"}
+  - {date: 2026-10-20, source: repass, row_id: "iedm45625.2022.10019499-F2-s06", change: "target '' -> 'D2D interconnect pitch < 3 um (> ~100K connections/mm2; stated capability)'", reason: "target_missing b-i1: p.2 Sec. IV.A 'creating and bonding scalable die to die interconnects below 3 um (or more than ~100K connections/mm2)'"}

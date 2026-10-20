@@ -1,0 +1,53 @@
+paper_id: ectc51846.2026.00375
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00375/text.md
+  - references/ectc51846.2026.00375/source.json
+  - references/ectc51846.2026.00375/figures/page_02.png
+  - references/ectc51846.2026.00375/figures/page_03.png
+  - references/ectc51846.2026.00375/figures/page_04.png
+  - references/ectc51846.2026.00375/figures/page_05.png
+figure_reading_method: >-
+  Page renders for Fig. 1-7 and Tables I-II; 300 dpi re-crops of Fig. 3 and Fig. 4 for labels. All values come from
+  text or table cells; no plot pixel reads (Fig. 7(b) has no legend, curves identified only through the text).
+entries:
+  - {table: test_vehicles, row_id: ectc51846.2026.00375-a, field: package_thickness_mm, value: 1.7, unit: mm, basis: design_target, locator: "p.4 Table II", note: "module height"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00375-c-m4, field: notes, values: ["inductance decreased to 30% of zero-bias value at 17 A", "Isat defined at 30% inductance drop"], locators: ["p.3 Sec. IV.A", "p.4 Table I footnote; p.3 Fig. 5"], chosen: "30% drop", why: "result table definition; Fig. 5 L/L0 stays above 70% to 16 A"}
+excluded:
+  - "FIVR (ref [1]), CoaxMIL (ref [2]), PCB-embedded inductor (ref [3]) and capacitor-embedded iPaS (ref [4]) results"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - "process_steps: ectc51846.2026.00375-b (reference module with commercial SMD inductor; build not described)"
+  - number of coil units in the buck module inductor (board silkscreen shows x4; not stated in text)
+  - RDL materials, dielectric product, Cu thickness of RDL layers, laser via diameter, substrate thickness per layer
+  - metal composite product name, filler fraction, cure conditions; insulator material and thickness
+  - PMIC part number, reference board stack-up and thickness
+  - thermal behavior and stray flux (future work), efficiency values at specific currents beyond the 7 A delta
+source_quality:
+  - "Clean text layer. Fig. 4 candidate covers only panel (b); Table I candidate clips the footnote; both re-cropped manually."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00375", change: "process_flow_level: 'ordered' -> 'fragments'; has_process_flow: 'yes' -> 'no'", reason: "Sec. III.A lists the processes of a 'sequential build-up' without an order (laser via, plating/etching, molding, curing); no flow figure; regraded per rule 7"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00375-F1", change: "level: 'ordered' -> 'fragments'; tv_ids: 'ectc51846.2026.00375-a;ectc51846.2026.00375-c' -> 'ectc51846.2026.00375-a;ectc51846.2026.00375-c;ectc51846.2026.00375-d'; flow_name: 'sequential build-up of inductor structure (Sec. III.A-B)' -> 'inductor-embedded substrate build-up (Sec. III.A-B)'; notes: '' -> 'Processes listed, order not stated; per-layer repetition not described.'", reason: "listed processes, no stated sequence; arrays d are built in the same substrate"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00375-F1-s01", change: "step_basis: '' -> 'generic_description'", reason: "fragments: one row per statement in reading order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00375-F1-s02", change: "step_basis: '' -> 'generic_description'", reason: "fragments: one row per statement in reading order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00375-F1-s03", change: "step_basis: '' -> 'generic_description'", reason: "fragments: one row per statement in reading order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00375-F1-s04", change: "step_basis: '' -> 'generic_description'", reason: "fragments: one row per statement in reading order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00375-F1-s05", change: "step_basis: '' -> 'generic_description'", reason: "fragments: one row per statement in reading order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00375-F1-s06", change: "step_basis: '' -> 'generic_description'", reason: "fragments: one row per statement in reading order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00375-F1-s07", change: "step_basis: '' -> 'generic_description'", reason: "fragments: one row per statement in reading order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00375-F1-s08", change: "step_basis: '' -> 'generic_description'", reason: "fragments: one row per statement in reading order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00375-F1-s01", change: "notes: 'Order as listed in the text; repetition per Cu layer not detailed.' -> 'Listed in Sec. III.A; order not stated.'", reason: "notes reflect fragment grading"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00375-F1-s02", change: "target: '' -> 'Cu 100 um per coil layer (two layers)'; step: 'copper patterning: plating (100 um per coil layer)' -> 'copper patterning: plating'", reason: "stated Cu thickness per coil layer"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00375-F1-s04", change: "material: 'metal composite' -> 'magnetic metal composite (iron powder + epoxy binder)'; conditions: '' -> 'filled from top and bottom sides of the stacked Cu coil'", reason: "material and fill sides as written (Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00375-F1-s05", change: "material: 'metal composite' -> 'magnetic metal composite (iron powder + epoxy binder)'", reason: "material as written"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00375-F1-s06", change: "category: 'other' -> 'rdl_layer'; step: 'build up RDL wiring layers on the coil-unit array (3-2-3 overall)' -> 'build up RDL / wiring layers on the coil-unit array (3-2-3 overall stack-up)'", reason: "category for wiring build-up"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00375-F1-s09", change: "added as TV delta (from former ectc51846.2026.00375-F1-s06): build up RDL / wiring layers on the coil-unit array (3-2-3 overall stack-up)", reason: "coil-unit arrays (d) sit in the prototype inductor-embedded substrates (Sec. III.B, IV)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00375-F1-s10", change: "added as TV delta (from former ectc51846.2026.00375-F1-s08): form dedicated GS-probe measurement pads near board center", reason: "GS-probe pads serve the embedded arrays d (Sec. III.A, IV)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00375-b", change: "not_reported adds process_steps for TV b", reason: "reference SMD-inductor module build is not described"}
+  - {date: 2026-10-20, source: flow_v25, row_id: "ectc51846.2026.00375-F1-s06", change: "tv_id ectc51846.2026.00375-a -> ectc51846.2026.00375-a;ectc51846.2026.00375-d; folded ectc51846.2026.00375-F1-s09", reason: "schema v2.5: a delta row lists every TV it applies to; the rows were identical except tv_id and locator"}
+  - {date: 2026-10-20, source: flow_v25, row_id: "ectc51846.2026.00375-F1-s09", change: "deleted: folded into ectc51846.2026.00375-F1-s06 (tv_id ectc51846.2026.00375-d added to its list)", reason: "schema v2.5: a delta row lists every TV it applies to; the rows were identical except tv_id and locator"}
+  - {date: 2026-10-20, source: flow_v25, row_id: "ectc51846.2026.00375-F1-s08", change: "tv_id ectc51846.2026.00375-a -> ectc51846.2026.00375-a;ectc51846.2026.00375-d; locator -> union of the folded rows; folded ectc51846.2026.00375-F1-s10", reason: "schema v2.5: a delta row lists every TV it applies to; the rows were identical except tv_id and locator"}
+  - {date: 2026-10-20, source: flow_v25, row_id: "ectc51846.2026.00375-F1-s10", change: "deleted: folded into ectc51846.2026.00375-F1-s08 (tv_id ectc51846.2026.00375-d added to its list)", reason: "schema v2.5: a delta row lists every TV it applies to; the rows were identical except tv_id and locator"}

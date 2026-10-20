@@ -1,0 +1,49 @@
+paper_id: ectc51529.2024.00334
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00334/text.md
+  - references/ectc51529.2024.00334/source.json
+  - references/ectc51529.2024.00334/figures/page_02.png
+  - references/ectc51529.2024.00334/figures/page_03.png
+  - references/ectc51529.2024.00334/figures/page_04.png
+  - references/ectc51529.2024.00334/figures/page_05.png
+  - references/ectc51529.2024.00334/figures/cand/p02_fig3.png
+  - references/ectc51529.2024.00334/figures/cand/p03_fig5.png
+  - references/ectc51529.2024.00334/figures/cand/p04_fig7.png
+  - references/ectc51529.2024.00334/figures/cand/p04_fig9.png
+  - references/ectc51529.2024.00334/figures/cand/p04_fig10a.png
+figure_reading_method: >-
+  Page renders p.2-5; candidate crops for Fig. 3, 5, 7, 9, 10; re-crops of Fig. 2, 9, 10. Yield values from the tables
+  printed in Fig. 8/9; Rs/link from the slope labels printed in Fig. 10. Fig. 11 cumulative plots used only
+  qualitatively (text values entered).
+entries:
+  - {table: interconnects, row_id: ectc51529.2024.00334-a-i1, field: count, value: 2200000, unit: links, basis: design_target, locator: "p.4 Fig. 8; p.2 Sec. II.A", note: "longest tested 500 nm chain (2.2Meg); design text says horizontal pads test up to 2 million links"}
+  - {table: interconnects, row_id: ectc51529.2024.00334-a-i2, field: count, value: 5500000, unit: links, basis: design_target, locator: "p.2 Sec. II.A; p.4 Fig. 9", note: "up to 5.5 million links at 300 nm"}
+  - {table: interconnects, row_id: ectc51529.2024.00334-a-i1, field: alignment_um, value: 0.08, unit: um, basis: measured, locator: "p.3 Sec. III.D", note: "IR max overlay 80 nm; optical 82 nm"}
+derived:
+  - {table: interconnects, row_id: ectc51529.2024.00334-a-i1, field: resistance_mohm, value: 6200, formula: "6.2 ohm/link x 1000", inputs: "p.4 Fig. 10 (28% Cu)"}
+  - {table: interconnects, row_id: ectc51529.2024.00334-a-i1, field: alignment_um, value: 0.08, formula: "80 nm / 1000", inputs: "p.3 Sec. III.D"}
+  - {table: interconnects, row_id: ectc51529.2024.00334-a-i2, field: alignment_um, value: 0.08, formula: "80 nm / 1000", inputs: "p.3 Sec. III.D"}
+  - {table: interconnects, row_id: ectc51529.2024.00334-a-i1, field: pitch_um, value: 0.5, formula: "500 nm / 1000", inputs: "p.2 Sec. II.A"}
+  - {table: interconnects, row_id: ectc51529.2024.00334-a-i2, field: pitch_um, value: 0.3, formula: "300 nm / 1000", inputs: "p.2 Sec. II.A"}
+  - {table: process_steps, row_id: ectc51529.2024.00334-F1-s18, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.5 Fig. 11 caption"}
+conflicts:
+  - {table: metrics, row_id: ectc51529.2024.00334-a-m19, field: value, values: [15.6, 14.8], locators: ["p.4 Fig. 10", "p.4 Sec. III.G"], chosen: 15.6, why: "result plot label over text; text may be a different statistic"}
+  - {table: metrics, row_id: ectc51529.2024.00334-a-m20, field: value, values: [8.7, 7.9], locators: ["p.4 Fig. 10", "p.4 Sec. III.G"], chosen: 8.7, why: "result plot label over text"}
+  - {table: metrics, row_id: ectc51529.2024.00334-a-m21, field: value, values: [6.2, 6.1], locators: ["p.4 Fig. 10", "p.4 Sec. III.G"], chosen: 6.2, why: "result plot label over text"}
+  - {table: metrics, row_id: ectc51529.2024.00334-a-m16, field: variant, values: ["3k chains (Fig. 9 table)", "5k chains (Fig. 9 caption)", "up to 3,000 vertical links (Sec. II.A)"], locators: ["p.4 Fig. 9", "p.4 Fig. 9 caption", "p.2 Sec. II.A"], chosen: "3k", why: "table and design text agree"}
+  - {table: metrics, row_id: ectc51529.2024.00334-a-m18, field: value, values: ["49% (Fig. 9, Sec. III.F)", "up to 50% (Sec. IV)"], locators: ["p.4 Fig. 9", "p.5 Sec. IV"], chosen: 49, why: "result table"}
+  - {table: process_steps, row_id: ectc51529.2024.00334-F1-s07, field: equipment, values: ["EVG40 NT2", "EVG NT30"], locators: ["p.3 Sec. III.D", "p.3 Fig. 4 caption"], chosen: "both kept in cell", why: "cannot resolve from the paper"}
+excluded:
+  - "3 um pitch CIS hybrid bonding (ref [1]); <100 nm pitch roadmap for stacked FETs (IMEC roadmap, ref [2], Fig. 1)"
+  - "first structural demonstration and 0.1 um pitch extendibility (ref [3]; no data shown in this paper)"
+  - "copper oxide reduction vs anneal temperature (ref [4])"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - "bond pad/via diameter and height, SiCN and TEOS thicknesses, bottom wafer thickness"
+  - "bonding temperature/pressure, plasma activation, bonder model, baseline anneal time and ambient"
+  - "Rs/link at 300 nm pitch; Fig. 11 per-curve yield values"
+  - "bond strength values"
+source_quality:
+  - "Candidate p02_fig2 points at the page header (bbox y 0-0.07); p04_fig9 cuts the yield row; p04_fig10a includes a text sliver. Manual crops used."

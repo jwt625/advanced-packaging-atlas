@@ -1,0 +1,49 @@
+paper_id: ectc51846.2026.00346
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00346/text.md
+  - references/ectc51846.2026.00346/source.json
+  - references/ectc51846.2026.00346/figures/page_02.png
+  - references/ectc51846.2026.00346/figures/page_03.png
+  - references/ectc51846.2026.00346/figures/page_04.png
+  - references/ectc51846.2026.00346/figures/page_05.png
+  - references/ectc51846.2026.00346/figures/page_06.png
+  - references/ectc51846.2026.00346/figures/page_07.png
+figure_reading_method: >-
+  Page renders p.2-7; candidate crops p02_fig3, p03_fig5, p04_fig7, p04_fig8, p05_fig12, p06_fig15; 400 dpi re-crop of
+  Fig. 3 to read the pitch labels ('40um min pitch', '160um min C4 pitch'); 300 dpi re-crops of Fig. 12 (bar heights vs
+  0.2 gridlines) and Fig. 15 (marker labels at 16 GHz); 200 dpi re-crop of Fig. 10 (no axis values printed).
+entries:
+  - {table: interconnects, row_id: ectc51846.2026.00346-a-i1, field: pitch_min_um, value: 40, unit: um, basis: design_target, locator: "p.2 Fig. 3", note: "schematic label '40um min pitch' at ASIC-PIC microbumps"}
+  - {table: interconnects, row_id: ectc51846.2026.00346-a-i2, field: pitch_min_um, value: 160, unit: um, basis: design_target, locator: "p.2 Fig. 3", note: "schematic label '160um min C4 pitch'; p.7 PI model uses 'current 160 um pitch'"}
+  - {table: electrical_interfaces, row_id: ectc51846.2026.00346-c-e2, field: insertion_loss_db, value: 0.176, unit: dB, basis: simulated, locator: "p.6 Fig. 15", note: "marker -0.176 assigned to Tapered VIA (Case2): text 'Case3 improved ~40% vs Case2' matches 0.110 vs 0.176"}
+  - {table: metrics, row_id: ectc51846.2026.00346-b-m1, field: value, value: 0.83, unit: normalized, basis: simulated, locator: "p.5 Fig. 12", note: "bar read off image; text says ~20% less"}
+  - {table: metrics, row_id: ectc51846.2026.00346-b-m3, field: value, value: 0.65, unit: normalized, basis: simulated, locator: "p.5 Fig. 12", note: "bar read off image; text says ~35% lower"}
+  - {table: interconnects, row_id: ectc51846.2026.00346-b-i2, field: notes, value: "5.5x / 8x", unit: normalized, basis: stated, locator: "p.5 Fig. 11(a)", note: "open TSV opening widths relative to std TSV width x; absolute size not given"}
+derived:
+  - {table: electrical_interfaces, row_id: ectc51846.2026.00346-c-e1, field: insertion_loss_db, value: 0.041, formula: "loss = -(plotted -0.041 dB)", inputs: "p.6 Fig. 15"}
+  - {table: electrical_interfaces, row_id: ectc51846.2026.00346-c-e2, field: insertion_loss_db, value: 0.176, formula: "loss = -(plotted -0.176 dB)", inputs: "p.6 Fig. 15"}
+  - {table: electrical_interfaces, row_id: ectc51846.2026.00346-c-e3, field: insertion_loss_db, value: 0.110, formula: "loss = -(plotted -0.110 dB)", inputs: "p.6 Fig. 15"}
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00346-c-m4, field: value_text, values: ["Fig. 15: Case3 (modified RDL) has lower IL than Case2", "Sec. III.D TDR paragraph: 'Case3 becomes more lossy due to thin RDL trace'"], locators: ["p.6 Fig. 15", "p.6 Sec. III.D"], chosen: "Fig. 15 IL values; TDR row qualitative only", why: "plot markers and the ~40% improvement sentence agree; lossy remark likely vs Case1 TSV"}
+  - {table: process_steps, row_id: ectc51846.2026.00346-F1-s06, field: conditions, values: ["PECVD", "CVD"], locators: ["p.3 Fig. 5(a)", "p.4 Sec. III.A"], chosen: "both recorded", why: "consistent (PECVD is a CVD)"}
+excluded:
+  - "1 Tbps/mm2 bandwidth density: OMM solution-level claim (p.2), not a property of the passive daisy-chain TV"
+  - "COUPE comparison attributed to ref [3]; photonic design elements of ref [14]"
+  - "Fig. 2 Photonic Fabric system concept (DDR5 DIMMs, FAU, board): concept only, no build"
+not_reported:
+  - die, interposer, substrate and package dimensions; die and interposer thickness
+  - TSV/TDV diameter, depth, count; RDL line/space and layer count
+  - microbump/C4 metallurgy, heights, bonding method and conditions
+  - optical adhesive product, cure conditions, alignment/overflow/BLT numeric values (axes unlabeled)
+  - optical coupling loss, wavelength, channel count; FAU attach on built TV
+  - warpage values; reliability tests (stated as future work)
+  - TM load case and absolute stress; SI trace lengths
+  - substrate_to_board interconnect
+source_quality:
+  - "Clean text layer. Fig. 7 caption labels panels (a) and (ii). Fig. 10 box plots have no numeric axes. Fig. 6 photo carries a product marking not mentioned in text (not used)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00346-F1, change: "step_basis set to stated_in_flow on steps without one", reason: "order is stated in the paper's flow text/figure"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00346-F1-s11, change: "target: '' -> 'min C4 pitch 160 um'; locator: 'p.3 Sec. II.B; p.3 Fig. 5(a)' -> 'p.3 Sec. II.B; p.3 Fig. 5(a); p.2 Fig. 3'", reason: "stated C4 pitch"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00346-F1-s12, change: "target: '' -> 'min microbump pitch 40 um'; locator: 'p.3 Sec. II.B; p.3 Fig. 5(b)' -> 'p.3 Sec. II.B; p.3 Fig. 5(b); p.2 Fig. 3'", reason: "stated microbump pitch"}

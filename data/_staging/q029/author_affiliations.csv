@@ -1,0 +1,47 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc51846.2026.00012-a01-1,ectc51846.2026.00012,1,Huan-Ping Su,1,primary,Ableprint Technology,,Hsinchu,TW,printed: HsinChu,paper,p.1 affiliations
+ectc51846.2026.00012-a02-1,ectc51846.2026.00012,2,Ming-Hua Hsu,1,primary,Ableprint Technology,,Hsinchu,TW,printed: HsinChu,paper,p.1 affiliations
+ectc51846.2026.00012-a03-1,ectc51846.2026.00012,3,Chih-Horng Horng,1,primary,Ableprint Technology,,Hsinchu,TW,printed: HsinChu,paper,p.1 affiliations
+ectc51846.2026.00140-a01-1,ectc51846.2026.00140,1,Roland Rettenmeier,1,primary,SCHMID Group,,Freudenstadt,DE,,paper,p.1 affiliations
+ectc51846.2026.00140-a02-1,ectc51846.2026.00140,2,Laurent Nicolet,1,primary,SCHMID Group,,Freudenstadt,DE,,paper,p.1 affiliations
+ectc51846.2026.00140-a03-1,ectc51846.2026.00140,3,Dr. Michael Kothe,1,primary,SCHMID Group,,Freudenstadt,DE,,paper,p.1 affiliations
+ectc51846.2026.00140-a04-1,ectc51846.2026.00140,4,Dr. Udo Kirsch,1,primary,SCHMID Group,,Freudenstadt,DE,,paper,p.1 affiliations
+ectc51846.2026.00140-a05-1,ectc51846.2026.00140,5,Christian Schmid,1,primary,SCHMID Group,,Freudenstadt,DE,,paper,p.1 affiliations
+ectc51846.2026.00140-a06-1,ectc51846.2026.00140,6,Dr. Sven Seren,1,primary,SCHMID Group,,Freudenstadt,DE,,paper,p.1 affiliations
+ectc51846.2026.00140-a07-1,ectc51846.2026.00140,7,Thomas Widmann,1,primary,SCHMID Group,,Freudenstadt,DE,,paper,p.1 affiliations
+ectc51846.2026.00140-a08-1,ectc51846.2026.00140,8,Dr. Christian Buchner,1,primary,SCHMID Group,,Freudenstadt,DE,,paper,p.1 affiliations
+ectc51846.2026.00140-a09-1,ectc51846.2026.00140,9,Dian Zhang,1,primary,SCHMID Group,,Freudenstadt,DE,,paper,p.1 affiliations
+ectc51846.2026.00336-a01-1,ectc51846.2026.00336,1,Peng Zhao,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a02-1,ectc51846.2026.00336,2,Liesbeth Witters,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a03-1,ectc51846.2026.00336,3,Michele Stucchi,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a04-1,ectc51846.2026.00336,4,Vladimir Cherman,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a05-1,ectc51846.2026.00336,5,Melina Lofrano,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a06-1,ectc51846.2026.00336,6,Rami Chukka,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a07-1,ectc51846.2026.00336,7,Kevin Vandersmissen,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a08-1,ectc51846.2026.00336,8,Farid Sebai,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a09-1,ectc51846.2026.00336,9,Bart Kenens,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a10-1,ectc51846.2026.00336,10,Jan Willem Maes,1,primary,ASM Belgium,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a11-1,ectc51846.2026.00336,11,Joeri De Vos,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a12-1,ectc51846.2026.00336,12,Gerald Beyer,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a13-1,ectc51846.2026.00336,13,Zsolt Tokei,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a14-1,ectc51846.2026.00336,14,Eric Beyne,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+eptc53413.2021.9663896-a01-1,eptc53413.2021.9663896,1,Clifford Sandstrom,1,primary,Deca Technologies,,"Tempe, AZ",US,author-to-block mapping from email domains,paper,p.1 affiliations
+eptc53413.2021.9663896-a02-1,eptc53413.2021.9663896,2,Timothy Olson,1,primary,Deca Technologies,,"Tempe, AZ",US,author-to-block mapping from email domains,paper,p.1 affiliations
+eptc53413.2021.9663896-a03-1,eptc53413.2021.9663896,3,Steve Fang,1,primary,ASE,,Kaohsiung City,TW,author-to-block mapping from email domains; printed: ASE Technology,paper,p.1 affiliations
+eptc53413.2021.9663896-a04-1,eptc53413.2021.9663896,4,Jeffrey Yang,1,primary,ASE,,Kaohsiung City,TW,author-to-block mapping from email domains; printed: ASE Technology,paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a01-1,vlsitechnologyandcir65830.2026.11577374,1,S. Morein,1,primary,SAIMEMORY,,Tokyo,JP,,paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a02-1,vlsitechnologyandcir65830.2026.11577374,2,P. Mahji,1,primary,Intel,,"Santa Clara, CA",US,printed: Intel,paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a03-1,vlsitechnologyandcir65830.2026.11577374,3,W. Gilmore,1,primary,Intel,,"Santa Clara, CA",US,printed: Intel,paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a04-1,vlsitechnologyandcir65830.2026.11577374,4,C.-L. Lu,1,primary,Powerchip Semiconductor Manufacturing,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a05-1,vlsitechnologyandcir65830.2026.11577374,5,S.C. Lin,1,primary,Powerchip Semiconductor Manufacturing,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a06-1,vlsitechnologyandcir65830.2026.11577374,6,C.H. Chuang,1,primary,Powerchip Semiconductor Manufacturing,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a07-1,vlsitechnologyandcir65830.2026.11577374,7,C.F. Sung,1,primary,Powerchip Semiconductor Manufacturing,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a08-1,vlsitechnologyandcir65830.2026.11577374,8,C.H. Chen,1,primary,Powerchip Semiconductor Manufacturing,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a09-1,vlsitechnologyandcir65830.2026.11577374,9,C.W. Huang,1,primary,Powerchip Semiconductor Manufacturing,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a10-1,vlsitechnologyandcir65830.2026.11577374,10,Y.L. Chang,1,primary,Powerchip Semiconductor Manufacturing,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a11-1,vlsitechnologyandcir65830.2026.11577374,11,S.-Z. Chang,1,primary,Powerchip Semiconductor Manufacturing,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a12-1,vlsitechnologyandcir65830.2026.11577374,12,Chris Liu,1,primary,AP Memory,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a13-1,vlsitechnologyandcir65830.2026.11577374,13,HN Hcueh,1,primary,AP Memory,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a14-1,vlsitechnologyandcir65830.2026.11577374,14,Hamy Yeh,1,primary,AP Memory,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a15-1,vlsitechnologyandcir65830.2026.11577374,15,PT Chen,1,primary,AP Memory,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577374-a16-1,vlsitechnologyandcir65830.2026.11577374,16,Wenliang Chen,1,primary,AP Memory,,Hsinchu,TW,"printed: Taiwan, R. O. C.",paper,p.1 affiliations

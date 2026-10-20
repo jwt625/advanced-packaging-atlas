@@ -28,8 +28,6 @@ derived:
   - {table: stack_layers, row_id: ectc51909.2023.00274-a-L01, field: thickness_um, value: 0.015, formula: "15 nm / 1000", inputs: "p.3 Sec. II.B"}
   - {table: stack_layers, row_id: ectc51909.2023.00274-a-L06, field: thickness_um, value: 0.4, formula: "400 nm / 1000", inputs: "p.3 Sec. II.B"}
   - {table: stack_layers, row_id: ectc51909.2023.00274-a-L07, field: thickness_um, value: 0.2, formula: "200 nm / 1000", inputs: "p.3 Sec. II.B"}
-  - {table: stack_layers, row_id: ectc51909.2023.00274-b-L09, field: thickness_um, value: 0.22, formula: "Ti 20 nm + Cu 200 nm", inputs: "p.5 Sec. III.A"}
-  - {table: stack_layers, row_id: ectc51909.2023.00274-c-L09, field: thickness_um, value: 0.22, formula: "Ti 20 nm + Cu 200 nm", inputs: "p.5 Sec. III.A"}
   - {table: process_steps, row_id: ectc51909.2023.00274-b-s01, field: thickness_um, value: 0.22, formula: "Ti 20 nm + Cu 200 nm", inputs: "p.5 Sec. III.A"}
   - {table: stack_layers, row_id: ectc51909.2023.00274-b-L05, field: thickness_um, value: 100, formula: "SU8 thickness = dielet height (100 um)", inputs: "p.6 Sec. III.A; p.5 Sec. III.A"}
   - {table: stack_layers, row_id: ectc51909.2023.00274-c-L05, field: thickness_um, value: 200, formula: "SU8 thickness = dielet height (200 um)", inputs: "p.6 Sec. III.A; p.5 Sec. III.A"}
@@ -53,3 +51,9 @@ not_reported:
   - TPV count per assembly beyond per-chain; resistance for 200 um dielet build
   - electrical_interfaces (no D2D PHY property); optical_interfaces
   - HEMT/IVR electrical efficiency (not built)
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00274-a-L03; ectc51909.2023.00274-a-L04, change: "via_pitch_um 10 cleared; pad/pillar pitch moved to notes", reason: "audit_x1 item 8: via_pitch_um held the Cu pad/pillar pitch, not a via pitch"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00274-b-L09; ectc51909.2023.00274-c-L09, change: "thickness_um 0.22 and override cleared; Ti/Cu 20/200 nm moved to notes; derived entries removed", reason: "audit_x1 item 8: 0.22 um is the dielet Ti/Cu lift-off pattern, not a bond-interface thickness"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00274-d, change: "tv_kind simulation_model -> other; notes 'design concept'", reason: "audit_x1 item 12: envisioned GaN-IF system, not built and not simulated; values are author estimates (interim for design_concept)"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00274-b-m2, change: "scope 'applies to TVs b, c'; notes updated", reason: "p.6 Sec. III.B: 'two different samples' with no per-build result; one row on first TV"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00274-c-m2, change: "row deleted (copy of b-m2)", reason: "audit_x1 item 4 / sibling_dup: copied statement on 200 um build"}

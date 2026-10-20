@@ -1,0 +1,669 @@
+step_id,old_step_ids,paper_id,flag,category,step
+ectc.2019.00095-F1-s01,ectc.2019.00095-a-s01,ectc.2019.00095,test,test,known good die (KGD) selection for stacking
+ectc.2019.00095-F1-s02,ectc.2019.00095-a-s02,ectc.2019.00095,other_category,other,bond formation on SoC
+ectc.2019.00095-F1-s05,ectc.2019.00095-a-s05,ectc.2019.00095,other_category,other,RDL (optional)
+ectc.2019.00095-F2-s01,ectc.2019.00095-e-s01,ectc.2019.00095,other_category,other,micro-bump formation on SOC-1
+ectc.2019.00095-F2-s04,ectc.2019.00095-e-s04,ectc.2019.00095,other_category,other,C4 FC bump formation
+ectc.2019.00-29-F1-s01,ectc.2019.00-29-a-s01,ectc.2019.00-29,structure_only,reflow,Cu pillar with solder cap on test chip reflowed with lead-free profile
+ectc.2019.00-29-F2-s24,ectc.2019.00-29-a-s25,ectc.2019.00-29,inspection,inspection,X-ray and cross-section of solder joints
+ectc.2019.00-29-F3-s03,ectc.2019.00-29-b-s03,ectc.2019.00-29,inspection,inspection,"FIB/SEM cross-section of 3, 5, 10 um vias"
+ectc.2019.00-29-F4-s03,ectc.2019.00-29-c-s03,ectc.2019.00-29,inspection,inspection,CD analysis and FIB/SEM of PR sidewalls
+ectc.2011.5898527-F1-s06,ectc.2011.5898527-a-s06,ectc.2011.5898527,other_category,other,M1-Mx interconnect wires by standard backend fab processes
+ectc.2011.5898527-F1-s07,ectc.2011.5898527-a-s07,ectc.2011.5898527,other_category,other,top-side passivation and microbump pad formation
+ectc.2011.5898527-F2-s01,ectc.2011.5898527-a-s12,ectc.2011.5898527,other_category,other,FPGA wafer Cu pillar bumping (30-60 um pitch range)
+ectc.2011.5898527-F3-s01,ectc.2011.5898527-a-s21,ectc.2011.5898527,preconditioning,preconditioning,level 5 (L5) moisture preconditioning
+ectc.2011.5898527-F3-s02,ectc.2011.5898527-a-s22,ectc.2011.5898527,inspection,inspection,C-SAM and open-short electrical test; cross-section after 1000 cycles
+ectc32696.2021.00125-F1-s01,ectc32696.2021.00125-a-s01;ectc32696.2021.00125-b-s01,ectc32696.2021.00125,preconditioning,preconditioning,standard preconditioning flow (multiple solder reflow) with MSL 4 soak
+ectc32696.2021.00125-F2-s01,ectc32696.2021.00125-b-s02,ectc32696.2021.00125,structure_only,lithography,"RDL design and formation, non-stitching approach"
+ectc32696.2021.00033-F1-s06,ectc32696.2021.00033-a-s06,ectc32696.2021.00033,inspection,inspection,X-ray inspection of C4 joints at InFO die corner
+ectc32696.2021.00033-F1-s07,ectc32696.2021.00033-a-s07,ectc32696.2021.00033,test,test,daisy chain electrical resistance test (chains A-F)
+ectc32696.2021.00166-F1-s10,ectc32696.2021.00166-a-s10,ectc32696.2021.00166,inspection,inspection,stitched cross section of a bonded daisy chain
+ectc51529.2024.00093-F1-s01,ectc51529.2024.00093-a-s01,ectc51529.2024.00093,structure_only,tsv_tgv_formation,TGV with fully filled Cu electrode
+ectc51529.2024.00093-F1-s02,ectc51529.2024.00093-b-s01,ectc51529.2024.00093,structure_only,tsv_tgv_formation,TGV with conformal Cu electrode
+ectc51529.2024.00093-F1-s03,ectc51529.2024.00093-a-s02;ectc51529.2024.00093-b-s02,ectc51529.2024.00093,other_category,other,form one insulating and one wiring layer on top and bottom surfaces
+ectc51529.2024.00093-F1-s04,ectc51529.2024.00093-a-s03;ectc51529.2024.00093-b-s03,ectc51529.2024.00093,test,test,"thermal cycle test, 1000 cycles"
+ectc51529.2024.00093-F2-s01,ectc51529.2024.00093-c-s01,ectc51529.2024.00093,structure_only,tsv_tgv_formation,TGV with partially filled Cu electrode
+ectc51529.2024.00093-F2-s02,ectc51529.2024.00093-c-s02,ectc51529.2024.00093,other_category,other,form one insulating and one wiring layer on top and bottom surfaces
+ectc51529.2024.00093-F2-s03,ectc51529.2024.00093-c-s03,ectc51529.2024.00093,test,test,"thermal cycle test, 1000 cycles"
+ectc51529.2024.00093-F3-s01,ectc51529.2024.00093-d-s01,ectc51529.2024.00093,structure_only,tsv_tgv_formation,TGV with fully filled Cu electrode in 400 um alkali-free glass
+ectc51529.2024.00093-F3-s02,ectc51529.2024.00093-e-s01,ectc51529.2024.00093,structure_only,tsv_tgv_formation,TGV with partially filled Cu electrode in 400 um alkali-free glass
+ectc51529.2024.00093-F3-s03,ectc51529.2024.00093-f-s01,ectc51529.2024.00093,structure_only,tsv_tgv_formation,TGV with conformal Cu electrode in 400 um alkali-free glass
+ectc51529.2024.00093-F3-s04,ectc51529.2024.00093-d-s02;ectc51529.2024.00093-e-s02;ectc51529.2024.00093-f-s02,ectc51529.2024.00093,other_category,other,"one RDL wiring layer on top and bottom forming CPW (10 mm long, 30 um wide)"
+ectc51529.2024.00093-F3-s05,ectc51529.2024.00093-d-s03;ectc51529.2024.00093-e-s03;ectc51529.2024.00093-f-s03,ectc51529.2024.00093,test,test,S-parameter measurement of CPW vs CPW+TGV with network analyzer
+ectc51529.2024.00092-F1-s01,ectc51529.2024.00092-a-s01,ectc51529.2024.00092,other_category,other,laser modification of bare glass according to via shape and diameter
+ectc51529.2024.00092-F1-s05,ectc51529.2024.00092-a-s05,ectc51529.2024.00092,inspection,inspection,via hole diameter by high-profile microscope; SEM cross-section
+ectc51529.2024.00092-F2-s06,ectc51529.2024.00092-b-s06,ectc51529.2024.00092,other_category,other,09/10 slow drain / N2 dry
+ectc32696.2021.00174-F1-s01,ectc32696.2021.00174-a-s01,ectc32696.2021.00174,other_category,other,"Cu stud formation on passivation openings (pre-assembly, wafer level)"
+ectc32696.2021.00174-F1-s15,ectc32696.2021.00174-a-s15,ectc32696.2021.00174,test,test,electrical test on panel or post singulation; 300 mm square segments on existing 300 mm round wafer probers
+ectc32696.2021.00174-F1-s19,ectc32696.2021.00174-a-s19,ectc32696.2021.00174,inspection,inspection,100% automated outgoing inspection (AOI)
+ectc32696.2021.00174-F1-s20,ectc32696.2021.00174-a-s20,ectc32696.2021.00174,other_category,other,tape and reel
+ectc51529.2024.00151-F1-s05,ectc51529.2024.00151-a-s05,ectc51529.2024.00151,test,test,time-zero electrical open/short test
+ectc51529.2024.00151-F2-s05,ectc51529.2024.00151-b-s05,ectc51529.2024.00151,other_category,other,"build FO-RDL: 3 passivation + 3 metal layers (3P3M, RDL/PI)"
+ectc51529.2024.00151-F2-s09,ectc51529.2024.00151-b-s09,ectc51529.2024.00151,other_category,other,C4 formation
+ectc51529.2024.00151-F2-s18,ectc51529.2024.00151-b-s18,ectc51529.2024.00151,test,test,time-zero electrical open/short test
+ectc51529.2024.00265-F1-s08,ectc51529.2024.00265-a-s08;ectc51529.2024.00265-b-s08;ectc51529.2024.00265-c-s08;ectc51529.2024.00265-d-s08,ectc51529.2024.00265,other_category,other,put glass beads (adhesive spacers)
+ectc51529.2024.00265-F1-s13,ectc51529.2024.00265-a-s13;ectc51529.2024.00265-b-s13;ectc51529.2024.00265-c-s13;ectc51529.2024.00265-d-s13,ectc51529.2024.00265,other_category,other,print solder paste on motherboard
+ectc51529.2024.00265-F1-s17,ectc51529.2024.00265-a-s17;ectc51529.2024.00265-b-s17;ectc51529.2024.00265-c-s17;ectc51529.2024.00265-d-s17,ectc51529.2024.00265,other_category,other,remove spacer
+ectc51529.2024.00265-F1-s19,ectc51529.2024.00265-a-s19;ectc51529.2024.00265-b-s19;ectc51529.2024.00265-c-s19;ectc51529.2024.00265-d-s19,ectc51529.2024.00265,test,test,temperature cycling of board assembly
+ectc51529.2024.00155-F1-s01,ectc51529.2024.00155-a-s01,ectc51529.2024.00155,other_category,other,pad formation on silicon (interposer) wafer: Al-Cu pads with electroless Ni/Au
+ectc51529.2024.00155-F1-s07,ectc51529.2024.00155-a-s07,ectc51529.2024.00155,inspection,inspection,IR microscope check of molding quality
+ectc51529.2024.00155-F1-s15,ectc51529.2024.00155-a-s15,ectc51529.2024.00155,inspection,inspection,warpage by shadow moire
+ectc51529.2024.00155-F1-s16,ectc51529.2024.00155-a-s16,ectc51529.2024.00155,other_category,other,fabricate 120x120 mm package substrate (Substrate A/B)
+ectc51529.2024.00155-F1-s21,ectc51529.2024.00155-a-s21,ectc51529.2024.00155,inspection,inspection,position accuracy by X-ray CT
+ectc51529.2024.00155-F1-s25,ectc51529.2024.00155-a-s25,ectc51529.2024.00155,other_category,other,print solder paste on PCB
+ectc51529.2024.00155-F1-s27,ectc51529.2024.00155-a-s27,ectc51529.2024.00155,test,test,"thermal cycling test JESD22-A104F, -55/125 C, 15 min dwell"
+ectc51529.2024.00155-F2-s03,ectc51529.2024.00155-f-s03,ectc51529.2024.00155,other_category,other,"remaining interposer steps as CUF+EMC route (die expose, carrier, grind, bump, debond, dice)"
+ectc51529.2024.00322-F1-s07,ectc51529.2024.00322-a-s07,ectc51529.2024.00322,inspection,inspection,"fill inspection by SAT, IR microscope and SEM (cross-section; top view after grinding to bumps)"
+ectc51529.2024.00322-F2-s05,ectc51529.2024.00322-b-s05,ectc51529.2024.00322,inspection,inspection,"fill inspection by SAT, IR microscope and SEM (cross-section; top view after grinding to bumps)"
+ectc51529.2024.00322-F3-s04,ectc51529.2024.00322-c-s04,ectc51529.2024.00322,inspection,inspection,"fill inspection by SAT, IR microscope and SEM (cross-section; top view after grinding to bumps)"
+ectc51529.2024.00094-F1-s10,ectc51529.2024.00094-a-s08;ectc51529.2024.00094-b-s08;ectc51529.2024.00094-c-s08,ectc51529.2024.00094,inspection,inspection,SAT T-mode inspection of underfill
+ectc51529.2024.00094-F1-s11,ectc51529.2024.00094-a-s09;ectc51529.2024.00094-b-s09;ectc51529.2024.00094-c-s09,ectc51529.2024.00094,test,test,iso-thermal aging (HTS) at 150 C and 180 C for 2000 h
+ectc51529.2024.00094-F1-s12,ectc51529.2024.00094-a-s10;ectc51529.2024.00094-b-s10;ectc51529.2024.00094-c-s10,ectc51529.2024.00094,inspection,inspection,"destructive analysis: grinding and polishing, FE-SEM and EDS"
+ectc51687.2025.00052-F1-s02,ectc51687.2025.00052-a-s02,ectc51687.2025.00052,preconditioning,preconditioning,pre-bake preconditioning
+ectc51687.2025.00052-F2-s01,ectc51687.2025.00052-b-s01,ectc51687.2025.00052,inspection,inspection,PIC inspection/preclean
+ectc51687.2025.00052-F2-s05,ectc51687.2025.00052-b-s05,ectc51687.2025.00052,test,test,test
+ectc51687.2025.00052-F2-s06,ectc51687.2025.00052-b-s06,ectc51687.2025.00052,inspection,inspection,PIC and substrate inspection/clean
+ectc51687.2025.00052-F2-s12,ectc51687.2025.00052-b-s12,ectc51687.2025.00052,test,test,module test
+ectc51687.2025.00052-F3-s01,ectc51687.2025.00052-c-s01,ectc51687.2025.00052,inspection,inspection,PIC and substrate inspection/clean
+ectc51687.2025.00052-F3-s07,ectc51687.2025.00052-c-s07,ectc51687.2025.00052,inspection,inspection,PIC inspection/precision
+ectc51687.2025.00052-F3-s13,ectc51687.2025.00052-c-s13,ectc51687.2025.00052,test,test,module test
+ectc51687.2025.00009-F1-s09,ectc51687.2025.00009-a-s09,ectc51687.2025.00009,test,test,4-wire daisy-chain resistance test across wafer
+ectc51687.2025.00026-F1-s04,ectc51687.2025.00026-a-s04,ectc51687.2025.00026,inspection,inspection,X-ray of ubump joints and CSAM of underfill
+ectc51687.2025.00026-F1-s08,ectc51687.2025.00026-a-s08,ectc51687.2025.00026,inspection,inspection,X-ray of C4 joints and CSAM post underfill
+ectc51687.2025.00028-F1-s01,ectc51687.2025.00028-b-s01,ectc51687.2025.00028,other_category,other,fabricate silicon capacitor on 12-inch wafer (step-a1)
+ectc51687.2025.00028-F1-s02,ectc51687.2025.00028-b-s02,ectc51687.2025.00028,other_category,other,form Cu bumps on Si-cap wafer (step-a1)
+ectc51687.2025.00028-F2-s01,ectc51687.2025.00028-b-s07;ectc51687.2025.00028-c-s07,ectc51687.2025.00028,other_category,other,form substrate cores on temporary carrier (step-c1)
+ectc51687.2025.00028-F2-s02,ectc51687.2025.00028-b-s08;ectc51687.2025.00028-c-s08,ectc51687.2025.00028,other_category,other,perforate side of substrate core for capacitor (step-c2)
+ectc51687.2025.00028-F2-s06,ectc51687.2025.00028-b-s11;ectc51687.2025.00028-c-s11,ectc51687.2025.00028,other_category,other,fabricate metal layer connecting upper and lower core sides (step-c5)
+ectc51687.2025.00027-F1-s12,ectc51687.2025.00027-a-s12;ectc51687.2025.00027-b-s12,ectc51687.2025.00027,inspection,inspection,warpage measurement by shadow moire
+ectc51687.2025.00027-F1-s17,ectc51687.2025.00027-a-s17;ectc51687.2025.00027-b-s17,ectc51687.2025.00027,inspection,inspection,evaluate positional accuracy of mounted die by X-ray CT
+ectc51687.2025.00027-F1-s23,ectc51687.2025.00027-a-s23;ectc51687.2025.00027-b-s23,ectc51687.2025.00027,other_category,other,print solder paste on PCB
+ectc51687.2025.00027-F1-s27,ectc51687.2025.00027-a-s27;ectc51687.2025.00027-b-s27,ectc51687.2025.00027,inspection,inspection,X-ray CT for solder bridges and positional accuracy
+ectc51687.2025.00027-F1-s28,ectc51687.2025.00027-a-s28;ectc51687.2025.00027-b-s28,ectc51687.2025.00027,test,test,short/conductivity check with auto prober
+ectc51687.2025.00061-F3-s01,ectc51687.2025.00061-a-s09,ectc51687.2025.00061,inspection,inspection,pre-screen incoming substrates with thermal bake at solder melting temperature
+ectc51687.2025.00061-F3-s06,ectc51687.2025.00061-a-s14,ectc51687.2025.00061,inspection,inspection,"3D X-ray, C-SAM/TSAM, optical imaging, cross-sections"
+ectc51687.2025.00284-F1-s01,ectc51687.2025.00284-a-s01,ectc51687.2025.00284,other_category,other,"fabricate optical modules in-house: iFAU (300 mm Si process), COI, COUPE-like; advanced couplers with N28 tools and mask sets"
+ectc51687.2025.00284-F1-s04,ectc51687.2025.00284-a-s04,ectc51687.2025.00284,test,test,"optical loss measurement: external laser 1260-1360 nm via fiber into iFAU, integrating sphere detection"
+ectc51687.2025.00097-F1-s04,ectc51687.2025.00097-a-s04,ectc51687.2025.00097,inspection,inspection,CSAM of carrier/Device 1 bonded pair
+ectc51687.2025.00097-F1-s09,ectc51687.2025.00097-a-s09,ectc51687.2025.00097,inspection,inspection,X-section and CSAM of 3-wafer stack
+ectc51687.2025.00097-F1-s10,ectc51687.2025.00097-a-s10,ectc51687.2025.00097,other_category,other,Edge treatment to remove sidewall dielectric coverage on Device 1/carrier edge
+ectc51687.2025.00097-F2-s04,ectc51687.2025.00097-b-s04,ectc51687.2025.00097,inspection,inspection,CSAM of carrier/Device 1 bonded pair
+ectc51687.2025.00097-F3-s04,ectc51687.2025.00097-c-s04,ectc51687.2025.00097,inspection,inspection,CSAM of carrier/Device 1 bonded pair
+ectc51687.2025.00097-F4-s03,ectc51687.2025.00097-d-s03,ectc51687.2025.00097,other_category,other,Carrier edge trim (through Device 1)
+ectc51846.2026.00110-F4-s04,ectc51846.2026.00110-e-s04,ectc51846.2026.00110,other_category,other,squeegee removal of excess core material
+ectc51846.2026.00092-F1-s03,ectc51846.2026.00092-a-s03,ectc51846.2026.00092,other_category,other,micropillar formation on SoC backside using TSMC front-end processes (micropillar loop)
+ectc51846.2026.00035-F1-s10,ectc51846.2026.00035-d-s10,ectc51846.2026.00035,test,test,electrical test in ground state
+ectc51846.2026.00074-F1-s04,ectc51846.2026.00074-a-s04,ectc51846.2026.00074,inspection,inspection,X-ray imaging of as-plated TGVs
+ectc51846.2026.00074-F1-s05,ectc51846.2026.00074-a-s05,ectc51846.2026.00074,test,test,"liquid-to-liquid thermal shock, 100 cycles"
+ectc51846.2026.00074-F1-s06,ectc51846.2026.00074-a-s06,ectc51846.2026.00074,inspection,inspection,X-ray imaging after thermal shock
+ectc51846.2026.00074-F2-s06,ectc51846.2026.00074-b-s05;ectc51846.2026.00074-c-s05,ectc51846.2026.00074,inspection,inspection,X-ray imaging of as-plated TGVs
+ectc51846.2026.00074-F2-s07,ectc51846.2026.00074-b-s06;ectc51846.2026.00074-c-s06,ectc51846.2026.00074,test,test,"liquid-to-liquid thermal shock, 100 cycles"
+ectc51846.2026.00074-F2-s08,ectc51846.2026.00074-b-s07;ectc51846.2026.00074-c-s07,ectc51846.2026.00074,inspection,inspection,X-ray imaging after thermal shock
+ectc51846.2026.00153-F1-s06,ectc51846.2026.00153-a-s02;ectc51846.2026.00153-b-s02;ectc51846.2026.00153-c-s02;ectc51846.2026.00153-d-s02;ectc51846.2026.00153-e-s02,ectc51846.2026.00153,other_category,other,TBF trimmed around glass carrier edges
+ectc51846.2026.00153-F1-s23,ectc51846.2026.00153-a-s07;ectc51846.2026.00153-b-s07;ectc51846.2026.00153-c-s07;ectc51846.2026.00153-d-s07;ectc51846.2026.00153-e-s07,ectc51846.2026.00153,inspection,inspection,"Warpage measurement before PMC, within 1 day after PMC and a few days after PMC"
+ectc51846.2026.00153-F1-s27,ectc51846.2026.00153-b-s11,ectc51846.2026.00153,inspection,inspection,Ash check of EMC and Si dummy chip surfaces by digital microscope
+ectc51846.2026.00153-F2-s02,ectc51846.2026.00153-f-s02,ectc51846.2026.00153,other_category,other,TBF trimmed around glass carrier edges
+ectc51846.2026.00336-F1-s05,ectc51846.2026.00336-a-s04;ectc51846.2026.00336-b-s04,ectc51846.2026.00336,other_category,other,lithography-masked doping
+ectc51846.2026.00336-F2-s03,ectc51846.2026.00336-b-s15,ectc51846.2026.00336,other_category,other,lithography-masked doping
+ectc51846.2026.00183-F1-s01,ectc51846.2026.00183-a-s01,ectc51846.2026.00183,other_category,other,form Cu wires (daisy-chain wiring layers)
+ectc51846.2026.00365-F2-s03,ectc51846.2026.00365-e-s03,ectc51846.2026.00365,inspection,inspection,CSAM inspection for final flow distance and voiding
+ectc51846.2026.00365-F4-s03,ectc51846.2026.00365-g-s03,ectc51846.2026.00365,inspection,inspection,CSAM inspection
+ectc51906.2022.00031-F1-s01,ectc51906.2022.00031-c-s01,ectc51906.2022.00031,other_category,other,"Logic/Cap wafers: 2 single-layer Cu damascene steps (1 um RDL, 2 um DBI layer)"
+ectc51906.2022.00031-F1-s08,ectc51906.2022.00031-c-s08,ectc51906.2022.00031,other_category,other,mount wafers on dicing tape (die prep done on tape)
+ectc51906.2022.00031-F1-s15,ectc51906.2022.00031-c-s15,ectc51906.2022.00031,test,test,two-probe electrical test of daisy chains
+ectc51906.2022.00031-F1-s16,ectc51906.2022.00031-c-s16,ectc51906.2022.00031,inspection,inspection,CSAM of bond interfaces
+ectc51846.2026.00187-F1-s08,ectc51846.2026.00187-a-s08,ectc51846.2026.00187,other_category,other,post-bonding integration to make bonded wafers electrically testable
+ectc51846.2026.00187-F1-s09,ectc51846.2026.00187-a-s09,ectc51846.2026.00187,test,test,whole-wafer 100K-link via chain electrical test
+ectc51906.2022.00106-F1-s06,ectc51906.2022.00106-a-s06,ectc51906.2022.00106,inspection,inspection,SAT of uC4 area and fillet
+ectc51906.2022.00106-F1-s10,ectc51906.2022.00106-a-s10,ectc51906.2022.00106,test,test,thermal cycling -40 to 125 C
+ectc51906.2022.00106-F4-s01,ectc51906.2022.00106-c-s01,ectc51906.2022.00106,inspection,inspection,high-speed camera imaging of flying dot
+ectc51906.2022.00057-F1-s06,ectc51906.2022.00057-a-s06,ectc51906.2022.00057,test,test,electrical test: daisy-chain contact resistance and comb-comb leakage current
+ectc51906.2022.00057-F2-s06,ectc51906.2022.00057-b-s06,ectc51906.2022.00057,other_category,other,backside Cu connection pad formation (protruded pads)
+ectc51906.2022.00057-F2-s08,ectc51906.2022.00057-b-s08,ectc51906.2022.00057,inspection,inspection,scanning acoustic microscopy of F2B bond
+ectc51906.2022.00057-F2-s09,ectc51906.2022.00057-b-s09,ectc51906.2022.00057,inspection,inspection,HAADF-STEM cross section of F2B connections (top wafer removed)
+ectc51906.2022.00108-F1-s05,ectc51906.2022.00108-a-s05,ectc51906.2022.00108,test,test,"package level thermal cycling, condition B"
+ectc51906.2022.00136-F1-s18,ectc51906.2022.00136-a-s18,ectc51906.2022.00136,test,test,test (panel or post singulation)
+ectc51906.2022.00136-F1-s23,ectc51906.2022.00136-a-s23,ectc51906.2022.00136,other_category,other,tape and reel / ship
+ectc51906.2022.00055-F1-s09,ectc51906.2022.00055-a-s09,ectc51906.2022.00055,other_category,other,RDL build-up using ABF; first metal layer on both sides forms solenoid winding with TGVs
+ectc51906.2022.00055-F2-s01,ectc51906.2022.00055-c-s01,ectc51906.2022.00055,other_category,other,ferrite-core embedded glass substrate per Fig. 3 flow (see -a)
+ectc51909.2023.00150-F1-s06,ectc51909.2023.00150-a-s15,ectc51909.2023.00150,inspection,inspection,"Cross-section, non-destructive 3D X-ray and electrical test of 40 um joints"
+ectc51909.2023.00150-F1-s09,ectc51909.2023.00150-a-s18,ectc51909.2023.00150,test,test,Module mounted on evaluation board; initial power-on test with bench power supply
+ectc51909.2023.00150-F2-s01,ectc51909.2023.00150-a-s03,ectc51909.2023.00150,other_category,other,Dummy Si solder transfer chip prepared with solder at target-chip bump locations
+ectc51909.2023.00154-F1-s04,ectc51909.2023.00154-a-s04,ectc51909.2023.00154,other_category,other,form metal lines
+ectc51909.2023.00154-F1-s05,ectc51909.2023.00154-a-s05,ectc51909.2023.00154,other_category,other,form micro bumps (40 um pitch)
+ectc51909.2023.00154-F2-s05,ectc51909.2023.00154-a-s10,ectc51909.2023.00154,other_category,other,Cu pillar bumping on interposer back side
+ectc51909.2023.00154-F2-s10,ectc51909.2023.00154-a-s15,ectc51909.2023.00154,other_category,other,vacuum de-void of underfill
+ectc51909.2023.00154-F2-s12,ectc51909.2023.00154-a-s17,ectc51909.2023.00154,inspection,inspection,SAT void inspection
+ectc51909.2023.00154-F2-s18,ectc51909.2023.00154-a-s23,ectc51909.2023.00154,inspection,inspection,"shadow moire warpage of molded chip module and substrate, RT to 240 C"
+ectc51909.2023.00153-F1-s14,ectc51909.2023.00153-a-s11;ectc51909.2023.00153-b-s11;ectc51909.2023.00153-c-s11;ectc51909.2023.00153-d-s11,ectc51909.2023.00153,inspection,inspection,IR microscopy for unfilled voids; SEM cross-section
+ectc51909.2023.00153-F2-s05,ectc51909.2023.00153-e-s05,ectc51909.2023.00153,inspection,inspection,cross-section EDX elemental mapping of joints
+ectc51909.2023.00235-F1-s05,ectc51909.2023.00235-a-s05,ectc51909.2023.00235,inspection,inspection,"X-ray, 3D X-ray, SEM cross-section and chip pull of joints"
+ectc51909.2023.00235-F2-s02,ectc51909.2023.00235-a-s07,ectc51909.2023.00235,preconditioning,preconditioning,preconditioning before package-level reliability
+ectc51909.2023.00235-F2-s03,ectc51909.2023.00235-a-s08,ectc51909.2023.00235,test,test,JEDEC deep thermal cycling
+ectc51909.2023.00235-F4-s01,ectc51909.2023.00235-b-s03,ectc51909.2023.00235,preconditioning,preconditioning,preconditioning before reliability tests
+ectc51909.2023.00235-F4-s02,ectc51909.2023.00235-b-s04,ectc51909.2023.00235,test,test,"DTC, accelerated thermal cycling, HTS and THB"
+ectc51909.2023.00175-F1-s04,ectc51909.2023.00175-a-s04;ectc51909.2023.00175-b-s04,ectc51909.2023.00175,other_category,other,RDL fabrication on mold with solder capture pads
+ectc51909.2023.00274-F1-s02,ectc51909.2023.00274-a-s02,ectc51909.2023.00274,other_category,other,fabricate HEMT devices and metal contacts
+ectc51909.2023.00274-F1-s03,ectc51909.2023.00274-a-s03,ectc51909.2023.00274,other_category,other,pattern Cu wires and Cu bonding pillars by damascene on GaN-IF wafer
+ectc51909.2023.00274-F1-s04,ectc51909.2023.00274-a-s04,ectc51909.2023.00274,other_category,other,damascene Cu pads on Si dielet wafer with recessed dicing street
+ectc51909.2023.00274-F1-s12,ectc51909.2023.00274-a-s12,ectc51909.2023.00274,test,test,UHAST then repeat shear and four-probe tests
+ectc51909.2023.00274-F2-s03,ectc51909.2023.00274-b-s03,ectc51909.2023.00274,other_category,other,fabricate substrate wafer patterns by single damascene
+ectc51909.2023.00274-F2-s14,ectc51909.2023.00274-b-s14,ectc51909.2023.00274,other_category,other,SAC305 solder paste screen printing
+ectc51909.2023.00180-F1-s11,ectc51909.2023.00180-a-s11,ectc51909.2023.00180,test,test,T0 electrical daisy-chain test (31 nets per module)
+ectc51909.2023.00155-F1-s10,ectc51909.2023.00155-a-s10,ectc51909.2023.00155,inspection,inspection,die position (X-ray) and bump height (digital microscope)
+ectc51909.2023.00155-F1-s14,ectc51909.2023.00155-a-s14,ectc51909.2023.00155,inspection,inspection,SAT for voids in molding layer
+ectc51909.2023.00155-F2-s13,ectc51909.2023.00155-a-s28,ectc51909.2023.00155,inspection,inspection,SEM of bump height
+ectc51909.2023.00155-F2-s16,ectc51909.2023.00155-a-s31,ectc51909.2023.00155,inspection,inspection,measure singulated interposer dimensions (digital microscope)
+ectc51909.2023.00155-F3-s06,ectc51909.2023.00155-a-s37,ectc51909.2023.00155,test,test,open/short test at positions 1-5 and X-ray / cross-section check
+ectc51909.2023.00155-F3-s11,ectc51909.2023.00155-a-s42,ectc51909.2023.00155,test,test,open/short test at positions 6-10
+ectc51909.2023.00155-F4-s04,ectc51909.2023.00155-c-s04,ectc51909.2023.00155,inspection,inspection,SAT for voids
+ectc51909.2023.00307-F1-s01,ectc51909.2023.00307-a-s01,ectc51909.2023.00307,other_category,other,frontside Cu-Ni-Au bump formation
+ectc51909.2023.00307-F1-s02,ectc51909.2023.00307-a-s02,ectc51909.2023.00307,other_category,other,wafer edge trimming
+ectc51909.2023.00307-F1-s23,ectc51909.2023.00307-a-s23,ectc51909.2023.00307,other_category,other,backside Cu-Ni-SnAg bump formation
+ectc51909.2023.00307-F1-s24,ectc51909.2023.00307-a-s24,ectc51909.2023.00307,other_category,other,bonding of dicing tape
+estc60143.2024.10712070-F1-s16,estc60143.2024.10712070-a-s08;estc60143.2024.10712070-b-s08;estc60143.2024.10712070-c-s08,estc60143.2024.10712070,inspection,inspection,"optical inspection after Cu seed etch (center, half radius, edge)"
+estc60143.2024.10712070-F1-s20,estc60143.2024.10712070-a-s10;estc60143.2024.10712070-b-s10;estc60143.2024.10712070-c-s10,estc60143.2024.10712070,inspection,inspection,optical inspection after Ti barrier etch
+estc60143.2024.10712070-F1-s21,estc60143.2024.10712070-a-s11;estc60143.2024.10712070-b-s11;estc60143.2024.10712070-c-s11,estc60143.2024.10712070,inspection,inspection,"SEM top/tilted view and cross sections at wafer center, half radius, edge"
+estc60143.2024.10712070-F1-s22,estc60143.2024.10712070-a-s12,estc60143.2024.10712070,inspection,inspection,PFIB cross section of single bump near half radius (undercut)
+estc60143.2024.10712070-F1-s23,estc60143.2024.10712070-b-s12,estc60143.2024.10712070,inspection,inspection,PFIB cross section of single bump near half radius (undercut)
+estc60143.2024.10712070-F1-s24,estc60143.2024.10712070-c-s12,estc60143.2024.10712070,inspection,inspection,PFIB cross section of single bump near half radius (undercut)
+eptc67330.2025.11392132-F1-s13,eptc67330.2025.11392132-a-s07;eptc67330.2025.11392132-b-s07;eptc67330.2025.11392132-c-s07;eptc67330.2025.11392132-d-s07,eptc67330.2025.11392132,inspection,inspection,SAT before charging to verify bonding quality; void samples excluded
+eptc67330.2025.11392132-F1-s14,eptc67330.2025.11392132-a-s08;eptc67330.2025.11392132-b-s08;eptc67330.2025.11392132-c-s08;eptc67330.2025.11392132-d-s08,eptc67330.2025.11392132,other_category,other,evacuate channel via open ports to < 0.13 Pa
+eptc67330.2025.11392132-F1-s15,eptc67330.2025.11392132-a-s09;eptc67330.2025.11392132-b-s09;eptc67330.2025.11392132-c-s09;eptc67330.2025.11392132-d-s09,eptc67330.2025.11392132,other_category,other,charge working fluid by volumetric measurement
+eptc67330.2025.11392132-F1-s16,eptc67330.2025.11392132-a-s10;eptc67330.2025.11392132-b-s10;eptc67330.2025.11392132-c-s10;eptc67330.2025.11392132-d-s10,eptc67330.2025.11392132,other_category,other,seal fill ports
+eptc67330.2025.11392132-F1-s17,eptc67330.2025.11392132-a-s11;eptc67330.2025.11392132-b-s11;eptc67330.2025.11392132-c-s11;eptc67330.2025.11392132-d-s11,eptc67330.2025.11392132,inspection,inspection,SAT after charging to assess fluid charge rate
+icep-iaac64884.2025.11003038-F1-s01,icep-iaac64884.2025.11003038-a-s01;icep-iaac64884.2025.11003038-b-s01;icep-iaac64884.2025.11003038-e-s01;icep-iaac64884.2025.11003038-f-s01,icep-iaac64884.2025.11003038,other_category,other,panel-level substrate fabrication
+icep-iaac64884.2025.11003038-F2-s01,icep-iaac64884.2025.11003038-c-s01;icep-iaac64884.2025.11003038-d-s01;icep-iaac64884.2025.11003038-g-s01;icep-iaac64884.2025.11003038-h-s01,icep-iaac64884.2025.11003038,other_category,other,panel-level substrate fabrication
+icep61562.2024.10535612-F1-s04,icep61562.2024.10535612-a-s04,icep61562.2024.10535612,other_category,other,hold at room temperature
+estc60143.2024.10712129-F4-s07,estc60143.2024.10712129-e-s07,estc60143.2024.10712129,inspection,inspection,optical microscopy and SEM of wiring defects and line width
+estc60143.2024.10712129-F6-s01,estc60143.2024.10712129-g-s01;estc60143.2024.10712129-h-s01,estc60143.2024.10712129,other_category,other,Cu pad formation on Si interposer
+estc60143.2024.10712129-F6-s08,estc60143.2024.10712129-g-s08;estc60143.2024.10712129-h-s08,estc60143.2024.10712129,other_category,other,"pad formation on interposer backside (insulating layer, pad)"
+estc60143.2024.10712129-F6-s09,estc60143.2024.10712129-g-s09;estc60143.2024.10712129-h-s09,estc60143.2024.10712129,other_category,other,bump formation (Cu/SnAg bumps)
+vlsitechnologyandcir46783.2024.10631441-F1-s12,vlsitechnologyandcir46783.2024.10631441-a-s11;vlsitechnologyandcir46783.2024.10631441-b-s11,vlsitechnologyandcir46783.2024.10631441,other_category,other,"continued FEOL NS processing (per refs [3,8])"
+tcpmt.2025.3557745-F1-s01,tcpmt.2025.3557745-a-s01,tcpmt.2025.3557745,other_category,other,drill rectangular through cavities in substrates
+tcpmt.2025.3557745-F1-s02,tcpmt.2025.3557745-a-s02,tcpmt.2025.3557745,other_category,other,laser-cut metal-polymer composite magnetic sheet to fit cavities
+ectc51906.2022.00142-F1-s07,ectc51906.2022.00142-a-s07,ectc51906.2022.00142,test,test,90 deg peel test of Cu from prepreg
+ectc51906.2022.00142-F3-s03,ectc51906.2022.00142-b-s09,ectc51906.2022.00142,inspection,inspection,warpage vs temperature by shadow moire
+ectc51906.2022.00142-F4-s04,ectc51906.2022.00142-c-s04,ectc51906.2022.00142,inspection,inspection,warpage vs temperature by shadow moire
+ectc51906.2022.00142-F5-s14,ectc51906.2022.00142-d-s14,ectc51906.2022.00142,inspection,inspection,"optical microscope, SEM or FIB inspection and inter-line insulation resistance after each process"
+ectc51906.2022.00142-F5-s18,ectc51906.2022.00142-d-s18,ectc51906.2022.00142,other_category,other,cover Cu lines with insulating resin
+ectc51906.2022.00142-F5-s19,ectc51906.2022.00142-d-s19,ectc51906.2022.00142,preconditioning,preconditioning,temperature-humidity soak
+ectc51906.2022.00142-F5-s21,ectc51906.2022.00142-d-s21,ectc51906.2022.00142,test,test,HAST of comb pattern
+ectc51906.2022.00142-F6-s04,ectc51906.2022.00142-e-s04,ectc51906.2022.00142,other_category,other,cover Cu lines with insulating resin
+ectc51906.2022.00142-F6-s05,ectc51906.2022.00142-e-s05,ectc51906.2022.00142,preconditioning,preconditioning,temperature-humidity soak
+ectc51906.2022.00142-F6-s07,ectc51906.2022.00142-e-s07,ectc51906.2022.00142,test,test,HAST of comb pattern
+ectc51906.2022.00072-F1-s01,ectc51906.2022.00072-a-s01,ectc51906.2022.00072,other_category,other,PIC fabrication in 90WG 300 mm platform
+ectc51906.2022.00072-F1-s03,ectc51906.2022.00072-a-s03,ectc51906.2022.00072,inspection,inspection,In-line monitoring of Vgroove width to process control target
+ectc51906.2022.00072-F3-s01,ectc51906.2022.00072-a-s12,ectc51906.2022.00072,test,test,"IL on 4 hairpin loopbacks per module, TE and TM"
+ectc51906.2022.00072-F4-s02,ectc51906.2022.00072-a-s14,ectc51906.2022.00072,test,test,"IL vs Vgroove width, TE and TM"
+ectc51906.2022.00072-F5-s01,ectc51906.2022.00072-b-s01;ectc51906.2022.00072-c-s01,ectc51906.2022.00072,test,test,Double cantilever beam fracture test
+ectc51906.2022.00072-F6-s01,ectc51906.2022.00072-d-s01,ectc51906.2022.00072,test,test,Ball-on-ring flexural test to fracture
+ectc51906.2022.00180-F2-s12,ectc51906.2022.00180-a-s17,ectc51906.2022.00180,inspection,inspection,x-ray and cross-section of assembled package
+ectc51906.2022.00180-F3-s19,ectc51906.2022.00180-b-s19,ectc51906.2022.00180,inspection,inspection,x-ray after die attach and cross-section
+iedm19573.2019.8993637-F2-s01,iedm19573.2019.8993637-a-t01,iedm19573.2019.8993637,other_category,other,insert TSV module at upper-layer patterning of 22FFL stack
+iedm19573.2019.8993637-F2-s08,iedm19573.2019.8993637-a-t08,iedm19573.2019.8993637,other_category,other,resume standard interconnect flow; redundant vias land on TSV
+iedm19573.2019.8993637-F3-s01,iedm19573.2019.8993637-a-r01,iedm19573.2019.8993637,test,test,fully patterned wafer tested
+iedm19573.2019.8993637-F3-s07,iedm19573.2019.8993637-a-r07,iedm19573.2019.8993637,other_category,other,"Cu/solder bump by standard bump processing, aligned to exposed TSV"
+itherm45881.2020.9190542-F1-s04,itherm45881.2020.9190542-a-s04,itherm45881.2020.9190542,inspection,inspection,"TIM coverage by scanning acoustic tomography (T-scan, T-SAM)"
+itherm45881.2020.9190542-F1-s06,itherm45881.2020.9190542-a-s06,itherm45881.2020.9190542,test,test,ThetaJC junction-to-case test per JEDEC [5] (JESD51-1)
+ectc.2016.201-F1-s01,ectc.2016.201-a-s01,ectc.2016.201,other_category,other,bridge wafer fab back-end process with multi-layer thick BEOL metals
+ectc.2016.201-F2-s01,ectc.2016.201-a-s04,ectc.2016.201,other_category,other,traditional organic build-up until final build-up layer
+ectc.2016.201-F2-s02,ectc.2016.201-a-s05,ectc.2016.201,other_category,other,bridge cavity formation
+ectc.2016.201-F2-s05,ectc.2016.201-a-s08,ectc.2016.201,other_category,other,fine via drilling in bridge region and coarse via drilling elsewhere
+ectc.2016.201-F2-s07,ectc.2016.201-a-s10,ectc.2016.201,other_category,other,mixed CD / mixed pitch bump formation with bump height control
+ectc.2016.201-F3-s01,ectc.2016.201-c-s01,ectc.2016.201,test,test,GSSG RF probing on surface pads both sides of bridge; 4-port S-parameters with network analyzer
+ectc51909.2023.00009-F1-s01,ectc51909.2023.00009-a-s01,ectc51909.2023.00009,other_category,other,Implantation steps for MRR PN/PIN junctions and access paths
+ectc51909.2023.00009-F1-s04,ectc51909.2023.00009-a-s04,ectc51909.2023.00009,other_category,other,Additional implantation on MRR slab
+ectc51909.2023.00009-F5-s04,ectc51909.2023.00009-a-s50,ectc51909.2023.00009,inspection,inspection,Residual Si above TSV monitored by IR interferometry
+ectc51909.2023.00298-F2-s05,ectc51909.2023.00298-a-s17,ectc51909.2023.00298,other_category,other,Pre-exposure bake in convection oven
+ectc51909.2023.00298-F2-s07,ectc51909.2023.00298-a-s19,ectc51909.2023.00298,other_category,other,Post-exposure bake in convection oven
+ectc51909.2023.00298-F3-s01,ectc51909.2023.00298-a-s23,ectc51909.2023.00298,other_category,other,Photoresist applied before dicing to protect 2 um lines from dicing tape
+ectc51909.2023.00298-F4-s01,ectc51909.2023.00298-a-s25,ectc51909.2023.00298,inspection,inspection,Laser confocal microscope / 3D step profiler imaging at multiple stages; SEM; cross-sections
+iwlpc52010.2020.9375887-F1-s01,iwlpc52010.2020.9375887-a-s01,iwlpc52010.2020.9375887,other_category,other,incoming silicon device wafer from foundry
+iwlpc52010.2020.9375887-F1-s02,iwlpc52010.2020.9375887-a-s02,iwlpc52010.2020.9375887,other_category,other,Cu stud buildup on wafer (wafer fab dielectric and Cu stud interconnect)
+iwlpc52010.2020.9375887-F1-s07,iwlpc52010.2020.9375887-a-s07,iwlpc52010.2020.9375887,inspection,inspection,CSAM of molded panel for mold voids
+iwlpc52010.2020.9375887-F1-s11,iwlpc52010.2020.9375887-a-s11,iwlpc52010.2020.9375887,other_category,other,RDL formation (Cu routing)
+iwlpc52010.2020.9375887-F1-s14,iwlpc52010.2020.9375887-a-s14,iwlpc52010.2020.9375887,other_category,other,UBM formation
+iwlpc52010.2020.9375887-F1-s17,iwlpc52010.2020.9375887-a-s17,iwlpc52010.2020.9375887,test,test,probe testing of segments
+iwlpc52010.2020.9375887-F1-s20,iwlpc52010.2020.9375887-a-s20,iwlpc52010.2020.9375887,other_category,other,backside epoxy
+iedm19573.2019.8993659-F1-s03,iedm19573.2019.8993659-a-s03,iedm19573.2019.8993659,inspection,inspection,"side view, cross section and top-view X-ray"
+ectc.2013.6575597-F1-s06,ectc.2013.6575597-a-s06,ectc.2013.6575597,other_category,other,"front-side multilayer interconnect: 3 Cu damascene layers + 1 Al RDL, optional MIM decap"
+ectc.2013.6575597-F1-s07,ectc.2013.6575597-a-s07,ectc.2013.6575597,other_category,other,"uBump formation on interposer, 40 um pitch"
+ectc.2013.6575597-F1-s08,ectc.2013.6575597-a-s08,ectc.2013.6575597,other_category,other,uBump formation on 28nm and 40nm logic wafers
+ectc.2013.6575597-F2-s01,ectc.2013.6575597-a-s16,ectc.2013.6575597,preconditioning,preconditioning,Level-3 preconditioning before all component reliability tests
+ectc51529.2024.00227-F1-s13,ectc51529.2024.00227-a-s13,ectc51529.2024.00227,inspection,inspection,"backside inspection of die-to-carrier contact, die warpage and D2C overlay measurement"
+ectc51529.2024.00227-F1-s15,ectc51529.2024.00227-a-s15,ectc51529.2024.00227,inspection,inspection,inspection and D2C overlay measurement after strip
+ectc51529.2024.00227-F1-s19,ectc51529.2024.00227-a-s19,ectc51529.2024.00227,inspection,inspection,scanning acoustic microscopy (SAM) of bonded dies
+ectc51529.2024.00227-F2-s14,ectc51529.2024.00227-b-s14,ectc51529.2024.00227,inspection,inspection,"backside inspection of die-to-carrier contact, die warpage and D2C overlay measurement"
+ectc51529.2024.00227-F2-s16,ectc51529.2024.00227-b-s16,ectc51529.2024.00227,inspection,inspection,inspection and D2C overlay measurement after strip
+ectc51529.2024.00227-F2-s20,ectc51529.2024.00227-b-s20,ectc51529.2024.00227,inspection,inspection,scanning acoustic microscopy (SAM) of bonded dies
+ectc51529.2024.00227-F2-s21,ectc51529.2024.00227-b-s21,ectc51529.2024.00227,test,test,evanescent coupling loss measurement of all transferred dies over full wafer
+ectc51906.2022.00176-F1-s01,ectc51906.2022.00176-a-s01,ectc51906.2022.00176,other_category,other,BEOL metal stack processing on top die (TD) wafer and bottom wafer (BW)
+ectc51906.2022.00176-F1-s06,ectc51906.2022.00176-a-s06,ectc51906.2022.00176,other_category,other,pad exposure
+ectc51906.2022.00176-F1-s07,ectc51906.2022.00176-a-s07,ectc51906.2022.00176,other_category,other,fiducial mark fabrication on TD and BW for bonding accuracy
+ectc51906.2022.00176-F1-s11,ectc51906.2022.00176-a-s11,ectc51906.2022.00176,test,test,wafer acceptance test (WAT) on daisy chains and Kelvin structures
+ectc51529.2024.00088-F1-s06,ectc51529.2024.00088-a-s06,ectc51529.2024.00088,inspection,inspection,measure DFR and ABF etch amounts before DFR removal
+ectc51529.2024.00088-F1-s08,ectc51529.2024.00088-a-s08,ectc51529.2024.00088,inspection,inspection,FIB/SEM cross-section of vias and trenches in ABF
+ectc32862.2020.00185-F1-s08,ectc32862.2020.00185-a-s08,ectc32862.2020.00185,inspection,inspection,"die shift measurement from two diagonal alignment marks per die, one quadrant"
+ectc32862.2020.00185-F1-s13,ectc32862.2020.00185-a-s13,ectc32862.2020.00185,other_category,other,degas before PVD
+ectc51687.2025.00233-F1-s03,ectc51687.2025.00233-a-s03,ectc51687.2025.00233,inspection,inspection,cross-section SEM of filled TGVs
+ectc51687.2025.00233-F2-s01,ectc51687.2025.00233-b-s01,ectc51687.2025.00233,structure_only,tsv_tgv_formation,TGV glass substrate with conformal metal-lined TGVs
+ectc51687.2025.00233-F2-s05,ectc51687.2025.00233-b-s05,ectc51687.2025.00233,other_category,other,PET film removal
+eptc53413.2021.9663896-F1-s03,eptc53413.2021.9663896-a-s03,eptc53413.2021.9663896,inspection,inspection,post-mold die position measurement by optical scanner on Cu studs
+eptc53413.2021.9663896-F2-s12,eptc53413.2021.9663896-b-s12,eptc53413.2021.9663896,inspection,inspection,"die location measurement (x, y, theta) by high-speed optical scanner"
+eptc53413.2021.9663896-F2-s13,eptc53413.2021.9663896-b-s13,eptc53413.2021.9663896,other_category,other,Adaptive Patterning: unit-specific via/RDL design per panel from measured die positions
+iedm45625.2022.10019499-F1-s01,iedm45625.2022.10019499-a-s01,iedm45625.2022.10019499,other_category,other,metal stack redefinition above final metal: much smaller via sizes and overlays
+iedm45625.2022.10019499-F1-s03,iedm45625.2022.10019499-a-s03,iedm45625.2022.10019499,other_category,other,hybrid bonding layer (damascene) with reduced thickness for smaller pads
+iedm45625.2022.10019499-F1-s05,iedm45625.2022.10019499-a-s05,iedm45625.2022.10019499,inspection,inspection,AFM post-CMP topography of HB pads (2D and 1D profile)
+iedm45625.2022.10019499-F2-s05,iedm45625.2022.10019499-b-s05,iedm45625.2022.10019499,other_category,other,form hybrid bonding interface (HBI) layer over the structure
+iedm45625.2022.10019499-F3-s03,iedm45625.2022.10019499-c-s03,iedm45625.2022.10019499,inspection,inspection,optical microscopy and cross-pol imaging of chiplet corner region
+ectc51906.2022.00061-F1-s10,ectc51906.2022.00061-a-s10,ectc51906.2022.00061,other_category,other,air cooling to room temperature
+ectc51906.2022.00061-F1-s11,ectc51906.2022.00061-a-s11,ectc51906.2022.00061,inspection,inspection,"ion-milled cross-section FE-SEM (BEI), FIB ion imaging, EDS mapping/line scan/point spectra"
+ectc51906.2022.00061-F1-s12,ectc51906.2022.00061-a-s12,ectc51906.2022.00061,test,test,chip-scale tensile test with universal testing machine (UTM)
+ectc51906.2022.00218-F1-s01,ectc51906.2022.00218-a-s01,ectc51906.2022.00218,other_category,other,"form 4 layers of ETR on Si wafer (see ETR flow, TV b)"
+ectc51906.2022.00218-F1-s17,ectc51906.2022.00218-a-s17,ectc51906.2022.00218,inspection,inspection,"cross-section, X-ray and SAT inspection of bump joints"
+ectc51906.2022.00218-F2-s08,ectc51906.2022.00218-b-s08,ectc51906.2022.00218,other_category,other,"next layer (repeat); stacking demonstrated to 4 layers, capability up to 6"
+ectc51906.2022.00218-F3-s01,ectc51906.2022.00218-c-s01,ectc51906.2022.00218,other_category,other,fabricate 2 layers of ETR with comb circuits
+ectc51906.2022.00218-F4-s01,ectc51906.2022.00218-d-s01,ectc51906.2022.00218,other_category,other,fabricate 2 layers of ETR with comb circuits
+eptc67330.2025.11392108-F1-s01,eptc67330.2025.11392108-a-s01,eptc67330.2025.11392108,other_category,other,"A substrate making (symmetric build-up, panel format)"
+eptc67330.2025.11392108-F1-s02,eptc67330.2025.11392108-a-s02,eptc67330.2025.11392108,other_category,other,"B substrate making (symmetric build-up, panel format)"
+eptc67330.2025.11392108-F1-s07,eptc67330.2025.11392108-a-s07,eptc67330.2025.11392108,other_category,other,solder mask for AB substrates
+eptc67330.2025.11392108-F1-s08,eptc67330.2025.11392108-a-s08,eptc67330.2025.11392108,other_category,other,cavity making on B substrate for each AiP unit
+eptc67330.2025.11392108-F2-s07,eptc67330.2025.11392108-a-s18,eptc67330.2025.11392108,inspection,inspection,X-ray and cross-section inspection
+ectc51909.2023.00174-F1-s05,ectc51909.2023.00174-a-s05,ectc51909.2023.00174,other_category,other,frontside RDL layer fabrication (u-bump to TIV and LSI)
+ectc51909.2023.00174-F1-s09,ectc51909.2023.00174-a-s09,ectc51909.2023.00174,other_category,other,backside RDL layer fabrication
+ectc51909.2023.00174-F1-s10,ectc51909.2023.00174-a-s10,ectc51909.2023.00174,other_category,other,C4 bump formation
+ectc51909.2023.00174-F4-s06,ectc51909.2023.00174-d-s04;ectc51909.2023.00174-e-s04,ectc51909.2023.00174,other_category,other,Cu via on LSI top metal
+ectc51906.2022.00038-F1-s06,ectc51906.2022.00038-a-s06,ectc51906.2022.00038,inspection,inspection,in-situ optical microscopy of hydrogen bubble formation and motion
+ectc51906.2022.00038-F1-s07,ectc51906.2022.00038-a-s07,ectc51906.2022.00038,inspection,inspection,2D and 3D X-ray microscopy of Cu-Cu bonds
+ectc51906.2022.00038-F1-s09,ectc51906.2022.00038-a-s09,ectc51906.2022.00038,inspection,inspection,ion-milling or FIB cross-section; SEM in SEI and BEI modes
+ectc51906.2022.00038-F1-s10,ectc51906.2022.00038-a-s10,ectc51906.2022.00038,test,test,tensile test of as-bonded sample and fracture-surface SEM
+ectc51906.2022.00038-F2-s03,ectc51906.2022.00038-b-s03,ectc51906.2022.00038,inspection,inspection,cross-section SEM of bonded interface
+ectc51906.2022.00038-F3-s02,ectc51906.2022.00038-c-s02,ectc51906.2022.00038,inspection,inspection,cross-section SEM
+tcpmt.2023.3266666-F1-s02,tcpmt.2023.3266666-a-s02,tcpmt.2023.3266666,other_category,other,glass manifold layers polished flat
+tcpmt.2023.3266666-F1-s03,tcpmt.2023.3266666-a-s03,tcpmt.2023.3266666,other_category,other,glass manifold layers patterned by water jet cutting
+tcpmt.2023.3266666-F2-s01,tcpmt.2023.3266666-a-s09,tcpmt.2023.3266666,test,test,four-point calibration of RTD temperature sensors vs inlet water temperature
+ectc51906.2022.00135-F1-s01,ectc51906.2022.00135-a-s01,ectc51906.2022.00135,other_category,other,"build RDL stack directly on glass panel by photolithographic methods, starting with UBM, then RDLs with interlayer dielectrics"
+ectc51906.2022.00135-F1-s10,ectc51906.2022.00135-a-s10,ectc51906.2022.00135,other_category,other,repeat to M4 and form die-side UBM for flip chip
+ectc51906.2022.00135-F2-s01,ectc51906.2022.00135-c-s01,ectc51906.2022.00135,other_category,other,pre-assembly and reconstitution process (300 mm form factor)
+ectc51906.2022.00135-F2-s03,ectc51906.2022.00135-c-s03,ectc51906.2022.00135,other_category,other,multiple redistribution layer processing as required (alignment per wafer/sub-panel)
+ectc51906.2022.00135-F2-s05,ectc51906.2022.00135-c-s05,ectc51906.2022.00135,test,test,"sub-panel probe, laser mark and singulation"
+ectc51906.2022.00135-F3-s02,ectc51906.2022.00135-c-s07,ectc51906.2022.00135,other_category,other,multiple redistribution layer processing as required
+ectc51906.2022.00135-F3-s04,ectc51906.2022.00135-c-s09,ectc51906.2022.00135,test,test,"wafer probe, laser mark and singulation"
+ectc51687.2025.00062-F1-s01,ectc51687.2025.00062-a-s01,ectc51687.2025.00062,other_category,other,form passivation (PSV) and RDL layer on glass carrier wafer
+ectc51687.2025.00062-F1-s02,ectc51687.2025.00062-a-s02,ectc51687.2025.00062,other_category,other,create opening in PSV and RDL for grating coupler access
+ectc51687.2025.00062-F1-s03,ectc51687.2025.00062-a-s03,ectc51687.2025.00062,other_category,other,form PSV dam to protect FAU opening during bridge die attach
+ectc51687.2025.00062-F1-s04,ectc51687.2025.00062-a-s04,ectc51687.2025.00062,other_category,other,microbump (uPad) formation on PSV
+ectc51687.2025.00062-F1-s05,ectc51687.2025.00062-a-s05,ectc51687.2025.00062,other_category,other,tall Cu pillar formation
+ectc51687.2025.00062-F1-s06,ectc51687.2025.00062-a-s06,ectc51687.2025.00062,inspection,inspection,metrology scans
+ectc51687.2025.00062-F1-s12,ectc51687.2025.00062-a-s12,ectc51687.2025.00062,other_category,other,form bottom PSV and RDL layers on exposed mold
+ectc51687.2025.00062-F1-s13,ectc51687.2025.00062-a-s13,ectc51687.2025.00062,other_category,other,C4 interconnect formation (bumping)
+ectc51687.2025.00062-F1-s16,ectc51687.2025.00062-a-s16,ectc51687.2025.00062,other_category,other,microbump formation on top side
+ectc51906.2022.00140-F1-s11,ectc51906.2022.00140-a-s11,ectc51906.2022.00140,inspection,inspection,automatic visual inspection (AVI) of fine patterns
+ectc51906.2022.00140-F1-s15,ectc51906.2022.00140-a-s15,ectc51906.2022.00140,other_category,other,final backend processing
+ectc51846.2026.00389-F1-s12,ectc51846.2026.00389-a-s11;ectc51846.2026.00389-b-s11,ectc51846.2026.00389,inspection,inspection,dimensional inspection by optical profilometry
+ectc51909.2023.00190-F1-s09,ectc51909.2023.00190-a-s09,ectc51909.2023.00190,other_category,other,"edge trim of bonded top wafer, stopped a few microns above the bonding interface"
+ectc51909.2023.00190-F1-s12,ectc51909.2023.00190-a-s12,ectc51909.2023.00190,test,test,electrical test of daisy chains
+ectc51909.2023.00190-F2-s04,ectc51909.2023.00190-b-s04,ectc51909.2023.00190,test,test,bond strength by Maszara blade test
+icep55381.2022.9795565-F3-s01,icep55381.2022.9795565-c-s01,icep55381.2022.9795565,other_category,other,form damascene metallization layers on 300 mm Si top wafer
+icep55381.2022.9795565-F3-s03,icep55381.2022.9795565-c-s03,icep55381.2022.9795565,other_category,other,form damascene metallization layers and Al probing pads on bottom wafer
+icep55381.2022.9795565-F3-s09,icep55381.2022.9795565-c-s09,icep55381.2022.9795565,test,test,electrical test of single-bump connections
+ectc51909.2023.00053-F1-s12,ectc51909.2023.00053-a-s12,ectc51909.2023.00053,inspection,inspection,die location measurement (DMS) of selected Cu studs per die
+ectc51909.2023.00053-F1-s13,ectc51909.2023.00053-a-s13,ectc51909.2023.00053,other_category,other,Adaptive Patterning generates unique optimized GDSII file per wafer
+ectc51909.2023.00053-F1-s25,ectc51909.2023.00053-a-s25,ectc51909.2023.00053,test,test,wafer- or panel-based final electrical test
+ectc51909.2023.00053-F1-s28,ectc51909.2023.00053-a-s28,ectc51909.2023.00053,other_category,other,pack in tape and reel or trays
+eptc56328.2022.10013262-F1-s03,eptc56328.2022.10013262-a-s03,eptc56328.2022.10013262,other_category,other,coversheet removal
+eptc56328.2022.10013262-F2-s01,eptc56328.2022.10013262-e-s01,eptc56328.2022.10013262,other_category,other,customer device wafer in (200 or 300 mm)
+eptc56328.2022.10013262-F2-s02,eptc56328.2022.10013262-e-s02,eptc56328.2022.10013262,other_category,other,panelization into 600 mm x 600 mm panel
+eptc56328.2022.10013262-F2-s03,eptc56328.2022.10013262-e-s03,eptc56328.2022.10013262,other_category,other,fan-out (RDL build-up with LDI and AP) on full panel
+eptc56328.2022.10013262-F2-s05,eptc56328.2022.10013262-e-s05,eptc56328.2022.10013262,test,test,final test and BE2 at 300 mm
+ectc51687.2025.00158-F1-s07,ectc51687.2025.00158-a-s07,ectc51687.2025.00158,other_category,other,PI formation
+ectc51687.2025.00158-F1-s08,ectc51687.2025.00158-a-s08,ectc51687.2025.00158,other_category,other,C4 bumping
+ectc51687.2025.00158-F2-s01,ectc51687.2025.00158-a-s14,ectc51687.2025.00158,other_category,other,form Cu pillars on wafer carrier
+ectc51687.2025.00158-F2-s11,ectc51687.2025.00158-a-s24,ectc51687.2025.00158,other_category,other,C4 bumping
+ectc51846.2026.00375-F1-s06,ectc51846.2026.00375-a-s06,ectc51846.2026.00375,other_category,other,build up RDL wiring layers on the coil-unit array (3-2-3 overall)
+ectc51846.2026.00375-F1-s07,ectc51846.2026.00375-c-s06,ectc51846.2026.00375,other_category,other,form termination electrodes for characterization
+ectc51846.2026.00375-F1-s08,ectc51846.2026.00375-a-s07,ectc51846.2026.00375,other_category,other,form dedicated GS-probe measurement pads near board center
+ectc51687.2025.00012-F1-s05,ectc51687.2025.00012-a-s05,ectc51687.2025.00012,test,test,assembly health monitor test
+ectc51687.2025.00012-F1-s08,ectc51687.2025.00012-a-s08,ectc51687.2025.00012,test,test,end-of-line loopback IL test (IEC-61300-3-4)
+ectc51846.2026.00140-F2-s07,ectc51846.2026.00140-a-s13,ectc51846.2026.00140,other_category,other,repeat B-O until final build-up (Fig. 3 P)
+iedm45741.2023.10413829-F1-s01,iedm45741.2023.10413829-a-s01,iedm45741.2023.10413829,other_category,other,PMD (top and bottom wafers)
+iedm45741.2023.10413829-F1-s03,iedm45741.2023.10413829-a-s03,iedm45741.2023.10413829,other_category,other,Metal1 (top and bottom)
+iedm45741.2023.10413829-F1-s04,iedm45741.2023.10413829-a-s04,iedm45741.2023.10413829,other_category,other,"Via (Via1, top and bottom)"
+iedm45741.2023.10413829-F1-s11,iedm45741.2023.10413829-a-s11,iedm45741.2023.10413829,other_category,other,backside processing
+iedm45741.2023.10413829-F1-s12,iedm45741.2023.10413829-a-s12,iedm45741.2023.10413829,test,test,E-test (Kelvin and daisy-chain resistors)
+icep58572.2023.10129695-F2-s03,icep58572.2023.10129695-c-s03,icep58572.2023.10129695,preconditioning,preconditioning,preconditioning before B-HAST
+ectc51846.2026.00016-F1-s03,ectc51846.2026.00016-a-s03,ectc51846.2026.00016,other_category,other,form UBM
+ectc51846.2026.00016-F1-s04,ectc51846.2026.00016-a-s04,ectc51846.2026.00016,other_category,other,form through-mold interconnects (TMIs)
+ectc51846.2026.00016-F1-s08,ectc51846.2026.00016-a-s08,ectc51846.2026.00016,other_category,other,form bottom-side RDL (4 layers)
+ectc51846.2026.00016-F1-s14,ectc51846.2026.00016-a-s14,ectc51846.2026.00016,other_category,other,expose preserved PIC edge optical I/O regions
+ectc51909.2023.00179-F1-s03,ectc51909.2023.00179-a-s03,ectc51909.2023.00179,other_category,other,back side processing (backside pads)
+ectc51909.2023.00179-F1-s07,ectc51909.2023.00179-a-s07,ectc51909.2023.00179,other_category,other,remounting of diced dies
+ectc51909.2023.00151-F1-s01,ectc51909.2023.00151-a-s01,ectc51909.2023.00151,other_category,other,flux dipping of core chips
+tcpmt.2025.3599484-F1-s02,tcpmt.2025.3599484-a-s02,tcpmt.2025.3599484,other_category,other,soft bake on hotplate
+tcpmt.2025.3599484-F3-s01,tcpmt.2025.3599484-c-s01,tcpmt.2025.3599484,other_category,other,cap ETR top surface with Ti using one additional mask
+ectc51909.2023.00266-F1-s01,ectc51909.2023.00266-a-s01,ectc51909.2023.00266,other_category,other,create Cu studs on incoming device wafers
+ectc51909.2023.00266-F1-s07,ectc51909.2023.00266-a-s07,ectc51909.2023.00266,other_category,other,build-up of 5-layer RDL with 6 passivation layers and UBM using Adaptive Patterning (WLCSP-like thin film)
+ectc51909.2023.00266-F1-s13,ectc51909.2023.00266-a-s13,ectc51909.2023.00266,other_category,other,detape
+ectc51687.2025.00051-F1-s01,ectc51687.2025.00051-a-s01,ectc51687.2025.00051,other_category,other,HDI substrate build-up to cavity layer
+ectc51687.2025.00051-F1-s06,ectc51687.2025.00051-a-s06,ectc51687.2025.00051,other_category,other,surface layer and first level interconnect formation
+ectc51687.2025.00051-F2-s01,ectc51687.2025.00051-b-s01,ectc51687.2025.00051,other_category,other,HDI substrate build-up to cavity layer
+ectc51687.2025.00051-F2-s04,ectc51687.2025.00051-b-s04,ectc51687.2025.00051,other_category,other,surface layer and first level interconnect formation
+eptc59621.2023.10457670-F1-s06,eptc59621.2023.10457670-a-s06,eptc59621.2023.10457670,other_category,other,fabricate 5 layers of Cu dual-damascene BEOL
+eptc59621.2023.10457670-F1-s14,eptc59621.2023.10457670-a-s14,eptc59621.2023.10457670,other_category,other,fabricate 2 layers of 3 um Cu RDL on the backside with polymer-based passivation
+ectc51909.2023.00252-F1-s01,ectc51909.2023.00252-a-s01,ectc51909.2023.00252,other_category,other,incoming LNA device wafer on SOI substrate
+eptc67330.2025.11392593-F1-s01,eptc67330.2025.11392593-a-s01,eptc67330.2025.11392593,other_category,other,prepare (first) carrier
+eptc67330.2025.11392593-F1-s07,eptc67330.2025.11392593-a-s07,eptc67330.2025.11392593,inspection,inspection,SAT inspection of voids in DAF under bridge die
+eptc67330.2025.11392593-F1-s10,eptc67330.2025.11392593-a-s10,eptc67330.2025.11392593,other_category,other,form two metal layers and two passivation layers on ground mold surface
+eptc67330.2025.11392593-F1-s11,eptc67330.2025.11392593-a-s11,eptc67330.2025.11392593,other_category,other,fabricate micro bumps at topmost level
+eptc67330.2025.11392593-F1-s13,eptc67330.2025.11392593-a-s13,eptc67330.2025.11392593,inspection,inspection,cross-section of joints for wetting and voids
+eptc67330.2025.11392593-F1-s15,eptc67330.2025.11392593-a-s15,eptc67330.2025.11392593,inspection,inspection,SAT of MUF fill
+eptc67330.2025.11392593-F1-s18,eptc67330.2025.11392593-a-s18,eptc67330.2025.11392593,other_category,other,form C4 bumps on interposer bottom side
+eptc67330.2025.11392593-F2-s01,eptc67330.2025.11392593-b-s01,eptc67330.2025.11392593,other_category,other,form RDLs on 600x600 mm panel
+eptc67330.2025.11392593-F2-s02,eptc67330.2025.11392593-b-s02,eptc67330.2025.11392593,other_category,other,form Cu posts on panel
+eptc67330.2025.11392593-F2-s08,eptc67330.2025.11392593-b-s08,eptc67330.2025.11392593,other_category,other,form C4 bumps on interposer
+ectc51909.2023.00048-F1-s01,ectc51909.2023.00048-a-s01,ectc51909.2023.00048,other_category,other,fabricate Si photonics (PIC) wafer in low-loss SiPh process
+ectc51909.2023.00048-F1-s07,ectc51909.2023.00048-a-s07,ectc51909.2023.00048,inspection,inspection,SAM void inspection before anneal
+ectc51909.2023.00048-F1-s09,ectc51909.2023.00048-a-s09,ectc51909.2023.00048,inspection,inspection,SAM void inspection after anneal
+ectc51909.2023.00048-F1-s13,ectc51909.2023.00048-a-s13,ectc51909.2023.00048,other_category,other,dielectric stress relief process (shifts bow positive)
+ectc51909.2023.00048-F1-s16,ectc51909.2023.00048-a-s16,ectc51909.2023.00048,other_category,other,form subsequent BEOL wiring levels (BM)
+ectc51909.2023.00048-F1-s19,ectc51909.2023.00048-a-s19,ectc51909.2023.00048,other_category,other,form damascene Cu RDL
+ectc51909.2023.00048-F1-s23,ectc51909.2023.00048-a-s23,ectc51909.2023.00048,other_category,other,remove bulk Si from top surface to reveal BEOL
+ectc51909.2023.00048-F2-s10,ectc51909.2023.00048-a-s34,ectc51909.2023.00048,test,test,test
+ectc51687.2025.00131-F1-s04,ectc51687.2025.00131-a-s04,ectc51687.2025.00131,other_category,other,C4 bump formation (conventional CoWoS)
+ectc51529.2024.00207-F1-s13,ectc51529.2024.00207-a-s13,ectc51529.2024.00207,test,test,final test (FT)
+ectc51529.2024.00207-F2-s01,ectc51529.2024.00207-a-s14,ectc51529.2024.00207,other_category,other,pre-ball and flux clean
+ectc51529.2024.00207-F2-s10,ectc51529.2024.00207-a-s23,ectc51529.2024.00207,other_category,other,laser marking / laser ablation / ball placement / reflow / singulation / FT
+ectc51909.2023.00008-F1-s01,ectc51909.2023.00008-a-s01,ectc51909.2023.00008,other_category,other,fabricate bond pad via (BPV) and bond pad metal (BPM) by BEOL dual damascene process
+ectc51909.2023.00008-F1-s03,ectc51909.2023.00008-a-s03,ectc51909.2023.00008,inspection,inspection,white light interferometry topography scan across reticle
+ectc51909.2023.00008-F1-s06,ectc51909.2023.00008-a-s06,ectc51909.2023.00008,inspection,inspection,CSAM scan of bonded wafer pair
+ectc51909.2023.00008-F1-s07,ectc51909.2023.00008-a-s07,ectc51909.2023.00008,test,test,wafer acceptance test of daisy chains and ramped-voltage leakage
+ectc51906.2022.00244-F1-s03,ectc51906.2022.00244-a-s03;ectc51906.2022.00244-b-s03;ectc51906.2022.00244-c-s03,ectc51906.2022.00244,other_category,other,STI densified oxide in which BPR are embedded
+ectc51906.2022.00244-F1-s40,ectc51906.2022.00244-a-s22,ectc51906.2022.00244,other_category,other,BSM1 backside metal by conventional Cu single damascene
+ectc51906.2022.00244-F1-s41,ectc51906.2022.00244-b-s22,ectc51906.2022.00244,other_category,other,BSM1 backside metal by conventional Cu single damascene
+ectc51906.2022.00244-F1-s43,ectc51906.2022.00244-a-s23,ectc51906.2022.00244,test,test,"DC resistance: n-TSV Kelvin (4-point), BPR by Kelvin configurations 1 and 2, interwoven n-TSV chains"
+ectc51906.2022.00244-F1-s44,ectc51906.2022.00244-b-s23,ectc51906.2022.00244,test,test,"DC resistance: n-TSV Kelvin (4-point), BPR by Kelvin configurations 1 and 2, interwoven n-TSV chains"
+ectc51906.2022.00244-F1-s45,ectc51906.2022.00244-c-s23,ectc51906.2022.00244,other_category,other,BSM1 backside metal by conventional Cu single damascene
+ectc51906.2022.00244-F1-s46,ectc51906.2022.00244-c-s24,ectc51906.2022.00244,test,test,"DC resistance: n-TSV Kelvin (4-point), BPR by Kelvin configurations 1 and 2, interwoven n-TSV chains"
+ectc51906.2022.00303-F1-s01,ectc51906.2022.00303-c-s01,ectc51906.2022.00303,structure_only,other,Si-IF design and fabrication: protruding Cu pillars in die region; TPV pads ready for plating or UBM
+ectc51906.2022.00303-F1-s01,ectc51906.2022.00303-c-s01,ectc51906.2022.00303,other_category,other,Si-IF design and fabrication: protruding Cu pillars in die region; TPV pads ready for plating or UBM
+ectc51906.2022.00303-F2-s08,ectc51906.2022.00303-d-s08,ectc51906.2022.00303,inspection,inspection,optical and SEM cross-section along two cuts
+ectc51906.2022.00179-F1-s04,ectc51906.2022.00179-a-s04,ectc51906.2022.00179,test,test,"electrical test: daisy chains, single-bump Kelvin, EM structures"
+ectc51906.2022.00179-F3-s02,ectc51906.2022.00179-c-s02,ectc51906.2022.00179,other_category,other,FS M1 and VIA1 standard Cu damascene
+ectc51906.2022.00179-F3-s05,ectc51906.2022.00179-c-s05,ectc51906.2022.00179,inspection,inspection,SAM inspection for voiding between wafers
+ectc51906.2022.00179-F3-s22,ectc51906.2022.00179-c-s22,ectc51906.2022.00179,inspection,inspection,"in-line FIB after VIA1B CMP, wafer center and edge"
+ectc51906.2022.00309-F1-s09,ectc51906.2022.00309-a-s09,ectc51906.2022.00309,other_category,other,repeat SAP and photo-dielectric to build 3 RDL layers
+ectc51906.2022.00309-F1-s11,ectc51906.2022.00309-a-s11,ectc51906.2022.00309,inspection,inspection,"AOI of fine line, via and metal pad after each process; electrical (RDL leakage, sheet resistance, via chain)"
+ectc51906.2022.00309-F2-s01,ectc51906.2022.00309-a-s12,ectc51906.2022.00309,other_category,other,hybrid micro bump formation on Si top dies (solder bump process) and reflow
+ectc51906.2022.00232-F2-s03,ectc51906.2022.00232-c-s03,ectc51906.2022.00232,other_category,other,"form multi-layer RDL (3 layers, Cu vias to die pads)"
+ectc51909.2023.00094-F1-s02,ectc51909.2023.00094-a-s02,ectc51909.2023.00094,inspection,inspection,measure Z height across panel
+ectc51909.2023.00094-F2-s02,ectc51909.2023.00094-b-s02,ectc51909.2023.00094,inspection,inspection,measure panel Z height
+ectc51909.2023.00094-F2-s04,ectc51909.2023.00094-b-s04,ectc51909.2023.00094,inspection,inspection,measure panel Z height
+ectc51909.2023.00094-F2-s06,ectc51909.2023.00094-b-s06,ectc51909.2023.00094,inspection,inspection,measure panel Z height; measure top die Z height locally with panel chucked
+ectc51687.2025.00048-F1-s09,ectc51687.2025.00048-a-s09,ectc51687.2025.00048,inspection,inspection,"X-ray, electrical inspection and cross-section of chip-interposer joints"
+ectc51909.2023.00324-F1-s01,ectc51909.2023.00324-a-s01,ectc51909.2023.00324,other_category,other,plastic molding of connector with co-axial molding parts (guide hole + groove pairs)
+ectc51909.2023.00178-F1-s02,ectc51909.2023.00178-a-s02,ectc51909.2023.00178,inspection,inspection,AFM measurement of Cu pad dishing across wafer
+ectc51909.2023.00178-F1-s08,ectc51909.2023.00178-a-s08,ectc51909.2023.00178,inspection,inspection,IR misalignment measurement on misalignment TEG; 2D inspection and SAT for voids
+ectc51909.2023.00178-F2-s02,ectc51909.2023.00178-b-s02;ectc51909.2023.00178-c-s02,ectc51909.2023.00178,other_category,other,backside processes (not detailed)
+ectc51529.2024.00311-F1-s01,ectc51529.2024.00311-a-s01,ectc51529.2024.00311,other_category,other,top-die wafer: UBM damascene metallization layers
+ectc51529.2024.00311-F1-s04,ectc51529.2024.00311-a-s04,ectc51529.2024.00311,other_category,other,"landing wafer: damascene metallization, Cu bumps and Al probe pads"
+ectc51529.2024.00311-F1-s11,ectc51529.2024.00311-a-s11,ectc51529.2024.00311,test,test,electrical test of daisy chains/Kelvin and SAM inspection
+ectc51529.2024.00311-F1-s12,ectc51529.2024.00311-a-s12,ectc51529.2024.00311,inspection,inspection,cleave to single dies for cross-section SEM
+ectc51529.2024.00311-F2-s04,ectc51529.2024.00311-b-s04,ectc51529.2024.00311,inspection,inspection,XPS depth profiling (O1s)
+ectc51909.2023.00268-F1-s08,ectc51909.2023.00268-a-s08,ectc51909.2023.00268,inspection,inspection,AOI of layer 1 after seed etching
+ectc51909.2023.00268-F2-s02,ectc51909.2023.00268-b-s02,ectc51909.2023.00268,inspection,inspection,cross-section SEM of lines
+ectc51529.2024.00023-F1-s01,ectc51529.2024.00023-a-s01,ectc51529.2024.00023,other_category,other,melt and refine glass from high-purity raw materials
+ectc51529.2024.00023-F1-s02,ectc51529.2024.00023-a-s02,ectc51529.2024.00023,other_category,other,cast into boules
+ectc51529.2024.00023-F1-s04,ectc51529.2024.00023-a-s04,ectc51529.2024.00023,other_category,other,slice and finish to 150 mm wafers
+ectc51529.2024.00023-F1-s08,ectc51529.2024.00023-a-s08,ectc51529.2024.00023,other_category,other,thermal silver ion-exchange in molten salt
+ectc51529.2024.00023-F1-s10,ectc51529.2024.00023-a-s10,ectc51529.2024.00023,other_category,other,thermal sodium ion-exchange to bury waveguide core
+eptc59621.2023.10457918-F1-s01,eptc59621.2023.10457918-a-s01,eptc59621.2023.10457918,other_category,other,mount wafer in vacuum-chuck dicing jig (wafer holder + cavity base)
+eptc59621.2023.10457918-F1-s05,eptc59621.2023.10457918-a-s05,eptc59621.2023.10457918,inspection,inspection,inspect scribe lines under microscope; re-scribe missed lines
+ectc51529.2024.00128-F1-s07,ectc51529.2024.00128-a-s07,ectc51529.2024.00128,inspection,inspection,post-bond wafer-level CSAM
+ectc51529.2024.00128-F1-s10,ectc51529.2024.00128-a-s10,ectc51529.2024.00128,test,test,daisy-chain resistance probing (interpenetrating chains)
+ectc51529.2024.00128-F1-s11,ectc51529.2024.00128-a-s11,ectc51529.2024.00128,inspection,inspection,FIB-SEM cross-section of bond interface
+ectc51529.2024.00064-F1-s01,ectc51529.2024.00064-a-s01,ectc51529.2024.00064,other_category,other,bumped top-chip wafer (Ni pillar 3 um + SnAg 9 um I/O bumps; 5 um test bumps)
+ectc51529.2024.00064-F1-s05,ectc51529.2024.00064-a-s05,ectc51529.2024.00064,test,test,electrical wafer test by daisy chain
+ectc51529.2024.00064-F1-s06,ectc51529.2024.00064-a-s06,ectc51529.2024.00064,inspection,inspection,optical scope and X-ray inspection of bonding and microbumps
+eptc59621.2023.10457652-F1-s02,eptc59621.2023.10457652-a-s02,eptc59621.2023.10457652,other_category,other,heat from room temperature to molding temperature (carrier expansion)
+ectc51846.2026.00051-F1-s02,ectc51846.2026.00051-b-s02,ectc51846.2026.00051,other_category,other,via formation and metallization to bridge pads (new via-to-bridge alignment scheme)
+ectc51846.2026.00051-F1-s04,ectc51846.2026.00051-b-s04,ectc51846.2026.00051,other_category,other,FLI bump plating (chemistry/metallurgy for Imax)
+ectc51846.2026.00176-F1-s06,ectc51846.2026.00176-a-s06,ectc51846.2026.00176,other_category,other,2X RDL formation
+ectc51846.2026.00176-F2-s03,ectc51846.2026.00176-a-s12,ectc51846.2026.00176,inspection,inspection,2D X-ray of top die to PIC alignment
+ectc51846.2026.00176-F2-s07,ectc51846.2026.00176-a-s16,ectc51846.2026.00176,inspection,inspection,SAT post CoW UF
+ectc51846.2026.00176-F2-s10,ectc51846.2026.00176-a-s19,ectc51846.2026.00176,inspection,inspection,SAT post mold grind
+ectc51846.2026.00176-F2-s12,ectc51846.2026.00176-a-s21,ectc51846.2026.00176,other_category,other,dicing tape mount
+ectc51846.2026.00176-F3-s02,ectc51846.2026.00176-a-s23,ectc51846.2026.00176,inspection,inspection,high-resolution optical inspection and EDX of waveguide facets
+ectc51846.2026.00176-F3-s04,ectc51846.2026.00176-a-s25,ectc51846.2026.00176,inspection,inspection,2D X-ray of module to substrate alignment; solder dam check
+ectc51846.2026.00176-F3-s11,ectc51846.2026.00176-a-s32,ectc51846.2026.00176,test,test,package e-test
+ectc51846.2026.00176-F4-s06,ectc51846.2026.00176-a-s38,ectc51846.2026.00176,test,test,final IL measurement; final bake 80 C on every unit
+ectc51529.2024.00133-F1-s01,ectc51529.2024.00133-a-s01,ectc51529.2024.00133,other_category,other,provide polished glass substrate
+ectc51529.2024.00133-F1-s06,ectc51529.2024.00133-a-s06,ectc51529.2024.00133,inspection,inspection,OM and SEM top view and cross-section of vias
+ectc51529.2024.00229-F1-s02,ectc51529.2024.00229-a-s02,ectc51529.2024.00229,other_category,other,form UV-curable PDMS replica mold from metal master mold and cut to 60 mm square
+ectc51529.2024.00229-F1-s04,ectc51529.2024.00229-a-s04,ectc51529.2024.00229,other_category,other,"manual alignment with pair of cross marks, press PDMS mold onto substrate (imprint)"
+ectc51529.2024.00229-F1-s06,ectc51529.2024.00229-a-s06,ectc51529.2024.00229,other_category,other,release mold
+ectc51529.2024.00229-F2-s03,ectc51529.2024.00229-b-s03,ectc51529.2024.00229,other_category,other,form PDMS mold from master mold with 30 um-high mirrors; cut larger than chip
+ectc51529.2024.00229-F2-s06,ectc51529.2024.00229-b-s06,ectc51529.2024.00229,other_category,other,release mold
+ectc51529.2024.00396-F1-s11,ectc51529.2024.00396-a-s11,ectc51529.2024.00396,inspection,inspection,inline AFM of roughness and Cu dishing; wafer bow after each step
+ectc51529.2024.00396-F1-s15,ectc51529.2024.00396-a-s15,ectc51529.2024.00396,other_category,other,remove opaque layer from glass backside
+ectc51529.2024.00396-F1-s16,ectc51529.2024.00396-a-s16,ectc51529.2024.00396,inspection,inspection,"C-SAM, optical overlay through glass, EVG overlay map"
+ectc51529.2024.00396-F1-s18,ectc51529.2024.00396-a-s18,ectc51529.2024.00396,inspection,inspection,X-SEM / FIB-SEM and EDS line scan of bond interface
+ectc51529.2024.00396-F2-s03,ectc51529.2024.00396-b-s03,ectc51529.2024.00396,inspection,inspection,C-SAM before anneal
+ectc51529.2024.00396-F2-s05,ectc51529.2024.00396-b-s05,ectc51529.2024.00396,inspection,inspection,C-SAM after anneal
+ectc51529.2024.00334-F1-s07,ectc51529.2024.00334-a-s07,ectc51529.2024.00334,inspection,inspection,IR overlay measurement through 775 um top wafer
+ectc51529.2024.00334-F1-s08,ectc51529.2024.00334-a-s08,ectc51529.2024.00334,inspection,inspection,C-SAM of bond interface
+ectc51529.2024.00334-F1-s09,ectc51529.2024.00334-a-s09,ectc51529.2024.00334,other_category,other,edge trim of top wafer bevel
+ectc51529.2024.00334-F1-s12,ectc51529.2024.00334-a-s12,ectc51529.2024.00334,inspection,inspection,optical box-in-box overlay after top wafer removal
+ectc51529.2024.00334-F1-s16,ectc51529.2024.00334-a-s16,ectc51529.2024.00334,test,test,DC IV via-chain test on all 138 reticles
+ectc51529.2024.00096-F2-s02,ectc51529.2024.00096-b-s02,ectc51529.2024.00096,other_category,other,Post-apply bake
+ectc51529.2024.00096-F2-s03,ectc51529.2024.00096-b-s03,ectc51529.2024.00096,structure_only,lithography,Design-to-size resolution test and design pre-bias
+icep58572.2023.10129684-F1-s01,icep58572.2023.10129684-a-s01,icep58572.2023.10129684,other_category,other,Warpage tuning of panel via thickness and material parameters
+icep58572.2023.10129684-F2-s01,icep58572.2023.10129684-b-s01,icep58572.2023.10129684,other_category,other,Warpage tuning of 300x300 mm panel
+icep58572.2023.10129684-F2-s02,icep58572.2023.10129684-b-s02,icep58572.2023.10129684,other_category,other,Flat stencil printing of flux
+ectc51529.2024.00013-F1-s02,ectc51529.2024.00013-a-s02,ectc51529.2024.00013,other_category,other,MicroPillar and pad formation on glass carrier
+ectc51529.2024.00013-F1-s08,ectc51529.2024.00013-a-s08,ectc51529.2024.00013,other_category,other,Tall Pillar formation
+tcpmt.2021.3123384-F3-s07,tcpmt.2021.3123384-c-s07,tcpmt.2021.3123384,other_category,other,open passivation on vias
+tcpmt.2021.3123384-F4-s08,tcpmt.2021.3123384-d-s08,tcpmt.2021.3123384,other_category,other,open passivation on vias
+tcpmt.2021.3123384-F6-s07,tcpmt.2021.3123384-f-s07,tcpmt.2021.3123384,inspection,inspection,pick dies from tape and inspect
+tcpmt.2021.3123384-F7-s01,tcpmt.2021.3123384-g-s01,tcpmt.2021.3123384,other_category,other,base material: 100 mm 4H-SiC with two epitaxial layers
+tcpmt.2021.3123384-F7-s03,tcpmt.2021.3123384-g-s03,tcpmt.2021.3123384,other_category,other,implantation of contact area
+tcpmt.2021.3123384-F7-s08,tcpmt.2021.3123384-g-s08,tcpmt.2021.3123384,other_category,other,Au stud bumping
+ectc51687.2025.00014-F1-s01,ectc51687.2025.00014-a-s01,ectc51687.2025.00014,other_category,other,fabricate MZI switch PIC in commercial MPW process
+ectc51687.2025.00014-F1-s03,ectc51687.2025.00014-a-s03,ectc51687.2025.00014,other_category,other,3D print VCBELs in PIC trenches by two-photon polymerization
+ectc51687.2025.00014-F1-s05,ectc51687.2025.00014-a-s05,ectc51687.2025.00014,other_category,other,write optical waveguides in glass with femtosecond laser (local index increase)
+ectc51687.2025.00014-F1-s07,ectc51687.2025.00014-a-s07,ectc51687.2025.00014,other_category,other,3D print VCBELs in glass trenches
+ectc51687.2025.00014-F1-s12,ectc51687.2025.00014-a-s12,ectc51687.2025.00014,test,test,electro-optical characterization
+ectc51687.2025.00378-F1-s01,ectc51687.2025.00378-a-s01,ectc51687.2025.00378,other_category,other,fabricate dummy chips on 500 um-thick wafers in 5x5 mm grid with 15 um Cu pads (70 um dia)
+ectc51687.2025.00378-F2-s19,ectc51687.2025.00378-a-s22,ectc51687.2025.00378,test,test,"DC daisy-chain resistance measurement (corner, edge, center chains)"
+ectc51529.2024.00218-F1-s01,ectc51529.2024.00218-a-s01,ectc51529.2024.00218,other_category,other,flatten bonding surfaces of top and middle wafers
+ectc51529.2024.00218-F1-s06,ectc51529.2024.00218-a-s06,ectc51529.2024.00218,other_category,other,form backside Cu interconnects and Cu pads on middle wafer
+ectc51529.2024.00218-F1-s07,ectc51529.2024.00218-a-s07,ectc51529.2024.00218,other_category,other,flatten middle-wafer backside and bottom-wafer frontside
+ectc51529.2024.00218-F1-s12,ectc51529.2024.00218-a-s12,ectc51529.2024.00218,test,test,electrical measurement; SIV test and controlled-IV/TDDB tests
+ectc51529.2024.00051-F2-s01,ectc51529.2024.00051-d-s01,ectc51529.2024.00051,test,test,simultaneous probing of Cu pillar bumps and Au pads
+ectc51906.2022.00332-F1-s02,ectc51906.2022.00332-a-s02;ectc51906.2022.00332-b-s02,ectc51906.2022.00332,other_category,other,"fabricate Si-IF Cu wiring by BEOL Cu damascene or dual damascene, per metal layer"
+ectc51906.2022.00332-F1-s03,ectc51906.2022.00332-a-s03;ectc51906.2022.00332-b-s03,ectc51906.2022.00332,inspection,inspection,defect detection scan after each Si-IF metal layer (known-good Si-IF)
+ectc51906.2022.00332-F1-s04,ectc51906.2022.00332-a-s04;ectc51906.2022.00332-b-s04,ectc51906.2022.00332,test,test,probe dielet VDD and VSS pads before bonding (KGD)
+ectc51906.2022.00332-F2-s01,ectc51906.2022.00332-c-s01,ectc51906.2022.00332,other_category,other,Si-IF metal layer 1 fabrication with some wafer cleaning steps omitted
+ectc51906.2022.00332-F2-s02,ectc51906.2022.00332-c-s02,ectc51906.2022.00332,inspection,inspection,defect scan after layer 1
+ectc51906.2022.00332-F2-s03,ectc51906.2022.00332-c-s03,ectc51906.2022.00332,other_category,other,Si-IF metal layer 2 fabrication
+ectc51906.2022.00332-F2-s04,ectc51906.2022.00332-c-s04,ectc51906.2022.00332,inspection,inspection,defect scan after layer 2 with modified detection parameters
+ectc51846.2026.00156-F1-s07,ectc51846.2026.00156-a-s07,ectc51846.2026.00156,test,test,leak test
+ectc51846.2026.00156-F1-s08,ectc51846.2026.00156-a-s08,ectc51846.2026.00156,other_category,other,TIM conditioning: circulate 50 C coolant with chip at full TDP
+tcpmt.2025.3557232-F1-s10,tcpmt.2025.3557232-a-s10,tcpmt.2025.3557232,inspection,inspection,SEM and EDX cross-section analysis
+vlsitechnologyandcir46783.2024.10631478-F1-s05,vlsitechnologyandcir46783.2024.10631478-a-s05,vlsitechnologyandcir46783.2024.10631478,other_category,other,interconnect formation: three wide-pitch metal layers M1-M3
+vlsitechnologyandcir46783.2024.10631478-F1-s08,vlsitechnologyandcir46783.2024.10631478-a-s08,vlsitechnologyandcir46783.2024.10631478,other_category,other,Si interposer bump (SIB) formation
+vlsitechnologyandcir46783.2024.10631478-F1-s11,vlsitechnologyandcir46783.2024.10631478-a-s11,vlsitechnologyandcir46783.2024.10631478,other_category,other,package side bump (PSB) patterning on TSVs
+eptc59621.2023.10457912-F1-s09,eptc59621.2023.10457912-a-s09,eptc59621.2023.10457912,inspection,inspection,cross-sectional FIB-SEM of filled/partially filled TSVs
+ectc51906.2022.00053-F1-s03,ectc51906.2022.00053-a-s03,ectc51906.2022.00053,other_category,other,planarize Cu pads and dielectric simultaneously (surface planer)
+ectc51906.2022.00053-F1-s16,ectc51906.2022.00053-a-s16,ectc51906.2022.00053,other_category,other,form RDL by front-end process
+ectc51906.2022.00053-F1-s17,ectc51906.2022.00053-a-s17,ectc51906.2022.00053,test,test,DC (Kelvin) and RF probe testing with carrier wafer attached
+ectc51529.2024.00125-F1-s01,ectc51529.2024.00125-a-s01,ectc51529.2024.00125,other_category,other,bond pad metal (BPM) formation by dual damascene process
+ectc51529.2024.00125-F1-s04,ectc51529.2024.00125-a-s04,ectc51529.2024.00125,inspection,inspection,C-SAM inspection of bonded wafer pair
+ectc51529.2024.00125-F1-s07,ectc51529.2024.00125-a-s07,ectc51529.2024.00125,other_category,other,form WAT probe pads on top of TSVs
+ectc51529.2024.00125-F1-s08,ectc51529.2024.00125-a-s08,ectc51529.2024.00125,test,test,wafer acceptance test (Kelvin and daisy-chain resistance)
+ectc51687.2025.00007-F1-s04,ectc51687.2025.00007-a-s04,ectc51687.2025.00007,other_category,other,test pad formation (60 x 60 um)
+ectc51687.2025.00007-F2-s07,ectc51687.2025.00007-b-s07,ectc51687.2025.00007,other_category,other,Ni/Au back bump formation on Cu via (Fig. 1 step 5)
+ectc51529.2024.00011-F1-s01,ectc51529.2024.00011-a-s01,ectc51529.2024.00011,other_category,other,Cu stud formation on source wafer
+ectc51529.2024.00011-F1-s18,ectc51529.2024.00011-a-s18,ectc51529.2024.00011,inspection,inspection,final inspection (AOI)
+ectc51529.2024.00011-F1-s20,ectc51529.2024.00011-a-s20,ectc51529.2024.00011,inspection,inspection,strip incoming inspection and 100% visual inspection
+ectc51529.2024.00011-F1-s21,ectc51529.2024.00011-a-s21,ectc51529.2024.00011,test,test,strip electrical open/short test
+ectc51529.2024.00011-F1-s23,ectc51529.2024.00011-a-s23,ectc51529.2024.00011,inspection,inspection,automated visual inspection of singulated units
+ectc51909.2023.00230-F1-s03,ectc51909.2023.00230-a-s03,ectc51909.2023.00230,other_category,other,"ion implantation steps before and after waveguide patterning (p-n junctions, access regions)"
+ectc51909.2023.00230-F1-s06,ectc51909.2023.00230-a-s06,ectc51909.2023.00230,other_category,other,silicidation of Si contact areas of active devices
+ectc51909.2023.00230-F1-s10,ectc51909.2023.00230-a-s10,ectc51909.2023.00230,other_category,other,"BEOL: via contacts to silicide and TiN, two metallization levels"
+ectc51909.2023.00230-F2-s01,ectc51909.2023.00230-a-s11,ectc51909.2023.00230,other_category,other,receive Leti wafer with TSV keep-out zones; open original I/O pads
+ectc51529.2024.00017-F1-s01,ectc51529.2024.00017-a-s01,ectc51529.2024.00017,other_category,other,BEOL metal stack processing in fab
+ectc51529.2024.00017-F1-s04,ectc51529.2024.00017-a-s04,ectc51529.2024.00017,inspection,inspection,AFM of bonding surface topography and Cu pad dishing
+ectc51529.2024.00017-F1-s12,ectc51529.2024.00017-a-s12,ectc51529.2024.00017,inspection,inspection,C-mode scanning acoustic microscopy of bonding interface
+ectc51529.2024.00017-F1-s13,ectc51529.2024.00017-a-s13,ectc51529.2024.00017,inspection,inspection,NIR overlay inspection of post-bond misalignment
+ectc51529.2024.00017-F1-s14,ectc51529.2024.00017-a-s14,ectc51529.2024.00017,test,test,4-point resistance probing of daisy chains
+ectc51529.2024.00017-F1-s16,ectc51529.2024.00017-a-s16,ectc51529.2024.00017,preconditioning,preconditioning,moisture soak preconditioning before reliability stress
+ectc51687.2025.00141-F1-s07,ectc51687.2025.00141-a-s07,ectc51687.2025.00141,other_category,other,"form Cu base substrates for micro-bump connection pads outside pixel area, with barrier metal on Cu surface"
+ectc51687.2025.00141-F1-s08,ectc51687.2025.00141-a-s08,ectc51687.2025.00141,other_category,other,fabricate on-chip lens in sensor pixel area
+ectc51687.2025.00141-F1-s09,ectc51687.2025.00141-a-s09,ectc51687.2025.00141,other_category,other,open micro-bump connection pad area
+ectc51687.2025.00323-F1-s01,ectc51687.2025.00323-a-s01,ectc51687.2025.00323,other_category,other,"fabricate electrodes and Cu pads on front side of top, middle and bottom wafers"
+ectc51687.2025.00323-F1-s05,ectc51687.2025.00323-a-s05,ectc51687.2025.00323,other_category,other,fabricate backside Cu pads on middle wafer
+ectc51687.2025.00323-F1-s11,ectc51687.2025.00323-a-s11,ectc51687.2025.00323,other_category,other,fabricate contact pads for probing
+ectc51687.2025.00323-F1-s12,ectc51687.2025.00323-a-s12,ectc51687.2025.00323,test,test,probing
+ectc51846.2026.00062-F1-s03,ectc51846.2026.00062-a-s03,ectc51846.2026.00062,other_category,other,single Cu damascene for pillars (front side)
+ectc51846.2026.00062-F2-s03,ectc51846.2026.00062-b-s03,ectc51846.2026.00062,test,test,die shear test
+ectc51846.2026.00062-F3-s04,ectc51846.2026.00062-c-s04,ectc51846.2026.00062,other_category,other,two-level single damascene: front pads and pillars (daisy chains)
+ectc51846.2026.00062-F3-s06,ectc51846.2026.00062-c-s06,ectc51846.2026.00062,other_category,other,single damascene backside pads
+ectc51846.2026.00062-F3-s11,ectc51846.2026.00062-c-s11,ectc51846.2026.00062,test,test,daisy-chain continuity and 4-point resistance (pre-anneal)
+ectc51846.2026.00062-F3-s13,ectc51846.2026.00062-c-s13,ectc51846.2026.00062,test,test,post-anneal 4-point resistance
+ectc51529.2024.00258-F1-s03,ectc51529.2024.00258-a-s03,ectc51529.2024.00258,other_category,other,planarize oxide
+ectc51846.2026.00227-F1-s03,ectc51846.2026.00227-a-s03,ectc51846.2026.00227,other_category,other,coin (flatten) solder surface for TCB
+ectc51846.2026.00227-F1-s07,ectc51846.2026.00227-a-s07,ectc51846.2026.00227,inspection,inspection,X-ray and SEM side-view inspection after bonding
+ectc51529.2024.00087-F1-s03,ectc51529.2024.00087-a-s03,ectc51529.2024.00087,inspection,inspection,pre-process total thickness measurement
+ectc51529.2024.00087-F1-s05,ectc51529.2024.00087-a-s05,ectc51529.2024.00087,inspection,inspection,"post-process total thickness measurement (MRR, WIPNU, TTV)"
+ectc51529.2024.00087-F2-s02,ectc51529.2024.00087-b-s02,ectc51529.2024.00087,inspection,inspection,top-down and cross-section SEM of Cu vias after CMP
+tcpmt.2026.3650893-F1-s05,tcpmt.2026.3650893-a-s05,tcpmt.2026.3650893,inspection,inspection,SEM of bottom die for ZnO area coverage
+tcpmt.2026.3650893-F3-s05,tcpmt.2026.3650893-c-s05,tcpmt.2026.3650893,other_category,other,repeat ZnO ALD + MOF conversion supercycles
+ectc51529.2024.00321-F1-s01,ectc51529.2024.00321-a-s01,ectc51529.2024.00321,other_category,other,glass carrier preparation (Glass C)
+ectc51529.2024.00321-F1-s15,ectc51529.2024.00321-a-s15,ectc51529.2024.00321,inspection,inspection,in-plane Cu width measurement and cross-section SEM
+ectc51846.2026.00130-F3-s04,ectc51846.2026.00130-a-sp04,ectc51846.2026.00130,inspection,inspection,CSAM inspection after anneal
+ectc51846.2026.00130-F3-s11,ectc51846.2026.00130-a-sp11,ectc51846.2026.00130,test,test,E-test
+ectc51846.2026.00130-F3-s12,ectc51846.2026.00130-a-sp12,ectc51846.2026.00130,inspection,inspection,cross-sectional TEM of test structure after full processing
+icep61562.2024.10535587-F2-s06,icep61562.2024.10535587-a-s13,icep61562.2024.10535587,inspection,inspection,"Measure x, y, theta of each die with high-precision optical scanner"
+icep61562.2024.10535587-F4-s04,icep61562.2024.10535587-a-s22,icep61562.2024.10535587,other_category,other,Tape and reel (TnR)
+vlsitechnologyandcir65830.2026.11577374-F1-s01,vlsitechnologyandcir65830.2026.11577374-a-s01,vlsitechnologyandcir65830.2026.11577374,other_category,other,Form oxide trench in DRAM wafer
+vlsitechnologyandcir65830.2026.11577374-F1-s04,vlsitechnologyandcir65830.2026.11577374-a-s04,vlsitechnologyandcir65830.2026.11577374,inspection,inspection,CSAM check of each bonding interface
+vlsitechnologyandcir65830.2026.11577374-F1-s07,vlsitechnologyandcir65830.2026.11577374-a-s07,vlsitechnologyandcir65830.2026.11577374,other_category,other,Backside interconnection and pad-out
+ectc51687.2025.00326-F1-s14,ectc51687.2025.00326-a-s14,ectc51687.2025.00326,other_category,other,third layer formed by the same method
+ectc51906.2022.00113-F1-s04,ectc51906.2022.00113-b-s04,ectc51906.2022.00113,inspection,inspection,AFM 3D image and line scan of Cu pad topology
+ectc51906.2022.00113-F1-s08,ectc51906.2022.00113-b-s08,ectc51906.2022.00113,inspection,inspection,CSAM immediately after bonding
+ectc51906.2022.00113-F1-s10,ectc51906.2022.00113-b-s10,ectc51906.2022.00113,inspection,inspection,CSAM after anneal
+ectc51906.2022.00113-F1-s11,ectc51906.2022.00113-b-s11,ectc51906.2022.00113,test,test,EPM daisy-chain electrical test (hundreds to hundreds of thousands of chains)
+ectc51906.2022.00113-F1-s12,ectc51906.2022.00113-b-s12,ectc51906.2022.00113,inspection,inspection,"EMMI localization of high-resistance points, then TEM cross-section"
+ectc51906.2022.00113-F2-s06,ectc51906.2022.00113-c-s06,ectc51906.2022.00113,test,test,Maszara blade-insertion crack test (IR image at wafer edge)
+ectc51687.2025.00090-F1-s01,ectc51687.2025.00090-a-s01,ectc51687.2025.00090,other_category,other,provide 1st carrier (CTE type chosen by warpage simulation)
+icep-iaac64884.2025.11002987-F1-s06,icep-iaac64884.2025.11002987-a-s06,icep-iaac64884.2025.11002987,other_category,other,wafer-level flux coating onto UBM
+icep-iaac64884.2025.11002987-F1-s08,icep-iaac64884.2025.11002987-a-s08,icep-iaac64884.2025.11002987,inspection,inspection,inline optical inspection and repair (nozzle adds/removes balls)
+ectc51909.2023.00023-F1-s01,ectc51909.2023.00023-a-s01,ectc51909.2023.00023,other_category,other,"foundry fabrication of 2-metal single-damascene Cu/SiO2 stack (isolation oxide, RDL, VIA, DBI pad) through top-metal Cu plating"
+ectc51909.2023.00023-F1-s09,ectc51909.2023.00023-a-s09,ectc51909.2023.00023,inspection,inspection,"IR alignment measurement (x, y, theta) and vernier-based die distortion"
+ectc51909.2023.00023-F1-s10,ectc51909.2023.00023-a-s10,ectc51909.2023.00023,test,test,electrical test of daisy-chain arrays per die
+ectc51909.2023.00023-F1-s11,ectc51909.2023.00023-a-s11,ectc51909.2023.00023,inspection,inspection,C-mode scanning acoustic microscopy for bond interface voids
+ectc51909.2023.00023-F1-s12,ectc51909.2023.00023-a-s12,ectc51909.2023.00023,inspection,inspection,cross-section imaging of selected passing and failing die
+ectc51687.2025.00095-F1-s01,ectc51687.2025.00095-a-s01,ectc51687.2025.00095,other_category,other,prepare 300 mm panel carrier
+ectc51687.2025.00095-F1-s11,ectc51687.2025.00095-a-s11,ectc51687.2025.00095,other_category,other,C4 formation
+ectc51687.2025.00095-F1-s15,ectc51687.2025.00095-a-s15,ectc51687.2025.00095,other_category,other,flux dipping of chip module
+ectc51687.2025.00095-F2-s01,ectc51687.2025.00095-b-s01,ectc51687.2025.00095,other_category,other,prepare 300 mm panel carrier
+ectc51529.2024.00076-F1-s04,ectc51529.2024.00076-a-s04,ectc51529.2024.00076,inspection,inspection,C-SAM after bonding
+ectc51529.2024.00076-F1-s06,ectc51529.2024.00076-a-s06,ectc51529.2024.00076,inspection,inspection,C-SAM after anneal
+ectc51529.2024.00076-F1-s07,ectc51529.2024.00076-a-s07,ectc51529.2024.00076,test,test,"DCB blade adherence measurement on full-sheet wafers, then complete debonding"
+ectc51529.2024.00076-F1-s08,ectc51529.2024.00076-a-s08,ectc51529.2024.00076,inspection,inspection,TEM cross section of bonded interface
+ectc51529.2024.00076-F2-s08,ectc51529.2024.00076-b-s08,ectc51529.2024.00076,inspection,inspection,C-SAM before anneal (wafer and die scale)
+ectc51529.2024.00076-F2-s12,ectc51529.2024.00076-b-s12,ectc51529.2024.00076,inspection,inspection,STEM/TEM and EDX of bonded pads
+ectc51846.2026.00008-F1-s03,ectc51846.2026.00008-a-s03,ectc51846.2026.00008,other_category,other,"build 3-layer RDL and passivation (fan-out construction, Step1 4P4M) on 600 mm panel carrier"
+ectc51529.2024.00057-F1-s01,ectc51529.2024.00057-a-s01,ectc51529.2024.00057,other_category,other,"fabricate tiers 1, 2, 3 in parallel on 300 mm wafers: MZ, HBV, HBM Cu damascene levels"
+ectc51529.2024.00057-F1-s04,ectc51529.2024.00057-a-s04,ectc51529.2024.00057,inspection,inspection,SAM of bonding interface and overlay measurement (60 points)
+ectc51529.2024.00057-F1-s07,ectc51529.2024.00057-a-s07,ectc51529.2024.00057,other_category,other,fabricate HBM bonding pad layer on top of TSV
+ectc51529.2024.00057-F1-s09,ectc51529.2024.00057-a-s09,ectc51529.2024.00057,inspection,inspection,SAM of bonding interface and overlay measurement (60 points)
+ectc51529.2024.00057-F1-s10,ectc51529.2024.00057-a-s10,ectc51529.2024.00057,other_category,other,remove tier 3 backside silicon
+ectc51687.2025.00226-F2-s06,ectc51687.2025.00226-e-s06,ectc51687.2025.00226,test,test,measure overall chain resistance and resistance between rows
+ectc51846.2026.00194-F1-s04,ectc51846.2026.00194-b-s04,ectc51846.2026.00194,inspection,inspection,CD measurement over panel grid
+ectc51846.2026.00194-F3-s06,ectc51846.2026.00194-d-s06,ectc51846.2026.00194,inspection,inspection,"cross-section prep: manual break, polish, Au sputter, SEM"
+icep-iaac64884.2025.11002958-F1-s03,icep-iaac64884.2025.11002958-b-s03,icep-iaac64884.2025.11002958,inspection,inspection,measure etched SiO2 amount by ellipsometer
+icep-iaac64884.2025.11002958-F2-s01,icep-iaac64884.2025.11002958-c-s01,icep-iaac64884.2025.11002958,other_category,other,preheat flat substrate in sputtering system
+icep-iaac64884.2025.11002958-F2-s07,icep-iaac64884.2025.11002958-c-s07,icep-iaac64884.2025.11002958,test,test,90-degree peel test
+icep-iaac64884.2025.11002958-F3-s01,icep-iaac64884.2025.11002958-d-s01,icep-iaac64884.2025.11002958,other_category,other,preheat flat substrate in sputtering system
+icep-iaac64884.2025.11002958-F3-s07,icep-iaac64884.2025.11002958-d-s07,icep-iaac64884.2025.11002958,test,test,90-degree peel test
+icep-iaac64884.2025.11002958-F4-s01,icep-iaac64884.2025.11002958-e-s01,icep-iaac64884.2025.11002958,other_category,other,preheat flat substrate in sputtering system
+icep-iaac64884.2025.11002958-F4-s06,icep-iaac64884.2025.11002958-e-s06,icep-iaac64884.2025.11002958,test,test,90-degree peel test
+icep-iaac64884.2025.11002958-F5-s04,icep-iaac64884.2025.11002958-f-s04,icep-iaac64884.2025.11002958,inspection,inspection,cross-section of Cu-plated TGV
+ectc51846.2026.00198-F1-s05,ectc51846.2026.00198-a-s05,ectc51846.2026.00198,inspection,inspection,optical microscopy of patterns at center and four corners of 18-reticle field
+ectc51846.2026.00198-F2-s06,ectc51846.2026.00198-b-s06,ectc51846.2026.00198,inspection,inspection,cross-sectional SEM of patterns
+ectc51846.2026.00198-F2-s07,ectc51846.2026.00198-b-s07,ectc51846.2026.00198,inspection,inspection,linewidth measurement across 18-reticle area by optical profilometer; Bossung analysis
+ectc51846.2026.00012-F1-s05,ectc51846.2026.00012-a-s05,ectc51846.2026.00012,other_category,other,"load on flat, convex/concave stage (membrane) or vacuum chuck table (contactless); pressurize chamber"
+ectc51846.2026.00012-F1-s07,ectc51846.2026.00012-a-s07,ectc51846.2026.00012,other_category,other,"after 10 min stabilization, pressurize sealed membrane (0.4 bar differential, conformal contact)"
+ectc51846.2026.00012-F1-s09,ectc51846.2026.00012-a-s09,ectc51846.2026.00012,other_category,other,"cool to room temperature under constraint, then release membrane pressure"
+ectc51846.2026.00012-F1-s10,ectc51846.2026.00012-a-s10,ectc51846.2026.00012,inspection,inspection,full-field 3D topography before and after (PV warpage)
+ectc51846.2026.00012-F2-s05,ectc51846.2026.00012-b-s05,ectc51846.2026.00012,other_category,other,"load on flat, convex/concave stage (membrane) or vacuum chuck table (contactless); pressurize chamber"
+ectc51846.2026.00012-F2-s07,ectc51846.2026.00012-b-s07,ectc51846.2026.00012,other_category,other,"after 10 min stabilization, pressurize sealed membrane (0.4 bar differential, conformal contact)"
+ectc51846.2026.00012-F2-s09,ectc51846.2026.00012-b-s09,ectc51846.2026.00012,other_category,other,"cool to room temperature under constraint, then release membrane pressure"
+ectc51846.2026.00012-F2-s10,ectc51846.2026.00012-b-s10,ectc51846.2026.00012,inspection,inspection,full-field 3D topography before and after (PV warpage)
+ectc51846.2026.00012-F3-s02,ectc51846.2026.00012-c-s02,ectc51846.2026.00012,other_category,other,via formation
+ectc51846.2026.00012-F3-s04,ectc51846.2026.00012-c-s04,ectc51846.2026.00012,other_category,other,apply solder mask both sides with defined openings for surface finish
+ectc51846.2026.00012-F3-s05,ectc51846.2026.00012-c-s05,ectc51846.2026.00012,other_category,other,"load on flat, convex/concave stage (membrane) or vacuum chuck table (contactless); pressurize chamber"
+ectc51846.2026.00012-F3-s07,ectc51846.2026.00012-c-s07,ectc51846.2026.00012,other_category,other,"after 10 min stabilization, pressurize sealed membrane (0.4 bar differential, conformal contact)"
+ectc51846.2026.00012-F3-s09,ectc51846.2026.00012-c-s09,ectc51846.2026.00012,other_category,other,"cool to room temperature under constraint, then release membrane pressure"
+ectc51846.2026.00012-F3-s10,ectc51846.2026.00012-c-s10,ectc51846.2026.00012,inspection,inspection,full-field 3D topography before and after (PV warpage)
+ectc51529.2024.00170-F1-s01,ectc51529.2024.00170-e-s01,ectc51529.2024.00170,other_category,other,form cavity in substrate core
+ectc51529.2024.00170-F1-s03,ectc51529.2024.00170-e-s03,ectc51529.2024.00170,other_category,other,seal with resin material
+ectc51529.2024.00170-F1-s04,ectc51529.2024.00170-e-s04,ectc51529.2024.00170,other_category,other,construct several RDL on top and bottom sides with laser via connection
+ectc51846.2026.00302-F1-s02,ectc51846.2026.00302-a-s02,ectc51846.2026.00302,other_category,other,femtosecond-laser modification of future V-groove regions (and lithography alignment markers)
+ectc51846.2026.00302-F1-s08,ectc51846.2026.00302-a-s08,ectc51846.2026.00302,other_category,other,first ion exchange: Ag+ in for Na+ in molten salt bath (raises surface index)
+ectc51846.2026.00302-F1-s09,ectc51846.2026.00302-a-s09,ectc51846.2026.00302,other_category,other,second ion exchange in second molten salt bath to bury index profile
+ectc51846.2026.00302-F1-s12,ectc51846.2026.00302-a-s12,ectc51846.2026.00302,test,test,"measure transmission (insertion loss) at 1550 nm, cut V-grooves off with CO2 laser, re-measure same waveguide"
+ectc51529.2024.00106-F1-s14,ectc51529.2024.00106-a-s14,ectc51529.2024.00106,other_category,other,strip laser release layer and acoustic layer
+ectc51529.2024.00106-F1-s15,ectc51529.2024.00106-a-s15,ectc51529.2024.00106,inspection,inspection,SAM bond-yield inspection and transfer-yield count; IR alignment measurement
+ectc51529.2024.00106-F2-s01,ectc51529.2024.00106-b-s01,ectc51529.2024.00106,other_category,other,tier 1 flow (N=2) completed first; N=2 stack used as target wafer
+ectc51529.2024.00106-F2-s05,ectc51529.2024.00106-b-s05,ectc51529.2024.00106,inspection,inspection,SAM bond yield; IR alignment
+ectc51529.2024.00106-F3-s01,ectc51529.2024.00106-c-s01,ectc51529.2024.00106,other_category,other,tier 1 flow (N=2) completed first; best N=3 stack used as target wafer
+ectc51529.2024.00106-F3-s05,ectc51529.2024.00106-c-s05,ectc51529.2024.00106,inspection,inspection,SAM bond yield; IR die-transfer count
+ectc51529.2024.00106-F4-s06,ectc51529.2024.00106-d-s06,ectc51529.2024.00106,inspection,inspection,cross-sectional SEM of N=3 interface
+tcpmt.2025.3540665-F1-s14,tcpmt.2025.3540665-a-s14,tcpmt.2025.3540665,other_category,other,cool to room temperature and release pressure
+tcpmt.2025.3540665-F1-s15,tcpmt.2025.3540665-a-s15,tcpmt.2025.3540665,inspection,inspection,"SEM, FIB cross-section and EDS of bonded bumps"
+tcpmt.2025.3540665-F1-s16,tcpmt.2025.3540665-a-s16,tcpmt.2025.3540665,test,test,"I-V characterization of Kelvin, two-bump and 6x6 daisy-chain structures"
+iedm45741.2023.10413759-F1-s01,iedm45741.2023.10413759-a-s01,iedm45741.2023.10413759,other_category,other,GaN HEMT fabrication
+iedm45741.2023.10413759-F1-s02,iedm45741.2023.10413759-a-s02,iedm45741.2023.10413759,other_category,other,RDL fabrication (standard BEOL) on dielets and GaN-on-Si substrate
+iedm45741.2023.10413759-F1-s03,iedm45741.2023.10413759-a-s03,iedm45741.2023.10413759,other_category,other,dielet alignment
+ectc51846.2026.00416-F1-s15,ectc51846.2026.00416-a-s15,ectc51846.2026.00416,inspection,inspection,X-ray and micro-CT inspection of Cu fill; overburden by optical profilometry and micro-resistance gauge
+ectc51846.2026.00416-F1-s16,ectc51846.2026.00416-a-s16,ectc51846.2026.00416,test,test,thermal shock test
+ectc51846.2026.00204-F1-s01,ectc51846.2026.00204-a-s01;ectc51846.2026.00204-b-s01;ectc51846.2026.00204-c-s01,ectc51846.2026.00204,other_category,other,"Sn-based alloy nanoparticle synthesis (controlled reduction and stabilization), purification and dispersion"
+ectc51846.2026.00204-F1-s02,ectc51846.2026.00204-a-s02;ectc51846.2026.00204-b-s02;ectc51846.2026.00204-c-s02,ectc51846.2026.00204,other_category,other,"Paste formulation: binder + coupling agent + dispersant in paste mixer, then curing agent, nanoparticles, thickener"
+ectc51846.2026.00204-F1-s07,ectc51846.2026.00204-a-s05,ectc51846.2026.00204,inspection,inspection,Bump pattern and thickness profile by 3D laser scanning microscope
+ectc51846.2026.00204-F1-s10,ectc51846.2026.00204-b-s06,ectc51846.2026.00204,inspection,inspection,Cross-section FE-SEM and EDS mapping
+ectc51846.2026.00204-F1-s11,ectc51846.2026.00204-c-s06,ectc51846.2026.00204,inspection,inspection,Cross-section FE-SEM and EDS mapping; XRM over whole chip
+ectc51846.2026.00204-F2-s04,ectc51846.2026.00204-c-s10,ectc51846.2026.00204,inspection,inspection,Cross-section SEM and EDS mapping of TC-bonded interface
+ectc51846.2026.00204-F2-s05,ectc51846.2026.00204-c-s11,ectc51846.2026.00204,test,test,Die shear test
+eptc62800.2024.10909935-F1-s08,eptc62800.2024.10909935-a-s08,eptc62800.2024.10909935,inspection,inspection,post-litho CDSEM (DICD)
+eptc62800.2024.10909935-F1-s11,eptc62800.2024.10909935-a-s11,eptc62800.2024.10909935,inspection,inspection,post-etch CDSEM (FICD) and X-SEM depth/profile
+ectc51846.2026.00096-F1-s46,ectc51846.2026.00096-a-s46,ectc51846.2026.00096,test,test,[assembly (Fig. 12)] resistance test after step 14
+ectc51687.2025.00359-F1-s04,ectc51687.2025.00359-a-s04,ectc51687.2025.00359,other_category,other,peel off PET film
+ectc51687.2025.00359-F1-s07,ectc51687.2025.00359-a-s07,ectc51687.2025.00359,inspection,inspection,FIB cross-section and SEM after each step
+tcpmt.2026.3717381-F1-s02,tcpmt.2026.3717381-a-s02,tcpmt.2026.3717381,other_category,other,polish upper glass wafer
+tcpmt.2026.3717381-F1-s08,tcpmt.2026.3717381-a-s08,tcpmt.2026.3717381,other_category,other,add PI layer as solder mask for pillar and bump formation on lower wafer
+ectc51846.2026.00218-F1-s11,ectc51846.2026.00218-a-s11,ectc51846.2026.00218,inspection,inspection,SAM bonding quality and alignment overlay measurement
+ectc51846.2026.00424-F1-s15,ectc51846.2026.00424-a-s15,ectc51846.2026.00424,other_category,other,Cu/Sn microbump formation for next-level stacking
+tcpmt.2024.3443855-F1-s01,tcpmt.2024.3443855-a-s01,tcpmt.2024.3443855,other_category,other,"start: active wafer after MOL, SiO2 on top, Al pads exposed"
+ectc51687.2025.00142-F1-s09,ectc51687.2025.00142-a-s09,ectc51687.2025.00142,other_category,other,"Cu damascene pillar formation (5 um dia, 10 um pitch)"
+ectc51846.2026.00106-F1-s04,ectc51846.2026.00106-a-s02;ectc51846.2026.00106-b-s02;ectc51846.2026.00106-c-s02,ectc51846.2026.00106,other_category,other,thermal silver ion exchange
+ectc51846.2026.00106-F1-s06,ectc51846.2026.00106-a-s04;ectc51846.2026.00106-b-s04;ectc51846.2026.00106-c-s04,ectc51846.2026.00106,other_category,other,thermal sodium ion exchange (second IOX)
+tcpmt.2026.3740312-F1-s09,tcpmt.2026.3740312-a-s09,tcpmt.2026.3740312,test,test,"cryogenic R-T, thermal cycling and R-M measurement in PPMS"
+ectc51846.2026.00119-F1-s04,ectc51846.2026.00119-a-s04,ectc51846.2026.00119,inspection,inspection,SEM cross-section for gap filling and voids
+ectc51846.2026.00119-F2-s06,ectc51846.2026.00119-c-s06,ectc51846.2026.00119,inspection,inspection,SEM of openings
+ectc51846.2026.00119-F3-s03,ectc51846.2026.00119-d-s03;ectc51846.2026.00119-e-s03;ectc51846.2026.00119-f-s03,ectc51846.2026.00119,test,test,apply constant power and record equilibrium temperature by IR thermography
+ectc51846.2026.00119-F4-s02,ectc51846.2026.00119-h-s02,ectc51846.2026.00119,test,test,measure melt viscosity vs temperature
+ectc51846.2026.00119-F5-s04,ectc51846.2026.00119-h-s06,ectc51846.2026.00119,other_category,other,peel cured film off Cu foil
+ectc51846.2026.00119-F5-s05,ectc51846.2026.00119-h-s07,ectc51846.2026.00119,test,test,"measure Cp (DSC), density and thermal diffusivity (periodic heating)"
+ectc51846.2026.00209-F3-s06,ectc51846.2026.00209-e-s06,ectc51846.2026.00209,test,test,ASTM D3359 tape test
+ectc51846.2026.00024-F2-s03,ectc51846.2026.00024-b-s03,ectc51846.2026.00024,inspection,inspection,C-SAM bond inspection
+tcpmt.2025.3538554-F1-s14,tcpmt.2025.3538554-a-s14,tcpmt.2025.3538554,other_category,other,repeat steps (a)-(o) on second wafer for second SLSI (no Sn)
+tcpmt.2025.3538554-F1-s21,tcpmt.2025.3538554-a-s21,tcpmt.2025.3538554,test,test,two-probe vertical conductance test on upper-side pads
+ectc51846.2026.00115-F1-s09,ectc51846.2026.00115-a-s09,ectc51846.2026.00115,other_category,other,1st vacuum-assisted injection of Cu-encapsulated diamond particles into TGVs
+ectc51846.2026.00115-F1-s12,ectc51846.2026.00115-a-s12,ectc51846.2026.00115,other_category,other,2nd vacuum-assisted particle injection
+ectc51846.2026.00115-F2-s01,ectc51846.2026.00115-b-s01,ectc51846.2026.00115,other_category,other,place Cu-encapsulated diamond particles on Cu-seeded substrate
+ectc51846.2026.00208-F1-s04,ectc51846.2026.00208-a-s04,ectc51846.2026.00208,other_category,other,vacuum degassing in DI water with mechanical vibration
+ectc51846.2026.00208-F1-s10,ectc51846.2026.00208-a-s10,ectc51846.2026.00208,other_category,other,pre-dip in electroless Ni solution for via penetration
+ectc51687.2025.00356-F1-s12,ectc51687.2025.00356-a-s12,ectc51687.2025.00356,inspection,inspection,FIB cross-section SEM for voids

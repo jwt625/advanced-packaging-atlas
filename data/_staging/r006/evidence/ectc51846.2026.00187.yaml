@@ -39,3 +39,8 @@ not_reported:
   - post-bond integration steps (thinning, probe pad formation)
 source_quality:
   - "Clean text layer. Fig. 7(b) prints no yields. Sec. III.B header misspelled 'overlaly'."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51846.2026.00187-a-m1, change: "none (kept a-m1 and b-m1)", reason: "p.6 Fig. 6(a) plots separate FG Cu and Std Cu points at 1000 nm pitch, both at 100%: genuine per-TV values"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00187-figures, change: "re-ranked: Fig. 2 f02 -> f01, Fig. 1 f01 -> f02, Fig. 6 f03 -> f04, Fig. 4 f04 -> f05, Fig. 8 f05 -> f06, Fig. 5 f06 -> f08", reason: "rank 1 = cross-section image over stack schematic (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00187-f03, change: "added Fig. 3 (cross_section, candidate)", reason: "TEM/PED images of bonded vias; context of a-m21, b-m6"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00187-f07, change: "added Fig. 7 (reliability_plot, candidate)", reason: "source of a-m22, a-m23, a-m26..a-m28"}

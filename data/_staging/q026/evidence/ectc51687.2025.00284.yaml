@@ -1,0 +1,62 @@
+paper_id: ectc51687.2025.00284
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00284/text.md
+  - references/ectc51687.2025.00284/source.json
+  - references/ectc51687.2025.00284/figures/page_02.png
+  - references/ectc51687.2025.00284/figures/page_03.png
+  - references/ectc51687.2025.00284/figures/page_04.png
+  - references/ectc51687.2025.00284/figures/cand/p02_fig1.png
+  - references/ectc51687.2025.00284/figures/cand/p02_fig2.png
+  - references/ectc51687.2025.00284/figures/cand/p02_fig3.png
+  - references/ectc51687.2025.00284/figures/cand/p03_fig4.png
+  - references/ectc51687.2025.00284/figures/cand/p03_fig5.png
+  - references/ectc51687.2025.00284/figures/cand/p03_fig6.png
+  - references/ectc51687.2025.00284/figures/cand/p03_fig7.png
+  - references/ectc51687.2025.00284/figures/cand/p04_fig8.png
+  - references/ectc51687.2025.00284/figures/cand/p04_fig9.png
+  - references/ectc51687.2025.00284/figures/cand/p04_fig10.png
+figure_reading_method: >-
+  All loss values from text; figures used for the dashed reference lines (Fig. 4, 6, 8), Fig. 8 spread (read off
+  candidate crop, +/-0.1 dB) and pie-chart percentages (Fig. 7, 9, 10, printed labels). Glue from Fig. 3(b) label.
+entries:
+  - {table: optical_interfaces, row_id: ectc51687.2025.00284-a-o1, field: coupling_loss_db, value: 1.28, unit: dB, basis: measured, locator: "p.3 Sec. III.A", note: "'around 1.28 dB with a sigma of 0.18 dB', loopback"}
+  - {table: optical_interfaces, row_id: ectc51687.2025.00284-a-o2, field: coupling_loss_db, value: 0.09, unit: dB, basis: measured, locator: "p.3 Sec. III.B", note: "average 1260-1360 nm; min 0.05 dB"}
+derived: []
+conflicts:
+  - {table: optical_interfaces, row_id: ectc51687.2025.00284-a-o1, field: channels, values: ["40 channel routings, one row 40 fibers", "outer most channel pair 1-42"], locators: ["p.2 Sec. II.B", "p.3 Sec. II.B"], chosen: 40, why: "channel count stated twice as 40; pair label 1-42 kept as written in report"}
+  - {table: optical_interfaces, row_id: ectc51687.2025.00284-a-o1, field: coupling_loss_db, values: ["Fig. 4 shows 10 samples (#1-#10)", "text: 40-fiber array average"], locators: ["p.3 Fig. 4", "p.3 Sec. III.A"], chosen: "text average", why: "figure x axis 'Sample#' with 10 points does not map to 40 channels; average and sigma taken from text"}
+excluded:
+  - "Single fiber to COI WG loss < 0.1 dB 1260-1360 nm (previous publication [5])"
+  - "General GC bandwidth 20-30 nm; 100 GHz modulator with PAM4 400 Gbps (introduction, not this work)"
+  - "AI model parameter and compute growth figures (refs [1-4])"
+  - "Fig. 1 CoWoS + EPIS-BOE system schematic (concept, not the measured TV)"
+not_reported:
+  - electrical_interfaces
+  - interconnects (no electrical joints; optical attach only)
+  - module dimensions, fiber type, MFD, COI/COUPE-like materials beyond SiN WGs, micro-lens material
+  - glue product and cure, alignment accuracy values, Part-3 gap
+  - Part-4 average loss (only plotted), which samples/wavelength for Part 3
+source_quality:
+  - "Candidates for Fig. 4, 5, 6, 8 cut the x-axis titles; pie-chart candidates cut at the bottom."
+revisions:
+  - {date: 2026-10-19, source: audit_x2A, row_id: "ectc51687.2025.00284-F1-s02", change: "equipment '6-axis alignment system' -> empty; conditions 'active alignment' kept", reason: "p.2 Sec. II.A names the 6-axis control system as part of the optical measurement set-up, not the attach tool"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "ectc51687.2025.00284-F1-s03", change: "equipment '6-axis alignment system' -> empty; conditions 'active alignment' kept", reason: "p.2 Sec. II.A names the 6-axis control system as part of the optical measurement set-up, not the attach tool"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "ectc51687.2025.00284-b-m1", change: "n_samples 216 -> 18; '216 data points' moved into condition", reason: "p.4 Fig. 8 caption: 216 data points; p.4 Sec. III.D: total 18 test samples"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "ectc51687.2025.00284-f02", change: "tv_ids a -> a;b", reason: "Fig. 2 shows interfaces 4-5, which are TV b (p.4 Sec. III.D-E)"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f01", change: "re-ranked Fig. 2: ectc51687.2025.00284-f02 -> ectc51687.2025.00284-f01", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f02", change: "re-ranked Fig. 3: ectc51687.2025.00284-f01 -> ectc51687.2025.00284-f02", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f03", change: "added Fig. 1 (stack_schematic, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f04", change: "re-ranked Fig. 4: ectc51687.2025.00284-f03 -> ectc51687.2025.00284-f04", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f05", change: "re-ranked Fig. 8: ectc51687.2025.00284-f04 -> ectc51687.2025.00284-f05", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f06", change: "re-ranked Fig. 6: ectc51687.2025.00284-f05 -> ectc51687.2025.00284-f06", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f07", change: "re-ranked Fig. 5: ectc51687.2025.00284-f06 -> ectc51687.2025.00284-f07", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f08", change: "added Fig. 7 (other, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f09", change: "added Fig. 9 (other, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00284-f10", change: "added Fig. 10 (other, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00284-F1-s01", change: "composite module-fabrication step split: iFAU build is new F1-s05 (fiber_prep, 127 um pitch)", reason: "p.2 Sec. II.A; p.3 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00284-F1-s05", change: "added iFAU fabrication step", reason: "p.2 Sec. II.A; p.3 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00284-F1-s04", change: "deleted (optical loss measurement); set-up added to condition of metric a-m5", reason: "measurements are metrics; loss values already in metrics/optical_interfaces"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00284-F2", change: "added fragments flow for wafer-level TV b", reason: "p.3 Sec. III.B; p.4 Sec. III.D; TV b was in no flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00284-F1", change: "step_basis filled on all steps of F1; seq renumbered in flow order where steps were added/removed", reason: "schema v2.4 step_basis; order from the paper's flow figure/table/text"}

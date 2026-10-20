@@ -1,0 +1,45 @@
+paper_id: tcpmt.2026.3650893
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/tcpmt.2026.3650893/text.md
+  - references/tcpmt.2026.3650893/source.json
+  - references/tcpmt.2026.3650893/figures/page_01.png
+  - references/tcpmt.2026.3650893/figures/page_02.png
+  - references/tcpmt.2026.3650893/figures/page_03.png
+  - references/tcpmt.2026.3650893/figures/cand/p01_fig2.png
+  - references/tcpmt.2026.3650893/figures/cand/p02_fig3.png
+  - references/tcpmt.2026.3650893/figures/cand/p02_fig5.png
+  - references/tcpmt.2026.3650893/figures/cand/p02_fig6.png
+  - references/tcpmt.2026.3650893/figures/cand/p03_fig7.png
+  - references/tcpmt.2026.3650893/figures/cand/p03_fig8.png
+figure_reading_method: >-
+  400-600 dpi re-crops from source.pdf of Fig. 3, 4, 5, 6, 7. Fig. 8 bar values printed on bars. Fig. 6 after-TCT
+  plateau read on log axis (1e-8 at 265 px, 1e-7 at 70 px; trace at 243 px -> 1.3e-8, +/-0.1e-8).
+entries:
+  - {table: interconnects, row_id: tcpmt.2026.3650893-c-i1, field: height_um, value: 0.4, unit: um, basis: measured, locator: "p.3 Fig. 7(c)", note: "400 nm label next to 'Copper Pillar' on SEM after 200 TC"}
+  - {table: stack_layers, row_id: tcpmt.2026.3650893-c-L10, field: thickness_um, value: 0.3, unit: um, basis: measured, locator: "p.3 Fig. 7(c)", note: "300 nm label next to 'Copper RDL'"}
+  - {table: metrics, row_id: tcpmt.2026.3650893-c-m4, field: value, value: 1.3e-8, unit: ohm*cm2, basis: measured, locator: "p.2 Fig. 6", note: "after-TCT trace plateau, read off plot"}
+derived:
+  - {table: interconnects, row_id: tcpmt.2026.3650893-a-i1, field: bonding_time_s, value: 300, formula: "5 min x 60", inputs: "p.2 Sec. II.A"}
+  - {table: process_steps, row_id: tcpmt.2026.3650893-F1-s02, field: time_s, value: 300, formula: "5 min x 60", inputs: "p.2 Sec. II.A"}
+  - {table: process_steps, row_id: tcpmt.2026.3650893-F3-s04, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.2 Sec. III.A"}
+  - {table: process_steps, row_id: tcpmt.2026.3650893-F1-s03, field: thickness_um, value: 0.02, formula: "20 nm / 1000", inputs: "p.2 Sec. II.B"}
+  - {table: process_steps, row_id: tcpmt.2026.3650893-F3-s03, field: thickness_um, value: 0.005, formula: "5 nm / 1000", inputs: "p.2 Sec. III.A"}
+  - {table: stack_layers, row_id: tcpmt.2026.3650893-c-L06, field: thickness_um, value: 0.01, formula: "10 nm / 1000", inputs: "p.2 Sec. III.A"}
+conflicts:
+  - {table: metrics, row_id: tcpmt.2026.3650893-c-m2, field: unit, values: ["ohm*cm2 (text)", "ohm*um2 (Fig. 6 axis label)"], locators: ["p.3 Sec. III.B", "p.2 Fig. 6"], chosen: "ohm*cm2", why: "text states 4.5e-9 and 1.1e-8 ohm*cm2; plot values match numerically but axis unit differs; text unit kept"}
+excluded:
+  - "Cu-Cu TCB at 5 um pitch, thin 5-10 nm passivation dielectric, W2W submicron pitch (refs [6]-[16])"
+  - "MOF dielectric constant k = 2.6 and process-time advantage attributed to refs [17], [18]"
+  - "Formic acid oxide removal rationale attributed to ref [14]"
+  - "Claims: >10x parasitic reduction vs microbumps (ref [5]); >10x local heat transfer and >20 um gaps for polymer underfills (no data in paper)"
+  - "10x film-thickness increase of MOF vs conventional ALD (qualitative claim, no data)"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - "bonding temperature/force/time for Au-passivated Cu bonds (TV c)"
+  - "Cu pillar/pad diameters; I/O counts; bottom substrate size for TV c; die thicknesses"
+  - "MOF recipe for TV a shear samples; sample counts for shear and TC"
+  - "meaning of 572 um / 364 um / 1.34 mm labels on Fig. 4(a) SEM (not entered)"
+source_quality:
+  - "3-page letter; clean text layer. All 8 figures had candidates; Fig. 6 candidate extends to page edge."

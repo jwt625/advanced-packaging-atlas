@@ -1,0 +1,61 @@
+paper_id: ectc51846.2026.00198
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00198/text.md
+  - references/ectc51846.2026.00198/source.json
+  - references/ectc51846.2026.00198/figures/page_02.png
+  - references/ectc51846.2026.00198/figures/page_03.png
+  - references/ectc51846.2026.00198/figures/page_04.png
+figure_reading_method: >-
+  Page renders p.2-4 and candidates p02_fig1, p02_fig2, p03_fig3, p03_fig5, p03_fig6, p03_fig7, p04_fig8 viewed.
+  Fig. 8 linewidth error bars read by eye (+/-0.01 um); SEM tool name SU5000 read from the Fig. 6 image banner.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00198-b-m1, field: value, value: 22, unit: um, basis: measured, locator: "p.4 Fig. 8", note: "DOF window drawn between focus -22 and 0 um"}
+derived:
+  - {table: test_vehicles, row_id: ectc51846.2026.00198-a, field: package_thickness_mm, value: 1.1, formula: "glass thickness t 1.1 mm (no conversion; stored as package thickness of the test panel)", inputs: "p.2 Sec. III.A"}
+  - {table: components, row_id: ectc51846.2026.00198-a-c1, field: thickness_um, value: 1100, formula: "1.1 mm x 1000", inputs: "p.2 Sec. III.A"}
+  - {table: stack_layers, row_id: ectc51846.2026.00198-a-L03, field: thickness_um, value: 1100, formula: "1.1 mm x 1000", inputs: "p.2 Sec. III.A"}
+conflicts:
+  - {table: figures, row_id: ectc51846.2026.00198-f06, field: axis units, values: ["x[um] axis label", "490 mm x 490 mm caption"], locators: ["p.2 Fig. 2", "p.2 Fig. 2 caption"], chosen: "490 mm x 490 mm", why: "caption and text (entire substrate area) agree; axis label likely mislabelled"}
+excluded:
+  - "reticle size 25.52 x 32.52 mm attributed to the lithography scanner of ref [1] (used only as the paper's own area unit)"
+  - "organic substrate thickness variation 10 um p-p from ref [2]"
+  - "HRDP glass carrier TTV <5 um from ref [5]"
+  - "thin panels down to 0.2 mm thickness (general statement citing ref [2])"
+  - "Fig. 3 caption full-panel area 262,650 mm2 / 316-reticle (panel arithmetic, not a build metric)"
+not_reported:
+  - process_steps details: Cr deposition method and thickness, panel exposure dose, Ti-Cu seed thickness
+  - "lens NA, wavelength, tool name/model, throughput"
+  - "wafer diameter; absolute CD values (authors focus on variation)"
+  - interconnects
+  - electrical_interfaces
+  - optical_interfaces
+source_quality:
+  - "All 8 figure candidates hold the full figure; Fig. 2 axis label says um while caption says mm."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F1-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F1-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F1-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F1-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F1-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in p.2 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F1-s03", change: "equipment: '' -> 'panel stepper with large-area projector lens; panel chuck plate'", reason: "named tool type to equipment; pattern sizes are a sweep on the exposure (p.3 Sec. IV.A; p.2 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F1-s03", change: "conditions: 'large-area projector lens; dose not stated' -> '18-reticle (14,940 mm2) field per shot; 4x4 shot pattern (16 shots); dose not stated'", reason: "named tool type to equipment; pattern sizes are a sweep on the exposure (p.3 Sec. IV.A; p.2 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F1-s03", change: "split: '' -> 'L/S 1.6/1.5/1.4/1.3/1.2 um'", reason: "named tool type to equipment; pattern sizes are a sweep on the exposure (p.3 Sec. IV.A; p.2 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s03", change: "equipment: '' -> 'panel stepper with large-area projector lens'", reason: "focus offsets are a parameter sweep on the exposure (p.4 Fig. 8); dose already typed; tool to equipment"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s03", change: "target: '' -> 'L/S 1.5 um'", reason: "focus offsets are a parameter sweep on the exposure (p.4 Fig. 8); dose already typed; tool to equipment"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s03", change: "conditions: 'dose 120 mJ/cm2; focus -30 to +8 um (Fig. 8)' -> 'exposure over 18-reticle field'", reason: "focus offsets are a parameter sweep on the exposure (p.4 Fig. 8); dose already typed; tool to equipment"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s03", change: "split: '' -> 'focus offset -30 to +8 um, about 2 um steps (Fig. 8)'", reason: "focus offsets are a parameter sweep on the exposure (p.4 Fig. 8); dose already typed; tool to equipment"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s03", change: "overrides: 'conditions:figure_image' -> 'split:figure_image'", reason: "focus offsets are a parameter sweep on the exposure (p.4 Fig. 8); dose already typed; tool to equipment"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F1-s05", change: "deleted step 'optical microscopy of patterns at center and four corners of 18-reticle field'", reason: "optical-microscope inspection is the experiment's measurement, not a build step; already in metrics ectc51846.2026.00198-a-m1/-a-m2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s06", change: "deleted step 'cross-sectional SEM of patterns'", reason: "cross-section SEM is a measurement; covered by metrics ectc51846.2026.00198-b-m3 (tool SU5000 moved to its condition)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-F2-s07", change: "deleted step 'linewidth measurement across 18-reticle area by optical profilometer; Bossung analysis'", reason: "linewidth/Bossung measurement is a result; covered by metrics ectc51846.2026.00198-b-m1/-b-m2 (profilometer moved to b-m1 condition)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-b-m3", change: "condition: '' -> 'cross-sectional SEM (SU5000, read from Fig. 6 image banner)'", reason: "SEM tool from deleted step ectc51846.2026.00198-F2-s06 (p.3 Fig. 6)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00198-b-m1", change: "condition: '1.5 um L/S, 6 um PXi/XI resist, 120 mJ/cm2' -> '1.5 um L/S, 6 um PXi/XI resist, 120 mJ/cm2; linewidth by optical profilometer, Bossung curve'", reason: "measurement method from deleted step ectc51846.2026.00198-F2-s07 (p.2-3 Sec. III.B)"}

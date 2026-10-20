@@ -1,0 +1,31 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+iwlpc52010.2020.9375887-a-c1,iwlpc52010.2020.9375887-a,unspecified,,,"single silicon die (face up, Cu studs up)",1,,,,,,,,,Si,,stated,text,,p.1 Abstract; p.3 Sec. 6-Sided Die Protection,,Die function and size not given; Si backgrind thickness 280-700 um across evaluation panels (stack layer).
+iwlpc52010.2020.9375887-a-c2,iwlpc52010.2020.9375887-a,mold,,no,"mold compound (compression molded, 6-sided die protection)",,,,,,,,,,mold compound (EMC),,stated,mixed,,p.1 Table 1; p.3 Sec. 6-Sided Die Protection; p.3 Fig. 5,,Product not named; overall mold thickness 405-815 um (stack layer).
+iwlpc52010.2020.9375887-a-c3,iwlpc52010.2020.9375887-a,other,,,backside epoxy,,,,,,,,,,epoxy,,stated,table,,p.1 Table 1,,"Listed for M-Series as feature, process and warpage control; thickness and product not given."
+iwlpc52010.2020.9375887-a-c4,iwlpc52010.2020.9375887-a,other,,,temporary carrier (panelization),1,,,,,,,,,,,stated,text,,p.3 Sec. 6-Sided Die Protection,,Material and size not given.
+iwlpc52010.2020.9375887-b-c1,iwlpc52010.2020.9375887-b,dummy_die,,,fiducial die package,5,5,5,,,,,,,,,design_target,table,,p.6 Table 3,,"Assumed 5x5 mm, 5 per segment (Table 3 footnotes); count is per segment."
+ectc51529.2024.00064-a-c1,ectc51529.2024.00064-a,dummy_die,yes,,"top chip (bumped, NCF laminated)",1,,,,,,,,,,,stated,text,,p.1 Sec. II; p.2 Sec. III.1,,Daisy-chain process vehicle; smaller than bottom chip; size not stated.
+ectc51529.2024.00064-a-c2,ectc51529.2024.00064-a,dummy_die,yes,,bottom chip (wafer),1,,,,,,,,,,,stated,text,,p.1 Sec. II; p.2 Sec. II,,Larger than top chip; bonding on wafer (CoW). Wafer diameter not stated.
+ectc51529.2024.00064-a-c3,ectc51529.2024.00064-a,underfill,,,"NCF (non-conductive film, pre-applied underfill)",,,,,,,,,,NCF (commercial),,stated,text,,p.1 Sec. II; p.4 Sec. III.2,,Commercial NCF viscosity about 2000 Pa.s (metric m22); a lower-viscosity NCF also evaluated.
+ectc51529.2024.00064-a-c4,ectc51529.2024.00064-a,mold,,,wafer-level mold (ground),,,,,,,,,,,,stated,caption,,p.2 Fig. 1(b),,Material not stated.
+ectc51529.2024.00229-a-c1,ectc51529.2024.00229-a,substrate,,,75-mm-square package substrate,1,75,75,,,,,,,,,design_target,mixed,,p.3 Sec. III.A; p.3 Fig. 4(a),,
+ectc51529.2024.00229-b-c1,ectc51529.2024.00229-b,pic,,,silicon photonics die,1,26.0,16.5,,,,,,,Si (220 nm Si waveguide),,design_target,text,,p.3 Sec. III.B; p.4 Sec. III.B,,
+ectc51846.2026.00019-a-c1,ectc51846.2026.00019-a,laser,,,"EML (DFB-LD + EAM + spot-size converter), flip-chip electrodes",1,,,,,,,,,,,stated,text,,p.4 Sec. III.B; p.4 Fig. 6(a),,Anode/cathode for DFB-LD and EAM on chip surface.
+ectc51846.2026.00019-a-c2,ectc51846.2026.00019-a,interposer,,,Glass-IP with TGVs; DFB-LD drive wiring on surface,1,,,,,,,,,glass,,stated,text,,p.4 Sec. III.B; p.4 Fig. 6,,
+ectc51846.2026.00019-a-c3,ectc51846.2026.00019-a,substrate,,,package substrate with straight HF transmission lines,1,,,,,,,,,,,stated,text,,p.4 Sec. III.B; p.4 Fig. 6(b),,Pad larger than designed caused ~60 GHz dip.
+ectc51846.2026.00019-a-c4,ectc51846.2026.00019-a,other,,,termination chip resistors on substrate backside,,,,,,,,,,,,stated,text,,p.4 Sec. III.B; p.4 Fig. 6(b),,Mounted with AuSn solder; count and value not stated.
+ectc51846.2026.00019-b-c1,ectc51846.2026.00019-b,laser,,,"EML (Tx), flip-chip",,,,90,,,,,,,,design_target,schematic,,p.3 Fig. 3; p.2 Fig. 1,,90 um is the EML height label in the simulation schematic.
+ectc51846.2026.00019-b-c2,ectc51846.2026.00019-b,other,,,"surface-illuminated photodetector (Rx), flip-chip",,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Fig. 1,,
+ectc51846.2026.00019-b-c3,ectc51846.2026.00019-b,eic,,yes,"driver (DRV) EIC, backside of Glass-IP",,,,,,,,,,,,stated,schematic,,p.2 Fig. 1; p.2 Sec. II.B,,Shown inside the mold layer under the Glass-IP.
+ectc51846.2026.00019-b-c4,ectc51846.2026.00019-b,eic,,yes,"TIA EIC, backside of Glass-IP",,,,,,,,,,,,stated,schematic,,p.2 Fig. 1; p.2 Sec. II.B,,
+ectc51846.2026.00019-b-c5,ectc51846.2026.00019-b,interposer,,,"Glass-IP with RDLs, TGVs and thermal vias",,,,,,,,,,glass,,stated,text,,p.2 Sec. II; p.2 Sec. II.C,,
+ectc51846.2026.00019-b-c6,ectc51846.2026.00019-b,other,,,45 deg micro-prism mirror (passive image-recognition placement),,,,,,,,,,,,design_target,schematic,,p.3 Fig. 3; p.2 Sec. II.A,,
+ectc51846.2026.00019-b-c7,ectc51846.2026.00019-b,lens,,,micro-lens array (collimating; actively aligned),,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 2,,
+ectc51846.2026.00019-b-c8,ectc51846.2026.00019-b,connector,,,"detachable fiber connector with mirror + focusing lens, mating molded receptacle plate",,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 2,,
+ectc51846.2026.00019-b-c9,ectc51846.2026.00019-b,mold,,,mold (backside EIC layer; optical-path shielding),,,,,,,,,,,,stated,mixed,,p.2 Fig. 1; p.2 Sec. II.A,,
+ectc51846.2026.00019-b-c10,ectc51846.2026.00019-b,other,,,heat-transfer block (HTB),,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. II.C,,
+ectc51846.2026.00019-b-c11,ectc51846.2026.00019-b,heat_spreader,,,heat spreader,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. II.C,,
+ectc51846.2026.00019-b-c12,ectc51846.2026.00019-b,substrate,,,package substrate (high-density),,,,,,,,,,,,stated,schematic,,p.2 Fig. 1; p.2 Sec. II.B,,
+ectc51846.2026.00024-a-c1,ectc51846.2026.00024-a,dummy_die,yes,,top chip with 3 um Cu/dielectric bond pads,,,,,,,,,,Si with fine-grained ECP Cu pads,,stated,text,,p.5 Sec. III.B.2,,"Chip size, thickness, count not stated."
+ectc51846.2026.00024-a-c2,ectc51846.2026.00024-a,other,,,300 mm target wafer with 3 um Cu/dielectric bond pads,1,,,,,,,,,Si,,stated,text,,p.2 Sec. II.B,,
+ectc51846.2026.00024-b-c1,ectc51846.2026.00024-b,other,,,300 mm Si bonding wafer with damascene Cu/dielectric pads,2,,,,,,,,,Si,,design_target,text,,p.2 Sec. II.B; p.5 Fig. 7,,

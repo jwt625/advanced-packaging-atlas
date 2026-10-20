@@ -1,0 +1,62 @@
+paper_id: ectc51846.2026.00092
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00092/text.md
+  - references/ectc51846.2026.00092/source.json
+  - references/ectc51846.2026.00092/figures/page_02.png
+  - references/ectc51846.2026.00092/figures/page_03.png
+  - references/ectc51846.2026.00092/figures/page_04.png
+  - references/ectc51846.2026.00092/figures/page_05.png
+  - references/ectc51846.2026.00092/figures/page_06.png
+figure_reading_method: >-
+  Page renders at 150 dpi; Fig. 1, 9, 10, 11 re-cropped at 300 dpi. Fig. 9/10 marker centres read against
+  gridlines (Fig. 10 ~66 px per kW at 300 dpi, +/-0.05 kW; Fig. 9 +/-0.03 kW). Fig. 12 has no y tick values.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00092-a-m2, field: value, value: 3.15, unit: kW, basis: measured, locator: "p.5 Fig. 10", note: "micropillar TTV at 4 LPM"}
+  - {table: metrics, row_id: ectc51846.2026.00092-c-m4, field: value, value: 1.96, unit: kW, basis: measured, locator: "p.5 Fig. 9", note: "lidded at 4 LPM; 10 LPM 2.24 -> ~280 W gain, text says ~300 W"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00092-a-m3, field: value, values: ["text: 4 kW at 4 LPM and 5.3 kW at 8 LPM", "abstract: >5000 W at 6 LPM", "Fig. 10: 3.15 kW at 4 LPM, 4.0 kW at 6 LPM, 4.55 kW at 8 LPM, 5.05 kW at 10 LPM, 5.35 kW at 12 LPM"], locators: ["p.5 Sec. III.C", "p.1 Abstract", "p.5 Fig. 10"], chosen: "Fig. 10 readings for per-flow rows; abstract >5000 W kept as its own text row with flow conflict noted", why: "measured plot over text; flow-rate labels inconsistent inside the paper"}
+  - {table: metrics, row_id: ectc51846.2026.00092-b-m1, field: value, values: ["text: lidless 2.5~3.0 kW and lidded 1.9-2.3 kW at 1-2 LPM", "Fig. 9: lidless 1.74/2.23 kW, lidded 1.37/1.74 kW at 1/2 LPM"], locators: ["p.4-5 Sec. III.C", "p.5 Fig. 9"], chosen: "Fig. 9 readings", why: "measured plot over text"}
+  - {table: metrics, row_id: ectc51846.2026.00092-a-m13, field: variant, values: ["text: TCG500x / HTS 250 hr / uHAST 96 hr / water immerse 250 hr", "Fig. 11 DoE: uHAST 264 hrs, HTS 1000 hrs, TCG 1000 cycles, water immerse 1000 hrs"], locators: ["p.5 Sec. IV.A", "p.5 Fig. 11"], chosen: "text durations (data reported so far); Fig. 11 read as planned DoE", why: "text states results at these readouts"}
+excluded:
+  - "30 kW per rack by 2027 (McKinsey, ref [1])"
+  - "Micropillar PoC results of refs [9]-[12]; CoWoS-R warpage/reliability claims of refs [15][16]"
+not_reported:
+  - "process_steps: ectc51846.2026.00092-b (lidless baseline TTV; build flow not described, only TIM1.5 PCM and cold plate stated)"
+  - "process_steps: ectc51846.2026.00092-c (lidded baseline TTV; build flow not described, only TIM1/lid/TIM2 and cold plate stated)"
+  - interconnects (microbump, C4, BGA shown in Fig. 1 schematic only; no pitch/size/metallurgy)
+  - electrical_interfaces, optical_interfaces
+  - micropillar height, diameter, pitch, aspect ratio; formation chemistry and equipment
+  - interposer, die, package and substrate dimensions; RDL layer count; lid material; sealant product and cure
+  - critical He leak rate value; pressure drop vs flow; junction temperatures; reliability n beyond Fig. 12 samples
+source_quality:
+  - "Candidate crops correct except Fig. 7 (third legend line cut; manual crop). Text flow rates inconsistent with Fig. 9/10."
+revisions:
+  - {date: 2026-10-19, source: audit_x2B, row_id: "ectc51846.2026.00092-F1-s02", change: "notes: 'Order relative to CoW not explicit; coating precedes micropillar steps.' -> 'seq inferred, not stated: paper gives no position for carrier coating; it precedes micropillar steps.' (seq unchanged)", reason: "audit_x2B defect 5: position not stated (p.2 Fig. 3 gives only CoW -> micropillar loop -> oS); seq_basis column is a pending schema change, interim: flag inferred order in notes"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: "ectc51846.2026.00092-F1-s06", change: "notes: 'Position after oS inferred from package architecture.' -> 'seq inferred, not stated: sealant dispense position after oS inferred from package architecture.' (seq unchanged)", reason: "audit_x2B defect 5: position not stated (p.2 Fig. 3 gives only CoW -> micropillar loop -> oS); seq_basis column is a pending schema change, interim: flag inferred order in notes"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: "ectc51846.2026.00092-F1-s07", change: "notes: 'Attach order not stated explicitly.' -> 'seq inferred, not stated: lid attach order not given in the paper.' (seq unchanged)", reason: "audit_x2B defect 5: position not stated (p.2 Fig. 3 gives only CoW -> micropillar loop -> oS); seq_basis column is a pending schema change, interim: flag inferred order in notes"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: "ectc51846.2026.00092-f01", change: "shows: 'Cross-section schematic: manifold lid with inlet/outlet over micropillared SoCs, sealant, HBM, organic RDL interposer, substrate, BGA' -> 'Unlabelled cross-section schematic of manifold lid with inlet/outlet over micropillared dies on interposer and substrate'", reason: "audit_x2B defect 6: Fig. 1 drawing has no labels and caption names none of sealant/HBM/RDL/BGA (verified on p.2 render)"}
+  - {date: 2026-10-19, source: audit_x2B, row_id: "ectc51846.2026.00092-f02", change: "bbox 0.4935,0.3837,1.0,0.4965 (candidate p02_fig3) -> 0.545,0.3837,0.885,0.4965 (manual)", reason: "audit_x2B section 4: bbox ran to page edge x1=1.0 (white margin only); re-cropped and opened"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00092-f04", change: "renumbered from ectc51846.2026.00092-f05 (rank 5 -> 4)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00092-f05", change: "added Fig. 4 p.3 micrograph (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00092-f06", change: "added Fig. 5 p.3 other (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00092-f07", change: "renumbered from ectc51846.2026.00092-f04 (rank 4 -> 7)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00092-f08", change: "added Fig. 9 p.5 thermal_plot (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00092-f09", change: "renumbered from ectc51846.2026.00092-f06 (rank 6 -> 9)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00092-f10", change: "added Fig. 11 p.5 data_table (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00092-F1-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 3 integrated CoWoS flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00092-F1-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 3 integrated CoWoS flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00092-F1-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 3; equipment and SoC count stated (p.1 Abstract; p.4 Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00092-F1-s03", change: "step: 'micropillar formation on SoC backside using TSMC front-end processes (micropillar loop)' -> 'Si micropillar formation on backside of the 4 SoC dies using TSMC front-end processes (micropillar loop)'", reason: "order from Fig. 3; equipment and SoC count stated (p.1 Abstract; p.4 Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00092-F1-s03", change: "equipment: '' -> 'special wafer carriers and tool parts'", reason: "order from Fig. 3; equipment and SoC count stated (p.1 Abstract; p.4 Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00092-F1-s03", change: "locator: 'p.2 Sec. I.A; p.2 Fig. 3; p.3 Sec. I.B' -> 'p.2 Sec. I.A; p.2 Fig. 3; p.3 Sec. I.B; p.1 Abstract; p.4 Sec. III.A'", reason: "order from Fig. 3; equipment and SoC count stated (p.1 Abstract; p.4 Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00092-F1-s04", change: "step_basis: '' -> 'inferred_order'", reason: "cleaning is inside the micropillar loop; its position after pillar formation is inferred (p.2 Sec. I.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00092-F1-s04", change: "notes: 'Designed to avoid damage to carrier protective layer.' -> 'Within micropillar loop; placed after pillar formation (removes its side products). Protects carrier layer.'", reason: "cleaning is inside the micropillar loop; its position after pillar formation is inferred (p.2 Sec. I.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00092-F1-s02", change: "result: 'cross-cut adhesion 5B after process I and II (vs 1B/0B for Material A)' -> ''", reason: "cross-cut adhesion result is a test result already in metrics ectc51846.2026.00092-a-m17..m20"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00092-F2", change: "added flow 'POR CoWoS Flow (Fig. 3)' (comparison)", reason: "Fig. 3 shows the POR flow as a distinct flow next to the integrated flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00092-F2-s01", change: "added step 'Chip-on-Wafer (CoW)'", reason: "POR CoWoS flow step shown in p.2 Fig. 3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00092-F2-s02", change: "added step 'On-Substrate (oS)'", reason: "POR CoWoS flow step shown in p.2 Fig. 3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00092-b", change: "added not_reported 'process_steps' entry", reason: "physical TV with no stated build flow (p.4 Sec. III.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00092-c", change: "added not_reported 'process_steps' entry", reason: "physical TV with no stated build flow (p.4 Sec. III.B)"}

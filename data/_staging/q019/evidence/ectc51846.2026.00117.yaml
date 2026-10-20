@@ -1,0 +1,49 @@
+paper_id: ectc51846.2026.00117
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00117/text.md
+  - references/ectc51846.2026.00117/source.json
+  - references/ectc51846.2026.00117/figures/page_01.png
+  - references/ectc51846.2026.00117/figures/page_02.png
+  - references/ectc51846.2026.00117/figures/page_03.png
+  - references/ectc51846.2026.00117/figures/page_04.png
+  - references/ectc51846.2026.00117/figures/page_05.png
+  - references/ectc51846.2026.00117/figures/cand/p03_fig7.png
+  - references/ectc51846.2026.00117/figures/cand/p03_fig8.png
+  - references/ectc51846.2026.00117/figures/cand/p04_tablei.png
+  - references/ectc51846.2026.00117/figures/cand/p04_fig10.png
+  - references/ectc51846.2026.00117/figures/cand/p04_fig11.png
+figure_reading_method: >-
+  Page renders plus 300 dpi re-crops of Fig. 7, Fig. 10, Fig. 11 and the unnumbered p.5 cross-section. Table I values
+  match text.md. Fig. 10 curves read against gridlines (+/-0.5 C/W).
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00117-a-m4, field: notes, value: "-20.96 C / -23.72 C / -14.97 C/W", unit: "C; C/W", basis: derived, locator: "p.3 Sec. IV", note: "paper-stated deltas; equal Table I differences"}
+  - {table: metrics, row_id: ectc51846.2026.00117-a-m5, field: value, value: 52.2, unit: C, basis: unspecified, locator: "p.4 Fig. 11", note: "table in figure; colour bar max 52.231"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00117-a-m11, field: value, values: ["42% X-Y reduction (abstract, this design)", "57.9% package size reduction (Sec. I.A, generic SESUB)", "-59.5% (Fig. 3, 12x14 mm normal vs 10x10 mm SESUB)"], locators: ["p.1 Abstract", "p.2 Sec. I.A", "p.2 Fig. 3"], chosen: 42, why: "only figure tied to this paper's design; others illustrate generic SESUB in the introduction"}
+  - {table: metrics, row_id: ectc51846.2026.00117-a-m5, field: basis, values: ["text: experimental data on the TV", "Fig. 11: simulation-style contour maps with FEA colour bars"], locators: ["p.4 Conclusion", "p.4 Fig. 11"], chosen: unspecified, why: "cannot confirm measured vs simulated"}
+excluded:
+  - "1000 W power threshold attributed to ref [1]"
+  - "Fig. 1 low noise emission and Fig. 2 ~20% thermal benefit: generic SESUB illustrations, no TV link"
+  - "Fig. 3 normal 12x14 mm vs SESUB 10x10 mm package (generic SESUB example)"
+  - "AEC-Q100 / ATV certification of the baseline line (no data)"
+  - "Fig. 9 thermal maps (no values readable beyond Table I)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - die sizes and thicknesses; substrate size and total thickness; dielectric materials
+  - via diameters/depths for TV; front-side Cu thickness; L/S
+  - reliability test conditions and sample counts; warpage values
+  - thermal simulation tool and boundary conditions beyond Ta 25 C, 1.4 W, JEDEC
+  - "process_steps: ectc51846.2026.00117-c (single-sided SESUB baseline; flow not described)"
+source_quality:
+  - "Unnumbered, uncaptioned cross-section image on p.5 (no scale bar). No candidate for it."
+  - "Candidate p04_fig9 bbox spans the page corner (0,0)."
+revisions:
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00117", change: "process_flow_level ordered -> fragments; has_process_flow yes -> no", reason: "repass rule 7: only a list of critical steps (Sec. II) and generic SESUB statements; no stated sequence or conditions"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00117-F1", change: "level ordered -> fragments; flow_name and notes rewritten", reason: "repass: as above"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00117-F1", change: "steps s01-s05 step_basis -> generic_description", reason: "repass: fragments are generic statements in reading order"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00117-F1-s05", change: "target (backside Cu > 45 um; slot vias 2x2 to 5x5 mm), plating capability, and void-free fill result added; locator + Conclusion", reason: "repass: stated in p.4 Conclusion"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51846.2026.00117-c", change: "not_reported 'process_steps: c' added", reason: "repass: single-sided SESUB baseline flow not described"}

@@ -35,3 +35,11 @@ not_reported:
   - Cu pillar diameter/height, solder cap; substrate layer count and materials; mold compound product
   - warpage data (named as purpose only); thermal; yield numbers
   - optical_interfaces
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: "iwlpc52010.2020.9375855-a-m11", change: "scope -> 'X-Cube height incl. Cu pillar; applies to TVs a, b'; copy iwlpc52010.2020.9375855-b-m1 deleted", reason: "p.3 Sec. X-Cube Test Vehicles and Fig. 3 ('details of package and functional test vehicles'): one 0.67 mm height for both TVs, no per-TV value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "iwlpc52010.2020.9375855-b-m1", change: "deleted (copy of iwlpc52010.2020.9375855-a-m11)", reason: "p.3 Sec. X-Cube Test Vehicles and Fig. 3 ('details of package and functional test vehicles'): one 0.67 mm height for both TVs, no per-TV value"}
+  - {date: 2026-10-19, source: figures, row_id: "iwlpc52010.2020.9375855-f03", change: "added Fig. 2 (stack_schematic, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "iwlpc52010.2020.9375855-f04", change: "re-ranked Fig. 4: iwlpc52010.2020.9375855-f05 -> iwlpc52010.2020.9375855-f04", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "iwlpc52010.2020.9375855-f05", change: "re-ranked Fig. 10: iwlpc52010.2020.9375855-f06 -> iwlpc52010.2020.9375855-f05", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "iwlpc52010.2020.9375855-f06", change: "re-ranked Fig. 6: iwlpc52010.2020.9375855-f04 -> iwlpc52010.2020.9375855-f06", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "iwlpc52010.2020.9375855-f07", change: "re-ranked Table 1: iwlpc52010.2020.9375855-f03 -> iwlpc52010.2020.9375855-f07", reason: "re-rank after additions"}

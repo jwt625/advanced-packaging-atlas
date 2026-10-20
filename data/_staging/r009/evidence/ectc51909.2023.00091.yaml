@@ -42,3 +42,5 @@ not_reported:
   - die sizes and thicknesses, LSI size, IPD x/y, mold and TIM materials, package thickness
   - warpage measurement method and sign convention; reliability test temperatures/humidity, preconditioning
   - electrical_interfaces (Fig. 5 attributed to ref [6]); optical_interfaces (CPO mentioned as potential only)
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00091, change: "papers.notes trimmed 31 -> 28 words (dropped \"TSMC\", \"and\", \"name\")", reason: "x1 item 15: notes over 30 words"}

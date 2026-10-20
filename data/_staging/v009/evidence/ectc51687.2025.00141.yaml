@@ -1,0 +1,51 @@
+paper_id: ectc51687.2025.00141
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00141/text.md
+  - references/ectc51687.2025.00141/source.json
+  - references/ectc51687.2025.00141/figures/page_02.png
+  - references/ectc51687.2025.00141/figures/page_03.png
+  - references/ectc51687.2025.00141/figures/page_04.png
+  - references/ectc51687.2025.00141/figures/page_05.png
+  - references/ectc51687.2025.00141/figures/page_06.png
+  - references/ectc51687.2025.00141/figures/cand/p02_fig2.png
+  - references/ectc51687.2025.00141/figures/cand/p03_fig4.png
+  - references/ectc51687.2025.00141/figures/cand/p03_tablei.png
+  - references/ectc51687.2025.00141/figures/cand/p04_fig7_2.png
+  - references/ectc51687.2025.00141/figures/cand/p06_fig10.png
+figure_reading_method: >-
+  300 dpi re-crops of Fig. 8(a), 9(a), 9(c), 10(a), 10(b); medians read at the 50% cumulative line against gridlines
+  (sheet resistance +/-0.003 ohm/sq, TSV chain +/-300 ohm, EM t50 +/-2 h on log axis, per-bump resistance +/-1 mOhm).
+entries:
+  - {table: metrics, row_id: ectc51687.2025.00141-a-m3, field: value, value: 30800, unit: ohm, basis: measured, locator: "p.5 Fig. 9(a)", note: "50% point; distribution ~29,800-31,800"}
+  - {table: metrics, row_id: ectc51687.2025.00141-a-m5, field: value, value: 17, unit: h, basis: measured, locator: "p.6 Fig. 9(c)", note: "50% cumulative failure; points ~14-20 h"}
+  - {table: interconnects, row_id: ectc51687.2025.00141-a-i1, field: resistance_mohm, value: 9, unit: mohm, basis: measured, locator: "p.6 Fig. 10(a)", note: "values converted per bump by the authors"}
+  - {table: metrics, row_id: ectc51687.2025.00141-a-m9, field: value_text, value: "plot max ~6%", unit: "%", basis: measured, locator: "p.6 Fig. 10(b)", note: "after improvement, 1000 h"}
+derived:
+  - {table: test_vehicles, row_id: ectc51687.2025.00141-a, field: n_dies, value: 3, formula: "1 sensor chip + 2 logic chips", inputs: "p.3 Sec. III.A"}
+conflicts:
+  - {table: metrics, row_id: ectc51687.2025.00141-a-m2, field: locator, values: ["text: 'Fig. 9(b) shows the results of short leakage tests'", "caption: Fig. 8(b) is the leakage plot"], locators: ["p.5 Sec. IV.B", "p.5 Fig. 8"], chosen: "Fig. 8(b)", why: "caption label per schema rule (c)"}
+excluded:
+  - "Al bump pad ~1 um thick and front-illuminated GS CIS of prior work refs [3], [4]"
+  - "0.4 um pitch backside Cu wiring of ref [5]; conventional RDL >= 2.0 um line width of refs [6]-[9]"
+  - "Fig. 1 CoW vs WoW comparison (generic)"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - wafer diameter, chip and thinned Si thicknesses, Cu wiring thickness, TSV diameter/depth
+  - solder composition, micro-bump height, bonding temperature/force/time/tool, underfill
+  - barrier metal material, interlayer film material, EM test temperature and failure criterion
+  - chain length for Fig. 9(a) and post-improvement HTS chain; sample counts
+source_quality:
+  - "Fig. 6 split across columns (panels a-f left, g right with caption) and had no candidate; Fig. 9 split across pages 5-6."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141", change: "process_flow_level ordered confirmed (no temperatures/times); 1 flow, 11 steps unchanged in count; step_basis set on all steps", reason: "p.4 Sec. III.B, Fig. 6(a)-(g) give the order; no conditions disclosed"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141-F1-s01", change: "target object names removed on s01, s02, s08, s09, s11; panel labels added to step text", reason: "target holds stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141-F1-s03", change: "target TSV 6 um pitch", reason: "p.4 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141-F1-s04", change: "target L/S 0.18/0.18 um (0.36 um pitch) on s04-s06; step_basis inferred_order", reason: "p.2 Sec. II.A; sub-steps of Fig. 6(c), order within (c) not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141-F1-s07", change: "target and thickness_um < 1 um (qualifier lt); material Cu with barrier metal", reason: "p.3 Sec. II.B: low-profile structure thickness less than 1 um"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141-F1-s10", change: "target micro-bump 20 um dia / 40 um min pitch, 15k per logic chip", reason: "p.3 Table I"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141-F1-s11", change: "step_basis inferred_order", reason: "dicing only implied by Fig. 5 diced device"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141-F1-s07", change: "category: 'other' -> 'rdl_layer'", reason: "manifest category_other: Cu pad base substrate formed by damascene in the same layer as the backside signal wiring (p.3 Sec. II.B); rdl_layer per DB convention for damascene metal layers"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141-F1-s08", change: "category: 'other' -> 'device_fab'", reason: "manifest category_other: on-chip lens is a CIS sensor (device) element (p.4 Sec. III.B, Fig. 6(e)); method not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00141-F1-s09", change: "category kept other", reason: "manifest category_other: pad-area opening method not stated (p.4 Sec. III.B, Fig. 6(f))"}

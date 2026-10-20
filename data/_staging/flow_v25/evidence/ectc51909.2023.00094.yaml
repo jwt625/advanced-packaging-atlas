@@ -1,0 +1,41 @@
+paper_id: ectc51909.2023.00094
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00094/text.md
+  - references/ectc51909.2023.00094/source.json
+  - references/ectc51909.2023.00094/figures/page_02.png
+  - references/ectc51909.2023.00094/figures/page_03.png
+  - references/ectc51909.2023.00094/figures/page_04.png
+  - references/ectc51909.2023.00094/figures/cand/p02_fig2.png
+  - references/ectc51909.2023.00094/figures/cand/p02_fig3.png
+  - references/ectc51909.2023.00094/figures/cand/p03_tablei.png
+  - references/ectc51909.2023.00094/figures/cand/p03_fig5.png
+  - references/ectc51909.2023.00094/figures/cand/p03_fig6.png
+  - references/ectc51909.2023.00094/figures/cand/p03_fig7.png
+  - references/ectc51909.2023.00094/figures/cand/p04_fig8.png
+figure_reading_method: >-
+  Candidate crops and 150 dpi page renders. Figs. 3, 4, 5, 6 have no numeric warpage axis. Fig. 7 percentages read from
+  panel titles. Fig. 8(b) means read against 10% gridlines (+/-2). Fig. 9 CTE bars read against axis ticks (unit not printed).
+entries:
+  - {table: metrics, row_id: ectc51909.2023.00094-b-m7, field: value, value: 44, unit: "%", basis: measured, locator: "p.4 Fig. 8(b)", note: "low CTE carrier mean bar; points ~53, 49, 38.5, 37"}
+  - {table: metrics, row_id: ectc51909.2023.00094-b-m8, field: value, value: 81, unit: "%", basis: measured, locator: "p.4 Fig. 8(b)", note: "high CTE carrier mean; points ~100, 81, 71"}
+  - {table: stack_layers, row_id: ectc51909.2023.00094-a-L02, field: properties, value: "~4 to >10", unit: "CTE (unit not printed)", basis: stated, locator: "p.4 Fig. 9", note: "Si CTE tick at 3; mold range starts ~5"}
+derived: []
+conflicts:
+  - {table: test_vehicles, row_id: ectc51909.2023.00094-a, field: locator, values: ["structure similar to Fig. 1(a)", "Fig. 2(a)"], locators: ["p.2 Sec. III.A", "p.2 Sec. II"], chosen: "Fig. 2(a)", why: "Fig. 1 is panel vs wafer size; text typo"}
+excluded:
+  - "Wafer-level warpage studies of refs [7,8]"
+  - "HBM die thickness more than 700 um (general statement in Introduction, not a die in these TVs)"
+not_reported:
+  - electrical_interfaces, optical_interfaces, interconnects
+  - absolute warpage values (only % of spec, normalized or ratios); warpage spec value
+  - mold material names, modulus, CTE values; carrier material and thickness; mold thicknesses
+  - die sizes and thicknesses; die attach method; molding temperature, pressure, cure conditions
+  - bridge dies (omitted in TVs); sample counts for panel warpage
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00094-F1-s02", change: "deleted (Z-height warpage measurement, not a build step)", reason: "results already in metrics a-m1..a-m3, b-m1..b-m8 (scope: range of Z height; die Z with panel chucked)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00094-F2-s02", change: "deleted (Z-height warpage measurement, not a build step)", reason: "results already in metrics a-m1..a-m3, b-m1..b-m8 (scope: range of Z height; die Z with panel chucked)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00094-F2-s04", change: "deleted (Z-height warpage measurement, not a build step)", reason: "results already in metrics a-m1..a-m3, b-m1..b-m8 (scope: range of Z height; die Z with panel chucked)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00094-F2-s06", change: "deleted (Z-height warpage measurement, not a build step)", reason: "results already in metrics a-m1..a-m3, b-m1..b-m8 (scope: range of Z height; die Z with panel chucked)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00094-F1/F2", change: "splits added (F1-s01 mold material/carrier CTE/mold thickness; F2 carrier CTE, die thickness, overmold stress index per Table I); step_basis stated_in_flow, performed yes", reason: "p.2 Sec. II; p.2-3 Sec. III.A; p.3 Table I"}

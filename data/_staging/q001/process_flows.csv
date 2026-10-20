@@ -1,0 +1,16 @@
+flow_id,paper_id,flow_name,scope,level,tv_ids,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00365-F1,ectc51846.2026.00365,on-package flow test,tv_build,fragments,ectc51846.2026.00365-d,stated,text,,p.3 Sec. IV.A,,
+ectc51846.2026.00365-F2,ectc51846.2026.00365,formulation flow test,tv_build,fragments,ectc51846.2026.00365-e,stated,text,,p.3 Sec. IV.A; p.4 Table I,,
+ectc51846.2026.00365-F3,ectc51846.2026.00365,dispense optimization,tv_build,fragments,ectc51846.2026.00365-f,stated,text,,p.4 Sec. IV.B,,
+ectc51846.2026.00365-F4,ectc51846.2026.00365,cure optimization,tv_build,fragments,ectc51846.2026.00365-g,stated,mixed,,p.4 Sec. IV.B; p.4 Fig. 6,,
+ectc51846.2026.00365-F5,ectc51846.2026.00365,"underfill KOZ barrier and dispense strategy (Sec. III.B, IV.B)",generic_platform,fragments,,stated,mixed,,p.2 Sec. III.B; p.3 Fig. 3; p.4 Sec. IV.B,,"Generic statements, no named TV."
+ectc51846.2026.00365-F6,ectc51846.2026.00365,void-free encapsulation demonstrations (Sec. V),tv_build,fragments,ectc51846.2026.00365-h;ectc51846.2026.00365-i;ectc51846.2026.00365-j,stated,text,,p.4 Sec. V; p.5 Sec. V,,4X reticle Foveros TV (k) has no encapsulation statement.
+ectc51906.2022.00072-F1,ectc51906.2022.00072,PIC fab,tv_build,fragments,ectc51906.2022.00072-a,stated,text,,p.2 Sec. I; p.2 Sec. II.A; p.4 Sec. III; p.4 Fig. 3(a),,
+ectc51906.2022.00072-F2,ectc51906.2022.00072,passive fiber attach,tv_build,ordered,ectc51906.2022.00072-a,stated,mixed,,p.5 Sec. IV; p.3 Fig. 1(c),,PIC-to-Si-submount attach (Fig. 4) not described.
+ectc51906.2022.00072-F5,ectc51906.2022.00072,DCB strip preparation (Sec. II.B),tv_build,fragments,ectc51906.2022.00072-b;ectc51906.2022.00072-c,stated,text,,p.3 Sec. II.B,,
+ectc51906.2022.00072-F6,ectc51906.2022.00072,BOR coupon preparation (Sec. II.B),tv_build,fragments,ectc51906.2022.00072-d,stated,text,,p.3 Sec. II.B,,
+ectc51909.2023.00268-F1,ectc51909.2023.00268,SAP patterning on 415x510 mm panel (Sec. 2),tv_build,ordered,ectc51909.2023.00268-a;ectc51909.2023.00268-b;ectc51909.2023.00268-c,stated,text,,p.2 Sec. 2; p.3 Sec. 2; p.3 Sec. 3.1; p.4 Sec. 3.3; p.4 Fig. 8,,"Exposure step differs per TV (deltas s03 a, s09 b, s10 c); AOI on a only."
+ectc51529.2024.00023-F1,ectc51529.2024.00023,"glass melt to IOX waveguide samples (Sec. III-IV, Fig. 2, Fig. 4)",tv_build,full,ectc51529.2024.00023-a,stated,text,,p.3 Sec. III; p.3 Fig. 4(a); p.3 Fig. 4(b); p.3 Fig. 4(c); p.3 Fig. 4(d); p.1 Sec. II.A; p.2 Fig. 2; p.2 Sec. II.A; p.3 Sec. IV,,
+ectc51529.2024.00023-F2,ectc51529.2024.00023,barrier film deposition,tv_build,fragments,ectc51529.2024.00023-b,stated,text,,p.3 Sec. V.A,,
+tcpmt.2026.3740312-F1,tcpmt.2026.3740312,"UBM, In bumping and RT flip-chip bonding (Sec. II)",tv_build,full,tcpmt.2026.3740312-a;tcpmt.2026.3740312-b;tcpmt.2026.3740312-c,stated,mixed,,p.2 Sec. I; p.2 Sec. II.A; p.3 Sec. II.A-B; p.4 Sec. II.B; p.2 Fig. 1(c)-(g); p.6 Sec. III.C; p.7 Sec. III.D,,"Sample1 (b): incomplete Ar clean and 40 nm Ti (Sec. III.D); c: 10 um CD bumps/strips. Splits on s02, s03, s05."
+tcpmt.2026.3740312-F2,tcpmt.2026.3740312,"In directly on Nb routing layer (Sec. II.A, Fig. 2)",tv_build,ordered,tcpmt.2026.3740312-d,stated,text,,p.2 Sec. II.A; p.3 Sec. II.A; p.2 Fig. 2,,

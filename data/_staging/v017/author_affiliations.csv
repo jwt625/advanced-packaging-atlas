@@ -1,0 +1,48 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc51846.2026.00227-a01-1,ectc51846.2026.00227,1,Mohammed Alhendi,1,primary,IBM,IBM Research,"Albany, NY",US,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a02-1,ectc51846.2026.00227,2,Luke Darling,1,primary,IBM,IBM Research,"Albany, NY",US,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a03-1,ectc51846.2026.00227,3,Roy Yu,1,primary,IBM,IBM Research,"Albany, NY",US,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a04-1,ectc51846.2026.00227,4,Neng Liu,1,primary,IBM,IBM Research,"Albany, NY",US,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a05-1,ectc51846.2026.00227,5,Ming Li,1,primary,ASMPT Singapore,,Yishun,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a06-1,ectc51846.2026.00227,6,Zetao Ma,1,primary,ASMPT Singapore,,Yishun,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a07-1,ectc51846.2026.00227,7,Kai Ming Yeung,1,primary,ASMPT Technology Hong Kong,,Tsing Yi,HK,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a08-1,ectc51846.2026.00227,8,Le Cheng,1,primary,ASMPT Technology Hong Kong,,Tsing Yi,HK,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a09-1,ectc51846.2026.00227,9,Katsuyuki Sakuma,1,primary,IBM,IBM Research,"Albany, NY",US,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00336-a01-1,ectc51846.2026.00336,1,Peng Zhao,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a02-1,ectc51846.2026.00336,2,Liesbeth Witters,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a03-1,ectc51846.2026.00336,3,Michele Stucchi,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a04-1,ectc51846.2026.00336,4,Vladimir Cherman,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a05-1,ectc51846.2026.00336,5,Melina Lofrano,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a06-1,ectc51846.2026.00336,6,Rami Chukka,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a07-1,ectc51846.2026.00336,7,Kevin Vandersmissen,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a08-1,ectc51846.2026.00336,8,Farid Sebai,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a09-1,ectc51846.2026.00336,9,Bart Kenens,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a10-1,ectc51846.2026.00336,10,Jan Willem Maes,1,primary,ASM Belgium,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a11-1,ectc51846.2026.00336,11,Joeri De Vos,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a12-1,ectc51846.2026.00336,12,Gerald Beyer,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a13-1,ectc51846.2026.00336,13,Zsolt Tokei,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00336-a14-1,ectc51846.2026.00336,14,Eric Beyne,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51846.2026.00302-a01-1,ectc51846.2026.00302,1,Maurice L. Haffner,1,primary,Fraunhofer IZM,,Berlin,DE,printed: Fraunhofer IZM,paper,p.1 affiliations
+ectc51846.2026.00302-a02-1,ectc51846.2026.00302,2,Tom Chojne,1,primary,Technische Universität Berlin,,Berlin,DE,printed: Technical University of Berlin,paper,p.1 affiliations
+ectc51846.2026.00302-a03-1,ectc51846.2026.00302,3,Julian Schwietering,1,primary,Fraunhofer IZM,,Berlin,DE,printed: Fraunhofer IZM,paper,p.1 affiliations
+ectc51846.2026.00302-a04-1,ectc51846.2026.00302,4,Hashem Al-Shami,1,primary,Fraunhofer IZM,,Berlin,DE,printed: Fraunhofer IZM,paper,p.1 affiliations
+ectc51846.2026.00302-a05-1,ectc51846.2026.00302,5,Ulrike Ganesh,1,primary,Fraunhofer IZM,,Berlin,DE,printed: Fraunhofer IZM,paper,p.1 affiliations
+ectc51846.2026.00346-a01-1,ectc51846.2026.00346,1,Digvijay Raorane,1,primary,Marvell Technology,,Santa Clara,US,"printed: Marvell Technology, Inc.",paper,p.1 affiliations (page image)
+ectc51846.2026.00346-a02-1,ectc51846.2026.00346,2,Suresh Pothukuchi,1,primary,Marvell Technology,,Santa Clara,US,"printed: Marvell Technology, Inc.",paper,p.1 affiliations (page image)
+ectc51846.2026.00346-a03-1,ectc51846.2026.00346,3,Ankur Aggarwal,1,primary,Marvell Technology,,Santa Clara,US,"printed: Marvell Technology, Inc.",paper,p.1 affiliations (page image)
+ectc51846.2026.00346-a04-1,ectc51846.2026.00346,4,Saket Chadda,1,primary,Marvell Technology,,Santa Clara,US,"printed: Marvell Technology, Inc.",paper,p.1 affiliations (page image)
+ectc51846.2026.00346-a05-1,ectc51846.2026.00346,5,Sagar Dubey,1,primary,Marvell Technology,,Santa Clara,US,"printed: Marvell Technology, Inc.",paper,p.1 affiliations (page image)
+ectc51846.2026.00346-a06-1,ectc51846.2026.00346,6,Dan Oh,1,primary,Marvell Technology,,Santa Clara,US,"printed: Marvell Technology, Inc.",paper,p.1 affiliations (page image)
+ectc51846.2026.00346-a07-1,ectc51846.2026.00346,7,Joy Zhan,1,primary,Marvell Technology,,Santa Clara,US,"printed: Marvell Technology, Inc.",paper,p.1 affiliations (page image)
+ectc51846.2026.00218-a01-1,ectc51846.2026.00218,1,Melissa Najem,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, Leti, Grenoble",paper,p.1 affiliations
+ectc51846.2026.00218-a02-1,ectc51846.2026.00218,2,Agathe Lerat,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, Leti, Grenoble",paper,p.1 affiliations
+ectc51846.2026.00218-a03-1,ectc51846.2026.00218,3,Carine Ladner,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, Leti, Grenoble",paper,p.1 affiliations
+ectc51846.2026.00218-a04-1,ectc51846.2026.00218,4,Loic Sanchez,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, Leti, Grenoble",paper,p.1 affiliations
+ectc51846.2026.00218-a05-1,ectc51846.2026.00218,5,Julien Diaz,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, Leti, Grenoble",paper,p.1 affiliations
+ectc51846.2026.00218-a06-1,ectc51846.2026.00218,6,Renan Bouis,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, Leti, Grenoble",paper,p.1 affiliations
+ectc51846.2026.00218-a07-1,ectc51846.2026.00218,7,Jérôme Dechamp,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, Leti, Grenoble",paper,p.1 affiliations
+ectc51846.2026.00218-a08-1,ectc51846.2026.00218,8,Antonio Roman,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, Leti, Grenoble",paper,p.1 affiliations
+ectc51846.2026.00218-a09-1,ectc51846.2026.00218,9,Myriam Assous,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, Leti, Grenoble",paper,p.1 affiliations
+ectc51846.2026.00218-a10-1,ectc51846.2026.00218,10,Damien Saint-Patrice,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, Leti, Grenoble",paper,p.1 affiliations
+ectc51846.2026.00218-a11-1,ectc51846.2026.00218,11,Lilian Masarotto,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, Leti, Grenoble",paper,p.1 affiliations
+ectc51846.2026.00218-a12-1,ectc51846.2026.00218,12,Stéphane Nicolas,1,primary,CEA-Leti,,Grenoble,FR,"printed: Univ. Grenoble Alpes, CEA, Leti, Grenoble",paper,p.1 affiliations

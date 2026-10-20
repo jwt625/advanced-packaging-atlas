@@ -1,0 +1,64 @@
+paper_id: ectc51909.2023.00230
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00230/text.md
+  - references/ectc51909.2023.00230/source.json
+  - references/ectc51909.2023.00230/figures/page_02.png
+  - references/ectc51909.2023.00230/figures/page_03.png
+  - references/ectc51909.2023.00230/figures/page_04.png
+  - references/ectc51909.2023.00230/figures/cand/p02_fig2.png
+  - references/ectc51909.2023.00230/figures/cand/p03_fig4.png
+  - references/ectc51909.2023.00230/figures/cand/p03_fig6.png
+  - references/ectc51909.2023.00230/figures/cand/p04_fig7.png
+figure_reading_method: >-
+  300 dpi re-crops of Fig. 3, 8, 9 from source.pdf; trace extrema read against gridlines (+/-0.1 dB in Fig. 9,
+  +/-1 dB in Fig. 3 and 8). Fig. 4 and 6 read from candidate crops.
+entries:
+  - {table: electrical_interfaces, row_id: ectc51909.2023.00230-a-e1, field: insertion_loss_db, value: 2.35, unit: dB, basis: measured, locator: "p.4 Fig. 9", note: "S12 reticle 1 at 67 GHz; S21 r1 ~1.75, S12 r2 ~1.65, S21 r2 ~1.35"}
+derived:
+  - {table: interconnects, row_id: ectc51909.2023.00230-a-i1, field: aspect_ratio, value: 10, formula: "depth / diameter = 100 / 10", inputs: "p.2 Sec. II.B; p.4 Sec. III.B step 2"}
+conflicts:
+  - {table: electrical_interfaces, row_id: ectc51909.2023.00230-a-e1, field: insertion_loss_db, values: ["text: remains below 2 dB loss at 67 GHz", "Fig. 9: S12 reticle 1 ~2.35 dB at 67 GHz, ~2.65 dB near 64 GHz"], locators: ["p.4 Sec. IV", "p.4 Fig. 9"], chosen: 2.35, why: "measured plot over text (rule k)"}
+  - {table: metrics, row_id: ectc51909.2023.00230-a-m3, field: value, values: ["text: S11/S22 below -20 dB DC-67 GHz", "Fig. 8: S11 reticle 2 peaks ~-11 dB near 65 GHz; S22 reticle 1 ~-19.5 dB"], locators: ["p.4 Sec. IV", "p.4 Fig. 8"], chosen: -11, why: "measured plot over text (rule k)"}
+  - {table: metrics, row_id: ectc51909.2023.00230-a-m5, field: value, values: ["text: measured resonance around 45 GHz in good agreement with simulation", "Fig. 3 simulated dip at ~40 GHz"], locators: ["p.4 Sec. IV", "p.2 Fig. 3"], chosen: "both entered as separate rows", why: "different basis"}
+excluded:
+  - "Transceiver market figures (275 million units 2021-2025, >60% single mode 400G share by 2024) from LightCounting ref [1]"
+  - "TSV-on-PIC work of IME A*STAR, IMEC, Fraunhofer IZM refs [5]-[6]"
+  - "Smoothing anneal loss benefit demonstrated in ref [7]"
+  - "Fig. 1 application scenario (DRV/TIA on front, DSP on PCB): concept only, no build"
+not_reported:
+  - "TSV pitch, liner/barrier, count per reticle; pad metallization materials; reticle and die size"
+  - "final wafer thickness after grinding (only 100 um TSV depth / optimum thickness)"
+  - "process temperatures except PECVD SiN 300 C; temporary bonding material"
+  - "energy per bit, data-rate test, BER"
+  - "reliability, warpage, yield"
+  - "fiber attach, MFD, fiber type"
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F1-s03, change: "step_basis: '' -> 'inferred_order'; notes: '' -> 'Text: implants before and after waveguide patterning; one row placed here.'", reason: "implants occur before and after waveguide patterning; single row placed after patterning"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F1-s07, change: "equipment: '' -> 'PECVD'", reason: "named method as equipment"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F1-s09, change: "target: '' -> 'TiN 600 nm above Si waveguides'; step: 'TiN metallic heaters 600 nm above Si waveguides' -> 'TiN metallic heater formation'", reason: "stated geometry on the step"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s01, change: "seq: '11' -> '1'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s02, change: "seq: '12' -> '2'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s03, change: "seq: '13' -> '3'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s04, change: "seq: '14' -> '4'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s05, change: "seq: '15' -> '5'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s06, change: "seq: '16' -> '6'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s07, change: "seq: '17' -> '7'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s08, change: "seq: '18' -> '8'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s09, change: "seq: '19' -> '9'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s10, change: "seq: '20' -> '10'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s11, change: "seq: '21' -> '11'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s12, change: "seq: '22' -> '12'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s13, change: "seq: '23' -> '13'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s14, change: "seq: '24' -> '14'", reason: "seq restarted at 1 within this flow (converter carried seq over from F1)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s01, change: "category: 'other' -> 'etch_other'; step: 'receive Leti wafer with TSV keep-out zones; open original I/O pads' -> 'open original I/O pads on received CEA-Leti wafer; identify TSV keep-out zones'", reason: "step 1 action is opening the original I/O pads (category other -> etch_other)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s02, change: "target: '' -> '10 um diameter, 100 um depth'; material: '' -> 'Cu'; conditions: 'via-last; 10 um diameter design; Cu fill (Sec. II.B)' -> 'via-last; dry etch through BEOL stack and bulk Si'; locator: 'p.4 Sec. III.B; p.3 Fig. 6 step 2' -> 'p.4 Sec. III.B; p.3 Fig. 6 step 2; p.2 Sec. II.B'", reason: "stated TSV geometry as target; Cu fill as material"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s05, change: "category: 'deposition_other' -> 'rdl_layer'", reason: "RDL formation category"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s11, change: "category: 'deposition_other' -> 'rdl_layer'", reason: "RDL formation category"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F2-s09, change: "notes: '' -> 'Final thickness not stated; TSV processes optimized for 100 um Si thickness (Sec. II.B).'", reason: "final thickness context (Sec. II.B)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F1-s03, change: "category other -> device_fab", reason: "ion implantation is FEOL device processing; device_fab in step_category (coordinator decision DevLog-007)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F1-s06, change: "category other -> device_fab", reason: "silicidation of device contact areas (p.2 Sec. III.A) is FEOL device processing"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F1-s10, change: "category other -> device_fab", reason: "PIC foundry BEOL (contacts, two metal levels), not a package RDL"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-F1-s01, change: "thickness_in_um '' -> 0.3; conditions + 'starting 200 mm SOI wafer: 300 nm Si layer, 2 um BOX'", reason: "manifest target_missing a-L08/a-L09: p.2 Sec. III.A SOI 300 nm / BOX 2 um"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00230-a, change: "build_seq F1=1, F2=2 confirmed", reason: "p.2 Sec. III: fully processed CEA-Leti SiPh wafers sent to Fraunhofer IZM for TSV post-processing"}

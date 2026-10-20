@@ -1,0 +1,41 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc51906.2022.00140-a01-1,ectc51906.2022.00140,1,Yoonyoung Jeon,1,primary,Samsung Electronics,Test & System Package (TSP),Cheonan-si,KR,,paper,p.1 affiliations
+ectc51906.2022.00140-a02-1,ectc51906.2022.00140,2,Youngmin Kim,1,primary,Samsung Electronics,Test & System Package (TSP),Cheonan-si,KR,,paper,p.1 affiliations
+ectc51906.2022.00140-a03-1,ectc51906.2022.00140,3,Minju Kim,1,primary,Samsung Electronics,Test & System Package (TSP),Cheonan-si,KR,,paper,p.1 affiliations
+ectc51906.2022.00140-a04-1,ectc51906.2022.00140,4,Sangyun Lee,1,primary,Samsung Electronics,Test & System Package (TSP),Cheonan-si,KR,,paper,p.1 affiliations
+ectc51906.2022.00140-a05-1,ectc51906.2022.00140,5,Hyundong Lee,1,primary,Samsung Electronics,Test & System Package (TSP),Cheonan-si,KR,,paper,p.1 affiliations
+ectc51906.2022.00140-a06-1,ectc51906.2022.00140,6,Changbo Lee,1,primary,Samsung Electronics,Test & System Package (TSP),Cheonan-si,KR,,paper,p.1 affiliations
+ectc51906.2022.00140-a07-1,ectc51906.2022.00140,7,Joon Seok Oh,1,primary,Samsung Electronics,Test & System Package (TSP),Cheonan-si,KR,,paper,p.1 affiliations
+ectc51906.2022.00176-a01-1,ectc51906.2022.00176,1,S. W. Liang,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51906.2022.00176-a02-1,ectc51906.2022.00176,2,Gene C. Y. Wu,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51906.2022.00176-a03-1,ectc51906.2022.00176,3,K. C. Yee,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51906.2022.00176-a04-1,ectc51906.2022.00176,4,C. T. Wang,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51906.2022.00176-a05-1,ectc51906.2022.00176,5,Ji James Cui,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51906.2022.00176-a06-1,ectc51906.2022.00176,6,Douglas C. H. Yu,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51906.2022.00142-a01-1,ectc51906.2022.00142,1,Masataka Nishida,1,primary,Showa Denko Materials,Packaging Solution Center,Kawasaki,JP,,paper,p.1 affiliations
+ectc51906.2022.00142-a02-1,ectc51906.2022.00142,2,Hirokazu Noma,1,primary,Showa Denko Materials,Packaging Solution Center,Kawasaki,JP,,paper,p.1 affiliations
+ectc51906.2022.00142-a03-1,ectc51906.2022.00142,3,Tetsuro Iwakura,1,primary,Showa Denko Materials,Laminate Materials R&D Dept,"Chikusei, Ibaraki",JP,country from printed city,paper,p.1 affiliations
+ectc51906.2022.00142-a04-1,ectc51906.2022.00142,4,Masaki Yamaguchi,1,primary,Showa Denko Materials,Laminate Materials R&D Dept,"Chikusei, Ibaraki",JP,country from printed city,paper,p.1 affiliations
+ectc51906.2022.00142-a05-1,ectc51906.2022.00142,5,Kazuyuki Mitsukura,1,primary,Showa Denko Materials,Packaging Solution Center,Kawasaki,JP,,paper,p.1 affiliations
+ectc51906.2022.00136-a01-1,ectc51906.2022.00136,1,Jacinta Aman Lim,1,primary,nepes,,,US,"multi-site block, no per-author mapping; org from email domain nepes.co.kr; country = first printed address",paper,p.1 affiliations (page image)
+ectc51906.2022.00136-a02-1,ectc51906.2022.00136,2,Brett Dunlap,1,primary,nepes,,,US,"multi-site block, no per-author mapping; org from email domain nepes.co.kr; country = first printed address",paper,p.1 affiliations (page image)
+ectc51906.2022.00136-a03-1,ectc51906.2022.00136,3,Sungeun Hong,1,primary,nepes,,,US,"multi-site block, no per-author mapping; org from email domain nepes.co.kr; country = first printed address",paper,p.1 affiliations (page image)
+ectc51906.2022.00136-a04-1,ectc51906.2022.00136,4,Hyung-Jin Shin,1,primary,nepes,,,US,"multi-site block, no per-author mapping; org from email domain nepes.co.kr; country = first printed address",paper,p.1 affiliations (page image)
+ectc51906.2022.00136-a05-1,ectc51906.2022.00136,5,Byung-Cheol Kim,1,primary,nepes,,,US,"multi-site block, no per-author mapping; org from email domain nepes.co.kr; country = first printed address",paper,p.1 affiliations (page image)
+ectc51906.2022.00179-a01-1,ectc51906.2022.00179,1,Jaber Derakhshandeh,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a02-1,ectc51906.2022.00179,2,Eric Beyne,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a03-1,ectc51906.2022.00179,3,Gerald Beyer,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a04-1,ectc51906.2022.00179,4,Giovanni Capuz,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a05-1,ectc51906.2022.00179,5,Vladimir Cherman,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a06-1,ectc51906.2022.00179,6,Inge De Preter,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a07-1,ectc51906.2022.00179,7,Carine Gerets,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a08-1,ectc51906.2022.00179,8,Ehsan Shafahian,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a09-1,ectc51906.2022.00179,9,Koen Kennes,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a10-1,ectc51906.2022.00179,10,Geraldine Jamieson,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a11-1,ectc51906.2022.00179,11,Tom Cochet,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a12-1,ectc51906.2022.00179,12,Tomas Webers,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a13-1,ectc51906.2022.00179,13,Bert Tobback,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a14-1,ectc51906.2022.00179,14,Geert Van der Plas,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a15-1,ectc51906.2022.00179,15,Douglas Charles La Tulipe,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a16-1,ectc51906.2022.00179,16,Alain Phommahaxay,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a17-1,ectc51906.2022.00179,17,Andy Miller,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations

@@ -1,0 +1,53 @@
+paper_id: ectc51687.2025.00009
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00009/text.md
+  - references/ectc51687.2025.00009/source.json
+  - references/ectc51687.2025.00009/figures/page_02.png
+  - references/ectc51687.2025.00009/figures/page_03.png
+  - references/ectc51687.2025.00009/figures/page_04.png
+  - references/ectc51687.2025.00009/figures/page_05.png
+  - references/ectc51687.2025.00009/figures/cand/p03_fig6.png
+  - references/ectc51687.2025.00009/figures/cand/p03_fig7.png
+  - references/ectc51687.2025.00009/figures/cand/p04_fig10.png
+  - references/ectc51687.2025.00009/figures/cand/p04_fig11.png
+  - references/ectc51687.2025.00009/figures/cand/p05_fig12.png
+figure_reading_method: >-
+  Page renders 2-5 read in full; 400 dpi re-crops of Fig. 9, 10 and 12. Fig. 12 median read from dashed line
+  (~101 px per 100 ohm, +/-5 ohm). Fig. 7(d) bars read 100/83/76.
+entries:
+  - {table: interconnects, row_id: ectc51687.2025.00009-a-i1, field: metallurgy, value: "Ta 13 nm; Cu seed 17 nm", unit: nm, basis: measured, locator: "p.4 Fig. 10 inset", note: "sidewall under-hang region"}
+  - {table: metrics, row_id: ectc51687.2025.00009-a-m1, field: value, value: 295, unit: ohm, basis: measured, locator: "p.5 Fig. 12", note: "median dashed line ~293-296"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51687.2025.00009-a-m5, field: value, values: [10, 8], locators: ["p.4 Fig. 9(a) caption AR ~10", "p.5 Sec. IV '8:1 and 20:1'"], chosen: 10, why: "figure caption tied to measured xSEM"}
+  - {table: metrics, row_id: ectc51687.2025.00009-b-m2, field: value, values: [24, 25], locators: ["p.3 Sec. II; p.3 Fig. 7(d)", "p.5 Sec. IV 'up to 25%'"], chosen: 24, why: "result text and bar chart"}
+  - {table: metrics, row_id: ectc51687.2025.00009-c-m3, field: value_text, values: ["caption: IR drop increases as metal thickness increases", "text and plot: thinner metal gives higher IR drop"], locators: ["p.2 Fig. 4 caption", "p.2 Sec. II; p.2 Fig. 4"], chosen: "plot/text", why: "plot curves show 1/4 thickness highest"}
+  - {table: papers, row_id: ectc51687.2025.00009, field: notes, values: ["title: scaling to 1 um pitch", "demonstrated: 3 um pitch MLVs; conclusion 'support pitches below 3 um'"], locators: ["p.1 title", "p.4 Fig. 11; p.5 Sec. IV"], chosen: "3 um pitch entered", why: "only demonstrated geometry"}
+excluded:
+  - "Standard HB backend of Fig. 1 (from ref [2])"
+  - "sub-1 um HB pitch demonstrations of refs [4], [5]; IR drop impact discussion of ref [4]"
+not_reported:
+  - components, optical_interfaces, electrical_interfaces
+  - hybrid bonding itself (no bonded TV); bonding conditions
+  - ILD and hardmask materials, layer thicknesses, wafer size, MLV count
+  - absolute IR drop, TSV pitch, metal thicknesses in models (normalized axes)
+  - daisy-chain per-via resistance; reliability data
+source_quality:
+  - "Clean text layer. No candidate for Fig. 9; others correct."
+revisions:
+  - {date: 2026-10-19, source: audit_x2B, row_id: ectc51687.2025.00009-f04, change: "bbox 0.14,0.64,0.42,0.825 -> 0.14,0.64,0.42,0.828", reason: "y1 cut through (a)/(b) panel labels (x2B defect 8); 0.835 includes the caption line, so 0.828 chosen from crop"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00009-figures, change: "renumbered f05 -> f08 (Fig. 12); f06 -> f09 (Fig. 7)", reason: "re-rank under key-figure rule 2026-10-19 (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00009-f05, change: "added Figure 8 (micrograph, candidate)", reason: "top-down SEM image of the build; source of a-m3, a-m4"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00009-f06, change: "added Figure 3 (stack_schematic, candidate)", reason: "3D die stack drawing of model TV c"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00009-f07, change: "added Figure 1 (stack_schematic, candidate)", reason: "stack drawing of standard HB backend (context, cites [2])"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00009-f10, change: "added Figure 5 (simulation_result, candidate)", reason: "source of c-m1, c-m2"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00009-f11, change: "added Figure 4 (simulation_result, candidate)", reason: "source of c-m3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00009-F1-s01", change: "equipment '' -> 'deep-UV scanner'; target '' -> 'MLV size 1 um and 0.4 um'; split '' -> 'resist thickness 0.4 to 1.31 um with focus/dose skew per thickness'; conditions 'resist thickness 0.4-1.31 um explored; DOF >= 250 nm; pre-determined alignment offsets for wafer distortion' -> 'binary mask; DOF >= 250 nm; pre-determined scanner alignment offsets for wafer distortion'", reason: "resist-thickness sweep to split; scanner to equipment; stated MLV sizes as target"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00009-F1-s03", change: "target '' -> 'AR > 10:1'; conditions '>10:1 aspect ratio' -> ''; equipment '' -> 'CCP etch tool'", reason: "stated aspect ratio is a target; tool type named"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00009-F1-s05", change: "equipment '' -> 'downstream ashing tools'", reason: "named tool type"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00009-F1-s06", change: "equipment '' -> 'high-power magnetron sputtering'", reason: "named tool type"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00009-F1-s07", change: "target '' -> 'vias ~1 x 9 um at 3 um pitch'; locator 'p.4 Sec. III.A; p.4 Fig. 11' -> 'p.4 Sec. III.A; p.4 Fig. 10; p.4 Fig. 11'", reason: "stated via geometry (Fig. 10/11 captions) as target"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00009-F1-s09", change: "deleted step '4-wire daisy-chain resistance test across wafer'", reason: "post-build electrical test; already in metrics a-m1 (4-wire, 585 points, 1200-link chains)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00009-F1", change: "step_basis set to stated_in_flow on 8 steps", reason: "order given in the paper's flow text/figure"}

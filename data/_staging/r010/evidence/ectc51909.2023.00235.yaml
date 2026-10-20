@@ -30,4 +30,9 @@ conflicts:
 excluded:
   - "Cu pillar electromigration/thermal conductivity claims attributed to ref [6]"
   - "low temperature underfill and wafer thinning mitigations attributed to ref [4]"
+  - "Fig. 10(b) SEM labels V1 20.64, V3 9.471, H2 5.467, H1 2.31 um (printed upside down; features not identified by the paper; rows a-m14..a-m17 removed 2026-10-19)"
 not_reported: [electrical_interfaces, optical_interfaces, "bump height and solder alloy of real hardware", "TCB temperature/force/time", "underfill, lid and TIM materials", "HD dielectric material and layer thicknesses", "via diameters (design)", "core material/thickness", "package thickness"]
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00235-b-m2; -b-m3; -b-m4, change: "n_samples 100 and qualifier n_samples:approx cleared; scope 'about 100 packaged modules shared across ATC, HTS and THB'", reason: "p.6 Sec. III.C: '~100 packaged modules' across all additional stresses, not per test (also audit_x2B)"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00235-a-m14; -a-m15; -a-m16; -a-m17, change: "rows deleted; label values moved to excluded", reason: "audit_x1 item 9: Fig. 10(b) SEM labels with no feature named by the paper; feature assignment was speculative"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00235-a-i4; ectc51909.2023.00235-b-i4, change: "ic_type microbump -> c4; note added", reason: "audit_x1 item 10: p.2 Table I names the Chip 3 joints C4, 150 um pitch, 90 um diameter"}

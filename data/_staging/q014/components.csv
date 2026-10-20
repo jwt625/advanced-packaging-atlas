@@ -1,0 +1,38 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc.2011.5898527-a-c1,ectc.2011.5898527-a,fpga,,,FPGA slice (IC1-IC4),4,7,12,,,,,,28nm,"Si, Cu/low-k BEOL",,design_target,table,,p.2 Table 1; p.2 Package Description; p.2 Fig. 2,,Thickness not reported.
+ectc.2011.5898527-a-c2,ectc.2011.5898527-a,interposer,,,Cu TSV silicon interposer,1,25,31,100,,,,,,Si with Cu TSV (via-first/via-middle),,design_target,text,,p.1 Abstract; p.2 Package Description,,"Passive interposer, no active devices implied by intro."
+ectc.2011.5898527-a-c3,ectc.2011.5898527-a,substrate,,,organic package substrate,1,42.5,42.5,,,,,,,"organic, low-CTE core chosen",,design_target,table,,p.2 Table 1; p.2 Package Warpage,,Core 800 um; layer count not reported.
+ectc.2011.5898527-a-c4,ectc.2011.5898527-a,lid,,,forged Cu heat spreader (lid),,,,1000,,,,,,copper,,simulated,text,,p.2 Package Warpage; p.3 Sec. a,thickness_um:approx,Forged lid chosen; optimum ~1 mm on top of die from simulation; built lid thickness not stated separately.
+ectc.2011.5898527-a-c5,ectc.2011.5898527-a,tim,,,TIM1,,,,,,,,,,TIM1 (not named),,stated,table,,p.2 Table 2,,
+ectc.2011.5898527-a-c6,ectc.2011.5898527-a,underfill,,,microbump underfill (UF-A baseline in phase 2),,,,,,,,,,"UF-A (phase 1 screened UF-A, UF-B, UF-C)",,stated,text,,p.5 Reliability Assessment,,
+ectc.2011.5898527-a-c7,ectc.2011.5898527-a,underfill,,,C4 underfill (standard),,,,,,,,,,standard C4 underfill,,stated,text,,p.5 Reliability Assessment,,
+ectc51846.2026.00187-a-c1,ectc51846.2026.00187-a,dummy_die,yes,,top wafer (daisy-chain TV),1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,"Probing pad, pad via, top metal, top via and SiCN bonding layer; top-wafer Si not drawn."
+ectc51846.2026.00187-a-c2,ectc51846.2026.00187-a,dummy_die,yes,,bottom wafer (daisy-chain TV),1,,,,,,,,,Silicon substrate,,stated,schematic,,p.2 Fig. 1,,
+ectc51846.2026.00187-b-c1,ectc51846.2026.00187-b,dummy_die,yes,,top wafer (daisy-chain TV),1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,"Probing pad, pad via, top metal, top via and SiCN bonding layer; top-wafer Si not drawn."
+ectc51846.2026.00187-b-c2,ectc51846.2026.00187-b,dummy_die,yes,,bottom wafer (daisy-chain TV),1,,,,,,,,,Silicon substrate,,stated,schematic,,p.2 Fig. 1,,
+ectc51909.2023.00174-a-c1,ectc51909.2023.00174-a,logic_soc,,,SoC/chiplet top dies,3,,,,,,,,,,,design_target,text,,p.2 Sec. II.A; p.2 Fig. 2,,
+ectc51909.2023.00174-a-c2,ectc51909.2023.00174-a,hbm,,,HBM,8,,,,,,,,,,,design_target,text,,p.2 Sec. II.A; p.1 Abstract,,HBM generation not given.
+ectc51909.2023.00174-a-c3,ectc51909.2023.00174-a,interposer,,,"reconstituted interposer (RI): LSI dies + TIV in molding compound, front/back RDL",1,43,58,,,,,,,molding compound with embedded LSI chiplets,,design_target,text,,p.2 Sec. II.A; p.2 Sec. II.B,,
+ectc51909.2023.00174-a-c4,ectc51909.2023.00174-a,bridge,,yes,"local Si interconnect (LSI) chiplets with TSV, Cu interconnect, eDTC",10,,,,,,,,,Si,,design_target,text,,p.2 Sec. II.A; p.3 Sec. II.C,count:gt,'More than 10 LSI dies'. LSI-1 / LSI-2 mix in TV not stated; known-good dies placed on carrier.
+ectc51909.2023.00174-a-c5,ectc51909.2023.00174-a,dtc,,yes,new generation embedded deep trench capacitor (eDTC) in LSI,,,,,,,,,,,,stated,text,,p.3 Sec. II.D; p.3 Sec. III.A,,Max eDTC area per single Si chip ~300 mm2 due to yield (stated).
+ectc51909.2023.00174-a-c6,ectc51909.2023.00174-a,underfill,,,top die underfill,,,,,,,,,,,,stated,text,,p.2 Sec. II.B,,
+ectc51909.2023.00174-a-c7,ectc51909.2023.00174-a,mold,,,top die encapsulation molding compound,,,,,,,,,,,,stated,text,,p.2 Sec. II.B,,
+ectc51909.2023.00174-a-c8,ectc51909.2023.00174-a,substrate,,,package substrate,1,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 2,,Substrate size/layers not given beyond package 70x76 (78) mm.
+ectc51909.2023.00174-b-c1,ectc51909.2023.00174-b,stiffener,,,ring,1,,,,,,,,,,,stated,figure_image,,p.2 Fig. 3(a); p.2 Sec. II.B,,
+ectc51909.2023.00174-c-c1,ectc51909.2023.00174-c,lid,,,lid,1,,,,,,,,,,,stated,figure_image,,p.2 Fig. 3(b); p.2 Sec. II.B,,
+ectc51909.2023.00174-c-c2,ectc51909.2023.00174-c,tim,,,film type thermal interface material between lid and CoW die,,,,,,,,,,,,stated,text,,p.2 Sec. II.B,,Replaces gel-type TIM; product not given.
+ectc51909.2023.00174-d-c1,ectc51909.2023.00174-d,bridge,,,LSI-1 die,,,,,,,,,,Si,,stated,text,,p.3 Sec. II.C,,
+ectc51909.2023.00174-e-c1,ectc51909.2023.00174-e,bridge,,,LSI-2 die,,,,,,,,,,Si,,stated,text,,p.3 Sec. II.C,,
+vlsitechnologyandcir46783.2024.10631478-a-c1,vlsitechnologyandcir46783.2024.10631478-a,cpu,,,CPU chiplet (with own 3-plate HDMIM),1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1; p.2 Fig. 7,,
+vlsitechnologyandcir46783.2024.10631478-a-c2,vlsitechnologyandcir46783.2024.10631478-a,gpu,,,GPU chiplet (no own HDMIM),1,,,,,,,,,,,stated,mixed,,p.2 Fig. 1; p.2 Fig. 7; p.1 GPU Performance,,
+vlsitechnologyandcir46783.2024.10631478-a-c3,vlsitechnologyandcir46783.2024.10631478-a,logic_soc,,,SOC chiplet (no HDMIM),1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1; p.2 Fig. 7,,
+vlsitechnologyandcir46783.2024.10631478-a-c4,vlsitechnologyandcir46783.2024.10631478-a,interposer,,,"passive Si-Interposer (base die) with TSVs, M1-M3 and HDMIM",1,,,,,,,,,Si,,stated,mixed,,p.1 Fabrication; p.2 Fig. 1; p.2 Fig. 5,,Called Base Die in Fig. 5. Thickness not stated; TSV height 75 um (Fig. 3).
+vlsitechnologyandcir46783.2024.10631478-a-c5,vlsitechnologyandcir46783.2024.10631478-a,capacitor,,yes,"interposer HDMIM (between M2-M3), 57.7 uF",1,,,,,,,,,high-k oxide between TiN electrodes,,stated,mixed,,p.2 Fig. 7(a); p.1 Fabrication,,"Shared by CPU, SOC and GPU chiplets."
+vlsitechnologyandcir46783.2024.10631478-a-c6,vlsitechnologyandcir46783.2024.10631478-a,capacitor,,yes,"3-plate HDMIM in CPU die (between top 2 metal layers), 5.4 uF",1,,,,,,,,,2 high-k layers between 3 TiN layers,,stated,mixed,,p.2 Fig. 7(a); p.2 Fig. 6,,CPU-die HDMIM described with citation [2]; density values excluded.
+vlsitechnologyandcir46783.2024.10631478-a-c7,vlsitechnologyandcir46783.2024.10631478-a,substrate,,,package substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1; p.2 Fig. 5,,Layer count and size not reported.
+ectc51906.2022.00053-a-c1,ectc51906.2022.00053-a,capacitor,,yes,multi-terminal Si capacitor (planarized Cu pads),,3.07,2.07,100,,,,,,Si with dielectric layer; Cu pads on Al pads,,design_target,text,,p.2 Sec. II.A; p.2 Fig. 3,,77 Cu pads; two-layer (dielectric + Si) structure gives initial warpage. Die marking shows muRata logo (Fig. 3a). Count per interposer not stated.
+ectc51906.2022.00053-a-c2,ectc51906.2022.00053-a,dummy_die,,yes,dummy Si,,,,,,,,,,Si,,stated,mixed,,p.3 Sec. II.B; p.2 Fig. 4(b),,Thinned together with mold resin.
+ectc51906.2022.00053-a-c3,ectc51906.2022.00053-a,interposer,,,Si base wafer (thinned),1,,,20,,,,,,Si,,design_target,text,,p.3 Sec. II.B,,"300 mm, thinned from 775 um by grinding and polishing; fiducial marks for die placement."
+ectc51906.2022.00053-a-c4,ectc51906.2022.00053-a,mold,,no,epoxy mold resin (compression molded),,,,,,,,,,epoxy resin,,stated,text,,p.3 Sec. II.B; p.2 Fig. 4(d),,Product not stated.
+ectc51906.2022.00053-a-c5,ectc51906.2022.00053-a,adhesive,,,permanent adhesive CYCLOTENE 3022-46 (CYC),,,,5,,,,,,CYCLOTENE 3022-46,DOW,design_target,text,,p.3 Sec. II.B,,Spin-on; B-stage bake to control curing extent.
+ectc51906.2022.00053-a-c6,ectc51906.2022.00053-a,other,,,carrier wafer,1,,,775,,,,,,Si,,design_target,text,,p.3 Sec. II.B,,300 mm; bonded on mold side for handling; attach adhesive not named.

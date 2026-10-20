@@ -1,0 +1,45 @@
+paper_id: ectc51687.2025.00226
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00226/text.md
+  - references/ectc51687.2025.00226/source.json
+  - references/ectc51687.2025.00226/figures/page_03.png
+  - references/ectc51687.2025.00226/figures/page_04.png
+  - references/ectc51687.2025.00226/figures/page_05.png
+  - references/ectc51687.2025.00226/figures/page_06.png
+  - references/ectc51687.2025.00226/figures/cand/p02_fig1.png
+  - references/ectc51687.2025.00226/figures/cand/p05_fig5.png
+  - references/ectc51687.2025.00226/figures/cand/p06_fig6.png
+  - references/ectc51687.2025.00226/figures/cand/p04_fig4.png
+figure_reading_method: >-
+  Tables I and II read from page renders and manual crops. Fig. 3, 4, 6 values read from 300 dpi re-crops against
+  gridlines (+/-2 MPa for Fig. 3/4, +/-0.05 ohm for Fig. 6).
+entries:
+  - {table: test_vehicles, row_id: ectc51687.2025.00226-e, field: interconnect count, value: 64, unit: ea, basis: design_target, locator: "p.2 Sec. II", note: "8x8 bumps of phi 75 um on Cu pads"}
+  - {table: interconnects, row_id: ectc51687.2025.00226-c-i1, field: bonding_time_s, value: 60, unit: s, basis: design_target, locator: "p.2 Sec. II", note: "1 min compression at 20 MPa, 300 C, reduction atmosphere"}
+derived:
+  - {table: metrics, row_id: ectc51687.2025.00226-a-m2, field: value, value: 43.5, formula: "authors' Eq. (1): (actual - theoretical)/actual x 100; value as printed in Table I", inputs: "p.2 Eq. (1); p.3 Table I"}
+  - {table: process_steps, row_id: ectc51687.2025.00226-F1-s05, field: time_s, value: 60, formula: "1 min x 60", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: ectc51687.2025.00226-F1-s08, field: time_s, value: 60, formula: "1 min x 60", inputs: "p.2 Sec. II"}
+  - {table: interconnects, row_id: ectc51687.2025.00226-c-i1, field: bonding_time_s, value: 60, formula: "1 min x 60", inputs: "p.2 Sec. II"}
+conflicts:
+  - {table: metrics, row_id: ectc51687.2025.00226-c-m3, field: value, values: ["3x NP-Cu/Ni (text)", "18.7 vs 3.7 MPa plotted (~5x)"], locators: ["p.4 Sec. III.b", "p.4 Fig. 4"], chosen: 18.7, why: "plotted measurement over text"}
+  - {table: metrics, row_id: ectc51687.2025.00226-e-m4, field: value_text, values: ["NP-Cu/Ni/Ag resistance 'almost the same' as Ni/SnAg", "2.1 vs 1.6 ohm"], locators: ["p.5 Sec. III", "p.5 Table II"], chosen: 2.1, why: "result table"}
+  - {table: metrics, row_id: ectc51687.2025.00226-b-m1, field: ordering, values: ["text lists order 'NP-Cu/SnAg, NP-Cu/Ni, NP-Cu and NP-Cu/SnAg' (typo)", "Fig. 3 curves"], locators: ["p.4 Sec. III.b", "p.4 Fig. 3"], chosen: "Fig. 3 readings", why: "plot"}
+excluded:
+  - "Prior NP-Cu shear-strength mechanism (sintering + additive reduction) attributed to ref [19]"
+  - "Co-electroplating + dealloying NP-Cu routes of refs [16], [17]"
+  - "Theoretical Ag deposition volume 2.9x Cu (stoichiometric argument, not a measurement); thickness ratio 1.18x NP-Cu/Ag vs NP-Cu not entered separately"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - bump pitch (fine-pitch claimed; pitch not stated for phi 7 um bumps)
+  - chip sizes, thicknesses and materials of shear and bump-to-bump coupons
+  - bonding conditions of the Fig. 5 bump-to-bump samples
+  - bonder/plating equipment, wafer size
+  - reliability stress (thermal aging, TC, EM stated as future work)
+  - sample counts for shear and resistance
+source_quality:
+  - "No candidates for Table I and Table II; manual crops used."
+  - "Table II B' electrical resistance cell is blank; Fig. 6 gives row resistances for B'."

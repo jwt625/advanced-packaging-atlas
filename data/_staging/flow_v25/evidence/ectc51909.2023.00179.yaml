@@ -1,0 +1,46 @@
+paper_id: ectc51909.2023.00179
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00179/text.md
+  - references/ectc51909.2023.00179/source.json
+  - references/ectc51909.2023.00179/figures/page_02.png
+  - references/ectc51909.2023.00179/figures/page_03.png
+  - references/ectc51909.2023.00179/figures/page_04.png
+  - references/ectc51909.2023.00179/figures/cand/p02_fig1.png
+  - references/ectc51909.2023.00179/figures/cand/p02_fig2.png
+  - references/ectc51909.2023.00179/figures/cand/p02_fig4.png
+  - references/ectc51909.2023.00179/figures/cand/p03_fig6.png
+  - references/ectc51909.2023.00179/figures/cand/p04_fig12.png
+figure_reading_method: >-
+  150 dpi page renders plus 300 dpi re-crops of Fig. 1, 2, 4, 6, 10, 11 and Table 1. Fig. 6 bars read against
+  gridlines (+/-0.5 nm); Fig. 10 bars read against 1000-count gridlines (+/-100). Fig. 2/4/12 and Table 1 values are printed labels.
+entries:
+  - {table: metrics, row_id: ectc51909.2023.00179-a-m19, field: value, value: -14, unit: nm, basis: measured, locator: "p.3 Fig. 6", note: "Sample 2 stack bar bottom ~-13.8; CMP bar ~-4.5"}
+  - {table: electrical_interfaces, row_id: ectc51909.2023.00179-a-e1, field: lane_rate_gbps, value: 4.0, unit: Gbps, basis: measured, locator: "p.4 Table 1", note: "printed '> 4.0Gbps' for HBM1, HBM2 Gen1/Gen2, HBM2E Func."}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51909.2023.00179-a-m34, field: value, values: ["15% (Fig. 1)", "10~15% (Sec. I)", ">15% for 16hi (Abstract)"], locators: ["p.2 Fig. 1", "p.1 Sec. I", "p.1 Abstract"], chosen: 15, why: "figure label for the stated 8Hi 58 um case"}
+  - {table: metrics, row_id: ectc51909.2023.00179-a-m33, field: value, values: ["22.8% lower thermal resistance at same bump density (Sec. II.E)", "thermal resistance at less than 20% of conventional HBM (Abstract)"], locators: ["p.4 Sec. II.E; p.4 Fig. 12", "p.1 Abstract"], chosen: 22.8, why: "result section and Fig. 12 (0.78 vs 1) agree; abstract wording likely means >20% lower"}
+  - {table: metrics, row_id: ectc51909.2023.00179-a-m19, field: value_text, values: ["annotation '14nm' (Sample 2)", "bar difference CMP -4.5 to stack -14 = ~9.5 nm"], locators: ["p.3 Fig. 6", "p.3 Fig. 6"], chosen: "bar values entered", why: "annotation arrow spans CMP level to stack level but label does not match axis difference; bars read from axis"}
+excluded:
+  - "Hybrid bonding and C2W prior work of refs [1]-[5] (no numbers taken)"
+  - "High thermal conductivity underfill (~0.7 W/C, printed unit) mentioned as a hypothetical comparator; not entered"
+  - "Particle counts for EFEM, stage, head, transfer areas (Fig. 10) kept only in metric notes"
+not_reported:
+  - optical_interfaces
+  - die x/y size, Cu pad pitch and count, passivation material and thickness, TSV dimensions
+  - bond force/time/temperature, anneal time, plasma gases and power, wafer size
+  - reliability test durations and sample counts; thermal resistance absolute values and method
+  - "process_steps: ectc51909.2023.00179-b (MR-MUF reference stack; build not described)"
+source_quality:
+  - "No Fig. 3 in the paper (numbering jumps from Fig. 2 to Fig. 4). Table 1 had no candidate; manual crop used."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00179-F1-s01, change: 'material set: Cu pads (redesigned) in low-outgassing passivation film', reason: 'p.3 Sec. II.D: low-outgassing passivation film, redesigned Cu pad, optimized CMP'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00179-F1-s02, change: cure splits moved from conditions to split; C' corrected to C, reason: p.2 Fig. 2 prints the last column as C; parameter sweep belongs in split}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00179-F1-s03, change: category other -> bumping; step names backside pad formation, reason: 'p.1 Sec. I and p.2 Sec. II.A: backside pads formed on each layer'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00179-F1-s05, change: step_basis inferred_order, reason: paper does not state dicing position relative to de-bonding}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00179-F1-s09, change: 'equipment: all-in-one stacking equipment', reason: 'p.4 Sec. II.D: cleaning applied in all-in-one equipment immediately before bonding'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00179-F1-s10, change: 'equipment: C2W bonder, convex bond tool', reason: 'p.3 Sec. II.D; p.3 Fig. 7, Fig. 10'}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00179-F1-s12, change: step_basis inferred_order, reason: proxy SiP molding position not stated (p.4 Sec. II.E)}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00179-b, change: process_steps not_reported entry added, reason: reference MR-MUF stack; build not described}

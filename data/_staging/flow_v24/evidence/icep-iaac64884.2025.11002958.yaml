@@ -1,0 +1,32 @@
+paper_id: icep-iaac64884.2025.11002958
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/icep-iaac64884.2025.11002958/text.md
+  - references/icep-iaac64884.2025.11002958/source.json
+  - references/icep-iaac64884.2025.11002958/figures/page_01.png
+  - references/icep-iaac64884.2025.11002958/figures/page_02.png
+figure_reading_method: >-
+  Page renders plus 400 dpi re-crops of Fig. 4, 6, 7, 8; candidates p02_fig5, p02_fig6, p02_fig9 viewed. Fig. 5 table
+  values read directly; Fig. 7 scatter and Fig. 8 bars read by eye (+/-0.02 kgf/cm); Fig. 4 (+/-0.1 ratio).
+entries:
+  - {table: test_vehicles, row_id: icep-iaac64884.2025.11002958-b, field: substrate_x_mm, value: 515, unit: mm, basis: design_target, locator: "p.2 Fig. 5", note: "'X 515mm' label = transfer direction; text gives 510 x 515 mm"}
+  - {table: metrics, row_id: icep-iaac64884.2025.11002958-a-m3, field: value, value: 3.6, unit: ratio, basis: measured, locator: "p.1 Fig. 4", note: "highest orange measured marker (~1190 W)"}
+derived:
+  - {table: test_vehicles, row_id: icep-iaac64884.2025.11002958-f, field: package_thickness_mm, value: 0.43, formula: "430 um / 1000", inputs: "p.2 Sec. II"}
+  - {table: interconnects, row_id: icep-iaac64884.2025.11002958-f-i1, field: depth_um, value: 430, formula: "through via depth = glass thickness 430 um", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: icep-iaac64884.2025.11002958-F1-s02, field: time_s, value: 120, formula: "approximately 2 min x 60", inputs: "p.2 Sec. III"}
+conflicts: []
+excluded:
+  - "CCP pretreatment effectiveness for adhesion attributed to ref [1] (Fujinaga, ECTC 2015)"
+  - "650 mm square double-sided sputtering system capability (stated in Introduction as proposed system; no data)"
+  - "electron gyro radius ~1 mm and Ar ion gyro radius >100 mm (source physics, not a build metric)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "LIS voltage/current/pass speed for the panel etch, peel and TGV runs"
+  - "ABF grade and thickness, glass products, coupon sizes, sample counts per peel point"
+  - "TGV formation method, TGV pitch/count, plating chemistry and current density"
+  - "CCP conditions beyond Pf x Time; preheat temperature for ABF"
+source_quality:
+  - "Candidates p01_fig4, p02_fig7, p02_fig8 clip axis titles/label rows; manual bboxes used."

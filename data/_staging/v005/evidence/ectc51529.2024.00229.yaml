@@ -1,0 +1,49 @@
+paper_id: ectc51529.2024.00229
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00229/text.md
+  - references/ectc51529.2024.00229/source.json
+  - references/ectc51529.2024.00229/figures/page_04.png
+  - references/ectc51529.2024.00229/figures/cand/p01_fig1.png
+  - references/ectc51529.2024.00229/figures/cand/p02_fig3.png
+  - references/ectc51529.2024.00229/figures/cand/p03_fig4.png
+figure_reading_method: >-
+  Page grids (110 dpi) for p.1-3 and page_04 render; manual re-crops of Fig. 1, 3, 4, 5, 6, 7 viewed. Fig. 4(c),
+  5(c) angle labels and Fig. 7 TDECQ labels read from the images; all other numbers from text.
+entries:
+  - {table: metrics, row_id: ectc51529.2024.00229-b-m6, field: value, value: 1.4, unit: dB, basis: measured, locator: "p.4 Fig. 7(a)", note: "reference TDECQ label; text gives only the 0.1 dB penalty"}
+  - {table: stack_layers, row_id: ectc51529.2024.00229-b-L03, field: thickness_um, value: 10.3, unit: um, basis: measured, locator: "p.5 Sec. IV", note: "design 8 um"}
+derived:
+  - {table: metrics, row_id: ectc51529.2024.00229-a-m1, field: n_samples, value: 75, formula: "4 mirrors x 19 points - 1 bubble point", inputs: "p.3 Sec. III.A"}
+  - {table: metrics, row_id: ectc51529.2024.00229-a-m5, field: n_samples, value: 76, formula: "4 mirrors x 19 points", inputs: "p.3 Sec. III.A"}
+  - {table: process_steps, row_id: ectc51529.2024.00229-F1-s04, field: pressure_mpa, value: 0.006, formula: "6.0 kPa / 1000 (paper: 21.7 N over 60x60 mm mold)", inputs: "p.3 Sec. III.A"}
+  - {table: process_steps, row_id: ectc51529.2024.00229-F2-s05, field: pressure_mpa, value: 0.00416, formula: "4.16 kPa / 1000", inputs: "p.4 Sec. III.B"}
+  - {table: stack_layers, row_id: ectc51529.2024.00229-b-L07, field: thickness_um, value: 0.22, formula: "220 nm / 1000", inputs: "p.4 Sec. III.B"}
+conflicts: []
+excluded:
+  - "low-loss broadband (1460-1600 nm) re-distribution transmittance (ref [6])"
+  - "4 dB C-band coupler IL with grayscale-lithography top mirror (ref [6])"
+  - "UV grayscale and two-photon lithography tools (refs [7]-[9])"
+  - "TDECQ < 3.4 dB requirement (IEEE 400G / 400G-FR4 refs [12][13]); kept only as pass criterion scope"
+not_reported:
+  - interconnects, electrical_interfaces (xPU bumps only in concept schematic Fig. 1(b))
+  - package substrate material and layer count; Si chip embedding (not done in this work)
+  - polymer cladding product for 75-mm demo; UV dose, cure time, spin speed, metal coating on 75-mm demo
+  - fiber pitch, channel count, alignment method; per-facet coupling losses
+  - throughput (time per imprint shot); reliability data
+source_quality:
+  - "Candidate crops for Fig. 1, 3, 4, 5, 6, 7 cut axis labels or included neighbouring text; all six figures re-cropped manually."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00229-F1-s01", change: "groove geometry result -> target; step_basis inferred_order", reason: "stated geometry the step produces belongs in target; paper gives no order vs mold forming"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00229-F1-s02", change: "conditions (mirror layout, master height) -> target; result 'mold angle sigma 0.773 deg' removed (already metric a-m2)", reason: "target = stated geometry; measurements are metrics"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00229-F1-s04", change: "category other -> lithography; step_basis stated_in_flow", reason: "UV nanoimprint mold press is the patterning step (Fig. 3(c))"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00229-F2-s02", change: "groove geometry result -> target", reason: "stated geometry the step produces belongs in target"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00229-F2-s03", change: "'30 um-high mirrors' moved from step text to target", reason: "target = stated geometry"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00229-F2-s05", change: "category cure -> lithography; step_basis stated_in_flow", reason: "mold press + UV cure is the imprint patterning step; consistent with F1-s04"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00229-F1-s03, F1-s05, F1-s06, F2-s01, F2-s04, F2-s06, F2-s07", change: "step_basis stated_in_flow", reason: "order from Fig. 3(a)-(d) and Sec. III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00229-F2", change: "level ordered -> full", reason: "ordered flow with materials (polyimide, SUNCONNECT, Au) and imprint pressure 4.16 kPa"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00229-F1-s02;ectc51529.2024.00229-F2-s03", change: "category other kept; note added", reason: "PDMS working-mold replica is tooling; no matching category"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00229-F1-s06;ectc51529.2024.00229-F2-s06", change: "category other -> lithography", reason: "mold release is the demold step of the UV imprint (Fig. 3(d)); kept as its own step since Fig. 3(d) shows it"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00229-F2-s08", change: "new step: polymer waveguide core by UV lithography, seq 3, inferred_order; target core 8 um (design), thickness_um 10.3 (measured), result 10.3 x 8.4 um", reason: "waveguide prepared in advance (p.3 Sec. III.B); fabricated size and UV lithography (p.5 Sec. IV)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00229-F2-s03;ectc51529.2024.00229-F2-s04;ectc51529.2024.00229-F2-s05;ectc51529.2024.00229-F2-s06;ectc51529.2024.00229-F2-s07", change: "seq +1 (4-8)", reason: "make room for F2-s08 at seq 3"}

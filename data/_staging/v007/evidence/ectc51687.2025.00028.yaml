@@ -1,0 +1,57 @@
+paper_id: ectc51687.2025.00028
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00028/text.md
+  - references/ectc51687.2025.00028/source.json
+  - references/ectc51687.2025.00028/figures/page_02.png
+  - references/ectc51687.2025.00028/figures/page_03.png
+  - references/ectc51687.2025.00028/figures/page_04.png
+  - references/ectc51687.2025.00028/figures/page_05.png
+  - references/ectc51687.2025.00028/figures/cand/p02_fig3.png
+  - references/ectc51687.2025.00028/figures/cand/p03_fig5.png
+  - references/ectc51687.2025.00028/figures/cand/p04_fig6.png
+  - references/ectc51687.2025.00028/figures/cand/p04_fig7.png
+  - references/ectc51687.2025.00028/figures/cand/p04_tablei.png
+  - references/ectc51687.2025.00028/figures/cand/p05_fig9.png
+figure_reading_method: >-
+  Page renders; 400 dpi re-crops of Fig. 8 and Fig. 9. Fig. 9 bars read against gridlines (+/-3 mV). Fig. 8 has no
+  numeric axis values (qualitative ranking only). Table I matches text.md.
+entries:
+  - {table: metrics, row_id: ectc51687.2025.00028-a-m2, field: value, value: 188, unit: mV, basis: simulated, locator: "p.5 Fig. 9", note: "Si-cap (DSC) bar"}
+  - {table: components, row_id: ectc51687.2025.00028-c-c4, field: count, value: 8, unit: ea, basis: design_target, locator: "p.4 Sec. V", note: "'An 8 stacked SSSC was used in the simulation'"}
+derived:
+  - {table: process_steps, row_id: ectc51687.2025.00028-F1-s05, field: thickness_um, value: 1200, formula: "1.2 mm * 1000", inputs: "p.4 Table I (DASC thickness)"}
+conflicts:
+  - {table: metrics, row_id: ectc51687.2025.00028-c-m2, field: value, values: ["Fig. 9 axis 'Voltage Drop Improvement [mV]': DSC 188 > DASC 122 > SSSC 88", "text: DSC least impact, SSSC largest voltage drop effect / best"], locators: ["p.5 Fig. 9", "p.5 Sec. V.B"], chosen: "plotted values entered as plotted", why: "only numbers available; bars read as residual drop would match text; flagged in notes"}
+  - {table: components, row_id: ectc51687.2025.00028-b-c4, field: thickness_um, values: ["780 um Si-cap assumed (12-inch wafer)", "DASC total 1.2 mm (Table I)"], locators: ["p.2 Sec. II.B", "p.4 Table I"], chosen: "both kept (part vs total)", why: "different quantities"}
+excluded:
+  - "Prior SSSC/eCAP/PDN results of refs [1], [4], [5], [11]"
+  - "Fig. 1 DSC/LSC/eCAP generic concept (no numbers)"
+not_reported:
+  - electrical_interfaces; optical_interfaces
+  - any fabricated sample, yield or reliability data (concept and simulation only)
+  - package, substrate and die dimensions; layer counts; exact core thickness (only 'over 1 mm')
+  - Cu bump pitch/diameter; dummy silicon and DAF thickness; NCF and MUF products; bonding conditions
+  - ESL/ESR values; impedance magnitudes and frequencies (Fig. 8 unlabelled axes)
+source_quality:
+  - "Candidate p03_fig5 clipped the bottom of step b5 (manual re-crop)."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51687.2025.00028-a-m1 / b-m1, change: "kept", reason: "p.4 Table I lists 510 nF separately for Si-cap DSC and DASC (also x2B judgment)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00028-figures, change: "renumbered f05 -> f08 (Table I); f06 -> f09 (Fig. 9)", reason: "re-rank under key-figure rule 2026-10-19 (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00028-f05, change: "added Fig. 2 (stack_schematic, candidate)", reason: "DASC stack drawing (TV b)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00028-f06, change: "added Fig. 4 (stack_schematic, candidate)", reason: "SSSC stack drawing (TV c)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00028-f07, change: "added Fig. 1 (stack_schematic, candidate)", reason: "DSC/LSC/eCAP concept drawing"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51687.2025.00028-f10, change: "added Fig. 8 (electrical_plot, candidate)", reason: "impedance plot cited by 3 rows"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00028", change: "process_flow_level ordered confirmed (no conditions); flows F1-F3 scope tv_build -> generic_platform, all steps performed no and step_basis stated_in_flow", reason: "concept flows (Figs. 3, 5, 6) for simulation-only models; no fabricated sample"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00028-F3-s06", change: "deleted: rotate SSSC 90 degrees; orientation merged into F2-s04 (mount SSSC sideways)", reason: "orientation of the mounting step, not a separate fab step (p.2 Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00028-F2-s09", change: "added route c6b: combine main chip + HBM; F2-s08 set to route c6a", reason: "p.4 Sec. IV.A: c6a or c6b are alternatives"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00028-F2", change: "seq 7-13 -> 1-6 (deltas s03/s04 share seq 3); s01 category other -> carrier_prep; s06 other -> rdl_layer", reason: "seq restarts per flow; c1 substrate core on temporary carrier; c5 metal layer"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00028-F1-s02", change: "category other -> bumping; material Cu", reason: "p.2 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00028-F1-s05", change: "target and thickness_um 1200 (Table I DASC thickness, design_target)", reason: "p.2 Sec. II.A-B; p.4 Table I"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00028-F1-s06", change: "target 0.5 x 1.26 mm (Table I)", reason: "p.4 Table I"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00028-F3-s02", change: "materials on F3-s02..s05 (NCF, Si-cap wafer, MUF)", reason: "p.2-3 Sec. III"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00028-F1-s01", change: "category: 'other' -> 'device_fab'", reason: "silicon capacitor wafer fabrication is device fabrication (p.2 Sec. II.B, Fig. 3 step-a1); category in schema v2.5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00028-F3-s03", change: "material: 'Si-cap wafer' -> 'Si-cap wafer with Cu bumps'", reason: "Fig. 5 step-b3 shows Cu bumps at the Si-cap edges"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00028-F3-s03", change: "conditions: '' -> 'Cu bumps at Si-cap edges (Fig. 5 b3); Cu bump thickness more than 50 um (Abstract)'", reason: "stated bump thickness that sets the molded gap (p.1 Abstract; p.3 Fig. 5)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00028-F3-s03", change: "locator: appended 'p.1 Abstract'", reason: "source of the Cu bump thickness now on the step"}

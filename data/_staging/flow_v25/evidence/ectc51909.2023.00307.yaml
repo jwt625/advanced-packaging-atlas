@@ -1,0 +1,63 @@
+paper_id: ectc51909.2023.00307
+verified_on: 2026-10-18
+schema_version: 2
+source_files:
+  - references/ectc51909.2023.00307/text.md
+  - references/ectc51909.2023.00307/source.json
+  - references/ectc51909.2023.00307/source.pdf
+  - references/ectc51909.2023.00307/figures/page_02.png
+  - references/ectc51909.2023.00307/figures/page_03.png
+  - references/ectc51909.2023.00307/figures/page_04.png
+  - references/ectc51909.2023.00307/figures/page_05.png
+figure_reading_method: >-
+  text.md is garbled (symbol-font character shift) in Sec. II p.2 (node, bump dimensions, trench depth, SiO2 thicknesses),
+  p.4 (warpage value) and p.5 (BBM thickness, TSV dimensions, chip gap), although source.json lists no garbled pages.
+  These passages were read from source.pdf re-rendered at 220-250 dpi. Fig. 3, 5, 6, 7, 8, 9 and Table I read from page
+  images; Fig. 5 profile and Table I at 250 dpi.
+entries:
+  - {table: interconnects, row_id: ectc51909.2023.00307-a-i1, field: diameter_um, value: 10, unit: um, basis: measured, locator: "p.5 Fig. 8(b) label; p.5 Sec. III", note: "depth 39 um"}
+  - {table: stack_layers, row_id: ectc51909.2023.00307-a-L02, field: thickness_um, value: 10.5, unit: um, basis: measured, locator: "p.5 Fig. 8(a) label", note: "text p.2 trench etch about 10.5 um"}
+  - {table: interconnects, row_id: ectc51909.2023.00307-b-i1, field: bonding_force_n, value: 0.392, unit: N, basis: design_target, locator: "p.4 Fig. 5", note: "392 mN; initial 294 mN step"}
+  - {table: metrics, row_id: ectc51909.2023.00307-a-m1, field: value, value: 77, unit: um, basis: measured, locator: "p.4 Fig. 7 label and Sec. III text", note: "approximately 77 um"}
+derived:
+  - {table: interconnects, row_id: ectc51909.2023.00307-a-i1, field: aspect_ratio, value: 3.9, formula: "depth/diameter = 39/10", inputs: "p.5 Fig. 8(b)"}
+  - {table: interconnects, row_id: ectc51909.2023.00307-b-i1, field: bonding_temp_c, value: 299.85, formula: "573 K - 273.15", inputs: "p.4 Fig. 5"}
+  - {table: interconnects, row_id: ectc51909.2023.00307-b-i1, field: bonding_force_n, value: 0.392, formula: "392 mN / 1000", inputs: "p.4 Fig. 5"}
+  - {table: process_steps, row_id: ectc51909.2023.00307-F2-s01, field: temp_c, value: 299.85, formula: "573 K - 273.15", inputs: "p.4 Fig. 5"}
+  - {table: process_steps, row_id: ectc51909.2023.00307-F1-s14, field: temp_c, value: 149.85, formula: "423 K - 273.15", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: ectc51909.2023.00307-F1-s19, field: temp_c, value: 26.85, formula: "300 K - 273.15", inputs: "p.4 Table I"}
+  - {table: process_steps, row_id: ectc51909.2023.00307-F1-s22, field: temp_c, value: 179.85, formula: "453 K - 273.15", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: ectc51909.2023.00307-F1-s22, field: time_s, value: 3600, formula: "1 h * 3600", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: ectc51909.2023.00307-F1-s19, field: time_s, value: 600, formula: "10 min x 60", inputs: "p.4 Table I"}
+  - {table: process_steps, row_id: ectc51909.2023.00307-F1-s27, field: time_s, value: 10800, formula: "180 min x 60", inputs: "p.4 Table I"}
+  - {table: process_steps, row_id: ectc51909.2023.00307-F1-s27, field: temp_c, value: 26.85, formula: "300 K - 273.15", inputs: "p.4 Table I"}
+  - {table: process_steps, row_id: ectc51909.2023.00307-F1-s28, field: time_s, value: 7200, formula: "120 min x 60", inputs: "p.4 Table I"}
+  - {table: process_steps, row_id: ectc51909.2023.00307-F1-s28, field: temp_c, value: 26.85, formula: "300 K - 273.15", inputs: "p.4 Table I"}
+  - {table: process_steps, row_id: ectc51909.2023.00307-F2-s01, field: temp_c_max, value: 299.85, formula: "573 K - 273.15", inputs: "p.4 Fig. 5"}
+  - {table: process_steps, row_id: ectc51909.2023.00307-F2-s01, field: force_n, value: 0.392, formula: "392 mN / 1000", inputs: "p.4 Fig. 5"}
+conflicts: []
+excluded:
+  - "BBM PDN impedance / decoupling benefits and secure-system evaluation attributed to prior work [8,9]; no electrical data in this paper"
+  - "SLID bonding method reference [10]; BPR comparison [11,12]"
+not_reported:
+  - electrical_interfaces, optical_interfaces; PDN impedance, IR drop, decap value, TSV/bump resistance
+  - bump pitch and count, BBM-TSV dimensions, BCB thickness, Ti thickness, support glass and glue products
+  - bonding atmosphere/tool, underfill (resin in Fig. 9 only for cross-section), reliability, yield
+  - warpage measurement temperature and sign convention
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00307, change: "papers.notes trimmed 32 -> 29 words", reason: "audit_x1 item 15 (rule m, notes <= 30 words); OCR text flag added per BATCH_INSTRUCTIONS"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00307-F1-s14, change: "none", reason: "audit_x1 item 14: temp_c 149.85 (423 K, p.2 Sec. II) already carries override temp_c:design_target; numeric cell is design_target"}
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00307-F1-s22, change: "none", reason: "audit_x1 item 14: temp_c 179.85 / time_s 3600 (453 K, 1 h, p.2 Sec. II) already carry design_target overrides"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00307-figures, change: "re-ranked: Fig. 3 f03 -> f02, Fig. 8 f02 -> f03, Fig. 6 f04 -> f05, Fig. 7 f05 -> f07, Fig. 5 f06 -> f08", reason: "key-figure rule 2026-10-19: rank 1 build view, then process flow, layout, other schematics/images, then plots/tables"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00307-f04, change: "added Fig. 2 (stack_schematic, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00307-f06, change: "added Fig. 4 (micrograph, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00307-f09, change: "added Table I (data_table, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51909.2023.00307-F1", change: "tv_ids a -> a;b; notes added", reason: "repass: the four-tier stack chips (TV b) are fabricated with the Fig. 3(a)-(q) flow"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51909.2023.00307-F2", change: "level fragments -> full; flow_name + Fig. 5; source schematic -> mixed", reason: "repass: step (r) of the stated Fig. 3 flow with a full bonding profile (p.4 Fig. 5)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51909.2023.00307-F1-s01", change: "category other -> bumping; bump diameter/height moved from conditions to target (override target:design_target)", reason: "repass: target holds stated geometry"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51909.2023.00307-F1-s02", change: "object name moved from target to step; trimmed width/depth moved from conditions to target", reason: "repass convention: target = stated geometry, not object names"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51909.2023.00307-F1-s09", change: "thickness_um 10.5 (approx) -> target 'etched Si depth approx 10.5 um'", reason: "repass: etch depth is produced geometry, not a result film thickness"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51909.2023.00307-F1-s19", change: "composite 3-step electroplating split: s19 = 1st step (0.5 mA/cm2, 600 s); new s27 (2nd, PPR, 10800 s) and s28 (3rd, 6 mA/cm2, 7200 s); typed current_density_ma_cm2/time_s", reason: "repass: Table I (p.4) gives a finer order; conditions typed"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51909.2023.00307-F1", change: "steps s20-s26 seq +2 (22-28) to follow new s27/s28; step_ids unchanged", reason: "repass: seq carries order, ids never renumbered"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51909.2023.00307-F1-s23", change: "category other -> bumping; bump diameter/height moved from conditions to target", reason: "repass: target holds stated geometry"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51909.2023.00307-F2-s01", change: "temp_c_max 299.85 and force_n 0.392 typed; load profile text corrected (294 mN ramp, then 392 mN held 22 s)", reason: "repass: Fig. 5 (p.4) re-read at 220 dpi"}

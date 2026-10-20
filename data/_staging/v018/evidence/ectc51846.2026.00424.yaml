@@ -1,0 +1,45 @@
+paper_id: ectc51846.2026.00424
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00424/text.md
+  - references/ectc51846.2026.00424/source.json
+  - references/ectc51846.2026.00424/figures/page_02.png
+  - references/ectc51846.2026.00424/figures/page_03.png
+  - references/ectc51846.2026.00424/figures/page_04.png
+  - references/ectc51846.2026.00424/figures/page_05.png
+  - references/ectc51846.2026.00424/figures/cand/p04_fig6.png
+  - references/ectc51846.2026.00424/figures/cand/p04_fig7.png
+  - references/ectc51846.2026.00424/figures/cand/p04_fig8.png
+  - references/ectc51846.2026.00424/figures/cand/p04_fig9.png
+figure_reading_method: >-
+  Page grids for p.2-5; manual re-crops of Fig. 1, 3, 4, 6, 8, 9, 10 (candidates clipped bottom rows/labels). Fig. 6
+  bars for 2.3 and 2.4 mm sites read against gridlines (+/-0.3 MPa). Fig. 7 and Fig. 9 profiles checked against text.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00424-b-m3, field: value, value: 5.3, unit: MPa, basis: measured, locator: "p.4 Fig. 6", note: "2.3 x 2.3 mm site bar"}
+  - {table: metrics, row_id: ectc51846.2026.00424-b-m4, field: value, value: 9.5, unit: MPa, basis: measured, locator: "p.4 Fig. 6", note: "2.4 x 2.4 mm site bar"}
+  - {table: interconnects, row_id: ectc51846.2026.00424-a-i1, field: diameter_um, value: 9.3, unit: um, basis: measured, locator: "p.5 Fig. 10", note: "design target 10 um"}
+derived: []
+conflicts:
+  - {table: stack_layers, row_id: ectc51846.2026.00424-a-L04, field: thickness_um, values: [5, 7, 6], locators: ["p.2 Sec. II.A; p.3 Fig. 3(2)", "p.3 Sec. III.A; p.4 Fig. 7 (before cure)", "p.3 Sec. III.A; p.4 Fig. 7 (after cure, center)"], chosen: 6, why: "measured profile after B-stage cure over stated 5 um spin-coat thickness"}
+  - {table: metrics, row_id: ectc51846.2026.00424-c-m1, field: value, values: [9.5, 9.3], locators: ["p.3 Sec. III.A", "p.4 Fig. 6"], chosen: 9.5, why: "text 'approximately 9.5 MPa'; bar reads about 9.3 within reading error"}
+excluded:
+  - "Tg ~347 C (cured PI) and ~90 C (thermoplastics), sentence attributed to ref [6]"
+  - "Tg < 150 C and shifts of several microns for conventional thermoplastics (Introduction, general)"
+  - "PE-CVD 200-300 C typical range (Introduction, general)"
+  - "uLED Cu-Au direct SAP bonding on TSV die backside (Fig. 11): concept under study, refs [5], [7]; no TV built"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - TSV electrical resistance/yield, TSV count and pitch
+  - thermocompression bonding temperature, force, time
+  - backside SiO2 and liner thicknesses, glass carrier diameter, MPW die source of the dummy dies
+  - Cu/Sn microbump dimensions (step listed, not shown)
+source_quality: []
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00424-F1", change: "s01 500 um glass carrier, s05 die size, s06 equipment wafer bonder tool, s10 target TSV 10 um design/9.3 um/40 um/AR 4, s11 equipment PE-CVD, s12 tool and Ti/Cu 100/1900 nm to conditions, s15 other -> bumping; step_basis stated_in_flow; performed yes s01-s13 (s14-s16 listed as subsequent steps, execution not stated)", reason: "p.2 Sec. II.A-B; p.3 Figs. 3-4; p.4 Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00424-F2", change: "s01 target mark sizes; s02 site-size sweep and s03 B-stage sweep moved to split (175 C from Fig. 5); s05/s06 set as alternative routes (PE-CVD exposure vs debonding), seq 1 each; profilometry removed from s06 step text; step_basis stated_in_flow, performed yes", reason: "p.3 Sec. III.A; p.4 Figs. 5, 6, 8, 9: debond residue test bonds then debonds, die-shift test bonds then runs PE-CVD"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00424-F3", change: "new comparison flow for TV c (2 steps: thermoplastic bond, 200 C PE-CVD exposure)", reason: "p.3 Sec. III.A: reference dies bonded with conventional thermoplastic and subjected to 200 C PE-CVD; TV c was in no flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00424-F1-s04", change: "thickness_um '' -> '6'; result '' -> '~7 um before cure -> ~6 um centre / 6.5 um edge bead after B-stage (Fig. 7)'; overrides '' -> 'thickness_um:measured'; qualifiers '' -> 'thickness_um:approx'; locator += 'p.4 Fig. 7'", reason: "pass B target_missing a-L04: Sec. III.A profilometry ~7 um before cure, ~6 um centre / 6.5 um perimeter after B-stage"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00424-F2-s03", change: "thickness_um '' -> '6'; result '' -> '~7 um before cure -> ~6 um centre / 6.5 um edge bead after B-stage (Fig. 7)'; overrides '' -> 'thickness_um:measured'; qualifiers '' -> 'thickness_um:approx'; locator += 'p.4 Fig. 7'", reason: "same B-stage bake on the evaluation TV; stated fix applied to every step it applies to"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00424-F2-s01", change: "conditions '' -> 'on 500 um glass support wafer (Sec. II.A)'; locator prefixed 'p.2 Sec. II.A; '", reason: "pass B target_missing b-L03: Sec. II.A bonding process uses a 500 um-thick glass support wafer"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00424-F3-s01", change: "none", reason: "pass B target_missing c-L03 not applicable: 500 um is stated only for the polyimide platform carrier (Sec. II.A); carrier thickness for the thermoplastic reference is not stated"}

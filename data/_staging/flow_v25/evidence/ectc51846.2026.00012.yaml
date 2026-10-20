@@ -1,0 +1,63 @@
+paper_id: ectc51846.2026.00012
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00012/text.md
+  - references/ectc51846.2026.00012/source.json
+  - references/ectc51846.2026.00012/figures/page_02.png
+  - references/ectc51846.2026.00012/figures/page_03.png
+  - references/ectc51846.2026.00012/figures/page_04.png
+  - references/ectc51846.2026.00012/figures/page_05.png
+  - references/ectc51846.2026.00012/figures/page_06.png
+  - references/ectc51846.2026.00012/figures/page_07.png
+figure_reading_method: >-
+  Tables I-III read from candidate crops (p04_tablei, p05_tableii, p05_tableiii) and checked against text. Fig. 2
+  re-cropped (150 dpi); Fig. 8 re-cropped at 500 dpi to read point ranges (+/-0.02 mm). Fig. 3-7 viewed on page renders.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00012-c-m13, field: value, value: 0.3, unit: mm, basis: measured, locator: "p.7 Sec. IV", note: "text 'remains below 0.3' (unit implied mm)"}
+  - {table: metrics, row_id: ectc51846.2026.00012-c-m14, field: value, value: 0.1, unit: mm, basis: measured, locator: "p.7 Sec. IV; p.7 Fig. 8(b)", note: "convergence zone +/-100 um"}
+derived:
+  - {table: process_steps, row_id: ectc51846.2026.00012-F1-s07, field: pressure_mpa, value: 0.84, formula: "8.4 bar x 0.1", inputs: "p.3 Sec. II.D; p.4 Table I"}
+  - {table: process_steps, row_id: ectc51846.2026.00012-F2-s05, field: pressure_mpa, value: 0.6, formula: "6.0 bar x 0.1", inputs: "p.3 Sec. II.D; p.5 Table II"}
+  - {table: process_steps, row_id: ectc51846.2026.00012-F2-s07, field: pressure_mpa, value: 0.64, formula: "6.4 bar x 0.1", inputs: "p.3 Sec. II.D; p.5 Table II"}
+  - {table: components, row_id: ectc51846.2026.00012-a-c1, field: x_mm, value: 300, formula: "wafer diameter 300 mm stored as x_mm", inputs: "p.2 Sec. II.B"}
+  - {table: process_steps, row_id: ectc51846.2026.00012-F1-s08, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.3 Sec. II.C; p.4 Table I"}
+  - {table: process_steps, row_id: ectc51846.2026.00012-F2-s08, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.3 Sec. II.C; p.5 Table II"}
+  - {table: process_steps, row_id: ectc51846.2026.00012-F3-s08, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.3 Sec. II.C; p.5 Table III"}
+  - {table: process_steps, row_id: ectc51846.2026.00012-F1-s07, field: time_s, value: 600, formula: "10 min x 60", inputs: "p.3 Sec. II.D"}
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00012-a-m7, field: stage geometry, values: ["convex (Table I, Fig. 4, Sec. III.A later text)", "flat/concave (Sec. III.A first paragraph, Fig. 4 caption)"], locators: ["p.4 Table I", "p.3 Sec. III.A"], chosen: "convex", why: "result table and plot labels"}
+  - {table: metrics, row_id: ectc51846.2026.00012-b-m12, field: value, values: [36, 35], locators: ["p.5 Table II", "p.1 Abstract 'up to 35% for EMC panels'"], chosen: 36, why: "result table"}
+  - {table: metrics, row_id: ectc51846.2026.00012-c-m14, field: n_samples, values: ["over 20 pieces (abstract)", "~24 points visible in Fig. 8(a)+(b)"], locators: ["p.1 Abstract", "p.7 Fig. 8"], chosen: "not entered", why: "exact count not stated"}
+  - {table: metrics, row_id: ectc51846.2026.00012-c-m1, field: initial warpage range, values: ["0.32-0.65 mm (Sec. III.C)", "0.3-0.6 mm (Sec. IV)"], locators: ["p.6 Sec. III.C", "p.6 Sec. IV"], chosen: "Table III values", why: "result table"}
+  - {table: figures, row_id: ectc51846.2026.00012-f02, field: pressure unit, values: ["kg/cm2 (Fig. 2 axis)", "bar (text)"], locators: ["p.3 Fig. 2", "p.3 Sec. II.D"], chosen: "bar in process_steps", why: "text"}
+excluded:
+  - "planar/rigid constraint spring-back and non-planar fixture concepts attributed to refs [1]-[5]"
+  - "curvature pre-compensation counter-bending moment attributed to refs [6],[7]; panel DV optimization note citing ref [8]"
+  - "Sec. III.B summary 'approximately 25-35% reduction' for EMC panels (covered by Table II rows)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "chip size/count, EMC product, mold thickness, carrier thickness, molding conditions"
+  - "ABF grade, Cu layer thickness and count, via dimensions, total substrate thickness, SR product"
+  - "membrane material and rigid-plate material, stage curvature radius, DV gas density values"
+  - "sample counts per Table configuration; KEYENCE measurement area per sample"
+source_quality:
+  - "Title has typo 'Membrance' (kept as printed). Fig. 2 candidate includes large blank area; manual crop used."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00012-F1", change: "step_basis stated_in_flow on all steps (also F2, F3)", reason: "order stated in Sec. II.B-D"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00012-F1-s10", change: "deleted: full-field 3D topography (KEYENCE VL-700) before/after WSAS is the warpage measurement, not a build step; PV values and tool already in metrics a/b/c-m* scope", reason: "rule 7: measurements are metrics (p.3 Sec. II.E)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00012-F2-s10", change: "deleted: full-field 3D topography (KEYENCE VL-700) before/after WSAS is the warpage measurement, not a build step; PV values and tool already in metrics a/b/c-m* scope", reason: "rule 7: measurements are metrics (p.3 Sec. II.E)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00012-F3-s10", change: "deleted: full-field 3D topography (KEYENCE VL-700) before/after WSAS is the warpage measurement, not a build step; PV values and tool already in metrics a/b/c-m* scope", reason: "rule 7: measurements are metrics (p.3 Sec. II.E)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00012-F1-s05", change: "stage/chuck-table and chamber-pressure variants put in split", reason: "p.4 Table I A1-A7"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00012-F1-s07", change: "pressure_mpa 0.84 (8.4 bar membrane); conditions clarified; membrane rigid/soft variants in split", reason: "p.3 Sec. II.D; p.4 Table I"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00012-F1-s08", change: "DV variants moved from conditions to split", reason: "p.4 Table I A4-A6"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00012-F2-s04", change: "pre-cured/post-cured EMC variants in split", reason: "p.4 Sec. III.B; p.5 Table II"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00012-F2-s05", change: "pressure_mpa 0.6 (ambient 6.0 bar); stage flat/convex in split", reason: "p.5 Table II"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00012-F2-s07", change: "pressure_mpa 0.64 (6.4 bar membrane); conditions corrected to soft membrane only (rigid membrane and DV not in panel runs)", reason: "p.5 Table II"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00012-F2-s08", change: "DV variants in split (B2 only)", reason: "p.5 Table II"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00012-F3-s03", change: "thickness_um 200 (approx, cumulative ABF per side)", reason: "p.2 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00012-F3-s04", change: "category other -> deposition_other", reason: "solder mask applied to both surfaces (p.2 Sec. II.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00012-F3-s05", change: "stage and chamber-pressure variants in split (8.0/6.0/4.0 bar)", reason: "p.5 Table III C1-C4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00012-F3-s07", change: "membrane 8.4/6.4 bar in split; conditions corrected to soft membrane only, no DV", reason: "p.5 Table III"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00012-F3-s08", change: "conditions: DV split removed (no DV run for ABF substrates)", reason: "p.5 Table III"}

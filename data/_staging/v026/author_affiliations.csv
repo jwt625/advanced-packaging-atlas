@@ -1,0 +1,30 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc51909.2023.00219-a01-1,ectc51909.2023.00219,1,Takahiro Kamei,1,primary,Sony Semiconductor Solutions,,Kanagawa,JP,"printed locality is a prefecture (Kanagawa, JPN)",paper,p.1 affiliations
+ectc51909.2023.00219-a02-1,ectc51909.2023.00219,2,Hirotaka Yoshioka,1,primary,Sony Semiconductor Solutions,,Kanagawa,JP,"printed locality is a prefecture (Kanagawa, JPN)",paper,p.1 affiliations
+ectc51909.2023.00219-a03-1,ectc51909.2023.00219,3,Tatsumasa Hiratsuka,1,primary,Sony Semiconductor Solutions,,Kanagawa,JP,"printed locality is a prefecture (Kanagawa, JPN)",paper,p.1 affiliations
+ectc51909.2023.00219-a04-1,ectc51909.2023.00219,4,Akihisa Sakamoto,1,primary,Sony Semiconductor Solutions,,Kanagawa,JP,"printed locality is a prefecture (Kanagawa, JPN)",paper,p.1 affiliations
+ectc51909.2023.00219-a05-1,ectc51909.2023.00219,5,Kan Shimizu,1,primary,Sony Semiconductor Solutions,,Kanagawa,JP,"printed locality is a prefecture (Kanagawa, JPN)",paper,p.1 affiliations
+ectc51909.2023.00219-a06-1,ectc51909.2023.00219,6,Hayato Iwamoto,1,primary,Sony Semiconductor Solutions,,Kanagawa,JP,"printed locality is a prefecture (Kanagawa, JPN)",paper,p.1 affiliations
+ectc51909.2023.00230-a01-1,ectc51909.2023.00230,1,Bogdan Sirbu,1,primary,Fraunhofer IZM,,Berlin,DE,,paper,p.1 affiliations
+ectc51909.2023.00230-a02-1,ectc51909.2023.00230,2,Kai Zoschke,1,primary,Fraunhofer IZM,,Berlin,DE,,paper,p.1 affiliations
+ectc51909.2023.00230-a03-1,ectc51909.2023.00230,3,Stéphane Bernabé,1,primary,CEA-Leti,,Grenoble,FR,,paper,p.1 affiliations
+ectc51909.2023.00230-a04-1,ectc51909.2023.00230,4,Quentin Wilmart,1,primary,CEA-Leti,,Grenoble,FR,,paper,p.1 affiliations
+ectc51909.2023.00230-a05-1,ectc51909.2023.00230,5,Tolga Tekin,1,primary,Fraunhofer IZM,,Berlin,DE,,paper,p.1 affiliations
+ectc51909.2023.00190-a01-1,ectc51909.2023.00190,1,Kai Ma,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51909.2023.00190-a02-1,ectc51909.2023.00190,2,Nikolaos Bekiaris,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51909.2023.00190-a03-1,ectc51909.2023.00190,3,Sesh Ramaswami,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51909.2023.00190-a04-1,ectc51909.2023.00190,4,Taotao Ding,1,primary,EV Group,,St. Florian am Inn,AT,,paper,p.1 affiliations
+ectc51909.2023.00190-a05-1,ectc51909.2023.00190,5,Gernot Probst,1,primary,EV Group,,St. Florian am Inn,AT,,paper,p.1 affiliations
+ectc51909.2023.00190-a06-1,ectc51909.2023.00190,6,Jürgen Burggraf,1,primary,EV Group,,St. Florian am Inn,AT,,paper,p.1 affiliations
+ectc51909.2023.00190-a07-1,ectc51909.2023.00190,7,Thomas Uhrmann,1,primary,EV Group,,St. Florian am Inn,AT,,paper,p.1 affiliations
+ectc51909.2023.00252-a01-1,ectc51909.2023.00252,1,Mihai Dragos Rotaru,1,primary,A*STAR Institute of Microelectronics,,Singapore,SG,"printed: Institute of Microelectronics (IME), Agency for Science, Technology, and Research (A*STAR)",paper,p.1 affiliations (page image)
+ectc51909.2023.00252-a02-1,ectc51909.2023.00252,2,Shashank Tiwari,1,primary,GlobalFoundries,,Bangalore,IN,,paper,p.1 affiliations (page image)
+ectc51909.2023.00252-a03-1,ectc51909.2023.00252,3,Paul Castillou,1,primary,Qorvo,,San Jose,US,,paper,p.1 affiliations (page image)
+ectc51909.2023.00252-a04-1,ectc51909.2023.00252,4,Chai Tai Chong,1,primary,A*STAR Institute of Microelectronics,,Singapore,SG,"printed: Institute of Microelectronics (IME), Agency for Science, Technology, and Research (A*STAR)",paper,p.1 affiliations (page image)
+ectc51909.2023.00252-a05-1,ectc51909.2023.00252,5,Chui King Jien,1,primary,A*STAR Institute of Microelectronics,,Singapore,SG,"printed: Institute of Microelectronics (IME), Agency for Science, Technology, and Research (A*STAR)",paper,p.1 affiliations (page image)
+ectc51909.2023.00235-a01-1,ectc51909.2023.00235,1,Griselda Bonilla,1,primary,IBM,"IBM Research, AI Hardware Research","Yorktown Heights, NY",US,,paper,p.1 affiliations
+ectc51909.2023.00235-a02-1,ectc51909.2023.00235,2,Brian Quinlan,1,primary,IBM,"IBM Systems, Packaging Development","East Fishkill, NY",US,,paper,p.1 affiliations
+ectc51909.2023.00235-a03-1,ectc51909.2023.00235,3,Thomas Wassick,1,primary,IBM,"IBM Systems, Packaging Development","East Fishkill, NY",US,,paper,p.1 affiliations
+ectc51909.2023.00235-a04-1,ectc51909.2023.00235,4,Russell Kastberg,1,primary,IBM,"IBM Systems, Packaging Development","East Fishkill, NY",US,,paper,p.1 affiliations
+ectc51909.2023.00235-a05-1,ectc51909.2023.00235,5,Shidong Li,1,primary,IBM,"IBM Systems, Packaging Development","East Fishkill, NY",US,,paper,p.1 affiliations
+ectc51909.2023.00235-a06-1,ectc51909.2023.00235,6,Monali Basutkar,1,primary,IBM,"IBM Systems, Packaging Development","East Fishkill, NY",US,,paper,p.1 affiliations

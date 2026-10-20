@@ -1,0 +1,66 @@
+paper_id: ectc51909.2023.00266
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00266/text.md
+  - references/ectc51909.2023.00266/source.json
+  - references/ectc51909.2023.00266/figures/page_01.png
+  - references/ectc51909.2023.00266/figures/page_02.png
+  - references/ectc51909.2023.00266/figures/page_03.png
+  - references/ectc51909.2023.00266/figures/page_04.png
+  - references/ectc51909.2023.00266/figures/page_05.png
+  - references/ectc51909.2023.00266/figures/cand/p02_fig2.png
+  - references/ectc51909.2023.00266/figures/cand/p03_fig7.png
+  - references/ectc51909.2023.00266/figures/cand/p03_fig9.png
+  - references/ectc51909.2023.00266/figures/cand/p03_tablei.png
+  - references/ectc51909.2023.00266/figures/cand/p04_fig11.png
+  - references/ectc51909.2023.00266/figures/cand/p04_fig13.png
+  - references/ectc51909.2023.00266/figures/cand/p04_fig15.png
+figure_reading_method: >-
+  Page renders at 150 dpi; Fig. 7 and Fig. 13 re-rendered at 300 dpi. Fig. 13 points read against 20 um gridlines
+  (+/-5 um). Fig. 11 yields read from the printed data table under the bars. Table I matches text.md.
+entries:
+  - {table: metrics, row_id: ectc51909.2023.00266-a-m8, field: value, value: 140, unit: um, basis: measured, locator: "p.4 Fig. 13", note: "first point at 25 C, about 139-140"}
+  - {table: metrics, row_id: ectc51909.2023.00266-a-m9, field: value, value: 43, unit: um, basis: measured, locator: "p.4 Fig. 13", note: "lowest points at 200-240 C, about 43-44"}
+  - {table: metrics, row_id: ectc51909.2023.00266-a-m12, field: value, value: 60.9, unit: um, basis: measured, locator: "p.4 Fig. 15", note: "measurement label in image"}
+derived: []
+conflicts:
+  - {table: test_vehicles, row_id: ectc51909.2023.00266-a, field: package_x_mm/package_y_mm, values: ["16 x 24 mm package size (Abstract)", "Chiplet size: 11mm x 16mm (Sec. II TV list)"], locators: ["p.1 Abstract", "p.2 Sec. II"], chosen: "16 x 24", why: "abstract explicitly says package size; 'chiplet size' in TV list may denote the SoC or another dimension, not stated"}
+  - {table: metrics, row_id: ectc51909.2023.00266-a-m8, field: scope, values: ["text: package level warpage showed convex warpage", "Fig. 13 legend: Warpage Mode Smiling, positive (+) sign"], locators: ["p.4 Sec. III.B", "p.4 Fig. 13"], chosen: "both recorded in scope", why: "sign convention not defined beyond the legend; no basis to override either"}
+excluded:
+  - "Chiplet market forecast $47.2B, CAGR 40.9% (Abstract, attributed to [4])"
+  - "TSMC cost-performance figure (Fig. 1, Source: TSMC) and InFO/CoWoS mentions"
+  - "600 mm x 600 mm PLP transfer: stated as future work, no build data"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - SoC die size and thickness; die thickness values in the 'thicker Si die' split; mold thickness
+  - RDL metal, passivation material and thickness, UBM stack, solder ball size/pitch/alloy
+  - Cu stud height and actual pitch on the TV (only Table I design-rule minima)
+  - package thickness; BLR sample count, board and failure criterion; yield definition
+  - measured panel warpage value (only 'within +/-3 mm spec')
+  - 2 um L/S pattern materials and process (Fig. 9 only)
+  - "process_steps: ectc51909.2023.00266-b (2 um L/S pattern shown in Fig. 9 only; process not described)"
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1, change: "notes: '' -> 'Warpage splits (Fig. 11): backside laminate film 1X-3X layers, filler dies, Si thickness; laminate position in flow not stated.'", reason: "warpage-control splits recorded"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1-s01, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text and Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1-s02, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text and Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1-s03, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text and Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1-s04, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text and Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1-s05, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text and Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1-s06, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text and Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1-s07, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text and Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1-s08, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text and Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1-s09, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text and Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1-s10, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text and Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1-s11, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text and Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1-s12, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text and Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1-s13, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text and Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1-s14, change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. II text and Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1-s01, change: "category: 'other' -> 'bumping'; target: '' -> 'design rule (10 um L/S): Cu stud min 40 um, min pitch 60 um'; overrides: '' -> 'target:design_target'; locator: 'p.2 Sec. II; p.2 Fig. 2' -> 'p.2 Sec. II; p.2 Fig. 2; p.3 Table I'", reason: "Cu stud formation is bumping; Table I design-rule geometry"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1-s02, change: "split: '' -> 'Si die thickness: baseline vs thicker (Fig. 11)'; locator: 'p.2 Sec. II' -> 'p.2 Sec. II; p.4 Sec. III.B; p.4 Fig. 11'", reason: "die-thickness split of the warpage learning cycles"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1-s04, change: "material: '' -> 'adhesive tape on temporary carrier'; conditions: '' -> 'face-up; dummy Si filler dies at panel edge'; split: '' -> 'edge filler die fan-out ratio: high vs low FOR (Fig. 11); layouts FOR 1.34 / 1.23 (Fig. 12)'; locator: 'p.2 Sec. II; p.2 Fig. 4' -> 'p.2 Sec. II; p.2 Fig. 4; p.4 Fig. 11; p.4 Fig. 12'; notes: 'Filler (dummy Si) dies at panel edge for warpage / fan-out-ratio control.' -> ''", reason: "stated material/conditions; filler-die layout split"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1-s06, change: "target: 'panel warpage +/-3 mm post front-side grind' -> ''; conditions: '' -> 'panel warpage requirement +/-3 mm post front-side grind'", reason: "target held a warpage spec, not geometry"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266-F1-s07, change: "category: 'other' -> 'rdl_layer'; target: '' -> '10/10 um L/S; RDL thickness 5 um'; overrides: '' -> 'target:design_target'; equipment: '' -> 'laser direct imaging (Adaptive Patterning)'; locator: 'p.2 Sec. II; p.3 Sec. II' -> 'p.2 Sec. I; p.2 Sec. II; p.3 Sec. II; p.3 Fig. 7'", reason: "RDL build-up category; stated L/S, thickness and LDI"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51909.2023.00266, change: "not_reported: added process_steps entry", reason: "uncovered physical TV(s) documented"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51909.2023.00266-F1-s13", change: "category: 'other' -> 'debonding'", reason: "detape after UV cure releases the backgrind tape (p.3 Sec. II); tape release = debonding (project precedent: TBF detaping)"}
+  - {date: "2026-10-20", source: "repass", row_id: "ectc51909.2023.00266-F1-s07", change: "target: '10/10 um L/S; RDL thickness 5 um' -> '10/10 um L/S; RDL thickness 5 um; min via size 20 um (10 um L/S rule, Table I)'; locator: 'p.2 Sec. I; p.2 Sec. II; p.3 Sec. II; p.3 Fig. 7' -> 'p.2 Sec. I; p.2 Sec. II; p.3 Sec. II; p.3 Fig. 7; p.3 Table I'", reason: "stated via design-rule minimum (p.3 Table I) put on the RDL build-up step"}

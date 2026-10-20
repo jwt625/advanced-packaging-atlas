@@ -1,0 +1,49 @@
+paper_id: ectc51846.2026.00008
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00008/text.md
+  - references/ectc51846.2026.00008/source.json
+  - references/ectc51846.2026.00008/figures/page_03.png
+  - references/ectc51846.2026.00008/figures/page_04.png
+  - references/ectc51846.2026.00008/figures/page_05.png
+figure_reading_method: >-
+  Page renders p.3-5; candidates p03_fig1, p03_tablev, p04_tableviii, p05_fig5, p05_tablexi opened; manual re-crops of
+  Fig. 1 (candidate cut at bottom, includes heading) and Table VI (candidate p03_tablevi points at caption on p.3; table
+  image is on p.4).
+entries:
+  - {table: test_vehicles, row_id: ectc51846.2026.00008-a, field: interposer_x_mm, value: 17, unit: mm, basis: design_target, locator: "p.1 Abstract", note: "FO interposer 'around 17 x 25 mm2'"}
+  - {table: metrics, row_id: ectc51846.2026.00008-a-m1, field: value, value: 5, unit: um, basis: measured, locator: "p.4 Sec. IV.C", note: "placement accuracy +/-5 um"}
+derived: []
+conflicts:
+  - {table: stack_layers, row_id: ectc51846.2026.00008-a-L05, field: repeat, values: [3, 4], locators: ["p.3 Table V; p.3 Sec. IV.A text; p.5 Sec. V", "p.3 Fig. 1 'Step1: 4P4M'; p.3 Sec. IV.A heading '4P4M'"], chosen: 3, why: "table and text state 3-layer RDL; 4P4M may count an extra metal (e.g. pad) layer, not explained"}
+excluded:
+  - "LDI, slit coating, laser dicing advantage/disadvantage Tables I-III (qualitative; Table I cites ref [2])"
+  - "laser dicing die-strength claim attributed to ref [3]"
+  - "Table IV wafer row 1.0 baseline (used as reference in scope)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - die sizes, thicknesses, process node; package thickness; substrate
+  - RDL dielectric material, thicknesses, via sizes; Cu thickness
+  - flip-chip bump type, pitch, size, metallurgy; bonding method and conditions
+  - underfill, EMC and carrier products; cure conditions; solder ball size/pitch
+  - warpage values, electrical test results beyond pass/fail, reliability standards
+source_quality:
+  - "p.5 text contains an unfilled editorial placeholder '[Package Size, e.g., 17x25mm]'. Page numbering 1-6 (no proceedings page range)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00008-F1-s13", change: "added: prepare 600x600 mm panel carrier (seq 1, stated_in_flow)", reason: "p.3 Sec. III.B: 'A 600mm x 600mm panel carrier is prepared'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00008-F1-s01", change: "seq '1' -> '2'; step 'slit coating on 600x600 mm panel' -> 'slit coat layer on 600x600 mm panel (RDL build)'; step_basis '' -> 'inferred_order'; equipment '' -> 'slit coater'; notes 'Coated material not named.' -> 'Coated material not named; placed inside Fig. 1 Step1 (RDL build).'", reason: "Sec. II.B coating technique of the RDL build; per-layer order not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00008-F1-s02", change: "seq '2' -> '3'; step 'laser direct imaging (LDI) of RDL at 5/8 um L/S' -> 'laser direct imaging (LDI) of RDL'; target '' -> 'L/S 5/8 um'; equipment '' -> 'laser direct imaging (LDI)'; step_basis '' -> 'inferred_order'; conditions 'mask-less LDI with software compensation' -> 'mask-less; software compensation'; notes '' -> 'Placed inside Fig. 1 Step1 (RDL build); per-layer order not stated.'", reason: "target = stated geometry; LDI is the RDL patterning method (Sec. II.A, IV.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00008-F1-s03", change: "seq '3' -> '4'; category 'other' -> 'rdl_layer'; step 'build 3-layer RDL and passivation (fan-out construction, Step1 4P4M) on 600 mm panel carrier' -> 'complete 3-layer RDL and passivation build-up (Fig. 1 Step1: 4P4M), chip-last'; target '' -> '3 RDL layers, L/S 5/8 um; 4 passivation layers'; step_basis '' -> 'stated_in_flow'", reason: "Fig. 1 Step1 4P4M; Table V: 3 RDL layers, 4 passivation layers, 5/8 um L/S"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00008-F1-s04", change: "seq '4' -> '5'; equipment '' -> 'laser'", reason: "Fig. 1 Step2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00008-F1-s05", change: "seq '5' -> '6'; conditions 'placement accuracy +/-5 um' -> ''; result '' -> 'placement accuracy +/-5 um (X-ray, cross-section)'", reason: "placement accuracy is a measured result (metric -a-m1), not a condition"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00008-F1-s06", change: "seq '6' -> '7'", reason: "Fig. 1 Step3 sub-step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00008-F1-s07", change: "seq '7' -> '8'", reason: "Fig. 1 Step3 sub-step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00008-F1-s08", change: "seq '8' -> '9'", reason: "Fig. 1 Step4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00008-F1-s09", change: "seq '9' -> '10'", reason: "Fig. 1 Step5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00008-F1-s10", change: "seq '10' -> '11'", reason: "Fig. 1 Step5 sub-step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00008-F1-s11", change: "seq '11' -> '12'; equipment '' -> 'fine-grinding wheel'; conditions 'fine-grinding wheel; TTV < 10 um over 300 mm' -> 'mechanical grinding of topside mold'; result '' -> 'TTV < 10 um across 300 mm; Si back surface exposed'", reason: "named tool on equipment; TTV is a result (metric -a-m2)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00008-F1-s12", change: "seq '12' -> '13'; material '' -> 'dicing tape'", reason: "Fig. 1 Step6"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00008-F1*", change: "step_basis set to stated_in_flow on rows without one", reason: "rule 7 step_basis"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00008", change: "process_flow_level ordered confirmed (provisional ordered); has_process_flow yes", reason: "Fig. 1 / Sec. III.B ordered flow; few conditions"}

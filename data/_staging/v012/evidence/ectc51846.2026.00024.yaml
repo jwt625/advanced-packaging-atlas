@@ -1,0 +1,46 @@
+paper_id: ectc51846.2026.00024
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00024/text.md
+  - references/ectc51846.2026.00024/source.json
+  - references/ectc51846.2026.00024/figures/page_03.png
+  - references/ectc51846.2026.00024/figures/page_04.png
+  - references/ectc51846.2026.00024/figures/page_05.png
+  - references/ectc51846.2026.00024/figures/page_06.png
+figure_reading_method: >-
+  Page renders p.3-6; candidate crops p04_fig3, p04_fig4, p05_fig5, p05_fig6, p05_fig7, p06_fig8; 300 dpi re-crops of
+  Fig. 2 legend and Fig. 6 (scratch only) to read grain statistics and the resistance CDF.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00024-d-m1, field: value_text, value: "N=143; min 39 nm; max 456 nm", unit: nm, basis: measured, locator: "p.3 Fig. 1(a)", note: "figure legend"}
+  - {table: metrics, row_id: ectc51846.2026.00024-d-m2, field: value_text, value: "N=97; min 39 nm; max 560 nm", unit: nm, basis: measured, locator: "p.3 Fig. 1(b)", note: "figure legend"}
+  - {table: metrics, row_id: ectc51846.2026.00024-e-m1, field: value_text, value: "N=281; min 34 nm", unit: nm, basis: measured, locator: "p.4 Fig. 2", note: "figure legend"}
+  - {table: interconnects, row_id: ectc51846.2026.00024-a-i1, field: notes, value: "pattern density ~16%", unit: "%", basis: design_target, locator: "p.2 Sec. II.B", note: "mask design"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00024-e-m1, field: max grain size, values: ["8288 nm (legend)", "largest bar ~0.82 um on 0-1.2 um axis"], locators: ["p.4 Fig. 2", "p.4 Fig. 2"], chosen: "not entered", why: "legend value inconsistent with histogram axis; likely typo, not resolved"}
+excluded:
+  - "conventional post-bond anneal >300 C (refs [6,7])"
+  - "pre-bond thermal exposure ~200 C from TBDB adhesive (ref [12]) used only as motivation"
+  - "nano-twinned Cu and fine-grained Cu prior results (refs [16]-[29])"
+not_reported:
+  - "process_steps: ectc51846.2026.00024-c (reference standard-Cu sample; only 400 C anneal and resistance stated, no build flow)"
+  - electrical_interfaces
+  - optical_interfaces
+  - "dielectric stack materials and thicknesses; Cu pad depth; Cu film thickness"
+  - "die size, die thickness, number of dies for C2W; C2W bonder and bond conditions"
+  - "bond temperature/force; anneal durations; alignment accuracy (Fig. 8(b) and 10 show visible pad offset, not quantified)"
+  - "resistance test structure (single pad vs daisy chain) and sample count"
+  - "reliability tests, shear strength, bond energy"
+source_quality:
+  - "Fig. 2 legend max grain size 8288 nm inconsistent with axis."
+  - "Bonding 'temperature below 220 C' refers to post-bond anneal; exact anneal value not given."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00024-F4", change: "tv_ids e -> e;a;b; flow_name clarified", reason: "Sec. II.B damascene scheme is the bonding-structure fabrication for the C2W and W2W bonds"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00024-F4-s06", change: "split added (blanket-optimized vs tuned recipe)", reason: "ECP recipe sweep stated p.4 Sec. III.A, Fig. 3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00024-F4-s07", change: "made W2W delta (tv_id b); DOE moved to split; step_basis inferred_order", reason: "pre-bond anneal DOE is reported for the W2W wafers only (Sec. III.B.3-4)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00024-F2-s02", change: "conditions 'split: <220 C or 250 C' -> split column", reason: "typed split column"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00024-F3-s01", change: "recipe comparison moved from step text to split", reason: "typed split column"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00024-F1, F2, F3", change: "level fragments -> ordered; all steps step_basis stated_in_flow", reason: "each is an ordered sequence stated in the text (bond then anneal; ECP then 200 C treatment)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00024-c", change: "added to not_reported as process_steps: <tv_id>", reason: "physical TV with no flow disclosed"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00024-F4", change: "build_seq 1 verified (F1 2, F2 3, F3 4); notes updated", reason: "p.2 Sec. II.B: pad wafers fabricated (PECVD, litho, etch, PVD, ECP, CMP) before W2W bonding; C2W (a) and W2W (b) bond these pad wafers"}

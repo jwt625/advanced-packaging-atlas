@@ -1,0 +1,58 @@
+paper_id: ectc51687.2025.00378
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00378/text.md
+  - references/ectc51687.2025.00378/source.json
+  - references/ectc51687.2025.00378/figures/cand/p02_tablei.png
+  - references/ectc51687.2025.00378/figures/cand/p02_tableii.png
+  - references/ectc51687.2025.00378/figures/cand/p03_fig1.png
+  - references/ectc51687.2025.00378/figures/cand/p03_fig2.png
+  - references/ectc51687.2025.00378/figures/cand/p03_fig3.png
+  - references/ectc51687.2025.00378/figures/cand/p04_fig4.png
+  - references/ectc51687.2025.00378/figures/cand/p04_fig5.png
+  - references/ectc51687.2025.00378/figures/cand/p04_fig6.png
+  - references/ectc51687.2025.00378/figures/cand/p04_fig7.png
+  - references/ectc51687.2025.00378/figures/cand/p05_fig8.png
+  - references/ectc51687.2025.00378/figures/cand/p05_fig9.png
+  - references/ectc51687.2025.00378/figures/cand/p05_tableiii.png
+figure_reading_method: >-
+  Candidate crops for all figures/tables; Fig. 5 panels re-rendered at 600 dpi in scratch to read the measurement labels
+  (5(a): 3 um above pad, 15 um pad; 5(b): 15 um above pad, 15 um pad, 29 um, 12 um).
+entries:
+  - {table: interconnects, row_id: ectc51687.2025.00378-a-i1, field: depth_um, value: 15, unit: um, basis: design_target, locator: "p.4 Sec. III.B; p.4 Fig. 5(b)", note: "uniform target dielectric thickness above chip Cu pads; via lands on pad"}
+  - {table: components, row_id: ectc51687.2025.00378-a-c1, field: cavity_depth_um, value: 29, unit: um, basis: measured, locator: "p.3 Fig. 2(b)", note: "29.0084 um profilometer label, rounded"}
+derived:
+  - {table: stack_layers, row_id: ectc51687.2025.00378-a-L05, field: roughness_ra_um, value: 0.12, formula: "120 nm / 1000", inputs: "p.2 Sec. III.A"}
+  - {table: stack_layers, row_id: ectc51687.2025.00378-a-L02, field: thickness_um, value: 0.25, formula: "250 nm / 1000", inputs: "p.5 Sec. III.C"}
+  - {table: stack_layers, row_id: ectc51687.2025.00378-a-L03, field: thickness_um, value: 0.05, formula: "50 nm / 1000", inputs: "p.5 Sec. III.C"}
+conflicts:
+  - {table: components, row_id: ectc51687.2025.00378-a-c1, field: thickness_um, values: ["<30", "~20-30", 25], locators: ["p.2 Table I", "p.2 Sec. II", "p.5 Fig. 8"], chosen: 25, why: "measured cross-section; table/text kept in stack_layers L10 range"}
+  - {table: interconnects, row_id: ectc51687.2025.00378-a-i1, field: diameter_um, values: [40, 41.66, 42, 43, 44], locators: ["p.4 Fig. 7 caption", "p.4 Fig. 7", "p.5 Fig. 8"], chosen: 40, why: "row basis is design target; measured diameters entered as metrics"}
+excluded:
+  - "Glass CTE ~3-10 ppm/C and <1 um L/S capability attributed to refs [8]-[10]"
+  - "Glass-core embedding cavity depth/chip thickness >100 um attributed to ref [11]"
+  - "Fig. 5(b) labels 29 um and 12 um: layer boundaries not identified in text, not entered"
+  - "Fig. 4 surface profile amplitudes (no values in text; not read off)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - dielectric product name, glass type, bonding material, cavity x/y size, M1 line/space
+  - lamination press temperature/pressure/time values, cure temperatures
+  - reliability, warpage, thermal data
+source_quality:
+  - "Typo 'ptich' in Sec. II; Fig. 4 caption and text describe before/after but caption title says 'optimized'."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378", change: "process_flow_level full confirmed", reason: "Fig. 1 10-step flow with layer thicknesses, laser, seed, litho and develop conditions (Sec. II-III)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F1", change: "flow_name 'chip thinning and singulation' -> 'chip fabrication, partial dicing and back-grinding (Sec. II)'", reason: "p.2 Sec. II: chips fabricated, partially diced, then back-ground; F1 precedes F2 pick-and-place"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2", change: "locator drops p.5 Table III", reason: "daisy-chain measurement row removed from the flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F1-s01", change: "category other -> bumping; pad geometry and pitches moved to target; material Cu; basis design_target", reason: "p.2 Sec. II and Table I: 15 um-thick, 70 um Cu bump pads, 100/250 um daisy-chain pitch"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F1-s02", change: "dicing depth moved conditions -> target", reason: "p.2 Sec. II 'partially diced to around 30 um in depth from the top side'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F1-s03", change: "thickness_in_um 500, thickness_um 30 (approx); 'resulting chips ~20-30 um' moved conditions -> result", reason: "p.2 Sec. II: 500 um-thick wafers ground to approximately 30 um; resulting 20-30 um"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2-s06", change: "pulse-width range and mask/no-mask comparison moved to split; result Ra 120 nm with masking layer", reason: "p.2 Sec. III.A 'wide range of pulse duration 256-1500 fs was used'; p.3 Fig. 2(a)/(b)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2-s09", change: "target 15 um dielectric above pads; before/after lamination optimization as split", reason: "p.4 Sec. III.B 'uniform target thickness of 15 um'; p.4 Figs. 4-5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2-s11", change: "target 40 um diameter (from step text); result top ~42 / bottom ~38 um; before/after optimization as split; equipment full name", reason: "p.4 Sec. III.C (OPTEC, same system as cavity ablation p.2 Sec. III.A); p.4 Figs. 6-7; p.5 Sec. III.C"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2-s12", change: "equipment 'DC magnetron sputter'", reason: "p.5 Sec. III.C 'DC magnetron sputtering'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2-s19", change: "deleted (DC daisy-chain resistance measurement)", reason: "post-build measurement, not a step; values already in metrics ectc51687.2025.00378-a-m12..m24 (Table III, 75% yield)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F1", change: "step_basis stated_in_flow on all steps", reason: "order stated in the paper's flow figure/text (DevLog-007 re-pass)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00378-F2", change: "step_basis stated_in_flow on all steps", reason: "order stated in the paper's flow figure/text (DevLog-007 re-pass)"}

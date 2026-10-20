@@ -1,0 +1,39 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc32696.2021.00174-a01-1,ectc32696.2021.00174,1,Jacinta Aman Lim,1,primary,nepes,,,US,"multi-site block, no per-author mapping; org from email domain nepes.co.kr; country = first printed address",paper,p.1 affiliations
+ectc32696.2021.00174-a02-1,ectc32696.2021.00174,2,Yun-Mook Park,1,primary,nepes,,,US,"multi-site block, no per-author mapping; org from email domain nepes.co.kr; country = first printed address",paper,p.1 affiliations
+ectc32696.2021.00174-a03-1,ectc32696.2021.00174,3,Edil De Vera,1,primary,nepes,,,US,"multi-site block, no per-author mapping; org from email domain nepes.co.kr; country = first printed address",paper,p.1 affiliations
+ectc32696.2021.00174-a04-1,ectc32696.2021.00174,4,Byung-Cheol Kim,1,primary,nepes,,,US,"multi-site block, no per-author mapping; org from email domain nepes.co.kr; country = first printed address",paper,p.1 affiliations
+ectc32696.2021.00174-a05-1,ectc32696.2021.00174,5,Brett Dunlap,1,primary,nepes,,,US,"multi-site block, no per-author mapping; org from email domain nepes.co.kr; country = first printed address",paper,p.1 affiliations
+ectc51529.2024.00125-a01-1,ectc51529.2024.00125,1,Wei-Ming Wang,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00125-a02-1,ectc51529.2024.00125,2,C.W. Yeh,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00125-a03-1,ectc51529.2024.00125,3,Han-Jong Chia,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00125-a04-1,ectc51529.2024.00125,4,R.F. Tsui,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00125-a05-1,ectc51529.2024.00125,5,Ji James Cui,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00125-a06-1,ectc51529.2024.00125,6,Chih-Hang Tung,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00125-a07-1,ectc51529.2024.00125,7,Kuo-Chung Yee,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00125-a08-1,ectc51529.2024.00125,8,Douglas C.H. Yu,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51846.2026.00227-a01-1,ectc51846.2026.00227,1,Mohammed Alhendi,1,primary,IBM,IBM Research,"Albany, NY",US,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a02-1,ectc51846.2026.00227,2,Luke Darling,1,primary,IBM,IBM Research,"Albany, NY",US,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a03-1,ectc51846.2026.00227,3,Roy Yu,1,primary,IBM,IBM Research,"Albany, NY",US,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a04-1,ectc51846.2026.00227,4,Neng Liu,1,primary,IBM,IBM Research,"Albany, NY",US,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a05-1,ectc51846.2026.00227,5,Ming Li,1,primary,ASMPT Singapore,,Yishun,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a06-1,ectc51846.2026.00227,6,Zetao Ma,1,primary,ASMPT Singapore,,Yishun,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a07-1,ectc51846.2026.00227,7,Kai Ming Yeung,1,primary,ASMPT Technology Hong Kong,,Tsing Yi,HK,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a08-1,ectc51846.2026.00227,8,Le Cheng,1,primary,ASMPT Technology Hong Kong,,Tsing Yi,HK,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a09-1,ectc51846.2026.00227,9,Katsuyuki Sakuma,1,primary,IBM,IBM Research,"Albany, NY",US,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51909.2023.00274-a01-1,ectc51909.2023.00274,1,Haoxiang Ren,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (CHIPS),Los Angeles,US,printed: UCLA; byline read from page-1 image,paper,p.1 affiliations
+ectc51909.2023.00274-a02-1,ectc51909.2023.00274,2,Krutikesh Sahoo,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (CHIPS),Los Angeles,US,printed: UCLA; byline read from page-1 image,paper,p.1 affiliations
+ectc51909.2023.00274-a03-1,ectc51909.2023.00274,3,Tianyu Xiang,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (CHIPS),Los Angeles,US,printed: UCLA; byline read from page-1 image,paper,p.1 affiliations
+ectc51909.2023.00274-a04-1,ectc51909.2023.00274,4,Guangqi Ouyang,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (CHIPS),Los Angeles,US,printed: UCLA; byline read from page-1 image,paper,p.1 affiliations
+ectc51909.2023.00274-a05-1,ectc51909.2023.00274,5,Subramanian S. Iyer,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (CHIPS),Los Angeles,US,printed: UCLA; byline read from page-1 image,paper,p.1 affiliations
+tcpmt.2023.3312037-a01-1,tcpmt.2023.3312037,1,Ziyin Lin,1,primary,Intel,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a02-1,tcpmt.2023.3312037,2,Wei Li,1,primary,Intel,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a03-1,tcpmt.2023.3312037,3,Edvin Cetegen,1,primary,Intel,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a04-1,tcpmt.2023.3312037,4,Yang Guo,1,primary,Intel,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a05-1,tcpmt.2023.3312037,5,Nai-Yuan Liu,1,primary,Intel,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a06-1,tcpmt.2023.3312037,6,Ifeanyi Okafor,1,primary,Intel,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a07-1,tcpmt.2023.3312037,7,Vipul Mehta,1,primary,Intel,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a08-1,tcpmt.2023.3312037,8,Xavier Brun,1,primary,Intel,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a09-1,tcpmt.2023.3312037,9,Shan Zhong,1,primary,Intel,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a10-1,tcpmt.2023.3312037,10,Hsin-Yu Li,1,primary,Intel,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a11-1,tcpmt.2023.3312037,11,Christopher Rumer,1,primary,Intel,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote

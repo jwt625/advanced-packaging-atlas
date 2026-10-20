@@ -1,0 +1,109 @@
+layer_id,tv_id,structure,side,seq,layer_name,feature,material,material_class,layer_role,reinforcement,thickness_um,thickness_min_um,thickness_max_um,line_um,space_um,via_diameter_um,via_pitch_um,roughness_ra_um,repeat,properties,basis,source,overrides,locator,qualifiers,notes
+ectc51529.2024.00094-a-L01,ectc51529.2024.00094-a,die,single,1,chip Si,,Si,silicon,device,,775,,,,,,,,,,design_target,table,,p.2 Table I,,
+ectc51529.2024.00094-a-L02,ectc51529.2024.00094-a,bonding_interface,single,1,chip-side Ti/Cu seed,,Ti/Cu,metal,seed,,,,,,,,,,,,stated,text,,p.3 Sec. III.A,,Stated for coupon Si; chips are diced coupons. Thickness not stated.
+ectc51529.2024.00094-a-L03,ectc51529.2024.00094-a,bonding_interface,single,2,chip-side metal pillar,,Ni,metal,conductor,,4,,,,,,,,,,design_target,table,,p.2 Table II,,
+ectc51529.2024.00094-a-L04,ectc51529.2024.00094-a,bonding_interface,single,3,chip-side solder,,SnAg,solder,bonding,,3,,,,,,,,,,design_target,table,,p.2 Table II,,
+ectc51529.2024.00094-a-L05,ectc51529.2024.00094-a,bonding_interface,single,4,coupon-side solder,,SnAg,solder,bonding,,3,,,,,,,,,,design_target,table,,p.2 Table II; p.3 Sec. III.B,,Both chip and coupon solders plasma treated before bonding.
+ectc51529.2024.00094-a-L06,ectc51529.2024.00094-a,bonding_interface,single,5,coupon-side metal pillar,,Ni,metal,conductor,,4,,,,,,,,,,design_target,table,,p.2 Table II,,
+ectc51529.2024.00094-a-L07,ectc51529.2024.00094-a,bonding_interface,single,6,coupon-side Ti/Cu seed,,Ti/Cu,metal,seed,,,,,,,,,,,,stated,text,,p.3 Sec. III.A,,
+ectc51529.2024.00094-a-L08,ectc51529.2024.00094-a,underfill,single,1,capillary underfill,,CUF (product not stated),underfill,encapsulant,,,,,,,,,,,,stated,text,,p.2 Sec. I; p.4 Sec. III.C,,Fills ~9-13 um gap; silica filler seen in cross-sections.
+ectc51529.2024.00094-a-L09,ectc51529.2024.00094-a,coupon,single,1,coupon Si,,Si,silicon,carrier,,775,,,,,,,,,,design_target,table,,p.2 Table I,,
+ectc51529.2024.00094-b-L01,ectc51529.2024.00094-b,die,single,1,chip Si,,Si,silicon,device,,775,,,,,,,,,,design_target,table,,p.2 Table I,,
+ectc51529.2024.00094-b-L02,ectc51529.2024.00094-b,bonding_interface,single,1,chip-side Ti/Cu seed,,Ti/Cu,metal,seed,,,,,,,,,,,,stated,text,,p.3 Sec. III.A,,Stated for coupon Si; chips are diced coupons. Thickness not stated.
+ectc51529.2024.00094-b-L03,ectc51529.2024.00094-b,bonding_interface,single,2,chip-side metal pillar,,"M (new metal, not disclosed)",metal,conductor,,3,,,,,,,,,,design_target,table,,p.2 Table II,,
+ectc51529.2024.00094-b-L04,ectc51529.2024.00094-b,bonding_interface,single,3,chip-side diffusion barrier,,diffusion barrier (material not disclosed),metal,barrier,,1,,,,,,,,,,design_target,table,,p.2 Table II; p.3 Sec. II.B,,SEM shows ~1 um barrier (Fig. 3).
+ectc51529.2024.00094-b-L05,ectc51529.2024.00094-b,bonding_interface,single,4,chip-side solder,,SnAg,solder,bonding,,3,,,,,,,,,,design_target,table,,p.2 Table II,,
+ectc51529.2024.00094-b-L06,ectc51529.2024.00094-b,bonding_interface,single,5,coupon-side solder,,SnAg,solder,bonding,,3,,,,,,,,,,design_target,table,,p.2 Table II; p.3 Sec. III.B,,Both chip and coupon solders plasma treated before bonding.
+ectc51529.2024.00094-b-L07,ectc51529.2024.00094-b,bonding_interface,single,6,coupon-side diffusion barrier,,diffusion barrier (material not disclosed),metal,barrier,,1,,,,,,,,,,design_target,table,,p.2 Table II,,
+ectc51529.2024.00094-b-L08,ectc51529.2024.00094-b,bonding_interface,single,7,coupon-side metal pillar,,"M (new metal, not disclosed)",metal,conductor,,3,,,,,,,,,,design_target,table,,p.2 Table II,,
+ectc51529.2024.00094-b-L09,ectc51529.2024.00094-b,bonding_interface,single,8,coupon-side Ti/Cu seed,,Ti/Cu,metal,seed,,,,,,,,,,,,stated,text,,p.3 Sec. III.A,,
+ectc51529.2024.00094-b-L10,ectc51529.2024.00094-b,underfill,single,1,capillary underfill,,CUF (product not stated),underfill,encapsulant,,,,,,,,,,,,stated,text,,p.2 Sec. I; p.4 Sec. III.C,,Fills ~9-13 um gap; silica filler seen in cross-sections.
+ectc51529.2024.00094-b-L11,ectc51529.2024.00094-b,coupon,single,1,coupon Si,,Si,silicon,carrier,,775,,,,,,,,,,design_target,table,,p.2 Table I,,
+ectc51529.2024.00094-c-L01,ectc51529.2024.00094-c,die,single,1,chip Si,,Si,silicon,device,,775,,,,,,,,,,design_target,table,,p.2 Table I,,
+ectc51529.2024.00094-c-L02,ectc51529.2024.00094-c,bonding_interface,single,1,chip-side Ti/Cu seed,,Ti/Cu,metal,seed,,,,,,,,,,,,stated,text,,p.3 Sec. III.A,,Stated for coupon Si; chips are diced coupons. Thickness not stated.
+ectc51529.2024.00094-c-L03,ectc51529.2024.00094-c,bonding_interface,single,2,chip-side metal pillar,,Cu,metal,conductor,,3,,,,,,,,,,design_target,table,,p.2 Table II,,
+ectc51529.2024.00094-c-L04,ectc51529.2024.00094-c,bonding_interface,single,3,chip-side diffusion barrier,,diffusion barrier (material not disclosed),metal,barrier,,1,,,,,,,,,,design_target,table,,p.2 Table II; p.3 Sec. II.B,,SEM shows ~1 um barrier (Fig. 3).
+ectc51529.2024.00094-c-L05,ectc51529.2024.00094-c,bonding_interface,single,4,chip-side solder,,SnAg,solder,bonding,,3,,,,,,,,,,design_target,table,,p.2 Table II,,
+ectc51529.2024.00094-c-L06,ectc51529.2024.00094-c,bonding_interface,single,5,coupon-side solder,,SnAg,solder,bonding,,3,,,,,,,,,,design_target,table,,p.2 Table II; p.3 Sec. III.B,,Both chip and coupon solders plasma treated before bonding.
+ectc51529.2024.00094-c-L07,ectc51529.2024.00094-c,bonding_interface,single,6,coupon-side diffusion barrier,,diffusion barrier (material not disclosed),metal,barrier,,1,,,,,,,,,,design_target,table,,p.2 Table II,,
+ectc51529.2024.00094-c-L08,ectc51529.2024.00094-c,bonding_interface,single,7,coupon-side metal pillar,,Cu,metal,conductor,,3,,,,,,,,,,design_target,table,,p.2 Table II,,
+ectc51529.2024.00094-c-L09,ectc51529.2024.00094-c,bonding_interface,single,8,coupon-side Ti/Cu seed,,Ti/Cu,metal,seed,,,,,,,,,,,,stated,text,,p.3 Sec. III.A,,
+ectc51529.2024.00094-c-L10,ectc51529.2024.00094-c,underfill,single,1,capillary underfill,,CUF (product not stated),underfill,encapsulant,,,,,,,,,,,,stated,text,,p.2 Sec. I; p.4 Sec. III.C,,Fills ~9-13 um gap; silica filler seen in cross-sections.
+ectc51529.2024.00094-c-L11,ectc51529.2024.00094-c,coupon,single,1,coupon Si,,Si,silicon,carrier,,775,,,,,,,,,,design_target,table,,p.2 Table I,,
+ectc51909.2023.00135-a-L01,ectc51909.2023.00135-a,die,single,1,SoC and HBM2E dies,,silicon,silicon,device,,,,,,,,,,,,stated,schematic,,p.1 Fig. 1; p.2 Fig. 3,,
+ectc51909.2023.00135-a-L02,ectc51909.2023.00135-a,mold,single,1,mold compound (MC),,epoxy mold compound,mold_compound,encapsulant,,,,,,,,,,,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,
+ectc51909.2023.00135-a-L03,ectc51909.2023.00135-a,underfill,single,1,Underfill1 (UF1),die-interposer gap,,underfill,encapsulant,,,,,,,,,,,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,
+ectc51909.2023.00135-a-L04,ectc51909.2023.00135-a,interposer,single,1,Si interposer with TSV,,silicon,silicon,core,,100,,,,,,,,,CTE ~4 ppm/K,design_target,table,properties:text,p.4 Table II; p.1 Fig. 1; p.3 Sec. III.E,,
+ectc51909.2023.00135-a-L05,ectc51909.2023.00135-a,underfill,single,2,Underfill2 (UF2),interposer-substrate gap,,underfill,encapsulant,,,,,,,,,,,CTE ~20 ppm/K,stated,text,,p.1 Sec. II; p.1 Fig. 1; p.3 Sec. III.E,,
+ectc51909.2023.00135-a-L06,ectc51909.2023.00135-a,substrate_core,single,1,organic substrate,,,organic_laminate,core,,,,,,,,,,,CTE ~15 ppm/K,stated,text,,p.1 Sec. II; p.3 Sec. III.E,,Build-up/core split not reported; one row for the whole substrate.
+ectc51909.2023.00135-a-L07,ectc51909.2023.00135-a,other,single,1,copper stiffener ring,,copper,metal,other,,,,,,,,,,,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,
+ectc51909.2023.00135-b-L01,ectc51909.2023.00135-b,die,single,1,SoC and HBM2E dies + dummy filler dies,,silicon,silicon,device,,,,,,,,,,,,stated,schematic,,p.1 Fig. 1; p.2 Fig. 3,,
+ectc51909.2023.00135-b-L02,ectc51909.2023.00135-b,mold,single,1,mold compound (MC),,epoxy mold compound,mold_compound,encapsulant,,,,,,,,,,,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,
+ectc51909.2023.00135-b-L03,ectc51909.2023.00135-b,underfill,single,1,Underfill1 (UF1),die-interposer gap,,underfill,encapsulant,,,,,,,,,,,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,
+ectc51909.2023.00135-b-L04,ectc51909.2023.00135-b,interposer,single,1,Si interposer with TSV,,silicon,silicon,core,,100,,,,,,,,,CTE ~4 ppm/K,design_target,table,properties:text,p.4 Table II; p.1 Fig. 1; p.3 Sec. III.E,,
+ectc51909.2023.00135-b-L05,ectc51909.2023.00135-b,underfill,single,2,Underfill2 (UF2),interposer-substrate gap,,underfill,encapsulant,,,,,,,,,,,CTE ~20 ppm/K,stated,text,,p.1 Sec. II; p.1 Fig. 1; p.3 Sec. III.E,,
+ectc51909.2023.00135-b-L06,ectc51909.2023.00135-b,substrate_core,single,1,organic substrate,,,organic_laminate,core,,,,,,,,,,,CTE ~15 ppm/K,stated,text,,p.1 Sec. II; p.3 Sec. III.E,,Build-up/core split not reported; one row for the whole substrate.
+ectc51909.2023.00135-b-L07,ectc51909.2023.00135-b,other,single,1,copper stiffener ring,,copper,metal,other,,,,,,,,,,,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,
+ectc51909.2023.00135-c-L01,ectc51909.2023.00135-c,die,single,1,SoC and HBM2E dies + dummy filler dies,,silicon,silicon,device,,,,,,,,,,,,stated,schematic,,p.1 Fig. 1; p.2 Fig. 3,,
+ectc51909.2023.00135-c-L02,ectc51909.2023.00135-c,mold,single,1,mold compound (MC),,epoxy mold compound,mold_compound,encapsulant,,,,,,,,,,,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,
+ectc51909.2023.00135-c-L03,ectc51909.2023.00135-c,underfill,single,1,Underfill1 (UF1),die-interposer gap,,underfill,encapsulant,,,,,,,,,,,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,
+ectc51909.2023.00135-c-L04,ectc51909.2023.00135-c,interposer,single,1,Si interposer with TSV,,silicon,silicon,core,,50,,,,,,,,,CTE ~4 ppm/K,design_target,table,properties:text,p.4 Table II; p.1 Fig. 1; p.3 Sec. III.E,,
+ectc51909.2023.00135-c-L05,ectc51909.2023.00135-c,underfill,single,2,Underfill2 (UF2),interposer-substrate gap,,underfill,encapsulant,,,,,,,,,,,CTE ~20 ppm/K,stated,text,,p.1 Sec. II; p.1 Fig. 1; p.3 Sec. III.E,,
+ectc51909.2023.00135-c-L06,ectc51909.2023.00135-c,substrate_core,single,1,organic substrate,,,organic_laminate,core,,,,,,,,,,,CTE ~15 ppm/K,stated,text,,p.1 Sec. II; p.3 Sec. III.E,,Build-up/core split not reported; one row for the whole substrate.
+ectc51909.2023.00135-c-L07,ectc51909.2023.00135-c,other,single,1,copper stiffener ring,,copper,metal,other,,,,,,,,,,,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,
+ectc32696.2021.00315-a-L01,ectc32696.2021.00315-a,die,single,1,ASIC and HBM Flashbolt,,Si,silicon,device,,685,,,,,,,,,,design_target,schematic,,p.2 Fig. 3,,
+ectc32696.2021.00315-a-L02,ectc32696.2021.00315-a,mold,single,1,EMC around chip module,,EMC (EMC-A/B/C split),mold_compound,encapsulant,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 3; p.5 Table I,,"Encapsulates devices, device underfill, interposer and interposer underfill edge."
+ectc32696.2021.00315-a-L03,ectc32696.2021.00315-a,bonding_interface,single,2,ubump layer with device underfill,,ubump; underfill,solder,bonding,,35,,,,,,,,,,design_target,schematic,,p.2 Fig. 3; p.3 Sec. III,,
+ectc32696.2021.00315-a-L04,ectc32696.2021.00315-a,interposer,single,3,Si interposer,,Si,silicon,core,,110,,,,,,,,,,design_target,text,,p.2 Sec. II.A; p.2 Fig. 3,,Through-vias visible in Fig. 10 cross-section but not described.
+ectc32696.2021.00315-a-L05,ectc32696.2021.00315-a,interposer_rdl,back,4,interposer backside RDL (increased volume),,,metal,conductor,,,,,,,,,,,,stated,text,,p.3 Sec. III; p.5 Sec. V,,Volume split phase1/phase2 to compensate upper-structure CTE; thickness and L/S not given.
+ectc32696.2021.00315-a-L06,ectc32696.2021.00315-a,bonding_interface,single,5,Cu pillar solder bumps with interposer underfill,,Cu pillar + solder; underfill,solder,bonding,,70,,,,,,,,,,design_target,schematic,,p.2 Fig. 3; p.2 Sec. II.A,,"Measured joint gap 72.2 um center, 69.5 um edge (Fig. 10)."
+ectc32696.2021.00315-a-L07,ectc32696.2021.00315-a,substrate_core,single,6,organic substrate,,,organic_laminate,,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 3,,Build-up/core not given.
+tcpmt.2021.3123384-a-L01,tcpmt.2021.3123384-a,coupon,single,1,"Ni etch mask (semiadditive electroplated, circular via openings)",,Ni,metal,other,,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.3 Sec. II.A; p.2 Fig. 2(d),,Mask thickness not stated.
+tcpmt.2021.3123384-a-L02,tcpmt.2021.3123384-a,coupon,single,2,seed layer,,Cu (seed),metal,seed,,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.3 Sec. II.A,,
+tcpmt.2021.3123384-a-L03,tcpmt.2021.3123384-a,coupon,single,3,SiC substrate,,SiC,ceramic,device,,,,,,,,,,,,stated,text,,p.2 Sec. II.A,,Polytype and thickness not stated.
+tcpmt.2021.3123384-a-L04,tcpmt.2021.3123384-a,coupon,single,4,wax bond,,wax,adhesive,adhesive,,,,,,,,,,,,stated,text,,p.2 Fig. 2(a); p.3 Sec. II.A,,
+tcpmt.2021.3123384-a-L05,tcpmt.2021.3123384-a,coupon,single,5,Ni-plated carrier wafer,,Si carrier with Ti/Cu seed and Ni,silicon,carrier,,,,,,,,,,,,stated,text,,p.2 Sec. II.A,,
+tcpmt.2021.3123384-b-L01,tcpmt.2021.3123384-b,coupon,single,1,electroplated etch mask,,Cu or Ni,metal,other,,10,,,,,,,,,,design_target,text,,p.5 Sec. II.B,thickness_um:ge,
+tcpmt.2021.3123384-b-L02,tcpmt.2021.3123384-b,coupon,single,2,seed (adhesion),,TiW,metal,adhesion,,0.2,,,,,,,,,,design_target,text,,p.5 Sec. II.B,,
+tcpmt.2021.3123384-b-L03,tcpmt.2021.3123384-b,coupon,single,3,seed,,Cu,metal,seed,,0.3,,,,,,,,,,design_target,text,,p.5 Sec. II.B,,
+tcpmt.2021.3123384-b-L04,tcpmt.2021.3123384-b,coupon,single,4,SiC wafer piece,,SiC,ceramic,device,,,,,,,,,,,,stated,text,,p.5 Sec. II.B,,
+tcpmt.2021.3123384-b-L05,tcpmt.2021.3123384-b,coupon,single,5,carrier wafer plated with mask material,,"carrier wafer, Ni or Cu plated",other,carrier,,,,,,,,,,,,stated,text,,p.5 Sec. II.B,,
+tcpmt.2021.3123384-c-L01,tcpmt.2021.3123384-c,interposer,front,1,front side metallization,,Ti/Cu (sputtered seed) + electroplated Cu,metal,conductor,,,,,,,,,,,,stated,text,,p.7 Sec. III; p.7 Fig. 13,,
+tcpmt.2021.3123384-c-L02,tcpmt.2021.3123384-c,interposer,front,2,PECVD via liner,,PECVD layer (material not stated),dielectric_inorganic,dielectric,,,,,,,,,,,,stated,text,,p.7 Sec. III,,'increased liner thicknesses'; thinner than BCB approach.
+tcpmt.2021.3123384-c-L03,tcpmt.2021.3123384-c,interposer,core,1,SiC interposer core with Cu TSiCV,,SiC,ceramic,core,,200,,,,,40,,,,,design_target,text,,p.1 Abstract; p.7 Fig. 13,,"Via diameters 40, 80, 120 um (Fig. 13); 40 entered as smallest."
+tcpmt.2021.3123384-c-L04,tcpmt.2021.3123384-c,interposer,back,1,backside passivation,,PECVD SiO2,dielectric_inorganic,passivation,,,,,,,,,,,,stated,text,,p.7 Sec. III,,Opened on vias.
+tcpmt.2021.3123384-c-L05,tcpmt.2021.3123384-c,interposer,back,2,backside RDL,,not stated,metal,conductor,,,,,,,,,,,,stated,text,,p.7 Sec. III,,
+tcpmt.2021.3123384-d-L01,tcpmt.2021.3123384-d,interposer,front,1,front side metallization,,Ti/Cu (sputtered seed) + electroplated Cu,metal,conductor,,,,,,,,,,,,stated,text,,p.7 Sec. III; p.7 Fig. 14,,
+tcpmt.2021.3123384-d-L02,tcpmt.2021.3123384-d,interposer,front,2,"polymer via liner (dry film, laser reopened)",,BCB (benzocyclobutene) dry film,dielectric_polymer,dielectric,,8,,,,,,,,,,measured,text,,p.7 Sec. III; p.7 Fig. 12,thickness_um:gt,Isolation >8 um at via edge/top corner (cross-section).
+tcpmt.2021.3123384-d-L03,tcpmt.2021.3123384-d,interposer,core,1,SiC interposer core with Cu TSiCV,,SiC,ceramic,core,,200,,,,,,,,,,design_target,text,,p.1 Abstract; p.7 Fig. 14,,
+tcpmt.2021.3123384-d-L04,tcpmt.2021.3123384-d,interposer,back,1,backside passivation,,PECVD SiO2,dielectric_inorganic,passivation,,,,,,,,,,,,stated,text,,p.7 Sec. III,,
+tcpmt.2021.3123384-d-L05,tcpmt.2021.3123384-d,interposer,back,2,backside RDL,,not stated,metal,conductor,,,,,,,,,,,,stated,text,,p.7 Sec. III,,
+tcpmt.2021.3123384-e-L01,tcpmt.2021.3123384-e,die,single,1,planar SiC chip,,SiC,ceramic,device,,100,,,,,,,,,,design_target,text,,p.8 Sec. IV; p.8 Fig. 16,,Alternative chips 40 um thick.
+tcpmt.2021.3123384-e-L02,tcpmt.2021.3123384-e,bonding_interface,single,1,solder bump joint,,electroplated solder (alloy not stated),solder,bonding,,,,,,,,,,,,stated,text,,p.8 Sec. IV; p.8 Fig. 16,,
+tcpmt.2021.3123384-e-L03,tcpmt.2021.3123384-e,interposer,front,1,freestanding Cu lines (no top passivation),,Cu,metal,conductor,,,,,,,,,,,,stated,text,,p.8 Sec. IV,,
+tcpmt.2021.3123384-e-L04,tcpmt.2021.3123384-e,interposer,core,1,SiC interposer with Cu TSiCV,,SiC,ceramic,core,,200,,,,,,,,,,design_target,text,,p.8 Sec. IV; p.8 Fig. 16,,
+tcpmt.2021.3123384-f-L01,tcpmt.2021.3123384-f,die,single,1,deep-etched SiC MEMS die,,SiC,ceramic,device,,,,,,,,,,,,stated,text,,p.8 Fig. 17,,
+tcpmt.2021.3123384-f-L02,tcpmt.2021.3123384-f,bonding_interface,single,1,solder bump joint,,electroplated solder (alloy not stated),solder,bonding,,,,,,,,,,,,stated,text,,p.8 Sec. IV; p.8 Fig. 17,,
+tcpmt.2021.3123384-f-L03,tcpmt.2021.3123384-f,interposer,core,1,SiC interposer,,SiC,ceramic,core,,200,,,,,,,,,,design_target,text,,p.8 Sec. IV; p.8 Fig. 17,,
+tcpmt.2021.3123384-g-L01,tcpmt.2021.3123384-g,die,single,1,SiC substrate with backside-etched membrane cavity,,4H-SiC,ceramic,device,,,,,,,,,,,,stated,text,,p.8 Sec. V; p.9 Fig. 18,,Die flipped onto interposer (Fig. 19); membrane thickness for this sensor not stated.
+tcpmt.2021.3123384-g-L02,tcpmt.2021.3123384-g,die,single,2,"lower epitaxial layer (opposite doping, isolation)",,SiC epitaxial layer,ceramic,device,,,,,,,,,,,,stated,text,,p.8 Sec. V,,
+tcpmt.2021.3123384-g-L03,tcpmt.2021.3123384-g,die,single,3,upper epitaxial layer patterned into piezoresistors,,SiC epitaxial layer,ceramic,device,,,,,,,,,,,,stated,text,,p.8 Sec. V; p.9 Fig. 18(b),,
+tcpmt.2021.3123384-g-L04,tcpmt.2021.3123384-g,die,single,4,"metallization, pads reinforced with electroplated Au",,Ti / TiWN / Au + ECD Au,metal,conductor,,,,,,,,,,,,stated,text,,p.8 Sec. V; p.9 Fig. 18(d),,
+tcpmt.2021.3123384-g-L05,tcpmt.2021.3123384-g,bonding_interface,single,1,Au stud bump thermocompression joint,,Au,metal,bonding,,,,,,,,,,,,stated,text,,p.9 Sec. V; p.9 Fig. 19(a),,
+tcpmt.2021.3123384-g-L06,tcpmt.2021.3123384-g,interposer,core,1,SiC interposer with TSiCV,,SiC,ceramic,core,,,,,,,,,,,,stated,text,,p.9 Fig. 19(a),,
+ectc51529.2024.00051-a-L01,ectc51529.2024.00051-a,tim_lid,single,1,Cu lid,,copper,metal,cap,,,,,,,,,,,,stated,mixed,,p.2 Fig. 1; p.3 Sec. V,,
+ectc51529.2024.00051-a-L02,ectc51529.2024.00051-a,die,single,2,processor dies (19x19 mm),,Si,silicon,device,,,,,,,,,,,,stated,text,,p.2 Sec. II,,Thickness not given.
+ectc51529.2024.00051-a-L03,ectc51529.2024.00051-a,bonding_interface,single,3,bridge uC4 joints (75 um pitch),,solder (Sn in FEM uC4 model),solder,bonding,,,,,,,,,,,,stated,mixed,,p.2 Sec. III; p.4 Fig. 5,,Main chip has matching fine-pitch pads.
+ectc51529.2024.00051-a-L04,ectc51529.2024.00051-a,bridge,single,4,Si bridge,,Si,silicon,device,,60,,,,,,,,,,design_target,text,,p.2 Sec. II; p.2 Fig. 1,,
+ectc51529.2024.00051-a-L05,ectc51529.2024.00051-a,underfill,single,5,underfill CUF-A,,"CUF-A (epoxy, silica filler)",underfill,encapsulant,,,,,,,,,,,,stated,table,,p.2 Table I; p.2 Fig. 1,,Encapsulates bridge uC4 joints.
+ectc51529.2024.00051-a-L06,ectc51529.2024.00051-a,bonding_interface,single,6,Cu-pillar C4 layer (chip-laminate standoff),,Cu pillar + solder cap (SAC in FEM C4 model),metal,bonding,,110,,,,,,,,,,design_target,text,,p.2 Sec. II; p.4 Fig. 5,,Total spacing 110 um; pillar height 100 um.
+ectc51529.2024.00051-a-L07,ectc51529.2024.00051-a,substrate_buildup,single,7,build-up,,,organic_laminate,dielectric,,,,,,,,,,,,stated,schematic,,p.4 Fig. 5; p.3 Sec. V,,From FEM intermediate model; materials not named.
+ectc51529.2024.00051-a-L08,ectc51529.2024.00051-a,substrate_core,single,8,laminate core,,,organic_laminate,core,,,,,,,,,,,,stated,schematic,,p.4 Fig. 5; p.3 Sec. V,,
+ectc51529.2024.00051-b-L01,ectc51529.2024.00051-b,tim_lid,single,1,Cu lid,,copper,metal,cap,,,,,,,,,,,,stated,mixed,,p.2 Fig. 1; p.3 Sec. V,,
+ectc51529.2024.00051-b-L02,ectc51529.2024.00051-b,die,single,2,processor dies (19x19 mm),,Si,silicon,device,,,,,,,,,,,,stated,text,,p.2 Sec. II,,Thickness not given.
+ectc51529.2024.00051-b-L03,ectc51529.2024.00051-b,bonding_interface,single,3,bridge uC4 joints (75 um pitch),,solder (Sn in FEM uC4 model),solder,bonding,,,,,,,,,,,,stated,mixed,,p.2 Sec. III; p.4 Fig. 5,,Main chip has matching fine-pitch pads.
+ectc51529.2024.00051-b-L04,ectc51529.2024.00051-b,bridge,single,4,Si bridge,,Si,silicon,device,,60,,,,,,,,,,design_target,text,,p.2 Sec. II; p.2 Fig. 1,,
+ectc51529.2024.00051-b-L05,ectc51529.2024.00051-b,underfill,single,5,underfill CUF-B,,"CUF-B (epoxy, silica filler)",underfill,encapsulant,,,,,,,,,,,,stated,table,,p.2 Table I; p.2 Fig. 1,,Encapsulates bridge uC4 joints.
+ectc51529.2024.00051-b-L06,ectc51529.2024.00051-b,bonding_interface,single,6,Cu-pillar C4 layer (chip-laminate standoff),,Cu pillar + solder cap (SAC in FEM C4 model),metal,bonding,,110,,,,,,,,,,design_target,text,,p.2 Sec. II; p.4 Fig. 5,,Total spacing 110 um; pillar height 100 um.
+ectc51529.2024.00051-b-L07,ectc51529.2024.00051-b,substrate_buildup,single,7,build-up,,,organic_laminate,dielectric,,,,,,,,,,,,stated,schematic,,p.4 Fig. 5; p.3 Sec. V,,From FEM intermediate model; materials not named.
+ectc51529.2024.00051-b-L08,ectc51529.2024.00051-b,substrate_core,single,8,laminate core,,,organic_laminate,core,,,,,,,,,,,,stated,schematic,,p.4 Fig. 5; p.3 Sec. V,,

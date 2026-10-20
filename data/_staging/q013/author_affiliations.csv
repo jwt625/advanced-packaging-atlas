@@ -1,0 +1,42 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc.2019.00095-a01-1,ectc.2019.00095,1,F.C. Chen,1,primary,TSMC,Research and Development,Hsinchu,TW,,paper,p.1 affiliations
+ectc.2019.00095-a02-1,ectc.2019.00095,2,M.F. Chen,1,primary,TSMC,Research and Development,Hsinchu,TW,,paper,p.1 affiliations
+ectc.2019.00095-a03-1,ectc.2019.00095,3,W.C. Chiou,1,primary,TSMC,Research and Development,Hsinchu,TW,,paper,p.1 affiliations
+ectc.2019.00095-a04-1,ectc.2019.00095,4,Doug C.H. Yu,1,primary,TSMC,Research and Development,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00021-a01-1,ectc51529.2024.00021,1,Hyeonmin Lee,1,primary,Samsung Electronics,AVP Product Development Team1,Cheonan-si,KR,,paper,p.1 affiliations
+ectc51529.2024.00021-a02-1,ectc51529.2024.00021,2,Wonil Lee,1,primary,Samsung Electronics,AVP Product Development Team1,Cheonan-si,KR,,paper,p.1 affiliations
+ectc51529.2024.00021-a03-1,ectc51529.2024.00021,3,Jihoon Kim,1,primary,Samsung Electronics,AVP Product Development Team1,Cheonan-si,KR,,paper,p.1 affiliations
+ectc51529.2024.00021-a04-1,ectc51529.2024.00021,4,Aeni Jang,1,primary,Samsung Electronics,AVP Product Development Team1,Cheonan-si,KR,,paper,p.1 affiliations
+ectc51529.2024.00021-a05-1,ectc51529.2024.00021,5,Dae-Woo Kim,1,primary,Samsung Electronics,AVP Product Development Team1,Cheonan-si,KR,,paper,p.1 affiliations
+ectc51529.2024.00021-a06-1,ectc51529.2024.00021,6,Min-Ki Kim,1,primary,Samsung Electronics,AVP Product Development Team1,Cheonan-si,KR,,paper,p.1 affiliations
+ectc51529.2024.00021-a07-1,ectc51529.2024.00021,7,Hyuekjae Lee,1,primary,Samsung Electronics,AVP Product Development Team1,Cheonan-si,KR,,paper,p.1 affiliations
+ectc51687.2025.00049-a01-1,ectc51687.2025.00049,1,Thomas Lesueur,1,primary,Université de Sherbrooke,Institut Interdisciplinaire d'Innovation Technologique (3IT),Sherbrooke,CA,,paper,p.1 affiliations
+ectc51687.2025.00049-a01-2,ectc51687.2025.00049,1,Thomas Lesueur,2,additional,CNRS,Laboratoire Nanotechnologies Nanosystèmes (LN2),Sherbrooke,CA,"printed in same block as 3IT, Université de Sherbrooke",paper,p.1 affiliations
+ectc51687.2025.00049-a02-1,ectc51687.2025.00049,2,David Danovitch,1,primary,Université de Sherbrooke,Institut Interdisciplinaire d'Innovation Technologique (3IT),Sherbrooke,CA,,paper,p.1 affiliations
+ectc51687.2025.00049-a02-2,ectc51687.2025.00049,2,David Danovitch,2,additional,CNRS,Laboratoire Nanotechnologies Nanosystèmes (LN2),Sherbrooke,CA,"printed in same block as 3IT, Université de Sherbrooke",paper,p.1 affiliations
+ectc51687.2025.00049-a03-1,ectc51687.2025.00049,3,Dominique Drouin,1,primary,Université de Sherbrooke,Institut Interdisciplinaire d'Innovation Technologique (3IT),Sherbrooke,CA,,paper,p.1 affiliations
+ectc51687.2025.00049-a03-2,ectc51687.2025.00049,3,Dominique Drouin,2,additional,CNRS,Laboratoire Nanotechnologies Nanosystèmes (LN2),Sherbrooke,CA,"printed in same block as 3IT, Université de Sherbrooke",paper,p.1 affiliations
+ectc51687.2025.00049-a04-1,ectc51687.2025.00049,4,Isabel de Sousa,1,primary,IBM Canada,,Bromont,CA,,paper,p.1 affiliations
+ectc51687.2025.00049-a05-1,ectc51687.2025.00049,5,Divya Taneja,1,primary,IBM Canada,,Bromont,CA,,paper,p.1 affiliations
+ectc51687.2025.00049-a06-1,ectc51687.2025.00049,6,Akihiro Horibe,1,primary,IBM,IBM Research - Tokyo,Kawasaki,JP,,paper,p.1 affiliations
+ectc51687.2025.00049-a07-1,ectc51687.2025.00049,7,Sayuri Kohara,1,primary,IBM,IBM Research - Tokyo,Kawasaki,JP,,paper,p.1 affiliations
+ectc51906.2022.00031-a01-1,ectc51906.2022.00031,1,Jeremy A. Theil,1,primary,Xperi,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a02-1,ectc51906.2022.00031,2,Thomas Workman,1,primary,Xperi,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a03-1,ectc51906.2022.00031,3,Dominik Suwito,1,primary,Xperi,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a04-1,ectc51906.2022.00031,4,Laura Mirkarimi,1,primary,Xperi,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a05-1,ectc51906.2022.00031,5,Gill Fountain,1,primary,Xperi,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a06-1,ectc51906.2022.00031,6,KM Bang,1,primary,Xperi,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a07-1,ectc51906.2022.00031,7,Guilian Gao,1,primary,Xperi,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a08-1,ectc51906.2022.00031,8,Bongsub Lee,1,primary,Xperi,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a09-1,ectc51906.2022.00031,9,Pawel Mrozek,1,primary,Xperi,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a10-1,ectc51906.2022.00031,10,Cyprian Uzoh,1,primary,Xperi,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a11-1,ectc51906.2022.00031,11,Michael Huynh,1,primary,Xperi,,San Jose,US,single shared block,paper,p.1 affiliations
+ectc51906.2022.00031-a12-1,ectc51906.2022.00031,12,Oliver Zhao,1,primary,Xperi,,San Jose,US,single shared block,paper,p.1 affiliations
+eptc67330.2025.11392108-a01-1,eptc67330.2025.11392108,1,Ra-Min Tain,1,primary,Unimicron,,Hsinchu County,TW,byline order read row-major from page-1 image; printed: Unimicron Technology Co.,paper,p.1 affiliations
+eptc67330.2025.11392108-a02-1,eptc67330.2025.11392108,2,Chin-Sheng Wang,1,primary,Unimicron,,Hsinchu County,TW,printed: Unimicron Technology Co.,paper,p.1 affiliations
+eptc67330.2025.11392108-a03-1,eptc67330.2025.11392108,3,Chia-Fu Hsu,1,primary,Unimicron,,Hsinchu County,TW,printed: Unimicron Technology Co.,paper,p.1 affiliations
+eptc67330.2025.11392108-a04-1,eptc67330.2025.11392108,4,Po-Wen Hsiao,1,primary,Unimicron,,Taoyuan,TW,printed: Unimicron Technology Co.,paper,p.1 affiliations
+eptc67330.2025.11392108-a05-1,eptc67330.2025.11392108,5,Chun-Hung Chen,1,primary,Unimicron,,Taoyuan,TW,printed: Unimicron Technology Co.,paper,p.1 affiliations
+eptc67330.2025.11392108-a06-1,eptc67330.2025.11392108,6,Jun-Ho Chen,1,primary,Unimicron,,Hsinchu County,TW,printed: Unimicron Technology Co.,paper,p.1 affiliations
+eptc67330.2025.11392108-a07-1,eptc67330.2025.11392108,7,Tse-Wei Wang,1,primary,Unimicron,,Hsinchu County,TW,printed: Unimicron Technology Co.,paper,p.1 affiliations
+eptc67330.2025.11392108-a08-1,eptc67330.2025.11392108,8,Guang-Hwa Ma,1,primary,Unimicron,,Taoyuan,TW,printed: Unimicron Technology Co.,paper,p.1 affiliations

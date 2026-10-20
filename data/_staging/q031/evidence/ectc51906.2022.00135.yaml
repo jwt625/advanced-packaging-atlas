@@ -1,0 +1,56 @@
+paper_id: ectc51906.2022.00135
+verified_on: 2026-10-18
+schema_version: 2
+source_files:
+  - references/ectc51906.2022.00135/text.md
+  - references/ectc51906.2022.00135/source.json
+  - references/ectc51906.2022.00135/source.pdf
+  - references/ectc51906.2022.00135/figures/page_01.png
+  - references/ectc51906.2022.00135/figures/page_02.png
+  - references/ectc51906.2022.00135/figures/page_03.png
+  - references/ectc51906.2022.00135/figures/page_04.png
+figure_reading_method: >-
+  Page renders 1-4 viewed. From source.pdf: Fig. 9 cross-section labels at 600 dpi, Fig. 7 at 600 dpi (colorbar
+  unreadable), Fig. 8 at 400 dpi (no axis values), Table 2 at 300 dpi (image-only table, absent from text.md).
+  Table 1 checked against the page image; Fig. 4/5 bar labels read from the page render.
+entries:
+  - {table: metrics, row_id: ectc51906.2022.00135-a-m14, field: value, value: 5.73, unit: um, basis: measured, locator: "p.4 Fig. 9", note: "topmost label; Fig. 9 labels top to bottom 5.73, 3.97, 4.63, 2.87, 5.07, 1.98, 4.63, 1.98, 4.41, 1.76, 8.16 um"}
+  - {table: metrics, row_id: ectc51906.2022.00135-a-m26, field: n_samples, value: 50, unit: ea, basis: measured, locator: "p.4 Table 2", note: "S/S per lots column"}
+derived: []
+conflicts:
+  - {table: test_vehicles, row_id: ectc51906.2022.00135-a, field: name, values: ["six-metal layer RDL-first TV (Sec. III)", "all 4 redistribution layers (Sec. III)", "four RDL layer structure with five dielectric layers (simulation)"], locators: ["p.3 Sec. III", "p.3 Sec. III", "p.3 Sec. III"], chosen: "6 metal = 2 UBM + M1-M4", why: "consistent with Table 1 and Fig. 6"}
+  - {table: stack_layers, row_id: ectc51906.2022.00135-a-L04, field: thickness_um, values: ["5 um nominal dielectric (text)", "1.76-3.97 um between metal levels (Fig. 9)"], locators: ["p.3 Sec. III", "p.4 Fig. 9"], chosen: "5 nominal in stack_layers; Fig. 9 values in metrics", why: "design vs measured kept separately; Fig. 9 layer assignment inferred"}
+excluded:
+  - "WLCSP, WLFO and SiP technology references [1]-[4] (no numbers)"
+  - "Abstract general PLFO challenges (die shift, TTV in back-grind) - no data in this paper"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - die size, count, function and thickness; package size and thickness; bump pitch and solder alloy
+  - dielectric product and properties; cure temperature; glass panel thickness and CTE values
+  - temporary bond / release layer for RDL-first; laser debond conditions; mold product
+  - absolute warpage values (Fig. 7/8 unreadable or without axis); TCT_B temperatures; preconditioning; lot count
+  - cost model inputs
+source_quality:
+  - "Table 2 (reliability) is an image; text.md contains only its caption. Read from page image p.4 (300 dpi re-render)."
+  - "Fig. 2 flow-chart labels appear in text.md out of place at the end of p.2; content consistent with the image."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135", change: "process_flow_level full -> ordered", reason: "ordered flow with layer thicknesses/CDs but no temperature, time or pressure anywhere"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135-F1", change: "level full -> ordered; locator/notes (min L/S 5/5 um)", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135-F1-s01", change: "other -> carrier_prep; now glass panel provision (650 x 650 mm)", reason: "Fig. 3 box 'Large Format glass panel'; old overview step split into s01 + layer rows"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135-F1", change: "s02-s09: step_basis generic_description; note per-layer module", reason: "Sec. II lists the panel-level module steps, not a per-layer order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135-F1", change: "s16-s20: added UBM, M1, M2, M3, M4 layer rows with Cu thk and CD targets", reason: "p.3 Table 1 criteria, Sec. III, Fig. 6 give the layer order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135-F1-s10", change: "other -> rdl_layer; now die-side UBM (7 um, CD 85 um), seq 15", reason: "p.3 Table 1; old 'repeat to M4' content now in s16-s20"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135-F1-s12", change: "bonding -> assembly; flip chip placement only", reason: "p.3 Sec. III separates placement and mass reflow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135-F1-s21", change: "added mass reflow step", reason: "p.3 Sec. III; p.2 Fig. 3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135-F1", change: "s11-s15: seq 16-21; step_basis stated_in_flow", reason: "order from Sec. III text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135-F2", change: "scope tv_build -> generic_platform", reason: "Fig. 2 generic platform flow; TV c is the platform (cost model)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135-F3", change: "scope tv_build -> generic_platform", reason: "Fig. 2 generic platform flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135-F2-s01", change: "other -> assembly", reason: "pre-assembly and reconstitution box, Fig. 2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135-F2-s02", change: "material temporary bonding adhesive; CTE-matched glass panel", reason: "p.2 Sec. I"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135-F3-s01", change: "material temporary bonding adhesive; CTE-matched glass panel", reason: "p.2 Sec. I"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135-F2-s03", change: "other -> rdl_layer; equipment panel-level stepper, curing oven; alignment per wafer/sub-panel", reason: "p.2 Sec. I"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135-F3-s02", change: "other -> rdl_layer; equipment panel-level stepper, curing oven; alignment per wafer/sub-panel", reason: "p.2 Sec. I"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135-F2-s05", change: "test -> laser_marking (fab); probe dropped as a test", reason: "probe/test not a step (rule 7); no result to move to metrics"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135-F3-s04", change: "test -> laser_marking (fab); probe dropped as a test", reason: "probe/test not a step (rule 7); no result to move to metrics"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135-F2-s06", change: "added singulation step", reason: "split from Fig. 2 'probe / laser mark & singulation' box"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00135-F3-s05", change: "added singulation step", reason: "split from Fig. 2 'probe / laser mark & singulation' box"}

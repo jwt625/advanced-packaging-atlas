@@ -1,0 +1,146 @@
+paper_id: ectc51687.2025.00097
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00097/text.md
+  - references/ectc51687.2025.00097/source.json
+  - references/ectc51687.2025.00097/figures/page_01.png
+  - references/ectc51687.2025.00097/figures/page_02.png
+  - references/ectc51687.2025.00097/figures/page_03.png
+  - references/ectc51687.2025.00097/figures/page_04.png
+  - references/ectc51687.2025.00097/figures/page_05.png
+  - references/ectc51687.2025.00097/figures/page_06.png
+  - references/ectc51687.2025.00097/figures/cand/p06_fig17.png
+  - references/ectc51687.2025.00097/figures/cand/p05_fig13.png
+  - references/ectc51687.2025.00097/figures/cand/p03_table1.png
+  - references/ectc51687.2025.00097/figures/cand/p04_fig8.png
+  - references/ectc51687.2025.00097/figures/cand/p04_fig10.png
+  - references/ectc51687.2025.00097/figures/cand/p05_fig12.png
+  - references/ectc51687.2025.00097/figures/cand/p06_fig14.png
+figure_reading_method: >-
+  Page renders p.1-6 at 150 dpi; candidate crops for Figs. 8, 10, 12, 13, 14, 17 and Table 1; manual re-crop of
+  Table 1. Figures carry layer labels only (no scale bars read, no numeric axes).
+entries:
+  - {table: components, row_id: ectc51687.2025.00097-d-c1, field: thickness_um, value: 775, unit: um, basis: design_target, locator: "p.3 Sec. II", note: "approximately 775 um full-thickness wafer"}
+  - {table: process_steps, row_id: ectc51687.2025.00097-F4-s05, field: thickness_um, value: 30, unit: um, basis: design_target, locator: "p.3 Sec. II; p.3 Fig. 6", note: "around 30 um; Fig. 6 label 'Carrier wafer thinned to 30um'"}
+  - {table: metrics, row_id: ectc51687.2025.00097-a-m4, field: value, value: 0.2, unit: um, basis: design_target, locator: "p.2 Sec. II", note: "less than 200nm TTV, stated as usual practice"}
+derived:
+  - {table: metrics, row_id: ectc51687.2025.00097-a-m4, field: value, value: 0.2, formula: "200 nm / 1000 = 0.2 um (unit conversion)", inputs: "p.2 Sec. II"}
+conflicts: []
+excluded:
+  - "Fig. 1 HBM W2W core-wafer flow and Fig. 2 CMOS/Array W2W flow: product concepts being developed, no data; not entered as TVs"
+  - "Fig. 3 industrial wafer support systems (thermal slide, chemical dissolution, peel-off, laser ablation) from ref [2]"
+  - "Fig. 4 organic glue cracks and 'glues take up to 200C': general statement on existing systems, no TV"
+  - "Release-layer mirror-reflection concept attributed to refs [3], [4]; film peel-off attributed to ref [5]"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - wafer diameter, carrier and device wafer thicknesses (except Device 1 <2 um)
+  - bonding layer materials and thicknesses (except release stack total <1 um)
+  - Cu pad pitch/size, hybrid-bond metallurgy, bonding temperature, pressure, anneal temperature/time
+  - laser wavelength, pulse energy, pitch and focus values; photonic flash energy; adhesive product names
+  - absolute bond energies, measured TTV, yield numbers
+judgment_calls:
+  - "One TV per carrier technology A/B/C (different temporary-bond stack and carrier); sacrificial flow of Fig. 5 kept as baseline TV d."
+  - "Generic Fig. 13 flow and Figs. 14-16 results (CSAM void free, Device 1 <2 um) hold for A, B and C (conclusion); entered once on TV a with scope 'applies to TVs a, b, c' (2026-10-19); wafer-to-technology mapping in Figs. 14-16 not stated."
+  - "Fig. 17 X-section attached to TV a (technology not stated; inorganic, thin temporary layer)."
+  - "Permanent bond entered as wafer_to_wafer_hybrid level with ic_type unspecified; only 'hydrophilic bonding' and SiO2 transit layer are described (bonding_method fusion for TV a)."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-a-m1", change: "scope -> 'applies to TVs a, b, c'; copies ectc51687.2025.00097-b-m1, ectc51687.2025.00097-c-m1 deleted", reason: "p.6 Sec. IV/V: CSAM void free stated for all temporary bonds; Fig. 14 wafer-to-technology mapping not stated"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-b-m1", change: "deleted (copy of ectc51687.2025.00097-a-m1)", reason: "p.6 Sec. IV/V: CSAM void free stated for all temporary bonds; Fig. 14 wafer-to-technology mapping not stated"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-c-m1", change: "deleted (copy of ectc51687.2025.00097-a-m1)", reason: "p.6 Sec. IV/V: CSAM void free stated for all temporary bonds; Fig. 14 wafer-to-technology mapping not stated"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-a-m2", change: "scope -> 'applies to TVs a, b, c'; copies ectc51687.2025.00097-b-m2, ectc51687.2025.00097-c-m2 deleted", reason: "p.6 Sec. IV/V: Device 1 thinned <2 um stated for the bonded pairs generally; Fig. 15 mapping not stated"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-b-m2", change: "deleted (copy of ectc51687.2025.00097-a-m2)", reason: "p.6 Sec. IV/V: Device 1 thinned <2 um stated for the bonded pairs generally; Fig. 15 mapping not stated"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-c-m2", change: "deleted (copy of ectc51687.2025.00097-a-m2)", reason: "p.6 Sec. IV/V: Device 1 thinned <2 um stated for the bonded pairs generally; Fig. 15 mapping not stated"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-a-m3", change: "scope -> 'W2W permanent bonding excursion requirement; applies to TVs a, b, c'; copies ectc51687.2025.00097-b-m3, ectc51687.2025.00097-c-m3 deleted", reason: "p.2 Sec. II: 350 C / 2 h is a general W2W requirement, not a per-carrier value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-b-m3", change: "deleted (copy of ectc51687.2025.00097-a-m3)", reason: "p.2 Sec. II: 350 C / 2 h is a general W2W requirement, not a per-carrier value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-c-m3", change: "deleted (copy of ectc51687.2025.00097-a-m3)", reason: "p.2 Sec. II: 350 C / 2 h is a general W2W requirement, not a per-carrier value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-a-m4", change: "scope -> 'Device 1 thinned to <2 um; applies to TVs a, b, c'; copies ectc51687.2025.00097-b-m4, ectc51687.2025.00097-c-m4 deleted", reason: "p.2 Sec. II: <200 nm TTV is the usual practice for W2W, not a per-carrier value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-b-m4", change: "deleted (copy of ectc51687.2025.00097-a-m4)", reason: "p.2 Sec. II: <200 nm TTV is the usual practice for W2W, not a per-carrier value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-c-m4", change: "deleted (copy of ectc51687.2025.00097-a-m4)", reason: "p.2 Sec. II: <200 nm TTV is the usual practice for W2W, not a per-carrier value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-a-m5", change: "scope -> 'applies to TVs a, b, c'; copies ectc51687.2025.00097-b-m5, ectc51687.2025.00097-c-m5 deleted", reason: "p.2 Sec. I: bonding layer TTV <1 um is a general carrier-bond requirement, not a per-carrier value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-b-m5", change: "deleted (copy of ectc51687.2025.00097-a-m5)", reason: "p.2 Sec. I: bonding layer TTV <1 um is a general carrier-bond requirement, not a per-carrier value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00097-c-m5", change: "deleted (copy of ectc51687.2025.00097-a-m5)", reason: "p.2 Sec. I: bonding layer TTV <1 um is a general carrier-bond requirement, not a per-carrier value"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f03", change: "added Fig. 7 (process_flow, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f04", change: "added Fig. 5 (process_flow, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f05", change: "re-ranked Fig. 8: ectc51687.2025.00097-f04 -> ectc51687.2025.00097-f05", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f06", change: "re-ranked Fig. 10: ectc51687.2025.00097-f05 -> ectc51687.2025.00097-f06", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f07", change: "re-ranked Fig. 12: ectc51687.2025.00097-f06 -> ectc51687.2025.00097-f07", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f08", change: "added Fig. 9 (stack_schematic, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f09", change: "added Fig. 11 (micrograph, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f10", change: "added Fig. 6 (package_photo, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f11", change: "added Fig. 14 (xray_csam, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f12", change: "added Fig. 15 (package_photo, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f13", change: "added Fig. 16 (package_photo, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f14", change: "added Fig. 1 (process_flow, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f15", change: "added Fig. 2 (process_flow, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00097-f16", change: "re-ranked Table 1: ectc51687.2025.00097-f03 -> ectc51687.2025.00097-f16", reason: "re-rank after additions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1", change: "flow_name: 'recyclable-carrier W2W flow (Fig. 13)' -> 'recyclable-carrier W2W bonding flow (Fig. 13)'; tv_ids: 'ectc51687.2025.00097-a' -> 'ectc51687.2025.00097-a;ectc51687.2025.00097-b;ectc51687.2025.00097-c'; locator: 'p.5 Fig. 13(a); p.5 Fig. 13(b); p.6 Fig. 14; p.5 Fig. 13(c); p.6 Fig. 15; p.4 Sec. III.B; p.6 Fig. 16; p.6 Sec. IV; p.5 Fig. 13(d); p.6 Fig. 17; p.4 Fig. 9; p.4 Fig. 8; p.5 Fig. 13(f)' -> 'p.5 Fig. 13; p.3 Fig. 7; p.4 Sec. III.B; p.4 Sec. III.C; p.5 Sec. III.D; p.6 Sec. IV; p.6 Fig. 16'", reason: "Fig. 13 is one generic flow for technologies A/B/C (step e); converter copied it per TV"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s01", change: "tv_id: '' -> 'ectc51687.2025.00097-a'; step_basis: '' -> 'stated_in_flow'; step: 'Release layer formation on Si carrier' -> 'Release layer formation on Si carrier (in-organic film, controlled bonding strength)'; material: 'in-organic film' -> 'in-organic film (controlled bonding strength)'; locator: 'p.5 Fig. 13(a)' -> 'p.5 Fig. 13(a); p.3 Table 1; p.4 Sec. III.B'", reason: "release layer differs per technology: TV delta for A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s14", change: "added as TV delta (from former ectc51687.2025.00097-F2-s01): Multiple release layer formation (dielectric 1 / ablation / dielectric 2 / reflection)", reason: "Technology B release stack (Sec. III.C, Fig. 10)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s15", change: "added as TV delta (from former ectc51687.2025.00097-F3-s01): Energy absorption layer pre-coated on glass carrier top surface", reason: "Technology C absorption layer (Sec. III.D)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "shared Fig. 13(a) step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s16", change: "added as TV delta (from former ectc51687.2025.00097-F3-s02): High temperature adhesive application by spin coating or film lamination", reason: "Technology C adhesive (Sec. III.D); placed before the bond, relative order to Fig. 13(a) bonding layer not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s03", change: "step_basis: '' -> 'stated_in_flow'; seq: '3' -> '4'; split: '' -> 'C: glass carrier bonded with high temperature adhesive by thermal compression bonding (Sec. III.D)'; locator: 'p.5 Fig. 13(b)' -> 'p.5 Fig. 13(b); p.5 Sec. III.D'", reason: "shared Fig. 13(b) step; Technology C bond method in split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s05", change: "step_basis: '' -> 'stated_in_flow'; basis: 'unspecified' -> 'stated'; conditions: '' -> 'extreme thinning usually comprises back-grinding, CMP and Si etching (Sec. I)'; locator: 'p.5 Fig. 13(c); p.6 Fig. 15' -> 'p.5 Fig. 13(c); p.6 Sec. IV; p.6 Fig. 15; p.2 Sec. I'; notes: 'Back-grind/CMP/Si etch sequence not detailed for this flow.' -> ''", reason: "shared Fig. 13(c) step; generic thinning sequence from Sec. I"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s06", change: "step_basis: '' -> 'stated_in_flow'; material: '' -> 'permanent bonding dielectric'", reason: "shared step (Fig. 16, Sec. IV); CVD named in Sec. III.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "shared step (Sec. IV)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s08", change: "step_basis: '' -> 'stated_in_flow'; conditions: 'hydrophilic bonding (SiO2 transit layer)' -> 'hydrophilic bonding; SiO2 transit layer at interface (Fig. 17; technology not stated)'; locator: 'p.5 Fig. 13(d); p.6 Sec. IV' -> 'p.5 Fig. 13(d); p.6 Sec. IV; p.6 Fig. 17'", reason: "shared Fig. 13(d) step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s10", change: "seq: '10' -> '9'; tv_id: '' -> 'ectc51687.2025.00097-a'", reason: "Technology A edge treatment; position not stated (kept before debond); TV delta for A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s11", change: "seq: '11' -> '10'; tv_id: '' -> 'ectc51687.2025.00097-a'; step_basis: '' -> 'stated_in_flow'; equipment: '' -> 'mechanical blade'; locator: 'p.4 Sec. III.B; p.4 Fig. 8' -> 'p.5 Fig. 13(e); p.4 Sec. III.B; p.4 Fig. 8'", reason: "Technology A debond (Fig. 13(e)); TV delta for A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s17", change: "added as TV delta (from former ectc51687.2025.00097-F2-s09): IR laser ablation through Si carrier at ablation layer; lift-off", reason: "Technology B debond (Fig. 13(e), Sec. III.C)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s18", change: "added as TV delta (from former ectc51687.2025.00097-F3-s09): Photonic debond: light through glass heats absorption layer, separation at absorption/adhesive interface", reason: "Technology C debond (Fig. 13(e), Sec. III.D)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s12", change: "step_basis: '' -> 'stated_in_flow'; seq: '12' -> '11'; split: '' -> 'C: adhesive on device side removed by solvent; film adhesive can be peeled off (Sec. III.D)'; locator: 'p.5 Fig. 13(f)' -> 'p.5 Fig. 13(f); p.5 Sec. III.D'", reason: "shared Fig. 13(f) step; Technology C device-side adhesive removal in split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s13", change: "seq: '13' -> '12'; tv_id: '' -> 'ectc51687.2025.00097-a'; step_basis: '' -> 'stated_in_flow'", reason: "Technology A carrier recycle; TV delta for A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s19", change: "added as TV delta (from former ectc51687.2025.00097-F2-s11): Residue chemical cleaning of carrier for recycling", reason: "Technology B carrier recycle (Sec. III.C)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s20", change: "added as TV delta (from former ectc51687.2025.00097-F3-s11): Minimum cleaning of glass carrier for recycling", reason: "Technology C carrier recycle (Sec. III.D)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s04", change: "deleted step (inspection: CSAM of carrier/Device 1 bonded pair)", reason: "CSAM of bonded pair is a measurement; result already in metrics a-m1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F1-s09", change: "deleted step (inspection: X-section and CSAM of 3-wafer stack)", reason: "3-wafer X-section/CSAM is a measurement; result in metrics a-m9 (CSAM note added)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F2-s01", change: "deleted step (deposition_other: Multiple release layer formation (dielectric 1 / ablation / dielectric 2 / reflection))", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F2-s02", change: "deleted step (deposition_other: Bonding layer formation on Device 1)", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F2-s03", change: "deleted step (temporary_bonding: Device 1 on carrier bonding (temporary))", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F2-s04", change: "deleted step (inspection: CSAM of carrier/Device 1 bonded pair)", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F2-s05", change: "deleted step (grinding_thinning: Device 1 thinning)", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F2-s06", change: "deleted step (deposition_other: Permanent bonding layer deposition at Device 1 backside)", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F2-s07", change: "deleted step (anneal: Higher-temperature thermal anneal for the bonding-layer deposition)", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F2-s08", change: "deleted step (bonding: Device 2 on Device 1 permanent W2W bonding)", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F2-s09", change: "deleted step (debonding: IR laser ablation through Si carrier at ablation layer; lift-off)", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F2-s10", change: "deleted step (cleaning: Surface cleaning of Device 1)", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F2-s11", change: "deleted step (cleaning: Residue chemical cleaning of carrier for recycling)", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F2", change: "deleted flow (recyclable-carrier W2W flow (Fig. 13), tv_ids ectc51687.2025.00097-b)", reason: "merged into ectc51687.2025.00097-F1 (same Fig. 13 flow)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F3-s01", change: "deleted step (deposition_other: Energy absorption layer pre-coated on glass carrier top surface)", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F3-s02", change: "deleted step (deposition_other: High temperature adhesive application by spin coating or film lamination)", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F3-s03", change: "deleted step (temporary_bonding: Glass carrier to Device 1 thermal compression bonding with adhesive)", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F3-s04", change: "deleted step (inspection: CSAM of carrier/Device 1 bonded pair)", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F3-s05", change: "deleted step (grinding_thinning: Device 1 thinning)", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F3-s06", change: "deleted step (deposition_other: Permanent bonding layer deposition at Device 1 backside)", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F3-s07", change: "deleted step (anneal: Higher-temperature thermal anneal for the bonding-layer deposition)", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F3-s08", change: "deleted step (bonding: Device 2 on Device 1 permanent W2W bonding)", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F3-s09", change: "deleted step (debonding: Photonic debond: light through glass heats absorption layer, separation at absorption/adhesive interface)", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F3-s10", change: "deleted step (cleaning: Solvent removal of adhesive on device side (film adhesive can be peeled))", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F3-s11", change: "deleted step (cleaning: Minimum cleaning of glass carrier for recycling)", reason: "copy of the Fig. 13 flow; merged into ectc51687.2025.00097-F1 (shared steps + TV deltas)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F3", change: "deleted flow (recyclable-carrier W2W flow (Fig. 13), tv_ids ectc51687.2025.00097-c)", reason: "merged into ectc51687.2025.00097-F1 (same Fig. 13 flow)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-a-m9", change: "notes: 'Technology used not stated; inorganic temporary layer.' -> 'Technology used not stated; inorganic temporary layer. 3-wafer CSAM clean (not shown).'", reason: "CSAM statement from deleted step F1-s09 (Sec. IV)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F4", change: "scope: 'tv_build' -> 'comparison'; locator: 'p.2 Sec. II; p.3 Fig. 5(a); p.3 Sec. II; p.3 Fig. 5(b); p.3 Fig. 5(c); p.3 Fig. 5(d); p.3 Fig. 6; p.3 Fig. 5(e); p.3 Fig. 5(f)' -> 'p.2 Sec. II; p.3 Sec. II; p.3 Fig. 5; p.3 Fig. 6'", reason: "baseline prior-practice flow compared against the recyclable carriers"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F4-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "step_basis: Fig. 5 steps (a)-(f)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F4-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "step_basis: Fig. 5 steps (a)-(f)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F4-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "step_basis: Fig. 5 steps (a)-(f)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F4-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "step_basis: Fig. 5 steps (a)-(f)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F4-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "step_basis: Fig. 5 steps (a)-(f)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F4-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "step_basis: Fig. 5 steps (a)-(f)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F4-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "step_basis: Fig. 5 steps (a)-(f)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F4-s05", change: "thickness_in_um: '' -> '775'; qualifiers: 'thickness_um:approx' -> 'thickness_um:approx;thickness_in_um:approx'", reason: "input thickness stated (Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F5", change: "added flow (HBM W2W bonding process flow (Fig. 1), scope generic_platform, level ordered)", reason: "Fig. 1 HBM W2W core-wafer flow is a disclosed ordered flow (concept under development, no TV)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F5-s01", change: "added step seq 1 (carrier_prep: Core 1 wafer manufacturing (Fig. 1(a)))", reason: "Fig. 1 flow step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F5-s02", change: "added step seq 2 (temporary_bonding: Core 1 bonding to carrier wafer (Fig. 1(b)))", reason: "Fig. 1 flow step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F5-s03", change: "added step seq 3 (via_reveal: Core 1 backside TSV processing (Fig. 1(c)))", reason: "Fig. 1 flow step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F5-s04", change: "added step seq 4 (bonding: Core 2 hybrid bonding to Core 1 (Fig. 1(d)))", reason: "Fig. 1 flow step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F5-s05", change: "added step seq 5 (other: carrier removal (Fig. 1(e)))", reason: "Fig. 1 flow step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F5-s06", change: "added step seq 6 (via_reveal: Core 2 backside TSV processing (Fig. 1(f)))", reason: "Fig. 1 flow step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F6", change: "added flow (CMOS/Array W2W memory manufacturing flow (Fig. 2), scope generic_platform, level ordered)", reason: "Fig. 2 CMOS/Array W2W manufacturing flow is a disclosed ordered flow (concept, no TV)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F6-s01", change: "added step seq 1 (carrier_prep: CMOS wafer manufacturing; Array wafer made separately (Fig. 2(a)))", reason: "Fig. 2 flow step (Sec. I text)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F6-s02", change: "added step seq 2 (bonding: CMOS wafer bonding to carrier wafer by fusion bonding (Fig. 2(b)))", reason: "Fig. 2 flow step (Sec. I text)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F6-s03", change: "added step seq 3 (grinding_thinning: CMOS substrate thinning (Fig. 2(c)))", reason: "Fig. 2 flow step (Sec. I text)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F6-s04", change: "added step seq 4 (bonding: Array wafer bonding to CMOS (bonded pair stacked to pre-made Array wafer) (Fig. 2(d)))", reason: "Fig. 2 flow step (Sec. I text)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F6-s05", change: "added step seq 5 (other: carrier wafer removal (Fig. 2(e)))", reason: "Fig. 2 flow step (Sec. I text)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00097-F6-s06", change: "added step seq 6 (rdl_layer: final interconnect and BEOL layers on top (Fig. 2(f)))", reason: "Fig. 2 flow step (Sec. I text)"}

@@ -49,3 +49,8 @@ not_reported:
   - reliability data
 source_quality:
   - "Fig. 4/5 captions partly clipped in text layer ('g. 5.'); Fig. 5 has no candidate."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51846.2026.00336-b-m8, change: "deleted (copy of a-m8: heater/sensor active Si line length 5 um)", reason: "p.5 Sec. IV states one design for the dedicated thermal structures of both schemes; no per-build value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51846.2026.00336-a-m8, change: "scope -> 'applies to TVs a, b (dedicated thermal structures of both schemes)'", reason: "kept as the single row for the shared statement"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00336-figures, change: "re-ranked: Table I f05 -> f04, Fig. 2 f03 -> f05, Fig. 5 f04 -> f06, Fig. 3 f06 -> f07", reason: "layout and schematics before plots (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51846.2026.00336-f03, change: "added Fig. 4 (top_view_layout, candidate)", reason: "thermal test-structure layout; source of a-m6, b-m6, a-m8"}

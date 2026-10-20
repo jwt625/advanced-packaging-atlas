@@ -1,0 +1,32 @@
+paper_id: vlsitechnologyandcir46783.2024.10631478
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/vlsitechnologyandcir46783.2024.10631478/text.md
+  - references/vlsitechnologyandcir46783.2024.10631478/source.json
+  - references/vlsitechnologyandcir46783.2024.10631478/figures/page_01.png
+  - references/vlsitechnologyandcir46783.2024.10631478/figures/page_02.png
+figure_reading_method: >-
+  Page renders and grid of p.2; 300 dpi re-crops of Fig. 3-7 and Table 1; Table 2, Table 3 and Fig. 8-12 read from the
+  150 dpi page render (Table 2 values 13/13/23/25/18/90 match the OCR copy in text.md).
+entries:
+  - {table: interconnects, row_id: vlsitechnologyandcir46783.2024.10631478-a-i1, field: diameter_um, value: 18, unit: um, basis: design_target, locator: "p.1 Fabrication; p.2 Fig. 5", note: "text 18 um diameter; Fig. 5 label 18um CD"}
+  - {table: interconnects, row_id: vlsitechnologyandcir46783.2024.10631478-a-i3, field: depth_um, value: 75, unit: um, basis: measured, locator: "p.2 Fig. 3", note: "SEM annotation"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: vlsitechnologyandcir46783.2024.10631478-a-m13, field: basis, values: ["simulated (section describes a simulation)", "'measured magnitude' wording"], locators: ["p.1 GPU Performance", "p.1 GPU Performance"], chosen: simulated, why: "paragraph and Fig. 9 present simulation results"}
+excluded:
+  - "CPU-die HDMIM capacitance density 376 fF/um2 and per-capacitor 219/157 fF/um2 (cited to ref [2])"
+  - "HDMIM in CPU die reliability statement (cited to ref [3])"
+  - "Face-to-face responsiveness rationale (ref [1])"
+  - "LPDDR5/DDR5 8 GHz data rate and 200 MHz clock (generic context, not this TV)"
+not_reported:
+  - die and interposer sizes, interposer thickness, package size, substrate layer count
+  - TSV pitch, metal line/space and thicknesses, high-k material name
+  - bonding method and conditions for SIB/MLB, underfill, PSB metallurgy
+  - temperature-cycling cycle count, sample counts
+  - electrical_interfaces (no D2D lane rate/energy/bandwidth), optical_interfaces
+source_quality:
+  - "p.1 text layer is font-encoded (unreadable) followed by an OCR copy with errors (e.g. 36!lm, l IOurn); all numbers verified on page renders."
+  - "Fig. 2 caption prints M1-2 1080um and M3 2000um pitch; units implausible for interposer metal, not entered."
+  - "Page-2 candidates are mislabelled or offset (p02_table1 shows Fig. 7, p02_fig3 shows Fig. 2 + Fig. 3, p02_fig4 covers Fig. 1/4/5); all key figures manual."

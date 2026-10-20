@@ -1,0 +1,76 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51529.2024.00151-a-c1,ectc51529.2024.00151-a,asic,,,ASIC,2,,,,,,,,,,,stated,text,,p.5 Sec. III.A; p.5 Fig. 10,,
+ectc51529.2024.00151-a-c2,ectc51529.2024.00151-a,hbm,,,HBM,8,,,,,,,,,,,stated,text,,p.5 Sec. III.A; p.5 Fig. 10,,Generation and stack height not stated.
+ectc51529.2024.00151-a-c3,ectc51529.2024.00151-a,bridge,,yes,Si bridge die (embedded in FO-RDL),8,6.2,6.4,,,,,,,Si,,design_target,text,,p.5 Sec. III.A; p.5 Fig. 10,,
+ectc51529.2024.00151-a-c4,ectc51529.2024.00151-a,substrate,,,FCBGA organic substrate,1,70,78,,,,,,,,,design_target,text,,p.5 Sec. III.A,,Package dimension 70x78 mm; layer count not reported.
+ectc51529.2024.00151-a-c5,ectc51529.2024.00151-a,mold,,,top mold and bottom mold,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2,,Compounds not named.
+ectc51529.2024.00151-a-c6,ectc51529.2024.00151-a,underfill,,,CoW UF (top underfill),,,,,,,,,,,,stated,mixed,,p.3 Fig. 2; p.6 Fig. 16,,
+ectc51529.2024.00151-a-c7,ectc51529.2024.00151-a,underfill,,,CoS UF (bottom underfill),,,,,,,,,,,,stated,mixed,,p.3 Fig. 2; p.6 Fig. 16,,
+ectc51529.2024.00151-b-c1,ectc51529.2024.00151-b,logic_soc,,,SoC-1,2,,,,,,,,,,,stated,text,,p.5 Sec. III.B; p.5 Fig. 12(a),,
+ectc51529.2024.00151-b-c2,ectc51529.2024.00151-b,logic_soc,,,SoC-2,8,,,,,,,,,,,stated,text,,p.5 Sec. III.B,,Function of SoC-2 not stated.
+ectc51529.2024.00151-b-c3,ectc51529.2024.00151-b,bridge,,yes,Si bridge die (embedded in FO-RDL),10,,,,,,,,,Si,,stated,text,,p.5 Sec. III.B; p.1 Abstract,,
+ectc51529.2024.00151-b-c4,ectc51529.2024.00151-b,substrate,,,"organic substrate (top build-up, core, bottom build-up)",1,76.5,80,,,,,,,,,design_target,text,,p.5 Sec. III.B; p.2 Fig. 1,,
+ectc51529.2024.00151-b-c5,ectc51529.2024.00151-b,mold,,,top mold and bottom mold,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2,,
+ectc51529.2024.00151-b-c6,ectc51529.2024.00151-b,underfill,,,CoW UF (top underfill),,,,,,,,,,,,stated,mixed,,p.3 Fig. 2; p.6 Fig. 16,,
+ectc51529.2024.00151-b-c7,ectc51529.2024.00151-b,underfill,,,CoS UF (bottom underfill),,,,,,,,,,,,stated,mixed,,p.3 Fig. 2; p.6 Fig. 16,,
+ectc51529.2024.00151-b-c8,ectc51529.2024.00151-b,other,,,passive components,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 1,,Type/count not stated.
+ectc51909.2023.00155-a-c1,ectc51909.2023.00155-a,logic_soc,yes,,Die A (mock of logic chip),1,21.9,21.9,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-a-c2,ectc51909.2023.00155-a,hbm,yes,,Die B (mock of HBM chip),4,10,8,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-a-c3,ectc51909.2023.00155-a,dummy_die,,,filler die 11 x 50 mm2,,11,50,,,,,,,,,design_target,mixed,,p.5 Sec. III.C; p.5 Fig. 9,,Modified design adopted to cut warpage; count not stated.
+ectc51909.2023.00155-a-c4,ectc51909.2023.00155-a,dummy_die,,,filler die 4 x 23 mm2,,4,23,,,,,,,,,design_target,mixed,,p.5 Sec. III.C; p.5 Fig. 9,,Count not stated.
+ectc51909.2023.00155-a-c5,ectc51909.2023.00155-a,die_attach_film,,,DAF for filler dies,,,,20,,,,,,,,design_target,text,,p.5 Sec. III.C,,
+ectc51909.2023.00155-a-c6,ectc51909.2023.00155-a,interposer,,,silicon interposer,1,50,50,200,,,,,,silicon; SiN insulating layer on top,,design_target,table,,p.2 Table 2; p.6 Table 10,,Measured 194 um (Table 10). No TSV described.
+ectc51909.2023.00155-a-c7,ectc51909.2023.00155-a,mold,,,granular EMC (compression mold),,,,698,,,,,,granular epoxy molding compound,,design_target,table,,p.6 Table 10; p.3 Table 7,,Mold thickness design; measured 694 um.
+ectc51909.2023.00155-a-c8,ectc51909.2023.00155-a,underfill,,,CUF under dies,,,,,,,,,,capillary underfill,,stated,text,,p.3 Sec. II.D; p.3 Table 6,,
+ectc51909.2023.00155-a-c9,ectc51909.2023.00155-a,underfill,,,CUF interposer-substrate,,,,,,,,,,capillary underfill,,stated,text,,p.4 Sec. II.H,,
+ectc51909.2023.00155-a-c10,ectc51909.2023.00155-a,substrate,,,"package Substrate-A (4/2/4 build-up, CCL core 2.8 ppm/C)",1,100,100,1600,,,,,,CCL core (2.8 ppm/C); build-up films,"SHINKO ELECTRIC INDUSTRIES CO., LTD.",design_target,table,supplier:text,p.2 Table 3; p.3 Sec. II.F; p.6 Table 11,,Measured total thickness 1.6 mm (Table 11). thickness_um converted from 1.6 mm.
+ectc51909.2023.00155-a-c11,ectc51909.2023.00155-a,stiffener,,,Cu stiffener,1,,,2000,,,,,,Cu,,design_target,text,,p.4 Sec. II.H; p.7 Sec. III.G,,"Attached with silicone glue, cured 130 C 1 h. Lateral size not given."
+ectc51909.2023.00155-a-c12,ectc51909.2023.00155-a,pcb,,,"motherboard (CCL 18.0 ppm/C, batch lamination)",1,150,150,2800,,,,,,CCL and prepregs,,design_target,table,,p.2 Table 4; p.7 Table 12,,Measured thickness 2.7 mm (Table 12).
+ectc51909.2023.00155-b-c1,ectc51909.2023.00155-b,logic_soc,yes,,Die A (mock of logic chip),1,21.9,21.9,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-b-c2,ectc51909.2023.00155-b,hbm,yes,,Die B (mock of HBM chip),4,10,8,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-b-c3,ectc51909.2023.00155-b,dummy_die,,,filler die 11 x 50 mm2,,11,50,,,,,,,,,design_target,mixed,,p.5 Sec. III.C; p.5 Fig. 9,,Modified design adopted to cut warpage; count not stated.
+ectc51909.2023.00155-b-c4,ectc51909.2023.00155-b,dummy_die,,,filler die 4 x 23 mm2,,4,23,,,,,,,,,design_target,mixed,,p.5 Sec. III.C; p.5 Fig. 9,,Count not stated.
+ectc51909.2023.00155-b-c5,ectc51909.2023.00155-b,die_attach_film,,,DAF for filler dies,,,,20,,,,,,,,design_target,text,,p.5 Sec. III.C,,
+ectc51909.2023.00155-b-c6,ectc51909.2023.00155-b,interposer,,,silicon interposer,1,50,50,200,,,,,,silicon; SiN insulating layer on top,,design_target,table,,p.2 Table 2; p.6 Table 10,,Measured 194 um (Table 10). No TSV described.
+ectc51909.2023.00155-b-c7,ectc51909.2023.00155-b,mold,,,granular EMC (compression mold),,,,698,,,,,,granular epoxy molding compound,,design_target,table,,p.6 Table 10; p.3 Table 7,,Mold thickness design; measured 694 um.
+ectc51909.2023.00155-b-c8,ectc51909.2023.00155-b,underfill,,,CUF under dies,,,,,,,,,,capillary underfill,,stated,text,,p.3 Sec. II.D; p.3 Table 6,,
+ectc51909.2023.00155-b-c9,ectc51909.2023.00155-b,underfill,,,CUF interposer-substrate,,,,,,,,,,capillary underfill,,stated,text,,p.4 Sec. II.H,,
+ectc51909.2023.00155-b-c10,ectc51909.2023.00155-b,substrate,,,"package Substrate-B (4/2/4 build-up, CCL core 0.7 ppm/C)",1,100,100,1600,,,,,,CCL core (0.7 ppm/C); build-up films,"SHINKO ELECTRIC INDUSTRIES CO., LTD.",design_target,table,supplier:text,p.2 Table 3; p.3 Sec. II.F; p.6 Table 11,,Measured total thickness 1.6 mm (Table 11). thickness_um converted from 1.6 mm.
+ectc51909.2023.00155-b-c11,ectc51909.2023.00155-b,stiffener,,,Cu stiffener,1,,,2000,,,,,,Cu,,design_target,text,,p.4 Sec. II.H; p.7 Sec. III.G,,"Attached with silicone glue, cured 130 C 1 h. Lateral size not given."
+ectc51909.2023.00155-b-c12,ectc51909.2023.00155-b,pcb,,,"motherboard (CCL 18.0 ppm/C, batch lamination)",1,150,150,2800,,,,,,CCL and prepregs,,design_target,table,,p.2 Table 4; p.7 Table 12,,Measured thickness 2.7 mm (Table 12).
+ectc51909.2023.00155-c-c1,ectc51909.2023.00155-c,logic_soc,yes,,Die A (mock of logic chip),1,21.9,21.9,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-c-c2,ectc51909.2023.00155-c,hbm,yes,,Die B (mock of HBM chip),4,10,8,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-c-c3,ectc51909.2023.00155-c,interposer,,,silicon interposer (wafer level),,50,50,,,,,,,silicon,,design_target,text,,p.2 Sec. II.A,,
+ectc51909.2023.00155-c-c4,ectc51909.2023.00155-c,mold,,,liquid EMC (MUF),,,,,,,,,,liquid epoxy molding compound,,stated,table,,p.3 Table 7,,
+ectc51909.2023.00155-d-c1,ectc51909.2023.00155-d,logic_soc,yes,,Die A (mock of logic chip),1,21.9,21.9,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-d-c2,ectc51909.2023.00155-d,hbm,yes,,Die B (mock of HBM chip),4,10,8,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-d-c3,ectc51909.2023.00155-d,interposer,,,silicon interposer (FEM),,50,50,,,,,,,silicon,,simulated,text,,p.3 Sec. II.E; p.3 Fig. 3,,
+ectc51909.2023.00155-d-c4,ectc51909.2023.00155-d,mold,,,EMC (FEM),,,,,,,,,,EMC (visco-elastic),,simulated,text,,p.3 Sec. II.E; p.3 Table 8,,
+ectc51909.2023.00155-d-c5,ectc51909.2023.00155-d,underfill,,,CUF (FEM),,,,,,,,,,CUF (visco-elastic),,simulated,text,,p.3 Sec. II.E; p.3 Table 8,,
+ectc51687.2025.00062-a-c1,ectc51687.2025.00062-a,asic,yes,,XPU test chip,1,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.3 Fig. 4,,XPU / accelerator position; passive daisy chain.
+ectc51687.2025.00062-a-c2,ectc51687.2025.00062-a,eic,yes,,EIC test chips (top),6,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.3 Fig. 4,,Stacked above OMIB PIC in the architecture (Fig. 1).
+ectc51687.2025.00062-a-c3,ectc51687.2025.00062-a,pic,yes,yes,OMIB PIC test chips (optical bridge),6,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.4 Fig. 6(a),,"Passive optical loopback, grating couplers; fine-pitch TSV and microbumps; embedded in interposer mold."
+ectc51687.2025.00062-a-c4,ectc51687.2025.00062-a,bridge,yes,yes,"silicon bridge test chips (EIC/electrical bridge, EB-1..6)",6,,,,,,,,,Si,,stated,text,count:figure_image,p.2 Sec. II.A; p.4 Fig. 6(a),,Count from Fig. 6(a) labels EB-1..EB-6; fine-pitch TSV and microbumps.
+ectc51687.2025.00062-a-c5,ectc51687.2025.00062-a,dtc,,yes,embedded silicon capacitors (DTC-1..6),6,,,,,,,,,Si,,stated,text,count:figure_image,p.2 Sec. II.A; p.3 Fig. 5; p.4 Fig. 6(a),,Under XPU die for power integrity; 'DTC' per Fig. 5/6 labels.
+ectc51687.2025.00062-a-c6,ectc51687.2025.00062-a,other,,,Si/glass block (through-mold optical path),,,,,,,,,,Si or glass,,stated,text,,p.2 Sec. II.A; p.3 Sec. II.B; p.5 Fig. 8,,Attached over grating coupler with optical epoxy; CMP finish ~1 nm Ra.
+ectc51687.2025.00062-a-c7,ectc51687.2025.00062-a,fiber_array,,,FAU units,6,,,,,,,,,,,stated,text,count:schematic,p.2 Sec. II.A; p.3 Fig. 4,,Attached on top of Si/glass block; count from Fig. 4 top-view schematic.
+ectc51687.2025.00062-a-c8,ectc51687.2025.00062-a,capacitor,,,die side capacitors (package substrate),,,,,,,,,,,,stated,schematic,,p.3 Fig. 4,,Shown in top-view schematic only; count not given.
+ectc51687.2025.00062-a-c9,ectc51687.2025.00062-a,interposer,,,RDL-first organic interposer (2x reticle),1,,,,,,,,,,,design_target,text,,p.2 Sec. II.A; p.3 Sec. II.B,,"4 RDL layers, L/S 2/2 um per reference PDK."
+ectc51687.2025.00062-a-c10,ectc51687.2025.00062-a,mold,,,mold compound (interposer and top encapsulation),,,,,,,,,,,,stated,text,,p.3 Sec. II.B,,Two mold/cure/grind steps; product not stated.
+ectc51687.2025.00062-a-c11,ectc51687.2025.00062-a,underfill,,,underfill (bridge attach and chiplet attach),,,,,,,,,,,,stated,text,,p.3 Sec. II.B,,
+ectc51687.2025.00062-a-c12,ectc51687.2025.00062-a,adhesive,,,optical epoxy (Si/glass block to grating coupler),,,,,,,,,,optical epoxy,,stated,text,,p.3 Sec. II.B,,
+ectc51687.2025.00062-a-c13,ectc51687.2025.00062-a,stiffener,,,stiffener ring,1,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 3,,
+ectc51687.2025.00062-a-c14,ectc51687.2025.00062-a,substrate,,,organic package substrate,1,,,,,,,,,,,stated,text,,p.3 Sec. II.B; p.2 Fig. 3,,
+ectc51687.2025.00062-b-c1,ectc51687.2025.00062-b,pic,yes,,PIC test chip with grating couplers,,,,,,,,,,,,stated,caption,,p.5 Fig. 9,,
+ectc51687.2025.00062-b-c2,ectc51687.2025.00062-b,other,,,glass spacer (glass block) on gratings,,,,,,,,,,glass,,stated,caption,,p.5 Fig. 9; p.5 Sec. III.C,,
+ectc51687.2025.00062-b-c3,ectc51687.2025.00062-b,fiber_array,,,FAU with glass lens array,,,,,,,,,,,,stated,caption,,p.5 Fig. 9,,
+ectc51687.2025.00007-a-c1,ectc51687.2025.00007-a,other,yes,,bare Si wafer with EM/TDDB test patterns,1,,,,,,,,,Si,,stated,text,,p.2 Sec. II.B,,
+ectc51687.2025.00007-b-c1,ectc51687.2025.00007-b,base_die,yes,,daisy-chain (DC) bottom die with TSVs and BS RDL,1,,,,,,,,,,,stated,text,,p.4 Sec. III.C; p.2 Sec. II.A; p.2 Fig. 1,,Called 'bottom die' / 'DC wafer'; base_die mapping inferred.
+ectc51687.2025.00007-b-c2,ectc51687.2025.00007-b,dram,,,8-layer stack assembled on bottom die backside,8,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.4 Sec. III.C,,Die type inferred from '3D stacked memory'; whether DC dummy dies not stated.
+tcpmt.2026.3650893-a-c1,tcpmt.2026.3650893-a,dummy_die,yes,,top die with through-holes,1,5,5,,,,,,,silicon,,design_target,text,material:schematic,p.2 Sec. II.A; p.2 Fig. 3(a),,140 um pitch Cu I/Os; 165 um pitch through-holes.
+tcpmt.2026.3650893-a-c2,tcpmt.2026.3650893-a,dummy_die,yes,,bottom substrate,1,10,10,,,,,,,silicon,,design_target,text,material:schematic,p.2 Sec. II.A; p.2 Fig. 3(a),,
+tcpmt.2026.3650893-a-c3,tcpmt.2026.3650893-a,underfill,,,vapor-phase MOF underfill,,,,,,,,,,ZIF-8 MOF (from ALD ZnO),,stated,text,,p.2 Sec. II.B; p.3 Sec. III.C,,Shear tested before/after MOF underfill (Fig. 8); MOF recipe for this TV not stated.
+tcpmt.2026.3650893-b-c1,tcpmt.2026.3650893-b,dummy_die,yes,,die without through-holes,,,,,,,,,,,,stated,text,,p.2 Sec. II.C,,
+tcpmt.2026.3650893-c-c1,tcpmt.2026.3650893-c,dummy_die,yes,,top die (multipitch),1,2,2,,,,,,,silicon,,design_target,text,material:figure_image,p.2 Sec. III.A; p.2 Fig. 5(a); p.3 Fig. 7(b),,Daisy chains and Kelvin structures; electrical readout pads.
+tcpmt.2026.3650893-c-c2,tcpmt.2026.3650893-c,dummy_die,yes,,bottom substrate,1,,,,,,,,,silicon with SiO2,,measured,figure_image,,p.3 Fig. 7(c),,Size not stated.
+tcpmt.2026.3650893-c-c3,tcpmt.2026.3650893-c,underfill,,,vapor-phase MOF underfill,,,,,,,,,,ZIF-8 MOF (ALD ZnO seed + 2-methylimidazole conversion),,stated,text,,p.2 Sec. II.B; p.2 Sec. III.A,,7 supercycles fill the 1 um die-to-substrate gap.

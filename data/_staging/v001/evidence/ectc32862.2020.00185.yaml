@@ -1,0 +1,64 @@
+paper_id: ectc32862.2020.00185
+verified_on: 2026-10-18
+source_files:
+  - references/ectc32862.2020.00185/text.md
+  - references/ectc32862.2020.00185/source.json
+  - references/ectc32862.2020.00185/figures/page_02.png
+  - references/ectc32862.2020.00185/figures/page_03.png
+  - references/ectc32862.2020.00185/figures/page_04.png
+  - references/ectc32862.2020.00185/figures/page_05.png
+  - references/ectc32862.2020.00185/figures/page_06.png
+  - references/ectc32862.2020.00185/figures/page_07.png
+figure_reading_method: >-
+  All tables (1-6) are images. Tables 2-5 and Figs. 10, 13, 14, 16 re-rendered from source.pdf at 300-400 dpi in
+  scratch (not kept). Fig. 14 and Fig. 16 values are printed data labels; Fig. 13 values only fit equations used.
+entries:
+  - {table: metrics, row_id: ectc32862.2020.00185-a-m12, field: value, value: 0.0013, unit: um/um, basis: measured, locator: "p.6 Fig. 13", note: "printed fit y = 0.0013x + 3.7298 on X-axis die shift plot"}
+  - {table: metrics, row_id: ectc32862.2020.00185-a-m13, field: value, value: 0.0014, unit: um/um, basis: measured, locator: "p.6 Fig. 13", note: "printed fit y = 0.0014x - 24.657 on Y-axis die shift plot"}
+derived:
+  - {table: process_steps, row_id: ectc32862.2020.00185-F1-s04, field: pressure_mpa, value: 4.903, formula: "50 kgf/cm2 x 0.0980665 MPa/(kgf/cm2)", inputs: "p.4 Table 3"}
+  - {table: process_steps, row_id: ectc32862.2020.00185-F2-s04, field: pressure_mpa, value: 4.903, formula: "50 kgf/cm2 x 0.0980665", inputs: "p.4 Table 3"}
+  - {table: process_steps, row_id: ectc32862.2020.00185-F1-s01, field: pressure_mpa, value: 0.2, formula: "200 kPa / 1000", inputs: "p.2 Sec. IV.A"}
+  - {table: process_steps, row_id: ectc32862.2020.00185-F1-s05, field: time_s, value: 14400, formula: "4 h x 3600", inputs: "p.3 Sec. IV.A"}
+  - {table: process_steps, row_id: ectc32862.2020.00185-F1-s12, field: time_s, value: 60, formula: "1 min x 60", inputs: "p.6 Sec. IV.B"}
+  - {table: stack_layers, row_id: ectc32862.2020.00185-a-L04, field: thickness_um, value: 0.1, formula: "1000 A x 1e-4 um/A", inputs: "p.6 Sec. IV.B"}
+  - {table: stack_layers, row_id: ectc32862.2020.00185-a-L05, field: thickness_um, value: 0.1, formula: "1000 A x 1e-4 um/A", inputs: "p.6 Sec. IV.B"}
+  - {table: process_steps, row_id: ectc32862.2020.00185-F1-s14, field: thickness_um, value: 0.2, formula: "1000 A Ti + 1000 A Cu", inputs: "p.6 Sec. IV.B"}
+  - {table: components, row_id: ectc32862.2020.00185-a-c3, field: thickness_um, value: 1100, formula: "1.1 mm x 1000", inputs: "p.2 Sec. IV.A"}
+  - {table: components, row_id: ectc32862.2020.00185-a-c1, field: thickness_um, value: 700, formula: "0.7 mm x 1000", inputs: "p.5 Sec. IV.B"}
+  - {table: "process_steps", row_id: "ectc32862.2020.00185-F1-s04", field: "thickness_um", value: 800, formula: "0.8 mm x 1000", inputs: "p.5 Sec. IV.B (reconstructed panel 600 x 600 x 0.8 mm)"}
+  - {table: "process_steps", row_id: "ectc32862.2020.00185-F4-s01", field: "pressure_mpa", value: 0.2, formula: "200 kPa / 1000", inputs: "p.2 Sec. IV.A"}
+  - {table: "process_steps", row_id: "ectc32862.2020.00185-F2-s04", field: "pressure_mpa", value: 4.903, formula: "50 kgf/cm2 x 0.0980665", inputs: "p.4 Table 3 run 1 (row re-keyed from F2-s01)"}
+conflicts:
+  - {table: stack_layers, row_id: ectc32862.2020.00185-a-L03, field: thickness_um, values: [7, 10], locators: ["p.2 Table 1", "p.6 Sec. IV.B"], chosen: 7, why: "spec table over text; text says 10 um coated (coated vs final thickness not stated)"}
+  - {table: metrics, row_id: ectc32862.2020.00185-a-m14, field: value, values: [66, 60], locators: ["p.5-6 Sec. IV.B; p.6 Fig. 14 (-66.31, 65.0385)", "p.1 Abstract; p.7 Sec. V (~60 um)"], chosen: 66, why: "body text matches Fig. 14 data labels"}
+  - {table: metrics, row_id: ectc32862.2020.00185-a-m11, field: value, values: [324, "Fig. 13 Y-axis last point about 365 (no data label)"], locators: ["p.5 Sec. IV.B", "p.6 Fig. 13"], chosen: 324, why: "explicit stated value; plot point unlabeled and read by eye"}
+  - {table: process_steps, row_id: ectc32862.2020.00185-F1-s24, field: result, values: ["100mm x 100mm packages", "10mm x 10mm package"], locators: ["p.6 Sec. IV.B", "p.2 Table 1"], chosen: "10 x 10 mm package (TV)", why: "100 mm likely typo; recorded as written in step result"}
+  - {table: metrics, row_id: ectc32862.2020.00185-a-m7, field: value, values: [0.5, 3.5], locators: ["p.6 Fig. 16 after molding", "p.4 Table 3 run 4; p.3 Sec. IV.A"], chosen: "both kept", why: "different panels/stages (Table 3 after PMC on de-bonded panel); not reconciled in paper"}
+  - {table: test_vehicles, row_id: ectc32862.2020.00185-a, field: package_thickness_mm, values: [0.8, 0.4], locators: ["p.6 Sec. IV.C reliability samples 10x10x0.8 mm", "p.6 Sec. IV.B thinning to 400 um demonstrated"], chosen: 0.8, why: "reliability samples stated at 0.8 mm"}
+excluded:
+  - "RDL LW/LS 2/2 um and 3 um dielectric via opening from litho optimization in previous work refs [8,11]"
+  - "panel sizes 300x300 to 650x550 mm of other industry players, refs [2-4]"
+not_reported: [electrical_interfaces, optical_interfaces, "dielectric and PR material names", "solder alloy", "die count per panel", "mold thickness on package", "dielectric cure conditions", "seed etch method", "warpage sign convention", "reliability electrical daisy-chain resistance results", "sheet molding lamination pressure/time values"]
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185", change: "process_flow_level full (unchanged); flows 5 -> 4", reason: "re-pass: F1 integration, F2 blanket molding (b, c merged), F3 sheet molding options (d), F4 3-step lamination (e)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F1-s01", change: "equipment 'tape laminator' set; glass carrier moved from target to material; split N1/M1; locator + Fig. 2(a)", reason: "review B miss 1: equipment named p.2 Sec. IV.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F1-s04", change: "equipment 'compression molding tool with bottom cavity'; Table 3 runs 2-4 moved to split; target reconstructed panel 600 x 600 x 0.8 mm, thickness_um 800", reason: "review B miss 1 (p.3 Sec. IV.A); rule 7 targets"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F1-s02;ectc32862.2020.00185-F1-s03", change: "die pitch 10.1/10.08 mm moved to split; dispensing jig as equipment", reason: "rule 7 split/equipment (p.3 Fig. 4(a), p.5 Sec. IV.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F1", change: "deleted former step F1-s08 (die shift measurement, inline_inspection); measurement method added to metrics a-m11, a-m14 condition", reason: "measurement, not a build step; values already in a-m11..a-m18"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F1-s11;ectc32862.2020.00185-F1-s12;ectc32862.2020.00185-F1-s13", change: "categories cleaning -> descum, other -> degas; atmosphere o2 / ar typed", reason: "new step_category values; typed atmosphere"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F1-s15;ectc32862.2020.00185-F1-s16", change: "old PR step (coat + LDI litho) split into slit coating and exposure/development", reason: "rule 7: text lists PR coating, litho as separate steps (p.6 Sec. IV.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F1-s20;ectc32862.2020.00185-F1-s21", change: "old dielectric 2 step split into coating and patterning", reason: "p.6 Sec. IV.B 'coated and patterned'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F1-s22", change: "bump size / pitch moved from conditions to target; locator + Table 1, Fig. 2(h)", reason: "rule 7 targets"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F1-s23", change: "performed -> no; thickness_in_um 800 set; note: thinning only demonstrated", reason: "review B miss 2: thinning 'evaluated' (p.6 Sec. IV.B); reliability units 10 x 10 x 0.8 mm (p.6 Sec. IV.C)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F1-s24", change: "note: dicing evaluated as demonstration; kept performed (packages were singulated for reliability)", reason: "review B miss 2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F1", change: "misused target cells (substrate names) cleared; step_basis set on all rows; step ids renumbered", reason: "target = stated dimension a step produces"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F2", change: "F2 (b) and F3 (c) blanket molding merged into one flow with tape split and per-EMC delta rows; old F3 deleted", reason: "one blanket-molding evaluation (p.3 Sec. IV.A); conditions only for granular (Table 3 run 1)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F3", change: "old F4 (d) single composite row -> routes 'option 1 sequential lamination' / 'option 2 pre-laminate then laminate' with run split", reason: "Fig. 7 (a)/(b) are alternative routes; Table 4 runs 1-4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F4-s01;ectc32862.2020.00185-F4-s02", change: "added tape lamination (N1/M1 split) and die placement to TV e flow", reason: "review B miss 3: Table 4 runs 5-6 'glass with mold tape N1/M1 and dies'; p.5 Fig. 10 700 um die"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F4-s04", change: "split filled with Table 5 conditions; result records chosen lower pressure + shorter vacuum (TTV <27 um, overflow <1 mm) and jig (<16 um)", reason: "review B miss 4 (p.5 Sec. IV.A, Table 5)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F4-s03;ectc32862.2020.00185-F4-s05", change: "equipment vacuum press (Table 4 runs 5-6); flattening split", reason: "p.4 Sec. IV.A, Table 4, Table 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F2-s04", change: "step: 'blanket compression molding, bottom cavity' -> 'blanket compression molding of granular EMC G1, bottom cavity'", reason: "v001 identical_delta_text: deltas kept (conditions stated only for G1, Table 3 run 1); step text names the variant"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F2-s05", change: "step: 'blanket compression molding, bottom cavity' -> 'blanket compression molding of liquid EMC L3, bottom cavity'", reason: "v001 identical_delta_text: deltas kept (no conditions stated for L3); step text names the variant"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F1-s09", change: "target: '' -> 'pad openings at 60 um pad pitch'", reason: "v001 target_missing a-i1: dielectric 1 opens the die bond pads, Table 1 pad pitch 60 um (p.2)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc32862.2020.00185-F1-s09", change: "notes: '' -> 'Table 1 pad size 40 um and opening 30 um are test-chip pad specs (incoming die), not produced here; dielectric via size not stated.'", reason: "a-i1 diameter 30 um is the test-chip pad opening, not a dielectric via made in this flow"}

@@ -1,0 +1,28 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51906.2022.00179-a-c1,ectc51906.2022.00179-a,dummy_die,yes,,"top die (full thickness, FS Ni/Sn bumps + Ni spacer bumps)",,,,,,,,,,Si,,stated,mixed,,p.2 Sec. III; p.2 Fig. 4,,"Daisy chain, Kelvin and EM test structures."
+ectc51906.2022.00179-a-c2,ectc51906.2022.00179-a,dummy_die,yes,,landing die (Ni/Cu pads),,,,,,,,,,Si,,stated,mixed,,p.2 Sec. III; p.2 Fig. 4,,
+ectc51906.2022.00179-a-c3,ectc51906.2022.00179-a,underfill,,,capillary underfill (CUF),,,,,,,,,,,,stated,text,,p.2 Sec. III; p.5 Sec. VI,,Product not named; incomplete fill between 5 um pitch bumps.
+ectc51906.2022.00179-b-c1,ectc51906.2022.00179-b,dummy_die,yes,,"top die (50 um thin, FS Ni/Sn bumps, BS M1B/VIA1B)",,,,50,,,,,,Si,,design_target,text,,p.1 Sec. III; p.2 Sec. III; p.2 Fig. 4,,
+ectc51906.2022.00179-b-c2,ectc51906.2022.00179-b,dummy_die,yes,,landing die (Ni/Cu pads),,,,,,,,,,Si,,stated,mixed,,p.2 Sec. III; p.2 Fig. 4,,
+ectc51906.2022.00179-b-c3,ectc51906.2022.00179-b,underfill,,,capillary underfill (CUF),,,,,,,,,,,,stated,text,,p.2 Sec. III,,
+ectc51906.2022.00179-b-c4,ectc51906.2022.00179-b,other,,,"glass carrier (temporary, laser debonded)",,,,,,,,,,glass,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,
+ectc51906.2022.00179-c-c1,ectc51906.2022.00179-c,other,,,"device wafer (TSV-middle, thinned)",1,,,50,,,,,,Si,,design_target,text,,p.1 Sec. III; p.3 Sec. IV,,300 mm.
+ectc51906.2022.00179-c-c2,ectc51906.2022.00179-c,other,,,glass carrier wafer (temporary),1,,,,,,,,,glass,,stated,text,,p.1 Sec. II; p.3 Sec. IV,,
+ectc51906.2022.00179-c-c3,ectc51906.2022.00179-c,adhesive,,,temporary bonding material (TBM) with laser release layer,,,,,,,,,,TBM (product not named); laser release layer,,stated,text,,p.1 Sec. II; p.3 Sec. IV,,"TBM coated on carrier, release layer on device wafer. Thermal budget value not stated."
+ectc51906.2022.00179-d-c1,ectc51906.2022.00179-d,dummy_die,yes,,stacked B2F dies (tiers T0-T3 shown),5,,,,,,,,,Si,,stated,mixed,,p.4 Sec. V; p.5 Sec. V; p.5 Fig. 14,,Die thickness not stated for this maskset.
+ectc51906.2022.00179-e-c1,ectc51906.2022.00179-e,dummy_die,yes,,STCA top die (full thickness),,,,,,,,,,Si,,stated,schematic,,p.6 Fig. 19,,
+ectc51906.2022.00179-e-c2,ectc51906.2022.00179-e,dummy_die,yes,,STCB landing die (Ni/Cu pads),,,,,,,,,,Si,,stated,schematic,,p.6 Fig. 19,,
+ectc51906.2022.00179-e-c3,ectc51906.2022.00179-e,underfill,,,wafer-level photo-patternable polymer as underfill,,,,,,,,,,,,stated,mixed,,p.6 Sec. VII; p.6 Fig. 19; p.6 Fig. 20,,Product not named.
+ectc51687.2025.00048-a-c1,ectc51687.2025.00048-a,logic_soc,,,Logic chip,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 2.1,,Count not stated.
+ectc51687.2025.00048-a-c2,ectc51687.2025.00048-a,hbm,,,HBM,12,,,,,,,,,,,design_target,text,,p.4 Sec. III.E; p.2 Fig. 2.2,,
+ectc51687.2025.00048-a-c3,ectc51687.2025.00048-a,bridge,,yes,Si bridge die (multi),,,,,,,,,,Si,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 2.1; p.2 Fig. 2.3; p.3 Sec. III.A,,"Count, size, thickness not stated; attached with DAF, molded, ground to expose Cu bumps."
+ectc51687.2025.00048-a-c4,ectc51687.2025.00048-a,die_attach_film,,,DAF (bridge attach),,,,,,,,,,,,stated,text,,p.2 Sec. III.A; p.4 Sec. IV,,
+ectc51687.2025.00048-a-c5,ectc51687.2025.00048-a,interposer,,,"2.3D PLP organic RDL interposer (upper RDL, mold with Cu posts and bridges, lower RDL)",1,95,105,,,,,,,,,design_target,schematic,,p.2 Fig. 2.1; p.2 Fig. 2.2,,Size as labeled 'Interposer Size'; unit size 51.00x67.72 mm2 also labeled.
+ectc51687.2025.00048-a-c6,ectc51687.2025.00048-a,mold,,,interposer mold (EMC),,,,,,,,,,EMC,,stated,text,,p.3 Sec. III.B; p.4 Sec. III.E; p.4 Sec. IV,,Mold material changed to reduce warpage; product not named.
+ectc51687.2025.00048-a-c7,ectc51687.2025.00048-a,substrate,,,package substrate,1,,,,,,,,,,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 2.3; p.5 Fig. 4.2,,
+tcpmt.2024.3443855-a-c1,tcpmt.2024.3443855-a,interposer,,,TSV active interposer (PMIC and SRAM functions),1,22,20,100,,,,,55 nm,Si,,measured,mixed,thickness_um:design_target;process_node:stated,p.2 Sec. II.A; p.3 Fig. 2; p.7 Sec. IV.A; p.7 Fig. 16(a)(b),,Thickness = Si substrate 100 um in Fig. 2 schematic; diced wafer 103.52 um measured in Fig. 14(d). Seal ring around die.
+tcpmt.2024.3443855-a-c2,tcpmt.2024.3443855-a,logic_soc,,,processing element die (PED1-PED4),4,,,,,,,,,,,design_target,schematic,,p.2 Fig. 1(a); p.2 Sec. II.A,,Planned flip-chip on microbumps; advanced node; sizes not given. Assembly not reported in this work.
+tcpmt.2024.3443855-a-c3,tcpmt.2024.3443855-a,substrate,,,package substrate,1,,,,,,,,,,,design_target,schematic,,p.2 Fig. 1(b); p.2 Sec. II.A,,Planned; connected to test board via socket. No dimensions.
+ectc51846.2026.00123-a-c1,ectc51846.2026.00123-a,dtc,,yes,"multi-terminal silicon deep-trench capacitor, 2.8 uF, 55 terminals",1,,,200,,,,,,silicon,,design_target,text,,p.3 Sec. II; p.3 Fig. 2; p.8 Sec. Conclusion,,"Pad height 10 um, pad pitch 200 um. Abstract gives 210 um (die plus pad, see evidence conflicts). Die x/y not reported."
+ectc51846.2026.00123-a-c2,ectc51846.2026.00123-a,substrate,,no,glass substrate with laser-ablated blind cavity,1,,,300,,,200,,,glass,AGC Inc.,design_target,text,,p.3 Sec. II; p.4 Sec. II; p.8 Ack.,,"Supplier from acknowledgment (ack). Cavity lateral size about 10 um larger than die; die/cavity x,y not reported."
+ectc51846.2026.00123-a-c3,ectc51846.2026.00123-a,die_attach_film,,yes,die-attach film (DAF),1,,,,,,,,,,,stated,text,,p.4 Sec. II; p.3 Fig. 3,,Laminated and cured on die before placement; product and thickness not reported.

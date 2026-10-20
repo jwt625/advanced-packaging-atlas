@@ -28,6 +28,8 @@ scratch folder). Schema: `data/schema/packaging.schema.yaml` v2.3 tables `author
 - Shared affiliation blocks without per-author markers: assign each author the block(s) the layout ties them to; if the
   mapping is ambiguous, say so in the note and the report.
 
+- Subsidiaries (2026-10-20): an entity printed under its own name (parent brand + region/function, or its own legal form: "SK hynix America Inc.", "Amkor Technology Korea, Inc.") is its own org with parent_org = the parent brand org; a location printed after the parent's name ("Intel Corporation, Kulim, Malaysia", "ASM, Belgium") stays the parent; divisions, labs, offices and facility names go in unit. Canonical names drop legal-form suffixes (Co., Ltd., Inc., Corporation) and keep the other printed words.
+
 ## organizations.csv (proposed, one row per org_name you used)
 org_name, org_type (university | company | research_institute | government_lab | foundry | facility | consortium |
 other), country (headquarters / main campus), region (north_america | south_america | europe | east_asia | south_asia

@@ -1,0 +1,39 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc51529.2024.00144-a01-1,ectc51529.2024.00144,1,Chih-Hsin Lu,1,primary,TSMC,,Hsinchu,TW,byline order read row-major from page-1 image,paper,p.1 affiliations
+ectc51529.2024.00144-a02-1,ectc51529.2024.00144,2,Chia-Chia Lin,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a03-1,ectc51529.2024.00144,3,Tzu-Chun Tang,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a04-1,ectc51529.2024.00144,4,Chung-Yi Lin,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a05-1,ectc51529.2024.00144,5,Jay Chang,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a06-1,ectc51529.2024.00144,6,Chung-Hao Tsai,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a07-1,ectc51529.2024.00144,7,Harry Hsia,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a08-1,ectc51529.2024.00144,8,J.C. Twu,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a09-1,ectc51529.2024.00144,9,C.S. Liu,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a10-1,ectc51529.2024.00144,10,Gene Wu,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a11-1,ectc51529.2024.00144,11,Kuo-Chung Yee,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a12-1,ectc51529.2024.00144,12,Douglas C.H. Yu,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51687.2025.00378-a01-1,ectc51687.2025.00378,1,Hyunggyu Park,1,primary,Georgia Institute of Technology,School of Electrical and Computer Engineering,"Atlanta, GA",US,country from printed city,paper,p.1 affiliations
+ectc51687.2025.00378-a02-1,ectc51687.2025.00378,2,Muhannad S. Bakir,1,primary,Georgia Institute of Technology,School of Electrical and Computer Engineering,"Atlanta, GA",US,country from printed city,paper,p.1 affiliations
+ectc51846.2026.00035-a01-1,ectc51846.2026.00035,1,Shinichi Arioka,1,primary,AOI Electronics,,Takamatsu,JP,,paper,p.1 affiliations
+ectc51846.2026.00035-a02-1,ectc51846.2026.00035,2,Tanapun Srichanthamit,1,primary,AOI Electronics,,Tokyo,JP,,paper,p.1 affiliations
+ectc51846.2026.00035-a03-1,ectc51846.2026.00035,3,Koji Iwabu,1,primary,AOI Electronics,,Takamatsu,JP,,paper,p.1 affiliations
+ectc51846.2026.00035-a04-1,ectc51846.2026.00035,4,Takashi Suzuki,1,primary,AOI Electronics,,Takamatsu,JP,,paper,p.1 affiliations
+ectc51846.2026.00035-a05-1,ectc51846.2026.00035,5,Yoshiaki Aizawa,1,primary,AOI Electronics,,Takamatsu,JP,,paper,p.1 affiliations
+ectc51846.2026.00035-a06-1,ectc51846.2026.00035,6,Yoichiro Kurita,1,primary,Institute of Science Tokyo,,Yokohama,JP,,paper,p.1 affiliations
+ectc51846.2026.00156-a01-1,ectc51846.2026.00156,1,M. Baris Dogruoz,1,primary,Microsoft,,"Mountain View, CA",US,byline order row-major from page image; text layer column-major; printed: Microsoft; printed email under this name is samajety@ (swapped with Majety),paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a02-1,ectc51846.2026.00156,2,Sashikanth Majety,1,primary,Microsoft,,"Hillsboro, OR",US,byline order row-major from page image; text layer column-major; printed: Microsoft; printed email under this name is barisdogruoz@ (swapped with Dogruoz),paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a03-1,ectc51846.2026.00156,3,Venkata Chivukula,1,primary,Microsoft,,"Mountain View, CA",US,byline order row-major from page image; text layer column-major; printed: Microsoft,paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a04-1,ectc51846.2026.00156,4,Cam Turner,1,primary,Microsoft,,Calgary,CA,byline order row-major from page image; text layer column-major; printed: Microsoft,paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a05-1,ectc51846.2026.00156,5,Bharath Ramakrishnan,1,primary,Microsoft,,"Redmond, WA",US,byline order row-major from page image; text layer column-major; printed: Microsoft,paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a06-1,ectc51846.2026.00156,6,Husam Alissa,1,primary,Microsoft,,"Redmond, WA",US,byline order row-major from page image; text layer column-major; printed: Microsoft,paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a07-1,ectc51846.2026.00156,7,Srikant Bharadwaj,1,primary,Microsoft,,"Redmond, WA",US,byline order row-major from page image; text layer column-major; printed: Microsoft,paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a08-1,ectc51846.2026.00156,8,Camille Couturier,1,primary,Microsoft,,Nantes,FR,byline order row-major from page image; text layer column-major; printed: Microsoft,paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a09-1,ectc51846.2026.00156,9,Malik Fahrni,1,primary,Corintis,,Lausanne,CH,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a10-1,ectc51846.2026.00156,10,Yann Meier,1,primary,Corintis,,Lausanne,CH,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a11-1,ectc51846.2026.00156,11,Remco Van Erp,1,primary,Corintis,,Lausanne,CH,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51846.2026.00156-a12-1,ectc51846.2026.00156,12,Samuel Higginbotham,1,primary,Corintis,,Lausanne,CH,byline order row-major from page image; text layer column-major,paper,p.1 affiliations (page image)
+ectc51906.2022.00061-a01-1,ectc51906.2022.00061,1,Shan-Bo Wang,1,primary,ASE,"Product Characterization, CRD",Kaohsiung,TW,,paper,p.1 affiliations
+ectc51906.2022.00061-a02-1,ectc51906.2022.00061,2,An-Hsuan Hsu,1,primary,ASE,"Product Characterization, CRD",Kaohsiung,TW,,paper,p.1 affiliations
+ectc51906.2022.00061-a03-1,ectc51906.2022.00061,3,Chin-Li Kao,1,primary,ASE,"Product Characterization, CRD",Kaohsiung,TW,,paper,p.1 affiliations
+ectc51906.2022.00061-a04-1,ectc51906.2022.00061,4,David Tarng,1,primary,ASE,"Product Characterization, CRD",Kaohsiung,TW,,paper,p.1 affiliations
+ectc51906.2022.00061-a05-1,ectc51906.2022.00061,5,Chien-Lung Liang,1,primary,National Cheng Kung University,Department of Materials Science and Engineering,Tainan,TW,,paper,p.1 affiliations
+ectc51906.2022.00061-a06-1,ectc51906.2022.00061,6,Kwang-Lung Lin,1,primary,National Cheng Kung University,Department of Materials Science and Engineering,Tainan,TW,,paper,p.1 affiliations

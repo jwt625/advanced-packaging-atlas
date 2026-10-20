@@ -1,0 +1,35 @@
+paper_id: ectc51529.2024.00087
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00087/text.md
+  - references/ectc51529.2024.00087/source.json
+  - references/ectc51529.2024.00087/figures/page_02.png
+  - references/ectc51529.2024.00087/figures/page_03.png
+  - references/ectc51529.2024.00087/figures/page_04.png
+  - references/ectc51529.2024.00087/figures/cand/p02_fig2.png
+  - references/ectc51529.2024.00087/figures/cand/p02_fig3.png
+  - references/ectc51529.2024.00087/figures/cand/p03_fig4.png
+  - references/ectc51529.2024.00087/figures/cand/p03_fig5.png
+  - references/ectc51529.2024.00087/figures/cand/p04_fig6.png
+  - references/ectc51529.2024.00087/figures/cand/p04_fig7.png
+figure_reading_method: >-
+  Candidate crops and a 300 dpi re-crop of Fig. 4(a) (WIPNU % axis, points read against 5% ticks, +/-0.3%). Figs. 3, 4(b),
+  5(a), 6 use normalized or unitless axes; only text ratios entered from them.
+entries:
+  - {table: metrics, row_id: ectc51529.2024.00087-a-m3, field: value, value: 19.6, unit: "%", basis: measured, locator: "p.3 Fig. 4(a)", note: "red circle, P 0.2 / Vr 0.4"}
+  - {table: metrics, row_id: ectc51529.2024.00087-a-m4, field: value, value: 4.2, unit: "%", basis: measured, locator: "p.3 Fig. 4(a)", note: "green triangle, P 1 / Vr 1.0"}
+derived: []
+conflicts:
+  - {table: interconnects, row_id: ectc51529.2024.00087-b-i1, field: ic_type, values: ["Cu vias", "Cu pillars"], locators: ["p.4 Sec. III.D", "p.4 Fig. 7 caption"], chosen: "other (Cu, revealed by CMP)", why: "text and caption name the feature differently; no dimensions to decide"}
+excluded:
+  - "Fig. 1 package form-factor trend reprinted from ref [1]"
+  - "Preston equation and generalized Prestonian model attributed to refs [3]-[5] (only this paper's fit R^2 entered)"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - dielectric material, thicknesses, absolute removal rates (all MRR normalized), absolute P, V, RPM, flow rate, polish time
+  - slurry, pad and conditioning-disk products; CMP tool vendor
+  - absolute TTV values; Cu via/pillar diameter, pitch, height; bridge die count, size, material
+  - reliability data
+source_quality:
+  - "Equations garbled in text.md (Preston, WIPNU); read from page renders."

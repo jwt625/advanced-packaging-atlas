@@ -1,0 +1,37 @@
+paper_id: ectc51529.2024.00128
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00128/text.md
+  - references/ectc51529.2024.00128/source.json
+  - references/ectc51529.2024.00128/figures/page_03.png
+  - references/ectc51529.2024.00128/figures/page_04.png
+  - references/ectc51529.2024.00128/figures/page_05.png
+  - references/ectc51529.2024.00128/figures/cand/p03_fig5a.png
+  - references/ectc51529.2024.00128/figures/cand/p03_fig6a.png
+  - references/ectc51529.2024.00128/figures/cand/p04_fig8.png
+  - references/ectc51529.2024.00128/figures/cand/p05_fig10a.png
+figure_reading_method: >-
+  Page renders p.3-5 at 150 dpi plus re-crops of Fig. 4, 11, 13. Fig. 4 markers read against 0.2 gridlines (+/-0.02);
+  Fig. 8 bar tops read against 20% gridlines (+/-2%); Fig. 13 CDF end points read +/-0.02. Fig. 9 AFM height axis
+  carries no numbers.
+entries:
+  - {table: interconnects, row_id: ectc51529.2024.00128-a-i3, field: density_per_mm2, value: 7700000, unit: per mm2, basis: design_target, locator: "p.1 Abstract; p.5 Sec. V", note: "abstract 'over 7.7M', conclusion 'up to 7.7 M'"}
+  - {table: metrics, row_id: ectc51529.2024.00128-c-m6, field: value_text, value: "no bar plotted", unit: "%", basis: simulated, locator: "p.4 Fig. 8", note: "0.6 um pitch, 0.25 a.u. recess: column has no bar (likely no contact), not entered as 0"}
+  - {table: metrics, row_id: ectc51529.2024.00128-c-m9, field: value_text, value: "no bar plotted", unit: "%", basis: simulated, locator: "p.4 Fig. 8", note: "0.3 um pitch, 0.25 a.u. recess: no bar"}
+derived: []
+conflicts:
+  - {table: interconnects, row_id: ectc51529.2024.00128-a-i3, field: density_per_mm2, values: ["over 7.7M connections/mm2", "up to 7.7 M connections/mm2"], locators: ["p.1 Abstract", "p.5 Sec. V"], chosen: "7.7e6 with qualifier approx", why: "bound direction contradicts between abstract and conclusion"}
+excluded:
+  - "100K connections/mm2 hybrid bonding density attributed to ref [2]"
+  - "Sub-1 um HB structures of ref [5]; Cu bulge-out mechanism of ref [7]; FEM method of ref [8]; pitting of ref [9]"
+  - "Fig. 2 generic comparison table (3D solder >10 um, HBI <0.4 to >10 um, sequential 3D ~100 nm, CFET <50 nm): technology-class values, not this TV"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - wafer diameter, die size, layer thicknesses, pad size, via size, dielectric materials by name
+  - bonding tool, bonding/anneal temperature and time, alignment accuracy (only 'close to equipment limits')
+  - absolute daisy-chain resistance, chain yield, 0.48 um pitch results
+  - Fig. 9 AFM height values (axis unlabeled numerically)
+source_quality:
+  - "Several candidates labelled '(a)' (p03_fig5a, p03_fig6a, p05_fig10a) actually contain both panels; Fig. 11 and Fig. 13 had no candidate; Fig. 9 candidate extends to x1=1.0."
+  - "Fig. 9 caption refers to 'Fig. 8(b)' for the pitting example; meant Fig. 9(b)."

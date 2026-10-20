@@ -1,0 +1,62 @@
+layer_id,tv_id,structure,side,seq,layer_name,feature,material,material_class,layer_role,reinforcement,thickness_um,thickness_min_um,thickness_max_um,line_um,space_um,via_diameter_um,via_pitch_um,roughness_ra_um,repeat,properties,basis,source,overrides,locator,qualifiers,notes
+ectc51906.2022.00072-a-L01,ectc51906.2022.00072-a,photonic,single,1,BEOL,,integrated BEOL (no porous ULK dielectric),,other,,,,,,,,,,,,stated,mixed,,p.3 Sec. II.B; p.3 Fig. 1(a),,"Multi-level metal/via stack in schematic only; level count, materials, thicknesses not stated."
+ectc51906.2022.00072-a-L02,ectc51906.2022.00072-a,photonic,single,2,top silicon,,Si,silicon,device,,0.15,,,,,,,,,,design_target,text,,p.2 Sec. II.A; p.3 Fig. 1(a),thickness_um:approx,Photonic devices and suspended metamaterial SSC; Ge-PD on this level (Fig. 1a); dual Si thicknesses.
+ectc51906.2022.00072-a-L03,ectc51906.2022.00072-a,photonic,single,3,BOX,,buried oxide,dielectric_inorganic,optical,,2,,,,,,,,,,design_target,text,,p.2 Sec. II.A; p.3 Fig. 1(a),,High index contrast; minimizes optical loss to Si substrate. Also labeled '2 um BOX' in Fig. 1(a).
+ectc51906.2022.00072-a-L04,ectc51906.2022.00072-a,photonic,single,4,Si carrier,,Si,silicon,carrier,,,,,,,,,,,,stated,mixed,,p.3 Fig. 1(a); p.3 Fig. 1(c); p.3 Sec. II.B,,Hosts crystallographic-etched Vgroove and SSC undercut; die thickness not stated (full wafer ~780 um).
+ectc51906.2022.00072-c-L01,ectc51906.2022.00072-c,coupon,single,1,BEOL,,"ultra low-K (ULK) dielectric, porous",,dielectric,,,,,,,,,,,,stated,text,,p.3 Sec. II.B,,Reference advanced CMOS BEOL; ULK composition not stated.
+ectc51909.2023.00268-a-L01,ectc51909.2023.00268-a,fan_out_rdl,single,1,RDL L1 fine lines (AP-HBM),,Cu,metal,conductor,,,,,1.5,1.5,,,,,,design_target,text,,p.3 Sec. 2; p.3 Fig. 5,,"Dozens of lines, average length 4 mm. Measured 1.60 um line at 2.93 um pitch (Fig. 10). Position in full stack not stated."
+ectc51909.2023.00268-a-L02,ectc51909.2023.00268-a,fan_out_rdl,single,2,seed,,Ti/Cu,metal,seed,,,,,,,,,,,,stated,text,,p.3 Sec. 2,,Seed etch undercut about 0.1 um per side (Sec. 3.1).
+ectc51909.2023.00268-a-L03,ectc51909.2023.00268-a,fan_out_rdl,single,3,dielectric under fine pattern,,,unspecified,dielectric,,,,,,,,,,,,stated,text,,p.4 Sec. 3.2; p.4 Fig. 10,,Material not stated; undulation about 1 um; coated over Cu pads with about 5 um undulation.
+ectc51909.2023.00268-a-L04,ectc51909.2023.00268-a,fan_out_rdl,single,4,Cu pads over vias (underlying layer),,Cu,metal,conductor,,,,,,,,,,,,stated,text,,p.3 Sec. 3.2; p.4 Fig. 9,,Imperfectly via-filled pads cause about 13 um undulation and open defects.
+ectc51909.2023.00268-b-L01,ectc51909.2023.00268-b,fan_out_rdl,single,1,SAP Cu lines,L/S 0.9/0.9,Cu,metal,conductor,,,,,0.9,0.9,,,,,,design_target,figure_image,,p.3 Fig. 7,,0.9/0.9 and 1/1 shown only at NA 0.18 and 0.24.
+ectc51909.2023.00268-b-L02,ectc51909.2023.00268-b,fan_out_rdl,single,1,SAP Cu lines,L/S 1/1,Cu,metal,conductor,,,,,1,1,,,,,,design_target,figure_image,,p.3 Fig. 7,,0.9/0.9 and 1/1 shown only at NA 0.18 and 0.24.
+ectc51909.2023.00268-b-L03,ectc51909.2023.00268-b,fan_out_rdl,single,1,SAP Cu lines,L/S 1.5/1.5,Cu,metal,conductor,,,,,1.5,1.5,,,,,,design_target,figure_image,,p.3 Fig. 7,,0.9/0.9 and 1/1 shown only at NA 0.18 and 0.24.
+ectc51909.2023.00268-b-L04,ectc51909.2023.00268-b,fan_out_rdl,single,2,seed,,Ti/Cu,metal,seed,,,,,,,,,,,,stated,text,,p.3 Sec. 2,,
+ectc51909.2023.00268-c-L01,ectc51909.2023.00268-c,fan_out_rdl,single,1,stitched Cu lines,isolated line 2 um / L/S 2/2,Cu,metal,conductor,,,,,2,2,,,,,,design_target,text,,p.4 Sec. 3.3; p.5 Fig. 11,,
+ectc51529.2024.00023-a-L01,ectc51529.2024.00023-a,photonic,single,1,IOX waveguide core,,"Ag+ ion-exchanged alkali glass, buried by Na+ IOX",glass,optical,,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 2; p.3 Sec. IV,,Core size and depth not stated.
+ectc51529.2024.00023-a-L02,ectc51529.2024.00023-a,glass_core,single,1,alkali glass wafer,,optimized alkali glass,glass,core,,,,,,,,,,,,stated,text,,p.3 Sec. III,,Thickness not stated.
+ectc51529.2024.00023-b-L01,ectc51529.2024.00023-b,glass_core,single,1,SiO2 barrier film,,SiO2,dielectric_inorganic,barrier,,2.45,,,,,,,,,,measured,figure_image,,p.4 Fig. 6,thickness_um:approx,Read from ToF-SIMS SiO2/substrate interface depth; not stated in text.
+ectc51529.2024.00023-b-L02,ectc51529.2024.00023-b,glass_core,single,2,alkali glass substrate,,alkali glass,glass,core,,,,,,,,,,,,stated,text,,p.3 Sec. V.A,,
+ectc51529.2024.00023-c-L01,ectc51529.2024.00023-c,photonic,single,1,PIC substrate,,Si,silicon,carrier,,,,,,,,,,,,stated,schematic,,p.3 Fig. 5,,
+ectc51529.2024.00023-c-L02,ectc51529.2024.00023-c,photonic,single,2,buried oxide (BOX),,SiO2 (BOX),dielectric_inorganic,dielectric,,,,,,,,,,,,stated,schematic,,p.3 Fig. 5,,
+ectc51529.2024.00023-c-L03,ectc51529.2024.00023-c,photonic,single,3,PIC cladding,cladding,SiO2,dielectric_inorganic,optical,,,,,,,,,,,,stated,schematic,,p.3 Fig. 5,,
+ectc51529.2024.00023-c-L04,ectc51529.2024.00023-c,photonic,single,3,PIC waveguide,SiN waveguide,SiN (Si3N4),dielectric_inorganic,optical,,,,,,,,,,,,stated,schematic,,p.3 Fig. 5,,
+ectc51529.2024.00023-c-L05,ectc51529.2024.00023-c,photonic,single,4,adhesive,,optical adhesive,adhesive,adhesive,,0.5,,,,,,,,,,design_target,text,,p.4 Sec. V.B,,
+ectc51529.2024.00023-c-L06,ectc51529.2024.00023-c,photonic,single,5,diffusion barrier layer,,SiO2 (index swept 1.45-1.9 in Fig. 8),dielectric_inorganic,barrier,,,0,0.4,,,,,,,,simulated,figure_image,,p.4 Fig. 7; p.4 Fig. 8,,Swept 0-400 nm (Fig. 7); 50 nm in Fig. 8; < 200 nm recommended.
+ectc51529.2024.00023-c-L07,ectc51529.2024.00023-c,photonic,single,6,IOX glass waveguide,,Ag-IOX alkali glass,glass,optical,,,,,,,,,,,,stated,schematic,,p.3 Fig. 5,,
+tcpmt.2026.3740312-a-L01,tcpmt.2026.3740312-a,die_stack,single,1,top Si chip,,Si,silicon,carrier,,,,,,,,,,,,stated,mixed,,p.2 Fig. 1(b),,
+tcpmt.2026.3740312-a-L02,tcpmt.2026.3740312-a,die_stack,single,2,Nb routing layer (top),,Nb,metal,conductor,,0.25,,,,,,,,,,design_target,mixed,,p.2 Sec. II.A; p.2 Fig. 1(b),,
+tcpmt.2026.3740312-a-L03,tcpmt.2026.3740312-a,die_stack,single,3,Ti adhesion/barrier (top),,Ti,metal,barrier,,0.3,,,,,,,,,,design_target,text,,p.3 Sec. II.A; p.6 Sec. III.D,,
+tcpmt.2026.3740312-a-L04,tcpmt.2026.3740312-a,die_stack,single,4,Au passivation (top),,Au,metal,surface_finish,,0.08,,,,,,,,,,design_target,text,,p.3 Sec. II.A; p.6 Sec. III.D,,Au area larger than In bump diameter.
+tcpmt.2026.3740312-a-L05,tcpmt.2026.3740312-a,die_stack,single,5,evaporated In bump (top),,In,metal,bonding,,5,,,,,,,,,,design_target,mixed,,p.2 Sec. I; p.2 Fig. 1(b),,5 um-thick evaporated In stated in Sec. I; original diameter 50 um.
+tcpmt.2026.3740312-a-L06,tcpmt.2026.3740312-a,die_stack,single,6,evaporated In bump (bottom),,In,metal,bonding,,5,,,,,,,,,,design_target,mixed,,p.2 Sec. I; p.2 Fig. 1(b),,5 um-thick evaporated In stated in Sec. I; original diameter 50 um.
+tcpmt.2026.3740312-a-L07,tcpmt.2026.3740312-a,die_stack,single,7,Au passivation (bottom),,Au,metal,surface_finish,,0.08,,,,,,,,,,design_target,text,,p.3 Sec. II.A; p.6 Sec. III.D,,
+tcpmt.2026.3740312-a-L08,tcpmt.2026.3740312-a,die_stack,single,8,Ti adhesion/barrier (bottom),,Ti,metal,barrier,,0.3,,,,,,,,,,design_target,text,,p.3 Sec. II.A; p.6 Sec. III.D,,
+tcpmt.2026.3740312-a-L09,tcpmt.2026.3740312-a,die_stack,single,9,Nb routing layer (bottom),,Nb,metal,conductor,,0.25,,,,,,,,,,design_target,mixed,,p.2 Sec. II.A; p.2 Fig. 1(b),,
+tcpmt.2026.3740312-a-L10,tcpmt.2026.3740312-a,die_stack,single,10,bottom Si chip,,high-resistivity Si,silicon,carrier,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 1(b),,
+tcpmt.2026.3740312-b-L01,tcpmt.2026.3740312-b,die_stack,single,1,top Si chip,,Si,silicon,carrier,,,,,,,,,,,,stated,mixed,,p.2 Fig. 1(b),,
+tcpmt.2026.3740312-b-L02,tcpmt.2026.3740312-b,die_stack,single,2,Nb routing layer (top),,Nb,metal,conductor,,0.25,,,,,,,,,,design_target,mixed,,p.2 Sec. II.A; p.2 Fig. 1(b),,Nb surface not thoroughly cleaned by in-situ Ar plasma: residual Nb oxide at Nb/Ti interface.
+tcpmt.2026.3740312-b-L03,tcpmt.2026.3740312-b,die_stack,single,3,Ti adhesion/barrier (top),,Ti,metal,barrier,,0.04,,,,,,,,,,design_target,text,,p.6 Sec. III.D,,
+tcpmt.2026.3740312-b-L04,tcpmt.2026.3740312-b,die_stack,single,4,Au passivation (top),,Au,metal,surface_finish,,0.08,,,,,,,,,,design_target,text,,p.6 Sec. III.D,,Au area larger than In bump diameter.
+tcpmt.2026.3740312-b-L05,tcpmt.2026.3740312-b,die_stack,single,5,evaporated In bump (top),,In,metal,bonding,,,,,,,,,,,,stated,mixed,,p.2 Sec. I; p.2 Fig. 1(b),,Bump size and thickness for sample1 not stated.
+tcpmt.2026.3740312-b-L06,tcpmt.2026.3740312-b,die_stack,single,6,evaporated In bump (bottom),,In,metal,bonding,,,,,,,,,,,,stated,mixed,,p.2 Sec. I; p.2 Fig. 1(b),,Bump size and thickness for sample1 not stated.
+tcpmt.2026.3740312-b-L07,tcpmt.2026.3740312-b,die_stack,single,7,Au passivation (bottom),,Au,metal,surface_finish,,0.08,,,,,,,,,,design_target,text,,p.6 Sec. III.D,,
+tcpmt.2026.3740312-b-L08,tcpmt.2026.3740312-b,die_stack,single,8,Ti adhesion/barrier (bottom),,Ti,metal,barrier,,0.04,,,,,,,,,,design_target,text,,p.6 Sec. III.D,,
+tcpmt.2026.3740312-b-L09,tcpmt.2026.3740312-b,die_stack,single,9,Nb routing layer (bottom),,Nb,metal,conductor,,0.25,,,,,,,,,,design_target,mixed,,p.2 Sec. II.A; p.2 Fig. 1(b),,Nb surface not thoroughly cleaned by in-situ Ar plasma: residual Nb oxide at Nb/Ti interface.
+tcpmt.2026.3740312-b-L10,tcpmt.2026.3740312-b,die_stack,single,10,bottom Si chip,,high-resistivity Si,silicon,carrier,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 1(b),,
+tcpmt.2026.3740312-c-L01,tcpmt.2026.3740312-c,die_stack,single,1,top Si chip,,Si,silicon,carrier,,,,,,,,,,,,stated,mixed,,p.2 Fig. 1(b),,
+tcpmt.2026.3740312-c-L02,tcpmt.2026.3740312-c,die_stack,single,2,Nb routing layer (top),,Nb,metal,conductor,,0.25,,,,,,,,,,design_target,mixed,,p.2 Sec. II.A; p.2 Fig. 1(b),,
+tcpmt.2026.3740312-c-L03,tcpmt.2026.3740312-c,die_stack,single,3,Ti adhesion/barrier (top),,Ti,metal,barrier,,0.3,,,,,,,,,,design_target,text,,p.3 Sec. II.A; p.6 Sec. III.D,,
+tcpmt.2026.3740312-c-L04,tcpmt.2026.3740312-c,die_stack,single,4,Au passivation (top),,Au,metal,surface_finish,,0.08,,,,,,,,,,design_target,text,,p.3 Sec. II.A; p.6 Sec. III.D,,Au area larger than In bump diameter.
+tcpmt.2026.3740312-c-L05,tcpmt.2026.3740312-c,die_stack,single,5,evaporated In bump (top),,In,metal,bonding,,5,,,,,,,,,,design_target,mixed,,p.2 Sec. I; p.2 Fig. 1(b),,Original 10 um CD; Fig. 6(g) profile shows about 4.1 um pre-bond height.
+tcpmt.2026.3740312-c-L06,tcpmt.2026.3740312-c,die_stack,single,6,evaporated In bump (bottom),,In,metal,bonding,,5,,,,,,,,,,design_target,mixed,,p.2 Sec. I; p.2 Fig. 1(b),,Original 10 um CD; Fig. 6(g) profile shows about 4.1 um pre-bond height.
+tcpmt.2026.3740312-c-L07,tcpmt.2026.3740312-c,die_stack,single,7,Au passivation (bottom),,Au,metal,surface_finish,,0.08,,,,,,,,,,design_target,text,,p.3 Sec. II.A; p.6 Sec. III.D,,
+tcpmt.2026.3740312-c-L08,tcpmt.2026.3740312-c,die_stack,single,8,Ti adhesion/barrier (bottom),,Ti,metal,barrier,,0.3,,,,,,,,,,design_target,text,,p.3 Sec. II.A; p.6 Sec. III.D,,
+tcpmt.2026.3740312-c-L09,tcpmt.2026.3740312-c,die_stack,single,9,Nb routing layer (bottom),,Nb,metal,conductor,,0.25,,,,,,,,,,design_target,mixed,,p.2 Sec. II.A; p.2 Fig. 1(b),,
+tcpmt.2026.3740312-c-L10,tcpmt.2026.3740312-c,die_stack,single,10,bottom Si chip,,high-resistivity Si,silicon,carrier,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 1(b),,
+tcpmt.2026.3740312-d-L01,tcpmt.2026.3740312-d,die,single,1,In layer,,In (e-beam evaporated),metal,bonding,,0.2,,,,,,,,,,design_target,text,,p.3 Sec. II.A; p.2 Fig. 2(a),,"Also a 5 um In bump on 250 nm Nb for EDS (Fig. 2(b,c))."
+tcpmt.2026.3740312-d-L02,tcpmt.2026.3740312-d,die,single,2,Nb routing layer,,Nb,metal,conductor,,0.25,,,,,,,,,,design_target,text,,p.2 Sec. II.A; p.2 Fig. 2,,
+tcpmt.2026.3740312-d-L03,tcpmt.2026.3740312-d,die,single,3,Si wafer,,high-resistivity Si,silicon,carrier,,,,,,,,,,,,stated,text,,p.2 Sec. II.A,,
+tcpmt.2026.3740312-e-L01,tcpmt.2026.3740312-e,die,single,1,In,,In,metal,bonding,,,,,,,,,,,,stated,mixed,,p.7 Sec. III.D; p.7 Fig. 9(c),,
+tcpmt.2026.3740312-e-L02,tcpmt.2026.3740312-e,die,single,2,Ti,,Ti,metal,barrier,,,,,,,,,,,,stated,mixed,,p.7 Sec. III.D; p.7 Fig. 9(c),,Natural Ti surface oxide (no Au cap).
+tcpmt.2026.3740312-e-L03,tcpmt.2026.3740312-e,die,single,3,Nb,,Nb,metal,conductor,,,,,,,,,,,,stated,mixed,,p.7 Sec. III.D; p.7 Fig. 9(c),,Without natural Nb oxide.

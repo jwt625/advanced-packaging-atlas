@@ -1,0 +1,121 @@
+paper_id: ectc.2019.00-29
+verified_on: 2026-10-18
+source_files:
+  - references/ectc.2019.00-29/text.md
+  - references/ectc.2019.00-29/source.json
+  - references/ectc.2019.00-29/source.pdf
+  - references/ectc.2019.00-29/figures/page_02.png
+  - references/ectc.2019.00-29/figures/page_03.png
+  - references/ectc.2019.00-29/figures/page_04.png
+  - references/ectc.2019.00-29/figures/page_05.png
+  - references/ectc.2019.00-29/figures/page_06.png
+  - references/ectc.2019.00-29/figures/page_07.png
+  - references/ectc.2019.00-29/figures/page_08.png
+figure_reading_method: >-
+  Page renders read at 150 dpi; Fig. 12, Fig. 17 and Fig. 22 re-rendered from source.pdf at 500-900 dpi (scratch crops,
+  not kept) to read SEM measurement labels. Fig. 22 label-to-layer assignment follows the thin vertical measurement
+  line next to each label and was checked against the image scale (about 0.078 um/px from the 29.5 um line).
+  Fig. 12 top/bottom CD labels illegible (low-resolution embedded image): not used; sidewall angles legible.
+entries:
+  - {table: stack_layers, row_id: ectc.2019.00-29-a-L04, field: thickness_um, value: 5.04, unit: um, basis: measured, locator: "p.7 Fig. 22", note: "D3 over RDL2"}
+  - {table: stack_layers, row_id: ectc.2019.00-29-a-L05, field: thickness_um, value: 7.97, unit: um, basis: measured, locator: "p.7 Fig. 22", note: "Cu RDL #2"}
+  - {table: stack_layers, row_id: ectc.2019.00-29-a-L08, field: thickness_um, value: 4.10, unit: um, basis: measured, locator: "p.7 Fig. 22", note: "D2 between RDL1 top and RDL2 bottom"}
+  - {table: stack_layers, row_id: ectc.2019.00-29-a-L09, field: thickness_um, value: 5.98, unit: um, basis: measured, locator: "p.7 Fig. 22", note: "Cu RDL #1"}
+  - {table: stack_layers, row_id: ectc.2019.00-29-a-L12, field: thickness_um, value: 6.91, unit: um, basis: measured, locator: "p.7 Fig. 22", note: "D1 under RDL1"}
+  - {table: metrics, row_id: ectc.2019.00-29-b-m4, field: value, value: 10.0, unit: um, basis: measured, locator: "p.5 Fig. 11", note: "160 mJ/cm2 point on the 10.0 um target line; text states 160 mJ/cm2 for 10 um CD"}
+  - {table: metrics, row_id: ectc.2019.00-29-c-m5, field: value, value: 87.5, unit: deg, basis: measured, locator: "p.6 Fig. 17(a)", note: "label 87.5 deg (cs)"}
+  - {table: metrics, row_id: ectc.2019.00-29-c-m6, field: value, value: 88.8, unit: deg, basis: measured, locator: "p.6 Fig. 17(a)", note: "label 88.8 deg (cs), other sidewall"}
+derived:
+  - {table: stack_layers, row_id: ectc.2019.00-29-a-L06, field: thickness_um, value: 0.1, formula: "1 kA = 1000 A * 1e-4 um/A", inputs: "p.6 Sec. IV.D"}
+  - {table: stack_layers, row_id: ectc.2019.00-29-a-L07, field: thickness_um, value: 0.1, formula: "1 kA = 1000 A * 1e-4 um/A", inputs: "p.6 Sec. IV.D"}
+  - {table: stack_layers, row_id: ectc.2019.00-29-a-L10, field: thickness_um, value: 0.1, formula: "1 kA = 1000 A * 1e-4 um/A", inputs: "p.6 Sec. IV.D"}
+  - {table: stack_layers, row_id: ectc.2019.00-29-a-L11, field: thickness_um, value: 0.1, formula: "1 kA = 1000 A * 1e-4 um/A", inputs: "p.6 Sec. IV.D"}
+  - {table: process_steps, row_id: ectc.2019.00-29-F2-s05, field: thickness_um, value: 0.1, formula: "1 kA = 1000 A * 1e-4 um/A (Ti and Cu each)", inputs: "p.6 Sec. IV.D"}
+  - {table: process_steps, row_id: ectc.2019.00-29-F2-s12, field: thickness_um, value: 0.1, formula: "1 kA = 1000 A * 1e-4 um/A (Ti and Cu each)", inputs: "p.6 Sec. IV.D"}
+conflicts:
+  - {table: stack_layers, row_id: ectc.2019.00-29-a-L05, field: thickness_um, values: [7.97, 5, 7], locators: ["p.7 Fig. 22", "p.2 Sec. II.A target Cu RDL thickness", "p.6 Sec. IV.D target Cu plating"], chosen: 7.97, why: "measured cross-section"}
+  - {table: stack_layers, row_id: ectc.2019.00-29-a-L09, field: thickness_um, values: [5.98, 5, 7], locators: ["p.7 Fig. 22", "p.2 Sec. II.A target", "p.6 Sec. IV.D target; 7.3-7.4 measured on UBM pad Fig. 19"], chosen: 5.98, why: "measured cross-section of TV"}
+  - {table: stack_layers, row_id: ectc.2019.00-29-a-L04, field: thickness_um, values: [5.04, 10], locators: ["p.7 Fig. 22", "p.2 Sec. II.A up to 10 um; p.4 target around 10 um"], chosen: 5.04, why: "measured cross-section"}
+  - {table: metrics, row_id: ectc.2019.00-29-a-m8, field: value, values: [10, 5], locators: ["p.4 Sec. III.B below 10%", "p.8 Sec. VI <5%"], chosen: 10, why: "body text; summary may conflate with seed variation (<5%)"}
+  - {table: interconnects, row_id: ectc.2019.00-29-a-i3, field: pad_x_um, values: [50, "300/200 arrows"], locators: ["p.2 Sec. II.A package UBM 50 um diameter", "p.7 Fig. 19(b) UBM pad cross-section"], chosen: 50, why: "text design value; Fig. 19 features unlabeled"}
+  - {table: test_vehicles, row_id: ectc.2019.00-29-a, field: notes, values: ["around 1000 I/Os", "up to 1000 I/Os"], locators: ["p.2 Sec. II.A", "p.2 Table 1"], chosen: "notes only", why: "I/O count not mapped to a specific interconnect level"}
+excluded:
+  - "Fan-out industry statements (300/330 mm wafer, panel standardization) are background, refs [1]-[7]"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - reliability tests
+  - Cu pillar pitch, height, solder alloy
+  - solder ball size, pitch, alloy
+  - die thickness, mold thickness, package thickness
+  - dielectric, PR, release layer, mold product names and properties
+  - meander parasitic results
+  - LDI tool and PVD/ECP equipment vendors
+  - dielectric cure conditions
+notes: >-
+  Fig. 3 caption is used twice (p.2 mask set and p.3 daisy chain schematics); text calls the p.3 figure Fig. 4.
+  p.3 Fig. 3 legend lists daisy chains (corner x4, outer row x3, inner row x3; 8/10/5 um RDL1-RDL2 chains x2/x1/x1)
+  and meanders (8 um x4, 10 um x2, 5 um x2); not tabulated.
+revisions:
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f02", change: "renumbered from ectc.2019.00-29-f03 (rank re-ordered)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f03", change: "added Fig. 20 p.7 process_flow (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f04", change: "added Fig. 2 p.2 top_view_layout (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f05", change: "added Fig. 3 p.2 top_view_layout (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f06", change: "added Fig. 3 p.3 top_view_layout (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f07", change: "added Fig. 10 p.5 top_view_layout (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f08", change: "added Fig. 14 p.6 top_view_layout (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f09", change: "renumbered from ectc.2019.00-29-f02 (rank re-ordered)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f10", change: "added Fig. 24 p.8 cross_section (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f11", change: "added Fig. 19 p.7 cross_section (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f12", change: "added Fig. 4 p.3 stack_schematic (manual)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f13", change: "added Fig. 23 p.8 package_photo (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f14", change: "added Fig. 21 p.7 package_photo (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f15", change: "renumbered from ectc.2019.00-29-f05 (rank re-ordered)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f16", change: "renumbered from ectc.2019.00-29-f06 (rank re-ordered)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f17", change: "added Fig. 5 p.3 micrograph (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f18", change: "added Fig. 18 p.6 package_photo (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f19", change: "added Fig. 16 p.6 micrograph (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f20", change: "added Fig. 8 p.4 micrograph (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f21", change: "renumbered from ectc.2019.00-29-f04 (rank re-ordered)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f22", change: "added Fig. 11 p.5 other (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f23", change: "added Fig. 15 p.6 other (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f24", change: "added Fig. 9 p.5 other (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f25", change: "added Fig. 7 p.4 other (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc.2019.00-29-f26", change: "added Fig. 13 p.6 other (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added; literal rank order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F1-s02", change: "added: Cu pillar + solder cap bumping (50 um diameter) on test chip, seq 1", reason: "p.3 Sec. II.B: UBM fabricated with 50 um Cu pillar with solder cap"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F1-s01", change: "seq 1 -> 2; reworded as solder-cap reflow; step_basis stated_in_flow", reason: "p.3 Sec. II.B / Fig. 5: pillar shown after lead-free reflow (a step, not structure only)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F1", change: "level fragments -> ordered; flow_name; locator", reason: "two ordered die-prep steps, no numeric conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s24", change: "deleted (X-ray and cross-section of solder joints); content moved to metrics ectc.2019.00-29-a-m15", reason: "post-build measurement, not a step (rule 7)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-a-m15", change: "added: solder joint integrity (X-ray, cross-section) pass", reason: "moved from deleted step F2-s24; p.8 Sec. V.B, Fig. 24"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s25", change: "added: degas and Ar sputter etch before RDL #2 seed PVD", reason: "Fig. 6(e) repeat (b)-(d); p.6 Sec. IV.D"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s26", change: "added: descum before RDL #2 ECP", reason: "p.6 Sec. IV.D: all panels descummed before ECP; Fig. 6(e)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s27", change: "added: Ti/Cu seed etch back (RDL #2), split from s15 (PR strip and etch back)", reason: "Fig. 6(d) gives strip then seed etch; same split as RDL #1 (s09, s10)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s15", change: "now PR strip only (seed etch back moved to s27)", reason: "split composite step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s04", change: "category surface_treatment -> degas", reason: "v2.4 category; p.6 Sec. IV.D"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s07", change: "category cleaning -> descum", reason: "v2.4 category"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s05", change: "target layer id -> Ti 1 kA / Cu 1 kA; equipment PVD with special jig", reason: "target holds stated geometry only; p.6 Sec. IV.D"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s12", change: "target layer id -> Ti 1 kA / Cu 1 kA", reason: "Fig. 6(e) repeat of step (b)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2", change: "layer-id targets cleared on s01, s02, s03, s08, s11, s14, s16; s08 equipment vertical ECP with jig; s02 equipment slit coater", reason: "target holds stated geometry only; layer ids are not geometry"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s18", change: "temp_c 260 (le) -> temp_c_max 260; conditions zones 145-260 C", reason: "reflow profile peak; p.8 Sec. V.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2", change: "seq renumbered 1-26 (was 2-25 after the converter split F1); step_basis stated_in_flow on all steps", reason: "Fig. 6 and Sec. III.A give the order"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F3-s03", change: "deleted (FIB/SEM cross-section of 3/5/10 um vias); results already in metrics ectc.2019.00-29-b-m5..m11", reason: "post-build measurement, not a step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F3-s02", change: "DOE ranges moved from conditions to split; dose_mj_cm2 160 (optimized for 10 um CD); target via openings 3-200 um; step_basis inferred_order", reason: "p.4 Sec. IV.B; p.5 Sec. IV.B, Fig. 10, Fig. 11"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F3", change: "level fragments -> ordered; flow_name; s01 target (layer id) cleared, step_basis inferred_order", reason: "coat -> LDI/develop short loop with DOE splits, no fixed recipe beyond dose"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F4-s03", change: "deleted (CD analysis and FIB/SEM of PR sidewalls); results already in metrics ectc.2019.00-29-c-m3..m8", reason: "post-build measurement, not a step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F4-s02", change: "DOE ranges moved from conditions to split; target LW/LS 1/1-15/15 um; step_basis inferred_order", reason: "p.5-6 Sec. IV.C, Fig. 14, Fig. 15"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F4", change: "level fragments -> ordered; flow_name", reason: "coat -> LDI/develop short loop with DOE splits"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29", change: "process_flow_level full confirmed", reason: "Fig. 6 ordered flow with thicknesses, seed targets, LDI, reflow 145-260 C"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s03", change: "target: '' -> 'via ~10 um; dielectric openings 10-200 um'; locator: 'p.3 Fig. 6(b); p.4 Sec. IV.B; p.7 Sec. V.A; p.7 Fig. 20' -> 'p.3 Fig. 6(b); p.4 Sec. IV.B; p.7 Sec. V.A; p.7 Fig. 20; p.2 Sec. II.A'; overrides: '' -> 'target:design_target'; notes: 'Openings 10-200 um in package design (p.2).' -> 'Target values are package design (p.2 Sec. II.A); layer used as base and for UBM openings.'", reason: "manifest v000 target_missing (audit_A): via ~10 um and dielectric openings 10-200 um are package design values (p.2 Sec. II.A); moved from notes to target"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s05", change: "target: 'Ti 1 kA / Cu 1 kA' -> ''; conditions: '' -> 'Ti 1 kA / Cu 1 kA (target)'; thickness_um: '' -> '0.1'; notes: '' -> 'thickness_um = Ti and Cu each (0.1 um); seed stack 0.2 um.'", reason: "manifest v000 thickness_untyped (audit_A): seed target 1 kA Ti / 1 kA Cu (p.6 Sec. IV.D) typed as 0.1 um each; kA text kept in conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s12", change: "target: 'Ti 1 kA / Cu 1 kA' -> ''; conditions: '' -> 'Ti 1 kA / Cu 1 kA (target)'; thickness_um: '' -> '0.1'; notes: '' -> 'thickness_um = Ti and Cu each (0.1 um); seed stack 0.2 um.'; overrides: '' -> 'thickness_um:design_target'", reason: "manifest v000 thickness_untyped (audit_A): seed target 1 kA Ti / 1 kA Cu (p.6 Sec. IV.D) typed as 0.1 um each; kA text kept in conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s06", change: "target: '' -> 'L/S 8/8 um'; locator: 'p.3 Sec. III.A; p.3 Fig. 6(c); p.7 Fig. 20' -> 'p.3 Sec. III.A; p.3 Fig. 6(c); p.7 Fig. 20; p.2 Sec. II.A; p.2 Table 1'; overrides: '' -> 'target:design_target'", reason: "manifest v000 target_missing (audit_A): RDL LW/LS 8/8 um design (p.2 Sec. II.A; Table 1)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s13", change: "target: '' -> 'L/S 8/8 um'; locator: 'p.3 Fig. 6(e); p.7 Sec. V.A; p.7 Fig. 20' -> 'p.3 Fig. 6(e); p.7 Sec. V.A; p.7 Fig. 20; p.2 Sec. II.A; p.2 Table 1'; overrides: '' -> 'target:design_target'", reason: "manifest v000 target_missing (audit_A): RDL LW/LS 8/8 um design (p.2 Sec. II.A; Table 1)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s08", change: "target: '' -> 'Cu RDL 5 um thick (design)'; result: '7.3-7.4 um on UBM pad (3D optical profile, X-section)' -> '7.3-7.4 um on UBM pad (3D optical profile, X-section); RDL #1 5.98 um in Fig. 22 X-section'; locator: 'p.6 Sec. IV.D; p.7 Fig. 19; p.7 Fig. 20' -> 'p.6 Sec. IV.D; p.7 Fig. 19; p.7 Fig. 20; p.2 Sec. II.A; p.7 Fig. 22'; overrides: '' -> 'result:measured'; notes: 'Target ~7 um. Separate chemistries for UBM and fine-line RDL; not named.' -> 'ECP target ~7 um (p.6) vs RDL design 5 um (p.2). Separate UBM and fine-line RDL chemistries, not named.'", reason: "manifest v000 target_missing (audit_A): RDL design thickness 5 um (p.2 Sec. II.A) on the step; 7 um ECP target kept; measured RDL #1 thickness from Fig. 22 added to result"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s11", change: "target: '' -> 'via ~10 um; dielectric openings 10-200 um'; result: '' -> '4.10 um between RDL #1 and RDL #2; 8.32 um over RDL #1 where RDL #2 absent (Fig. 22)'; locator: 'p.3 Fig. 6(e); p.7 Sec. V.A; p.7 Fig. 20' -> 'p.3 Fig. 6(e); p.7 Sec. V.A; p.7 Fig. 20; p.2 Sec. II.A; p.7 Fig. 22'; overrides: '' -> 'target:design_target;result:measured'", reason: "manifest v000 target_missing (audit_A): via ~10 um, openings 10-200 um design (p.2 Sec. II.A); stack_layers a-L08 measured thickness (Fig. 22) added to result"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s14", change: "target: '' -> 'Cu RDL 5 um thick (design)'; result: '' -> 'RDL #2 7.97 um in Fig. 22 X-section'; locator: 'p.3 Sec. III.A; p.3 Fig. 6(e)' -> 'p.3 Sec. III.A; p.3 Fig. 6(e); p.2 Sec. II.A; p.7 Fig. 22'; overrides: '' -> 'target:design_target;result:measured'; notes: '' -> 'Design 5 um (p.2) vs ECP target ~7 um (p.6) vs 7.97 um measured (Fig. 22).'", reason: "manifest v000 target_missing (audit_A) and a-L05: RDL design thickness 5 um (p.2 Sec. II.A); measured RDL #2 7.97 um (Fig. 22) in result"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s16", change: "step_basis: 'stated_in_flow' -> 'inferred_order'; result: '' -> '5.04 um over RDL #2 (Fig. 22)'; locator: 'p.7 Sec. V.A' -> 'p.7 Sec. V.A; p.7 Fig. 22'; overrides: '' -> 'result:measured'; notes: 'No package UBM on chip side.' -> 'Position inferred: role (final passivation) and 5 masks stated (p.7 Sec. V.A), not in Fig. 6/Sec. III.A. No package UBM on chip side.'", reason: "manifest v000 step_basis (audit_A): Dielectric #3 role and mask count stated (p.7 Sec. V.A) but its position is not in Fig. 6 or Sec. III.A; a-L04 measured thickness added to result"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2-s02", change: "result: '' -> '6.91 um under RDL #1 in Fig. 22 X-section'; locator: 'p.4 Sec. IV.B; p.7 Sec. V.A' -> 'p.4 Sec. IV.B; p.7 Sec. V.A; p.7 Fig. 22'; overrides: '' -> 'result:measured'", reason: "manifest v000 target_missing a-L12: measured Dielectric #1 thickness (Fig. 22) added to result; ~10 um coat target kept"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F1-s02", change: "conditions: '' -> 'on ~70x70 um Al pads with 30 um oxide passivation opening'", reason: "manifest v000 target_missing a-L03: chip Al pads ~70x70 um with 30 um oxide passivation opening (p.3 Sec. II.B) are the input of the bumping step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F4-s02", change: "target: 'LW/LS 1/1 to 15/15 um test structures' -> 'LW/LS 1/1 to 15/15 um layout; 2/2 um finest patterned; 5/5 um imaged'; locator: 'p.5 Sec. IV.C; p.6 Sec. IV.C; p.6 Fig. 15' -> 'p.5 Sec. IV.C; p.6 Sec. IV.C; p.6 Fig. 15; p.6 Fig. 16'", reason: "manifest v000 target_missing c-L01/c-L03: 2/2 um finest patterned and 5/5 um imaged (p.6 Sec. IV.C; Fig. 16)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29-F2", change: "build_seq 2 confirmed (no change)", reason: "manifest v000 build_seq_unverified: test chips are bumped and reflowed (F1, p.3 Sec. II.B) before C2P attach in F2 (Fig. 6(f))"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc.2019.00-29", change: "a-L04, a-L05, a-L08, a-L09, a-L12: measured Fig. 22 thicknesses put in step result text (F2-s02, -s08, -s11, -s14, -s16), not thickness_um", reason: "manifest v000 target_missing: values are final cross-section measurements after later steps, not the as-processed result of each step"}

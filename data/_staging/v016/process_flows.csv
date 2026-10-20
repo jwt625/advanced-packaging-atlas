@@ -1,0 +1,13 @@
+flow_id,paper_id,flow_name,scope,level,tv_ids,build_seq,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00199-F1,ectc51846.2026.00199,SAP on 200x200 mm glass (Sec. III.B),tv_build,full,ectc51846.2026.00199-a,1,stated,text,,p.4 Sec. III.B; p.4 Fig. 5; p.5 Sec. IV.A; p.4 Sec. III.A,,
+ectc51846.2026.00209-F1,ectc51846.2026.00209,"two-layer glass circuit (Sec. IV, VII)",tv_build,full,ectc51846.2026.00209-a,1,stated,text,,p.2 Sec. IV; p.2 Fig. 1; p.4 Sec. VIII; p.3 Sec. VII; p.4 Sec. VII; p.4 Fig. 9,,
+ectc51846.2026.00209-F2,ectc51846.2026.00209,via resistance coupon (Sec. VII),tv_build,full,ectc51846.2026.00209-b,2,stated,text,,p.4 Sec. VII; p.4 Fig. 7(a); p.4 Fig. 7(b),,
+ectc51846.2026.00209-F3,ectc51846.2026.00209,adhesion samples (Sec. VI),tv_build,ordered,ectc51846.2026.00209-e;ectc51846.2026.00209-d,3,stated,text,,p.3 Sec. VI,,
+ectc51846.2026.00209-F4,ectc51846.2026.00209,four-point probe samples (Sec. VII),tv_build,ordered,ectc51846.2026.00209-c,4,stated,text,,p.3 Sec. VII; p.4 Sec. VII; p.4 Fig. 6,,
+ectc51846.2026.00209-F5,ectc51846.2026.00209,"laser-drilled via array (Sec. IV, Fig. 2)",tv_build,fragments,ectc51846.2026.00209-f,5,stated,mixed,,p.2 Sec. IV; p.2 Fig. 2; p.5 Sec. IX,,
+ectc51846.2026.00208-F1,ectc51846.2026.00208,"EL-Ni seed and double-sided Cu electroplating of TGVs (Sec. II.A, III)",tv_build,full,ectc51846.2026.00208-a,1,stated,text,,p.2 Sec. II.A; p.3 Sec. II.A; p.4 Sec. III.A; p.4 Sec. III.B; p.5 Fig. 10-13; p.6 Sec. III.B.2,,
+ectc51846.2026.00208-F2,ectc51846.2026.00208,"direct Cu pillar insertion into fat TGV (Fig. 4, Sec. II.B, IV)",tv_build,ordered,ectc51846.2026.00208-b,2,stated,mixed,,p.3 Fig. 4; p.6 Sec. IV; p.6 Fig. 14,,
+ectc51846.2026.00194-F1,ectc51846.2026.00194,DFR patterning on panel (Table I),tv_build,full,ectc51846.2026.00194-a;ectc51846.2026.00194-b,1,stated,mixed,,p.3 Table I; p.2 Sec. II.B; p.5 Sec. IV,,
+ectc51846.2026.00194-F2,ectc51846.2026.00194,DFR patterning on wafer (Table I),tv_build,full,ectc51846.2026.00194-c,2,stated,table,,p.3 Table I; p.2 Sec. II.B; p.5 Sec. IV,,
+ectc51846.2026.00194-F3,ectc51846.2026.00194,"Cu pillar formation (Sec. III.D, Table I)",tv_build,full,ectc51846.2026.00194-d,3,stated,mixed,,p.3 Table I; p.4 Sec. III.D,,
+ectc51846.2026.00204-F1,ectc51846.2026.00204,"nanosolder paste, hot-plate bumping/bonding and TC bonding (Sec. II.A-C)",tv_build,full,ectc51846.2026.00204-a;ectc51846.2026.00204-b;ectc51846.2026.00204-c,1,stated,text,,p.2 Sec. II.A; p.2 Sec. II.B; p.2 Sec. II.C; p.2 Fig. 1(a); p.2 Fig. 1(b); p.3 Sec. II.C; p.3 Sec. III.A; p.3 Fig. 4; p.4 Sec. III.A; p.4 Fig. 5; p.5 Sec. III.C.1; p.5 Fig. 10,,"Routes: hot plate (a, b, c; Sec. II.B) and TC bonding (c only; paste applied after alignment, no bumping stated; Sec. II.C)."

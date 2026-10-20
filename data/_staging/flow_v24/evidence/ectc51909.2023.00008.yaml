@@ -1,0 +1,34 @@
+paper_id: ectc51909.2023.00008
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00008/text.md
+  - references/ectc51909.2023.00008/source.json
+  - references/ectc51909.2023.00008/figures/page_02.png
+  - references/ectc51909.2023.00008/figures/page_03.png
+  - references/ectc51909.2023.00008/figures/page_04.png
+  - references/ectc51909.2023.00008/figures/cand/p03_fig3.png
+  - references/ectc51909.2023.00008/figures/cand/p03_fig4.png
+  - references/ectc51909.2023.00008/figures/cand/p03_fig5.png
+  - references/ectc51909.2023.00008/figures/cand/p04_fig6.png
+  - references/ectc51909.2023.00008/figures/cand/p04_fig7.png
+figure_reading_method: >-
+  Page renders p.2-4 viewed; Fig. 7 re-cropped at 300 dpi, leakage at 200 V read on log axis (about 1.4e-10 A,
+  +/-0.1 decade). Figs. 3, 5, 6 carry no absolute value scale (topography, overlay nm, normalized resistance a.u.).
+  Table 1 re-cropped (candidate cut off the data row).
+entries:
+  - {table: metrics, row_id: ectc51909.2023.00008-a-m1, field: value, value: 2824, unit: "x", basis: derived, locator: "p.2 Table 1", note: "authors' EEP model normalized to 9 um pitch"}
+  - {table: interconnects, row_id: ectc51909.2023.00008-a-i1, field: anneal_temp_c, value: 280, unit: C, basis: design_target, locator: "p.3 Sec. IV", note: "'low temperature anneal (<280 degC)'"}
+derived: []
+conflicts: []
+excluded:
+  - "9 um pitch SoIC SRAM-on-logic (3x SRAM capacity) attributed to ref [8]"
+  - "Fig. 1 compute vs DRAM bandwidth trend (1.7x vs 1.57x per 2 years) attributed to ref [6]"
+  - "EEP definition attributed to ref [9]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - wafer size, die size, BPM CD/thickness, BPV dimensions, bond film material
+  - bonding temperature/pressure, anneal time, absolute overlay values, bond yield percentage
+  - absolute daisy-chain resistance, sample counts
+source_quality:
+  - "4-page invited-style paper; most results normalized or qualitative."

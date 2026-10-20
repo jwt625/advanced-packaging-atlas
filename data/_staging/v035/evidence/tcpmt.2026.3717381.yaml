@@ -1,0 +1,58 @@
+paper_id: tcpmt.2026.3717381
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/tcpmt.2026.3717381/text.md
+  - references/tcpmt.2026.3717381/source.json
+  - references/tcpmt.2026.3717381/figures/cand/p01_fig2.png
+  - references/tcpmt.2026.3717381/figures/cand/p02_fig3.png
+  - references/tcpmt.2026.3717381/figures/cand/p02_fig4.png
+  - references/tcpmt.2026.3717381/figures/cand/p03_tablei.png
+  - references/tcpmt.2026.3717381/figures/cand/p03_fig6.png
+  - references/tcpmt.2026.3717381/figures/cand/p04_fig8.png
+  - references/tcpmt.2026.3717381/figures/cand/p04_fig9.png
+  - references/tcpmt.2026.3717381/figures/cand/p04_fig10.png
+  - references/tcpmt.2026.3717381/figures/cand/p05_fig13.png
+  - references/tcpmt.2026.3717381/figures/cand/p05_fig15.png
+  - references/tcpmt.2026.3717381/figures/cand/p07_fig20.png
+  - references/tcpmt.2026.3717381/figures/cand/p07_fig22.png
+figure_reading_method: >-
+  Candidate crops viewed for Fig. 2, 3, 4, 6, 8, 9, 10, 13, 15, 20, 22 and Table I. Fig. 15(b) labels (26.80, 47.37,
+  48.97, 11.17 um) read from the photo; Fig. 13 spacings (2.34, 2.13, 2.2 mm) read from labels; Fig. 6/9 used only to
+  confirm the text bounds.
+entries:
+  - {table: interconnects, row_id: tcpmt.2026.3717381-a-i1, field: diameter_um, value: 50, unit: um, basis: design_target, locator: "p.3 Table I", note: "printed 'Dtgy'; Fig. 4 labels it D_tgv"}
+  - {table: interconnects, row_id: tcpmt.2026.3717381-a-i2, field: height_um, value: 30, unit: um, basis: design_target, locator: "p.3 Sec. III.B; p.3 Table I", note: "gap held by plating vias; gap height hvac = 30 um"}
+  - {table: stack_layers, row_id: tcpmt.2026.3717381-a-L05, field: line_um, value: 80, unit: um, basis: design_target, locator: "p.3 Sec. III.B", note: "EIML width for 50 ohm"}
+derived: []
+conflicts:
+  - {table: interconnects, row_id: tcpmt.2026.3717381-a-i3, field: diameter_um, values: [48, 47.37, 48.97], locators: ["p.5 Sec. IV", "p.5 Fig. 15(b)", "p.5 Fig. 15(b)"], chosen: 48, why: "photo shows two widths without saying which is the pillar diameter; text value 48 um lies between them"}
+excluded:
+  - "Table II values for refs [7], [9], [10], [13], [15], [23] (LTCC, PCB, CMOS, eWLB, MEMS, five-glass-wafer stacks)"
+  - "100 um minimum line/space of thick-film LTCC/PCB (Introduction, cited)"
+  - "Six metal layers with five stacked glass wafers (ref [23])"
+  - "Transceiver phase shifter specs (6-bit, 5.625 deg, RMS error <3 deg, gain variation +/-0.1 dB): chip property, not packaging"
+not_reported:
+  - electrical_interfaces (RF feed losses entered as metrics)
+  - optical_interfaces
+  - glass product/vendor, metal thicknesses, TGV count and pitch, total stack thickness
+  - Cu-Sn-Cu bonding temperature, pressure, time; reflow profile; underfill product
+  - Si wafer thickness, RFIC size and node, PCB layer stack
+  - organizations/affiliations (not printed in cached text)
+  - reliability, warpage, thermal data
+source_quality:
+  - "Accepted author version (not final pagination). Affiliation block absent from text layer."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2026.3717381-F1, change: "tv_ids + TV b; notes", reason: "frontend b is built from the same stacked glass array (p.6 Sec. IV)"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2026.3717381-F1, change: "step_basis set to stated_in_flow on steps without one", reason: "order is stated in the paper's flow text/figure"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2026.3717381-F2, change: "step_basis set to stated_in_flow on steps without one", reason: "order is stated in the paper's flow text/figure"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2026.3717381-F1-s04, change: "target: '' -> 'TGV diameter 50 um (Dtgv)'; locator: 'p.3 Sec. III.A; p.2 Fig. 3(b)' -> 'p.3 Sec. III.A; p.2 Fig. 3(b); p.3 Table I'", reason: "stated TGV diameter"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2026.3717381-F1-s08, change: "category: 'other' -> 'deposition_other'", reason: "PI solder mask is a dielectric deposition; method not stated"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2026.3717381-F1-s10, change: "target: '' -> 'vacuum gap 30 um (hvac); seal ring width 50 um'; locator: 'p.3 Sec. III.A; p.2 Fig. 3(g)' -> 'p.3 Sec. III.A; p.2 Fig. 3(g); p.3 Sec. III.B; p.4 Sec. III.D'", reason: "stated geometry produced by bonding"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2026.3717381-F1-s12, change: "result: '' -> '479 Cu pillars, height 26.8 um, diameter 48 um; SnAg bump height 11.17 um (measured)'; locator: 'p.3 Sec. III.A; p.2 Fig. 3(h)' -> 'p.3 Sec. III.A; p.2 Fig. 3(h); p.5 Sec. IV; p.5 Fig. 15(b)'", reason: "measured result of the pillar/bump step"}
+  - {date: 2026-10-20, source: repass, row_id: tcpmt.2026.3717381-F1-s02, change: "category 'other' kept", reason: "polishing method of the glass wafer not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3717381-F1-s02", change: "category 'other' -> 'grinding_thinning'; notes: method not stated", reason: "p.3 Sec. III.A 'polishing' of the glass wafer; no CMP stated, so the mechanical-removal category"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3717381-F1-s01", change: "conditions '' -> 'upper glass wafer 150 um thick (hg1, Table I); 8-inch wafer'", reason: "p.3 Table I hg1 = 150 um; p.5 Sec. IV 8-inch wafer; position (input vs post-polish) not stated, so conditions not thickness columns"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3717381-F1-s07", change: "conditions '' -> 'lower glass wafer 150 um thick (hg2, Table I)'; target '' -> 'EIML signal line width 80 um on MOG3'", reason: "p.3 Table I hg2 = 150 um; p.3 Sec. III.B EIML width 80 um for 50 ohm, on MOG3 of the lower wafer (Fig. 4)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3717381-F1-s12", change: "target '' -> 'Cu pillar diameter 48 um, height 26.8 um; SnAg bump height 11.17 um (measured)'", reason: "p.5 Sec. IV pillar geometry stated (measured values; no design target given)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2026.3717381-F2", change: "build_seq 2 confirmed (F1 = 1) for TV b", reason: "p.5-6 Sec. IV: glass array fabricated (F1) then mounted on the Si wafer by reflow and attached to PCB (F2)"}

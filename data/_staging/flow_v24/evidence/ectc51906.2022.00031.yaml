@@ -1,0 +1,67 @@
+paper_id: ectc51906.2022.00031
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51906.2022.00031/text.md
+  - references/ectc51906.2022.00031/TEXT_LAYER_WARNING.md
+  - references/ectc51906.2022.00031/figures/page_01_220dpi.png
+  - references/ectc51906.2022.00031/figures/page_02_220dpi.png
+  - references/ectc51906.2022.00031/figures/page_03_220dpi.png
+  - references/ectc51906.2022.00031/figures/page_04_220dpi.png
+  - references/ectc51906.2022.00031/figures/page_05_220dpi.png
+  - references/ectc51906.2022.00031/figures/page_06_220dpi.png
+  - references/ectc51906.2022.00031/figures/page_07_220dpi.png
+figure_reading_method: >-
+  OCR text.md checked line by line against the 220 dpi page renders (OCR errors: 'pm'/'ym'/'jum' for um, '+5 1m' for
+  +/-5 um, Table I garbled). All numbers taken from the images. Fig. 10 and Fig. 14 read against gridlines from
+  re-crops; Table I and Fig. 13 means read from re-crops.
+entries:
+  - {table: interconnects, row_id: ectc51906.2022.00031-c-i1, field: alignment_um, value: 5, unit: um, basis: measured, locator: "p.4 Sec. III.B", note: "bond misalignment +/-5 um 3 sigma; bonder spec +/-7 um 3 sigma (p.2)"}
+  - {table: metrics, row_id: ectc51906.2022.00031-c-m2, field: value, value: 90, unit: "%", basis: measured, locator: "p.5 Fig. 10", note: "plotted point at 155 um about 88%"}
+  - {table: metrics, row_id: ectc51906.2022.00031-d-m3, field: value, value: 0.39, unit: ohm, basis: measured, locator: "p.6 Fig. 14", note: "8-die cluster at x=7 just below 0.4"}
+derived:
+  - {table: interconnects, row_id: ectc51906.2022.00031-b-i3, field: aspect_ratio, value: 10, formula: "depth/diameter = 50/5", inputs: "p.3 Sec. II.B"}
+  - {table: interconnects, row_id: ectc51906.2022.00031-c-i3, field: aspect_ratio, value: 10, formula: "depth/diameter = 50/5", inputs: "p.3 Sec. II.B"}
+  - {table: interconnects, row_id: ectc51906.2022.00031-d-i3, field: aspect_ratio, value: 10, formula: "depth/diameter = 50/5", inputs: "p.3 Sec. II.B"}
+  - {table: components, row_id: ectc51906.2022.00031-a-c2, field: x_mm/y_mm, value: "8 x 12", formula: "Logic die site footprint taken equal to the 8 x 12 mm test vehicle die", inputs: "p.2 Sec. II.A"}
+  - {table: components, row_id: ectc51906.2022.00031-b-c3, field: x_mm/y_mm, value: "8 x 12", formula: "Logic die site footprint taken equal to the 8 x 12 mm test vehicle die", inputs: "p.2 Sec. II.A"}
+  - {table: components, row_id: ectc51906.2022.00031-c-c3, field: x_mm/y_mm, value: "8 x 12", formula: "Logic die site footprint taken equal to the 8 x 12 mm test vehicle die", inputs: "p.2 Sec. II.A"}
+  - {table: components, row_id: ectc51906.2022.00031-d-c3, field: x_mm/y_mm, value: "8 x 12", formula: "Logic die site footprint taken equal to the 8 x 12 mm test vehicle die", inputs: "p.2 Sec. II.A"}
+  - {table: interconnects, row_id: ectc51906.2022.00031-b-i3, field: resistance_mohm, value: 50, formula: "paper calculated TSV resistance ~0.05 ohm = Fig. 14 slope; ohm to mohm x1000", inputs: "p.6 Sec. III.D; p.7 Sec. IV.B"}
+  - {table: interconnects, row_id: ectc51906.2022.00031-c-i3, field: resistance_mohm, value: 50, formula: "paper calculated TSV resistance ~0.05 ohm = Fig. 14 slope; ohm to mohm x1000", inputs: "p.6 Sec. III.D; p.7 Sec. IV.B"}
+  - {table: interconnects, row_id: ectc51906.2022.00031-d-i3, field: resistance_mohm, value: 50, formula: "paper calculated TSV resistance ~0.05 ohm = Fig. 14 slope; ohm to mohm x1000", inputs: "p.6 Sec. III.D; p.7 Sec. IV.B"}
+conflicts:
+  - {table: interconnects, row_id: ectc51906.2022.00031-a-i1, field: notes (main array link count), values: [9450, 9480], locators: ["p.2 Sec. II.A", "p.1 Abstract"], chosen: 9450, why: "body text over abstract"}
+  - {table: interconnects, row_id: ectc51906.2022.00031-a-i1, field: notes (outermost column distance from edge), values: ["about 85 um", "80 um"], locators: ["p.2 Sec. II.A; p.5 Sec. III.C", "p.1 Abstract"], chosen: "85 um", why: "body text and plotted data"}
+  - {table: metrics, row_id: ectc51906.2022.00031-c-m2, field: variant, values: ["5-die yield falls below 90% at 155 um", "yield dependence at 220 um from die edge"], locators: ["p.5 Sec. III.C; p.5 Fig. 10", "p.7 Sec. V"], chosen: "155 um", why: "results text matches Fig. 10"}
+  - {table: metrics, row_id: ectc51906.2022.00031-a-m1, field: value, values: ["~100% normalized yield at 85 um", "high yield (99%) at 85 um"], locators: ["p.5 Sec. III.C", "p.7 Sec. V"], chosen: "~100%", why: "results text matches Fig. 10/11"}
+  - {table: interconnects, row_id: ectc51906.2022.00031-a-i1, field: notes (edge array links), values: ["8 columns x 315 links", "full array of 2512 links"], locators: ["p.2 Sec. II.A"], chosen: "both recorded as written", why: "8 x 315 = 2520, not 2512; paper's own numbers"}
+excluded:
+  - "Cu recess variation < 3 nm across 300 mm wafers (refs [5, 6])"
+  - "DBI capable of pad diameters < 1 to 20 um (general capability)"
+  - "Assumed CMP length scale 100-200 um"
+  - "Main-array reliability results of ref [6]"
+  - "TSV fabrication process details (ref [4])"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - DBI dielectric material; isolation oxide and Thru RDL thicknesses; Logic wafer thickness
+  - bonding force/pressure/time; surface activation chemistry
+  - reliability conditions (TCT range/cycles, autoclave, HTS duration), sample counts
+  - per-layer cumulative void-free yields for layers 1-4 (only read approximately from Fig. 8 bars; not entered)
+source_quality:
+  - "Scanned-quality text layer garbled; text.md is tesseract OCR (note 'OCR text' in papers.notes). No figure candidates were detected (candidates.json empty); all key figures manual."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51906.2022.00031-b-m3, change: "deleted (copy of a-m4: no link resistance dependence on distance from die edge)", reason: "p.5 Sec. III.D gives one statement for every stack type; no per-build value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51906.2022.00031-c-m6, change: "deleted (copy of a-m4)", reason: "same statement"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51906.2022.00031-a-m4, change: "scope -> 'applies to TVs a, b, c'; notes added", reason: "kept as the single row; Fig. 12 plots D2W, 2-die, 5-die only"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-figures, change: "re-ranked: Fig. 6 f03 -> f04, Fig. 4 f02 -> f05, Fig. 10 f04 -> f09, Fig. 13 f05 -> f13, Table I f06 -> f15", reason: "layouts before other schematics/images, then plots/tables (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f02, change: "added Fig. 2 (top_view_layout, manual)", reason: "die floor plan"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f03, change: "added Fig. 3 (top_view_layout, manual)", reason: "edge daisy-chain layout"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f06, change: "added Fig. 5 (stack_schematic, manual)", reason: "LTxC stack drawing"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f07, change: "added Fig. 1 (package_photo, manual)", reason: "photo of 8-die stack"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f08, change: "added Fig. 9 (xray_csam, manual)", reason: "CSAM of D2W and 5-die stack"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f10, change: "added Fig. 11 (electrical_plot, manual)", reason: "source of a-m1, a-m2"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f11, change: "added Fig. 8 (other, manual)", reason: "source of c-m3, c-m4"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f12, change: "added Fig. 12 (electrical_plot, manual)", reason: "source of a-m4"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f14, change: "added Fig. 14 (electrical_plot, manual)", reason: "source of a-m5, d-m3, d-m4"}

@@ -1,0 +1,140 @@
+paper_id: tcpmt.2021.3123384
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/tcpmt.2021.3123384/text.md
+  - references/tcpmt.2021.3123384/source.json
+  - references/tcpmt.2021.3123384/figures/page_05.png
+  - references/tcpmt.2021.3123384/figures/page_06.png
+  - references/tcpmt.2021.3123384/figures/page_07.png
+  - references/tcpmt.2021.3123384/figures/page_08.png
+  - references/tcpmt.2021.3123384/figures/page_09.png
+  - references/tcpmt.2021.3123384/figures/cand/p02_fig2.png
+  - references/tcpmt.2021.3123384/figures/cand/p03_fig3.png
+  - references/tcpmt.2021.3123384/figures/cand/p03_fig4.png
+  - references/tcpmt.2021.3123384/figures/cand/p04_tablei.png
+  - references/tcpmt.2021.3123384/figures/cand/p04_fig5.png
+  - references/tcpmt.2021.3123384/figures/cand/p04_fig6.png
+  - references/tcpmt.2021.3123384/figures/cand/p08_fig16.png
+  - references/tcpmt.2021.3123384/figures/cand/p07_fig13.png
+  - references/tcpmt.2021.3123384/figures/cand/p09_fig19.png
+figure_reading_method: >-
+  Re-pass 2026-10-20: Fig. 2, Table III, Figs. 18-19 re-read from page renders.
+  Tables I-IV read from page renders (Table III candidate cut after 2 rows, Table IV candidate title only; re-cropped).
+  Fig. 20 chip count (8) and resistance span read from page_09 render. No dimensions read off scale bars.
+entries:
+  - {table: metrics, row_id: tcpmt.2021.3123384-b-m8, field: value, value: 101.4, unit: um/h, basis: simulated, locator: "p.6 Table IV", note: "JMP model prediction; third column 'Max' is measured minus model"}
+  - {table: process_steps, row_id: tcpmt.2021.3123384-F2-s08, field: conditions, value: "chamber 50 C", unit: C, basis: design_target, locator: "p.5 Table III", note: "row printed as 'Hamber Temperature'"}
+derived:
+  - {table: interconnects, row_id: tcpmt.2021.3123384-g-i2, field: resistance_mohm, value: 1000, formula: "about 1 ohm x 1000 (unit conversion); paper: 1.96 ohm / two TSiCVs", inputs: "p.9 Sec. V"}
+  - {table: process_steps, row_id: tcpmt.2021.3123384-F2-s07, field: time_s, value: 1200, formula: "20 min x 60", inputs: "p.5 Table III"}
+  - {table: process_steps, row_id: tcpmt.2021.3123384-F2-s08, field: time_s, value: 3600, formula: "60 min x 60", inputs: "p.5 Table III"}
+  - {table: stack_layers, row_id: tcpmt.2021.3123384-b-L02, field: thickness_um, value: 0.2, formula: "200 nm / 1000", inputs: "p.5 Sec. II.B"}
+  - {table: stack_layers, row_id: tcpmt.2021.3123384-b-L03, field: thickness_um, value: 0.3, formula: "300 nm / 1000", inputs: "p.5 Sec. II.B"}
+conflicts:
+  - {table: metrics, row_id: tcpmt.2021.3123384-a-m1, field: parameter, values: ["Fig. 3 caption: etch rate for 80 um vias", "Fig. 3 legend plots 40, 80 and 120 um vias"], locators: ["p.3 Fig. 3"], chosen: "text values for 80 um vias", why: "text gives 80 um maxima explicitly"}
+excluded:
+  - "SiC electronics >500 C operation (ref [1]); 3C-SiC piezoresistive suitability (ref [2])"
+  - "Microtrenching causes attributed to refs [5], [6]"
+  - "PECVD below 350 / 200 C deposition temperatures (generic, ref [7])"
+  - "Via first/middle/last schematic Fig. 11 (generic TSV concepts)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - via pitch and count for TSiCV arrays (except 36-via array)
+  - PECVD liner material and thickness; BCB product name
+  - solder alloy, bump diameter, flip-chip and TCB bonding temperature/force/time
+  - die and interposer x/y sizes; sensor membrane thickness
+  - reliability testing
+source_quality:
+  - "Table III candidate crop cut after 2 of 5 rows; Table IV candidate title only; Table II has no candidate."
+  - "Text uses ohm symbol dropped in text layer (1.96 ohm, 1 ohm) confirmed on page_09."
+revisions:
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F1-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 2(a)-(f) and Sec. II.A text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F1-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 2(a)-(f) and Sec. II.A text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F1-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 2(a)-(f) and Sec. II.A text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F1-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 2(a)-(f) and Sec. II.A text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F1-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 2(a)-(f) and Sec. II.A text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F1-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 2(a)-(f) and Sec. II.A text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F1-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 2(a)-(f) and Sec. II.A text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F1-s08", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 2(a)-(f) and Sec. II.A text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F1-s09", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 2(a)-(f) and Sec. II.A text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F1-s10", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 2(a)-(f) and Sec. II.A text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F1-s11", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 2(a)-(f) and Sec. II.A text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F1-s12", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 2(a)-(f) and Sec. II.A text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F1-s01", change: "notes: '' -> 'Carrier wafer preparation (Ni-plated protection carrier).'", reason: "carrier prep stated in Sec. II.A"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F1-s07", change: "target: '' -> 'circular via openings 40/80/120 um; via fields V1-V120 (2x2 to 6x6 arrays, Fig. 5)'; conditions: 'via openings 40, 80, 120 um' -> ''", reason: "stated geometry goes in target (p.3 Sec. II.A; p.4 Fig. 5)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F1-s12", change: "target: '' -> 'vias 40/80/120 um diameter'; conditions: 'ESC + mechanical clamp ring; factors coil power (1000/1500/2000 W), platen power, backside cooling, SF6/O2/He flows' -> 'electrostatic chuck + mechanical clamp ring; SF6/O2 with He'; split: '' -> 'DoE 26 runs (definitive screening, JMP): coil power 1000/1500/2000 W; platen power; backside cooling; SF6, O2, He flows'", reason: "DoE factor sweep goes in split; via diameters in target (p.3 Sec. II.A; p.3 Fig. 3)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F1-s13", change: "added step 'remove Ni mask after SiC via etch' (seq 13)", reason: "mask removal after etch stated (selectivity measured before/after removal of the masking layer, p.5 Sec. II.A)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F1", change: "notes: '' -> 'Via-etch DoE coupons; three via diameters etched together on one carrier.'", reason: "flow re-pass"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F2-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Sec. II.B text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F2-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Sec. II.B text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F2-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Sec. II.B text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F2-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Sec. II.B text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F2-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Sec. II.B text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F2-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Sec. II.B text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F2-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Sec. II.B text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F2-s08", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Sec. II.B text"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F2-s03", change: "material: 'Cu or Ni' -> 'Cu; Ni'; split: '' -> 'mask metal: Cu (wafer 1) / Ni (wafer 2)'; step: 'electroplate Cu (wafer 1) or Ni (wafer 2) mask' -> 'electroplate Cu or Ni etch mask (>=10 um)'", reason: "per-wafer mask metal is a split on the shared plating step (p.5 Sec. II.B)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F2-s09", change: "added step 'singulate masked wafers into 15x15 mm pieces' (seq 6)", reason: "pieces of 15x15 mm cut from the masked wafers; paper says preparation is the same as for the via coupons (Sec. II.A singulation)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F2-s06", change: "seq: '6' -> '7'", reason: "seq shifted for inserted singulation step"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F2-s07", change: "seq: '7' -> '8'; category: 'cleaning' -> 'descum'", reason: "descum is its own category (schema v2.4); seq shifted"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F2-s08", change: "seq: '8' -> '9'; conditions: 'clamp 10 C; He 70 sccm; chamber 50 C (Table III 'Hamber'); varied: pressure, source/platen power, SF6, O2, clamp cooling, mask' -> 'clamp 10 C; He 70 sccm; chamber 50 C (Table III 'Hamber')'; split: '' -> 'DoE 29 recipes (JMP): chamber pressure; source power; platen power; SF6 flow; O2 flow; clamp cooling; mask material Ni/Cu'", reason: "recipe sweep goes in split (p.5 Sec. II.B; Table III); seq shifted"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F2-s10", change: "added step 'remove Cu/Ni mask after deep etch' (seq 10)", reason: "mask removal after etch stated (cavities examined after removing the mask, p.5 Sec. II.B; Fig. 10 wafer after etch and mask stripping)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F2", change: "notes: '' -> 'Full-wafer verification etch (Fig. 10) and Table IV verification samples use the best recipe; no separate TV.'", reason: "flow re-pass"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F3", change: "flow_name: 'TSiCV interposer fabrication (Sec. III)' -> 'TSiCV interposer fabrication, PECVD or BCB liner (Sec. III)'; tv_ids: 'tcpmt.2021.3123384-c' -> 'tcpmt.2021.3123384-c;tcpmt.2021.3123384-d;tcpmt.2021.3123384-e;tcpmt.2021.3123384-f;tcpmt.2021.3123384-g'; locator: 'p.6 Sec. III; p.7 Sec. III' -> 'p.6 Sec. III; p.7 Sec. III; p.7 Fig. 12; p.7 Fig. 13; p.7 Fig. 14'; notes: '' -> 'Liner variant of the interposers in TVs e, f, g not stated; interposer 200 um thick in Figs. 16-17.'", reason: "F3/F4 were copies of one TSiCV flow differing only in the liner; merged with TV deltas. Interposers in Sec. IV/V are made with this TSiCV process (p.7 Sec. IV, p.8 Sec. V)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F3-s01", change: "step_basis: '' -> 'stated_in_flow'; target: '' -> 'vias 40/80/120 um diameter'", reason: "order stated (etch, insulation, metallization, grind, backside passivation/RDL); via diameters from Fig. 13"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F3-s02", change: "tv_id: '' -> 'tcpmt.2021.3123384-c'; step_basis: '' -> 'stated_in_flow'; material: '' -> 'PECVD layer (material not stated)'; step: 'PECVD via liner with increased thickness' -> 'PECVD via liner (increased thickness)'", reason: "PECVD liner applies only to TV c (inorganic route)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F3-s09", change: "added step 'fill vias with dry-film polymer (BCB)' (seq 2)", reason: "BCB route of TV d moved from flow F4 (F4-s02)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F3-s10", change: "added step 'reopen polymer-filled vias by excimer laser ablation' (seq 3)", reason: "BCB route of TV d moved from flow F4 (F4-s03)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F3-s03", change: "seq: '3' -> '4'; step_basis: '' -> 'stated_in_flow'", reason: "seq after liner deltas; order stated in Sec. III"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F3-s04", change: "seq: '4' -> '5'; step_basis: '' -> 'stated_in_flow'", reason: "seq after liner deltas; order stated in Sec. III"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F3-s05", change: "seq: '5' -> '6'; step_basis: '' -> 'stated_in_flow'", reason: "seq after liner deltas; order stated in Sec. III"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F3-s06", change: "seq: '6' -> '7'; step_basis: '' -> 'stated_in_flow'", reason: "seq after liner deltas; order stated in Sec. III"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F3-s07", change: "seq: '7' -> '8'; step_basis: '' -> 'stated_in_flow'", reason: "seq after liner deltas; order stated in Sec. III"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F3-s08", change: "seq: '8' -> '9'; step_basis: '' -> 'stated_in_flow'", reason: "seq after liner deltas; order stated in Sec. III"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F3-s08", change: "category: 'deposition_other' -> 'rdl_layer'", reason: "backside RDL is an rdl_layer step"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F4-s01", change: "deleted step 'ICP RIE of blind TSiCV'", reason: "F4 duplicated F3; shared steps now in F3, BCB liner steps are TV-d deltas F3-s09/s10"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F4-s02", change: "deleted step 'fill via with dry film polymer (BCB)'", reason: "F4 duplicated F3; shared steps now in F3, BCB liner steps are TV-d deltas F3-s09/s10"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F4-s03", change: "deleted step 'reopen filled via by excimer laser ablation'", reason: "F4 duplicated F3; shared steps now in F3, BCB liner steps are TV-d deltas F3-s09/s10"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F4-s04", change: "deleted step 'sputter Ti/Cu adhesion and seed'", reason: "F4 duplicated F3; shared steps now in F3, BCB liner steps are TV-d deltas F3-s09/s10"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F4-s05", change: "deleted step 'Cu via fill by electrochemical deposition'", reason: "F4 duplicated F3; shared steps now in F3, BCB liner steps are TV-d deltas F3-s09/s10"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F4-s06", change: "deleted step 'grind backside to reveal Cu'", reason: "F4 duplicated F3; shared steps now in F3, BCB liner steps are TV-d deltas F3-s09/s10"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F4-s07", change: "deleted step 'PECVD SiO2 backside passivation'", reason: "F4 duplicated F3; shared steps now in F3, BCB liner steps are TV-d deltas F3-s09/s10"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F4-s08", change: "deleted step 'open passivation on vias'", reason: "F4 duplicated F3; shared steps now in F3, BCB liner steps are TV-d deltas F3-s09/s10"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F4-s09", change: "deleted step 'deposit backside RDL'", reason: "F4 duplicated F3; shared steps now in F3, BCB liner steps are TV-d deltas F3-s09/s10"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F4", change: "deleted flow 'TSiCV interposer fabrication (Sec. III)'", reason: "merged into F3 (TV d linked there)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F5-s01", change: "step_basis: '' -> 'stated_in_flow'; split: '' -> 'chip thickness 40 / 100 um'", reason: "two stated thicknesses are a split, not a result (p.8 Sec. IV)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F5-s02", change: "deleted step 'place interposer face up on reflow carrier on placer chuck (vacuum pick)'", reason: "assembly steps shared by TVs e and f moved to new flow F8"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F5-s03", change: "deleted step 'pick pre-flipped chips and place sequentially with beam-splitter microscope alignment'", reason: "assembly steps shared by TVs e and f moved to new flow F8"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F5-s04", change: "deleted step 'bonding reflow in reflow oven (solder to interposer Cu pads)'", reason: "assembly steps shared by TVs e and f moved to new flow F8"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F5", change: "flow_name: 'flip-chip assembly on SiC interposer (Sec. IV)' -> 'planar SiC chip thinning (Sec. IV)'", reason: "flow re-pass: assembly split out to F8"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F6-s01", change: "step_basis: '' -> 'inferred_order'; notes: '' -> 'Inferred: MEMS topography etched (Sec. II process) before wafer bumping.'", reason: "deep etch before bumping: order not stated explicitly"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F6-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. IV"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F6-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. IV"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F6-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. IV"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F6-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. IV"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F6-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. IV"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F6-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated in Sec. IV"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F6-s05", change: "target: '' -> 'bump height 75 um (calculated)'; result: 'calculated bump height 75 um' -> ''", reason: "calculated bump height is the stated target geometry"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F6-s06", change: "conditions: '' -> 'face-up on dicing tape; soft water rinse to clean and cool'", reason: "conditions as written (p.8 Sec. IV)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F6-s08", change: "deleted step 'manual flip-chip placement on SiC interposer'", reason: "assembly steps shared by TVs e and f moved to new flow F8"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F6-s09", change: "deleted step 'bonding reflow in reflow oven'", reason: "assembly steps shared by TVs e and f moved to new flow F8"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F6", change: "flow_name: 'flip-chip assembly on SiC interposer (Sec. IV)' -> 'SiC MEMS die preparation and wafer bumping (Sec. IV)'", reason: "flow re-pass: assembly split out to F8"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F8", change: "added flow 'flip-chip assembly on SiC interposer (Sec. IV)'", reason: "one assembly procedure for planar chips (e) and MEMS die (f), p.8 Sec. IV"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F8-s01", change: "added step 'pick interposer from tray, place face up on reflow carrier, preposition on placer chuck' (seq 1)", reason: "replaces F5-s02 (shared by e and f)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F8-s02", change: "added step 'pick pre-flipped chips from tray and place sequentially; manual alignment of bumps to pads' (seq 2)", reason: "replaces F5-s03 and F6-s08"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F8-s03", change: "added step 'bonding reflow: chip solder bumps melt, wet and bond to interposer Cu pads' (seq 3)", reason: "replaces F5-s04 and F6-s09"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F7-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 18(a)-(f), Sec. V and Fig. 19(a)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F7-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 18(a)-(f), Sec. V and Fig. 19(a)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F7-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 18(a)-(f), Sec. V and Fig. 19(a)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F7-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 18(a)-(f), Sec. V and Fig. 19(a)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F7-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 18(a)-(f), Sec. V and Fig. 19(a)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F7-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 18(a)-(f), Sec. V and Fig. 19(a)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F7-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 18(a)-(f), Sec. V and Fig. 19(a)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F7-s08", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 18(a)-(f), Sec. V and Fig. 19(a)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F7-s09", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 18(a)-(f), Sec. V and Fig. 19(a)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F7-s01", change: "category: 'other' -> 'carrier_prep'", reason: "wafer provision shown as step (a) of Fig. 18 (carrier_prep convention)"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F7-s03", change: "notes: '' -> 'Ion implantation of contact area; species/dose not stated.'", reason: "implantation has no category; keep other with note"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F7-s04", change: "category: 'deposition_pvd' -> 'deposition_other'; notes: '' -> 'Passivation material and deposition methods not stated.'", reason: "deposition method not stated (Fig. 18(d) 'passivation and metallization')"}
+  - {date: 2026-10-20, source: "repass", row_id: "tcpmt.2021.3123384-F7-s08", change: "category: 'other' -> 'bumping'", reason: "stud bumping is a bumping step"}

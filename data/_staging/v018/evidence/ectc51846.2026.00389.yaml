@@ -1,0 +1,57 @@
+paper_id: ectc51846.2026.00389
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00389/text.md
+  - references/ectc51846.2026.00389/source.json
+  - references/ectc51846.2026.00389/figures/page_03.png
+  - references/ectc51846.2026.00389/figures/page_05.png
+  - references/ectc51846.2026.00389/figures/cand/p02_fig1.png
+  - references/ectc51846.2026.00389/figures/cand/p02_fig2.png
+  - references/ectc51846.2026.00389/figures/cand/p03_fig3.png
+  - references/ectc51846.2026.00389/figures/cand/p04_fig4.png
+  - references/ectc51846.2026.00389/figures/cand/p04_fig6.png
+  - references/ectc51846.2026.00389/figures/cand/p04_fig7.png
+  - references/ectc51846.2026.00389/figures/cand/p05_tablei.png
+  - references/ectc51846.2026.00389/figures/cand/p05_fig9.png
+figure_reading_method: >-
+  Table I checked cell by cell against candidate p05_tablei; Table II checked against a page-5 re-crop. IR temperatures
+  (80.3 C, 114 C) read from Fig. 4(b-c) candidate crop. Fig. 3 ring label 5.4 mm read from page-3 re-crop.
+entries:
+  - {table: stack_layers, row_id: ectc51846.2026.00389-a-L01, field: thickness_um, value: 4, unit: um, basis: measured, locator: "p.3 Sec. III", note: "'approximately 4 um' final Cu"}
+  - {table: stack_layers, row_id: ectc51846.2026.00389-b-L01, field: line_um, value: 34, unit: um, basis: design_target, locator: "p.3 Sec. II.B", note: "'approximately 34 um' for 70 ohm on 30 um ABF"}
+  - {table: stack_layers, row_id: ectc51846.2026.00389-a-L02, field: thickness_um, value: 72.5, unit: um, basis: design_target, locator: "p.3 Sec. II.A", note: "ABF thickness used to design the MRRs in HFSS; fabricated thickness not stated"}
+  - {table: test_vehicles, row_id: ectc51846.2026.00389-a, field: notes, value: "11, 16.5, 20, 33 GHz", basis: design_target, locator: "p.3 Sec. II.A", note: "MRR fundamental resonances"}
+derived:
+  - {table: stack_layers, row_id: ectc51846.2026.00389-a-L04, field: thickness_um, value: 0.2, formula: "200 nm / 1000", inputs: "p.3 Sec. III"}
+  - {table: stack_layers, row_id: ectc51846.2026.00389-a-L05, field: thickness_um, value: 0.05, formula: "50 nm / 1000", inputs: "p.3 Sec. III"}
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00389-b-m1, field: locator, values: ["TABLE I (second table, insertion loss)", "Table II (text)"], locators: ["p.5 table title", "p.5 Sec. IV.B"], chosen: "Table II", why: "two tables printed as TABLE I; text refers to the insertion-loss table as Table II"}
+  - {table: stack_layers, row_id: ectc51846.2026.00389-a-L02, field: thickness_um, values: [72.5, 30], locators: ["p.3 Sec. II.A (MRR design)", "p.1 Abstract / p.3 Sec. II.B (microstrip lines)"], chosen: "72.5 for MRR TV, 30 for line TV", why: "paper gives different ABF thicknesses for the two structures; treated as two coupons"}
+excluded:
+  - "Prior work [10]: Dk 3.45 +/- 0.05 and Df 0.002-0.009 from 20-220 GHz; ABF Type B comparison"
+  - "Glass dimensional stability 'up to 35% better than organic cores' and sub-2 um RDL (refs [3], [7])"
+  - "Chip operating temperatures 85-150 C (ref [9])"
+  - "224 Gb/s SerDes Nyquist ~56 GHz statement (ref [2])"
+  - "Fig. 1 multi-chip stacked glass AiP concept (not built)"
+not_reported:
+  - electrical_interfaces (insertion loss per mm entered as metrics; no protocol, no total IL in dB)
+  - optical_interfaces
+  - panel size, MRR ring radii and line widths, gap values (only deviations), microvia diameter/depth
+  - ABF cure and lamination conditions, plating chemistry, seed for the signal layer
+  - Fig. 7 Df per point beyond Table I; Fig. 10/11 values (model-to-hardware plots)
+source_quality:
+  - "Two tables both titled TABLE I; candidate missing for the insertion-loss table. Candidate p03_fig3 cuts the (b) label."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00389-F1-s01", change: "conditions '' -> 'both sides of glass; minimize panel-level warpage, mechanical buffer'", reason: "stated purpose/sides moved to conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00389-F1-s03", change: "target '' -> 'Cu ground layer 3-6 um'; material 'Cu 3-6 um' -> 'Cu'", reason: "stated Cu thickness range as target"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00389-F1-s04", change: "tv_id 'ectc51846.2026.00389-a' -> ''; thickness_um '72.5' -> ''; overrides 'thickness_um:design_target' -> ''; split '' -> 'ABF thickness: MRR coupon (a) 72.5 um / microstrip-line coupon (b) 30 um'; locator 'p.3 Sec. III' -> 'p.3 Sec. III; p.3 Sec. II.A; p.3 Sec. II.B'; notes '' -> '72.5 um is the HFSS design thickness of the MRRs (Sec. II.A); fabricated thickness not stated.'", reason: "per-TV thickness merged into shared step split (convention: variant values in split)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00389-F1-s05", change: "deleted step 'laminate ABF of required thickness'", reason: "merged into shared F1-s04 (split)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00389-F1-s08", change: "atmosphere '' -> 'vacuum'; conditions '' -> 'vacuum lamination; standard photolithography'", reason: "vacuum lamination typed"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00389-F1-s09", change: "result '' -> 'final Cu ~4 um (profilometer)'; overrides '' -> 'result:measured'", reason: "measured final Cu thickness moved from deleted inspection row"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00389-F1-s12", change: "deleted step 'dimensional inspection by optical profilometry'", reason: "post-build dimensional measurement; values already in metrics a-m44, b-m1 and stack_layers L01 (Cu ~4 um, RMS 190 nm)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00389-F1", change: "step_basis set to stated_in_flow on 10 steps", reason: "order given in the paper's flow text/figure"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00389-F1-s01", change: "conditions prefixed 'on bare 200 um AGC EN-1 glass; '", reason: "pass B target_missing L07: Sec. III 'Fabrication begins with a bare 200 um-thick AGC EN-1 glass substrate'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00389-F1-s02", change: "target '' -> 'Ti 50 nm / Cu 200 nm'", reason: "pass B target_missing L04/L05: Sec. III 'Ti/Cu seed layer (50 nm / 200 nm)'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00389-F1-s08", change: "target '' -> 'microstrip conductor width ~34 um (coupon b, 70 ohm on 30 um ABF; design)'", reason: "pass B target_missing b-L01 line_um: Sec. II.B 'conductor width of approximately 34 um'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00389-F1-s09", change: "thickness_um '' -> '4'; overrides 'result:measured' -> 'result:measured;thickness_um:measured'; qualifiers '' -> 'thickness_um:approx'", reason: "pass B target_missing L01: Sec. III final Cu thickness measured ~4 um"}

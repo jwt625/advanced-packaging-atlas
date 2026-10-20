@@ -1,0 +1,44 @@
+paper_id: ectc51687.2025.00378
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00378/text.md
+  - references/ectc51687.2025.00378/source.json
+  - references/ectc51687.2025.00378/figures/cand/p02_tablei.png
+  - references/ectc51687.2025.00378/figures/cand/p02_tableii.png
+  - references/ectc51687.2025.00378/figures/cand/p03_fig1.png
+  - references/ectc51687.2025.00378/figures/cand/p03_fig2.png
+  - references/ectc51687.2025.00378/figures/cand/p03_fig3.png
+  - references/ectc51687.2025.00378/figures/cand/p04_fig4.png
+  - references/ectc51687.2025.00378/figures/cand/p04_fig5.png
+  - references/ectc51687.2025.00378/figures/cand/p04_fig6.png
+  - references/ectc51687.2025.00378/figures/cand/p04_fig7.png
+  - references/ectc51687.2025.00378/figures/cand/p05_fig8.png
+  - references/ectc51687.2025.00378/figures/cand/p05_fig9.png
+  - references/ectc51687.2025.00378/figures/cand/p05_tableiii.png
+figure_reading_method: >-
+  Candidate crops for all figures/tables; Fig. 5 panels re-rendered at 600 dpi in scratch to read the measurement labels
+  (5(a): 3 um above pad, 15 um pad; 5(b): 15 um above pad, 15 um pad, 29 um, 12 um).
+entries:
+  - {table: interconnects, row_id: ectc51687.2025.00378-a-i1, field: depth_um, value: 15, unit: um, basis: design_target, locator: "p.4 Sec. III.B; p.4 Fig. 5(b)", note: "uniform target dielectric thickness above chip Cu pads; via lands on pad"}
+  - {table: components, row_id: ectc51687.2025.00378-a-c1, field: cavity_depth_um, value: 29, unit: um, basis: measured, locator: "p.3 Fig. 2(b)", note: "29.0084 um profilometer label, rounded"}
+derived:
+  - {table: stack_layers, row_id: ectc51687.2025.00378-a-L05, field: roughness_ra_um, value: 0.12, formula: "120 nm / 1000", inputs: "p.2 Sec. III.A"}
+  - {table: stack_layers, row_id: ectc51687.2025.00378-a-L02, field: thickness_um, value: 0.25, formula: "250 nm / 1000", inputs: "p.5 Sec. III.C"}
+  - {table: stack_layers, row_id: ectc51687.2025.00378-a-L03, field: thickness_um, value: 0.05, formula: "50 nm / 1000", inputs: "p.5 Sec. III.C"}
+conflicts:
+  - {table: components, row_id: ectc51687.2025.00378-a-c1, field: thickness_um, values: ["<30", "~20-30", 25], locators: ["p.2 Table I", "p.2 Sec. II", "p.5 Fig. 8"], chosen: 25, why: "measured cross-section; table/text kept in stack_layers L10 range"}
+  - {table: interconnects, row_id: ectc51687.2025.00378-a-i1, field: diameter_um, values: [40, 41.66, 42, 43, 44], locators: ["p.4 Fig. 7 caption", "p.4 Fig. 7", "p.5 Fig. 8"], chosen: 40, why: "row basis is design target; measured diameters entered as metrics"}
+excluded:
+  - "Glass CTE ~3-10 ppm/C and <1 um L/S capability attributed to refs [8]-[10]"
+  - "Glass-core embedding cavity depth/chip thickness >100 um attributed to ref [11]"
+  - "Fig. 5(b) labels 29 um and 12 um: layer boundaries not identified in text, not entered"
+  - "Fig. 4 surface profile amplitudes (no values in text; not read off)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - dielectric product name, glass type, bonding material, cavity x/y size, M1 line/space
+  - lamination press temperature/pressure/time values, cure temperatures
+  - reliability, warpage, thermal data
+source_quality:
+  - "Typo 'ptich' in Sec. II; Fig. 4 caption and text describe before/after but caption title says 'optimized'."

@@ -42,3 +42,15 @@ not_reported:
   - interposer-to-substrate joint type/pitch; BGA pitch
   - lid material; reliability testing; numeric yield
   - warpage magnitude in Fig. 3 (3D plot not readable)
+revisions:
+  - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00150-a-i3, change: "ic_type microbump kept (disputed); notes and locator now cite the micro bump naming", reason: "x1 item 10 calls it a 150 um C4; p.1 Fig. 1(b) labels FPGA/AI chip joints \"Micro bump\" and the Abstract says Cu-pillar micro-bump solder joints"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-f03, change: "added Fig. 12 (process_flow, candidate)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-f06, change: "added Fig. 11 (cross_section, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-f07, change: "added Fig. 5 (cross_section, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-f08, change: "added Fig. 7 (cross_section, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-f09, change: "added Fig. 8 (cross_section, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-f10, change: "added Fig. 14 (package_photo, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-f13, change: "added Fig. 3 (warpage_plot, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-f14, change: "added Fig. 6 (warpage_plot, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-f15, change: "added Fig. 9 (other, manual)", reason: "schematic/image of the build or plot/table carrying extracted values (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51909.2023.00150-figures, change: "re-ranked: Fig. 10 f03 -> f02, Fig. 2 f05 -> f04, Fig. 1 f02 -> f05, Table I f04 -> f11, Fig. 4 f06 -> f12", reason: "rank order per SKILL.md step 5 after additions"}

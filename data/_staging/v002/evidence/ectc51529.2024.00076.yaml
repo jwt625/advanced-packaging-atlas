@@ -1,0 +1,55 @@
+paper_id: ectc51529.2024.00076
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00076/text.md
+  - references/ectc51529.2024.00076/source.json
+  - references/ectc51529.2024.00076/figures/page_02.png
+  - references/ectc51529.2024.00076/figures/page_03.png
+  - references/ectc51529.2024.00076/figures/page_04.png
+  - references/ectc51529.2024.00076/figures/page_05.png
+figure_reading_method: >-
+  Page renders p.2-5 viewed; candidates p02_fig1, p03_fig5, p03_fig6, p04_fig8, p05_fig9, p05_fig10 opened; manual re-crop of Fig. 8.
+  Fig. 6 labels read: Nb 200 nm, TiN 10 nm, Dielectric, Si 725 um; Nb 100 nm after CMP; 4 um gap and 3 um pad.
+entries:
+  - {table: interconnects, row_id: ectc51529.2024.00076-b-i1, field: pitch_um, value: 7, unit: um, basis: design_target, locator: "p.4 Sec. III.1", note: "3 um pad width corresponds to 7 um pitch"}
+  - {table: interconnects, row_id: ectc51529.2024.00076-b-i1, field: alignment_um, value: 0.4, unit: um, basis: measured, locator: "p.4 Sec. III.2; p.5 Fig. 9", note: "~400 nm misalignment in STEM; tool spec 3-sigma < 1 um"}
+derived:
+  - {table: process_steps, row_id: ectc51529.2024.00076-F1-s05, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.2 Sec. II.1"}
+  - {table: process_steps, row_id: ectc51529.2024.00076-F2-s09, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.4 Sec. III.1"}
+  - {table: interconnects, row_id: ectc51529.2024.00076-a-i1, field: anneal_time_min, value: 120, formula: "2 h x 60", inputs: "p.2 Sec. II.1"}
+  - {table: interconnects, row_id: ectc51529.2024.00076-b-i1, field: anneal_time_min, value: 120, formula: "2 h x 60", inputs: "p.4 Sec. III.1"}
+  - {table: stack_layers, row_id: ectc51529.2024.00076-a-L03, field: thickness_um, value: 0.112, formula: "112 nm / 1000", inputs: "p.3 Sec. II.2"}
+  - {table: process_steps, row_id: ectc51529.2024.00076-F1-s02, field: thickness_um, value: 0.112, formula: "112 nm / 1000", inputs: "p.3 Sec. II.2"}
+  - {table: process_steps, row_id: ectc51529.2024.00076-F1-s02, field: thickness_in_um, value: 0.2, formula: "200 nm / 1000", inputs: "p.1 Sec. II.1"}
+conflicts: []
+excluded:
+  - "In microbump Tc ~2.7 K (ref [3]); In bump pitch 5 um (ref [4]); sub-1 um hybrid bonding pitch (refs [5,6])"
+  - "Fujino et al. SAB Nb daisy chains: 200 um / 1.4 mm pads, Tc 7.2 K / 9.3 K, 3 nm Si layer (refs [7-9])"
+  - "NbN thermo-compression bonding, Tc ~15 K (ref [10]); Uomoto Nb ADB 1.5 J/m2 (ref [15])"
+not_reported:
+  - electrical_interfaces (electrical/cryogenic tests stated as ongoing)
+  - optical_interfaces
+  - patterned-wafer diameter, dielectric thickness (only 'submicrometer' transferred oxide), full-sheet thermal oxide thickness
+  - pad count, daisy chains, resistance, critical temperature, yield
+  - bonding temperature as a number ('atmospheric temperature and pressure'), CMP and etch chemistries
+source_quality:
+  - "Candidate p04_fig8 clips the bottom of both C-SAM panels and the A)/B) labels."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00076-F1;ectc51529.2024.00076-F2", change: "step_basis stated_in_flow on all steps (Sec. II.1 text order; Sec. III.1 + Fig. 6 A-E)", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00076-F1-s04", change: "deleted (C-SAM after bonding)", reason: "Sec. II.2 characterization, not part of the Sec. II.1 flow; result already in metrics ectc51529.2024.00076-a-m5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00076-F1-s06", change: "deleted (C-SAM after anneal)", reason: "Sec. II.2 characterization; result already in metrics ectc51529.2024.00076-a-m5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00076-F1-s07", change: "deleted (DCB adherence test + debonding)", reason: "destructive post-build test; Gc 1.6 J/m2 and failure interface already in metrics -a-m3, -a-m4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00076-F1-s08", change: "deleted (TEM cross-section)", reason: "failure-analysis/characterization cut; result already in metrics -a-m6; Nb ~112 nm in stack_layers -a-L03"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00076-F1-s05", change: "seq 5 -> 4 (step_id kept)", reason: "seq compacted after deleting characterization rows"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00076-F2-s08", change: "deleted (C-SAM before anneal)", reason: "Sec. III.2 characterization on a non-annealed sample; result already in metrics ectc51529.2024.00076-b-m2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00076-F2-s12", change: "deleted (STEM/TEM and EDX of bonded pads)", reason: "failure-analysis/characterization; results already in metrics -b-m3 (400 nm), -b-m4 (2 nm), -b-m5, -b-m6"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00076-F2-s09", change: "seq -> 8 (step_id kept)", reason: "seq compacted after deleting characterization rows"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00076-F2-s10", change: "seq -> 9 (step_id kept)", reason: "seq compacted after deleting characterization rows"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00076-F2-s11", change: "seq -> 10 (step_id kept)", reason: "seq compacted after deleting characterization rows"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00076-F2-s03", change: "thickness_in_um 0.2 (as-deposited Nb)", reason: "p.3 Sec. III.1, Fig. 6(A)-(B): Nb 200 nm polished down to 100 nm"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00076-F2-s05", change: "pad geometry moved from conditions to target, plus 4 um gap label", reason: "p.4 Sec. III.1: down to 3 um width (7 um pitch); p.3 Fig. 6(C) labels 3 um pad / 4 um gap"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00076-F1;ectc51529.2024.00076-F2", change: "flow locators trimmed to the flow sources (characterization figures removed)", reason: "characterization rows deleted"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00076-F1-s02", change: "thickness_in_um '' -> 0.2; thickness_um '' -> 0.112 (measured, approx); locator + p.3 Sec. II.2, Fig. 5(A)", reason: "manifest v002 target_missing a-L03/a-L04: 200 nm PVD (p.1 Sec. II.1) and TEM ~112 nm per Nb layer after bonding (p.3 Sec. II.2); CMP is the only thinning step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00076-F2-s01", change: "conditions: on dielectric-coated Si 725 um wafer (Fig. 6(A))", reason: "manifest v002 target_missing_preexisting b-L07: Fig. 6(A) label 'Si 725 um'"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00076-F2-s10", change: "thickness_in_um '' -> 725 (schematic)", reason: "manifest v002 target_missing_preexisting b-L07: Fig. 6(A)-(B) wafer label Si 725 um; grinding input of top wafer bulk"}

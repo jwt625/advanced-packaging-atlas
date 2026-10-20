@@ -1,0 +1,34 @@
+paper_id: ectc51846.2026.00140
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00140/text.md
+  - references/ectc51846.2026.00140/source.json
+  - references/ectc51846.2026.00140/figures/page_03.png
+  - references/ectc51846.2026.00140/figures/cand/p03_fig1.png
+  - references/ectc51846.2026.00140/figures/cand/p03_fig2.png
+  - references/ectc51846.2026.00140/figures/cand/p03_fig3.png
+  - references/ectc51846.2026.00140/figures/cand/p03_fig4.png
+figure_reading_method: >-
+  Candidates for Fig. 1-4 opened; Fig. 4(a) re-cropped at 500 dpi: green measurement labels unreadable, so the
+  2.4/0.6 um values come from the text (p.4). SEM scale bar (3 um) consistent with ~3 um feature pitch.
+entries:
+  - {table: stack_layers, row_id: ectc51846.2026.00140-b-L02, field: line_um, value: 2.4, unit: um, basis: design_target, locator: "p.4 Sec. 4", note: "printed 'fine line DRIE (2.4um/0.6um)'; image shows narrow ~0.6 um walls between ~2.4 um gaps, so line/space roles may be reversed"}
+derived: []
+conflicts: []
+excluded:
+  - "glass thickness range 'several tens of microns up to several millimeters' (laser equipment capability, not a build)"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - panel size, glass type and thickness used, TGV diameter/pitch/depth/aspect ratio
+  - RDL layer count, dielectric thickness, Cu thickness, via pitch
+  - warpage, thermal cycling, bend test and electrical results (claimed only)
+source_quality:
+  - "Clean text layer; short platform paper with qualitative claims; candidates for all 4 figures correct."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00140-F1", change: "scope tv_build -> generic_platform (also F2); step_basis stated_in_flow", reason: "Sec. 3-4 describe the InfinityBoard platform flow, not a specific build"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00140-F1-s05", change: "metallization options in split", reason: "p.2 Sec. 3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00140-F2", change: "masking/etching C-L split per Fig. 2: added s08 (C), s09 (G), s10 (H-I), s11 (L); s02 now D-F, s03 now J-K; seq renumbered", reason: "p.3 Fig. 2 gives the finer order; text p.3 Sec. 4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00140-F2-s07", change: "category other -> rdl_layer; step reworded", reason: "p.3 Sec. 4; Fig. 3"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00140-F3", change: "added fragments flow for TV b (DRIE/metallization demos)", reason: "p.3 Fig. 1; p.3 Fig. 4; p.4 Sec. 4; TV b was in no flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00140-F3-s01", change: "added rows s01-s05 (DRIE trench L/S ~5 um, metallization, CMP, fine-line DRIE 2.4/0.6 um, 15 um DRIE via)", reason: "p.3 Sec. 4; p.4 Sec. 4"}

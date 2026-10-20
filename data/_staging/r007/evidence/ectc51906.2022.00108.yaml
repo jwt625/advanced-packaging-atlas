@@ -35,3 +35,9 @@ not_reported:
   - stiffener and adhesive material names, absolute moduli/CTE, HT measurement temperature, warpage axis unit and measurement method
   - flip chip bond temperature, stiffener attach temperature other than press cure split, TC cycle count, sample counts
   - note: Adhesive A (267/134) and Reflow x1 (225/193) bars equal Stiff C 1.5 mm and Stiff B 1 mm 180 C values; builds not stated
+revisions:
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00108-figures, change: "renumbered f02 -> f01 (Fig. 2), f01 -> f02 (Fig. 1), f06 -> f03 (Fig. 8 p.5), f03 -> f05 (Fig. 5), f05 -> f06 (Fig. 7), f04 -> f08 (Table I)", reason: "rank rule 2026-10-19: stack schematic > package photo"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00108-f04, change: "added Fig. 6 (warpage_plot, candidate)", reason: "contains press-cure head schematic; source of -a-m9, -a-m10, -a-m15, -a-m16"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00108-f07, change: "added Fig. 8 p.4 (warpage_plot, candidate)", reason: "source of -a-m23..m28"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00108-f09, change: "added Table III (data_table, candidate)", reason: "source of -a-m33..m41"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00108-f10, change: "added Table II (data_table, candidate)", reason: "source of -a-c7 relative modulus/CTE notes"}

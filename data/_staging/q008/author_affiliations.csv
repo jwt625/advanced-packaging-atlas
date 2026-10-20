@@ -1,0 +1,37 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc51529.2024.00218-a01-1,ectc51529.2024.00218,1,Masaki Haneda,1,primary,Sony Semiconductor Solutions,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51529.2024.00218-a02-1,ectc51529.2024.00218,2,Yukako Ikegami,1,primary,Sony Semiconductor Solutions,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51529.2024.00218-a03-1,ectc51529.2024.00218,3,Kengo Kotoo,1,primary,Sony Semiconductor Solutions,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51529.2024.00218-a04-1,ectc51529.2024.00218,4,Kan Shimizu,1,primary,Sony Semiconductor Solutions,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51529.2024.00218-a05-1,ectc51529.2024.00218,5,Yoshihisa Kagawa,1,primary,Sony Semiconductor Solutions,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51529.2024.00218-a06-1,ectc51529.2024.00218,6,Hayato Iwamoto,1,primary,Sony Semiconductor Solutions,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51529.2024.00322-a01-1,ectc51529.2024.00322,1,Takeshi Saito,1,primary,JOINT2,,Kawasaki,JP,"printed block: Consortium JOINT2 (Jisso Open Innovation Network of Tops 2), Resonac Corporation",paper,p.1 affiliations
+ectc51529.2024.00322-a01-2,ectc51529.2024.00322,1,Takeshi Saito,2,additional,Resonac,,Kawasaki,JP,same printed block as JOINT2,paper,p.1 affiliations
+ectc51529.2024.00322-a02-1,ectc51529.2024.00322,2,Keiko Ueno,1,primary,JOINT2,,Kawasaki,JP,"printed block: Consortium JOINT2 (Jisso Open Innovation Network of Tops 2), Resonac Corporation",paper,p.1 affiliations
+ectc51529.2024.00322-a02-2,ectc51529.2024.00322,2,Keiko Ueno,2,additional,Resonac,,Kawasaki,JP,same printed block as JOINT2,paper,p.1 affiliations
+ectc51529.2024.00322-a03-1,ectc51529.2024.00322,3,Dongchul Kang,1,primary,JOINT2,,Kawasaki,JP,"printed block: Consortium JOINT2 (Jisso Open Innovation Network of Tops 2), Resonac Corporation",paper,p.1 affiliations
+ectc51529.2024.00322-a03-2,ectc51529.2024.00322,3,Dongchul Kang,2,additional,Resonac,,Kawasaki,JP,same printed block as JOINT2,paper,p.1 affiliations
+ectc51529.2024.00322-a04-1,ectc51529.2024.00322,4,Takahiro Iseki,1,primary,JOINT2,,Kawasaki,JP,"printed block: Consortium JOINT2 (Jisso Open Innovation Network of Tops 2), Resonac Corporation",paper,p.1 affiliations
+ectc51529.2024.00322-a04-2,ectc51529.2024.00322,4,Takahiro Iseki,2,additional,Resonac,,Kawasaki,JP,same printed block as JOINT2,paper,p.1 affiliations
+ectc51529.2024.00322-a05-1,ectc51529.2024.00322,5,Shan Ho Tsai,1,primary,Resonac,,Kawasaki,JP,printed: Resonac Corporation only (no JOINT2),paper,p.1 affiliations
+ectc51529.2024.00322-a06-1,ectc51529.2024.00322,6,Sadaaki Katoh,1,primary,JOINT2,,Kawasaki,JP,"printed block: Consortium JOINT2 (Jisso Open Innovation Network of Tops 2), Resonac Corporation",paper,p.1 affiliations
+ectc51529.2024.00322-a06-2,ectc51529.2024.00322,6,Sadaaki Katoh,2,additional,Resonac,,Kawasaki,JP,same printed block as JOINT2,paper,p.1 affiliations
+ectc51687.2025.00055-a01-1,ectc51687.2025.00055,1,Terry Ku,1,primary,TSMC,,Hsinchu,TW,printed: TSMC,paper,p.1 affiliations
+ectc51687.2025.00055-a02-1,ectc51687.2025.00055,2,C.H. Tsai,1,primary,TSMC,,Hsinchu,TW,printed: TSMC,paper,p.1 affiliations
+ectc51687.2025.00055-a03-1,ectc51687.2025.00055,3,R.F. Tsui,1,primary,TSMC,,Hsinchu,TW,printed: TSMC,paper,p.1 affiliations
+ectc51687.2025.00055-a04-1,ectc51687.2025.00055,4,J.C. Twu,1,primary,TSMC,,Hsinchu,TW,printed: TSMC,paper,p.1 affiliations
+ectc51687.2025.00055-a05-1,ectc51687.2025.00055,5,S.W. Lu,1,primary,TSMC,,Hsinchu,TW,printed: TSMC,paper,p.1 affiliations
+ectc51687.2025.00055-a06-1,ectc51687.2025.00055,6,C.C. Hsieh,1,primary,TSMC,,Hsinchu,TW,printed: TSMC,paper,p.1 affiliations
+ectc51687.2025.00055-a07-1,ectc51687.2025.00055,7,C.S. Liu,1,primary,TSMC,,Hsinchu,TW,printed: TSMC,paper,p.1 affiliations
+ectc51687.2025.00055-a08-1,ectc51687.2025.00055,8,Douglas C.H. Yu,1,primary,TSMC,,Hsinchu,TW,printed: TSMC,paper,p.1 affiliations
+ectc51906.2022.00176-a01-1,ectc51906.2022.00176,1,S. W. Liang,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51906.2022.00176-a02-1,ectc51906.2022.00176,2,Gene C. Y. Wu,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51906.2022.00176-a03-1,ectc51906.2022.00176,3,K. C. Yee,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51906.2022.00176-a04-1,ectc51906.2022.00176,4,C. T. Wang,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51906.2022.00176-a05-1,ectc51906.2022.00176,5,Ji James Cui,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51906.2022.00176-a06-1,ectc51906.2022.00176,6,Douglas C. H. Yu,1,primary,TSMC,,Hsinchu,TW,,paper,p.1 affiliations
+icep58572.2023.10129684-a01-1,icep58572.2023.10129684,1,Powei Lu,1,primary,ASE,,Kaohsiung,TW,,paper,p.1 affiliations
+icep58572.2023.10129684-a02-1,icep58572.2023.10129684,2,Jia Sang Weng,1,primary,ASE,,Kaohsiung,TW,,paper,p.1 affiliations
+icep58572.2023.10129684-a03-1,icep58572.2023.10129684,3,Huang Han Chen,1,primary,ASE,,Kaohsiung,TW,,paper,p.1 affiliations
+icep58572.2023.10129684-a04-1,icep58572.2023.10129684,4,Jeffrey Yang,1,primary,ASE,,Kaohsiung,TW,,paper,p.1 affiliations
+icep58572.2023.10129684-a05-1,icep58572.2023.10129684,5,Jen-Kuang Fang,1,primary,ASE,,Kaohsiung,TW,,paper,p.1 affiliations

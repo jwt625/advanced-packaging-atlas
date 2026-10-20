@@ -1,0 +1,37 @@
+paper_id: icept59018.2023.10492317
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/icept59018.2023.10492317/text.md
+  - references/icept59018.2023.10492317/source.json
+  - references/icept59018.2023.10492317/figures/page_01.png
+  - references/icept59018.2023.10492317/figures/page_02.png
+  - references/icept59018.2023.10492317/figures/page_03.png
+figure_reading_method: >-
+  Page renders; 300 dpi re-crops of Fig. 8, 9, 10 (fit equations and max points); Fig. 5 legend maxima from the render.
+entries:
+  - {table: test_vehicles, row_id: icept59018.2023.10492317-a, field: carrier_size_mm, value: "700x700", unit: mm, basis: design_target, locator: "p.1 Abstract; p.1 Sec. II", note: "around 700x700 mm"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: icept59018.2023.10492317-b-m1, field: value, values: [3.37, 3.4, 3.32], locators: ["p.2 Fig. 5 legend", "p.2 Sec. V text", "p.3 Fig. 8 step 1"], chosen: 3.37, why: "contour legend maximum; text is rounded, Fig. 8 read off plot"}
+  - {table: metrics, row_id: icept59018.2023.10492317-b-m2, field: value, values: [3.43, 3.4, 3.35], locators: ["p.2 Fig. 5 legend", "p.3 Sec. V text", "p.3 Fig. 8 step 1"], chosen: 3.43, why: "contour legend maximum"}
+  - {table: metrics, row_id: icept59018.2023.10492317-a-m2, field: value, values: [0.055, 0.056], locators: ["p.3 Fig. 10 fit", "p.3 Sec. V text"], chosen: 0.055, why: "printed fit equation of tested data; text rounds tested and simulated together"}
+excluded:
+  - "WLP die shift studies of refs [1]-[4]"
+not_reported:
+  - value of M (die shift spec, um), so all die shift values are normalized only
+  - die size and thickness, panel/carrier/tape/MC materials and properties, molding temperature and pressure
+  - Cu trace and film dimensions, interconnects (ball drop step mentioned only)
+  - number of tested panels/dies, measurement method
+  - electrical_interfaces, optical_interfaces, warpage values
+source_quality:
+  - "p.1 footer reads '2022 23rd ICEPT' while header/DOI give 2023 24th ICEPT (template remnant); p.4 contains leftover IEEE template text."
+  - "Candidate bboxes are shifted (p01_fig1 includes author block and cuts the panel; others include blank space); all key figures manual."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "icept59018.2023.10492317-F1-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "numbered main process steps (p.1 Sec. III)"}
+  - {date: 2026-10-20, source: repass, row_id: "icept59018.2023.10492317-F1-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "numbered main process steps (p.1 Sec. III)"}
+  - {date: 2026-10-20, source: repass, row_id: "icept59018.2023.10492317-F1-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "numbered main process steps (p.1 Sec. III)"}
+  - {date: 2026-10-20, source: repass, row_id: "icept59018.2023.10492317-F1-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "numbered main process steps (p.1 Sec. III)"}
+  - {date: 2026-10-20, source: repass, row_id: "icept59018.2023.10492317-F1-s02", change: "material: '' -> 'tape'", reason: "die/tape/carrier plate stack shown in Fig. 3 model"}
+  - {date: 2026-10-20, source: repass, row_id: "icept59018.2023.10492317-F1-s03", change: "material: '' -> 'mold compound (MC)'", reason: "MC named as mold compound (Sec. I, Fig. 4)"}
+  - {date: 2026-10-20, source: repass, row_id: "icept59018.2023.10492317-F1-s05", change: "added: ball drop", reason: "Abstract names a ball drop step affected by die shift"}

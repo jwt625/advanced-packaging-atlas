@@ -1,0 +1,44 @@
+paper_id: ectc51846.2026.00389
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00389/text.md
+  - references/ectc51846.2026.00389/source.json
+  - references/ectc51846.2026.00389/figures/page_03.png
+  - references/ectc51846.2026.00389/figures/page_05.png
+  - references/ectc51846.2026.00389/figures/cand/p02_fig1.png
+  - references/ectc51846.2026.00389/figures/cand/p02_fig2.png
+  - references/ectc51846.2026.00389/figures/cand/p03_fig3.png
+  - references/ectc51846.2026.00389/figures/cand/p04_fig4.png
+  - references/ectc51846.2026.00389/figures/cand/p04_fig6.png
+  - references/ectc51846.2026.00389/figures/cand/p04_fig7.png
+  - references/ectc51846.2026.00389/figures/cand/p05_tablei.png
+  - references/ectc51846.2026.00389/figures/cand/p05_fig9.png
+figure_reading_method: >-
+  Table I checked cell by cell against candidate p05_tablei; Table II checked against a page-5 re-crop. IR temperatures
+  (80.3 C, 114 C) read from Fig. 4(b-c) candidate crop. Fig. 3 ring label 5.4 mm read from page-3 re-crop.
+entries:
+  - {table: stack_layers, row_id: ectc51846.2026.00389-a-L01, field: thickness_um, value: 4, unit: um, basis: measured, locator: "p.3 Sec. III", note: "'approximately 4 um' final Cu"}
+  - {table: stack_layers, row_id: ectc51846.2026.00389-b-L01, field: line_um, value: 34, unit: um, basis: design_target, locator: "p.3 Sec. II.B", note: "'approximately 34 um' for 70 ohm on 30 um ABF"}
+  - {table: stack_layers, row_id: ectc51846.2026.00389-a-L02, field: thickness_um, value: 72.5, unit: um, basis: design_target, locator: "p.3 Sec. II.A", note: "ABF thickness used to design the MRRs in HFSS; fabricated thickness not stated"}
+  - {table: test_vehicles, row_id: ectc51846.2026.00389-a, field: notes, value: "11, 16.5, 20, 33 GHz", basis: design_target, locator: "p.3 Sec. II.A", note: "MRR fundamental resonances"}
+derived:
+  - {table: stack_layers, row_id: ectc51846.2026.00389-a-L04, field: thickness_um, value: 0.2, formula: "200 nm / 1000", inputs: "p.3 Sec. III"}
+  - {table: stack_layers, row_id: ectc51846.2026.00389-a-L05, field: thickness_um, value: 0.05, formula: "50 nm / 1000", inputs: "p.3 Sec. III"}
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00389-b-m1, field: locator, values: ["TABLE I (second table, insertion loss)", "Table II (text)"], locators: ["p.5 table title", "p.5 Sec. IV.B"], chosen: "Table II", why: "two tables printed as TABLE I; text refers to the insertion-loss table as Table II"}
+  - {table: stack_layers, row_id: ectc51846.2026.00389-a-L02, field: thickness_um, values: [72.5, 30], locators: ["p.3 Sec. II.A (MRR design)", "p.1 Abstract / p.3 Sec. II.B (microstrip lines)"], chosen: "72.5 for MRR TV, 30 for line TV", why: "paper gives different ABF thicknesses for the two structures; treated as two coupons"}
+excluded:
+  - "Prior work [10]: Dk 3.45 +/- 0.05 and Df 0.002-0.009 from 20-220 GHz; ABF Type B comparison"
+  - "Glass dimensional stability 'up to 35% better than organic cores' and sub-2 um RDL (refs [3], [7])"
+  - "Chip operating temperatures 85-150 C (ref [9])"
+  - "224 Gb/s SerDes Nyquist ~56 GHz statement (ref [2])"
+  - "Fig. 1 multi-chip stacked glass AiP concept (not built)"
+not_reported:
+  - electrical_interfaces (insertion loss per mm entered as metrics; no protocol, no total IL in dB)
+  - optical_interfaces
+  - panel size, MRR ring radii and line widths, gap values (only deviations), microvia diameter/depth
+  - ABF cure and lamination conditions, plating chemistry, seed for the signal layer
+  - Fig. 7 Df per point beyond Table I; Fig. 10/11 values (model-to-hardware plots)
+source_quality:
+  - "Two tables both titled TABLE I; candidate missing for the insertion-loss table. Candidate p03_fig3 cuts the (b) label."

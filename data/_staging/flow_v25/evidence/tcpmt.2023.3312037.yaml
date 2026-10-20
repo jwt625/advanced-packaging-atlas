@@ -1,0 +1,45 @@
+paper_id: tcpmt.2023.3312037
+verified_on: 2026-10-18
+schema_version: 2
+source_files:
+  - references/tcpmt.2023.3312037/text.md
+  - references/tcpmt.2023.3312037/source.json
+  - references/tcpmt.2023.3312037/source.pdf
+  - references/tcpmt.2023.3312037/figures/page_01.png
+  - references/tcpmt.2023.3312037/figures/page_02.png
+  - references/tcpmt.2023.3312037/figures/page_03.png
+  - references/tcpmt.2023.3312037/figures/page_04.png
+  - references/tcpmt.2023.3312037/figures/page_05.png
+figure_reading_method: >-
+  Page renders 1-5 viewed (p.6 is text and references only, read in text.md). From source.pdf: Fig. 6 at 600 dpi;
+  Fig. 7(c), 7(d), 8, 9(c) at 800 dpi. Table I is image-only and was read from the p.4 render.
+entries:
+  - {table: metrics, row_id: tcpmt.2023.3312037-b-m2, field: value, value: 150, unit: um, basis: design_target, locator: "p.3 Fig. 6(a)", note: "arrow spans trench opening; 50 um arrow spans mold ledge to die edge; depth label >20um"}
+  - {table: metrics, row_id: tcpmt.2023.3312037-c-m2, field: value, value: 11, unit: deg, basis: measured, locator: "p.3 Fig. 7(c)", note: "red annotation 11 deg; SEM tool label 10.78 deg"}
+  - {table: metrics, row_id: tcpmt.2023.3312037-e-m4, field: value, value: 105.71, unit: um, basis: measured, locator: "p.4 Fig. 9(c)", note: "horizontal label at thinner-die top; 107.69 um near bottom"}
+derived: []
+conflicts: []
+excluded:
+  - "Fig. 1 PVC package layout reprinted from ref [1] (die counts not entered)"
+  - "trench on substrate for underfill keep-out zone attributed to ref [8]"
+  - "capillary flow and contact-line theory attributed to refs [2]-[7]"
+  - "Fig. 7(c)/(d) SEM measurement labels (e.g. 41.3 deg, 48.19 deg, 27.89 deg, 111.88, 417.11, 638.21, 12.72 um) not defined in text; not entered"
+  - "Fig. 8 labels 103.07, 216.88, 286.37, 215.47 and ~17 um not defined in text; only the vertical [1] 308.29 um entered (inferred die height delta)"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - package, die and EMIB dimensions; die thicknesses; bump pitch; TCB conditions
+  - underfill, mold, coating and barrier products; cure conditions; laser ablation recipe
+  - HVM UOD yield numbers; trench edge angle target in HVM; thermal performance data
+source_quality:
+  - "Table I (comparison of UOD solutions) is image-only; text.md has only the caption. Read from the p.4 render."
+  - "text.md clean otherwise (typos 'Fevores', 'Froveros' are in the original)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3312037-F1-s09", change: "step added (chiplet attach, seq 1, inferred_order)", reason: "p.6 'tight process control in chiplet attach and wafer-level underfill dispense'; chiplets are underfilled at wafer level"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3312037-F1-s01..s08", change: "seq +1 after new s09; step_basis set (s03, s06 inferred_order); s04 equipment 'laser ablation'", reason: "p.5 Sec. V: underfill chiplets then wafer-level mold; trench after BSM and before singulation; solder TIM after underfilling"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3312037-F2; tcpmt.2023.3312037-F3; tcpmt.2023.3312037-F4", change: "scope tv_build -> generic_platform; tv_ids a -> empty", reason: "candidate HVM routes compared in Table I; trench selected, these were never run on the PVC package (steps performed=no)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3312037-F3-s01", change: "split 'dispense / dip transfer'; step_basis generic_description", reason: "p.5 two potential process options"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3312037-F4-s01; tcpmt.2023.3312037-F4-s02", change: "composite step split: s01 reconstitution (temporary_bonding), new s02 coating with split", reason: "p.5 Sec. IV gives reconstitution then wafer-level coating"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3312037-F5..tcpmt.2023.3312037-F8", change: "flow_name 'lab POC coupon' -> per-coupon names; F8 level fragments -> ordered", reason: "distinguish the four coupon flows; F8 text states coating then 'after underfill dispensing'"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3312037-F5-s02", change: "target from Fig. 6(a) (150 um width, >20 um depth, 50 um ledge); equipment 'laser ablation'", reason: "stated target trench dimensions (also in metrics -b-m2..m4)"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3312037-F6-s01", change: "split 'control / treated'; step_basis inferred_order", reason: "TV c compares control and treated samples; order coating-before-underfill not stated explicitly"}
+  - {date: 2026-10-20, source: repass, row_id: "tcpmt.2023.3312037-F7; tcpmt.2023.3312037-F8", change: "step_basis set (F7 inferred_order; F8 stated_in_flow, s01 equipment 'Q-tip')", reason: "p.4 Sec. III.D 'applied ... using a Q-tip. After underfill dispensing'"}

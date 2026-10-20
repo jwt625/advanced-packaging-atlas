@@ -1,0 +1,43 @@
+paper_id: icep61562.2024.10535612
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/icep61562.2024.10535612/text.md
+  - references/icep61562.2024.10535612/source.json
+  - references/icep61562.2024.10535612/figures/page_01.png
+  - references/icep61562.2024.10535612/figures/page_02.png
+  - references/icep61562.2024.10535612/figures/cand/p01_fig2.png
+  - references/icep61562.2024.10535612/figures/cand/p02_fig2_2.png
+  - references/icep61562.2024.10535612/figures/cand/p02_fig3.png
+  - references/icep61562.2024.10535612/figures/cand/p02_fig4.png
+figure_reading_method: >-
+  Page renders and candidate crops. DOF values from text agree with the arrow labels in Fig. 3/4. Fig. 2 (p.2) CD
+  levels for 60/70 mJ read off the axis (~2.5 and ~2.9 um).
+entries:
+  - {table: metrics, row_id: icep61562.2024.10535612-a-m9, field: value_text, value: "60 mJ CD ~2.5-2.6 um; 70 mJ ~2.9 um", unit: um, basis: measured, locator: "p.2 Fig. 2", note: "open markers = partially lost patterns"}
+derived: []
+conflicts:
+  - {table: figures, row_id: icep61562.2024.10535612-f01, field: label, values: ["caption Fig. 2 (p.1)", "text Fig 1"], locators: ["p.1 caption", "p.1 Sec. II"], chosen: "Fig. 2 (caption)", why: "rule (c): cite caption label and note"}
+  - {table: metrics, row_id: icep61562.2024.10535612-a-m7, field: value, values: [1.4, 1.47], locators: ["p.2 Sec. III", "own arithmetic 2.29/1.56"], chosen: 1.4, why: "paper's stated value"}
+excluded:
+  - "Organic substrate flatness 20 um and 250 mm exposure field for 500 mm substrate (Introduction context, not this coupon)"
+  - "Chiplet and CoWoS context of refs [1], [2]"
+not_reported:
+  - interconnects
+  - electrical_interfaces
+  - optical_interfaces
+  - "lens NA values, exposure tool and wavelength"
+  - "DFR product, Cu thickness, glass type and size"
+  - "Cu plating / seed etch after patterning (only resist patterning done)"
+source_quality:
+  - "Two different figures both captioned 'Fig. 2'; 2-page extended abstract."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535612-F1-s02", change: "lens/dose/focus sweep moved from conditions to split; target '5/5 um and 3.5/6.5 um L/S (10 um pitch)'; conditions keep the >= 90 mJ margin basis", reason: "p.1 Sec. II; p.2 Figs. 2-4 legends"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535612-F1-s04", change: "conditions 'room temperature, 30 min'", reason: "p.1 Sec. II"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535612-F1-s05", change: "conditions '1.0 wt% sodium carbonate solution, 27 C'", reason: "p.1 Sec. II"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535612-F1", change: "step_basis stated_in_flow on s01-s06", reason: "DevLog-007 re-pass (rule 7, schema v2.4)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535612", change: "process_flow_level full confirmed", reason: "ordered flow with bake, hold, develop conditions"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535612-F1-s03", change: "conditions '' -> 'then left at room temperature for 30 min before development'; notes added", reason: "category_other profile fragment: RT hold merged into the post-exposure bake step (p.1 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535612-F1-s04", change: "deleted (other: 'hold at room temperature', time_s 1800); merged into F1-s03 conditions", reason: "profile fragment, not a separate build step (p.1 Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535612-F1-s05", change: "seq 5 -> 4", reason: "close the gap left by deleted F1-s04"}
+  - {date: 2026-10-20, source: repass, row_id: "icep61562.2024.10535612-F1-s06", change: "seq 6 -> 5", reason: "close the gap left by deleted F1-s04"}

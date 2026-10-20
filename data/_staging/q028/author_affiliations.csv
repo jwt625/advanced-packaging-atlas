@@ -1,0 +1,54 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc51687.2025.00012-a01-1,ectc51687.2025.00012,1,Kumar Abhishek Singh,1,primary,Intel,,Chandler,US,,paper,p.1 affiliations
+ectc51687.2025.00012-a02-1,ectc51687.2025.00012,2,Ziyin Lin,1,primary,Intel,,Chandler,US,,paper,p.1 affiliations
+ectc51687.2025.00012-a03-1,ectc51687.2025.00012,3,Peter A Williams,1,primary,Intel,,Chandler,US,,paper,p.1 affiliations
+ectc51687.2025.00012-a04-1,ectc51687.2025.00012,4,Darren A Vance,1,primary,Intel,,Chandler,US,,paper,p.1 affiliations
+ectc51687.2025.00012-a05-1,ectc51687.2025.00012,5,Joel Wright,1,primary,Intel,,Chandler,US,,paper,p.1 affiliations
+ectc51687.2025.00012-a06-1,ectc51687.2025.00012,6,Bilas Chowdhury,1,primary,Intel,,Chandler,US,,paper,p.1 affiliations
+ectc51687.2025.00012-a07-1,ectc51687.2025.00012,7,Todd R Coons,1,primary,Intel,,Chandler,US,,paper,p.1 affiliations
+ectc51687.2025.00012-a08-1,ectc51687.2025.00012,8,Shahin Mani,1,primary,Intel,,Chandler,US,,paper,p.1 affiliations
+ectc51687.2025.00012-a09-1,ectc51687.2025.00012,9,John Chris Decker,1,primary,Intel,,Chandler,US,,paper,p.1 affiliations
+ectc51687.2025.00012-a10-1,ectc51687.2025.00012,10,Matthew Fritz,1,primary,Intel,,Hillsboro,US,,paper,p.1 affiliations
+ectc51687.2025.00012-a11-1,ectc51687.2025.00012,11,Pratyasha Mohapatra,1,primary,Intel,,Chandler,US,,paper,p.1 affiliations
+ectc51687.2025.00012-a12-1,ectc51687.2025.00012,12,Vamsi Chandra Meesala,1,primary,Intel,,Chandler,US,,paper,p.1 affiliations
+ectc51687.2025.00012-a13-1,ectc51687.2025.00012,13,Shivani Syal,1,primary,Intel,,Chandler,US,,paper,p.1 affiliations
+ectc51687.2025.00012-a14-1,ectc51687.2025.00012,14,John Oh,1,primary,Intel,,Santa Clara,US,,paper,p.1 affiliations
+ectc51687.2025.00012-a15-1,ectc51687.2025.00012,15,Saikumar Jayaraman,1,primary,Intel,,Chandler,US,,paper,p.1 affiliations
+ectc51687.2025.00233-a01-1,ectc51687.2025.00233,1,Yaming Jiang,1,primary,DuPont,DuPont Electronics & Industrial,"Marlborough, MA",US,,paper,p.1 affiliations
+ectc51687.2025.00233-a02-1,ectc51687.2025.00233,2,Patrick Huang,1,primary,DuPont,DuPont Electronics & Industrial,Miaoli,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a03-1,ectc51687.2025.00233,3,Jason Chuang,1,primary,DuPont,DuPont Electronics & Industrial,Miaoli,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a04-1,ectc51687.2025.00233,4,George Yen,1,primary,DuPont,DuPont Electronics & Industrial,Miaoli,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a05-1,ectc51687.2025.00233,5,Zhou Lu,1,primary,DuPont,DuPont Electronics & Industrial,"Marlborough, MA",US,,paper,p.1 affiliations
+ectc51687.2025.00233-a06-1,ectc51687.2025.00233,6,Colin Hayes,1,primary,DuPont,DuPont Electronics & Industrial,"Marlborough, MA",US,,paper,p.1 affiliations
+ectc51687.2025.00233-a07-1,ectc51687.2025.00233,7,Chris Gilmore,1,primary,DuPont,DuPont Electronics & Industrial,"Marlborough, MA",US,,paper,p.1 affiliations
+ectc51687.2025.00233-a08-1,ectc51687.2025.00233,8,LiYen Lin,1,primary,DuPont,DuPont Electronics & Industrial,Miaoli,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a09-1,ectc51687.2025.00233,9,Jeng-Ting Li,1,primary,Unimicron,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a10-1,ectc51687.2025.00233,10,Wei-Tse Ho,1,primary,Unimicron,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a11-1,ectc51687.2025.00233,11,Chi-Hai Kuo,1,primary,Unimicron,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a12-1,ectc51687.2025.00233,12,"Bruce, P Lin",1,primary,Unimicron,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a13-1,ectc51687.2025.00233,13,Cheng-Ta Ko,1,primary,Unimicron,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a14-1,ectc51687.2025.00233,14,Mike Ma,1,primary,Unimicron,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a15-1,ectc51687.2025.00233,15,Eugene Lee,1,primary,DuPont,DuPont Electronics & Industrial,"Marlborough, MA",US,,paper,p.1 affiliations
+ectc51846.2026.00092-a01-1,ectc51846.2026.00092,1,Sing-Da Jiang,1,primary,TSMC,,Hsinchu,TW,"printed: Taiwan Semiconductor Manufacturing Company, Ltd.",paper,p.1 affiliations
+ectc51846.2026.00092-a02-1,ectc51846.2026.00092,2,Chun-Yu Ou,1,primary,TSMC,,Hsinchu,TW,"printed: Taiwan Semiconductor Manufacturing Company, Ltd.",paper,p.1 affiliations
+ectc51846.2026.00092-a03-1,ectc51846.2026.00092,3,Chi-Shiang Chiou,1,primary,TSMC,,Hsinchu,TW,"printed: Taiwan Semiconductor Manufacturing Company, Ltd.",paper,p.1 affiliations
+ectc51846.2026.00092-a04-1,ectc51846.2026.00092,4,Yu-Sheng Tsai,1,primary,TSMC,,Hsinchu,TW,"printed: Taiwan Semiconductor Manufacturing Company, Ltd.",paper,p.1 affiliations
+ectc51846.2026.00092-a05-1,ectc51846.2026.00092,5,Chang-Yi Tsai,1,primary,TSMC,,Hsinchu,TW,"printed: Taiwan Semiconductor Manufacturing Company, Ltd.",paper,p.1 affiliations
+ectc51846.2026.00092-a06-1,ectc51846.2026.00092,6,Chuan-Chang Wu,1,primary,TSMC,,Hsinchu,TW,"printed: Taiwan Semiconductor Manufacturing Company, Ltd.",paper,p.1 affiliations
+ectc51846.2026.00092-a07-1,ectc51846.2026.00092,7,Tsun-Yen Wu,1,primary,TSMC,,Hsinchu,TW,"printed: Taiwan Semiconductor Manufacturing Company, Ltd.",paper,p.1 affiliations
+ectc51846.2026.00092-a08-1,ectc51846.2026.00092,8,Ying-Ju Chen,1,primary,TSMC,,Hsinchu,TW,"printed: Taiwan Semiconductor Manufacturing Company, Ltd.",paper,p.1 affiliations
+ectc51846.2026.00092-a09-1,ectc51846.2026.00092,9,Wen-Hsiung Lu,1,primary,TSMC,,Hsinchu,TW,"printed: Taiwan Semiconductor Manufacturing Company, Ltd.",paper,p.1 affiliations
+ectc51846.2026.00092-a10-1,ectc51846.2026.00092,10,Tzong-Huann Yang,1,primary,TSMC,,Hsinchu,TW,"printed: Taiwan Semiconductor Manufacturing Company, Ltd.",paper,p.1 affiliations
+ectc51846.2026.00092-a11-1,ectc51846.2026.00092,11,Ren-Yu Chang,1,primary,TSMC,,Hsinchu,TW,"printed: Taiwan Semiconductor Manufacturing Company, Ltd.",paper,p.1 affiliations
+ectc51846.2026.00092-a12-1,ectc51846.2026.00092,12,Kathy Yan,1,primary,TSMC,,Hsinchu,TW,"printed: Taiwan Semiconductor Manufacturing Company, Ltd.",paper,p.1 affiliations
+ectc51846.2026.00092-a13-1,ectc51846.2026.00092,13,Rick Lien,1,primary,TSMC,,Hsinchu,TW,"printed: Taiwan Semiconductor Manufacturing Company, Ltd.",paper,p.1 affiliations
+ectc51846.2026.00092-a14-1,ectc51846.2026.00092,14,Jun He,1,primary,TSMC,,Hsinchu,TW,"printed: Taiwan Semiconductor Manufacturing Company, Ltd.",paper,p.1 affiliations
+ectc51846.2026.00198-a01-1,ectc51846.2026.00198,1,Naoya Sohara,1,primary,USHIO,,Gotenba,JP,"printed: 1-90, Komakado, Gotenba, Shizuoka",paper,p.1 affiliations
+ectc51846.2026.00198-a02-1,ectc51846.2026.00198,2,Toshimitsu Arai,1,primary,USHIO,,Gotenba,JP,"printed: 1-90, Komakado, Gotenba, Shizuoka",paper,p.1 affiliations
+ectc51846.2026.00198-a03-1,ectc51846.2026.00198,3,Ryotaro Takahashi,1,primary,USHIO,,Gotenba,JP,"printed: 1-90, Komakado, Gotenba, Shizuoka",paper,p.1 affiliations
+ectc51846.2026.00198-a04-1,ectc51846.2026.00198,4,Naoki Goto,1,primary,USHIO,,Gotenba,JP,"printed: 1-90, Komakado, Gotenba, Shizuoka",paper,p.1 affiliations
+ectc51846.2026.00198-a05-1,ectc51846.2026.00198,5,Hirosuke Takamatsu,1,primary,USHIO,,Gotenba,JP,"printed: 1-90, Komakado, Gotenba, Shizuoka",paper,p.1 affiliations
+icep61562.2024.10535587-a01-1,icep61562.2024.10535587,1,Ping-Ching Shen,1,primary,ASE,,Kaohsiung,TW,"printed: Advanced Semiconductor Engineering, Inc.",paper,p.1 affiliations
+icep61562.2024.10535587-a02-1,icep61562.2024.10535587,2,Sheng-Feng Huang,1,primary,ASE,,Kaohsiung,TW,"printed: Advanced Semiconductor Engineering, Inc.",paper,p.1 affiliations
+icep61562.2024.10535587-a03-1,icep61562.2024.10535587,3,Ping-Feng Yang,1,primary,ASE,,Kaohsiung,TW,"printed: Advanced Semiconductor Engineering, Inc.",paper,p.1 affiliations
+icep61562.2024.10535587-a04-1,icep61562.2024.10535587,4,Jen-Kuang Fang,1,primary,ASE,,Kaohsiung,TW,"printed: Advanced Semiconductor Engineering, Inc.",paper,p.1 affiliations

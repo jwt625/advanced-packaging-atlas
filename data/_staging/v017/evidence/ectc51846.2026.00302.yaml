@@ -1,0 +1,50 @@
+paper_id: ectc51846.2026.00302
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00302/text.md
+  - references/ectc51846.2026.00302/source.json
+  - references/ectc51846.2026.00302/figures/page_02.png
+  - references/ectc51846.2026.00302/figures/page_03.png
+  - references/ectc51846.2026.00302/figures/cand/p02_fig1.png
+  - references/ectc51846.2026.00302/figures/cand/p03_fig2.png
+  - references/ectc51846.2026.00302/figures/cand/p03_fig3.png
+  - references/ectc51846.2026.00302/figures/cand/p03_fig4.png
+figure_reading_method: >-
+  Fig. 1(b) re-cropped at 300 and 600 dpi to read the microscope overlay labels (1)-(4). Label-to-feature assignment
+  checked by pixel scale: 250.02 um circle = 203 px at 300 dpi (0.81 px/um); label (4) line 435 px = 536 um, label (3)
+  offset ~15 px = 18 um, label (1) horizontal surface line across the right groove opening ~295 px = 363 um; all
+  consistent with the printed values. Fig. 4 scan units not shown; no MFD entered.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00302-a-m5, field: value, value: 369.53, unit: um, basis: measured, locator: "p.2 Fig. 1(b)", note: "overlay label (1) 'Laenge 369,53 um' (German decimal comma)"}
+  - {table: metrics, row_id: ectc51846.2026.00302-a-m8, field: value, value: 537.38, unit: um, basis: measured, locator: "p.2 Fig. 1(b)", note: "overlay label (4); vertical line from glass surface to lower boundary"}
+derived: []
+conflicts: []
+excluded:
+  - "Edge coupling advantages, Si V-groove passive alignment and IOX technology attributed to refs [1]-[7]"
+not_reported:
+  - interconnects, electrical_interfaces, components beyond glass/fiber/index fluid
+  - waveguide width/depth, index contrast, propagation loss value, MFD of waveguide and fiber
+  - V-groove pitch, depth, angle and lengths of deep/shallow trench sections; panel thickness (text)
+  - fs-laser parameters, KOH concentration/temperature/time, sputtered metal, IOX salt composition/temperature/time
+  - polarization, wavelength range beyond 1550 nm measurement, reliability data
+source_quality:
+  - "Candidate p03_fig3 includes the 'III. Conclusions' heading (manual crop used). Fig. 1 candidate includes sub-captions and top whitespace (kept)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00302, change: "process_flow_level full -> ordered", reason: "ordered flow with materials but no temperature/time/concentration anywhere (pilot precedent 00321)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00302-F1, change: "level: 'full' -> 'ordered'; locator: 'p.2 Sec. II.B; p.2 Fig. 1; p.2 Sec. II.C; p.2 Sec. II.D; p.3 Sec. II.F; p.3 Sec. II.E' -> 'p.2 Sec. II.B; p.2 Fig. 1; p.2 Sec. II.C; p.2 Sec. II.D; p.3 Sec. II.F'", reason: "no process conditions stated; measurement locators removed"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00302-F1-s06, change: "step: 'laser direct imaging of waveguide patterns and resist development' -> 'laser direct imaging (LDI) exposure of waveguide patterns in resist'", reason: "composite step split: text gives exposure, then development (p.2 Sec. II.C)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00302-F1-s13, change: "added step 'develop exposed resist to open windows to the metal layer'", reason: "split from s06 (p.2 Sec. II.C: 'The exposed resist is developed to open windows to the metal layer')"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00302-F1-s07, change: "seq: '7' -> '8'", reason: "seq shifted after inserting s13"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00302-F1-s08, change: "seq: '8' -> '9'", reason: "seq shifted after inserting s13"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00302-F1-s09, change: "seq: '9' -> '10'", reason: "seq shifted after inserting s13"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00302-F1-s10, change: "seq: '10' -> '11'", reason: "seq shifted after inserting s13"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00302-F1-s08, change: "notes: 'Salt composition, temperature, time not stated.' -> 'Ion exchange (no enum category). Salt composition, temperature, time not stated.'", reason: "IOX is not in the step_category enum; noted"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00302-F1-s09, change: "notes: 'Text: silver ions exchanged with sodium ions; conditions not stated.' -> 'Ion exchange (no enum category); text: silver ions exchanged with sodium ions; conditions not stated.'", reason: "IOX is not in the step_category enum; noted"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00302-F1-s11, change: "deleted step 'passively place single-mode fiber in V-groove, fix by hand, apply index-matching fluid, load with small mass'", reason: "fiber placement by hand with index fluid and a mass is the measurement setup (p.3 Sec. II.E-F 'measurement procedure'); moved to metric a-m1 condition"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00302-F1-s12, change: "deleted step 'measure transmission (insertion loss) at 1550 nm, cut V-grooves off with CO2 laser, re-measure same waveguide'", reason: "IL measurement and V-groove cut-off are the coupling-loss measurement; kept in metrics a-m1..a-m4"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00302-a-m1, change: "condition: '1550 nm; index-matching oil at facets' -> '1550 nm; SMF passively placed in V-groove and fixed by hand; small mass on fiber; index-matching oil at facets'", reason: "measurement setup moved from deleted step F1-s11 (p.3 Sec. II.E-F)"}
+  - {date: 2026-10-20, source: repass, row_id: ectc51846.2026.00302-F1, change: "step_basis filled on all steps of this flow: 'stated_in_flow' on rows without one", reason: "repass: order stated in the paper's flow text/figure"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00302-F1-s02", change: "category other -> laser_modification", reason: "v017 category_other: fs-laser modification of glass for SLE (p.2 Sec. II.B); category added to step_category"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00302-F1-s08", change: "category other -> ion_exchange; notes drop 'no enum category'", reason: "v017 category_other: first Ag+/Na+ molten-salt ion exchange (p.2 Sec. II.D)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51846.2026.00302-F1-s09", change: "category other -> ion_exchange; notes drop 'no enum category'", reason: "v017 category_other: second ion exchange step (p.2 Sec. II.D)"}

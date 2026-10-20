@@ -1,0 +1,36 @@
+paper_id: ectc51909.2023.00151
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00151/text.md
+  - references/ectc51909.2023.00151/source.json
+  - references/ectc51909.2023.00151/figures/page_02.png
+  - references/ectc51909.2023.00151/figures/page_03.png
+  - references/ectc51909.2023.00151/figures/page_04.png
+  - references/ectc51909.2023.00151/figures/cand/p02_fig3.png
+  - references/ectc51909.2023.00151/figures/cand/p02_fig4.png
+  - references/ectc51909.2023.00151/figures/cand/p03_fig8.png
+  - references/ectc51909.2023.00151/figures/cand/p03_fig12.png
+  - references/ectc51909.2023.00151/figures/cand/p04_fig14.png
+  - references/ectc51909.2023.00151/figures/cand/p04_tableii.png
+figure_reading_method: >-
+  150 dpi page renders and candidate crops. Fig. 2 bar labels, Fig. 2 inset (550 um mold, 775 um Si, mold 120 C 400 s,
+  PMC 150 C 1 h), Fig. 6 color scale, Fig. 12 loss labels printed. Fig. 14 Tj end points read against 5 C gridlines (+/-1 C).
+entries:
+  - {table: test_vehicles, row_id: ectc51909.2023.00151-a, field: n_dies, value: 9, unit: ea, basis: stated, locator: "p.2 Fig. 3", note: "Base(Logic) + 7 Core(Memory) + Top(Memory)"}
+derived:
+  - {table: process_steps, row_id: ectc51909.2023.00151-F3-s02, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.2 Fig. 2 'PMC : 150C 1hr'"}
+  - {table: process_steps, row_id: ectc51909.2023.00151-F3-s02, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.2 Fig. 2"}
+  - {table: process_steps, row_id: ectc51909.2023.00151-F3-s02, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.2 Fig. 2"}
+conflicts:
+  - {table: metrics, row_id: ectc51909.2023.00151-b-m1, field: locator, values: ["text cites 'Table I' for reliability", "reliability table printed as Table II"], locators: ["p.4 Sec. III.C", "p.4 Table II"], chosen: "Table II", why: "Table I is the LMC property table"}
+excluded:
+  - "Fig. 1 2.5D SiP schematic reprinted from ref [1] (no numbers taken)"
+  - "TC-NCF bonding pressure limits and NCF flow (refs [2]-[5]); SRA adhesion issue (refs [7], [8]); MUF air-trap mechanisms (refs [9], [10])"
+not_reported:
+  - electrical_interfaces (2.0 Gbps / VDD 1.26 V are Tj test conditions only), optical_interfaces
+  - bump pitch, diameter, count, solder alloy; reflow peak temperature/profile; chip thicknesses
+  - mold pressure and vacuum values; wafer diameter; Si interposer and substrate dimensions; sample counts
+  - TC-NCF test vehicle details
+source_quality:
+  - "Fig. 13 candidate p04_fig13 spans both panels (not chosen). All chosen candidates used as-is."

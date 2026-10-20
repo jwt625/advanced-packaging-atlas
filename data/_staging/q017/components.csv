@@ -1,0 +1,46 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc32696.2021.00174-a-c1,ectc32696.2021.00174-a,unspecified,,,"single die (Cu studs on passivation openings, face up)",1,,,,,,,,,Si,,stated,text,,p.2 Sec. II; p.3 Sec. III; p.2 Fig. 7,,"Die function, size and thickness not given; target apps PMIC, RF, single die."
+ectc32696.2021.00174-a-c2,ectc32696.2021.00174-a,mold,,,compression mold compound (6-sided die protection),1,,,,,,,,,mold compound,,stated,text,,p.2 Sec. II; p.3 Sec. III; p.4 Sec. III,,Mold compound not named.
+ectc32696.2021.00174-c-c1,ectc32696.2021.00174-c,pcb,,,1 mm JEDEC test board,1,,,,,,,,,,,design_target,text,,p.2 Sec. I,,Board thickness 1 mm stated; shared by all BLR models.
+ectc51909.2023.00274-a-c1,ectc51909.2023.00274-a,dummy_die,yes,,"Si dielet (daisy chain, Cu pads)",,2,2,,,,,100,,Si,,design_target,text,,p.3 Sec. II.B; p.4 Fig. 4,,Diced 2x2 mm with recessed dicing street; gap = inter-dielet spacing. Count and thickness not given.
+ectc51909.2023.00274-a-c2,ectc51909.2023.00274-a,interposer,,,GaN-IF wafer (GaN-on-(111)Si),,,,,,,,,,GaN / AlN / Si(111),Kyma Technologies (GaN growth),design_target,text,,p.3 Sec. II.B; p.3 Fig. 2(b),,TSV-less interposer (Fig. 2(b)); Cu pillars on top. HEMTs skipped.
+ectc51909.2023.00274-b-c1,ectc51909.2023.00274-b,dummy_die,yes,,thin Si dielet (Ti/Cu pattern),4,5,5,100,,,,500,,Si,,design_target,text,gap_um:figure_image,p.5 Sec. III.A; p.6 Fig. 9(a); p.6 Fig. 9(b),,"From 100 um thick 4-inch Si wafer, saw-diced. Gap = inter-dielet spacing (Fig. 9(b) label)."
+ectc51909.2023.00274-b-c2,ectc51909.2023.00274-b,substrate,,,Si substrate wafer (single damascene Cu),1,,,500,,,,,,Si,,design_target,text,,p.5 Sec. III.A,,4-inch wafer.
+ectc51909.2023.00274-b-c3,ectc51909.2023.00274-b,pcb,,,2-layer FR-4 test PCB (power platform),1,9.85,9.85,600,,,,,,FR-4; ENIG pads,,design_target,text,,p.5 Sec. III.A; p.6 Fig. 10(a),,
+ectc51909.2023.00274-b-c4,ectc51909.2023.00274-b,other,,,SU8 permanent film between dielets (TPV host),,,,100,,,,,,SU8,,stated,text,thickness_um:derived,p.6 Sec. III.A; p.6 Fig. 9(b),,Thickness equal to dielet height (stated rule; value from dielet thickness). Hard-baked.
+ectc51909.2023.00274-c-c1,ectc51909.2023.00274-c,dummy_die,yes,,Si dielet (Ti/Cu pattern),,5,5,200,,,,,,Si,,design_target,text,,p.5 Sec. III.A,,From 200 um thick 4-inch Si wafer; count not given.
+ectc51909.2023.00274-c-c2,ectc51909.2023.00274-c,substrate,,,Si substrate wafer (single damascene Cu),1,,,500,,,,,,Si,,design_target,text,,p.5 Sec. III.A,,
+ectc51909.2023.00274-c-c3,ectc51909.2023.00274-c,pcb,,,2-layer FR-4 test PCB (power platform),1,9.85,9.85,600,,,,,,FR-4; ENIG pads,,design_target,text,,p.5 Sec. III.A,,
+tcpmt.2023.3312037-a-c1,tcpmt.2023.3312037-a,other,,,Foveros 3-D stack (thinned die; back side metallization with Au surface finish; ~250 um mold shelf at edge),2,,,,,,,,,Si with mold shelf; BSM + Au finish,,stated,text,,p.1 Sec. I; p.2 Sec. II; p.3 Sec. III,,Thinner die. Surface under BSM is mold or Si. Thickness not given. Trench laser-ablated in mold shelf (HVM).
+tcpmt.2023.3312037-a-c2,tcpmt.2023.3312037-a,hbm,,,"HBM (full thickness, mold sidewall)",,,,,,,,100,,mold sidewall,,stated,text,gap_um:design_target,p.1 Sec. I; p.2 Sec. II; p.2 Fig. 4,gap_um:ge,"gap_um = DtD spacing to Foveros stack, as small as 100 um. Two memory suppliers, different mold materials. Count from reprinted Fig. 1 not entered."
+tcpmt.2023.3312037-a-c3,tcpmt.2023.3312037-a,other,,,"transceiver die (full thickness, Si sidewall)",,,,,,,,100,,Si,,stated,text,gap_um:design_target,p.1 Sec. I; p.2 Sec. II,gap_um:ge,"gap_um = DtD spacing to Foveros stack, as small as 100 um."
+tcpmt.2023.3312037-a-c4,tcpmt.2023.3312037-a,bridge,,,EMIB bridge,,,,,,,,,,,,stated,text,,p.1 Abstract; p.1 Sec. I,,No bridge details given.
+tcpmt.2023.3312037-a-c5,tcpmt.2023.3312037-a,substrate,,,package substrate,,,,,,,,,,,,stated,schematic,,p.1 Fig. 2,,No details.
+tcpmt.2023.3312037-a-c6,tcpmt.2023.3312037-a,underfill,,,"package-level capillary underfill (epoxy resin, silica filler, additives)",,,,,,,,,,epoxy resin + silica filler,,stated,text,,p.1 Sec. I; p.2 Sec. II,,"Product not given; dispensed at edge, flows toward C4 and DtD space."
+tcpmt.2023.3312037-a-c7,tcpmt.2023.3312037-a,underfill,,,"wafer-level underfill (Foveros chiplets, under wafer-level mold)",,,,,,,,,,,,stated,text,,p.5 Sec. V,,Ablates slower than mold; at process corners can fill most of the mold shelf.
+tcpmt.2023.3312037-a-c8,tcpmt.2023.3312037-a,tim,,,solder TIM,,,,,,,,,,solder,,stated,text,,p.1 Sec. I; p.5 Sec. IV,,Applied after underfilling; UOD/trench surfaces risk TIM delamination.
+tcpmt.2023.3312037-a-c9,tcpmt.2023.3312037-a,heat_spreader,,,heat spreader,,,,,,,,,,,,stated,schematic,,p.1 Fig. 2,,Generic schematic only.
+tcpmt.2023.3312037-b-c1,tcpmt.2023.3312037-b,dummy_die,,,thicker die,,,,,,,,,,,,stated,text,,p.3 Sec. III.A; p.3 Fig. 6,,
+tcpmt.2023.3312037-b-c2,tcpmt.2023.3312037-b,dummy_die,,,thinner die with laser-ablated edge trench,,,,,,,,,,,,stated,text,,p.3 Sec. III.A; p.3 Fig. 6,,Fig. 6(a) schematic: Si with mold at edge; trench in the mold region.
+tcpmt.2023.3312037-b-c3,tcpmt.2023.3312037-b,other,,,glass slide (dies glued on),,,,,,,,,,glass,,stated,text,,p.3 Sec. III.A; p.3 Fig. 6,,
+tcpmt.2023.3312037-b-c4,tcpmt.2023.3312037-b,underfill,,,"underfill, manually dispensed, supplier-recommended cure",,,,,,,,,,,,stated,text,,p.3 Sec. III.A; p.3 Fig. 6,,
+tcpmt.2023.3312037-c-c1,tcpmt.2023.3312037-c,unspecified,,,thicker die,,,,,,,,,,,,stated,mixed,,p.3 Sec. III.B; p.3 Fig. 7,,
+tcpmt.2023.3312037-c-c2,tcpmt.2023.3312037-c,unspecified,,,thinner die,,,,,,,,,,,,stated,mixed,,p.3 Sec. III.B; p.3 Fig. 7,,
+tcpmt.2023.3312037-c-c3,tcpmt.2023.3312037-c,other,,,hydrophobic coating on thinner die top side (treated split),,,,,,,,,,,,stated,text,,p.3 Sec. III.B; p.3 Fig. 7,,Material not named.
+tcpmt.2023.3312037-c-c4,tcpmt.2023.3312037-c,underfill,,,underfill,,,,,,,,,,,,stated,mixed,,p.3 Sec. III.B; p.3 Fig. 7,,
+tcpmt.2023.3312037-d-c1,tcpmt.2023.3312037-d,unspecified,,,thicker die,,,,,,,,,,,,stated,mixed,,p.3 Sec. III.C; p.4 Fig. 8,,
+tcpmt.2023.3312037-d-c2,tcpmt.2023.3312037-d,unspecified,,,thinner die,,,,,,,,,,,,stated,mixed,,p.3 Sec. III.C; p.4 Fig. 8,,
+tcpmt.2023.3312037-d-c3,tcpmt.2023.3312037-d,other,,,hydrophobic barrier line on thinner die edge,,,,,,,,,,,,stated,text,,p.3 Sec. III.C; p.4 Fig. 8,,Material not named.
+tcpmt.2023.3312037-d-c4,tcpmt.2023.3312037-d,underfill,,,underfill,,,,,,,,,,,,stated,mixed,,p.3 Sec. III.C; p.4 Fig. 8,,
+tcpmt.2023.3312037-e-c1,tcpmt.2023.3312037-e,unspecified,,,thicker die,,,,,,,,,,,,stated,mixed,,p.4 Sec. III.D; p.4 Fig. 9,,
+tcpmt.2023.3312037-e-c2,tcpmt.2023.3312037-e,unspecified,,,thinner die,,,,,,,,,,,,stated,mixed,,p.4 Sec. III.D; p.4 Fig. 9,,
+tcpmt.2023.3312037-e-c3,tcpmt.2023.3312037-e,other,,,hydrophobic coating on thicker die sidewall (Q-tip),,,,,,,,,,,,stated,text,,p.4 Sec. III.D; p.4 Fig. 9,,Material not named.
+tcpmt.2023.3312037-e-c4,tcpmt.2023.3312037-e,underfill,,,underfill,,,,,,,,,,,,stated,mixed,,p.4 Sec. III.D; p.4 Fig. 9,,
+ectc51529.2024.00125-a-c1,ectc51529.2024.00125-a,other,yes,,thinned wafer with revealed TSVs and WAT probe pads,1,,,,,,,,,,,stated,text,,p.4 Sec. IV,,Test wafer with Kelvin and daisy-chain structures; which wafer (top/bottom) is thinned not stated.
+ectc51529.2024.00125-a-c2,ectc51529.2024.00125-a,other,yes,,F2F bonded partner wafer,1,,,,,,,,,,,stated,text,,p.4 Sec. IV,,Test wafer; thickness and material stack not stated.
+ectc51846.2026.00227-a-c1,ectc51846.2026.00227-a,logic_soc,,,top die (full-thickness logic type die),1,6.4,3.7,775,,,,,,Si,,design_target,text,,p.3 Sec. II.A,x_mm:approx;y_mm:approx,Whether functional or daisy-chain not stated.
+ectc51846.2026.00227-a-c2,ectc51846.2026.00227-a,interposer,,,thin Si interposer (interposer die),1,,,100,,,,,,Si,,design_target,text,,p.3 Sec. II.A; p.5 Fig. 16(b),,Diced slightly larger than top die (by 2 mm) for underfill dispensing; TSV labelled in Fig. 16(b).
+ectc51846.2026.00227-a-c3,ectc51846.2026.00227-a,substrate,,,organic laminate substrate with pre-tinned solder,1,21,21,800,,,,,,,,design_target,text,,p.3 Sec. II.A,,Thickness stated 0.8 mm. Layer count not given.
+ectc51846.2026.00227-a-c4,ectc51846.2026.00227-a,underfill,,,underfill (product not stated),,,,,,,,,,,,stated,mixed,,p.3 Sec. II.A; p.5 Fig. 16(a),,Underfill fillet labelled in cross-section.
+ectc51846.2026.00227-b-c1,ectc51846.2026.00227-b,other,,,top die with Cu/Ni/Cu/SnAg microbumps (short-loop bumping wafer),1,,,,,,,,,,,stated,text,,p.3 Sec. II.A,,Die size not given.
+ectc51846.2026.00227-b-c2,ectc51846.2026.00227-b,other,,,bottom die with Cu/Ni/Cu pads (short-loop bumping wafer),1,,,,,,,,,,,stated,text,,p.3 Sec. II.A,,Die size not given.

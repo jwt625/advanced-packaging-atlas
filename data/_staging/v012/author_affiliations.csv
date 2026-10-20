@@ -1,0 +1,49 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc51846.2026.00050-a01-1,ectc51846.2026.00050,1,Akihiro Horibe,1,primary,IBM,IBM Research - Tokyo,Kawasaki,JP,,paper,p.1 affiliations (page image)
+ectc51846.2026.00050-a02-1,ectc51846.2026.00050,2,Chinami Marushima,1,primary,IBM,IBM Research - Tokyo,Kawasaki,JP,,paper,p.1 affiliations (page image)
+ectc51846.2026.00050-a03-1,ectc51846.2026.00050,3,Takahito Watanabe,1,primary,IBM,IBM Research - Tokyo,Kawasaki,JP,,paper,p.1 affiliations (page image)
+ectc51846.2026.00050-a04-1,ectc51846.2026.00050,4,Atom Watanabe,1,primary,IBM,IBM Research - Watson Research Center,"Yorktown, NY",US,,paper,p.1 affiliations (page image)
+ectc51846.2026.00050-a05-1,ectc51846.2026.00050,5,Yasuharu Yamada,1,primary,IBM,IBM Research - Tokyo,Kawasaki,JP,,paper,p.1 affiliations (page image)
+ectc51846.2026.00050-a06-1,ectc51846.2026.00050,6,Sayuri Kohara,1,primary,IBM,IBM Research - Tokyo,Kawasaki,JP,,paper,p.1 affiliations (page image)
+ectc51846.2026.00050-a07-1,ectc51846.2026.00050,7,Risa Miyazawa,1,primary,IBM,IBM Research - Tokyo,Kawasaki,JP,,paper,p.1 affiliations (page image)
+ectc51846.2026.00050-a08-1,ectc51846.2026.00050,8,Hiroyuki Mori,1,primary,IBM,IBM Research - Tokyo,Kawasaki,JP,,paper,p.1 affiliations (page image)
+ectc51846.2026.00050-a09-1,ectc51846.2026.00050,9,Divya Taneja,1,primary,IBM,IBM Infrastructure,Bromont,CA,,paper,p.1 affiliations (page image)
+ectc51846.2026.00050-a10-1,ectc51846.2026.00050,10,Isabel de Sousa,1,primary,IBM,IBM Infrastructure,Bromont,CA,,paper,p.1 affiliations (page image)
+ectc51846.2026.00019-a01-1,ectc51846.2026.00019,1,Kei Masuyama,1,primary,Mitsubishi Electric,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00019-a02-1,ectc51846.2026.00019,2,Mizuki Shirao,1,primary,Mitsubishi Electric,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00019-a03-1,ectc51846.2026.00019,3,Shinji Araki,1,primary,Mitsubishi Electric,,Hyogo,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00019-a04-1,ectc51846.2026.00019,4,Kiyotomo Hasegawa,1,primary,Mitsubishi Electric,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00019-a05-1,ectc51846.2026.00019,5,Shinya Okuda,1,primary,Mitsubishi Electric,,Hyogo,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00019-a06-1,ectc51846.2026.00019,6,Seiu Higashide,1,primary,Mitsubishi Electric,,Hyogo,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00019-a07-1,ectc51846.2026.00019,7,Nobuo Ohata,1,primary,Mitsubishi Electric,,Kanagawa,JP,printed locality is a prefecture,paper,p.1 affiliations
+ectc51846.2026.00024-a01-1,ectc51846.2026.00024,1,Tran Van Nhat Anh,1,primary,A*STAR Institute of Microelectronics,,Singapore,SG,"printed: Institute of Microelectronics (IME), Agency for Science, Technology and Research (A*STAR)",paper,p.1 affiliations
+ectc51846.2026.00024-a02-1,ectc51846.2026.00024,2,Prayudi Lianto,1,primary,Applied Materials,Packaging Plating and Cleans,Singapore,SG,,paper,p.1 affiliations
+ectc51846.2026.00024-a03-1,ectc51846.2026.00024,3,B.S.S. Chandra Rao,1,primary,A*STAR Institute of Microelectronics,,Singapore,SG,"printed: Institute of Microelectronics (IME), Agency for Science, Technology and Research (A*STAR)",paper,p.1 affiliations
+ectc51846.2026.00024-a04-1,ectc51846.2026.00024,4,Chaeeun Lee,1,primary,A*STAR Institute of Microelectronics,,Singapore,SG,"printed: Institute of Microelectronics (IME), Agency for Science, Technology and Research (A*STAR)",paper,p.1 affiliations
+ectc51846.2026.00024-a05-1,ectc51846.2026.00024,5,Fujino Masahisa,1,primary,A*STAR Institute of Microelectronics,,Singapore,SG,"printed: Institute of Microelectronics (IME), Agency for Science, Technology and Research (A*STAR)",paper,p.1 affiliations
+ectc51846.2026.00024-a06-1,ectc51846.2026.00024,6,Nicholas Chua Boon Leong,1,primary,Applied Materials,Packaging Plating and Cleans,Singapore,SG,,paper,p.1 affiliations
+ectc51846.2026.00024-a07-1,ectc51846.2026.00024,7,Rong Ji,1,primary,A*STAR Institute of Materials Research and Engineering,,Singapore,SG,"printed: Institute of Materials Research and Engineering (IMRE), Agency for Science, Technology and Research (A*STAR)",paper,p.1 affiliations
+ectc51846.2026.00024-a08-1,ectc51846.2026.00024,8,Ming Lin,1,primary,A*STAR Institute of Materials Research and Engineering,,Singapore,SG,"printed: Institute of Materials Research and Engineering (IMRE), Agency for Science, Technology and Research (A*STAR)",paper,p.1 affiliations
+ectc51846.2026.00024-a09-1,ectc51846.2026.00024,9,Yong Hong Derrick Tan,1,primary,WinTech Nano-Technology Services,,Singapore,SG,printed: WinTech Nano-Technology Services Pte. Ltd.,paper,p.1 affiliations
+ectc51846.2026.00024-a10-1,ectc51846.2026.00024,10,Vempati Srinivasa Rao,1,primary,A*STAR Institute of Microelectronics,,Singapore,SG,"printed: Institute of Microelectronics (IME), Agency for Science, Technology and Research (A*STAR)",paper,p.1 affiliations
+ectc51846.2026.00024-a11-1,ectc51846.2026.00024,11,Navab Singh,1,primary,A*STAR Institute of Microelectronics,,Singapore,SG,"printed: Institute of Microelectronics (IME), Agency for Science, Technology and Research (A*STAR)",paper,p.1 affiliations
+ectc51846.2026.00051-a01-1,ectc51846.2026.00051,1,Tarek Ibrahim,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a02-1,ectc51846.2026.00051,2,Zhiguo Qian,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a03-1,ectc51846.2026.00051,3,Jianyong Xie,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a04-1,ectc51846.2026.00051,4,Yidnekachew Mekonnen,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a05-1,ectc51846.2026.00051,5,Jung Kyu Han,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a06-1,ectc51846.2026.00051,6,Ali Lehaf,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a07-1,ectc51846.2026.00051,7,Tchefor Ndukum,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a08-1,ectc51846.2026.00051,8,Siddarth Kumar,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a09-1,ectc51846.2026.00051,9,Jason Gamba,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a10-1,ectc51846.2026.00051,10,Kaladhar Radhakrishnan,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a11-1,ectc51846.2026.00051,11,Kemal Aygün,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00051-a12-1,ectc51846.2026.00051,12,Rahul Manepalli,1,primary,Intel,Advanced Packaging Technology & Manufacturing,Chandler,US,,paper,p.1 affiliations
+ectc51846.2026.00062-a01-1,ectc51846.2026.00062,1,Vineeth Harish,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS),"Los Angeles, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00062-a02-1,ectc51846.2026.00062,2,Jui-Han Liu,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS),"Los Angeles, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00062-a03-1,ectc51846.2026.00062,3,Diana Cantini,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS),"Los Angeles, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00062-a04-1,ectc51846.2026.00062,4,Samuel Wang,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS),"Los Angeles, California",US,,paper,p.1 affiliations
+ectc51846.2026.00062-a05-1,ectc51846.2026.00062,5,Goutham Ezhilarasu,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS),"Los Angeles, California",US,,paper,p.1 affiliations
+ectc51846.2026.00062-a06-1,ectc51846.2026.00062,6,Anton Turpault,1,primary,Kulicke & Soffa,,"Fort Washington, PA",US,"printed: Kulicke & Soffa Industries, Inc.",paper,p.1 affiliations
+ectc51846.2026.00062-a07-1,ectc51846.2026.00062,7,Adeel Bajwa,1,primary,Kulicke & Soffa,,"Fort Washington, PA",US,"printed: Kulicke & Soffa Industries, Inc.",paper,p.1 affiliations
+ectc51846.2026.00062-a08-1,ectc51846.2026.00062,8,Subramanian S. Iyer,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS),"Los Angeles, CA",US,,paper,p.1 affiliations

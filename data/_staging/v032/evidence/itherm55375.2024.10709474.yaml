@@ -1,0 +1,46 @@
+paper_id: itherm55375.2024.10709474
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/itherm55375.2024.10709474/text.md
+  - references/itherm55375.2024.10709474/source.json
+  - references/itherm55375.2024.10709474/figures/page_02.png
+  - references/itherm55375.2024.10709474/figures/page_03.png
+  - references/itherm55375.2024.10709474/figures/page_04.png
+  - references/itherm55375.2024.10709474/figures/cand/p02_fig1.png
+  - references/itherm55375.2024.10709474/figures/cand/p02_tablei.png
+  - references/itherm55375.2024.10709474/figures/cand/p03_fig5.png
+  - references/itherm55375.2024.10709474/figures/cand/p03_fig7.png
+  - references/itherm55375.2024.10709474/figures/cand/p04_fig9.png
+figure_reading_method: >-
+  Page renders at 150 dpi plus re-crops of Fig. 1, Fig. 2(a)-(d), Fig. 5, Fig. 9. Fig. 4 and Fig. 10 bar values are
+  printed bar labels; Fig. 8 average temperature is the printed IR box label; Table I matches text.md.
+entries:
+  - {table: components, row_id: itherm55375.2024.10709474-a-c1, field: notes, value: "22.8 x 24", unit: mm, basis: design_target, locator: "p.2 Fig. 2(a)", note: "fin array extent labels in schematic"}
+  - {table: metrics, row_id: itherm55375.2024.10709474-a-m4, field: condition, value: 29.1, unit: C, basis: measured, locator: "p.4 Sec. IV", note: "inlet temperature for the 1150 W, 1 L/min IR measurement"}
+  - {table: metrics, row_id: itherm55375.2024.10709474-a-m14, field: condition, value: "0.145 / 0.29", unit: m/s, basis: simulated, locator: "p.2 Sec. II.B", note: "inlet velocity equivalent to 0.5 / 1 L/min in the periodic-unit model"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: itherm55375.2024.10709474-a-m1, field: value, values: [3, 3.5], locators: ["p.4 Sec. IV", "p.5 Sec. V"], chosen: 3, why: "results section; COP 56000 = 1400 W / (8.33e-6 m3/s x 3000 Pa) consistent with 3 kPa"}
+excluded:
+  - "Prior-work cooling numbers in Introduction (Tuckerman/Pease 790 W/cm2, Sarvey, Wu 481 W/cm2, van Erp 1.7 kW/cm2, Colgan 500 W/cm2 and HTC, Jung, Chen 1200 W/18.3 kPa, Yang 417 W) from refs [6]-[16]"
+  - "Ponte Vecchio 600 W and MI300X 750 W TDP from refs [3]-[4]"
+  - "Fig. 11 COP comparison points of other works (ref [9])"
+  - "Fig. 9 intermediate data points (not needed; endpoints stated in text)"
+  - "Fig. 3(b) simulated temperature contour scale"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - wafer size; die outer x/y; package dimensions
+  - Cu-Sn bond pad size, pitch, metal thicknesses and bonding temperature/pressure/time
+  - SiO2 and Ti/Cu heater thicknesses; heater resistance
+  - manifold material and dimensions (only an undefined 3.8 mm label); adhesive product
+  - inlet temperature for 0.5 L/min runs; sample count; reliability / leak tests
+source_quality:
+  - "Text layer clean. Candidates p02_fig1, p03_fig5 and p04_fig9 clip labels (manual re-crops); Fig. 2 and Fig. 3/6/8 have no candidates."
+  - "Text says manifold has 4 inlets and 3 outlets; Fig. 2(d) labels only one inlet and one outlet (entered per text)."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: itherm55375.2024.10709474-F1-s01, change: target 'fin and slit wafers' moved to step text, reason: target holds stated geometry only}
+  - {date: 2026-10-20, source: repass, row_id: itherm55375.2024.10709474-F1-s08, change: 'target -> fin geometry (depth 400 um, Table I sizes); thickness_um 400 cleared', reason: '400 um is etch depth, not result thickness; p.2 Sec. II.A, Table I'}
+  - {date: 2026-10-20, source: repass, row_id: itherm55375.2024.10709474-F1-s12, change: target 18 mm x 20 mm, reason: p.3 Sec. III.A heater size}
+  - {date: 2026-10-20, source: repass, row_id: itherm55375.2024.10709474-F1-s14, change: step_basis inferred_order, reason: black paint position vs fixture assembly not stated}
+  - {date: 2026-10-20, source: repass, row_id: "itherm55375.2024.10709474-F1-s08", change: "target 'fin depth 400 um (350 um Si left); Lp 0.2 mm, Lf 0.4 mm, Wf 0.1 mm, Wc 0.1 mm, 2theta 60 deg' -> 'fin depth 400 um (350 um Si left); slits through 300 um thick slit wafer; Lp 0.2 mm, Lf 0.4 mm, Wf 0.1 mm, Wc 0.1 mm, 2theta 60 deg'", reason: "manifest target_missing a-L08: slit wafer thickness 300 um stated p.2 Sec. II.A (slit depth through wafer)"}

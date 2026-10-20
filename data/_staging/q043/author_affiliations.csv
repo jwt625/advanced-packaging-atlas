@@ -1,0 +1,39 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc51687.2025.00142-a01-1,ectc51687.2025.00142,1,Vineeth Harish,1,primary,"University of California, Los Angeles",UCLA Center for Heterogeneous Integration and Performance Scaling (CHIPS),"Los Angeles, CA",US,,paper,p.1 affiliations
+ectc51687.2025.00142-a02-1,ectc51687.2025.00142,2,Seungwoo Baek,1,primary,"University of California, Los Angeles",UCLA Center for Heterogeneous Integration and Performance Scaling (CHIPS),"Los Angeles, CA",US,,paper,p.1 affiliations
+ectc51687.2025.00142-a03-1,ectc51687.2025.00142,3,Kai Zheng,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51687.2025.00142-a04-1,ectc51687.2025.00142,4,Krutikesh Sahoo,1,primary,"University of California, Los Angeles",UCLA Center for Heterogeneous Integration and Performance Scaling (CHIPS),"Los Angeles, CA",US,printed unit typo: Heterogeneosu,paper,p.1 affiliations
+ectc51687.2025.00142-a05-1,ectc51687.2025.00142,5,Gilbert Park,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51687.2025.00142-a06-1,ectc51687.2025.00142,6,Han-Wen Chen,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51687.2025.00142-a07-1,ectc51687.2025.00142,7,Steven Verhaverbeke,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51687.2025.00142-a08-1,ectc51687.2025.00142,8,Subramanian S. Iyer,1,primary,"University of California, Los Angeles",UCLA Center for Heterogeneous Integration and Performance Scaling (CHIPS),"Los Angeles, CA",US,,paper,p.1 affiliations
+ectc51687.2025.00187-a01-1,ectc51687.2025.00187,1,Po-Yao Lin,1,primary,Intel,,Hsinchu,TW,printed: Intel,paper,p.1 affiliations (page image)
+ectc51687.2025.00187-a02-1,ectc51687.2025.00187,2,Yanling Huang,1,primary,Intel,,Hsinchu,TW,printed: Intel,paper,p.1 affiliations (page image)
+ectc51687.2025.00187-a03-1,ectc51687.2025.00187,3,Yen-Kun Lai,1,primary,Intel,,Hsinchu,TW,printed: Intel,paper,p.1 affiliations (page image)
+ectc51687.2025.00187-a04-1,ectc51687.2025.00187,4,Han-wen Lin,1,primary,Intel,,Hsinchu,TW,printed: Intel,paper,p.1 affiliations (page image)
+ectc51687.2025.00187-a05-1,ectc51687.2025.00187,5,JS Paek,1,primary,Intel,,Hsinchu,TW,printed: Intel,paper,p.1 affiliations (page image)
+ectc51687.2025.00187-a06-1,ectc51687.2025.00187,6,Max Wu,1,primary,Intel,,Hsinchu,TW,printed: Intel,paper,p.1 affiliations (page image)
+ectc51687.2025.00187-a07-1,ectc51687.2025.00187,7,Jason Zhang,1,primary,Intel,,Arizona,US,"locality = printed state (Intel, Arizona, US); no city printed",paper,p.1 affiliations (page image)
+ectc51687.2025.00187-a08-1,ectc51687.2025.00187,8,Thomas Huber,1,primary,Intel,,Munich,DE,printed: Intel,paper,p.1 affiliations (page image)
+ectc51909.2023.00324-a01-1,ectc51909.2023.00324,1,Akihiro Noriki,1,primary,National Institute of Advanced Industrial Science and Technology,Platform photonics research center,Tsukuba,JP,printed: National Institute of Advanced Industrial Science and Technology (AIST),paper,p.1 affiliations (page image)
+ectc51909.2023.00324-a02-1,ectc51909.2023.00324,2,Takeru Amano,1,primary,National Institute of Advanced Industrial Science and Technology,Platform photonics research center,Tsukuba,JP,printed: National Institute of Advanced Industrial Science and Technology (AIST),paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a01-1,vlsitechnologyandcir46783.2024.10631441,1,P. Zhao,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a02-1,vlsitechnologyandcir46783.2024.10631441,2,L. Witters,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a03-1,vlsitechnologyandcir46783.2024.10631441,3,A. Jourdain,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a04-1,vlsitechnologyandcir46783.2024.10631441,4,M. Stucchi,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a05-1,vlsitechnologyandcir46783.2024.10631441,5,N. Jourdan,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a06-1,vlsitechnologyandcir46783.2024.10631441,6,J.W. Maes,1,primary,ASM International,,Leuven,BE,"superscript 1: ASM, Belgium, Kapeldreef 75, Leuven",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a07-1,vlsitechnologyandcir46783.2024.10631441,7,H. Bana,1,primary,ASM International,,Leuven,BE,"superscript 1: ASM, Belgium, Kapeldreef 75, Leuven",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a08-1,vlsitechnologyandcir46783.2024.10631441,8,C. Zhu,1,primary,ASM International,,Helsinki,FI,"superscript 2: ASM, Helsinki, Finland",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a09-1,vlsitechnologyandcir46783.2024.10631441,9,R. Chukka,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a10-1,vlsitechnologyandcir46783.2024.10631441,10,F. Sebaai,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a11-1,vlsitechnologyandcir46783.2024.10631441,11,K. Vandersmissen,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a12-1,vlsitechnologyandcir46783.2024.10631441,12,N. Heylen,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a13-1,vlsitechnologyandcir46783.2024.10631441,13,D. Montero,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a14-1,vlsitechnologyandcir46783.2024.10631441,14,S. Wang,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a15-1,vlsitechnologyandcir46783.2024.10631441,15,K. D'Have,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a16-1,vlsitechnologyandcir46783.2024.10631441,16,F. Schleicher,1,primary,KLA,,Newport,GB,"superscript 3: KLA Corp, Newport, U.K.",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a17-1,vlsitechnologyandcir46783.2024.10631441,17,J. De Vos,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a18-1,vlsitechnologyandcir46783.2024.10631441,18,G. Beyer,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a19-1,vlsitechnologyandcir46783.2024.10631441,19,A. Miller,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)
+vlsitechnologyandcir46783.2024.10631441-a20-1,vlsitechnologyandcir46783.2024.10631441,20,E. Beyne,1,primary,imec,,Leuven,BE,"unmarked author, assigned to IMEC block",paper,p.1 affiliations (page image)

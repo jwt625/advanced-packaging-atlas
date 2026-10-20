@@ -1,0 +1,51 @@
+paper_id: ectc51529.2024.00051
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00051/text.md
+  - references/ectc51529.2024.00051/source.json
+  - references/ectc51529.2024.00051/figures/page_02.png
+  - references/ectc51529.2024.00051/figures/page_03.png
+  - references/ectc51529.2024.00051/figures/page_04.png
+  - references/ectc51529.2024.00051/figures/page_05.png
+figure_reading_method: >-
+  Page renders; 300 dpi re-crops of Fig. 1, 4, 6, 7, 8, 10, 13 and Tables II/III (cell values verified against image).
+  Bar heights by pixel scaling (Fig. 6: 299 px/unit; Fig. 10: 294 px/unit).
+entries:
+  - {table: metrics, row_id: ectc51529.2024.00051-b-m2, field: value, value: 0.84, unit: relative, basis: simulated, locator: "p.4 Fig. 6", note: "CUF-B bar top vs CUF-A = 1.0"}
+  - {table: metrics, row_id: ectc51529.2024.00051-c-m1, field: value, value: 0.97, unit: relative, basis: simulated, locator: "p.4 Fig. 10", note: "QCM bar vs DCM = 1.0"}
+  - {table: interconnects, row_id: ectc51529.2024.00051-a-i2, field: total_length_um, value: 110, unit: um, basis: design_target, locator: "p.2 Sec. II; p.4 Fig. 5", note: "total chip-to-laminate spacing"}
+derived:
+  - {table: test_vehicles, row_id: ectc51529.2024.00051-a, field: n_dies, value: 3, formula: "2 processor dies + 1 bridge", inputs: "p.2 Sec. II"}
+  - {table: test_vehicles, row_id: ectc51529.2024.00051-b, field: n_dies, value: 3, formula: "2 processor dies + 1 bridge", inputs: "p.2 Sec. II"}
+  - {table: test_vehicles, row_id: ectc51529.2024.00051-c, field: n_dies, value: 8, formula: "4 main chips + 4 bridges", inputs: "p.1 Sec. I; p.3 Sec. IV"}
+conflicts:
+  - {table: metrics, row_id: ectc51529.2024.00051-a-m3, field: interpretation, values: ["CUF-A strain greater, consistent with superior reliability of CUF-A module (p.3 text)", "CUF-B passed 2000 cycles, CUF-A failed before 1000 (Tables II/III)"], locators: ["p.3 Sec. V", "p.2 Table II; p.3 Table III"], chosen: "CUF-B superior", why: "result tables; text sentence names the wrong underfill"}
+  - {table: interconnects, row_id: ectc51529.2024.00051-a-i2, field: height_um, values: [100, 110], locators: ["p.2 Fig. 1; p.4 Sec. VI", "p.2 Sec. II; p.4 Fig. 5"], chosen: "100 pillar height, 110 total spacing", why: "different quantities (pillar vs standoff incl. solder cap)"}
+excluded:
+  - "Void in DBHi modules with cavity (Fig. 2(a), ref [4])"
+  - "NCP vs CUF reliability comparison of previous study ref [7]"
+  - "Copper pillar C4 standoff design attributed to refs [5, 6] (dimensions still stated as this build)"
+not_reported:
+  - "process_steps: ectc51529.2024.00051-d (main-chip wafer bumping/pad flow not described; only wafer probing, in metrics)"
+  - electrical_interfaces
+  - optical_interfaces
+  - die thickness of main chips, laminate size/layer count for DCM, lid and TIM materials
+  - uC4 diameter/height, pad sizes, bonding temperatures and reflow profiles, underfill cure
+  - nature of the 29 monitored nets, failure criterion (resistance threshold)
+  - absolute FEM warpage/stress units (legend values without unit)
+  - wafer size and probe card details
+source_quality:
+  - "Clean text layer. Candidate p03_fig3 merges Table III lower block with Fig. 3; p03_tableiii covers only the first block; p04_fig5 cuts labels; Fig. 4 has no candidate."
+revisions:
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00051-F1-s01", change: "step_basis: '' -> 'inferred_order'; thickness_um: '' -> '60'; notes: 'Conditions not given.' -> 'Inferred order. Thinning method/conditions not given.'", reason: "result thickness stated (p.2 Sec. II); order before bridge bonding implied, not stated"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00051-F1-s02", change: "step_basis: '' -> 'stated_in_flow'; split: '' -> 'uC4 pitch: DCM 75 um / QCM bridges 30 or 75 um'; notes: '' -> '>7000 joints on one 30 um-pitch bridge, no shorts or non-wets.'", reason: "order stated p.1 Sec. I; per-TV joint pitch is a split"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00051-F1-s03", change: "step_basis: '' -> 'stated_in_flow'; target: '' -> 'Cu-pillar C4: 150 um pitch, 100 um pillar height, 110 um total standoff'", reason: "stated C4 geometry on the step (p.2 Sec. II; p.4 Sec. VI)"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00051-F1-s04", change: "tv_id: 'ectc51529.2024.00051-a' -> ''; step_basis: '' -> 'stated_in_flow'; material: 'CUF-A capillary underfill' -> 'capillary underfill (epoxy)'; split: '' -> 'CUF-A (TV a) / CUF-B (TV b); QCM (TV c) not stated'; locator: 'p.3 Sec. IV; p.2 Sec. III' -> 'p.2 Sec. III; p.2 Table I; p.3 Sec. IV; p.3 Fig. 4(a)'", reason: "underfill differs only by material between TVs -> shared step with split (pilot convention)"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00051-F1-s05", change: "deleted step 'underfill'", reason: "merged into shared F1-s04 (split CUF-A/CUF-B)"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00051-F1-s06", change: "deleted step 'underfill'", reason: "merged into shared F1-s04"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00051-F1-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated (Fig. 4(a): before underfilling and capping)"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00051-F1", change: "locator: 'p.2 Sec. II; p.1 Sec. I; p.3 Sec. IV; p.2 Sec. III; p.2 Fig. 1' -> 'p.1 Sec. I; p.2 Sec. II; p.2 Fig. 1; p.2 Sec. III; p.3 Sec. IV; p.3 Fig. 4'", reason: "flow re-pass"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00051-F2-s01", change: "deleted step 'simultaneous probing of Cu pillar bumps and Au pads'", reason: "wafer probing is a test; OD/temperature conditions and results already in metrics ectc51529.2024.00051-d-m1..m4"}
+  - {date: 2026-10-20, source: "repass", row_id: "ectc51529.2024.00051-F2", change: "deleted flow 'KGD wafer probing (Sec. VI)'", reason: "only held the probing test; TV d listed in evidence not_reported"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00051-F1-s02", change: "step_basis stated_in_flow kept; notes: added 'Sec. I describes the executed QCM assembly'", reason: "manifest v002 generic_intro_candidate: p.1 Sec. I says 'We successfully assembled a DBHi QCM ... The chip assembly process consists of first directly bonding the bridge dies'; executed for the TVs"}

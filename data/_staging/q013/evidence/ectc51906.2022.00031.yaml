@@ -1,0 +1,98 @@
+paper_id: ectc51906.2022.00031
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51906.2022.00031/text.md
+  - references/ectc51906.2022.00031/TEXT_LAYER_WARNING.md
+  - references/ectc51906.2022.00031/figures/page_01_220dpi.png
+  - references/ectc51906.2022.00031/figures/page_02_220dpi.png
+  - references/ectc51906.2022.00031/figures/page_03_220dpi.png
+  - references/ectc51906.2022.00031/figures/page_04_220dpi.png
+  - references/ectc51906.2022.00031/figures/page_05_220dpi.png
+  - references/ectc51906.2022.00031/figures/page_06_220dpi.png
+  - references/ectc51906.2022.00031/figures/page_07_220dpi.png
+figure_reading_method: >-
+  OCR text.md checked line by line against the 220 dpi page renders (OCR errors: 'pm'/'ym'/'jum' for um, '+5 1m' for
+  +/-5 um, Table I garbled). All numbers taken from the images. Fig. 10 and Fig. 14 read against gridlines from
+  re-crops; Table I and Fig. 13 means read from re-crops.
+entries:
+  - {table: interconnects, row_id: ectc51906.2022.00031-c-i1, field: alignment_um, value: 5, unit: um, basis: measured, locator: "p.4 Sec. III.B", note: "bond misalignment +/-5 um 3 sigma; bonder spec +/-7 um 3 sigma (p.2)"}
+  - {table: metrics, row_id: ectc51906.2022.00031-c-m2, field: value, value: 90, unit: "%", basis: measured, locator: "p.5 Fig. 10", note: "plotted point at 155 um about 88%"}
+  - {table: metrics, row_id: ectc51906.2022.00031-d-m3, field: value, value: 0.39, unit: ohm, basis: measured, locator: "p.6 Fig. 14", note: "8-die cluster at x=7 just below 0.4"}
+derived:
+  - {table: process_steps, row_id: ectc51906.2022.00031-F1-s14, field: time_s, value: 3600, formula: "1 h x 3600 s/h", inputs: "p.4 Sec. II.B"}
+  - {table: interconnects, row_id: ectc51906.2022.00031-b-i3, field: aspect_ratio, value: 10, formula: "depth/diameter = 50/5", inputs: "p.3 Sec. II.B"}
+  - {table: interconnects, row_id: ectc51906.2022.00031-c-i3, field: aspect_ratio, value: 10, formula: "depth/diameter = 50/5", inputs: "p.3 Sec. II.B"}
+  - {table: interconnects, row_id: ectc51906.2022.00031-d-i3, field: aspect_ratio, value: 10, formula: "depth/diameter = 50/5", inputs: "p.3 Sec. II.B"}
+  - {table: components, row_id: ectc51906.2022.00031-a-c2, field: x_mm/y_mm, value: "8 x 12", formula: "Logic die site footprint taken equal to the 8 x 12 mm test vehicle die", inputs: "p.2 Sec. II.A"}
+  - {table: components, row_id: ectc51906.2022.00031-b-c3, field: x_mm/y_mm, value: "8 x 12", formula: "Logic die site footprint taken equal to the 8 x 12 mm test vehicle die", inputs: "p.2 Sec. II.A"}
+  - {table: components, row_id: ectc51906.2022.00031-c-c3, field: x_mm/y_mm, value: "8 x 12", formula: "Logic die site footprint taken equal to the 8 x 12 mm test vehicle die", inputs: "p.2 Sec. II.A"}
+  - {table: components, row_id: ectc51906.2022.00031-d-c3, field: x_mm/y_mm, value: "8 x 12", formula: "Logic die site footprint taken equal to the 8 x 12 mm test vehicle die", inputs: "p.2 Sec. II.A"}
+  - {table: interconnects, row_id: ectc51906.2022.00031-b-i3, field: resistance_mohm, value: 50, formula: "paper calculated TSV resistance ~0.05 ohm = Fig. 14 slope; ohm to mohm x1000", inputs: "p.6 Sec. III.D; p.7 Sec. IV.B"}
+  - {table: interconnects, row_id: ectc51906.2022.00031-c-i3, field: resistance_mohm, value: 50, formula: "paper calculated TSV resistance ~0.05 ohm = Fig. 14 slope; ohm to mohm x1000", inputs: "p.6 Sec. III.D; p.7 Sec. IV.B"}
+  - {table: interconnects, row_id: ectc51906.2022.00031-d-i3, field: resistance_mohm, value: 50, formula: "paper calculated TSV resistance ~0.05 ohm = Fig. 14 slope; ohm to mohm x1000", inputs: "p.6 Sec. III.D; p.7 Sec. IV.B"}
+conflicts:
+  - {table: interconnects, row_id: ectc51906.2022.00031-a-i1, field: notes (main array link count), values: [9450, 9480], locators: ["p.2 Sec. II.A", "p.1 Abstract"], chosen: 9450, why: "body text over abstract"}
+  - {table: interconnects, row_id: ectc51906.2022.00031-a-i1, field: notes (outermost column distance from edge), values: ["about 85 um", "80 um"], locators: ["p.2 Sec. II.A; p.5 Sec. III.C", "p.1 Abstract"], chosen: "85 um", why: "body text and plotted data"}
+  - {table: metrics, row_id: ectc51906.2022.00031-c-m2, field: variant, values: ["5-die yield falls below 90% at 155 um", "yield dependence at 220 um from die edge"], locators: ["p.5 Sec. III.C; p.5 Fig. 10", "p.7 Sec. V"], chosen: "155 um", why: "results text matches Fig. 10"}
+  - {table: metrics, row_id: ectc51906.2022.00031-a-m1, field: value, values: ["~100% normalized yield at 85 um", "high yield (99%) at 85 um"], locators: ["p.5 Sec. III.C", "p.7 Sec. V"], chosen: "~100%", why: "results text matches Fig. 10/11"}
+  - {table: interconnects, row_id: ectc51906.2022.00031-a-i1, field: notes (edge array links), values: ["8 columns x 315 links", "full array of 2512 links"], locators: ["p.2 Sec. II.A"], chosen: "both recorded as written", why: "8 x 315 = 2520, not 2512; paper's own numbers"}
+excluded:
+  - "Cu recess variation < 3 nm across 300 mm wafers (refs [5, 6])"
+  - "DBI capable of pad diameters < 1 to 20 um (general capability)"
+  - "Assumed CMP length scale 100-200 um"
+  - "Main-array reliability results of ref [6]"
+  - "TSV fabrication process details (ref [4])"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - DBI dielectric material; isolation oxide and Thru RDL thicknesses; Logic wafer thickness
+  - bonding force/pressure/time; surface activation chemistry
+  - reliability conditions (TCT range/cycles, autoclave, HTS duration), sample counts
+  - per-layer cumulative void-free yields for layers 1-4 (only read approximately from Fig. 8 bars; not entered)
+source_quality:
+  - "Scanned-quality text layer garbled; text.md is tesseract OCR (note 'OCR text' in papers.notes). No figure candidates were detected (candidates.json empty); all key figures manual."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51906.2022.00031-b-m3, change: "deleted (copy of a-m4: no link resistance dependence on distance from die edge)", reason: "p.5 Sec. III.D gives one statement for every stack type; no per-build value"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51906.2022.00031-c-m6, change: "deleted (copy of a-m4)", reason: "same statement"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: ectc51906.2022.00031-a-m4, change: "scope -> 'applies to TVs a, b, c'; notes added", reason: "kept as the single row; Fig. 12 plots D2W, 2-die, 5-die only"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-figures, change: "re-ranked: Fig. 6 f03 -> f04, Fig. 4 f02 -> f05, Fig. 10 f04 -> f09, Fig. 13 f05 -> f13, Table I f06 -> f15", reason: "layouts before other schematics/images, then plots/tables (SKILL.md step 5)"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f02, change: "added Fig. 2 (top_view_layout, manual)", reason: "die floor plan"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f03, change: "added Fig. 3 (top_view_layout, manual)", reason: "edge daisy-chain layout"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f06, change: "added Fig. 5 (stack_schematic, manual)", reason: "LTxC stack drawing"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f07, change: "added Fig. 1 (package_photo, manual)", reason: "photo of 8-die stack"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f08, change: "added Fig. 9 (xray_csam, manual)", reason: "CSAM of D2W and 5-die stack"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f10, change: "added Fig. 11 (electrical_plot, manual)", reason: "source of a-m1, a-m2"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f11, change: "added Fig. 8 (other, manual)", reason: "source of c-m3, c-m4"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f12, change: "added Fig. 12 (electrical_plot, manual)", reason: "source of a-m4"}
+  - {date: 2026-10-19, source: figure_rule, row_id: ectc51906.2022.00031-f14, change: "added Fig. 14 (electrical_plot, manual)", reason: "source of a-m5, d-m3, d-m4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1", change: "flow_name: 'DBI Ultra die stack build (applies to all LTxC stacks; D2W skips Thru steps)' -> 'DBI Ultra die stack build: wafer prep, die prep on tape, cyclical D2W stacking, anneal (Sec. II.B)'; tv_ids: 'ectc51906.2022.00031-c' -> 'ectc51906.2022.00031-a;ectc51906.2022.00031-b;ectc51906.2022.00031-c;ectc51906.2022.00031-d'; locator: 'p.3 Sec. II.B; p.4 Sec. II.B; p.1 Abstract; p.4 Sec. III.B' -> 'p.3 Sec. II.B; p.4 Sec. II.B; p.2 Sec. II.A; p.1 Abstract'; notes: '' -> 'Thru-wafer TSV and backside prep in F2 (TVs b-d). Reliability-part plating and singulation are TV c deltas.'", reason: "all four LTxC stacks (x = 0, 1, 4, 7) share this flow (p.4 Sec. II.B); Thru-wafer steps split to F2"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F2", change: "added", reason: "Thru-wafer steps apply only to stacks with Thru die (b, c, d); TV a (LC, D2W) has none (p.2 Sec. II.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1-s01", change: "category: 'other' -> 'rdl_layer'; step_basis: '' -> 'stated_in_flow'; step: 'Logic/Cap wafers: 2 single-layer Cu damascene steps (1 um RDL, 2 um DBI layer)' -> 'Cu damascene RDL layer (damascene step 1 of 2; Logic, Cap and Thru wafers)'; thickness_um: '' -> '1'; target: '' -> '10 um nominal RDL linewidth'; basis: 'stated' -> 'design_target'; locator: 'p.3 Sec. II.B' -> 'p.3 Sec. II.B; p.2 Sec. II.A; p.3 Fig. 4'", reason: "p.3 Sec. II.B: 2 single-layer Cu damascene steps (1 um RDL, 2 um DBI layer); RDL linewidth p.2 Sec. II.A; composite step split"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1-s19", change: "added", reason: "p.3 Sec. II.B: 2 single-layer Cu damascene steps (1 um RDL, 2 um DBI layer); RDL linewidth p.2 Sec. II.A; second damascene step split out of F1-s01"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F2-s01", change: "added", reason: "moved from ectc51906.2022.00031-F1-s02 (Thru-wafer only)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1-s02", change: "moved to ectc51906.2022.00031-F2-s01", reason: "Thru-wafer only; TV a has no Thru die"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F2-s02", change: "added", reason: "moved from ectc51906.2022.00031-F1-s05 (Thru-wafer only; final 50 um moved to backside CMP (end of grind + reveal + CMP))"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1-s05", change: "moved to ectc51906.2022.00031-F2-s02", reason: "Thru-wafer only; TV a has no Thru die"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F2-s03", change: "added", reason: "moved from ectc51906.2022.00031-F1-s06 (Thru-wafer only)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1-s06", change: "moved to ectc51906.2022.00031-F2-s03", reason: "Thru-wafer only; TV a has no Thru die"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F2-s04", change: "added", reason: "moved from ectc51906.2022.00031-F1-s07 (Thru-wafer only)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1-s07", change: "moved to ectc51906.2022.00031-F2-s04", reason: "Thru-wafer only; TV a has no Thru die"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1-s03", change: "step_basis: '' -> 'inferred_order'; step: 'CMP of DBI surfaces for hybrid-bond topography control' -> 'CMP of DBI bond surfaces for hybrid-bond topography control'; notes: '' -> 'Position not stated; CMP of DBI pads ends front-side prep.'", reason: "CMP is part of damascene/DBI topography control; position in flow not stated (p.3 Sec. II.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated p.3 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1-s08", change: "category: 'other' -> 'lamination'; step_basis: '' -> 'stated_in_flow'; seq: '8' -> '5'; step: 'mount wafers on dicing tape (die prep done on tape)' -> 'mount Thru and Cap wafers on dicing tape (die prep done on tape)'", reason: "tape mount is a build step; category other -> lamination (p.3 Sec. II.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1-s09", change: "step_basis: '' -> 'stated_in_flow'; seq: '9' -> '6'; equipment: '' -> 'stealth dicing'", reason: "named method as equipment; order stated p.3 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1-s10", change: "step_basis: '' -> 'stated_in_flow'; seq: '10' -> '7'", reason: "order stated p.3 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1-s11", change: "step_basis: '' -> 'stated_in_flow'; seq: '11' -> '8'; conditions: 'class 1000 laboratory cleanroom' -> 'class 1000 laboratory cleanroom; repeated per layer'", reason: "cyclical clean/activate/bond stated p.4 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1-s12", change: "step_basis: '' -> 'stated_in_flow'; seq: '12' -> '9'; conditions: '' -> 'repeated per layer; chemistry not stated'", reason: "cyclical clean/activate/bond stated p.4 Sec. II.B"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1-s13", change: "step_basis: '' -> 'stated_in_flow'; seq: '13' -> '10'; atmosphere: '' -> 'air'; step: 'bond die face down onto Logic wafer / previous Thru die; repeat x times then Cap die' -> 'bond die face down onto Logic wafer: x Thru die then one Cap die (cyclical per layer)'; conditions: 'room temperature, ambient atmosphere, 900 UPH' -> 'room temperature, ambient atmosphere, 900 UPH; bonder accuracy +/-7 um 3 sigma'; split: '' -> 'Thru die x = 0 (a) / 1 (b) / 4 (c) / 7 (d)'; locator: 'p.4 Sec. II.B' -> 'p.4 Sec. II.B; p.2 Sec. II.A'", reason: "typed atmosphere; per-TV Thru die count as split; bonder accuracy p.2 Sec. II.A"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1-s14", change: "step_basis: '' -> 'stated_in_flow'; seq: '14' -> '11'; conditions: '' -> '250 C for 1 hour; wafer annealed after stack assembly'", reason: "order stated p.4 Sec. II.B; 1 h -> 3600 s logged in derived"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1-s15", change: "deleted", reason: "two-probe electrical test is a measurement, not a build step; tool details moved to metrics a-m3, b-m2, c-m5 condition"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1-s16", change: "deleted", reason: "CSAM is characterization of finished stacks (time-zero and after reliability, p.4 Sec. II.B/III.B); results already in metrics c-m3, c-m4"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1-s17", change: "tv_id: '' -> 'ectc51906.2022.00031-c'; step_basis: '' -> 'stated_in_flow'; seq: '17' -> '12'", reason: "reliability parts were 5-die stacks (p.4 Sec. II.B; p.6 Sec. III.E): TV c delta"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-F1-s18", change: "tv_id: '' -> 'ectc51906.2022.00031-c'; step_basis: '' -> 'stated_in_flow'; seq: '18' -> '13'", reason: "reliability parts were 5-die stacks (p.4 Sec. II.B; p.6 Sec. III.E): TV c delta"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-a-m3", change: "condition: '' -> 'two-probe; Agilent B1500 SMU, Wentworth 300 mm probe station, Signatone probers, 5 um W tips'", reason: "moved from deleted step ectc51906.2022.00031-F1-s15 (p.4 Sec. II.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-b-m2", change: "condition: '' -> 'two-probe; Agilent B1500 SMU, Wentworth 300 mm probe station, Signatone probers, 5 um W tips'", reason: "moved from deleted step ectc51906.2022.00031-F1-s15 (p.4 Sec. II.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-c-m5", change: "condition: '' -> 'two-probe; Agilent B1500 SMU, Wentworth 300 mm probe station, Signatone probers, 5 um W tips'", reason: "moved from deleted step ectc51906.2022.00031-F1-s15 (p.4 Sec. II.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-c-m3", change: "condition: '' -> 'C-mode scanning acoustic microscopy (CSAM)'", reason: "moved from deleted step ectc51906.2022.00031-F1-s16 (p.1 Abstract; p.4 Sec. III.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00031-c-m4", change: "condition: '' -> 'C-mode scanning acoustic microscopy (CSAM)'", reason: "moved from deleted step ectc51906.2022.00031-F1-s16 (p.1 Abstract; p.4 Sec. III.B)"}

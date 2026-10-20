@@ -1,0 +1,51 @@
+paper_id: ectc51529.2024.00088
+verified_on: 2026-10-18
+source_files:
+  - references/ectc51529.2024.00088/text.md
+  - references/ectc51529.2024.00088/source.json
+  - references/ectc51529.2024.00088/figures/page_02.png
+  - references/ectc51529.2024.00088/figures/page_03.png
+  - references/ectc51529.2024.00088/figures/page_04.png
+figure_reading_method: >-
+  Page renders read at 150 dpi; Fig. 4 and Fig. 6 re-rendered from source.pdf at 400 dpi in scratch (not kept). In
+  Fig. 6 the horizontal arrows are top and bottom CD, the vertical arrow is depth (matches caption depths 6/10/10 um).
+entries:
+  - {table: metrics, row_id: ectc51529.2024.00088-a-m1, field: value, value: 15.6, unit: um, basis: measured, locator: "p.2 Fig. 2(c),(f)", note: "laser confocal step label 15.6um on both via and trench profiles"}
+  - {table: metrics, row_id: ectc51529.2024.00088-a-m8, field: value, value: 8.3, unit: um, basis: measured, locator: "p.3 Fig. 4(c)", note: "ABF portion below DFR/ABF interface arrow"}
+derived:
+  - {table: stack_layers, row_id: ectc51529.2024.00088-a-L05, field: space_um, value: 5, formula: "pitch - trench CD = 10 - 5", inputs: "p.4 Fig. 6(d)"}
+  - {table: stack_layers, row_id: ectc51529.2024.00088-a-L06, field: space_um, value: 10, formula: "15 - 5", inputs: "p.2 Fig. 2(d)"}
+  - {table: stack_layers, row_id: ectc51529.2024.00088-a-L07, field: space_um, value: 16, formula: "24 - 8", inputs: "p.2 Fig. 2(e)"}
+  - {table: stack_layers, row_id: ectc51529.2024.00088-a-L08, field: space_um, value: 20, formula: "30 - 10", inputs: "p.2 Fig. 2(f)"}
+conflicts:
+  - {table: metrics, row_id: ectc51529.2024.00088-a-m6, field: value, values: [14.3, 14.1, 14.2], locators: ["p.3 Fig. 4(a)", "p.3 Fig. 4(b)", "p.3 Sec. III.B"], chosen: "figure values per feature", why: "text ~14.2 um is an overall figure; per-feature measured labels entered"}
+  - {table: metrics, row_id: ectc51529.2024.00088-a-m8, field: value, values: [8.3, 8.1, 8.2], locators: ["p.3 Fig. 4(c)", "p.3 Fig. 4(d)", "p.3 Sec. III.B"], chosen: "figure values per feature", why: "measured image labels over text"}
+  - {table: metrics, row_id: ectc51529.2024.00088-a-m21, field: locator, values: ["Fig. 6 caption labels vias (a-b), trenches (d-e)", "image shows vias a-c, trenches d-f"], locators: ["p.4 Fig. 6 caption", "p.4 Fig. 6"], chosen: "image panel labels", why: "caption panel ranges inconsistent with three via panels; Fig. 4 caption also says (b) for panel (d)"}
+excluded:
+  - "Cu-mask DRIE of ABF, via CD 8-20 um, depth 5.4 um attributed to refs [7-8]"
+  - "sub-10 um vias and L/S, etched depth 7 um attributed to ref [9]"
+  - "laser drilling via CD > 15 um limit (general statement, background)"
+not_reported: [components, interconnects, electrical_interfaces, optical_interfaces, "ABF grade and thickness", "Cu thickness", "coupon size", "etch time, gas flows, ICP/CCP power", "exposure dose", "taper angle", "metallization"]
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-F1-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "step_basis: order stated in Sec. II and Fig. 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-F1-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "step_basis: order stated in Sec. II and Fig. 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-F1-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "step_basis: order stated in Sec. II and Fig. 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-F1-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "step_basis: order stated in Sec. II and Fig. 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-F1-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "step_basis: order stated in Sec. II and Fig. 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-F1-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "step_basis: order stated in Sec. II and Fig. 1"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-F1-s01", change: "step: 'DFR lamination on ABF surface' -> 'DFR lamination on ABF (ABF on Cu)'; target: 'ABF on Cu' -> ''", reason: "target holds geometry only; object name moved to step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-F1-s02", change: "target: 'DFR' -> 'via/trench CD 5, 8, 10 um at pitch 15, 24, 30 um (5 um trench also at 10 um pitch)'; material: '' -> 'DFR'; equipment: '' -> 'laser-based digital lithography (resolution down to 1 um)'; conditions: 'tool resolution down to 1 um; patterns CD down to 5 um designed (DFR resolution >4 um)' -> 'DFR resolution >4 um, so CD >= 5 um designed and exposed'; locator: 'p.2 Sec. II; p.2 Fig. 1(c)' -> 'p.2 Sec. II; p.2 Fig. 1(c); p.2 Fig. 2; p.4 Fig. 6'", reason: "stated CD/pitch targets and tool type on the step (Fig. 2 caption, Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-F1-s03", change: "target: 'DFR' -> ''; material: 'Na2CO3 aqueous solution' -> 'DFR; Na2CO3 aqueous developer'; conditions: 'spray pressure 0.18 MPa' -> 'spray, 0.18 MPa; 30 C'", reason: "target holds geometry only; developer is the material"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-F1-s04", change: "target: 'DFR' -> ''; material: '' -> 'DFR'", reason: "target holds geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-F1-s05", change: "target: 'ABF' -> 'vias/trenches CD 5-10 um in ABF; ABF etch ~6 um (5 um vias), ~10 um (others)'; material: '' -> 'ABF'; equipment: '' -> 'ICP + CCP plasma etch'", reason: "stated etch geometry as target; tool type on the step (Sec. II, III.C)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-F1-s07", change: "target: 'DFR' -> ''; material: '' -> 'DFR'; equipment: '' -> 'O2 ICP plasma'; atmosphere: '' -> 'o2'; conditions: 'O2 ICP plasma' -> 'O2 ICP plasma ashing'", reason: "typed atmosphere; target holds geometry only; tool type"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-F1-s06", change: "deleted step (inspection: measure DFR and ABF etch amounts before DFR removal)", reason: "measurement for etch-rate calculation, not a build step; values already in metrics a-m6..a-m17"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-F1-s08", change: "deleted step (inspection: FIB/SEM cross-section of vias and trenches in ABF)", reason: "post-build FIB/SEM cross-section, not a build step; values already in metrics a-m21..a-m39"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-F1-s07", change: "seq: '7' -> '6'", reason: "seq renumbered after measurement rows removed"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-F1", change: "locator: 'p.2 Sec. II; p.2 Fig. 1(a-b); p.2 Fig. 1(c); p.2 Fig. 1(d); p.4 Sec. III.C; p.3 Sec. III.B; p.2 Fig. 1(e-f); p.4 Fig. 6' -> 'p.2 Sec. II; p.2 Fig. 1; p.4 Sec. III.C'; flow_name: 'DFR-masked dry etch of ABF' -> 'DFR-masked dry etch of ABF (Fig. 1)'", reason: "locator cites the flow sources only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-a-m1", change: "condition: 'laser confocal step profile' -> 'Keyence laser confocal step profile'", reason: "measurement tool from deleted step s06 (Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-a-m6", change: "condition: 'laser confocal step profile, before DFR removal' -> 'Keyence laser confocal step profile, before DFR removal'", reason: "measurement tool from deleted step s06 (Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-a-m7", change: "condition: 'laser confocal step profile, before DFR removal' -> 'Keyence laser confocal step profile, before DFR removal'", reason: "measurement tool from deleted step s06 (Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-a-m18", change: "condition: 'laser confocal step profile' -> 'Keyence laser confocal step profile'", reason: "measurement tool from deleted step s06 (Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-a-m19", change: "condition: 'laser confocal step profile' -> 'Keyence laser confocal step profile'", reason: "measurement tool from deleted step s06 (Sec. II)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00088-a-L07;ectc51529.2024.00088-a-L08", change: "none (pass B target_missing not applicable)", reason: "space_um 16/20 are derived (pitch - CD, see derived); paper states only trench CD 8/10 um at pitch 24/30 um (p.2 Fig. 2 caption), already in F1-s02 target"}

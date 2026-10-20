@@ -1,0 +1,73 @@
+paper_id: ectc51687.2025.00233
+verified_on: 2026-10-18
+source_files:
+  - references/ectc51687.2025.00233/text.md
+  - references/ectc51687.2025.00233/source.json
+  - references/ectc51687.2025.00233/figures/page_02.png
+  - references/ectc51687.2025.00233/figures/page_03.png
+  - references/ectc51687.2025.00233/figures/page_04.png
+figure_reading_method: >-
+  Page renders p.2-p.4 opened; Fig. 2 and Fig. 3(a) re-rendered from source.pdf at 5x zoom in the scratchpad.
+entries:
+  - {table: test_vehicles, row_id: ectc51687.2025.00233-b, field: substrate_x_mm, value: 77, unit: mm, basis: design_target, locator: "p.3 Sec. III.B", note: "unit size 77 x 77 mm2"}
+  - {table: interconnects, row_id: ectc51687.2025.00233-b-i2, field: diameter_um, value: 30, unit: um, basis: design_target, locator: "p.4 Fig. 4; p.4 Sec. III.B", note: "Fig. 4 'Drill Size: 30 um, pitch: 150 um'; text 'via size of 30 um'"}
+  - {table: metrics, row_id: ectc51687.2025.00233-b-m6, field: value, value: 9, unit: um, basis: design_target, locator: "p.4 Fig. 4", note: "Line width/space 9/12 um, length 2000 um"}
+  - {table: metrics, row_id: ectc51687.2025.00233-b-m2, field: pass_criterion, value: "1e8", unit: ohm, basis: measured, locator: "p.4 Table III", note: "Insulation R > 10^8 ohm"}
+  - {table: stack_layers, row_id: ectc51687.2025.00233-b-L08, field: thickness_um, value: 400, unit: um, basis: design_target, locator: "p.4 Sec. III.B; p.3 Fig. 2(c)", note: "0.4 mm glass core; Fig. 2(c) label"}
+derived:
+  - {table: interconnects, row_id: ectc51687.2025.00233-a-i1, field: aspect_ratio, value: 4, formula: "depth/diameter = 400/100", inputs: "p.3 Sec. III.A"}
+  - {table: interconnects, row_id: ectc51687.2025.00233-b-i1, field: aspect_ratio, value: 4, formula: "depth/diameter = 400/100", inputs: "p.4 Sec. III.B"}
+  - {table: process_steps, row_id: ectc51687.2025.00233-F2-s08, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.2 Sec. II.B"}
+  - {table: process_steps, row_id: ectc51687.2025.00233-F2-s09, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.2 Sec. II.B"}
+  - {table: interconnects, row_id: ectc51687.2025.00233-a-i1, field: depth_um, value: 400, formula: "0.4 mm x 1000 (via depth = glass thickness)", inputs: "p.3 Sec. III.A"}
+conflicts:
+  - {table: test_vehicles, row_id: ectc51687.2025.00233-b, field: substrate_layer_count, values: ["two layer RDL structures on both sides (p.2 Sec. I)", "three layers of RDL per side (p.4 Sec. III.B); six RDL + six DF-PID (abstract); M1-M6 (Fig. 3(a))"], locators: ["p.2 Sec. I", "p.4 Sec. III.B; p.1 Abstract; p.3 Fig. 3(a)"], chosen: "3 RDL per side", why: "results text, abstract and schematic agree"}
+excluded:
+  - "Intel prediction: 50% less pattern distortion and 10x IO density for glass (ref [2])"
+  - "TSV higher loss than TGV at high frequency (ref [4]); fully filled TGV lower loss at 30 GHz (ref [3])"
+  - "Table I generic glass/Si/organic comparison (roughness <10 nm vs 400-600 nm) - not this TV"
+  - "Cu CTE 17 ppm/K and glass CTE ~3-9 ppm/K - generic background, glass type of TV not given"
+  - "DF6800 / DF6800M (Table II) - not used in this TV; DF6800 details in ref [9]"
+not_reported:
+  - glass type/supplier, TGV pitch/count, TGV formation method, liner metal thickness
+  - per-layer DF-PID and Cu thicknesses, per-layer L/S, via diameters per layer
+  - lamination temperature/pressure/time, exposure dose, plasma power/time, seed thickness
+  - n_samples for reliability, bHAST/HTS test structure assignment, measured resistance or R shift values
+  - warpage numbers; electrical_interfaces; optical_interfaces
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F1", change: "level: 'fragments' -> 'ordered'", reason: "two steps in stated order (line TGV, then laminate), lamination film thickness given; not isolated fragments (p.3 Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F1", change: "locator: 'p.3 Sec. III.A; p.3 Fig. 2(a)-(b); p.3 Fig. 2' -> 'p.3 Sec. III.A; p.3 Fig. 2(a)-(b)'", reason: "SEM-only locator dropped with the deleted inspection row"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F1-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated: TGV 'first lined with a metal layer and then' laminated (p.3 Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F1-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated: TGV 'first lined with a metal layer and then' laminated (p.3 Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F1-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "order stated: TGV 'first lined with a metal layer and then' laminated (p.3 Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F1-s01", change: "step: 'metal lining of TGVs' -> 'metal lining of 100 um TGVs in 0.4 mm glass'", reason: "target holds geometry only; substrate geometry moved to step text (p.3 Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F1-s01", change: "target: 'glass substrate TGVs' -> ''", reason: "target holds geometry only; substrate geometry moved to step text (p.3 Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F1-s02", change: "thickness_in_um: '' -> '20'", reason: "20 um is the as-laminated film thickness (input), not a result thickness (p.3 Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F1-s02", change: "thickness_um: '20' -> ''", reason: "20 um is the as-laminated film thickness (input), not a result thickness (p.3 Sec. III.A)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F1-s03", change: "deleted step 'cross-section SEM of filled TGVs'", reason: "cross-section SEM is a measurement, not a build step; already in metrics ectc51687.2025.00233-a-m1 (p.3 Fig. 2(a))"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s01", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 1 flow and p.2-3 Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s02", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 1 flow and p.2-3 Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s03", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 1 flow and p.2-3 Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s04", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 1 flow and p.2-3 Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s05", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 1 flow and p.2-3 Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s06", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 1 flow and p.2-3 Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s07", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 1 flow and p.2-3 Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s08", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 1 flow and p.2-3 Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s09", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 1 flow and p.2-3 Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s10", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 1 flow and p.2-3 Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s11", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 1 flow and p.2-3 Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s12", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 1 flow and p.2-3 Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s13", change: "step_basis: '' -> 'stated_in_flow'", reason: "order from Fig. 1 flow and p.2-3 Sec. II.B text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s01", change: "category: 'tsv_tgv_formation' -> 'carrier_prep'", reason: "substrate-provision step (1) of Fig. 1 kept as carrier_prep; target holds stated geometry (p.4 Sec. III.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s01", change: "step: 'TGV glass substrate with conformal metal-lined TGVs' -> 'provide TGV glass substrate with conformal metal-lined TGVs'", reason: "substrate-provision step (1) of Fig. 1 kept as carrier_prep; target holds stated geometry (p.4 Sec. III.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s01", change: "target: 'glass core 0.4 mm' -> 'TGV diameter 100 um; glass core 0.4 mm thick'", reason: "substrate-provision step (1) of Fig. 1 kept as carrier_prep; target holds stated geometry (p.4 Sec. III.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s01", change: "locator: 'p.3 Fig. 1; p.3 Sec. III.A; p.3 Fig. 3(a)' -> 'p.3 Fig. 1; p.4 Sec. III.B; p.3 Fig. 3(a)'", reason: "substrate-provision step (1) of Fig. 1 kept as carrier_prep; target holds stated geometry (p.4 Sec. III.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s01", change: "notes: 'Input substrate; TGV formation and metallization process not described.' -> 'Fig. 1 step (1); TGV formation and metallization process not described.'", reason: "substrate-provision step (1) of Fig. 1 kept as carrier_prep; target holds stated geometry (p.4 Sec. III.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s02", change: "step: 'AP9000C adhesion promoter spin-coating' -> 'AP9000C adhesion promoter spin-coating on glass substrate'", reason: "target held an object name; moved to step text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s02", change: "target: 'glass substrate' -> ''", reason: "target held an object name; moved to step text"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s05", change: "notes: '' -> 'Text step; not a Fig. 1 box.'", reason: "PET removal is a text step between lamination and exposure (p.2 Sec. II.B), not a Fig. 1 box"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s06", change: "equipment: '' -> 'i-line exposure tool'", reason: "named tool type goes to equipment (p.2 Sec. II.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s08", change: "notes: '' -> 'Inner DF-PID layers only; outer layers get s09 instead.'", reason: "cure type depends on layer position (p.2 Sec. II.B); clarify that s08 and s09 are per-layer alternatives"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s09", change: "notes: '' -> 'Outer DF-PID layers (final cure) only.'", reason: "cure type depends on layer position (p.2 Sec. II.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s13", change: "target: '' -> 'min L/S 9/12 um (comb); via 30 um at 150 um pitch (daisy chain)'", reason: "stated test-structure geometry made by the dry SAP build-up goes on the step (p.1 Abstract; p.4 Sec. III.B)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00233-F2-s13", change: "locator: 'p.3 Sec. II.B; p.3 Fig. 1; p.1 Abstract; p.4 Sec. III.B' -> 'p.3 Sec. II.B; p.3 Fig. 1; p.1 Abstract; p.4 Sec. III.B; p.4 Fig. 4'", reason: "stated test-structure geometry made by the dry SAP build-up goes on the step (p.1 Abstract; p.4 Sec. III.B)"}

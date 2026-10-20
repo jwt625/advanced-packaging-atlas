@@ -35,3 +35,13 @@ not_reported:
   - sample counts for crosstalk and reliability tests
 source_quality:
   - "Fig. 8 caption duplicates Fig. 7 caption ('Refractive index variations...') though it plots bending loss vs Delta."
+revisions:
+  - {date: 2026-10-19, source: audit_x2A, row_id: "ectc51846.2026.00110-e-s01", change: "performed: '' -> 'no'", reason: "audit_x2A defect 8: Fig. 6 flow 'is proposed' (p.3 Sec. III.A) and 'is expected to' reduce residual layer (p.4); not executed"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "ectc51846.2026.00110-e-s02", change: "performed: '' -> 'no'", reason: "audit_x2A defect 8: Fig. 6 flow 'is proposed' (p.3 Sec. III.A) and 'is expected to' reduce residual layer (p.4); not executed"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "ectc51846.2026.00110-e-s03", change: "performed: '' -> 'no'", reason: "audit_x2A defect 8: Fig. 6 flow 'is proposed' (p.3 Sec. III.A) and 'is expected to' reduce residual layer (p.4); not executed"}
+  - {date: 2026-10-19, source: audit_x2A, row_id: "ectc51846.2026.00110-e-s04", change: "performed: '' -> 'no'", reason: "audit_x2A defect 8: Fig. 6 flow 'is proposed' (p.3 Sec. III.A) and 'is expected to' reduce residual layer (p.4); not executed"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00110-f04", change: "added Fig. 1 p.1 other (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00110-f05", change: "renumbered from ectc51846.2026.00110-f04 (rank 4 -> 5)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00110-f06", change: "renumbered from ectc51846.2026.00110-f05 (rank 5 -> 6)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00110-f07", change: "renumbered from ectc51846.2026.00110-f06 (rank 6 -> 7)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51846.2026.00110-f08", change: "added Fig. 8 p.5 simulation_result (candidate)", reason: "key-figure rule 2026-10-19: every schematic/image of the build kept; values-carrying plots added"}

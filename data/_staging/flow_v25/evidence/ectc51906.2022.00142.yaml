@@ -1,0 +1,91 @@
+paper_id: ectc51906.2022.00142
+verified_on: 2026-10-18
+schema_version: 2
+source_files:
+  - references/ectc51906.2022.00142/text.md
+  - references/ectc51906.2022.00142/source.json
+  - references/ectc51906.2022.00142/source.pdf
+  - references/ectc51906.2022.00142/figures/page_02.png
+  - references/ectc51906.2022.00142/figures/page_03.png
+  - references/ectc51906.2022.00142/figures/page_04.png
+  - references/ectc51906.2022.00142/figures/page_05.png
+  - references/ectc51906.2022.00142/figures/img_p03_1.png
+  - references/ectc51906.2022.00142/figures/img_p03_2.png
+  - references/ectc51906.2022.00142/figures/img_p04_3.png
+  - references/ectc51906.2022.00142/figures/img_p04_5.png
+  - references/ectc51906.2022.00142/figures/img_p04_6.png
+  - references/ectc51906.2022.00142/figures/img_p04_7.png
+  - references/ectc51906.2022.00142/figures/img_p04_8.png
+  - references/ectc51906.2022.00142/figures/img_p04_9.png
+  - references/ectc51906.2022.00142/figures/img_p05_1.png
+figure_reading_method: >-
+  Fig. 5, Fig. 6 and Fig. 12 values read by pixel calibration of the embedded chart images (img_p03_1, img_p04_9,
+  img_p05_1) against their gridlines; Fig. 12 on a log axis (23 px per decade). Fig. 7 coplanarity labels illegible
+  even after 400 dpi re-render (raster-limited); SEM/FIB scale bars (Figs. 9, 10, 11, 13) not used for dimensions.
+entries:
+  - {table: components, row_id: ectc51906.2022.00142-b-c1, field: count, value: 1, unit: count, basis: measured, source: figure_image, locator: "p.2 Fig. 3(b)", note: "one chip visible in package photo"}
+  - {table: process_steps, row_id: ectc51906.2022.00142-F1-s01, field: material, value: "ETS thin copper foil 5 um", unit: um, basis: design_target, source: schematic, locator: "p.2 Fig. 1(b)", note: "ETS foil = copper foil + peeling layer + 5 um thin copper foil"}
+  - {table: metrics, row_id: ectc51906.2022.00142-a-m5, field: value, value: 0.04, unit: kN/m, basis: measured, source: figure_image, locator: "p.3 Fig. 5", note: "shiny marker partly hidden under ETS marker at 0 and 315 mJ/cm2; center from visible lower edge"}
+  - {table: metrics, row_id: ectc51906.2022.00142-b-m1, field: value, value: -201, unit: um, basis: measured, source: figure_image, locator: "p.4 Fig. 6", note: "error bars present but definition not stated; not extracted"}
+  - {table: metrics, row_id: ectc51906.2022.00142-b-m7, field: value, value: 45, unit: "%", basis: measured, source: text, locator: "p.3 Sec. III.B", note: "Fig. 6 bar reading gives 35/79 = 0.44 and 36/79 = 0.46, consistent"}
+  - {table: metrics, row_id: ectc51906.2022.00142-d-m6, field: value, value: 4e9, unit: ohm, basis: measured, source: figure_image, locator: "p.5 Fig. 12", note: "shiny 60 s Pd curve hidden under other curves after about 30 h; its 200 h value not extracted"}
+derived:
+  - {table: stack_layers, row_id: ectc51906.2022.00142-a-L03, field: thickness_um, value: 800, formula: "0.8 mm * 1000", inputs: "p.2 Sec. II.A"}
+  - {table: stack_layers, row_id: ectc51906.2022.00142-b-L05, field: thickness_um, value: 800, formula: "0.8 mm * 1000", inputs: "p.2 Sec. II.A"}
+  - {table: stack_layers, row_id: ectc51906.2022.00142-c-L05, field: thickness_um, value: 800, formula: "0.8 mm * 1000", inputs: "p.2 Sec. II.A"}
+  - {table: stack_layers, row_id: ectc51906.2022.00142-d-L07, field: thickness_um, value: 800, formula: "0.8 mm * 1000", inputs: "p.2 Sec. II.A"}
+  - {table: stack_layers, row_id: ectc51906.2022.00142-e-L06, field: thickness_um, value: 800, formula: "0.8 mm * 1000", inputs: "p.2 Sec. II.A"}
+  - {table: stack_layers, row_id: ectc51906.2022.00142-b-L01, field: thickness_um, value: 725, formula: "0.725 mm * 1000", inputs: "p.2 Sec. II.D"}
+  - {table: stack_layers, row_id: ectc51906.2022.00142-c-L01, field: thickness_um, value: 725, formula: "0.725 mm * 1000", inputs: "p.2 Sec. II.D"}
+  - {table: components, row_id: ectc51906.2022.00142-b-c1, field: thickness_um, value: 725, formula: "0.725 mm * 1000", inputs: "p.2 Sec. II.D"}
+  - {table: components, row_id: ectc51906.2022.00142-c-c1, field: thickness_um, value: 725, formula: "0.725 mm * 1000", inputs: "p.2 Sec. II.D"}
+conflicts:
+  - {table: stack_layers, row_id: ectc51906.2022.00142-d-L01, field: material, values: ["Prepreg without Glass cross (Table III, spans all rows incl. insulation film reference)", "insulating resin constituting the prepreg or insulation film (Sec. II.G)"], locators: ["p.5 Table III", "p.3 Sec. II.G"], chosen: "Prepreg without Glass cross", why: "result table > text"}
+  - {table: stack_layers, row_id: ectc51906.2022.00142-e-L01, field: material, values: ["Prepreg without Glass cross (Table III)", "insulating resin constituting the prepreg or insulation film (Sec. II.G)"], locators: ["p.5 Table III", "p.3 Sec. II.G"], chosen: "Prepreg without Glass cross", why: "result table > text; for the film reference the text could mean film resin"}
+  - {table: metrics, row_id: ectc51906.2022.00142-b-m7, field: value, values: [45, "reduced by half"], locators: ["p.3 Sec. III.B", "p.5 Sec. IV"], chosen: 45, why: "numeric statement; conclusion is a rounded restatement"}
+excluded:
+  - "low transmission loss of micro-strip lines up to 40 GHz with UV-assisted SAP, refs [22, 23]"
+  - "HAST reliability on L/S 15/15 um with primer copper foil, ref [17]"
+  - "flip-chip joint pitch down to 20 um, ref [18]"
+not_reported:
+  - electrical_interfaces and optical_interfaces
+  - prepreg, core and insulation film product names, CTE, modulus, Tg, Dk/Df
+  - electroless seed and electroplated line thickness
+  - die-to-substrate joint type, pitch, count, bonding conditions; BGA balls
+  - underfill material
+  - UV dose for warpage samples; UV lamp/equipment model
+  - Pd removing reagent and seed etchant chemistry
+  - surface treatment type and cover-resin application method before HAST
+  - insulation film reference sample process details
+  - HAST test standard; warpage sample count
+  - Ra for matt VLP and matt ETS press variants
+  - vias (laser via step skipped)
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142", change: "process_flow_level full confirmed; 6 -> 7 flows (F3 now shared assembly flow for b and c; new F7 shared post-Pd-removal steps for d and e); flow names, levels and locators revised", reason: "Sec. II.C-G describe separate sample builds; chip mount/underfill (II.D) and surface treatment/cover (II.G) apply to both prepreg and reference samples"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F1-s07", change: "deleted: 90 deg peel test (moved to metrics; a-m2..a-m16 already hold value, n=3, conditions)", reason: "post-build measurement, not a build step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F3-s03", change: "deleted: shadow moire warpage vs temperature (b-m1..b-m8 hold values, BGA-side view, 24-260-24 C)", reason: "post-build measurement, not a build step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F4-s04", change: "deleted: shadow moire warpage (c-m1..c-m3 hold values)", reason: "post-build measurement, not a build step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F4-s02", change: "deleted: chip mount duplicate; F3-s01 now covers b and c via tv_ids", reason: "merge true duplicate (p.2 Sec. II.D: same mounting for both substrates)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F4-s03", change: "deleted: underfill duplicate; F3-s02 now covers b and c", reason: "merge true duplicate"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F3", change: "tv_ids b -> b;c; seq 7,8 -> 1,2", reason: "sub-flow after substrate preparation, shared by prepreg and insulation-film packages"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F5-s16", change: "deleted: electroless Ni decoration of Pd residue on diagnostic samples; method added to metric d-m13 condition", reason: "failure-analysis/diagnostic step, not part of the build (p.3 Sec. II.F)"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F5-s19", change: "deleted: 85 C/85%RH 168 h soak (HAST preconditioning; in d-m1..d-m9 condition)", reason: "reliability preconditioning is metrics, not a step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F5-s20", change: "deleted: 3x 260 C reflow (HAST preconditioning; in d-m1..d-m9 condition)", reason: "reliability preconditioning is metrics, not a step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F5-s21", change: "deleted: HAST 5.5 V 130 C 85%RH 200 h (d-m1..d-m9 hold result, n=6, criterion)", reason: "reliability test is metrics, not a step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F6-s05", change: "deleted: 85/85 soak (in e-m1/e-m2 condition)", reason: "reliability preconditioning is metrics"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F6-s06", change: "deleted: 3x reflow (in e-m1/e-m2 condition)", reason: "reliability preconditioning is metrics"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F6-s07", change: "deleted: HAST (e-m1/e-m2 hold result)", reason: "reliability test is metrics"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F5-s17", change: "moved to F7-s01 (shared surface treatment for d and e)", reason: "shared post-branch step goes in its own flow"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F5-s18", change: "moved to F7-s02 (shared resin cover for d and e); target layer id removed", reason: "shared post-branch step goes in its own flow; target holds geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F6-s03", change: "merged into F7-s01", reason: "duplicate of shared step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F6-s04", change: "merged into F7-s02", reason: "duplicate of shared step"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F1-s01", change: "thickness_um 30 -> thickness_in_um 30 (per ply, as supplied); split foil press shiny VLP / matt ETS; core 0.8 mm in material", reason: "p.2 Sec. II.A: 30 um prepreg pressed; pressed thickness not stated"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F2-s01", change: "thickness_um 30 -> thickness_in_um 30; split foil press", reason: "p.2 Sec. II.A, II.D"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F5-s01", change: "thickness_um 30 -> thickness_in_um 30; split foil press shiny VLP / matt VLP / matt ETS", reason: "p.2 Sec. II.E; p.5 Table III"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F1-s04", change: "UV dose sweep moved from conditions to split", reason: "p.2 Table I; p.3 Fig. 5"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F5-s15", change: "Pd removal time sweep 0/60/120 s in split", reason: "p.3 Sec. II.F"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F5-s10", change: "target comb 40 lines L/S 10/10 and 8/8 um", reason: "p.2 Sec. II.E"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F5-s11", change: "target L/S 10/10 and 8/8 um (was layer ids)", reason: "target holds stated geometry, not object names"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F5-s08", change: "target layer id removed", reason: "target holds stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F5-s13", change: "target layer id removed", reason: "target holds stated geometry only"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51906.2022.00142-F1-s03", change: "step_basis inferred_order (also F2-s03, F5-s06); all other steps stated_in_flow or generic_description", reason: "cut vs foil etch order not stated; other orders from Fig. 4 and Sec. II text"}

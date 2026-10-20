@@ -1,0 +1,12 @@
+flow_id,paper_id,flow_name,scope,level,tv_ids,basis,source,overrides,locator,qualifiers,notes
+ectc51687.2025.00284-F1,ectc51687.2025.00284,BOE module fabrication and assembly (Sec. II.A),tv_build,ordered,ectc51687.2025.00284-a,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 3; p.3 Sec. III.A-B,,
+ectc51909.2023.00298-F1,ectc51909.2023.00298,SAP M1-M3 (double-side),tv_build,full,ectc51909.2023.00298-a,stated,mixed,,p.2 Sec. II; p.2 Fig. 2; p.1 Abstract,,
+ectc51909.2023.00298-F2,ectc51909.2023.00298,aSAP M4 (double-side),tv_build,full,ectc51909.2023.00298-a,stated,text,,p.2 Sec. II; p.2 Fig. 1; p.3 Sec. III; p.4 Sec. IV; p.4 Fig. 9,,
+ectc51909.2023.00298-F3,ectc51909.2023.00298,singulation (Sec. IV),tv_build,ordered,ectc51909.2023.00298-a,stated,text,,p.4 Sec. IV,,
+ectc51529.2024.00164-F1,ectc51529.2024.00164,IMC-Si fabrication and assembly (Sec. II.C; Fig. 2),tv_build,ordered,ectc51529.2024.00164-a;ectc51529.2024.00164-c,stated,mixed,,p.2 Fig. 2(a); p.2 Sec. II.C; p.2 Fig. 2(b); p.2 Fig. 2(c); p.2 Fig. 2(d); p.2 Fig. 2(e); p.4 Sec. IV.F,,
+ectc51529.2024.00164-F2,ectc51529.2024.00164,plain TTV variant (Sec. IV.E),tv_build,fragments,ectc51529.2024.00164-b,stated,text,,p.4 Sec. IV.E,,"Steps before DRIE (carrier bonding, thinning) for this TV are not stated."
+ectc51529.2024.00258-F1,ectc51529.2024.00258,nano-TSV with Al FS/BS metallization (Fig. 2),tv_build,ordered,ectc51529.2024.00258-a,stated,text,,p.2 Sec. II; p.2 Fig. 2 Step 1; p.2 Fig. 2 Step 2; p.3 Sec. III; p.2 Fig. 2 Step 3; p.2 Fig. 2 Step 4; p.2 Fig. 2 Step 5; p.2 Fig. 2 Step 6,,
+ectc51846.2026.00194-F1,ectc51846.2026.00194,DFR patterning on panel (Table I),tv_build,full,ectc51846.2026.00194-a;ectc51846.2026.00194-b,stated,mixed,,p.3 Table I; p.2 Sec. II.B; p.5 Sec. IV,,
+ectc51846.2026.00194-F2,ectc51846.2026.00194,DFR patterning on wafer (Table I),tv_build,full,ectc51846.2026.00194-c,stated,table,,p.3 Table I; p.2 Sec. II.B; p.5 Sec. IV,,
+ectc51846.2026.00194-F3,ectc51846.2026.00194,"Cu pillar formation (Sec. III.D, Table I)",tv_build,full,ectc51846.2026.00194-d,stated,mixed,,p.3 Table I; p.4 Sec. III.D,,
+ectc51687.2025.00284-F2,ectc51687.2025.00284,"COUPE-like advanced coupler wafer fabrication (Sec. III.B, III.D)",tv_build,fragments,ectc51687.2025.00284-b,stated,text,,p.3 Sec. III.B; p.4 Sec. III.D,,

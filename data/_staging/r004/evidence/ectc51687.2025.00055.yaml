@@ -33,3 +33,13 @@ not_reported:
   - case-study package dimensions beyond areas; TIM properties; lid and interposer materials
 source_quality:
   - "Clean text layer; Sec. II header misspelled 'VALIDAITON' in source."
+revisions:
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00055-b-m1", change: "kept (genuine per-TV); locator Fig. 3 -> Fig. 3(a)", reason: "p.2 Fig. 3 shows a separate C-SAM wafer map per TV: (a) Reference TV, (b) C-Layer TV"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00055-c-m1", change: "kept (genuine per-TV); locator Fig. 3 -> Fig. 3(b)", reason: "p.2 Fig. 3 shows a separate C-SAM wafer map per TV: (a) Reference TV, (b) C-Layer TV"}
+  - {date: 2026-10-19, source: sibling_dup, row_id: "ectc51687.2025.00055-e-m3;ectc51687.2025.00055-f-m3", change: "kept both (no change)", reason: "p.3 Table II gives bonding density per scheme: SoIC 1X, SoIC-CS 1X (genuine per-TV table cells)"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00055-f03", change: "added Fig. 3 (xray_csam, manual)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00055-f04", change: "re-ranked Fig. 2: ectc51687.2025.00055-f03 -> ectc51687.2025.00055-f04", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00055-f05", change: "re-ranked Fig. 4: ectc51687.2025.00055-f04 -> ectc51687.2025.00055-f05", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00055-f06", change: "re-ranked Table I: ectc51687.2025.00055-f05 -> ectc51687.2025.00055-f06", reason: "re-rank after additions"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00055-f07", change: "added Table II (data_table, candidate)", reason: "decision 2026-10-19 key-figure rule: schematic/image of the build or plot/table carrying extracted values"}
+  - {date: 2026-10-19, source: figures, row_id: "ectc51687.2025.00055-f08", change: "re-ranked Fig. 6: ectc51687.2025.00055-f06 -> ectc51687.2025.00055-f08", reason: "re-rank after additions"}

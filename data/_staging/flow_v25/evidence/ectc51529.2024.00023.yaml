@@ -1,0 +1,53 @@
+paper_id: ectc51529.2024.00023
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00023/text.md
+  - references/ectc51529.2024.00023/source.json
+  - references/ectc51529.2024.00023/figures/page_01.png
+  - references/ectc51529.2024.00023/figures/page_02.png
+  - references/ectc51529.2024.00023/figures/page_03.png
+  - references/ectc51529.2024.00023/figures/page_04.png
+  - references/ectc51529.2024.00023/figures/cand/p03_fig5.png
+  - references/ectc51529.2024.00023/figures/cand/p02_fig2.png
+  - references/ectc51529.2024.00023/figures/cand/p03_fig4.png
+  - references/ectc51529.2024.00023/figures/cand/p04_fig7.png
+  - references/ectc51529.2024.00023/figures/cand/p04_fig6.png
+  - references/ectc51529.2024.00023/figures/cand/p02_table2.png
+figure_reading_method: >-
+  300 dpi re-crops of Fig. 5, 6, 7, 8. Fig. 7/8 curve values read against gridlines (+/-0.05 dB). Fig. 6 SiO2/substrate
+  interface read at ~2.45-2.47 um depth; Na plateau in SiO2 ~0.001 atom%. Tables 1-2 checked against the page image.
+entries:
+  - {table: stack_layers, row_id: ectc51529.2024.00023-b-L01, field: thickness_um, value: 2.45, unit: um, basis: measured, locator: "p.4 Fig. 6", note: "SIMS depth of SiO2 region boundary"}
+  - {table: metrics, row_id: ectc51529.2024.00023-c-m1, field: value, value: 1.43, unit: dB, basis: simulated, locator: "p.4 Fig. 7", note: "TE 2000 um taper at 200 nm"}
+derived:
+  - {table: process_steps, row_id: ectc51529.2024.00023-F1-s02, field: thickness_um, value: 50000, formula: "50 mm x 1000 (unit conversion, basis design_target)", inputs: "p.3 Sec. III (50 mm thick boules)"}
+  - {table: metrics, row_id: ectc51529.2024.00023-d-m3, field: unit, value: "m2/s", formula: "diffusivity unit printed as m/s2; corrected to m2/s (unit label only)", inputs: "p.2 Sec. II.B; p.2 Table 1"}
+conflicts:
+  - {table: optical_interfaces, row_id: ectc51529.2024.00023-c-o1, field: coupling_loss_db, values: ["< 0.5 dB", "< 1 dB"], locators: ["p.1 Abstract; p.4 Sec. V.B; p.4 Conclusion", "p.4 Sec. V.B (after Fig. 8)"], chosen: "< 0.5 dB", why: "stated three times and supported by Fig. 7 (3000 um taper, <= 200 nm)"}
+  - {table: metrics, row_id: ectc51529.2024.00023-d-m12, field: value_text, values: ["5E-21: 0.1, 0.025, 0.04 dB (5/10/15 y)"], locators: ["p.2 Table 2"], chosen: "as printed", why: "non-monotonic row, likely typo; not corrected"}
+  - {table: figures, row_id: ectc51529.2024.00023-f01, field: caption, values: ["caption 'Fig. 5: B-OH concentration vs. bulk absorption'", "text: 'Fig. 8 shows the packaging concept'"], locators: ["p.3", "p.3 Sec. V.A"], chosen: "Fig. 5 (caption label)", why: "caption text duplicates Fig. 3 topic; image is the packaging concept"}
+  - {table: metrics, row_id: ectc51529.2024.00023-b-m1, field: condition, values: ["HAST 130 C/85%RH (no duration, Sec. V.A)", "HAST ... and 300 C for 1000 hrs (Conclusion)"], locators: ["p.3 Sec. V.A", "p.4 Conclusion"], chosen: "1000 h noted as ambiguous", why: "sentence structure ambiguous"}
+excluded:
+  - "IOX loss 0.043 dB/cm of ref [5]; 0.048 dB/cm and peak index increase 4.7E-3 of ref [6]"
+  - "4 dB 400G-FR4 link budget of ref [7]; 102.4 Tb/s glass core package design of ref [2]"
+  - "Fig. 1 panel concepts (75 x 75 mm multi-chip substrates, 255 x 420 mm optical circuit): concept only, no build"
+  - "Requirement list (<0.05 dB/cm, 5 y at 85 C) as targets; only the measured/simulated values entered"
+  - "Fig. 5 package elements (connector, TGV, PCB bumps) from ref [3]"
+not_reported:
+  - electrical_interfaces
+  - interconnects
+  - "glass composition, wafer thickness, waveguide core dimensions and depth"
+  - "IOX times for the demonstrated wafer, mask material"
+  - "SiO2 deposition method and film thickness (only SIMS depth), HAST duration (ambiguous)"
+  - "measured diffusivity of the new glass"
+source_quality:
+  - "Fig. 5 caption wrong (repeats Fig. 3 topic); Fig. 8 caption fragmentary; diffusivity unit printed m/s2."
+revisions:
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00023-F1", change: "step_basis stated_in_flow on s01-s11", reason: "p.3 Sec. III ('melted, refined, and then cast ... annealed and then sliced'); p.1-2 Sec. II.A ('First ... Then ... Next ... The last step'); p.3 Sec. IV ('After wafer processing')"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00023-F1-s01", change: "material/conditions: high-purity raw materials to reduce tramp Pt, Rh, Fe", reason: "p.3 Sec. III"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00023-F1-s02", change: "target '154 mm diameter boule'; thickness_um 50000 (50 mm); basis design_target; conditions cleared", reason: "p.3 Sec. III; unit conversion mm -> um"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00023-F1-s04", change: "target '150 mm diameter wafers'", reason: "p.3 Sec. III"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00023-F1-s05", change: "notes: mask material not stated", reason: "evidence not_reported"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00023-F1-s11", change: "equipment 'laser'", reason: "p.3 Sec. IV: laser cut end-faces"}
+  - {date: 2026-10-20, source: repass, row_id: "ectc51529.2024.00023-F2-s01", change: "step_basis generic_description; thickness_um 2.45 (measured, ToF-SIMS, approx)", reason: "p.4 Fig. 6 SiO2/glass interface depth (same value as stack layer b-L01)"}
