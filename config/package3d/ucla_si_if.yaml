@@ -6,6 +6,12 @@
 # Gaps from the same family: Si-IF and dielet thickness (3D Si-IF TV ectc51846.2026.00062-c), pillar height (GaN/Si-IF TV
 # iedm45741.2023.10413759-a), wiring-level thickness (Si-IF PDN unit-cell model ectc51906.2022.00303-a).
 # The Si-IF is wafer scale in general; the backbone is an 8 mm 2x2 site, drawn square (one side is labelled).
+# Routing (DevLog-011, 2026-10-20; config/package3d/ROUTING_REF_si.md, TSV-less Si-IF): dielet Cu pad / Cu pillar (4 um at
+# 9.8 um pitch) protruding 0.5 um from the Si-IF top SiO2 / M2 (pillar pads + links) / inter-level SiO2 with vias / M1
+# (links) / isolation SiO2 / Si. 350 um links run straight across the 59 um dielet gap on the two Cu levels, pillar
+# fields at both ends (fig ectc51906.2022.00332-f01). Pillar / pad / recess proportions after the GaN/Si-IF section
+# (fig iedm45741.2023.10413759-f01: 2 um pad, 3 um pillar, 500 nm SiO2 recess). No TSV and no board-side joints: I/O
+# leaves through wire-bond pads at the Si-IF edge (not drawn), so there is no vertical die-to-board net.
 id: ucla_si_if
 name: Si-IF (Silicon Interconnect Fabric)
 company: UCLA CHIPS
@@ -37,10 +43,43 @@ params:
   tpv_pitch_um: {ref: ectc51906.2022.00303-a-i1.pitch_um}
   tpv_d_um: {ref: ectc51906.2022.00303-a-i1.diameter_um}
   ws_area_mm2: {ref: ectc51906.2022.00303-c.interposer_area_mm2}
+  pad_um: {ref: iedm45741.2023.10413759-a-i1.pad_x_um, note: "7 um Cu pad of the GaN/Si-IF TV (10 um pitch); UDSP pad size not stated"}
+  dl_pad_h_um:
+    ref: iedm45741.2023.10413759-a-L04.thickness_um
+    note: "2 um dielet Cu pad of the GaN/Si-IF TV (SEM label, fig iedm45741.2023.10413759-f01 (c)); UDSP dielet pad thickness not stated"
+  link_mm: {ref: ectc51906.2022.00332-b-e1.reach_mm, note: "SuperCHIPS link length 350 um"}
+  link_n: {ref: ectc51906.2022.00332-b-e1.lanes, note: "64 links per interface, 7 interfaces per dielet pair"}
   # ---- derived
   dl_nx: {derived: "dl_n ** 0.5", note: "four dielets in a 2 x 2 array"}
+  dl_si_um: {derived: "dl_h_um - dl_pad_h_um", note: "dielet Si (incl. its unresolved BEOL) = dielet - Cu pad level"}
   dl_px_mm: {derived: "dl_w_mm + gap_um / 1000", note: "dielet pitch = dielet + inter-dielet spacing"}
-  if_si_um: {derived: "if_h_um - m_n * m_h_um", note: "Si-IF silicon = substrate - wiring levels"}
+  # ---- template: Si-IF BEOL (DevLog-011 routing); level thicknesses other than the 3 um metal are not reported
+  recess_um:
+    template: 0.5
+    refs: [iedm45741.2023.10413759-a-i1.dielectric]
+    source: "iedm45741.2023.10413759 Fig. 8(d) (key figure iedm45741.2023.10413759-f01 (d)): 500 nm GaN/Si-IF pillar SiO2 recess"
+    note: "pillar protrusion above the Si-IF SiO2 not stated for the UDSP Si-IF; 500 nm recess of the GaN/Si-IF TV (drawn as the dielet standoff)"
+  pass_um:
+    template: "pil_h_um - recess_um"
+    note: "Si-IF top SiO2 around the pillar base = pillar height - recess (GaN/Si-IF section proportions)"
+  ild_um:
+    analog: ectc51909.2023.00009-a-L23.thickness_um
+    refs: [ectc51906.2022.00303-c-L01.thickness_um]
+    note: "inter-level SiO2 not reported for any Si-IF; analog = 2 um PECVD SiO2 under the 3 um Cu RDL of a Si interposer (inside the Si-IF RDL < 30 um bound); also used for the isolation oxide on the Si"
+  link_line_um:
+    template: 2
+    refs: [ectc51906.2022.00332-b-L03.notes]
+    note: "Si-IF wire width not reported for the UDSP assembly; 4 um wire pitch stated for SuperCHIPS (text), drawn as 2/2 um"
+  link_space_um:
+    template: 2
+    refs: [ectc51906.2022.00332-b-L03.notes]
+    note: "Si-IF wire space not reported; half of the 4 um SuperCHIPS wire pitch"
+  ivia_um:
+    template: "link_line_um"
+    note: "inter-level via size not reported; drawn at the 2 um wire width (dual damascene)"
+  if_si_um:
+    template: "if_h_um - pass_um - 2 * m_h_um - 2 * ild_um"
+    note: "Si-IF silicon = 525 um substrate - top SiO2 - 2 Cu levels - inter-level and isolation SiO2 (template / analog levels)"
   # ---- template
   if_d_mm: {template: "if_w_mm", note: "Si-IF drawn square; only one side is labelled (8 mm)"}
   dl_d_mm: {template: "dl_w_mm", note: "dielet drawn square; only the width is labelled (2.5 mm)"}
@@ -63,19 +102,51 @@ parts:
     note: "bare dielet; Cu pads terminated at the final Cu metallization; no underfill or mold"
 
 layers:
-  - part: si_if
-    repeat: m_n
+  # dielet (face down): Si / Cu pad level in the dielet SiO2 at the bonding face (R2 2026-10-20, fig iedm45741.2023.10413759-f01 (b), (c))
+  - part: dielet
     pattern:
-      - {id: if_m, name: "Si-IF Cu wiring level", material: copper, material_label: "Cu damascene / dual damascene",
-         role: conductor, h_um: m_h_um}
+      - {id: dl_si, name: "Dielet Si (BEOL not resolved)", material: silicon, role: core, h_um: dl_si_um}
+      - {id: dl_pad, name: "Dielet Cu pads in SiO2", material: copper, material_label: "Cu pad in dielet SiO2 (passivation)",
+         role: conductor, h_um: dl_pad_h_um, route: {use: pad, matrix: oxide}}
+  # top -> bottom: SiO2 around the pillar base / M2 / SiO2 / M1 / isolation SiO2 / Si (2 Cu levels = m_n)
   - part: si_if
     pattern:
+      - {id: if_pass, name: "Top SiO2 (pillar base, recessed)", material: oxide, material_label: "SiO2",
+         role: passivation, h_um: pass_um}
+      - {id: if_m2, name: "M2: pillar pads + links", material: copper, material_label: "Cu damascene / dual damascene",
+         role: conductor, h_um: m_h_um,
+         route: {use: mixed, dir: x, line_um: link_line_um, space_um: link_space_um, matrix: oxide}}
+      - {id: if_ild, name: "Inter-level SiO2", material: oxide, material_label: "SiO2 (not stated)", role: dielectric,
+         h_um: ild_um}
+      - {id: if_m1, name: "M1: links", material: copper, material_label: "Cu damascene / dual damascene",
+         role: conductor, h_um: m_h_um,
+         route: {use: signal, dir: y, line_um: link_line_um, space_um: link_space_um, matrix: oxide}}
+      - {id: if_iso, name: "Isolation SiO2", material: oxide, material_label: "SiO2 (not stated)", role: dielectric,
+         h_um: ild_um}
       - {id: if_si, name: "Si-IF silicon", material: silicon, role: core, h_um: if_si_um}
 
 arrays:
   - {id: pillar, name: "Cu-Cu bonds (Si-IF pillar to dielet pad)", kind: cu_pillar, per: dielet, lower: si_if,
-     pitch_um: pil_pitch_um, diameter_um: pil_d_um, height_um: pil_h_um,
-     note: "Cu pillars on the Si-IF thermocompression bonded to dielet Cu pads; no solder; full-area field drawn (bump map not reported)"}
+     pitch_um: pil_pitch_um, diameter_um: pil_d_um, height_um: recess_um, pad_um: pad_um,
+     note: "Cu pillars on the Si-IF thermocompression bonded to the dielet Cu pads (layer dl_pad); no solder, Cu-Cu joint; drawn: the 0.5 um protrusion above the SiO2 (the embedded pillar base is the via class pil_base); full-area field (bump map not reported)"}
+
+routing:
+  layout_note: >-
+    mock-up routing: link placement, shares and the assignment of pads / links to M2 and M1 are illustrative (two
+    Cu wiring levels and 350 um links are reported); dims carry their own status
+  vias:
+    - {id: pil_base, name: "Cu pillar base (in SiO2)", kind: beol_via, through: if_pass, diameter_um: pil_d_um, fill: filled,
+       note: "lower part of the {pil_h_um} um Si-IF Cu pillar, embedded in the recessed SiO2, standing on the M2 pad"}
+    - {id: ivia, name: "Inter-level via M2-M1", kind: beol_via, through: if_ild, diameter_um: ivia_um, fill: filled}
+  nets:
+    # SuperCHIPS links: pillar field -> M2 pad -> (via) -> M1 / M2 wire across the 59 um gap -> pillar field
+    - {id: d2d_12, kind: lateral, from: pillar_dielet_1, to: pillar_dielet_2, levels: [if_m2, if_m1], share: 0.1,
+       note: "350 um links across the dielet gap, pillars at both ends"}
+    - {id: d2d_34, kind: lateral, from: pillar_dielet_3, to: pillar_dielet_4, levels: [if_m2, if_m1], share: 0.1}
+    - {id: d2d_13, kind: lateral, from: pillar_dielet_1, to: pillar_dielet_3, levels: [if_m2, if_m1], share: 0.1}
+    - {id: d2d_24, kind: lateral, from: pillar_dielet_2, to: pillar_dielet_4, levels: [if_m2, if_m1], share: 0.1}
+    # fan-out wiring toward the wire-bond pads at the Si-IF periphery
+    - {id: esc, kind: escape, from: pillar, levels: [if_m2], share: 0.1, length_um: 300}
 
 callouts:
   - {target: pillar, text: "Cu-Cu TCB, {pil_pitch_um} um pitch",
@@ -84,9 +155,18 @@ callouts:
   - {target: dielet, text: "Dielets {gap_um} um apart",
      note: "{dl_n} UDSP dielets, {gap_um} um inter-dielet spacing after assembly; links between dielets run in the Si-IF wiring",
      refs: [ectc51906.2022.00332-b-L03.notes]}
-  - {target: if_m, text: "{m_n} Cu wiring levels",
-     note: "{m_n} Cu damascene wiring levels on the Si-IF; level thickness from the PDN model ({m_h_um} um)",
+  - {target: if_m1, text: "{m_n} Cu wiring levels",
+     note: "{m_n} Cu damascene wiring levels on the Si-IF; level thickness from the PDN model ({m_h_um} um); SiO2 thickness and wire L/S are template values (see tooltips)",
      refs: [ectc51906.2022.00332-b-L03.material]}
+  - {target: d2d_12, text: "{link_mm} mm links across gap",
+     note: "{link_n} SuperCHIPS links per interface, {link_mm} mm long, across the {gap_um} um dielet gap on the Si-IF wiring; pillars at both ends (layout mock-up)",
+     refs: [ectc51906.2022.00332-b-e1.notes]}
+  - {target: dl_pad, text: "Dielet Cu pad {dl_pad_h_um} um",
+     note: "dielet-side Cu pad ({dl_pad_h_um} um, {pad_um} um wide) in the dielet SiO2, Cu-Cu bonded to the Si-IF pillar tip (GaN/Si-IF section, fig iedm45741.2023.10413759-f01 (c)); the dielet BEOL above it is not resolved",
+     refs: [iedm45741.2023.10413759-a-L03.material]}
+  - {target: pil_base, text: "Pillar in recessed SiO2",
+     note: "Si-IF Cu pillar ({pil_d_um} um) stands on a {pad_um} um M2 pad; SiO2 recessed around it so only the tip touches the dielet pad (GaN/Si-IF section)",
+     refs: [iedm45741.2023.10413759-a-i1.dielectric]}
   - {target: si_if, text: "No TSV, wire-bonded I/O", refs: [ectc51906.2022.00332-b-i2.notes, ectc51906.2022.00332-a-c2.material]}
   - {target: si_if, text: "GaN/Si-IF: {gan_pitch_um} um Cu-Cu",
      note: "GaN/Si-IF variant: dielets Cu-Cu bonded at {gan_pitch_um} um pitch on a GaN-on-Si wafer (iedm45741.2023.10413759)",

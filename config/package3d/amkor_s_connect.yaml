@@ -9,11 +9,15 @@
 # substrate. Layout per Fig. 6(a) / Table 1: ASIC beside a column of the two HBM, one connect die under each HBM-ASIC
 # edge. The tall pillar (135 um) exceeds connect die + stud (~75 um), so the die bottom sits ~60 um above the 1st-mold
 # bottom; what fills that gap is not described.
+# Mock-up routing (DevLog-011, 2026-10-20): ubump -> top RDL (capture pads, stacked vias) -> Cu stud on the connect die
+# (ASIC-HBM wires in its BEOL) or tall Cu pillar -> bottom RDL -> plated C4 -> HDBU substrate (module stack, analog
+# 2.5D-TV 4/2/4 substrate) -> BGA. Sections: ectc51909.2023.00175-f01 (SEM: pillars, studs, ubumps), -f03 (schematic: 2-level top
+# RDL over the connect-die BEOL, bottom RDL, C4).
 #
-# Uses the bridge_in_mold module of cowos_l.yaml: `drop` removes the module's bridge-TSV array and its two params (mTV1
-# has no connect-die TSV), `rename` gives ri_back / ri_core / ri_front and tiv S-Connect names (ids kept), the connect die
-# (`lsi`) is overridden because it sits off-center, and lsi_via is overridden (Cu studs, kind cu_pillar). The top-RDL
-# vias over the connect dies are this template's own array rdl_via_br.
+# Uses the bridge_in_mold module of cowos_l.yaml: `drop` removes the module's bridge TSV class and its params (mTV1 has
+# no connect-die TSV), `rename` gives the module parts, layers and via classes S-Connect names (ids kept), the connect
+# die (`lsi`) is overridden because it sits off-center, and its layers are restated (BEOL dielectric not stated) with
+# the module layer ids.
 id: amkor_s_connect
 name: S-Connect
 company: Amkor
@@ -27,14 +31,23 @@ summary: >-
 use:
   - module: bridge_in_mold
     from: cowos_l.yaml
-    drop: [lsi_tsv, lsi_tsv_pitch_um, lsi_tsv_d_um]
+    drop: [lsi_tsv, lsi_tsv_pitch_um, lsi_tsv_d_um, lsi_tsv_land_um, lsi_tsv_liner_um]
     rename:
       ri_back: {name: "Bottom-side RDL (C4)", material_label: "Cu RDL / dielectric (not given)"}
       ri_core: {name: "1st mold (connect die, IPD, pillars)", material_label: "EMC (1st mold)"}
       ri_front: {name: "Top-side RDL (capture pads)", material_label: "Cu RDL / dielectric (not given)"}
       tiv:
         name: "Tall Cu pillars"
-        note: "pillar placement not reported; rendered over the module outside the connect dies (IPDs not drawn)"
+        note: "pillar placement not reported; grid over the module outside the connect dies (IPDs not drawn)"
+      lsi_via: {name: "Connect-die Cu studs"}
+      rv_f: {name: "Top RDL via"}
+      rv_b: {name: "Bottom RDL via"}
+      ri_f_pass: {name: "Top RDL passivation", material_label: "dielectric (not given)"}
+      ri_f_cu: {name: "Top RDL Cu"}
+      ri_f_diel: {name: "Top RDL dielectric", material_label: "dielectric (not given)"}
+      ri_b_diel: {name: "Bottom RDL dielectric", material_label: "dielectric (not given)"}
+      ri_b_cu: {name: "Bottom RDL Cu"}
+      ri_b_pass: {name: "Bottom RDL passivation", material_label: "dielectric (not given)"}
 
 params:
   # ---- reported (backbone ectc51909.2023.00175-a unless noted)
@@ -91,6 +104,9 @@ params:
   ubump_d_um:
     analog: ectc51906.2022.00180-a-i3.diameter_um
     note: "micro-bump diameter not reported for S-Connect; analog = 55 um-pitch Cu/SnAg micro-bump of a glass 2.5D package"
+  ubump_cap_um:
+    analog: ectc51906.2022.00180-a-i3.cap_height_um
+    note: "solder cap height not reported; cap of the same analog joint as the standoff (R2 2026-10-20: joint drawn as Cu column + solder cap)"
   ubump_h_um:
     template: "r0 + r1"
     refs: [ectc51906.2022.00180-a-i3.height_um, ectc51906.2022.00180-a-i3.cap_height_um]
@@ -103,6 +119,9 @@ params:
   c4_d_um:
     analog: ectc51909.2023.00155-a-i3.diameter_um
     note: "C4 diameter not given; analog = the same 150 um-pitch bump"
+  c4_cap_um:
+    analog: ectc51909.2023.00155-a-i3.cap_height_um
+    note: "solder cap height not reported; cap of the same analog joint as the standoff (R2 2026-10-20: joint drawn as Cu column + solder cap)"
   c4_h_um:
     template: "r0 + r1"
     refs: [ectc51909.2023.00155-a-i3.height_um, ectc51909.2023.00155-a-i3.cap_height_um]
@@ -111,6 +130,18 @@ params:
     analog: ectc51687.2025.00095-a-L05.repeat
     note: "top RDL layer count not given; analog = 2-layer FO-RDL of ASE FOCoS Bridge (bridge-in-mold peer)"
   ri_back_n: {template: 1, note: "bottom RDL layer count not given; one level drawn under the 1st mold for the C4"}
+  ri_f_line_um:
+    analog: ectc51687.2025.00095-a-L05.line_um
+    note: "top RDL L/S not given; analog = 8/8 um 2-layer FO-RDL of ASE FOCoS Bridge (same row as the level count)"
+  ri_f_space_um:
+    analog: ectc51687.2025.00095-a-L05.space_um
+    note: "top RDL L/S not given; analog = 8/8 um 2-layer FO-RDL of ASE FOCoS Bridge (same row as the level count)"
+  ri_b_line_um:
+    analog: ectc51687.2025.00095-a-L05.line_um
+    note: "bottom RDL L/S not given; analog = 8/8 um FO-RDL of ASE FOCoS Bridge"
+  ri_b_space_um:
+    analog: ectc51687.2025.00095-a-L05.space_um
+    note: "bottom RDL L/S not given; analog = 8/8 um FO-RDL of ASE FOCoS Bridge"
   ri_cu_um:
     analog: ectc51909.2023.00266-a-L02.thickness_um
     note: "RDL Cu thickness not given; analog = fan-out RDL Cu of a Deca M-Series TV"
@@ -132,25 +163,37 @@ params:
   lsi_space_um:
     analog: ectc.2016.201-a-L02.space_um
     note: "connect-die line space not reported; analog = Intel EMIB bridge 2/2 um"
-  lsi_si_um: {template: "lsi_h_um - lsi_m_n * lsi_m_um", note: "connect-die Si = die thickness - metal levels (template level inputs)"}
   lsi_via_pitch_um: {template: "ubump_pitch_um", note: "one Cu stud per ASIC micro-bump over the connect die; stud pitch not reported"}
   lsi_via_d_um: {template: "ubump_d_um", note: "Cu stud diameter not reported; set equal to the micro-bump diameter"}
-  rv_pitch_um: {template: "lsi_via_pitch_um", note: "one top-RDL via per Cu stud; pitch not reported"}
   rv_d_um:
     analog: ectc51687.2025.00095-a-i2.diameter_um
     note: "RDL via size not reported; analog = 10 um passivation via landing on bridge studs (ASE FOCoS Bridge)"
-  # ---- template: substrate (HDBU; stack not given)
+  rv_land_um:
+    template: "rv_d_um * 48 / 29"
+    refs: [ectc51687.2025.00095-a-i3.ic_type]
+    note: "RDL via land not reported; T-profile of the FOCoS-Bridge analog via (fig ectc51687.2025.00095-f04, pixel widths): pad on the lower RDL metal ~48 px over the ~29 px stem that lands on the post / stud (R2 2026-10-20; was land / via 11 / 8 of TSMC CoWoS-R)"
+  rv_m_d_um:
+    template: "rv_d_um"
+    note: "via between the two upper RDL metals not reported; drawn like the analog 10 um via"
+  rv_m_land_um:
+    template: "rv_m_d_um * 92 / 30"
+    refs: [ectc51687.2025.00095-a-i3.ic_type]
+    note: "via land not reported; T-profile of the FOCoS-Bridge analog via (fig ectc51687.2025.00095-f04): pad on the top RDL metal ~92 px over a ~30 px stem"
+  rv_m_bot_d_um:
+    template: "rv_m_d_um * 26 / 31"
+    refs: [ectc51687.2025.00095-a-i3.ic_type]
+    note: "via bottom not reported; filled stems narrow downward in fig ectc51687.2025.00095-f04 (pixel widths ~31 px under the pad to ~26 px at the base)"
+  rv_bot_d_um:
+    template: "rv_d_um * 26 / 31"
+    refs: [ectc51687.2025.00095-a-i3.ic_type]
+    note: "via bottom not reported; taper of the FOCoS-Bridge analog via (fig ectc51687.2025.00095-f04, ~31 to ~26 px); the S-Connect schematic fig ectc51909.2023.00175-f03 also draws tapered top-RDL vias with caps"
+  # ---- template: substrate (HDBU; stack not given; module stack with analogs)
   bu_n:
-    analog: ectc51687.2025.00148-a-L06.repeat
-    note: "HDBU layer count not given; analog = 4 build-up layers per side of an organic FC substrate"
-  bu_diel_um:
-    analog: ectc51687.2025.00148-a-L04.thickness_um
-    note: "build-up dielectric thickness not given; analog = ABF-GL layer of an organic FC substrate"
-  bu_h_um: {template: "bu_n * bu_diel_um", note: "build-up per side = layer count x dielectric thickness (analogs)"}
+    analog: ectc51909.2023.00155-a-L16.repeat
+    note: "HDBU layer count not given; analog = 4 build-up layers per side (4/2/4) of the substrate under a 2.5D Si-interposer TV"
   core_h_um:
-    analog: ectc51687.2025.00148-a-L07.thickness_um
-    note: "core thickness not given; analog = core of the same organic FC substrate"
-  sbt_h_um: {template: "core_h_um + 2 * bu_h_um", note: "substrate = core + 2 build-up stacks (template inputs)"}
+    analog: ectc51909.2023.00155-a-L17.thickness_um
+    note: "core thickness not reported; analog = 1.3 mm CCL core of the same 2.5D-TV substrate"
   uf_margin_mm: {template: 0.3, note: "CUF fillet extent not reported; illustrative"}
   bga_pitch_um:
     analog: ectc51909.2023.00155-a-i4.pitch_um
@@ -175,17 +218,16 @@ parts:
     x_mm: lsi_x_mm
     w_mm: lsi_w_mm
     d_mm: lsi_d_mm
-    h_um: lsi_h_um
+    h_um: lsi_part_h_um
     in: ri_core
-    depth_um: lsi_via_h_um
     repeat: {ny: lsi_rows_n, pitch_y_mm: hbm_py_mm}
     explode_group: 2
-    note: "face up; top ~5 um below the ground 1st-mold surface (Cu stud height)"
+    note: "face up; die + ~5 um Cu stud level, flush with the ground 1st-mold surface"
   - id: lsi_gap
-    name: "Under connect die (not described)"
+    name: "Under connect die (drawn as 1st mold)"
     kind: other
-    material: other
-    material_label: "bond / fill not described"
+    material: mold_compound
+    material_label: "not described; drawn as the 1st-mold EMC"
     x_mm: lsi_x_mm
     w_mm: lsi_w_mm
     d_mm: lsi_d_mm
@@ -194,7 +236,8 @@ parts:
     depth_um: "lsi_via_h_um + lsi_h_um"
     repeat: {ny: lsi_rows_n, pitch_y_mm: hbm_py_mm}
     explode_group: 2
-    note: "the die is face-up bonded on the carrier (flow s01); medium under it is not described"
+    xray_default: false
+    note: "the die is face-up bonded on the carrier (flow s01); the medium under it is not described: drawn as the 1st-mold EMC that fills the module (assumption, R2 2026-10-20; was a neutral grey block that read as Si)"
   - {id: mold2, name: "2nd mold", kind: mold, material: mold_compound, material_label: "EMC (2nd mold)", w_mm: ri_w_mm,
      d_mm: ri_d_mm, h_um: mold_h_um, on: ri_front, explode_group: 4, xray_default: true,
      note: "ground to expose the die tops; outer edge flush with the module"}
@@ -220,34 +263,51 @@ parts:
     xray_default: true
 
 layers:
+  # connect-die stack restated (dielectric not stated); ids match the module via classes
   - part: lsi
-    repeat: lsi_m_n
+    pattern:
+      - {id: lsi_stud, name: "Cu stud level", material: mold_compound, material_label: "EMC (1st mold) between the Cu studs",
+         role: dielectric, h_um: lsi_via_h_um}
+  - part: lsi
+    repeat: lsi_sig_n
     pattern:
       - {id: lsi_m, name: "Connect-die metal level", material: copper, material_label: "BEOL metal (not specified)",
-         role: conductor, h_um: lsi_m_um, line_um: lsi_line_um, space_um: lsi_space_um}
+         role: conductor, h_um: lsi_m_um,
+         route: {use: signal, dir: x, line_um: lsi_line_um, space_um: lsi_space_um, matrix: other}}
+      - {id: lsi_imd, name: "Connect-die BEOL dielectric", material: other, material_label: "dielectric (not stated)",
+         role: dielectric, h_um: lsi_imd_um}
   - part: lsi
     pattern:
+      - {id: lsi_m1, name: "Connect-die M1 (GND plane)", material: copper, material_label: "BEOL metal (not specified)",
+         role: conductor, h_um: lsi_m_um, route: {use: plane, matrix: other}}
       - {id: lsi_si, name: "Connect-die Si", material: silicon, role: core, h_um: lsi_si_um}
-  - part: substrate
-    pattern:
-      - {id: sbt_bu_top, name: "Top build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
-      - {id: sbt_core, name: "Core", material: organic_laminate, material_label: "laminate core", role: core,
-         h_um: core_h_um}
-      - {id: sbt_bu_bot, name: "Bottom build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
 
 arrays:
   - {id: ubump_asic, name: "ASIC micro-bumps", kind: microbump, per: asic, lower: ri_front, pitch_um: ubump_pitch_um,
-     diameter_um: ubump_d_um, height_um: ubump_h_um, note: "pitch rendered over the full die; the bump map is not reported"}
+     diameter_um: ubump_d_um, height_um: ubump_h_um, cap_h_um: ubump_cap_um, note: "pitch rendered over the full die; the bump map is not reported"}
   - {id: ubump_hbm, name: "HBM micro-bumps", kind: microbump, per: hbm, lower: ri_front, pitch_um: hbm_ubump_pitch_um,
-     diameter_um: ubump_d_um, height_um: ubump_h_um}
-  - {id: lsi_via, name: "Connect-die Cu studs", kind: cu_pillar, span: ["top:lsi", "top:ri_core"], between: [ri_front, lsi],
-     region: {part: lsi}, pitch_um: lsi_via_pitch_um, diameter_um: lsi_via_d_um}
-  - {id: rdl_via_br, name: "Top-RDL vias over connect dies", kind: rdl_via, in: ri_front, region: {part: lsi},
-     pitch_um: rv_pitch_um, diameter_um: rv_d_um, note: "drawn over the connect dies only"}
+     diameter_um: ubump_d_um, height_um: ubump_h_um, cap_h_um: ubump_cap_um}
   - {id: c4, name: "Plated C4 bumps", kind: c4, upper: ri_back, lower: substrate, region: {part: ri_back},
-     pitch_um: c4_pitch_um, diameter_um: c4_d_um, height_um: c4_h_um}
+     pitch_um: c4_pitch_um, diameter_um: c4_d_um, height_um: c4_h_um, cap_h_um: c4_cap_um,
+     pad_um: c4_pad_um, opening_um: c4_open_um}
   - {id: bga, name: "BGA balls", kind: bga, under: substrate, region: {part: substrate}, pitch_um: bga_pitch_um,
-     diameter_um: bga_d_um, height_um: bga_h_um}
+     diameter_um: bga_d_um, height_um: bga_h_um,
+     pad_um: bga_pad_um, opening_um: bga_open_um}
+
+routing:
+  vias:
+    # the module's rv_f spans every top-RDL dielectric; split per level for the T-profile lands (R2 2026-10-20)
+    - {id: rv_f, name: "Top RDL via (onto stud / pillar)", kind: rdl_via, through: ri_f_diel_2, diameter_um: rv_d_um,
+       bottom_diameter_um: rv_bot_d_um, land_um: rv_land_um, fill: filled,
+       note: "T-profile tapered filled via (FOCoS analog fig ectc51687.2025.00095-f04; schematic ectc51909.2023.00175-f03)"}
+    - {id: rv_m, name: "Top RDL via (metal to metal)", kind: rdl_via, through: ri_f_diel_1, diameter_um: rv_m_d_um,
+       bottom_diameter_um: rv_m_bot_d_um, land_um: rv_m_land_um, fill: filled,
+       note: "T-profile tapered filled via (FOCoS analog fig ectc51687.2025.00095-f04)"}
+  nets:
+    - {id: ri_asic, kind: vertical, from: ubump_asic, to: c4, style: stacked, jog: [ri_f_cu, ri_b_cu], share: 0.4,
+       note: "ASIC power / IO: top RDL -> tall Cu pillar -> bottom RDL -> plated C4 (vertical top-bottom RDL path, row -i4)"}
+    - {id: d2d, kind: lateral, from: ubump_hbm, to: ubump_asic, levels: [lsi_m], share: 0.5,
+       note: "ASIC-HBM wires inside the connect-die BEOL under the D2D gap (Cu studs up to the top RDL)"}
 
 callouts:
   - {target: lsi, text: "Connect die {lsi_w_mm} x {lsi_d_mm} mm"}
@@ -258,17 +318,28 @@ callouts:
   - {target: ri_core, text: "Mimic IPD embedded in mold", refs: [ectc51909.2023.00175-a-c4.name]}
   - {target: mold2, text: "2nd mold ground to die tops", refs: [ectc51909.2023.00175-F1-s10.step]}
   - {target: ri_core, text: "mTV2: {m2_w_mm} x {m2_d_mm} mm, lidded", refs: [ectc51909.2023.00175-b-c8.name]}
+  - {target: rv_f, text: "Top RDL vias onto studs",
+     note: "top RDL levels, L/S and vias not reported; 2 levels with stacked vias drawn after the FOCoS-Bridge analog (schematic ectc51909.2023.00175-f03)"}
+  - {target: d2d, text: "ASIC-HBM wires in connect die",
+     note: "die-to-die wires in the connect-die metal levels; levels and lane count not reported (mock-up layout)"}
+  - {target: pth, text: "Analog build-up, plugged PTH",
+     note: "HDBU stack not reported; build-up, microvias and PTH from analogs (2.5D-TV 4/2/4 substrate, 4-2-4 FCBGA TV)"}
 
 insets:
   - id: bridge_edge
-    label: "Connect die under HBM-ASIC edge"
-    box_mm: ["lsi_x_mm - lsi_w_mm / 2 - 0.5", "hbm_py_mm / 2 - 0.5", "lsi_x_mm + lsi_w_mm / 2 + 0.5", "hbm_py_mm / 2 + 0.5"]
-    z: ["bottom:ri_back", "top:mold2"]
+    label: "Connect die under the HBM-ASIC gap"
+    box_mm: ["lsi_x_mm - 0.25", "hbm_py_mm / 2 - 0.25", "lsi_x_mm + 0.25", "hbm_py_mm / 2 + 0.25"]
+    z: ["bottom:ri_back", "bottom:asic"]
     view: front
   - id: module_stack
     label: "Module stack: pillars, die, studs"
     box_mm: ["lsi_x_mm - lsi_w_mm / 2 - 0.4", "hbm_py_mm / 2 - 0.3", "lsi_x_mm - lsi_w_mm / 2 + 0.4", "hbm_py_mm / 2 + 0.3"]
     z: ["top:substrate", "bottom:asic"]
+    view: front
+  - id: sbt_stack
+    label: "C4, build-up, PTH core, BGA"
+    box_mm: ["lsi_x_mm - 1.5", "hbm_py_mm / 2 - 0.5", "lsi_x_mm + 1.5", "hbm_py_mm / 2 + 0.5"]
+    z: ["bottom:bga", "top:ri_back"]
     view: front
   - id: module_edge
     label: "Module edge, C4"

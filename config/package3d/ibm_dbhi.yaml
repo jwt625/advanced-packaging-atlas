@@ -9,6 +9,16 @@
 # gap; the bridges across the left-right gap are labelled 30 um pitch, those across the top-bottom gap 75 um pitch.
 # Gaps from the same family: chip thickness and chip gap (ectc51906.2022.00106-a), laminate thickness (DBrM,
 # ectc51846.2026.00050-a), lid material (FEM, ectc51909.2023.00180).
+# Routing (DevLog-011, 2026-10-20; config/package3d/ROUTING_REF_si.md 1.5 DBHi, ROUTING_REF_substrate.md A):
+# - Bridges (face up under the chip gaps): pad level / 2 x (signal, Vss plane) BEOL levels / Si, as the EMIB analog
+#   (ectc.2016.201-a-L02: M1-M4 at 2/2 um); no DBHi row gives bridge wiring. D2D wires run in the bridge signal levels
+#   between the uC4 fields of adjacent chips (fine 30 um bridges across the left-right gap, coarse 75 um across the
+#   top-bottom gap).
+# - Laminate: reusable module `sbt_828` (cowos_r.yaml): SR / L1 pad / 3 x (signal, plane) / L8 / core Cu / core with
+#   plugged PTH / mirrored back side / BGA pad / SR. Total 2.0 mm (DBrM laminate, reported), core analog 1.2 mm; the
+#   build-up dielectric is derived from them; L/S 9/12 um reported for the surface-DBHi laminate (routing allowed under
+#   the bridge). Cu-pillar C4 -> stacked microvias with jogs -> PTH -> BGA, as in the surface-DBHi section
+#   (fig ectc51909.2023.00180-f01: Cu levels and via stacks under the pillar fields beside the bridge).
 id: ibm_dbhi
 name: DBHi / DBrM
 company: IBM
@@ -53,6 +63,9 @@ params:
   chip_nx: {derived: "chip_n ** 0.5", note: "four chips tiled 2 x 2 (Fig. 4(b))"}
   br_side_n: {derived: "br_n / 2", note: "two bridges across each of the two chip gaps (one per shared chip edge)"}
   # ---- template
+  uc4_cap_um:
+    analog: ectc51909.2023.00155-a-i1.cap_height_um
+    note: "solder cap height not reported; cap of the same analog joint as the standoff (R2 2026-10-20: joint drawn as Cu column + solder cap)"
   uc4_h_um:
     template: "r0 + r1"
     refs: [ectc51909.2023.00155-a-i1.height_um, ectc51909.2023.00155-a-i1.cap_height_um]
@@ -66,6 +79,9 @@ params:
   coarse_d_um:
     analog: eptc67330.2025.11392593-a-i2.diameter_um
     note: "75 um-pitch joint diameter not reported; analog = 25 um bump at 73 um pitch of a bridge interposer"
+  pil_cap_um:
+    analog: ectc51687.2025.00049-b-i2.cap_height_um
+    note: "solder cap height not reported; cap of the same analog bump row as the pillar diameter (R2 2026-10-20: joint drawn as Cu column + solder cap)"
   pil_d_um:
     template: "r0"
     refs: [ectc51687.2025.00049-b-i2.diameter_um]
@@ -74,6 +90,50 @@ params:
     analog: ectc51687.2025.00148-a-L07.thickness_um
     note: "laminate core thickness not reported (FEM uses core + build-up); analog = core of an organic FC substrate"
   bu_h_um: {template: "(sbt_h_um - core_h_um) / 2", note: "build-up per side = (2.0 mm laminate - analog core) / 2"}
+  # laminate levels (module sbt_828 overrides)
+  bu_n:
+    template: 8
+    refs: [ectc51529.2024.00049-a.substrate_layer_count, ectc51846.2026.00050-a-L04.layer_name]
+    note: "build-up level count not reported for DBHi; the sbt_828 module count (8 per side, the 8-2-8 TSMC CoWoS-R TV substrate) is kept unchanged; the derived dielectric (about 31 um) follows from it and was not a selection criterion"
+  bu_d_um:
+    template: "(bu_h_um - sr_h_um - cc_um - bu_n * bu_cu_um) / bu_n"
+    note: "build-up dielectric = (build-up per side - SR - core Cu - 8 Cu levels) / 8 (reported laminate total, analog core / SR / Cu)"
+  bu_line_um:
+    template: "ls_line_um"
+    refs: [ectc51909.2023.00180-a-L09.line_um]
+    note: "9 um line of the surface-DBHi laminate (one surface-laminate row; layer count, core and dielectric not given) applied to every build-up signal level incl. the BGA side (template choice)"
+  bu_space_um:
+    template: "ls_space_um"
+    refs: [ectc51909.2023.00180-a-L09.space_um]
+    note: "12 um space of the same surface-laminate row applied to every build-up signal level and as the plane antipad clearance (template choice)"
+  # ---- template: bridge BEOL (no DBHi row describes the bridge wiring; EMIB analog as in emib.yaml)
+  m_n:
+    analog: ectc.2016.201-a-L02.repeat
+    note: "bridge metal level count not reported for DBHi; analog = EMIB M1-M4"
+  m_pairs_n: {template: "m_n / 2", note: "M4..M1 drawn as 2 x (signal level, Vss plane level), as in the EMIB template"}
+  m_line_um:
+    analog: ectc.2016.201-a-L02.line_um
+    note: "bridge line width not reported for DBHi; analog = EMIB 2/2 um"
+  m_space_um:
+    analog: ectc.2016.201-a-L02.space_um
+    note: "bridge line space not reported for DBHi; analog = EMIB 2/2 um"
+  m_via_um:
+    analog: ectc.2016.201-a-L02.via_diameter_um
+    note: "bridge BEOL via not reported for DBHi; analog = EMIB 2 um dual-damascene via"
+  m_h_um:
+    analog: ectc51909.2023.00174-d-L02.thickness_um
+    note: "bridge metal thickness not reported; analog = TSMC LSI-1 dual-damascene Cu level (same as the EMIB template)"
+  m_imd_um:
+    analog: ectc51846.2026.00035-a-L02.thickness_um
+    note: "bridge inter-metal dielectric not reported; analog = 1 um SiO2 ILD of a dual-damascene Si bridge"
+  br_pad_h_um: {template: "m_h_um", note: "bridge pad layer thickness not reported; set equal to a metal level"}
+  br_plane_fill:
+    template: 0.6
+    refs: [ectc.2016.201-a-L02.properties]
+    note: "Vss plane metal density not reported for DBHi; midpoint of the 50-70 % EMIB Vss density (analog)"
+  br_si_um:
+    template: "br_h_um - br_pad_h_um - m_n * (m_h_um + m_imd_um)"
+    note: "bridge Si = 60 um bridge - pad layer - 4 x (via dielectric + metal level) (analog level thicknesses)"
   tim_h_um:
     analog: itherm45881.2020.9190542-a-c5.thickness_um
     refs: [ectc51909.2023.00180-a-c5.name]
@@ -148,26 +208,92 @@ parts:
      w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: lid_h_um, on: substrate, gap_um: lid_gap_um, explode_group: 6,
      xray_default: true, note: "the QCM was shown before capping; lid per the DBHi DCM and surface-DBHi builds"}
 
+use:
+  - module: sbt_828
+    from: cowos_r.yaml
+    rename:
+      sbt_core: {name: "Laminate core", material_label: "laminate core (not named)"}
+
 layers:
-  - part: substrate
+  # laminate levels: module sbt_828. Bridges (face up): pad level, M4..M1 (signal / Vss plane alternating), Si
+  - part: br_fine
     pattern:
-      - {id: sbt_bu_top, name: "Top build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um,
-         line_um: ls_line_um, space_um: ls_space_um}
-      - {id: sbt_core, name: "Core", material: organic_laminate, material_label: "laminate core", role: core,
-         h_um: core_h_um}
-      - {id: sbt_bu_bot, name: "Bottom build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+      - {id: bf_pad, name: "Bridge pad level", material: copper, material_label: "metal (not specified)", role: conductor,
+         h_um: br_pad_h_um, route: {use: pad, matrix: oxide}}
+  - part: br_fine
+    repeat: m_pairs_n
+    pattern:
+      - {id: bf_vs, name: "Bridge via dielectric", material: oxide, material_label: "inter-metal dielectric (not specified)",
+         role: dielectric, h_um: m_imd_um}
+      - {id: bf_ms, name: "Bridge signal level (M4, M2)", material: copper, material_label: "BEOL metal (not specified)",
+         role: conductor, h_um: m_h_um,
+         route: {use: signal, dir: x, line_um: m_line_um, space_um: m_space_um, matrix: oxide}}
+      - {id: bf_vp, name: "Bridge via dielectric", material: oxide, material_label: "inter-metal dielectric (not specified)",
+         role: dielectric, h_um: m_imd_um}
+      - {id: bf_mp, name: "Bridge Vss plane (M3, M1)", material: copper, material_label: "BEOL metal (not specified)",
+         role: conductor, h_um: m_h_um, route: {use: plane, space_um: m_space_um, matrix: oxide, fill: br_plane_fill}}
+  - part: br_fine
+    pattern:
+      - {id: bf_si, name: "Bridge Si", material: silicon, role: core, h_um: br_si_um}
+  - part: br_coarse
+    pattern:
+      - {id: bc_pad, name: "Bridge pad level", material: copper, material_label: "metal (not specified)", role: conductor,
+         h_um: br_pad_h_um, route: {use: pad, matrix: oxide}}
+  - part: br_coarse
+    repeat: m_pairs_n
+    pattern:
+      - {id: bc_vs, name: "Bridge via dielectric", material: oxide, material_label: "inter-metal dielectric (not specified)",
+         role: dielectric, h_um: m_imd_um}
+      - {id: bc_ms, name: "Bridge signal level (M4, M2)", material: copper, material_label: "BEOL metal (not specified)",
+         role: conductor, h_um: m_h_um,
+         route: {use: signal, dir: y, line_um: m_line_um, space_um: m_space_um, matrix: oxide}}
+      - {id: bc_vp, name: "Bridge via dielectric", material: oxide, material_label: "inter-metal dielectric (not specified)",
+         role: dielectric, h_um: m_imd_um}
+      - {id: bc_mp, name: "Bridge Vss plane (M3, M1)", material: copper, material_label: "BEOL metal (not specified)",
+         role: conductor, h_um: m_h_um, route: {use: plane, space_um: m_space_um, matrix: oxide, fill: br_plane_fill}}
+  - part: br_coarse
+    pattern:
+      - {id: bc_si, name: "Bridge Si", material: silicon, role: core, h_um: br_si_um}
 
 arrays:
   - {id: uc4_fine, name: "Bridge joints (30 um pitch)", kind: microbump, per: chip, lower: br_fine,
-     region: {intersect: [br_fine]}, pitch_um: fine_pitch_um, diameter_um: fine_d_um, height_um: uc4_h_um,
+     region: {intersect: [br_fine]}, pitch_um: fine_pitch_um, diameter_um: fine_d_um, height_um: uc4_h_um, cap_h_um: uc4_cap_um,
      note: "uC4 solder joints between the chip underside and the bridge; more than 7000 per bridge"}
   - {id: uc4_coarse, name: "Bridge joints (75 um pitch)", kind: microbump, per: chip, lower: br_coarse,
-     region: {intersect: [br_coarse]}, pitch_um: coarse_pitch_um, diameter_um: coarse_d_um, height_um: uc4_h_um}
+     region: {intersect: [br_coarse]}, pitch_um: coarse_pitch_um, diameter_um: coarse_d_um, height_um: uc4_h_um, cap_h_um: uc4_cap_um}
   - {id: pillar, name: "Cu-pillar C4", kind: cu_pillar, per: chip, lower: substrate,
      region: {subtract: [br_fine, br_coarse]}, pitch_um: pil_pitch_um, diameter_um: pil_d_um, height_um: standoff_um,
+     cap_h_um: pil_cap_um, opening_um: sro_top_um,
      note: "Cu pillar + solder cap, mass reflow; drawn everywhere outside the bridges (bump map not reported)"}
   - {id: bga, name: "BGA balls", kind: bga, under: substrate, region: {part: substrate}, pitch_um: bga_pitch_um,
-     diameter_um: bga_d_um, height_um: bga_h_um}
+     diameter_um: bga_d_um, height_um: bga_h_um, opening_um: sro_bot_um}
+
+routing:
+  layout_note: >-
+    mock-up routing: net layout, shares, jogs and the signal / plane assignment of bridge and laminate levels are
+    illustrative (figs ectc51909.2023.00180-f01, ectc51846.2026.00050-f01 as the visual reference); dims carry their
+    own status
+  vias:
+    - {id: bf_v, name: "Bridge BEOL via", kind: beol_via, through: bf_vs, diameter_um: m_via_um, fill: filled,
+       note: "dual damascene (EMIB analog)"}
+    - {id: bf_vq, name: "Bridge BEOL via", kind: beol_via, through: bf_vp, diameter_um: m_via_um, fill: filled}
+    - {id: bc_v, name: "Bridge BEOL via", kind: beol_via, through: bc_vs, diameter_um: m_via_um, fill: filled}
+    - {id: bc_vq, name: "Bridge BEOL via", kind: beol_via, through: bc_vp, diameter_um: m_via_um, fill: filled}
+  nets:
+    # die-to-die wires in the bridge signal levels (chip uC4 -> bridge pad -> M4 / M2 -> across the gap -> uC4)
+    - {id: d2d_f1, kind: lateral, from: uc4_fine_chip_1, to: uc4_fine_chip_2, levels: [bf_ms], share: 0.6,
+       note: "30 um-pitch bridge across the left-right chip gap"}
+    - {id: d2d_f2, kind: lateral, from: uc4_fine_chip_3, to: uc4_fine_chip_4, levels: [bf_ms], share: 0.6}
+    - {id: d2d_c1, kind: lateral, from: uc4_coarse_chip_1, to: uc4_coarse_chip_3, levels: [bc_ms], share: 0.6,
+       note: "75 um-pitch bridge across the top-bottom chip gap"}
+    - {id: d2d_c2, kind: lateral, from: uc4_coarse_chip_2, to: uc4_coarse_chip_4, levels: [bc_ms], share: 0.6}
+    - {id: pg_f, kind: plane_tie, from: uc4_fine, plane: bf_mp_1, share: 0.3}
+    - {id: pg_c, kind: plane_tie, from: uc4_coarse, plane: bc_mp_1, share: 0.3}
+    # laminate (module nets re-pointed from c4 to the Cu-pillar C4): pillar -> stacked microvias / jogs -> PTH -> BGA
+    - {id: sbt_io, kind: vertical, from: pillar, to: bga, style: stacked, jog: [bu_cs_1, bu_c8, bb_c8, bb_cs_3],
+       share: 0.3, note: "Cu-pillar C4 -> BGA fan-out (150 um -> PTH -> BGA pitch): stacked microvias with jogs near the surface and above the PTH caps"}
+    - {id: sbt_pg_t, kind: plane_tie, from: pillar, plane: bu_cp_1, share: 0.3}
+    - {id: sbt_esc, kind: escape, from: pillar, levels: [bu_cs_1], share: 0.2, length_um: 600}
 
 callouts:
   - {target: br_fine, text: "Bridge {br_h_um} um, no cavity",
@@ -190,6 +316,10 @@ callouts:
      note: "DBrM: chips edge-glued first (clearance down to {glue_um} um), then a {brm_w_mm} x {brm_d_mm} mm bridge with 30 um-pitch bumps is attached",
      refs: [ectc51846.2026.00050-a-i1.pitch_um]}
   - {target: lid, text: "Cu lid on TIM", refs: [ectc51909.2023.00180-c-c3.material, ectc51909.2023.00180-a-c5.name]}
+  - {target: d2d_f1, text: "D2D wires in bridge BEOL",
+     note: "Chip-to-chip wires in the bridge signal levels between the uC4 fields of adjacent chips; bridge levels and L/S are EMIB analogs (no DBHi row describes the bridge wiring); mock-up layout"}
+  - {target: bf_ms, text: "Bridge BEOL (analog levels)",
+     note: "Bridge face up: pad level, 2 signal + 2 Vss plane levels (EMIB M1-M4 analog), Si below; the {fine_pitch_um} / {coarse_pitch_um} um uC4 land on the pad level"}
 
 insets:
   - id: br_fine_xs
@@ -206,6 +336,16 @@ insets:
     label: "Bridge joints and C4 standoff"
     box_mm: [-1.9, "site_mm / 2 - 0.15", -1.3, "site_mm / 2 + 0.15"]
     z: ["top:substrate", "bottom:tim"]
+    view: front
+  - id: sbt_stack
+    label: "Pillar to BGA: vias, PTH"
+    box_mm: ["-site_mm / 2 - 2", "site_mm / 2 - 0.5", "-site_mm / 2 + 2", "site_mm / 2 + 0.5"]
+    z: ["bottom:bga", "bottom:chip"]
+    view: front
+  - id: br_beol
+    label: "Bridge BEOL, uC4, D2D wires"
+    box_mm: [-0.2, "site_mm / 2 - 0.05", 0.2, "site_mm / 2 + 0.05"]
+    z: ["bottom:br_fine", "bottom:chip"]
     view: front
   - id: edge
     label: "Chip edge, underfill, lid"

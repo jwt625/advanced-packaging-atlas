@@ -10,11 +10,15 @@
 # and HBM micro-bumped with CoW underfill and top mold; carrier removed, bottom passivation and C4; TCB onto the
 # substrate with CoS underfill; BGA. No back-side RDL metal and no bridge TSV in TV-1 (the TSV bridge is a separate
 # variant, ectc51687.2025.00158).
+# Mock-up routing (DevLog-011, 2026-10-20): ubump -> 2P2M FO-RDL with stacked T-profile vias (ectc51529.2024.00151-f01 D,
+# ectc51687.2025.00095-f04) -> 10 um passivation via onto a tall Cu pillar or a bridge Cu stud -> bridge BEOL
+# (ASIC-HBM wires) / pillar -> bottom passivation opening -> C4 (ectc51687.2025.00095-f05) -> substrate (module stack,
+# analog 2.5D-TV 4/2/4 substrate) -> BGA.
 #
-# Uses the bridge_in_mold module of cowos_l.yaml: `drop` removes the module's bridge-TSV array and its two params (TV-1
-# bridges have no TSV), `rename` gives the module parts ri_back / ri_core / ri_front / lsi and the array tiv FOCoS names
-# (ids kept), layer groups are replaced, and lsi_via is overridden (Cu studs, kind cu_pillar). The FO-RDL vias over the
-# bridges are this template's own array rdl_via_br.
+# Uses the bridge_in_mold module of cowos_l.yaml: `drop` removes the module's bridge TSV class and its params (TV-1
+# bridges have no TSV) and the back RDL metal and dielectric (with the back RDL via class and the module HBM net that
+# jogs on it; this template restates that net); `rename` gives the module parts, layers and via classes FOCoS names
+# (ids kept). The bridge layers are restated here (BEOL dielectric not stated) with the module layer ids.
 id: ase_focos_bridge
 name: FOCoS-Bridge
 company: ASE
@@ -29,13 +33,19 @@ summary: >-
 use:
   - module: bridge_in_mold
     from: cowos_l.yaml
-    drop: [lsi_tsv, lsi_tsv_pitch_um, lsi_tsv_d_um]
+    drop: [lsi_tsv, lsi_tsv_pitch_um, lsi_tsv_d_um, lsi_tsv_land_um, lsi_tsv_liner_um, ri_b_diel, ri_b_cu, ri_b_line_um,
+           ri_b_space_um]
     rename:
       ri_back: {name: "Bottom passivation (C4 side)", material_label: "passivation (material not stated)"}
       ri_core: {name: "Bottom mold (bridges, Cu pillars)", material_label: "molding compound (not named)"}
       ri_front: {name: "FO-RDL (2P2M)", material_label: "Cu RDL / PI passivation"}
       lsi: {name: "Si bridge (no TSV)", note: "face up on its D/A film at the mold bottom; Cu studs to the FO-RDL"}
-      tiv: {name: "Tall Cu pillars", note: "pillar placement not reported; rendered over the module outside the bridges"}
+      tiv: {name: "Tall Cu pillars", note: "pillar placement not reported; grid over the module outside the bridges"}
+      lsi_via: {name: "Bridge Cu studs"}
+      rv_f: {name: "FO-RDL via"}
+      ri_f_pass: {name: "FO-RDL top passivation", material_label: PI}
+      ri_f_cu: {name: "FO-RDL metal", material_label: "RDL metal (not named)"}
+      ri_f_diel: {name: "FO-RDL passivation", material_label: PI}
 
 params:
   # ---- reported (backbone ectc51529.2024.00151-a unless noted)
@@ -52,16 +62,23 @@ params:
   c4_pitch_um: {ref: ectc51529.2024.00151-a-i4.pitch_um}
   rdl_line_um: {ref: ectc51529.2024.00151-a-L04.line_um}
   rdl_space_um: {ref: ectc51529.2024.00151-a-L04.space_um}
+  ri_f_line_um: "rdl_line_um"
+  ri_f_space_um: "rdl_space_um"
   ri_front_n:
     ref: ectc51687.2025.00095-a-L05.repeat
     note: "2 FO-RDL metal layers (repeat of the panel FOCoS Bridge TV); the TV-1 row notes give 2P2M (Sec. IV.B)"
+  pi_n:
+    ref: ectc51687.2025.00095-a-L04.repeat
+    note: "3 PI layers = top passivation + one under each of the 2 RDL metals (interleaving not stated)"
   ri_back_n:
     ref: ectc51687.2025.00095-a-L08.repeat
     note: "one bottom passivation layer on the C4 side (panel FOCoS Bridge TV); no back-side RDL metal reported"
   ri_core_h_um:
     ref: ectc51687.2025.00095-a-i4.height_um
     note: "tall Cu pillar 'up to 120 um' (panel FOCoS Bridge TV, upper bound); bottom mold ground to the pillar tops (flow s05)"
-  via_d_um: {ref: ectc51687.2025.00095-a-i2.diameter_um, note: "passivation via opening landing on pillars and bridge studs"}
+  rv_d_um:
+    ref: ectc51687.2025.00095-a-i2.diameter_um
+    note: "passivation via opening landing on pillars and bridge studs (via class rv_f, lowest FO-RDL dielectric only)"
   tsv_c4_pitch_um: {ref: ectc51687.2025.00158-a-i1.pitch_um}
   tsv_rdl_line_um: {ref: ectc51687.2025.00158-a-L02.line_um}
   tv2_w_mm: {ref: ectc51529.2024.00151-b.interposer_x_mm}
@@ -108,6 +125,9 @@ params:
   ubump_d_um:
     analog: ectc51906.2022.00180-a-i3.diameter_um
     note: "micro-bump diameter not reported for FOCoS-Bridge; analog = 55 um-pitch Cu/SnAg micro-bump of a glass 2.5D package"
+  ubump_cap_um:
+    analog: ectc51906.2022.00180-a-i3.cap_height_um
+    note: "solder cap height not reported; cap of the same analog joint as the standoff (R2 2026-10-20: joint drawn as Cu column + solder cap)"
   ubump_h_um:
     template: "r0 + r1"
     refs: [ectc51906.2022.00180-a-i3.height_um, ectc51906.2022.00180-a-i3.cap_height_um]
@@ -116,6 +136,9 @@ params:
   c4_d_um:
     analog: ectc51909.2023.00155-a-i3.diameter_um
     note: "C4 diameter not reported for FOCoS-Bridge; analog = 150 um-pitch Cu/SnAg bump of a 2.5D TV (same pitch)"
+  c4_cap_um:
+    analog: ectc51909.2023.00155-a-i3.cap_height_um
+    note: "solder cap height not reported; cap of the same analog joint as the standoff (R2 2026-10-20: joint drawn as Cu column + solder cap)"
   c4_h_um:
     template: "r0 + r1"
     refs: [ectc51909.2023.00155-a-i3.height_um, ectc51909.2023.00155-a-i3.cap_height_um]
@@ -126,19 +149,39 @@ params:
   ri_diel_um:
     analog: ectc51906.2022.00309-a-L06.thickness_um
     note: "FO-RDL passivation thickness not reported; analog = 5 um photo-dielectric of ASE chip-last FOCoS"
-  ri_back_h_um: {template: "ri_back_n * ri_diel_um", note: "bottom passivation only: layers x passivation thickness (template)"}
+  ri_back_h_um: {template: "ri_back_n * ri_pass_um", note: "bottom passivation only: layers x passivation thickness (template)"}
+  rv_m_d_um:
+    template: "rv_d_um"
+    refs: [ectc51687.2025.00095-a-i2.notes, ectc51687.2025.00095-a-i3.ic_type]
+    note: "via between the two FO-RDL metals not dimensioned; drawn like the reported 10 um passivation via opening, a cell that describes only the opening onto the pillars and bridge studs (audit A1 minor M1)"
+  rv_m_land_um:
+    template: "rv_m_d_um * 92 / 30"
+    refs: [ectc51687.2025.00095-a-i3.ic_type]
+    note: "via land not reported; T-profile read off the stacked-via SEM fig ectc51687.2025.00095-f04 (lower panel, no scale bar, pixel widths): pad on the top FO-RDL metal ~92 px over a ~30 px stem (R2 2026-10-20; was one 0.45 stem / pad ratio for both levels, which is the mean of the two levels)"
+  rv_land_um:
+    template: "rv_d_um * 48 / 29"
+    refs: [ectc51687.2025.00095-a-i3.ic_type]
+    note: "via land not reported; T-profile read off fig ectc51687.2025.00095-f04 (lower panel, pixel widths): pad on the lower FO-RDL metal ~48 px over the ~29 px stem that lands on the pillar / stud (R2 2026-10-20)"
+  rv_bot_d_um:
+    template: "rv_d_um * 26 / 31"
+    refs: [ectc51687.2025.00095-a-i3.ic_type]
+    note: "via bottom not reported; the filled FO-RDL via stems narrow downward in fig ectc51687.2025.00095-f04 (pixel widths: lower panel ~31 px under the pad to ~26 px at the base; upper panel ~26 to ~23 px); ratio 26 / 31 (R2 2026-10-20)"
+  rv_m_bot_d_um:
+    template: "rv_m_d_um * 26 / 31"
+    refs: [ectc51687.2025.00095-a-i3.ic_type]
+    note: "same stem taper as rv_bot_d_um (fig ectc51687.2025.00095-f04, both levels)"
   lsi_h_um:
-    template: 50
-    refs: [ectc51687.2025.00158-a-m5.variant]
-    note: "bridge thickness not reported for TV-1; 50 um = one point of the 47-65 um bridge sweep in the FOCoS-Bridge with TSV warpage simulation"
+    template: "ri_core_h_um - daf_h_um - lsi_via_h_um"
+    refs: [ectc51687.2025.00095-a-L07.notes, ectc51687.2025.00158-a-m5.variant]
+    note: "bridge thickness not reported for TV-1; the bridge (Si + BEOL) fills the bottom mold height (tall pillar <= 120 um) above its D/A film up to short Cu studs, as drawn in the section schematic fig ectc51687.2025.00095-f01 (F1 fix 2026-10-20; was 50 um, which left 50 um studs). The TSV-bridge variant sweeps 47-65 um (ectc51687.2025.00158 Fig. 5)"
   daf_h_um:
     analog: ectc51909.2023.00155-a-c5.thickness_um
     refs: [ectc51687.2025.00095-F1-s03.step]
     note: "bridge D/A film thickness not reported; analog = die attach film of a 2.5D TV"
   lsi_via_h_um:
-    template: "ri_core_h_um - daf_h_um - lsi_h_um"
-    refs: [ectc51687.2025.00095-a-i5.ic_type]
-    note: "bridge Cu stud height not reported; studs reach the ground mold surface from the bridge on its D/A film"
+    analog: ectc51909.2023.00175-a-i3.height_um
+    refs: [ectc51687.2025.00095-a-i5.notes]
+    note: "bridge Cu stud height not reported for FOCoS-Bridge (studs revealed by mold grinding); analog = ~5 um Cu stud on the S-Connect connect die, also exposed by mold grinding; short studs as in fig ectc51687.2025.00095-f01"
   lsi_m_n:
     analog: ectc.2016.201-a-L02.repeat
     note: "bridge metal level count not reported; analog = 4 routing levels of the Intel EMIB bridge"
@@ -151,31 +194,21 @@ params:
   lsi_space_um:
     analog: ectc.2016.201-a-L02.space_um
     note: "bridge line space not reported; analog = Intel EMIB bridge 2/2 um"
-  lsi_si_um: {template: "lsi_h_um - lsi_m_n * lsi_m_um", note: "bridge Si = bridge thickness - metal levels (template inputs)"}
   lsi_via_pitch_um: {template: "ubump_pitch_um", note: "one Cu stud per micro-bump over the bridge; stud pitch not reported"}
   lsi_via_d_um: {template: "ubump_d_um", note: "bridge Cu stud diameter not reported; set equal to the micro-bump diameter"}
-  rv_pitch_um:
-    template: "lsi_via_pitch_um"
-    refs: [ectc51687.2025.00095-a-i2.notes]
-    note: "one FO-RDL via per bridge stud (via openings land on the studs); pitch not reported"
   tiv_pitch_um:
     analog: eptc67330.2025.11392593-a-i3.pitch_um
     note: "tall Cu pillar pitch not reported for FOCoS-Bridge; analog = Cu posts of a nepes fan-out embedded-bridge interposer"
   tiv_d_um:
     analog: eptc67330.2025.11392593-a-i3.diameter_um
     note: "tall Cu pillar diameter not reported (top/bottom ~1:1); analog = Cu posts of the same nepes interposer"
-  # ---- template: substrate (same analogs as the EMIB / CoWoS-L templates)
+  # ---- template: substrate (module stack; same analogs as the EMIB / CoWoS-L templates)
   bu_n:
-    analog: ectc51687.2025.00148-a-L06.repeat
-    note: "substrate layer count not reported for FOCoS-Bridge; analog = 4 build-up layers per side of an organic FC substrate"
-  bu_diel_um:
-    analog: ectc51687.2025.00148-a-L04.thickness_um
-    note: "build-up dielectric thickness not reported; analog = ABF-GL layer of an organic FC substrate"
-  bu_h_um: {template: "bu_n * bu_diel_um", note: "build-up per side = layer count x dielectric thickness (analogs)"}
+    analog: ectc51909.2023.00155-a-L16.repeat
+    note: "substrate layer count not reported for FOCoS-Bridge; analog = 4 build-up layers per side (4/2/4) of the substrate under a 2.5D Si-interposer TV"
   core_h_um:
-    analog: ectc51687.2025.00148-a-L07.thickness_um
-    note: "core thickness not reported; analog = core of the same organic FC substrate"
-  sbt_h_um: {template: "core_h_um + 2 * bu_h_um", note: "substrate = core + 2 build-up stacks (template inputs)"}
+    analog: ectc51909.2023.00155-a-L17.thickness_um
+    note: "core thickness not reported; analog = 1.3 mm CCL core of the same 2.5D-TV substrate"
   uf_margin_mm: {template: 0.3, note: "CoW underfill fillet extent not reported; illustrative"}
   c4uf_margin_mm: {template: 1.0, note: "CoS underfill fillet extent not reported; illustrative"}
   bga_pitch_um:
@@ -246,70 +279,93 @@ parts:
     xray_default: true
 
 layers:
-  - part: ri_front
-    repeat: ri_front_n
-    pattern:
-      - {id: ri_f_pi, name: "FO-RDL passivation", material: polymer_dielectric, material_label: PI, role: dielectric,
-         h_um: ri_diel_um, via_um: via_d_um}
-      - {id: ri_f_cu, name: "FO-RDL metal", material: copper, material_label: "RDL metal (not named)", role: conductor,
-         h_um: ri_cu_um, line_um: rdl_line_um, space_um: rdl_space_um}
   - part: ri_back
     repeat: ri_back_n
     pattern:
       - {id: ri_b_pass, name: "Bottom passivation", material: polymer_dielectric,
-         material_label: "passivation (material not stated)", role: passivation, h_um: ri_diel_um}
+         material_label: "passivation (material not stated)", role: passivation, h_um: ri_pass_um}
+  # bridge stack restated (dielectric not stated); ids match the module via classes
   - part: lsi
-    repeat: lsi_m_n
+    pattern:
+      - {id: lsi_stud, name: "Cu stud level", material: mold_compound, material_label: "bottom mold between the Cu studs",
+         role: dielectric, h_um: lsi_via_h_um}
+  - part: lsi
+    repeat: lsi_sig_n
     pattern:
       - {id: lsi_m, name: "Bridge metal level", material: copper, material_label: "BEOL metal (not specified)",
-         role: conductor, h_um: lsi_m_um, line_um: lsi_line_um, space_um: lsi_space_um}
+         role: conductor, h_um: lsi_m_um,
+         route: {use: signal, dir: x, line_um: lsi_line_um, space_um: lsi_space_um, matrix: other}}
+      - {id: lsi_imd, name: "Bridge BEOL dielectric", material: other, material_label: "dielectric (not stated)",
+         role: dielectric, h_um: lsi_imd_um}
   - part: lsi
     pattern:
+      - {id: lsi_m1, name: "Bridge M1 (GND plane)", material: copper, material_label: "BEOL metal (not specified)",
+         role: conductor, h_um: lsi_m_um, route: {use: plane, matrix: other}}
       - {id: lsi_si, name: "Bridge Si", material: silicon, role: core, h_um: lsi_si_um}
-  - part: substrate
-    pattern:
-      - {id: sbt_bu_top, name: "Top build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
-      - {id: sbt_core, name: "Core", material: organic_laminate, material_label: "laminate core", role: core,
-         h_um: core_h_um}
-      - {id: sbt_bu_bot, name: "Bottom build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
 
 arrays:
   - {id: ubump_asic, name: "ASIC micro-bumps", kind: microbump, per: asic, lower: ri_front, pitch_um: ubump_pitch_um,
-     diameter_um: ubump_d_um, height_um: ubump_h_um, note: "pitch rendered over the full die; the bump map is not reported"}
+     diameter_um: ubump_d_um, height_um: ubump_h_um, cap_h_um: ubump_cap_um, note: "pitch rendered over the full die; the bump map is not reported"}
   - {id: ubump_hbm, name: "HBM micro-bumps", kind: microbump, per: hbm, lower: ri_front, pitch_um: ubump_pitch_um,
-     diameter_um: ubump_d_um, height_um: ubump_h_um}
-  - {id: lsi_via, name: "Bridge Cu studs", kind: cu_pillar, span: ["top:lsi", "top:ri_core"], between: [ri_front, lsi],
-     region: {part: lsi}, pitch_um: lsi_via_pitch_um, diameter_um: lsi_via_d_um}
-  - {id: rdl_via_br, name: "FO-RDL vias over bridges", kind: rdl_via, in: ri_front, region: {part: lsi},
-     pitch_um: rv_pitch_um, diameter_um: via_d_um, note: "drawn over the bridges only, stacked per site"}
+     diameter_um: ubump_d_um, height_um: ubump_h_um, cap_h_um: ubump_cap_um}
   - {id: c4, name: "C4 bumps", kind: c4, upper: ri_back, lower: substrate, region: {part: ri_back}, pitch_um: c4_pitch_um,
-     diameter_um: c4_d_um, height_um: c4_h_um}
+     diameter_um: c4_d_um, height_um: c4_h_um, cap_h_um: c4_cap_um,
+     pad_um: c4_pad_um, opening_um: c4_open_um}
   - {id: bga, name: "BGA balls", kind: bga, under: substrate, region: {part: substrate}, pitch_um: bga_pitch_um,
-     diameter_um: bga_d_um, height_um: bga_h_um}
+     diameter_um: bga_d_um, height_um: bga_h_um,
+     pad_um: bga_pad_um, opening_um: bga_open_um}
+
+routing:
+  vias:
+    # the module's rv_f spans every FO-RDL dielectric; split so the reported 10 um opening is used only where its cell applies
+    - {id: rv_f, name: "FO-RDL via (opening onto pillar / stud)", kind: rdl_via, through: ri_f_diel_2, diameter_um: rv_d_um,
+       bottom_diameter_um: rv_bot_d_um, land_um: rv_land_um, fill: filled,
+       note: "T-profile: tapered filled stem under a wider pad (fig ectc51687.2025.00095-f04)"}
+    - {id: rv_m, name: "FO-RDL via (metal to metal)", kind: rdl_via, through: ri_f_diel_1, diameter_um: rv_m_d_um,
+       bottom_diameter_um: rv_m_bot_d_um, land_um: rv_m_land_um, fill: filled,
+       note: "T-profile: tapered filled stem under the top-metal pad (fig ectc51687.2025.00095-f04)"}
+  nets:
+    - {id: ri_hbm, kind: vertical, from: ubump_hbm, to: c4, style: stacked, jog: [ri_f_cu], share: 0.3,
+       note: "HBM power / IO: stacked FO-RDL vias -> tall Cu pillar -> bottom passivation opening -> C4 (no back RDL metal)"}
+    - {id: ri_asic, kind: vertical, from: ubump_asic, to: c4, style: stacked, jog: [ri_f_cu], share: 0.4,
+       note: "ASIC power / IO through the tall Cu pillars"}
+    - {id: d2d, kind: lateral, from: ubump_hbm, to: ubump_asic, levels: [lsi_m], share: 0.5,
+       note: "ASIC-HBM wires inside the bridge BEOL under the D2D gap"}
 
 callouts:
   - {target: lsi, text: "{lsi_n} bridges, {lsi_w_mm} x {lsi_d_mm} mm"}
   - {target: daf, text: "Bridge die attach (D/A)", refs: [ectc51687.2025.00095-F1-s03.step]}
   - {target: ri_f_cu, text: "FO-RDL L/S {rdl_line_um}/{rdl_space_um} um"}
-  - {target: ri_f_pi, text: "Via opening {via_d_um} um"}
+  - {target: ri_f_diel, text: "Via opening {rv_d_um} um",
+     note: "{rv_d_um} um passivation via openings land on the pillars and bridge studs; {pi_n} PI layers for {ri_front_n} RDL metals"}
+  - {target: rv_f, text: "Stacked FO-RDL vias",
+     note: "stacked and staggered RDL vias (row ectc51687.2025.00095-a-i3); stacked under the micro-bumps in the TV-1 section (fig ectc51529.2024.00151-f01 D)"}
   - {target: tiv, text: "Cu pillars up to {ri_core_h_um} um"}
+  - {target: d2d, text: "ASIC-HBM wires in bridge",
+     note: "die-to-die wires in the bridge metal levels under the D2D gap; levels and lane count not reported (mock-up layout)"}
   - {target: ubump_asic, text: "Micro-bump pitch {ubump_pitch_um} um"}
   - {target: c4, text: "C4 {c4_pitch_um} um, TCB", refs: [ectc51529.2024.00151-a-i4.bonding_method]}
   - {target: lsi, text: "TSV variant: C4 {tsv_c4_pitch_um} um", refs: [ectc51687.2025.00158-a-c3.name]}
   - {target: ri_core, text: "TV-2: {tv2_w_mm} x {tv2_d_mm} mm module"}
+  - {target: pth, text: "Analog build-up, plugged PTH",
+     note: "FCBGA substrate stack not reported for TV-1; build-up, microvias and PTH from analogs (2.5D-TV 4/2/4 substrate, 4-2-4 FCBGA TV)"}
 
 insets:
   - id: bridge_edge
-    label: "Bridge under HBM-ASIC edge"
-    box_mm: ["-lsi_px_mm / 2 - lsi_w_mm / 2 - 0.5", "1.5 * lsi_py_mm - 0.5", "-lsi_px_mm / 2 + lsi_w_mm / 2 + 0.5",
-             "1.5 * lsi_py_mm + 0.5"]
-    z: ["bottom:ri_back", "top:mold"]
+    label: "Bridge under the HBM-ASIC gap"
+    box_mm: ["-lsi_px_mm / 2 - 0.25", "1.5 * lsi_py_mm - 0.25", "-lsi_px_mm / 2 + 0.25", "1.5 * lsi_py_mm + 0.25"]
+    z: ["bottom:ri_back", "bottom:asic"]
     view: front
   - id: module_stack
     label: "Module stack: pillars, bridge, RDL"
     box_mm: ["-lsi_px_mm / 2 - lsi_w_mm / 2 - 0.4", "1.5 * lsi_py_mm - 0.3", "-lsi_px_mm / 2 - lsi_w_mm / 2 + 0.4",
              "1.5 * lsi_py_mm + 0.3"]
     z: ["top:substrate", "bottom:asic"]
+    view: front
+  - id: sbt_stack
+    label: "C4, build-up, PTH core, BGA"
+    box_mm: ["-lsi_px_mm / 2 - 1.5", "1.5 * lsi_py_mm - 0.5", "-lsi_px_mm / 2 + 1.5", "1.5 * lsi_py_mm + 0.5"]
+    z: ["bottom:bga", "top:ri_back"]
     view: front
   - id: module_edge
     label: "Module edge, C4, CoS underfill"

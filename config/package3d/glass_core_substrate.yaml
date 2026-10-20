@@ -5,14 +5,23 @@
 # Gaps from other TVs of the same family (package_class glass_core_substrate):
 #   - glass core 1.0 mm with Cu-filled TGVs of 90 um diameter at 175 um minimum pitch and the unit outline 77.5 x 75.0 mm
 #     from the Shinko 2-2-2 TGV prototype ectc51687.2025.00178-i;
-#   - build-up layer = 15 um ABF + 5 um SAP Cu, 20 um microvias, 10/15 um routing, 130 um die-bump pads from the Georgia
-#     Tech 200 x 200 mm glass panel ectc51846.2026.00199-a.
+#   - build-up layer = 15 um ABF + 5 um SAP Cu, 20 um microvias, 10/15 um routing, 5/5 um finest lines, 130 um die-bump
+#     pads from the Georgia Tech 200 x 200 mm glass panel ectc51846.2026.00199-a;
+#   - BGA 1.0 mm pitch, 580 um SAC305 balls on the glass core of tcpmt.2025.3614186-a.
 # Topology (RESEARCH.md glass_core_substrate; db:ectc51846.2026.00134 p.3 Sec. III): same build-up stack as FCBGA, but the
 # core is a glass slab with Cu-filled TGVs instead of a laminate with PTH; EMIB bridges sit in the top build-up layers.
-# No glass-core TV in the database has dies attached: the dies, bumps, bridge size and BGA are template values
+# No glass-core TV in the database has dies attached: the dies, bumps, bridge size and bridge levels are template values
 # (analogs from the EMIB template, DIE 2 | DIE 1 | DIE 3 with one bridge per die-die edge), so this model can be compared
 # with the emib and fcbga_organic templates.
-# The substrate is three parts (back build-up, glass core, front build-up) so the TGV array spans only the glass.
+# The substrate is three parts (back build-up, glass core, front build-up) so the TGVs span only the glass.
+#
+# Routing (DevLog-011, 2026-10-20; reference config/package3d/ROUTING_REF_substrate.md archetype C):
+# - Front levels L1 (die-bump pad level), L2 fine signal (finest L/S on the outermost routing level, R1 section 3:
+#   ectc51909.2023.00298-f02, 001c.147214-f04), then (plane, signal) x 4 = L3 .. L10; core-face Cu with TGV caps on both
+#   glass faces; back (signal, plane) x 4 = B1 .. B8, B9 signal, B10 BGA pad level; solder resist both faces (analog).
+# - Vias: filled laser microvias stacked onto the TGV caps (ectc51687.2025.00178-f02/-f04), staggered offsets in the
+#   multi-level build-up (ectc51909.2023.00298-f02); Cu-filled tapered TGVs (ectc51687.2025.00178-f01,
+#   ectc51529.2024.00093-f01); EMIB bridge levels and fine vias as in the emib template (analogs).
 id: glass_core_substrate
 name: Glass core substrate
 company: Intel / Absolics / others
@@ -44,18 +53,50 @@ params:
   line_um: {ref: ectc51846.2026.00199-a-L09.line_um, note: "UCIe-S x8 10 mm routing traces on the glass build-up"}
   space_um: {ref: ectc51846.2026.00199-a-L09.space_um}
   min_line_um: {ref: ectc51846.2026.00199-a-L05.line_um}
+  min_space_um: {ref: ectc51846.2026.00199-a-L05.space_um, note: "finest serpentine / comb on the glass panel; drawn on L2 (finest L/S on the outermost routing level)"}
+  # drawn L/S (audit A1 minor M2): the reported cells describe one routed metal layer of the panel TV (traces) and a
+  # serpentine / comb test structure; applying them to every level is a template choice
+  sig_line_um: {template: "line_um", refs: [ectc51846.2026.00199-a-L09.line_um], note: "10 um UCIe-S trace width of the single routed metal layer of the glass panel TV, applied to every signal level L4-L10 / B1-B9 (template choice)"}
+  sig_space_um: {template: "space_um", refs: [ectc51846.2026.00199-a-L09.space_um], note: "15 um UCIe-S trace space of the same single metal layer, applied to every signal level and as the plane antipad clearance (template choice)"}
+  fine_line_um: {template: "min_line_um", refs: [ectc51846.2026.00199-a-L05.line_um], note: "5 um line of a serpentine / comb test structure on the glass panel, drawn on L2 as the finest outermost routing level (template choice)"}
+  fine_space_um: {template: "min_space_um", refs: [ectc51846.2026.00199-a-L05.space_um], note: "5 um space of the same serpentine / comb test structure, drawn on L2 (template choice)"}
   mvia_d_um: {ref: ectc51846.2026.00199-a-i1.diameter_um, note: "smallest of the 20/30/40/50 um femtosecond-laser microvias"}
   coarse_pitch_um: {ref: ectc51846.2026.00199-a-i5.pitch_um, note: "UCIe-S x8 terminal bump pads on the glass substrate (no die attached)"}
+  bga_pitch_um: {ref: tcpmt.2025.3614186-a-i1.pitch_um, note: "BGA on a 500 um glass core TV (OSP glass pads, NSMD board pads)"}
+  bga_d_um: {ref: tcpmt.2025.3614186-a-i1.diameter_um, note: "SAC305 ball on the glass core TV; reflowed mean 550 um (metric a-m12)"}
   # ---- derived
   bu_layer_h_um: {derived: "abf_um + cu_um", note: "one build-up layer = ABF dielectric + SAP Cu (Georgia Tech glass panel)"}
-  bu_h_um: {derived: "bu_n * (abf_um + cu_um)", note: "front build-up = 10 layers x (ABF + Cu)"}
-  bu_bot_h_um: {derived: "bu_bot_n * (abf_um + cu_um)", note: "back build-up = 10 layers x (ABF + Cu)"}
+  bu_pair_n: {derived: "(bu_n - 2) / 2", note: "front (plane, signal) pairs L3/L4 .. L9/L10 below the L1 pad and L2 fine-signal levels"}
+  bk_pair_n: {derived: "(bu_bot_n - 2) / 2", note: "back (signal, plane) pairs B1/B2 .. B7/B8 above the B9 signal and B10 BGA pad levels"}
+  # ---- template: solder resist (none reported for a glass-core TV)
+  sr_h_um:
+    analog: ectc51906.2022.00180-b-L02.thickness_um
+    note: "solder resist not reported for any glass-core TV; analog = 20 um solder mask laminated on both sides of a glass interposer"
+  bu_h_um: {derived: "sr_h_um + bu_n * (abf_um + cu_um)", note: "front build-up = SR + 10 layers x (ABF + Cu)"}
+  bu_bot_h_um: {derived: "sr_h_um + bu_bot_n * (abf_um + cu_um)", note: "back build-up = 10 layers x (ABF + Cu) + SR"}
   # ---- template: core metal (the "2" of 10-2-10)
   core_cu_um:
     template: "cu_um"
     note: "core-surface Cu thickness not reported (rows 00134-a-L03, 00178-i-L03 state the layers only); set to the 5 um SAP Cu of the glass panel"
     refs: [ectc51687.2025.00178-i-L03.layer_name]
   core_part_h_um: {template: "core_h_um + 2 * core_cu_um", note: "core part = glass + one Cu layer on each face"}
+  # ---- template: routing (DevLog-011)
+  mvia_land_um:
+    template: "mvia_d_um + r0 - r1"
+    refs: [tcpmt.2026.3736233-a-i1.pad_x_um, tcpmt.2026.3736233-a-i1.diameter_um]
+    note: "microvia land not reported for a glass-core TV; harmonized rule for glass-core build-up (TEMPLATE_FORMAT.md 'Template rules'): 'pad 12 um larger than via top' (136 / 124 um via pad of a glass-embedded package)"
+  mvia_bot_d_um:
+    template: "mvia_d_um - 2 * abf_um / 3.078"
+    refs: [ectc51687.2025.00076-b-i1.notes]
+    note: "via bottom not reported; 72 deg laser-via sidewall (analog row notes) over the 15 um ABF; 3.078 = tan(72 deg)"
+  tgv_bot_d_um:
+    template: "tgv_d_um * 0.5"
+    refs: [ectc51529.2024.00093-a-i1.notes]
+    note: "TGV taper not reported for the 1.0 mm core; narrow end about half the wide end (60 / 30 um filled TGV, row notes; SEM fig ectc51687.2025.00178-f01)"
+  tgv_land_um:
+    template: "tgv_d_um * 1.4"
+    refs: [ectc51687.2025.00178-i-i2.notes]
+    note: "TGV cap / land not reported; Cu RDL pad about 1.4 x the TGV end width, read by eye from SEM fig ectc51687.2025.00178-f04 (no scale bar)"
   # ---- template: bridges, dies and joints (no glass-core TV has dies; analogs as in the EMIB template)
   bridge_w_mm:
     analog: ectc.2016.201-a-c1.x_mm
@@ -67,8 +108,33 @@ params:
     analog: ectc.2016.201-a-c1.thickness_um
     note: "EMIB thickness not reported for the glass TV; analog = upper bound (thinned below 75 um) of the EMIB architecture paper"
   bridge_depth_um:
-    template: "bu_layer_h_um"
-    note: "bridge top drawn one build-up layer below the surface ('embedded in the top layers'); depth not reported"
+    template: "sr_h_um + cu_um + abf_um"
+    note: "bridge top at the L2 level, under SR + L1 + one ABF ('embedded in the top layers'); depth not reported"
+  adh_h_um:
+    analog: ectc51909.2023.00155-a-c5.thickness_um
+    refs: [ectc.2016.201-a-c3.name]
+    note: "bridge adhesive not reported for the glass TV; analog = die attach film of a 2.5D TV, as in the emib template"
+  m_n:
+    analog: ectc.2016.201-a-L02.repeat
+    note: "bridge metal levels not reported for the glass TV; analog = EMIB M1-M4"
+  m_pair_n: {template: "m_n / 2", note: "bridge levels drawn as (signal, Vss) pairs: M4 / M3, M2 / M1"}
+  m_line_um: {analog: ectc.2016.201-a-L02.line_um, note: "EMIB bridge wiring L/S (analog)"}
+  m_space_um: {analog: ectc.2016.201-a-L02.space_um, note: "EMIB bridge wiring L/S (analog)"}
+  m_via_um: {analog: ectc.2016.201-a-L02.via_diameter_um, note: "EMIB 2 um dual-damascene Via1-Via3 (analog)"}
+  m_h_um:
+    analog: ectc51909.2023.00174-d-L02.thickness_um
+    note: "bridge metal level thickness not reported; analog = TSMC LSI-1 dual-damascene Cu level, as in the emib template"
+  imd_h_um:
+    analog: ectc51846.2026.00035-a-L02.thickness_um
+    refs: [ectc51909.2023.00174-d-L03.material]
+    note: "bridge inter-metal dielectric thickness not reported for EMIB; analog = 1 um SiO2 ILD of a Si bridge model (PSB)"
+  vss_fill:
+    template: 0.6
+    refs: [ectc.2016.201-a-L02.properties]
+    note: "EMIB Vss level metal density 50-70% (row properties); midpoint drawn"
+  bridge_si_um:
+    template: "bridge_h_um - (m_n + 1) * m_h_um - m_n * imd_h_um"
+    note: "bridge Si = bridge thickness - pad level - metal levels - inter-metal dielectrics (template levels)"
   d1_w_mm:
     analog: ectc51906.2022.00106-a-c1.x_mm
     note: "no die in the glass-core TVs; DIE 1 analog = processor chip of an IBM bridge (DBHi) package, as in the EMIB template"
@@ -96,6 +162,17 @@ params:
   fine_d_um:
     analog: ectc51906.2022.00180-a-i3.diameter_um
     note: "fine bump diameter analog = 55 um-pitch Cu/SnAg micro-bump of a glass 2.5D package"
+  fine_via_d_um:
+    template: "fine_d_um"
+    refs: [ectc.2016.201-a-i3.notes]
+    note: "fine via onto the bridge pads: diameter not reported; set equal to the fine bump, as in the emib template"
+  fine_via_land_um:
+    template: 30
+    refs: [ectc51906.2022.00180-a-i1.notes]
+    note: "bridge pad / fine-via land not reported; largest pad of the 10/20/30 um pad arrays of an embedded-die glass analog (fits the 55 um pitch), as in the emib template (R2 2026-10-20)"
+  bump_cap_um:
+    analog: ectc51906.2022.00180-a-i3.cap_height_um
+    note: "solder cap height not reported; cap of the same analog joint as the standoff (R2 2026-10-20: joint drawn as Cu column + solder cap)"
   bump_h_um:
     template: "r0 + r1"
     refs: [ectc51906.2022.00180-a-i3.height_um, ectc51906.2022.00180-a-i3.cap_height_um]
@@ -104,26 +181,20 @@ params:
     analog: vlsitechnologyandcir46783.2024.10631478-a-i2.diameter_um
     note: "coarse bump diameter not reported; analog = Intel Foveros 110 um-pitch package-side bump"
   uf_margin_mm: {template: 0.5, note: "underfill fillet extent not reported; illustrative"}
-  mvia_pitch_um: {template: "coarse_pitch_um", note: "stacked microvia placement not reported; one column per coarse bump pad assumed"}
-  bga_pitch_um:
-    analog: ectc51909.2023.00155-a-i4.pitch_um
-    note: "BGA not reported for any glass-core TV; analog = 1.0 mm-pitch ball of a large 2.5D TV"
-  bga_d_um:
-    analog: ectc51909.2023.00155-a-i4.diameter_um
-    note: "BGA ball diameter analog = SAC305 ball of the same 2.5D TV"
   bga_h_um:
     template: 478
-    refs: [ectc51909.2023.00155-a-i4.notes]
-    note: "BGA height not reported; the analog row's notes give a measured ball height of 478 um"
+    refs: [ectc51909.2023.00155-a-i4.notes, tcpmt.2025.3614186-a-m12.value]
+    note: "BGA height not reported for a glass-core TV; measured height of a 600 um SAC305 ball at 1.0 mm pitch in a 2.5D TV (analog row notes)"
 
 parts:
-  - {id: sbt_bu_bot, name: "Back build-up (10 layers)", kind: substrate, material: organic_build_up,
-     material_label: "ABF / SAP Cu", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: bu_bot_h_um, base: true, explode_group: 0}
+  - {id: sbt_bu_bot, name: "Back build-up (10 layers) + SR", kind: substrate, material: organic_build_up,
+     material_label: "ABF / SAP Cu, solder resist", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: bu_bot_h_um, base: true,
+     explode_group: 0}
   - {id: core, name: "Glass core (TGV)", kind: substrate, material: glass, material_label: "glass (type not stated in the Intel TV)",
      w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: core_part_h_um, on: sbt_bu_bot, explode_group: 0,
      note: "thick glass core with Cu-filled TGVs (laser-assisted etching, electrolytic fill)"}
-  - {id: sbt_bu_top, name: "Front build-up (10 layers)", kind: substrate, material: organic_build_up,
-     material_label: "ABF / SAP Cu", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: bu_h_um, on: core, explode_group: 0}
+  - {id: sbt_bu_top, name: "Front build-up (10 layers) + SR", kind: substrate, material: organic_build_up,
+     material_label: "ABF / SAP Cu, solder resist", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: bu_h_um, on: core, explode_group: 0}
   - id: bridge
     name: "EMIB bridge (Si)"
     kind: bridge
@@ -136,6 +207,19 @@ parts:
     repeat: {nx: bridge_n, pitch_x_mm: bridge_px_mm}
     explode_group: 1
     note: "2 EMIB bridges in the top build-up layers (Fig. 8(a)); size, depth and attach not reported"
+  - id: br_adh
+    name: "Bridge adhesive"
+    kind: other
+    material: other
+    material_label: "adhesive (not named)"
+    w_mm: bridge_w_mm
+    d_mm: bridge_d_mm
+    h_um: adh_h_um
+    in: sbt_bu_top
+    depth_um: "bridge_depth_um + bridge_h_um"
+    repeat: {nx: bridge_n, pitch_x_mm: bridge_px_mm}
+    explode_group: 1
+    note: "bridge attach not reported for the glass TV; drawn as in the emib template (cavity + adhesive)"
   - {id: die1, name: "DIE 1", kind: die, material: silicon, w_mm: d1_w_mm, d_mm: d1_d_mm, h_um: die_h_um, on: sbt_bu_top,
      standoff: coarse_d1, explode_group: 3, note: "no die in the glass-core TVs; template (EMIB-template analog)"}
   - id: die2
@@ -159,54 +243,165 @@ parts:
     xray_default: true
 
 layers:
+  # ---- front build-up, top down: SR, L1 pad, L2 fine signal, (plane, signal) x 4 = L3 .. L10, ABF onto the glass
   - part: sbt_bu_top
-    repeat: bu_n
     pattern:
-      - {id: bu_top_cu, name: "Build-up Cu (SAP)", material: copper, material_label: "SAP Cu", role: conductor, h_um: cu_um,
-         line_um: line_um, space_um: space_um}
-      - {id: bu_top_abf, name: "Build-up ABF", material: organic_build_up, material_label: "ABF GL102", role: dielectric,
+      - {id: sr_top, name: "Solder resist (die side)", material: polymer_dielectric, material_label: "solder resist (analog)",
+         role: passivation, h_um: sr_h_um}
+      - {id: g_pad, name: "L1 die-bump pad Cu", material: copper, material_label: "SAP Cu pads", role: conductor, h_um: cu_um,
+         route: {use: pad, matrix: organic_build_up}}
+      - {id: g_d1, name: "Build-up ABF L1-L2", material: organic_build_up, material_label: "ABF GL102", role: dielectric,
          h_um: abf_um, via_um: mvia_d_um}
+      - {id: g_fsig, name: "L2 fine signal Cu", material: copper, material_label: "SAP Cu", role: conductor, h_um: cu_um,
+         line_um: fine_line_um, space_um: fine_space_um,
+         route: {use: signal, dir: x, line_um: fine_line_um, space_um: fine_space_um, matrix: organic_build_up}}
+      - {id: g_d2, name: "Build-up ABF L2-L3", material: organic_build_up, material_label: "ABF GL102", role: dielectric,
+         h_um: abf_um, via_um: mvia_d_um}
+  - part: sbt_bu_top
+    repeat: bu_pair_n
+    pattern:
+      - {id: g_pl, name: "Front GND/PWR plane Cu (L3/5/7/9)", material: copper, material_label: "SAP Cu plane",
+         role: conductor, h_um: cu_um, route: {use: plane, space_um: sig_space_um, matrix: organic_build_up}}
+      - {id: g_pd, name: "Build-up ABF", material: organic_build_up, material_label: "ABF GL102", role: dielectric,
+         h_um: abf_um, via_um: mvia_d_um}
+      - {id: g_sig, name: "Front signal Cu (L4/6/8/10)", material: copper, material_label: "SAP Cu", role: conductor,
+         h_um: cu_um, line_um: sig_line_um, space_um: sig_space_um,
+         route: {use: signal, dir: alt, line_um: sig_line_um, space_um: sig_space_um, matrix: organic_build_up}}
+      - {id: g_sd, name: "Build-up ABF", material: organic_build_up, material_label: "ABF GL102", role: dielectric,
+         h_um: abf_um, via_um: mvia_d_um}
+  # ---- glass core with Cu caps on both faces
   - id: g_core
     part: core
     pattern:
-      - {id: core_cu_top, name: "Core-surface Cu", material: copper, material_label: Cu, role: conductor, h_um: core_cu_um}
+      - {id: core_cu_top, name: "Core-surface Cu (TGV caps)", material: copper, material_label: Cu, role: conductor,
+         h_um: core_cu_um, route: {use: pad, matrix: organic_build_up}}
       - {id: glass, name: "Glass core", material: glass, role: core, h_um: core_h_um}
-      - {id: core_cu_bot, name: "Core-surface Cu", material: copper, material_label: Cu, role: conductor, h_um: core_cu_um}
+      - {id: core_cu_bot, name: "Core-surface Cu (TGV caps)", material: copper, material_label: Cu, role: conductor,
+         h_um: core_cu_um, route: {use: pad, matrix: organic_build_up}}
+  # ---- back build-up, top down: (ABF, signal, ABF, plane) x 4 = B1 .. B8, B9 signal, B10 BGA pad, SR
   - part: sbt_bu_bot
-    repeat: bu_bot_n
+    repeat: bk_pair_n
     pattern:
-      - {id: bu_bot_abf, name: "Build-up ABF", material: organic_build_up, material_label: "ABF GL102", role: dielectric,
-         h_um: abf_um}
-      - {id: bu_bot_cu, name: "Build-up Cu (SAP)", material: copper, material_label: "SAP Cu", role: conductor, h_um: cu_um}
+      - {id: g_bsd, name: "Build-up ABF", material: organic_build_up, material_label: "ABF GL102", role: dielectric,
+         h_um: abf_um, via_um: mvia_d_um}
+      - {id: g_bsig, name: "Back signal Cu (B1/3/5/7)", material: copper, material_label: "SAP Cu", role: conductor,
+         h_um: cu_um, line_um: sig_line_um, space_um: sig_space_um,
+         route: {use: signal, dir: alt, line_um: sig_line_um, space_um: sig_space_um, matrix: organic_build_up}}
+      - {id: g_bpd, name: "Build-up ABF", material: organic_build_up, material_label: "ABF GL102", role: dielectric,
+         h_um: abf_um, via_um: mvia_d_um}
+      - {id: g_bpl, name: "Back GND/PWR plane Cu (B2/4/6/8)", material: copper, material_label: "SAP Cu plane",
+         role: conductor, h_um: cu_um, route: {use: plane, space_um: sig_space_um, matrix: organic_build_up}}
+  - part: sbt_bu_bot
+    pattern:
+      - {id: g_b9d, name: "Build-up ABF B8-B9", material: organic_build_up, material_label: "ABF GL102", role: dielectric,
+         h_um: abf_um, via_um: mvia_d_um}
+      - {id: g_b9, name: "B9 signal Cu", material: copper, material_label: "SAP Cu", role: conductor, h_um: cu_um,
+         line_um: sig_line_um, space_um: sig_space_um,
+         route: {use: signal, dir: x, line_um: sig_line_um, space_um: sig_space_um, matrix: organic_build_up}}
+      - {id: g_b10d, name: "Build-up ABF B9-B10", material: organic_build_up, material_label: "ABF GL102", role: dielectric,
+         h_um: abf_um, via_um: mvia_d_um}
+      - {id: g_bpad, name: "B10 BGA pad Cu", material: copper, material_label: "SAP Cu pads, OSP", role: conductor,
+         h_um: cu_um, route: {use: pad, matrix: organic_build_up}}
+      - {id: sr_bot, name: "Solder resist (BGA side)", material: polymer_dielectric, material_label: "solder resist (analog)",
+         role: passivation, h_um: sr_h_um}
+  # ---- EMIB bridge levels (analogs): pad level, (IMD, signal, IMD, Vss) x 2 = M4 .. M1, Si
+  - part: bridge
+    pattern:
+      - {id: br_pad, name: "Bridge pad level", material: copper, material_label: "metal (not specified)", role: conductor,
+         h_um: m_h_um, route: {use: pad, matrix: oxide}}
+  - part: bridge
+    repeat: m_pair_n
+    pattern:
+      - {id: br_imd_a, name: "Bridge inter-metal dielectric", material: oxide,
+         material_label: "inter-metal dielectric (not stated; LSI analog: USG)", role: dielectric, h_um: imd_h_um,
+         via_um: m_via_um}
+      - {id: br_sig, name: "Bridge signal level (M4 / M2)", material: copper, material_label: "BEOL metal (not specified)",
+         role: conductor, h_um: m_h_um, line_um: m_line_um, space_um: m_space_um,
+         route: {use: signal, dir: x, line_um: m_line_um, space_um: m_space_um, matrix: oxide}}
+      - {id: br_imd_b, name: "Bridge inter-metal dielectric", material: oxide,
+         material_label: "inter-metal dielectric (not stated; LSI analog: USG)", role: dielectric, h_um: imd_h_um,
+         via_um: m_via_um}
+      - {id: br_vss, name: "Bridge Vss level (M3 / M1)", material: copper, material_label: "BEOL metal (not specified)",
+         role: conductor, h_um: m_h_um, route: {use: plane, space_um: m_space_um, matrix: oxide, fill: vss_fill}}
+  - part: bridge
+    pattern:
+      - {id: br_si, name: "Bridge Si", material: silicon, role: core, h_um: bridge_si_um}
 
 arrays:
-  - {id: tgv, name: "Cu-filled TGVs", kind: tgv, in_layer: glass, region: {part: core}, pitch_um: tgv_pitch_um,
-     diameter_um: tgv_d_um, note: "fully Cu-filled TGVs; placement not reported, drawn at the minimum pitch over the full core"}
-  - {id: mvia, name: "Stacked microvias", kind: rdl_via, in: sbt_bu_top, region: {part: die1, subtract: [bridge]},
-     pitch_um: mvia_pitch_um, diameter_um: mvia_d_um, note: "drawn under DIE 1 outside the bridges; placement not reported"}
   - {id: fine_d1, name: "Fine bumps over the bridge", kind: microbump, per: die1, lower: sbt_bu_top,
-     region: {intersect: [bridge]}, pitch_um: fine_pitch_um, diameter_um: fine_d_um, height_um: bump_h_um}
+     region: {intersect: [bridge]}, pitch_um: fine_pitch_um, diameter_um: fine_d_um, height_um: bump_h_um, cap_h_um: bump_cap_um}
   - {id: fine_d2, name: "Fine bumps over the bridge", kind: microbump, per: die2, lower: sbt_bu_top,
-     region: {intersect: [bridge]}, pitch_um: fine_pitch_um, diameter_um: fine_d_um, height_um: bump_h_um}
+     region: {intersect: [bridge]}, pitch_um: fine_pitch_um, diameter_um: fine_d_um, height_um: bump_h_um, cap_h_um: bump_cap_um}
   - {id: coarse_d1, name: "Coarse bumps", kind: microbump, per: die1, lower: sbt_bu_top, region: {subtract: [bridge]},
-     pitch_um: coarse_pitch_um, diameter_um: coarse_d_um, height_um: bump_h_um,
+     pitch_um: coarse_pitch_um, diameter_um: coarse_d_um, height_um: bump_h_um, cap_h_um: bump_cap_um,
      note: "130 um pitch of the UCIe-S bump pads on the glass panel; bump map not reported"}
   - {id: coarse_d2, name: "Coarse bumps", kind: microbump, per: die2, lower: sbt_bu_top, region: {subtract: [bridge]},
-     pitch_um: coarse_pitch_um, diameter_um: coarse_d_um, height_um: bump_h_um}
+     pitch_um: coarse_pitch_um, diameter_um: coarse_d_um, height_um: bump_h_um, cap_h_um: bump_cap_um}
   - {id: bga, name: "BGA balls", kind: bga, under: sbt_bu_bot, region: {part: sbt_bu_bot}, pitch_um: bga_pitch_um,
      diameter_um: bga_d_um, height_um: bga_h_um}
 
+routing:
+  layout_note: >-
+    mock-up routing: which bumps / balls belong to which net, the net shares, jog levels and escape length are
+    illustrative (no glass-core substrate design is published); level order, Cu / dielectric thickness, L/S, via,
+    land and TGV dims carry their own provenance
+  vias:
+    # front microvias: laser drilled from the top, filled, wide end up
+    - {id: mv_g1, name: "Microvia L1-L2", kind: microvia, through: g_d1, diameter_um: mvia_d_um,
+       bottom_diameter_um: mvia_bot_d_um, land_um: mvia_land_um, fill: filled}
+    - {id: mv_g2, name: "Microvia L2-L3", kind: microvia, through: g_d2, diameter_um: mvia_d_um,
+       bottom_diameter_um: mvia_bot_d_um, land_um: mvia_land_um, fill: filled}
+    - {id: mv_gp, name: "Microvia plane-signal", kind: microvia, through: g_pd, diameter_um: mvia_d_um,
+       bottom_diameter_um: mvia_bot_d_um, land_um: mvia_land_um, fill: filled}
+    - {id: mv_gs, name: "Microvia signal-plane / onto TGV cap", kind: microvia, through: g_sd, diameter_um: mvia_d_um,
+       bottom_diameter_um: mvia_bot_d_um, land_um: mvia_land_um, fill: filled}
+    # fine vias from the L1 pads onto the bridge pads (inside the bridge footprint)
+    - {id: bv, name: "Fine via onto bridge pad", kind: bridge_via, through: g_d1, diameter_um: fine_via_d_um,
+       land_um: fine_via_land_um, pitch_um: fine_pitch_um, fill: filled, region: {part: bridge},
+       note: "one per fine bump inside the bridge footprint, landing on the bridge pad level (EMIB analog, ectc.2016.201-a-i3). R2 2026-10-20: was a region-less class without pitch, so the viewer never drew it (the microvia mv_g1 of the same dielectric won at every point and no grid was drawn under the fine bumps)"}
+    # TGV: Cu filled, tapered, Cu caps on both glass faces
+    - {id: tgv, name: "Cu-filled TGV", kind: tgv, through: glass, diameter_um: tgv_d_um, bottom_diameter_um: tgv_bot_d_um,
+       land_um: tgv_land_um, pitch_um: tgv_pitch_um, fill: filled,
+       note: "fully Cu-filled (ectc51687.2025.00178-i-i1, ectc51846.2026.00134-a-i1); real TGVs alternate taper direction in the SEM (fig ectc51687.2025.00178-f01)"}
+    # back microvias: laser drilled from the BGA side, filled, wide end down
+    - {id: mv_bs, name: "Microvia onto signal (from TGV cap / plane)", kind: microvia, through: g_bsd,
+       diameter_um: mvia_bot_d_um, bottom_diameter_um: mvia_d_um, land_um: mvia_land_um, fill: filled}
+    - {id: mv_bp, name: "Microvia signal-plane", kind: microvia, through: g_bpd, diameter_um: mvia_bot_d_um,
+       bottom_diameter_um: mvia_d_um, land_um: mvia_land_um, fill: filled}
+    - {id: mv_b9, name: "Microvia B8-B9", kind: microvia, through: g_b9d, diameter_um: mvia_bot_d_um,
+       bottom_diameter_um: mvia_d_um, land_um: mvia_land_um, fill: filled}
+    - {id: mv_b10, name: "Microvia B9-B10", kind: microvia, through: g_b10d, diameter_um: mvia_bot_d_um,
+       bottom_diameter_um: mvia_d_um, land_um: mvia_land_um, fill: filled}
+    # bridge BEOL vias (analog)
+    - {id: bv_a, name: "Bridge via (pad/Vss to signal)", kind: beol_via, through: br_imd_a, diameter_um: m_via_um, fill: filled}
+    - {id: bv_b, name: "Bridge via (signal to Vss)", kind: beol_via, through: br_imd_b, diameter_um: m_via_um, fill: filled}
+  nets:
+    - {id: io_d1, kind: vertical, from: coarse_d1, to: bga, style: stacked, jog: [g_fsig, g_sig_3, g_bsig_1, g_b9],
+       share: 0.15,
+       note: "DIE 1 I/O: stacked microvias, fan-out jog on L2, jog onto the TGV cap on L8, stacked onto the TGV cap (ectc51687.2025.00178-f02/-f04); jogs on B1 / B9 to the BGA pad"}
+    - {id: io_d2, kind: vertical, from: coarse_d2, to: bga, style: staggered, jog: [g_fsig, g_sig_3, g_bsig_1, g_b9],
+       share: 0.15, note: "DIE 2 / 3 I/O: staggered microvias as in the 8ML glass build-up (ectc51909.2023.00298-f02)"}
+    - {id: d2d, kind: lateral, from: fine_d1, to: fine_d2, levels: [br_sig], share: 0.6,
+       note: "die-to-die wires on the bridge signal levels under the die-die gap (EMIB analog)"}
+    - {id: gnd_die, kind: plane_tie, from: coarse_d1, plane: g_pl_1, share: 0.3, note: "DIE 1 GND bumps tied to the L3 plane"}
+    - {id: gnd_bga, kind: plane_tie, from: bga, plane: g_bpl_4, share: 0.3, note: "BGA GND balls tied to the B8 plane"}
+    - {id: esc, kind: escape, from: coarse_d1, levels: [g_fsig], share: 0.2, length_um: 400,
+       note: "local escape wiring on the L2 fine-line level"}
+
 callouts:
   - {target: glass, text: "Glass core {core_h_um} um",
-     note: "{core_h_um} um glass core (Shinko 2-2-2 prototype; Georgia Tech panel also {gt_core_h_um} um); {thin_core_h_um} um core with DF-PID-filled TGVs in another TV; Intel core thickness not reported"}
+     note: "{core_h_um} um glass core (Shinko 2-2-2 prototype; Georgia Tech panel also {gt_core_h_um} um); {thin_core_h_um} um core with DF-PID-filled conformal TGVs in another TV; Intel core thickness not reported"}
   - {target: tgv, text: "TGV {tgv_d_um} um, {tgv_pitch_um} um pitch",
-     note: "Cu-filled TGV {tgv_d_um} um diameter at {tgv_pitch_um} um minimum pitch through {core_h_um} um glass (aspect ratio {tgv_ar})"}
+     note: "Cu-filled TGV {tgv_d_um} um diameter at {tgv_pitch_um} um minimum pitch through {core_h_um} um glass (aspect ratio {tgv_ar}); taper and Cu caps are template"}
   - {target: sbt_bu_top, text: "{sbt_layers} glass core substrate",
      note: "Intel {sbt_layers} glass core substrate on a {panel} mm panel; build-up layer drawn as {abf_um} um ABF + {cu_um} um Cu (Georgia Tech glass panel)"}
-  - {target: bu_top_cu, text: "Routing L/S {line_um}/{space_um} um",
-     note: "UCIe-S x8 routing {line_um}/{space_um} um; test structures down to {min_line_um} um lines; microvias from {mvia_d_um} um"}
+  - {target: g_sig, text: "Routing L/S {line_um}/{space_um} um",
+     note: "UCIe-S x8 routing {line_um}/{space_um} um on L4-L10 and B1-B9; L2 drawn at the finest {min_line_um}/{min_space_um} um; signal and GND/PWR plane levels alternate (mock-up)"}
+  - {target: mv_gs, text: "Microvias {mvia_d_um} um onto TGV",
+     note: "femtosecond-laser microvias from {mvia_d_um} um in {abf_um} um ABF, stacked onto the Cu cap over each TGV"}
   - {target: bridge, text: "{bridge_n} EMIB in top layers",
-     note: "{bridge_n} EMIB bridges embedded in the top build-up layers of the Intel glass substrate; bridge size and depth not reported (EMIB analog drawn)"}
+     note: "{bridge_n} EMIB bridges embedded in the top build-up layers of the Intel glass substrate; bridge size, depth and levels not reported (EMIB analog drawn)"}
+  - {target: d2d, text: "D2D wires on the bridge"}
   - {target: coarse_d1, text: "Die-bump pads {coarse_pitch_um} um",
      note: "UCIe-S x8 terminal bump pads at {coarse_pitch_um} um pitch on the glass panel; no die attached in any glass-core TV (dies are template)"}
   - {target: core, text: "Glass replaces laminate + PTH", refs: [ectc51846.2026.00134-a-L03.material]}
@@ -217,6 +412,11 @@ insets:
     box_mm: ["-sbt_w_mm / 2 + 1", -0.5, "-sbt_w_mm / 2 + 2", 0.5]
     z: ["bottom:sbt_bu_bot", "top:sbt_bu_top"]
     view: front
+  - id: bridge_d2d
+    label: "Bridge levels under the Die-die gap"
+    box_mm: ["bridge_px_mm / 2 - 0.25", -0.25, "bridge_px_mm / 2 + 0.25", 0.25]
+    z: ["bottom:bridge", "bottom:die1"]
+    view: front
   - id: bridge_gap
     label: "Die-die gap over the EMIB"
     box_mm: ["bridge_px_mm / 2 - bridge_w_mm / 2 - 0.5", -1, "bridge_px_mm / 2 + bridge_w_mm / 2 + 0.5", 1]
@@ -226,4 +426,9 @@ insets:
     label: "Substrate cross-section"
     box_mm: [-0.6, -0.6, 0.6, 0.6]
     z: ["bottom:sbt_bu_bot", "top:die1"]
+    view: front
+  - id: die_bga
+    label: "Die bump to BGA: vias, TGV, planes"
+    box_mm: [-1.0, -0.25, 1.0, 0.25]
+    z: ["bottom:bga", "top:coarse_d1"]
     view: front

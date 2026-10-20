@@ -81,6 +81,9 @@ params:
   ubump_d_um:
     analog: ectc51909.2023.00155-a-i1.diameter_um
     note: "micro-bump diameter not reported for CoWoS-S; analog = 40 um-pitch Cu/SnAg bump of a Si-interposer TV"
+  ubump_cap_um:
+    analog: ectc51909.2023.00155-a-i1.cap_height_um
+    note: "solder cap height not reported; cap of the same analog joint as the standoff (R2 2026-10-20: joint drawn as Cu column + solder cap)"
   ubump_h_um:
     template: "r0 + r1"
     refs: [ectc51909.2023.00155-a-i1.height_um, ectc51909.2023.00155-a-i1.cap_height_um]
@@ -89,27 +92,146 @@ params:
   c4_d_um:
     analog: ectc51909.2023.00155-a-i3.diameter_um
     note: "Cu-pillar diameter not reported for CoWoS-S; analog = 150 um-pitch Cu/SnAg pillar of a Si-interposer TV"
+  c4_cap_um:
+    analog: ectc51909.2023.00155-a-i3.cap_height_um
+    note: "solder cap height not reported; cap of the same analog joint as the standoff (R2 2026-10-20: joint drawn as Cu column + solder cap)"
   c4_h_um:
     template: "r0 + r1"
     refs: [ectc51909.2023.00155-a-i3.height_um, ectc51909.2023.00155-a-i3.cap_height_um]
     note: "C4 standoff = Cu + SnAg of the 150 um-pitch analog pillar (backbone studied 60-90 um only by FEA)"
   tsv_pitch_um:
-    analog: eptc59621.2023.10457670-a-i1.pitch_min_um
-    note: "TSV pitch not reported for CoWoS-S; analog = 10 um x 100 um via-first TSV daisy chain on a Si interposer"
+    template: "c4_pitch_um"
+    refs: [ectc.2013.6575597-a-i3.notes, ectc.2013.6575597-a-i2.ic_type]
+    note: "TSV pitch not reported for CoWoS-S; the 2013 TV puts the C4 directly on the TSV with no backside RDL (C4 row notes; 1 TSV per C4 in fig ectc.2013.6575597-f06), so one TSV column is drawn under each C4 (harmonized rule, TEMPLATE_FORMAT.md 'Template rules': TSV pitch = endpoint pitch when no routing level lies between them)"
+  # ---- interposer stack (DevLog-011 routing). Top -> bottom: passivation / Al RDL + micro-bump pads / via level /
+  # Cu3 (signal) / IMD / Cu2 (GND plane) / IMD / Cu1 (signal, TSV landing) / Si 100 um with TSVs / C4 pad level /
+  # backside passivation. The 2013 TV states 3 Cu damascene levels at < 1 um pitch, an Al RDL at 5 um pitch and the C4
+  # directly on the TSV (no backside RDL); every BEOL / backside thickness and L/S is an analog (ROUTING_REF_si.md).
+  si_h_um: {ref: ectc.2013.6575597-a-L05.thickness_um, note: "Si core thinned to 100 um = TSV depth (2013 TV)"}
+  pass_h_um:
+    analog: ectc51909.2023.00230-a-L02.thickness_um
+    note: "top passivation over the Al pads not reported for CoWoS; analog = front RDL passivation (CVD oxide) of the Si photonic interposer that supplies the Al RDL analog"
   al_h_um:
     analog: ectc51909.2023.00230-a-L03.thickness_um
     note: "Al RDL thickness not reported; analog = Al front RDL of a Si photonic interposer"
+  al_line_um:
+    template: 2.5
+    refs: [ectc.2013.6575597-a-L03.feature, ectc.2013.6575597-a-L03.notes]
+    note: "Al RDL line pitch 5 um (text); line / space split not reported, drawn 50 / 50"
+  v_al_h_um:
+    analog: ectc51909.2023.00009-a-L04.thickness_um
+    note: "via level between the Al RDL and the top Cu level not reported; analog = top via interlayer (SiO2) of a Si-interposer BEOL"
+  v_al_d_um:
+    analog: ectc51909.2023.00009-a-L04.via_diameter_um
+    note: "Al-to-Cu via size not reported; analog = top via of the same Si-interposer BEOL"
   cu_h_um:
-    analog: ectc51909.2023.00174-d-L02.thickness_um
-    note: "Cu damascene level thickness not reported for CoWoS-S; analog = TSMC LSI-1 dual-damascene Cu level"
-  si_h_um: {template: "ip_h_um - al_h_um - cu_n * cu_h_um", note: "Si core = interposer thickness - BEOL (template BEOL)"}
+    analog: eptc59621.2023.10457670-a-L03.thickness_um
+    note: "Cu damascene level thickness not reported for CoWoS-S; analog = 1 um dual-damascene Cu level (M1-M5) of a 300 mm TSV Si interposer"
+  cu_line_um:
+    template: r0
+    refs: [ectc51909.2023.00108-a-L01.line_um, ectc.2013.6575597-a-L04.feature]
+    note: "Cu damascene L/S not reported; CoWoS text gives a pitch below 1 um; analog = 0.4 / 0.4 um CoWoS-based BEOL Cu of a photonic interposer (iOIS)"
+  cu_space_um:
+    template: r0
+    refs: [ectc51909.2023.00108-a-L01.space_um, ectc.2013.6575597-a-L04.feature]
+    note: "Cu damascene space not reported; analog = 0.4 / 0.4 um CoWoS-based BEOL Cu (iOIS)"
+  imd_h_um:
+    analog: ectc51909.2023.00009-a-L06.thickness_um
+    note: "inter-metal (via) dielectric thickness not reported; analog = 0.54 um SiO2 via-2 interlayer of a Si-interposer BEOL, the same row that supplies the 0.3 um via (via and IMD from one row, audit A1 S5)"
+  bv_d_um:
+    analog: ectc51909.2023.00009-a-L06.via_diameter_um
+    note: "BEOL via size not reported; analog = 0.3 um via of a Si-interposer BEOL via interlayer"
+  tsv_liner_um:
+    analog: ectc51909.2023.00307-a-L05.thickness_um
+    refs: [ectc.2013.6575597-a-i2.metallurgy]
+    note: "CoWoS states an oxide liner without thickness; analog = TEOS liner on the sidewall of a 10 um TSV"
+  tsv_land_um:
+    template: "1.5 * tsv_d_um"
+    note: "TSV landing pad on Cu1 not reported; harmonized rule: drawn 1.5x the TSV diameter (Cu1 pad wider than the TSV in ectc.2013.6575597-f06 and eptc59621.2023.10457670-f01; ratio estimated from the figures)"
+  bs_pad_h_um:
+    analog: ectc51909.2023.00155-a-L13.thickness_um
+    refs: [ectc.2013.6575597-a-i3.notes]
+    note: "C4 pad on the TSV at the interposer backside (C4 directly on TSV in the 2013 TV); thickness not reported; analog = backside Cu pad of a 2.5D Si-interposer TV"
+  bs_pi_h_um:
+    analog: ectc51909.2023.00155-a-L10.thickness_um
+    note: "backside passivation with C4 openings not reported; analog = backside polyimide of the same Si-interposer TV"
+  ip_tot_um:
+    template: "pass_h_um + al_h_um + v_al_h_um + cu_n * cu_h_um + (cu_n - 1) * imd_h_um + si_h_um + bs_pad_h_um + bs_pi_h_um"
+    note: "interposer part = front BEOL (analog levels) + 100 um Si + backside C4 pad level + passivation"
+  # ---- substrate stack: no CoWoS-S row reports the substrate; one analog TV (ectc51909.2023.00155-a, 2.5D Si
+  # interposer on a 4/2/4 build-up substrate, 1.6 mm total, 1.3 mm core) supplies counts, thicknesses, L/S and via.
+  # Top -> bottom: SR / L1 C4 pads / 2 x (dielectric, signal, dielectric, plane) / core / 2 x (plane, dielectric,
+  # signal, dielectric) / L8 BGA pads / SR; the last top plane and the first bottom plane are the core Cu levels.
   sbt_h_um:
     analog: ectc51909.2023.00155-a-c10.thickness_um
     note: "substrate thickness not reported for CoWoS-S; analog = 100 mm build-up substrate of a 50 x 50 mm Si-interposer TV"
   core_h_um:
     analog: ectc51909.2023.00155-a-L17.thickness_um
     note: "core thickness not reported; analog = CCL core of the same analog substrate"
-  bu_h_um: {template: "(sbt_h_um - core_h_um) / 2", note: "build-up + solder resist per side = (substrate - core) / 2 of the analog"}
+  bu_n:
+    analog: ectc51909.2023.00155-a-L16.repeat
+    note: "build-up layers per side not reported for CoWoS-S; analog = 4/2/4 substrate of the same Si-interposer TV"
+  sr_h_um:
+    analog: ectc51909.2023.00155-a-L15.thickness_um
+    note: "solder resist not reported for CoWoS-S; analog = top SR of the same substrate (bottom SR equal, -L19)"
+  bu_diel_um:
+    analog: ectc51909.2023.00155-a-L16.thickness_um
+    note: "build-up dielectric per layer; analog = build-up film of the same substrate"
+  bu_cu_um:
+    template: "(sbt_h_um - core_h_um - 2 * sr_h_um - 2 * bu_n * bu_diel_um) / (2 * bu_n + 2)"
+    note: "build-up Cu thickness not reported in the analog TV; closes its 1.6 mm total: (total - core - 2 SR - 8 dielectrics) / 10 Cu levels (4 build-up + 1 core Cu per side)"
+  bu_line_um:
+    analog: ectc51909.2023.00155-a-L16.line_um
+    note: "build-up line width; analog = same substrate"
+  bu_space_um:
+    analog: ectc51909.2023.00155-a-L16.space_um
+    note: "build-up space; analog = same substrate"
+  plane_space_um:
+    template: 20
+    refs: [tcpmt.2026.3736233-a-L04.notes]
+    note: "plane antipad clearance not reported for FCBGA substrates; plate-to-via-pad gap of 20 um of a glass-embedded package plane level (notes cell)"
+  mv_d_um:
+    analog: ectc51909.2023.00155-a-i6.diameter_um
+    note: "microvia top diameter; analog = build-up via of the same substrate"
+  mv_bot_um:
+    template: "mv_d_um * 38 / 42"
+    refs: [ectc51687.2025.00378-a-L04.notes]
+    note: "microvia bottom diameter not reported for cored FCBGA; bottom / top 38 / 42 um measured on a 40 um laser via in dry-film dielectric applied to the top diameter"
+  mv_land_um:
+    template: "mv_d_um * r0 / r1"
+    refs: [001c.147203-a-i1.pad_x_um, 001c.147203-a-i1.diameter_um]
+    note: "microvia land not reported for a cored organic substrate; harmonized rule, TEMPLATE_FORMAT.md 'Template rules': land / via = 110 / 70 (pad >= 110 um for a 70 um Cu-filled stacked via: minimum design rule of a coreless 150 GHz AiP antenna substrate, R-G640)"
+  pth_d_um:
+    analog: ectc51909.2023.00155-a-i5.diameter_um
+    note: "core through-hole diameter; analog = same substrate"
+  pth_pitch_um:
+    analog: ectc51687.2025.00148-a-i4.pitch_um
+    note: "PTH pitch not given in the analog TV; analog = 500 um through-hole pitch of a 1.2 mm-core 4-2-4 FC substrate"
+  pth_land_um:
+    template: "pth_d_um * 1.5"
+    refs: [ectc51687.2025.00148-a-i4.pitch_um]
+    note: "PTH land not reported; harmonized rule, TEMPLATE_FORMAT.md 'Template rules': 1.5 x the hole, read from the 4-2-4 FCBGA schematic (fig ectc51687.2025.00148-f01, scaled by the 500 um TH pitch)"
+  pth_wall_um:
+    template: "(r0 + r1 + r2 + r3) / 4"
+    refs: [eptc62800.2024.10909809-a-m17.value, eptc62800.2024.10909809-a-m18.value, eptc62800.2024.10909809-a-m19.value, eptc62800.2024.10909809-a-m20.value]
+    note: "PTH plating not reported for a cored HPC substrate; harmonized rule, TEMPLATE_FORMAT.md 'Template rules': mean of the minimum barrel Cu of legs 1-4 of a thin-core through hole (11-18.5 um, mean 14.875 um)"
+  ubump_pad_um:
+    analog: ectc51909.2023.00155-a-i1.pad_x_um
+    note: "interposer micro-bump pad not reported for CoWoS-S (Al pad, size not given); analog = 27 x 27 um Cu pad of a 40 um-pitch Si-interposer TV"
+  c4_pad_um:
+    template: 75
+    refs: [ectc51909.2023.00155-a-L13.notes]
+    note: "C4 pad on the interposer backside not reported; 75 um pads at 150 um pitch of a Si-interposer TV (notes text)"
+  c4_open_um:
+    analog: ectc51909.2023.00155-a-m5.value
+    note: "substrate top SR opening not reported; analog = measured top SR opening (design 50 um) of the same Si-interposer substrate"
+  bga_pad_um:
+    template: 700
+    refs: [ectc51529.2024.00265-a-L10.feature, ectc51529.2024.00265-a-i2.notes]
+    note: "substrate BGA pad not reported; SMD BGA pad of 700 um at 1.0 mm pitch of an FCBGA TV (feature / notes text)"
+  bga_open_um:
+    analog: ectc51909.2023.00155-a-m6.value
+    note: "substrate bottom SR opening not reported; analog = measured bottom SR opening (design 500 um) of a large Si-interposer substrate"
   ring_h_um:
     analog: ectc51909.2023.00155-a-c11.thickness_um
     note: "Cu ring thickness not reported for CoWoS-S; analog = Cu stiffener of the same analog Si-interposer TV"
@@ -136,7 +258,7 @@ parts:
     material: silicon
     w_mm: ip_w_mm
     d_mm: ip_d_mm
-    h_um: ip_h_um
+    h_um: ip_tot_um
     on: substrate
     standoff: c4
     repeat: {ny: ip_n, pitch_y_mm: ip_py_mm}
@@ -209,47 +331,163 @@ parts:
      note: "ring size not reported; outer edge assumed flush with the substrate edge"}
 
 layers:
+  # Interposer front (BEOL), top -> bottom. Level usage (pads, signal, GND plane) is a mock-up: the 2013 TV reports only
+  # "3 Cu levels, optional MIM between Cu1 and Cu2"; signal / plane alternation follows the GSGS Si-interposer link model
+  # (ectc51529.2024.00144-c-L01) and the stripline-like D2D shielding in ROUTING_REF_si.md section 3.
   - part: interposer
+    id: ip_front
     pattern:
-      - {id: ip_al, name: "Al RDL (top)", material: other, material_label: "Al", role: conductor, h_um: al_h_um}
-  - part: interposer
-    repeat: cu_n
-    pattern:
-      - {id: ip_cu, name: "Cu damascene level", material: copper, material_label: "Cu damascene (sub-um pitch)",
-         role: conductor, h_um: cu_h_um}
+      - {id: ip_pass, name: "Top passivation", material: oxide,
+         material_label: "passivation (CVD oxide in the analog; not stated for CoWoS)", role: passivation, h_um: pass_h_um}
+      - {id: ip_al, name: "Al RDL + micro-bump pads", material: other, material_label: "Al", role: conductor,
+         h_um: al_h_um,
+         route: {use: mixed, dir: y, line_um: al_line_um, space_um: al_line_um, matrix: oxide}}
+      - {id: ip_val, name: "Al-Cu via level", material: oxide, material_label: "IMD (not stated for CoWoS)",
+         role: dielectric, h_um: v_al_h_um}
+      - {id: ip_m3, name: "Cu3 (signal, D2D)", material: copper, material_label: "Cu damascene (sub-um pitch)",
+         role: conductor, h_um: cu_h_um,
+         route: {use: signal, dir: x, line_um: cu_line_um, space_um: cu_space_um, matrix: oxide}}
+      - {id: ip_v3, name: "IMD Cu3-Cu2", material: oxide, material_label: "IMD (not stated for CoWoS)",
+         role: dielectric, h_um: imd_h_um}
+      - {id: ip_m2, name: "Cu2 (GND plane)", material: copper, material_label: "Cu damascene",
+         role: conductor, h_um: cu_h_um,
+         route: {use: plane, space_um: cu_space_um, matrix: oxide}}
+      - {id: ip_v2, name: "IMD Cu2-Cu1", material: oxide, material_label: "IMD (not stated for CoWoS)",
+         role: dielectric, h_um: imd_h_um}
+      - {id: ip_m1, name: "Cu1 (signal, TSV landing)", material: copper, material_label: "Cu damascene (sub-um pitch)",
+         role: conductor, h_um: cu_h_um,
+         route: {use: signal, dir: x, line_um: cu_line_um, space_um: cu_space_um, matrix: oxide}}
   - part: interposer
     pattern:
       - {id: ip_si, name: "Si core (TSV)", material: silicon, role: core, h_um: si_h_um}
+  - part: interposer
+    id: ip_back
+    pattern:
+      - {id: ip_bpad, name: "C4 pad level (on TSV)", material: copper, material_label: "Cu pad (C4 UBM on TSV)",
+         role: conductor, h_um: bs_pad_h_um, route: {use: pad, matrix: polymer_dielectric}}
+      - {id: ip_bpass, name: "Backside passivation", material: polymer_dielectric,
+         material_label: "polyimide in the analog (not stated for CoWoS)", role: passivation, h_um: bs_pi_h_um}
+  # Substrate (analog 4/2/4 stack), top -> bottom
   - part: substrate
     pattern:
-      - {id: sbt_bu_top, name: "Front build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+      - {id: sbt_sr_t, name: "Solder resist (top)", material: polymer_dielectric, material_label: "solder resist",
+         role: passivation, h_um: sr_h_um}
+      - {id: sbt_l1, name: "L1 C4 pad level", material: copper, role: conductor, h_um: bu_cu_um,
+         route: {use: pad, matrix: polymer_dielectric}}
+  - part: substrate
+    id: sbt_top
+    repeat: "bu_n / 2"
+    pattern:
+      - {id: bt_da, name: "Build-up dielectric (top, a)", material: organic_build_up, material_label: "build-up film",
+         role: dielectric, h_um: bu_diel_um}
+      - {id: bt_s, name: "Build-up Cu signal (top)", material: copper, role: conductor, h_um: bu_cu_um,
+         route: {use: signal, dir: alt, line_um: bu_line_um, space_um: bu_space_um, matrix: organic_build_up}}
+      - {id: bt_db, name: "Build-up dielectric (top, b)", material: organic_build_up, material_label: "build-up film",
+         role: dielectric, h_um: bu_diel_um}
+      - {id: bt_p, name: "Cu plane (top; 2 = core Cu)", material: copper, role: conductor, h_um: bu_cu_um,
+         route: {use: plane, space_um: plane_space_um, matrix: organic_build_up}}
+  - part: substrate
+    pattern:
       - {id: sbt_core, name: "Core", material: organic_laminate, material_label: "laminate core", role: core,
          h_um: core_h_um}
-      - {id: sbt_bu_bot, name: "Back build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+  - part: substrate
+    id: sbt_bot
+    repeat: "bu_n / 2"
+    pattern:
+      - {id: bb_p, name: "Cu plane (bottom; 1 = core Cu)", material: copper, role: conductor, h_um: bu_cu_um,
+         route: {use: plane, space_um: plane_space_um, matrix: organic_build_up}}
+      - {id: bb_da, name: "Build-up dielectric (bottom, a)", material: organic_build_up,
+         material_label: "build-up film", role: dielectric, h_um: bu_diel_um}
+      - {id: bb_s, name: "Build-up Cu signal (bottom)", material: copper, role: conductor, h_um: bu_cu_um,
+         route: {use: signal, dir: alt, line_um: bu_line_um, space_um: bu_space_um, matrix: organic_build_up}}
+      - {id: bb_db, name: "Build-up dielectric (bottom, b)", material: organic_build_up,
+         material_label: "build-up film", role: dielectric, h_um: bu_diel_um}
+  - part: substrate
+    pattern:
+      - {id: sbt_l8, name: "L8 BGA pad level", material: copper, role: conductor, h_um: bu_cu_um,
+         route: {use: pad, matrix: polymer_dielectric}}
+      - {id: sbt_sr_b, name: "Solder resist (bottom)", material: polymer_dielectric, material_label: "solder resist",
+         role: passivation, h_um: sr_h_um}
 
 arrays:
   - {id: ubump_soc, name: "SoC micro-bumps", kind: microbump, per: soc, lower: interposer, pitch_um: ubump_pitch_um,
-     diameter_um: ubump_d_um, height_um: ubump_h_um, note: "pitch rendered over the full die; the bump map is not reported"}
+     diameter_um: ubump_d_um, height_um: ubump_h_um, cap_h_um: ubump_cap_um, pad_um: ubump_pad_um,
+     note: "pitch rendered over the full die; the bump map is not reported"}
   - {id: ubump_hbm_a, name: "HBM micro-bumps", kind: microbump, per: hbm_a, lower: interposer,
-     pitch_um: ubump_pitch_um, diameter_um: ubump_d_um, height_um: ubump_h_um}
+     pitch_um: ubump_pitch_um, diameter_um: ubump_d_um, height_um: ubump_h_um, cap_h_um: ubump_cap_um, pad_um: ubump_pad_um}
   - {id: ubump_hbm_b, name: "HBM micro-bumps", kind: microbump, per: hbm_b, lower: interposer,
-     pitch_um: ubump_pitch_um, diameter_um: ubump_d_um, height_um: ubump_h_um}
-  - {id: tsv, name: "TSVs", kind: tsv, per: interposer, in: interposer, pitch_um: tsv_pitch_um, diameter_um: tsv_d_um,
-     note: "TSV placement not reported; rendered over the full interposer, through its full thickness"}
+     pitch_um: ubump_pitch_um, diameter_um: ubump_d_um, height_um: ubump_h_um, cap_h_um: ubump_cap_um, pad_um: ubump_pad_um}
   - {id: c4, name: "Cu-pillar C4", kind: cu_pillar, per: interposer, lower: substrate, pitch_um: c4_pitch_um,
-     diameter_um: c4_d_um, height_um: c4_h_um, note: "2013 TV: C4 directly on the TSV at the interposer backside"}
+     diameter_um: c4_d_um, height_um: c4_h_um, cap_h_um: c4_cap_um, pad_um: c4_pad_um, opening_um: c4_open_um,
+     note: "2013 TV: C4 directly on the TSV at the interposer backside"}
   - {id: bga, name: "BGA balls", kind: bga, under: substrate, region: {part: substrate}, pitch_um: bga_pitch_um,
-     diameter_um: bga_d_um, height_um: bga_h_um}
+     diameter_um: bga_d_um, height_um: bga_h_um, pad_um: bga_pad_um, opening_um: bga_open_um}
+
+routing:
+  layout_note: >-
+    mock-up routing: net layout, shares, jogs, level usage (signal / plane) and D2D lane placement are illustrative;
+    dims carry their own status
+  vias:
+    - {id: v_al, name: "Al-Cu3 via", kind: beol_via, through: ip_val, diameter_um: v_al_d_um,
+       fill: filled}
+    - {id: bv3, name: "BEOL via Cu3-Cu2", kind: beol_via, through: ip_v3, diameter_um: bv_d_um,
+       fill: filled, note: "dual damascene, one via per IMD, landing on the line of the level below (no separate capture pad); staircase in vertical chains (eptc59621.2023.10457670-f02)"}
+    - {id: bv2, name: "BEOL via Cu2-Cu1", kind: beol_via, through: ip_v2, diameter_um: bv_d_um,
+       fill: filled}
+    - {id: tsv, name: "TSV (Cu, oxide liner)", kind: tsv, through: ip_si, diameter_um: tsv_d_um, pitch_um: tsv_pitch_um,
+       land_um: tsv_land_um, liner_um: tsv_liner_um, fill: filled,
+       note: "TSV top on a Cu1 pad, bottom on the C4 pad (C4 directly on TSV, ectc.2013.6575597-f02 / -f06)"}
+    - {id: mv_ta, name: "Microvia (top)", kind: microvia, through: bt_da, diameter_um: mv_d_um,
+       bottom_diameter_um: mv_bot_um, land_um: mv_land_um, fill: filled}
+    - {id: mv_tb, name: "Microvia (top)", kind: microvia, through: bt_db, diameter_um: mv_d_um,
+       bottom_diameter_um: mv_bot_um, land_um: mv_land_um, fill: filled}
+    - {id: pth, name: "PTH (plugged)", kind: pth, through: sbt_core, diameter_um: pth_d_um, pitch_um: pth_pitch_um,
+       land_um: pth_land_um, wall_um: pth_wall_um, fill: plugged, plug: resin,
+       note: "Cu barrel with resin plug and Cu caps (ectc51909.2023.00155-f08, estc60143.2024.10712019-f09)"}
+    - {id: mv_ba, name: "Microvia (bottom)", kind: microvia, through: bb_da, diameter_um: mv_d_um,
+       land_um: mv_land_um, fill: filled,
+       note: "bottom-side laser vias open toward the BGA face (wide end down); drawn straight because the via contract tapers toward the bottom only"}
+    - {id: mv_bb, name: "Microvia (bottom)", kind: microvia, through: bb_db, diameter_um: mv_d_um,
+       land_um: mv_land_um, fill: filled}
+  nets:
+    # interposer segment (micro-bump -> BEOL -> TSV -> C4)
+    - {id: ip_io_soc, kind: vertical, from: ubump_soc, to: c4, style: staggered, jog: [ip_m1], share: 0.15,
+       note: "SoC I/O and supply to the substrate: via staircase down the BEOL, lateral move on Cu1 to a TSV over a C4"}
+    - {id: ip_io_hbm_a, kind: vertical, from: ubump_hbm_a, to: c4, style: staggered, jog: [ip_m1], share: 0.1}
+    - {id: ip_io_hbm_b, kind: vertical, from: ubump_hbm_b, to: c4, style: staggered, jog: [ip_m1], share: 0.1}
+    - {id: d2d_a, kind: lateral, from: ubump_soc, to: ubump_hbm_a, levels: [ip_m3, ip_m1], share: 0.5,
+       note: "SoC-HBM wires in the BEOL across the die gap; CoWoS-S lane density, levels and die gap not reported"}
+    - {id: d2d_b, kind: lateral, from: ubump_soc, to: ubump_hbm_b, levels: [ip_m3, ip_m1], share: 0.5}
+    - {id: ip_gnd_soc, kind: plane_tie, from: ubump_soc, plane: ip_m2, share: 0.3}
+    - {id: ip_gnd_hbm_a, kind: plane_tie, from: ubump_hbm_a, plane: ip_m2, share: 0.3}
+    - {id: ip_gnd_hbm_b, kind: plane_tie, from: ubump_hbm_b, plane: ip_m2, share: 0.3}
+    - {id: ip_gnd_c4, kind: plane_tie, from: c4, plane: ip_m2, share: 0.3, note: "GND from the C4 up a TSV to the Cu2 plane"}
+    - {id: ip_esc, kind: escape, from: ubump_soc, levels: [ip_al], share: 0.2, length_um: 80}
+    # substrate segment (C4 -> build-up -> PTH -> build-up -> BGA)
+    - {id: sbt_io, kind: vertical, from: c4, to: bga, style: stacked, jog: [bt_s, bb_s], share: 0.4,
+       note: "stacked microvia columns with fan-out jogs on the signal levels (C4 150 um -> PTH 500 um -> BGA 1000 um)"}
+    - {id: sbt_gnd_top, kind: plane_tie, from: c4, plane: bt_p_1, share: 0.25}
+    - {id: sbt_pwr_core, kind: plane_tie, from: c4, plane: bt_p_2, share: 0.25}
+    - {id: sbt_gnd_bot, kind: plane_tie, from: bga, plane: bb_p_2, share: 0.3}
+    - {id: sbt_esc, kind: escape, from: c4, levels: [bt_s_1], share: 0.2, length_um: 450}
 
 callouts:
   - {target: interposer, text: "Si interposer {ip_h_um} um",
      note: "Si interposer {ip_h_um} um ({ip_thin_um} um in the optimized TV2), {reticle_x}x reticle each"}
-  - {target: ip_cu, text: "{cu_n} damascene Cu levels, Al RDL",
+  - {target: ip_m3, text: "{cu_n} damascene Cu levels, Al RDL",
      note: "Front side: {cu_n} Cu damascene levels (pitch below 1 um) + Al RDL (5 um pitch); optional MIM",
      refs: [ectc.2013.6575597-a-L04.feature, ectc.2013.6575597-a-L03.feature, ectc.2013.6575597-a-L04.notes]}
   - {target: tsv, text: "TSV {tsv_d_um} x {tsv_depth_um} um",
-     note: "TSV {tsv_d_um} um x {tsv_depth_um} um deep (AR {tsv_ar}), ECP Cu with oxide liner",
-     refs: [ectc.2013.6575597-a-i2.metallurgy]}
+     note: "TSV {tsv_d_um} um x {tsv_depth_um} um deep (AR {tsv_ar}), ECP Cu with oxide liner; top on a Cu1 pad, bottom on the C4 pad (no backside RDL in the 2013 TV); TSV pitch, liner and land are analog / template",
+     refs: [ectc.2013.6575597-a-i2.metallurgy, ectc.2013.6575597-a-i3.notes]}
+  - {target: d2d_a, text: "SoC-HBM wires on Cu3, Cu1",
+     note: "Mock-up die-to-die wires in the interposer BEOL between the SoC and HBM bump fields, over a Cu2 GND plane; CoWoS-S lane density, wire levels and die gap are not reported (L/S from the iOIS CoWoS-based BEOL analog)"}
+  - {target: ip_io_soc, text: "BEOL via staircase to TSV",
+     note: "Vertical chain: micro-bump on Al pad, one via per IMD offset level by level, lateral move on Cu1 to a TSV above a C4 (ectc.2013.6575597-f06, eptc59621.2023.10457670-f02)"}
+  - {target: mv_ta, text: "Build-up levels, stacked microvias",
+     note: "No CoWoS-S row reports the substrate stack: layer count, thicknesses, L/S and via size come from the substrate of a Si-interposer peer TV (ectc51909.2023.00155-a); filled laser microvias stacked over the PTH caps"}
+  - {target: pth, text: "Plugged PTH through core",
+     note: "Plated through holes with resin plug and Cu caps through the laminate core; diameter, pitch, land and wall are analog / template values"}
   - {target: interposer, text: "2013 TV: {ubump_count_2013} micro-bumps",
      note: "2013 TSMC TV: one {ip2013_w_mm} x {ip2013_d_mm} mm interposer, {ubump_count_2013} micro-bumps"}
   - {target: ubump_soc, text: "Micro-bump pitch {ubump_pitch_um} um", note: "Micro-bump pitch {ubump_pitch_um} um (SoC and HBM)"}
@@ -279,6 +517,11 @@ insets:
     label: "Interposer edge, C4 and UF2"
     box_mm: ["ip_w_mm / 2 - 1.5", "ip_py_mm / 2 - 1.5", "ip_w_mm / 2 + 2", "ip_py_mm / 2 + 1.5"]
     z: ["top:substrate", "top:mold"]
+    view: front
+  - id: sbt_stack
+    label: "Substrate: C4, build-up, PTH, BGA"
+    box_mm: [-1.2, "ip_py_mm / 2 - 1.2", 1.2, "ip_py_mm / 2 + 1.2"]
+    z: ["bottom:bga", "bottom:interposer"]
     view: front
   - id: modules
     label: "Gap between the two interposer modules"

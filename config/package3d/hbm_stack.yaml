@@ -6,6 +6,11 @@
 # Base-die thickness is an analog; the top-die thickness follows from the 720 um height. The TSV / bump field is drawn
 # as a central band because the bump map is not reported. The core dies, their MUF gaps, micro-bumps and TSVs use the
 # vertical repeat (repeat nz / fill per), so the stack follows core_n.
+# Routing (DevLog-011): every die is face down (front BEOL toward the base, ectc51909.2023.00151-f01 zoom: bump pillar
+# under the upper die's BEOL, pad on the lower die's back side, TSV entering that pad). Each core / base die gets a
+# backside bump pad level, backside oxide + Si (TSV span), front M1, a via level and a front bump pad level; the top die
+# only the front levels. No HBM row reports die BEOL or TSV dims: the levels use the M1B / VIA1B / TSV-reveal oxide of
+# an imec TSV-middle die stack (ectc51906.2022.00179-c) and the TSV the 5 x 50 um TSV-middle of the same paper (analogs).
 # family_match: the families.yaml rule (technology names plus the paper fallbacks ectc51529.2024.00021,
 # ectc51846.2026.00024, vlsitechnologyandcir65830.2026.11577576).
 id: hbm_stack
@@ -54,17 +59,67 @@ params:
     template: "total_h_um - base_h_um - gap_um"
     note: "MUF wall from the first core die to the stack top (flush after mold grinding); first gap drawn as gap fill"
   ub_pitch_um:
-    analog: vlsitechnologyandcir46769.2022.9830182-j-i1.pitch_um
-    note: "MR-MUF bump pitch not reported; analog = 36 um micro-bump pitch of a 12-Hi micro-bump HBM model (untagged TV)"
+    ref: vlsitechnologyandcir46769.2022.9830182-j-i1.pitch_um
+    note: "36 um micro-bump pitch of the 12-Hi micro-bump HBM reference in the SoIC_HBM comparison (Fig. 8 table); that TV is a simulation model (STCO, tv_kind simulation_model), not a built stack; MR-MUF 8Hi pitch not reported"
+  ub_cap_um:
+    analog: ectc51909.2023.00155-a-i2.cap_height_um
+    note: "solder cap height not reported; cap of the same analog bump row as the bump diameter (R2 2026-10-20: joint drawn as Cu column + solder cap)"
   ub_d_um:
     analog: ectc51909.2023.00155-a-i2.diameter_um
     note: "bump diameter not reported; analog = 18 um Cu/SnAg bump on a mock-HBM die (35 um pitch, 2.5D TV)"
-  tsv_pitch_um: {template: "ub_pitch_um", note: "one TSV under each bump column assumed; TSV pitch not reported"}
+  ub_pad_um:
+    analog: ectc51909.2023.00155-a-i2.pad_x_um
+    note: "micro-bump pad not reported; analog = 27 um pad of the same mock-HBM bump"
+  tsv_pitch_um: {template: "ub_pitch_um", note: "one TSV under each bump of the central bundle assumed (TSV lines at the bump pitch in fig ectc51909.2023.00151-f01); TSV pitch not reported"}
   tsv_d_um:
-    analog: ectc51906.2022.00031-b-i3.diameter_um
-    note: "core-die TSV size not reported (TSVs shown, ectc51909.2023.00151-a-i2); analog = 5 x 50 um TSV of a D2W die stack"
+    analog: ectc51906.2022.00179-b-i5.diameter_um
+    note: "core-die TSV size not reported (TSVs shown, ectc51909.2023.00151-a-i2); analog = 5 x 50 um TSV-middle of a D2W micro-bump die stack"
     refs: [ectc51909.2023.00151-a-i2.ic_type]
-  band_d_mm: {template: 1.0, note: "TSV / bump field location and size not reported; drawn as a 1 mm central band"}
+  tsv_land_um:
+    template: "1.5 * tsv_d_um"
+    note: "TSV landing pad on M1 not reported; 1.5 x the TSV diameter (M1 pad wider than the TSV in eptc59621.2023.10457670-f01; ratio estimated from the figure)"
+  tsv_liner_um:
+    analog: ectc51909.2023.00307-a-L05.thickness_um
+    note: "TSV liner not reported for HBM; analog = 0.4 um TEOS liner on a TSV sidewall"
+  # ---- template: die levels (analog set = imec TSV-middle die ectc51906.2022.00179-c)
+  bp_h_um:
+    analog: ectc51906.2022.00179-c-L06.thickness_min_um
+    note: "backside bump pad level not reported; analog = 1.06 um M1B damascene level on the revealed TSVs of a TSV-middle die"
+  box_h_um:
+    analog: ectc51906.2022.00179-c-L07.thickness_um
+    note: "backside dielectric after TSV reveal not reported; analog = 3 um low-temperature oxide of the same TSV-middle die"
+  m1_h_um:
+    template: "bp_h_um"
+    note: "front M1 (TSV landing) not reported; drawn with the M1B thickness of the TSV-middle analog (its front M1F has no thickness)"
+  m1_line_um:
+    analog: ectc51906.2022.00179-c-L06.line_um
+    note: "M1 line width not reported; analog = 1 um M1B CD of the TSV-middle die"
+  m1_space_um: {template: "m1_line_um", note: "M1 space not reported; drawn equal to the analog line (1 / 1)"}
+  v1_h_um:
+    analog: ectc51906.2022.00179-c-L05.thickness_min_um
+    note: "front via level not reported; analog = 0.52 um VIA1B level of the TSV-middle die (the device BEOL above M1 is collapsed into this level)"
+  v1_d_um:
+    analog: ectc51906.2022.00179-c-L05.via_diameter_um
+    note: "BEOL via CD not reported; analog = 0.54 um VIA1B of the TSV-middle die"
+  v1_land_um: {template: "m1_line_um", note: "via lands on a minimum-width (1 um) line of the analog (layout not reported)"}
+  fp_h_um:
+    template: "bp_h_um"
+    note: "front bump pad level not reported; drawn with the M1B thickness of the analog (pillar UBM counted in the joint)"
+  core_si_um:
+    template: "core_h_um - bp_h_um - box_h_um - m1_h_um - v1_h_um - fp_h_um"
+    note: "core-die Si = die - backside pad - backside oxide - front levels (template levels)"
+  base_si_um:
+    template: "base_h_um - bp_h_um - box_h_um - m1_h_um - v1_h_um - fp_h_um"
+    note: "base-die Si = die - backside pad - backside oxide - front levels (template levels)"
+  top_si_um:
+    template: "top_h_um - m1_h_um - v1_h_um - fp_h_um"
+    note: "top-die Si = die - front levels (no TSV, no backside levels)"
+  band_d_mm:
+    template: 1.0
+    note: "bump field size not reported; the SAM image fig ectc51909.2023.00151-f06 shows the bump array as a band across the die center; band depth 1 mm drawn (not dimensioned)"
+  tsv_band_w_mm:
+    template: "core_w_mm * 80 / 470"
+    note: "TSV bundle width not reported; the HBM3 8Hi schematic fig ectc51909.2023.00151-f03 draws the TSVs as one central bundle over ~80 of the ~470 px die width (schematic proportion), with bumps across the full width; the SEM fig ectc51909.2023.00151-f01 shows TSV lines under the central bumps only (R2 2026-10-20)"
   band_c_mm: {template: 0, note: "band centered on the die (layout not reported)"}
   bot_pitch_um:
     analog: ectc51909.2023.00155-a-i2.pitch_um
@@ -72,6 +127,9 @@ params:
   bot_d_um:
     analog: ectc51909.2023.00155-a-i2.diameter_um
     note: "base-die bump diameter not reported; analog = the same mock-HBM bump"
+  bot_cap_um:
+    analog: ectc51909.2023.00155-a-i2.cap_height_um
+    note: "solder cap height not reported; cap of the same analog joint as the standoff (R2 2026-10-20: joint drawn as Cu column + solder cap)"
   bot_h_um:
     template: "r0 + r1"
     refs: [ectc51909.2023.00155-a-i2.height_um, ectc51909.2023.00155-a-i2.cap_height_um]
@@ -79,7 +137,7 @@ params:
 
 parts:
   - {id: base, name: "Base logic die", kind: die, material: silicon, w_mm: base_w_mm, d_mm: base_d_mm,
-     h_um: base_h_um, base: true, explode_group: 0, note: "bonded as the base logic wafer (chip-to-wafer stacking)"}
+     h_um: base_h_um, base: true, explode_group: 0, note: "bonded as the base logic wafer (chip-to-wafer stacking); face down, TSVs to its backside pads"}
   - id: core
     name: "Core DRAM die"
     kind: hbm
@@ -104,6 +162,59 @@ parts:
      gap_um: gap_um, explode_group: 17, xray_default: true,
      note: "wafer-level mold that fills the gaps also encapsulates the stack (MR-MUF flow, ectc51909.2023.00151); wall flush with the base-die edge is a layout derived from the die sizes, not a reported edge geometry"}
 
+layers:
+  # core dies (every level): backside pad on the revealed TSVs / backside oxide + Si (TSV span) / front BEOL
+  - part: core
+    pattern:
+      - {id: cd_bp, name: "Core backside bump pads", material: copper, material_label: "Cu (not specified)",
+         role: conductor, h_um: bp_h_um, route: {use: pad, matrix: other}}
+  - part: core
+    id: cd_body
+    pattern:
+      - {id: cd_box, name: "Core backside oxide (TSV reveal)", material: other,
+         material_label: "backside dielectric (not specified)", role: dielectric, h_um: box_h_um}
+      - {id: cd_si, name: "Core Si (TSV)", material: silicon, role: core, h_um: core_si_um}
+  - part: core
+    pattern:
+      - {id: cd_m1, name: "Core M1 (TSV landing)", material: copper, material_label: "Cu (not specified)",
+         role: conductor, h_um: m1_h_um,
+         route: {use: signal, dir: x, line_um: m1_line_um, space_um: m1_space_um, matrix: other}}
+      - {id: cd_v1, name: "Core BEOL via level (collapsed)", material: other,
+         material_label: "BEOL dielectric (not specified)", role: dielectric, h_um: v1_h_um}
+      - {id: cd_fp, name: "Core front bump pads", material: copper, material_label: "Cu (not specified)",
+         role: conductor, h_um: fp_h_um, route: {use: pad, matrix: other}}
+  # base logic die: same level set
+  - part: base
+    pattern:
+      - {id: bs_bp, name: "Base backside bump pads", material: copper, material_label: "Cu (not specified)",
+         role: conductor, h_um: bp_h_um, route: {use: pad, matrix: other}}
+  - part: base
+    id: bs_body
+    pattern:
+      - {id: bs_box, name: "Base backside oxide (TSV reveal)", material: other,
+         material_label: "backside dielectric (not specified)", role: dielectric, h_um: box_h_um}
+      - {id: bs_si, name: "Base Si (TSV)", material: silicon, role: core, h_um: base_si_um}
+  - part: base
+    pattern:
+      - {id: bs_m1, name: "Base M1 (TSV landing)", material: copper, material_label: "Cu (not specified)",
+         role: conductor, h_um: m1_h_um,
+         route: {use: signal, dir: y, line_um: m1_line_um, space_um: m1_space_um, matrix: other}}
+      - {id: bs_v1, name: "Base BEOL via level (collapsed)", material: other,
+         material_label: "BEOL dielectric (not specified)", role: dielectric, h_um: v1_h_um}
+      - {id: bs_fp, name: "Base front bump pads", material: copper, material_label: "Cu (not specified)",
+         role: conductor, h_um: fp_h_um, route: {use: pad, matrix: other}}
+  # top die: front levels only
+  - part: top
+    pattern:
+      - {id: tp_si, name: "Top-die Si", material: silicon, role: core, h_um: top_si_um}
+      - {id: tp_m1, name: "Top-die M1", material: copper, material_label: "Cu (not specified)",
+         role: conductor, h_um: m1_h_um,
+         route: {use: signal, dir: x, line_um: m1_line_um, space_um: m1_space_um, matrix: other}}
+      - {id: tp_v1, name: "Top-die BEOL via level (collapsed)", material: other,
+         material_label: "BEOL dielectric (not specified)", role: dielectric, h_um: v1_h_um}
+      - {id: tp_fp, name: "Top-die front bump pads", material: copper, material_label: "Cu (not specified)",
+         role: conductor, h_um: fp_h_um, route: {use: pad, matrix: other}}
+
 arrays:
   - id: ub
     name: "Micro-bumps"
@@ -114,15 +225,39 @@ arrays:
     pitch_um: ub_pitch_um
     diameter_um: ub_d_um
     height_um: gap_um
-    note: "mass-reflow joints, flux dipped (ectc51909.2023.00151-a-i1); bump map not reported, central band drawn"
+    cap_h_um: ub_cap_um
+    pad_um: ub_pad_um
+    note: "mass-reflow joints, flux dipped (ectc51909.2023.00151-a-i1); bump map not reported, central band drawn across the full die width; outside the central TSV bundle the bumps are support / dummy bumps with no TSV (figs ectc51909.2023.00151-f01, -f03)"
   - {id: ub_top, name: "Micro-bumps (top die)", kind: microbump, upper: top, lower: core, region: *band,
-     pitch_um: ub_pitch_um, diameter_um: ub_d_um, height_um: gap_um}
-  - &tsv {id: tsv_base, name: "Base-die TSVs", kind: tsv, in: base, region: *band, pitch_um: tsv_pitch_um,
-          diameter_um: tsv_d_um, note: "TSV size and placement not reported; one TSV per bump in the central band"}
-  - {<<: *tsv, id: tsv, name: "Core-die TSVs", in: core}
+     pitch_um: ub_pitch_um, diameter_um: ub_d_um, height_um: gap_um, cap_h_um: ub_cap_um, pad_um: ub_pad_um}
   - {id: bumps, name: "Base-die bumps", kind: microbump, under: base, region: *band, pitch_um: bot_pitch_um,
-     diameter_um: bot_d_um, height_um: bot_h_um,
+     diameter_um: bot_d_um, height_um: bot_h_um, cap_h_um: bot_cap_um, pad_um: ub_pad_um,
      note: "bumps to the interposer (2.5D SiP proxy, ectc51909.2023.00151-b); bump map not reported"}
+
+routing:
+  layout_note: >-
+    mock-up routing: one straight TSV column per bump of the central TSV bundle; bumps outside the bundle are support /
+    dummy bumps (ectc51909.2023.00151-f01 / -f03 show TSV lines under the central bump columns only), net shares and the
+    base-die escape traces are illustrative; dims carry their own status
+  vias:
+    - {id: tsv_core, name: "Core-die TSV", kind: tsv, through: cd_body, diameter_um: tsv_d_um, land_um: tsv_land_um,
+       pitch_um: tsv_pitch_um, liner_um: tsv_liner_um, fill: filled,
+       region: &tsvband {x_mm: band_c_mm, y_mm: band_c_mm, w_mm: tsv_band_w_mm, d_mm: band_d_mm},
+       note: "TSV from the front M1 through Si and backside oxide into the backside bump pad (TSV enters the pad, ectc51909.2023.00151-f01 zoom)"}
+    - {id: tsv_base, name: "Base-die TSV", kind: tsv, through: bs_body, diameter_um: tsv_d_um, land_um: tsv_land_um,
+       pitch_um: tsv_pitch_um, liner_um: tsv_liner_um, fill: filled, region: *tsvband}
+    - {id: v1_core, name: "Core BEOL via", kind: beol_via, through: cd_v1, diameter_um: v1_d_um, land_um: v1_land_um,
+       fill: filled}
+    - {id: v1_base, name: "Base BEOL via", kind: beol_via, through: bs_v1, diameter_um: v1_d_um, land_um: v1_land_um,
+       fill: filled}
+    - {id: v1_top, name: "Top-die BEOL via", kind: beol_via, through: tp_v1, diameter_um: v1_d_um, land_um: v1_land_um,
+       fill: filled}
+  nets:
+    # top-die bump -> core 7 ... core 1 (pad, TSV, M1, via, pad, bump) -> base TSV -> base front pad -> base bump
+    - {id: tsv_col, kind: vertical, from: ub_top, to: bumps, style: stacked, jog: [bs_m1], share: 0.6,
+       note: "straight TSV columns through every core die and the base die (ectc51909.2023.00151-f03); the base die M1 moves the net from the 36 um core-bump / TSV grid to its 35 um interposer-bump grid"}
+    # base-die PHY / logic texture: bump -> front pad -> via -> short M1 trace
+    - {id: base_esc, kind: escape, from: bumps, levels: [bs_m1], share: 0.3, length_um: 40}
 
 callouts:
   - {target: base, text: "Base die {base_w_mm} x {base_d_mm} mm"}
@@ -141,6 +276,16 @@ callouts:
   - {target: ub, text: "HB variant: no bump, no MUF", refs: [ectc51909.2023.00179-a-L02.material]}
   - {target: ub, text: "HB Cu pad {hb_pad_um} um"}
   - {target: top, text: "{hcb_n}-high by hybrid Cu bonding"}
+  - {target: ub, text: "Support bumps outside TSV bundle",
+     note: "bumps span the die width; only the central bundle carries TSVs (figs ectc51909.2023.00151-f01, -f03); MR-MUF uses more bumps than TC-NCF (row text)",
+     refs: [ectc51909.2023.00151-c-i1.notes]}
+  - {target: tsv_core, text: "TSV column through each die",
+     note: "TSV dims not reported for HBM (TSVs drawn only, ectc51909.2023.00151-a-i2); drawn as the TSV-middle of a D2W micro-bump stack (analog ectc51906.2022.00179) with oxide liner, from the front M1 to the backside bump pad",
+     refs: [ectc51909.2023.00151-a-i2.notes]}
+  - {target: cd_m1, text: "Die BEOL: M1, via, pad",
+     note: "front BEOL levels and backside pad of each die drawn with the M1B / VIA1B / backside-oxide dims of an imec TSV-middle die (analogs); the DRAM BEOL is not reported"}
+  - {target: tsv_col, text: "Signal and power down TSV columns",
+     note: "mock-up: each column = top-die bump, then per core die backside pad, TSV, M1, via, front pad and bump, then the base-die TSV to a base bump"}
 
 insets:
   - id: gap
@@ -152,6 +297,11 @@ insets:
     label: "Stack edge, MUF wall"
     box_mm: ["base_w_mm / 2 - 0.4", -0.25, "base_w_mm / 2 + 0.05", 0.25]
     z: ["bottom:base", "top:top"]
+    view: front
+  - id: base_xs
+    label: "Base die: TSV, BEOL, bumps"
+    box_mm: [-0.06, -0.06, 0.06, 0.06]
+    z: ["bottom:bumps", "top:core_1"]
     view: front
   - id: column
     label: "TSV column, full stack"

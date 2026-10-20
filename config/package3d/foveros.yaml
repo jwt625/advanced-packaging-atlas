@@ -11,6 +11,21 @@
 # 2.5D Foveros on a passive Si interposer, vlsitechnologyandcir46783.2024.10631478-a, and is now a callout only). The
 # package-side bump (110 um / 70 um) still comes from that 2024 TV (same family tag, base-to-substrate joint).
 # Tile sizes, thicknesses other than the base die, bump heights and the substrate are template values.
+#
+# Routing (DevLog-011, 2026-10-20; references config/package3d/ROUTING_REF_si.md (Foveros base die, TSV) and
+# ROUTING_REF_rdl.md 1E (Foveros micro-bump variant); figs iedm19573.2019.8993637-f01/-f02,
+# vlsitechnologyandcir46783.2024.10631478-f01/-f04):
+# - Top tile (face down): Si / signal level / thick Cu power plane / thick top Cu micro-bump pads / passivation.
+# - Base die (face up): passivation / thick top Cu micro-bump pads / thick Cu power plane (22FFL "thick Cu upper
+#   layers", iedm19573.2019.8993637-a-L03) / M2, M1 signal (TSV landing on M1) / 75 um Si with TSV-mid / backside
+#   nitride polished to expose the TSVs; package-side bumps sit directly on the TSV ends (fig -f02: 2 TSVs per PSB).
+#   No Foveros row gives a BEOL level count, thickness or L/S: the drawn levels are a reduced set with analog
+#   thicknesses (Si-interposer / Si-bridge BEOL rows); the real 22FFL stack has more levels.
+# - TSVs sit in clusters (pairs, 2x2, hexagons) at 15-16 um pitch that share one package bump
+#   (iedm19573.2019.8993637-a-i2/-i3); drawn as one 2-TSV cluster (via `cluster`, reported 15 um pitch) under each
+#   package-side bump (site pitch = bump pitch), as in the sections figs -f01 / -f02 (R2 2026-10-20).
+# - Package substrate: reusable module `sbt_828` of cowos_r.yaml (no Foveros row reports a substrate); its nets are
+#   re-declared here from the package-side bumps.
 id: foveros
 name: Foveros
 company: Intel
@@ -18,9 +33,14 @@ package_class: microbump_3d
 family_match: {families: true}
 backbone_tv: iedm19573.2019.8993637-a
 summary: >-
-  Intel 3D: top tiles face down on a ~{base_h_um} um active base die with {tsv_d_um} um TSVs, joined by {ub_pitch_um} um
+  Intel 3D: top tiles face down on a ~{base_si_um} um active base die with {tsv_d_um} um TSVs, joined by {ub_pitch_um} um
   Cu pillar + SnAg micro-bumps and underfill; mold on the die edge; {psb_pitch_um} um package-side bumps to the
   substrate.
+
+use:
+  - module: sbt_828
+    from: cowos_r.yaml
+    drop: [sbt_io, sbt_pg_t, sbt_pg_b, sbt_esc]   # re-declared below from the package-side bumps
 
 params:
   # ---- reported (backbone iedm19573.2019.8993637-a unless noted)
@@ -29,7 +49,7 @@ params:
   reticle_j: {ref: ectc51846.2026.00365-j.reticle_multiple}
   k_w_mm: {ref: ectc51846.2026.00365-k-c1.x_mm}
   k_d_mm: {ref: ectc51846.2026.00365-k-c1.y_mm}
-  base_h_um: {ref: iedm19573.2019.8993637-a-c2.thickness_um, note: "ground to ~75 um to reveal TSVs (qualifier approx)"}
+  base_si_um: {ref: iedm19573.2019.8993637-a-c2.thickness_um, note: "base-die Si ground to ~75 um to reveal TSVs (qualifier approx)"}
   tile_n:
     ref: iedm19573.2019.8993637-a-c1.count
     note: "one top die on the base die in the backbone stack; drawn per base die (tile count of the 2X complex not reported)"
@@ -80,10 +100,16 @@ params:
   tile_h_um:
     analog: ectc51906.2022.00181-a-c1.thickness_um
     note: "top-tile thickness not reported for Foveros; analog = 50 um ASIC top die of a micro-bump 3DIC CoW TV"
+  ub_cap_um:
+    analog: ectc51909.2023.00155-a-i1.cap_height_um
+    note: "solder cap height not reported; cap of the same analog joint as the standoff (R2 2026-10-20: joint drawn as Cu column + solder cap)"
   ub_h_um:
     template: "r0 + r1"
     refs: [ectc51909.2023.00155-a-i1.height_um, ectc51909.2023.00155-a-i1.cap_height_um]
     note: "micro-bump joint height not reported; analog = Cu + SnAg cap of a 40 um-pitch Cu/SnAg bump (2.5D TV)"
+  psb_cap_um:
+    analog: ectc51909.2023.00155-a-i3.cap_height_um
+    note: "solder cap height not reported; cap of the same analog joint as the standoff (R2 2026-10-20: joint drawn as Cu column + solder cap)"
   psb_h_um:
     template: "r0 + r1"
     refs: [ectc51909.2023.00155-a-i3.height_um, ectc51909.2023.00155-a-i3.cap_height_um]
@@ -97,21 +123,91 @@ params:
     note: "wafer-level underfill drawn under each top die only; it can enter the mold shelf (tcpmt.2023.3312037-a-c7)"
     refs: [tcpmt.2023.3312037-a-c7.name]
   osuf_margin_mm: {template: 1.0, note: "package-level underfill fillet extent not reported; illustrative"}
-  # ---- template: package substrate (no Foveros row reports one)
+  # ---- template: base-die and tile BEOL (DevLog-011; no Foveros row gives a level count, thickness or L/S)
+  pass_um:
+    analog: ectc51909.2023.00230-a-L02.thickness_um
+    note: "front passivation over the micro-bump pads not reported for Foveros; analog = 1 um CVD-oxide front passivation of a Si interposer (as in the CoWoS-S template)"
+  tm_um:
+    analog: ectc51909.2023.00174-d-L02.thickness_um
+    refs: [iedm19573.2019.8993637-a-L03.material]
+    note: "thick upper Cu stated for the 22FFL base die without thickness; analog = 2 um dual-damascene Cu of a Si bridge (LSI-1)"
+  tm_space_um:
+    analog: ectc51909.2023.00174-d-L02.space_um
+    note: "thick-Cu plane clearance (antipad) not reported; analog = 0.8 um minimum space of the same 2 um dual-damascene Cu"
+  m_um:
+    analog: eptc59621.2023.10457670-a-L03.thickness_um
+    note: "thin BEOL Cu thickness not reported; analog = 1 um dual-damascene Cu level of a 300 mm TSV Si interposer"
+  m_line_um:
+    analog: ectc51909.2023.00108-a-L01.line_um
+    note: "BEOL L/S not reported; analog = 0.4 / 0.4 um BEOL Cu of a CoWoS-based photonic interposer (as in the CoWoS-S template)"
+  m_space_um:
+    analog: ectc51909.2023.00108-a-L01.space_um
+    note: "BEOL space not reported; analog = 0.4 / 0.4 um BEOL Cu (as in the CoWoS-S template)"
+  imd_um:
+    analog: ectc51909.2023.00009-a-L06.thickness_um
+    note: "thin-level inter-metal dielectric (M2-M1) not reported; analog = 0.54 um SiO2 via-2 interlayer of a Si-interposer BEOL, the same row that supplies the 0.3 um via (via and IMD from one row, audit A1 S5)"
+  timd_um:
+    analog: ectc51909.2023.00009-a-L04.thickness_um
+    note: "inter-metal dielectric under / between the thick Cu levels not reported; analog = 1.5 um SiO2 via-3 interlayer of a Si-interposer BEOL, the same row that supplies the 0.75 um top via (audit A1 S5)"
+  bv_d_um:
+    analog: ectc51909.2023.00009-a-L06.via_diameter_um
+    note: "BEOL via size not reported; analog = 0.3 um via of a Si-interposer BEOL (thin levels)"
+  tv_d_um:
+    analog: ectc51909.2023.00009-a-L04.via_diameter_um
+    note: "via to / between the thick upper Cu levels not reported; analog = 0.75 um top via of the same Si-interposer BEOL"
+  bsn_um:
+    analog: ectc51909.2023.00009-a-L01.thickness_um
+    refs: [iedm19573.2019.8993637-a-L05.material]
+    note: "backside nitride (deposited after the blanket Si etch, polished to expose the TSVs) stated without thickness; analog = 0.6 um PECVD SiN final passivation of a Si-interposer BEOL"
+  tsv_col_pitch_um:
+    template: "psb_pitch_um"
+    refs: [iedm19573.2019.8993637-a-i3.notes, iedm19573.2019.8993637-a-i2.notes]
+    note: "one TSV cluster per package-side bump: clusters (single, 2 side-by-side, 2x2, hexagon) at 15-16 um pitch share one bump (row notes); cluster site pitch = bump pitch (harmonized rule: TSV pitch = endpoint pitch when no routing level lies between)"
+  tsv_cl_n:
+    template: 2
+    refs: [iedm19573.2019.8993637-a-i2.notes, iedm19573.2019.8993637-a-i3.notes]
+    note: "TSVs per cluster: the cross-sections figs iedm19573.2019.8993637-f01 / -f02 show 2 side-by-side TSVs on each package-side bump; the text lists single, pair, 2x2 and hexagon clusters (R2 2026-10-20, was one TSV per bump)"
+  tsv_land_um:
+    template: "tsv_pitch_um + 1.5 * tsv_d_um"
+    refs: [iedm19573.2019.8993637-a-L03.notes]
+    note: "TSV landing on M1 not dimensioned ('TSV lands via redundant vias'); one pad per cluster: the cluster span (one TSV pitch) plus the 1.5 x TSV land of the CoWoS-S template, so the pad covers both TSVs (fig iedm19573.2019.8993637-f02)"
+  tsv_liner_um:
+    template: 0.5
+    refs: [vlsitechnologyandcir46783.2024.10631478-a-i3.dielectric, iedm19573.2019.8993637-a-i2.dielectric]
+    note: "'SiO2 liner 0.5 um' is a text cell of the 2024 Foveros TV (9 x 75 um TSV); the backbone states a conformal oxide liner without thickness"
+  beol_um:
+    template: "pass_um + 2 * tm_um + 2 * m_um + 2 * timd_um + imd_um"
+    note: "base-die BEOL drawn as passivation + 2 thick Cu (pads, power plane) + 2 thin Cu (M2, M1) + 2 thick-via IMD + 1 thin IMD; a reduced set of the 22FFL stack (analog thicknesses)"
+  base_h_um:
+    template: "beol_um + base_si_um + bsn_um"
+    note: "base die = BEOL (analog levels) + reported ~75 um Si + backside nitride (analog)"
+  tile_beol_um:
+    template: "pass_um + 2 * tm_um + m_um + 2 * timd_um"
+    note: "top-tile BEOL drawn as passivation + 2 thick Cu (pads, power plane) + 1 signal level + 2 IMD (analog thicknesses; tile BEOL not reported)"
+  tile_si_um: {template: "tile_h_um - tile_beol_um", note: "tile Si = analog tile thickness - drawn BEOL"}
+  # ---- template: package substrate (no Foveros row reports one; module sbt_828 of cowos_r.yaml)
   sbt_margin_mm: {template: 10, note: "substrate outline not reported; die complex + 10 mm per side, illustrative"}
   sbt_w_mm: {template: "cx_w_mm + 2 * sbt_margin_mm", note: "substrate = die complex + margin (template)"}
   sbt_d_mm: {template: "cx_d_mm + 2 * sbt_margin_mm", note: "substrate = die complex + margin (template)"}
   bu_n:
-    analog: ectc51687.2025.00148-a-L06.repeat
-    note: "Foveros substrate layer count not reported; analog = 4 build-up layers per side of an organic FC substrate"
-  bu_diel_um:
-    analog: ectc51687.2025.00148-a-L04.thickness_um
-    note: "build-up dielectric thickness not reported; analog = ABF-GL layer of the same organic FC substrate"
-  bu_h_um: {template: "bu_n * bu_diel_um", note: "build-up per side = layer count x dielectric thickness (analogs)"}
+    template: 8
+    refs: [ectc51529.2024.00049-a.substrate_layer_count]
+    note: "Foveros substrate layer count not reported; 8 build-up Cu levels per side of the shared 8-2-8 substrate module (count of the CoWoS-R 5.5x TV substrate), drawn for the ~52 x 82 mm package"
   core_h_um:
-    analog: ectc51687.2025.00148-a-L07.thickness_um
-    note: "core thickness not reported; analog = core of the same organic FC substrate"
-  sbt_h_um: {template: "core_h_um + 2 * bu_h_um", note: "substrate = core + 2 build-up stacks (template inputs)"}
+    analog: ectc51529.2024.00265-a-L08.thickness_um
+    note: "core thickness not reported; analog = CCL core of an 8-2-8 build-up substrate (as in the CoWoS-R template)"
+  sbt_h_um: {template: "core_h_um + 2 * bu_h_um", note: "substrate = core + 2 build-up stacks of the module (analog per-level values)"}
+  bga_pitch_um:
+    analog: ectc51909.2023.00155-a-i4.pitch_um
+    note: "BGA not reported for Foveros; analog = 1 mm BGA of a 120 mm 2.5D TV (as in the CoWoS-R template)"
+  bga_d_um:
+    analog: ectc51909.2023.00155-a-i4.diameter_um
+    note: "BGA ball diameter not reported; analog = SAC305 ball of the same 2.5D TV"
+  bga_h_um:
+    template: 478
+    refs: [ectc51909.2023.00155-a-i4.notes]
+    note: "BGA height not reported; analog row notes give a measured ball height of 478 um"
+
 
 parts:
   - {id: substrate, name: "Package substrate", kind: substrate, material: organic_laminate,
@@ -152,30 +248,100 @@ parts:
      note: "package-level capillary underfill reported for Ponte Vecchio (tcpmt.2023.3312037-a-c6)"}
 
 layers:
-  - part: substrate
+  # Top tile, face down: Si on top, BEOL at its bottom face (top -> bottom)
+  - part: tile
     pattern:
-      - {id: sbt_bu_top, name: "Front build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
-      - {id: sbt_core, name: "Core", material: organic_laminate, material_label: "laminate core", role: core,
-         h_um: core_h_um}
-      - {id: sbt_bu_bot, name: "Back build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+      - {id: t_si, name: "Tile Si", material: silicon, role: core, h_um: tile_si_um}
+      - {id: t_m, name: "Tile signal level", material: copper, material_label: "Cu damascene", role: conductor,
+         h_um: m_um, route: {use: signal, dir: x, line_um: m_line_um, space_um: m_space_um, matrix: oxide}}
+      - {id: t_v1, name: "Tile IMD", material: oxide, material_label: "IMD (not stated)", role: dielectric, h_um: timd_um}
+      - {id: t_pl, name: "Tile thick Cu (power plane)", material: copper, material_label: "Cu (thick)", role: conductor,
+         h_um: tm_um, route: {use: plane, space_um: tm_space_um, matrix: oxide}}
+      - {id: t_v2, name: "Tile IMD (top via)", material: oxide, material_label: "IMD (not stated)", role: dielectric,
+         h_um: timd_um}
+      - {id: t_pad, name: "Tile top Cu (micro-bump pads)", material: copper, material_label: "Cu (thick)",
+         role: conductor, h_um: tm_um, route: {use: pad, matrix: oxide}}
+      - {id: t_pass, name: "Tile passivation", material: other, material_label: "passivation (not stated)",
+         role: passivation, h_um: pass_um}
+  # Base die, face up (top -> bottom)
+  - part: base
+    id: base_front
+    pattern:
+      - {id: b_pass, name: "Base passivation", material: other, material_label: "passivation (not stated)",
+         role: passivation, h_um: pass_um}
+      - {id: b_pad, name: "Base top Cu (micro-bump pads)", material: copper, material_label: "Cu (thick upper layer)",
+         role: conductor, h_um: tm_um, route: {use: pad, matrix: oxide}}
+      - {id: b_v3, name: "Base IMD (top via)", material: oxide, material_label: "IMD (not stated)", role: dielectric,
+         h_um: timd_um}
+      - {id: b_pl, name: "Base thick Cu (power plane)", material: copper, material_label: "Cu (thick upper layer)",
+         role: conductor, h_um: tm_um, route: {use: plane, space_um: tm_space_um, matrix: oxide}}
+      - {id: b_v2, name: "Base IMD", material: oxide, material_label: "IMD (not stated)", role: dielectric, h_um: timd_um}
+      - {id: b_m2, name: "Base M2 signal", material: copper, material_label: "Cu damascene", role: conductor, h_um: m_um,
+         route: {use: signal, dir: x, line_um: m_line_um, space_um: m_space_um, matrix: oxide}}
+      - {id: b_v1, name: "Base IMD", material: oxide, material_label: "IMD (not stated)", role: dielectric, h_um: imd_um}
+      - {id: b_m1, name: "Base M1 signal (TSV landing)", material: copper, material_label: "Cu damascene",
+         role: conductor, h_um: m_um,
+         route: {use: signal, dir: y, line_um: m_line_um, space_um: m_space_um, matrix: oxide}}
+  - part: base
+    id: base_back
+    pattern:
+      - {id: b_si, name: "Base Si (TSV-mid)", material: silicon, role: core, h_um: base_si_um}
+      - {id: b_bsn, name: "Backside nitride (TSV reveal)", material: other, material_label: "silicon nitride",
+         role: passivation, h_um: bsn_um}
 
 arrays:
   - {id: ubump, name: "F2F micro-bumps", kind: microbump, per: tile, lower: base, pitch_um: ub_pitch_um,
-     diameter_um: ub_d_um, height_um: ub_h_um,
+     diameter_um: ub_d_um, height_um: ub_h_um, cap_h_um: ub_cap_um,
      note: "Cu pillar + SnAg on both dies, TCB (iedm19573.2019.8993637-a-i1); rendered over each tile, bump map not reported"}
-  - {id: tsv, name: "Base-die TSVs", kind: tsv, in: base, region: {part: base}, pitch_um: tsv_pitch_um,
-     diameter_um: tsv_d_um,
-     note: "TSV-mid at the minimum cluster pitch; clusters share one package bump; placement not reported, rendered over the full die"}
   - {id: psb, name: "Package-side bumps", kind: c4, upper: base, lower: substrate, region: {part: base},
-     pitch_um: psb_pitch_um, diameter_um: psb_d_um, height_um: psb_h_um,
-     note: "aligned to exposed TSVs (iedm19573.2019.8993637-a-i3); size from the 2024 Foveros SiP TV"}
+     pitch_um: psb_pitch_um, diameter_um: psb_d_um, height_um: psb_h_um, cap_h_um: psb_cap_um, opening_um: sro_top_um,
+     note: "aligned to exposed TSVs (iedm19573.2019.8993637-a-i3); size from the 2024 Foveros SiP TV; substrate SR opening from the module analog"}
+  - {id: bga, name: "BGA balls", kind: bga, under: substrate, region: {part: substrate}, pitch_um: bga_pitch_um,
+     diameter_um: bga_d_um, height_um: bga_h_um, opening_um: sro_bot_um}
+
+routing:
+  layout_note: "mock-up routing: net layout, shares, jogs and level assignment are illustrative; dims carry their own status"
+  vias:
+    - {id: t_tv, name: "Tile top via", kind: beol_via, through: t_v2, diameter_um: tv_d_um, fill: filled}
+    - {id: t_bv, name: "Tile BEOL via", kind: beol_via, through: t_v1, diameter_um: tv_d_um, fill: filled}
+    - {id: b_tv, name: "Base top via", kind: beol_via, through: b_v3, diameter_um: tv_d_um, fill: filled}
+    - {id: b_bv2, name: "Base via (thick Cu to M2)", kind: beol_via, through: b_v2, diameter_um: tv_d_um, fill: filled}
+    - {id: b_bv1, name: "Base via M2-M1", kind: beol_via, through: b_v1, diameter_um: bv_d_um, fill: filled}
+    - {id: tsv, name: "TSV-mid (Cu, oxide liner)", kind: tsv, through: base_back, diameter_um: tsv_d_um,
+       pitch_um: tsv_col_pitch_um, land_um: tsv_land_um, liner_um: tsv_liner_um, fill: filled,
+       cluster: {n: tsv_cl_n, pitch_um: tsv_pitch_um},
+       note: "from the M1 landing through the Si and the backside nitride; the package-side bump sits on the exposed TSV ends (fig iedm19573.2019.8993637-f02); one 2-TSV cluster at the reported 15 um minimum pitch per bump"}
+  nets:
+    # base die: micro-bump -> BEOL -> TSV -> package-side bump
+    - {id: io, kind: vertical, from: ubump, to: psb, style: stacked, jog: [b_m1], share: 0.3,
+       note: "micro-bump down the base BEOL, lateral move on M1 to a TSV over a package-side bump"}
+    - {id: pg_ub, kind: plane_tie, from: ubump, plane: b_pl, share: 0.2,
+       note: "redundant power bumps on the thick upper Cu (iedm19573.2019.8993637-a-L03 notes)"}
+    - {id: esc_b, kind: escape, from: ubump, levels: [b_m2], share: 0.15, length_um: 100}
+    # top tile: micro-bump up into the tile BEOL
+    - {id: t_pg, kind: plane_tie, from: ubump, plane: t_pl, share: 0.2}
+    - {id: t_esc, kind: escape, from: ubump, levels: [t_m], share: 0.15, length_um: 100}
+    # power up the TSVs to the base plane
+    - {id: pg_psb, kind: plane_tie, from: psb, plane: b_pl, share: 0.2}
+    # substrate (module sbt_828 levels): package-side bump -> build-up -> PTH -> build-up -> BGA
+    - {id: sbt_io, kind: vertical, from: psb, to: bga, style: stacked, jog: [bu_cs_1, bu_c8, bb_c8, bb_cs_3],
+       share: 0.3, note: "PSB -> BGA fan-out (110 um -> PTH 500 um -> BGA 1000 um): stacked microvias with jogs near the surface and above the PTH caps. Open: the sbt_828 module stack (40 um vias, 110/70 lands = 62.9 um, 14/20 um L/S, all analogs of a 150 um-C4 substrate) cannot pass a trace between lands at the 110 um PSB pitch; no Foveros substrate row gives the finer escape layer such a pitch needs, so it is left as a scorer M6 flag (DevLog-011 F3)"}
+    - {id: sbt_pg_t, kind: plane_tie, from: psb, plane: bu_cp_1, share: 0.3}
+    - {id: sbt_pg_b, kind: plane_tie, from: bga, plane: bb_cp_3, share: 0.3}
+    - {id: sbt_esc, kind: escape, from: psb, levels: [bu_cs_1], share: 0.2, length_um: 450}
 
 callouts:
   - {target: ubump, text: "Micro-bump {ub_pitch_um} um pitch"}
   - {target: ubump, text: "{ub2_pitch_um} um pitch (2024 TV)"}
-  - {target: tsv, text: "TSV {tsv_d_um} um, {tsv_pitch_um} um pitch"}
+  - {target: tsv, text: "TSV {tsv_d_um} um, {tsv_pitch_um} um pitch",
+     note: "TSV-mid {tsv_d_um} um at {tsv_pitch_um} um minimum pitch inside a cluster (single, pair, 2x2, hexagon); conformal oxide liner, Ta barrier, Cu fill; a cluster shares one package bump (drawn as 2 TSVs per bump, figs f01 / f02)"}
   - {target: tsv, text: "TSV depth {tsv2_depth_um} um (2024 TV)"}
-  - {target: base, text: "Base die ~{base_h_um} um, 22FFL", refs: [iedm19573.2019.8993637-a-c2.name]}
+  - {target: base, text: "Base die ~{base_si_um} um, 22FFL", refs: [iedm19573.2019.8993637-a-c2.name]}
+  - {target: b_pl, text: "Base BEOL: thick upper Cu",
+     note: "22FFL interconnect stack with thick upper Cu (redundant bumps, TSV landing via redundant vias); drawn as 2 thick + 2 thin Cu levels with analog thicknesses, level count not reported",
+     refs: [iedm19573.2019.8993637-a-L03.notes]}
+  - {target: io, text: "Bump to TSV via stack",
+     note: "micro-bump -> top Cu -> via stack -> M1 -> TSV -> package-side bump (mock-up layout; fig iedm19573.2019.8993637-f02)"}
   - {target: mold, text: "{reticle_j}X complex {cx_w_mm} x {cx_d_mm} mm",
      note: "Foveros die complex ~{cx_w_mm} x {cx_d_mm} mm ({reticle_j}X reticle, ectc51846.2026.00365 p.5 Sec. V, Fig. 9(a)); about 2.3x one 26 x 33 mm field, so drawn as {reticle_j} base dies of <= 1X each; partition not reported"}
   - {target: base, text: "4X complex {k_w_mm} x {k_d_mm} mm", refs: [ectc51846.2026.00365-k.reticle_multiple],
@@ -202,4 +368,9 @@ insets:
     label: "Complex edge, mold"
     box_mm: ["base_w_mm / 2 - 0.6", "base_py_mm / 2 - 0.3", "cx_w_mm / 2 + 0.6", "base_py_mm / 2 + 0.3"]
     z: ["top:substrate", "top:mold"]
+    view: front
+  - id: sbt_stack
+    label: "Substrate build-up, PTH, BGA"
+    box_mm: [-1.2, "base_py_mm / 2 - 1.2", 1.2, "base_py_mm / 2 + 1.2"]
+    z: ["bottom:bga", "top:substrate"]
     view: front

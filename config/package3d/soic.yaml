@@ -40,12 +40,52 @@ params:
     analog: ectc51906.2022.00031-b-c2.thickness_um
     note: "SoIC bottom-die thickness not reported; analog = 50 um TSV pass-through die of the same D2W hybrid-bond stack"
   bond_t_um:
-    analog: ectc51906.2022.00031-b-L04.thickness_um
-    note: "bond layer thickness per side not reported for SoIC; analog = 2 um DBI layer (Cu pads in bond dielectric) per die face"
-    refs: [ectc51906.2022.00031-b-L10.thickness_um]
+    analog: tcpmt.2021.3104326-c-L05.thickness_um
+    note: "SoIC bond-pad thickness not reported; analog = 0.5 um Cu bond pad in SiO2 per side of a D2W hybrid-bond TV (20 um pitch); sub-um pad height also in the 3 um-pitch panel of ectc51846.2026.00218-f01 (c)"
   fill_h_um:
     template: "bond_t_um + top_h_um"
-    note: "gap fill flush with the top-die back side: top bond layer + top die"
+    note: "gap fill flush with the top-die back side: top bond-pad tier + top die"
+  # ---- template: die BEOL at the bond (DevLog-011 routing; no SoIC row reports BEOL levels)
+  hbv_h_um:
+    analog: tcpmt.2021.3104326-c-L04.thickness_um
+    note: "hybrid-bond via (HBV) level thickness not reported for SoIC; analog = 0.5 um Cu via level under the bond pad of a D2W hybrid-bond TV"
+  hbv_d_um:
+    analog: ectc51846.2026.00218-a-i5.diameter_um
+    note: "HBV CD not reported for SoIC; analog = 0.5 um HBV of the 3 um-pitch D2W TV (same pitch as SoIC4, 1 via per pad at <= 3 um pitch)"
+  hbv_fill:
+    template: "0.7854 * hbv_d_um ** 2 / hb_pitch_um ** 2"
+    note: "Cu area fraction of the HBV level = one via per bond pad"
+  mz_h_um:
+    analog: tcpmt.2021.3104326-c-L02.thickness_um
+    note: "top metal (MZ, the 'metal line' under the HBV) not reported for SoIC; analog = 0.85 um Cu damascene routing level of a D2W hybrid-bond TV"
+  ild_h_um:
+    analog: ectc51906.2022.00179-c-L05.thickness_min_um
+    note: "device BEOL between M1 and the top metal not reported; collapsed into one via level, analog = 0.52 um VIA1B damascene level of a TSV-middle die"
+  bv_d_um:
+    analog: ectc51906.2022.00179-c-L05.via_diameter_um
+    note: "BEOL via CD not reported; analog = 0.54 um VIA1B of the same TSV-middle die"
+  bv_land_um:
+    template: "hb_d_um"
+    note: "BEOL via land drawn as wide as the bond pad: the metal line under each pad is at least pad wide in ectc51846.2026.00218-f01 (layout not reported)"
+  m1_h_um:
+    analog: ectc51906.2022.00179-c-L06.thickness_min_um
+    note: "M1 (TSV landing level) not reported for SoIC; analog = 1.06 um M1B damascene level of a TSV-middle die"
+  m1_line_um:
+    analog: ectc51906.2022.00179-c-L06.line_um
+    note: "M1 line width not reported; analog = 1 um M1B CD of the same TSV-middle die"
+  m1_space_um: {template: "m1_line_um", note: "M1 space not reported; drawn equal to the analog line (1 / 1)"}
+  box_h_um:
+    analog: ectc51906.2022.00179-c-L07.thickness_um
+    note: "bottom-die backside dielectric after TSV reveal not reported; analog = 3 um low-temperature oxide (TSV knock-off planarization) of a TSV-middle die"
+  bpad_h_um:
+    analog: ectc51909.2023.00155-a-L05.thickness_um
+    note: "backside bump pad not reported; analog = 5 um Cu pad under the same 35 um-pitch micro-bump analog (Si-interposer TV)"
+  top_si_um:
+    template: "top_h_um - m1_h_um - ild_h_um - mz_h_um - hbv_h_um"
+    note: "top-die Si = die - BEOL levels drawn at the bond side (template levels)"
+  bot_si_um:
+    template: "bot_h_um - hbv_h_um - mz_h_um - ild_h_um - m1_h_um - box_h_um - bpad_h_um"
+    note: "bottom-die Si = die - front BEOL levels - backside oxide - backside pad (template levels)"
   # ---- template: interconnect sizes
   hb_d_um:
     analog: ectc51846.2026.00218-a-i2.pad_x_um
@@ -57,12 +97,24 @@ params:
   tsv_d_um:
     analog: ectc51906.2022.00031-b-i3.diameter_um
     note: "SoIC TSV diameter not reported; analog = 5 um x 50 um TSV of the D2W hybrid-bond stack"
+  tsv_land_um:
+    template: "1.5 * tsv_d_um"
+    note: "TSV landing pad on M1 not reported; 1.5 x the TSV diameter (M1 pad wider than the TSV in ectc51529.2024.00057-f06 and eptc59621.2023.10457670-f01; ratio estimated from the figures)"
+  tsv_liner_um:
+    analog: ectc51909.2023.00307-a-L05.thickness_um
+    note: "TSV liner not reported for SoIC; analog = 0.4 um TEOS liner on a TSV sidewall"
   bump_pitch_um:
     analog: ectc51909.2023.00155-a-i2.pitch_um
     note: "next-level bump (to a CoWoS interposer) not reported; analog = 35 um-pitch Cu/SnAg micro-bump of a 2.5D Si-interposer TV"
   bump_d_um:
     analog: ectc51909.2023.00155-a-i2.diameter_um
     note: "next-level bump diameter not reported; analog = the same 35 um-pitch Cu/SnAg bump"
+  bump_pad_um:
+    analog: ectc51909.2023.00155-a-i2.pad_x_um
+    note: "bump pad not reported; analog = 27 um pad of the same 35 um-pitch bump (27 x 27 um interposer pads)"
+  bump_cap_um:
+    analog: ectc51909.2023.00155-a-i2.cap_height_um
+    note: "solder cap height not reported; cap of the same analog joint as the standoff (R2 2026-10-20: joint drawn as Cu column + solder cap)"
   bump_h_um:
     template: "r0 + r1"
     refs: [ectc51909.2023.00155-a-i2.height_um, ectc51909.2023.00155-a-i2.cap_height_um]
@@ -71,11 +123,11 @@ params:
 parts:
   - {id: die_bot, name: "Bottom die (TSV)", kind: die, material: silicon, w_mm: bot_w_mm, d_mm: bot_d_mm,
      h_um: bot_h_um, base: true, explode_group: 0,
-     note: "face up; bottom-wafer die of the SoIC4 CoW TV, BEOL and bond-pad tier on top; TSVs per ectc.2019.00095"}
-  - {id: bond_bot, name: "Bottom bond layer", kind: other, material: other,
+     note: "face up; bottom-wafer die of the SoIC4 CoW TV: HBV level, top metal, BEOL via level and M1 on top, TSVs per ectc.2019.00095, backside oxide and bump pads below"}
+  - {id: bond_bot, name: "Bottom bond-pad tier", kind: other, material: other,
      material_label: "Cu pads in bond dielectric (not specified)", w_mm: bot_w_mm, d_mm: bot_d_mm, h_um: bond_t_um,
      on: die_bot, explode_group: 1, note: "bottom-wafer bond-pad tier (ECP Cu, ectc51906.2022.00176-a-L05)"}
-  - {id: bond_top, name: "Top bond layer", kind: other, material: other,
+  - {id: bond_top, name: "Top bond-pad tier", kind: other, material: other,
      material_label: "Cu pads in bond dielectric (not specified)", w_mm: top_w_mm, d_mm: top_d_mm, h_um: bond_t_um,
      on: bond_bot, explode_group: 2,
      note: "top-die bond-pad tier (ECP Cu, ectc51906.2022.00176-a-L04); the bonded plane is its bottom face"}
@@ -86,15 +138,74 @@ parts:
      shape: frame, frame_w_mm: fill_w_mm, on: bond_bot, explode_group: 3, xray_default: true,
      note: "not described for the SoIC4 CoW TV; drawn so the SoIC chip is one block ('just like a general SoC chip', ectc.2019.00095 p.2 Sec. III); no TDVs here: in packaged SoIC (Fig. 4(b),(d)) the smaller dies, and any fill with TDVs, face the bump side"}
 
+layers:
+  # top die, face down: Si, then its BEOL toward the bond (symmetric cross of ectc51846.2026.00218-f01)
+  - part: die_top
+    pattern:
+      - {id: dt_si, name: "Top-die Si", material: silicon, role: core, h_um: top_si_um}
+      - {id: dt_m1, name: "Top-die M1 (signal)", material: copper, material_label: "Cu damascene (not specified)",
+         role: conductor, h_um: m1_h_um,
+         route: {use: signal, dir: y, line_um: m1_line_um, space_um: m1_space_um, matrix: other}}
+      - {id: dt_ild, name: "Top-die BEOL via level (collapsed)", material: other,
+         material_label: "BEOL dielectric (not specified)", role: dielectric, h_um: ild_h_um}
+      - {id: dt_mz, name: "Top-die top metal (power mesh)", material: copper, material_label: "Cu damascene (not specified)",
+         role: conductor, h_um: mz_h_um, route: {use: plane, matrix: other}}
+      - {id: dt_hbv, name: "Top-die HBV level", material: copper, material_label: "Cu vias in bond dielectric (not specified)",
+         role: conductor, h_um: hbv_h_um, route: {use: pad, matrix: other, fill: hbv_fill}}
+  # bottom die, face up: HBV level, top metal, BEOL via level, M1 on top; Si + backside oxide (TSV span); bump pads
+  - part: die_bot
+    pattern:
+      - {id: db_hbv, name: "Bottom-die HBV level", material: copper, material_label: "Cu vias in bond dielectric (not specified)",
+         role: conductor, h_um: hbv_h_um, route: {use: pad, matrix: other, fill: hbv_fill}}
+      - {id: db_mz, name: "Bottom-die top metal (pad landing)", material: copper,
+         material_label: "Cu damascene (not specified)", role: conductor, h_um: mz_h_um, route: {use: pad, matrix: other}}
+      - {id: db_ild, name: "Bottom-die BEOL via level (collapsed)", material: other,
+         material_label: "BEOL dielectric (not specified)", role: dielectric, h_um: ild_h_um}
+      - {id: db_m1, name: "Bottom-die M1 (signal, TSV landing)", material: copper,
+         material_label: "Cu damascene (not specified)", role: conductor, h_um: m1_h_um,
+         route: {use: signal, dir: x, line_um: m1_line_um, space_um: m1_space_um, matrix: other}}
+  - part: die_bot
+    id: db_body
+    pattern:
+      - {id: db_si, name: "Bottom-die Si (TSV)", material: silicon, role: core, h_um: bot_si_um}
+      - {id: db_box, name: "Backside dielectric (TSV reveal)", material: other,
+         material_label: "backside dielectric (not specified)", role: dielectric, h_um: box_h_um}
+  - part: die_bot
+    pattern:
+      - {id: db_bpad, name: "Backside bump pads", material: copper, material_label: "Cu pads (not specified)",
+         role: conductor, h_um: bpad_h_um, route: {use: pad, matrix: other}}
+
 arrays:
   - {id: hb, name: "Cu hybrid bonds", kind: hybrid_bond, span: ["bottom:bond_bot", "top:bond_top"],
      between: [die_top, die_bot], region: {part: die_top}, pitch_um: hb_pitch_um, diameter_um: hb_d_um,
-     note: "full-array F2F bond under the top die; Cu-Cu + dielectric, no solder or underfill"}
-  - {id: tsv, name: "Bottom-die TSVs", kind: tsv, in: die_bot, region: {part: die_bot}, pitch_um: tsv_pitch_um,
-     diameter_um: tsv_d_um, note: "TSV placement not reported; rendered over the full bottom die"}
+     pad_um: hbv_d_um,
+     note: "full-array F2F bond under the top die; the drawn column is the bonded pad pair (Cu-Cu + dielectric, no solder or underfill); pad_um = the HBV under each pad on the HBV levels"}
   - {id: bumps, name: "Next-level bumps", kind: microbump, under: die_bot, region: {part: die_bot},
-     pitch_um: bump_pitch_um, diameter_um: bump_d_um, height_um: bump_h_um,
+     pitch_um: bump_pitch_um, diameter_um: bump_d_um, height_um: bump_h_um, cap_h_um: bump_cap_um, pad_um: bump_pad_um,
      note: "bumps to the carrier (CoWoS interposer, InFO or flip chip; ectc.2019.00095); bump map not reported"}
+
+routing:
+  layout_note: >-
+    mock-up routing: net layout, shares, the M1 fan-in to the TSV grid and the signal / power assignment of the die
+    levels are illustrative (ectc51846.2026.00218-f01 and ectc51529.2024.00057-f06 / -f07 as the visual reference); dims
+    carry their own status
+  vias:
+    - {id: bv_top, name: "Top-die BEOL via", kind: beol_via, through: dt_ild, diameter_um: bv_d_um, land_um: bv_land_um,
+       fill: filled}
+    - {id: bv_bot, name: "Bottom-die BEOL via", kind: beol_via, through: db_ild, diameter_um: bv_d_um, land_um: bv_land_um,
+       fill: filled}
+    - {id: tsv, name: "Bottom-die TSV", kind: tsv, through: db_body, diameter_um: tsv_d_um, land_um: tsv_land_um,
+       pitch_um: tsv_pitch_um, liner_um: tsv_liner_um, fill: filled,
+       note: "TSV from M1 through the Si and the backside dielectric onto the backside bump pad; placement not reported, drawn as a grid over the bottom die"}
+  nets:
+    # bond pad -> HBV -> top metal -> BEOL via -> M1 (fan-in to the TSV grid) -> TSV -> backside pad -> bump
+    - {id: hb_tsv, kind: vertical, from: hb, to: bumps, style: stacked, jog: [db_m1], share: 0.3,
+       note: "bond pad straight down the HBV / top-metal / via column, lateral move on M1 to the nearest TSV, then to a bump"}
+    # top-die power: bond pads tied into the top-metal mesh
+    - {id: hb_pwr, kind: plane_tie, from: hb, plane: dt_mz, share: 0.4,
+       note: "power / ground bond pads tied into the top-die top metal (power in thick top metals, ectc32696.2021.00166-c-i1 notes)"}
+    # top-die signals: bond pad -> HBV -> top metal -> via -> short M1 trace
+    - {id: hb_sig, kind: escape, from: hb, levels: [dt_m1], share: 0.3, length_um: 20}
 
 callouts:
   - {target: hb, text: "HB pitch {hb_pitch_um} um (SoIC4)"}
@@ -108,7 +219,12 @@ callouts:
   - {target: gap_fill, text: "Gap fill, material not stated",
      note: "TDVs (through-dielectric vias) are reported for SoIC (ectc.2019.00095 Sec. VI) without placement. In packaged SoIC (ectc.2019.00095 p.2 Fig. 4(b),(d)) the smaller chiplets sit under the larger die on the bump side, so a fill with TDVs faces the bumps, not the top-die side drawn here",
      refs: [ectc.2019.00095-a-i3.ic_type]}
-  - {target: tsv, text: "TSV size not reported", refs: [ectc.2019.00095-a-i2.ic_type]}
+  - {target: tsv, text: "TSV size not reported", refs: [ectc.2019.00095-a-i2.ic_type],
+     note: "TSV drawn with the 5 um x 35 um-pitch TSV of a D2W hybrid-bond stack (analog), oxide liner, landing on M1 and on the backside bump pad"}
+  - {target: dt_hbv, text: "Pad over via, metal line",
+     note: "bond pad on one HBV on a top-metal line, mirrored on both dies (cross shape of ectc51846.2026.00218-f01 at 3 um pitch); all BEOL dims are analogs from other hybrid-bond / TSV-die TVs"}
+  - {target: hb_tsv, text: "Bond to TSV via M1",
+     note: "mock-up: each bonded pad drops through HBV, top metal and a BEOL via to M1, which fans in to the coarser TSV grid"}
   - {target: bond_bot, text: "SoIC-CS: C-Layer bond (F2B)", refs: [ectc51687.2025.00055-a-L02.material]}
   - {target: bumps, text: "Then into CoWoS, InFO, FC", refs: [ectc.2019.00095-a.technology_name]}
 
@@ -124,7 +240,7 @@ insets:
     z: ["bottom:die_bot", "top:die_top"]
     view: front
   - id: tsv_column
-    label: "TSV column and bumps"
-    box_mm: ["-bot_w_mm / 2 + 0.5", -0.1, "-bot_w_mm / 2 + 0.7", 0.1]
-    z: ["bottom:die_bot", "top:bond_bot"]
+    label: "Bond to TSV to bump"
+    box_mm: [-0.06, -0.06, 0.06, 0.06]
+    z: ["bottom:bumps", "top:bond_top"]
     view: front

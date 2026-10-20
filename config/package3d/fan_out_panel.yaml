@@ -1,148 +1,277 @@
 # Panel-level fan-out (FOPLP) 3D template. Format: config/package3d/TEMPLATE_FORMAT.md. Generator: scripts/build_package3d.py.
-# Variant modeled: mold-first (chip-first, die face down), the best-dimensioned FOPLP TV in the database and the first
-# representative TV in families.yaml. Backbone: ectc32862.2020.00185-a (10 x 10 x 0.8 mm package from a 600 x 600 mm
-# reconstructed panel: 7 x 7 x 0.7 mm daisy-chain Si die face down in granular EMC, 1-layer RDL = 7 um polyimide with
-# 30 um pad openings on 60 um-pitch Al pads, Ti/Cu seed, 5 um Cu at 10/10 um, polyimide passivation, 200 um solder balls
-# at 400 um pitch; no substrate).
-# Gaps from the same family: RDL passivation (PM2) thickness and solder-ball height from the 600 mm chip-first FOPLP TV
-# ectc32696.2021.00174-a (6-sided die protection). The chip-first face-up (Cu studs, 6-sided protection, M-Series),
-# RDL-first and double-mold LGA variants are callouts.
-# Family rule (audit M6, open): wafer-format Deca M-Series TVs (package_class fan_out_wafer) are not in this family's rule
-# and are not used here.
-# Die pads are peripheral (1585 pads at 60 um pitch): drawn as 4 edge strips whose row count follows from the pad count.
+# Variant modeled: chip-last (RDL-first) FOPLP, the in-family TV with a fully dimensioned multi-level RDL (coordinator
+# decision 2026-10-20, DevLog-011: the owner asked for representative RDL layers). Backbone: 2380-4505-2020.1.000042-a
+# (IMAPS 2020: Chip 1 10 x 10 mm + Chip 2A / 2B 7 x 5 mm, 200 um apart, Cu-pillar bumped (90 / 60 um pitch) by TCB onto a
+# 20 x 20 mm 3-RDL substrate built 10/10-um-layer first on a 515 x 510 mm glass panel; underfill; 400 um laminated EMC;
+# carrier removed, 245 um CO2-laser solder-mask openings, EPIG, 200 um SAC balls at 350 um pitch; no package substrate).
+# Stack (fig 2380-4505-2020.1.000042-f03, Fig. 3a; text Sec. II.B), die side down: Cu bonding pad 8 um (35 um dia) /
+# DL01 5 um (V01 22-17 um) / ML1 2/2 um, 2.5 um / DL12 6.5 um (V12 30-25 um) / ML2 5/5 um, 2.5 um / DL23 6.5 um
+# (V23 30-25 um) / ML3 10/10 um, 8 um, 180 um ball pads / DL3B solder mask 5 um (245 um opening). No top passivation
+# over the pad level (pads sit on DL01 under the underfill, Fig. 2a / 3a / 11).
+# Measured (fig 2380-4505-2020.1.000042-f04, Fig. 7 SEM): ML1 2.15-2.24 wide x 1.68 thick, ML2 5.14 x 2.15, ML3 10.38 x 7.49;
+# drawn at the targets above (callouts give the measured values).
+# Gaps (template, notes per param): die thickness (analog: in-family 150 um panel dummy die), bump joint standoff (as-built
+# pillar + Ni + cap), via bottom diameters (text '22-17', '30-25'), pad / ball-pad / opening sizes (Fig. 3a text, notes
+# cells only), die placement inside the package (Fig. 2b / 3b not dimensioned beyond the 200 um gap).
+# Routing (DevLog-011; config/package3d/ROUTING_REF_rdl.md 1C, C1): Cu pillar -> bonding pad -> V01 -> ML1 (2/2 D2D wiring
+# between Chip 1 and Chip 2A / 2B) -> V12 -> ML2 (5/5) -> V23 -> ML3 (10/10 traces + ball pads) -> SMO -> ball. Filled
+# PID vias, tapered (wider at the die side, as drawn in Fig. 3a), staggered from level to level (Fig. 2a / 3a). Fan-out
+# from the 60 / 90 um pillar pitch to the 350 um ball pitch on ML2 / ML3.
+# Old backbone (until 2026-10-20): chip-first mold-first TV ectc32862.2020.00185-a (10 x 10 x 0.8 mm, one 10/10 um RDL on a
+# face-down 7 x 7 mm die); kept as a callout, with the face-up (6-sided), RDL-first glass-carrier and LGA variants.
+# Family rule (audit M6, open): wafer-format Deca M-Series TVs (package_class fan_out_wafer) are not in this family's rule.
 id: fan_out_panel
 name: Panel-level fan-out (FOPLP)
 company: Deca/nepes, ASE, A*STAR IME, Samsung, others
 package_class: fan_out_panel
 family_match: {families: true}
-backbone_tv: ectc32862.2020.00185-a
+backbone_tv: 2380-4505-2020.1.000042-a
 summary: >-
-  Fan-out on a {panel} mm reconstructed panel: a {die_w_mm} x {die_d_mm} mm die face down in EMC, one RDL
-  ({rdl_line_um}/{rdl_space_um} um Cu on polyimide) built on the die face and mold, {ball_pitch_um} um solder balls
-  to the board, no substrate.
+  Chip-last (RDL-first) fan-out on a {panel} mm glass panel: Chip 1 and Chip 2A / 2B on Cu pillars over a 3-RDL
+  substrate ({ml1_line_um}, {ml2_line_um}, {ml3_line_um} um lines), {mold_h_um} um EMC, {ball_pitch_um} um-pitch balls;
+  no package substrate.
 
 params:
-  # ---- reported (backbone ectc32862.2020.00185-a unless noted)
-  panel: {ref: ectc32862.2020.00185-a.carrier_size_mm}
-  pkg_w_mm: {ref: ectc32862.2020.00185-a.package_x_mm}
-  pkg_d_mm: {ref: ectc32862.2020.00185-a.package_y_mm}
-  pkg_h_um: {ref: ectc32862.2020.00185-a.package_thickness_mm, note: "package / reconstructed panel thickness 0.8 mm (mold body)"}
-  die_w_mm: {ref: ectc32862.2020.00185-a-c1.x_mm}
-  die_d_mm: {ref: ectc32862.2020.00185-a-c1.y_mm}
-  die_h_um: {ref: ectc32862.2020.00185-a-c1.thickness_um}
-  emc: {ref: ectc32862.2020.00185-a-c2.material}
-  pi1_um: {ref: ectc32862.2020.00185-a-L03.thickness_um, note: "Table 1: 7 um; text: 10 um coated (conflict logged)"}
-  ti_um: {ref: ectc32862.2020.00185-a-L04.thickness_um}
-  seed_um: {ref: ectc32862.2020.00185-a-L05.thickness_um}
-  cu_um: {ref: ectc32862.2020.00185-a-L06.thickness_um}
-  rdl_line_um: {ref: ectc32862.2020.00185-a-L06.line_um}
-  rdl_space_um: {ref: ectc32862.2020.00185-a-L06.space_um}
-  pad_pitch_um: {ref: ectc32862.2020.00185-a-i1.pitch_um}
-  pad_open_um: {ref: ectc32862.2020.00185-a-i1.diameter_um, note: "30 um opening in the 40 um Al pad"}
-  pad_n: {ref: ectc32862.2020.00185-a-i1.count}
-  ball_pitch_um: {ref: ectc32862.2020.00185-a-i2.pitch_um}
-  ball_d_um: {ref: ectc32862.2020.00185-a-i2.diameter_um, note: "'C4 solder bumps' by ball attach, 200 um"}
-  ball_n: {ref: ectc32862.2020.00185-a-i2.count, note: "center array plus peripheral rows"}
-  shift_um: {ref: ectc32862.2020.00185-a-m14.value, note: "max die shift with pitch compensation (panel edge)"}
-  pi2_um:
-    ref: ectc32696.2021.00174-a-L07.thickness_um
-    note: "RDL passivation (PM2) of the 600 mm chip-first FOPLP TV; the backbone dielectric-2 thickness is not reported"
-  ball_h_um:
-    ref: ectc32696.2021.00174-a-i2.height_um
-    note: "SAC405 ball height target of the 600 mm chip-first FOPLP TV (350 um pitch); backbone ball height not reported"
-  # variants (callouts)
+  # ---- reported (backbone 2380-4505-2020.1.000042-a)
+  panel: {ref: 2380-4505-2020.1.000042-a.carrier_size_mm}
+  sub_per_panel: {ref: 2380-4505-2020.1.000042-a-m13.value}
+  pkg_w_mm: {ref: 2380-4505-2020.1.000042-a.package_x_mm}
+  pkg_d_mm: {ref: 2380-4505-2020.1.000042-a.package_y_mm}
+  c1_w_mm: {ref: 2380-4505-2020.1.000042-a-c1.x_mm}
+  c1_d_mm: {ref: 2380-4505-2020.1.000042-a-c1.y_mm}
+  c2_w_mm: {ref: 2380-4505-2020.1.000042-a-c2.x_mm, note: "Chip 2 is 7 x 5 mm; Chip 2B drawn 7 mm along x, Chip 2A rotated (Fig. 3b)"}
+  c2_d_mm: {ref: 2380-4505-2020.1.000042-a-c2.y_mm}
+  c2_n: {ref: 2380-4505-2020.1.000042-a-c2.count}
+  gap_um: {ref: 2380-4505-2020.1.000042-a-c1.gap_um, note: "chip-to-chip gap 200 um (Fig. 3b)"}
+  mold_h_um: {ref: 2380-4505-2020.1.000042-a-L12.thickness_um, note: "strip laminated with 400 um-thick EMC over the underfilled chips"}
+  pad_h_um: {ref: 2380-4505-2020.1.000042-a-L02.thickness_um}
+  dl01_um: {ref: 2380-4505-2020.1.000042-a-L03.thickness_um}
+  ml1_um: {ref: 2380-4505-2020.1.000042-a-L04.thickness_um}
+  ml1_line_um: {ref: 2380-4505-2020.1.000042-a-L04.line_um}
+  ml1_space_um: {ref: 2380-4505-2020.1.000042-a-L04.space_um}
+  dl12_um: {ref: 2380-4505-2020.1.000042-a-L05.thickness_um}
+  ml2_um: {ref: 2380-4505-2020.1.000042-a-L06.thickness_um}
+  ml2_line_um: {ref: 2380-4505-2020.1.000042-a-L06.line_um}
+  ml2_space_um: {ref: 2380-4505-2020.1.000042-a-L06.space_um}
+  dl23_um: {ref: 2380-4505-2020.1.000042-a-L07.thickness_um}
+  ml3_um: {ref: 2380-4505-2020.1.000042-a-L08.thickness_um}
+  ml3_line_um: {ref: 2380-4505-2020.1.000042-a-L08.line_um}
+  ml3_space_um: {ref: 2380-4505-2020.1.000042-a-L08.space_um}
+  sm_um: {ref: 2380-4505-2020.1.000042-a-L09.thickness_um}
+  v01_um: {ref: 2380-4505-2020.1.000042-a-i3.diameter_um, note: "V01 opening 22-17 um; larger value entered"}
+  v12_um: {ref: 2380-4505-2020.1.000042-a-i4.diameter_um, note: "V12 opening 30-25 um; larger value entered"}
+  v23_um: {ref: 2380-4505-2020.1.000042-a-i5.diameter_um, note: "V23 opening 30-25 um; larger value entered"}
+  b1_pitch_um: {ref: 2380-4505-2020.1.000042-a-i1.pitch_um}
+  b1_n: {ref: 2380-4505-2020.1.000042-a-i1.count}
+  b2_pitch_um: {ref: 2380-4505-2020.1.000042-a-i2.pitch_um}
+  b2_n: {ref: 2380-4505-2020.1.000042-a-i2.count, note: "per Chip 2"}
+  bump_d_um: {ref: 2380-4505-2020.1.000042-a-i1.diameter_um, note: "same 35 um Cu pillar on both chips"}
+  pillar_h_um: {ref: 2380-4505-2020.1.000042-a-i1.height_um}
+  cap_h_um: {ref: 2380-4505-2020.1.000042-a-i1.cap_height_um}
+  ball_pitch_um: {ref: 2380-4505-2020.1.000042-a-i6.pitch_um}
+  ball_d_um: {ref: 2380-4505-2020.1.000042-a-i6.diameter_um}
+  ball_h_um: {ref: 2380-4505-2020.1.000042-a-i6.height_um, note: "mean mounted ball height 154.7 um (measured)"}
+  ball_n: {ref: 2380-4505-2020.1.000042-a-i6.count}
+  ml1_meas_um: {ref: 2380-4505-2020.1.000042-a-m3.value}
+  ml3_meas_um: {ref: 2380-4505-2020.1.000042-a-m8.value}
+  # old backbone and variants (callouts only)
+  cf_pkg_w_mm: {ref: ectc32862.2020.00185-a.package_x_mm}
+  cf_pkg_h_um: {ref: ectc32862.2020.00185-a.package_thickness_mm}
+  cf_die_w_mm: {ref: ectc32862.2020.00185-a-c1.x_mm}
+  cf_cu_um: {ref: ectc32862.2020.00185-a-L06.thickness_um}
+  cf_line_um: {ref: ectc32862.2020.00185-a-L06.line_um}
+  cf_pi1_um: {ref: ectc32862.2020.00185-a-L03.thickness_um}
+  cf_pad_pitch_um: {ref: ectc32862.2020.00185-a-i1.pitch_um}
+  cf_pad_open_um: {ref: ectc32862.2020.00185-a-i1.diameter_um}
+  cf_ball_pitch_um: {ref: ectc32862.2020.00185-a-i2.pitch_um}
+  cf_panel: {ref: ectc32862.2020.00185-a.carrier_size_mm}
+  cf_shift_um: {ref: ectc32862.2020.00185-a-m14.value, note: "max die shift with pitch compensation (panel edge)"}
   fu_w_mm: {ref: ectc32696.2021.00174-a.package_x_mm}
   fu_d_mm: {ref: ectc32696.2021.00174-a.package_y_mm}
   fu_h_mm: {ref: ectc32696.2021.00174-a.package_thickness_mm}
+  fu_pi2_um: {ref: ectc32696.2021.00174-a-L07.thickness_um}
   rf_w_mm: {ref: ectc.2019.00-29-a.package_x_mm}
   rf_cu_um: {ref: ectc.2019.00-29-a-L05.thickness_um}
   rf_line_um: {ref: ectc.2019.00-29-a-L05.line_um}
   lga_h_mm: {ref: ectc51529.2024.00011-a.package_thickness_mm}
   lga_w_mm: {ref: ectc51529.2024.00011-a.package_x_mm}
   # ---- derived
-  rdl_h_um: {derived: "pi1_um + ti_um + seed_um + cu_um + pi2_um", note: "1-layer RDL = PI1 + Ti + Cu seed + Cu + PM2"}
-  die_depth_um: {derived: "pkg_h_um - die_h_um", note: "die face flush with the mold bottom (RDL side); mold over the die back = 0.8 mm - 0.7 mm"}
-  # ---- template: pad layout and placement
-  pad_rows_n:
-    template: "ceil(pad_n / (4 * floor(die_w_mm * 1000 / pad_pitch_um)))"
-    note: "pad map not reported ('peripheral Al bond pads'); rows per die edge = 1585 pads / (4 edges x pads per row at 60 um pitch), rounded up"
-  strip_mm: {template: "pad_rows_n * pad_pitch_um / 1000", note: "width of the peripheral pad band = rows x pitch"}
-  strip_y_mm: {template: "die_d_mm / 2 - strip_mm / 2", note: "north / south pad bands at the die edges"}
-  strip_x_mm: {template: "die_w_mm / 2 - strip_mm / 2", note: "east / west pad bands at the die edges"}
-  strip_side_mm: {template: "die_d_mm - 2 * strip_mm", note: "east / west bands between the north and south bands"}
-  zero_mm: {template: 0, note: "die centered in the package (placement not dimensioned)"}
+  rdl_h_um:
+    derived: "pad_h_um + dl01_um + ml1_um + dl12_um + ml2_um + dl23_um + ml3_um + sm_um"
+    note: "RDL substrate = Cu pad + DL01 + ML1 + DL12 + ML2 + DL23 + ML3 + DL3B solder mask (ball-side EPIG 0.056 + 0.069 um not drawn)"
+  c2a_w_mm: {derived: "c2_d_mm", note: "Chip 2A drawn rotated: 5 mm along x, 7 mm along y (Fig. 3b)"}
+  c2a_d_mm: {derived: "c2_w_mm", note: "Chip 2A drawn rotated (Fig. 3b)"}
+  # ---- template: thicknesses and joints
+  die_h_um:
+    analog: ectc51846.2026.00153-b-c4.thickness_um
+    note: "chip thickness not reported (test chips 'the same as those in [1]'); analog = 150 um Si dummy chip of an in-family 320 mm FOPLP panel TV; fits under the 400 um EMC with the pillar standoff"
+  bump_h_um:
+    template: "r0 + r1 + 3"
+    refs: [2380-4505-2020.1.000042-a-i1.height_um, 2380-4505-2020.1.000042-a-i1.cap_height_um, 2380-4505-2020.1.000042-a-i1.metallurgy]
+    note: "joint standoff = Cu pillar 37 + Ni 3 (metallurgy text) + SnAg cap 15 um as built (Fig. 1 bump total 55 um); post-reflow joint height not reported"
+  pad_d_um:
+    template: 35
+    refs: [2380-4505-2020.1.000042-a-L02.notes]
+    note: "Cu bonding pad diameter 35 um (Fig. 3a text; only in the row notes)"
+  v01_bot_um:
+    template: 17
+    refs: [2380-4505-2020.1.000042-a-L03.notes, 2380-4505-2020.1.000042-a-i3.notes]
+    note: "V01 written as 22-17 um; 17 um drawn at the ML1 end (vias drawn wider at the die side, as in the Fig. 3a schematic)"
+  v12_bot_um:
+    template: 25
+    refs: [2380-4505-2020.1.000042-a-L05.notes, 2380-4505-2020.1.000042-a-i4.notes]
+    note: "V12 written as 30-25 um; 25 um drawn at the ML2 end (taper direction as drawn in Fig. 3a)"
+  v23_bot_um:
+    template: 25
+    refs: [2380-4505-2020.1.000042-a-L07.notes, 2380-4505-2020.1.000042-a-i5.notes]
+    note: "V23 written as 30-25 um; 25 um drawn at the ML3 end (taper direction as drawn in Fig. 3a)"
+  rdl_land_um:
+    template: "max(v01_um, v12_um, v23_um) + 2 * 4"
+    refs: [2380-4505-2020.1.000042-a-i4.notes, 001c.129513-a-i3.diameter_um]
+    note: "RDL via land / capture pad not dimensioned; Fig. 3a (fig 2380-4505-2020.1.000042-f03) draws a Cu pad wider than the via opening on ML1 / ML2 / ML3 under each via; no land / via ratio for this RDL class in the DB, so land = largest via opening + 2 x 4 um land overlap (via-to-land overlap >= 4 um of a polymer RDL design rule, fig 001c.129513-f04; same rule as the samsung_mios backside RDL), one land size for all three via levels"
+  ball_pad_um:
+    template: 180
+    refs: [2380-4505-2020.1.000042-a-L08.notes, 2380-4505-2020.1.000042-a-i6.notes]
+    note: "ML3 ball pad 180 um (Fig. 3a / 3c text; only in the row notes)"
+  ball_open_um:
+    template: 245
+    refs: [2380-4505-2020.1.000042-a-L09.notes]
+    note: "DL3B solder-mask opening 245 um (NSMD, larger than the pad; text and Fig. 3a, only in the row notes)"
+  uf_margin_mm: {template: "gap_um / 2 / 1000", note: "underfill fillet extent not reported; half the 200 um chip gap so the fillets of neighbouring chips meet (Fig. 10c)"}
+  # ---- template: placement (Fig. 2b / 3b give sizes and the 200 um gap only)
+  cl_w_mm: {template: "c1_w_mm + gap_um / 1000 + c2a_w_mm", note: "chip cluster width: Chip 1 + gap + Chip 2A (Fig. 3b)"}
+  cl_d_mm: {template: "c1_d_mm + gap_um / 1000 + c2_d_mm", note: "chip cluster depth: Chip 1 + gap + Chip 2B (Fig. 3b)"}
+  c1_x_mm: {template: "c1_w_mm / 2 - cl_w_mm / 2", note: "chip cluster centered in the package (placement not dimensioned)"}
+  c1_y_mm: {template: "c1_d_mm / 2 - cl_d_mm / 2", note: "Chip 1 at the lower left of the cluster, Chip 2B above, Chip 2A to the right (Fig. 3b)"}
+  c2a_x_mm: {template: "cl_w_mm / 2 - c2a_w_mm / 2", note: "Chip 2A right of Chip 1 at the 200 um gap"}
+  c2a_y_mm: {template: "c1_y_mm", note: "Chip 2A centered on Chip 1 along y (not dimensioned)"}
+  c2b_x_mm: {template: "c2_w_mm / 2 - cl_w_mm / 2", note: "Chip 2B left edge aligned with Chip 1 (Fig. 3b)"}
+  c2b_y_mm: {template: "cl_d_mm / 2 - c2_d_mm / 2", note: "Chip 2B above Chip 1 at the 200 um gap"}
+  die_depth_um: {template: "mold_h_um - bump_h_um - die_h_um", note: "chips on their pillars inside the 400 um EMC: EMC above the chip backs = EMC - standoff - chip"}
 
 parts:
-  - {id: rdl, name: "Fan-out RDL (1 layer)", kind: interposer, material: polymer_dielectric,
-     material_label: "polyimide / Cu RDL", w_mm: pkg_w_mm, d_mm: pkg_d_mm, h_um: rdl_h_um, base: true, explode_group: 1,
-     note: "built on the die face and mold after carrier and tape release (slit-coated PI, LDI patterned)"}
-  - {id: mold, name: "EMC (reconstituted panel)", kind: mold, material: mold_compound, material_label: "granular EMC G1",
-     w_mm: pkg_w_mm, d_mm: pkg_d_mm, h_um: pkg_h_um, on: rdl, explode_group: 2, xray_default: true,
-     note: "compression molded over face-down dies on thermal release tape on a 625 x 615 mm glass carrier"}
-  - {id: die, name: "Si die (face down)", kind: die, material: silicon, w_mm: die_w_mm, d_mm: die_d_mm, h_um: die_h_um,
-     in: mold, depth_um: die_depth_um, explode_group: 2, note: "daisy-chain test die, peripheral Al bond pads"}
+  - {id: rdl, name: "RDL-first substrate (3 RDL)", kind: interposer, material: polymer_dielectric,
+     material_label: "PID / Cu RDL", w_mm: pkg_w_mm, d_mm: pkg_d_mm, h_um: rdl_h_um, base: true, explode_group: 1,
+     note: "built 10/10-um layer (ML3) first on a temporary glass panel (LDI-patterned PID, ECD Cu on Ti / Cu seed); carrier removed after molding"}
+  - {id: mold, name: "EMC (laminated)", kind: mold, material: mold_compound, material_label: "EMC (product not named)",
+     w_mm: pkg_w_mm, d_mm: pkg_d_mm, h_um: mold_h_um, on: rdl, explode_group: 3, xray_default: true,
+     note: "two-stage vacuum lamination over the underfilled chips on the strip"}
+  - {id: chip1, name: "Chip 1 (large test chip)", kind: die, material: silicon, w_mm: c1_w_mm, d_mm: c1_d_mm, h_um: die_h_um,
+     x_mm: c1_x_mm, y_mm: c1_y_mm, in: mold, depth_um: die_depth_um, standoff: bump_c1, explode_group: 3,
+     note: "could stand for a processor (text); daisy-chain test chip"}
+  - {id: chip2a, name: "Chip 2A (small test chip)", kind: die, material: silicon, w_mm: c2a_w_mm, d_mm: c2a_d_mm,
+     h_um: die_h_um, x_mm: c2a_x_mm, y_mm: c2a_y_mm, in: mold, depth_um: die_depth_um, standoff: bump_c2a,
+     explode_group: 3, note: "could stand for a memory (text)"}
+  - {id: chip2b, name: "Chip 2B (small test chip)", kind: die, material: silicon, w_mm: c2_w_mm, d_mm: c2_d_mm,
+     h_um: die_h_um, x_mm: c2b_x_mm, y_mm: c2b_y_mm, in: mold, depth_um: die_depth_um, standoff: bump_c2b,
+     explode_group: 3, note: "could stand for a memory (text)"}
+  - {id: uf1, name: "Underfill (Chip 1)", kind: underfill, material: underfill, material_label: "underfill (not named)",
+     fill: {per: chip1, margin_mm: uf_margin_mm}, explode_group: 2, xray_default: true}
+  - {id: uf2a, name: "Underfill (Chip 2A)", kind: underfill, material: underfill, material_label: "underfill (not named)",
+     fill: {per: chip2a, margin_mm: uf_margin_mm}, explode_group: 2, xray_default: true}
+  - {id: uf2b, name: "Underfill (Chip 2B)", kind: underfill, material: underfill, material_label: "underfill (not named)",
+     fill: {per: chip2b, margin_mm: uf_margin_mm}, explode_group: 2, xray_default: true}
 
 layers:
-  - id: g_pi1
-    part: rdl
-    pattern:
-      - {id: pi1, name: "Dielectric 1 (PI, pad vias)", material: polymer_dielectric, material_label: "polyimide (positive tone)",
-         role: dielectric, h_um: pi1_um}
+  # RDL substrate, top (chip side) -> bottom (ball side); fabricated in the opposite order (ML3 first)
   - part: rdl
     pattern:
-      - {id: ti, name: "Ti seed", material: other, material_label: "Ti (PVD)", role: adhesion, h_um: ti_um}
-      - {id: seed, name: "Cu seed", material: copper, material_label: "Cu (PVD)", role: seed, h_um: seed_um}
-      - {id: rdl_cu, name: "Cu RDL (M1)", material: copper, material_label: "electroplated Cu", role: conductor, h_um: cu_um,
-         line_um: rdl_line_um, space_um: rdl_space_um}
-      - {id: pi2, name: "Dielectric 2 (passivation)", material: polymer_dielectric, material_label: "polyimide", role: passivation,
-         h_um: pi2_um}
+      - {id: pad, name: "Cu bonding pads (lead)", material: copper, material_label: "Cu (ECD on Ti / Cu seed), EPIG finish",
+         role: conductor, h_um: pad_h_um, route: {use: pad, matrix: underfill}}
+      - {id: dl01, name: "DL01 (PID, V01)", material: polymer_dielectric, material_label: PID, role: dielectric, h_um: dl01_um}
+      - {id: ml1, name: "ML1 (RDL1) 2/2 um, D2D", material: copper, material_label: "Cu (ECD on Ti / Cu seed)",
+         role: conductor, h_um: ml1_um, line_um: ml1_line_um, space_um: ml1_space_um,
+         route: {use: signal, dir: x, line_um: ml1_line_um, space_um: ml1_space_um, matrix: polymer_dielectric}}
+      - {id: dl12, name: "DL12 (PID, V12)", material: polymer_dielectric, material_label: PID, role: dielectric, h_um: dl12_um}
+      - {id: ml2, name: "ML2 (RDL2) 5/5 um", material: copper, material_label: "Cu (ECD on Ti / Cu seed)",
+         role: conductor, h_um: ml2_um, line_um: ml2_line_um, space_um: ml2_space_um,
+         route: {use: signal, dir: y, line_um: ml2_line_um, space_um: ml2_space_um, matrix: polymer_dielectric}}
+      - {id: dl23, name: "DL23 (PID, V23)", material: polymer_dielectric, material_label: PID, role: dielectric, h_um: dl23_um}
+      - {id: ml3, name: "ML3 (RDL3) 10/10 um + ball pads", material: copper, material_label: "Cu (ECD on Ti / Cu seed)",
+         role: conductor, h_um: ml3_um, line_um: ml3_line_um, space_um: ml3_space_um,
+         route: {use: mixed, dir: x, line_um: ml3_line_um, space_um: ml3_space_um, matrix: polymer_dielectric}}
+      - {id: dl3b, name: "DL3B solder mask (ball openings)", material: polymer_dielectric, material_label: PID,
+         role: passivation, h_um: sm_um}
 
 arrays:
-  - {id: pad_vn, name: "Die-pad vias", kind: rdl_via, in_layer: g_pi1, pitch_um: pad_pitch_um, diameter_um: pad_open_um,
-     region: {x_mm: zero_mm, y_mm: strip_y_mm, w_mm: die_w_mm, d_mm: strip_mm},
-     note: "RDL via into the 30 um opening of each 40 um Al pad; peripheral band drawn (pad map not reported)"}
-  - {id: pad_vs, name: "Die-pad vias", kind: rdl_via, in_layer: g_pi1, pitch_um: pad_pitch_um, diameter_um: pad_open_um,
-     region: {x_mm: zero_mm, y_mm: "-strip_y_mm", w_mm: die_w_mm, d_mm: strip_mm}}
-  - {id: pad_ve, name: "Die-pad vias", kind: rdl_via, in_layer: g_pi1, pitch_um: pad_pitch_um, diameter_um: pad_open_um,
-     region: {x_mm: strip_x_mm, y_mm: zero_mm, w_mm: strip_mm, d_mm: strip_side_mm}}
-  - {id: pad_vw, name: "Die-pad vias", kind: rdl_via, in_layer: g_pi1, pitch_um: pad_pitch_um, diameter_um: pad_open_um,
-     region: {x_mm: "-strip_x_mm", y_mm: zero_mm, w_mm: strip_mm, d_mm: strip_side_mm}}
-  - {id: balls, name: "Solder balls", kind: bga, under: rdl, region: {part: rdl}, pitch_um: ball_pitch_um,
-     diameter_um: ball_d_um, height_um: ball_h_um,
-     note: "full 400 um grid drawn; the TV has 392 balls (center array plus peripheral rows)"}
+  - {id: bump_c1, name: "Chip 1 Cu pillars", kind: cu_pillar, per: chip1, lower: rdl, pitch_um: b1_pitch_um,
+     diameter_um: bump_d_um, height_um: bump_h_um, cap_h_um: cap_h_um, pad_um: pad_d_um,
+     note: "Cu pillar / Ni / SnAg cap, TCB; full 90 um grid drawn over the chip (3,760 pads; pad map not reported)"}
+  - {id: bump_c2a, name: "Chip 2A Cu pillars", kind: cu_pillar, per: chip2a, lower: rdl, pitch_um: b2_pitch_um,
+     diameter_um: bump_d_um, height_um: bump_h_um, cap_h_um: cap_h_um, pad_um: pad_d_um,
+     note: "full 60 um grid drawn over the chip (1,512 pads per chip; pad map not reported)"}
+  - {id: bump_c2b, name: "Chip 2B Cu pillars", kind: cu_pillar, per: chip2b, lower: rdl, pitch_um: b2_pitch_um,
+     diameter_um: bump_d_um, height_um: bump_h_um, cap_h_um: cap_h_um, pad_um: pad_d_um}
+  - {id: balls, name: "Solder balls (SAC)", kind: bga, under: rdl, region: {part: rdl}, pitch_um: ball_pitch_um,
+     diameter_um: ball_d_um, height_um: ball_h_um, pad_um: ball_pad_um, opening_um: ball_open_um,
+     note: "full 350 um grid drawn; the TV has 2,780 balls in peripheral rings (Fig. 3c)"}
+
+routing:
+  layout_note: >-
+    mock-up routing: net layout, shares, jogs and the use of ML1 for the chip-to-chip wires are illustrative (pad, wire
+    and ball maps not reported); dims carry their own status
+  vias:
+    - {id: v01, name: "V01 (PID via, pad to ML1)", kind: rdl_via, through: dl01, diameter_um: v01_um,
+       bottom_diameter_um: v01_bot_um, land_um: rdl_land_um, fill: filled}
+    - {id: v12, name: "V12 (PID via, ML1 to ML2)", kind: rdl_via, through: dl12, diameter_um: v12_um,
+       bottom_diameter_um: v12_bot_um, land_um: rdl_land_um, fill: filled}
+    - {id: v23, name: "V23 (PID via, ML2 to ML3)", kind: rdl_via, through: dl23, diameter_um: v23_um,
+       bottom_diameter_um: v23_bot_um, land_um: rdl_land_um, fill: filled}
+  nets:
+    # pillar -> pad -> V01 -> ML1 -> V12 -> ML2 (jog) -> V23 -> ML3 (jog to the ball pad) -> SMO -> ball
+    - {id: io_c1, kind: vertical, from: bump_c1, to: balls, style: staggered, jog: [ml2, ml3], share: 0.3,
+       note: "Chip 1 pillar -> staggered PID vias -> fan-out on ML2 / ML3 from 90 um to the 350 um ball pitch"}
+    - {id: io_c2a, kind: vertical, from: bump_c2a, to: balls, style: staggered, jog: [ml2, ml3], share: 0.3}
+    - {id: io_c2b, kind: vertical, from: bump_c2b, to: balls, style: staggered, jog: [ml2, ml3], share: 0.3}
+    # chip-to-chip wires across the 200 um gaps
+    - {id: d2d_1a, kind: lateral, from: bump_c1, to: bump_c2a, levels: [ml1], share: 0.3,
+       note: "Chip 1 - Chip 2A wires on the 2/2 um ML1 (processor - memory use case in the text)"}
+    - {id: d2d_1b, kind: lateral, from: bump_c1, to: bump_c2b, levels: [ml1], share: 0.3}
+    - {id: esc_c2, kind: escape, from: bump_c2a, levels: [ml1], share: 0.2, length_um: 150}
 
 callouts:
-  - {target: mold, text: "Panel {panel} mm, mold-first",
-     note: "reconstructed {panel} mm panel, {pkg_h_um} um thick; die shift at the panel edge <= {shift_um} um with pitch compensation"}
-  - {target: die, text: "Die {die_w_mm} x {die_d_mm} mm face-down"}
-  - {target: mold, text: "Package {pkg_w_mm} x {pkg_d_mm} mm"}
-  - {target: rdl_cu, text: "RDL {rdl_line_um}/{rdl_space_um} um, {cu_um} um Cu"}
-  - {target: pi1, text: "PI {pi1_um} um, pad vias",
-     note: "{pad_n} Al pads at {pad_pitch_um} um pitch, {pad_open_um} um openings; via drawn per pad"}
+  - {target: mold, text: "Panel {panel} mm, chip-last",
+     note: "RDL-first substrates built on a {panel} mm glass panel ({sub_per_panel} per panel); chips bonded by TCB on strips, underfilled, laminated with {mold_h_um} um EMC"}
+  - {target: chip1, text: "Chip 1 {c1_w_mm} x {c1_d_mm} mm",
+     note: "{b1_n} pads at {b1_pitch_um} um pitch; Chip 2A / 2B {c2_w_mm} x {c2_d_mm} mm ({c2_n} chips), {b2_n} pads each at {b2_pitch_um} um; {gap_um} um gaps"}
+  - {target: bump_c1, text: "Cu pillars {b1_pitch_um} / {b2_pitch_um} um",
+     note: "{bump_d_um} um Cu pillar {pillar_h_um} um + Ni + {cap_h_um} um SnAg cap on {pad_h_um} um Cu pads, TCB",
+     refs: [2380-4505-2020.1.000042-a-i1.metallurgy]}
+  - {target: ml1, text: "ML1 {ml1_line_um}/{ml1_space_um} um, D2D wires",
+     note: "ML1 target {ml1_um} um thick; measured {ml1_meas_um} um (Fig. 7 SEM); chip-to-chip wiring drawn here (mock-up)"}
+  - {target: ml2, text: "ML2 {ml2_line_um}/{ml2_space_um} um"}
+  - {target: ml3, text: "ML3 {ml3_line_um}/{ml3_space_um} um, ball pads",
+     note: "ML3 {ml3_um} um thick (measured {ml3_meas_um} um), first level built on the glass carrier; ball pads under each ball"}
+  - {target: v12, text: "Staggered PID vias",
+     note: "V01 {v01_um} um, V12 / V23 {v12_um} / {v23_um} um openings (largest value of the written range) in {dl01_um} / {dl12_um} / {dl23_um} um PID"}
+  - {target: d2d_1a, text: "Chip-to-chip wires on ML1"}
   - {target: balls, text: "Balls {ball_d_um} um, {ball_pitch_um} um pitch",
-     note: "{ball_n} solder balls of {ball_d_um} um at {ball_pitch_um} um pitch directly to the board (no substrate)"}
-  - {target: die, text: "Face-up variant: 6-sided molding",
-     note: "chip-first face-up FOPLP: Cu studs on the die, front mold ground to the studs (6-sided die protection), {fu_w_mm} x {fu_d_mm} x {fu_h_mm} mm package",
+     note: "{ball_n} SAC balls, mounted height {ball_h_um} um, in {sm_um} um solder mask openings; directly to the PCB (no substrate)"}
+  - {target: rdl, text: "Chip-first variant: one RDL",
+     note: "chip-first mold-first FOPLP (previous backbone): {cf_die_w_mm} mm die face down in a {cf_pkg_w_mm} mm, {cf_pkg_h_um} um package from a {cf_panel} mm panel; one RDL, {cf_cu_um} um Cu at {cf_line_um}/{cf_line_um} um on {cf_pi1_um} um PI with {cf_pad_open_um} um openings on {cf_pad_pitch_um} um-pitch pads; {cf_ball_pitch_um} um balls; die shift <= {cf_shift_um} um",
+     refs: [ectc32862.2020.00185-a.name]}
+  - {target: chip2b, text: "Face-up variant: 6-sided molding",
+     note: "chip-first face-up FOPLP: Cu studs on the die, front mold ground to the studs, PM2 {fu_pi2_um} um; {fu_w_mm} x {fu_d_mm} x {fu_h_mm} mm package",
      refs: [ectc32696.2021.00174-a.technology_name, ectc32696.2021.00174-a-L03.layer_name]}
-  - {target: rdl, text: "RDL-first variant: {rf_line_um} um lines",
-     note: "RDL-first FOPLP: 2 Cu RDLs ({rf_cu_um} um, {rf_line_um}/{rf_line_um} um) built on a glass carrier panel, {rf_w_mm} mm package",
+  - {target: dl3b, text: "RDL-first on glass: {rf_line_um} um lines",
+     note: "RDL-first FOPLP: 2 Cu RDLs ({rf_cu_um} um, {rf_line_um}/{rf_line_um} um) on a glass carrier panel, {rf_w_mm} mm package",
      refs: [ectc.2019.00-29-a.purpose]}
   - {target: balls, text: "LGA variant: {lga_h_mm} mm thick",
      note: "chip-first double-mold FOPLP as a {lga_w_mm} mm RDL-based LGA, {lga_h_mm} mm thick (leadframe-free QFN)"}
 
 insets:
-  - id: die_edge
-    label: "Die edge: pad vias, RDL, ball"
-    box_mm: ["die_w_mm / 2 - 0.5", -0.3, "die_w_mm / 2 + 0.3", 0.3]
-    z: ["bottom:balls", "top:mold"]
+  - id: d2d_gap
+    label: "Chip 1 - Chip 2A gap, RDL"
+    box_mm: ["c1_x_mm + c1_w_mm / 2 - 0.25", "c1_y_mm - 0.15", "c2a_x_mm - c2a_w_mm / 2 + 0.25", "c1_y_mm + 0.15"]
+    z: ["bottom:balls", "top:chip1"]
     view: front
   - id: rdl_xs
-    label: "RDL cross-section"
-    box_mm: ["die_w_mm / 2 - 0.1", -0.05, "die_w_mm / 2", 0.05]
-    z: ["bottom:rdl", "top:rdl"]
+    label: "3-RDL cross-section"
+    box_mm: ["c1_x_mm + c1_w_mm / 2 - 0.12", "c1_y_mm - 0.03", "c1_x_mm + c1_w_mm / 2", "c1_y_mm + 0.03"]
+    z: ["bottom:rdl", "top:bump_c1"]
     view: front
   - id: pkg_edge
-    label: "Package edge"
+    label: "Package edge, balls"
     box_mm: ["pkg_w_mm / 2 - 1.2", -0.5, "pkg_w_mm / 2", 0.5]
     z: ["bottom:balls", "top:mold"]
     view: front

@@ -8,6 +8,17 @@
 # The host is drawn as a wafer section with two die sites so the die-to-wafer character shows (separate stacks with a
 # gap); the die spacing is an analog. The host thickness comes from the Leti D2W TV (ectc51846.2026.00218-a).
 # Gap fill between the stacks is not part of these TVs (RESEARCH.md); the Leti inter-die gap fill is a callout.
+#
+# Routing (DevLog-011, 2026-10-20; references config/package3d/ROUTING_REF_rdl.md 1E (DBI multi-die variant) and 2.4;
+# figs ectc51906.2022.00031-f01 (DBI pad on TSV end, RDL pad above), -f04 (straight TSV columns through all dies)):
+# - Every face: single-level Cu damascene RDL with the DBI pad (2 um DBI layer) directly on it; no separate bond via
+#   level in this TV (the HBV levels of other family TVs, e.g. ectc51846.2026.00218, are not drawn). The pad-to-RDL
+#   contact is a via class through the DBI layer with the pad diameter (it coincides with the pad array).
+# - Thru dies: the TSV runs from the prepared backside (bond surface, TSV end exposed) through the Si to the RDL pad;
+#   the next die's DBI pad bonds directly onto the TSV end (F2B). Isolation oxide layers are reported without thickness
+#   and not drawn.
+# - Nets: cap pad -> straight TSV column through the 4 thru dies -> host pad, and RDL daisy-chain links on every face
+#   (mock-up layout). RDL line width is the reported nominal 10 um (text); space and TSV landing are templates.
 id: hybrid_bond_d2w
 name: Hybrid bonding, die-to-wafer
 company: Adeia/Xperi, CEA-Leti, imec, Sony, others
@@ -67,6 +78,21 @@ params:
     note: "die-to-die spacing on the host wafer not reported; analog = 100 um inter-dielet spacing of a Cu-Cu bonded die-to-wafer assembly (GaN-IF)"
   site_px_mm: {template: "die_w_mm + space_um / 1000", note: "die-site pitch = die + analog spacing"}
   host_w_mm: {template: "sites_n * site_px_mm", note: "host wafer section = two die sites"}
+  rdl_line_um:
+    template: 10
+    refs: [ectc51906.2022.00031-c-L03.notes]
+    note: "RDL nominal linewidth 10 um (text cell 'RDL nominal linewidth 10 um (p.2)')"
+  rdl_space_um:
+    template: "rdl_line_um"
+    refs: [ectc51906.2022.00031-c-L03.notes]
+    note: "RDL space not reported; harmonized rule (TEMPLATE_FORMAT.md 'Template rules'): space = line when only the line is known (until 2026-10-20 derived to pass the scorer L/S rule; audit A1 S4)"
+  tsv_land_um:
+    template: "hb_d_um"
+    refs: [ectc51906.2022.00031-c-L08.notes]
+    note: "RDL capture pad over the TSV not dimensioned (wider than the DBI pad in fig ectc51906.2022.00031-f01); drawn as wide as the 15 um DBI pad"
+  tsv_liner_um:
+    analog: ectc51909.2023.00307-a-L05.thickness_um
+    note: "TSV liner not reported (TSVs by IZM-ASSID); analog = 0.4 um TEOS liner on the sidewall of a 10 um TSV"
   host_d_mm: {template: "die_d_mm + space_um / 1000", note: "host wafer section = die + analog spacing"}
 
 parts:
@@ -104,7 +130,8 @@ layers:
       - {id: host_dbi, name: "Host DBI layer", material: other, material_label: "Cu pads in DBI dielectric (not stated)",
          role: bonding, h_um: host_dbi_um}
       - {id: host_rdl, name: "Host RDL", material: copper, material_label: "Cu damascene", role: conductor,
-         h_um: host_rdl_um}
+         h_um: host_rdl_um,
+         route: {use: signal, dir: x, line_um: rdl_line_um, space_um: rdl_space_um, matrix: oxide}}
       - {id: host_si, name: "Host Si", material: silicon, role: core, h_um: host_si_um}
   - part: thru
     id: thru_body
@@ -115,29 +142,54 @@ layers:
   - part: thru
     pattern:
       - {id: thru_rdl, name: "Thru-die RDL", material: copper, material_label: "Cu damascene", role: conductor,
-         h_um: thru_rdl_um}
+         h_um: thru_rdl_um,
+         route: {use: signal, dir: x, line_um: rdl_line_um, space_um: rdl_space_um, matrix: oxide}}
       - {id: thru_dbi, name: "Thru-die DBI layer", material: other,
          material_label: "Cu pads in DBI dielectric (not stated)", role: bonding, h_um: thru_dbi_um}
   - part: cap
     pattern:
       - {id: cap_si, name: "Cap Si", material: silicon, role: core, h_um: cap_si_um}
-      - {id: cap_rdl, name: "Cap RDL", material: copper, material_label: "Cu damascene", role: conductor, h_um: rdl_h_um}
+      - {id: cap_rdl, name: "Cap RDL", material: copper, material_label: "Cu damascene", role: conductor, h_um: rdl_h_um,
+         route: {use: signal, dir: x, line_um: rdl_line_um, space_um: rdl_space_um, matrix: oxide}}
       - {id: cap_dbi, name: "Cap DBI layer", material: other, material_label: "Cu pads in DBI dielectric (not stated)",
          role: bonding, h_um: dbi_h_um}
 
 arrays:
-  - {id: hb_host, name: "Host DBI pads", kind: hybrid_bond, in_layer: host_dbi, region: {intersect: [thru]},
+  - {id: hb_host, name: "Host DBI pads", kind: hybrid_bond, in_layer: host_dbi, between: [thru, host], region: {intersect: [thru]},
      pitch_um: hb_pitch_um, diameter_um: hb_d_um, note: "face-to-face bond to the first thru die; pads only under the die sites"}
   - {id: hb_thru, name: "Thru-die DBI pads", kind: hybrid_bond, in_layer: thru_dbi, pitch_um: hb_pitch_um,
      diameter_um: hb_d_um, note: "die face; bonds F2F to the host (first level) or B2F to the TSV backside below"}
   - {id: hb_cap, name: "Cap DBI pads", kind: hybrid_bond, in_layer: cap_dbi, pitch_um: hb_pitch_um, diameter_um: hb_d_um}
-  - {id: tsv, name: "TSVs", kind: tsv, in_layer: thru_body, pitch_um: tsv_pitch_um, diameter_um: tsv_d_um,
-     note: "5 x 50 um Cu TSVs through each thru die, ends exposed in the prepared backside; one per pad column"}
 
+routing:
+  layout_note: "mock-up routing: net layout, shares and daisy-chain links are illustrative; dims carry their own status"
+  vias:
+    # The DBI pad is plated into the DBI-layer opening directly onto the RDL: drawn as the bond-pad array and as this
+    # via class (same diameter, same positions) so the pad-to-RDL contact spans the DBI layer.
+    - {id: dbi_host, name: "DBI pad on RDL (host)", kind: rdl_via, through: host_dbi, diameter_um: hb_d_um, fill: filled,
+       note: "Cu DBI pad in the 2 um DBI layer, directly on the RDL (no separate via level in this TV)"}
+    - {id: dbi_thru, name: "DBI pad on RDL (thru die)", kind: rdl_via, through: thru_dbi, diameter_um: hb_d_um, fill: filled}
+    - {id: dbi_cap, name: "DBI pad on RDL (cap)", kind: rdl_via, through: cap_dbi, diameter_um: hb_d_um, fill: filled}
+    - {id: tsv, name: "TSV (Cu)", kind: tsv, through: thru_body, diameter_um: tsv_d_um, pitch_um: tsv_pitch_um,
+       land_um: tsv_land_um, liner_um: tsv_liner_um, fill: filled,
+       note: "5 x 50 um Cu TSV from the prepared backside (TSV end exposed, bonded to the next DBI pad) to the RDL pad; one per pad column, columns aligned through all thru dies (fig ectc51906.2022.00031-f04). The 10 um daisy-chain RDL lines join neighbouring pads; no line passes between two 15 um lands at 35 um pitch in the source, so the scorer's one-trace-between-lands rule (20 um gap vs 10 + 2 x 10) does not describe this stack (left flagged)"}
+  nets:
+    - {id: column, kind: vertical, from: hb_cap, to: hb_host, style: stacked, share: 0.5,
+       note: "cap DBI pad -> TSV end -> RDL pad -> DBI pad -> ... straight through the 4 thru dies to the host pad (fig ectc51906.2022.00031-f04)"}
+    - {id: link_cap, kind: escape, from: hb_cap, levels: [cap_rdl], share: 0.4, length_um: 35,
+       note: "RDL daisy-chain link to the next pad (mock-up)"}
+    - {id: link_thru, kind: escape, from: hb_thru, levels: [thru_rdl], share: 0.4, length_um: 35}
+    - {id: link_host, kind: escape, from: hb_host, levels: [host_rdl], share: 0.4, length_um: 35}
 callouts:
   - {target: hb_thru, text: "DBI pads, {hb_pitch_um} um pitch",
      note: "Cu pads ({hb_d_um} um) in a {dbi_h_um} um DBI layer per face at {hb_pitch_um} um pitch; Cu-Cu joined during anneal; no solder, no underfill",
      refs: [ectc51906.2022.00031-c-i2.metallurgy, ectc51906.2022.00031-c-i2.anneal_temp_c]}
+  - {target: column, text: "TSV columns through all dies",
+     note: "straight TSV columns at {tsv_pitch_um} um pitch through every thru die; each DBI pad bonds directly onto the TSV end below (F2B), the RDL pad sits above the TSV (fig ectc51906.2022.00031-f01, -f04)",
+     refs: [ectc51906.2022.00031-c-i2.notes]}
+  - {target: thru_rdl, text: "1 um RDL, 10 um lines",
+     note: "single-level Cu damascene RDL ({rdl_h_um} um) per face, nominal linewidth 10 um (text); DBI pad directly on the RDL, no bond via level",
+     refs: [ectc51906.2022.00031-c-L03.notes]}
   - {target: tsv, text: "TSV {tsv_d_um} x {tsv_depth_um} um",
      note: "TSV {tsv_d_um} um x {tsv_depth_um} um at {tsv_pitch_um} um pitch in each {thru_si_um} um thru die",
      refs: [ectc51906.2022.00031-c-i3.aspect_ratio]}

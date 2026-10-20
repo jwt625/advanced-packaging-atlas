@@ -4,7 +4,15 @@
 # value, so it is drawn as a template value). The substrate outline is taken from the 45 um-pitch EMIB-T package TV
 # (ectc51687.2025.00051-a, 77 x 56 mm) because the backbone TV does not report one. Topology (bridge face-up in a
 # substrate cavity, solder joints + underfill to cavity pads, dielectric encapsulation with vias onto bridge pads,
-# FLI on the surface) follows the EMIB-T process-step rows of ectc51687.2025.00051-a.
+# surface layer + FLI) follows the EMIB-T process-step rows of ectc51687.2025.00051-a and the Fig. 3 schematic of
+# ectc51846.2026.00051 (two stacked micro-vias from the surface pad to the bridge pad; TSV groups; cavity-side bumps).
+# Routing (DevLog-011, 2026-10-20): no substrate number is reported for EMIB-T, so the substrate stack uses the same
+# analogs as emib.yaml (2.5D HPC 4/2/4 substrate ectc51909.2023.00155-a: 15 um film, L/S 14/20, 40 um via, 1.3 mm core,
+# SR 18, 200 um PTH, BGA; 5/2/5 level count of the Si-bridge MTV substrate ectc51846.2026.00073-a). Cavity: bridge top
+# at the top of L3 (encapsulation dielectric + surface layer over it), cavity-side joints on pads of the core-top Cu
+# level; the joint height closes the stack (template). Bridge BEOL: the paper's 'at least 10 metal layers' drawn as 10
+# thin levels with a MIM band between M1 and M2. Bridge back: TSV groups end on backside pads over the cavity-side bumps
+# (Fig. 3); one TSV column per cavity bump at the cavity-bump pitch (audit A1 S3, 2026-10-20).
 id: emib_t
 name: EMIB-T
 company: Intel
@@ -33,9 +41,13 @@ params:
   overlay_um: {ref: ectc51846.2026.00051-b-m1.value}
   mim_density: {ref: ectc51846.2026.00051-d-L02.properties}
   hbm4e_gbps: {ref: ectc51846.2026.00051-d-e1.lane_rate_gbps}
+  m_n:
+    ref: ectc51846.2026.00051-d-L01.repeat
+    note: "'at least 10 metal layers'; the paper does not say bridge or package; drawn as bridge BEOL levels per the Fig. 3 schematic"
   # ---- derived layout
   die_px_mm: {derived: "die_w_mm + die_gap_um / 1000"}
-  # ---- template
+  m_pairs_n: "(m_n - 2) / 2"   # M10..M3 as 4 x (signal level, plane level); M2 / MIM / M1 drawn separately
+  # ---- template: layout
   bridge_h_um:
     template: "r0"
     refs: [ectc51846.2026.00051-b-c1.thickness_um]
@@ -54,30 +66,142 @@ params:
   die_gap_um:
     analog: tcpmt.2023.3312037-a-c2.gap_um
     note: "die-to-die gap not reported for EMIB-T; analog = Intel Co-EMIB DtD spacing ('as small as 100 um')"
+  # ---- template: substrate stack (analogs; same set as emib.yaml)
   bu_n:
-    analog: ectc51687.2025.00148-a-L06.repeat
-    note: "EMIB-T substrate layer count not reported; analog = 4 build-up layers per side of an organic FC substrate"
+    analog: ectc51846.2026.00073-a-L07.repeat
+    note: "EMIB-T substrate layer count not reported; analog = 5 build-up levels per side (5/2/5) of a Si-bridge 2.5D MTV substrate"
+  bu_pairs_n: {template: "(bu_n - 1) / 2", note: "L2..L5 below the L1 pad level as 2 x (signal level, plane level); the 5th dielectric sits on the core Cu"}
+  sr_h_um:
+    analog: ectc51909.2023.00155-a-L15.thickness_um
+    note: "solder resist not reported for EMIB-T; analog = SR of a 2.5D HPC 4/2/4 substrate"
+  cu_h_um:
+    analog: ectc51687.2025.00148-a-L06.thickness_um
+    note: "build-up Cu thickness not reported for EMIB-T (nor in the 4/2/4 film analog); analog = build-up Cu of a 4-2-4 FCBGA TV; used for every Cu level incl. core Cu"
   bu_diel_um:
-    analog: ectc51687.2025.00148-a-L04.thickness_um
-    note: "build-up dielectric thickness not reported for EMIB-T; analog = ABF-GL layer of an organic FC substrate"
-  bu_h_um: {template: "bu_n * bu_diel_um", note: "build-up per side = layer count x dielectric thickness (analogs)"}
+    analog: ectc51909.2023.00155-a-L16.thickness_um
+    note: "build-up dielectric not reported for EMIB-T; analog = 15 um build-up film of a 2.5D HPC 4/2/4 substrate (thin enough for the fine vias over the bridge)"
+  bu_line_um:
+    analog: ectc51909.2023.00155-a-L16.line_um
+    note: "build-up L/S not reported for EMIB-T; analog = 14/20 um wiring of the same 4/2/4 substrate"
+  bu_space_um:
+    analog: ectc51909.2023.00155-a-L16.space_um
+    note: "build-up L/S not reported for EMIB-T; analog = 14/20 um wiring of the same 4/2/4 substrate"
   core_h_um:
-    analog: ectc51687.2025.00148-a-L07.thickness_um
-    note: "core thickness not reported for EMIB-T; analog = core of the same organic FC substrate"
-  sbt_h_um: {template: "core_h_um + 2 * bu_h_um", note: "substrate = core + 2 build-up stacks (template inputs)"}
+    analog: ectc51909.2023.00155-a-L17.thickness_um
+    note: "core thickness not reported for EMIB-T; analog = CCL core of the same 4/2/4 substrate"
+  sbt_h_um:
+    template: "core_h_um + 2 * (sr_h_um + (bu_n + 1) * cu_h_um + bu_n * bu_diel_um)"
+    note: "substrate = core + 2 x (SR + 5 build-up Cu + core Cu + 5 dielectrics) (template inputs)"
+  # ---- template: vias in the substrate
+  mvia_d_um:
+    analog: ectc51909.2023.00155-a-i6.diameter_um
+    note: "build-up microvia not reported for EMIB-T; analog = 40 um microvia of the same 4/2/4 substrate (top diameter)"
+  mvia_bot_um:
+    template: "mvia_d_um * 38 / 42"
+    refs: [ectc51687.2025.00378-a-L04.notes]
+    note: "microvia taper not reported; bottom/top ratio of a measured 42/38 um laser via in laminated dielectric (analog notes)"
+  mvia_land_um:
+    template: "mvia_d_um * r0 / r1"
+    refs: [001c.147203-a-i1.pad_x_um, 001c.147203-a-i1.diameter_um]
+    note: "microvia land not reported for a cored organic substrate; harmonized rule, TEMPLATE_FORMAT.md 'Template rules': land / via = 110 / 70 (pad >= 110 um for a 70 um Cu-filled stacked via: minimum design rule of a coreless 150 GHz AiP antenna substrate, R-G640)"
+  pth_d_um:
+    analog: ectc51909.2023.00155-a-i5.diameter_um
+    note: "core through hole not reported for EMIB-T; analog = 200 um PTH in the 1.3 mm core of the same 4/2/4 substrate"
+  pth_pitch_um:
+    analog: ectc51687.2025.00148-a-i4.pitch_um
+    note: "PTH pitch not reported for EMIB-T (nor for the 4/2/4 film analog); analog = 500 um core TH pitch of a 4-2-4 FCBGA TV"
+  pth_wall_um:
+    template: "(r0 + r1 + r2 + r3) / 4"
+    refs: [eptc62800.2024.10909809-a-m17.value, eptc62800.2024.10909809-a-m18.value, eptc62800.2024.10909809-a-m19.value, eptc62800.2024.10909809-a-m20.value]
+    note: "PTH plating not reported for a cored HPC substrate; harmonized rule, TEMPLATE_FORMAT.md 'Template rules': mean of the minimum barrel Cu of legs 1-4 of a thin-core through hole (11-18.5 um, mean 14.875 um)"
+  pth_land_um:
+    template: "pth_d_um * 1.5"
+    refs: [ectc51687.2025.00148-a-i4.pitch_um]
+    note: "PTH land not reported; harmonized rule, TEMPLATE_FORMAT.md 'Template rules': 1.5 x the hole, read from the 4-2-4 FCBGA schematic (fig ectc51687.2025.00148-f01, scaled by the 500 um TH pitch)"
+  fv_d_um:
+    template: "fli_bridge_pitch_um * 18 / 42"
+    refs: [ectc51846.2026.00051-b-i2.notes]
+    note: "micro-via onto bridge pads not dimensioned; read off the backbone EMIB25T X-SEM zoom fig ectc51846.2026.00051-f01 (d) (pixel widths, no scale bar): via stem ~18 px at the ~42 px FLI column pitch (25 um, row -b-i1); the 36 um TV SEM fig ectc51846.2026.00051-f04 (b) gives a similar via / pitch (~43 / 150 px at the via top). R2 2026-10-20: was the 16 um analog ectc51906.2022.00180-a-i1 (20 um-pitch vias of another package), which left 3 um between lands at 25 um pitch"
+  fv_bot_um:
+    template: "fv_d_um * 38 / 42"
+    refs: [ectc51687.2025.00378-a-L04.notes]
+    note: "fine-via taper not reported; same bottom/top ratio as the build-up microvia"
+  fv_land_um:
+    template: "fv_d_um + 2 * overlay_um"
+    refs: [ectc51846.2026.00051-b-m1.qualifiers]
+    note: "bridge pad / fine-via land not reported; via + 2 x the reported max via-to-pad overlay (< 3 um), so the pad captures the via; consistent with the discrete pads of fig ectc51846.2026.00051-f01 (d) (~30 px pads at ~42 px pitch, ~18 um at 25 um)"
+  # ---- template: bridge BEOL and TSV
+  m_line_um:
+    analog: ectc.2016.201-a-L02.line_um
+    note: "EMIB-T bridge L/S not reported; analog = EMIB bridge 2/2 um"
+  m_space_um:
+    analog: ectc.2016.201-a-L02.space_um
+    note: "EMIB-T bridge L/S not reported; analog = EMIB bridge 2/2 um"
+  m_via_um:
+    analog: ectc.2016.201-a-L02.via_diameter_um
+    note: "EMIB-T bridge via not reported; analog = EMIB 2 um dual-damascene via"
+  m_h_um:
+    analog: eptc59621.2023.10457670-a-L03.thickness_um
+    note: "level thickness not reported; analog = 1 um dual-damascene Cu level (M1-M5) of a built 300 mm TSV Si interposer (until 2026-10-20 the 1 um level of a simulation-model bridge, ectc51846.2026.00035-a). Built bridge rows give 2-4 um (LSI / polyimide RDL bridges with <= 4 levels); 10 levels of 2 um plus IMD would leave about 14 um of Si in a ~50 um bridge, so the Si-BEOL value is kept and sits below that bridge range"
+  m_imd_um:
+    analog: ectc51846.2026.00035-a-L02.thickness_um
+    note: "inter-metal dielectric not reported; analog = 1 um SiO2 ILD of the same dual-damascene Si bridge"
+  pad_h_um: {template: "m_h_um", note: "bridge pad layer thickness not reported; set equal to a metal level"}
+  mim_h_um:
+    template: "m_imd_um"
+    refs: [ectc51846.2026.00051-d-L02.layer_name]
+    note: "MIM band thickness not reported; drawn as one via-dielectric level between M1 and M2"
+  br_plane_fill:
+    template: 0.6
+    refs: [ectc.2016.201-a-L02.properties]
+    note: "plane density not reported for EMIB-T; EMIB Vss level metal density 50-70 % (Table II), midpoint"
+  bpad_h_um:
+    analog: ectc51687.2025.00049-a-L04.thickness_um
+    refs: [ectc51846.2026.00051-b-i3.notes]
+    note: "bridge backside pad under each TSV group (Fig. 3, ectc51846.2026.00051-f03) not dimensioned; analog = 4 um Cu/Ni/Cu UBM of the bottom-side pillars of a Si bridge (DBHi coupon), the closest bridge-underside joint pad in the DB"
+  bridge_si_um:
+    template: "bridge_h_um - pad_h_um - m_n * (m_h_um + m_imd_um) - bpad_h_um"
+    note: "bridge Si = bridge thickness - pad layer - 10 x (via dielectric + metal level) - backside pad level (analog level thicknesses)"
+  tsv_pitch_um:
+    template: "cav_pitch_um"
+    refs: [ectc51846.2026.00051-b-i4.notes]
+    note: "bridge TSV group pitch not reported; in Fig. 9 (ectc51846.2026.00051-f03) a group of 3-4 TSVs ends on one backside pad over each cavity-side bump: one group site per cavity bump at the cavity-bump pitch (harmonized rule, TEMPLATE_FORMAT.md 'Template rules': TSV pitch = endpoint pitch when no routing level lies between them), the group drawn with `cluster` (R2 2026-10-20)"
+  tsv_cl_n:
+    template: 4
+    refs: [ectc51846.2026.00051-b-i4.notes]
+    note: "TSVs per group not reported; the schematic fig ectc51846.2026.00051-f03 draws groups of 3-4 TSVs on each backside pad (4 in the left group); 4 drawn as a compact 2 x 2 group"
+  tsv_cl_pitch_um:
+    analog: iedm19573.2019.8993637-a-i2.pitch_min_um
+    note: "TSV pitch inside a group not reported for EMIB-T; analog = 15 um minimum TSV pitch inside the TSV clusters of Intel Foveros (single / pair / 2 x 2 clusters sharing one bump), matching the Foveros TSV diameter analog"
+  tsv_d_um:
+    analog: vlsitechnologyandcir46783.2024.10631478-a-i3.diameter_um
+    note: "bridge TSV diameter not reported; analog = Intel Foveros base-die TSV (SEM)"
+  tsv_liner_um:
+    template: 0.5
+    refs: [vlsitechnologyandcir46783.2024.10631478-a-i3.dielectric]
+    note: "TSV liner not reported for EMIB-T; 0.5 um SiO2 liner of the Foveros TSV analog"
+  tsv_land_um:
+    template: "tsv_cl_pitch_um + 1.5 * tsv_d_um"
+    note: "TSV group pad not reported; one pad per TSV group (ectc51846.2026.00051-f03: the group ends on one backside pad): the 2 x 2 group span (one cluster pitch) plus the harmonized 1.5 x TSV land (TEMPLATE_FORMAT.md 'Template rules'), so the pad covers every TSV of the group"
+  # ---- template: cavity
   bridge_depth_um:
-    template: "2 * bu_diel_um"
+    template: "sr_h_um + 2 * (cu_h_um + bu_diel_um)"
     refs: [ectc51687.2025.00051-F1-s05.step, ectc51687.2025.00051-F1-s06.step]
-    note: "bridge top below the surface by the encapsulation dielectric + surface layer (flow steps s05, s06); thickness not reported"
+    note: "bridge top at the top of L3: encapsulation dielectric (s05) with vias + pads, then surface layer (s06) over it; two stacked vias as in the Fig. 3 schematic"
+  cav_floor_um:
+    template: "sr_h_um + bu_n * (cu_h_um + bu_diel_um)"
+    refs: [ectc51687.2025.00051-F1-s02.step]
+    note: "cavity floor = top of the core-top Cu level carrying the cavity pads (PTH right under the cavity in the Fig. 1(c) section); cavity depth not reported"
   cav_h_um:
-    template: "fli_h_um"
+    template: "cav_floor_um - bridge_depth_um - bridge_h_um"
     refs: [ectc51687.2025.00051-F1-s03.step, ectc51846.2026.00051-b-i3.bonding_method]
-    note: "cavity-side solder joint (TCB) height not reported; set equal to the FLI standoff"
+    note: "cavity-side solder joint (TCB) height not reported; closes the cavity (floor - bridge top - bridge)"
   cav_pitch_um:
-    template: "fli_core_pitch_um"
-    note: "cavity-side bump pitch not reported; set equal to the coarse FLI pitch"
+    analog: ectc51846.2026.00050-e-i2.pitch_um
+    note: "cavity-side bump pitch not reported; analog = 175 um bottom solder bumps of an IBM TSV bridge to laminate (power path)"
   cav_d_um: {template: "fli_core_d_um", note: "cavity-side bump diameter not reported; set equal to the coarse FLI bump"}
   cav_margin_mm: {template: 0.2, note: "cavity clearance around the bridge not reported; illustrative"}
+  # ---- template: joints
   fli_bridge_d_um:
     analog: ectc51846.2026.00227-b-i1.diameter_um
     note: "FLI bump diameter at 25 um pitch not reported for EMIB-T; analog = 25 um-pitch Cu/SnAg TCB bump"
@@ -85,17 +209,17 @@ params:
     analog: vlsitechnologyandcir46783.2024.10631478-a-i2.diameter_um
     note: "FLI bump diameter at 110 um pitch not reported for EMIB-T; analog = Intel Foveros 110 um-pitch package-side bump"
   fli_h_um: {template: 30, note: "FLI joint standoff not reported in any EMIB-T or EMIB row; illustrative"}
-  via_d_um:
-    template: "fli_bridge_d_um"
-    refs: [ectc51846.2026.00051-b-i2.ic_type]
-    note: "micro-via onto bridge pads: diameter not reported; set equal to the 25 um-pitch FLI bump"
-  tsv_pitch_um:
-    analog: eptc59621.2023.10457670-a-i1.pitch_min_um
-    note: "bridge TSV pitch not reported; analog = 50 um-pitch via-first TSV daisy chain"
-  tsv_d_um:
-    analog: vlsitechnologyandcir46783.2024.10631478-a-i3.diameter_um
-    note: "bridge TSV diameter not reported; analog = Intel Foveros base-die TSV (SEM)"
   uf_margin_mm: {template: 0.5, note: "top-die underfill fillet extent not reported; illustrative"}
+  bga_pitch_um:
+    analog: ectc51909.2023.00155-a-i4.pitch_um
+    note: "BGA not reported for EMIB-T; analog pitch of a large 2.5D TV (same as emib.yaml)"
+  bga_d_um:
+    analog: ectc51909.2023.00155-a-i4.diameter_um
+    note: "BGA ball not reported for EMIB-T; analog = SAC305 ball of the same 2.5D TV"
+  bga_h_um:
+    template: 478
+    refs: [ectc51909.2023.00155-a-i4.notes]
+    note: "BGA height not reported for EMIB-T; the analog row's notes give a measured ball height of 478 um"
 
 parts:
   - {id: substrate, name: "Organic package substrate", kind: substrate, material: organic_laminate,
@@ -103,6 +227,10 @@ parts:
      explode_group: 0}
   - {id: bridge, name: "EMIB-T bridge (Si, TSV)", kind: bridge, material: silicon, w_mm: bridge_w_mm,
      d_mm: bridge_d_mm, h_um: bridge_h_um, in: substrate, depth_um: bridge_depth_um, explode_group: 1}
+  - {id: ob_bu, name: "Build-up over the bridge (via pads only)", kind: other, material: organic_build_up,
+     material_label: "build-up film (not named)", w_mm: bridge_w_mm, d_mm: bridge_d_mm, h_um: bridge_depth_um,
+     in: substrate, explode_group: 1,
+     note: "the substrate levels above the bridge footprint (SR, L1, surface dielectric, L2, encapsulation dielectric) carry only the stacked fine-via pads, no traces (figs ectc51846.2026.00051-f03, -f01 (c)); drawn as its own part so these levels can be pad-only (same thicknesses as the substrate levels; R2 2026-10-20)"}
   - {id: cavity_fill, name: "Cavity joints + underfill", kind: underfill, material: underfill,
      w_mm: "bridge_w_mm + 2 * cav_margin_mm", d_mm: "bridge_d_mm + 2 * cav_margin_mm", h_um: cav_h_um,
      in: substrate, depth_um: "bridge_depth_um + bridge_h_um", explode_group: 1, xray_default: true}
@@ -127,13 +255,105 @@ parts:
     note: "not described in EMIB-T rows; capillary underfill is reported for EMIB (ectc.2016.201)"
 
 layers:
+  # ---- bridge: pad layer, M10..M3 (signal / plane alternating), M2 / MIM band / M1, Si with TSVs
+  - part: bridge
+    pattern:
+      - {id: br_pad, name: "Bridge pad layer", material: copper, material_label: "metal (not specified)",
+         role: conductor, h_um: pad_h_um,
+         route: {use: pad, matrix: oxide}}
+  - part: bridge
+    repeat: m_pairs_n
+    pattern:
+      - {id: br_vs, name: "Bridge via dielectric", material: oxide, material_label: "inter-metal dielectric (not specified)",
+         role: dielectric, h_um: m_imd_um, via_um: m_via_um}
+      - {id: br_ms, name: "Bridge signal level (M10, M8, M6, M4)", material: copper,
+         material_label: "BEOL metal (not specified)", role: conductor, h_um: m_h_um, line_um: m_line_um,
+         space_um: m_space_um,
+         route: {use: signal, dir: x, line_um: m_line_um, space_um: m_space_um, matrix: oxide}}
+      - {id: br_vp, name: "Bridge via dielectric", material: oxide, material_label: "inter-metal dielectric (not specified)",
+         role: dielectric, h_um: m_imd_um, via_um: m_via_um}
+      - {id: br_mp, name: "Bridge P/G plane (M9, M7, M5, M3)", material: copper,
+         material_label: "BEOL metal (not specified)", role: conductor, h_um: m_h_um,
+         route: {use: plane, space_um: m_space_um, matrix: oxide, fill: br_plane_fill}}
+  - part: bridge
+    pattern:
+      - {id: br_vb, name: "Bridge via dielectric", material: oxide, material_label: "inter-metal dielectric (not specified)",
+         role: dielectric, h_um: m_imd_um, via_um: m_via_um}
+      - {id: br_m2, name: "Bridge M2 (MIM top plate, P/G)", material: copper, material_label: "BEOL metal (not specified)",
+         role: conductor, h_um: m_h_um,
+         route: {use: plane, space_um: m_space_um, matrix: oxide, fill: br_plane_fill}}
+      - {id: br_mim, name: "High-density MIM band (M1-M2)", material: other,
+         material_label: "MIM capacitor stack (not specified)", role: dielectric, h_um: mim_h_um}
+      - {id: br_m1, name: "Bridge M1 (MIM bottom plate, TSV landing)", material: copper,
+         material_label: "BEOL metal (not specified)", role: conductor, h_um: m_h_um,
+         route: {use: plane, space_um: m_space_um, matrix: oxide, fill: br_plane_fill}}
+      - {id: br_si, name: "Bridge Si (TSV)", material: silicon, role: core, h_um: bridge_si_um}
+      - {id: br_bpad, name: "Bridge backside pads (TSV groups, cavity bumps)", material: copper,
+         material_label: "Cu pad (not specified)", role: conductor, h_um: bpad_h_um,
+         route: {use: pad, matrix: polymer_dielectric}}
+  # ---- over the bridge: SR, L1 surface pads, surface dielectric, L2 via pads, encapsulation dielectric (pads only)
+  - part: ob_bu
+    pattern:
+      - {id: ob_sr, name: "Solder resist (over bridge)", material: polymer_dielectric, material_label: "solder resist",
+         role: passivation, h_um: sr_h_um}
+      - {id: ob_l1, name: "L1 surface pads (over bridge)", material: copper, role: conductor, h_um: cu_h_um,
+         route: {use: pad, matrix: polymer_dielectric}}
+      - {id: ob_d1, name: "Surface-layer dielectric (over bridge)", material: organic_build_up,
+         material_label: "build-up film (not named)", role: dielectric, h_um: bu_diel_um}
+      - {id: ob_l2, name: "L2 stacked-via pads (over bridge)", material: copper, role: conductor, h_um: cu_h_um,
+         route: {use: pad, matrix: organic_build_up}}
+      - {id: ob_d2, name: "Encapsulation dielectric (over bridge)", material: organic_build_up,
+         material_label: "build-up film (not named)", role: dielectric, h_um: bu_diel_um}
+  # ---- substrate front: SR, L1 pad level, L2..L5, core Cu (cavity floor, cavity pads)
   - part: substrate
     pattern:
-      - {id: sbt_bu_top, name: "Front build-up (cavity layers)", material: organic_build_up, role: dielectric,
-         h_um: bu_h_um}
+      - {id: sr_top, name: "Solder resist (top)", material: polymer_dielectric, material_label: "solder resist",
+         role: passivation, h_um: sr_h_um}
+      - {id: top_cu, name: "L1 surface pad level (FLI pads)", material: copper, role: conductor, h_um: cu_h_um,
+         route: {use: pad, matrix: polymer_dielectric}}
+  - part: substrate
+    repeat: bu_pairs_n
+    pattern:
+      - {id: bu_ds, name: "Build-up dielectric", material: organic_build_up, material_label: "build-up film (not named)",
+         role: dielectric, h_um: bu_diel_um}
+      - {id: bu_sig, name: "Build-up signal level (L2, L4)", material: copper, role: conductor, h_um: cu_h_um,
+         line_um: bu_line_um, space_um: bu_space_um,
+         route: {use: signal, dir: alt, line_um: bu_line_um, space_um: bu_space_um, matrix: organic_build_up}}
+      - {id: bu_dp, name: "Build-up dielectric", material: organic_build_up, material_label: "build-up film (not named)",
+         role: dielectric, h_um: bu_diel_um}
+      - {id: bu_pl, name: "Build-up plane (L3 GND, L5 PWR)", material: copper, role: conductor, h_um: cu_h_um,
+         route: {use: plane, space_um: bu_space_um, matrix: organic_build_up}}
+  - part: substrate
+    pattern:
+      - {id: bu_dc, name: "Build-up dielectric (on core)", material: organic_build_up,
+         material_label: "build-up film (not named)", role: dielectric, h_um: bu_diel_um}
+      - {id: core_cu_t, name: "Core Cu (top face; cavity pads, PTH lands)", material: copper, role: conductor, h_um: cu_h_um,
+         route: {use: mixed, dir: x, line_um: bu_line_um, space_um: bu_space_um, matrix: organic_laminate}}
       - {id: sbt_core, name: "Core", material: organic_laminate, material_label: "laminate core", role: core,
          h_um: core_h_um}
-      - {id: sbt_bu_bot, name: "Back build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+      - {id: core_cu_b, name: "Core Cu (bottom face)", material: copper, role: conductor, h_um: cu_h_um,
+         route: {use: plane, space_um: bu_space_um, matrix: organic_laminate}}
+  # ---- substrate back: mirrored L7..L10, L11 BGA pad level, SR
+  - part: substrate
+    repeat: bu_pairs_n
+    pattern:
+      - {id: bb_dp, name: "Back build-up dielectric", material: organic_build_up,
+         material_label: "build-up film (not named)", role: dielectric, h_um: bu_diel_um}
+      - {id: bb_pl, name: "Back plane (L7 PWR, L9 GND)", material: copper, role: conductor, h_um: cu_h_um,
+         route: {use: plane, space_um: bu_space_um, matrix: organic_build_up}}
+      - {id: bb_ds, name: "Back build-up dielectric", material: organic_build_up,
+         material_label: "build-up film (not named)", role: dielectric, h_um: bu_diel_um}
+      - {id: bb_sig, name: "Back signal level (L8, L10)", material: copper, role: conductor, h_um: cu_h_um,
+         line_um: bu_line_um, space_um: bu_space_um,
+         route: {use: signal, dir: alt, line_um: bu_line_um, space_um: bu_space_um, matrix: organic_build_up}}
+  - part: substrate
+    pattern:
+      - {id: bb_dc, name: "Back build-up dielectric (outer)", material: organic_build_up,
+         material_label: "build-up film (not named)", role: dielectric, h_um: bu_diel_um}
+      - {id: bga_cu, name: "L11 BGA pad level", material: copper, role: conductor, h_um: cu_h_um,
+         route: {use: pad, matrix: polymer_dielectric}}
+      - {id: sr_bot, name: "Solder resist (bottom)", material: polymer_dielectric, material_label: "solder resist",
+         role: passivation, h_um: sr_h_um}
 
 arrays:
   - {id: fli_bridge, name: "FLI bumps over bridge", kind: microbump, per: die, lower: substrate,
@@ -141,28 +361,93 @@ arrays:
   - {id: fli_core, name: "FLI bumps (coarse)", kind: microbump, per: die, lower: substrate,
      region: {subtract: [bridge]}, pitch_um: fli_core_pitch_um, diameter_um: fli_core_d_um, height_um: fli_h_um,
      note: "coarse pitch rendered over the die outside the bridge; the bump map is not reported"}
-  - {id: via_bridge, name: "Vias onto bridge pads", kind: rdl_via, per: die, span: ["top:bridge", "top:substrate"],
-     between: [substrate, bridge], region: {intersect: [bridge]}, pitch_um: fli_bridge_pitch_um,
-     diameter_um: via_d_um, note: "one via per FLI bump assumed"}
-  - {id: tsv_bridge, name: "Bridge TSVs", kind: tsv, in: bridge, region: {part: bridge}, pitch_um: tsv_pitch_um,
-     diameter_um: tsv_d_um, note: "TSV placement not reported; rendered over the full bridge"}
   - {id: cavity_bumps, name: "Cavity-side bumps", kind: microbump, in: cavity_fill, between: [bridge, substrate],
      region: {part: bridge}, pitch_um: cav_pitch_um, diameter_um: cav_d_um, height_um: cav_h_um}
+  - {id: bga, name: "BGA balls", kind: bga, under: substrate, region: {part: substrate}, pitch_um: bga_pitch_um,
+     diameter_um: bga_d_um, height_um: bga_h_um}
+
+routing:
+  layout_note: >-
+    mock-up routing: net layout, shares, jogs, TSV grouping and the signal / plane assignment of levels are
+    illustrative (Fig. 1 and Fig. 3 of ectc51846.2026.00051 as the visual reference); dims carry their own status
+  vias:
+    # two stacked micro-vias from the surface pad to the bridge pad (Fig. 3 / Fig. 4(b))
+    - {id: bv_top, name: "Micro-via over bridge (surface layer)", kind: bridge_via, through: ob_d1,
+       diameter_um: fv_d_um, bottom_diameter_um: fv_bot_um, land_um: fv_land_um, pitch_um: fli_bridge_pitch_um,
+       fill: filled,
+       note: "one per FLI bump in the over-bridge build-up (part ob_bu, pad-only levels: surface pad - via - pad - via - bridge pad, figs ectc51846.2026.00051-f03, -f01 (d)); outside the bridge the build-up microvia mv_s_1 spans the same dielectric"}
+    - {id: bv_pad, name: "Micro-via onto bridge pad", kind: bridge_via, through: ob_d2,
+       diameter_um: fv_d_um, bottom_diameter_um: fv_bot_um, land_um: fv_land_um, pitch_um: fli_bridge_pitch_um,
+       fill: filled,
+       note: "through the encapsulation dielectric onto the bridge pad (via-to-pad overlay critical); bridge top = top of L3, so the via lands on the bridge pad inside the bridge footprint"}
+    - {id: bvm_s, name: "Bridge BEOL via", kind: beol_via, through: br_vs, diameter_um: m_via_um, fill: filled}
+    - {id: bvm_p, name: "Bridge BEOL via", kind: beol_via, through: br_vp, diameter_um: m_via_um, fill: filled}
+    - {id: bvm_b, name: "Bridge BEOL via", kind: beol_via, through: br_vb, diameter_um: m_via_um, fill: filled}
+    - {id: bvm_mim, name: "Via through MIM band", kind: beol_via, through: br_mim, diameter_um: m_via_um, fill: filled,
+       note: "MIM stitched to the P/G grids with BEOL vias (ectc51846.2026.00051-d-L02 notes)"}
+    - {id: tsv, name: "Bridge TSV", kind: tsv, through: br_si, diameter_um: tsv_d_um, land_um: tsv_land_um,
+       pitch_um: tsv_pitch_um, liner_um: tsv_liner_um, fill: filled,
+       cluster: {n: tsv_cl_n, pitch_um: tsv_cl_pitch_um},
+       note: "TSV group per cavity bump: TSV tops on M1, bottoms on one backside pad over the cavity-side bump (groups of 3-4 per pad in fig ectc51846.2026.00051-f03; 4 drawn)"}
+    - {id: mv_s, name: "Build-up microvia", kind: microvia, through: bu_ds, diameter_um: mvia_d_um,
+       bottom_diameter_um: mvia_bot_um, land_um: mvia_land_um, fill: filled}
+    - {id: mv_p, name: "Build-up microvia", kind: microvia, through: bu_dp, diameter_um: mvia_d_um,
+       bottom_diameter_um: mvia_bot_um, land_um: mvia_land_um, fill: filled}
+    - {id: mv_c, name: "Build-up microvia", kind: microvia, through: bu_dc, diameter_um: mvia_d_um,
+       bottom_diameter_um: mvia_bot_um, land_um: mvia_land_um, fill: filled}
+    - {id: pth, name: "Plated through hole", kind: pth, through: sbt_core, diameter_um: pth_d_um, land_um: pth_land_um,
+       pitch_um: pth_pitch_um, fill: plugged, plug: resin, wall_um: pth_wall_um,
+       note: "resin-plugged, Cu-capped barrel in a cloth-reinforced core (Fig. 1(c) section)"}
+    # back side: laser-drilled from below, so the bottom is the wide end
+    - {id: mvb_p, name: "Back microvia", kind: microvia, through: bb_dp, diameter_um: mvia_bot_um,
+       bottom_diameter_um: mvia_d_um, land_um: mvia_land_um, fill: filled}
+    - {id: mvb_s, name: "Back microvia", kind: microvia, through: bb_ds, diameter_um: mvia_bot_um,
+       bottom_diameter_um: mvia_d_um, land_um: mvia_land_um, fill: filled}
+    - {id: mvb_c, name: "Back microvia", kind: microvia, through: bb_dc, diameter_um: mvia_bot_um,
+       bottom_diameter_um: mvia_d_um, land_um: mvia_land_um, fill: filled}
+  nets:
+    # die-to-die wires on the bridge signal levels
+    - {id: d2d, kind: lateral, from: fli_bridge_die_1, to: fli_bridge_die_2, levels: [br_ms], share: 0.5}
+    - {id: pg_fine, kind: plane_tie, from: fli_bridge, plane: br_mp_1, share: 0.2}
+    # power through the bridge: FLI over bridge -> 2 micro-vias -> bridge BEOL -> TSV -> cavity bump
+    - {id: tsv_pwr, kind: vertical, from: fli_bridge, to: cavity_bumps, style: stacked, share: 0.3}
+    # cavity bump -> cavity pad on core Cu -> PTH -> back build-up -> BGA
+    - {id: cav_bga, kind: vertical, from: cavity_bumps, to: bga, style: stacked, jog: [core_cu_t, bb_sig_2], share: 0.6,
+       note: "cavity pad -> short trace on the core-top Cu to a PTH land (cavity bumps at 175 um, PTHs at 500 um) -> PTH -> back build-up -> BGA"}
+    # coarse FLI -> build-up (fan-out jogs) -> PTH -> back build-up -> BGA
+    - {id: io, kind: vertical, from: fli_core, to: bga, style: stacked, jog: [bu_sig_1, bu_sig_2, bb_sig_2],
+       share: 0.4}
+    - {id: pg_top, kind: plane_tie, from: fli_core, plane: bu_pl_1, share: 0.3}
+    - {id: pg_bot, kind: plane_tie, from: bga, plane: bb_pl_2, share: 0.3}
+    - {id: esc, kind: escape, from: fli_core, levels: [bu_sig_1], share: 0.2, length_um: 400}
 
 callouts:
   - {target: bridge, text: "EMIB-T bridge {bridge_w_mm} x {bridge_d_mm} mm",
      note: "EMIB-T bridge {bridge_w_mm} x {bridge_d_mm} mm, Si with TSVs (EMIB25T TV). Drawn ~50 um thick: the paper's general EMIB bridge statement (Sec. I), not reported for EMIB25T",
      refs: [ectc51846.2026.00051-b-c1.thickness_um]}
-  - {target: bridge, text: "On-bridge MIM capacitor {mim_density} (model)"}
+  - {target: br_mim, text: "On-bridge MIM capacitor {mim_density} (model)",
+     note: "High-density MIM between Metal 1 and Metal 2 over the full bridge area, {mim_density} (model)",
+     refs: [ectc51846.2026.00051-d-L02.notes]}
   - {target: fli_bridge, text: "FLI pitch {fli_bridge_pitch_um} um over bridge",
      note: "FLI pitch {fli_bridge_pitch_um} um over the bridge; {fli_mid_pitch_um}-{fli_core_pitch_um} um in the 2x-reticle TV"}
-  - {target: via_bridge, text: "Via overlay < {overlay_um} um",
+  - {target: bv_pad, text: "Via overlay < {overlay_um} um",
      note: "Via-to-bridge-pad overlay < {overlay_um} um (new alignment scheme)",
      refs: [ectc51846.2026.00051-b-m1.qualifiers]}
   - {target: substrate, text: "Outline from {d2d45_pitch_um} um-pitch TV",
      note: "Outline from the {d2d45_pitch_um} um-pitch EMIB-T TV ({pkg45_bridges_n} bridges)"}
   - {target: bridge, text: "HBM4e: {hbm4e_gbps} Gb/s (simulated)",
      note: "HBM4e channel over EMIB-T: {hbm4e_gbps} Gb/s (simulated)"}
+  - {target: br_ms, text: "{m_n} bridge metal levels",
+     note: "'At least {m_n} metal layers' (bridge or package not stated); drawn as bridge BEOL with signal / P/G alternation (mock-up)"}
+  - {target: tsv, text: "TSV power path to cavity bumps",
+     note: "TSVs carry power (and HSIO) from the package bottom through the bridge to the top dies; cavity-side solder joints on cavity pads, underfilled",
+     refs: [ectc51846.2026.00051-b-i4.notes, ectc51687.2025.00051-a-i3.notes]}
+  - {target: d2d, text: "D2D wires in bridge BEOL",
+     note: "Die-to-die wires on the bridge signal levels between the two FLI fields (mock-up level assignment)"}
+  - {target: mv_s, text: "Stacked microvias, build-up levels",
+     note: "Coarse-bump nets drop through stacked filled microvias with fan-out jogs on the signal levels (mock-up; substrate stack is analog)"}
+  - {target: pth, text: "Plugged PTH through core",
+     note: "Plated through holes carry the nets through the core to the back build-up and BGA (analog dims)"}
 
 insets:
   - id: bridge_edge
@@ -180,3 +465,8 @@ insets:
     box_mm: ["-bridge_w_mm / 2 - 0.6", "bridge_d_mm / 2 - 0.6", "-bridge_w_mm / 2 + 0.6", "bridge_d_mm / 2 + 0.6"]
     z: ["top:bridge", "top:die"]
     view: iso
+  - id: buildup_xs
+    label: "Coarse bump to BGA: build-up, PTH"
+    box_mm: [-6.5, -0.5, -3.5, 0.5]
+    z: ["bottom:bga", "bottom:die"]
+    view: front

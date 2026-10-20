@@ -9,6 +9,12 @@
 # No X-Cube row reports a die thickness, bump height or substrate thickness. The 0.67 mm X-Cube height with Cu
 # pillar is stated only in the Cu-pillar row notes (no numeric cell), so it enters as a template value with that
 # cell as reference; die and joint heights are analogs; the SRAM fills the rest of the 0.67 mm.
+# Routing (DevLog-011): logic die = backside passivation / backside pad / via / backside metal (TSV landing) / oxide + Si
+# (TSV span) / front M1 / via / top metal (plane) / via / pillar pad / passivation, after the 'backside metal layers' and
+# 'front side metal layers' of the X-Cube text (iwlpc52010.2020.9375855-b-L04 / -L06; no thicknesses: analogs from a
+# TSV-middle die and a Si-interposer BEOL). SRAM front levels are analogs too. The substrate (thickness = template
+# remainder of the 1.1 mm package) is drawn as a thin-core 2-2-2 build-up (template layer count) with analog dims from a
+# Si-interposer TV substrate (ectc51909.2023.00155-a) and a Cu-filled thin-core through hole (eptc62800.2024.10909809-a).
 id: samsung_x_cube
 name: X-Cube
 company: Samsung
@@ -48,15 +54,52 @@ params:
   logic_h_um:
     analog: ectc51906.2022.00031-c-c2.thickness_um
     note: "thinned logic-die thickness not reported; analog = 50 um TSV pass-through die (5 um TSV) of a D2W stack"
-  bsm_h_um:
-    analog: ectc51906.2022.00031-c-L03.thickness_um
+  # ---- template: logic-die levels (no X-Cube row gives a thickness)
+  pass_h_um:
+    analog: eptc59621.2023.10457612-a-L02.thickness_um
+    note: "die passivation at the micro-bump faces not reported; analog = 2 um backside oxide (UBM dielectric) of a TSV die"
+  bpad_h_um:
+    analog: ectc51909.2023.00155-a-L05.thickness_um
     refs: [iwlpc52010.2020.9375855-b-L04.notes]
-    note: "logic backside metal stated without thickness; analog = 1 um single-level Cu damascene RDL of a D2W stack"
+    note: "backside bump pad (outer backside metal) not reported; analog = 5 um Cu micro-bump pad (27 x 27 um, 35 / 40 um-pitch Cu/SnAg bumps) of a Si-interposer TV"
+  bv_h_um:
+    analog: ectc51906.2022.00179-c-L05.thickness_min_um
+    note: "backside via level not reported; analog = 0.52 um VIA1B of a TSV-middle die with backside damascene"
+  bv_d_um:
+    analog: ectc51906.2022.00179-c-L05.via_diameter_um
+    note: "BEOL via CD not reported; analog = 0.54 um VIA1B of the same TSV-middle die"
+  bm_h_um:
+    analog: ectc51906.2022.00179-c-L06.thickness_min_um
+    refs: [iwlpc52010.2020.9375855-b-L04.notes]
+    note: "logic backside metal stated without thickness; analog = 1.06 um M1B on the revealed TSVs of the TSV-middle die"
+  m_line_um:
+    analog: ectc51906.2022.00179-c-L06.line_um
+    note: "BEOL line width not reported; analog = 1 um M1B CD of the TSV-middle die"
+  m_space_um: {template: "m_line_um", note: "BEOL space not reported; drawn equal to the analog line (1 / 1)"}
+  bv_land_um: {template: "m_line_um", note: "via lands on a minimum-width (1 um) line of the analog (layout not reported)"}
+  box_h_um:
+    analog: ectc51906.2022.00179-c-L07.thickness_um
+    note: "backside dielectric after TSV reveal not reported; analog = 3 um low-temperature oxide of the TSV-middle die"
   fem_h_um:
-    analog: eptc59621.2023.10457670-a-L03.thickness_um
+    analog: eptc59621.2023.10457670-a-L07.thickness_um
     refs: [iwlpc52010.2020.9375855-b-L06.layer_name]
-    note: "logic front metal stated without thickness; analog = one 1 um Cu dual-damascene level (illustrative, a 7nm BEOL is thicker)"
-  logic_si_um: {template: "logic_h_um - bsm_h_um - fem_h_um", note: "logic Si (with TSV) = die - backside metal - front metal"}
+    note: "logic front metal stated without thickness; analog = 1 um Cu dual-damascene BEOL level of a TSV interposer (used for M1 and the top metal; a 7nm BEOL has many more levels)"
+  ppad_h_um:
+    analog: ectc51909.2023.00155-a-L13.thickness_um
+    note: "Cu-pillar pad not reported; analog = 5 um Cu pad under the 150 um-pitch Cu/SnAg pillar of the same Si-interposer TV"
+  fpass_h_um:
+    analog: ectc51846.2026.00096-a-L07.thickness_um
+    note: "front passivation around the pillar pads not reported; analog = 4.25 um polyimide die passivation with ~100 um bump openings"
+  logic_si_um:
+    template: "logic_h_um - pass_h_um - bpad_h_um - bv_h_um - bm_h_um - box_h_um - 2 * fem_h_um - 2 * bv_h_um - ppad_h_um - fpass_h_um"
+    note: "logic Si (TSV) = die - backside levels - front levels (template levels)"
+  tsv_land_um:
+    template: "1.5 * tsv_d_um"
+    note: "TSV landing pads on the backside metal and on M1 not reported; 1.5 x the TSV diameter (M1 pad wider than the TSV in eptc59621.2023.10457670-f01; ratio estimated from the figure)"
+  tsv_liner_um:
+    analog: ectc51909.2023.00307-a-L05.thickness_um
+    note: "TSV liner not reported for X-Cube; analog = 0.4 um TEOS liner on a TSV sidewall"
+  # ---- template: joints
   ub_pitch_um:
     template: "tsv_pitch_um"
     refs: [iwlpc52010.2020.9375855-b-i2.notes]
@@ -64,6 +107,12 @@ params:
   ub_d_um:
     analog: ectc51909.2023.00155-a-i1.diameter_um
     note: "micro-bump diameter not reported; analog = 40 um-pitch Cu/SnAg micro-bump of a Si-interposer TV"
+  ub_pad_um:
+    analog: ectc51909.2023.00155-a-i1.pad_x_um
+    note: "micro-bump pad not reported; analog = 27 um pad of the same 40 um-pitch bump"
+  ub_cap_um:
+    analog: ectc51909.2023.00155-a-i1.cap_height_um
+    note: "solder cap height not reported; cap of the same analog joint as the standoff (R2 2026-10-20: joint drawn as Cu column + solder cap)"
   ub_h_um:
     template: "r0 + r1"
     refs: [ectc51909.2023.00155-a-i1.height_um, ectc51909.2023.00155-a-i1.cap_height_um]
@@ -71,13 +120,20 @@ params:
   pil_d_um:
     analog: ectc51909.2023.00155-a-i3.diameter_um
     note: "Cu-pillar diameter not reported; analog = 150 um-pitch Cu/SnAg pillar of a Si-interposer TV (closest pitch)"
+  pil_cap_um:
+    analog: ectc51909.2023.00155-a-i3.cap_height_um
+    note: "solder cap height not reported; cap of the same analog joint as the standoff (R2 2026-10-20: joint drawn as Cu column + solder cap)"
   pil_h_um:
     template: "r0 + r1"
     refs: [ectc51909.2023.00155-a-i3.height_um, ectc51909.2023.00155-a-i3.cap_height_um]
     note: "Cu-pillar joint height not reported; Cu + SnAg of the same analog pillar"
+  # ---- template: SRAM (face down; front levels toward the logic)
   sram_h_um:
     template: "xcube_h_um - logic_h_um - ub_h_um - pil_h_um"
     note: "SRAM thickness not reported; the remainder of the 0.67 mm X-Cube height (template joints and logic die)"
+  sram_si_um:
+    template: "sram_h_um - fem_h_um - bv_h_um - bpad_h_um - pass_h_um"
+    note: "SRAM Si = die - front metal, via level, bump pads and passivation (template levels)"
   mold_h_um: {template: "ub_h_um + sram_h_um", note: "mold from the logic backside to the SRAM back (flush in Fig. 3)"}
   bga_d_um:
     analog: ectc32862.2020.00185-a-i2.diameter_um
@@ -88,13 +144,54 @@ params:
   sbt_h_um:
     template: "pkg_h_um - xcube_h_um - bga_h_um"
     note: "substrate thickness not reported; 1.1 mm package - 0.67 mm X-Cube - template BGA"
+  # ---- template: substrate (layers and material not given; analog set = substrate of ectc51909.2023.00155-a)
+  sr_h_um:
+    analog: ectc51909.2023.00155-a-L15.thickness_um
+    note: "solder resist not reported; analog = 18 um SR of the substrate of a 2.5D Si-interposer TV"
+  bu_cu_h_um:
+    analog: estc60143.2024.10712019-b-L03.thickness_um
+    note: "build-up Cu not reported; analog = 13 um build-up Cu of a 6-N-6 FCBGA TV"
+  core_cu_h_um:
+    analog: estc60143.2024.10712019-b-L05.thickness_um
+    note: "core-face Cu not reported; analog = 18 um core-adjacent Cu of the same FCBGA TV"
+  bu_d_h_um:
+    analog: ectc51909.2023.00155-a-L16.thickness_um
+    note: "build-up dielectric not reported; analog = 15 um build-up film of the 2.5D TV substrate"
+  bu_line_um:
+    analog: ectc51909.2023.00155-a-L16.line_um
+    note: "build-up line not reported; analog = 14 um of the 2.5D TV substrate"
+  bu_space_um:
+    analog: ectc51909.2023.00155-a-L16.space_um
+    note: "build-up space not reported; analog = 20 um of the 2.5D TV substrate"
+  mv_d_um:
+    analog: ectc51909.2023.00155-a-L16.via_diameter_um
+    note: "microvia not reported; analog = 40 um build-up via of the 2.5D TV substrate"
+  mv_land_um:
+    template: "mv_d_um * r0 / r1"
+    refs: [001c.147203-a-i1.pad_x_um, 001c.147203-a-i1.diameter_um]
+    note: "microvia land not reported for a cored organic substrate; harmonized rule, TEMPLATE_FORMAT.md 'Template rules': land / via = 110 / 70 (pad >= 110 um for a 70 um Cu-filled stacked via: minimum design rule of a coreless 150 GHz AiP antenna substrate, R-G640)"
+  mv_bot_um:
+    template: "mv_d_um - 2 * bu_d_h_um / 3.078"
+    refs: [ectc51687.2025.00076-b-i1.notes]
+    note: "via bottom not reported; 72 deg laser-via sidewall (analog row notes) over the 15 um dielectric; 3.078 = tan(72 deg)"
+  core_h_um:
+    template: "sbt_h_um - 2 * sr_h_um - 4 * bu_cu_h_um - 2 * core_cu_h_um - 4 * bu_d_h_um"
+    note: "thin core = template substrate thickness - SR - 2-2-2 Cu levels - build-up dielectrics (layer count 2-2-2 is a template; inside the 60-200 um thin-core range of the DB analogs tcpmt.2025.3610036-a-L04 / eptc62800.2024.10909809-a-L04)"
+  th_d_um:
+    analog: eptc62800.2024.10909809-a-i1.diameter_um
+    note: "core through hole not reported; analog = 80 um X-shaped, Cu-filled laser through hole of a 200 um thin-core substrate"
+  th_land_um:
+    template: "th_d_um * 1.5"
+    refs: [ectc51687.2025.00148-a-i4.pitch_um]
+    note: "PTH land not reported; harmonized rule, TEMPLATE_FORMAT.md 'Template rules': 1.5 x the hole, read from the 4-2-4 FCBGA schematic (fig ectc51687.2025.00148-f01, scaled by the 500 um TH pitch); applied to the thin-core Cu-filled through hole"
+  th_pitch_um: {template: "bga_pitch_um", note: "through-hole grid not reported; one through hole per BGA site (0.4 mm)"}
   ub_margin_mm: {template: 0, note: "gap filler under the SRAM drawn at the SRAM footprint (material and extent not stated)"}
   uf_margin_mm: {template: 0.3, note: "Cu-pillar underfill fillet extent not reported; illustrative"}
 
 parts:
   - {id: substrate, name: "Package substrate", kind: substrate, material: organic_laminate,
      material_label: "substrate (layers and material not given)", w_mm: pkg_w_mm, d_mm: pkg_d_mm, h_um: sbt_h_um,
-     base: true, explode_group: 0}
+     base: true, explode_group: 0, note: "drawn as a thin-core 2-2-2 build-up substrate (template layer count, analog dims)"}
   - {id: logic, name: "Logic die (7nm, TSV)", kind: die, material: silicon, w_mm: logic_w_mm, d_mm: logic_d_mm,
      h_um: logic_h_um, on: substrate, standoff: pillar, explode_group: 2,
      note: "thinned logic wafer: front metal faces the substrate, backside metal faces the SRAM"}
@@ -111,23 +208,135 @@ parts:
      fill: {above: substrate, parts: [logic], margin_mm: uf_margin_mm}, explode_group: 1, xray_default: true}
 
 layers:
+  # logic die, top (backside, SRAM side) to bottom (front, pillar side)
   - part: logic
     pattern:
-      - {id: logic_bsm, name: "Backside metal", material: copper, material_label: "backside metal (not specified)",
-         role: conductor, h_um: bsm_h_um}
-      - {id: logic_si, name: "Logic Si (TSV)", material: silicon, role: core, h_um: logic_si_um}
-      - {id: logic_fem, name: "Front metal", material: copper, material_label: "front-side metal layers (not specified)",
-         role: conductor, h_um: fem_h_um}
+      - {id: lg_bpass, name: "Logic backside passivation", material: other, material_label: "passivation (not specified)",
+         role: passivation, h_um: pass_h_um}
+      - {id: lg_bpad, name: "Logic backside bump pads", material: copper, material_label: "backside metal (not specified)",
+         role: conductor, h_um: bpad_h_um, route: {use: pad, matrix: other}}
+      - {id: lg_bv, name: "Logic backside via level", material: other, material_label: "dielectric (not specified)",
+         role: dielectric, h_um: bv_h_um}
+      - {id: lg_bm, name: "Logic backside metal (TSV landing)", material: copper,
+         material_label: "backside metal (not specified)", role: conductor, h_um: bm_h_um,
+         route: {use: signal, dir: x, line_um: m_line_um, space_um: m_space_um, matrix: other}}
+  - part: logic
+    id: lg_body
+    pattern:
+      - {id: lg_box, name: "Logic backside oxide (TSV reveal)", material: other,
+         material_label: "backside dielectric (not specified)", role: dielectric, h_um: box_h_um}
+      - {id: lg_si, name: "Logic Si (TSV)", material: silicon, role: core, h_um: logic_si_um}
+  - part: logic
+    pattern:
+      - {id: lg_m1, name: "Logic front M1 (TSV landing)", material: copper,
+         material_label: "front-side metal (not specified)", role: conductor, h_um: fem_h_um,
+         route: {use: signal, dir: y, line_um: m_line_um, space_um: m_space_um, matrix: other}}
+      - {id: lg_fv1, name: "Logic front via level (collapsed BEOL)", material: other,
+         material_label: "BEOL dielectric (not specified)", role: dielectric, h_um: bv_h_um}
+      - {id: lg_mt, name: "Logic front top metal (power plane)", material: copper,
+         material_label: "front-side metal (not specified)", role: conductor, h_um: fem_h_um,
+         route: {use: plane, matrix: other}}
+      - {id: lg_fv2, name: "Logic pad via level", material: other, material_label: "dielectric (not specified)",
+         role: dielectric, h_um: bv_h_um}
+      - {id: lg_ppad, name: "Logic Cu-pillar pads", material: copper, material_label: "Cu (not specified)",
+         role: conductor, h_um: ppad_h_um, route: {use: pad, matrix: other}}
+      - {id: lg_fpass, name: "Logic front passivation", material: other, material_label: "passivation (not specified)",
+         role: passivation, h_um: fpass_h_um}
+  # SRAM die (face down): Si, then front metal, via level, bump pads, passivation toward the logic
+  - part: sram
+    pattern:
+      - {id: sr_si, name: "SRAM Si", material: silicon, role: core, h_um: sram_si_um}
+      - {id: sr_m, name: "SRAM front metal", material: copper, material_label: "front-side metal (not specified)",
+         role: conductor, h_um: fem_h_um,
+         route: {use: signal, dir: y, line_um: m_line_um, space_um: m_space_um, matrix: other}}
+      - {id: sr_v, name: "SRAM via level (collapsed BEOL)", material: other, material_label: "dielectric (not specified)",
+         role: dielectric, h_um: bv_h_um}
+      - {id: sr_pad, name: "SRAM micro-bump pads", material: copper, material_label: "Cu (not specified)",
+         role: conductor, h_um: bpad_h_um, route: {use: pad, matrix: other}}
+      - {id: sr_pass, name: "SRAM passivation", material: other, material_label: "passivation (not specified)",
+         role: passivation, h_um: pass_h_um}
+  # substrate: thin-core 2-2-2 (template layer count)
+  - part: substrate
+    pattern:
+      - {id: st_sr, name: "Solder resist (top)", material: other, material_label: "solder resist (not specified)",
+         role: passivation, h_um: sr_h_um}
+      - {id: st_l1, name: "L1 pillar pads", material: copper, role: conductor, h_um: bu_cu_h_um,
+         route: {use: pad, matrix: organic_build_up}}
+      - {id: st_d1, name: "Build-up dielectric (top 1)", material: organic_build_up,
+         material_label: "build-up film (not specified)", role: dielectric, h_um: bu_d_h_um}
+      - {id: st_l2, name: "L2 signal", material: copper, role: conductor, h_um: bu_cu_h_um,
+         route: {use: signal, dir: x, line_um: bu_line_um, space_um: bu_space_um, matrix: organic_build_up}}
+      - {id: st_d2, name: "Build-up dielectric (top 2)", material: organic_build_up,
+         material_label: "build-up film (not specified)", role: dielectric, h_um: bu_d_h_um}
+      - {id: st_l3, name: "L3 core-top plane", material: copper, role: conductor, h_um: core_cu_h_um,
+         route: {use: plane, matrix: organic_build_up}}
+      - {id: sb_core, name: "Thin core", material: organic_laminate, material_label: "core laminate (not specified)",
+         role: core, h_um: core_h_um}
+      - {id: sb_l4, name: "L4 core-bottom plane", material: copper, role: conductor, h_um: core_cu_h_um,
+         route: {use: plane, matrix: organic_build_up}}
+      - {id: sb_d1, name: "Build-up dielectric (bottom 1)", material: organic_build_up,
+         material_label: "build-up film (not specified)", role: dielectric, h_um: bu_d_h_um}
+      - {id: sb_l5, name: "L5 signal", material: copper, role: conductor, h_um: bu_cu_h_um,
+         route: {use: signal, dir: y, line_um: bu_line_um, space_um: bu_space_um, matrix: organic_build_up}}
+      - {id: sb_d2, name: "Build-up dielectric (bottom 2)", material: organic_build_up,
+         material_label: "build-up film (not specified)", role: dielectric, h_um: bu_d_h_um}
+      - {id: sb_l6, name: "L6 BGA pads", material: copper, role: conductor, h_um: bu_cu_h_um,
+         route: {use: pad, matrix: organic_build_up}}
+      - {id: sb_sr, name: "Solder resist (bottom)", material: other, material_label: "solder resist (not specified)",
+         role: passivation, h_um: sr_h_um}
 
 arrays:
   - {id: ub, name: "SRAM micro-bumps", kind: microbump, per: sram, lower: logic, pitch_um: ub_pitch_um,
-     diameter_um: ub_d_um, height_um: ub_h_um, note: "CoW solder bonding, F2B; pitch and bump map not reported"}
-  - {id: tsv, name: "Logic TSVs", kind: tsv, in_layer: logic_si, region: {part: sram}, pitch_um: tsv_pitch_um,
-     diameter_um: tsv_d_um, note: "TSV placement not reported; drawn under the SRAM at the reported pitch"}
+     diameter_um: ub_d_um, height_um: ub_h_um, cap_h_um: ub_cap_um, pad_um: ub_pad_um,
+     note: "CoW solder bonding, F2B; pitch and bump map not reported"}
   - {id: pillar, name: "Cu pillars", kind: cu_pillar, per: logic, lower: substrate, pitch_um: pil_pitch_um,
-     diameter_um: pil_d_um, height_um: pil_h_um, note: "bump map not reported; pitch rendered over the full logic die"}
+     diameter_um: pil_d_um, height_um: pil_h_um, cap_h_um: pil_cap_um, note: "bump map not reported; pitch rendered over the full logic die"}
   - {id: bga, name: "BGA balls", kind: bga, under: substrate, region: {part: substrate}, pitch_um: bga_pitch_um,
      diameter_um: bga_d_um, height_um: bga_h_um}
+
+routing:
+  layout_note: >-
+    mock-up routing: net layout, shares, jogs and the signal / plane assignment of the die and substrate levels are
+    illustrative (X-Cube Fig. 3 of iwlpc52010.2020.9375855 as the visual reference: TSVs under the SRAM, bumps on both
+    logic faces); dims carry their own status
+  vias:
+    - {id: lg_bvia, name: "Logic backside via", kind: beol_via, through: lg_bv, diameter_um: bv_d_um, land_um: bv_land_um,
+       fill: filled}
+    - {id: tsv, name: "Logic TSV", kind: tsv, through: lg_body, diameter_um: tsv_d_um, land_um: tsv_land_um,
+       pitch_um: tsv_pitch_um, liner_um: tsv_liner_um, fill: filled, region: {part: sram},
+       note: "7nm TSV from front M1 to the backside metal, under the SRAM at the reported pitch (placement not reported)"}
+    - {id: lg_fvia1, name: "Logic front via", kind: beol_via, through: lg_fv1, diameter_um: bv_d_um, land_um: bv_land_um,
+       fill: filled}
+    - {id: lg_fvia2, name: "Logic pad via", kind: beol_via, through: lg_fv2, diameter_um: bv_d_um, land_um: bv_land_um,
+       fill: filled}
+    - {id: sr_via, name: "SRAM via", kind: beol_via, through: sr_v, diameter_um: bv_d_um, land_um: bv_land_um,
+       fill: filled}
+    - {id: mv_t1, name: "Microvia (top)", kind: microvia, through: st_d1, diameter_um: mv_d_um,
+       bottom_diameter_um: mv_bot_um, land_um: mv_land_um, fill: filled}
+    - {id: mv_t2, name: "Microvia (top)", kind: microvia, through: st_d2, diameter_um: mv_d_um,
+       bottom_diameter_um: mv_bot_um, land_um: mv_land_um, fill: filled}
+    - {id: th, name: "Thin-core through hole", kind: pth, through: sb_core, diameter_um: th_d_um, land_um: th_land_um,
+       pitch_um: th_pitch_um, fill: filled,
+       note: "Cu-filled X-shaped laser through hole of a thin core (analog eptc62800.2024.10909809-a-i1, figs -f01 / -f04): no barrel wall, no resin plug"}
+    - {id: mv_b1, name: "Microvia (bottom)", kind: microvia, through: sb_d1, diameter_um: mv_bot_um,
+       bottom_diameter_um: mv_d_um, land_um: mv_land_um, fill: filled,
+       note: "bottom-side laser via: wide end toward the BGA face"}
+    - {id: mv_b2, name: "Microvia (bottom)", kind: microvia, through: sb_d2, diameter_um: mv_bot_um,
+       bottom_diameter_um: mv_d_um, land_um: mv_land_um, fill: filled}
+  nets:
+    # logic segment: SRAM bump -> backside pad -> via -> backside metal -> TSV -> M1 (jog) -> via -> top metal -> pad -> pillar
+    - {id: sram_io, kind: vertical, from: ub, to: pillar, style: stacked, jog: [lg_m1], share: 0.4,
+       note: "SRAM supply / IO through the logic TSVs to the Cu pillars (M1 fans out from the 50 um TSV grid to the 125 um pillar grid)"}
+    - {id: sram_pg, kind: plane_tie, from: ub, plane: lg_mt, share: 0.35,
+       note: "SRAM bumps tied through the TSVs into the logic top-metal plane"}
+    - {id: sram_sig, kind: escape, from: ub, levels: [sr_m], share: 0.25, length_um: 30}
+    - {id: pil_pg, kind: plane_tie, from: pillar, plane: lg_mt, share: 0.15}
+    - {id: pil_esc, kind: escape, from: pillar, levels: [lg_m1], share: 0.15, length_um: 60}
+    # substrate segment: pillar -> L1 pad -> microvias (jog on L2) -> through hole -> L5 (jog) -> BGA
+    - {id: io, kind: vertical, from: pillar, to: bga, style: stacked, jog: [st_l2, sb_l5], share: 0.4}
+    - {id: pg_top, kind: plane_tie, from: pillar, plane: st_l3, share: 0.2}
+    - {id: esc, kind: escape, from: pillar, levels: [st_l2], share: 0.1, length_um: 300}
+    - {id: pg_bot, kind: plane_tie, from: bga, plane: sb_l4, share: 0.3}
 
 callouts:
   - {target: sram, text: "SRAM {sram_w_mm}x{sram_d_mm} mm, face down",
@@ -136,11 +345,20 @@ callouts:
   - {target: logic, text: "Logic {logic_w_mm}x{logic_d_mm} mm, 7nm",
      refs: [iwlpc52010.2020.9375855-b-c1.process_node]}
   - {target: tsv, text: "TSV {tsv_d_um} um at {tsv_pitch_um} um",
-     note: "7nm TSV, {tsv_d_um} um diameter at {tsv_pitch_um} um pitch; the pitch includes TSV keep-out rules of the F2B SRAM link",
+     note: "7nm TSV, {tsv_d_um} um diameter at {tsv_pitch_um} um pitch; the pitch includes TSV keep-out rules of the F2B SRAM link; drawn from front M1 to the backside metal with an oxide liner (analog)",
      refs: [iwlpc52010.2020.9375855-b-i2.notes]}
+  - {target: lg_bm, text: "Backside and front metal levels",
+     note: "the logic die has backside metal layers and front-side metal layers joined by the TSVs (X-Cube text); level counts and thicknesses are analogs (TSV-middle die backside damascene, Si-interposer BEOL)",
+     refs: [iwlpc52010.2020.9375855-b-L04.notes]}
+  - {target: sram_io, text: "SRAM to pillar through TSVs",
+     note: "mock-up: SRAM bump, logic backside pad, via, backside metal, TSV, front M1 (lateral move to the pillar grid), via, top metal, pad via, pillar pad"}
   - {target: pillar, text: "Cu pillar {pil_pitch_um} um pitch",
      note: "Cu pillars at {pil_pitch_um} um pitch to the {pkg_w_mm} x {pkg_d_mm} mm substrate; X-Cube height with pillars 0.67 mm (row notes)",
      refs: [iwlpc52010.2020.9375855-b-i3.notes]}
+  - {target: mv_t1, text: "Thin-core 2-2-2 substrate (template)",
+     note: "substrate layers and material are not given (iwlpc52010.2020.9375855-b-L07); drawn as a thin-core 2-2-2 build-up with stacked filled microvias and a Cu-filled through hole (analog dims)",
+     refs: [iwlpc52010.2020.9375855-b-L07.notes]}
+  - {target: th, text: "Cu-filled thin-core through hole"}
   - {target: mold, text: "Mold around SRAM", refs: [iwlpc52010.2020.9375855-b-L02.notes]}
   - {target: bga, text: "Package {pkg_h_um} um, BGA {bga_pitch_um} um"}
   - {target: ub, text: "Bumpless HCB: {hcb_pitch_um} um pitch",
@@ -153,10 +371,20 @@ insets:
     box_mm: [-0.15, -0.15, 0.15, 0.15]
     z: ["bottom:logic", "bottom:sram"]
     view: front
+  - id: logic_xs
+    label: "SRAM bump to pillar via TSV"
+    box_mm: [-0.2, -0.1, 0.2, 0.1]
+    z: ["bottom:pillar", "top:ub"]
+    view: front
   - id: edge
     label: "X-Cube edge: mold, pillars"
     box_mm: ["logic_w_mm / 2 - 0.6", -0.3, "pkg_w_mm / 2", 0.3]
     z: ["top:substrate", "top:sram"]
+    view: front
+  - id: sbt_xs
+    label: "Pillar to BGA: build-up, core"
+    box_mm: [-0.6, -0.3, 0.6, 0.3]
+    z: ["bottom:bga", "bottom:logic"]
     view: front
   - id: stack
     label: "Full stack at the edge"
