@@ -1,0 +1,51 @@
+paper_id: eptc67330.2025.11392620
+verified_on: '2026-10-20'
+source_files:
+- references/eptc67330.2025.11392620/text.md
+- references/eptc67330.2025.11392620/source.json
+- references/eptc67330.2025.11392620/figures/page_01.png
+- references/eptc67330.2025.11392620/figures/page_02.png
+- references/eptc67330.2025.11392620/figures/page_03.png
+- references/eptc67330.2025.11392620/figures/page_04.png
+figure_reading_method: 'Fig. 3 dimension labels read from 300 dpi re-crop: per CPWG GND-signal gap, signal width, signal-signal
+  spacing, GND via-centre-to-edge (7.5/12.5/22.5 um).'
+conflicts:
+- table: stack_layers
+  row_id: eptc67330.2025.11392620-a-L16
+  field: thickness_um
+  values:
+  - 0.868
+  - 0.8
+  locators:
+  - p.2 Fig. 2(b) SEM label 868 nm
+  - p.2 Sec. II.A text 'around 0.8 um'
+  chosen: 0.868
+  why: measured cross-section label
+entries:
+- table: stack_layers
+  row_id: eptc67330.2025.11392620-a-L03
+  field: space_um
+  value: 3
+  unit: um
+  basis: design_target
+  locator: p.2 Fig. 3(a)
+  note: GND-signal gap; GND via centre to GND edge 7.5 um
+excluded:
+- 224 Gbps/lane CPO optical engines (refs [6-7])
+not_reported:
+- process_steps (no fabrication process disclosed; process_flow_level none)
+- optical_interfaces
+- RDL metal material, via diameter, bridge size, Cu pillar height, FOWLP dimensions
+- Fig. 2(b) SEM dimension labels 15.9/1.91/3.75/4.69/5.98/4.94/6.03/14.9 um not assigned to features by the paper (not entered)
+- BER, energy per bit, sample counts
+revisions:
+- date: '2026-10-20'
+  source: ingest_audit_B
+  row_id: eptc67330.2025.11392620-b-i5
+  change: Added interconnects row through_via/tsv, basis stated, source schematic, locator p.1 Fig. 1.
+  reason: Fig. 1 labels a TSV in the Si bridge (leader line into left Bridge); only labelled interconnect without a row. No dimensions stated.
+- date: '2026-10-20'
+  source: ingest_audit_B
+  row_id: eptc67330.2025.11392620-f13
+  change: bbox 0.0689,0.0597,0.4915,0.2575 -> 0.0689,0.0597,0.4915,0.272; bbox_source candidate -> manual; cand_id p04_fig11 -> empty.
+  reason: Candidate crop cut the x-axis title 'Freq [GHz]'; re-crop checked, includes title and no caption text.

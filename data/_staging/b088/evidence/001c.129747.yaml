@@ -1,0 +1,54 @@
+paper_id: 001c.129747
+verified_on: 2026-10-20
+source_files:
+  - references/001c.129747/text.md
+  - references/001c.129747/source.json
+  - references/001c.129747/figures/page_02.png
+  - references/001c.129747/figures/page_03.png
+  - references/001c.129747/figures/page_04.png
+  - references/001c.129747/figures/page_05.png
+  - references/001c.129747/figures/page_06.png
+  - references/001c.129747/figures/page_07.png
+figure_reading_method: >-
+  Page renders read directly; Fig. 8 right end and Fig. 24 plot re-rendered at 400 dpi in scratch (not kept) to read
+  insertion loss at 40 GHz and per-via resistance.
+entries:
+  - {table: electrical_interfaces, row_id: 001c.129747-d-e1, field: insertion_loss_db, value: 6.6, unit: dB, basis: measured, locator: "p.3 Fig. 8", note: "W1_5mm_S3_LS1.5 curve at 40 GHz, read between -6 and -7 gridlines"}
+  - {table: electrical_interfaces, row_id: 001c.129747-d-e2, field: insertion_loss_db, value: 3.8, unit: dB, basis: measured, locator: "p.3 Fig. 8", note: "W1_5mm_S9_LS3_LS3 curve at 40 GHz"}
+  - {table: interconnects, row_id: 001c.129747-o-i1, field: resistance_mohm, value: 34, unit: mOhm, basis: measured, locator: "p.6 Fig. 24", note: "cumulative plot at sigma 0; points span about 32-37 mOhm/via"}
+  - {table: metrics, row_id: 001c.129747-m-m2, field: value, value: 2.4, unit: ohm, basis: measured, locator: "p.6 Fig. 22", note: "10 traces between about 2.3 and 2.5 ohm"}
+  - {table: metrics, row_id: 001c.129747-n-m2, field: value, value: 0.23, unit: ohm, basis: measured, locator: "p.6 Fig. 23", note: "traces at about 0.22-0.23 ohm"}
+  - {table: interconnects, row_id: 001c.129747-b-i1, field: notes, value: 3, unit: um, basis: design_target, locator: "p.3 Fig. 6", note: "target via diameters 3, 5, 7 um read from plot x positions"}
+derived:
+  - {table: components, row_id: 001c.129747-g-c1, field: thickness_um, value: 400, formula: "0.4 mm x 1000", inputs: "p.5 Fig. 15 label 0.4mmt"}
+  - {table: interconnects, row_id: 001c.129747-g-i1, field: depth_um, value: 400, formula: "0.4 mm x 1000 (glass thickness)", inputs: "p.5 Fig. 15"}
+  - {table: components, row_id: 001c.129747-h-c1, field: thickness_um, value: 500, formula: "0.5 mm x 1000", inputs: "p.5 Fig. 16 label 'Glass core thickness: 0.5mm'"}
+  - {table: interconnects, row_id: 001c.129747-h-i1, field: depth_um, value: 500, formula: "0.5 mm x 1000 (glass core thickness)", inputs: "p.5 Fig. 16"}
+conflicts:
+  - {table: process_steps, row_id: 001c.129747-F2-s01, field: target, values: ["TGV pitch 200 um (flow text)", "150 um pitch (conformal panel photo)"], locators: ["p.4 Sec. III.A", "p.5 Fig. 15"], chosen: "both kept: 200 um on the flow step, 150 um on panel g", why: "different samples possible; flow text pitch kept on the step, panel photo pitch on g (flow scoped tv_build after audit B)"}
+excluded:
+  - "UCIe 1.0 spec values 4-32 Gbps/line, 1.0-10.5 Tbps/mm and 2.0 mm channel length (specification, not this build)"
+  - "partial fill gives half diameter of conventional TGV (attributed to ref 5)"
+  - "high reliability of fine wiring protected by inorganic dielectric (ref 6, 'not mentioned in this paper')"
+  - "inorganic layers enhance reliability under 2 um pitch (refs 2, 3)"
+not_reported:
+  - optical_interfaces
+  - "process conditions (temperatures, times, chemistries) for all steps"
+  - "insulation layer / dielectric material names and thicknesses (RDL interposer)"
+  - "TGV hole forming method"
+  - "process_steps: 001c.129747-b (PID via test; only via result shown)"
+  - "process_steps: 001c.129747-d (CPW TEG fabrication not described)"
+  - "process_steps: 001c.129747-h (filled Cu method not described)"
+  - "process_steps: 001c.129747-i (partial fill Cu method not described)"
+  - "process_steps: 001c.129747-j (filled Cu method not described)"
+  - "process_steps: 001c.129747-l (partial fill Cu method not described)"
+  - "process_steps: 001c.129747-n (filled Cu method not described)"
+  - "process_steps: 001c.129747-o (partial fill Cu method not described)"
+  - "process_steps: 001c.129747-p (550x650 mm filled panel; no steps)"
+  - "TC dwell for filled and partially filled coupons; sample counts"
+  - "warpage"
+revisions:
+  - {date: 2026-10-20, source: ingest_audit_B, row_id: 001c.129747-a-L03, change: "basis measured -> design_target; source figure_image -> mixed; line_um/space_um 1/1 unchanged", reason: "L/S=1/1 um is the nominal label in p.2 Sec. II.B text and Fig. 5 caption; no measured width given; only AR about 3 is a result"}
+  - {date: 2026-10-20, source: ingest_audit_B, row_id: 001c.129747-F2, change: "scope generic_platform -> tv_build; notes rewritten; tv_ids and s01 pitch conflict kept", reason: "p.4 Sec. III.A describes the flow in past tense with specific dimensions (80 um TGV, 400 um glass, conformal Cu), matching conformal builds k (Fig. 19(b)) and m (Fig. 22)"}
+  - {date: 2026-10-20, source: ingest_audit_B, row_id: 001c.129747-c-L02;001c.129747-c-L03, change: "seq swapped: c-L03 inorganic dielectric 3 -> 2, c-L02 fine pitch wiring 2 -> 3", reason: "inorganic layer is deposited on and covers the Cu traces (p.2 Fig. 3(f), p.3 Fig. 7 label); matches TV a order"}
+  - {date: 2026-10-20, source: ingest_audit_B, row_id: 001c.129747-m-m2;001c.129747-n-m2, change: "parameter 'chain resistance during TC' -> 'resistance during TC (structure not stated)'", reason: "p.6 Fig. 22/23 plot only 'Resistance' with legend 1-10; daisy chain is stated only for the partially filled coupon (Fig. 24)"}

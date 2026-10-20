@@ -1,0 +1,38 @@
+paper_id: ectc51909.2023.00021
+verified_on: 2026-10-20
+schema_version: 2.5
+source_files:
+  - references/ectc51909.2023.00021/text.md
+  - references/ectc51909.2023.00021/source.json
+  - references/ectc51909.2023.00021/figures/page_02.png
+  - references/ectc51909.2023.00021/figures/page_03.png
+  - references/ectc51909.2023.00021/figures/page_04.png
+  - references/ectc51909.2023.00021/figures/page_05.png
+  - references/ectc51909.2023.00021/figures/page_06.png
+figure_reading_method: >-
+  All page renders opened. Candidates p02_fig1, p02_fig2, p02_fig3, p02_tablei, p03_fig4, p03_fig5, p03_fig7, p04_fig9,
+  p04_fig11, p04_fig12, p05_fig13, p05_fig14, p05_fig15, p05_tableii, p06_fig16, p06_fig17 opened; Fig. 10 has no
+  candidate and was re-cropped manually (page 4). Insertion-loss values taken from Table II, not read off Fig. 15.
+entries:
+  - {table: interconnects, row_id: ectc51909.2023.00021-a-i1, field: depth_um, value: 30, unit: um, basis: measured, locator: "p.4 Fig. 12", note: "laser-microscope profile; 'depth equivalent to prepreg thickness 30 um'; prepreg type not stated, entered for a and b"}
+  - {table: stack_layers, row_id: ectc51909.2023.00021-b-L08, field: roughness_ra_um, value: 0.5, unit: um, basis: unspecified, locator: "p.2 Sec. II.B", note: "prepreg pressed with matt side of VLP foil"}
+  - {table: process_steps, row_id: ectc51909.2023.00021-F1-s05, field: dose_mj_cm2, value: 1260, unit: mJ/cm2, basis: stated, locator: "p.2 Sec. II.B", note: "254 nm peak, 40 mm lamp distance"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51909.2023.00021-a-m1, field: value, values: [-0.34, -0.32], locators: ["p.5 Table II", "p.5 Fig. 15"], chosen: -0.34, why: "result table over curve read at 50 GHz (Fig. 15 prepreg A curve ends near -0.32 dB/mm)"}
+  - {table: metrics, row_id: ectc51909.2023.00021-a-m2, field: value, values: ["differential about 0.1 dB better than single-end", "0.01-0.02 dB/mm better (Table II)"], locators: ["p.5 Sec. III.C", "p.5 Table II"], chosen: "Table II values", why: "result table over text; text difference not entered"}
+excluded:
+  - "L/S 10/10 um UV-assisted SAP feasibility and adhesion results of refs [12]-[14]"
+  - "HBM3 6.4 GHz clock / 19.2 GHz third harmonic (background, ref [9])"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - substrate/panel size, core material name, prepreg and insulation-film product names
+  - press (lamination) temperature, pressure and time; electroless/electroplating chemistry and current density
+  - CO2 laser power/pulse conditions; desmear chemistry; SR material; Ni and Au thicknesses
+  - measured Cu line thickness and width; GND-via size; final differential-pair spacing
+  - insulation-film Dk/Df values (stated only as close to prepreg A) and its lamination steps
+  - reliability, warpage
+source_quality:
+  - "Clean text layer; section and conclusion headings partly garbled in text.md (font encoding), page renders fine."
+  - "Fig. 8 and Fig. 9 captions appear swapped vs content; Fig. 8 image duplicates the single-ended impedance plot (line widths 20-30 um)."
+  - "Fig. 17 caption labels panel (b) twice; caption says optical image while text says SEM."

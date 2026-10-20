@@ -1,0 +1,3 @@
+flow_id,paper_id,flow_name,scope,level,tv_ids,build_seq,basis,source,overrides,locator,qualifiers,notes
+iedm50572.2025.11353487-F1,iedm50572.2025.11353487,ETC TSV fabrication (Fig. 3),tv_build,full,iedm50572.2025.11353487-a,1,stated,mixed,,p.1 Sec. II; p.3 Fig. 3,,"Double-sided liner, seed and Cu-ring processes; CNT core by vacuum-assisted filling."
+ectc51909.2023.00331-F1,ectc51909.2023.00331,"Fully additive microvia fabrication, Stages I-III (Fig. 1)",tv_build,full,ectc51909.2023.00331-a,1,stated,mixed,,p.3 Sec. II.B; p.4 Sec. II.B; p.3 Fig. 1,,Room-temperature additive process per authors (p.6).

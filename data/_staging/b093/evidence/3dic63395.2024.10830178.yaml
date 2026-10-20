@@ -1,0 +1,40 @@
+paper_id: 3dic63395.2024.10830178
+verified_on: 2026-10-20
+schema_version: 2.5
+source_files:
+  - references/3dic63395.2024.10830178/text.md
+  - references/3dic63395.2024.10830178/source.json
+  - references/3dic63395.2024.10830178/figures/page_02.png
+  - references/3dic63395.2024.10830178/figures/page_03.png
+  - references/3dic63395.2024.10830178/figures/page_04.png
+  - references/3dic63395.2024.10830178/figures/page_05.png
+figure_reading_method: >-
+  All 11 candidates opened plus manual crops of Fig. 2 (p.2 panels a-g), Fig. 3(a)-(c) and Fig. 6. Fig. 3(a) SEM
+  labels read at 300 dpi (10.52 um opening). Fig. 7 log box plot read at 300 dpi: decade ~86 px; pre-descum
+  medians ~6.5e2 nA (chain) and ~2.3e3 nA (meander fork); post-descum chain median ~3.5e-4 nA, meander-fork upper
+  whisker ~1.5e-4 nA (+/-20 %). Fig. 6(a) statistics printed on the histogram.
+entries:
+  - {table: metrics, row_id: 3dic63395.2024.10830178-a-m25, field: value, value: 0.3, unit: dB/mm, basis: measured, locator: "p.5 Sec. IV; p.1 Abstract", note: "RDL1 1 mm microstrip; abstract: around 0.3 dB/mm at 110 GHz"}
+  - {table: process_steps, row_id: 3dic63395.2024.10830178-F1-s09, field: temp_c, value: 170, unit: C, basis: design_target, locator: "p.4 Sec. III.C", note: "PID2 'cured under the soft cure condition (170 C for one hour) as well' implies PID1 same cure"}
+derived:
+  - {table: process_steps, row_id: 3dic63395.2024.10830178-F1-s09, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.4 Sec. III.C"}
+  - {table: process_steps, row_id: 3dic63395.2024.10830178-F1-s18, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.4 Sec. III.C"}
+  - {table: process_steps, row_id: 3dic63395.2024.10830178-F1-s23, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.5 Sec. III.C"}
+conflicts:
+  - {table: metrics, row_id: 3dic63395.2024.10830178-a-m16, field: value, values: ["a few milliamps (text)", "~650 nA chain, ~2300 nA meander fork (Fig. 7, nA axis)"], locators: ["p.4 Sec. III.B", "p.4 Fig. 7"], chosen: "Fig. 7 values", why: "measured plot over text; plot axis labelled nA"}
+  - {table: metrics, row_id: 3dic63395.2024.10830178-a-m7, field: value, values: ["about 330 um final without compensation (abstract)", "230 um final with backside SiN; SiN compensates 100 um (Sec. III.C)"], locators: ["p.1 Abstract", "p.5 Sec. III.C"], chosen: "both kept as separate variants", why: "consistent (230 + 100); abstract value only stated there"}
+  - {table: process_steps, row_id: 3dic63395.2024.10830178-F1-s14, field: conditions, values: ["pillar seed removal by Ar sputter dry etch (Sec. III.A)", "RDL1 'after seed layer wet etch' (Fig. 7 caption)"], locators: ["p.3 Sec. III.A", "p.4 Fig. 7"], chosen: "dry etch on pillar step s07; wet etch noted on RDL1 step s14", why: "different modules; text does not state the RDL seed etch method"}
+excluded:
+  - "Table I CYCLOTENE 4000 vs XP80 properties (resolution, aspect ratio, Dk 2.6, Df 0.0032 at 40 GHz, Tg) attributed to ref [9] / Dupont"
+  - "BCB cure 250 C/1 h and BCB stress/reliability issues of refs [8]-[10]"
+  - "RF Si interposer with BCB [7], glass interposer [14] and PCB [15] loss values (comparison only, not given)"
+  - "InP HBT gain/footprint advantage of ref [1]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - Si substrate thickness, BEOL oxide thickness, Via1 dimensions, UBM metallurgy and thickness
+  - pillar pitch, count; RDL via count; PID1 as-coated thickness
+  - "process_steps: execution of Cu/Ni/Sn micro-bumps on the reported wafers (shown in Fig. 2(h) only)"
+  - CMP/etch/PVD/plasma parameters; reliability tests; die assembly
+  - warpage sign convention and measurement tool
+source_quality:
+  - "Clean text layer. Fig. 4 caption duplicates the Fig. 3 caption text; Fig. 3 right panel labelled e) but shows caption d) content."

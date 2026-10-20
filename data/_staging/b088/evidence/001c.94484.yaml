@@ -1,0 +1,32 @@
+paper_id: 001c.94484
+verified_on: 2026-10-20
+source_files:
+  - references/001c.94484/text.md
+  - references/001c.94484/source.json
+  - references/001c.94484/figures/page_02.png
+  - references/001c.94484/figures/page_03.png
+  - references/001c.94484/figures/page_04.png
+  - references/001c.94484/figures/page_05.png
+entries:
+  - {table: metrics, row_id: 001c.94484-a-m1, field: value_text, value: "0, 0.5, 16, 25", unit: N, basis: measured, locator: "p.3 Fig. 5", note: "points read off the temperature panel at 150, 250, 350, 450 C"}
+  - {table: metrics, row_id: 001c.94484-a-m4, field: value, value: 10.5, unit: N, basis: measured, locator: "p.3 Fig. 5", note: "dotted acceptance line between 10 and 11 N gridlines"}
+  - {table: process_steps, row_id: 001c.94484-F1-s03, field: temp_c_max, value: 450, unit: C, basis: design_target, locator: "p.3 Fig. 5", note: "highest Taguchi temperature level on axis; DOE max 400 C (Table I)"}
+derived:
+  - {table: process_steps, row_id: 001c.94484-F1-s03, field: split, value: "539 / 4903 / 8826 N", formula: "kgf x 9.80665 (55, 500, 900 kgf)", inputs: "p.3 Table I"}
+conflicts:
+  - {table: process_steps, row_id: 001c.94484-F1-s03, field: split, values: ["DOE 1 325 C/55 kgf; DOE 2 400 C/500 kgf (Table I)", "325 C 550 kgf; 400 C 550 kgf (Fig. 6 panel labels)"], locators: ["p.3 Table I", "p.3 Fig. 6"], chosen: "Table I", why: "result table over figure labels"}
+  - {table: metrics, row_id: 001c.94484-a-m11, field: notes, values: ["Table III (caption)", "Table II (text)"], locators: ["p.5 Table III", "p.5 Sec. IV"], chosen: "Table III", why: "caption label cited per rule (c)"}
+  - {table: interconnects, row_id: 001c.94484-a-i1, field: notes, values: ["40 um diameter pillars (abstract)", "40 um diameter x 7 um thick plated Cu pads (Sec. II)"], locators: ["p.1 Abstract", "p.2 Sec. II"], chosen: "pads", why: "test vehicle section"}
+excluded:
+  - "40 um, 20 um and 10 um pitch industry Cu pillar roadmap (ref 1)"
+  - "formic acid vapor better than liquid immersion (ref 5)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "selected (optimized) bonding temperature and force"
+  - "bonding time (not studied)"
+  - "Cu pad and silicon oxide fabrication steps"
+  - "plasma cleaning gas and power"
+  - "formic acid concentration and flow rate"
+  - "unit of Table III resistance change"
+  - "die shear values of the final assemblies"

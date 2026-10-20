@@ -1,0 +1,337 @@
+paper_id: tcpmt.2021.3111345
+verified_on: '2026-10-20'
+source_files:
+- references/tcpmt.2021.3111345/text.md
+- references/tcpmt.2021.3111345/source.json
+- references/tcpmt.2021.3111345/figures/page_01.png
+- references/tcpmt.2021.3111345/figures/page_02.png
+- references/tcpmt.2021.3111345/figures/page_03.png
+- references/tcpmt.2021.3111345/figures/page_04.png
+- references/tcpmt.2021.3111345/figures/page_05.png
+- references/tcpmt.2021.3111345/figures/page_06.png
+- references/tcpmt.2021.3111345/figures/page_07.png
+- references/tcpmt.2021.3111345/figures/page_08.png
+figure_reading_method: Table I re-cropped from page 2 render; Fig. 12 tensile values read off the candidate crop (approx, +-1 MPa); SEM scale bars not used
+  for dimensions.
+derived:
+- table: stack_layers
+  row_id: tcpmt.2021.3111345-a-L02
+  field: thickness_um
+  value: 0.03
+  formula: 30 nm / 1000
+  inputs: p.2 Sec. II-A
+- table: stack_layers
+  row_id: tcpmt.2021.3111345-a-L03
+  field: thickness_um
+  value: 0.15
+  formula: 150 nm / 1000
+  inputs: p.2 Sec. II-A
+- table: stack_layers
+  row_id: tcpmt.2021.3111345-a-L10
+  field: thickness_um
+  value: 0.15
+  formula: 150 nm / 1000
+  inputs: p.2 Sec. II-A
+- table: stack_layers
+  row_id: tcpmt.2021.3111345-a-L11
+  field: thickness_um
+  value: 0.03
+  formula: 30 nm / 1000
+  inputs: p.2 Sec. II-A
+- table: stack_layers
+  row_id: tcpmt.2021.3111345-b-L02
+  field: thickness_um
+  value: 0.03
+  formula: 30 nm / 1000
+  inputs: p.2 Sec. II-A
+- table: stack_layers
+  row_id: tcpmt.2021.3111345-b-L03
+  field: thickness_um
+  value: 0.15
+  formula: 150 nm / 1000
+  inputs: p.2 Sec. II-A
+- table: stack_layers
+  row_id: tcpmt.2021.3111345-b-L08
+  field: thickness_um
+  value: 0.15
+  formula: 150 nm / 1000
+  inputs: p.2 Sec. II-A
+- table: stack_layers
+  row_id: tcpmt.2021.3111345-b-L09
+  field: thickness_um
+  value: 0.03
+  formula: 30 nm / 1000
+  inputs: p.2 Sec. II-A
+- table: stack_layers
+  row_id: tcpmt.2021.3111345-c-L02
+  field: thickness_um
+  value: 0.03
+  formula: 30 nm / 1000
+  inputs: p.2 Sec. II-A
+- table: stack_layers
+  row_id: tcpmt.2021.3111345-c-L03
+  field: thickness_um
+  value: 0.15
+  formula: 150 nm / 1000
+  inputs: p.2 Sec. II-A
+- table: stack_layers
+  row_id: tcpmt.2021.3111345-c-L08
+  field: thickness_um
+  value: 0.15
+  formula: 150 nm / 1000
+  inputs: p.2 Sec. II-A
+- table: stack_layers
+  row_id: tcpmt.2021.3111345-c-L09
+  field: thickness_um
+  value: 0.03
+  formula: 30 nm / 1000
+  inputs: p.2 Sec. II-A
+- table: interconnects
+  row_id: tcpmt.2021.3111345-a-i1
+  field: bonding_force_n
+  value: 4300
+  formula: 4.3 kN x 1000
+  inputs: p.2 Sec. II-C (same force at EVG and Aalto, p.2 Sec. II-B)
+- table: interconnects
+  row_id: tcpmt.2021.3111345-a-i1
+  field: bonding_time_s
+  value: 3600
+  formula: 1 h x 3600
+  inputs: p.2 Sec. II-C
+- table: interconnects
+  row_id: tcpmt.2021.3111345-a-i2
+  field: bonding_force_n
+  value: 4300
+  formula: 4.3 kN x 1000
+  inputs: p.2 Sec. II-C (same force at EVG and Aalto, p.2 Sec. II-B)
+- table: interconnects
+  row_id: tcpmt.2021.3111345-a-i2
+  field: bonding_time_s
+  value: 3600
+  formula: 1 h x 3600
+  inputs: p.2 Sec. II-C
+- table: interconnects
+  row_id: tcpmt.2021.3111345-a-i3
+  field: bonding_force_n
+  value: 4300
+  formula: 4.3 kN x 1000
+  inputs: p.2 Sec. II-C (same force at EVG and Aalto, p.2 Sec. II-B)
+- table: interconnects
+  row_id: tcpmt.2021.3111345-a-i3
+  field: bonding_time_s
+  value: 3600
+  formula: 1 h x 3600
+  inputs: p.2 Sec. II-C
+- table: interconnects
+  row_id: tcpmt.2021.3111345-a-i4
+  field: bonding_force_n
+  value: 4300
+  formula: 4.3 kN x 1000
+  inputs: p.2 Sec. II-C (same force at EVG and Aalto, p.2 Sec. II-B)
+- table: interconnects
+  row_id: tcpmt.2021.3111345-a-i4
+  field: bonding_time_s
+  value: 3600
+  formula: 1 h x 3600
+  inputs: p.2 Sec. II-C
+- table: interconnects
+  row_id: tcpmt.2021.3111345-a-i5
+  field: bonding_force_n
+  value: 4300
+  formula: 4.3 kN x 1000
+  inputs: p.2 Sec. II-C (same force at EVG and Aalto, p.2 Sec. II-B)
+- table: interconnects
+  row_id: tcpmt.2021.3111345-a-i5
+  field: bonding_time_s
+  value: 3600
+  formula: 1 h x 3600
+  inputs: p.2 Sec. II-C
+- table: interconnects
+  row_id: tcpmt.2021.3111345-b-i1
+  field: bonding_force_n
+  value: 4300
+  formula: 4.3 kN x 1000
+  inputs: p.2 Sec. II-C (same force at EVG and Aalto, p.2 Sec. II-B)
+- table: interconnects
+  row_id: tcpmt.2021.3111345-b-i1
+  field: bonding_time_s
+  value: 3600
+  formula: 1 h x 3600
+  inputs: p.2 Sec. II-C
+- table: interconnects
+  row_id: tcpmt.2021.3111345-b-i2
+  field: bonding_force_n
+  value: 4300
+  formula: 4.3 kN x 1000
+  inputs: p.2 Sec. II-C (same force at EVG and Aalto, p.2 Sec. II-B)
+- table: interconnects
+  row_id: tcpmt.2021.3111345-b-i2
+  field: bonding_time_s
+  value: 3600
+  formula: 1 h x 3600
+  inputs: p.2 Sec. II-C
+- table: interconnects
+  row_id: tcpmt.2021.3111345-b-i3
+  field: bonding_force_n
+  value: 4300
+  formula: 4.3 kN x 1000
+  inputs: p.2 Sec. II-C (same force at EVG and Aalto, p.2 Sec. II-B)
+- table: interconnects
+  row_id: tcpmt.2021.3111345-b-i3
+  field: bonding_time_s
+  value: 3600
+  formula: 1 h x 3600
+  inputs: p.2 Sec. II-C
+- table: interconnects
+  row_id: tcpmt.2021.3111345-b-i4
+  field: bonding_force_n
+  value: 4300
+  formula: 4.3 kN x 1000
+  inputs: p.2 Sec. II-C (same force at EVG and Aalto, p.2 Sec. II-B)
+- table: interconnects
+  row_id: tcpmt.2021.3111345-b-i4
+  field: bonding_time_s
+  value: 3600
+  formula: 1 h x 3600
+  inputs: p.2 Sec. II-C
+- table: interconnects
+  row_id: tcpmt.2021.3111345-b-i5
+  field: bonding_force_n
+  value: 4300
+  formula: 4.3 kN x 1000
+  inputs: p.2 Sec. II-C (same force at EVG and Aalto, p.2 Sec. II-B)
+- table: interconnects
+  row_id: tcpmt.2021.3111345-b-i5
+  field: bonding_time_s
+  value: 3600
+  formula: 1 h x 3600
+  inputs: p.2 Sec. II-C
+- table: interconnects
+  row_id: tcpmt.2021.3111345-c-i1
+  field: bonding_force_n
+  value: 4300
+  formula: 4.3 kN x 1000
+  inputs: p.2 Sec. II-C (same force at EVG and Aalto, p.2 Sec. II-B)
+- table: interconnects
+  row_id: tcpmt.2021.3111345-c-i1
+  field: bonding_time_s
+  value: 3600
+  formula: 1 h x 3600
+  inputs: p.2 Sec. II-C
+- table: interconnects
+  row_id: tcpmt.2021.3111345-c-i2
+  field: bonding_force_n
+  value: 4300
+  formula: 4.3 kN x 1000
+  inputs: p.2 Sec. II-C (same force at EVG and Aalto, p.2 Sec. II-B)
+- table: interconnects
+  row_id: tcpmt.2021.3111345-c-i2
+  field: bonding_time_s
+  value: 3600
+  formula: 1 h x 3600
+  inputs: p.2 Sec. II-C
+- table: interconnects
+  row_id: tcpmt.2021.3111345-c-i3
+  field: bonding_force_n
+  value: 4300
+  formula: 4.3 kN x 1000
+  inputs: p.2 Sec. II-C (same force at EVG and Aalto, p.2 Sec. II-B)
+- table: interconnects
+  row_id: tcpmt.2021.3111345-c-i3
+  field: bonding_time_s
+  value: 3600
+  formula: 1 h x 3600
+  inputs: p.2 Sec. II-C
+- table: interconnects
+  row_id: tcpmt.2021.3111345-c-i4
+  field: bonding_force_n
+  value: 4300
+  formula: 4.3 kN x 1000
+  inputs: p.2 Sec. II-C (same force at EVG and Aalto, p.2 Sec. II-B)
+- table: interconnects
+  row_id: tcpmt.2021.3111345-c-i4
+  field: bonding_time_s
+  value: 3600
+  formula: 1 h x 3600
+  inputs: p.2 Sec. II-C
+- table: interconnects
+  row_id: tcpmt.2021.3111345-c-i5
+  field: bonding_force_n
+  value: 4300
+  formula: 4.3 kN x 1000
+  inputs: p.2 Sec. II-C (same force at EVG and Aalto, p.2 Sec. II-B)
+- table: interconnects
+  row_id: tcpmt.2021.3111345-c-i5
+  field: bonding_time_s
+  value: 3600
+  formula: 1 h x 3600
+  inputs: p.2 Sec. II-C
+- table: process_steps
+  row_id: tcpmt.2021.3111345-F1-s04
+  field: thickness_um
+  value: 0.03
+  formula: 30 nm / 1000
+  inputs: p.2 Sec. II-A
+- table: process_steps
+  row_id: tcpmt.2021.3111345-F1-s05
+  field: thickness_um
+  value: 0.15
+  formula: 150 nm / 1000
+  inputs: p.2 Sec. II-A
+- table: process_steps
+  row_id: tcpmt.2021.3111345-F2-s06
+  field: force_n
+  value: 4300
+  formula: 4.3 kN x 1000
+  inputs: p.2 Sec. II-C
+- table: process_steps
+  row_id: tcpmt.2021.3111345-F2-s06
+  field: time_s
+  value: 3600
+  formula: 1 h x 3600
+  inputs: p.2 Sec. II-C
+- table: process_steps
+  row_id: tcpmt.2021.3111345-F2-s12
+  field: force_n
+  value: 4300
+  formula: 4.3 kN x 1000
+  inputs: p.2 Sec. II-C
+- table: process_steps
+  row_id: tcpmt.2021.3111345-F2-s13
+  field: time_s
+  value: 3600
+  formula: 1 h x 3600
+  inputs: p.2 Sec. II-C
+- table: process_steps
+  row_id: tcpmt.2021.3111345-F2-s14
+  field: time_s
+  value: 3600
+  formula: approximately 1 h x 3600
+  inputs: p.2 Sec. II-C
+conflicts:
+- table: metrics
+  row_id: tcpmt.2021.3111345-a-m9
+  field: value
+  values:
+  - 57.5
+  - 40-50
+  locators:
+  - p.6 Fig. 12 (Aalto bond top point)
+  - p.6 Sec. III-C 'highest tensile strengths were 40-50 MPa'
+  chosen: 57.5
+  why: measured plot > text
+excluded:
+- Cu-Sn SLID at ~300 C and other binary SLID systems (refs [2]-[30], Introduction)
+- Prior Cu-In-Sn low-temperature bonding results (refs [32]-[34])
+- Void formation at Cu|Cu3Sn interface in binary Cu-Sn (refs [35]-[37])
+not_reported:
+- electrical_interfaces
+- optical_interfaces
+- bump pitch and bump count
+- wafer thickness
+- EVG bonding chamber atmosphere and ramp
+- bond alignment accuracy value
+- bonding yield numbers per temperature
+- Fig. 11 isothermal section (no values extracted)
+notes: Table I bottom/top layers listed in deposition order (Cu, Sn, In); In outermost. Top wafer mapped to 'Si cap' of Fig. 8 (inferred). Fig. 12 has 8
+  EVG1 points stacked at <10 MPa.

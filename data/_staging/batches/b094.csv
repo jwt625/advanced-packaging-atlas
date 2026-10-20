@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+ectc51909.2023.00021,10.1109/ectc51909.2023.00021,High Frequency Characteristics of Fine Copper Lines on High Rigidity Dielectrics,2023,ECTC,advanced_substrate,advanced_substrate,3,"UV-assisted SAP fine strip lines on smooth prepreg vs insulation film test vehicles; impedance, S-parameters."
+ectc51846.2026.00356,10.1109/ectc51846.2026.00356,Die-Shift of Sub-20 μm Thickness Embedded Chiplet in Glass-Core Package Redistribution Layers,2026,ECTC,glass,glass;advanced_substrate,2,"Sub-20 um chiplets embedded in RDL on 100x100 mm glass; die-shift measured through pick-place, ABF encapsulation, cure."
+estc60143.2024.10712091,10.1109/estc60143.2024.10712091,Improving the Wafer Thinning Flow Robustness for 2.5D & 3D Applications,2024,ESTC,si_interposer,si_interposer,3,Temporary-carrier thinning to sub-100 um; edge trim 500 um to 1 mm cut edge chipping; EBR/misalignment DOE.

@@ -1,0 +1,37 @@
+paper_id: 001c.147214
+verified_on: 2026-10-20
+schema_version: 2.5
+source_files:
+  - references/001c.147214/text.md
+  - references/001c.147214/source.json
+  - references/001c.147214/figures/page_02.png
+  - references/001c.147214/figures/page_03.png
+  - references/001c.147214/figures/page_04.png
+  - references/001c.147214/figures/page_05.png
+  - references/001c.147214/figures/page_06.png
+  - references/001c.147214/figures/candidates.json
+figure_reading_method: >-
+  Page renders at 150 dpi; all 16 candidates opened; Figs. 6, 7, 8, 9, 10, 12, 15, 16, 17, 19 re-cropped (labels or
+  axes cut); Figs. 5 and 13 have no candidate and were cropped manually. No Fig. 4 is printed. Warpage plots read
+  only qualitatively; the 300 um reduction is from text.
+entries:
+  - {table: test_vehicles, row_id: 001c.147214-b, field: substrate_x_mm, value: 130, unit: mm, basis: design_target, locator: "p.4 Fig. 11; p.4 Fig. 13", note: "130 mm dimension arrows; caption 13 x 13 cm"}
+derived: []
+conflicts:
+  - {table: test_vehicles, row_id: 001c.147214-a, field: carrier_size_mm, values: ["300x400", "300x300"], locators: ["p.2 Sec. II.A; p.3 Fig. 8 caption", "p.3 Sec. II.B"], chosen: "300x400", why: "caption and Sec. II.A agree; Sec. II.B likely typo"}
+  - {table: interconnects, row_id: 001c.147214-b-i1, field: count, values: ["approximately 15,000 vias within 13 cm2", "13 x 13 cm unit (169 cm2)"], locators: ["p.4 Sec. II.C", "p.4 Fig. 13; p.6 Sec. IV"], chosen: "15000 as written", why: "count as stated; area wording inconsistent (abstract: chip size 13 cm2)"}
+  - {table: stack_layers, row_id: 001c.147214-b-L03, field: line_um, values: ["100/100", "<= 100/100"], locators: ["p.4 Sec. II.C", "p.4 Fig. 12"], chosen: 100, why: "text"}
+excluded:
+  - "HAST result (Fig. 2(c), L/S 1.0/1.0 um, 130 C, 85%, 3.5 V) and HTS result (Fig. 3, 150 C 1000 h, JESD22-A103E) attributed to refs [3][4]"
+  - "TGV high-frequency performance up to 10 Gbps of ref [5]; prior panel fine wiring ref [2]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - "process_steps: 001c.147214-d (conventional SAP control; only 'covered directly with polyimide' stated)"
+  - process conditions (temperatures, times, plating current density) for all steps
+  - RDL layer count, dielectric material names and thicknesses, inorganic dielectric material and thickness
+  - chip type and size on RDL interposer; mold material; micro bump dimensions
+  - TGV metallization and glass type; build-up dielectric material
+  - EM sample count; warpage absolute values and sign convention
+notes:
+  - "EM (Sec. III) and warpage (Sec. II.B) sections end with citations [8] and [7]; entered because the abstract and introduction state these tests were conducted in this paper."
+  - "Process flow F2 linked to EM monitor c by inference: DNP-SAP is the proposed SAP with inorganic layer deposition (Fig. 7(f))."

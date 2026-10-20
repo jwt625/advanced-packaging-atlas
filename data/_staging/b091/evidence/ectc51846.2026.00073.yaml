@@ -1,0 +1,125 @@
+paper_id: ectc51846.2026.00073
+verified_on: '2026-10-20'
+source_files:
+- references/ectc51846.2026.00073/text.md
+- references/ectc51846.2026.00073/source.json
+- references/ectc51846.2026.00073/figures/page_01.png
+- references/ectc51846.2026.00073/figures/page_02.png
+- references/ectc51846.2026.00073/figures/page_03.png
+- references/ectc51846.2026.00073/figures/page_04.png
+- references/ectc51846.2026.00073/figures/page_05.png
+- references/ectc51846.2026.00073/figures/page_06.png
+- references/ectc51846.2026.00073/figures/page_07.png
+- references/ectc51846.2026.00073/figures/page_08.png
+figure_reading_method: Tables I-VI read from page renders; Fig. 10 and Fig. 16 re-rendered at 300 dpi in scratch and read to ~1 um; warpage curves of Fig.
+  9/14 not digitized.
+derived:
+- table: interconnects
+  row_id: ectc51846.2026.00073-a-i5
+  field: pitch_um
+  value: 1000
+  formula: 1.0 mm x 1000
+  inputs: p.2 Table I
+- table: interconnects
+  row_id: ectc51846.2026.00073-a-i5
+  field: diameter_um
+  value: 600
+  formula: 0.6 mm x 1000
+  inputs: p.2 Table I
+- table: interconnects
+  row_id: ectc51846.2026.00073-b-i5
+  field: pitch_um
+  value: 1000
+  formula: 1.0 mm x 1000
+  inputs: p.2 Table I
+- table: interconnects
+  row_id: ectc51846.2026.00073-b-i5
+  field: diameter_um
+  value: 600
+  formula: 0.6 mm x 1000
+  inputs: p.2 Table I
+- table: interconnects
+  row_id: ectc51846.2026.00073-c-i5
+  field: pitch_um
+  value: 1000
+  formula: 1.0 mm x 1000
+  inputs: p.2 Table I
+- table: interconnects
+  row_id: ectc51846.2026.00073-c-i5
+  field: diameter_um
+  value: 600
+  formula: 0.6 mm x 1000
+  inputs: p.2 Table I
+- table: interconnects
+  row_id: ectc51846.2026.00073-d-i5
+  field: pitch_um
+  value: 1000
+  formula: 1.0 mm x 1000
+  inputs: p.2 Table I
+- table: interconnects
+  row_id: ectc51846.2026.00073-d-i5
+  field: diameter_um
+  value: 600
+  formula: 0.6 mm x 1000
+  inputs: p.2 Table I
+- table: interconnects
+  row_id: ectc51846.2026.00073-e-i5
+  field: pitch_um
+  value: 1000
+  formula: 1.0 mm x 1000
+  inputs: p.2 Table I
+- table: interconnects
+  row_id: ectc51846.2026.00073-e-i5
+  field: diameter_um
+  value: 600
+  formula: 0.6 mm x 1000
+  inputs: p.2 Table I
+- table: interconnects
+  row_id: ectc51846.2026.00073-f-i5
+  field: pitch_um
+  value: 1000
+  formula: 1.0 mm x 1000
+  inputs: p.2 Table I
+- table: interconnects
+  row_id: ectc51846.2026.00073-f-i5
+  field: diameter_um
+  value: 600
+  formula: 0.6 mm x 1000
+  inputs: p.2 Table I
+conflicts:
+- table: metrics
+  row_id: ectc51846.2026.00073-f-m1
+  field: value
+  values:
+  - 223
+  - about 200
+  locators:
+  - p.7 Fig. 17 label 223um
+  - p.7 Sec. IV 'about 200um'
+  chosen: 223
+  why: figure label is the measured value; text rounds
+- table: metrics
+  row_id: ectc51846.2026.00073-a-m13
+  field: value
+  values:
+  - 80
+  - 78
+  locators:
+  - p.7 Sec. IV 'about 80um'
+  - p.7 Fig. 16 bar
+  chosen: both kept
+  why: text approximate value kept as its own row; Fig. 16 read value in ectc51846.2026.00073-a-m7
+excluded:
+- FOCoS-Bridge features (Si capacitors in molded interposer, >1000 HBM lines) attributed to ref [3]
+- Monitor design guidance from refs [4]-[7]
+not_reported:
+- electrical_interfaces
+- optical_interfaces
+- stiffener width L and thickness t
+- die sizes and thicknesses, interposer size, RDL layer count and L/S
+- u-bump diameter, height, count; bridge pillar pitch
+- assembly process sequence and conditions
+- underfill CTE/modulus values
+- simulation model details
+notes: 'TCT readouts per Table VI are new failures over samples tested at that readout (n drops after failures). Warpage sign: Table V legend ''-'' means
+  negative.'

@@ -1,0 +1,35 @@
+paper_id: estc55720.2022.9939446
+verified_on: 2026-10-20
+schema_version: 2.5
+source_files:
+  - references/estc55720.2022.9939446/text.md
+  - references/estc55720.2022.9939446/source.json
+  - references/estc55720.2022.9939446/figures/page_02.png
+  - references/estc55720.2022.9939446/figures/page_03.png
+  - references/estc55720.2022.9939446/figures/page_04.png
+  - references/estc55720.2022.9939446/figures/page_05.png
+  - references/estc55720.2022.9939446/figures/page_06.png
+  - references/estc55720.2022.9939446/figures/candidates.json
+figure_reading_method: >-
+  Page renders at 150 dpi; all 18 figure/table candidates opened; Figs. 10, 13, 15 re-cropped (candidate cut the
+  bottom). S21 gain of bare and embedded LNA read off Fig. 15 at the 37-40 GHz marker band (about 14 dB, +/-1 dB).
+entries:
+  - {table: interconnects, row_id: estc55720.2022.9939446-b-i1, field: diameter_um, value: 25, unit: um, basis: measured, locator: "p.3 Fig. 7", note: "top diameter; bottom diameter 16 um (caption)"}
+  - {table: interconnects, row_id: estc55720.2022.9939446-b-i1, field: pad_x_um, value: 100, unit: um, basis: design_target, locator: "p.3 Table I", note: "contact diameter (SERENA column)"}
+derived:
+  - {table: process_steps, row_id: estc55720.2022.9939446-F1-s03, field: time_s, value: 5400, formula: "1.5 h x 3600", inputs: "p.3 Sec. III.A"}
+conflicts:
+  - {table: components, row_id: estc55720.2022.9939446-a-c1, field: count, values: ["2 GaN + 1 SiGe in Fig. 10 concept", "fabricated low power module die count not stated"], locators: ["p.4 Fig. 10", "p.6 Sec. V.C"], chosen: "Fig. 10 counts, source schematic", why: "only stated counts"}
+excluded:
+  - "Patents [6], [7] and prior embedding refs [1]-[5] (no numbers taken)"
+  - "Antenna design details of refs [8], [9]; interconnect modeling of ref [10]"
+  - "Conventional sinter material conductivity 150 W/mK and higher (comparison, not this build)"
+not_reported:
+  - optical_interfaces
+  - "process_steps: estc55720.2022.9939446-c (antenna test structure build not described)"
+  - "process_steps: estc55720.2022.9939446-d (RF interconnect test structures mentioned in abstract only)"
+  - module and die dimensions, package size, layer count of fabricated module
+  - lamination temperature/pressure (Megtron 7N recipe), laser drilling parameters for SERENA, plating current density
+  - solder ball size and alloy; thermal via dimensions; micro-via sizes of upper layers
+  - measured thermal resistance; reliability tests
+  - insertion-loss frequency and structure geometry of interconnect test structures

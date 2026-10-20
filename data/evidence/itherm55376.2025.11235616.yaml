@@ -1,0 +1,37 @@
+paper_id: itherm55376.2025.11235616
+verified_on: 2026-10-20
+source_files:
+  - references/itherm55376.2025.11235616/text.md
+  - references/itherm55376.2025.11235616/source.json
+  - references/itherm55376.2025.11235616/figures/page_02.png
+  - references/itherm55376.2025.11235616/figures/page_03.png
+  - references/itherm55376.2025.11235616/figures/page_04.png
+  - references/itherm55376.2025.11235616/figures/page_05.png
+  - references/itherm55376.2025.11235616/figures/page_06.png
+  - references/itherm55376.2025.11235616/figures/page_07.png
+figure_reading_method: >-
+  Tables I-IV values checked against page 4 render and candidate crops. Cross-section scale bars (100 um, 50 um) not used
+  for dimensions. Candidate crops for Fig. 1, 5, 7, 8, 9, 10, 11, 12 cut off bottom content; manual re-crops used.
+entries:
+  - {table: metrics, row_id: itherm55376.2025.11235616-a-m1, field: n_samples, value: 2, unit: "-", basis: measured, locator: "p.6 Sec. IV.C", note: "TOF-SIMS on four regions of two samples"}
+derived:
+  - {table: components, row_id: itherm55376.2025.11235616-b-c1, field: thickness_um, value: 78, formula: "0.078 mm x 1000 um/mm", inputs: "p.3 Sec. III.B"}
+  - {table: process_steps, row_id: itherm55376.2025.11235616-F2-s03, field: time_s, value: 1800, formula: "30 min x 60 s/min", inputs: "p.3 Sec. III.B"}
+  - {table: process_steps, row_id: itherm55376.2025.11235616-F2-s04, field: time_s, value: 1800, formula: "30 min x 60 s/min", inputs: "p.3 Sec. III.B"}
+  - {table: process_steps, row_id: itherm55376.2025.11235616-F2-s05, field: time_s, value: 3600, formula: "1 h x 3600 s/h", inputs: "p.3 Sec. III.B"}
+  - {table: process_steps, row_id: itherm55376.2025.11235616-F2-s07, field: thickness_um, value: 78, formula: "0.078 mm x 1000 um/mm", inputs: "p.3 Sec. III.B"}
+conflicts: []
+excluded:
+  - "Table V simulation material parameters (Fick D 236.26 um2/min etc.) taken from ref [5]"
+  - "Prior dual-stage ABF characterization refs [5], [6]"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "substrate size, panel/strip format, layer thicknesses, via diameter and pitch, bridge dimensions"
+  - "ABF grade of the bridge substrate (GX92 named only for the sorption sample)"
+  - "lamination, cure, drilling and plating conditions of the bridge substrate"
+  - "moisture uptake saturation values in Fig. 6/7 (not stated numerically)"
+notes: >-
+  Fitted parameters (Tables I-IV) entered as basis derived (authors' fits of measured uptake). Tables VII and VIII are
+  printed with the label 'TABLE I.' (text cites VII/VIII). D2O experiment assisted by WinTech Nano-Technology Services (ack).
+  Drying 100 C 24 h and N2 atmosphere are test preconditions, recorded in metrics.condition, not as steps.

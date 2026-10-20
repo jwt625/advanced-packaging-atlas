@@ -1,0 +1,50 @@
+paper_id: iedm50572.2025.11353855
+verified_on: 2026-10-20
+source_files:
+  - references/iedm50572.2025.11353855/text.md
+  - references/iedm50572.2025.11353855/source.json
+  - references/iedm50572.2025.11353855/figures/page_01.png
+  - references/iedm50572.2025.11353855/figures/page_02.png
+  - references/iedm50572.2025.11353855/figures/page_03.png
+  - references/iedm50572.2025.11353855/figures/page_04.png
+figure_reading_method: >-
+  Pages 3-4 are figure panels; all crops manual (candidate bboxes misplaced or truncated). BV 4.58 V and leakage
+  8.9e-7 A/mm2 read from Fig. 14 labels; Fig. 12 curve values for 1/2/4 layers not stated and not read off.
+entries:
+  - {table: metrics, row_id: iedm50572.2025.11353855-a-m3, field: value, value: 4.58, unit: V, basis: measured, locator: "p.4 Fig. 14", note: "label BV=4.58V"}
+derived:
+  - {table: test_vehicles, row_id: iedm50572.2025.11353855-a, field: carrier_size_mm, value: 101.6, formula: "4 in x 25.4 mm/in", inputs: "p.3 Fig. 5"}
+  - {table: stack_layers, row_id: iedm50572.2025.11353855-a-L01, field: thickness_um, value: 0.2, formula: "200 nm / 1000", inputs: "p.1 Sec. II; p.3 Fig. 4"}
+  - {table: stack_layers, row_id: iedm50572.2025.11353855-a-L02, field: thickness_um, value: 0.05, formula: "50 nm / 1000", inputs: "p.3 Fig. 4"}
+  - {table: stack_layers, row_id: iedm50572.2025.11353855-a-L03, field: thickness_um, value: 0.01, formula: "10 nm / 1000", inputs: "p.1 Sec. II; p.3 Fig. 4"}
+  - {table: stack_layers, row_id: iedm50572.2025.11353855-a-L04, field: thickness_um, value: 0.05, formula: "50 nm / 1000", inputs: "p.1 Sec. II; p.3 Fig. 4"}
+  - {table: stack_layers, row_id: iedm50572.2025.11353855-b-L01, field: thickness_um, value: 0.05, formula: "50 nm / 1000", inputs: "p.4 Fig. 16(c)"}
+  - {table: stack_layers, row_id: iedm50572.2025.11353855-b-L02, field: thickness_um, value: 0.01, formula: "10 nm / 1000", inputs: "p.4 Fig. 16(b)"}
+  - {table: stack_layers, row_id: iedm50572.2025.11353855-b-L03, field: thickness_um, value: 0.05, formula: "50 nm / 1000", inputs: "p.4 Fig. 16(b)"}
+  - {table: components, row_id: iedm50572.2025.11353855-b-c1, field: x_mm, value: 0.08, formula: "80 um / 1000", inputs: "p.4 Fig. 16(b)"}
+  - {table: components, row_id: iedm50572.2025.11353855-b-c1, field: y_mm, value: 0.16, formula: "160 um / 1000", inputs: "p.4 Fig. 16(b)"}
+  - {table: process_steps, row_id: iedm50572.2025.11353855-F1-s01, field: thickness_um, value: 0.05, formula: "50 nm / 1000", inputs: "p.3 Fig. 4"}
+  - {table: process_steps, row_id: iedm50572.2025.11353855-F1-s05, field: thickness_um, value: 0.01, formula: "10 nm / 1000", inputs: "p.3 Fig. 4"}
+  - {table: process_steps, row_id: iedm50572.2025.11353855-F1-s06, field: thickness_um, value: 0.05, formula: "50 nm / 1000", inputs: "p.3 Fig. 4"}
+  - {table: process_steps, row_id: iedm50572.2025.11353855-F1-s07, field: thickness_um, value: 0.01, formula: "10 nm / 1000", inputs: "p.3 Fig. 4"}
+  - {table: process_steps, row_id: iedm50572.2025.11353855-F1-s09, field: thickness_um, value: 0.05, formula: "50 nm / 1000", inputs: "p.3 Fig. 4"}
+  - {table: process_steps, row_id: iedm50572.2025.11353855-F1-s10, field: thickness_um, value: 0.2, formula: "200 nm / 1000", inputs: "p.3 Fig. 4"}
+conflicts:
+  - {table: metrics, row_id: iedm50572.2025.11353855-a-m3, field: value, values: [4.58, 4.6], locators: ["p.4 Fig. 14", "p.1 Abstract; p.2 Sec. IV; p.4 Table 1"], chosen: 4.58, why: "measured plot label over rounded text"}
+  - {table: metrics, row_id: iedm50572.2025.11353855-a-m5, field: value, values: [119.8, 60.2], locators: ["p.3 Fig. 9 caption; p.2 Sec. IV", "p.3 Fig. 9 image label"], chosen: 119.8, why: "caption and text agree; 60.2 is the supplementary angle drawn"}
+  - {table: metrics, row_id: iedm50572.2025.11353855-b-m4, field: value, values: [31.08, 31], locators: ["p.4 Table 1", "p.2 Sec. IV"], chosen: 31.08, why: "result table over text"}
+excluded:
+  - "Conventional BEOL MIM 1-2 nF/mm2 (Introduction, ref [3])"
+  - "Table 1 columns for refs [6]-[9] (8.3, 68, 65-97, 1200 fF/um2 etc.)"
+  - "Fig. 19 droop values of 2D MIM [6] 101.81 mV and DTC [7]-[9] 276.07, 280.03, 279.29 mV"
+  - "2000 A/us load transient level from ref [1] used only as model condition"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "deposition/etch temperatures, powers, times and gas flows"
+  - "device area, via diameter used, contact resistance values (Fig. 15 not readable numerically)"
+  - "capacitance of 1/2/4-layer devices (Fig. 12 curves only)"
+  - "integration into an actual interposer or package substrate (proposed only)"
+notes: >-
+  Text cites the stacked-edge SEM as Fig. 10; caption numbering (Fig. 9) used. 1/2/4-layer devices of Fig. 12 and Fig.
+  15 not made separate TVs because no values are stated for them. Fig. 1 integration concept is paper-level.

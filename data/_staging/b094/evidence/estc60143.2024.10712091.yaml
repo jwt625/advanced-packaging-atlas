@@ -1,0 +1,38 @@
+paper_id: estc60143.2024.10712091
+verified_on: 2026-10-20
+schema_version: 2.5
+source_files:
+  - references/estc60143.2024.10712091/text.md
+  - references/estc60143.2024.10712091/source.json
+  - references/estc60143.2024.10712091/figures/page_01.png
+  - references/estc60143.2024.10712091/figures/page_02.png
+  - references/estc60143.2024.10712091/figures/page_03.png
+  - references/estc60143.2024.10712091/figures/page_04.png
+  - references/estc60143.2024.10712091/figures/page_05.png
+  - references/estc60143.2024.10712091/figures/page_06.png
+figure_reading_method: >-
+  All six page renders opened (equations (3)-(9) read from page 2-3 renders; symbols are dropped in text.md).
+  Candidates p01_fig1, p02_fig3, p02_fig4, p03_fig6, p03_tablei, p04_fig8, p04_fig9, p05_fig10, p06_tableii,
+  p06_fig11, p06_fig12 opened; p01_fig2 (merged with author block, cut labels) and p02_fig5 (includes equations)
+  re-cropped manually. Fig. 12 medians read off box plots (+/-0.02 mOhm/sq).
+entries:
+  - {table: test_vehicles, row_id: estc60143.2024.10712091-a, field: carrier_format, value: wafer_300mm, unit: "", basis: derived, locator: "p.5 Fig. 10", note: "polar-map radius labels about 149963-149970 um and 144968-144986 um imply 300 mm wafers; size not stated in text"}
+  - {table: metrics, row_id: estc60143.2024.10712091-a-m32, field: value, value: 50, unit: "%", basis: simulated, locator: "p.3 Sec. III", note: "'quite significant (~50%)'"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: estc60143.2024.10712091-a-m7, field: value, values: [614, 537], locators: ["p.6 Table II", "p.4 Fig. 8"], chosen: 614, why: "result table over box-plot median (D07); text says ~50 um bias, Fig. 8 shows about 537 um"}
+  - {table: metrics, row_id: estc60143.2024.10712091-a-m10, field: value, values: [592, 535], locators: ["p.6 Table II", "p.4 Fig. 8"], chosen: 592, why: "result table over box-plot median (D08)"}
+  - {table: metrics, row_id: estc60143.2024.10712091-a-m25, field: value, values: [1284, 1258], locators: ["p.6 Table II", "p.4 Fig. 8"], chosen: 1284, why: "result table over box-plot median (D13; text notes D13 deviates from the 50 um bias)"}
+excluded:
+  - "commercial temporary bonders: X/Y wafer-to-wafer misalignment < 100 um (generic tool statement)"
+  - "edge chipping wafer-loss data of refs [2,3]; thinning flow details of refs [4,5]"
+  - "Fig. 7 SEMI M1-0114 edge exclusion definition (generic standard figure); IMEC raw-wafer edge exclusion 3 mm"
+not_reported:
+  - interconnects, electrical_interfaces, optical_interfaces
+  - wafer diameter (stated), initial device-wafer thickness, carrier type per wafer (glass or Si), carrier bevel width
+  - spin-coat speeds, LRL/TBM thicknesses, soft-bake and bonding temperatures/pressures/times
+  - grinding wheel and CMP conditions; SiO2, seed and plating deposition methods/conditions
+  - laser debonding (not described); chipping metric beyond qualitative classes
+source_quality:
+  - "Text layer clean but Greek symbols (delta, omega, gamma, beta, phi) and equations (3)-(9) dropped in text.md; read from page renders."
+  - "Every page carries a 'restricted' footer label."

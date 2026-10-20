@@ -1,0 +1,6 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51909.2023.00331-a-c1,ectc51909.2023.00331-a,pcb,,,FR-4 base PCB,,,,,,,,,,FR-4,Digi-Key Electronics,stated,text,,p.2 Sec. II.A,,
+eptc67330.2025.11392620-a-c1,eptc67330.2025.11392620-a,bridge,,,4-layer RDL silicon bridge,,,,,,,,,,Si; polyimide RDL dielectric,,stated,text,,p.2 Sec. II.A; p.2 Fig. 2,,
+eptc67330.2025.11392620-b-c1,eptc67330.2025.11392620-b,bridge,,,Si bridge (4 RDL layers),,,,,,,,,,,,stated,text,,p.4 Sec. III; p.4 Fig. 13,,
+eptc67330.2025.11392620-b-c2,eptc67330.2025.11392620-b,other,,,XPU,,,,,,,,,,,,stated,text,,p.4 Sec. III; p.4 Fig. 13,,Compute die (XPU).
+eptc67330.2025.11392620-b-c3,eptc67330.2025.11392620-b,other,,,OE chiplet,,,,,,,,,,,,stated,text,,p.4 Sec. III; p.4 Fig. 13,,Optical engine chiplet.

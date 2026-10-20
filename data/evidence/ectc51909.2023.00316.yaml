@@ -1,0 +1,98 @@
+paper_id: ectc51909.2023.00316
+verified_on: '2026-10-20'
+source_files:
+- references/ectc51909.2023.00316/text.md
+- references/ectc51909.2023.00316/source.json
+- references/ectc51909.2023.00316/figures/page_01.png
+- references/ectc51909.2023.00316/figures/page_02.png
+- references/ectc51909.2023.00316/figures/page_03.png
+- references/ectc51909.2023.00316/figures/page_04.png
+- references/ectc51909.2023.00316/figures/page_05.png
+- references/ectc51909.2023.00316/figures/page_06.png
+- references/ectc51909.2023.00316/figures/page_07.png
+- references/ectc51909.2023.00316/figures/page_08.png
+figure_reading_method: Fig. 3 flow and Fig. 4 SEM labels read from page renders; Fig. 7 values only qualitative.
+derived:
+- table: stack_layers
+  row_id: ectc51909.2023.00316-a-L01
+  field: thickness_um
+  value: 0.12
+  formula: 120 nm / 1000
+  inputs: p.5 Sec. III-B
+- table: stack_layers
+  row_id: ectc51909.2023.00316-a-L04
+  field: thickness_um
+  value: 0.3
+  formula: 3000 A / 10000
+  inputs: p.5 Sec. III-B
+- table: stack_layers
+  row_id: ectc51909.2023.00316-a-L06
+  field: thickness_um
+  value: 0.3
+  formula: 3000 A / 10000
+  inputs: p.5 Sec. III-B
+- table: stack_layers
+  row_id: ectc51909.2023.00316-a-L08
+  field: thickness_um
+  value: 0.12
+  formula: 120 nm / 1000
+  inputs: p.5 Sec. III-B
+- table: interconnects
+  row_id: ectc51909.2023.00316-a-i1
+  field: depth_um
+  value: 300
+  formula: through via depth = wafer thickness 300 um
+  inputs: p.4 Sec. III-B; p.5 Sec. III-B
+- table: process_steps
+  row_id: ectc51909.2023.00316-F1-s08
+  field: thickness_um
+  value: 0.3
+  formula: 3000 A / 10000
+  inputs: p.5 Sec. III-B
+- table: process_steps
+  row_id: ectc51909.2023.00316-F1-s09
+  field: thickness_um
+  value: 0.2
+  formula: 200 nm / 1000
+  inputs: p.5 Sec. III-B
+- table: process_steps
+  row_id: ectc51909.2023.00316-F1-s10
+  field: thickness_um
+  value: 0.12
+  formula: 120 nm / 1000
+  inputs: p.5 Sec. III-B
+conflicts:
+- table: metrics
+  row_id: ectc51909.2023.00316-a-m5
+  field: value
+  values:
+  - more than 200 nm
+  - ~200 nm
+  locators:
+  - p.5 Sec. III-B
+  - p.1 Abstract; p.7 Sec. V
+  chosen: 200 (gt)
+  why: process text gives the bound; abstract/conclusion approximate
+- table: interconnects
+  row_id: ectc51909.2023.00316-a-i1
+  field: diameter_um
+  values:
+  - 30
+  - 29.6
+  locators:
+  - p.3 Sec. III-A design
+  - p.5 Fig. 4(b) SEM
+  chosen: 30 design on interconnect row; 29.6 measured in metrics a-m1
+  why: design and measured kept in separate rows
+excluded:
+- Flip-chip TCB Al/TiN/In/Au bumps 50 um diameter, 5 um height, 100 um pitch; die shear 12.9 MPa; He leak per MIL-STD-883 (prior study [22])
+- Al-, TiN-, In-based TSVs and In microbumps of refs [14]-[22]
+not_reported:
+- electrical_interfaces
+- optical_interfaces
+- process temperatures, times, ALD/ICP/DRIE recipes
+- TiN thickness on wafer surfaces
+- chip size
+- S21 numeric loss at a stated frequency
+- superconducting transition temperature
+notes: The flip-chip TV of Sec. IV-C is not entered as a TV (prior work [22]); Fig. 8 kept as reprinted key figure.

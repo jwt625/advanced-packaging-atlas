@@ -1,0 +1,49 @@
+paper_id: ectc51909.2023.00331
+verified_on: '2026-10-20'
+source_files:
+- references/ectc51909.2023.00331/text.md
+- references/ectc51909.2023.00331/source.json
+- references/ectc51909.2023.00331/figures/page_03.png
+- references/ectc51909.2023.00331/figures/page_04.png
+- references/ectc51909.2023.00331/figures/page_05.png
+derived:
+- table: process_steps
+  row_id: ectc51909.2023.00331-F1-s03
+  field: time_s
+  value: 180
+  formula: 3 min x 60
+  inputs: p.3 Sec. II.B
+- table: process_steps
+  row_id: ectc51909.2023.00331-F1-s05
+  field: time_s
+  value: 180
+  formula: 3 min x 60
+  inputs: p.3 Sec. II.B
+- table: process_steps
+  row_id: ectc51909.2023.00331-F1-s08
+  field: time_s
+  value: 180
+  formula: 3 min x 60
+  inputs: p.3 Sec. II.B
+conflicts: []
+entries:
+- table: stack_layers
+  row_id: ectc51909.2023.00331-a-L03
+  field: thickness_um
+  value: 20
+  unit: um
+  basis: design_target
+  locator: p.4 Sec. III
+  note: 20 um PU used for laser drilling; text points to Fig. 2c, which shows the Stage I PU layer
+excluded:
+- HDI RDL 6 um L/S, 20 um via at 50 um pitch, 1-2 um future vias (ref [1])
+- plasma-etch 75 um vias on 25 um PI, photovias down to 10 um, CO2 laser 60-80 um, UV laser 20 um (background)
+- sub-5 um microvias GT-PRC (refs [6-9]); SBU-CBM L/S < 5/5 um (ref [10])
+not_reported:
+- electrical_interfaces
+- optical_interfaces
+- exact microvia diameter, depth, pitch, count
+- PU1 thickness, spin speeds, UV dose
+- laser fluence, pulse count, LDW power or dose
+- electroless bath time and temperature
+- via Cu fill (not performed), reliability, resistance

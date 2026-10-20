@@ -2019,3 +2019,149 @@ estc60143.2024.10712002-e-c2,estc60143.2024.10712002-e,substrate,,,alumina mount
 estc60143.2024.10712002-f-c2,estc60143.2024.10712002-f,substrate,,,alumina mounting substrate (daisy chain),,,,,,,,,,alumina,,stated,text,,p.4 Sec. IV; p.4 Fig. 9,,
 estc60143.2024.10712002-g-c2,estc60143.2024.10712002-g,substrate,,,alumina mounting substrate (daisy chain),,,,,,,,,,alumina,,stated,text,,p.4 Sec. IV; p.4 Fig. 9,,
 estc60143.2024.10712002-f-c3,estc60143.2024.10712002-f,underfill,,,underfill,,,,,,,,,,,,stated,mixed,,p.4 Sec. IV; p.4 Fig. 9(b),,Material not stated.
+001c.129747-a-c1,001c.129747-a,other,,,glass panel (carrier),1,300,400,,,,,,,glass,,design_target,text,,p.2 Sec. II.B; p.2 Fig. 4,,
+001c.129747-c-c1,001c.129747-c,other,,,carrier glass,,,,,,,,,,glass,,stated,mixed,,p.3 Sec. II.B; p.3 Fig. 7,,
+001c.129747-d-c1,001c.129747-d,substrate,,,core glass,,,,,,,,,,glass,,stated,text,,p.3 Sec. II.B,,
+001c.129747-g-c1,001c.129747-g,interposer,,,glass panel with conformal Cu TGV,,400,300,400,,,,,,glass,,design_target,figure_image,,p.5 Fig. 15,,"Labels 400 mm, 300 mm, 0.4mmt."
+001c.129747-h-c1,001c.129747-h,substrate,,,glass core panel with filled Cu TGV,,510,515,500,,,,,,glass,,design_target,figure_image,,p.4 Sec. III.A; p.5 Fig. 16,,Label 'Glass core thickness: 0.5mm'.
+001c.129747-i-c1,001c.129747-i,interposer,,,glass panel with partially filled Cu TGV,,400,300,,,,,,,glass,,design_target,figure_image,,p.5 Fig. 17,,50 mm inset region shown.
+001c.129747-j-c1,001c.129747-j,interposer,,,glass core,,,,400,,,,,,glass,,design_target,schematic,,p.6 Fig. 19(a),,
+001c.129747-k-c1,001c.129747-k,interposer,,,glass core,,,,400,,,,,,glass,,design_target,schematic,,p.6 Fig. 19(b),,
+001c.129747-l-c1,001c.129747-l,interposer,,,glass core,,,,400,,,,,,glass,,design_target,schematic,,p.6 Fig. 20,,
+001c.129747-m-c1,001c.129747-m,interposer,,,glass core,,,,400,,,,,,glass,,design_target,schematic,,p.6 Fig. 22,,
+001c.129747-n-c1,001c.129747-n,interposer,,,glass core,,,,300,,,,,,glass,,design_target,schematic,,p.6 Fig. 23,,
+001c.129747-o-c1,001c.129747-o,interposer,,,glass core,,,,400,,,,,,glass,,design_target,schematic,,p.6 Fig. 24,,
+001c.129747-p-c1,001c.129747-p,substrate,,,"glass core panel, TGV fully filled with Cu",,550,650,,,,,,,glass,,design_target,text,,p.7 Sec. III.D; p.7 Fig. 25,,
+ectc51687.2025.00060-a-c1,ectc51687.2025.00060-a,dummy_die,yes,,component die with RDL and HBI pads,,,,50,,,,,,Si,,design_target,text,,p.3 Sec. II; p.4 Sec. III.B,,"Plasma diced (to 70 um, as written) then backside ground to 50 um."
+ectc51687.2025.00060-a-c2,ectc51687.2025.00060-a,other,,,substrate wafer with RDL and HBI pads,,,,,,,,,,,,stated,text,,p.3 Sec. II; p.4 Sec. III.B,,Same damascene RDL/HBI flow as component wafer; test pads for probing (eTV).
+ectc51687.2025.00060-b-c1,ectc51687.2025.00060-b,dummy_die,yes,,component die with RDL and HBI pads,600,,,50,,,,,,Si,,design_target,text,,p.3 Sec. II; p.5 Sec. III.C,count:approx,"Plasma diced (to 70 um, as written) then backside ground to 50 um."
+ectc51687.2025.00060-b-c2,ectc51687.2025.00060-b,other,,,substrate wafer with RDL and HBI pads,,,,,,,,,,,,stated,text,,p.3 Sec. II; p.5 Sec. III.C,,Same damascene RDL/HBI flow as component wafer; test pads for probing (eTV).
+001c.94484-a-c1,001c.94484-a,dummy_die,yes,,silicon test die (top),1,5,5,760,,,,,,Si,,design_target,text,,p.2 Sec. II; p.2 Fig. 1(a),,Full thickness.
+001c.94484-a-c2,001c.94484-a,interposer,,,silicon interposer (bottom),1,10,10,760,,,,,,Si,,design_target,text,,p.2 Sec. II; p.2 Fig. 1(b),,Large perimeter pads for daisy chain monitoring.
+itherm55376.2025.11235616-a-c1,itherm55376.2025.11235616-a,bridge,,yes,silicon bridge,4,,,,,,,,,silicon,,stated,mixed,,p.2 Sec. II; p.2 Fig. 2,,Count from Fig. 2 text: four central regions are embedded bridges.
+itherm55376.2025.11235616-a-c2,itherm55376.2025.11235616-a,substrate,,no,embedded silicon bridge substrate,,,,,,,,,,ABF build-up with Cu vias,,stated,text,,p.2 Sec. II,,
+itherm55376.2025.11235616-b-c1,itherm55376.2025.11235616-b,other,,,ABF film sample,,6,6,78,,,,,,ABF GX92,,design_target,text,,p.3 Sec. III.B,,Thickness printed 0.078 mm.
+itherm55376.2025.11235616-c-c1,itherm55376.2025.11235616-c,bridge,,yes,silicon bridge,,,,,,,,,,silicon,,stated,schematic,,p.5 Fig. 8,,
+ectc51906.2022.00323-a-c1,ectc51906.2022.00323-a,dummy_die,yes,yes,G-CPW dummy chip,2,0.8,,,,,,,,lossy Si with WPR-1201 dielectric,,design_target,schematic,,p.2 Fig. 2(a); p.1 Fig. 1(b),,800 um side drawn in Fig. 2(a); 500 um G-CPW line on chip.
+ectc51906.2022.00323-a-c2,ectc51906.2022.00323-a,substrate,,no,lossy Si package,,,,,0.82,0.82,120,,,lossy silicon,,design_target,mixed,,p.2 Fig. 2(b); p.1 Fig. 1(b); p.4 Sec. III.B,,"Cavity a = d = 820 um, b = 120 um (text p.4)."
+ectc51906.2022.00323-a-c3,ectc51906.2022.00323-a,adhesive,,,conductive epoxy,,,,,,,,,,conductive epoxy,,stated,text,,p.2 Sec. II; p.2 Fig. 2(b),,
+ectc51906.2022.00323-b-c1,ectc51906.2022.00323-b,other,,yes,CMOS 8x frequency multiplier,1,,,,,,,,,,,stated,mixed,,p.6 Sec. IV.A; p.6 Fig. 10(c),,
+ectc51906.2022.00323-b-c2,ectc51906.2022.00323-b,other,,yes,CMOS drive amplifier,1,,,,,,,,,,,stated,mixed,,p.6 Sec. IV.A; p.6 Fig. 10(c),,Designed for 84 GHz target frequency.
+ectc51906.2022.00323-b-c3,ectc51906.2022.00323-b,substrate,,,lossy Si package,,,,,,,,,,lossy silicon,,stated,text,,p.6 Sec. IV.A,,
+ectc51906.2022.00323-b-c4,ectc51906.2022.00323-b,pcb,,,fabricated printed circuit board,,,,,,,,,,,,stated,text,,p.7 Sec. IV.B,,
+ectc51906.2022.00323-c-c1,ectc51906.2022.00323-c,other,,yes,CMOS 8x frequency multiplier,1,,,,,,,,,,,stated,mixed,,p.6 Sec. IV.A; p.6 Fig. 10(b),,
+ectc51906.2022.00323-c-c2,ectc51906.2022.00323-c,other,,yes,CMOS drive amplifier,1,,,,,,,,,,,stated,mixed,,p.6 Sec. IV.A; p.6 Fig. 10(b),,Designed for 84 GHz target frequency.
+ectc51906.2022.00323-c-c3,ectc51906.2022.00323-c,substrate,,,lossy Si package,,,,,,,,,,lossy silicon,,stated,text,,p.6 Sec. IV.A,,
+ectc51906.2022.00323-c-c4,ectc51906.2022.00323-c,pcb,,,fabricated printed circuit board,,,,,,,,,,,,stated,text,,p.7 Sec. IV.B,,
+ectc51906.2022.00323-d-c1,ectc51906.2022.00323-d,other,,no,CMOS 8x frequency multiplier,1,,,,,,,,,,,stated,mixed,,p.6 Sec. IV.A; p.6 Fig. 10(a),,
+ectc51906.2022.00323-d-c2,ectc51906.2022.00323-d,other,,no,CMOS drive amplifier,1,,,,,,,,,,,stated,mixed,,p.6 Sec. IV.A; p.6 Fig. 10(a),,Designed for 84 GHz target frequency.
+ectc51906.2022.00323-d-c4,ectc51906.2022.00323-d,pcb,,,fabricated printed circuit board,,,,,,,,,,,,stated,text,,p.7 Sec. IV.B,,
+ectc51906.2022.00323-e-c1,ectc51906.2022.00323-e,dummy_die,yes,yes,embedded IC (model),,0.82,,110,,,,10,,silicon,,design_target,schematic,,p.3 Fig. 4(a); p.4 Fig. 7,,"IC height hSi 110 um, chip ground 5 um, width/length 820 um, margin dM 10 um (chip to cavity)."
+iedm50572.2025.11353855-a-c1,iedm50572.2025.11353855-a,capacitor,,no,3DSMIM 8-layer MIM capacitor,,,,,,,,,,TiN/HfO2,,stated,mixed,,p.1 Sec. II; p.3 Fig. 4; p.3 Fig. 6,,
+iedm50572.2025.11353855-b-c1,iedm50572.2025.11353855-b,capacitor,,yes,3DSMIM modeling area,,0.08,0.16,,,,,,,TiN/HfO2,,design_target,schematic,,p.4 Fig. 16(b),,"Model area W 80 um x L 160 um; finger Lf 1 um, gap Lg 0.1 um; N = 10 parallel unit cells."
+estc55720.2022.9939446-a-c1,estc55720.2022.9939446-a,other,,yes,GaN MMIC,2,,,,,,,,,GaN,,stated,schematic,,p.4 Fig. 10; p.1 Abstract,,Count from Fig. 10 concept schematic.
+estc55720.2022.9939446-a-c2,estc55720.2022.9939446-a,other,,yes,SiGe IC,1,,,,,,,,,SiGe,,stated,schematic,,p.4 Fig. 10; p.1 Abstract,,Count from Fig. 10 concept schematic.
+estc55720.2022.9939446-a-c3,estc55720.2022.9939446-a,capacitor,,yes,ceramic capacitor (SMD),2,,,,,,,,,,,stated,mixed,count:schematic,p.4 Sec. IV; p.4 Fig. 10; p.3 Sec. III.B,,"Two top contacts, same height and metallization as the MMICs; processed like the MMICs."
+estc55720.2022.9939446-a-c4,estc55720.2022.9939446-a,other,,yes,beam former IC,,,,,,,,,,,,stated,text,,p.6 Sec. V.C,,Inside the low power module; relation to Fig. 10 dies not stated.
+estc55720.2022.9939446-a-c5,estc55720.2022.9939446-a,adhesive,,,sinter glue,,,,,,,,,,NAMICS H9890-7,NAMICS,stated,text,,p.3 Sec. III.A,,
+estc55720.2022.9939446-a-c6,estc55720.2022.9939446-a,substrate,,,RF laminate / prepreg,,,,,,,,,,Megtron 7N,Panasonic,stated,text,,p.3 Sec. III.B; p.4 Sec. IV,,
+estc55720.2022.9939446-b-c1,estc55720.2022.9939446-b,other,,yes,MMIC (LNA/PA) with air bridges,,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 2; p.5 Sec. V.B,,Air bridges typically 3 um Au with 1-2 um gap to substrate; 3 um Au contact pads.
+estc55720.2022.9939446-b-c2,estc55720.2022.9939446-b,adhesive,,,sinter glue,,,,,,,,,,NAMICS H9890-7,NAMICS,stated,text,,p.3 Sec. III.A,,
+tcpmt.2025.3533388-a-c1,tcpmt.2025.3533388-a,dummy_die,yes,,reference thermal chip,1,5,5,500,,,,,,silicon,,design_target,text,,p.4 Sec. III.A,,Tungsten heater loopbacks as hotspots; Au pads 100 x 200 um.
+tcpmt.2025.3533388-a-c2,tcpmt.2025.3533388-a,interposer,,,glass interposer,1,13,7,460,,,,,,Borofloat 33 glass,Schott,design_target,text,,p.2 Sec. II; p.3 Sec. III.A,,25 x 14 BGA pads on backside.
+tcpmt.2025.3533388-a-c3,tcpmt.2025.3533388-a,pcb,,,custom FR4 PCB,1,,,1600,,,,,,FR4,,design_target,text,,p.4 Sec. III.A,,Four routing layers; thickness tolerance +/-10%; 500 um pitch BGA pads.
+tcpmt.2025.3533388-a-c4,tcpmt.2025.3533388-a,underfill,,,underfill epoxy,,,,,,,,,,EPO-TEK 301-2,,stated,text,,p.4 Sec. III.A,,Chip-interposer and interposer-PCB interfaces.
+tcpmt.2025.3533388-b-c1,tcpmt.2025.3533388-b,interposer,,,glass substrate,,,,460,,,,,,Borofloat 33 glass,Schott,design_target,text,,p.2 Sec. II; p.7 Sec. IV.B,,
+tcpmt.2025.3533388-c-c1,tcpmt.2025.3533388-c,interposer,,,glass interposer (electrical),,,,460,,,,,,Borofloat 33 glass,Schott,design_target,text,,p.2 Sec. II; p.3 Sec. II.B,,
+tcpmt.2025.3533388-d-c1,tcpmt.2025.3533388-d,interposer,,,glass interposer (electrical),,,,460,,,,,,Borofloat 33 glass,Schott,design_target,text,,p.2 Sec. II; p.6 Sec. IV.A,,
+tcpmt.2025.3533388-d-c2,tcpmt.2025.3533388-d,pcb,,,RF PCB,,,,1600,,,,,,"Rogers 4350B core, 4450F prepreg, FR4",Rogers,design_target,text,,p.7 Sec. IV.A,,"+/-10% thickness; PTH vias, 50 ohm striplines, SMP connectors, 2x THRU."
+tcpmt.2025.3533388-d-c3,tcpmt.2025.3533388-d,underfill,,,underfill epoxy,,,,,,,,,,EPO-TEK 301-2,,stated,text,,p.7 Sec. IV.A; p.9 Sec. IV.D,,"Dk 3.8, loss tangent 0.012 at 1 kHz."
+001c.147214-a-c1,001c.147214-a,other,,,carrier glass,,,,,,,,,,glass,,stated,text,,p.2 Sec. II.A; p.3 Fig. 6,,Released after molding.
+001c.147214-a-c2,001c.147214-a,unspecified,,,mounted chips,,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 5(b); p.3 Fig. 6(c),,Chip type and count not stated.
+001c.147214-a-c3,001c.147214-a,mold,,,mold resin,,,,500,,,,,,,,design_target,text,,p.3 Sec. II.B; p.3 Fig. 8,,
+001c.147214-b-c1,001c.147214-b,substrate,,,TGV glass core (2 metal layers),,,,1000,,,,,,glass,,design_target,schematic,,p.4 Fig. 12,,
+tcpmt.2021.3111345-a-c1,tcpmt.2021.3111345-a,other,,,top Si wafer (cap wafer),1,,,,,,,,,"Si, double side polished, <100>",Okmetic (ack),stated,text,,p.1 Sec. II-A; p.2 Table I; p.5 Fig. 8; p.7 Acknowledgment,,Top wafer = Si cap per Fig. 8 labels (inferred mapping). Thickness not stated. Backside RIE-patterned.
+tcpmt.2021.3111345-a-c2,tcpmt.2021.3111345-a,other,,,bottom Si wafer (device wafer),1,,,,,,,,,"Si, double side polished, <100>",Okmetic (ack),stated,text,,p.1 Sec. II-A; p.2 Table I; p.5 Fig. 8; p.7 Acknowledgment,,"Bottom wafer = Si device per Fig. 8 labels (inferred mapping). Test wafer, no devices described."
+tcpmt.2021.3111345-b-c1,tcpmt.2021.3111345-b,other,,,top Si wafer (cap wafer),1,,,,,,,,,"Si, double side polished, <100>",Okmetic (ack),stated,text,,p.1 Sec. II-A; p.2 Table I; p.5 Fig. 8; p.7 Acknowledgment,,Top wafer = Si cap per Fig. 8 labels (inferred mapping). Thickness not stated. Backside RIE-patterned.
+tcpmt.2021.3111345-b-c2,tcpmt.2021.3111345-b,other,,,bottom Si wafer (device wafer),1,,,,,,,,,"Si, double side polished, <100>",Okmetic (ack),stated,text,,p.1 Sec. II-A; p.2 Table I; p.5 Fig. 8; p.7 Acknowledgment,,"Bottom wafer = Si device per Fig. 8 labels (inferred mapping). Test wafer, no devices described."
+tcpmt.2021.3111345-c-c1,tcpmt.2021.3111345-c,other,,,top Si wafer (cap wafer),1,,,,,,,,,"Si, double side polished, <100>",Okmetic (ack),stated,text,,p.1 Sec. II-A; p.2 Table I; p.5 Fig. 8; p.7 Acknowledgment,,Top wafer = Si cap per Fig. 8 labels (inferred mapping). Thickness not stated. Backside RIE-patterned.
+tcpmt.2021.3111345-c-c2,tcpmt.2021.3111345-c,other,,,bottom Si wafer (device wafer),1,,,,,,,,,"Si, double side polished, <100>",Okmetic (ack),stated,text,,p.1 Sec. II-A; p.2 Table I; p.5 Fig. 8; p.7 Acknowledgment,,"Bottom wafer = Si device per Fig. 8 labels (inferred mapping). Test wafer, no devices described."
+ectc51846.2026.00073-a-c1,ectc51846.2026.00073-a,logic_soc,yes,,"SOC1 (CPU mimic, daisy chain; SOC1-T, SOC1-B)",2,,,,,,,,,,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,
+ectc51846.2026.00073-a-c2,ectc51846.2026.00073-a,asic,yes,,"SOC2 (accelerator mimic, daisy chain; SOC2-T, SOC2-B)",2,,,,,,,,,,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,
+ectc51846.2026.00073-a-c3,ectc51846.2026.00073-a,bridge,,yes,"Bridge1 (D2D SOC1-T to SOC1-B, UCIe-Advanced-like)",1,,,,,,,,,Si,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,"Ten pillar-matrix areas, traces in edge and center areas (Fig. 5)."
+ectc51846.2026.00073-a-c4,ectc51846.2026.00073-a,bridge,,yes,"Bridge2 (SOC1 to SOC2, HBM-like bus)",2,,,,,,,,,Si,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,Same design concept as Bridge1 (Fig. 6).
+ectc51846.2026.00073-a-c5,ectc51846.2026.00073-a,interposer,,,molded interposer with RDL and embedded Si bridge dies,1,,,,,,,,,RDL + EMC,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,Size and RDL layer count not stated.
+ectc51846.2026.00073-a-c6,ectc51846.2026.00073-a,substrate,,,"organic package substrate, 12 layers (5/2/5)",1,,,,,,,,,build-up and core: process standard,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,SR opening 75 um (Table I).
+ectc51846.2026.00073-a-c7,ectc51846.2026.00073-a,mold,,,EMC,,,,,,,,,,EMC (process standard),,stated,table,,p.2 Table II; p.6 Table VI,,
+ectc51846.2026.00073-a-c8,ectc51846.2026.00073-a,underfill,,,wafer UF (chip-on-wafer underfill),,,,,,,,,,UF-A (process standard),,stated,table,,p.2 Table II; p.6 Table VI,,UF-B CTE lower than UF-A; values not stated.
+ectc51846.2026.00073-a-c9,ectc51846.2026.00073-a,underfill,,,C4 UF,,,,,,,,,,C4 UF (process standard),,stated,table,,p.2 Table II; p.6 Table VI,,
+ectc51846.2026.00073-a-c10,ectc51846.2026.00073-a,stiffener,,,stiffener ring,1,59.6,59.6,,,,,,,Cu,,design_target,table,,p.2 Table I; p.2 Table II; p.4 Table IV; p.6 Table VI,,"Foot width L, thickness t (values not disclosed)."
+ectc51846.2026.00073-b-c1,ectc51846.2026.00073-b,logic_soc,yes,,"SOC1 (CPU mimic, daisy chain; SOC1-T, SOC1-B)",2,,,,,,,,,,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,
+ectc51846.2026.00073-b-c2,ectc51846.2026.00073-b,asic,yes,,"SOC2 (accelerator mimic, daisy chain; SOC2-T, SOC2-B)",2,,,,,,,,,,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,
+ectc51846.2026.00073-b-c3,ectc51846.2026.00073-b,bridge,,yes,"Bridge1 (D2D SOC1-T to SOC1-B, UCIe-Advanced-like)",1,,,,,,,,,Si,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,"Ten pillar-matrix areas, traces in edge and center areas (Fig. 5)."
+ectc51846.2026.00073-b-c4,ectc51846.2026.00073-b,bridge,,yes,"Bridge2 (SOC1 to SOC2, HBM-like bus)",2,,,,,,,,,Si,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,Same design concept as Bridge1 (Fig. 6).
+ectc51846.2026.00073-b-c5,ectc51846.2026.00073-b,interposer,,,molded interposer with RDL and embedded Si bridge dies,1,,,,,,,,,RDL + EMC,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,Size and RDL layer count not stated.
+ectc51846.2026.00073-b-c6,ectc51846.2026.00073-b,substrate,,,"organic package substrate, 12 layers (5/2/5)",1,,,,,,,,,build-up and core: process standard,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,SR opening 75 um (Table I).
+ectc51846.2026.00073-b-c7,ectc51846.2026.00073-b,mold,,,EMC,,,,,,,,,,EMC (process standard),,stated,table,,p.2 Table II; p.6 Table VI,,
+ectc51846.2026.00073-b-c8,ectc51846.2026.00073-b,underfill,,,wafer UF (chip-on-wafer underfill),,,,,,,,,,UF-A (process standard),,stated,table,,p.2 Table II; p.6 Table VI,,UF-B CTE lower than UF-A; values not stated.
+ectc51846.2026.00073-b-c9,ectc51846.2026.00073-b,underfill,,,C4 UF,,,,,,,,,,C4 UF (process standard),,stated,table,,p.2 Table II; p.6 Table VI,,
+ectc51846.2026.00073-b-c10,ectc51846.2026.00073-b,stiffener,,,stiffener ring,1,59.6,59.6,,,,,,,Cu,,design_target,table,,p.2 Table I; p.2 Table II; p.4 Table IV; p.6 Table VI,,"Foot width L, thickness t-0.5 mm."
+ectc51846.2026.00073-c-c1,ectc51846.2026.00073-c,logic_soc,yes,,"SOC1 (CPU mimic, daisy chain; SOC1-T, SOC1-B)",2,,,,,,,,,,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,
+ectc51846.2026.00073-c-c2,ectc51846.2026.00073-c,asic,yes,,"SOC2 (accelerator mimic, daisy chain; SOC2-T, SOC2-B)",2,,,,,,,,,,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,
+ectc51846.2026.00073-c-c3,ectc51846.2026.00073-c,bridge,,yes,"Bridge1 (D2D SOC1-T to SOC1-B, UCIe-Advanced-like)",1,,,,,,,,,Si,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,"Ten pillar-matrix areas, traces in edge and center areas (Fig. 5)."
+ectc51846.2026.00073-c-c4,ectc51846.2026.00073-c,bridge,,yes,"Bridge2 (SOC1 to SOC2, HBM-like bus)",2,,,,,,,,,Si,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,Same design concept as Bridge1 (Fig. 6).
+ectc51846.2026.00073-c-c5,ectc51846.2026.00073-c,interposer,,,molded interposer with RDL and embedded Si bridge dies,1,,,,,,,,,RDL + EMC,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,Size and RDL layer count not stated.
+ectc51846.2026.00073-c-c6,ectc51846.2026.00073-c,substrate,,,"organic package substrate, 12 layers (5/2/5)",1,,,,,,,,,build-up and core: process standard,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,SR opening 75 um (Table I).
+ectc51846.2026.00073-c-c7,ectc51846.2026.00073-c,mold,,,EMC,,,,,,,,,,EMC (process standard),,stated,table,,p.2 Table II; p.6 Table VI,,
+ectc51846.2026.00073-c-c8,ectc51846.2026.00073-c,underfill,,,wafer UF (chip-on-wafer underfill),,,,,,,,,,UF-A (process standard),,stated,table,,p.2 Table II; p.6 Table VI,,UF-B CTE lower than UF-A; values not stated.
+ectc51846.2026.00073-c-c9,ectc51846.2026.00073-c,underfill,,,C4 UF,,,,,,,,,,C4 UF (process standard),,stated,table,,p.2 Table II; p.6 Table VI,,
+ectc51846.2026.00073-c-c10,ectc51846.2026.00073-c,stiffener,,,stiffener ring,1,59.6,59.6,,,,,,,Cu,,design_target,table,,p.2 Table I; p.2 Table II; p.4 Table IV; p.6 Table VI,,"Foot width L+2 mm, thickness t."
+ectc51846.2026.00073-d-c1,ectc51846.2026.00073-d,logic_soc,yes,,"SOC1 (CPU mimic, daisy chain; SOC1-T, SOC1-B)",2,,,,,,,,,,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,
+ectc51846.2026.00073-d-c2,ectc51846.2026.00073-d,asic,yes,,"SOC2 (accelerator mimic, daisy chain; SOC2-T, SOC2-B)",2,,,,,,,,,,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,
+ectc51846.2026.00073-d-c3,ectc51846.2026.00073-d,bridge,,yes,"Bridge1 (D2D SOC1-T to SOC1-B, UCIe-Advanced-like)",1,,,,,,,,,Si,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,"Ten pillar-matrix areas, traces in edge and center areas (Fig. 5)."
+ectc51846.2026.00073-d-c4,ectc51846.2026.00073-d,bridge,,yes,"Bridge2 (SOC1 to SOC2, HBM-like bus)",2,,,,,,,,,Si,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,Same design concept as Bridge1 (Fig. 6).
+ectc51846.2026.00073-d-c5,ectc51846.2026.00073-d,interposer,,,molded interposer with RDL and embedded Si bridge dies,1,,,,,,,,,RDL + EMC,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,Size and RDL layer count not stated.
+ectc51846.2026.00073-d-c6,ectc51846.2026.00073-d,substrate,,,"organic package substrate, 12 layers (5/2/5)",1,,,,,,,,,build-up and core: process standard,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,SR opening 75 um (Table I).
+ectc51846.2026.00073-d-c7,ectc51846.2026.00073-d,mold,,,EMC,,,,,,,,,,EMC (process standard),,stated,table,,p.2 Table II; p.6 Table VI,,
+ectc51846.2026.00073-d-c8,ectc51846.2026.00073-d,underfill,,,wafer UF (chip-on-wafer underfill),,,,,,,,,,UF-A (process standard),,stated,table,,p.2 Table II; p.6 Table VI,,UF-B CTE lower than UF-A; values not stated.
+ectc51846.2026.00073-d-c9,ectc51846.2026.00073-d,underfill,,,C4 UF,,,,,,,,,,C4 UF (process standard),,stated,table,,p.2 Table II; p.6 Table VI,,
+ectc51846.2026.00073-d-c10,ectc51846.2026.00073-d,stiffener,,,stiffener ring,1,59.6,59.6,,,,,,,SUS,,design_target,table,,p.2 Table I; p.2 Table II; p.4 Table IV; p.6 Table VI,,"Foot width L, thickness t; SUS CTE ~1.5x lower than Cu (text)."
+ectc51846.2026.00073-e-c1,ectc51846.2026.00073-e,logic_soc,yes,,"SOC1 (CPU mimic, daisy chain; SOC1-T, SOC1-B)",2,,,,,,,,,,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,
+ectc51846.2026.00073-e-c2,ectc51846.2026.00073-e,asic,yes,,"SOC2 (accelerator mimic, daisy chain; SOC2-T, SOC2-B)",2,,,,,,,,,,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,
+ectc51846.2026.00073-e-c3,ectc51846.2026.00073-e,bridge,,yes,"Bridge1 (D2D SOC1-T to SOC1-B, UCIe-Advanced-like)",1,,,,,,,,,Si,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,"Ten pillar-matrix areas, traces in edge and center areas (Fig. 5)."
+ectc51846.2026.00073-e-c4,ectc51846.2026.00073-e,bridge,,yes,"Bridge2 (SOC1 to SOC2, HBM-like bus)",2,,,,,,,,,Si,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,Same design concept as Bridge1 (Fig. 6).
+ectc51846.2026.00073-e-c5,ectc51846.2026.00073-e,interposer,,,molded interposer with RDL and embedded Si bridge dies,1,,,,,,,,,RDL + EMC,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,Size and RDL layer count not stated.
+ectc51846.2026.00073-e-c6,ectc51846.2026.00073-e,substrate,,,"organic package substrate, 12 layers (5/2/5)",1,,,,,,,,,build-up and core: process standard,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,SR opening 75 um (Table I).
+ectc51846.2026.00073-e-c7,ectc51846.2026.00073-e,mold,,,EMC,,,,,,,,,,EMC (process standard),,stated,table,,p.2 Table II; p.6 Table VI,,
+ectc51846.2026.00073-e-c8,ectc51846.2026.00073-e,underfill,,,wafer UF (chip-on-wafer underfill),,,,,,,,,,UF-B (lower CTE),,stated,table,,p.2 Table II; p.6 Table VI,,UF-B CTE lower than UF-A; values not stated.
+ectc51846.2026.00073-e-c9,ectc51846.2026.00073-e,underfill,,,C4 UF,,,,,,,,,,C4 UF (process standard),,stated,table,,p.2 Table II; p.6 Table VI,,
+ectc51846.2026.00073-e-c10,ectc51846.2026.00073-e,stiffener,,,stiffener ring,1,59.6,59.6,,,,,,,Cu,,design_target,table,,p.2 Table I; p.2 Table II; p.4 Table IV; p.6 Table VI,,"Foot width L, thickness t (same as DOE1)."
+ectc51846.2026.00073-f-c1,ectc51846.2026.00073-f,logic_soc,yes,,"SOC1 (CPU mimic, daisy chain; SOC1-T, SOC1-B)",2,,,,,,,,,,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,
+ectc51846.2026.00073-f-c2,ectc51846.2026.00073-f,asic,yes,,"SOC2 (accelerator mimic, daisy chain; SOC2-T, SOC2-B)",2,,,,,,,,,,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,
+ectc51846.2026.00073-f-c3,ectc51846.2026.00073-f,bridge,,yes,"Bridge1 (D2D SOC1-T to SOC1-B, UCIe-Advanced-like)",1,,,,,,,,,Si,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,"Ten pillar-matrix areas, traces in edge and center areas (Fig. 5)."
+ectc51846.2026.00073-f-c4,ectc51846.2026.00073-f,bridge,,yes,"Bridge2 (SOC1 to SOC2, HBM-like bus)",2,,,,,,,,,Si,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,Same design concept as Bridge1 (Fig. 6).
+ectc51846.2026.00073-f-c5,ectc51846.2026.00073-f,interposer,,,molded interposer with RDL and embedded Si bridge dies,1,,,,,,,,,RDL + EMC,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,Size and RDL layer count not stated.
+ectc51846.2026.00073-f-c6,ectc51846.2026.00073-f,substrate,,,"organic package substrate, 12 layers (5/2/5)",1,,,,,,,,,build-up and core: process standard,,stated,mixed,,p.1 Sec. II; p.2 Sec. II-A; p.2 Fig. 1; p.2 Fig. 3,,SR opening 75 um (Table I).
+ectc51846.2026.00073-f-c7,ectc51846.2026.00073-f,mold,,,EMC,,,,,,,,,,EMC (process standard),,stated,table,,p.2 Table II; p.6 Table VI,,
+ectc51846.2026.00073-f-c8,ectc51846.2026.00073-f,underfill,,,wafer UF (chip-on-wafer underfill),,,,,,,,,,UF-A (process standard),,stated,table,,p.2 Table II; p.6 Table VI,,UF-B CTE lower than UF-A; values not stated.
+ectc51846.2026.00073-f-c9,ectc51846.2026.00073-f,underfill,,,C4 UF,,,,,,,,,,C4 UF (process standard),,stated,table,,p.2 Table II; p.6 Table VI,,
+ectc51909.2023.00316-a-c1,ectc51909.2023.00316-a,interposer,,,Si TSV interposer wafer,1,,,300,,,,,,Si,,design_target,text,,p.4 Sec. III-B; p.5 Sec. III-B,,"Measured 300.9 um (Fig. 4b, metrics)."
+ectc51909.2023.00331-a-c1,ectc51909.2023.00331-a,pcb,,,FR-4 base PCB,,,,,,,,,,FR-4,Digi-Key Electronics,stated,text,,p.2 Sec. II.A,,
+eptc67330.2025.11392620-a-c1,eptc67330.2025.11392620-a,bridge,,,4-layer RDL silicon bridge,,,,,,,,,,Si; polyimide RDL dielectric,,stated,text,,p.2 Sec. II.A; p.2 Fig. 2,,
+eptc67330.2025.11392620-b-c1,eptc67330.2025.11392620-b,bridge,,,Si bridge (4 RDL layers),,,,,,,,,,,,stated,text,,p.4 Sec. III; p.4 Fig. 13,,
+eptc67330.2025.11392620-b-c2,eptc67330.2025.11392620-b,other,,,XPU,,,,,,,,,,,,stated,text,,p.4 Sec. III; p.4 Fig. 13,,Compute die (XPU).
+eptc67330.2025.11392620-b-c3,eptc67330.2025.11392620-b,other,,,OE chiplet,,,,,,,,,,,,stated,text,,p.4 Sec. III; p.4 Fig. 13,,Optical engine chiplet.
+001c.129276-a-c1,001c.129276-a,substrate,,,Boro-33 glass substrate with LMCE TGVs,1,,,400,,,,,,Boro-33 glass,Joongwoo M-tech (TGV LMCE process),design_target,text,,p.2 Sec. II; p.2 Table 1; p.2 Sec. III,,TGV process provided by Joongwoo M-tech (South Korea).
+001c.129276-a-c2,001c.129276-a,ipd,,yes,Marchand-type solenoid transformer balun (1:1 transformer),1,1.18,0.61,,,,,,,,,design_target,mixed,,p.2 Sec. II; p.2 Table 1; p.2 Fig. 2(a),,"Lt 1180 um, Wt 610 um; primary = top M1 + bottom M2, secondary = top M2 + bottom M1."
+3dic63395.2024.10830178-a-c1,3dic63395.2024.10830178-a,interposer,,,RF Si interposer on standard Si substrate,1,,,,,,,,,Si,,stated,text,,p.1 Sec. I; p.1 Sec. II.A; p.5 Sec. III.C,,300 mm wafer; substrate thickness not stated.
+3dic63395.2024.10830178-a-c2,3dic63395.2024.10830178-a,other,no,,CYCLOTENE XP80 photo imageable dielectric (non-PFAS),,,,,,,,,,CYCLOTENE XP80,Dupont,stated,text,,p.1 Abstract; p.6 Acknowledgment,,Material supplied by Dupont (ack); used for PID1-PID3.
+ectc51846.2026.00243-a-c1,ectc51846.2026.00243-a,substrate,,,Si substrate with via-first DRIE TSVs,,,,,,,,,,Si,Purdue University (ack),stated,text,,p.2 Sec. II; p.7 Acknowledgment,,Wafer size and thickness not stated.
+ectc51846.2026.00243-a-c2,ectc51846.2026.00243-a,other,,,Si carrier substrate (temporary bond),,,,,,,,,,Si,,stated,text,,p.2 Sec. II,,Mechanical support and uniform thermal conditions during CVD; bond material not stated.
+ectc51909.2023.00021-a-c1,ectc51909.2023.00021-a,substrate,no,no,core substrate,1,,,800,,,,,,core material (not named),,design_target,text,,p.2 Sec. II.A; p.2 Fig. 1,,800 um core used to suppress warpage.
+ectc51909.2023.00021-b-c1,ectc51909.2023.00021-b,substrate,no,no,core substrate,1,,,800,,,,,,core material (not named),,design_target,text,,p.2 Sec. II.A; p.2 Fig. 1,,800 um core used to suppress warpage.
+ectc51909.2023.00021-c-c1,ectc51909.2023.00021-c,substrate,no,no,core substrate,1,,,800,,,,,,core material (not named),,design_target,text,,p.2 Sec. II.A; p.2 Fig. 1,,800 um core used to suppress warpage.
+ectc51846.2026.00356-a-c1,ectc51846.2026.00356-a,dummy_die,yes,yes,sub-20 um Si test chiplet with Ti/Cu fiducial marks,9,,,19,,,,,,Si (double-side polished wafer),,measured,figure_image,,p.2 Sec. II.A; p.3 Fig. 3; p.4 Fig. 6; p.5 Fig. 7(a),thickness_um:approx,Thickness from profilometer (Fig. 3); chiplet x/y not stated for the TV.
+ectc51846.2026.00356-a-c2,ectc51846.2026.00356-a,substrate,no,no,glass-core substrate,1,100,100,500,,,,,,glass,,design_target,text,,p.2 Sec. II.A,,Glass type and CTE not stated.
+ectc51846.2026.00356-a-c3,ectc51846.2026.00356-a,adhesive,no,yes,APTMS die-attach adhesion promoter,,,,,,,,,,3-aminopropyltrimethoxysilane (APTMS),,stated,text,,p.2 Sec. II; p.3 Sec. II.B,,Organosilane coupling agent between O2-plasma-activated ABF and native oxide of Si chiplet.
+estc60143.2024.10712091-a-c1,estc60143.2024.10712091-a,other,no,no,device wafer (Si with BEOL stack),,,,50,,,,,,Si,,design_target,text,,p.1 Sec. II.A; p.1 Fig. 2,,Grinding target thickness 50 um; initial thickness not stated.
+estc60143.2024.10712091-a-c2,estc60143.2024.10712091-a,other,no,no,temporary carrier wafer,,,,,,,,,,glass or silicon,,stated,text,,p.1 Sec. II.A,,"Carrier with bevel width Ac (model, Fig. 5)."

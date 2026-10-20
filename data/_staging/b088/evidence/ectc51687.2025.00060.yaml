@@ -1,0 +1,37 @@
+paper_id: ectc51687.2025.00060
+verified_on: 2026-10-20
+source_files:
+  - references/ectc51687.2025.00060/text.md
+  - references/ectc51687.2025.00060/source.json
+  - references/ectc51687.2025.00060/figures/page_02.png
+  - references/ectc51687.2025.00060/figures/page_03.png
+  - references/ectc51687.2025.00060/figures/page_04.png
+  - references/ectc51687.2025.00060/figures/page_05.png
+figure_reading_method: >-
+  Page renders read directly; Fig. 6 (AFM Ra and dishing labels), Fig. 8, Fig. 10 average labels and Fig. 2(b) warpage
+  colour bar re-rendered at 300-400 dpi in scratch (not kept).
+entries:
+  - {table: metrics, row_id: ectc51687.2025.00060-b-m5, field: value, value: 451.28, unit: ohm, basis: measured, locator: "p.5 Fig. 10(b)", note: "label Avg=451.281629 (10k chain); consistent with 45 mOhm/link"}
+  - {table: metrics, row_id: ectc51687.2025.00060-b-m6, field: value, value: 580.07, unit: ohm, basis: measured, locator: "p.5 Fig. 10(a)", note: "label Avg=580.073939"}
+  - {table: metrics, row_id: ectc51687.2025.00060-a-m4, field: value, value: 10, unit: um, basis: measured, locator: "p.3 Fig. 2(b)", note: "colour bar 91457.87 to 91468.33 um, about 10.5 um span; text 'about 10 um'"}
+  - {table: interconnects, row_id: ectc51687.2025.00060-b-i3, field: pitch_um, value: 2.5, unit: um, basis: design_target, locator: "p.5 Fig. 9", note: "FIB-SEM label reads 2.4 um"}
+derived:
+  - {table: stack_layers, row_id: ectc51687.2025.00060-a-L02, field: thickness_um, value: 0.2, formula: "2000 A / 10000", inputs: "p.2 Fig. 1 legend 'SiN, 2000A'"}
+  - {table: stack_layers, row_id: ectc51687.2025.00060-b-L02, field: thickness_um, value: 0.2, formula: "2000 A / 10000", inputs: "p.2 Fig. 1 legend 'SiN, 2000A'"}
+  - {table: interconnects, row_id: ectc51687.2025.00060-b-i3, field: alignment_um, value: 0.05, formula: "50 nm / 1000", inputs: "p.5 Sec. III.B"}
+conflicts:
+  - {table: metrics, row_id: ectc51687.2025.00060-b-m7, field: value, values: [30, 25], locators: ["p.5 Sec. III.C; p.6 Sec. IV", "p.1 Abstract ('more than 25%')"], chosen: 30, why: "results text and conclusion"}
+  - {table: metrics, row_id: ectc51687.2025.00060-b-m12, field: value, values: [2, 3], locators: ["p.4 Fig. 6(c)", "p.4 Sec. III.A ('from 0.4nm to 3nm')"], chosen: 2, why: "measured AFM label over text"}
+  - {table: metrics, row_id: ectc51687.2025.00060-b-m18, field: value_text, values: ["1 nm protrusion to 5 nm dishing", "-1 to +7 nm"], locators: ["p.6 Sec. IV", "p.1 Abstract"], chosen: "1 nm protrusion to 5 nm dishing", why: "conclusion with stated CMP margin; abstract range kept in notes"}
+  - {table: interconnects, row_id: ectc51687.2025.00060-b-i3, field: pitch_um, values: [2.5, 2.4], locators: ["p.5 Sec. III.B; p.5 Fig. 9 caption", "p.5 Fig. 9 SEM label"], chosen: 2.5, why: "design pitch; 2.4 um is the SEM measurement label"}
+excluded:
+  - "placement accuracy <500 nm as a general C2W challenge (refs 7-8)"
+  - "Ti/Cu 1.97 V and Ta/Cu 0.67 V electrode potential differences (material data, not a measurement of this build)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "wafer diameter, die size"
+  - "bonding temperature, force, time, atmosphere; anneal temperature and time"
+  - "dielectric, RDL and Cu pad thicknesses"
+  - "2.5 um pitch electrical data (in progress)"
+  - "CMP downforce, slurry flow and exposure energy values"

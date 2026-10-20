@@ -1,0 +1,46 @@
+paper_id: ectc51906.2022.00323
+verified_on: 2026-10-20
+source_files:
+  - references/ectc51906.2022.00323/text.md
+  - references/ectc51906.2022.00323/source.json
+  - references/ectc51906.2022.00323/figures/page_01.png
+  - references/ectc51906.2022.00323/figures/page_02.png
+  - references/ectc51906.2022.00323/figures/page_03.png
+  - references/ectc51906.2022.00323/figures/page_04.png
+  - references/ectc51906.2022.00323/figures/page_05.png
+  - references/ectc51906.2022.00323/figures/page_06.png
+  - references/ectc51906.2022.00323/figures/page_07.png
+figure_reading_method: >-
+  Fig. 2(a)(b) re-rendered at 300 dpi in scratch to read labels (800 um, 30/25 um line/gap, 60/20 um pad, 20 um
+  WPR-1201, 820 um, 120 um). Fig. 4(a) and Fig. 7 labels read from page renders.
+entries:
+  - {table: electrical_interfaces, row_id: ectc51906.2022.00323-a-e1, field: line_um, value: 65, unit: um, basis: simulated, locator: "p.3 Sec. III.A", note: "optimized I2 section width by EM simulation"}
+derived:
+  - {table: components, row_id: ectc51906.2022.00323-a-c1, field: x_mm, value: 0.8, formula: "800 um / 1000", inputs: "p.2 Fig. 2(a)"}
+  - {table: components, row_id: ectc51906.2022.00323-a-c2, field: cavity_x_mm, value: 0.82, formula: "820 um / 1000", inputs: "p.2 Fig. 2(b); p.4 Sec. III.B"}
+  - {table: components, row_id: ectc51906.2022.00323-a-c2, field: cavity_y_mm, value: 0.82, formula: "820 um / 1000", inputs: "p.4 Sec. III.B (d = 820 um)"}
+  - {table: components, row_id: ectc51906.2022.00323-e-c1, field: x_mm, value: 0.82, formula: "820 um / 1000", inputs: "p.4 Fig. 7"}
+  - {table: electrical_interfaces, row_id: ectc51906.2022.00323-a-e1, field: reach_mm, value: 0.32, formula: "320 um / 1000", inputs: "p.3 Sec. III.A"}
+  - {table: electrical_interfaces, row_id: ectc51906.2022.00323-b-e1, field: reach_mm, value: 0.225, formula: "225 um / 1000", inputs: "p.7 Sec. IV.B"}
+  - {table: electrical_interfaces, row_id: ectc51906.2022.00323-a-e1, field: insertion_loss_db, value: 0.2, formula: "paper: 1.24 dB whole package minus 0.52 dB per dummy chip incl. pad transition (x2)", inputs: "p.6 Sec. III.C; p.5 Table I"}
+conflicts:
+  - {table: components, row_id: ectc51906.2022.00323-e-c1, field: x_mm, values: [0.82, 0.8], locators: ["p.4 Fig. 7 width or length 820 um", "p.2 Fig. 2(a) dummy chip 800 um"], chosen: 0.82, why: "e is the Fig. 7 model; the 800 um fabricated dummy chip is on TV a"}
+  - {table: metrics, row_id: ectc51906.2022.00323-e-m5, field: value, values: ["8 deg", "5 %"], locators: ["p.2 Sec. II", "p.1 Abstract"], chosen: "both entered (different units, e-m5 and e-m6)", why: "not reducible to one value"}
+  - {table: metrics, row_id: ectc51906.2022.00323-e-m11, field: value, values: [83, 74.9], locators: ["p.3 Fig. 6(a)", "p.4 Eq. (1)"], chosen: "both entered", why: "simulated vs calculated; paper attributes difference to imperfect shielding"}
+excluded:
+  - "Table I dummy chip IL 0.4 dB and pad-transition 0.52 dB follow results of ref [14]"
+  - "Table II interconnect benchmarks of refs [1], [2], [4], [5], [7]"
+  - "Typical-process fabrication details described in refs [12], [14]"
+not_reported:
+  - optical_interfaces
+  - "cavity etch method, seed and plating metal, pad metallurgy, via diameters, WPR-1201 thickness on fabricated TVs"
+  - "bake conditions; lamination conditions other than vacuum"
+  - "package and module outline dimensions, PCB details"
+  - "sample counts"
+notes: >-
+  CTC channel_type organic_rdl per rule (i) (polymer dielectric WPR-1201 on Si). Bare-die gain measurements of drive
+  amplifier and multiplier placed on TV d (bare-die module) with scope bare die.
+revisions:
+  - {date: 2026-10-20, source: ingest_audit_C, row_id: ectc51906.2022.00323-F1-s02, change: "equipment 'vacuum laminating process' -> empty; atmosphere empty -> vacuum; conditions empty -> 'vacuum laminating process'", reason: "a process name is not a tool; p.6 Sec. IV.A states a vacuum laminating process"}
+  - {date: 2026-10-20, source: ingest_audit_C, row_id: ectc51906.2022.00323-F1-s07, change: "atmosphere empty -> vacuum; locator unchanged (already p.6 Sec. IV.A; p.1 Sec. I)", reason: "p.6 Sec. IV.A says the improved process vacuum-laminates in the same way as the typical process; p.1 Sec. I names the vacuum laminating process covering ABF"}
+  - {date: 2026-10-20, source: ingest_audit_C, row_id: ectc51906.2022.00323-F1, change: "notes 'No conditions given.' -> 'Only stated condition: vacuum lamination (s02, s07).'; not_reported 'bake and lamination conditions' -> 'bake conditions; lamination conditions other than vacuum'; level stays ordered", reason: "consistency with typed atmosphere; a single atmosphere value is few conditions (ordered)"}

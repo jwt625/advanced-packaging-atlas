@@ -1,0 +1,20 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+001c.129747-a-c1,001c.129747-a,other,,,glass panel (carrier),1,300,400,,,,,,,glass,,design_target,text,,p.2 Sec. II.B; p.2 Fig. 4,,
+001c.129747-c-c1,001c.129747-c,other,,,carrier glass,,,,,,,,,,glass,,stated,mixed,,p.3 Sec. II.B; p.3 Fig. 7,,
+001c.129747-d-c1,001c.129747-d,substrate,,,core glass,,,,,,,,,,glass,,stated,text,,p.3 Sec. II.B,,
+001c.129747-g-c1,001c.129747-g,interposer,,,glass panel with conformal Cu TGV,,400,300,400,,,,,,glass,,design_target,figure_image,,p.5 Fig. 15,,"Labels 400 mm, 300 mm, 0.4mmt."
+001c.129747-h-c1,001c.129747-h,substrate,,,glass core panel with filled Cu TGV,,510,515,500,,,,,,glass,,design_target,figure_image,,p.4 Sec. III.A; p.5 Fig. 16,,Label 'Glass core thickness: 0.5mm'.
+001c.129747-i-c1,001c.129747-i,interposer,,,glass panel with partially filled Cu TGV,,400,300,,,,,,,glass,,design_target,figure_image,,p.5 Fig. 17,,50 mm inset region shown.
+001c.129747-j-c1,001c.129747-j,interposer,,,glass core,,,,400,,,,,,glass,,design_target,schematic,,p.6 Fig. 19(a),,
+001c.129747-k-c1,001c.129747-k,interposer,,,glass core,,,,400,,,,,,glass,,design_target,schematic,,p.6 Fig. 19(b),,
+001c.129747-l-c1,001c.129747-l,interposer,,,glass core,,,,400,,,,,,glass,,design_target,schematic,,p.6 Fig. 20,,
+001c.129747-m-c1,001c.129747-m,interposer,,,glass core,,,,400,,,,,,glass,,design_target,schematic,,p.6 Fig. 22,,
+001c.129747-n-c1,001c.129747-n,interposer,,,glass core,,,,300,,,,,,glass,,design_target,schematic,,p.6 Fig. 23,,
+001c.129747-o-c1,001c.129747-o,interposer,,,glass core,,,,400,,,,,,glass,,design_target,schematic,,p.6 Fig. 24,,
+001c.129747-p-c1,001c.129747-p,substrate,,,"glass core panel, TGV fully filled with Cu",,550,650,,,,,,,glass,,design_target,text,,p.7 Sec. III.D; p.7 Fig. 25,,
+ectc51687.2025.00060-a-c1,ectc51687.2025.00060-a,dummy_die,yes,,component die with RDL and HBI pads,,,,50,,,,,,Si,,design_target,text,,p.3 Sec. II; p.4 Sec. III.B,,"Plasma diced (to 70 um, as written) then backside ground to 50 um."
+ectc51687.2025.00060-a-c2,ectc51687.2025.00060-a,other,,,substrate wafer with RDL and HBI pads,,,,,,,,,,,,stated,text,,p.3 Sec. II; p.4 Sec. III.B,,Same damascene RDL/HBI flow as component wafer; test pads for probing (eTV).
+ectc51687.2025.00060-b-c1,ectc51687.2025.00060-b,dummy_die,yes,,component die with RDL and HBI pads,600,,,50,,,,,,Si,,design_target,text,,p.3 Sec. II; p.5 Sec. III.C,count:approx,"Plasma diced (to 70 um, as written) then backside ground to 50 um."
+ectc51687.2025.00060-b-c2,ectc51687.2025.00060-b,other,,,substrate wafer with RDL and HBI pads,,,,,,,,,,,,stated,text,,p.3 Sec. II; p.5 Sec. III.C,,Same damascene RDL/HBI flow as component wafer; test pads for probing (eTV).
+001c.94484-a-c1,001c.94484-a,dummy_die,yes,,silicon test die (top),1,5,5,760,,,,,,Si,,design_target,text,,p.2 Sec. II; p.2 Fig. 1(a),,Full thickness.
+001c.94484-a-c2,001c.94484-a,interposer,,,silicon interposer (bottom),1,10,10,760,,,,,,Si,,design_target,text,,p.2 Sec. II; p.2 Fig. 1(b),,Large perimeter pads for daisy chain monitoring.

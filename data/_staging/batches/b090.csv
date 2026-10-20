@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+estc55720.2022.9939446,10.1109/estc55720.2022.9939446,PCB Embedding Technology for 5G mmWave Applications,2022,ESTC,advanced_substrate,advanced_substrate,3,"GaN/SiGe dies embedded in RF laminate/prepreg PCB; laser-drilled, plated vias to 3 um Au pads; 39 GHz SiP."
+tcpmt.2025.3533388,10.1109/tcpmt.2025.3533388,Thermal and Electrical Study of Glass Interposers in Co-Packaged Electronic–Photonic Systems,2025,TCPMT,cpo,glass;cpo,3,"Glass interposer thermal and electrical test vehicles, TGV pitch 100-400 um; 2.9 C rise, ~11 dB IL cut at 40 GHz."
+001c.147214,10.4071/001c.147214,Fine-Pitch RDL with High Reliability Formed on Glass for Heterogeneous Integration,2025,IMAPS,glass,glass;panel;organic_rdl_fanout,1,"RDL interposer on glass at 2 um pitch, 1-2 um inorganic-coated wiring, 300x400 mm demo; electromigration."

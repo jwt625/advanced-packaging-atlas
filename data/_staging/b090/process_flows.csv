@@ -1,0 +1,10 @@
+flow_id,paper_id,flow_name,scope,level,tv_ids,build_seq,basis,source,overrides,locator,qualifiers,notes
+estc55720.2022.9939446-F1,estc55720.2022.9939446,MMIC embedding and antenna-in-package build-up (Sec. III-IV),tv_build,full,estc55720.2022.9939446-a;estc55720.2022.9939446-b,1,stated,text,,p.3 Sec. III.A-D; p.3 Fig. 5; p.4 Sec. III.E; p.4 Sec. IV; p.5 Sec. IV,,Core and antenna build-up steps are module (a) deltas.
+estc55720.2022.9939446-F2,estc55720.2022.9939446,Conventional chip embedding into PCB build-up (Fig. 1; Table I Standard),comparison,full,estc55720.2022.9939446-a;estc55720.2022.9939446-b,2,stated,mixed,,p.1 Sec. I; p.2 Fig. 1; p.2 Sec. II.C-D; p.3 Table I,,Conventional process the SERENA flow was re-developed from; not executed for these TVs.
+tcpmt.2025.3533388-F1,tcpmt.2025.3533388,Flip-chip bonding of reference thermal chip on glass interposer (Sec. III-A),tv_build,full,tcpmt.2025.3533388-a,1,stated,text,,p.4 Sec. III.A,,"Glass interposer fabrication is in ref [18], not described."
+tcpmt.2025.3533388-F2,tcpmt.2025.3533388,"Glass interposer to PCB assembly with Bi-Sn solder and underfill (Sec. III-A, IV-A)",tv_build,full,tcpmt.2025.3533388-a;tcpmt.2025.3533388-d,2,stated,text,,p.4 Sec. III.A; p.7 Sec. IV.A,,
+001c.147214-F1,001c.147214,Release layer on carrier glass (Fig. 6(a)),tv_build,ordered,001c.147214-a,1,stated,mixed,,p.2 Sec. II.A; p.3 Fig. 6,,
+001c.147214-F2,001c.147214,Process flow of RDL layers (Fig. 7),tv_build,ordered,001c.147214-a;001c.147214-b;001c.147214-c,2,stated,mixed,,p.2 Sec. II.A; p.3 Sec. II.A; p.3 Fig. 7,,"Repeated per RDL layer. b: top 2/2 um layer only; c: inferred, DNP-SAP named as proposed SAP."
+001c.147214-F3,001c.147214,"Chip mount, mold and carrier release (Fig. 6(c)-(e))",tv_build,ordered,001c.147214-a,3,stated,mixed,,p.2 Sec. II.A; p.3 Fig. 6; p.3 Fig. 8,,
+001c.147214-F4,001c.147214,Build-up on TGV glass core before fine wiring (Sec. II-C),tv_build,ordered,001c.147214-b,1,stated,mixed,,p.4 Sec. II.C; p.4 Fig. 12,,
+001c.147214-F5,001c.147214,Dicing of 13 x 13 cm substrate (Sec. II-C),tv_build,ordered,001c.147214-b,3,stated,text,,p.4 Sec. II.C; p.4 Fig. 13,,

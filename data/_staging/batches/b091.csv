@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+tcpmt.2021.3111345,10.1109/tcpmt.2021.3111345,Demonstrating 170 °C Low-Temperature Cu–In–Sn Wafer-Level Solid Liquid Interdiffusion Bonding,2022,TCPMT,microbump_3d,microbump_3d,3,"Cu-In-Sn SLID W2W bonding at 170-250 C, ECD u-bumps 250 down to 10 um on 100 mm wafers; IMC microstructure."
+ectc51846.2026.00073,10.1109/ectc51846.2026.00073,The first report of Si Bridge type 2.5D package's reliability for Automotive Applications,2026,ECTC,si_bridge,si_bridge,3,"60x60 mm Si-bridge 2.5D mechanical TV, two logic plus two accelerator dies; stiffener DOE, AEC-Q TCT, warpage."
+ectc51909.2023.00316,10.1109/ectc51909.2023.00316,Through-silicon-via Architecture of 3D Integration for Superconducting Quantum Computing Application,2023,ECTC,si_interposer,si_interposer,3,"TiN TSV test vehicle, 30 um dia, AR 10:1, DRIE plus ~200 nm ALD TiN; SEM/EDS, RT and cryogenic tests."

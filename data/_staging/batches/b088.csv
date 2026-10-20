@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+001c.129747,10.4071/001c.129747,Ultra-High Density RDL on Glass Core Substrate for Heterogenous Integration,2024,IMAPS,glass,glass;panel,1,"Glass core with three TGV Cu fill methods, panels up to 550x650 mm, RDL at 3 um pitch; reliability, eye."
+ectc51687.2025.00060,10.1109/ectc51687.2025.00060,Scalability and Process Optimization in Hybrid Bonding with Fine-Pitch Interconnections,2025,ECTC,hybrid_bonding,hybrid_bonding,3,"C2W HB, TEOS/SiCN, 3 um pads at 6/10 um pitch, dishing -1 to +7 nm; 45 mOhm/link, >98% yield."
+001c.94484,10.4071/001c.94484,Solder-less Fine Pitch Copper-to-Copper Bonding,2023,IMAPS,microbump_3d,microbump_3d,2,"Solderless Cu-Cu TCB under deoxidizing vapor, 40 um pillars at 80 um pitch; shear, cross-section SEM, TC, resistance."

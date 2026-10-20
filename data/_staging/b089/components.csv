@@ -1,0 +1,22 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+itherm55376.2025.11235616-a-c1,itherm55376.2025.11235616-a,bridge,,yes,silicon bridge,4,,,,,,,,,silicon,,stated,mixed,,p.2 Sec. II; p.2 Fig. 2,,Count from Fig. 2 text: four central regions are embedded bridges.
+itherm55376.2025.11235616-a-c2,itherm55376.2025.11235616-a,substrate,,no,embedded silicon bridge substrate,,,,,,,,,,ABF build-up with Cu vias,,stated,text,,p.2 Sec. II,,
+itherm55376.2025.11235616-b-c1,itherm55376.2025.11235616-b,other,,,ABF film sample,,6,6,78,,,,,,ABF GX92,,design_target,text,,p.3 Sec. III.B,,Thickness printed 0.078 mm.
+itherm55376.2025.11235616-c-c1,itherm55376.2025.11235616-c,bridge,,yes,silicon bridge,,,,,,,,,,silicon,,stated,schematic,,p.5 Fig. 8,,
+ectc51906.2022.00323-a-c1,ectc51906.2022.00323-a,dummy_die,yes,yes,G-CPW dummy chip,2,0.8,,,,,,,,lossy Si with WPR-1201 dielectric,,design_target,schematic,,p.2 Fig. 2(a); p.1 Fig. 1(b),,800 um side drawn in Fig. 2(a); 500 um G-CPW line on chip.
+ectc51906.2022.00323-a-c2,ectc51906.2022.00323-a,substrate,,no,lossy Si package,,,,,0.82,0.82,120,,,lossy silicon,,design_target,mixed,,p.2 Fig. 2(b); p.1 Fig. 1(b); p.4 Sec. III.B,,"Cavity a = d = 820 um, b = 120 um (text p.4)."
+ectc51906.2022.00323-a-c3,ectc51906.2022.00323-a,adhesive,,,conductive epoxy,,,,,,,,,,conductive epoxy,,stated,text,,p.2 Sec. II; p.2 Fig. 2(b),,
+ectc51906.2022.00323-b-c1,ectc51906.2022.00323-b,other,,yes,CMOS 8x frequency multiplier,1,,,,,,,,,,,stated,mixed,,p.6 Sec. IV.A; p.6 Fig. 10(c),,
+ectc51906.2022.00323-b-c2,ectc51906.2022.00323-b,other,,yes,CMOS drive amplifier,1,,,,,,,,,,,stated,mixed,,p.6 Sec. IV.A; p.6 Fig. 10(c),,Designed for 84 GHz target frequency.
+ectc51906.2022.00323-b-c3,ectc51906.2022.00323-b,substrate,,,lossy Si package,,,,,,,,,,lossy silicon,,stated,text,,p.6 Sec. IV.A,,
+ectc51906.2022.00323-b-c4,ectc51906.2022.00323-b,pcb,,,fabricated printed circuit board,,,,,,,,,,,,stated,text,,p.7 Sec. IV.B,,
+ectc51906.2022.00323-c-c1,ectc51906.2022.00323-c,other,,yes,CMOS 8x frequency multiplier,1,,,,,,,,,,,stated,mixed,,p.6 Sec. IV.A; p.6 Fig. 10(b),,
+ectc51906.2022.00323-c-c2,ectc51906.2022.00323-c,other,,yes,CMOS drive amplifier,1,,,,,,,,,,,stated,mixed,,p.6 Sec. IV.A; p.6 Fig. 10(b),,Designed for 84 GHz target frequency.
+ectc51906.2022.00323-c-c3,ectc51906.2022.00323-c,substrate,,,lossy Si package,,,,,,,,,,lossy silicon,,stated,text,,p.6 Sec. IV.A,,
+ectc51906.2022.00323-c-c4,ectc51906.2022.00323-c,pcb,,,fabricated printed circuit board,,,,,,,,,,,,stated,text,,p.7 Sec. IV.B,,
+ectc51906.2022.00323-d-c1,ectc51906.2022.00323-d,other,,no,CMOS 8x frequency multiplier,1,,,,,,,,,,,stated,mixed,,p.6 Sec. IV.A; p.6 Fig. 10(a),,
+ectc51906.2022.00323-d-c2,ectc51906.2022.00323-d,other,,no,CMOS drive amplifier,1,,,,,,,,,,,stated,mixed,,p.6 Sec. IV.A; p.6 Fig. 10(a),,Designed for 84 GHz target frequency.
+ectc51906.2022.00323-d-c4,ectc51906.2022.00323-d,pcb,,,fabricated printed circuit board,,,,,,,,,,,,stated,text,,p.7 Sec. IV.B,,
+ectc51906.2022.00323-e-c1,ectc51906.2022.00323-e,dummy_die,yes,yes,embedded IC (model),,0.82,,110,,,,10,,silicon,,design_target,schematic,,p.3 Fig. 4(a); p.4 Fig. 7,,"IC height hSi 110 um, chip ground 5 um, width/length 820 um, margin dM 10 um (chip to cavity)."
+iedm50572.2025.11353855-a-c1,iedm50572.2025.11353855-a,capacitor,,no,3DSMIM 8-layer MIM capacitor,,,,,,,,,,TiN/HfO2,,stated,mixed,,p.1 Sec. II; p.3 Fig. 4; p.3 Fig. 6,,
+iedm50572.2025.11353855-b-c1,iedm50572.2025.11353855-b,capacitor,,yes,3DSMIM modeling area,,0.08,0.16,,,,,,,TiN/HfO2,,design_target,schematic,,p.4 Fig. 16(b),,"Model area W 80 um x L 160 um; finger Lf 1 um, gap Lg 0.1 um; N = 10 parallel unit cells."

@@ -1,0 +1,30 @@
+paper_id: 001c.129276
+verified_on: 2026-10-20
+schema_version: 2.5
+source_files:
+  - references/001c.129276/text.md
+  - references/001c.129276/source.json
+  - references/001c.129276/figures/page_02.png
+  - references/001c.129276/figures/page_03.png
+  - references/001c.129276/figures/page_04.png
+figure_reading_method: >-
+  All 8 candidates opened; 7 re-cropped manually (cut labels, steps or axis labels). Numbers taken from text and
+  Table 1; plots Fig. 5-7 checked only for consistency with the text values (no values read off the curves).
+entries:
+  - {table: interconnects, row_id: 001c.129276-a-i1, field: diameter_um, value: 30, unit: um, basis: design_target, locator: "p.2 Table 1; p.2 Sec. III", note: "Dvia; 'could fabricate TGVs with 30 um diameter on the 400 um-thick glass wafer'"}
+  - {table: test_vehicles, row_id: 001c.129276-a, field: package_thickness_mm, value: 0.46, unit: mm, basis: design_target, locator: "p.4 Sec. III", note: "fabricated size 1.18 x 0.61 x 0.46 mm3"}
+derived:
+  - {table: interconnects, row_id: 001c.129276-a-i1, field: depth_um, value: 400, formula: "TGV depth = glass thickness 400 um (through via)", inputs: "p.2 Table 1"}
+  - {table: interconnects, row_id: 001c.129276-a-i1, field: aspect_ratio, value: 13.3, formula: "400 um / 30 um", inputs: "p.2 Table 1"}
+conflicts:
+  - {table: interconnects, row_id: 001c.129276-a-i1, field: metallurgy, values: ["conformal Cu on TGV sidewall (Fig. 3 drawing)", "VIA filling (Fig. 4(b) caption)", "ABF fill-up of TGVs (Sec. III text on Fig. 4(c))"], locators: ["p.3 Fig. 3", "p.3 Fig. 4", "p.3 Sec. III"], chosen: "Cu (Metal 1, 15 um) with ABF fill-up", why: "text describes Metal 1 on sidewalls plus ABF fill-up; caption wording kept in notes"}
+excluded:
+  - "Sub-10 um high-aspect-ratio TGVs by laser induced deep etching attributed to ref [3]"
+  - "Glass IPD / 3D inductor and solenoid inductor work of refs [5]-[7]; Marchand coupled-line design of ref [8]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - glass wafer diameter, number of TGVs, laser via diameter, seed metal material
+  - process temperatures, times, ABF cure, etch chemistry, laser parameters
+  - inductance, coupling factor and Q values; reliability; measured cross-sections
+source_quality:
+  - "Clean text layer (IMAPS manual download). Plot axis text from Fig. 6-7 appended at the end of the p.4 text."

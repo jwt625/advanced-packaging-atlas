@@ -1,0 +1,60 @@
+layer_id,tv_id,structure,side,seq,layer_name,feature,material,material_class,layer_role,reinforcement,thickness_um,thickness_min_um,thickness_max_um,line_um,space_um,via_diameter_um,via_pitch_um,roughness_ra_um,repeat,properties,basis,source,overrides,locator,qualifiers,notes
+001c.129747-a-L01,001c.129747-a,interposer_rdl,single,1,insulation layer (upper),,low loss insulation layer,unspecified,dielectric,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.B; p.2 Fig. 3(g),,"Material not named; formed after inorganic layer, which is then dry etched in its openings."
+001c.129747-a-L02,001c.129747-a,interposer_rdl,single,2,non-organic (inorganic) protective layer,,inorganic layer,dielectric_inorganic,passivation,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.B; p.2 Fig. 3(f); p.2 Fig. 5(b),,Deposited on Cu trace; 'original process for high reliability'.
+001c.129747-a-L03,001c.129747-a,interposer_rdl,single,3,fine-line Cu wiring (SAP),fine traces,Cu,metal,conductor,,,,,1,1,,,,,,design_target,mixed,,p.2 Sec. II.B; p.2 Fig. 5,,Aspect ratio about 3 at L/S 1/1 um (Fig. 5(a)); 2 um pitch traces on 300x400 mm panel (Fig. 4).
+001c.129747-a-L04,001c.129747-a,interposer_rdl,single,4,seed layer,,,metal,seed,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.B; p.2 Fig. 3(a),,Seed metal not named.
+001c.129747-a-L05,001c.129747-a,interposer_rdl,single,5,"insulation layer (lower, with vias)",,,unspecified,dielectric,,,,,,,,,,,,stated,schematic,,p.2 Sec. II.B; p.2 Fig. 3(a),,
+001c.129747-a-L06,001c.129747-a,other,single,6,glass panel,,glass,glass,carrier,,,,,,,,,,,,design_target,text,,p.2 Sec. II.B; p.2 Fig. 4,,300x400 mm panel.
+001c.129747-b-L01,001c.129747-b,interposer_rdl,single,1,positive tone photo imageable dielectric (PID),via test,positive tone PID,dielectric_polymer,dielectric,,,,,,,5.7,,,,,measured,figure_image,,p.3 Sec. II.B; p.3 Fig. 6,,"Smallest via: top 5.7 um, bottom 3.0 um, tapered."
+001c.129747-c-L01,001c.129747-c,interposer_rdl,single,1,top metal with I/O pads,I/O pads 55 um pitch for HBM,,metal,conductor,,,,,,,,,,,,design_target,figure_image,,p.3 Fig. 7,,
+001c.129747-c-L02,001c.129747-c,interposer_rdl,single,3,fine pitch wiring layer,fine lines,,metal,conductor,,,,,1.5,1.5,,,,,,design_target,figure_image,,p.3 Sec. II.B; p.3 Fig. 7,,Fabricated on flat intermediate RDL surface; label L/S=1.5/1.5um on SEM.
+001c.129747-c-L03,001c.129747-c,interposer_rdl,single,2,inorganic dielectric,,inorganic dielectric,dielectric_inorganic,passivation,,,,,,,,,,,,stated,figure_image,,p.3 Fig. 7,,Labelled on SEM over the fine lines.
+001c.129747-c-L04,001c.129747-c,interposer_rdl,single,4,intermediate RDL layers,,,metal,conductor,,,,,,,,,,,,stated,mixed,,p.3 Sec. II.B; p.3 Fig. 7,,Remainder of the 5-metal stack; per-layer dimensions not stated.
+001c.129747-c-L05,001c.129747-c,other,single,5,glass carrier,,glass,glass,carrier,,,,,,,,,,,,stated,figure_image,,p.3 Fig. 7,,
+001c.129747-d-L01,001c.129747-d,interposer_rdl,single,1,CPW fine wiring,CPW L/S 1.5/1.5,,metal,conductor,,,,,1.5,1.5,,,,,,design_target,figure_image,,p.3 Fig. 8,,Legend W1_5mm_S3_LS1.5; 5 mm length.
+001c.129747-d-L02,001c.129747-d,interposer_rdl,single,1,CPW fine wiring,CPW L/S 3/3,,metal,conductor,,,,,3,3,,,,,,design_target,figure_image,,p.3 Fig. 8,,Legend W1_5mm_S9_LS3_LS3; intermediate L/S 1.75-2.75 um also measured.
+001c.129747-d-L03,001c.129747-d,other,single,2,core glass,,glass,glass,core,,,,,,,,,,,,stated,text,,p.3 Sec. II.B,,
+001c.129747-f-L01,001c.129747-f,interposer_rdl,single,1,signal/ground lines,GSG (a),,metal,conductor,,3.0,,,1.0,1.0,,,,,,design_target,schematic,,p.4 Fig. 11(a),,
+001c.129747-f-L02,001c.129747-f,interposer_rdl,single,1,signal/ground lines,SSG (b),,metal,conductor,,3.0,,,1.0,1.0,,,,,,design_target,schematic,,p.4 Fig. 11(b),,Signal-to-signal spacing X = 6.0 um (I/O and middle sections).
+001c.129747-f-L03,001c.129747-f,interposer_rdl,single,1,signal lines,SSS (c),,metal,conductor,,2.0,,,2.0,3.5,,,,,,design_target,schematic,,p.4 Fig. 11(c),,Spacing X = 3.5 um (I/O and middle sections).
+001c.129747-f-L04,001c.129747-f,interposer_rdl,single,2,polyimide,,Polyimide,dielectric_polymer,dielectric,,4.0,,,,,,,,,,design_target,schematic,,p.4 Fig. 11,,4.0 um in all three topologies.
+001c.129747-f-L05,001c.129747-f,interposer_rdl,single,3,ground plane,GSG/SSG,,metal,conductor,,3.0,,,,,,,,,,design_target,schematic,,p.4 Fig. 11(a)(b),,
+001c.129747-f-L06,001c.129747-f,interposer_rdl,single,3,ground plane,SSS (c),,metal,conductor,,2.0,,,,,,,,,,design_target,schematic,,p.4 Fig. 11(c),,
+001c.129747-j-L01,001c.129747-j,glass_core,front,1,CPW signal/ground,CPW 10 mm,,metal,conductor,,,,,30,15,,,,,,design_target,mixed,,p.5 Sec. III.B; p.6 Fig. 19(a),,L/S 30/15 um for 50 ohm; CPW length 10 mm (W 30 um label).
+001c.129747-j-L02,001c.129747-j,glass_core,core,1,glass core,,glass,glass,core,,400,,,,,,,,,,design_target,schematic,,p.6 Fig. 19(a),,
+001c.129747-j-L03,001c.129747-j,glass_core,back,1,back-side metal,,,metal,conductor,,,,,,,,,,,,stated,mixed,,p.5 Sec. III.B; p.6 Fig. 19(a),,Double side metal layer test vehicle.
+001c.129747-k-L01,001c.129747-k,glass_core,front,1,CPW signal/ground,CPW 10 mm,,metal,conductor,,,,,30,15,,,,,,design_target,mixed,,p.5 Sec. III.B; p.6 Fig. 19(b),,L/S 30/15 um for 50 ohm; CPW length 10 mm (W 30 um label).
+001c.129747-k-L02,001c.129747-k,glass_core,core,1,glass core,,glass,glass,core,,400,,,,,,,,,,design_target,schematic,,p.6 Fig. 19(b),,
+001c.129747-k-L03,001c.129747-k,glass_core,back,1,back-side metal,,,metal,conductor,,,,,,,,,,,,stated,mixed,,p.5 Sec. III.B; p.6 Fig. 19(b),,Double side metal layer test vehicle.
+001c.129747-l-L01,001c.129747-l,glass_core,front,1,CPW signal/ground,CPW 10 mm,,metal,conductor,,,,,30,15,,,,,,design_target,mixed,,p.5 Sec. III.B; p.6 Fig. 20,,L/S 30/15 um for 50 ohm; CPW length 10 mm (W 30 um label).
+001c.129747-l-L02,001c.129747-l,glass_core,core,1,glass core,,glass,glass,core,,400,,,,,,,,,,design_target,schematic,,p.6 Fig. 20,,
+001c.129747-l-L03,001c.129747-l,glass_core,back,1,back-side metal,,,metal,conductor,,,,,,,,,,,,stated,mixed,,p.5 Sec. III.B; p.6 Fig. 20,,Double side metal layer test vehicle.
+ectc51687.2025.00060-a-L01,ectc51687.2025.00060-a,die,single,1,component die Si,,Si,silicon,device,,50,,,,,,,,,,design_target,text,,p.3 Sec. II,,
+ectc51687.2025.00060-a-L02,ectc51687.2025.00060-a,die,single,2,SiN etch stop,,SiN,dielectric_inorganic,other,,0.2,,,,,,,,,,design_target,schematic,,p.2 Sec. II; p.2 Fig. 1,,"Fig. 1 legend 'SiN, 2000A'."
+ectc51687.2025.00060-a-L03,ectc51687.2025.00060-a,die,single,3,RDL dielectric,,TEOS oxide,dielectric_inorganic,dielectric,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Fig. 1,,
+ectc51687.2025.00060-a-L04,ectc51687.2025.00060-a,die,single,4,damascene Cu RDL,,Cu,metal,conductor,,,,,2,,,,,,,design_target,text,,p.2 Sec. II,,"RDL pad CD 6, 4 and 1.5 um; line width 2 um; WIW CD +/-5%."
+ectc51687.2025.00060-a-L05,ectc51687.2025.00060-a,die,single,5,HB bond dielectric,TEOS split,TEOS oxide,dielectric_inorganic,bonding,,,,,,,,,,,,stated,text,,p.2 Sec. II,,Dielectric roughness <0.3 nm after CMP.
+ectc51687.2025.00060-a-L06,ectc51687.2025.00060-a,die,single,5,HB bond dielectric,SiCN split,SiCN,dielectric_inorganic,bonding,,,,,,,,,,,,stated,text,,p.2 Sec. II,,
+ectc51687.2025.00060-a-L07,ectc51687.2025.00060-a,die,single,6,HBI pad barrier/seed,Ta barrier (final),Ta/Cu,metal,barrier,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.3 Sec. III.A,,
+ectc51687.2025.00060-a-L08,ectc51687.2025.00060-a,die,single,6,HBI pad barrier/seed,Ti barrier (study),Ti/Cu,metal,barrier,,,,,,,,,,,,stated,text,,p.3 Sec. III.A; p.3 Fig. 3,,Micro-trenching and delamination; Ta preferred.
+ectc51687.2025.00060-a-L09,ectc51687.2025.00060-a,die,single,7,HBI Cu pads (damascene),,Cu,metal,bonding,,,,,,,,,,,,design_target,text,,p.2 Sec. I; p.4 Sec. III.A,,"Pad sizes 1, 3, 5 um; Cu pad roughness <0.4 nm."
+ectc51687.2025.00060-a-L10,ectc51687.2025.00060-a,bonding_interface,single,1,hybrid bond interface (dielectric fusion + Cu-Cu),,,other,bonding,,,,,,,,,,,,stated,text,,p.2 Sec. I; p.4 Fig. 5,,
+ectc51687.2025.00060-a-L11,ectc51687.2025.00060-a,other,single,1,"substrate wafer HBI pads, bond dielectric and RDL",,Cu; TEOS oxide or SiCN; SiN/TEOS,other,bonding,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Fig. 1,,Same damascene RDL and HBI flow as component wafer.
+ectc51687.2025.00060-b-L01,ectc51687.2025.00060-b,die,single,1,component die Si,,Si,silicon,device,,50,,,,,,,,,,design_target,text,,p.3 Sec. II,,
+ectc51687.2025.00060-b-L02,ectc51687.2025.00060-b,die,single,2,SiN etch stop,,SiN,dielectric_inorganic,other,,0.2,,,,,,,,,,design_target,schematic,,p.2 Sec. II; p.2 Fig. 1,,"Fig. 1 legend 'SiN, 2000A'."
+ectc51687.2025.00060-b-L03,ectc51687.2025.00060-b,die,single,3,RDL dielectric,,TEOS oxide,dielectric_inorganic,dielectric,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Fig. 1,,
+ectc51687.2025.00060-b-L04,ectc51687.2025.00060-b,die,single,4,damascene Cu RDL,,Cu,metal,conductor,,,,,2,,,,,,,design_target,text,,p.2 Sec. II,,"RDL pad CD 6, 4 and 1.5 um; line width 2 um; WIW CD +/-5%."
+ectc51687.2025.00060-b-L05,ectc51687.2025.00060-b,die,single,5,HB bond dielectric,TEOS split,TEOS oxide,dielectric_inorganic,bonding,,,,,,,,,,,,stated,text,,p.2 Sec. II,,Dielectric roughness <0.3 nm after CMP.
+ectc51687.2025.00060-b-L06,ectc51687.2025.00060-b,die,single,5,HB bond dielectric,SiCN split,SiCN,dielectric_inorganic,bonding,,,,,,,,,,,,stated,text,,p.2 Sec. II,,
+ectc51687.2025.00060-b-L07,ectc51687.2025.00060-b,die,single,6,HBI pad barrier/seed,Ta barrier (final),Ta/Cu,metal,barrier,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.3 Sec. III.A,,
+ectc51687.2025.00060-b-L08,ectc51687.2025.00060-b,die,single,6,HBI pad barrier/seed,Ti barrier (study),Ti/Cu,metal,barrier,,,,,,,,,,,,stated,text,,p.3 Sec. III.A; p.3 Fig. 3,,Micro-trenching and delamination; Ta preferred.
+ectc51687.2025.00060-b-L09,ectc51687.2025.00060-b,die,single,7,HBI Cu pads (damascene),,Cu,metal,bonding,,,,,,,,,,,,design_target,text,,p.2 Sec. I; p.4 Sec. III.A,,"Pad sizes 1, 3, 5 um; Cu pad roughness <0.4 nm."
+ectc51687.2025.00060-b-L10,ectc51687.2025.00060-b,bonding_interface,single,1,hybrid bond interface (dielectric fusion + Cu-Cu),,,other,bonding,,,,,,,,,,,,stated,text,,p.2 Sec. I; p.4 Fig. 5,,
+ectc51687.2025.00060-b-L11,ectc51687.2025.00060-b,other,single,1,"substrate wafer HBI pads, bond dielectric and RDL",,Cu; TEOS oxide or SiCN; SiN/TEOS,other,bonding,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Fig. 1,,Same damascene RDL and HBI flow as component wafer.
+001c.94484-a-L01,001c.94484-a,die,single,1,Si test die,,Si,silicon,device,,760,,,,,,,,,,design_target,text,,p.2 Sec. II,,
+001c.94484-a-L02,001c.94484-a,die,single,2,silicon oxide,,silicon oxide,dielectric_inorganic,passivation,,0.3,,,,,,,,,,design_target,text,,p.2 Sec. I,,'plated with 300nm thick silicon oxide' as written.
+001c.94484-a-L03,001c.94484-a,die,single,3,plated Cu pads,daisy chain pads,Cu,metal,bonding,,7,,,,,,,,,,design_target,text,,p.2 Sec. II,,"40 um diameter, 80 um pitch."
+001c.94484-a-L04,001c.94484-a,bonding_interface,single,1,direct Cu-Cu bond interface,,Cu,metal,bonding,,,,,,,,,,,,stated,text,,p.2 Sec. III; p.5 Fig. 14,,
+001c.94484-a-L05,001c.94484-a,interposer,single,1,plated Cu pads,daisy chain pads,Cu,metal,bonding,,7,,,,,,,,,,design_target,text,,p.2 Sec. II,,"40 um diameter, 80 um pitch."
+001c.94484-a-L06,001c.94484-a,interposer,single,2,silicon oxide,,silicon oxide,dielectric_inorganic,passivation,,0.3,,,,,,,,,,design_target,text,,p.2 Sec. I,,
+001c.94484-a-L07,001c.94484-a,interposer,single,3,Si interposer,,Si,silicon,core,,760,,,,,,,,,,design_target,text,,p.2 Sec. II,,

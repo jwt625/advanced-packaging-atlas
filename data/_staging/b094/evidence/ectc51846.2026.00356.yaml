@@ -1,0 +1,34 @@
+paper_id: ectc51846.2026.00356
+verified_on: 2026-10-20
+schema_version: 2.5
+source_files:
+  - references/ectc51846.2026.00356/text.md
+  - references/ectc51846.2026.00356/source.json
+  - references/ectc51846.2026.00356/figures/page_02.png
+  - references/ectc51846.2026.00356/figures/page_03.png
+  - references/ectc51846.2026.00356/figures/page_04.png
+  - references/ectc51846.2026.00356/figures/page_06.png
+figure_reading_method: >-
+  Page renders 2, 3, 4, 6 opened; candidates p02_fig1, p02_fig2, p03_fig3, p03_fig4, p03_fig5, p04_fig6, p05_fig7,
+  p06_tablei, p06_tableii, p06_fig8 opened, all usable as-is. Table I/II values checked against the table crops.
+  Profilometer labels read from the Fig. 3 crop; die-site pitch read from Fig. 8 axes (+/-1 mm).
+entries:
+  - {table: components, row_id: ectc51846.2026.00356-a-c1, field: thickness_um, value: 19, unit: um, basis: measured, locator: "p.3 Fig. 3", note: "caption 'approximately 19 um'; profiles 18.32-19.11 um; text p.2 also says approximately 20 um"}
+  - {table: process_steps, row_id: ectc51846.2026.00356-F3-s03, field: temp_c, value: 90, unit: C, basis: stated, locator: "p.4 Sec. II.B", note: "tack cure 60 s"}
+derived:
+  - {table: process_steps, row_id: ectc51846.2026.00356-F2-s03, field: time_s, value: 3600, formula: "1 h x 3600 s/h", inputs: "p.2 Sec. II.A"}
+  - {table: process_steps, row_id: ectc51846.2026.00356-F3-s04, field: time_s, value: 3600, formula: "1 h x 3600 s/h", inputs: "p.4 Sec. II.B"}
+  - {table: process_steps, row_id: ectc51846.2026.00356-F3-s08, field: time_s, value: 3600, formula: "1 h x 3600 s/h", inputs: "p.4 Sec. II.B"}
+conflicts:
+  - {table: components, row_id: ectc51846.2026.00356-a-c1, field: thickness_um, values: [20, 19], locators: ["p.2 Sec. II.A", "p.3 Fig. 3"], chosen: 19, why: "profilometer measurement over text 'approximately 20 um'"}
+excluded:
+  - "RIE grooving and backside dry etch for stress relief (ref [7], proposed future work)"
+  - "die-shift mechanism of compression molding (ref [12])"
+not_reported:
+  - interconnects (RDL metallization and vias omitted in the TV), electrical_interfaces, optical_interfaces
+  - chiplet x/y size for the TV (Fig. 1 concept shows 5 mm), Si wafer diameter, glass type and CTE
+  - O2 plasma power/time, APTMS application method and thickness, flip-chip bonder model, placement force
+  - ABF lamination temperature/pressure/time; dicing blade/grinding wheel parameters
+  - die-shift measurement uncertainty; warpage; reliability
+source_quality:
+  - "Clean text layer, 7 pages; equations (1)-(17) partially garbled in text.md but readable on page renders."

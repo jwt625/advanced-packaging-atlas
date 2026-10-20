@@ -1,0 +1,37 @@
+paper_id: ectc51846.2026.00243
+verified_on: 2026-10-20
+schema_version: 2.5
+source_files:
+  - references/ectc51846.2026.00243/text.md
+  - references/ectc51846.2026.00243/source.json
+  - references/ectc51846.2026.00243/figures/page_02.png
+  - references/ectc51846.2026.00243/figures/page_03.png
+  - references/ectc51846.2026.00243/figures/page_04.png
+  - references/ectc51846.2026.00243/figures/page_05.png
+  - references/ectc51846.2026.00243/figures/page_06.png
+figure_reading_method: >-
+  All 8 candidates opened; Fig. 4, 5, 6, 8 re-cropped manually. Fig. 7 thickness labels read off the SEM images.
+  Fig. 8 profile read at 300 dpi: 0 to 2.5 um = 373 px (149 px per um), points +/-0.03 um.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00243-a-m4, field: value, value: 0.2, unit: um, basis: measured, locator: "p.6 Sec. IV; p.5 Fig. 7(b)", note: "~200 nm at the bottom of 15 um vias"}
+  - {table: metrics, row_id: ectc51846.2026.00243-a-m5, field: value, value: 0.67, unit: um, basis: measured, locator: "p.6 Sec. IV; p.5 Fig. 7(d)", note: "~670 nm at the bottom of 20 um vias"}
+derived:
+  - {table: process_steps, row_id: ectc51846.2026.00243-F1-s05, field: time_s, value: 1800, formula: "30 min x 60", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: ectc51846.2026.00243-F1-s06, field: time_s, value: 60, formula: "1 min x 60 (each of 3 cleans)", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: ectc51846.2026.00243-F1-s07, field: time_s, value: 1800, formula: "30 min x 60", inputs: "p.3 Sec. II"}
+  - {table: process_steps, row_id: ectc51846.2026.00243-F1-s07, field: pressure_mpa, value: 0.004933, formula: "37 Torr x 133.322 Pa/Torr = 4933 Pa = 0.004933 MPa", inputs: "p.3 Sec. II"}
+  - {table: process_steps, row_id: ectc51846.2026.00243-F1-s08, field: pressure_mpa, value: 0.004933, formula: "37 Torr x 133.322 Pa/Torr = 4933 Pa = 0.004933 MPa", inputs: "p.3 Sec. II"}
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00243-a-m1, field: value, values: [0.1, 0.5], locators: ["p.5 Sec. III; p.1 Abstract", "p.6 Sec. V"], chosen: 0.1, why: "Sec. III/abstract and Fig. 8 (minimum ~0.18 um at 15 um TSV) contradict the conclusion's 0.5 um lower bound"}
+excluded:
+  - "Table I thermal conductivity, resistivity, dielectric constant and loss tangent of CVD diamond, Cu, PLD hBN, AlN (refs [10]-[16])"
+  - "Single-crystal diamond properties (bandgap, breakdown field, ~2200 W/m-K, Dk ~5.5) of refs [10]-[14]"
+  - "PCD conductivity 1500-1800 W/m-K and low-temperature 300-400 C diamond CVD of refs [17]-[18]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - TSV depth, pitch, count; wafer size and thickness; SiO2 and Ti thickness and deposition methods
+  - temporary bonding material and debond; which sample was coated 3 h vs 8 h
+  - Cu fill of the diamond-lined TSVs (proposed only, not built)
+  - measured thermal conductivity or thermal resistance of the diamond-lined TSVs
+source_quality:
+  - "Clean text layer; SEM labels garbled in text.md ('!\"' for um) but readable on page renders."

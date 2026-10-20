@@ -1,0 +1,43 @@
+paper_id: tcpmt.2025.3533388
+verified_on: 2026-10-20
+schema_version: 2.5
+source_files:
+  - references/tcpmt.2025.3533388/text.md
+  - references/tcpmt.2025.3533388/source.json
+  - references/tcpmt.2025.3533388/figures/page_02.png
+  - references/tcpmt.2025.3533388/figures/page_03.png
+  - references/tcpmt.2025.3533388/figures/page_04.png
+  - references/tcpmt.2025.3533388/figures/page_05.png
+  - references/tcpmt.2025.3533388/figures/page_06.png
+  - references/tcpmt.2025.3533388/figures/page_07.png
+  - references/tcpmt.2025.3533388/figures/page_08.png
+  - references/tcpmt.2025.3533388/figures/page_09.png
+  - references/tcpmt.2025.3533388/figures/page_10.png
+  - references/tcpmt.2025.3533388/figures/candidates.json
+figure_reading_method: >-
+  Page renders at 150 dpi; all 17 candidates opened; Fig. 5 and Table I re-cropped (candidate cut insets / caption
+  only). Fig. 5 Tmax values printed in the IR images; Fig. 6(a) peak read at about 41 C (+/-0.5 C) against 5 C grid,
+  consistent with 43.9 - 2.9 C. Fig. 2(a) 35 um microvia label read at 2x zoom.
+entries:
+  - {table: metrics, row_id: tcpmt.2025.3533388-a-m1, field: value, value: 41, unit: C, basis: measured, locator: "p.5 Fig. 6(a)", note: "Pin 500 mW curve peak; 100 um pitch"}
+  - {table: interconnects, row_id: tcpmt.2025.3533388-a-i4, field: diameter_um, value: 35, unit: um, basis: design_target, locator: "p.3 Fig. 2(a)", note: "label on PI1 microvia; not stated in text"}
+derived:
+  - {table: interconnects, row_id: tcpmt.2025.3533388-a-i5, field: count, value: 350, formula: "25 x 14 BGA pads", inputs: "p.3 Sec. III.A"}
+  - {table: process_steps, row_id: tcpmt.2025.3533388-F2-s08, field: time_s, value: 129600, formula: "36 h x 3600", inputs: "p.4 Sec. III.A; p.7 Sec. IV.A"}
+conflicts:
+  - {table: metrics, row_id: tcpmt.2025.3533388-e-m1, field: value, values: [11.83, 11], locators: ["p.9 Sec. IV.D", "p.1 Abstract"], chosen: 11.83, why: "body text value; abstract rounds (approximately 11 dB)"}
+excluded:
+  - "LGA socket <0.5 dB IL / 8.6 dB XSR loss of refs [9], [10]; loss growth 10->20 dB of ref [9]"
+  - "Effective TGV conductivity threshold 100 W/mK of Cho et al. [22]"
+  - "Rogers 4350B Dk 3.66 and loss tangent 0.0037 (datasheet ref [28])"
+  - "Cu rms surface roughness 12.7 +/- 0.3 nm (ref [33])"
+  - "Glass interposer fabrication process (ref [18]); reference thermal chip details (ref [26])"
+  - "Supplementary Information tables/figures (S1-S6) are not in the cached text"
+not_reported:
+  - optical_interfaces
+  - "process_steps: tcpmt.2025.3533388-b (glass/RDL fabrication only by reference [18])"
+  - "process_steps: tcpmt.2025.3533388-c (glass interposer fabrication only by reference [18]; probed, not assembled)"
+  - glass interposer fabrication (TGV formation, Cu fill, PI, RDL thicknesses, UBM thicknesses)
+  - RDL metal thicknesses; microvia sizes other than Fig. 2(a) label; electrical interposer size
+  - Bi-Sn reflow peak temperature and time (Supplementary S3 only); PCB pad finish details
+  - measured insertion loss values of the glass interposer and electrical test vehicle (plots only)

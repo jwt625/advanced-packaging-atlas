@@ -1,0 +1,31 @@
+paper_id: iedm50572.2025.11353487
+verified_on: '2026-10-20'
+source_files:
+- references/iedm50572.2025.11353487/text.md
+- references/iedm50572.2025.11353487/source.json
+- references/iedm50572.2025.11353487/figures/page_03.png
+- references/iedm50572.2025.11353487/figures/page_04.png
+figure_reading_method: Page renders p.3-4 at 150 dpi plus manual re-crops in scratch; Fig. 8 plot labels and Fig. 14 protrusion
+  heights read from images.
+derived:
+- table: process_steps
+  row_id: iedm50572.2025.11353487-F1-s04
+  field: current_density_ma_cm2
+  value: 16
+  formula: 1.6 ASD x 10 (1 A/dm2 = 10 mA/cm2)
+  inputs: p.1 Sec. II
+conflicts: []
+excluded:
+- 'Table I literature TSVs: IEDM 2020 [6] 200 um, CNT, 2.43 ohm; EDL 2022 [8] 580 um PI/TiN/Cu/BCB; ECTC 2023 [11] 102 um,
+  1.29 ohm; ECTC 2025 [12] 410 um TiN-Cu'
+- 'Table I footnotes: CNT growth 550 C, ALD TiN 270 C, PECVD SiO2 400 C, ALD TiN under 200 C (cited works)'
+not_reported:
+- components
+- electrical_interfaces
+- optical_interfaces
+- 'process_steps: iedm50572.2025.11353487-b (BCB-core control fabrication not described)'
+- Si substrate thickness, coupon size, TSV pitch and count per array
+- IL and RDL materials and thicknesses
+- DRIE, CVD, ELP, CMP conditions
+- heater power, sample counts, anneal experiments (simulation only)
+notes: Fig. 15 radar ranks are qualitative; not entered as metrics.

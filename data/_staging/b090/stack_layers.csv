@@ -1,0 +1,70 @@
+layer_id,tv_id,structure,side,seq,layer_name,feature,material,material_class,layer_role,reinforcement,thickness_um,thickness_min_um,thickness_max_um,line_um,space_um,via_diameter_um,via_pitch_um,roughness_ra_um,repeat,properties,basis,source,overrides,locator,qualifiers,notes
+estc55720.2022.9939446-a-L01,estc55720.2022.9939446-a,substrate_buildup,front,1,antenna layer,patch antennas,Cu,metal,conductor,,25,,,,,,,,,,design_target,text,,p.4 Sec. IV; p.4 Fig. 10,,
+estc55720.2022.9939446-a-L02,estc55720.2022.9939446-a,substrate_buildup,front,2,top build-up,,Megtron 7N,organic_laminate,dielectric,,300,,,,,,,,,,design_target,text,,p.4 Sec. IV; p.4 Fig. 10,,
+estc55720.2022.9939446-a-L03,estc55720.2022.9939446-a,substrate_buildup,front,3,GND plane,antenna ground and shielding,Cu,metal,conductor,,25,,,,,,,,,,design_target,text,,p.4 Sec. IV; p.4 Fig. 10,,
+estc55720.2022.9939446-a-L04,estc55720.2022.9939446-a,substrate_buildup,front,4,build-up,,Megtron 7N,organic_laminate,dielectric,,100,,,,,,,,,,design_target,text,,p.4 Sec. IV; p.4 Fig. 10,,
+estc55720.2022.9939446-a-L05,estc55720.2022.9939446-a,substrate_buildup,front,5,routing layer (via-fill plated Cu),,Cu,metal,conductor,,20,,,,,,,,,,design_target,text,,p.3 Sec. III.D; p.4 Sec. III.E; p.4 Sec. IV,,
+estc55720.2022.9939446-a-L06,estc55720.2022.9939446-a,substrate_buildup,front,6,sputtered Cu seed,,Cu,metal,seed,,0.3,,,,,,,,,,design_target,text,,p.3 Sec. III.D,,
+estc55720.2022.9939446-a-L07,estc55720.2022.9939446-a,substrate_buildup,front,7,sputtered Ti,,Ti,metal,adhesion,,0.1,,,,,,,,,,design_target,text,,p.3 Sec. III.D,,
+estc55720.2022.9939446-a-L08,estc55720.2022.9939446-a,substrate_buildup,front,8,Ajinomoto build-up film,full-area thin encapsulation over MMICs,Ajinomoto build-up film (ABF),dielectric_polymer,dielectric,,10,,,,,,,,,,design_target,text,,p.3 Sec. III.B; p.3 Fig. 5; p.4 Fig. 10,,
+estc55720.2022.9939446-a-L09,estc55720.2022.9939446-a,substrate_buildup,front,9,embedding prepreg,cavities for MMICs and SMD capacitors,Megtron 7N,organic_laminate,dielectric,,,,,,,,,,,,stated,text,,p.3 Sec. III.B; p.3 Fig. 5,,
+estc55720.2022.9939446-a-L10,estc55720.2022.9939446-a,substrate_core,core,1,core Cu (landings),landings for capacitors and MMICs,Cu,metal,conductor,,,,,,,,,,,,stated,text,,p.4 Sec. IV,,
+estc55720.2022.9939446-a-L11,estc55720.2022.9939446-a,substrate_core,core,2,PCB core,,Megtron,organic_laminate,core,,,,,,,,,,,,stated,schematic,,p.3 Fig. 5; p.4 Sec. IV,,Core material from Fig. 5 label 'Megtron'; 2 Cu layers stated.
+estc55720.2022.9939446-a-L12,estc55720.2022.9939446-a,substrate_core,core,3,core Cu (bottom),,Cu,metal,conductor,,,,,,,,,,,,stated,text,,p.4 Sec. IV,,
+estc55720.2022.9939446-a-L13,estc55720.2022.9939446-a,die,single,1,MMIC contact pads,,Au,metal,conductor,,3,,,,,,,,,,design_target,table,,p.3 Table I; p.2 Sec. II.B,,"Contact diameter 100 um (Table I, SERENA column)."
+estc55720.2022.9939446-a-L14,estc55720.2022.9939446-a,die,single,2,MMIC die,,GaN / SiGe,other,device,,,,,,,,,,,,stated,mixed,,p.1 Abstract; p.4 Fig. 10,,
+estc55720.2022.9939446-a-L15,estc55720.2022.9939446-a,die,single,3,die attach,,NAMICS H9890-7 sinter glue,adhesive,adhesive,,,,,,,,,,,thermal conductivity up to 140 W/mK (data sheet),stated,text,,p.3 Sec. III.A,,
+estc55720.2022.9939446-b-L01,estc55720.2022.9939446-b,substrate_buildup,single,1,via-fill plated Cu,,Cu,metal,conductor,,20,,,,,,,,,,design_target,text,,p.3 Sec. III.D; p.3 Fig. 7,,
+estc55720.2022.9939446-b-L02,estc55720.2022.9939446-b,substrate_buildup,single,2,sputtered Cu seed,,Cu,metal,seed,,0.3,,,,,,,,,,design_target,text,,p.3 Sec. III.D,,
+estc55720.2022.9939446-b-L03,estc55720.2022.9939446-b,substrate_buildup,single,3,sputtered Ti,,Ti,metal,adhesion,,0.1,,,,,,,,,,design_target,text,,p.3 Sec. III.D,,
+estc55720.2022.9939446-b-L04,estc55720.2022.9939446-b,substrate_buildup,single,4,Ajinomoto build-up film,,Ajinomoto build-up film (ABF),dielectric_polymer,dielectric,,10,,,,,,,,,,design_target,text,,p.3 Sec. III.B; p.3 Fig. 6,,
+estc55720.2022.9939446-b-L05,estc55720.2022.9939446-b,substrate_buildup,single,5,embedding prepreg,cavities for MMICs,Megtron 7N,organic_laminate,dielectric,,,,,,,,,,,,stated,text,,p.3 Sec. III.B,,
+estc55720.2022.9939446-b-L06,estc55720.2022.9939446-b,die,single,1,MMIC contact pads,,Au,metal,conductor,,3,,,,,,,,,,design_target,table,,p.3 Table I; p.2 Sec. II.C,,
+estc55720.2022.9939446-b-L07,estc55720.2022.9939446-b,die,single,2,MMIC die,"air bridges 3 um Au, 1-2 um gap",,other,device,,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 2,,
+estc55720.2022.9939446-b-L08,estc55720.2022.9939446-b,die,single,3,die attach,,NAMICS H9890-7 sinter glue,adhesive,adhesive,,,,,,,,,,,,stated,text,,p.3 Sec. III.A; p.3 Fig. 4,,
+tcpmt.2025.3533388-a-L01,tcpmt.2025.3533388-a,interposer_rdl,front,1,UBM pads and Au thermal spreading pad,,Au/Cu/Ni stack (UBM); Au pad,metal,surface_finish,,,,,,,,,,,,stated,mixed,,p.2 Sec. II; p.2 Sec. II.A; p.3 Fig. 2(a),,
+tcpmt.2025.3533388-a-L02,tcpmt.2025.3533388-a,interposer_rdl,front,2,polyimide 2nd layer,microvias to RDL2,polyimide,dielectric_polymer,dielectric,,,,,,,,,,,,stated,mixed,,p.2 Sec. II; p.3 Fig. 2(a),,
+tcpmt.2025.3533388-a-L03,tcpmt.2025.3533388-a,interposer_rdl,front,3,RDL2,,Cu,metal,conductor,,,,,,,,,,,,stated,mixed,,p.2 Sec. II; p.3 Fig. 2(a); p.8 Sec. IV.C,,
+tcpmt.2025.3533388-a-L04,tcpmt.2025.3533388-a,interposer_rdl,front,4,polyimide 1st layer,staggered microvias RDL2-RDL1,polyimide,dielectric_polymer,dielectric,,,,,,,35,,,,,stated,mixed,via_diameter_um:design_target;via_diameter_um:schematic,p.2 Sec. II; p.3 Fig. 2(a),,35 um label on PI1 microvia in Fig. 2(a).
+tcpmt.2025.3533388-a-L05,tcpmt.2025.3533388-a,interposer_rdl,front,5,RDL1,4.5 x 5 mm thermal pad,Cu,metal,conductor,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.3 Sec. II.A,,
+tcpmt.2025.3533388-a-L06,tcpmt.2025.3533388-a,glass_core,core,1,glass core,hourglass Cu-filled TGVs,Borofloat 33 (Schott),glass,core,,460,,,,,50,,,,,design_target,text,,p.2 Sec. II; p.3 Sec. II.A,,Thermal TGV pitch 100/200/300/400 um (design split).
+tcpmt.2025.3533388-a-L07,tcpmt.2025.3533388-a,interposer_rdl,back,1,backside RDL (BRDL),4.5 x 5 mm BRDL pad,Cu,metal,conductor,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.3 Sec. II.A,,
+tcpmt.2025.3533388-a-L08,tcpmt.2025.3533388-a,interposer_rdl,back,2,backside polyimide,microvias BRDL-BGA,polyimide,dielectric_polymer,dielectric,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.3 Sec. II.A,,
+tcpmt.2025.3533388-a-L09,tcpmt.2025.3533388-a,interposer_rdl,back,3,BGA pads,"circular pads, 250 um dia, 500 um pitch",,metal,conductor,,,,,,,,,,,,design_target,text,,p.3 Sec. II.A,,
+tcpmt.2025.3533388-c-L01,tcpmt.2025.3533388-c,interposer_rdl,front,1,polyimide 2nd layer,,polyimide,dielectric_polymer,dielectric,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2(b),,
+tcpmt.2025.3533388-c-L02,tcpmt.2025.3533388-c,interposer_rdl,front,2,polyimide 1st layer,,polyimide,dielectric_polymer,dielectric,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2(b); p.8 Sec. IV.C,,
+tcpmt.2025.3533388-c-L03,tcpmt.2025.3533388-c,interposer_rdl,front,3,RDL1 (CBCPW signal and ground),"GSG CBCPW, L = 3/4/5/6 mm",Cu,metal,conductor,,,,,100,18,,,,,,design_target,text,,p.3 Sec. II.B; p.3 Fig. 3(b),,
+tcpmt.2025.3533388-c-L04,tcpmt.2025.3533388-c,glass_core,core,1,glass core,signal and ground TGVs,Borofloat 33 (Schott),glass,core,,460,,,,,50,500,,,,design_target,text,,p.2 Sec. II; p.3 Sec. II.B; p.3 Fig. 2(b),,500 um = ground stitching TGV mesh pitch.
+tcpmt.2025.3533388-c-L05,tcpmt.2025.3533388-c,interposer_rdl,back,1,backside RDL (CBCPW),,Cu,metal,conductor,,,,,100,18,,,,,,design_target,text,,p.3 Sec. II.B,,
+tcpmt.2025.3533388-c-L06,tcpmt.2025.3533388-c,interposer_rdl,back,2,backside polyimide,microvias BRDL-BGA,polyimide,dielectric_polymer,dielectric,,,,,,,,,,,,stated,mixed,,p.3 Sec. II.B; p.3 Fig. 2(b),,
+tcpmt.2025.3533388-c-L07,tcpmt.2025.3533388-c,interposer_rdl,back,3,BGA pads,250 um pads,,metal,conductor,,,,,,,,,,,,design_target,schematic,,p.3 Fig. 2(b),,
+tcpmt.2025.3533388-d-L01,tcpmt.2025.3533388-d,interposer_rdl,front,1,polyimide 2nd layer,,polyimide,dielectric_polymer,dielectric,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2(b),,
+tcpmt.2025.3533388-d-L02,tcpmt.2025.3533388-d,interposer_rdl,front,2,polyimide 1st layer,,polyimide,dielectric_polymer,dielectric,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2(b); p.8 Sec. IV.C,,
+tcpmt.2025.3533388-d-L03,tcpmt.2025.3533388-d,interposer_rdl,front,3,RDL1 (CBCPW signal and ground),"GSG CBCPW, L = 3/4/5/6 mm",Cu,metal,conductor,,,,,100,18,,,,,,design_target,text,,p.3 Sec. II.B; p.3 Fig. 3(b),,
+tcpmt.2025.3533388-d-L04,tcpmt.2025.3533388-d,glass_core,core,1,glass core,signal and ground TGVs,Borofloat 33 (Schott),glass,core,,460,,,,,50,500,,,,design_target,text,,p.2 Sec. II; p.3 Sec. II.B; p.3 Fig. 2(b),,500 um = ground stitching TGV mesh pitch.
+tcpmt.2025.3533388-d-L05,tcpmt.2025.3533388-d,interposer_rdl,back,1,backside RDL (CBCPW),,Cu,metal,conductor,,,,,100,18,,,,,,design_target,text,,p.3 Sec. II.B,,
+tcpmt.2025.3533388-d-L06,tcpmt.2025.3533388-d,interposer_rdl,back,2,backside polyimide,microvias BRDL-BGA,polyimide,dielectric_polymer,dielectric,,,,,,,,,,,,stated,mixed,,p.3 Sec. II.B; p.3 Fig. 2(b),,
+tcpmt.2025.3533388-d-L07,tcpmt.2025.3533388-d,interposer_rdl,back,3,BGA pads,250 um pads,,metal,conductor,,,,,,,,,,,,design_target,schematic,,p.3 Fig. 2(b),,
+tcpmt.2025.3533388-d-L08,tcpmt.2025.3533388-d,underfill,single,1,underfill (interposer-PCB),,EPO-TEK 301-2,underfill,encapsulant,,250,,,,,,,,,"Dk 3.8, loss tangent 0.012 at 1 kHz",simulated,text,,p.9 Sec. IV.D,,250 um = simulation-model thickness (cylindrical solder); measured gap not stated.
+tcpmt.2025.3533388-b-L01,tcpmt.2025.3533388-b,interposer_rdl,single,1,RDL1 CPW line,L = 3/4/5/6 mm,Cu,metal,conductor,,,,,100,18,,,,,,design_target,text,,p.7 Sec. IV.B; p.8 Fig. 12(a),,
+tcpmt.2025.3533388-b-L02,tcpmt.2025.3533388-b,glass_core,core,1,glass,,Borofloat 33 (Schott),glass,core,,460,,,,,,,,,,design_target,text,,p.2 Sec. II; p.7 Sec. IV.B,,
+tcpmt.2025.3533388-e-L01,tcpmt.2025.3533388-e,underfill,single,1,underfill (optimized),,EPO-TEK 301-2,underfill,encapsulant,,100,,,,,,,,,,simulated,text,,p.9 Sec. IV.D,,
+001c.147214-a-L01,001c.147214-a,mold,single,1,mold resin,,mold resin,mold_compound,encapsulant,,500,,,,,,,,,,design_target,text,,p.3 Sec. II.B; p.3 Fig. 8,,
+001c.147214-a-L02,001c.147214-a,interposer_rdl,single,1,RDL (all layers),"Cu wiring with inorganic dielectric cover, insulation layers, micro bumps",Cu; inorganic dielectric; insulation layer,other,conductor,,21,,,,,,,,,,design_target,text,,p.3 Sec. II.B; p.3 Fig. 8; p.2 Fig. 5(a),,Total RDL thickness; design L/S 1/1 to 3/3 um (Fig. 5(a)); layer count not stated.
+001c.147214-a-L03,001c.147214-a,other,single,2,release layer,,,unspecified,other,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.A; p.3 Fig. 6(a); p.3 Fig. 8,,
+001c.147214-a-L04,001c.147214-a,other,single,3,carrier glass,,glass,glass,carrier,,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.3 Fig. 6,,
+001c.147214-b-L01,001c.147214-b,substrate_buildup,front,1,top fine wiring,,Cu,metal,conductor,,,,,2,2,,,,1,,design_target,mixed,,p.4 Sec. II.C; p.4 Fig. 11; p.4 Fig. 12,,
+001c.147214-b-L02,001c.147214-b,substrate_buildup,front,2,PID,,PID,dielectric_polymer,dielectric,,,,,,,,,,,,stated,schematic,,p.4 Fig. 12,,Fine wiring 'on PID' per Fig. 12.
+001c.147214-b-L03,001c.147214-b,substrate_buildup,front,3,build-up layers,,,unspecified,conductor,,,,,100,100,,,,2,,design_target,text,,p.4 Sec. II.C; p.4 Fig. 12,,Text 100/100 um; Fig. 12 '<= 100/100 um'.
+001c.147214-b-L04,001c.147214-b,glass_core,core,1,TGV glass core,2 metal layers,glass,glass,core,,1000,,,,,100,1000,,,,design_target,mixed,thickness_um:schematic,p.4 Sec. II.C; p.4 Fig. 12,,
+001c.147214-b-L05,001c.147214-b,substrate_buildup,back,1,build-up layers,,,unspecified,conductor,,,,,100,,,,,3,,design_target,schematic,,p.4 Fig. 12,line_um:le,As written 'L/S <= 100 um'.
+001c.147214-c-L01,001c.147214-c,interposer_rdl,single,1,polyimide cover,,polyimide,dielectric_polymer,dielectric,,,,,,,,,,,,stated,text,,p.4 Sec. III.A,,Same polyimide type as control samples.
+001c.147214-c-L02,001c.147214-c,interposer_rdl,single,2,second inorganic dielectric,,,dielectric_inorganic,passivation,,,,,,,,,,,,measured,figure_image,,p.6 Fig. 19,,
+001c.147214-c-L03,001c.147214-c,interposer_rdl,single,3,first inorganic dielectric,,,dielectric_inorganic,passivation,,,,,,,,,,,,measured,figure_image,,p.6 Fig. 19; p.5 Sec. III.C,,
+001c.147214-c-L04,001c.147214-c,interposer_rdl,single,4,Cu trace,"1 um line, 1600 um long",Cu,metal,conductor,,,,,1,,,,,,,design_target,text,,p.4 Sec. III.A; p.4 Fig. 14,,
+001c.147214-c-L05,001c.147214-c,interposer_rdl,single,4,Cu trace,"2 um line, 1600 um long",Cu,metal,conductor,,,,,2,,,,,,,design_target,text,,p.4 Sec. III.A; p.4 Fig. 14,,
+001c.147214-c-L06,001c.147214-c,interposer_rdl,single,5,barrier metal,,,metal,barrier,,,,,,,,,,,,measured,figure_image,,p.6 Fig. 19,,
+001c.147214-c-L07,001c.147214-c,interposer_rdl,single,6,polyimide (under trace),,polyimide,dielectric_polymer,dielectric,,,,,,,,,,,,measured,figure_image,,p.6 Fig. 19,,
+001c.147214-d-L01,001c.147214-d,interposer_rdl,single,1,polyimide cover (direct on Cu),,polyimide,dielectric_polymer,dielectric,,,,,,,,,,,,stated,text,,p.4 Sec. III.A,,
+001c.147214-d-L02,001c.147214-d,interposer_rdl,single,2,Cu trace (SAP),"1 um line, 1600 um long",Cu,metal,conductor,,,,,1,,,,,,,design_target,text,,p.4 Sec. III.A; p.4 Fig. 14,,
+001c.147214-d-L03,001c.147214-d,interposer_rdl,single,2,Cu trace (SAP),"2 um line, 1600 um long",Cu,metal,conductor,,,,,2,,,,,,,design_target,text,,p.4 Sec. III.A; p.4 Fig. 14,,
