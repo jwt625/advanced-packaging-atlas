@@ -460,7 +460,7 @@ def build() -> dict:
             for t in CHILD_TABLES:
                 if by_tv[t].get(s(tv.get("tv_id"))):
                     tables_present.add(t)
-        papers_out.append(compact({
+        row = compact({
             "paper_id": pid,
             "label": (s(p.get("first_author")).split()[-1] if s(p.get("first_author")) else pid) + " " + s(p.get("year")),
             "first_author": s(p.get("first_author")),
@@ -481,7 +481,11 @@ def build() -> dict:
             "n_tvs": len(tvs),
             "tables_present": sorted(tables_present),
             "evidence": ev,
-        }))
+        })
+        # list fields are part of the app contract; compact() drops empties, so restore them
+        row["orgs"] = split_list(p.get("orgs"))
+        row["tables_present"] = sorted(tables_present)
+        papers_out.append(row)
 
     for tv in tvs_raw:
         tv_id = s(tv.get("tv_id"))
