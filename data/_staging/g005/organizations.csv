@@ -1,1 +1,38 @@
 org_name,org_type,country,region,parent_org,notes
+Purdue University,university,US,north_america,,printed: Purdue University
+Samsung Electronics,company,KR,east_asia,,"printed: Samsung Electronics Co., Ltd; Samsung Electronics Co., Ltd."
+Intel Corporation,company,US,north_america,,printed: Intel Corporation
+STMicroelectronics,company,CH,europe,,"printed: STMicroelectronics; HQ country from general knowledge (Geneva), verify at merge"
+Université de Sherbrooke,university,CA,north_america,,printed: Université de Sherbrooke ; unit 3IT
+CNRS,research_institute,FR,europe,,"printed: Laboratoire Nanotechnologies Nanosystèmes (LN2) CNRS (lab sited in Sherbrooke, Canada)"
+IBM,company,US,north_america,,printed: IBM Canada; IBM Research- Tokyo; IBM Research
+"Agency for Science, Technology and Research",government_lab,SG,southeast_asia,,printed: A*STAR; parent of IME
+"Institute of Microelectronics, A*STAR",research_institute,SG,southeast_asia,"Agency for Science, Technology and Research","printed: Institute of Microelectronics, Agency for Science, Technology and Research (A*STAR); Institute of Microelectronics (IME), Agency for Science, Technology and Research (A*STAR); Institute of Microelectronics, A*STAR (Agency for Science, Technology and Research)"
+Tokyo Institute of Technology,university,JP,east_asia,,printed: Tokyo Institute of Technology (merged into Institute of Science Tokyo in 2024)
+Murata Manufacturing,company,JP,east_asia,,"printed: Murata Manufacturing Co., Ltd."
+DISCO Corporation,company,JP,east_asia,,printed: DISCO Corporation
+Industrial Technology Research Institute,research_institute,TW,east_asia,,printed: Industrial Technology Research Institute
+Taiwan Semiconductor Manufacturing Company,foundry,TW,east_asia,,"printed: Taiwan Semiconductor Manufacturing Company, Ltd.; TSMC"
+SK hynix,company,KR,east_asia,,printed: SK hynix Inc.; SK hynix America Inc. (subsidiary kept in unit)
+Nepes,company,KR,east_asia,,printed: nepes Corporation
+Deca Technologies,company,US,north_america,,printed: DECA
+AOI Electronics,company,JP,east_asia,,"printed: AOI Electronics CO., LTD."
+Institute of Science Tokyo,university,JP,east_asia,,printed: Institute of Science Tokyo
+Fraunhofer-Gesellschaft,research_institute,DE,europe,,parent of Fraunhofer IZM; not printed as a separate affiliation
+Fraunhofer IZM,research_institute,DE,europe,Fraunhofer-Gesellschaft,printed: Fraunhofer IZM
+CEA,government_lab,FR,europe,,parent of CEA-Leti; not printed as a separate affiliation
+CEA-Leti,research_institute,FR,europe,CEA,printed: CEA-Leti
+Sony Semiconductor Solutions Corporation,company,JP,east_asia,,printed: Sony Semiconductor Solutions Corporation
+Sony Semiconductor Manufacturing Corporation,company,JP,east_asia,Sony Semiconductor Solutions Corporation,"printed: Sony Semiconductor Manufacturing Corporation; parent from general knowledge, not printed"
+Resonac Corporation,company,JP,east_asia,,printed: Resonac Corporation
+Peking University,university,CN,east_asia,,printed: Peking University
+Chinese Academy of Sciences,government_lab,CN,east_asia,,parent of IMECAS; not printed as a separate affiliation
+"Institute of Microelectronics, Chinese Academy of Sciences",research_institute,CN,east_asia,Chinese Academy of Sciences,printed: The Institute of Microelectronics of the Chinese Academy of Sciences
+"University of California, Los Angeles",university,US,north_america,,printed: UCLA Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS)
+Kulicke & Soffa,company,SG,southeast_asia,,"printed: Kulicke & Soffa Industries, Inc. (Fort Washington, PA); HQ country from general knowledge, verify at merge"
+ASMPT,company,HK,east_asia,,"printed: ASMPT Technology Hong Kong Limited; ASMPT Singapore Pte. Ltd; HQ country uncertain (HK listing), verify at merge"
+Georgia Institute of Technology,university,US,north_america,,printed: Georgia Institute of Technology
+"University of California, San Diego",university,US,north_america,,"printed: University of California, San Diego"
+Applied Materials,company,US,north_america,,printed: Applied Materials
+EV Group,company,AT,europe,,printed: EV Group
+Advanced Semiconductor Engineering,company,TW,east_asia,,"printed: Advanced Semiconductor Engineering, Inc."

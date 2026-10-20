@@ -1,1 +1,251 @@
 aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+tcpmt.2025.3557232-a01-1,tcpmt.2025.3557232,1,Ye Yang,1,primary,Purdue University,School of Mechanical Engineering,"West Lafayette, IN",US,,paper,p.1 footnote
+tcpmt.2025.3557232-a02-1,tcpmt.2025.3557232,2,Kelly E. Lahaie,1,primary,Purdue University,School of Mechanical Engineering,"West Lafayette, IN",US,,paper,p.1 footnote
+tcpmt.2025.3557232-a03-1,tcpmt.2025.3557232,3,Tiwei Wei,1,primary,Purdue University,School of Mechanical Engineering,"West Lafayette, IN",US,,paper,p.1 footnote
+ectc51529.2024.00021-a01-1,ectc51529.2024.00021,1,Hyeonmin Lee,1,primary,Samsung Electronics,AVP Product Development Team1,Cheonan-si,KR,,paper,p.1 affiliations
+ectc51529.2024.00021-a02-1,ectc51529.2024.00021,2,Wonil Lee,1,primary,Samsung Electronics,AVP Product Development Team1,Cheonan-si,KR,,paper,p.1 affiliations
+ectc51529.2024.00021-a03-1,ectc51529.2024.00021,3,Jihoon Kim,1,primary,Samsung Electronics,AVP Product Development Team1,Cheonan-si,KR,,paper,p.1 affiliations
+ectc51529.2024.00021-a04-1,ectc51529.2024.00021,4,Aeni Jang,1,primary,Samsung Electronics,AVP Product Development Team1,Cheonan-si,KR,,paper,p.1 affiliations
+ectc51529.2024.00021-a05-1,ectc51529.2024.00021,5,Dae-Woo Kim,1,primary,Samsung Electronics,AVP Product Development Team1,Cheonan-si,KR,,paper,p.1 affiliations
+ectc51529.2024.00021-a06-1,ectc51529.2024.00021,6,Min-Ki Kim,1,primary,Samsung Electronics,AVP Product Development Team1,Cheonan-si,KR,,paper,p.1 affiliations
+ectc51529.2024.00021-a07-1,ectc51529.2024.00021,7,Hyuekjae Lee,1,primary,Samsung Electronics,AVP Product Development Team1,Cheonan-si,KR,,paper,p.1 affiliations
+vlsitechnologyandcir46783.2024.10631478-a01-1,vlsitechnologyandcir46783.2024.10631478,1,Christopher Pelto,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a02-1,vlsitechnologyandcir46783.2024.10631478,2,R. Aggarwal,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a03-1,vlsitechnologyandcir46783.2024.10631478,3,R. Ahan,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a04-1,vlsitechnologyandcir46783.2024.10631478,4,M. Armstrong,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a05-1,vlsitechnologyandcir46783.2024.10631478,5,M. Bebek,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a06-1,vlsitechnologyandcir46783.2024.10631478,6,M. Blount,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a07-1,vlsitechnologyandcir46783.2024.10631478,7,S. Chowdhury,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a08-1,vlsitechnologyandcir46783.2024.10631478,8,J. Chuah,1,primary,Intel Corporation,Client Computing Group,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a09-1,vlsitechnologyandcir46783.2024.10631478,9,C. Connor,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a10-1,vlsitechnologyandcir46783.2024.10631478,10,T. DeBonis,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a11-1,vlsitechnologyandcir46783.2024.10631478,11,B. Dhayal,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a12-1,vlsitechnologyandcir46783.2024.10631478,12,A. Dougless,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a13-1,vlsitechnologyandcir46783.2024.10631478,13,S. Gokhale,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a14-1,vlsitechnologyandcir46783.2024.10631478,14,A. Jain,1,primary,Intel Corporation,Client Computing Group,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a15-1,vlsitechnologyandcir46783.2024.10631478,15,V. Javvaji,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a16-1,vlsitechnologyandcir46783.2024.10631478,16,K. Kamisetty,1,primary,Intel Corporation,Client Computing Group,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a17-1,vlsitechnologyandcir46783.2024.10631478,17,G. Kim,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a18-1,vlsitechnologyandcir46783.2024.10631478,18,J. Kpetehoto,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a19-1,vlsitechnologyandcir46783.2024.10631478,19,C. Kuan,1,primary,Intel Corporation,Client Computing Group,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a20-1,vlsitechnologyandcir46783.2024.10631478,20,C. Lin,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a21-1,vlsitechnologyandcir46783.2024.10631478,21,G. Liu,1,primary,Intel Corporation,Design Engineering Group,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a22-1,vlsitechnologyandcir46783.2024.10631478,22,Y. Ma,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a23-1,vlsitechnologyandcir46783.2024.10631478,23,G. Mcpherson,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a24-1,vlsitechnologyandcir46783.2024.10631478,24,S. Mokler,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a25-1,vlsitechnologyandcir46783.2024.10631478,25,C. Perini,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a26-1,vlsitechnologyandcir46783.2024.10631478,26,R. Ramaswamy,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a27-1,vlsitechnologyandcir46783.2024.10631478,27,B. Sell,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a28-1,vlsitechnologyandcir46783.2024.10631478,28,R. Subramaniam,1,primary,Intel Corporation,Design Engineering Group,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a29-1,vlsitechnologyandcir46783.2024.10631478,29,J. Waldemer,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a30-1,vlsitechnologyandcir46783.2024.10631478,30,D. Wei,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a31-1,vlsitechnologyandcir46783.2024.10631478,31,Y. Yang,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a32-1,vlsitechnologyandcir46783.2024.10631478,32,Y. Yang,1,primary,Intel Corporation,Client Computing Group,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a33-1,vlsitechnologyandcir46783.2024.10631478,33,J. Yaung,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a34-1,vlsitechnologyandcir46783.2024.10631478,34,B. Sabi,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+vlsitechnologyandcir46783.2024.10631478-a35-1,vlsitechnologyandcir46783.2024.10631478,35,S. Natarajan,1,primary,Intel Corporation,Technology Development,"Hillsboro, Oregon",US,single printed location line shared by all three units,paper,p.1 affiliations (page render; text layer garbled)
+icept59018.2023.10492317-a01-1,icept59018.2023.10492317,1,Bin GU,1,primary,STMicroelectronics,,Singapore,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+icept59018.2023.10492317-a02-1,icept59018.2023.10492317,2,Jing-en LUAN,1,primary,STMicroelectronics,,Singapore,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+icept59018.2023.10492317-a03-1,icept59018.2023.10492317,3,Daniela SPINI,1,primary,STMicroelectronics,,Agrate,IT,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+icept59018.2023.10492317-a04-1,icept59018.2023.10492317,4,Samuele ZALAFFI,1,primary,STMicroelectronics,,Agrate,IT,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+icept59018.2023.10492317-a05-1,icept59018.2023.10492317,5,Marco Rovitto,1,primary,STMicroelectronics,,Agrate,IT,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+icept59018.2023.10492317-a06-1,icept59018.2023.10492317,6,Chun-hao CHEN,1,primary,STMicroelectronics,,Muar,MY,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51687.2025.00049-a01-1,ectc51687.2025.00049,1,Thomas Lesueur,1,primary,Université de Sherbrooke,Institut Interdisciplinaire d'Innovation Technologique (3IT),Sherbrooke,CA,,paper,p.1 affiliations
+ectc51687.2025.00049-a01-2,ectc51687.2025.00049,1,Thomas Lesueur,2,additional,CNRS,Laboratoire Nanotechnologies Nanosystèmes (LN2),Sherbrooke,CA,"printed in same block as 3IT, Université de Sherbrooke",paper,p.1 affiliations
+ectc51687.2025.00049-a02-1,ectc51687.2025.00049,2,David Danovitch,1,primary,Université de Sherbrooke,Institut Interdisciplinaire d'Innovation Technologique (3IT),Sherbrooke,CA,,paper,p.1 affiliations
+ectc51687.2025.00049-a02-2,ectc51687.2025.00049,2,David Danovitch,2,additional,CNRS,Laboratoire Nanotechnologies Nanosystèmes (LN2),Sherbrooke,CA,"printed in same block as 3IT, Université de Sherbrooke",paper,p.1 affiliations
+ectc51687.2025.00049-a03-1,ectc51687.2025.00049,3,Dominique Drouin,1,primary,Université de Sherbrooke,Institut Interdisciplinaire d'Innovation Technologique (3IT),Sherbrooke,CA,,paper,p.1 affiliations
+ectc51687.2025.00049-a03-2,ectc51687.2025.00049,3,Dominique Drouin,2,additional,CNRS,Laboratoire Nanotechnologies Nanosystèmes (LN2),Sherbrooke,CA,"printed in same block as 3IT, Université de Sherbrooke",paper,p.1 affiliations
+ectc51687.2025.00049-a04-1,ectc51687.2025.00049,4,Isabel de Sousa,1,primary,IBM,IBM Canada,Bromont,CA,,paper,p.1 affiliations
+ectc51687.2025.00049-a05-1,ectc51687.2025.00049,5,Divya Taneja,1,primary,IBM,IBM Canada,Bromont,CA,,paper,p.1 affiliations
+ectc51687.2025.00049-a06-1,ectc51687.2025.00049,6,Akihiro Horibe,1,primary,IBM,IBM Research - Tokyo,Kawasaki,JP,,paper,p.1 affiliations
+ectc51687.2025.00049-a07-1,ectc51687.2025.00049,7,Sayuri Kohara,1,primary,IBM,IBM Research - Tokyo,Kawasaki,JP,,paper,p.1 affiliations
+eptc59621.2023.10457912-a01-1,eptc59621.2023.10457912,1,Tran Van Nhat Anh,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,,paper,p.1 affiliations (page render; text layer garbled)
+eptc59621.2023.10457912-a02-1,eptc59621.2023.10457912,2,Nandini Venkataraman,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,,paper,p.1 affiliations (page render; text layer garbled)
+eptc59621.2023.10457912-a03-1,eptc59621.2023.10457912,3,Meng Tao,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,,paper,p.1 affiliations (page render; text layer garbled)
+eptc59621.2023.10457912-a04-1,eptc59621.2023.10457912,4,Tseng Ya-Ching,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,,paper,p.1 affiliations (page render; text layer garbled)
+eptc59621.2023.10457912-a05-1,eptc59621.2023.10457912,5,Wang Xiangyu,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,,paper,p.1 affiliations (page render; text layer garbled)
+eptc59621.2023.10457912-a06-1,eptc59621.2023.10457912,6,Chui King-Jien,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,,paper,p.1 affiliations (page render; text layer garbled)
+eptc59621.2023.10457912-a07-1,eptc59621.2023.10457912,7,Navab Singh,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,,paper,p.1 affiliations (page render; text layer garbled)
+eptc59621.2023.10457912-a08-1,eptc59621.2023.10457912,8,Vempati Srinivasa Rao,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,,paper,p.1 affiliations (page render; text layer garbled)
+ectc51906.2022.00053-a01-1,ectc51906.2022.00053,1,Yoshiaki Satake,1,primary,Tokyo Institute of Technology,,Kanagawa,JP,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations (page render; text layer garbled)
+ectc51906.2022.00053-a01-2,ectc51906.2022.00053,1,Yoshiaki Satake,2,additional,Murata Manufacturing,,Kyoto,JP,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations (page render; text layer garbled)
+ectc51906.2022.00053-a02-1,ectc51906.2022.00053,2,Tatsuya Funaki,1,primary,Tokyo Institute of Technology,,Kanagawa,JP,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations (page render; text layer garbled)
+ectc51906.2022.00053-a02-2,ectc51906.2022.00053,2,Tatsuya Funaki,2,additional,Murata Manufacturing,,Kyoto,JP,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations (page render; text layer garbled)
+ectc51906.2022.00053-a03-1,ectc51906.2022.00053,3,Kyosuke Kobinata,1,primary,Tokyo Institute of Technology,,Kanagawa,JP,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations (page render; text layer garbled)
+ectc51906.2022.00053-a03-2,ectc51906.2022.00053,3,Kyosuke Kobinata,2,additional,DISCO Corporation,,Tokyo,JP,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations (page render; text layer garbled)
+ectc51906.2022.00053-a04-1,ectc51906.2022.00053,4,Hitoshi Matsuno,1,primary,Tokyo Institute of Technology,,Kanagawa,JP,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations (page render; text layer garbled)
+ectc51906.2022.00053-a04-2,ectc51906.2022.00053,4,Hitoshi Matsuno,2,additional,Murata Manufacturing,,Kyoto,JP,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations (page render; text layer garbled)
+ectc51906.2022.00053-a05-1,ectc51906.2022.00053,5,Seiji Hidaka,1,primary,Murata Manufacturing,,Kyoto,JP,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations (page render; text layer garbled)
+ectc51906.2022.00053-a06-1,ectc51906.2022.00053,6,Shunsuke Abe,1,primary,Tokyo Institute of Technology,,Kanagawa,JP,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations (page render; text layer garbled)
+ectc51906.2022.00053-a06-2,ectc51906.2022.00053,6,Shunsuke Abe,2,additional,Murata Manufacturing,,Kyoto,JP,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations (page render; text layer garbled)
+ectc51906.2022.00053-a07-1,ectc51906.2022.00053,7,Hiroyuki Ito,1,primary,Tokyo Institute of Technology,,Kanagawa,JP,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations (page render; text layer garbled)
+ectc51906.2022.00053-a08-1,ectc51906.2022.00053,8,Chih-Cheng Hsiao,1,primary,Industrial Technology Research Institute,,Hsinchu,TW,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations (page render; text layer garbled)
+ectc51906.2022.00053-a09-1,ectc51906.2022.00053,9,Sheng Yi Li,1,primary,Industrial Technology Research Institute,,Hsinchu,TW,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations (page render; text layer garbled)
+ectc51906.2022.00053-a10-1,ectc51906.2022.00053,10,Youngsuk Kim,1,primary,Tokyo Institute of Technology,,Kanagawa,JP,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations (page render; text layer garbled)
+ectc51906.2022.00053-a10-2,ectc51906.2022.00053,10,Youngsuk Kim,2,additional,DISCO Corporation,,Tokyo,JP,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations (page render; text layer garbled)
+ectc51906.2022.00053-a11-1,ectc51906.2022.00053,11,Takayuki Ohba,1,primary,Tokyo Institute of Technology,,Kanagawa,JP,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations (page render; text layer garbled)
+ectc51529.2024.00125-a01-1,ectc51529.2024.00125,1,Wei-Ming Wang,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00125-a02-1,ectc51529.2024.00125,2,C.W. Yeh,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00125-a03-1,ectc51529.2024.00125,3,Han-Jong Chia,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00125-a04-1,ectc51529.2024.00125,4,R.F. Tsui,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00125-a05-1,ectc51529.2024.00125,5,Ji James Cui,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00125-a06-1,ectc51529.2024.00125,6,Chih-Hang Tung,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00125-a07-1,ectc51529.2024.00125,7,Kuo-Chung Yee,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00125-a08-1,ectc51529.2024.00125,8,Douglas C.H. Yu,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51687.2025.00007-a01-1,ectc51687.2025.00007,1,Jong-Yeon Kim,1,primary,SK hynix,,Ichon-si,KR,printed: Rebublic of Korea (sic),paper,p.1 affiliations
+ectc51687.2025.00007-a02-1,ectc51687.2025.00007,2,Jae-Cheol Shim,1,primary,SK hynix,,Ichon-si,KR,printed: Rebublic of Korea (sic),paper,p.1 affiliations
+ectc51687.2025.00007-a03-1,ectc51687.2025.00007,3,Sung-Kyu Kim,1,primary,SK hynix,,Ichon-si,KR,printed: Rebublic of Korea (sic),paper,p.1 affiliations
+ectc51687.2025.00007-a04-1,ectc51687.2025.00007,4,Danee-Cho,1,primary,SK hynix,,Ichon-si,KR,printed: Rebublic of Korea (sic),paper,p.1 affiliations
+ectc51687.2025.00007-a05-1,ectc51687.2025.00007,5,Seung-Chul Han,1,primary,SK hynix,,Ichon-si,KR,printed: Rebublic of Korea (sic),paper,p.1 affiliations
+ectc51687.2025.00007-a06-1,ectc51687.2025.00007,6,Ho-Young Son,1,primary,SK hynix,,Ichon-si,KR,printed: Rebublic of Korea (sic),paper,p.1 affiliations
+ectc51687.2025.00007-a07-1,ectc51687.2025.00007,7,Kangwook Lee,1,primary,SK hynix,,Ichon-si,KR,printed: Rebublic of Korea (sic),paper,p.1 affiliations
+ectc51529.2024.00011-a01-1,ectc51529.2024.00011,1,Jacinta Aman Lim,1,primary,Nepes,,San Diego,US,printed: nepes Corporation,paper,p.1 affiliations (page render; absent from text layer)
+ectc51529.2024.00011-a02-1,ectc51529.2024.00011,2,Jane Lee,1,primary,Nepes,,San Diego,US,printed: nepes Corporation,paper,p.1 affiliations (page render; absent from text layer)
+ectc51529.2024.00011-a03-1,ectc51529.2024.00011,3,Hyun-Jin Shin,1,primary,Nepes,,Chungcheongbuk-do,KR,printed: nepes Corporation; locality is a province as printed,paper,p.1 affiliations (page render; absent from text layer)
+ectc51529.2024.00011-a04-1,ectc51529.2024.00011,4,YunMook Park,1,primary,Nepes,,Chungcheongbuk-do,KR,printed: nepes Corporation; locality is a province as printed,paper,p.1 affiliations (page render; absent from text layer)
+ectc51529.2024.00011-a05-1,ectc51529.2024.00011,5,Robin Davis,1,primary,Deca Technologies,,Tempe,US,printed: DECA,paper,p.1 affiliations (page render; absent from text layer)
+ectc51529.2024.00011-a06-1,ectc51529.2024.00011,6,YoungMo Lee,1,primary,Nepes,,Chungcheongbuk-do,KR,printed: nepes Corporation; locality is a province as printed,paper,p.1 affiliations (page render; absent from text layer)
+ectc51529.2024.00011-a07-1,ectc51529.2024.00011,7,Brett Dunlap,1,primary,Nepes,,"Phoenix, AZ",US,printed: nepes Corporation; country from printed city,paper,p.1 affiliations (page render; absent from text layer)
+ectc51846.2026.00035-a01-1,ectc51846.2026.00035,1,Shinichi Arioka,1,primary,AOI Electronics,,Takamatsu,JP,,paper,p.1 affiliations
+ectc51846.2026.00035-a02-1,ectc51846.2026.00035,2,Tanapun Srichanthamit,1,primary,AOI Electronics,,Tokyo,JP,,paper,p.1 affiliations
+ectc51846.2026.00035-a03-1,ectc51846.2026.00035,3,Koji Iwabu,1,primary,AOI Electronics,,Takamatsu,JP,,paper,p.1 affiliations
+ectc51846.2026.00035-a04-1,ectc51846.2026.00035,4,Takashi Suzuki,1,primary,AOI Electronics,,Takamatsu,JP,,paper,p.1 affiliations
+ectc51846.2026.00035-a05-1,ectc51846.2026.00035,5,Yoshiaki Aizawa,1,primary,AOI Electronics,,Takamatsu,JP,,paper,p.1 affiliations
+ectc51846.2026.00035-a06-1,ectc51846.2026.00035,6,Yoichiro Kurita,1,primary,Institute of Science Tokyo,,Yokohama,JP,,paper,p.1 affiliations
+ectc51909.2023.00230-a01-1,ectc51909.2023.00230,1,Bogdan Sirbu,1,primary,Fraunhofer IZM,,Berlin,DE,,paper,p.1 affiliations
+ectc51909.2023.00230-a02-1,ectc51909.2023.00230,2,Kai Zoschke,1,primary,Fraunhofer IZM,,Berlin,DE,,paper,p.1 affiliations
+ectc51909.2023.00230-a03-1,ectc51909.2023.00230,3,Stéphane Bernabé,1,primary,CEA-Leti,,Grenoble,FR,,paper,p.1 affiliations
+ectc51909.2023.00230-a04-1,ectc51909.2023.00230,4,Quentin Wilmart,1,primary,CEA-Leti,,Grenoble,FR,,paper,p.1 affiliations
+ectc51909.2023.00230-a05-1,ectc51909.2023.00230,5,Tolga Tekin,1,primary,Fraunhofer IZM,,Berlin,DE,,paper,p.1 affiliations
+eptc59621.2023.10457612-a01-1,eptc59621.2023.10457612,1,Lau Boon Long,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,,paper,p.1 affiliations (page render; text layer garbled)
+eptc59621.2023.10457612-a02-1,eptc59621.2023.10457612,2,Javier Ong,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,,paper,p.1 affiliations (page render; text layer garbled)
+eptc59621.2023.10457612-a03-1,eptc59621.2023.10457612,3,Jason Au,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,,paper,p.1 affiliations (page render; text layer garbled)
+eptc59621.2023.10457612-a04-1,eptc59621.2023.10457612,4,Jong Ming Chinq,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,printed: Chinq; likely Ching,paper,p.1 affiliations (page render; text layer garbled)
+eptc59621.2023.10457612-a05-1,eptc59621.2023.10457612,5,Zhang Xiaowu,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,,paper,p.1 affiliations (page render; text layer garbled)
+eptc59621.2023.10457612-a06-1,eptc59621.2023.10457612,6,Feng Huicheng,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,,paper,p.1 affiliations (page render; text layer garbled)
+ectc51529.2024.00017-a01-1,ectc51529.2024.00017,1,Yi Shi,1,primary,Intel Corporation,,"Chandler, Arizona",US,,paper,p.1 affiliations
+ectc51529.2024.00017-a02-1,ectc51529.2024.00017,2,Haris Khan Niazi,1,primary,Intel Corporation,,"Chandler, Arizona",US,,paper,p.1 affiliations
+ectc51529.2024.00017-a03-1,ectc51529.2024.00017,3,Michael A. Rosshirt,1,primary,Intel Corporation,,"Chandler, Arizona",US,,paper,p.1 affiliations
+ectc51529.2024.00017-a04-1,ectc51529.2024.00017,4,Saritha Kumari Paletti,1,primary,Intel Corporation,,"Hillsboro, Oregon",US,,paper,p.1 affiliations
+ectc51529.2024.00017-a05-1,ectc51529.2024.00017,5,Xavier F. Brun,1,primary,Intel Corporation,,"Chandler, Arizona",US,,paper,p.1 affiliations
+ectc51687.2025.00141-a01-1,ectc51687.2025.00141,1,Syuto Tamura,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51687.2025.00141-a02-1,ectc51687.2025.00141,2,Junichiro Fujimagari,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51687.2025.00141-a03-1,ectc51687.2025.00141,3,Yuji Uesugi,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51687.2025.00141-a04-1,ectc51687.2025.00141,4,Takuji Matsumoto,1,primary,Sony Semiconductor Manufacturing Corporation,,Kumamoto,JP,,paper,p.1 affiliations
+ectc51687.2025.00141-a05-1,ectc51687.2025.00141,5,Kenta Fukushima,1,primary,Sony Semiconductor Manufacturing Corporation,,Kumamoto,JP,,paper,p.1 affiliations
+ectc51687.2025.00141-a06-1,ectc51687.2025.00141,6,Kota Maruyama,1,primary,Sony Semiconductor Manufacturing Corporation,,Kumamoto,JP,,paper,p.1 affiliations
+ectc51687.2025.00141-a07-1,ectc51687.2025.00141,7,Kentaro Akiyama,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+estc60143.2024.10712129-a01-1,estc60143.2024.10712129,1,Kei Togasaki,1,primary,Resonac Corporation,,Kawasaki,JP,,paper,p.1 affiliations
+estc60143.2024.10712129-a02-1,estc60143.2024.10712129,2,Sadaaki Katoh,1,primary,Resonac Corporation,,Kawasaki,JP,,paper,p.1 affiliations
+estc60143.2024.10712129-a03-1,estc60143.2024.10712129,3,Masashi Minami,1,primary,Resonac Corporation,,Kawasaki,JP,,paper,p.1 affiliations
+estc60143.2024.10712129-a04-1,estc60143.2024.10712129,4,Dongchul Kang,1,primary,Resonac Corporation,,Kawasaki,JP,,paper,p.1 affiliations
+itherm55368.2023.10177502-a01-1,itherm55368.2023.10177502,1,Xiaoliang Zhao,1,primary,Peking University,School of Software and Microelectronics,Beijing,CN,,paper,p.1 affiliations
+itherm55368.2023.10177502-a02-1,itherm55368.2023.10177502,2,Penghuai Shu,1,primary,Peking University,School of Software and Microelectronics,Beijing,CN,,paper,p.1 affiliations
+itherm55368.2023.10177502-a03-1,itherm55368.2023.10177502,3,Wei Li,1,primary,Peking University,School of Software and Microelectronics,Beijing,CN,,paper,p.1 affiliations
+itherm55368.2023.10177502-a04-1,itherm55368.2023.10177502,4,Zhenyu Wang,1,primary,Peking University,School of Software and Microelectronics,Beijing,CN,,paper,p.1 affiliations
+itherm55368.2023.10177502-a05-1,itherm55368.2023.10177502,5,Xiaobin Zhang,1,primary,"Institute of Microelectronics, Chinese Academy of Sciences",,Beijing,CN,,paper,p.1 affiliations
+ectc51687.2025.00323-a01-1,ectc51687.2025.00323,1,Akihiro Urata,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51687.2025.00323-a02-1,ectc51687.2025.00323,2,Takahiro Kamei,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51687.2025.00323-a03-1,ectc51687.2025.00323,3,Itsuki Imanishi,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51687.2025.00323-a04-1,ectc51687.2025.00323,4,Masanori Chiyozono,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51687.2025.00323-a05-1,ectc51687.2025.00323,5,Toru Osako,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51687.2025.00323-a06-1,ectc51687.2025.00323,6,Kan Shimizu,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51687.2025.00323-a07-1,ectc51687.2025.00323,7,Yoshihisa Kagawa,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51687.2025.00323-a08-1,ectc51687.2025.00323,8,Hayato Iwamoto,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51846.2026.00062-a01-1,ectc51846.2026.00062,1,Vineeth Harish,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS),"Los Angeles, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00062-a02-1,ectc51846.2026.00062,2,Jui-Han Liu,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS),"Los Angeles, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00062-a03-1,ectc51846.2026.00062,3,Diana Cantini,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS),"Los Angeles, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00062-a04-1,ectc51846.2026.00062,4,Samuel Wang,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS),"Los Angeles, California",US,,paper,p.1 affiliations
+ectc51846.2026.00062-a05-1,ectc51846.2026.00062,5,Goutham Ezhilarasu,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS),"Los Angeles, California",US,,paper,p.1 affiliations
+ectc51846.2026.00062-a06-1,ectc51846.2026.00062,6,Anton Turpault,1,primary,Kulicke & Soffa,,"Fort Washington, PA",US,"printed: Kulicke & Soffa Industries, Inc.",paper,p.1 affiliations
+ectc51846.2026.00062-a07-1,ectc51846.2026.00062,7,Adeel Bajwa,1,primary,Kulicke & Soffa,,"Fort Washington, PA",US,"printed: Kulicke & Soffa Industries, Inc.",paper,p.1 affiliations
+ectc51846.2026.00062-a08-1,ectc51846.2026.00062,8,Subramanian S. Iyer,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (UCLA CHIPS),"Los Angeles, CA",US,,paper,p.1 affiliations
+eptc62800.2024.10909872-a01-1,eptc62800.2024.10909872,1,Jieun Park,1,primary,Samsung Electronics,,Cheonan-si,KR,,paper,p.1 affiliations
+eptc62800.2024.10909872-a02-1,eptc62800.2024.10909872,2,DaHee Kim,1,primary,Samsung Electronics,,Cheonan-si,KR,,paper,p.1 affiliations
+eptc62800.2024.10909872-a03-1,eptc62800.2024.10909872,3,Jaeyoung Choi,1,primary,Samsung Electronics,,Cheonan-si,KR,,paper,p.1 affiliations
+eptc62800.2024.10909872-a04-1,eptc62800.2024.10909872,4,Wooseok Park,1,primary,Samsung Electronics,,Cheonan-si,KR,,paper,p.1 affiliations
+eptc62800.2024.10909872-a05-1,eptc62800.2024.10909872,5,Younchan Choi,1,primary,Samsung Electronics,,Cheonan-si,KR,,paper,p.1 affiliations
+eptc62800.2024.10909872-a06-1,eptc62800.2024.10909872,6,Jeongho Lee,1,primary,Samsung Electronics,,Cheonan-si,KR,,paper,p.1 affiliations
+eptc62800.2024.10909872-a07-1,eptc62800.2024.10909872,7,Wonkyoung Choi,1,primary,Samsung Electronics,,Cheonan-si,KR,,paper,p.1 affiliations
+eptc62800.2024.10909872-a08-1,eptc62800.2024.10909872,8,Dae-Woo Kim,1,primary,Samsung Electronics,,Cheonan-si,KR,,paper,p.1 affiliations
+ectc51529.2024.00258-a01-1,ectc51529.2024.00258,1,Ya-Ching Tseng,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51529.2024.00258-a03-1,ectc51529.2024.00258,3,Simon Chun Kiat Goh,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51529.2024.00258-a04-1,ectc51529.2024.00258,4,Daniel Lau,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51529.2024.00258-a05-1,ectc51529.2024.00258,5,Hongyu Li,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51529.2024.00258-a06-1,ectc51529.2024.00258,6,Tran Van Nhat Anh,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51529.2024.00258-a07-1,ectc51529.2024.00258,7,Haitao Yu,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51529.2024.00258-a08-1,ectc51529.2024.00258,8,Chin Khang Tew,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51529.2024.00258-a09-1,ectc51529.2024.00258,9,Gim Guan Chen,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51529.2024.00258-a10-1,ectc51529.2024.00258,10,Binni Varghese,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51529.2024.00258-a11-1,ectc51529.2024.00258,11,Calvin Chua Hung Ming,1,primary,"Institute of Microelectronics, A*STAR",,Singapore,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51687.2025.00055-a01-1,ectc51687.2025.00055,1,Terry Ku,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,printed: TSMC,paper,p.1 affiliations
+ectc51687.2025.00055-a02-1,ectc51687.2025.00055,2,C.H. Tsai,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,printed: TSMC,paper,p.1 affiliations
+ectc51687.2025.00055-a03-1,ectc51687.2025.00055,3,R.F. Tsui,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,printed: TSMC,paper,p.1 affiliations
+ectc51687.2025.00055-a04-1,ectc51687.2025.00055,4,J.C. Twu,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,printed: TSMC,paper,p.1 affiliations
+ectc51687.2025.00055-a05-1,ectc51687.2025.00055,5,S.W. Lu,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,printed: TSMC,paper,p.1 affiliations
+ectc51687.2025.00055-a06-1,ectc51687.2025.00055,6,C.C. Hsieh,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,printed: TSMC,paper,p.1 affiliations
+ectc51687.2025.00055-a07-1,ectc51687.2025.00055,7,C.S. Liu,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,printed: TSMC,paper,p.1 affiliations
+ectc51687.2025.00055-a08-1,ectc51687.2025.00055,8,Douglas C.H. Yu,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,printed: TSMC,paper,p.1 affiliations
+ectc51846.2026.00227-a01-1,ectc51846.2026.00227,1,Mohammed Alhendi,1,primary,IBM,IBM Research,"Albany, NY",US,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a02-1,ectc51846.2026.00227,2,Luke Darling,1,primary,IBM,IBM Research,"Albany, NY",US,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a03-1,ectc51846.2026.00227,3,Roy Yu,1,primary,IBM,IBM Research,"Albany, NY",US,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a04-1,ectc51846.2026.00227,4,Neng Liu,1,primary,IBM,IBM Research,"Albany, NY",US,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a05-1,ectc51846.2026.00227,5,Ming Li,1,primary,ASMPT,ASMPT Singapore Pte. Ltd,Yishun,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a06-1,ectc51846.2026.00227,6,Zetao Ma,1,primary,ASMPT,ASMPT Singapore Pte. Ltd,Yishun,SG,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a07-1,ectc51846.2026.00227,7,Kai Ming Yeung,1,primary,ASMPT,ASMPT Technology Hong Kong Limited,Tsing Yi,HK,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a08-1,ectc51846.2026.00227,8,Le Cheng,1,primary,ASMPT,ASMPT Technology Hong Kong Limited,Tsing Yi,HK,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51846.2026.00227-a09-1,ectc51846.2026.00227,9,Katsuyuki Sakuma,1,primary,IBM,IBM Research,"Albany, NY",US,"byline order read row-major from grid; text-layer order is column-major, so order is ambiguous",paper,p.1 affiliations
+ectc51529.2024.00087-a01-1,ectc51529.2024.00087,1,Francoise Angoua,1,primary,Intel Corporation,Substrate Packaging Technology Development; Assembly and Test Technology Development,"Chandler, Arizona",US,shared block lists two units; per-author unit not printed,paper,p.1 affiliations
+ectc51529.2024.00087-a02-1,ectc51529.2024.00087,2,Aaditya Candadai,1,primary,Intel Corporation,Substrate Packaging Technology Development; Assembly and Test Technology Development,"Chandler, Arizona",US,shared block lists two units; per-author unit not printed,paper,p.1 affiliations
+ectc51529.2024.00087-a03-1,ectc51529.2024.00087,3,Daniel Rosales-Yeomans,1,primary,Intel Corporation,Substrate Packaging Technology Development; Assembly and Test Technology Development,"Chandler, Arizona",US,shared block lists two units; per-author unit not printed,paper,p.1 affiliations
+ectc51529.2024.00087-a04-1,ectc51529.2024.00087,4,Yosef Kornbluth,1,primary,Intel Corporation,Substrate Packaging Technology Development; Assembly and Test Technology Development,"Chandler, Arizona",US,shared block lists two units; per-author unit not printed,paper,p.1 affiliations
+ectc51529.2024.00087-a05-1,ectc51529.2024.00087,5,Dilan Seneviratne,1,primary,Intel Corporation,Substrate Packaging Technology Development; Assembly and Test Technology Development,"Chandler, Arizona",US,shared block lists two units; per-author unit not printed,paper,p.1 affiliations
+ectc51529.2024.00087-a06-1,ectc51529.2024.00087,6,Rahul Manepalli,1,primary,Intel Corporation,Substrate Packaging Technology Development; Assembly and Test Technology Development,"Chandler, Arizona",US,shared block lists two units; per-author unit not printed,paper,p.1 affiliations
+ectc51846.2026.00183-a01-1,ectc51846.2026.00183,1,Yukako Ikegami,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51846.2026.00183-a02-1,ectc51846.2026.00183,2,Ken Arano,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51846.2026.00183-a03-1,ectc51846.2026.00183,3,Masanori Chiyozono,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51846.2026.00183-a04-1,ectc51846.2026.00183,4,Kengo Kotoo,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51846.2026.00183-a05-1,ectc51846.2026.00183,5,Kan Shimizu,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51846.2026.00183-a06-1,ectc51846.2026.00183,6,Yoshihisa Kagawa,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+tcpmt.2026.3650893-a01-1,tcpmt.2026.3650893,1,Madison Manley,1,primary,Georgia Institute of Technology,School of Electrical and Computer Engineering,"Atlanta, GA",US,,paper,p.1 footnote
+tcpmt.2026.3650893-a02-1,tcpmt.2026.3650893,2,Rohan Sahay,1,primary,Georgia Institute of Technology,School of Electrical and Computer Engineering,"Atlanta, GA",US,,paper,p.1 footnote
+tcpmt.2026.3650893-a03-1,tcpmt.2026.3650893,3,Dipayan Pal,1,primary,"University of California, San Diego",Department of Chemistry and Biochemistry,"La Jolla, CA",US,,paper,p.1 footnote
+tcpmt.2026.3650893-a04-1,tcpmt.2026.3650893,4,Ashita Victor,1,primary,Georgia Institute of Technology,School of Electrical and Computer Engineering,"Atlanta, GA",US,,paper,p.1 footnote
+tcpmt.2026.3650893-a05-1,tcpmt.2026.3650893,5,Danish Baig,1,primary,Georgia Institute of Technology,School of Electrical and Computer Engineering,"Atlanta, GA",US,,paper,p.1 footnote
+tcpmt.2026.3650893-a06-1,tcpmt.2026.3650893,6,Jit Dutta,1,primary,"University of California, San Diego",Department of Chemistry and Biochemistry,"La Jolla, CA",US,,paper,p.1 footnote
+tcpmt.2026.3650893-a07-1,tcpmt.2026.3650893,7,Andrew C. Kummel,1,primary,"University of California, San Diego",Department of Chemistry and Biochemistry,"La Jolla, CA",US,,paper,p.1 footnote
+tcpmt.2026.3650893-a08-1,tcpmt.2026.3650893,8,Muhannad S. Bakir,1,primary,Georgia Institute of Technology,School of Electrical and Computer Engineering,"Atlanta, GA",US,footnote prints Muhannad Bakir,paper,p.1 footnote
+ectc51529.2024.00321-a01-1,ectc51529.2024.00321,1,Katsuaki To,1,primary,Resonac Corporation,Packaging Solution Center,Kawasaki,JP,,paper,p.1 affiliations
+ectc51529.2024.00321-a02-1,ectc51529.2024.00321,2,Masashi Minami,1,primary,Resonac Corporation,Packaging Solution Center,Kawasaki,JP,,paper,p.1 affiliations
+ectc51529.2024.00321-a03-1,ectc51529.2024.00321,3,Daisuke Yamanaka,1,primary,Resonac Corporation,Packaging Solution Center,Kawasaki,JP,,paper,p.1 affiliations
+ectc51529.2024.00321-a04-1,ectc51529.2024.00321,4,Shan Ho Tsai,1,primary,Resonac Corporation,Packaging Solution Center,Kawasaki,JP,,paper,p.1 affiliations
+ectc51529.2024.00321-a05-1,ectc51529.2024.00321,5,Takahiro Iseki,1,primary,Resonac Corporation,Packaging Solution Center,Kawasaki,JP,,paper,p.1 affiliations
+ectc51529.2024.00321-a06-1,ectc51529.2024.00321,6,Sadaaki Katoh,1,primary,Resonac Corporation,Packaging Solution Center,Kawasaki,JP,,paper,p.1 affiliations
+ectc51846.2026.00130-a01-1,ectc51846.2026.00130,1,Ying Trickett,1,primary,Applied Materials,,"Albany, NY",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a02-1,ectc51846.2026.00130,2,Roger Quon,1,primary,Applied Materials,,"Albany, NY",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a03-1,ectc51846.2026.00130,3,Yoocharn Jeon,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a04-1,ectc51846.2026.00130,4,Amit Prakash,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a05-1,ectc51846.2026.00130,5,Raghav Sreenivasan,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a06-1,ectc51846.2026.00130,6,Raghuveer Patlolla,1,primary,Applied Materials,,"Albany, NY",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a07-1,ectc51846.2026.00130,7,Joan Chung,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a08-1,ectc51846.2026.00130,8,Ju Seon Goo,1,primary,Applied Materials,,,KR,no city printed; printed: South Korea,paper,p.1 affiliations
+ectc51846.2026.00130-a09-1,ectc51846.2026.00130,9,Sang Jin Kim,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a10-1,ectc51846.2026.00130,10,Norman Tam,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a11-1,ectc51846.2026.00130,11,Shashank Sharma,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a12-1,ectc51846.2026.00130,12,Jeremiah Hebding,1,primary,Applied Materials,,"Albany, NY",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a13-1,ectc51846.2026.00130,13,Siddarth Krishnan,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a14-1,ectc51846.2026.00130,14,Michael Chudzik,1,primary,Applied Materials,,"Santa Clara, CA",US,,paper,p.1 affiliations
+ectc51846.2026.00130-a15-1,ectc51846.2026.00130,15,Barabara Weis,1,primary,EV Group,,St. Florian am Inn,AT,,paper,p.1 affiliations
+ectc51846.2026.00130-a16-1,ectc51846.2026.00130,16,David Goldberger,1,primary,EV Group,,St. Florian am Inn,AT,,paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577576-a01-1,vlsitechnologyandcir65830.2026.11577576,1,Yeontaek Hwang,1,primary,SK hynix,SK hynix America Inc.,San Jose,US,,paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577576-a02-1,vlsitechnologyandcir65830.2026.11577576,2,Jongkyu Moon,1,primary,SK hynix,,Icheon,KR,superscript 1 not rendered before SK hynix Inc.; mapped by elimination,paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577576-a03-1,vlsitechnologyandcir65830.2026.11577576,3,Juheon Yang,1,primary,SK hynix,,Icheon,KR,superscript 1 not rendered before SK hynix Inc.; mapped by elimination,paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577576-a04-1,vlsitechnologyandcir65830.2026.11577576,4,Kyoungmoo Harr,1,primary,SK hynix,,Icheon,KR,superscript 1 not rendered before SK hynix Inc.; mapped by elimination,paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577576-a05-1,vlsitechnologyandcir65830.2026.11577576,5,Minseok Jang,1,primary,SK hynix,,Icheon,KR,superscript 1 not rendered before SK hynix Inc.; mapped by elimination,paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577576-a06-1,vlsitechnologyandcir65830.2026.11577576,6,Jinwoo Choi,1,primary,SK hynix,SK hynix America Inc.,San Jose,US,,paper,p.1 affiliations
+vlsitechnologyandcir65830.2026.11577576-a07-1,vlsitechnologyandcir65830.2026.11577576,7,Jaesik Lee,1,primary,SK hynix,SK hynix America Inc.,San Jose,US,,paper,p.1 affiliations
+icep61562.2024.10535587-a01-1,icep61562.2024.10535587,1,Ping-Ching Shen,1,primary,Advanced Semiconductor Engineering,,Kaohsiung,TW,"printed: Advanced Semiconductor Engineering, Inc.",paper,p.1 affiliations
+icep61562.2024.10535587-a02-1,icep61562.2024.10535587,2,Sheng-Feng Huang,1,primary,Advanced Semiconductor Engineering,,Kaohsiung,TW,"printed: Advanced Semiconductor Engineering, Inc.",paper,p.1 affiliations
+icep61562.2024.10535587-a03-1,icep61562.2024.10535587,3,Ping-Feng Yang,1,primary,Advanced Semiconductor Engineering,,Kaohsiung,TW,"printed: Advanced Semiconductor Engineering, Inc.",paper,p.1 affiliations
+icep61562.2024.10535587-a04-1,icep61562.2024.10535587,4,Jen-Kuang Fang,1,primary,Advanced Semiconductor Engineering,,Kaohsiung,TW,"printed: Advanced Semiconductor Engineering, Inc.",paper,p.1 affiliations
