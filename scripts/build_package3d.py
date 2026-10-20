@@ -25,8 +25,11 @@ Template format (summary; the .md file is the full reference)
   callouts: {target, text (<= 6 words) and note (tooltip) with "{param}" placeholders, refs: ["<row>.<field>"]}.
   insets:   {id, label, box_mm: [x0, y0, x1, y1] (view framing), z: ["bottom:<part|array>", "top:<part|array>"],
             view}.
-  modules / use: named reusable blocks {params, parts, layers, arrays, callouts}; `use: [{module, from?, drop?,
-            rename?}]` merges them, the template winning on params, ids and layer hosts.
+  modules / use: named reusable blocks {params, parts, layers, arrays, callouts, routing}; `use: [{module, from?,
+            drop?, rename?}]` merges them, the template winning on params, ids and layer hosts.
+  routing:  layer `route: {use, dir, line_um, space_um, matrix, fill?}` on conductor layers; family `routing:
+            {layout_note, vias: [{id, kind, through, diameter_um, ...}], nets: [{id, kind, from, to?, share, ...}]}`
+            (DevLog-011). Net `share` / `length_um` may be bare numbers (template dims noted with layout_note).
 
 Dimension specs (no silent numbers: a bare number is rejected)
   {ref: "<row_id>.<field>"}                      reported: one database cell (exact um <-> mm conversion only)
@@ -77,6 +80,27 @@ PART_REPEAT_KEYS = {"nx", "ny", "pitch_x_mm", "pitch_y_mm", "nz", "pitch_um", "s
 MATCH_LIST_KEYS = ("cls", "cls_only", "papers", "tvs", "ic_level", "excl_papers", "excl_tvs")
 MATCH_RE_KEYS = ("tn", "excl")
 FAMILIES_RULE_KEYS = "tn|cls|cls_only|papers|ic_level|excl|excl_papers"
+# routing (DevLog-011): layer `route` and family `routing`
+ROUTE_KEYS = {"use", "dir", "line_um", "space_um", "matrix", "fill"}
+ROUTE_USES = {"signal", "plane", "pad", "mixed"}
+ROUTE_LS_USES = {"signal", "mixed"}  # uses that need line/space and a direction
+ROUTE_DIRS = {"x", "y", "alt"}
+ROUTE_FILL_DEFAULT = {"plane": 0.85, "pad": 0.5}
+ROUTING_KEYS = {"layout_note", "vias", "nets"}
+VIA_KINDS = {"microvia", "rdl_via", "beol_via", "pth", "tsv", "tgv", "tdv", "bridge_via", "tmv"}
+VIA_KEYS = {"id", "name", "kind", "through", "diameter_um", "bottom_diameter_um", "land_um", "pitch_um", "fill", "plug",
+            "region", "cluster",
+            "wall_um", "liner_um", "note"}
+VIA_DIMS = ("diameter_um", "bottom_diameter_um", "land_um", "pitch_um", "wall_um", "liner_um")
+VIA_FILLS = {"filled", "conformal", "plugged"}
+VIA_PLUGS = {"resin", "copper", "none"}  # core material of a plugged / conformal via (text, not a dim)
+REGION_KEYS = {"part", "intersect", "subtract", "x_mm", "y_mm", "w_mm", "d_mm"}
+# optional array dims (2026-10-20): landing pad / UBM and SR / passivation opening diameters, solder cap height
+ARRAY_PAD_DIMS = ("pad_um", "opening_um", "cap_h_um")
+CLUSTER_KEYS = {"n", "pitch_um"}
+NET_KINDS = {"vertical", "lateral", "plane_tie", "escape"}
+NET_KEYS = {"id", "kind", "from", "to", "style", "jog", "levels", "plane", "share", "length_um", "note"}
+NET_STYLES = {"stacked", "staggered"}
 
 CONVENTIONS = {
     "xy": "x_mm/y_mm are the footprint CENTER; the package is centered at x = y = 0; w along x, d along y",
@@ -498,6 +522,8 @@ class Refs:
         rid_, fld = key.rsplit(".", 1)
         tv = self.db.tv_of(table, row)
         pid = row.get("paper_id") or (tv or {}).get("paper_id", "")
+        if not pid and row.get("flow_id"):  # process_steps rows without a TV: the paper of their flow
+            pid = self.db.flows.get(row["flow_id"], {}).get("paper_id", "")
         paper = self.db.papers.get(pid, {})
         ov = split_pairs(row.get("overrides", ""))
         basis = next((x for x in ov.get(fld, []) if x in BASIS_ENUM), row.get("basis", ""))
@@ -542,6 +568,19 @@ def dim_json(v: Val, refs: Refs) -> dict:
     if v.conv:
         out["conv"] = v.conv
     return out
+
+
+def fill_from_ls(line: Val, space: Val, where: str) -> Val:
+    """Default Cu fill of a signal / mixed route = line / (line + space): derived from reported L/S, template if
+    either input is a template value."""
+    lv, sv = line.num(f"{where}.line_um"), space.num(f"{where}.space_um")
+    tmpl = [n for n, v in (("line_um", line), ("space_um", space)) if v.status == "template"]
+    note = "default fill = line_um / (line_um + space_um)"
+    if tmpl:
+        note += "; computed from template inputs: " + ", ".join(tmpl)
+    return Val(lv / (lv + sv), None, "template" if tmpl else "derived", list(dict.fromkeys(line.cells + space.cells)),
+               note=note, formula="line_um / (line_um + space_um)", values=f"{fmt(lv)} / ({fmt(lv)} + {fmt(sv)})",
+               inputs=list(dict.fromkeys(line.inputs + space.inputs)), template_inputs=tmpl)
 
 
 # ----------------------------------------------------------------------------- geometry
@@ -613,6 +652,10 @@ class Builder:
         self.lz: dict[str, list[tuple[float, float, str, int]]] = {}  # layer (group) id -> (z0, z1, host, level)
         self.counts: dict[str, int] = {"reported": 0, "derived": 0, "template": 0}
         self.template_list: list[str] = []
+        # concrete layer id -> {tid, host, lv, group, role, route, z0, z1}; template / group id -> concrete ids
+        self.lmeta: dict[str, dict[str, Any]] = {}
+        self.ltids: dict[str, list[str]] = {}
+        self.lgroups: dict[str, list[str]] = {}
 
     def count(self, elem: str, dims: dict[str, Val]) -> None:
         for k, v in dims.items():
@@ -775,7 +818,17 @@ class Builder:
         where = f"arrays.{aid}"
         if a.get("kind") not in ARRAY_KINDS:
             raise TemplateError(f"{where}: kind {a.get('kind')!r} not in {sorted(ARRAY_KINDS)}")
-        dims = {k: self.r(a[k], k, f"{where}.{k}") for k in ("pitch_um", "diameter_um", "height_um") if k in a}
+        dims = {k: self.r(a[k], k, f"{where}.{k}") for k in ("pitch_um", "diameter_um", "height_um", *ARRAY_PAD_DIMS)
+                if k in a}
+        for k in ARRAY_PAD_DIMS:
+            if k in dims and dims[k].num(f"{where}.{k}") <= 0:
+                raise TemplateError(f"{where}: {k} must be > 0")
+        if "cap_h_um" in dims:
+            if "height_um" not in dims:
+                raise TemplateError(f"{where}: cap_h_um needs height_um")
+            if dims["cap_h_um"].num(where) >= dims["height_um"].num(where):
+                raise TemplateError(f"{where}: cap_h_um {fmt(dims['cap_h_um'].num(where))} must be < height_um "
+                                    f"{fmt(dims['height_um'].num(where))}")
         if "pitch_um" not in dims:
             raise TemplateError(f"{where}: missing pitch_um")
         if "repeat" in a:
@@ -935,8 +988,11 @@ class Builder:
                     raise TemplateError(f"{where}: missing h_um")
                 if rep is not None:
                     ld["repeat_n"] = rep
-                pats.append((el, ld))
+                rt = self.route_spec(el, where) if "route" in el else None
+                pats.append((el, ld, rt))
                 self.count(f"layer {el['id']}", ld)
+                if rt is not None:
+                    self.count(f"layer {el['id']} route", rt[3])
             layer_groups.append((host, n, pats, gid))
         for tid in self.pdecl:
             self.zpos(tid)
@@ -956,7 +1012,7 @@ class Builder:
                 key = (host, lv)
                 ztop = cursor.get(key, self.itop(linsts[0]))
                 for k in range(1, n + 1):
-                    for el, ld in pats:
+                    for el, ld, rt in pats:
                         h = ld["h_um"].num(el["id"])
                         ztop -= h
                         seq[key] = seq.get(key, 0) + 1
@@ -973,11 +1029,19 @@ class Builder:
                         lo["template_id"] = el["id"]
                         if len(linsts) > 1:  # repeated host: the same stack in every instance of this level
                             lo["instances"] = [i.id for i in linsts]
+                        ro = self.route_json(rt, k) if rt is not None else None
+                        if ro is not None:
+                            lo["route"] = ro
                         lo["dims"] = {kk: dim_json(v, refs) for kk, v in ld.items()}
                         layers_out.append({k2: v2 for k2, v2 in lo.items() if v2 != ""})
                         for name in (el["id"], gid):
                             if name:
                                 self.lz.setdefault(name, []).append((ztop, ztop + h, host, lv))
+                        self.lmeta[lid] = {"tid": el["id"], "host": host, "lv": lv, "group": gid,
+                                           "role": el.get("role", ""), "route": ro, "z0": ztop, "z1": ztop + h}
+                        self.ltids.setdefault(el["id"], []).append(lid)
+                        if gid:
+                            self.lgroups.setdefault(gid, []).append(lid)
                 cursor[key] = ztop
         for (host, lv), zb in cursor.items():
             if lv:
@@ -1017,8 +1081,11 @@ class Builder:
         for ao in arrays_out:
             ao["z_um"] = rnd(ao["z_um"] - zmin)
         self.sanity(parts_out)
+        routing = self.build_routing(tpl["routing"], arrays_out, zmin) if "routing" in tpl else None
         callouts = [self.callout(c) for c in tpl.get("callouts", [])]
         ids = {x[k] for x in parts_out + layers_out + arrays_out for k in ("id", "template_id")}
+        if routing is not None:  # callouts may target via entries / classes and nets
+            ids |= {x.get(k, x["id"]) for x in routing["vias"] + routing["nets"] for k in ("id", "template_id")}
         for c in callouts:
             if c["target"] not in ids:
                 raise TemplateError(f"callout target {c['target']!r} not found")
@@ -1037,7 +1104,323 @@ class Builder:
             "parts": parts_out, "layers": layers_out, "arrays": arrays_out, "callouts": callouts, "insets": insets,
             "params": params_out,
         }
+        if routing is not None:
+            fam["routing"] = routing
         return fam
+
+    # -- routing (DevLog-011)
+    def check_region(self, reg: Any, where: str) -> None:
+        """Via class `region`: {part}, {intersect: [...]}, {subtract: [...]} (combinable) or explicit x/y/w/d specs."""
+        if not isinstance(reg, dict) or not reg:
+            raise TemplateError(f"{where}: want {{part}}, {{intersect: [...]}}, {{subtract: [...]}} or {{x_mm, y_mm, "
+                                f"w_mm, d_mm}}")
+        bad = set(reg) - REGION_KEYS
+        if bad:
+            raise TemplateError(f"{where}: unknown keys {sorted(bad)} (allowed {sorted(REGION_KEYS)})")
+        box = {"x_mm", "y_mm", "w_mm", "d_mm"} & set(reg)
+        if box and (box != {"x_mm", "y_mm", "w_mm", "d_mm"} or set(reg) - box):
+            raise TemplateError(f"{where}: an explicit region needs exactly x_mm, y_mm, w_mm, d_mm")
+        for k in ("intersect", "subtract"):
+            if k in reg and (not isinstance(reg[k], list) or not reg[k]):
+                raise TemplateError(f"{where}.{k}: want a non-empty list of part ids")
+        for t in [reg.get("part"), *(reg.get("intersect") or []), *(reg.get("subtract") or [])]:
+            if t is not None and t not in self.pdecl:
+                raise TemplateError(f"{where}: unknown part {t!r}")
+        for k in ("w_mm", "d_mm"):
+            if k in reg and self.r(reg[k], k, f"{where}.{k}").num(where) <= 0:
+                raise TemplateError(f"{where}: {k} must be > 0")
+
+    def cluster_dims(self, cl: Any, dims: dict[str, Val], where: str) -> dict[str, Val]:
+        """Via `cluster: {n, pitch_um}`: n vias on a compact grid (ceil(sqrt n) columns) at pitch_um per site."""
+        if not isinstance(cl, dict) or set(cl) != CLUSTER_KEYS:
+            raise TemplateError(f"{where}: want exactly {{n: <count spec>, pitch_um: <spec>}}")
+        cd = {"n": self.f.resolve(cl["n"], "n", f"{where}.n"), "pitch_um": self.r(cl["pitch_um"], "pitch_um",
+                                                                                     f"{where}.pitch_um")}
+        n, cp = cd["n"].num(f"{where}.n"), cd["pitch_um"].num(f"{where}.pitch_um")
+        if not n.is_integer() or n < 1:
+            raise TemplateError(f"{where}: n must be an integer >= 1 ({fmt(n)})")
+        if cp <= 0:
+            raise TemplateError(f"{where}: pitch_um must be > 0")
+        dia = dims["diameter_um"].num(where)
+        cols = math.ceil(math.sqrt(n))
+        extent = (cols - 1) * cp + dia  # the grid has cols >= rows
+        if n > 1 and cp < dia:
+            self.f.warnings.append(f"{where}: cluster pitch {fmt(cp)} um < via diameter {fmt(dia)} um (vias overlap)")
+        for k in ("pitch_um", "land_um"):
+            if k in dims and extent > dims[k].num(where) + 1e-9:
+                self.f.warnings.append(f"{where}: cluster extent {fmt(rnd(extent))} um ({cols} columns) > via "
+                                       f"{k} {fmt(dims[k].num(where))} um")
+        return cd
+
+    def route_spec(self, el: dict, where: str) -> tuple[str, str | None, str, dict[str, Val]]:
+        """Layer `route` -> (use, dir or None, matrix, dims). Only conductor layers may carry one."""
+        rt = el["route"]
+        w = f"{where}.route"
+        if not isinstance(rt, dict):
+            raise TemplateError(f"{w}: want {{use, dir, line_um, space_um, matrix, fill?}}")
+        if el.get("role") != "conductor":
+            raise TemplateError(f"{w}: only role `conductor` layers may carry `route` (role {el.get('role')!r})")
+        bad = set(rt) - ROUTE_KEYS
+        if bad:
+            raise TemplateError(f"{w}: unknown keys {sorted(bad)} (allowed {sorted(ROUTE_KEYS)})")
+        use = rt.get("use")
+        if use not in ROUTE_USES:
+            raise TemplateError(f"{w}: use {use!r} not in {sorted(ROUTE_USES)}")
+        d = rt.get("dir")
+        if d is not None and d not in ROUTE_DIRS:
+            raise TemplateError(f"{w}: dir {d!r} not in {sorted(ROUTE_DIRS)}")
+        if rt.get("matrix") not in MATERIALS:
+            raise TemplateError(f"{w}: matrix {rt.get('matrix')!r} not in {sorted(MATERIALS)}")
+        dims = {k: self.r(rt[k], k, f"{w}.{k}") for k in ("line_um", "space_um") if k in rt}
+        if use in ROUTE_LS_USES:
+            miss = [k for k in ("dir", "line_um", "space_um") if k not in rt]
+            if miss:
+                raise TemplateError(f"{w}: use {use} needs {', '.join(miss)}")
+        for k, v in dims.items():
+            if v.num(f"{w}.{k}") <= 0:
+                raise TemplateError(f"{w}: {k} must be > 0")
+        if "fill" in rt:
+            dims["fill"] = self.f.resolve(rt["fill"], None, f"{w}.fill")
+        elif use in ROUTE_LS_USES:
+            dims["fill"] = fill_from_ls(dims["line_um"], dims["space_um"], w)
+        else:
+            dims["fill"] = Val(ROUTE_FILL_DEFAULT[use], None, "template",
+                               note=f"default Cu area fraction of a {use} level (generator default, not reported)")
+        fv = dims["fill"].num(f"{w}.fill")
+        if not 0 < fv <= 1:
+            raise TemplateError(f"{w}: fill {fmt(fv)} not in (0, 1]")
+        return str(use), d, str(rt["matrix"]), dims
+
+    def route_json(self, rt: tuple[str, str | None, str, dict[str, Val]], k: int) -> dict:
+        """Resolved route of repeat k (1-based): `alt` alternates x / y over the repeats, starting at x."""
+        use, d, matrix, dims = rt
+        ro: dict[str, Any] = {"use": use}
+        if d is not None:
+            ro["dir"] = ("x" if k % 2 else "y") if d == "alt" else d
+        for kk in ("line_um", "space_um"):
+            if kk in dims:
+                ro[kk] = rnd(dims[kk].num(kk))
+        ro["matrix"] = matrix
+        ro["fill"] = rnd(dims["fill"].num("fill"))
+        ro["dims"] = {kk: dim_json(v, self.refs) for kk, v in dims.items()}
+        return ro
+
+    def layer_refs(self, names: Any, where: str) -> list[str]:
+        """Layer names in nets: a concrete layer id (`<id>_<k>`) or a template id (= all its repeats / levels)."""
+        if not isinstance(names, list) or not names:
+            raise TemplateError(f"{where}: want a non-empty list of layer ids")
+        out: list[str] = []
+        for nm in names:
+            nm = str(nm)
+            if nm in self.lmeta:
+                ids = [nm]
+            elif nm in self.ltids:
+                ids = self.ltids[nm]
+            else:
+                raise TemplateError(f"{where}: unknown layer {nm!r}")
+            out += [i for i in ids if i not in out]
+        return out
+
+    def check_levels(self, ids: list[str], uses: set[str], where: str) -> None:
+        for lid in ids:
+            m = self.lmeta[lid]
+            if m["role"] != "conductor" or m["route"] is None:
+                raise TemplateError(f"{where}: layer {lid} is not a conductor layer with `route`")
+            if m["route"]["use"] not in uses:
+                raise TemplateError(f"{where}: layer {lid} has route use {m['route']['use']!r}; want "
+                                    f"{' or '.join(sorted(uses))}")
+
+    def via_spans(self, thr: str, where: str, zmin: float) -> list[tuple[str, str, int, float, float, str, str]]:
+        """`through` -> [(id suffix, host, level, z0, z1, through id, through kind)] (z after the final shift)."""
+        def lv_suffix(host: str, lv: int) -> str:
+            if self.nz[host] == 1:
+                return ""
+            linsts = self.levels(host)[lv]
+            return f"_{linsts[0].id}" if len(linsts) == 1 else f"_z{lv + 1}"
+
+        if thr in self.lmeta or thr in self.ltids:
+            lids = [thr] if thr in self.lmeta else self.ltids[thr]
+            base = "" if thr in self.lmeta else thr
+            return [(lid[len(base):] if base else "", self.lmeta[lid]["host"], self.lmeta[lid]["lv"],
+                     self.lmeta[lid]["z0"] - zmin, self.lmeta[lid]["z1"] - zmin, lid, "layer") for lid in lids]
+        if thr in self.lgroups:
+            out = []
+            ents = [self.lmeta[lid] for lid in self.lgroups[thr]]
+            for host, lv in dict.fromkeys((e["host"], e["lv"]) for e in ents):
+                es = [e for e in ents if e["host"] == host and e["lv"] == lv]
+                out.append((lv_suffix(host, lv), host, lv, min(e["z0"] for e in es) - zmin,
+                            max(e["z1"] for e in es) - zmin, thr, "group"))
+            return out
+        if thr in self.pdecl:
+            out = []
+            for lv, linsts in enumerate(self.levels(thr)):
+                z0 = self.iz(linsts[0]) - zmin
+                label = thr if self.nz[thr] == 1 or len(linsts) > 1 else linsts[0].id
+                out.append((lv_suffix(thr, lv), thr, lv, z0, z0 + self.h[thr], label, "part"))
+            return out
+        raise TemplateError(f"{where}: unknown through {thr!r} (want a layer id, layer group id or part id)")
+
+    def via_end(self, host: str, lv: int, z: float, side: str, where: str, zmin: float) -> str | None:
+        """Conductor layer directly above (side top) / below (bottom) a via span in its host level; None at a face."""
+        tol = 1e-6
+        for lid, m in self.lmeta.items():
+            if m["host"] != host or m["lv"] != lv:
+                continue
+            edge = (m["z0"] if side == "top" else m["z1"]) - zmin
+            if abs(edge - z) <= tol:
+                if m["role"] != "conductor":
+                    raise TemplateError(f"{where}: layer {lid} directly {'above' if side == 'top' else 'below'} the "
+                                        f"via span is role {m['role']!r}, not a conductor")
+                return lid
+        inst = self.levels(host)[lv][0]
+        face = (self.itop(inst) if side == "top" else self.iz(inst)) - zmin
+        if abs(face - z) <= tol:
+            return None
+        raise TemplateError(f"{where}: no conductor layer directly {'above' if side == 'top' else 'below'} the via "
+                            f"span (z {fmt(rnd(z))} um) and the span is not at the {side} face of {host}")
+
+    def build_routing(self, spec: Any, arrays_out: list[dict], zmin: float) -> dict:
+        refs = self.refs
+        if not isinstance(spec, dict):
+            raise TemplateError("routing: want {layout_note, vias, nets}")
+        bad = set(spec) - ROUTING_KEYS
+        if bad:
+            raise TemplateError(f"routing: unknown keys {sorted(bad)} (allowed {sorted(ROUTING_KEYS)})")
+        note = " ".join(str(spec.get("layout_note") or "").split())
+        if not note:
+            raise TemplateError("routing: `layout_note` is required when `routing` exists")
+        vias_out: list[dict] = []
+        seen: set[str] = set()
+        for vi, v in enumerate(spec.get("vias") or []):
+            vid = v.get("id") if isinstance(v, dict) else None
+            where = f"routing.vias.{vid or vi}"
+            if not vid:
+                raise TemplateError(f"{where}: via class needs an id")
+            if vid in seen:
+                raise TemplateError(f"{where}: duplicate via id")
+            seen.add(vid)
+            bad = set(v) - VIA_KEYS
+            if bad:
+                raise TemplateError(f"{where}: unknown keys {sorted(bad)} (allowed {sorted(VIA_KEYS)})")
+            if v.get("kind") not in VIA_KINDS:
+                raise TemplateError(f"{where}: kind {v.get('kind')!r} not in {sorted(VIA_KINDS)}")
+            if "through" not in v:
+                raise TemplateError(f"{where}: missing through")
+            if "diameter_um" not in v:
+                raise TemplateError(f"{where}: missing diameter_um")
+            if v.get("fill") is not None and v["fill"] not in VIA_FILLS:
+                raise TemplateError(f"{where}: fill {v['fill']!r} not in {sorted(VIA_FILLS)}")
+            if v.get("plug") is not None:
+                if v["plug"] not in VIA_PLUGS:
+                    raise TemplateError(f"{where}: plug {v['plug']!r} not in {sorted(VIA_PLUGS)}")
+                if v.get("fill") not in {"plugged", "conformal"}:
+                    raise TemplateError(f"{where}: `plug` needs fill plugged or conformal (fill {v.get('fill')!r})")
+            if "region" in v:
+                self.check_region(v["region"], f"{where}.region")
+            dims = {k: self.r(v[k], k, f"{where}.{k}") for k in VIA_DIMS if k in v}
+            cdims = self.cluster_dims(v["cluster"], dims, f"{where}.cluster") if "cluster" in v else None
+            for suffix, host, lv, z0, z1, thr, tk in self.via_spans(str(v["through"]), where, zmin):
+                if z1 - z0 <= 0:
+                    raise TemplateError(f"{where}: empty z span through {thr}")
+                vo: dict[str, Any] = {"id": vid + suffix, "template_id": vid, "name": v.get("name", vid),
+                                      "kind": v["kind"], "part": host, "through": thr, "through_kind": tk,
+                                      "z_um": rnd(z0), "h_um": rnd(z1 - z0),
+                                      "upper": None if tk == "part" else self.via_end(host, lv, z1, "top", where, zmin),
+                                      "lower": None if tk == "part" else self.via_end(host, lv, z0, "bottom", where,
+                                                                                         zmin)}
+                linsts = self.levels(host)[lv]
+                if len(linsts) > 1:
+                    vo["instances"] = [i.id for i in linsts]
+                if "region" in v:
+                    rects = self.array_region({"region": v["region"]}, linsts, where)
+                    for rc in rects:
+                        if not any(inside(rc, i.rect) for i in linsts):
+                            self.f.warnings.append(f"via {vo['id']}: region {[rnd(c) for c in rc]} not inside {host}")
+                    vo["regions"] = [dict(zip(("x_mm", "y_mm", "w_mm", "d_mm"), (rnd(c) for c in rect_xywd(rc))))
+                                     for rc in rects]
+                for k in VIA_DIMS:
+                    if k in dims:
+                        vo[k] = rnd(dims[k].num(f"{where}.{k}"))
+                if v.get("fill") is not None:
+                    vo["fill"] = v["fill"]
+                if v.get("plug") is not None:
+                    vo["plug"] = v["plug"]
+                if cdims is not None:
+                    vo["cluster"] = {"n": int(cdims["n"].num("n")), "pitch_um": rnd(cdims["pitch_um"].num("pitch_um")),
+                                     "dims": {k: dim_json(x, refs) for k, x in cdims.items()}}
+                if v.get("note"):
+                    vo["note"] = v["note"]
+                vo["dims"] = {k: dim_json(x, refs) for k, x in dims.items()}
+                vias_out.append(vo)
+            self.count(f"via {vid}", dims)
+            if cdims is not None:
+                self.count(f"via {vid} cluster", cdims)
+        array_ids = set(self.adecl) | {a["id"] for a in arrays_out}
+        nets_out: list[dict] = []
+        seen = set()
+        for ni, n in enumerate(spec.get("nets") or []):
+            nid = n.get("id") if isinstance(n, dict) else None
+            where = f"routing.nets.{nid or ni}"
+            if not nid:
+                raise TemplateError(f"{where}: net class needs an id")
+            if nid in seen:
+                raise TemplateError(f"{where}: duplicate net id")
+            seen.add(nid)
+            bad = set(n) - NET_KEYS
+            if bad:
+                raise TemplateError(f"{where}: unknown keys {sorted(bad)} (allowed {sorted(NET_KEYS)})")
+            kind = n.get("kind")
+            if kind not in NET_KINDS:
+                raise TemplateError(f"{where}: kind {kind!r} not in {sorted(NET_KINDS)}")
+            need = {"vertical": ("from", "to"), "lateral": ("from", "to", "levels"), "plane_tie": ("from", "plane"),
+                    "escape": ("from", "levels")}[str(kind)]
+            miss = [k for k in (*need, "share") if k not in n]
+            if miss:
+                raise TemplateError(f"{where}: a {kind} net needs {', '.join(miss)}")
+            for k in ("from", "to"):
+                if k in n and str(n[k]) not in array_ids:
+                    raise TemplateError(f"{where}: {k} {n[k]!r} is not an array id")
+            no: dict[str, Any] = {"id": nid, "kind": kind, "from": str(n["from"])}
+            if "to" in n:
+                no["to"] = str(n["to"])
+            if kind == "vertical":
+                style = n.get("style", "stacked")
+                if style not in NET_STYLES:
+                    raise TemplateError(f"{where}: style {style!r} not in {sorted(NET_STYLES)}")
+                no["style"] = style
+            elif "style" in n:
+                raise TemplateError(f"{where}: `style` applies to vertical nets only")
+            for k, uses in (("jog", ROUTE_LS_USES), ("levels", ROUTE_LS_USES)):
+                if k in n:
+                    ids = self.layer_refs(n[k], f"{where}.{k}")
+                    self.check_levels(ids, uses, f"{where}.{k}")
+                    no[k] = ids
+            if "plane" in n:
+                ids = self.layer_refs([n["plane"]], f"{where}.plane")
+                if len(ids) != 1:
+                    raise TemplateError(f"{where}.plane: {n['plane']!r} names {len(ids)} layers; name one repeat")
+                self.check_levels(ids, {"plane"}, f"{where}.plane")
+                no["plane"] = ids[0]
+            dims = {}
+            for k in ("share", "length_um"):
+                if k not in n:
+                    continue
+                x = n[k]
+                if isinstance(x, (int, float)) and not isinstance(x, bool):  # net layout numbers: template + layout_note
+                    dims[k] = Val(float(x), name_unit(k), "template", note=note)
+                else:
+                    dims[k] = self.r(x, k, f"{where}.{k}")
+                no[k] = rnd(dims[k].num(f"{where}.{k}"))
+            if not 0 < no["share"] <= 1:
+                raise TemplateError(f"{where}: share {no['share']} not in (0, 1]")
+            if "length_um" in no and no["length_um"] <= 0:
+                raise TemplateError(f"{where}: length_um must be > 0")
+            if n.get("note"):
+                no["note"] = n["note"]
+            no["dims"] = {k: dim_json(x, refs) for k, x in dims.items()}
+            nets_out.append(no)
+            self.count(f"net {nid}", dims)
+        return {"layout_note": note, "vias": vias_out, "nets": nets_out}
 
     def source_tvs(self) -> list[str]:
         tvs: list[str] = []
@@ -1131,6 +1514,9 @@ class Builder:
         pitch = dims["pitch_um"].num(where)
         if "diameter_um" in dims and dims["diameter_um"].num(where) >= pitch:
             f.warnings.append(f"array {aid}: diameter >= pitch")
+        for k in ("pad_um", "opening_um"):
+            if k in dims and dims[k].num(where) >= pitch:
+                f.warnings.append(f"array {aid}: {k} >= pitch")
         rep = self.arep.get(aid)
         out = []
         for suffix, z0, z1, between, mount, src in places:
@@ -1149,6 +1535,9 @@ class Builder:
                           "mount": mount, "region": {"x_mm": rnd(x), "y_mm": rnd(y), "w_mm": rnd(w), "d_mm": rnd(d)},
                           "z_um": z0 + dz, "h_um": rnd(z1 - z0), "pitch_um": rnd(pitch)}
                     for k in ("diameter_um", "height_um"):
+                        if k in dims:
+                            ao[k] = rnd(dims[k].num(where))
+                    for k in ARRAY_PAD_DIMS:
                         if k in dims:
                             ao[k] = rnd(dims[k].num(where))
                     ao.setdefault("height_um", rnd(z1 - z0))  # in/span arrays: the element spans its host range
@@ -1309,8 +1698,9 @@ ARRAY_REFS = ("per", "upper", "lower", "in", "under", "host")
 
 
 def module_drop(mod: dict, names: list[str], where: str) -> None:
-    """Remove module elements by id: parts, arrays, layer elements (and groups hosted on dropped parts), params and
-    callouts that target a dropped id."""
+    """Remove module elements by id: parts, arrays, layer elements (and groups hosted on dropped parts), params,
+    routing via / net classes, callouts that target a dropped id, and via / net classes that name a dropped element
+    (via `through`; net from / to / plane / jog / levels, incl. `<layer>_<k>` repeats)."""
     names_s = {str(n) for n in names}
     found: set[str] = set()
     for key in ("parts", "arrays"):
@@ -1323,11 +1713,14 @@ def module_drop(mod: dict, names: list[str], where: str) -> None:
         mod[key] = keep
     dropped_parts = {n for n in names_s if n in found}
     groups = []
+    dropped_layers: set[str] = set()  # layer elements (and groups) gone, for the routing that names them
     for g in mod.get("layers") or []:
         if g.get("part") in dropped_parts:
+            dropped_layers |= {el["id"] for el in g.get("pattern", []) if el.get("id")} | {g.get("id") or ""}
             continue
         pat = [el for el in g.get("pattern", []) if el.get("id") not in names_s]
         found |= {el["id"] for el in g.get("pattern", []) if el.get("id") in names_s}
+        dropped_layers |= {el["id"] for el in g.get("pattern", []) if el.get("id") in names_s}
         if pat:
             groups.append({**g, "pattern": pat})
     mod["layers"] = groups
@@ -1336,6 +1729,21 @@ def module_drop(mod: dict, names: list[str], where: str) -> None:
         del params[n]
         found.add(n)
     mod["callouts"] = [c for c in mod.get("callouts") or [] if c.get("target") not in names_s]
+    rt = mod.get("routing")
+    if isinstance(rt, dict):  # via / net classes by id; then those that name a dropped element
+        for key in ("vias", "nets"):
+            found |= {x["id"] for x in rt.get(key) or [] if x.get("id") in names_s}
+
+        dropped_layers.discard("")
+
+        def gone(ref: Any) -> bool:  # a dropped id, or a repeat `<layer>_<k>` of a dropped layer element
+            r = str(ref)
+            return r in names_s or r in dropped_layers or any(r.startswith(f"{n}_") for n in dropped_layers)
+
+        rt["vias"] = [v for v in rt.get("vias") or [] if v.get("id") not in names_s and not gone(v.get("through"))]
+        rt["nets"] = [x for x in rt.get("nets") or [] if x.get("id") not in names_s and not any(
+            gone(r) for r in [x.get("from"), x.get("to"), x.get("plane"), *(x.get("jog") or []),
+                              *(x.get("levels") or [])] if r is not None)]
     missing = names_s - found
     if missing:
         raise TemplateError(f"{where}: drop names nothing in the module: {sorted(missing)}")
@@ -1344,7 +1752,8 @@ def module_drop(mod: dict, names: list[str], where: str) -> None:
 def module_rename(mod: dict, ren: dict, where: str) -> None:
     """Rename module element ids ({old: new}) and/or patch display fields ({old: {id?, name?, material_label?,
     note?}}). Every reference inside the module (stacking, standoff, fill, per/upper/lower/in/under, region,
-    span anchors, between, layer hosts, callout targets) follows the new id."""
+    span anchors, between, layer hosts, callout targets, via `through`, net from / to / plane / jog / levels incl.
+    `<layer>_<k>` repeats) follows the new id."""
     idmap: dict[str, str] = {}
     patch: dict[str, dict] = {}
     for old, v in ren.items():
@@ -1359,8 +1768,12 @@ def module_rename(mod: dict, ren: dict, where: str) -> None:
             patch[old] = {k: x for k, x in v.items() if k != "id"}
         else:
             raise TemplateError(f"{where}: rename {old}: want a new id or a dict of display fields")
-    elems = [*(mod.get("parts") or []), *(mod.get("arrays") or []),
-             *(el for g in mod.get("layers") or [] for el in g.get("pattern", []))]
+    mrt = mod.get("routing")
+    rt: dict = mrt if isinstance(mrt, dict) else {}
+    layer_els = [el for g in mod.get("layers") or [] for el in g.get("pattern", [])]
+    layer_ids = {str(el.get("id")) for el in layer_els}
+    elems = [*(mod.get("parts") or []), *(mod.get("arrays") or []), *layer_els, *(rt.get("vias") or []),
+             *(rt.get("nets") or [])]
     known = {x.get("id") for x in elems}
     missing = set(ren) - known
     if missing:
@@ -1372,6 +1785,15 @@ def module_rename(mod: dict, ren: dict, where: str) -> None:
     def anchor(s: str) -> str:
         side, sep, name = s.partition(":")
         return f"{side}{sep}{m(name)}" if sep else s
+
+    def ml(x: Any) -> Any:  # layer reference: exact id, or `<layer>_<k>` of a renamed layer element (longest match)
+        if not isinstance(x, str) or x in idmap:
+            return m(x)
+        olds = [o for o in idmap if o in layer_ids and x.startswith(f"{o}_")]
+        if not olds:
+            return x
+        o = max(olds, key=len)
+        return idmap[o] + x[len(o):]
 
     for el in elems:
         old = el.get("id")
@@ -1408,16 +1830,36 @@ def module_rename(mod: dict, ren: dict, where: str) -> None:
         g["part"] = m(g.get("part"))
     for c in mod.get("callouts") or []:
         c["target"] = m(c.get("target"))
+    for v in rt.get("vias") or []:
+        if "through" in v:
+            v["through"] = ml(v["through"])
+        reg = v.get("region")
+        if isinstance(reg, dict):
+            if "part" in reg:
+                reg["part"] = m(reg["part"])
+            for k in ("intersect", "subtract"):
+                if k in reg:
+                    reg[k] = [m(x) for x in reg[k]]
+    for n in rt.get("nets") or []:
+        for k in ("from", "to"):
+            if k in n:
+                n[k] = m(n[k])
+        if "plane" in n:
+            n["plane"] = ml(n["plane"])
+        for k in ("jog", "levels"):
+            if isinstance(n.get(k), list):
+                n[k] = [ml(x) for x in n[k]]
 
 
 def expand_modules(path: Path, tpl: dict) -> dict:
     """Apply `use: [{module, from?, drop?, rename?}]`: merge named `modules:` blocks into the template.
 
-    A module is {params, parts, layers, arrays, callouts}. `from` names another template file in config/package3d
+    A module is {params, parts, layers, arrays, callouts, routing}. `from` names another template file in config/package3d
     (default: this file). `drop: [ids]` removes module elements first, then `rename: {old: new | {id?, name?,
     material_label?, note?}}` renames ids (references follow) or patches display fields; both use the module's
     original ids. The template wins on conflicts: its own params, parts/arrays with the same id and layer groups on
-    the same host part replace the module's. Module callouts are appended. Modules cannot `use` others.
+    the same host part replace the module's. Module callouts are appended. Routing via / net classes merge by id
+    (template wins), and the template's `layout_note` wins over the module's. Modules cannot `use` others.
     """
     uses = tpl.get("use") or []
     if not uses:
@@ -1454,6 +1896,18 @@ def expand_modules(path: Path, tpl: dict) -> dict:
         hosts = {g.get("part") for g in own_layers}
         tpl["layers"] = own_layers + [g for g in mod.get("layers") or [] if g.get("part") not in hosts]
         tpl["callouts"] = list(tpl.get("callouts") or []) + list(mod.get("callouts") or [])
+        mrt = mod.get("routing")
+        if mrt:  # via / net classes merge by id like arrays; the template's layout_note wins
+            if not isinstance(mrt, dict):
+                raise TemplateError(f"{where}: module routing must be a mapping")
+            trt = dict(tpl.get("routing") or {})
+            if not trt.get("layout_note") and mrt.get("layout_note"):
+                trt["layout_note"] = mrt["layout_note"]
+            for key in ("vias", "nets"):
+                own = list(trt.get(key) or [])
+                ids = {x.get("id") for x in own}
+                trt[key] = own + [x for x in mrt.get(key) or [] if x.get("id") not in ids]
+            tpl["routing"] = trt
     return tpl
 
 
