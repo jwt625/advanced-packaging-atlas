@@ -1,0 +1,233 @@
+# EMIB 3D template. Format: config/package3d/TEMPLATE_FORMAT.md. Generator: scripts/build_package3d.py.
+# Backbone: ectc.2016.201-a (Intel EMIB architecture: thin Si bridge, no TSV, M1-M4 at 2/2 um, embedded in a cavity at
+# the final build-up layer of an organic FCBGA substrate, held by adhesive, covered by the final build-up dielectric;
+# fine-pitch vias land on the bridge pads; dies attached by TCB with 55 um bumps over the bridge and 130 um bumps
+# elsewhere, capillary underfill). Layout follows its Fig. 4(a) schematic: DIE 2 | DIE 1 | DIE 3 in a row, one bridge
+# under each die-die edge. The substrate outline comes from the EMIB CHIPS prototype MCP (ectc51687.2025.00061-a)
+# because the backbone reports none. Substrate stack analogs match the EMIB-T template for a like-for-like comparison.
+id: emib
+name: EMIB
+company: Intel
+package_class: si_bridge_organic
+family_match: {families: true}
+backbone_tv: ectc.2016.201-a
+summary: >-
+  Intel 2.5D without an interposer: a thin Si bridge (no TSV, {m_n} metal levels at {m_line_um}/{m_space_um} um) sits
+  in an organic-substrate cavity under the die edges; {fine_pitch_um} um bumps over the bridge, {coarse_pitch_um} um
+  elsewhere.
+
+params:
+  # ---- reported (backbone ectc.2016.201-a unless noted)
+  sbt_w_mm: {ref: ectc51687.2025.00061-a.package_x_mm, note: "outline of the EMIB CHIPS prototype MCP (backbone reports none)"}
+  sbt_d_mm: {ref: ectc51687.2025.00061-a.package_y_mm, note: "outline of the EMIB CHIPS prototype MCP (backbone reports none)"}
+  die_n: {ref: ectc.2016.201-a-c5.count}
+  bridge_w_mm: {ref: ectc.2016.201-a-c1.x_mm, note: "lower bound of the 2 x 2 to 8 x 8 mm bridge size range"}
+  bridge_d_mm: {ref: ectc.2016.201-a-c1.y_mm, note: "lower bound of the 2 x 2 to 8 x 8 mm bridge size range"}
+  bridge_h_um: {ref: ectc.2016.201-a-c1.thickness_um, note: "upper bound: bridge wafer thinned below 75 um"}
+  m_n: {ref: ectc.2016.201-a-L02.repeat}
+  m_line_um: {ref: ectc.2016.201-a-L02.line_um}
+  m_space_um: {ref: ectc.2016.201-a-L02.space_um}
+  m_via_um: {ref: ectc.2016.201-a-L02.via_diameter_um}
+  fine_pitch_um: {ref: ectc.2016.201-a-i1.pitch_um}
+  coarse_pitch_um: {ref: ectc.2016.201-a-i2.pitch_um}
+  gen2_pitch_um: {ref: ectc51687.2025.00051-b-i1.pitch_um}
+  # ---- template: layout (die sizes and positions are not dimensioned in any EMIB row)
+  bridge_n:
+    template: 2
+    refs: [ectc.2016.201-a.notes]
+    note: "two bridges, one under each die-die edge, as drawn in the Fig. 4(a) schematic (3 dies, 2 bridges)"
+  d1_w_mm:
+    analog: ectc51906.2022.00106-a-c1.x_mm
+    note: "DIE 1 size not reported for EMIB; analog = processor chip of an IBM bridge (DBHi) package"
+  d1_d_mm:
+    analog: ectc51906.2022.00106-a-c1.y_mm
+    note: "DIE 1 size not reported for EMIB; analog = processor chip of an IBM bridge (DBHi) package"
+  d1_h_um:
+    analog: ectc51906.2022.00106-a-c1.thickness_um
+    note: "die thickness not reported for EMIB; analog = processor chip of the same DBHi package"
+  d2_w_mm:
+    analog: ectc51909.2023.00135-a-c2.x_mm
+    note: "DIE 2 / DIE 3 (smaller dies in Fig. 4(a)) size not reported; analog = HBM2E footprint of a 2.5D TV"
+  d2_d_mm:
+    analog: ectc51909.2023.00135-a-c2.y_mm
+    note: "DIE 2 / DIE 3 (smaller dies in Fig. 4(a)) size not reported; analog = HBM2E footprint of a 2.5D TV"
+  d2_h_um: {template: "d1_h_um", note: "DIE 2 / DIE 3 drawn at the same height as DIE 1 in the Fig. 4(a) schematic"}
+  d2_n: {template: "die_n - 1", note: "DIE 2 and DIE 3 flank DIE 1 (Fig. 4(a))"}
+  die_gap_um:
+    analog: tcpmt.2023.3312037-a-c2.gap_um
+    note: "die-to-die gap not reported for EMIB; analog = Intel Co-EMIB DtD spacing ('as small as 100 um')"
+  d2_px_mm: {template: "d1_w_mm + 2 * die_gap_um / 1000 + d2_w_mm", note: "DIE 2 / DIE 3 centers at the D2D gap on each side of DIE 1"}
+  bridge_px_mm: {template: "d1_w_mm + die_gap_um / 1000", note: "bridge centered under each die-die gap"}
+  # ---- template: substrate stack (same analogs as the EMIB-T template)
+  bu_n:
+    analog: ectc51687.2025.00148-a-L06.repeat
+    note: "EMIB substrate layer count not reported; analog = 4 build-up layers per side of an organic FC substrate"
+  bu_diel_um:
+    analog: ectc51687.2025.00148-a-L04.thickness_um
+    note: "build-up dielectric thickness not reported for EMIB; analog = ABF-GL layer of an organic FC substrate"
+  bu_h_um: {template: "bu_n * bu_diel_um", note: "build-up per side = layer count x dielectric thickness (analogs)"}
+  core_h_um:
+    analog: ectc51687.2025.00148-a-L07.thickness_um
+    note: "core thickness not reported for EMIB; analog = core of the same organic FC substrate"
+  sbt_h_um: {template: "core_h_um + 2 * bu_h_um", note: "substrate = core + 2 build-up stacks (template inputs)"}
+  bridge_depth_um:
+    template: "bu_diel_um"
+    refs: [ectc.2016.201-a-L04.layer_name]
+    note: "bridge top below the surface by the one final build-up dielectric laminated over it; thickness not reported"
+  adh_h_um:
+    analog: ectc51909.2023.00155-a-c5.thickness_um
+    refs: [ectc.2016.201-a-c3.name]
+    note: "bridge adhesive (not named, thickness not reported); analog = die attach film of a 2.5D TV"
+  m_h_um:
+    analog: ectc51909.2023.00174-d-L02.thickness_um
+    note: "bridge metal level thickness not reported; analog = TSMC LSI-1 dual-damascene Cu level"
+  bridge_si_um: {template: "bridge_h_um - m_n * m_h_um", note: "bridge Si = bridge thickness - metal levels (template level thickness)"}
+  # ---- template: joints
+  fine_d_um:
+    analog: ectc51906.2022.00180-a-i3.diameter_um
+    note: "fine bump diameter not reported for EMIB; analog = 55 um-pitch Cu/SnAg micro-bump of a glass 2.5D package"
+  bump_h_um:
+    template: "r0 + r1"
+    refs: [ectc51906.2022.00180-a-i3.height_um, ectc51906.2022.00180-a-i3.cap_height_um, ectc.2016.201-a-i1.notes]
+    note: "bump standoff not reported; Cu + SnAg cap of the 55 um-pitch analog; one standoff for fine and coarse bumps (mixed-CD bumps with height control)"
+  coarse_d_um:
+    analog: vlsitechnologyandcir46783.2024.10631478-a-i2.diameter_um
+    note: "coarse bump diameter not reported for EMIB; analog = Intel Foveros 110 um-pitch package-side bump"
+  via_d_um:
+    template: "fine_d_um"
+    refs: [ectc.2016.201-a-i3.notes]
+    note: "fine via onto the bridge pads: diameter not reported; set equal to the fine bump"
+  uf_margin_mm: {template: 0.5, note: "capillary underfill fillet extent not reported; illustrative"}
+  bga_pitch_um:
+    analog: ectc51909.2023.00155-a-i4.pitch_um
+    refs: [ectc.2016.201-a-i5.notes]
+    note: "BGA drawn in the Fig. 4(a) schematic without dimensions; analog pitch of a large 2.5D TV"
+  bga_d_um:
+    analog: ectc51909.2023.00155-a-i4.diameter_um
+    note: "BGA ball diameter not reported for EMIB; analog = SAC305 ball of the same 2.5D TV"
+  bga_h_um:
+    template: 478
+    refs: [ectc51909.2023.00155-a-i4.notes]
+    note: "BGA height not reported for EMIB; the analog row's notes give a measured ball height of 478 um"
+
+parts:
+  - {id: substrate, name: "Organic FCBGA substrate", kind: substrate, material: organic_laminate,
+     material_label: "organic build-up substrate", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: sbt_h_um, base: true,
+     explode_group: 0}
+  - id: bridge
+    name: "EMIB bridge (Si, no TSV)"
+    kind: bridge
+    material: silicon
+    w_mm: bridge_w_mm
+    d_mm: bridge_d_mm
+    h_um: bridge_h_um
+    in: substrate
+    depth_um: bridge_depth_um
+    repeat: {nx: bridge_n, pitch_x_mm: bridge_px_mm}
+    explode_group: 1
+  - id: adhesive
+    name: "Bridge adhesive"
+    kind: other
+    material: other
+    material_label: "adhesive (not named)"
+    w_mm: bridge_w_mm
+    d_mm: bridge_d_mm
+    h_um: adh_h_um
+    in: substrate
+    depth_um: "bridge_depth_um + bridge_h_um"
+    repeat: {nx: bridge_n, pitch_x_mm: bridge_px_mm}
+    explode_group: 1
+    note: "cavity formed at the final build-up layer; cavity clearance around the bridge not drawn"
+  - {id: die1, name: "DIE 1", kind: die, material: silicon, w_mm: d1_w_mm, d_mm: d1_d_mm, h_um: d1_h_um, on: substrate,
+     standoff: fli_coarse, explode_group: 3}
+  - id: die2
+    name: "DIE 2 / DIE 3"
+    kind: die
+    material: silicon
+    w_mm: d2_w_mm
+    d_mm: d2_d_mm
+    h_um: d2_h_um
+    on: substrate
+    standoff: fli_coarse
+    repeat: {nx: d2_n, pitch_x_mm: d2_px_mm}
+    explode_group: 3
+  - id: uf
+    name: "Capillary underfill"
+    kind: underfill
+    material: underfill
+    material_label: "epoxy underfill"
+    fill: {above: substrate, parts: [die1, die2], margin_mm: uf_margin_mm}
+    explode_group: 2
+    xray_default: true
+
+layers:
+  - part: bridge
+    repeat: m_n
+    pattern:
+      - {id: br_m, name: "Bridge metal level", material: copper, material_label: "BEOL metal (not specified)",
+         role: conductor, h_um: m_h_um, line_um: m_line_um, space_um: m_space_um, via_um: m_via_um}
+  - part: bridge
+    pattern:
+      - {id: br_si, name: "Bridge Si", material: silicon, role: core, h_um: bridge_si_um}
+  - part: substrate
+    pattern:
+      - {id: sbt_bu_top, name: "Front build-up (bridge layers)", material: organic_build_up, role: dielectric,
+         h_um: bu_h_um}
+      - {id: sbt_core, name: "Core", material: organic_laminate, material_label: "laminate core", role: core,
+         h_um: core_h_um}
+      - {id: sbt_bu_bot, name: "Back build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+
+arrays:
+  - {id: fine_d1, name: "Fine bumps over the bridge", kind: microbump, per: die1, lower: substrate,
+     region: {intersect: [bridge]}, pitch_um: fine_pitch_um, diameter_um: fine_d_um, height_um: bump_h_um}
+  - {id: fine_d2, name: "Fine bumps over the bridge", kind: microbump, per: die2, lower: substrate,
+     region: {intersect: [bridge]}, pitch_um: fine_pitch_um, diameter_um: fine_d_um, height_um: bump_h_um}
+  - {id: fli_coarse, name: "Coarse bumps", kind: microbump, per: die1, lower: substrate, region: {subtract: [bridge]},
+     pitch_um: coarse_pitch_um, diameter_um: coarse_d_um, height_um: bump_h_um,
+     note: "coarse pitch rendered over the die outside the bridge; the bump map is not reported"}
+  - {id: coarse_d2, name: "Coarse bumps", kind: microbump, per: die2, lower: substrate, region: {subtract: [bridge]},
+     pitch_um: coarse_pitch_um, diameter_um: coarse_d_um, height_um: bump_h_um}
+  - {id: via_d1, name: "Fine vias onto bridge pads", kind: rdl_via, per: die1, span: ["top:bridge", "top:substrate"],
+     between: [substrate, bridge], region: {intersect: [bridge]}, pitch_um: fine_pitch_um, diameter_um: via_d_um,
+     note: "one via per fine bump assumed"}
+  - {id: via_d2, name: "Fine vias onto bridge pads", kind: rdl_via, per: die2, span: ["top:bridge", "top:substrate"],
+     between: [substrate, bridge], region: {intersect: [bridge]}, pitch_um: fine_pitch_um, diameter_um: via_d_um}
+  - {id: bga, name: "BGA balls", kind: bga, under: substrate, region: {part: substrate}, pitch_um: bga_pitch_um,
+     diameter_um: bga_d_um, height_um: bga_h_um}
+
+callouts:
+  - {target: bridge, text: "Si bridge, no TSV",
+     note: "Si bridge {bridge_w_mm} x {bridge_w_mm} to 8 x 8 mm, below {bridge_h_um} um, no TSV; more than 5 bridges per package possible",
+     refs: [ectc.2016.201-a-c1.notes, ectc.2016.201-a-c1.material]}
+  - {target: br_m, text: "M1-M4 L/S {m_line_um}/{m_space_um} um",
+     note: "M1-M4: L/S {m_line_um}/{m_space_um} um, vias {m_via_um} um (dual damascene)",
+     refs: [ectc.2016.201-a-L02.properties]}
+  - {target: adhesive, text: "Bridge on adhesive in cavity",
+     note: "Bridge held by adhesive in a cavity at the final build-up layer, then covered by build-up dielectric",
+     refs: [ectc.2016.201-a-L05.notes, ectc.2016.201-a-L04.notes]}
+  - {target: fine_d1, text: "Fine {fine_pitch_um} / coarse {coarse_pitch_um} um",
+     note: "Fine {fine_pitch_um} um over the bridge, coarse {coarse_pitch_um} um elsewhere; TCB + capillary underfill",
+     refs: [ectc.2016.201-a-i1.bonding_method, ectc.2016.201-a-c4.name]}
+  - {target: fine_d1, text: "{gen2_pitch_um} um pitch, later flow",
+     note: "{gen2_pitch_um} um bump pitch in the later EMIB flow (ectc51687.2025.00051)"}
+  - {target: via_d1, text: "Fine vias land on bridge pads",
+     note: "Fine vias land fully on bridge pads; coarse vias outside the bridge (not drawn)",
+     refs: [ectc.2016.201-a-i3.notes, ectc.2016.201-a-i4.notes]}
+
+insets:
+  - id: bridge_gap
+    label: "Die-die gap over the bridge"
+    box_mm: ["bridge_px_mm / 2 - bridge_w_mm / 2 - 0.5", -1, "bridge_px_mm / 2 + bridge_w_mm / 2 + 0.5", 1]
+    z: ["bottom:adhesive", "top:die1"]
+    view: front
+  - id: bridge_xs
+    label: "Bridge in cavity: adhesive, metal levels, fine vias"
+    box_mm: ["bridge_px_mm / 2 - bridge_w_mm / 2 - 0.3", -0.4, "bridge_px_mm / 2 - bridge_w_mm / 2 + 0.5", 0.4]
+    z: ["bottom:adhesive", "bottom:die1"]
+    view: front
+  - id: fine_coarse
+    label: "Fine / coarse bump transition"
+    box_mm: ["bridge_px_mm / 2 - bridge_w_mm / 2 - 0.6", "bridge_d_mm / 2 - 0.6", "bridge_px_mm / 2 + 0.2",
+             "bridge_d_mm / 2 + 0.6"]
+    z: ["top:bridge", "top:die1"]
+    view: iso

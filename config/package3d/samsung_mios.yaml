@@ -1,0 +1,244 @@
+# Samsung MIoS 3D template. Format: config/package3d/TEMPLATE_FORMAT.md. Generator: scripts/build_package3d.py.
+# Backbone: ectc32696.2021.00315-a (85 x 85 mm 2.5D MIoS TV, 2 ASIC + 8 HBM on a 51 x 55 mm, 110 um Si interposer).
+# Its Fig. 3 gives the full vertical stack: dies 0.685 mm, ubump layer 0.035 mm, interposer 0.11 mm, Cu pillar + solder
+# 0.07 mm (MIP module 0.90 mm), ring frame 0.71 mm on a 0.1 mm layer, package 3.082 mm including the BGA.
+# Topology (Sec. II.A, Fig. 2-3, Fig. 6): devices microbumped onto the interposer with device underfill, EMC between and
+# around the dies down to the interposer (molded interposer, MIP), MIP reflowed to the organic substrate with Cu-pillar
+# solder bumps and interposer underfill, ring frame on adhesive, BGA.
+# Die outlines, bump pitches and the chip gap are not given for this TV; they come from the other MIoS-family TV in our
+# data, the 3.5D molded-interposer TV ectc51909.2023.00154-a (ASIC 25 x 19 mm, HBM3 11 x 11 mm, 60 um chip gap). The
+# floor plan follows the backbone's Fig. 2 (two ASICs side by side, two HBMs above and two below each ASIC).
+# Naming: the papers call it MIoS only. A mapping to a Samsung I-Cube brand is not stated in our sources (not claimed).
+id: samsung_mios
+name: Samsung MIoS
+company: Samsung
+package_class: si_interposer_2p5d
+family_match: {families: true}
+backbone_tv: ectc32696.2021.00315-a
+summary: >-
+  Samsung molded interposer on substrate: {asic_n} ASIC + {hbm_n} HBM microbumped on a {ip_w_mm}x{ip_d_mm} mm,
+  {ip_h_um} um Si interposer, encapsulated in EMC (MIP), then Cu-pillar bumped to an {sbt_w_mm} mm substrate with a
+  ring frame; {pkg_h_um} um total.
+
+params:
+  # ---- reported (backbone ectc32696.2021.00315-a unless noted)
+  sbt_w_mm: {ref: ectc32696.2021.00315-a-c4.x_mm}
+  sbt_d_mm: {ref: ectc32696.2021.00315-a-c4.y_mm}
+  pkg_h_um: {ref: ectc32696.2021.00315-a.package_thickness_mm, note: "package height including the BGA (Fig. 3)"}
+  ip_w_mm: {ref: ectc32696.2021.00315-a-c3.x_mm}
+  ip_d_mm: {ref: ectc32696.2021.00315-a-c3.y_mm}
+  ip_h_um: {ref: ectc32696.2021.00315-a-c3.thickness_um}
+  asic_n: {ref: ectc32696.2021.00315-a-c1.count}
+  hbm_n: {ref: ectc32696.2021.00315-a-c2.count}
+  asic_h_um: {ref: ectc32696.2021.00315-a-c1.thickness_um}
+  hbm_h_um: {ref: ectc32696.2021.00315-a-c2.thickness_um}
+  ub_h_um: {ref: ectc32696.2021.00315-a-L03.thickness_um, note: "ubump layer with device underfill (Fig. 3)"}
+  pil_h_um: {ref: ectc32696.2021.00315-a-L06.thickness_um, note: "Cu pillar + solder layer in the Fig. 3 schematic"}
+  pil_meas_um: {ref: ectc32696.2021.00315-a-i2.height_um, note: "measured joint gap at the MIP centre (Fig. 10)"}
+  pil_edge_um: {ref: ectc32696.2021.00315-a-m8.value, note: "measured joint gap at the MIP edge (Fig. 10)"}
+  pil_n: {ref: ectc32696.2021.00315-a-i2.count}
+  ring_h_um: {ref: ectc32696.2021.00315-a-c8.thickness_um}
+  ring_adh_um:
+    ref: ectc51906.2022.00108-a-L05.thickness_um
+    note: "stiffener adhesive of the 85 x 85 mm MIoS ring-frame TV, stated as below 100 um (upper bound)"
+  mip_warp_um: {ref: ectc32696.2021.00315-a-m1.value}
+  # ---- reported, other MIoS-family TV (ectc51909.2023.00154-a, 3.5D molded interposer)
+  asic_w_mm: {ref: ectc51909.2023.00154-a-c2.x_mm, note: "2D ASIC of the MIoS-family 3.5D TV; ASIC size not given for the backbone"}
+  asic_d_mm: {ref: ectc51909.2023.00154-a-c2.y_mm, note: "2D ASIC of the MIoS-family 3.5D TV"}
+  hbm_w_mm: {ref: ectc51909.2023.00154-a-c4.x_mm, note: "HBM3 of the 3.5D TV; the backbone HBM (Flashbolt) outline is not given"}
+  hbm_d_mm: {ref: ectc51909.2023.00154-a-c4.y_mm, note: "HBM3 of the 3.5D TV"}
+  gap_um: {ref: ectc51909.2023.00154-a-m27.value, note: "chip-to-chip gap on the Si interposer, one design statement for all dies (3.5D TV)"}
+  ub_pitch_um: {ref: ectc51909.2023.00154-a-i3.pitch_um, note: "ASIC micro-bump pitch (3.5D TV)"}
+  hbm_pitch_um: {ref: ectc51909.2023.00154-a-i5.pitch_um, note: "HBM3 buffer-die micro-bump minimum pitch (3.5D TV, qualifier ge)"}
+  hb_pitch_um: {ref: ectc51909.2023.00154-a-i1.pitch_um}
+  hbm3_n: {ref: ectc51909.2023.00154-a-c4.count}
+  reticle_x: {ref: ectc51909.2023.00154-a.reticle_multiple}
+  bu_n: {ref: ectc51909.2023.00154-a-L11.repeat, note: "6 build-up layers per side (6-2-6) of the 3.5D TV substrate"}
+  core_h_um:
+    ref: ectc51906.2022.00108-b-L04.thickness_um
+    note: "1.2 mm POR core of the 85 x 85 mm MIoS substrate FEM model (simulation row; build value not stated)"
+  # ---- derived
+  mip_h_um:
+    derived: "asic_h_um + ub_h_um + ip_h_um + pil_h_um"
+    note: "MIP module height = dies + ubump layer + interposer + Cu pillar; equals the 0.90 mm of Fig. 3"
+  sbt_bga_um: {derived: "pkg_h_um - mip_h_um", note: "substrate + BGA = package height - MIP module"}
+  mold_h_um: {derived: "ub_h_um + max(asic_h_um, hbm_h_um)", note: "EMC from the interposer top to the die backs (flush in Fig. 3)"}
+  asic_px_mm: {derived: "asic_w_mm + gap_um / 1000", note: "two ASICs side by side at the stated chip gap"}
+  hbm_px_mm: {derived: "hbm_w_mm + gap_um / 1000", note: "two HBMs side by side at the chip gap, centred on their ASIC"}
+  hbm_py_mm: {derived: "asic_d_mm + hbm_d_mm + 2 * gap_um / 1000", note: "HBM above and below the ASIC, each at the chip gap"}
+  hbm_rows_n:
+    template: 2
+    note: "one HBM row above and one below each ASIC, as drawn in the Fig. 2 overhead view (positions not dimensioned)"
+  hbm_cols_n: {template: "hbm_n / asic_n / hbm_rows_n", note: "HBMs per row per ASIC = HBM per ASIC / rows (Fig. 2 layout)"}
+  # ---- template
+  c4_pitch_um:
+    template: "(ip_w_mm * ip_d_mm / r0) ** 0.5 * 1000"
+    refs: [ectc32696.2021.00315-a-i2.count]
+    note: "Cu-pillar pitch not reported; effective pitch if the ~60K bumps (approximate count) filled the interposer as a uniform grid"
+  c4_d_um:
+    analog: ectc51529.2024.00265-a-i1.diameter_um
+    note: "Cu-pillar diameter not reported for MIoS; analog = 200 um-pitch Cu pillar of an organic flip-chip TV (closest pitch with a diameter)"
+  ub_d_um:
+    analog: ectc51909.2023.00155-a-i1.diameter_um
+    note: "micro-bump diameter not reported for MIoS; analog = 40 um-pitch Cu/SnAg bump of a Si-interposer TV (same pitch)"
+  hbm_ub_d_um:
+    analog: eptc67330.2025.11392593-a-i2.diameter_um
+    note: "HBM bump diameter not reported; analog = 25 um bump at 73 um pitch (NPU-to-HBM region of a bridge interposer)"
+  tsv_pitch_um:
+    analog: eptc59621.2023.10457670-a-i1.pitch_min_um
+    refs: [ectc51909.2023.00154-a-i6.notes]
+    note: "interposer TSVs stated (revealed by grinding + Si etch) without dimensions; analog = 10 um x 100 um via-first TSV daisy chain on a Si interposer"
+  tsv_d_um:
+    analog: ectc.2013.6575597-a-i2.diameter_um
+    note: "interposer TSV diameter not reported for MIoS; analog = TSMC CoWoS interposer TSV"
+  bsrdl_h_um:
+    analog: ectc51909.2023.00230-a-L12.thickness_um
+    refs: [ectc32696.2021.00315-a-L05.notes]
+    note: "interposer backside RDL stated (volume split for warpage control) without thickness; analog = 1 um back-side RDL of a Si photonic interposer"
+  si_h_um: {template: "ip_h_um - bsrdl_h_um", note: "interposer Si = 110 um - backside RDL (template RDL)"}
+  bu_diel_um:
+    analog: ectc51687.2025.00148-a-L04.thickness_um
+    note: "build-up dielectric thickness not reported for MIoS; analog = ABF layer of an organic FC substrate"
+  bu_h_um: {template: "bu_n * bu_diel_um", note: "build-up per side = 6 layers (3.5D TV) x analog dielectric"}
+  sbt_h_um: {template: "core_h_um + 2 * bu_h_um", note: "substrate = FEM POR core + two 6-layer build-up stacks"}
+  bga_h_um:
+    template: "sbt_bga_um - sbt_h_um"
+    note: "BGA height not reported; the remainder that closes the reported 3.082 mm package height over the template substrate"
+  bga_pitch_um:
+    analog: ectc51909.2023.00155-a-i4.pitch_um
+    note: "BGA drawn in Fig. 3 without dimensions; analog = 1.0 mm pitch of a large Si-interposer TV"
+  bga_d_um:
+    analog: ectc51909.2023.00155-a-i4.diameter_um
+    note: "BGA ball diameter not reported; analog = SAC305 ball of the same Si-interposer TV"
+  ring_w_mm:
+    template: 7
+    note: "ring frame width not reported for the backbone; illustrative (outer edge flush with the substrate)"
+  uf1_margin_mm: {template: 0.3, note: "device underfill fillet extent not reported; illustrative"}
+  uf2_margin_mm: {template: 1.0, note: "interposer underfill fillet extent not reported; illustrative"}
+
+parts:
+  - {id: substrate, name: "Organic substrate", kind: substrate, material: organic_laminate,
+     material_label: "organic substrate (ABF build-up, SR)", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: sbt_h_um, base: true,
+     explode_group: 0}
+  - {id: interposer, name: "Si interposer (TSV)", kind: interposer, material: silicon, w_mm: ip_w_mm, d_mm: ip_d_mm,
+     h_um: ip_h_um, on: substrate, standoff: c4, explode_group: 2,
+     note: "4-stitch main-FAB + 2-stitch post-FAB lithography; backside RDL (volume tuned for MIP warpage)"}
+  - id: mold
+    name: "EMC (molded interposer)"
+    kind: mold
+    material: mold_compound
+    material_label: "EMC (EMC-A/B/C splits)"
+    w_mm: ip_w_mm
+    d_mm: ip_d_mm
+    h_um: mold_h_um
+    on: interposer
+    explode_group: 4
+    xray_default: true
+    note: "EMC between and around the dies down to the interposer; outer edge drawn flush with the interposer (Fig. 3)"
+  - {id: asic, name: ASIC, kind: die, material: silicon, w_mm: asic_w_mm, d_mm: asic_d_mm, h_um: asic_h_um, in: mold,
+     repeat: {nx: asic_n, pitch_x_mm: asic_px_mm}, explode_group: 4}
+  - id: hbm_l
+    name: "HBM (left ASIC)"
+    kind: hbm
+    material: silicon
+    material_label: "HBM Flashbolt (outline from HBM3)"
+    w_mm: hbm_w_mm
+    d_mm: hbm_d_mm
+    h_um: hbm_h_um
+    in: mold
+    x_mm: "-asic_px_mm / 2"
+    repeat: {nx: hbm_cols_n, ny: hbm_rows_n, pitch_x_mm: hbm_px_mm, pitch_y_mm: hbm_py_mm}
+    explode_group: 4
+  - id: hbm_r
+    name: "HBM (right ASIC)"
+    kind: hbm
+    material: silicon
+    material_label: "HBM Flashbolt (outline from HBM3)"
+    w_mm: hbm_w_mm
+    d_mm: hbm_d_mm
+    h_um: hbm_h_um
+    in: mold
+    x_mm: "asic_px_mm / 2"
+    repeat: {nx: hbm_cols_n, ny: hbm_rows_n, pitch_x_mm: hbm_px_mm, pitch_y_mm: hbm_py_mm}
+    explode_group: 4
+  - {id: uf1, name: "Device underfill", kind: underfill, material: underfill, material_label: "device underfill (not named)",
+     fill: {above: interposer, parts: [asic, hbm_l, hbm_r], margin_mm: uf1_margin_mm}, explode_group: 3,
+     xray_default: true}
+  - {id: uf2, name: "Interposer underfill", kind: underfill, material: underfill,
+     material_label: "interposer underfill (not named)", fill: {above: substrate, parts: [interposer],
+     margin_mm: uf2_margin_mm}, explode_group: 1, xray_default: true}
+  - {id: ring_adh, name: "Ring-frame adhesive", kind: other, material: other, material_label: "adhesive (not named)",
+     w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: ring_adh_um, shape: frame, frame_w_mm: ring_w_mm, on: substrate,
+     explode_group: 1, note: "drawn at the < 100 um upper bound of the ring-frame TV; Fig. 3 shows a 0.1 mm layer under the ring"}
+  - {id: ring, name: "Ring frame", kind: stiffener, material: other, material_label: "ring frame (material not given)",
+     w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: ring_h_um, shape: frame, frame_w_mm: ring_w_mm, on: ring_adh,
+     explode_group: 2}
+
+layers:
+  - part: interposer
+    pattern:
+      - {id: ip_si, name: "Interposer Si (TSV)", material: silicon, role: core, h_um: si_h_um}
+      - {id: ip_bsrdl, name: "Backside RDL", material: copper, material_label: "backside RDL (metal not named)",
+         role: conductor, h_um: bsrdl_h_um}
+  - part: substrate
+    pattern:
+      - {id: sbt_bu_top, name: "Top build-up (6 layers)", material: organic_build_up, material_label: "ABF + SR",
+         role: dielectric, h_um: bu_h_um}
+      - {id: sbt_core, name: "Core", material: organic_laminate, material_label: "low-CTE core", role: core,
+         h_um: core_h_um}
+      - {id: sbt_bu_bot, name: "Bottom build-up (6 layers)", material: organic_build_up, material_label: "ABF + SR",
+         role: dielectric, h_um: bu_h_um}
+
+arrays:
+  - {id: ub_asic, name: "ASIC micro-bumps", kind: microbump, per: asic, lower: interposer, pitch_um: ub_pitch_um,
+     diameter_um: ub_d_um, height_um: ub_h_um, note: "bump map not reported; pitch rendered over the full die"}
+  - {id: ub_hbm_l, name: "HBM micro-bumps", kind: microbump, per: hbm_l, lower: interposer, pitch_um: hbm_pitch_um,
+     diameter_um: hbm_ub_d_um, height_um: ub_h_um}
+  - {id: ub_hbm_r, name: "HBM micro-bumps", kind: microbump, per: hbm_r, lower: interposer, pitch_um: hbm_pitch_um,
+     diameter_um: hbm_ub_d_um, height_um: ub_h_um}
+  - {id: tsv, name: "Interposer TSVs", kind: tsv, in: interposer, region: {part: interposer}, pitch_um: tsv_pitch_um,
+     diameter_um: tsv_d_um, note: "TSV size and placement not reported; rendered over the full interposer"}
+  - {id: c4, name: "Cu pillar + solder bumps", kind: cu_pillar, per: interposer, lower: substrate, pitch_um: c4_pitch_um,
+     diameter_um: c4_d_um, height_um: pil_h_um, note: "about 60K bumps; pitch not reported (effective uniform-grid pitch drawn)"}
+  - {id: bga, name: "BGA balls", kind: bga, under: substrate, region: {part: substrate}, pitch_um: bga_pitch_um,
+     diameter_um: bga_d_um, height_um: bga_h_um}
+
+callouts:
+  - {target: interposer, text: "{ip_w_mm}x{ip_d_mm} mm Si interposer",
+     note: "Si interposer {ip_w_mm} x {ip_d_mm} mm, {ip_h_um} um thick; 4-stitch main-FAB and 2-stitch post-FAB lithography",
+     refs: [ectc32696.2021.00315-a-c3.notes]}
+  - {target: mold, text: "EMC-molded interposer (MIP)",
+     note: "Dies and interposer encapsulated in EMC form the MIP ({mip_h_um} um), then reflowed to the substrate; MIP warpage {mip_warp_um} um at high temperature before warpage control",
+     refs: [ectc32696.2021.00315-a-L02.notes]}
+  - {target: ub_asic, text: "Micro-bump layer {ub_h_um} um",
+     note: "Micro-bump layer {ub_h_um} um with device underfill; pitch {ub_pitch_um} um (ASIC) and {hbm_pitch_um} um or more (HBM3) in the 3.5D TV"}
+  - {target: c4, text: "Cu pillar + solder {pil_h_um} um",
+     note: "Cu pillar + solder bumps, {pil_h_um} um in the schematic; measured joint gap {pil_meas_um} um (centre) and {pil_edge_um} um (edge); about {pil_n} bumps, pitch not reported"}
+  - {target: ring, text: "Ring frame {ring_h_um} um",
+     note: "Ring frame {ring_h_um} um on adhesive (below {ring_adh_um} um); ring-frame material and thickness splits studied in ectc51906.2022.00108",
+     refs: [ectc51906.2022.00108-a-L03.notes]}
+  - {target: substrate, text: "{sbt_w_mm}x{sbt_d_mm} mm substrate",
+     note: "{sbt_w_mm} x {sbt_d_mm} mm organic substrate; {core_h_um} um core (FEM POR); {bu_n}-2-{bu_n} build-up in the 3.5D TV",
+     refs: [ectc51909.2023.00154-a.substrate_layer_count]}
+  - {target: bga, text: "Package {pkg_h_um} um incl. BGA"}
+  - {target: asic, text: "3.5D: hybrid-bonded 3D-ASIC",
+     note: "3.5D variant (ectc51909.2023.00154): {reticle_x}x-reticle molded Si interposer, 3D-ASIC Cu-Cu hybrid bonded at {hb_pitch_um} um, {hbm3_n} HBM3",
+     refs: [ectc51909.2023.00154-a-c1.name]}
+  - {target: tsv, text: "TSV size not reported", refs: [ectc51909.2023.00154-a-i6.notes]}
+
+insets:
+  - id: die_edge
+    label: "ASIC-HBM edge, EMC"
+    box_mm: ["asic_px_mm / 2 - 1.5", "asic_d_mm / 2 - 1.5", "asic_px_mm / 2 + 1.5", "asic_d_mm / 2 + 1.5"]
+    z: ["bottom:interposer", "top:mold"]
+    view: right
+  - id: ip_stack
+    label: "Micro-bump, interposer, Cu pillar"
+    box_mm: ["asic_px_mm / 2 - 0.4", -0.4, "asic_px_mm / 2 + 0.4", 0.4]
+    z: ["top:substrate", "bottom:asic"]
+    view: front
+  - id: mip_edge
+    label: "MIP edge, underfill, ring frame"
+    box_mm: [-2, "ip_d_mm / 2 - 2", 2, "sbt_d_mm / 2"]
+    z: ["top:substrate", "top:ring"]
+    view: right

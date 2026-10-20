@@ -1,0 +1,156 @@
+# Hybrid bonding, wafer-to-wafer (generic) 3D template. Format: config/package3d/TEMPLATE_FORMAT.md.
+# Generator: scripts/build_package3d.py.
+# Backbone: ectc51529.2024.00057-a (3-layer W2W Cu-Cu hybrid-bonded TV on 300 mm wafers: tier 3 bonded face-to-face onto
+# tier 2 at 6 / 4 um pad pitch (3 / 2 um pads), tier 2 thinned to 9 um with 1 x 10 um high-density TSVs and backside pads,
+# then bonded face-to-back onto tier 1; tier 3 Si removed, passivation opened, UBM pads). Chosen over the first-listed
+# representative ectc51687.2025.00323-a (same score) because that TV is a CoW-on-WoW stack shared with hybrid_bond_d2w;
+# 00057-a is the topology source of RESEARCH.md (hybrid_bond_w2w).
+# Each tier carries Cu damascene MZ (line) / HBV (via) / HBM (bond pad) levels. Their thicknesses are not reported in the
+# family: analogs from a CEA Cu/SiO2 hybrid-bond stack (0.85 um line level, 0.5 um via level, 0.5 um pad level).
+# Tier 1 is a full-thickness Si wafer (kept as base); the bonded footprint is not dimensioned (wafer-level test
+# structures), so a 2 x 2 mm section of the stack is drawn; all tiers share one footprint (no gap fill).
+id: hybrid_bond_w2w
+name: Hybrid bonding, wafer-to-wafer (generic)
+company: Sony, imec, CEA-Leti, Applied Materials/EVG, Micron, SK hynix, others
+package_class: hybrid_bonded_3d
+family_match: {families: true}
+backbone_tv: ectc51529.2024.00057-a
+summary: >-
+  Full wafers bonded face-to-face, then face-to-back: Cu pads at {f2f_pitch_um} um pitch in each tier's bond level, a
+  {t2_si_um} um thinned middle tier with {tsv_d_um} x {tsv_h_um} um TSVs; identical footprints, no gap fill.
+  Database pitches reach {min_pitch_um} um.
+
+params:
+  # ---- reported (backbone ectc51529.2024.00057-a unless noted)
+  f2f_pitch_um: {ref: ectc51529.2024.00057-a-i1.pitch_um}
+  f2f_pad_um: {ref: ectc51529.2024.00057-a-i1.pad_x_um, note: "3 x 3 um pads at 6 um pitch"}
+  fine_pitch_um: {ref: ectc51529.2024.00057-a-i2.pitch_um}
+  fine_pad_um: {ref: ectc51529.2024.00057-a-i2.pad_x_um}
+  f2b_pitch_um: {ref: ectc51529.2024.00057-a-i3.pitch_um, note: "F2B tier 1 to the tier 2/3 stack, pads on TSV"}
+  f2b_pad_um: {ref: ectc51529.2024.00057-a-i3.pad_x_um}
+  f2f_align_um: {ref: ectc51529.2024.00057-a-i1.alignment_um, note: "|mean| + 3 sigma X after the F2F bond (60 points)"}
+  f2b_align_um: {ref: ectc51529.2024.00057-a-i3.alignment_um, note: "|mean| + 3 sigma Y after the F2B bond (text: < 1 um)"}
+  recess_nm: {ref: ectc51529.2024.00057-a-m5.value}
+  t2_si_um: {ref: ectc51529.2024.00057-a-L10.thickness_um}
+  tsv_d_um: {ref: ectc51529.2024.00057-a-i5.diameter_um}
+  tsv_h_um: {ref: ectc51529.2024.00057-a-i5.depth_um, note: "TSV height 10 um in the 9 um tier; lands on MZ, HBM pad on top"}
+  hbv_d_um: {ref: ectc51529.2024.00057-a-L04.via_diameter_um, note: "4 HBVs per 3 um pad, 2 per 2 um pad"}
+  t1_si_um:
+    ref: ectc51529.2024.00334-a-c1.thickness_um
+    note: "full 300 mm wafer thickness of a W2W-bonded Si wafer (as bonded) in the same family; tier 1 is kept as the base, its thickness not stated"
+  # other TVs of the family (callouts)
+  sony_pitch_um: {ref: ectc51529.2024.00218-a-i1.pitch_um}
+  sony_si_um: {ref: ectc51529.2024.00218-a-L05.thickness_um}
+  sony_tsv_d_um: {ref: ectc51529.2024.00218-a-i3.diameter_um}
+  sony_tsv_pitch_um: {ref: ectc51529.2024.00218-a-i3.pitch_um}
+  min_pitch_um: {ref: ectc51846.2026.00187-a-i1.pitch_um}
+  sicn: {ref: ectc51846.2026.00187-a-i1.dielectric}
+  p04_pitch_um: {ref: ectc51846.2026.00183-a-i3.pitch_um}
+  p04_pad_um: {ref: ectc51846.2026.00183-a-i3.pad_x_um}
+  dram_n: {ref: vlsitechnologyandcir65830.2026.11577374-a-c1.count}
+  dram_si_um: {ref: vlsitechnologyandcir65830.2026.11577374-a-L02.thickness_um}
+  # ---- template: BEOL level thicknesses (not reported in the family)
+  mz_um:
+    analog: tcpmt.2021.3104326-c-L02.thickness_um
+    note: "MZ line-level thickness not reported; analog = Cu damascene routing level of a CEA Cu/SiO2 hybrid-bond stack"
+  hbv_um:
+    analog: tcpmt.2021.3104326-c-L04.thickness_um
+    note: "HBV via-level thickness not reported; analog = Cu via level of the same CEA stack"
+  hbm_um:
+    analog: tcpmt.2021.3104326-c-L05.thickness_um
+    note: "HBM bond-pad level thickness not reported; analog = Cu bonding pad in SiO2 of the same CEA stack (0.5 um per side)"
+  bpad_um: {template: "hbm_um", note: "tier 2 backside pad level (on the TSVs) drawn like the front pad level; thickness not reported"}
+  pass_um: {template: 1, note: "tier 3 passivation thickness not reported (opened for UBM pads); illustrative"}
+  hbv_pitch_um: {template: "f2f_pad_um / 2", note: "4 HBVs per 3 um pad drawn as a 2 x 2 grid per pad: via pitch = pad / 2 (layout not reported)"}
+  tsv_pitch_um: {template: "f2b_pitch_um", note: "one TSV under each F2B pad assumed ('pads on TSV'); TSV pitch not reported"}
+  sec_mm: {template: 2, note: "bonded footprint not dimensioned (wafer-level test structures); a 2 x 2 mm section of the stack is drawn"}
+  t1_h_um: {template: "t1_si_um + mz_um + hbv_um + hbm_um", note: "tier 1 = Si + MZ + HBV + HBM levels (template level thicknesses)"}
+  t2_h_um: {template: "bpad_um + t2_si_um + mz_um + hbv_um + hbm_um", note: "tier 2 = backside pads + 9 um Si + MZ + HBV + HBM levels"}
+  t3_h_um: {template: "hbm_um + hbv_um + mz_um + pass_um", note: "tier 3 after Si removal = HBM + HBV + MZ levels + passivation"}
+
+parts:
+  - {id: t1, name: "Tier 1 (bottom wafer)", kind: die, material: silicon, w_mm: sec_mm, d_mm: sec_mm, h_um: t1_h_um,
+     base: true, explode_group: 0, note: "face up; Si kept as the base; MZ / HBV / HBM levels on top"}
+  - {id: t2, name: "Tier 2 (thinned, TSV)", kind: die, material: silicon, w_mm: sec_mm, d_mm: sec_mm, h_um: t2_h_um,
+     on: t1, explode_group: 2, note: "face up in the final stack: thinned to 9 um after the F2F bond, backside pads on the TSVs, then F2B onto tier 1"}
+  - {id: t3, name: "Tier 3 (Si removed)", kind: die, material: other, material_label: "Cu damascene levels in dielectric",
+     w_mm: sec_mm, d_mm: sec_mm, h_um: t3_h_um, on: t2, explode_group: 4,
+     note: "bonded face down onto tier 2 (F2F); Si removed after the F2B bond; passivation opened, UBM / micro-pillar pads (not drawn)"}
+
+layers:
+  - part: t1
+    pattern:
+      - {id: t1_hbm, name: "T1 HBM bond-pad level", material: other, material_label: "Cu pads in bond dielectric (not named)",
+         role: bonding, h_um: hbm_um}
+      - {id: t1_hbv, name: "T1 HBV via level", material: copper, material_label: "Cu damascene", role: conductor, h_um: hbv_um,
+         via_um: hbv_d_um}
+      - {id: t1_mz, name: "T1 MZ line level", material: copper, material_label: "Cu damascene", role: conductor, h_um: mz_um}
+      - {id: t1_si, name: "T1 Si", material: silicon, role: core, h_um: t1_si_um}
+  - part: t2
+    pattern:
+      - {id: t2_hbm, name: "T2 HBM bond-pad level", material: other, material_label: "Cu pads in bond dielectric (not named)",
+         role: bonding, h_um: hbm_um}
+      - {id: t2_hbv, name: "T2 HBV via level", material: copper, material_label: "Cu damascene", role: conductor, h_um: hbv_um,
+         via_um: hbv_d_um}
+      - {id: t2_mz, name: "T2 MZ line level", material: copper, material_label: "Cu damascene", role: conductor, h_um: mz_um}
+      - {id: t2_si, name: "T2 Si (9 um, TSV)", material: silicon, role: core, h_um: t2_si_um}
+      - {id: t2_bpad, name: "T2 backside pads on TSV", material: other, material_label: "Cu pads in bond dielectric (not named)",
+         role: bonding, h_um: bpad_um}
+  - part: t3
+    pattern:
+      - {id: t3_pass, name: "T3 passivation (opened)", material: other, material_label: "passivation (not named)",
+         role: passivation, h_um: pass_um}
+      - {id: t3_mz, name: "T3 MZ line level", material: copper, material_label: "Cu damascene", role: conductor, h_um: mz_um}
+      - {id: t3_hbv, name: "T3 HBV via level", material: copper, material_label: "Cu damascene", role: conductor, h_um: hbv_um,
+         via_um: hbv_d_um}
+      - {id: t3_hbm, name: "T3 HBM bond-pad level", material: other, material_label: "Cu pads in bond dielectric (not named)",
+         role: bonding, h_um: hbm_um}
+
+arrays:
+  - {id: f2f_lo, name: "F2F bond pads (tier 2)", kind: hybrid_bond, in_layer: t2_hbm, pitch_um: f2f_pitch_um,
+     diameter_um: f2f_pad_um, note: "3 x 3 um square pads drawn as their width; full-area grid, test-structure map not reported"}
+  - {id: f2f_hi, name: "F2F bond pads (tier 3)", kind: hybrid_bond, in_layer: t3_hbm, pitch_um: f2f_pitch_um,
+     diameter_um: f2f_pad_um}
+  - {id: f2b_lo, name: "F2B bond pads (tier 1)", kind: hybrid_bond, in_layer: t1_hbm, pitch_um: f2b_pitch_um,
+     diameter_um: f2b_pad_um}
+  - {id: f2b_hi, name: "F2B backside pads (tier 2)", kind: hybrid_bond, in_layer: t2_bpad, pitch_um: f2b_pitch_um,
+     diameter_um: f2b_pad_um, note: "backside pads on the TSVs"}
+  - {id: tsv, name: "HD TSVs", kind: tsv, in_layer: t2_si, pitch_um: tsv_pitch_um, diameter_um: tsv_d_um,
+     note: "1 x 10 um TSV with oxide liner through the 9 um tier 2 Si; fill metal not named"}
+  - {id: hbv, name: "HBVs (tier 2)", kind: rdl_via, in_layer: t2_hbv, pitch_um: hbv_pitch_um, diameter_um: hbv_d_um,
+     note: "0.6 um hybrid-bonding vias, 4 per 3 um pad"}
+
+callouts:
+  - {target: f2f_lo, text: "F2F {f2f_pitch_um} um, {f2f_pad_um} um pads",
+     note: "F2F tier 3 / tier 2: {f2f_pad_um} um pads at {f2f_pitch_um} um and {fine_pad_um} um at {fine_pitch_um} um; overlay {f2f_align_um} um (|mean| + 3 sigma); Cu recess < {recess_nm} nm"}
+  - {target: f2b_lo, text: "F2B {f2b_pitch_um} um, pads on TSV",
+     note: "F2B tier 1 to the tier 2/3 stack at {f2b_pitch_um} um pitch; overlay {f2b_align_um} um after the second bond"}
+  - {target: tsv, text: "TSV {tsv_d_um} x {tsv_h_um} um"}
+  - {target: t2_si, text: "Tier 2 Si {t2_si_um} um"}
+  - {target: hbv, text: "HBV {hbv_d_um} um, 4 per pad", refs: [ectc51529.2024.00057-a-L04.notes]}
+  - {target: t3, text: "Tier 3 Si removed, UBM", refs: [ectc51529.2024.00057-a-c3.notes]}
+  - {target: t1, text: "Bond dielectric not named", refs: [ectc51529.2024.00057-a-L06.notes],
+     note: "the backbone does not name the bonding dielectric; other TVs of the family use {sicn}"}
+  - {target: f2f_lo, text: "Sony WoWoW: {sony_pitch_um} um pitch",
+     note: "Sony WoWoW: {sony_pitch_um} um F2F and F2B, {sony_si_um} um middle Si with {sony_tsv_d_um} um TSVs at {sony_tsv_pitch_um} um pitch"}
+  - {target: f2f_lo, text: "W2W down to {min_pitch_um} um", refs: [ectc51846.2026.00187-a-i1.dielectric],
+     note: "W2W pitches in the database reach {min_pitch_um} um with a SiCN bond layer; {p04_pad_um} um pads at {p04_pitch_um} um in another TV"}
+  - {target: t1, text: "{dram_n}-high DRAM, {dram_si_um} um Si",
+     note: "logic + {dram_n} DRAM wafer stack with via-in-one TSVs, ~{dram_si_um} um Si per tier"}
+
+insets:
+  - id: unit_cell
+    label: "Three-tier unit cell"
+    box_mm: [-0.012, -0.012, 0.012, 0.012]
+    z: ["bottom:f2b_lo", "top:t3"]
+    view: front
+  - id: f2b_tsv
+    label: "F2B interface and TSV"
+    box_mm: [-0.009, -0.009, 0.009, 0.009]
+    z: ["bottom:f2b_lo", "top:tsv"]
+    view: front
+  - id: stack_edge
+    label: "Stack edge, full height"
+    box_mm: ["sec_mm / 2 - 0.05", -0.05, "sec_mm / 2", 0.05]
+    z: ["bottom:t1", "top:t3"]
+    view: front

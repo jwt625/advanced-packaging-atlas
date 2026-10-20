@@ -1,0 +1,287 @@
+# CoWoS-S 3D template. Format: config/package3d/TEMPLATE_FORMAT.md. Generator: scripts/build_package3d.py.
+# Backbone: ectc51909.2023.00135-a (TV1: 85 x 85 mm CoWoS MCM, two 1.5x-reticle Si TSV interposers, each with 1 SoC
+# + 4 HBM2E; Cu-pillar C4, Cu stiffener ring, mold between the dies, UF1 + UF2). Interposer BEOL, TSV and micro-bump
+# details come from the TSMC CoWoS TV ectc.2013.6575597-a (same family). Dimensions no CoWoS row reports are template
+# values, mostly analog cells from the Si-interposer peer TVs (si_interposer_peers in families.yaml).
+# Floor plan per module follows the backbone's Fig. 3 drawing (TV1): SoC in the middle, two HBM2E on each long side;
+# the two modules are stacked along y. Dies are drawn rotated so their long side runs along y as in that drawing.
+id: cowos_s
+name: CoWoS-S
+company: TSMC
+package_class: si_interposer_2p5d
+family_match: {families: true}
+backbone_tv: ectc51909.2023.00135-a
+summary: >-
+  TSMC 2.5D: SoC and HBM on {ubump_pitch_um} um micro-bumps over a {ip_h_um} um Si interposer with
+  {tsv_d_um} um TSVs, Cu-pillar C4 at {c4_pitch_um} um to an organic substrate. Backbone: {ip_n} x
+  {reticle_x}x-reticle interposers, {soc_n} SoC + {hbm_n} HBM2E.
+
+params:
+  # ---- reported (backbone ectc51909.2023.00135-a unless noted)
+  sbt_w_mm: {ref: ectc51909.2023.00135-a-c4.x_mm}
+  sbt_d_mm: {ref: ectc51909.2023.00135-a-c4.y_mm}
+  reticle_x: {ref: ectc51909.2023.00135-a.reticle_multiple}
+  ip_n: {ref: ectc51909.2023.00135-a-c3.count}
+  ip_h_um: {ref: ectc51909.2023.00135-a-c3.thickness_um}
+  ip_thin_um: {ref: ectc51909.2023.00135-c-c4.thickness_um}
+  soc_n: {ref: ectc51909.2023.00135-a-c1.count}
+  soc_w_mm: {ref: ectc51909.2023.00135-a-c1.y_mm, note: "SoC 27 x 18 mm drawn with the 18 mm side along x (Fig. 3 floor plan)"}
+  soc_d_mm: {ref: ectc51909.2023.00135-a-c1.x_mm, note: "SoC 27 x 18 mm drawn with the 27 mm side along y (Fig. 3 floor plan)"}
+  hbm_n: {ref: ectc51909.2023.00135-a-c2.count}
+  hbm_w_mm: {ref: ectc51909.2023.00135-a-c2.y_mm, note: "HBM2E 11 x 10 mm drawn with the 10 mm side along x (Fig. 3 floor plan)"}
+  hbm_d_mm: {ref: ectc51909.2023.00135-a-c2.x_mm, note: "HBM2E 11 x 10 mm drawn with the 11 mm side along y (Fig. 3 floor plan)"}
+  ubump_pitch_um: {ref: ectc51909.2023.00135-a-i1.pitch_um}
+  ubump_count_2013: {ref: ectc.2013.6575597-a-i1.count}
+  c4_pitch_um: {ref: ectc51909.2023.00135-a-i2.pitch_um}
+  c4_2013_pitch_um: {ref: ectc.2013.6575597-a-i3.pitch_um}
+  bga_pitch_um: {ref: ectc51909.2023.00135-a-i3.pitch_um}
+  ring_mat: {ref: ectc51909.2023.00135-a-c5.material}
+  tsv_d_um: {ref: ectc.2013.6575597-a-i2.diameter_um}
+  tsv_depth_um: {ref: ectc.2013.6575597-a-i2.depth_um}
+  tsv_ar: {ref: ectc.2013.6575597-a-i2.aspect_ratio}
+  cu_n: {ref: ectc.2013.6575597-a-L04.repeat}
+  ip2013_w_mm: {ref: ectc.2013.6575597-a-c3.x_mm}
+  ip2013_d_mm: {ref: ectc.2013.6575597-a-c3.y_mm}
+  # ---- template: layout (die positions and interposer x/y are not dimensioned in any CoWoS row)
+  hbm_cols_n:
+    template: 2
+    note: "two HBM2E columns per module, one on each side of the SoC (backbone Fig. 3, TV1 floor plan)"
+  hbm_rows_n: {template: "hbm_n / ip_n / hbm_cols_n", note: "HBM per column = HBM per interposer / columns"}
+  die_gap_um:
+    analog: ectc51529.2024.00049-a-c1.gap_um
+    note: "die-to-die gap not reported for CoWoS-S; analog = TSMC CoWoS-R SoC D2D gap"
+  hbm_px_mm: {template: "soc_w_mm + 2 * die_gap_um / 1000 + hbm_w_mm", note: "HBM columns flank the SoC at the D2D gap"}
+  hbm_py_mm:
+    template: "soc_d_mm - hbm_d_mm"
+    note: "HBM pair drawn flush with the SoC long edges (backbone Fig. 3 floor plan); not dimensioned"
+  block_w_mm: {template: "soc_w_mm + 2 * hbm_w_mm + 2 * die_gap_um / 1000", note: "die block width per module (template gap)"}
+  ip_edge_mm:
+    template: 1
+    refs: [ectc51909.2023.00091-a.notes]
+    note: "die-to-interposer-edge margin not reported for CoWoS-S; the TSMC CoWoS-L 6x TV defines its interposer as the top-die rectangle + 1 mm per side"
+  reticle_area_mm2:
+    template: "r0 / r1"
+    refs: [ectc51909.2023.00174-a.interposer_area_mm2, ectc51909.2023.00174-a.reticle_multiple]
+    note: "area per reticle not given in CoWoS-S rows; analog = TSMC CoWoS-L TV interposer area / reticle multiple"
+  ip_w_mm: {template: "block_w_mm + 2 * ip_edge_mm", note: "interposer x = die block + edge margin per side (x/y not reported; size given as 1.5 reticle)"}
+  ip_d_mm:
+    template: "reticle_x * reticle_area_mm2 / ip_w_mm"
+    note: "interposer y from the reported 1.5x reticle multiple x analog reticle area / interposer x"
+  ip_gap_mm:
+    template: 1
+    note: "spacing between the two interposer modules not reported; narrow gap as in the backbone photo (Fig. 2); illustrative"
+  ip_py_mm: {template: "ip_d_mm + ip_gap_mm", note: "module pitch along y = interposer y + module gap"}
+  # ---- template: thicknesses and joints (no CoWoS-S row reports them)
+  soc_h_um:
+    analog: ectc32696.2021.00315-a-c1.thickness_um
+    note: "SoC thickness not reported for CoWoS-S; analog = ASIC thickness of a Samsung MIoS Si-interposer TV (drawn coplanar with HBM)"
+  hbm_h_um:
+    analog: ectc32696.2021.00315-a-c2.thickness_um
+    note: "HBM2E stack height not reported for CoWoS-S; analog = HBM (Flashbolt) stack height of the same MIoS TV"
+  ubump_d_um:
+    analog: ectc51909.2023.00155-a-i1.diameter_um
+    note: "micro-bump diameter not reported for CoWoS-S; analog = 40 um-pitch Cu/SnAg bump of a Si-interposer TV"
+  ubump_h_um:
+    template: "r0 + r1"
+    refs: [ectc51909.2023.00155-a-i1.height_um, ectc51909.2023.00155-a-i1.cap_height_um]
+    note: "joint standoff = Cu bump + SnAg cap of the 40 um-pitch analog bump"
+  mold_h_um: {template: "ubump_h_um + max(soc_h_um, hbm_h_um)", note: "mold ground flush with the die backs: standoff + die height"}
+  c4_d_um:
+    analog: ectc51909.2023.00155-a-i3.diameter_um
+    note: "Cu-pillar diameter not reported for CoWoS-S; analog = 150 um-pitch Cu/SnAg pillar of a Si-interposer TV"
+  c4_h_um:
+    template: "r0 + r1"
+    refs: [ectc51909.2023.00155-a-i3.height_um, ectc51909.2023.00155-a-i3.cap_height_um]
+    note: "C4 standoff = Cu + SnAg of the 150 um-pitch analog pillar (backbone studied 60-90 um only by FEA)"
+  tsv_pitch_um:
+    analog: eptc59621.2023.10457670-a-i1.pitch_min_um
+    note: "TSV pitch not reported for CoWoS-S; analog = 10 um x 100 um via-first TSV daisy chain on a Si interposer"
+  al_h_um:
+    analog: ectc51909.2023.00230-a-L03.thickness_um
+    note: "Al RDL thickness not reported; analog = Al front RDL of a Si photonic interposer"
+  cu_h_um:
+    analog: ectc51909.2023.00174-d-L02.thickness_um
+    note: "Cu damascene level thickness not reported for CoWoS-S; analog = TSMC LSI-1 dual-damascene Cu level"
+  si_h_um: {template: "ip_h_um - al_h_um - cu_n * cu_h_um", note: "Si core = interposer thickness - BEOL (template BEOL)"}
+  sbt_h_um:
+    analog: ectc51909.2023.00155-a-c10.thickness_um
+    note: "substrate thickness not reported for CoWoS-S; analog = 100 mm build-up substrate of a 50 x 50 mm Si-interposer TV"
+  core_h_um:
+    analog: ectc51909.2023.00155-a-L17.thickness_um
+    note: "core thickness not reported; analog = CCL core of the same analog substrate"
+  bu_h_um: {template: "(sbt_h_um - core_h_um) / 2", note: "build-up + solder resist per side = (substrate - core) / 2 of the analog"}
+  ring_h_um:
+    analog: ectc51909.2023.00155-a-c11.thickness_um
+    note: "Cu ring thickness not reported for CoWoS-S; analog = Cu stiffener of the same analog Si-interposer TV"
+  ring_w_mm:
+    template: 7
+    note: "ring width not reported; 7 mm leaves ~3 mm to the UF2 fillet along y on this substrate; illustrative"
+  uf1_margin_mm: {template: 0.3, note: "UF1 fillet extent not reported; illustrative"}
+  uf2_margin_mm: {template: 1.0, note: "UF2 (C4) fillet extent not reported; illustrative"}
+  bga_d_um:
+    analog: ectc51909.2023.00155-a-i4.diameter_um
+    note: "BGA ball diameter not reported for CoWoS-S; analog = SAC305 1.0 mm-pitch ball of a large Si-interposer TV"
+  bga_h_um:
+    template: 478
+    refs: [ectc51909.2023.00155-a-i4.notes]
+    note: "BGA height not reported for CoWoS-S; the analog row's notes give a measured ball height of 478 um"
+
+parts:
+  - {id: substrate, name: "Organic substrate", kind: substrate, material: organic_laminate,
+     material_label: "organic build-up substrate", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: sbt_h_um, base: true,
+     explode_group: 0}
+  - id: interposer
+    name: "Si interposer (TSV)"
+    kind: interposer
+    material: silicon
+    w_mm: ip_w_mm
+    d_mm: ip_d_mm
+    h_um: ip_h_um
+    on: substrate
+    standoff: c4
+    repeat: {ny: ip_n, pitch_y_mm: ip_py_mm}
+    explode_group: 2
+  - id: mold
+    name: "Mold compound (between dies)"
+    kind: mold
+    material: mold_compound
+    material_label: "epoxy mold compound"
+    w_mm: ip_w_mm
+    d_mm: ip_d_mm
+    h_um: mold_h_um
+    on: interposer
+    repeat: {ny: ip_n, pitch_y_mm: ip_py_mm}
+    explode_group: 4
+    xray_default: true
+    note: "fills around the dies and the UF1 fillet down to the interposer; outer edge assumed flush with the interposer"
+  - id: soc
+    name: SoC
+    kind: die
+    material: silicon
+    w_mm: soc_w_mm
+    d_mm: soc_d_mm
+    h_um: soc_h_um
+    in: mold
+    repeat: {ny: soc_n, pitch_y_mm: ip_py_mm}
+    explode_group: 4
+  - id: hbm_a
+    name: "HBM2E (module 1)"
+    kind: hbm
+    material: silicon
+    w_mm: hbm_w_mm
+    d_mm: hbm_d_mm
+    h_um: hbm_h_um
+    in: mold
+    y_mm: "ip_py_mm / 2"
+    repeat: {nx: hbm_cols_n, ny: hbm_rows_n, pitch_x_mm: hbm_px_mm, pitch_y_mm: hbm_py_mm}
+    explode_group: 4
+  - id: hbm_b
+    name: "HBM2E (module 2)"
+    kind: hbm
+    material: silicon
+    w_mm: hbm_w_mm
+    d_mm: hbm_d_mm
+    h_um: hbm_h_um
+    in: mold
+    y_mm: "-ip_py_mm / 2"
+    repeat: {nx: hbm_cols_n, ny: hbm_rows_n, pitch_x_mm: hbm_px_mm, pitch_y_mm: hbm_py_mm}
+    explode_group: 4
+  - id: uf1
+    name: "UF1 (die to interposer)"
+    kind: underfill
+    material: underfill
+    w_mm: "block_w_mm + 2 * uf1_margin_mm"
+    d_mm: "soc_d_mm + 2 * uf1_margin_mm"
+    h_um: ubump_h_um
+    on: interposer
+    repeat: {ny: ip_n, pitch_y_mm: ip_py_mm}
+    explode_group: 3
+    xray_default: true
+  - id: uf2
+    name: "UF2 (interposer to substrate)"
+    kind: underfill
+    material: underfill
+    fill: {above: substrate, parts: [interposer], margin_mm: uf2_margin_mm}
+    explode_group: 1
+    xray_default: true
+  - {id: ring, name: "Cu stiffener ring", kind: stiffener, material: copper, material_label: copper, w_mm: sbt_w_mm,
+     d_mm: sbt_d_mm, h_um: ring_h_um, shape: frame, frame_w_mm: ring_w_mm, on: substrate, explode_group: 1,
+     note: "ring size not reported; outer edge assumed flush with the substrate edge"}
+
+layers:
+  - part: interposer
+    pattern:
+      - {id: ip_al, name: "Al RDL (top)", material: other, material_label: "Al", role: conductor, h_um: al_h_um}
+  - part: interposer
+    repeat: cu_n
+    pattern:
+      - {id: ip_cu, name: "Cu damascene level", material: copper, material_label: "Cu damascene (sub-um pitch)",
+         role: conductor, h_um: cu_h_um}
+  - part: interposer
+    pattern:
+      - {id: ip_si, name: "Si core (TSV)", material: silicon, role: core, h_um: si_h_um}
+  - part: substrate
+    pattern:
+      - {id: sbt_bu_top, name: "Front build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+      - {id: sbt_core, name: "Core", material: organic_laminate, material_label: "laminate core", role: core,
+         h_um: core_h_um}
+      - {id: sbt_bu_bot, name: "Back build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+
+arrays:
+  - {id: ubump_soc, name: "SoC micro-bumps", kind: microbump, per: soc, lower: interposer, pitch_um: ubump_pitch_um,
+     diameter_um: ubump_d_um, height_um: ubump_h_um, note: "pitch rendered over the full die; the bump map is not reported"}
+  - {id: ubump_hbm_a, name: "HBM micro-bumps", kind: microbump, per: hbm_a, lower: interposer,
+     pitch_um: ubump_pitch_um, diameter_um: ubump_d_um, height_um: ubump_h_um}
+  - {id: ubump_hbm_b, name: "HBM micro-bumps", kind: microbump, per: hbm_b, lower: interposer,
+     pitch_um: ubump_pitch_um, diameter_um: ubump_d_um, height_um: ubump_h_um}
+  - {id: tsv, name: "TSVs", kind: tsv, per: interposer, in: interposer, pitch_um: tsv_pitch_um, diameter_um: tsv_d_um,
+     note: "TSV placement not reported; rendered over the full interposer, through its full thickness"}
+  - {id: c4, name: "Cu-pillar C4", kind: cu_pillar, per: interposer, lower: substrate, pitch_um: c4_pitch_um,
+     diameter_um: c4_d_um, height_um: c4_h_um, note: "2013 TV: C4 directly on the TSV at the interposer backside"}
+  - {id: bga, name: "BGA balls", kind: bga, under: substrate, region: {part: substrate}, pitch_um: bga_pitch_um,
+     diameter_um: bga_d_um, height_um: bga_h_um}
+
+callouts:
+  - {target: interposer, text: "Si interposer {ip_h_um} um",
+     note: "Si interposer {ip_h_um} um ({ip_thin_um} um in the optimized TV2), {reticle_x}x reticle each"}
+  - {target: ip_cu, text: "{cu_n} damascene Cu levels, Al RDL",
+     note: "Front side: {cu_n} Cu damascene levels (pitch below 1 um) + Al RDL (5 um pitch); optional MIM",
+     refs: [ectc.2013.6575597-a-L04.feature, ectc.2013.6575597-a-L03.feature, ectc.2013.6575597-a-L04.notes]}
+  - {target: tsv, text: "TSV {tsv_d_um} x {tsv_depth_um} um",
+     note: "TSV {tsv_d_um} um x {tsv_depth_um} um deep (AR {tsv_ar}), ECP Cu with oxide liner",
+     refs: [ectc.2013.6575597-a-i2.metallurgy]}
+  - {target: interposer, text: "2013 TV: {ubump_count_2013} micro-bumps",
+     note: "2013 TSMC TV: one {ip2013_w_mm} x {ip2013_d_mm} mm interposer, {ubump_count_2013} micro-bumps"}
+  - {target: ubump_soc, text: "Micro-bump pitch {ubump_pitch_um} um", note: "Micro-bump pitch {ubump_pitch_um} um (SoC and HBM)"}
+  - {target: c4, text: "Cu-pillar C4 at {c4_pitch_um} um",
+     note: "Cu-pillar C4 at {c4_pitch_um} um (SnPb C4 at {c4_2013_pitch_um} um in 2013); standoff 60-90 um studied by FEA",
+     refs: [ectc51909.2023.00135-a-i2.notes]}
+  - {target: mold, text: "Mold between SoC and HBM",
+     note: "Mold compound between SoC and HBM; UF1 under the dies, UF2 under the interposer",
+     refs: [ectc51909.2023.00135-a-c6.name, ectc51909.2023.00135-a-c7.name, ectc51909.2023.00135-a-c8.name]}
+  - {target: ring, text: "{ring_mat} stiffener ring (warpage control)", refs: [ectc51909.2023.00135-a-c5.notes]}
+  - {target: substrate, text: "{sbt_w_mm} x {sbt_d_mm} mm substrate",
+     note: "{sbt_w_mm} x {sbt_d_mm} mm organic substrate; BGA pitch {bga_pitch_um} um"}
+
+insets:
+  - id: d2h
+    label: "SoC-HBM edge"
+    box_mm: ["soc_w_mm / 2 - 1.5", "ip_py_mm / 2 + hbm_py_mm / 2 - 1.5", "soc_w_mm / 2 + 1.5",
+             "ip_py_mm / 2 + hbm_py_mm / 2 + 1.5"]
+    z: ["bottom:interposer", "top:mold"]
+    view: front
+  - id: ip_stack
+    label: "Interposer: BEOL, TSV, micro-bumps, C4"
+    box_mm: [-0.3, "ip_py_mm / 2 - 0.3", 0.3, "ip_py_mm / 2 + 0.3"]
+    z: ["top:substrate", "bottom:soc"]
+    view: front
+  - id: ip_edge
+    label: "Interposer edge, C4 and UF2"
+    box_mm: ["ip_w_mm / 2 - 1.5", "ip_py_mm / 2 - 1.5", "ip_w_mm / 2 + 2", "ip_py_mm / 2 + 1.5"]
+    z: ["top:substrate", "top:mold"]
+    view: front
+  - id: modules
+    label: "Gap between the two interposer modules"
+    box_mm: [-1.5, "-ip_gap_mm / 2 - 2", 1.5, "ip_gap_mm / 2 + 2"]
+    z: ["top:substrate", "top:mold"]
+    view: right

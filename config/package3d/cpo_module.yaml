@@ -1,0 +1,239 @@
+# Co-packaged optics module 3D template (generic). Format: config/package3d/TEMPLATE_FORMAT.md.
+# Generator: scripts/build_package3d.py.
+# Backbone: ectc51687.2025.00012-a (Intel MCP: XPU compute die at the center, 2 optical I/O (OIO) chiplets linked to it
+# through EMIB bridges in the package substrate, each OIO chiplet overhanging the substrate edge with 24 edge ports
+# (metamaterial spot-size converters + etched V-grooves); two 24-channel PM fiber array units (FAU, 250 um pitch)
+# attached last with optical and mechanical adhesives and a fiber lid; heat spreader; underfill; SAC BGA). The paper
+# gives no die, bridge, substrate or bump dimensions.
+# Gaps from other TVs of the same family (package_class cpo_module): PIC footprint (8 x 10 mm), die-to-substrate C4
+# pitch (150 um) and BGA pitch (500 um) of the IBM single-PIC CPO module ectc51687.2025.00052-b. Every other dimension is a
+# template; the EMIB bridge and XPU use the same analogs as the emib template.
+# Layout: XPU | gap | OIO on each side, one EMIB under each XPU-OIO edge; the substrate edge sits under each OIO chiplet
+# so the outer part of the chiplet overhangs it. The FAU is drawn under the overhang at the chip edge (the face-down
+# chiplet carries its edge couplers and V-grooves on the substrate-facing side; the attach geometry is not dimensioned).
+# Variants as callouts: IBM polymer-waveguide module, IME PIC-in-mold interposer, OMIB, CHIPS open-cavity prototype.
+id: cpo_module
+name: Co-packaged optics module
+company: IBM, Intel, A*STAR IME, TSMC, Celestial AI, others
+package_class: cpo_module
+family_match: {families: true}
+backbone_tv: ectc51687.2025.00012-a
+summary: >-
+  Compute die (XPU) and {oio_n} optical I/O chiplets on one substrate, linked by EMIB bridges; each chiplet overhangs the
+  substrate edge, where a {fau_ch_n}-channel fiber array ({fiber_pitch_um} um pitch) is attached last; heat spreader,
+  BGA. Generic layout.
+
+params:
+  # ---- reported (backbone ectc51687.2025.00012-a unless noted)
+  oio_n: {ref: ectc51687.2025.00012-a-c2.count}
+  fau_n: {ref: ectc51687.2025.00012-a-c5.count, note: "one FAU per OIO chiplet"}
+  fau_ch_n: {ref: ectc51687.2025.00012-a-o1.channels}
+  fiber_pitch_um: {ref: ectc51687.2025.00012-a-o1.fiber_pitch_um}
+  il_db: {ref: ectc51687.2025.00012-a-o1.coupling_loss_db, note: "IL per facet, mean of 386 chiplets (active alignment)"}
+  oio4_n: {ref: ectc51687.2025.00012-b-c1.count}
+  oio6_n: {ref: ectc51687.2025.00012-c-c1.count}
+  c4_pitch_um:
+    ref: ectc51687.2025.00052-b-i1.pitch_um
+    note: "PIC flip-chip solder bump pitch of the IBM single-PIC CPO module; the backbone draws its bumps only"
+  bga_pitch_um:
+    ref: ectc51687.2025.00052-b-i2.pitch_um
+    note: "micro-BGA pitch of the IBM single-PIC CPO module; the backbone reports SAC BGA without pitch"
+  ibm_sbt_mm: {ref: ectc51687.2025.00052-b-c2.x_mm}
+  ibm_pic_w_mm: {ref: ectc51687.2025.00052-b-c1.x_mm}
+  ibm_pic_d_mm: {ref: ectc51687.2025.00052-b-c1.y_mm}
+  ibm_pwg_pitch_um: {ref: ectc51687.2025.00052-b-o1.fiber_pitch_um}
+  ime_w_mm: {ref: ectc51846.2026.00016-a.interposer_x_mm}
+  ime_d_mm: {ref: ectc51846.2026.00016-a.interposer_y_mm}
+  chips_w_mm: {ref: ectc51687.2025.00061-a.package_x_mm}
+  chips_fau_n: {ref: ectc51687.2025.00061-a-c10.count}
+  chips_ch_n: {ref: ectc51687.2025.00061-a-o1.channels}
+  chips_pitch_um: {ref: ectc51687.2025.00061-a-o1.fiber_pitch_um}
+  omib_n: {ref: ectc51687.2025.00062-a-c3.count}
+  # ---- derived
+  fau_d_mm: {derived: "fau_ch_n * fiber_pitch_um / 1000", note: "FAU width = 24 channels x 250 um fiber pitch (fiber span; block margin not drawn)"}
+  # ---- template: layout and sizes (no CPO row dimensions the backbone parts)
+  oio_w_mm:
+    template: "r0"
+    refs: [ectc51687.2025.00052-b-c1.x_mm]
+    note: "OIO chiplet size not reported; set to the 8 x 10 mm PIC of the IBM CPO module (8 mm across, ports on the outer edge)"
+  oio_d_mm:
+    template: "r0"
+    refs: [ectc51687.2025.00052-b-c1.y_mm]
+    note: "OIO chiplet size not reported; 10 mm side of the IBM CPO PIC along the port edge"
+  xpu_w_mm:
+    analog: ectc51906.2022.00106-a-c1.x_mm
+    note: "XPU size not reported; analog = processor chip of an IBM bridge (DBHi) package, as in the EMIB template"
+  xpu_d_mm:
+    analog: ectc51906.2022.00106-a-c1.y_mm
+    note: "XPU size analog = the same processor chip"
+  die_h_um:
+    analog: ectc51906.2022.00106-a-c1.thickness_um
+    note: "die thickness not reported; analog = the same processor chip; OIO drawn co-planar under the heat spreader"
+  die_gap_um:
+    analog: tcpmt.2023.3312037-a-c2.gap_um
+    note: "XPU-OIO gap not reported; analog = Intel Co-EMIB die-to-die spacing ('as small as 100 um')"
+  oio_px_mm: {template: "xpu_w_mm + 2 * die_gap_um / 1000 + oio_w_mm", note: "OIO chiplets at the D2D gap on each side of the XPU"}
+  overhang_mm: {template: 1.5, note: "OIO overhang beyond the substrate edge is stated, not dimensioned; illustrative"}
+  sbt_w_mm:
+    template: "oio_px_mm + oio_w_mm - 2 * overhang_mm"
+    note: "substrate width set so its edges sit under the OIO chiplets with the overhang (size not reported)"
+  sbt_margin_mm: {template: 8, note: "substrate margin beyond the dies along y not reported; illustrative"}
+  sbt_d_mm: {template: "max(xpu_d_mm, oio_d_mm) + 2 * sbt_margin_mm", note: "substrate length = tallest die + margins (template)"}
+  bridge_w_mm:
+    analog: ectc.2016.201-a-c1.x_mm
+    note: "EMIB size not reported (count and size not given, c3); analog = lower bound of the EMIB size range"
+  bridge_d_mm:
+    analog: ectc.2016.201-a-c1.y_mm
+    note: "EMIB size analog = lower bound of the EMIB size range"
+  bridge_h_um:
+    analog: ectc.2016.201-a-c1.thickness_um
+    note: "EMIB thickness analog = upper bound (thinned below 75 um)"
+  bridge_px_mm: {template: "xpu_w_mm + die_gap_um / 1000", note: "one EMIB centered under each XPU-OIO gap (count not reported)"}
+  fine_pitch_um:
+    analog: ectc.2016.201-a-i1.pitch_um
+    note: "die-to-bridge bump pitch not reported; analog = 55 um EMIB fine pitch"
+  fine_d_um:
+    analog: ectc51906.2022.00180-a-i3.diameter_um
+    note: "fine bump diameter analog = 55 um-pitch Cu/SnAg micro-bump of a glass 2.5D package"
+  bump_h_um:
+    template: "r0 + r1"
+    refs: [ectc51906.2022.00180-a-i3.height_um, ectc51906.2022.00180-a-i3.cap_height_um]
+    note: "bump standoff = Cu + SnAg cap of the 55 um-pitch analog; one standoff for fine and coarse bumps"
+  c4_d_um:
+    analog: ectc51909.2023.00155-a-i3.diameter_um
+    note: "C4 diameter not reported; analog = 75 um Cu/SnAg bump at 150 um pitch (2.5D TV)"
+  bu_n:
+    analog: ectc51687.2025.00148-a-L06.repeat
+    note: "substrate layer count not reported; analog = 4 build-up layers per side of an organic FC substrate"
+  bu_diel_um:
+    analog: ectc51687.2025.00148-a-L04.thickness_um
+    note: "build-up dielectric thickness analog = ABF-GL layer of the same organic FC substrate"
+  bu_h_um: {template: "bu_n * bu_diel_um", note: "build-up per side = layer count x dielectric thickness (analogs)"}
+  core_h_um:
+    analog: ectc51687.2025.00148-a-L07.thickness_um
+    note: "core thickness analog = core of the same organic FC substrate"
+  sbt_h_um: {template: "core_h_um + 2 * bu_h_um", note: "substrate = core + 2 build-up stacks (template inputs)"}
+  bridge_depth_um: {template: "bu_diel_um", note: "bridge top one build-up dielectric below the surface (as in the EMIB template)"}
+  uf_margin_mm: {template: 0.5, note: "underfill fillet extent not reported; illustrative"}
+  fau_w_mm: {template: 6, note: "FAU length along the fibers not reported; illustrative"}
+  fau_h_um: {template: 1000, note: "FAU height (fiber array + fiber lid) not reported; illustrative"}
+  fau_x_mm:
+    template: "oio_px_mm / 2 + oio_w_mm / 2 - overhang_mm + fau_w_mm / 2"
+    note: "FAU starts under the overhang at the substrate edge and extends outward (attach geometry not dimensioned)"
+  hs_gap_um: {template: "bump_h_um + die_h_um", note: "heat spreader plate rests on the die backs (TIM and attach not reported)"}
+  hs_h_um:
+    analog: ectc51909.2023.00091-a-c8.thickness_um
+    note: "heat spreader thickness not reported; analog = 2 mm lid of a large 2.5D TV"
+  bga_d_um:
+    analog: ectc32862.2020.00185-a-i2.diameter_um
+    note: "ball diameter not reported; analog = 200 um solder ball at 400 um pitch (fan-out panel package)"
+  bga_h_um:
+    analog: ectc51909.2023.00091-a-i3.height_um
+    note: "ball height not reported; analog = ~200 um 0.5 mm-pitch uBGA layer of a large 2.5D TV"
+
+parts:
+  - {id: substrate, name: "Package substrate (EMIB)", kind: substrate, material: organic_laminate,
+     material_label: "package substrate (construction not reported)", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: sbt_h_um,
+     base: true, explode_group: 0}
+  - id: bridge
+    name: "EMIB bridge"
+    kind: bridge
+    material: silicon
+    w_mm: bridge_w_mm
+    d_mm: bridge_d_mm
+    h_um: bridge_h_um
+    in: substrate
+    depth_um: bridge_depth_um
+    repeat: {nx: oio_n, pitch_x_mm: bridge_px_mm}
+    explode_group: 1
+    note: "XPU-OIO link through EMIB (row i1); count and size not reported"
+  - {id: xpu, name: "XPU compute die", kind: die, material: silicon, w_mm: xpu_w_mm, d_mm: xpu_d_mm, h_um: die_h_um,
+     on: substrate, standoff: c4_xpu, explode_group: 3, note: "die size and node not reported"}
+  - id: oio
+    name: "Optical I/O chiplet (PIC)"
+    kind: die
+    material: silicon
+    w_mm: oio_w_mm
+    d_mm: oio_d_mm
+    h_um: die_h_um
+    on: substrate
+    standoff: c4_xpu
+    repeat: {nx: oio_n, pitch_x_mm: oio_px_mm}
+    explode_group: 3
+    note: "24 edge ports (8 laser in, 8 Tx, 8 Rx), metamaterial SSC + etched V-grooves; overhangs the substrate edge"
+  - id: uf
+    name: "Underfill"
+    kind: underfill
+    material: underfill
+    fill: {above: substrate, parts: [xpu, oio], margin_mm: uf_margin_mm}
+    explode_group: 2
+    xray_default: true
+    note: "product not reported; clipped to the substrate (the overhang is not underfilled in this drawing)"
+  - id: fau
+    name: "Fiber array unit (FAU)"
+    kind: other
+    material: glass
+    material_label: "1x24 PM fiber array + fiber lid, optical / mechanical adhesives"
+    w_mm: fau_w_mm
+    d_mm: fau_d_mm
+    h_um: fau_h_um
+    under: oio
+    repeat: {nx: fau_n, pitch_x_mm: "2 * fau_x_mm"}
+    explode_group: 4
+    note: "attached last; fans out to a 2 x 12 MTP/MT ferrule (not drawn); placement under the overhang inferred, not dimensioned"
+  - {id: hs, name: "Heat spreader", kind: lid, material: other, material_label: "heat spreader (material not reported)",
+     w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: hs_h_um, on: substrate, gap_um: hs_gap_um, explode_group: 5, xray_default: true,
+     note: "FAUs are bonded to it with mechanical adhesive (bond not drawn); TIM and attach not reported"}
+
+layers:
+  - part: substrate
+    pattern:
+      - {id: sbt_bu_top, name: "Front build-up (EMIB layers)", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+      - {id: sbt_core, name: "Core", material: organic_laminate, material_label: "laminate core", role: core, h_um: core_h_um}
+      - {id: sbt_bu_bot, name: "Back build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+
+arrays:
+  - {id: fine_xpu, name: "Fine bumps over EMIB", kind: microbump, per: xpu, lower: substrate, region: {intersect: [bridge]},
+     pitch_um: fine_pitch_um, diameter_um: fine_d_um, height_um: bump_h_um}
+  - {id: fine_oio, name: "Fine bumps over EMIB", kind: microbump, per: oio, lower: substrate, region: {intersect: [bridge]},
+     pitch_um: fine_pitch_um, diameter_um: fine_d_um, height_um: bump_h_um}
+  - {id: c4_xpu, name: "Die bumps", kind: c4, per: xpu, lower: substrate, region: {subtract: [bridge]},
+     pitch_um: c4_pitch_um, diameter_um: c4_d_um, height_um: bump_h_um,
+     note: "bumps drawn only in the backbone; 150 um pitch of the IBM PIC flip chip"}
+  - {id: c4_oio, name: "Die bumps", kind: c4, per: oio, lower: substrate, region: {intersect: [substrate], subtract: [bridge]},
+     pitch_um: c4_pitch_um, diameter_um: c4_d_um, height_um: bump_h_um, note: "none under the overhang"}
+  - {id: bga, name: "BGA (SAC)", kind: bga, under: substrate, region: {part: substrate}, pitch_um: bga_pitch_um,
+     diameter_um: bga_d_um, height_um: bga_h_um}
+
+callouts:
+  - {target: fau, text: "{fau_n} FAUs, {fau_ch_n} ch, {fiber_pitch_um} um",
+     note: "{fau_n} FAUs, 1x{fau_ch_n} PM fibers at {fiber_pitch_um} um pitch, attached last (active or passive alignment); IL {il_db} dB per facet (mean of 386 chiplets)",
+     refs: [ectc51687.2025.00012-a-o1.scope]}
+  - {target: oio, text: "OIO overhangs the substrate edge", refs: [ectc51687.2025.00012-a-c2.notes],
+     note: "{oio_n} OIO chiplets; layouts with {oio4_n} and {oio6_n} chiplets also assembled; chiplet size not reported (IBM PIC size drawn)"}
+  - {target: bridge, text: "XPU-OIO link via EMIB", refs: [ectc51687.2025.00012-a-i1.notes]}
+  - {target: c4_oio, text: "Die bumps {c4_pitch_um} um (IBM)",
+     note: "{c4_pitch_um} um PIC flip-chip pitch of the IBM CPO module ({ibm_pic_w_mm} x {ibm_pic_d_mm} mm PIC on a {ibm_sbt_mm} mm substrate); backbone bump pitch not reported"}
+  - {target: hs, text: "Heat spreader, FAU bonded", refs: [ectc51687.2025.00012-a-c7.notes]}
+  - {target: bga, text: "BGA {bga_pitch_um} um (IBM module)"}
+  - {target: substrate, text: "IBM: polymer waveguide to ferrule",
+     note: "IBM CPO: PIC adiabatically coupled to a polymer waveguide at {ibm_pwg_pitch_um} um, fanned out to an MT ferrule, lid on substrate and ferrule",
+     refs: [ectc51687.2025.00052-b-c3.name]}
+  - {target: substrate, text: "IME: PIC-in-mold {ime_w_mm} x {ime_d_mm}",
+     note: "IME PIC-in-mold RDL-first interposer {ime_w_mm} x {ime_d_mm} mm: embedded PIC and TSV Si bridge, EIC flip-chip above, FAU at the PIC edge"}
+  - {target: substrate, text: "CHIPS: {chips_fau_n} FAUs, {chips_ch_n} couplers",
+     note: "Intel CHIPS prototype {chips_w_mm} x {chips_w_mm} mm: FPGA, 2 data converters, 3 EIC-PIC stacks in an open-cavity EMIB substrate; {chips_fau_n} FAUs butt-coupled ({chips_ch_n} couplers, {chips_pitch_um} um pitch)",
+     refs: [ectc51687.2025.00061-a.name]}
+  - {target: substrate, text: "OMIB: {omib_n} PICs in interposer", refs: [ectc51687.2025.00062-a-c3.name]}
+
+insets:
+  - id: oio_edge
+    label: "OIO overhang and FAU"
+    box_mm: ["sbt_w_mm / 2 - 2", "-fau_d_mm / 2 - 0.5", "fau_x_mm + fau_w_mm / 2", "fau_d_mm / 2 + 0.5"]
+    z: ["bottom:fau", "top:hs"]
+    view: front
+  - id: bridge_gap
+    label: "XPU-OIO gap over the EMIB"
+    box_mm: ["bridge_px_mm / 2 - bridge_w_mm / 2 - 0.5", -1, "bridge_px_mm / 2 + bridge_w_mm / 2 + 0.5", 1]
+    z: ["top:substrate", "top:xpu"]
+    view: front

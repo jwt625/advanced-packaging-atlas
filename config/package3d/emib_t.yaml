@@ -1,0 +1,182 @@
+# EMIB-T 3D template. Format: config/package3d/TEMPLATE_FORMAT.md. Generator: scripts/build_package3d.py.
+# Backbone: ectc51846.2026.00051-b (EMIB25T TV: one 3 x 18 mm EMIB-T bridge with TSVs connecting two 1x-reticle top
+# dies at 25 um FLI pitch; the ~50 um bridge thickness is the paper's general EMIB statement, Sec. I, not an EMIB25T
+# value, so it is drawn as a template value). The substrate outline is taken from the 45 um-pitch EMIB-T package TV
+# (ectc51687.2025.00051-a, 77 x 56 mm) because the backbone TV does not report one. Topology (bridge face-up in a
+# substrate cavity, solder joints + underfill to cavity pads, dielectric encapsulation with vias onto bridge pads,
+# FLI on the surface) follows the EMIB-T process-step rows of ectc51687.2025.00051-a.
+id: emib_t
+name: EMIB-T
+company: Intel
+package_class: si_bridge_organic
+family_match: {families: true}
+backbone_tv: ectc51846.2026.00051-b
+summary: >-
+  Intel 2.5D: a thin Si bridge with TSVs sits face-up in an organic-substrate cavity, soldered to cavity pads;
+  top dies reach it through {fli_bridge_pitch_um} um FLI bumps and vias. Backbone: EMIB25T TV, {die_n} dies, one
+  {bridge_w_mm} x {bridge_d_mm} mm bridge.
+
+params:
+  # ---- reported
+  sbt_w_mm: {ref: ectc51687.2025.00051-a-c2.x_mm, note: "outline of the 45 um-pitch EMIB-T package TV (backbone TV reports none)"}
+  sbt_d_mm: {ref: ectc51687.2025.00051-a-c2.y_mm, note: "outline of the 45 um-pitch EMIB-T package TV (backbone TV reports none)"}
+  die_n: {ref: ectc51846.2026.00051-b-c2.count}
+  bridge_w_mm: {ref: ectc51846.2026.00051-b-c1.x_mm}
+  bridge_d_mm: {ref: ectc51846.2026.00051-b-c1.y_mm}
+  fli_bridge_pitch_um: {ref: ectc51846.2026.00051-b-i1.pitch_um}
+  fli_core_pitch_um:
+    ref: ectc51846.2026.00051-a-i1.pitch_max_um
+    note: "coarsest FLI pitch of the mixed 110/55/36 um EMIB-T TV, used outside the bridge region"
+  fli_mid_pitch_um: {ref: ectc51846.2026.00051-a-i1.pitch_min_um}
+  d2d45_pitch_um: {ref: ectc51687.2025.00051-a-i1.pitch_um}
+  pkg45_bridges_n: {ref: ectc51687.2025.00051-a-c1.count}
+  overlay_um: {ref: ectc51846.2026.00051-b-m1.value}
+  mim_density: {ref: ectc51846.2026.00051-d-L02.properties}
+  hbm4e_gbps: {ref: ectc51846.2026.00051-d-e1.lane_rate_gbps}
+  # ---- derived layout
+  die_px_mm: {derived: "die_w_mm + die_gap_um / 1000"}
+  # ---- template
+  bridge_h_um:
+    template: "r0"
+    refs: [ectc51846.2026.00051-b-c1.thickness_um]
+    note: "~50 um is the paper's general EMIB bridge statement (ectc51846.2026.00051 p.1 Sec. I), not reported for the EMIB25T bridge"
+  die_w_mm:
+    template: 26
+    note: "TV reports '1x reticle top dies' without size; full lithography field 26 x 33 mm assumed"
+    refs: [ectc51846.2026.00051-b-c2.name]
+  die_d_mm:
+    template: 33
+    note: "TV reports '1x reticle top dies' without size; full lithography field 26 x 33 mm assumed"
+    refs: [ectc51846.2026.00051-b-c2.name]
+  die_h_um:
+    analog: ectc51529.2024.00322-a-c1.thickness_um
+    note: "top-die thickness not reported for EMIB-T; analog = full-thickness (775 um) logic-mimic die of a 2.5D TV"
+  die_gap_um:
+    analog: tcpmt.2023.3312037-a-c2.gap_um
+    note: "die-to-die gap not reported for EMIB-T; analog = Intel Co-EMIB DtD spacing ('as small as 100 um')"
+  bu_n:
+    analog: ectc51687.2025.00148-a-L06.repeat
+    note: "EMIB-T substrate layer count not reported; analog = 4 build-up layers per side of an organic FC substrate"
+  bu_diel_um:
+    analog: ectc51687.2025.00148-a-L04.thickness_um
+    note: "build-up dielectric thickness not reported for EMIB-T; analog = ABF-GL layer of an organic FC substrate"
+  bu_h_um: {template: "bu_n * bu_diel_um", note: "build-up per side = layer count x dielectric thickness (analogs)"}
+  core_h_um:
+    analog: ectc51687.2025.00148-a-L07.thickness_um
+    note: "core thickness not reported for EMIB-T; analog = core of the same organic FC substrate"
+  sbt_h_um: {template: "core_h_um + 2 * bu_h_um", note: "substrate = core + 2 build-up stacks (template inputs)"}
+  bridge_depth_um:
+    template: "2 * bu_diel_um"
+    refs: [ectc51687.2025.00051-F1-s05.step, ectc51687.2025.00051-F1-s06.step]
+    note: "bridge top below the surface by the encapsulation dielectric + surface layer (flow steps s05, s06); thickness not reported"
+  cav_h_um:
+    template: "fli_h_um"
+    refs: [ectc51687.2025.00051-F1-s03.step, ectc51846.2026.00051-b-i3.bonding_method]
+    note: "cavity-side solder joint (TCB) height not reported; set equal to the FLI standoff"
+  cav_pitch_um:
+    template: "fli_core_pitch_um"
+    note: "cavity-side bump pitch not reported; set equal to the coarse FLI pitch"
+  cav_d_um: {template: "fli_core_d_um", note: "cavity-side bump diameter not reported; set equal to the coarse FLI bump"}
+  cav_margin_mm: {template: 0.2, note: "cavity clearance around the bridge not reported; illustrative"}
+  fli_bridge_d_um:
+    analog: ectc51846.2026.00227-b-i1.diameter_um
+    note: "FLI bump diameter at 25 um pitch not reported for EMIB-T; analog = 25 um-pitch Cu/SnAg TCB bump"
+  fli_core_d_um:
+    analog: vlsitechnologyandcir46783.2024.10631478-a-i2.diameter_um
+    note: "FLI bump diameter at 110 um pitch not reported for EMIB-T; analog = Intel Foveros 110 um-pitch package-side bump"
+  fli_h_um: {template: 30, note: "FLI joint standoff not reported in any EMIB-T or EMIB row; illustrative"}
+  via_d_um:
+    template: "fli_bridge_d_um"
+    refs: [ectc51846.2026.00051-b-i2.ic_type]
+    note: "micro-via onto bridge pads: diameter not reported; set equal to the 25 um-pitch FLI bump"
+  tsv_pitch_um:
+    analog: eptc59621.2023.10457670-a-i1.pitch_min_um
+    note: "bridge TSV pitch not reported; analog = 50 um-pitch via-first TSV daisy chain"
+  tsv_d_um:
+    analog: vlsitechnologyandcir46783.2024.10631478-a-i3.diameter_um
+    note: "bridge TSV diameter not reported; analog = Intel Foveros base-die TSV (SEM)"
+  uf_margin_mm: {template: 0.5, note: "top-die underfill fillet extent not reported; illustrative"}
+
+parts:
+  - {id: substrate, name: "Organic package substrate", kind: substrate, material: organic_laminate,
+     material_label: "organic build-up substrate", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: sbt_h_um, base: true,
+     explode_group: 0}
+  - {id: bridge, name: "EMIB-T bridge (Si, TSV)", kind: bridge, material: silicon, w_mm: bridge_w_mm,
+     d_mm: bridge_d_mm, h_um: bridge_h_um, in: substrate, depth_um: bridge_depth_um, explode_group: 1}
+  - {id: cavity_fill, name: "Cavity joints + underfill", kind: underfill, material: underfill,
+     w_mm: "bridge_w_mm + 2 * cav_margin_mm", d_mm: "bridge_d_mm + 2 * cav_margin_mm", h_um: cav_h_um,
+     in: substrate, depth_um: "bridge_depth_um + bridge_h_um", explode_group: 1, xray_default: true}
+  - id: die
+    name: Top die
+    kind: die
+    material: silicon
+    w_mm: die_w_mm
+    d_mm: die_d_mm
+    h_um: die_h_um
+    on: substrate
+    standoff: fli_core
+    repeat: {nx: die_n, pitch_x_mm: die_px_mm}
+    explode_group: 3
+  - id: die_uf
+    name: "Top-die underfill"
+    kind: underfill
+    material: underfill
+    fill: {above: substrate, parts: [die], margin_mm: uf_margin_mm}
+    explode_group: 2
+    xray_default: true
+    note: "not described in EMIB-T rows; capillary underfill is reported for EMIB (ectc.2016.201)"
+
+layers:
+  - part: substrate
+    pattern:
+      - {id: sbt_bu_top, name: "Front build-up (cavity layers)", material: organic_build_up, role: dielectric,
+         h_um: bu_h_um}
+      - {id: sbt_core, name: "Core", material: organic_laminate, material_label: "laminate core", role: core,
+         h_um: core_h_um}
+      - {id: sbt_bu_bot, name: "Back build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+
+arrays:
+  - {id: fli_bridge, name: "FLI bumps over bridge", kind: microbump, per: die, lower: substrate,
+     region: {intersect: [bridge]}, pitch_um: fli_bridge_pitch_um, diameter_um: fli_bridge_d_um, height_um: fli_h_um}
+  - {id: fli_core, name: "FLI bumps (coarse)", kind: microbump, per: die, lower: substrate,
+     region: {subtract: [bridge]}, pitch_um: fli_core_pitch_um, diameter_um: fli_core_d_um, height_um: fli_h_um,
+     note: "coarse pitch rendered over the die outside the bridge; the bump map is not reported"}
+  - {id: via_bridge, name: "Vias onto bridge pads", kind: rdl_via, per: die, span: ["top:bridge", "top:substrate"],
+     between: [substrate, bridge], region: {intersect: [bridge]}, pitch_um: fli_bridge_pitch_um,
+     diameter_um: via_d_um, note: "one via per FLI bump assumed"}
+  - {id: tsv_bridge, name: "Bridge TSVs", kind: tsv, in: bridge, region: {part: bridge}, pitch_um: tsv_pitch_um,
+     diameter_um: tsv_d_um, note: "TSV placement not reported; rendered over the full bridge"}
+  - {id: cavity_bumps, name: "Cavity-side bumps", kind: microbump, in: cavity_fill, between: [bridge, substrate],
+     region: {part: bridge}, pitch_um: cav_pitch_um, diameter_um: cav_d_um, height_um: cav_h_um}
+
+callouts:
+  - {target: bridge, text: "EMIB-T bridge {bridge_w_mm} x {bridge_d_mm} mm",
+     note: "EMIB-T bridge {bridge_w_mm} x {bridge_d_mm} mm, Si with TSVs (EMIB25T TV). Drawn ~50 um thick: the paper's general EMIB bridge statement (Sec. I), not reported for EMIB25T",
+     refs: [ectc51846.2026.00051-b-c1.thickness_um]}
+  - {target: bridge, text: "On-bridge MIM capacitor {mim_density} (model)"}
+  - {target: fli_bridge, text: "FLI pitch {fli_bridge_pitch_um} um over bridge",
+     note: "FLI pitch {fli_bridge_pitch_um} um over the bridge; {fli_mid_pitch_um}-{fli_core_pitch_um} um in the 2x-reticle TV"}
+  - {target: via_bridge, text: "Via overlay < {overlay_um} um",
+     note: "Via-to-bridge-pad overlay < {overlay_um} um (new alignment scheme)",
+     refs: [ectc51846.2026.00051-b-m1.qualifiers]}
+  - {target: substrate, text: "Outline from {d2d45_pitch_um} um-pitch TV",
+     note: "Outline from the {d2d45_pitch_um} um-pitch EMIB-T TV ({pkg45_bridges_n} bridges)"}
+  - {target: bridge, text: "HBM4e: {hbm4e_gbps} Gb/s (simulated)",
+     note: "HBM4e channel over EMIB-T: {hbm4e_gbps} Gb/s (simulated)"}
+
+insets:
+  - id: bridge_edge
+    label: "Die-die gap over the bridge"
+    box_mm: ["-bridge_w_mm / 2 - 0.5", -1, "bridge_w_mm / 2 + 0.5", 1]
+    z: ["bottom:cavity_fill", "top:die"]
+    view: front
+  - id: bridge_xs
+    label: "Bridge in cavity (TSV, cavity joints)"
+    box_mm: ["-bridge_w_mm / 2 - 0.3", -0.5, "-bridge_w_mm / 2 + 0.6", 0.5]
+    z: ["bottom:cavity_fill", "top:substrate"]
+    view: front
+  - id: fli_field
+    label: "FLI fine/coarse transition"
+    box_mm: ["-bridge_w_mm / 2 - 0.6", "bridge_d_mm / 2 - 0.6", "-bridge_w_mm / 2 + 0.6", "bridge_d_mm / 2 + 0.6"]
+    z: ["top:bridge", "top:die"]
+    view: iso

@@ -1,0 +1,248 @@
+# InFO_oS 3D template. Format: config/package3d/TEMPLATE_FORMAT.md. Generator: scripts/build_package3d.py.
+# Backbone: ectc32696.2021.00033-a (TSMC InFO_oS 2.5x-reticle mechanical daisy-chain TV: 2 logic + 8 IO chiplets in a
+# 51 x 42 mm InFO, 4 fine RDLs at 2/2 um + 1 RDL at 5/5 um formed after wafer molding, 130 um-pitch C4 to a 110 x 110 mm
+# organic substrate (2.3 mm, 1.4 mm lower-CTE core), ring heat spreader 2 mm thick, 12 mm wide).
+# Topology (RESEARCH.md info_os; db:ectc32696.2021.00033 p.2 Sec. II-III): chiplets face down in wafer molding compound,
+# die backs at the mold surface; the RDL stack is built directly on the die faces and mold (chip-first; no micro-bump or
+# underfill between die and RDL in the stated flow); C4 + underfill to the substrate; BGA. Ring-type heat spreader drawn
+# (the backbone option); the lid-type option is a callout (TV-1/TV-2 and the itherm thermal TV).
+# Layout: no InFO_oS row dimensions the chiplets of the 2.5x TV. The edge margin and the die-to-die gap come from the
+# 2-die InFO_oS thermal TV (itherm45881.2020.9190542-a: dies 21.78 x 16.25 mm in a 22.78 x 34.0 mm InFO); the logic
+# chiplets are drawn in a center column, 4 IO chiplets on each side (template).
+# The `other`-level 36 um pitch row (die I/O to the InFO RDL, i1) is drawn as the die-pad vias through the first PM layer.
+id: info_os
+name: InFO_oS
+company: TSMC
+package_class: fan_out_wafer
+family_match: {families: true}
+backbone_tv: ectc32696.2021.00033-a
+summary: >-
+  TSMC fan-out on substrate: {logic_n} logic + {io_n} IO chiplets molded in a {info_w_mm} x {info_d_mm} mm InFO;
+  {rdl_f_line_um}/{rdl_f_space_um} and {rdl_c_line_um}/{rdl_c_space_um} um RDLs built on the die faces after molding,
+  no micro-bumps; {c4_pitch_um} um C4 to the substrate; ring spreader.
+
+params:
+  # ---- reported (backbone ectc32696.2021.00033-a unless noted)
+  info_w_mm: {ref: ectc32696.2021.00033-a.interposer_x_mm, note: "InFO (fan-out) outline 51 x 42 mm"}
+  info_d_mm: {ref: ectc32696.2021.00033-a.interposer_y_mm, note: "InFO (fan-out) outline 51 x 42 mm"}
+  info_area_mm2: {ref: ectc32696.2021.00033-a.interposer_area_mm2, note: "2100 mm2 as printed (51 x 42 = 2142; conflict logged in the TV row)"}
+  reticle_x: {ref: ectc32696.2021.00033-a.reticle_multiple}
+  sbt_w_mm: {ref: ectc32696.2021.00033-a.substrate_x_mm}
+  sbt_d_mm: {ref: ectc32696.2021.00033-a.substrate_y_mm}
+  sbt_h_um: {ref: ectc32696.2021.00033-a-c4.thickness_um, note: "substrate ~2.3 mm (Table VI ring case)"}
+  core_h_um: {ref: ectc32696.2021.00033-a-L09.thickness_um, note: "lower-CTE core ~1.4 mm (Table VI ring case)"}
+  hs_h_um: {ref: ectc32696.2021.00033-a-c5.thickness_um, note: "ring-type heat spreader thickness (Fig. 4(c), Table VI)"}
+  logic_n: {ref: ectc32696.2021.00033-a-c1.count}
+  io_n: {ref: ectc32696.2021.00033-a-c2.count}
+  rdl_f_n: {ref: ectc32696.2021.00033-b-L01.repeat, note: "RDL1-4 fine-pitch layers (same 5-layer RDL as the backbone, Sec. III)"}
+  rdl_f_line_um: {ref: ectc32696.2021.00033-a-L03.line_um}
+  rdl_f_space_um: {ref: ectc32696.2021.00033-a-L03.space_um}
+  rdl_c_line_um: {ref: ectc32696.2021.00033-a-L07.line_um, note: "RDL5 (normal pitch): external connection and stress buffer"}
+  rdl_c_space_um: {ref: ectc32696.2021.00033-a-L07.space_um}
+  io_pitch_um: {ref: ectc32696.2021.00033-a-i1.pitch_um, note: "D2D IO pitch, die I/O to the InFO RDL (interconnect level 'other')"}
+  io_count_n: {ref: ectc32696.2021.00033-a-i1.count, note: "over 60,000 I/O in the inter-chip RDL daisy chains"}
+  c4_pitch_um: {ref: ectc32696.2021.00033-a-i4.pitch_um}
+  # lid-type options (callouts only)
+  lid1_h_um: {ref: ectc32696.2021.00033-c-c1.thickness_um, note: "TV-1 (1x reticle) lid-type heat spreader"}
+  lid2_h_um: {ref: ectc32696.2021.00033-d-c1.thickness_um, note: "TV-2 (1250 mm2) lid-type heat spreader"}
+  tim_h_um: {ref: itherm45881.2020.9190542-a-L02.thickness_um, note: "TIM1 BLT baseline of the InFO_oS thermal TV"}
+  tim_max_um: {ref: itherm45881.2020.9190542-a-L02.thickness_max_um}
+  t_info_w_mm: {ref: itherm45881.2020.9190542-a-c2.x_mm}
+  t_info_d_mm: {ref: itherm45881.2020.9190542-a-c2.y_mm}
+  t_die_w_mm: {ref: itherm45881.2020.9190542-a-c1.x_mm}
+  t_die_d_mm: {ref: itherm45881.2020.9190542-a-c1.y_mm, note: "16.25 mm in Table 1; text gives 16.26 mm (conflict logged)"}
+  # ---- derived
+  bu_h_um: {derived: "(sbt_h_um - core_h_um) / 2", note: "build-up per side = (substrate - core) / 2; layer count not given"}
+  edge_mm:
+    derived: "(t_info_w_mm - t_die_w_mm) / 2"
+    note: "die-to-InFO-edge margin of the 2-die thermal TV, dies centered across the InFO width"
+  # ---- template: layout of the 2.5x TV (chiplet sizes and positions not dimensioned)
+  gap_um:
+    template: "(t_info_d_mm - 2 * t_die_d_mm - 2 * edge_mm) * 1000"
+    note: "die-to-die gap not reported; from the thermal TV: InFO length - 2 dies - 2 margins, with the length-wise margin assumed equal to the width-wise one"
+  logic_w_mm:
+    template: "t_die_w_mm"
+    note: "logic chiplet size not reported for the 2.5x TV; width set to the InFO_oS thermal-TV die width"
+  logic_d_mm:
+    template: "(info_d_mm - 2 * edge_mm - (logic_n - 1) * gap_um / 1000) / logic_n"
+    note: "the logic chiplets share the InFO length in a center column (layout not reported)"
+  logic_py_mm: {template: "logic_d_mm + gap_um / 1000", note: "logic chiplet pitch = length + gap"}
+  io_cols_n: {template: 2, note: "IO chiplets drawn in one column on each side of the logic column (Fig. 4(b) layout not dimensioned)"}
+  io_rows_n: {template: "io_n / io_cols_n", note: "IO chiplets per column = IO count / columns"}
+  io_w_mm:
+    template: "(info_w_mm - 2 * edge_mm - logic_w_mm - 2 * gap_um / 1000) / io_cols_n"
+    note: "IO chiplet size not reported; IO columns fill the InFO width beside the logic column"
+  io_d_mm:
+    template: "(info_d_mm - 2 * edge_mm - (io_rows_n - 1) * gap_um / 1000) / io_rows_n"
+    note: "IO chiplets share the InFO length equally (layout not reported)"
+  io_px_mm: {template: "logic_w_mm + 2 * gap_um / 1000 + io_w_mm", note: "IO columns flank the logic column at the D2D gap"}
+  io_py_mm: {template: "io_d_mm + gap_um / 1000", note: "IO chiplet pitch = length + gap"}
+  # ---- template: thicknesses and joints (no InFO_oS row reports them)
+  die_h_um:
+    analog: ectc32862.2020.00185-a-c1.thickness_um
+    note: "chiplet thickness not reported for InFO_oS; analog = Si die embedded in mold with RDL built after molding (mold-first FO-PLP)"
+  mold_h_um: {template: "die_h_um", note: "die backs at the mold surface (chiplets embedded in wafer molding compound); mold height = die height"}
+  cu_f_um:
+    template: "rdl_f_line_um"
+    note: "fine RDL Cu thickness not reported; aspect ratio 1 to the 2 um line assumed (as in the CoWoS-R template)"
+  cu_c_um:
+    template: "rdl_c_line_um"
+    note: "RDL5 Cu thickness not reported; aspect ratio 1 to the 5 um line assumed"
+  pm_um:
+    analog: ectc51846.2026.00016-a-L04.thickness_um
+    note: "PM dielectric thickness not reported (row L08 states PM without thickness); analog = polymer RDL dielectric of a molded RDL interposer"
+    refs: [ectc32696.2021.00033-a-L08.material]
+  rdl_h_um:
+    template: "(rdl_f_n + 2) * pm_um + rdl_f_n * cu_f_um + cu_c_um"
+    note: "InFO RDL stack = die-side PM + 4 x (fine Cu + PM) + RDL5 Cu + bottom PM (template layer thicknesses)"
+  io_via_d_um:
+    template: "io_pitch_um / 2"
+    note: "die-pad via size not reported; half the 36 um I/O pitch, illustrative"
+  c4_d_um:
+    analog: ectc51909.2023.00155-a-i3.diameter_um
+    note: "C4 size not given ('alloy, size not given', row i4); analog = 75 um Cu/SnAg interposer-to-substrate bump (150 um pitch)"
+  c4_h_um:
+    template: "r0 + r1"
+    refs: [ectc51909.2023.00155-a-i3.height_um, ectc51909.2023.00155-a-i3.cap_height_um]
+    note: "C4 standoff = Cu + SnAg cap of the 75 um analog bump"
+  c4uf_margin_mm: {template: 1.0, note: "C4 underfill fillet extent not reported; illustrative"}
+  ring_w_mm:
+    template: 12
+    refs: [ectc32696.2021.00033-a-c5.notes]
+    note: "ring width 12 mm is in the component notes ('12mm width ring', Table VI foot width), not in a numeric column; outer edge assumed flush with the substrate"
+  bga_pitch_um:
+    analog: ectc51909.2023.00155-a-i4.pitch_um
+    note: "BGA not dimensioned for InFO_oS (itherm45881.2020.9190542-a-i2: pitch not given); analog = 1.0 mm-pitch ball of a large 2.5D TV"
+    refs: [itherm45881.2020.9190542-a-i2.ic_type]
+  bga_d_um:
+    analog: ectc51909.2023.00155-a-i4.diameter_um
+    note: "BGA ball diameter not reported; analog = SAC305 ball of the same 2.5D TV"
+  bga_h_um:
+    template: 478
+    refs: [ectc51909.2023.00155-a-i4.notes]
+    note: "BGA height not reported; the analog row's notes give a measured ball height of 478 um"
+
+parts:
+  - {id: substrate, name: "Organic substrate", kind: substrate, material: organic_laminate,
+     material_label: "organic substrate, lower-CTE core", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: sbt_h_um, base: true,
+     explode_group: 0}
+  - {id: rdl, name: "InFO RDL stack", kind: interposer, material: polymer_dielectric,
+     material_label: "Cu RDL / PM dielectric", w_mm: info_w_mm, d_mm: info_d_mm, h_um: rdl_h_um, on: substrate,
+     standoff: c4, explode_group: 2,
+     note: "built on the die faces and mold after wafer molding (interconnect formation after molding, Sec. II)"}
+  - {id: mold, name: "Wafer molding compound", kind: mold, material: mold_compound,
+     material_label: "wafer molding compound (product not given)", w_mm: info_w_mm, d_mm: info_d_mm, h_um: mold_h_um,
+     on: rdl, explode_group: 3, xray_default: true}
+  - id: logic
+    name: "Logic (SoC) chiplet"
+    kind: die
+    material: silicon
+    w_mm: logic_w_mm
+    d_mm: logic_d_mm
+    h_um: die_h_um
+    in: mold
+    repeat: {ny: logic_n, pitch_y_mm: logic_py_mm}
+    explode_group: 3
+    note: "face down, daisy-chain emulator (die size and node not given); size and position template"
+  - id: io
+    name: "IO chiplet"
+    kind: die
+    material: silicon
+    w_mm: io_w_mm
+    d_mm: io_d_mm
+    h_um: die_h_um
+    in: mold
+    repeat: {nx: io_cols_n, ny: io_rows_n, pitch_x_mm: io_px_mm, pitch_y_mm: io_py_mm}
+    explode_group: 3
+    note: "8 identical IO chiplets (emulators); size and position template"
+  - id: c4uf
+    name: "C4 underfill"
+    kind: underfill
+    material: underfill
+    fill: {above: substrate, parts: [rdl], margin_mm: c4uf_margin_mm}
+    explode_group: 1
+    xray_default: true
+    note: "underfill under the InFO not described in the backbone rows; drawn as for the other flip-chip families"
+  - {id: ring, name: "Ring heat spreader", kind: stiffener, material: other, material_label: "ring heat spreader (material not given)",
+     w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: hs_h_um, shape: frame, frame_w_mm: ring_w_mm, on: substrate, explode_group: 2,
+     xray_default: true, note: "outer size and material not given; ring attach layer not reported (not drawn)"}
+
+layers:
+  - id: g_pm1
+    part: rdl
+    pattern:
+      - {id: pm1, name: "PM (die side, pad vias)", material: polymer_dielectric, material_label: "PM", role: dielectric,
+         h_um: pm_um}
+  - id: g_fine
+    part: rdl
+    repeat: rdl_f_n
+    pattern:
+      - {id: rdl_f, name: "Fine RDL Cu (RDL1-4)", material: copper, material_label: Cu, role: conductor, h_um: cu_f_um,
+         line_um: rdl_f_line_um, space_um: rdl_f_space_um}
+      - {id: pm_f, name: "PM dielectric", material: polymer_dielectric, material_label: "PM", role: dielectric, h_um: pm_um}
+  - id: g_coarse
+    part: rdl
+    pattern:
+      - {id: rdl_c, name: "RDL5 Cu (normal pitch)", material: copper, material_label: Cu, role: conductor, h_um: cu_c_um,
+         line_um: rdl_c_line_um, space_um: rdl_c_space_um}
+      - {id: pm_c, name: "PM (C4 side)", material: polymer_dielectric, material_label: "PM", role: passivation, h_um: pm_um}
+  - part: substrate
+    pattern:
+      - {id: sbt_bu_top, name: "Front build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+      - {id: sbt_core, name: "Lower-CTE core", material: organic_laminate, material_label: "lower CTE core material",
+         role: core, h_um: core_h_um}
+      - {id: sbt_bu_bot, name: "Back build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+
+arrays:
+  - {id: io_via_logic, name: "Die I/O vias", kind: rdl_via, in_layer: g_pm1, region: {part: logic}, pitch_um: io_pitch_um,
+     diameter_um: io_via_d_um,
+     note: "36 um D2D IO pitch, die I/O to InFO RDL (row i1, level 'other'); drawn as pad vias over each full die, I/O map not reported"}
+  - {id: io_via_io, name: "Die I/O vias", kind: rdl_via, in_layer: g_pm1, region: {part: io}, pitch_um: io_pitch_um,
+     diameter_um: io_via_d_um}
+  - {id: c4, name: "C4 bumps", kind: c4, upper: rdl, lower: substrate, region: {part: rdl}, pitch_um: c4_pitch_um,
+     diameter_um: c4_d_um, height_um: c4_h_um, note: "InFO flip-chip bonded to the substrate; full grid drawn, bump map not reported"}
+  - {id: bga, name: "BGA balls", kind: bga, under: substrate, region: {part: substrate}, pitch_um: bga_pitch_um,
+     diameter_um: bga_d_um, height_um: bga_h_um}
+
+callouts:
+  - {target: mold, text: "InFO {info_w_mm} x {info_d_mm} mm",
+     note: "InFO {info_w_mm} x {info_d_mm} mm ({info_area_mm2} mm2 as printed, {reticle_x}x reticle) on a {sbt_w_mm} x {sbt_d_mm} mm substrate"}
+  - {target: logic, text: "{logic_n} logic + {io_n} IO chiplets",
+     note: "daisy-chain emulators; chiplet sizes and floor plan not dimensioned (drawn: logic column with IO chiplets on both sides)"}
+  - {target: rdl, text: "RDL after molding (chip-first)", refs: [ectc32696.2021.00033-a-c3.notes],
+     note: "interconnect formation after wafer molding: no micro-bump or underfill between die and RDL"}
+  - {target: rdl_f, text: "{rdl_f_n} RDL at {rdl_f_line_um}/{rdl_f_space_um} um",
+     note: "RDL1-4 fine pitch {rdl_f_line_um}/{rdl_f_space_um} um for D2D; RDL5 {rdl_c_line_um}/{rdl_c_space_um} um to the C4; layer thicknesses not reported"}
+  - {target: rdl_c, text: "RDL5 {rdl_c_line_um}/{rdl_c_space_um} um"}
+  - {target: io_via_logic, text: "D2D I/O pitch {io_pitch_um} um",
+     note: "{io_pitch_um} um die I/O pitch to the InFO RDL; over {io_count_n} I/O in the daisy chains; via size not reported"}
+  - {target: c4, text: "C4 {c4_pitch_um} um pitch"}
+  - {target: substrate, text: "Substrate {sbt_h_um} um, {core_h_um} um core"}
+  - {target: ring, text: "Ring heat spreader {hs_h_um} um", refs: [ectc32696.2021.00033-a-c5.name]}
+  - {target: ring, text: "Lid option: {lid1_h_um}-{lid2_h_um} um",
+     note: "lid-type heat spreader {lid1_h_um} um (TV-1, 1x) or {lid2_h_um} um (TV-2); TIM1 {tim_h_um}-{tim_max_um} um in the lid-type thermal TV"}
+  - {target: logic, text: "Thermal-TV die {t_die_w_mm} x {t_die_d_mm} mm",
+     note: "InFO_oS thermal TV: 2 dies {t_die_w_mm} x {t_die_d_mm} mm in a {t_info_w_mm} x {t_info_d_mm} mm InFO; it sets the edge margin and D2D gap drawn here",
+     refs: [itherm45881.2020.9190542-a-c1.count]}
+
+insets:
+  - id: d2d
+    label: "Logic-IO gap, RDL stack"
+    box_mm: ["logic_w_mm / 2 - 0.15", "io_py_mm / 2 - 0.15", "logic_w_mm / 2 + gap_um / 1000 + 0.15", "io_py_mm / 2 + 0.15"]
+    z: ["bottom:rdl", "top:mold"]
+    view: front
+  - id: rdl_xs
+    label: "InFO RDL cross-section"
+    box_mm: [-0.06, -0.06, 0.06, 0.06]
+    z: ["bottom:rdl", "top:rdl"]
+    view: front
+  - id: info_edge
+    label: "InFO edge, C4, underfill"
+    box_mm: ["info_w_mm / 2 - 1.5", -1.0, "info_w_mm / 2 + 1.5", 1.0]
+    z: ["top:substrate", "top:mold"]
+    view: front
+  - id: ring_edge
+    label: "Ring heat spreader"
+    box_mm: ["sbt_w_mm / 2 - ring_w_mm - 1", -1.5, "sbt_w_mm / 2", 1.5]
+    z: ["bottom:bga", "top:ring"]
+    view: front

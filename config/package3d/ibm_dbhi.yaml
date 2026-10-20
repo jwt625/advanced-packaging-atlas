@@ -1,0 +1,214 @@
+# IBM DBHi / DBrM 3D template. Format: config/package3d/TEMPLATE_FORMAT.md. Generator: scripts/build_package3d.py.
+# Backbone: ectc51529.2024.00051-c (DBHi QCM: four 19 x 19 mm main chips tiled by four 2.5 x 3.2 x 0.06 mm Si bridges
+# with 30 or 75 um-pitch solder joints, Cu-pillar C4 at 150 um pitch, 67.5 x 67.5 mm package, no laminate cavity).
+# Topology (ectc51529.2024.00051 p.2 Sec. II, Fig. 1; p.3 Sec. IV, Fig. 4): the bridge is solder-joined to the underside of
+# adjacent chips first (chip-bridge-chip sub-assembly); the sub-assembly is then mass-reflowed to a standard laminate.
+# The 60 um bridge fits under the 110 um chip-to-laminate spacing of the Cu-pillar C4 (100 um pillar + solder cap), so
+# it hangs under the chip gap above the laminate surface. Capillary underfill, TIM, Cu lid on the laminate.
+# Layout from the Fig. 4(b) bottom view: one bridge at the middle of each shared chip edge, its long side across the
+# gap; the bridges across the left-right gap are labelled 30 um pitch, those across the top-bottom gap 75 um pitch.
+# Gaps from the same family: chip thickness and chip gap (ectc51906.2022.00106-a), laminate thickness (DBrM,
+# ectc51846.2026.00050-a), lid material (FEM, ectc51909.2023.00180).
+id: ibm_dbhi
+name: DBHi / DBrM
+company: IBM
+package_class: si_bridge_organic
+family_match: {families: true}
+backbone_tv: ectc51529.2024.00051-c
+summary: >-
+  IBM bridge-first 2.5D: {br_h_um} um Si bridges are solder-joined ({fine_pitch_um} or {coarse_pitch_um} um pitch)
+  under adjacent {chip_w_mm} mm chips; the tile then lands on a cavity-free laminate on {pil_h_um} um Cu pillars
+  that clear the bridges.
+
+params:
+  # ---- reported (backbone ectc51529.2024.00051-c unless noted)
+  sbt_w_mm: {ref: ectc51529.2024.00051-c-c3.x_mm, note: "package size 67.5 x 67.5 mm assigned to the laminate"}
+  sbt_d_mm: {ref: ectc51529.2024.00051-c-c3.y_mm}
+  chip_w_mm: {ref: ectc51529.2024.00051-c-c1.x_mm}
+  chip_d_mm: {ref: ectc51529.2024.00051-c-c1.y_mm}
+  chip_n: {ref: ectc51529.2024.00051-c-c1.count}
+  br_n: {ref: ectc51529.2024.00051-c-c2.count}
+  br_a_mm: {ref: ectc51529.2024.00051-c-c2.x_mm, note: "bridge 2.5 mm side, drawn along the chip gap"}
+  br_b_mm: {ref: ectc51529.2024.00051-c-c2.y_mm, note: "bridge 3.2 mm side, drawn across the chip gap (Fig. 4(b))"}
+  br_h_um: {ref: ectc51529.2024.00051-c-c2.thickness_um}
+  fine_pitch_um: {ref: ectc51529.2024.00051-c-i1.pitch_um}
+  fine_n: {ref: ectc51529.2024.00051-c-i1.count}
+  coarse_pitch_um: {ref: ectc51529.2024.00051-c-i2.pitch_um}
+  pil_pitch_um: {ref: ectc51529.2024.00051-c-i3.pitch_um}
+  pil_h_um: {ref: ectc51529.2024.00051-c-i3.height_um, note: "Cu pillar height"}
+  standoff_um: {ref: ectc51529.2024.00051-c-i3.total_length_um, note: "total chip-to-laminate spacing (pillar + solder cap)"}
+  chip_h_um: {ref: ectc51906.2022.00106-a-c1.thickness_um, note: "processor chip of a DBHi module (Fig. 7 proportional drawing); not given for the QCM"}
+  gap_um: {ref: ectc51906.2022.00106-a-m7.value, note: "chip-to-chip gap of a DBHi module (used for CUF jetting); not given for the QCM"}
+  keepout_um: {ref: ectc51906.2022.00106-a-m9.value}
+  sbt_h_um: {ref: ectc51846.2026.00050-a-c3.thickness_um, note: "68.5 x 68.5 x 2.0 mm laminate of the DBrM dual-chip module; QCM laminate thickness not given"}
+  brm_w_mm: {ref: ectc51846.2026.00050-a-c2.x_mm}
+  brm_d_mm: {ref: ectc51846.2026.00050-a-c2.y_mm}
+  old_br_um: {ref: ectc51909.2023.00180-c-c1.thickness_um, note: "200 um bridge of standard (cavity) DBHi, FEM case 1"}
+  ls_line_um: {ref: ectc51909.2023.00180-a-L09.line_um}
+  ls_space_um: {ref: ectc51909.2023.00180-a-L09.space_um}
+  glue_um: {ref: ectc51846.2026.00050-i-c1.gap_um}
+  # ---- derived
+  site_mm: {derived: "chip_w_mm + gap_um / 1000", note: "chip pitch in the 2 x 2 tile = chip + chip gap"}
+  tile_mm: {derived: "2 * chip_w_mm + gap_um / 1000", note: "chip tile edge = two chips + one gap"}
+  chip_nx: {derived: "chip_n ** 0.5", note: "four chips tiled 2 x 2 (Fig. 4(b))"}
+  br_side_n: {derived: "br_n / 2", note: "two bridges across each of the two chip gaps (one per shared chip edge)"}
+  # ---- template
+  uc4_h_um:
+    template: "r0 + r1"
+    refs: [ectc51909.2023.00155-a-i1.height_um, ectc51909.2023.00155-a-i1.cap_height_um]
+    note: "bridge joint height not reported; Cu + SnAg cap of a 40 um-pitch micro-bump of a Si-interposer TV; same height drawn for 30 and 75 um pitch"
+  br_gap_um:
+    template: "standoff_um - uc4_h_um - br_h_um"
+    note: "bridge-to-laminate clearance = 110 um spacing - template joint - 60 um bridge"
+  fine_d_um:
+    analog: ectc51906.2022.00179-b-i1.diameter_um
+    note: "30 um-pitch joint diameter not reported; analog = 13 um bump of a 20 um-pitch 3D micro-bump stack"
+  coarse_d_um:
+    analog: eptc67330.2025.11392593-a-i2.diameter_um
+    note: "75 um-pitch joint diameter not reported; analog = 25 um bump at 73 um pitch of a bridge interposer"
+  pil_d_um:
+    template: "r0"
+    refs: [ectc51687.2025.00049-b-i2.diameter_um]
+    note: "main-chip Cu-pillar diameter not reported; set to the 80 um bridge-bottom pillar of a DBHi self-alignment coupon at the same 150 um pitch"
+  core_h_um:
+    analog: ectc51687.2025.00148-a-L07.thickness_um
+    note: "laminate core thickness not reported (FEM uses core + build-up); analog = core of an organic FC substrate"
+  bu_h_um: {template: "(sbt_h_um - core_h_um) / 2", note: "build-up per side = (2.0 mm laminate - analog core) / 2"}
+  tim_h_um:
+    analog: itherm45881.2020.9190542-a-c5.thickness_um
+    refs: [ectc51909.2023.00180-a-c5.name]
+    note: "TIM drawn but thickness not reported for DBHi; analog = TIM1 of a lidded 2.5D TV"
+  lid_h_um:
+    analog: ectc51687.2025.00187-a-c5.thickness_um
+    note: "lid thickness not reported for DBHi; analog = 1 mm forged lid of a 74 x 74 mm bridge package"
+  lid_gap_um: {template: "standoff_um + chip_h_um + tim_h_um", note: "lid plate sits on the TIM: laminate top to TIM top"}
+  lid_foot_w_mm: {template: 5, note: "lid foot width not reported; illustrative (outline assumed equal to the laminate)"}
+  uf_margin_mm: {template: 0.5, note: "underfill fillet extent not reported; illustrative"}
+  bga_pitch_um:
+    analog: ectc51909.2023.00155-a-i4.pitch_um
+    note: "BGA not reported for DBHi; analog = 1.0 mm pitch of a large 2.5D TV"
+  bga_d_um:
+    analog: ectc51909.2023.00155-a-i4.diameter_um
+    note: "BGA ball diameter not reported; analog = SAC305 ball of the same 2.5D TV"
+  bga_h_um:
+    template: 478
+    refs: [ectc51909.2023.00155-a-i4.notes]
+    note: "BGA height not reported for DBHi; the analog row's notes give a measured ball height of 478 um"
+
+parts:
+  - {id: substrate, name: "Organic laminate (no cavity)", kind: substrate, material: organic_laminate,
+     material_label: "standard organic laminate", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: sbt_h_um, base: true,
+     explode_group: 0}
+  - id: chip
+    name: "Main chip"
+    kind: die
+    material: silicon
+    w_mm: chip_w_mm
+    d_mm: chip_d_mm
+    h_um: chip_h_um
+    on: substrate
+    standoff: pillar
+    repeat: {nx: chip_nx, ny: chip_nx, pitch_x_mm: site_mm, pitch_y_mm: site_mm}
+    explode_group: 4
+  - id: br_fine
+    name: "Si bridge (30 um-pitch joints)"
+    kind: bridge
+    material: silicon
+    w_mm: br_b_mm
+    d_mm: br_a_mm
+    h_um: br_h_um
+    on: substrate
+    gap_um: br_gap_um
+    repeat: {ny: br_side_n, pitch_y_mm: site_mm}
+    explode_group: 2
+    note: "joined to the two chips first, then carried by the chip tile; hangs under the left-right chip gap above the laminate"
+  - id: br_coarse
+    name: "Si bridge (75 um-pitch joints)"
+    kind: bridge
+    material: silicon
+    w_mm: br_a_mm
+    d_mm: br_b_mm
+    h_um: br_h_um
+    on: substrate
+    gap_um: br_gap_um
+    repeat: {nx: br_side_n, pitch_x_mm: site_mm}
+    explode_group: 2
+    note: "under the top-bottom chip gap; 30 vs 75 um assignment per the Fig. 4(b) labels"
+  - {id: uf, name: "Capillary underfill", kind: underfill, material: underfill, material_label: "CUF (two dispenses)",
+     fill: {above: substrate, parts: [chip], margin_mm: uf_margin_mm}, explode_group: 1, xray_default: true,
+     note: "one dispense through the chip gap into the bridge joints, one for the C4 area"}
+  - {id: tim, name: "TIM", kind: tim, material: tim, material_label: "thermal interface material (not named)",
+     w_mm: chip_w_mm, d_mm: chip_d_mm, h_um: tim_h_um, on: chip,
+     repeat: {nx: chip_nx, ny: chip_nx, pitch_x_mm: site_mm, pitch_y_mm: site_mm}, explode_group: 5, xray_default: true,
+     note: "drawn as one TIM pad per chip"}
+  - {id: lid_foot, name: "Lid sidewall", kind: lid, material: copper, material_label: "Cu lid (DBHi DCM; FEM copper lid)",
+     w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: lid_gap_um, shape: frame, frame_w_mm: lid_foot_w_mm, on: substrate,
+     explode_group: 6, xray_default: true, note: "lid adhesive between foot and laminate not drawn (thickness not reported)"}
+  - {id: lid, name: "Lid", kind: lid, material: copper, material_label: "Cu lid (DBHi DCM; FEM copper lid)",
+     w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: lid_h_um, on: substrate, gap_um: lid_gap_um, explode_group: 6,
+     xray_default: true, note: "the QCM was shown before capping; lid per the DBHi DCM and surface-DBHi builds"}
+
+layers:
+  - part: substrate
+    pattern:
+      - {id: sbt_bu_top, name: "Top build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um,
+         line_um: ls_line_um, space_um: ls_space_um}
+      - {id: sbt_core, name: "Core", material: organic_laminate, material_label: "laminate core", role: core,
+         h_um: core_h_um}
+      - {id: sbt_bu_bot, name: "Bottom build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+
+arrays:
+  - {id: uc4_fine, name: "Bridge joints (30 um pitch)", kind: microbump, per: chip, lower: br_fine,
+     region: {intersect: [br_fine]}, pitch_um: fine_pitch_um, diameter_um: fine_d_um, height_um: uc4_h_um,
+     note: "uC4 solder joints between the chip underside and the bridge; more than 7000 per bridge"}
+  - {id: uc4_coarse, name: "Bridge joints (75 um pitch)", kind: microbump, per: chip, lower: br_coarse,
+     region: {intersect: [br_coarse]}, pitch_um: coarse_pitch_um, diameter_um: coarse_d_um, height_um: uc4_h_um}
+  - {id: pillar, name: "Cu-pillar C4", kind: cu_pillar, per: chip, lower: substrate,
+     region: {subtract: [br_fine, br_coarse]}, pitch_um: pil_pitch_um, diameter_um: pil_d_um, height_um: standoff_um,
+     note: "Cu pillar + solder cap, mass reflow; drawn everywhere outside the bridges (bump map not reported)"}
+  - {id: bga, name: "BGA balls", kind: bga, under: substrate, region: {part: substrate}, pitch_um: bga_pitch_um,
+     diameter_um: bga_d_um, height_um: bga_h_um}
+
+callouts:
+  - {target: br_fine, text: "Bridge {br_h_um} um, no cavity",
+     note: "Si bridge {br_a_mm} x {br_b_mm} mm, {br_h_um} um thick, thinned (from {old_br_um} um in cavity DBHi) so it fits under the C4 standoff; no laminate cavity",
+     refs: [ectc51529.2024.00051-a-c2.notes]}
+  - {target: uc4_fine, text: "Bridge joints {fine_pitch_um} um pitch",
+     note: "{fine_pitch_um} um-pitch solder joints, more than {fine_n} on one bridge; the other QCM bridges use {coarse_pitch_um} um",
+     refs: [ectc51529.2024.00051-c-i1.notes]}
+  - {target: uc4_fine, text: "Bridge joined to chips first",
+     note: "chip-bridge-chip sub-assembly first (mass reflow), then the tile is joined to the laminate like a single chip",
+     refs: [ectc51529.2024.00051-a-i1.notes]}
+  - {target: pillar, text: "Cu pillar {pil_h_um} um tall",
+     note: "Cu-pillar C4: {pil_h_um} um pillar + solder cap, {standoff_um} um chip-to-laminate spacing, {pil_pitch_um} um pitch; nearest C4 about {keepout_um} um from the bridge edge",
+     refs: [ectc51529.2024.00051-a-L06.notes]}
+  - {target: chip, text: "{chip_n} chips {chip_w_mm}x{chip_d_mm} mm",
+     note: "{chip_n} main chips {chip_w_mm} x {chip_d_mm} mm tiled by {br_n} bridges; chip gap {gap_um} um (DBHi module)"}
+  - {target: substrate, text: "Laminate {sbt_w_mm} mm, L/S {ls_line_um}/{ls_space_um}",
+     note: "Standard cavity-free laminate, {sbt_w_mm} x {sbt_d_mm} mm (QCM); {sbt_h_um} um thick in the DBrM module; signal routing allowed under the bridge (L/S {ls_line_um}/{ls_space_um} um)"}
+  - {target: chip, text: "DBrM: chips edge-glued first",
+     note: "DBrM: chips edge-glued first (clearance down to {glue_um} um), then a {brm_w_mm} x {brm_d_mm} mm bridge with 30 um-pitch bumps is attached",
+     refs: [ectc51846.2026.00050-a-i1.pitch_um]}
+  - {target: lid, text: "Cu lid on TIM", refs: [ectc51909.2023.00180-c-c3.material, ectc51909.2023.00180-a-c5.name]}
+
+insets:
+  - id: br_fine_xs
+    label: "30 um bridge under the chip gap"
+    box_mm: [-2, "site_mm / 2 - 0.3", 2, "site_mm / 2 + 0.3"]
+    z: ["top:substrate", "top:chip"]
+    view: front
+  - id: br_coarse_xs
+    label: "75 um bridge, side view"
+    box_mm: ["site_mm / 2 - 0.3", -2, "site_mm / 2 + 0.3", 2]
+    z: ["top:substrate", "top:chip"]
+    view: right
+  - id: joint
+    label: "Bridge joints and C4 standoff"
+    box_mm: [-1.9, "site_mm / 2 - 0.15", -1.3, "site_mm / 2 + 0.15"]
+    z: ["top:substrate", "bottom:tim"]
+    view: front
+  - id: edge
+    label: "Chip edge, underfill, lid"
+    box_mm: ["tile_mm / 2 - 2", -1, "sbt_w_mm / 2", 1]
+    z: ["top:substrate", "top:lid"]
+    view: front

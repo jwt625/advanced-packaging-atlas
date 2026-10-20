@@ -1,0 +1,130 @@
+# SoIC 3D template. Format: config/package3d/TEMPLATE_FORMAT.md. Generator: scripts/build_package3d.py.
+# Backbone: ectc51906.2022.00176-a (SoIC4 TV: 6 x 6 mm top die bonded face-to-face, chip-on-wafer, onto a 16 x 16 mm
+# bottom-wafer die at 3 um bond pitch, bumpless). Topology per RESEARCH.md (soic): thinned top die, gap fill around it
+# (drawn so the SoIC chip is one block; material not stated), Cu hybrid-bond interface, bottom die with TSVs, bumps to
+# the next package level (CoWoS, InFO or flip chip). TDVs exist in SoIC (ectc.2019.00095 Sec. VI) but no TSMC source
+# places them; in packaged SoIC (ectc.2019.00095 p.2 Fig. 4(b),(d)) the smaller chiplets sit under the larger die on the
+# bump side, so any fill with TDVs faces the bumps. The fill here (beside the top die of the CoW TV) carries no TDVs. No SoIC row reports a thickness, TSV size or next-level bump, so the vertical axis is analog values
+# from other hybrid-bond and 2.5D TVs. The carrier below the SoIC chip is not drawn (it is a separate family).
+id: soic
+name: SoIC
+company: TSMC
+package_class: hybrid_bonded_3d
+family_match: {families: true}
+backbone_tv: ectc51906.2022.00176-a
+summary: >-
+  TSMC bumpless 3D: a {top_w_mm} x {top_d_mm} mm known-good die Cu hybrid bonded face-to-face onto a
+  {bot_w_mm} x {bot_d_mm} mm die at {hb_pitch_um} um pitch; no solder, no underfill; gap fill around the top die,
+  TSVs below.
+
+params:
+  # ---- reported (backbone ectc51906.2022.00176-a unless noted)
+  top_w_mm: {ref: ectc51906.2022.00176-a-c1.x_mm}
+  top_d_mm: {ref: ectc51906.2022.00176-a-c1.y_mm}
+  bot_w_mm: {ref: ectc51906.2022.00176-a-c2.x_mm}
+  bot_d_mm: {ref: ectc51906.2022.00176-a-c2.y_mm}
+  hb_pitch_um: {ref: ectc51906.2022.00176-a-i1.pitch_um}
+  soic1_pitch_um: {ref: ectc51906.2022.00176-b-i1.pitch_um}
+  rule_pitch_um: {ref: ectc.2019.00095-a-i1.pitch_um, note: "'sub-10 um' SoIC bond pitch rule (qualifier lt)"}
+  w2w_pitch_um: {ref: ectc51529.2024.00125-a-i1.pitch_um}
+  w2w_cd_um: {ref: ectc51529.2024.00125-a-i1.diameter_um}
+  # ---- derived
+  fill_w_mm:
+    derived: "(bot_w_mm - top_w_mm) / 2"
+    note: "gap-fill ring width = (bottom - top) / 2; equal in x and y because both dies are square and centered"
+  # ---- template: thicknesses (no SoIC row reports any)
+  top_h_um:
+    analog: ectc51906.2022.00031-b-c1.thickness_um
+    note: "SoIC top-die thickness not reported (text: thinned); analog = 50 um cap die of a D2W hybrid-bond (DBI Ultra) stack"
+  bot_h_um:
+    analog: ectc51906.2022.00031-b-c2.thickness_um
+    note: "SoIC bottom-die thickness not reported; analog = 50 um TSV pass-through die of the same D2W hybrid-bond stack"
+  bond_t_um:
+    analog: ectc51906.2022.00031-b-L04.thickness_um
+    note: "bond layer thickness per side not reported for SoIC; analog = 2 um DBI layer (Cu pads in bond dielectric) per die face"
+    refs: [ectc51906.2022.00031-b-L10.thickness_um]
+  fill_h_um:
+    template: "bond_t_um + top_h_um"
+    note: "gap fill flush with the top-die back side: top bond layer + top die"
+  # ---- template: interconnect sizes
+  hb_d_um:
+    analog: ectc51846.2026.00218-a-i2.pad_x_um
+    note: "SoIC4 bond pad size not reported; analog = 1.5 um pad of a 3 um-pitch D2W hybrid-bond TV (same pitch)"
+  tsv_pitch_um:
+    analog: ectc51906.2022.00031-b-i3.pitch_um
+    note: "SoIC TSV pitch not reported (TSV stated, ectc.2019.00095); analog = 35 um TSV pitch of the D2W hybrid-bond stack"
+    refs: [ectc.2019.00095-a-i2.ic_type]
+  tsv_d_um:
+    analog: ectc51906.2022.00031-b-i3.diameter_um
+    note: "SoIC TSV diameter not reported; analog = 5 um x 50 um TSV of the D2W hybrid-bond stack"
+  bump_pitch_um:
+    analog: ectc51909.2023.00155-a-i2.pitch_um
+    note: "next-level bump (to a CoWoS interposer) not reported; analog = 35 um-pitch Cu/SnAg micro-bump of a 2.5D Si-interposer TV"
+  bump_d_um:
+    analog: ectc51909.2023.00155-a-i2.diameter_um
+    note: "next-level bump diameter not reported; analog = the same 35 um-pitch Cu/SnAg bump"
+  bump_h_um:
+    template: "r0 + r1"
+    refs: [ectc51909.2023.00155-a-i2.height_um, ectc51909.2023.00155-a-i2.cap_height_um]
+    note: "next-level bump height = Cu + SnAg cap of the 35 um-pitch analog bump"
+
+parts:
+  - {id: die_bot, name: "Bottom die (TSV)", kind: die, material: silicon, w_mm: bot_w_mm, d_mm: bot_d_mm,
+     h_um: bot_h_um, base: true, explode_group: 0,
+     note: "face up; bottom-wafer die of the SoIC4 CoW TV, BEOL and bond-pad tier on top; TSVs per ectc.2019.00095"}
+  - {id: bond_bot, name: "Bottom bond layer", kind: other, material: other,
+     material_label: "Cu pads in bond dielectric (not specified)", w_mm: bot_w_mm, d_mm: bot_d_mm, h_um: bond_t_um,
+     on: die_bot, explode_group: 1, note: "bottom-wafer bond-pad tier (ECP Cu, ectc51906.2022.00176-a-L05)"}
+  - {id: bond_top, name: "Top bond layer", kind: other, material: other,
+     material_label: "Cu pads in bond dielectric (not specified)", w_mm: top_w_mm, d_mm: top_d_mm, h_um: bond_t_um,
+     on: bond_bot, explode_group: 2,
+     note: "top-die bond-pad tier (ECP Cu, ectc51906.2022.00176-a-L04); the bonded plane is its bottom face"}
+  - {id: die_top, name: "Top die (KGD, thinned)", kind: die, material: silicon, w_mm: top_w_mm, d_mm: top_d_mm,
+     h_um: top_h_um, on: bond_top, explode_group: 3, note: "face down (F2F); thinned before dicing; a support Si on top is not stated in our TSMC sources (not drawn)"}
+  - {id: gap_fill, name: "Gap fill", kind: other, material: other,
+     material_label: "gap fill (material not stated)", w_mm: bot_w_mm, d_mm: bot_d_mm, h_um: fill_h_um,
+     shape: frame, frame_w_mm: fill_w_mm, on: bond_bot, explode_group: 3, xray_default: true,
+     note: "not described for the SoIC4 CoW TV; drawn so the SoIC chip is one block ('just like a general SoC chip', ectc.2019.00095 p.2 Sec. III); no TDVs here: in packaged SoIC (Fig. 4(b),(d)) the smaller dies, and any fill with TDVs, face the bump side"}
+
+arrays:
+  - {id: hb, name: "Cu hybrid bonds", kind: hybrid_bond, span: ["bottom:bond_bot", "top:bond_top"],
+     between: [die_top, die_bot], region: {part: die_top}, pitch_um: hb_pitch_um, diameter_um: hb_d_um,
+     note: "full-array F2F bond under the top die; Cu-Cu + dielectric, no solder or underfill"}
+  - {id: tsv, name: "Bottom-die TSVs", kind: tsv, in: die_bot, region: {part: die_bot}, pitch_um: tsv_pitch_um,
+     diameter_um: tsv_d_um, note: "TSV placement not reported; rendered over the full bottom die"}
+  - {id: bumps, name: "Next-level bumps", kind: microbump, under: die_bot, region: {part: die_bot},
+     pitch_um: bump_pitch_um, diameter_um: bump_d_um, height_um: bump_h_um,
+     note: "bumps to the carrier (CoWoS interposer, InFO or flip chip; ectc.2019.00095); bump map not reported"}
+
+callouts:
+  - {target: hb, text: "HB pitch {hb_pitch_um} um (SoIC4)"}
+  - {target: hb, text: "SoIC1 pitch {soic1_pitch_um} um"}
+  - {target: hb, text: "W2W pitch {w2w_pitch_um} um"}
+  - {target: hb, text: "W2W pad CD {w2w_cd_um} um"}
+  - {target: hb, text: "Bumpless, no underfill",
+     refs: [ectc51906.2022.00176-a-i1.bonding_method]}
+  - {target: die_top, text: "Top die {top_w_mm} x {top_d_mm} mm"}
+  - {target: die_bot, text: "Bottom die {bot_w_mm} x {bot_d_mm} mm"}
+  - {target: gap_fill, text: "Gap fill, material not stated",
+     note: "TDVs (through-dielectric vias) are reported for SoIC (ectc.2019.00095 Sec. VI) without placement. In packaged SoIC (ectc.2019.00095 p.2 Fig. 4(b),(d)) the smaller chiplets sit under the larger die on the bump side, so a fill with TDVs faces the bumps, not the top-die side drawn here",
+     refs: [ectc.2019.00095-a-i3.ic_type]}
+  - {target: tsv, text: "TSV size not reported", refs: [ectc.2019.00095-a-i2.ic_type]}
+  - {target: bond_bot, text: "SoIC-CS: C-Layer bond (F2B)", refs: [ectc51687.2025.00055-a-L02.material]}
+  - {target: bumps, text: "Then into CoWoS, InFO, FC", refs: [ectc.2019.00095-a.technology_name]}
+
+insets:
+  - id: hb_interface
+    label: "Hybrid-bond interface"
+    box_mm: [-0.012, -0.012, 0.012, 0.012]
+    z: ["bottom:bond_bot", "top:bond_top"]
+    view: front
+  - id: die_edge
+    label: "Top-die edge, gap fill"
+    box_mm: ["top_w_mm / 2 - 0.1", -0.1, "top_w_mm / 2 + 0.1", 0.1]
+    z: ["bottom:die_bot", "top:die_top"]
+    view: front
+  - id: tsv_column
+    label: "TSV column and bumps"
+    box_mm: ["-bot_w_mm / 2 + 0.5", -0.1, "-bot_w_mm / 2 + 0.7", 0.1]
+    z: ["bottom:die_bot", "top:bond_bot"]
+    view: front

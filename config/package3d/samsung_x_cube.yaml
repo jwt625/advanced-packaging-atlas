@@ -1,0 +1,165 @@
+# Samsung X-Cube 3D template. Format: config/package3d/TEMPLATE_FORMAT.md. Generator: scripts/build_package3d.py.
+# Backbone: iwlpc52010.2020.9375855-b (SAINT-S functional TV: one 9 x 9 mm SRAM die stacked face-to-back on a
+# 9.5 x 9.5 mm 7nm logic die with TSVs; 12 x 12 mm substrate, 1.1 mm package). The package TV (-a) has the same
+# geometry with several SRAM dies (count not given).
+# Topology (p.3 Sec. 'X-Cube Test Vehicles', Fig. 3): SRAM front side with micro-bumps bonded by CoW solder bonding to
+# the backside of the thinned logic wafer (backside metal, TSVs, front metal), wafer-level mold around the SRAM, the
+# X-Cube Cu-pillar bumped to the substrate, BGA. The bumpless D2W hybrid Cu bonding (HCB) path of
+# ectc51909.2023.00178 is a callout (its TVs give no thicknesses or package outline).
+# No X-Cube row reports a die thickness, bump height or substrate thickness. The 0.67 mm X-Cube height with Cu
+# pillar is stated only in the Cu-pillar row notes (no numeric cell), so it enters as a template value with that
+# cell as reference; die and joint heights are analogs; the SRAM fills the rest of the 0.67 mm.
+id: samsung_x_cube
+name: X-Cube
+company: Samsung
+package_class: microbump_3d
+family_match: {families: true}
+backbone_tv: iwlpc52010.2020.9375855-b
+summary: >-
+  Samsung 3D logic stack: a {sram_w_mm} mm SRAM die micro-bumped face-to-back onto a {logic_w_mm} mm logic die
+  with {tsv_d_um} um TSVs at {tsv_pitch_um} um, molded, then Cu-pillar bumped to a {pkg_w_mm} mm substrate;
+  {pkg_h_um} um package.
+
+params:
+  # ---- reported (backbone iwlpc52010.2020.9375855-b)
+  pkg_w_mm: {ref: iwlpc52010.2020.9375855-b-c4.x_mm}
+  pkg_d_mm: {ref: iwlpc52010.2020.9375855-b-c4.y_mm}
+  pkg_h_um: {ref: iwlpc52010.2020.9375855-b.package_thickness_mm, note: "total height of both TVs, BGA included (Fig. 3)"}
+  logic_w_mm: {ref: iwlpc52010.2020.9375855-b-c1.x_mm}
+  logic_d_mm: {ref: iwlpc52010.2020.9375855-b-c1.y_mm}
+  sram_w_mm: {ref: iwlpc52010.2020.9375855-b-c2.x_mm}
+  sram_d_mm: {ref: iwlpc52010.2020.9375855-b-c2.y_mm}
+  tsv_pitch_um: {ref: iwlpc52010.2020.9375855-b-i2.pitch_um}
+  tsv_d_um: {ref: iwlpc52010.2020.9375855-b-i2.diameter_um}
+  pil_pitch_um: {ref: iwlpc52010.2020.9375855-b-i3.pitch_um}
+  bga_pitch_um: {ref: iwlpc52010.2020.9375855-b-i4.pitch_um}
+  hcb_pitch_um: {ref: ectc51909.2023.00178-a-i1.pitch_um}
+  hcb_pad_um: {ref: ectc51909.2023.00178-a-i1.pad_x_um}
+  hcb_tv_mm: {ref: ectc51909.2023.00178-a.package_x_mm}
+  # ---- derived
+  mold_w_mm:
+    derived: "(logic_w_mm - sram_w_mm) / 2"
+    note: "mold wall around the SRAM = (logic - SRAM) / 2, outer face flush with the logic die (Fig. 3); equal in x and y"
+  # ---- template
+  xcube_h_um:
+    template: 670
+    refs: [iwlpc52010.2020.9375855-b-i3.notes]
+    note: "X-Cube height with Cu pillar (0.67 mm) is stated in the Cu-pillar row notes and Fig. 3 but has no numeric cell"
+  logic_h_um:
+    analog: ectc51906.2022.00031-c-c2.thickness_um
+    note: "thinned logic-die thickness not reported; analog = 50 um TSV pass-through die (5 um TSV) of a D2W stack"
+  bsm_h_um:
+    analog: ectc51906.2022.00031-c-L03.thickness_um
+    refs: [iwlpc52010.2020.9375855-b-L04.notes]
+    note: "logic backside metal stated without thickness; analog = 1 um single-level Cu damascene RDL of a D2W stack"
+  fem_h_um:
+    analog: eptc59621.2023.10457670-a-L03.thickness_um
+    refs: [iwlpc52010.2020.9375855-b-L06.layer_name]
+    note: "logic front metal stated without thickness; analog = one 1 um Cu dual-damascene level (illustrative, a 7nm BEOL is thicker)"
+  logic_si_um: {template: "logic_h_um - bsm_h_um - fem_h_um", note: "logic Si (with TSV) = die - backside metal - front metal"}
+  ub_pitch_um:
+    template: "tsv_pitch_um"
+    refs: [iwlpc52010.2020.9375855-b-i2.notes]
+    note: "SRAM micro-bump pitch not reported; the 50 um TSV pitch is set by the F2B SRAM connection, so one bump per TSV is drawn"
+  ub_d_um:
+    analog: ectc51909.2023.00155-a-i1.diameter_um
+    note: "micro-bump diameter not reported; analog = 40 um-pitch Cu/SnAg micro-bump of a Si-interposer TV"
+  ub_h_um:
+    template: "r0 + r1"
+    refs: [ectc51909.2023.00155-a-i1.height_um, ectc51909.2023.00155-a-i1.cap_height_um]
+    note: "micro-bump joint height not reported; Cu + SnAg cap of the same analog bump"
+  pil_d_um:
+    analog: ectc51909.2023.00155-a-i3.diameter_um
+    note: "Cu-pillar diameter not reported; analog = 150 um-pitch Cu/SnAg pillar of a Si-interposer TV (closest pitch)"
+  pil_h_um:
+    template: "r0 + r1"
+    refs: [ectc51909.2023.00155-a-i3.height_um, ectc51909.2023.00155-a-i3.cap_height_um]
+    note: "Cu-pillar joint height not reported; Cu + SnAg of the same analog pillar"
+  sram_h_um:
+    template: "xcube_h_um - logic_h_um - ub_h_um - pil_h_um"
+    note: "SRAM thickness not reported; the remainder of the 0.67 mm X-Cube height (template joints and logic die)"
+  mold_h_um: {template: "ub_h_um + sram_h_um", note: "mold from the logic backside to the SRAM back (flush in Fig. 3)"}
+  bga_d_um:
+    analog: ectc32862.2020.00185-a-i2.diameter_um
+    note: "BGA ball size not reported; analog = 200 um balls at the same 0.4 mm pitch (panel fan-out package)"
+  bga_h_um:
+    analog: ectc51906.2022.00136-a-i1.height_um
+    note: "BGA height not reported; analog = 180 um ball height target at 0.35 mm pitch (fan-out package)"
+  sbt_h_um:
+    template: "pkg_h_um - xcube_h_um - bga_h_um"
+    note: "substrate thickness not reported; 1.1 mm package - 0.67 mm X-Cube - template BGA"
+  ub_margin_mm: {template: 0, note: "gap filler under the SRAM drawn at the SRAM footprint (material and extent not stated)"}
+  uf_margin_mm: {template: 0.3, note: "Cu-pillar underfill fillet extent not reported; illustrative"}
+
+parts:
+  - {id: substrate, name: "Package substrate", kind: substrate, material: organic_laminate,
+     material_label: "substrate (layers and material not given)", w_mm: pkg_w_mm, d_mm: pkg_d_mm, h_um: sbt_h_um,
+     base: true, explode_group: 0}
+  - {id: logic, name: "Logic die (7nm, TSV)", kind: die, material: silicon, w_mm: logic_w_mm, d_mm: logic_d_mm,
+     h_um: logic_h_um, on: substrate, standoff: pillar, explode_group: 2,
+     note: "thinned logic wafer: front metal faces the substrate, backside metal faces the SRAM"}
+  - {id: sram, name: "SRAM die (face down)", kind: die, material: silicon, w_mm: sram_w_mm, d_mm: sram_d_mm,
+     h_um: sram_h_um, on: logic, standoff: ub, explode_group: 4,
+     note: "front side with micro-bumps bonded to the logic-wafer backside (face to back); the package TV stacks several SRAM dies"}
+  - {id: mold, name: "Mold (wafer level)", kind: mold, material: mold_compound, material_label: "molding compound",
+     w_mm: logic_w_mm, d_mm: logic_d_mm, h_um: mold_h_um, shape: frame, frame_w_mm: mold_w_mm, on: logic,
+     explode_group: 4, xray_default: true, note: "wafer-level molding after CoW, laterally around the SRAM"}
+  - {id: ub_fill, name: "Micro-bump gap filler", kind: underfill, material: underfill,
+     material_label: "gap filler (not stated)", fill: {above: logic, parts: [sram], margin_mm: ub_margin_mm},
+     explode_group: 3, xray_default: true}
+  - {id: uf, name: "Cu-pillar underfill", kind: underfill, material: underfill, material_label: "underfill (not stated)",
+     fill: {above: substrate, parts: [logic], margin_mm: uf_margin_mm}, explode_group: 1, xray_default: true}
+
+layers:
+  - part: logic
+    pattern:
+      - {id: logic_bsm, name: "Backside metal", material: copper, material_label: "backside metal (not specified)",
+         role: conductor, h_um: bsm_h_um}
+      - {id: logic_si, name: "Logic Si (TSV)", material: silicon, role: core, h_um: logic_si_um}
+      - {id: logic_fem, name: "Front metal", material: copper, material_label: "front-side metal layers (not specified)",
+         role: conductor, h_um: fem_h_um}
+
+arrays:
+  - {id: ub, name: "SRAM micro-bumps", kind: microbump, per: sram, lower: logic, pitch_um: ub_pitch_um,
+     diameter_um: ub_d_um, height_um: ub_h_um, note: "CoW solder bonding, F2B; pitch and bump map not reported"}
+  - {id: tsv, name: "Logic TSVs", kind: tsv, in_layer: logic_si, region: {part: sram}, pitch_um: tsv_pitch_um,
+     diameter_um: tsv_d_um, note: "TSV placement not reported; drawn under the SRAM at the reported pitch"}
+  - {id: pillar, name: "Cu pillars", kind: cu_pillar, per: logic, lower: substrate, pitch_um: pil_pitch_um,
+     diameter_um: pil_d_um, height_um: pil_h_um, note: "bump map not reported; pitch rendered over the full logic die"}
+  - {id: bga, name: "BGA balls", kind: bga, under: substrate, region: {part: substrate}, pitch_um: bga_pitch_um,
+     diameter_um: bga_d_um, height_um: bga_h_um}
+
+callouts:
+  - {target: sram, text: "SRAM {sram_w_mm}x{sram_d_mm} mm, face down",
+     note: "SRAM front side with micro-bumps on the logic backside (face to back), CoW solder bonding",
+     refs: [iwlpc52010.2020.9375855-b-L01.notes]}
+  - {target: logic, text: "Logic {logic_w_mm}x{logic_d_mm} mm, 7nm",
+     refs: [iwlpc52010.2020.9375855-b-c1.process_node]}
+  - {target: tsv, text: "TSV {tsv_d_um} um at {tsv_pitch_um} um",
+     note: "7nm TSV, {tsv_d_um} um diameter at {tsv_pitch_um} um pitch; the pitch includes TSV keep-out rules of the F2B SRAM link",
+     refs: [iwlpc52010.2020.9375855-b-i2.notes]}
+  - {target: pillar, text: "Cu pillar {pil_pitch_um} um pitch",
+     note: "Cu pillars at {pil_pitch_um} um pitch to the {pkg_w_mm} x {pkg_d_mm} mm substrate; X-Cube height with pillars 0.67 mm (row notes)",
+     refs: [iwlpc52010.2020.9375855-b-i3.notes]}
+  - {target: mold, text: "Mold around SRAM", refs: [iwlpc52010.2020.9375855-b-L02.notes]}
+  - {target: bga, text: "Package {pkg_h_um} um, BGA {bga_pitch_um} um"}
+  - {target: ub, text: "Bumpless HCB: {hcb_pitch_um} um pitch",
+     note: "D2W hybrid Cu bonding variant (ectc51909.2023.00178): {hcb_pad_um} um Cu pads at {hcb_pitch_um} um pitch, {hcb_tv_mm} mm test chip; no bumps, no gap filler",
+     refs: [ectc51909.2023.00178-a-i1.bonding_method]}
+
+insets:
+  - id: f2b
+    label: "SRAM-logic F2B joint, TSVs"
+    box_mm: [-0.15, -0.15, 0.15, 0.15]
+    z: ["bottom:logic", "bottom:sram"]
+    view: front
+  - id: edge
+    label: "X-Cube edge: mold, pillars"
+    box_mm: ["logic_w_mm / 2 - 0.6", -0.3, "pkg_w_mm / 2", 0.3]
+    z: ["top:substrate", "top:sram"]
+    view: front
+  - id: stack
+    label: "Full stack at the edge"
+    box_mm: ["logic_w_mm / 2 - 1", -0.5, "pkg_w_mm / 2", 0.5]
+    z: ["bottom:bga", "top:sram"]
+    view: front

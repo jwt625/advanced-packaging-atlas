@@ -1,0 +1,205 @@
+# Foveros 3D template. Format: config/package3d/TEMPLATE_FORMAT.md. Generator: scripts/build_package3d.py.
+# Backbone: iedm19573.2019.8993637-a (Foveros F2F logic-on-logic stack on package: one top logic die face down on a 22FFL
+# base die with TSV-mid, 50 um Cu pillar + SnAg micro-bumps, base die ground to ~75 um, package-side bumps on the TSVs).
+# Footprint: the backbone reports no die size; the only Foveros outline in the database is the 2X-reticle die complex
+# of ectc51846.2026.00365-j (~32 x 62 mm, "mold material is present on the die edge", p.5 Sec. V). 32 x 62 mm is about
+# 2.3x the 26 x 33 mm lithography field, so it cannot be one unstitched active base die: the complex is drawn as
+# reticle_multiple (2) base dies of at most 1X each, split along the long axis, embedded with their top dies in one mold
+# body that has the reported outline. The partition, the base-die sizes and where the mold sits are template values
+# (the Fig. 9(a) top view shows the complex in two halves; the paper does not say these are base dies).
+# Top dies: one per base die, as in the backbone stack (2026-10-20 audit B2: the 3-tile count of the 2024 TV came from a
+# 2.5D Foveros on a passive Si interposer, vlsitechnologyandcir46783.2024.10631478-a, and is now a callout only). The
+# package-side bump (110 um / 70 um) still comes from that 2024 TV (same family tag, base-to-substrate joint).
+# Tile sizes, thicknesses other than the base die, bump heights and the substrate are template values.
+id: foveros
+name: Foveros
+company: Intel
+package_class: microbump_3d
+family_match: {families: true}
+backbone_tv: iedm19573.2019.8993637-a
+summary: >-
+  Intel 3D: top tiles face down on a ~{base_h_um} um active base die with {tsv_d_um} um TSVs, joined by {ub_pitch_um} um
+  Cu pillar + SnAg micro-bumps and underfill; mold on the die edge; {psb_pitch_um} um package-side bumps to the
+  substrate.
+
+params:
+  # ---- reported (backbone iedm19573.2019.8993637-a unless noted)
+  cx_w_mm: {ref: ectc51846.2026.00365-j-c1.x_mm, note: "outline of the 2X-reticle Foveros die complex (approx.)"}
+  cx_d_mm: {ref: ectc51846.2026.00365-j-c1.y_mm, note: "outline of the 2X-reticle Foveros die complex (approx.)"}
+  reticle_j: {ref: ectc51846.2026.00365-j.reticle_multiple}
+  k_w_mm: {ref: ectc51846.2026.00365-k-c1.x_mm}
+  k_d_mm: {ref: ectc51846.2026.00365-k-c1.y_mm}
+  base_h_um: {ref: iedm19573.2019.8993637-a-c2.thickness_um, note: "ground to ~75 um to reveal TSVs (qualifier approx)"}
+  tile_n:
+    ref: iedm19573.2019.8993637-a-c1.count
+    note: "one top die on the base die in the backbone stack; drawn per base die (tile count of the 2X complex not reported)"
+  t24_n:
+    ref: vlsitechnologyandcir46783.2024.10631478-a.n_dies
+    note: "CPU, GPU and SOC chiplets of the 2.5D Foveros SiP TV on a passive TSV Si interposer (callout only)"
+  ub_pitch_um: {ref: iedm19573.2019.8993637-a-i1.pitch_um}
+  ub_d_um: {ref: iedm19573.2019.8993637-a-i1.diameter_um}
+  ub2_pitch_um: {ref: vlsitechnologyandcir46783.2024.10631478-a-i1.pitch_um}
+  ub2_d_um: {ref: vlsitechnologyandcir46783.2024.10631478-a-i1.diameter_um}
+  tsv_pitch_um: {ref: iedm19573.2019.8993637-a-i2.pitch_min_um, note: "minimum of the 15-16 um TSV pitch range"}
+  tsv_d_um: {ref: iedm19573.2019.8993637-a-i2.diameter_um}
+  tsv2_depth_um: {ref: vlsitechnologyandcir46783.2024.10631478-a-i3.depth_um}
+  psb_pitch_um:
+    ref: vlsitechnologyandcir46783.2024.10631478-a-i2.pitch_um
+    note: "package-side bump (PSB) of the 2024 Foveros SiP TV; the backbone reports its package bump without size"
+  psb_d_um: {ref: vlsitechnologyandcir46783.2024.10631478-a-i2.diameter_um}
+  # ---- template: base-die partition of the 2X complex (not reported)
+  base_n:
+    template: "reticle_j"
+    note: "base-die partition not reported; the 2X complex is drawn as reticle-multiple base dies of <= 1X each along the long axis (Fig. 9(a) shows two halves; not stated to be base dies)"
+    refs: [ectc51846.2026.00365-k-c2.name]
+  field_w_mm: {template: 26, note: "lithography field 26 x 33 mm: each base die is capped at 1X reticle"}
+  field_d_mm: {template: 33, note: "lithography field 26 x 33 mm: each base die is capped at 1X reticle"}
+  edge_mm:
+    analog: tcpmt.2023.3312037-a-m3.value
+    note: "mold on the die edge is reported (ectc51846.2026.00365-j-c2) without a width; analog = ~250 um mold shelf of the Ponte Vecchio Foveros stacks"
+    refs: [ectc51846.2026.00365-j-c2.name]
+  base_gap_um:
+    analog: tcpmt.2023.3312037-a-c2.gap_um
+    note: "gap between base dies not reported; analog = die-to-die spacing to a Foveros stack in the Ponte Vecchio Co-EMIB package (>= 100 um)"
+  base_w_mm:
+    template: "min(field_w_mm, cx_w_mm - 2 * edge_mm)"
+    note: "base die fills the complex width inside the mold edge, capped at the 26 mm field width (size not reported)"
+  base_d_mm:
+    template: "min(field_d_mm, (cx_d_mm - 2 * edge_mm - (base_n - 1) * base_gap_um / 1000) / base_n)"
+    note: "base dies share the complex length inside the mold edge, each capped at the 33 mm field length (size not reported)"
+  base_py_mm: {template: "base_d_mm + base_gap_um / 1000", note: "base-die pitch = base-die length + gap"}
+  # ---- template: tile layout (no Foveros row dimensions a top tile)
+  tile_w_mm: {template: "base_w_mm - 2 * edge_mm", note: "top die spans its base die inside the mold shelf (size not reported)"}
+  tile_d_mm:
+    template: "(base_d_mm - 2 * edge_mm - (tile_n - 1) * base_gap_um / 1000) / tile_n"
+    note: "top dies share their base die inside the mold shelf, equal size (layout not reported)"
+  tile_py_mm:
+    template: "base_py_mm / tile_n"
+    note: "tile pitch along the long axis; exact for one tile per base die (layout not reported)"
+  # ---- template: thicknesses and joints
+  tile_h_um:
+    analog: ectc51906.2022.00181-a-c1.thickness_um
+    note: "top-tile thickness not reported for Foveros; analog = 50 um ASIC top die of a micro-bump 3DIC CoW TV"
+  ub_h_um:
+    template: "r0 + r1"
+    refs: [ectc51909.2023.00155-a-i1.height_um, ectc51909.2023.00155-a-i1.cap_height_um]
+    note: "micro-bump joint height not reported; analog = Cu + SnAg cap of a 40 um-pitch Cu/SnAg bump (2.5D TV)"
+  psb_h_um:
+    template: "r0 + r1"
+    refs: [ectc51909.2023.00155-a-i3.height_um, ectc51909.2023.00155-a-i3.cap_height_um]
+    note: "package-side bump height not reported; analog = Cu + SnAg cap of a 150 um-pitch interposer-to-substrate bump"
+  mold_h_um:
+    template: "base_h_um + ub_h_um + tile_h_um"
+    note: "complex drawn as base dies and top dies in one mold body with the reported outline, flush with the tile backs; where the mold sits and its height are not reported"
+  base_depth_um: {template: "ub_h_um + tile_h_um", note: "base-die top below the mold top by the joint + tile height"}
+  wluf_margin_mm:
+    template: 0
+    note: "wafer-level underfill drawn under each top die only; it can enter the mold shelf (tcpmt.2023.3312037-a-c7)"
+    refs: [tcpmt.2023.3312037-a-c7.name]
+  osuf_margin_mm: {template: 1.0, note: "package-level underfill fillet extent not reported; illustrative"}
+  # ---- template: package substrate (no Foveros row reports one)
+  sbt_margin_mm: {template: 10, note: "substrate outline not reported; die complex + 10 mm per side, illustrative"}
+  sbt_w_mm: {template: "cx_w_mm + 2 * sbt_margin_mm", note: "substrate = die complex + margin (template)"}
+  sbt_d_mm: {template: "cx_d_mm + 2 * sbt_margin_mm", note: "substrate = die complex + margin (template)"}
+  bu_n:
+    analog: ectc51687.2025.00148-a-L06.repeat
+    note: "Foveros substrate layer count not reported; analog = 4 build-up layers per side of an organic FC substrate"
+  bu_diel_um:
+    analog: ectc51687.2025.00148-a-L04.thickness_um
+    note: "build-up dielectric thickness not reported; analog = ABF-GL layer of the same organic FC substrate"
+  bu_h_um: {template: "bu_n * bu_diel_um", note: "build-up per side = layer count x dielectric thickness (analogs)"}
+  core_h_um:
+    analog: ectc51687.2025.00148-a-L07.thickness_um
+    note: "core thickness not reported; analog = core of the same organic FC substrate"
+  sbt_h_um: {template: "core_h_um + 2 * bu_h_um", note: "substrate = core + 2 build-up stacks (template inputs)"}
+
+parts:
+  - {id: substrate, name: "Package substrate", kind: substrate, material: organic_laminate,
+     material_label: "organic build-up substrate", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: sbt_h_um, base: true,
+     explode_group: 0}
+  - {id: mold, name: "Die-complex mold", kind: mold, material: mold_compound, material_label: "mold material (not named)",
+     w_mm: cx_w_mm, d_mm: cx_d_mm, h_um: mold_h_um, on: substrate, standoff: psb, explode_group: 2, xray_default: true,
+     note: "mold on the die edge of the ~32 x 62 mm complex (ectc51846.2026.00365-j-c2); drawn as one body around the base and top dies; extent and height not reported"}
+  - id: base
+    name: "Base die (active, TSV)"
+    kind: die
+    material: silicon
+    w_mm: base_w_mm
+    d_mm: base_d_mm
+    h_um: base_h_um
+    in: mold
+    depth_um: base_depth_um
+    repeat: {ny: base_n, pitch_y_mm: base_py_mm}
+    explode_group: 2
+    note: "face up; 22FFL base die with TSV-mid, thick upper Cu, backside nitride (iedm19573.2019.8993637-a-L03..L05); <= 1X reticle each, partition not reported"
+  - id: tile
+    name: "Top tile"
+    kind: die
+    material: silicon
+    w_mm: tile_w_mm
+    d_mm: tile_d_mm
+    h_um: tile_h_um
+    in: mold
+    standoff: ubump
+    repeat: {ny: "base_n * tile_n", pitch_y_mm: tile_py_mm}
+    explode_group: 4
+    note: "face down (F2F); tile size and placement not reported"
+  - {id: wluf, name: "Wafer-level underfill", kind: underfill, material: underfill,
+     fill: {per: tile, margin_mm: wluf_margin_mm}, explode_group: 3, xray_default: true,
+     note: "Foveros chiplet underfill under wafer-level mold (tcpmt.2023.3312037-a-c7, Ponte Vecchio)"}
+  - {id: osuf, name: "Package underfill", kind: underfill, material: underfill,
+     fill: {above: substrate, parts: [mold], margin_mm: osuf_margin_mm}, explode_group: 1, xray_default: true,
+     note: "package-level capillary underfill reported for Ponte Vecchio (tcpmt.2023.3312037-a-c6)"}
+
+layers:
+  - part: substrate
+    pattern:
+      - {id: sbt_bu_top, name: "Front build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+      - {id: sbt_core, name: "Core", material: organic_laminate, material_label: "laminate core", role: core,
+         h_um: core_h_um}
+      - {id: sbt_bu_bot, name: "Back build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+
+arrays:
+  - {id: ubump, name: "F2F micro-bumps", kind: microbump, per: tile, lower: base, pitch_um: ub_pitch_um,
+     diameter_um: ub_d_um, height_um: ub_h_um,
+     note: "Cu pillar + SnAg on both dies, TCB (iedm19573.2019.8993637-a-i1); rendered over each tile, bump map not reported"}
+  - {id: tsv, name: "Base-die TSVs", kind: tsv, in: base, region: {part: base}, pitch_um: tsv_pitch_um,
+     diameter_um: tsv_d_um,
+     note: "TSV-mid at the minimum cluster pitch; clusters share one package bump; placement not reported, rendered over the full die"}
+  - {id: psb, name: "Package-side bumps", kind: c4, upper: base, lower: substrate, region: {part: base},
+     pitch_um: psb_pitch_um, diameter_um: psb_d_um, height_um: psb_h_um,
+     note: "aligned to exposed TSVs (iedm19573.2019.8993637-a-i3); size from the 2024 Foveros SiP TV"}
+
+callouts:
+  - {target: ubump, text: "Micro-bump {ub_pitch_um} um pitch"}
+  - {target: ubump, text: "{ub2_pitch_um} um pitch (2024 TV)"}
+  - {target: tsv, text: "TSV {tsv_d_um} um, {tsv_pitch_um} um pitch"}
+  - {target: tsv, text: "TSV depth {tsv2_depth_um} um (2024 TV)"}
+  - {target: base, text: "Base die ~{base_h_um} um, 22FFL", refs: [iedm19573.2019.8993637-a-c2.name]}
+  - {target: mold, text: "{reticle_j}X complex {cx_w_mm} x {cx_d_mm} mm",
+     note: "Foveros die complex ~{cx_w_mm} x {cx_d_mm} mm ({reticle_j}X reticle, ectc51846.2026.00365 p.5 Sec. V, Fig. 9(a)); about 2.3x one 26 x 33 mm field, so drawn as {reticle_j} base dies of <= 1X each; partition not reported"}
+  - {target: base, text: "4X complex {k_w_mm} x {k_d_mm} mm", refs: [ectc51846.2026.00365-k.reticle_multiple],
+     note: "4X-reticle Foveros TV with active base die communication, ~{k_w_mm} x {k_d_mm} mm (ectc51846.2026.00365 p.5 Sec. V); base-die count and size not stated"}
+  - {target: tile, text: "{tile_n} top die per base die",
+     note: "one top die on the base die in the backbone stack (iedm19573.2019.8993637); tile count and layout of the 2X complex not reported"}
+  - {target: tile, text: "Foveros-S 2.5D: {t24_n} tiles",
+     note: "2.5D Foveros SiP: {t24_n} chiplets (CPU, GPU, SOC) on a passive TSV Si interposer (vlsitechnologyandcir46783.2024.10631478-a), not on an active base die"}
+  - {target: psb, text: "Package bump {psb_pitch_um} um pitch"}
+  - {target: mold, text: "Mold on die edge", refs: [ectc51846.2026.00365-j-c2.name]}
+
+insets:
+  - id: base_gap
+    label: "Base-die gap"
+    box_mm: [-0.5, -0.5, 0.5, 0.5]
+    z: ["bottom:base", "top:tile"]
+    view: right
+  - id: tsv_column
+    label: "TSV column and package bump"
+    box_mm: [-0.15, "base_py_mm / 2 - 0.15", 0.15, "base_py_mm / 2 + 0.15"]
+    z: ["bottom:psb", "top:tile"]
+    view: front
+  - id: die_edge
+    label: "Complex edge, mold"
+    box_mm: ["base_w_mm / 2 - 0.6", "base_py_mm / 2 - 0.3", "cx_w_mm / 2 + 0.6", "base_py_mm / 2 + 0.3"]
+    z: ["top:substrate", "top:mold"]
+    view: front

@@ -1,0 +1,116 @@
+# UCLA Si-IF 3D template. Format: config/package3d/TEMPLATE_FORMAT.md. Generator: scripts/build_package3d.py.
+# Backbone: ectc51906.2022.00332-b (2x2 UDSP assembly: four TSMC 16FF dielets, 2.5 mm wide, Cu-Cu thermocompression
+# bonded at 9.8 um pitch (4 um pillars) onto an 8 mm 2x2 Si-IF with 2 Cu wiring levels; 59 um inter-dielet spacing;
+# wire-bonded I/O). Topology (ectc51906.2022.00332 p.1 Sec. I, p.2-3 Sec. II.B, Fig. 3): bare dielets face down, dielet
+# Cu pads bonded directly to Cu pillars on the Si-IF, BEOL Cu wiring on a Si substrate, no TSV, no organic substrate.
+# Gaps from the same family: Si-IF and dielet thickness (3D Si-IF TV ectc51846.2026.00062-c), pillar height (GaN/Si-IF TV
+# iedm45741.2023.10413759-a), wiring-level thickness (Si-IF PDN unit-cell model ectc51906.2022.00303-a).
+# The Si-IF is wafer scale in general; the backbone is an 8 mm 2x2 site, drawn square (one side is labelled).
+id: ucla_si_if
+name: Si-IF (Silicon Interconnect Fabric)
+company: UCLA CHIPS
+package_class: wafer_scale
+family_match: {families: true}
+backbone_tv: ectc51906.2022.00332-b
+summary: >-
+  UCLA substrate-less integration: {dl_n} bare {dl_w_mm} mm dielets Cu-Cu thermocompression bonded at
+  {pil_pitch_um} um pitch onto an {if_w_mm} mm Si-IF with {m_n} Cu wiring levels, {gap_um} um apart; no TSV, no
+  organic substrate, wire-bonded I/O.
+
+params:
+  # ---- reported (backbone ectc51906.2022.00332-b unless noted)
+  if_w_mm: {ref: ectc51906.2022.00332-b-c2.x_mm, note: "Si-IF side 8 mm (Fig. 3(b) arrow)"}
+  dl_w_mm: {ref: ectc51906.2022.00332-b-c1.x_mm, note: "dielet width 2.5 mm (Fig. 3(a))"}
+  dl_n: {ref: ectc51906.2022.00332-b-c1.count}
+  gap_um: {ref: ectc51906.2022.00332-b-c2.gap_um, note: "inter-dielet spacing after assembly, both directions"}
+  pil_pitch_um: {ref: ectc51906.2022.00332-b-i1.pitch_um}
+  pil_d_um: {ref: ectc51906.2022.00332-b-i1.diameter_um}
+  pil_r_mohm: {ref: ectc51906.2022.00332-b-i1.resistance_mohm}
+  m_n: {ref: ectc51906.2022.00332-b-L03.repeat}
+  if_h_um: {ref: ectc51846.2026.00062-c-c3.thickness_um, note: "Si-IF base substrate of the 3D Si-IF TV; not stated for the 2x2 UDSP Si-IF"}
+  dl_h_um: {ref: ectc51846.2026.00062-c-c1.thickness_um, note: "2 x 2 mm test die on Si-IF (ectc51846.2026.00062); UDSP dielet thickness not stated"}
+  pil_h_um: {ref: iedm45741.2023.10413759-a-i1.height_um, note: "3 um Cu pillar of the GaN/Si-IF TV (10 um pitch); not stated for the UDSP assembly"}
+  m_h_um: {ref: ectc51906.2022.00303-a-L01.thickness_um, note: "3 um metal level of the Si-IF PDN unit-cell model (simulation row)"}
+  gan_pitch_um: {ref: iedm45741.2023.10413759-a-i1.pitch_um}
+  st_pitch_um: {ref: ectc51846.2026.00062-a-i1.pitch_um}
+  st_w_mm: {ref: ectc51846.2026.00062-a-c2.x_mm}
+  tpv_pitch_um: {ref: ectc51906.2022.00303-a-i1.pitch_um}
+  tpv_d_um: {ref: ectc51906.2022.00303-a-i1.diameter_um}
+  ws_area_mm2: {ref: ectc51906.2022.00303-c.interposer_area_mm2}
+  # ---- derived
+  dl_nx: {derived: "dl_n ** 0.5", note: "four dielets in a 2 x 2 array"}
+  dl_px_mm: {derived: "dl_w_mm + gap_um / 1000", note: "dielet pitch = dielet + inter-dielet spacing"}
+  if_si_um: {derived: "if_h_um - m_n * m_h_um", note: "Si-IF silicon = substrate - wiring levels"}
+  # ---- template
+  if_d_mm: {template: "if_w_mm", note: "Si-IF drawn square; only one side is labelled (8 mm)"}
+  dl_d_mm: {template: "dl_w_mm", note: "dielet drawn square; only the width is labelled (2.5 mm)"}
+
+parts:
+  - {id: si_if, name: "Si-IF (Si, BEOL Cu wiring)", kind: interposer, material: silicon,
+     material_label: "Si with Cu damascene wiring", w_mm: if_w_mm, d_mm: if_d_mm, h_um: if_h_um, base: true,
+     explode_group: 0, note: "no TSV; fan-out pads at the periphery are wire-bonded to a daughter card"}
+  - id: dielet
+    name: "UDSP dielet (16FF, face down)"
+    kind: die
+    material: silicon
+    w_mm: dl_w_mm
+    d_mm: dl_d_mm
+    h_um: dl_h_um
+    on: si_if
+    standoff: pillar
+    repeat: {nx: dl_nx, ny: dl_nx, pitch_x_mm: dl_px_mm, pitch_y_mm: dl_px_mm}
+    explode_group: 2
+    note: "bare dielet; Cu pads terminated at the final Cu metallization; no underfill or mold"
+
+layers:
+  - part: si_if
+    repeat: m_n
+    pattern:
+      - {id: if_m, name: "Si-IF Cu wiring level", material: copper, material_label: "Cu damascene / dual damascene",
+         role: conductor, h_um: m_h_um}
+  - part: si_if
+    pattern:
+      - {id: if_si, name: "Si-IF silicon", material: silicon, role: core, h_um: if_si_um}
+
+arrays:
+  - {id: pillar, name: "Cu-Cu bonds (Si-IF pillar to dielet pad)", kind: cu_pillar, per: dielet, lower: si_if,
+     pitch_um: pil_pitch_um, diameter_um: pil_d_um, height_um: pil_h_um,
+     note: "Cu pillars on the Si-IF thermocompression bonded to dielet Cu pads; no solder; full-area field drawn (bump map not reported)"}
+
+callouts:
+  - {target: pillar, text: "Cu-Cu TCB, {pil_pitch_um} um pitch",
+     note: "Si-IF Cu pillars ({pil_d_um} um) thermocompression bonded to dielet Cu pads at {pil_pitch_um} um pitch, no solder; {pil_r_mohm} mOhm per joint (extracted)",
+     refs: [ectc51906.2022.00332-b-i1.bonding_method]}
+  - {target: dielet, text: "Dielets {gap_um} um apart",
+     note: "{dl_n} UDSP dielets, {gap_um} um inter-dielet spacing after assembly; links between dielets run in the Si-IF wiring",
+     refs: [ectc51906.2022.00332-b-L03.notes]}
+  - {target: if_m, text: "{m_n} Cu wiring levels",
+     note: "{m_n} Cu damascene wiring levels on the Si-IF; level thickness from the PDN model ({m_h_um} um)",
+     refs: [ectc51906.2022.00332-b-L03.material]}
+  - {target: si_if, text: "No TSV, wire-bonded I/O", refs: [ectc51906.2022.00332-b-i2.notes, ectc51906.2022.00332-a-c2.material]}
+  - {target: si_if, text: "GaN/Si-IF: {gan_pitch_um} um Cu-Cu",
+     note: "GaN/Si-IF variant: dielets Cu-Cu bonded at {gan_pitch_um} um pitch on a GaN-on-Si wafer (iedm45741.2023.10413759)",
+     refs: [iedm45741.2023.10413759-a.technology_name]}
+  - {target: dielet, text: "3D: F2B Cu-Cu stacks",
+     note: "3D extension: up to 3-tier face-to-back Cu-Cu TCB stacks of {st_w_mm} mm dies at {st_pitch_um} um pitch on Si-IF (ectc51846.2026.00062)",
+     refs: [ectc51846.2026.00062-a.name]}
+  - {target: si_if, text: "Wafer-scale TSV-less power concept",
+     note: "Envisioned wafer-scale Si-IF ({ws_area_mm2} mm2): power through polymer vias in the inter-die gaps ({tpv_d_um} um at {tpv_pitch_um} um pitch), no TSV",
+     refs: [ectc51906.2022.00303-c.name]}
+
+insets:
+  - id: gap
+    label: "Inter-dielet gap"
+    box_mm: [-0.15, "dl_px_mm / 2 - 0.15", 0.15, "dl_px_mm / 2 + 0.15"]
+    z: ["bottom:si_if", "top:dielet"]
+    view: front
+  - id: joint
+    label: "Cu-Cu bond field"
+    box_mm: ["-dl_px_mm / 2 - 0.03", "dl_px_mm / 2 - 0.03", "-dl_px_mm / 2 + 0.03", "dl_px_mm / 2 + 0.03"]
+    z: ["top:si_if", "bottom:dielet"]
+    view: front
+  - id: edge
+    label: "Dielet edge on Si-IF"
+    box_mm: ["dl_px_mm / 2 + dl_w_mm / 2 - 0.3", -0.3, "if_w_mm / 2", 0.3]
+    z: ["bottom:si_if", "top:dielet"]
+    view: front

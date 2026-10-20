@@ -1,0 +1,156 @@
+# FCBGA baseline 3D template. Format: config/package3d/TEMPLATE_FORMAT.md. Generator: scripts/build_package3d.py.
+# Backbone: ectc51529.2024.00265-a (100 x 100 mm 8-2-8 FCBGA, 1.4 mm CCL core, 50 x 50 x 0.725 mm Si chip on Cu pillar /
+# SnAg bumps at 200 um pitch, capillary underfill, Cu stiffener on silicone adhesive, 1.0 mm-pitch BGA). Gaps from other
+# TVs of the same family (package_class organic_substrate): build-up wiring L/S, microvia and core PTH from the 60 x 60 mm
+# 4-2-4 TV ectc51687.2025.00148-a; solder resist thickness from ectc51846.2026.00119-b.
+# Topology (RESEARCH.md fcbga_organic): monolithic die face down on Cu pillar joints in CUF; solder resist / N build-up
+# layers / laminate core with PTH / N build-up / solder resist; stiffener ring on adhesive; BGA. No interposer, no bridge:
+# the reference the 2.5D / bridge families are compared against.
+# The substrate is three parts (back build-up, core, front build-up) so the PTH array spans only the core.
+# family_match: the families.yaml rule (package_class organic_substrate), so the generator checks every reported cell
+# against the TV's package_class (2026-10-20; before that the regex "^$" could only test for an empty technology_name).
+id: fcbga_organic
+name: FCBGA (organic build-up baseline)
+company: generic
+package_class: organic_substrate
+family_match: {families: true}
+backbone_tv: ectc51529.2024.00265-a
+summary: >-
+  Baseline flip chip: one {die_w_mm} x {die_d_mm} mm Si die on {bump_pitch_um} um Cu pillars with capillary underfill,
+  on a {sbt_w_mm} mm {sbt_layers} build-up substrate ({core_h_um} um core with PTH); Cu stiffener; {bga_pitch_um} um
+  BGA. No interposer or bridge.
+
+params:
+  # ---- reported (backbone ectc51529.2024.00265-a unless noted)
+  sbt_w_mm: {ref: ectc51529.2024.00265-a-c2.x_mm}
+  sbt_d_mm: {ref: ectc51529.2024.00265-a-c2.y_mm}
+  sbt_h_um: {ref: ectc51529.2024.00265-a-c2.thickness_um, note: "total substrate thickness (1.8 mm incl. the 1.4 mm CCL core)"}
+  sbt_layers: {ref: ectc51529.2024.00265-a.substrate_layer_count}
+  core_h_um: {ref: ectc51529.2024.00265-a-L08.thickness_um}
+  bu_inner_n: {ref: ectc51529.2024.00265-a-L07.repeat, note: "L2-L8 build-up layers on the front side"}
+  die_w_mm: {ref: ectc51529.2024.00265-a-c1.x_mm}
+  die_d_mm: {ref: ectc51529.2024.00265-a-c1.y_mm}
+  die_h_um: {ref: ectc51529.2024.00265-a-c1.thickness_um, note: "chip thickness excluding bumps"}
+  bump_pitch_um: {ref: ectc51529.2024.00265-a-i1.pitch_um}
+  bump_d_um: {ref: ectc51529.2024.00265-a-i1.diameter_um}
+  bump_cu_um: {ref: ectc51529.2024.00265-a-i1.height_um}
+  bump_cap_um: {ref: ectc51529.2024.00265-a-i1.cap_height_um}
+  bga_pitch_um: {ref: ectc51529.2024.00265-a-i2.pitch_um}
+  bga_d_um: {ref: ectc51529.2024.00265-a-i2.diameter_um}
+  stiff_h_um: {ref: ectc51529.2024.00265-a-c3.thickness_um}
+  stiff_mat: {ref: ectc51529.2024.00265-a-c3.material}
+  adh_h_um: {ref: ectc51529.2024.00265-a-c4.thickness_um, note: "silicone adhesive with 150 um glass-bead spacers (BLR build)"}
+  sr_h_um:
+    ref: ectc51846.2026.00119-b-L01.thickness_um
+    note: "dry-film package solder resist of a substrate coupon in the same family; backbone SR thickness not given"
+  bu_line_um: {ref: ectc51687.2025.00148-a-L06.line_um, note: "build-up Cu wiring of the 4-2-4 FCBGA TV (backbone gives none)"}
+  bu_space_um: {ref: ectc51687.2025.00148-a-L06.space_um, note: "build-up Cu wiring of the 4-2-4 FCBGA TV (backbone gives none)"}
+  mvia_d_um: {ref: ectc51687.2025.00148-a-i2.diameter_um, note: "build-up blind via of the 4-2-4 FCBGA TV"}
+  pth_pitch_um: {ref: ectc51687.2025.00148-a-i4.pitch_um, note: "core through hole of the 4-2-4 FCBGA TV (1.2 mm core)"}
+  pth_d_um: {ref: ectc51687.2025.00148-a-i4.diameter_um, note: "core through hole of the 4-2-4 FCBGA TV (1.2 mm core)"}
+  # ---- derived
+  bu_n: {derived: "bu_inner_n + 1", note: "front build-up metal layers = L1 flip-chip pad layer (row L06) + L2-L8 (row L07); 8-2-8"}
+  bu_h_um: {derived: "(sbt_h_um - core_h_um) / 2", note: "build-up per side incl. solder resist = (substrate - core) / 2"}
+  bu_layer_h_um: {derived: "(bu_h_um - sr_h_um) / bu_n", note: "one build-up layer (dielectric + Cu) = (build-up side - SR) / layers"}
+  bump_h_um: {derived: "bump_cu_um + bump_cap_um", note: "joint standoff = Cu pillar + SnAg cap"}
+  # ---- template
+  stiff_w_mm:
+    template: 16
+    refs: [ectc51529.2024.00265-a-c3.name]
+    note: "stiffener width 16 mm (BLR build) is given in the component name, not in a numeric column"
+  uf_margin_mm:
+    template: 1.5
+    refs: [ectc51529.2024.00265-a-c5.notes]
+    note: "CUF fillet not measured; 1.5 mm = the fillet width the paper assumes when sizing the stiffener"
+  mvia_pitch_um:
+    template: "bump_pitch_um"
+    refs: [ectc51687.2025.00148-a-i3.ic_type]
+    note: "stacked-via placement not reported; one stacked column per flip-chip pad assumed"
+  bga_h_um:
+    template: 478
+    refs: [ectc51909.2023.00155-a-i4.notes]
+    note: "BGA height not reported in the family; measured height of the same 1.0 mm-pitch / 600 um SAC305 ball in a 2.5D TV (analog row notes)"
+
+parts:
+  - {id: sbt_bu_bot, name: "Back build-up + SR", kind: substrate, material: organic_build_up,
+     material_label: "build-up film / Cu, solder resist", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: bu_h_um, base: true,
+     explode_group: 0}
+  - {id: sbt_core, name: "CCL core (PTH)", kind: substrate, material: organic_laminate,
+     material_label: "GFRP CCL: resin with E-glass cloth", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: core_h_um, on: sbt_bu_bot,
+     explode_group: 0}
+  - {id: sbt_bu_top, name: "Front build-up + SR", kind: substrate, material: organic_build_up,
+     material_label: "build-up film / Cu, solder resist", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: bu_h_um, on: sbt_core,
+     explode_group: 0}
+  - {id: die, name: "Si die (flip chip)", kind: die, material: silicon, w_mm: die_w_mm, d_mm: die_d_mm, h_um: die_h_um,
+     on: sbt_bu_top, standoff: bump, explode_group: 2, note: "simple bumped Si chip (no interposer module) in the backbone TV"}
+  - id: uf
+    name: "Capillary underfill (CUF)"
+    kind: underfill
+    material: underfill
+    fill: {above: sbt_bu_top, parts: [die], margin_mm: uf_margin_mm}
+    explode_group: 1
+    xray_default: true
+  - {id: adhesive, name: "Stiffener adhesive", kind: other, material: other,
+     material_label: "silicone adhesive with glass beads", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: adh_h_um, shape: frame,
+     frame_w_mm: stiff_w_mm, on: sbt_bu_top, explode_group: 1}
+  - {id: stiffener, name: "Cu stiffener", kind: stiffener, material: copper, material_label: "copper", w_mm: sbt_w_mm,
+     d_mm: sbt_d_mm, h_um: stiff_h_um, shape: frame, frame_w_mm: stiff_w_mm, on: adhesive, explode_group: 2,
+     note: "outer edge assumed flush with the substrate edge (position not reported)"}
+
+layers:
+  - part: sbt_bu_top
+    pattern:
+      - {id: sr_top, name: "Solder resist (L1 side)", material: polymer_dielectric, material_label: "dry-film solder resist",
+         role: passivation, h_um: sr_h_um}
+  - part: sbt_bu_top
+    repeat: bu_n
+    pattern:
+      - {id: bu_top, name: "Build-up layer", material: organic_build_up, material_label: "build-up film + Cu wiring",
+         role: dielectric, h_um: bu_layer_h_um, line_um: bu_line_um, space_um: bu_space_um, via_um: mvia_d_um}
+  - part: sbt_bu_bot
+    repeat: bu_n
+    pattern:
+      - {id: bu_bot, name: "Build-up layer", material: organic_build_up, material_label: "build-up film + Cu wiring",
+         role: dielectric, h_um: bu_layer_h_um}
+  - part: sbt_bu_bot
+    pattern:
+      - {id: sr_bot, name: "Solder resist (BGA side)", material: polymer_dielectric,
+         material_label: "dry-film solder resist", role: passivation, h_um: sr_h_um}
+
+arrays:
+  - {id: bump, name: "Cu pillar + SnAg bumps", kind: cu_pillar, upper: die, lower: sbt_bu_top, region: {part: die},
+     pitch_um: bump_pitch_um, diameter_um: bump_d_um, height_um: bump_h_um,
+     note: "full-area array at the reported pitch; the bump map is not reported"}
+  - {id: mvia, name: "Stacked microvias", kind: rdl_via, in: sbt_bu_top, region: {part: die}, pitch_um: mvia_pitch_um,
+     diameter_um: mvia_d_um, note: "drawn under the die only; placement not reported"}
+  - {id: pth, name: "Core PTH (plated through hole)", kind: pth, in: sbt_core, region: {part: die},
+     pitch_um: pth_pitch_um, diameter_um: pth_d_um, note: "drawn under the die only; placement not reported"}
+  - {id: bga, name: "BGA balls", kind: bga, under: sbt_bu_bot, region: {part: sbt_bu_bot}, pitch_um: bga_pitch_um,
+     diameter_um: bga_d_um, height_um: bga_h_um, note: "full grid drawn; the TV depopulates every two rows/columns"}
+
+callouts:
+  - {target: sbt_core, text: "{sbt_layers} substrate, {core_h_um} um core"}
+  - {target: bu_top, text: "Build-up L/S {bu_line_um}/{bu_space_um} um"}
+  - {target: sr_top, text: "Solder resist {sr_h_um} um"}
+  - {target: pth, text: "Core PTH {pth_d_um} um dia"}
+  - {target: bump, text: "Cu pillar {bump_pitch_um} um pitch"}
+  - {target: uf, text: "Capillary underfill (CUF)", refs: [ectc51529.2024.00265-a-c5.name]}
+  - {target: stiffener, text: "Cu stiffener {stiff_h_um} um thick"}
+  - {target: bga, text: "BGA {bga_pitch_um} um pitch"}
+
+insets:
+  - id: die_edge
+    label: "Die edge, bumps, CUF fillet"
+    box_mm: ["die_w_mm / 2 - 0.6", -0.5, "die_w_mm / 2 + 2", 0.5]
+    z: ["bottom:sbt_bu_top", "top:die"]
+    view: front
+  - id: sbt_xs
+    label: "Substrate cross-section"
+    box_mm: [-0.75, -0.75, 0.75, 0.75]
+    z: ["bottom:sbt_bu_bot", "top:die"]
+    view: front
+  - id: stiff_edge
+    label: "Stiffener on adhesive"
+    box_mm: ["sbt_w_mm / 2 - stiff_w_mm - 1", -1, "sbt_w_mm / 2", 1]
+    z: ["bottom:sbt_bu_bot", "top:stiffener"]
+    view: front

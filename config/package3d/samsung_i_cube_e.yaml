@@ -1,0 +1,332 @@
+# I-Cube E 3D template. Format: config/package3d/TEMPLATE_FORMAT.md. Generator: scripts/build_package3d.py.
+# Backbone: ectc51687.2025.00048-a (I-Cube E 2.3D panel-level package: logic + 12 HBM on a 4.3x-reticle RDL interposer
+# with multiple embedded Si bridges attached by DAF, Cu posts through the interposer mold, upper and lower RDL, C4 to the
+# substrate). The only paper of the family reports almost no dimensions, so the model is mostly template.
+# Interposer outline: the database stores the floor-plan label 'Interposer Size 95.00x105.00' in interposer_x/y, with the
+# conflict logged in the evidence ('Unit Size 51.00x67.72' is also labeled; unresolved). This template draws the
+# 51 x 67.72 mm unit as the interposer because its area matches the reported 4.3x reticle multiple and the 12-HBM floor
+# plan (Samsung's 4.3x I-Cube R TV is 51 x 68 mm), and uses the 95 x 105 mm label as the substrate outline. Both are
+# template values; swap them if the conflict is resolved the other way. Re-checked 2026-10-20 on the page render of
+# Fig. 2.2: the one drawn floor-plan rectangle (12 HBM, logic, bridges) has a width/height ratio of about 0.75, which
+# matches 51 / 67.72 = 0.75 and not 95 / 105 = 0.90, so the decision stands.
+# Topology (ectc51687.2025.00048 Sec. II.A-B, Fig. 2.1-2.3): lower RDL on a carrier, Cu posts, bridges mounted with DAF,
+# mold, grind to expose the bridge Cu bumps, upper RDL, logic and HBM by panel-level mass reflow (CoP), C4, mount on the
+# substrate. Floor plan (Fig. 2.2): two columns of 6 HBM flank the logic region, a bridge under each HBM-logic edge and
+# one at the logic-logic edge. No top-die underfill or mold is reported.
+#
+# Uses the bridge_in_mold module of cowos_l.yaml: `drop` removes the module's bridge-TSV array and its two params (no
+# bridge TSV reported), `rename` gives ri_back / ri_core / ri_front / lsi I-Cube E names (ids kept), layer groups are
+# replaced, tiv is overridden (it also skips the logic-logic bridge) and lsi_via is overridden (bridge Cu bumps, kind cu_pillar). The upper-RDL vias over the bridges are this
+# template's own array rdl_via_br. Bridge orientation: face up, since the mold is ground to expose the bridge Cu bumps
+# (ectc51687.2025.00048 p.3 Sec. III.B; flow step s05) on bridges mounted with DAF (s03).
+id: samsung_i_cube_e
+name: I-Cube E
+company: Samsung
+package_class: si_bridge_fanout
+family_match: {families: true}
+backbone_tv: ectc51687.2025.00048-a
+summary: >-
+  Samsung panel-level 2.3D interposer: multiple Si bridges on DAF molded with Cu posts between lower and upper RDL; logic +
+  {hbm_n} HBM on top ({reticle_x}x reticle); C4 to the substrate.
+
+use:
+  - module: bridge_in_mold
+    from: cowos_l.yaml
+    drop: [lsi_tsv, lsi_tsv_pitch_um, lsi_tsv_d_um]
+    rename:
+      ri_back: {name: "Lower RDL", material_label: "Cu RDL / dielectric (not given)"}
+      ri_core: {name: "Interposer mold (bridges, Cu posts)", material_label: "EMC (not named)"}
+      ri_front: {name: "Upper RDL", material_label: "Cu RDL / dielectric (not given)"}
+      lsi:
+        name: "Si bridge (HBM-logic)"
+        note: "face up on DAF: the mold is ground to expose the bridge Cu bumps (p.3 Sec. III.B, flow s05); Cu bumps to the upper RDL"
+
+params:
+  # ---- reported (backbone ectc51687.2025.00048-a)
+  hbm_n: {ref: ectc51687.2025.00048-a-c2.count}
+  reticle_x: {ref: ectc51687.2025.00048-a.reticle_multiple}
+  ip_lab_w_mm: {ref: ectc51687.2025.00048-a.interposer_x_mm, note: "floor-plan label 'Interposer Size' (see the outline note)"}
+  ip_lab_d_mm: {ref: ectc51687.2025.00048-a.interposer_y_mm, note: "floor-plan label 'Interposer Size' (see the outline note)"}
+  # ---- template: outlines
+  ri_w_mm:
+    template: 51
+    refs: [ectc51687.2025.00048-a.notes, eptc62800.2024.10909872-a-c4.x_mm]
+    note: "drawn = the floor plan's 'Unit Size' 51.00 x 67.72 mm (TV notes): it fits the reported 4.3x reticle and the 12-HBM plan, like Samsung's 51 x 68 mm I-Cube R TV; the 95 x 105 mm 'Interposer Size' label stays unresolved"
+  ri_d_mm:
+    template: 67.72
+    refs: [ectc51687.2025.00048-a.notes, eptc62800.2024.10909872-a-c4.y_mm]
+    note: "drawn = the floor plan's 'Unit Size' 51.00 x 67.72 mm (TV notes); see ri_w_mm"
+  sbt_w_mm:
+    template: "r0"
+    refs: [ectc51687.2025.00048-a.interposer_x_mm]
+    note: "substrate size not reported; set to the 95 x 105 mm 'Interposer Size' label, read here as the outer outline (conflict unresolved)"
+  sbt_d_mm:
+    template: "r0"
+    refs: [ectc51687.2025.00048-a.interposer_y_mm]
+    note: "substrate size not reported; set to the 95 x 105 mm 'Interposer Size' label, read here as the outer outline (conflict unresolved)"
+  # ---- template: layout
+  hbm_w_mm:
+    template: 11
+    refs: [ectc51687.2025.00048-a-i1.notes]
+    note: "HBM size not reported; 11 x 11 mm = chip size for which panel-level CoP mass reflow was verified"
+  hbm_d_mm:
+    template: 11
+    refs: [ectc51687.2025.00048-a-i1.notes]
+    note: "HBM size not reported; 11 x 11 mm = chip size for which panel-level CoP mass reflow was verified"
+  hbm_cols_n: {template: 2, note: "two HBM columns flank the logic region (Fig. 2.2 floor plan)"}
+  hbm_rows_n: {template: "hbm_n / hbm_cols_n", note: "HBM per column = HBM count / columns (6 per side in Fig. 2.2)"}
+  die_gap_um:
+    analog: tcpmt.2023.3312037-a-c2.gap_um
+    note: "die-to-die gap not reported for I-Cube E; analog = Intel Co-EMIB DtD spacing ('as small as 100 um')"
+  ip_edge_mm:
+    template: "(ri_d_mm - hbm_rows_n * hbm_d_mm - (hbm_rows_n - 1) * die_gap_um / 1000) / 2"
+    note: "HBM columns span the unit length (Fig. 2.2); die-to-edge margin = what remains of the length"
+  logic_n:
+    analog: eptc62800.2024.10909872-a-c2.count
+    note: "logic count not stated; analog = 2 logic dies of Samsung's 4.3x I-Cube R floor plan; Fig. 2.2 splits the logic region at mid-length"
+  logic_w_mm:
+    template: "min(26, ri_w_mm - 2 * ip_edge_mm - 2 * hbm_w_mm - 2 * die_gap_um / 1000)"
+    note: "logic size not reported; fills the column between the HBM columns, capped at a 26 mm reticle-field width"
+  logic_d_mm:
+    template: "min(33, (ri_d_mm - 2 * ip_edge_mm - (logic_n - 1) * die_gap_um / 1000) / logic_n)"
+    note: "logic size not reported; two dies share the column length, capped at a 33 mm reticle-field length"
+  logic_py_mm: {template: "logic_d_mm + die_gap_um / 1000", note: "logic pitch = logic length + D2D gap"}
+  hbm_px_mm: {template: "ri_w_mm - 2 * ip_edge_mm - hbm_w_mm", note: "HBM columns at the unit edges (Fig. 2.2)"}
+  hbm_py_mm: {template: "hbm_d_mm + die_gap_um / 1000", note: "HBM pitch = HBM length + D2D gap"}
+  lsi_cols_n: {template: "hbm_cols_n", note: "one bridge under each HBM-logic edge (Fig. 2.2); count not stated"}
+  lsi_rows_n: {template: "hbm_rows_n", note: "one bridge per HBM (Fig. 2.2); count not stated"}
+  lsi_px_mm:
+    template: "(logic_w_mm + hbm_px_mm - hbm_w_mm) / 2"
+    note: "bridge centered between the logic edge and the HBM inner edge"
+  lsi_py_mm: {template: "hbm_py_mm", note: "bridges aligned with the HBM rows"}
+  # ---- template: bridge, mold core and joints
+  lsi_w_mm:
+    analog: ectc51909.2023.00175-a-c3.x_mm
+    note: "bridge size not reported for I-Cube E; analog = Amkor S-Connect connect die (Si bridge in mold)"
+  lsi_d_mm:
+    analog: ectc51909.2023.00175-a-c3.y_mm
+    note: "bridge size not reported for I-Cube E; analog = Amkor S-Connect connect die (Si bridge in mold)"
+  lsi_h_um:
+    analog: ectc51909.2023.00175-a-c3.thickness_um
+    note: "bridge thickness not reported; analog = S-Connect connect die (~70 um)"
+  lsi_via_h_um:
+    analog: ectc51909.2023.00175-a-i3.height_um
+    refs: [ectc51687.2025.00048-a-i2.notes]
+    note: "bridge Cu bump height not reported (only relative heights vs thickness tolerance); analog = S-Connect Cu stud (~5 um)"
+  daf_h_um:
+    analog: ectc51909.2023.00155-a-c5.thickness_um
+    refs: [ectc51687.2025.00048-a-c4.name]
+    note: "DAF thickness not reported; analog = die attach film of a 2.5D TV"
+  ri_core_h_um:
+    template: "daf_h_um + lsi_h_um + lsi_via_h_um"
+    refs: [ectc51687.2025.00048-F1-s05.step]
+    note: "interposer mold ground to expose the bridge Cu bumps (step s05) with the bridge on DAF on the lower RDL (s01-s03)"
+  lsi_m_n:
+    analog: ectc.2016.201-a-L02.repeat
+    note: "bridge metal level count not reported; analog = 4 routing levels of the Intel EMIB bridge"
+  lsi_m_um:
+    analog: ectc51909.2023.00174-d-L02.thickness_um
+    note: "bridge metal level thickness not reported; analog = TSMC LSI-1 dual-damascene Cu level"
+  lsi_line_um:
+    analog: ectc.2016.201-a-L02.line_um
+    note: "bridge line width not reported; analog = Intel EMIB bridge 2/2 um"
+  lsi_space_um:
+    analog: ectc.2016.201-a-L02.space_um
+    note: "bridge line space not reported; analog = Intel EMIB bridge 2/2 um"
+  lsi_si_um: {template: "lsi_h_um - lsi_m_n * lsi_m_um", note: "bridge Si = bridge thickness - metal levels (template inputs)"}
+  tiv_pitch_um:
+    analog: eptc67330.2025.11392593-a-i3.pitch_um
+    note: "Cu post pitch not reported; analog = Cu posts of a nepes embedded-bridge interposer (bridges also on DAF)"
+  tiv_d_um:
+    analog: eptc67330.2025.11392593-a-i3.diameter_um
+    note: "Cu post diameter not reported; analog = Cu posts of the same nepes interposer"
+  ri_front_n:
+    analog: eptc67330.2025.11392593-a-L04.repeat
+    note: "upper RDL layer count not reported; analog = 2 top-side RDL metal layers of the nepes embedded-bridge interposer"
+  ri_back_n: {template: 1, note: "lower RDL layer count not reported; one level drawn"}
+  ri_cu_um:
+    analog: ectc51909.2023.00266-a-L02.thickness_um
+    note: "RDL Cu thickness not reported; analog = fan-out RDL Cu of a Deca M-Series TV"
+  ri_diel_um:
+    analog: ectc51846.2026.00016-a-L04.thickness_um
+    note: "RDL dielectric thickness not reported; analog = polyimide RDL dielectric of a mold interposer"
+  ubump_pitch_um:
+    analog: ectc51687.2025.00090-a-i1.pitch_min_um
+    note: "chip bump pitch not reported; analog = minimum 45 um ASIC bump pitch of Samsung's 4.3x panel RDL interposer"
+  ubump_d_um:
+    analog: ectc51906.2022.00180-a-i3.diameter_um
+    note: "chip bump diameter not reported; analog = Cu/SnAg micro-bump of a glass 2.5D package"
+  ubump_h_um:
+    template: "r0 + r1"
+    refs: [ectc51906.2022.00180-a-i3.height_um, ectc51906.2022.00180-a-i3.cap_height_um]
+    note: "joint standoff = Cu + SnAg cap of the analog micro-bump"
+  lsi_via_pitch_um: {template: "ubump_pitch_um", note: "one bridge Cu bump per chip bump over the bridge; pitch not reported"}
+  lsi_via_d_um: {template: "ubump_d_um", note: "bridge Cu bump diameter not reported; set equal to the chip bump diameter"}
+  rv_pitch_um: {template: "lsi_via_pitch_um", note: "one upper-RDL via per bridge Cu bump; pitch not reported"}
+  rv_d_um:
+    analog: ectc51687.2025.00095-a-i2.diameter_um
+    note: "RDL via size not reported; analog = 10 um via landing on bridge studs (ASE FOCoS Bridge)"
+  logic_h_um:
+    analog: ectc32696.2021.00315-a-c1.thickness_um
+    note: "logic thickness not reported; analog = ASIC of a Samsung MIoS 2.5D TV"
+  hbm_h_um:
+    analog: ectc32696.2021.00315-a-c2.thickness_um
+    note: "HBM height not reported; analog = HBM (Flashbolt) of the same Samsung MIoS TV"
+  c4_pitch_um:
+    analog: ectc51909.2023.00155-a-i3.pitch_um
+    note: "C4 pitch not reported; analog = 150 um-pitch Cu/SnAg interposer-to-substrate bump of a 2.5D TV"
+  c4_d_um:
+    analog: ectc51909.2023.00155-a-i3.diameter_um
+    note: "C4 diameter not reported; analog = the same 150 um-pitch bump"
+  c4_h_um:
+    template: "r0 + r1"
+    refs: [ectc51909.2023.00155-a-i3.height_um, ectc51909.2023.00155-a-i3.cap_height_um]
+    note: "C4 standoff = Cu + SnAg cap of the 150 um-pitch analog bump"
+  # ---- template: substrate
+  bu_n:
+    analog: ectc51687.2025.00148-a-L06.repeat
+    note: "substrate layer count not reported; analog = 4 build-up layers per side of an organic FC substrate"
+  bu_diel_um:
+    analog: ectc51687.2025.00148-a-L04.thickness_um
+    note: "build-up dielectric thickness not reported; analog = ABF-GL layer of an organic FC substrate"
+  bu_h_um: {template: "bu_n * bu_diel_um", note: "build-up per side = layer count x dielectric thickness (analogs)"}
+  core_h_um:
+    analog: ectc51687.2025.00148-a-L07.thickness_um
+    note: "core thickness not reported; analog = core of the same organic FC substrate"
+  sbt_h_um: {template: "core_h_um + 2 * bu_h_um", note: "substrate = core + 2 build-up stacks (template inputs)"}
+  bga_pitch_um:
+    analog: ectc51909.2023.00155-a-i4.pitch_um
+    note: "BGA drawn in Fig. 2.1 without dimensions; analog = 1.0 mm pitch of a large 2.5D TV"
+  bga_d_um:
+    analog: ectc51909.2023.00155-a-i4.diameter_um
+    note: "BGA ball diameter not reported; analog = SAC305 ball of the same 2.5D TV"
+  bga_h_um:
+    template: 478
+    refs: [ectc51909.2023.00155-a-i4.notes]
+    note: "BGA height not reported; the analog row's notes give a measured ball height of 478 um"
+
+parts:
+  - {id: substrate, name: "Package substrate", kind: substrate, material: organic_laminate,
+     material_label: "organic build-up substrate", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: sbt_h_um, base: true,
+     explode_group: 0}
+  # module parts ri_back / ri_core / ri_front / lsi come from the module (renamed in `use`)
+  - {id: lsi_ll, name: "Si bridge (logic-logic)", kind: bridge, material: silicon, w_mm: lsi_d_mm, d_mm: lsi_w_mm,
+     h_um: lsi_h_um, in: ri_core, depth_um: lsi_via_h_um, explode_group: 2,
+     note: "same bridge rotated to straddle the logic-logic edge (Fig. 2.2)"}
+  - id: daf
+    name: "DAF (bridge attach)"
+    kind: other
+    material: other
+    material_label: "die attach film"
+    w_mm: lsi_w_mm
+    d_mm: lsi_d_mm
+    h_um: daf_h_um
+    in: ri_core
+    depth_um: "lsi_via_h_um + lsi_h_um"
+    repeat: {nx: lsi_cols_n, ny: lsi_rows_n, pitch_x_mm: lsi_px_mm, pitch_y_mm: lsi_py_mm}
+    explode_group: 2
+  - {id: daf_ll, name: "DAF (bridge attach)", kind: other, material: other, material_label: "die attach film",
+     w_mm: lsi_d_mm, d_mm: lsi_w_mm, h_um: daf_h_um, in: ri_core, depth_um: "lsi_via_h_um + lsi_h_um", explode_group: 2}
+  - id: logic
+    name: Logic
+    kind: die
+    material: silicon
+    w_mm: logic_w_mm
+    d_mm: logic_d_mm
+    h_um: logic_h_um
+    on: ri_front
+    standoff: ubump_logic
+    repeat: {ny: logic_n, pitch_y_mm: logic_py_mm}
+    explode_group: 4
+  - id: hbm
+    name: HBM
+    kind: hbm
+    material: silicon
+    w_mm: hbm_w_mm
+    d_mm: hbm_d_mm
+    h_um: hbm_h_um
+    on: ri_front
+    standoff: ubump_hbm
+    repeat: {nx: hbm_cols_n, ny: hbm_rows_n, pitch_x_mm: hbm_px_mm, pitch_y_mm: hbm_py_mm}
+    explode_group: 4
+
+layers:
+  - part: ri_front
+    repeat: ri_front_n
+    pattern:
+      - {id: ri_f_cu, name: "Upper RDL Cu", material: copper, material_label: Cu, role: conductor, h_um: ri_cu_um}
+      - {id: ri_f_diel, name: "Upper RDL dielectric", material: polymer_dielectric, role: dielectric, h_um: ri_diel_um}
+  - part: ri_back
+    repeat: ri_back_n
+    pattern:
+      - {id: ri_b_diel, name: "Lower RDL dielectric", material: polymer_dielectric, role: dielectric, h_um: ri_diel_um}
+      - {id: ri_b_cu, name: "Lower RDL Cu", material: copper, material_label: Cu, role: conductor, h_um: ri_cu_um}
+  - part: lsi
+    repeat: lsi_m_n
+    pattern:
+      - {id: lsi_m, name: "Bridge metal level", material: copper, material_label: "BEOL metal (not specified)",
+         role: conductor, h_um: lsi_m_um, line_um: lsi_line_um, space_um: lsi_space_um}
+  - part: lsi
+    pattern:
+      - {id: lsi_si, name: "Bridge Si", material: silicon, role: core, h_um: lsi_si_um}
+  - part: lsi_ll
+    repeat: lsi_m_n
+    pattern:
+      - {id: lsi_ll_m, name: "Bridge metal level", material: copper, material_label: "BEOL metal (not specified)",
+         role: conductor, h_um: lsi_m_um, line_um: lsi_line_um, space_um: lsi_space_um}
+  - part: lsi_ll
+    pattern:
+      - {id: lsi_ll_si, name: "Bridge Si", material: silicon, role: core, h_um: lsi_si_um}
+  - part: substrate
+    pattern:
+      - {id: sbt_bu_top, name: "Top build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+      - {id: sbt_core, name: "Core", material: organic_laminate, material_label: "laminate core", role: core,
+         h_um: core_h_um}
+      - {id: sbt_bu_bot, name: "Bottom build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+
+arrays:
+  - {id: ubump_logic, name: "Logic bumps", kind: microbump, per: logic, lower: ri_front, pitch_um: ubump_pitch_um,
+     diameter_um: ubump_d_um, height_um: ubump_h_um, note: "bump type and map not reported; analog pitch over the full die"}
+  - {id: ubump_hbm, name: "HBM bumps", kind: microbump, per: hbm, lower: ri_front, pitch_um: ubump_pitch_um,
+     diameter_um: ubump_d_um, height_um: ubump_h_um}
+  - {id: tiv, name: "Cu posts (through mold)", kind: cu_pillar, in: ri_core, region: {part: ri_core, subtract: [lsi, lsi_ll]},
+     pitch_um: tiv_pitch_um, diameter_um: tiv_d_um,
+     note: "post placement not reported; rendered over the interposer outside the bridges (overrides the module array to also skip the logic-logic bridge)"}
+  - {id: lsi_via, name: "Bridge Cu bumps", kind: cu_pillar, span: ["top:lsi", "top:ri_core"], between: [ri_front, lsi],
+     region: {part: lsi}, pitch_um: lsi_via_pitch_um, diameter_um: lsi_via_d_um}
+  - {id: lsi_ll_via, name: "Bridge Cu bumps", kind: cu_pillar, span: ["top:lsi_ll", "top:ri_core"],
+     between: [ri_front, lsi_ll], region: {part: lsi_ll}, pitch_um: lsi_via_pitch_um, diameter_um: lsi_via_d_um}
+  - {id: rdl_via_br, name: "Upper-RDL vias over bridges", kind: rdl_via, in: ri_front, region: {part: lsi},
+     pitch_um: rv_pitch_um, diameter_um: rv_d_um, note: "drawn over the HBM-logic bridges only"}
+  - {id: c4, name: "C4 bumps", kind: c4, upper: ri_back, lower: substrate, region: {part: ri_back}, pitch_um: c4_pitch_um,
+     diameter_um: c4_d_um, height_um: c4_h_um}
+  - {id: bga, name: "BGA balls", kind: bga, under: substrate, region: {part: substrate}, pitch_um: bga_pitch_um,
+     diameter_um: bga_d_um, height_um: bga_h_um}
+
+callouts:
+  - {target: ri_core, text: "{reticle_x}x reticle panel interposer"}
+  - {target: ri_core, text: "Unit 51 x 67.72 mm drawn", refs: [ectc51687.2025.00048-a.notes]}
+  - {target: substrate, text: "'Interposer' label {ip_lab_w_mm} x {ip_lab_d_mm} mm"}
+  - {target: daf, text: "Bridges on DAF, count unstated", refs: [ectc51687.2025.00048-a-c3.notes]}
+  - {target: lsi_via, text: "Cu bumps exposed by grinding", refs: [ectc51687.2025.00048-F1-s05.step]}
+  - {target: tiv, text: "Cu posts link both RDLs", refs: [ectc51687.2025.00048-a-i3.notes]}
+  - {target: hbm, text: "{hbm_n} HBM, panel CoP reflow", refs: [ectc51687.2025.00048-F1-s07.step]}
+
+insets:
+  - id: bridge_edge
+    label: "Bridge under HBM-logic edge"
+    box_mm: ["-lsi_px_mm / 2 - lsi_w_mm / 2 - 0.5", "2.5 * lsi_py_mm - 0.5", "-lsi_px_mm / 2 + lsi_w_mm / 2 + 0.5",
+             "2.5 * lsi_py_mm + 0.5"]
+    z: ["bottom:ri_back", "top:hbm"]
+    view: front
+  - id: interposer_stack
+    label: "Interposer: posts, DAF, bridge, RDL"
+    box_mm: ["-lsi_px_mm / 2 - lsi_w_mm / 2 - 0.4", "2.5 * lsi_py_mm - 0.3", "-lsi_px_mm / 2 - lsi_w_mm / 2 + 0.4",
+             "2.5 * lsi_py_mm + 0.3"]
+    z: ["top:substrate", "bottom:hbm"]
+    view: front
+  - id: ll_bridge
+    label: "Bridge under logic-logic edge"
+    box_mm: [-0.5, "-lsi_w_mm / 2 - 0.5", 0.5, "lsi_w_mm / 2 + 0.5"]
+    z: ["bottom:ri_back", "top:logic"]
+    view: right

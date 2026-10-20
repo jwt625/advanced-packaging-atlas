@@ -1,0 +1,170 @@
+# Hybrid bonding, die-to-wafer (generic) 3D template. Format: config/package3d/TEMPLATE_FORMAT.md.
+# Generator: scripts/build_package3d.py.
+# Backbone: ectc51906.2022.00031-c (DBI Ultra 5-die stack LT4C: 8 x 12 mm dies; a logic host wafer with its DBI layer
+# face up, four 50 um 'thru' dies with 5 x 50 um TSVs at 35 um pitch, one 50 um cap die; single-level 1 um Cu RDL and a
+# 2 um DBI layer (Cu pads in bond dielectric) per bonded face; 35 um pad pitch, 15 um pads).
+# Topology (ectc51906.2022.00031 p.2-3 Sec. II.A-B, Fig. 4): known-good dies hybrid bonded face down onto the host
+# wafer (F2F), then each next die face down onto the prepared TSV backside of the one below (B2F); cap die last.
+# The host is drawn as a wafer section with two die sites so the die-to-wafer character shows (separate stacks with a
+# gap); the die spacing is an analog. The host thickness comes from the Leti D2W TV (ectc51846.2026.00218-a).
+# Gap fill between the stacks is not part of these TVs (RESEARCH.md); the Leti inter-die gap fill is a callout.
+id: hybrid_bond_d2w
+name: Hybrid bonding, die-to-wafer
+company: Adeia/Xperi, CEA-Leti, imec, Sony, others
+package_class: hybrid_bonded_3d
+family_match: {families: true}
+backbone_tv: ectc51906.2022.00031-c
+summary: >-
+  Generic D2W hybrid bonding: known-good {die_w_mm} x {die_d_mm} mm dies bonded face down onto a host wafer and
+  onto each other, Cu pads at {hb_pitch_um} um pitch, no solder; {thru_n} thinned dies carry TSVs, a cap die
+  closes the stack.
+
+params:
+  # ---- reported (backbone ectc51906.2022.00031-c unless noted)
+  die_w_mm: {ref: ectc51906.2022.00031-c-c2.x_mm}
+  die_d_mm: {ref: ectc51906.2022.00031-c-c2.y_mm}
+  thru_n: {ref: ectc51906.2022.00031-c-c2.count}
+  thru_si_um: {ref: ectc51906.2022.00031-c-L06.thickness_um}
+  cap_si_um: {ref: ectc51906.2022.00031-c-L01.thickness_um}
+  rdl_h_um: {ref: ectc51906.2022.00031-c-L03.thickness_um, note: "cap RDL, single-level Cu damascene"}
+  dbi_h_um: {ref: ectc51906.2022.00031-c-L04.thickness_um, note: "cap DBI layer (Cu pads in DBI dielectric)"}
+  host_dbi_um: {ref: ectc51906.2022.00031-c-L10.thickness_um}
+  host_rdl_um: {ref: ectc51906.2022.00031-c-L11.thickness_um}
+  hb_pitch_um: {ref: ectc51906.2022.00031-c-i2.pitch_um}
+  hb_d_um: {ref: ectc51906.2022.00031-c-i2.diameter_um}
+  tsv_pitch_um: {ref: ectc51906.2022.00031-c-i3.pitch_um}
+  tsv_d_um: {ref: ectc51906.2022.00031-c-i3.diameter_um}
+  tsv_depth_um: {ref: ectc51906.2022.00031-c-i3.depth_um}
+  host_h_um: {ref: ectc51846.2026.00218-a-c2.thickness_um, note: "300 mm Si bottom wafer of the Leti D2W TV (approx.); host thickness not stated in the backbone"}
+  fine7_pitch_um: {ref: ectc51909.2023.00023-a-i1.pitch_um}
+  fine7_pad_um: {ref: ectc51909.2023.00023-a-i1.diameter_um}
+  leti_pitch_um: {ref: ectc51846.2026.00218-a-i4.pitch_um}
+  leti_die_um: {ref: ectc51846.2026.00218-a-c1.thickness_um}
+  idgf_um: {ref: ectc51846.2026.00218-b-L01.thickness_um}
+  big_w_mm: {ref: ectc51909.2023.00219-a-c1.x_mm}
+  big_d_mm: {ref: ectc51909.2023.00219-a-c1.y_mm}
+  big_pitch_um: {ref: ectc51909.2023.00219-a-i1.pitch_um}
+  # ---- derived
+  cap_h_um: {derived: "cap_si_um + rdl_h_um + dbi_h_um", note: "cap die = Si + RDL + DBI layer"}
+  host_si_um: {derived: "host_h_um - host_dbi_um - host_rdl_um", note: "host Si = wafer - DBI layer - RDL"}
+  # ---- template
+  thru_bs_um:
+    template: "dbi_h_um"
+    refs: [ectc51906.2022.00031-c-L05.notes]
+    note: "prepared TSV backside (bond surface of the B2F interface) stated without thickness; set equal to the 2 um DBI layer"
+  thru_rdl_um:
+    template: "rdl_h_um"
+    refs: [ectc51906.2022.00031-c-L08.notes]
+    note: "thru-die RDL thickness not stated ('similar two-layer metal structure'); set equal to the 1 um cap RDL"
+  thru_dbi_um:
+    template: "dbi_h_um"
+    refs: [ectc51906.2022.00031-c-L09.layer_name]
+    note: "thru-die DBI layer thickness not stated; set equal to the 2 um cap / logic DBI layer"
+  thru_h_um: {template: "thru_bs_um + thru_si_um + thru_rdl_um + thru_dbi_um", note: "thru die = backside bond layer + Si + RDL + DBI layer (isolation oxide not drawn, thickness not stated)"}
+  sites_n: {template: 2, note: "two die sites of the host wafer drawn to show separate D2W stacks (illustrative)"}
+  space_um:
+    analog: ectc51909.2023.00274-a-c1.gap_um
+    note: "die-to-die spacing on the host wafer not reported; analog = 100 um inter-dielet spacing of a Cu-Cu bonded die-to-wafer assembly (GaN-IF)"
+  site_px_mm: {template: "die_w_mm + space_um / 1000", note: "die-site pitch = die + analog spacing"}
+  host_w_mm: {template: "sites_n * site_px_mm", note: "host wafer section = two die sites"}
+  host_d_mm: {template: "die_d_mm + space_um / 1000", note: "host wafer section = die + analog spacing"}
+
+parts:
+  - {id: host, name: "Host (logic) wafer section", kind: die, material: silicon, w_mm: host_w_mm, d_mm: host_d_mm,
+     h_um: host_h_um, base: true, explode_group: 0,
+     note: "host wafer, DBI layer face up; the backbone die site is 8 x 12 mm (same footprint as the dies)"}
+  - id: thru
+    name: "Thru die (TSV, face down)"
+    kind: die
+    material: silicon
+    w_mm: die_w_mm
+    d_mm: die_d_mm
+    h_um: thru_h_um
+    on: host
+    repeat: {nx: sites_n, pitch_x_mm: site_px_mm, nz: thru_n, stack: true}
+    explode_group: 2
+    explode_step: 1
+    note: "known-good die bonded face down; TSVs revealed and the backside prepared (CMP) for the next B2F bond; no gap, no solder, no underfill"
+  - id: cap
+    name: "Cap die (face down)"
+    kind: die
+    material: silicon
+    w_mm: die_w_mm
+    d_mm: die_d_mm
+    h_um: cap_h_um
+    on: thru
+    repeat: {nx: sites_n, pitch_x_mm: site_px_mm}
+    explode_group: 8
+    note: "thinned to 50 um, backside not polished; closes the daisy chains"
+
+layers:
+  - part: host
+    id: host_bond
+    pattern:
+      - {id: host_dbi, name: "Host DBI layer", material: other, material_label: "Cu pads in DBI dielectric (not stated)",
+         role: bonding, h_um: host_dbi_um}
+      - {id: host_rdl, name: "Host RDL", material: copper, material_label: "Cu damascene", role: conductor,
+         h_um: host_rdl_um}
+      - {id: host_si, name: "Host Si", material: silicon, role: core, h_um: host_si_um}
+  - part: thru
+    id: thru_body
+    pattern:
+      - {id: thru_bs, name: "Prepared TSV backside", material: other,
+         material_label: "TSV dielectric + Cu TSV ends (not stated)", role: bonding, h_um: thru_bs_um}
+      - {id: thru_si, name: "Thru-die Si (TSV)", material: silicon, role: core, h_um: thru_si_um}
+  - part: thru
+    pattern:
+      - {id: thru_rdl, name: "Thru-die RDL", material: copper, material_label: "Cu damascene", role: conductor,
+         h_um: thru_rdl_um}
+      - {id: thru_dbi, name: "Thru-die DBI layer", material: other,
+         material_label: "Cu pads in DBI dielectric (not stated)", role: bonding, h_um: thru_dbi_um}
+  - part: cap
+    pattern:
+      - {id: cap_si, name: "Cap Si", material: silicon, role: core, h_um: cap_si_um}
+      - {id: cap_rdl, name: "Cap RDL", material: copper, material_label: "Cu damascene", role: conductor, h_um: rdl_h_um}
+      - {id: cap_dbi, name: "Cap DBI layer", material: other, material_label: "Cu pads in DBI dielectric (not stated)",
+         role: bonding, h_um: dbi_h_um}
+
+arrays:
+  - {id: hb_host, name: "Host DBI pads", kind: hybrid_bond, in_layer: host_dbi, region: {intersect: [thru]},
+     pitch_um: hb_pitch_um, diameter_um: hb_d_um, note: "face-to-face bond to the first thru die; pads only under the die sites"}
+  - {id: hb_thru, name: "Thru-die DBI pads", kind: hybrid_bond, in_layer: thru_dbi, pitch_um: hb_pitch_um,
+     diameter_um: hb_d_um, note: "die face; bonds F2F to the host (first level) or B2F to the TSV backside below"}
+  - {id: hb_cap, name: "Cap DBI pads", kind: hybrid_bond, in_layer: cap_dbi, pitch_um: hb_pitch_um, diameter_um: hb_d_um}
+  - {id: tsv, name: "TSVs", kind: tsv, in_layer: thru_body, pitch_um: tsv_pitch_um, diameter_um: tsv_d_um,
+     note: "5 x 50 um Cu TSVs through each thru die, ends exposed in the prepared backside; one per pad column"}
+
+callouts:
+  - {target: hb_thru, text: "DBI pads, {hb_pitch_um} um pitch",
+     note: "Cu pads ({hb_d_um} um) in a {dbi_h_um} um DBI layer per face at {hb_pitch_um} um pitch; Cu-Cu joined during anneal; no solder, no underfill",
+     refs: [ectc51906.2022.00031-c-i2.metallurgy, ectc51906.2022.00031-c-i2.anneal_temp_c]}
+  - {target: tsv, text: "TSV {tsv_d_um} x {tsv_depth_um} um",
+     note: "TSV {tsv_d_um} um x {tsv_depth_um} um at {tsv_pitch_um} um pitch in each {thru_si_um} um thru die",
+     refs: [ectc51906.2022.00031-c-i3.aspect_ratio]}
+  - {target: thru, text: "{thru_n} thru dies + cap",
+     note: "{thru_n} thru dies + 1 cap die on the host wafer (5-die stack); 2- and 8-die stacks in the same paper",
+     refs: [ectc51906.2022.00031-c.name, ectc51906.2022.00031-c-c1.count, ectc51906.2022.00031-b.name, ectc51906.2022.00031-d.name]}
+  - {target: host, text: "Gap fill not in these TVs",
+     note: "Inter-die gap fill (Leti): dies thinned to about {leti_die_um} um after bonding, then a {idgf_um} um SiO2 fill planarized by CMP (ectc51846.2026.00218)",
+     refs: [ectc51846.2026.00218-b-L01.material]}
+  - {target: hb_host, text: "Fine pitch: {fine7_pitch_um} to {leti_pitch_um} um",
+     note: "Finer D2W pitch in the family: {fine7_pitch_um} um pitch / {fine7_pad_um} um pads (DBI Ultra) down to {leti_pitch_um} um pitch (Leti)"}
+  - {target: host, text: "Large chips: {big_w_mm}x{big_d_mm} mm",
+     note: "{big_w_mm} x {big_d_mm} mm chips bonded at {big_pitch_um} um pitch on a base wafer (ectc51909.2023.00219)"}
+
+insets:
+  - id: interface
+    label: "Host-to-die bond interface"
+    box_mm: ["-site_px_mm / 2 - 0.05", -0.05, "-site_px_mm / 2 + 0.05", 0.05]
+    z: ["bottom:hb_host", "top:thru_1"]
+    view: front
+  - id: column
+    label: "TSV column through the stack"
+    box_mm: ["-site_px_mm / 2 - 0.1", -0.1, "-site_px_mm / 2 + 0.1", 0.1]
+    z: ["bottom:hb_host", "top:cap"]
+    view: front
+  - id: gap
+    label: "Gap between two die stacks"
+    box_mm: [-0.3, -0.3, 0.3, 0.3]
+    z: ["bottom:hb_host", "top:cap"]
+    view: front

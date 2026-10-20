@@ -1,0 +1,382 @@
+# CoWoS-L 3D template. Format: config/package3d/TEMPLATE_FORMAT.md. Generator: scripts/build_package3d.py.
+# Backbone: ectc51909.2023.00174-a (CoWoS-L TV: 3 SoC/chiplet + 8 HBM on a 43 x 58 mm reconstituted interposer (RI),
+# > 10 LSI chiplets with TSV, TIV in molding compound, one RDL layer on each RI face, C4, 70 x 78 mm package; ring- and
+# lid-type options, lid type drawn). Gaps from the same family: TIV, lid, substrate core/layers and BGA from the 6x
+# SC-RDL TV ectc51909.2023.00091-a; LSI metal scheme from the LSI-1 / LSI-2 rows (ectc51909.2023.00174-d/e).
+# Topology (ectc51909.2023.00174 Sec. II.A-B, Fig. 2, Fig. 4): top dies on micro-bumps + underfill, encapsulated in
+# mold; RI = front RDL / mold core with face-up LSI (Cu via on top metal to the front RDL, TSV to the back RDL) and
+# TIV posts / back RDL; C4 + underfill to the organic substrate; BGA; lid with film TIM.
+#
+# Reusable module `bridge_in_mold` (RI with embedded Si bridges and through-mold vias). Shared topology with
+# FOCoS-Bridge, S-Connect and I-Cube E (RESEARCH.md). Use it from another template with
+#   use: [{module: bridge_in_mold, from: cowos_l.yaml}]
+# and override params there (the template wins on params, part/array ids and layer hosts); `drop:` / `rename:` in the
+# `use` entry remove or rename module elements (TEMPLATE_FORMAT.md). Every `ref:` default below
+# is a CoWoS-L cell and fails the family check elsewhere, so an importer must re-point those params to its own rows
+# or to `analog:`/`template:` specs.
+#   Requires from the importer: part `substrate`; array `c4` (joint under ri_back, height_um set); params
+#     ubump_pitch_um, ubump_d_um; layout params lsi_cols_n, lsi_rows_n, lsi_px_mm, lsi_py_mm.
+#   Provides: parts ri_back, ri_core, ri_front (stacked from the substrate up), lsi (bridges in ri_core, top via to
+#     ri_front); layers in ri_front, ri_back, lsi; arrays tiv (through ri_core outside the bridges), lsi_tsv, lsi_via.
+#   Top dies go `on: ri_front` (or `in:` a mold part on ri_front) in the importer.
+id: cowos_l
+name: CoWoS-L
+company: TSMC
+package_class: si_bridge_fanout
+family_match: {families: true}
+backbone_tv: ectc51909.2023.00174-a
+summary: >-
+  TSMC 2.5D: SoC and HBM micro-bumped onto a reconstituted interposer: TSV-bearing Si LSI bridges and {tiv_d_um} um
+  TIVs in mold, RDL on each face; C4 to organic substrate. Backbone: {ri_w_mm} x {ri_d_mm} mm, {soc_n} SoC +
+  {hbm_n} HBM.
+
+modules:
+  bridge_in_mold:
+    params:
+      ri_w_mm: {ref: ectc51909.2023.00174-a-c3.x_mm}
+      ri_d_mm: {ref: ectc51909.2023.00174-a-c3.y_mm}
+      ri_front_n: {ref: ectc51909.2023.00174-a-L03.repeat}
+      ri_back_n: {ref: ectc51909.2023.00174-a-L06.repeat}
+      ri_cu_um:
+        template: "r0"
+        refs: [ectc51909.2023.00174-e-L02.thickness_um]
+        note: "RI RDL Cu thickness not reported; set to the LSI-2 SAP Cu RDL thickness of the same paper"
+      ri_diel_um:
+        analog: ectc51846.2026.00016-a-L04.thickness_um
+        note: "RI RDL dielectric thickness not reported; analog = polyimide front-side RDL dielectric of a mold interposer"
+      ri_front_h_um: {template: "ri_front_n * (ri_cu_um + ri_diel_um)", note: "front RDL = layers x (Cu + dielectric)"}
+      ri_back_h_um: {template: "ri_back_n * (ri_cu_um + ri_diel_um)", note: "back RDL = layers x (Cu + dielectric)"}
+      lsi_w_mm:
+        analog: ectc51909.2023.00175-a-c3.x_mm
+        note: "LSI size not reported for CoWoS-L; analog = Amkor S-Connect connect die (Si bridge in mold)"
+      lsi_d_mm:
+        analog: ectc51909.2023.00175-a-c3.y_mm
+        note: "LSI size not reported for CoWoS-L; analog = Amkor S-Connect connect die (Si bridge in mold)"
+      lsi_h_um:
+        analog: ectc51909.2023.00175-a-c3.thickness_um
+        note: "LSI thickness not reported; analog = measured S-Connect connect-die thickness"
+      lsi_via_h_um:
+        analog: ectc51909.2023.00175-a-i3.height_um
+        note: "LSI top Cu via height not reported; analog = S-Connect Cu stud on the connect die, exposed by mold grinding"
+      ri_core_h_um:
+        template: "lsi_h_um + lsi_via_h_um"
+        refs: [ectc51909.2023.00174-F1-s04.step]
+        note: "mold core thickness not reported; LSI + top via, planarized by CMP (flow step s04); LSI TSV reaches the back RDL"
+      lsi_m_n:
+        analog: ectc.2016.201-a-L02.repeat
+        note: "LSI metal level count not reported; analog = 4 routing levels of the Intel EMIB bridge"
+      lsi_m_um: {ref: ectc51909.2023.00174-d-L02.thickness_um}
+      lsi_line_um: {ref: ectc51909.2023.00174-d-L02.line_um}
+      lsi_space_um: {ref: ectc51909.2023.00174-d-L02.space_um}
+      lsi_si_um: {template: "lsi_h_um - lsi_m_n * lsi_m_um", note: "LSI Si = LSI thickness - metal levels (template inputs)"}
+      tiv_pitch_um: {ref: ectc51909.2023.00091-a-i2.pitch_um}
+      tiv_d_um: {ref: ectc51909.2023.00091-a-i2.diameter_um}
+      lsi_tsv_pitch_um:
+        analog: eptc59621.2023.10457670-a-i1.pitch_min_um
+        note: "LSI TSV pitch not reported; analog = via-first TSV daisy chain on a Si interposer"
+      lsi_tsv_d_um:
+        analog: ectc.2013.6575597-a-i2.diameter_um
+        note: "LSI TSV diameter not reported (LSI keeps the Si-interposer TSV); analog = TSMC CoWoS-S interposer TSV"
+      lsi_via_pitch_um: {template: "ubump_pitch_um", note: "one Cu via per micro-bump over the LSI; via pitch not reported"}
+      lsi_via_d_um: {template: "ubump_d_um", note: "LSI top via diameter not reported; set equal to the micro-bump diameter"}
+    parts:
+      - {id: ri_back, name: "RI back-side RDL", kind: interposer, material: polymer_dielectric,
+         material_label: "Cu RDL / polymer dielectric", w_mm: ri_w_mm, d_mm: ri_d_mm, h_um: ri_back_h_um, on: substrate,
+         standoff: c4, explode_group: 2}
+      - {id: ri_core, name: "RI mold core (LSI + TIV)", kind: interposer, material: mold_compound,
+         material_label: "molding compound", w_mm: ri_w_mm, d_mm: ri_d_mm, h_um: ri_core_h_um, on: ri_back,
+         explode_group: 2, xray_default: true}
+      - {id: ri_front, name: "RI front-side RDL", kind: interposer, material: polymer_dielectric,
+         material_label: "Cu RDL / polymer dielectric", w_mm: ri_w_mm, d_mm: ri_d_mm, h_um: ri_front_h_um, on: ri_core,
+         explode_group: 2}
+      - id: lsi
+        name: "LSI bridge (Si, TSV)"
+        kind: bridge
+        material: silicon
+        w_mm: lsi_w_mm
+        d_mm: lsi_d_mm
+        h_um: lsi_h_um
+        in: ri_core
+        depth_um: lsi_via_h_um
+        repeat: {nx: lsi_cols_n, ny: lsi_rows_n, pitch_x_mm: lsi_px_mm, pitch_y_mm: lsi_py_mm}
+        explode_group: 2
+        note: "face-up; bottom at the RI back face so the TSV lands on the back RDL"
+    layers:
+      - part: ri_front
+        repeat: ri_front_n
+        pattern:
+          - {id: ri_f_cu, name: "Front RDL Cu", material: copper, material_label: Cu, role: conductor, h_um: ri_cu_um}
+          - {id: ri_f_diel, name: "Front RDL dielectric", material: polymer_dielectric, role: dielectric, h_um: ri_diel_um}
+      - part: ri_back
+        repeat: ri_back_n
+        pattern:
+          - {id: ri_b_diel, name: "Back RDL dielectric", material: polymer_dielectric, role: dielectric, h_um: ri_diel_um}
+          - {id: ri_b_cu, name: "Back RDL Cu", material: copper, material_label: Cu, role: conductor, h_um: ri_cu_um}
+      - part: lsi
+        repeat: lsi_m_n
+        pattern:
+          - {id: lsi_m, name: "LSI Cu/USG level", material: copper, material_label: "Cu in USG (dual damascene)",
+             role: conductor, h_um: lsi_m_um, line_um: lsi_line_um, space_um: lsi_space_um}
+      - part: lsi
+        pattern:
+          - {id: lsi_si, name: "LSI Si (TSV)", material: silicon, role: core, h_um: lsi_si_um}
+    arrays:
+      - {id: tiv, name: "TIV (Cu in mold)", kind: cu_pillar, in: ri_core, region: {part: ri_core, subtract: [lsi]},
+         pitch_um: tiv_pitch_um, diameter_um: tiv_d_um,
+         note: "TIV placement not reported; rendered over the RI outside the bridges"}
+      - {id: lsi_tsv, name: "LSI TSVs", kind: tsv, in: lsi, region: {part: lsi}, pitch_um: lsi_tsv_pitch_um,
+         diameter_um: lsi_tsv_d_um, note: "TSV placement not reported; rendered over the full LSI"}
+      - {id: lsi_via, name: "LSI top Cu vias", kind: rdl_via, span: ["top:lsi", "top:ri_core"], between: [ri_front, lsi],
+         region: {part: lsi}, pitch_um: lsi_via_pitch_um, diameter_um: lsi_via_d_um}
+
+use:
+  - {module: bridge_in_mold}
+
+params:
+  # ---- reported (backbone ectc51909.2023.00174-a unless noted)
+  sbt_w_mm: {ref: ectc51909.2023.00174-a.package_x_mm, note: "package outline used as the substrate outline"}
+  sbt_d_mm:
+    ref: ectc51909.2023.00174-a.package_y_mm
+    note: "package outline used as the substrate outline; 78 mm in the figure, 76 mm in the text (logged in the TV notes)"
+  reticle_x: {ref: ectc51909.2023.00174-a.reticle_multiple}
+  ri_area_mm2: {ref: ectc51909.2023.00174-a.interposer_area_mm2}
+  soc_n: {ref: ectc51909.2023.00174-a-c1.count}
+  hbm_n: {ref: ectc51909.2023.00174-a-c2.count}
+  lsi_n: {ref: ectc51909.2023.00174-a-c4.count}
+  lsi2_line_um: {ref: ectc51909.2023.00174-e-L02.line_um}
+  lsi2_space_um: {ref: ectc51909.2023.00174-e-L02.space_um}
+  lsi2_t_um: {ref: ectc51909.2023.00174-e-L02.thickness_um}
+  lid_h_um: {ref: ectc51909.2023.00091-a-c8.thickness_um, note: "lid thickness of the 6x lid-type TV"}
+  core_h_um: {ref: ectc51909.2023.00091-a-L11.thickness_um, note: "core of the 6x TV substrate"}
+  bu_n: {ref: ectc51909.2023.00091-a-L10.repeat, note: "3 build-up layers per side (3-2-3) of the 6x TV substrate"}
+  sbt_layers: {ref: ectc51909.2023.00091-a.substrate_layer_count}
+  bga_pitch_um: {ref: ectc51909.2023.00091-a-i4.pitch_um}
+  sc_back_n: {ref: ectc51909.2023.00091-a-L07.repeat}
+  sc_line_um: {ref: ectc51909.2023.00091-a-L07.line_um}
+  sc_space_um: {ref: ectc51909.2023.00091-a-L07.space_um}
+  ubga_pitch_um: {ref: ectc51909.2023.00091-a-i3.pitch_um}
+  ubga_h_um: {ref: ectc51909.2023.00091-a-i3.height_um}
+  sc_ipd_n: {ref: ectc51909.2023.00091-a-c5.count}
+  # ---- template: layout (no CoWoS-L row dimensions the dies or their positions)
+  hbm_w_mm:
+    analog: ectc51909.2023.00135-a-c2.x_mm
+    note: "HBM size not reported for CoWoS-L; analog = HBM2E footprint of a TSMC CoWoS-S TV"
+  hbm_d_mm:
+    analog: ectc51909.2023.00135-a-c2.y_mm
+    note: "HBM size not reported for CoWoS-L; analog = HBM2E footprint of a TSMC CoWoS-S TV"
+  die_gap_um:
+    analog: ectc51529.2024.00049-a-c1.gap_um
+    note: "die-to-die gap not reported for CoWoS-L; analog = TSMC CoWoS-R SoC D2D gap"
+  ip_edge_mm:
+    template: 1
+    refs: [ectc51909.2023.00091-a.notes]
+    note: "die-to-RI-edge margin not reported for this TV; the 6x CoWoS-L TV defines its interposer as the top-die rectangle + 1 mm per side"
+  hbm_cols_n:
+    template: 2
+    note: "HBM in two columns, one on each side of the SoC column (package photo, ectc51909.2023.00174 Fig. 3(a)); not dimensioned"
+  hbm_rows_n: {template: "hbm_n / hbm_cols_n", note: "HBM per column = HBM count / columns"}
+  soc_w_mm:
+    template: "ri_w_mm - 2 * ip_edge_mm - 2 * hbm_w_mm - 2 * die_gap_um / 1000"
+    note: "SoC size not reported; SoC column fills the die block between the HBM columns"
+  soc_d_mm:
+    template: "(ri_d_mm - 2 * ip_edge_mm - (soc_n - 1) * die_gap_um / 1000) / soc_n"
+    note: "SoC size not reported; the SoCs share the die-block length equally"
+  soc_py_mm: {template: "soc_d_mm + die_gap_um / 1000", note: "SoC pitch = SoC length + D2D gap"}
+  hbm_px_mm: {template: "soc_w_mm + 2 * die_gap_um / 1000 + hbm_w_mm", note: "HBM columns flank the SoC column at the D2D gap"}
+  hbm_py_mm:
+    template: "(ri_d_mm - 2 * ip_edge_mm - hbm_d_mm) / (hbm_rows_n - 1)"
+    note: "HBM spread evenly along the die block, end HBM flush with its edges (photo); not dimensioned"
+  lsi_cols_n: {template: "hbm_cols_n", note: "one LSI under each HBM-SoC edge (LSI placement not reported)"}
+  lsi_rows_n: {template: "hbm_rows_n", note: "one LSI per HBM (LSI placement not reported)"}
+  lsi_px_mm: {template: "soc_w_mm + die_gap_um / 1000", note: "LSI centered on the HBM-SoC gap"}
+  lsi_py_mm: {template: "hbm_py_mm", note: "LSI aligned with the HBM rows"}
+  lsi_ss_n: {template: "soc_n - 1", note: "one LSI under each SoC-SoC edge (LSI placement not reported)"}
+  # ---- template: thicknesses and joints (no CoWoS-L row reports them)
+  soc_h_um:
+    analog: ectc32696.2021.00315-a-c1.thickness_um
+    note: "SoC thickness not reported for CoWoS-L; analog = ASIC thickness of a Samsung MIoS 2.5D TV (coplanar with HBM)"
+  hbm_h_um:
+    analog: ectc32696.2021.00315-a-c2.thickness_um
+    note: "HBM stack height not reported for CoWoS-L; analog = HBM (Flashbolt) stack height of the same MIoS TV"
+  ubump_pitch_um:
+    analog: ectc51529.2024.00049-a-i1.pitch_min_um
+    refs: [ectc51909.2023.00091-a-i1.notes]
+    note: "micro-bump pitch not given for the CoWoS-L TVs (6x paper: may be scaled to 35 um or lower); analog = TSMC CoWoS-R minimum micro-bump pitch"
+  ubump_d_um:
+    analog: ectc51909.2023.00155-a-i2.diameter_um
+    note: "micro-bump diameter not reported for CoWoS-L; analog = 35 um-pitch Cu/SnAg bump of a 2.5D Si-interposer TV"
+  ubump_h_um:
+    template: "r0 + r1"
+    refs: [ectc51909.2023.00155-a-i2.height_um, ectc51909.2023.00155-a-i2.cap_height_um]
+    note: "joint standoff = Cu bump + SnAg cap of the 35 um-pitch analog bump"
+  mold_h_um: {template: "ubump_h_um + max(soc_h_um, hbm_h_um)", note: "top-die mold ground flush with the die backs: standoff + die height"}
+  c4_pitch_um:
+    analog: ectc51529.2024.00049-a-i2.pitch_um
+    note: "C4 pitch not reported for the CoWoS-L C4 TV; analog = TSMC CoWoS-R interposer C4 pitch"
+  c4_d_um:
+    analog: ectc51909.2023.00155-a-i3.diameter_um
+    note: "C4 diameter not reported for CoWoS-L; analog = 150 um-pitch Cu/SnAg interposer-to-substrate bump"
+  c4_h_um:
+    template: "r0 + r1"
+    refs: [ectc51909.2023.00155-a-i3.height_um, ectc51909.2023.00155-a-i3.cap_height_um]
+    note: "C4 standoff = Cu + SnAg cap of the 150 um-pitch analog bump"
+  bu_diel_um:
+    analog: ectc51687.2025.00148-a-L04.thickness_um
+    note: "build-up dielectric thickness not reported for CoWoS-L; analog = ABF-GL layer of an organic FC substrate"
+  bu_h_um: {template: "bu_n * bu_diel_um", note: "build-up per side = reported layer count x analog dielectric thickness"}
+  sbt_h_um: {template: "core_h_um + 2 * bu_h_um", note: "substrate = reported core + 2 build-up stacks (template build-up)"}
+  tim_h_um:
+    analog: itherm45881.2020.9190542-a-c5.thickness_um
+    refs: [ectc51909.2023.00174-c-c2.name]
+    note: "film TIM thickness not reported for CoWoS-L; analog = TIM1 (gel or film) of a TSMC InFO_oS lid TV"
+  lid_gap_um:
+    template: "c4_h_um + ri_back_h_um + ri_core_h_um + ri_front_h_um + mold_h_um + tim_h_um"
+    note: "lid plate sits on the TIM: substrate top to TIM top (template stack)"
+  lid_foot_w_mm: {template: 5, note: "lid foot (sidewall) width not reported; illustrative"}
+  uf_margin_mm: {template: 0.3, note: "top-die underfill fillet extent not reported; illustrative"}
+  c4uf_margin_mm: {template: 1.0, note: "C4 underfill fillet extent not reported; illustrative"}
+  bga_d_um:
+    analog: ectc51909.2023.00155-a-i4.diameter_um
+    note: "BGA ball diameter not reported for CoWoS-L; analog = SAC305 1.0 mm-pitch ball of a large 2.5D TV"
+  bga_h_um:
+    template: 478
+    refs: [ectc51909.2023.00155-a-i4.notes]
+    note: "BGA height not reported for CoWoS-L; the analog row's notes give a measured ball height of 478 um"
+
+parts:
+  - {id: substrate, name: "Organic substrate", kind: substrate, material: organic_laminate,
+     material_label: "organic build-up substrate", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: sbt_h_um, base: true,
+     explode_group: 0}
+  - id: lsi_ss
+    name: "LSI bridge, SoC-SoC (Si, TSV)"
+    kind: bridge
+    material: silicon
+    w_mm: lsi_d_mm
+    d_mm: lsi_w_mm
+    h_um: lsi_h_um
+    in: ri_core
+    depth_um: lsi_via_h_um
+    repeat: {ny: lsi_ss_n, pitch_y_mm: soc_py_mm}
+    explode_group: 2
+    note: "same LSI rotated to straddle the SoC-SoC edge"
+  - {id: mold, name: "Top-die mold compound", kind: mold, material: mold_compound, material_label: "molding compound",
+     w_mm: ri_w_mm, d_mm: ri_d_mm, h_um: mold_h_um, on: ri_front, explode_group: 4, xray_default: true,
+     note: "encapsulates the top dies and the underfill; outer edge assumed flush with the RI"}
+  - id: soc
+    name: SoC
+    kind: die
+    material: silicon
+    w_mm: soc_w_mm
+    d_mm: soc_d_mm
+    h_um: soc_h_um
+    in: mold
+    repeat: {ny: soc_n, pitch_y_mm: soc_py_mm}
+    explode_group: 4
+  - id: hbm
+    name: HBM
+    kind: hbm
+    material: silicon
+    w_mm: hbm_w_mm
+    d_mm: hbm_d_mm
+    h_um: hbm_h_um
+    in: mold
+    repeat: {nx: hbm_cols_n, ny: hbm_rows_n, pitch_x_mm: hbm_px_mm, pitch_y_mm: hbm_py_mm}
+    explode_group: 4
+  - id: uf
+    name: "Top-die underfill"
+    kind: underfill
+    material: underfill
+    fill: {above: ri_front, parts: [soc, hbm], margin_mm: uf_margin_mm}
+    explode_group: 3
+    xray_default: true
+  - id: c4uf
+    name: "C4 underfill"
+    kind: underfill
+    material: underfill
+    fill: {above: substrate, parts: [ri_back], margin_mm: c4uf_margin_mm}
+    explode_group: 1
+    xray_default: true
+    note: "underfill under the RI is drawn in the schematic (Fig. 2); material not reported"
+  - {id: tim, name: "Film TIM", kind: tim, material: tim, material_label: "film-type TIM", w_mm: ri_w_mm, d_mm: ri_d_mm,
+     h_um: tim_h_um, on: mold, explode_group: 5}
+  - {id: lid_foot, name: "Lid sidewall", kind: lid, material: other, material_label: "lid (material not reported)",
+     w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: lid_gap_um, shape: frame, frame_w_mm: lid_foot_w_mm, on: substrate,
+     explode_group: 6, xray_default: true}
+  - {id: lid, name: "Lid", kind: lid, material: other, material_label: "lid (material not reported)", w_mm: sbt_w_mm,
+     d_mm: sbt_d_mm, h_um: lid_h_um, on: substrate, gap_um: lid_gap_um, explode_group: 6, xray_default: true,
+     note: "lid-type option of the TV (ring type also offered); outline assumed equal to the substrate, as in the 6x TV"}
+
+layers:
+  - part: lsi_ss
+    repeat: lsi_m_n
+    pattern:
+      - {id: lsi_ss_m, name: "LSI Cu/USG level", material: copper, material_label: "Cu in USG (dual damascene)",
+         role: conductor, h_um: lsi_m_um, line_um: lsi_line_um, space_um: lsi_space_um}
+  - part: lsi_ss
+    pattern:
+      - {id: lsi_ss_si, name: "LSI Si (TSV)", material: silicon, role: core, h_um: lsi_si_um}
+  - part: substrate
+    pattern:
+      - {id: sbt_bu_top, name: "Front build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+      - {id: sbt_core, name: "Core", material: organic_laminate, material_label: "laminate core", role: core,
+         h_um: core_h_um}
+      - {id: sbt_bu_bot, name: "Back build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+
+arrays:
+  - {id: ubump_soc, name: "SoC micro-bumps", kind: microbump, per: soc, lower: ri_front, pitch_um: ubump_pitch_um,
+     diameter_um: ubump_d_um, height_um: ubump_h_um, note: "pitch rendered over the full die; the bump map is not reported"}
+  - {id: ubump_hbm, name: "HBM micro-bumps", kind: microbump, per: hbm, lower: ri_front, pitch_um: ubump_pitch_um,
+     diameter_um: ubump_d_um, height_um: ubump_h_um}
+  - {id: tiv, name: "TIV (Cu in mold)", kind: cu_pillar, in: ri_core, region: {part: ri_core, subtract: [lsi, lsi_ss]},
+     pitch_um: tiv_pitch_um, diameter_um: tiv_d_um, note: "TIV placement not reported; rendered over the RI outside the LSIs"}
+  - {id: lsi_ss_tsv, name: "LSI TSVs", kind: tsv, in: lsi_ss, region: {part: lsi_ss}, pitch_um: lsi_tsv_pitch_um,
+     diameter_um: lsi_tsv_d_um, note: "TSV placement not reported; rendered over the full LSI"}
+  - {id: lsi_ss_via, name: "LSI top Cu vias", kind: rdl_via, span: ["top:lsi_ss", "top:ri_core"],
+     between: [ri_front, lsi_ss], region: {part: lsi_ss}, pitch_um: lsi_via_pitch_um, diameter_um: lsi_via_d_um}
+  - {id: c4, name: "C4 bumps", kind: c4, upper: ri_back, lower: substrate, region: {part: ri_back}, pitch_um: c4_pitch_um,
+     diameter_um: c4_d_um, height_um: c4_h_um}
+  - {id: bga, name: "BGA balls", kind: bga, under: substrate, region: {part: substrate}, pitch_um: bga_pitch_um,
+     diameter_um: bga_d_um, height_um: bga_h_um}
+
+callouts:
+  - {target: lsi, text: "More than {lsi_n} LSI chiplets",
+     note: "More than {lsi_n} LSI chiplets with TSV, Cu interconnect and eDTC; one drawn per die-to-die edge",
+     refs: [ectc51909.2023.00174-a-c4.name]}
+  - {target: lsi_m, text: "LSI-1 L/S {lsi_line_um}/{lsi_space_um} um",
+     note: "LSI-1: dual-damascene Cu/USG, L/S {lsi_line_um}/{lsi_space_um} um, {lsi_m_um} um thick; LSI-2: SAP Cu/PI, L/S {lsi2_line_um}/{lsi2_space_um} um, {lsi2_t_um} um"}
+  - {target: tiv, text: "TIV {tiv_d_um} um, {tiv_pitch_um} um pitch",
+     note: "TIV {tiv_d_um} um at {tiv_pitch_um} um pitch (6x TV): direct substrate-to-die path, lower insertion loss than TSV",
+     refs: [ectc51909.2023.00174-a-i3.notes]}
+  - {target: ri_core, text: "RI {ri_w_mm} x {ri_d_mm} mm",
+     note: "Reconstituted interposer {ri_w_mm} x {ri_d_mm} mm (~{ri_area_mm2} mm2, {reticle_x}x reticle); one RDL per face"}
+  - {target: ri_back, text: "6x TV: {sc_back_n} back-side RDLs",
+     note: "6x SC-RDL variant: {sc_back_n} back-side RDL layers at {sc_line_um}/{sc_space_um} um; uBGA at {ubga_pitch_um} um pitch, ~{ubga_h_um} um layer with {sc_ipd_n} embedded IPDs"}
+  - {target: substrate, text: "{sbt_layers} substrate, {core_h_um} um core",
+     note: "{sbt_layers} substrate with {core_h_um} um core (6x TV); BGA pitch {bga_pitch_um} um"}
+  - {target: lid, text: "Lid {lid_h_um} um, film TIM",
+     note: "Lid {lid_h_um} um (6x TV); film-type TIM between lid and CoW die",
+     refs: [ectc51909.2023.00174-c-c2.name]}
+
+insets:
+  - id: lsi_edge
+    label: "LSI under the HBM-SoC edge"
+    box_mm: ["-lsi_px_mm / 2 - lsi_w_mm / 2 - 0.5", "1.5 * lsi_py_mm - 0.5", "-lsi_px_mm / 2 + lsi_w_mm / 2 + 0.5",
+             "1.5 * lsi_py_mm + 0.5"]
+    z: ["bottom:ri_back", "top:mold"]
+    view: front
+  - id: ri_stack
+    label: "RI stack: TIV, LSI with TSV and top via"
+    box_mm: ["-lsi_px_mm / 2 - lsi_w_mm / 2 - 0.4", "1.5 * lsi_py_mm - 0.3", "-lsi_px_mm / 2 - lsi_w_mm / 2 + 0.4",
+             "1.5 * lsi_py_mm + 0.3"]
+    z: ["top:substrate", "bottom:soc"]
+    view: front
+  - id: lsi_ss
+    label: "LSI under the SoC-SoC edge"
+    box_mm: [-0.5, "soc_py_mm / 2 - lsi_w_mm / 2 - 0.5", 0.5, "soc_py_mm / 2 + lsi_w_mm / 2 + 0.5"]
+    z: ["bottom:ri_back", "top:mold"]
+    view: right
+  - id: edge
+    label: "RI edge, C4 underfill and lid sidewall"
+    box_mm: ["ri_w_mm / 2 - 1.5", -1.5, "sbt_w_mm / 2", 1.5]
+    z: ["top:substrate", "top:lid"]
+    view: front

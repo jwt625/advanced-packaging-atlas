@@ -1,0 +1,229 @@
+# Glass core substrate 3D template. Format: config/package3d/TEMPLATE_FORMAT.md. Generator: scripts/build_package3d.py.
+# Backbone: ectc51846.2026.00134-a (Intel 10-2-10 glass core substrate: 10 build-up layers per side, Cu-filled TGVs made
+# by laser-assisted etching, 2 EMIB bridges embedded in the top layers; 510 x 515 mm panel, singulated units; unit size,
+# core thickness and TGV dimensions not reported).
+# Gaps from other TVs of the same family (package_class glass_core_substrate):
+#   - glass core 1.0 mm with Cu-filled TGVs of 90 um diameter at 175 um minimum pitch and the unit outline 77.5 x 75.0 mm
+#     from the Shinko 2-2-2 TGV prototype ectc51687.2025.00178-i;
+#   - build-up layer = 15 um ABF + 5 um SAP Cu, 20 um microvias, 10/15 um routing, 130 um die-bump pads from the Georgia
+#     Tech 200 x 200 mm glass panel ectc51846.2026.00199-a.
+# Topology (RESEARCH.md glass_core_substrate; db:ectc51846.2026.00134 p.3 Sec. III): same build-up stack as FCBGA, but the
+# core is a glass slab with Cu-filled TGVs instead of a laminate with PTH; EMIB bridges sit in the top build-up layers.
+# No glass-core TV in the database has dies attached: the dies, bumps, bridge size and BGA are template values
+# (analogs from the EMIB template, DIE 2 | DIE 1 | DIE 3 with one bridge per die-die edge), so this model can be compared
+# with the emib and fcbga_organic templates.
+# The substrate is three parts (back build-up, glass core, front build-up) so the TGV array spans only the glass.
+id: glass_core_substrate
+name: Glass core substrate
+company: Intel / Absolics / others
+package_class: glass_core_substrate
+family_match: {families: true}
+backbone_tv: ectc51846.2026.00134-a
+summary: >-
+  Build-up substrate with a {core_h_um} um glass core: Cu-filled TGVs ({tgv_d_um} um at {tgv_pitch_um} um pitch) replace
+  the laminate core and PTH; {bu_n} build-up layers per side ({sbt_layers}) with {bridge_n} EMIB bridges in the top
+  layers.
+
+params:
+  # ---- reported (backbone ectc51846.2026.00134-a unless noted)
+  sbt_layers: {ref: ectc51846.2026.00134-a.substrate_layer_count, note: "abstract 10-2-10; text and captions say 24-layer (conflict logged)"}
+  bu_n: {ref: ectc51846.2026.00134-a-L01.repeat, note: "front build-up RDL layers, count from '10-2-10'"}
+  bu_bot_n: {ref: ectc51846.2026.00134-a-L04.repeat}
+  bridge_n: {ref: ectc51846.2026.00134-a-c1.count, note: "EMIB bridges embedded in the top layers; size and depth not reported"}
+  panel: {ref: ectc51846.2026.00134-a.carrier_size_mm}
+  sbt_w_mm: {ref: ectc51687.2025.00178-i.substrate_x_mm, note: "unit outline of the 1.0 mm glass core 2-2-2 TGV prototype (backbone unit size not reported)"}
+  sbt_d_mm: {ref: ectc51687.2025.00178-i.substrate_y_mm}
+  core_h_um: {ref: ectc51687.2025.00178-i-L04.thickness_um, note: "1.0 mm glass core (Shinko TGV prototype); backbone core thickness not reported"}
+  tgv_d_um: {ref: ectc51687.2025.00178-i-i1.diameter_um}
+  tgv_pitch_um: {ref: ectc51687.2025.00178-i-i1.pitch_min_um, note: "minimum TGV pitch"}
+  tgv_ar: {ref: ectc51687.2025.00178-i-i1.aspect_ratio}
+  gt_core_h_um: {ref: ectc51846.2026.00199-a-L13.thickness_um, note: "1 mm Corning glass core of the Georgia Tech 200 x 200 mm panel"}
+  thin_core_h_um: {ref: ectc51687.2025.00233-b-c1.thickness_um, note: "0.4 mm glass core with DF-PID-filled conformal TGVs"}
+  abf_um: {ref: ectc51846.2026.00199-a-L04.thickness_um, note: "ABF GL102 build-up dielectric on the glass panel"}
+  cu_um: {ref: ectc51846.2026.00199-a-L01.thickness_um, note: "SAP Cu target thickness on the glass panel"}
+  line_um: {ref: ectc51846.2026.00199-a-L09.line_um, note: "UCIe-S x8 10 mm routing traces on the glass build-up"}
+  space_um: {ref: ectc51846.2026.00199-a-L09.space_um}
+  min_line_um: {ref: ectc51846.2026.00199-a-L05.line_um}
+  mvia_d_um: {ref: ectc51846.2026.00199-a-i1.diameter_um, note: "smallest of the 20/30/40/50 um femtosecond-laser microvias"}
+  coarse_pitch_um: {ref: ectc51846.2026.00199-a-i5.pitch_um, note: "UCIe-S x8 terminal bump pads on the glass substrate (no die attached)"}
+  # ---- derived
+  bu_layer_h_um: {derived: "abf_um + cu_um", note: "one build-up layer = ABF dielectric + SAP Cu (Georgia Tech glass panel)"}
+  bu_h_um: {derived: "bu_n * (abf_um + cu_um)", note: "front build-up = 10 layers x (ABF + Cu)"}
+  bu_bot_h_um: {derived: "bu_bot_n * (abf_um + cu_um)", note: "back build-up = 10 layers x (ABF + Cu)"}
+  # ---- template: core metal (the "2" of 10-2-10)
+  core_cu_um:
+    template: "cu_um"
+    note: "core-surface Cu thickness not reported (rows 00134-a-L03, 00178-i-L03 state the layers only); set to the 5 um SAP Cu of the glass panel"
+    refs: [ectc51687.2025.00178-i-L03.layer_name]
+  core_part_h_um: {template: "core_h_um + 2 * core_cu_um", note: "core part = glass + one Cu layer on each face"}
+  # ---- template: bridges, dies and joints (no glass-core TV has dies; analogs as in the EMIB template)
+  bridge_w_mm:
+    analog: ectc.2016.201-a-c1.x_mm
+    note: "EMIB size not reported for the glass TV; analog = lower bound of the 2 x 2 to 8 x 8 mm EMIB range"
+  bridge_d_mm:
+    analog: ectc.2016.201-a-c1.y_mm
+    note: "EMIB size not reported for the glass TV; analog = lower bound of the EMIB range"
+  bridge_h_um:
+    analog: ectc.2016.201-a-c1.thickness_um
+    note: "EMIB thickness not reported for the glass TV; analog = upper bound (thinned below 75 um) of the EMIB architecture paper"
+  bridge_depth_um:
+    template: "bu_layer_h_um"
+    note: "bridge top drawn one build-up layer below the surface ('embedded in the top layers'); depth not reported"
+  d1_w_mm:
+    analog: ectc51906.2022.00106-a-c1.x_mm
+    note: "no die in the glass-core TVs; DIE 1 analog = processor chip of an IBM bridge (DBHi) package, as in the EMIB template"
+  d1_d_mm:
+    analog: ectc51906.2022.00106-a-c1.y_mm
+    note: "DIE 1 analog = the same processor chip"
+  die_h_um:
+    analog: ectc51906.2022.00106-a-c1.thickness_um
+    note: "die thickness analog = the same processor chip"
+  d2_w_mm:
+    analog: ectc51909.2023.00135-a-c2.x_mm
+    note: "DIE 2 / DIE 3 analog = HBM2E footprint of a 2.5D TV, as in the EMIB template"
+  d2_d_mm:
+    analog: ectc51909.2023.00135-a-c2.y_mm
+    note: "DIE 2 / DIE 3 analog = the same HBM2E footprint"
+  d2_n: {template: "bridge_n", note: "one side die per bridge: DIE 2 | DIE 1 | DIE 3 with a bridge under each die-die edge"}
+  die_gap_um:
+    analog: tcpmt.2023.3312037-a-c2.gap_um
+    note: "die-to-die gap analog = Intel Co-EMIB DtD spacing ('as small as 100 um')"
+  d2_px_mm: {template: "d1_w_mm + 2 * die_gap_um / 1000 + d2_w_mm", note: "side dies at the D2D gap on each side of DIE 1"}
+  bridge_px_mm: {template: "d1_w_mm + die_gap_um / 1000", note: "bridge centered under each die-die gap"}
+  fine_pitch_um:
+    analog: ectc.2016.201-a-i1.pitch_um
+    note: "bump pitch over the bridge not reported for the glass TV; analog = 55 um EMIB fine pitch"
+  fine_d_um:
+    analog: ectc51906.2022.00180-a-i3.diameter_um
+    note: "fine bump diameter analog = 55 um-pitch Cu/SnAg micro-bump of a glass 2.5D package"
+  bump_h_um:
+    template: "r0 + r1"
+    refs: [ectc51906.2022.00180-a-i3.height_um, ectc51906.2022.00180-a-i3.cap_height_um]
+    note: "bump standoff = Cu + SnAg cap of the 55 um-pitch analog; one standoff for fine and coarse bumps"
+  coarse_d_um:
+    analog: vlsitechnologyandcir46783.2024.10631478-a-i2.diameter_um
+    note: "coarse bump diameter not reported; analog = Intel Foveros 110 um-pitch package-side bump"
+  uf_margin_mm: {template: 0.5, note: "underfill fillet extent not reported; illustrative"}
+  mvia_pitch_um: {template: "coarse_pitch_um", note: "stacked microvia placement not reported; one column per coarse bump pad assumed"}
+  bga_pitch_um:
+    analog: ectc51909.2023.00155-a-i4.pitch_um
+    note: "BGA not reported for any glass-core TV; analog = 1.0 mm-pitch ball of a large 2.5D TV"
+  bga_d_um:
+    analog: ectc51909.2023.00155-a-i4.diameter_um
+    note: "BGA ball diameter analog = SAC305 ball of the same 2.5D TV"
+  bga_h_um:
+    template: 478
+    refs: [ectc51909.2023.00155-a-i4.notes]
+    note: "BGA height not reported; the analog row's notes give a measured ball height of 478 um"
+
+parts:
+  - {id: sbt_bu_bot, name: "Back build-up (10 layers)", kind: substrate, material: organic_build_up,
+     material_label: "ABF / SAP Cu", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: bu_bot_h_um, base: true, explode_group: 0}
+  - {id: core, name: "Glass core (TGV)", kind: substrate, material: glass, material_label: "glass (type not stated in the Intel TV)",
+     w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: core_part_h_um, on: sbt_bu_bot, explode_group: 0,
+     note: "thick glass core with Cu-filled TGVs (laser-assisted etching, electrolytic fill)"}
+  - {id: sbt_bu_top, name: "Front build-up (10 layers)", kind: substrate, material: organic_build_up,
+     material_label: "ABF / SAP Cu", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: bu_h_um, on: core, explode_group: 0}
+  - id: bridge
+    name: "EMIB bridge (Si)"
+    kind: bridge
+    material: silicon
+    w_mm: bridge_w_mm
+    d_mm: bridge_d_mm
+    h_um: bridge_h_um
+    in: sbt_bu_top
+    depth_um: bridge_depth_um
+    repeat: {nx: bridge_n, pitch_x_mm: bridge_px_mm}
+    explode_group: 1
+    note: "2 EMIB bridges in the top build-up layers (Fig. 8(a)); size, depth and attach not reported"
+  - {id: die1, name: "DIE 1", kind: die, material: silicon, w_mm: d1_w_mm, d_mm: d1_d_mm, h_um: die_h_um, on: sbt_bu_top,
+     standoff: coarse_d1, explode_group: 3, note: "no die in the glass-core TVs; template (EMIB-template analog)"}
+  - id: die2
+    name: "DIE 2 / DIE 3"
+    kind: die
+    material: silicon
+    w_mm: d2_w_mm
+    d_mm: d2_d_mm
+    h_um: die_h_um
+    on: sbt_bu_top
+    standoff: coarse_d1
+    repeat: {nx: d2_n, pitch_x_mm: d2_px_mm}
+    explode_group: 3
+    note: "template (EMIB-template analog)"
+  - id: uf
+    name: "Underfill"
+    kind: underfill
+    material: underfill
+    fill: {above: sbt_bu_top, parts: [die1, die2], margin_mm: uf_margin_mm}
+    explode_group: 2
+    xray_default: true
+
+layers:
+  - part: sbt_bu_top
+    repeat: bu_n
+    pattern:
+      - {id: bu_top_cu, name: "Build-up Cu (SAP)", material: copper, material_label: "SAP Cu", role: conductor, h_um: cu_um,
+         line_um: line_um, space_um: space_um}
+      - {id: bu_top_abf, name: "Build-up ABF", material: organic_build_up, material_label: "ABF GL102", role: dielectric,
+         h_um: abf_um, via_um: mvia_d_um}
+  - id: g_core
+    part: core
+    pattern:
+      - {id: core_cu_top, name: "Core-surface Cu", material: copper, material_label: Cu, role: conductor, h_um: core_cu_um}
+      - {id: glass, name: "Glass core", material: glass, role: core, h_um: core_h_um}
+      - {id: core_cu_bot, name: "Core-surface Cu", material: copper, material_label: Cu, role: conductor, h_um: core_cu_um}
+  - part: sbt_bu_bot
+    repeat: bu_bot_n
+    pattern:
+      - {id: bu_bot_abf, name: "Build-up ABF", material: organic_build_up, material_label: "ABF GL102", role: dielectric,
+         h_um: abf_um}
+      - {id: bu_bot_cu, name: "Build-up Cu (SAP)", material: copper, material_label: "SAP Cu", role: conductor, h_um: cu_um}
+
+arrays:
+  - {id: tgv, name: "Cu-filled TGVs", kind: tgv, in_layer: glass, region: {part: core}, pitch_um: tgv_pitch_um,
+     diameter_um: tgv_d_um, note: "fully Cu-filled TGVs; placement not reported, drawn at the minimum pitch over the full core"}
+  - {id: mvia, name: "Stacked microvias", kind: rdl_via, in: sbt_bu_top, region: {part: die1, subtract: [bridge]},
+     pitch_um: mvia_pitch_um, diameter_um: mvia_d_um, note: "drawn under DIE 1 outside the bridges; placement not reported"}
+  - {id: fine_d1, name: "Fine bumps over the bridge", kind: microbump, per: die1, lower: sbt_bu_top,
+     region: {intersect: [bridge]}, pitch_um: fine_pitch_um, diameter_um: fine_d_um, height_um: bump_h_um}
+  - {id: fine_d2, name: "Fine bumps over the bridge", kind: microbump, per: die2, lower: sbt_bu_top,
+     region: {intersect: [bridge]}, pitch_um: fine_pitch_um, diameter_um: fine_d_um, height_um: bump_h_um}
+  - {id: coarse_d1, name: "Coarse bumps", kind: microbump, per: die1, lower: sbt_bu_top, region: {subtract: [bridge]},
+     pitch_um: coarse_pitch_um, diameter_um: coarse_d_um, height_um: bump_h_um,
+     note: "130 um pitch of the UCIe-S bump pads on the glass panel; bump map not reported"}
+  - {id: coarse_d2, name: "Coarse bumps", kind: microbump, per: die2, lower: sbt_bu_top, region: {subtract: [bridge]},
+     pitch_um: coarse_pitch_um, diameter_um: coarse_d_um, height_um: bump_h_um}
+  - {id: bga, name: "BGA balls", kind: bga, under: sbt_bu_bot, region: {part: sbt_bu_bot}, pitch_um: bga_pitch_um,
+     diameter_um: bga_d_um, height_um: bga_h_um}
+
+callouts:
+  - {target: glass, text: "Glass core {core_h_um} um",
+     note: "{core_h_um} um glass core (Shinko 2-2-2 prototype; Georgia Tech panel also {gt_core_h_um} um); {thin_core_h_um} um core with DF-PID-filled TGVs in another TV; Intel core thickness not reported"}
+  - {target: tgv, text: "TGV {tgv_d_um} um, {tgv_pitch_um} um pitch",
+     note: "Cu-filled TGV {tgv_d_um} um diameter at {tgv_pitch_um} um minimum pitch through {core_h_um} um glass (aspect ratio {tgv_ar})"}
+  - {target: sbt_bu_top, text: "{sbt_layers} glass core substrate",
+     note: "Intel {sbt_layers} glass core substrate on a {panel} mm panel; build-up layer drawn as {abf_um} um ABF + {cu_um} um Cu (Georgia Tech glass panel)"}
+  - {target: bu_top_cu, text: "Routing L/S {line_um}/{space_um} um",
+     note: "UCIe-S x8 routing {line_um}/{space_um} um; test structures down to {min_line_um} um lines; microvias from {mvia_d_um} um"}
+  - {target: bridge, text: "{bridge_n} EMIB in top layers",
+     note: "{bridge_n} EMIB bridges embedded in the top build-up layers of the Intel glass substrate; bridge size and depth not reported (EMIB analog drawn)"}
+  - {target: coarse_d1, text: "Die-bump pads {coarse_pitch_um} um",
+     note: "UCIe-S x8 terminal bump pads at {coarse_pitch_um} um pitch on the glass panel; no die attached in any glass-core TV (dies are template)"}
+  - {target: core, text: "Glass replaces laminate + PTH", refs: [ectc51846.2026.00134-a-L03.material]}
+
+insets:
+  - id: tgv_xs
+    label: "TGV through the glass core"
+    box_mm: ["-sbt_w_mm / 2 + 1", -0.5, "-sbt_w_mm / 2 + 2", 0.5]
+    z: ["bottom:sbt_bu_bot", "top:sbt_bu_top"]
+    view: front
+  - id: bridge_gap
+    label: "Die-die gap over the EMIB"
+    box_mm: ["bridge_px_mm / 2 - bridge_w_mm / 2 - 0.5", -1, "bridge_px_mm / 2 + bridge_w_mm / 2 + 0.5", 1]
+    z: ["top:core", "top:die1"]
+    view: front
+  - id: sbt_xs
+    label: "Substrate cross-section"
+    box_mm: [-0.6, -0.6, 0.6, 0.6]
+    z: ["bottom:sbt_bu_bot", "top:die1"]
+    view: front

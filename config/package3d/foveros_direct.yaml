@@ -1,0 +1,219 @@
+# Foveros Direct (Intel hybrid bonding) 3D template. Format: config/package3d/TEMPLATE_FORMAT.md.
+# Generator: scripts/build_package3d.py.
+# Scope (2026-10-20 family audit M9): the family holds 5 Intel hybrid-bond papers. Only the backbone TV
+# ectc32696.2021.00166-b is tied to the Foveros brand (the paper says "Foveros architecture"); the others are Intel HB
+# pathfinding: 3 um C2W (ectc51529.2024.00017), QMC (iedm45625.2022.10019499), MLV (ectc51687.2025.00009) and sub-1 um W2W
+# lattices (ectc51529.2024.00128). The name and summary say so; the product link is an inference (RESEARCH.md).
+# Backbone: ectc32696.2021.00166-b (active HB test chip, Intel 10 nm: 4 top dies Cu hybrid bonded onto 1 base die at
+# 9 um pitch, over 3 million connections, on a package; in fab at the time of the paper, no dimensions).
+# Topology drawn: top dies face down on the active base die through bond layers (Cu pads in a bond dielectric), no solder
+# and no underfill at that interface; the gap between the top dies is an inorganic oxide fill as in the QMC flow
+# (iedm45625.2022.10019499-b: SiO2 fill replacing organic mold); base die with TSVs (drawn in the 3 um C2W TV assembly
+# illustration, ectc51529.2024.00017-a-i2) and solder bumps to a conventional package (QMC row i3). QMC support Si on
+# top of the stack is a callout only (not part of the backbone description).
+# Sizes: no row of the family dimensions the backbone dies. The top-die size is estimated from the reported connection
+# count and pitch (full-area square grid, template); the base die is the 2 x 2 top-die block plus a margin (template).
+id: foveros_direct
+name: Intel hybrid bonding (Foveros Direct and pathfinding)
+company: Intel
+package_class: hybrid_bonded_3d
+family_match: {families: true}
+backbone_tv: ectc32696.2021.00166-b
+summary: >-
+  Intel Cu hybrid bonding: {top_n} top dies on an active base die at {hb_pitch_um} um pitch (the one TV tagged Foveros),
+  no solder or underfill; oxide gap fill, base TSVs and solder bumps follow Intel pathfinding rows (C2W, QMC).
+
+params:
+  # ---- reported (backbone ectc32696.2021.00166-b unless noted)
+  top_n: {ref: ectc32696.2021.00166-b-c1.count, note: "Top Die 1-4 on one base die (Fig. 9)"}
+  hb_pitch_um: {ref: ectc32696.2021.00166-b-i1.pitch_um}
+  hb_count_n: {ref: ectc32696.2021.00166-b-i1.count, note: "'over 3 million' HB connections, base die to top dies (total)"}
+  p_pitch_um: {ref: ectc32696.2021.00166-a-i1.pitch_um, note: "passive HB assembly test chip, hexagonal pad arrangement"}
+  area_min_mm2: {ref: ectc32696.2021.00166-a-m1.value}
+  area_max_mm2: {ref: ectc32696.2021.00166-a-m2.value}
+  g2_pitch_um: {ref: ectc51529.2024.00017-a-i1.pitch_um, note: "3 um pitch C2W HB, symmetric Cu pads, F2F"}
+  g2_top_w_mm: {ref: ectc51529.2024.00017-a-c1.x_mm}
+  g2_top_d_mm: {ref: ectc51529.2024.00017-a-c1.y_mm}
+  g2_align_um: {ref: ectc51529.2024.00017-a-i1.alignment_um, note: "post-bond misalignment < 0.5 um for all 400 tested chiplets"}
+  qmc_pitch_um: {ref: iedm45625.2022.10019499-b-i1.pitch_um}
+  top_h_um:
+    ref: iedm45625.2022.10019499-c-c1.thickness_um
+    note: "'20+ um chiplets' of the QMC oxide-fill module wafers (qualifier gt; height incl. active Si and metallization); the backbone top-die thickness is not reported"
+  mlv_d_um: {ref: ectc51687.2025.00009-a-i1.diameter_um, note: "multi-level via in the HB bonding-layer BEOL, ~1 x 9 um at 3 um pitch"}
+  mlv_h_um: {ref: ectc51687.2025.00009-a-i1.depth_um}
+  mlv_pitch_um: {ref: ectc51687.2025.00009-a-i1.pitch_um}
+  w2w_pitch_um: {ref: ectc51529.2024.00128-a-i3.pitch_um, note: "rectangular 0.33 x 0.4 um lattice, called 0.36 um"}
+  w2w_density: {ref: ectc51529.2024.00128-a-i3.density_per_mm2}
+  # ---- template: die sizes (no row of the family dimensions the backbone dies)
+  top_w_mm:
+    template: "(hb_count_n * hb_pitch_um ** 2 / top_n) ** 0.5 / 1000"
+    note: "top-die size not reported; side of a square die whose full area holds its share of the 'over 3 million' connections on a square 9 um grid (lower bound; the pad map is not reported)"
+  top_d_mm: {template: "top_w_mm", note: "square top dies assumed (same estimate)"}
+  top_gap_um:
+    analog: tcpmt.2023.3312037-a-c2.gap_um
+    note: "gap between top dies not reported; analog = Intel die-to-die spacing next to a Foveros stack ('as small as 100 um', Co-EMIB)"
+  base_edge_mm: {template: 0.5, note: "base-die margin outside the top-die block not reported; illustrative"}
+  top_cols_n: {template: 2, note: "4 top dies drawn as 2 x 2 (Fig. 9 layout not dimensioned)"}
+  top_rows_n: {template: "top_n / top_cols_n", note: "rows = top-die count / columns"}
+  top_p_mm: {template: "top_w_mm + top_gap_um / 1000", note: "top-die pitch = size + gap"}
+  base_w_mm:
+    template: "top_cols_n * top_w_mm + (top_cols_n - 1) * top_gap_um / 1000 + 2 * base_edge_mm"
+    note: "base-die size not reported; top-die block + margin"
+  base_d_mm:
+    template: "top_rows_n * top_d_mm + (top_rows_n - 1) * top_gap_um / 1000 + 2 * base_edge_mm"
+    note: "base-die size not reported; top-die block + margin"
+  # ---- template: thicknesses and joints
+  base_h_um:
+    analog: iedm19573.2019.8993637-a-c2.thickness_um
+    note: "base-die thickness not reported in the family; analog = Intel Foveros (micro-bump) base die ground to ~75 um to reveal TSVs"
+  bond_t_um:
+    analog: ectc51909.2023.00023-a-i1.height_um
+    note: "bond-layer thickness not reported; analog = 3.5 um pad height per side of a 7 um-pitch D2W hybrid bond (closest pitch in the database)"
+  hb_d_um:
+    template: "hb_pitch_um / 2"
+    refs: [ectc51846.2026.00218-a-i2.pad_x_um, ectc51846.2026.00218-a-i2.pitch_um]
+    note: "HB pad size not reported; pad = half the pitch, the ratio of the D2W hybrid-bond rows (e.g., 1.5 um pad at 3 um pitch)"
+  fill_h_um: {template: "bond_t_um + top_h_um", note: "oxide fill flush with the top-die backs: top bond layer + top die"}
+  tsv_pitch_um:
+    analog: iedm19573.2019.8993637-a-i2.pitch_min_um
+    note: "base-die TSV drawn without dimensions (ectc51529.2024.00017-a-i2); analog = Intel Foveros base-die TSV pitch (minimum of 15-16 um)"
+    refs: [ectc51529.2024.00017-a-i2.ic_type]
+  tsv_d_um:
+    analog: iedm19573.2019.8993637-a-i2.diameter_um
+    note: "TSV diameter not reported in the family; analog = Intel Foveros base-die TSV (9 um target)"
+  psb_pitch_um:
+    analog: vlsitechnologyandcir46783.2024.10631478-a-i2.pitch_um
+    note: "package bump pitch not given (QMC row i3: solder, pitch not given); analog = Intel Foveros package-side bump on TSVs"
+    refs: [iedm45625.2022.10019499-b-i3.metallurgy]
+  psb_d_um:
+    analog: vlsitechnologyandcir46783.2024.10631478-a-i2.diameter_um
+    note: "package bump diameter not given; analog = the same Foveros package-side bump"
+  psb_h_um:
+    template: "r0 + r1"
+    refs: [ectc51909.2023.00155-a-i3.height_um, ectc51909.2023.00155-a-i3.cap_height_um]
+    note: "package bump height not reported; analog = Cu + SnAg cap of a 150 um-pitch interposer-to-substrate bump"
+  uf_margin_mm: {template: 0.5, note: "package-level underfill under the base die assumed (not stated); fillet extent illustrative"}
+  # ---- template: package substrate (no row of the family dimensions the package)
+  sbt_margin_mm: {template: 5, note: "package outline not reported ('package' is a figure label only); base die + 5 mm per side, illustrative"}
+  sbt_w_mm: {template: "base_w_mm + 2 * sbt_margin_mm", note: "substrate = base die + margin (template)"}
+  sbt_d_mm: {template: "base_d_mm + 2 * sbt_margin_mm", note: "substrate = base die + margin (template)"}
+  bu_n:
+    analog: ectc51687.2025.00148-a-L06.repeat
+    note: "package layer count not reported; analog = 4 build-up layers per side of an organic FC substrate (as in the Foveros template)"
+  bu_diel_um:
+    analog: ectc51687.2025.00148-a-L04.thickness_um
+    note: "build-up dielectric thickness not reported; analog = ABF-GL layer of the same organic FC substrate"
+  bu_h_um: {template: "bu_n * bu_diel_um", note: "build-up per side = layer count x dielectric thickness (analogs)"}
+  core_h_um:
+    analog: ectc51687.2025.00148-a-L07.thickness_um
+    note: "core thickness not reported; analog = core of the same organic FC substrate"
+  sbt_h_um: {template: "core_h_um + 2 * bu_h_um", note: "substrate = core + 2 build-up stacks (template inputs)"}
+
+parts:
+  - {id: substrate, name: "Package substrate", kind: substrate, material: organic_laminate,
+     material_label: "conventional package (build not given)", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: sbt_h_um,
+     base: true, explode_group: 0}
+  - {id: base, name: "Base die (active, TSV)", kind: die, material: silicon, w_mm: base_w_mm, d_mm: base_d_mm,
+     h_um: base_h_um, on: substrate, standoff: psb, explode_group: 2,
+     note: "face up; Intel 10 nm base die of the active HB test chip; size and thickness not reported"}
+  - {id: bond_bot, name: "Base bond layer", kind: other, material: other,
+     material_label: "Cu HB pads in bonding dielectric (not named)", w_mm: base_w_mm, d_mm: base_d_mm, h_um: bond_t_um,
+     on: base, explode_group: 3, note: "base-die HB pad layer (hybrid bonding pad layer, row L02)"}
+  - {id: fill, name: "Oxide gap fill", kind: mold, material: oxide, material_label: "inorganic fill, e.g. SiO2 (QMC)",
+     w_mm: base_w_mm, d_mm: base_d_mm, h_um: fill_h_um, on: bond_bot, explode_group: 4, xray_default: true,
+     note: "QMC: PECVD SiO2 fill replaces organic mold around the chiplets (iedm45625.2022.10019499-b-c4, -c-L01); the fill of the backbone test chip is not stated"}
+  - id: bond_top
+    name: "Top-die bond layer"
+    kind: other
+    material: other
+    material_label: "Cu HB pads in bonding dielectric (not named)"
+    w_mm: top_w_mm
+    d_mm: top_d_mm
+    h_um: bond_t_um
+    in: fill
+    depth_um: top_h_um
+    repeat: {nx: top_cols_n, ny: top_rows_n, pitch_x_mm: top_p_mm, pitch_y_mm: top_p_mm}
+    explode_group: 4
+    note: "the bonded plane is its bottom face"
+  - id: top
+    name: "Top die"
+    kind: die
+    material: silicon
+    w_mm: top_w_mm
+    d_mm: top_d_mm
+    h_um: top_h_um
+    in: fill
+    repeat: {nx: top_cols_n, ny: top_rows_n, pitch_x_mm: top_p_mm, pitch_y_mm: top_p_mm}
+    explode_group: 4
+    note: "face down (F2F), Intel 10 nm; size estimated from the connection count, thickness from the QMC chiplets"
+  - id: uf
+    name: "Package underfill"
+    kind: underfill
+    material: underfill
+    fill: {above: substrate, parts: [base], margin_mm: uf_margin_mm}
+    explode_group: 1
+    xray_default: true
+    note: "not stated for this family; drawn under the base die only (no underfill at the hybrid-bond interface)"
+
+layers:
+  - part: substrate
+    pattern:
+      - {id: sbt_bu_top, name: "Front build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+      - {id: sbt_core, name: "Core", material: organic_laminate, material_label: "laminate core", role: core,
+         h_um: core_h_um}
+      - {id: sbt_bu_bot, name: "Back build-up", material: organic_build_up, role: dielectric, h_um: bu_h_um}
+
+arrays:
+  - {id: hb, name: "Cu hybrid bonds", kind: hybrid_bond, span: ["bottom:bond_bot", "top:bond_bot"],
+     between: [top, base], region: {part: top}, pitch_um: hb_pitch_um, diameter_um: hb_d_um,
+     note: "bottom pad tier under each top die; the top-die pad tier is the bond_top layer; full-area grid drawn, pad map not reported"}
+  - {id: hb_top, name: "Cu hybrid bonds (top pads)", kind: hybrid_bond, in: bond_top, pitch_um: hb_pitch_um,
+     diameter_um: hb_d_um}
+  - {id: tsv, name: "Base-die TSVs", kind: tsv, in: base, region: {part: base}, pitch_um: tsv_pitch_um,
+     diameter_um: tsv_d_um, note: "TSV drawn in the 3 um C2W TV assembly illustration only; sizes analog, placement not reported"}
+  - {id: psb, name: "Package bumps (solder)", kind: c4, upper: base, lower: substrate, region: {part: base},
+     pitch_um: psb_pitch_um, diameter_um: psb_d_um, height_um: psb_h_um,
+     note: "solder bump plating after carrier removal, attach to a conventional package (QMC row i3); size analog"}
+
+callouts:
+  - {target: hb, text: "HB pitch {hb_pitch_um} um (Foveros TV)",
+     note: "active HB test chip ('Foveros architecture'): {top_n} top dies on 1 base die, over {hb_count_n} connections at {hb_pitch_um} um pitch; in fab at the time of the paper",
+     refs: [ectc32696.2021.00166-b-c2.count]}
+  - {target: hb, text: "No solder, no underfill", refs: [ectc32696.2021.00166-b-L02.layer_name, ectc32696.2021.00166-d-i1.pitch_um],
+     note: "Cu-Cu + dielectric bond; the micro-bump F2F reference at 40 um pitch uses TCB solder with underfill"}
+  - {target: hb, text: "C2W pitch {g2_pitch_um} um",
+     note: "{g2_pitch_um} um pitch C2W HB: {g2_top_w_mm} x {g2_top_d_mm} mm top die F2F on a base wafer, misalignment < {g2_align_um} um (400 chiplets)",
+     refs: [ectc51529.2024.00017-a-m4.n_samples]}
+  - {target: hb, text: "W2W lattice {w2w_pitch_um} um",
+     note: "sub-1 um W2W pathfinding lattices down to {w2w_pitch_um} um pitch, {w2w_density} connections per mm2"}
+  - {target: hb, text: "Passive chip {p_pitch_um} um, hexagonal",
+     note: "passive HB assembly test chip at {p_pitch_um} um pitch; assembled die areas {area_min_mm2}-{area_max_mm2} mm2"}
+  - {target: top, text: "Top-die size from bond count",
+     note: "no row dimensions the backbone top dies; drawn as square dies holding the reported connection count on a full-area square grid at the reported pitch"}
+  - {target: top, text: "QMC chiplets {top_h_um}+ um",
+     note: "QMC oxide-fill module: chiplets over {top_h_um} um (incl. metallization); used as the drawn top-die thickness"}
+  - {target: fill, text: "Oxide fill (QMC flow)", refs: [iedm45625.2022.10019499-b-c4.material],
+     note: "inorganic fill (e.g., silicon dioxide, PECVD) replacing organic mold; TDVs through it in the QMC architecture"}
+  - {target: fill, text: "QMC: support Si on top", refs: [iedm45625.2022.10019499-b-c1.name],
+     note: "QMC bonds a support Si wafer to the topmost chiplet layer for structural stability (not drawn)"}
+  - {target: bond_bot, text: "MLV {mlv_d_um} x {mlv_h_um} um vias",
+     note: "multi-level bond-layer vias ~{mlv_d_um} x {mlv_h_um} um at {mlv_pitch_um} um pitch (process wafer, no bonding)"}
+  - {target: tsv, text: "TSV drawn, not dimensioned", refs: [ectc51529.2024.00017-a-i2.ic_type]}
+  - {target: psb, text: "Solder bumps to package", refs: [iedm45625.2022.10019499-b-i3.metallurgy]}
+
+insets:
+  - id: hb_interface
+    label: "Hybrid-bond interface"
+    box_mm: ["-top_p_mm / 2 - 0.03", "-top_p_mm / 2 - 0.03", "-top_p_mm / 2 + 0.03", "-top_p_mm / 2 + 0.03"]
+    z: ["bottom:bond_bot", "top:bond_top"]
+    view: front
+  - id: top_gap
+    label: "Top-die gap, oxide fill"
+    box_mm: ["-top_gap_um / 2000 - 0.1", "top_p_mm / 2 - 0.1", "top_gap_um / 2000 + 0.1", "top_p_mm / 2 + 0.1"]
+    z: ["bottom:base", "top:fill"]
+    view: front
+  - id: tsv_column
+    label: "TSV column, package bump"
+    box_mm: [-0.15, -0.15, 0.15, 0.15]
+    z: ["bottom:psb", "top:fill"]
+    view: front

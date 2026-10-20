@@ -1,0 +1,2273 @@
+# Packaging families for the 3D package viewer (DevLog-008).
+# Generated 2026-10-19 by the research agent from data/*.csv (239 papers) + cited public sources; hand-curated fields:
+#   name, company, include, priority, include_reason, summary, sources, representative_tvs pin order.
+# Counts: db_papers = distinct papers with a matching TV (physical or simulation); db_physical_tvs excludes
+#   tv_kind=simulation_model. Matching uses technology_name aliases (TV column), package_class, or a paper list
+#   (see RESEARCH.md "Matching rules").
+# representative_tvs: ranked by a geometric-completeness score (outline 2, package thickness 1, die x/y and die
+#   thickness up to 3 each, other component thickness 0.5 each up to 3, layer thickness 0.4 each up to 10,
+#   interconnect pitch 1 each up to 4, interconnect diameter+height 0.75 each up to 4, distinct interconnect
+#   levels 0.5 each up to 4); a few families pin topology-relevant TVs first (RESEARCH.md says which).
+#   has = per-TV counts: outline (0/1), die_xy / die_t = die-type components with x+y / thickness,
+#   other_t = non-die components with thickness, layer_t = stack_layers rows with thickness,
+#   ic_pitch / ic_d+h = interconnect rows with pitch / diameter+height, ic_levels = distinct levels.
+# sources: "db:<paper_id> <locator> - <claim>" points at references/<paper_id>/text.md;
+#   "url:<url> - <claim> (primary|secondary)" is a public web source checked 2026-10-19.
+# match_rule keys: tn = case-insensitive regex on test_vehicles.technology_name; cls_only = any TV of these
+#   package_class; papers = any TV of these paper_ids (restricted by cls if given); ic_level = TV has an
+#   interconnect row at this level; excl = regex on technology_name + paper title that removes a TV;
+#   excl_papers = paper_ids removed (assigned to a more specific family).
+# priority: 1 = first template wave, 2 = second, 3 = later; null = not illustrated (include: false).
+# The 3D generator uses these rules unchanged (template `family_match: {families: true}`; scripts/build_package3d.py
+#   Matcher): tn and excl are case-insensitive there too; a template may add `tvs` / `excl_tvs` lists (2026-10-20).
+# shared_with: TVs deliberately counted in this family and another one (overlaps are intended, with the reason).
+# Counts and paper lists recomputed 2026-10-20 from data/*.csv (uncommitted revision-pass changes included; they can
+#   drift again after that merge).
+version: 1
+generated: '2026-10-19'
+families:
+- id: fcbga_organic
+  name: FCBGA on organic build-up substrate (baseline)
+  company: generic (Resonac, Ajinomoto, others)
+  package_class: organic_substrate
+  include: true
+  priority: 1
+  include_reason: Baseline for compare view and the shared substrate sub-template under all 2.5D families; 22 papers.
+  summary: Monolithic die flip-chip (Cu pillar/C4) on a cored organic build-up substrate (N-2-N build-up film layers on a glass-fiber laminate
+    core with PTH), capillary underfill, stiffener or lid, BGA to board.
+  technology_name_aliases: []
+  match_rule: cls_only=['organic_substrate']; cls=['organic_substrate']
+  db_papers: 27
+  db_physical_tvs: 48
+  db_simulation_tvs: 7
+  papers:
+  - ectc32696.2021.00125
+  - ectc51529.2024.00087
+  - ectc51529.2024.00088
+  - ectc51529.2024.00207
+  - ectc51529.2024.00265
+  - ectc51687.2025.00028
+  - ectc51687.2025.00142
+  - ectc51687.2025.00148
+  - ectc51687.2025.00178
+  - ectc51687.2025.00359
+  - ectc51846.2026.00012
+  - ectc51846.2026.00117
+  - ectc51846.2026.00119
+  - ectc51846.2026.00134
+  - ectc51846.2026.00365
+  - ectc51846.2026.00375
+  - ectc51906.2022.00142
+  - ectc51909.2023.00108
+  - ectc51909.2023.00235
+  - eptc67330.2025.11392108
+  - icep-iaac64884.2025.11003038
+  - icep58572.2023.10129684
+  - icep61562.2024.10535612
+  - tcpmt.2025.3538554
+  - tcpmt.2025.3557745
+  - tcpmt.2025.3610036
+  - vlsitechnologyandcir65830.2026.11577576
+  representative_tvs:
+  - tv_id: ectc51529.2024.00265-a
+    score: 10.8
+    tv_kind: package
+    has: outline=1 die_xy=1 die_t=1 other_t=4 layer_t=4 ic_pitch=2 ic_d+h=1 ic_levels=2
+    name: 100x100 mm 8-2-8 FCBGA with core (A) conventional resin with E-glass cloth; 50 m
+  - tv_id: ectc51529.2024.00265-c
+    score: 10.8
+    tv_kind: package
+    has: outline=1 die_xy=1 die_t=1 other_t=4 layer_t=4 ic_pitch=2 ic_d+h=1 ic_levels=2
+    name: 100x100 mm 8-2-8 FCBGA with core (C) low CTE and high modulus resin with S-glass
+  - tv_id: ectc51687.2025.00148-a
+    score: 11.9
+    tv_kind: package
+    has: outline=1 die_xy=1 die_t=1 other_t=1 layer_t=8 ic_pitch=2 ic_d+h=1 ic_levels=3
+    name: 'Leg1: 60x60 mm 4-2-4 build-up substrate (L1/L8 ABF-GL, L2-7 ABF-GL) with 27x15 m'
+  - tv_id: ectc51687.2025.00148-b
+    score: 11.9
+    tv_kind: package
+    has: outline=1 die_xy=1 die_t=1 other_t=1 layer_t=8 ic_pitch=2 ic_d+h=1 ic_levels=3
+    name: 'Leg2: 60x60 mm 4-2-4 build-up substrate (L1/L8 ABF-GCP, L2-7 ABF-GL) with 27x15 '
+  - tv_id: eptc67330.2025.11392108-a
+    score: 12.4
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=4 layer_t=6 ic_pitch=2 ic_d+h=2 ic_levels=4
+    name: 2T3R mmWave radar AiP module (heterogeneous stacked A/B/C substrates)
+  - tv_id: ectc51687.2025.00148-c
+    score: 11.9
+    tv_kind: package
+    has: outline=1 die_xy=1 die_t=1 other_t=1 layer_t=8 ic_pitch=2 ic_d+h=1 ic_levels=3
+    name: 'Leg3: 60x60 mm 4-2-4 build-up substrate (L1/L8 ABF-GX, L2-7 ABF-GX) with 27x15 m'
+  simulation_tvs_top:
+  - tcpmt.2025.3538554-d
+  - ectc51909.2023.00235-c
+  - ectc51687.2025.00178-c
+  shared_with:
+  - tv: vlsitechnologyandcir65830.2026.11577576-d
+    family: hbm_stack
+    reason: 'simulation model: HBM + logic on an advanced organic substrate in an HBM4 paper'
+  sources:
+  - db:ectc51529.2024.00265 p.2 Table I; p.3 Table II-III - 100x100 mm 8-2-8, 1.4 mm CCL core, 50x50x0.725 mm Si, Cu pillar 200 um pitch / 90
+    dia / 30 high, BGA 1 mm / 600 um, Cu stiffener 2.5 mm, CUF
+  - db:ectc51687.2025.00148 - 60x60 mm 4-2-4 build-up substrate (ABF)
+  - db:ectc51909.2023.00155 p.2 Table 3 - 4/2/4 build-up 15 um film, 14/20 um L/S, 40 um microvia, 1.3 mm CCL core, PTH 200 um, solder resist
+    18 um
+- id: cowos_s
+  name: CoWoS-S
+  company: TSMC
+  package_class: si_interposer_2p5d
+  include: true
+  priority: 1
+  include_reason: Reference 2.5D Si-interposer architecture; 2 TSMC-labelled papers plus a well-dimensioned Si-interposer peer set.
+  summary: 'Chip-last 2.5D: SoC and HBM microbumped side by side on a monolithic Si interposer with TSVs; interposer Cu-pillar/C4 bumped to an
+    organic build-up substrate with BGA; two underfills, mold between dies, ring stiffener or lid.'
+  technology_name_aliases:
+  - CoWoS
+  match_rule: tn=(^|; )CoWoS(-S)?($|;); cls=['si_interposer_2p5d']
+  db_papers: 3
+  db_physical_tvs: 7
+  db_simulation_tvs: 2
+  papers:
+  - ectc.2013.6575597
+  - ectc51687.2025.00055
+  - ectc51909.2023.00135
+  representative_tvs:
+  - tv_id: ectc51909.2023.00135-a
+    score: 9.9
+    tv_kind: package
+    has: outline=1 die_xy=2 die_t=0 other_t=1 layer_t=1 ic_pitch=3 ic_d+h=0 ic_levels=4
+    name: 'TV1: 85x85 mm CoWoS MCM, two 1.5X reticle Si interposers (100 um), each with 1 S'
+  - tv_id: ectc51909.2023.00135-b
+    score: 9.9
+    tv_kind: package
+    has: outline=1 die_xy=2 die_t=0 other_t=1 layer_t=1 ic_pitch=3 ic_d+h=0 ic_levels=4
+    name: 'TV2: 85x85 mm CoWoS MCM, two 1.5X reticle Si interposers (100 um), each with 1 S'
+  - tv_id: ectc51909.2023.00135-c
+    score: 9.9
+    tv_kind: package
+    has: outline=1 die_xy=2 die_t=0 other_t=1 layer_t=1 ic_pitch=3 ic_d+h=0 ic_levels=4
+    name: 'TV2 optimized: as TV2 with 50 um thin interposer and increased C4 bump height'
+  - tv_id: ectc.2013.6575597-a
+    score: 8.4
+    tv_kind: package
+    has: outline=1 die_xy=2 die_t=0 other_t=1 layer_t=1 ic_pitch=2 ic_d+h=0 ic_levels=3
+    name: CoWoS test vehicle (component level)
+  - tv_id: ectc.2013.6575597-d
+    score: 1.5
+    tv_kind: wafer_level
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=1
+    name: CoW wafer (chip-on-wafer before backside and substrate)
+  - tv_id: ectc.2013.6575597-b
+    score: 1.0
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=1 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=1
+    name: CoWoS component on IPC9701 test board
+  simulation_tvs_top:
+  - ectc51687.2025.00055-g
+  - ectc51687.2025.00055-h
+  peer_family: si_interposer_peers
+  sources:
+  - db:ectc.2013.6575597 p.1 Test Vehicle and Fabrication - Si interposer with TSV, 100 um, 40 um uBump, 200 um C4 (SnPb)
+  - db:ectc51909.2023.00135 p.1 Sec. II, Fig. 1; p.2 Table I - mold between SoC and HBM, UF1 die-interposer, UF2 interposer-substrate, Cu stiffener
+    ring, 1.5-reticle interposer, 150 um Cu-pillar C4, 1 mm BGA
+  - db:ectc51909.2023.00135 p.3 Sec. III.E; p.4 Table II - 100 um interposer (50 um in the optimized TV2)
+  - db:ectc51909.2023.00174 p.1-2 Sec. I - CoWoS-S is Si-interposer based; CoWoS-L replaces the monolithic Si interposer
+  - url:https://www.tsmc.com/english/dedicatedFoundry/technology/platform_HPC_tech_WLSI - CoWoS is a chip-last on interposer process (primary)
+  - url:https://3dfabric.tsmc.com/english/dedicatedFoundry/technology/cowos.htm - CoWoS-S interposer up to 3.3X reticle (~2700 mm2); larger sizes
+    recommended as CoWoS-L/-R (primary page, text seen only via search snippet; direct fetch HTTP 403 on 2026-10-19)
+- id: cowos_r
+  name: CoWoS-R
+  company: TSMC
+  package_class: organic_rdl_interposer
+  include: true
+  priority: 1
+  include_reason: Best-covered TSMC family in the DB (8 papers); RDL-interposer counterpart to CoWoS-S.
+  summary: Chip-last 2.5D on a TSV-less organic RDL interposer (Cu in polymer, 4-9 RDL layers, 2/2 um L/S); dies microbumped on top, C4 to an
+    organic substrate, optional land-side IPDs, stiffener ring or lid with TIM.
+  technology_name_aliases:
+  - CoWoS-R
+  - CoWoS-R+ (plus)
+  - CoWoS-R; IMC-Si
+  match_rule: tn=CoWoS-R
+  db_papers: 8
+  db_physical_tvs: 25
+  db_simulation_tvs: 5
+  papers:
+  - ectc32696.2021.00125
+  - ectc51529.2024.00049
+  - ectc51687.2025.00026
+  - ectc51687.2025.00047
+  - ectc51687.2025.00085
+  - ectc51687.2025.00131
+  - ectc51846.2026.00092
+  - ectc51906.2022.00008
+  representative_tvs:
+  - tv_id: ectc51529.2024.00049-a
+    score: 7.5
+    tv_kind: package
+    has: outline=1 die_xy=2 die_t=0 other_t=0 layer_t=0 ic_pitch=2 ic_d+h=0 ic_levels=3
+    name: 'CoWoS-R 5.5x TV, 9L RDL interposer: 4 SoC + 12 HBM, 66x68 mm CoW, 97.3x95 mm 8-2'
+  - tv_id: ectc51687.2025.00047-a
+    score: 7.5
+    tv_kind: package
+    has: outline=1 die_xy=2 die_t=0 other_t=0 layer_t=0 ic_pitch=2 ic_d+h=0 ic_levels=3
+    name: CoWoS-R 5.5x TV, POR RDL (L/S 2/2 um, via CD/cap 8/11 um), 4 SoC + 12 HBM3
+  - tv_id: ectc51687.2025.00047-b
+    score: 7.5
+    tv_kind: package
+    has: outline=1 die_xy=2 die_t=0 other_t=0 layer_t=0 ic_pitch=2 ic_d+h=0 ic_levels=3
+    name: CoWoS-R 5.5x TV, KY process RDL (L/S 1.4/1.4 um, PM via CD 3 um), 4 SoC + 12 HBM
+  - tv_id: ectc32696.2021.00125-a
+    score: 5.5
+    tv_kind: package
+    has: outline=1 die_xy=1 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=3
+    name: Heterogeneous integration package (1 SOC + 2 HBM2 on organic interposer)
+  - tv_id: ectc32696.2021.00125-b
+    score: 5.5
+    tv_kind: package
+    has: outline=1 die_xy=1 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=3
+    name: Chiplet integration package (2 SOCs on organic interposer)
+  - tv_id: ectc51687.2025.00026-a
+    score: 5.5
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=2 ic_d+h=0 ic_levels=3
+    name: 'CoWoS-R 5.5x TV (POR): 4 SoC + 12 HBM4 on 9L RDL interposer, 97.3x95 mm substrat'
+  simulation_tvs_top:
+  - ectc51687.2025.00026-f
+  - ectc51687.2025.00131-b
+  - ectc51529.2024.00049-e
+  peer_family: organic_interposer_peers
+  sources:
+  - db:ectc32696.2021.00125 p.2 Sec. II.A, Fig. 2, Table 2 - organic interposer with 4 RDLs, 32x35 mm, 1 SoC + 2 HBM2, 55x55 mm 5-2-5 substrate,
+    40 um microbump, uBump and C4 underfills, molding
+  - db:ectc51529.2024.00049 p.2 Sec. III, Fig. 2 - 9L RDL interposer 66x68 mm (5.5x reticle), 4 SoC + 12 HBM, 97.3x95 mm 8-2-8 substrate, 35 um
+    uBump, 145 um C4, 248 land-side IPDs, SUS430 ring
+  - db:ectc51906.2022.00008 p.2 Table I; p.4 Sec. III.A - TSV-less organic interposer, 2/2 um RDL, 20 land-side IPDs, 150 um C4
+  - db:ectc51687.2025.00085 p.1 Fig. 1; p.2 Table 1 - lid + graphite-film TIM1 thermal configuration
+  - url:https://3dfabric.tsmc.com/english/dedicatedFoundry/technology/cowos.htm - RDL interposer = polymer and Cu traces, min 4 um pitch (2 um
+    L/S) (primary, via search snippet; fetch 403)
+- id: cowos_l
+  name: CoWoS-L
+  company: TSMC
+  package_class: si_bridge_fanout
+  include: true
+  priority: 1
+  include_reason: Key bridge-in-interposer architecture; contrasts with EMIB (bridge in substrate).
+  summary: 'Chip-last 2.5D on a reconstituted interposer: Si LSI bridge chips (with TSV) and through-insulator vias embedded in mold, RDL on both
+    faces; dies microbumped on top, C4 to organic substrate; lid or ring.'
+  technology_name_aliases:
+  - CoWoS-L
+  - CoWoS-L_6X; SC-RDL
+  - LSI-1
+  - LSI-2
+  match_rule: tn=CoWoS-L|LSI-
+  db_papers: 2
+  db_physical_tvs: 7
+  db_simulation_tvs: 0
+  papers:
+  - ectc51909.2023.00091
+  - ectc51909.2023.00174
+  representative_tvs:
+  - tv_id: ectc51909.2023.00091-a
+    score: 8.7
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=1 layer_t=3 ic_pitch=3 ic_d+h=0 ic_levels=4
+    name: TV0_1.6x (TV_1.6x) CoWoS-L_6x mechanical TV with lid
+  - tv_id: ectc51909.2023.00091-b
+    score: 7.8
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=2 ic_pitch=3 ic_d+h=0 ic_levels=4
+    name: TV0_4.8x (TV_4.8x) CoWoS-L_6x mechanical TV with stiffener ring
+  - tv_id: ectc51909.2023.00174-a
+    score: 4.0
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=5
+    name: CoWoS-L test vehicle, 3 SoC/chiplet + 8 HBM on reconstituted interposer
+  - tv_id: ectc51909.2023.00174-b
+    score: 2.0
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=0
+    name: CoWoS-L ring-type package
+  - tv_id: ectc51909.2023.00174-c
+    score: 2.0
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=0
+    name: CoWoS-L lid-type package with film TIM
+  - tv_id: ectc51909.2023.00174-d
+    score: 0.4
+    tv_kind: wafer_level
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=1 ic_pitch=0 ic_d+h=0 ic_levels=0
+    name: LSI-1 die (dual damascene Cu/USG metal scheme) test structures
+  peer_family: bridge_fanout_other
+  sources:
+  - db:ectc51909.2023.00174 p.2 Sec. II.A-B, Fig. 2, Fig. 4 - top dies, reconstituted interposer (RI), substrate; LSI dies and TIV in molding
+    compound; one RDL on each RI face; chip-last; ring or lid with film TIM
+  - db:ectc51909.2023.00174 p.3 Sec. II.C - LSI has TSV; LSI-1 dual-damascene Cu/USG 0.8/0.8 um; LSI-2 SAP Cu RDL 2/2 um in PI
+  - 'db:ectc51909.2023.00091 p.2 Sec. II; p.3 Table 1, Fig. 6 - CoWoS-L_6x SC-RDL TV: 6 LSI, TIV pitch 100 / dia 50 um, uBGA 500 um pitch with
+    embedded IPD, 3-2-3 substrate 1.4 mm core, 2 mm lid, 91x91 mm'
+  - url:https://3dfabric.tsmc.com/english/dedicatedFoundry/technology/cowos.htm - CoWoS-L recommended above 3.3X reticle (primary, via search
+    snippet; fetch 403)
+- id: info_os
+  name: InFO_oS
+  company: TSMC
+  package_class: fan_out_wafer
+  include: true
+  priority: 2
+  include_reason: TSMC fan-out (no interposer, no microbump layer in the stated flow); 3 papers.
+  summary: 'Integrated fan-out on substrate: chiplets molded in a wafer, multi-layer RDL (2/2 and 5/5 um) built after molding, C4 (130 um pitch)
+    to an organic substrate; ring heat spreader or lid.'
+  technology_name_aliases:
+  - InFO_oS
+  match_rule: tn=InFO_oS
+  db_papers: 3
+  db_physical_tvs: 6
+  db_simulation_tvs: 3
+  papers:
+  - ectc32696.2021.00033
+  - ectc51909.2023.00108
+  - itherm45881.2020.9190542
+  representative_tvs:
+  - tv_id: ectc32696.2021.00033-a
+    score: 6.9
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=2 layer_t=1 ic_pitch=2 ic_d+h=0 ic_levels=3
+    name: InFO_oS 2.5x reticle mechanical daisy-chain TV, 2 logic + 8 IO chiplets, ring he
+  - tv_id: itherm45881.2020.9190542-a
+    score: 5.9
+    tv_kind: package
+    has: outline=1 die_xy=1 die_t=0 other_t=1 layer_t=1 ic_pitch=1 ic_d+h=0 ic_levels=2
+    name: InFO_oS thermal test vehicle (TTV), lid type
+  - tv_id: ectc32696.2021.00033-b
+    score: 5.0
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=2 ic_d+h=0 ic_levels=2
+    name: InFO_oS 2.5x TV floor plan 1 logic + 8 IO chiplets
+  - tv_id: ectc32696.2021.00033-c
+    score: 1.4
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=2 layer_t=1 ic_pitch=0 ic_d+h=0 ic_levels=0
+    name: TV-1 InFO_oS 1x reticle, 850 mm2, 3 RDL, 1+1 chiplets
+  - tv_id: ectc32696.2021.00033-d
+    score: 1.4
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=2 layer_t=1 ic_pitch=0 ic_d+h=0 ic_levels=0
+    name: TV-2 InFO_oS 1250 mm2, 3 RDL, 1+1 chiplets
+  - tv_id: ectc51909.2023.00108-d
+    score: 0.0
+    tv_kind: other
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=0
+    name: InFO_oS CPO reference (organic interposer)
+  simulation_tvs_top:
+  - itherm45881.2020.9190542-b
+  - ectc32696.2021.00033-e
+  - ectc32696.2021.00033-f
+  sources:
+  - db:ectc32696.2021.00033 p.2 Sec. II-III, Fig. 2-3 - interconnect formation after wafer molding; 5 RDL (4 at 2/2 um + 1 at 5/5 um); 51x42 mm
+    InFO on 110x110 mm substrate; 130 um C4
+  - 'db:itherm45881.2020.9190542 p.2 Table 1, Fig. 2 - InFO_oS lid type: 2 dies 21.78x16.25 mm, InFO 22.78x34.0 mm, 62.5x62.5 mm substrate, 3
+    RDL, TIM1 60-140 um'
+  - url:https://www.tsmc.com/english/dedicatedFoundry/technology/InFO - InFO_oS 2/2 um RDL, min 40 um SoC I/O pitch, min 130 um C4 Cu bump pitch,
+    >2X reticle on >65x65 mm substrates (primary)
+- id: soic
+  name: SoIC
+  company: TSMC
+  package_class: hybrid_bonded_3d
+  include: true
+  priority: 1
+  include_reason: TSMC front-end 3D stacking; 7 papers; needed to contrast with Foveros/Foveros Direct and X-Cube.
+  summary: Bumpless Cu hybrid-bond stacking of known-good dies (F2F or F2B) on a wafer, dielectric gap fill with through-dielectric vias, TSVs
+    in the lower die; the stack is then packaged like one SoC in CoWoS, InFO or flip chip.
+  technology_name_aliases:
+  - COUPE2.0; SoIC
+  - SoIC
+  - SoIC-CS
+  - SoIC; InFO_PoP
+  - SoIC; SoIC1
+  - SoIC; SoIC4
+  - SoIC_H
+  - SoIC_HBM
+  match_rule: tn=SoIC
+  db_papers: 7
+  db_physical_tvs: 13
+  db_simulation_tvs: 8
+  papers:
+  - ectc.2019.00095
+  - ectc51529.2024.00125
+  - ectc51687.2025.00055
+  - ectc51906.2022.00176
+  - ectc51909.2023.00008
+  - ectc51909.2023.00108
+  - vlsitechnologyandcir46769.2022.9830182
+  representative_tvs:
+  - tv_id: ectc51906.2022.00176-a
+    score: 3.5
+    tv_kind: die_stack
+    has: outline=0 die_xy=2 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=1
+    name: SoIC4 3 um bond pitch F2F chip-on-wafer test vehicle
+  - tv_id: vlsitechnologyandcir46769.2022.9830182-a
+    score: 2.0
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=2
+    name: 'SoIC_H architecture: logic chiplets and memory cubes SoIC-bonded F2F on Si inter'
+  - tv_id: ectc.2019.00095-a
+    score: 2.0
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=2
+    name: SoIC-embedded InFO_PoP (logic-on-logic SoIC)
+  - tv_id: ectc51529.2024.00125-a
+    score: 4.0
+    tv_kind: wafer_level
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=3 ic_d+h=0 ic_levels=2
+    name: F2F wafer-on-wafer SoIC TV with BPM CD/pitch 0.1/0.2, 0.15/0.3 and 0.2/0.4 um (K
+  - tv_id: ectc51687.2025.00055-c
+    score: 2.0
+    tv_kind: test_coupon
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=0
+    name: 'C-Layer thermal TV (CTV): Cu array in C-Layer, 27x27 mm specimens with 5 laminat'
+  - tv_id: ectc51906.2022.00176-b
+    score: 1.5
+    tv_kind: die_stack
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=1
+    name: SoIC1 9 um bond pitch reference
+  simulation_tvs_top:
+  - vlsitechnologyandcir46769.2022.9830182-c
+  - vlsitechnologyandcir46769.2022.9830182-e
+  - vlsitechnologyandcir46769.2022.9830182-i
+  shared_with:
+  - tv: ectc.2019.00095-a
+    family: info_pop
+    reason: 'SoIC chip embedded in InFO_PoP'
+  - tv: ectc51909.2023.00108-b
+    family: tsmc_coupe
+    reason: 'COUPE2.0 optical engine built with SoIC'
+  - tv: vlsitechnologyandcir46769.2022.9830182-i
+    family: hbm_stack
+    reason: '12-Hi SoIC_HBM model: an HBM cube stacked by SoIC bonding, so both an SoIC and an HBM stack'
+  sources:
+  - db:ectc.2019.00095 p.2 Sec. II-III, Fig. 2-4 - KGD-based F2F/F2B stacking; SoIC integrated into CoWoS, InFO or flip chip; profile lower than
+    microbump 3DIC
+  - db:ectc.2019.00095 p.4 Sec. VI, Fig. 12-13 - TSV and TDV (through dielectric via) in SoIC
+  - db:ectc51906.2022.00176 p.1 Abstract; p.3 Sec. III.A - SoIC1 9 um and SoIC4 3 um bond pitch, F2F chip-on-wafer, 6x6 mm top die on 16x16 mm
+    bottom die
+  - db:ectc51909.2023.00008 - sub-0.5 um bond pitch SoIC (wafer-level)
+  - 'db:vlsitechnologyandcir46769.2022.9830182 p.1 Sec. Technology and Architecture - SoIC_H: logic chiplets and memory cubes SoIC-bonded F2F
+    (3/9 um) on a Si interposer'
+  - url:https://semiwiki.com/semiconductor-manufacturers/tsmc/328139-tsmc-2023-north-america-technology-symposium-overview-part-3/ - SoIC-P (microbump)
+    vs SoIC-X (bumpless) naming and pitch ranges (secondary)
+  - url:https://at-web1.www.anandtech.com/show/21414/tsmcs-3d-stacked-soic-packaging-making-quick-progress-3um-pitch-in-2027 - SoIC-X pitch roadmap
+    9 um toward 3 um (secondary)
+- id: emib
+  name: EMIB
+  company: Intel
+  package_class: si_bridge_organic
+  include: true
+  priority: 1
+  include_reason: Reference bridge-in-substrate architecture; 6 papers; contrasts with CoWoS-L/FOCoS-Bridge.
+  summary: Small multi-layer Si bridge placed in a cavity of the organic build-up substrate, held by adhesive and covered by the last build-up
+    layers; dies straddle it with fine bumps over the bridge and coarse bumps elsewhere.
+  technology_name_aliases:
+  - EMIB
+  match_rule: tn=^EMIB$|^EMIB \(|^EMIB;
+  db_papers: 6
+  db_physical_tvs: 11
+  db_simulation_tvs: 1
+  papers:
+  - ectc.2016.201
+  - ectc51687.2025.00012
+  - ectc51687.2025.00051
+  - ectc51687.2025.00061
+  - ectc51846.2026.00134
+  - ectc51846.2026.00365
+  representative_tvs:
+  - tv_id: ectc.2016.201-a
+    score: 6.4
+    tv_kind: package
+    has: outline=0 die_xy=1 die_t=1 other_t=0 layer_t=1 ic_pitch=2 ic_d+h=0 ic_levels=4
+    name: EMIB architecture (generic package with embedded Si bridge)
+  - tv_id: ectc51687.2025.00051-b
+    score: 1.5
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=1
+    name: 'EMIB 45 um bump pitch technology example (die embedding, substrate fab, top die '
+  - tv_id: ectc51846.2026.00365-h
+    score: 2.0
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=0
+    name: EMIB package, >5X reticle die area, 18 dies incl. 12 HBM (Fig. 7)
+  - tv_id: ectc51687.2025.00061-a
+    score: 4.0
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=4
+    name: 'CHIPS prototype MCP: Stratix-10 FPGA + 2 data converters + 3 EIC-PIC stacks on o'
+  - tv_id: ectc51687.2025.00012-a
+    score: 1.5
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=3
+    name: MCP with XPU and 2 OIO chiplets on EMIB, two 24-ch FAUs attached last (V-groove,
+  - tv_id: ectc51846.2026.00134-a
+    score: 0.5
+    tv_kind: panel_level
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=1
+    name: 10-2-10 (24-layer) glass core substrate, Cu-filled TGVs, 2 embedded EMIB bridges
+  simulation_tvs_top:
+  - ectc.2016.201-d
+  shared_with:
+  - tv: ectc51687.2025.00012-a
+    family: cpo_module
+    reason: 'EMIB-based co-packaged optics package'
+  - tv: ectc51687.2025.00012-b
+    family: cpo_module
+    reason: 'EMIB-based co-packaged optics package'
+  - tv: ectc51687.2025.00012-c
+    family: cpo_module
+    reason: 'EMIB-based co-packaged optics package'
+  - tv: ectc51687.2025.00061-a
+    family: cpo_module
+    reason: 'EMIB-based co-packaged optics package'
+  - tv: ectc51846.2026.00134-a
+    family: glass_core_substrate
+    reason: 'EMIB bridge in a glass-core substrate'
+  sources:
+  - db:ectc.2016.201 p.6 Sec. III, Fig. 5 - cavity at final build-up layer, bridge held by adhesive, final build-up dielectric, fine vias over
+    bridge and coarse elsewhere, TCB chip attach + capillary underfill
+  - db:ectc.2016.201 p.5 Fig. 4(a), Table II - 55 um die-to-bridge vs 130 um die-to-substrate bump pitch; bridge M1-M4 2/2 um; bridge Si 75 um
+    (p.6 Sec. III(b))
+  - 'db:ectc51687.2025.00051 p.2-3 Sec. III.A, Fig. 3 - 45 um bump pitch EMIB flow: build-up to cavity layer, bridge placement, dielectric encapsulation
+    and vias, surface layer and FLI, assembly'
+  - url:https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2025-07/emib-product-brief.pdf - bridges in the substrate cavity
+    held with adhesives; added dielectric and metal build-up; tight microbump pitch only at the bridge; EMIB-M adds MIM capacitors (primary)
+  - url:https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2024-02/intel-tech-clearwater-wp.pdf - 2nd-gen EMIB bump pitch
+    55 -> 45 um (primary)
+- id: emib_t
+  name: EMIB-T
+  company: Intel
+  package_class: si_bridge_organic
+  include: true
+  priority: 1
+  include_reason: Named in the request; 2 dedicated Intel papers; shows TSV-through-bridge power delivery.
+  summary: 'EMIB with TSVs and MIM capacitors in the bridge: the bridge is solder-joined to cavity-floor pads, underfilled, then covered by build-up;
+    power reaches HBM from the package bottom through the bridge.'
+  technology_name_aliases:
+  - EMIB-T
+  - EMIB-T (TSV)
+  - EMIB25T
+  match_rule: tn=EMIB-T|EMIB25T
+  db_papers: 2
+  db_physical_tvs: 5
+  db_simulation_tvs: 1
+  papers:
+  - ectc51687.2025.00051
+  - ectc51846.2026.00051
+  representative_tvs:
+  - tv_id: ectc51846.2026.00051-b
+    score: 5.4
+    tv_kind: package
+    has: outline=0 die_xy=1 die_t=1 other_t=0 layer_t=1 ic_pitch=1 ic_d+h=0 ic_levels=4
+    name: 'EMIB25T TV: single 3x18 mm EMIB-T bridge connecting two 1x reticle top dies, 25 '
+  - tv_id: ectc51687.2025.00051-a
+    score: 4.5
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=3
+    name: 'EMIB-T package TV: 3 TSV bridge dies, 45 um D2D pitch, 77x56 mm, ~2x reticle Si'
+  - tv_id: ectc51846.2026.00051-a
+    score: 3.4
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=1 other_t=0 layer_t=1 ic_pitch=1 ic_d+h=0 ic_levels=2
+    name: '36 um FLI bump pitch EMIB-T TV: 2x reticle Si on EMIB package (mixed 110/55/36 u'
+  - tv_id: ectc51846.2026.00051-c
+    score: 2.0
+    tv_kind: sub_assembly
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=0
+    name: Quarter-panel 240x240 mm EMIB-T package substrate unit
+  - tv_id: ectc51687.2025.00051-c
+    score: 0.0
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=0
+    name: 14-Bridge EMIB-T Package TV (shown during TSV bridge placement)
+  simulation_tvs_top:
+  - ectc51846.2026.00051-d
+  sources:
+  - db:ectc51687.2025.00051 p.1 Abstract; p.2 Sec. II, Fig. 2 - direct power path from package bottom through TSV bridge dies to HBM
+  - db:ectc51687.2025.00051 p.3 Sec. III.B, Fig. 4 - cavity pad preparation, TSV bridge placement with solder joint formation, dielectric encapsulation
+    and via formation
+  - db:ectc51687.2025.00051 p.4 Sec. IV, Fig. 5 - TV 77x56 mm, 3 TSV bridges, 45 um D2D pitch, ~2x reticle Si
+  - db:ectc51687.2025.00051 p.4 Sec. III - underfill protection between TSV bridge backside and substrate cavity; direct vias to bridge pads
+  - db:ectc51846.2026.00051 p.4-5 Sec. B Power Delivery, Fig. 9 - TSV arrays plus high-density on-bridge MIM capacitors
+  - 'db:ectc51846.2026.00051 p.3 Sec. II.A.ii, Fig. 4 - EMIB25T: 3x18 mm bridge, 25 um FLI bump pitch, two 1x-reticle top dies (bridge
+    thickness not given for EMIB25T; "~50 um thick" is the general EMIB statement of p.1 Sec. I); 36 um TV with mixed 110/55/36 um regions
+    (p.2-3 Fig. 3)'
+  - url:https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2025-07/emib-product-brief.pdf - EMIB-T adds TSVs for vertical
+    power delivery to HBM (primary)
+- id: foveros
+  name: Foveros
+  company: Intel
+  package_class: microbump_3d
+  include: true
+  priority: 1
+  include_reason: Intel microbump 3D (active base die); contrasts with Foveros Direct (hybrid bond) and SoIC.
+  summary: 'Face-to-face 3D: top logic die microbumped (50 um, later 36 um) onto a base die with TSVs; base die C4-bumped to the package substrate.
+    Foveros-S variant uses a passive TSV Si interposer as base.'
+  technology_name_aliases:
+  - Foveros
+  match_rule: tn=Foveros; excl_papers=['ectc32696.2021.00166']
+  db_papers: 3
+  db_physical_tvs: 5
+  db_simulation_tvs: 0
+  papers:
+  - ectc51846.2026.00365
+  - iedm19573.2019.8993637
+  - vlsitechnologyandcir46783.2024.10631478
+  representative_tvs:
+  - tv_id: iedm19573.2019.8993637-a
+    score: 4.9
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=1 other_t=0 layer_t=1 ic_pitch=2 ic_d+h=0 ic_levels=3
+    name: Foveros F2F logic-on-logic stack on package
+  - tv_id: vlsitechnologyandcir46783.2024.10631478-a
+    score: 4.0
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=2 ic_d+h=0 ic_levels=4
+    name: 'Foveros 2.5D F2F SiP: CPU, GPU, SOC chiplets on passive TSV Si-interposer with H'
+  - tv_id: iedm19573.2019.8993637-b
+    score: 0.5
+    tv_kind: wafer_level
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=1
+    name: TSV Kelvin and comb test structures (12-inch wafer)
+  - tv_id: ectc51846.2026.00365-j
+    score: 0.0
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=0
+    name: Foveros 3D package, die approx. 32 x 62 mm, 2X reticle (Fig. 9(a,b))
+  - tv_id: ectc51846.2026.00365-k
+    score: 0.0
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=0
+    name: Foveros package with active base die, die approx. 51 x 65 mm, 4X reticle (Fig. 9
+  peer_family: microbump_d2w_peers
+  sources:
+  - db:iedm19573.2019.8993637 p.1 Sec. I-II, Fig. 1-3 - F2F top die on 22FFL base die with TSV-mid; 50 um microbump (Cu pillar + SnAg); TSV pitch
+    15-16 um, dia 9 um; base die to package via package-side bumps
+  - 'db:vlsitechnologyandcir46783.2024.10631478 p.1 Fabrication; p.2 Fig. 1, 3, 5 - 2.5D Foveros: CPU/GPU/SOC chiplets at 36 um microbump on passive
+    Si interposer with HDMIM, TSV dia 9 um / depth 75 um, C4 110 um pitch / 70 um dia'
+  - db:ectc51846.2026.00051 p.2 Sec. I - FOVEROS-S solder bump pitch 25 um in HVM
+  - url:https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2025-07/emib-product-brief.pdf - Foveros-S 2.5D and Foveros-R
+    2.5D in the lineup, separate from Foveros Direct 3D (primary)
+- id: foveros_direct
+  name: Foveros Direct
+  company: Intel
+  package_class: hybrid_bonded_3d
+  include: true
+  priority: 2
+  include_reason: Intel Cu-Cu hybrid bonding counterpart to SoIC; 5 Intel HB papers (link to the brand is partly inferred).
+  summary: Cu-Cu hybrid bonding of chiplets directly onto an active base tile (9 um pitch gen 1, 3 um gen 2), base tile with TSVs bumped to the
+    substrate; no microbump or underfill at the stack interface.
+  technology_name_aliases:
+  - Foveros
+  - MLV
+  - QMC
+  match_rule: papers=['ectc32696.2021.00166', 'ectc51529.2024.00017', 'ectc51529.2024.00128', 'ectc51687.2025.00009', 'iedm45625.2022.10019499']
+  db_papers: 5
+  db_physical_tvs: 8
+  db_simulation_tvs: 12
+  papers:
+  - ectc32696.2021.00166
+  - ectc51529.2024.00017
+  - ectc51529.2024.00128
+  - ectc51687.2025.00009
+  - iedm45625.2022.10019499
+  representative_tvs:
+  - tv_id: ectc32696.2021.00166-b
+    score: 1.5
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=1
+    name: Active hybrid bonding test chip (4 top dies + 1 base die)
+  - tv_id: ectc51529.2024.00017-a
+    score: 3.5
+    tv_kind: die_stack
+    has: outline=0 die_xy=1 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=3
+    name: 'C2W hybrid bonding daisy-chain TV: 6.2x7.7 mm top die F2F on half-reticle base w'
+  - tv_id: iedm45625.2022.10019499-b
+    score: 2.5
+    tv_kind: other
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=3
+    name: QMC two-chiplet-layer architecture (Fig. 2) and process flow (Fig. 11)
+  - tv_id: ectc51529.2024.00128-a
+    score: 3.5
+    tv_kind: wafer_level
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=3 ic_d+h=0 ic_levels=1
+    name: Sub-1 um pitch W2W hybrid bonding test chip (0.64, 0.48, 0.36 um pitch lattices,
+  - tv_id: ectc32696.2021.00166-a
+    score: 1.5
+    tv_kind: die_stack
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=1
+    name: Passive hybrid bonding assembly test chip (daisy chains)
+  - tv_id: iedm45625.2022.10019499-a
+    score: 1.5
+    tv_kind: die_stack
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=1
+    name: 3 um pitch scaled hybrid bonding layer build on Intel process
+  simulation_tvs_top:
+  - ectc32696.2021.00166-c
+  - ectc32696.2021.00166-d
+  - ectc32696.2021.00166-e
+  sources:
+  - 'url:https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2024-02/intel-tech-clearwater-wp.pdf - Foveros Direct 3D: direct
+    attach of chiplets to an active base tile; Cu bonding at 9 um pitch (gen 1), 3 um (gen 2) (primary; it does not state base-tile TSVs or
+    the absence of underfill: the TSV is from db:ectc51529.2024.00017 p.2 Sec. II.A)'
+  - 'db:ectc32696.2021.00166 p.5 Sec. IV.B, Fig. 9 - active HB test chip: 4 top dies on 1 base die, 9 um pitch, on package (TV tagged Foveros)'
+  - db:ectc51529.2024.00017 p.2 Sec. II.A, Fig. 1 - 3 um pitch C2W HB, 6.2x7.7 mm top die F2F on base wafer with TSV
+  - 'db:iedm45625.2022.10019499 p.2 Sec. IV.A; p.3 Fig. 2 - QMC: 3 um HB, oxide fill with TDVs around base chiplets, support Si on top'
+  - db:ectc51687.2025.00009 - MLV C2W hybrid bonding toward 1 um pitch
+- id: hbm_stack
+  name: HBM stack (MR-MUF / TC-NCF / hybrid bond)
+  company: SK hynix, Samsung
+  package_class: microbump_3d
+  include: true
+  priority: 1
+  include_reason: Every 2.5D family carries HBM; a stack template is reused inside cowos_*, emib_t, focos etc.; 6 papers.
+  summary: Base logic die plus 8-16 thinned DRAM core dies joined by TSV + microbump; gaps filled by molded underfill (MR-MUF) or non-conductive
+    film (TC-NCF), or bumpless Cu hybrid bonding; stack height 720 um.
+  technology_name_aliases:
+  - HBI
+  - HCB
+  - MR-MUF
+  - SoIC_HBM
+  - TC-NCF
+  match_rule: tn=MR-MUF|TC-NCF|^HBI|SoIC_HBM|bump_HBM; papers=['ectc51529.2024.00021', 'ectc51846.2026.00024', 'vlsitechnologyandcir65830.2026.11577576']
+  db_papers: 6
+  db_physical_tvs: 11
+  db_simulation_tvs: 5
+  papers:
+  - ectc51529.2024.00021
+  - ectc51846.2026.00024
+  - ectc51909.2023.00151
+  - ectc51909.2023.00179
+  - vlsitechnologyandcir46769.2022.9830182
+  - vlsitechnologyandcir65830.2026.11577576
+  representative_tvs:
+  - tv_id: ectc51909.2023.00151-a
+    score: 5.4
+    tv_kind: die_stack
+    has: outline=0 die_xy=3 die_t=0 other_t=0 layer_t=1 ic_pitch=0 ic_d+h=0 ic_levels=2
+    name: 'HBM3 8Hi stack: base logic chip + 7 core + 1 top memory chips, MR-MUF chip-to-wa'
+  - tv_id: ectc51909.2023.00179-a
+    score: 1.9
+    tv_kind: die_stack
+    has: outline=0 die_xy=0 die_t=1 other_t=0 layer_t=1 ic_pitch=0 ic_d+h=0 ic_levels=1
+    name: 8Hi HBM (HBM2E) real device, DRAM chips stacked C2W by Cu/oxide hybrid bonding (
+  - tv_id: ectc51909.2023.00179-b
+    score: 1.9
+    tv_kind: die_stack
+    has: outline=0 die_xy=0 die_t=1 other_t=0 layer_t=1 ic_pitch=0 ic_d+h=0 ic_levels=1
+    name: Conventional 8Hi HBM with micro bumps and molded underfill (MR-MUF), reference
+  - tv_id: vlsitechnologyandcir65830.2026.11577576-a
+    score: 1.5
+    tv_kind: die_stack
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=1
+    name: MTV4 (Mechanical Test Vehicle 4), 12-layer HBM4 stack
+  - tv_id: ectc51846.2026.00024-a
+    score: 1.5
+    tv_kind: die_stack
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=1
+    name: 'C2W Cu/dielectric hybrid bond, fine-grained ECP Cu, 3 um pads, post-bond anneal '
+  - tv_id: ectc51846.2026.00024-b
+    score: 1.5
+    tv_kind: wafer_level
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=1
+    name: W2W Cu/dielectric hybrid bonded 300 mm wafer pair, fine-grained ECP Cu, 3 um pad
+  simulation_tvs_top:
+  - vlsitechnologyandcir46769.2022.9830182-i
+  - vlsitechnologyandcir65830.2026.11577576-b
+  - vlsitechnologyandcir65830.2026.11577576-c
+  peer_family: microbump_d2w_peers
+  shared_with:
+  - tv: vlsitechnologyandcir46769.2022.9830182-i
+    family: soic
+    reason: '12-Hi SoIC_HBM model: an HBM cube stacked by SoIC bonding, so both an SoIC and an HBM stack'
+  - tv: vlsitechnologyandcir65830.2026.11577576-d
+    family: fcbga_organic
+    reason: 'simulation model: HBM + logic on an advanced organic substrate in an HBM4 paper'
+  sources:
+  - 'db:ectc51909.2023.00151 p.1 Sec. I; p.2 Sec. II.B, Fig. 3-4 - HBM3 8Hi: base 10.8x9.8 mm, core 10.5x9.5 mm, package height 720 um, chip-to-chip
+    gap 15 um; MR-MUF flow (chip mount, mass reflow, wafer mold gap fill) vs TC-NCF'
+  - db:vlsitechnologyandcir65830.2026.11577576 p.1 - HBM4 12-layer, total height kept at 720 um, thinner die and gap
+  - db:ectc51909.2023.00179 p.2 Fig. 1; p.1 Abstract - 8Hi HBM2E by C2W Cu/oxide hybrid bonding, core die 58 um
+  - db:ectc51529.2024.00021 p.1 Abstract - Samsung 16H HBM by D2W hybrid Cu bonding
+- id: samsung_mios
+  name: Samsung MIoS (I-Cube S class)
+  company: Samsung
+  package_class: si_interposer_2p5d
+  include: true
+  priority: 2
+  include_reason: Samsung Si-interposer 2.5D with the most complete geometry in the DB (package, die, interposer, bump heights); brand mapping
+    to I-Cube S unverified.
+  summary: 'Molded interposer on substrate: ASIC and HBM microbumped on a Si TSV interposer, encapsulated in EMC to form a molded interposer module,
+    Cu-pillar bumped to an organic substrate with ring-frame stiffener.'
+  technology_name_aliases:
+  - MIoS
+  match_rule: tn=MIoS; papers=['ectc51909.2023.00154']
+  db_papers: 3
+  db_physical_tvs: 3
+  db_simulation_tvs: 3
+  papers:
+  - ectc32696.2021.00315
+  - ectc51906.2022.00108
+  - ectc51909.2023.00154
+  representative_tvs:
+  - tv_id: ectc32696.2021.00315-a
+    score: 9.1
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=2 other_t=2 layer_t=4 ic_pitch=0 ic_d+h=0 ic_levels=3
+    name: 85x85 mm 2.5D MIoS test vehicle (2 ASIC + 8 HBM on Si interposer)
+  - tv_id: ectc51906.2022.00108-a
+    score: 3.4
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=1 layer_t=1 ic_pitch=0 ic_d+h=0 ic_levels=1
+    name: 85x85 mm 2.5D MIoS package with ring frame stiffener (2 logic + 8 HBM)
+  - tv_id: ectc51909.2023.00154-a
+    score: 9.9
+    tv_kind: package
+    has: outline=0 die_xy=3 die_t=0 other_t=1 layer_t=1 ic_pitch=4 ic_d+h=0 ic_levels=5
+    name: '3.5D TV: 4x-reticle molded Si interposer with 3D-ASIC (2-die Cu-Cu hybrid bonded'
+  simulation_tvs_top:
+  - ectc51906.2022.00108-b
+  - ectc32696.2021.00315-b
+  - ectc32696.2021.00315-c
+  peer_family: si_interposer_peers
+  sources:
+  - db:ectc32696.2021.00315 p.2 Sec. II.A, Fig. 2-3 - 85x85x3.082 mm, 2 ASIC + 8 HBM (685 um), Si interposer 51x55 mm 110 um, uBump layer 35 um,
+    Cu pillar + solder 70 um, EMC, ring frame 710 um
+  - 'db:ectc51909.2023.00154 p.2 Sec. II, Table 1 - 3.5D: 4x reticle molded Si interposer, Cu-Cu HB 3D-ASIC (4 um), 12 HBM3, 6-2-6 substrate'
+  - 'url:https://www.3dincites.com/?p=84689 - I-CubeS: Si interposer, 3x reticle, 8 HBM + 2 logic (secondary report of Samsung Foundry Forum)'
+  - url:https://iconnect007.com/index.php/article/127456/samsung-electronics-next-generation-25d-integration-solution-i-cube4-available/127459/?skin=ein
+    - I-Cube4 uses a mold-free structure and ~100 um Si interposer (press-release reprint)
+- id: samsung_x_cube
+  name: X-Cube
+  company: Samsung
+  package_class: microbump_3d
+  include: true
+  priority: 2
+  include_reason: Samsung 3D logic-memory stack; outline, die sizes and TSV/bump pitches reported.
+  summary: SRAM die stacked face-down on a thinned logic die with TSVs (microbump; a bumpless Cu hybrid-bond variant exists), mold around the
+    SRAM, logic die Cu-pillar bumped to the substrate.
+  technology_name_aliases:
+  - X-Cube
+  - X-Cube; SAINT-S
+  match_rule: tn=X-Cube; papers=['ectc51909.2023.00178']
+  db_papers: 2
+  db_physical_tvs: 5
+  db_simulation_tvs: 0
+  papers:
+  - ectc51909.2023.00178
+  - iwlpc52010.2020.9375855
+  representative_tvs:
+  - tv_id: iwlpc52010.2020.9375855-a
+    score: 10.0
+    tv_kind: package
+    has: outline=1 die_xy=2 die_t=0 other_t=0 layer_t=0 ic_pitch=3 ic_d+h=0 ic_levels=4
+    name: X-Cube package test vehicle (daisy chain, stacked SRAM dies on logic die)
+  - tv_id: iwlpc52010.2020.9375855-b
+    score: 10.0
+    tv_kind: package
+    has: outline=1 die_xy=2 die_t=0 other_t=0 layer_t=0 ic_pitch=3 ic_d+h=0 ic_levels=4
+    name: SAINT-S functional test vehicle (one SRAM die on 7nm logic die)
+  - tv_id: ectc51909.2023.00178-a
+    score: 3.5
+    tv_kind: die_stack
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=1
+    name: 'D2W HCB test vehicle chip: top die hybrid bonded on bottom (buffer) wafer, 2 um '
+  - tv_id: ectc51909.2023.00178-b
+    score: 2.0
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=2
+    name: 'Large top 3D IC package: D2W HCB chip, thinned, backside processed, on PCB subst'
+  - tv_id: ectc51909.2023.00178-c
+    score: 2.0
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=2
+    name: 'Small top 3D IC package: D2W HCB chip, thinned, backside processed, on PCB subst'
+  sources:
+  - db:iwlpc52010.2020.9375855 p.3 Sec. X-Cube Test Vehicles, Fig. 3 - 12x12x1.1 mm package, 9.5x9.5 mm logic with TSV (pitch 50, dia 4 um), 9x9
+    mm SRAM, microbump, mold, Cu pillar 125 um, BGA 400 um
+  - db:ectc51909.2023.00178 p.1-2 - Samsung D2W hybrid Cu bonding for 3D-IC (bumpless path)
+  - url:https://www.3dincites.com/?p=84689 - X-Cube dies connected by micro-bumps or bump-less Cu-to-Cu bonding (secondary)
+- id: samsung_i_cube_e
+  name: I-Cube E
+  company: Samsung
+  package_class: si_bridge_fanout
+  include: true
+  priority: 3
+  include_reason: Samsung bridge-in-mold interposer on panel; 1 paper, sparse geometry; keeps the vendor comparison complete.
+  summary: Panel-level RDL interposer with multiple Si bridges die-attached (DAF) and molded together with Cu posts, upper and lower RDL; logic
+    and 12 HBM on top, C4 to substrate.
+  technology_name_aliases:
+  - I-Cube E
+  match_rule: tn=I-Cube E
+  db_papers: 1
+  db_physical_tvs: 1
+  db_simulation_tvs: 0
+  papers:
+  - ectc51687.2025.00048
+  representative_tvs:
+  - tv_id: ectc51687.2025.00048-a
+    score: 4.0
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=5
+    name: 'I-Cube E 2.3D PLP ultra-large PKG: logic + 12 HBM on panel-level RDL interposer '
+  peer_family: bridge_fanout_other
+  sources:
+  - db:ectc51687.2025.00048 p.2 Sec. II.A, Fig. 2.1-2.3; p.2 Sec. III.A - 2.3D PLP interposer 95x105 mm (4.3x reticle), embedded multi Si bridge
+    with DAF, EMC with Cu posts, upper/lower RDL, 12 HBM, C4
+  - url:https://www.3dincites.com/?p=84689 - I-CubeE = embedded silicon bridge, plan up to 12 HBM (secondary)
+- id: ase_focos_bridge
+  name: FOCoS-Bridge
+  company: ASE
+  package_class: si_bridge_fanout
+  include: true
+  priority: 2
+  include_reason: Named in the request; 3 papers; OSAT bridge-in-fan-out counterpart to CoWoS-L.
+  summary: 'Fan-out chip module: Si bridges die-attached on a carrier among plated tall Cu pillars, molded and ground, 3-layer fan-out RDL on
+    top, ASIC/HBM microbumped and molded, C4 to FCBGA substrate.'
+  technology_name_aliases:
+  - FOCoS Bridge
+  - FOCoS-Bridge
+  - FOCoS-Bridge with TSV
+  match_rule: tn=FOCoS.?Bridge
+  db_papers: 3
+  db_physical_tvs: 4
+  db_simulation_tvs: 1
+  papers:
+  - ectc51529.2024.00151
+  - ectc51687.2025.00095
+  - ectc51687.2025.00158
+  representative_tvs:
+  - tv_id: ectc51529.2024.00151-a
+    score: 7.0
+    tv_kind: package
+    has: outline=1 die_xy=1 die_t=0 other_t=0 layer_t=0 ic_pitch=2 ic_d+h=0 ic_levels=5
+    name: 'TV-1 (non-BSM): FOCoS-Bridge, 2 ASIC + 8 HBM, 8 embedded Si bridges, 31x47 mm FO'
+  - tv_id: ectc51687.2025.00158-a
+    score: 5.0
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=4
+    name: 'FOCoS-Bridge with TSV TV: 2 FO modules (1 ASIC, 4 HBM3, 4 TSV bridges, 10 IPD ea'
+  - tv_id: ectc51529.2024.00151-b
+    score: 4.0
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=5
+    name: 'TV-2 (with BSM): FOCoS-Bridge, 2 SoC-1 + 8 SoC-2, 10 embedded Si bridges, 50x50 '
+  - tv_id: ectc51687.2025.00095-a
+    score: 2.0
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=5
+    name: 'TV-1: 3x reticle FOCoS Bridge fan-out chip module on 300 mm panel (10 SoC chiple'
+  simulation_tvs_top:
+  - ectc51687.2025.00158-b
+  peer_family: bridge_fanout_other
+  sources:
+  - 'db:ectc51529.2024.00151 p.2 Sec. II.A, Fig. 1 - flow: tall Cu pillars plated on carrier, Si bridge D/A, mold/grind, 3P3M FO-RDL, SoC flip-chip
+    + underfill + FO mold, C4 + optional BSM, attach to organic substrate, BGA'
+  - db:ectc51529.2024.00151 p.5 Sec. III.A, Fig. 10 - 2 ASIC + 8 HBM, 8 bridges 6.2x6.4 mm, 31x47 mm module on 70x78 mm, 55 um uBump, 150 um C4,
+    10/10 um RDL
+  - db:ectc51687.2025.00158 p.2 Sec. II.A-C, Fig. 1-3 - TSV bridge variant, 5/5 um RDL x3, 130 um C4, lid, 85x85 mm
+  - url:https://www.aseglobal.com/press-room/focos-bridge - 47x31 mm fan-out structures, each 1 ASIC + 4 HBM + 4 bridges, two per 70x78 mm
+    package; submicron L/S (primary; as fetched 2026-10-20 in the family audit, which found no bridge-placement statement on the page; the
+    placement is from db:ectc51529.2024.00151 p.2 Sec. II.A)
+  - url:https://www.aseglobal.com/press-room/ase-announces-focos-bridge-with-tsv/ - FOCoS-Bridge with TSV (primary)
+- id: amkor_s_connect
+  name: S-Connect
+  company: Amkor
+  package_class: si_bridge_fanout
+  include: true
+  priority: 2
+  include_reason: Named in the request; 1 paper with outline, die and bridge sizes; Amkor bridge-in-mold.
+  summary: 'Chip-last module: Si connect die and IPDs bonded face-up among tall Cu pillars on a carrier, first mold, RDL both sides, top dies
+    microbumped and second-molded, C4 to an organic substrate.'
+  technology_name_aliases:
+  - S-Connect
+  match_rule: tn=S-Connect
+  db_papers: 1
+  db_physical_tvs: 2
+  db_simulation_tvs: 1
+  papers:
+  - ectc51909.2023.00175
+  representative_tvs:
+  - tv_id: ectc51909.2023.00175-a
+    score: 11.4
+    tv_kind: package
+    has: outline=1 die_xy=3 die_t=1 other_t=0 layer_t=1 ic_pitch=3 ic_d+h=0 ic_levels=4
+    name: mTV1 S-Connect 1x reticle module
+  - tv_id: ectc51909.2023.00175-b
+    score: 9.0
+    tv_kind: package
+    has: outline=1 die_xy=4 die_t=0 other_t=0 layer_t=0 ic_pitch=2 ic_d+h=0 ic_levels=4
+    name: mTV2 S-Connect 3x reticle module
+  simulation_tvs_top:
+  - ectc51909.2023.00175-c
+  peer_family: bridge_fanout_other
+  sources:
+  - db:ectc51909.2023.00175 p.2 Sec. II.A-B, Fig. 1-2 - three parts (multi-die layer with uBump, molded tall pillars + thin connect die, C4 area);
+    face-up connect die and IPD with Cu stud; 1st mold, double-side RDL, uBump, 2nd mold, plated C4
+  - db:ectc51909.2023.00175 p.2 Table 1; p.4 Sec. IV.A, Fig. 6 - mTV1 67x67 mm, module 32.8x25.6 mm, ASIC 23x24, HBM2 8x12, connect die 7x6x0.07
+    mm, uBump 50/55 um, tall pillar 260 um pitch / 135 um height
+  - url:https://amkor.com/technology/s-connect/ - molded local S-Connect die (TSV optional), molded tall Cu pillars, 40-50 um pitch (primary)
+- id: ibm_dbhi
+  name: DBHi / DBrM
+  company: IBM
+  package_class: si_bridge_organic
+  include: true
+  priority: 2
+  include_reason: 4 papers, die/bridge sizes and pitches reported; a third bridge placement (bridge joined to dies first, under the dies, on/in
+    the laminate).
+  summary: Si bridge solder-joined (30-75 um pitch) to the underside of adjacent dies before substrate attach; dies land on the laminate with
+    tall Cu pillars (150 um) whose standoff clears the thin bridge, no cavity in surface-DBHi.
+  technology_name_aliases:
+  - DBHi
+  - DBHi (Direct Bonded Heterogeneous Integration)
+  - DBrM
+  - surface-DBHi
+  match_rule: tn=DBHi|DBrM
+  db_papers: 5
+  db_physical_tvs: 16
+  db_simulation_tvs: 8
+  papers:
+  - ectc51529.2024.00051
+  - ectc51687.2025.00049
+  - ectc51846.2026.00050
+  - ectc51906.2022.00106
+  - ectc51909.2023.00180
+  representative_tvs:
+  - tv_id: ectc51529.2024.00051-c
+    score: 9.0
+    tv_kind: package
+    has: outline=1 die_xy=2 die_t=1 other_t=0 layer_t=0 ic_pitch=3 ic_d+h=0 ic_levels=2
+    name: 'DBHi QCM: four 19x19 mm main chips tiled by four Si bridges (30 or 75 um-pitch j'
+  - tv_id: ectc51846.2026.00050-a
+    score: 7.9
+    tv_kind: package
+    has: outline=1 die_xy=1 die_t=1 other_t=1 layer_t=1 ic_pitch=2 ic_d+h=0 ic_levels=2
+    name: 'Dual-chip DBrM module: 2x 19x19 mm chips edge-glued, 3.35x2.5x0.06 mm Si bridge '
+  - tv_id: ectc51529.2024.00051-a
+    score: 6.8
+    tv_kind: package
+    has: outline=0 die_xy=2 die_t=1 other_t=0 layer_t=2 ic_pitch=2 ic_d+h=0 ic_levels=2
+    name: 'DBHi DCM: two 19x19 mm processor dies + 2.5x3.2x0.06 mm Si bridge (75 um-pitch u'
+  - tv_id: ectc51529.2024.00051-b
+    score: 6.8
+    tv_kind: package
+    has: outline=0 die_xy=2 die_t=1 other_t=0 layer_t=2 ic_pitch=2 ic_d+h=0 ic_levels=2
+    name: 'DBHi DCM: two 19x19 mm processor dies + 2.5x3.2x0.06 mm Si bridge (75 um-pitch u'
+  - tv_id: ectc51906.2022.00106-a
+    score: 6.4
+    tv_kind: package
+    has: outline=0 die_xy=2 die_t=1 other_t=0 layer_t=1 ic_pitch=2 ic_d+h=0 ic_levels=2
+    name: DBHi Si-bridge module, bridge uC4 encapsulated by jet-dispensed CUF
+  - tv_id: ectc51906.2022.00106-b
+    score: 6.4
+    tv_kind: package
+    has: outline=0 die_xy=2 die_t=1 other_t=0 layer_t=1 ic_pitch=2 ic_d+h=0 ic_levels=2
+    name: DBHi Si-bridge module, reference NCP/TCB bridge bonding
+  simulation_tvs_top:
+  - ectc51909.2023.00180-c
+  - ectc51909.2023.00180-d
+  - ectc51909.2023.00180-e
+  shared_with:
+  - tv: ectc51846.2026.00050-j
+    family: cpo_module
+    reason: 'PWG-integrated DBrM package concept (optics on a DBrM package)'
+  sources:
+  - db:ectc51909.2023.00180 p.1-2 Sec. I-II, Fig. 1-3 - initial DBHi required a machined laminate cavity; surface-DBHi uses a thin bridge (60
+    um) and Cu-pillar standoff, cavity-free; lid, TIM
+  - 'db:ectc51529.2024.00051 p.3 Sec. IV, Fig. 4 - QCM: four 19x19 mm chips, four 2.5x3.2x0.06 mm bridges, 30/75 um joints, 150 um Cu pillar (100
+    um high), 67.5x67.5 mm laminate'
+  - 'db:ectc51846.2026.00050 p.2 Sec. II.A; p.4 Fig. 12-13, Table 1 - DBrM: die-edge glued chips, 3.35x2.5x0.06 mm bridge, 30 um uBump, 150 um
+    Cu pillar, 68.5x68.5 mm laminate 2 mm'
+- id: glass_core_substrate
+  name: Glass core substrate
+  company: Intel / Absolics / others
+  package_class: glass_core_substrate
+  include: true
+  priority: 2
+  include_reason: Named in the request; 14 papers; the core layer and TGV are the visible difference from FCBGA.
+  summary: Build-up substrate whose core is glass with Cu-filled through-glass vias (TGV) instead of a glass-fiber laminate with PTH; build-up
+    layers on both sides, optional EMIB bridges in the top build-up.
+  technology_name_aliases:
+  - ABF Type-A
+  - CYCLOTENE DF-PID; DF6000
+  - EMIB
+  - InfinityBoard; AnyLayer ET
+  - LMCT
+  match_rule: cls_only=['glass_core_substrate']
+  db_papers: 14
+  db_physical_tvs: 45
+  db_simulation_tvs: 8
+  papers:
+  - ectc51529.2024.00092
+  - ectc51529.2024.00093
+  - ectc51687.2025.00063
+  - ectc51687.2025.00178
+  - ectc51687.2025.00233
+  - ectc51846.2026.00074
+  - ectc51846.2026.00110
+  - ectc51846.2026.00134
+  - ectc51846.2026.00140
+  - ectc51846.2026.00199
+  - ectc51846.2026.00389
+  - ectc51906.2022.00055
+  - ectc51909.2023.00298
+  - icep-iaac64884.2025.11003038
+  representative_tvs:
+  - tv_id: ectc51846.2026.00134-a
+    score: 0.5
+    tv_kind: panel_level
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=1
+    name: 10-2-10 (24-layer) glass core substrate, Cu-filled TGVs, 2 embedded EMIB bridges
+  - tv_id: ectc51687.2025.00178-i
+    score: 5.2
+    tv_kind: test_coupon
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=3 ic_pitch=1 ic_d+h=0 ic_levels=2
+    name: 'TGV prototype: 1.0 mm glass core 2-2-2 build-up substrate, 77.5x75.0 mm, TGV dai'
+  - tv_id: ectc51846.2026.00199-a
+    score: 8.5
+    tv_kind: panel_level
+    has: outline=1 die_xy=0 die_t=0 other_t=1 layer_t=15 ic_pitch=1 ic_d+h=0 ic_levels=2
+    name: 200x200 mm glass substrate (1 mm core), ABF GL102 2-metal-layer SAP build-up, 8x
+  - tv_id: ectc51687.2025.00233-b
+    score: 4.9
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=1 layer_t=1 ic_pitch=1 ic_d+h=0 ic_levels=2
+    name: Glass core test vehicle with DF-PID-filled TGV and double-side RDL
+  - tv_id: ectc51909.2023.00298-a
+    score: 4.6
+    tv_kind: panel_level
+    has: outline=0 die_xy=0 die_t=0 other_t=1 layer_t=9 ic_pitch=0 ic_d+h=0 ic_levels=1
+    name: 8ML double-side RDL test vehicle on glass panel
+  - tv_id: ectc51906.2022.00055-c
+    score: 4.3
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=1 layer_t=2 ic_pitch=0 ic_d+h=0 ic_levels=2
+    name: 'IVR module: TPS62601 buck regulator IC over embedded type 1 inductor, 2 MLCCs, 4'
+  simulation_tvs_top:
+  - ectc51687.2025.00178-d
+  - ectc51687.2025.00178-e
+  - ectc51687.2025.00178-f
+  shared_with:
+  - tv: ectc51846.2026.00134-a
+    family: emib
+    reason: 'EMIB bridge in a glass-core substrate'
+  sources:
+  - db:ectc51846.2026.00134 p.1 Abstract; p.3 Sec. III, Fig. 5; p.4 Fig. 8(a) - Intel 10-2-10 (24-layer) glass core substrate, Cu-filled TGVs,
+    2 EMIB bridges in top layers, 510x515 mm panel
+  - db:ectc51687.2025.00178 p.4 Table 1, Fig. 14 - Shinko 1.0 mm glass core, TGV dia 90 / pitch 175 um, 2-2-2 build-up, 77.5x75.0 mm
+  - db:ectc51846.2026.00199 p.4 Sec. III.A-B - Georgia Tech 200x200 mm, 1 mm Corning glass core, ABF 15 um, Cu 5 um, microvias 20-50 um
+  - 'db:ectc51529.2024.00092 - Absolics: laser-modified TGV etch in 200-400 um glass (coupons/panel only)'
+  - url:https://at-web1.www.anandtech.com/show/20058/intel-shows-off-glass-core-substrate-plans-deployment-late-decade - Intel glass substrate
+    announcement, TGV aspect ratio ~20:1 at 1 mm core, 75 um TGV in TVs (secondary)
+- id: fan_out_panel
+  name: Panel-level fan-out (FOPLP)
+  company: Deca/nepes, ASE, A*STAR IME, Samsung, others
+  package_class: fan_out_panel
+  include: true
+  priority: 2
+  include_reason: Named in the request; 21 papers; chip-first face-up (M-Series) and mold-first/RDL-first variants.
+  summary: Dies molded into a 600 mm-class reconstituted panel; RDL built on the die face (chip-first, Cu studs) or dies flipped onto an RDL-first
+    layer; solder balls or LGA directly to board, no substrate.
+  technology_name_aliases:
+  - 6-sided die protection
+  - FOPLP
+  - M-Series
+  - M-Series Gen 2
+  - M-Series; Adaptive Patterning
+  - M-series
+  - MDx
+  - RDL-1st FOPLP
+  - TM-420
+  - aWLP
+  match_rule: cls_only=['fan_out_panel']; excl=HPLT|Hybrid PLP|FOCoS
+  db_papers: 21
+  db_physical_tvs: 47
+  db_simulation_tvs: 6
+  papers:
+  - ectc.2019.00-29
+  - ectc32696.2021.00174
+  - ectc32862.2020.00185
+  - ectc51529.2024.00011
+  - ectc51529.2024.00321
+  - ectc51846.2026.00008
+  - ectc51846.2026.00012
+  - ectc51846.2026.00153
+  - ectc51906.2022.00136
+  - ectc51906.2022.00140
+  - ectc51909.2023.00094
+  - ectc51909.2023.00268
+  - eptc53413.2021.9663896
+  - eptc59621.2023.10457652
+  - eptc59621.2023.10457909
+  - estc60143.2024.10712129
+  - icep-iaac64884.2025.11002987
+  - icep58572.2023.10129684
+  - icep61562.2024.10535587
+  - icept59018.2023.10492317
+  - iwlpc52010.2020.9375887
+  representative_tvs:
+  - tv_id: ectc32862.2020.00185-a
+    score: 10.5
+    tv_kind: package
+    has: outline=1 die_xy=1 die_t=1 other_t=1 layer_t=5 ic_pitch=2 ic_d+h=0 ic_levels=2
+    name: Mold-First FO-PLP package on 600 x 600 mm reconstructed panel (granular EMC)
+  - tv_id: ectc32696.2021.00174-a
+    score: 6.6
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=4 ic_pitch=1 ic_d+h=0 ic_levels=2
+    name: 600 mm FOPLP single-die 6-sided die protection test vehicle (4.5x5.5 mm)
+  - tv_id: ectc.2019.00-29-a
+    score: 8.5
+    tv_kind: package
+    has: outline=1 die_xy=1 die_t=0 other_t=0 layer_t=10 ic_pitch=0 ic_d+h=0 ic_levels=3
+    name: RDL-First FOPLP (TV2)
+  - tv_id: ectc51529.2024.00011-a
+    score: 9.7
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=2 layer_t=8 ic_pitch=1 ic_d+h=0 ic_levels=3
+    name: 5x5x0.85 mm 40-lead RDL-based LGA (leadframe-free QFN), chip-first double-mold F
+  - tv_id: ectc51529.2024.00011-b
+    score: 9.7
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=2 layer_t=8 ic_pitch=1 ic_d+h=0 ic_levels=3
+    name: 5x5x0.85 mm 40-lead RDL-based LGA (leadframe-free QFN), chip-first double-mold F
+  - tv_id: ectc51906.2022.00136-a
+    score: 6.6
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=4 ic_pitch=1 ic_d+h=0 ic_levels=2
+    name: 4.5x5.5 mm chip-first FOPLP with 6-sided die protection, 1-layer RDL, 0.35 mm pi
+  extra_tvs:
+  - tv_id: ectc51909.2023.00266-a
+    note: outside alias rule; same topology
+    name: 9-die substrate-less chiplet fan-out package (SoC + 8 structural Si), 5-layer RD
+  - tv_id: ectc51909.2023.00053-a
+    note: outside alias rule; same topology
+    name: 'M-Series Gen 2 test vehicle: 2 processor chiplets + 4 HBM footprint dies, 18x14 '
+  simulation_tvs_top:
+  - eptc59621.2023.10457909-a
+  - iwlpc52010.2020.9375887-b
+  - ectc51529.2024.00321-g
+  sources:
+  - 'db:ectc32862.2020.00185 p.2 Sec. II, Table 1 - mold-first FO-PLP on 600x600 mm: 10x10x0.8 mm package, 7x7x0.7 mm die, PI 7 um, Cu RDL 5 um
+    10/10, 400 um ball pitch'
+  - 'db:ectc51909.2023.00266 p.2 Sec. II; p.3 Fig. 7, Table I - 6-sided die protection chiplet FO: Cu studs on wafer, face-up attach, mold over
+    face, grind to studs, 5 RDL 10/10 um x 5 um'
+  - db:ectc.2019.00-29 - RDL-first FOPLP
+  - 'url:https://resources.sw.siemens.com/en-US/white-paper-deca-adaptive-patterning-white-paper - M-Series: chips-first face-up, Cu studs, 20
+    um stud pitch with Adaptive Patterning (vendor white paper)'
+- id: cpo_module
+  name: Co-packaged optics module
+  company: IBM, Intel, A*STAR IME, TSMC, Celestial AI, others
+  package_class: cpo_module
+  include: true
+  priority: 2
+  include_reason: Named in the request; 9 papers; topology varies by vendor, so the template is a generic ASIC + optical-engine layout.
+  summary: Compute/switch die and optical engines (EIC + PIC) on one package substrate or interposer; PIC edge or grating couplers meet fiber
+    arrays or polymer waveguides at the package edge.
+  technology_name_aliases:
+  - BOE; COUPE-like; COI; iFAU
+  - COUPE
+  - CPO
+  - DBrM
+  - EMIB
+  - OMIB
+  - PIC-in-mold interposer
+  match_rule: cls_only=['cpo_module']
+  db_papers: 9
+  db_physical_tvs: 15
+  db_simulation_tvs: 3
+  papers:
+  - ectc51529.2024.00144
+  - ectc51687.2025.00012
+  - ectc51687.2025.00052
+  - ectc51687.2025.00061
+  - ectc51687.2025.00062
+  - ectc51687.2025.00284
+  - ectc51846.2026.00016
+  - ectc51846.2026.00050
+  - iedm50572.2025.11353491
+  representative_tvs:
+  - tv_id: ectc51687.2025.00012-a
+    score: 1.5
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=3
+    name: MCP with XPU and 2 OIO chiplets on EMIB, two 24-ch FAUs attached last (V-groove,
+  - tv_id: ectc51687.2025.00052-b
+    score: 6.0
+    tv_kind: package
+    has: outline=1 die_xy=1 die_t=0 other_t=0 layer_t=0 ic_pitch=2 ic_d+h=0 ic_levels=2
+    name: IBM OTV1 single-PIC CPO module, PIC to PWG first assembly
+  - tv_id: ectc51846.2026.00016-a
+    score: 6.6
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=4 ic_pitch=1 ic_d+h=0 ic_levels=4
+    name: 'PIC-in-mold CPO platform TV: 79x52 mm RDL-first molded interposer (FS 2L RDL, BS'
+  - tv_id: ectc51687.2025.00061-a
+    score: 4.0
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=4
+    name: 'CHIPS prototype MCP: Stratix-10 FPGA + 2 data converters + 3 EIC-PIC stacks on o'
+  - tv_id: ectc51687.2025.00052-c
+    score: 6.0
+    tv_kind: package
+    has: outline=1 die_xy=1 die_t=0 other_t=0 layer_t=0 ic_pitch=2 ic_d+h=0 ic_levels=2
+    name: IBM OTV1B single-PIC CPO module, PIC to PWG last assembly (substrate cut-out)
+  - tv_id: ectc51687.2025.00062-a
+    score: 1.5
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=3
+    name: 'OMIB SiP TV: 2x reticle RDL-first organic interposer with embedded OMIB PIC and '
+  simulation_tvs_top:
+  - ectc51529.2024.00144-a
+  - ectc51846.2026.00016-d
+  - iedm50572.2025.11353491-d
+  shared_with:
+  - tv: ectc51529.2024.00144-a
+    family: tsmc_coupe
+    reason: 'SoIC-based COUPE optical engine model (COUPE is a cpo_module variant)'
+  - tv: ectc51687.2025.00012-a
+    family: emib
+    reason: 'EMIB-based co-packaged optics package'
+  - tv: ectc51687.2025.00012-b
+    family: emib
+    reason: 'EMIB-based co-packaged optics package'
+  - tv: ectc51687.2025.00012-c
+    family: emib
+    reason: 'EMIB-based co-packaged optics package'
+  - tv: ectc51687.2025.00061-a
+    family: emib
+    reason: 'EMIB-based co-packaged optics package'
+  - tv: ectc51687.2025.00284-a
+    family: tsmc_coupe
+    reason: 'COUPE-like optical engine test module'
+  - tv: ectc51846.2026.00050-j
+    family: ibm_dbhi
+    reason: 'PWG-integrated DBrM package concept (optics on a DBrM package)'
+  sources:
+  - db:ectc51687.2025.00012 p.1-2 Sec. II-III, Fig. 1 - XPU + 2 OIO chiplets on EMIB substrate, two 24-ch FAUs attached last, heat spreader
+  - 'db:ectc51687.2025.00052 p.3-5 Sec. V, Fig. 3, 6, Table 2 - IBM: PIC flip-chip (C4 150 um) on 17x17 mm substrate, polymer waveguide to MT
+    ferrule, lid, BGA 500 um'
+  - 'db:ectc51846.2026.00016 p.2 Sec. III, Fig. 2 - IME PIC-in-mold RDL-first interposer 79x52 mm: PIC and Si bridge embedded in mold, FS 2L /
+    BS 4L RDL, TMV, FAU'
+  - 'db:ectc51529.2024.00144 p.2 Sec. II - TSMC COUPE: SoIC-bonded EIC on PIC'
+- id: hybrid_bond_d2w
+  name: Hybrid bonding, die-to-wafer (generic)
+  company: Adeia/Xperi, CEA-Leti, imec, Sony, others
+  package_class: hybrid_bonded_3d
+  include: true
+  priority: 2
+  include_reason: Generic unit-cell family; 9 papers with die sizes and thicknesses; multi-die stacks with TSV.
+  summary: Singulated known-good dies hybrid bonded face-down onto a host wafer (and onto each other) with Cu pads in oxide; thinned dies carry
+    TSVs; smaller top dies leave gaps filled later by dielectric or mold.
+  technology_name_aliases:
+  - CoWoW
+  - DBI Ultra
+  - IHB
+  match_rule: ic_level=['die_to_wafer_hybrid', 'die_to_die_hybrid']; excl_papers=['ectc32696.2021.00166', 'ectc51529.2024.00017', 'ectc51687.2025.00009',
+    'iedm45625.2022.10019499', 'ectc.2019.00095', 'ectc51906.2022.00176', 'ectc51687.2025.00055', 'ectc51909.2023.00154', 'ectc51529.2024.00021',
+    'ectc51846.2026.00024', 'ectc51909.2023.00179', 'vlsitechnologyandcir46769.2022.9830182', 'ectc51909.2023.00108', 'ectc51909.2023.00178']
+  db_papers: 8
+  db_physical_tvs: 16
+  db_simulation_tvs: 0
+  papers:
+  - ectc51529.2024.00106
+  - ectc51687.2025.00323
+  - ectc51846.2026.00218
+  - ectc51906.2022.00031
+  - ectc51909.2023.00023
+  - ectc51909.2023.00219
+  - tcpmt.2021.3104326
+  - tcpmt.2026.3650893
+  representative_tvs:
+  - tv_id: ectc51906.2022.00031-b
+    score: 11.9
+    tv_kind: die_stack
+    has: outline=0 die_xy=3 die_t=2 other_t=0 layer_t=6 ic_pitch=3 ic_d+h=0 ic_levels=3
+    name: 2-die stack (LTC), 8 x 12 mm DBI daisy-chain test die
+  - tv_id: ectc51906.2022.00031-c
+    score: 11.9
+    tv_kind: die_stack
+    has: outline=0 die_xy=3 die_t=2 other_t=0 layer_t=6 ic_pitch=3 ic_d+h=0 ic_levels=3
+    name: 5-die stack (LT4C), 8 x 12 mm DBI daisy-chain test die
+  - tv_id: ectc51906.2022.00031-d
+    score: 11.9
+    tv_kind: die_stack
+    has: outline=0 die_xy=3 die_t=2 other_t=0 layer_t=6 ic_pitch=3 ic_d+h=0 ic_levels=3
+    name: 8-die stack (LT7C), 8 x 12 mm DBI daisy-chain test die
+  - tv_id: ectc51846.2026.00218-a
+    score: 8.3
+    tv_kind: die_stack
+    has: outline=0 die_xy=1 die_t=1 other_t=1 layer_t=2 ic_pitch=4 ic_d+h=0 ic_levels=2
+    name: 'TV1: 6x6 mm Si top die D2W hybrid bonded on 300 mm Si bottom wafer, multi-pitch '
+  - tv_id: tcpmt.2021.3104326-c
+    score: 7.6
+    tv_kind: die_stack
+    has: outline=0 die_xy=1 die_t=1 other_t=0 layer_t=9 ic_pitch=1 ic_d+h=0 ic_levels=2
+    name: Cu/SiO2 hybrid bonded D2W daisy-chain assembly
+  - tv_id: ectc51909.2023.00023-a
+    score: 7.2
+    tv_kind: die_stack
+    has: outline=0 die_xy=1 die_t=1 other_t=0 layer_t=6 ic_pitch=1 ic_d+h=1 ic_levels=2
+    name: 3.5 um pad / 7 um pitch D2W hybrid bond daisy-chain test vehicle
+  shared_with:
+  - tv: ectc51687.2025.00323-a
+    family: hybrid_bond_w2w
+    reason: 'CoWoW stack: a CoW (die-to-wafer) hybrid bond on a WoW (wafer-to-wafer) bonded pair, both interfaces in one TV'
+  sources:
+  - db:ectc51906.2022.00031 p.2 Sec. II.A; p.3 Sec. II.B, Fig. 4 - DBI Ultra 2/5/8-die stacks, 8x12 mm, 50 um dies, 35 um pitch, TSV 5x50 um,
+    1 um RDL, 2 um DBI layer
+  - db:ectc51909.2023.00023 - DBI Ultra D2W at 7 um pitch, 3.5 um pad
+  - db:ectc51846.2026.00218 - Leti D2W down to 1 um pitch, 6x6 mm top die on 300 mm wafer
+- id: hybrid_bond_w2w
+  name: Hybrid bonding, wafer-to-wafer (generic)
+  company: Sony, imec, CEA-Leti, Applied Materials/EVG, Micron, SK hynix, others
+  package_class: hybrid_bonded_3d
+  include: true
+  priority: 2
+  include_reason: Generic unit-cell family; 15 papers; full-wafer face-to-face stacks at 0.3-6 um pitch.
+  summary: Two or more full wafers bonded face-to-face (and face-to-back after thinning) with Cu pads in SiO2/SiCN; dies have identical footprints,
+    no gap fill; nano/HD TSVs through the thinned tier.
+  technology_name_aliases:
+  - CoWoW
+  - Insepra SiCN
+  - WoWoW
+  - via-in-one TSV
+  match_rule: ic_level=['wafer_to_wafer_hybrid']; excl_papers=['ectc51529.2024.00128', 'ectc51846.2026.00024', 'ectc51529.2024.00125', 'ectc51909.2023.00008']
+  db_papers: 15
+  db_physical_tvs: 21
+  db_simulation_tvs: 0
+  papers:
+  - ectc51529.2024.00057
+  - ectc51529.2024.00218
+  - ectc51529.2024.00334
+  - ectc51529.2024.00396
+  - ectc51687.2025.00097
+  - ectc51687.2025.00323
+  - ectc51846.2026.00130
+  - ectc51846.2026.00183
+  - ectc51846.2026.00187
+  - ectc51906.2022.00057
+  - ectc51906.2022.00113
+  - ectc51909.2023.00190
+  - ectc51909.2023.00219
+  - iedm45741.2023.10413829
+  - vlsitechnologyandcir65830.2026.11577374
+  representative_tvs:
+  - tv_id: ectc51687.2025.00323-a
+    score: 6.9
+    tv_kind: die_stack
+    has: outline=0 die_xy=1 die_t=1 other_t=0 layer_t=1 ic_pitch=3 ic_d+h=0 ic_levels=3
+    name: 'CoWoW three-layer stack TV: top chip F2B CoW hybrid bonded on TSV middle wafer, '
+  - tv_id: ectc51529.2024.00057-a
+    score: 6.9
+    tv_kind: wafer_level
+    has: outline=0 die_xy=0 die_t=1 other_t=0 layer_t=1 ic_pitch=4 ic_d+h=0 ic_levels=3
+    name: 3-layer W2W Cu-Cu hybrid bonded TV (F2F tier2/tier3 + F2B tier1) with 1x10 um HD
+  - tv_id: ectc51529.2024.00218-a
+    score: 5.4
+    tv_kind: wafer_level
+    has: outline=0 die_xy=0 die_t=1 other_t=0 layer_t=1 ic_pitch=3 ic_d+h=0 ic_levels=2
+    name: 'WoWoW TV: top/middle/bottom wafers, 1 um pitch F2F and F2B Cu-Cu hybrid bonds, v'
+  - tv_id: iedm45741.2023.10413829-a
+    score: 5.0
+    tv_kind: wafer_level
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=8 ic_d+h=0 ic_levels=2
+    name: Cu/SiCN W2W hybrid bonding TV, hexagonal grid circular pads, 400-700 nm pitch, e
+  - tv_id: ectc51909.2023.00190-a
+    score: 4.5
+    tv_kind: wafer_level
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=8 ic_d+h=0 ic_levels=1
+    name: 'Six-level Cu/SiCN W2W hybrid bonding test vehicle (via-to-via, 0.5-1.2 um pitch '
+  - tv_id: ectc51846.2026.00187-a
+    score: 4.5
+    tv_kind: wafer_level
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=4 ic_d+h=0 ic_levels=1
+    name: W2W hybrid bonding six-layer daisy-chain TV, SiCN bonding layer, fine-grain (FG)
+  shared_with:
+  - tv: ectc51687.2025.00323-a
+    family: hybrid_bond_d2w
+    reason: 'CoWoW stack: a CoW (die-to-wafer) hybrid bond on a WoW (wafer-to-wafer) bonded pair, both interfaces in one TV'
+  sources:
+  - 'db:ectc51529.2024.00057 p.2 Sec. II.A-B, Fig. 1-3 - 3-layer W2W: F2F tier2/3 + F2B tier1, 4/6 um pitch, tier 2 Si 9 um with 1x10 um TSV'
+  - db:ectc51529.2024.00218 - Sony WoWoW, 1 um pitch F2F
+  - db:ectc51909.2023.00190 - 0.5 um pitch W2W with SiCN
+  - db:ectc51846.2026.00187 - 300 nm pitch W2W, SiCN
+- id: ucla_si_if
+  name: Si-IF (Silicon Interconnect Fabric)
+  company: UCLA CHIPS
+  package_class: wafer_scale
+  include: true
+  priority: 3
+  include_reason: 5 papers; wafer-scale substrate-less extreme; academic platform (lower priority).
+  summary: Bare dielets Cu-Cu thermocompression bonded (about 10 um pitch) directly onto a Si wafer carrying BEOL Cu wiring; no organic substrate;
+    edge or wire-bond I/O, TSV-less power delivery options.
+  technology_name_aliases:
+  - GaN-IF
+  - GaN-IF; 3D-IVR
+  - GaN/Si-IF
+  - Si-IF
+  - Si-IF; SuperCHIPS
+  - Si-IF; SuperCHIPS; SNR-10
+  match_rule: tn=Si-IF|GaN-IF|GaN/Si-IF
+  db_papers: 5
+  db_physical_tvs: 11
+  db_simulation_tvs: 2
+  papers:
+  - ectc51846.2026.00062
+  - ectc51906.2022.00303
+  - ectc51906.2022.00332
+  - ectc51909.2023.00274
+  - iedm45741.2023.10413759
+  representative_tvs:
+  - tv_id: ectc51846.2026.00062-c
+    score: 9.9
+    tv_kind: die_stack
+    has: outline=0 die_xy=2 die_t=2 other_t=1 layer_t=6 ic_pitch=2 ic_d+h=0 ic_levels=2
+    name: 'Electrical TV: pyramid Si-IF + 3x3 mm 3D die + 2x2 mm 2D die, F2B Cu-Cu TCB at 2'
+  - tv_id: ectc51846.2026.00062-a
+    score: 8.2
+    tv_kind: die_stack
+    has: outline=0 die_xy=2 die_t=2 other_t=0 layer_t=3 ic_pitch=2 ic_d+h=0 ic_levels=2
+    name: 'Mechanical TV: up to 3-tier F2B Cu-Cu TCB stacks of 5x5 and 10x10 mm dies (10 um'
+  - tv_id: iedm45741.2023.10413759-a
+    score: 4.9
+    tv_kind: wafer_level
+    has: outline=0 die_xy=1 die_t=0 other_t=0 layer_t=6 ic_pitch=1 ic_d+h=0 ic_levels=1
+    name: 2x2 mm Si dielets Cu-Cu bonded on 4-inch GaN-on-Si wafer (GaN/Si-IF), 3.6 mm dai
+  - tv_id: ectc51906.2022.00303-d
+    score: 4.6
+    tv_kind: test_coupon
+    has: outline=0 die_xy=1 die_t=1 other_t=1 layer_t=4 ic_pitch=0 ic_d+h=0 ic_levels=1
+    name: thin-dielet surrogate TPV structure
+  - tv_id: ectc51906.2022.00303-e
+    score: 4.2
+    tv_kind: test_coupon
+    has: outline=0 die_xy=1 die_t=1 other_t=0 layer_t=3 ic_pitch=0 ic_d+h=0 ic_levels=2
+    name: thick-dielet die-to-wafer TPV structure
+  - tv_id: ectc51906.2022.00303-c
+    score: 3.8
+    tv_kind: other
+    has: outline=0 die_xy=0 die_t=0 other_t=3 layer_t=2 ic_pitch=0 ic_d+h=0 ic_levels=3
+    name: envisioned wafer-scale TSV-less Si-IF assembly
+  simulation_tvs_top:
+  - ectc51906.2022.00303-a
+  - ectc51906.2022.00303-b
+  - ectc51909.2023.00274-d
+  sources:
+  - db:ectc51906.2022.00332 p.1 Abstract; p.2 Sec. II - GF22FDX dielet Cu-Cu TCB on Si-IF, 10 um (9.8 um) pitch, wire-bonded I/O
+  - db:ectc51906.2022.00303 - TSV-less power delivery for wafer-scale Si-IF
+  - db:ectc51846.2026.00062 - multi-tier F2B Cu-Cu TCB stacks on Si-IF
+- id: info_pop
+  name: InFO_PoP
+  company: TSMC
+  package_class: fan_out_wafer
+  include: false
+  priority: null
+  include_reason: 1 TV (SoIC-in-InFO_PoP) with no geometry; mobile PoP out of HPC scope for v1.
+  summary: 'Fan-out PoP: application processor in a molded fan-out layer with TIVs and RDL, DRAM package stacked on top; no organic substrate
+    or C4.'
+  technology_name_aliases:
+  - SoIC; InFO_PoP
+  match_rule: tn=InFO_PoP
+  db_papers: 1
+  db_physical_tvs: 1
+  db_simulation_tvs: 0
+  papers:
+  - ectc.2019.00095
+  representative_tvs:
+  - tv_id: ectc.2019.00095-a
+    score: 2.0
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=2
+    name: SoIC-embedded InFO_PoP (logic-on-logic SoIC)
+  shared_with:
+  - tv: ectc.2019.00095-a
+    family: soic
+    reason: 'SoIC chip embedded in InFO_PoP'
+  sources:
+  - 'url:https://www.tsmc.com/english/dedicatedFoundry/technology/InFO - InFO_PoP: high-density RDL and TIV, no organic substrate and C4 bump
+    (primary)'
+  - db:ectc.2019.00095 p.2 Sec. IV - SoIC chip integrated in InFO_PoP
+- id: emib_3p5d
+  name: EMIB 3.5D (Co-EMIB)
+  company: Intel
+  package_class: si_bridge_organic
+  include: false
+  priority: null
+  include_reason: Composite of EMIB + Foveros; DB TVs carry no geometry. Build later from the emib and foveros templates.
+  summary: Foveros 3D stacks (chiplets on base die) connected to each other and to HBM by EMIB bridges in the substrate; e.g. Ponte Vecchio.
+  technology_name_aliases:
+  - Co-EMIB
+  match_rule: tn=Co-EMIB
+  db_papers: 2
+  db_physical_tvs: 2
+  db_simulation_tvs: 0
+  papers:
+  - ectc51846.2026.00365
+  - tcpmt.2023.3312037
+  representative_tvs:
+  - tv_id: tcpmt.2023.3312037-a
+    score: 0.5
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=1
+    name: Ponte Vecchio (PVC) Xe-HPC GPU Co-EMIB package
+  - tv_id: ectc51846.2026.00365-b
+    score: 0.0
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=0
+    name: Co-EMIB package (Fig. 2(b))
+  sources:
+  - 'db:tcpmt.2023.3312037 p.1 Sec. I, Fig. 2; p.2 Sec. II - Ponte Vecchio Co-EMIB: thinned Foveros stacks with mold shelf, full-thickness HBM
+    and transceiver dies, EMIB in substrate, package underfill, solder TIM, heat spreader'
+  - url:https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2025-07/emib-product-brief.pdf - EMIB 3.5D = EMIB combined with
+    Foveros in one package (primary)
+- id: samsung_i_cube_r
+  name: I-Cube R / 2.3D RDL interposer
+  company: Samsung
+  package_class: organic_rdl_interposer
+  include: false
+  priority: null
+  include_reason: Topology identical to cowos_r (panel-level process is not visible in a 3D model); use as cowos_r peer data.
+  summary: Panel-level 6-layer RDL interposer (2/2 um) with 12 HBM and logic on top, C4 to substrate.
+  technology_name_aliases:
+  - 2.3D RDL interposer
+  - I-Cube R
+  match_rule: tn=I-Cube R|2.3D RDL
+  db_papers: 2
+  db_physical_tvs: 2
+  db_simulation_tvs: 0
+  papers:
+  - ectc51687.2025.00090
+  - eptc62800.2024.10909872
+  representative_tvs:
+  - tv_id: eptc62800.2024.10909872-a
+    score: 3.0
+    tv_kind: panel_level
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=2
+    name: 'Panel-level 2.3D 6-layer RDL interposer TV (4.3x reticle): 12 HBM, 2 logic, 2 ch'
+  - tv_id: ectc51687.2025.00090-a
+    score: 2.0
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=0 ic_levels=2
+    name: 4.3x reticle panel-level RDL interposer package, 6-layer 2/2 um RDL, 16 chips of
+  sources:
+  - db:eptc62800.2024.10909872 p.1 Sec. 2-1, Fig. 1; p.2 Sec. 2-2 - 51x68 mm 6-layer RDL interposer, PID, organic carrier
+- id: ase_focos_chip_last
+  name: FOCoS chip-last
+  company: ASE
+  package_class: organic_rdl_interposer
+  include: false
+  priority: null
+  include_reason: Topology equals an RDL interposer (cowos_r); keep as cowos_r peer data.
+  summary: Chip-last fan-out RDL interposer (3 RDL) with main die + chiplets microbumped, C4 to 7-2-7 substrate, ring heat sink.
+  technology_name_aliases:
+  - CL-FOCoS
+  - FOCoS Chip Last
+  match_rule: tn=CL-FOCoS|FOCoS Chip Last
+  db_papers: 2
+  db_physical_tvs: 2
+  db_simulation_tvs: 0
+  papers:
+  - ectc51687.2025.00095
+  - ectc51906.2022.00309
+  representative_tvs:
+  - tv_id: ectc51906.2022.00309-a
+    score: 10.4
+    tv_kind: package
+    has: outline=1 die_xy=2 die_t=0 other_t=1 layer_t=1 ic_pitch=4 ic_d+h=0 ic_levels=3
+    name: ASE chip-last FOCoS networking TV (1 main die + 8 chiplets)
+  - tv_id: ectc51687.2025.00095-b
+    score: 1.0
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=2
+    name: 'TV-2: FOCoS Chip Last fan-out package on 300 mm panel (SoC-1 + SoC-2, 3-layer RD'
+  sources:
+  - db:ectc51906.2022.00309 p.1 Sec. II.A; p.2 Table 1 - 34x42 mm interposer, 30 um, 3 RDL 2/2 um, 45-150 um microbumps, 130 um C4, 74x74 mm 7-2-7
+- id: amkor_s_swift
+  name: S-SWIFT
+  company: Amkor
+  package_class: organic_rdl_interposer
+  include: false
+  priority: null
+  include_reason: 1 TV without geometry; topology equals an RDL interposer (cowos_r).
+  summary: High-density fan-out module (4-layer embedded-trace RDL) carrying ASIC + HBM, Cu-pillar bumped to a laminate substrate, lid + TIM.
+  technology_name_aliases:
+  - S-SWIFT; HDFO; ETR
+  match_rule: tn=S-SWIFT
+  db_papers: 1
+  db_physical_tvs: 1
+  db_simulation_tvs: 0
+  papers:
+  - ectc51906.2022.00218
+  representative_tvs:
+  - tv_id: ectc51906.2022.00218-a
+    score: 2.0
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=4
+    name: S-SWIFT package with 4-layer ETR HDFO module, ASIC + HBMs on laminate substrate
+  sources:
+  - db:ectc51906.2022.00218 p.5 Sec. IV, Fig. 8-9
+  - url:https://amkor.com/blog/revolutionizing-ic-packaging-with-s-swift-technology/ - substrate-integrated fan-out (primary)
+- id: amkor_hplt
+  name: Hybrid PLP (HPLT)
+  company: Amkor
+  package_class: fan_out_panel
+  include: false
+  priority: null
+  include_reason: A 650x650 mm panel process platform; product topology equals RDL-first fan-out; covered by fan_out_panel.
+  summary: RDL-first (die-last) 6-metal-layer fan-out built on a 650x650 mm glass panel; flip-chip die, mold underfill.
+  technology_name_aliases:
+  - Hybrid PLP (HPLT)
+  match_rule: tn=HPLT|Hybrid PLP
+  db_papers: 1
+  db_physical_tvs: 2
+  db_simulation_tvs: 0
+  papers:
+  - ectc51906.2022.00135
+  representative_tvs:
+  - tv_id: ectc51906.2022.00135-a
+    score: 5.0
+    tv_kind: panel_level
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=11 ic_pitch=0 ic_d+h=0 ic_levels=2
+    name: Six-metal-layer RDL-first (die-last) fan-out TV built on 650x650 mm glass panel
+  - tv_id: ectc51906.2022.00135-c
+    score: 0.0
+    tv_kind: panel_level
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=0
+    name: 'Hybrid PLP platform: wafers or sub-panels assembled on 650x650 mm glass carrier '
+  sources:
+  - db:ectc51906.2022.00135 p.2 Sec. I; p.3 Sec. III, Table 1, Fig. 6 - HPLT on 650x650 mm, 5 um Cu/PI layers, 7 um UBM
+- id: tsmc_coupe
+  name: COUPE
+  company: TSMC
+  package_class: cpo_module
+  include: false
+  priority: null
+  include_reason: DB TVs are a circuit model and sub-assemblies with no geometry; represented as a variant note under cpo_module.
+  summary: 'Compact universal photonic engine: EIC hybrid-bonded (SoIC) on PIC, with optical coupling through the stack.'
+  technology_name_aliases:
+  - BOE; COUPE-like; COI; iFAU
+  - COUPE
+  - COUPE-like
+  - COUPE2.0; SoIC
+  match_rule: tn=COUPE
+  db_papers: 3
+  db_physical_tvs: 3
+  db_simulation_tvs: 1
+  papers:
+  - ectc51529.2024.00144
+  - ectc51687.2025.00284
+  - ectc51909.2023.00108
+  representative_tvs:
+  - tv_id: ectc51909.2023.00108-b
+    score: 1.0
+    tv_kind: sub_assembly
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=2
+    name: COUPE2.0 optical engine with vertical broad-band coupler
+  - tv_id: ectc51687.2025.00284-a
+    score: 0.0
+    tv_kind: sub_assembly
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=0
+    name: 'BOE test module: 40-fiber iFAU actively aligned to COI, iFAU-COI on COUPE-like o'
+  - tv_id: ectc51687.2025.00284-b
+    score: 0.0
+    tv_kind: wafer_level
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=0
+    name: 'COUPE-like wafer-level test structures: Rx advanced coupler to SiN WG and SiN/Si'
+  simulation_tvs_top:
+  - ectc51529.2024.00144-a
+  shared_with:
+  - tv: ectc51529.2024.00144-a
+    family: cpo_module
+    reason: 'SoIC-based COUPE optical engine model (COUPE is a cpo_module variant)'
+  - tv: ectc51687.2025.00284-a
+    family: cpo_module
+    reason: 'COUPE-like optical engine test module'
+  - tv: ectc51687.2025.00284-b
+    family: photonic_interposer
+    reason: 'COUPE-like wafer-level photonic coupler test structures'
+  - tv: ectc51909.2023.00108-b
+    family: soic
+    reason: 'COUPE2.0 optical engine built with SoIC'
+  sources:
+  - db:ectc51529.2024.00144 p.2 Sec. II-III
+  - db:ectc51909.2023.00108
+  - db:ectc51687.2025.00284
+- id: photonic_interposer
+  name: Photonic interposer
+  company: Lightmatter, Marvell, AIM, CEA-Leti, others
+  package_class: photonic_interposer
+  include: false
+  priority: null
+  include_reason: Mostly wafer-level TVs without package geometry; revisit after cpo_module.
+  summary: Si photonic wafer used as the 2.5D/3D interposer; electronic dies stacked on it.
+  technology_name_aliases:
+  - COUPE-like
+  - OMM; Photonic Fabric
+  - POPSTAR
+  - Passage M1000
+  - VCBEL
+  - active interposer
+  - iOIS; iOIS_CI; 3DFabric
+  match_rule: cls_only=['photonic_interposer']
+  db_papers: 11
+  db_physical_tvs: 16
+  db_simulation_tvs: 5
+  papers:
+  - ectc51529.2024.00023
+  - ectc51687.2025.00014
+  - ectc51687.2025.00284
+  - ectc51846.2026.00106
+  - ectc51846.2026.00176
+  - ectc51846.2026.00302
+  - ectc51846.2026.00346
+  - ectc51909.2023.00009
+  - ectc51909.2023.00048
+  - ectc51909.2023.00108
+  - ectc51909.2023.00230
+  representative_tvs:
+  - tv_id: ectc51909.2023.00009-a
+    score: 10.0
+    tv_kind: wafer_level
+    has: outline=0 die_xy=0 die_t=0 other_t=1 layer_t=26 ic_pitch=2 ic_d+h=2 ic_levels=5
+    name: POPSTAR SiPho interposer wafer (process integration)
+  - tv_id: ectc51909.2023.00230-a
+    score: 5.1
+    tv_kind: wafer_level
+    has: outline=0 die_xy=0 die_t=1 other_t=0 layer_t=9 ic_pitch=0 ic_d+h=0 ic_levels=1
+    name: 'TSV test reticle on post-processed CEA-Leti 200 mm SiPh wafer: GSG lines with 2/'
+  - tv_id: ectc51846.2026.00346-a
+    score: 3.5
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=2 ic_d+h=0 ic_levels=3
+    name: 'OMM TV: 1x-reticle PIC interposer with ASIC + 2 HBM test chips and through-mold '
+  - tv_id: ectc51909.2023.00048-a
+    score: 2.9
+    tv_kind: wafer_level
+    has: outline=0 die_xy=0 die_t=0 other_t=1 layer_t=1 ic_pitch=0 ic_d+h=0 ic_levels=5
+    name: '300 mm active Si photonic interposer: PIC wafer oxide-bonded to TSV interposer w'
+  - tv_id: ectc51846.2026.00176-a
+    score: 2.4
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=1 ic_pitch=0 ic_d+h=0 ic_levels=5
+    name: 'Passage M1000: 15 ASIC/SerDes chiplets CoW on multi-reticle TSV photonic interpo'
+  - tv_id: ectc51909.2023.00009-b
+    score: 1.0
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=2
+    name: POPSTAR ONoC system (design; in fabrication)
+  simulation_tvs_top:
+  - ectc51846.2026.00346-c
+  - ectc51529.2024.00023-c
+  - ectc51846.2026.00346-b
+  shared_with:
+  - tv: ectc51687.2025.00284-b
+    family: tsmc_coupe
+    reason: 'COUPE-like wafer-level photonic coupler test structures'
+  sources:
+  - db:ectc51846.2026.00176
+  - db:ectc51846.2026.00346
+  - db:ectc51909.2023.00009
+  - db:ectc51909.2023.00048
+- id: embedded_die
+  name: Embedded-die substrates
+  company: ASE SESUB, Murata iPaS, Samsung DASC, Georgia Tech glass
+  package_class: embedded_die_substrate
+  include: false
+  priority: null
+  include_reason: Power/RF modules, outside the HPC packaging comparison for v1.
+  summary: Dies or passives embedded inside the substrate core.
+  technology_name_aliases:
+  - Alumina Ribbon Ceramic (ARC)
+  - DASC
+  - GPE
+  - SESUB
+  - SSSC
+  - iPaS
+  match_rule: cls_only=['embedded_die_substrate', 'glass_embedded_die']
+  db_papers: 9
+  db_physical_tvs: 11
+  db_simulation_tvs: 4
+  papers:
+  - ectc51529.2024.00170
+  - ectc51687.2025.00028
+  - ectc51687.2025.00076
+  - ectc51687.2025.00378
+  - ectc51846.2026.00117
+  - ectc51846.2026.00123
+  - ectc51846.2026.00416
+  - ectc51906.2022.00180
+  - ectc51909.2023.00333
+  representative_tvs:
+  - tv_id: ectc51906.2022.00180-a
+    score: 13.8
+    tv_kind: package
+    has: outline=1 die_xy=1 die_t=2 other_t=2 layer_t=9 ic_pitch=2 ic_d+h=1 ic_levels=3
+    name: TV-1 (3D Glass Panel Embedded Package)
+  - tv_id: ectc51687.2025.00378-a
+    score: 10.2
+    tv_kind: test_coupon
+    has: outline=1 die_xy=1 die_t=1 other_t=1 layer_t=8 ic_pitch=2 ic_d+h=0 ic_levels=1
+    name: 100x100 mm 400 um glass core with dry-film dielectric build-up (15/30/30 um) and
+  - tv_id: ectc51846.2026.00416-a
+    score: 5.6
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=5 layer_t=9 ic_pitch=0 ic_d+h=0 ic_levels=1
+    name: Blind-cavity embedded dual N-channel MOSFET in 320 um boro-aluminosilicate glass
+  - tv_id: ectc51846.2026.00123-a
+    score: 5.3
+    tv_kind: test_coupon
+    has: outline=0 die_xy=0 die_t=0 other_t=2 layer_t=7 ic_pitch=1 ic_d+h=0 ic_levels=1
+    name: Glass-embedded multi-terminal DTC with dual Cu planes and stacked microvias (pla
+  - tv_id: ectc51529.2024.00170-e
+    score: 5.0
+    tv_kind: sub_assembly
+    has: outline=1 die_xy=0 die_t=0 other_t=1 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=3
+    name: iPaS substrate 10.0 x 25.0 x 0.85 mm with embedded 7.43 x 19.00 mm, 0.32 mF capa
+  - tv_id: ectc51687.2025.00076-a
+    score: 4.1
+    tv_kind: test_coupon
+    has: outline=0 die_xy=0 die_t=0 other_t=2 layer_t=4 ic_pitch=1 ic_d+h=0 ic_levels=1
+    name: 'Design 1: DTC embedded in 200 um glass, 30 um ABF, single-step microvias and hor'
+  simulation_tvs_top:
+  - ectc51687.2025.00076-b
+  - ectc51687.2025.00028-b
+  - ectc51687.2025.00028-c
+  sources:
+  - db:ectc51846.2026.00117
+  - db:ectc51529.2024.00170
+  - db:ectc51687.2025.00028
+  - db:ectc51906.2022.00180
+- id: glass_interposer
+  name: Glass interposer
+  company: various
+  package_class: glass_interposer
+  include: false
+  priority: null
+  include_reason: Mostly wafer-level TGV coupons; topology covered by glass_core_substrate for v1.
+  summary: Thin glass with TGV used as a 2.5D interposer.
+  technology_name_aliases:
+  - GPE
+  - SLE; LMCT
+  match_rule: cls_only=['glass_interposer']
+  db_papers: 8
+  db_physical_tvs: 11
+  db_simulation_tvs: 1
+  papers:
+  - ectc51846.2026.00019
+  - ectc51846.2026.00115
+  - ectc51846.2026.00208
+  - ectc51846.2026.00209
+  - ectc51906.2022.00180
+  - eptc59621.2023.10457918
+  - tcpmt.2025.3557232
+  - tcpmt.2026.3717381
+  representative_tvs:
+  - tv_id: ectc51906.2022.00180-b
+    score: 18.5
+    tv_kind: package
+    has: outline=1 die_xy=3 die_t=3 other_t=1 layer_t=11 ic_pitch=6 ic_d+h=0 ic_levels=4
+    name: TV-2 (Embedded Glass Interposer package)
+  - tv_id: eptc59621.2023.10457918-a
+    score: 8.9
+    tv_kind: wafer_level
+    has: outline=0 die_xy=2 die_t=2 other_t=1 layer_t=1 ic_pitch=3 ic_d+h=0 ic_levels=2
+    name: '6-inch 150 um glass wafer with TGV, two-sided metallization/passivation: 5 inter'
+  - tv_id: ectc51846.2026.00208-a
+    score: 6.2
+    tv_kind: wafer_level
+    has: outline=0 die_xy=0 die_t=0 other_t=1 layer_t=3 ic_pitch=4 ic_d+h=0 ic_levels=1
+    name: 1 mm glass wafer, 40x40 TGV arrays (10/30/50/100 um, 250 um pitch), EL-Ni seed +
+  - tv_id: tcpmt.2026.3717381-a
+    score: 6.0
+    tv_kind: wafer_level
+    has: outline=1 die_xy=0 die_t=0 other_t=2 layer_t=3 ic_pitch=0 ic_d+h=1 ic_levels=2
+    name: Stacked glass wafer 4x4 W-band antenna array (Glass1/Glass2, MOG1-4, TGV1/2, vac
+  - tv_id: ectc51846.2026.00209-a
+    score: 5.6
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=2 layer_t=4 ic_pitch=0 ic_d+h=0 ic_levels=2
+    name: 'Two-layer Bluetooth sensor circuit: printed borosilicate slide base with two sta'
+  - tv_id: ectc51846.2026.00209-b
+    score: 3.4
+    tv_kind: test_coupon
+    has: outline=1 die_xy=0 die_t=0 other_t=1 layer_t=1 ic_pitch=0 ic_d+h=0 ic_levels=1
+    name: 'Via resistance coupon: CL83A cross-pattern legs on both sides of 22x22x0.15 mm c'
+  simulation_tvs_top:
+  - ectc51846.2026.00019-b
+  sources:
+  - db:ectc51906.2022.00180
+  - db:eptc59621.2023.10457918
+- id: si_interposer_peers
+  name: Si-interposer 2.5D peers (JOINT2, Xilinx, IME, Resonac)
+  company: various
+  package_class: si_interposer_2p5d
+  include: false
+  priority: null
+  include_reason: Peer data set for cowos_s / samsung_mios templates; vendor-neutral Si-interposer TVs with the best geometry in the DB.
+  summary: Logic + HBM mock dies microbumped on a TSV Si interposer, Cu-pillar to a large build-up substrate.
+  technology_name_aliases:
+  - DLSSI
+  - bumpless COW
+  match_rule: cls_only=['si_interposer_2p5d']; excl=CoWoS|SoIC|MIoS|Si-IF|COUPE|Foveros|MR-MUF|3.5D|SuperCHIPS; excl_papers=['ectc32696.2021.00166',
+    'vlsitechnologyandcir65830.2026.11577576']
+  db_papers: 13
+  db_physical_tvs: 33
+  db_simulation_tvs: 7
+  papers:
+  - ectc.2011.5898527
+  - ectc51529.2024.00155
+  - ectc51529.2024.00322
+  - ectc51687.2025.00027
+  - ectc51846.2026.00227
+  - ectc51906.2022.00053
+  - ectc51909.2023.00151
+  - ectc51909.2023.00153
+  - ectc51909.2023.00155
+  - eptc59621.2023.10457670
+  - estc60143.2024.10712129
+  - iedm19573.2019.8993659
+  - tcpmt.2025.3538554
+  representative_tvs:
+  - tv_id: ectc51909.2023.00155-a
+    score: 20.8
+    tv_kind: package
+    has: outline=1 die_xy=4 die_t=2 other_t=6 layer_t=18 ic_pitch=4 ic_d+h=3 ic_levels=5
+    name: 'TV1: 50x50 mm Si interposer (Die A + 4 Die B, CUF + C-mold, filler dies) on 100x'
+  - tv_id: ectc51909.2023.00155-b
+    score: 20.8
+    tv_kind: package
+    has: outline=1 die_xy=4 die_t=2 other_t=6 layer_t=18 ic_pitch=4 ic_d+h=3 ic_levels=5
+    name: 'TV2: same as TV1 but on 100x100 mm Substrate-B (CCL core 0.7 ppm/C)'
+  - tv_id: estc60143.2024.10712129-g
+    score: 18.1
+    tv_kind: package
+    has: outline=1 die_xy=2 die_t=2 other_t=4 layer_t=7 ic_pitch=4 ic_d+h=3 ic_levels=3
+    name: 'Large 2.5D package on substrate-A: Die A + Die B + dummy dies on 50x50 mm Si int'
+  - tv_id: estc60143.2024.10712129-h
+    score: 18.1
+    tv_kind: package
+    has: outline=1 die_xy=2 die_t=2 other_t=4 layer_t=7 ic_pitch=4 ic_d+h=3 ic_levels=3
+    name: 'Large 2.5D package on substrate-B: Die A + Die B + dummy dies on 50x50 mm Si int'
+  - tv_id: ectc51687.2025.00027-a
+    score: 13.6
+    tv_kind: package
+    has: outline=1 die_xy=2 die_t=2 other_t=2 layer_t=4 ic_pitch=2 ic_d+h=2 ic_levels=3
+    name: 120x120 mm 2.5D package on Substrate A (CTE 11.97 ppm/C), 42x46 mm Si interposer
+  - tv_id: ectc51687.2025.00027-b
+    score: 13.6
+    tv_kind: package
+    has: outline=1 die_xy=2 die_t=2 other_t=2 layer_t=4 ic_pitch=2 ic_d+h=2 ic_levels=3
+    name: 120x120 mm 2.5D package on Substrate B (CTE 12.81 ppm/C), 42x46 mm Si interposer
+  simulation_tvs_top:
+  - ectc51909.2023.00155-d
+  - ectc.2011.5898527-b
+  - iedm19573.2019.8993659-d
+  sources:
+  - db:ectc51909.2023.00155 p.2 Tables 1-3
+  - db:estc60143.2024.10712129
+  - db:ectc51687.2025.00027
+  - db:ectc.2011.5898527
+- id: bridge_fanout_other
+  name: Bridge-in-mold peers (nepes, AOI PSB, FO-EB)
+  company: various
+  package_class: si_bridge_fanout
+  include: false
+  priority: null
+  include_reason: Peer data set for bridge-in-mold templates (cowos_l, ase_focos_bridge, amkor_s_connect, samsung_i_cube_e); not a separate illustration.
+  summary: Si bridges embedded in a molded fan-out interposer with vertical Cu pillars; variants from nepes, AOI Electronics (pillar-suspended
+    bridge) and an Intel-authored FO-EB package.
+  technology_name_aliases:
+  - Embedded Bridge Die Interposer
+  - FO-EB
+  - PSB
+  - Pillar-Suspended Bridge (PSB)
+  match_rule: tn=Embedded Bridge Die|PSB|Pillar-Suspended|FO-EB
+  db_papers: 4
+  db_physical_tvs: 6
+  db_simulation_tvs: 5
+  papers:
+  - ectc51529.2024.00013
+  - ectc51687.2025.00187
+  - ectc51846.2026.00035
+  - eptc67330.2025.11392593
+  representative_tvs:
+  - tv_id: ectc51529.2024.00013-a
+    score: 16.1
+    tv_kind: package
+    has: outline=1 die_xy=2 die_t=2 other_t=2 layer_t=4 ic_pitch=4 ic_d+h=2 ic_levels=2
+    name: PSB prototype module (Chiplet-TEG 1/2 + Bridge-TEG, MicroPillar, Tall Pillar, tw
+  - tv_id: eptc67330.2025.11392593-a
+    score: 8.8
+    tv_kind: package
+    has: outline=1 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=3 ic_d+h=3 ic_levels=3
+    name: 'FOWLP embedded bridge die interposer 49x49 mm: 3 NPU + 6 HBM over embedded Si br'
+  - tv_id: ectc51687.2025.00187-a
+    score: 4.9
+    tv_kind: package
+    has: outline=1 die_xy=2 die_t=0 other_t=1 layer_t=1 ic_pitch=0 ic_d+h=0 ic_levels=0
+    name: Lidded 75x75 mm FO-EB package (4 ASIC + 3 bridge, 50x32 mm fanout module), hybri
+  - tv_id: ectc51687.2025.00187-b
+    score: 4.9
+    tv_kind: package
+    has: outline=1 die_xy=2 die_t=0 other_t=1 layer_t=1 ic_pitch=0 ic_d+h=0 ic_levels=0
+    name: 'Lidded 75x75 mm FO-EB package, LM-only TIM1 (silicone matrix with liquid metal, '
+  - tv_id: ectc51846.2026.00035-d
+    score: 2.8
+    tv_kind: package
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=1 ic_d+h=1 ic_levels=2
+    name: 'PSB PoC module: Chiplet 1 + Chiplet 2 joined by bridge die via 25 um pitch Micro'
+  - tv_id: eptc67330.2025.11392593-b
+    score: 1.5
+    tv_kind: panel_level
+    has: outline=0 die_xy=0 die_t=0 other_t=0 layer_t=0 ic_pitch=0 ic_d+h=0 ic_levels=3
+    name: 600x600 mm panel-level embedded bridge interposer, singulated to 300x300 mm pane
+  simulation_tvs_top:
+  - ectc51687.2025.00187-c
+  - ectc51687.2025.00187-d
+  - ectc51846.2026.00035-a
+  sources:
+  - db:ectc51529.2024.00013
+  - db:eptc67330.2025.11392593
+  - db:ectc51687.2025.00187 p.2 Sec. II.A.1, Fig. 2
+  - db:ectc51846.2026.00035
+- id: microbump_d2w_peers
+  name: Micro-bump 3D peers (die-to-wafer / chip-to-chip TCB, generic)
+  company: various (imec, SPIL, Resonac, CEA, ASE, others)
+  package_class: microbump_3d
+  include: false
+  priority: null
+  include_reason: Peer data set for the foveros, samsung_x_cube and hbm_stack templates (micro-bump 3D joints, thin dies, TSVs) with their own
+    references; not a separate illustration (2026-10-20 family audit M7).
+  summary: Dies stacked face-to-face or face-to-back on solder micro-bumps (Cu/Ni/SnAg, Ni/Sn, In), mostly by TCB, with capillary, wafer-level
+    or NCF underfill; TSVs in the thinned lower die in some TVs.
+  technology_name_aliases: []
+  match_rule: cls_only=['microbump_3d']; excl=Foveros|X-Cube|HCB|MR-MUF|TC-NCF|HBI|SoIC|bump_HBM; excl_papers=['ectc32696.2021.00166', 'ectc51846.2026.00365', 'ectc51909.2023.00151', 'ectc51909.2023.00179', 'iedm19573.2019.8993637', 'iwlpc52010.2020.9375855', 'vlsitechnologyandcir65830.2026.11577576']
+  db_papers: 24
+  db_physical_tvs: 50
+  db_simulation_tvs: 3
+  papers:
+  - ectc51529.2024.00064
+  - ectc51529.2024.00094
+  - ectc51529.2024.00144
+  - ectc51529.2024.00153
+  - ectc51529.2024.00311
+  - ectc51687.2025.00141
+  - ectc51687.2025.00226
+  - ectc51846.2026.00204
+  - ectc51846.2026.00227
+  - ectc51906.2022.00038
+  - ectc51906.2022.00061
+  - ectc51906.2022.00179
+  - ectc51906.2022.00181
+  - ectc51909.2023.00252
+  - ectc51909.2023.00307
+  - estc60143.2024.10712070
+  - estc60143.2024.10712129
+  - icep55381.2022.9795565
+  - iedm19573.2019.8993659
+  - tcpmt.2021.3104326
+  - tcpmt.2024.3443855
+  - tcpmt.2025.3540665
+  - tcpmt.2025.3628798
+  - tcpmt.2026.3740312
+  tvs:
+  - ectc51529.2024.00064-a
+  - ectc51529.2024.00094-a
+  - ectc51529.2024.00094-b
+  - ectc51529.2024.00094-c
+  - ectc51529.2024.00153-a
+  - ectc51529.2024.00153-b
+  - ectc51529.2024.00311-a
+  - ectc51687.2025.00141-a
+  - ectc51687.2025.00226-c
+  - ectc51687.2025.00226-d
+  - ectc51687.2025.00226-e
+  - ectc51846.2026.00204-a
+  - ectc51846.2026.00204-b
+  - ectc51846.2026.00204-c
+  - ectc51846.2026.00227-b
+  - ectc51906.2022.00038-a
+  - ectc51906.2022.00038-b
+  - ectc51906.2022.00061-a
+  - ectc51906.2022.00179-a
+  - ectc51906.2022.00179-b
+  - ectc51906.2022.00179-c
+  - ectc51906.2022.00179-d
+  - ectc51906.2022.00179-e
+  - ectc51906.2022.00181-a
+  - ectc51909.2023.00252-a
+  - ectc51909.2023.00307-a
+  - ectc51909.2023.00307-b
+  - estc60143.2024.10712070-a
+  - estc60143.2024.10712070-b
+  - estc60143.2024.10712070-c
+  - estc60143.2024.10712129-a
+  - estc60143.2024.10712129-b
+  - estc60143.2024.10712129-c
+  - estc60143.2024.10712129-d
+  - icep55381.2022.9795565-a
+  - icep55381.2022.9795565-b
+  - icep55381.2022.9795565-c
+  - tcpmt.2021.3104326-a
+  - tcpmt.2021.3104326-b
+  - tcpmt.2024.3443855-a
+  - tcpmt.2025.3540665-a
+  - tcpmt.2025.3628798-a
+  - tcpmt.2025.3628798-b
+  - tcpmt.2025.3628798-c
+  - tcpmt.2025.3628798-d
+  - tcpmt.2026.3740312-a
+  - tcpmt.2026.3740312-b
+  - tcpmt.2026.3740312-c
+  - tcpmt.2026.3740312-d
+  - tcpmt.2026.3740312-e
+  sources:
+  - db:ectc51906.2022.00179 - imec D2W TCB micro-bump stacks (F2F, F2B, B2F)
+  - db:ectc51906.2022.00181 - SPIL 3DIC CoW TV, 50 um dies, 20 um pitch micro-bumps
+  - db:estc60143.2024.10712129 - Resonac die-on-wafer micro-bump TVs, 10-15 um pitch
+- id: organic_interposer_peers
+  name: Organic RDL-interposer peers (IBM, Resonac, others)
+  company: various
+  package_class: organic_rdl_interposer
+  include: false
+  priority: null
+  include_reason: Peer data set for the cowos_r template (organic RDL interposers outside the named CoWoS-R / I-Cube R / FOCoS chip-last / S-SWIFT
+    families), next to samsung_i_cube_r and ase_focos_chip_last; not a separate illustration (2026-10-20 family audit M7).
+  summary: Fine-line Cu/polymer RDL interposers and coupons (SAP or embedded-trace RDL, down to 1.5/1.5 um L/S); the IBM module carries FPGA,
+    HBM2 and AI dies on an organic interposer substrate.
+  technology_name_aliases:
+  - ETR
+  match_rule: cls_only=['organic_rdl_interposer']; excl=CoWoS|InFO|S-SWIFT|FOCoS|I-Cube|2.3D RDL
+  db_papers: 6
+  db_physical_tvs: 13
+  db_simulation_tvs: 1
+  papers:
+  - ectc51687.2025.00326
+  - ectc51846.2026.00016
+  - ectc51909.2023.00150
+  - eptc62800.2024.10909872
+  - estc60143.2024.10712129
+  - tcpmt.2025.3599484
+  tvs:
+  - ectc51687.2025.00326-a
+  - ectc51687.2025.00326-b
+  - ectc51687.2025.00326-c
+  - ectc51687.2025.00326-d
+  - ectc51846.2026.00016-b
+  - ectc51909.2023.00150-a
+  - ectc51909.2023.00150-b
+  - eptc62800.2024.10909872-b
+  - eptc62800.2024.10909872-c
+  - estc60143.2024.10712129-e
+  - tcpmt.2025.3599484-a
+  - tcpmt.2025.3599484-b
+  - tcpmt.2025.3599484-c
+  sources:
+  - db:ectc51909.2023.00150 p.2 Sec. II.A, Table I - IBM FPGA / HBM2 / AI chip module on an organic interposer substrate
+  - db:ectc51687.2025.00326 - Resonac panel-level 3-layer SAP RDL interposer, L/S 1.5/1.5 um

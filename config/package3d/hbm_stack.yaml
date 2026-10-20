@@ -1,0 +1,160 @@
+# HBM stack 3D template. Format: config/package3d/TEMPLATE_FORMAT.md. Generator: scripts/build_package3d.py.
+# Variant modeled: MR-MUF (best covered in our data). Backbone: ectc51909.2023.00151-a (HBM3 8Hi: base logic chip
+# 10.8 x 9.8 mm, 7 core + 1 thick top memory chip 10.5 x 9.5 mm, micro-bump joints, 15 um MUF gaps, 720 um tall).
+# Core-die thickness: 58 um, the equal-thickness case of the solder-bump vs HBI comparison in ectc51909.2023.00179 Fig. 1
+# (a comparison case, not a measured MR-MUF product value; template). TC-NCF and hybrid-bond variants are callouts only.
+# Base-die thickness is an analog; the top-die thickness follows from the 720 um height. The TSV / bump field is drawn
+# as a central band because the bump map is not reported. The core dies, their MUF gaps, micro-bumps and TSVs use the
+# vertical repeat (repeat nz / fill per), so the stack follows core_n.
+# family_match: the families.yaml rule (technology names plus the paper fallbacks ectc51529.2024.00021,
+# ectc51846.2026.00024, vlsitechnologyandcir65830.2026.11577576).
+id: hbm_stack
+name: HBM stack (MR-MUF)
+company: SK hynix, Samsung
+package_class: microbump_3d
+family_match: {families: true}
+backbone_tv: ectc51909.2023.00151-a
+summary: >-
+  HBM3 8-high MR-MUF stack: a {base_w_mm} x {base_d_mm} mm base logic die, {core_n} TSV core dies and a thick top
+  die, joined by micro-bumps; molded underfill fills the {gap_um} um gaps and wraps the stack; {total_h_um} um tall.
+
+params:
+  # ---- reported (backbone ectc51909.2023.00151-a unless noted)
+  base_w_mm: {ref: ectc51909.2023.00151-a-c1.x_mm}
+  base_d_mm: {ref: ectc51909.2023.00151-a-c1.y_mm}
+  core_w_mm: {ref: ectc51909.2023.00151-a-c2.x_mm}
+  core_d_mm: {ref: ectc51909.2023.00151-a-c2.y_mm}
+  top_w_mm: {ref: ectc51909.2023.00151-a-c3.x_mm}
+  top_d_mm: {ref: ectc51909.2023.00151-a-c3.y_mm}
+  core_n: {ref: ectc51909.2023.00151-a-c2.count}
+  gap_um: {ref: ectc51909.2023.00151-a-i1.height_um, note: "chip-to-chip gap height = joint height"}
+  gap_n: {ref: ectc51909.2023.00151-a-L03.repeat}
+  total_h_um: {ref: ectc51909.2023.00151-a.package_thickness_mm, note: "HBM3 8Hi package height 720 um"}
+  hb_pad_um: {ref: ectc51909.2023.00179-a-i1.diameter_um}
+  hcb_n: {ref: ectc51529.2024.00021-a-c1.count}
+  hbm4_n: {ref: vlsitechnologyandcir65830.2026.11577576-a-c1.count}
+  hbm4_h_um: {ref: vlsitechnologyandcir65830.2026.11577576-a.package_thickness_mm}
+  # ---- derived
+  mold_w_mm:
+    derived: "(base_w_mm - core_w_mm) / 2"
+    note: "MUF wall = (base - core) / 2; equal in x (10.8 - 10.5) and y (9.8 - 9.5), outer face flush with the base die"
+  band_w_mm: "core_w_mm"
+  # ---- template
+  core_h_um:
+    template: "r0"
+    refs: [ectc51909.2023.00179-b-c1.thickness_um]
+    note: "MR-MUF core-die thickness not reported; 58 um = the equal chip thickness assumed in the solder-bump vs HBI comparison (ectc51909.2023.00179 p.2 Fig. 1), not a product value"
+  base_h_um:
+    analog: iedm19573.2019.8993637-a-c2.thickness_um
+    note: "HBM base-die thickness not reported; analog = TSV-revealed logic base die (~75 um) of Intel Foveros"
+  top_h_um:
+    template: "total_h_um - base_h_um - core_n * core_h_um - gap_n * gap_um"
+    note: "thick top die (thickness not reported) = 720 um stack - base die - core dies - MUF gaps"
+  mold_h_um:
+    template: "total_h_um - base_h_um - gap_um"
+    note: "MUF wall from the first core die to the stack top (flush after mold grinding); first gap drawn as gap fill"
+  ub_pitch_um:
+    analog: vlsitechnologyandcir46769.2022.9830182-j-i1.pitch_um
+    note: "MR-MUF bump pitch not reported; analog = 36 um micro-bump pitch of a 12-Hi micro-bump HBM model (untagged TV)"
+  ub_d_um:
+    analog: ectc51909.2023.00155-a-i2.diameter_um
+    note: "bump diameter not reported; analog = 18 um Cu/SnAg bump on a mock-HBM die (35 um pitch, 2.5D TV)"
+  tsv_pitch_um: {template: "ub_pitch_um", note: "one TSV under each bump column assumed; TSV pitch not reported"}
+  tsv_d_um:
+    analog: ectc51906.2022.00031-b-i3.diameter_um
+    note: "core-die TSV size not reported (TSVs shown, ectc51909.2023.00151-a-i2); analog = 5 x 50 um TSV of a D2W die stack"
+    refs: [ectc51909.2023.00151-a-i2.ic_type]
+  band_d_mm: {template: 1.0, note: "TSV / bump field location and size not reported; drawn as a 1 mm central band"}
+  band_c_mm: {template: 0, note: "band centered on the die (layout not reported)"}
+  bot_pitch_um:
+    analog: ectc51909.2023.00155-a-i2.pitch_um
+    note: "base-die bump pitch to the interposer not reported; analog = mock-HBM die bump of a 2.5D TV (35 um)"
+  bot_d_um:
+    analog: ectc51909.2023.00155-a-i2.diameter_um
+    note: "base-die bump diameter not reported; analog = the same mock-HBM bump"
+  bot_h_um:
+    template: "r0 + r1"
+    refs: [ectc51909.2023.00155-a-i2.height_um, ectc51909.2023.00155-a-i2.cap_height_um]
+    note: "base-die bump height = Cu + SnAg cap of the mock-HBM analog bump"
+
+parts:
+  - {id: base, name: "Base logic die", kind: die, material: silicon, w_mm: base_w_mm, d_mm: base_d_mm,
+     h_um: base_h_um, base: true, explode_group: 0, note: "bonded as the base logic wafer (chip-to-wafer stacking)"}
+  - id: core
+    name: "Core DRAM die"
+    kind: hbm
+    material: silicon
+    w_mm: core_w_mm
+    d_mm: core_d_mm
+    h_um: core_h_um
+    on: base
+    standoff: ub
+    repeat: {nz: core_n, stack: true}
+    explode_group: 2
+    explode_step: 2
+  - {id: muf, name: "MUF gap", kind: underfill, material: mold_compound, material_label: "MUF (LMC C based)",
+     fill: {per: core, margin_mm: mold_w_mm}, explode_group: 1, explode_step: 2, xray_default: true,
+     note: "one gap under each core die; footprint clipped to the die below"}
+  - {id: muf_top, name: "MUF gap (top die)", kind: underfill, material: mold_compound, material_label: "MUF (LMC C based)",
+     fill: {above: core, parts: [top], margin_mm: mold_w_mm}, explode_group: 15, xray_default: true}
+  - {id: top, name: "Top DRAM die (thick)", kind: hbm, material: silicon, w_mm: top_w_mm, d_mm: top_d_mm,
+     h_um: top_h_um, on: core, standoff: ub_top, explode_group: 16, note: "no TSV drawn in the top die"}
+  - {id: mold, name: "MUF wall", kind: mold, material: mold_compound, material_label: "MUF (LMC C based)",
+     w_mm: base_w_mm, d_mm: base_d_mm, h_um: mold_h_um, shape: frame, frame_w_mm: mold_w_mm, on: base,
+     gap_um: gap_um, explode_group: 17, xray_default: true,
+     note: "wafer-level mold that fills the gaps also encapsulates the stack (MR-MUF flow, ectc51909.2023.00151); wall flush with the base-die edge is a layout derived from the die sizes, not a reported edge geometry"}
+
+arrays:
+  - id: ub
+    name: "Micro-bumps"
+    kind: microbump
+    per: core
+    lower: base
+    region: &band {x_mm: band_c_mm, y_mm: band_c_mm, w_mm: band_w_mm, d_mm: band_d_mm}
+    pitch_um: ub_pitch_um
+    diameter_um: ub_d_um
+    height_um: gap_um
+    note: "mass-reflow joints, flux dipped (ectc51909.2023.00151-a-i1); bump map not reported, central band drawn"
+  - {id: ub_top, name: "Micro-bumps (top die)", kind: microbump, upper: top, lower: core, region: *band,
+     pitch_um: ub_pitch_um, diameter_um: ub_d_um, height_um: gap_um}
+  - &tsv {id: tsv_base, name: "Base-die TSVs", kind: tsv, in: base, region: *band, pitch_um: tsv_pitch_um,
+          diameter_um: tsv_d_um, note: "TSV size and placement not reported; one TSV per bump in the central band"}
+  - {<<: *tsv, id: tsv, name: "Core-die TSVs", in: core}
+  - {id: bumps, name: "Base-die bumps", kind: microbump, under: base, region: *band, pitch_um: bot_pitch_um,
+     diameter_um: bot_d_um, height_um: bot_h_um,
+     note: "bumps to the interposer (2.5D SiP proxy, ectc51909.2023.00151-b); bump map not reported"}
+
+callouts:
+  - {target: base, text: "Base die {base_w_mm} x {base_d_mm} mm"}
+  - {target: core, text: "Core die {core_w_mm} x {core_d_mm} mm"}
+  - {target: core, text: "Core 58 um (Fig. 1 case)",
+     note: "58 um is the equal chip thickness assumed in the solder-bump vs HBI comparison of ectc51909.2023.00179 (p.2 Fig. 1), not a measured MR-MUF core-die thickness",
+     refs: [ectc51909.2023.00179-b-c1.thickness_um]}
+  - {target: top, text: "{core_n} core dies + thick top", refs: [ectc51909.2023.00151-a-c3.name]}
+  - {target: muf, text: "MUF gap {gap_um} um, x{gap_n}"}
+  - {target: mold, text: "Stack height {total_h_um} um"}
+  - {target: mold, text: "MR-MUF: reflow, then wafer mold", refs: [ectc51909.2023.00151-a-i1.bonding_method]}
+  - {target: mold, text: "MUF wall {mold_w_mm} mm (derived)",
+     note: "wall width = (base - core) / 2 = ({base_w_mm} - {core_w_mm}) / 2 mm, outer face flush with the base die: a layout derived from the reported die sizes, not a reported edge geometry"}
+  - {target: top, text: "HBM4: {hbm4_n} dies, {hbm4_h_um} um"}
+  - {target: ub, text: "TC-NCF: NCF film per joint", refs: [ectc51909.2023.00151-c-c2.name]}
+  - {target: ub, text: "HB variant: no bump, no MUF", refs: [ectc51909.2023.00179-a-L02.material]}
+  - {target: ub, text: "HB Cu pad {hb_pad_um} um"}
+  - {target: top, text: "{hcb_n}-high by hybrid Cu bonding"}
+
+insets:
+  - id: gap
+    label: "Core-die gap: bump, MUF, TSV"
+    box_mm: [-0.06, -0.06, 0.06, 0.06]
+    z: ["top:core_3", "bottom:core_5"]
+    view: front
+  - id: stack_edge
+    label: "Stack edge, MUF wall"
+    box_mm: ["base_w_mm / 2 - 0.4", -0.25, "base_w_mm / 2 + 0.05", 0.25]
+    z: ["bottom:base", "top:top"]
+    view: front
+  - id: column
+    label: "TSV column, full stack"
+    box_mm: [-0.25, -0.25, 0.25, 0.25]
+    z: ["bottom:bumps", "top:top"]
+    view: front

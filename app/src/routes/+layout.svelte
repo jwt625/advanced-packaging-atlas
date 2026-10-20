@@ -16,6 +16,7 @@
 		{ href: '/', label: 'Dashboard' },
 		{ href: '/table', label: 'Table' },
 		{ href: '/explore', label: 'Explore' },
+		{ href: '/3d', label: '3D' },
 		{ href: '/about', label: 'About' }
 	];
 
