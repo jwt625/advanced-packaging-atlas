@@ -1,0 +1,20 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+eptc67330.2025.11392593-a-c1,eptc67330.2025.11392593-a,asic,,,NPU,3,,,,,,,,,,,design_target,text,,p.2 Sec. II.A; p.2 Fig. 1(b),,Neural processing unit dies; flip-chip bonded.
+eptc67330.2025.11392593-a-c2,eptc67330.2025.11392593-a,hbm,,,HBM stack,6,,,,,,,,,,,design_target,text,,p.1 Abstract; p.2 Fig. 1(b),,HBM generation not stated.
+eptc67330.2025.11392593-a-c3,eptc67330.2025.11392593-a,bridge,,yes,"Si bridge die, NPU-to-HBM (73 um bump pitch)",6,,,,,,,,,silicon,,design_target,schematic,,p.2 Fig. 1(b); p.3 Sec. III.A,,Count from six 'Bridge die' labels in Fig. 1(b). Bridge size not given.
+eptc67330.2025.11392593-a-c4,eptc67330.2025.11392593-a,bridge,,yes,"Si bridge die, NPU-to-NPU (45 um UCIe bump pitch)",2,,,,,,,,,silicon,,design_target,schematic,,p.2 Fig. 1(b); p.3 Sec. III.A,,Count from two unlabeled shaded rectangles at NPU-NPU boundaries in Fig. 1(b); also seen in SAT Fig. 4.
+eptc67330.2025.11392593-a-c5,eptc67330.2025.11392593-a,interposer,,,fan-out embedded bridge die interposer,1,49,49,,,,,,,,,design_target,text,,p.2 Sec. II.A,,
+eptc67330.2025.11392593-a-c6,eptc67330.2025.11392593-a,die_attach_film,,,DAF (bridge die bonding),,,,,,,,,,,,stated,text,,p.3 Sec. IV.A,,Product not stated.
+eptc67330.2025.11392593-a-c7,eptc67330.2025.11392593-a,mold,,no,Mold 1 (interposer molding compound),,,,,,,,,,molding compound,,stated,mixed,,p.2 Sec. II.B; p.3 Fig. 2(d),,Product not stated.
+eptc67330.2025.11392593-a-c8,eptc67330.2025.11392593-a,mold,,,"molded underfill (MUF), EMC",,,,,,,,,,EMC,,stated,text,,p.4 Sec. IV.C,,Compression molding; product not stated.
+eptc67330.2025.11392593-a-c9,eptc67330.2025.11392593-a,substrate,,,package substrate,1,,,,,,,,,,,stated,mixed,,p.2 Sec. II.B; p.2 Fig. 1(a),,Size and layer count not stated.
+eptc67330.2025.11392593-b-c1,eptc67330.2025.11392593-b,logic_soc,,,SoC dies,10,,,,,,,,,,,design_target,text,,p.4 Sec. V.A; p.4 Fig. 7(b),,Per 300x300 mm panel.
+eptc67330.2025.11392593-b-c2,eptc67330.2025.11392593-b,bridge,,yes,Si bridge die,,,,,,,,,,silicon,,stated,text,,p.4 Sec. V.A,,
+eptc67330.2025.11392593-b-c3,eptc67330.2025.11392593-b,mold,,,MUF,,,,,,,,,,,,stated,text,,p.4 Sec. V.A,,
+ectc51909.2023.00048-a-c1,ectc51909.2023.00048-a,interposer,,,Si photonic (active) interposer,,,,100,,,,,AIM Photonics low-loss Si photonics process (modified base MPW),Si,,design_target,text,,p.1 Abstract; p.2 Sec. I; p.3 Sec. II.B,thickness_um:approx,Thinned to approximately 100 um to reveal TSVs.
+ectc51909.2023.00048-a-c2,ectc51909.2023.00048-a,pic,,yes,"Si photonics wafer layers (1 Si + 2 SiN waveguide levels, PDs, modulators, 2 Cu routing levels)",,,,,,,,,,,,stated,text,,p.3 Sec. II.B,,Oxide bonded to interposer wafer; SOI substrate removed.
+ectc51909.2023.00048-a-c3,ectc51909.2023.00048-a,eic,,,EIC (flip-chip on interposer top),,,,,,,,,,,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 2(c); p.3 Sec. II.B,,Example attach shown; die size not stated.
+ectc51909.2023.00048-a-c4,ectc51909.2023.00048-a,laser,,,III-V laser in interposer trench,,,,,,,,,,,,stated,text,,p.1 Abstract; p.3 Sec. II.C,,
+ectc51909.2023.00048-a-c5,ectc51909.2023.00048-a,fiber_array,,,edge-coupled fiber array,,,,,,,,,,,,stated,mixed,,p.1 Abstract; p.2 Fig. 2(b),,PDK interface; no attach results reported.
+ectc51909.2023.00048-a-c6,ectc51909.2023.00048-a,pcb,,,PCB (BGA attach),,,,,,,,,,,,stated,mixed,,p.3 Sec. II.B; p.2 Fig. 2(b),,
+ectc51909.2023.00048-b-c1,ectc51909.2023.00048-b,laser,,,DFB laser (III-V),1,,,,,,,,,,,stated,mixed,,p.5 Sec. III.C; p.6 Fig. 8(b),,

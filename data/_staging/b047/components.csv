@@ -1,0 +1,21 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+tcpmt.2021.3123384-a-c1,tcpmt.2021.3123384-a,other,,,SiC via-etch chip coupon,3,,,,,,,,,SiC,,stated,figure_image,,p.2 Fig. 2; p.3 Sec. II.A,,Three chips (80/120/40 um vias) on carrier in Fig. 2 photo; polytype not stated.
+tcpmt.2021.3123384-a-c2,tcpmt.2021.3123384-a,other,,,carrier wafer (Ti/Cu seed + electroplated Ni over entire surface),,,,,,,,,,Si wafer; Ti/Cu/Ni,,stated,text,,p.2 Sec. II.A,,200 mm carrier used for Ni plating; Ni protects carrier during etch.
+tcpmt.2021.3123384-b-c1,tcpmt.2021.3123384-b,other,,,SiC wafer piece (deep-etch sample),2,15,15,,,,,,,SiC,,design_target,text,count:figure_image,p.5 Sec. II.B; p.6 Fig. 8,,Fig. 8: two pieces with Ni mask on carrier.
+tcpmt.2021.3123384-b-c2,tcpmt.2021.3123384-b,other,,,carrier wafer fully electroplated with the mask material,,,,,,,,,,,,stated,text,,p.5 Sec. II.B,,
+tcpmt.2021.3123384-c-c1,tcpmt.2021.3123384-c,interposer,,,SiC interposer with TSiCV,,,,200,,,,,,SiC,,design_target,text,,p.1 Abstract; p.8 Sec. IV,,Thickness from 200 um interposer statements; liner PECVD.
+tcpmt.2021.3123384-d-c1,tcpmt.2021.3123384-d,interposer,,,SiC interposer with TSiCV (BCB liner),,,,200,,,,,,SiC,,design_target,text,,p.1 Abstract; p.7 Sec. III,,
+tcpmt.2021.3123384-e-c1,tcpmt.2021.3123384-e,interposer,,,"SiC interposer (Cu TSiCV, freestanding Cu lines)",,,,200,,,,,,SiC,,design_target,text,,p.8 Sec. IV; p.8 Fig. 16,,
+tcpmt.2021.3123384-e-c2,tcpmt.2021.3123384-e,dummy_die,yes,,"planar SiC chip, single metallization layer",2,,,100,,,,30,,SiC,,design_target,text,count:figure_image,p.7 Sec. IV; p.8 Sec. IV; p.8 Fig. 15; p.8 Fig. 16,gap_um:approx,"Chips thinned to 40 or 100 um; Fig. 16 shows the 100 um chip. gap_um = 'chip gap' as written, meaning unclear."
+tcpmt.2021.3123384-f-c1,tcpmt.2021.3123384-f,interposer,,,SiC interposer,,,,200,,,,,,SiC,,design_target,text,,p.8 Sec. IV; p.8 Fig. 17,,
+tcpmt.2021.3123384-f-c2,tcpmt.2021.3123384-f,other,,,simplified SiC MEMS die with deep etched SiC structures,,,,,,,,,,SiC,,stated,text,,p.8 Sec. IV; p.8 Fig. 17,,
+tcpmt.2021.3123384-g-c1,tcpmt.2021.3123384-g,interposer,,,SiC interposer with TSiCV,,,,,,,,,,SiC,,stated,text,,p.8 Sec. V; p.9 Fig. 19,,
+tcpmt.2021.3123384-g-c2,tcpmt.2021.3123384-g,other,,,"piezoresistive SiC pressure sensor die (membrane, center boss)",,,,,,,,,,4H-SiC with two epitaxial layers,Fraunhofer IZM,stated,text,,p.8 Sec. V; p.9 Fig. 18,,Developed in-house at Fraunhofer IZM; die size not stated.
+ectc51687.2025.00014-a-c1,ectc51687.2025.00014-a,pic,,,MZI optical switch PIC with deep-RIE trenches and edge couplers,1,,,,,,,,commercial MPW process,,,stated,text,,p.3 Sec. III; p.3 Fig. 5(a),,Size not stated (Fig. 5(a) 1000 um scale bar). Edge-coupler MFD 3 um.
+ectc51687.2025.00014-a-c2,ectc51687.2025.00014-a,lens,,,"VCBEL on PIC: free-form lens + aspherical convex mirror, 3D printed in PIC trench",,,,,,,,,,UV-curable resin (two-photon polymerization),,stated,text,,p.2 Sec. II.B; p.3 Sec. III; p.5 Sec. V.B; p.2 Fig. 3,,
+ectc51687.2025.00014-a-c3,ectc51687.2025.00014-a,substrate,,,"glass substrate with Au-plated wiring, fs-laser-written waveguides and laser-assisted-etched trenches",1,,,,,,,,,glass (type not stated; n = 1.47),,stated,text,,p.3 Sec. III; p.4 Sec. IV.B; p.3 Fig. 5(a),,Waveguide MFD 9 um.
+ectc51687.2025.00014-a-c4,ectc51687.2025.00014-a,lens,,,"VCBEL on glass substrate, 3D printed in glass trench",,,,,,,,,,UV-curable resin (two-photon polymerization),,stated,text,,p.3 Sec. III; p.3 Fig. 5(b),,
+ectc51687.2025.00014-a-c5,ectc51687.2025.00014-a,fiber_array,,,fiber arrays attached to both glass substrate edges,2,,,,,,,,,,,stated,text,,p.3 Sec. III; p.3 Fig. 4,,
+ectc51687.2025.00014-a-c6,ectc51687.2025.00014-a,underfill,,,sidefill protecting the flip-chip PIC,,,,,,,,,,,,stated,text,,p.5 Sec. V.B,,Prevents resin infiltration into PIC-substrate gap; product not stated.
+ectc51687.2025.00014-a-c7,ectc51687.2025.00014-a,other,,,ceramic base,,,,,,,,,,,,stated,figure_image,,p.3 Fig. 4,,
+ectc51687.2025.00014-a-c8,ectc51687.2025.00014-a,connector,,,flexible flat cable (FFC) to control board,,,,,,,,,,,,stated,text,,p.3 Sec. III; p.3 Fig. 4,,

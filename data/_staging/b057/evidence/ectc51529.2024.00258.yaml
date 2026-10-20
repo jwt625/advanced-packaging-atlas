@@ -1,0 +1,45 @@
+paper_id: ectc51529.2024.00258
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00258/text.md
+  - references/ectc51529.2024.00258/source.json
+  - references/ectc51529.2024.00258/figures/page_02.png
+  - references/ectc51529.2024.00258/figures/page_03.png
+  - references/ectc51529.2024.00258/figures/page_04.png
+  - references/ectc51529.2024.00258/figures/page_05.png
+  - references/ectc51529.2024.00258/figures/cand/p02_fig2.png
+  - references/ectc51529.2024.00258/figures/cand/p02_fig3.png
+  - references/ectc51529.2024.00258/figures/cand/p03_fig4.png
+  - references/ectc51529.2024.00258/figures/cand/p03_fig8.png
+  - references/ectc51529.2024.00258/figures/cand/p05_fig14.png
+  - references/ectc51529.2024.00258/figures/cand/p05_fig17.png
+figure_reading_method: >-
+  400 dpi re-crops of Fig. 3, 4, 11, 12-17. Fig. 4 markers read against 25 um gridlines (+/-3 um). Linear resistance
+  axes (Fig. 12, 14, 16) read at about 3.5 px/ohm (+/-2 ohm). Log leakage axes read from tick-label centres
+  (about 85-110 px per decade, +/-0.05 decade). n_samples = number of plotted points per series (10 for chain
+  resistance, 5 for leakage).
+entries:
+  - {table: interconnects, row_id: ectc51529.2024.00258-a-i1, field: diameter_um, value: 0.18, unit: um, basis: design_target, locator: "p.1 Abstract; p.5 Sec. VI", note: "'180 x 500nm nano-TSV' read as diameter x depth"}
+  - {table: metrics, row_id: ectc51529.2024.00258-a-m4, field: value, value: -82, unit: um, basis: measured, locator: "p.3 Fig. 4", note: "after Step 4, plot minimum"}
+  - {table: metrics, row_id: ectc51529.2024.00258-a-m14, field: value, value: 277, unit: ohm, basis: measured, locator: "p.5 Fig. 14", note: "single HTS T1 outlier at 100% cumulative; other T1 points 221-235 ohm"}
+derived:
+  - {table: interconnects, row_id: ectc51529.2024.00258-a-i1, field: diameter_um, value: 0.18, formula: "180 nm / 1000", inputs: "p.1 Abstract"}
+  - {table: interconnects, row_id: ectc51529.2024.00258-a-i1, field: depth_um, value: 0.5, formula: "500 nm / 1000", inputs: "p.1 Abstract"}
+  - {table: stack_layers, row_id: ectc51529.2024.00258-a-L03, field: thickness_um, value: 0.075, formula: "75 nm / 1000", inputs: "p.2 Sec. II"}
+  - {table: metrics, row_id: ectc51529.2024.00258-a-m9, field: value, value: 200, formula: "R = V/I = 0.20 V / 1.0 mA", inputs: "p.3 Fig. 7 last point"}
+conflicts:
+  - {table: metrics, row_id: ectc51529.2024.00258-a-m7, field: value_text, values: ["text: well controlled (< -100 um)", "Fig. 4 extreme about -82 um"], locators: ["p.3 Sec. III", "p.3 Fig. 4"], chosen: "both kept (text as value_text, plotted points as rows m1-m6)", why: "text bound is literally inconsistent in sign; plotted values are the measurement"}
+  - {table: metrics, row_id: ectc51529.2024.00258-a-m8, field: locator, values: ["text: single-TSV I-V is Fig 6", "caption: Fig 7. Single nano-TSV I-V curve"], locators: ["p.3 Sec. IV", "p.3 Fig. 7"], chosen: "Fig. 7", why: "rule (c): cite caption label; no Fig. 6 exists"}
+  - {table: metrics, row_id: ectc51529.2024.00258-a-m12, field: condition, values: ["intro lists TC (1), HTS (3), uHAST (4)", "Sec. V lists (1)-(3)"], locators: ["p.2 Sec. I", "p.4 Sec. V"], chosen: "Sec. V / Table 1", why: "numbering typo only; conditions identical"}
+excluded:
+  - "BS-PDN benefits and nano-TSV density claims attributed to refs [1]-[8]"
+  - "SOI precise wafer thinning method first demonstrated in ref [12] (process re-described here and entered as this paper's flow)"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - TSV pitch and count per chain; number of TSVs in parallel groups; Al and passivation thicknesses
+  - backside passivation material; oxide planarization method; Al BS M1 deposition method
+  - warpage sign convention and measurement tool; warpage after Step 2
+  - de-embedded per-TSV resistance; leakage test voltage for reliability plots; pass/fail criterion (authors' 'comparable')
+source_quality:
+  - "Clean text layer; figure numbering skips Fig. 6 (text refers to Fig 6 for the single-TSV I-V, caption is Fig 7)."

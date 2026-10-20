@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+tcpmt.2021.3104326,10.1109/tcpmt.2021.3104326,Electrical and Morphological Characterizations of 3-D Interconnections for Quantum Computation,2022,TCPMT,microbump_3d,microbump_3d;hybrid_bonding,2,"20 um pitch SnAg microbump and Cu/SiO2 hybrid bond D2W daisy chains on 300 mm; 500 mK resistance, SEM xsec."
+icep-iaac64884.2025.11002987,10.23919/icep-iaac64884.2025.11002987,Micro Ball Mount Total Process in Wafer-Level and Panel-Level in Chip Preparation for Next on Large Panel-Level Package,2025,ICEP,panel,panel;organic_rdl_fanout,1,"Metal micro-ball mount on 12-inch wafer, thinning, die bond to 600x600 mm panel, molding, grinding flow."
+ectc51909.2023.00023,10.1109/ectc51909.2023.00023,Fine Pitch Die-to-Wafer Hybrid Bonding,2023,ECTC,hybrid_bonding,hybrid_bonding,2,"DBI Ultra D2W: 3.5 um pad, 7 um pitch, 8x12 mm die daisy chains; >98% alignment yield, CSAM, cross-sections."

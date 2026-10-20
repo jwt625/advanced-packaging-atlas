@@ -1,0 +1,31 @@
+paper_id: ectc51529.2024.00207
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00207/text.md
+  - references/ectc51529.2024.00207/source.json
+  - references/ectc51529.2024.00207/figures/page_02.png
+  - references/ectc51529.2024.00207/figures/page_03.png
+  - references/ectc51529.2024.00207/figures/page_04.png
+figure_reading_method: >-
+  All tables are images (text layer has captions only). Read Table I, Fig. 3 from page_02 and candidate p02_fig3;
+  400 dpi re-crops of Fig. 4, Table II, Table IV, Table V; Table III, Fig. 7-10 from page renders. Fig. 4 Avg curves read
+  against gridlines (a: 1.0 mm per line, labels 2.0/-2.0; b: 0.1 mm per line, labels 0.2/-0.2).
+entries:
+  - {table: test_vehicles, row_id: ectc51529.2024.00207-a, field: package_thickness_mm, value: 0.85, unit: mm, basis: design_target, locator: "p.1 Sec. I", note: "'total Z-height 0.85mm max'; abstract: total stack-up thickness 850um"}
+  - {table: components, row_id: ectc51529.2024.00207-a-c2, field: count, value: 80, unit: ea, basis: design_target, locator: "p.1 Sec. I", note: "'over than 80pcs passive components'"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51529.2024.00207-a-m1, field: value, values: ["3.5x vs 1x max strip warpage (Table I, text)", "plotted Avg extremes ~1.45 mm vs ~0.12 mm (ratio ~12x) (Fig. 4)"], locators: ["p.2 Table I", "p.3 Fig. 4"], chosen: "both entered; ratio as stated, plotted values as read", why: "metric definition behind 3.5x not given (may be a different statistic than the Avg curve)"}
+excluded:
+  - "double-side SiP background of refs [1]-[3]; TMV profile / ball height model of ref [4]"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - die size, die count, bump type/pitch; ETS dielectric material, Cu thickness, line/space
+  - ball size/pitch, TMV diameter/depth; EMC/MUF products; mold, cure, reflow conditions
+  - numeric die thickness (masked '~5x um'), numeric SOH (relative only), C4 planarity values (no axis)
+  - reliability test names, conditions and sample counts (only 'passed reliability qualifications')
+source_quality:
+  - "Tables I-V are raster images; numbers read from renders. Fig. 9 caption duplicates Fig. 8 caption (printed so)."
+  - "Fig. 5 candidate included the Fig. 4 caption line; Table IV candidate spans to the page edge."

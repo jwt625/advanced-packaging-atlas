@@ -1,0 +1,18 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51909.2023.00252-a-c1,ectc51909.2023.00252-a,other,,,"LNA die (bottom die, RF SOI)",1,0.985,0.75,,,,,,130nm 8SW RF SOI,,GlobalFoundries,design_target,mixed,,p.1 Abstract; p.1 Sec. II; p.2 Fig. 1,,LNA for UMTS downlink at 2100 MHz; inductors face PCB side. Thickness not stated.
+ectc51909.2023.00252-a-c2,ectc51909.2023.00252-a,other,,,BAW duplexer die (top die),1,1.175,0.525,,,,,,,,Qorvo,design_target,mixed,,p.1 Abstract; p.1 Sec. II; p.2 Fig. 1,,"UMTS IMT duplexer: uplink 1920-1980 MHz, downlink 2110-2170 MHz. Attached face-to-back on LNA backside."
+ectc51909.2023.00252-a-c3,ectc51909.2023.00252-a,mold,,,mold compound,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 3; p.2 Fig. 4,,Product not stated.
+ectc51909.2023.00252-b-c1,ectc51909.2023.00252-b,other,,,"LNA die (bottom die, RF SOI)",1,0.985,0.75,,,,,,130nm 8SW RF SOI,,GlobalFoundries,design_target,mixed,,p.1 Abstract; p.1 Sec. II; p.2 Fig. 1,,LNA for UMTS downlink at 2100 MHz; inductors face PCB side. Thickness not stated.
+ectc51909.2023.00252-b-c2,ectc51909.2023.00252-b,other,,,BAW duplexer die (top die),1,1.175,0.525,,,,,,,,Qorvo,design_target,mixed,,p.1 Abstract; p.1 Sec. II; p.2 Fig. 1,,"UMTS IMT duplexer: uplink 1920-1980 MHz, downlink 2110-2170 MHz. Attached face-to-back on LNA backside."
+ectc51909.2023.00252-b-c3,ectc51909.2023.00252-b,mold,,,mold compound,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 3; p.2 Fig. 4,,Product not stated.
+ectc51529.2024.00049-a-c1,ectc51529.2024.00049-a,logic_soc,,,SoC,4,32,21,,,,,150,,,,design_target,table,gap_um:text,p.2 Fig. 2; p.2 Sec. III,,gap_um = SoC die-to-die (D2D) gap.
+ectc51529.2024.00049-a-c2,ectc51529.2024.00049-a,hbm,,,HBM (HBM3 size in Fig. 2; HBM3/4 in Fig. 1),12,11,11,,,,,,,,,design_target,table,,p.2 Fig. 2; p.2 Fig. 1,,
+ectc51529.2024.00049-a-c3,ectc51529.2024.00049-a,ipd,,,IPD (land-side),248,0.7,0.9,,,,,,,,,design_target,mixed,,p.2 Sec. III; p.2 Fig. 2,,248 IPDs totaling 400 uF (text). DTC generation used not stated.
+ectc51529.2024.00049-a-c4,ectc51529.2024.00049-a,interposer,,,9L RDL interposer (CoW),1,66,68,,,,,,,low Dk dielectric polymer / Cu RDL,,design_target,text,,p.2 Sec. III; p.1 Sec. II,,
+ectc51529.2024.00049-a-c5,ectc51529.2024.00049-a,substrate,,,8-2-8 package substrate (SBT),1,97.3,95,,,,,,,,,design_target,text,,p.2 Sec. III; p.2 Fig. 2,,Fig. 2 table and abstract round to 97x95 mm.
+ectc51529.2024.00049-a-c6,ectc51529.2024.00049-a,stiffener,,,ring,1,,,,,,,,,SUS430,,stated,table,,p.2 Fig. 2; p.2 Sec. III,,
+ectc51529.2024.00049-c-c1,ectc51529.2024.00049-c,ipd,,,IPD,140,,,,,,,,,,,stated,text,,p.4 Sec. VI,,
+ectc51529.2024.00049-d-c1,ectc51529.2024.00049-d,logic_soc,,,SoC,4,,,,,,,,,,,stated,figure_image,,p.2 Fig. 1,,
+ectc51529.2024.00049-d-c2,ectc51529.2024.00049-d,hbm,,,HBM3,8,,,,,,,,,,,stated,figure_image,,p.2 Fig. 1,,
+ectc51906.2022.00136-a-c1,ectc51906.2022.00136-a,unspecified,,yes,die with Cu studs (6-sided mold protection),1,,,,,,,,,,,stated,schematic,,p.2 Fig. 4; p.2 Sec. II,,"Die function, size and thickness not stated; count inferred from single-die stack-up schematic."
+ectc51906.2022.00136-a-c2,ectc51906.2022.00136-a,mold,,,compression mold compound,1,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Fig. 4,,Same mold compound as 300 mm FOWLP; product not stated.

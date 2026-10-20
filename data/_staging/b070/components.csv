@@ -1,0 +1,11 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+itherm55375.2024.10709474-a-c1,itherm55375.2024.10709474-a,dummy_die,yes,,Si chip with embedded SSF microchannels (fin wafer),1,,,750,,,,,,Si,,design_target,text,,p.2 Sec. II.A; p.2 Fig. 2(a); p.2 Table I,,"400 um deep fins, 350 um Si left; fin array 22.8 x 24 mm (Fig. 2(a) schematic). Die x/y not stated."
+itherm55375.2024.10709474-a-c2,itherm55375.2024.10709474-a,micro_cooler,,,Si slit wafer (irregular slit shape),1,,,300,,,,,,Si,,design_target,text,,p.2 Sec. II.A; p.2 Fig. 2(c),,Slit shape designed for uniform coolant distribution; Cu-Sn bonded to fin chip.
+itherm55375.2024.10709474-a-c3,itherm55375.2024.10709474-a,other,,,"manifold (4 inlets, 3 outlets)",1,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 2(d); p.3 Sec. III.B,,Material not stated. Fig. 2(d) marks a 3.8 mm dimension (feature undefined in text). Attached by adhesive.
+itherm55375.2024.10709474-a-c4,itherm55375.2024.10709474-a,other,,,Ti/Cu serpentine metal heating resistor,1,18,20,,,,,,,Ti/Cu,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 6,,"Lift-off, on bottom of fin chip; heated area used for heat flux. Black paint coat for IR."
+itherm55375.2024.10709474-a-c5,itherm55375.2024.10709474-a,pcb,,,PCB contacting heater pads via probes,1,,,,,,,,,,,stated,text,,p.3 Sec. III.B; p.3 Fig. 7(a),,
+itherm55375.2024.10709474-a-c6,itherm55375.2024.10709474-a,other,,,fixing plate,1,,,,,,,,,aluminum,,stated,text,,p.3 Sec. III.B; p.3 Fig. 7,,Applies pressure for reliable probe contact.
+itherm55375.2024.10709474-a-c7,itherm55375.2024.10709474-a,other,,,bottom fixture with inlet/outlet temperature and pressure channels,1,,,,,,,,,,,stated,text,,p.3 Sec. III.B; p.3 Fig. 7(b),,
+itherm55375.2024.10709474-b-c1,itherm55375.2024.10709474-b,unspecified,,,chip (simulated),1,,,700,,,,,,,,simulated,text,,p.2 Sec. II.B,,
+itherm55375.2024.10709474-b-c2,itherm55375.2024.10709474-b,tim,,,TIM,1,,,100,,,,,,Dow Corning TC-5888,,simulated,text,,p.2 Sec. II.B,,Thermal conductivity 5.2 W/mK (assumed in model).
+itherm55375.2024.10709474-b-c3,itherm55375.2024.10709474-b,cold_plate,,,Si-based cold plate with the same SSF microchannel structure,1,,,,,,,,,Si,,simulated,text,,p.2 Sec. II.B,,

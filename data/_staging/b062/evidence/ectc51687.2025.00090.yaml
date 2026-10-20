@@ -1,0 +1,37 @@
+paper_id: ectc51687.2025.00090
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00090/text.md
+  - references/ectc51687.2025.00090/source.json
+  - references/ectc51687.2025.00090/figures/page_02.png
+  - references/ectc51687.2025.00090/figures/page_03.png
+  - references/ectc51687.2025.00090/figures/page_04.png
+  - references/ectc51687.2025.00090/figures/cand/p02_fig1.png
+  - references/ectc51687.2025.00090/figures/cand/p02_fig3.png
+  - references/ectc51687.2025.00090/figures/cand/p03_fig6.png
+figure_reading_method: >-
+  Page renders p.2-4; 300 dpi re-crops of Fig. 3 (box plot; mean markers read against gridlines, about 161 px/um,
+  +/-0.03 um), Fig. 4(a)(b) and 4(d) (2.14 um label), Fig. 2 (flow labels); 150 dpi crop of Table 3. Tables 1-2 read
+  from page render (image tables, not in text.md).
+entries:
+  - {table: metrics, row_id: ectc51687.2025.00090-a-m8, field: value, value: 2.14, unit: um, basis: measured, locator: "p.3 Fig. 4(d)", note: "SEM label on leftmost line; second label illegible"}
+  - {table: components, row_id: ectc51687.2025.00090-a-c2, field: count, value: 12, unit: ea, basis: stated, locator: "p.2 Fig. 1", note: "6 grey dies per side column"}
+  - {table: metrics, row_id: ectc51687.2025.00090-a-m9, field: value, value: 24.60, unit: "%", basis: measured, locator: "p.3 Fig. 5", note: "text says 'about 24%'"}
+derived: []
+conflicts:
+  - {table: test_vehicles, row_id: ectc51687.2025.00090-a, field: n_hbm, values: ["12 Chip 2 positions (Fig. 1)", "more than 12 HBM chips (Sec. IV)"], locators: ["p.2 Fig. 1", "p.4 Sec. IV"], chosen: "not entered", why: "Fig. 1 chip types unlabelled; conclusion wording loose"}
+  - {table: metrics, row_id: ectc51687.2025.00090-a-m20, field: condition, values: ["text: uHAST(130 C/85%, RH) no duration", "Table 3: 130 C/85% RH, 96 hr"], locators: ["p.4 Sec. III.D", "p.4 Table 3"], chosen: "Table 3", why: "result table over text"}
+  - {table: metrics, row_id: ectc51687.2025.00090-a-m22, field: value, values: ["approximately 3 times (Sec. I)", "more than three times (Abstract)"], locators: ["p.1 Sec. I", "p.1 Abstract"], chosen: "3 approx", why: "body text"}
+excluded:
+  - "Si interposer pitch ranges (few to tens of um; tens to hundreds of um) from refs [1-3]"
+  - "Undulation equation (1) constant k1 not given; DoF failure mechanism from ref [6]"
+  - "Warpage analytical model from ref [7]"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - die sizes and thicknesses; interposer x/y in mm; package and PCB size; panel size
+  - RDL Cu and PID thicknesses; via diameters; UBM thickness values of the DOE legs
+  - microbump diameter/height/metallurgy, bonding method and conditions; C4 dimensions
+  - mold and PID product names; carrier material
+  - absolute panel warpage values (Fig. 7 has no axis values); reliability sample count

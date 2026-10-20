@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+ectc51909.2023.00266,10.1109/ectc51909.2023.00266,6-Sided Die Protection for Chiplet Package with Multi-Layer RDL,2023,ECTC,panel,organic_rdl_fanout;panel,1,"16x24 mm 9-die substrate-less chiplet, 5 RDL layers, 10 um L/S, 300 mm round panel toward 600x600 PLP."
+ectc51687.2025.00051,10.1109/ectc51687.2025.00051,EMIB-T (TSV) Advanced Packaging Technology EMIB's Next Evolution,2025,ECTC,si_bridge,si_bridge,1,EMIB-T adds TSVs through bridge for power to HBM; EMIB vs EMIB-T process flow comparison.
+eptc59621.2023.10457670,10.1109/eptc59621.2023.10457670,Demonstration and Challenges of Through Si Interposer (TSI) with 5-layer Frontside Cu Metal and 2-layer Backside Cu RDL,2023,EPTC,si_interposer,si_interposer,1,"TSI with 5-layer 1 um Cu dual-damascene front, 2-layer 3 um backside RDL, UBM; warpage evolution."

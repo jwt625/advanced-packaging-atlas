@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+ectc51529.2024.00311,10.1109/ectc51529.2024.00311,Wet Cu passivation for high throughput fluxless Thermal Compression Bonding of Cu-Sn μbumps for Die-to-Wafer stacking,2024,ECTC,microbump_3d,microbump_3d,1,Wet Cu passivation for fluxless TCB of Cu-Sn microbumps; 20 um pitch daisy-chain yield; underfill at 5-20 um pitch.
+ectc51687.2025.00047,10.1109/ectc51687.2025.00047,Fine Pitch High Density CoWoS-R Package with 1.4/1.4um RDL Lines and 3um via CD,2025,ECTC,organic_rdl_fanout,organic_rdl_fanout,1,"5.5x CoWoS-R with RDL scaled 2/2 to 1.4/1.4 um, via CD 8 to 3 um, >2200 lines/mm; via chain yield."
+ectc51909.2023.00268,10.1109/ectc51909.2023.00268,Scaling of redistribution layer for Heterogeneous packaging in a panel level,2023,ECTC,panel,panel;organic_rdl_fanout,1,"PLP RDL patterning to 1.5/1.5 um L/S (0.8/0.8 limit) with i-line CAR; >98% layer yield, 2/2 um stitching."

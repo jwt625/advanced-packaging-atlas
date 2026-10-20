@@ -1,0 +1,7 @@
+paper_id,doi,title,year,venue,primary_bucket,mode
+ectc51909.2023.00150,10.1109/ectc51909.2023.00150,Heterogeneous Integration on Organic Interposer Substrate with fine-pitch RDL and 40 micron pitch Micro-bumps,2023,ECTC,advanced_substrate,figures_only
+iwlpc52010.2020.9375887,10.23919/iwlpc52010.2020.9375887,600MM Wafer-Level Fan Out on Panel Level Processing with 6-Sided Die Protection,2020,IWLPC 2020,panel,figures_only
+ectc51906.2022.00106,10.1109/ectc51906.2022.00106,Super Fine Jet Underfill Dispense Technique for Robust Micro Joint in Direct Bonded Heterogeneous Integration (DBHi) Silicon Bridge Packages,2022,"ECTC 2022 (72nd), pp. 631-634",si_bridge,figures_only
+ectc32696.2021.00166,10.1109/ectc32696.2021.00166,Hybrid Bonding Interconnect for Advanced Heterogeneously Integrated Processors,2021,"ECTC 2021 (71st), pp. 1014-1019",hybrid_bonding,figures_only
+iedm19573.2019.8993659,10.1109/iedm19573.2019.8993659,Heterogeneous Integration Using Omni-Directional Interconnect Packaging,2019,"IEDM 2019, pp. 19.4.1-19.4.4",microbump_3d,figures_only
+ectc32696.2021.00125,10.1109/ectc32696.2021.00125,Reliability Performance of Advanced Organic Interposer (CoWoS-R) Packages,2021,"ECTC 2021 (71st), pp. 723-728",organic_rdl_fanout,figures_only

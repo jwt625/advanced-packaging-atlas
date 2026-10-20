@@ -1,0 +1,3 @@
+ei_id,tv_id,protocol,protocol_as_written,channel_type,lane_rate_gbps,lanes,aggregate_bw_tbps,bw_density_tbps_per_mm,bw_density_tbps_per_mm2,energy_pj_per_bit,scope,reach_mm,bump_pitch_um,line_um,space_um,insertion_loss_db,il_freq_ghz,ber,latency_ns,basis,source,overrides,locator,qualifiers,notes
+ectc51909.2023.00179-a-e1,ectc51909.2023.00179-a,hbm2e,HBM2E,hybrid_bond_3d,4.0,,,,,,,,,,,,,,,measured,table,,p.4 Table 1,lane_rate_gbps:gt,"FUDV HBM1/HBM2/HBM2E functional items >4.0 Gbps; tCK 4.17 Gbps; all 176 items spec-in, same as MR-MUF."
+ectc51909.2023.00179-b-e1,ectc51909.2023.00179-b,hbm2e,HBM2E,microbump_3d,4.0,,,,,,,,,,,,,,,measured,table,,p.4 Table 1,lane_rate_gbps:gt,MR-MUF column of Table 1; tCK 4.17 Gbps.

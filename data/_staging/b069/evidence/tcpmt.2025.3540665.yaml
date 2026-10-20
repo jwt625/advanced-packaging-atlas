@@ -1,0 +1,37 @@
+paper_id: tcpmt.2025.3540665
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/tcpmt.2025.3540665/text.md
+  - references/tcpmt.2025.3540665/source.json
+  - references/tcpmt.2025.3540665/figures/cand/p02_fig1.png
+  - references/tcpmt.2025.3540665/figures/cand/p02_fig2.png
+  - references/tcpmt.2025.3540665/figures/cand/p03_fig3.png
+figure_reading_method: >-
+  All numbers from text; figures (candidate crops, complete) used to confirm structure (Si/Si joint, Cu tracks, Kelvin
+  pads 1-4, I-V sweep ranges). Ohm symbol is dropped in text.md ("1.3e-7 m", "158.1 m"); units restored as Ohm-m, mOhm, Ohm from context.
+entries:
+  - {table: interconnects, row_id: tcpmt.2025.3540665-a-i1, field: pad_x_um, value: 5, unit: um, basis: design_target, locator: "p.1 Sec. I", note: "square microbumps 5 x 5 um, 15 um pitch"}
+derived:
+  - {table: interconnects, row_id: tcpmt.2025.3540665-a-i1, field: bonding_time_s, value: 300, formula: "5 min * 60", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: tcpmt.2025.3540665-a-s13, field: time_s, value: 300, formula: "5 min * 60", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: tcpmt.2025.3540665-a-s08, field: time_s, value: 540, formula: "9 min * 60", inputs: "p.2 Sec. II"}
+  - {table: stack_layers, row_id: tcpmt.2025.3540665-a-L08, field: thickness_um, value: 0.2, formula: "200 nm / 1000", inputs: "p.1 Sec. II"}
+  - {table: stack_layers, row_id: tcpmt.2025.3540665-a-L07, field: thickness_um, value: 0.05, formula: "50 nm / 1000", inputs: "p.1 Sec. II"}
+  - {table: stack_layers, row_id: tcpmt.2025.3540665-a-L06, field: thickness_um, value: 0.12, formula: "120 nm / 1000", inputs: "p.1 Sec. II"}
+conflicts:
+  - {table: metrics, row_id: tcpmt.2025.3540665-a-m6, field: value, values: [1.6e-7, 1.3e-7], locators: ["p.3 Sec. III", "p.1 Abstract"], chosen: 1.6e-7, why: "body result for 170 C/5 min Kelvin; abstract 'as low as 1.3e-7 Ohm-m' not traceable to any body value"}
+  - {table: components, row_id: tcpmt.2025.3540665-a-c1, field: x_mm, values: ["6 x 6 um device", "4 x 4 um cap"], locators: ["p.1 Sec. II"], chosen: "not entered", why: "um unit impossible for chips carrying 15 um pitch test structures; likely mm but not stated"}
+excluded:
+  - "Cu-Cu hybrid bonding <5 um pitch, <200 C (refs [3], [4])"
+  - "Cu-Sn <10 um pitch solid-state bonding; Cu-Sn-Ag >250 C (refs [8], [9])"
+  - "Cu-Sn resistivity 5.2e-7 Ohm-m with similar geometry (ref [21])"
+  - "melting points Sn 235, Sn-Ag 221, In 157, Au-In-Bi 71, Sn-In 120 C quoted from literature"
+not_reported:
+  - chip sizes in valid units, chip/wafer thickness, bump count per structure
+  - bonding yield, reliability, shear strength
+  - deposition methods for SiO2, TiW, Cu seed
+  - electrical_interfaces
+  - optical_interfaces
+source_quality:
+  - "Text layer drops the Ohm symbol; chip size units printed as um (typo)."

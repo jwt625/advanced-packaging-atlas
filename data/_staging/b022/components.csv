@@ -1,0 +1,21 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51909.2023.00219-a-c1,ectc51909.2023.00219-a,dummy_die,yes,,top chip (daisy chain / Kelvin TEG),,17,24,,,,,,,,,design_target,schematic,,p.4 Fig. 12; p.2 Table I,,"Fig. 12 inset 17x24 mm; Table I chip area 410 (printed 'mm', i.e. mm2). Thickness not stated."
+ectc51909.2023.00219-a-c2,ectc51909.2023.00219-a,other,,,base wafer,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 5,,Wafer size/material not stated.
+ectc51909.2023.00219-b-c1,ectc51909.2023.00219-b,other,,,top wafer,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 5,,
+ectc51909.2023.00219-b-c2,ectc51909.2023.00219-b,other,,,base wafer,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 5,,
+ectc51906.2022.00181-a-c1,ectc51906.2022.00181-a,asic,,,ASIC die (top die),1,,,50,,,,,,,,design_target,mixed,,p.2 Table I; p.2 Sec. Test Vehicle Introduction,,Die area 70 mm2 (Table I); x/y not given.
+ectc51906.2022.00181-a-c2,ectc51906.2022.00181-a,other,,,memory die (bottom die),1,,,50,,,,,,,,design_target,mixed,,p.2 Table I; p.2 Sec. Test Vehicle Introduction,,Die area 110 mm2 (Table I); memory type not stated.
+ectc51906.2022.00181-a-c3,ectc51906.2022.00181-a,underfill,,,underfill between dies (and oS underfill),2,,,,,,,,,,,stated,text,,p.2 Sec. 3DIC Process Flow,,Products not stated.
+ectc51906.2022.00181-a-c4,ectc51906.2022.00181-a,mold,,,first molding (chip module) and second molding (package),2,,,,,,,,,,,stated,text,,p.2 Sec. 3DIC Process Flow; p.2 Fig. 3,,Mold compounds not stated.
+ectc51906.2022.00181-a-c5,ectc51906.2022.00181-a,substrate,,,package substrate,1,,,,,,,,,,,stated,mixed,,p.2 Sec. 3DIC Process Flow; p.2 Fig. 3,,Size and layer count not stated; substrate made by an unnamed supplier (ack).
+ectc51906.2022.00008-a-c1,ectc51906.2022.00008-a,logic_soc,,,split SOC dies,2,,,,,,,,,,,design_target,text,,p.4 Sec. III.A,,
+ectc51906.2022.00008-a-c2,ectc51906.2022.00008-a,hbm,,,HBM,2,,,,,,,,,,,design_target,text,,p.4 Sec. III.A,,HBM3 eye diagram reported in Fig. 4(a); generation of the built TV not stated.
+ectc51906.2022.00008-a-c3,ectc51906.2022.00008-a,interposer,,,"organic interposer (RDL, TSV-less)",1,32,35,,,,,,,,,design_target,text,,p.4 Sec. III.A; p.2 Table I,,
+ectc51906.2022.00008-a-c4,ectc51906.2022.00008-a,ipd,,no,known-good high capacitance density IPD (de-cap) on interposer landside,20,,,,,,,,,,,design_target,text,,p.4 Sec. III.A; p.4 Fig. 7(b),,IPD area consumes ~8% of C4 bumps; C4 pattern re-arranged to retain full I/O count.
+ectc51906.2022.00008-a-c5,ectc51906.2022.00008-a,substrate,,,package substrate,1,55,55,,,,,,,,,design_target,text,,p.4 Sec. III.A,,x/y = stated package size 55x55 mm.
+ectc51906.2022.00008-a-c6,ectc51906.2022.00008-a,underfill,,,CoW underfill and oS underfill,2,,,,,,,,,,,stated,text,,p.4 Sec. III.A; p.5 Sec. III.D,,CSAM shows void-free underfill; products not stated.
+ectc51906.2022.00008-b-c1,ectc51906.2022.00008-b,logic_soc,,,split SOC dies,2,,,,,,,,,,,stated,text,,p.4 Sec. III.B,,
+ectc51906.2022.00008-b-c2,ectc51906.2022.00008-b,bridge,,,"Si-based connection block (landside, interfaces two split SOC dies)",,,,,,,,,,Si-based,,stated,text,,p.3 Sec. II.B; p.4 Sec. III.B; p.4 Fig. 6(b),,"0.8/0.8 um routing, 24 um ubump pitch; count not stated. Assembled on landside like a discrete IPD."
+ectc51906.2022.00008-b-c3,ectc51906.2022.00008-b,ipd,,no,discrete IPD (landside),2,,,,,,,,,,,design_target,text,,p.4 Sec. III.B; p.5 Fig. 10(a),,
+ectc51906.2022.00008-b-c4,ectc51906.2022.00008-b,interposer,,,organic interposer,,,,,,,,,,,,stated,text,,p.4 Sec. III.B,,
+ectc51906.2022.00008-c-c1,ectc51906.2022.00008-c,interposer,,,organic interposer CoW module (no landside chiplets),,,,,,,,,,,,stated,caption,,p.5 Fig. 11,,

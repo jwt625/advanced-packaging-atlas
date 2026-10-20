@@ -1,0 +1,61 @@
+layer_id,tv_id,structure,side,seq,layer_name,feature,material,material_class,layer_role,reinforcement,thickness_um,thickness_min_um,thickness_max_um,line_um,space_um,via_diameter_um,via_pitch_um,roughness_ra_um,repeat,properties,basis,source,overrides,locator,qualifiers,notes
+ectc51906.2022.00140-a-L01,ectc51906.2022.00140-a,die,single,1,AP/ASIC and HBM dies (side by side),,,unspecified,device,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+ectc51906.2022.00140-a-L02,ectc51906.2022.00140-a,mold,single,1,mold,,,mold_compound,encapsulant,,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,
+ectc51906.2022.00140-a-L03,ectc51906.2022.00140-a,fan_out_rdl,single,1,fine RDL (D2D lines ASIC-HBM),"L/S 2/2 um lines, >6 mm length","Cu (EP plating, SAP)",metal,conductor,,,,,2,2,,,,,,design_target,text,,p.1 Abstract; p.2 Sec. 2.2; p.3 Sec. 2.3,,Abstract also cites 4 um-pitch patterns. Cu thickness not reported. RDL layer count not reported.
+ectc51906.2022.00140-a-L04,ectc51906.2022.00140-a,fan_out_rdl,single,2,PID on UBM pad,,PID (photo imageable dielectric),dielectric_polymer,dielectric,,8.5,,,,,,,,,,design_target,text,,p.3 Sec. 2.3; p.3 Fig. 5,,Target thickness on pad. Fig. 8(b) split: PID 9-12 um on Layer 1 after cure. Product not named.
+ectc51906.2022.00140-a-L05,ectc51906.2022.00140-a,fan_out_rdl,single,3,"UBM Cu pad (as-is, planar)",,Cu,metal,conductor,,11,,,,,,,,,,design_target,text,,p.3 Sec. 2.3; p.3 Fig. 5; p.4 Fig. 9,,Pad space D_space 40 um (split 20 um); thickness split 8/11 um in Fig. 8.
+ectc51906.2022.00140-a-L06,ectc51906.2022.00140-a,fan_out_rdl,single,4,PID under UBM,,PID,dielectric_polymer,dielectric,,,,,,,,,,,,stated,schematic,,p.4 Fig. 9,,As-is schematic; thickness not given.
+ectc51906.2022.00140-a-L07,ectc51906.2022.00140-a,other,single,1,carrier (temporary),,carrier,unspecified,carrier,,,,,,,,,,,,stated,schematic,,p.4 Fig. 9,,Organic carrier per Fig. 10.
+ectc51906.2022.00140-b-L01,ectc51906.2022.00140-b,die,single,1,AP/ASIC and HBM dies (side by side),,,unspecified,device,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+ectc51906.2022.00140-b-L02,ectc51906.2022.00140-b,mold,single,1,mold,,,mold_compound,encapsulant,,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,
+ectc51906.2022.00140-b-L03,ectc51906.2022.00140-b,fan_out_rdl,single,1,fine RDL (D2D lines ASIC-HBM),L/S 2/2 um lines,"Cu (EP plating, SAP)",metal,conductor,,,,,2,2,,,,,,design_target,text,,p.2 Sec. 2.2; p.5 Sec. 3.2,,
+ectc51906.2022.00140-b-L04,ectc51906.2022.00140-b,fan_out_rdl,single,2,PID over UBM (T_PID),,PID,dielectric_polymer,dielectric,,,,,,,,,,,,stated,schematic,,p.5 Fig. 10,,Thickness for T-shape design not given.
+ectc51906.2022.00140-b-L05,ectc51906.2022.00140-b,fan_out_rdl,single,3,"UBM Cu pad, T-shape",,Cu,metal,conductor,,8,,,,,,,,,,design_target,text,,p.4 Sec. 3.2; p.5 Fig. 10,,8 um minimum (IMC consumption at UBM Cu/solder over 1000 h HTS). Fig. 9 to-be label ~10 um. Stem passes through lower PID.
+ectc51906.2022.00140-b-L06,ectc51906.2022.00140-b,fan_out_rdl,single,4,"PID (lower, around UBM stem)",,PID,dielectric_polymer,dielectric,,,,,,,,,,,,stated,schematic,,p.5 Fig. 10,,
+ectc51906.2022.00140-b-L07,ectc51906.2022.00140-b,fan_out_rdl,single,5,stopper metal,,stopper metal,metal,other,,,,,,,,,,,,stated,schematic,,p.5 Fig. 10,,Metal not named.
+ectc51906.2022.00140-b-L08,ectc51906.2022.00140-b,fan_out_rdl,single,6,PID (release layer),,PID,dielectric_polymer,other,,,,,,,,,,,,stated,schematic,,p.5 Fig. 10,,
+ectc51906.2022.00140-b-L09,ectc51906.2022.00140-b,other,single,1,organic carrier (temporary),,organic carrier,unspecified,carrier,,,,,,,,,,,,stated,schematic,,p.5 Fig. 10,,
+ectc51906.2022.00140-c-L01,ectc51906.2022.00140-c,fan_out_rdl,single,1,Cu lines,L/S 0.9/0.9 um pattern,Cu (SAP),metal,conductor,,,,,0.9,0.9,,,,,,design_target,figure_image,,p.5 Fig. 12(b); p.5 Sec. 3.3,,
+ectc51906.2022.00140-c-L02,ectc51906.2022.00140-c,fan_out_rdl,single,1,Cu lines,L/S 1.0/1.0 um pattern,Cu (SAP),metal,conductor,,,,,1.0,1.0,,,,,,design_target,figure_image,,p.5 Fig. 12(b); p.5 Sec. 3.3,,
+ectc51906.2022.00140-c-L03,ectc51906.2022.00140-c,fan_out_rdl,single,1,Cu lines,L/S 1.5/1.5 um pattern,Cu (SAP),metal,conductor,,,,,1.5,1.5,,,,,,design_target,figure_image,,p.5 Fig. 12(b); p.5 Sec. 3.3,,
+ectc51906.2022.00140-c-L04,ectc51906.2022.00140-c,fan_out_rdl,single,2,seed,,Ti (seed),metal,seed,,,,,,,,,,,,stated,figure_image,,p.5 Fig. 12(b),,Label 'Seed Ti' in SEM; other seed metals not stated.
+ectc51906.2022.00140-c-L05,ectc51906.2022.00140-c,fan_out_rdl,single,3,PID,,PID,dielectric_polymer,dielectric,,,,,,,,,,,,stated,figure_image,,p.5 Fig. 12(b),,
+ectc51529.2024.00151-a-L01,ectc51529.2024.00151-a,die,single,1,chiplets (ASIC/HBM),,,silicon,device,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2,,
+ectc51529.2024.00151-a-L02,ectc51529.2024.00151-a,mold,single,1,top mold,,,mold_compound,encapsulant,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2,,
+ectc51529.2024.00151-a-L03,ectc51529.2024.00151-a,underfill,single,1,top underfill (CoW UF),,,underfill,encapsulant,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2; p.6 Fig. 16,,
+ectc51529.2024.00151-a-L04,ectc51529.2024.00151-a,fan_out_rdl,single,1,FO-RDL metal,,RDL metal (not named),metal,conductor,,,,,10,10,,,,,,design_target,text,,p.5 Sec. III.A,,"Sec. III.A: 1-layer RDL, L/S 10/10 um; Sec. IV.B: TV-1 has 2P2M. Substrate layers per generic Fig. 1."
+ectc51529.2024.00151-a-L05,ectc51529.2024.00151-a,fan_out_rdl,single,2,FO-RDL passivation,,PI,dielectric_polymer,dielectric,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,Fig. 1 step 3 label 'RDL/PI'.
+ectc51529.2024.00151-a-L06,ectc51529.2024.00151-a,mold,single,2,"bottom mold (tall Cu pillars, embedded Si bridge)",,,mold_compound,encapsulant,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2; p.2 Fig. 1,,
+ectc51529.2024.00151-a-L07,ectc51529.2024.00151-a,bridge,single,1,Si bridge die,,Si,silicon,device,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2,,
+ectc51529.2024.00151-a-L08,ectc51529.2024.00151-a,underfill,single,2,bottom underfill (CoS UF),,,underfill,encapsulant,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2; p.6 Fig. 16,,
+ectc51529.2024.00151-a-L09,ectc51529.2024.00151-a,substrate_buildup,front,1,top build-up layer,,,organic_laminate,dielectric,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,
+ectc51529.2024.00151-a-L10,ectc51529.2024.00151-a,substrate_core,core,1,substrate core,,,organic_laminate,core,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,
+ectc51529.2024.00151-a-L11,ectc51529.2024.00151-a,substrate_buildup,back,1,bottom build-up layer,,,organic_laminate,dielectric,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,
+ectc51529.2024.00151-b-L01,ectc51529.2024.00151-b,other,single,1,BSM D - oxidation prevention layer,,material D (not named),metal,surface_finish,,,,,,,,,,,,stated,mixed,,p.5 Sec. IV.A; p.5 Fig. 12; p.3 Sec. II.D,,"PVD/sputtered on die backside; thickness within spec, values not given."
+ectc51529.2024.00151-b-L02,ectc51529.2024.00151-b,other,single,2,BSM C - soldering layer,,material C (not named),metal,bonding,,,,,,,,,,,,stated,mixed,,p.5 Sec. IV.A; p.5 Fig. 12; p.3 Sec. II.D,,
+ectc51529.2024.00151-b-L03,ectc51529.2024.00151-b,other,single,3,BSM B - barrier layer,,material B (not named),metal,barrier,,,,,,,,,,,,stated,mixed,,p.5 Sec. IV.A; p.5 Fig. 12; p.3 Sec. II.D,,
+ectc51529.2024.00151-b-L04,ectc51529.2024.00151-b,other,single,4,BSM A - adhesion layer,,material A (not named),metal,adhesion,,,,,,,,,,,,stated,mixed,,p.5 Sec. IV.A; p.5 Fig. 12; p.3 Sec. II.D,,
+ectc51529.2024.00151-b-L05,ectc51529.2024.00151-b,die,single,1,chiplets (SoC-1/SoC-2),,,silicon,device,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2,,
+ectc51529.2024.00151-b-L06,ectc51529.2024.00151-b,mold,single,1,top mold,,,mold_compound,encapsulant,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2,,
+ectc51529.2024.00151-b-L07,ectc51529.2024.00151-b,underfill,single,1,top underfill (CoW UF),,,underfill,encapsulant,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2; p.6 Fig. 16,,
+ectc51529.2024.00151-b-L08,ectc51529.2024.00151-b,fan_out_rdl,single,1,FO-RDL metal,,RDL metal (not named),metal,conductor,,,,,8,8,,,,,,design_target,text,,p.5 Sec. III.B,,"Sec. III.B: 2-layer RDL, L/S 8/8 um; Sec. IV.B: 3P3M; Fig. 1 step 3: 3P3M; Fig. 16 label 2-RDL."
+ectc51529.2024.00151-b-L09,ectc51529.2024.00151-b,fan_out_rdl,single,2,FO-RDL passivation,,PI,dielectric_polymer,dielectric,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,Fig. 1 step 3 label 'RDL/PI'.
+ectc51529.2024.00151-b-L10,ectc51529.2024.00151-b,mold,single,2,"bottom mold (tall Cu pillars, embedded Si bridge)",,,mold_compound,encapsulant,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2; p.2 Fig. 1,,
+ectc51529.2024.00151-b-L11,ectc51529.2024.00151-b,bridge,single,1,Si bridge die,,Si,silicon,device,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2,,
+ectc51529.2024.00151-b-L12,ectc51529.2024.00151-b,underfill,single,2,bottom underfill (CoS UF),,,underfill,encapsulant,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2; p.6 Fig. 16,,
+ectc51529.2024.00151-b-L13,ectc51529.2024.00151-b,substrate_buildup,front,1,top build-up layer,,,organic_laminate,dielectric,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,
+ectc51529.2024.00151-b-L14,ectc51529.2024.00151-b,substrate_core,core,1,substrate core,,,organic_laminate,core,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,
+ectc51529.2024.00151-b-L15,ectc51529.2024.00151-b,substrate_buildup,back,1,bottom build-up layer,,,organic_laminate,dielectric,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,
+ectc51909.2023.00154-a-L01,ectc51909.2023.00154-a,die_stack,single,1,3D-ASIC large top die,,Si,silicon,device,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3; p.5 Fig. 11(b),,
+ectc51909.2023.00154-a-L02,ectc51909.2023.00154-a,die_stack,single,2,BEOL (top die),,,unspecified,bonding,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3; p.5 Fig. 11(b),,"Cu-Cu hybrid bond interface between top and bottom BEOL, 4 um pitch."
+ectc51909.2023.00154-a-L03,ectc51909.2023.00154-a,die_stack,single,3,BEOL (bottom die),,,unspecified,bonding,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3; p.5 Fig. 11(b),,
+ectc51909.2023.00154-a-L04,ectc51909.2023.00154-a,die_stack,single,4,small bottom die with TSV,,Si,silicon,device,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3; p.2 Sec. II,,
+ectc51909.2023.00154-a-L05,ectc51909.2023.00154-a,die_stack,single,4,oxide gap fill around small bottom die,gap fill,oxide,dielectric_inorganic,dielectric,,,,,,,,,,,,stated,mixed,,p.2 Sec. II; p.2 Fig. 3,,"CMP to expose TSV, then metal lines and microbumps."
+ectc51909.2023.00154-a-L06,ectc51909.2023.00154-a,die,single,1,"ASIC, chiplet, HBM3 dies (side by side)",,,silicon,device,,,,,,,,,,,,stated,schematic,,p.2 Fig. 2(a),,
+ectc51909.2023.00154-a-L07,ectc51909.2023.00154-a,mold,single,1,mold (die backsides exposed),,,mold_compound,encapsulant,,,,,,,,,,,,stated,mixed,,p.3 Sec. III; p.2 Fig. 2(a),,
+ectc51909.2023.00154-a-L08,ectc51909.2023.00154-a,underfill,single,1,UF (CoW),,wafer level underfill,underfill,encapsulant,,,,,,,,,,,,stated,mixed,,p.2 Sec. I; p.5 Fig. 11(a),,
+ectc51909.2023.00154-a-L09,ectc51909.2023.00154-a,interposer,single,1,Si interposer with TSV,,Si,silicon,core,,110,,,,,,,,,,design_target,text,,p.3 Sec. III; p.5 Fig. 11,,
+ectc51909.2023.00154-a-L10,ectc51909.2023.00154-a,underfill,single,2,UF (interposer),,,underfill,encapsulant,,,,,,,,,,,,stated,mixed,,p.3 Sec. III; p.5 Fig. 11(a),,
+ectc51909.2023.00154-a-L11,ectc51909.2023.00154-a,substrate_buildup,front,1,6 build-up layers (top),,,organic_laminate,dielectric,,,,,,,,,,6,,design_target,table,,p.2 Table 1; p.2 Sec. II,,
+ectc51909.2023.00154-a-L12,ectc51909.2023.00154-a,substrate_core,core,1,extremely low CTE core (2 metal layers),,,organic_laminate,core,,,,,,,,,,,,design_target,mixed,,p.2 Table 1; p.2 Sec. II,,'2' in 6-2-6 read as core layers; CTE value not given.
+ectc51909.2023.00154-a-L13,ectc51909.2023.00154-a,substrate_buildup,back,1,6 build-up layers (bottom),,,organic_laminate,dielectric,,,,,,,,,,6,,design_target,table,,p.2 Table 1; p.2 Sec. II,,

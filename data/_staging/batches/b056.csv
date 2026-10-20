@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+itherm55368.2023.10177502,10.1109/itherm55368.2023.10177502,The Embedded Cooling Silicon 3D Stacking Thermal Test Vehicle,2023,ITherm,thermal_pdn,thermal_pdn,2,"Five-layer embedded-cooling Si 3D stack TTV; bonding stress optimized; HTC 25 kW/m2K, 4.8 C delta."
+ectc51687.2025.00323,10.1109/ectc51687.2025.00323,Advanced Face-to-Back Cow 2.0- µm Pitch Cu-Cu Hybrid Bonding Process for Three Layer-Stacked 3D Heterogeneous Integration,2025,ECTC,hybrid_bonding,hybrid_bonding,1,"Face-to-back CoW 2.0 um pitch Cu-Cu hybrid bonding, 1.0-3.0 um pads, inhibitor CMP; three-layer CoWoW Kelvin yields."
+ectc51846.2026.00062,10.1109/ectc51846.2026.00062,Initial Assessments of Fine Pitch Cu-Cu TCB for 3D Integration,2026,ECTC,microbump_3d,microbump_3d,1,"Cu-Cu TCB, 10/20 um pitch, 100 mm2 dies, H2/Ar plasma, formic acid, 500 N, 400 C anneal."

@@ -1,0 +1,37 @@
+paper_id: ectc51687.2025.00028
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00028/text.md
+  - references/ectc51687.2025.00028/source.json
+  - references/ectc51687.2025.00028/figures/page_02.png
+  - references/ectc51687.2025.00028/figures/page_03.png
+  - references/ectc51687.2025.00028/figures/page_04.png
+  - references/ectc51687.2025.00028/figures/page_05.png
+  - references/ectc51687.2025.00028/figures/cand/p02_fig3.png
+  - references/ectc51687.2025.00028/figures/cand/p03_fig5.png
+  - references/ectc51687.2025.00028/figures/cand/p04_fig6.png
+  - references/ectc51687.2025.00028/figures/cand/p04_fig7.png
+  - references/ectc51687.2025.00028/figures/cand/p04_tablei.png
+  - references/ectc51687.2025.00028/figures/cand/p05_fig9.png
+figure_reading_method: >-
+  Page renders; 400 dpi re-crops of Fig. 8 and Fig. 9. Fig. 9 bars read against gridlines (+/-3 mV). Fig. 8 has no
+  numeric axis values (qualitative ranking only). Table I matches text.md.
+entries:
+  - {table: metrics, row_id: ectc51687.2025.00028-a-m2, field: value, value: 188, unit: mV, basis: simulated, locator: "p.5 Fig. 9", note: "Si-cap (DSC) bar"}
+  - {table: components, row_id: ectc51687.2025.00028-c-c4, field: count, value: 8, unit: ea, basis: design_target, locator: "p.4 Sec. V", note: "'An 8 stacked SSSC was used in the simulation'"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51687.2025.00028-c-m2, field: value, values: ["Fig. 9 axis 'Voltage Drop Improvement [mV]': DSC 188 > DASC 122 > SSSC 88", "text: DSC least impact, SSSC largest voltage drop effect / best"], locators: ["p.5 Fig. 9", "p.5 Sec. V.B"], chosen: "plotted values entered as plotted", why: "only numbers available; bars read as residual drop would match text; flagged in notes"}
+  - {table: components, row_id: ectc51687.2025.00028-b-c4, field: thickness_um, values: ["780 um Si-cap assumed (12-inch wafer)", "DASC total 1.2 mm (Table I)"], locators: ["p.2 Sec. II.B", "p.4 Table I"], chosen: "both kept (part vs total)", why: "different quantities"}
+excluded:
+  - "Prior SSSC/eCAP/PDN results of refs [1], [4], [5], [11]"
+  - "Fig. 1 DSC/LSC/eCAP generic concept (no numbers)"
+not_reported:
+  - electrical_interfaces; optical_interfaces
+  - any fabricated sample, yield or reliability data (concept and simulation only)
+  - package, substrate and die dimensions; layer counts; exact core thickness (only 'over 1 mm')
+  - Cu bump pitch/diameter; dummy silicon and DAF thickness; NCF and MUF products; bonding conditions
+  - ESL/ESR values; impedance magnitudes and frequencies (Fig. 8 unlabelled axes)
+source_quality:
+  - "Candidate p03_fig5 clipped the bottom of step b5 (manual re-crop)."

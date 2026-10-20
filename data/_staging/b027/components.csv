@@ -1,0 +1,57 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51909.2023.00155-a-c1,ectc51909.2023.00155-a,logic_soc,yes,,Die A (mock of logic chip),1,21.9,21.9,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-a-c2,ectc51909.2023.00155-a,hbm,yes,,Die B (mock of HBM chip),4,10,8,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-a-c3,ectc51909.2023.00155-a,dummy_die,,,filler die 11 x 50 mm2,,11,50,,,,,,,,,design_target,mixed,,p.5 Sec. III.C; p.5 Fig. 9,,Modified design adopted to cut warpage; count not stated.
+ectc51909.2023.00155-a-c4,ectc51909.2023.00155-a,dummy_die,,,filler die 4 x 23 mm2,,4,23,,,,,,,,,design_target,mixed,,p.5 Sec. III.C; p.5 Fig. 9,,Count not stated.
+ectc51909.2023.00155-a-c5,ectc51909.2023.00155-a,die_attach_film,,,DAF for filler dies,,,,20,,,,,,,,design_target,text,,p.5 Sec. III.C,,
+ectc51909.2023.00155-a-c6,ectc51909.2023.00155-a,interposer,,,silicon interposer,1,50,50,200,,,,,,silicon; SiN insulating layer on top,,design_target,table,,p.2 Table 2; p.6 Table 10,,Measured 194 um (Table 10). No TSV described.
+ectc51909.2023.00155-a-c7,ectc51909.2023.00155-a,mold,,,granular EMC (compression mold),,,,698,,,,,,granular epoxy molding compound,,design_target,table,,p.6 Table 10; p.3 Table 7,,Mold thickness design; measured 694 um.
+ectc51909.2023.00155-a-c8,ectc51909.2023.00155-a,underfill,,,CUF under dies,,,,,,,,,,capillary underfill,,stated,text,,p.3 Sec. II.D; p.3 Table 6,,
+ectc51909.2023.00155-a-c9,ectc51909.2023.00155-a,underfill,,,CUF interposer-substrate,,,,,,,,,,capillary underfill,,stated,text,,p.4 Sec. II.H,,
+ectc51909.2023.00155-a-c10,ectc51909.2023.00155-a,substrate,,,"package Substrate-A (4/2/4 build-up, CCL core 2.8 ppm/C)",1,100,100,1600,,,,,,CCL core (2.8 ppm/C); build-up films,"SHINKO ELECTRIC INDUSTRIES CO., LTD.",design_target,table,supplier:text,p.2 Table 3; p.3 Sec. II.F; p.6 Table 11,,Measured total thickness 1.6 mm (Table 11). thickness_um converted from 1.6 mm.
+ectc51909.2023.00155-a-c11,ectc51909.2023.00155-a,stiffener,,,Cu stiffener,1,,,2000,,,,,,Cu,,design_target,text,,p.4 Sec. II.H; p.7 Sec. III.G,,"Attached with silicone glue, cured 130 C 1 h. Lateral size not given."
+ectc51909.2023.00155-a-c12,ectc51909.2023.00155-a,pcb,,,"motherboard (CCL 18.0 ppm/C, batch lamination)",1,150,150,2800,,,,,,CCL and prepregs,,design_target,table,,p.2 Table 4; p.7 Table 12,,Measured thickness 2.7 mm (Table 12).
+ectc51909.2023.00155-b-c1,ectc51909.2023.00155-b,logic_soc,yes,,Die A (mock of logic chip),1,21.9,21.9,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-b-c2,ectc51909.2023.00155-b,hbm,yes,,Die B (mock of HBM chip),4,10,8,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-b-c3,ectc51909.2023.00155-b,dummy_die,,,filler die 11 x 50 mm2,,11,50,,,,,,,,,design_target,mixed,,p.5 Sec. III.C; p.5 Fig. 9,,Modified design adopted to cut warpage; count not stated.
+ectc51909.2023.00155-b-c4,ectc51909.2023.00155-b,dummy_die,,,filler die 4 x 23 mm2,,4,23,,,,,,,,,design_target,mixed,,p.5 Sec. III.C; p.5 Fig. 9,,Count not stated.
+ectc51909.2023.00155-b-c5,ectc51909.2023.00155-b,die_attach_film,,,DAF for filler dies,,,,20,,,,,,,,design_target,text,,p.5 Sec. III.C,,
+ectc51909.2023.00155-b-c6,ectc51909.2023.00155-b,interposer,,,silicon interposer,1,50,50,200,,,,,,silicon; SiN insulating layer on top,,design_target,table,,p.2 Table 2; p.6 Table 10,,Measured 194 um (Table 10). No TSV described.
+ectc51909.2023.00155-b-c7,ectc51909.2023.00155-b,mold,,,granular EMC (compression mold),,,,698,,,,,,granular epoxy molding compound,,design_target,table,,p.6 Table 10; p.3 Table 7,,Mold thickness design; measured 694 um.
+ectc51909.2023.00155-b-c8,ectc51909.2023.00155-b,underfill,,,CUF under dies,,,,,,,,,,capillary underfill,,stated,text,,p.3 Sec. II.D; p.3 Table 6,,
+ectc51909.2023.00155-b-c9,ectc51909.2023.00155-b,underfill,,,CUF interposer-substrate,,,,,,,,,,capillary underfill,,stated,text,,p.4 Sec. II.H,,
+ectc51909.2023.00155-b-c10,ectc51909.2023.00155-b,substrate,,,"package Substrate-B (4/2/4 build-up, CCL core 0.7 ppm/C)",1,100,100,1600,,,,,,CCL core (0.7 ppm/C); build-up films,"SHINKO ELECTRIC INDUSTRIES CO., LTD.",design_target,table,supplier:text,p.2 Table 3; p.3 Sec. II.F; p.6 Table 11,,Measured total thickness 1.6 mm (Table 11). thickness_um converted from 1.6 mm.
+ectc51909.2023.00155-b-c11,ectc51909.2023.00155-b,stiffener,,,Cu stiffener,1,,,2000,,,,,,Cu,,design_target,text,,p.4 Sec. II.H; p.7 Sec. III.G,,"Attached with silicone glue, cured 130 C 1 h. Lateral size not given."
+ectc51909.2023.00155-b-c12,ectc51909.2023.00155-b,pcb,,,"motherboard (CCL 18.0 ppm/C, batch lamination)",1,150,150,2800,,,,,,CCL and prepregs,,design_target,table,,p.2 Table 4; p.7 Table 12,,Measured thickness 2.7 mm (Table 12).
+ectc51909.2023.00155-c-c1,ectc51909.2023.00155-c,logic_soc,yes,,Die A (mock of logic chip),1,21.9,21.9,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-c-c2,ectc51909.2023.00155-c,hbm,yes,,Die B (mock of HBM chip),4,10,8,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-c-c3,ectc51909.2023.00155-c,interposer,,,silicon interposer (wafer level),,50,50,,,,,,,silicon,,design_target,text,,p.2 Sec. II.A,,
+ectc51909.2023.00155-c-c4,ectc51909.2023.00155-c,mold,,,liquid EMC (MUF),,,,,,,,,,liquid epoxy molding compound,,stated,table,,p.3 Table 7,,
+ectc51909.2023.00155-d-c1,ectc51909.2023.00155-d,logic_soc,yes,,Die A (mock of logic chip),1,21.9,21.9,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-d-c2,ectc51909.2023.00155-d,hbm,yes,,Die B (mock of HBM chip),4,10,8,675,,,,,,,,design_target,table,,p.2 Table 1; p.1 Sec. II.A,,
+ectc51909.2023.00155-d-c3,ectc51909.2023.00155-d,interposer,,,silicon interposer (FEM),,50,50,,,,,,,silicon,,simulated,text,,p.3 Sec. II.E; p.3 Fig. 3,,
+ectc51909.2023.00155-d-c4,ectc51909.2023.00155-d,mold,,,EMC (FEM),,,,,,,,,,EMC (visco-elastic),,simulated,text,,p.3 Sec. II.E; p.3 Table 8,,
+ectc51909.2023.00155-d-c5,ectc51909.2023.00155-d,underfill,,,CUF (FEM),,,,,,,,,,CUF (visco-elastic),,simulated,text,,p.3 Sec. II.E; p.3 Table 8,,
+ectc51529.2024.00164-a-c1,ectc51529.2024.00164-a,logic_soc,yes,,"TTV (36 central + 8 peripheral heaters, 2 hot-spot heaters, 118 RTDs)",1,25.2,32.2,,,,,,,silicon,,design_target,text,,p.2 Sec. II.A,,Up to 5 kW uniform heating; hot spots 0.5x0.5 and 1.0x1.0 mm2. Thinned; thickness not given.
+ectc51529.2024.00164-a-c2,ectc51529.2024.00164-a,micro_cooler,,,IMC-Si (Si carrier C2 with egg-shaped micropillars),1,,,775,,,,,,silicon,,design_target,text,thickness_um:derived,p.2 Sec. II.B-C; p.2 Fig. 2(d),,"150 um pillars + 625 um base. 3x3 zones of about 92 mm2, one inlet and outlet each."
+ectc51529.2024.00164-a-c3,ectc51529.2024.00164-a,other,,,LIO (liquid inlet/outlet manifold),1,,,,,,,,,,,stated,text,,p.2 Sec. II.C; p.2 Fig. 2(e),,Replaces TIM; coolant contacts the Si directly.
+ectc51529.2024.00164-a-c4,ectc51529.2024.00164-a,adhesive,,,polymer-based sealant (on ribs),,,,,,,,,,polymer-based sealant,,stated,text,,p.2 Sec. II.C; p.4 Sec. IV.F,,
+ectc51529.2024.00164-a-c5,ectc51529.2024.00164-a,pcb,,,test PCB with pin socket and back plate,1,,,,,,,,,,,stated,mixed,,p.2 Sec. III.A; p.2 Fig. 2(e),,
+ectc51529.2024.00164-b-c1,ectc51529.2024.00164-b,logic_soc,yes,,"TTV (36 central + 8 peripheral heaters, 2 hot-spot heaters, 118 RTDs)",1,25.2,32.2,,,,,,,silicon,,design_target,text,,p.2 Sec. II.A,,Up to 5 kW uniform heating; hot spots 0.5x0.5 and 1.0x1.0 mm2. Thinned; thickness not given.
+ectc51529.2024.00164-b-c2,ectc51529.2024.00164-b,other,,,LIO (liquid inlet/outlet manifold),1,,,,,,,,,,,stated,text,,p.2 Sec. II.C; p.2 Fig. 2(e),,Replaces TIM; coolant contacts the Si directly.
+ectc51529.2024.00164-b-c3,ectc51529.2024.00164-b,adhesive,,,polymer-based sealant,,,,,,,,,,polymer-based sealant,,stated,text,,p.2 Sec. II.C; p.4 Sec. IV.F,,
+ectc51529.2024.00164-b-c4,ectc51529.2024.00164-b,pcb,,,test PCB with pin socket and back plate,1,,,,,,,,,,,stated,mixed,,p.2 Sec. III.A; p.2 Fig. 2(e),,
+ectc51529.2024.00164-c-c1,ectc51529.2024.00164-c,logic_soc,yes,,"TTV (36 central + 8 peripheral heaters, 2 hot-spot heaters, 118 RTDs)",1,25.2,32.2,,,,,,,silicon,,design_target,text,,p.2 Sec. II.A,,Up to 5 kW uniform heating; hot spots 0.5x0.5 and 1.0x1.0 mm2. Thinned; thickness not given.
+ectc51529.2024.00164-c-c2,ectc51529.2024.00164-c,micro_cooler,,,IMC-Si (Si carrier C2 with egg-shaped micropillars),1,,,775,,,,,,silicon,,design_target,text,thickness_um:derived,p.2 Sec. II.B-C; p.2 Fig. 2(d),,"150 um pillars + 625 um base. 3x3 zones of about 92 mm2, one inlet and outlet each."
+ectc51529.2024.00164-c-c3,ectc51529.2024.00164-c,other,,,LIO (liquid inlet/outlet manifold),1,,,,,,,,,,,stated,text,,p.2 Sec. II.C; p.2 Fig. 2(e),,Replaces TIM; coolant contacts the Si directly.
+ectc51529.2024.00164-c-c4,ectc51529.2024.00164-c,adhesive,,,polymer-based sealant (ribs kept free),,,,,,,,,,polymer-based sealant,,stated,text,,p.2 Sec. II.C; p.4 Sec. IV.F,,
+ectc51529.2024.00164-c-c5,ectc51529.2024.00164-c,pcb,,,test PCB with pin socket and back plate,1,,,,,,,,,,,stated,mixed,,p.2 Sec. III.A; p.2 Fig. 2(e),,
+ectc51529.2024.00164-e-c1,ectc51529.2024.00164-e,adhesive,,,polymer-based sealant,,,,,,,,,,polymer-based sealant,,stated,text,,p.3 Sec. IV.B,,
+ectc51846.2026.00375-a-c1,ectc51846.2026.00375-a,inductor,,yes,L-type-iPaS embedded flat-coil inductor (series coil-unit array),,,,,,,,,,"2-layer Cu coil (100 um/layer, 1.5 turns per unit); metal composite (iron powder + epoxy)",,design_target,text,,p.2 Sec. III.A; p.3 Sec. III.B; p.4 Table II,,"Module unit w 0.5 mm, inner diameter 1.0 mm; L 0.29 uH, Rdc 16 mOhm (Table II). Unit count not stated."
+ectc51846.2026.00375-a-c2,ectc51846.2026.00375-a,other,,,"PMIC (buck controller, vendor reference layout)",1,,,,,,,,,,,stated,text,,p.3 Sec. III.B,,Embedded inductor placed underneath the PMIC.
+ectc51846.2026.00375-a-c3,ectc51846.2026.00375-a,substrate,,,inductor-embedded substrate (3-2-3),1,30,20,1200,,,,,,,,design_target,text,,p.1 Abstract; p.2 Sec. I; p.4 Sec. V.A,thickness_um:approx,'about 1.2 mm'; locally thicker at inductor. Freed surface footprint about 4.0 x 4.0 mm.
+ectc51846.2026.00375-b-c1,ectc51846.2026.00375-b,inductor,,no,commercial SMD power inductor,1,4.0,4.0,1200,,,,,,,,design_target,table,,p.4 Table II,,"L 0.47 uH, Rdc 20 mOhm."
+ectc51846.2026.00375-b-c2,ectc51846.2026.00375-b,other,,,PMIC (buck controller),1,,,,,,,,,,,stated,text,,p.4 Sec. V,,
+ectc51846.2026.00375-b-c3,ectc51846.2026.00375-b,substrate,,,reference module board,1,30,20,,,,,,,,,design_target,text,,p.4 Sec. V.A,,
+ectc51846.2026.00375-c-c1,ectc51846.2026.00375-c,inductor,,yes,"single flat-coil unit (w 0.5 mm, inner diameter 1.6 mm)",1,,,,,,,,,2-layer Cu coil (100 um/layer); metal composite,,design_target,table,,p.4 Table I; p.2 Fig. 3,,Termination electrodes formed for characterization.
+ectc51846.2026.00375-d-c1,ectc51846.2026.00375-d,inductor,,yes,"series coil-unit array (w 0.5 mm, inner diameter 1.0 mm units)",,,,,,,,,,2-layer Cu coil (100 um/layer); metal composite,,design_target,table,,p.4 Table I; p.4 Fig. 6,,"N = 4, 6, 8 (DC bias); N = 4 to 8 (L and Rdc scaling)."

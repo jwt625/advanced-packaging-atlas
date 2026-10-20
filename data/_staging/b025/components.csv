@@ -1,0 +1,11 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00134-a-c1,ectc51846.2026.00134-a,bridge,,yes,EMIB (Embedded Multi-die Interconnect Bridge),2,,,,,,,,,Si,,stated,text,,p.3 Sec. III; p.4 Fig. 8(a),,Embedded in the top layers for fine die-to-die interconnect; bridge size and depth not reported.
+ectc51846.2026.00134-a-c2,ectc51846.2026.00134-a,substrate,,,glass core substrate (24-layer),1,,,,,,,,,glass core; wet SAP RDL,,stated,text,,p.3 Sec. III; p.4 Fig. 8,,"Glass type, core thickness and unit size not reported."
+ectc51846.2026.00134-e-c1,ectc51846.2026.00134-e,stiffener,,,stiffener (organic reference),1,,,,,,,,,,,stated,figure_image,,p.4 Fig. 7,,Only the label 'Organic with Stiffener'.
+ectc51909.2023.00190-a-c1,ectc51909.2023.00190-a,other,,,top wafer (thinned after bonding),1,,,,,,,,,Si,,stated,mixed,,p.2 Fig. 1; p.3 Sec. II.E,,"Top Si removed by edge trim, partial grind and Si CMP."
+ectc51909.2023.00190-a-c2,ectc51909.2023.00190-a,other,,,bottom wafer (300 mm),1,,,,,,,,,Si,,design_target,text,,p.1 Abstract; p.5 Sec. II.F,,
+icep55381.2022.9795565-b-c1,icep55381.2022.9795565-b,other,,,"top die (Si, damascene BEOL, Ni/Sn bumps)",,,,,,,,,,Si,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,Die size not reported.
+icep55381.2022.9795565-b-c2,icep55381.2022.9795565-b,other,,,"bottom wafer (Si, damascene BEOL, Al probe pads, Co/Sn bumps in oxide cavities)",1,,,,,,,,,Si,,stated,text,,p.1 Sec. II; p.2 Sec. III.B; p.1 Fig. 1,,
+icep55381.2022.9795565-c-c1,icep55381.2022.9795565-c,other,,,"top die (Si, damascene BEOL, Ni/Sn bumps)",,,,,,,,,,Si,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,Die size not reported.
+icep55381.2022.9795565-c-c2,icep55381.2022.9795565-c,other,,,"bottom wafer (Si, damascene BEOL, Al probe pads, Co/Sn bumps in oxide cavities)",1,,,,,,,,,Si,,stated,text,,p.1 Sec. II; p.2 Sec. III.B; p.1 Fig. 1,,
+icep55381.2022.9795565-c-c3,icep55381.2022.9795565-c,underfill,,,capillary underfill (CUF),,,,,,,,,,,,stated,text,,p.2 Sec. III.D,,Product and cure conditions not stated.

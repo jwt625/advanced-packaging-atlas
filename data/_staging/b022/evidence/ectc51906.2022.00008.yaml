@@ -1,0 +1,36 @@
+paper_id: ectc51906.2022.00008
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51906.2022.00008/text.md
+  - references/ectc51906.2022.00008/source.json
+  - references/ectc51906.2022.00008/figures/page_02.png
+  - references/ectc51906.2022.00008/figures/page_03.png
+  - references/ectc51906.2022.00008/figures/page_04.png
+  - references/ectc51906.2022.00008/figures/page_05.png
+figure_reading_method: >-
+  Page renders; 450 dpi re-crop of Fig. 8; candidates p03_fig4, p04_fig6, p04_fig7, p05_fig10, p05_fig11, p05_tableii
+  opened. Fig. 8 medians read at the 50% quantile (+/-0.03 uF/mm2).
+entries:
+  - {table: test_vehicles, row_id: ectc51906.2022.00008-a, field: interposer_x_mm, value: 32, unit: mm, basis: design_target, locator: "p.4 Sec. III.A", note: "interposer 32x35 mm2"}
+  - {table: interconnects, row_id: ectc51906.2022.00008-a-i3, field: pitch_um, value: 150, unit: um, basis: design_target, locator: "p.4 Sec. III.A", note: "nominal C4 pitch"}
+derived:
+  - {table: test_vehicles, row_id: ectc51906.2022.00008-a, field: interposer_area_mm2, value: 1120, formula: "x*y = 32*35", inputs: "p.4 Sec. III.A"}
+  - {table: test_vehicles, row_id: ectc51906.2022.00008-a, field: n_dies, value: 4, formula: "2 split SOC + 2 HBM", inputs: "p.4 Sec. III.A"}
+conflicts:
+  - {table: metrics, row_id: ectc51906.2022.00008-c-m1, field: value, values: [61, 70], locators: ["p.5 Fig. 11 table", "p.5 Fig. 11 plot at 25 C (case not labelled)"], chosen: 61, why: "result table over unlabelled plot curve"}
+  - {table: metrics, row_id: ectc51906.2022.00008-c-m2, field: value, values: [26, -35], locators: ["p.5 Fig. 11 table", "p.5 Fig. 11 plot near 260 C"], chosen: 26, why: "table gives magnitudes; plot sign negative"}
+excluded:
+  - "HBM1/2/2E/3 data rates and HBM2/2E/3 package widths and ~5.5 mm SOC-HBM length (background)"
+  - "Eye diagram and insertion loss of multilayer RDL from ref [5]; CoWoS-R reliability from ref [6]"
+  - "Fig. 2 normalized RC curves and Fig. 5(b) line density vs L/S and 3-6 RDL layers (generic design study, not this TV)"
+  - "Table I organic vs Si interposer comparison (Si interposer column: TSV, embedded DTC iCap)"
+not_reported:
+  - process_steps
+  - optical_interfaces
+  - RDL layer count, thicknesses, via sizes and dielectric product for this TV; interposer thickness
+  - top-die ubump pitch, die sizes, HBM generation of the built TV, substrate layers
+  - IPD size/capacitance per device, Si connection block size and count
+  - reliability sample counts and preconditioning level; whether the eye diagram is measured or simulated
+source_quality:
+  - "All candidates used as-is; none clipped."

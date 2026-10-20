@@ -1,0 +1,30 @@
+paper_id: ectc51909.2023.00268
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00268/text.md
+  - references/ectc51909.2023.00268/source.json
+  - references/ectc51909.2023.00268/figures/page_02.png
+  - references/ectc51909.2023.00268/figures/page_03.png
+  - references/ectc51909.2023.00268/figures/page_04.png
+  - references/ectc51909.2023.00268/figures/page_05.png
+figure_reading_method: >-
+  Candidates p03_fig5, p03_fig6, p03_fig7, p04_fig8, p04_fig10, p05_fig11 opened. Fig. 6 curves read at x = 1.5 um and
+  at curve starts on a 14.4 px per um y scale (+/-0.5 um). Fig. 8 table and Fig. 10 SEM labels read directly.
+entries:
+  - {table: interconnects, row_id: ectc51909.2023.00268-a-i1, field: depth_um, value: 13, unit: um, basis: measured, locator: "p.4 Fig. 9(a)", note: "label 'via depth: 13 um' on profile of not-Cu-filled via"}
+derived: []
+conflicts:
+  - {table: interconnects, row_id: ectc51909.2023.00268-a-i1, field: depth_um, values: ["13 um via depth (Fig. 9(a) label)", "13 um Cu pad undulation (text)"], locators: ["p.4 Fig. 9(a)", "p.3 Sec. 3.2"], chosen: "13 um entered both as via depth and as pad undulation metric", why: "same number described two ways"}
+excluded:
+  - "Package-size roadmap (Fig. 1) and wafer vs panel area efficiency (Fig. 2: text 62% to 85% for 60x60 mm; table 69.3% vs 83.0%), generic estimates not tied to a TV"
+  - "Samsung PLP mass production history (2018 wearable AP, 2022 mobile AP)"
+  - "Fan-out market and roadmap claims of refs [1]-[6]"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - dielectric material and thickness, Cu thickness, via diameter, number of RDL layers
+  - die and package sizes, interposer size, number of units per panel
+  - stepper model, CAR product, exposure dose, plating and etch chemistries
+  - stitching overlay error in um (only qualitative SEM shapes)
+source_quality:
+  - "Clean text layer; all six chosen candidates usable as-is."

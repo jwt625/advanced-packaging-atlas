@@ -1,0 +1,36 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51529.2024.00017-a-c1,ectc51529.2024.00017-a,dummy_die,yes,,"top die (test chiplet with daisy chains, local alignment marks at each corner)",,6.2,7.7,,,,,,,,,design_target,figure_image,,p.2 Fig. 1(b); p.2 Sec. II.A,,Dimensions labelled on optical image. Singulated from top wafer by plasma dicing; MFZ around each chiplet.
+ectc51529.2024.00017-a-c2,ectc51529.2024.00017-a,base_die,yes,,base wafer (half-reticle field with 8 bonding sites),,,,,,,,,,,,stated,mixed,,p.2 Fig. 1(b); p.2 Sec. II.A,,Wafer size and thickness not stated; daisy chains run between top die and base wafer.
+ectc51687.2025.00141-a-c1,ectc51687.2025.00141-a,other,,,"bottom (sensor) chip, BI-CIS with pixel area and micro-bump connection areas",1,40,33,,,,,,,,,design_target,table,,p.3 Table I; p.4 Fig. 5,,"Back-illuminated CMOS image sensor wafer bonded to support substrate wafer, thinned; carries TSVs and backside Cu wiring."
+ectc51687.2025.00141-a-c2,ectc51687.2025.00141-a,logic_soc,,,top (logic) chip,2,33,3.5,,,,,,,,,design_target,table,,p.3 Table I; p.4 Fig. 5,,"Each connected to sensor chip via 15,000 micro-bumps; Al interconnect on logic side (Fig. 10(a) inset)."
+ectc51687.2025.00141-a-c3,ectc51687.2025.00141-a,other,,,support substrate wafer,1,,,,,,,,,,,stated,mixed,,p.4 Sec. III.B; p.4 Fig. 6(a),,Carrier wafer bonded to CIS wafer front side; material and thickness not stated.
+estc60143.2024.10712129-a-c1,estc60143.2024.10712129-a,dummy_die,yes,,large die (mimics logic),1,15,20,,,,,,,,,design_target,figure_image,,p.2 Fig. 2,,Cu pillar + Ni barrier + SnAg solder bumps.
+estc60143.2024.10712129-a-c2,estc60143.2024.10712129-a,dummy_die,yes,,small die (mimics memory),4,5,10,,,,,,,,,design_target,figure_image,count:schematic,p.2 Fig. 2,,Count of 4 per site from layout drawing.
+estc60143.2024.10712129-a-c3,estc60143.2024.10712129-a,interposer,yes,,interposer wafer with Cu pads,,,,,,,,,,,,stated,table,,p.2 Table I,,Interposer material and wafer size not stated.
+estc60143.2024.10712129-b-c1,estc60143.2024.10712129-b,dummy_die,yes,,large die (mimics logic),1,15,20,,,,,,,,,design_target,figure_image,,p.2 Fig. 2,,Cu pillar + Ni barrier + SnAg solder bumps.
+estc60143.2024.10712129-b-c2,estc60143.2024.10712129-b,dummy_die,yes,,small die (mimics memory),4,5,10,,,,,,,,,design_target,figure_image,count:schematic,p.2 Fig. 2,,Count of 4 per site from layout drawing.
+estc60143.2024.10712129-b-c3,estc60143.2024.10712129-b,interposer,yes,,interposer wafer with Cu pads,,,,,,,,,,,,stated,table,,p.2 Table I,,Interposer material and wafer size not stated.
+estc60143.2024.10712129-c-c1,estc60143.2024.10712129-c,dummy_die,yes,,large die (mimics logic),1,15,20,,,,,,,,,design_target,figure_image,,p.2 Fig. 2,,Cu pillar + Ni barrier + SnAg solder bumps.
+estc60143.2024.10712129-c-c2,estc60143.2024.10712129-c,dummy_die,yes,,small die (mimics memory),4,5,10,,,,,,,,,design_target,figure_image,count:schematic,p.2 Fig. 2,,Count of 4 per site from layout drawing.
+estc60143.2024.10712129-c-c3,estc60143.2024.10712129-c,interposer,yes,,interposer wafer with Cu pads,,,,,,,,,,,,stated,table,,p.2 Table I,,Interposer material and wafer size not stated.
+estc60143.2024.10712129-f-c1,estc60143.2024.10712129-f,dummy_die,,yes,embedded Si chip,700,,,,,,,,,Si,,measured,text,,p.4 Sec. III.B; p.2 Fig. 6; p.4 Fig. 12,count:gt,More than 700 dies mounted per panel; die size and function not stated; is_emulator not stated.
+estc60143.2024.10712129-f-c2,estc60143.2024.10712129-f,die_attach_film,,,DAF,,,,,,,,,,DAF,,stated,text,,p.2 Sec. II.B; p.4 Fig. 12,,Cured in pressure oven.
+estc60143.2024.10712129-f-c3,estc60143.2024.10712129-f,mold,,,compression mold (EMC),,,,,,,,,,EMC,,stated,mixed,,p.2 Sec. II.B; p.2 Fig. 6,,
+estc60143.2024.10712129-g-c1,estc60143.2024.10712129-g,dummy_die,,,Die A,,21.9,21.9,675,,,,,,,,design_target,table,,p.2 Table II,,is_emulator and count not stated.
+estc60143.2024.10712129-g-c2,estc60143.2024.10712129-g,dummy_die,,,Die B,,10,8,675,,,,,,,,design_target,table,,p.2 Table II,,is_emulator and count not stated.
+estc60143.2024.10712129-g-c3,estc60143.2024.10712129-g,dummy_die,yes,,dummy dies (reduce EMC area and interposer warpage),,,,,,,,,,,,stated,text,,p.4 Sec. III.C,,
+estc60143.2024.10712129-g-c4,estc60143.2024.10712129-g,interposer,,,silicon interposer,,50,50,200,,,,,,Si,,design_target,table,,p.2 Table III,,
+estc60143.2024.10712129-g-c5,estc60143.2024.10712129-g,substrate,,,package substrate-A,,100,100,1600,,,,,,,,measured,table,,p.3 Table IV,,Actual value = design 1.6 mm. Core material not named.
+estc60143.2024.10712129-g-c6,estc60143.2024.10712129-g,stiffener,,,"Cu stiffener (selected t=2.0 mm, w=20.5 mm)",,,,2000,,,,,,Cu,,design_target,mixed,,p.4 Sec. III.C; p.3 Fig. 7; p.4 Fig. 15,,Selected design from stiffener study; use in TCT build follows the sequential Sec. III.C narrative.
+estc60143.2024.10712129-g-c7,estc60143.2024.10712129-g,pcb,,,motherboard,,150,150,2800,,,,,,,,design_target,table,,p.3 Table V,,
+estc60143.2024.10712129-g-c8,estc60143.2024.10712129-g,underfill,,,CUF (die-interposer and interposer-substrate),,,,,,,,,,CUF,,stated,mixed,,p.3 Fig. 7; p.4 Sec. III.C,,
+estc60143.2024.10712129-g-c9,estc60143.2024.10712129-g,mold,,,EMC (C-mold on interposer),,,,,,,,,,EMC,,stated,mixed,,p.3 Fig. 7; p.4 Sec. III.C,,
+estc60143.2024.10712129-h-c1,estc60143.2024.10712129-h,dummy_die,,,Die A,,21.9,21.9,675,,,,,,,,design_target,table,,p.2 Table II,,is_emulator and count not stated.
+estc60143.2024.10712129-h-c2,estc60143.2024.10712129-h,dummy_die,,,Die B,,10,8,675,,,,,,,,design_target,table,,p.2 Table II,,is_emulator and count not stated.
+estc60143.2024.10712129-h-c3,estc60143.2024.10712129-h,dummy_die,yes,,dummy dies (reduce EMC area and interposer warpage),,,,,,,,,,,,stated,text,,p.4 Sec. III.C,,
+estc60143.2024.10712129-h-c4,estc60143.2024.10712129-h,interposer,,,silicon interposer,,50,50,200,,,,,,Si,,design_target,table,,p.2 Table III,,
+estc60143.2024.10712129-h-c5,estc60143.2024.10712129-h,substrate,,,package substrate-B,,100,100,1600,,,,,,,,measured,table,,p.3 Table IV,,Actual value = design 1.6 mm. Core material not named.
+estc60143.2024.10712129-h-c6,estc60143.2024.10712129-h,stiffener,,,"Cu stiffener (selected t=2.0 mm, w=20.5 mm)",,,,2000,,,,,,Cu,,design_target,mixed,,p.4 Sec. III.C; p.3 Fig. 7; p.4 Fig. 15,,Selected design from stiffener study; use in TCT build follows the sequential Sec. III.C narrative.
+estc60143.2024.10712129-h-c7,estc60143.2024.10712129-h,pcb,,,motherboard,,150,150,2800,,,,,,,,design_target,table,,p.3 Table V,,
+estc60143.2024.10712129-h-c8,estc60143.2024.10712129-h,underfill,,,CUF (die-interposer and interposer-substrate),,,,,,,,,,CUF,,stated,mixed,,p.3 Fig. 7; p.4 Sec. III.C,,
+estc60143.2024.10712129-h-c9,estc60143.2024.10712129-h,mold,,,EMC (C-mold on interposer),,,,,,,,,,EMC,,stated,mixed,,p.3 Fig. 7; p.4 Sec. III.C,,

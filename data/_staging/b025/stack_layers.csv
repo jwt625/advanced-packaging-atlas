@@ -1,0 +1,37 @@
+layer_id,tv_id,structure,side,seq,layer_name,feature,material,material_class,layer_role,reinforcement,thickness_um,thickness_min_um,thickness_max_um,line_um,space_um,via_diameter_um,via_pitch_um,roughness_ra_um,repeat,properties,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00134-a-L01,ectc51846.2026.00134-a,substrate_buildup,front,1,front build-up RDL layers,,Cu (wet SAP); dielectric not stated,metal,conductor,,,,,,,,,,10,,design_target,text,,p.1 Abstract; p.3 Sec. III,,"Count from '10-2-10'. Line/space, dielectric material and thicknesses not reported."
+ectc51846.2026.00134-a-L02,ectc51846.2026.00134-a,bridge,front,1,EMIB bridges (2x) in top layers,,Si,silicon,device,,,,,,,,,,,,stated,text,,p.3 Sec. III; p.4 Fig. 8(a),,
+ectc51846.2026.00134-a-L03,ectc51846.2026.00134-a,glass_core,core,1,glass core with Cu-filled TGVs,,glass (type not stated),glass,core,,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. II; p.4 Fig. 8(c),,'Thick glass core'; thickness not given. The '2' of 10-2-10 read as core metal layers (not stated explicitly).
+ectc51846.2026.00134-a-L04,ectc51846.2026.00134-a,substrate_buildup,back,1,back build-up RDL layers,,Cu (wet SAP); dielectric not stated,metal,conductor,,,,,,,,,,10,,design_target,text,,p.1 Abstract; p.3 Sec. III,,
+ectc51846.2026.00134-b-L01,ectc51846.2026.00134-b,glass_core,core,1,glass core with fully Cu-filled TGVs,,glass (type not stated),glass,core,,,,,,,,,,,,stated,text,,p.2 Sec. II.B; p.3 Fig. 4,,Fig. 4(c) variant carries a first patterning layer.
+ectc51846.2026.00134-c-L01,ectc51846.2026.00134-c,glass_core,core,1,glass with LAE through holes and cavities,,glass (type not stated),glass,core,,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 1; p.2 Fig. 2,,
+ectc51846.2026.00134-d-L01,ectc51846.2026.00134-d,glass_core,core,1,glass with embedded optical waveguides and through-glass holes,,glass (type not stated),glass,optical,,,,,,,,,,,,stated,text,,p.5 Sec. VI; p.5 Fig. 10(a),,
+ectc51846.2026.00134-e-L01,ectc51846.2026.00134-e,substrate_core,core,1,organic core,,organic core (product not stated),organic_laminate,core,,,,,,,,,,,,stated,figure_image,,p.3 Fig. 6; p.4 Fig. 7,,
+ectc51909.2023.00190-a-L01,ectc51909.2023.00190-a,die_stack,single,1,Pad metal,,pad metal (material not stated),metal,conductor,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,Formation not described in text.
+ectc51909.2023.00190-a-L02,ectc51909.2023.00190-a,die_stack,single,2,pad via layer,pad via,dielectric (not labelled) with pad via,unspecified,dielectric,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,
+ectc51909.2023.00190-a-L03,ectc51909.2023.00190-a,die_stack,single,3,Top metal,,top metal (material not stated),metal,conductor,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,
+ectc51909.2023.00190-a-L04,ectc51909.2023.00190-a,die_stack,single,4,oxide with top via,top via,oxide,dielectric_inorganic,dielectric,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.B; p.2 Fig. 1,,PECVD SiO2 stated for dielectric films.
+ectc51909.2023.00190-a-L05,ectc51909.2023.00190-a,die_stack,single,5,SiCN bonding layer (top wafer),,"SiCN (SiCN#2, PECVD)",dielectric_inorganic,bonding,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.B; p.2 Fig. 1,,
+ectc51909.2023.00190-a-L06,ectc51909.2023.00190-a,die_stack,single,6,interfacial SiOx at bond interface,,SiOx,dielectric_inorganic,bonding,,,0.00443,0.00489,,,,,,,,measured,figure_image,,p.3 Fig. 4(a),,TEM 4.43 and 4.89 nm; text says ~6 nm (conflict logged).
+ectc51909.2023.00190-a-L07,ectc51909.2023.00190-a,die_stack,single,7,SiCN bonding layer (bottom wafer),,"SiCN (SiCN#2, PECVD)",dielectric_inorganic,bonding,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.B; p.2 Fig. 1,,
+ectc51909.2023.00190-a-L08,ectc51909.2023.00190-a,die_stack,single,8,oxide with bottom via,bottom via,oxide,dielectric_inorganic,dielectric,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,
+ectc51909.2023.00190-a-L09,ectc51909.2023.00190-a,die_stack,single,9,Bottom metal,,bottom metal (material not stated),metal,conductor,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,
+ectc51909.2023.00190-a-L10,ectc51909.2023.00190-a,die_stack,single,10,bottom wafer substrate,,Si,silicon,carrier,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,300 mm.
+icep55381.2022.9795565-c-L01,icep55381.2022.9795565-c,die_stack,single,1,top Si die,,Si,silicon,device,,,,,,,,,,,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,
+icep55381.2022.9795565-c-L02,icep55381.2022.9795565-c,die_stack,single,2,top damascene metallization layers,,damascene metallization,metal,conductor,,,,,,,,,,,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,
+icep55381.2022.9795565-c-L03,icep55381.2022.9795565-c,die_stack,single,3,Ni/Sn bump (top die),,Ni/Sn,solder,bonding,,,,,,,,,,,,stated,text,,p.1 Sec. II,,Thicknesses not given.
+icep55381.2022.9795565-c-L04,icep55381.2022.9795565-c,die_stack,single,4,"Sn (bottom bump, converted to CoSn3 pre-IMC)",,Sn,solder,bonding,,0.5,,,,,,,,,,design_target,text,,p.2 Sec. III.D,,"Pre-IMC at 270 C, 1 min."
+icep55381.2022.9795565-c-L05,icep55381.2022.9795565-c,die_stack,single,5,Co (bottom bump),,Co,metal,bonding,,1.0,,,,,,,,,,design_target,text,,p.2 Sec. III.D,,
+icep55381.2022.9795565-c-L06,icep55381.2022.9795565-c,die_stack,single,6,UBM,,UBM (material not stated),metal,barrier,,,,,,,,,,,,stated,schematic,,p.1 Fig. 1,,Label in schematic only.
+icep55381.2022.9795565-c-L07,icep55381.2022.9795565-c,die_stack,single,7,oxide cavity layer,,oxide,dielectric_inorganic,dielectric,,,,,,,,,,,,stated,text,,p.2 Sec. III.B,,Co/Sn plated inside oxide cavities; depth not given.
+icep55381.2022.9795565-c-L08,icep55381.2022.9795565-c,die_stack,single,8,bottom damascene metallization with Al probe pads,,damascene metallization; Al pads,metal,conductor,,,,,,,,,,,,stated,text,,p.1 Sec. II; p.1 Fig. 1,,"Schematic labels M1, Al."
+icep55381.2022.9795565-c-L09,icep55381.2022.9795565-c,die_stack,single,9,bottom Si wafer,,Si,silicon,carrier,,,,,,,,,,,,stated,schematic,,p.1 Fig. 1,,
+icep55381.2022.9795565-c-L10,icep55381.2022.9795565-c,underfill,single,1,capillary underfill,,CUF (product not stated),underfill,encapsulant,,,,,,,,,,,,stated,text,,p.2 Sec. III.D,,
+icep55381.2022.9795565-b-L01,icep55381.2022.9795565-b,die_stack,single,1,top Si die,,Si,silicon,device,,,,,,,,,,,,stated,mixed,,p.1 Sec. II; p.1 Fig. 1,,
+icep55381.2022.9795565-b-L02,icep55381.2022.9795565-b,die_stack,single,2,Ni/Sn bump (top die),,Ni/Sn,solder,bonding,,,,,,,,,,,,stated,text,,p.1 Sec. II,,
+icep55381.2022.9795565-b-L03,icep55381.2022.9795565-b,die_stack,single,3,"Sn (bottom bump, converted to CoSn3 pre-IMC)",,Sn,solder,bonding,,,,,,,,,,,,design_target,mixed,,p.2 Sec. III.C; p.2 Fig. 4,,Split 0.5 / 1 / 2 um.
+icep55381.2022.9795565-b-L04,icep55381.2022.9795565-b,die_stack,single,4,Co (bottom bump),,Co,metal,bonding,,1.0,,,,,,,,,,design_target,mixed,,p.2 Sec. III.C; p.2 Fig. 4,,
+icep55381.2022.9795565-b-L05,icep55381.2022.9795565-b,die_stack,single,5,oxide cavity layer,,oxide,dielectric_inorganic,dielectric,,,,,,,,,,,,stated,text,,p.2 Sec. III.B,,
+icep55381.2022.9795565-b-L06,icep55381.2022.9795565-b,die_stack,single,6,bottom Si wafer,,Si,silicon,carrier,,,,,,,,,,,,stated,mixed,,p.1 Fig. 1,,
+icep55381.2022.9795565-a-L01,icep55381.2022.9795565-a,die,single,1,"Co/Sn bumps (unconfined), CoSn3 after pre-IMC",,Co/Sn -> CoSn3,metal,bonding,,,,,,,,,,,,stated,text,,p.1 Sec. III.A; p.1 Fig. 2,,
+icep55381.2022.9795565-a-L02,icep55381.2022.9795565-a,die,single,2,bottom Si wafer,,Si,silicon,carrier,,,,,,,,,,,,stated,text,,p.1 Sec. II,,

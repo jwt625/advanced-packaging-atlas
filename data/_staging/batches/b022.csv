@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+ectc51909.2023.00219,10.1109/ectc51909.2023.00219,Development of high reliability 6 µm-pitch Cu-Cu connections using over-400mm2-large Chip on Wafer bonding process,2023,ECTC,hybrid_bonding,hybrid_bonding,1,"6 um pitch Cu-Cu CoW bonding of >400 mm2 chips; daisy-chain yield, SIV, EM, cross-sections."
+ectc51906.2022.00181,10.1109/ectc51906.2022.00181,3DIC Stacking Process Investigation by Soldering Bonding Technology,2022,ECTC,microbump_3d,microbump_3d,1,CoW soldering of 50 um dies by mass reflow vs TCB; 20 um ubump pitch via solder tip volume; IMC voids.
+ectc51906.2022.00008,10.1109/ectc51906.2022.00008,Organic Interposer CoWoS-R+ (plus) Technology,2022,ECTC,organic_rdl_fanout,organic_rdl_fanout,1,"CoWoS-R+ organic interposer integrating IPD decaps and fine-pitch Si connection block, thick power mesh."

@@ -1,0 +1,2 @@
+oi_id,tv_id,coupler_type,alignment,wavelength_nm,band,polarization,channels,fiber_pitch_um,fiber_type,mfd_chip_um,mfd_fiber_um,coupling_loss_db,scope,attach_material,lane_rate_gbps,basis,source,overrides,locator,qualifiers,notes
+ectc51687.2025.00061-a-o1,ectc51687.2025.00061-a,edge,unspecified,,,,56,127,,,,,3 FAUs butt-coupled to PIC edges,,,design_target,text,,p.1 Abstract; p.2 Sec. I,,"As written '3 FAUs (56 couplers, 127um pitch)': whether 56 is per FAU or total not stated. No loss values."

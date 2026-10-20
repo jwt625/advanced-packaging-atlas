@@ -1,0 +1,34 @@
+paper_id: icep61562.2024.10535612
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/icep61562.2024.10535612/text.md
+  - references/icep61562.2024.10535612/source.json
+  - references/icep61562.2024.10535612/figures/page_01.png
+  - references/icep61562.2024.10535612/figures/page_02.png
+  - references/icep61562.2024.10535612/figures/cand/p01_fig2.png
+  - references/icep61562.2024.10535612/figures/cand/p02_fig2_2.png
+  - references/icep61562.2024.10535612/figures/cand/p02_fig3.png
+  - references/icep61562.2024.10535612/figures/cand/p02_fig4.png
+figure_reading_method: >-
+  Page renders and candidate crops. DOF values from text agree with the arrow labels in Fig. 3/4. Fig. 2 (p.2) CD
+  levels for 60/70 mJ read off the axis (~2.5 and ~2.9 um).
+entries:
+  - {table: metrics, row_id: icep61562.2024.10535612-a-m9, field: value_text, value: "60 mJ CD ~2.5-2.6 um; 70 mJ ~2.9 um", unit: um, basis: measured, locator: "p.2 Fig. 2", note: "open markers = partially lost patterns"}
+derived:
+  - {table: process_steps, row_id: icep61562.2024.10535612-a-s04, field: time_s, value: 1800, formula: "30 min x 60", inputs: "p.1 Sec. II"}
+conflicts:
+  - {table: figures, row_id: icep61562.2024.10535612-f01, field: label, values: ["caption Fig. 2 (p.1)", "text Fig 1"], locators: ["p.1 caption", "p.1 Sec. II"], chosen: "Fig. 2 (caption)", why: "rule (c): cite caption label and note"}
+  - {table: metrics, row_id: icep61562.2024.10535612-a-m7, field: value, values: [1.4, 1.47], locators: ["p.2 Sec. III", "own arithmetic 2.29/1.56"], chosen: 1.4, why: "paper's stated value"}
+excluded:
+  - "Organic substrate flatness 20 um and 250 mm exposure field for 500 mm substrate (Introduction context, not this coupon)"
+  - "Chiplet and CoWoS context of refs [1], [2]"
+not_reported:
+  - interconnects
+  - electrical_interfaces
+  - optical_interfaces
+  - "lens NA values, exposure tool and wavelength"
+  - "DFR product, Cu thickness, glass type and size"
+  - "Cu plating / seed etch after patterning (only resist patterning done)"
+source_quality:
+  - "Two different figures both captioned 'Fig. 2'; 2-page extended abstract."

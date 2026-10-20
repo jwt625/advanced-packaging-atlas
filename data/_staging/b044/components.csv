@@ -1,0 +1,25 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00092-a-c1,ectc51846.2026.00092-a,logic_soc,yes,,"SoC thermal test die (4 SoC heater groups, 5 thermal sensors each)",4,,,,,,,,,,,design_target,text,,p.4 Sec. III.A; p.4 Fig. 7,,16 SoC heater groups parallel-connected in PCB for uniform heating; total SoC area about 1.6X reticle.
+ectc51846.2026.00092-a-c2,ectc51846.2026.00092-a,hbm,yes,,HBM thermal test die (single HBM heater group),8,,,,,,,,,,,design_target,text,,p.4 Sec. III.A; p.4 Fig. 7,,
+ectc51846.2026.00092-a-c3,ectc51846.2026.00092-a,interposer,,,"CoWoS-R organic interposer, 3.3X reticle",1,,,,,,,,,organic interposer,,design_target,text,,p.3 Sec. I.B; p.4 Sec. III.A,,
+ectc51846.2026.00092-a-c4,ectc51846.2026.00092-a,substrate,,,package substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,Shown in schematic only; no details.
+ectc51846.2026.00092-a-c5,ectc51846.2026.00092-a,lid,,,"lid with inlet, outlet and manifold for liquid distribution",1,,,,,,,,,,,stated,text,,p.3 Sec. I.B; p.2 Fig. 1,,Material not stated.
+ectc51846.2026.00092-a-c6,ectc51846.2026.00092-a,adhesive,,,warpage-tolerant sealant at periphery of cooling area (die to lid),,,,,,,,,,,,stated,text,,p.3 Sec. II; p.5 Sec. IV.A,,"Selected for elongation, adhesion, coolant resistance; product not named."
+ectc51846.2026.00092-a-c7,ectc51846.2026.00092-a,micro_cooler,,no,"Si micropillar array formed on SoC backside (direct-to-silicon, DI water coolant)",4,,,,,,,,,Si,,stated,text,,p.2 Sec. I.A; p.2 Fig. 2; p.4 Sec. III.A,,Pillar dimensions not reported.
+ectc51846.2026.00092-b-c1,ectc51846.2026.00092-b,logic_soc,yes,,"SoC thermal test die (4 SoC heater groups, 5 thermal sensors each)",4,,,,,,,,,,,design_target,text,,p.4 Sec. III.A; p.4 Fig. 7,,16 SoC heater groups parallel-connected in PCB for uniform heating; total SoC area about 1.6X reticle.
+ectc51846.2026.00092-b-c2,ectc51846.2026.00092-b,hbm,yes,,HBM thermal test die (single HBM heater group),8,,,,,,,,,,,design_target,text,,p.4 Sec. III.A; p.4 Fig. 7,,
+ectc51846.2026.00092-b-c3,ectc51846.2026.00092-b,interposer,,,"CoWoS-R organic interposer, 3.3X reticle",1,,,,,,,,,organic interposer,,design_target,text,,p.3 Sec. I.B; p.4 Sec. III.A,,
+ectc51846.2026.00092-b-c4,ectc51846.2026.00092-b,substrate,,,package substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,Shown in schematic only; no details.
+ectc51846.2026.00092-b-c5,ectc51846.2026.00092-b,tim,,,TIM1.5 phase change material,,,,,,,,,,"PCM, 8 W/m-K",,stated,text,,p.4 Sec. III.B,,
+ectc51846.2026.00092-b-c6,ectc51846.2026.00092-b,cold_plate,,,commercial cold plate,1,,,,,,,,,,,stated,text,,p.4 Sec. III.B,,
+ectc51846.2026.00092-c-c1,ectc51846.2026.00092-c,logic_soc,yes,,"SoC thermal test die (4 SoC heater groups, 5 thermal sensors each)",4,,,,,,,,,,,design_target,text,,p.4 Sec. III.A; p.4 Fig. 7,,16 SoC heater groups parallel-connected in PCB for uniform heating; total SoC area about 1.6X reticle.
+ectc51846.2026.00092-c-c2,ectc51846.2026.00092-c,hbm,yes,,HBM thermal test die (single HBM heater group),8,,,,,,,,,,,design_target,text,,p.4 Sec. III.A; p.4 Fig. 7,,
+ectc51846.2026.00092-c-c3,ectc51846.2026.00092-c,interposer,,,"CoWoS-R organic interposer, 3.3X reticle",1,,,,,,,,,organic interposer,,design_target,text,,p.3 Sec. I.B; p.4 Sec. III.A,,
+ectc51846.2026.00092-c-c4,ectc51846.2026.00092-c,substrate,,,package substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,Shown in schematic only; no details.
+ectc51846.2026.00092-c-c5,ectc51846.2026.00092-c,tim,,,TIM1 (TSMC POR),,,,,,,,,,TSMC POR,,stated,text,,p.4 Sec. III.B,,
+ectc51846.2026.00092-c-c6,ectc51846.2026.00092-c,lid,,,lid,1,,,,,,,,,,,stated,text,,p.4 Sec. III.B,,
+ectc51846.2026.00092-c-c7,ectc51846.2026.00092-c,tim,,,TIM2 phase change material,,,,,,,,,,"PCM, 8 W/m-K",,stated,text,,p.4 Sec. III.B,,
+ectc51846.2026.00092-c-c8,ectc51846.2026.00092-c,cold_plate,,,commercial cold plate,1,,,,,,,,,,,stated,text,,p.4 Sec. III.B,,
+ectc51529.2024.00133-a-c1,ectc51529.2024.00133-a,substrate,,,SCHOTT D 263 glass substrate (polished),1,50,50,400,,,,,,SCHOTT D 263 glass,SCHOTT,design_target,text,,p.2 Sec. II,,0.4 mm converted to 400 um.
+ectc51529.2024.00229-a-c1,ectc51529.2024.00229-a,substrate,,,75-mm-square package substrate,1,75,75,,,,,,,,,design_target,mixed,,p.3 Sec. III.A; p.3 Fig. 4(a),,
+ectc51529.2024.00229-b-c1,ectc51529.2024.00229-b,pic,,,silicon photonics die,1,26.0,16.5,,,,,,,Si (220 nm Si waveguide),,design_target,text,,p.3 Sec. III.B; p.4 Sec. III.B,,

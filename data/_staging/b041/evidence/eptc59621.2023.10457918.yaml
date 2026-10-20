@@ -1,0 +1,38 @@
+paper_id: eptc59621.2023.10457918
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/eptc59621.2023.10457918/text.md
+  - references/eptc59621.2023.10457918/source.json
+  - references/eptc59621.2023.10457918/TEXT_LAYER_WARNING.md
+  - references/eptc59621.2023.10457918/figures/page_01_220dpi.png
+  - references/eptc59621.2023.10457918/figures/page_02_220dpi.png
+  - references/eptc59621.2023.10457918/figures/page_03_220dpi.png
+  - references/eptc59621.2023.10457918/figures/page_04_220dpi.png
+figure_reading_method: >-
+  OCR text verified against 220 dpi page images; Tab. 2-4 (garbled in OCR) read from 300 dpi re-crops of source.pdf.
+  Processor count checked by counting boxes in Fig. 6 and labels in the unnumbered Fig. 7 drawing (2.1-2.6, 4.1-4.4).
+entries:
+  - {table: components, row_id: eptc59621.2023.10457918-a-c2, field: count, value: 10, unit: ea, basis: design_target, locator: "p.1 Introduction; p.3 Fig. 6; p.3 Fig. 7", note: "10 red boxes / labels"}
+derived:
+  - {table: test_vehicles, row_id: eptc59621.2023.10457918-a, field: n_dies, value: 109, formula: "5 interposer + 10 processor + 94 optical", inputs: "p.1 Introduction"}
+  - {table: interconnects, row_id: eptc59621.2023.10457918-a-i1, field: depth_um, value: 150, formula: "TGV depth = wafer thickness", inputs: "p.1 Abstract"}
+  - {table: process_steps, row_id: eptc59621.2023.10457918-a-s02, field: conditions, value: 254, formula: "10 mil x 25.4 um", inputs: "p.2 Sec. 2; p.3 Sec. 4"}
+  - {table: process_steps, row_id: eptc59621.2023.10457918-a-s03, field: conditions, value: 152.4, formula: "6 mil x 25.4 um", inputs: "p.3 Sec. 4"}
+  - {table: process_steps, row_id: eptc59621.2023.10457918-a-s04, field: conditions, value: 101.6, formula: "4 mil x 25.4 um", inputs: "p.3 Sec. 4"}
+conflicts:
+  - {table: components, row_id: eptc59621.2023.10457918-a-c2, field: count, values: [10, 12], locators: ["p.1 Introduction; p.3 Fig. 6; p.3 Fig. 7", "p.3 Sec. 4"], chosen: 10, why: "Intro count and both layout drawings show 10"}
+  - {table: metrics, row_id: eptc59621.2023.10457918-a-m3, field: value_text, values: ["error a -0.78", "30.441-31.18 = -0.739"], locators: ["p.4 Tab. 2"], chosen: "as printed", why: "table entered verbatim"}
+  - {table: metrics, row_id: eptc59621.2023.10457918-a-m9, field: value_text, values: ["error a 1.74", "8.29-6.5 = 1.79"], locators: ["p.4 Tab. 4"], chosen: "as printed", why: "table entered verbatim"}
+  - {table: metrics, row_id: eptc59621.2023.10457918-a-m14, field: value_text, values: ["interposer 3.2 edged (text)", "Tab. 2 sample 2 edged"], locators: ["p.3 Results", "p.4 Tab. 2"], chosen: "both kept", why: "chip IDs vs table sample numbers not mapped by paper"}
+excluded:
+  - "Mechanical dicing, manual cleaving, stealth dicing (50 um wafers) and die-edge cracking results of refs [1], [2], [4], [5]"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "glass type, TGV diameter/pitch, metallization and passivation materials and thicknesses"
+  - "solder material, reflow conditions (future paper)"
+  - "absolute vacuum pressure; stencil used per measured sample"
+  - "yield percentage"
+source_quality:
+  - "Garbled text layer; tesseract OCR (Tab. 2-4 unreadable in OCR, read from images). Fig. 3 and Fig. 7 captions absent; an unlabelled photo of diced interposers on p.3."

@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+ectc51846.2026.00365,10.1109/ectc51846.2026.00365,Challenges and Solutions for Package-level Encapsulation of Ultra-large Die Complexes,2026,ECTC,microbump_3d,si_bridge;microbump_3d,1,"Void-free encapsulation case studies: 5X and >10X reticle EMIB, >4X reticle Foveros die complexes."
+ectc51687.2025.00090,10.1109/ectc51687.2025.00090,Next Generation Panel Level RDL Interposer Package for High Density Interconnection,2025,ECTC,panel,organic_rdl_fanout;panel,1,"Panel-level RDL interposer, 4.3x reticle, 6 RDLs at 2/2 um L/S, 16 chips; warpage control, reliability passed."
+ectc51906.2022.00031,10.1109/ectc51906.2022.00031,Analysis of Die Edge Bond Pads in Hybrid Bonded Multi-Die Stacks,2022,ECTC,hybrid_bonding,hybrid_bonding,2,"DBI Ultra 1-8 die stacks, 8x12 mm, 35 um TSV pitch, 15 um pads, 250 C anneal; SEM, yield vs edge distance."

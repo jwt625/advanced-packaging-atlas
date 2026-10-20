@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+ectc51687.2025.00026,10.1109/ectc51687.2025.00026,Package Warpage Reduction for Large CoWoS-R Packages,2025,ECTC,organic_rdl_fanout,organic_rdl_fanout,1,"5.5x CoWoS-R with 4 SoC + 12 HBM on 110x110 mm substrate; ubump join, IPD, underfill; warpage reduction."
+ectc51909.2023.00094,10.1109/ectc51909.2023.00094,Warpage Modulation Study on Panel-level Compression Molding Technology for Heterogenous Integration Applications,2023,ECTC,panel,panel;si_bridge,1,"~2600 cm2 panel compression molding of bridge dies and top dies; warpage vs material, carrier CTE, die thickness."
+ectc51687.2025.00048,10.1109/ectc51687.2025.00048,Development of Embedded Multi Si Bridge Package in Panel Level Process for HPC/AI Applications,2025,ECTC,si_bridge,panel;si_bridge;organic_rdl_fanout,1,"I-Cube E 2.3D panel-level RDL with embedded multi Si bridges; bridge accuracy, TTV, warpage control."

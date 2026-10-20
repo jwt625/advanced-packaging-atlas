@@ -1,0 +1,3 @@
+ei_id,tv_id,protocol,protocol_as_written,channel_type,lane_rate_gbps,lanes,aggregate_bw_tbps,bw_density_tbps_per_mm,bw_density_tbps_per_mm2,energy_pj_per_bit,scope,reach_mm,bump_pitch_um,line_um,space_um,insertion_loss_db,il_freq_ghz,ber,latency_ns,basis,source,overrides,locator,qualifiers,notes
+eptc62800.2024.10909872-a-e1,eptc62800.2024.10909872-a,hbm3,HBM3,organic_rdl,,,,,,,,5,,2,2,,,,,design_target,text,,p.1 Sec. 2-1,reach_mm:le,"PHY-area signal wiring L/S 2/2 um, max length 5 mm; inner layer SSGSS."
+eptc62800.2024.10909872-a-e2,eptc62800.2024.10909872-a,other,UCIe x32,organic_rdl,,32,,,,,,5,,2,2,,,,,design_target,text,,p.1 Sec. 2-1,reach_mm:le,UCIe package type (S/A) not stated; lanes from 'x32'.

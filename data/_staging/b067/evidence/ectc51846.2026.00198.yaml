@@ -1,0 +1,35 @@
+paper_id: ectc51846.2026.00198
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00198/text.md
+  - references/ectc51846.2026.00198/source.json
+  - references/ectc51846.2026.00198/figures/page_02.png
+  - references/ectc51846.2026.00198/figures/page_03.png
+  - references/ectc51846.2026.00198/figures/page_04.png
+figure_reading_method: >-
+  Page renders p.2-4 and candidates p02_fig1, p02_fig2, p03_fig3, p03_fig5, p03_fig6, p03_fig7, p04_fig8 viewed.
+  Fig. 8 linewidth error bars read by eye (+/-0.01 um); SEM tool name SU5000 read from the Fig. 6 image banner.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00198-b-m1, field: value, value: 22, unit: um, basis: measured, locator: "p.4 Fig. 8", note: "DOF window drawn between focus -22 and 0 um"}
+derived:
+  - {table: test_vehicles, row_id: ectc51846.2026.00198-a, field: package_thickness_mm, value: 1.1, formula: "glass thickness t 1.1 mm (no conversion; stored as package thickness of the test panel)", inputs: "p.2 Sec. III.A"}
+  - {table: components, row_id: ectc51846.2026.00198-a-c1, field: thickness_um, value: 1100, formula: "1.1 mm x 1000", inputs: "p.2 Sec. III.A"}
+  - {table: stack_layers, row_id: ectc51846.2026.00198-a-L03, field: thickness_um, value: 1100, formula: "1.1 mm x 1000", inputs: "p.2 Sec. III.A"}
+conflicts:
+  - {table: figures, row_id: ectc51846.2026.00198-f06, field: axis units, values: ["x[um] axis label", "490 mm x 490 mm caption"], locators: ["p.2 Fig. 2", "p.2 Fig. 2 caption"], chosen: "490 mm x 490 mm", why: "caption and text (entire substrate area) agree; axis label likely mislabelled"}
+excluded:
+  - "reticle size 25.52 x 32.52 mm attributed to the lithography scanner of ref [1] (used only as the paper's own area unit)"
+  - "organic substrate thickness variation 10 um p-p from ref [2]"
+  - "HRDP glass carrier TTV <5 um from ref [5]"
+  - "thin panels down to 0.2 mm thickness (general statement citing ref [2])"
+  - "Fig. 3 caption full-panel area 262,650 mm2 / 316-reticle (panel arithmetic, not a build metric)"
+not_reported:
+  - process_steps details: Cr deposition method and thickness, panel exposure dose, Ti-Cu seed thickness
+  - "lens NA, wavelength, tool name/model, throughput"
+  - "wafer diameter; absolute CD values (authors focus on variation)"
+  - interconnects
+  - electrical_interfaces
+  - optical_interfaces
+source_quality:
+  - "All 8 figure candidates hold the full figure; Fig. 2 axis label says um while caption says mm."

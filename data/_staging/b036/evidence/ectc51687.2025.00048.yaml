@@ -1,0 +1,35 @@
+paper_id: ectc51687.2025.00048
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00048/text.md
+  - references/ectc51687.2025.00048/source.json
+  - references/ectc51687.2025.00048/figures/page_02.png
+  - references/ectc51687.2025.00048/figures/page_03.png
+  - references/ectc51687.2025.00048/figures/page_04.png
+  - references/ectc51687.2025.00048/figures/page_05.png
+  - references/ectc51687.2025.00048/figures/cand/p02_fig2.png
+  - references/ectc51687.2025.00048/figures/cand/p02_fig2_3.png
+  - references/ectc51687.2025.00048/figures/cand/p03_fig3_4.png
+  - references/ectc51687.2025.00048/figures/cand/p05_fig4_2.png
+figure_reading_method: >-
+  150 dpi page renders; Fig. 2.2 labels read from a 400 dpi re-crop; Fig. 3.2.2 and Fig. 3.5 tables read from crops.
+  Fig. 3.1.2 bar chart and Fig. 3.3.1 warpage simulation have no readable absolute axis values.
+entries:
+  - {table: test_vehicles, row_id: ectc51687.2025.00048-a, field: interposer_x_mm, value: 95, unit: mm, basis: design_target, locator: "p.2 Fig. 2.2", note: "label 'Interposer Size 95.00x105.00mm2'"}
+  - {table: metrics, row_id: ectc51687.2025.00048-a-m8, field: value, value: 25, unit: um, basis: simulated, locator: "p.3 Fig. 3.2.2", note: "Case 1 required bridge Cu bump height +25 um (relative)"}
+derived: []
+conflicts:
+  - {table: test_vehicles, row_id: ectc51687.2025.00048-a, field: interposer_x_mm/interposer_y_mm, values: ["Interposer Size 95.00x105.00 mm2", "Unit Size 51.00x67.72 mm2", "4.3x reticle (text)"], locators: ["p.2 Fig. 2.2", "p.2 Fig. 2.2", "p.2 Sec. III"], chosen: "95x105 as labeled 'Interposer Size'", why: "literal label; unit size (3454 mm2) is closer to 4.3x reticle, so the 95x105 label may denote the panel/substrate-level outline; unresolved"}
+  - {table: metrics, row_id: ectc51687.2025.00048-a-m14, field: condition, values: ["MSL4 (30 C/60%, 96 hrs) (text)", "MSL4, reflow x3 at 260 C (Fig. 3.5)"], locators: ["p.4 Sec. III.E", "p.4 Fig. 3.5"], chosen: "Fig. 3.5 table", why: "result table; text soak condition kept in notes"}
+excluded:
+  - "I-Cube S / CoWoS-S 2.5D Si interposer examples of refs [1-3]"
+  - "Warpage model of ref [6] (only the neutral-factor method is reused; no numbers taken)"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - die and bridge sizes, counts (except 12 HBM), thicknesses; logic chip count
+  - RDL layer count, L/S, via size, dielectric product; Cu post and bump pitch/diameter/height; C4 pitch
+  - panel size; mold product; DAF product; bonding temperatures/times; carrier type and release
+  - absolute bonding accuracy, thickness deviation and panel warpage values; sample counts
+source_quality:
+  - "Fig. 2.2 and Fig. 3.5 candidate crops cut off bottom content; manual crops used."

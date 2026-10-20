@@ -1,0 +1,19 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51909.2023.00053-a-c1,ectc51909.2023.00053-a,logic_soc,,yes,"processor chiplet (U1, U2)",2,,,,,,,,,,,stated,mixed,,p.3 Sec. IV.A; p.3 Fig. 5; p.3 Fig. 6,,"Chips-first, face up, encapsulated. Size, thickness, node not reported; whether active silicon not stated."
+ectc51909.2023.00053-a-c2,ectc51909.2023.00053-a,hbm,yes,yes,HBM footprint die (U3-U6),4,,,,,,,,,,,stated,mixed,,p.3 Sec. IV.A; p.3 Fig. 5; p.3 Fig. 6,,Simulated HBM footprint with JEDEC 55 um pitch Cu studs; actual HBM to be mounted chips-last.
+ectc51909.2023.00053-a-c3,ectc51909.2023.00053-a,mold,,no,encapsulant (reconstituted wafer),,,,,,,,,,EMC or other dielectric (product not stated),,stated,text,,p.1 Abstract; p.3 Sec. IV.B,,Encapsulates active surface and sidewalls (face-up chips-first).
+eptc56328.2022.10013262-a-c1,eptc56328.2022.10013262-a,other,,yes,active embedded die (chips first; 'Combo active device & bridge die' in Fig. 6),1,,,,,,,,,,,stated,mixed,,p.3 Sec. LDI and Tall Cu Post Patterning; p.3 Fig. 6; p.4 Sec. Applications,,"Can be analog device, memory or processor (p.4). Size not given."
+eptc56328.2022.10013262-a-c2,eptc56328.2022.10013262-a,unspecified,,no,chips-last dies on top,4,,,,,,,,,,,stated,text,,p.3 Sec. LDI and Tall Cu Post Patterning; p.3 Fig. 6,,Fig. 6 side view shows two; 3D render shows four.
+eptc56328.2022.10013262-a-c3,eptc56328.2022.10013262-a,mold,,no,organic mold compound (EMC),,,,,,,,,,EMC,,stated,mixed,,p.3 Sec. LDI and Tall Cu Post Patterning; p.3 Fig. 6,,
+eptc56328.2022.10013262-a-c4,eptc56328.2022.10013262-a,lid,,,lid cover,,,,,,,,,,,,stated,text,,p.3 Sec. LDI and Tall Cu Post Patterning,,Not shown in figures.
+eptc56328.2022.10013262-b-c1,eptc56328.2022.10013262-b,unspecified,,,chiplets with monolithic or chiplet SoC,9,,,,,,,,,,,stated,text,,p.4 Sec. Cost,,
+eptc56328.2022.10013262-b-c2,eptc56328.2022.10013262-b,substrate,,,flip-chip substrate (planned),,,,,,,,,,,,stated,text,,p.4 Sec. Cost,,Molded 9-die package 'will then be' flip-chip mounted on a substrate.
+eptc56328.2022.10013262-c-c1,eptc56328.2022.10013262-c,unspecified,,,near reticle size die,4,,,,,,,,,,,design_target,mixed,,p.5 Sec. Applications; p.5 Fig. 13,,One die at reticle limit; future need for eight dies.
+ectc51687.2025.00158-a-c1,ectc51687.2025.00158-a,asic,,,ASIC (SoC),2,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 1,,1 per FO module.
+ectc51687.2025.00158-a-c2,ectc51687.2025.00158-a,hbm,,,HBM3,8,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 1,,4 per FO module; whether functional or dummy not stated.
+ectc51687.2025.00158-a-c3,ectc51687.2025.00158-a,bridge,,yes,Si bridge die with TSV,8,,,,,,,,,Si,,stated,text,,p.2 Sec. II.A-B; p.2 Fig. 2; p.4 Fig. 6,,"4 per FO module; TSV through bridge, C4 bumps one side, Cu studs other side. Thickness simulated 47-65 um only (Fig. 5)."
+ectc51687.2025.00158-a-c4,ectc51687.2025.00158-a,ipd,,yes,IPD (integrated passive device) die,20,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 1,,"10 per FO module, embedded underneath ASIC die."
+ectc51687.2025.00158-a-c5,ectc51687.2025.00158-a,substrate,,,organic FCBGA substrate,1,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. II.C,,Body 85x85 mm (package). Layer count not given.
+ectc51687.2025.00158-a-c6,ectc51687.2025.00158-a,lid,,,lid,1,,,,,,,,,,,stated,mixed,,p.2 Sec. II.C; p.3 Fig. 3,,
+ectc51687.2025.00158-a-c7,ectc51687.2025.00158-a,underfill,,,underfill (top die to FO),,,,,,,,,,,,stated,text,,p.2 Sec. II.C,,
+ectc51687.2025.00158-a-c8,ectc51687.2025.00158-a,mold,,,molding compound (FO module),,,,,,,,,,,,stated,text,,p.2 Sec. II.C,,"Molded twice: around bridges/IPD, then after top-die assembly."

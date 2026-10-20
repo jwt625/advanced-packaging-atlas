@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+estc60143.2024.10712070,10.1109/estc60143.2024.10712070,Investigation of Side Wall Loss for Development of 6 µm Microbumps for 3D/2.5D Integration,2024,ESTC,microbump_3d,microbump_3d,2,"6 um microbumps at 18 um pitch; Ti/Cu seed 20/30-50 nm, Cu/SnAg and Cu/Ni/SnAg plating; SEM/FIB undercut."
+ectc51687.2025.00095,10.1109/ectc51687.2025.00095,Advanced Packaging from FOWLP to FOPLP Development of FanOut Chip Last in 300 Mm Panel,2025,ECTC,panel,panel;organic_rdl_fanout,1,Fan-out chip-last on 300 mm panel with LDI patterning; panel warpage and chip-on-panel joints studied.
+ectc51529.2024.00076,10.1109/ectc51529.2024.00076,Fine pitch Nb-Nb Direct Bonding for quantum applications,2024,ECTC,hybrid_bonding,hybrid_bonding,2,"First hydrophilic Nb-Nb direct bonding of 7 um pitch pads; AFM, SAM, DCB adherence, TEM interface."

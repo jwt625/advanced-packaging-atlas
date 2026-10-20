@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+ectc51529.2024.00396,10.1109/ectc51529.2024.00396,Cu/Dielectric hybrid bonding among Glass and Si,2024,ECTC,glass,hybrid_bonding;glass,2,"~6 um pitch glass-to-Si Cu/dielectric hybrid bonding <=250 C, N2 plasma; Ra <0.3 nm, dishing <5 nm, FIB-SEM."
+ectc51529.2024.00334,10.1109/ectc51529.2024.00334,300 nm Pitch W2W HBI for CFET and 3D DRAM Through Module Co-optimization,2024,ECTC,hybrid_bonding,hybrid_bonding,1,300 nm pitch W2W hybrid bonding at up to 35% Cu density; module co-optimization; 5M-link via chain yield.
+ectc51529.2024.00322,10.1109/ectc51529.2024.00322,Development of two different molding methods in 2.5D package with 20 μm or less fine bump pitch CoW structure,2024,ECTC,microbump_3d,si_interposer;microbump_3d,1,"CoW 2.5D underfill/mold: CUF+EMC vs LCMUF, <=1 um filler fills 15 um pitch bumps; warpage per step."

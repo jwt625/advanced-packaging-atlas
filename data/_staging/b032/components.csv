@@ -1,0 +1,15 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51909.2023.00179-a-c1,ectc51909.2023.00179-a,dram,,,HBM DRAM core chips (8Hi),8,,,58,,,,,,Si,,design_target,caption,material:stated,p.2 Fig. 1; p.1 Abstract,,58 um is the Fig. 1 equal-thickness comparison case; actual device chip thickness not otherwise stated. x/y not reported.
+ectc51909.2023.00179-a-c2,ectc51909.2023.00179-a,base_die,,,HBM base wafer (base die),,,,,,,,,,,,stated,text,,p.2 Sec. II.C,,Base wafer carries solder; anneal limited below 200 C to limit its IMC growth and DRAM refresh degradation.
+ectc51909.2023.00179-a-c3,ectc51909.2023.00179-a,mold,,,low CTE EMC (proxy SiP package),,,,,,,,,,low CTE epoxy molding compound,,stated,text,,p.4 Sec. II.E; p.4 Fig. 11,,Used in proxy package for SiP; avoids delamination at EMC/chip triple point. Product and CTE not given.
+ectc51909.2023.00179-b-c1,ectc51909.2023.00179-b,dram,,,HBM DRAM core chips (8Hi),8,,,58,,,,,,,,design_target,caption,,p.2 Fig. 1,,Equal 58 um chip thickness assumed in Fig. 1 comparison.
+ectc51909.2023.00179-b-c2,ectc51909.2023.00179-b,underfill,,,molded underfill (MR-MUF),,,,,,,,,,,,stated,text,,p.4 Sec. II.E; p.4 Fig. 12,,Material and thermal conductivity not given for this TV.
+ectc51909.2023.00151-a-c1,ectc51909.2023.00151-a,base_die,,,Base (Logic) chip,1,10.8,9.8,,,,,,,,,design_target,text,,p.2 Sec. II.B; p.2 Fig. 3,,Bonded as base logic wafer; thickness not reported.
+ectc51909.2023.00151-a-c2,ectc51909.2023.00151-a,dram,,,Core (Memory) chips,7,10.5,9.5,,,,,,,,,design_target,text,count:schematic,p.2 Sec. II.B; p.2 Fig. 3,,Thickness not reported.
+ectc51909.2023.00151-a-c3,ectc51909.2023.00151-a,dram,,,Top (Memory) chip (thick),1,10.5,9.5,,,,,,,,,design_target,text,count:schematic,p.2 Sec. II.B; p.2 Fig. 3; p.2 Sec. III.A,,Described as thick top memory chip; thickness not given.
+ectc51909.2023.00151-a-c4,ectc51909.2023.00151-a,underfill,,,"MUF (molded underfill, LMC C based)",,,,,,,,,,"liquid epoxy molding compound LMC C based; filler 77%, max 3 um; SRA -20%, LMC resin +20%",,stated,text,,p.1 Sec. II.A; p.2 Sec. II.A,,"Optimized MUF: CTE a1 18 ppm/C, modulus 11 GPa."
+ectc51909.2023.00151-b-c1,ectc51909.2023.00151-b,hbm,,,MR-MUF 8Hi HBM,1,,,,,,,,,,,stated,text,,p.4 Sec. III.C,,
+ectc51909.2023.00151-b-c2,ectc51909.2023.00151-b,interposer,,,Si interposer,,,,,,,,,,Si,,stated,text,,p.4 Sec. III.C,,
+ectc51909.2023.00151-b-c3,ectc51909.2023.00151-b,substrate,,,organic substrate,,,,,,,,,,,,stated,text,,p.4 Sec. III.C,,
+ectc51909.2023.00151-c-c1,ectc51909.2023.00151-c,dram,,,memory chips (8Hi),8,,,,,,,,,,,stated,text,,p.4 Sec. III.C,,
+ectc51909.2023.00151-c-c2,ectc51909.2023.00151-c,underfill,,,non-conductive film (NCF),,,,,,,,,,,,stated,text,,p.1 Sec. I,,

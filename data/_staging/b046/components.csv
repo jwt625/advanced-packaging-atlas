@@ -1,0 +1,10 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+icep58572.2023.10129684-a-c1,icep58572.2023.10129684-a,mold,,,epoxy compound panel 600x600 mm,1,600,600,,,,,,,epoxy compound,,design_target,text,,p.1 Sec. II,,Embedded die content and thickness not given.
+icep58572.2023.10129684-b-c1,icep58572.2023.10129684-b,mold,,,epoxy compound panel 300x300 mm (with frame),1,300,300,,,,,,,epoxy compound,,design_target,text,,p.1 Sec. II; p.1 Fig. 1(b),,
+icep58572.2023.10129684-c-c1,icep58572.2023.10129684-c,substrate,,,standard substrate,1,95,240,150,,,,,,,,design_target,text,,p.2 Sec. III,thickness_um:approx,
+ectc51529.2024.00013-a-c1,ectc51529.2024.00013-a,dummy_die,yes,yes,Chiplet-TEG 1 and 2,2,10.0,7.0,700,,,,,,,,design_target,table,,p.4 Table 1; p.4 Fig. 12,,2240 pads per chiplet TEG; daisy-chain RDL on chiplet; embedded in 1st mold.
+ectc51529.2024.00013-a-c2,ectc51529.2024.00013-a,bridge,yes,yes,Bridge-TEG,1,10.0,1.0,110,,,,,,Si,,design_target,table,material:schematic,p.4 Table 1; p.1 Fig. 1; p.4 Fig. 11,,2250 pads; RDL daisy chain on bridge; 'Si Bridge' per Fig. 1 architecture.
+ectc51529.2024.00013-a-c3,ectc51529.2024.00013-a,mold,,,"1st mold (upper, MUF)",1,,,700,,,,,,,,design_target,table,,p.4 Table 1; p.4 Fig. 10; p.2 Fig. 3,,Mold underfill around chiplets; product not given.
+ectc51529.2024.00013-a-c4,ectc51529.2024.00013-a,mold,,,"2nd mold (lower, MUF)",1,,,120,,,,,,,,design_target,table,,p.4 Table 1; p.4 Fig. 10; p.2 Fig. 3,,Encapsulates bridge and Tall Pillars; product not given.
+ectc51529.2024.00013-a-c5,ectc51529.2024.00013-a,other,,,temporary glass carrier panel (300 mm square),1,,,,,,,,,soda-lime glass,,stated,text,,p.3 Sec. III; p.2 Fig. 3,,CTE 8-9 ppm/K stated; removed after 1st mold. Low-CTE glass (3-5) considered for future.
+ectc51529.2024.00013-a-c6,ectc51529.2024.00013-a,adhesive,,,temporary chip-fixing adhesive (volatilizes at reflow temperature in vacuum),,,,,,,,,,,,stated,text,,p.2 Sec. III,,

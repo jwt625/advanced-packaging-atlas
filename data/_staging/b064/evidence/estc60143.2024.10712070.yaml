@@ -1,0 +1,32 @@
+paper_id: estc60143.2024.10712070
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/estc60143.2024.10712070/text.md
+  - references/estc60143.2024.10712070/source.json
+  - references/estc60143.2024.10712070/figures/page_02.png
+  - references/estc60143.2024.10712070/figures/page_03.png
+  - references/estc60143.2024.10712070/figures/page_04.png
+figure_reading_method: >-
+  Page renders p.2-4 viewed; candidate crops p02_fig2, p02_fig3, p03_tableiii, p04_fig6, p05_tableiv, p05_fig10 opened.
+  Tables II-IV read from images (agree with text.md). Per-bump SEM labels in Fig. 5/7/9 not transcribed; Table IV ranges used.
+entries:
+  - {table: interconnects, row_id: estc60143.2024.10712070-a-i1, field: pitch_um, value: 18, unit: um, basis: design_target, locator: "p.2 Sec. II.A", note: "bump diameter 6 um, pitch 18 um per test design"}
+  - {table: process_steps, row_id: estc60143.2024.10712070-a-s07, field: time_s, value: 10, unit: s, basis: design_target, locator: "p.3 Table III", note: "applied Cu etch; baseline 15 s (Table II)"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: estc60143.2024.10712070-a-m2, field: value, values: [450, "closer to half millimeter"], locators: ["p.5 Table IV", "p.6 Sec. III.E"], chosen: 450, why: "result table; 'half millimeter' in Discussion is inconsistent with all measured values (nm scale)"}
+  - {table: metrics, row_id: estc60143.2024.10712070-c-m8, field: value_text, values: ["85-230 (Test 2 vs Reference)", "55-230 (thinner layers, Discussion)"], locators: ["p.5 Sec. III.D", "p.6 Sec. III.E"], chosen: "85-230", why: "Results section per-variant statement; Discussion merges Test 1 and Test 2"}
+excluded:
+  - "10 um pitch Cu/Sn microbumps (ref [1]); 5 um pads on 10 um pitch (ref [2])"
+  - "barrier layer thickness effect (ref [3]); wet vs dry seed etch throughput (ref [4]); SnAg void mechanism (ref [5]); current density in thin seeds (ref [6])"
+  - "Test 2 undercut 'roughly 50% more' than Test 1 (qualitative ratio; absolute ranges entered)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - bump height (target or measured), Cu/Ni/SnAg plating thicknesses, plating chemistries and current densities
+  - SiO2 thickness, wafer bulk material, resist type and thickness, sputter tool
+  - bonding (bumps not bonded), shear strength (future work), resistance, yield
+  - n_samples per value beyond '3-6 samples per wafer, average of 3 bumps'
+source_quality:
+  - "Fig. 5 and Fig. 8 are split across pages (Fig. 5(a-d) on p.3, (e,f) on p.4; Fig. 8(a,b) on p.4, (c,d) on p.5); candidates p04_fig5 and p05_fig8 hold only part."

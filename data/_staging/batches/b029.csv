@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+ectc51909.2023.00252,10.1109/ectc51909.2023.00252,Design and Analysis of 3D Heterogeneous Chiplet Stack for RF Front-End Module Minituarization,2023,ECTC,microbump_3d,microbump_3d,1,"BAW duplexer stacked on RF SOI LNA via backside RDL and TSV; 1x1.4x0.45 mm3 module, <0.2 dB loss."
+ectc51529.2024.00049,10.1109/ectc51529.2024.00049,Next Generation Large Size High Interconnect Density CoWoS-R Package,2024,ECTC,organic_rdl_fanout,organic_rdl_fanout,1,"97x95 mm2 package, 4 SoC + 12 HBM on 5.5X-reticle CoWoS-R, >1100 lines/mm, integrated decaps; electrical, reliability."
+ectc51906.2022.00136,10.1109/ectc51906.2022.00136,Package Reliability Evaluation of 600mm FOPLP with 6-Sided Die Protection with 0.35mm Ball Pitch,2022,ECTC,panel,panel,1,"600x600 mm FOPLP with 6-sided die protection, 0.35 mm ball pitch; reliability vs 300 mm FOWLP."

@@ -1,0 +1,45 @@
+paper_id: ectc51909.2023.00153
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00153/text.md
+  - references/ectc51909.2023.00153/source.json
+  - references/ectc51909.2023.00153/figures/page_02.png
+  - references/ectc51909.2023.00153/figures/page_03.png
+  - references/ectc51909.2023.00153/figures/page_04.png
+  - references/ectc51909.2023.00153/figures/page_05.png
+  - references/ectc51909.2023.00153/figures/cand/p02_fig4.png
+  - references/ectc51909.2023.00153/figures/cand/p02_fig5.png
+  - references/ectc51909.2023.00153/figures/cand/p04_fig10.png
+  - references/ectc51909.2023.00153/figures/cand/p04_fig11.png
+  - references/ectc51909.2023.00153/figures/cand/p04_fig12.png
+figure_reading_method: >-
+  Tables I-IV read from page renders (text layer lacks table bodies); Fig. 5 re-cropped at 300 dpi; Fig. 7(b) bars
+  re-cropped at 300 dpi (about 20.6 px per N, read +/-0.2 N); Fig. 11 bars sit on gridline values.
+entries:
+  - {table: interconnects, row_id: ectc51909.2023.00153-a-i1, field: pitch_um, value: 20, unit: um, basis: design_target, locator: "p.2 Fig. 5", note: "dimension A; B = 10 um diameter"}
+  - {table: process_steps, row_id: ectc51909.2023.00153-a-s08, field: temp_c, value: 235, unit: C, basis: design_target, locator: "p.3 Table III", note: "set bonding temperature; stage 70 C; actual temperature measured by thermocouple but not reported"}
+  - {table: process_steps, row_id: ectc51909.2023.00153-a-s07, field: step, value: dicing, basis: stated, locator: "p.3 Fig. 8", note: "Fig. 8 conventional flow starts 'After dicing' with rounded bumps; placed after reflow"}
+derived:
+  - {table: process_steps, row_id: ectc51909.2023.00153-a-s09, field: time_s, value: 300, formula: "5 min x 60", inputs: "p.3 Sec. II.C"}
+  - {table: process_steps, row_id: ectc51909.2023.00153-b-s09, field: time_s, value: 300, formula: "5 min x 60", inputs: "p.3 Sec. II.C"}
+  - {table: process_steps, row_id: ectc51909.2023.00153-c-s09, field: time_s, value: 300, formula: "5 min x 60", inputs: "p.3 Sec. II.C"}
+  - {table: process_steps, row_id: ectc51909.2023.00153-d-s09, field: time_s, value: 300, formula: "5 min x 60", inputs: "p.3 Sec. II.C"}
+  - {table: metrics, row_id: ectc51909.2023.00153-a-m2, field: value, value: 10, formula: "A - B = 20 - 10", inputs: "p.2 Fig. 5"}
+  - {table: metrics, row_id: ectc51909.2023.00153-c-m2, field: value, value: 7.5, formula: "A - B = 15 - 7.5", inputs: "p.2 Fig. 5"}
+conflicts: []
+excluded:
+  - "Fig. 1 IR image of CUF unfilled defects from flux residue (introductory example, build not specified)"
+  - "fluxless approaches (plasma, formic acid, no-clean flux) of refs [4]-[7]; 10 um pitch microbump scaling of ref [1]"
+notes_on_judgment:
+  - "TV-1..TV-4 are separate assemblies (each has its own IR image of the full 5-die interposer and its own flux-cleaning count), so one TV per bump design."
+  - "Table I/II bump counts (750,000 / 125,000 / 1,250,000) are not split by design; they equal a full-area 20 um pitch array, so they are kept in TV notes only, not as interconnect counts."
+  - "Fluxless sample is TV e; the bump design and die it used are not stated."
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - bonding force/pressure, measured actual bond temperature, alignment accuracy number, bond-line standoff
+  - CUF product, filler size, cure; flux product; Developed product A composition and layer thickness
+  - die material, interposer routing, electrical (daisy-chain) results, reliability
+  - wafer size for bump fabrication; sample counts for shear test
+source_quality:
+  - "Table bodies (I-IV) missing from text layer; read from page renders. Table numerals garbled in text.md."

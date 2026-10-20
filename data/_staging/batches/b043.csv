@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+eptc59621.2023.10457652,10.1109/eptc59621.2023.10457652,Experimental and Numerical Investigation of Die Shift in Large Panel Level Packaging,2023,EPTC,panel,panel,1,"700x700 mm panel die-shift multi-step FEA with carrier expansion, mold shrinkage; correlated with tests."
+ectc51846.2026.00051,10.1109/ectc51846.2026.00051,Scaling the EMIB-T Advanced Packaging Technology to Address the Future HPC/AI Demand,2026,ECTC,si_bridge,si_bridge,1,"EMIB-T scaling: FLI bump pitch to 25 um, package >120x120 mm, >9 reticles; roadmap."
+ectc51846.2026.00176,10.1109/ectc51846.2026.00176,Advancing Interconnect Performance and Reliability with Innovations in 3D Photonic Integration Packaging and Fiber Coupling,2026,ECTC,si_interposer,cpo;si_interposer,1,"Passage M CoW assembly: 15 ASIC chiplets on multi-reticle 3D photonic interposer, 7200 mm2 substrate, fiber attach; BER, >900 W TDP."

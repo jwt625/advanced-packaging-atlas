@@ -1,0 +1,23 @@
+layer_id,tv_id,structure,side,seq,layer_name,feature,material,material_class,layer_role,reinforcement,thickness_um,thickness_min_um,thickness_max_um,line_um,space_um,via_diameter_um,via_pitch_um,roughness_ra_um,repeat,properties,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00227-a-L01,ectc51846.2026.00227-a,die,single,1,top die,,Si (logic die),silicon,device,,775,,,,,,,,,,design_target,text,,p.3 Sec. II.A,,
+ectc51846.2026.00227-a-L02,ectc51846.2026.00227-a,interposer,single,1,top pad finish,pads,Au,metal,surface_finish,,0.1,,,,,,,,,,design_target,text,,p.3 Sec. II.A; p.3 Fig. 3(a),,
+ectc51846.2026.00227-a-L03,ectc51846.2026.00227-a,interposer,single,2,top pad,pads,Ni,metal,conductor,,2,,,,,,,,,,design_target,text,,p.3 Sec. II.A; p.3 Fig. 3(a),,
+ectc51846.2026.00227-a-L04,ectc51846.2026.00227-a,interposer,single,3,Si interposer,TSV,Si,silicon,core,,100,,,,,,,,,,design_target,text,,p.3 Sec. II.A; p.5 Fig. 16(b),,TSV labelled in Fig. 16(b); TSV dimensions not given.
+ectc51846.2026.00227-a-L05,ectc51846.2026.00227-a,interposer,single,4,bottom bump Cu,bumps,Cu,metal,conductor,,10,,,,,,,,,,design_target,text,,p.3 Sec. II.A,,
+ectc51846.2026.00227-a-L06,ectc51846.2026.00227-a,interposer,single,5,bottom bump Ni,bumps,Ni,metal,barrier,,2,,,,,,,,,,design_target,text,,p.3 Sec. II.A,,
+ectc51846.2026.00227-a-L07,ectc51846.2026.00227-a,interposer,single,6,bottom bump Cu,bumps,Cu,metal,conductor,,1,,,,,,,,,,design_target,text,,p.3 Sec. II.A,,
+ectc51846.2026.00227-a-L08,ectc51846.2026.00227-a,interposer,single,7,bottom bump solder,bumps,Sn1.8%Ag,solder,bonding,,55,,,,,,,,,,design_target,text,,p.3 Sec. II.A,,
+ectc51846.2026.00227-a-L09,ectc51846.2026.00227-a,substrate_buildup,front,1,pre-tinned C4 pads,41 x 23 C4 array,Sn pre-solder,solder,bonding,,,,,,,,,,,,stated,mixed,,p.3 Sec. II.A; p.3 Fig. 3(a); p.3 Fig. 6,,'Sn pad' in Fig. 3(a); thickness not given.
+ectc51846.2026.00227-a-L10,ectc51846.2026.00227-a,underfill,single,1,underfill,,underfill (product not stated),underfill,encapsulant,,,,,,,,,,,,stated,figure_image,,p.5 Fig. 16(a),,
+ectc51846.2026.00227-b-L01,ectc51846.2026.00227-b,die,single,1,top die,,Si wafer (300 mm),silicon,device,,,,,,,,,,,,stated,text,,p.3 Sec. II.A,,
+ectc51846.2026.00227-b-L02,ectc51846.2026.00227-b,bonding_interface,single,2,microbump layer,25 um pitch bumps,Cu/Ni/Cu/SnAg bumps on Cu/Ni/Cu pads,solder,bonding,,,,,,,,,,,,stated,text,,p.3 Sec. II.A,,Individual metal thicknesses not given.
+ectc51846.2026.00227-b-L03,ectc51846.2026.00227-b,die,single,3,bottom die,,Si wafer (300 mm),silicon,device,,,,,,,,,,,,stated,text,,p.3 Sec. II.A,,
+ectc51529.2024.00087-a-L01,ectc51529.2024.00087-a,substrate_buildup,single,1,blanket dielectric (polished by CMP),blanket,dielectric (not named),unspecified,dielectric,,,,,,,,,,,,stated,text,,p.2 Sec. III.A; p.3 Sec. III.C,,Laminated and cured before CMP; thickness not given.
+ectc51529.2024.00087-b-L01,ectc51529.2024.00087-b,substrate_buildup,single,1,dielectric layer with Cu vias (overburden removed by CMP),Cu via reveal,substrate dielectric (not named); Cu vias,unspecified,dielectric,,,,,,,,,,,,stated,mixed,,p.4 Sec. III.D; p.4 Fig. 7(c),,Thickness kept within target; values not given.
+ectc51529.2024.00087-b-L02,ectc51529.2024.00087-b,bridge,single,2,embedded bridge die,,not stated,unspecified,device,,,,,,,,,,,,stated,mixed,,p.4 Sec. III.D; p.4 Fig. 7(a),,Vertical position relative to the Cu via layer not stated.
+ectc51846.2026.00183-a-L01,ectc51846.2026.00183-a,die,single,1,upper wafer Si substrate,,Si,silicon,carrier,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,'Si sub' label.
+ectc51846.2026.00183-a-L02,ectc51846.2026.00183-a,die,single,2,upper Cu wiring (daisy-chain links),daisy chain,Cu,metal,conductor,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.B; p.4 Fig. 8,,
+ectc51846.2026.00183-a-L03,ectc51846.2026.00183-a,bonding_interface,single,3,upper via + Cu pad in SiO2,0.4/0.3/0.2 um pads,Cu with Ta barrier; SiO2,metal,bonding,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.A; p.4 Fig. 8; p.4 Fig. 9,,Ta barrier from text and EDS map; thicknesses not given.
+ectc51846.2026.00183-a-L04,ectc51846.2026.00183-a,bonding_interface,single,4,lower Cu pad + via in SiO2,0.4/0.3/0.2 um pads,Cu with Ta barrier; SiO2,metal,bonding,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.A; p.4 Fig. 8; p.4 Fig. 9,,
+ectc51846.2026.00183-a-L05,ectc51846.2026.00183-a,die,single,5,lower Cu wiring (daisy-chain links),daisy chain,Cu,metal,conductor,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.B; p.4 Fig. 8,,
+ectc51846.2026.00183-a-L06,ectc51846.2026.00183-a,die,single,6,lower wafer Si substrate,,Si,silicon,carrier,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,

@@ -1,0 +1,17 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51909.2023.00266-a-c1,ectc51909.2023.00266-a,logic_soc,,,Monolithic SoC,1,,,,,,,60,,,,design_target,text,,p.2 Sec. II,gap_um:ge,"gap_um = min die-to-die spacing (design); 60.9 um measured after mold (Fig. 15, metrics). Die size not given."
+ectc51909.2023.00266-a-c2,ectc51909.2023.00266-a,dummy_die,,,Structural silicon die 2x8 mm,,2,8,,,,,,,silicon,,design_target,text,,p.2 Sec. II,,8 structural Si dies in total across two sizes; count per size not given.
+ectc51909.2023.00266-a-c3,ectc51909.2023.00266-a,dummy_die,,,Structural silicon die 7x3 mm,,7,3,,,,,,,silicon,,design_target,text,,p.2 Sec. II,,8 structural Si dies in total across two sizes; count per size not given.
+ectc51909.2023.00266-a-c4,ectc51909.2023.00266-a,mold,,no,"Compression mold compound (EMC), 6-sided die protection",,,,,,,,,,mold compound (EMC),,stated,text,,p.2 Sec. II; p.5 Sec. V,,Product and thickness not given.
+ectc51909.2023.00266-a-c5,ectc51909.2023.00266-a,underfill,,,Board-level underfill for BLR,,,,,,,,,,,,stated,text,,p.4 Sec. IV,,Material not given.
+ectc51687.2025.00051-a-c1,ectc51687.2025.00051-a,bridge,,yes,EMIB-T TSV bridge die,3,,,,,,,,,silicon,,design_target,text,,p.4 Sec. IV; p.4 Fig. 5,,Thin TSV bridge with solder joints and underfill to cavity pads (Sec. III.C). Size and thickness not given.
+ectc51687.2025.00051-a-c2,ectc51687.2025.00051-a,substrate,,,HDI package substrate with bridge cavities,,77,56,,,,,,,,,design_target,text,,p.4 Sec. IV; p.3 Fig. 4,,Package form factor 77x56 mm; substrate stack and core not given.
+ectc51687.2025.00051-a-c3,ectc51687.2025.00051-a,underfill,,,Underfill between TSV bridge die back side and substrate cavity,,,,,,,,,,,,stated,text,,p.4 Sec. III.C,,Material not given.
+ectc51687.2025.00051-a-c4,ectc51687.2025.00051-a,logic_soc,,,"Top dies (Die 1, Die 2 in cross-section)",,,,,,,,,,,,stated,figure_image,,p.4 Fig. 5,,"Die type, count and size not given; total Si ~2x reticle."
+ectc51687.2025.00051-b-c1,ectc51687.2025.00051-b,bridge,,yes,EMIB (Embedded Multi-die Interconnect Bridge) Si bridge,,,,,,,,,,silicon,,stated,schematic,,p.2 Fig. 3; p.4 Fig. 5,,Placed into cavity of HDI build-up substrate; no TSV.
+ectc51687.2025.00051-b-c2,ectc51687.2025.00051-b,substrate,,,HDI build-up substrate with cavity,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+ectc51687.2025.00051-b-c3,ectc51687.2025.00051-b,logic_soc,,,"Top dies (Die 1, Die 2 in cross-section)",,,,,,,,,,,,stated,figure_image,,p.4 Fig. 5,,Die type and size not given.
+ectc51687.2025.00051-c-c1,ectc51687.2025.00051-c,bridge,,yes,EMIB-T TSV bridge die,14,,,,,,,,,silicon,,stated,schematic,,p.3 Fig. 4,,
+eptc59621.2023.10457670-a-c1,eptc59621.2023.10457670-a,interposer,,,Through Si interposer (TSI) wafer,1,,,,,,,,,Si,,design_target,text,,p.1 TSI Process Fabrication,,300 mm wafer; thinned by grinding to reveal TSVs; final thickness not given.
+eptc59621.2023.10457670-a-c2,eptc59621.2023.10457670-a,other,,,Si substrate carrier wafer (temporary bond),,,,,,,,,,Si,,stated,text,,p.1 TSI Process Fabrication; p.2 Fig. 1,,Temporary bonding material not given.
+eptc59621.2023.10457670-b-c1,eptc59621.2023.10457670-b,interposer,,,BEOL-only Si wafer (no TSV),,,,,,,,,,Si,,stated,text,,p.3 text; p.3 Fig. 6,,

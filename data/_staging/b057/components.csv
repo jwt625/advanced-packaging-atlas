@@ -1,0 +1,26 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+eptc62800.2024.10909872-a-c1,eptc62800.2024.10909872-a,hbm,,,HBM,12,,,,,,,,,,,design_target,schematic,,p.1 Sec. 2-1; p.1 Fig. 1,,Real or dummy not stated.
+eptc62800.2024.10909872-a-c2,eptc62800.2024.10909872-a,logic_soc,,,Logic chip,2,,,,,,,,,,,design_target,schematic,,p.1 Sec. 2-1; p.1 Fig. 1,,
+eptc62800.2024.10909872-a-c3,eptc62800.2024.10909872-a,unspecified,,,Chiplet,2,,,,,,,,,,,design_target,schematic,,p.1 Sec. 2-1; p.1 Fig. 1,,Chiplet function not stated; placed at the two short ends of the floor plan.
+eptc62800.2024.10909872-a-c4,eptc62800.2024.10909872-a,interposer,,,6-layer RDL interposer (4.3x reticle),1,51,68,,,,,,,,,design_target,text,,p.1 Sec. 1; p.1 Sec. 2,,Size from the 4.3x reticle (51x68 mm2) figure in Sec. 1.
+eptc62800.2024.10909872-a-c5,eptc62800.2024.10909872-a,mold,,,mold,,,,,,,,,,,,stated,text,,p.2 Sec. 2-2; p.2 Fig. 2,,Mold compound not named.
+eptc62800.2024.10909872-a-c6,eptc62800.2024.10909872-a,other,,,organic carrier,1,,,,,,,,,organic carrier,,stated,text,,p.2 Sec. 2-2; p.3 Sec. 3-2-2,,Temporary carrier; absent in final Fig. 2 panel. CTE/thickness not given.
+eptc62800.2024.10909872-b-c1,eptc62800.2024.10909872-b,other,,,organic carrier,1,,,,,,,,,organic carrier,,stated,text,,p.3 Sec. 3-2-2,,Carrier selected after Table 1 study; type not named.
+ectc51529.2024.00258-a-c1,ectc51529.2024.00258-a,other,,,12-inch SOI wafer (device wafer),1,,,,,,,,,SOI: 75 nm Si on 2000 A BOX,,design_target,text,,p.2 Sec. II,,
+ectc51529.2024.00258-a-c2,ectc51529.2024.00258-a,other,,,Si carrier wafer,1,,,,,,,,,Si with pre-deposited oxide,,stated,text,,p.2 Sec. II; p.2 Fig. 2,,
+ectc51687.2025.00055-a-c1,ectc51687.2025.00055-a,base_die,,,bottom die (daisy chain),1,,,,,,,,,,,stated,text,,p.2 Sec. II.A,,
+ectc51687.2025.00055-a-c2,ectc51687.2025.00055-a,dummy_die,yes,,top die (daisy chain),1,,,,,,,,,,,stated,text,,p.2 Sec. II.A,,
+ectc51687.2025.00055-g-c1,ectc51687.2025.00055-g,gpu,,,"GPU (500 W each, 800 mm2 area)",2,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(a),,Area 800 mm2 each (x/y not given).
+ectc51687.2025.00055-g-c2,ectc51687.2025.00055-g,hbm,,,HBM cube (8/12/16-hi DRAM on base die),8,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(a),,"Base die 143 mm2, DRAM core 131 mm2 heated 0.015 W/mm2; base die blocks PHY, TSV, Compute."
+ectc51687.2025.00055-g-c3,ectc51687.2025.00055-g,interposer,,,interposer (3000 mm2),1,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(a),,
+ectc51687.2025.00055-g-c4,ectc51687.2025.00055-g,substrate,,,package substrate (5000 mm2),1,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(a),,
+ectc51687.2025.00055-g-c5,ectc51687.2025.00055-g,lid,,,"lid (2 mm thick, 5000 mm2)",1,,,2000,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(a),,
+ectc51687.2025.00055-g-c6,ectc51687.2025.00055-g,tim,,,TIM1,1,,,,,,,,,,,stated,schematic,,p.3 Sec. III.A; p.3 Fig. 5(a),,
+ectc51687.2025.00055-g-c7,ectc51687.2025.00055-g,tim,,,TIM2 (grease),1,,,,,,,,,grease,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(a),,
+ectc51687.2025.00055-g-c8,ectc51687.2025.00055-g,cold_plate,,,"micro-channeled cold plate (DLC), 40 C DI water at 4 LPM",1,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(a),,Slightly larger than CoWoS substrate.
+ectc51687.2025.00055-h-c1,ectc51687.2025.00055-h,gpu,,,"GPU (500 W each, 800 mm2 area)",2,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(b),,Area 800 mm2 each (x/y not given).
+ectc51687.2025.00055-h-c2,ectc51687.2025.00055-h,hbm,,,HBM cube (8/12/16-hi DRAM on base die),8,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(b),,"Base die 143 mm2, DRAM core 131 mm2 heated 0.015 W/mm2; base die blocks PHY, TSV, Compute."
+ectc51687.2025.00055-h-c3,ectc51687.2025.00055-h,interposer,,,interposer (3000 mm2),1,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(b),,
+ectc51687.2025.00055-h-c4,ectc51687.2025.00055-h,substrate,,,package substrate (5000 mm2),1,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(b),,
+ectc51687.2025.00055-h-c5,ectc51687.2025.00055-h,tim,,,TIM2 (grease),1,,,,,,,,,grease,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(b),,
+ectc51687.2025.00055-h-c6,ectc51687.2025.00055-h,cold_plate,,,"micro-channeled cold plate (DLC), 40 C DI water at 4 LPM",1,,,,,,,,,,,design_target,text,,p.3 Sec. III.A; p.3 Fig. 5(b),,Slightly larger than CoWoS substrate.

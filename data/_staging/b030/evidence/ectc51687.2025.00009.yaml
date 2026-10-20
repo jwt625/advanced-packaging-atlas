@@ -1,0 +1,38 @@
+paper_id: ectc51687.2025.00009
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00009/text.md
+  - references/ectc51687.2025.00009/source.json
+  - references/ectc51687.2025.00009/figures/page_02.png
+  - references/ectc51687.2025.00009/figures/page_03.png
+  - references/ectc51687.2025.00009/figures/page_04.png
+  - references/ectc51687.2025.00009/figures/page_05.png
+  - references/ectc51687.2025.00009/figures/cand/p03_fig6.png
+  - references/ectc51687.2025.00009/figures/cand/p03_fig7.png
+  - references/ectc51687.2025.00009/figures/cand/p04_fig10.png
+  - references/ectc51687.2025.00009/figures/cand/p04_fig11.png
+  - references/ectc51687.2025.00009/figures/cand/p05_fig12.png
+figure_reading_method: >-
+  Page renders 2-5 read in full; 400 dpi re-crops of Fig. 9, 10 and 12. Fig. 12 median read from dashed line
+  (~101 px per 100 ohm, +/-5 ohm). Fig. 7(d) bars read 100/83/76.
+entries:
+  - {table: interconnects, row_id: ectc51687.2025.00009-a-i1, field: metallurgy, value: "Ta 13 nm; Cu seed 17 nm", unit: nm, basis: measured, locator: "p.4 Fig. 10 inset", note: "sidewall under-hang region"}
+  - {table: metrics, row_id: ectc51687.2025.00009-a-m1, field: value, value: 295, unit: ohm, basis: measured, locator: "p.5 Fig. 12", note: "median dashed line ~293-296"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51687.2025.00009-a-m5, field: value, values: [10, 8], locators: ["p.4 Fig. 9(a) caption AR ~10", "p.5 Sec. IV '8:1 and 20:1'"], chosen: 10, why: "figure caption tied to measured xSEM"}
+  - {table: metrics, row_id: ectc51687.2025.00009-b-m2, field: value, values: [24, 25], locators: ["p.3 Sec. II; p.3 Fig. 7(d)", "p.5 Sec. IV 'up to 25%'"], chosen: 24, why: "result text and bar chart"}
+  - {table: metrics, row_id: ectc51687.2025.00009-c-m3, field: value_text, values: ["caption: IR drop increases as metal thickness increases", "text and plot: thinner metal gives higher IR drop"], locators: ["p.2 Fig. 4 caption", "p.2 Sec. II; p.2 Fig. 4"], chosen: "plot/text", why: "plot curves show 1/4 thickness highest"}
+  - {table: papers, row_id: ectc51687.2025.00009, field: notes, values: ["title: scaling to 1 um pitch", "demonstrated: 3 um pitch MLVs; conclusion 'support pitches below 3 um'"], locators: ["p.1 title", "p.4 Fig. 11; p.5 Sec. IV"], chosen: "3 um pitch entered", why: "only demonstrated geometry"}
+excluded:
+  - "Standard HB backend of Fig. 1 (from ref [2])"
+  - "sub-1 um HB pitch demonstrations of refs [4], [5]; IR drop impact discussion of ref [4]"
+not_reported:
+  - components, optical_interfaces, electrical_interfaces
+  - hybrid bonding itself (no bonded TV); bonding conditions
+  - ILD and hardmask materials, layer thicknesses, wafer size, MLV count
+  - absolute IR drop, TSV pitch, metal thicknesses in models (normalized axes)
+  - daisy-chain per-via resistance; reliability data
+source_quality:
+  - "Clean text layer. No candidate for Fig. 9; others correct."

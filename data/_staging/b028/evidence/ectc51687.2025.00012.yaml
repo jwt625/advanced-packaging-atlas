@@ -1,0 +1,41 @@
+paper_id: ectc51687.2025.00012
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00012/text.md
+  - references/ectc51687.2025.00012/source.json
+  - references/ectc51687.2025.00012/figures/page_02.png
+  - references/ectc51687.2025.00012/figures/page_03.png
+  - references/ectc51687.2025.00012/figures/page_04.png
+  - references/ectc51687.2025.00012/figures/page_05.png
+  - references/ectc51687.2025.00012/figures/cand/p02_fig1.png
+  - references/ectc51687.2025.00012/figures/cand/p02_fig2.png
+  - references/ectc51687.2025.00012/figures/cand/p03_tablei.png
+  - references/ectc51687.2025.00012/figures/cand/p04_tablev.png
+  - references/ectc51687.2025.00012/figures/cand/p04_tablevii.png
+  - references/ectc51687.2025.00012/figures/cand/p04_tableviii.png
+figure_reading_method: >-
+  All IL numbers from Tables I-XI (checked against page renders p.3-5; text.md matches). Fig. 1 3D render re-cropped
+  at 400 dpi to read the 'Pitch 250 um' label. Fig. 3-8 scatter plots not digitized (tables give the statistics).
+entries:
+  - {table: optical_interfaces, row_id: ectc51687.2025.00012-a-o1, field: fiber_pitch_um, value: 250, unit: um, basis: design_target, locator: "p.2 Fig. 1", note: "label 'Pitch 250 um' in illustrative 3D render of V-groove coupling"}
+  - {table: optical_interfaces, row_id: ectc51687.2025.00012-a-o1, field: coupling_loss_db, value: 2.46, unit: dB, basis: measured, locator: "p.3 Table I", note: "printed as -2.46 dB IL/facet; sign flipped to the schema's positive-loss convention"}
+  - {table: optical_interfaces, row_id: ectc51687.2025.00012-a-o2, field: coupling_loss_db, value: 2.62, unit: dB, basis: measured, locator: "p.3 Table II", note: "printed as -2.62 dB"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51687.2025.00012-a-m17, field: value, values: ["Table V: -2.39 -> -2.52 dB, std 0.34 -> 0.36", "text: -2.40 -> -2.53 dB, std 0.34 -> 0.40"], locators: ["p.4 Table V", "p.4 Sec. IV"], chosen: "Table V", why: "result table > text"}
+  - {table: metrics, row_id: ectc51687.2025.00012-a-m20, field: value, values: ["Table VII: end-of-line std 0.36, TCB1500 std 0.47", "text: std increases from 0.34 to 0.47"], locators: ["p.4 Table VII", "p.4 Sec. V"], chosen: "Table VII", why: "result table > text; 0.34 is the TCB50 value"}
+excluded:
+  - "below 5 pJ/bit CPO energy target attributed to refs [1,2]"
+  - "OIO chiplet design details documented in refs [10-12] (not entered)"
+  - "adhesive materials selection detailed in ref [13]"
+  - "MT ferrule reflow behavior attributed to ref [14]"
+not_reported:
+  - electrical_interfaces (no data rate, energy or bandwidth)
+  - die, bridge, substrate and package dimensions; substrate layer count
+  - bump/ball pitch, size, metallurgy (except SAC reflow), bonding conditions
+  - wavelength, MFD, lane rate, adhesive products, reflow profile
+  - yield percentage (only 'high yield' claims)
+  - pass criteria for JEDEC stresses
+source_quality:
+  - "Clean text layer; all 21 figure/table candidates present and correctly cropped (tables crop below title)."

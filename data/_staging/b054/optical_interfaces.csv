@@ -1,0 +1,3 @@
+oi_id,tv_id,coupler_type,alignment,wavelength_nm,band,polarization,channels,fiber_pitch_um,fiber_type,mfd_chip_um,mfd_fiber_um,coupling_loss_db,scope,attach_material,lane_rate_gbps,basis,source,overrides,locator,qualifiers,notes
+ectc51909.2023.00230-a-o1,ectc51909.2023.00230-a,grating,,1311,O-band,,,,,,,2.3,grating coupler insertion loss at central wavelength; wafer-level PDK evaluation,,,measured,text,,p.3 Sec. III.A,,
+ectc51909.2023.00230-a-o2,ectc51909.2023.00230-a,grating,,1553,C-band,,,,,,,2.4,grating coupler insertion loss at central wavelength; wafer-level PDK evaluation,,,measured,text,,p.3 Sec. III.A,,

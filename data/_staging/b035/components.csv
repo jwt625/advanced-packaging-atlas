@@ -1,0 +1,22 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51909.2023.00008-a-c1,ectc51909.2023.00008-a,other,yes,,face-to-face bonded wafer pair with daisy-chain test structures,2,,,,,,,,,,,stated,text,,p.3 Sec. IV; p.3 Sec. V,,Chains of various lengths incl. 400k; wafer size and node not stated.
+ectc51909.2023.00153-a-c1,ectc51909.2023.00153-a,dummy_die,yes,,large die,1,15,20,775,,,,,,,,design_target,table,,p.2 Table I,,Full-area bump array. Gap between chips 50~60 um (Fig. 3). Die material not stated.
+ectc51909.2023.00153-a-c2,ectc51909.2023.00153-a,dummy_die,yes,,small die,4,5,10,775,,,,,,,,design_target,table,count:text,p.2 Table I; p.2 Sec. II.A; p.2 Fig. 3,,Full-area bump array; 4 small dies per interposer.
+ectc51909.2023.00153-a-c3,ectc51909.2023.00153-a,interposer,,,silicon interposer,1,30,30,775,,,,,,silicon,,design_target,table,,p.2 Table II; p.2 Sec. II.A,,Heterogeneous microbump layout matching both die types; Cu bumps 5 um.
+ectc51909.2023.00153-a-c4,ectc51909.2023.00153-a,underfill,,,CUF (capillary underfill),,,,,,,,,,CUF (product not stated),,stated,text,,p.3 Sec. II.D,,
+ectc51909.2023.00153-b-c1,ectc51909.2023.00153-b,dummy_die,yes,,large die,1,15,20,775,,,,,,,,design_target,table,,p.2 Table I,,Full-area bump array. Gap between chips 50~60 um (Fig. 3). Die material not stated.
+ectc51909.2023.00153-b-c2,ectc51909.2023.00153-b,dummy_die,yes,,small die,4,5,10,775,,,,,,,,design_target,table,count:text,p.2 Table I; p.2 Sec. II.A; p.2 Fig. 3,,Full-area bump array; 4 small dies per interposer.
+ectc51909.2023.00153-b-c3,ectc51909.2023.00153-b,interposer,,,silicon interposer,1,30,30,775,,,,,,silicon,,design_target,table,,p.2 Table II; p.2 Sec. II.A,,Heterogeneous microbump layout matching both die types; Cu bumps 5 um.
+ectc51909.2023.00153-b-c4,ectc51909.2023.00153-b,underfill,,,CUF (capillary underfill),,,,,,,,,,CUF (product not stated),,stated,text,,p.3 Sec. II.D,,
+ectc51909.2023.00153-c-c1,ectc51909.2023.00153-c,dummy_die,yes,,large die,1,15,20,775,,,,,,,,design_target,table,,p.2 Table I,,Full-area bump array. Gap between chips 50~60 um (Fig. 3). Die material not stated.
+ectc51909.2023.00153-c-c2,ectc51909.2023.00153-c,dummy_die,yes,,small die,4,5,10,775,,,,,,,,design_target,table,count:text,p.2 Table I; p.2 Sec. II.A; p.2 Fig. 3,,Full-area bump array; 4 small dies per interposer.
+ectc51909.2023.00153-c-c3,ectc51909.2023.00153-c,interposer,,,silicon interposer,1,30,30,775,,,,,,silicon,,design_target,table,,p.2 Table II; p.2 Sec. II.A,,Heterogeneous microbump layout matching both die types; Cu bumps 5 um.
+ectc51909.2023.00153-c-c4,ectc51909.2023.00153-c,underfill,,,CUF (capillary underfill),,,,,,,,,,CUF (product not stated),,stated,text,,p.3 Sec. II.D,,
+ectc51909.2023.00153-d-c1,ectc51909.2023.00153-d,dummy_die,yes,,large die,1,15,20,775,,,,,,,,design_target,table,,p.2 Table I,,Full-area bump array. Gap between chips 50~60 um (Fig. 3). Die material not stated.
+ectc51909.2023.00153-d-c2,ectc51909.2023.00153-d,dummy_die,yes,,small die,4,5,10,775,,,,,,,,design_target,table,count:text,p.2 Table I; p.2 Sec. II.A; p.2 Fig. 3,,Full-area bump array; 4 small dies per interposer.
+ectc51909.2023.00153-d-c3,ectc51909.2023.00153-d,interposer,,,silicon interposer,1,30,30,775,,,,,,silicon,,design_target,table,,p.2 Table II; p.2 Sec. II.A,,Heterogeneous microbump layout matching both die types; Cu bumps 5 um.
+ectc51909.2023.00153-d-c4,ectc51909.2023.00153-d,underfill,,,CUF (capillary underfill),,,,,,,,,,CUF (product not stated),,stated,text,,p.3 Sec. II.D,,
+ectc51846.2026.00199-a-c1,ectc51846.2026.00199-a,substrate,,,glass panel (core),1,200,200,1000,,,,,,"glass, CTE 7.8 ppm/C",Corning Inc.,design_target,text,,p.4 Sec. III.B,,1 mm thick panel.
+ectc51846.2026.00199-c-c1,ectc51846.2026.00199-c,gpu,,,Blackwell (B200) GPU die,18,,,,,,,,,,,design_target,text,,p.2 Sec. II.A; p.2 Fig. 1(a),,6x3 2D mesh spanning 166x155 mm; NV-HBI links.
+ectc51846.2026.00199-c-c2,ectc51846.2026.00199-c,hbm,,,HBM,72,,,,,,,,,,,design_target,text,,p.2 Sec. II.A; p.3 Sec. III,,4 HBM per GPU die; 72 stated in Sec. III.
+ectc51846.2026.00199-c-c3,ectc51846.2026.00199-c,substrate,,,glass package substrate,1,200,200,,,,,,,glass,,design_target,text,,p.2 Sec. II.A; p.2 Fig. 1(a),,

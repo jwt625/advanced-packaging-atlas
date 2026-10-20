@@ -1,0 +1,42 @@
+paper_id: ectc51687.2025.00085
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00085/text.md
+  - references/ectc51687.2025.00085/source.json
+  - references/ectc51687.2025.00085/figures/page_02.png
+  - references/ectc51687.2025.00085/figures/page_04.png
+  - references/ectc51687.2025.00085/figures/page_05.png
+  - references/ectc51687.2025.00085/figures/cand/p01_fig1.png
+  - references/ectc51687.2025.00085/figures/cand/p02_fig2.png
+  - references/ectc51687.2025.00085/figures/cand/p02_table1.png
+  - references/ectc51687.2025.00085/figures/cand/p03_table2.png
+  - references/ectc51687.2025.00085/figures/cand/p03_table3.png
+  - references/ectc51687.2025.00085/figures/cand/p04_fig9.png
+figure_reading_method: >-
+  Tables 1-5 are images (absent from text.md): read from 300 dpi re-crops. Fig. 8 (Rjc +/-0.00003 C/W, power +/-1 W),
+  Fig. 9 (Rjc +/-0.00005, power +/-3 W) and Fig. 11 (power +/-5 W, pressure drop +/-300 Pa) markers read against
+  gridlines at 300 dpi. Fig. 3 dimension labels and Fig. 5/6 setup drawings viewed at 150-300 dpi.
+entries:
+  - {table: metrics, row_id: ectc51687.2025.00085-a-m3, field: value, value: 2917, unit: ohm, basis: design_target, locator: "p.2 Fig. 3(a)", note: "heater unit 1796 x 5842 um"}
+  - {table: metrics, row_id: ectc51687.2025.00085-a-m4, field: value, value: 2500, unit: ohm, basis: design_target, locator: "p.2 Fig. 3(b)", note: "sensor 580 x 578 um"}
+  - {table: test_vehicles, row_id: ectc51687.2025.00085-a, field: interposer_area_mm2, value: 2685, unit: mm2, basis: design_target, locator: "p.3 Table 3", note: "model geometry; same value for TIM1"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51687.2025.00085-c-m1, field: value, values: [0.0108, 0.0109], locators: ["p.3 Table 2", "p.3 Table 4 (Experiment)"], chosen: "both entered (m1 Table 2, m7 Table 4)", why: "same sample, two tables; rounding"}
+  - {table: process_steps, row_id: ectc51687.2025.00085-c-s06, field: step, values: ["indium TIM supplied in paste form", "metal sheet TIM soldered between dies and lid"], locators: ["p.2 Sec. III para 1", "p.2 Sec. III para 2"], chosen: "not resolved; noted", why: "text inconsistent"}
+  - {table: metrics, row_id: ectc51687.2025.00085-d-m4, field: notes, values: ["Fig. 8 x-axis 'TIM1 BLT thickness (mm)'", "text BLT 25-200 um"], locators: ["p.4 Fig. 8", "p.4 Sec. V.A"], chosen: "um", why: "text and 200 um BLT statement"}
+  - {table: metrics, row_id: ectc51687.2025.00085-c-m2, field: value, values: ["power inputs over 1200W at Tj 105 C (abstract)", "1866 W (Table 2)"], locators: ["p.1 Abstract", "p.3 Table 2"], chosen: 1866, why: "result table"}
+  - {table: test_vehicles, row_id: ectc51687.2025.00085-a, field: n_dies, values: ["4 SoC dies x 4 heater groups (text)", "16 SoC blocks SoC1-SoC16 drawn (Fig. 2)", "2 SOC in Fig. 1 schematic"], locators: ["p.2 Sec. II", "p.2 Fig. 2", "p.1 Fig. 1"], chosen: "4 SoC + 8 HBM = 12", why: "text explicit; Fig. 2 labels heater groups"}
+excluded:
+  - "IMC-Si direct liquid cooling: 2 kW at near-full-reticle die, <10 W system energy, >3000 W at Tj rise 60 C on 3.3x CoWoS-R TTV, sealant/manifold assembly: attributed to Lien et al. refs [12], [13]"
+  - "Impingement flow-pattern literature refs [8], [9]; TIM Rc/IMC void degradation ref [7]; RTD metrology ref [5]"
+  - "Generic CoWoS-R power levels 'exceed 1000W and even beyond 2000W' (intro, ref [2])"
+not_reported:
+  - interconnects (microbumps, C4, BGA only drawn in Fig. 1; no pitch/size), electrical_interfaces, optical_interfaces
+  - die x/y dimensions and thicknesses (areas only), interposer RDL layer count, L/S, substrate layer count and thickness
+  - lid material, TIM2 material, underfill material, BLT of graphite and liquid-metal TIMs
+  - sample counts, reliability data, warpage
+  - indium TIM reflow temperature/profile, BSM thickness
+source_quality:
+  - "Tables 1-5 are images, not in text.md. Candidates p02_fig2, p02_table1, p03_table3, p04_fig9 are cut at the bottom; manual crops used."

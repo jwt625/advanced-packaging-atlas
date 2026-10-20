@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+icep58572.2023.10129695,10.23919/icep58572.2023.10129695,Novel Photo Imageable Film for Interlayer Insulation Application,2023,ICEP,advanced_substrate,advanced_substrate,2,"Photo-imageable interlayer film: 8 um photo vias, electroless Cu wiring, lamination, no desmear."
+ectc51846.2026.00016,10.1109/ectc51846.2026.00016,"High-Density, Energy-Efficient CPO Platform with PIC-in-Mold Interposer Architecture for AI/ML Data Centers",2026,ECTC,cpo,cpo;organic_rdl_fanout;si_bridge,1,"79x52 mm RDL-first molded interposer embedding PICs, TMIs, bridges, four-field stitching; measured CPWG to 65 GHz."
+ectc51846.2026.00110,10.1109/ectc51846.2026.00110,High-Density Polymer Waveguide Integration on Glass Substrate for CPO,2026,ECTC,glass,glass,1,"Polymer waveguides on glass substrate by imprint lithography at 10um pitch; crosstalk vs index contrast, reliability."

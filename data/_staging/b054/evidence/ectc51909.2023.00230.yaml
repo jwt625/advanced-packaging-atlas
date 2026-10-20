@@ -1,0 +1,36 @@
+paper_id: ectc51909.2023.00230
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00230/text.md
+  - references/ectc51909.2023.00230/source.json
+  - references/ectc51909.2023.00230/figures/page_02.png
+  - references/ectc51909.2023.00230/figures/page_03.png
+  - references/ectc51909.2023.00230/figures/page_04.png
+  - references/ectc51909.2023.00230/figures/cand/p02_fig2.png
+  - references/ectc51909.2023.00230/figures/cand/p03_fig4.png
+  - references/ectc51909.2023.00230/figures/cand/p03_fig6.png
+  - references/ectc51909.2023.00230/figures/cand/p04_fig7.png
+figure_reading_method: >-
+  300 dpi re-crops of Fig. 3, 8, 9 from source.pdf; trace extrema read against gridlines (+/-0.1 dB in Fig. 9,
+  +/-1 dB in Fig. 3 and 8). Fig. 4 and 6 read from candidate crops.
+entries:
+  - {table: electrical_interfaces, row_id: ectc51909.2023.00230-a-e1, field: insertion_loss_db, value: 2.35, unit: dB, basis: measured, locator: "p.4 Fig. 9", note: "S12 reticle 1 at 67 GHz; S21 r1 ~1.75, S12 r2 ~1.65, S21 r2 ~1.35"}
+derived:
+  - {table: interconnects, row_id: ectc51909.2023.00230-a-i1, field: aspect_ratio, value: 10, formula: "depth / diameter = 100 / 10", inputs: "p.2 Sec. II.B; p.4 Sec. III.B step 2"}
+conflicts:
+  - {table: electrical_interfaces, row_id: ectc51909.2023.00230-a-e1, field: insertion_loss_db, values: ["text: remains below 2 dB loss at 67 GHz", "Fig. 9: S12 reticle 1 ~2.35 dB at 67 GHz, ~2.65 dB near 64 GHz"], locators: ["p.4 Sec. IV", "p.4 Fig. 9"], chosen: 2.35, why: "measured plot over text (rule k)"}
+  - {table: metrics, row_id: ectc51909.2023.00230-a-m3, field: value, values: ["text: S11/S22 below -20 dB DC-67 GHz", "Fig. 8: S11 reticle 2 peaks ~-11 dB near 65 GHz; S22 reticle 1 ~-19.5 dB"], locators: ["p.4 Sec. IV", "p.4 Fig. 8"], chosen: -11, why: "measured plot over text (rule k)"}
+  - {table: metrics, row_id: ectc51909.2023.00230-a-m5, field: value, values: ["text: measured resonance around 45 GHz in good agreement with simulation", "Fig. 3 simulated dip at ~40 GHz"], locators: ["p.4 Sec. IV", "p.2 Fig. 3"], chosen: "both entered as separate rows", why: "different basis"}
+excluded:
+  - "Transceiver market figures (275 million units 2021-2025, >60% single mode 400G share by 2024) from LightCounting ref [1]"
+  - "TSV-on-PIC work of IME A*STAR, IMEC, Fraunhofer IZM refs [5]-[6]"
+  - "Smoothing anneal loss benefit demonstrated in ref [7]"
+  - "Fig. 1 application scenario (DRV/TIA on front, DSP on PCB): concept only, no build"
+not_reported:
+  - "TSV pitch, liner/barrier, count per reticle; pad metallization materials; reticle and die size"
+  - "final wafer thickness after grinding (only 100 um TSV depth / optimum thickness)"
+  - "process temperatures except PECVD SiN 300 C; temporary bonding material"
+  - "energy per bit, data-rate test, BER"
+  - "reliability, warpage, yield"
+  - "fiber attach, MFD, fiber type"

@@ -1,0 +1,32 @@
+layer_id,tv_id,structure,side,seq,layer_name,feature,material,material_class,layer_role,reinforcement,thickness_um,thickness_min_um,thickness_max_um,line_um,space_um,via_diameter_um,via_pitch_um,roughness_ra_um,repeat,properties,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00117-a-L01,ectc51846.2026.00117-a,substrate_buildup,front,1,front-side Cu wiring ('Thick Cu'),,Cu,metal,conductor,,,,,,,,,,,,stated,schematic,,p.3 Fig. 7,,Two upper metal layers labelled 'Thick Cu'; thickness not given.
+ectc51846.2026.00117-a-L02,ectc51846.2026.00117-a,substrate_core,core,1,embedding layer with Driver IC and MOSFETs,,,unspecified,core,,,,,,,,,,,,stated,mixed,,p.3 Sec. III; p.3 Fig. 7,,Dies of different thickness placed in same layer; via depth varies. Dielectric material not stated.
+ectc51846.2026.00117-a-L03,ectc51846.2026.00117-a,substrate_buildup,back,1,backside Cu wiring (backside connection),,Cu,metal,conductor,,45,,,,,,,,,,unspecified,text,,p.1 Abstract; p.2 Sec. I.C; p.3 Sec. III,thickness_um:gt,'over 45 um' achieved after plating optimization; measurement method not stated.
+ectc51687.2025.00061-a-L01,ectc51687.2025.00061-a,tim_lid,single,1,IHS lid,,,unspecified,cap,,,,,,,,,,,,stated,mixed,,p.4 Fig. 12; p.5 Sec. IV.C,,No thicknesses disclosed.
+ectc51687.2025.00061-a-L02,ectc51687.2025.00061-a,tim_lid,single,2,polymer TIM,,polymer TIM,tim,thermal,,,,,,,,,,,,stated,mixed,,p.5 Sec. IV.C,,
+ectc51687.2025.00061-a-L03,ectc51687.2025.00061-a,die,single,1,"S10 FPGA, EIC and data converter dies",,,silicon,device,,,,,,,,,,,,stated,schematic,,p.3 Fig. 5,,
+ectc51687.2025.00061-a-L04,ectc51687.2025.00061-a,underfill,single,1,epoxy underfill,,epoxy,underfill,encapsulant,,,,,,,,,,,,stated,mixed,,p.4 Fig. 11; p.4 Fig. 12,,
+ectc51687.2025.00061-a-L05,ectc51687.2025.00061-a,bridge,single,1,EMIB bridge embedded in package substrate,,Si,silicon,device,,,,,,,,,,,,stated,schematic,,p.3 Fig. 5,,
+ectc51687.2025.00061-a-L06,ectc51687.2025.00061-a,cavity,single,1,PIC in open substrate cavity under EIC overhang,,,silicon,device,,,,,,,,,,,,stated,schematic,,p.3 Fig. 5; p.4 Fig. 11,,
+ectc51687.2025.00061-a-L07,ectc51687.2025.00061-a,substrate_core,single,1,package substrate,,,unspecified,core,,,,,,,,,,,,stated,schematic,,p.3 Fig. 5,,
+ectc51687.2025.00178-a-L01,ectc51687.2025.00178-a,glass_core,core,1,glass core,,glass,glass,core,,,,,,,,,,,,stated,text,,p.2 Sec. II.A,,Glass type for DIC sample: Low CTE (Fig. 7).
+ectc51687.2025.00178-b-L01,ectc51687.2025.00178-b,substrate_core,core,1,organic core,,organic core,organic_laminate,core,,,,,,,,,,,,stated,text,,p.2 Sec. II.A,,
+ectc51687.2025.00178-c-L01,ectc51687.2025.00178-c,substrate_core,core,1,organic core,,organic core,organic_laminate,core,,,,,,,,,,,,stated,text,,p.2 Sec. II.B; p.3 Fig. 4,,Thickness not stated.
+ectc51687.2025.00178-d-L01,ectc51687.2025.00178-d,glass_core,core,1,glass core,,glass (Low CTE),glass,core,,1000,,,,,,,,,,design_target,text,,p.2 Sec. II.B; p.3 Fig. 4,,CTE values not given.
+ectc51687.2025.00178-e-L01,ectc51687.2025.00178-e,glass_core,core,1,glass core,,glass (Middle CTE),glass,core,,1000,,,,,,,,,,design_target,text,,p.2 Sec. II.B; p.3 Fig. 4,,CTE values not given.
+ectc51687.2025.00178-f-L01,ectc51687.2025.00178-f,glass_core,core,1,glass core,,glass (High CTE),glass,core,,1000,,,,,,,,,,design_target,text,,p.2 Sec. II.B; p.3 Fig. 4,,CTE values not given.
+ectc51687.2025.00178-g-L01,ectc51687.2025.00178-g,substrate_buildup,front,1,build-up resin,,build-up resin,dielectric_polymer,dielectric,,,60,300,,,,,,,,design_target,mixed,,p.4 Sec. III.A; p.4 Fig. 11,,Thickness swept 60-300 um (simulation).
+ectc51687.2025.00178-g-L02,ectc51687.2025.00178-g,glass_core,core,1,glass core,,glass,glass,core,,1000,,,,,,,,,,design_target,schematic,,p.4 Fig. 11(a),,
+ectc51687.2025.00178-g-L03,ectc51687.2025.00178-g,substrate_buildup,back,1,build-up resin,,build-up resin,dielectric_polymer,dielectric,,,60,300,,,,,,,,design_target,mixed,,p.4 Sec. III.A; p.4 Fig. 11,,
+ectc51687.2025.00178-g-L04,ectc51687.2025.00178-g,other,single,1,resin edge coating (split),,resin,dielectric_polymer,encapsulant,,,,,,,,,,,,stated,mixed,,p.4 Sec. III.A; p.4 Fig. 12,,Only in 'w/ edge coating' variant.
+ectc51687.2025.00178-h-L01,ectc51687.2025.00178-h,substrate_buildup,front,1,build-up resin,,build-up resin,dielectric_polymer,dielectric,,210,,,,,,,,,,design_target,text,,p.4 Sec. III.A,,
+ectc51687.2025.00178-h-L02,ectc51687.2025.00178-h,glass_core,core,1,glass substrate,,glass,glass,core,,,,,,,,,,,,stated,text,,p.4 Sec. III.A,,Thickness and CTE not stated.
+ectc51687.2025.00178-h-L03,ectc51687.2025.00178-h,substrate_buildup,back,1,build-up resin,,build-up resin,dielectric_polymer,dielectric,,210,,,,,,,,,,design_target,text,,p.4 Sec. III.A,,
+ectc51687.2025.00178-h-L04,ectc51687.2025.00178-h,other,single,1,resin edge coating (split),,resin,dielectric_polymer,encapsulant,,,,,,,,,,,,stated,mixed,,p.4 Sec. III.A; p.4 Fig. 13,,Only in 'w/ edge coating' variant.
+ectc51687.2025.00178-i-L01,ectc51687.2025.00178-i,substrate_buildup,front,1,build-up Cu RDL,,Cu,metal,conductor,,20,,,,,,,,2,,design_target,table,,p.4 Table 1,,2-2-2: two build-up layers per side.
+ectc51687.2025.00178-i-L02,ectc51687.2025.00178-i,substrate_buildup,front,2,build-up dielectric,,build-up resin,dielectric_polymer,dielectric,,,,,,,,,,2,,stated,table,,p.4 Table 1,,Product and thickness not stated.
+ectc51687.2025.00178-i-L03,ectc51687.2025.00178-i,glass_core,core,1,core-surface Cu RDL,,Cu,metal,conductor,,,,,,,,,,,,stated,figure_image,,p.5 Fig. 15; p.4 Table 1,,Middle '2' of 2-2-2 configuration; per-layer Cu thickness not stated.
+ectc51687.2025.00178-i-L04,ectc51687.2025.00178-i,glass_core,core,2,glass core,,glass (Low CTE or Middle CTE),glass,core,,1000,,,,,90,175,,,,design_target,table,,p.4 Table 1; p.4 Fig. 14,via_pitch_um:ge,"TGV dia 90 um, min pitch 175 um."
+ectc51687.2025.00178-i-L05,ectc51687.2025.00178-i,glass_core,core,3,core-surface Cu RDL,,Cu,metal,conductor,,,,,,,,,,,,stated,figure_image,,p.5 Fig. 15; p.4 Table 1,,
+ectc51687.2025.00178-i-L06,ectc51687.2025.00178-i,substrate_buildup,back,1,build-up dielectric,,build-up resin,dielectric_polymer,dielectric,,,,,,,,,,2,,stated,table,,p.4 Table 1,,
+ectc51687.2025.00178-i-L07,ectc51687.2025.00178-i,substrate_buildup,back,2,build-up Cu RDL,,Cu,metal,conductor,,20,,,,,,,,2,,design_target,table,,p.4 Table 1,,

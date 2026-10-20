@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+ectc51909.2023.00324,10.1109/ectc51909.2023.00324,Self-aligned optical connector assembly on polymer waveguide integrated package substrate for co-packaged optics,2023,ECTC,cpo,cpo,2,Self-aligned connector on SiPh-embedded polymer-waveguide package substrate using <10 um guide; 1 dB penalty.
+ectc51906.2022.00055,10.1109/ectc51906.2022.00055,Demonstration of Substrate Embedded Ni-Zn Ferrite Core Solenoid Inductors Using a Photosensitive Glass Substrate,2022,ECTC,glass,glass,2,"Ni-Zn ferrite cores embedded in photosensitive glass cavities; 1600x1500 um inductor 209 nH, IVR 85.2%."
+ectc51909.2023.00178,10.1109/ectc51909.2023.00178,Die to Wafer Hybrid Cu Bonding for Fine Pitch 3D-IC Applications,2023,ECTC,hybrid_bonding,hybrid_bonding,1,"D2W hybrid Cu bonding at 4 um pitch, 2 um pad; dishing, alignment, particle voids, >98% of 210 chains."

@@ -1,0 +1,42 @@
+paper_id: ectc51846.2026.00365
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00365/text.md
+  - references/ectc51846.2026.00365/source.json
+  - references/ectc51846.2026.00365/figures/page_02.png
+  - references/ectc51846.2026.00365/figures/page_03.png
+  - references/ectc51846.2026.00365/figures/page_04.png
+  - references/ectc51846.2026.00365/figures/page_05.png
+  - references/ectc51846.2026.00365/figures/cand/p02_fig2.png
+  - references/ectc51846.2026.00365/figures/cand/p03_fig3.png
+  - references/ectc51846.2026.00365/figures/cand/p04_tablei.png
+  - references/ectc51846.2026.00365/figures/cand/p04_fig6.png
+  - references/ectc51846.2026.00365/figures/cand/p05_fig7a.png
+  - references/ectc51846.2026.00365/figures/cand/p05_fig9a.png
+figure_reading_method: >-
+  Page renders p.2-5 and candidate crops. Table I values read from candidate crop (match text.md). Fig. 6(a) void
+  labels d1-d16 read from crop (0.8-3.4 mm). Fig. 2 flow distances read from figure labels (match caption).
+entries:
+  - {table: test_vehicles, row_id: ectc51846.2026.00365-h, field: package_x_mm, value: 85, unit: mm, basis: design_target, locator: "p.4 Sec. V", note: "approximately 85 mm x 110 mm"}
+  - {table: metrics, row_id: ectc51846.2026.00365-g-m1, field: value, value: 3.4, unit: mm, basis: measured, locator: "p.4 Fig. 6(a)", note: "caption: up to 3.4 mm; label d6 = 3.4 mm, d14 = 3.3 mm"}
+derived:
+  - {table: components, row_id: ectc51846.2026.00365-h-c2, field: count, value: 6, formula: "18 dies - 12 HBM", inputs: "p.4 Sec. V"}
+conflicts:
+  - {table: test_vehicles, row_id: ectc51846.2026.00365-i, field: reticle_multiple, values: [">7X (Sec. V, Fig. 8 caption)", "demonstrated packages ranging from 2X to 6X reticles (Sec. VI)"], locators: ["p.5 Sec. V", "p.5 Sec. VI"], chosen: ">7X", why: "specific TV statement and caption over summary text"}
+  - {table: metrics, row_id: ectc51846.2026.00365-j-m4, field: value, values: ["275 h for BHAST and UHAST", "275 h for UHAST only"], locators: ["p.5 Sec. V"], chosen: "275 h for both", why: "sentence groups BHAST and UHAST 'at 275 hours'"}
+excluded:
+  - "Roadmap: die area up to 4X reticle demonstrated in 2023 with up to 8 HBMs and 12 bridge dies (no specific TV)"
+  - "Roadmap targets for 2028: >12X reticle die area, >120 mm x 180 mm package (Fig. 1 attributed to ref [7])"
+  - "Pathfinding for 12X reticle and ~50X reticle panel-sized packages (future)"
+  - "EMIB core vs bridge bump pitch 'tens of microns to over a hundred microns' (generic, not tied to a TV)"
+not_reported:
+  - stack_layers
+  - interconnects (bump pitches, counts, metallurgy)
+  - electrical_interfaces
+  - optical_interfaces
+  - underfill product names, absolute viscosity, filler loading, CTE, cure conditions
+  - package sizes except the >5X EMIB package; substrate size and layer count
+  - sample counts for reliability; Temperature Cycling B temperature range
+source_quality:
+  - "Fig. 7 and Fig. 9 candidates are labelled (a) but their bboxes cover all panels; used as-is."

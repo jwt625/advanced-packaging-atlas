@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+ectc51529.2024.00021,10.1109/ectc51529.2024.00021,A study on D2W Hybrid Cu bonding Technology for HBM Multi-die Stacking,2024,ECTC,hybrid_bonding,hybrid_bonding,1,"D2W hybrid Cu bonding for HBM: Cu dishing vs CMP, WSS, thinning, anneal by AFM; 16H HBM demonstrated."
+vlsitechnologyandcir46783.2024.10631478,10.1109/vlsitechnologyandcir46783.2024.10631478,Integration of Si-Interposer and High Density MIM Capacitor on 2.5D Foveros Face-to-Face Architecture,2024,VLSI,microbump_3d,si_interposer;microbump_3d;thermal_pdn,1,Passive TSV Si interposer with HDMIM decap in 2.5D Foveros F2F at 36 um bump pitch; fabrication steps described.
+icept59018.2023.10492317,10.1109/icept59018.2023.10492317,Die Shift Simulation in Panel Level Packaging,2023,ICEPT,panel,panel,1,curator-verified primary disclosure: FOPLP line: STMicroelectronics 700x700 mm

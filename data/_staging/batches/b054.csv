@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+ectc51846.2026.00035,10.1109/ectc51846.2026.00035,Pillar-Suspended Bridge (PSB); Fabrication Process Verification and Interconnect Design for 25-Micron Pitch Die-to-Die Interface,2026,ECTC,si_bridge,si_bridge,2,Pillar-suspended bridge at 25 um pitch; simulated damascene vs SAP RDL; bridge-last PoC with MicroPillars.
+ectc51909.2023.00230,10.1109/ectc51909.2023.00230,3D silicon interposer for terabit/s transceivers based on high-speed TSVs,2023,ECTC,si_interposer,si_interposer,2,"Post-processed high-speed TSVs on CEA-Leti SiPh wafers; fabrication flow at both foundries, >67 GHz bandwidth."
+eptc59621.2023.10457612,10.1109/eptc59621.2023.10457612,Wafer Level Fabrication of Embedded Silicon Microcooler on Heating Devices,2023,EPTC,thermal_pdn,thermal_pdn,2,Wafer-level embedded Si microchannel cooler opposite 3.6 um metallic heater/sensor; process integration flow.

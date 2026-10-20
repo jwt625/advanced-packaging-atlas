@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+ectc51846.2026.00199,10.1109/ectc51846.2026.00199,First Demonstration of a 200×200 mm2 Glass Substrate for Large Area Packages,2026,ECTC,glass,glass,1,"200x200 mm glass substrate, two metal layers, 5/5 um L/S, 20 um microvias; DC yield vs plating uniformity, SI sims."
+ectc51909.2023.00008,10.1109/ectc51909.2023.00008,Ultra High Density Low Temperature SoIC with Sub-0.5 μm Bond Pitch,2023,ECTC,hybrid_bonding,hybrid_bonding,1,"Low-temperature W2W SoIC at 400 nm bond pitch; bonding overlay control, electrical and reliability results."
+ectc51909.2023.00153,10.1109/ectc51909.2023.00153,Development of Fluxless Micro-Bonding and Narrow Gap Filling Process,2023,ECTC,microbump_3d,microbump_3d,1,"Bump formation, TCB, CUF at 10 um minimum pitch; underfillability limits and fluxless bonding pretreatment."

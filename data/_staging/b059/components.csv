@@ -1,0 +1,16 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+tcpmt.2026.3650893-a-c1,tcpmt.2026.3650893-a,dummy_die,yes,,top die with through-holes,1,5,5,,,,,,,silicon,,design_target,text,material:schematic,p.2 Sec. II.A; p.2 Fig. 3(a),,140 um pitch Cu I/Os; 165 um pitch through-holes.
+tcpmt.2026.3650893-a-c2,tcpmt.2026.3650893-a,dummy_die,yes,,bottom substrate,1,10,10,,,,,,,silicon,,design_target,text,material:schematic,p.2 Sec. II.A; p.2 Fig. 3(a),,
+tcpmt.2026.3650893-a-c3,tcpmt.2026.3650893-a,underfill,,,vapor-phase MOF underfill,,,,,,,,,,ZIF-8 MOF (from ALD ZnO),,stated,text,,p.2 Sec. II.B; p.3 Sec. III.C,,Shear tested before/after MOF underfill (Fig. 8); MOF recipe for this TV not stated.
+tcpmt.2026.3650893-b-c1,tcpmt.2026.3650893-b,dummy_die,yes,,die without through-holes,,,,,,,,,,,,stated,text,,p.2 Sec. II.C,,
+tcpmt.2026.3650893-c-c1,tcpmt.2026.3650893-c,dummy_die,yes,,top die (multipitch),1,2,2,,,,,,,silicon,,design_target,text,material:figure_image,p.2 Sec. III.A; p.2 Fig. 5(a); p.3 Fig. 7(b),,Daisy chains and Kelvin structures; electrical readout pads.
+tcpmt.2026.3650893-c-c2,tcpmt.2026.3650893-c,dummy_die,yes,,bottom substrate,1,,,,,,,,,silicon with SiO2,,measured,figure_image,,p.3 Fig. 7(c),,Size not stated.
+tcpmt.2026.3650893-c-c3,tcpmt.2026.3650893-c,underfill,,,vapor-phase MOF underfill,,,,,,,,,,ZIF-8 MOF (ALD ZnO seed + 2-methylimidazole conversion),,stated,text,,p.2 Sec. II.B; p.2 Sec. III.A,,7 supercycles fill the 1 um die-to-substrate gap.
+ectc51529.2024.00321-a-c1,ectc51529.2024.00321-a,dummy_die,yes,yes,dummy Si chips,729,,,,,,,,,Si,,design_target,text,,p.1 Sec. II.A; p.3 Sec. III.C; p.3 Fig. 7,,9x9 shots; Si/EMC volume ratio 27.8%. Chip size not stated.
+ectc51529.2024.00321-a-c2,ectc51529.2024.00321-a,die_attach_film,,,DAF,,,,,,,,,,,,stated,text,,p.1 Sec. II.A,,
+ectc51529.2024.00321-a-c3,ectc51529.2024.00321-a,mold,,,liquid type EMC (compression molded),,,,,,,,,,EMC liquid type,,stated,text,,p.4 Sec. III.E; p.3 Sec. III.D,,"Table I: E 15.0 GPa, alpha1 1.60e-5/K, alpha2 4.80e-5/K (simulation inputs)."
+ectc51529.2024.00321-a-c4,ectc51529.2024.00321-a,other,,,glass carrier (Glass C),,,,,,,,,,Glass C,,design_target,text,,p.4 Sec. III.E; p.2 Fig. 4,,"Temporary carrier with releasable bonding layer; CTE 8.60e-6/K, E 71.6 GPa."
+ectc51529.2024.00321-g-c1,ectc51529.2024.00321-g,mold,,,EMC liquid type (sim),,,,,,,,,,liquid type EMC,,design_target,table,,p.3 Table I,,"E 15.0 GPa; alpha1 1.60e-5, alpha2 4.80e-5 /K."
+ectc51529.2024.00321-g-c2,ectc51529.2024.00321-g,mold,,,EMC granule type 1 (sim),,,,,,,,,,granule type 1 EMC,,design_target,table,,p.3 Table I,,"E 18.4 GPa; alpha1 9.00e-6, alpha2 4.20e-5 /K."
+ectc51529.2024.00321-g-c3,ectc51529.2024.00321-g,mold,,,EMC granule type 2 (sim),,,,,,,,,,granule type 2 EMC,,design_target,table,,p.3 Table I,,"E 15.2 GPa; alpha1 9.00e-6, alpha2 5.10e-5 /K."
+ectc51529.2024.00321-g-c4,ectc51529.2024.00321-g,mold,,,EMC film type (sim),,,,,,,,,,film type EMC,,design_target,table,,p.3 Table I,,"E 15.1 GPa; alpha1 6.00e-6, alpha2 5.00e-5 /K."

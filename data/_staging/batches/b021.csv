@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+ectc51846.2026.00117,10.1109/ectc51846.2026.00117,High Power System Scaling Using Double-Sided Connection in Embedded Substrate,2026,ECTC,advanced_substrate,advanced_substrate,1,"Embedded-die substrate with vias to die backside, >45 um backside Cu; multi-die embedding; 34% thermal gain."
+ectc51687.2025.00061,10.1109/ectc51687.2025.00061,Demonstration of Co-Packaged Optics Assembly for Fiber-Based Optical Interconnect,2025,ECTC,cpo,cpo;si_bridge,1,"PIPES MCP: open-cavity EMIB bridge substrate, three EIC-PIC stacks, FAUs with 56 couplers at 127 um pitch."
+ectc51687.2025.00178,10.1109/ectc51687.2025.00178,Development of Glass Core Build-up Substrate with TGV,2025,ECTC,glass,glass;advanced_substrate,1,"Glass core build-up prototype with void-free Cu-filled TGV, resin edge coating vs dicing cracks; warpage."

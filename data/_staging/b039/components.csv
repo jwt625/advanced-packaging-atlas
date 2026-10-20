@@ -1,0 +1,17 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51529.2024.00311-a-c1,ectc51529.2024.00311-a,dummy_die,,,"top die with Ni/Sn solder bumps, dummy solder and Ni spacer bumps",9,7.2,7.2,,,,,,,Si,,design_target,text,,p.2 Sec. III; p.3 Sec. IV; p.4 Fig. 8,,count = dies bonded per coupon in the electrical lot.
+ectc51529.2024.00311-a-c2,ectc51529.2024.00311-a,dummy_die,,,"landing die/wafer with passivated Cu bumps and Al probe pads (DC, Kelvin, EM, TM structures)",,,,,,,,,,,,stated,text,,p.2 Sec. III,,Size and thickness not stated.
+ectc51529.2024.00311-a-c3,ectc51529.2024.00311-a,underfill,,,capillary underfill (CUF) with nanofillers,,,,,,,,,,U8443-14,Namics,stated,text,,p.3 Sec. IV,,Cured 2 h at 150 C.
+ectc51687.2025.00047-a-c1,ectc51687.2025.00047-a,logic_soc,,,SoC,4,32,21,,,,,150,,,,design_target,table,gap_um:text,p.4 Fig. 9; p.4 Sec. IV.A,,Listed under 'TD' in Fig. 9. gap = SoC die-to-die gap.
+ectc51687.2025.00047-a-c2,ectc51687.2025.00047-a,hbm,,,HBM3,12,11,11,,,,,,,,,design_target,table,,p.4 Fig. 9; p.4 Sec. IV.A,,Listed under 'TD' in Fig. 9.
+ectc51687.2025.00047-a-c3,ectc51687.2025.00047-a,interposer,,,CoWoS-R RDL interposer (CoW),1,66,68,,,,,,,polymer dielectric film and Cu RDL,,design_target,text,,p.4 Sec. IV.A,,Size given as CoW size.
+ectc51687.2025.00047-a-c4,ectc51687.2025.00047-a,substrate,,,SBT,1,97.3,95,,,,,,,,,design_target,text,,p.4 Sec. IV.A; p.4 Fig. 9,,Fig. 9: 97 x 95 mm.
+ectc51687.2025.00047-a-c5,ectc51687.2025.00047-a,stiffener,,,ring,1,,,,,,,,,SUS430,,stated,text,,p.4 Sec. IV.A,,
+ectc51687.2025.00047-b-c1,ectc51687.2025.00047-b,logic_soc,,,SoC,4,32,21,,,,,150,,,,design_target,table,gap_um:text,p.4 Fig. 9; p.4 Sec. IV.A,,Listed under 'TD' in Fig. 9. gap = SoC die-to-die gap.
+ectc51687.2025.00047-b-c2,ectc51687.2025.00047-b,hbm,,,HBM3,12,11,11,,,,,,,,,design_target,table,,p.4 Fig. 9; p.4 Sec. IV.A,,Listed under 'TD' in Fig. 9.
+ectc51687.2025.00047-b-c3,ectc51687.2025.00047-b,interposer,,,CoWoS-R RDL interposer (CoW),1,66,68,,,,,,,polymer dielectric film and Cu RDL,,design_target,text,,p.4 Sec. IV.A,,Size given as CoW size.
+ectc51687.2025.00047-b-c4,ectc51687.2025.00047-b,substrate,,,SBT,1,97.3,95,,,,,,,,,design_target,text,,p.4 Sec. IV.A; p.4 Fig. 9,,Fig. 9: 97 x 95 mm.
+ectc51687.2025.00047-b-c5,ectc51687.2025.00047-b,stiffener,,,ring,1,,,,,,,,,SUS430,,stated,text,,p.4 Sec. IV.A,,
+ectc51909.2023.00268-a-c1,ectc51909.2023.00268-a,logic_soc,,,application processor (AP),1,,,,,,,,,,,stated,text,,p.3 Sec. 2; p.3 Fig. 5,,Design site; size not stated.
+ectc51909.2023.00268-a-c2,ectc51909.2023.00268-a,hbm,,,HBM,1,,,,,,,,,,,stated,text,,p.3 Sec. 2; p.3 Fig. 5,,Design site; size not stated.
+ectc51909.2023.00268-a-c3,ectc51909.2023.00268-a,substrate,,,substrate,1,,,,,,,,,,,stated,schematic,,p.3 Fig. 5,,

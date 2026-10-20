@@ -1,0 +1,16 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+icep-iaac64884.2025.11002958-b-c1,icep-iaac64884.2025.11002958-b,other,,,Th-SiO2 / Si test pieces,25,,,,,,,,,thermal SiO2 on Si,,design_target,text,,p.2 Sec. II; p.2 Fig. 5,,5 x 5 grid; piece size not stated.
+icep-iaac64884.2025.11002958-b-c2,icep-iaac64884.2025.11002958-b,substrate,,,510 x 515 mm panel substrate (carrier for test pieces),1,515,510,,,,,,,,,design_target,mixed,,p.2 Sec. II; p.2 Fig. 5,,Material not stated.
+icep-iaac64884.2025.11002958-c-c1,icep-iaac64884.2025.11002958-c,substrate,,,ABF flat substrate,1,,,,,,,,,Ajinomoto Build-up Film (ABF),,stated,text,,p.2 Sec. II; p.2 Fig. 6,,"ABF grade, thickness and core not stated; preheated before pretreatment."
+icep-iaac64884.2025.11002958-d-c1,icep-iaac64884.2025.11002958-d,substrate,,,alkali-free glass flat substrate,1,,,,,,,,,alkali-free glass,,stated,text,,p.2 Sec. II,,Glass product and thickness not stated.
+icep-iaac64884.2025.11002958-e-c1,icep-iaac64884.2025.11002958-e,substrate,,,alkali-free glass flat substrate,1,,,,,,,,,alkali-free glass,,stated,text,,p.2 Sec. II,,Glass product and thickness not stated.
+icep-iaac64884.2025.11002958-f-c1,icep-iaac64884.2025.11002958-f,substrate,,,glass substrate with hourglass TGVs,1,50,40,430,,,,,,glass (type not stated),,design_target,text,,p.2 Sec. II,,
+ectc51846.2026.00198-a-c1,ectc51846.2026.00198-a,substrate,,,glass panel substrate,1,510,515,1100,,,,,,glass (type not stated),,design_target,text,,p.2 Sec. III.A,,Thickness given as t 1.1 mm.
+ectc51846.2026.00198-b-c1,ectc51846.2026.00198-b,substrate,,,"silicon wafer, TTV <1 um",1,,,,,,,,,Si,,stated,text,,p.2 Sec. III.B,,Diameter and thickness not stated.
+ectc51846.2026.00012-a-c1,ectc51846.2026.00012-a,other,,,Si wafer carrier,1,300,,,,,,,,Si,,design_target,text,,p.2 Sec. II.B,,x_mm = wafer diameter 300 mm.
+ectc51846.2026.00012-a-c2,ectc51846.2026.00012-a,unspecified,,yes,distributed chips,,,,,,,,,,,,stated,text,,p.2 Sec. II.B,,"'chip-distributed carriers'; chip type, size, count not stated."
+ectc51846.2026.00012-a-c3,ectc51846.2026.00012-a,mold,,,epoxy molding compound (compression molded),,,,,,,,,,EMC,,stated,text,,p.2 Sec. II.B,,"Product, thickness and properties not stated."
+ectc51846.2026.00012-b-c1,ectc51846.2026.00012-b,other,,,glass panel carrier,1,510,515,,,,,,,glass,,design_target,text,,p.2 Sec. II.B,,
+ectc51846.2026.00012-b-c2,ectc51846.2026.00012-b,unspecified,,yes,distributed chips,,,,,,,,,,,,stated,text,,p.2 Sec. II.B,,
+ectc51846.2026.00012-b-c3,ectc51846.2026.00012-b,mold,,,epoxy molding compound (compression molded),,,,,,,,,,EMC,,stated,text,,p.2 Sec. II.B; p.4 Sec. III.B,,
+ectc51846.2026.00012-c-c1,ectc51846.2026.00012-c,substrate,,,ABF build-up substrate,1,118,115,,,,,,,ABF on glass-reinforced epoxy core,,design_target,text,,p.2 Sec. II.B,,

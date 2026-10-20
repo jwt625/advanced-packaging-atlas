@@ -1,0 +1,48 @@
+layer_id,tv_id,structure,side,seq,layer_name,feature,material,material_class,layer_role,reinforcement,thickness_um,thickness_min_um,thickness_max_um,line_um,space_um,via_diameter_um,via_pitch_um,roughness_ra_um,repeat,properties,basis,source,overrides,locator,qualifiers,notes
+tcpmt.2021.3123384-a-L01,tcpmt.2021.3123384-a,coupon,single,1,"Ni etch mask (semiadditive electroplated, circular via openings)",,Ni,metal,other,,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.3 Sec. II.A; p.2 Fig. 2(d),,Mask thickness not stated.
+tcpmt.2021.3123384-a-L02,tcpmt.2021.3123384-a,coupon,single,2,seed layer,,Cu (seed),metal,seed,,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.3 Sec. II.A,,
+tcpmt.2021.3123384-a-L03,tcpmt.2021.3123384-a,coupon,single,3,SiC substrate,,SiC,ceramic,device,,,,,,,,,,,,stated,text,,p.2 Sec. II.A,,Polytype and thickness not stated.
+tcpmt.2021.3123384-a-L04,tcpmt.2021.3123384-a,coupon,single,4,wax bond,,wax,adhesive,adhesive,,,,,,,,,,,,stated,text,,p.2 Fig. 2(a); p.3 Sec. II.A,,
+tcpmt.2021.3123384-a-L05,tcpmt.2021.3123384-a,coupon,single,5,Ni-plated carrier wafer,,Si carrier with Ti/Cu seed and Ni,silicon,carrier,,,,,,,,,,,,stated,text,,p.2 Sec. II.A,,
+tcpmt.2021.3123384-b-L01,tcpmt.2021.3123384-b,coupon,single,1,electroplated etch mask,,Cu or Ni,metal,other,,10,,,,,,,,,,design_target,text,,p.5 Sec. II.B,thickness_um:ge,
+tcpmt.2021.3123384-b-L02,tcpmt.2021.3123384-b,coupon,single,2,seed (adhesion),,TiW,metal,adhesion,,0.2,,,,,,,,,,design_target,text,,p.5 Sec. II.B,,
+tcpmt.2021.3123384-b-L03,tcpmt.2021.3123384-b,coupon,single,3,seed,,Cu,metal,seed,,0.3,,,,,,,,,,design_target,text,,p.5 Sec. II.B,,
+tcpmt.2021.3123384-b-L04,tcpmt.2021.3123384-b,coupon,single,4,SiC wafer piece,,SiC,ceramic,device,,,,,,,,,,,,stated,text,,p.5 Sec. II.B,,
+tcpmt.2021.3123384-b-L05,tcpmt.2021.3123384-b,coupon,single,5,carrier wafer plated with mask material,,"carrier wafer, Ni or Cu plated",other,carrier,,,,,,,,,,,,stated,text,,p.5 Sec. II.B,,
+tcpmt.2021.3123384-c-L01,tcpmt.2021.3123384-c,interposer,front,1,front side metallization,,Ti/Cu (sputtered seed) + electroplated Cu,metal,conductor,,,,,,,,,,,,stated,text,,p.7 Sec. III; p.7 Fig. 13,,
+tcpmt.2021.3123384-c-L02,tcpmt.2021.3123384-c,interposer,front,2,PECVD via liner,,PECVD layer (material not stated),dielectric_inorganic,dielectric,,,,,,,,,,,,stated,text,,p.7 Sec. III,,'increased liner thicknesses'; thinner than BCB approach.
+tcpmt.2021.3123384-c-L03,tcpmt.2021.3123384-c,interposer,core,1,SiC interposer core with Cu TSiCV,,SiC,ceramic,core,,200,,,,,40,,,,,design_target,text,,p.1 Abstract; p.7 Fig. 13,,"Via diameters 40, 80, 120 um (Fig. 13); 40 entered as smallest."
+tcpmt.2021.3123384-c-L04,tcpmt.2021.3123384-c,interposer,back,1,backside passivation,,PECVD SiO2,dielectric_inorganic,passivation,,,,,,,,,,,,stated,text,,p.7 Sec. III,,Opened on vias.
+tcpmt.2021.3123384-c-L05,tcpmt.2021.3123384-c,interposer,back,2,backside RDL,,not stated,metal,conductor,,,,,,,,,,,,stated,text,,p.7 Sec. III,,
+tcpmt.2021.3123384-d-L01,tcpmt.2021.3123384-d,interposer,front,1,front side metallization,,Ti/Cu (sputtered seed) + electroplated Cu,metal,conductor,,,,,,,,,,,,stated,text,,p.7 Sec. III; p.7 Fig. 14,,
+tcpmt.2021.3123384-d-L02,tcpmt.2021.3123384-d,interposer,front,2,"polymer via liner (dry film, laser reopened)",,BCB (benzocyclobutene) dry film,dielectric_polymer,dielectric,,8,,,,,,,,,,measured,text,,p.7 Sec. III; p.7 Fig. 12,thickness_um:gt,Isolation >8 um at via edge/top corner (cross-section).
+tcpmt.2021.3123384-d-L03,tcpmt.2021.3123384-d,interposer,core,1,SiC interposer core with Cu TSiCV,,SiC,ceramic,core,,200,,,,,,,,,,design_target,text,,p.1 Abstract; p.7 Fig. 14,,
+tcpmt.2021.3123384-d-L04,tcpmt.2021.3123384-d,interposer,back,1,backside passivation,,PECVD SiO2,dielectric_inorganic,passivation,,,,,,,,,,,,stated,text,,p.7 Sec. III,,
+tcpmt.2021.3123384-d-L05,tcpmt.2021.3123384-d,interposer,back,2,backside RDL,,not stated,metal,conductor,,,,,,,,,,,,stated,text,,p.7 Sec. III,,
+tcpmt.2021.3123384-e-L01,tcpmt.2021.3123384-e,die,single,1,planar SiC chip,,SiC,ceramic,device,,100,,,,,,,,,,design_target,text,,p.8 Sec. IV; p.8 Fig. 16,,Alternative chips 40 um thick.
+tcpmt.2021.3123384-e-L02,tcpmt.2021.3123384-e,bonding_interface,single,1,solder bump joint,,electroplated solder (alloy not stated),solder,bonding,,,,,,,,,,,,stated,text,,p.8 Sec. IV; p.8 Fig. 16,,
+tcpmt.2021.3123384-e-L03,tcpmt.2021.3123384-e,interposer,front,1,freestanding Cu lines (no top passivation),,Cu,metal,conductor,,,,,,,,,,,,stated,text,,p.8 Sec. IV,,
+tcpmt.2021.3123384-e-L04,tcpmt.2021.3123384-e,interposer,core,1,SiC interposer with Cu TSiCV,,SiC,ceramic,core,,200,,,,,,,,,,design_target,text,,p.8 Sec. IV; p.8 Fig. 16,,
+tcpmt.2021.3123384-f-L01,tcpmt.2021.3123384-f,die,single,1,deep-etched SiC MEMS die,,SiC,ceramic,device,,,,,,,,,,,,stated,text,,p.8 Fig. 17,,
+tcpmt.2021.3123384-f-L02,tcpmt.2021.3123384-f,bonding_interface,single,1,solder bump joint,,electroplated solder (alloy not stated),solder,bonding,,,,,,,,,,,,stated,text,,p.8 Sec. IV; p.8 Fig. 17,,
+tcpmt.2021.3123384-f-L03,tcpmt.2021.3123384-f,interposer,core,1,SiC interposer,,SiC,ceramic,core,,200,,,,,,,,,,design_target,text,,p.8 Sec. IV; p.8 Fig. 17,,
+tcpmt.2021.3123384-g-L01,tcpmt.2021.3123384-g,die,single,1,SiC substrate with backside-etched membrane cavity,,4H-SiC,ceramic,device,,,,,,,,,,,,stated,text,,p.8 Sec. V; p.9 Fig. 18,,Die flipped onto interposer (Fig. 19); membrane thickness for this sensor not stated.
+tcpmt.2021.3123384-g-L02,tcpmt.2021.3123384-g,die,single,2,"lower epitaxial layer (opposite doping, isolation)",,SiC epitaxial layer,ceramic,device,,,,,,,,,,,,stated,text,,p.8 Sec. V,,
+tcpmt.2021.3123384-g-L03,tcpmt.2021.3123384-g,die,single,3,upper epitaxial layer patterned into piezoresistors,,SiC epitaxial layer,ceramic,device,,,,,,,,,,,,stated,text,,p.8 Sec. V; p.9 Fig. 18(b),,
+tcpmt.2021.3123384-g-L04,tcpmt.2021.3123384-g,die,single,4,"metallization, pads reinforced with electroplated Au",,Ti / TiWN / Au + ECD Au,metal,conductor,,,,,,,,,,,,stated,text,,p.8 Sec. V; p.9 Fig. 18(d),,
+tcpmt.2021.3123384-g-L05,tcpmt.2021.3123384-g,bonding_interface,single,1,Au stud bump thermocompression joint,,Au,metal,bonding,,,,,,,,,,,,stated,text,,p.9 Sec. V; p.9 Fig. 19(a),,
+tcpmt.2021.3123384-g-L06,tcpmt.2021.3123384-g,interposer,core,1,SiC interposer with TSiCV,,SiC,ceramic,core,,,,,,,,,,,,stated,text,,p.9 Fig. 19(a),,
+ectc51846.2026.00336-a-L01,ectc51846.2026.00336-a,die,single,1,frontside M0 metal (bonding stack above),,not stated,metal,conductor,,,,,,,,,,,,stated,figure_image,,p.3 Fig. 1(a)-(c); p.3 Sec. II.B,,Frontside completes with bonding stack deposition (stack not described).
+ectc51846.2026.00336-a-L02,ectc51846.2026.00336-a,die,single,2,STI / active Si level with TDV,,STI dielectric; active Si,dielectric_inorganic,dielectric,,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.3 Fig. 1(b),,TDV fully surrounded by STI.
+ectc51846.2026.00336-a-L03,ectc51846.2026.00336-a,die,single,3,buried power rail level,,Mo or TiN/W fill,metal,conductor,,,,,0.042,,,,,,,design_target,text,,p.2 Sec. II.A,,"BPR trench parallel to active, CD 42 nm (line_um = CD)."
+ectc51846.2026.00336-a-L04,ectc51846.2026.00336-a,die,single,4,remaining Si substrate with slit nTSV,,Si,silicon,device,,0.25,,,,,,,,,,design_target,text,,p.3 Sec. II.B; p.2 Table II,thickness_um:approx,~250 nm after extreme thinning; nTSV with 10 nm oxide liner.
+ectc51846.2026.00336-a-L05,ectc51846.2026.00336-a,die,single,5,backside metal BSM1 (perpendicular to nTSV),,not stated,metal,conductor,,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.3 Fig. 1(a),,
+ectc51846.2026.00336-b-L01,ectc51846.2026.00336-b,die,single,1,frontside M0 metal (bonding stack above),,not stated,metal,conductor,,,,,,,,,,,,stated,figure_image,,p.3 Fig. 1(d)-(f); p.3 Sec. II.B,,
+ectc51846.2026.00336-b-L02,ectc51846.2026.00336-b,die,single,2,STI / active Si level with TDV (no Si substrate below),,STI dielectric; active Si,dielectric_inorganic,dielectric,,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.3 Fig. 1(f),,Si substrate fully removed (ultimate thinning).
+ectc51846.2026.00336-b-L03,ectc51846.2026.00336-b,die,single,3,backside metal BSM1/BSPR,,not stated,metal,conductor,,,,,,,,,,,,stated,schematic,,p.2 Table I; p.3 Fig. 1(e),,
+ectc51687.2025.00014-a-L01,ectc51687.2025.00014-a,die,single,1,"PIC (flip-chip, face down) with edge coupler and trench",,not stated (MPW PIC),unspecified,device,,,,,,,,,,,,stated,text,,p.3 Sec. III; p.2 Fig. 3,,
+ectc51687.2025.00014-a-L02,ectc51687.2025.00014-a,bonding_interface,single,1,stud bump joints (TCB),,stud bumps (metal not stated),metal,bonding,,,,,,,,,,,,stated,text,,p.3 Sec. III,,
+ectc51687.2025.00014-a-L03,ectc51687.2025.00014-a,underfill,single,1,sidefill at PIC periphery,,sidefill (product not stated),underfill,encapsulant,,,,,,,,,,,,stated,text,,p.5 Sec. V.B,,
+ectc51687.2025.00014-a-L04,ectc51687.2025.00014-a,photonic,single,1,glass substrate surface: Au-plated electrical wiring,,Au,metal,conductor,,,,,,,,,,,,stated,text,,p.3 Sec. III; p.3 Fig. 5(a),,
+ectc51687.2025.00014-a-L05,ectc51687.2025.00014-a,photonic,single,2,glass substrate with fs-laser-written waveguides and laser-assisted-etched trench,trench sidewall,glass,glass,optical,,,,,,,,,0.4,,n = 1.47,measured,text,properties:stated,p.3 Sec. III; p.4 Sec. IV.B,,"Sidewall Ra 400 nm, Rz 2 um (white light interferometer). Glass thickness not stated."
+ectc51687.2025.00014-a-L06,ectc51687.2025.00014-a,other,single,1,ceramic base,,ceramic,ceramic,carrier,,,,,,,,,,,,stated,figure_image,,p.3 Fig. 4,,

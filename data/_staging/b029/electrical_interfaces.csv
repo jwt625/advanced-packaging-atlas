@@ -1,0 +1,3 @@
+ei_id,tv_id,protocol,protocol_as_written,channel_type,lane_rate_gbps,lanes,aggregate_bw_tbps,bw_density_tbps_per_mm,bw_density_tbps_per_mm2,energy_pj_per_bit,scope,reach_mm,bump_pitch_um,line_um,space_um,insertion_loss_db,il_freq_ghz,ber,latency_ns,basis,source,overrides,locator,qualifiers,notes
+ectc51529.2024.00049-a-e1,ectc51529.2024.00049-a,other,UCIe x64 32Gbps,organic_rdl,32,64,,,,,,,,2,2,,,,,simulated,table,,p.4 Table II; p.4 Sec. IV.C,,"Simulated eye width 0.74 UI on 9 RDL layers (Tx 14 mA, Rx +/-40 mV). UCIe-S/A not stated."
+ectc51529.2024.00049-b-e1,ectc51529.2024.00049-b,hbm4,HBM4,organic_rdl,8,,,,,,,,,2,2,,,,,simulated,table,,p.4 Table II,,Simulated eye width 0.76 UI on 8 RDL layers.

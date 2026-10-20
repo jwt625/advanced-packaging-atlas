@@ -1,0 +1,32 @@
+paper_id: ectc51846.2026.00302
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00302/text.md
+  - references/ectc51846.2026.00302/source.json
+  - references/ectc51846.2026.00302/figures/page_02.png
+  - references/ectc51846.2026.00302/figures/page_03.png
+  - references/ectc51846.2026.00302/figures/cand/p02_fig1.png
+  - references/ectc51846.2026.00302/figures/cand/p03_fig2.png
+  - references/ectc51846.2026.00302/figures/cand/p03_fig3.png
+  - references/ectc51846.2026.00302/figures/cand/p03_fig4.png
+figure_reading_method: >-
+  Fig. 1(b) re-cropped at 300 and 600 dpi to read the microscope overlay labels (1)-(4). Label-to-feature assignment
+  checked by pixel scale: 250.02 um circle = 203 px at 300 dpi (0.81 px/um); label (4) line 435 px = 536 um, label (3)
+  offset ~15 px = 18 um, label (1) horizontal surface line across the right groove opening ~295 px = 363 um; all
+  consistent with the printed values. Fig. 4 scan units not shown; no MFD entered.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00302-a-m5, field: value, value: 369.53, unit: um, basis: measured, locator: "p.2 Fig. 1(b)", note: "overlay label (1) 'Laenge 369,53 um' (German decimal comma)"}
+  - {table: metrics, row_id: ectc51846.2026.00302-a-m8, field: value, value: 537.38, unit: um, basis: measured, locator: "p.2 Fig. 1(b)", note: "overlay label (4); vertical line from glass surface to lower boundary"}
+derived: []
+conflicts: []
+excluded:
+  - "Edge coupling advantages, Si V-groove passive alignment and IOX technology attributed to refs [1]-[7]"
+not_reported:
+  - interconnects, electrical_interfaces, components beyond glass/fiber/index fluid
+  - waveguide width/depth, index contrast, propagation loss value, MFD of waveguide and fiber
+  - V-groove pitch, depth, angle and lengths of deep/shallow trench sections; panel thickness (text)
+  - fs-laser parameters, KOH concentration/temperature/time, sputtered metal, IOX salt composition/temperature/time
+  - polarization, wavelength range beyond 1550 nm measurement, reliability data
+source_quality:
+  - "Candidate p03_fig3 includes the 'III. Conclusions' heading (manual crop used). Fig. 1 candidate includes sub-captions and top whitespace (kept)."

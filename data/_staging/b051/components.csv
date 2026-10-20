@@ -1,0 +1,18 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51529.2024.00021-a-c1,ectc51529.2024.00021-a,hbm,,,"DRAM core die (top die), 16-high stack",16,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Fig. 1(b); p.2 Fig. 3,,"Die size, thickness and process node not reported."
+ectc51529.2024.00021-a-c2,ectc51529.2024.00021-a,base_die,,,bottom wafer (D2W target),,,,,,,,,,,,stated,schematic,,p.2 Fig. 3(b),,Shown in Fig. 3 as the wafer receiving the die stacks; function (base logic die) not stated.
+vlsitechnologyandcir46783.2024.10631478-a-c1,vlsitechnologyandcir46783.2024.10631478-a,cpu,,,CPU chiplet (with own 3-plate HDMIM),1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1; p.2 Fig. 7,,
+vlsitechnologyandcir46783.2024.10631478-a-c2,vlsitechnologyandcir46783.2024.10631478-a,gpu,,,GPU chiplet (no own HDMIM),1,,,,,,,,,,,stated,mixed,,p.2 Fig. 1; p.2 Fig. 7; p.1 GPU Performance,,
+vlsitechnologyandcir46783.2024.10631478-a-c3,vlsitechnologyandcir46783.2024.10631478-a,logic_soc,,,SOC chiplet (no HDMIM),1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1; p.2 Fig. 7,,
+vlsitechnologyandcir46783.2024.10631478-a-c4,vlsitechnologyandcir46783.2024.10631478-a,interposer,,,"passive Si-Interposer (base die) with TSVs, M1-M3 and HDMIM",1,,,,,,,,,Si,,stated,mixed,,p.1 Fabrication; p.2 Fig. 1; p.2 Fig. 5,,Called Base Die in Fig. 5. Thickness not stated; TSV height 75 um (Fig. 3).
+vlsitechnologyandcir46783.2024.10631478-a-c5,vlsitechnologyandcir46783.2024.10631478-a,capacitor,,yes,"interposer HDMIM (between M2-M3), 57.7 uF",1,,,,,,,,,high-k oxide between TiN electrodes,,stated,mixed,,p.2 Fig. 7(a); p.1 Fabrication,,"Shared by CPU, SOC and GPU chiplets."
+vlsitechnologyandcir46783.2024.10631478-a-c6,vlsitechnologyandcir46783.2024.10631478-a,capacitor,,yes,"3-plate HDMIM in CPU die (between top 2 metal layers), 5.4 uF",1,,,,,,,,,2 high-k layers between 3 TiN layers,,stated,mixed,,p.2 Fig. 7(a); p.2 Fig. 6,,CPU-die HDMIM described with citation [2]; density values excluded.
+vlsitechnologyandcir46783.2024.10631478-a-c7,vlsitechnologyandcir46783.2024.10631478-a,substrate,,,package substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1; p.2 Fig. 5,,Layer count and size not reported.
+icept59018.2023.10492317-a-c1,icept59018.2023.10492317-a,unspecified,,yes,Si-Die,500000,,,,,,,,,Si,,stated,mixed,,p.1 Sec. II; p.1 Fig. 2,count:gt,Count = units per panel ('more than half million'). Die size not given.
+icept59018.2023.10492317-a-c2,icept59018.2023.10492317-a,mold,,,MC (mold compound),,,,,,,,,,MC,,stated,mixed,,p.1 Fig. 2; p.1 Sec. III,,Compression molded; product not stated.
+icept59018.2023.10492317-a-c3,icept59018.2023.10492317-a,other,,,carrier plate,,,,,,,,,,,,stated,mixed,,p.1 Sec. III; p.2 Fig. 3,,Temporary; panel released after molding. Material not stated.
+icept59018.2023.10492317-a-c4,icept59018.2023.10492317-a,adhesive,,,tape,,,,,,,,,,,,stated,mixed,,p.1 Sec. I; p.2 Fig. 3,,Die bonding tape on carrier plate (Fig. 3); product not stated.
+icept59018.2023.10492317-b-c1,icept59018.2023.10492317-b,unspecified,,,Die,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3; p.2 Fig. 4,,
+icept59018.2023.10492317-b-c2,icept59018.2023.10492317-b,adhesive,,,Tape,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+icept59018.2023.10492317-b-c3,icept59018.2023.10492317-b,other,,,Carrier Plate,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+icept59018.2023.10492317-b-c4,icept59018.2023.10492317-b,mold,,,MC,,,,,,,,,,,,stated,schematic,,p.2 Fig. 4,,

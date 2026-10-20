@@ -1,0 +1,47 @@
+paper_id: ectc51529.2024.00049
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00049/text.md
+  - references/ectc51529.2024.00049/source.json
+  - references/ectc51529.2024.00049/figures/page_02.png
+  - references/ectc51529.2024.00049/figures/page_03.png
+  - references/ectc51529.2024.00049/figures/page_04.png
+  - references/ectc51529.2024.00049/figures/cand/p02_fig1.png
+  - references/ectc51529.2024.00049/figures/cand/p02_fig2.png
+  - references/ectc51529.2024.00049/figures/cand/p02_fig3b.png
+  - references/ectc51529.2024.00049/figures/cand/p04_fig7.png
+figure_reading_method: >-
+  Fig. 1 labels read from a 400 dpi re-crop; Fig. 2, 3(b), 7 from candidates; Fig. 4, 5, 6 and Tables II/III
+  from page renders and 150 dpi re-crops (Tables II/III have no candidate). Table I (requirements) is qualitative.
+entries:
+  - {table: components, row_id: ectc51529.2024.00049-a-c3, field: count, value: 248, unit: ea, basis: design_target, locator: "p.2 Sec. III", note: "248 IPDs totaling 400 uF"}
+  - {table: components, row_id: ectc51529.2024.00049-c-c1, field: count, value: 140, unit: ea, basis: stated, locator: "p.4 Sec. VI", note: "component-level reliability with 140 pcs IPD"}
+  - {table: electrical_interfaces, row_id: ectc51529.2024.00049-a-e1, field: lanes, value: 64, unit: lanes, basis: simulated, locator: "p.4 Table II", note: "UCIe x64, eye 0.74 UI, 9 RDL layers"}
+derived:
+  - {table: test_vehicles, row_id: ectc51529.2024.00049-a, field: interposer_area_mm2, value: 4488, formula: "66 x 68", inputs: "p.2 Sec. III (CoW size 66x68 mm2)"}
+  - {table: test_vehicles, row_id: ectc51529.2024.00049-a, field: n_dies, value: 16, formula: "4 SoC + 12 HBM", inputs: "p.1 Abstract; p.2 Fig. 2"}
+  - {table: test_vehicles, row_id: ectc51529.2024.00049-d, field: n_dies, value: 12, formula: "4 SoC + 8 HBM3", inputs: "p.2 Fig. 1"}
+conflicts:
+  - {table: test_vehicles, row_id: ectc51529.2024.00049-a, field: substrate_x_mm, values: [97.3, 97], locators: ["p.2 Sec. III (SBT 97.3*95 mm2)", "p.2 Fig. 2 table; p.1 Abstract; p.2 Fig. 1 (97x95)"], chosen: 97.3, why: "text value is more precise; 97 appears as a rounded spec/label (package_x_mm keeps the Fig. 1 body size 97)"}
+  - {table: metrics, row_id: ectc51529.2024.00049-c-m4, field: condition, values: ["-40 C ~ 125 C", "-55 C ~ 125 C"], locators: ["p.4 Table III", "p.4 Sec. VI"], chosen: "-40 C ~ 125 C", why: "result table over text"}
+  - {table: metrics, row_id: ectc51529.2024.00049-a-m9, field: parameter, values: ["PoC + TCC1000 (5.5X, Fig. 1)", "TCC500 (7L TV, Sec. VI / Table III)"], locators: ["p.2 Fig. 1", "p.4 Sec. VI; p.4 Table III"], chosen: "both entered", why: "attributed to different builds/labels; cycle counts differ"}
+  - {table: metrics, row_id: ectc51529.2024.00049-e-m10, field: scope, values: ["vs SI spec", "vs TSV-interposer counterpart"], locators: ["p.3 Fig. 5 (second table header 'SI Spec')", "p.3 Sec. IV.C text"], chosen: "vs SI spec", why: "figure table header over text"}
+excluded:
+  - "CoWoS-R mass production since Q4'23 with >99% yield for 2 products (products not described)"
+  - "Fig. 1 roadmap items 1.4X (1 SoC + 2 HBM2E), 1.7X (1 SoC + 8 IO die), 1.6X (2 SoC + 4 HBM3): products, not TVs of this paper"
+  - "Q4 2025 qual pass and DTC2500 release (future plans)"
+  - "Automotive-grade TCB1000 'high reliability confidence' (TV not identified, no result)"
+  - "Fig. 3(a) line-density vs routing-length positions (schematic, no readable values)"
+  - "Table I next-gen criteria (requirements, not results)"
+  - "Multilayer RDL and CoWoS-R reliability results of refs [1], [4]"
+not_reported:
+  - process_steps (no fabrication flow; only 'leveraging InFO process')
+  - RDL Cu and dielectric thickness, dielectric product, Dk/Df
+  - microbump diameter/metallurgy, C4 diameter/metallurgy, bonding method
+  - substrate materials and thickness, package thickness, underfill/TIM/lid
+  - warpage values, sample counts for reliability, test standards
+  - energy per bit, BER, insertion loss in dB
+  - HBM die count per stack, HBM generation actually assembled (Fig. 2 says HBM3 size; Fig. 1 says HBM3/4)
+source_quality:
+  - "Tables I-III have no candidates; table titles garbled in text.md; values read from renders."

@@ -1,0 +1,10 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+tcpmt.2025.3628798-a-c1,tcpmt.2025.3628798-a,dummy_die,yes,,STCA top die (daisy chain / Kelvin / EM test die),,,,,,,,,,Si,,stated,mixed,,p.5 Fig. 15; p.6 Sec. IV.A; p.6 Sec. IV.B,,Full-thickness dies; die size not stated.
+tcpmt.2025.3628798-a-c2,tcpmt.2025.3628798-a,dummy_die,yes,,landing coupon (D2C) or 300 mm landing wafer (D2W),,30,30,,,,,,,Si,,design_target,caption,,p.6 Fig. 19,,x/y = D2C coupon 3x3 cm (caption); D2W also on full 300 mm wafer.
+tcpmt.2025.3628798-a-c3,tcpmt.2025.3628798-a,underfill,,,"wafer-level underfill (spin-coated polymer, bumps revealed by CMP)",,,,,,,,,,spin-coated polymer (type not named),,stated,text,,p.5 Sec. III.B; p.5 Fig. 15,,"Polymer type, Tg and product not reported."
+tcpmt.2025.3628798-b-c1,tcpmt.2025.3628798-b,dummy_die,yes,,top die with Ni/Sn bumps,,,,,,,,,,Si,,stated,text,,p.6 Sec. IV.A; p.7 Fig. 22,,Die size not stated.
+tcpmt.2025.3628798-b-c2,tcpmt.2025.3628798-b,dummy_die,yes,,landing coupon or 300 mm landing wafer,,30,30,,,,,,,Si,,design_target,caption,,p.6 Fig. 19,,x/y = D2C coupon 3x3 cm.
+tcpmt.2025.3628798-b-c3,tcpmt.2025.3628798-b,underfill,,,capillary underfill (CUF),,,,,,,,,,CUF (product not named),,stated,text,,p.2 Sec. I; p.7 Sec. IV.C,,Dispensed and cured after TCB.
+tcpmt.2025.3628798-c-c1,tcpmt.2025.3628798-c,dummy_die,yes,,landing wafer (full-thickness Si),,,,,,,,,,Si,,stated,schematic,,p.3 Fig. 7,,
+tcpmt.2025.3628798-d-c1,tcpmt.2025.3628798-d,dummy_die,yes,,In-bumped test chips (In-In bonded pair),,,,,,,,,,,,stated,text,,p.10 Sec. V.B; p.11 Sec. V.C; p.11 Fig. 34,,Chip sizes and count not stated.
+ectc51687.2025.00326-a-c1,ectc51687.2025.00326-a,interposer,,,panel-level multilayer RDL interposer,,320,320,,,,,,,Cu / photosensitive dielectric,,design_target,text,,p.1 Sec. II.A; p.2 Fig. 3,,x/y = glass carrier/panel size.

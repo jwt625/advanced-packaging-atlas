@@ -1,0 +1,37 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51906.2022.00140-a-c1,ectc51906.2022.00140-a,asic,,,"ASIC / AP (Application Processor), Die 1",1,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. 2.2; p.2 Fig. 3,,"Size, node, emulator status not reported."
+ectc51906.2022.00140-a-c2,ectc51906.2022.00140-a,hbm,,,"HBM, Die 2",1,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. 2.2; p.2 Fig. 3,,
+ectc51906.2022.00140-a-c3,ectc51906.2022.00140-a,mold,,,over-mold (chip last molding),,,,,,,,,,,,stated,mixed,,p.2 Sec. 2.1; p.2 Fig. 2,,Mold compound not named.
+ectc51906.2022.00140-a-c4,ectc51906.2022.00140-a,substrate,,,substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,Only shown in Fig. 3 schematic; no details.
+ectc51906.2022.00140-a-c5,ectc51906.2022.00140-a,other,,,"organic carrier (temporary, released after molding)",1,,,,,,,,,organic carrier,,stated,mixed,,p.2 Sec. 2.1; p.4 Fig. 9; p.5 Fig. 10,,
+ectc51906.2022.00140-b-c1,ectc51906.2022.00140-b,asic,,,"ASIC / AP (Application Processor), Die 1",1,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. 2.2; p.2 Fig. 3,,"Size, node, emulator status not reported."
+ectc51906.2022.00140-b-c2,ectc51906.2022.00140-b,hbm,,,"HBM, Die 2",1,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. 2.2; p.2 Fig. 3,,
+ectc51906.2022.00140-b-c3,ectc51906.2022.00140-b,mold,,,over-mold (chip last molding),,,,,,,,,,,,stated,mixed,,p.2 Sec. 2.1; p.2 Fig. 2,,Mold compound not named.
+ectc51906.2022.00140-b-c4,ectc51906.2022.00140-b,substrate,,,substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,Only shown in Fig. 3 schematic; no details.
+ectc51906.2022.00140-b-c5,ectc51906.2022.00140-b,other,,,"organic carrier (temporary, released after molding)",1,,,,,,,,,organic carrier,,stated,mixed,,p.2 Sec. 2.1; p.4 Fig. 9; p.5 Fig. 10,,
+ectc51529.2024.00151-a-c1,ectc51529.2024.00151-a,asic,,,ASIC,2,,,,,,,,,,,stated,text,,p.5 Sec. III.A; p.5 Fig. 10,,
+ectc51529.2024.00151-a-c2,ectc51529.2024.00151-a,hbm,,,HBM,8,,,,,,,,,,,stated,text,,p.5 Sec. III.A; p.5 Fig. 10,,Generation and stack height not stated.
+ectc51529.2024.00151-a-c3,ectc51529.2024.00151-a,bridge,,yes,Si bridge die (embedded in FO-RDL),8,6.2,6.4,,,,,,,Si,,design_target,text,,p.5 Sec. III.A; p.5 Fig. 10,,
+ectc51529.2024.00151-a-c4,ectc51529.2024.00151-a,substrate,,,FCBGA organic substrate,1,70,78,,,,,,,,,design_target,text,,p.5 Sec. III.A,,Package dimension 70x78 mm; layer count not reported.
+ectc51529.2024.00151-a-c5,ectc51529.2024.00151-a,mold,,,top mold and bottom mold,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2,,Compounds not named.
+ectc51529.2024.00151-a-c6,ectc51529.2024.00151-a,underfill,,,CoW UF (top underfill),,,,,,,,,,,,stated,mixed,,p.3 Fig. 2; p.6 Fig. 16,,
+ectc51529.2024.00151-a-c7,ectc51529.2024.00151-a,underfill,,,CoS UF (bottom underfill),,,,,,,,,,,,stated,mixed,,p.3 Fig. 2; p.6 Fig. 16,,
+ectc51529.2024.00151-b-c1,ectc51529.2024.00151-b,logic_soc,,,SoC-1,2,,,,,,,,,,,stated,text,,p.5 Sec. III.B; p.5 Fig. 12(a),,
+ectc51529.2024.00151-b-c2,ectc51529.2024.00151-b,logic_soc,,,SoC-2,8,,,,,,,,,,,stated,text,,p.5 Sec. III.B,,Function of SoC-2 not stated.
+ectc51529.2024.00151-b-c3,ectc51529.2024.00151-b,bridge,,yes,Si bridge die (embedded in FO-RDL),10,,,,,,,,,Si,,stated,text,,p.5 Sec. III.B; p.1 Abstract,,
+ectc51529.2024.00151-b-c4,ectc51529.2024.00151-b,substrate,,,"organic substrate (top build-up, core, bottom build-up)",1,76.5,80,,,,,,,,,design_target,text,,p.5 Sec. III.B; p.2 Fig. 1,,
+ectc51529.2024.00151-b-c5,ectc51529.2024.00151-b,mold,,,top mold and bottom mold,,,,,,,,,,,,stated,schematic,,p.3 Fig. 2,,
+ectc51529.2024.00151-b-c6,ectc51529.2024.00151-b,underfill,,,CoW UF (top underfill),,,,,,,,,,,,stated,mixed,,p.3 Fig. 2; p.6 Fig. 16,,
+ectc51529.2024.00151-b-c7,ectc51529.2024.00151-b,underfill,,,CoS UF (bottom underfill),,,,,,,,,,,,stated,mixed,,p.3 Fig. 2; p.6 Fig. 16,,
+ectc51529.2024.00151-b-c8,ectc51529.2024.00151-b,other,,,passive components,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 1,,Type/count not stated.
+ectc51909.2023.00154-a-c1,ectc51909.2023.00154-a,asic,yes,,3D-ASIC (large top die Cu-Cu hybrid bonded F2F to small bottom die with TSV),1,25,19,,,,,60,,,,design_target,table,,p.2 Table 1; p.2 Sec. II; p.2 Fig. 3,,Daisy-chain test chip. 25x19 mm per Table 1 'ASIC (3D ASIC)'. Top die larger than bottom die. gap_um = chip-to-chip gap on interposer.
+ectc51909.2023.00154-a-c2,ectc51909.2023.00154-a,asic,yes,,ASIC (2D),2,25,19,,,,,60,,,,design_target,mixed,,p.2 Sec. II; p.2 Table 1,,Daisy-chain test chips.
+ectc51909.2023.00154-a-c3,ectc51909.2023.00154-a,other,,,chiplet,3,8.4,6.0,,,,,60,,,,design_target,mixed,,p.2 Sec. II; p.2 Table 1,,Function not stated.
+ectc51909.2023.00154-a-c4,ectc51909.2023.00154-a,hbm,,,"HBM3 (Gen3), 8 core dies on buffer die",12,11,11,,,,,60,,,,design_target,mixed,,p.2 Sec. II; p.2 Table 1,,
+ectc51909.2023.00154-a-c5,ectc51909.2023.00154-a,interposer,,,Si interposer with TSV (molded),1,,,110,,,,,,Si,,design_target,text,,p.1 Abstract; p.3 Sec. III,,4x reticle size; final thickness on 1st glass carrier.
+ectc51909.2023.00154-a-c6,ectc51909.2023.00154-a,substrate,,,"build-up organic substrate, 14 layers (6-2-6), extremely low CTE core",1,,,,,,,,,,,stated,mixed,,p.2 Sec. II; p.2 Table 1,,Core material/CTE value not named; Cu layer design optimized.
+ectc51909.2023.00154-a-c7,ectc51909.2023.00154-a,stiffener,,,"stiffener (foot width 10 x 3.5 mm, height above substrate thickness)",1,,,,,,,,,,,design_target,mixed,,p.2 Sec. II; p.2 Table 1; p.3 Sec. III,,Attached with adhesive; material not stated.
+ectc51909.2023.00154-a-c8,ectc51909.2023.00154-a,mold,,,"wafer-level mold, partially removed to expose die backsides",,,,,,,,,,,,stated,text,,p.3 Sec. III,,
+ectc51909.2023.00154-a-c9,ectc51909.2023.00154-a,underfill,,,"UF (CoW), wafer-level underfill",,,,,,,,,,,,stated,mixed,,p.3 Sec. III; p.5 Fig. 11,,
+ectc51909.2023.00154-a-c10,ectc51909.2023.00154-a,underfill,,,"UF (interposer), CM-to-substrate underfill",,,,,,,,,,,,stated,mixed,,p.3 Sec. III; p.5 Fig. 11,,
+ectc51909.2023.00154-a-c11,ectc51909.2023.00154-a,adhesive,,,stiffener adhesive,,,,,,,,,,,,stated,text,,p.3 Sec. III,,

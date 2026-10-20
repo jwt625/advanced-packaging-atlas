@@ -1,0 +1,35 @@
+paper_id: ectc51687.2025.00326
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51687.2025.00326/text.md
+  - references/ectc51687.2025.00326/source.json
+  - references/ectc51687.2025.00326/figures/candidates.json
+  - references/ectc51687.2025.00326/figures/page_02.png
+  - references/ectc51687.2025.00326/figures/page_03.png
+  - references/ectc51687.2025.00326/figures/page_04.png
+  - references/ectc51687.2025.00326/figures/page_05.png
+  - references/ectc51687.2025.00326/figures/cand/p02_fig1.png
+  - references/ectc51687.2025.00326/figures/cand/p03_fig5.png
+  - references/ectc51687.2025.00326/figures/cand/p05_fig10.png
+figure_reading_method: >-
+  Page renders (150 dpi) and manual re-crops of Figs. 3, 5, 6, 8, 10. Fig. 8 mean/sigma and Fig. 7 U values and Fig. 10
+  Sa/Sz are printed labels; Fig. 5 yield is the printed label 'Yield = 98.3%'. Fig. 6/12 time axes carry no tick values.
+entries:
+  - {table: metrics, row_id: ectc51687.2025.00326-a-m1, field: value, value: 1.49, unit: um, basis: measured, locator: "p.4 Fig. 8(a)", note: "Layer 3 sigma 0.04; Layer 2 1.49/0.07; Layer 1 1.47/0.08"}
+derived:
+  - {table: stack_layers, row_id: ectc51687.2025.00326-b-L04, field: thickness_um, value: 0.175, formula: "Ti 0.025 + Cu 0.150", inputs: "p.1 Sec. II.A"}
+conflicts:
+  - {table: metrics, row_id: ectc51687.2025.00326-b-m1, field: value, values: [98.3, "over 95", "over 98"], locators: ["p.3 Fig. 5(a)", "p.3 Sec. III.A", "p.5 Sec. IV"], chosen: 98.3, why: "measured plot label > text"}
+  - {table: metrics, row_id: ectc51687.2025.00326-a-m4, field: locator, values: ["text: Fig 10", "caption: Fig. 9"], locators: ["p.3 Sec. III.C", "p.4 Fig. 9"], chosen: "Fig. 9", why: "rule (c): cite caption label; text calls the daisy-chain plot Fig 10"}
+excluded:
+  - "L/S 2/2 um multilayer interposer of ref [5] (previous paper)"
+  - "Protective-material SAP structure details (ref [5]); only its b-HAST trace in Fig. 12 entered (TV d)"
+  - "Bossung-curve CD values (Fig. 2, simulation; exposure step 10 mJ/cm2) not entered as metrics"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - die assembly / bumps (no top dies; despite abstract 'assembled')
+  - Cu wiring height for the 1.5/1.5 interposer, dielectric thickness used, dielectric and resist product names
+  - cure temperature/time, plating chemistry details, glass carrier thickness
+  - b-HAST time axis values and failure criterion

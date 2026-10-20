@@ -1,0 +1,89 @@
+step_id,tv_id,flow_name,seq,category,step,performed,target,material,equipment,temp_c,time_s,pressure_mpa,thickness_um,conditions,result,basis,source,overrides,locator,qualifiers,notes
+ectc51687.2025.00187-a-s01,ectc51687.2025.00187-a,"lid attachment (Sec. III.A, Fig. 10)",1,dispense,dispense adhesive onto substrate as lid bonding surface,yes,,adhesive,,,,,,,,stated,mixed,,p.4 Sec. III.A; p.5 Fig. 10,,Process execution by SPIL MTS and CRD teams (ack). Conditions not reported.
+ectc51687.2025.00187-a-s02,ectc51687.2025.00187-a,"lid attachment (Sec. III.A, Fig. 10)",2,dispense,"dispense dam adhesive around chip module, height = module + TIM",yes,,adhesive (dam),,,,,,,,stated,mixed,,p.4 Sec. III.A; p.5 Fig. 10,,
+ectc51687.2025.00187-a-s03,ectc51687.2025.00187-a,"lid attachment (Sec. III.A, Fig. 10)",3,dispense,"dispense TIM1: silicone-based LM TIM on die area, adhesive-type PTIM on periphery",yes,,silicone LM TIM; adhesive-type PTIM,,,,,,,,stated,mixed,,p.4 Sec. III.A; p.5 Fig. 10,,Fig. 10 step 2 'TIM and Dam Dispensing'.
+ectc51687.2025.00187-a-s04,ectc51687.2025.00187-a,"lid attachment (Sec. III.A, Fig. 10)",4,assembly,position and attach lid,yes,,lid,,,,,,,,stated,mixed,,p.4 Sec. III.A; p.5 Fig. 10,,
+ectc51687.2025.00187-a-s05,ectc51687.2025.00187-a,"lid attachment (Sec. III.A, Fig. 10)",5,cure,snap cure,yes,,adhesive,,,,,,,,stated,mixed,,p.4 Sec. III.A; p.5 Fig. 10,,
+ectc51687.2025.00187-a-s06,ectc51687.2025.00187-a,"lid attachment (Sec. III.A, Fig. 10)",6,cure,oven hard cure of adhesive and TIM,yes,,adhesive; TIM,,,,,,,,stated,mixed,,p.4 Sec. III.A; p.5 Fig. 10,,
+ectc51687.2025.00187-b-s01,ectc51687.2025.00187-b,"lid attachment (Sec. III.A, Fig. 10)",1,dispense,dispense adhesive onto substrate as lid bonding surface,yes,,adhesive,,,,,,,,stated,mixed,,p.4 Sec. III.A; p.5 Fig. 10,,Process execution by SPIL MTS and CRD teams (ack). Conditions not reported.
+ectc51687.2025.00187-b-s02,ectc51687.2025.00187-b,"lid attachment (Sec. III.A, Fig. 10)",2,dispense,dispense dam adhesive around chip module,no,,adhesive (dam),,,,,,,,stated,mixed,,p.4 Sec. III.A; p.5 Fig. 10,,Dam not used in LM-only build (Fig. 12 schematic).
+ectc51687.2025.00187-b-s03,ectc51687.2025.00187-b,"lid attachment (Sec. III.A, Fig. 10)",3,dispense,dispense LM-only TIM1 over chip module,yes,,silicone LM TIM,,,,,,,,stated,mixed,,p.4 Sec. III.A; p.5 Fig. 10,,
+ectc51687.2025.00187-b-s04,ectc51687.2025.00187-b,"lid attachment (Sec. III.A, Fig. 10)",4,assembly,position and attach lid,yes,,lid,,,,,,,,stated,mixed,,p.4 Sec. III.A; p.5 Fig. 10,,
+ectc51687.2025.00187-b-s05,ectc51687.2025.00187-b,"lid attachment (Sec. III.A, Fig. 10)",5,cure,snap cure,yes,,adhesive,,,,,,,,stated,mixed,,p.4 Sec. III.A; p.5 Fig. 10,,
+ectc51687.2025.00187-b-s06,ectc51687.2025.00187-b,"lid attachment (Sec. III.A, Fig. 10)",6,cure,oven hard cure of adhesive and TIM,yes,,adhesive; TIM,,,,,,,,stated,mixed,,p.4 Sec. III.A; p.5 Fig. 10,,
+ectc51529.2024.00265-a-s01,ectc51529.2024.00265-a,TV fabrication (Fig. 3),1,dicing,dice wafer into chips,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-a-s02,ectc51529.2024.00265-a,TV fabrication (Fig. 3),2,dispense,apply flux,,,water-soluble flux,,,,,,,,stated,mixed,,p.4 Fig. 3; p.4 Sec. III.D,,
+ectc51529.2024.00265-a-s03,ectc51529.2024.00265-a,TV fabrication (Fig. 3),3,assembly,mount chip,,,,,,,,,,,stated,schematic,,p.4 Fig. 3; p.4 Sec. III.D,,Simple mount and reflow; no TCB or laser assisted bonding.
+ectc51529.2024.00265-a-s04,ectc51529.2024.00265-a,TV fabrication (Fig. 3),4,reflow,reflow flip-chip joints,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-a-s05,ectc51529.2024.00265-a,TV fabrication (Fig. 3),5,cleaning,clean flux,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-a-s06,ectc51529.2024.00265-a,TV fabrication (Fig. 3),6,underfill,dispense CUF,,,capillary underfill,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-a-s07,ectc51529.2024.00265-a,TV fabrication (Fig. 3),7,cure,cure CUF,,,capillary underfill,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-a-s08,ectc51529.2024.00265-a,TV fabrication (Fig. 3),8,other,put glass beads (adhesive spacers),,,glass beads,,,,,,,,stated,schematic,,p.4 Fig. 3; p.3 Sec. III.B,,150 um beads for BLR build; 100/300 um and no beads also evaluated.
+ectc51529.2024.00265-a-s09,ectc51529.2024.00265-a,TV fabrication (Fig. 3),9,dispense,apply stiffener adhesive,,,silicone adhesive,,,,,,,,stated,schematic,,p.4 Fig. 3; p.3 Sec. III.B,,
+ectc51529.2024.00265-a-s10,ectc51529.2024.00265-a,TV fabrication (Fig. 3),10,assembly,attach stiffener,,,copper stiffener,,,,,,,,stated,schematic,,p.4 Fig. 3,,"BLR build 2.5 mm thick, 16 mm wide."
+ectc51529.2024.00265-a-s11,ectc51529.2024.00265-a,TV fabrication (Fig. 3),11,cure,cure adhesive,,,silicone adhesive,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-a-s12,ectc51529.2024.00265-a,TV fabrication (Fig. 3),12,ball_attach,BGA ball mount,,,"Sn-3.0Ag-0.5Cu balls, 0.6 mm",,,,,,,,stated,mixed,,p.4 Fig. 3; p.4 Sec. III.D,,
+ectc51529.2024.00265-a-s13,ectc51529.2024.00265-a,TV fabrication (Fig. 3),13,other,print solder paste on motherboard,,,Sn-Ag-Cu solder paste,,,,,,,,stated,mixed,,p.4 Fig. 3; p.4 Sec. III.D,,No paste on the four corner pads; same flux coated there.
+ectc51529.2024.00265-a-s14,ectc51529.2024.00265-a,TV fabrication (Fig. 3),14,assembly,put Si spacers at package-area corners on motherboard,,,"silicon spacers, 0.25 mm thick",,,,,250,,,design_target,mixed,,p.4 Fig. 3; p.4 Sec. III.D,,Prevents BGA solder bridging.
+ectc51529.2024.00265-a-s15,ectc51529.2024.00265-a,TV fabrication (Fig. 3),15,assembly,mount package on motherboard,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,SMT.
+ectc51529.2024.00265-a-s16,ectc51529.2024.00265-a,TV fabrication (Fig. 3),16,reflow,reflow BGA joints,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-a-s17,ectc51529.2024.00265-a,TV fabrication (Fig. 3),17,other,remove spacer,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-a-s18,ectc51529.2024.00265-a,TV fabrication (Fig. 3),18,cleaning,clean flux,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-a-s19,ectc51529.2024.00265-a,TV fabrication (Fig. 3),19,test,temperature cycling of board assembly,,,,,,,,,"-55 to +125 C, 2 cycles/h, air ambient",,stated,text,,p.4 Sec. III.E,,
+ectc51529.2024.00265-b-s01,ectc51529.2024.00265-b,TV fabrication (Fig. 3),1,dicing,dice wafer into chips,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-b-s02,ectc51529.2024.00265-b,TV fabrication (Fig. 3),2,dispense,apply flux,,,water-soluble flux,,,,,,,,stated,mixed,,p.4 Fig. 3; p.4 Sec. III.D,,
+ectc51529.2024.00265-b-s03,ectc51529.2024.00265-b,TV fabrication (Fig. 3),3,assembly,mount chip,,,,,,,,,,,stated,schematic,,p.4 Fig. 3; p.4 Sec. III.D,,Simple mount and reflow; no TCB or laser assisted bonding.
+ectc51529.2024.00265-b-s04,ectc51529.2024.00265-b,TV fabrication (Fig. 3),4,reflow,reflow flip-chip joints,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-b-s05,ectc51529.2024.00265-b,TV fabrication (Fig. 3),5,cleaning,clean flux,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-b-s06,ectc51529.2024.00265-b,TV fabrication (Fig. 3),6,underfill,dispense CUF,,,capillary underfill,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-b-s07,ectc51529.2024.00265-b,TV fabrication (Fig. 3),7,cure,cure CUF,,,capillary underfill,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-b-s08,ectc51529.2024.00265-b,TV fabrication (Fig. 3),8,other,put glass beads (adhesive spacers),,,glass beads,,,,,,,,stated,schematic,,p.4 Fig. 3; p.3 Sec. III.B,,150 um beads for BLR build; 100/300 um and no beads also evaluated.
+ectc51529.2024.00265-b-s09,ectc51529.2024.00265-b,TV fabrication (Fig. 3),9,dispense,apply stiffener adhesive,,,silicone adhesive,,,,,,,,stated,schematic,,p.4 Fig. 3; p.3 Sec. III.B,,
+ectc51529.2024.00265-b-s10,ectc51529.2024.00265-b,TV fabrication (Fig. 3),10,assembly,attach stiffener,,,copper stiffener,,,,,,,,stated,schematic,,p.4 Fig. 3,,"BLR build 2.5 mm thick, 16 mm wide."
+ectc51529.2024.00265-b-s11,ectc51529.2024.00265-b,TV fabrication (Fig. 3),11,cure,cure adhesive,,,silicone adhesive,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-b-s12,ectc51529.2024.00265-b,TV fabrication (Fig. 3),12,ball_attach,BGA ball mount,,,"Sn-3.0Ag-0.5Cu balls, 0.6 mm",,,,,,,,stated,mixed,,p.4 Fig. 3; p.4 Sec. III.D,,
+ectc51529.2024.00265-b-s13,ectc51529.2024.00265-b,TV fabrication (Fig. 3),13,other,print solder paste on motherboard,,,Sn-Ag-Cu solder paste,,,,,,,,stated,mixed,,p.4 Fig. 3; p.4 Sec. III.D,,No paste on the four corner pads; same flux coated there.
+ectc51529.2024.00265-b-s14,ectc51529.2024.00265-b,TV fabrication (Fig. 3),14,assembly,put Si spacers at package-area corners on motherboard,,,"silicon spacers, 0.25 mm thick",,,,,250,,,design_target,mixed,,p.4 Fig. 3; p.4 Sec. III.D,,Prevents BGA solder bridging.
+ectc51529.2024.00265-b-s15,ectc51529.2024.00265-b,TV fabrication (Fig. 3),15,assembly,mount package on motherboard,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,SMT.
+ectc51529.2024.00265-b-s16,ectc51529.2024.00265-b,TV fabrication (Fig. 3),16,reflow,reflow BGA joints,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-b-s17,ectc51529.2024.00265-b,TV fabrication (Fig. 3),17,other,remove spacer,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-b-s18,ectc51529.2024.00265-b,TV fabrication (Fig. 3),18,cleaning,clean flux,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-b-s19,ectc51529.2024.00265-b,TV fabrication (Fig. 3),19,test,temperature cycling of board assembly,,,,,,,,,"-55 to +125 C, 2 cycles/h, air ambient",,stated,text,,p.4 Sec. III.E,,
+ectc51529.2024.00265-c-s01,ectc51529.2024.00265-c,TV fabrication (Fig. 3),1,dicing,dice wafer into chips,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-c-s02,ectc51529.2024.00265-c,TV fabrication (Fig. 3),2,dispense,apply flux,,,water-soluble flux,,,,,,,,stated,mixed,,p.4 Fig. 3; p.4 Sec. III.D,,
+ectc51529.2024.00265-c-s03,ectc51529.2024.00265-c,TV fabrication (Fig. 3),3,assembly,mount chip,,,,,,,,,,,stated,schematic,,p.4 Fig. 3; p.4 Sec. III.D,,Simple mount and reflow; no TCB or laser assisted bonding.
+ectc51529.2024.00265-c-s04,ectc51529.2024.00265-c,TV fabrication (Fig. 3),4,reflow,reflow flip-chip joints,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-c-s05,ectc51529.2024.00265-c,TV fabrication (Fig. 3),5,cleaning,clean flux,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-c-s06,ectc51529.2024.00265-c,TV fabrication (Fig. 3),6,underfill,dispense CUF,,,capillary underfill,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-c-s07,ectc51529.2024.00265-c,TV fabrication (Fig. 3),7,cure,cure CUF,,,capillary underfill,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-c-s08,ectc51529.2024.00265-c,TV fabrication (Fig. 3),8,other,put glass beads (adhesive spacers),,,glass beads,,,,,,,,stated,schematic,,p.4 Fig. 3; p.3 Sec. III.B,,150 um beads for BLR build; 100/300 um and no beads also evaluated.
+ectc51529.2024.00265-c-s09,ectc51529.2024.00265-c,TV fabrication (Fig. 3),9,dispense,apply stiffener adhesive,,,silicone adhesive,,,,,,,,stated,schematic,,p.4 Fig. 3; p.3 Sec. III.B,,
+ectc51529.2024.00265-c-s10,ectc51529.2024.00265-c,TV fabrication (Fig. 3),10,assembly,attach stiffener,,,copper stiffener,,,,,,,,stated,schematic,,p.4 Fig. 3,,"BLR build 2.5 mm thick, 16 mm wide."
+ectc51529.2024.00265-c-s11,ectc51529.2024.00265-c,TV fabrication (Fig. 3),11,cure,cure adhesive,,,silicone adhesive,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-c-s12,ectc51529.2024.00265-c,TV fabrication (Fig. 3),12,ball_attach,BGA ball mount,,,"Sn-3.0Ag-0.5Cu balls, 0.6 mm",,,,,,,,stated,mixed,,p.4 Fig. 3; p.4 Sec. III.D,,
+ectc51529.2024.00265-c-s13,ectc51529.2024.00265-c,TV fabrication (Fig. 3),13,other,print solder paste on motherboard,,,Sn-Ag-Cu solder paste,,,,,,,,stated,mixed,,p.4 Fig. 3; p.4 Sec. III.D,,No paste on the four corner pads; same flux coated there.
+ectc51529.2024.00265-c-s14,ectc51529.2024.00265-c,TV fabrication (Fig. 3),14,assembly,put Si spacers at package-area corners on motherboard,,,"silicon spacers, 0.25 mm thick",,,,,250,,,design_target,mixed,,p.4 Fig. 3; p.4 Sec. III.D,,Prevents BGA solder bridging.
+ectc51529.2024.00265-c-s15,ectc51529.2024.00265-c,TV fabrication (Fig. 3),15,assembly,mount package on motherboard,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,SMT.
+ectc51529.2024.00265-c-s16,ectc51529.2024.00265-c,TV fabrication (Fig. 3),16,reflow,reflow BGA joints,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-c-s17,ectc51529.2024.00265-c,TV fabrication (Fig. 3),17,other,remove spacer,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-c-s18,ectc51529.2024.00265-c,TV fabrication (Fig. 3),18,cleaning,clean flux,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-c-s19,ectc51529.2024.00265-c,TV fabrication (Fig. 3),19,test,temperature cycling of board assembly,,,,,,,,,"-55 to +125 C, 2 cycles/h, air ambient",,stated,text,,p.4 Sec. III.E,,
+ectc51529.2024.00265-d-s01,ectc51529.2024.00265-d,TV fabrication (Fig. 3),1,dicing,dice wafer into chips,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-d-s02,ectc51529.2024.00265-d,TV fabrication (Fig. 3),2,dispense,apply flux,,,water-soluble flux,,,,,,,,stated,mixed,,p.4 Fig. 3; p.4 Sec. III.D,,
+ectc51529.2024.00265-d-s03,ectc51529.2024.00265-d,TV fabrication (Fig. 3),3,assembly,mount chip,,,,,,,,,,,stated,schematic,,p.4 Fig. 3; p.4 Sec. III.D,,Simple mount and reflow; no TCB or laser assisted bonding.
+ectc51529.2024.00265-d-s04,ectc51529.2024.00265-d,TV fabrication (Fig. 3),4,reflow,reflow flip-chip joints,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-d-s05,ectc51529.2024.00265-d,TV fabrication (Fig. 3),5,cleaning,clean flux,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-d-s06,ectc51529.2024.00265-d,TV fabrication (Fig. 3),6,underfill,dispense CUF,,,capillary underfill,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-d-s07,ectc51529.2024.00265-d,TV fabrication (Fig. 3),7,cure,cure CUF,,,capillary underfill,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-d-s08,ectc51529.2024.00265-d,TV fabrication (Fig. 3),8,other,put glass beads (adhesive spacers),,,glass beads,,,,,,,,stated,schematic,,p.4 Fig. 3; p.3 Sec. III.B,,150 um beads for BLR build; 100/300 um and no beads also evaluated.
+ectc51529.2024.00265-d-s09,ectc51529.2024.00265-d,TV fabrication (Fig. 3),9,dispense,apply stiffener adhesive,,,silicone adhesive,,,,,,,,stated,schematic,,p.4 Fig. 3; p.3 Sec. III.B,,
+ectc51529.2024.00265-d-s10,ectc51529.2024.00265-d,TV fabrication (Fig. 3),10,assembly,attach stiffener,,,copper stiffener,,,,,,,,stated,schematic,,p.4 Fig. 3,,"BLR build 2.5 mm thick, 16 mm wide."
+ectc51529.2024.00265-d-s11,ectc51529.2024.00265-d,TV fabrication (Fig. 3),11,cure,cure adhesive,,,silicone adhesive,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-d-s12,ectc51529.2024.00265-d,TV fabrication (Fig. 3),12,ball_attach,BGA ball mount,,,"Sn-3.0Ag-0.5Cu balls, 0.6 mm",,,,,,,,stated,mixed,,p.4 Fig. 3; p.4 Sec. III.D,,
+ectc51529.2024.00265-d-s13,ectc51529.2024.00265-d,TV fabrication (Fig. 3),13,other,print solder paste on motherboard,,,Sn-Ag-Cu solder paste,,,,,,,,stated,mixed,,p.4 Fig. 3; p.4 Sec. III.D,,No paste on the four corner pads; same flux coated there.
+ectc51529.2024.00265-d-s14,ectc51529.2024.00265-d,TV fabrication (Fig. 3),14,assembly,put Si spacers at package-area corners on motherboard,,,"silicon spacers, 0.25 mm thick",,,,,250,,,design_target,mixed,,p.4 Fig. 3; p.4 Sec. III.D,,Prevents BGA solder bridging.
+ectc51529.2024.00265-d-s15,ectc51529.2024.00265-d,TV fabrication (Fig. 3),15,assembly,mount package on motherboard,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,SMT.
+ectc51529.2024.00265-d-s16,ectc51529.2024.00265-d,TV fabrication (Fig. 3),16,reflow,reflow BGA joints,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-d-s17,ectc51529.2024.00265-d,TV fabrication (Fig. 3),17,other,remove spacer,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-d-s18,ectc51529.2024.00265-d,TV fabrication (Fig. 3),18,cleaning,clean flux,,,,,,,,,,,stated,schematic,,p.4 Fig. 3,,
+ectc51529.2024.00265-d-s19,ectc51529.2024.00265-d,TV fabrication (Fig. 3),19,test,temperature cycling of board assembly,,,,,,,,,"-55 to +125 C, 2 cycles/h, air ambient",,stated,text,,p.4 Sec. III.E,,

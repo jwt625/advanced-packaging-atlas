@@ -1,0 +1,29 @@
+paper_id: ectc51846.2026.00375
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00375/text.md
+  - references/ectc51846.2026.00375/source.json
+  - references/ectc51846.2026.00375/figures/page_02.png
+  - references/ectc51846.2026.00375/figures/page_03.png
+  - references/ectc51846.2026.00375/figures/page_04.png
+  - references/ectc51846.2026.00375/figures/page_05.png
+figure_reading_method: >-
+  Page renders for Fig. 1-7 and Tables I-II; 300 dpi re-crops of Fig. 3 and Fig. 4 for labels. All values come from
+  text or table cells; no plot pixel reads (Fig. 7(b) has no legend, curves identified only through the text).
+entries:
+  - {table: test_vehicles, row_id: ectc51846.2026.00375-a, field: package_thickness_mm, value: 1.7, unit: mm, basis: design_target, locator: "p.4 Table II", note: "module height"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00375-c-m4, field: notes, values: ["inductance decreased to 30% of zero-bias value at 17 A", "Isat defined at 30% inductance drop"], locators: ["p.3 Sec. IV.A", "p.4 Table I footnote; p.3 Fig. 5"], chosen: "30% drop", why: "result table definition; Fig. 5 L/L0 stays above 70% to 16 A"}
+excluded:
+  - "FIVR (ref [1]), CoaxMIL (ref [2]), PCB-embedded inductor (ref [3]) and capacitor-embedded iPaS (ref [4]) results"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - number of coil units in the buck module inductor (board silkscreen shows x4; not stated in text)
+  - RDL materials, dielectric product, Cu thickness of RDL layers, laser via diameter, substrate thickness per layer
+  - metal composite product name, filler fraction, cure conditions; insulator material and thickness
+  - PMIC part number, reference board stack-up and thickness
+  - thermal behavior and stray flux (future work), efficiency values at specific currents beyond the 7 A delta
+source_quality:
+  - "Clean text layer. Fig. 4 candidate covers only panel (b); Table I candidate clips the footnote; both re-cropped manually."

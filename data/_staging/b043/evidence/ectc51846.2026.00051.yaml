@@ -1,0 +1,43 @@
+paper_id: ectc51846.2026.00051
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00051/text.md
+  - references/ectc51846.2026.00051/source.json
+  - references/ectc51846.2026.00051/figures/page_02.png
+  - references/ectc51846.2026.00051/figures/page_03.png
+  - references/ectc51846.2026.00051/figures/page_04.png
+  - references/ectc51846.2026.00051/figures/page_05.png
+  - references/ectc51846.2026.00051/figures/cand/p02_fig1.png
+  - references/ectc51846.2026.00051/figures/cand/p02_fig2.png
+  - references/ectc51846.2026.00051/figures/cand/p03_fig5.png
+  - references/ectc51846.2026.00051/figures/cand/p04_fig6.png
+  - references/ectc51846.2026.00051/figures/cand/p04_fig7.png
+  - references/ectc51846.2026.00051/figures/cand/p05_fig9.png
+  - references/ectc51846.2026.00051/figures/cand/p05_fig10.png
+figure_reading_method: >-
+  Fig. 2 (log2 axis, ~83 px/octave) and Fig. 7 (linear dual axis) curve endpoints read by pixel position on candidate
+  crops (+/-5%). Fig. 5 whiskers read at 250 dpi (~40 px/um, +/-0.1 um). Fig. 3/4 re-cropped at 300 dpi: no scale bars
+  or numeric labels. Fig. 6 dimension labels 240 mm read from photo.
+entries:
+  - {table: electrical_interfaces, row_id: ectc51846.2026.00051-d-e2, field: bw_density_tbps_per_mm, value: 22.6, unit: Tbps/mm, basis: author_estimate, locator: "p.2 Fig. 2", note: "consistent with ~355 IO/mm x 64 Gbps (Fig. 7)"}
+  - {table: electrical_interfaces, row_id: ectc51846.2026.00051-d-e3, field: bw_density_tbps_per_mm, value: 45.7, unit: Tbps/mm, basis: author_estimate, locator: "p.2 Fig. 2", note: "consistent with ~1430 IO/mm x 32 Gbps (Fig. 7)"}
+derived: []
+conflicts: []
+excluded:
+  - "UCIe-A 64 Gb/s channel compliance and 20 Tb/s/mm linear BW density of EMIB-T (reported in ref [5])"
+  - "HBM4e electrical design optimization details of ref [6]"
+  - "FOVEROS-S solder bump pitch 25 um HVM / <25 um development (ref [2], other technology)"
+  - "UCIe industry 20 Tb/s/mm (refs [3]-[5]); active EMIB bridge embedding (ref [7]); glass core substrates (ref [8])"
+  - "EMIB-T bridge die size 'much larger than 72 mm2' (roadmap statement, current size not unambiguous)"
+  - "assembly yields comparable to FC-BGA (qualitative, no number)"
+not_reported:
+  - "bump diameters/CDs, bump heights, metallurgy beyond 'solder-based', TCB conditions"
+  - "bridge count/size for TV a; die sizes; substrate layer count, thickness, dielectric materials"
+  - "TSV diameter/depth/pitch; micro-via dimensions; RDL line/space"
+  - "reliability test conditions, standards and sample counts for the 36 um TV; 25 um TV results (future work)"
+  - "whether PDN impedance (Fig. 10) is simulated or measured; Fig. 10 y-axis values"
+  - optical_interfaces
+  - "process_steps for TVs a, c, d (only the 25 um building blocks are listed for TV b)"
+source_quality:
+  - "Candidates p03_fig3 and p03_fig4 are empty (no graphics); p03_fig5, p04_fig6, p04_fig7, p05_fig9, p05_fig10 clip axis labels or edges."

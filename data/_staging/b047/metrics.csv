@@ -1,0 +1,74 @@
+metric_id,tv_id,category,parameter,variant,value,value_text,unit,statistic,n_samples,condition,test_standard,pass_criterion,result,scope,reference_tv_id,basis,source,overrides,locator,qualifiers,notes
+tcpmt.2021.3123384-a-m1,tcpmt.2021.3123384-a,throughput,SiC via etch rate (max),80 um vias; coil power 1000 W,1.42,,um/min,max,,,,,,,,measured,text,,p.3 Sec. II.A; p.3 Fig. 3,,
+tcpmt.2021.3123384-a-m2,tcpmt.2021.3123384-a,throughput,SiC via etch rate (max),80 um vias; coil power 1500 W,1.57,,um/min,max,,,,,,,,measured,text,,p.3 Sec. II.A; p.3 Fig. 3,,
+tcpmt.2021.3123384-a-m3,tcpmt.2021.3123384-a,throughput,SiC via etch rate (max),80 um vias; coil power 2000 W,1.81,,um/min,max,,,,,,,,measured,text,,p.3 Sec. II.A; p.3 Fig. 3,,
+tcpmt.2021.3123384-a-m4,tcpmt.2021.3123384-a,throughput,SiC via etch rate (highest measured in DoE),120 um vias,2.0,,um/min,max,,,,,,,,measured,text,,p.3 Sec. II.A; p.9 Sec. VI,,
+tcpmt.2021.3123384-a-m5,tcpmt.2021.3123384-a,throughput,SiC via etch rate outside DoE space,platen 1000 W (from 500 W); coil 2000 W,3,,um/min,max,,,,,,,,measured,text,,p.9 Sec. VI,,
+tcpmt.2021.3123384-a-m6,tcpmt.2021.3123384-a,geometry,via sidewall etch angle,40 um vias,90.1,,deg,median,,over DoE runs,,,,,,measured,table,,p.4 Table I,,
+tcpmt.2021.3123384-a-m7,tcpmt.2021.3123384-a,geometry,via sidewall etch angle,40 um vias,88.0,,deg,min,,over DoE runs,,,,,,measured,table,,p.4 Table I,,
+tcpmt.2021.3123384-a-m8,tcpmt.2021.3123384-a,geometry,via sidewall etch angle,40 um vias,91.9,,deg,max,,over DoE runs,,,,,,measured,table,,p.4 Table I,,
+tcpmt.2021.3123384-a-m9,tcpmt.2021.3123384-a,geometry,via sidewall etch angle,80 um vias,90.1,,deg,median,,over DoE runs,,,,,,measured,table,,p.4 Table I,,
+tcpmt.2021.3123384-a-m10,tcpmt.2021.3123384-a,geometry,via sidewall etch angle,80 um vias,87.5,,deg,min,,over DoE runs,,,,,,measured,table,,p.4 Table I,,
+tcpmt.2021.3123384-a-m11,tcpmt.2021.3123384-a,geometry,via sidewall etch angle,80 um vias,94.1,,deg,max,,over DoE runs,,,,,,measured,table,,p.4 Table I,,
+tcpmt.2021.3123384-a-m12,tcpmt.2021.3123384-a,geometry,via sidewall etch angle,120 um vias,90.8,,deg,median,,over DoE runs,,,,,,measured,table,,p.4 Table I,,
+tcpmt.2021.3123384-a-m13,tcpmt.2021.3123384-a,geometry,via sidewall etch angle,120 um vias,87.7,,deg,min,,over DoE runs,,,,,,measured,table,,p.4 Table I,,
+tcpmt.2021.3123384-a-m14,tcpmt.2021.3123384-a,geometry,via sidewall etch angle,120 um vias,93.2,,deg,max,,over DoE runs,,,,,,measured,table,,p.4 Table I,,
+tcpmt.2021.3123384-a-m15,tcpmt.2021.3123384-a,other,Ni mask selectivity (SiC etch depth / Ni removal),40 um vias,21,,ratio,median,,,,,,,,measured,table,,p.5 Table II; p.5 Eq. (1),,Confocal microscope measurement.
+tcpmt.2021.3123384-a-m16,tcpmt.2021.3123384-a,other,Ni mask selectivity (SiC etch depth / Ni removal),40 um vias,10,,ratio,min,,,,,,,,measured,table,,p.5 Table II; p.5 Eq. (1),,Confocal microscope measurement.
+tcpmt.2021.3123384-a-m17,tcpmt.2021.3123384-a,other,Ni mask selectivity (SiC etch depth / Ni removal),40 um vias,61,,ratio,max,,,,,,,,measured,table,,p.5 Table II; p.5 Eq. (1),,Confocal microscope measurement.
+tcpmt.2021.3123384-a-m18,tcpmt.2021.3123384-a,other,Ni mask selectivity (SiC etch depth / Ni removal),80 um vias,29,,ratio,median,,,,,,,,measured,table,,p.5 Table II; p.5 Eq. (1),,Confocal microscope measurement.
+tcpmt.2021.3123384-a-m19,tcpmt.2021.3123384-a,other,Ni mask selectivity (SiC etch depth / Ni removal),80 um vias,17,,ratio,min,,,,,,,,measured,table,,p.5 Table II; p.5 Eq. (1),,Confocal microscope measurement.
+tcpmt.2021.3123384-a-m20,tcpmt.2021.3123384-a,other,Ni mask selectivity (SiC etch depth / Ni removal),80 um vias,62,,ratio,max,,,,,,,,measured,table,,p.5 Table II; p.5 Eq. (1),,Confocal microscope measurement.
+tcpmt.2021.3123384-a-m21,tcpmt.2021.3123384-a,other,Ni mask selectivity (SiC etch depth / Ni removal),120 um vias,31,,ratio,median,,,,,,,,measured,table,,p.5 Table II; p.5 Eq. (1),,Confocal microscope measurement.
+tcpmt.2021.3123384-a-m22,tcpmt.2021.3123384-a,other,Ni mask selectivity (SiC etch depth / Ni removal),120 um vias,19,,ratio,min,,,,,,,,measured,table,,p.5 Table II; p.5 Eq. (1),,Confocal microscope measurement.
+tcpmt.2021.3123384-a-m23,tcpmt.2021.3123384-a,other,Ni mask selectivity (SiC etch depth / Ni removal),120 um vias,113,,ratio,max,,,,,,,,measured,table,,p.5 Table II; p.5 Eq. (1),,Confocal microscope measurement.
+tcpmt.2021.3123384-a-m24,tcpmt.2021.3123384-a,geometry,microtrenching occurrence,,,observed only with platen 300 W and coil 1000 W both low,,,,,,,,,,measured,text,,p.5 Sec. II.A; p.3 Fig. 4; p.6 Fig. 7,,
+tcpmt.2021.3123384-a-m25,tcpmt.2021.3123384-a,throughput,normalized etch rate vs via-field density,120 um vias,,decreases with higher via density in both field groups (V1-V36; V36LD-V120),,,,,,,,,,measured,figure_image,,p.4 Fig. 6; p.4 Sec. II.A,,Normalized to chip-sample average; range ~0.95-1.07.
+tcpmt.2021.3123384-b-m1,tcpmt.2021.3123384-b,throughput,deep SiC etch rate,,,1.4 to 4,um/min,range,,,,,,,,measured,text,,p.6 Sec. II.B,,
+tcpmt.2021.3123384-b-m2,tcpmt.2021.3123384-b,other,mask selectivity,Ni mask,,12 to 112,ratio,range,,,,,,,,measured,text,,p.6 Sec. II.B,,
+tcpmt.2021.3123384-b-m3,tcpmt.2021.3123384-b,other,mask selectivity,Cu mask,,19 to 113,ratio,range,,,,,,,,measured,text,,p.6 Sec. II.B,,
+tcpmt.2021.3123384-b-m4,tcpmt.2021.3123384-b,geometry,profile angle,,,82 to 104,deg,range,,,,,,,,measured,text,,p.6 Sec. II.B,,
+tcpmt.2021.3123384-b-m5,tcpmt.2021.3123384-b,geometry,membrane roughness Ra,,,0.6 to 9,um,range,,,,,,,,measured,text,,p.6 Sec. II.B,,As written (um); profilometer.
+tcpmt.2021.3123384-b-m6,tcpmt.2021.3123384-b,geometry,etch ground flatness,,,19 to 1070,nm,range,,,,,,,,measured,text,,p.6 Sec. II.B,,
+tcpmt.2021.3123384-b-m7,tcpmt.2021.3123384-b,yield,area covered by micromasking,,,0 to 72,%,range,,,,,,,,measured,text,,p.6 Sec. II.B,,
+tcpmt.2021.3123384-b-m8,tcpmt.2021.3123384-b,throughput,etch rate,verification recipe; JMP least-squares model prediction,101.4,,um/h,single,,,,,,,,simulated,table,,p.6 Table IV,,
+tcpmt.2021.3123384-b-m9,tcpmt.2021.3123384-b,throughput,etch rate,verification recipe; 60 min etch; cross-section,109.6,,um/h,single,,,,,,,,measured,table,,p.6 Table IV,,
+tcpmt.2021.3123384-b-m10,tcpmt.2021.3123384-b,geometry,profile angle inner,verification recipe; JMP least-squares model prediction,90.24,,deg,single,,,,,,,,simulated,table,,p.6 Table IV,,
+tcpmt.2021.3123384-b-m11,tcpmt.2021.3123384-b,geometry,profile angle inner,verification recipe; 60 min etch; cross-section,89.46,,deg,single,,,,,,,,measured,table,,p.6 Table IV,,
+tcpmt.2021.3123384-b-m12,tcpmt.2021.3123384-b,geometry,profile angle outer,verification recipe; JMP least-squares model prediction,89.91,,deg,single,,,,,,,,simulated,table,,p.6 Table IV,,
+tcpmt.2021.3123384-b-m13,tcpmt.2021.3123384-b,geometry,profile angle outer,verification recipe; 60 min etch; cross-section,90.31,,deg,single,,,,,,,,measured,table,,p.6 Table IV,,
+tcpmt.2021.3123384-b-m14,tcpmt.2021.3123384-b,yield,micromasking area,verification recipe; JMP least-squares model prediction,0,,%,single,,,,,,,,simulated,table,,p.6 Table IV,,
+tcpmt.2021.3123384-b-m15,tcpmt.2021.3123384-b,yield,micromasking area,verification recipe; 60 min etch; cross-section,0.05,,%,single,,,,,,,,measured,table,,p.6 Table IV,,
+tcpmt.2021.3123384-b-m16,tcpmt.2021.3123384-b,geometry,membrane thickness after deep cavity etch,,50,,um,single,,,,,,,,design_target,text,,p.1 Abstract,,SiC-MEMS device membrane per abstract; not shown in a figure.
+tcpmt.2021.3123384-e-m1,tcpmt.2021.3123384-e,geometry,chip gap,,30,,um,single,,,,,,,,unspecified,text,,p.8 Sec. IV; p.8 Fig. 15,value:approx,'chip gap of around 30 um' as written; standoff vs die-to-die unclear.
+tcpmt.2021.3123384-g-m1,tcpmt.2021.3123384-g,electrical,bridge resistance increase after assembly on interposer,,1.96,,ohm,mean,8,,,,,sensor bridge measured across two TSiCVs,,measured,text,n_samples:figure_image,p.9 Sec. V; p.9 Fig. 20,,Bridge resistances ~2100-2430 ohm (Fig. 20).
+tcpmt.2021.3123384-g-m2,tcpmt.2021.3123384-g,electrical,offset voltage change after assembly,,0.5,,mV,max,8,,,,,,,measured,text,n_samples:figure_image,p.9 Sec. V; p.9 Fig. 20,value:lt,
+ectc51846.2026.00336-a-m1,ectc51846.2026.00336-a,electrical,single TDV resistance distribution,Mo fill,,4 to 22,ohm,range,,,,,,extracted Kelvin (chain decoupled from BPR/nTSV),,measured,figure_image,,p.3 Fig. 2(a),,"Read off Weibull plot, +/-2 ohm; medians in interconnects."
+ectc51846.2026.00336-a-m2,ectc51846.2026.00336-a,electrical,single TDV resistance distribution,TiN/W fill,,19 to 34,ohm,range,,,,,,extracted Kelvin (chain decoupled from BPR/nTSV),,measured,figure_image,,p.3 Fig. 2(a),,"Read off Weibull plot, +/-2 ohm; medians in interconnects."
+ectc51846.2026.00336-b-m1,ectc51846.2026.00336-b,electrical,single TDV resistance distribution,Mo fill,,26 to 68,ohm,range,,,,,,direct single-TDV measurement,,measured,figure_image,,p.3 Fig. 2(a),,"Read off Weibull plot, +/-2 ohm; medians in interconnects."
+ectc51846.2026.00336-b-m2,ectc51846.2026.00336-b,electrical,single TDV resistance distribution,TiN/W fill,,61 to 91,ohm,range,,,,,,direct single-TDV measurement,,measured,figure_image,,p.3 Fig. 2(a),,"Read off Weibull plot, +/-2 ohm; medians in interconnects."
+ectc51846.2026.00336-b-m3,ectc51846.2026.00336-b,electrical,single TDV capacitance,,20,,aF,single,,"accumulation, Cp at -15 V; slope of 1000-4000 TDV parallel arrays",,,,,,measured,mixed,,p.4 Sec. III.B; p.4 Fig. 3(a),value:approx,Fig. 3(a): C = 20 +/- 5 aF.
+ectc51846.2026.00336-b-m4,ectc51846.2026.00336-b,electrical,single TDV capacitance,"Raphael (Synopsys) 3D, TEM-calibrated",25,,aF,single,,,,,,,,simulated,text,,p.4 Sec. III.B,,124 aF with minus 99 aF without TDV.
+ectc51846.2026.00336-b-m5,ectc51846.2026.00336-b,electrical,single TDV capacitance,"Coventor, TEM-calibrated",23.7,,aF,single,,,,,,,,simulated,text,,p.4 Sec. III.B,,
+ectc51846.2026.00336-a-m3,ectc51846.2026.00336-a,electrical,single nTSV capacitance,,339,,aF,single,,"accumulation; slope of 1000-4000 nTSV arrays, same BPR length, no TDV",,,,,,measured,text,,p.4 Sec. III.B,value:approx,
+ectc51846.2026.00336-a-m4,ectc51846.2026.00336-a,electrical,single nTSV capacitance,model difference (BSM1+nTSV+BPR) - (BSM1+BPR) vs Si substrate,378,,aF,single,,,,,,,,simulated,text,,p.4 Sec. III.B,,
+ectc51846.2026.00336-a-m5,ectc51846.2026.00336-a,electrical,nTSV / TDV capacitance ratio,,14,,x,single,,,,,,,ectc51846.2026.00336-b,derived,text,,p.5 Sec. V,value:approx,
+ectc51846.2026.00336-a-m6,ectc51846.2026.00336-a,thermal,active Si self-heating rate,~250 nm remaining Si,60,,K/mW,mean,,5 um active Si heater; TCR resistance readout,,,,,,measured,figure_image,,p.5 Fig. 5; p.5 Fig. 4(b),value:approx,Fig. 5 bar ~60 (error bar ~50-70); abstract states 50 K/mW (conflict logged).
+ectc51846.2026.00336-a-m7,ectc51846.2026.00336-a,thermal,active Si self-heating rate,"3D FEM, 1/2 symmetry",56,,K/mW,single,,,,,,,,simulated,figure_image,,p.5 Fig. 5,value:approx,
+ectc51846.2026.00336-b-m6,ectc51846.2026.00336-b,thermal,active Si self-heating rate,no remaining Si,101,,K/mW,mean,,5 um active Si heater; TCR resistance readout,,,,,,measured,figure_image,,p.5 Fig. 5; p.5 Fig. 4(c); p.5 Sec. IV,value:approx,Text ~100 K/mW; Fig. 5 error bar ~96-110.
+ectc51846.2026.00336-b-m7,ectc51846.2026.00336-b,thermal,active Si self-heating rate,"3D FEM, 1/2 symmetry",108,,K/mW,single,,,,,,,,simulated,figure_image,,p.5 Fig. 5,value:approx,
+ectc51846.2026.00336-a-m8,ectc51846.2026.00336-a,geometry,thermal test structure heater/sensor active Si line length,,5,,um,single,,,,,,,,design_target,text,,p.5 Sec. IV; p.5 Fig. 4(a),,Heater-to-sensor lateral distance 200 nm.
+ectc51846.2026.00336-b-m8,ectc51846.2026.00336-b,geometry,thermal test structure heater/sensor active Si line length,,5,,um,single,,,,,,,,design_target,text,,p.5 Sec. IV; p.5 Fig. 4(a),,Heater-to-sensor lateral distance 200 nm.
+ectc51846.2026.00336-a-m9,ectc51846.2026.00336-a,geometry,nTSV-to-BSM overlay requirement,,100,,nm,single,,,,,,,,design_target,text,,p.2 Sec. II.A,,No high-order correction per exposure needed.
+ectc51846.2026.00336-b-m9,ectc51846.2026.00336-b,geometry,"knock-off CMP process window reduction, approach #2 vs #1",,50,,nm,single,,,,,,,,author_estimate,text,,p.3 Sec. II.B,value:approx,
+ectc51687.2025.00014-a-m1,ectc51687.2025.00014-a,optical,PIC-to-glass-waveguide coupling loss,,1.6,,dB,typical,,1310 nm,,,,"per PIC-glass interface, two VCBELs",,measured,text,,p.4 Sec. IV.C; p.4 Fig. 7,,
+ectc51687.2025.00014-a-m2,ectc51687.2025.00014-a,optical,PIC-to-glass-waveguide coupling loss over O-band,,2,,dB,max,,1260-1360 nm,,,,,,measured,text,,p.4 Sec. IV.C; p.4 Fig. 7,value:lt,Ripple attributed to source polarization variation.
+ectc51687.2025.00014-a-m3,ectc51687.2025.00014-a,optical,1-dB lateral alignment tolerance,,11,,um,single,,,,,,+/- lateral position,,measured,text,,p.4 Sec. IV.C; p.4 Fig. 8,,
+ectc51687.2025.00014-a-m4,ectc51687.2025.00014-a,optical,excess loss at +/-3 um lateral misalignment,,0.1,,dB,max,,,,,,,,measured,text,,p.4 Sec. IV.C; p.4 Fig. 8,value:lt,
+ectc51687.2025.00014-a-m5,ectc51687.2025.00014-a,optical,switch crosstalk between channels,,40,,dB,typical,,,,,,,,measured,text,,p.4 Sec. IV.D; p.5 Fig. 9,value:approx,"Fig. 9: on-state ~-6 dBm, off-state ~-43 to -48 dBm."
+ectc51687.2025.00014-a-m6,ectc51687.2025.00014-a,optical,Fresnel reflection loss of VCBEL lens surfaces,,0.4,,dB,single,,,,,,,,author_estimate,text,,p.5 Sec. V.A,,Stated as 2 x 0.2 dB; mitigable by AR coating.
+ectc51687.2025.00014-a-m7,ectc51687.2025.00014-a,geometry,glass trench sidewall roughness Ra,,400,,nm,single,,white light interferometer,,,,,,measured,text,,p.4 Sec. IV.B,,Rz 2 um.
+ectc51687.2025.00014-a-m8,ectc51687.2025.00014-a,geometry,glass trench sidewall roughness Rz,,2,,um,single,,white light interferometer,,,,,,measured,text,,p.4 Sec. IV.B,,
+ectc51687.2025.00014-a-m9,ectc51687.2025.00014-a,reliability,VCBEL resin lens deformation after TCB,,,no deformation or significant loss increase,,,,300 C for a few seconds (thermal compression bonding),,,pass,,,measured,mixed,,p.3 Sec. IV.A; p.3 Fig. 5(b); p.5 Sec. V.B,,
+ectc51687.2025.00014-b-m1,ectc51687.2025.00014-b,optical,coupling loss into glass waveguide at 2 um sidewall roughness,incidence from air,14,,dB,single,,FDTD,,,,,,simulated,text,,p.4 Sec. IV.B; p.4 Fig. 6,,
+ectc51687.2025.00014-b-m2,ectc51687.2025.00014-b,optical,excess loss at 2 um sidewall roughness,incidence from resin lens,0.3,,dB,single,,FDTD,,,,,,simulated,text,,p.4 Sec. IV.B; p.4 Fig. 6,,

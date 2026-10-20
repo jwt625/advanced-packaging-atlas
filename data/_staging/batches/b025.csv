@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+ectc51846.2026.00134,10.1109/ectc51846.2026.00134,Glass Core Substrates – Next Generation Advanced Packaging Platform for AI and HPC,2026,ECTC,glass,glass;si_bridge;advanced_substrate,1,"10-2-10 glass core with Cu-filled TGVs and embedded EMIB, panel-scale on organic lines; TSC750, no SeWaRe; glass waveguides."
+ectc51909.2023.00190,10.1109/ectc51909.2023.00190,0.5 µm Pitch Wafer-to-wafer Hybrid Bonding with SiCN Bonding Interface for Advanced Memory,2023,ECTC,hybrid_bonding,hybrid_bonding,1,"0.5-1.2 um pitch Cu/SiCN W2W six-level test vehicle; litho, etch, CMP, edge trim, grind flow; anneal 200-350 C."
+icep55381.2022.9795565,10.23919/icep55381.2022.9795565,Confined IMCs for low temperature and high throughput D2W bonding,2022,ICEP,microbump_3d,microbump_3d,1,"Confined CoSn3 pre-IMC bumps in cavities, low-temperature TCB; 95% yield at 20, 10, 7 um pitch."

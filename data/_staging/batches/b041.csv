@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+icep61562.2024.10535612,10.23919/icep61562.2024.10535612,Verification of resolution considering process margins for the l0μm pitch patterning of organic substrates,2024,ICEP,advanced_substrate,advanced_substrate,2,"SAP lithography at 3.5, 5, 6.5 um L/S with two NA lenses; process margin comparison."
+ectc51529.2024.00023,10.1109/ectc51529.2024.00023,Ultra Low-Loss Ion-Exchange Waveguides in Optimized Alkali Glass for Co-Packaged Optics,2024,ECTC,cpo,glass;cpo,2,"Ag ion-exchange waveguides in alkali glass core at ~350 C, SiO2 barrier <200 nm; 0.034 dB/cm, <0.5 dB coupling."
+eptc59621.2023.10457918,10.1109/eptc59621.2023.10457918,Overcoming Assembly Process Challenges in Glass Interposer: Development of Jigs and Fixtures,2023,EPTC,glass,glass,2,"6-inch 150 um glass wafer with TGV, two-sided metallization; manual singulation jigs, solder dispensing."

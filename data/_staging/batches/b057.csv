@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+eptc62800.2024.10909872,10.1109/eptc62800.2024.10909872,Panel Level Fine Patterning RDL Interposer Package,2024,EPTC,panel,panel;organic_rdl_fanout,1,Panel-level 2.3D 6-layer RDL interposer package implemented; fine-circuit RDL formation and panel warpage control.
+ectc51529.2024.00258,10.1109/ectc51529.2024.00258,Electrical Characterization and Reliability Studies of Nano-TSV,2024,ECTC,thermal_pdn,thermal_pdn,2,"180 x 500 nm nano-TSV in 75 nm SOI Si, Al2O3 liner, Ta/Cu seed, Cu ECP; chain resistance after TC/HTS/uHAST."
+ectc51687.2025.00055,10.1109/ectc51687.2025.00055,Innovative SoIC® Cool-Stacking Technology to Overcome the Thermal Wall of Future High Performance Compute,2025,ECTC,hybrid_bonding,hybrid_bonding,1,SoIC-CS replaces bond dielectric with high-k thermal C-layer; 37% lower Rth than SoIC; daisy chain yield.

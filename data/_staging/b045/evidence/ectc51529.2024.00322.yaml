@@ -1,0 +1,56 @@
+paper_id: ectc51529.2024.00322
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51529.2024.00322/text.md
+  - references/ectc51529.2024.00322/source.json
+  - references/ectc51529.2024.00322/figures/page_01.png
+  - references/ectc51529.2024.00322/figures/page_02.png
+  - references/ectc51529.2024.00322/figures/page_03.png
+  - references/ectc51529.2024.00322/figures/page_04.png
+  - references/ectc51529.2024.00322/figures/page_05.png
+  - references/ectc51529.2024.00322/figures/page_06.png
+  - references/ectc51529.2024.00322/figures/cand/p02_fig2.png
+  - references/ectc51529.2024.00322/figures/cand/p02_tablei.png
+  - references/ectc51529.2024.00322/figures/cand/p03_fig3.png
+  - references/ectc51529.2024.00322/figures/cand/p03_fig4.png
+  - references/ectc51529.2024.00322/figures/cand/p04_fig7.png
+  - references/ectc51529.2024.00322/figures/cand/p06_fig11.png
+figure_reading_method: >-
+  Tables I-VI read from page renders (match text.md). Fig. 10 bar ends read at 300 dpi against gridlines (+/-10 um).
+  Fig. 11 markers located by color-pixel scan at 300 dpi (grid 86.2 px per 500 um) and checked visually on 500 dpi
+  zooms; triangle markers and overlapping markers read +/-30 um. Actual vs sim assigned by solid/dashed line.
+entries:
+  - {table: interconnects, row_id: ectc51529.2024.00322-a-i1, field: count, value: 1204275, unit: bumps, basis: design_target, locator: "p.2 Table II", note: "interposer count = large die 733,655 + 4 x small die 117,655"}
+  - {table: interconnects, row_id: ectc51529.2024.00322-a-i2, field: count, value: 2135439, unit: bumps, basis: design_target, locator: "p.2 Table II", note: "= 1,302,459 + 4 x 208,245"}
+  - {table: interconnects, row_id: ectc51529.2024.00322-a-i1, field: total_length_um, value: 12, unit: um, basis: design_target, locator: "p.2 Sec. II.A", note: "bump gap after bonding designed to be around 12 um"}
+  - {table: metrics, row_id: ectc51529.2024.00322-a-m4, field: value, value: -1210, unit: um, basis: measured, locator: "p.5 Fig. 10", note: "bar end ~-1207"}
+  - {table: metrics, row_id: ectc51529.2024.00322-b-m5, field: value, value: -640, unit: um, basis: measured, locator: "p.5 Fig. 10", note: "bar end ~-638"}
+derived:
+  - {table: test_vehicles, row_id: ectc51529.2024.00322-a, field: carrier_size_mm, value: 300, formula: "12-inch wafer = nominal 300 mm", inputs: "p.2 Sec. II.A"}
+  - {table: test_vehicles, row_id: ectc51529.2024.00322-d, field: carrier_size_mm, value: 300, formula: "12-inch wafer = nominal 300 mm", inputs: "p.3 Table III"}
+  - {table: test_vehicles, row_id: ectc51529.2024.00322-a, field: interposer_area_mm2, value: 900, formula: "30 x 30", inputs: "p.2 Table II"}
+  - {table: test_vehicles, row_id: ectc51529.2024.00322-a, field: n_dies, value: 5, formula: "1 large + 4 small dies (same for b, c)", inputs: "p.2 Sec. II.A"}
+  - {table: test_vehicles, row_id: ectc51529.2024.00322-d, field: n_dies, value: 52, formula: "52 Die-A + 0 Die-B", inputs: "p.3 Table III"}
+  - {table: test_vehicles, row_id: ectc51529.2024.00322-e, field: n_dies, value: 88, formula: "68 Die-A + 20 Die-B", inputs: "p.3 Table III"}
+  - {table: test_vehicles, row_id: ectc51529.2024.00322-f, field: n_dies, value: 100, formula: "92 Die-A + 8 Die-B", inputs: "p.3 Table III"}
+  - {table: process_steps, row_id: ectc51529.2024.00322-a-s02, field: time_s, value: 1800, formula: "30 min x 60", inputs: "p.4 Table IV"}
+  - {table: process_steps, row_id: ectc51529.2024.00322-a-s03, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.4 Table IV"}
+  - {table: process_steps, row_id: ectc51529.2024.00322-a-s05, field: time_s, value: 18000, formula: "5 h x 3600", inputs: "p.4 Table V"}
+  - {table: process_steps, row_id: ectc51529.2024.00322-b-s03, field: time_s, value: 3600, formula: "1 h x 3600", inputs: "p.4 Table V"}
+conflicts:
+  - {table: metrics, row_id: ectc51529.2024.00322-b-m5, field: value, values: [-640, "around -600"], locators: ["p.5 Fig. 10", "p.5 Sec. III.B"], chosen: -640, why: "plotted result over rounded text"}
+  - {table: metrics, row_id: ectc51529.2024.00322-a-m4, field: value, values: [-1210, "around -1200"], locators: ["p.5 Fig. 10", "p.5 Sec. III.B"], chosen: -1210, why: "plotted result; consistent"}
+  - {table: metrics, row_id: ectc51529.2024.00322-d-m16, field: value, values: ["-1300 (text, structure not named)", "-1310 A, -1220 B, -1380 C after sputtering (Fig. 11)"], locators: ["p.5 Sec. III.C", "p.6 Fig. 11"], chosen: "both kept", why: "text summary attached to Structure-A, whose value matches"}
+excluded:
+  - "10 um bump pitch chip bonding with CUF and bump fabrication method (ref [3])"
+  - "LCMUF low-warpage/flexible-resin technology (ref [4])"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - "bonding method and conditions for the microbumps (refers to ref [3])"
+  - "material suppliers/products for CUF, EMC, LCMUF, DAF, glass carrier, passivation"
+  - "molding conditions and mold thickness for the Structure A-C warpage TVs (Table V given for the fill TV)"
+  - "backside bump size/pitch/metal; plating chemistry; seed etch method; glass bond/debond method"
+  - "warpage measurement temperature; sample counts; reliability tests"
+source_quality:
+  - "Candidates p03_fig3 and p03_fig4 cut the bottom of the figures; manual crops used. Table candidates start below the first title line."

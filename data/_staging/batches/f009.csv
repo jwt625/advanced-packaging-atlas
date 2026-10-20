@@ -1,0 +1,5 @@
+paper_id,doi,title,year,venue,primary_bucket,mode
+tcpmt.2023.3266666,10.1109/tcpmt.2023.3266666,Fabrication and Performance of 300-mm Wafer-Scale Silicon Microchannel Cooler,2023,"IEEE TCPMT vol. 13 no. 4, pp. 472-480 (2023-04)",thermal_pdn,figures_only
+ectc51906.2022.00232,10.1109/ectc51906.2022.00232,Reliability Challenges of High-Density Fan-out Packaging for High-Performance Computing Applications,2022,"ECTC 2022 (72nd), pp. 1454-1458",organic_rdl_fanout,figures_only
+ectc51906.2022.00135,10.1109/ectc51906.2022.00135,A Hybrid Panel Level Package (Hybrid PLP) Technology Based on a 650-mm x 650-mm Platform,2022,"ECTC 2022 (72nd), pp. 824-827",panel,figures_only
+tcpmt.2023.3312037,10.1109/tcpmt.2023.3312037,Controlling Underfill on Die in Multichip Heterogenous Integration With Large Die Height Delta,2023,"IEEE TCPMT vol. 13 no. 9, pp. 1510-1515",si_bridge,figures_only

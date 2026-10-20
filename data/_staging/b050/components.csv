@@ -1,0 +1,37 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00156-a-c1,ectc51846.2026.00156-a,gpu,,,GPU SoC die with backside etched microchannels,1,,,,,,,,,Si,,stated,mixed,,p.1 Abstract; p.2 Sec. III.A; p.2 Fig. 1(a),,Straight channels laser-etched into die back; coolant contacts Si directly. Die size and thickness not given.
+ectc51846.2026.00156-a-c2,ectc51846.2026.00156-a,hbm,,,HBM dies,,,,,,,,,,,,stated,mixed,,p.2 Sec. III.A; p.2 Fig. 1,,Count not stated; Fig. 1(b) schematic shows 3 HBM sites per side.
+ectc51846.2026.00156-a-c3,ectc51846.2026.00156-a,cold_plate,,,HBM copper cold plates (split flow),2,,,,,,,,,copper,,stated,text,,p.2 Sec. III.A; p.3 Sec. IV,,Inserted through gasket cut-outs onto HBM; fed by manifold main inlet.
+ectc51846.2026.00156-a-c4,ectc51846.2026.00156-a,tim,,,PTM7950 phase-change TIM,,,,,,,,,,PTM7950,Honeywell,stated,text,,p.2 Sec. III.A; p.3 Sec. IV,,On HBM cold plate bases and CPU cold plate; bond-line thickness not given.
+ectc51846.2026.00156-a-c5,ectc51846.2026.00156-a,other,,,"sealing gasket (3 inlets, 2 outlet slits, HBM cut-outs)",1,,,,,,,,,,,stated,mixed,,p.2 Sec. III.A; p.2 Fig. 1(b),,Seals channels on the GPU die; gasket material not stated.
+ectc51846.2026.00156-a-c6,ectc51846.2026.00156-a,other,,,copper manifold,1,,,,,,,,,copper,,stated,text,,p.2 Sec. III.A,,Compresses gasket; internal channels redirect coolant from HBM cold plates into Si microchannels.
+ectc51846.2026.00156-a-c7,ectc51846.2026.00156-a,cpu,,,CPU,1,,,,,,,,,,,stated,text,,p.2 Sec. III.A,,Cooled by skived Cu cold plate in series downstream of the GPU.
+ectc51846.2026.00156-a-c8,ectc51846.2026.00156-a,cold_plate,,,skived copper cold plate on CPU,1,,,,,,,,,copper,,stated,text,,p.2 Sec. III.A,,
+ectc51846.2026.00156-b-c1,ectc51846.2026.00156-b,cold_plate,,,OEM traditional cold plate,,,,,,,,,,,,stated,text,,p.3 Sec. IV,,Design not described.
+ectc51846.2026.00156-c-c1,ectc51846.2026.00156-c,dummy_die,yes,,Si sample with vertical microchannels,,,,,,,,,,Si,,stated,text,,p.4 Sec. V,,
+ectc51846.2026.00156-d-c1,ectc51846.2026.00156-d,dummy_die,yes,,Si control sample,,,,,,,,,,Si,,stated,text,,p.4 Sec. V,,
+iedm50572.2025.11353491-a-c1,iedm50572.2025.11353491-a,pic,,,PIC,,,,,,,,,,,,stated,text,,p.1 Sec. II-III,,
+iedm50572.2025.11353491-a-c2,iedm50572.2025.11353491-a,substrate,,,organic substrate without cut-out area,,,,,,,,,,organic laminate,,stated,text,,p.1 Sec. II; p.3 Fig. 1,,
+iedm50572.2025.11353491-a-c3,iedm50572.2025.11353491-a,other,,,single-mode polymer waveguide (PWG),,,,,,,,,,polymer,,stated,text,,p.1 Sec. III; p.3 Fig. 2,,Adiabatically coupled to PIC surface; other end in fiber ferrule.
+iedm50572.2025.11353491-a-c4,iedm50572.2025.11353491-a,adhesive,,,optical adhesive (PIC-PWG bond),,,,,,,,,,,,stated,text,,p.1 Sec. III,,Product not named.
+iedm50572.2025.11353491-a-c5,iedm50572.2025.11353491-a,connector,,,ferrule (fiber connector at package edge),,,,,,,,,,,,stated,mixed,,p.1 Sec. I; p.2 Sec. III; p.3 Fig. 1,,
+iedm50572.2025.11353491-a-c6,iedm50572.2025.11353491-a,lid,,,lid,,,,,,,,,,,,stated,figure_image,,p.3 Fig. 1(a),,Lid visible in photo only.
+iedm50572.2025.11353491-b-c1,iedm50572.2025.11353491-b,pic,,,PIC,,,,,,,,,,,,stated,text,,p.1 Sec. II-III,,
+iedm50572.2025.11353491-b-c2,iedm50572.2025.11353491-b,substrate,,,organic substrate with cut-out area,,,,,,,,,,organic laminate,,stated,text,,p.1 Sec. II; p.3 Fig. 1,,
+iedm50572.2025.11353491-b-c3,iedm50572.2025.11353491-b,other,,,single-mode polymer waveguide (PWG),,,,,,,,,,polymer,,stated,text,,p.1 Sec. III; p.3 Fig. 2,,Adiabatically coupled to PIC surface; other end in fiber ferrule.
+iedm50572.2025.11353491-b-c4,iedm50572.2025.11353491-b,adhesive,,,optical adhesive (PIC-PWG bond),,,,,,,,,,,,stated,text,,p.1 Sec. III,,Product not named.
+iedm50572.2025.11353491-b-c5,iedm50572.2025.11353491-b,connector,,,ferrule (fiber connector at package edge),,,,,,,,,,,,stated,mixed,,p.1 Sec. I; p.2 Sec. III; p.3 Fig. 1,,
+iedm50572.2025.11353491-b-c6,iedm50572.2025.11353491-b,lid,,,lid,,,,,,,,,,,,stated,text,,p.1 Sec. II,,Module-to-lid assembly stated for Type-B.
+iedm50572.2025.11353491-c-c1,iedm50572.2025.11353491-c,substrate,,,package substrate with three cut-outs,,,,,,,,,,organic laminate,,stated,mixed,name:figure_image,p.2 Sec. V; p.4 Fig. 11,,Substrate material from Sec. II (organic); 3 cut-outs from photo.
+iedm50572.2025.11353491-c-c2,iedm50572.2025.11353491-c,connector,,,ferrule ports,3,,,,,,,,,,,stated,mixed,,p.2 Sec. V; p.4 Fig. 11,,
+iedm50572.2025.11353491-c-c3,iedm50572.2025.11353491-c,other,,,single-mode polymer waveguides (PWG),,,,,,,,,,,,stated,mixed,,p.2 Sec. V; p.4 Fig. 11,,
+iedm50572.2025.11353491-d-c1,iedm50572.2025.11353491-d,substrate,,,laminate,,,,,,,,,,,,simulated,schematic,,p.4 Fig. 8,,
+iedm50572.2025.11353491-d-c2,iedm50572.2025.11353491-d,pic,,,Si (die),,,,,,,,,,Si,,simulated,schematic,,p.4 Fig. 8,,"Labelled ""Si"" in model."
+iedm50572.2025.11353491-d-c3,iedm50572.2025.11353491-d,other,,,PWG,,,,,,,,,,,,simulated,schematic,,p.4 Fig. 8,,
+iedm50572.2025.11353491-d-c4,iedm50572.2025.11353491-d,connector,,,ferrule,,,,,,,,,,,,simulated,schematic,,p.4 Fig. 8,,
+iedm50572.2025.11353491-d-c5,iedm50572.2025.11353491-d,other,,,glass (ferrule part),,,,,,,,,,glass,,simulated,schematic,,p.4 Fig. 8(a),,
+iedm50572.2025.11353491-e-c1,iedm50572.2025.11353491-e,dummy_die,yes,,silicon substrate,,,,,,,,,,Si,,stated,schematic,,p.3 Fig. 3,,
+iedm50572.2025.11353491-e-c2,iedm50572.2025.11353491-e,other,,,PWG,,,,,,,,,,,,stated,schematic,,p.3 Fig. 3,,
+iedm50572.2025.11353491-e-c3,iedm50572.2025.11353491-e,adhesive,,,optical adhesive (candidate),,,,,,,,,,,,stated,schematic,,p.3 Fig. 3; p.1 Sec. III,,Several candidate adhesives evaluated; representative result shown.
+iedm50572.2025.11353491-f-c1,iedm50572.2025.11353491-f,other,,,PWG,,,,,,,,,,,,stated,schematic,,p.3 Fig. 5,,
+tcpmt.2025.3557232-a-c1,tcpmt.2025.3557232-a,interposer,,,borosilicate glass substrate,1,,,300,,,,,,borosilicate glass,Taiwan Foresight Company Ltd.,design_target,text,,p.1 Abstract; p.3 Sec. III.B; p.8 Ack.,,Glass samples provided by Taiwan Foresight (ack).

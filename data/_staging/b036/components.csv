@@ -1,0 +1,31 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51687.2025.00026-a-c1,ectc51687.2025.00026-a,logic_soc,,,SoC,4,,,,,,,150,,,,design_target,text,,p.2 Sec. II; p.2 Fig. 4,,gap_um = SoC die-to-die gap.
+ectc51687.2025.00026-a-c2,ectc51687.2025.00026-a,hbm,,,HBM4,12,,,,,,,,,,,design_target,text,,p.2 Sec. I; p.2 Fig. 4,,
+ectc51687.2025.00026-a-c3,ectc51687.2025.00026-a,ipd,,,IPD,,,,,,,,,,,,stated,text,,p.1 Abstract; p.2 Sec. I,,"Count, size not given."
+ectc51687.2025.00026-a-c4,ectc51687.2025.00026-a,interposer,,,CoWoS-R RDL interposer (CoW die),1,66,68,,,,,,,polymer dielectric film + Cu RDL,,design_target,text,,p.2 Sec. II; p.2 Sec. III.A,,x/y = CoW size.
+ectc51687.2025.00026-a-c5,ectc51687.2025.00026-a,substrate,,,package substrate (SBT),1,97.3,95,,,,,,,,,design_target,text,,p.2 Sec. II,,Layer count and core not given.
+ectc51687.2025.00026-a-c6,ectc51687.2025.00026-a,underfill,,,UF1 (CoW underfill),,,,,,,,,,,,stated,text,,p.3 Sec. III.A; p.5 Sec. V,,Product not given.
+ectc51687.2025.00026-a-c7,ectc51687.2025.00026-a,underfill,,,oS underfill,,,,,,,,,,,,stated,text,,p.4 Sec. III.B,,Product not given.
+ectc51687.2025.00026-b-c1,ectc51687.2025.00026-b,substrate,,,package substrate (SBT),1,110,110,,,,,,,,,design_target,text,,p.4 Sec. III.C; p.4 Fig. 10,,
+ectc51687.2025.00026-c-c1,ectc51687.2025.00026-c,logic_soc,,,SoC,4,,,,,,,,,,,design_target,text,,p.2 Sec. II; p.2 Fig. 4,,
+ectc51687.2025.00026-c-c2,ectc51687.2025.00026-c,hbm,,,HBM,20,,,,,,,,,,,design_target,text,,p.2 Sec. II; p.2 Fig. 4,,
+ectc51687.2025.00026-c-c3,ectc51687.2025.00026-c,io_die,,,I/O,8,,,,,,,,,,,design_target,text,,p.2 Sec. II,,
+ectc51687.2025.00026-c-c4,ectc51687.2025.00026-c,substrate,,,package substrate (SBT),1,110,110,,,,,,,,,design_target,text,,p.4 Sec. III.C; p.4 Fig. 10,,
+ectc51687.2025.00026-d-c1,ectc51687.2025.00026-d,other,,,warpage compensation layer,1,,,,,,,,,,,stated,mixed,,p.4 Sec. IV; p.4 Fig. 11,,"Attached onto substrate around CoW; material, size, thickness not given."
+ectc51687.2025.00026-d-c2,ectc51687.2025.00026-d,stiffener,,,ring,1,,,,,,,,,,,stated,mixed,,p.4 Sec. IV; p.5 Fig. 13(a),,Attached after compensation layer (Fig. 13 stages).
+ectc51687.2025.00026-d-c3,ectc51687.2025.00026-d,substrate,,,package substrate (SBT),1,110,110,,,,,,,,,design_target,text,,p.4 Sec. IV; p.4 Fig. 12,,
+ectc51687.2025.00026-e-c1,ectc51687.2025.00026-e,other,,,warpage compensation layer,1,,,,,,,,,,,stated,text,,p.4 Sec. IV; p.4 Fig. 12,,
+ectc51687.2025.00026-e-c2,ectc51687.2025.00026-e,substrate,,,package substrate (SBT),1,110,110,,,,,,,,,design_target,table,,p.4 Fig. 12,,
+ectc51909.2023.00094-a-c1,ectc51909.2023.00094-a,other,,,panel carrier,1,510,515,,,,,,,,,design_target,mixed,,p.1 Sec. I; p.2 Fig. 1,,"Carrier material not named; CTE varied (Fig. 4, 9)."
+ectc51909.2023.00094-a-c2,ectc51909.2023.00094-a,mold,,,encapsulation mold (compression molded),,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Sec. III.A,,Several mold materials; products not named.
+ectc51909.2023.00094-b-c1,ectc51909.2023.00094-b,other,,,panel carrier,1,510,515,,,,,,,,,design_target,mixed,,p.1 Sec. I; p.2 Fig. 1,,
+ectc51909.2023.00094-b-c2,ectc51909.2023.00094-b,unspecified,,,top dies (Si),,,,,,,,,,Si,,stated,text,,p.2 Sec. II; p.2 Fig. 2(b); p.4 Sec. III.B,,"Die-to-package ratio 64%; thick vs thin die split (Table I), thickness not given; die type not stated."
+ectc51909.2023.00094-b-c3,ectc51909.2023.00094-b,mold,,,encapsulation layer mold,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.3 Sec. III.A,,
+ectc51909.2023.00094-b-c4,ectc51909.2023.00094-b,mold,,,overmold,,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Fig. 2(c),,Two overmold materials of similar thickness tested.
+ectc51687.2025.00048-a-c1,ectc51687.2025.00048-a,logic_soc,,,Logic chip,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 2.1,,Count not stated.
+ectc51687.2025.00048-a-c2,ectc51687.2025.00048-a,hbm,,,HBM,12,,,,,,,,,,,design_target,text,,p.4 Sec. III.E; p.2 Fig. 2.2,,
+ectc51687.2025.00048-a-c3,ectc51687.2025.00048-a,bridge,,yes,Si bridge die (multi),,,,,,,,,,Si,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 2.1; p.2 Fig. 2.3; p.3 Sec. III.A,,"Count, size, thickness not stated; attached with DAF, molded, ground to expose Cu bumps."
+ectc51687.2025.00048-a-c4,ectc51687.2025.00048-a,die_attach_film,,,DAF (bridge attach),,,,,,,,,,,,stated,text,,p.2 Sec. III.A; p.4 Sec. IV,,
+ectc51687.2025.00048-a-c5,ectc51687.2025.00048-a,interposer,,,"2.3D PLP organic RDL interposer (upper RDL, mold with Cu posts and bridges, lower RDL)",1,95,105,,,,,,,,,design_target,schematic,,p.2 Fig. 2.1; p.2 Fig. 2.2,,Size as labeled 'Interposer Size'; unit size 51.00x67.72 mm2 also labeled.
+ectc51687.2025.00048-a-c6,ectc51687.2025.00048-a,mold,,,interposer mold (EMC),,,,,,,,,,EMC,,stated,text,,p.3 Sec. III.B; p.4 Sec. III.E; p.4 Sec. IV,,Mold material changed to reduce warpage; product not named.
+ectc51687.2025.00048-a-c7,ectc51687.2025.00048-a,substrate,,,package substrate,1,,,,,,,,,,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 2.3; p.5 Fig. 4.2,,

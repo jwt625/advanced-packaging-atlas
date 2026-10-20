@@ -1,0 +1,7 @@
+paper_id,doi,title,year,venue,primary_bucket,mode
+ectc.2019.00-29,10.1109/ectc.2019.00-29,RDL-1st Fan-Out Panel Level Packaging (FOPLP) for Heterogeneous and Economical Packaging,2019,"ECTC 2019 (69th), pp. 2126-2133",panel,figures_only
+ectc.2016.201,10.1109/ectc.2016.201,"Embedded Multi-die Interconnect Bridge (EMIB) -- A High Density, High Bandwidth Packaging Interconnect",2016,"ECTC 2016 (66th), pp. 557-565",si_bridge,figures_only
+ectc.2011.5898527,10.1109/ectc.2011.5898527,Advanced reliability study of TSV interposers and interconnects for the 28nm technology FPGA,2011,"ECTC 2011 (61st), pp. 285-290",si_interposer,figures_only
+ectc51906.2022.00244,10.1109/ectc51906.2022.00244,Buried Power Rails and Nano-Scale TSV: Technology Boosters for Backside Power Delivery Network and 3D Heterogeneous Integration,2022,ECTC,thermal_pdn,figures_only
+ectc51909.2023.00009,10.1109/ectc51909.2023.00009,Process Integration of Photonic Interposer for Chiplet-based 3D Systems,2023,ECTC,cpo,figures_only
+ectc51909.2023.00298,10.1109/ectc51909.2023.00298,Demonstration of Eight Metal Layer Redistribution on Glass Substrate with Fine Features and Microvia,2023,ECTC,glass,figures_only

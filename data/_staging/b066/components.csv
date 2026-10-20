@@ -1,0 +1,6 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51687.2025.00226-c-c1,ectc51687.2025.00226-c,dummy_die,yes,,top chip with phi 7 um porous bumps,1,,,,,,,,,,,stated,text,,p.2 Sec. II,,"Size, thickness and material not stated."
+ectc51687.2025.00226-c-c2,ectc51687.2025.00226-c,dummy_die,yes,,bottom chip without bump pattern,1,,,,,,,,,,,stated,text,,p.2 Sec. II,,"Size, thickness and surface metal not stated."
+ectc51687.2025.00226-d-c1,ectc51687.2025.00226-d,dummy_die,yes,,top and bottom chips with phi 7 um porous bumps,2,,,,,,,,,,,stated,text,,p.4 Sec. III.b; p.5 Fig. 5,,Bump to bump bonding; chip size not stated.
+ectc51687.2025.00226-e-c1,ectc51687.2025.00226-e,dummy_die,yes,,"top chip (Si, Ti/Cu seed, Cu pads, porous bumps)",1,,,,,,,,,Si,,stated,text,,p.2 Sec. II,,Chip size and thickness not stated.
+ectc51687.2025.00226-e-c2,ectc51687.2025.00226-e,dummy_die,yes,,"bottom chip (Si, Ti/Cu seed, Cu pads, porous bumps)",1,,,,,,,,,Si,,stated,text,,p.2 Sec. II,,Chip size and thickness not stated.

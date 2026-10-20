@@ -1,0 +1,14 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51687.2025.00012-a-c1,ectc51687.2025.00012-a,logic_soc,,,XPU compute die (center),1,,,,,,,,,,,stated,mixed,,p.1 Sec. II; p.2 Fig. 1,,Die size and node not reported.
+ectc51687.2025.00012-a-c2,ectc51687.2025.00012-a,pic,,,Optical I/O (OIO) chiplet,2,,,,,,,,,,external Si suppliers (unnamed),stated,text,,p.2 Sec. II,,"Overhangs substrate edge; 24 edge ports (8 laser in, 8 Tx, 8 Rx); metamaterial SSC + etched V-grooves. Details in refs [10-12]."
+ectc51687.2025.00012-a-c3,ectc51687.2025.00012-a,bridge,,yes,EMIB (embedded multi-die interconnect bridge),,,,,,,,,,,,stated,mixed,,p.1 Sec. I; p.2 Fig. 1,,Bridge count and size not reported.
+ectc51687.2025.00012-a-c4,ectc51687.2025.00012-a,substrate,,,package substrate,1,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,Size and layer count not reported.
+ectc51687.2025.00012-a-c5,ectc51687.2025.00012-a,fiber_array,,,"24-channel FAU, 1x24 PM fiber array fanning out to 2x12 MTP/MT ferrule",2,,,,,,,,,,,stated,text,count:figure_image,p.2 Sec. II; p.2 Fig. 1; p.2 Fig. 2; p.3 Sec. III,,Count: one per OIO chiplet (Fig. 2 photo; 'two FAUs tested at once'). Standard and reflow-compatible versions; several suppliers.
+ectc51687.2025.00012-a-c6,ectc51687.2025.00012-a,fiber_lid,,,lid on FAU fibers,,,,,,,,,,,,stated,text,,p.2 Sec. III,,Mechanical support; bonded with mechanical adhesive.
+ectc51687.2025.00012-a-c7,ectc51687.2025.00012-a,heat_spreader,,,heat spreader,1,,,,,,,,,,,stated,text,,p.2 Sec. III,,FAU bonded to heat spreader with mechanical adhesive.
+ectc51687.2025.00012-a-c8,ectc51687.2025.00012-a,underfill,,,underfill,,,,,,,,,,,,stated,text,,p.2 Sec. III,,Product not reported.
+ectc51687.2025.00012-a-c9,ectc51687.2025.00012-a,adhesive,,,mechanical adhesive(s),,,,,,,,,,,,stated,text,,p.2 Sec. III,,"Bond fiber and lid to OIO chiplet, FAU to heat spreader; selection in ref [13]."
+ectc51687.2025.00012-a-c10,ectc51687.2025.00012-a,adhesive,,,optical adhesive(s),,,,,,,,,,,,stated,text,,p.2 Sec. III,,Index matching between SSC and fiber tip.
+ectc51687.2025.00012-b-c1,ectc51687.2025.00012-b,pic,,,Optical I/O (OIO) chiplet,4,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Fig. 2,,
+ectc51687.2025.00012-c-c1,ectc51687.2025.00012-c,pic,,,Optical I/O (OIO) chiplet,6,,,,,,,,,,,stated,text,,p.2 Sec. II; p.2 Fig. 2,,
+ectc51846.2026.00140-a-c1,ectc51846.2026.00140-a,substrate,,,glass panel core with TGVs,,,,,,,,,,"glass (BF33, EXG or D263 named as laser-compatible types)",,stated,text,,p.2 Sec. 2; p.2 Sec. 3,,Specific glass used for any build not stated.

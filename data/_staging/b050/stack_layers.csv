@@ -1,0 +1,27 @@
+layer_id,tv_id,structure,side,seq,layer_name,feature,material,material_class,layer_role,reinforcement,thickness_um,thickness_min_um,thickness_max_um,line_um,space_um,via_diameter_um,via_pitch_um,roughness_ra_um,repeat,properties,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00156-a-L01,ectc51846.2026.00156-a,tim_lid,single,1,copper manifold,,copper,metal,thermal,,,,,,,,,,,,stated,mixed,,p.2 Sec. III.A; p.2 Fig. 1(a),,
+ectc51846.2026.00156-a-L02,ectc51846.2026.00156-a,tim_lid,single,2,sealing gasket,,,unspecified,other,,,,,,,,,,,,stated,mixed,,p.2 Sec. III.A; p.2 Fig. 1,,Over GPU die; cut-outs above HBM.
+ectc51846.2026.00156-a-L03,ectc51846.2026.00156-a,tim_lid,single,3,HBM Cu cold plate,,copper,metal,thermal,,,,,,,,,,,,stated,mixed,,p.2 Sec. III.A; p.2 Fig. 1(a),,"Above HBM only, in gasket cut-out."
+ectc51846.2026.00156-a-L04,ectc51846.2026.00156-a,tim_lid,single,4,TIM on HBM,,Honeywell PTM7950,tim,thermal,,,,,,,,,,,,stated,mixed,,p.2 Sec. III.A; p.3 Sec. IV,,Between HBM cold plate base and HBM.
+ectc51846.2026.00156-a-L05,ectc51846.2026.00156-a,die,single,1,GPU SoC die with backside microchannels,"straight microchannels, 75 um wide, 350 um deep, 150 um pitch",Si,silicon,device,,,,,,,,,,,,design_target,text,,p.2 Sec. III.A,,"Coolant flows directly in etched Si channels (no TIM, no cold plate base over GPU). Die thickness not given."
+ectc51846.2026.00156-a-L06,ectc51846.2026.00156-a,die_stack,single,1,HBM stack,,,silicon,device,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1(a),,
+iedm50572.2025.11353491-a-L01,iedm50572.2025.11353491-a,photonic,single,1,single-mode PWG,,polymer,dielectric_polymer,optical,,,,,,,,,,,,stated,text,,p.1 Sec. III,,
+iedm50572.2025.11353491-a-L02,iedm50572.2025.11353491-a,photonic,single,2,optical adhesive,,optical adhesive,adhesive,adhesive,,,,,,,,,,,,stated,text,,p.1 Sec. III,,
+iedm50572.2025.11353491-a-L03,iedm50572.2025.11353491-a,die,single,1,PIC,,,silicon,device,,,,,,,,,,,,stated,mixed,,p.1 Sec. III; p.4 Fig. 8,,Si from FEM model label.
+iedm50572.2025.11353491-a-L04,iedm50572.2025.11353491-a,substrate_core,single,1,organic substrate (laminate),,,organic_laminate,core,,,,,,,,,,,,stated,text,,p.1 Sec. II,,Layer count/thickness not given.
+iedm50572.2025.11353491-b-L01,iedm50572.2025.11353491-b,photonic,single,1,single-mode PWG,,polymer,dielectric_polymer,optical,,,,,,,,,,,,stated,text,,p.1 Sec. III,,
+iedm50572.2025.11353491-b-L02,iedm50572.2025.11353491-b,photonic,single,2,optical adhesive,,optical adhesive,adhesive,adhesive,,,,,,,,,,,,stated,text,,p.1 Sec. III,,
+iedm50572.2025.11353491-b-L03,iedm50572.2025.11353491-b,die,single,1,PIC,,,silicon,device,,,,,,,,,,,,stated,mixed,,p.1 Sec. III; p.4 Fig. 8,,Si from FEM model label.
+iedm50572.2025.11353491-b-L04,iedm50572.2025.11353491-b,substrate_core,single,1,organic substrate (laminate),,,organic_laminate,core,,,,,,,,,,,,stated,text,,p.1 Sec. II,,Layer count/thickness not given.
+iedm50572.2025.11353491-e-L01,iedm50572.2025.11353491-e,coupon,single,1,PWG,,polymer,dielectric_polymer,optical,,,,,,,,,,,,stated,schematic,,p.3 Fig. 3,,
+iedm50572.2025.11353491-e-L02,iedm50572.2025.11353491-e,coupon,single,2,optical adhesive,,optical adhesive,adhesive,adhesive,,,,,,,,,,,,stated,schematic,,p.3 Fig. 3,,
+iedm50572.2025.11353491-e-L03,iedm50572.2025.11353491-e,coupon,single,3,silicon substrate,,Si,silicon,carrier,,,,,,,,,,,,stated,schematic,,p.3 Fig. 3,,
+tcpmt.2025.3557232-a-L01,tcpmt.2025.3557232-a,glass_core,front,1,electroplated Cu (double-sided),,Cu,metal,conductor,,,,,,,,,,,,stated,text,,p.6 Sec. V,,Overburden thickness not given; overplated at via opening for 60 min SLE.
+tcpmt.2025.3557232-a-L02,tcpmt.2025.3557232-a,glass_core,front,2,electroless Cu (SLE),,"Cu (electroless, HCHO bath)",metal,seed,,,,,,,,,,,,stated,text,,p.4 Sec. IV.A; p.5 Fig. 6,,Top-surface thickness 3.8-10.4 um vs SLE time (metrics).
+tcpmt.2025.3557232-a-L03,tcpmt.2025.3557232-a,glass_core,front,3,PVD Cu seed,,Cu,metal,seed,,0.3,,,,,,,,,,design_target,text,,p.3 Sec. III.A,,
+tcpmt.2025.3557232-a-L04,tcpmt.2025.3557232-a,glass_core,front,4,PVD Ti adhesion,,Ti,metal,adhesion,,0.05,,,,,,,,,,design_target,text,,p.3 Sec. III.A,,
+tcpmt.2025.3557232-a-L05,tcpmt.2025.3557232-a,glass_core,core,1,borosilicate glass core,20 um straight TGV array,borosilicate glass,glass,core,,300,,,,,20,,,,,design_target,text,,p.1 Abstract; p.3 Sec. III.B,,
+tcpmt.2025.3557232-a-L06,tcpmt.2025.3557232-a,glass_core,back,1,PVD Ti adhesion,,Ti,metal,adhesion,,0.05,,,,,,,,,,design_target,text,,p.3 Sec. III.A,,Double-sided PVD.
+tcpmt.2025.3557232-a-L07,tcpmt.2025.3557232-a,glass_core,back,2,PVD Cu seed,,Cu,metal,seed,,0.3,,,,,,,,,,design_target,text,,p.3 Sec. III.A,,
+tcpmt.2025.3557232-a-L08,tcpmt.2025.3557232-a,glass_core,back,3,electroless Cu (SLE),,Cu (electroless),metal,seed,,,,,,,,,,,,stated,text,,p.3 Sec. III.A; p.3 Fig. 1(d),,
+tcpmt.2025.3557232-a-L09,tcpmt.2025.3557232-a,glass_core,back,4,electroplated Cu (double-sided),,Cu,metal,conductor,,,,,,,,,,,,stated,text,,p.3 Fig. 1(e); p.6 Sec. V,,

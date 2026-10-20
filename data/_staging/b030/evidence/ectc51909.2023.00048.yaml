@@ -1,0 +1,41 @@
+paper_id: ectc51909.2023.00048
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51909.2023.00048/text.md
+  - references/ectc51909.2023.00048/source.json
+  - references/ectc51909.2023.00048/figures/page_02.png
+  - references/ectc51909.2023.00048/figures/page_03.png
+  - references/ectc51909.2023.00048/figures/page_04.png
+  - references/ectc51909.2023.00048/figures/page_05.png
+  - references/ectc51909.2023.00048/figures/page_06.png
+  - references/ectc51909.2023.00048/figures/cand/p02_fig2.png
+  - references/ectc51909.2023.00048/figures/cand/p03_fig3.png
+  - references/ectc51909.2023.00048/figures/cand/p03_fig4.png
+  - references/ectc51909.2023.00048/figures/cand/p05_fig6.png
+  - references/ectc51909.2023.00048/figures/cand/p06_fig8.png
+figure_reading_method: >-
+  Page renders 2-6 read in full. 400 dpi re-crops of Fig. 2(d), Fig. 3, Fig. 5 and Fig. 8. Fig. 5 bars read by pixel
+  scale (65 px per 100 um, +/-10 um). Fig. 8(a) coupling loss read on right axis (+/-0.1 dB). Fig. 2(d) loss read +/-0.1 dB/mm.
+entries:
+  - {table: optical_interfaces, row_id: ectc51909.2023.00048-b-o1, field: coupling_loss_db, value: 1.6, unit: dB, basis: measured, locator: "p.6 Fig. 8(a)", note: "curve minimum ~1.57 dB near 115-120 mA"}
+  - {table: metrics, row_id: ectc51909.2023.00048-a-m4, field: value, value: -5, unit: um, basis: measured, locator: "p.4 Fig. 5", note: "high-induced-bow final equals Si removal value (no stress relief)"}
+derived:
+  - {table: metrics, row_id: ectc51909.2023.00048-b-m1, field: value_check, value: 0.38, formula: "(6.89 - 6.13) / 2", inputs: "p.6 Fig. 8(c) gap labels; authors' stated bound 0.4 um entered"}
+conflicts:
+  - {table: optical_interfaces, row_id: ectc51909.2023.00048-b-o1, field: coupling_loss_db, values: [1.5, 1.6], locators: ["p.5 Sec. III.C 'approaching 1.5 dB'", "p.6 Sec. IV '<1.6 dB'; p.6 Fig. 8(a) ~1.6"], chosen: 1.6, why: "measured plot"}
+  - {table: process_steps, row_id: ectc51909.2023.00048-a-s32, field: seq, values: ["Fig. 4: wire bond then fiber attach", "text: fiber attachment and wire-bonding complete the assembly"], locators: ["p.3 Fig. 4", "p.3 Sec. II.B"], chosen: "Fig. 4 order", why: "flow chart is explicit"}
+  - {table: process_steps, row_id: ectc51909.2023.00048-a-s28, field: step, values: ["fab text: thin wafer transferred to dicing tape and singulated", "packaging text: wafer-level bumping, then de-bond and singulate"], locators: ["p.3 Sec. II.B (both)"], chosen: "single singulation step in packaging flow after bumping and de-bond", why: "avoid duplicating singulation"}
+excluded:
+  - "Table I bond energies for Low T TEOS, High T TEOS, SiN, SiCN (adapted from ref [15])"
+  - "Prior PIC-CMOS wafer stack integration of ref [11]; laser attach procedure details of ref [13]"
+  - "Architecture background (pluggable, OBO, CPO) of refs [2], [10]"
+not_reported:
+  - electrical_interfaces
+  - interposer die size, TSV diameter/pitch, RDL line/space and thickness, layer thicknesses in Fig. 3
+  - anneal temperature/time, bonding conditions, Cu pillar and solder bump dimensions, BGA pitch
+  - laser wavelength, polarization, fiber-array coupling loss, fiber pitch
+  - wafer bow sign convention; sample counts
+source_quality:
+  - "text.md has a shifted-glyph duplicate of the text plus an OCR-like layer with digit errors (e.g. '11m' for um, '§' for ~); all numbers checked on page renders. No TEXT_LAYER_WARNING present."
+  - "No candidate for Fig. 5; candidate p02_fig2 includes a cut caption line."

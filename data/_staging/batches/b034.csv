@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+ectc51687.2025.00131,10.1109/ectc51687.2025.00131,Direct-to-Silicon Liquid Cooling Integrated on Cowos® Platform,2025,ECTC,thermal_pdn,thermal_pdn;organic_rdl_fanout,1,"Si integrated micro cooler on 3.3x-reticle CoWoS-R via sealant to manifold lid; 3.4 kW, leak and TCG/HTS tests."
+ectc51529.2024.00207,10.1109/ectc51529.2024.00207,Ultra-thin Double Side SiP Technology with Embedded Trace Substrate,2024,ECTC,advanced_substrate,advanced_substrate,2,"Double-side SiP 850 um total on 3-layer 85 um embedded trace substrate; TMV laser ablation UV vs CO2, flow comparison."
+ectc51846.2026.00346,10.1109/ectc51846.2026.00346,A Low-Cost 2.5D Photonic Silicon Interposer Assembly Process for HPC Applications,2026,ECTC,cpo,si_interposer;cpo,1,"PIC as passive interposer via backside tapered TSV plus TDV through BOX, offset-C4; test vehicle built; no dimensions."

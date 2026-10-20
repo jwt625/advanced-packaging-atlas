@@ -1,0 +1,41 @@
+paper_id: ectc51906.2022.00113
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51906.2022.00113/text.md
+  - references/ectc51906.2022.00113/source.json
+  - references/ectc51906.2022.00113/figures/candidates.json
+  - references/ectc51906.2022.00113/figures/page_02.png
+  - references/ectc51906.2022.00113/figures/page_03.png
+  - references/ectc51906.2022.00113/figures/page_04.png
+  - references/ectc51906.2022.00113/figures/page_05.png
+  - references/ectc51906.2022.00113/figures/cand/p02_fig2.png
+  - references/ectc51906.2022.00113/figures/cand/p02_fig3.png
+  - references/ectc51906.2022.00113/figures/cand/p04_fig7.png
+  - references/ectc51906.2022.00113/figures/cand/p04_fig8.png
+  - references/ectc51906.2022.00113/figures/cand/p04_tableii.png
+  - references/ectc51906.2022.00113/figures/cand/p05_tableiv.png
+figure_reading_method: >-
+  Page renders and candidate crops; Table II/III/IV values match the render. Fig. 6 x-axis labels read from a 400 dpi
+  rotated re-crop (no numeric y-axis). p.5 right column (optimal 3-5 nm dishing, conclusion) read from page_05.png
+  because text.md omits it.
+entries:
+  - {table: metrics, row_id: ectc51906.2022.00113-b-m17, field: value_text, value: "3-5 nm dishing", unit: nm, basis: measured, locator: "p.5 Sec. III right column; p.5 Sec. IV", note: "absent from text.md; read from page render"}
+derived: []
+conflicts:
+  - {table: interconnects, row_id: ectc51906.2022.00113-b-i3, field: notes, values: ["Table I: Square / 3x3 Segment, ratio 0.694", "Table II: Circle / 3x3 Segment, ratio 0.69"], locators: ["p.2 Table I", "p.4 Table II"], chosen: "both recorded in notes", why: "no figure resolves the top-pad shape"}
+  - {table: metrics, row_id: ectc51906.2022.00113-c-m1, field: value_text, values: ["text: SiCN with high carbon ratio has highest bonding energy", "Fig. 6: TOX-TOX and TEOS-SiCN2 at Temp3 plot highest"], locators: ["p.3 Sec. III", "p.3 Fig. 6"], chosen: "Fig. 6 ordering", why: "measured plot > text; text compares SiCN films only"}
+  - {table: figures, row_id: ectc51906.2022.00113-f02, field: caption, values: ["Figure 3 caption duplicates Figure 2 caption"], locators: ["p.2 Figure 3"], chosen: "as printed", why: "source error"}
+excluded:
+  - "Sub-2 um pitch Cu pads and 10 nm SiOx statements are general (Sec. I); SiOx entered only with le qualifier backed by Fig. 1"
+  - "Cu oxidation with O2 plasma (refs [8,9]); Cu inter-diffusion vs temperature (ref [7]); CMP factor study of ref [5]"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - components (wafer size, device type, wafer thickness)
+  - Cu pad size, film thicknesses (SiCN, HDP, Ti/TiN), bonding tool and alignment
+  - anneal temperature/time for patterned wafers (Temp1-3 only as 250-400 C range for blanket coupons)
+  - absolute surface energy values (Fig. 6 has no y-axis numbers), absolute daisy-chain yields
+source_quality:
+  - "text.md drops the right column of p.5 (optimal-condition paragraph and Conclusion); read from page_05.png."
+  - "Table IV inner header is a copy of Table III's header ('Linkage analysis between EMMI and TEM')."

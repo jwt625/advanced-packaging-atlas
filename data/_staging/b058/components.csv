@@ -1,0 +1,12 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+ectc51846.2026.00227-a-c1,ectc51846.2026.00227-a,logic_soc,,,top die (full-thickness logic type die),1,6.4,3.7,775,,,,,,Si,,design_target,text,,p.3 Sec. II.A,x_mm:approx;y_mm:approx,Whether functional or daisy-chain not stated.
+ectc51846.2026.00227-a-c2,ectc51846.2026.00227-a,interposer,,,thin Si interposer (interposer die),1,,,100,,,,,,Si,,design_target,text,,p.3 Sec. II.A; p.5 Fig. 16(b),,Diced slightly larger than top die (by 2 mm) for underfill dispensing; TSV labelled in Fig. 16(b).
+ectc51846.2026.00227-a-c3,ectc51846.2026.00227-a,substrate,,,organic laminate substrate with pre-tinned solder,1,21,21,800,,,,,,,,design_target,text,,p.3 Sec. II.A,,Thickness stated 0.8 mm. Layer count not given.
+ectc51846.2026.00227-a-c4,ectc51846.2026.00227-a,underfill,,,underfill (product not stated),,,,,,,,,,,,stated,mixed,,p.3 Sec. II.A; p.5 Fig. 16(a),,Underfill fillet labelled in cross-section.
+ectc51846.2026.00227-b-c1,ectc51846.2026.00227-b,other,,,top die with Cu/Ni/Cu/SnAg microbumps (short-loop bumping wafer),1,,,,,,,,,,,stated,text,,p.3 Sec. II.A,,Die size not given.
+ectc51846.2026.00227-b-c2,ectc51846.2026.00227-b,other,,,bottom die with Cu/Ni/Cu pads (short-loop bumping wafer),1,,,,,,,,,,,stated,text,,p.3 Sec. II.A,,Die size not given.
+ectc51529.2024.00087-a-c1,ectc51529.2024.00087-a,substrate,,,organic substrate panel with blanket dielectric,1,510,515,,,,,,,,,design_target,text,,p.1 Sec. II; p.2 Sec. III.A,,
+ectc51529.2024.00087-b-c1,ectc51529.2024.00087-b,substrate,,,substrate panel with dielectric layers and Cu vias,1,510,515,,,,,,,,,design_target,text,,p.4 Sec. III.D,,
+ectc51529.2024.00087-b-c2,ectc51529.2024.00087-b,bridge,,yes,embedded bridge dies (rectangular features in panel photo),,,,,,,,,,,,stated,mixed,,p.4 Sec. III.D; p.4 Fig. 7(a),,"Count, size and material not stated."
+ectc51846.2026.00183-a-c1,ectc51846.2026.00183-a,other,yes,,upper wafer (Cu-Cu daisy-chain test module),1,,,,,,,,,Si,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 3,,Device content not described.
+ectc51846.2026.00183-a-c2,ectc51846.2026.00183-a,other,yes,,lower wafer (Cu-Cu daisy-chain test module),1,,,,,,,,,Si,,stated,mixed,,p.2 Sec. II.A; p.2 Fig. 3,,
