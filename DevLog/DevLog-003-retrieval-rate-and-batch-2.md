@@ -121,13 +121,25 @@ roughly 60 per 2 hours instead.
 - [x] Retry `ectc51846.2026.00153` (HTTP 502) in the next batch (saved 21:18:59)
 - [x] Batch 5 (30 attempts) complete (239 cached total)
 - [x] Batch 6 (30 attempts) complete (269 cached total)
-- [ ] Batch 7 (remaining 10 p3) complete (target: 279 IEEE cached)
+- [x] Batch 7 (remaining 10 p3) complete (279 IEEE cached)
 - [x] Reconcile `data/papers.csv` with cached PDFs (239 cached, 239 papers in DB)
-- [ ] Ingest the 30 PDFs cached by batch 6 (269 cached vs 239 in `data/papers.csv`)
-- [ ] Fetch the 21 manual IMAPS/IWLPC PDFs via `scripts/ingest_inbox.py`
+- [ ] Ingest the 40 PDFs cached by batches 6-7 (279 cached vs 239 in `data/papers.csv`)
+- [x] Fetch the 17 accessible manual IMAPS PDFs (2026-10-20)
+- [ ] 4 SMTA/IWLPC papers skipped: no access (`10.37665`)
+- [ ] Distill the 57 cached PDFs not yet in `data/papers.csv`
+
+## 2026-10-20 09:40 manual IMAPS
+
+- Downloaded all 17 IMAPS papers (`10.4071`) sequentially in one browser context via each article's
+  `citation_pdf_url`; saved to `references/_inbox/` and ingested with `scripts/ingest_inbox.py`.
+- All 17 ingested: `source.pdf`, `source.json`, `text.md` and figures present. Inbox is empty.
+- 4 SMTA/IWLPC papers (`10.37665`) skipped: Wentao has no access.
+- Cache state: **296/300** PDFs and `text.md`; `data/papers.csv` is 239, so 57 cached PDFs await distillation.
 
 ## 2026-10-20 09:18 batch 7
 
 - Target: the final 10 IEEE papers (all p3), 279 IEEE cached.
 - Started 09:18:10 in tmux `apa-ieee-11`; log `logs/ieee_run_20261020T091810.log`. Login returned
   `institute: True`; first save `eptc67330.2025.11392620` at 09:18:56.
+- Completed 09:34:12: **279/279 IEEE cached**, 10/10 saved, 0 remaining, no breaker. IEEE retrieval is
+  complete; only the 21 manual IMAPS/IWLPC papers and ingestion of the 40 newest PDFs remain.
