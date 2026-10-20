@@ -1,0 +1,839 @@
+# Fidelity checklist for the 3D package models (DevLog-011, metric M2; also scopes M4 and M5).
+#
+# Read by scripts/score_package3d.py. Each archetype lists the structural elements a real package of that kind has;
+# each element carries a machine check over app/static/data/package3d.json (contract v1 + DevLog-011 routing).
+# `families:` maps every family to the archetypes its parts contain (scope = part template ids).
+#
+# Element keys
+#   id, name, group (structure = geometry present at all, legacy uniform arrays accepted;
+#                    routing = needs the DevLog-011 `route` / `routing` classes), check,
+#   only: [variants]     expected only when the family entry lists one of these variants
+#   not_in: [variants]   not expected when the family entry lists one of these variants
+#   when: {dies_over_min: n}   expected only when >= n die / hbm instances sit on the scope (see below)
+#   when: {dies_share_min: n}  expected only when >= n die / hbm instances sit on ONE instance of a scope part (two
+#                              tiles on two separate base dies have no D2D link through the scope; F1, 2026-10-20)
+#
+# Check types (all over the scope of the family entry unless `where: family`)
+#   part          {kind, material, in_kind, frame, z_index, count_min}            parts (template level)
+#   layer         {role, material, zone, routed, use, count_min}                  layers hosted by scope parts
+#   via           {kind, zone, needs: [land_um, fill, liner_um, upper, lower, pitch_um, wall_um, plug], fill, plug,
+#                  core_h_max_um, count_min}                                       routing.vias hosted by scope parts
+#                                (plug: allowed `plug` values; core_h_max_um: only when the scope core, else the via
+#                                span, is at most this thick; F2, 2026-10-20)
+#                                (upper / lower: a null end of a through-part via resolves to the conductor level,
+#                                via, or endpoint array of the neighbouring part at that z face; F1, 2026-10-20)
+#   via_per_gap   {kind, zone}   every non-conductor layer (or unlayered scope part) between two consecutive
+#                                conductor levels of the zone is spanned (z) by a via class of the kind; needs >= 1 gap
+#   array         {kind, face: top | bottom | inside | any, count_min}            arrays at a scope face / inside it
+#   array_over    {kind}         array whose region overlaps the scope footprint and whose bottom is at or above the
+#                                scope top (bump field over a bridge)
+#   part_adjacent {kind, material, relation: below | above, of_kind, of_frame}  a family part touching the bottom / top
+#                                face of a scope part (of_kind / of_frame = ring or lid sidewall only) with xy overlap
+#                                (die-attach film under a bridge, adhesive under a ring)
+#   each_part_has {kind, skip_top, has: {array_kind, via_kind}}  every scope part instance of the kind hosts an array or
+#                                via class of the kind (TSV in every HBM core die); skip_top skips the highest level
+#   net           {kind, from_face, to_face, from_kind, to_kind, levels_in_scope, plane_in_scope}  routing.nets
+#   opening       {face, role}   cover layer (role) at the scope face + an endpoint array of some net at that face
+#                                (the viewer cuts the openings at the endpoint pads; DevLog-011 viewer rules)
+#   dies_on       {min}          >= min die / hbm instances on the scope (used by die entries: joint, encapsulation)
+#   die_joint     {}             (die entries) every die instance has a joint array (bump / pillar / hybrid bond)
+#   die_encap     {}             (die entries) every die joint is encapsulated: underfill / mold / gap-fill part
+#                                spanning the joint z range, or the joint is a hybrid bond; not applicable (not
+#                                counted) when the only non-hybrid joints land on no part of the family (the next
+#                                level, e.g. a carrier or board, is outside the model)
+#   die_net       {}             (die entries) the joint array of every die is the from / to of a net
+#   symmetric     {}             as many routed Cu levels below the core as above it (core-face levels excluded)
+#   any_of        {of: [check, ...]}   one of the checks passes
+#   common keys: where: family (search the whole family, not the scope); part: name_re, covers_die, max_h_um;
+#                net: jog_min, through_scope (from array at / above the scope top, to array at / below its bottom),
+#                crosses: [array kinds] (the net's z span includes such an array of the scope)
+#
+# Zones (layers / vias in the scope, z from the JSON, tolerance 0.1 um)
+#   face_top / face_bottom    layer touching the scope top / bottom face
+#   outer_top / outer_bottom  the highest / lowest conductor layer of the scope
+#   above_core / below_core   above / below the core (core = thickest scope layer of role core; else, in a scope of
+#                             several parts, the part of a core material: organic_laminate, glass, silicon,
+#                             mold_compound); no core = the whole scope is above_core
+#   core_faces                conductor layers inside the core range or touching its top / bottom face
+#   any
+#
+# Reconciliation with the reference files R1-R3 (config/package3d/ROUTING_REF_{substrate,si,rdl}.md): see the
+# `reconciliation` block at the end.
+
+version: 1
+date: 2026-10-20
+tolerance_um: 0.1
+dies_over_gap_max_um: 300   # a die counts as "on" the scope when its bottom is within this of the scope top (z)
+                            # and it overlaps the scope footprint in xy; scorer heuristic, not a package dimension
+
+archetypes:
+  organic_substrate:
+    name: Organic build-up substrate (FCBGA)
+    match: [{kind: [substrate], material: [organic_laminate, organic_build_up]}]
+    elements:
+      - id: sr_top
+        name: Solder resist top
+        group: structure
+        check: {type: layer, role: [passivation], zone: face_top}
+      - id: sr_top_open
+        name: SR top openings at the FLI pads
+        group: routing
+        check: {type: opening, face: top, role: [passivation]}
+      - id: fli_array
+        name: First-level interconnect field on the top face (C4 / pillar / bump)
+        group: structure
+        check: {type: array, kind: [c4, cu_pillar, microbump], face: top}
+      - id: top_pads
+        name: Top pad level (outermost Cu, routed)
+        group: routing
+        check: {type: layer, role: [conductor], zone: outer_top, routed: true}
+      - id: bu_top_cu
+        name: ">= 2 top build-up Cu levels with route"
+        group: routing
+        check: {type: layer, role: [conductor], zone: above_core, routed: true, count_min: 2}
+      - id: bu_top_mv
+        name: Microvia class per top build-up dielectric
+        group: routing
+        check: {type: via_per_gap, kind: [microvia], zone: above_core, needs: [land_um, fill]}
+      - id: core
+        name: Core laminate
+        group: structure
+        check:
+          type: any_of
+          of:
+            - {type: layer, role: [core], material: [organic_laminate]}
+            - {type: part, material: [organic_laminate], kind: [substrate]}
+      - id: core_cu
+        name: Core Cu levels (both core faces)
+        group: routing
+        check: {type: layer, role: [conductor], zone: core_faces, count_min: 2}
+      - id: pth
+        name: PTH field through the core
+        group: structure
+        check:
+          type: any_of
+          of:
+            - {type: via, kind: [pth]}
+            - {type: array, kind: [pth], face: inside}
+      - id: pth_class
+        name: PTH via class with lands, wall plating and a plug (resin / Cu), or a Cu-filled through hole in a thin core
+        group: routing
+        # ROUTING_REF_substrate.md (section 2 "Via styles", row "PTH wall / plug"): conventional core >= 400 um =
+        # mechanically drilled, resin plug + Cu wall; core <= 200 um = double-side laser, pure Cu fill
+        # (eptc62800.2024.10909809-f04, -a-i1). The Cu-filled branch is accepted only for a scope core <= 400 um
+        # (200-400 um: the reference states neither rule; 400 is where the plugged rule starts). Otherwise wall_um and
+        # plug (resin | copper) are required (F2 2026-10-20, A1 S9).
+        check:
+          type: any_of
+          of:
+            - {type: via, kind: [pth], needs: [land_um, pitch_um, wall_um, plug], fill: [plugged], plug: [resin, copper]}
+            - {type: via, kind: [pth], needs: [land_um, pitch_um], fill: [filled], core_h_max_um: 400}
+      - id: bu_bot_cu
+        name: ">= 2 bottom build-up Cu levels with route"
+        group: routing
+        check: {type: layer, role: [conductor], zone: below_core, routed: true, count_min: 2}
+      - id: bu_bot_mv
+        name: Microvia class per bottom build-up dielectric
+        group: routing
+        check: {type: via_per_gap, kind: [microvia], zone: below_core, needs: [land_um, fill]}
+      - id: pdn_plane_top
+        name: Power / ground plane level in the top build-up
+        group: routing
+        check: {type: layer, role: [conductor], zone: above_core, routed: true, use: [plane]}
+      - id: pdn_plane_bot
+        name: Power / ground plane level in the bottom build-up
+        group: routing
+        check: {type: layer, role: [conductor], zone: below_core, routed: true, use: [plane]}
+      - id: bu_symmetric
+        name: Bottom build-up mirrors the top Cu level count (n-2-n)
+        group: routing
+        check: {type: symmetric}
+      - id: sr_bot
+        name: Solder resist bottom
+        group: structure
+        check: {type: layer, role: [passivation], zone: face_bottom}
+      - id: sr_bot_open
+        name: SR bottom openings at the BGA pads
+        group: routing
+        check: {type: opening, face: bottom, role: [passivation]}
+      - id: bga_pads
+        name: BGA pad level (outermost bottom Cu, routed)
+        group: routing
+        check: {type: layer, role: [conductor], zone: outer_bottom, routed: true}
+      - id: bga_balls
+        name: BGA balls
+        group: structure
+        check: {type: array, kind: [bga], face: bottom}
+      - id: net_jog
+        name: "Vertical net class with >= 1 lateral jog (fan-out C4 -> PTH -> BGA pitch)"
+        group: routing
+        check: {type: net, kind: [vertical], jog_min: 1, levels_in_scope: true}
+      - id: net_c4_bga
+        name: "Vertical net class C4 -> BGA through the substrate"
+        group: routing
+        check: {type: net, kind: [vertical], from_face: top, to_face: bottom, to_kind: [bga]}
+      - id: net_plane_tie
+        name: Plane-tie net class to a substrate plane
+        group: routing
+        check: {type: net, kind: [plane_tie], plane_in_scope: true}
+
+  glass_core_substrate:
+    name: Glass-core substrate
+    match: [{kind: [substrate], material: [glass, organic_build_up, organic_laminate]}]
+    elements:
+      - id: sr_top
+        name: Solder resist top
+        group: structure
+        check: {type: layer, role: [passivation], zone: face_top}
+      - id: sr_top_open
+        name: SR top openings at the FLI pads
+        group: routing
+        check: {type: opening, face: top, role: [passivation]}
+      - id: fli_array
+        name: First-level interconnect field on the top face
+        group: structure
+        check: {type: array, kind: [c4, cu_pillar, microbump], face: top}
+      - id: top_pads
+        name: Top pad level (outermost Cu, routed)
+        group: routing
+        check: {type: layer, role: [conductor], zone: outer_top, routed: true}
+      - id: bu_top_cu
+        name: ">= 2 top build-up Cu levels with route"
+        group: routing
+        check: {type: layer, role: [conductor], zone: above_core, routed: true, count_min: 2}
+      - id: bu_top_mv
+        name: Microvia class per top build-up dielectric
+        group: routing
+        check: {type: via_per_gap, kind: [microvia], zone: above_core, needs: [land_um, fill]}
+      - id: core
+        name: Glass core
+        group: structure
+        check:
+          type: any_of
+          of:
+            - {type: layer, role: [core], material: [glass]}
+            - {type: part, material: [glass]}
+      - id: core_cu
+        name: Cu levels on both glass faces
+        group: routing
+        check: {type: layer, role: [conductor], zone: core_faces, count_min: 2}
+      - id: tgv
+        name: TGV field through the glass
+        group: structure
+        check:
+          type: any_of
+          of:
+            - {type: via, kind: [tgv]}
+            - {type: array, kind: [tgv], face: inside}
+      - id: tgv_class
+        name: TGV via class with lands and fill
+        group: routing
+        check: {type: via, kind: [tgv], needs: [land_um, fill, pitch_um]}
+      - id: bu_bot_cu
+        name: ">= 2 bottom build-up Cu levels with route"
+        group: routing
+        check: {type: layer, role: [conductor], zone: below_core, routed: true, count_min: 2}
+      - id: bu_bot_mv
+        name: Microvia class per bottom build-up dielectric
+        group: routing
+        check: {type: via_per_gap, kind: [microvia], zone: below_core, needs: [land_um, fill]}
+      - id: pdn_plane
+        name: Power / ground plane level
+        group: routing
+        check: {type: layer, role: [conductor], routed: true, use: [plane]}
+      - id: bu_symmetric
+        name: Symmetric build-up Cu level count on both glass faces
+        group: routing
+        check: {type: symmetric}
+      - id: sr_bot
+        name: Solder resist bottom
+        group: structure
+        check: {type: layer, role: [passivation], zone: face_bottom}
+      - id: sr_bot_open
+        name: SR bottom openings at the BGA pads
+        group: routing
+        check: {type: opening, face: bottom, role: [passivation]}
+      - id: bga_pads
+        name: BGA pad level (outermost bottom Cu, routed)
+        group: routing
+        check: {type: layer, role: [conductor], zone: outer_bottom, routed: true}
+      - id: bga_balls
+        name: BGA balls
+        group: structure
+        check: {type: array, kind: [bga], face: bottom}
+      - id: net_c4_bga
+        name: "Vertical net class FLI -> BGA through the TGV core"
+        group: routing
+        check: {type: net, kind: [vertical], from_face: top, to_face: bottom, to_kind: [bga]}
+
+  si_tsv_interposer:
+    name: Si TSV interposer (passive interposer; active base die with variant active_base)
+    match: [{kind: [interposer, die], material: [silicon]}]
+    elements:
+      - id: si_core
+        name: Si body
+        group: structure
+        check: {type: part, material: [silicon]}
+      - id: beol_cu
+        name: ">= 2 front BEOL Cu levels with route"
+        group: routing
+        check: {type: layer, role: [conductor], zone: above_core, routed: true, count_min: 2}
+      - id: beol_via
+        name: BEOL via class per inter-level dielectric
+        group: routing
+        check: {type: via_per_gap, kind: [beol_via], zone: above_core}
+      - id: top_pass
+        name: Top passivation with openings at the micro-bump pads
+        group: routing
+        check: {type: opening, face: top, role: [passivation, dielectric]}
+      - id: top_pads
+        name: Top pad level (routed)
+        group: routing
+        check: {type: layer, role: [conductor], zone: outer_top, routed: true}
+      - id: top_bumps
+        name: Micro-bump / hybrid-bond field on the top face
+        group: structure
+        check: {type: array, kind: [microbump, cu_pillar, hybrid_bond], face: top}
+      - id: tsv
+        name: TSV field
+        group: structure
+        not_in: [no_tsv]
+        check:
+          type: any_of
+          of:
+            - {type: via, kind: [tsv]}
+            - {type: array, kind: [tsv], face: inside}
+      - id: tsv_class
+        name: TSV via class with liner, landing on an M1 pad
+        group: routing
+        not_in: [no_tsv]
+        check: {type: via, kind: [tsv], needs: [liner_um, land_um, pitch_um, upper]}
+      - id: bs_rdl
+        name: "Backside landing: 1-2 backside RDL / UBM levels (routed), or C4 UBM directly on the TSV"
+        group: routing
+        not_in: [no_tsv]
+        check:
+          type: any_of
+          of:
+            - {type: layer, role: [conductor], zone: below_core, routed: true}
+            - {type: via, kind: [tsv], zone: face_bottom}
+      - id: bs_pass
+        name: Backside passivation with openings at the C4 pads
+        group: routing
+        not_in: [no_tsv]
+        check: {type: opening, face: bottom, role: [passivation, dielectric]}
+      - id: bot_c4
+        name: C4 / pillar field on the bottom face
+        group: structure
+        not_in: [no_tsv]
+        check: {type: array, kind: [c4, cu_pillar], face: bottom}
+      - id: net_d2d
+        name: Lateral die-to-die net class on the BEOL levels
+        group: routing
+        when: {dies_share_min: 2}
+        check: {type: net, kind: [lateral], levels_in_scope: true}
+      - id: beol_plane
+        name: Ground / power BEOL level between the D2D signal levels
+        group: routing
+        when: {dies_share_min: 2}
+        check: {type: layer, role: [conductor], zone: above_core, routed: true, use: [plane, mixed]}
+      - id: net_vertical
+        name: "Vertical net class top bump -> TSV -> C4"
+        group: routing
+        not_in: [no_tsv]
+        check: {type: net, kind: [vertical], from_face: top, through_scope: true}
+
+  organic_rdl_interposer:
+    name: Organic RDL interposer / fan-out RDL (variant cored = front RDL + mold core with TIV + back RDL)
+    match: [{kind: [interposer], material: [polymer_dielectric, mold_compound]}]
+    elements:
+      - id: rdl_cu
+        name: RDL Cu level(s) with route
+        group: routing
+        check: {type: layer, role: [conductor], routed: true}
+      - id: rdl_cu_2
+        name: ">= 2 RDL Cu levels with route"
+        group: routing
+        not_in: [single_level]
+        check: {type: layer, role: [conductor], routed: true, count_min: 2}
+      - id: rdl_via
+        name: RDL via class with lands per inter-level dielectric
+        group: routing
+        not_in: [single_level]
+        check: {type: via_per_gap, kind: [rdl_via], zone: any, needs: [land_um]}   # land_um: A1 S8 (F2)
+      - id: rdl_plane
+        name: Plane / wide-strap (power) RDL level distinct from the signal levels
+        group: routing
+        not_in: [single_level]
+        check: {type: layer, role: [conductor], routed: true, use: [plane, mixed]}
+      - id: top_land
+        name: "Die-side landing: top pads (routed) or die-pad vias through the first dielectric"
+        group: routing
+        check:
+          type: any_of
+          of:
+            - {type: layer, role: [conductor], zone: outer_top, routed: true, use: [pad, mixed]}
+            - {type: via, kind: [rdl_via], zone: face_top}
+      - id: top_cover
+        name: Top dielectric / passivation with openings
+        group: routing
+        check: {type: opening, face: top, role: [passivation, dielectric]}
+      - id: top_joint
+        name: Die-side joints (micro-bumps, or die-pad vias for chip-first fan-out)
+        group: structure
+        check:
+          type: any_of
+          of:
+            - {type: array, kind: [microbump, cu_pillar, hybrid_bond], face: top}
+            - {type: array, kind: [rdl_via], face: inside}
+            - {type: via, kind: [rdl_via], zone: face_top}
+      - id: bot_pads
+        name: Bottom pad / UBM level (routed)
+        group: routing
+        check: {type: layer, role: [conductor], zone: outer_bottom, routed: true}
+      - id: bot_cover
+        name: Bottom passivation with openings
+        group: routing
+        check: {type: opening, face: bottom, role: [passivation, dielectric]}
+      - id: bot_joint
+        name: C4 / BGA field on the bottom face
+        group: structure
+        check: {type: array, kind: [c4, cu_pillar, bga], face: bottom}
+      - id: tiv
+        name: Through-mold / through-insulator vias in the core
+        group: structure
+        only: [cored]
+        check:
+          type: any_of
+          of:
+            - {type: via, kind: [tmv]}
+            - {type: array, kind: [cu_pillar], face: inside}
+      - id: tiv_class
+        name: TIV / TMV via class with lands on front and back RDL
+        group: routing
+        only: [cored]
+        check: {type: via, kind: [tmv], needs: [land_um, upper, lower]}
+      - id: back_rdl
+        name: Back-side RDL level under the core (routed)
+        group: routing
+        only: [cored]
+        not_in: [no_back_rdl]
+        check: {type: layer, role: [conductor], zone: below_core, routed: true}
+      - id: net_d2d
+        name: Lateral die-to-die net class on the RDL levels
+        group: routing
+        not_in: [cored]
+        when: {dies_share_min: 2}
+        check: {type: net, kind: [lateral], levels_in_scope: true}
+      - id: net_vertical
+        name: "Vertical net class die joint -> RDL -> C4 / BGA (fan-out jogs)"
+        group: routing
+        check: {type: net, kind: [vertical], from_face: top, through_scope: true}
+
+  si_bridge_substrate:
+    name: Si bridge embedded in the substrate (EMIB / EMIB-T; variant surface = bridge on the substrate, DBHi)
+    match: [{kind: [bridge], material: [silicon]}]
+    elements:
+      - id: bridge_body
+        name: Si bridge embedded in the substrate build-up
+        group: structure
+        not_in: [surface]
+        check: {type: part, kind: [bridge], material: [silicon], in_kind: [substrate]}
+      - id: bridge_body_surface
+        name: Si bridge between die and substrate
+        group: structure
+        only: [surface]
+        check: {type: part, kind: [bridge], material: [silicon]}
+      - id: bridge_attach
+        name: Die-attach film / cavity fill under the bridge
+        group: structure
+        not_in: [surface]
+        check: {type: part_adjacent, kind: [other, underfill], relation: below}
+      - id: bridge_cu
+        name: ">= 2 bridge BEOL Cu levels with route"
+        group: routing
+        check: {type: layer, role: [conductor], routed: true, count_min: 2}
+      - id: bridge_beol_via
+        name: Bridge BEOL via class per inter-level dielectric
+        group: routing
+        check: {type: via_per_gap, kind: [beol_via], zone: any}
+      - id: bridge_pads
+        name: Bridge top pad level (routed)
+        group: routing
+        check: {type: layer, role: [conductor], zone: outer_top, routed: true}
+      - id: bridge_via
+        name: Bridge-connection via class (substrate microvia landing on the bridge pads)
+        group: routing
+        not_in: [surface]
+        check: {type: via, kind: [bridge_via], where: family}
+      - id: fine_bumps
+        name: Fine-pitch bump field over the bridge
+        group: structure
+        check: {type: array_over, kind: [microbump, cu_pillar, hybrid_bond, rdl_via]}
+      - id: bridge_tsv
+        name: Bridge TSV field
+        group: structure
+        only: [tsv]
+        check:
+          type: any_of
+          of:
+            - {type: via, kind: [tsv]}
+            - {type: array, kind: [tsv], face: inside}
+      - id: bridge_tsv_class
+        name: Bridge TSV class landing on the substrate level below
+        group: routing
+        only: [tsv]
+        check: {type: via, kind: [tsv], needs: [land_um, pitch_um]}
+      - id: cavity_bumps
+        name: Cavity-side solder joints under the TSV bridge
+        group: structure
+        only: [tsv]
+        check: {type: array, kind: [microbump, c4, cu_pillar], face: bottom}
+      - id: net_d2d
+        name: Lateral die-to-die net class on the bridge levels
+        group: routing
+        check: {type: net, kind: [lateral], levels_in_scope: true}
+
+  bridge_in_mold:
+    name: Si bridge (LSI) in a mold / RDL interposer (CoWoS-L, FOCoS-Bridge, S-Connect, I-Cube E)
+    match: [{kind: [bridge], material: [silicon], in_kind: [interposer, mold]}]
+    elements:
+      - id: bridge_body
+        name: Si bridge in the mold core
+        group: structure
+        check: {type: part, kind: [bridge], material: [silicon], in_kind: [interposer, mold]}
+      - id: bridge_attach
+        name: "Bridge back attach: die-attach film, or solder joints for a soldered TSV bridge"
+        group: structure
+        not_in: [tsv]
+        check:
+          type: any_of
+          of:
+            - {type: part_adjacent, kind: [other], relation: below}
+            - {type: array, kind: [c4, microbump], face: bottom}
+      - id: bridge_cu
+        name: ">= 2 bridge BEOL Cu levels with route"
+        group: routing
+        check: {type: layer, role: [conductor], routed: true, count_min: 2}
+      - id: bridge_beol_via
+        name: Bridge BEOL via class per inter-level dielectric
+        group: routing
+        check: {type: via_per_gap, kind: [beol_via], zone: any}
+      - id: bridge_pads
+        name: Bridge top pad level (routed)
+        group: routing
+        check: {type: layer, role: [conductor], zone: outer_top, routed: true}
+      - id: bridge_conn
+        name: Bridge-to-front-RDL connection field
+        group: structure
+        check:
+          type: any_of
+          of:
+            - {type: via, kind: [bridge_via, rdl_via], where: family}
+            - {type: array_over, kind: [cu_pillar, rdl_via, microbump]}
+      - id: bridge_via
+        name: Bridge-connection via class with lands
+        group: routing
+        check: {type: via, kind: [bridge_via], needs: [land_um], where: family}
+      - id: bridge_tsv
+        name: Bridge TSV field
+        group: structure
+        only: [tsv]
+        check:
+          type: any_of
+          of:
+            - {type: via, kind: [tsv]}
+            - {type: array, kind: [tsv], face: inside}
+      - id: net_d2d
+        name: Lateral die-to-die net class on the bridge levels
+        group: routing
+        check: {type: net, kind: [lateral], levels_in_scope: true}
+
+  hybrid_bond_stack:
+    name: Hybrid-bond stack (SoIC, Foveros Direct, D2W / W2W)
+    match: [{kind: [die, other, mold], material: [silicon, other, oxide]}]
+    elements:
+      - id: hb_pads
+        name: Hybrid-bond pad field
+        group: structure
+        check: {type: array, kind: [hybrid_bond], face: any}
+      - id: bond_layer
+        name: Bond dielectric on both bonded faces
+        group: structure
+        check:
+          type: any_of
+          of:
+            - {type: layer, role: [bonding], count_min: 2}
+            - {type: part, kind: [other], max_h_um: 10, count_min: 2}
+      - id: pad_via
+        name: Bond-pad via class to the top BEOL metal
+        group: routing
+        check: {type: via, kind: [beol_via, rdl_via]}
+      - id: beol_cu
+        name: Routed BEOL Cu level on the bonded dies
+        group: routing
+        check: {type: layer, role: [conductor], routed: true}
+      - id: tsv
+        name: TSV field in the thinned die
+        group: structure
+        not_in: [no_tsv]
+        check:
+          type: any_of
+          of:
+            - {type: via, kind: [tsv, tdv]}
+            - {type: array, kind: [tsv], face: inside}
+      - id: tsv_class
+        name: TSV via class with liner and lands
+        group: routing
+        not_in: [no_tsv]
+        check: {type: via, kind: [tsv, tdv], needs: [liner_um, land_um]}
+      - id: gap_fill
+        name: Gap fill around the bonded die
+        group: structure
+        only: [d2w]
+        check: {type: part, material: [oxide, other, mold_compound], kind: [other, mold]}
+      - id: pkg_joints
+        name: Package-side joints under the bottom tier
+        group: structure
+        only: [packaged]
+        check: {type: array, kind: [microbump, c4, cu_pillar, bga], face: bottom}
+      - id: net_vertical
+        name: Vertical net class through the bond interface
+        group: routing
+        check: {type: net, kind: [vertical], crosses: [hybrid_bond]}
+
+  hbm_stack:
+    name: HBM stack (base die + core dies + TSV + micro-bumps + MUF)
+    match: [{kind: [die, hbm, underfill, mold], material: [silicon, mold_compound, underfill]}]
+    elements:
+      - id: base_die
+        name: Base logic die
+        group: structure
+        check: {type: part, kind: [die], material: [silicon]}
+      - id: core_dies
+        name: ">= 2 stacked core dies"
+        group: structure
+        check: {type: part, kind: [hbm], z_index: true, count_min: 2}
+      - id: core_tsv
+        name: TSV in every core die (top die excluded)
+        group: structure
+        check: {type: each_part_has, kind: [hbm], skip_top: true, has: {array_kind: [tsv], via_kind: [tsv]}}
+      - id: base_tsv
+        name: TSV in the base die
+        group: structure
+        check: {type: each_part_has, kind: [die], has: {array_kind: [tsv], via_kind: [tsv]}}
+      - id: inter_bumps
+        name: Micro-bumps between all levels
+        group: structure
+        check: {type: array, kind: [microbump, hybrid_bond], face: inside, count_min: 2}
+      - id: inter_fill
+        name: MUF / NCF between the levels
+        group: structure
+        check: {type: part, kind: [underfill], count_min: 2}
+      - id: mold
+        name: Stack encapsulation mold
+        group: structure
+        check: {type: part, kind: [mold]}
+      - id: bot_bumps
+        name: Micro-bump field under the base die
+        group: structure
+        check: {type: array, kind: [microbump, cu_pillar], face: bottom}
+      - id: tsv_class
+        name: TSV via class with lands and liner in the core dies
+        group: routing
+        check: {type: via, kind: [tsv], needs: [land_um, liner_um]}
+      - id: net_vertical
+        name: "Vertical net class bottom bump -> base TSV -> core TSV chain"
+        group: routing
+        check: {type: net, kind: [vertical], to_face: bottom}
+
+  die:
+    name: Die / HBM block (each die template of the entry is checked)
+    per_part: true
+    match: [{kind: [die, hbm], material: [silicon, other]}]
+    elements:
+      - id: body
+        name: Die body
+        group: structure
+        check: {type: part, kind: [die, hbm]}
+      - id: joint
+        name: Joint field on the active face (bump / pillar / hybrid bond)
+        group: structure
+        check: {type: die_joint}
+      - id: encap
+        name: Joint encapsulation (underfill / mold / gap fill) or hybrid bond
+        group: structure
+        check: {type: die_encap}
+      - id: net
+        name: Die joint is a net endpoint
+        group: routing
+        check: {type: die_net}
+
+  lid_thermal:
+    name: Lid / stiffener / thermal stack (variants ring, lid, heatsink)
+    match: [{kind: [lid, stiffener, tim, other]}]
+    elements:
+      - id: frame
+        name: Stiffener ring / lid sidewall
+        group: structure
+        not_in: [heatsink]
+        check:
+          type: any_of
+          of:
+            - {type: part, kind: [stiffener]}
+            - {type: part, kind: [lid], frame: true}
+            - {type: part, kind: [lid], name_re: "foot|wall|side"}
+      - id: frame_attach
+        name: Adhesive under the ring / lid foot
+        group: structure
+        not_in: [heatsink]
+        check: {type: part_adjacent, kind: [other, tim], relation: below, of_kind: [stiffener, lid], of_frame: true}
+      - id: lid_plate
+        name: Lid / heat-spreader plate over the dies
+        group: structure
+        only: [lid, heatsink]
+        check: {type: part, kind: [lid], covers_die: true}
+      - id: tim
+        name: TIM between die and lid
+        group: structure
+        only: [lid, heatsink]
+        check: {type: part, kind: [tim], where: family}
+
+# Per-family mapping: archetype entries with their scope (part template ids) and variants.
+families:
+  fcbga_organic:
+    - {archetype: organic_substrate, parts: [sbt_bu_top, sbt_core, sbt_bu_bot]}
+    - {archetype: die, parts: [die]}
+    - {archetype: lid_thermal, parts: [stiffener, adhesive], variants: [ring]}
+  cowos_s:
+    - {archetype: organic_substrate, parts: [substrate]}
+    - {archetype: si_tsv_interposer, parts: [interposer]}
+    - {archetype: die, parts: [soc, hbm_a, hbm_b]}
+    - {archetype: lid_thermal, parts: [ring], variants: [ring]}
+  cowos_r:
+    - {archetype: organic_substrate, parts: [substrate]}
+    - {archetype: organic_rdl_interposer, parts: [interposer]}
+    - {archetype: die, parts: [soc, hbm]}
+    - {archetype: lid_thermal, parts: [ring], variants: [ring]}
+  cowos_l:
+    - {archetype: organic_substrate, parts: [substrate]}
+    - {archetype: organic_rdl_interposer, parts: [ri_front, ri_core, ri_back], variants: [cored]}
+    - {archetype: bridge_in_mold, parts: [lsi, lsi_ss], variants: [tsv]}
+    - {archetype: die, parts: [soc, hbm]}
+    - {archetype: lid_thermal, parts: [lid, lid_foot, tim], variants: [lid]}
+  info_os:
+    - {archetype: organic_substrate, parts: [substrate]}
+    - {archetype: organic_rdl_interposer, parts: [rdl], variants: [chip_first]}
+    - {archetype: die, parts: [logic, io]}
+    - {archetype: lid_thermal, parts: [ring], variants: [ring]}
+  soic:
+    - {archetype: hybrid_bond_stack, parts: [die_bot, bond_bot, bond_top, die_top, gap_fill], variants: [d2w, packaged]}
+    - {archetype: die, parts: [die_top, die_bot]}
+  emib:
+    - {archetype: organic_substrate, parts: [substrate]}
+    - {archetype: si_bridge_substrate, parts: [bridge]}
+    - {archetype: die, parts: [die1, die2]}
+  emib_t:
+    - {archetype: organic_substrate, parts: [substrate]}
+    - {archetype: si_bridge_substrate, parts: [bridge], variants: [tsv]}
+    - {archetype: die, parts: [die]}
+  foveros:
+    - {archetype: organic_substrate, parts: [substrate]}
+    - {archetype: si_tsv_interposer, parts: [base], variants: [active_base]}
+    - {archetype: die, parts: [tile]}
+  foveros_direct:
+    - {archetype: organic_substrate, parts: [substrate]}
+    - {archetype: si_tsv_interposer, parts: [base], variants: [active_base]}
+    - {archetype: hybrid_bond_stack, parts: [base, bond_bot, fill, bond_top, top], variants: [d2w, packaged]}
+    - {archetype: die, parts: [top]}
+  hbm_stack:
+    - {archetype: hbm_stack, parts: [base, core, muf, muf_top, top, mold]}
+  samsung_mios:
+    - {archetype: organic_substrate, parts: [substrate]}
+    - {archetype: si_tsv_interposer, parts: [interposer]}
+    - {archetype: die, parts: [asic, hbm_l, hbm_r]}
+    - {archetype: lid_thermal, parts: [ring, ring_adh], variants: [ring]}
+  samsung_x_cube:
+    - {archetype: organic_substrate, parts: [substrate]}
+    - {archetype: si_tsv_interposer, parts: [logic], variants: [active_base]}
+    - {archetype: die, parts: [sram]}
+  samsung_i_cube_e:
+    - {archetype: organic_substrate, parts: [substrate]}
+    - {archetype: organic_rdl_interposer, parts: [ri_front, ri_core, ri_back], variants: [cored]}
+    - {archetype: bridge_in_mold, parts: [lsi, lsi_ll]}
+    - {archetype: die, parts: [logic, hbm]}
+  ase_focos_bridge:
+    - {archetype: organic_substrate, parts: [substrate]}
+    - {archetype: organic_rdl_interposer, parts: [ri_front, ri_core, ri_back], variants: [cored, no_back_rdl]}
+    - {archetype: bridge_in_mold, parts: [lsi]}
+    - {archetype: die, parts: [asic, hbm]}
+  amkor_s_connect:
+    - {archetype: organic_substrate, parts: [substrate]}
+    - {archetype: organic_rdl_interposer, parts: [ri_front, ri_core, ri_back], variants: [cored]}
+    - {archetype: bridge_in_mold, parts: [lsi]}
+    - {archetype: die, parts: [asic, hbm]}
+  ibm_dbhi:
+    - {archetype: organic_substrate, parts: [substrate]}
+    - {archetype: si_bridge_substrate, parts: [br_fine, br_coarse], variants: [surface]}
+    - {archetype: die, parts: [chip]}
+    - {archetype: lid_thermal, parts: [lid, lid_foot, tim], variants: [lid]}
+  glass_core_substrate:
+    - {archetype: glass_core_substrate, parts: [sbt_bu_top, core, sbt_bu_bot]}
+    - {archetype: si_bridge_substrate, parts: [bridge]}
+    - {archetype: die, parts: [die1, die2]}
+  fan_out_panel:
+    - {archetype: organic_rdl_interposer, parts: [rdl], variants: [chip_last]}
+    - {archetype: die, parts: [chip1, chip2a, chip2b]}
+  cpo_module:
+    - {archetype: organic_substrate, parts: [substrate]}
+    - {archetype: si_bridge_substrate, parts: [bridge]}
+    - {archetype: die, parts: [xpu, oio]}
+    - {archetype: lid_thermal, parts: [hs], variants: [heatsink]}
+  hybrid_bond_d2w:
+    - {archetype: hybrid_bond_stack, parts: [host, thru, cap], variants: [d2w]}
+    - {archetype: die, parts: [host, thru, cap]}
+  hybrid_bond_w2w:
+    - {archetype: hybrid_bond_stack, parts: [t1, t2, t3], variants: [w2w]}
+    - {archetype: die, parts: [t1, t2]}
+  ucla_si_if:
+    - {archetype: si_tsv_interposer, parts: [si_if], variants: [no_tsv]}
+    - {archetype: die, parts: [dielet]}
+
+# Parts deliberately outside every archetype (no element of the 10 archetypes describes them).
+unmapped_ok:
+  cpo_module: [fau]   # fiber array unit (optical); no optical archetype in this checklist
+
+# Reconciliation with the reference checklists (S1, 2026-10-20). Element lists were drafted from DevLog-011 first,
+# then changed as below after reading ROUTING_REF_substrate.md (R1, section 5), ROUTING_REF_si.md (R2, section 5) and
+# ROUTING_REF_rdl.md (R3, section 5). Reference items that are dimensions / proportions (thickness ratios, pitch
+# bands, L/S ranges, land/via ratio) are M5 / M6 / M7 items, not M2 presence items, and are not repeated here.
+reconciliation:
+  - {ref: R1, archetype: organic_substrate, change: "microvia-per-dielectric now needs land_um and fill (R1: filled, lands on both levels)"}
+  - {ref: R1, archetype: organic_substrate, change: "pdn_plane split into pdn_plane_top / pdn_plane_bot (R1: >= 1 plane level per side)"}
+  - {ref: R1, archetype: organic_substrate, change: "added bu_symmetric (R1: bottom build-up mirrors the top level count, n-2-n)"}
+  - {ref: R1, archetype: organic_substrate, change: "pth_class needs wall_um and fill plugged (R1: plug distinct from the Cu wall for cores >= 400 um; all atlas cores are >= 1000 um)"}
+  - {ref: R1, archetype: organic_substrate, change: "added net_jog (R1: >= 1 jog / staggered segment per vertical net, C4 -> PTH -> BGA fan-out)"}
+  - {ref: R1, archetype: glass_core_substrate, change: "microvia lands / fill as above; added bu_symmetric (R1: symmetric count both faces)"}
+  - {ref: R1, archetype: coreless, change: "R1 archetype B (coreless / thin core) not added: no atlas family uses it"}
+  - {ref: R2, archetype: si_tsv_interposer, change: "tsv_class needs `upper` (R2: TSV top lands on an M1 pad)"}
+  - {ref: R2, archetype: si_tsv_interposer, change: "bs_rdl accepts C4 UBM directly on the TSV (TSV via at the bottom face) as well as 1-2 backside RDL levels (R2: CoWoS 2013 has no backside RDL)"}
+  - {ref: R2, archetype: si_tsv_interposer, change: "added beol_plane (R2: ground / power levels between the D2D signal levels)"}
+  - {ref: R2, archetype: si_bridge_substrate, change: "added cavity_bumps for variant tsv (R2: cavity-side solder joints + pads under the TSV bridge)"}
+  - {ref: R2, archetype: bridge_in_mold, change: "bridge_attach accepts solder joints at the bridge bottom (R2: TSV bridges are soldered, others on DAF)"}
+  - {ref: R2, archetype: si_bridge_substrate, change: "R2 'no TSV, no bridge-bottom joints' (EMIB) kept implicit: TSV items are only expected for variant tsv"}
+  - {ref: R3, archetype: organic_rdl_interposer, change: "added rdl_plane (R3: >= 1 plane / wide-strap power level distinct from signal levels)"}
+  - {ref: R3, archetype: hybrid_bond_stack, change: "added pkg_joints for variant packaged (R3: bumps under the base die / wafer); soic and foveros_direct get variant packaged"}
+  - {ref: R3, archetype: hybrid_bond_stack, change: "net_vertical uses `crosses: [hybrid_bond]` (net span includes the bond interface) instead of through_scope"}
+  - {ref: R3, archetype: organic_rdl_interposer, change: "R3 '>= 4 RDL levels' (CoWoS-R) and the chip-first panel Cu studs are family-specific; kept as >= 2 levels (variant single_level: >= 1) and noted for M7"}
+  # F1 fix pass (2026-10-20, DevLog-011 fix-pass queue + T6 / T7 reports)
+  - {ref: F1, archetype: organic_rdl_interposer, change: "net_d2d not expected for variant cored (bridge-in-mold: the D2D wires live in the bridge BEOL, checked by bridge_in_mold.net_d2d)"}
+  - {ref: F1, archetype: organic_rdl_interposer, change: "back_rdl not expected for variant no_back_rdl (FOCoS-Bridge TV-1: bottom passivation only, ectc51687.2025.00095-a-L08)"}
+  - {ref: F1, archetype: organic_rdl_interposer, change: "tiv_class `upper` / `lower` resolve through-part via ends to the neighbouring part's conductor / via / endpoint (scorer)"}
+  - {ref: F1, archetype: bridge_in_mold, change: "bridge_attach not expected for variant tsv: the LSI TSV lands on the back-side RDL of the interposer (ROUTING_REF_si.md CoWoS-L path and 'TSV in LSI (CoWoS-L)'), so there is no DAF / bridge-bottom joint in that flow (reason reworded by F2 per A1 minor M9; 'not reported' alone is not 'absent')"}
+  - {ref: F1, archetype: organic_substrate, change: "pth_class accepts a Cu-filled through hole (fill filled, no wall / plug; X-Cube thin core)"}
+  # F2 fix pass (2026-10-20, audit A1 DevLog/audits/package3d_routing_audit_A1_2026-10-20.md)
+  - {ref: F2, archetype: organic_substrate, change: "pth_class: Cu-filled branch gated on scope core <= 400 um (R1 PTH wall / plug rule); plugged branch needs wall_um and plug in [resin, copper] (A1 S9)"}
+  - {ref: F2, archetype: organic_rdl_interposer, change: "rdl_via per gap needs land_um (A1 S8: without lands the M6 land rules are vacuous)"}
+  - {ref: F1, archetype: "si_tsv_interposer, organic_rdl_interposer", change: "net_d2d / beol_plane use when dies_share_min 2 (dies on one scope instance; Foveros: two tiles on two separate base dies)"}
+  - {ref: F1, archetype: die, change: "die_encap not applicable when the die's only non-hybrid joints land on no part of the family (SoIC bottom bumps to an off-model carrier)"}
+  - {ref: F1, archetype: fan_out_panel, change: "mapping: backbone switched to the 3-RDL chip-last TV 2380-4505-2020.1.000042-a (variant chip_last, multi-level; dies chip1, chip2a, chip2b)"}
