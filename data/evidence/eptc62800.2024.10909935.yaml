@@ -1,0 +1,33 @@
+paper_id: eptc62800.2024.10909935
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/eptc62800.2024.10909935/text.md
+  - references/eptc62800.2024.10909935/source.json
+  - references/eptc62800.2024.10909935/figures/page_02.png
+  - references/eptc62800.2024.10909935/figures/page_03.png
+  - references/eptc62800.2024.10909935/figures/page_04.png
+  - references/eptc62800.2024.10909935/figures/page_05.png
+figure_reading_method: >-
+  300 dpi re-crops of Fig. 1-7, 10 and 11 from source.pdf; bar heights read against gridlines (+/-0.3 pt for 1%-grid
+  charts, +/-1 pt for Fig. 4 with 10% grid), Fig. 5 mean markers +/-10 nm, Fig. 10 points +/-3 nm.
+entries:
+  - {table: interconnects, row_id: eptc62800.2024.10909935-a-i1, field: depth_um, value: 14.0, unit: um, basis: measured, locator: "p.5 Fig. 11(a)", note: "X-SEM label; text says 14 um with necking"}
+  - {table: interconnects, row_id: eptc62800.2024.10909935-a-i2, field: depth_um, value: 20.3, unit: um, basis: measured, locator: "p.5 Fig. 11(b)", note: "text says 20 um"}
+  - {table: interconnects, row_id: eptc62800.2024.10909935-a-i1, field: diameter_um, value: 1, unit: um, basis: design_target, locator: "p.1 Sec. Experimental Setup", note: "target CD"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: eptc62800.2024.10909935-a-m17, field: value, values: [76.2, "gt 88"], locators: ["p.3 Fig. 4", "p.5 Conclusions"], chosen: 76.2, why: "Conclusions claim PFI26A 2.3 um FICD CDU >88% across all splits; Fig. 4 bar shows ~76%; plotted result table/figure preferred, definition may differ"}
+  - {table: metrics, row_id: eptc62800.2024.10909935-a-m14, field: value, values: ["3% better (text)", "59.3 vs 55.1 (Fig. 4)"], locators: ["p.2 Sec. D", "p.3 Fig. 4"], chosen: "both entered", why: "text relative claim and plotted bars do not match exactly (4.2 pt); kept text as relative metric and bars as values"}
+excluded:
+  - "LDI and panel-level overlay techniques, RCC mold stacking of refs [2]-[4] (prior work)"
+not_reported:
+  - absolute TSV pitch (only relative N vs Nx5)
+  - SiO2 hard mask thickness and deposition method; wafer thickness
+  - bake/PEB/develop temperatures and times; exposure dose in mJ/cm2; ICP etch recipe
+  - TSV liner, barrier, Cu fill (only etched holes reported)
+  - definition of CD uniformity %
+  - components, electrical_interfaces, optical_interfaces
+source_quality:
+  - "Text cites 'Fig. 15. b)' for the DICD mean; it is Fig. 10(b). Fig. 9 caption repeats labels c), d) for panels g), h)."
+  - "Fig. 9 split: panels a-f bottom-left of p.4, g-h top-right of p.4; Fig. 10 a-b on p.4, c on p.5."

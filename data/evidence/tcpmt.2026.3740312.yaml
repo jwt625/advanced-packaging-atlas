@@ -1,0 +1,35 @@
+paper_id: tcpmt.2026.3740312
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/tcpmt.2026.3740312/text.md
+  - references/tcpmt.2026.3740312/source.json
+  - references/tcpmt.2026.3740312/figures/page_02.png
+  - references/tcpmt.2026.3740312/figures/page_03.png
+  - references/tcpmt.2026.3740312/figures/page_05.png
+  - references/tcpmt.2026.3740312/figures/page_06.png
+  - references/tcpmt.2026.3740312/figures/page_07.png
+figure_reading_method: >-
+  Page renders p.2, 3, 5, 6, 7 viewed; candidate crops of Fig. 1, 5, 6, 7, 8, 9 opened; 300 dpi re-crops of Fig. 1(b),
+  Fig. 6(g) (bump height profile) and Fig. 8 (CDF bar labels).
+entries:
+  - {table: interconnects, row_id: tcpmt.2026.3740312-a-i1, field: count, value: 1152, unit: pairs, basis: design_target, locator: "p.1 Abstract", note: "daisy-chain test vehicle with 1152 bonding pairs"}
+  - {table: interconnects, row_id: tcpmt.2026.3740312-a-i1, field: diameter_um, value: 50, unit: um, basis: design_target, locator: "p.5 Sec. III.B", note: "'original 50um In bump system' for R-T tests"}
+  - {table: interconnects, row_id: tcpmt.2026.3740312-c-i1, field: height_um, value: 4.1, unit: um, basis: measured, locator: "p.5 Fig. 6(g)", note: "profile plateau about 4.1 um, read +/-0.2 um"}
+derived: []
+conflicts:
+  - {table: interconnects, row_id: tcpmt.2026.3740312-c-i1, field: height_um, values: [4.1, 5], locators: ["p.5 Fig. 6(g)", "p.2 Sec. I"], chosen: 4.1, why: "measured profile of 10 um bumps beats the general 5 um-thick text statement (kept for the 50 um TV)"}
+  - {table: metrics, row_id: tcpmt.2026.3740312-a-m3, field: scope, values: ["resistance per link", "daisy chain resistance"], locators: ["p.5 Sec. III.B (both phrases)"], chosen: "daisy chain", why: "R-M section gives ~200 ohm chain normal-state resistance consistent with Fig. 7(a)"}
+excluded:
+  - "AuIn alloy Tc 0.4-0.6 K (refs [23], [24])"
+  - "Josephson-junction-compatible temperature <150 C (refs [18], [19]); In oxide removal methods (refs [12], [20]-[22])"
+  - "electroplated In with Cu seed interface distribution (ref [13]); NbOx/TiOx resistivity trends (refs [30], [31])"
+  - "In melting point 156.6 C and ideal Tc values 9.25 K / 3.4 K (handbook values, used only as notes)"
+not_reported:
+  - electrical_interfaces, optical_interfaces
+  - chip sizes and thicknesses; bump pitch of the 50 um daisy chain; number of chains/chips
+  - bonding force, pressure, time; Nb/UBM patterning method; Nb/Ti/Au deposition method (sputter vs evaporation)
+  - per-joint resistance; critical field values (Fig. 10 shown without stated numbers)
+  - measurement temperature of the Fig. 8 CDF; sample1 bump size and bonding conditions
+source_quality:
+  - "Accepted author version (not final). Text layer clean; no TEXT_LAYER_WARNING."

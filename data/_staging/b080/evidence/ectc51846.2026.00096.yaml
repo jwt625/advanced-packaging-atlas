@@ -1,0 +1,50 @@
+paper_id: ectc51846.2026.00096
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/ectc51846.2026.00096/text.md
+  - references/ectc51846.2026.00096/figures/page_01.png
+  - references/ectc51846.2026.00096/figures/page_02.png
+  - references/ectc51846.2026.00096/figures/page_03.png
+  - references/ectc51846.2026.00096/figures/page_04.png
+  - references/ectc51846.2026.00096/figures/page_05.png
+  - references/ectc51846.2026.00096/figures/page_06.png
+  - references/ectc51846.2026.00096/figures/cand/p01_fig1.png
+  - references/ectc51846.2026.00096/figures/cand/p02_fig3.png
+  - references/ectc51846.2026.00096/figures/cand/p03_table2.png
+  - references/ectc51846.2026.00096/figures/cand/p05_fig12.png
+  - references/ectc51846.2026.00096/figures/cand/p06_fig16.png
+figure_reading_method: >-
+  400-450 dpi re-crops of Fig. 3 (SEM labels), Fig. 12 steps 1-14 (p.4 and p.5 labels), Fig. 16. Fig. 16 markers
+  located by color-pixel centroids (axis 0-4 W/mm2 = rows 443-30, 103.3 px per W/mm2); chip-1 triangles partly hidden
+  by chip-2 circles, read from triangle base minus half height (+/-0.07). Table 2 values match text.md.
+entries:
+  - {table: interconnects, row_id: ectc51846.2026.00096-a-i4, field: bonding_temp_c, value: 130, unit: C, basis: design_target, locator: "p.4 Fig. 12 Step 1", note: "NCP curing profile 130 C 15 min"}
+  - {table: interconnects, row_id: ectc51846.2026.00096-a-i2, field: bonding_force_n, value: 5, unit: N, basis: design_target, locator: "p.5 Sec. VI; p.5 Fig. 12 Step 8", note: "dipping force 5 N also listed"}
+  - {table: components, row_id: ectc51846.2026.00096-a-c4, field: name, value: "pin fin pitch 150 um staggered", basis: design_target, locator: "p.1 Sec. II", note: "design from refs [27, 35] applied to this TV"}
+derived:
+  - {table: test_vehicles, row_id: ectc51846.2026.00096-a, field: n_dies, value: 3, formula: "chip-1 + chip-2 + cap chip", inputs: "p.1 Fig. 1; p.2 Fig. 2(f)"}
+  - {table: interconnects, row_id: ectc51846.2026.00096-a-i1, field: aspect_ratio, value: 10, formula: "300/30", inputs: "p.1 Table 1"}
+  - {table: process_steps, row_id: ectc51846.2026.00096-a-s33, field: time_s, value: 900, formula: "15 min x 60", inputs: "p.4 Fig. 12 Step 1"}
+  - {table: test_vehicles, row_id: ectc51846.2026.00096-a, field: carrier_size_mm, value: 300, formula: "12-inch wafer = 300 mm standard wafer", inputs: "p.3 Fig. 5; p.6 Sec. VIII"}
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00096-a-m1, field: unit, values: ["157 W/cm2 heat flux (abstract)", "157 W power (Sec. VII, VIII)", "~1.67 W/mm2 heat flux at 0.7 L/min (Fig. 16)"], locators: ["p.1 Abstract", "p.6 Sec. VII", "p.6 Fig. 16"], chosen: "157 W (text) plus Fig. 16 points separately", why: "body text and conclusion state power; heat-flux area not given so no conversion"}
+  - {table: metrics, row_id: ectc51846.2026.00096-a-m2, field: unit, values: ["187 W/cm2 (abstract)", "187 W (text)", "~2.01 W/mm2 (Fig. 16)"], locators: ["p.1 Abstract", "p.6 Sec. VII", "p.6 Fig. 16"], chosen: "187 W", why: "as above"}
+  - {table: metrics, row_id: ectc51846.2026.00096-a-m3, field: value, values: ["344 W/cm2 (text)", "~3.75 W/mm2 total (Fig. 16)"], locators: ["p.6 Sec. VII", "p.6 Fig. 16"], chosen: 344, why: "text value; Fig. 16 total entered separately"}
+  - {table: process_steps, row_id: ectc51846.2026.00096-a-s28, field: step, values: ["laser debonding (Fig. 2(e))", "Si carrier chosen; laser debond described for glass carriers (Sec. V)"], locators: ["p.2 Fig. 2(e)", "p.4 Sec. V"], chosen: "laser debonding as labelled", why: "only stated debond step"}
+  - {table: interconnects, row_id: ectc51846.2026.00096-a-i1, field: diameter_um, values: [30, 30.5], locators: ["p.1 Table 1", "p.2 Fig. 3 SEM"], chosen: 30, why: "design row; SEM 30.5/27.4/297 um entered as metrics"}
+excluded:
+  - "Pin-fin design optimization (refs [27, 35]) and prior RTD characterization (refs [31, 35]) not re-entered"
+  - "Comparison to conventional single-chip cooling works [37-46]"
+  - "Fig. 6 (20.28 um) and Fig. 7 (98.34 um) single image annotations; Table 2 statistics used instead"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - cap chip material and thickness; package/PCB dimensions; TSV count and pitch
+  - solder ball pitch and count; reflow profiles other than 245 C peak; NCP and underfill suppliers
+  - chip temperatures, pressure drop, thermal resistance, coolant inlet temperature
+  - oxide thicknesses (frontside, backside thick oxide, TSV liner), anneal temperature for TSV, polyimide cure temperature
+  - reliability testing
+source_quality:
+  - "Text layer clean. Fig. 12 spans p.4 (steps 1-6) and p.5 (steps 7-14) with caption on p.5. Table 2 right column truncated in the PDF itself."
+  - "Candidates p01_fig1 and p02_fig3 include body text; no candidate for Fig. 2 (two-column split)."

@@ -1,0 +1,47 @@
+paper_id: tcpmt.2025.3610036
+verified_on: 2026-10-19
+schema_version: 2.2
+source_files:
+  - references/tcpmt.2025.3610036/text.md
+  - references/tcpmt.2025.3610036/source.json
+  - references/tcpmt.2025.3610036/figures/page_04.png
+  - references/tcpmt.2025.3610036/figures/page_05.png
+  - references/tcpmt.2025.3610036/figures/page_06.png
+  - references/tcpmt.2025.3610036/figures/page_07.png
+  - references/tcpmt.2025.3610036/figures/cand/p05_fig7.png
+  - references/tcpmt.2025.3610036/figures/cand/p06_fig10.png
+  - references/tcpmt.2025.3610036/figures/cand/p06_fig12.png
+  - references/tcpmt.2025.3610036/figures/cand/p07_fig13.png
+  - references/tcpmt.2025.3610036/figures/cand/p07_fig15.png
+figure_reading_method: >-
+  Page renders p.4-7; 300 dpi re-crops of Table II, Fig. 7 and Fig. 8 (scale bars used to check hole pitch);
+  candidate crops for Fig. 7, 10, 12, 13, 15. Diameters taken from figure labels and captions.
+entries:
+  - {table: interconnects, row_id: tcpmt.2025.3610036-a-i1, field: count, value: 858, unit: ea, basis: measured, locator: "p.6 Fig. 12(a)", note: "26 x 33 matrix"}
+  - {table: metrics, row_id: tcpmt.2025.3610036-d-m1, field: variant, value: "10 um pitch", basis: measured, locator: "p.5 Fig. 8(a)", note: "15 um scale bar spans 1.5 hole pitches; text gives 10 um pitch for 2 and 1 um holes"}
+derived: []
+conflicts:
+  - {table: process_steps, row_id: tcpmt.2025.3610036-a-s06, field: conditions, values: ["0.08 W (Fig. 12 caption; Sec. V.E for Fig. 13)", "0.8 W (Sec. V.D text)"], locators: ["p.6 Fig. 12", "p.6 Sec. V.D"], chosen: "both recorded", why: "no measurement decides; Sec. V.E also uses 0.08 W; power range used 0.07-1.1 W (p.7)"}
+  - {table: metrics, row_id: tcpmt.2025.3610036-d-m1, field: variant, values: ["5 um via pitch for all (Fig. 8 caption)", "10 and 5 um pitch (text)"], locators: ["p.5 Fig. 8", "p.5 Sec. V.B"], chosen: "10 um for (a),(b); 5 um for (c)", why: "scale bars in the photo agree with the text"}
+  - {table: interconnects, row_id: tcpmt.2025.3610036-b-i1, field: diameter_um, values: [3.06, 3.0], locators: ["p.6 Fig. 10(a)", "p.6 Sec. V.C"], chosen: 3.06, why: "measured image label"}
+  - {table: interconnects, row_id: tcpmt.2025.3610036-c-i1, field: diameter_um, values: [11.8, 12], locators: ["p.5 Fig. 7(a)", "p.5 Sec. V.A"], chosen: 11.8, why: "measured image label; text says ~12"}
+  - {table: metrics, row_id: tcpmt.2025.3610036-a-m1, field: value, values: ["1.26 um minimum via (Sec. V.D, abstract)", "1.5 um minimum via diameter (Conclusion)"], locators: ["p.6 Fig. 12(b)", "p.8 Sec. VI"], chosen: 1.26, why: "measured SEM; 1.5 um likely the post-plating value (1.51 um, Fig. 12(c))"}
+  - {table: metrics, row_id: tcpmt.2025.3610036-a-m8, field: scope, values: ["landing accuracy +/-0.34 um (abstract)", "mean 0.24 (+/-0.12), max 0.67 (+/-0.34) um (text)"], locators: ["p.1 Abstract", "p.7 Sec. V.E"], chosen: "text values", why: "result section"}
+  - {table: stack_layers, row_id: tcpmt.2025.3610036-a-L01, field: thickness_um, values: ["80 nm (Sec. III.E)", "80-100 nm (Sec. IV.C)"], locators: ["p.4 Sec. III.E", "p.4 Sec. IV.C"], chosen: "80-100 nm range", why: "process flow statement"}
+  - {table: stack_layers, row_id: tcpmt.2025.3610036-a-L02, field: properties, values: ["Df <0.005 (Table II)", "Df = 0.005 (text)"], locators: ["p.4 Table II", "p.4 Sec. IV.B"], chosen: "<0.005", why: "table"}
+excluded:
+  - "Nanosecond UV SOTA 20 um vias and 40 um pitch (ref [7]); 3-5 um ps-laser vias (ref [14]); photovia 2-3 um (refs [11], [12])"
+  - "EMIB/SLIM bump pitch 10-40 um (ref [5]); HIR 500 wires/mm/layer target (ref [3])"
+  - "Table I laser type comparison (literature overview)"
+  - "Fig. 1 GPE architecture schematic (concept, no build or numbers)"
+  - "Fig. 7(a) 19.3 um and Fig. 7(b) 10.0 um labels (feature not identified in text)"
+  - "Future-system considerations (<=4 W system power, 266 nm, fs pulses): recommendations, not results"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "dielectric cure conditions, plasma desmear and Cu etch conditions, plating chemistry details"
+  - "coupon size, carrier size, laminate product name"
+  - "via resistance, reliability, yield"
+  - "dielectric material of Fig. 6 DoE, Fig. 7 and Fig. 8 samples"
+source_quality:
+  - "No candidate for Table II (manual bbox). Fig. 7 may show prior-study samples (text: 'Previous studies ... As shown in Fig. 7') without citation."
