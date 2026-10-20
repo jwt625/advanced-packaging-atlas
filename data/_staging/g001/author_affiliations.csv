@@ -1,0 +1,276 @@
+aff_id,paper_id,author_index,author,aff_order,kind,org_name,unit,locality,country,note,source,locator
+ectc51529.2024.00144-a01-1,ectc51529.2024.00144,1,Chih-Hsin Lu,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,byline order read row-major from page-1 image,paper,p.1 affiliations
+ectc51529.2024.00144-a02-1,ectc51529.2024.00144,2,Chia-Chia Lin,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a03-1,ectc51529.2024.00144,3,Tzu-Chun Tang,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a04-1,ectc51529.2024.00144,4,Chung-Yi Lin,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a05-1,ectc51529.2024.00144,5,Jay Chang,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a06-1,ectc51529.2024.00144,6,Chung-Hao Tsai,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a07-1,ectc51529.2024.00144,7,Harry Hsia,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a08-1,ectc51529.2024.00144,8,J.C. Twu,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a09-1,ectc51529.2024.00144,9,C.S. Liu,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a10-1,ectc51529.2024.00144,10,Gene Wu,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a11-1,ectc51529.2024.00144,11,Kuo-Chung Yee,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51529.2024.00144-a12-1,ectc51529.2024.00144,12,Douglas C.H. Yu,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,,paper,p.1 affiliations
+ectc32862.2020.00185-a01-1,ectc32862.2020.00185,1,Vempati Srinivasa Rao,1,primary,A*STAR Institute of Microelectronics,,Singapore,SG,,paper,p.1 affiliations
+ectc32862.2020.00185-a02-1,ectc32862.2020.00185,2,Chong Ser Choong,1,primary,A*STAR Institute of Microelectronics,,Singapore,SG,,paper,p.1 affiliations
+ectc32862.2020.00185-a03-1,ectc32862.2020.00185,3,Kazunori Yamamoto,1,primary,A*STAR Institute of Microelectronics,,Singapore,SG,,paper,p.1 affiliations
+ectc51906.2022.00057-a01-1,ectc51906.2022.00057,1,Yoshihisa Kagawa,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51906.2022.00057-a02-1,ectc51906.2022.00057,2,Takumi Kamibayashi,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51906.2022.00057-a03-1,ectc51906.2022.00057,3,Yuriko Yamano,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51906.2022.00057-a04-1,ectc51906.2022.00057,4,Kenya Nishio,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51906.2022.00057-a05-1,ectc51906.2022.00057,5,Akihisa Sakamoto,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51906.2022.00057-a06-1,ectc51906.2022.00057,6,Taichi Yamada,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51906.2022.00057-a07-1,ectc51906.2022.00057,7,Kan Shimizu,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51906.2022.00057-a08-1,ectc51906.2022.00057,8,Tomoyuki Hirano,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51906.2022.00057-a09-1,ectc51906.2022.00057,9,Hayato Iwamoto,1,primary,Sony Semiconductor Solutions Corporation,,Kanagawa,JP,,paper,p.1 affiliations
+ectc51906.2022.00179-a01-1,ectc51906.2022.00179,1,Jaber Derakhshandeh,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a02-1,ectc51906.2022.00179,2,Eric Beyne,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a03-1,ectc51906.2022.00179,3,Gerald Beyer,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a04-1,ectc51906.2022.00179,4,Giovanni Capuz,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a05-1,ectc51906.2022.00179,5,Vladimir Cherman,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a06-1,ectc51906.2022.00179,6,Inge De Preter,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a07-1,ectc51906.2022.00179,7,Carine Gerets,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a08-1,ectc51906.2022.00179,8,Ehsan Shafahian,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a09-1,ectc51906.2022.00179,9,Koen Kennes,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a10-1,ectc51906.2022.00179,10,Geraldine Jamieson,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a11-1,ectc51906.2022.00179,11,Tom Cochet,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a12-1,ectc51906.2022.00179,12,Tomas Webers,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a13-1,ectc51906.2022.00179,13,Bert Tobback,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a14-1,ectc51906.2022.00179,14,Geert Van der Plas,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a15-1,ectc51906.2022.00179,15,Douglas Charles La Tulipe,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a16-1,ectc51906.2022.00179,16,Alain Phommahaxay,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00179-a17-1,ectc51906.2022.00179,17,Andy Miller,1,primary,imec,,Leuven,BE,,paper,p.1 affiliations
+ectc51906.2022.00309-a01-1,ectc51906.2022.00309,1,Teck-Chong Lee,1,primary,ASE Group,Corporate R&D/ Advanced Wafer Interconnect,Kaohsiung,TW,printed: Advanced Semiconductor Engineering Inc.,paper,p.1 affiliations
+ectc51906.2022.00309-a02-1,ectc51906.2022.00309,2,Shu-Han Yang,1,primary,ASE Group,Corporate R&D/ Div. of New Panel-level Packaging,Kaohsiung,TW,printed: Advanced Semiconductor Engineering Inc.,paper,p.1 affiliations
+ectc51906.2022.00309-a03-1,ectc51906.2022.00309,3,Hsin-Yi Wu,1,primary,ASE Group,Corporate R&D/ Div. of New Panel-level Packaging,Kaohsiung,TW,printed: Advanced Semiconductor Engineering Inc.,paper,p.1 affiliations
+ectc51906.2022.00309-a04-1,ectc51906.2022.00309,4,You-Jun Lin,1,primary,ASE Group,Corporate R&D/ Advanced Wafer Interconnect,Kaohsiung,TW,printed: Advanced Semiconductor Engineering Inc.,paper,p.1 affiliations
+ectc51687.2025.00233-a01-1,ectc51687.2025.00233,1,Yaming Jiang,1,primary,DuPont,DuPont Electronics & Industrial,"Marlborough, MA",US,,paper,p.1 affiliations
+ectc51687.2025.00233-a02-1,ectc51687.2025.00233,2,Patrick Huang,1,primary,DuPont,DuPont Electronics & Industrial,Miaoli,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a03-1,ectc51687.2025.00233,3,Jason Chuang,1,primary,DuPont,DuPont Electronics & Industrial,Miaoli,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a04-1,ectc51687.2025.00233,4,George Yen,1,primary,DuPont,DuPont Electronics & Industrial,Miaoli,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a05-1,ectc51687.2025.00233,5,Zhou Lu,1,primary,DuPont,DuPont Electronics & Industrial,"Marlborough, MA",US,,paper,p.1 affiliations
+ectc51687.2025.00233-a06-1,ectc51687.2025.00233,6,Colin Hayes,1,primary,DuPont,DuPont Electronics & Industrial,"Marlborough, MA",US,,paper,p.1 affiliations
+ectc51687.2025.00233-a07-1,ectc51687.2025.00233,7,Chris Gilmore,1,primary,DuPont,DuPont Electronics & Industrial,"Marlborough, MA",US,,paper,p.1 affiliations
+ectc51687.2025.00233-a08-1,ectc51687.2025.00233,8,LiYen Lin,1,primary,DuPont,DuPont Electronics & Industrial,Miaoli,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a09-1,ectc51687.2025.00233,9,Jeng-Ting Li,1,primary,Unimicron,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a10-1,ectc51687.2025.00233,10,Wei-Tse Ho,1,primary,Unimicron,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a11-1,ectc51687.2025.00233,11,Chi-Hai Kuo,1,primary,Unimicron,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a12-1,ectc51687.2025.00233,12,"Bruce, P Lin",1,primary,Unimicron,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a13-1,ectc51687.2025.00233,13,Cheng-Ta Ko,1,primary,Unimicron,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a14-1,ectc51687.2025.00233,14,Mike Ma,1,primary,Unimicron,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51687.2025.00233-a15-1,ectc51687.2025.00233,15,Eugene Lee,1,primary,DuPont,DuPont Electronics & Industrial,"Marlborough, MA",US,,paper,p.1 affiliations
+eptc53413.2021.9663896-a01-1,eptc53413.2021.9663896,1,Clifford Sandstrom,1,primary,Deca Technologies,,"Tempe, AZ",US,author-to-block mapping from email domains,paper,p.1 affiliations
+eptc53413.2021.9663896-a02-1,eptc53413.2021.9663896,2,Timothy Olson,1,primary,Deca Technologies,,"Tempe, AZ",US,author-to-block mapping from email domains,paper,p.1 affiliations
+eptc53413.2021.9663896-a03-1,eptc53413.2021.9663896,3,Steve Fang,1,primary,ASE Group,,Kaohsiung City,TW,author-to-block mapping from email domains; printed: ASE Technology,paper,p.1 affiliations
+eptc53413.2021.9663896-a04-1,eptc53413.2021.9663896,4,Jeffrey Yang,1,primary,ASE Group,,Kaohsiung City,TW,author-to-block mapping from email domains; printed: ASE Technology,paper,p.1 affiliations
+ectc51909.2023.00175-a01-1,ectc51909.2023.00175,1,Heejun Jang,1,primary,Amkor Technology,R&D,Incheon,KR,byline order read row-major from page-1 image; printed: Amkor Technology Korea,paper,p.1 affiliations
+ectc51909.2023.00175-a02-1,ectc51909.2023.00175,2,Kyun Ahn,1,primary,Amkor Technology,R&D,Incheon,KR,printed: Amkor Technology Korea,paper,p.1 affiliations
+ectc51909.2023.00175-a03-1,ectc51909.2023.00175,3,Haesung Park,1,primary,Amkor Technology,R&D,Incheon,KR,printed: Amkor Technology Korea,paper,p.1 affiliations
+ectc51909.2023.00175-a04-1,ectc51909.2023.00175,4,Gamhan Yong,1,primary,Amkor Technology,R&D,Incheon,KR,printed: Amkor Technology Korea,paper,p.1 affiliations
+ectc51909.2023.00175-a05-1,ectc51909.2023.00175,5,Jihyun Kim,1,primary,Amkor Technology,R&D,Incheon,KR,printed: Amkor Technology Korea,paper,p.1 affiliations
+ectc51909.2023.00175-a06-1,ectc51909.2023.00175,6,YeonKi Jeong,1,primary,Amkor Technology,R&D,Incheon,KR,printed: Amkor Technology Korea,paper,p.1 affiliations
+ectc51909.2023.00175-a07-1,ectc51909.2023.00175,7,EunSook Sohn,1,primary,Amkor Technology,R&D,Incheon,KR,printed: Amkor Technology Korea,paper,p.1 affiliations
+ectc51909.2023.00175-a08-1,ectc51909.2023.00175,8,Dave Hiner,1,primary,Amkor Technology,Advanced Package and Technology Integration,"Tempe, AZ",US,"printed: Amkor Technology,Inc.",paper,p.1 affiliations
+ectc51909.2023.00175-a09-1,ectc51909.2023.00175,9,Mike Kelly,1,primary,Amkor Technology,Advanced Package and Technology Integration,"Tempe, AZ",US,"printed: Amkor Technology,Inc.",paper,p.1 affiliations
+ectc51909.2023.00175-a10-1,ectc51909.2023.00175,10,Taekyeong Hwang,1,primary,Amkor Technology,R&D,Incheon,KR,printed: Amkor Technology Korea,paper,p.1 affiliations
+ectc51909.2023.00175-a11-1,ectc51909.2023.00175,11,Wonchul Do,1,primary,Amkor Technology,R&D,Incheon,KR,printed: Amkor Technology Korea,paper,p.1 affiliations
+ectc51909.2023.00175-a12-1,ectc51909.2023.00175,12,JinYoung Khim,1,primary,Amkor Technology,R&D,Incheon,KR,printed: Amkor Technology Korea,paper,p.1 affiliations
+ectc51909.2023.00091-a01-1,ectc51909.2023.00091,1,S. Y. Hou,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,"printed with typo: Taiwan Semicondutor Manufaturing Company, Ltd",paper,p.1 affiliations
+ectc51909.2023.00091-a02-1,ectc51909.2023.00091,2,Chien Hsun Lee,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,"printed with typo: Taiwan Semicondutor Manufaturing Company, Ltd",paper,p.1 affiliations
+ectc51909.2023.00091-a03-1,ectc51909.2023.00091,3,Tsung-Ding Wang,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,"printed with typo: Taiwan Semicondutor Manufaturing Company, Ltd",paper,p.1 affiliations
+ectc51909.2023.00091-a04-1,ectc51909.2023.00091,4,Hao Cheng Hou,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,"printed with typo: Taiwan Semicondutor Manufaturing Company, Ltd",paper,p.1 affiliations
+ectc51909.2023.00091-a05-1,ectc51909.2023.00091,5,Hsieh-Pin Hu,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,"printed with typo: Taiwan Semicondutor Manufaturing Company, Ltd",paper,p.1 affiliations
+ectc32696.2021.00315-a01-1,ectc32696.2021.00315,1,Soohyun Nam,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+ectc32696.2021.00315-a02-1,ectc32696.2021.00315,2,Younglyong Kim,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+ectc32696.2021.00315-a03-1,ectc32696.2021.00315,3,Aeni Jang,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+ectc32696.2021.00315-a04-1,ectc32696.2021.00315,4,Inhyo Hwang,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+ectc32696.2021.00315-a05-1,ectc32696.2021.00315,5,Sungwoo Park,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+ectc32696.2021.00315-a06-1,ectc32696.2021.00315,6,Su-Chang Lee,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+ectc32696.2021.00315-a07-1,ectc32696.2021.00315,7,Dae-Woo Kim,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+ectc51909.2023.00274-a01-1,ectc51909.2023.00274,1,Haoxiang Ren,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (CHIPS),Los Angeles,US,printed: UCLA; byline read from page-1 image,paper,p.1 affiliations
+ectc51909.2023.00274-a02-1,ectc51909.2023.00274,2,Krutikesh Sahoo,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (CHIPS),Los Angeles,US,printed: UCLA; byline read from page-1 image,paper,p.1 affiliations
+ectc51909.2023.00274-a03-1,ectc51909.2023.00274,3,Tianyu Xiang,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (CHIPS),Los Angeles,US,printed: UCLA; byline read from page-1 image,paper,p.1 affiliations
+ectc51909.2023.00274-a04-1,ectc51909.2023.00274,4,Guangqi Ouyang,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (CHIPS),Los Angeles,US,printed: UCLA; byline read from page-1 image,paper,p.1 affiliations
+ectc51909.2023.00274-a05-1,ectc51909.2023.00274,5,Subramanian S. Iyer,1,primary,"University of California, Los Angeles",Center for Heterogeneous Integration and Performance Scaling (CHIPS),Los Angeles,US,printed: UCLA; byline read from page-1 image,paper,p.1 affiliations
+iedm45625.2022.10019499-a01-1,iedm45625.2022.10019499,1,A. Elsherbini,1,primary,Intel Corporation,Components Research,,US,no city printed,paper,p.1 affiliations
+iedm45625.2022.10019499-a02-1,iedm45625.2022.10019499,2,K. Jun,1,primary,Intel Corporation,Components Research,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a03-1,iedm45625.2022.10019499,3,S. Liff,1,primary,Intel Corporation,Logic Technology Development,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a04-1,iedm45625.2022.10019499,4,T. Talukdar,1,primary,Intel Corporation,Components Research,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a05-1,iedm45625.2022.10019499,5,J. Bielefeld,1,primary,Intel Corporation,Components Research,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a06-1,iedm45625.2022.10019499,6,W. Li,1,primary,Intel Corporation,Components Research,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a07-1,iedm45625.2022.10019499,7,R. Vreeland,1,primary,Intel Corporation,Components Research,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a08-1,iedm45625.2022.10019499,8,H. Niazi,1,primary,Intel Corporation,Assembly and Test Technology Development,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a09-1,iedm45625.2022.10019499,9,B. Rawlings,1,primary,Intel Corporation,Components Research,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a10-1,iedm45625.2022.10019499,10,T. Ajayi,1,primary,Intel Corporation,Assembly and Test Technology Development,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a11-1,iedm45625.2022.10019499,11,N. Tsunoda,1,primary,Intel Corporation,Assembly and Test Technology Development,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a12-1,iedm45625.2022.10019499,12,T. Hoff,1,primary,Intel Corporation,Components Research,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a13-1,iedm45625.2022.10019499,13,C. Woods,1,primary,Intel Corporation,Assembly and Test Technology Development,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a14-1,iedm45625.2022.10019499,14,G. Pasdast,1,primary,Intel Corporation,Design Engineering Group,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a15-1,iedm45625.2022.10019499,15,S. Tiagaraj,1,primary,Intel Corporation,Design Engineering Group,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a16-1,iedm45625.2022.10019499,16,E. Kabir,1,primary,Intel Corporation,Corporate Quality Network,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a17-1,iedm45625.2022.10019499,17,Y. Shi,1,primary,Intel Corporation,Assembly and Test Technology Development,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a18-1,iedm45625.2022.10019499,18,W. Brezinski,1,primary,Intel Corporation,Components Research,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a19-1,iedm45625.2022.10019499,19,R. Jordan,1,primary,Intel Corporation,Components Research,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a20-1,iedm45625.2022.10019499,20,J. Ng,1,primary,Intel Corporation,Logic Technology Development,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a21-1,iedm45625.2022.10019499,21,X. Brun,1,primary,Intel Corporation,Assembly and Test Technology Development,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a22-1,iedm45625.2022.10019499,22,B. Krisnatreya,1,primary,Intel Corporation,Global Sourcing for Equipment and Materials,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a23-1,iedm45625.2022.10019499,23,P. Liu,1,primary,Intel Corporation,Corporate Quality Network,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a24-1,iedm45625.2022.10019499,24,B. Zhang,1,primary,Intel Corporation,Assembly and Test Technology Development,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a25-1,iedm45625.2022.10019499,25,Z. Qian,1,primary,Intel Corporation,Assembly and Test Technology Development,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a26-1,iedm45625.2022.10019499,26,M. Goel,1,primary,Intel Corporation,Design Enabling Group,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a27-1,iedm45625.2022.10019499,27,J. Swan,1,primary,Intel Corporation,Components Research,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a28-1,iedm45625.2022.10019499,28,G. Yin,1,primary,Intel Corporation,Logic Technology Development,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a29-1,iedm45625.2022.10019499,29,C. Pelto,1,primary,Intel Corporation,Logic Technology Development,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a30-1,iedm45625.2022.10019499,30,J. Torres,1,primary,Intel Corporation,Components Research,,US,,paper,p.1 affiliations
+iedm45625.2022.10019499-a31-1,iedm45625.2022.10019499,31,P. Fischer,1,primary,Intel Corporation,Components Research,,US,,paper,p.1 affiliations
+ectc51906.2022.00061-a01-1,ectc51906.2022.00061,1,Shan-Bo Wang,1,primary,ASE Group,"Product Characterization, CRD",Kaohsiung,TW,,paper,p.1 affiliations
+ectc51906.2022.00061-a02-1,ectc51906.2022.00061,2,An-Hsuan Hsu,1,primary,ASE Group,"Product Characterization, CRD",Kaohsiung,TW,,paper,p.1 affiliations
+ectc51906.2022.00061-a03-1,ectc51906.2022.00061,3,Chin-Li Kao,1,primary,ASE Group,"Product Characterization, CRD",Kaohsiung,TW,,paper,p.1 affiliations
+ectc51906.2022.00061-a04-1,ectc51906.2022.00061,4,David Tarng,1,primary,ASE Group,"Product Characterization, CRD",Kaohsiung,TW,,paper,p.1 affiliations
+ectc51906.2022.00061-a05-1,ectc51906.2022.00061,5,Chien-Lung Liang,1,primary,National Cheng Kung University,Department of Materials Science and Engineering,Tainan,TW,,paper,p.1 affiliations
+ectc51906.2022.00061-a06-1,ectc51906.2022.00061,6,Kwang-Lung Lin,1,primary,National Cheng Kung University,Department of Materials Science and Engineering,Tainan,TW,,paper,p.1 affiliations
+ectc51906.2022.00218-a01-1,ectc51906.2022.00218,1,SangHyun Jin,1,primary,Amkor Technology,R&D,Incheon,KR,"byline order read row-major from page-1 image (2-column grid); printed: Amkor Technology Korea, Inc.",paper,p.1 affiliations
+ectc51906.2022.00218-a02-1,ectc51906.2022.00218,2,WonChul Do,1,primary,Amkor Technology,R&D,Incheon,KR,"printed: Amkor Technology Korea, Inc.",paper,p.1 affiliations
+ectc51906.2022.00218-a03-1,ectc51906.2022.00218,3,JinSuk Jeong,1,primary,Amkor Technology,R&D,Incheon,KR,"printed: Amkor Technology Korea, Inc.",paper,p.1 affiliations
+ectc51906.2022.00218-a04-1,ectc51906.2022.00218,4,HyunGoo Cha,1,primary,Amkor Technology,R&D,Incheon,KR,"printed: Amkor Technology Korea, Inc.",paper,p.1 affiliations
+ectc51906.2022.00218-a05-1,ectc51906.2022.00218,5,YunKyung Jeong,1,primary,Amkor Technology,R&D,Incheon,KR,"printed: Amkor Technology Korea, Inc.",paper,p.1 affiliations
+ectc51906.2022.00218-a06-1,ectc51906.2022.00218,6,JinYoung Khim,1,primary,Amkor Technology,R&D,Incheon,KR,"printed: Amkor Technology Korea, Inc.",paper,p.1 affiliations
+ectc32696.2021.00174-a01-1,ectc32696.2021.00174,1,Jacinta Aman Lim,1,primary,nepes Corporation,,"San Diego, CA",US,org from email nepes.co.kr; address-to-author mapping not printed,paper,p.1 affiliations
+ectc32696.2021.00174-a01-2,ectc32696.2021.00174,1,Jacinta Aman Lim,2,additional,nepes Corporation,,"Cheongju-si, Chungbuk",KR,org from email nepes.co.kr; address-to-author mapping not printed,paper,p.1 affiliations
+ectc32696.2021.00174-a01-3,ectc32696.2021.00174,1,Jacinta Aman Lim,3,additional,nepes Corporation,,"Binan, Laguna",PH,org from email nepes.co.kr; address-to-author mapping not printed,paper,p.1 affiliations
+ectc32696.2021.00174-a02-1,ectc32696.2021.00174,2,Yun-Mook Park,1,primary,nepes Corporation,,"San Diego, CA",US,org from email nepes.co.kr; address-to-author mapping not printed,paper,p.1 affiliations
+ectc32696.2021.00174-a02-2,ectc32696.2021.00174,2,Yun-Mook Park,2,additional,nepes Corporation,,"Cheongju-si, Chungbuk",KR,org from email nepes.co.kr; address-to-author mapping not printed,paper,p.1 affiliations
+ectc32696.2021.00174-a02-3,ectc32696.2021.00174,2,Yun-Mook Park,3,additional,nepes Corporation,,"Binan, Laguna",PH,org from email nepes.co.kr; address-to-author mapping not printed,paper,p.1 affiliations
+ectc32696.2021.00174-a03-1,ectc32696.2021.00174,3,Edil De Vera,1,primary,nepes Corporation,,"San Diego, CA",US,org from email nepes.co.kr; address-to-author mapping not printed,paper,p.1 affiliations
+ectc32696.2021.00174-a03-2,ectc32696.2021.00174,3,Edil De Vera,2,additional,nepes Corporation,,"Cheongju-si, Chungbuk",KR,org from email nepes.co.kr; address-to-author mapping not printed,paper,p.1 affiliations
+ectc32696.2021.00174-a03-3,ectc32696.2021.00174,3,Edil De Vera,3,additional,nepes Corporation,,"Binan, Laguna",PH,org from email nepes.co.kr; address-to-author mapping not printed,paper,p.1 affiliations
+ectc32696.2021.00174-a04-1,ectc32696.2021.00174,4,Byung-Cheol Kim,1,primary,nepes Corporation,,"San Diego, CA",US,org from email nepes.co.kr; address-to-author mapping not printed,paper,p.1 affiliations
+ectc32696.2021.00174-a04-2,ectc32696.2021.00174,4,Byung-Cheol Kim,2,additional,nepes Corporation,,"Cheongju-si, Chungbuk",KR,org from email nepes.co.kr; address-to-author mapping not printed,paper,p.1 affiliations
+ectc32696.2021.00174-a04-3,ectc32696.2021.00174,4,Byung-Cheol Kim,3,additional,nepes Corporation,,"Binan, Laguna",PH,org from email nepes.co.kr; address-to-author mapping not printed,paper,p.1 affiliations
+ectc32696.2021.00174-a05-1,ectc32696.2021.00174,5,Brett Dunlap,1,primary,nepes Corporation,,"San Diego, CA",US,org from email nepes.co.kr; address-to-author mapping not printed,paper,p.1 affiliations
+ectc32696.2021.00174-a05-2,ectc32696.2021.00174,5,Brett Dunlap,2,additional,nepes Corporation,,"Cheongju-si, Chungbuk",KR,org from email nepes.co.kr; address-to-author mapping not printed,paper,p.1 affiliations
+ectc32696.2021.00174-a05-3,ectc32696.2021.00174,5,Brett Dunlap,3,additional,nepes Corporation,,"Binan, Laguna",PH,org from email nepes.co.kr; address-to-author mapping not printed,paper,p.1 affiliations
+ectc51909.2023.00180-a01-1,ectc51909.2023.00180,1,Claudia Cristina Barrera Pulido,1,primary,IBM,IBM Systems,Bromont,CA,,paper,p.1 affiliations
+ectc51909.2023.00180-a02-1,ectc51909.2023.00180,2,Sayuri Kohara,1,primary,IBM,IBM Research – Tokyo,Kawasaki,JP,,paper,p.1 affiliations
+ectc51909.2023.00180-a03-1,ectc51909.2023.00180,3,Aakrati Jain,1,primary,IBM,IBM Research – Albany,Albany,US,,paper,p.1 affiliations
+ectc51909.2023.00180-a04-1,ectc51909.2023.00180,4,Thomas Wassick,1,primary,IBM,IBM Systems,East Fishkill,US,,paper,p.1 affiliations
+ectc51909.2023.00180-a05-1,ectc51909.2023.00180,5,Divya Taneja,1,primary,IBM,IBM Systems,Bromont,CA,unit printed with typo: IBM Sysytems,paper,p.1 affiliations
+ectc51909.2023.00180-a06-1,ectc51909.2023.00180,6,Philip McInnes,1,primary,IBM,IBM Systems,Bromont,CA,,paper,p.1 affiliations
+ectc51909.2023.00180-a07-1,ectc51909.2023.00180,7,Akihiro Horibe,1,primary,IBM,IBM Research – Tokyo,Kawasaki,JP,,paper,p.1 affiliations
+ectc51909.2023.00180-a08-1,ectc51909.2023.00180,8,Isabel de Sousa,1,primary,IBM,IBM Systems,Bromont,CA,,paper,p.1 affiliations
+ectc51906.2022.00108-a01-1,ectc51906.2022.00108,1,Soohyun Nam,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+ectc51906.2022.00108-a02-1,ectc51906.2022.00108,2,Jinhyun Kang,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+ectc51906.2022.00108-a03-1,ectc51906.2022.00108,3,Ilbok Lee,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+ectc51906.2022.00108-a04-1,ectc51906.2022.00108,4,Younglyong Kim,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+ectc51906.2022.00108-a05-1,ectc51906.2022.00108,5,Hae Jung Yu,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+ectc51906.2022.00108-a06-1,ectc51906.2022.00108,6,Dae-Woo Kim,1,primary,Samsung Electronics,"Advanced Package Development Team, Test & System Package (TSP)","Chonan-Si, Chungcheongnam-do",KR,,paper,p.1 affiliations
+eptc67330.2025.11392108-a01-1,eptc67330.2025.11392108,1,Ra-Min Tain,1,primary,Unimicron,,Hsinchu County,TW,byline order read row-major from page-1 image; printed: Unimicron Technology Co.,paper,p.1 affiliations
+eptc67330.2025.11392108-a02-1,eptc67330.2025.11392108,2,Chin-Sheng Wang,1,primary,Unimicron,,Hsinchu County,TW,printed: Unimicron Technology Co.,paper,p.1 affiliations
+eptc67330.2025.11392108-a03-1,eptc67330.2025.11392108,3,Chia-Fu Hsu,1,primary,Unimicron,,Hsinchu County,TW,printed: Unimicron Technology Co.,paper,p.1 affiliations
+eptc67330.2025.11392108-a04-1,eptc67330.2025.11392108,4,Po-Wen Hsiao,1,primary,Unimicron,,Taoyuan,TW,printed: Unimicron Technology Co.,paper,p.1 affiliations
+eptc67330.2025.11392108-a05-1,eptc67330.2025.11392108,5,Chun-Hung Chen,1,primary,Unimicron,,Taoyuan,TW,printed: Unimicron Technology Co.,paper,p.1 affiliations
+eptc67330.2025.11392108-a06-1,eptc67330.2025.11392108,6,Jun-Ho Chen,1,primary,Unimicron,,Hsinchu County,TW,printed: Unimicron Technology Co.,paper,p.1 affiliations
+eptc67330.2025.11392108-a07-1,eptc67330.2025.11392108,7,Tse-Wei Wang,1,primary,Unimicron,,Hsinchu County,TW,printed: Unimicron Technology Co.,paper,p.1 affiliations
+eptc67330.2025.11392108-a08-1,eptc67330.2025.11392108,8,Guang-Hwa Ma,1,primary,Unimicron,,Taoyuan,TW,printed: Unimicron Technology Co.,paper,p.1 affiliations
+ectc51687.2025.00052-a01-1,ectc51687.2025.00052,1,John U. Knickerbocker,1,primary,IBM,IBM Research,"Yorktown Heights, NY",US,,paper,p.1 affiliations
+ectc51687.2025.00052-a02-1,ectc51687.2025.00052,2,Jean Benoit Herou,1,primary,IBM,IBM Infrastructure,"Bromont, Quebec",CA,,paper,p.1 affiliations
+ectc51687.2025.00052-a03-1,ectc51687.2025.00052,3,Adrian Paz Ramos,1,primary,IBM,IBM Infrastructure,"Bromont, Quebec",CA,,paper,p.1 affiliations
+ectc51687.2025.00052-a04-1,ectc51687.2025.00052,4,Hsianghan Hsu,1,primary,IBM,IBM Research,"Albany, NY",US,,paper,p.1 affiliations
+ectc51687.2025.00052-a05-1,ectc51687.2025.00052,5,Neng Liu,1,primary,IBM,IBM Research,"Albany, NY",US,,paper,p.1 affiliations
+ectc51687.2025.00052-a06-1,ectc51687.2025.00052,6,Yoichi Taira,1,primary,IBM,IBM Research,Kawasaki,JP,,paper,p.1 affiliations
+ectc51687.2025.00052-a07-1,ectc51687.2025.00052,7,Chinami Marushima,1,primary,IBM,IBM Research,Kawasaki,JP,,paper,p.1 affiliations
+ectc51687.2025.00052-a08-1,ectc51687.2025.00052,8,Sayuri Kohara,1,primary,IBM,IBM Research,Kawasaki,JP,,paper,p.1 affiliations
+ectc51687.2025.00052-a09-1,ectc51687.2025.00052,9,Hiroki Mori,1,primary,IBM,IBM Research,Kawasaki,JP,,paper,p.1 affiliations
+ectc51687.2025.00052-a10-1,ectc51687.2025.00052,10,Mark Schultz,1,primary,IBM,IBM Research,"Yorktown Heights, NY",US,,paper,p.1 affiliations
+ectc51687.2025.00052-a11-1,ectc51687.2025.00052,11,Akihiro Horibe,1,primary,IBM,IBM Research,Kawasaki,JP,,paper,p.1 affiliations
+ectc51687.2025.00052-a12-1,ectc51687.2025.00052,12,Hidetoshi Numata,1,primary,IBM,IBM Research,Kawasaki,JP,,paper,p.1 affiliations
+ectc51909.2023.00174-a01-1,ectc51909.2023.00174,1,Yu-Chen Hu,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,"printed: Taiwan Semiconductor (or Semicondutor Manufaturing) Company, Ltd",paper,p.1 affiliations
+ectc51909.2023.00174-a02-1,ectc51909.2023.00174,2,Yu-Min Liang,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,"printed: Taiwan Semiconductor (or Semicondutor Manufaturing) Company, Ltd",paper,p.1 affiliations
+ectc51909.2023.00174-a03-1,ectc51909.2023.00174,3,Hsieh-Pin Hu,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,"printed: Taiwan Semiconductor (or Semicondutor Manufaturing) Company, Ltd",paper,p.1 affiliations
+ectc51909.2023.00174-a04-1,ectc51909.2023.00174,4,Chia-Yen Tan,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,"printed: Taiwan Semiconductor (or Semicondutor Manufaturing) Company, Ltd",paper,p.1 affiliations
+ectc51909.2023.00174-a05-1,ectc51909.2023.00174,5,Chih-Ta Shen,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,"printed: Taiwan Semiconductor (or Semicondutor Manufaturing) Company, Ltd",paper,p.1 affiliations
+ectc51909.2023.00174-a06-1,ectc51909.2023.00174,6,Chien-Hsun Lee,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,"printed: Taiwan Semiconductor (or Semicondutor Manufaturing) Company, Ltd",paper,p.1 affiliations
+ectc51909.2023.00174-a07-1,ectc51909.2023.00174,7,S. Y. Hou,1,primary,Taiwan Semiconductor Manufacturing Company,,Hsinchu,TW,"printed: Taiwan Semiconductor (or Semicondutor Manufaturing) Company, Ltd",paper,p.1 affiliations
+vlsitechnologyandcir46769.2022.9830182-a01-1,vlsitechnologyandcir46769.2022.9830182,1,Chuei-Tang Wang,1,primary,Taiwan Semiconductor Manufacturing Company,Pathfinding for System Integration,Hsinchu,TW,,paper,p.1 affiliations
+vlsitechnologyandcir46769.2022.9830182-a02-1,vlsitechnologyandcir46769.2022.9830182,2,Chia-Chai Lin,1,primary,Taiwan Semiconductor Manufacturing Company,Pathfinding for System Integration,Hsinchu,TW,,paper,p.1 affiliations
+vlsitechnologyandcir46769.2022.9830182-a03-1,vlsitechnologyandcir46769.2022.9830182,3,Chih-Hsin Lu,1,primary,Taiwan Semiconductor Manufacturing Company,Pathfinding for System Integration,Hsinchu,TW,,paper,p.1 affiliations
+vlsitechnologyandcir46769.2022.9830182-a04-1,vlsitechnologyandcir46769.2022.9830182,4,Wei-Ting Chen,1,primary,Taiwan Semiconductor Manufacturing Company,Pathfinding for System Integration,Hsinchu,TW,,paper,p.1 affiliations
+vlsitechnologyandcir46769.2022.9830182-a05-1,vlsitechnologyandcir46769.2022.9830182,5,Chung-Hao Tsai,1,primary,Taiwan Semiconductor Manufacturing Company,Pathfinding for System Integration,Hsinchu,TW,,paper,p.1 affiliations
+vlsitechnologyandcir46769.2022.9830182-a06-1,vlsitechnologyandcir46769.2022.9830182,6,Douglas C. H. Yu,1,primary,Taiwan Semiconductor Manufacturing Company,Pathfinding for System Integration,Hsinchu,TW,,paper,p.1 affiliations
+ectc51906.2022.00038-a01-1,ectc51906.2022.00038,1,Yung-Sheng Lin,1,primary,ASE Group,"Product Characterization, Corporate R&D",Kaohsiung City,TW,printed: Advanced Semiconductor Engineering (ASE) Group,paper,p.1 affiliations
+ectc51906.2022.00038-a02-1,ectc51906.2022.00038,2,Yun-Ching Hung,1,primary,ASE Group,"Product Characterization, Corporate R&D",Kaohsiung City,TW,printed: Advanced Semiconductor Engineering (ASE) Group,paper,p.1 affiliations
+ectc51906.2022.00038-a03-1,ectc51906.2022.00038,3,Chin-Li Kao,1,primary,ASE Group,"Product Characterization, Corporate R&D",Kaohsiung City,TW,printed: Advanced Semiconductor Engineering (ASE) Group,paper,p.1 affiliations
+ectc51906.2022.00038-a04-1,ectc51906.2022.00038,4,Chung-Hung Lai,1,primary,ASE Group,"Product Characterization, Corporate R&D",Kaohsiung City,TW,printed: Advanced Semiconductor Engineering (ASE) Group,paper,p.1 affiliations
+ectc51906.2022.00038-a05-1,ectc51906.2022.00038,5,Po-Shao Shih,1,primary,National Taiwan University,Department of Materials Science and Engineering,Taipei City,TW,,paper,p.1 affiliations
+ectc51906.2022.00038-a06-1,ectc51906.2022.00038,6,Jeng-Hau Huang,1,primary,National Taiwan University,Department of Materials Science and Engineering,Taipei City,TW,,paper,p.1 affiliations
+ectc51906.2022.00038-a07-1,ectc51906.2022.00038,7,David Tarng,1,primary,ASE Group,"Product Characterization, Corporate R&D",Kaohsiung City,TW,printed: Advanced Semiconductor Engineering (ASE) Group,paper,p.1 affiliations
+ectc51906.2022.00038-a08-1,ectc51906.2022.00038,8,C. Robert Kao,1,primary,National Taiwan University,Department of Materials Science and Engineering,Taipei City,TW,,paper,p.1 affiliations
+ectc51687.2025.00063-a01-1,ectc51687.2025.00063,1,Seong-Ho Seok,1,primary,Corning Incorporated,Corning Technology Center Korea,Asan,KR,,paper,p.1 affiliations
+ectc51687.2025.00063-a02-1,ectc51687.2025.00063,2,Bo-Kyung Kong,1,primary,Corning Incorporated,Corning Technology Center Korea,Asan,KR,,paper,p.1 affiliations
+ectc51687.2025.00063-a03-1,ectc51687.2025.00063,3,Lars Brusberg,1,primary,Corning Incorporated,Corning Research and Development Corporation,"Corning, NY",US,,paper,p.1 affiliations
+ectc51687.2025.00063-a04-1,ectc51687.2025.00063,4,Lucas W. Yeary,1,primary,Corning Incorporated,Corning Research and Development Corporation,"Corning, NY",US,,paper,p.1 affiliations
+ectc51687.2025.00063-a05-1,ectc51687.2025.00063,5,Jung-Hyun Noh,1,primary,Corning Incorporated,Corning Technology Center Korea,Asan,KR,,paper,p.1 affiliations
+ectc51687.2025.00063-a06-1,ectc51687.2025.00063,6,Han-Kyom Lee,1,primary,Corning Incorporated,Corning Technology Center Korea,Asan,KR,,paper,p.1 affiliations
+ectc51687.2025.00063-a07-1,ectc51687.2025.00063,7,Kyeong-Gon Choi,1,primary,Corning Incorporated,Corning Technology Center Korea,Asan,KR,,paper,p.1 affiliations
+ectc51687.2025.00063-a08-1,ectc51687.2025.00063,8,Daniel W Levesque,1,primary,Corning Incorporated,Corning Research and Development Corporation,"Corning, NY",US,,paper,p.1 affiliations
+ectc51909.2023.00307-a01-1,ectc51909.2023.00307,1,Naoya Watanabe,1,primary,National Institute of Advanced Industrial Science and Technology,,Tsukuba-shi,JP,byline order read row-major from page-1 image,paper,p.1 affiliations
+ectc51909.2023.00307-a02-1,ectc51909.2023.00307,2,Yuuki Araga,1,primary,National Institute of Advanced Industrial Science and Technology,,Tsukuba-shi,JP,,paper,p.1 affiliations
+ectc51909.2023.00307-a03-1,ectc51909.2023.00307,3,Haruo Shimamoto,1,primary,National Institute of Advanced Industrial Science and Technology,,Tsukuba-shi,JP,,paper,p.1 affiliations
+ectc51909.2023.00307-a04-1,ectc51909.2023.00307,4,Makoto Nagata,1,primary,Kobe University,"Graduate School of Science, Technology and Innovation",Kobe-shi,JP,,paper,p.1 affiliations
+ectc51909.2023.00307-a05-1,ectc51909.2023.00307,5,Katsuya Kikuchi,1,primary,National Institute of Advanced Industrial Science and Technology,,Tsukuba-shi,JP,,paper,p.1 affiliations
+tcpmt.2023.3266666-a01-1,tcpmt.2023.3266666,1,Evan G. Colgan,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a02-1,tcpmt.2023.3266666,2,Kai Schleupen,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a03-1,tcpmt.2023.3266666,3,Phillip Mann,1,primary,IBM,Midrange Systems,"Rochester, MN",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a04-1,tcpmt.2023.3266666,4,Robert P. Kuder,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a05-1,tcpmt.2023.3266666,5,Jae-Woong Nah,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a06-1,tcpmt.2023.3266666,6,Katsuyuki Sakuma,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a06-2,tcpmt.2023.3266666,6,Katsuyuki Sakuma,2,additional,Tohoku University,Department of Biomedical Engineering,Sendai,JP,visiting professor; city from his degree line in same biography,paper,p.9 biography
+tcpmt.2023.3266666-a07-1,tcpmt.2023.3266666,7,Victor Alvarez,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a08-1,tcpmt.2023.3266666,8,Lavanya Turlapati,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a09-1,tcpmt.2023.3266666,9,Danny C. Wong,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a10-1,tcpmt.2023.3266666,10,Stanislav Lukashov,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+tcpmt.2023.3266666-a11-1,tcpmt.2023.3266666,11,Steve Cordes,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,printed as former affiliation (was with),paper,p.1 footnote
+tcpmt.2023.3266666-a11-2,tcpmt.2023.3266666,11,Steve Cordes,2,present_address,ASML,,"Wilton, CT",US,printed: ASML Wilton,paper,p.1 footnote
+tcpmt.2023.3266666-a12-1,tcpmt.2023.3266666,12,James L. Speidell,1,primary,IBM,IBM Thomas J. Watson Research Center,"Yorktown Heights, NY",US,,paper,p.1 footnote
+ectc51906.2022.00232-a01-1,ectc51906.2022.00232,1,Laurene Yip,1,primary,MediaTek,,"San Jose, CA",US,printed: MediaTek Inc,paper,p.1 affiliations
+ectc51906.2022.00232-a02-1,ectc51906.2022.00232,2,Rosa Lin,1,primary,MediaTek,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51906.2022.00232-a03-1,ectc51906.2022.00232,3,Charles Lai,1,primary,MediaTek,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51906.2022.00232-a04-1,ectc51906.2022.00232,4,Cooper Peng,1,primary,MediaTek,,Hsinchu,TW,,paper,p.1 affiliations
+ectc51906.2022.00135-a01-1,ectc51906.2022.00135,1,Eoin O´Toole,1,primary,Amkor Technology,,Vila do Conde,PT,superscript 1 block,paper,p.1 affiliations
+ectc51906.2022.00135-a02-1,ectc51906.2022.00135,2,José Luís Silva,1,primary,Amkor Technology,,Vila do Conde,PT,superscript 1 block,paper,p.1 affiliations
+ectc51906.2022.00135-a03-1,ectc51906.2022.00135,3,Filipe Cardoso,1,primary,Amkor Technology,,Vila do Conde,PT,superscript 1 block,paper,p.1 affiliations
+ectc51906.2022.00135-a04-1,ectc51906.2022.00135,4,José Silva,1,primary,Amkor Technology,,Vila do Conde,PT,superscript 1 block,paper,p.1 affiliations
+ectc51906.2022.00135-a05-1,ectc51906.2022.00135,5,Luís Alves,1,primary,Amkor Technology,,Vila do Conde,PT,superscript 1 block,paper,p.1 affiliations
+ectc51906.2022.00135-a06-1,ectc51906.2022.00135,6,Márcio Souto,1,primary,Amkor Technology,,Vila do Conde,PT,superscript 1 block,paper,p.1 affiliations
+ectc51906.2022.00135-a07-1,ectc51906.2022.00135,7,Nuno Delduque,1,primary,Amkor Technology,,Vila do Conde,PT,superscript 1 block,paper,p.1 affiliations
+ectc51906.2022.00135-a08-1,ectc51906.2022.00135,8,Aníbal Coelho,1,primary,Amkor Technology,,Vila do Conde,PT,superscript 1 block,paper,p.1 affiliations
+ectc51906.2022.00135-a09-1,ectc51906.2022.00135,9,José Miguel Silva,1,primary,Amkor Technology,,Vila do Conde,PT,superscript 1 block,paper,p.1 affiliations
+ectc51906.2022.00135-a10-1,ectc51906.2022.00135,10,WonChul Do,1,primary,Amkor Technology,,Incheon,KR,superscript 2 block,paper,p.1 affiliations
+ectc51906.2022.00135-a11-1,ectc51906.2022.00135,11,JinYoung Khim,1,primary,Amkor Technology,,Incheon,KR,superscript 2 block,paper,p.1 affiliations
+tcpmt.2023.3312037-a01-1,tcpmt.2023.3312037,1,Ziyin Lin,1,primary,Intel Corporation,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a02-1,tcpmt.2023.3312037,2,Wei Li,1,primary,Intel Corporation,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a03-1,tcpmt.2023.3312037,3,Edvin Cetegen,1,primary,Intel Corporation,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a04-1,tcpmt.2023.3312037,4,Yang Guo,1,primary,Intel Corporation,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a05-1,tcpmt.2023.3312037,5,Nai-Yuan Liu,1,primary,Intel Corporation,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a06-1,tcpmt.2023.3312037,6,Ifeanyi Okafor,1,primary,Intel Corporation,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a07-1,tcpmt.2023.3312037,7,Vipul Mehta,1,primary,Intel Corporation,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a08-1,tcpmt.2023.3312037,8,Xavier Brun,1,primary,Intel Corporation,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a09-1,tcpmt.2023.3312037,9,Shan Zhong,1,primary,Intel Corporation,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a10-1,tcpmt.2023.3312037,10,Hsin-Yu Li,1,primary,Intel Corporation,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+tcpmt.2023.3312037-a11-1,tcpmt.2023.3312037,11,Christopher Rumer,1,primary,Intel Corporation,Assembly Test and Technology Development,"Chandler, AZ",US,,paper,p.1 footnote
+ectc51687.2025.00148-a01-1,ectc51687.2025.00148,1,Daichi Okazaki,1,primary,"Ajinomoto Fine-Techno Co., Inc.",,Kanagawa,JP,,paper,p.1 affiliations
+ectc51687.2025.00148-a02-1,ectc51687.2025.00148,2,Eiji Baba,1,primary,"Ajinomoto Fine-Techno Co., Inc.",,Kanagawa,JP,,paper,p.1 affiliations
+ectc51687.2025.00148-a03-1,ectc51687.2025.00148,3,Yuto Inoue,1,primary,"Ajinomoto Fine-Techno Co., Inc.",,Kanagawa,JP,,paper,p.1 affiliations
+ectc51687.2025.00148-a04-1,ectc51687.2025.00148,4,Daisuke Hironiwa,1,primary,"Ajinomoto Fine-Techno Co., Inc.",,Kanagawa,JP,,paper,p.1 affiliations
+ectc51687.2025.00148-a05-1,ectc51687.2025.00148,5,Ikumi Sawa,1,primary,"Ajinomoto Fine-Techno Co., Inc.",,Kanagawa,JP,,paper,p.1 affiliations
+ectc51687.2025.00148-a06-1,ectc51687.2025.00148,6,YoungGun Han,1,primary,Fukuoka University,IMAP (Institute of Microelectronics Assembling and Packaging),Fukuoka,JP,,paper,p.1 affiliations
+ectc51687.2025.00148-a07-1,ectc51687.2025.00148,7,Taka Kanayama,1,primary,Fukuoka University,IMAP (Institute of Microelectronics Assembling and Packaging),Fukuoka,JP,,paper,p.1 affiliations
+ectc51687.2025.00148-a08-1,ectc51687.2025.00148,8,Atsunori Hattori,1,primary,Fukuoka IST,3D semiconductor research center,Fukuoka,JP,"printed: Fukuoka IST (Industry, science, and technology)",paper,p.1 affiliations
+ectc51687.2025.00148-a09-1,ectc51687.2025.00148,9,Kanta Nogita,1,primary,Fukuoka IST,3D semiconductor research center,Fukuoka,JP,"printed: Fukuoka IST (Industry, science, and technology)",paper,p.1 affiliations
+ectc51687.2025.00148-a10-1,ectc51687.2025.00148,10,Ryo Miyamoto,1,primary,"Ajinomoto Fine-Techno Co., Inc.",,Kanagawa,JP,,paper,p.1 affiliations
+ectc51687.2025.00062-a01-1,ectc51687.2025.00062,1,Ankur Aggarwal,1,primary,Celestial AI,,Santa Clara,US,printed: Celestial AI Inc.,paper,p.1 affiliations
+ectc51687.2025.00062-a02-1,ectc51687.2025.00062,2,Suresh Pothukuchi,1,primary,Celestial AI,,Santa Clara,US,printed: Celestial AI Inc.,paper,p.1 affiliations
+ectc51687.2025.00062-a03-1,ectc51687.2025.00062,3,Anmol Rathi,1,primary,Celestial AI,,Santa Clara,US,printed: Celestial AI Inc.,paper,p.1 affiliations
+ectc51687.2025.00062-a04-1,ectc51687.2025.00062,4,Subal Sahni,1,primary,Celestial AI,,Santa Clara,US,printed: Celestial AI Inc.,paper,p.1 affiliations
+ectc51687.2025.00062-a05-1,ectc51687.2025.00062,5,Phil Winterbottom,1,primary,Celestial AI,,Santa Clara,US,printed: Celestial AI Inc.,paper,p.1 affiliations
+ectc51687.2025.00062-a06-1,ectc51687.2025.00062,6,David Lazovsky,1,primary,Celestial AI,,Santa Clara,US,printed: Celestial AI Inc.,paper,p.1 affiliations

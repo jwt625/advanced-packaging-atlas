@@ -1,0 +1,28 @@
+org_name,org_type,country,region,parent_org,notes
+Taiwan Semiconductor Manufacturing Company,foundry,TW,east_asia,,"printed: Taiwan Semiconductor Manufacturing Company, Ltd.; Taiwan Semicondutor Manufaturing Company, Ltd (typo); Taiwan Semiconductor Manufacturing Company Ltd"
+A*STAR Institute of Microelectronics,research_institute,SG,southeast_asia,A*STAR,"printed: Institute of Microelectronics, A*STAR (Agency for Science, Technology and Research)"
+A*STAR,government_lab,SG,southeast_asia,,"Agency for Science, Technology and Research; parent row only"
+Sony Semiconductor Solutions Corporation,company,JP,east_asia,,printed: Sony Semiconductor Solutions Corporation
+imec,research_institute,BE,europe,,printed: IMEC
+ASE Group,company,TW,east_asia,,OSAT; printed: Advanced Semiconductor Engineering Inc.; ASE Group; Advanced Semiconductor Engineering (ASE) Group; ASE Technology
+DuPont,company,US,north_america,,printed: DuPont Electronics & Industrial (kept as unit)
+Unimicron,company,TW,east_asia,,substrate maker; printed: Unimicron; Unimicron Technology Co.
+Deca Technologies,company,US,north_america,,printed: Deca Technologies Inc.
+Amkor Technology,company,US,north_america,,"OSAT; printed: Amkor Technology Korea; Amkor Technology Korea, Inc.; Amkor Technology,Inc.; Amkor Technology"
+Samsung Electronics,company,KR,east_asia,,"printed: Samsung Electronics Co., Ltd"
+"University of California, Los Angeles",university,US,north_america,,printed: UCLA
+Intel Corporation,company,US,north_america,,printed: Intel Corporation
+National Cheng Kung University,university,TW,east_asia,,printed: National Cheng Kung University
+nepes Corporation,company,KR,east_asia,,name not printed in byline; from email domain nepes.co.kr and acknowledgement text
+IBM,company,US,north_america,,"printed units: IBM Research; IBM Research – Tokyo; IBM Research – Albany; IBM Systems; IBM Infrastructure; IBM Thomas J. Watson Research Center; IBM, Midrange Systems"
+Corning Incorporated,company,US,north_america,,printed: Corning Technology Center Korea; Corning Research and Development Corporation (kept as units)
+National Institute of Advanced Industrial Science and Technology,government_lab,JP,east_asia,,printed: National Institute of Advanced Industrial Science and Technology (AIST)
+Kobe University,university,JP,east_asia,,printed: Kobe University
+ASML,company,NL,europe,,printed: ASML Wilton (present address)
+Tohoku University,university,JP,east_asia,,from biography (visiting professor)
+MediaTek,company,TW,east_asia,,printed: MediaTek Inc
+National Taiwan University,university,TW,east_asia,,printed: National Taiwan University
+"Ajinomoto Fine-Techno Co., Inc.",company,JP,east_asia,,"printed: Ajinomoto Fine-Techno Co., Inc."
+Fukuoka University,university,JP,east_asia,,"printed: Fukuoka University, IMAP (Institute of Microelectronics Assembling and Packaging)"
+Fukuoka IST,research_institute,JP,east_asia,,"printed: Fukuoka IST (Industry, science, and technology), 3D semiconductor research center"
+Celestial AI,company,US,north_america,,printed: Celestial AI Inc.

@@ -1,7 +1,8 @@
 # Schema for the packaging extraction tables in data/. Single source of truth for scripts/validate_db.py.
 # Modeled on eo-modulator-atlas (data/schema/devices.schema.yaml). v1 2026-10-18; v2 2026-10-18 after pilots 1-3
 # (data/_staging/pilot_*/SCHEMA_FEEDBACK.md); v2.1 2026-10-19 adds papers.has_process_flow; v2.2 2026-10-19 adds the
-# figures table (key figures: location + description; crops stay local-only, DevLog-005).
+# figures table (key figures: location + description; crops stay local-only, DevLog-005); v2.3 2026-10-19 adds
+# author_affiliations, organizations, org_sites (institutions and map, DevLog-006).
 #
 # Rules (binding)
 #   (a) Empty cell = not reported in the source. Never estimate, never take numbers from memory, press, other papers,
@@ -44,7 +45,7 @@
 #       winner; list every alternative in the evidence `conflicts` list (field, values, locators, chosen, why).
 #   (l) A technology/brand name goes in `technology_name` only if the paper itself uses it; inferred mappings -> notes.
 #   (m) No emoji; ISO dates; no absolute local paths or private names in any file; notes <= 30 words, no long quotes.
-version: 2.2
+version: 2.3
 
 enums:
   basis: [measured, design_target, simulated, derived, author_estimate, stated, unspecified]
@@ -99,6 +100,12 @@ enums:
                 simulation_result,
                 data_table, block_diagram, other]
   bbox_source: [candidate, manual]
+  aff_kind: [primary, additional, present_address]
+  aff_source: [paper]
+  org_type: [university, company, research_institute, government_lab, foundry, facility, consortium, other]
+  region: [north_america, south_america, europe, east_asia, south_asia, southeast_asia, middle_east, oceania, africa]
+  site_precision: [building, campus, postcode, city, unresolved]
+  site_source: [wikidata, nominatim, manual, none]
 
 common: &common
   basis: {type: enum, enum: basis, required: true}
@@ -341,4 +348,45 @@ tables:
       caption: {type: str}                           # as printed, <= 30 words ("..." if cut)
       shows: {type: str, required: true}             # own words, <= 25 words: hover text
       reprinted: {type: enum, enum: yes_no}          # reprinted from cited work
+      notes: {type: str}
+  author_affiliations:
+    key: aff_id
+    parent: {table: papers, column: paper_id}
+    columns:
+      aff_id: {type: str, required: true}            # <paper_id>-a01-1 = author 1 (byline order), affiliation 1
+      paper_id: {type: str, required: true}
+      author_index: {type: int, required: true}      # 1-based position in the printed byline
+      author: {type: str, required: true}            # as printed
+      aff_order: {type: int, required: true}         # 1-based order of this author's affiliations
+      kind: {type: enum, enum: aff_kind, required: true}
+      org_name: {type: str, required: true}          # canonical name; must exist in organizations.csv
+      unit: {type: str}                              # department / lab / division as printed
+      locality: {type: str}                          # city as printed ("Hsinchu", "Albany, NY")
+      country: {type: str, required: true}           # ISO 3166 alpha-2 (HK, TW own codes)
+      source: {type: enum, enum: aff_source, required: true}
+      locator: {type: str, required: true}           # "p.1 affiliations", "p.1 footnote"
+      note: {type: str}
+  organizations:
+    key: org_name
+    columns:
+      org_name: {type: str, required: true}          # the organization's own English name; variants in notes
+      org_type: {type: enum, enum: org_type, required: true}
+      country: {type: str, required: true}           # ISO alpha-2 of the headquarters / main campus
+      region: {type: enum, enum: region, required: true}
+      parent_org: {type: str}                        # must exist in organizations.csv when set
+      notes: {type: str}
+  org_sites:
+    key: site_id
+    columns:
+      site_id: {type: str, required: true}           # slug of org_name + locality
+      org_name: {type: str, required: true}
+      locality: {type: str}
+      country: {type: str, required: true}
+      lat: {type: float}
+      lon: {type: float}
+      precision: {type: enum, enum: site_precision, required: true}
+      source: {type: enum, enum: site_source, required: true}
+      source_ref: {type: str}                        # Wikidata Q-id or osm:<type>/<id>
+      source_label: {type: str}
+      verified_on: {type: date, required: true}
       notes: {type: str}

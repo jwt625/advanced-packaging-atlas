@@ -1,0 +1,30 @@
+org_name,org_type,country,region,parent_org,notes
+Intel Corporation,company,US,north_america,,"printed: Intel Corporation; Intel Foundry, Intel Corporation; ATTD, Intel Technology, Malaysia"
+AGC Inc.,company,JP,east_asia,,printed: AGC Inc.
+"Shinko Electric Industries Co., Ltd.",company,JP,east_asia,,"printed: Shinko Electric Industries Co. Ltd.; Shinko Electric Industries Co., Ltd"
+iNEMI,consortium,US,north_america,,printed: iNEMI Shanghai
+"Advanced Semiconductor Engineering, Inc.",company,TW,east_asia,,"printed: Advanced Semiconductor Engineering, INC (ASE); Advanced Semiconductor Engineering, Inc.; ASE Technology"
+Sony Semiconductor Solutions Corporation,company,JP,east_asia,,printed: Sony Semiconductor Solutions Corporation
+"Siliconware Precision Industries Co., Ltd.",company,TW,east_asia,,printed: Siliconware Precision Industries Co. Ltd.; SPIL
+TSMC,foundry,TW,east_asia,,"printed: Taiwan Semiconductor Manufacturing Company; Taiwan Semiconductor Manufacturing Company, Ltd."
+"Samsung Electronics Co., Ltd.",company,KR,east_asia,,"printed: Samsung Electronics Co., Ltd; Samsung Electronics Co, Ltd"
+imec,research_institute,BE,europe,,printed: IMEC
+ASM International,company,NL,europe,,"printed: ASM (Belgium; Helsinki, Finland)"
+KLA Corporation,company,US,north_america,,printed: KLA Corp
+Pennsylvania State University,university,US,north_america,,printed: Pennsylvania State University
+Georgia Institute of Technology,university,US,north_america,,printed: Georgia Institute of Technology
+Ajinomoto Fine-Techno USA Corporation,company,US,north_america,,"printed: Ajinomoto Fine-Techno USA Corporation; parent relation to Ajinomoto Co., Inc. not printed"
+"Ajinomoto Co., Inc.",company,JP,east_asia,,"printed: Ajinomoto Co., Inc."
+"Applied Materials, Inc.",company,US,north_america,,"printed: Applied Materials, Inc."
+EV Group,company,AT,europe,,printed: EV Group
+Deca Technologies Inc.,company,US,north_america,,printed: Deca Technologies Inc.
+nepes hayyim Corporation,company,PH,southeast_asia,,printed: nepes hayyim Corporation
+JOINT2,consortium,JP,east_asia,,printed: Consortium JOINT2 (Jisso Open Innovation Network of Tops 2)
+Resonac Corporation,company,JP,east_asia,,printed: Resonac Corporation
+"Murata Manufacturing Co., Ltd.",company,JP,east_asia,,"printed: Murata Manufacturing Co., Ltd."
+SCHMID Group,company,DE,europe,,printed: SCHMID Group
+"Taiyo Ink Mfg. Co., Ltd.",company,JP,east_asia,,"printed: Taiyo Ink MFG. Co., Ltd"
+A*STAR,government_lab,SG,southeast_asia,,"printed: A*STAR (Agency for Science, Technology and Research)"
+A*STAR Institute of Microelectronics,research_institute,SG,southeast_asia,A*STAR,"printed: Institute of Microelectronics, A*STAR"
+"Dai Nippon Printing Co., Ltd.",company,JP,east_asia,,"printed: Dai Nippon Printing Co., Ltd."
+SK hynix Inc.,company,KR,east_asia,,printed: SK hynix Inc.

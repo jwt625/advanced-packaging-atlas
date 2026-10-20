@@ -83,7 +83,7 @@ def validate(d: Path, base: Path | None = None) -> tuple[list[str], list[str]]:
     for table, ts in TABLES.items():
         hdr, rows = read(d, table)
         if not hdr:
-            if table == "papers" and not (d / "figures.csv").exists():
+            if table == "papers" and (d / "test_vehicles.csv").exists():
                 errs.append(f"{table}.csv missing")
             continue
         expected = list(ts["columns"])
@@ -214,6 +214,31 @@ def validate(d: Path, base: Path | None = None) -> tuple[list[str], list[str]]:
         for col, lim in (("caption", 30), ("shows", 25)):
             if len((r.get(col) or "").split()) > lim:
                 warns.append(f"figures: {fid} {col} > {lim} words")
+    # institutions (v2.3)
+    org_names = {r["org_name"] for r in data.get("organizations", [])}
+    if base is not None:
+        org_names |= {r["org_name"] for r in read(base, "organizations")[1]}
+    for r in data.get("organizations", []):
+        if r.get("parent_org") and r["parent_org"] not in org_names:
+            errs.append(f"organizations: {r['org_name']} parent_org '{r['parent_org']}' not an organization")
+    aff_seen: set[tuple[str, str, str]] = set()
+    for r in data.get("author_affiliations", []):
+        if org_names and r["org_name"] not in org_names:
+            errs.append(f"author_affiliations: {r['aff_id']} org_name '{r['org_name']}' not in organizations.csv")
+        if not re.fullmatch(r"[A-Z]{2}", r.get("country", "")):
+            errs.append(f"author_affiliations: {r['aff_id']} country '{r.get('country')}' not ISO alpha-2")
+        k = (r["paper_id"], r["author_index"], r["aff_order"])
+        if k in aff_seen:
+            errs.append(f"author_affiliations: {r['aff_id']} duplicate (paper, author_index, aff_order)")
+        aff_seen.add(k)
+    for r in data.get("org_sites", []):
+        if org_names and r["org_name"] not in org_names:
+            errs.append(f"org_sites: {r['site_id']} org_name '{r['org_name']}' not in organizations.csv")
+        has = bool(r.get("lat")) and bool(r.get("lon"))
+        if (r.get("precision") == "unresolved") == has:
+            errs.append(f"org_sites: {r['site_id']} coordinates must be empty iff precision unresolved")
+        if has and not (-90 <= float(r["lat"]) <= 90 and -180 <= float(r["lon"]) <= 180):
+            errs.append(f"org_sites: {r['site_id']} lat/lon out of range")
     # privacy
     for p in d.rglob("*"):
         if p.is_file() and p.suffix in (".csv", ".yaml", ".md"):

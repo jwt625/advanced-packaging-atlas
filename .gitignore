@@ -27,3 +27,6 @@ references/_inbox/*
 node_modules/
 app/build/
 app/.svelte-kit/
+
+# Geocoding raw response cache (DevLog-006; large, regenerable)
+data/_staging/geo_cache/

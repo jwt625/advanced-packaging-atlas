@@ -1,0 +1,23 @@
+org_name,org_type,country,region,parent_org,notes
+Showa Denko Materials,company,JP,east_asia,,"printed: Showa Denko Materials Co., Ltd."
+GlobalFoundries,foundry,US,north_america,,printed: Globalfoundries Inc.
+IBM,company,US,north_america,,printed: IBM; IBM T. J. Watson Research Center; IBM Research - Tokyo; IBM Research - Albany; IBM Research; IBM Systems; IBM Sysytems (sic)
+Georgia Institute of Technology,university,US,north_america,,printed: Georgia Institute of Technology; Georgia Intitute of Technology (sic)
+Taiwan Semiconductor Manufacturing Company,foundry,TW,east_asia,,"printed: Taiwan Semiconductor Manufacturing Company Ltd.; Taiwan Semiconductor Manufacturing Company, Ltd.; Taiwan Semiconductor Manufacturing Company; TSMC"
+Intel Corporation,company,US,north_america,,printed: Intel Corporation; Intel Corp.; Intel Coporation (sic)
+MediaTek,company,TW,east_asia,,printed: MediaTek Inc.
+"Agency for Science, Technology and Research",government_lab,SG,southeast_asia,,"printed: A*STAR (Agency for Science, Technology and Research); parent of IME"
+"Institute of Microelectronics, A*STAR",research_institute,SG,southeast_asia,"Agency for Science, Technology and Research","printed: Institute of Microelectronics, A*STAR (Agency for Science, Technology and Research)"
+Xilinx,company,US,north_america,,"printed: Xilinx, Inc."
+imec,research_institute,BE,europe,,"printed: imec; Imec, vzw"
+CEA,government_lab,FR,europe,,parent of CEA-Leti; not printed as a separate affiliation in this batch
+CEA-Leti,research_institute,FR,europe,CEA,"printed: CEA-Leti, Univ Grenoble Alpes"
+Pennsylvania State University,university,US,north_america,,printed: Pennsylvania State University
+Nepes,company,KR,east_asia,,"printed: Nepes (sites San Diego, CA, USA and Binan, Laguna, Philippines)"
+"University of California, Los Angeles",university,US,north_america,,printed: UCLA
+Dai Nippon Printing,company,JP,east_asia,,"printed: DNP Co., Ltd."
+Corning Incorporated,company,US,north_america,,printed: Corning Incorporated
+Absolics,company,US,north_america,,printed: Absolics Inc.
+Yield Engineering Systems,company,US,north_america,,printed: Yield Engineering Systems
+Samsung Electronics,company,KR,east_asia,,printed: Samsung Electronics Co. Ltd
+Applied Materials,company,US,north_america,,"printed: Applied Materials, Inc."
