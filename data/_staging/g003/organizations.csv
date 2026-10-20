@@ -1,1 +1,28 @@
 org_name,org_type,country,region,parent_org,notes
+Amkor Technology,company,US,north_america,,"OSAT; printed: Amkor Technology Korea, Inc."
+Sogang University,university,KR,east_asia,,printed: Sogang University
+nepes Corporation,company,KR,east_asia,,printed: nepes Corporation; nepes corporation; org inferred from nepes.co.kr email in ectc51906.2022.00136
+nepes hayyim,company,PH,southeast_asia,nepes Corporation,"printed: nepes hayyim (Binan, Philippines); parent not printed, verify at merge"
+nepes laweh,company,KR,east_asia,nepes Corporation,"printed: nepes laweh (Cheongan-myeon, Korea; nepes.co.kr email); parent not printed, verify at merge"
+Deca Technologies,company,US,north_america,,printed: Deca Technologies
+Intel Corporation,company,US,north_america,,printed: Intel Corporation; Intel Corp; Intel; Intel Foundry (as unit suffix)
+A*STAR,government_lab,SG,southeast_asia,,"Agency for Science, Technology and Research; parent of IME"
+A*STAR Institute of Microelectronics,research_institute,SG,southeast_asia,A*STAR,"printed: Institute of Microelectronics, Agency for Science, Technology and Research (A*STAR); Institute of Microelectronics (IME), Agency for Science, Technology, and Research (A*STAR)"
+GlobalFoundries,foundry,US,north_america,,printed: GlobalFoundries
+Qorvo,company,US,north_america,,printed: Qorvo
+Taiwan Semiconductor Manufacturing Company,foundry,TW,east_asia,,"printed: Taiwan Semiconductor Manufacturing Company; Taiwan Semiconductor Manufacturing Company, Ltd.; Taiwan Semiconductor Manufacturing Company, LTd."
+Research Foundation for the State University of New York,other,US,north_america,,printed: The Research Foundation for State University of New York
+SUNY Polytechnic Institute,university,US,north_america,,printed: State University of New York Polytechnic Institute; Stat University of New York Polytechnic Institute (sic)
+Analog Photonics,company,US,north_america,,printed: Analog Photonics
+Renesas Electronics Corporation,company,JP,east_asia,,printed: Renesas Electronics Corporation
+Marvell Technology,company,US,north_america,,"printed: Marvell Technology, Inc."
+JOINT2,consortium,JP,east_asia,,printed: Consortium JOINT2 (Jisso Open Innovation Network of Tops 2)
+Resonac Corporation,company,JP,east_asia,,printed: Resonac Corporation
+Georgia Institute of Technology,university,US,north_america,,printed: Georgia Institute of Technology
+Samsung Electronics,company,KR,east_asia,,"printed: Samsung Electronics Co, Ltd; Samsung Electronics Co., Ltd"
+MediaTek,company,TW,east_asia,,printed: MediaTek Inc
+National Institute of Advanced Industrial Science and Technology,government_lab,JP,east_asia,,printed: National Institute of Advanced Industrial Science and Technology (AIST)
+Korea Electronics Technology Institute,research_institute,KR,east_asia,,"printed: Korea Electronic Technology Institute, KETI"
+imec,research_institute,BE,europe,,printed: IMEC
+"MEC Co., Ltd.",company,JP,east_asia,,"printed: MEC Co., Ltd"
+IBM,company,US,north_america,,printed: IBM Research - Tokyo; IBM Research - Watson Research Center; IBM Infrastructure

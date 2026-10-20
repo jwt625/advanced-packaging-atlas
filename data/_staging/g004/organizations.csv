@@ -1,1 +1,40 @@
 org_name,org_type,country,region,parent_org,notes
+Samsung Electronics,company,KR,east_asia,,"printed: Samsung Electronics Co. Ltd.; Samsung Electronics Co., Ltd."
+USHIO Inc.,company,JP,east_asia,,printed: USHIO.Inc
+Corning Incorporated,company,US,north_america,,"printed: Corning Research & Development Corporation (kept as unit, per earlier batches)"
+LightSpeed Photonics Private Limited,company,SG,southeast_asia,,printed: LightSpeed Photonics Private Limited. (Singapore address); HQ country from printed address
+Intel Corporation,company,US,north_america,,printed: Intel Corporation
+Taiwan Semiconductor Manufacturing Company,foundry,TW,east_asia,,"printed: Taiwan Semiconductor Manufacturing Company; Taiwan Semiconductor Manufacturing Company, Ltd.; brand TSMC"
+STMicroelectronics,company,CH,europe,,printed: STMicroelectronics (Singapore address); HQ Geneva not printed
+Lightmatter,company,US,north_america,,printed: Lightmatter
+PHIX Photonics Assembly,company,NL,europe,,printed: PHIX Photonics Assembly
+Amkor Technology,company,US,north_america,,OSAT; printed: AMKOR
+The University of Tokyo,university,JP,east_asia,,printed: The University of Tokyo
+"Ajinomoto Fine-Techno Co., Inc.",company,JP,east_asia,,printed: Ajinomoto Fine-Techno Co. Inc.
+Spectronix Co.,company,JP,east_asia,,printed: Spectronix Co.
+Mitsubishi Electric Corporation,company,JP,east_asia,,printed: Mitsubishi Electric Co.
+National Institute of Advanced Industrial Science and Technology,government_lab,JP,east_asia,,printed: National Institute of Advanced Industrial Science and Technology (AIST)
+A*STAR,government_lab,SG,southeast_asia,,"Agency for Science, Technology and Research; printed: Agency for Science, Technology and Research (A*STAR)"
+A*STAR Institute of Microelectronics,research_institute,SG,southeast_asia,A*STAR,"printed: Institute of Microelectronics (IME), Agency for Science, Technology and Research (A*STAR)"
+Applied Materials,company,US,north_america,,printed: Applied Materials
+EV Group,company,AT,europe,,printed: EV Group
+JOINT2,consortium,JP,east_asia,,printed: Consortium JOINT2 (Jisso Open Innovation Network of Tops 2)
+Resonac Corporation,company,JP,east_asia,,printed: Resonac Corporation
+"Advanced Semiconductor Engineering, Inc.",company,TW,east_asia,,"OSAT; printed: Advanced Semiconductor Engineering, Inc.; ASE Technology"
+AOI Electronics,company,JP,east_asia,,printed: AOI Electronics
+Tokyo Institute of Technology,university,JP,east_asia,,printed: Tokyo Institute of Technology (2024 ECTC paper; predecessor of Institute of Science Tokyo)
+Institute of Science Tokyo,university,JP,east_asia,,printed: Institute of Science Tokyo
+Fraunhofer-Gesellschaft,research_institute,DE,europe,,parent row only
+Fraunhofer Institute for Reliability and Microintegration IZM,research_institute,DE,europe,Fraunhofer-Gesellschaft,printed: Fraunhofer-Institut fur Zuverlassigkeit und Mikrointegration (IZM)
+University of Applied Science Berlin,university,DE,europe,,printed: University of Applied Science Berlin (exact institution not named)
+Technische Universität Berlin,university,DE,europe,,printed: Technische Universität Berlin
+imec,research_institute,BE,europe,,printed: imec
+ASM International,company,NL,europe,,printed: ASM Belgium
+"Sumitomo Electric Industries, Ltd.",company,JP,east_asia,,"printed: Sumitomo Electric Industries, Ltd."
+FICT LIMITED,company,JP,east_asia,,printed: FICT LIMITED
+Georgia Institute of Technology,university,US,north_america,,printed: Georgia Institute of Technology
+Sony Semiconductor Solutions Corporation,company,JP,east_asia,,printed: Sony Semiconductor Solutions Corporation
+IBM,company,US,north_america,,printed units: IBM Research – Tokyo; IBM Infrastructure; IBM Research – Yorktown Heights; IBM Research – Albany; IBM Research – Watson Research Center
+"University of California, Los Angeles",university,US,north_america,,"printed: University of California, Los Angeles (UCLA)"
+Microsoft Corporation,company,US,north_america,,printed: Microsoft
+Corintis SA,company,CH,europe,,printed: Corintis SA
