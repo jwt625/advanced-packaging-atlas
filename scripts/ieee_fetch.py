@@ -1,16 +1,17 @@
 """Throttled IEEE Xplore full-text fetcher using a dedicated, persistent browser profile (institutional sign-in).
 
-Decisions (DevLog-001, 2026-10-18; revised 2026-10-18 in DevLog-003): one PDF every 60-120 s, at most 60 per
-rolling 2-hour window, priority 1 first; stop on any captcha / access warning / HTML-instead-of-PDF (breaker file
-logs/.ieee_blocked.json, manual reset). A challenge or throttled PDF request is retried twice, ~8-10 s apart,
-before the breaker is set. When the window is saturated the process sleeps until the oldest saved download ages
-out (run it in tmux). Each PDF is extracted right after download.
+Decisions (DevLog-001, 2026-10-18; revised 2026-10-18 and 2026-10-19 in DevLog-003): one PDF
+every 60-120 s, at most 60 per rolling 2-hour window, 30 per run, priority 1 first; stop on any captcha / access
+warning / HTML-instead-of-PDF (breaker file logs/.ieee_blocked.json, manual reset). A challenge or throttled PDF
+request is retried twice, ~8-10 s apart, before the breaker is set. When the window is saturated the process sleeps
+until the oldest saved download ages out (run it in tmux). Each PDF is extracted right after download.
 
 Usage:
   uv run python scripts/ieee_fetch.py --login        # opens a window; sign in (Institutional Sign In); waits for access
   uv run python scripts/ieee_fetch.py --run [--max N] [--cap N] [--window-hours H] [--dry-run]
 Profile: cache/browser_profile (git-ignored). PDFs: references/<paper_id>/source.pdf (local-only; institutional stamp).
-The default cap is 60 per rolling 2 hours; --cap and --window-hours override it for an explicit batch.
+The default batch is 30 papers per run (about 50 min, inside one login session); --max overrides it. The default cap
+is 60 per rolling 2 hours; --cap and --window-hours override it.
 """
 
 from __future__ import annotations
@@ -39,6 +40,7 @@ BREAKER = LOGS / ".ieee_blocked.json"
 BASE = "https://ieeexplore.ieee.org"
 CAP = 60
 CAP_WINDOW_H = 2.0
+BATCH_SIZE = 30
 CHALLENGE_RETRIES = 2
 CHALLENGE_WAIT_S = 8.0
 CHALLENGE_RE = re.compile(r"awsWafCookieDomainList|challenge-container|captcha", re.I)
@@ -311,7 +313,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--login", action="store_true")
     ap.add_argument("--run", action="store_true")
-    ap.add_argument("--max", type=int)
+    ap.add_argument("--max", type=int, default=BATCH_SIZE, help="max papers per run (default 30)")
     ap.add_argument("--cap", type=int, default=CAP, help="max PDFs per rolling window (default 60)")
     ap.add_argument("--window-hours", type=float, default=CAP_WINDOW_H,
                     help="rolling cap window in hours (default 2)")

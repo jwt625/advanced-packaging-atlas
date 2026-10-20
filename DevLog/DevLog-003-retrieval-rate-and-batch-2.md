@@ -76,9 +76,41 @@ roughly 60 per 2 hours instead.
   Priority 1 is complete (161/161); 19 priority-2 papers cached.
 - Remaining: 99 IEEE (63 p2, 36 p3) and 21 manual (120 records total).
 
+## 2026-10-19 20:11 batch size 30 and batch 4
+
+- Batch size changed from 60 to 30 papers per run (`BATCH_SIZE = 30`, `--max` default). 30 papers at
+  ~100 s each is ~50 min, which fits inside one institutional login session; 60-paper runs were
+  crossing the session lifetime and ending in WAF challenges.
+- The rolling cap is unchanged at 60 per 2 hours; `--cap` and `--window-hours` still override it.
+- Batch 4 starts with a fresh `--login`, then `--run --headed` (default 30). Target: 210 cached total;
+  all 30 are priority 2 (priority 1 is complete).
+- Started 20:11:44 in tmux `apa-ieee-7`; log `logs/ieee_run_20261019T201144.log`. Login returned
+  `institute: True`; first save `ectc51529.2024.00265` at 20:12:37.
+- Batch 4 completed 21:03:53: **209/300 cached**, 29 saved and 1 `not_pdf` out of 30 attempts; no breaker.
+- Failure: `ectc51846.2026.00153` (priority 2, panel) returned HTTP 502 with a 17.5 kB HTML body at
+  20:21:57. It stays uncached and will be retried in the next batch.
+- Remaining: 70 IEEE (34 p2, 36 p3) and 21 manual (91 records total).
+- At 21:04 `data/papers.csv` had 61 rows (concurrent extraction work); this caching run did not merge
+  the 209 cached PDFs.
+
+## 2026-10-19 21:18 batch 5
+
+- Target: next 30 IEEE papers (all priority 2), 240 cached total.
+- Started 21:18:21 in tmux `apa-ieee-8`; log `logs/ieee_run_20261019T211821.log`. Login returned
+  `institute: True`.
+- The first save at 21:18:59 was the batch-4 HTTP 502 failure `ectc51846.2026.00153`, now cached
+  (210 total). No breaker.
+- Batch 5 completed 22:05:47: **239/300 cached**, 30/30 saved, no breaker. Priority 2 is 78/82.
+- Remaining: 40 IEEE (4 p2, 36 p3) and 21 manual (61 records total).
+- At 22:06 `data/papers.csv` had 94 rows (concurrent extraction work).
+
 ## Progress
 
 - [x] Second batch of 60 PDFs complete (120 cached total)
 - [x] Third batch of 60 PDFs complete (180 cached total)
-- [ ] Reconcile `data/papers.csv` with cached PDFs (122 cached PDFs not yet merged)
+- [x] Batch 4 (30 attempts) complete (209 cached total; one HTTP 502)
+- [x] Retry `ectc51846.2026.00153` (HTTP 502) in the next batch (saved 21:18:59)
+- [x] Batch 5 (30 attempts) complete (239 cached total)
+- [ ] Batch 6: remaining 40 IEEE (4 p2, 36 p3)
+- [ ] Reconcile `data/papers.csv` with cached PDFs (209 cached vs 61 merged at 21:04)
 - [ ] Fetch the 21 manual IMAPS/IWLPC PDFs via `scripts/ingest_inbox.py`
