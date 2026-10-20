@@ -1,0 +1,85 @@
+org_name,locality,country,locality_query,locality_level,wikidata_search,nominatim_query,precision_override,label_override,override_note
+A*STAR Institute of Microelectronics,Singapore,SG,,,Institute of Microelectronics,"2 Fusionopolis Way, Singapore 138634",,,
+CEA-Leti,Grenoble,FR,,,,,,CEA Grenoble campus (Wikidata item without English label),
+Sony Semiconductor Solutions,Kanagawa,JP,,region,,,,,printed region only; facility query removed (audit 2026-10-20 D2)
+Samsung Electronics,Cheonan-si,KR,,,,삼성전자 천안캠퍼스,,,
+ASE,Kaohsiung City,TW,Kaohsiung,,,,,,printed locality 'Kaohsiung City' geocoded as 'Kaohsiung'
+IBM,"Yorktown Heights, NY",US,,,Thomas J. Watson Research Center,"Thomas J. Watson Research Center, Yorktown Heights",,,
+nepes,Cheongju,KR,,,,"Gwahaksaneop 3-ro, Ochang-eup, Cheongju",,,
+Samsung Electronics,"Chonan-Si, Chungcheongnam-do",KR,,,,삼성전자 천안캠퍼스,,,
+GlobalFoundries,"Hopewell Junction, NY",US,,,,"GlobalFoundries, East Fishkill",,,
+"Institute of Microelectronics, Chinese Academy of Sciences",Beijing,CN,,,Institute of Microelectronics of the Chinese Academy of Sciences,中国科学院微电子研究所,,,
+Ajinomoto Fine-Techno,Kanagawa,JP,,region,,,,,
+Samsung Electronics,Chonan-Si,KR,,,,삼성전자 천안캠퍼스,,,
+SK hynix,Ichon-si,KR,Icheon,,,,,,printed locality 'Ichon-si' geocoded as 'Icheon'
+SPIL,Taichung,TW,,,,"矽品精密工業, 潭子區, 臺中市",,,
+Tokyo Institute of Technology,Kanagawa,JP,,region,,,,,printed region only; facility query removed (audit 2026-10-20 D2)
+Sumitomo Electric Industries,Kanagawa,JP,,region,,,,,printed region only; facility query removed (audit 2026-10-20 D2)
+IBM,"Albany, NY",US,,,,"Albany NanoTech Complex, Fuller Road, Albany",,,
+SCHMID Group,Freudenstadt,DE,,,,"Gebr. Schmid, Freudenstadt",,,
+USHIO,Gotenba,JP,,,,ウシオ電機 御殿場事業所,,,
+Deca Technologies,"Tempe, AZ",US,,,,"7855 River Parkway, Tempe, AZ 85284",,,
+Samsung Electronics,"Cheonan-si, Chungcheongnam-Do",KR,,,,삼성전자 천안캠퍼스,,,
+Pennsylvania State University,University Park,US,"University Park, PA",,,,,,"printed locality 'University Park' geocoded as 'University Park, PA'"
+Intel,"Santa Clara, CA",US,,,,"Robert Noyce Building, Santa Clara",,,
+IBM,Albany,US,,,,"Albany NanoTech Complex, Fuller Road, Albany",,,
+ASE,Austin,US,,,,"Austin, Texas",,,
+Celestial AI,Santa Clara,US,,,,"Santa Clara, Santa Clara County, California",,,
+Mitsubishi Electric,Hyogo,JP,,region,,,,,
+Shinko Electric Industries,Nagano,JP,,region,,,,,printed region only; facility query removed (audit 2026-10-20 D2)
+Taiyo Ink Mfg.,Saitama,JP,,region,,,,,
+Research Foundation for the State University of New York,"Albany, NY",US,,,,"Albany NanoTech Complex, Fuller Road, Albany",,,
+LightSpeed Photonics,Singapore,SG,,,,"111 Somerset Road, Singapore 238164",,,
+ULVAC,Kanagawa,JP,,region,,"アルバック, 茅ヶ崎市",,,facility query kept: printed postcode 253-8543
+Mitsubishi Materials,Hyogo-ken,JP,,region,,,,,
+Mitsubishi Electric,Kanagawa,JP,,region,,,,,
+Dai Nippon Printing,Chiba,JP,,region,,,,,
+Resonac,Ibaraki,JP,,region,,,,,
+SK hynix,Seoul-si,KR,Seoul,,,,,,printed locality 'Seoul-si' geocoded as 'Seoul'
+STMicroelectronics,Singapore,SG,,,,"629 Lorong 4/6 Toa Payoh, Singapore 319521",,,
+Fraunhofer IZM,Dresden,DE,,,,"Fraunhofer IZM-ASSID, Moritzburg",,,
+Peking University,Beijing,CN,,,,"北京大学软件与微电子学院, 大兴区",,,
+nepes,San Diego,US,,,,"9808 Scranton Road, San Diego, CA 92121",,,
+nepes,Chungcheongbuk-do,KR,,region,,,,,
+AOI Electronics,Kagawa,JP,,region,,,,,
+The University of Tokyo,Chiba,JP,,region,,,,,printed region only; facility query removed (audit 2026-10-20 D2)
+CNRS,Sherbrooke,CA,,,Université de Sherbrooke,,,,
+Sony Semiconductor Manufacturing,Kumamoto,JP,,,,"Kumamoto Technology Center, Kikuyo",,,
+Gigaphoton,Tochigi,JP,,region,,,,,printed region only; facility query removed (audit 2026-10-20 D2)
+Microsoft,"Redmond, WA",US,,,Microsoft Redmond campus,"Microsoft Campus, Redmond",,,
+ASM International,Leuven,BE,,,,"Kapeldreef 75, Leuven",,,
+National Taiwan University,Taipei City,TW,Taipei,,,,,,printed locality 'Taipei City' geocoded as 'Taipei'
+nepes hayyim,Laguna,PH,,region,,,,,printed region only; facility query removed (audit 2026-10-20 D2)
+IBM,"Yorktown Heights / Albany, NY",US,"Yorktown Heights, NY",,Thomas J. Watson Research Center,"Thomas J. Watson Research Center, Yorktown Heights",,,"printed 'Yorktown Heights / Albany, NY' (two cities); unit IBM T. J. Watson Research Center -> Yorktown Heights"
+nepes hayyim,Binan,PH,,,,"Laguna Technopark, Binan, Laguna",,,
+STMicroelectronics,Agrate,IT,Agrate Brianza,,,"STMicroelectronics, Agrate Brianza",,,printed locality 'Agrate' geocoded as 'Agrate Brianza'
+Beijing National Research Center for Information Science and Technology,Beijing,CN,,,Tsinghua University,,,,
+Deca Technologies,Tempe,US,,,,"7855 River Parkway, Tempe, AZ 85284",,,
+FICT,Nagano,JP,,region,,,,,
+A*STAR Institute of Materials Research and Engineering,Singapore,SG,,,,"Innovis, Fusionopolis Way, Singapore",,,
+Resonac,Kanagawa,JP,,region,,,,,
+Resonac,Chiba,JP,,region,,,,,
+Microsoft,"Mountain View, CA",US,,,,"Microsoft Silicon Valley Campus, Mountain View",,,
+Lightmatter,Arizona,US,,region,,,,,
+Showa Denko Materials,"Chikusei, Ibaraki",JP,,,,"下館事業所, 筑西市",,,
+Korea Advanced Institute of Science and Technology,Daejeon-si,KR,Daejeon,,,,,,printed locality 'Daejeon-si' geocoded as 'Daejeon'
+IBM,NY,US,,region,,,,,printed region only; facility query removed (audit 2026-10-20 D2)
+IBM,Yorktown Heights,US,,,Thomas J. Watson Research Center,"Thomas J. Watson Research Center, Yorktown Heights",,,
+Applied Materials,Taichung City,TW,Taichung,,,,,,printed locality 'Taichung City' geocoded as 'Taichung'
+Brewer Science,"Rolla, MO",US,,,,"2401 Brewer Drive, Rolla, MO 65401",,,
+SUSS MicroTec Lithography,Sternenfels,DE,,,,"Ferdinand-von-Steinbeis-Ring 10, 75447 Sternenfels",,,
+JOINT2,Shimodate,JP,"Chikusei, Ibaraki",,,"下館事業所, 筑西市",,,"printed locality 'Shimodate' geocoded as 'Chikusei, Ibaraki'"
+Resonac,Shimodate,JP,"Chikusei, Ibaraki",,,"下館事業所, 筑西市",,,"printed locality 'Shimodate' geocoded as 'Chikusei, Ibaraki'"
+Resonac,"Chikusei, Ibaraki",JP,,,,"下館事業所, 筑西市",,,
+Intel,Santa Clara,US,,,,"Robert Noyce Building, Santa Clara",,,
+Institute of Science Tokyo,Kanagawa,JP,,region,,,,,printed region only; facility query removed (audit 2026-10-20 D2)
+Institute of Science Tokyo,Yokohama,JP,,,,"Suzukakedai Campus, Yokohama",,,
+IBM,"Yorktown, NY",US,,,Thomas J. Watson Research Center,"Thomas J. Watson Research Center, Yorktown Heights",,,
+Amkor Technology,Arizona,US,,region,,,,,
+GlobalFoundries,"Burlington, VT",US,,,,"GlobalFoundries Fab 9, Essex Junction",,,
+GlobalFoundries,"Santa Clara, CA",US,,,,"Santa Clara, Santa Clara County, California",,,
+ULVAC,Chiba,JP,,region,,,,,
+Shanghai Aircraft Design and Research Institute,Shanghai,CN,,,,上海飞机设计研究院,,,
+Apple,"Cupertino, CA",US,,,,"Apple Park, Cupertino",,,
+JSR,Yokkaichi,JP,,,,JSR 四日市工場,,,
+KLA,Newport,GB,,,,"SPTS Technologies, Newport",,,

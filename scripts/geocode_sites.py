@@ -16,9 +16,16 @@ Usage:
   uv run python scripts/geocode_sites.py SITES_CSV OUT_CSV [--limit N] [--dry-run]
 SITES_CSV columns: org_name, locality, country (ISO alpha-2); optional wikidata_search and nominatim_query
 override the search strings for a refinement pass (e.g. "EPFL" instead of a long official name).
+Refinement rules (DevLog-006, after the 2026-10-20 site review): locality suffixes (City, -si, -shi, -ken) are
+stripped for the lookup only; a county/state hit for a city locality is rejected (US: structured city/state retry);
+optional locality_query (disambiguation of the printed locality) and locality_level=region (printed prefecture /
+state / province -> precision region, 300 km tolerance); an empty locality without overrides is unresolved; an
+override hit is accepted only if its OSM label names the queried facility; precision_override, label_override and
+override_note are applied after geocoding.
 """
 
 import argparse
+import re
 import csv
 import datetime as dt
 import json
@@ -181,42 +188,130 @@ def wikidata_site(org: str, country: str, dry: bool, near: tuple[float, float] |
     return [c for c in out if c["country"] in ok or (c["country"] is None and near is not None)]
 
 
-def geocode(org: str, locality: str, country: str, dry: bool, wd_q: str = "", nm_q: str = "") -> dict[str, Any]:
-    city = None
-    if locality:
-        r = nominatim(city_query(locality, country), dry, countrycodes=ccodes(country), featureType="settlement")
-        if r:
-            city = (float(r[0]["lat"]), float(r[0]["lon"]))
+GENERIC = {"university", "institute", "research", "center", "centre", "company", "corporation", "campus", "technology",
+           "laboratory", "laboratories", "inc", "ltd", "co", "the", "of", "and", "national", "science"}
+BAD_SETTLEMENT = {"county", "state", "province", "region", "state_district", "country"}
+REGION_KM = 300.0
+
+
+def label_matches(query: str, label: str) -> bool:
+    """Accept an override hit only if its OSM label names the queried facility (review rule, DevLog-006)."""
+    head = query.split(",")[0].strip()
+    if any(ord(ch) > 127 for ch in head):
+        toks = [t for t in re.split(r"[\s\u3000]+", head) if t]
+        return any(t in label for t in toks)
+    toks = [t for t in re.findall(r"[a-z0-9]+", head.lower()) if len(t) >= 3]
+    key = [t for t in toks if t not in GENERIC] or toks
+    return any(t in label.lower() for t in key)
+
+
+def strip_suffix(locality: str) -> str:
+    """'Kaohsiung City' -> 'Kaohsiung', 'Seoul-si' -> 'Seoul', 'Hyogo-ken' -> 'Hyogo' (query only; data keeps print)."""
+    parts = [re.sub(r"(\s+City|-si|-shi|-ken)$", "", x.strip(), flags=re.I) for x in locality.split(",")]
+    return ", ".join(parts)
+
+
+def locate(locality: str, country: str, level: str, dry: bool) -> tuple[tuple[float, float] | None, str]:
+    """Centre of the printed locality: (point, 'city' | 'region').
+
+    A county/state hit for a city-type locality is not used as a city; the lookup retries as city, US structured
+    city/state, then free text. If only a county/state-level match exists (printed "Hsinchu County", province-level
+    municipalities such as Shanghai), it is kept as the locality at precision region (300 km tolerance).
+    """
+    q = city_query(strip_suffix(locality), country)
+    cc = ccodes(country)
+    pt = lambda r: (float(r[0]["lat"]), float(r[0]["lon"]))  # noqa: E731
+    if level == "region":
+        q = ", ".join(dict.fromkeys(x.strip() for x in q.split(",") if x.strip()))  # "Oregon, Oregon" -> "Oregon"
+        r = nominatim(q, dry, countrycodes=cc, featureType="state")
+        return (pt(r), "region") if r else (None, "region")
+    held = None
+    tries = [lambda: nominatim(q, dry, countrycodes=cc, featureType="settlement"),
+             lambda: nominatim(q, dry, countrycodes=cc, featureType="city")]
+    if country == "US" and "," in q:
+        city, state = [x.strip() for x in q.split(",", 1)]
+        tries.append(lambda: get("https://nominatim.openstreetmap.org/search?" + urllib.parse.urlencode(
+            {"city": city, "state": state, "countrycodes": "us", "format": "jsonv2", "limit": "1"}), dry))
+    tries.append(lambda: nominatim(q, dry, countrycodes=cc))
+    for t in tries:
+        r = t()
+        if not r:
+            continue
+        if r[0].get("addresstype") in BAD_SETTLEMENT:
+            held = held or r
+            continue
+        return pt(r), "city"
+    return (pt(held), "region") if held else (None, "city")
+
+
+JP_PREFECTURES = {
+    "hokkaido", "aomori", "iwate", "miyagi", "akita", "yamagata", "fukushima", "ibaraki", "tochigi", "gunma", "saitama",
+    "chiba", "kanagawa", "niigata", "toyama", "ishikawa", "fukui", "yamanashi", "nagano", "gifu", "shizuoka", "aichi",
+    "mie", "shiga", "hyogo", "nara", "wakayama", "tottori", "shimane", "okayama", "hiroshima", "yamaguchi", "tokushima",
+    "kagawa", "ehime", "kochi", "saga", "nagasaki", "kumamoto", "oita", "miyazaki", "kagoshima", "okinawa",
+}  # prefectures whose name is not also a major printed city (Tokyo, Osaka, Kyoto, Fukuoka, ... excluded)
+
+
+def is_region_only(locality: str, country: str) -> bool:
+    """Printed locality is only a state / prefecture ("Arizona", "NY", "Oregon, OR", "Kanagawa", "Hyogo-ken")."""
+    parts = [strip_suffix(x).strip().lower() for x in locality.split(",") if x.strip()]
+    if not parts:
+        return False
+    if country == "US":
+        states = ({k.lower() for k in US_STATES} | {v.lower() for v in US_STATES.values()}) - {"dc", "district of columbia"}
+        return all(x in states for x in parts)
+    if country == "JP":
+        return all(x in JP_PREFECTURES for x in parts)
+    return False
+
+
+def geocode(org: str, locality: str, country: str, dry: bool, wd_q: str = "", nm_q: str = "",
+            loc_q: str = "", level: str = "") -> dict[str, Any]:
+    if not level and not loc_q and is_region_only(locality, country):
+        level = "region"
+    unresolved = {"lat": "", "lon": "", "precision": "unresolved", "source": "none", "source_ref": "", "source_label": ""}
+    q_loc = loc_q or locality
+    if not q_loc and not (wd_q or nm_q):
+        return {**unresolved, "notes": "no locality printed"}
+    city, kind = locate(q_loc, country, level, dry) if q_loc else (None, "city")
+    if kind == "region" and city and not (wd_q or nm_q):
+        # printed region only: no facility search inside it (printed-data rule, affiliations audit 2026-10-20 D2)
+        return {"lat": round(city[0], 5), "lon": round(city[1], 5), "precision": "region", "source": "nominatim",
+                "source_ref": "", "source_label": f"region centre: {q_loc}", "notes": "printed region only"}
+    max_km = REGION_KM if kind == "region" else MAX_KM
     # an explicit Nominatim override without a Wikidata override skips the name-based Wikidata search
     for c in ([] if (nm_q and not wd_q) else wikidata_site(wd_q or org, country, dry, city)):
         d = km(city, (c["lat"], c["lon"])) if city else None
-        if d is None or d <= MAX_KM:
+        if d is not None and d <= max_km:
             return {
                 "lat": round(c["lat"], 5), "lon": round(c["lon"], 5), "precision": "campus", "source": "wikidata",
                 "source_ref": c["qid"], "source_label": f"{c['label']} ({c['desc']})"[:160],
-                "notes": f"{d:.1f} km from locality centre" if d is not None else "no locality to check",
+                "notes": f"{d:.1f} km from {kind} centre",
             }
-    r = nominatim(nm_q or ", ".join(x for x in (org, locality) if x), dry, countrycodes=ccodes(country))
+    r = nominatim(nm_q or ", ".join(x for x in (org, strip_suffix(q_loc)) if x), dry, countrycodes=ccodes(country))
+    if r and nm_q and not label_matches(nm_q, r[0].get("display_name", "")):
+        r = None
     if r:
         p = (float(r[0]["lat"]), float(r[0]["lon"]))
         d = km(city, p) if city else None
-        if d is None or d <= (MAX_KM_OVERRIDE if nm_q else MAX_KM):
+        tol = max(MAX_KM_OVERRIDE if nm_q else MAX_KM, max_km)
+        if d is not None and d <= tol:
             return {
                 "lat": round(p[0], 5), "lon": round(p[1], 5), "precision": precision_of(r[0]),
                 "source": "nominatim", "source_ref": f"osm:{r[0].get('osm_type')}/{r[0].get('osm_id')}",
                 "source_label": r[0].get("display_name", "")[:160],
-                "notes": f"{d:.1f} km from locality centre" if d is not None else "no locality to check",
+                "notes": f"{d:.1f} km from {kind} centre",
             }
     if city:
         return {
-            "lat": round(city[0], 5), "lon": round(city[1], 5), "precision": "city", "source": "nominatim",
-            "source_ref": "", "source_label": f"locality centre: {locality}", "notes": "institution not resolved; locality centre",
+            "lat": round(city[0], 5), "lon": round(city[1], 5), "precision": kind, "source": "nominatim",
+            "source_ref": "", "source_label": f"{kind} centre: {q_loc}",
+            "notes": f"institution not resolved; printed {kind} centre",
         }
-    return {"lat": "", "lon": "", "precision": "unresolved", "source": "none", "source_ref": "", "source_label": "", "notes": "unresolved"}
+    return {**unresolved, "notes": "unresolved"}
 
 
 def site_id(org: str, locality: str) -> str:
-    import re
     return re.sub(r"[^a-z0-9]+", "-", f"{org} {locality}".lower()).strip("-")[:80]
 
 
@@ -238,7 +333,14 @@ def main() -> int:
     rows = []
     try:
         for i, s in enumerate(sites, 1):
-            r = geocode(s["org_name"], s["locality"], s["country"], a.dry_run, s.get("wikidata_search", "") or "", s.get("nominatim_query", "") or "")
+            r = geocode(s["org_name"], s["locality"], s["country"], a.dry_run, s.get("wikidata_search", "") or "",
+                        s.get("nominatim_query", "") or "", s.get("locality_query", "") or "", s.get("locality_level", "") or "")
+            if s.get("precision_override"):
+                r["precision"] = s["precision_override"]
+            if s.get("label_override"):
+                r["source_label"] = s["label_override"]
+            if s.get("override_note"):
+                r["notes"] = "; ".join(x for x in (r["notes"], s["override_note"]) if x)
             rows.append({"site_id": site_id(s["org_name"], s["locality"]), **{k: s[k] for k in ("org_name", "locality", "country")},
                          **r, "verified_on": dt.date.today().isoformat()})
             line = f"[{i}/{len(sites)}] {s['org_name']} | {s['locality']} -> {r['source']} {r['source_ref']} {r['precision']} {r['notes']}"
