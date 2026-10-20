@@ -16,6 +16,9 @@
 	/** lump nearby sites into zoom-dependent clusters; off = one point per site location (exactly co-located sites still share one) */
 	let lump = $state(false);
 	let mapW = $state(800);
+	/** panel fills the viewport below the header (36 px), footer (20 px) and main padding (16 px), 480-960 px */
+	let winH = $state(1000);
+	const panelH = $derived(Math.round(Math.min(960, Math.max(480, winH - 72))));
 
 	const th = $derived(plotTheme(ui.theme));
 	const a = $derived(store.atlas);
@@ -363,12 +366,14 @@
 	const legend = $derived(GROUP_ORDER.filter((g) => pins.some((q) => q.group === g)));
 </script>
 
+<svelte:window bind:innerHeight={winH} />
+
 <Frame
 	letter="j"
 	desc="Institutions at author level: one pin per author and printed affiliation (or per paper and institution site), placed at the institution site (Wikidata or OpenStreetMap coordinates; precision building, campus, city centre, or printed region only). Sites with no printed city or region are not placed. Default: one point per site location (sites with identical coordinates share a point), 5 to 11 px by log count, coloured by primary bucket, a pie by distinct papers per bucket where a location has several. Lump: nearby sites cluster within 36 px at the current zoom and split when zoomed in; label = distinct authors per paper (authors) or distinct papers (papers); an author with two affiliations counts once in the label and twice as affiliations. Scroll to zoom, drag to pan, double-click to reset. Outlines refine from 1:110m to 1:50m with state/province borders at zoom 3; country and city labels by Natural Earth label zoom; roads from zoom 4.5 (major), 5.5 and 6.5 (Natural Earth 1:10m; no city streets). No external tiles."
 	badge={unit === 'authors' ? `${nAuthors} authors, ${pins.length} affiliations, ${nPapersLocated}/${view.papers.length} papers` : `${pins.length} paper-site pairs, ${nPapersLocated}/${view.papers.length} papers`}
 	badgeTip="pins in the current filter; papers with at least one located affiliation / papers in the filter"
-	height={480}
+	height={panelH}
 >
 	{#snippet controls()}
 		<span class="seg" title="Bubble grouping">
