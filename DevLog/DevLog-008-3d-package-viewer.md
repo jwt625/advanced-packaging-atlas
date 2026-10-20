@@ -512,3 +512,25 @@ All additive; no key renamed or removed. `package3d.json` regenerated (12 famili
   - Checks: `pnpm check` 0/0. Headless CoWoS-L in default / X-ray all (iso, front) / X-ray off: 0 console errors.
     All-on shows dies, LSIs, TIVs and C4 through the lid/mold/substrate, with translucent cut faces; off restores
     the defaults.
+
+## SOTA CoWoS / EMIB models and compare default (Wentao, 2026-10-20 11:40)
+
+Request:
+1. The 3D tab opens on the compare view with two CoWoS and two EMIB families.
+2. Iterate the CoWoS and EMIB models toward state-of-the-art complexity (die count, HBM count, interposer/bridge
+   size and count).
+
+Decisions (coordinator):
+- Compare default: cowos_s, cowos_l, emib, emib_t (the HBM-class CoWoS platforms; CoWoS-R stays in the list). A
+  `#f=<family>` hash still opens single view.
+- Product-level topology (die/HBM count, layout, interposer and bridge count/size, substrate size) comes from public
+  primary sources (company disclosures, conference papers in or outside the DB), researched first and written to
+  `config/package3d/RESEARCH_SOTA_{COWOS,EMIB}.md` with URLs and retrieval dates. Such values are `template` dims
+  with `source`; DB values stay `reported`; nothing from memory.
+
+Plan:
+- [ ] Research agents (web): CoWoS-S/L and EMIB/EMIB-T SOTA configurations.
+- [x] Compare default in `app/src/routes/3d/+page.svelte` (2026-10-20 11:50; pnpm check 0/0; headless render ok, 0 console errors).
+- [ ] Template agents: cowos_s + cowos_l, emib + emib_t (generator frozen unless a feature is required).
+- [ ] Regenerate package3d.json (`--check`), render the compare view, coordinator check.
+- [ ] Fresh-context audit of the 4 templates (provenance + topology), fixes.

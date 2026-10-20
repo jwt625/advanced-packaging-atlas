@@ -12,6 +12,7 @@
 	import type { Inset } from '../../lib/three/types';
 
 	type Mode = 'single' | 'compare' | 'gallery';
+	const COMPARE_DEFAULT = ['cowos_s', 'cowos_l', 'emib', 'emib_t'];
 
 	let loaded = $state<Loaded | null>(null);
 	let mode = $state<Mode>('single');
@@ -100,8 +101,12 @@
 			loaded = l;
 			const h = new URLSearchParams(location.hash.slice(1));
 			const f = h.get('f');
-			famId = f && l.data.families.some((x) => x.id === f) ? f : l.data.families[0]?.id ?? '';
-			cmp = l.data.families.slice(0, Math.min(3, l.data.families.length)).map((x) => x.id);
+			const hasF = !!f && l.data.families.some((x) => x.id === f);
+			famId = hasF ? f! : l.data.families[0]?.id ?? '';
+			const def = COMPARE_DEFAULT.filter((id) => l.data.families.some((x) => x.id === id));
+			cmp = def.length >= 2 ? def : l.data.families.slice(0, Math.min(3, l.data.families.length)).map((x) => x.id);
+			// default landing: compare (two CoWoS, two EMIB); a #f=<family> link opens that family in single view
+			if (!hasF) mode = 'compare';
 		});
 	});
 
