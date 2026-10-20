@@ -3,7 +3,7 @@
 	import { Viewer, type Overlay, type Stats } from './viewer';
 	import type { ViewState } from './build';
 	import type { Item, Picked } from './model';
-	import type { Callout, Family, Ref } from './types';
+	import type { Callout, Dim, Family, Ref } from './types';
 	import { dimRefs, doiUrl, fieldLabel, fieldUnit, fmtNum, STATUS_TIP } from './data';
 	import { ui } from '../state.svelte';
 
@@ -79,7 +79,7 @@
 	$effect(() => {
 		const v = viewer;
 		if (!v) return;
-		const s: ViewState = { illustrative: vs.illustrative, section: vs.section, axis: vs.axis, cut: vs.cut, explode: vs.explode, xray: [...vs.xray], selected: v.state.selected };
+		const s: ViewState = { illustrative: vs.illustrative, section: vs.section, axis: vs.axis, cut: vs.cut, explode: vs.explode, xray: [...vs.xray], selected: v.state.selected, routing: vs.routing, xrayCap: vs.xrayCap ? [...vs.xrayCap] : undefined };
 		v.setState(s);
 	});
 
@@ -105,12 +105,32 @@
 	const FIELDS: Record<string, string[]> = {
 		part: ['w_mm', 'd_mm', 'h_um', 'x_mm', 'y_mm', 'z_um'],
 		layer: ['h_um', 'z_um', 'line_um', 'space_um'],
-		array: ['pitch_um', 'diameter_um', 'height_um', 'region']
+		array: ['pitch_um', 'diameter_um', 'height_um', 'region', 'pad_um', 'opening_um'],
+		via: ['diameter_um', 'bottom_diameter_um', 'land_um', 'pitch_um', 'h_um', 'wall_um', 'liner_um', 'z_um'],
+		net: ['share', 'length_um']
 	};
+	const ROUTE_FIELDS = ['line_um', 'space_um', 'fill'];
 	function rowsOf(it: Item): Row[] {
 		const src = it.src as unknown as Record<string, unknown>;
+		const out = rowsFrom(src, FIELDS[it.type], it.dims);
+		const route = src.route as { dims?: Record<string, Dim> } | undefined;
+		if (it.type === 'layer' && route) for (const r of rowsFrom(route as Record<string, unknown>, ROUTE_FIELDS, route.dims ?? {})) out.push({ ...r, field: `route ${r.field}` });
+		return out;
+	}
+	/** Routing summary line of a routed level / via / net (use, direction, endpoints). */
+	function routeLine(it: Item): string {
+		const src = it.src as unknown as Record<string, unknown>;
+		if (it.type === 'layer' && src.route) {
+			const r = src.route as Record<string, unknown>;
+			return [`routed ${r.use ?? ''}`, r.dir ? `dir ${r.dir}` : '', r.matrix ? `in ${r.matrix}` : ''].filter(Boolean).join(' · ');
+		}
+		if (it.type === 'via') return [String(src.kind ?? ''), String(src.fill ?? 'filled'), src.through ? `through ${src.through}` : '', `${src.upper ?? 'face'} -> ${src.lower ?? 'face'}`].filter(Boolean).join(' · ');
+		if (it.type === 'net') return [String(src.kind ?? ''), src.style ? String(src.style) : '', `${src.from ?? ''}${src.to ? ` -> ${src.to}` : ''}`, src.plane ? `plane ${src.plane}` : '', Array.isArray(src.jog) && src.jog.length ? `jog ${src.jog.join(', ')}` : '', Array.isArray(src.levels) && src.levels.length ? `levels ${src.levels.join(', ')}` : ''].filter(Boolean).join(' · ');
+		return '';
+	}
+	function rowsFrom(src: Record<string, unknown>, fields: string[], dims: Record<string, Dim>): Row[] {
 		const out: Row[] = [];
-		for (const f of FIELDS[it.type]) {
+		for (const f of fields) {
 			const raw = src[f];
 			if (raw == null) continue;
 			let value: string;
@@ -119,7 +139,7 @@
 				value = `${fmtNum(r.w_mm)} x ${fmtNum(r.d_mm)} mm`;
 			} else if (typeof raw === 'number') value = `${fmtNum(raw)} ${fieldUnit(f)}`;
 			else continue;
-			const d = it.dims[f];
+			const d = dims[f];
 			const ids = dimRefs(d);
 			const tip = [d ? STATUS_TIP[d.status] : 'no status (treated as template)', d?.formula ? `formula: ${d.formula}` : '', d?.note ?? ''].filter(Boolean).join('\n');
 			out.push({ field: fieldLabel(f), value, status: d?.status ?? 'template', tip, refIds: ids, note: d?.note ?? '' });
@@ -224,6 +244,8 @@
 	<div class="badges">
 		{#if fixture}
 			<span class="badge warn" data-tip="package3d.json not found: an invented fixture family is shown. Every dimension is template.">FIXTURE</span>
+		{:else if families.some((f) => f.fixture)}
+			<span class="badge warn" data-tip="Development fixture family (?fixture=routing): hand-written routing; numbers marked fixture are not from the database.">FIXTURE</span>
 		{/if}
 		{#if vs.illustrative}
 			<span class="badge" data-tip="Illustrative scale: lateral (x, y) true; z mapped piecewise so every layer is visible. The ruler shows true z.">z not to scale</span>
@@ -248,6 +270,9 @@
 					<svg viewBox="0 0 12 12" width="10" height="10"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.4" /></svg>
 				</button>
 			</div>
+			{#if routeLine(it)}<div class="co mono small">{routeLine(it)}</div>{/if}
+			{#if it.routeNote}<div class="co muted" data-tip="Routing is synthesized by the viewer from the routing specs; only the listed dimensions carry provenance">mock-up layout: {it.routeNote}</div>{/if}
+			{#if it.lod}<div class="co muted">{it.lod}</div>{/if}
 			{#each calloutsOf(it) as c, ci (ci)}
 				<div class="co">
 					<div>{c.text}</div>
@@ -319,13 +344,14 @@
 	.grow { flex: 1; }
 	.x { width: 20px; height: 20px; padding: 0; display: inline-flex; align-items: center; justify-content: center; background: transparent; border-color: transparent; flex: none; }
 	.co { border-top: 1px solid var(--grid); padding: 2px 0; }
+	.co.small { font-size: 10px; color: var(--ink-2); }
 	.co .ref { padding-left: 0; }
-	.row { display: grid; grid-template-columns: 58px 1fr auto; gap: 6px; align-items: center; border-top: 1px solid var(--grid); padding-top: 2px; margin-top: 2px; }
+	.row { display: grid; grid-template-columns: 72px 1fr auto; gap: 6px; align-items: center; border-top: 1px solid var(--grid); padding-top: 2px; margin-top: 2px; }
 	.f { color: var(--ink-3); }
 	.st { font-size: 10px; padding: 0 4px; border: 1px solid var(--line); }
 	.st.reported { color: var(--good); border-color: var(--good); }
 	.st.derived { color: var(--accent); border-color: var(--accent); }
 	.st.template { color: var(--ink-3); border-style: dashed; }
-	.ref { padding-left: 64px; font-size: 10px; display: flex; gap: 6px; overflow: hidden; white-space: nowrap; }
+	.ref { padding-left: 78px; font-size: 10px; display: flex; gap: 6px; overflow: hidden; white-space: nowrap; }
 	.ref .muted { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 </style>

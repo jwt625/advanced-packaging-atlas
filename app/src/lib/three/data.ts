@@ -26,6 +26,11 @@ export function loadPackage3d(): Promise<Loaded> {
 			if (d.version !== 1) throw new Error(`package3d.json: unsupported version ${String(d.version)} (viewer expects 1)`);
 			if (!Array.isArray(d.families) || !d.families.length) throw new Error('package3d.json: no families');
 			d.refs ??= {};
+			// DEV only: `?fixture=routing` prepends the hand-written routing fixture families (DevLog-011).
+			if (import.meta.env.DEV && typeof location !== 'undefined' && new URLSearchParams(location.search).get('fixture') === 'routing') {
+				const { addRoutingFixture } = await import('./fixture_routing');
+				addRoutingFixture(d);
+			}
 			for (const f of d.families) {
 				f.layers ??= [];
 				f.arrays ??= [];

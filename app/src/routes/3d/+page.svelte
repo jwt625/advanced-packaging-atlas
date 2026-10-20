@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import Viewer3D from '../../lib/three/Viewer3D.svelte';
 	import { doiUrl, familyRefs, fmtNum, loadPackage3d, type Loaded } from '../../lib/three/data';
 	import { materialClass, CLASS_COLOR } from '../../lib/three/materials';
@@ -26,7 +26,11 @@
 	/** toolbar X-ray: every object translucent; off = the per-material set (data defaults + inspector chips) */
 	let xrayAll = $state(false);
 	let xraySet = $state<string[]>([]);
+	/** data-default x-ray tokens and the ones the user has toggled (their cut caps follow the x-ray) */
+	let xrayDefaults = $state<string[]>([]);
+	let xrayTouched = $state<string[]>([]);
 	let labels = $state(true);
+	let routing = $state(true);
 	let cellOn = $state(false);
 	let cellArray = $state<string | null>(null);
 	let pipInset = $state<string | null>(null);
@@ -76,7 +80,12 @@
 	const arrays = $derived(single && fam ? (fam.arrays ?? []) : []);
 	const insets = $derived(single && fam ? (fam.insets ?? []) : []);
 
-	const vs = $derived<ViewState>({ illustrative, section, axis, cut, explode, xray: xrayAll ? [XRAY_ALL] : xraySet, selected: null });
+	const vs = $derived<ViewState>({
+		illustrative, section, axis, cut, explode, xray: xrayAll ? [XRAY_ALL] : xraySet, selected: null, routing,
+		// cut faces stay opaque for parts translucent only by the data default; the user's X-ray choices make them translucent
+		xrayCap: xrayAll ? [XRAY_ALL] : xraySet.filter((x) => !xrayDefaults.includes(x) || xrayTouched.includes(x))
+	});
+	const hasRouting = $derived(shown.some((f) => !!f.routing || (f.layers ?? []).some((l) => !!l.route)));
 
 	// Reset per-family defaults when the families on screen change.
 	let lastShown = '';
@@ -86,6 +95,8 @@
 		lastShown = key;
 		// X-ray defaults come from the data (xray_default parts); compare: cut offset 0 from each family's default.
 		xraySet = defaultXray(shown);
+		xrayDefaults = [...xraySet];
+		xrayTouched = [];
 		xrayAll = false;
 		cut = shown.length > 1 ? 0 : defaultCut(shown[0]);
 		axis = 'y';
@@ -94,6 +105,37 @@
 		picked = null;
 		const a = shown[0]?.arrays ?? [];
 		cellArray = (a.find((x) => ['microbump', 'cu_pillar', 'hybrid_bond'].includes(x.kind)) ?? a[0])?.id ?? null;
+	});
+
+	// Automation hook for headless scripts (render checks, scorer): small and stable.
+	onMount(() => {
+		const w = window as unknown as { __apa3d?: unknown };
+		const frames = (n: number) => new Promise<void>((r) => { const f = (k: number) => (k <= 0 ? r() : requestAnimationFrame(() => f(k - 1))); f(n); });
+		w.__apa3d = {
+			stats: () => viewer?.stats ?? null,
+			preset: (name: Preset) => viewer?.preset(name),
+			// inset(id): in-scale, like the inspector button; keepScale: frame in the current scale mode (after the state
+			// change has reached the viewer, so the illustrative z map is the one used for framing)
+			inset: async (id: string, keepScale = false) => {
+				const ins = insets.find((i) => i.id === id);
+				if (!ins) return false;
+				if (!keepScale) illustrative = false;
+				insetCut(ins);
+				await tick();
+				await frames(2);
+				viewer?.frameInset(ins);
+				await frames(2);
+				return true;
+			},
+			setSection: async (a: 'x' | 'y', c: number) => { section = true; axis = a; cut = c; await tick(); await frames(2); },
+			setIllustrative: async (on: boolean) => { illustrative = on; if (on) pipInset = null; await tick(); await frames(2); },
+			ready: async () => {
+				while (!loaded || !viewer || !shown.length) await frames(2);
+				await frames(3);
+				return true;
+			}
+		};
+		return () => { delete w.__apa3d; };
 	});
 
 	onMount(() => {
@@ -151,6 +193,7 @@
 		return ids.some((i) => xraySet.includes(i));
 	}
 	function toggleX(c: string) {
+		xrayTouched = [...new Set([...xrayTouched, c, ...idsOfClass(c)])];
 		if (xrayAll) {
 			// leaving "all": keep every class translucent except the one clicked
 			xrayAll = false;
@@ -250,6 +293,7 @@
 			<button class:on={xrayAll} onclick={() => (xrayAll = !xrayAll)} data-tip="X-ray: every object translucent, section faces included (per-material choice in the inspector)">X-ray</button>
 			<button class:on={cellOn && single} disabled={!single} onclick={() => (cellOn = !cellOn)} data-tip={single ? 'Interconnect unit cell inset at true scale' : 'Unit cell: single view only'}>Cell</button>
 			<button class:on={labels} onclick={() => (labels = !labels)} data-tip="Leader-line callouts (only visible features; decluttered by zoom)">Labels</button>
+			<button class:on={routing && hasRouting} disabled={!hasRouting} onclick={() => (routing = !routing)} data-tip={hasRouting ? 'Mock-up routing (traces, planes, vias, pads) synthesized inside a band at the section; outside it, routed levels are slabs tinted by their Cu fill. Click any routed feature for dims and provenance.' : 'No routing specs in the families on screen'}>Routing</button>
 			<span class="sep"></span>
 			<div class="seg">
 				<button onclick={() => cam('iso')} data-tip="Isometric view">Iso</button>
@@ -381,7 +425,7 @@
 				</section>
 				{#if stats}
 					<div class="stats mono" data-tip="renderer.info for the last frame (all viewports): draw calls, triangles, instanced interconnects, geometries in GPU memory, CPU time of the frame">
-						{stats.calls} calls · {kfmt(stats.triangles)} tris · {kfmt(stats.instances)} inst · {stats.geometries} geo · {stats.ms.toFixed(1)} ms
+						{stats.calls} calls · {kfmt(stats.triangles)} tris · {kfmt(stats.instances)} inst · {stats.geometries} geo · {stats.ms.toFixed(1)} ms{#if stats.routing.cyls || stats.routing.boxes}<br />routing {kfmt(stats.routing.cyls)} cyl · {kfmt(stats.routing.boxes)} box · band {fmtNum(stats.routing.depth)} mm{/if}
 					</div>
 				{/if}
 			</aside>

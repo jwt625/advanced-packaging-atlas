@@ -23,7 +23,7 @@ export interface Overlay {
 	cell: { rect: Rect; arr: ArrModel } | null;
 	pip: { rect: Rect; label: string } | null;
 }
-export interface Stats { calls: number; triangles: number; lines: number; instances: number; geometries: number; textures: number; ms: number }
+export interface Stats { calls: number; triangles: number; lines: number; instances: number; geometries: number; textures: number; ms: number; routing: { cyls: number; boxes: number; depth: number } }
 
 const n3 = (x: number, y: number, z: number) => new THREE.Vector3(x, y, z).normalize();
 const DIRS: Record<string, THREE.Vector3> = {
@@ -94,8 +94,47 @@ function refinePose(cam: THREE.PerspectiveCamera, box: THREE.Box3, pos: THREE.Ve
 
 export class Viewer {
 	readonly renderer: THREE.WebGLRenderer;
-	readonly camera = new THREE.PerspectiveCamera(FOV, 1, 0.01, 1000);
+	readonly pcam = new THREE.PerspectiveCamera(FOV, 1, 0.01, 1000);
+	/** Orthographic camera for section views (Front / Right presets, insets with Section on): no perspective wedges. */
+	readonly ocam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.01, 1000);
+	ortho = false;
+	private orthoH = 1; // half height of the orthographic view at zoom 1 (world units)
+	private sceneR = 100; // radius of the content (world units), for the orthographic depth range
 	readonly controls: OrbitControls;
+	get camera(): THREE.PerspectiveCamera | THREE.OrthographicCamera {
+		return this.ortho ? this.ocam : this.pcam;
+	}
+	private setAspect(a: number) {
+		this.pcam.aspect = a;
+		this.pcam.updateProjectionMatrix();
+		const o = this.ocam;
+		o.left = -this.orthoH * a; o.right = this.orthoH * a; o.top = this.orthoH; o.bottom = -this.orthoH;
+		o.updateProjectionMatrix();
+	}
+	/** Switch between perspective and orthographic keeping the view (position, target, on-screen size). */
+	setOrtho(on: boolean) {
+		if (on === this.ortho) return;
+		const t = this.controls.target;
+		if (on) {
+			const d = this.pcam.position.distanceTo(t);
+			this.orthoH = d * TAN;
+			this.ocam.zoom = 1;
+			this.ocam.position.copy(this.pcam.position);
+			this.ocam.up.copy(this.pcam.up);
+		} else {
+			const half = this.orthoH / this.ocam.zoom;
+			const dir = this.ocam.position.clone().sub(t).normalize();
+			this.pcam.position.copy(t).addScaledVector(dir, half / TAN);
+			this.pcam.up.copy(this.ocam.up);
+		}
+		this.ortho = on;
+		this.camera.lookAt(t);
+		this.controls.object = this.camera;
+		this.setAspect(this.pcam.aspect);
+		this.controls.update();
+		this.updateLod();
+		this.requestRender();
+	}
 	private slots: Slot[] = [];
 	private el: HTMLElement;
 	private ro: ResizeObserver;
@@ -105,14 +144,14 @@ export class Viewer {
 	private h = 1;
 	private bg = new THREE.Color('#0d0d0d');
 	private cellBg = new THREE.Color('#171717');
-	state: ViewState = { illustrative: true, section: true, axis: 'y', cut: 0, explode: 0, xray: [], selected: null };
+	state: ViewState = { illustrative: true, section: true, axis: 'y', cut: 0, explode: 0, xray: [], selected: null, routing: true };
 	labels = true;
 	cellArray: string | null = null;
 	cellOn = false;
 	pipInset: string | null = null;
 	/** Compare view: scale each family to the same on-screen size (false: one common lateral scale). */
 	fitEach = true;
-	stats: Stats = { calls: 0, triangles: 0, lines: 0, instances: 0, geometries: 0, textures: 0, ms: 0 };
+	stats: Stats = { calls: 0, triangles: 0, lines: 0, instances: 0, geometries: 0, textures: 0, ms: 0, routing: { cyls: 0, boxes: 0, depth: 0 } };
 	onOverlay: (o: Overlay) => void = () => {};
 	onPick: (it: Item | null, slot: number, x: number, y: number) => void = () => {};
 	onStats: (s: Stats) => void = () => {};
@@ -121,6 +160,7 @@ export class Viewer {
 	private cellLight = new THREE.DirectionalLight(0xffffff, 1.6);
 	private cellKey = '';
 	private pipCam = new THREE.PerspectiveCamera(FOV, PIP.w / PIP.h, 0.0001, 100);
+	private pipO = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.0001, 100);
 	private down: { x: number; y: number } | null = null;
 	private ray = new THREE.Raycaster();
 
@@ -200,6 +240,7 @@ export class Viewer {
 		});
 		const S = Math.max(...sizes, 1e-6);
 		this.slots.forEach((s, i) => {
+			s.fs.budgetScale = 1 / Math.max(1, this.slots.length);
 			s.fs.setScale(multi && this.fitEach ? S / sizes[i] : 1);
 			s.fs.cutBase = multi ? defaultCut(s.fs.model.family, this.state.axis) : 0;
 		});
@@ -210,6 +251,8 @@ export class Viewer {
 		for (const s of this.slots) if (s.fs.zmap.illustrative !== this.state.illustrative) s.fs.build(this.state);
 		this.applySlotFrames();
 		for (const s of this.slots) s.fs.build(this.state);
+		const sph = this.allBounds(false).getBoundingSphere(new THREE.Sphere());
+		this.sceneR = Math.max(sph.radius + sph.center.length(), 1e-3);
 		this.cellKey = '';
 		this.updateLod();
 		this.requestRender();
@@ -239,8 +282,7 @@ export class Viewer {
 		this.slots.forEach((s, i) => {
 			s.rect = { x: (i % cols) * cw, y: Math.floor(i / cols) * ch, w: cw - (cols > 1 ? 1 : 0), h: ch - (rows > 1 ? 1 : 0) };
 		});
-		this.camera.aspect = cw / ch;
-		this.camera.updateProjectionMatrix();
+		this.setAspect(cw / ch);
 	}
 
 	requestRender() {
@@ -259,13 +301,21 @@ export class Viewer {
 
 	private updateNearFar() {
 		const d = this.camera.position.distanceTo(this.controls.target);
-		this.camera.near = Math.max(d / 400, 1e-5);
-		this.camera.far = d * 20 + 400;
-		this.camera.updateProjectionMatrix();
+		if (this.ortho) {
+			// depth range just around the content (orthographic depth is linear)
+			this.ocam.near = d - 1.2 * this.sceneR;
+			this.ocam.far = d + 1.2 * this.sceneR;
+			this.ocam.updateProjectionMatrix();
+			return;
+		}
+		this.pcam.near = Math.max(d / 400, 1e-5);
+		this.pcam.far = d * 20 + 400;
+		this.pcam.updateProjectionMatrix();
 	}
 
 	/** World units per pixel at the orbit target. */
 	wpp(rectH: number): number {
+		if (this.ortho) return (2 * this.orthoH) / this.ocam.zoom / Math.max(1, rectH);
 		const d = this.camera.position.distanceTo(this.controls.target);
 		return (2 * d * TAN) / Math.max(1, rectH);
 	}
@@ -282,11 +332,12 @@ export class Viewer {
 			const t = this.controls.target.clone().divideScalar(s.fs.scale);
 			const hw = Math.max(r.w, r.h) * wpp * 0.75;
 			changed = s.fs.updateArrays((a): Lod => {
-				if ((2 * a.r) / wpp < MIN_D_PX || a.pitch / wpp < MIN_P_PX) return { mode: 'slab', x0: 0, x1: 0, y0: 0, y1: 0 };
+				if ((2 * a.r) / wpp < MIN_D_PX || a.pitch / wpp < MIN_P_PX) return { mode: 'slab', x0: 0, x1: 0, y0: 0, y1: 0, wpp };
 				const q = Math.max(a.pitch * 8, hw / 4);
 				const cx = t.x, cy = -t.z;
-				return { mode: 'zoom', x0: Math.floor((cx - hw) / q) * q, x1: Math.ceil((cx + hw) / q) * q, y0: Math.floor((cy - hw) / q) * q, y1: Math.ceil((cy + hw) / q) * q };
+				return { mode: 'zoom', x0: Math.floor((cx - hw) / q) * q, x1: Math.ceil((cx + hw) / q) * q, y0: Math.floor((cy - hw) / q) * q, y1: Math.ceil((cy + hw) / q) * q, wpp };
 			}) || changed;
+			changed = s.fs.updateRouting({ tx: t.x, ty: -t.z, hw, wpp }) || changed;
 		}
 		if (changed) this.requestRender();
 	}
@@ -304,8 +355,7 @@ export class Viewer {
 		for (const s of this.slots) {
 			const { x, y, w, h } = s.rect;
 			if (w < 2 || h < 2) continue;
-			this.camera.aspect = w / h;
-			this.camera.updateProjectionMatrix();
+			this.setAspect(w / h);
 			R.setViewport(x, this.h - y - h, w, h);
 			R.setScissor(x, this.h - y - h, w, h);
 			s.light.position.copy(this.camera.position).sub(this.controls.target).normalize().add(new THREE.Vector3(0.2, 0.6, 0.1));
@@ -327,7 +377,8 @@ export class Viewer {
 			instances: this.slots.reduce((a, s) => a + s.fs.instanceCount, 0),
 			geometries: info.memory.geometries,
 			textures: info.memory.textures,
-			ms: performance.now() - t0
+			ms: performance.now() - t0,
+			routing: this.slots.reduce((a, s) => ({ cyls: a.cyls + s.fs.routingStats.cyls, boxes: a.boxes + s.fs.routingStats.boxes, depth: Math.max(a.depth, s.fs.routingStats.depth) }), { cyls: 0, boxes: 0, depth: 0 })
 		};
 		this.onOverlay(ov);
 		this.onStats(this.stats);
@@ -335,10 +386,16 @@ export class Viewer {
 
 	// ---- camera ---------------------------------------------------------------------------------------------
 	private fit(box: THREE.Box3, dir: THREE.Vector3, margin = 1.12) {
-		const { pos, target } = fitPose(box, dir, this.camera.aspect, margin);
-		this.camera.up.set(0, 1, 0);
-		refinePose(this.camera, box, pos, target, margin);
+		const { pos, target } = fitPose(box, dir, this.pcam.aspect, margin);
+		this.pcam.up.set(0, 1, 0);
+		refinePose(this.pcam, box, pos, target, margin);
 		this.controls.target.copy(target);
+		if (this.ortho) {
+			this.orthoH = pos.distanceTo(target) * TAN;
+			this.ocam.zoom = 1;
+			this.ocam.up.set(0, 1, 0);
+			this.setAspect(this.pcam.aspect);
+		}
 		this.camera.position.copy(pos);
 		this.camera.lookAt(target);
 		this.controls.update();
@@ -365,6 +422,7 @@ export class Viewer {
 	}
 
 	preset(p: Preset) {
+		this.setOrtho(p === 'front' && this.state.section);
 		const b = this.allBounds(true); // visible (section-trimmed) content only
 		// Leave room for the z ruler drawn beside the package (left of a y-section, in front of an x-section).
 		const lat = Math.max(b.max.x - b.min.x, b.max.z - b.min.z);
@@ -412,10 +470,15 @@ export class Viewer {
 			const x = this.state.section ? Math.min(cut, rb.x1) : rb.x1;
 			box = new THREE.Box3(new THREE.Vector3(x, Y0 - 1.5 * h, -cy - half), new THREE.Vector3(x, Y1 + 1.5 * h, -cy + half));
 		}
+		this.setOrtho(this.state.section);
 		this.fit(s.fs.world(box), this.sectionDir(), 1.1);
 	}
 
-	/** Section plane implied by an inset: front/back/iso views cut along y, right/left views along x. */
+	/**
+	 * Section plane implied by an inset: front/back/iso views cut along y, right/left views along x. The cut snaps to
+	 * the nearest row of the inset's main array (finest-pitch array whose region holds the inset target and whose z
+	 * range meets the inset), so the section goes through bumps / vias instead of between rows.
+	 */
 	insetSection(ins: Inset, slot = 0): { axis: 'x' | 'y'; cut: number } | null {
 		const s = this.slots[slot];
 		if (!s) return null;
@@ -423,7 +486,23 @@ export class Viewer {
 		const [x0, y0, x1, y1] = ins.box_mm;
 		const t = ins.camera?.target ?? [(x0 + x1) / 2, (y0 + y1) / 2, 0];
 		const v = ins.camera?.view ?? 'front';
-		return v === 'right' || v === 'left' ? { axis: 'x', cut: t[0] - cx } : { axis: 'y', cut: t[1] - cy };
+		const axis: 'x' | 'y' = v === 'right' || v === 'left' ? 'x' : 'y';
+		const tx = t[0] - cx, ty = t[1] - cy;
+		let cut = axis === 'x' ? tx : ty;
+		const zr = Array.isArray(ins.z_um) && ins.z_um.length === 2 ? ins.z_um : null;
+		const hx = (x1 - x0) / 2, hy = (y1 - y0) / 2;
+		const cands = s.fs.model.arrays.filter((a) => {
+			if (zr && (a.z1 < zr[0] - 1e-6 || a.z0 > zr[1] + 1e-6)) return false;
+			const b = a.item.box, m = 2 * a.pitch;
+			return tx >= b.x0 - m - hx && tx <= b.x1 + m + hx && ty >= b.y0 - m - hy && ty <= b.y1 + m + hy;
+		});
+		if (cands.length) {
+			const a = cands.reduce((p, q) => (q.pitch < p.pitch ? q : p));
+			const g0 = axis === 'y' ? a.gy0 : a.gx0, n = axis === 'y' ? a.ny : a.nx;
+			const j = Math.min(n - 1, Math.max(0, Math.round((cut - g0) / a.pitch)));
+			cut = g0 + j * a.pitch;
+		}
+		return { axis, cut };
 	}
 
 	/** Scene box and view direction of an inset (camera.view / target / span_mm, z_um range; explode ignored). */
@@ -450,6 +529,7 @@ export class Viewer {
 		const s = this.slots[slot];
 		if (!s) return;
 		const { box, dir } = this.insetFrame(ins, s.fs);
+		this.setOrtho(this.state.section);
 		this.fit(box, dir, 1.2);
 	}
 
@@ -477,8 +557,7 @@ export class Viewer {
 		if (i < 0) { this.onPick(null, -1, x, y); return; }
 		const s = this.slots[i];
 		const ndc = new THREE.Vector2(((x - s.rect.x) / s.rect.w) * 2 - 1, -((y - s.rect.y) / s.rect.h) * 2 + 1);
-		this.camera.aspect = s.rect.w / s.rect.h;
-		this.camera.updateProjectionMatrix();
+		this.setAspect(s.rect.w / s.rect.h);
 		this.ray.setFromCamera(ndc, this.camera);
 		const hits = this.ray.intersectObjects(s.fs.pickables, false);
 		// First opaque hit wins; a translucent (x-ray, slab) hit only when nothing opaque is behind it.
@@ -507,8 +586,7 @@ export class Viewer {
 
 	private slotOverlay(s: Slot): SlotOverlay {
 		const r = s.rect;
-		this.camera.aspect = r.w / r.h;
-		this.camera.updateProjectionMatrix();
+		this.setAspect(r.w / r.h);
 		const fs = s.fs;
 		const wppL = this.wpp(r.h) / fs.scale;
 		const out: SlotOverlay = { rect: r, name: fs.model.family.name, labels: [], ruler: null, scale: scaleBar(wppL) };
@@ -589,7 +667,7 @@ export class Viewer {
 		const r = s.rect, fs = s.fs, st = this.state, ax = st.axis;
 		const camPos = this.camera.position;
 		// Occlusion rays test the merged opaque meshes only (bodies and caps, not instanced arrays).
-		const opaque = fs.pickables.filter((o) => !(o instanceof THREE.InstancedMesh) && !(((o as THREE.Mesh).material as THREE.Material).transparent));
+		const opaque = fs.occluders;
 		type Hit = { it: Item; ax: number; ay: number; score: number; text: string; full: string };
 		const hits: Hit[] = [];
 		let rank = 0;
@@ -626,15 +704,21 @@ export class Viewer {
 					break;
 				}
 				if (!anchor) continue;
-				const dir = anchor.clone().sub(camPos);
+				let org = camPos, dir = anchor.clone().sub(camPos);
+				if (this.ortho) {
+					// parallel rays: from far in front of the anchor along the view direction
+					const fwd = this.controls.target.clone().sub(camPos).normalize();
+					dir = fwd.clone().multiplyScalar(2 * this.sceneR + Math.max(0, anchor.clone().sub(camPos).dot(fwd)));
+					org = anchor.clone().sub(dir);
+				}
 				const dist = dir.length();
-				this.ray.set(camPos, dir.normalize());
+				this.ray.set(org, dir.normalize());
 				this.ray.far = dist * (1 - 1e-4);
 				const hit = this.ray.intersectObjects(opaque, false)[0];
 				this.ray.far = Infinity;
 				if (hit) {
 					const hi = fs.itemOf(hit);
-					const ok = hi && (hi.id === it.id || (hi.type === 'layer' && hi.host === it.id));
+					const ok = hi && (hi.id === it.id || hi.host === it.id);
 					if (!ok && hit.distance < dist * (1 - 2e-3)) continue;
 				}
 				best = { it, ax: ax0, ay: ay0, score: area, text: c.text, full: c.full };
@@ -766,6 +850,18 @@ export class Viewer {
 		cam.near = dist / 200;
 		cam.far = dist * 50;
 		cam.updateProjectionMatrix();
+		let rc: THREE.Camera = cam;
+		if (this.state.section) {
+			// orthographic like the main section views
+			const o = this.pipO, hh = dist * TAN;
+			o.left = -hh * cam.aspect; o.right = hh * cam.aspect; o.top = hh; o.bottom = -hh;
+			o.near = dist - 1.2 * this.sceneR; o.far = dist + 1.2 * this.sceneR;
+			o.up.set(0, 1, 0);
+			o.position.copy(pos);
+			o.lookAt(target);
+			o.updateProjectionMatrix();
+			rc = o;
+		}
 		const rect: Rect = { x: r.x + 8, y: r.y + r.h - h - 44, w, h };
 		const R = this.renderer;
 		R.setViewport(rect.x, this.h - rect.y - rect.h, rect.w, rect.h);
@@ -777,7 +873,7 @@ export class Viewer {
 		const wppL = (2 * dist * TAN) / h / s.fs.scale;
 		HATCH.value = (wppL * h) / Math.max(1e-9, s.fs.lateral) < HATCH_ZOOM ? HATCH_STRENGTH : 0;
 		setDash(wppL);
-		R.render(s.scene, cam);
+		R.render(s.scene, rc);
 		return { rect, label: ins.label };
 	}
 
@@ -893,10 +989,11 @@ export async function renderThumbnails(fams: Family[], w: number, h: number, bg:
 	const octx = outC.getContext('2d');
 	const bg8 = [bgc.clone().convertLinearToSRGB()].map((c) => [c.r * 255, c.g * 255, c.b * 255])[0];
 	for (const f of fams) {
-		const st: ViewState = { illustrative: true, section: true, axis: 'y', cut: defaultCut(f, 'y'), explode: 0, xray: defaultXray([f]), selected: null };
+		const st: ViewState = { illustrative: true, section: true, axis: 'y', cut: defaultCut(f, 'y'), explode: 0, xray: defaultXray([f]), selected: null, routing: true };
 		const fs = new FamilyScene(f);
 		fs.build(st);
 		fs.updateArrays(() => ({ mode: 'slab', x0: 0, x1: 0, y0: 0, y1: 0 }));
+		fs.updateRouting(null);
 		const scene = new THREE.Scene();
 		const light = new THREE.DirectionalLight(0xffffff, 1.7);
 		light.position.copy(DIRS.iso).add(new THREE.Vector3(0.2, 0.6, 0.1));

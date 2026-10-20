@@ -64,6 +64,70 @@ export interface Layer {
 	material_label?: string;
 	template_id?: string;
 	instances?: string[]; // host instance ids when the host part is repeated (the layer is drawn in each)
+	route?: Route; // routed conductor level (DevLog-011): matrix dielectric + synthesized Cu features in the routing window
+}
+
+/** Routing pattern of a conductor layer (DevLog-011 contract). Lengths in um. */
+export interface Route {
+	use: 'signal' | 'plane' | 'pad' | 'mixed' | string;
+	dir?: 'x' | 'y' | string; // signal / mixed only (resolved; absent on plane / pad)
+	line_um?: number;
+	space_um?: number; // plane: antipad clearance
+	matrix: string; // material key of the dielectric around the Cu
+	fill: number; // Cu area fraction
+	dims?: Record<string, Dim>;
+	[k: string]: unknown;
+}
+
+/** One via entry (per spanned dielectric / part level). Lengths in um. */
+export interface ViaClass {
+	id: string;
+	template_id?: string;
+	name?: string;
+	kind: string; // microvia | rdl_via | beol_via | pth | tsv | tgv | tdv | bridge_via | tmv
+	part: string; // host template id
+	through: string;
+	through_kind?: 'layer' | 'group' | 'part' | string;
+	instances?: string[]; // host instance ids (xy-repeated host)
+	z_um: number;
+	h_um: number;
+	upper?: string | null; // conductor layer id above the span (null at a host face)
+	lower?: string | null;
+	diameter_um: number; // top diameter
+	bottom_diameter_um?: number;
+	land_um?: number;
+	pitch_um?: number; // grid vias only
+	fill?: 'filled' | 'conformal' | 'plugged' | string;
+	wall_um?: number;
+	liner_um?: number;
+	plug?: 'resin' | 'copper' | 'none' | string; // core of a plugged / conformal via
+	regions?: Region[]; // restrict the class to these footprints (package frame, centers like array regions)
+	cluster?: { n: number; pitch_um: number; dims?: Record<string, Dim> }; // n vias on a compact grid per site
+	note?: string;
+	dims?: Record<string, Dim>;
+	[k: string]: unknown;
+}
+
+export interface Net {
+	id: string;
+	kind: 'vertical' | 'lateral' | 'plane_tie' | 'escape' | string;
+	from: string; // array id or template id
+	to?: string;
+	style?: 'stacked' | 'staggered' | string;
+	jog?: string[]; // concrete layer ids
+	levels?: string[];
+	plane?: string;
+	share: number;
+	length_um?: number;
+	note?: string;
+	dims?: Record<string, Dim>;
+	[k: string]: unknown;
+}
+
+export interface Routing {
+	layout_note: string;
+	vias: ViaClass[];
+	nets: Net[];
 }
 
 export interface Region {
@@ -89,6 +153,9 @@ export interface IcArray {
 	dims?: Record<string, Dim>;
 	note?: string;
 	template_id?: string;
+	pad_um?: number; // optional landing pad diameter on the routed level it touches (viewer default from diameter_um)
+	opening_um?: number; // optional solder-resist / passivation opening diameter
+	cap_h_um?: number; // solder cap height at the lower end (Cu column + solder cap); absent = one material
 }
 
 export interface Callout {
@@ -129,6 +196,7 @@ export interface Family {
 	insets?: Inset[];
 	fixture?: boolean;
 	note?: string;
+	routing?: Routing;
 }
 
 export interface Package3D {

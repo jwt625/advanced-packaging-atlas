@@ -1,7 +1,8 @@
 // Family -> solid pieces in true units (x, y in mm relative to the package center; z in um), plus the z map.
 import { worstStatus } from './data';
 import { materialClass } from './materials';
-import type { Dim, DimStatus, Family, IcArray, Layer, Part } from './types';
+import { attachRouting, type RoutingModel } from './routing';
+import type { Dim, DimStatus, Family, IcArray, Layer, Net, Part, ViaClass } from './types';
 
 export interface Box {
 	x0: number;
@@ -12,7 +13,7 @@ export interface Box {
 	z1: number;
 }
 
-export type ItemType = 'part' | 'layer' | 'array';
+export type ItemType = 'part' | 'layer' | 'array' | 'via' | 'net';
 
 /** Provenance level of a solid: every box dimension reported/derived, some template, or all template. */
 export type Prov = 'reported' | 'mixed' | 'template';
@@ -33,9 +34,13 @@ export interface Item {
 	group: number;
 	dims: Record<string, Dim>;
 	box: Box;
-	src: Part | Layer | IcArray;
+	src: Part | Layer | IcArray | ViaClass | Net;
 	filler: boolean;
 	xrayDefault: boolean;
+	/** routing: family layout_note (routed levels, via entries, nets) */
+	routeNote?: string;
+	/** routing: current level-of-detail statement (decimation factor, hidden below 1.5 px), set by the synthesizer */
+	lod?: string;
 }
 
 export interface Picked {
@@ -74,7 +79,10 @@ export interface Model {
 	arrays: ArrModel[];
 	bounds: Box;
 	zbreaks: number[];
+	/** z breaks of parts and interconnect arrays only (illustrative map: layers share their part's interval) */
+	zcoarse: number[];
 	groups: number[];
+	routing: RoutingModel | null;
 }
 
 const FILLER_RANK: Record<string, number> = { underfill: 2, mold: 1, encapsulant: 1 };
@@ -192,7 +200,8 @@ export function buildModel(f: Family): Model {
 		if (it.filler) {
 			const rank = FILLER_RANK[it.kind];
 			const higher = partItems.filter((o) => o.filler && FILLER_RANK[o.kind] > rank);
-			boxes = subtractAll(boxes, [...solids, ...higher].map((o) => o.box));
+			// an embedded filler (cavity fill `in:` a host) is not cut by its own host: it fills the host's cavity
+			boxes = subtractAll(boxes, [...solids.filter((o) => o.id !== it.host), ...higher].map((o) => o.box));
 		}
 		for (const b of boxes) if (b.z1 - b.z0 > 1e-6 && b.x1 - b.x0 > 1e-9 && b.y1 - b.y0 > 1e-9) pieces.push({ item: it, box: b });
 	}
@@ -253,8 +262,14 @@ export function buildModel(f: Family): Model {
 	for (const it of items.values()) if (it.type === 'part') grow(it.box);
 	if (!Number.isFinite(bounds.x0)) Object.assign(bounds, { x0: -1, x1: 1, y0: -1, y1: 1, z0: 0, z1: 1 });
 	const zbreaks = [...zs].sort((a, b) => a - b).filter((z, i, s) => i === 0 || z - s[i - 1] > 1e-6);
+	const zc = new Set<number>([zbreaks[0], zbreaks[zbreaks.length - 1]]);
+	for (const it of items.values()) if (it.type === 'part' || it.type === 'array') { zc.add(it.box.z0); zc.add(it.box.z1); }
+	// snap coarse breaks onto the fine list (same values, tolerance 1e-6)
+	const zcoarse = zbreaks.filter((z) => [...zc].some((c) => Math.abs(c - z) <= 1e-6));
 	const groups = [...new Set([...items.values()].map((i) => i.group))].sort((a, b) => a - b);
-	return { family: f, cx, cy, items, pieces, arrays, bounds, zbreaks, groups };
+	const model: Model = { family: f, cx, cy, items, pieces, arrays, bounds, zbreaks, zcoarse, groups, routing: null };
+	model.routing = attachRouting(model);
+	return model;
 }
 
 const DIE_KINDS = ['die', 'hbm', 'chiplet', 'bridge'];
@@ -321,12 +336,27 @@ export class ZMap {
 		if (!illustrative) {
 			this.mapped = b.map((z) => (z - z0) / 1000);
 		} else {
+			// Coarse intervals (between part / array boundaries) get t^0.4, so a part's drawn thickness grows with its true
+			// thickness; the layers inside an interval share its height by thickness with a floor (each at least
+			// FLOOR / n of the interval), so thin levels stay visible without outgrowing their part.
 			const lat = Math.max(m.bounds.x1 - m.bounds.x0, m.bounds.y1 - m.bounds.y0);
 			const H = Math.max(0.16 * lat, ((b[b.length - 1] - z0) / 1000) * 1.5);
-			const w = b.slice(1).map((z, i) => Math.pow(Math.max(z - b[i], 0), 0.4));
-			const tot = w.reduce((s, v) => s + v, 0) || 1;
+			const c = m.zcoarse.length >= 2 ? m.zcoarse : [b[0], b[b.length - 1]];
+			const wc = c.slice(1).map((z, i) => Math.pow(Math.max(z - c[i], 0), 0.4));
+			const tot = wc.reduce((s, v) => s + v, 0) || 1;
+			const FLOOR = 0.5;
 			const out = [0];
-			for (const v of w) out.push(out[out.length - 1] + (v / tot) * H);
+			let bi = 0;
+			for (let k = 0; k < c.length - 1; k++) {
+				const Hk = (wc[k] / tot) * H, T = c[k + 1] - c[k];
+				const sub: number[] = [];
+				while (bi < b.length - 1 && b[bi + 1] <= c[k + 1] + 1e-6) { sub.push(b[bi + 1] - b[bi]); bi++; }
+				const n = sub.length || 1;
+				const ws = sub.map((t) => Math.max(t, (FLOOR * T) / n));
+				const ts = ws.reduce((s, v) => s + v, 0) || 1;
+				for (const v of ws) out.push(out[out.length - 1] + (v / ts) * Hk);
+			}
+			while (out.length < b.length) out.push(out[out.length - 1]);
 			this.mapped = out;
 		}
 		this.height = this.mapped[this.mapped.length - 1];
