@@ -39,7 +39,7 @@
 		<div class="tt">{paper.title}</div>
 		<div class="sub">{paper.label} · {tv.name || tv.tv_id}</div>
 		<div class="sub">{kind}</div>
-		<div class="org">{paper.orgs.join('; ') || EM_DASH}</div>
+		<div class="org">{(paper.orgs_canonical ?? []).join('; ') || EM_DASH}</div>
 		<table>
 			<tbody>
 				{#each rows as r (r.l)}

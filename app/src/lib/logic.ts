@@ -181,7 +181,7 @@ export function buildIndex(a: Atlas): Index {
 			p.venue,
 			p.doi,
 			p.technology_name,
-			p.orgs.join(' '),
+			(p.orgs_canonical ?? []).join(' '),
 			p.buckets.map((b) => lbl('bucket', b)).join(' '),
 			tvs
 				.map((t) => `${t.name} ${lbl('tv_kind', t.tv_kind)} ${lbl('package_class', t.package_class)} ${t.technology_name}`)
@@ -209,7 +209,7 @@ export function paperMatches(p: Paper, f: Filters, idx: Index): boolean {
 	if (f.yearMax !== null && p.year > f.yearMax) return false;
 	if (f.buckets.length && !p.buckets.some((b) => f.buckets.includes(b))) return false;
 	if (f.sourceStatuses.length && !f.sourceStatuses.includes(p.source_status)) return false;
-	if (f.orgs.length && !p.orgs.some((o) => f.orgs.includes(o))) return false;
+	if (f.orgs.length && !(p.orgs_canonical ?? []).some((o) => f.orgs.includes(o))) return false;
 	const q = f.q.trim().toLowerCase();
 	if (q) {
 		const hay = idx.search.get(p.paper_id) ?? '';
@@ -293,7 +293,8 @@ export function toHash(f: Filters, extras: HashExtras = { sort: [] }): string {
 	if (f.packageClasses.length) p.set('pc', f.packageClasses.join(','));
 	if (f.tvKinds.length) p.set('tk', f.tvKinds.join(','));
 	if (f.sourceStatuses.length) p.set('ss', f.sourceStatuses.join(','));
-	if (f.orgs.length) p.set('o', f.orgs.join(','));
+	// org names can contain commas ("MEC Co., Ltd."), so the org list is '|'-separated
+	if (f.orgs.length) p.set('o', f.orgs.join('|'));
 	if (f.yearMin !== null) p.set('y0', String(f.yearMin));
 	if (f.yearMax !== null) p.set('y1', String(f.yearMax));
 	if (f.hasHybrid) p.set('hb', '1');
@@ -313,7 +314,9 @@ export function fromHash(hash: string): { filters: Filters; extras: HashExtras }
 	f.packageClasses = list(p.get('pc'));
 	f.tvKinds = list(p.get('tk'));
 	f.sourceStatuses = list(p.get('ss'));
-	f.orgs = list(p.get('o'));
+	const o = p.get('o');
+	// '|'-separated; an older comma-separated list stays one raw item until normalizeOrgs() resolves it
+	f.orgs = o ? o.split('|').filter(Boolean) : [];
 	const y0 = Number(p.get('y0'));
 	const y1 = Number(p.get('y1'));
 	f.yearMin = p.get('y0') && Number.isFinite(y0) ? y0 : null;
@@ -337,6 +340,29 @@ export function stateFromHashChange(hash: string, filters: Filters, sort: SortKe
 	const next = fromHash(hash);
 	const nextSort = next.extras.sort.length ? next.extras.sort : sort;
 	return toHash(next.filters, { sort: nextSort }) === toHash(filters, { sort }) ? null : { filters: next.filters, sort: nextSort };
+}
+
+/**
+ * Map org filter values (possibly from an old URL with printed names or a comma-separated list) onto the
+ * canonical org names in the atlas. Unknown names are dropped; never throws.
+ */
+export function normalizeOrgs(a: Atlas, orgs: string[]): string[] {
+	const known = new Set<string>();
+	for (const p of a.papers) for (const o of p.orgs_canonical ?? []) known.add(o);
+	const alias = a.org_aliases ?? {};
+	const resolve = (s: string): string | null => {
+		const v = s.trim();
+		if (known.has(v)) return v;
+		const c = alias[v];
+		return c && known.has(c) ? c : null;
+	};
+	const out: string[] = [];
+	for (const raw of orgs) {
+		const whole = resolve(raw);
+		const got = whole ? [whole] : raw.split(',').map(resolve);
+		for (const g of got) if (g && !out.includes(g)) out.push(g);
+	}
+	return out;
 }
 
 // ---------- CSV ----------

@@ -22,6 +22,7 @@
 	import YearStack from '../../lib/YearStack.svelte';
 	import TopBars from '../../lib/TopBars.svelte';
 	import HeatChart from '../../lib/HeatChart.svelte';
+	import GeoPanel from '../../lib/GeoPanel.svelte';
 	import type { Paper } from '../../lib/types';
 
 	const a = $derived(store.atlas);
@@ -119,7 +120,7 @@
 	);
 
 	// (h)/(i) organization and venue counts ------------------------------------
-	const orgCounts = $derived.by(() => (view ? countBy(view.papers, (p) => p.orgs) : new Map<string, number>()));
+	const orgCounts = $derived.by(() => (view ? countBy(view.papers, (p) => p.orgs_canonical ?? []) : new Map<string, number>()));
 	const venueCounts = $derived.by(() => (view ? countBy(view.papers, (p) => p.venue || '—') : new Map<string, number>()));
 	const meanSummary = $derived.by(() => {
 		if (!view) return '';
@@ -136,7 +137,7 @@
 		{:else if !view}
 			<div class="msg"><span class="spinner"></span></div>
 		{:else}
-			<div class="intro muted">{meanSummary}. Each point is one test vehicle, coloured by its paper's primary bucket. No geographic view: affiliations are recorded as names, not coordinates.</div>
+			<div class="intro muted">{meanSummary}. Each point is one test vehicle, coloured by its paper's primary bucket. The map places authors at their printed institution sites.</div>
 			<div class="grid">
 				<ScatterChart
 					letter="a"
@@ -156,6 +157,7 @@
 					omitted={bRes.omitted}
 					yLog={true}
 				/>
+				<div class="wide"><GeoPanel {view} /></div>
 				<ScatterChart
 					letter="c"
 					desc="Through-via diameter against through-via pitch per test vehicle, log-log, coloured by packaging bucket. Only test vehicles that report both are plotted."
@@ -208,7 +210,7 @@
 					/>
 				</div>
 				<YearStack {view} />
-				<TopBars letter="h" desc="Papers per organization (affiliations as printed on the paper)" counts={orgCounts} />
+				<TopBars letter="h" desc="Papers per organization (canonical names from the per-author affiliations; a paper counts once per organization)" counts={orgCounts} />
 				<TopBars letter="i" desc="Papers per conference / journal" counts={venueCounts} />
 				<div class="wide"><HeatChart {view} /></div>
 			</div>

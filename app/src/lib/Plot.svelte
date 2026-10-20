@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, untrack } from 'svelte';
 
 	interface Props {
 		data: unknown[];
@@ -17,47 +17,101 @@
 	let el: HTMLDivElement;
 	let P: any = $state(null);
 	let bound = false;
+	let destroyed = false;
+	// renders are serialized: one Plotly.react in flight, later prop changes coalesce into one follow-up render
+	let busy = false;
+	let pending = false;
+
+	/** run a user callback without letting it break Plotly's event loop or the render queue */
+	const safe = (f: ((x: any) => void) | undefined, x: any) => {
+		if (!f || destroyed) return;
+		try {
+			f(x);
+		} catch (err) {
+			console.warn('plot callback failed', err);
+		}
+	};
 
 	onMount(() => {
-		let alive = true;
 		import('plotly.js-dist-min').then((m) => {
-			if (alive) P = (m as any).default ?? m;
+			if (!destroyed) P = (m as any).default ?? m;
 		});
+		let raf = 0;
 		const ro = new ResizeObserver(() => {
-			if (P && el && el.clientWidth > 0) P.Plots.resize(el);
+			if (raf) return;
+			raf = requestAnimationFrame(() => {
+				raf = 0;
+				if (P && el && !destroyed && el.clientWidth > 0 && (el as any)._fullLayout) {
+					try {
+						P.Plots.resize(el);
+					} catch (err) {
+						console.warn('plot resize failed', err);
+					}
+				}
+			});
 		});
 		ro.observe(el);
 		return () => {
-			alive = false;
+			destroyed = true;
 			ro.disconnect();
-			if (P) P.purge(el);
+			if (raf) cancelAnimationFrame(raf);
+			if (P) {
+				try {
+					P.purge(el);
+				} catch {
+					/* already purged */
+				}
+			}
 		};
 	});
 
+	async function render() {
+		if (!P || destroyed) return;
+		if (busy) {
+			pending = true;
+			return;
+		}
+		busy = true;
+		try {
+			do {
+				pending = false;
+				// read the latest props without subscribing this async chain to them (the $effect below subscribes)
+				const [d, l, c] = untrack(() => [data, layout, config]);
+				await P.react(el, d, l, {
+					displaylogo: false,
+					responsive: false,
+					scrollZoom: false,
+					doubleClick: 'reset',
+					modeBarButtonsToRemove: ['select2d', 'lasso2d', 'autoScale2d', 'toggleSpikelines', 'hoverClosestCartesian', 'hoverCompareCartesian'],
+					toImageButtonOptions: { format: 'png', scale: 2 },
+					...c
+				});
+				if (destroyed) return;
+				if (!bound) {
+					bound = true;
+					gd = el;
+					const g = el as any;
+					g.on('plotly_hover', (e: any) => safe(onhover, e));
+					g.on('plotly_unhover', (e: any) => safe(onunhover, e));
+					g.on('plotly_click', (e: any) => safe(onclick, e));
+					g.on('plotly_afterplot', () => safe(onafterplot, el));
+					g.on('plotly_relayout', (e: any) => safe(onrelayout, e));
+					safe(onafterplot, el); // the first afterplot fired before the listener existed
+				}
+			} while (pending && !destroyed);
+		} catch (err) {
+			console.warn('plot render failed', err);
+		} finally {
+			busy = false;
+		}
+	}
+
 	$effect(() => {
 		if (!P) return;
-		const d = data;
-		const l = layout;
-		P.react(el, d, l, {
-			displaylogo: false,
-			responsive: false,
-			scrollZoom: false,
-			doubleClick: 'reset',
-			modeBarButtonsToRemove: ['select2d', 'lasso2d', 'autoScale2d', 'toggleSpikelines', 'hoverClosestCartesian', 'hoverCompareCartesian'],
-			toImageButtonOptions: { format: 'png', scale: 2 },
-			...config
-		}).then(() => {
-			gd = el;
-			if (!bound) {
-				bound = true;
-				(el as any).on('plotly_hover', (e: any) => onhover?.(e));
-				(el as any).on('plotly_unhover', (e: any) => onunhover?.(e));
-				(el as any).on('plotly_click', (e: any) => onclick?.(e));
-				(el as any).on('plotly_afterplot', () => onafterplot?.(el));
-				(el as any).on('plotly_relayout', (e: any) => onrelayout?.(e));
-			}
-			onafterplot?.(el);
-		});
+		void data;
+		void layout;
+		void config;
+		render();
 	});
 </script>
 

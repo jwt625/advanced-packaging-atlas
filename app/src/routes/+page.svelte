@@ -23,7 +23,7 @@
 					['Papers', i.counts.papers, 'Publications in the verified database'],
 					['Test vehicles', i.counts.test_vehicles, 'Test vehicles / packages / coupons extracted'],
 					['Extracted rows', i.counts.rows_total, 'Rows across the nine child tables'],
-					['Organizations', i.counts.organizations, 'Distinct affiliations named on papers'],
+					['Organizations', i.counts.organizations, 'Distinct organizations (canonical names) in the author affiliations'],
 					['Hybrid-bond TVs', nHybrid, 'Test vehicles with a Cu-Cu hybrid/direct bond pitch'],
 					['Through-via TVs', nVia, 'Test vehicles with a TSV / TGV / TDV / TMV']
 				]

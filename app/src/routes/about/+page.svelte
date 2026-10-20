@@ -58,7 +58,8 @@
 
 	<h2>What is not here</h2>
 	<p>
-		No geographic map: affiliations are recorded as printed names, not coordinates. No simulator: this atlas shows reported
+		No street-level geography: map pins sit at institution sites (building, campus, city or printed region; Wikidata and
+		OpenStreetMap coordinates), not at the authors' labs. No simulator: this atlas shows reported
 		data only. PDFs, extracted text and figures stay local (they carry a licensed-download stamp); the site ships only the CSV
 		database projected into one JSON document.
 	</p>

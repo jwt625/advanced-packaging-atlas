@@ -42,7 +42,7 @@ export const COLS: ColDef[] = [
 	{ id: 'bucket', label: 'Bucket', tip: 'Primary packaging bucket assigned during triage', width: 148, level: 'paper', defaultOn: true },
 	{ id: 'venue', label: 'Venue', tip: 'Journal / conference', width: 170, level: 'paper', defaultOn: false },
 	{ id: 'status', label: 'Source', tip: 'How much of the source was read: full text, partial text, abstract only or needs download', width: 92, level: 'paper', defaultOn: false },
-	{ id: 'orgs', label: 'Organizations', tip: 'Affiliations as printed on the paper, first author first', width: 250, level: 'paper', defaultOn: true },
+	{ id: 'orgs', label: 'Organizations', tip: 'Organizations (canonical names), first author first. Hover for the affiliations as printed.', width: 250, level: 'paper', defaultOn: true },
 	{ id: 'n_tvs', label: 'TVs', tip: 'Test vehicles extracted from this paper', width: 52, num: true, level: 'paper', defaultOn: true },
 	{ id: 'verified_on', label: 'Verified', tip: 'Date the extraction was checked against the cached source', width: 88, level: 'paper', defaultOn: false },
 	{ id: 'paper_tech', label: 'Platform', tip: 'Technology / brand name used by the paper', width: 150, level: 'paper', defaultOn: false },
@@ -143,8 +143,10 @@ export function cellFor(a: Atlas, id: string, p: Paper, tv: TestVehicle): Cell {
 		case 'status':
 			return { text: enumLabel(a, 'source_status', p.source_status), tip: `pages read: ${p.pages_read || EM_DASH}` };
 		case 'orgs': {
-			const t = p.orgs.join('; ');
-			return t ? { text: t, tip: t, multiline: true } : dash();
+			const t = (p.orgs_canonical ?? []).join('; ');
+			const printed = p.orgs.length ? `printed: ${p.orgs.join('; ')}` : '';
+			if (t) return { text: t, tip: printed ? `${t}\n${printed}` : t, multiline: true };
+			return printed ? { text: EM_DASH, muted: true, tip: `no per-author affiliations extracted\n${printed}` } : dash();
 		}
 		case 'n_tvs':
 			return { text: String(p.n_tvs), num: p.n_tvs };
@@ -208,7 +210,7 @@ export function sortValue(a: Atlas, id: string, p: Paper, tv: TestVehicle): Sort
 		case 'bucket':
 			return enumLabel(a, 'bucket', p.primary_bucket).toLowerCase();
 		case 'orgs':
-			return p.orgs.join('; ').toLowerCase();
+			return (p.orgs_canonical ?? []).length ? p.orgs_canonical.join('; ').toLowerCase() : null;
 		case 'n_tvs':
 			return p.n_tvs;
 		case 'verified_on':

@@ -54,7 +54,7 @@
 		return HEAD_ROWS.filter(([k]) => typeof tv.headline[k] === 'number').map(([k, l, u]) => ({ k, l, u, v: tv.headline[k] as number, m: tv.headline_meta[k] ?? {} }));
 	});
 
-	const SKIP = new Set(['comp_id', 'tv_id', 'layer_id', 'ic_id', 'step_id', 'ei_id', 'oi_id', 'metric_id', 'basis', 'source', 'locator', 'notes', 'overrides', 'qualifiers']);
+	const SKIP = new Set(['comp_id', 'tv_id', 'layer_id', 'ic_id', 'step_id', 'flow_id', 'ei_id', 'oi_id', 'metric_id', 'basis', 'source', 'locator', 'notes', 'overrides', 'qualifiers']);
 
 	function colsFor(table: string): ColumnMeta[] {
 		return a?.columns[table] ?? [];
@@ -154,7 +154,7 @@
 				<div class="k">Source</div>
 				<div>{enumLabel(a, 'source_status', paper.source_status)}; pages {paper.pages_read || EM_DASH}</div>
 				<div class="k">Organizations</div>
-				<div>{paper.orgs.join('; ') || EM_DASH}</div>
+				<div>{(paper.orgs_canonical ?? []).join('; ') || EM_DASH}{#if paper.orgs.length}<div class="printed">printed: {paper.orgs.join('; ')}</div>{/if}</div>
 				<div class="k">Verified</div>
 				<div>{paper.verified_on || EM_DASH}{#if paper.evidence} · {paper.evidence.n_entries} evidence entries{/if}</div>
 				{#if paper.technology_name}<div class="k">Platform</div><div>{paper.technology_name}</div>{/if}
@@ -242,6 +242,10 @@
 {/if}
 
 <style>
+	.printed {
+		color: var(--ink-3);
+		font-size: 10px;
+	}
 	.drawer {
 		position: absolute;
 		top: 0;

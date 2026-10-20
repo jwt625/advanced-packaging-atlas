@@ -19,6 +19,26 @@ export interface EvidenceMeta {
 	not_reported: string[];
 }
 
+/** One process flow of a paper (process_flows.csv, schema v2.4); its steps are projected onto each TV in tv_ids. */
+export interface ProcessFlow {
+	flow_id: string;
+	flow_name?: string;
+	/** tv_build | generic_platform | comparison */
+	scope: string;
+	/** full | ordered | fragments */
+	level: string;
+	tv_ids: string[];
+	/** order of this flow in its TVs' build, 1 = first (schema v2.5; defaults to the flow number) */
+	build_seq?: number;
+	/** shared steps (all tv_ids) and TV-specific delta steps (a delta may list several TVs) */
+	n_steps: number;
+	n_deltas: number;
+	basis?: string;
+	source?: string;
+	locator?: string;
+	notes?: string;
+}
+
 export interface Paper {
 	paper_id: string;
 	label: string;
@@ -34,11 +54,21 @@ export interface Paper {
 	source_status: string;
 	pages_read: string;
 	n_test_vehicles: number;
+	/** full | ordered | fragments | none (schema v2.4) */
+	process_flow_level?: string;
+	/** derived: yes iff process_flow_level is full or ordered */
+	has_process_flow?: string;
 	verified_on: string;
+	/** affiliations as printed (provenance; papers.csv) */
 	orgs: string[];
+	/** distinct canonical org names (organizations.csv) in byline order, first author's first */
+	orgs_canonical: string[];
+	/** printed author x affiliation with a placed site: a = author index (1-based), n = author, s = site id, k = kind */
+	affil: { a: number; n: string; s: number; k: string }[];
 	notes: string;
 	n_tvs: number;
 	tables_present: string[];
+	process_flows?: ProcessFlow[];
 	evidence?: EvidenceMeta;
 }
 
@@ -97,6 +127,20 @@ export interface TestVehicle {
 	rows: TvRows;
 }
 
+/** Institution site (org_sites.csv) with coordinates; unresolved sites are not emitted. */
+export interface Site {
+	id: number;
+	org: string;
+	locality: string;
+	country: string;
+	lat: number;
+	lon: number;
+	/** building | campus | postcode | city | region */
+	precision: string;
+	source: string;
+	source_ref: string;
+}
+
 export interface ColumnMeta {
 	name: string;
 	label: string;
@@ -126,6 +170,7 @@ export interface Atlas {
 		per_source: Record<string, number>;
 		per_ic_type: Record<string, number>;
 		per_step_category: Record<string, number>;
+		per_process_flow_level?: Record<string, number>;
 		per_metric_category: Record<string, number>;
 		per_material_class: Record<string, number>;
 		per_structure: Record<string, number>;
@@ -138,6 +183,9 @@ export interface Atlas {
 	columns: Record<string, ColumnMeta[]>;
 	papers: Paper[];
 	tvs: TestVehicle[];
+	sites?: Site[];
+	/** variant org name -> canonical org_name (config/org_aliases.yaml) */
+	org_aliases?: Record<string, string>;
 }
 
 export interface Filters {

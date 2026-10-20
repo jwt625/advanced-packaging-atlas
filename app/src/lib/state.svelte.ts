@@ -1,5 +1,5 @@
 import { staticUrl } from './paths';
-import { buildIndex, defaultFilters, type Index } from './logic';
+import { buildIndex, defaultFilters, normalizeOrgs, type Index } from './logic';
 import { defaultColumns } from './columns';
 import type { Atlas, Filters, SortKey } from './types';
 
@@ -29,6 +29,8 @@ export async function loadAtlas(): Promise<void> {
 		const a = (await res.json()) as Atlas;
 		store.index = buildIndex(a);
 		store.atlas = a;
+		// org filter from the URL may hold printed (pre-canonical) names; map or drop them
+		if (filters.orgs.length) filters.orgs = normalizeOrgs(a, filters.orgs);
 	} catch (e) {
 		store.error = e instanceof Error ? e.message : String(e);
 	} finally {

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { filters, resetFilters, store, tableState } from './state.svelte';
-	import { countBy, stateFromHashChange } from './logic';
+	import { countBy, normalizeOrgs, stateFromHashChange } from './logic';
 
 	let { charts = false, nShown = 0 }: { charts?: boolean; nShown?: number } = $props();
 
@@ -30,6 +30,7 @@
 		if (!next) return;
 		clearTimeout(timer);
 		Object.assign(filters, next.filters);
+		if (a && filters.orgs.length) filters.orgs = normalizeOrgs(a, filters.orgs);
 		tableState.sort = next.sort;
 	}
 
@@ -50,7 +51,7 @@
 	const kindOpts = $derived(a ? opts('tv_kind', countBy(a.tvs, (t) => t.tv_kind)) : []);
 	const orgOpts = $derived.by(() => {
 		if (!a) return [] as Opt[];
-		const c = countBy(a.papers, (p) => p.orgs);
+		const c = countBy(a.papers, (p) => p.orgs_canonical ?? []);
 		return [...c.entries()]
 			.sort((x, y) => y[1] - x[1] || x[0].localeCompare(y[0]))
 			.map(([value, n]) => ({ value, label: value, n }));
