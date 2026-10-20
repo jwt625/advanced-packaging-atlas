@@ -1,0 +1,36 @@
+paper_id: 001c.129513
+verified_on: 2026-10-20
+source_files:
+  - references/001c.129513/text.md
+  - references/001c.129513/source.json
+  - references/001c.129513/figures/page_02.png
+  - references/001c.129513/figures/page_03.png
+  - references/001c.129513/figures/page_04.png
+  - references/001c.129513/figures/page_05.png
+  - references/001c.129513/figures/page_06.png
+figure_reading_method: >-
+  Fig. 8, Fig. 10 bar heights and Fig. 9 points read from 400 dpi re-renders in scratch (not kept); readings
+  approximate (about +-0.03 mm warpage, +-0.01 wt%, +-0.2 um2/s); marked value:approx.
+entries:
+  - {table: stack_layers, row_id: 001c.129513-b-L03, field: reinforcement, value: "83.5 wt%", unit: wt%, basis: design_target, locator: "p.4 Table 1", note: "printed 83,5 (decimal comma)"}
+  - {table: interconnects, row_id: 001c.129513-a-i2, field: pitch_um, value: 20, unit: um, basis: design_target, locator: "p.3 Fig. 4", note: "design rule supports a possible TSV pitch of 20 um; next release 15 um"}
+derived:
+  - {table: process_steps, row_id: 001c.129513-F3-s03, field: time_s, value: 600, formula: "10 min x 60", inputs: "p.4 Table 1"}
+  - {table: process_steps, row_id: 001c.129513-F3-s04, field: time_s, value: 3600, formula: "60 min x 60", inputs: "p.4 Table 1"}
+  - {table: process_steps, row_id: 001c.129513-F3-s10, field: time_s, value: 600, formula: "10 min x 60", inputs: "p.4 Table 1"}
+  - {table: process_steps, row_id: 001c.129513-F3-s11, field: time_s, value: 3600, formula: "60 min x 60", inputs: "p.4 Table 1"}
+conflicts: []
+excluded:
+  - "microbump pitch in the range of 50 um (ref [9])"
+  - "typical BGA ball size ~300 um and pitch 500 um (IPC-7095, ref [15])"
+  - "standard RDL 5 um Cu, 12 um L/S, 10 um polymer (background technology, not this platform)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "process_steps: 001c.129513-a (functional module not built; F1/F2 are generic_platform flows shown for it)"
+  - "chip x/y sizes, microbump pitch/diameter, interposer x/y, TSV depth, RDL layer materials by name"
+  - "demonstrator wafer diameter, dummy chip size/count, die attach material name, glass substrate type"
+  - "mold pressure, thinning target for demonstrator wafers, balling and dicing conditions"
+notes: >-
+  Main-effect values (Fig. 7) not entered (derived means of Figs. 8/10 data). Text range 1.1-1.7 mm after molding
+  entered; Fig. 8 EMC C bars (added material) fall outside it.

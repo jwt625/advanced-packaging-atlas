@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+2380-4505-2020.1.000042,10.4071/2380-4505-2020.1.000042,Chip-Last (RDL-First) Fan-Out Panel-Level Packaging (FOPLP) for Heterogeneous Integration,2020,IMAPS International Symposium,panel,panel,1,curator-verified primary disclosure: FOPLP line: Unimicron chip-last RDL-first on 515x510 mm glass carrier
+001c.74775,10.4071/001c.74775,Chiplet Integration by Die-to-Die Pillar-Suspended Bridge,2022,IMAPS,si_bridge,si_bridge;panel,1,"Molded pillar-suspended bridge: 40 um pitch MicroPillars, 20 um bridge die, 300x300 mm panel; cross-section, warpage <10 um."
+001c.129513,10.4071/001c.129513,HPC Packaging Platform Including Compression Molding,2024,IMAPS,si_interposer,si_interposer,2,"HPC SiP on Si interposer with organic RDL; process flow variants, compression molding warpage vs materials/parameters."

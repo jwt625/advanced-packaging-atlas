@@ -1,0 +1,6 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+001c.74770-a-c1,001c.74770-a,interposer,yes,,Interposer die,1,10,10,725,,,,,,,,design_target,mixed,,p.3 Sec. II; p.3 Table 1,,"Daisy chain; AlCu pad openings 60x60 um, pitch 300 um center / 80 um edge."
+001c.74770-a-c2,001c.74770-a,dummy_die,yes,,TSV die,1,7.3,7.3,100,,,,,,,,design_target,mixed,,p.3 Sec. II; p.3 Table 1,,Daisy chain; interconnections both sides; via size 40 um.
+001c.74770-a-c3,001c.74770-a,dummy_die,yes,,Top die,1,7.3,7.3,725,,,,,,,,design_target,mixed,,p.3 Sec. II; p.3 Table 1,,Daisy chain.
+001c.74770-a-c4,001c.74770-a,underfill,,,Pre-applied NCP underfill,,,,,,,,,,"commercially available non-conductive paste (NCP), fluxing, for Cu pillar TCB",,stated,text,,p.3 Sec. II,,Product and supplier not named.
+001c.74770-b-c1,001c.74770-b,underfill,,,Capillary underfill,,,,,,,,,,capillary underfill (material not named),,stated,table,,p.5 Table 2,,

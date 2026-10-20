@@ -1,0 +1,3 @@
+ei_id,tv_id,protocol,protocol_as_written,channel_type,lane_rate_gbps,lanes,aggregate_bw_tbps,bw_density_tbps_per_mm,bw_density_tbps_per_mm2,energy_pj_per_bit,scope,reach_mm,bump_pitch_um,line_um,space_um,insertion_loss_db,il_freq_ghz,ber,latency_ns,basis,source,overrides,locator,qualifiers,notes
+001c.74748-c-e1,001c.74748-c,unspecified,,organic_rdl,,,,,,,per interconnection transition: (total 0.47 - dummy 0.18)/2,,,,,0.145,28,,,derived,mixed,,p.4 Sec. III.B; p.4 Fig. 5,,Paper's own estimate; target <0.2 dB (Table 1).
+001c.74748-d-e1,001c.74748-d,unspecified,,,,,,,,,dummy transmission line in test module,,,,,0.2,28,,,measured,text,,p.4 Sec. III.B; p.4 Fig. 7,insertion_loss_db:approx,

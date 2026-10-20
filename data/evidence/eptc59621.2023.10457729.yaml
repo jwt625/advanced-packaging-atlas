@@ -1,0 +1,38 @@
+paper_id: eptc59621.2023.10457729
+verified_on: 2026-10-20
+source_files:
+  - references/eptc59621.2023.10457729/text.md
+  - references/eptc59621.2023.10457729/source.json
+  - references/eptc59621.2023.10457729/figures/page_01.png
+  - references/eptc59621.2023.10457729/figures/page_02.png
+  - references/eptc59621.2023.10457729/figures/page_03.png
+  - references/eptc59621.2023.10457729/figures/page_04.png
+figure_reading_method: >-
+  Fig. 5 re-rendered at 400 dpi in scratch to read the eight points not labelled in Fig. 6 (approx, +/-0.2 um).
+  Fig. 4 reflow annotations read from page render. Fig. 3 tolerance curves not digitised.
+entries:
+  - {table: process_steps, row_id: eptc59621.2023.10457729-F1-s04, field: temp_c_max, value: 260, unit: C, basis: design_target, locator: "p.3 Fig. 4", note: "Peak temperature 260 C annotation"}
+  - {table: metrics, row_id: eptc59621.2023.10457729-b-m1, field: value, value: 8.07, unit: um, basis: measured, locator: "p.4 Fig. 7", note: "label 8.07+/-0.107"}
+derived:
+  - {table: process_steps, row_id: eptc59621.2023.10457729-F1-s04, field: ramp_c_per_min, value: 60, formula: "1 C/s x 60 s/min", inputs: "p.3 Fig. 4"}
+  - {table: interconnects, row_id: eptc59621.2023.10457729-a-i1, field: count, value: 196, formula: "14 x 14 pad array", inputs: "p.3 Methodology"}
+  - {table: interconnects, row_id: eptc59621.2023.10457729-b-i1, field: count, value: 196, formula: "14 x 14 pad array", inputs: "p.3 Methodology"}
+conflicts:
+  - {table: metrics, row_id: eptc59621.2023.10457729-b-m1, field: notes, values: ["+/-0.107 um", "+/-0.177 um"], locators: ["p.4 Fig. 7 label", "p.3 Result and Discussion text"], chosen: "+/-0.107 um", why: "measured image label beats text; text value equals the epoxy-bond spread and may be a copy error"}
+excluded:
+  - "<2 pJ/bit per Tx/Rx at >100 Gbps (ref [1], Introduction)"
+  - "inverse taper optical bandwidth 300 nm/1 dB (ref [1])"
+  - "VCSEL flip-chip on Si PIC with solder (ref [9])"
+  - "pick-and-place bonder accuracy ~+/-3-10 um (generic comparison)"
+not_reported:
+  - electrical_interfaces
+  - organizations and affiliations (separate pipeline)
+  - "flip-chip bonder, bonding temperature, force and atmosphere for TV b"
+  - "underfill product and cure; reflow atmosphere"
+  - "dimensions of the epoxy-bonded Si and glass samples; UV dose"
+  - "simulated CE of the inverse-taper coupler as a number; free-form coupler tolerances as numbers"
+  - "process_steps: eptc59621.2023.10457729-d (simulation model, no build)"
+  - "process_steps: eptc59621.2023.10457729-e (simulation model, no build)"
+notes: >-
+  Evanescent tolerance values (Y +/-2.7, Z 2.8, X >+/-150 um, twist +/-2.3, tilt +/-0.4 deg) are stated in this
+  paper's Simulation section but read from Fig. 2, which is reprinted from co-author work [1]; entered as simulated.

@@ -1,0 +1,44 @@
+paper_id: ectc51909.2023.00240
+verified_on: 2026-10-20
+schema_version: 2.5
+source_files:
+  - references/ectc51909.2023.00240/text.md
+  - references/ectc51909.2023.00240/source.json
+  - references/ectc51909.2023.00240/figures/page_01.png
+  - references/ectc51909.2023.00240/figures/page_02.png
+  - references/ectc51909.2023.00240/figures/page_03.png
+  - references/ectc51909.2023.00240/figures/page_04.png
+  - references/ectc51909.2023.00240/figures/page_05.png
+  - references/ectc51909.2023.00240/figures/page_06.png
+  - references/ectc51909.2023.00240/figures/page_07.png
+figure_reading_method: >-
+  Page renders p.1-7; all 17 candidate crops opened; r values of Fig. 6(a) and Fig. 13(a) read from 400 dpi
+  re-crops; bar labels of Figs. 8 and 15 and fit equations of Fig. 12 read from candidate crops.
+entries:
+  - {table: metrics, row_id: ectc51909.2023.00240-a-m28, field: value, value: 0.9922, unit: "", basis: measured, locator: "p.4 Fig. 6(a)", note: "printed r = 0.9922"}
+  - {table: metrics, row_id: ectc51909.2023.00240-b-m35, field: value, value: 0.9805, unit: "", basis: measured, locator: "p.6 Fig. 13(a)", note: "printed r = 0.9805"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51909.2023.00240-a-m24, field: value, values: [60, 75], locators: ["p.4 Sec. III.C", "p.1 Abstract"], chosen: 60, why: "body text 'just under a minute per wafer' for this measurement; abstract '< 75 s per wafer' across all 6 wafers"}
+  - {table: metrics, row_id: ectc51909.2023.00240-b-m37, field: variant, values: ["wafers A, D, C", "wafers B, D, C"], locators: ["p.6 Sec. IV.D", "p.7 Fig. 15"], chosen: "B, D, C", why: "figure and caption (wafer B named) over text"}
+  - {table: metrics, row_id: ectc51909.2023.00240-b-m38, field: value, values: ["< 0.1 nm", "0.07 nm"], locators: ["p.6 Sec. IV.D", "p.7 Sec. V"], chosen: "per-wafer bar values", why: "figure values entered; text summaries consistent with detrend max 0.07"}
+  - {table: metrics, row_id: ectc51909.2023.00240-a-m26, field: value, values: [60, 25], locators: ["p.3 Sec. II", "p.4 Fig. 5"], chosen: 60, why: "text states spot enlarged to 60 um for this study; Fig. 5 schematic label ~25 um is the generic SE diagram"}
+  - {table: metrics, row_id: ectc51909.2023.00240-a-m21, field: value, values: [120, 112], locators: ["p.4 Sec. III.B", "p.6 Sec. IV.B"], chosen: 120, why: "120 includes 8 internal validation sites; 112 = training only"}
+excluded:
+  - "WLI/PSI and AFM general capabilities and throughput (background, refs [4], [5])"
+  - "SCD front-end transistor metrology examples (ref [6])"
+  - "Fig. 2 AFM (~20 nm) vs WLI (~40 nm) recess on an example HB wafer; pitch/TV not stated, not entered"
+not_reported:
+  - components
+  - electrical_interfaces
+  - optical_interfaces
+  - "process_steps: only CMP-skew fragment; no bonding, anneal or deposition performed or described"
+  - "pad metal, dielectric material, pad diameter, underlayer stack, wafer diameter"
+  - "CMP conditions used to create the skews"
+  - "SCD tool name in body (KLA SpectraShape named in acknowledgment only, ack)"
+source_quality:
+  - "Equation (1) text layer garbled; read from page render."
+  - "Fig. 14 both panels y-axes read 'AFM Pad Recess' although caption compares SCD and AFM."
+  - "Table I/II measurement method (AFM or SCD) not stated explicitly."
+revisions:
+  - {date: 2026-10-20, source: ingest_audit_B, row_id: ectc51909.2023.00240-f05, change: "shows: dropped '~20 nm AFM vs ~40 nm WLI recess'; now 'AFM vs WLI 3D images and line profiles of the same HB pad region; WLI profile shows larger apparent recess'", reason: "~20/~40 nm values are from p.2 body text, not the Fig. 2 image or caption; re-crop profiles read about 23 nm (AFM) and 34 nm (WLI) peak-to-valley"}

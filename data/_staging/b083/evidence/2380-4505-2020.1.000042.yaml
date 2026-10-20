@@ -1,0 +1,48 @@
+paper_id: 2380-4505-2020.1.000042
+verified_on: 2026-10-20
+source_files:
+  - references/2380-4505-2020.1.000042/text.md
+  - references/2380-4505-2020.1.000042/source.json
+  - references/2380-4505-2020.1.000042/figures/page_02.png
+  - references/2380-4505-2020.1.000042/figures/page_03.png
+  - references/2380-4505-2020.1.000042/figures/page_04.png
+  - references/2380-4505-2020.1.000042/figures/page_05.png
+  - references/2380-4505-2020.1.000042/figures/page_06.png
+  - references/2380-4505-2020.1.000042/figures/page_07.png
+  - references/2380-4505-2020.1.000042/figures/page_08.png
+figure_reading_method: >-
+  Fig. 1 and Fig. 3(a) labels re-cropped at 300 dpi in scratch (not kept). Fig. 7 SEM dimension labels read from the
+  page render. Most candidate crops were cut at the bottom; manual bboxes used and checked.
+entries:
+  - {table: interconnects, row_id: 2380-4505-2020.1.000042-a-i1, field: height_um, value: 37, unit: um, basis: design_target, locator: "p.2 Sec. II.A Fig. 1", note: "Cu pillar 37 um + Ni 3 um + SnAg 15 um = 55 um total in Fig. 1"}
+  - {table: stack_layers, row_id: 2380-4505-2020.1.000042-a-L03, field: via_diameter_um, value: 22, unit: um, basis: design_target, locator: "p.2 Fig. 3(a)", note: "V01 = 22-17 um; larger end entered as top diameter"}
+  - {table: process_steps, row_id: 2380-4505-2020.1.000042-F3-s03, field: conditions, value: "75 -> 250 -> 275 C, 2.5 s, 10 N", unit: "-", basis: design_target, locator: "p.4 Sec. III.C; p.5 Fig. 9", note: "Chip 1 P&P head profile"}
+derived:
+  - {table: components, row_id: 2380-4505-2020.1.000042-a-c6, field: thickness_um, value: 992, formula: "0.992 mm x 1000", inputs: "p.6 Sec. IV.A"}
+  - {table: interconnects, row_id: 2380-4505-2020.1.000042-a-i6, field: pitch_um, value: 350, formula: "0.35 mm x 1000", inputs: "p.3 Sec. II.B"}
+  - {table: interconnects, row_id: 2380-4505-2020.1.000042-a-i6, field: diameter_um, value: 200, formula: "ball size 0.2 mm x 1000", inputs: "p.2 Fig. 3(c)"}
+  - {table: process_steps, row_id: 2380-4505-2020.1.000042-F3-s07, field: time_s, value: 7200, formula: "2 h x 3600", inputs: "p.5 Sec. III.D"}
+conflicts:
+  - {table: process_steps, row_id: 2380-4505-2020.1.000042-F3-s05, field: temp_c_max, values: [250, "about 260 (curve read)"], locators: ["p.5 Sec. III.C text", "p.5 Fig. 9 reflow curve"], chosen: 250, why: "text states the maximum; curve reading is approximate"}
+  - {table: process_steps, row_id: 2380-4505-2020.1.000042-F3-s04, field: conditions, values: ["225 C first plateau", "about 230 C on Fig. 9"], locators: ["p.5 Sec. III.C text", "p.5 Fig. 9"], chosen: "225 (text)", why: "text value; plot reading approximate"}
+  - {table: test_vehicles, row_id: 2380-4505-2020.1.000042-a, field: carrier_size_mm, values: ["515x510", "510x515"], locators: ["p.3 Sec. II.B text", "p.3 Fig. 4"], chosen: "515x510", why: "same panel, axis order only"}
+  - {table: interconnects, row_id: 2380-4505-2020.1.000042-a-i6, field: diameter_um, values: [200, 212.4], locators: ["p.2 Fig. 3(c); p.3 Sec. II.B (ball size 0.2 mm)", "p.6 Fig. 14 profile (b)"], chosen: 200, why: "different quantities: design ball size vs measured mounted-ball profile width (metrics a-m14)"}
+excluded:
+  - "Ref [1] process (2/2 um first, carrier transfer, one-chip-at-a-time TCB) - prior work, not entered"
+  - "DARPA/Navy program descriptions (introduction)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "chip thickness, Si die layer stack (PI1/PI2 thickness), underfill and EMC product names"
+  - "package thickness, number of drop-test boards / samples"
+  - "solder ball mounting equipment (same as ref [1], not named), SMT reflow atmosphere"
+  - "laser debond wavelength/power, PVD and ECD conditions"
+notes: >-
+  Text writes the drop standard as "JEDEC Standard ESD22-B111"; entered as written. Fig. 17 (drop tower photo) not kept
+  as key figure: test equipment, not the build.
+revisions:
+  - {date: 2026-10-20, source: ingest_audit_A, row_id: 2380-4505-2020.1.000042-a-m14, change: "added metric mounted solder ball width 212.4 um (measured, figure_image, p.6 Fig. 14); conflict logged for i6 diameter_um [200, 212.4]", reason: "Fig. 14 profile label (b) 212.4um verified on page_06 render; only the 154.7 um height had been taken"}
+  - {date: 2026-10-20, source: ingest_audit_A, row_id: 2380-4505-2020.1.000042-F1-s01, change: "target 'carrier 515 x 510 mm' cleared; moved to notes", reason: "carrier size is the input object, not a dimension the step produces (p.3 Sec. III.A)"}
+  - {date: 2026-10-20, source: ingest_audit_A, row_id: 2380-4505-2020.1.000042-F3-s12, change: "conditions = '4 pulses'", reason: "p.6 Sec. III.F 'CO2 laser with four times of pulse' was only in the step text"}
+  - {date: 2026-10-20, source: ingest_audit_A, row_id: 2380-4505-2020.1.000042-f12, change: "bbox 0.1332,0.0859,0.4139,0.3258 -> 0.1332,0.0859,0.4139,0.340; bbox_source manual, cand_id cleared", reason: "candidate p06_fig12 clipped the bottom of the close-up photo; re-crop checked"}
+  - {date: 2026-10-20, source: ingest_audit_A, row_id: 2380-4505-2020.1.000042-f13, change: "bbox 0.1245,0.6858,0.4226,0.8534 -> 0.1245,0.6858,0.4226,0.868; bbox_source manual, cand_id cleared", reason: "candidate p06_fig13 clipped the second row (Ti/Cu/Au) images; re-crop checked"}

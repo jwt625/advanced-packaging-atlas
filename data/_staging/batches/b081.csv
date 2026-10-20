@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+001c.147288,10.4071/001c.147288,Wafer Level Substrates with Si-Core and Hybrid Organic/Inorganic Interconnect,2025,IMAPS,advanced_substrate,si_interposer;advanced_substrate,1,Si-core substrate with hybrid organic/inorganic interconnect replacing interposer plus laminate; <10 um pitch solderless Cu-Cu TCB.
+eptc59621.2023.10457729,10.1109/eptc59621.2023.10457729,Packaging strategies for 3D integration of Photonic and Electronic chips on a Glass substrate,2023,EPTC,cpo,glass;cpo,3,5x5x0.5 mm dies flip-chipped on glass via jetted SAC305 on 50-105 um pads; PIC epoxy bond.
+001c.74748,10.4071/001c.74748,Die-embedded packaging using Corning® multi-layered glass,2022,IMAPS,glass,glass;advanced_substrate,1,"Die-embedded laminate glass: 0.5 mm AFG, wet-etched cavities +/-2.5 um, 125 um dies, TGVs, 600 um package, PoP."

@@ -1,0 +1,42 @@
+layer_id,tv_id,structure,side,seq,layer_name,feature,material,material_class,layer_role,reinforcement,thickness_um,thickness_min_um,thickness_max_um,line_um,space_um,via_diameter_um,via_pitch_um,roughness_ra_um,repeat,properties,basis,source,overrides,locator,qualifiers,notes
+001c.147288-a-L01,001c.147288-a,substrate_buildup,front,1,epoxy organic dielectric (top),,epoxy based organic dielectric,dielectric_polymer,dielectric,,30,,,,,,,,,,design_target,caption,,p.2 Sec. II; p.3 Fig. 2,,
+001c.147288-a-L02,001c.147288-a,substrate_core,core,1,Si core,,Si,silicon,core,,296.7,,,,,,,,,,measured,figure_image,,p.3 Fig. 2,,Caption states 300 um Si (see evidence conflicts).
+001c.147288-a-L03,001c.147288-a,substrate_buildup,back,1,epoxy organic dielectric (bottom),,epoxy based organic dielectric,dielectric_polymer,dielectric,,30,,,,,,,,,,design_target,caption,,p.2 Sec. II; p.3 Fig. 2,,
+001c.147288-b-L01,001c.147288-b,substrate_buildup,front,1,organic interconnect layers (top),,organic polymer dielectric with semi-additive Cu,dielectric_polymer,dielectric,,,,,,,,,,3,,stated,mixed,,p.3 Fig. 3; p.3 Sec. II; p.4 Sec. IV,,
+001c.147288-b-L02,001c.147288-b,substrate_core,core,1,Si core,,Si,silicon,core,,,,,,,,,,,,stated,mixed,,p.3 Fig. 3; p.3 Sec. II; p.4 Sec. IV,,
+001c.147288-b-L03,001c.147288-b,substrate_buildup,back,1,organic interconnect layers (bottom),,organic polymer dielectric with semi-additive Cu,dielectric_polymer,dielectric,,,,,,,,,,3,,stated,mixed,,p.3 Fig. 3; p.3 Sec. II; p.4 Sec. IV,,
+001c.147288-c-L01,001c.147288-c,die,single,1,Si die,,Si,silicon,device,,,,,,,,,,,,stated,mixed,,p.3 Sec. III; p.4 Fig. 6,,
+001c.147288-c-L02,001c.147288-c,substrate_buildup,single,1,inorganic dielectric with Cu pillars,,SiO2,dielectric_inorganic,dielectric,,,,,,,,,,,,stated,mixed,,p.3 Sec. III; p.4 Fig. 6,,"Low-temperature CVD; Cu by damascene, terminating in Cu pillars in SiO2."
+001c.147288-c-L03,001c.147288-c,substrate_buildup,single,2,Si3N4,,Si3N4,dielectric_inorganic,dielectric,,,,,,,,,,,,stated,mixed,,p.3 Sec. III; p.4 Fig. 6,,Position below SiO2 read from Fig. 6 labels.
+001c.147288-c-L04,001c.147288-c,substrate_buildup,single,3,organic wiring layer,,ABF-GL102,dielectric_polymer,dielectric,,,,,,,,,,,,stated,mixed,,p.3 Sec. III; p.4 Fig. 6,,
+001c.147288-c-L05,001c.147288-c,substrate_buildup,single,3,Cu in organic layer,Cu pads,Cu,metal,conductor,,,,,,,,,,,,stated,mixed,,p.3 Sec. III; p.4 Fig. 6,,
+eptc59621.2023.10457729-a-L01,eptc59621.2023.10457729-a,die,single,1,dummy Si chip,,Si,silicon,device,,500,,,,,,,,,,design_target,text,,p.3 Methodology,,
+eptc59621.2023.10457729-a-L02,eptc59621.2023.10457729-a,die,single,2,oxide,,oxide,dielectric_inorganic,dielectric,,3,,,,,,,,,,design_target,text,,p.3 Methodology,,Deposited to mimic a PIC.
+eptc59621.2023.10457729-b-L01,eptc59621.2023.10457729-b,die,single,1,dummy Si chip,,Si,silicon,device,,500,,,,,,,,,,design_target,text,,p.3 Methodology,,
+eptc59621.2023.10457729-b-L02,eptc59621.2023.10457729-b,die,single,2,oxide,,oxide,dielectric_inorganic,dielectric,,3,,,,,,,,,,design_target,text,,p.3 Methodology,,Deposited to mimic a PIC.
+eptc59621.2023.10457729-c-L01,eptc59621.2023.10457729-c,die,single,1,dummy Si chip,,Si,silicon,device,,500,,,,,,,,,,design_target,text,,p.3 Methodology,,500 um stated for the 5x5x0.5 mm dummy chips; not restated for epoxy samples.
+eptc59621.2023.10457729-c-L02,eptc59621.2023.10457729-c,die,single,2,oxide,,oxide,dielectric_inorganic,dielectric,,3,,,,,,,,,,design_target,text,,p.3 Methodology,,Deposited to mimic a PIC.
+eptc59621.2023.10457729-b-L03,eptc59621.2023.10457729-b,bonding_interface,single,1,SAC305 solder joint gap,,SAC305,solder,bonding,,8.07,,,,,,,,,,measured,figure_image,,p.4 Fig. 7; p.3 Result and Discussion,,Mean Si-to-glass gap.
+eptc59621.2023.10457729-b-L04,eptc59621.2023.10457729-b,interposer,single,1,dummy glass chip,,glass,glass,carrier,,500,,,,,,,,,,design_target,text,,p.3 Methodology,,
+eptc59621.2023.10457729-c-L03,eptc59621.2023.10457729-c,bonding_interface,single,1,optical epoxy bond line,,Dymax OP-29,adhesive,adhesive,,1.618,,,,,,,,,n=1.5; viscosity 2500 cP,measured,figure_image,properties:stated;properties:text,p.4 Fig. 8; p.3 Methodology,,Mean Si-to-glass gap.
+eptc59621.2023.10457729-c-L04,eptc59621.2023.10457729-c,interposer,single,1,glass sample,,glass,glass,carrier,,,,,,,,,,,,stated,text,,p.3 Methodology,,
+001c.74748-a-L01,001c.74748-a,substrate_buildup,front,1,PASS passivation,,,unspecified,passivation,,,,,,,,,,,,stated,schematic,,p.3 Fig. 3(h),,
+001c.74748-a-L02,001c.74748-a,substrate_buildup,front,2,MET2,,,metal,conductor,,,,,,,,,,,,stated,schematic,,p.3 Fig. 3(h),,
+001c.74748-a-L03,001c.74748-a,substrate_buildup,front,3,ISL1 insulation layer #1 (organic lamination),,ABF,dielectric_polymer,dielectric,,,,,,,,,,,,stated,mixed,,p.3 Fig. 3(d); p.3 Fig. 3(h); p.3 Sec. III.A,,
+001c.74748-a-L04,001c.74748-a,substrate_buildup,front,4,MET1,,Ti/Au,metal,conductor,,,,,,,,,,,,stated,schematic,,p.3 Fig. 3(a),,
+001c.74748-a-L05,001c.74748-a,glass_core,core,1,clad glass (cavity layer),,Corning AFG clad glass,glass,core,,125,,,,,,,,,etch rate ratio clad:core ~20:1 in 5% diluted HF,design_target,text,,p.2 Sec. II,,
+001c.74748-a-L06,001c.74748-a,glass_core,core,2,core glass (etch stop),,Corning AFG core glass,glass,core,,250,,,,,,,,,,design_target,text,,p.2 Sec. II,,
+001c.74748-a-L07,001c.74748-a,glass_core,core,3,clad glass (bottom),,Corning AFG clad glass,glass,core,,125,,,,,,,,,,design_target,text,,p.2 Sec. II,,
+001c.74748-a-L08,001c.74748-a,die,single,1,dummy IC,,,,device,,140,,,,,,,,,,design_target,text,,p.2 Sec. III.A,,Die material for the Fig. 4 dummies not stated.
+001c.74748-a-L09,001c.74748-a,die,single,2,die fixing epoxy,,non-conductive epoxy,adhesive,adhesive,,,,,,,,,,,,stated,schematic,,p.3 Fig. 3(c),,
+001c.74748-e-L01,001c.74748-e,substrate_buildup,front,1,passivation,,,unspecified,passivation,,,,,,,,,,,,stated,schematic,,p.5 Fig. 8(f),,
+001c.74748-e-L02,001c.74748-e,substrate_buildup,front,2,metal wiring / TGV electrode,,,metal,conductor,,,,,,,,,,,,stated,schematic,,p.5 Fig. 8(f),,
+001c.74748-e-L03,001c.74748-e,substrate_buildup,front,3,organic dielectric film,,ABF,dielectric_polymer,dielectric,,40,,,,,,,,,,design_target,mixed,,p.4 Sec. III.C; p.5 Fig. 8(d),,40 um film as laminated; also fills TGVs.
+001c.74748-e-L04,001c.74748-e,glass_core,core,1,clad glass (top cavity layer),,Corning AFG glass,glass,core,,125,,,,,,,,,,design_target,text,,p.2 Sec. II,,
+001c.74748-e-L05,001c.74748-e,glass_core,core,2,core glass,,Corning AFG glass,glass,core,,250,,,,,,,,,,design_target,text,,p.2 Sec. II,,
+001c.74748-e-L06,001c.74748-e,glass_core,core,3,clad glass (bottom cavity layer),,Corning AFG glass,glass,core,,125,,,,,,,,,,design_target,text,,p.2 Sec. II,,
+001c.74748-e-L07,001c.74748-e,substrate_buildup,back,1,organic dielectric film,,ABF,dielectric_polymer,dielectric,,40,,,,,,,,,,design_target,mixed,,p.4 Sec. III.C; p.5 Fig. 8(d),,
+001c.74748-e-L08,001c.74748-e,substrate_buildup,back,2,metal wiring / TGV electrode,,,metal,conductor,,,,,,,,,,,,stated,schematic,,p.5 Fig. 8(f),,
+001c.74748-e-L09,001c.74748-e,substrate_buildup,back,3,passivation,,,unspecified,passivation,,,,,,,,,,,,stated,schematic,,p.5 Fig. 8(f),,
+001c.74748-e-L10,001c.74748-e,die,front,1,IC in top cavity,,,,device,,125,,,,,,,,,,design_target,text,,p.1 Abstract; p.5 Fig. 9(b),,
+001c.74748-e-L11,001c.74748-e,die,back,1,IC in bottom cavity,,,,device,,125,,,,,,,,,,design_target,text,,p.1 Abstract; p.5 Fig. 9(b),,

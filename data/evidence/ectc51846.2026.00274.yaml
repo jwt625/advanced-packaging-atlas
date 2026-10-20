@@ -1,0 +1,56 @@
+paper_id: ectc51846.2026.00274
+verified_on: 2026-10-20
+schema_version: 2.5
+source_files:
+  - references/ectc51846.2026.00274/text.md
+  - references/ectc51846.2026.00274/source.json
+  - references/ectc51846.2026.00274/figures/page_02.png
+  - references/ectc51846.2026.00274/figures/page_03.png
+  - references/ectc51846.2026.00274/figures/page_04.png
+  - references/ectc51846.2026.00274/figures/page_05.png
+  - references/ectc51846.2026.00274/figures/page_06.png
+  - references/ectc51846.2026.00274/figures/cand/p02_fig1.png
+  - references/ectc51846.2026.00274/figures/cand/p02_fig2.png
+  - references/ectc51846.2026.00274/figures/cand/p02_fig3.png
+  - references/ectc51846.2026.00274/figures/cand/p02_fig4.png
+  - references/ectc51846.2026.00274/figures/cand/p03_fig5.png
+  - references/ectc51846.2026.00274/figures/cand/p03_fig6.png
+  - references/ectc51846.2026.00274/figures/cand/p03_tableii.png
+  - references/ectc51846.2026.00274/figures/cand/p03_tableiii.png
+  - references/ectc51846.2026.00274/figures/cand/p04_fig8.png
+  - references/ectc51846.2026.00274/figures/cand/p04_fig9.png
+  - references/ectc51846.2026.00274/figures/cand/p04_fig10.png
+  - references/ectc51846.2026.00274/figures/cand/p04_fig11.png
+  - references/ectc51846.2026.00274/figures/cand/p05_tableiv.png
+  - references/ectc51846.2026.00274/figures/cand/p05_fig12.png
+  - references/ectc51846.2026.00274/figures/cand/p06_tablev.png
+  - references/ectc51846.2026.00274/figures/cand/p06_tablevi.png
+  - references/ectc51846.2026.00274/figures/cand/p06_fig13.png
+figure_reading_method: >-
+  Page renders p.2-6 at 150 dpi; 300 dpi re-renders of Figs. 2 and 3 to read stack labels; manual re-crops of Fig. 4,
+  Fig. 14 (no candidate), Tables II, IV (candidates cut rows) and VI (candidate bbox wrong). Table values read from table images.
+entries:
+  - {table: metrics, row_id: ectc51846.2026.00274-a-m3, field: value, value: 3500, unit: cycles, basis: measured, locator: "p.3 Table II", note: "3500 cycle (no failure); test end, not a failure"}
+  - {table: metrics, row_id: ectc51846.2026.00274-b-m17, field: value, value: 67.4, unit: "%", basis: simulated, locator: "p.6 Fig. 13", note: "label -67.4% at corner BGA"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51846.2026.00274-a-m13, field: value, values: [20, 21], locators: ["p.3 Sec. III.C", "p.3 Table III"], chosen: 20, why: "text states maximum difference 20 C; Table III 10-min dwell gives 125-104 = 21 C (own arithmetic, not entered)"}
+excluded:
+  - "Edge bond pattern effect study attributed to ref [5]"
+  - "Component-level qualification of CoWoS packages (ref [4]) and CoWoS platform background (refs [1]-[3])"
+  - "Darveaux model constants C1-C4 (fit constants, values not given)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "package, interposer, substrate and OAM board dimensions; die set; BGA pitch, ball size, alloy, count"
+  - "edge bond and stiffener/ring materials for the experiment; ring CTE values"
+  - "process_steps: package-to-OAM BGA attach (reflow) and edge bond cure conditions; cold plate loading force value"
+  - "TC dwell time of the Table II runs; n per split; Weibull beta and eta values"
+  - "PCB Young's modulus and CTE values from tensile/DIC tests"
+judgment_calls:
+  - "TV a = physical CoWoS-R MTV on OAM (edge bond with/without is a split, metrics variant); TV b = quarter FEA model (ring material, edge bond pattern and PCB model are simulation splits)."
+  - "Flow F1 = OAM downstream assembly of Fig. 3 (ordered, no typed conditions); edge bond dispense placed first by inference (F1-s01 inferred_order)."
+  - "Load cell / pressure-sensitive film / strain gauge monitoring kept as conditions on the assembly steps; the strain result is metric a-m15."
+  - "Table IV-VI normalized delta W_ave entered as unit 'x' with the reference stated in scope."
+  - "Fig. 13 edge-end reductions (-8.12%, -10.41%) entered as value_text: which end is which side is not stated."
+  - "Venue formatted like other ECTC 2026 papers in data/papers.csv (pp. 1674-1679 from page footers)."

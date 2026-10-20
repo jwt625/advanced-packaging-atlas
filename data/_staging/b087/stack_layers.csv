@@ -1,0 +1,66 @@
+layer_id,tv_id,structure,side,seq,layer_name,feature,material,material_class,layer_role,reinforcement,thickness_um,thickness_min_um,thickness_max_um,line_um,space_um,via_diameter_um,via_pitch_um,roughness_ra_um,repeat,properties,basis,source,overrides,locator,qualifiers,notes
+ectc51909.2023.00302-a-L01,ectc51909.2023.00302-a,other,single,1,Cu heat spreader,,electroplated Cu,metal,thermal,,36,,,,,,,,,,measured,text,,p.5 Sec. IV; p.4 Fig. 5,thickness_um:approx,Forward/reverse pulse plating; no Cu diffusion barrier.
+ectc51909.2023.00302-a-L02,ectc51909.2023.00302-a,other,single,2,Cu seed,,Cu (sputtered),metal,seed,,0.3,,,,,,,,,,design_target,text,,p.5 Sec. IV,,
+ectc51909.2023.00302-a-L03,ectc51909.2023.00302-a,other,single,3,Ti adhesion,,Ti (sputtered),metal,adhesion,,0.015,,,,,,,,,,design_target,text,,p.5 Sec. IV,,
+ectc51909.2023.00302-a-L04,ectc51909.2023.00302-a,other,single,4,ICP-PECVD SiO2 encapsulant,,SiO2 (ICP-PECVD),dielectric_inorganic,encapsulant,,15,,,,,,,,,,design_target,text,,p.4 Sec. IV; p.4 Fig. 6(b); p.4 Fig. 7(b),,Between/around chiplets; removed above chiplets by BOE; pinch-off void at 10 um gap.
+ectc51909.2023.00302-a-L05,ectc51909.2023.00302-a,other,single,5,device-wafer bottom oxide,,SiO2,dielectric_inorganic,other,,2,,,,,,,,,,design_target,text,,p.4 Sec. IV; p.4 Fig. 5,,
+ectc51909.2023.00302-a-L06,ectc51909.2023.00302-a,other,single,6,temporary adhesive,,temporary adhesive,adhesive,adhesive,,,,,,,,,,,,stated,schematic,,p.4 Fig. 5,,
+ectc51909.2023.00302-a-L07,ectc51909.2023.00302-a,other,single,7,carrier wafer 1,,Si,silicon,carrier,,500,,,,,,,,,,design_target,text,,p.4 Sec. IV; p.4 Fig. 5,,
+ectc51909.2023.00302-a-L08,ectc51909.2023.00302-a,die,single,1,emulated chiplet Si,,Si,silicon,device,,30,,,,,,,,,,design_target,text,,p.3 Sec. IV; p.4 Fig. 6(b),,Co-planar with SiO2 encapsulant; 150 um x 150 um.
+ectc51909.2023.00302-b-L01,ectc51909.2023.00302-b,other,single,1,ICP-PECVD SiO2 with TOVs,,SiO2 (ICP-PECVD),dielectric_inorganic,dielectric,,8.5,,,,,,,,,,design_target,text,,p.5 Sec. IV; p.5 Fig. 10,thickness_um:approx,"Via diameters approx 2-5 um, pitch 4-15 um (interconnects)."
+ectc51909.2023.00302-b-L02,ectc51909.2023.00302-b,other,single,2,Si wafer,,Si,silicon,core,,500,,,,,,,,,,design_target,text,,p.5 Sec. IV,,
+ectc51909.2023.00302-c-L01,ectc51909.2023.00302-c,other,single,1,PECVD SiO2,,PECVD SiO2,dielectric_inorganic,encapsulant,,12,,,,,,,,,k = 1.1 W/mK,simulated,table,,p.2 Table I,,Fig. 2(b) caption states 22 um SiO2 for the full-oxide case.
+ectc51909.2023.00302-c-L02,ectc51909.2023.00302-c,other,single,2,Cu heat spreader,,Cu,metal,thermal,,30,,,,,,,,,k = 380 W/mK,simulated,table,,p.2 Table I,,
+001c.147203-a-L01,001c.147203-a,substrate_buildup,single,1,Cu metal layers L1-L10,,Cu (MSAP),metal,conductor,,18,,,30,30,70,125,,10,,design_target,table,,p.2 Table 1; p.3 Sec. III,line_um:ge;space_um:ge;via_pitch_um:ge,Min. L/S 30/30 um; via pitch = min pad pitch 125 um; text design basis via phi60 um (see conflicts).
+001c.147203-a-L02,001c.147203-a,substrate_buildup,single,2,build-up dielectric (9 layers),,resin A: Panasonic R-G640(L) prepreg,organic_laminate,dielectric,glass cloth,65,,,,,,,,9,"Dk 3.1, Df 0.002 (10 GHz)",design_target,table,properties:text,p.2 Table 1; p.2 Sec. II.B,,Text design basis 70 um resin thickness (see conflicts).
+001c.147203-c-L01,001c.147203-c,coupon,single,1,differential microstrip signal and GND traces,,Cu,metal,conductor,,20,,,,,,,,,,design_target,schematic,,p.2 Fig. 3(b),,Line length 10-40 mm.
+001c.147203-d-L01,001c.147203-d,coupon,single,1,differential microstrip signal and GND traces,,Cu,metal,conductor,,20,,,,,,,,,,design_target,schematic,,p.2 Fig. 3(b),,Line length 10-40 mm.
+001c.147203-e-L01,001c.147203-e,coupon,single,1,differential microstrip signal and GND traces,,Cu,metal,conductor,,20,,,,,,,,,,design_target,schematic,,p.2 Fig. 3(b),,Line length 10-40 mm.
+001c.147203-c-L02,001c.147203-c,coupon,single,2,resin,,material A: Panasonic R-G640(L) prepreg,organic_laminate,dielectric,glass cloth,70,,,,,,,,,"Dk 3.1, Df 0.002 (10 GHz)",design_target,schematic,properties:text,p.2 Fig. 3(b); p.2 Sec. II.B,,
+001c.147203-d-L02,001c.147203-d,coupon,single,2,resin,,material B: Panasonic R-G740M RCC,dielectric_polymer,dielectric,,70,,,,,,,,,"Dk 2.6, Df 0.003 (10 GHz)",design_target,schematic,properties:text,p.2 Fig. 3(b); p.2 Sec. II.B,,
+001c.147203-e-L02,001c.147203-e,coupon,single,2,resin,,material C: prepreg,organic_laminate,dielectric,,70,,,,,,,,,"Dk 2.9, Df 0.002 (10 GHz)",design_target,schematic,properties:text,p.2 Fig. 3(b); p.2 Sec. II.B,,
+001c.147203-c-L03,001c.147203-c,coupon,single,3,Cu ground plane,,Cu,metal,conductor,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3(b),,
+001c.147203-d-L03,001c.147203-d,coupon,single,3,Cu ground plane,,Cu,metal,conductor,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3(b),,
+001c.147203-e-L03,001c.147203-e,coupon,single,3,Cu ground plane,,Cu,metal,conductor,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3(b),,
+estc60143.2024.10712002-a-L01,estc60143.2024.10712002-a,bridge,single,1,Ni/Pd/Au surface treatment,,Ni/Pd/Au,metal,surface_finish,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-a-L02,estc60143.2024.10712002-a,bridge,single,2,polyimide-2,,polyimide,dielectric_polymer,passivation,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-a-L03,estc60143.2024.10712002-a,bridge,single,3,Cu metal layer (GSSG CPW lines),,electroplated Cu,metal,conductor,,,,,,,,,,,,stated,mixed,,p.2 Fig. 3; p.3 Sec. III,,
+estc60143.2024.10712002-a-L04,estc60143.2024.10712002-a,bridge,single,4,Cu seed,,Cu,metal,seed,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-a-L05,estc60143.2024.10712002-a,bridge,single,5,polyimide-1,,polyimide,dielectric_polymer,dielectric,,,,,,,,,,,elongation at break > 50%,stated,mixed,,p.2 Fig. 3; p.2 Sec. II,,
+estc60143.2024.10712002-a-L06,estc60143.2024.10712002-a,bridge,single,6,Si substrate,,"high-resistivity Si, 1000 ohm-cm",silicon,core,,,,,,,,,,,,stated,mixed,,p.2 Fig. 3; p.3 Sec. III,,Etched from back around pad area (membrane).
+estc60143.2024.10712002-b-L01,estc60143.2024.10712002-b,bridge,single,1,Ni/Pd/Au surface treatment,,Ni/Pd/Au,metal,surface_finish,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-b-L02,estc60143.2024.10712002-b,bridge,single,2,polyimide-2,,polyimide,dielectric_polymer,passivation,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-b-L03,estc60143.2024.10712002-b,bridge,single,3,Cu metal layer (GSSG CPW lines),,electroplated Cu,metal,conductor,,,,,,,,,,,,stated,mixed,,p.2 Fig. 3; p.3 Sec. III,,
+estc60143.2024.10712002-b-L04,estc60143.2024.10712002-b,bridge,single,4,Cu seed,,Cu,metal,seed,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-b-L05,estc60143.2024.10712002-b,bridge,single,5,polyimide-1,,polyimide,dielectric_polymer,dielectric,,,,,,,,,,,elongation at break > 50%,stated,mixed,,p.2 Fig. 3; p.2 Sec. II,,
+estc60143.2024.10712002-b-L06,estc60143.2024.10712002-b,bridge,single,6,Si substrate,,"high-resistivity Si, 1000 ohm-cm",silicon,core,,,,,,,,,,,,stated,mixed,,p.2 Fig. 3; p.3 Sec. III,,Not etched (no membrane).
+estc60143.2024.10712002-c-L01,estc60143.2024.10712002-c,bridge,single,1,Ni/Pd/Au surface treatment,,Ni/Pd/Au,metal,surface_finish,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-c-L02,estc60143.2024.10712002-c,bridge,single,2,polyimide-2,,polyimide,dielectric_polymer,passivation,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-c-L03,estc60143.2024.10712002-c,bridge,single,3,Cu metal layer (GSSG CPW lines),,electroplated Cu,metal,conductor,,,,,,,,,,,,stated,mixed,,p.2 Fig. 3; p.3 Sec. III,,
+estc60143.2024.10712002-c-L04,estc60143.2024.10712002-c,bridge,single,4,Cu seed,,Cu,metal,seed,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-c-L05,estc60143.2024.10712002-c,bridge,single,5,polyimide-1,,polyimide,dielectric_polymer,dielectric,,,,,,,,,,,elongation at break > 50%,stated,mixed,,p.2 Fig. 3; p.2 Sec. II,,
+estc60143.2024.10712002-c-L06,estc60143.2024.10712002-c,bridge,single,6,Si substrate,,"high-resistivity Si, 1000 ohm-cm",silicon,core,,,,,,,,,,,,stated,mixed,,p.2 Fig. 3; p.3 Sec. III,,Not etched (no membrane).
+estc60143.2024.10712002-d-L01,estc60143.2024.10712002-d,bridge,single,1,Ni/Pd/Au surface treatment,,Ni/Pd/Au,metal,surface_finish,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-d-L02,estc60143.2024.10712002-d,bridge,single,2,polyimide-2,,polyimide,dielectric_polymer,passivation,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-d-L03,estc60143.2024.10712002-d,bridge,single,3,Cu metal layer (GSSG CPW lines),,electroplated Cu,metal,conductor,,,,,,,,,,,,stated,mixed,,p.2 Fig. 3; p.3 Sec. III,,
+estc60143.2024.10712002-d-L04,estc60143.2024.10712002-d,bridge,single,4,Cu seed,,Cu,metal,seed,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-d-L05,estc60143.2024.10712002-d,bridge,single,5,polyimide-1,,polyimide,dielectric_polymer,dielectric,,,,,,,,,,,elongation at break > 50%,stated,mixed,,p.2 Fig. 3; p.2 Sec. II,,
+estc60143.2024.10712002-d-L06,estc60143.2024.10712002-d,bridge,single,6,Si substrate,,"high-resistivity Si, 1000 ohm-cm",silicon,core,,,,,,,,,,,,stated,mixed,,p.2 Fig. 3; p.3 Sec. III,,Not etched (no membrane).
+estc60143.2024.10712002-e-L01,estc60143.2024.10712002-e,bridge,single,1,Ni/Pd/Au surface treatment,,Ni/Pd/Au,metal,surface_finish,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-e-L02,estc60143.2024.10712002-e,bridge,single,2,polyimide-2,,polyimide,dielectric_polymer,passivation,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-e-L03,estc60143.2024.10712002-e,bridge,single,3,Cu metal layer (GSSG CPW lines),,electroplated Cu,metal,conductor,,,,,,,,,,,,stated,mixed,,p.2 Fig. 3; p.3 Sec. III,,
+estc60143.2024.10712002-e-L04,estc60143.2024.10712002-e,bridge,single,4,Cu seed,,Cu,metal,seed,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-e-L05,estc60143.2024.10712002-e,bridge,single,5,polyimide-1,,polyimide,dielectric_polymer,dielectric,,,,,,,,,,,elongation at break > 50%,stated,mixed,,p.2 Fig. 3; p.2 Sec. II,,
+estc60143.2024.10712002-e-L06,estc60143.2024.10712002-e,bridge,single,6,Si substrate,,"high-resistivity Si, 1000 ohm-cm",silicon,core,,,,,,,,,,,,stated,mixed,,p.2 Fig. 3; p.3 Sec. III,,Not etched (no membrane).
+estc60143.2024.10712002-f-L01,estc60143.2024.10712002-f,bridge,single,1,Ni/Pd/Au surface treatment,,Ni/Pd/Au,metal,surface_finish,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-f-L02,estc60143.2024.10712002-f,bridge,single,2,polyimide-2,,polyimide,dielectric_polymer,passivation,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-f-L03,estc60143.2024.10712002-f,bridge,single,3,Cu metal layer (GSSG CPW lines),,electroplated Cu,metal,conductor,,,,,,,,,,,,stated,mixed,,p.2 Fig. 3; p.3 Sec. III,,
+estc60143.2024.10712002-f-L04,estc60143.2024.10712002-f,bridge,single,4,Cu seed,,Cu,metal,seed,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-f-L05,estc60143.2024.10712002-f,bridge,single,5,polyimide-1,,polyimide,dielectric_polymer,dielectric,,,,,,,,,,,elongation at break > 50%,stated,mixed,,p.2 Fig. 3; p.2 Sec. II,,
+estc60143.2024.10712002-f-L06,estc60143.2024.10712002-f,bridge,single,6,Si substrate,,"high-resistivity Si, 1000 ohm-cm",silicon,core,,,,,,,,,,,,stated,mixed,,p.2 Fig. 3; p.3 Sec. III,,Not etched (no membrane).
+estc60143.2024.10712002-g-L01,estc60143.2024.10712002-g,bridge,single,1,Ni/Pd/Au surface treatment,,Ni/Pd/Au,metal,surface_finish,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-g-L02,estc60143.2024.10712002-g,bridge,single,2,polyimide-2,,polyimide,dielectric_polymer,passivation,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-g-L03,estc60143.2024.10712002-g,bridge,single,3,Cu metal layer (GSSG CPW lines),,electroplated Cu,metal,conductor,,,,,,,,,,,,stated,mixed,,p.2 Fig. 3; p.3 Sec. III,,
+estc60143.2024.10712002-g-L04,estc60143.2024.10712002-g,bridge,single,4,Cu seed,,Cu,metal,seed,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+estc60143.2024.10712002-g-L05,estc60143.2024.10712002-g,bridge,single,5,polyimide-1,,polyimide,dielectric_polymer,dielectric,,,,,,,,,,,elongation at break > 50%,stated,mixed,,p.2 Fig. 3; p.2 Sec. II,,
+estc60143.2024.10712002-g-L06,estc60143.2024.10712002-g,bridge,single,6,Si substrate,,"high-resistivity Si, 1000 ohm-cm",silicon,core,,,,,,,,,,,,stated,mixed,,p.2 Fig. 3; p.3 Sec. III,,Etched from back around pad area (membrane).

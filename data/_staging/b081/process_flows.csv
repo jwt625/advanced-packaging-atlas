@@ -1,0 +1,10 @@
+flow_id,paper_id,flow_name,scope,level,tv_ids,build_seq,basis,source,overrides,locator,qualifiers,notes
+001c.147288-F1,001c.147288,"through via module (Sec. II, items i-v)",tv_build,ordered,001c.147288-a;001c.147288-b,1,stated,text,,p.2 Sec. II; p.3 Fig. 2,,"Free-standing wafer, both sides processed without carrier; no process conditions given."
+001c.147288-F2,001c.147288,organic build-up on both sides of Si core,tv_build,ordered,001c.147288-b,2,stated,mixed,,p.3 Sec. II; p.3 Fig. 3; p.4 Sec. IV,,
+001c.147288-F3,001c.147288,inorganic-on-organic hybrid interconnect and Cu-Cu TCB (tack + gang anneal),tv_build,full,001c.147288-c,1,stated,text,,p.3 Sec. III; p.4 Fig. 6; p.4 Sec. IV,,
+eptc59621.2023.10457729-F1,eptc59621.2023.10457729,"Au pads, jetted SAC305 bumps and reflow (Fig. 4)",tv_build,full,eptc59621.2023.10457729-a;eptc59621.2023.10457729-b,1,design_target,mixed,,p.3 Methodology; p.3 Fig. 4,,
+eptc59621.2023.10457729-F2,eptc59621.2023.10457729,flip-chip attach of bumped Si chip to glass chip,tv_build,ordered,eptc59621.2023.10457729-b,2,stated,text,,p.1 Introduction; p.3 Result and Discussion; p.4 Fig. 7,,"Bonder, temperature and force not reported."
+eptc59621.2023.10457729-F3,eptc59621.2023.10457729,UV-curable optical epoxy bonding (Dymax OP-29),tv_build,ordered,eptc59621.2023.10457729-c,1,stated,text,,p.3 Methodology,,
+001c.74748-F1,001c.74748,"embedded IC package fabrication steps (Fig. 3), single-sided",tv_build,ordered,001c.74748-a;001c.74748-b;001c.74748-c;001c.74748-d,1,stated,mixed,,p.3 Fig. 3; p.3 Sec. III.A,,Rest of steps after lamination described as conventional PCB processes.
+001c.74748-F2,001c.74748,fabrication steps for double-sided DEP (Fig. 8),tv_build,full,001c.74748-e;001c.74748-f,1,stated,mixed,,p.4 Sec. III.C; p.5 Fig. 8,,
+001c.74748-F3,001c.74748,PoP flip-chip bonding of two double-sided DEPs,tv_build,full,001c.74748-f,2,stated,text,,p.5 Sec. III.D; p.5 Fig. 10,,

@@ -1,0 +1,5 @@
+flow_id,paper_id,flow_name,scope,level,tv_ids,build_seq,basis,source,overrides,locator,qualifiers,notes
+001c.129733-F1,001c.129733,"reconstructed W2W bonding process (Fig. 2, Sec. II.B)",tv_build,ordered,001c.129733-a,1,stated,mixed,,p.2 Sec. II.B; p.2 Fig. 2; p.4 Sec. III; p.5 Sec. IV,,No numeric process conditions stated; per text same as typical D2W up to D2W bonding.
+001c.129733-F2,001c.129733,typical D2W bonding (Fig. 2),comparison,ordered,001c.129733-a,2,stated,mixed,,p.2 Sec. II.B; p.2 Fig. 2,,Conventional D2W flow contrasted with reconstructed W2W.
+001c.129764-F1,001c.129764,bumping and assembly process flow (Fig. 2),tv_build,full,001c.129764-a;001c.129764-b,1,stated,mixed,,p.2 Sec. II.A; p.2 Sec. II.B; p.3 Fig. 2; p.3 Sec. II.B,,All processes at wafer level; Leg1/Leg2 differ only in electroplated metallurgy (deltas).
+ectc51846.2026.00274-F1,ectc51846.2026.00274,"OAM assembly: stiffener, cold plate, baseboard (Fig. 3, Sec. II.B)",tv_build,ordered,ectc51846.2026.00274-a,1,stated,mixed,,p.2 Sec. II.B; p.2 Fig. 3; p.2 Sec. II.C,,Downstream module assembly after package-to-OAM attach (attach not described); no typed conditions.

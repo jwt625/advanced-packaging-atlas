@@ -1,0 +1,32 @@
+paper_id: 001c.147108
+verified_on: 2026-10-20
+source_files:
+  - references/001c.147108/text.md
+  - references/001c.147108/source.json
+  - references/001c.147108/figures/page_02.png
+  - references/001c.147108/figures/page_03.png
+  - references/001c.147108/figures/page_05.png
+figure_reading_method: >-
+  Page renders p.2, p.3, p.5 opened; Fig. 2 step labels (1)-(23) and Fig. 3 panels read from candidate crops; Fig. 1
+  manually re-cropped in the scratchpad.
+entries:
+  - {table: stack_layers, row_id: 001c.147108-a-L01, field: line_um, value: 10, unit: um, basis: design_target, locator: "p.2 Fig. 1(a) caption", note: "W = 10 um; S = 20 um; D = 50 um (center pad)"}
+  - {table: interconnects, row_id: 001c.147108-a-i1, field: diameter_um, value: 10, unit: um, basis: design_target, locator: "p.1 Abstract; p.6 Conclusion", note: "'10 um copper microvias'"}
+  - {table: process_steps, row_id: 001c.147108-F1-s03, field: time_s, value: 180, unit: s, basis: stated, locator: "p.3 Sec. II.D Stage I", note: "UV exposure three minutes"}
+derived:
+  - {table: process_steps, row_id: 001c.147108-F1-s03, field: time_s, value: 180, formula: "3 min x 60", inputs: "p.3 Sec. II.D Stage I"}
+  - {table: process_steps, row_id: 001c.147108-F1-s11, field: time_s, value: 180, formula: "3 min x 60", inputs: "p.3-4 Sec. II.D Stage II"}
+  - {table: process_steps, row_id: 001c.147108-F1-s23, field: time_s, value: 180, formula: "3 min x 60", inputs: "p.4 Sec. II.D Stage IV"}
+conflicts:
+  - {table: process_steps, row_id: 001c.147108-F1-s30, field: step, values: ["third spiral inductor (SI2) (text typo)", "SI3 (resulting substrate label; Fig. 2 step 22)"], locators: ["p.4 Sec. II.D Stage V", "p.4 Sec. II.D Stage V; p.3 Fig. 2"], chosen: "SI3", why: "resulting label and figure"}
+  - {table: stack_layers, row_id: 001c.147108-a-L06, field: layer_name, values: ["second (top-layer) spiral after Stage III", "second (middle-layer) spiral in final stack"], locators: ["p.6 Sec. III", "p.5 Fig. 3 caption"], chosen: "middle", why: "final triple stack"}
+excluded:
+  - "strip widths down to 1 um attributed to ref [7]; via diameters below 10 um attributed to ref [6]"
+  - "target inductance density >50 nH/mm2 and Q >30 at 1 GHz (design targets from literature, ref [1])"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "inductance, Q, resistance or any electrical measurement (future work)"
+  - "layer thicknesses (PU, HP19, Cu), FR-4 thickness, coupon size, number of spiral turns"
+  - "spin-coat speeds, electroless bath temperature and time, laser fluence and pulse count"
+  - "numeric layer-to-layer misalignment; microvia depth"

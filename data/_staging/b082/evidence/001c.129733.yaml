@@ -1,0 +1,43 @@
+paper_id: 001c.129733
+verified_on: 2026-10-20
+schema_version: 2.5
+source_files:
+  - references/001c.129733/text.md
+  - references/001c.129733/source.json
+  - references/001c.129733/figures/page_02.png
+  - references/001c.129733/figures/page_04.png
+  - references/001c.129733/figures/page_05.png
+  - references/001c.129733/figures/cand/p02_fig1.png
+  - references/001c.129733/figures/cand/p02_fig2.png
+  - references/001c.129733/figures/cand/p03_fig3.png
+  - references/001c.129733/figures/cand/p04_fig4.png
+  - references/001c.129733/figures/cand/p04_fig5.png
+  - references/001c.129733/figures/cand/p04_fig6.png
+  - references/001c.129733/figures/cand/p05_fig7.png
+  - references/001c.129733/figures/cand/p05_fig8.png
+figure_reading_method: >-
+  Page renders p.2, 4, 5 at 150 dpi; all 8 candidate crops opened; manual re-crops of Figs. 1, 2, 3, 4, 5, 6, 8
+  (candidates cut labels/axes). Fig. 3 bar heights read against the 0-1800 nm axis (about 20 nm resolution).
+entries:
+  - {table: interconnects, row_id: 001c.129733-a-i1, field: pitch_um, value: 2, unit: um, basis: design_target, locator: "p.4 Sec. III.B; p.5 Fig. 7", note: "2 um pitch bonding; '2um' arrow in Fig. 7 schematic and SEM (d), '2um' in Fig. 8 TEM"}
+  - {table: metrics, row_id: 001c.129733-a-m3, field: value, value: 200, unit: nm, basis: measured, locator: "p.4 Sec. III.A", note: "misalignment below 200nm under condition 3"}
+  - {table: metrics, row_id: 001c.129733-a-m8, field: value, value: 400, unit: nm, basis: derived, locator: "p.3 Sec. II.C", note: "minimum misalignment of less than 400nm required for 2um pitch at 50% pad overlap"}
+derived: []
+conflicts: []
+excluded:
+  - "High-precision D2W bonders with precision of 200 nm or less 'recently developed' (background, refs [7,8])"
+  - "Fig. 3 top-panel per-pad-design accuracy curves (Pad Design 1-3): only the 400 nm / 2 um text value entered"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "process_steps: anneal temperatures/times, CMP and plasma conditions, gapfill thickness, die and wafer thicknesses"
+  - "wafer diameter, die size and count, Cu pad diameter, D2W interface pitch"
+  - "W2W bonding conditions 1-3 parameters; numeric misalignment values for conditions 1 and 2"
+  - "daisy-chain resistance values; electrical yield (planned future work)"
+judgment_calls:
+  - "TV a = demonstrated reconstructed W2W wafer pair (Figs. 4-8); TV b = Fig. 1 architecture example (tv_kind other, concept only)."
+  - "Flow F1 order from Fig. 2 and Sec. II.B; Sec. II.B D2W surface-prep steps apply to F1 because the text says the reconstructed flow is the D2W flow up to D2W bonding."
+  - "D2W anneal not put in F1 (text places it in the typical D2W flow only); W2W anneal (F1-s13) from Sec. III.B Fig. 8 text."
+  - "Carrier removal F1-s14 generic_description with performed empty: Fig. 7 demo still shows the carrier wafer."
+  - "Fig. 3 margin bars entered as derived (paper's design analysis), approx qualifier."
+  - "Daisy-chain TEG result attached to TV a (same reconstructed W2W build)."

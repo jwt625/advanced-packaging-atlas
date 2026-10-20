@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+ectc51909.2023.00302,10.1109/ectc51909.2023.00302,Reconstituted-SiO2 Tier with Integrated Copper Heat Spreader,2023,ECTC,thermal_pdn,thermal_pdn,3,"150x150 um, ~30 um thick chiplets encapsulated in 15 um ICP-PECVD SiO2 and 36 um plated Cu spreader."
+001c.147203,10.4071/001c.147203,150 GHz-band Coreless High Multilayer Antenna-in-Package for 6G,2025,IMAPS,advanced_substrate,advanced_substrate,2,"150 GHz coreless multilayer AiP, 8x20x<1 mm, 7 stacked vias passed 1000 TC cycles; low-loss materials."
+estc60143.2024.10712002,10.1109/estc60143.2024.10712002,Over 100-GHz Bridge Chip Interconnection Between Photonic and Electrical ICs with a Heat-Insulating Stress-Relief Membrane Structure,2024,ESTC,cpo,cpo,3,"Si bridge chip with PI/metal and backside-etched membrane linking PIC and EIC; Au stud TCB, -1.2 dB at 100 GHz."

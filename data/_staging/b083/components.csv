@@ -1,0 +1,21 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+2380-4505-2020.1.000042-a-c1,2380-4505-2020.1.000042-a,dummy_die,,,Chip 1 (large test chip),1,10,10,,,,,200,,,,design_target,text,gap_um:schematic,p.2 Sec. II.A Fig. 1; p.2 Fig. 3(b),,"Test chip; 3,760 pads at 90 um pitch. Paper says it could stand for a processor. gap = chip-to-chip spacing (Fig. 3b)."
+2380-4505-2020.1.000042-a-c2,2380-4505-2020.1.000042-a,dummy_die,,,Chip 2A / Chip 2B (small test chips),2,7,5,,,,,200,,,,design_target,text,gap_um:schematic,p.2 Sec. II.A Fig. 1; p.2 Fig. 3(b),,"Test chips; 1,512 pads at 60 um pitch each. Paper says they could stand for memories."
+2380-4505-2020.1.000042-a-c3,2380-4505-2020.1.000042-a,substrate,,,RDL-first substrate (3 RDLs),,20,20,,,,,,,PID dielectric; ECD Cu on Ti/Cu seed,,design_target,text,,p.2 Sec. II.B; p.3 Sec. III.A,,"Built on temporary glass carrier, 10/10 um layer first; 6,784 top pads, 2,780 bottom pads."
+2380-4505-2020.1.000042-a-c4,2380-4505-2020.1.000042-a,underfill,,,underfill,,,,,,,,,,,,stated,text,,p.5 Sec. III.D,,Dispensed and cured 165 C for 2 h; material not named.
+2380-4505-2020.1.000042-a-c5,2380-4505-2020.1.000042-a,mold,,,EMC (laminated),,,,400,,,,,,EMC,,design_target,text,,p.5 Sec. III.D; p.6 Sec. III.E,,Strip laminated with 400 um thick EMC; thin EMC required strip transfer.
+2380-4505-2020.1.000042-a-c6,2380-4505-2020.1.000042-a,pcb,,,drop-test PCB (8 package sites),1,132,77,992,,,,,,FR-4,,design_target,text,,p.6 Sec. IV.A Fig. 15,,8 layers; 2780 pads at 0.35 mm pitch per site; NSMD pads with OSP finish.
+001c.74775-a-c1,001c.74775-a,unspecified,,yes,chiplet,2,9.96,7.06,720,,,,200,,,,design_target,text,,p.3 Sec. III,,SnAg-capped Cu pillar electrodes and RDL; designed as connected pair; gap = chip spacing. Function not stated.
+001c.74775-a-c2,001c.74775-a,bridge,,yes,bridge die,1,9.96,0.96,20,,,,,,Si (bridge die with RDL),,design_target,text,thickness_um:measured,p.3 Sec. III; p.4 Sec. IV.A Fig. 8,thickness_um:approx,200 um thick as bonded; ground to about 20 um after 2nd MUF (cross-section).
+001c.74775-a-c3,001c.74775-a,mold,,,"1st mold resin (panel-level MUF, chiplet side)",,,,,,,,,,granule resin,,stated,text,,p.3 Sec. III; p.1 Fig. 1(a),,Molding temperature 140 C; fills chiplet-to-carrier gap without voids.
+001c.74775-a-c4,001c.74775-a,mold,,,"2nd mold resin (MUF, bridge side)",,,,,,,,,,,,stated,text,,p.3 Sec. III; p.1 Fig. 1(a),,Encapsulates bridge dies and Tall Pillars; ground to expose pillars.
+001c.129513-a-c1,001c.129513-a,other,,,stencil processing unit (stencil chip),1,,,725,,,,,,,,design_target,text,,p.2 Sec. II Fig. 1,,
+001c.129513-a-c2,001c.129513-a,hbm,,,High Bandwidth Memory,1,,,725,,,,,,,,design_target,text,,p.2 Sec. II Fig. 1,,
+001c.129513-a-c3,001c.129513-a,interposer,,,Si interposer with TSV and multi-layer RDL,,,,100,,,,,,Si,,design_target,text,,p.2 Sec. II; p.3 Fig. 4,,"725 um wafer thinned to 100 um to expose TSVs, before or after molding."
+001c.129513-a-c4,001c.129513-a,mold,,,EMC (compression molded),,,,,,,,,,EMC,,stated,mixed,,p.2 Fig. 1; p.4 Sec. IV.A,,
+001c.129513-a-c5,001c.129513-a,underfill,,,underfill or molded underfill,,,,,,,,,,,,stated,text,,p.2 Sec. II Fig. 1,,Either capillary underfill or MUF by compression molding.
+001c.129513-a-c6,001c.129513-a,substrate,,,organic substrate,,,,,,,,,,,,stated,text,,p.2 Sec. II Fig. 1,,
+001c.129513-b-c1,001c.129513-b,dummy_die,yes,,dummy Si chips,,,,,,,,,,Si,,stated,text,,p.5 Sec. IV.B Fig. 6,,
+001c.129513-b-c2,001c.129513-b,adhesive,,,die attach material,,,,,,,,,,,,stated,text,,p.5 Sec. IV.B,,
+001c.129513-b-c3,001c.129513-b,interposer,yes,,Si wafer serving as interposer,,,,,,,,,,Si,,stated,text,,p.5 Sec. IV.B,,Unthinned or thinned (on glass substrate) per Table 2 flow factor.
+001c.129513-b-c4,001c.129513-b,mold,,,EMC A / EMC B / EMC C (split),,,,,,,,,,EMC A granular; EMC B liquid; EMC C liquid,,stated,table,,p.4 Table 1; p.5 Table 2,,

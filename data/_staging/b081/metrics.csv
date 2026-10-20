@@ -1,0 +1,55 @@
+metric_id,tv_id,category,parameter,variant,value,value_text,unit,statistic,n_samples,condition,test_standard,pass_criterion,result,scope,reference_tv_id,basis,source,overrides,locator,qualifiers,notes
+001c.147288-a-m1,001c.147288-a,geometry,Si core thickness (SEM label),,296.7,,um,single,,,,,,,,measured,figure_image,,p.3 Fig. 2,,
+001c.147288-a-m2,001c.147288-a,geometry,vertical span labelled across via cross-section,,413.0,,um,single,,,,,,,,measured,figure_image,,p.3 Fig. 2,,Line spans top to bottom Cu surface as drawn; caption gives 360 um via length.
+001c.147288-a-m3,001c.147288-a,geometry,epoxy fill thickness on Si sidewall,left sidewall of centre via,53.74,,um,single,,,,,,,,measured,figure_image,,p.3 Fig. 2,,Interpreted from label position.
+001c.147288-a-m4,001c.147288-a,geometry,epoxy fill thickness on Si sidewall,right sidewall of centre via,51.91,,um,single,,,,,,,,measured,figure_image,,p.3 Fig. 2,,Interpreted from label position.
+001c.147288-a-m5,001c.147288-a,geometry,via-in-via opening width at mid-height,,22.05,,um,single,,,,,,,,measured,figure_image,,p.3 Fig. 2,,Interpreted from label position.
+001c.147288-a-m6,001c.147288-a,geometry,via-in-via opening width at top,,58.98,,um,single,,,,,,,,measured,figure_image,,p.3 Fig. 2,,Interpreted from label position.
+001c.147288-a-m7,001c.147288-a,geometry,via-in-via opening width at bottom,,12.68,,um,single,,,,,,,,measured,figure_image,,p.3 Fig. 2,,Interpreted from label position.
+001c.147288-c-m1,001c.147288-c,geometry,die-to-substrate misalignment after anneal,,,some slight misalignment,,single,,FIB cross-section after 240 C 4 h anneal,,,,,,measured,caption,,p.4 Fig. 6,,
+001c.147288-c-m2,001c.147288-c,other,sufficient gang anneal temperature,,240,,C,single,,"4 h, high vacuum, no pressure; after 250 C 15 s tack",,,,,,measured,text,,p.3 Sec. III,,Result of anneal temperature variation; criterion for sufficient not stated.
+eptc59621.2023.10457729-a-m1,eptc59621.2023.10457729-a,geometry,solder bump height after reflow,bond pad 50 um,26.8,,um,single,,"SAC305 jetted, reflowed per Fig. 4; SEM after epoxy mount, SiC grind, 1 um alumina polish",,,,,,measured,figure_image,,p.4 Fig. 6; p.3 Fig. 5,,SEM label
+eptc59621.2023.10457729-a-m2,eptc59621.2023.10457729-a,geometry,solder bump height after reflow,bond pad 55 um,24.9,,um,single,,"SAC305 jetted, reflowed per Fig. 4; SEM after epoxy mount, SiC grind, 1 um alumina polish",,,,,,measured,figure_image,,p.3 Fig. 5,value:approx,read off plot
+eptc59621.2023.10457729-a-m3,eptc59621.2023.10457729-a,geometry,solder bump height after reflow,bond pad 60 um,22.5,,um,single,,"SAC305 jetted, reflowed per Fig. 4; SEM after epoxy mount, SiC grind, 1 um alumina polish",,,,,,measured,figure_image,,p.3 Fig. 5,value:approx,read off plot
+eptc59621.2023.10457729-a-m4,eptc59621.2023.10457729-a,geometry,solder bump height after reflow,bond pad 65 um,20.2,,um,single,,"SAC305 jetted, reflowed per Fig. 4; SEM after epoxy mount, SiC grind, 1 um alumina polish",,,,,,measured,figure_image,,p.3 Fig. 5,value:approx,read off plot
+eptc59621.2023.10457729-a-m5,eptc59621.2023.10457729-a,geometry,solder bump height after reflow,bond pad 70 um,18.7,,um,single,,"SAC305 jetted, reflowed per Fig. 4; SEM after epoxy mount, SiC grind, 1 um alumina polish",,,,,,measured,figure_image,,p.3 Fig. 5,value:approx,read off plot
+eptc59621.2023.10457729-a-m6,eptc59621.2023.10457729-a,geometry,solder bump height after reflow,bond pad 75 um,16.7,,um,single,,"SAC305 jetted, reflowed per Fig. 4; SEM after epoxy mount, SiC grind, 1 um alumina polish",,,,,,measured,figure_image,,p.4 Fig. 6; p.3 Fig. 5,,SEM label
+eptc59621.2023.10457729-a-m7,eptc59621.2023.10457729-a,geometry,solder bump height after reflow,bond pad 80 um,14.5,,um,single,,"SAC305 jetted, reflowed per Fig. 4; SEM after epoxy mount, SiC grind, 1 um alumina polish",,,,,,measured,figure_image,,p.3 Fig. 5,value:approx,read off plot
+eptc59621.2023.10457729-a-m8,eptc59621.2023.10457729-a,geometry,solder bump height after reflow,bond pad 85 um,13.9,,um,single,,"SAC305 jetted, reflowed per Fig. 4; SEM after epoxy mount, SiC grind, 1 um alumina polish",,,,,,measured,figure_image,,p.4 Fig. 6; p.3 Fig. 5,,SEM label
+eptc59621.2023.10457729-a-m9,eptc59621.2023.10457729-a,geometry,solder bump height after reflow,bond pad 90 um,13.5,,um,single,,"SAC305 jetted, reflowed per Fig. 4; SEM after epoxy mount, SiC grind, 1 um alumina polish",,,,,,measured,figure_image,,p.3 Fig. 5,value:approx,read off plot
+eptc59621.2023.10457729-a-m10,eptc59621.2023.10457729-a,geometry,solder bump height after reflow,bond pad 95 um,12.0,,um,single,,"SAC305 jetted, reflowed per Fig. 4; SEM after epoxy mount, SiC grind, 1 um alumina polish",,,,,,measured,figure_image,,p.3 Fig. 5,value:approx,read off plot
+eptc59621.2023.10457729-a-m11,eptc59621.2023.10457729-a,geometry,solder bump height after reflow,bond pad 100 um,12.14,,um,single,,"SAC305 jetted, reflowed per Fig. 4; SEM after epoxy mount, SiC grind, 1 um alumina polish",,,,,,measured,figure_image,,p.4 Fig. 6; p.3 Fig. 5,,SEM label
+eptc59621.2023.10457729-a-m12,eptc59621.2023.10457729-a,geometry,solder bump height after reflow,bond pad 105 um,9.9,,um,single,,"SAC305 jetted, reflowed per Fig. 4; SEM after epoxy mount, SiC grind, 1 um alumina polish",,,,,,measured,figure_image,,p.3 Fig. 5,value:approx,read off plot
+eptc59621.2023.10457729-b-m1,eptc59621.2023.10457729-b,geometry,vertical gap Si to glass after flip-chip,100 um pads on both chips,8.07,,um,mean,,SEM cross-section,,<=14 um free-form coupler requirement,pass,,,measured,figure_image,,p.4 Fig. 7; p.3 Result and Discussion,,Spread +/-0.107 um in Fig. 7 label; text gives +/-0.177 um.
+eptc59621.2023.10457729-c-m1,eptc59621.2023.10457729-c,geometry,"vertical gap Si to glass, epoxy bonded",,1.618,,um,mean,,SEM cross-section,,within 2.8 um simulated Z tolerance,pass,,,measured,figure_image,,p.4 Fig. 8; p.4 Result and Discussion,,
+eptc59621.2023.10457729-c-m2,eptc59621.2023.10457729-c,geometry,gap variation across chip interface length,,0.177,,um,other,,,,,,+/- about mean,,measured,text,,p.4 Result and Discussion; p.4 Fig. 8,,
+eptc59621.2023.10457729-d-m1,eptc59621.2023.10457729-d,optical,coupling efficiency at 1550 nm,,84,,%,single,,,,,,,,simulated,text,,p.3 Simulation,,
+eptc59621.2023.10457729-d-m2,eptc59621.2023.10457729-d,geometry,required vertical distance PIC to interposer,,14,,um,single,,,,,,,,design_target,text,,p.1 Introduction; p.1 Fig. 1,value:le,
+eptc59621.2023.10457729-e-m1,eptc59621.2023.10457729-e,optical,lateral (Y) alignment tolerance,,2.7,,um,single,,Z gap 0 um; epoxy n=1.457,,,,+/-,,simulated,text,,p.2 Simulation; p.2 Fig. 2,,
+eptc59621.2023.10457729-e-m2,eptc59621.2023.10457729-e,optical,vertical (Z) alignment tolerance,,2.8,,um,single,,epoxy n=1.457,,,,,,simulated,text,,p.2 Simulation; p.2 Fig. 2,,
+eptc59621.2023.10457729-e-m3,eptc59621.2023.10457729-e,optical,longitudinal (X) alignment tolerance,,150,,um,single,,Z gap 0 um,,,,+/-,,simulated,text,,p.2 Simulation; p.2 Fig. 2,value:gt,
+eptc59621.2023.10457729-e-m4,eptc59621.2023.10457729-e,optical,twist rotation tolerance,,2.3,,deg,single,,Z gap 500 nm,,,,+/-,,simulated,text,,p.2 Simulation; p.2 Fig. 2,,
+eptc59621.2023.10457729-e-m5,eptc59621.2023.10457729-e,optical,tilt rotation tolerance,,0.4,,deg,single,,Z gap 500 nm,,,,+/-,,simulated,text,,p.2 Simulation; p.2 Fig. 2,,
+eptc59621.2023.10457729-e-m6,eptc59621.2023.10457729-e,optical,vertical (Z) alignment tolerance,epoxy n near 1.5,3.75,,um,single,,,,,,,,simulated,text,,p.2 Simulation,value:approx,Further simulations; longer tapers needed as index rises.
+eptc59621.2023.10457729-e-m7,eptc59621.2023.10457729-e,geometry,required vertical distance PIC to interposer,,3,,um,single,,,,,,,,design_target,text,,p.1 Introduction; p.1 Fig. 1,value:le,
+001c.74748-a-m1,001c.74748-a,geometry,etched cavity depth,,,127-130,um,range,,,,,,,,measured,text,,p.3 Sec. III.A; p.4 Fig. 4(a),,Fig. 4(a) label 130.65 um.
+001c.74748-a-m2,001c.74748-a,geometry,cavity bottom waviness range,,3,,um,single,,,,target 5 um,pass,,,measured,text,,p.3 Sec. III.A,value:lt,
+001c.74748-a-m3,001c.74748-a,geometry,cavity bottom flatness,,2.5,,um,single,,,,,,+/-,,measured,text,,p.1 Abstract,value:lt,
+001c.74748-a-m4,001c.74748-a,geometry,die placement misalignment in cavity,,15,,um,single,,DFR mask used as placement guide,,,,,,measured,text,,p.3 Sec. III.A,value:lt,
+001c.74748-a-m5,001c.74748-a,other,clad:core etch rate ratio in 5% diluted HF,,20,,ratio,single,,,,,,,,design_target,text,,p.2 Sec. II; p.3 Sec. III.A,value:approx,Abstract: selectivity over 20:1.
+001c.74748-a-m6,001c.74748-a,geometry,recommended wiring keep-out from cavity pattern,,140,,um,single,,,,,,,,author_estimate,text,,p.3 Sec. III.A,value:ge,Rule of thumb from cavity sidewall over-etch (~cavity depth).
+001c.74748-a-m7,001c.74748-a,geometry,pad size/pitch on embedded dummy IC,development goal,,60/100,um,single,,,,,,,,design_target,table,,p.3 Table 1,,
+001c.74748-a-m8,001c.74748-a,geometry,min line width/spacing,development goal,,5/5,um,single,,,,,,,,design_target,table,,p.3 Table 1,,
+001c.74748-a-m9,001c.74748-a,geometry,pad alignment,development goal,15,,um,single,,,,,,+/-,,design_target,table,,p.3 Table 1,value:lt,
+001c.74748-c-m1,001c.74748-c,electrical,S21 loss at 28 GHz,Embedding_G50 (total loss),0.47,,dB,single,,,,,,,,measured,figure_image,,p.4 Fig. 5,,G30/G50 not defined in text.
+001c.74748-c-m2,001c.74748-c,electrical,S21 loss at 28 GHz,Dummy (IC only),0.18,,dB,single,,,,,,,,measured,figure_image,,p.4 Fig. 5,,
+001c.74748-c-m3,001c.74748-c,electrical,S21 loss at 28 GHz,Embedding_G30,0.66,,dB,single,,,,,,,,measured,figure_image,,p.4 Fig. 5,,Label 0.66 dB on G30 curve; G30/G50 not defined in text.
+001c.74748-c-m4,001c.74748-c,electrical,interconnection loss at 28 GHz,development goal,0.2,,dB,single,,,,,,,,design_target,table,,p.3 Table 1,value:lt,
+001c.74748-d-m1,001c.74748-d,electrical,LNA gain at 28 GHz,,,20-21,dB,range,,,,,,,,measured,text,,p.4 Sec. III.B; p.4 Fig. 7,,
+001c.74748-d-m2,001c.74748-d,electrical,center frequency shift,,4,,GHz,single,,,,,,,,measured,text,,p.4 Sec. III.B,value:approx,Attributed to upper insulating layer.
+001c.74748-f-m1,001c.74748-f,geometry,gap between stacked DEPs,,80,,um,single,,,,,,,,measured,figure_image,,p.5 Fig. 10(b),,
+001c.74748-f-m2,001c.74748-f,geometry,PKG-to-PKG bump width (label),,140,,um,single,,,,,,,,measured,figure_image,,p.5 Fig. 10(b),,Interpreted from label position.
+001c.74748-f-m3,001c.74748-f,geometry,spacing between PKG-to-PKG bumps (label),,387,,um,single,,,,,,,,measured,figure_image,,p.5 Fig. 10(b),,Interpreted from label position.
+001c.74748-f-m4,001c.74748-f,geometry,bottom solder ball width (label),,300,,um,single,,,,,,,,measured,figure_image,,p.5 Fig. 10(b),,Interpreted from label position.
+001c.74748-f-m5,001c.74748-f,geometry,bump size/pitch glass to glass,development goal,,80/200,um,single,,,,,,,,design_target,table,,p.3 Table 1,,
+001c.74748-f-m6,001c.74748-f,geometry,package size,development goal,,5x5,mm2,single,,,,,,,,design_target,table,,p.3 Table 1,,

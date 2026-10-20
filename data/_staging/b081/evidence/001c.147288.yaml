@@ -1,0 +1,36 @@
+paper_id: 001c.147288
+verified_on: 2026-10-20
+source_files:
+  - references/001c.147288/text.md
+  - references/001c.147288/source.json
+  - references/001c.147288/figures/page_02.png
+  - references/001c.147288/figures/page_03.png
+  - references/001c.147288/figures/page_04.png
+figure_reading_method: >-
+  Fig. 2, Fig. 4, Fig. 5 and Fig. 6 re-rendered at 400 dpi in scratch (not kept) to read SEM labels and callouts.
+entries:
+  - {table: interconnects, row_id: 001c.147288-c-i1, field: pitch_um, value: 10, unit: um, basis: measured, locator: "p.4 Fig. 6", note: "10 um marker on FIB image; text p.4 Sec. IV: demonstrated at 10um pitch"}
+  - {table: process_steps, row_id: 001c.147288-F3-s04, field: temp_c, value: 250, unit: C, basis: design_target, locator: "p.3 Sec. III", note: "interface temperature during 15 s tack"}
+derived:
+  - {table: interconnects, row_id: 001c.147288-c-i1, field: anneal_time_min, value: 240, formula: "4 h x 60 min/h", inputs: "p.3 Sec. III"}
+  - {table: process_steps, row_id: 001c.147288-F3-s05, field: time_s, value: 14400, formula: "4 h x 3600 s/h", inputs: "p.3 Sec. III"}
+conflicts:
+  - {table: stack_layers, row_id: 001c.147288-a-L02, field: thickness_um, values: [300, 296.7], locators: ["p.3 Fig. 2 caption", "p.3 Fig. 2 SEM label"], chosen: 296.7, why: "measured cross-section label beats caption"}
+  - {table: interconnects, row_id: 001c.147288-a-i1, field: total_length_um, values: [360, 413.0], locators: ["p.3 Fig. 2 caption", "p.3 Fig. 2 SEM label"], chosen: 360, why: "413.0 um line spans top to bottom Cu surfaces, not clearly the via length; kept as metric a-m2"}
+excluded:
+  - "Fig. 5 labels 3.9 um, 2.06 um, 0.85 um and 10 um pitch: result of prior work [10]"
+  - "Si-IF sub-10 um pitch Cu-Cu TCB of UCLA platform (refs [7], [8])"
+  - "Fig. 1 UCIe packaging options (reprinted from spec [5]); not this paper's build"
+  - "Fig. 2 labels 20.67, 33.07, 8.268, 215.4, 33.53 um not entered: span of each label unclear"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - organizations and affiliations (separate pipeline)
+  - "through via diameters as design values, laser type, epoxy fill method"
+  - "build-up layer thickness, line/space, via size, dielectric product for TV b"
+  - "TCB bond force, die size, die count, anneal temperatures in the variation"
+  - "CVD temperature and inorganic layer thickness"
+  - "reliability, warpage, electrical test results"
+notes: >-
+  Fig. 4 (concept with up to 8 organic and 8 inorganic layers per side, embedded trench capacitors, GaN, cooling)
+  is a platform illustration; its options are not attributed to a built TV.

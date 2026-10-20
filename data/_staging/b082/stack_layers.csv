@@ -1,0 +1,39 @@
+layer_id,tv_id,structure,side,seq,layer_name,feature,material,material_class,layer_role,reinforcement,thickness_um,thickness_min_um,thickness_max_um,line_um,space_um,via_diameter_um,via_pitch_um,roughness_ra_um,repeat,properties,basis,source,overrides,locator,qualifiers,notes
+001c.129733-a-L01,001c.129733-a,die,single,1,Top Wafer,,,,device,,,,,,,,,,,,stated,schematic,,p.5 Fig. 7,,
+001c.129733-a-L02,001c.129733-a,bonding_interface,single,2,W2W hybrid bonding interface,"Cu pad array, 2 um pitch (on-chip); no pads in inter-die gapfill region",Cu pads; dielectric oxide,metal,bonding,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.A; p.5 Fig. 7,,Cu-to-Cu plus dielectric-to-dielectric oxide bonding; layer thickness not stated.
+001c.129733-a-L03,001c.129733-a,die,single,3,"backside BEOL of reconstructed wafer (rerouting layer, W2W bonding surface)",,,,conductor,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.B; p.3 Sec. II.C; p.5 Fig. 7,,Reroutes to recover D2W misalignment; materials and thickness not stated.
+001c.129733-a-L04,001c.129733-a,die,single,4,Recon. Die (reconstructed KGD dies),,,,device,,,,,,,,,,,,stated,schematic,,p.5 Fig. 7,,
+001c.129733-a-L05,001c.129733-a,mold,single,4,inter-die gapfill dielectric,,gapfill dielectric material,dielectric_inorganic,encapsulant,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.B; p.4 Sec. III.B; p.5 Sec. IV; p.5 Fig. 7,,Co-planar with dies; deposited by gapfill CVD (Sec. IV); oxide per Fig. 1 description (Sec. II.A); thickness not stated.
+001c.129733-a-L06,001c.129733-a,bonding_interface,single,5,D2W hybrid bonding interface (dies to carrier wafer),,Cu pads; CVD dielectric oxide,metal,bonding,,,,,,,,,,,,stated,mixed,,p.2 Sec. II.B; p.5 Fig. 7,,Oxide deposited by CVD on chip wafer and carrier wafer; pad pitch not stated.
+001c.129733-a-L07,001c.129733-a,other,single,6,Carrier WF,,,,carrier,,,,,,,,,,,,stated,schematic,,p.5 Fig. 7,,Material not stated.
+001c.129733-b-L01,001c.129733-b,die,single,1,top reconstructed tier: Recon. Chip 1-3,,,,device,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,
+001c.129733-b-L02,001c.129733-b,mold,single,1,inter-die gapfill (top tier),,oxide dielectric,dielectric_inorganic,encapsulant,,,,,,,,,,,,stated,mixed,,p.2 Fig. 1; p.2 Sec. II.A,,Gapfill oxide thickness equal to chip thickness (Sec. II.A).
+001c.129733-b-L03,001c.129733-b,bonding_interface,single,2,hybrid bonding interface (top to bottom reconstructed tier),,Cu pads; dielectric oxide,metal,bonding,,,,,,,,,,,,stated,mixed,,p.2 Fig. 1; p.2 Sec. II.A,,
+001c.129733-b-L04,001c.129733-b,die,single,3,"bottom reconstructed tier: Recon. Chip 4, Recon. Die 5 (with TSVs)",,,,device,,,,,,,,,,,,stated,mixed,,p.2 Fig. 1; p.2 Sec. II.A,,
+001c.129733-b-L05,001c.129733-b,mold,single,3,inter-die oxide gapfill with TDVs (bottom tier),TDVs,oxide dielectric,dielectric_inorganic,encapsulant,,,,,,,,,,,,stated,mixed,,p.2 Fig. 1; p.2 Sec. II.A,,High-thickness oxide equal to chip thickness.
+001c.129733-b-L06,001c.129733-b,substrate_core,single,1,Substrate,,,,core,,,,,,,,,,,,stated,schematic,,p.2 Fig. 1,,Substrate type not stated.
+001c.129764-a-L01,001c.129764-a,die,single,1,top chip,,Si,silicon,device,,,,,,,,,,,,stated,text,,p.2 Sec. I; p.2 Sec. II.B,,
+001c.129764-a-L02,001c.129764-a,bonding_interface,single,1,Ti/Cu seed layer (chip side),,Ti/Cu,metal,seed,,0.4,,,,,,,,,,design_target,mixed,,p.2 Sec. II.A; p.2 Table I,,4 kA as written.
+001c.129764-a-L03,001c.129764-a,bonding_interface,single,2,Ni pillar (chip side),,Ni,metal,conductor,,4,,,,,,,,,,design_target,table,,p.2 Table I,,
+001c.129764-a-L04,001c.129764-a,bonding_interface,single,3,SnAg solder joint,,SnAg,solder,bonding,,2,,,,,,,,,,design_target,table,,p.2 Table I; p.5 Fig. 7(a),,2 um per plated bump; IMC (Ni-Sn) 0.36-0.76 um at time zero; consumed to Ni3Sn4 after 180 C/500 h.
+001c.129764-a-L05,001c.129764-a,bonding_interface,single,4,Ni pillar (wafer side),,Ni,metal,conductor,,,,,,,,,,,,measured,figure_image,,p.4 Fig. 6(a); p.5 Fig. 7(a),,Wafer-side bump from same bumping process (Sec. II.B); Ni both sides per EDS; thickness not stated separately.
+001c.129764-a-L06,001c.129764-a,underfill,single,1,Underfill C,,underfill (silica filled),underfill,encapsulant,,,,,,,,,,,,stated,text,,p.3 Sec. II.B; p.3 Table II,,"Cured 175 C, 2 h; fills chip-to-wafer gap around bumps."
+001c.129764-a-L07,001c.129764-a,die,single,2,bottom 12-inch Si wafer,,Si,silicon,carrier,,,,,,,,,,,,stated,text,,p.2 Sec. I; p.2 Table I,,
+001c.129764-b-L01,001c.129764-b,die,single,1,top chip,,Si,silicon,device,,,,,,,,,,,,stated,text,,p.2 Sec. I; p.2 Sec. II.B,,
+001c.129764-b-L02,001c.129764-b,bonding_interface,single,1,Ti/Cu seed layer (chip side),,Ti/Cu,metal,seed,,0.4,,,,,,,,,,design_target,mixed,,p.2 Sec. II.A; p.2 Table I,,4 kA as written.
+001c.129764-b-L03,001c.129764-b,bonding_interface,single,2,metal pillar M (chip side),,"M (metal pillar, not disclosed)",metal,conductor,,3,,,,,,,,,,design_target,table,,p.2 Table I,,
+001c.129764-b-L04,001c.129764-b,bonding_interface,single,3,diffusion barrier (chip side),,"diffusion barrier (new material, not named)",unspecified,barrier,,1,,,,,,,,,,design_target,table,,p.2 Table I,,
+001c.129764-b-L05,001c.129764-b,bonding_interface,single,4,SnAg solder joint,,SnAg,solder,bonding,,2,,,,,,,,,,design_target,table,,p.2 Table I; p.5 Fig. 7(c),,2 um per plated bump; IMC 0.23-0.24 um at time zero; solder consumed after 180 C/500 h without voids.
+001c.129764-b-L06,001c.129764-b,bonding_interface,single,5,diffusion barrier (wafer side),,"diffusion barrier (new material, not named)",unspecified,barrier,,,,,,,,,,,,measured,figure_image,,p.5 Fig. 7(c),,DB peak on both sides of Sn in EDS line scan; thickness not stated separately.
+001c.129764-b-L07,001c.129764-b,bonding_interface,single,6,metal pillar M (wafer side),,"M (metal pillar, not disclosed)",metal,conductor,,,,,,,,,,,,measured,figure_image,,p.4 Fig. 6(c); p.5 Fig. 7(c),,Wafer-side bump from same bumping process (Sec. II.B).
+001c.129764-b-L08,001c.129764-b,underfill,single,1,Underfill C,,underfill (silica filled),underfill,encapsulant,,,,,,,,,,,,stated,text,,p.3 Sec. II.B; p.3 Table II,,"Cured 175 C, 2 h."
+001c.129764-b-L09,001c.129764-b,die,single,2,bottom 12-inch Si wafer,,Si,silicon,carrier,,,,,,,,,,,,stated,text,,p.2 Sec. I; p.2 Table I,,
+ectc51846.2026.00274-a-L01,ectc51846.2026.00274-a,tim_lid,single,1,Cold plate,,,,thermal,,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,
+ectc51846.2026.00274-a-L02,ectc51846.2026.00274-a,other,single,1,"Stiffener (OAM top side, around cold plate pedestal)",,,,other,,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,
+ectc51846.2026.00274-a-L03,ectc51846.2026.00274-a,other,single,2,CoWoS-R package (3.3X-reticle interposer on substrate),,,,device,,,,,,,,,,,,stated,mixed,,p.2 Fig. 2; p.2 Sec. II.A,,
+ectc51846.2026.00274-a-L04,ectc51846.2026.00274-a,underfill,single,1,BGA edge bond (split),,edge bond,adhesive,adhesive,,,,,,,,,,,,stated,text,,p.2 Sec. II.C; p.2 Table I,,"POR on four corners, 4/5 of each side; co-planar with BGA."
+ectc51846.2026.00274-a-L05,ectc51846.2026.00274-a,other,single,3,PCB (OAM),,,organic_laminate,core,,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,
+ectc51846.2026.00274-a-L06,ectc51846.2026.00274-a,other,single,4,Stiffener (OAM backside),,,,other,,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,
+ectc51846.2026.00274-a-L07,ectc51846.2026.00274-a,other,single,5,Connector,,,,other,,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,
+ectc51846.2026.00274-a-L08,ectc51846.2026.00274-a,other,single,6,PCB (baseboard),,,organic_laminate,core,,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,
+ectc51846.2026.00274-a-L09,ectc51846.2026.00274-a,other,single,7,Stiffener (baseboard),,,,other,,,,,,,,,,,,stated,schematic,,p.2 Fig. 2,,

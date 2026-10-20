@@ -1,0 +1,22 @@
+layer_id,tv_id,structure,side,seq,layer_name,feature,material,material_class,layer_role,reinforcement,thickness_um,thickness_min_um,thickness_max_um,line_um,space_um,via_diameter_um,via_pitch_um,roughness_ra_um,repeat,properties,basis,source,overrides,locator,qualifiers,notes
+001c.74577-a-L01,001c.74577-a,glass_core,single,1,LIDE-processed glass substrate,,glass (type not stated),glass,core,,,,,,,20,25,,,,design_target,caption,,p.3 Fig. 3,,
+001c.74577-b-L01,001c.74577-b,glass_core,single,1,LIDE-processed glass substrate,,glass (type not stated),glass,core,,,,,,,,,,,,stated,caption,,p.4 Fig. 4,,
+001c.74577-c-L01,001c.74577-c,glass_core,single,1,LIDE-processed glass substrate,,glass (type not stated),glass,core,,,,,,,,,,,,stated,caption,,p.5 Fig. 5,,
+001c.74577-d-L01,001c.74577-d,glass_core,single,1,LIDE-processed glass substrate,,glass (type not stated),glass,core,,,,,,,,,,,,stated,caption,,p.5 Fig. 6,,
+001c.74577-e-L01,001c.74577-e,glass_core,single,1,LIDE-processed glass substrate,,glass (type not stated),glass,core,,,,,,,,,,,,stated,caption,,p.5 Fig. 7,,
+001c.74577-f-L01,001c.74577-f,glass_core,single,1,LIDE-processed glass substrate,,"glass (all glass types, Table II)",glass,core,,,50,1000,,,,,,,,unspecified,table,,p.6 Table II,,Processable thickness range 50 um to 1 mm (capability).
+ectc51909.2023.00240-a-L01,ectc51909.2023.00240-a,bonding_interface,single,1,hybrid bonding surface,metal pad array in dielectric,dielectric with embedded metal pads (materials not named),other,bonding,,,,,,,,,,,,stated,text,,p.3 Sec. III.A; p.4 Fig. 4,,Pad recess/protrusion and dielectric shape set by CMP skew; see metrics.
+ectc51909.2023.00240-b-L01,ectc51909.2023.00240-b,bonding_interface,single,1,hybrid bonding surface,metal pad array in dielectric,dielectric with embedded metal pads (materials not named),other,bonding,,,,,,,,,,,,stated,text,,p.5 Sec. IV.A; p.5 Fig. 9; p.6 Fig. 11,,Pad recess/protrusion and dielectric shape set by CMP skew; see metrics.
+001c.74770-a-L01,001c.74770-a,die,single,1,top die,,,unspecified,device,,725,,,,,,,,,,design_target,table,,p.3 Sec. II; p.3 Table 1,,
+001c.74770-a-L02,001c.74770-a,die,single,2,top die pillar pad,pad,AlCu,metal,conductor,,,,,,,,,,,,design_target,table,,p.3 Sec. II; p.3 Table 1,,
+001c.74770-a-L03,001c.74770-a,bonding_interface,single,1,top die Cu pillar,"Cu pillar, 42 um dia, 80/300 um pitch",Cu,metal,bonding,,30,,,,,,,,,,design_target,table,,p.3 Sec. II; p.3 Table 1,,Table 1 lists 30um height.
+001c.74770-a-L04,001c.74770-a,bonding_interface,single,2,top die SnAg cap,,SnAg,solder,bonding,,15,,,,,,,,,,design_target,table,,p.3 Sec. II; p.3 Table 1,,
+001c.74770-a-L05,001c.74770-a,underfill,single,1,"NCP underfill, top die to TSV die",,pre-applied NCP,underfill,encapsulant,,,,,,,,,,,,stated,text,,p.3 Sec. II; p.4 Fig. 1,,
+001c.74770-a-L06,001c.74770-a,die,single,3,TSV die die-side pad,pad 48 um,ENIG (electroless NiAu),metal,surface_finish,,8,,,,,,,,,,design_target,table,,p.3 Sec. II; p.3 Table 1,,Pad height 8 um; Table 1 pad size 48 um vs text 60x60 um.
+001c.74770-a-L07,001c.74770-a,die,single,4,TSV die,,,unspecified,device,,100,,,,,40,,,,,design_target,table,,p.3 Sec. II; p.3 Table 1,,TSV via size 40 um; TSV pitch not stated.
+001c.74770-a-L08,001c.74770-a,die,single,5,TSV die interposer-side UBM,UBM pad 40 um,Ti/Cu,metal,seed,,,,,,,,,,,,design_target,table,,p.3 Sec. II; p.3 Table 1,,Cu pillars plated on Ti/Cu UBM.
+001c.74770-a-L09,001c.74770-a,bonding_interface,single,3,TSV die Cu pillar,"Cu pillar, 40 um dia, 80/300 um pitch",Cu,metal,bonding,,20,,,,,,,,,,design_target,table,,p.3 Sec. II; p.3 Table 1,,
+001c.74770-a-L10,001c.74770-a,bonding_interface,single,4,TSV die SnAg cap,,SnAg,solder,bonding,,10,,,,,,,,,,design_target,table,,p.3 Sec. II; p.3 Table 1,,Text writes 'lead-tin (SnAg)' caps.
+001c.74770-a-L11,001c.74770-a,underfill,single,2,"NCP underfill, TSV die to interposer",,pre-applied NCP,underfill,encapsulant,,,,,,,,,,,,stated,text,,p.3 Sec. II; p.4 Fig. 1,,
+001c.74770-a-L12,001c.74770-a,interposer,single,1,interposer pad opening,pad 60x60 um,AlCu,metal,conductor,,4,,,,,,,,,,design_target,table,,p.3 Sec. II; p.3 Table 1,,Table 1 also lists SnAg 15 um and pitch 80/300 under the interposer column.
+001c.74770-a-L13,001c.74770-a,interposer,single,2,interposer die,,,unspecified,core,,725,,,,,,,,,,design_target,table,,p.3 Sec. II; p.3 Table 1,,

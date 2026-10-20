@@ -1,0 +1,40 @@
+paper_id: 001c.74577
+verified_on: 2026-10-20
+schema_version: 2.5
+source_files:
+  - references/001c.74577/text.md
+  - references/001c.74577/source.json
+  - references/001c.74577/figures/page_02.png
+  - references/001c.74577/figures/page_03.png
+  - references/001c.74577/figures/page_04.png
+  - references/001c.74577/figures/page_05.png
+  - references/001c.74577/figures/page_06.png
+figure_reading_method: >-
+  Page renders p.2-6; candidate crops p03_fig2, p03_fig3, p04_fig4, p05_fig5, p05_fig6, p05_fig7; Fig. 7 depth
+  annotations and Table II read from 400 dpi re-crops.
+entries:
+  - {table: metrics, row_id: 001c.74577-e-m1, field: value, value: 94.5, unit: um, basis: measured, locator: "p.5 Fig. 7(a)", note: "annotation '1 [ 94,5um ]' (decimal comma)"}
+  - {table: metrics, row_id: 001c.74577-e-m5, field: value, value: 121.4, unit: um, basis: measured, locator: "p.5 Fig. 7(e)", note: "annotation '1 [ 121,4um ]'"}
+  - {table: interconnects, row_id: 001c.74577-a-i1, field: pitch_um, value: 25, unit: um, basis: design_target, locator: "p.3 Fig. 3", note: "caption: center-to-center pitch, gap between TGV edges 5 um"}
+derived:
+  - {table: stack_layers, row_id: 001c.74577-f-L01, field: thickness_max_um, value: 1000, formula: "1 mm * 1000", inputs: "p.6 Table II"}
+conflicts:
+  - {table: metrics, row_id: 001c.74577-f-m5, field: parameter, values: ["Cp > 1.33", "Cpk > 1.33"], locators: ["p.1 Abstract", "p.4 Sec. II.C; p.6 Table II"], chosen: "Cpk > 1.33", why: "result table and body text agree; abstract differs"}
+  - {table: metrics, row_id: 001c.74577-f-m12, field: value_text, values: ["510 mm x 515 mm", "515 mm x 510 mm"], locators: ["p.1 Abstract", "p.6 Table II; p.4 Sec. II.C"], chosen: "515 mm x 510 mm", why: "table; same size, order only"}
+excluded:
+  - "Fig. 1 fracture strength vs flaw size, reprinted from ref [18]; theoretical failure strength > 1,000 MPa (background)"
+  - "Table I generic material properties of glass categories and Si (background, not a build of this paper)"
+  - "microprocessing technology comparisons attributed to refs [8]-[12]"
+not_reported:
+  - components
+  - electrical_interfaces
+  - optical_interfaces
+  - "glass type, thickness and panel/wafer format of each demonstration sample (Figs. 3-7)"
+  - "laser parameters (wavelength, pulse energy, pulse duration), etchant chemistry, etch temperature and time"
+  - "TGV metallization; no via fill or RDL on these samples"
+  - "TGV diameters of the Fig. 5-7 samples"
+  - "reliability, warpage, electrical data"
+source_quality:
+  - "Text p.2 'This is demonstrated in Fig. which shows' (figure number missing; context = Fig. 1)."
+  - "Table II 'Minimum pitch 2 um (pitch << diameter)' is as printed; physically ambiguous."
+  - "Cross-section damage in Figs. 5 and 7 attributed by the authors to scribe-and-break sample preparation."

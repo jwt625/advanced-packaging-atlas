@@ -1,0 +1,55 @@
+paper_id: 001c.129764
+verified_on: 2026-10-20
+schema_version: 2.5
+source_files:
+  - references/001c.129764/text.md
+  - references/001c.129764/source.json
+  - references/001c.129764/figures/page_02.png
+  - references/001c.129764/figures/page_03.png
+  - references/001c.129764/figures/page_04.png
+  - references/001c.129764/figures/page_05.png
+  - references/001c.129764/figures/cand/p02_tablei.png
+  - references/001c.129764/figures/cand/p03_tableii.png
+  - references/001c.129764/figures/cand/p03_fig2.png
+  - references/001c.129764/figures/cand/p03_fig3.png
+  - references/001c.129764/figures/cand/p03_fig4.png
+  - references/001c.129764/figures/cand/p04_fig5.png
+  - references/001c.129764/figures/cand/p04_fig6.png
+  - references/001c.129764/figures/cand/p04_tableiii.png
+  - references/001c.129764/figures/cand/p05_fig7.png
+figure_reading_method: >-
+  Page renders p.2-5 at 150 dpi; candidate crops opened for Tables I-III and Figs. 2-7; manual re-crops of Figs. 1, 2,
+  4, 5, 6, 7 (candidate p03_fig1 had a wrong bbox; others cut panel labels). Table I/II values read from the table images.
+entries:
+  - {table: interconnects, row_id: 001c.129764-a-i1, field: diameter_um, value: 5, unit: um, basis: design_target, locator: "p.2 Sec. II.A; p.2 Table I", note: "PR opening CD 5 um entered as bump diameter"}
+  - {table: metrics, row_id: 001c.129764-a-m1, field: value, value: 9.05, unit: um, basis: measured, locator: "p.2 Sec. II.A", note: "The measured bump pitch was 9.05 um"}
+derived:
+  - {table: stack_layers, row_id: 001c.129764-a-L02, field: thickness_um, value: 0.4, formula: "4 kA x 1e-4 um/A = 0.4 um (unit conversion)", inputs: "p.2 Sec. II.A; p.2 Table I"}
+  - {table: stack_layers, row_id: 001c.129764-b-L02, field: thickness_um, value: 0.4, formula: "4 kA x 1e-4 um/A = 0.4 um (unit conversion)", inputs: "p.2 Sec. II.A; p.2 Table I"}
+  - {table: process_steps, row_id: 001c.129764-F1-s01, field: thickness_um, value: 0.4, formula: "4 kA x 1e-4 um/A = 0.4 um (unit conversion)", inputs: "p.2 Sec. II.A"}
+  - {table: process_steps, row_id: 001c.129764-F1-s11, field: time_s, value: 7200, formula: "2 h x 3600 s/h (unit conversion)", inputs: "p.3 Sec. II.B"}
+conflicts:
+  - {table: components, row_id: 001c.129764-a-c2, field: name, values: ["another 12-inch Si wafer (Sec. I)", "the same 12-inch wafer (Sec. II.B)"], locators: ["p.2 Sec. I", "p.2 Sec. II.B"], chosen: "bottom 12-inch Si wafer patterned with 9 um pitch bumps (identity not resolved)", why: "text inconsistent; neutral name kept"}
+  - {table: components, row_id: 001c.129764-b-c2, field: name, values: ["another 12-inch Si wafer (Sec. I)", "the same 12-inch wafer (Sec. II.B)"], locators: ["p.2 Sec. I", "p.2 Sec. II.B"], chosen: "bottom 12-inch Si wafer patterned with 9 um pitch bumps (identity not resolved)", why: "text inconsistent; neutral name kept"}
+excluded:
+  - "FLOLA lower thermal expansion than conventional TCB and tool details: attributed to prior work [8]"
+  - "180 C harsher than 150 C (ref [9]); Ag agglomeration common in SnAg (ref [10])"
+  - "Intro statements on MR/LAB/TCB limits under 10 um pitch (background)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "FLOLA bonding temperature, force, time, laser power; plasma power/time"
+  - "chip and wafer thickness; bump count; chip-to-wafer gap; underfill product names"
+  - "pillar metal M and diffusion barrier material identity"
+  - "HTS sample count per condition; pass criterion; electrical resistance"
+  - "unit of Table II void area"
+judgment_calls:
+  - "Leg1 (Ni-SnAg) and Leg2 (M-SnAg) are separate TVs (different bump stack); underfill A/B/C is a split (metrics variant, F1-s10 split)."
+  - "Underfill void and joint-formation results: leg not stated, entered once on TV a with scope 'applies to TVs a, b'."
+  - "Wafer-side bump layers taken from PFIB/EDS (Figs. 6, 7) showing pillar/barrier on both sides; thickness not stated, left empty."
+  - "bonding_method tcb: text calls FLOLA a flux-less thermal-compression bonding process with laser heat source."
+  - "12-inch wafer mapped to carrier_format wafer_300mm; carrier_size_mm left empty."
+  - "Paper level full: cure 175 C / 2 h typed; FLOLA bonding conditions absent."
+revisions:
+  - {date: 2026-10-20, source: ingest_audit_C, row_id: 001c.129764-f08, change: "bbox 0.1557,0.6751,0.4001,0.8127 -> 0.1557,0.698,0.4001,0.831; bbox_source candidate -> manual; cand_id p03_fig3 -> empty", reason: "candidate crop started in whitespace and cut the bottom of the fillet image; manual re-crop verified"}
+  - {date: 2026-10-20, source: ingest_audit_C, row_id: 001c.129764-a-c2, change: "added conflicts entries for bottom wafer identity (a-c2, b-c2); component names unchanged", reason: "p.2 Sec. I says another 12-inch wafer, p.2 Sec. II.B says the same 12-inch wafer"}

@@ -1,0 +1,32 @@
+paper_id: estc60143.2024.10712002
+verified_on: 2026-10-20
+source_files:
+  - references/estc60143.2024.10712002/text.md
+  - references/estc60143.2024.10712002/source.json
+  - references/estc60143.2024.10712002/figures/page_01.png
+  - references/estc60143.2024.10712002/figures/page_02.png
+  - references/estc60143.2024.10712002/figures/page_03.png
+  - references/estc60143.2024.10712002/figures/page_04.png
+figure_reading_method: >-
+  Table I, Fig. 5 dimensions and Fig. 10 sigma labels read from page renders and candidate crops. Fig. 10 average
+  resistance at 0 and 500 cycles read off the plot (approx +-0.1 ohm). Fig. 2 and Fig. 3 have no or a cut candidate;
+  manual crops opened in scratch.
+entries:
+  - {table: metrics, row_id: estc60143.2024.10712002-a-m1, field: value, value: -1.2, unit: dB, basis: measured, locator: "p.3 Sec. III.B", note: "membrane structure, 100 GHz; also abstract and conclusion"}
+derived:
+  - {table: interconnects, row_id: estc60143.2024.10712002-g-i1, field: count, value: 32, formula: "384 contact points / 12 samples", inputs: "p.4 Sec. IV"}
+conflicts: []
+excluded:
+  - "InP PIC high-speed suitability (ref [1]); CDM module examples (refs [2][3])"
+  - "eddy-current loss mechanism (ref [6])"
+not_reported:
+  - optical_interfaces
+  - Si substrate thickness, polyimide and Cu thicknesses, line width/gap of GSSG lines
+  - fabricated membrane gap width, Au stud bump diameter/height/pitch and bump count per chip (except derived 32 for TC chips)
+  - TCB force, time and atmosphere; underfill material; stud bumping tool
+  - number of die shear samples; HF sample count
+  - lane data rate, energy per bit, crosstalk values
+notes: >-
+  Fig. 3 is called 'an example of the process flow'; it is linked to all bridge-chip TVs, with backside Si etch as a
+  delta for membrane TVs (a, g). Die shear was done on chips without membrane only. Thermal model gaps (50/100 um) are
+  simulation inputs, not stated fabricated dimensions.

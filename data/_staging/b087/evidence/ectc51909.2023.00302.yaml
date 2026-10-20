@@ -1,0 +1,41 @@
+paper_id: ectc51909.2023.00302
+verified_on: 2026-10-20
+source_files:
+  - references/ectc51909.2023.00302/text.md
+  - references/ectc51909.2023.00302/source.json
+  - references/ectc51909.2023.00302/figures/page_02.png
+  - references/ectc51909.2023.00302/figures/page_03.png
+  - references/ectc51909.2023.00302/figures/page_04.png
+  - references/ectc51909.2023.00302/figures/page_05.png
+  - references/ectc51909.2023.00302/figures/page_06.png
+figure_reading_method: >-
+  Thermal contour max/min read from Ansys legends in Fig. 2 (p.2 render and crop). CPW/TOV loss values at 50 GHz read
+  off the plot curves in Fig. 3 and Fig. 4 (approx, +-0.01 dB for S21, +-0.2 dB for S11). TOV diameters from the
+  labels in Fig. 11; SEM scale bars not used for dimensions.
+entries:
+  - {table: process_steps, row_id: ectc51909.2023.00302-F1-s02, field: thickness_um, value: 30, unit: um, basis: design_target, locator: "p.4 Fig. 5", note: "Fig. 5: thinned to 30 um; text: approx 20-30 um"}
+  - {table: metrics, row_id: ectc51909.2023.00302-d-m7, field: value, value: -0.89, unit: dB, basis: simulated, locator: "p.3 Fig. 4", note: "4 um oxide curve at 50 GHz"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: ectc51909.2023.00302-c-m5, field: value, values: [37.695, 37.6], locators: ["p.2 Fig. 2(c) legend max", "p.3 Sec. III.A text"], chosen: 37.695, why: "result figure legend over text; other text values agree with legend after rounding"}
+  - {table: stack_layers, row_id: ectc51909.2023.00302-c-L01, field: thickness_um, values: [12, 22], locators: ["p.2 Table I PECVD SiO2 thickness", "p.2 Fig. 2 caption (b) fully encapsulated in 22 um of SiO2"], chosen: 12, why: "Table I is the stated design parameter set; 22 um applies to the full-oxide comparison case per caption"}
+  - {table: process_steps, row_id: ectc51909.2023.00302-F1-s02, field: thickness_um, values: [30, "20-30"], locators: ["p.4 Fig. 5", "p.4 Sec. IV text approx 20-30 um"], chosen: 30, why: "chiplets stated 30 um-thick (p.3, p.4 Fig. 6(b), p.6)"}
+  - {table: metrics, row_id: ectc51909.2023.00302-d-m7, field: value, values: ["4 um oxide has highest loss in Fig. 4", "text: insertion loss increases with oxide thickness"], locators: ["p.3 Fig. 4", "p.3 Sec. III.B"], chosen: "plot values entered as read", why: "plot is the result; trend statement in text disagrees; Fig. 4 12/20 um curves match Fig. 3(a) CPW curves"}
+  - {table: process_steps, row_id: ectc51909.2023.00302-F1-s07, field: performed, values: ["barrier shown in Fig. 5", "no barrier used (text)"], locators: ["p.4 Fig. 5", "p.5 Sec. IV"], chosen: "no", why: "text states copper diffusion barriers were not used in this study"}
+excluded:
+  - "EMC reconstituted tier warpage 52-544 um (ref [4])"
+  - "Si-embedding adhesive warpage 0.258-2.204 mm on 12-inch wafer (refs [7-9])"
+  - "glass 3D stacking 40 um solder pitch, 300 um TGV pitch (ref [6])"
+  - "Fig. 8: 2 um-thick chiplets in 8 um oxide (ref [10]); figure not kept as key figure (cited build)"
+not_reported:
+  - optical_interfaces
+  - "process_steps: ectc51909.2023.00302-c (simulation model, no build)"
+  - "process_steps: ectc51909.2023.00302-d (simulation model, no build)"
+  - chiplet count, carrier wafer diameter, temporary adhesive product, debond method
+  - Cu plating chemistry and current density, ICP-PECVD gas chemistry and power
+  - TOV pitch per diameter, TOV via diameter in the HFSS model, TOV fill (vias not metallized)
+  - measured electrical or thermal performance (future work)
+notes: >-
+  Fabrication covers the chiplet SiO2/Cu reconstitution up to debond and an oxide-via etch testbed; no RDL, no tier
+  transfer, no device test. Text-layer gaps (font-encoded strings) on p.3 and p.5 resolved from page renders (50 ohm,
+  < 1 dB, > 20 dB).

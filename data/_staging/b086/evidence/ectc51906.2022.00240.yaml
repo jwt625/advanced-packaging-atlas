@@ -1,0 +1,21 @@
+paper_id: ectc51906.2022.00240
+verified_on: 2026-10-20
+source_files: [references/ectc51906.2022.00240/text.md, references/ectc51906.2022.00240/figures/page_01.png, references/ectc51906.2022.00240/figures/page_02.png, references/ectc51906.2022.00240/figures/page_03.png, references/ectc51906.2022.00240/figures/page_04.png, references/ectc51906.2022.00240/figures/page_05.png, references/ectc51906.2022.00240/figures/page_06.png]
+entries:
+  - {table: metrics, row_id: ectc51906.2022.00240-b-m10, field: value, value: 0.91, unit: um, basis: measured, locator: "p.3 Fig. 6(3)", note: "Dy mean+3 sigma; same as Dx"}
+derived: []
+conflicts:
+  - {table: test_vehicles, row_id: ectc51906.2022.00240-a, field: carrier_size_mm, values: ["515x510", "510x515"], locators: ["p.1 Abstract", "p.2 Sec. II-A"], chosen: "510x515", why: "body text and figure labels"}
+  - {table: metrics, row_id: ectc51906.2022.00240-c-m12, field: value, values: ["text: deviation X maximum 5.42 um, shifts right", "Fig. 12 table: Dx max 3.94, min -5.42"], locators: ["p.4 Sec. II-D", "p.5 Fig. 12"], chosen: "table values", why: "text 5.42 is the largest magnitude (table min); table entered"}
+  - {table: metrics, row_id: ectc51906.2022.00240-c-m31, field: value, values: ["text: vector up to 20 um or higher", "Fig. 13 table: vector max 23.26 um"], locators: ["p.5 Sec. II-D", "p.5 Fig. 13"], chosen: 23.26, why: "result table"}
+excluded:
+  - "Fig. 1 package roadmap (Source: Cadence)"
+  - "substrate provider database expectation: final overlay error < 10 um (external expectation, not a result)"
+  - "industry typical overlay yield 95-97% per layer in AICS (background)"
+not_reported:
+  - interconnects
+  - electrical_interfaces
+  - optical_interfaces
+  - "exposure dose, focus setting, resist development conditions"
+  - "panel layer count, ABF/CCL thicknesses, warpage values"
+  - "panel build process conditions (Fig. 3 is generic)"

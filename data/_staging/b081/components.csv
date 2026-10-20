@@ -1,0 +1,26 @@
+comp_id,tv_id,component_type,is_emulator,embedded,name,count,x_mm,y_mm,thickness_um,cavity_x_mm,cavity_y_mm,cavity_depth_um,gap_um,process_node,material,supplier,basis,source,overrides,locator,qualifiers,notes
+001c.147288-a-c1,001c.147288-a,substrate,,,Si core wafer,1,,,296.7,,,,,,Si,,measured,figure_image,,p.3 Fig. 2; p.2 Sec. II,,296.7 um SEM label; caption 300 um; platform range 100-775 um.
+001c.147288-b-c1,001c.147288-b,substrate,,,Si core wafer,1,,,,,,,,,Si,,stated,caption,,p.3 Fig. 3,,
+001c.147288-c-c1,001c.147288-c,unspecified,,,Si die,,,,,,,,,,Si,,stated,figure_image,,p.4 Fig. 6,,"Die size, count and function not reported."
+001c.147288-c-c2,001c.147288-c,substrate,,,hybrid organic/inorganic substrate,,,,,,,,,,ABF-GL102 organic layer with SiO2 / Si3N4 inorganic layers,,stated,mixed,,p.3 Sec. III; p.4 Fig. 6,,
+eptc59621.2023.10457729-a-c1,eptc59621.2023.10457729-a,pic,yes,,dummy Si chip with 3 um oxide,1,5,5,500,,,,,,Si with 3 um oxide,,design_target,text,,p.1 Abstract; p.3 Methodology,,
+eptc59621.2023.10457729-b-c1,eptc59621.2023.10457729-b,pic,yes,,dummy Si chip with 3 um oxide,1,5,5,500,,,,,,Si with 3 um oxide,,design_target,text,,p.1 Abstract; p.3 Methodology,,
+eptc59621.2023.10457729-b-c2,eptc59621.2023.10457729-b,interposer,yes,,dummy glass chip,1,5,5,500,,,,,,glass,,design_target,text,,p.1 Abstract; p.3 Methodology,,
+eptc59621.2023.10457729-b-c3,eptc59621.2023.10457729-b,underfill,,,epoxy underfill,,,,,,,,,,epoxy,,stated,text,,p.1 Introduction,,Stated as part of demonstrated method; product and process not given.
+eptc59621.2023.10457729-c-c1,eptc59621.2023.10457729-c,pic,yes,,dummy Si chip (dummy PIC),,,,,,,,,,Si with 3 um oxide,,stated,text,,p.3 Methodology; p.4 Fig. 8,,Dimensions for the epoxy-bonded samples not stated.
+eptc59621.2023.10457729-c-c2,eptc59621.2023.10457729-c,interposer,yes,,glass sample,,,,,,,,,,glass,,stated,text,,p.3 Methodology,,
+eptc59621.2023.10457729-c-c3,eptc59621.2023.10457729-c,adhesive,,,UV-curable optical epoxy,,,,,,,,,,"Dymax OP-29 (n=1.5, 2500 cP)",Dymax,stated,text,,p.3 Methodology,,
+001c.74748-a-c1,001c.74748-a,dummy_die,yes,yes,dummy IC,1,2,2,140,,,,190,,,,design_target,text,gap_um:measured;gap_um:figure_image,p.2 Sec. III.A; p.3 Fig. 2; p.4 Fig. 4(a),,"gap = die edge to cavity top edge (190 um label, sidewall over-etch); 140 um thickness set in design."
+001c.74748-a-c2,001c.74748-a,substrate,,,Corning AFG laminate glass (clad/core/clad),1,,,500,,,,,,Corning AFG glass,Corning,design_target,text,,p.2 Sec. II,,
+001c.74748-b-c1,001c.74748-b,dummy_die,yes,yes,dummy IC,2,2,2,140,,,,,,,,design_target,text,,p.2 Sec. III.A; p.4 Fig. 4(b),,
+001c.74748-b-c2,001c.74748-b,substrate,,,Corning AFG laminate glass (clad/core/clad),1,,,500,,,,,,Corning AFG glass,Corning,design_target,text,,p.2 Sec. II,,
+001c.74748-c-c1,001c.74748-c,dummy_die,yes,yes,dummy IC with transmission line,,,,,,,,,,HRS (high resistivity Si),,stated,text,,p.2 Sec. III.A; p.4 Sec. III.B,,
+001c.74748-c-c2,001c.74748-c,substrate,,,Corning AFG laminate glass (clad/core/clad),1,,,500,,,,,,Corning AFG glass,Corning,design_target,text,,p.2 Sec. II,,
+001c.74748-d-c1,001c.74748-d,other,,yes,commercial 28 GHz LNA IC,1,,,,,,,,,,,stated,text,,p.4 Sec. III.B; p.4 Fig. 6,,
+001c.74748-d-c2,001c.74748-d,dummy_die,yes,yes,transmission line dummy IC,2,,,,,,,,,HRS (high resistivity Si),,stated,text,,p.4 Sec. III.B; p.4 Fig. 6; p.2 Sec. III.A,,
+001c.74748-d-c3,001c.74748-d,pcb,,,evaluation board,1,,,,,,,,,,,stated,caption,,p.4 Fig. 6,,
+001c.74748-d-c4,001c.74748-d,substrate,,,Corning AFG laminate glass (clad/core/clad),1,,,500,,,,,,Corning AFG glass,Corning,design_target,text,,p.2 Sec. II,,
+001c.74748-e-c1,001c.74748-e,dummy_die,yes,yes,IC,3,,,125,,,,,,,,design_target,text,count:measured;count:figure_image,p.1 Abstract; p.5 Fig. 9(b),,"Count from Fig. 9(b); abstract: two 125 um ICs, one per side."
+001c.74748-e-c2,001c.74748-e,substrate,,,Corning AFG laminate glass (clad/core/clad),1,,,500,,,,,,Corning AFG glass,Corning,design_target,text,,p.2 Sec. II,,
+001c.74748-f-c1,001c.74748-f,dummy_die,yes,yes,IC,4,,,,,,,,,,,stated,mixed,,p.5 Sec. III.D; p.5 Fig. 10(b),,
+001c.74748-f-c2,001c.74748-f,interposer,,,double-sided DEP (built-in interposer),2,,,,,,,,,Corning AFG glass,Corning,stated,text,,p.5 Sec. III.D,,

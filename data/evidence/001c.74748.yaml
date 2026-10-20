@@ -1,0 +1,47 @@
+paper_id: 001c.74748
+verified_on: 2026-10-20
+source_files:
+  - references/001c.74748/text.md
+  - references/001c.74748/source.json
+  - references/001c.74748/figures/page_02.png
+  - references/001c.74748/figures/page_03.png
+  - references/001c.74748/figures/page_04.png
+  - references/001c.74748/figures/page_05.png
+figure_reading_method: >-
+  Fig. 3, 4, 8, 9 and 10 re-rendered at 400-800 dpi in scratch to read step labels and dimension labels.
+entries:
+  - {table: components, row_id: 001c.74748-a-c1, field: gap_um, value: 190, unit: um, basis: measured, locator: "p.4 Fig. 4(a)", note: "red arrow from cavity top edge to die edge"}
+  - {table: test_vehicles, row_id: 001c.74748-a, field: package_thickness_mm, value: 0.53, unit: mm, basis: measured, locator: "p.4 Fig. 4(a)", note: "0.53 mm label"}
+  - {table: electrical_interfaces, row_id: 001c.74748-c-e1, field: insertion_loss_db, value: 0.145, unit: dB, basis: derived, locator: "p.4 Sec. III.B", note: "paper: (0.47-0.18)/2"}
+  - {table: interconnects, row_id: 001c.74748-f-i1, field: diameter_um, value: 140, unit: um, basis: measured, locator: "p.5 Fig. 10(b)", note: "140 um arrows bracket left PKG-to-PKG bump; same value as metric f-m2"}
+  - {table: interconnects, row_id: 001c.74748-f-i3, field: diameter_um, value: 300, unit: um, basis: measured, locator: "p.5 Fig. 10(b)", note: "300 um arrows on bottom-right package ball; same value as metric f-m4"}
+derived:
+  - {table: process_steps, row_id: 001c.74748-F2-s05, field: time_s, value: 600, formula: "10 min x 60 s/min", inputs: "p.4 Sec. III.C"}
+  - {table: process_steps, row_id: 001c.74748-F2-s07, field: time_s, value: 3600, formula: "60 min x 60 s/min", inputs: "p.4 Sec. III.C"}
+  - {table: test_vehicles, row_id: 001c.74748-e, field: package_thickness_mm, value: 0.6, formula: "600 um / 1000", inputs: "p.1 Abstract"}
+conflicts:
+  - {table: test_vehicles, row_id: 001c.74748-e, field: n_dies, values: [2, 3], locators: ["p.1 Abstract two 125um-thick IC chips, one on each side", "p.5 Fig. 9(b) IC1, IC2, IC3"], chosen: 3, why: "cross-section image beats text"}
+  - {table: metrics, row_id: 001c.74748-a-m1, field: value_text, values: ["127-130", "130.65"], locators: ["p.3 Sec. III.A", "p.4 Fig. 4(a) small label Length = 130.65 um"], chosen: "127-130", why: "label partly illegible, text gives the range over samples"}
+  - {table: metrics, row_id: 001c.74748-a-m5, field: value, values: ["close to 20:1", "over 20:1"], locators: ["p.2 Sec. II", "p.1 Abstract"], chosen: 20, why: "body text; approx qualifier"}
+excluded:
+  - "EMC die movement up to 100 um at 12-inch wafer perimeter and ~10 um after compensation (ref [1])"
+  - "Georgia Tech glass panel embedding Process A/B (refs [8-9])"
+  - "Table 1 current level (organic board) values: comparison technology, not a TV of this paper"
+not_reported:
+  - optical_interfaces
+  - organizations and affiliations (separate pipeline)
+  - "TGV diameter, pitch, depth and drilling method"
+  - "MET1/MET2 metal and thickness, L/S achieved, passivation material"
+  - "glass etch time and temperature, ABF lamination conditions, soft-bake conditions for single-sided flow"
+  - "PoP bonding force, time and bump metallurgy; die material of Fig. 4 dummies"
+  - "warpage and reliability data"
+notes: >-
+  Fig. 5 legend G30 / G50 not defined in the text. Single-sided steps after lamination described only as
+  conventional PCB processes; their order is taken from Fig. 3 panels (e)-(h).
+revisions:
+  - {date: 2026-10-20, source: ingest_audit_A, row_id: 001c.74748-f-i1, change: "diameter_um = 140; overrides diameter_um:measured;diameter_um:figure_image; notes updated", reason: "Fig. 10(b) 140 um label brackets the left PKG-to-PKG bump (400 dpi re-crop); was only in metric f-m2. 387 um stays metric only (span ambiguous: pitch vs spacing)"}
+  - {date: 2026-10-20, source: ingest_audit_A, row_id: 001c.74748-f-i3, change: "new row: unspecified solder_ball, diameter_um 300, measured, figure_image, p.5 Fig. 10(b)", reason: "bottom package balls visible in Fig. 10(b) with 300 um label; width was only in metric f-m4"}
+  - {date: 2026-10-20, source: ingest_audit_A, row_id: 001c.74748-e-i4, change: "new row: unspecified solder_ball, stated, schematic, p.5 Fig. 8(f); p.5 Fig. 9(b)", reason: "Fig. 8(f) solder patterning and Fig. 9(b) inset show bottom-side solder balls of the double-sided DEP; no dimensions given"}
+  - {date: 2026-10-20, source: ingest_audit_A, row_id: 001c.74748-f01, change: "bbox 0.1,0.105,0.45,0.362 -> 0.1,0.105,0.45,0.372", reason: "old bbox clipped printed (b) panel label; re-crop confirmed label included, no body text"}
+  - {date: 2026-10-20, source: ingest_audit_A, row_id: 001c.74748-f02, change: "bbox 0.1,0.36,0.45,0.607 -> 0.1,0.36,0.45,0.615", reason: "old bbox clipped printed (b) panel label; re-crop confirmed"}
+  - {date: 2026-10-20, source: ingest_audit_A, row_id: 001c.74748-f03, change: "bbox 0.55,0.092,0.9,0.478 -> 0.55,0.092,0.9,0.486", reason: "old bbox clipped printed (b) panel label; re-crop confirmed"}

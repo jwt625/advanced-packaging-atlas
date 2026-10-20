@@ -1,0 +1,29 @@
+paper_id: eptc62800.2024.10909836
+verified_on: 2026-10-20
+source_files:
+  - references/eptc62800.2024.10909836/text.md
+  - references/eptc62800.2024.10909836/source.json
+  - references/eptc62800.2024.10909836/figures/page_01.png
+  - references/eptc62800.2024.10909836/figures/page_02.png
+  - references/eptc62800.2024.10909836/figures/page_03.png
+figure_reading_method: >-
+  Page renders p.1-p.3 opened; Fig. 4(B) histogram, Fig. 4(C) XSEM labels and Fig. 3 line scan re-rendered at 400 dpi
+  in the scratchpad. Fig. 3 bow-height legend values illegible at any zoom; not entered.
+entries:
+  - {table: metrics, row_id: eptc62800.2024.10909836-a-m4, field: value, value: 171, unit: nm, basis: measured, locator: "p.2 Fig. 4(C)", note: "XSEM label '171nm' on SiO2"}
+  - {table: metrics, row_id: eptc62800.2024.10909836-a-m5, field: value, value: 216, unit: nm, basis: measured, locator: "p.2 Fig. 4(C)", note: "XSEM label '216nm' on c-Si"}
+  - {table: metrics, row_id: eptc62800.2024.10909836-a-m6, field: value, value: 384, unit: nm, basis: measured, locator: "p.2 Fig. 4(C)", note: "XSEM label '384nm' spanning SiO2 + c-Si; 171 + 216 = 387 (label rounding, not corrected)"}
+  - {table: metrics, row_id: eptc62800.2024.10909836-a-m3, field: value_text, value: "128-208 nm bins", unit: nm, basis: measured, locator: "p.2 Fig. 4(B)", note: "x-axis bins (128,138] to (198,208]; tallest bar (158,168] about 28 counts"}
+  - {table: metrics, row_id: eptc62800.2024.10909836-a-m8, field: value_text, value: "-290 to -565 nm", unit: nm, basis: measured, locator: "p.2 Fig. 3 middle", note: "approximate read of line-scan end points"}
+derived: []
+conflicts:
+  - {table: metrics, row_id: eptc62800.2024.10909836-a-m6, field: value, values: ["384 nm (XSEM total label)", "387 nm (171 + 216, own arithmetic)"], locators: ["p.2 Fig. 4(C)", "p.2 Fig. 4(C)"], chosen: 384, why: "printed measurement label entered"}
+excluded:
+  - "evanescent coupling gap typically <500 nm attributed to refs [6-8]"
+not_reported:
+  - electrical_interfaces
+  - "optical_interfaces (no optical coupling measurement; evanescent coupling only motivates the work)"
+  - "bonding temperature, pressure, plasma activation, anneal, alignment accuracy"
+  - "die size and count for C2W, wafer substrate material, cladding thickness, deposited (pre-CMP) oxide thickness"
+  - "numeric bow height values (Fig. 3 legend illegible), numeric surface roughness"
+  - "etch step after i193 lithography not stated"

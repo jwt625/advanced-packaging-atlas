@@ -1,0 +1,26 @@
+paper_id: 001c.147098
+verified_on: 2026-10-20
+source_files: [references/001c.147098/text.md, references/001c.147098/figures/page_02.png, references/001c.147098/figures/page_03.png, references/001c.147098/figures/page_04.png, references/001c.147098/figures/page_05.png]
+entries:
+  - {table: interconnects, row_id: 001c.147098-a-i1, field: depth_um, value: 395, unit: um, basis: measured, locator: "p.4 Fig. 5(a)", note: "SEM label 395 um; text p.3 says approx. 395 um after frontside CMP"}
+  - {table: process_steps, row_id: 001c.147098-F1-s02, field: result, value: "400-410", unit: um, basis: design_target, locator: "p.3 Sec. II", note: "as-etched via depth before grinding and CMP"}
+derived:
+  - {table: components, row_id: 001c.147098-b-c1, field: thickness_um, value: 395, formula: "0.395 mm x 1000", inputs: "p.4 Sec. III"}
+  - {table: components, row_id: 001c.147098-c-c1, field: thickness_um, value: 395, formula: "0.395 mm x 1000", inputs: "p.4 Sec. III"}
+  - {table: stack_layers, row_id: 001c.147098-a-L03, field: thickness_um, value: 0.03, formula: "30 nm / 1000", inputs: "p.3 Sec. II"}
+  - {table: stack_layers, row_id: 001c.147098-a-L04, field: thickness_um, value: 0.2, formula: "200 nm / 1000", inputs: "p.3 Sec. II"}
+  - {table: stack_layers, row_id: 001c.147098-a-L05, field: thickness_um, value: 0.03, formula: "30 nm / 1000", inputs: "p.3 Sec. II"}
+  - {table: process_steps, row_id: 001c.147098-F1-s05, field: thickness_um, value: 0.1, formula: "100 nm / 1000", inputs: "p.3 Sec. II"}
+  - {table: process_steps, row_id: 001c.147098-F1-s06, field: thickness_um, value: 4, formula: "4000 nm / 1000", inputs: "p.3 Sec. II"}
+  - {table: stack_layers, row_id: 001c.147098-b-L02, field: thickness_um, value: 395, formula: "0.395 mm x 1000", inputs: "p.4 Sec. III"}
+  - {table: stack_layers, row_id: 001c.147098-c-L02, field: thickness_um, value: 395, formula: "0.395 mm x 1000", inputs: "p.4 Sec. III"}
+conflicts: []
+excluded:
+  - "conventional 13-step process TSV results and cavity-resonance suppression attributed to ref. [5] (only qualitative comparison, no numbers entered)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "process_steps: 001c.147098-b (fabrication of the no-TSV through-pattern reference chip not described)"
+  - "TSV etch recipe values (cycle times, coil power), plating current density/time, SiO2 and frontside Nb thickness"
+  - "dicing of chips from the wafer; through-pattern line material"
+  - "TSV resistance, yield, reliability"

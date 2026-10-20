@@ -1,0 +1,62 @@
+paper_id: tcpmt.2026.3736233
+verified_on: 2026-10-20
+source_files:
+  - references/tcpmt.2026.3736233/text.md
+  - references/tcpmt.2026.3736233/source.json
+  - references/tcpmt.2026.3736233/figures/page_01.png
+  - references/tcpmt.2026.3736233/figures/page_02.png
+  - references/tcpmt.2026.3736233/figures/page_03.png
+  - references/tcpmt.2026.3736233/figures/page_04.png
+  - references/tcpmt.2026.3736233/figures/page_05.png
+  - references/tcpmt.2026.3736233/figures/page_06.png
+  - references/tcpmt.2026.3736233/figures/page_07.png
+  - references/tcpmt.2026.3736233/figures/page_08.png
+  - references/tcpmt.2026.3736233/figures/page_09.png
+  - references/tcpmt.2026.3736233/figures/page_10.png
+  - references/tcpmt.2026.3736233/figures/page_11.png
+  - references/tcpmt.2026.3736233/figures/page_12.png
+  - references/tcpmt.2026.3736233/figures/page_13.png
+  - references/tcpmt.2026.3736233/figures/page_14.png
+  - references/tcpmt.2026.3736233/figures/page_15.png
+figure_reading_method: >-
+  Page renders p.1-p.15 opened (p.16-18 references and biographies, read in text.md). Fig. 3/4 labels, Fig. 21 measurement
+  labels and Table VII re-rendered at 300-400 dpi in the scratchpad; Fig. 24 ADS marker boxes read from the candidate crop.
+entries:
+  - {table: interconnects, row_id: tcpmt.2026.3736233-a-i1, field: diameter_um, value: 124, unit: um, basis: design_target, locator: "p.11 Table IV", note: "d_Via1-T 124, d_Via1-B 110, d_pad1 136, H_Via1 30"}
+  - {table: interconnects, row_id: tcpmt.2026.3736233-a-i2, field: diameter_um, value: 139, unit: um, basis: design_target, locator: "p.11 Table IV", note: "d_Via2-T 139, d_Via2-B 126, d_pad2 152, H_Via2 15"}
+  - {table: interconnects, row_id: tcpmt.2026.3736233-a-i1, field: count, value: 55, unit: "", basis: design_target, locator: "p.12 Sec. VII.B", note: "'full 55-via capacitor'"}
+  - {table: metrics, row_id: tcpmt.2026.3736233-c-m7, field: value, value: 0.064, unit: Ohm, basis: measured, locator: "p.14 Fig. 24(a)", note: "marker m1 109.2 MHz on S(2,1) trace = 3-via segment per legend colour"}
+  - {table: metrics, row_id: tcpmt.2026.3736233-d-m7, field: value, value: 0.034, unit: Ohm, basis: measured, locator: "p.14 Fig. 24(a)", note: "marker m2 269.7 MHz on S(4,3) trace = 6-via segment"}
+  - {table: test_vehicles, row_id: tcpmt.2026.3736233-b, field: package_x_mm, value: 1.8, unit: mm, basis: design_target, locator: "p.1 Abstract; p.15 Table VII", note: "five-die footprint 1.8 x 8.6 mm2"}
+derived: []
+conflicts:
+  - {table: components, row_id: tcpmt.2026.3736233-a-c2, field: thickness_um, values: ["300 um glass substrate (abstract)", "Glass (200 um) label in Fig. 3(c)/4(c) (cited to refs [27],[28])", "Substrate/Dielectric thickness 90-300 um (Fig. 4(b))"], locators: ["p.1 Abstract", "p.4 Fig. 3(c); p.4 Fig. 4(c)", "p.4 Fig. 4(b)"], chosen: 300, why: "text over schematic; schematics reprinted from prior work"}
+  - {table: stack_layers, row_id: tcpmt.2026.3736233-a-L09, field: thickness_um, values: [300, 200], locators: ["p.1 Abstract", "p.4 Fig. 4(c)"], chosen: 300, why: "text over schematic"}
+  - {table: stack_layers, row_id: tcpmt.2026.3736233-a-L01, field: feature, values: ["Cu#2 = ground V- (Fig. 4(b))", "top 10 um Cu = source, lower = GND (Fig. 4(c))"], locators: ["p.4 Fig. 4(b)", "p.4 Fig. 4(c)"], chosen: "net not assigned", why: "schematics disagree; noted"}
+  - {table: interconnects, row_id: tcpmt.2026.3736233-e-i1, field: diameter_um, values: ["150 um via diameter (p.10 Sec. VI.B)", "same as plate first-layer via = 124 um top (Table IV)"], locators: ["p.10 Sec. VI.B", "p.11 Table IV"], chosen: 124, why: "table; 150 um matches capacitor pad diameter"}
+  - {table: metrics, row_id: tcpmt.2026.3736233-a-m19, field: variant, values: ["Table VI nominal H_via1 40, H_via2 25, d_pad 140 um", "Table IV H_via1 30, H_via2 15, d_pad1 136, d_pad2 152 um"], locators: ["p.14 Table VI", "p.11 Table IV"], chosen: "both kept (Table IV for build rows, Table VI for sensitivity rows)", why: "different tables; not reconciled in paper"}
+  - {table: metrics, row_id: tcpmt.2026.3736233-a-m4, field: value, values: ["0.52 pH (Table V)", "0.5 pH (Table VII)"], locators: ["p.14 Table V", "p.15 Table VII"], chosen: 0.52, why: "result table, more digits"}
+  - {table: metrics, row_id: tcpmt.2026.3736233-e-m1, field: value, values: ["approximately 1.24 nH (text)", "approximately 1.2 nH (Fig. 23 caption)"], locators: ["p.12 Sec. VII.B", "p.13 Fig. 23"], chosen: 1.24, why: "text"}
+  - {table: metrics, row_id: tcpmt.2026.3736233-a-m8, field: value, values: ["6.5 V maximum voltage (Table VII)", "5.3 V die rating (p.4 Sec. II.B)", "6 V breakdown (Table I, prior design)"], locators: ["p.15 Table VII", "p.4 Sec. II.B", "p.3 Table I"], chosen: 6.5, why: "table of this work"}
+  - {table: metrics, row_id: tcpmt.2026.3736233-f-m6, field: value, values: ["2.1% error at 45 um (Table III)", "abstract: <2% error when inter-plane dielectric <50 um", "Table V: <2% reconstruction error", "text: within 3% for all three geometries"], locators: ["p.10 Table III", "p.1 Abstract", "p.14 Table V", "p.9 Sec. V.C"], chosen: 2.1, why: "table value entered; claims differ"}
+  - {table: metrics, row_id: tcpmt.2026.3736233-b-m13, field: value, values: ["-2.6% at 1 GHz for 40 x 6-via (Table II)", "<2% (abstract, Table V)", "3% (text)"], locators: ["p.9 Table II", "p.1 Abstract", "p.9 Sec. V.C"], chosen: "table", why: "result table"}
+excluded:
+  - "Table I capacitor specifications (Cs1, Cs2, Cin, Co ratings, part numbers, 20/25 parallel dies) for the IVR of prior work [2]; only the ELSPES supplier name used"
+  - "Fig. 2 IVR architecture (12-to-1 V, 5 MHz, 100 W) from refs [2],[29]; not built in this paper"
+  - "Table VII comparison rows for refs [8],[11],[13]-[15],[21],[38]-[40] and the two 'ongoing work' DTC rows (4.3 uF 95 um, 0.45 uF 120 um)"
+  - "DTC literature values (3500 nF/mm2, <95 um, ESL <1 pH, ESR <3 mOhm, SRF >100 MHz) attributed to refs [19],[20]"
+  - "Fig. 9 model curves (2.8 uF ESR 2.5 mOhm ESL 0.5 pH; 14 uF ESR 0.5 mOhm ESL 0.1 pH) and VNA limits 1 Ohm / 1 mOhm (method, not TV results)"
+  - "Fig. 24 single-capacitor and five-parallel ADS marker values (near VNA limit; Table V values used)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "process temperatures, pressures and times (deferred to refs [27],[28]); laser types; ABF grade; seed layer thicknesses"
+  - "cavity dimensions and depth; DAF thickness; die-to-cavity gap"
+  - "reliability, warpage and thermal tests"
+  - "process_steps: tcpmt.2026.3736233-f (simulation model, no build)"
+  - "open/short de-embedding structures not entered as TVs (calibration only)"
+revisions:
+  - {date: 2026-10-20, source: ingest_audit_C, row_id: tcpmt.2026.3736233-a-m12, change: "basis measured -> simulated; condition 'after CPW de-embedding' -> 'HFSS waveport after CPW de-embedding'; notes added (simulation only); source mixed kept", reason: "p.13 Fig. 23(b) legend shows only CPW wave-port before/after de-embedding and direct lumped-port traces, no measured data; caption says HFSS simulations; p.12 Sec. VII.B validates the simulation methodology; no fabricated parallel-plane Ze sample"}
+  - {date: 2026-10-20, source: ingest_audit_C, row_id: tcpmt.2026.3736233-f27, change: "bbox 0.5111,0.566,0.9271,0.7287 -> 0.5111,0.566,0.9271,0.738; bbox_source candidate -> manual; cand_id p14_fig25 -> empty", reason: "candidate crop cut the x-axis title 'Values [um]'; manual re-crop of page_14 verified"}
+  - {date: 2026-10-20, source: ingest_audit_C, row_id: "tcpmt.2026.3736233-c-m10..m13; tcpmt.2026.3736233-d-m10..m13", change: "added direct Q3D ESL of two adjacent 3-via (width 3.2/3.02, length 4.09/3.86 pH) and 6-via (width 1.76/1.69, length 2.2/2.09 pH) segments at 200 MHz/1 GHz; simulated, table", reason: "p.9 Table II reference values were missing; only error percentages entered"}
+  - {date: 2026-10-20, source: ingest_audit_C, row_id: "tcpmt.2026.3736233-f-m9..m12", change: "added segment ESL L6via per design A-D (3.86, 5.3, 6.83, 13.18 pH), condition 1 GHz; simulated, table", reason: "p.10 Table III ESL-estimate column (printed as L6via/8) was missing; 1 GHz taken from the error-column header and Table II L6via at 1 GHz = 3.86 pH for design A"}

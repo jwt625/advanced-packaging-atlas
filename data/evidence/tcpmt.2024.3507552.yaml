@@ -1,0 +1,48 @@
+paper_id: tcpmt.2024.3507552
+verified_on: 2026-10-20
+source_files: [references/tcpmt.2024.3507552/text.md, references/tcpmt.2024.3507552/figures/page_02.png, references/tcpmt.2024.3507552/figures/page_03.png, references/tcpmt.2024.3507552/figures/page_04.png, references/tcpmt.2024.3507552/figures/page_05.png, references/tcpmt.2024.3507552/figures/page_06.png, references/tcpmt.2024.3507552/figures/page_07.png, references/tcpmt.2024.3507552/figures/page_08.png]
+entries:
+  - {table: interconnects, row_id: tcpmt.2024.3507552-a-i1, field: diameter_um, value: 100, unit: um, basis: measured, locator: "p.8 Sec. IV", note: "post-assembly optical inspection; height 20 um also from profilometer p.7"}
+  - {table: stack_layers, row_id: tcpmt.2024.3507552-a-L01, field: thickness_um, value: 0.4, unit: um, basis: design_target, locator: "p.7 Fig. 11", note: "trace thickness label on dummy chip CPW in assembly drawing"}
+  - {table: interconnects, row_id: tcpmt.2024.3507552-a-i3, field: diameter_um, value: 58, unit: um, basis: design_target, locator: "p.5 Table I; p.3 Fig. 4(b)", note: "simulated optimum for 50 ohm adopted as design target"}
+derived:
+  - {table: components, row_id: tcpmt.2024.3507552-a-c3, field: thickness_um, value: 50.8, formula: "2 mil x 25.4 um/mil", inputs: "p.7 Sec. III-B"}
+  - {table: components, row_id: tcpmt.2024.3507552-b-c3, field: thickness_um, value: 50.8, formula: "2 mil x 25.4 um/mil", inputs: "p.7 Sec. III-B"}
+  - {table: stack_layers, row_id: tcpmt.2024.3507552-a-L06, field: thickness_um, value: 50.8, formula: "2 mil x 25.4 um/mil", inputs: "p.7 Sec. III-B"}
+  - {table: stack_layers, row_id: tcpmt.2024.3507552-b-L06, field: thickness_um, value: 50.8, formula: "2 mil x 25.4 um/mil", inputs: "p.7 Sec. III-B"}
+  - {table: interconnects, row_id: tcpmt.2024.3507552-b-i1, field: diameter_um, value: 25.4, formula: "1 mil x 25.4 um/mil", inputs: "p.7 Sec. III-C"}
+  - {table: components, row_id: tcpmt.2024.3507552-a-c1, field: thickness_um, value: 300, formula: "0.3 mm x 1000", inputs: "p.5 Sec. II-C; p.5 Table I"}
+  - {table: components, row_id: tcpmt.2024.3507552-a-c2, field: thickness_um, value: 500, formula: "0.5 mm x 1000", inputs: "p.5 Sec. II-C; p.5 Table I"}
+  - {table: components, row_id: tcpmt.2024.3507552-a-c4, field: thickness_um, value: 500, formula: "0.5 mm x 1000", inputs: "p.4 Sec. II-A2; p.5 Table I"}
+  - {table: components, row_id: tcpmt.2024.3507552-a-c5, field: thickness_um, value: 300, formula: "0.3 mm x 1000", inputs: "p.5 Table I"}
+  - {table: components, row_id: tcpmt.2024.3507552-c-c1, field: thickness_um, value: 200, formula: "0.2 mm x 1000", inputs: "p.2 Sec. II"}
+  - {table: components, row_id: tcpmt.2024.3507552-c-c2, field: thickness_um, value: 500, formula: "0.5 mm x 1000", inputs: "p.2 Sec. II"}
+  - {table: process_steps, row_id: tcpmt.2024.3507552-F6-s01, field: thickness_in_um, value: 50.8, formula: "2 mil x 25.4 um/mil", inputs: "p.7 Sec. III-B"}
+  - {table: process_steps, row_id: tcpmt.2024.3507552-F2-s02, field: thickness_um, value: 0.5, formula: "500 nm / 1000", inputs: "p.6 Sec. III-A2"}
+  - {table: process_steps, row_id: tcpmt.2024.3507552-F2-s03, field: thickness_um, value: 0.3, formula: "300 nm / 1000", inputs: "p.5 Table I"}
+  - {table: components, row_id: tcpmt.2024.3507552-b-c1, field: thickness_um, value: 300, formula: "0.3 mm x 1000", inputs: "p.5 Sec. II-C; p.5 Table I"}
+  - {table: components, row_id: tcpmt.2024.3507552-b-c2, field: thickness_um, value: 500, formula: "0.5 mm x 1000", inputs: "p.5 Sec. II-C; p.5 Table I"}
+conflicts:
+  - {table: interconnects, row_id: tcpmt.2024.3507552-a-i1, field: diameter_um, values: [80, 90, 100], locators: ["p.5 Table I", "p.6 Sec. III-A1", "p.8 Sec. IV"], chosen: 100, why: "80 design, ~90 as formed, 100 measured after compression bonding"}
+  - {table: interconnects, row_id: tcpmt.2024.3507552-a-i1, field: height_um, values: [50, 20], locators: ["p.5 Table I", "p.7 Sec. III-C; p.8 Sec. IV"], chosen: 20, why: "measured after thermo-compression; 50 um is the design target"}
+  - {table: components, row_id: tcpmt.2024.3507552-a-c3, field: thickness_um, values: [50.8, 50, 30], locators: ["p.7 Sec. III-B (2 mil)", "p.7 Fig. 11 panel 1", "p.7 Fig. 11 panel 2 (after 3DSC bonding)"], chosen: 50.8, why: "as-applied film, text over schematic label; 30 um is the film after bonding (epoxy reflow, Sec. III-C)"}
+  - {table: stack_layers, row_id: tcpmt.2024.3507552-a-L06, field: thickness_um, values: [50.8, 50, 30], locators: ["p.7 Sec. III-B (2 mil)", "p.7 Fig. 11 panel 1", "p.7 Fig. 11 panel 2 (after 3DSC bonding)"], chosen: 50.8, why: "as-applied film, text over schematic label; 30 um is the film after bonding (epoxy reflow, Sec. III-C)"}
+  - {table: metrics, row_id: tcpmt.2024.3507552-a-m1, field: value, values: [16, 16.3], locators: ["p.1 Abstract", "p.9 Sec. V"], chosen: 16.3, why: "conclusion gives the more specific bound"}
+  - {table: components, row_id: tcpmt.2024.3507552-a-c5, field: x_mm, values: ["0.5 x 1 mm (Table I w, l)", "W = 1000, L = 500 um (p.4 text)"], locators: ["p.5 Table I", "p.4 Sec. II-B"], chosen: "0.5 x 1", why: "table over text; axis naming differs"}
+  - {table: metrics, row_id: tcpmt.2024.3507552-a-m10, field: value_text, values: ["three 30 um tall bumps (p.8)", "bump height approx. 20 um after compression (p.7)"], locators: ["p.8 Sec. IV", "p.7 Sec. III-C"], chosen: "as written", why: "vertical-length estimate uses nominal 30 um bumps"}
+excluded:
+  - "15-100 gf per bump shear values attributed to ref. [24]"
+  - "stitch-chip with compressible microinterconnects (CMI) fabrication of ref. [23]"
+not_reported:
+  - optical_interfaces
+  - "metal thicknesses of stitch-chip and board CPW; board metal stack"
+  - "DRIE recipe, plating chemistry and current density, CMP conditions"
+  - "bonding force and time for 3DSC bonding and assembly; stud bump stage temperature"
+  - "dummy-chip dicing and marker-removal steps"
+  - "reliability testing"
+revisions:
+  - {date: 2026-10-20, source: ingest_audit_A, row_id: tcpmt.2024.3507552-a-i2, change: "metallurgy 'Au stud bump (stitch-chip) to Cu cap (TSV chiplet)' -> 'Au stud bump (stitch-chip) to Cu pad (TSV chiplet top)'; locator += p.7 Fig. 11; F5-s02 notes corrected the same way", reason: "Cu cap is only on the board-facing side (p.6 Sec. III-A2); Fig. 11 panel 2 shows 20 um stud bump at top, 30 um cap at bottom"}
+  - {date: 2026-10-20, source: ingest_audit_A, row_id: tcpmt.2024.3507552-a-c3, change: "conflicts thickness_um values [50.8, 50] -> [50.8, 50, 30] with p.7 Fig. 11 panel 2 locator; same conflict added for a-L06; notes of a-c3 and a-L06 mention 30 um after bonding; F6-s02 notes += film 30 um label", reason: "Fig. 11 panel 2 labels the film 30 um after 3DSC bonding; Sec. III-C reports epoxy reflow"}
+  - {date: 2026-10-20, source: ingest_audit_A, row_id: tcpmt.2024.3507552-F6-s01, change: "thickness_in_um = 50.8 (derived 2 mil x 25.4); conditions = '2 mil film'; notes updated", reason: "p.7 Sec. III-B states a 2 mil thick conductive epoxy film; input thickness column was empty"}
+  - {date: 2026-10-20, source: ingest_audit_A, row_id: tcpmt.2024.3507552-F1-s06, change: "target 'stud bump diameter approx. 90 um' -> 'd 80 um, h 50 um'; basis measured -> design_target; overrides = target:table;result:measured; qualifiers = result:approx; locator += p.5 Table I", reason: "90 um is the as-formed result (p.6 Sec. III-A1); design target is Table I gold bump d, h = 80, 50 um"}
+  - {date: 2026-10-20, source: ingest_audit_A, row_id: tcpmt.2024.3507552-f01..f15, change: "re-ranked: 1 Fig. 11, 2 Fig. 7, 3 Fig. 9, 4 Fig. 5, 5 Fig. 2, 6 Fig. 12, 7 Fig. 10, 8 Fig. 13, 9 Fig. 8, 10 Fig. 1, 11 Fig. 14, 12 Table I, 13 Fig. 4, 14 Fig. 6, 15 Fig. 3; fig_id renumbered to rank", reason: "SKILL step 5: process flow right after rank 1, then layout/floorplan (Fig. 5 stitch-chip layout), then other schematics and images"}

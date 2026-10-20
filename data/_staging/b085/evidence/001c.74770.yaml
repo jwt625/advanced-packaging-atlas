@@ -1,0 +1,42 @@
+paper_id: 001c.74770
+verified_on: 2026-10-20
+schema_version: 2.5
+source_files:
+  - references/001c.74770/text.md
+  - references/001c.74770/source.json
+  - references/001c.74770/figures/page_03.png
+  - references/001c.74770/figures/page_04.png
+  - references/001c.74770/figures/page_05.png
+  - references/001c.74770/figures/page_06.png
+figure_reading_method: >-
+  Page renders p.3-6; Table 1 and Fig. 5 read from 500 dpi re-crops; candidate crops p04_fig1, p04_fig2, p04_fig4,
+  p05_fig6, p05_fig7, p06_fig9, p06_fig11, p06_fig12 opened; manual re-crops for Table 1, Table 2, Fig. 3, Fig. 5,
+  Fig. 8, Fig. 10.
+entries:
+  - {table: process_steps, row_id: 001c.74770-F1-s03, field: temp_c, value: 170, unit: C, basis: design_target, locator: "p.4 Sec. III", note: "die-side heater ~170 C, substrate-side ~150 C at contact"}
+  - {table: process_steps, row_id: 001c.74770-F1-s03, field: temp_c_max, value: 260, unit: C, basis: design_target, locator: "p.5 Fig. 5", note: "bond-head set plateau read off sample profile, approx; stage plateau ~235 C"}
+  - {table: process_steps, row_id: 001c.74770-F1-s03, field: conditions, value: "SnAg reflow 230 C", unit: C, basis: stated, locator: "p.4 Sec. III", note: "NCP cures in a couple of seconds at this temperature"}
+derived:
+  - {table: metrics, row_id: 001c.74770-a-m6, field: value, value: 25, formula: "paper's own: 1 - 395.821/525.099 = 24.6 %", inputs: "p.5 Table 2; p.5 Sec. III"}
+conflicts:
+  - {table: stack_layers, row_id: 001c.74770-a-L06, field: feature, values: ["pad 48 um", "60x60 um ENIG pad"], locators: ["p.3 Table 1", "p.3 Sec. II"], chosen: "48 um", why: "table over text"}
+  - {table: metrics, row_id: 001c.74770-a-m9, field: variant, values: ["both conditions", "condition 1"], locators: ["p.6 Sec. IV", "p.6 Figs. 11-12 captions"], chosen: "both conditions (text)", why: "captions both say condition 1 though text says Figs. 11 and 12 cover both; noted in row"}
+  - {table: metrics, row_id: 001c.74770-a-m12, field: value_text, values: ["insufficient touch-down force -> underfill entrapment", "over compressed joint with filler separation"], locators: ["p.4 Sec. III", "p.4 Fig. 2 caption"], chosen: "text description", why: "text explains the cause; caption differs, noted in row"}
+  - {table: metrics, row_id: 001c.74770-a-m10, field: parameter, values: ["X-ray analysis for underfill voiding", "C-SAM for underfill voiding"], locators: ["p.1 Abstract", "p.2 Sec. I; p.6 Sec. IV"], chosen: "CSAM", why: "body text and Fig. 10; no X-ray data shown"}
+excluded:
+  - "Prior work results in Sec. I: 25 um diameter / 50 um pitch WLUF [1], NCP reliability 1000 TC and 200 h bHAST [2], NCF collective bonding [3], 30 um pitch WLUF [8], 20 um pitch PAUF TCB [9]"
+  - "solder bump lowest pitch around 40 um (background)"
+not_reported:
+  - electrical_interfaces
+  - optical_interfaces
+  - "process_steps: 001c.74770-b (capillary underfill reference build not described)"
+  - "bonding force values, bond times, atmosphere; Fig. 5 force axis not readable"
+  - "die shear test results (mentioned in abstract, no data)"
+  - "X-ray voiding data (abstract only)"
+  - "NCP product, supplier, dispense volume; TV supplier"
+  - "electrical continuity results (next steps)"
+  - "thermal cycling sample count, dwell, ramp; HAST not done"
+source_quality:
+  - "Text p.3 'lead-tin (SnAg) solder caps' is a misnomer as printed."
+  - "Table 1 lists SnAg thickness 15 um and pillar pitch 80/300 under the interposer column (interposer has AlCu pads per text)."
+  - "Text 'CSEM analysis' read as CSAM."

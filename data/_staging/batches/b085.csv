@@ -1,0 +1,4 @@
+paper_id,doi,title,year,venue,primary_bucket,buckets,priority,triage_rationale
+001c.74577,10.4071/001c.74577,Fabrication of Panel-Level Glass Substrates with Complete Design Freedom using LIDE,2022,IMAPS,glass,glass;panel,1,"LIDE laser-modify plus wet-etch TGV on 510x515 mm panels, aspect 1:10-1:50, +/-5 um cumulative accuracy."
+ectc51909.2023.00240,10.1109/ectc51909.2023.00240,Critical Dimension Scatterometry as a Scalable Solution for Hybrid Bonding Pad Recess Metrology,2023,ECTC,hybrid_bonding,hybrid_bonding,3,"ML-assisted scatterometry for 9 and 3 um pitch HB pad recess (-30 to 40 nm); metrology only, no stack."
+001c.74770,10.4071/001c.74770,Pre-applied underfill Technique for Fine-pitch Cu Pillar 3D Die Stacking to Enable 2.5/3D Advanced Packaging,2022,IMAPS,microbump_3d,microbump_3d,2,"TCB with pre-applied underfill, 80 um pitch SnAg-capped Cu pillars on ENIG; shear, cross-section, X-ray voids, TC."
