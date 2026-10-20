@@ -67,7 +67,9 @@ regenerated from `source.pdf` at any time.
 - [x] Full run: pending papers in batches of 3, at most 7 subagents at once (b021-b070 done, 145 papers).
 - [x] Figures backfill for the 58 merged papers (figures-only batches f000-f009).
 - [x] Merge, validate (0 errors), fresh-context audit sample (x2A/x2B), final crops, `build_views.py`.
-- [ ] Decide on the audit x2 findings and the rule questions (figure cap, `has_process_flow` threshold); apply fixes.
+- [x] Decide on the audit x2 findings and the rule questions (figure cap, `has_process_flow` threshold); apply fixes.
+      Decided 2026-10-19 23:00; the revision pass applied the audit fixes and the new figure rule (process flow ->
+      DevLog-007).
 - [ ] Detector: 36% of figure rows needed a manual bbox (501/1410). Agents report bottom-clipped candidates on
       some papers (ectc51846.2026.00416 and 00424, where all 6 were manual). Investigate the caption-edge clipping.
 - [ ] App: project `figures` into `atlas.json` and build hover/expand (crops local-only; publishing needs a rights
@@ -297,3 +299,45 @@ Two fresh-context reviewers, read-only (`DevLog/audits/process_flow_review_{A,B}
 - Work through the TODO lists one by one. Example of the organization problem: the table shows multiple TSMC
   spellings, because `papers.orgs` is the printed string. Fix: show the canonical organizations from DevLog-006
   in the app and keep the printed form for provenance.
+
+## Revision pass results (2026-10-20)
+
+- Workflow `wf_6cf0197a-596` (44 agents, 0 failed). Problems found by the coordinator check before merging:
+  1. Coordinator error in batch naming. The export numbered the figures-only batches s014-s035, but the
+     workflow was given s000-s021. Effects:
+     - The 14 agents for s000-s013 found no folder and wrote nothing.
+     - s014-s021 were processed correctly.
+     - s022-s035 (about 110 papers) were never run.
+  2. The r008 agent declined: it read the latest user message (map view) as the current request. No changes.
+  3. The exports predate schema v2.3, so they have no author_affiliations.csv. A `--replace` merge would have
+     deleted those papers' affiliation rows.
+- Fixes:
+  - `merge_staging.py --replace` now replaces only the tables present in the staging dir.
+  - The revision prompt states that the work is assigned.
+  - Re-run of r008 + s022-s035 in workflow `wf_22c5d368-193` (4 workers).
+- Merged (zip backup `cache/backups/data_before_revision_merge_*`): r000-r007, r009-r013, s014-s021.
+  - Coordinator check before merging: all validate at 0 errors; s-batches changed nothing outside figures.csv
+    (row-set comparison) and no evidence file.
+  - After the merge: 239 papers, 2158 figure rows (was 1410; 3-27 per paper, median 7), 5987 metrics rows (was
+    6057; sibling copies merged), 2020 affiliation rows intact. Validator 0 errors.
+- Issues reported by the agents:
+  - Short-id collision: x2B "00092" means ectc51846.2026.00092, not ectc51529.2024.00092. The agent did not
+    misapply it.
+  - Schema gaps already on the v2.x list: applies_to (merged copies carry "applies to TVs a, b" in
+    metrics.scope), an `inferred` basis, value_kind, diameter_bottom, pooled tv_kind.
+  - Evidence `revisions` source labels "figures" / "figure_rule" are used for figure changes.
+  - Some candidate crops are still missed; agents fixed them manually.
+- Pending: merge r008 + s022-s035, then re-render all key-figure crops with `--force` (fig_ids were renumbered
+  by rank) and remove stale crop files.
+- 2026-10-20 00:41-00:45: re-run workflow `wf_22c5d368-193` complete (15/15, 0 failed); r008 + s022-s035 merged
+  in two steps after the same checks (validate 0 errors; s-batches changed only figures.csv; evidence unchanged).
+  Zip backups: `cache/backups/data_before_revision_merge{2,3}_*`.
+- Revision pass complete for all 239 papers:
+  - figures.csv 2812 rows on 239 papers (was 1410; 3-34 per paper, median 11). Kinds: cross_section 373,
+    stack_schematic 350, data_table 307, micrograph 294, other 238, process_flow 225.
+  - All 2812 local crops re-rendered with `--force` (fig_ids were renumbered by rank); no stale files.
+  - `build_views.py`: atlas.json 8.53 MB, 0 warnings.
+- Rule question raised by agents: photos that show only equipment/tools (not the build) were skipped by most
+  agents (00133 Fig. 3, 00229 Fig. 2, 00096 Fig. 4); one tool photo was kept because a panel shows the build.
+  Generic concept schematics are included at low rank; generic roadmaps are skipped.
+- Agents ran a read-only `git status` twice despite "no git" (s023, s024); nothing changed.

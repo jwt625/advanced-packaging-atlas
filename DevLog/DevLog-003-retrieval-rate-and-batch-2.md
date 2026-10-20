@@ -104,6 +104,15 @@ roughly 60 per 2 hours instead.
 - Remaining: 40 IEEE (4 p2, 36 p3) and 21 manual (61 records total).
 - At 22:06 `data/papers.csv` had 94 rows (concurrent extraction work).
 
+## 2026-10-20 00:39 batch 6
+
+- Target: next 30 IEEE papers (4 p2 + 26 p3), 269 cached total.
+- Started 00:39:57 in tmux `apa-ieee-10`; log `logs/ieee_run_20261020T003957.log`. Login returned
+  `institute: True`; first save `ectc51846.2026.00356` at 00:40:58.
+- Remaining before the batch: 40 IEEE (4 p2, 36 p3).
+- Batch 6 completed 01:32:34: **269/300 cached**, 30/30 saved, no breaker. All p2 are cached.
+- Remaining: 10 IEEE (all p3) and 21 manual. `data/papers.csv` is 239, so 30 cached PDFs await ingestion.
+
 ## Progress
 
 - [x] Second batch of 60 PDFs complete (120 cached total)
@@ -111,6 +120,14 @@ roughly 60 per 2 hours instead.
 - [x] Batch 4 (30 attempts) complete (209 cached total; one HTTP 502)
 - [x] Retry `ectc51846.2026.00153` (HTTP 502) in the next batch (saved 21:18:59)
 - [x] Batch 5 (30 attempts) complete (239 cached total)
-- [ ] Batch 6: remaining 40 IEEE (4 p2, 36 p3)
-- [ ] Reconcile `data/papers.csv` with cached PDFs (209 cached vs 61 merged at 21:04)
+- [x] Batch 6 (30 attempts) complete (269 cached total)
+- [ ] Batch 7 (remaining 10 p3) complete (target: 279 IEEE cached)
+- [x] Reconcile `data/papers.csv` with cached PDFs (239 cached, 239 papers in DB)
+- [ ] Ingest the 30 PDFs cached by batch 6 (269 cached vs 239 in `data/papers.csv`)
 - [ ] Fetch the 21 manual IMAPS/IWLPC PDFs via `scripts/ingest_inbox.py`
+
+## 2026-10-20 09:18 batch 7
+
+- Target: the final 10 IEEE papers (all p3), 279 IEEE cached.
+- Started 09:18:10 in tmux `apa-ieee-11`; log `logs/ieee_run_20261020T091810.log`. Login returned
+  `institute: True`; first save `eptc67330.2025.11392620` at 09:18:56.
