@@ -1,0 +1,94 @@
+# Bring-up 3 (DevLog-010): JOINT2 50 x 50 mm Si interposer module, FEM quarter model (ectc51909.2023.00155-d):
+# Die A + 4 Die B on a 200 um interposer, CUF + compression-molded EMC, bottom Cu/SnAg bumps; warpage at 260 C,
+# stress-free 150 C. The paper uses viscoelastic EMC / CUF (Table 8): elastic-bias check until E8.
+# Uses the cowos_s generator in module scope (no substrate).
+schema: ap-sim/0
+id: si_interposer_peers/50mm_quarter
+title: JOINT2 50 x 50 mm interposer module (Die A + 4 Die B, EMC), warpage at 260 C (FEM quarter model)
+status: unvalidated
+family: cowos_s
+params:
+  scope: {value: module, status: reported, ref: ectc51909.2023.00155-d.notes, note: "FEM quarter model of the interposer with molded dies (no substrate)"}
+  ip_n: {value: 1, status: reported, ref: ectc51909.2023.00155-a-c6.count}
+  soc_n: {value: 1, status: reported, ref: ectc51909.2023.00155-d-c1.count, note: "Die A (logic mock)"}
+  soc_w_mm: {value: 21.9, status: reported, ref: ectc51909.2023.00155-d-c1.x_mm}
+  soc_d_mm: {value: 21.9, status: reported, ref: ectc51909.2023.00155-d-c1.y_mm}
+  soc_h_um: {value: 675, status: reported, ref: ectc51909.2023.00155-d-c1.thickness_um}
+  hbm_n: {value: 4, status: reported, ref: ectc51909.2023.00155-d-c2.count, note: "Die B (HBM mock), two per side of Die A (Fig. 5, ectc51909.2023.00155-f06)"}
+  hbm_w_mm: {value: 10, status: reported, ref: ectc51909.2023.00155-d-c2.x_mm}
+  hbm_d_mm: {value: 8, status: reported, ref: ectc51909.2023.00155-d-c2.y_mm}
+  hbm_h_um: {value: 675, status: reported, ref: ectc51909.2023.00155-d-c2.thickness_um}
+  ip_size_rule: {value: given, status: reported, ref: ectc51909.2023.00155-d-c3.x_mm, note: "interposer size reported"}
+  ip_w_mm: {value: 50, status: reported, ref: ectc51909.2023.00155-d-c3.x_mm}
+  ip_d_mm: {value: 50, status: reported, ref: ectc51909.2023.00155-d-c3.y_mm}
+  reticle_x: {value: "=ip_w_mm * ip_d_mm / reticle_area_mm2", status: template, note: "reticle multiple not stated (2500 mm2 interposer, -a.interposer_area_mm2)"}
+  si_h_um: {value: 200, status: reported, ref: ectc51909.2023.00155-a-L09.thickness_um}
+  bs_pi_h_um: {value: 3, status: reported, ref: ectc51909.2023.00155-d-L02.thickness_um, note: "insulator layer under the interposer"}
+  bs_pad_h_um: {value: 5, status: reported, ref: ectc51909.2023.00155-d-L03.thickness_um, note: "Cu pad layer"}
+  ubump_h_um: {value: 22, status: reported, ref: ectc51909.2023.00155-d-L01.thickness_um, note: "CUF gap 22 um (FEM model)"}
+  mold_h_um: {value: 698, status: reported, ref: ectc51909.2023.00155-a-c7.thickness_um, note: "EMC 698 um (design; FEM label in Fig. 3)"}
+  uf1_margin_mm: {value: 1, status: template, ref: ectc51909.2023.00155-d-L01.notes, note: "CUF fillet drawn 1 mm wide (triangle 698 um high in the FEM); box of the bump height here"}
+  ubump_pitch_um: {value: 40, status: reported, ref: ectc51909.2023.00155-a-i1.pitch_um, note: "Die A bumps (minimum pitch)"}
+  ubump_d_um: {value: 22, status: reported, ref: ectc51909.2023.00155-a-i1.diameter_um}
+  ubump_hbm_pitch_um: {value: 35, status: reported, ref: ectc51909.2023.00155-a-i2.pitch_um, note: "Die B bumps (minimum pitch)"}
+  ubump_hbm_d_um: {value: 18, status: reported, ref: ectc51909.2023.00155-a-i2.diameter_um}
+  c4_pitch_um: {value: 150, status: reported, ref: ectc51909.2023.00155-a-i3.pitch_um}
+  c4_d_um: {value: 75, status: reported, ref: ectc51909.2023.00155-a-i3.diameter_um}
+  c4_h_um: {value: 55, status: derived, refs: [ectc51909.2023.00155-d-i1.height_um, ectc51909.2023.00155-d-i1.cap_height_um], note: "Cu 30 + SnAg 25 um"}
+geometry:
+  symmetry: quarter
+  drop_kinds: [cu_pillar, tsv]
+  resolve: []
+materials:
+  map: {}
+  overrides:
+    # Table 8 (p.3) FEM inputs. EMC and CUF are viscoelastic in the paper (E1 below Tg, E2 above): the override can
+    # carry one E, so E1 is used (elastic bias above Tg, stated in assumptions). Si stays cubic (library).
+    emc:
+      E_GPa: {value: 18.0, status: reported, ref: "ectc51909.2023.00155-a-L01.properties (p.3 Table 8, E1; E2 0.4 GPa above Tg 140 C)"}
+      cte_ppmK: {value: {alpha1: 7, alpha2: 25, Tg_C: 140}, status: reported, ref: "ectc51909.2023.00155-a-L01.properties (p.3 Table 8)"}
+    underfill_cuf:
+      E_GPa: {value: 8.9, status: reported, ref: "ectc51909.2023.00155-a-L04.properties (p.3 Table 8, E1; E2 0.1 GPa above Tg 160 C)"}
+      cte_ppmK: {value: {alpha1: 26, alpha2: 104, Tg_C: 160}, status: reported, ref: "ectc51909.2023.00155-a-L04.properties (p.3 Table 8)"}
+    si_crystal:
+      cte_ppmK: {value: 3, status: reported, ref: "ectc51909.2023.00155-a-L09.properties (p.3 Table 8)"}
+    polyimide_rdl:
+      E_GPa: {value: 32, status: reported, ref: "ectc51909.2023.00155-d-L02.properties (p.3 Table 8, insulation layer)"}
+      cte_ppmK: {value: 65, status: reported, ref: "ectc51909.2023.00155-d-L02.properties (p.3 Table 8, insulation layer)"}
+    cu_electroplated:
+      E_GPa: {value: 100, status: reported, ref: "ectc51909.2023.00155-d-L03.properties (p.3 Table 8)"}
+      cte_ppmK: {value: 17, status: reported, ref: "ectc51909.2023.00155-d-L03.properties (p.3 Table 8)"}
+mesh:
+  max_xy_mm: 0.5
+  min_cells_per_layer: 2
+  grading: 1.3
+  max_nodes: 300000
+physics:
+  thermal:
+    sources:
+      - {parts: "soc*", power_W: 500, distribution: uniform_volume}
+    bcs:
+      - {selection: "top:mold*", type: temperature, T_C: 40}
+      - {selection: default, type: adiabatic}
+  mechanics:
+    element: q1im               # A3 bake-off winner (SPEC section 15); q2s as the reference variant
+    stress_free_C: {default: {value: 150, status: reported, ref: ectc51909.2023.00155-d.notes, note: "stress-free 150 C"}, per_part: {}}
+    supports: symmetry
+studies:
+  - {id: s1, type: thermal_stationary}
+  - {id: s2, type: thermo_elastic, temperature: {uniform_C: [25, 260]}}
+# The 260 C target -d-m1 moved to 50mm_quarter_e2 (2026-10-20, coordinator / L9): this case applies the below-Tg
+# moduli E1 over the 150 -> 260 C path, which lies above the EMC Tg (140 C) and 91 % above the CUF Tg (160 C), so its
+# 260 C value is not a valid comparison (L9: +852 um, stiffness-biased). The 25 C study has no target.
+targets: []
+assumptions:
+  - "Elastic-bias check: the paper's EMC and CUF are viscoelastic (Table 8 E1 / E2); the overrides carry E1 (below Tg) with the bilinear CTE, so the 260 C result (above both Tg) is stiffness-biased until the E8 Prony / WLF tier (DevLog-010 first canonical sims)."
+  - "Paper sign per Fig. 9 pictograms (-189 um, original design without filler dies); compared on the interposer bottom with the JEITA ED-7306 sign."
+  - "Bottom Cu/SnAg bumps hang free in the FEM (Fig. 3); dropped here (drop_kinds cu_pillar) because a free homogenized bump layer adds little stiffness; the template TSV field is dropped too (no TSV described)."
+  - "Die B placement two per side of Die A (Fig. 5 photo; not dimensioned); D2D gap template."
+  - "Front interposer levels (template passivation / Al / Cu BEOL, about 8.5 um) are kept; the TV has a 5 um Cu pad, a Cu seed / Ti and a SiN layer of unstated thickness (-a-L05..L08)."
+  - "CUF fillet (triangle, 1 mm x 698 um in the FEM) approximated by a 1 mm margin box of the bump height; the rest of the fillet volume is EMC."
+  - "Thermal study s1 is an end-to-end run, not a validation: 500 W on Die A (analog ectc51687.2025.00055-g condition), mold top fixed at 40 C (the 698 um EMC covers the 697 um die tops by 1 um)."
+missing:
+  - "Poisson ratios; EMC / CUF relaxation data (Prony, WLF) and cure shrinkage use (0.16 % EMC, 21 % insulator given in Table 8)."
+  - "FEM boundary conditions beyond the quarter symmetry; mesh (20-node hexahedra, MARC 2021.2)."

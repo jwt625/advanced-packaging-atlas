@@ -1,0 +1,37 @@
+# M2 hybrid_bonded_3d canonical (DevLog-010): TSMC SoIC F2F chip-on-wafer TV (ectc51906.2022.00176-a: 6 x 6 mm
+# top die on a 16 x 16 mm bottom die, 3 um bond pitch), steady conduction through the bond. No DB row gives a
+# temperature or resistance for this TV (sensitivity case without targets).
+schema: ap-sim/0
+id: soic/thermal_stack
+title: SoIC F2F stack (6 x 6 on 16 x 16 mm), steady thermal through the hybrid bond (no validation target)
+status: unvalidated
+family: soic
+params: {}
+geometry:
+  symmetry: quarter
+  drop_kinds: [microbump]
+  resolve: []
+materials:
+  map: {}
+  overrides: {}
+mesh:
+  max_xy_mm: 0.25
+  min_cells_per_layer: 1
+  grading: 1.3
+  max_nodes: 300000
+physics:
+  thermal:
+    sources:
+      - {parts: "dt_si", power_W: 57.6, distribution: uniform_volume}     # 1.6 W/mm2 x 36 mm2 (analog heating density)
+    bcs:
+      - {selection: "bottom:db_bpad", type: temperature, T_C: 25}
+      - {selection: default, type: adiabatic}
+studies:
+  - {id: s1, type: thermal_stationary}
+targets: []
+assumptions:
+  - "Heating 1.6 W/mm2 on the top die = the ASTM D5470 heating density of the SoIC bonding-layer tests (ectc51687.2025.00055-b condition, p.2 Sec. II.B); bottom-die back face held at 25 C (template)."
+  - "Bond-pad tiers and gap fill use the generator keys bond_tier_mat / gap_fill_mat = sio2_film (not specified in the sources); BEOL dielectric sio2_film."
+  - "No target: the measured effective thermal resistances of ectc51687.2025.00055-b/-c (24.3 / 23.5 C mm2/W) belong to a different test structure, and -d/-e/-f give normalized ratios of model variants (micro-bump vs SoIC vs SoIC-CS bonding) that need bonding-layer variants this template does not carry."
+missing:
+  - "Power map and cooling path of a measured SoIC stack; bond-layer and gap-fill thermal conductivity."

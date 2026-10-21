@@ -1,0 +1,74 @@
+# M2 glass_core canonical (DevLog-010): 65 x 65 mm 2-2-2 build-up substrate with a 1 mm low-CTE glass core,
+# simulated warpage bare (stress-free 180 C) and after 2-chip assembly (stress-free 150 C) at 25 / 265 C
+# (ectc51687.2025.00178-d). Organic-core counterpart: fcbga_organic/substrate_warpage(_bare) (same paper, TV c).
+# Uses the glass_core_substrate generator with the two-die pair layout and no bridges.
+schema: ap-sim/0
+id: glass_core_substrate/warpage_vs_organic
+title: Glass-core (1 mm, low CTE) 2-2-2 substrate, 65 x 65 mm, bare and with 2 chips; warpage 25 / 265 C
+status: unvalidated
+family: glass_core_substrate
+params:
+  sbt_w_mm: {value: 65, status: reported, ref: ectc51687.2025.00178-d.substrate_x_mm}
+  sbt_d_mm: {value: 65, status: reported, ref: ectc51687.2025.00178-d.substrate_y_mm}
+  core_h_um: {value: 1000, status: reported, ref: ectc51687.2025.00178-d-L01.thickness_um}
+  bu_n: {value: 2, status: derived, ref: ectc51687.2025.00178-d.substrate_layer_count, note: "2-2-2"}
+  bu_bot_n: {value: 2, status: derived, ref: ectc51687.2025.00178-d.substrate_layer_count, note: "2-2-2"}
+  die_layout: {value: pair, status: reported, ref: ectc51687.2025.00178-d-c1.count, note: "2 chips side by side (Fig. 5(b), ectc51687.2025.00178-f09)"}
+  bridge_n: {value: 0, status: reported, ref: ectc51687.2025.00178-d.name, note: "no bridge in the simulation model"}
+  d2_n: {value: 2, status: reported, ref: ectc51687.2025.00178-d-c1.count}
+  d2_w_mm: {value: 23, status: reported, ref: ectc51687.2025.00178-d-c1.x_mm}
+  d2_d_mm: {value: 28, status: reported, ref: ectc51687.2025.00178-d-c1.y_mm}
+  die_h_um: {value: 775, status: reported, ref: ectc51687.2025.00178-d-c1.thickness_um}
+geometry:
+  symmetry: quarter
+  drop_kinds: [bga]
+  resolve: []
+materials:
+  # CD6: hold the last data value beyond the range for these keys only; reason: targets d-m2 / d-m4 at 265 C; abf_gl data end at 240 C, underfill_cuf at 260 C, solder_resist (SR layers, mapped since 2026-10-20) at 225 C, its last instantaneous CTE 130 ppm/K (above 121 C) held, glass_en_a1 and core_lowcte at 260 C (5 C short); last table values held.
+  allow_extrapolation: [abf_gl, underfill_cuf, solder_resist, glass_en_a1, core_lowcte]
+  map: {}
+  overrides: {}  # glass_en_a1 k: library template analog (L2 wave 3)
+mesh:
+  max_xy_mm: 1.0
+  min_cells_per_layer: 2
+  grading: 1.3
+  max_nodes: 300000
+physics:
+  thermal:
+    sources:
+      - {parts: "die2*", power_W: 1000, distribution: uniform_volume}      # total over the 2 chips (500 W each, analog)
+    bcs:
+      - {selection: "top:die2*", type: temperature, T_C: 40}
+      - {selection: default, type: adiabatic}
+  mechanics:
+    element: q1im               # A3 bake-off winner (SPEC section 15); q2s as the reference variant
+    stress_free_C: {default: {value: 150, status: reported, ref: ectc51687.2025.00178-d-c2.notes, note: "stress-free 150 C = UF cure (after chip assembly)"}, per_part: {}}
+    supports: symmetry
+studies:
+  - {id: s1, type: thermal_stationary}
+  - {id: s2, type: thermo_elastic, temperature: {uniform_C: [25]}}
+  - {id: s2h, type: thermo_elastic, temperature: {uniform_C: [265]}, note: "beyond the data range of abf_gl, underfill_cuf, solder_resist: runs with materials.allow_extrapolation (CD6); results carry the extrapolated flag"}
+  - id: s3
+    type: thermo_elastic
+    temperature: {uniform_C: [25]}
+    stress_free_C: {value: 180, status: reported, ref: ectc51687.2025.00178-d-m1.condition, note: "bare substrate: stress-free 180 C (build-up cure)"}
+    geometry: {drop_kinds: [bga, die, microbump, underfill]}
+  - id: s3h
+    type: thermo_elastic
+    temperature: {uniform_C: [265]}
+    stress_free_C: {value: 180, status: reported, ref: ectc51687.2025.00178-d-m1.condition, note: "bare substrate: stress-free 180 C (build-up cure)"}
+    geometry: {drop_kinds: [bga, die, microbump, underfill]}
+    note: "beyond the data range of abf_gl, underfill_cuf, solder_resist: runs with materials.allow_extrapolation (CD6); results carry the extrapolated flag"
+targets:
+  - {metric_id: ectc51687.2025.00178-d-m3, quantity: warpage_um, selection: "top:sr_top", definition: jeita_ed7306, study: s2, T_C: 25, tolerance: {sign_only: true}, tier: C}
+  - {metric_id: ectc51687.2025.00178-d-m4, quantity: warpage_um, selection: "top:sr_top", definition: jeita_ed7306, study: s2h, T_C: 265, tolerance: {sign_only: true}, tier: C}
+  - {metric_id: ectc51687.2025.00178-d-m1, quantity: warpage_um, selection: "top:sr_top", definition: jeita_ed7306, study: s3, T_C: 25, tolerance: {sign_only: true}, tier: C}
+  - {metric_id: ectc51687.2025.00178-d-m2, quantity: warpage_um, selection: "top:sr_top", definition: jeita_ed7306, study: s3h, T_C: 265, tolerance: {sign_only: true}, tier: C}
+assumptions:
+  - "Glass CTE values are not given (low / middle / high CTE glass, -d/-e/-f): the library glass key (glass_en_a1) stands for the low-CTE glass; the middle / high variants (-e, -f) cannot be distinguished without their CTEs."
+  - "Trend comparison with the organic core (fcbga_organic cases, TV -c: 122 / -47 um bare, 439 / -292 um with chips) is a cross-case direction check (glass warps less), not encoded as a target here."
+  - "Paper sign: top side view, + convex / - concave (metric scope), as JEITA ED-7306; sign-only tolerances (no material table in the paper)."
+  - "Build-up per-layer thickness and Cu (ABF 15 um + Cu 5 um, glass template), chip gap, bump field and underfill are templates; BGA dropped (simulated substrate, no balls described)."
+  - "Thermal study s1 is an end-to-end run, not a validation: 500 W per chip (analog ectc51687.2025.00055-g condition), chip tops fixed at 40 C."
+missing:
+  - "Glass CTE / modulus of the three glasses, build-up resin properties, core Cu, simulation BCs."

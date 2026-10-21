@@ -1,0 +1,65 @@
+schema: ap-sim/0
+id: em/em4_microbump_gsg
+title: EM-4 reduced, G-S-G micro-bump transition between an interposer RDL line and a die RDL line (40 um pitch)
+status: unvalidated
+family: em3d
+em3d:
+  # Coordinates um. z = 0: interposer ground plane (pec box bottom); z = 44: die ground plane (pec box top, flipped
+  # die). Interposer oxide [0, 6], die oxide [38, 44], underfill in between. Signal line on the interposer from
+  # x = -80 to the bump, die line from the bump to x = +80. Ground bumps at y = +-40 um tie the two ground planes.
+  box_um: {x: [-80, 80], y: [-70, 70], z: [0, 44]}
+  axis: z
+  bc: {ymin: pec, ymax: pec, zmin: pec, zmax: pec}
+  background: underfill
+  materials:
+    oxide: {model: const, eps_r: 4.0, tan_delta: 0.002, ref: "ectc51846.2026.00035-a-L02 (SiO2 ILD Dk 4.0, Df 0.002; p.2 Table I)"}
+    underfill: {model: const, eps_r: 3.8, tan_delta: 0.012, ref: "tcpmt.2025.3533388-d-L08 (EPO-TEK 301-2, Dk 3.8, tan delta 0.012 at 1 kHz)", note: "1 kHz values used at GHz (GHz data N/A)"}
+  conductor_materials:
+    cu: {sigma_S_m: 5.8e7, tcr_per_K: 0.00393, T_ref_C: 20, status: template, note: "IACS Cu (bumps are Cu / SnAg in the analog TV; SnAg cap conductivity N/A)"}
+  temperature_C: 25
+  solids:
+    - {name: ip_oxide, kind: dielectric, material: oxide, box_um: {x: [-80, 80], y: [-70, 70], z: [0, 6]}, ref: "6 um: template"}
+    - {name: die_oxide, kind: dielectric, material: oxide, box_um: {x: [-80, 80], y: [-70, 70], z: [38, 44]}, ref: "6 um: template"}
+    - {name: ip_line, kind: conductor, model: pec, conductor: cu, box_um: {x: [-80, 0], y: [-5, 5], z: [6, 8]}, h_um: 3, ref: "w 10 um, t 2 um: template"}
+    - {name: die_line, kind: conductor, model: pec, conductor: cu, box_um: {x: [0, 80], y: [-5, 5], z: [36, 38]}, h_um: 3}
+    - {name: ip_pad, kind: conductor, model: pec, conductor: cu, box_um: {x: [-13.5, 13.5], y: [-13.5, 13.5], z: [6, 11]}, h_um: 4, ref: "27 x 27 um, 5 um Cu pad: ectc51909.2023.00155-a-i1 (analog per config/package3d/cowos_s.yaml ubump_pad_um)"}
+    - {name: bump, kind: conductor, model: pec, conductor: cu, cylinder_um: {c: [0, 0], r: 11, n: 24, z: [11, 33]}, h_um: 4, ref: "d 22 um, standoff 15 + 7 um: ectc51909.2023.00155-a-i1 (analog for CoWoS-S ubump_d_um / ubump_h_um); pitch 40 um: ectc51909.2023.00135-a-i1"}
+    - {name: die_pad, kind: conductor, model: pec, conductor: cu, box_um: {x: [-13.5, 13.5], y: [-13.5, 13.5], z: [33, 38]}, h_um: 4}
+    - {name: g1_via_ip, kind: conductor, model: pec, conductor: cu, box_um: {x: [-5, 5], y: [35, 45], z: [0, 6]}, ref: "ground via 10 x 10 um: template"}
+    - {name: g1_pad_ip, kind: conductor, model: pec, conductor: cu, box_um: {x: [-13.5, 13.5], y: [26.5, 53.5], z: [6, 11]}}
+    - {name: g1_bump, kind: conductor, model: pec, conductor: cu, cylinder_um: {c: [0, 40], r: 11, n: 24, z: [11, 33]}}
+    - {name: g1_pad_die, kind: conductor, model: pec, conductor: cu, box_um: {x: [-13.5, 13.5], y: [26.5, 53.5], z: [33, 38]}}
+    - {name: g1_via_die, kind: conductor, model: pec, conductor: cu, box_um: {x: [-5, 5], y: [35, 45], z: [38, 44]}}
+    - {name: g2_via_ip, kind: conductor, model: pec, conductor: cu, box_um: {x: [-5, 5], y: [-45, -35], z: [0, 6]}}
+    - {name: g2_pad_ip, kind: conductor, model: pec, conductor: cu, box_um: {x: [-13.5, 13.5], y: [-53.5, -26.5], z: [6, 11]}}
+    - {name: g2_bump, kind: conductor, model: pec, conductor: cu, cylinder_um: {c: [0, -40], r: 11, n: 24, z: [11, 33]}}
+    - {name: g2_pad_die, kind: conductor, model: pec, conductor: cu, box_um: {x: [-13.5, 13.5], y: [-53.5, -26.5], z: [33, 38]}}
+    - {name: g2_via_die, kind: conductor, model: pec, conductor: cu, box_um: {x: [-5, 5], y: [-45, -35], z: [38, 44]}}
+  ports:
+    - {name: ip, side: xmin, signal: ip_line, deembed_um: 66.5, note: "reference plane at the interposer pad edge x = -13.5; de-embedded with a 66.5 um line-run companion cut from the device mesh (deembed_method line_run, default since L7 wave 6; companion on the device mesh since L13)"}
+    - {name: die, side: xmax, signal: die_line, deembed_um: 66.5, note: "reference plane at the die pad edge x = +13.5"}
+  mesh: {max_edge_um: 17, max_dz_um: 6, grade: 0.42}   # grade 0.4 -> 0.42 (L13): the reference-plane cut lines add 270 DOF; back under 6e4
+  max_dof: 60000
+  sweep: {f_GHz: [1, 10, 25, 50, 75, 100]}
+  zref_ohm: 50
+  lumped: pi
+  touchstone: true
+  variants:
+    - id: lossy
+      title: Cu losses (thin transition BC on lines, IBC on pads / bumps), coarser z cells (max_dz 8 um) to stay within 6e4 DOF (IBC surfaces keep their edges)
+      patch:
+        mesh: {max_edge_um: 17, max_dz_um: 8}
+        solids:
+          ip_line: {model: thin}
+          die_line: {model: thin}
+          ip_pad: {model: ibc}
+          bump: {model: ibc}
+          die_pad: {model: ibc}
+targets: []
+assumptions:
+  - "Reduced EM-4 (R3 Sec. 4.2): single signal bump with one ground bump on each side (G-S-G), PEC side walls at y = +-70 um (box resonance far above 100 GHz for this width), PEC ground planes on both sides."
+  - "Line, oxide and via dimensions are templates (no DB source for a CoWoS-S RDL line next to a micro-bump); bump and pad from the 40 um-pitch analog TV ectc51909.2023.00155-a-i1."
+  - "Ports are single-mode quasi-TEM wave ports on 66.5 um lead-ins, de-embedded to the pad edges by line-run companions cut from the device mesh (same triangulation and z-planes; 2-port ABCD inversion). The 3D port impedance is 9.5 % below the converged 2D value at this budget (port-Z check warning); the line run removes the leads on their own discretization, so the block S and pi model are not referenced to it."
+missing:
+  - "CoWoS-S micro-bump diameter, pad and standoff (analog used); RDL line geometry next to the bump; underfill Dk/Df at GHz."
+notes: "No measured or simulated DB target for this block (R3 Sec. 4.2 EM-4: cross-solver only). Reference deck: sims/em/em4_microbump_gsg_reference_deck.md."

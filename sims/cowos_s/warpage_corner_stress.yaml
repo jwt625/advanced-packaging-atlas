@@ -1,0 +1,81 @@
+# CoWoS-S 2-module MCM (backbone TV1, ectc51909.2023.00135-a): package warpage 25 C / 250 C and normalized
+# interposer corner stress vs interposer thickness and C4 height (ratio targets, insensitive to absolute
+# materials). Geometry = cowos_s family defaults (the backbone TV). DevLog-010 first canonical sims, user 2.
+# Corner-stress sweeps use study-level params (L1 parser, 2026-10-20).
+schema: ap-sim/0
+id: cowos_s/warpage_corner_stress
+title: CoWoS-S TV1 (2 x 1.5x interposers, 2 SoC + 8 HBM2E, 85 x 85 mm), warpage and interposer corner stress
+status: unvalidated
+family: cowos_s
+params: {}
+geometry:
+  symmetry: quarter
+  drop_kinds: [bga]
+  resolve: []
+materials:
+  # CD6: hold the last data value beyond the range for these keys only; reason: target a-m2 is at 250 C; abf_gl data end at 240 C (10 C short, no phase change in between), solder_resist (SR layers, mapped since 2026-10-20) at 225 C, its last instantaneous CTE 130 ppm/K (above 121 C) held; last table values held.
+  allow_extrapolation: [abf_gl, solder_resist]
+  map:
+    stiffener: cu_lid         # part kind: Cu ring (ectc51909.2023.00135-a-c5.material); L2 maps lid / stiffener Cu to cu_lid
+  overrides: {}
+mesh:
+  max_xy_mm: 1.0
+  min_cells_per_layer: 2
+  grading: 1.3
+  max_nodes: 300000
+physics:
+  thermal:
+    sources:
+      - {parts: "soc_*", power_W: 1000, distribution: uniform_volume}      # total over the matched parts (2 SoC)
+    bcs:
+      - {selection: "top:soc_*", type: temperature, T_C: 40}
+      - {selection: "top:hbm_*", type: temperature, T_C: 40}
+      - {selection: "top:mold*", type: temperature, T_C: 40}
+      - {selection: default, type: adiabatic}
+  mechanics:
+    element: q1im               # A3 bake-off winner (SPEC section 15); q2s as the reference variant
+    stress_free_C: {default: 150, per_part: {}}
+    supports: symmetry
+studies:
+  - {id: s1, type: thermal_stationary}
+  - {id: s2, type: thermo_elastic, temperature: {uniform_C: [25]}}
+  - {id: s2h, type: thermo_elastic, temperature: {uniform_C: [250]}, note: "beyond the data range of abf_gl, solder_resist: runs with materials.allow_extrapolation (CD6); results carry the extrapolated flag"}
+  - id: s3
+    type: thermo_elastic
+    temperature: {uniform_C: [25]}
+    params: {si_h_um: {value: "=ip_thin_um", status: reported, ref: ectc51909.2023.00135-c-c4.thickness_um, note: "50 um interposer variant"}}
+  - id: s4
+    type: thermo_elastic
+    temperature: {uniform_C: [25]}
+    params: {c4_h_um: {value: 60, status: reported, ref: ectc51909.2023.00135-a-i2.notes, note: "C4 standoff sweep 60-90 um (FEA)"}}
+  - id: s5
+    type: thermo_elastic
+    temperature: {uniform_C: [25]}
+    params: {c4_h_um: {value: 70, status: reported, ref: ectc51909.2023.00135-a-i2.notes, note: "C4 standoff sweep"}}
+  - id: s6
+    type: thermo_elastic
+    temperature: {uniform_C: [25]}
+    params: {c4_h_um: {value: 80, status: reported, ref: ectc51909.2023.00135-a-i2.notes, note: "C4 standoff sweep (reference = 1.0)"}}
+  - id: s7
+    type: thermo_elastic
+    temperature: {uniform_C: [25]}
+    params: {c4_h_um: {value: 90, status: reported, ref: ectc51909.2023.00135-a-i2.notes, note: "C4 standoff sweep"}}
+targets:
+  - {metric_id: ectc51909.2023.00135-a-m1, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: s2, T_C: 25, tolerance: {rel: 0.5}, tier: D}
+  - {metric_id: ectc51909.2023.00135-a-m2, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: s2h, T_C: 250, tolerance: {rel: 0.5}, tier: D}
+  # selection tsv_*: the interposer Si cells are owned by the TSV field box (homog:tsv copper+silicon, Cu fraction 0.0035) spanning the full interposer; ip_si@interposer_* owns no cells (checked on the grid 2026-10-20); tsv_b lies in the cropped half (quarter). Homogenized-field von Mises, not the bare-Si value
+  # normalized corner stress: ratio to reference_study (s2: 100 um interposer, -a-m11 = 1.0; s6: C4 80 um, -a-m15 = 1.0)
+  - {metric_id: ectc51909.2023.00135-a-m10, quantity: stress_norm, selection: "corner:tsv_*", definition: ratio_to_reference, study: s3, reference_study: s2, T_C: 25, tolerance: {rel: 0.1}, tier: C}
+  - {metric_id: ectc51909.2023.00135-a-m13, quantity: stress_norm, selection: "corner:tsv_*", definition: ratio_to_reference, study: s4, reference_study: s6, T_C: 25, tolerance: {rel: 0.1}, tier: C}
+  - {metric_id: ectc51909.2023.00135-a-m14, quantity: stress_norm, selection: "corner:tsv_*", definition: ratio_to_reference, study: s5, reference_study: s6, T_C: 25, tolerance: {rel: 0.1}, tier: C}
+  - {metric_id: ectc51909.2023.00135-a-m16, quantity: stress_norm, selection: "corner:tsv_*", definition: ratio_to_reference, study: s7, reference_study: s6, T_C: 25, tolerance: {rel: 0.1}, tier: C}
+assumptions:
+  - "Warpage basis not stated in the paper (DB basis 'unspecified', p.2 Fig. 4); treated as tier D regression. Paper sign: BGA side up, '-' = convex, '+' = concave (Fig. 4 legend); compared with the JEITA ED-7306 sign on the substrate bottom."
+  - "Stress-free temperature 150 C (template; not reported for CoWoS-S; R5 sec. 4.1 analog)."
+  - "Corner-stress targets are ratios to the reference (100 um interposer, 80 um C4 = 1.0, -a-m11 / -a-m15); stress type and evaluation temperature not stated (25 C assumed); C4 standoff sweep values from the -a-i2 notes (60-90 um), the default template C4 is 55 um."
+  - "The 50 um variant (s3) thins the Si core to the reported 50 um interposer thickness (ectc51909.2023.00135-c-c4) and keeps the template BEOL and backside levels."
+  - "Thermal study s1 is an end-to-end run, not a validation: 500 W per SoC (analog ectc51687.2025.00055-g condition), die and mold tops fixed at 40 C (cold-plate water of the same analog; ring package without lid)."
+  - "Al RDL level (template key other) uses the generator key al_mat = al (material_label Al)."
+missing:
+  - "Material properties (no CoWoS-S paper in the DB gives modulus / CTE tables), stress-free temperature, BCs and mesh of the paper's FEA."
+  - "Ring size (7 mm width is a template), interposer x / y (derived from the 1.5x reticle multiple)."

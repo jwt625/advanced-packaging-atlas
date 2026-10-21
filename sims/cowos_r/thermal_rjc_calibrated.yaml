@@ -1,0 +1,90 @@
+# Thermal canonical (DevLog-010, thermal 1): CoWoS-R 3.3x thermal test vehicle with indium TIM1 and lid
+# (ectc51687.2025.00085-c / -d): 4 SoC (16 heater groups) + 8 HBM heater dies; 1866 W uniform SoC power;
+# Rjc = (max SoC Tj - Tc) / P = 0.0108 C/W measured. Table 3 (model geometry and k) is image-only in the text layer;
+# its areas are in DB notes cells and used here (squares assumed). Uses the cowos_r generator with overrides.
+schema: ap-sim/0
+id: cowos_r/thermal_rjc_calibrated
+title: CoWoS-R 3.3x thermal TV, TIM1 contact resistance calibrated from the paper's own model numbers (calibration, not validation)
+status: unvalidated
+family: cowos_r
+params:
+  reticle_x: {value: 3.3, status: reported, ref: ectc51687.2025.00085-c.reticle_multiple}
+  ip_w_mm: {value: "=2685 ** 0.5", status: template, ref: ectc51687.2025.00085-c.interposer_area_mm2, note: "2685 mm2 RDL interposer (Table 3) drawn square; aspect not in the text"}
+  ip_d_mm: {value: "=2685 ** 0.5", status: template, ref: ectc51687.2025.00085-c.interposer_area_mm2, note: "2685 mm2 drawn square"}
+  soc_n: {value: 4, status: reported, ref: ectc51687.2025.00085-c-c1.count}
+  soc_rows_n: {value: 2, status: template, note: "SoC dies 2 x 2 (Fig. 2 top view, ectc51687.2025.00085-f02: 4 x 4 heater groups, 2 x 2 per die)"}
+  soc_w_mm: {value: "=(ip_w_mm - (hbm_px_mm - hbm_w_mm) - soc_gap_um / 1000) / 2", status: template, note: "SoC block spans the HBM row width (Fig. 2); 2 dies per row"}
+  soc_d_mm: {value: "=332.8 / soc_w_mm", status: template, ref: ectc51687.2025.00085-c-c1.notes, note: "SoC area 332.8 mm2 (Table 3, notes cell) / SoC width"}
+  hbm_n: {value: 8, status: reported, ref: ectc51687.2025.00085-c-c2.count, note: "HBM heater dies (unpowered in the measurements)"}
+  hbm_w_mm: {value: 11, status: template, ref: ectc51687.2025.00085-c-c2.notes, note: "HBM area 121 mm2 (Table 3) drawn 11 x 11"}
+  hbm_d_mm: {value: 11, status: template, ref: ectc51687.2025.00085-c-c2.notes, note: "HBM area 121 mm2 drawn 11 x 11"}
+  sbt_w_mm: {value: "=5616 ** 0.5", status: template, ref: ectc51687.2025.00085-c-c4.notes, note: "substrate 5616 mm2 (Table 3) drawn square"}
+  sbt_d_mm: {value: "=5616 ** 0.5", status: template, ref: ectc51687.2025.00085-c-c4.notes, note: "substrate 5616 mm2 drawn square"}
+  lid_type: {value: lid, status: reported, ref: ectc51687.2025.00085-c-c5.name, note: "lid (heat spreader)"}
+  tim_h_um: {value: 200, status: reported, ref: ectc51687.2025.00085-c-c6.thickness_um, note: "indium TIM1 BLT 200 um"}
+geometry:
+  symmetry: quarter
+  drop_kinds: [bga]
+  resolve: []
+materials:
+  map:
+    tim: tim_indium           # template key tim: indium TIM1 (ectc51687.2025.00085-c-c6.material)
+  overrides:
+    tim_indium:
+      k_W_mK: {value: 86, status: reported, ref: "ectc51687.2025.00085-d-m32.value (p.3 Table 3)"}
+    cu_lid:
+      k_W_mK: {value: 390, status: reported, ref: "ectc51687.2025.00085-c-L01.properties (p.3 Table 3, lid model k)"}
+    # Si k(T) = 117.5 - 0.42 (T - 100) W/mK (ectc51687.2025.00085-c-L05.properties, Table 3) is not expressible as an override value:
+    # library Si k(T) used (assumption below)
+mesh:
+  max_xy_mm: 1.0
+  min_cells_per_layer: 1
+  grading: 1.3
+  max_nodes: 300000
+physics:
+  thermal:
+    sources:
+      # 1866 W total, uniform SoC heating (16 groups x 116.7 W): ectc51687.2025.00085-c-m2.value; HBM heaters unpowered
+      - {parts: "soc_*", power_W: 1866, distribution: uniform_volume}
+    bcs:
+      # measured case temperature Tc at 1866 W: ectc51687.2025.00085-c-m6.value
+      - {selection: "top:lid", type: temperature, T_C: 84.6}
+      # TIM1 contact resistance (calibration): R'' = (Rjc at normalized contact resistance 1 - Rjc at 0) x heated area
+      #   = (0.01082 - 0.00759) C/W x 4 x 332.8 mm2 = 4.30e-6 m2K/W  (ectc51687.2025.00085-d-m18.value, -d-m12.value,
+      #   p.4 Fig. 9; SoC area 332.8 mm2 x 4, -c-c1.notes / count, Table 3). Heat crosses TIM1 over the SoC footprint:
+      #   a first run with the full TIM1 area (2685 mm2, 8.67e-6 m2K/W) doubled the intended Rjc step (+0.0065 C/W).
+      #   Applied at the TIM1 / lid interface (location not stated in the paper).
+      - {selection: "interface:tim|lid", type: contact_resistance, R_m2K_W: 4.30e-6}
+      - {selection: default, type: adiabatic}
+studies:
+  - {id: s1, type: thermal_stationary, note: "calibration: contact resistance derived from the same paper's model results (not a validation)"}
+  - id: s2
+    type: thermal_stationary
+    params: {tim_h_um: {value: 25, status: reported, ref: ectc51687.2025.00085-d-m4.variant, note: "BLT sweep (model)"}}
+  - id: s3
+    type: thermal_stationary
+    params: {tim_h_um: {value: 50, status: reported, ref: ectc51687.2025.00085-d-m6.variant}}
+  - id: s4
+    type: thermal_stationary
+    params: {tim_h_um: {value: 100, status: reported, ref: ectc51687.2025.00085-d-m8.variant}}
+targets:
+  - {metric_id: ectc51687.2025.00085-c-m1, quantity: Rjc_C_W, selection: "part:soc_*", definition: tj_max_minus_tc_over_p, study: s1, tolerance: {rel: 0.2}, tier: D}
+  - {metric_id: ectc51687.2025.00085-c-m5, quantity: Tmax_C, selection: "part:soc_*", definition: max_over_part, study: s1, tolerance: {abs_C: 3}, tier: D}
+  - {metric_id: ectc51687.2025.00085-d-m10, quantity: Rjc_C_W, selection: "part:soc_*", definition: tj_max_minus_tc_over_p, study: s1, tolerance: {rel: 0.2}, tier: C}
+  - {metric_id: ectc51687.2025.00085-d-m4, quantity: Rjc_C_W, selection: "part:soc_*", definition: tj_max_minus_tc_over_p, study: s2, tolerance: {rel: 0.2}, tier: C}
+  - {metric_id: ectc51687.2025.00085-d-m6, quantity: Rjc_C_W, selection: "part:soc_*", definition: tj_max_minus_tc_over_p, study: s3, tolerance: {rel: 0.2}, tier: C}
+  - {metric_id: ectc51687.2025.00085-d-m8, quantity: Rjc_C_W, selection: "part:soc_*", definition: tj_max_minus_tc_over_p, study: s4, tolerance: {rel: 0.2}, tier: C}
+assumptions:
+  - "The BLT sweep studies s2-s4 were not used in the calibration (it uses only the BLT 200 um points d-m18 / d-m12); their agreement is a model-to-model consistency check."
+  - "CALIBRATION case: the TIM1 contact resistance is derived from the paper's own model sweep (Fig. 9: Rjc 0.01082 C/W at normalized contact resistance 1, 0.00759 at 0), which was itself calibrated to the measured Rjc; agreement with c-m1 / c-m5 is therefore not a validation. The uncalibrated case is cowos_r/thermal_rjc."
+  - "Lid top held at the measured Tc (84.6 C) as a uniform fixed temperature: Rjc = (max SoC T - 84.6 C) / 1866 W. Tc is a point measurement in the paper; the uniform BC is an approximation (the cold plate is not modelled)."
+  - "Interposer, substrate and HBM footprints from the Table 3 areas (DB notes cells) drawn as squares; lid outline = substrate (lid 5556 mm2 vs substrate 5616 mm2 in Table 3, 1 % area difference)."
+  - "SoC footprint: area 332.8 mm2 with the 2 x 2 SoC block spanning the HBM row width (Fig. 2); aspect not in the text."
+  - "Si k(T) of Table 3 is not expressible as an override: library Si k(T) used."
+  - "Power uniform in the SoC volume (heaters sit in the die metal layer; surface source would be closer)."
+  - "TIM1 contact resistance modelled as a contact_resistance BC on interface tim|lid (R'' = 4.30e-6 m2K/W, fitted parameter derived above on the SoC footprint; calibration). Cross-check: it accounts for 0.0032 C/W, i.e. the 29.6 % contact-resistance share the paper reports (ectc51687.2025.00085-d-m20) x 0.0108 C/W. The uncalibrated case cowos_r/thermal_rjc omits it."
+  - "Orthotropic k of the RDL interposer and substrate from Cu density per layer (paper, values not given): from the generator's homogenized layers instead."
+  - "Die thickness, lid thickness, substrate stack: cowos_r templates."
+missing:
+  - "Table 3 cells other than the areas, TIM k and lid k (image-only in the text layer; R5 open question 7)."
+  - "Die and lid thicknesses, substrate stack, TIM1 contact resistance value, TIM2 properties, cold-plate model."

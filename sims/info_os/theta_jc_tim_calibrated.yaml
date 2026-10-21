@@ -1,0 +1,65 @@
+# M2 fan_out_wafer canonical (DevLog-010): InFO_oS thermal test vehicle, lid type (itherm45881.2020.9190542-a):
+# theta-JC (JEDEC, (Tj - Tc) / (PH1 + PH2)) vs TIM1 BLT 60 / 140 um with the 6.0 W/mK gel TIM. Uses the info_os
+# generator with overrides (two thermal dies, no IO dies, lid with TIM).
+schema: ap-sim/0
+id: info_os/theta_jc_tim_calibrated
+title: InFO_oS thermal TV, fitted effective TIM1 k (calibration parameter, not a TIM property; not validation)
+status: unvalidated
+family: info_os
+params:
+  logic_n: {value: 2, status: reported, ref: itherm45881.2020.9190542-a-c1.count, note: "two thermal dies (heaters + sensors)"}
+  io_n: {value: 0, status: derived, refs: [itherm45881.2020.9190542-a.n_dies, itherm45881.2020.9190542-a-c1.count], note: "n_dies 2 = the two thermal dies: no IO chiplets"}
+  info_w_mm: {value: 22.78, status: reported, ref: itherm45881.2020.9190542-a-c2.x_mm}
+  info_d_mm: {value: 34, status: reported, ref: itherm45881.2020.9190542-a-c2.y_mm}
+  logic_w_mm: {value: 21.78, status: reported, ref: itherm45881.2020.9190542-a-c1.x_mm}
+  logic_d_mm: {value: 16.25, status: reported, ref: itherm45881.2020.9190542-a-c1.y_mm, note: "Table 1 (text gives 16.26 mm)"}
+  sbt_w_mm: {value: 62.5, status: reported, ref: itherm45881.2020.9190542-a-c3.x_mm}
+  sbt_d_mm: {value: 62.5, status: reported, ref: itherm45881.2020.9190542-a-c3.y_mm}
+  c4_pitch_um: {value: 130, status: reported, ref: itherm45881.2020.9190542-a-i1.pitch_um}
+  lid_type: {value: lid, status: reported, ref: itherm45881.2020.9190542-a-c4.name, note: "metal lid (lid-type TTV)"}
+  tim_h_um: {value: 60, status: reported, ref: itherm45881.2020.9190542-a-c5.thickness_um, note: "BLT 60 um baseline"}
+geometry:
+  symmetry: quarter
+  drop_kinds: [bga]
+  resolve: []
+materials:
+  map: {}
+  overrides:
+    tim_polymer:
+      # calibration: k_eff = dBLT / (d theta_JC x A_die) = 80 um / ((0.065 - 0.031) C/W x 2 x 21.78 x 16.25 mm2) = 3.32 W/(m K)
+      #   (measured theta-JC at BLT 140 / 60 um, itherm45881.2020.9190542-a-m3 / -a-m4, p.4 Table 3; die size -a-c1)
+      # FITTED CALIBRATION PARAMETER, not a TIM property (audit A2 S3): k_eff absorbs whatever steepens the measured BLT
+      # slope (heater footprint, TIM coverage, model form); the gel datasheet value is 6.0 W/(m K)
+      k_W_mK: {value: 3.32, status: derived, ref: "itherm45881.2020.9190542-a-m3.value, -a-m4.value, -a-c1.x_mm / y_mm (fitted calibration parameter k_eff from the measured BLT slope; not a TIM property)"}
+mesh:
+  max_xy_mm: 0.5
+  max_z_mm: 0.2               # removes the Q1 overshoot (0.16 K in pm1); theta-JC unchanged to 4 digits (0.022662 -> 0.022661 C/W); 2.9e5 nodes
+  min_cells_per_layer: 1
+  grading: 1.3
+  max_nodes: 300000
+physics:
+  thermal:
+    sources:
+      - {parts: "logic*", power_W: 100, distribution: uniform_volume}      # total over both dies; template (power not stated)
+    bcs:
+      - {selection: "top:lid", type: temperature, T_C: 25}
+      - {selection: default, type: adiabatic}
+studies:
+  - {id: s1, type: thermal_stationary, note: "calibration: effective TIM1 k derived from the measured BLT slope of the same targets (not a validation)"}
+  - id: s2
+    type: thermal_stationary
+    params: {tim_h_um: {value: "=tim_max_um", status: reported, ref: itherm45881.2020.9190542-a-L02.thickness_max_um, note: "BLT 140 um variant"}}
+targets:
+  - {metric_id: itherm45881.2020.9190542-a-m4, quantity: theta_jc_C_W, selection: "part:logic*", definition: tj_max_minus_tc_over_p, study: s1, tolerance: {rel: 0.3}, tier: D}
+  - {metric_id: itherm45881.2020.9190542-a-m3, quantity: theta_jc_C_W, selection: "part:logic*", definition: tj_max_minus_tc_over_p, study: s2, tolerance: {rel: 0.3}, tier: D}
+  - {metric_id: itherm45881.2020.9190542-a-m2, quantity: theta_jc_C_W, selection: "part:logic*", definition: tj_max_minus_tc_over_p, study: s1, tolerance: {rel: 0.3}, tier: C}
+  - {metric_id: itherm45881.2020.9190542-a-m1, quantity: theta_jc_C_W, selection: "part:logic*", definition: tj_max_minus_tc_over_p, study: s2, tolerance: {rel: 0.3}, tier: C}
+assumptions:
+  - "CALIBRATION case: the effective TIM1 k (3.32 W/mK vs 6.0 W/mK bulk gel) is derived from the measured theta-JC at BLT 60 / 140 um, the same targets; agreement is therefore not a validation. A constant TIM contact resistance cannot explain the uncalibrated deficit (it grows with BLT: -0.008 C/W at 60 um, -0.024 at 140 um); with k_eff the model is 0.003 C/W above the measured intercept, so the best-fit added contact resistance is zero. The uncalibrated case is info_os/theta_jc_tim."
+  - "Test power not stated (metric notes): 100 W total is a template; theta-JC = (max die T - Tc) / P does not depend on P for temperature-independent k (library Si k(T) adds a small dependence)."
+  - "Tc is measured at the lid center; the lid top is held at a uniform 25 C (template reference), an approximation of the cold-plate contact (silica grease, not modelled)."
+  - "Lid thickness and metal not given (-a-L01): lid_h_um = 1.5 mm lid of an InFO_oS TV of ectc32696.2021.00033 (template here), lid_mat cu_lid; lid adhesive thickness not given (lid foot sits on the substrate)."
+  - "Die thickness, InFO RDL and substrate stacks are info_os templates."
+  - "Unused check of the calibration against Table 5 (BLT 60 um; measured -a-m9..m12 = 0.036 / 0.034 / 0.021 / 0.021 C/W for TIM A / B / C / D at 3.2 / 6.0 / 25 / 30 W/mK; paper simulation -a-m5..m8 = 0.036 / 0.033 / 0.025 / 0.025), engine runs 2026-10-20 of info_os/theta_jc_tim with the TIM k replaced: bulk k gives 0.0349 / 0.0227 / 0.0120 / 0.0114 C/W (-3 / -33 / -43 / -46 % vs measured); one calibration factor k_eff / k_bulk = 3.32 / 6.0 on every TIM gives 0.0559 / 0.0340 / 0.0147 / 0.0137 (+55 / 0 / -30 / -35 %). One k_eff does not fit the rows: the measured A-B difference is 0.002 C/W against 0.012 (bulk) or 0.022 (scaled) in the model, so the deficit is not a TIM-conductivity effect alone (heater footprint, coverage, or the Table 5 extraction; audit A2 S3). Per-study material overrides are not in the case schema, so these are not targets here."
+missing:
+  - "Heater power, die thickness, lid thickness / material, lid adhesive, substrate stack, cold-plate interface resistance."

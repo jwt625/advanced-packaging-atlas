@@ -1,0 +1,109 @@
+# Bring-up 1 (DevLog-010): Xilinx 28 nm 4-slice FPGA on a 100 um Cu-TSV Si interposer with forged Cu lid,
+# ectc.2011.5898527 TV -a (package) / TV -b (ABAQUS quarter model). Elastic, no mold; RT property table (Table 2);
+# stress-free 150 C (UF cure). Uses the cowos_s generator with overrides (CoWoS-S-like, one interposer, no HBM).
+schema: ap-sim/0
+id: si_interposer_peers/xilinx_tsv_lid
+title: Xilinx 4-slice FPGA on TSV Si interposer, 42.5 x 42.5 mm, forged Cu lid; warpage at 25 C
+status: unvalidated
+family: cowos_s
+params:
+  ip_n: {value: 1, status: reported, ref: ectc.2011.5898527-a-c2.count}
+  soc_n: {value: 4, status: reported, ref: ectc.2011.5898527-a-c1.count, note: "4 FPGA slices (IC1-IC4)"}
+  soc_w_mm: {value: 12, status: reported, ref: ectc.2011.5898527-a-c1.y_mm, note: "7 x 12 mm slice drawn with 12 mm along x (orientation assumed)"}
+  soc_d_mm: {value: 7, status: reported, ref: ectc.2011.5898527-a-c1.x_mm, note: "7 mm along y; 4 slices stacked along the 31 mm interposer side"}
+  soc_cols_n: {value: 1, status: template, note: "slices in one column of 4 along y (Fig. 2 shows 4 dies in a row; not dimensioned)"}
+  hbm_n: {value: 0, status: derived, refs: [ectc.2011.5898527-a.n_dies, ectc.2011.5898527-a-c1.count], note: "n_dies 4 = 4 FPGA slices: no HBM"}
+  ip_size_rule: {value: given, status: reported, ref: ectc.2011.5898527-a-c2.x_mm, note: "interposer size reported"}
+  ip_w_mm: {value: 25, status: reported, ref: ectc.2011.5898527-a-c2.x_mm}
+  ip_d_mm: {value: 31, status: reported, ref: ectc.2011.5898527-a-c2.y_mm}
+  reticle_x: {value: "=ip_w_mm * ip_d_mm / reticle_area_mm2", status: template, note: "reticle multiple not stated; set to the interposer area / area per reticle"}
+  ip_tot_um: {value: 100, status: reported, ref: ectc.2011.5898527-a-c2.thickness_um}
+  si_h_um: {value: "=ip_tot_um - pass_h_um - al_h_um - v_al_h_um - cu_n * cu_h_um - (cu_n - 1) * imd_h_um - bs_pad_h_um - bs_pi_h_um", status: template, note: "Si core = reported 100 um interposer minus the template BEOL / backside levels"}
+  tsv_d_um: {value: 10, status: reported, ref: ectc.2011.5898527-a-i2.diameter_um}
+  ubump_pitch_um: {value: 45, status: reported, ref: ectc.2011.5898527-a-i1.pitch_um}
+  c4_pitch_um: {value: 180, status: reported, ref: ectc.2011.5898527-a-i3.pitch_um}
+  c4_inclusion: {value: solder, status: reported, ref: ectc.2011.5898527-a-i3.metallurgy, note: "eutectic solder C4 ('Eut')"}
+  bga_pitch_um: {value: 1000, status: reported, ref: ectc.2011.5898527-a-i4.pitch_um}
+  sbt_w_mm: {value: 42.5, status: reported, ref: ectc.2011.5898527-a-c3.x_mm}
+  sbt_d_mm: {value: 42.5, status: reported, ref: ectc.2011.5898527-a-c3.y_mm}
+  core_h_um: {value: 800, status: reported, ref: ectc.2011.5898527-a-L12.thickness_um}
+  bu_cu_um: {value: 15, status: template, refs: [ectc51687.2025.00148-a-L06.thickness_um], note: "build-up Cu not reported; analog = 15 um build-up Cu of a 4-2-4 FCBGA TV"}
+  sbt_h_um: {value: "=core_h_um + 2 * sr_h_um + 2 * bu_n * bu_diel_um + (2 * bu_n + 2) * bu_cu_um", status: template, note: "substrate total not reported: core + template build-up stack"}
+  top_encap: {value: none, status: reported, ref: ectc.2011.5898527-a-c6.name, note: "micro-bump underfill only; no mold described for this TV"}
+  lid_type: {value: lid, status: reported, ref: ectc.2011.5898527-a-c4.name, note: "forged Cu heat spreader (lid)"}
+  lid_foot_w_mm: {value: 3, status: template, note: "forged-lid foot width not reported; 3 mm keeps the foot clear of the C4 underfill (interposer 31 mm + fillet) on the 42.5 mm substrate (the paper notes the lid-to-IO keep-out, p.3 Sec. a)"}
+  c4_uf_mat: {value: underfill_c4, status: reported, ref: ectc.2011.5898527-a-L10.material, note: "Table 2 lists the C4 underfill separately from the microbump UF (-a-L05)"}
+  lid_attach: {value: adhesive, status: template, note: "forged lid attached to the substrate; attach material and thickness not reported: adhesive frame (generator template 150 um silicone analog) instead of a rigid bond"}
+  lid_mat: {value: cu_lid, status: reported, ref: ectc.2011.5898527-a-c4.material, note: "forged Cu heat spreader"}
+  lid_h_um: {value: 1000, status: reported, ref: ectc.2011.5898527-a-c4.thickness_um, note: "~1 mm on top of die (approx; the simulated optimum, also the built lid per Table 3 row 3)"}
+geometry:
+  symmetry: quarter
+  drop_kinds: [bga]
+  resolve: []
+materials:
+  map: {}
+  overrides:
+    # Table 2 RT model inputs (p.2 Table 2); Poisson ratios not given (library values). Si stays cubic (library):
+    # the paper's isotropic Si E 150 GPa is not applied (an isotropic override would need a Poisson ratio).
+    core_lowcte:
+      E_GPa: {value: 18.9, status: reported, ref: "ectc.2011.5898527-a-L12.properties (p.2 Table 2)"}
+      cte_ppmK: {value: [11, 11, 16], status: reported, ref: "ectc.2011.5898527-a-L12.properties (p.2 Table 2; x,y 11, z 16 ppm)"}
+    cu_lid:
+      E_GPa: {value: 130, status: reported, ref: "ectc.2011.5898527-a-L01.properties (p.2 Table 2)"}
+      cte_ppmK: {value: 17, status: reported, ref: "ectc.2011.5898527-a-L01.properties (p.2 Table 2)"}
+    underfill_cuf:
+      E_GPa: {value: 6, status: reported, ref: "ectc.2011.5898527-a-L05.properties (p.2 Table 2, ubump UF)"}
+      cte_ppmK: {value: 38, status: reported, ref: "ectc.2011.5898527-a-L05.properties (p.2 Table 2, ubump UF)"}
+    tim_polymer:
+      E_GPa: {value: 5.8e-3, status: reported, ref: "ectc.2011.5898527-a-L02.properties (p.2 Table 2, TIM1)"}
+    solder_resist:
+      E_GPa: {value: 2.9, status: reported, ref: "ectc.2011.5898527-a-L11.properties (p.2 Table 2)"}
+      cte_ppmK: {value: 68, status: reported, ref: "ectc.2011.5898527-a-L11.properties (p.2 Table 2)"}
+    # solder_resist reaches the sbt_sr_t / sbt_sr_b layers since 2026-10-20 (generator sr_mat; before, they mapped to
+    # polyimide_rdl and this override was a silent no-op, L9).
+    # C4 underfill (uf2 and the C4 field matrix): own key underfill_c4 (param c4_uf_mat, L2 wave 8) with Table 2 C4 UF
+    underfill_c4:
+      E_GPa: {value: 8.5, status: reported, ref: "ectc.2011.5898527-a-L10.properties (p.2 Table 2, C4 UF)"}
+      cte_ppmK: {value: 32, status: reported, ref: "ectc.2011.5898527-a-L10.properties (p.2 Table 2, C4 UF)"}
+mesh:
+  max_xy_mm: 0.5
+  min_cells_per_layer: 2
+  grading: 1.3
+  max_nodes: 300000
+  snap_z_um: 0.05             # 2026-10-20 (L8): lid adhesive top 1734.00 um (substrate top + 150 um template) and the interposer BEOL face 1733.96 um (template films) are independent dimensions 0.04 um apart; the default 0.01 um snap leaves a 0.04 um z sliver (max cell aspect 12500). 0.05 um merges it (shift 0.04 um, max aspect 2000, same node count) and keeps the 0.54 um via films; 0.5 um gives the identical grid
+physics:
+  thermal:
+    sources:
+      - {parts: "soc_*", power_W: 200, distribution: uniform_volume}      # total over the matched parts (4 slices)
+    bcs:
+      - {selection: "top:lid", type: temperature, T_C: 40}
+      - {selection: default, type: adiabatic}
+  mechanics:
+    element: q1im               # A3 bake-off winner (SPEC section 15); q2s as the reference variant
+    stress_free_C: {default: {value: 150, status: reported, ref: ectc.2011.5898527-b.notes, note: "stress-free at 150 C UF cure"}, per_part: {}}
+    supports: symmetry
+studies:
+  - {id: s1, type: thermal_stationary}
+  - {id: s2, type: thermo_elastic, temperature: {uniform_C: [25]}}
+  - id: s3
+    type: thermo_elastic
+    temperature: {uniform_C: [25]}
+    params: {lid_type: {value: none, status: reported, ref: ectc.2011.5898527-b-m2.variant, note: "COC on package after C4 UF, before lid attach"}}
+targets:
+  - {metric_id: ectc.2011.5898527-b-m3, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: s2, T_C: 25, tolerance: {rel: 0.3}, tier: C}
+  - {metric_id: ectc.2011.5898527-b-m4, quantity: von_mises_max_MPa, selection: "part:soc_*", definition: max_over_part, study: s2, T_C: 25, tolerance: {rel: 0.3}, tier: C}
+  - {metric_id: ectc.2011.5898527-b-m2, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: s3, T_C: 25, tolerance: {rel: 0.3}, tier: C}
+assumptions:
+  - "Paper sign: 'negative = smiley face' (Table 3 text); max package warpage magnitude compared on the substrate bottom with the JEITA ED-7306 sign; surface not stated."
+  - "Die thickness, substrate build-up count / thickness, C4 and micro-bump heights, lid foot width and TIM BLT not reported: cowos_s templates (see generator provenance)."
+  - "Slices drawn as one column of four 12 x 7 mm dies along the 31 mm interposer side (Fig. 2 schematic, not dimensioned)."
+  - "No mold compound (top_encap: none): the space between the slices is void; TIM1 covers the die block (block_w x die-column length) under the lid."
+  - "TIM1 CTE: library template (L2 CD5, 149 ppm/K, sensitivity x1/3 .. x3; the paper gives only E 5.8 MPa); the earlier 100 ppm/K was a mislabelled user value and is removed."
+  - "Table 2 values are RT model inputs used as constant properties (paper used T-dependent data, not given); Si keeps the library cubic Cij (the paper's isotropic 150 GPa needs a Poisson ratio, not given); TIM1 (E 5.8e-3 GPa) and solder rows not mapped."
+  - "Thermal study s1 is an end-to-end run, not a validation: 50 W per slice is a template (FPGA power not reported); lid top fixed at 40 C (cold-plate water of analog ectc51687.2025.00055-g)."
+missing:
+  - "OPEN MODEL-FORM ISSUE (L8 run 2026-10-20): the lidded warpage misses in sign (-63.8 um vs +162.56 um, b-m3) while the no-lid study reproduces +338 um vs +335.28 um (b-m2). L8 attributes it to the lid foot bonded rigidly with no adhesive and to the unknown lid-attach temperature; the case now models an adhesive frame (template) with the paper's single stress-free temperature 150 C for all parts. L3 rerun 2026-10-20 (q1im, quarter): lidded -52.8 um (sign still opposite), no-lid +337.9 um, die von Mises 126 MPa vs 115 MPa (b-m4). The adhesive does not resolve the sign; remaining suspects: forged-lid geometry (cavity, foot width), TIM1 coupling (E 5.8 MPa), lid-attach temperature. Lid-attach material, thickness and cure temperature are not reported."
+  - "Poisson ratios, T-dependent moduli / CTEs, solder mask and eutectic / SnAg solder use in the homogenized joints (Table 2 gives 51 / 31.5 GPa)."
+  - "Lid geometry beyond 'about 1 mm on top of die' (forged lid foot, cavity), TIM1 thickness (E 5.8e-3 GPa given)."
+  - "Substrate layer stack and thickness (core 800 um only), C4 bump height, micro-bump size."
+  - "Interposer TSV pitch (diameter 10 um, AR 10 reported)."

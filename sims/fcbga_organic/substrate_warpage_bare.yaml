@@ -1,0 +1,64 @@
+# Trend case (DevLog-010): organic-core 2-2-2 build-up substrate, 65 x 65 mm, simulated warpage of the bare
+# substrate (stress-free 180 C; sibling case substrate_warpage_bare) and after 2-chip assembly (stress-free 150 C, this case) at 25 / 265 C
+# (ectc51687.2025.00178-c). No material rows in this paper (an ABF table exists only in ectc51687.2025.00148):
+# sign and trend case, not grade A. Uses the fcbga_organic generator with overrides.
+schema: ap-sim/0
+id: fcbga_organic/substrate_warpage_bare
+title: FCBGA organic 2-2-2 bare build-up substrate, 65 x 65 mm; warpage 25 / 265 C
+status: unvalidated
+family: fcbga_organic
+params:
+  sbt_w_mm: {value: 65, status: reported, ref: ectc51687.2025.00178-c.substrate_x_mm}
+  sbt_d_mm: {value: 65, status: reported, ref: ectc51687.2025.00178-c.substrate_y_mm}
+  bu_inner_n: {value: 1, status: derived, ref: ectc51687.2025.00178-c.substrate_layer_count, note: "2-2-2: L1 pad level + one inner level per side"}
+  sbt_h_um: {value: "=core_h_um + 2 * (sr_h_um + bu_n * 22.5)", status: template, note: "total not stated for TV c; build-up level thickness kept at the backbone's 22.5 um per level (Cu 13 + dielectric 9.5, fcbga_organic bu_layer_h_um)"}
+  die_cols_n: {value: 2, status: reported, ref: ectc51687.2025.00178-c-c1.count, note: "2 chips side by side (Fig. 5(b), ectc51687.2025.00178-f09)"}
+  die_w_mm: {value: 23, status: reported, ref: ectc51687.2025.00178-c-c1.x_mm}
+  die_d_mm: {value: 28, status: reported, ref: ectc51687.2025.00178-c-c1.y_mm}
+  die_h_um: {value: 775, status: reported, ref: ectc51687.2025.00178-c-c1.thickness_um}
+  lid_type: {value: none, status: template, note: "no stiffener in the simulation model (Fig. 5, ectc51687.2025.00178-f09)"}
+geometry:
+  symmetry: quarter
+  drop_kinds: [bga, die, cu_pillar, underfill]
+  resolve: []
+materials:
+  # CD6: hold the last data value beyond the range for these keys only; reason: targets c-m2 (265 C) and b-m5 (260 C); abf_gl data end at 240 C, solder_resist (SR layers, mapped since 2026-10-20) at 225 C, its last instantaneous CTE 130 ppm/K (above 121 C) held, core_lowcte at 260 C (5 C short); last table values held.
+  allow_extrapolation: [abf_gl, solder_resist, core_lowcte]
+  map: {}
+  overrides: {}
+mesh:
+  max_xy_mm: 1.0
+  min_cells_per_layer: 2
+  grading: 1.3
+  max_nodes: 300000
+physics:
+  thermal:
+    sources:
+      - {parts: "fc_d1", power_W: 10, distribution: uniform_volume}
+    bcs:
+      - {selection: "bottom:sr_bot", type: temperature, T_C: 40}
+      - {selection: default, type: adiabatic}
+  mechanics:
+    element: q1im               # A3 bake-off winner (SPEC section 15); q2s as the reference variant
+    stress_free_C: {default: {value: 180, status: reported, ref: ectc51687.2025.00178-c-m1.condition, note: "bare substrate: stress-free 180 C (build-up resin cure)"}, per_part: {}}
+    supports: symmetry
+studies:
+  - {id: s1, type: thermal_stationary}
+  - {id: s2, type: thermo_elastic, temperature: {uniform_C: [25, 30]}}
+  - {id: s2h, type: thermo_elastic, temperature: {uniform_C: [260, 265]}, note: "beyond the data range of abf_gl, solder_resist: runs with materials.allow_extrapolation (CD6); results carry the extrapolated flag"}
+targets:
+  - {metric_id: ectc51687.2025.00178-c-m1, quantity: warpage_um, selection: "top:sr_top", definition: jeita_ed7306, study: s2, T_C: 25, tolerance: {sign_only: true}, tier: C}
+  - {metric_id: ectc51687.2025.00178-c-m2, quantity: warpage_um, selection: "top:sr_top", definition: jeita_ed7306, study: s2h, T_C: 265, tolerance: {sign_only: true}, tier: C}
+  - {metric_id: ectc51687.2025.00178-b-m4, quantity: warpage_um, selection: "top:sr_top", definition: jeita_ed7306, study: s2, T_C: 30, tolerance: {sign_only: true}, tier: H}
+  - {metric_id: ectc51687.2025.00178-b-m5, quantity: warpage_um, selection: "top:sr_top", definition: jeita_ed7306, study: s2h, T_C: 260, tolerance: {sign_only: true}, tier: H}
+assumptions:
+  - "Trend case: sign flip convex at 25 C / concave at 265 C (paper text p.2-3) is the comparison (tolerance sign_only); magnitudes need a material table (none in this paper)."
+  - "Paper sign: top side view, '+' = convex, '-' = concave (metric scope), which matches the JEITA ED-7306 top-surface convention (R1 sec. 2.4)."
+  - "Bare-substrate stage: the chip, bump and underfill parts are dropped (drop_kinds); stress-free 180 C. The 2-chip stage is fcbga_organic/substrate_warpage."
+  - "Measured organic reference samples (-b-m4 / -b-m5, DIC 30 / 260 C) have an unstated stack: tier H (sign only)."
+  - "Core thickness not stated: fcbga_organic template 1.4 mm (8-2-8 backbone core); build-up levels at the backbone's 22.5 um per level."
+  - "Chip gap, bump field (backbone Cu pillar 200 um pitch) and underfill fillet are templates; chip orientation 23 mm along x."
+  - "Thermal study s1 is a solver smoke run only (bare substrate, no chips): 10 W in the front build-up and the bottom held at 40 C are templates without a source."
+missing:
+  - "All material properties (build-up resin, core, solder resist, Cu, underfill); ABF properties exist only in ectc51687.2025.00148 (Table 1)."
+  - "Core thickness, build-up and Cu thickness, chip spacing, bump and underfill geometry, BCs of the simulation."

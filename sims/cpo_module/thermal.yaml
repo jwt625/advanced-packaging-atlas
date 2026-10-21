@@ -1,0 +1,37 @@
+# M2 cpo_module canonical (DevLog-010): fiber-based CPO MCP (ectc51687.2025.00012-a: XPU + 2 OIO chiplets on EMIB,
+# FAUs attached under the OIO overhang, heat spreader). Steady thermal with template powers; no DB thermal row for
+# this TV (sensitivity case without targets).
+schema: ap-sim/0
+id: cpo_module/thermal
+title: CPO MCP (XPU + 2 OIO on EMIB, FAU), steady thermal (no validation target)
+status: unvalidated
+family: cpo_module
+params: {}
+geometry:
+  symmetry: quarter
+  drop_kinds: [bga]
+  resolve: []
+materials:
+  map: {}
+  overrides: {}  # glass_en_a1 k: library template analog (L2 wave 3)
+mesh:
+  max_xy_mm: 0.5
+  min_cells_per_layer: 1
+  grading: 1.3
+  max_nodes: 300000
+physics:
+  thermal:
+    sources:
+      - {parts: "xpu", power_W: 500, distribution: uniform_volume}      # analog GPU 500 W
+    bcs:
+      - {selection: "top:hs", type: temperature, T_C: 40}
+      - {selection: default, type: adiabatic}
+studies:
+  - {id: s1, type: thermal_stationary}
+targets: []
+assumptions:
+  - "XPU 500 W (analog 'GPU 500 W each', ectc51687.2025.00055-g condition); OIO and laser power not modelled (not reported for this TV); heat-spreader top held at 40 C (cold-plate water of the same analog)."
+  - "No target: the CPO thermal rows in the DB (ectc51846.2026.00016-d: 1000 W TDP, PIC 65 C, package 91.16 C, forced air) belong to a different PIC-in-mold platform with a heat sink and vapor chamber."
+  - "Heat spreader and FAU attach not dimensioned (cpo_module template); adhesive epoxy_generic and hs Cu are generator templates."
+missing:
+  - "Power map (XPU, OIO, lasers), TIM, heat-spreader attach, optical-engine temperature limits."

@@ -1,0 +1,53 @@
+# M2 fan_out_panel canonical (DevLog-010): chip-last (RDL-first) FOPLP strip (2380-4505-2020.1.000042-a): a 240 x
+# 74 mm strip of 33 packages (Chip 1 + Chip 2A/2B on a 3-RDL substrate) laminated with 400 um EMC; measured strip
+# warpage 0.7 mm after carrier transfer. Elastic EMC bias: molded-panel warpage needs Prony / WLF EMC and the
+# process sequence (E4 + E8) for absolute values (DevLog-010 M2 row). Uses the fan_out_panel generator, strip mode.
+schema: ap-sim/0
+id: fan_out_panel/panel_warpage
+title: FOPLP strip (240 x 74 mm, 33 packages of 20 x 20 mm), warpage after carrier removal
+status: unvalidated
+family: fan_out_panel
+params:
+  units_nx: {value: 11, status: template, ref: 2380-4505-2020.1.000042-a.notes, note: "33 packages per strip (TV notes) arranged 11 x 3 (layout not stated; 11 x 20 mm and 3 x 20 mm fit 240 x 74 mm)"}
+  units_ny: {value: 3, status: template, ref: 2380-4505-2020.1.000042-a.notes, note: "33 packages per strip arranged 11 x 3 (assumption)"}
+  strip_w_mm: {value: 240, status: reported, ref: 2380-4505-2020.1.000042-a.notes, note: "strip 240 x 74 mm (p.3 text)"}
+  strip_d_mm: {value: 74, status: reported, ref: 2380-4505-2020.1.000042-a.notes, note: "strip 240 x 74 mm (p.3 text)"}
+geometry:
+  symmetry: none
+  drop_kinds: [bga, underfill]
+  resolve: []
+materials:
+  map: {}
+  overrides: {}
+mesh:
+  max_xy_mm: 2.0
+  min_cells_per_layer: 2
+  grading: 2.0
+  max_nodes: 300000
+physics:
+  thermal:
+    sources:
+      - {parts: "chip*", power_W: 99, distribution: uniform_volume}      # total over 99 chips (1 W each, template)
+    bcs:
+      - {selection: "bottom:dl3b", type: temperature, T_C: 25}
+      - {selection: default, type: adiabatic}
+  mechanics:
+    element: q1im               # A3 bake-off winner (SPEC section 15); q2s as the reference variant
+    stress_free_C: {default: 120, per_part: {}}
+    supports: rigid_motion
+studies:
+  - {id: s1, type: thermal_stationary}
+  - {id: s2, type: thermo_elastic, temperature: {uniform_C: [25]}}
+targets:
+  # DB row 0.7 mm: the runner converts DB units to the quantity unit (L10, 2026-10-20)
+  - {metric_id: 2380-4505-2020.1.000042-a-m9, quantity: warpage_um, selection: "top:mold", definition: jeita_ed7306, study: s2, T_C: 25, tolerance: {rel: 0.5}, tier: D}
+assumptions:
+  - "Mesh budget: the 99-chip strip with 0.1 mm underfill fillets and grading 1.3 needs 3.7e6 nodes; the per-chip underfill is dropped (EMC fills the 55 um chip standoff and fillet) and the grading relaxed to 2.0, giving 2.6e5 nodes. Effect: the underfill-EMC CTE / modulus contrast under the chips is not represented."
+  - "Elastic EMC: absolute molded-strip warpage is biased (an elastic EMC overpredicts warpage in the cited FOWLP case, R1); E4 process sequence and E8 viscoelastic EMC are needed for a validation-grade result."
+  - "Stress-free 120 C = first-stage EMC lamination temperature (p.6 Sec. III.D, 120 C vacuum 30 s); EMC post-cure not stated; single-step elastic model."
+  - "Strip layout 11 x 3 units at the 20 mm package pitch, centered on the 240 x 74 mm strip (unit arrangement not stated); saw streets not modelled."
+  - "Measurement: 'after strip transfer to 2nd glass carrier and removal of 1st carrier', sign not stated: compared as a magnitude on the EMC top; the strip is modelled free (rigid-motion suppression, no carrier)."
+  - "Thermal study s1 is a smoke run only (1 W per chip and a 25 C RDL bottom are templates without a source)."
+  - "Package geometry (chips, pillars, underfill, RDL levels, EMC 400 um) from the fan_out_panel template (backbone TV, reported cells)."
+missing:
+  - "EMC and PID properties, carrier state during the measurement, warpage sign / shape, strip unit arrangement."

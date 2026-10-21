@@ -1,0 +1,43 @@
+# M2 wafer_scale canonical (DevLog-010): UCLA Si-IF 2 x 2 dielet assembly (ectc51906.2022.00332-b: four 16FF UDSP
+# dielets Cu-Cu thermocompression-bonded on an 8 mm Si-IF). Warpage of the assembly after bonding and a steady
+# thermal run; no DB warpage or thermal row for a Si-IF assembly (sensitivity case without targets).
+schema: ap-sim/0
+id: ucla_si_if/warpage
+title: Si-IF 2 x 2 dielet assembly (8 mm Si-IF), warpage and steady thermal (no validation target)
+status: unvalidated
+family: ucla_si_if
+params: {}
+geometry:
+  symmetry: quarter
+  drop_kinds: []
+  resolve: []
+materials:
+  map: {}
+  overrides: {}
+mesh:
+  max_xy_mm: 0.2
+  min_cells_per_layer: 2
+  grading: 1.3
+  max_nodes: 300000
+physics:
+  thermal:
+    sources:
+      - {parts: "dielet_*", power_W: 4, distribution: uniform_volume}      # total over 4 dielets (template)
+    bcs:
+      - {selection: "bottom:if_si", type: temperature, T_C: 25}
+      - {selection: default, type: adiabatic}
+  mechanics:
+    element: q1im               # A3 bake-off winner (SPEC section 15); q2s as the reference variant
+    stress_free_C: {default: 150, per_part: {}}
+    supports: symmetry
+studies:
+  - {id: s1, type: thermal_stationary}
+  - {id: s2, type: thermo_elastic, temperature: {uniform_C: [25]}}
+targets: []
+assumptions:
+  - "Stress-free 150 C is a template: the Cu-Cu TCB bonding temperature is not given in the DB row (ectc51906.2022.00332-b-i1)."
+  - "No underfill or mold between the dielets (none described); Cu-Cu bond field homogenized (pillar 4 um at 9.8 um pitch)."
+  - "No target: the only wafer_scale warpage rows in the DB (ectc51529.2024.00227) are free-standing / on-carrier die warpage of a different collective die-to-wafer process; the thermal rows (tcpmt.2023.3266666, iedm45741.2023.10413759) belong to other wafer-scale systems."
+  - "Thermal study s1 is a smoke run: 1 W per dielet and the 25 C Si-IF bottom are templates without a source."
+missing:
+  - "Bonding temperature, dielet power, Si-IF warpage measurement."

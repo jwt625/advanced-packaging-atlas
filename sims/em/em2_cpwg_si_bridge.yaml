@@ -1,0 +1,87 @@
+schema: ap-sim/0
+id: em/em2_cpwg_si_bridge
+title: EM-2 differential GSSG CPWG on a 4-layer polyimide Si-bridge RDL, differential IL/mm at 56 GHz (5 of 7 designs)
+status: unvalidated
+family: em2d
+em2d:
+  section:
+    # y = 0 at the M1 bottom face. Stack (DB eptc67330.2025.11392620-a-L01..L17, paper p.2 Fig. 2(a)): M1 [0, 2],
+    # VIA1 PI [2, 6], M2 [6, 8], VIA2 PI [8, 12], M3 [12, 14], VIA3 PI [14, 18], M4 [18, 20], top PI [20, 24].
+    # Lateral dimensions per design from paper p.2 Fig. 3 labels (line, GND-signal gap, signal-signal spacing; also
+    # electrical_interfaces e1..e5). Base = M4M1W25 (e3); other designs are variants.
+    box: {x_um: [-200, 200], y_um: [0, 124], bc: {left: pmc, right: pmc, bottom: pmc, top: pmc}}
+    background: air
+    dielectrics:
+      - name: pi
+        material: pi
+        rect_um: {x: [-200, 200], y: [2, 24]}
+        ref: "PI Dk 3.3, Df 0.034 (eptc67330.2025.11392620-a-L01/L08/L10/L14, p.2 Sec. II.A); top PI 4 um is a template"
+    conductors:
+      - {name: sp, role: signal, conductor: cu, rect_um: {x: [10.5, 35.5], y: [18, 20]}, ref: "M4 signal +, 2 um thick (L02)"}
+      - {name: sn, role: signal, conductor: cu, rect_um: {x: [-35.5, -10.5], y: [18, 20]}, ref: "M4 signal -"}
+      - {name: gl, role: ground, conductor: cu, rect_um: {x: [-200, -51.5], y: [18, 20]}, ref: "M4 side ground (width to the box side: template)"}
+      - {name: gr, role: ground, conductor: cu, rect_um: {x: [51.5, 200], y: [18, 20]}}
+      - {name: plane, role: ground, conductor: cu, rect_um: {x: [-200, 200], y: [0, 2]}, ref: "M1 GND plane 2 um (L15)"}
+  materials:
+    pi: {model: djordjevic_sarkar, eps_r: 3.3, tan_delta: 0.034, f_ref_Hz: 56.0e9, f_low_Hz: 1.0e3, f_high_Hz: 1.0e12, ref: "eptc67330.2025.11392620-a-L01 (p.2 Sec. II.A)", note: "reference frequency of the Dk/Df pair N/A; fitted at 56 GHz (the comparison frequency); DS corners template"}
+  conductor_materials:
+    cu: {sigma_S_m: 5.8e7, tcr_per_K: 0.00393, T_ref_C: 20, status: template, note: "metal not named in the paper (DB L02 notes); IACS Cu assumed"}
+  temperature_C: 25
+  conductor_model: volumetric
+  return: auto
+  mesh: {order: 2, skin_cells: 1, grade: 0.45, f_max_GHz: 65}
+  sweep: {start_GHz: 1, stop_GHz: 65, points: 33, spacing: lin}
+  lines:
+    - {length_mm: 1, zref_ohm: 50}
+  mixed_mode_pairs: [[0, 1]]
+  touchstone: false
+  variants:
+    - id: m4m1w2
+      title: M4M1W2 (M1 ground plane)
+      patch:
+        section:
+          box: {x_um: [-200, 200], y_um: [0, 124], bc: {left: pmc, right: pmc, bottom: pmc, top: pmc}}
+          dielectrics: {pi: {rect_um: {x: [-200, 200], y: [2, 24]}}}
+          conductors: {sp: {rect_um: {x: [2.0, 4.0], y: [18, 20]}}, sn: {rect_um: {x: [-4.0, -2.0], y: [18, 20]}}, gl: {rect_um: {x: [-200, -7.0], y: [18, 20]}}, gr: {rect_um: {x: [7.0, 200], y: [18, 20]}}, plane: {rect_um: {x: [-200, 200], y: [0, 2]}}}
+    - id: m4m1w10
+      title: M4M1W10 (M1 ground plane)
+      patch:
+        section:
+          box: {x_um: [-200, 200], y_um: [0, 124], bc: {left: pmc, right: pmc, bottom: pmc, top: pmc}}
+          dielectrics: {pi: {rect_um: {x: [-200, 200], y: [2, 24]}}}
+          conductors: {sp: {rect_um: {x: [4.5, 14.5], y: [18, 20]}}, sn: {rect_um: {x: [-14.5, -4.5], y: [18, 20]}}, gl: {rect_um: {x: [-200, -20.0], y: [18, 20]}}, gr: {rect_um: {x: [20.0, 200], y: [18, 20]}}, plane: {rect_um: {x: [-200, 200], y: [0, 2]}}}
+    - id: m4m3w2
+      title: M4M3W2 (M3 ground plane)
+      patch:
+        section:
+          box: {x_um: [-200, 200], y_um: [12, 124], bc: {left: pmc, right: pmc, bottom: pmc, top: pmc}}
+          dielectrics: {pi: {rect_um: {x: [-200, 200], y: [14, 24]}}}
+          conductors: {sp: {rect_um: {x: [2.25, 4.25], y: [18, 20]}}, sn: {rect_um: {x: [-4.25, -2.25], y: [18, 20]}}, gl: {rect_um: {x: [-200, -7.25], y: [18, 20]}}, gr: {rect_um: {x: [7.25, 200], y: [18, 20]}}, plane: {rect_um: {x: [-200, 200], y: [12, 14]}}}
+    - id: m4m3w5
+      title: M4M3W5 (M3 ground plane)
+      patch:
+        section:
+          box: {x_um: [-200, 200], y_um: [12, 124], bc: {left: pmc, right: pmc, bottom: pmc, top: pmc}}
+          dielectrics: {pi: {rect_um: {x: [-200, 200], y: [14, 24]}}}
+          conductors: {sp: {rect_um: {x: [6.0, 11.0], y: [18, 20]}}, sn: {rect_um: {x: [-11.0, -6.0], y: [18, 20]}}, gl: {rect_um: {x: [-200, -15.0], y: [18, 20]}}, gr: {rect_um: {x: [15.0, 200], y: [18, 20]}}, plane: {rect_um: {x: [-200, 200], y: [12, 14]}}}
+    - id: air_top
+      title: M4M1W25 without the top PI layer (bracket for the unknown top PI thickness)
+      patch:
+        section:
+          dielectrics: {pi: {rect_um: {x: [-200, 200], y: [2, 20]}}}
+targets:
+  - {metric_id: eptc67330.2025.11392620-a-e3, quantity: alpha_dB_mm, mode: odd, f_GHz: 56, value: 0.441, unit: dB/mm, tolerance: {rel: 0.3}, tier: D, variant: base, locator: "p.3 Table I"}
+  - {metric_id: eptc67330.2025.11392620-a-e1, quantity: alpha_dB_mm, mode: odd, f_GHz: 56, value: 1.353, unit: dB/mm, tolerance: {rel: 0.3}, tier: D, variant: m4m1w2, locator: "p.3 Table I"}
+  - {metric_id: eptc67330.2025.11392620-a-e2, quantity: alpha_dB_mm, mode: odd, f_GHz: 56, value: 0.634, unit: dB/mm, tolerance: {rel: 0.3}, tier: D, variant: m4m1w10, locator: "p.3 Table I"}
+  - {metric_id: eptc67330.2025.11392620-a-e4, quantity: alpha_dB_mm, mode: odd, f_GHz: 56, value: 1.351, unit: dB/mm, tolerance: {rel: 0.3}, tier: D, variant: m4m3w2, locator: "p.3 Table I"}
+  - {metric_id: eptc67330.2025.11392620-a-e5, quantity: alpha_dB_mm, mode: odd, f_GHz: 56, value: 0.937, unit: dB/mm, tolerance: {rel: 0.3}, tier: D, variant: m4m3w5, locator: "p.3 Table I"}
+assumptions:
+  - "Measured L-2L de-embedded differential IL/mm (p.3 Table I) is compared with the attenuation of the odd (differential) quasi-TEM mode, identified by its antisymmetric voltage eigenvector."
+  - "No ground via walls in 2D (via pitch and diameter N/A); side grounds, plane and box are one tied reference group."
+  - "Top PI 4 um (template, equal to the via dielectric layers); variant air_top removes it."
+  - "Side grounds extend to the box sides (x = +-200 um, >= 10 h for h = 16 um); widths N/A."
+  - "Below the ground plane nothing is modelled (pmc at the plane lower face): M1 (or M3) shields the Si substrate. M2M3W2/W5 (e6, e7) are not run: Si resistivity N/A and the M2M3 lines see the Si 6 um below (a-m5)."
+  - "Smooth Cu (roughness N/A), rectangular profile, metal meshing (cheesing, 4 x 4 um at 4 um) not modelled (DB a-m6, a-m7; HFSS shows +0.02..0.07 dB per 2 mm at 56 GHz, a-m9..m15)."
+missing:
+  - "Si resistivity, top PI thickness, side-ground widths, via-wall pitch, metal conductivity, PI Dk/Df reference frequency."
+notes: "EM-2 of R3 Sec. 4.2. 30 % acceptance band is an L7 choice for a D-tier comparison with several N/A inputs."

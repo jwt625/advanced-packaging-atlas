@@ -1,0 +1,48 @@
+# EMIB-T EMIB25T backbone (ectc51846.2026.00051-b): 2 x 1X-reticle dies + one 3 x 18 mm TSV bridge in a substrate
+# cavity; warpage and bridge-corner / FLI stress. No EMIB-T warpage, thermal or stress row exists in the DB
+# (R5 sec. 1.2 item 5): sensitivity / regression case without targets. DevLog-010 first canonical sims, user 3.
+schema: ap-sim/0
+id: emib_t/bridge_stress
+title: EMIB-T EMIB25T (2 dies, 1 TSV bridge, 77 x 56 mm), warpage and bridge stress (no validation source)
+status: unvalidated
+family: emib_t
+params: {}
+geometry:
+  symmetry: quarter
+  drop_kinds: [bga]
+  resolve: []
+materials:
+  # CD6: reason: s2 includes 240 C; solder_resist (SR layers, mapped since 2026-10-20) data end at 225 C, its last instantaneous CTE 130 ppm/K (above 121 C) held (15 C short).
+  allow_extrapolation: [solder_resist]
+  map: {}
+  overrides: {}
+mesh:
+  max_xy_mm: 0.5
+  min_cells_per_layer: 2
+  grading: 1.3
+  max_nodes: 1000000          # quarter model at 0.5 mm with 2 cells per layer needs 5.0e5 nodes; within the ~1e6-node browser thermal target
+physics:
+  thermal:
+    sources:
+      - {parts: "die_*", power_W: 1000, distribution: uniform_volume}      # total over the matched parts (2 dies)
+    bcs:
+      - {selection: "top:die_*", type: temperature, T_C: 40}
+      - {selection: default, type: adiabatic}
+  mechanics:
+    element: q1im               # A3 bake-off winner (SPEC section 15); q2s as the reference variant
+    stress_free_C: {default: 150, per_part: {}}
+    supports: symmetry
+studies:
+  - {id: s1, type: thermal_stationary}
+  - {id: s2, type: thermo_elastic, temperature: {uniform_C: [25, 240]}, note: "high temperature 240 C (template; the 260 C reflow peak exceeds the abf_gl data range, valid to 240 C)"}
+targets: []
+assumptions:
+  - "No validation source: EMIB-T has zero warpage / thermal / stress rows in the DB (R5 sec. 1.2 item 5); results are sensitivity and regression outputs only."
+  - "Stress-free temperature 150 C and evaluation temperatures 25 / 260 C are templates (R5 sec. 4.3: no EMIB-T warpage condition in the DB; 260 C delamination check of EMIB CHIPS ectc51687.2025.00061-a-m10)."
+  - "No lid or stiffener (no EMIB-T row states one; R5 sec. 4.3)."
+  - "MIM band (template key other) uses the generator key mim_mat = sio2_film (MIM stack composition not reported)."
+  - "Thermal study s1 is an end-to-end run, not a validation: 500 W per die (analog ectc51687.2025.00055-g condition), die tops fixed at 40 C (cold-plate water of the same analog)."
+missing:
+  - "Die size (1X reticle stated without size; 26 x 33 mm template), bridge thickness and burial depth, FLI joint height, cavity joint geometry."
+  - "All material properties, including the cavity adhesive / underfill and the bridge BEOL."
+  - "Any measured or simulated warpage, stress or thermal value for EMIB-T."

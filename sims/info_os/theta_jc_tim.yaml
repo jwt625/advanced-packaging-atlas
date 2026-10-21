@@ -1,0 +1,90 @@
+# M2 fan_out_wafer canonical (DevLog-010): InFO_oS thermal test vehicle, lid type (itherm45881.2020.9190542-a):
+# theta-JC (JEDEC, (Tj - Tc) / (PH1 + PH2)) vs TIM1 BLT 60 / 140 um with the 6.0 W/mK gel TIM. Uses the info_os
+# generator with overrides (two thermal dies, no IO dies, lid with TIM).
+schema: ap-sim/0
+id: info_os/theta_jc_tim
+title: InFO_oS thermal TV (2 dies, 22.78 x 34 mm InFO, 62.5 mm substrate, lid); theta-JC vs TIM BLT
+status: unvalidated
+family: info_os
+params:
+  logic_n: {value: 2, status: reported, ref: itherm45881.2020.9190542-a-c1.count, note: "two thermal dies (heaters + sensors)"}
+  io_n: {value: 0, status: derived, refs: [itherm45881.2020.9190542-a.n_dies, itherm45881.2020.9190542-a-c1.count], note: "n_dies 2 = the two thermal dies: no IO chiplets"}
+  info_w_mm: {value: 22.78, status: reported, ref: itherm45881.2020.9190542-a-c2.x_mm}
+  info_d_mm: {value: 34, status: reported, ref: itherm45881.2020.9190542-a-c2.y_mm}
+  logic_w_mm: {value: 21.78, status: reported, ref: itherm45881.2020.9190542-a-c1.x_mm}
+  logic_d_mm: {value: 16.25, status: reported, ref: itherm45881.2020.9190542-a-c1.y_mm, note: "Table 1 (text gives 16.26 mm)"}
+  sbt_w_mm: {value: 62.5, status: reported, ref: itherm45881.2020.9190542-a-c3.x_mm}
+  sbt_d_mm: {value: 62.5, status: reported, ref: itherm45881.2020.9190542-a-c3.y_mm}
+  c4_pitch_um: {value: 130, status: reported, ref: itherm45881.2020.9190542-a-i1.pitch_um}
+  lid_type: {value: lid, status: reported, ref: itherm45881.2020.9190542-a-c4.name, note: "metal lid (lid-type TTV)"}
+  tim_h_um: {value: 60, status: reported, ref: itherm45881.2020.9190542-a-c5.thickness_um, note: "BLT 60 um baseline"}
+geometry:
+  symmetry: quarter
+  drop_kinds: [bga]
+  resolve: []
+materials:
+  map: {}
+  overrides:
+    tim_polymer:
+      k_W_mK: {value: 6.0, status: reported, ref: "itherm45881.2020.9190542-a-L02.properties (gel TIM B, 6.0 W/mK; p.4 Table 3)"}
+mesh:
+  max_xy_mm: 0.5
+  max_z_mm: 0.2               # removes the Q1 overshoot (0.16 K in pm1); theta-JC unchanged to 4 digits (0.022662 -> 0.022661 C/W); 2.9e5 nodes
+  min_cells_per_layer: 1
+  grading: 1.3
+  max_nodes: 300000
+physics:
+  thermal:
+    sources:
+      - {parts: "logic*", power_W: 100, distribution: uniform_volume}      # total over both dies; template (power not stated)
+    bcs:
+      - {selection: "top:lid", type: temperature, T_C: 25}
+      - {selection: default, type: adiabatic}
+studies:
+  - {id: s1, type: thermal_stationary}
+  - id: s2
+    type: thermal_stationary
+    params: {tim_h_um: {value: "=tim_max_um", status: reported, ref: itherm45881.2020.9190542-a-L02.thickness_max_um, note: "BLT 140 um variant"}}
+  - id: s3
+    type: thermal_stationary
+    note: "Table 5 TIM A at BLT 60 um (study-level override, SPEC 17)"
+    materials:
+      overrides:
+        tim_polymer:
+          k_W_mK: {value: 3.2, status: reported, ref: "itherm45881.2020.9190542-a-m9.scope (p.4 Table 5, TIM A gel 3.2 W/mK)"}
+  - id: s4
+    type: thermal_stationary
+    note: "Table 5 TIM C at BLT 60 um (study-level override, SPEC 17)"
+    materials:
+      overrides:
+        tim_polymer:
+          k_W_mK: {value: 25.0, status: reported, ref: "itherm45881.2020.9190542-a-m11.scope (p.4 Table 5, TIM C film 25.0 W/mK)"}
+  - id: s5
+    type: thermal_stationary
+    note: "Table 5 TIM D at BLT 60 um (study-level override, SPEC 17)"
+    materials:
+      overrides:
+        tim_polymer:
+          k_W_mK: {value: 30.0, status: reported, ref: "itherm45881.2020.9190542-a-m12.scope (p.4 Table 5, TIM D film 30.0 W/mK)"}
+targets:
+  - {metric_id: itherm45881.2020.9190542-a-m4, quantity: theta_jc_C_W, selection: "part:logic*", definition: tj_max_minus_tc_over_p, study: s1, tolerance: {rel: 0.3}, tier: D}
+  - {metric_id: itherm45881.2020.9190542-a-m3, quantity: theta_jc_C_W, selection: "part:logic*", definition: tj_max_minus_tc_over_p, study: s2, tolerance: {rel: 0.3}, tier: D}
+  - {metric_id: itherm45881.2020.9190542-a-m2, quantity: theta_jc_C_W, selection: "part:logic*", definition: tj_max_minus_tc_over_p, study: s1, tolerance: {rel: 0.3}, tier: C}
+  - {metric_id: itherm45881.2020.9190542-a-m1, quantity: theta_jc_C_W, selection: "part:logic*", definition: tj_max_minus_tc_over_p, study: s2, tolerance: {rel: 0.3}, tier: C}
+  # Table 5 TIM A-D at BLT 60 um (measured -a-m9..m12, tier D as -a-m3 / -a-m4; paper simulation -a-m5..m8, tier C); TIM B = s1
+  - {metric_id: itherm45881.2020.9190542-a-m9, quantity: theta_jc_C_W, selection: "part:logic*", definition: tj_max_minus_tc_over_p, study: s3, tolerance: {rel: 0.3}, tier: D}
+  - {metric_id: itherm45881.2020.9190542-a-m5, quantity: theta_jc_C_W, selection: "part:logic*", definition: tj_max_minus_tc_over_p, study: s3, tolerance: {rel: 0.3}, tier: C}
+  - {metric_id: itherm45881.2020.9190542-a-m10, quantity: theta_jc_C_W, selection: "part:logic*", definition: tj_max_minus_tc_over_p, study: s1, tolerance: {rel: 0.3}, tier: D}
+  - {metric_id: itherm45881.2020.9190542-a-m6, quantity: theta_jc_C_W, selection: "part:logic*", definition: tj_max_minus_tc_over_p, study: s1, tolerance: {rel: 0.3}, tier: C}
+  - {metric_id: itherm45881.2020.9190542-a-m11, quantity: theta_jc_C_W, selection: "part:logic*", definition: tj_max_minus_tc_over_p, study: s4, tolerance: {rel: 0.3}, tier: D}
+  - {metric_id: itherm45881.2020.9190542-a-m7, quantity: theta_jc_C_W, selection: "part:logic*", definition: tj_max_minus_tc_over_p, study: s4, tolerance: {rel: 0.3}, tier: C}
+  - {metric_id: itherm45881.2020.9190542-a-m12, quantity: theta_jc_C_W, selection: "part:logic*", definition: tj_max_minus_tc_over_p, study: s5, tolerance: {rel: 0.3}, tier: D}
+  - {metric_id: itherm45881.2020.9190542-a-m8, quantity: theta_jc_C_W, selection: "part:logic*", definition: tj_max_minus_tc_over_p, study: s5, tolerance: {rel: 0.3}, tier: C}
+assumptions:
+  - "Test power not stated (metric notes): 100 W total is a template; theta-JC = (max die T - Tc) / P does not depend on P for temperature-independent k (library Si k(T) adds a small dependence)."
+  - "Tc is measured at the lid center; the lid top is held at a uniform 25 C (template reference), an approximation of the cold-plate contact (silica grease, not modelled)."
+  - "Lid thickness and metal not given (-a-L01): lid_h_um = 1.5 mm lid of an InFO_oS TV of ectc32696.2021.00033 (template here), lid_mat cu_lid; lid adhesive thickness not given (lid foot sits on the substrate)."
+  - "Die thickness, InFO RDL and substrate stacks are info_os templates."
+  - "Table 5 TIM A-D split at BLT 60 um: studies s3 / s1 / s4 / s5 with study-level TIM k overrides (3.2 / 6.0 / 25 / 30 W/mK, SPEC 17, 2026-10-20). Only the TIM k changes; TIM modulus and any TIM-dependent contact are not modelled."
+missing:
+  - "Heater power, die thickness, lid thickness / material, lid adhesive, substrate stack, cold-plate interface resistance."

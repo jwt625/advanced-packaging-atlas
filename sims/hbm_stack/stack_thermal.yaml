@@ -1,0 +1,38 @@
+# M2 microbump_3d canonical (DevLog-010): HBM3 8-Hi MR-MUF stack (ectc51909.2023.00151-a: base logic die +
+# 7 core + 1 top die, 720 um), steady conduction through the stack with a DRAM-core power density analog.
+# No DB row gives a steady stack temperature for this stack (sensitivity case without targets).
+schema: ap-sim/0
+id: hbm_stack/stack_thermal
+title: HBM3 8-Hi MR-MUF stack, steady thermal (no validation target)
+status: unvalidated
+family: hbm_stack
+params: {}
+geometry:
+  symmetry: quarter
+  drop_kinds: [microbump]
+  resolve: []
+materials:
+  map: {}
+  overrides: {}
+mesh:
+  max_xy_mm: 0.25
+  min_cells_per_layer: 1
+  grading: 1.3
+  max_nodes: 300000
+physics:
+  thermal:
+    sources:
+      - {parts: "cd_si_*", power_W: 10.5, distribution: uniform_volume}     # Si layer boxes of the 7 core dies: 0.015 W/mm2 x 99.75 mm2 x 7 (analog)
+      - {parts: "tp_si", power_W: 1.5, distribution: uniform_volume}        # Si layer box of the top die: 0.015 W/mm2 x 99.75 mm2 (analog)
+    bcs:
+      - {selection: "top:tp_si", type: temperature, T_C: 40}
+      - {selection: default, type: adiabatic}
+studies:
+  - {id: s1, type: thermal_stationary}
+targets: []
+assumptions:
+  - "DRAM power: 0.015 W/mm2 per core / top die area (analog 'DRAM core 0.015 W/mm2', ectc51687.2025.00055-g condition, p.4 Fig. 6(a)); base-die (PHY / logic) power not modelled."
+  - "Stack top held at 40 C (cold-plate water of the same analog); micro-bump fields dropped (homogenized joints would need the solder library entry at the joint)."
+  - "No target: ectc51909.2023.00151-b-m7 / -c-m1 are transient DRAM Tj at 200 s in a system test (IDD4, start 85 C) and ectc51687.2025.00055-g/-h are power-density limits from a different model; neither maps to this steady stack."
+missing:
+  - "Base-die power map, package / cooling path of a measured HBM stack, MUF and die-attach thermal properties."

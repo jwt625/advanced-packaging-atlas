@@ -1,0 +1,82 @@
+# CoWoS-L lid-type mechanical TV (ectc51909.2023.00091-a), package warpage at 25 C and 240 C, plus an end-to-end
+# steady-thermal study. Regression case: geometry partly template, no material table, stress-free T not reported
+# (R5 sec. 7.2; DevLog-010 first canonical sims, user 1). Geometry: engine/src/families/cowos_l.mjs (lane L3).
+# Fixes the R5 sketch: symmetry planes OR rigid-motion suppression, never both (R1).
+schema: ap-sim/0
+id: cowos_l/warpage_rt_ht
+title: CoWoS-L lid-type TV (2 SoC + 4 HBM2E, 91 x 91 mm), package warpage 25 C / 240 C
+status: unvalidated
+family: cowos_l
+params:
+  sbt_w_mm: {value: 91, status: reported, ref: ectc51909.2023.00091-a-c6.x_mm}
+  sbt_d_mm: {value: 91, status: reported, ref: ectc51909.2023.00091-a-c6.y_mm}
+  soc_n: {value: 2, status: reported, ref: ectc51909.2023.00091-a-c1.count}
+  soc_cols_n: {value: 2, status: template, note: "two SoCs side by side with two HBM2E on each side (Fig. 6(b), ectc51909.2023.00091-f02; not dimensioned)"}
+  hbm_n: {value: 4, status: reported, ref: ectc51909.2023.00091-a-c2.count}
+  hbm_gen: {value: HBM2E, status: reported, ref: ectc51909.2023.00091-a-c2.name}
+  # interposer = top-die rectangle + 1 mm per side (1.6x); SC-RDL and side mold extend to the 91 x 91 mm substrate
+  ip_size_rule: {value: fit_dies, status: reported, ref: ectc51909.2023.00091-a.notes, note: "interposer = top-die enclosing rectangle + 1 mm per side"}
+  reticle_x: {value: 1.6, status: reported, ref: ectc51909.2023.00091-a.reticle_multiple}
+  sc_rdl: {value: substrate, status: reported, ref: ectc51909.2023.00091-a.notes, note: "SC-RDL equals the 91 x 91 mm substrate; side mold extended to the package substrate edge (-a-c7)"}
+  dummy_n: {value: 8, status: reported, ref: ectc51909.2023.00091-a-c3.count, note: "equivalent 3.8x reticle dummy Si; two rows of four (Fig. 6(b)); size from 3.8x / 8, square (template)"}
+  lsi_n: {value: 6, status: reported, ref: ectc51909.2023.00091-a-c4.count, note: "6 LSI in this TV (R5 fit n_hbm + n_soc = 6)"}
+  ri_back_n: {value: 6, status: reported, ref: ectc51909.2023.00091-a-L07.repeat, note: "6 B/S SC-RDL layers"}
+  # uBGA layer (with 45 embedded IPDs) between the SC-RDL and the substrate, modelled as the C4 field
+  c4_pitch_um: {value: 500, status: reported, ref: ectc51909.2023.00091-a-i3.pitch_um}
+  c4_h_um: {value: 200, status: reported, ref: ectc51909.2023.00091-a-i3.height_um, note: "uBGA layer height ~200 um (approx)"}
+  # uBGA field over the full SC-RDL (2026-10-20, coordinator / L9): the uBGA joins the substrate-sized SC-RDL to the substrate;
+  # the ball-field extent is not dimensioned, so the field spans the whole 91 x 91 mm (was: the RI footprint only)
+  c4_region_w_mm: {value: "=sbt_w_mm", status: template, refs: [ectc51909.2023.00091-a-i3.pitch_um, ectc51909.2023.00091-a-c6.x_mm], note: "uBGA field width = SC-RDL / substrate width (extent not dimensioned)"}
+  c4_region_d_mm: {value: "=sbt_d_mm", status: template, refs: [ectc51909.2023.00091-a-i3.pitch_um, ectc51909.2023.00091-a-c6.y_mm], note: "uBGA field length = SC-RDL / substrate length (extent not dimensioned)"}
+  lid_type: {value: lid, status: reported, ref: ectc51909.2023.00091-a-c8.name, note: "lid-type TV (Fig. 6(c) 'Lid: 91mmx91mmx2mm')"}
+  lid_h_um: {value: 2000, status: reported, ref: ectc51909.2023.00091-a-c8.thickness_um}
+geometry:
+  symmetry: quarter
+  drop_kinds: [bga]
+  resolve: []
+materials:
+  # CD6: hold the last data value beyond the range for these keys only; reason: target a-m2 is at 240 C; tim_polymer data end at 150 C. The TIM is a compliant layer (CD5 template CTE, E <= 100 MPa): L8 found x3 on its CTE changes lidded warpage by about 1 %, so holding the last value is judged acceptable. solder_resist (SR layers, mapped since 2026-10-20) at 225 C, its last instantaneous CTE 130 ppm/K (above 121 C) held (15 C short).
+  allow_extrapolation: [tim_polymer, solder_resist]
+  map: {}
+  overrides: {}
+mesh:
+  max_xy_mm: 1.0
+  max_z_mm: 0.2               # removes the Q1 maximum-principle overshoot (mold node 0.48 K above the SoC with one cell through the 685 um dies next to 0.15 mm gaps)
+  min_cells_per_layer: 1      # 2026-10-20 (coordinator, browser memory): was 2 (6.0e5 nodes, 1.80e6 DOF, browser array allocation failed); 1 cell per layer gives 3.6e5 nodes, 1.08e6 DOF. Targets are warpage only: L8 q1im gate cases are within 5e-4 at 1 cell per layer up to aspect 100 (DevLog/lanes/L8-mech.md); >= 2 only for through-thickness stress probes
+  grading: 1.3
+  max_nodes: 1000000          # quarter model (generator symmetry report: mirror_x and mirror_y, quarter allowed)
+physics:
+  thermal:
+    sources:
+      - {parts: "soc_*", power_W: 1000, distribution: uniform_volume}      # total over the matched parts (2 SoC)
+    bcs:
+      - {selection: "top:lid", type: temperature, T_C: 40}
+      - {selection: default, type: adiabatic}
+  mechanics:
+    element: q1im               # A3 bake-off winner (SPEC section 15); q2s as the reference variant
+    stress_free_C: {default: 150, per_part: {}}
+    supports: symmetry
+studies:
+  - {id: s1, type: thermal_stationary}
+  - {id: s2, type: thermo_elastic, temperature: {uniform_C: [25]}}
+  - {id: s3, type: thermo_elastic, temperature: {uniform_C: [240]}}
+targets:
+  - {metric_id: ectc51909.2023.00091-a-m1, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: s2, T_C: 25, tolerance: {rel: 0.5}, tier: D}
+  - {metric_id: ectc51909.2023.00091-a-m2, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: s3, T_C: 240, tolerance: {rel: 0.5}, tier: D}
+assumptions:
+  - "Thermal study s1 is an end-to-end run, not a validation: 500 W per SoC = analog 'GPU 500 W each' (ectc51687.2025.00055-g condition, p.4 Fig. 6(a)); lid top fixed at 40 C = cold-plate water temperature of the same analog (zero cold-plate resistance); HBM power neglected."
+  - "Stress-free temperature 150 C for all parts (template; analog post-assembly stress-free 150 C of ectc51687.2025.00178-c-m3, R5 sec. 4.1)."
+  - "Die sizes not reported: SoC footprint kept at the backbone template (18.7 x 18.57 mm); the fitted interposer is checked against the reported 1.6x reticle (830 mm2 per reticle, p.2 footnote)."
+  - "Dummy Si: 8 square dies of 3.8 x 830 / 8 mm2 in two rows along the +y / -y package edges, 3 mm from the edge, spread evenly (Fig. 6(b) top view; sizes and positions not dimensioned); no bump field under them (mold / underfill)."
+  - "SC-RDL (F/S RDL, LSI / TIV layer, 6 B/S RDL) and the side mold span the 91 x 91 mm substrate; TIVs only inside the interposer area; the lid plate (91 x 91 x 2 mm) sits on a mold-sized TIM (no sidewall, the module covers the substrate)."
+  - "Lid material Cu (generator lid_mat = cu_lid, template; not stated in any CoWoS-L row)."
+  - "uBGA layer represented by the C4 field (pitch 500 um, height 200 um) over the full 91 x 91 mm SC-RDL area (extent not dimensioned; before 2026-10-20 only under the RI); the template C4 diameter (75 um) is kept because the uBGA ball size is not reported."
+  - "Measured surface and sign convention not stated (metric scope: 'sign as labeled in Fig. 6(c)'); compared on the substrate bottom with the JEITA ED-7306 sign; tolerance rel 0.5 is a regression judgement for a template-heavy case."
+  - "BGA dropped: package-level moire of the unmounted package (R5 sec. 5.2); SAC305 is also outside its library range at 240 C (above the 217 C solidus)."
+  - "Film TIM: library tim_polymer with its CD5 template CTE (149 ppm/K, sensitivity x1/3 .. x3); its data range ends at 150 C, so s3 (240 C) runs with materials.allow_extrapolation (CD6, reason in the materials block)."
+  - "Warpage studies use quarter symmetry with sym:x, sym:y and one z point (supports: symmetry)."
+missing:
+  - "Dummy-die size and positions (only count 8 and the 3.8x reticle total, -a-c3), top-die sizes, LSI sizes and positions."
+  - "45 embedded IPDs in the uBGA layer (2.9 mm2 each, -a-c5): dropped."
+  - "Material properties of mold, underfills, SC-RDL dielectric, substrate layers, lid and film TIM (sourced high-temperature TIM CTE)."
+  - "Stress-free temperature, process sequence, measurement method details; TIM BLT."
