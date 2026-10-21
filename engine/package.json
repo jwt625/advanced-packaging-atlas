@@ -1,0 +1,16 @@
+{
+  "name": "ap-sim-engine",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Browser-native 3D simulation engine for advanced packaging: steady heat conduction, linear thermo-elasticity (warpage, stress), 2D/3D regional EM for S-parameters (DevLog-010, DevLog-012)",
+  "type": "module",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "test": "node --test --test-concurrency=1 tests/*.test.mjs",
+    "cli": "node cli.mjs",
+    "bench": "node bench/bench.mjs"
+  },
+  "dependencies": {
+    "yaml": "^2.9.1"
+  }
+}
