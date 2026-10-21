@@ -8,7 +8,7 @@ until the oldest saved download ages out (run it in tmux). Each PDF is extracted
 
 Usage:
   uv run python scripts/ieee_fetch.py --login        # opens a window; sign in (Institutional Sign In); waits for access
-  uv run python scripts/ieee_fetch.py --run [--max N] [--cap N] [--window-hours H] [--dry-run]
+  uv run python scripts/ieee_fetch.py --run [--max N] [--cap N] [--window-hours H] [--dry-run] [--queue CSV]
 Profile: cache/browser_profile (git-ignored). PDFs: references/<paper_id>/source.pdf (local-only; institutional stamp).
 The default batch is 30 papers per run (about 50 min, inside one login session); --max overrides it. The default cap
 is 60 per rolling 2 hours; --cap and --window-hours override it.
@@ -133,7 +133,22 @@ def login() -> int:
         return 1
 
 
-def targets() -> list[dict]:
+def queue_targets(path: Path) -> list[dict]:
+    """Explicit queue (CSV: doi, arnumber, priority, bucket, title, purpose), e.g. config/sim/fetch_queue.csv."""
+    out = []
+    for r in csv.DictReader(path.open()):
+        doi = r["doi"].strip().lower()
+        if not doi.startswith(("10.1109/", "10.23919/")):
+            continue
+        out.append({"paper_id": paper_id_of(doi), "doi": doi, "arnumber": r.get("arnumber") or None,
+                    "priority": int(r.get("priority") or 1), "bucket": r.get("bucket") or "", "title": r["title"],
+                    "purpose": r.get("purpose") or ""})
+    return sorted(out, key=lambda x: x["priority"])
+
+
+def targets(queue: Path | None = None) -> list[dict]:
+    if queue:
+        return queue_targets(queue)
     rows = list(csv.DictReader((ROOT / "outputs" / "cache_list.csv").open()))
     pool = {}
     for ln in (ROOT / "cache" / "pool.jsonl").read_text().splitlines():
@@ -231,11 +246,14 @@ def fetch_one(ctx: BrowserContext, t: dict) -> str:
     part = out / "source.pdf.part"
     part.write_bytes(body)
     part.replace(out / "source.pdf")
-    (out / "source.json").write_text(json.dumps({
+    meta = {
         "paper_id": t["paper_id"], "doi": t["doi"], "url": f"https://doi.org/{t['doi']}", "arnumber": an,
         "retrieved_on": dt.date.today().isoformat(), "access": "institutional subscription (local-only)",
         "redistribution": "restricted_local_only", "bytes": len(body),
-        "sha256": hashlib.sha256(body).hexdigest()}, indent=1))
+        "sha256": hashlib.sha256(body).hexdigest()}
+    if t.get("purpose"):
+        meta["purpose"] = t["purpose"]
+    (out / "source.json").write_text(json.dumps(meta, indent=1))
     try:
         info = extract(t["paper_id"])
         log({"event": "saved", "arnumber": an, "pages": info["pages"], "text_chars": info["text_chars"], **t})
@@ -245,8 +263,8 @@ def fetch_one(ctx: BrowserContext, t: dict) -> str:
 
 
 def run(max_n: int | None, dry: bool, headless: bool, cap: int = CAP,
-        window_h: float = CAP_WINDOW_H) -> int:
-    todo = [t for t in targets() if not (ROOT / "references" / t["paper_id"] / "source.pdf").exists()]
+        window_h: float = CAP_WINDOW_H, queue: Path | None = None) -> int:
+    todo = [t for t in targets(queue) if not (ROOT / "references" / t["paper_id"] / "source.pdf").exists()]
     print(f"{len(todo)} IEEE-hosted papers to fetch (priority order)", flush=True)
     if dry:
         for t in todo[:15]:
@@ -319,11 +337,12 @@ def main() -> int:
                     help="rolling cap window in hours (default 2)")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--headed", action="store_true", help="keep the window visible during --run")
+    ap.add_argument("--queue", type=Path, help="fetch from this CSV instead of outputs/cache_list.csv")
     a = ap.parse_args()
     if a.login:
         return login()
     if a.run:
-        return run(a.max, a.dry_run, headless=not a.headed, cap=a.cap, window_h=a.window_hours)
+        return run(a.max, a.dry_run, headless=not a.headed, cap=a.cap, window_h=a.window_hours, queue=a.queue)
     ap.print_help()
     return 1
 

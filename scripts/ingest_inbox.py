@@ -25,6 +25,9 @@ INBOX = ROOT / "references" / "_inbox"
 
 def wanted() -> dict[str, str]:
     md = (ROOT / "data" / "manual_downloads.md").read_text()
+    sim = ROOT / "config" / "sim" / "manual_downloads.md"  # simulation references (DevLog-010)
+    if sim.exists():
+        md += "\n" + sim.read_text()
     out = {}
     for block in md.split("- paper_id: ")[1:]:
         pid = block.split("\n", 1)[0].strip()

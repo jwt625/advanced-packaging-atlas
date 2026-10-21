@@ -1,0 +1,4 @@
+doi,arnumber,priority,bucket,title,purpose
+10.1109/JMEMS.2009.2039697,5430873,1,sim_materials,"What is the Young's modulus of silicon? (Hopcroft, Nix, Kenny, J. Microelectromech. Syst. 2010)",sim_materials: Si Cij and orientation-dependent E
+10.1109/TMTT.2006.883655,1717770,1,sim_materials,"Measurements of permittivity, dielectric loss tangent, and resistivity of float-zone silicon at microwave frequencies (Krupka et al., IEEE TMTT 2006)",sim_materials: Si microwave permittivity and loss
+10.1109/ITHERM.2012.6231522,6231522,1,sim_materials,"Determination of Anand constants for SAC solders using stress-strain or creep data (Motalab, Cai, Suhling, Lall, ITherm 2012)",sim_materials: SAC305 Anand parameters
