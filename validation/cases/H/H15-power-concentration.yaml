@@ -1,0 +1,68 @@
+schema: ap-sim-val/0
+id: H/H15-power-concentration
+tier: H
+title: 'Putting the same total power on one die instead of two raises the junction rise by 1.4-2.1x [weak: 1 paper]'
+status: unvalidated
+physics:
+- thermal_stationary
+strength: weak
+scope_package_classes:
+- organic_rdl_interposer, InFO_oS lidded 2-die only (one paper)
+applies_to:
+- info_os/theta_jc_tim
+rule:
+  type: ratio_range_per_bc
+  expr: 'InFO_oS lidded 2-die: ThetaJC(one die) / ThetaJC(split) in [1.8, 2.3] with a JEDEC cold plate on the lid; rise ratio in [1.25, 1.6] with
+    the vapor-chamber heat sink'
+  derived: cold plate 2.05 (sim) / 2.1 (test); VC (113.7 - 55) / (96.3 - 55) = 1.42 (L4 arithmetic)
+  strength: weak
+fails_if: ratio outside the band for its BC
+n_papers: 1
+support:
+- metric_id: itherm45881.2020.9190542-a-m21
+  value: 2.05
+  unit: x
+  parameter: normalized ThetaJC, condition B vs A
+  variant: 'B: PH1 200 W, PH2 0 W vs A: 100 W/100 W (Simulation)'
+  condition: JEDEC ThetaJC = (Tj - Tc)/(PH1 + PH2); Tj max of die1/die2; Tc lid center; cold plate; silica-based thermal grease to cold plate;
+    TTV on thermal test PCB
+  basis: simulated
+  package_class: organic_rdl_interposer
+  locator: p.5 Table 6; p.5 Fig. 12; p.5 Sec. Multiple Chips Heating
+- metric_id: itherm45881.2020.9190542-a-m22
+  value: 2.1
+  unit: x
+  parameter: normalized ThetaJC, condition B vs A
+  variant: 'B: PH1 200 W, PH2 0 W vs A: 100 W/100 W (Experiment)'
+  condition: JEDEC ThetaJC = (Tj - Tc)/(PH1 + PH2); Tj max of die1/die2; Tc lid center; cold plate; silica-based thermal grease to cold plate;
+    TTV on thermal test PCB
+  basis: measured
+  package_class: organic_rdl_interposer
+  locator: p.5 Table 6; p.5 Fig. 12; p.5 Sec. Multiple Chips Heating
+- metric_id: itherm45881.2020.9190542-b-m7
+  value: 96.3
+  unit: C
+  parameter: Tj_die1
+  variant: 'Case 3: PH1 175 W, PH2 175 W (1:1), total 350 W'
+  condition: Tamb 55.0 C; InFO_oS package with vapor-chamber heat sink
+  basis: simulated
+  package_class: organic_rdl_interposer
+  locator: p.5 Table 7; p.6 Table 8
+- metric_id: itherm45881.2020.9190542-b-m40
+  value: 113.7
+  unit: C
+  parameter: Tj_die1
+  variant: 'Case 14: PH1 350 W, PH2 0 W (1:0), total 350 W'
+  condition: Tamb 55.0 C; InFO_oS package with vapor-chamber heat sink
+  basis: simulated
+  package_class: organic_rdl_interposer
+  locator: p.5 Table 7; p.6 Table 8
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  replaces: 'wave-1 single band [1.3, 2.2] and applies_to cowos_l (a 3-SoC + HBM package with other spreading: removed)'
+notes:
+- Ratio depends on how much spreading the cooling path offers (cold plate on lid vs vapor chamber). Single paper, two BCs.
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

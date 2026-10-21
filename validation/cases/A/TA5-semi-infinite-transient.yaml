@@ -1,0 +1,42 @@
+schema: ap-sim-val/0
+id: A/TA5-semi-infinite-transient
+tier: A
+title: Semi-infinite solid, step surface temperature and constant surface flux
+status: unvalidated
+physics: [thermal_transient]
+box_compatible: true
+needs_engine_feature: "transient thermal (E7 in DevLog-010); not part of E1 steady"
+tests: [time integrator order (BE 1, CN / BDF2 2), mass matrix (consistent vs lumped), domain depth truncation]
+variants:
+  step_T:
+    bcs:
+      - {selection: "top:col", type: temperature, T_C: 125}
+      - {selection: default, type: adiabatic}
+  flux:
+    bcs:
+      - {selection: "top:col", type: heat_flux, flux_W_m2: 1.0e6}
+      - {selection: default, type: adiabatic}
+inputs:
+  materials: {set: _materials_tier_a.yaml}
+  geometry:
+    symmetry: none
+    boxes:   # 1D column; the heated face is the top; depth 3 mm > 4 sqrt(alpha t) = 1.20 mm at 1 ms
+      - {id: col, kind: die, material: "tierA:si_iso", x_mm: 0, y_mm: 0, w_mm: 0.1, d_mm: 0.1, z_um: 0, h_um: 3000}
+  mesh: {max_xy_mm: 0.1, min_cells_per_layer: 300, note: "refine toward the top face; dz <= 10 um near the probe"}
+  physics: {thermal: {initial_C: 25}}
+  studies: [{id: s1, type: thermal_transient, t_end_s: 1.0e-3, dt_s: [1.0e-5, 5.0e-6, 2.5e-6], output_s: [1.0e-3]}]
+expected:
+  - {variant: step_T, quantity: T_C, probe: "0.5 mm below the top face, t = 1 ms", value: 48.8849, unit: C,
+     tolerance: {rel_rise: 1.0e-3, after: "dt -> 0 Richardson"}, script_key: TA5.T_C}
+  - {variant: step_T, quantity: theta, definition: "(T - T_s) / (T_i - T_s)", value: 0.761151, unit: "1", script_key: TA5.theta}
+  - {variant: flux, quantity: surface_rise_K, probe: "top face, t = 1 ms", value: 2.2885, unit: K,
+     tolerance: {rel: 1.0e-3, after: "dt -> 0 Richardson"}, script_key: TA5.flux_surface_rise_K}
+  - {quantity: observed_order_dt, value: "1 (backward Euler), 2 (Crank-Nicolson or BDF2)", tolerance: {abs: 0.3}}
+formula: "theta = erf(x / (2 sqrt(alpha t))), alpha = k / (rho cp) = 9.010e-5 m2/s; constant flux: T_s - T_i = 2 q'' sqrt(alpha t / pi) / k"
+provenance:
+  formula: "Incropera et al., semi-infinite solid (transient conduction chapter); R6 section 1.2 TA5"
+  values: "validation/expected/tier_a.py ta5()"
+missing: []
+assumptions:
+  - "Study type thermal_transient and its keys (t_end_s, dt_s, output_s, initial_C) are not in SPEC v0 (contract-change request L4-3)."
+  - "Step BC applied at t = 0+ (discontinuous initial data): the first steps of CN oscillate; compare at t = 1 ms only."

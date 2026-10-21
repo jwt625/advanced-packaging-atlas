@@ -1,0 +1,53 @@
+schema: ap-sim-val/0
+id: H/H18-tsv-residual-stress-vs-depth
+tier: H
+title: 'Residual Si stress between fine-pitch TSVs after anneal decreases with TSV aspect ratio (3 um TSV, 6 um pitch) [weak: 1 paper]'
+status: unvalidated
+physics:
+- thermo_elastic
+strength: weak
+scope_package_classes:
+- fine-pitch Si TSV test structure (3 um TSV, 6 um pitch; one paper, Raman)
+applies_to:
+- validation XB3 TSV unit cell (tier B, not yet written)
+rule:
+  type: monotonic
+  expr: sigma(AR 4) > sigma(AR 7) > sigma(AR 10); order of magnitude 10-100 MPa
+  strength: weak
+fails_if: sigma(AR 4) <= sigma(AR 7) or sigma(AR 7) <= sigma(AR 10) in a TSV unit-cell model, or values outside [5, 300] MPa
+n_papers: 1
+support:
+- metric_id: ectc51687.2025.00071-a-m1
+  value: 86
+  unit: MPa
+  parameter: peak residual biaxial stress in Si at gap center
+  condition: after 400 C 1 h anneal; Raman 532 nm, 100x/0.9
+  basis: measured
+  package_class: other
+  locator: p.4 Fig. 6
+- metric_id: ectc51687.2025.00071-b-m1
+  value: 34
+  unit: MPa
+  parameter: peak residual biaxial stress in Si at gap center
+  condition: after 400 C 1 h anneal; Raman 532 nm, 100x/0.9
+  basis: measured
+  package_class: other
+  locator: p.4 Fig. 6
+- metric_id: ectc51687.2025.00071-c-m1
+  value: 19
+  unit: MPa
+  parameter: peak residual biaxial stress in Si at gap center
+  condition: after 400 C 1 h anneal; Raman 532 nm, 100x/0.9
+  basis: measured
+  package_class: other
+  locator: p.4 Fig. 6
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+notes:
+- 'Measured micro-Raman (532 nm, near-surface probe) after 400 C / 1 h: 86 / 34 / 19 MPa. Plasticity and Raman depth dominate: trend and order
+  of magnitude only (R6 3.4).'
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

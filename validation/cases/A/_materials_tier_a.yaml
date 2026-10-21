@@ -1,0 +1,18 @@
+# Synthetic isotropic material set for every tier-A case (R6 section 1 table). Not real material data:
+# chosen so the expected values are reproducible. Referenced by the cases as `tierA:<key>`.
+schema: ap-sim-val-materials/0
+source: DevLog/research/2026-10-20-sim-validation-set.md section 1 (material set table)
+materials:
+  si_iso: {E_GPa: 130, nu: 0.28, cte_ppmK: 2.6, k_W_mK: 148, rho_kg_m3: 2330, cp_J_kgK: 705}
+  cu:     {E_GPa: 110, nu: 0.34, cte_ppmK: 17, k_W_mK: 390}
+  cu_nu035: {E_GPa: 110, nu: 0.35, cte_ppmK: 17, k_W_mK: 390, note: "MA7 only"}
+  cu_nu028: {E_GPa: 110, nu: 0.28, cte_ppmK: 17, note: "MA4a only (equal nu so CLT reduces to MA3)"}
+  si_nu028: {E_GPa: 130, nu: 0.28, cte_ppmK: 2.6, note: "= si_iso; listed for MA4a symmetry"}
+  uf:     {E_GPa: 8, nu: 0.35, cte_ppmK: 30}
+  sub:    {E_GPa: 25, nu: 0.30, cte_ppmK: 15}
+  tim:    {k_W_mK: 5}
+  al:     {k_W_mK: 200}
+  ortho_core: {E_GPa: 25, nu: 0.30, cte_ppmK: [11, 11, 16],
+               note: "MA8: CTE values as the substrate core in ectc.2011.5898527 Table 2 p.2; E, nu synthetic (stress is zero for any stiffness)"}
+  film_mis: {E_GPa: 130, nu: 0.28, cte_ppmK: 8.13846,
+             note: "MA5 runnable form: si_iso stiffness with a CTE offset giving +100 MPa misfit at dT = -100 K (tier_a.py ma5)"}

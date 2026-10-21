@@ -1,0 +1,255 @@
+{
+ "solver": "scikit-fem (apref)",
+ "versions": {
+  "python": "3.12.11",
+  "scikit-fem": "12.0.2",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pyamg": "5.3.0",
+  "gmsh": "4.15.2",
+  "scikit-rf": "2.2.0"
+ },
+ "case": "NAFEMS-T1",
+ "tier": "B",
+ "expected_source": "Abaqus T1 / L4 B/nafems-T1 (50.0 MPa)",
+ "results": {
+  "runs": [
+   {
+    "elem": "t1",
+    "refine": 1,
+    "dof": 318,
+    "mesh": {
+     "lc_in": 0.2,
+     "lc_out": 1.5,
+     "elements": 272
+    },
+    "q": {
+     "sigma_yy_D_Pa": 36699728.31,
+     "sigma_xx_D_Pa": -41447552.15,
+     "sigma_yy_D_inside_Pa": -50017900.98
+    }
+   },
+   {
+    "elem": "t1",
+    "refine": 2,
+    "dof": 622,
+    "mesh": {
+     "lc_in": 0.1,
+     "lc_out": 1.0,
+     "elements": 558
+    },
+    "q": {
+     "sigma_yy_D_Pa": 43672726.21,
+     "sigma_xx_D_Pa": -45023964.28,
+     "sigma_yy_D_inside_Pa": -49364629.1
+    }
+   },
+   {
+    "elem": "t1",
+    "refine": 4,
+    "dof": 1208,
+    "mesh": {
+     "lc_in": 0.05,
+     "lc_out": 0.7,
+     "elements": 1120
+    },
+    "q": {
+     "sigma_yy_D_Pa": 46575789.16,
+     "sigma_xx_D_Pa": -46964918.95,
+     "sigma_yy_D_inside_Pa": -49656559.58
+    }
+   },
+   {
+    "elem": "t1",
+    "refine": 8,
+    "dof": 2320,
+    "mesh": {
+     "lc_in": 0.025,
+     "lc_out": 0.5,
+     "elements": 2204
+    },
+    "q": {
+     "sigma_yy_D_Pa": 48353574.88,
+     "sigma_xx_D_Pa": -48239824.54,
+     "sigma_yy_D_inside_Pa": -49782049.2
+    }
+   },
+   {
+    "elem": "t1",
+    "refine": 16,
+    "dof": 4662,
+    "mesh": {
+     "lc_in": 0.0125,
+     "lc_out": 0.35,
+     "elements": 4504
+    },
+    "q": {
+     "sigma_yy_D_Pa": 49433230.26,
+     "sigma_xx_D_Pa": -48898617.5,
+     "sigma_yy_D_inside_Pa": -49681989.19
+    }
+   },
+   {
+    "elem": "t2",
+    "refine": 1,
+    "dof": 1178,
+    "mesh": {
+     "lc_in": 0.2,
+     "lc_out": 1.5,
+     "elements": 272
+    },
+    "q": {
+     "sigma_yy_D_Pa": 49070006.22,
+     "sigma_xx_D_Pa": -48470017.23,
+     "sigma_yy_D_inside_Pa": -49428935.33
+    }
+   },
+   {
+    "elem": "t2",
+    "refine": 2,
+    "dof": 2358,
+    "mesh": {
+     "lc_in": 0.1,
+     "lc_out": 1.0,
+     "elements": 558
+    },
+    "q": {
+     "sigma_yy_D_Pa": 50110621.99,
+     "sigma_xx_D_Pa": -49243434.74,
+     "sigma_yy_D_inside_Pa": -49532002.2
+    }
+   },
+   {
+    "elem": "t2",
+    "refine": 4,
+    "dof": 4654,
+    "mesh": {
+     "lc_in": 0.05,
+     "lc_out": 0.7,
+     "elements": 1120
+    },
+    "q": {
+     "sigma_yy_D_Pa": 50349667.04,
+     "sigma_xx_D_Pa": -49463163.94,
+     "sigma_yy_D_inside_Pa": -49548344.94
+    }
+   },
+   {
+    "elem": "t2",
+    "refine": 8,
+    "dof": 9046,
+    "mesh": {
+     "lc_in": 0.025,
+     "lc_out": 0.5,
+     "elements": 2204
+    },
+    "q": {
+     "sigma_yy_D_Pa": 50420115.92,
+     "sigma_xx_D_Pa": -49525707.11,
+     "sigma_yy_D_inside_Pa": -49553173.33
+    }
+   },
+   {
+    "elem": "t2",
+    "refine": 16,
+    "dof": 18330,
+    "mesh": {
+     "lc_in": 0.0125,
+     "lc_out": 0.35,
+     "elements": 4504
+    },
+    "q": {
+     "sigma_yy_D_Pa": 50439851.49,
+     "sigma_xx_D_Pa": -49541680.14,
+     "sigma_yy_D_inside_Pa": -49553910.1
+    }
+   }
+  ],
+  "convergence": {
+   "t1": {
+    "sigma_yy_D_Pa": {
+     "p_obs": 0.7195105571,
+     "p_used": 0.7195105571,
+     "f_fine": 49433230.26,
+     "f_ext": 51102912.37,
+     "gci_fine": 0.04222064038,
+     "rel_change_last": 0.02184068029,
+     "expected": 50000000.0,
+     "rel_err_fine": -0.01133539487,
+     "rel_err_ext": 0.02205824733,
+     "orders_vs_exact": [
+      1.071799787,
+      0.8858124903,
+      1.056434634,
+      1.538502252
+     ]
+    },
+    "sigma_xx_D_Pa": {
+     "p_obs": 0.9524933896,
+     "p_used": 0.9524933896,
+     "f_fine": -48898617.5,
+     "f_ext": -49603047.38,
+     "gci_fine": 0.01800740801,
+     "rel_change_last": 0.01347262943
+    },
+    "sigma_yy_D_inside_Pa": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": -49681989.19,
+     "f_ext": null,
+     "gci_fine": null
+    }
+   },
+   "t2": {
+    "sigma_yy_D_Pa": {
+     "p_obs": 1.835778539,
+     "p_used": 1.835778539,
+     "f_fine": 50439851.49,
+     "f_ext": 50447531.78,
+     "gci_fine": 0.0001903327971,
+     "rel_change_last": 0.0003912693977,
+     "expected": 50000000.0,
+     "rel_err_fine": 0.00879702981,
+     "rel_err_ext": 0.008950635538,
+     "orders_vs_exact": [
+      3.071582887,
+      -1.660343644,
+      -0.2648056401,
+      -0.06622904341
+     ]
+    },
+    "sigma_xx_D_Pa": {
+     "p_obs": 1.969213873,
+     "p_used": 1.969213873,
+     "f_fine": -49541680.14,
+     "f_ext": -49547158.71,
+     "gci_fine": 0.0001382313745,
+     "rel_change_last": 0.0003224160576
+    },
+    "sigma_yy_D_inside_Pa": {
+     "p_obs": 2.712269646,
+     "p_used": 2.712269646,
+     "f_fine": -49553910.1,
+     "f_ext": -49554042.76,
+     "gci_fine": 3.346508649e-06,
+     "rel_change_last": 1.486791775e-05
+    }
+   }
+  },
+  "expected": {
+   "sigma_yy_D_Pa": 50000000.0
+  },
+  "closed_form": {
+   "infinite_plate_sigma_tt_a_plus_Pa": 50000000.0,
+   "free_disk_R10_sigma_tt_a_plus_Pa": 50500000.0,
+   "note": "plane stress, same material, e* = 1e-3; the square 10 x 10 quarter lies between these"
+  },
+  "sources": {
+   "retrieved": "2026-10-20",
+   "urls": [
+    "https://abaqus-docs.mit.edu/2017/English/SIMAINPRefResources/nt1xxf8x.inp",
+    "https://abaqus-docs.mit.edu/2017/English/SIMACAEBMKRefMap/simabmk-c-t1.htm"
+   ]
+  }
+ }
+}

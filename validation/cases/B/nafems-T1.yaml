@@ -1,0 +1,56 @@
+schema: ap-sim-val/0
+id: B/nafems-T1
+tier: B
+title: NAFEMS T1 plane-stress membrane with a circular hot spot
+status: unvalidated
+physics: [thermo_elastic]
+box_compatible: partial
+geometry_note: >-
+  Quarter membrane 10 x 10 (box-compatible). Hot spot circular, r <= 1.0, so on a structured grid the thermal-strain
+  jump cuts through cells. Runnable as (a) staircase hot spot or (b) per-Gauss-point indicator of r <= a; both converge
+  slowly and the error at D must be measured (not assumed) on 3+ grids. Conforming-mesh run on the desktop reference.
+tests: [stress from a discontinuous thermal strain (die hot spot analogue), reduced-integration failure (Abaqus CPS4R -52.7 %)]
+inputs:
+  geometry:
+    analytic:
+      quarter_model: true
+      hot_spot: {shape: circle, radius: 1.0, source: "Abaqus input deck nt1xxf8x.inp (via lane L5, retrieved 2026-10-20); RecurDyn validation document"}
+      membrane: {shape: square quarter, size: [10, 10], source: "Abaqus input deck nt1xxf8x.inp (via lane L5)"}
+      point_D: [1.0, 0.0]
+      units: "as in the deck (length unit cancels for plane-stress stresses)"
+      geometry_status: "verified 2026-10-20 by lane L5 from the Abaqus deck; was figure-only in wave 1"
+  materials: {inline: {nafems_t1: {E_GPa: 100, nu: 0.3}}}
+  physics:
+    thermal_strain: {inside_hot_spot: 1.0e-3, outside: 0.0, note: "Altair form: CTE 1e-5 /C inside, 0 outside, hot spot at 100 C"}
+    mechanics:
+      bcs:
+        - {selection: "edge x = 0", type: fixed, components: [ux]}
+        - {selection: "edge y = 0", type: fixed, components: [uy]}
+expected:
+  - {quantity: sigma_yy_MPa, probe: "D = (1, 0), outside the hot spot", value: 50.0, unit: MPa, tolerance: {rel: 1.5e-2, after: "refinement"},
+     note: "NAFEMS target = infinite-plate value; the exact answer for the 10 x 10 quarter is about 0.9 % higher (below), so 1.5 % is the benchmark band"}
+  - {form: closed_form_finite, quantity: sigma_yy_MPa, probe: "D, free disk R = 10 (inscribed circle of the quarter square)", value: 50.5, unit: MPa,
+     script: "validation/expected/tier_b.py t1() free_disk_R10", note: "E e* (R^2 + a^2) / (2 R^2); the square lies between 50.0 and 50.5"}
+  - {form: reference_fe, quantity: sigma_yy_Pa, probe: D, value: 50447531.78, unit: Pa, tolerance: {rel: 1.0e-2},
+     ref: {file: T1-skfem.json, path: results.convergence.t2.sigma_yy_D_Pa, field: f_ext},
+     note: "lane L5, P2 triangles plane stress, Richardson (finest 50.440 MPa), GCI 1.9e-4; gate for the engine. 1e-2 because the box engine cannot conform to the circular hot spot"}
+independent_check:
+  formula: "infinite plane-stress plate, circular eigenstrain inclusion (same material): sigma_tt(r = a+) = E e* / 2 = 50.0 MPa; inside sigma = -50 MPa equibiaxial"
+  script: "validation/expected/tier_b.py t1()"
+  value_MPa: 50.0
+  reading: "The target equals the infinite-plate hoop stress just outside the hot spot on y = 0, so D is at (a+, 0) and the membrane is large enough for edge effects to be below the quoted precision (inference, L4 2026-10-20)."
+reference_results:
+  - {solver: "Abaqus", CPS3: 54.25, CPS4: 50.94, CPS4I: 46.29, CPS4R: 23.65, CPS6: 54.46, CPS6M: 54.25, CPS8: 51.53, CPS8R: 44.06, unit: MPa}
+  - {solver: "OptiStruct Quad4", value_MPa: 45.51, note: "2021 page; its normalized value 1.0987 is target / result"}
+  - {solver: "RecurDyn Shell4", value_MPa: 50.74}
+provenance:
+  target: "NAFEMS TNSB Rev. 3 (1990), via Abaqus T1, Altair OS-V 0100, RecurDyn validation document"
+  urls:
+    - {url: "https://abaqus-docs.mit.edu/2017/English/SIMACAEBMKRefMap/simabmk-c-t1.htm", retrieved: 2026-10-20}
+    - {url: "https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/nafems_test_problem_t1_r.htm", retrieved: 2026-10-20}
+    - {url: "https://functionbay.com/documentation/onlinehelp/Documents/Validation/Validation_NAFEMS.pdf", retrieved: 2026-10-20}
+    - {url: "https://abaqus-docs.mit.edu/2017/English/SIMAINPRefResources/nt1xxf8x.inp", retrieved: 2026-10-20, note: "fetched by lane L5"}
+missing:
+  - "Membrane thickness (does not enter plane-stress stresses)."
+assumptions:
+  - "Hot spot circular with r = 1.0 (RecurDyn text and the Abaqus deck agree)."

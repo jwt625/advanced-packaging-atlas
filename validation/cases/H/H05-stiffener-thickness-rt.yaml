@@ -1,0 +1,112 @@
+schema: ap-sim-val/0
+id: H/H05-stiffener-thickness-rt
+tier: H
+title: RT warpage decreases with lid / stiffener thickness
+status: unvalidated
+physics:
+- thermo_elastic
+strength: moderate
+scope_package_classes:
+- si_interposer_2p5d (estc60143.2024.10712129, ectc51906.2022.00108, ectc.2011.5898527 sim)
+applies_to:
+- si_interposer_peers/xilinx_tsv_lid (lid thickness 1.0 / 1.5 mm)
+- cowos_s/warpage_corner_stress (stiffener thickness)
+rule:
+  type: monotonic
+  expr: w_RT decreasing in lid / stiffener thickness per series
+  strength: moderate
+fails_if: w_RT increases by more than 5 um when lid / stiffener thickness increases (5 um covers the 1 um 0.7 / 1 mm pair of 00108)
+n_papers: 3
+support:
+- metric_id: estc60143.2024.10712129-i-m4
+  value: 565
+  unit: um
+  parameter: package warpage at 25 C
+  variant: stiffener t=1.0 mm, w=18.5 mm
+  condition: 25 C (temperature sequence 25, 260, 40 C as in legend)
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 15
+- metric_id: estc60143.2024.10712129-i-m10
+  value: 355
+  unit: um
+  parameter: package warpage at 25 C
+  variant: stiffener t=2.0 mm, w=18.5 mm
+  condition: 25 C (temperature sequence 25, 260, 40 C as in legend)
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 15
+- metric_id: ectc51906.2022.00108-a-m1
+  value: 273
+  unit: um
+  parameter: package warpage (RT)
+  variant: Stiff A 0.7 mm
+  condition: room temperature
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 5
+- metric_id: ectc51906.2022.00108-a-m3
+  value: 272
+  unit: um
+  parameter: package warpage (RT)
+  variant: Stiff A 1 mm
+  condition: room temperature
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.3 Fig. 4; p.4 Fig. 5
+- metric_id: ectc51906.2022.00108-a-m5
+  value: 206
+  unit: um
+  parameter: package warpage (RT)
+  variant: Stiff A 3 mm
+  condition: room temperature
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 5
+- metric_id: ectc51906.2022.00108-a-m11
+  value: 294
+  unit: um
+  parameter: package warpage (RT)
+  variant: Stiff C 1 mm
+  condition: room temperature
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.3 Fig. 4; p.4 Fig. 5
+- metric_id: ectc51906.2022.00108-a-m13
+  value: 267
+  unit: um
+  parameter: package warpage (RT)
+  variant: Stiff C 1.5 mm
+  condition: room temperature
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 5
+- metric_id: ectc.2011.5898527-b-m5
+  value: 205.74
+  unit: um
+  parameter: max package warpage at 25 C
+  variant: COC on pkg after lid attach; pkg 45x45 mm; lid 1.0 mm on top of die
+  condition: stress-free at 150 C UF cure, cooled to 25 C
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.3 Table 3; p.3 Fig. 3
+- metric_id: ectc.2011.5898527-b-m7
+  value: 113.03
+  unit: um
+  parameter: max package warpage at 25 C
+  variant: COC on pkg after lid attach; pkg 45x45 mm; lid 1.5 mm on top of die
+  condition: stress-free at 150 C UF cure, cooled to 25 C
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.3 Table 3; p.3 Fig. 3
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+notes:
+- 'estc60143 w = 18.5 mm: t 1.0 -> 2.0 mm, 565 -> 355 um; 00108 Stiff A 0.7 / 1 / 3 mm: 273 / 272 / 206 um (0.7 vs 1 mm equal within reading);
+  Stiff C 1 / 1.5 mm: 294 / 267 um; Xilinx lid 1.0 -> 1.5 mm (45 mm pkg, sim): 205.74 -> 113.03 um.'
+- Rule is non-increasing (the 00108 0.7 / 1 mm pair differs by 1 um).
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

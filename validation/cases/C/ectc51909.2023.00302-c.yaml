@@ -1,0 +1,38 @@
+schema: ap-sim-val/0
+id: C/ectc51909.2023.00302-c
+tier: C
+title: Georgia Tech reconstituted-SiO2 chiplet tier - Ansys steady thermal, EMC vs SiO2 vs SiO2 + Cu encapsulation
+status: unvalidated
+physics: [thermal_stationary]
+gate: "E1 thermal 3 (small model, cheap); inputs largely inferred"
+source: {paper_id: ectc51909.2023.00302, tv_id: ectc51909.2023.00302-c}
+inputs:
+  sim_case: null    # no L3 case; self-contained box model below (all positions template, see assumptions)
+  geometry:
+    symmetry: none
+    note: "Table I gives chip 150 x 150 x 30 um, SiO2 12 um (Fig. 2(b) caption: 22 um for the full-oxide case), Cu 30 um, k SiO2 1.1, Cu 380, EMC 0.6 W/mK, h 500 W/m2K. Chiplet spacing, tier footprint, carrier and which faces carry h are not stated."
+    template_layout:
+      chiplets: {count: 4, array: [2, 2], size_um: [150, 150, 30], pitch_um: N/A, material: silicon}
+      encapsulant: {variants: {emc: "EMC around and over chiplets", sio2: "SiO2 22 um (Fig. 2(b))", sio2_cu: "SiO2 12 um + Cu 30 um backside spreader plated across all chiplets"}}
+  physics:
+    thermal:
+      sources: [{parts: "chiplet_1", power_density_W_mm2: 1.0, note: "1 W/mm2 on one chiplet = 22.5 mW (150 x 150 um)"}]
+      bcs: [{selection: "N/A (faces with h not stated)", type: htc, h_W_m2K: 500, T_inf_C: N/A}]
+targets:
+  # ambient not stated: compare temperature spans (max - min across the tier), which do not depend on T_inf in a linear model
+  - {metric_id: ectc51909.2023.00302-c-m1, variant: emc,     quantity: Tmax_C, value: 43.026, basis: simulated, locator: "p.2 Fig. 2(a)"}
+  - {metric_id: ectc51909.2023.00302-c-m2, variant: emc,     quantity: Tmin_C, value: 35.744, basis: simulated, locator: "p.2 Fig. 2(a)"}
+  - {metric_id: ectc51909.2023.00302-c-m3, variant: sio2,    quantity: Tmax_C, value: 40.776, basis: simulated, locator: "p.2 Fig. 2(b)"}
+  - {metric_id: ectc51909.2023.00302-c-m4, variant: sio2,    quantity: Tmin_C, value: 35.201, basis: simulated, locator: "p.2 Fig. 2(b)"}
+  - {metric_id: ectc51909.2023.00302-c-m5, variant: sio2_cu, quantity: Tmax_C, value: 37.695, basis: simulated, locator: "p.2 Fig. 2(c)"}
+  - {metric_id: ectc51909.2023.00302-c-m6, variant: sio2_cu, quantity: Tmin_C, value: 36.421, basis: simulated, locator: "p.2 Fig. 2(c)"}
+comparisons:
+  - {quantity: span_K, variant: emc,     value: 7.282, from: [ectc51909.2023.00302-c-m1, ectc51909.2023.00302-c-m2], tolerance: {rel: 0.25}}
+  - {quantity: span_K, variant: sio2,    value: 5.575, from: [ectc51909.2023.00302-c-m3, ectc51909.2023.00302-c-m4], tolerance: {rel: 0.25}}
+  - {quantity: span_K, variant: sio2_cu, value: 1.274, from: [ectc51909.2023.00302-c-m5, ectc51909.2023.00302-c-m6], tolerance: {rel: 0.25}}
+  - {rule: "rank order of Tmax: emc > sio2 > sio2_cu; rank order of span: emc > sio2 > sio2_cu", status: "target"}
+missing:
+  - "ambient / reference temperature; chiplet pitch; tier footprint and carrier; faces with h; whether the SiO2 thickness is 12 um (Table I) or 22 um (Fig. 2(b) caption) in the full-oxide case"
+assumptions:
+  - "Tolerance 25 % on spans (wider than tier C thermal 5 %) because the layout is inferred; rank order is the primary comparison."
+  - "Temperatures in the DB carry 3 decimals from the figure legends; text p.3 Sec. III.A gives 35.7-43.0, 35.2-40.7, 36.4-37.6 C."

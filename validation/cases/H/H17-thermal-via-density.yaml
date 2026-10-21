@@ -1,0 +1,108 @@
+schema: ap-sim-val/0
+id: H/H17-thermal-via-density
+tier: H
+title: 'More conductive via metal lowers thermal resistance / peak temperature [weak: 2 papers]'
+status: unvalidated
+physics:
+- thermal_stationary
+strength: weak
+scope_package_classes:
+- embedded_die_substrate (ectc51846.2026.00117, sim)
+- glass_interposer (tcpmt.2025.3533388, measured); one paper each
+applies_to:
+- glass_core_substrate/warpage_vs_organic (thermal variant, future)
+- embedded-die substrate (no canonical sim yet)
+rule:
+  type: monotonic
+  expr: R decreasing in via Cu volume (embedded die); Tmax increasing in thermal-TGV pitch (glass interposer)
+  strength: weak
+fails_if: R or Tmax increases with via Cu volume / decreases with via pitch in either series
+n_papers: 2
+support:
+- metric_id: ectc51846.2026.00117-d-m5
+  value: 30
+  unit: C/W
+  parameter: thermal resistance
+  variant: without thermal via
+  basis: simulated
+  package_class: embedded_die_substrate
+  locator: p.4 Fig. 10
+- metric_id: ectc51846.2026.00117-d-m1
+  value: 11
+  unit: C/W
+  parameter: thermal resistance
+  variant: slot via; Cu volume 0.01 mm3
+  basis: simulated
+  package_class: embedded_die_substrate
+  locator: p.4 Fig. 10
+- metric_id: ectc51846.2026.00117-d-m2
+  value: 2.5
+  unit: C/W
+  parameter: thermal resistance
+  variant: slot via; Cu volume 0.2 mm3
+  basis: simulated
+  package_class: embedded_die_substrate
+  locator: p.4 Fig. 10
+- metric_id: ectc51846.2026.00117-d-m3
+  value: 14
+  unit: C/W
+  parameter: thermal resistance
+  variant: multi-circle via; Cu volume 0.01 mm3
+  basis: simulated
+  package_class: embedded_die_substrate
+  locator: p.4 Fig. 10
+- metric_id: ectc51846.2026.00117-d-m4
+  value: 3
+  unit: C/W
+  parameter: thermal resistance
+  variant: multi-circle via; Cu volume 0.2 mm3
+  basis: simulated
+  package_class: embedded_die_substrate
+  locator: p.4 Fig. 10
+- metric_id: tcpmt.2025.3533388-a-m1
+  value: 41
+  unit: C
+  parameter: maximum chip surface temperature
+  variant: thermal TGV pitch 100 um
+  condition: heater loopback at chip corner, 0.5 W; Cu block on TEC at 20 C; IR microscopy (FLIR X6540sc)
+  basis: measured
+  package_class: glass_interposer
+  locator: p.5 Fig. 6(a)
+- metric_id: tcpmt.2025.3533388-a-m2
+  value: 41.3
+  unit: C
+  parameter: maximum chip surface temperature
+  variant: thermal TGV pitch 200 um
+  condition: Pin 0.5 W; Cu block on TEC at 20 C; IR microscopy (FLIR X6540sc)
+  basis: measured
+  package_class: glass_interposer
+  locator: p.5 Fig. 5
+- metric_id: tcpmt.2025.3533388-a-m3
+  value: 43.6
+  unit: C
+  parameter: maximum chip surface temperature
+  variant: thermal TGV pitch 300 um
+  condition: Pin 0.5 W; Cu block on TEC at 20 C; IR microscopy (FLIR X6540sc)
+  basis: measured
+  package_class: glass_interposer
+  locator: p.5 Fig. 5
+- metric_id: tcpmt.2025.3533388-a-m4
+  value: 43.9
+  unit: C
+  parameter: maximum chip surface temperature
+  variant: thermal TGV pitch 400 um
+  condition: Pin 0.5 W; Cu block on TEC at 20 C; IR microscopy (FLIR X6540sc)
+  basis: measured
+  package_class: glass_interposer
+  locator: p.5 Fig. 5
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+notes:
+- 'Embedded-die substrate (sim): no via 30 C/W; slot via 11 -> 2.5 C/W and multi-circle 14 -> 3 C/W for Cu 0.01 -> 0.2 mm3. Glass interposer (measured
+  IR): 41.0 / 41.3 / 43.6 / 43.9 C at TGV pitch 100 / 200 / 300 / 400 um, 0.5 W.'
+- Applies to sims with resolved or homogenized thermal-via arrays; canonical glass_core case is warpage-first (thermal variant to be added).
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

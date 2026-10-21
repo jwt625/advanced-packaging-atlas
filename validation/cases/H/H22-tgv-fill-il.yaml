@@ -1,0 +1,79 @@
+schema: ap-sim-val/0
+id: H/H22-tgv-fill-il
+tier: H
+title: 'TGV transition loss ranks fully filled < half filled < conformal [weak: 2 papers]'
+status: unvalidated
+physics:
+- em
+strength: weak
+scope_package_classes:
+- glass_core_substrate / glass_interposer TGV (DNP, one source)
+applies_to:
+- glass_core_substrate/warpage_vs_organic (EM variant, future)
+rule:
+  type: rank_order
+  expr: IL(filled) < IL(half filled) < IL(conformal) at 30 GHz
+  strength: weak
+fails_if: IL(filled) >= IL(half filled) or IL(half filled) >= IL(conformal)
+n_papers: 2
+support:
+- ei_id: ectc51529.2024.00093-d-e1
+  insertion_loss_db: 0.23
+  il_freq_ghz: 30
+  line_um: 30
+  channel_type: glass
+  basis: measured
+  package_class: glass_core_substrate
+  locator: p.3 Sec. II.B; p.4 Fig. 8; p.1 Abstract
+- ei_id: ectc51529.2024.00093-e-e1
+  insertion_loss_db: 0.34
+  il_freq_ghz: 30
+  line_um: 30
+  channel_type: glass
+  basis: measured
+  package_class: glass_core_substrate
+  locator: p.3 Sec. II.B; p.4 Fig. 8; p.1 Abstract
+- ei_id: ectc51529.2024.00093-f-e1
+  insertion_loss_db: 0.48
+  il_freq_ghz: 30
+  line_um: 30
+  channel_type: glass
+  basis: measured
+  package_class: glass_core_substrate
+  locator: p.3 Sec. II.B; p.4 Fig. 8; p.1 Abstract
+- ei_id: 001c.129747-j-e1
+  insertion_loss_db: 0.23
+  il_freq_ghz: 30
+  line_um: 30
+  space_um: 15
+  channel_type: glass
+  basis: measured
+  package_class: glass_interposer
+  locator: p.5 Sec. III.B; p.6 Fig. 19(a); p.6 Table 1
+- ei_id: 001c.129747-l-e1
+  insertion_loss_db: 0.34
+  il_freq_ghz: 30
+  line_um: 30
+  space_um: 15
+  channel_type: glass
+  basis: measured
+  package_class: glass_interposer
+  locator: p.5 Sec. III.B; p.6 Fig. 21; p.6 Table 1
+- ei_id: 001c.129747-k-e1
+  insertion_loss_db: 0.48
+  il_freq_ghz: 30
+  line_um: 30
+  space_um: 15
+  channel_type: glass
+  basis: measured
+  package_class: glass_interposer
+  locator: p.5 Sec. III.B; p.6 Fig. 19(b); p.6 Table 1
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+notes:
+- '0.23 / 0.34 / 0.48 dB at 30 GHz in both papers: same organization (DNP), identical values, so one independent source.'
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

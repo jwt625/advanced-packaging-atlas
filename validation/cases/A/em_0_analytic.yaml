@@ -1,0 +1,44 @@
+schema: ap-sim-val/0
+id: A/em_0_analytic
+tier: A
+title: EM-0 analytic set - TEM / quasi-TEM line closed forms, waveguide cutoff, structural S-parameter checks
+status: unvalidated
+physics: [em]
+solver_scope: "2D cross-section solver (L7, engine/src/em2d) and the S-parameter post-processor; 3D checks later (E6)"
+cases:
+  - {id: coax_50, geometry: {inner_radius_mm: 1.0, outer_radius_mm: 2.3, er: 1.0}, quantity: Z0_ohm, value: 49.940,
+     formula: "eta0 / (2 pi sqrt(er)) ln(b / a)", tolerance: {rel: 5.0e-3}, script_key: coax_a1mm_b2p3mm_er1}
+  - {id: coax_ptfe, geometry: {inner_radius_mm: 0.455, outer_radius_mm: 1.5, er: 2.1}, quantity: Z0_ohm, value: 49.358,
+     formula: "as coax_50", tolerance: {rel: 5.0e-3}, script_key: coax_a0p455_b1p5_er2p1}
+  - {id: wr90_te10, geometry: {a_mm: 22.86, er: 1.0}, quantity: fc_GHz, value: 6.55714, formula: "c / (2 a sqrt(er))",
+     tolerance: {rel: 1.0e-3}, script_key: wr90_te10, note: "3D port-mode eigen check (E6); 2D: mode solver of a closed rectangle"}
+  - {id: parallel_plate, geometry: {w_um: 100, h_um: 1, er: 4.0}, quantity: Z0_ohm, value: 1.8837, formula: "eta0 h / (w sqrt(er)) (w >> h)",
+     tolerance: {rel: 1.0e-2}, script_key: parallel_plate_w100_h1_er4, note: "use PMC side walls to remove fringing, or w/h >= 100"}
+  - {id: cpw_sapphire_palace, geometry: {w_um: 30, s_um: 18, er: 9.3, substrate: "infinitely thick (quasi-static)"}, quantity: Z0_ohm, value: 55.963,
+     formula: "k = w/(w + 2s), eps_eff = (er + 1)/2, Z0 = (eta0 / 4) / sqrt(eps_eff) K(k')/K(k); the 30 pi form gives 56.002 (6.9e-4 high)", tolerance: {rel: 1.0e-2}, script_key: cpw_w30_s18_er9p3,
+     cross_check: "AWS Palace CPW example quotes 56.02 ohm on sapphire (er 9.3 / 11.5 anisotropic, 500 um), per R3 [S6]; anisotropic finite substrate, so not an exact check"}
+  - {id: stripline_cohn, geometry: {w_mm: 0.5, ground_spacing_b_mm: 1.0, t_um: 0, er: 4.0}, quantity: Z0_ohm, value: 50.216,
+     formula: "k = sech(pi w / (2 b)), Z0 = (eta0 / 4) / sqrt(er) K(k)/K(k') (30 pi form: 6.9e-4 high)", tolerance: {rel: 5.0e-3}, script_key: stripline_w_b_0p5_er4}
+  - {id: microstrip_em1, geometry: {w_um: 34, h_um: 30, t_um: 4, er: 3.406}, quantity: [Z0_ohm, eps_eff], value: [70.583, 2.4703],
+     formula: "Hammerstad-Jensen 1980 with thickness correction", tolerance: {rel: 2.0e-2, note: "closed form accuracy about 1-2 %"},
+     script_key: microstrip_em1_abf, cross_check: "scikit-rf MLine (hammerstadjensen, no dispersion) gives 70.5829 ohm / 2.47031 (L4 run 2026-10-20)",
+     source_geometry: "ectc51846.2026.00389-b (w 34, t 4 um, ABF 30 um); Dk 3.406 = -a-m1 (16.5 GHz, 25 C)"}
+  - {id: microstrip_em1_t0, geometry: {w_um: 34, h_um: 30, t_um: 0, er: 3.406}, quantity: [Z0_ohm, eps_eff], value: [74.637, 2.5581],
+     tolerance: {rel: 2.0e-2}, script_key: microstrip_em1_abf_t0}
+  - {id: alpha_d_homogeneous, geometry: {medium: "homogeneous ABF, Dk 3.412, Df 0.0036 at 77 GHz (-a-m13, -a-m14)"}, quantity: alpha_d_dB_per_mm,
+     value: 0.046606, formula: "pi f sqrt(er) tan_d / c (Np/m) x 8.686 / 1000", tolerance: {rel: 1.0e-3}, script_key: alpha_d_abf_77GHz_homog,
+     note: "TEM line fully in dielectric (stripline / coax); for microstrip it is an upper bound (filling factor < 1)"}
+structural_checks:
+  - {id: passivity, rule: "lossless structure: |S11|^2 + |S21|^2 = 1 to 1e-6; lossy: all singular values of S <= 1", applies: "every EM case"}
+  - {id: reciprocity, rule: "S21 = S12 to 1e-9 relative (passive, isotropic media)"}
+  - {id: coupled_stripline_fext, rule: "homogeneous dielectric coupled stripline: FEXT below -60 dB numerical floor"}
+  - {id: pml_reflection, rule: "uniform line terminated in PML: |S11| < -40 dB, 1-100 GHz; S21 phase vs 2D beta l within 0.5 deg/mm; 4 / 8 / 12 layers", source: "R3 5.2 [inference]"}
+  - {id: clearance, rule: "moving PML / PEC walls out by 2x changes IL < 0.01 dB and XT < 1 dB", source: "R3 5.2 [inference]"}
+  - {id: rlgc_cascade, rule: "2D RLGC(f) cascaded over length l reproduces the 3D S21 within 0.1 dB", source: "R3 5.1 [inference]"}
+provenance:
+  formulas: "R3 section 5.1 (several marked [unverified, textbook]); microstrip H-J cross-checked against scikit-rf 1.x MLine; CPW against the Palace example value"
+  values: "validation/expected/em0.py"
+missing: []
+assumptions:
+  - "eta0 = mu0 c with mu0 = 4 pi 1e-7 (the 2019 SI mu0 differs by about 1e-10 relative)."
+  - "Tolerances are proposals (R3 [inference]); conformal-map forms are exact for their idealized geometry, so the 2D solver gate is limited by the solver, not the formula."

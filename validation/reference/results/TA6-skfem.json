@@ -1,0 +1,97 @@
+{
+ "solver": "scikit-fem (apref)",
+ "versions": {
+  "python": "3.12.11",
+  "scikit-fem": "12.0.2",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pyamg": "5.3.0",
+  "gmsh": "4.15.2",
+  "scikit-rf": "2.2.0"
+ },
+ "case": "TA6",
+ "tier": "A",
+ "expected_source": "validation/expected/tier_a_values.json",
+ "results": {
+  "aniso": {
+   "runs": [
+    {
+     "elem": "q1",
+     "refine": 1,
+     "dof": 392,
+     "mesh": {
+      "nx": 6,
+      "ny": 7,
+      "nz": 6,
+      "elements": 252
+     },
+     "balance_rel": null,
+     "q": {
+      "T_centre_C": 55.0,
+      "max_abs_err_K": 7.105427358e-14
+     }
+    },
+    {
+     "elem": "q2",
+     "refine": 1,
+     "dof": 2535,
+     "mesh": {
+      "nx": 6,
+      "ny": 7,
+      "nz": 6,
+      "elements": 252
+     },
+     "balance_rel": null,
+     "q": {
+      "T_centre_C": 55.0,
+      "max_abs_err_K": 1.634248292e-13
+     }
+    }
+   ],
+   "convergence": {},
+   "expected": {
+    "T_centre_C": 55.0
+   }
+  },
+  "aniso_rot30z": {
+   "runs": [
+    {
+     "elem": "q1",
+     "refine": 1,
+     "dof": 392,
+     "mesh": {
+      "nx": 6,
+      "ny": 7,
+      "nz": 6,
+      "elements": 252
+     },
+     "balance_rel": null,
+     "q": {
+      "T_centre_C": 55.0,
+      "max_abs_err_K": 5.684341886e-14
+     }
+    },
+    {
+     "elem": "q2",
+     "refine": 1,
+     "dof": 2535,
+     "mesh": {
+      "nx": 6,
+      "ny": 7,
+      "nz": 6,
+      "elements": 252
+     },
+     "balance_rel": null,
+     "q": {
+      "T_centre_C": 55.0,
+      "max_abs_err_K": 2.273736754e-13
+     }
+    }
+   ],
+   "convergence": {},
+   "expected": {
+    "T_centre_C": 55.0
+   }
+  }
+ }
+}

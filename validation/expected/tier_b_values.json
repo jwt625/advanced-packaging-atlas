@@ -1,0 +1,40 @@
+{
+ "generator": "validation/expected/tier_b.py",
+ "values": {
+  "T1": {
+   "sigma_inside_Pa": -50000000.0,
+   "sigma_yy_D_outside_Pa": 50000000.0,
+   "note": "independent of nu in plane stress",
+   "free_disk_R10": {
+    "sigma_inside_Pa": -49500000.0,
+    "sigma_yy_D_outside_Pa": 50500000.0
+   }
+  },
+  "T3": {
+   "alpha_m2_s": 1.1035439525791399e-05,
+   "T_C": 36.60311595908435,
+   "heated_end": "x = L (point B)",
+   "zero_end": "x = 0 (point A)"
+  },
+  "T3_half_terms": {
+   "alpha_m2_s": 1.1035439525791399e-05,
+   "T_C": 36.603115959083894,
+   "heated_end": "x = L (point B)",
+   "zero_end": "x = 0 (point A)"
+  },
+  "T4": {
+   "T_E_C": 18.253756537134212,
+   "point_E_m": [
+    0.6,
+    0.2
+   ]
+  },
+  "T4_half_terms": {
+   "T_E_C": 18.253756537134212,
+   "point_E_m": [
+    0.6,
+    0.2
+   ]
+  }
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "solver": "scikit-fem (apref)",
+ "versions": {
+  "python": "3.12.11",
+  "scikit-fem": "12.0.2",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pyamg": "5.3.0",
+  "gmsh": "4.15.2",
+  "scikit-rf": "2.2.0"
+ },
+ "case": "MA8",
+ "tier": "A",
+ "expected_source": "validation/expected/tier_a_values.json",
+ "results": {
+  "aligned": {
+   "runs": [
+    {
+     "elem": "q1",
+     "refine": 1,
+     "dof": 375,
+     "mesh": {
+      "nx": 4,
+      "ny": 4,
+      "nz": 4,
+      "elements": 64
+     },
+     "reaction_rel": 1.872841064e-16,
+     "q": {
+      "eps_xx": 0.0011,
+      "eps_yy": 0.0011,
+      "eps_zz": 0.0016,
+      "eps_yz_tensor": 1.62663806e-18,
+      "max_abs_sigma_Pa": 1.720128447e-07
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 1,
+     "dof": 1275,
+     "mesh": {
+      "nx": 4,
+      "ny": 4,
+      "nz": 4,
+      "elements": 64
+     },
+     "reaction_rel": 4.600726817e-16,
+     "q": {
+      "eps_xx": 0.0011,
+      "eps_yy": 0.0011,
+      "eps_zz": 0.0016,
+      "eps_yz_tensor": -1.727359922e-18,
+      "max_abs_sigma_Pa": 2.817949733e-07
+     }
+    }
+   ],
+   "convergence": {},
+   "expected": {
+    "eps_xx": 0.0011,
+    "eps_yy": 0.0011,
+    "eps_zz": 0.0016
+   }
+  },
+  "rot30x": {
+   "runs": [
+    {
+     "elem": "q1",
+     "refine": 1,
+     "dof": 375,
+     "mesh": {
+      "nx": 4,
+      "ny": 4,
+      "nz": 4,
+      "elements": 64
+     },
+     "reaction_rel": 8.482948063e-17,
+     "q": {
+      "eps_xx": 0.0011,
+      "eps_yy": 0.001225,
+      "eps_zz": 0.001475,
+      "eps_yz_tensor": -0.0002165063509,
+      "max_abs_sigma_Pa": 9.069768174e-08
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 1,
+     "dof": 1275,
+     "mesh": {
+      "nx": 4,
+      "ny": 4,
+      "nz": 4,
+      "elements": 64
+     },
+     "reaction_rel": 3.099243205e-16,
+     "q": {
+      "eps_xx": 0.0011,
+      "eps_yy": 0.001225,
+      "eps_zz": 0.001475,
+      "eps_yz_tensor": -0.0002165063509,
+      "max_abs_sigma_Pa": 2.629289214e-07
+     }
+    }
+   ],
+   "convergence": {},
+   "expected": {
+    "eps_xx": 0.0011,
+    "eps_yy": 0.001225,
+    "eps_zz": 0.001475,
+    "eps_yz_tensor": 0.0002165063509
+   }
+  }
+ }
+}

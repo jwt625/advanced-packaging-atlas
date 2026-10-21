@@ -1,0 +1,55 @@
+schema: ap-sim-val/0
+id: B/nafems-LE10
+tier: B
+title: NAFEMS LE10 thick elliptic plate under uniform normal pressure (3D)
+status: unvalidated
+physics: [elastic]
+box_compatible: false
+geometry_note: "Curved planform (same elliptic annulus as LE1). Desktop reference only; this is also the A3 element bake-off accuracy case, so the engine bake-off must use it through the reference lane or a curved-mesh path. Staircase: not meaningful (edge-point stress)."
+tests: [3D stress at an edge point, coarse hex20 error (Abaqus C3D20 coarse +25 %), A3 element bake-off]
+inputs:
+  geometry:
+    analytic:
+      quarter_model: true
+      planform: "as B/nafems-LE1 (inner ellipse 2000 x 1000 mm, outer 3250 x 2750 mm)"
+      thickness_mm: 600
+      z_range_mm: [-300, 300]
+      point_D_mm: [2000, 0, 300]
+      geometry_status: >-
+        Verified 2026-10-20 by lane L5 from FeenoX nafems-le10.step (inner ellipse 2000 x 1000 mm, outer 3250 x 2750 mm,
+        z -300..300), nafems-le10.geo (groups), nafems-le10.fee (BCs, D = (2000, 0, 300)) and the Abaqus Benchmarks LE10
+        page. Matches the wave-1 inference.
+  materials: {inline: {steel_nafems: {E_GPa: 210, nu: 0.3}}}
+  physics:
+    mechanics:
+      bcs:
+        - {selection: "upper face (z = +300)", type: pressure, value_MPa: 1.0}
+        - {selection: "face DCD'C' (y = 0)", type: fixed, components: [uy]}
+        - {selection: "face ABA'B' (x = 0)", type: fixed, components: [ux]}
+        - {selection: "face BCB'C' (outer curved face)", type: fixed, components: [ux, uy]}
+        - {selection: "line EE' (mid-plane z = 0 of the outer face)", type: fixed, components: [uz]}
+expected:
+  - {quantity: sigma_yy_MPa, probe: "D = (2000, 0, 300) mm", value: -5.38, unit: MPa, tolerance: {rel: 1.0e-2, after: "refinement / Richardson"}}
+  # reference_fe (lane L5 wave 2, verified geometry). Finest values, not Richardson: graded / locally refined levels
+  # are not one h-family (L5). P2 tets and Q2s agree to 5.8e-4; both are within 0.15 % of -5.38 and FeenoX -5.37968.
+  - {form: reference_fe, quantity: sigma_yy_Pa, probe: D, value: -5384662.865, unit: Pa, tolerance: {rel: 3.0e-3},
+     ref: {file: LE10-skfem.json, path: results.tet_p2.convergence.p2.sigma_yy_D_Pa, field: f_fine}, note: "P2 tets, local refinement at D, 114,603 DOF"}
+  - {form: reference_fe, quantity: sigma_yy_Pa, probe: D, value: -5387806.145, unit: Pa, tolerance: {rel: 3.0e-3},
+     ref: {file: LE10-skfem.json, path: [results, hex_graded_1.25, convergence, q2s, sigma_yy_D_Pa], field: f_fine}, note: "Q2s mapped hex, two-sided grading 1.25, level 5, 66,399 DOF"}
+reference_results:
+  - {solver: "FeenoX", value_MPa: -5.37968}
+  - {solver: "Abaqus C3D20", coarse_MPa: -6.72, fine_MPa: -5.64}
+  - {solver: "Abaqus C3D20R", coarse_MPa: -7.93, fine_MPa: -5.53}
+  - {solver: "Abaqus C3D10", coarse_MPa: -5.44, fine_MPa: -5.77}
+  - {solver: "scikit-fem (lane L5, wave 1)", q2s_uniform_finest_MPa: -5.4423, note: "uniform mesh plateau; superseded by the graded / local-refinement runs below"}
+provenance:
+  target: "NAFEMS TNSB Rev. 3 (1990), via Abaqus Benchmarks Manual LE10 and FeenoX (-5.37968 MPa)"
+  urls:
+    - {url: "https://abaqus-docs.mit.edu/2017/English/SIMACAEBMKRefMap/simabmk-c-le10.htm", retrieved: 2026-10-20}
+    - {url: "https://www.seamplex.com/feenox/examples/mechanical.html", retrieved: 2026-10-20}
+    - {url: "https://raw.githubusercontent.com/seamplex/feenox/main/examples/nafems-le10.geo", retrieved: 2026-10-20, note: "loads nafems-le10.step; no coordinates in the .geo"}
+    - {url: "https://raw.githubusercontent.com/seamplex/feenox/main/examples/nafems-le10.step", retrieved: 2026-10-20, note: "fetched by lane L5"}
+    - {url: "https://raw.githubusercontent.com/seamplex/feenox/main/examples/nafems-le10.fee", retrieved: 2026-10-20, note: "fetched by lane L5"}
+missing: []
+assumptions:
+  - "Abaqus lists the target as 5.38 MPa and its results as negative values; the stress at D is compressive (-5.38 MPa), consistent with FeenoX."

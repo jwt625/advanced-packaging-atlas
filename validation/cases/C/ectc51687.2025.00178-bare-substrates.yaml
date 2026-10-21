@@ -1,0 +1,40 @@
+schema: ap-sim-val/0
+id: C/ectc51687.2025.00178-bare-substrates
+tier: C
+title: Shinko glass-core paper - bare 2-2-2 build-up substrates (organic and glass core), RT and reflow warpage
+status: untestable
+untestable_reason: >-
+  The sign and magnitude are set by a top / bottom asymmetry of the build-up stack that the paper does not disclose.
+  The modelled 2-2-2 stacks are mirror-symmetric except a 6 % (organic) or 10 % (glass) pad / signal Cu-fraction
+  difference. Engine results are -7.6 / -7.3 um (organic, 25 / 30 C) and -4.5 um (glass, 25 C), against +122, +166 and
+  +97 um. The engine was verified against CLT to 0.05 % (lane L9), so the mismatch is the input, not the solver.
+  The paper's model is visibly not mirror-symmetric (Fig. 5(a), p.3: a central top-face region of different colour
+  and scattered pads), but that asymmetry is not described. Text p.2 Sec. II.B gives only "2-2-2", 65 mm and
+  stress-free 180 C.
+activation: >-
+  Testable once the asymmetry is an explicit, sourced input: solder-resist opening area over the die region and the
+  per-side Cu residual. These need their own provenance. Template knobs may give sensitivity bounds only, never a
+  value chosen to hit the sign (L9 proposal to L3).
+physics: [thermo_elastic]
+source: {paper_id: ectc51687.2025.00178, tv_ids: [ectc51687.2025.00178-b, ectc51687.2025.00178-c, ectc51687.2025.00178-d]}
+inputs:
+  sim_cases: [fcbga_organic/substrate_warpage_bare, glass_core_substrate/warpage_vs_organic (study s3 / s3h)]
+targets:   # recorded, not gated while status = untestable
+  - {metric_id: ectc51687.2025.00178-c-m1, quantity: warpage_um, value: 122, T_C: 25, basis: simulated, locator: "p.3 Fig. 4", note: "organic core; stated stress-free 180 C"}
+  - {metric_id: ectc51687.2025.00178-c-m2, quantity: warpage_um, value: -47, T_C: 265, basis: simulated, locator: "p.3 Fig. 4"}
+  - {metric_id: ectc51687.2025.00178-b-m4, quantity: warpage_um, value: 166, T_C: 30, basis: measured, locator: "p.3 Fig. 7", note: "DIC, top side view, + convex"}
+  - {metric_id: ectc51687.2025.00178-b-m5, quantity: warpage_um, value: -68, T_C: 260, basis: measured, locator: "p.3 Fig. 7"}
+  - {metric_id: ectc51687.2025.00178-d-m1, quantity: warpage_um, value: 97, T_C: 25, basis: simulated, locator: "p.3 Fig. 4", note: "glass core 1 mm; stated stress-free 180 C"}
+  - {metric_id: ectc51687.2025.00178-d-m2, quantity: warpage_um, value: -31, T_C: 265, basis: simulated, locator: "p.3 Fig. 4"}
+diagnostics:
+  implied_tsf: >-
+    validation/expected/implied_tsf.py: paper FEM pairs imply 198 C (organic) and 207 C (glass) against the stated
+    180 C, and the measured DIC pair implies 193 C. So even the paper's own model departs from a linear single-Tsf
+    model by +18 to +27 C, which is the reference spread for this diagnostic on that paper's
+    non-linear-material models.
+tier_h_decision: >-
+  Not kept as a tier-H direction. The RT-convex / HT-concave pattern of a bare substrate comes from one paper, and in a
+  physically symmetric stack it has no driver without the undisclosed asymmetry. A trend rule would carry no
+  information the model can test.
+assumptions: []
+missing: ["top / bottom stack asymmetry (SR opening, per-side Cu residual)", "build-up and core material table (no material rows in the DB)"]

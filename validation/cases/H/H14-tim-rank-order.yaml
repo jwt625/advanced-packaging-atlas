@@ -1,0 +1,97 @@
+schema: ap-sim-val/0
+id: H/H14-tim-rank-order
+tier: H
+title: TIM rank order is not set by bulk k alone across TIM families
+status: unvalidated
+physics:
+- thermal_stationary
+strength: moderate
+scope_package_classes:
+- organic_rdl_interposer (CoWoS-R, InFO_oS)
+applies_to:
+- cowos_r/thermal_rjc
+- info_os/theta_jc_tim
+rule:
+  type: rank_order
+  expr: 'CoWoS-R: R(indium) < R(LM gel) < R(graphite film); InFO_oS: R(film 25/30) < R(gel 6) <= R(gel 3.2)'
+  strength: moderate
+fails_if: 'in a model with TIM interface resistance: R(indium) >= R(LM gel) or R(LM gel) >= R(graphite) (CoWoS-R), or R(film) >= R(gel 6) (InFO_oS).
+  A bulk-k-only TIM model is expected to invert graphite vs LM gel and is not gated'
+n_papers: 2
+support:
+- metric_id: ectc51687.2025.00085-a-m1
+  value: 0.014
+  unit: C/W
+  parameter: package Rjc
+  condition: max SoC Tj 105 C; SoC heaters only; S-type liquid cold plate
+  basis: measured
+  package_class: organic_rdl_interposer
+  locator: p.3 Table 2; p.3 Sec. IV.B
+- metric_id: ectc51687.2025.00085-b-m1
+  value: 0.012
+  unit: C/W
+  parameter: package Rjc
+  condition: max SoC Tj 105 C; SoC heaters only; S-type liquid cold plate
+  basis: measured
+  package_class: organic_rdl_interposer
+  locator: p.3 Table 2; p.3 Sec. IV.B
+- metric_id: ectc51687.2025.00085-c-m1
+  value: 0.0108
+  unit: C/W
+  parameter: package Rjc
+  condition: max SoC Tj 105 C; SoC heaters only; S-type liquid cold plate
+  basis: measured
+  package_class: organic_rdl_interposer
+  locator: p.3 Table 2; p.3 Sec. IV.B
+- metric_id: itherm45881.2020.9190542-a-m9
+  value: 0.036
+  unit: C/W
+  parameter: ThetaJC
+  variant: TIM A gel 3.2 W/mK, BLT 60 um (Test, Table 5)
+  condition: JEDEC ThetaJC = (Tj - Tc)/(PH1 + PH2); Tj max of die1/die2; Tc lid center; cold plate; silica-based thermal grease to cold plate;
+    TTV on thermal test PCB
+  basis: measured
+  package_class: organic_rdl_interposer
+  locator: p.4 Table 4; p.4 Table 5; p.4 Fig. 9; p.4 Fig. 10
+- metric_id: itherm45881.2020.9190542-a-m10
+  value: 0.034
+  unit: C/W
+  parameter: ThetaJC
+  variant: TIM B gel 6.0 W/mK, BLT 60 um (Test, Table 5)
+  condition: JEDEC ThetaJC = (Tj - Tc)/(PH1 + PH2); Tj max of die1/die2; Tc lid center; cold plate; silica-based thermal grease to cold plate;
+    TTV on thermal test PCB
+  basis: measured
+  package_class: organic_rdl_interposer
+  locator: p.4 Table 4; p.4 Table 5; p.4 Fig. 9; p.4 Fig. 10
+- metric_id: itherm45881.2020.9190542-a-m11
+  value: 0.021
+  unit: C/W
+  parameter: ThetaJC
+  variant: TIM C film 25.0 W/mK, BLT 60 um (Test, Table 5)
+  condition: JEDEC ThetaJC = (Tj - Tc)/(PH1 + PH2); Tj max of die1/die2; Tc lid center; cold plate; silica-based thermal grease to cold plate;
+    TTV on thermal test PCB
+  basis: measured
+  package_class: organic_rdl_interposer
+  locator: p.4 Table 4; p.4 Table 5; p.4 Fig. 9; p.4 Fig. 10
+- metric_id: itherm45881.2020.9190542-a-m12
+  value: 0.021
+  unit: C/W
+  parameter: ThetaJC
+  variant: TIM D film 30.0 W/mK, BLT 60 um (Test, Table 5)
+  condition: JEDEC ThetaJC = (Tj - Tc)/(PH1 + PH2); Tj max of die1/die2; Tc lid center; cold plate; silica-based thermal grease to cold plate;
+    TTV on thermal test PCB
+  basis: measured
+  package_class: organic_rdl_interposer
+  locator: p.4 Table 4; p.4 Table 5; p.4 Fig. 9; p.4 Fig. 10
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+notes:
+- Graphite film (bulk k > 20 W/mK, thickness direction) ranks worse than liquid-metal gel (> 6 W/mK) in CoWoS-R; a model with bulk k only would
+  invert that pair. Expected failure mode of a k-only TIM model, recorded so it is not mistaken for a solver bug.
+- InFO_oS gel 3.2 -> 6.0 W/mK changes ThetaJC by 0.002-0.003 C/W, about 4-6x less than a 1D TIM term predicts (see C/itherm45881.2020.9190542-a-sim
+  observations).
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

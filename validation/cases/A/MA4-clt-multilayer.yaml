@@ -1,0 +1,77 @@
+schema: ap-sim-val/0
+id: A/MA4-clt-multilayer
+tier: A
+title: Classical lamination theory, free N-layer isotropic plate under uniform dT (2-layer and package-like 3-layer)
+status: unvalidated
+physics: [thermo_elastic]
+box_compatible: true
+tests: [core warpage gate, multi-layer plate interior, thin compliant layer (50 um underfill), symmetry vs full model, edge zone]
+variants:
+  a:
+    note: "si 0.5 mm (bottom) + cu 0.5 mm (top), both nu = 0.28: reduces exactly to MA3 with Q = E / (1 - nu)"
+    boxes:
+      - {id: si, kind: die, material: "tierA:si_nu028", x_mm: 0, y_mm: 0, w_mm: 20, d_mm: 20, z_um: 0,   h_um: 500}
+      - {id: cu, kind: lid, material: "tierA:cu_nu028", x_mm: 0, y_mm: 0, w_mm: 20, d_mm: 20, z_um: 500, h_um: 500}
+    stress_free_C: 125
+    temperature_C: 25
+  b:
+    note: "package-like: sub 1.0 mm / uf 0.05 mm / si_iso 0.775 mm (bottom to top), 50 x 50 mm, stress-free 150 C, cooled to 25 C"
+    boxes:
+      - {id: sub, kind: substrate, material: "tierA:sub",    x_mm: 0, y_mm: 0, w_mm: 50, d_mm: 50, z_um: 0,    h_um: 1000}
+      - {id: uf,  kind: underfill, material: "tierA:uf",     x_mm: 0, y_mm: 0, w_mm: 50, d_mm: 50, z_um: 1000, h_um: 50}
+      - {id: si,  kind: die,       material: "tierA:si_iso", x_mm: 0, y_mm: 0, w_mm: 50, d_mm: 50, z_um: 1050, h_um: 775}
+    stress_free_C: 150
+    temperature_C: 25
+inputs:
+  materials: {set: _materials_tier_a.yaml}
+  geometry: {symmetry: [none, quarter], boxes: "per variant"}
+  mesh: {max_xy_mm: 1.0, min_cells_per_layer: [1, 2, 4], grading: 1.3}
+  physics:
+    mechanics: {element: [q2s, q1im], stress_free_C: {default: "per variant"}, supports: "rigid_motion (none) | symmetry (quarter)"}
+  studies: [{id: s1, type: thermo_elastic, temperature: {uniform_C: ["per variant"]}}]
+expected:
+  - {variant: a, quantity: kappa_1_m, definition: "signed CLT curvature kappa = -d2w/dx2 of the bottom surface fitted over the central 50 % (z up; > 0 = dome, centre higher)",
+     value: -2.15623, unit: 1/m, tolerance: {rel: 1.0e-3}, script_key: MA4.a.kappa_1_m}
+  - {variant: a, quantity: sigma_xx_Pa, probe: "plate centre, Si bottom / Si top / Cu bottom / Cu top",
+     value: [6.73822e7, -1.27277e8, 1.12304e8, -5.24084e7], unit: Pa, tolerance: {rel: 1.0e-2},
+     script_key: [MA4.a.si_bottom_Pa, MA4.a.si_top_Pa, MA4.a.cu_bottom_Pa, MA4.a.cu_top_Pa]}
+  - {variant: b, quantity: kappa_1_m, value: 1.19278, unit: 1/m, tolerance: {rel: 1.0e-3}, script_key: MA4.b.kappa_1_m}
+  - {variant: b, quantity: eps0_bottom, definition: "in-plane strain of the bottom face at the centre", value: -2.13735e-3, unit: "1",
+     tolerance: {rel: 1.0e-3}, script_key: MA4.b.eps0_bottom}
+  - {variant: b, quantity: sag_edge_m, definition: "w(centre) - w(edge midpoint) over the 50 mm span, kappa L^2 / 8 (CLT, interior curvature extended to the edge)",
+     value: 3.72744e-4, unit: m, tolerance: {rel: 2.0e-2}, script_key: MA4.b.sag_edge50_m}
+  - {variant: b, quantity: sag_diag_m, definition: "w(centre) - w(corner) over the 70.71 mm diagonal", value: 7.45489e-4, unit: m,
+     tolerance: {rel: 2.0e-2}, script_key: MA4.b.sag_diag_m}
+  - {variant: b, quantity: sigma_xx_Pa, probe: "plate centre, sub bottom / sub top / uf bottom / uf top / si bottom / si top",
+     value: [-9.36965e6, 3.32297e7, 3.45284e7, 3.52624e7, -1.01098e8, 6.58084e7], unit: Pa, tolerance: {rel: 1.0e-2},
+     script_key: [MA4.b.sub_bottom_Pa, MA4.b.sub_top_Pa, MA4.b.uf_bottom_Pa, MA4.b.uf_top_Pa, MA4.b.si_bottom_Pa, MA4.b.si_top_Pa]}
+  # reference_fe (lane L5, scikit-fem Q2s, Richardson-extrapolated; validation/reference/results/MA4b-skfem.json). The 3D
+  # finite plate differs physically from the Kirchhoff interior solution (O(h/L) finite-plate and edge-zone effects):
+  # kappa -6.4e-5, sag -6.7e-4. Engine gates tighter than 1e-3 use these, not the closed form.
+  - {variant: b, form: reference_fe, quantity: kappa_1_m, value: 1.192705982, unit: 1/m, tolerance: {rel: 2.0e-4},
+     ref: {file: MA4b-skfem.json, path: results.convergence.q2s.kappa_clt_1_m, field: f_ext}, diff_vs_closed_form: -6.4e-5, gci: 5.9e-6}
+  - {variant: b, form: reference_fe, quantity: sag_edge_m, value: 3.724953309e-4, unit: m, tolerance: {rel: 5.0e-4},
+     ref: {file: MA4b-skfem.json, path: results.convergence.q2s.sag_edge_m, field: f_ext}, diff_vs_closed_form: -6.7e-4, gci: 3.5e-5}
+  - {variant: b, form: reference_fe, quantity: sag_diag_m, value: 7.449861459e-4, unit: m, tolerance: {rel: 5.0e-4},
+     ref: {file: MA4b-skfem.json, path: results.convergence.q2s.sag_diag_m, field: f_ext}, diff_vs_closed_form: -6.7e-4, gci: 5.5e-5}
+  - {variant: b, form: reference_fe, quantity: si_bottom_sigma_xx_Pa, value: -101090958.2, unit: Pa, tolerance: {rel: 5.0e-4},
+     ref: {file: MA4b-skfem.json, path: results.convergence.q2s.si_bottom_Pa, field: f_ext}, diff_vs_closed_form: 7.2e-5}
+  - {variant: b, form: reference_fe, quantity: si_top_sigma_xx_Pa, value: 65804664.78, unit: Pa, tolerance: {rel: 5.0e-4},
+     ref: {file: MA4b-skfem.json, path: results.convergence.q2s.si_top_Pa, field: f_ext}, diff_vs_closed_form: -5.7e-5}
+  - {variant: b, quantity: shape, value: dome, note: "die side convex after cooling: centre higher than edges (z up, die on top)"}
+  - {variant: b, quantity: symmetry_consistency, definition: "quarter vs full model, same mesh density", value: 0, tolerance: {rel: 1.0e-6}}
+formula: >-
+  [A B; B D][eps0; kappa] = [N_T; M_T]; A = sum Q_i t_i, B = sum Q_i (z_i+1^2 - z_i^2)/2, D = sum Q_i (z_i+1^3 - z_i^3)/3,
+  N_T = sum Q_i alpha_i dT t_i, M_T = sum Q_i alpha_i dT (z_i+1^2 - z_i^2)/2, Q_i = E_i/(1 - nu_i),
+  sigma_i(z) = Q_i (eps0 + kappa z - alpha_i dT); z = 0 at the bottom face
+provenance:
+  formula: "classical lamination theory for isotropic layers in an equibiaxial state (exact for the plate interior); R6 section 1.1 MA4"
+  values: "validation/expected/tier_a.py ma4()"
+tolerance_note: >-
+  Kirchhoff interior solution: 3D FE differs within about one total thickness of the free edges, so kappa is fitted
+  over the central 50 %. Sag to the edge uses the interior curvature and therefore carries the edge-zone error
+  (2e-2, assumption). Variant b: sag / thickness = 0.20, so geometric nonlinearity starts to matter (R6 note; MA4c,
+  120 mm, is tier B only).
+missing: []
+assumptions:
+  - "Variant a plate size 20 x 20 mm is a lane choice (R6 gives no size for MA4a); interior result is size independent once L >> h = 1 mm."

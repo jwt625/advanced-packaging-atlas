@@ -1,0 +1,217 @@
+{
+ "solver": "scikit-fem (apref)",
+ "versions": {
+  "python": "3.12.11",
+  "scikit-fem": "12.0.2",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pyamg": "5.3.0",
+  "gmsh": "4.15.2",
+  "scikit-rf": "2.2.0"
+ },
+ "case": "MA2",
+ "tier": "A",
+ "expected_source": "validation/expected/tier_a_values.json",
+ "results": {
+  "uniaxial": {
+   "runs": [
+    {
+     "elem": "q1",
+     "refine": 1,
+     "dof": 81,
+     "mesh": {
+      "nx": 2,
+      "ny": 2,
+      "nz": 2,
+      "elements": 8
+     },
+     "reaction_rel": 0.01333333333,
+     "q": {
+      "sigma_Pa": -187000000.0,
+      "sigma_spread_rel": 3.187414159e-16
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 1,
+     "dof": 243,
+     "mesh": {
+      "nx": 2,
+      "ny": 2,
+      "nz": 2,
+      "elements": 8
+     },
+     "reaction_rel": 0.005333333333,
+     "q": {
+      "sigma_Pa": -187000000.0,
+      "sigma_spread_rel": 1.673392434e-14
+     }
+    }
+   ],
+   "convergence": {},
+   "expected": {
+    "sigma_Pa": -187000000.0
+   }
+  },
+  "biaxial": {
+   "runs": [
+    {
+     "elem": "q1",
+     "refine": 1,
+     "dof": 81,
+     "mesh": {
+      "nx": 2,
+      "ny": 2,
+      "nz": 2,
+      "elements": 8
+     },
+     "reaction_rel": 0.0202020202,
+     "q": {
+      "sigma_Pa": -283333333.3,
+      "sigma_spread_rel": 1.472585342e-15
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 1,
+     "dof": 243,
+     "mesh": {
+      "nx": 2,
+      "ny": 2,
+      "nz": 2,
+      "elements": 8
+     },
+     "reaction_rel": 0.008080808081,
+     "q": {
+      "sigma_Pa": -283333333.3,
+      "sigma_spread_rel": 6.100710701e-15
+     }
+    }
+   ],
+   "convergence": {},
+   "expected": {
+    "sigma_Pa": -283333333.3
+   }
+  },
+  "triaxial": {
+   "runs": [
+    {
+     "elem": "q1",
+     "refine": 1,
+     "dof": 81,
+     "mesh": {
+      "nx": 2,
+      "ny": 2,
+      "nz": 2,
+      "elements": 8
+     },
+     "reaction_rel": 0.04166666667,
+     "q": {
+      "sigma_Pa": -584375000.0,
+      "sigma_spread_rel": 2.039945062e-16
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 1,
+     "dof": 243,
+     "mesh": {
+      "nx": 2,
+      "ny": 2,
+      "nz": 2,
+      "elements": 8
+     },
+     "reaction_rel": 0.01666666667,
+     "q": {
+      "sigma_Pa": -584375000.0,
+      "sigma_spread_rel": 2.039945062e-16
+     }
+    }
+   ],
+   "convergence": {},
+   "expected": {
+    "sigma_Pa": -584375000.0
+   }
+  },
+  "triaxial_nu049": {
+   "runs": [
+    {
+     "elem": "q1",
+     "refine": 1,
+     "dof": 81,
+     "mesh": {
+      "nx": 2,
+      "ny": 2,
+      "nz": 2,
+      "elements": 8
+     },
+     "reaction_rel": 0.04166666667,
+     "q": {
+      "sigma_Pa": -9350000000.0,
+      "sigma_spread_rel": 8.159780247e-16
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 1,
+     "dof": 243,
+     "mesh": {
+      "nx": 2,
+      "ny": 2,
+      "nz": 2,
+      "elements": 8
+     },
+     "reaction_rel": 0.01666666667,
+     "q": {
+      "sigma_Pa": -9350000000.0,
+      "sigma_spread_rel": 6.119835185e-16
+     }
+    }
+   ],
+   "convergence": {},
+   "expected": {
+    "sigma_Pa": -9350000000.0
+   }
+  },
+  "biaxial_nu049": {
+   "runs": [
+    {
+     "elem": "q1",
+     "refine": 1,
+     "dof": 81,
+     "mesh": {
+      "nx": 2,
+      "ny": 2,
+      "nz": 2,
+      "elements": 8
+     },
+     "reaction_rel": 0.001633986928,
+     "q": {
+      "sigma_Pa": -366666666.7,
+      "sigma_spread_rel": 1.391497525e-13
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 1,
+     "dof": 243,
+     "mesh": {
+      "nx": 2,
+      "ny": 2,
+      "nz": 2,
+      "elements": 8
+     },
+     "reaction_rel": 0.0006535947712,
+     "q": {
+      "sigma_Pa": -366666666.7,
+      "sigma_spread_rel": 4.031441428e-14
+     }
+    }
+   ],
+   "convergence": {},
+   "expected": {
+    "sigma_Pa": -366666666.7
+   }
+  }
+ }
+}

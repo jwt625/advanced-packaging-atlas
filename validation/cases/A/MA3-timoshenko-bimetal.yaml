@@ -1,0 +1,39 @@
+schema: ap-sim-val/0
+id: A/MA3-timoshenko-bimetal
+tier: A
+title: Timoshenko bimetal strip, Si 0.5 mm + Cu 0.5 mm, cooled by 100 K
+status: unvalidated
+physics: [thermo_elastic]
+box_compatible: true
+tests: [curvature from layer CTE mismatch, beam vs plate limit, bending with few through-thickness cells]
+inputs:
+  materials: {set: _materials_tier_a.yaml}
+  geometry:
+    symmetry: none
+    boxes:   # layer 1 (bottom) si, layer 2 (top) cu; strip along x
+      - {id: si, kind: die, material: "tierA:si_iso", x_mm: 0, y_mm: 0, w_mm: 10, d_mm: 1, z_um: 0,   h_um: 500}
+      - {id: cu, kind: lid, material: "tierA:cu",     x_mm: 0, y_mm: 0, w_mm: 10, d_mm: 1, z_um: 500, h_um: 500}
+  mesh: {max_xy_mm: 0.25, min_cells_per_layer: 2}
+  physics:
+    mechanics: {element: q2s, stress_free_C: {default: 125}, supports: rigid_motion}
+  studies: [{id: s1, type: thermo_elastic, temperature: {uniform_C: [25]}}]
+expected:
+  - {quantity: abs_kappa_1_m, definition: "|d2w/dx2| from a quadratic fit of w(x) on the mid-plane over the central 50 % of the length",
+     value: 2.15623, unit: 1/m, tolerance: {rel: 1.0e-2}, script_key: MA3.abs_kappa_1_m}
+  - {quantity: kappa_bracket_1_m, definition: "3D strip result must lie in [beam (E), plate (Q)] up to discretisation error",
+     value: [2.15623, 2.15913], unit: 1/m, script_key: [MA3.abs_kappa_1_m, MA3.abs_kappa_plate_Q_1_m]}
+  - {quantity: sag_L10mm_m, definition: "kappa L^2 / 8, centre to ends", value: 2.69529e-5, unit: m, tolerance: {rel: 1.0e-2},
+     script_key: MA3.sag_L10mm_m}
+  - {form: reference_fe, quantity: kappa_1_m, definition: "signed, 3D strip 10 x 1 mm (lane L5 scikit-fem Q2s, extrapolated)", value: -2.157647065,
+     unit: 1/m, tolerance: {rel: 2.0e-4}, ref: {file: MA3-skfem.json, path: results.convergence.q2s.kappa_clt_1_m, field: f_ext},
+     diff_vs_closed_form: -6.6e-4, reason: "3D strip of width 1 mm lies between the beam (E) and plate (Q) limits (XB1)"}
+  - {form: reference_fe, quantity: sag_L10mm_m, value: 2.687673359e-5, unit: m, tolerance: {rel: 5.0e-4},
+     ref: {file: MA3-skfem.json, path: results.convergence.q2s.sag_L10mm_m, field: f_ext}, diff_vs_closed_form: -2.8e-3}
+  - {quantity: concave_side, value: cu, note: "after cooling the higher-CTE layer (top, Cu) is concave: ends higher than the centre (z up)"}
+formula: "kappa = 6 (a2 - a1) dT (1 + m)^2 / (h [3 (1 + m)^2 + (1 + m n)(m^2 + 1/(m n))]), m = t1/t2, n = E1/E2, h = t1 + t2"
+provenance:
+  formula: "S. Timoshenko, J. Opt. Soc. Am. 11, 233 (1925); R6 section 1.1 MA3"
+  values: "validation/expected/tier_a.py ma3()"
+tolerance_note: "Beam formula (uniaxial stress); a 1 mm wide, 1 mm thick strip is neither beam nor plate. The beam-plate bracket is 0.13 %; 1e-2 is an assumption until XB1 (validation/reference) quantifies the width effect."
+missing: []
+assumptions: []

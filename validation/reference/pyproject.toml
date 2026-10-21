@@ -1,0 +1,36 @@
+[project]
+name = "ap-atlas-reference"
+version = "0.1.0"
+description = "Desktop reference solvers (scikit-fem thermal and thermo-elastic, scikit-rf EM utilities) for the advanced-packaging sim harness"
+requires-python = ">=3.12,<3.13"
+license = "GPL-3.0-or-later"
+dependencies = [
+  "numpy",
+  "scipy",
+  "scikit-fem",
+  "pyyaml",
+  "scikit-rf",
+  "gmsh>=4.15.2",
+  "pyamg>=5.3.0",
+  "qdldl>=0.1.9.post1",
+  "ngsolve>=6.2.2608",
+  "pillow>=13.0.0",
+]
+
+[dependency-groups]
+dev = ["ruff", "pytest"]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["B", "E", "F", "I", "UP"]
+ignore = ["E501", "E741"]  # long physics comments; l/I as math symbols
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

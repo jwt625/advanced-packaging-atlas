@@ -1,0 +1,213 @@
+{
+ "solver": "scikit-fem (apref)",
+ "versions": {
+  "python": "3.12.11",
+  "scikit-fem": "12.0.2",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pyamg": "5.3.0",
+  "gmsh": "4.15.2",
+  "scikit-rf": "2.2.0"
+ },
+ "case": "TA3a",
+ "tier": "A",
+ "expected_source": "validation/expected/tier_a_values.json",
+ "results": {
+  "runs": [
+   {
+    "elem": "q1",
+    "refine": 1,
+    "dof": 1323,
+    "mesh": {
+     "nx": 20,
+     "ny": 20,
+     "nz": 2,
+     "elements": 800
+    },
+    "balance_rel": -1.445954467e-13,
+    "q": {
+     "R_total_max_K_W": 1.668521061,
+     "R_total_avg_K_W": 1.524416023,
+     "heat_out_W_full": 10.0
+    }
+   },
+   {
+    "elem": "q1",
+    "refine": 2,
+    "dof": 8405,
+    "mesh": {
+     "nx": 40,
+     "ny": 40,
+     "nz": 4,
+     "elements": 6400
+    },
+    "balance_rel": -6.043165968e-13,
+    "q": {
+     "R_total_max_K_W": 1.667921135,
+     "R_total_avg_K_W": 1.526316387,
+     "heat_out_W_full": 10.0
+    }
+   },
+   {
+    "elem": "q1",
+    "refine": 4,
+    "dof": 59049,
+    "mesh": {
+     "nx": 80,
+     "ny": 80,
+     "nz": 8,
+     "elements": 51200
+    },
+    "balance_rel": 2.087219286e-13,
+    "q": {
+     "R_total_max_K_W": 1.66777339,
+     "R_total_avg_K_W": 1.52680585,
+     "heat_out_W_full": 10.0
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 1,
+    "dof": 8405,
+    "mesh": {
+     "nx": 20,
+     "ny": 20,
+     "nz": 2,
+     "elements": 800
+    },
+    "balance_rel": -3.304201357e-12,
+    "q": {
+     "R_total_max_K_W": 1.667723371,
+     "R_total_avg_K_W": 1.526940817,
+     "heat_out_W_full": 10.0
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 2,
+    "dof": 59049,
+    "mesh": {
+     "nx": 40,
+     "ny": 40,
+     "nz": 4,
+     "elements": 6400
+    },
+    "balance_rel": -7.397282786e-12,
+    "q": {
+     "R_total_max_K_W": 1.667724213,
+     "R_total_avg_K_W": 1.526965884,
+     "heat_out_W_full": 10.0
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 3,
+    "dof": 190333,
+    "mesh": {
+     "nx": 60,
+     "ny": 60,
+     "nz": 6,
+     "elements": 21600
+    },
+    "balance_rel": 5.673150838e-12,
+    "q": {
+     "R_total_max_K_W": 1.667724249,
+     "R_total_avg_K_W": 1.526971167,
+     "heat_out_W_full": 10.0
+    }
+   }
+  ],
+  "convergence": {
+   "q1": {
+    "R_total_max_K_W": {
+     "p_obs": 2.021672581,
+     "p_used": 2.021672581,
+     "f_fine": 1.66777339,
+     "f_ext": 1.667725116,
+     "gci_fine": 3.61816084e-05,
+     "rel_change_last": 8.85882877e-05,
+     "expected": 1.657879502,
+     "rel_err_fine": 0.005967796623,
+     "rel_err_ext": 0.005938678597,
+     "orders_vs_exact": [
+      0.08371557347,
+      0.02138445827
+     ]
+    },
+    "R_total_avg_K_W": {
+     "p_obs": 1.957003811,
+     "p_used": 1.957003811,
+     "f_fine": 1.52680585,
+     "f_ext": 1.526975652,
+     "gci_fine": 0.0001390175021,
+     "rel_change_last": 0.0003205797131,
+     "expected": 1.504571506,
+     "rel_err_fine": 0.01477785815,
+     "rel_err_ext": 0.01489071565,
+     "orders_vs_exact": [
+      -0.1319353329,
+      -0.03211402493
+     ]
+    },
+    "heat_out_W_full": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 10.0,
+     "f_ext": null,
+     "gci_fine": null,
+     "expected": 10,
+     "rel_err_fine": 2.088995643e-13,
+     "orders_vs_exact": [
+      -2.065479894,
+      1.532919091
+     ]
+    }
+   },
+   "q2": {
+    "R_total_max_K_W": {
+     "p_obs": 4.365150676,
+     "p_used": 4.365150676,
+     "f_fine": 1.667724249,
+     "f_ext": 1.667724256,
+     "gci_fine": 5.484217122e-09,
+     "rel_change_last": 2.136809787e-08,
+     "expected": 1.657879502,
+     "rel_err_fine": 0.005938155556,
+     "rel_err_ext": 0.005938159969,
+     "orders_vs_exact": [
+      -0.0001234306243,
+      -8.927561979e-06
+     ]
+    },
+    "R_total_avg_K_W": {
+     "p_obs": 1.783456549,
+     "p_used": 1.783456549,
+     "f_fine": 1.526971167,
+     "f_ext": 1.526976147,
+     "gci_fine": 4.076510171e-06,
+     "rel_change_last": 3.459725799e-06,
+     "expected": 1.504571506,
+     "rel_err_fine": 0.01488773464,
+     "rel_err_ext": 0.0148910444,
+     "orders_vs_exact": [
+      -0.00161574823,
+      -0.0005817398252
+     ]
+    },
+    "heat_out_W_full": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 10.0,
+     "f_ext": null,
+     "gci_fine": null,
+     "expected": 10,
+     "rel_err_fine": 5.673328474e-12,
+     "orders_vs_exact": [
+      -1.162806028,
+      0.6544602036
+     ]
+    }
+   }
+  }
+ }
+}

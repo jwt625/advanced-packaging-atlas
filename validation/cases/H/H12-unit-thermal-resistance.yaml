@@ -1,0 +1,106 @@
+schema: ap-sim-val/0
+id: H/H12-unit-thermal-resistance
+tier: H
+title: Area-normalized junction-to-case / -coolant resistance of liquid-cooled or cold-plate-tested packages is 10-50 C-mm2/W
+status: unvalidated
+physics:
+- thermal_stationary
+strength: moderate
+scope_package_classes:
+- organic_rdl_interposer (CoWoS-R, InFO_oS)
+- hybrid_bonded_3d laminate specimen
+- wafer_scale cooler
+- microjet test chip
+applies_to:
+- cowos_r/thermal_rjc
+- info_os/theta_jc_tim
+- soic/thermal_stack
+rule:
+  type: order_of_magnitude
+  expr: R'' = R x heated area in [10, 50] C-mm2/W
+  derived: CoWoS-R 0.0108 C/W x 1331 mm2 (4 SoC) = 14.4; InFO_oS 0.021-0.065 C/W x 707.85 mm2 (2 dies) = 14.9-46.0 (L4 arithmetic; heated area
+    = die area, an assumption)
+  strength: moderate
+fails_if: R x heated area outside [10, 50] C-mm2/W (one decade around the observed 10.8-46)
+n_papers: 5
+support:
+- metric_id: ectc51687.2025.00085-c-m1
+  value: 0.0108
+  unit: C/W
+  parameter: package Rjc
+  condition: max SoC Tj 105 C; SoC heaters only; S-type liquid cold plate
+  basis: measured
+  package_class: organic_rdl_interposer
+  locator: p.3 Table 2; p.3 Sec. IV.B
+- metric_id: itherm45881.2020.9190542-a-m11
+  value: 0.021
+  unit: C/W
+  parameter: ThetaJC
+  variant: TIM C film 25.0 W/mK, BLT 60 um (Test, Table 5)
+  condition: JEDEC ThetaJC = (Tj - Tc)/(PH1 + PH2); Tj max of die1/die2; Tc lid center; cold plate; silica-based thermal grease to cold plate;
+    TTV on thermal test PCB
+  basis: measured
+  package_class: organic_rdl_interposer
+  locator: p.4 Table 4; p.4 Table 5; p.4 Fig. 9; p.4 Fig. 10
+- metric_id: itherm45881.2020.9190542-a-m3
+  value: 0.065
+  unit: C/W
+  parameter: ThetaJC
+  variant: gel TIM 6.0 W/mK, BLT 140 um (Test, Table 3)
+  condition: JEDEC ThetaJC = (Tj - Tc)/(PH1 + PH2); Tj max of die1/die2; Tc lid center; cold plate; silica-based thermal grease to cold plate;
+    TTV on thermal test PCB
+  basis: measured
+  package_class: organic_rdl_interposer
+  locator: p.4 Table 3; p.4 Fig. 8
+- metric_id: ectc51687.2025.00055-b-m2
+  value: 24.295
+  unit: C-mm2/W
+  parameter: effective thermal resistance
+  condition: ASTM D5470; heating 1.6 W/mm2, hot side stable 99.9-100.1 C for 10 min; Rth = dT / power density
+  basis: measured
+  package_class: hybrid_bonded_3d
+  locator: p.2 Sec. II.B; p.2 Fig. 4
+- metric_id: ectc51687.2025.00055-c-m2
+  value: 23.533
+  unit: C-mm2/W
+  parameter: effective thermal resistance
+  condition: ASTM D5470; heating 1.6 W/mm2, hot side stable 99.9-100.1 C for 10 min; Rth = dT / power density
+  basis: measured
+  package_class: hybrid_bonded_3d
+  locator: p.2 Sec. II.B; p.2 Fig. 4
+- metric_id: tcpmt.2023.3266666-a-m34
+  value: 15.6
+  unit: C-mm2/W
+  parameter: unit thermal resistance junction to fin base Rsub
+  basis: derived
+  package_class: wafer_scale
+  locator: p.7 Sec. III
+- metric_id: itherm55375.2024.10709474-a-m3
+  value: 15.5
+  unit: mm2K/W
+  parameter: thermal resistance (area-normalized)
+  variant: 0.5 L/min
+  condition: DI water; 1200 W (333 W/cm2)
+  basis: measured
+  package_class: other
+  locator: p.4 Sec. IV; p.4 Fig. 10
+- metric_id: itherm55375.2024.10709474-a-m4
+  value: 10.8
+  unit: mm2K/W
+  parameter: thermal resistance (area-normalized)
+  variant: 1 L/min
+  condition: DI water; 1150 W (320 W/cm2); inlet 29.1 C
+  basis: measured
+  package_class: other
+  locator: p.4 Sec. IV; p.4 Fig. 10
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+notes:
+- 'Definitions differ (junction-to-case, ASTM D5470 specimen, junction-to-fin-base, junction-to-inlet): order-of-magnitude rule only, one decade
+  wide.'
+- SoC die area 332.8 mm2 and HBM 121 mm2 from components rows of ectc51687.2025.00085-a; InFO_oS dies 21.78 x 16.25 mm.
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

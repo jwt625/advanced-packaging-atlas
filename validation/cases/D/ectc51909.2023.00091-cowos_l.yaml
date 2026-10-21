@@ -1,0 +1,40 @@
+schema: ap-sim-val/0
+id: D/ectc51909.2023.00091-cowos_l
+tier: D
+title: TSMC CoWoS-L_6x mechanical TVs - RT / 240 C warpage, sign-agnostic gates (lid TV_1.6x, ring TV_4.8x)
+status: unvalidated
+physics: [thermo_elastic]
+source: {paper_id: ectc51909.2023.00091, tv_ids: [ectc51909.2023.00091-a, ectc51909.2023.00091-b]}
+inputs:
+  sim_case: cowos_l/warpage_rt_ht
+  variants: {lid: "TV_1.6x with lid (-a; the case default)", ring: "TV_4.8x with stiffener ring 18-12-2 mm (-b; needs a ring variant in the sim case)"}
+why_sign_agnostic: >-
+  Measured surface, view side and method are not stated (DB scope: "sign as labeled in Fig. 6(c), convention not
+  stated"). The RT map is saddle-like, and for a saddle a signed warpage is ill-defined. If the moire was read from
+  the ball side, the JEITA values would be -64 / +148 um (L9). At RT the model sign comes from a near-cancellation
+  between the module term and the template lid / TIM term, and it flips with a 10x change of the template TIM
+  modulus (L9).
+measured:
+  - {metric_id: ectc51909.2023.00091-a-m1, variant: lid, T_C: 25, value: 64, unit: um, basis: measured, locator: "p.3 Fig. 6(c)"}
+  - {metric_id: ectc51909.2023.00091-a-m2, variant: lid, T_C: 240, value: -148, unit: um, basis: measured, locator: "p.3 Fig. 6(c)"}
+  - {metric_id: ectc51909.2023.00091-b-m1, variant: ring, T_C: 25, value: 186, unit: um, basis: measured, locator: "p.4 Fig. 7(c)"}
+  - {metric_id: ectc51909.2023.00091-b-m2, variant: ring, T_C: 240, value: -107, unit: um, basis: measured, locator: "p.4 Fig. 7(c)"}
+gates:
+  - id: coplanarity_magnitude
+    rule: "|coplanarity_um(sim)| vs |w| per variant and T, tolerance max(20 um, 25 %) (tier D)"
+    values_um: {lid: {25: 64, 240: 148}, ring: {25: 186, 240: 107}}
+    fails_if: "any magnitude outside the band"
+  - id: rt_ht_ratio
+    rule: "w(240 C) / w(25 C) from the same model and the same surface; sign-convention free"
+    values: {lid: -2.31, ring: -0.575}
+    band: {lid: [-4.2, -1.3], ring: [-0.96, -0.35]}
+    band_basis: "each measured value moved by its tier-D tolerance max(20 um, 25 %) in the worst direction (L4 arithmetic)"
+    fails_if: "ratio outside the band, or ratio > 0 (no sign flip)"
+  - id: sign_flip
+    rule: "H/H01-warpage-sign-flip-rt-ht for both variants"
+    requires_shape_class: [dome, bowl]
+    note: "applies only when the warpage result's shape_class (L8, field being added; L9 proposal: dome | bowl | W | saddle) is dome or bowl at both temperatures; otherwise reported, not gated"
+diagnostics:
+  implied_tsf: "validation/expected/implied_tsf.py: lid pair implies a linear Tsf of 90 C (case input 150 C, template); ring pair implies 161 C. Reported next to the result; the case keeps 150 C with 90 C as a labelled sensitivity bound (L3)."
+missing: ["view side, surface and method of the moire maps", "lid / ring material, TIM film properties, dummy-die positions (template in the sim case)"]
+assumptions: ["Coplanarity of the simulated surface is compared with |w| as printed, since the printed values are labels on maps of unknown sign convention."]

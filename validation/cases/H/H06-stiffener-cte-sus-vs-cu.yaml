@@ -1,0 +1,140 @@
+schema: ap-sim-val/0
+id: H/H06-stiffener-cte-sus-vs-cu
+tier: H
+title: 'Lower-CTE stiffener (SUS430) vs Cu: smaller warpage at reflow, larger at RT [weak: 2 papers]'
+status: unvalidated
+physics:
+- thermo_elastic
+strength: weak
+scope_package_classes:
+- si_interposer_2p5d, JOINT2 consortium builds only (two related papers)
+applies_to:
+- si_interposer_peers/120mm_warpage
+rule:
+  type: direction
+  expr: '|w_HT(SUS430)| < |w_HT(Cu)| and |w_RT(SUS430)| > |w_RT(Cu)|'
+  strength: weak
+fails_if: 'for the 120 mm JOINT2 geometry: |w_HT(SUS430)| >= |w_HT(Cu)| or |w_RT(SUS430)| <= |w_RT(Cu)|'
+n_papers: 2
+support:
+- metric_id: ectc51529.2024.00155-a-m16
+  value: 485
+  unit: um
+  parameter: package substrate warpage at 30 C
+  variant: package substrate with SUS430 stiffener, before PCB bonding
+  condition: shadow moire; 30 C
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.5 Fig. 11
+- metric_id: ectc51529.2024.00155-a-m19
+  value: -85
+  unit: um
+  parameter: package substrate warpage at 243 C
+  variant: package substrate with SUS430 stiffener, before PCB bonding
+  condition: shadow moire; 243 C
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.5 Fig. 11
+- metric_id: ectc51529.2024.00155-e-m1
+  value: -330
+  unit: um
+  parameter: package substrate warpage at 30 C
+  condition: shadow moire; 30 C
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.5 Fig. 11
+- metric_id: ectc51529.2024.00155-e-m4
+  value: 770
+  unit: um
+  parameter: package substrate warpage at 243 C
+  condition: shadow moire; 243 C
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.5 Fig. 11
+- metric_id: ectc51687.2025.00027-a-m1
+  value: 396
+  unit: um
+  parameter: package coplanarity at 30 C
+  variant: stiffener Cu size S
+  condition: shadow moire, heating 30-200 C; 30 C
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 3(a)
+- metric_id: ectc51687.2025.00027-a-m2
+  value: 462
+  unit: um
+  parameter: package coplanarity at 195 C
+  variant: stiffener Cu size S
+  condition: shadow moire, heating 30-200 C; 195 C
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 3(a)
+- metric_id: ectc51687.2025.00027-a-m4
+  value: 696
+  unit: um
+  parameter: package coplanarity at 30 C
+  variant: stiffener SUS430 size S
+  condition: shadow moire, heating 30-200 C; 30 C
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 3(a)
+- metric_id: ectc51687.2025.00027-a-m5
+  value: 71
+  unit: um
+  parameter: package coplanarity at 195 C
+  variant: stiffener SUS430 size S
+  condition: shadow moire, heating 30-200 C; 195 C
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 3(a)
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+counter_examples:
+- metric_id: 001c.147115-c-m21
+  value: 110
+  unit: um
+  parameter: simulated package warpage
+  variant: 'leg 3: high Tg UF, low CTE core 1.2 mm, stiffener, high E; RT'
+  condition: room temperature
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 9; p.4 Table II
+- metric_id: 001c.147115-c-m22
+  value: -101
+  unit: um
+  parameter: simulated package warpage
+  variant: 'leg 3: high Tg UF, low CTE core 1.2 mm, stiffener, high E; HT'
+  condition: high temperature (value not stated)
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 9; p.4 Table II
+- metric_id: 001c.147115-c-m29
+  value: 172
+  unit: um
+  parameter: simulated package warpage
+  variant: 'leg 7: high Tg UF, low CTE core 1.2 mm, stiffener SUS 430, high E; RT'
+  condition: room temperature
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 9; p.4 Table II
+- metric_id: 001c.147115-c-m30
+  value: -159
+  unit: um
+  parameter: simulated package warpage
+  variant: 'leg 7: high Tg UF, low CTE core 1.2 mm, stiffener SUS 430, high E; HT'
+  condition: high temperature (value not stated)
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 9; p.4 Table II
+notes:
+- 'Counter-example (Amkor TSV 2.5D FEM, p.4 Table II / Fig. 9): leg 7 ''Stiffener (SUS 430)'' gives 172 / -159 um vs leg 3 ''Stiffener'' (material
+  not stated in Table II) 110 / -101 um, i.e. larger at both RT and HT. If leg 3 is Cu, this contradicts the JOINT2 direction; the rule is therefore
+  gated only on the JOINT2 cases (si_interposer_peers/120mm_warpage) until the leg-3 material is known (L4 self-check, 2026-10-20).'
+- 'JOINT2 2024 (moire, 28 x 30 mm, substrate A): SUS430 485 / -85 um vs Cu -330 / 770 um at 30 / 243 C; JOINT2 2025 coplanarity (size S): SUS430
+  696 / 71 um vs Cu 396 / 462 um at 30 / 195 C.'
+- 'Two papers from the same consortium (JOINT2): related builds, not fully independent.'
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

@@ -1,0 +1,74 @@
+schema: ap-sim-val/0
+id: H/H23-crosstalk-pitch
+tier: H
+title: 'Crosstalk of unshielded fine-pitch bridge lines is about -20 dB; wider or shielded lines reach -27 to -60 dB (weak, confounded) [weak:
+  4 papers]'
+status: unvalidated
+physics:
+- em
+strength: weak
+scope_package_classes:
+- si_bridge_fanout (PSB, Si-bridge CPWG)
+- si_bridge_organic (EMIB 2016)
+- glass_core_substrate (UCIe-S on ABF)
+applies_to:
+- EM-3 (C/em_3_fine_pitch_crosstalk)
+rule:
+  type: range
+  expr: 'unshielded L/S <= 2 um: XT in [-25, -15] dB to 50 GHz; W/S 10/15 um UCIe-S 10 mm: worst VTF XT <= -25 dB; shielded CPWG: <= -50 dB'
+  strength: weak
+fails_if: unshielded L/S <= 2 um XT outside [-25, -15] dB to 50 GHz; UCIe-S 10 mm worst VTF XT > -25 dB; shielded CPWG XT > -50 dB
+n_papers: 4
+support:
+- metric_id: ectc51846.2026.00035-a-m13
+  value: -20
+  unit: dB
+  parameter: crosstalk
+  variant: channel reach 0.4 mm; all dielectrics
+  condition: 0-50 GHz
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.5 Sec. III.B.4; p.6 Fig. 8
+- metric_id: ectc.2016.201-c-m1
+  value: -17
+  unit: dB
+  parameter: near-end crosstalk
+  condition: about 4-7 GHz
+  basis: measured
+  package_class: si_bridge_organic
+  locator: p.8 Fig. 10(b)
+- metric_id: ectc51846.2026.00199-b-m1
+  value: -27.6
+  unit: dB
+  parameter: VTF crosstalk, worst case
+  condition: 12.7 GHz; 19 aggressors per victim
+  basis: simulated
+  package_class: glass_core_substrate
+  locator: p.7 Sec. IV.B.3; p.7 Fig. 14(b)
+- metric_id: ectc51846.2026.00199-b-m2
+  value: -36.3
+  unit: dB
+  parameter: VTF crosstalk at Nyquist
+  condition: 16 GHz
+  basis: simulated
+  package_class: glass_core_substrate
+  locator: p.7 Sec. IV.B.3; p.7 Fig. 14(b)
+- metric_id: eptc67330.2025.11392620-b-m3
+  value: -60
+  unit: dB
+  parameter: crosstalk among channels
+  variant: 8 channels
+  condition: DC-100 GHz
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.5 Sec. III
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+notes:
+- No paper in the DB sweeps electrical pitch at fixed everything else; the cross-paper trend is confounded by length, shielding, dielectric and
+  metric (NEXT vs VTF XT). Optical waveguide crosstalk vs pitch (ectc51846.2026.00110) is clean but out of scope (no optical solver).
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

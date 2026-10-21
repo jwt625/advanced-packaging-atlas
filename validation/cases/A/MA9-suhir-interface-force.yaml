@@ -1,0 +1,31 @@
+schema: ap-sim-val/0
+id: A/MA9-suhir-interface-force
+tier: A
+title: Bilayer far-field interface force and integrated edge shear (Suhir structure vs CLT)
+status: unvalidated
+physics: [thermo_elastic]
+box_compatible: true
+tests: [shear-lag edge zone, interface equilibrium without using singular corner nodes]
+inputs:
+  base: A/MA4-clt-multilayer   # variant a geometry (si 0.5 + cu 0.5 mm, nu 0.28, 20 x 20 mm, 125 -> 25 C)
+expected:
+  - {quantity: cu_force_N_m, definition: "integral of sigma_xx over the Cu thickness at the plate centre (per unit width; tension positive)",
+     value: 14973.8, unit: N/m, tolerance: {rel: 1.0e-2}, script_key: MA4.a.cu_force_N_m}
+  - {quantity: integrated_edge_shear_N_m, definition: "integral of the interface shear tau_xz from the free edge to the centre along y = 0; equals cu_force by equilibrium",
+     value: 14973.8, unit: N/m, tolerance: {rel: 2.0e-2}, script_key: MA4.a.cu_force_N_m}
+  - {quantity: suhir_force_biaxial_D_N_m, form: reference, definition: "Suhir structure with D_i = E h^3 / (12 (1 - nu)) (equibiaxial); signed per Suhir (da dT < 0 here, so negative); |T_inf| equals the CLT Cu force exactly",
+     value: -14973.8, unit: N/m, script_key: MA9.T_inf_suhir_biax_D_N_m}
+  - {quantity: suhir_force_cyl_D_N_m, form: reference, definition: "same with D_i = E h^3 / (12 (1 - nu^2)) (cylindrical bending); |T_inf| = 0.827 x CLT",
+     value: -12378.8, unit: N/m, script_key: MA9.T_inf_suhir_cyl_D_N_m}
+  - {quantity: tau_max, value: null, note: "not a target: Bogy-type singularity at the free-edge corner"}
+formula: "T_inf = da dT / lambda, lambda = sum (1 - nu_i)/(E_i h_i) + (h1 + h2)^2 / (4 D); edge shear tau(x) = (da dT k / lambda) sinh(kx)/cosh(kl), k = sqrt(lambda / kappa_int), kappa_int = h1/(3 G1) + h2/(3 G2)"
+provenance:
+  formula: "E. Suhir, J. Appl. Mech. 53, 657 (1986); 56, 595 (1989); structure as cited by secondary sources, coefficients UNVERIFIED against the primary (R6 section 1.1 MA9)"
+  values: "validation/expected/tier_a.py ma9(), ma4()"
+finding: >-
+  L4 2026-10-20: R6 leaves D undefined. With the equibiaxial plate rigidity E h^3 / (12 (1 - nu)), consistent with the
+  (1 - nu)/(E h) membrane terms, the Suhir far-field force equals the CLT layer force to round-off. With the
+  cylindrical-bending rigidity E h^3 / (12 (1 - nu^2)) it is 17.3 % low. The hard target is therefore the CLT force.
+missing: []
+assumptions:
+  - "Plate (not strip) geometry: the MA4a variant is reused so the CLT interior force is exact; the R6 MA3 strip would need the beam (E) form of the force."

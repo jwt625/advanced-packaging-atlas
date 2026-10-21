@@ -1,0 +1,534 @@
+{
+ "solver": "scikit-fem (apref)",
+ "versions": {
+  "python": "3.12.11",
+  "scikit-fem": "12.0.2",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pyamg": "5.3.0",
+  "gmsh": "4.15.2",
+  "scikit-rf": "2.2.0"
+ },
+ "case": "XB3",
+ "tier": "B",
+ "results": {
+  "runs": [
+   {
+    "elem": "p1",
+    "refine": 1,
+    "dof": 2313,
+    "mesh": {
+     "elements": 2904,
+     "lc_in_m": 5e-06
+    },
+    "q": {
+     "si_top_2a_srr_mean_Pa": 96213629.76,
+     "si_top_2a_stt_mean_Pa": -114443921.8,
+     "si_top_2a_srr_spread_rel": 0.6672536338,
+     "si_top_3a_srr_mean_Pa": 58937358.06,
+     "si_top_3a_stt_mean_Pa": -48905738.46,
+     "si_top_3a_srr_spread_rel": 0.4527281801,
+     "cu_protrusion_m": -4.280144724e-08,
+     "uz_top_axis_m": -1.092322245e-07,
+     "si_top_2a_srr_Pa": 85790027.77161732,
+     "si_top_2a_stt_Pa": -151351754.9601862,
+     "si_top_2a_szz_Pa": -25182934.07,
+     "si_top_3a_srr_Pa": 51307901.396587804,
+     "si_top_3a_stt_Pa": -44308951.25314805,
+     "si_mid_2a_srr_Pa": 115142199.58714032,
+     "si_mid_a_srr_Pa": -18437588.185488284,
+     "si_mid_a_stt_Pa": -417388469.16051817,
+     "cu_mid_axis_szz_Pa": 694524063.6,
+     "cu_mid_axis_srr_Pa": 435267514.0948083
+    }
+   },
+   {
+    "elem": "p1",
+    "refine": 2,
+    "dof": 7995,
+    "mesh": {
+     "elements": 12340,
+     "lc_in_m": 2.5e-06
+    },
+    "q": {
+     "si_top_2a_srr_mean_Pa": 116986051.2,
+     "si_top_2a_stt_mean_Pa": -121860335.2,
+     "si_top_2a_srr_spread_rel": 0.3633622432,
+     "si_top_3a_srr_mean_Pa": 52223527.59,
+     "si_top_3a_stt_mean_Pa": -53276222.52,
+     "si_top_3a_srr_spread_rel": 0.390370654,
+     "cu_protrusion_m": -4.396486297e-08,
+     "uz_top_axis_m": -1.104932475e-07,
+     "si_top_2a_srr_Pa": 117112419.64586705,
+     "si_top_2a_stt_Pa": -105935495.12093854,
+     "si_top_2a_szz_Pa": 4316834.235,
+     "si_top_3a_srr_Pa": 53783470.69184716,
+     "si_top_3a_stt_Pa": -41978552.279656515,
+     "si_mid_2a_srr_Pa": 114379028.47324675,
+     "si_mid_a_srr_Pa": 212188181.97266275,
+     "si_mid_a_stt_Pa": -359301468.0107022,
+     "cu_mid_axis_szz_Pa": 656387396.6,
+     "cu_mid_axis_srr_Pa": 384746742.91947293
+    }
+   },
+   {
+    "elem": "p1",
+    "refine": 3,
+    "dof": 20277,
+    "mesh": {
+     "elements": 34117,
+     "lc_in_m": 1.666666667e-06
+    },
+    "q": {
+     "si_top_2a_srr_mean_Pa": 124502542.0,
+     "si_top_2a_stt_mean_Pa": -116053773.6,
+     "si_top_2a_srr_spread_rel": 0.2137887182,
+     "si_top_3a_srr_mean_Pa": 54945098.43,
+     "si_top_3a_stt_mean_Pa": -49700011.94,
+     "si_top_3a_srr_spread_rel": 0.1748394228,
+     "cu_protrusion_m": -4.417923004e-08,
+     "uz_top_axis_m": -1.107170321e-07,
+     "si_top_2a_srr_Pa": 143577899.79302397,
+     "si_top_2a_stt_Pa": -108781781.42674349,
+     "si_top_2a_szz_Pa": -770347.7562,
+     "si_top_3a_srr_Pa": 57620586.19554631,
+     "si_top_3a_stt_Pa": -48195179.40050201,
+     "si_mid_2a_srr_Pa": 72522897.93597296,
+     "si_mid_a_srr_Pa": 142458048.2540286,
+     "si_mid_a_stt_Pa": -411113079.6645348,
+     "cu_mid_axis_szz_Pa": 637604621.9,
+     "cu_mid_axis_srr_Pa": 371269650.95850754
+    }
+   },
+   {
+    "elem": "p1",
+    "refine": 4,
+    "dof": 40989,
+    "mesh": {
+     "elements": 72851,
+     "lc_in_m": 1.25e-06
+    },
+    "q": {
+     "si_top_2a_srr_mean_Pa": 111683562.2,
+     "si_top_2a_stt_mean_Pa": -122683477.9,
+     "si_top_2a_srr_spread_rel": 0.1664900281,
+     "si_top_3a_srr_mean_Pa": 51665374.49,
+     "si_top_3a_stt_mean_Pa": -51405781.63,
+     "si_top_3a_srr_spread_rel": 0.1657885739,
+     "cu_protrusion_m": -4.422531792e-08,
+     "uz_top_axis_m": -1.107799796e-07,
+     "si_top_2a_srr_Pa": 110100019.19633844,
+     "si_top_2a_stt_Pa": -126871151.60419881,
+     "si_top_2a_szz_Pa": -686787.505,
+     "si_top_3a_srr_Pa": 54628406.81370254,
+     "si_top_3a_stt_Pa": -48849135.733447805,
+     "si_mid_2a_srr_Pa": 92328435.94492954,
+     "si_mid_a_srr_Pa": 237558969.9545036,
+     "si_mid_a_stt_Pa": -351605689.13140285,
+     "cu_mid_axis_szz_Pa": 636397551.6,
+     "cu_mid_axis_srr_Pa": 367300652.07065797
+    }
+   },
+   {
+    "elem": "p2",
+    "refine": 1,
+    "dof": 14976,
+    "mesh": {
+     "elements": 2904,
+     "lc_in_m": 5e-06
+    },
+    "q": {
+     "si_top_2a_srr_mean_Pa": 120215161.1,
+     "si_top_2a_stt_mean_Pa": -117262942.8,
+     "si_top_2a_srr_spread_rel": 0.1565078482,
+     "si_top_3a_srr_mean_Pa": 51708817.94,
+     "si_top_3a_stt_mean_Pa": -53908687.81,
+     "si_top_3a_srr_spread_rel": 0.06240449521,
+     "cu_protrusion_m": -4.472274745e-08,
+     "uz_top_axis_m": -1.111983233e-07,
+     "si_top_2a_srr_Pa": 120803502.3820862,
+     "si_top_2a_stt_Pa": -121086506.29750472,
+     "si_top_2a_szz_Pa": -575804.7251,
+     "si_top_3a_srr_Pa": 51737128.49301497,
+     "si_top_3a_stt_Pa": -53783601.856336065,
+     "si_mid_2a_srr_Pa": 85819234.14807704,
+     "si_mid_a_srr_Pa": 194358101.93599916,
+     "si_mid_a_stt_Pa": -397346734.1078101,
+     "cu_mid_axis_szz_Pa": 633190230.7,
+     "cu_mid_axis_srr_Pa": 362545590.86872345
+    }
+   },
+   {
+    "elem": "p2",
+    "refine": 1.5,
+    "dof": 30678,
+    "mesh": {
+     "elements": 6362,
+     "lc_in_m": 3.333333333e-06
+    },
+    "q": {
+     "si_top_2a_srr_mean_Pa": 117545064.8,
+     "si_top_2a_stt_mean_Pa": -119285304.7,
+     "si_top_2a_srr_spread_rel": 0.02960978696,
+     "si_top_3a_srr_mean_Pa": 50526600.42,
+     "si_top_3a_stt_mean_Pa": -54268785.32,
+     "si_top_3a_srr_spread_rel": 0.02271400819,
+     "cu_protrusion_m": -4.471740645e-08,
+     "uz_top_axis_m": -1.111935248e-07,
+     "si_top_2a_srr_Pa": 119244405.37956485,
+     "si_top_2a_stt_Pa": -116638277.93350509,
+     "si_top_2a_szz_Pa": 1445622.475,
+     "si_top_3a_srr_Pa": 50551941.182176515,
+     "si_top_3a_stt_Pa": -54094385.39214594,
+     "si_mid_2a_srr_Pa": 94187444.32414101,
+     "si_mid_a_srr_Pa": 363592352.312003,
+     "si_mid_a_stt_Pa": -366408903.99015033,
+     "cu_mid_axis_szz_Pa": 626946258.3,
+     "cu_mid_axis_srr_Pa": 353859150.2988007
+    }
+   },
+   {
+    "elem": "p2",
+    "refine": 2,
+    "dof": 56709,
+    "mesh": {
+     "elements": 12340,
+     "lc_in_m": 2.5e-06
+    },
+    "q": {
+     "si_top_2a_srr_mean_Pa": 116341277.0,
+     "si_top_2a_stt_mean_Pa": -119751377.5,
+     "si_top_2a_srr_spread_rel": 0.02984317852,
+     "si_top_3a_srr_mean_Pa": 50384593.02,
+     "si_top_3a_stt_mean_Pa": -54399341.02,
+     "si_top_3a_srr_spread_rel": 0.01527084604,
+     "cu_protrusion_m": -4.465931578e-08,
+     "uz_top_axis_m": -1.11134616e-07,
+     "si_top_2a_srr_Pa": 116960921.66321295,
+     "si_top_2a_stt_Pa": -119177914.51351091,
+     "si_top_2a_szz_Pa": 982831.2304,
+     "si_top_3a_srr_Pa": 50815232.245670676,
+     "si_top_3a_stt_Pa": -53722077.398309484,
+     "si_mid_2a_srr_Pa": 93329324.17875493,
+     "si_mid_a_srr_Pa": 415630094.80823576,
+     "si_mid_a_stt_Pa": -339528630.6625314,
+     "cu_mid_axis_szz_Pa": 625260594.6,
+     "cu_mid_axis_srr_Pa": 350113159.92752874
+    }
+   },
+   {
+    "elem": "p2",
+    "refine": 2.5,
+    "dof": 95568,
+    "mesh": {
+     "elements": 21348,
+     "lc_in_m": 2e-06
+    },
+    "q": {
+     "si_top_2a_srr_mean_Pa": 115817114.6,
+     "si_top_2a_stt_mean_Pa": -119595829.3,
+     "si_top_2a_srr_spread_rel": 0.01825668147,
+     "si_top_3a_srr_mean_Pa": 50423531.42,
+     "si_top_3a_stt_mean_Pa": -54372426.68,
+     "si_top_3a_srr_spread_rel": 0.005627157429,
+     "cu_protrusion_m": -4.465516165e-08,
+     "uz_top_axis_m": -1.111297679e-07,
+     "si_top_2a_srr_Pa": 116179253.18452057,
+     "si_top_2a_stt_Pa": -120291509.54111609,
+     "si_top_2a_szz_Pa": 705938.4652,
+     "si_top_3a_srr_Pa": 50452710.18615102,
+     "si_top_3a_stt_Pa": -54230432.35286214,
+     "si_mid_2a_srr_Pa": 88930655.29237363,
+     "si_mid_a_srr_Pa": 308520637.13060987,
+     "si_mid_a_stt_Pa": -363628771.27064955,
+     "cu_mid_axis_szz_Pa": 625015879.1,
+     "cu_mid_axis_srr_Pa": 349698269.6853094
+    }
+   }
+  ],
+  "convergence": {
+   "p1": {
+    "si_top_2a_srr_mean_Pa": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 111683562.2,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "si_top_2a_stt_mean_Pa": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": -122683477.9,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "si_top_2a_srr_spread_rel": {
+     "p_obs": 2.281221163,
+     "p_used": 2.281221163,
+     "f_fine": 0.1664900281,
+     "f_ext": 0.1154986507,
+     "gci_fine": 0.3828410774,
+     "rel_change_last": 0.2840932317
+    },
+    "si_top_3a_srr_mean_Pa": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 51665374.49,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "si_top_3a_stt_mean_Pa": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": -51405781.63,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "si_top_3a_srr_spread_rel": {
+     "p_obs": 7.642561437,
+     "p_used": 7.642561437,
+     "f_fine": 0.1657885739,
+     "f_ext": 0.1646590024,
+     "gci_fine": 0.008516657057,
+     "rel_change_last": 0.05459271802
+    },
+    "cu_protrusion_m": {
+     "p_obs": 3.338100994,
+     "p_used": 3.338100994,
+     "f_fine": -4.422531792e-08,
+     "f_ext": -4.425389935e-08,
+     "gci_fine": 0.0008078356755,
+     "rel_change_last": 0.001042115104
+    },
+    "uz_top_axis_m": {
+     "p_obs": 2.603932915,
+     "p_used": 2.603932915,
+     "f_fine": -1.107799796e-07,
+     "f_ext": -1.108364293e-07,
+     "gci_fine": 0.0006369584201,
+     "rel_change_last": 0.0005682208043
+    },
+    "si_top_2a_srr_Pa": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 110100019.19633844,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "si_top_2a_stt_Pa": {
+     "p_obs": 11.06718736,
+     "p_used": 11.06718736,
+     "f_fine": -126871151.60419881,
+     "f_ext": -127652919.2,
+     "gci_fine": 0.007702377687,
+     "rel_change_last": 0.1425806415
+    },
+    "si_top_2a_szz_Pa": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": -686787.505,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "si_top_3a_srr_Pa": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 54628406.81370254,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "si_top_3a_stt_Pa": {
+     "p_obs": 5.25106958,
+     "p_used": 5.25106958,
+     "f_fine": -48849135.733447805,
+     "f_ext": -49034412.3,
+     "gci_fine": 0.004741040139,
+     "rel_change_last": 0.01338726516
+    },
+    "si_mid_2a_srr_Pa": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 92328435.94492954,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "si_mid_a_srr_Pa": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 237558969.9545036,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "si_mid_a_stt_Pa": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": -351605689.13140285,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "cu_mid_axis_szz_Pa": {
+     "p_obs": 6.542157377,
+     "p_used": 6.542157377,
+     "f_fine": 636397551.6,
+     "f_ext": 636180726.7,
+     "gci_fine": 0.000425883341,
+     "rel_change_last": 0.001896723635
+    },
+    "cu_mid_axis_srr_Pa": {
+     "p_obs": 2.477615549,
+     "p_used": 2.477615549,
+     "f_fine": 367300652.07065797,
+     "f_ext": 363482927.5,
+     "gci_fine": 0.01299250552,
+     "rel_change_last": 0.01080585854
+    }
+   },
+   "p2": {
+    "si_top_2a_srr_mean_Pa": {
+     "p_obs": 2.233907282,
+     "p_used": 2.233907282,
+     "f_fine": 115817114.6,
+     "f_ext": 115005994.3,
+     "gci_fine": 0.008754321583,
+     "rel_change_last": 0.004525777077
+    },
+    "si_top_2a_stt_mean_Pa": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": -119595829.3,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "si_top_2a_srr_spread_rel": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 0.01825668147,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "si_top_3a_srr_mean_Pa": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 50423531.42,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "si_top_3a_stt_mean_Pa": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": -54372426.68,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "si_top_3a_srr_spread_rel": {
+     "p_obs": 2.74153386,
+     "p_used": 2.74153386,
+     "f_fine": 0.005627157429,
+     "f_ext": -0.005803546906,
+     "gci_fine": 2.539182633,
+     "rel_change_last": 1.713776225
+    },
+    "cu_protrusion_m": {
+     "p_obs": 8.937386121,
+     "p_used": 8.937386121,
+     "f_fine": -4.465516165e-08,
+     "f_ext": -4.465450717e-08,
+     "gci_fine": 1.832044945e-05,
+     "rel_change_last": 9.302693047e-05
+    },
+    "uz_top_axis_m": {
+     "p_obs": 8.428173448,
+     "p_used": 8.428173448,
+     "f_fine": -1.111297679e-07,
+     "f_ext": -1.111288956e-07,
+     "gci_fine": 9.811344862e-06,
+     "rel_change_last": 4.362551773e-05
+    },
+    "si_top_2a_srr_Pa": {
+     "p_obs": 3.149820522,
+     "p_used": 3.149820522,
+     "f_fine": 116179253.18452057,
+     "f_ext": 115412554.2,
+     "gci_fine": 0.008249095325,
+     "rel_change_last": 0.006728124491
+    },
+    "si_top_2a_stt_Pa": {
+     "p_obs": 2.207135873,
+     "p_used": 2.207135873,
+     "f_fine": -120291509.54111609,
+     "f_ext": -122041302.2,
+     "gci_fine": 0.01818283592,
+     "rel_change_last": 0.00925746989
+    },
+    "si_top_2a_szz_Pa": {
+     "p_obs": 1.010923666,
+     "p_used": 1.010923666,
+     "f_fine": 705938.4652,
+     "f_ext": -388280.2885,
+     "gci_fine": 1.937525025,
+     "rel_change_last": 0.3922335712
+    },
+    "si_top_3a_srr_Pa": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 50452710.18615102,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "si_top_3a_stt_Pa": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": -54230432.35286214,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "si_mid_2a_srr_Pa": {
+     "p_obs": 10.61900143,
+     "p_used": 10.61900143,
+     "f_fine": 88930655.29237363,
+     "f_ext": 88476842.96,
+     "gci_fine": 0.006378738774,
+     "rel_change_last": 0.04946178426
+    },
+    "si_mid_a_srr_Pa": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 308520637.13060987,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "si_mid_a_stt_Pa": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": -363628771.27064955,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "cu_mid_axis_szz_Pa": {
+     "p_obs": 6.3530732,
+     "p_used": 6.3530732,
+     "f_fine": 625015879.1,
+     "f_ext": 624937630.3,
+     "gci_fine": 0.000156493797,
+     "rel_change_last": 0.0003915347782
+    },
+    "cu_mid_axis_srr_Pa": {
+     "p_obs": 7.346231872,
+     "p_used": 7.346231872,
+     "f_fine": 349698269.6853094,
+     "f_ext": 349598329.3,
+     "gci_fine": 0.0003572378457,
+     "rel_change_last": 0.001186423492
+    }
+   }
+  },
+  "expected": {},
+  "assumptions": [
+   "Si cylinder R = 50 um, traction-free outer surface (isolated TSV)",
+   "z = 0 mirror plane (top half of a 200 um layer); top z = 100 um free",
+   "stress-free 275 C, T = 25 C (dT = -250 K, R6 XB3)",
+   "tier-A materials si_iso, cu (nu 0.34)",
+   "cu_protrusion_m = u_z(axis, top) - u_z(r = 0.9 R = 45 um, top)"
+  ]
+ }
+}

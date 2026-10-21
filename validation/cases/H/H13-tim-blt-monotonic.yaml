@@ -1,0 +1,106 @@
+schema: ap-sim-val/0
+id: H/H13-tim-blt-monotonic
+tier: H
+title: Junction-to-case resistance increases with TIM1 bond-line thickness
+status: unvalidated
+physics:
+- thermal_stationary
+strength: moderate
+scope_package_classes:
+- organic_rdl_interposer (CoWoS-R, InFO_oS)
+applies_to:
+- cowos_r/thermal_rjc
+- info_os/theta_jc_tim
+rule:
+  type: monotonic
+  expr: R strictly increasing in BLT; dR/dBLT >= 1 / (k_TIM A_heated)
+  strength: moderate
+fails_if: R does not increase with BLT, or dR/dBLT < 1 / (k_TIM A_heated) with A_heated = total heated die area
+n_papers: 2
+support:
+- metric_id: ectc51687.2025.00085-d-m4
+  value: 0.00982
+  unit: C/W
+  parameter: package Rjc
+  variant: TIM1 BLT 25 um
+  condition: Tj max 105 C
+  basis: simulated
+  package_class: organic_rdl_interposer
+  locator: p.4 Fig. 8
+- metric_id: ectc51687.2025.00085-d-m6
+  value: 0.00996
+  unit: C/W
+  parameter: package Rjc
+  variant: TIM1 BLT 50 um
+  condition: Tj max 105 C
+  basis: simulated
+  package_class: organic_rdl_interposer
+  locator: p.4 Fig. 8
+- metric_id: ectc51687.2025.00085-d-m8
+  value: 0.01026
+  unit: C/W
+  parameter: package Rjc
+  variant: TIM1 BLT 100 um
+  condition: Tj max 105 C
+  basis: simulated
+  package_class: organic_rdl_interposer
+  locator: p.4 Fig. 8
+- metric_id: ectc51687.2025.00085-d-m10
+  value: 0.01082
+  unit: C/W
+  parameter: package Rjc
+  variant: TIM1 BLT 200 um
+  condition: Tj max 105 C
+  basis: simulated
+  package_class: organic_rdl_interposer
+  locator: p.4 Fig. 8
+- metric_id: itherm45881.2020.9190542-a-m1
+  value: 0.063
+  unit: C/W
+  parameter: ThetaJC
+  variant: gel TIM 6.0 W/mK, BLT 140 um (Sim, Table 3)
+  condition: JEDEC ThetaJC = (Tj - Tc)/(PH1 + PH2); Tj max of die1/die2; Tc lid center; cold plate; silica-based thermal grease to cold plate;
+    TTV on thermal test PCB
+  basis: simulated
+  package_class: organic_rdl_interposer
+  locator: p.4 Table 3; p.4 Fig. 8
+- metric_id: itherm45881.2020.9190542-a-m2
+  value: 0.033
+  unit: C/W
+  parameter: ThetaJC
+  variant: gel TIM 6.0 W/mK, BLT 60 um (Sim, Table 3)
+  condition: JEDEC ThetaJC = (Tj - Tc)/(PH1 + PH2); Tj max of die1/die2; Tc lid center; cold plate; silica-based thermal grease to cold plate;
+    TTV on thermal test PCB
+  basis: simulated
+  package_class: organic_rdl_interposer
+  locator: p.4 Table 3; p.4 Fig. 8
+- metric_id: itherm45881.2020.9190542-a-m3
+  value: 0.065
+  unit: C/W
+  parameter: ThetaJC
+  variant: gel TIM 6.0 W/mK, BLT 140 um (Test, Table 3)
+  condition: JEDEC ThetaJC = (Tj - Tc)/(PH1 + PH2); Tj max of die1/die2; Tc lid center; cold plate; silica-based thermal grease to cold plate;
+    TTV on thermal test PCB
+  basis: measured
+  package_class: organic_rdl_interposer
+  locator: p.4 Table 3; p.4 Fig. 8
+- metric_id: itherm45881.2020.9190542-a-m4
+  value: 0.031
+  unit: C/W
+  parameter: ThetaJC
+  variant: gel TIM 6.0 W/mK, BLT 60 um (Test, Table 3)
+  condition: JEDEC ThetaJC = (Tj - Tc)/(PH1 + PH2); Tj max of die1/die2; Tc lid center; cold plate; silica-based thermal grease to cold plate;
+    TTV on thermal test PCB
+  basis: measured
+  package_class: organic_rdl_interposer
+  locator: p.4 Table 3; p.4 Fig. 8
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+notes:
+- 'Slopes (validation/expected/derived_checks.py): CoWoS-R 5.73 C/W/m (A_eff 2031 mm2 with k 86); InFO_oS 375 (sim) / 425 (test) C/W/m vs 1D bound
+  235 C/W/m.'
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

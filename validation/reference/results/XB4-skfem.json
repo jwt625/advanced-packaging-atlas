@@ -1,0 +1,221 @@
+{
+ "solver": "scikit-fem (apref)",
+ "versions": {
+  "python": "3.12.11",
+  "scikit-fem": "12.0.2",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pyamg": "5.3.0",
+  "gmsh": "4.15.2",
+  "scikit-rf": "2.2.0"
+ },
+ "case": "XB4",
+ "tier": "B",
+ "results": {
+  "runs": [
+   {
+    "elem": "q1",
+    "refine": 1,
+    "dof": 713,
+    "mesh": {
+     "nx": 10,
+     "ny": 10,
+     "nz": 7,
+     "elements": 475
+    },
+    "balance_rel": 3.694822226e-14,
+    "q": {
+     "T_max_C": 42.90383234,
+     "R_th_max_K_W": 0.1790383234,
+     "R_th_avg_K_W": 0.1542548531,
+     "T_lid_top_centre_C": 40.03066273,
+     "heat_out_W_full": 100.0
+    }
+   },
+   {
+    "elem": "q1",
+    "refine": 2,
+    "dof": 4695,
+    "mesh": {
+     "nx": 20,
+     "ny": 20,
+     "nz": 14,
+     "elements": 3800
+    },
+    "balance_rel": -4.217781679e-13,
+    "q": {
+     "T_max_C": 42.8966328,
+     "R_th_max_K_W": 0.178966328,
+     "R_th_avg_K_W": 0.1547644041,
+     "T_lid_top_centre_C": 40.02354091,
+     "heat_out_W_full": 100.0
+    }
+   },
+   {
+    "elem": "q1",
+    "refine": 4,
+    "dof": 33869,
+    "mesh": {
+     "nx": 40,
+     "ny": 40,
+     "nz": 28,
+     "elements": 30400
+    },
+    "balance_rel": -6.949107956e-14,
+    "q": {
+     "T_max_C": 42.89598009,
+     "R_th_max_K_W": 0.1789598009,
+     "R_th_avg_K_W": 0.1549142739,
+     "T_lid_top_centre_C": 40.02286759,
+     "heat_out_W_full": 100.0
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 1,
+    "dof": 4695,
+    "mesh": {
+     "nx": 10,
+     "ny": 10,
+     "nz": 7,
+     "elements": 475
+    },
+    "balance_rel": -1.22270194e-12,
+    "q": {
+     "T_max_C": 42.89405998,
+     "R_th_max_K_W": 0.1789405998,
+     "R_th_avg_K_W": 0.1549245643,
+     "T_lid_top_centre_C": 40.02095983,
+     "heat_out_W_full": 100.0
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 2,
+    "dof": 33869,
+    "mesh": {
+     "nx": 20,
+     "ny": 20,
+     "nz": 14,
+     "elements": 3800
+    },
+    "balance_rel": -3.129514425e-12,
+    "q": {
+     "T_max_C": 42.89566631,
+     "R_th_max_K_W": 0.1789566631,
+     "R_th_avg_K_W": 0.1549609124,
+     "T_lid_top_centre_C": 40.02254584,
+     "heat_out_W_full": 100.0
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 3,
+    "dof": 110323,
+    "mesh": {
+     "nx": 30,
+     "ny": 30,
+     "nz": 21,
+     "elements": 12825
+    },
+    "balance_rel": -1.176090336e-12,
+    "q": {
+     "T_max_C": 42.89591782,
+     "R_th_max_K_W": 0.1789591782,
+     "R_th_avg_K_W": 0.1549674769,
+     "T_lid_top_centre_C": 40.02279223,
+     "heat_out_W_full": 100.0
+    }
+   }
+  ],
+  "convergence": {
+   "q1": {
+    "T_max_C": {
+     "p_obs": 3.463396976,
+     "p_used": 3.463396976,
+     "f_fine": 42.89598009,
+     "f_ext": 42.89591502,
+     "gci_fine": 1.896265202e-06,
+     "rel_change_last": 1.521605056e-05
+    },
+    "R_th_max_K_W": {
+     "p_obs": 3.463396976,
+     "p_used": 3.463396976,
+     "f_fine": 0.1789598009,
+     "f_ext": 0.1789591502,
+     "gci_fine": 4.545275192e-06,
+     "rel_change_last": 3.647229146e-05
+    },
+    "R_th_avg_K_W": {
+     "p_obs": 1.765516688,
+     "p_used": 1.765516688,
+     "f_fine": 0.1549142739,
+     "f_ext": 0.1549767207,
+     "gci_fine": 0.0005038823908,
+     "rel_change_last": 0.0009674370346
+    },
+    "T_lid_top_centre_C": {
+     "p_obs": 3.402872756,
+     "p_used": 3.402872756,
+     "f_fine": 40.02286759,
+     "f_ext": 40.02279729,
+     "gci_fine": 2.195794095e-06,
+     "rel_change_last": 1.682347857e-05
+    },
+    "heat_out_W_full": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 100.0,
+     "f_ext": null,
+     "gci_fine": null
+    }
+   },
+   "q2": {
+    "T_max_C": {
+     "p_obs": 2.278322659,
+     "p_used": 2.278322659,
+     "f_fine": 42.89591782,
+     "f_ext": 42.89608342,
+     "gci_fine": 4.825570357e-06,
+     "rel_change_last": 5.863239085e-06
+    },
+    "R_th_max_K_W": {
+     "p_obs": 2.278322659,
+     "p_used": 2.278322659,
+     "f_fine": 0.1789591782,
+     "f_ext": 0.1789608342,
+     "gci_fine": 1.156673111e-05,
+     "rel_change_last": 1.405398843e-05
+    },
+    "R_th_avg_K_W": {
+     "p_obs": 2.041750397,
+     "p_used": 2.041750397,
+     "f_fine": 0.1549674769,
+     "f_ext": 0.1549725719,
+     "gci_fine": 4.109764839e-05,
+     "rel_change_last": 4.236059416e-05
+    },
+    "T_lid_top_centre_C": {
+     "p_obs": 2.291221719,
+     "p_used": 2.291221719,
+     "f_fine": 40.02279223,
+     "f_ext": 40.02295306,
+     "gci_fine": 5.023064755e-06,
+     "rel_change_last": 6.156277909e-06
+    },
+    "heat_out_W_full": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 100.0,
+     "f_ext": null,
+     "gci_fine": null
+    }
+   }
+  },
+  "expected": {},
+  "assumptions": [
+   "die si_iso 25 x 25 x 0.775 mm with the 100 W as a uniform flux on its bottom face",
+   "TIM 50 um, k 5 W/mK, die footprint only; lid Cu 50 x 50 x 2 mm; h 5000 W/m2K, 25 C on lid top"
+  ]
+ }
+}

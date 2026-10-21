@@ -1,0 +1,68 @@
+schema: ap-sim-val/0
+id: A/MA7-lame-tsv
+tier: A
+title: Lame plane-strain Cu cylinder (TSV) in a Si matrix under uniform dT
+status: unvalidated
+physics: [thermo_elastic]
+box_compatible: false
+geometry_note: >-
+  Curved interface. A structured box grid can only staircase the cylinder, which puts re-entrant corners on the
+  interface and makes interface stresses mesh dependent (singular): do not gate the browser engine on this case.
+  Runs on the desktop reference (validation/reference/, L5) with a conforming mesh. Staircase variant for the
+  browser engine: compare only the Si stress at r >= 3a (1/r^2 decay) and the volume-averaged Cu stress, with the
+  staircase error measured, not assumed.
+tests: [interface stress continuity (sigma_rr continuous, sigma_tt jumps), curved interface meshing, 1/r^2 decay, domain truncation]
+inputs:
+  materials: {set: _materials_tier_a.yaml}
+  geometry:
+    analytic:
+      inclusion: {material: "tierA:cu_nu035", radius_um: 5}
+      matrix: {material: "tierA:si_iso", outer_radius_um: 100, note: "20 a; truncation error about (a/R)^2 = 0.25 %; repeat at 10 a and 40 a"}
+      slab: {thickness_um: 20, bc: "u_z = 0 on both faces (plane strain, eps_zz = 0)"}
+      outer_bc: traction-free
+    symmetry: quarter
+  physics:
+    mechanics: {stress_free_C: {default: 25}}
+  studies: [{id: s1, type: thermo_elastic, temperature: {uniform_C: [125]}}]
+expected:
+  - {quantity: p_Pa, definition: "interface pressure", value: 1.45048e8, unit: Pa, tolerance: {rel: 5.0e-3}, script_key: MA7.p_Pa}
+  - {quantity: cu_sigma_rr_Pa, probe: "inside Cu (uniform)", value: -1.45048e8, unit: Pa, tolerance: {rel: 1.0e-2}, script_key: MA7.cu_srr_Pa}
+  - {quantity: si_sigma_rr_Pa, probe: "Si at r = a", value: -1.45048e8, unit: Pa, tolerance: {rel: 1.0e-2}, script_key: MA7.si_srr_r_a_Pa}
+  - {quantity: si_sigma_tt_Pa, probe: "Si at r = a", value: 1.45048e8, unit: Pa, tolerance: {rel: 1.0e-2}, script_key: MA7.si_stt_r_a_Pa}
+  - {quantity: si_sigma_rr_Pa, probe: "Si at r = 2a", value: -3.62619e7, unit: Pa, tolerance: {rel: 1.0e-2}, script_key: MA7.si_srr_r_2a_Pa}
+  - {quantity: si_sigma_tt_Pa, probe: "Si at r = 2a", value: 3.62619e7, unit: Pa, tolerance: {rel: 1.0e-2}, script_key: MA7.si_stt_r_2a_Pa}
+  # closed form for the modelled finite matrix (outer radius 20 a, traction-free; tier_a.py ma7 finite_R20a), exact for
+  # the geometry, 0.26 % below the infinite-matrix value; agrees with lane L5's own closed form and its P2 Cu value
+  - {form: closed_form_finite_R, quantity: p_Pa, value: 1.44668e8, unit: Pa, tolerance: {rel: 1.0e-3}, script_key: MA7.finite_R20a.p_Pa}
+  # Gate quantities (wave 3): 9-angle ring means (`*_mean_Pa`) at r = 1.05a and 2a, vs the finite-R closed form.
+  # Single-point values scatter about +-1.7 % with angle on unstructured P2 tets (lane L5): reference only.
+  - {form: closed_form_finite_R, gate: ring_mean, quantity: si_r_1p05a_srr_mean_Pa, value: -1.31184e+8, unit: Pa, tolerance: {rel: 3.0e-3}, script_key: MA7.finite_R20a.si_srr_r_1p05a_Pa}
+  - {form: closed_form_finite_R, gate: ring_mean, quantity: si_r_1p05a_stt_mean_Pa, value: 1.31909e+8, unit: Pa, tolerance: {rel: 3.0e-3}, script_key: MA7.finite_R20a.si_stt_r_1p05a_Pa}
+  - {form: closed_form_finite_R, gate: ring_mean, quantity: si_r_2a_srr_mean_Pa, value: -3.5895e+7, unit: Pa, tolerance: {rel: 3.0e-3}, script_key: MA7.finite_R20a.si_srr_r_2a_Pa}
+  - {form: closed_form_finite_R, gate: ring_mean, quantity: si_r_2a_stt_mean_Pa, value: 3.66201e+7, unit: Pa, tolerance: {rel: 3.0e-3}, script_key: MA7.finite_R20a.si_stt_r_2a_Pa}
+  - {form: closed_form_finite_R, gate: ring_mean, quantity: cu_r_0p5a_srr_mean_Pa, value: -1.44668e+8, unit: Pa, tolerance: {rel: 1.0e-3}, script_key: MA7.finite_R20a.cu_srr_Pa}
+  - {form: reference_fe, gate: ring_mean, quantity: si_r_2a_srr_mean_Pa, value: -35990423.17, unit: Pa, tolerance: {rel: 3.0e-3},
+     ref: {file: MA7-skfem.json, path: results.R20a.convergence.p2.si_r_2a_srr_mean_Pa, field: f_fine}, diff_vs_closed_form_finite_R: -2.7e-3}
+  - {form: reference_fe, gate: ring_mean, quantity: si_r_2a_stt_mean_Pa, value: 36594554.37, unit: Pa, tolerance: {rel: 3.0e-3},
+     ref: {file: MA7-skfem.json, path: results.R20a.convergence.p2.si_r_2a_stt_mean_Pa, field: f_fine}, diff_vs_closed_form_finite_R: -7.0e-4}
+  - {form: reference_fe, gate: ring_mean, quantity: si_r_1p05a_srr_mean_Pa, value: -131369246.2, unit: Pa, tolerance: {rel: 3.0e-3},
+     ref: {file: MA7-skfem.json, path: results.R20a.convergence.p2.si_r_1p05a_srr_mean_Pa, field: f_fine}, diff_vs_closed_form_finite_R: -1.4e-3}
+  - {form: reference_fe, gate: ring_mean, quantity: si_r_1p05a_stt_mean_Pa, value: 132125049.2, unit: Pa, tolerance: {rel: 3.0e-3},
+     ref: {file: MA7-skfem.json, path: results.R20a.convergence.p2.si_r_1p05a_stt_mean_Pa, field: f_fine}, diff_vs_closed_form_finite_R: 1.6e-3}
+  - {form: closed_form_finite_R, gate: reference_only, quantity: si_stt_Pa, probe: "Si single point at r = a+", value: 1.45393e+8, unit: Pa, script_key: MA7.finite_R20a.si_stt_r_a_Pa}
+  - {form: reference_fe, quantity: cu_srr_centre_Pa, value: -144669425.7, unit: Pa, tolerance: {rel: 1.0e-3},
+     ref: {file: MA7-skfem.json, path: results.R20a.convergence.p2.cu_srr_centre_Pa, field: f_ext}, diff_vs_closed_form_finite_R: 1.2e-5}
+  - {quantity: equal_constant_check_Pa, form: reference, definition: "E da dT / (2 (1 - nu)) with Si constants (Ryu et al. 2011 limit)",
+     value: 1.3e8, unit: Pa, script_key: MA7.equal_constant_check_Pa}
+formula: "p = [(1 + nu1) a1 - (1 + nu2) a2] dT / [(1 + nu1)(1 - 2 nu1)/E1 + (1 + nu2)/E2]; Cu sigma_rr = sigma_tt = -p; Si sigma_rr = -p (a/r)^2, sigma_tt = +p (a/r)^2"
+provenance:
+  formula: "plane-strain Lame inclusion (own derivation in R6, re-derived by L4 2026-10-20 from displacement continuity at r = a); equal-constant limit as in S.-K. Ryu et al., IEEE TDMR 11, 35 (2011), not re-fetched; R6 section 1.1 MA7"
+  values: "validation/expected/tier_a.py ma7()"
+reference_note: >-
+  Resolved (L5 wave 2): single-point P2 stresses scatter about +-1.7 % with angle at r = 2a (the -35.26 MPa point was the
+  22.5 deg probe). The 9-angle ring means agree with the finite-R closed form within 0.3 % and are the gate quantities;
+  the infinite-matrix entries above stay as the textbook reference (0.26 % truncation for R = 20 a).
+tolerance_note: "5e-3 on p covers the 0.25 % truncation of a finite matrix (outer radius 20 a); 1e-2 for point stresses (R6 4.3)."
+missing: []
+assumptions:
+  - "Signs for heating (dT = +100 K): Cu expands more than Si, so the Cu is in compression and the Si hoop stress at the interface is tensile."

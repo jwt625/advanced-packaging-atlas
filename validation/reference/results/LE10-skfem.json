@@ -1,0 +1,430 @@
+{
+ "solver": "scikit-fem (apref)",
+ "versions": {
+  "python": "3.12.11",
+  "scikit-fem": "12.0.2",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pyamg": "5.3.0",
+  "gmsh": "4.15.2",
+  "scikit-rf": "2.2.0"
+ },
+ "case": "NAFEMS-LE10",
+ "tier": "B",
+ "expected_source": "R6 section 2.1 (-5.38 MPa)",
+ "results": {
+  "hex_graded_1.25": {
+   "runs": [
+    {
+     "elem": "q1",
+     "refine": 1,
+     "dof": 315,
+     "mesh": {
+      "ns": 3,
+      "nt": 6,
+      "nz": 2,
+      "elements": 48
+     },
+     "q": {
+      "sigma_yy_D_Pa": -5799190.883,
+      "sigma_xx_D_Pa": -751433.1149
+     }
+    },
+    {
+     "elem": "q1",
+     "refine": 2,
+     "dof": 1365,
+     "mesh": {
+      "ns": 6,
+      "nt": 12,
+      "nz": 4,
+      "elements": 288
+     },
+     "q": {
+      "sigma_yy_D_Pa": -5790067.013,
+      "sigma_xx_D_Pa": -825533.8518
+     }
+    },
+    {
+     "elem": "q1",
+     "refine": 4,
+     "dof": 8775,
+     "mesh": {
+      "ns": 12,
+      "nt": 24,
+      "nz": 8,
+      "elements": 2304
+     },
+     "q": {
+      "sigma_yy_D_Pa": -5732990.503,
+      "sigma_xx_D_Pa": -557985.1465
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 2,
+     "dof": 4887,
+     "mesh": {
+      "ns": 6,
+      "nt": 12,
+      "nz": 4,
+      "elements": 288
+     },
+     "q": {
+      "sigma_yy_D_Pa": -5602213.305,
+      "sigma_xx_D_Pa": -471726.3474
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 3,
+     "dof": 16299,
+     "mesh": {
+      "ns": 9,
+      "nt": 18,
+      "nz": 6,
+      "elements": 1080
+     },
+     "q": {
+      "sigma_yy_D_Pa": -5456328.169,
+      "sigma_xx_D_Pa": -151709.2835
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 4,
+     "dof": 33099,
+     "mesh": {
+      "ns": 12,
+      "nt": 24,
+      "nz": 8,
+      "elements": 2304
+     },
+     "q": {
+      "sigma_yy_D_Pa": -5418153.753,
+      "sigma_xx_D_Pa": -81623.39803
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 5,
+     "dof": 66399,
+     "mesh": {
+      "ns": 15,
+      "nt": 30,
+      "nz": 10,
+      "elements": 4800
+     },
+     "q": {
+      "sigma_yy_D_Pa": -5387806.145,
+      "sigma_xx_D_Pa": -23049.13301
+     }
+    },
+    {
+     "elem": "q2",
+     "refine": 2,
+     "dof": 8775,
+     "mesh": {
+      "ns": 6,
+      "nt": 12,
+      "nz": 4,
+      "elements": 288
+     },
+     "q": {
+      "sigma_yy_D_Pa": -5539681.413,
+      "sigma_xx_D_Pa": -419279.7571
+     }
+    },
+    {
+     "elem": "q2",
+     "refine": 3,
+     "dof": 30303,
+     "mesh": {
+      "ns": 9,
+      "nt": 18,
+      "nz": 6,
+      "elements": 1080
+     },
+     "q": {
+      "sigma_yy_D_Pa": -5429103.355,
+      "sigma_xx_D_Pa": -125681.1288
+     }
+    },
+    {
+     "elem": "q2",
+     "refine": 4,
+     "dof": 62475,
+     "mesh": {
+      "ns": 12,
+      "nt": 24,
+      "nz": 8,
+      "elements": 2304
+     },
+     "q": {
+      "sigma_yy_D_Pa": -5400363.145,
+      "sigma_xx_D_Pa": -68326.46571
+     }
+    }
+   ],
+   "convergence": {
+    "q1": {
+     "sigma_yy_D_Pa": {
+      "p_obs": 2.645179425,
+      "p_used": 2.645179425,
+      "f_fine": -5732990.503,
+      "f_ext": -5722130.651,
+      "gci_fine": 0.002367842066,
+      "rel_change_last": 0.009955800546,
+      "expected": -5380000.0,
+      "rel_err_fine": -0.06561161775,
+      "rel_err_ext": -0.06359305774,
+      "orders_vs_exact": [
+       0.0317476441,
+       0.2162303242
+      ]
+     },
+     "sigma_xx_D_Pa": {
+      "p_obs": null,
+      "p_used": null,
+      "f_fine": -557985.1465,
+      "f_ext": null,
+      "gci_fine": null
+     }
+    },
+    "q2s": {
+     "sigma_yy_D_Pa": {
+      "p_obs": 0.1289626735,
+      "p_used": 0.1289626735,
+      "f_fine": -5387806.145,
+      "f_ext": -4348335.514,
+      "gci_fine": 0.2411627764,
+      "rel_change_last": 0.005632646588,
+      "expected": -5380000.0,
+      "rel_err_fine": -0.00145095637,
+      "rel_err_ext": 0.1917591981,
+      "orders_vs_exact": [
+       2.635481272,
+       2.410361962,
+       7.110726903
+      ]
+     },
+     "sigma_xx_D_Pa": {
+      "p_obs": 0.3920158061,
+      "p_used": 0.3920158061,
+      "f_fine": -23049.13301,
+      "f_ext": 617696.0379,
+      "gci_fine": 34.74887595,
+      "rel_change_last": 2.541278451
+     }
+    },
+    "q2": {
+     "sigma_yy_D_Pa": {
+      "p_obs": 2.820791317,
+      "p_used": 2.820791317,
+      "f_fine": -5400363.145,
+      "f_ext": -5377394.171,
+      "gci_fine": 0.005316534402,
+      "rel_change_last": 0.005321903357,
+      "expected": -5380000.0,
+      "rel_err_fine": -0.003784971112,
+      "rel_err_ext": 0.0004843547527,
+      "orders_vs_exact": [
+       2.908396476,
+       3.059630142
+      ]
+     },
+     "sigma_xx_D_Pa": {
+      "p_obs": 3.597733444,
+      "p_used": 3.597733444,
+      "f_fine": -68326.46571,
+      "f_ext": -36728.11718,
+      "gci_fine": 0.5780766685,
+      "rel_change_last": 0.8394208961
+     }
+    }
+   },
+   "expected": {
+    "sigma_yy_D_Pa": -5380000.0
+   }
+  },
+  "hex_uniform": {
+   "runs": [
+    {
+     "elem": "q2s",
+     "refine": 3,
+     "dof": 14781,
+     "mesh": {
+      "ns": 9,
+      "nt": 18,
+      "nz": 6,
+      "elements": 972
+     },
+     "q": {
+      "sigma_yy_D_Pa": -5508674.123,
+      "sigma_xx_D_Pa": -337820.2768
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 4,
+     "dof": 33099,
+     "mesh": {
+      "ns": 12,
+      "nt": 24,
+      "nz": 8,
+      "elements": 2304
+     },
+     "q": {
+      "sigma_yy_D_Pa": -5468501.386,
+      "sigma_xx_D_Pa": -225023.7619
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 5,
+     "dof": 62433,
+     "mesh": {
+      "ns": 15,
+      "nt": 30,
+      "nz": 10,
+      "elements": 4500
+     },
+     "q": {
+      "sigma_yy_D_Pa": -5442348.691,
+      "sigma_xx_D_Pa": -156927.7568
+     }
+    }
+   ],
+   "convergence": {
+    "q2s": {
+     "sigma_yy_D_Pa": {
+      "p_obs": 0.6834206964,
+      "p_used": 0.6834206964,
+      "f_fine": -5442348.691,
+      "f_ext": -5283600.763,
+      "gci_fine": 0.03646126363,
+      "rel_change_last": 0.004805405972,
+      "expected": -5380000.0,
+      "rel_err_fine": -0.01158897611,
+      "rel_err_ext": 0.01791807377,
+      "orders_vs_exact": [
+       1.300966747,
+       1.569731816
+      ]
+     },
+     "sigma_xx_D_Pa": {
+      "p_obs": 0.9761401898,
+      "p_used": 0.9761401898,
+      "f_fine": -156927.7568,
+      "f_ext": 122885.3212,
+      "gci_fine": 2.228836725,
+      "rel_change_last": 0.4339321897
+     }
+    }
+   },
+   "expected": {
+    "sigma_yy_D_Pa": -5380000.0
+   }
+  },
+  "tet_p2": {
+   "runs": [
+    {
+     "elem": "p2",
+     "refine": 1,
+     "dof": 15669,
+     "mesh": {
+      "lc_far_m": 0.2,
+      "lc_D_m": 0.04,
+      "elements": 2890
+     },
+     "q": {
+      "sigma_yy_D_Pa": -5397555.623,
+      "sigma_xx_D_Pa": -8566.151332
+     }
+    },
+    {
+     "elem": "p2",
+     "refine": 2,
+     "dof": 51945,
+     "mesh": {
+      "lc_far_m": 0.12,
+      "lc_D_m": 0.016,
+      "elements": 10551
+     },
+     "q": {
+      "sigma_yy_D_Pa": -5388837.305,
+      "sigma_xx_D_Pa": 3656.968161
+     }
+    },
+    {
+     "elem": "p2",
+     "refine": 3,
+     "dof": 55014,
+     "mesh": {
+      "lc_far_m": 0.12,
+      "lc_D_m": 0.008,
+      "elements": 11174
+     },
+     "q": {
+      "sigma_yy_D_Pa": -5387354.223,
+      "sigma_xx_D_Pa": 534.810543
+     }
+    },
+    {
+     "elem": "p2",
+     "refine": 4,
+     "dof": 114603,
+     "mesh": {
+      "lc_far_m": 0.09,
+      "lc_D_m": 0.008,
+      "elements": 24669
+     },
+     "q": {
+      "sigma_yy_D_Pa": -5384662.865,
+      "sigma_xx_D_Pa": 939.4891349
+     }
+    }
+   ],
+   "convergence": {
+    "p2": {
+     "sigma_yy_D_Pa": {
+      "p_obs": 4.379117331,
+      "p_used": 4.379117331,
+      "f_fine": -5384662.865,
+      "f_ext": -5383596.852,
+      "gci_fine": 0.0002474652265,
+      "rel_change_last": 0.000499819126,
+      "expected": -5380000.0,
+      "rel_err_fine": -0.0008667035688,
+      "rel_err_ext": -0.0006685598045,
+      "orders_vs_exact": [
+       0.990254875,
+       0.4530778993,
+       1.583847581
+      ]
+     },
+     "sigma_xx_D_Pa": {
+      "p_obs": null,
+      "p_used": null,
+      "f_fine": 939.4891349,
+      "f_ext": null,
+      "gci_fine": null
+     }
+    }
+   },
+   "expected": {
+    "sigma_yy_D_Pa": -5380000.0
+   }
+  },
+  "sources": {
+   "retrieved": "2026-10-20",
+   "urls": [
+    "https://raw.githubusercontent.com/seamplex/feenox/main/examples/nafems-le10.step",
+    "https://raw.githubusercontent.com/seamplex/feenox/main/examples/nafems-le10.geo",
+    "https://raw.githubusercontent.com/seamplex/feenox/main/examples/nafems-le10.fee",
+    "https://abaqus-docs.mit.edu/2017/English/SIMACAEBMKRefMap/simabmk-c-le10.htm"
+   ]
+  },
+  "note": "tet_p2 'refine' index: (lc_far, lc_D) = (0.2, 0.04), (0.12, 0.016), (0.12, 0.008), (0.09, 0.008) m; hex_graded: two-sided grading in s (toward D and toward the clamped outer face / line EE'), one-sided toward t = 0 and the top face. One-sided s-grading (toward D only) plateaued at -5.412 MPa: the result is sensitive to resolution at the outer support (log-singular line EE')."
+ }
+}

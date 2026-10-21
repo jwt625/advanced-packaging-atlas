@@ -1,0 +1,53 @@
+schema: ap-sim-val/0
+id: H/H16-hbm-bonding-tj
+tier: H
+title: 'MR-MUF HBM runs cooler than TC-NCF HBM (8Hi): DRAM Tj lower by about 14 C [weak: 1 paper]'
+status: unvalidated
+physics:
+- thermal_stationary
+strength: weak
+scope_package_classes:
+- microbump_3d HBM 8Hi (SK hynix, one paper, transient measurement)
+applies_to:
+- hbm_stack/stack_thermal
+rule:
+  type: direction
+  expr: Tj(MR-MUF) < Tj(TC-NCF); difference in [7, 21] C (+-50 %)
+  strength: weak
+fails_if: Tj(MR-MUF) >= Tj(TC-NCF), or the difference outside [7, 21] C
+n_papers: 1
+support:
+- metric_id: ectc51909.2023.00151-b-m6
+  value: 14
+  unit: C
+  parameter: average DRAM Tj reduction vs TC-NCF 8Hi HBM
+  condition: IDD4; pin speed 2.0 Gbps; VDD 1.26 V
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Sec. III.C; p.4 Fig. 14
+- metric_id: ectc51909.2023.00151-b-m7
+  value: 100
+  unit: C
+  parameter: DRAM junction temperature at 200 s
+  condition: IDD4; 2.0 Gbps; VDD 1.26 V; start 85 C
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 14
+- metric_id: ectc51909.2023.00151-c-m1
+  value: 114
+  unit: C
+  parameter: DRAM junction temperature at 200 s
+  condition: IDD4; 2.0 Gbps; VDD 1.26 V; start 85 C
+  basis: measured
+  package_class: microbump_3d
+  locator: p.4 Fig. 14
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+notes:
+- Measured transient at 200 s from 85 C start, IDD4 (not steady state); the engine comparison needs the transient study or a steady proxy. Single
+  paper (SK hynix).
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

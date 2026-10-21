@@ -1,0 +1,265 @@
+{
+ "solver": "scikit-fem (apref)",
+ "versions": {
+  "python": "3.12.11",
+  "scikit-fem": "12.0.2",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pyamg": "5.3.0",
+  "gmsh": "4.15.2",
+  "scikit-rf": "2.2.0"
+ },
+ "case": "XB1",
+ "tier": "B",
+ "results": {
+  "w1mm": {
+   "runs": [
+    {
+     "elem": "q2s",
+     "refine": 1,
+     "dof": 1059,
+     "mesh": {
+      "nx": 10,
+      "ny": 1,
+      "nz": 4,
+      "elements": 40
+     },
+     "q": {
+      "kappa_x_clt_1_m": -2.157922035,
+      "kappa_y_clt_1_m": -2.180475113
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 2,
+     "dof": 5967,
+     "mesh": {
+      "nx": 20,
+      "ny": 2,
+      "nz": 8,
+      "elements": 320
+     },
+     "q": {
+      "kappa_x_clt_1_m": -2.157744721,
+      "kappa_y_clt_1_m": -1.954240709
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 4,
+     "dof": 38859,
+     "mesh": {
+      "nx": 40,
+      "ny": 4,
+      "nz": 16,
+      "elements": 2560
+     },
+     "q": {
+      "kappa_x_clt_1_m": -2.157681748,
+      "kappa_y_clt_1_m": -1.926963092
+     }
+    }
+   ],
+   "convergence": {
+    "q2s": {
+     "kappa_x_clt_1_m": {
+      "p_obs": 1.493483579,
+      "p_used": 1.493483579,
+      "f_fine": -2.157681748,
+      "f_ext": -2.157647065,
+      "gci_fine": 2.00928891e-05,
+      "rel_change_last": 2.918581168e-05
+     },
+     "kappa_y_clt_1_m": {
+      "p_obs": 3.052028774,
+      "p_used": 3.052028774,
+      "f_fine": -1.926963092,
+      "f_ext": -1.923223242,
+      "gci_fine": 0.002425999688,
+      "rel_change_last": 0.01415575519
+     }
+    }
+   },
+   "expected": {}
+  },
+  "w2mm": {
+   "runs": [
+    {
+     "elem": "q2s",
+     "refine": 1,
+     "dof": 1671,
+     "mesh": {
+      "nx": 10,
+      "ny": 2,
+      "nz": 4,
+      "elements": 80
+     },
+     "q": {
+      "kappa_x_clt_1_m": -2.158502604,
+      "kappa_y_clt_1_m": -2.16212366
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 2,
+     "dof": 10323,
+     "mesh": {
+      "nx": 20,
+      "ny": 4,
+      "nz": 8,
+      "elements": 640
+     },
+     "q": {
+      "kappa_x_clt_1_m": -2.15839151,
+      "kappa_y_clt_1_m": -2.176472058
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 4,
+     "dof": 71619,
+     "mesh": {
+      "nx": 40,
+      "ny": 8,
+      "nz": 16,
+      "elements": 5120
+     },
+     "q": {
+      "kappa_x_clt_1_m": -2.158359993,
+      "kappa_y_clt_1_m": -2.175729592
+     }
+    }
+   ],
+   "convergence": {
+    "q2s": {
+     "kappa_x_clt_1_m": {
+      "p_obs": 1.817555979,
+      "p_used": 1.817555979,
+      "f_fine": -2.158359993,
+      "f_ext": -2.15834751,
+      "gci_fine": 7.229430296e-06,
+      "rel_change_last": 1.460249849e-05
+     },
+     "kappa_y_clt_1_m": {
+      "p_obs": null,
+      "p_used": null,
+      "f_fine": -2.175729592,
+      "f_ext": null,
+      "gci_fine": null
+     }
+    }
+   },
+   "expected": {}
+  },
+  "w5mm": {
+   "runs": [
+    {
+     "elem": "q2s",
+     "refine": 1,
+     "dof": 3507,
+     "mesh": {
+      "nx": 10,
+      "ny": 5,
+      "nz": 4,
+      "elements": 200
+     },
+     "q": {
+      "kappa_x_clt_1_m": -2.158898691,
+      "kappa_y_clt_1_m": -2.159279654
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 2,
+     "dof": 23391,
+     "mesh": {
+      "nx": 20,
+      "ny": 10,
+      "nz": 8,
+      "elements": 1600
+     },
+     "q": {
+      "kappa_x_clt_1_m": -2.158863126,
+      "kappa_y_clt_1_m": -2.159381643
+     }
+    }
+   ],
+   "convergence": {
+    "q2s": {
+     "kappa_x_clt_1_m": {
+      "p_obs": null,
+      "p_used": null,
+      "f_fine": -2.158863126,
+      "f_ext": null,
+      "gci_fine": null
+     },
+     "kappa_y_clt_1_m": {
+      "p_obs": null,
+      "p_used": null,
+      "f_fine": -2.159381643,
+      "f_ext": null,
+      "gci_fine": null
+     }
+    }
+   },
+   "expected": {}
+  },
+  "w10mm": {
+   "runs": [
+    {
+     "elem": "q2s",
+     "refine": 1,
+     "dof": 6567,
+     "mesh": {
+      "nx": 10,
+      "ny": 10,
+      "nz": 4,
+      "elements": 400
+     },
+     "q": {
+      "kappa_x_clt_1_m": -2.159072364,
+      "kappa_y_clt_1_m": -2.159072364
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 2,
+     "dof": 45171,
+     "mesh": {
+      "nx": 20,
+      "ny": 20,
+      "nz": 8,
+      "elements": 3200
+     },
+     "q": {
+      "kappa_x_clt_1_m": -2.15906425,
+      "kappa_y_clt_1_m": -2.15906425
+     }
+    }
+   ],
+   "convergence": {
+    "q2s": {
+     "kappa_x_clt_1_m": {
+      "p_obs": null,
+      "p_used": null,
+      "f_fine": -2.15906425,
+      "f_ext": null,
+      "gci_fine": null
+     },
+     "kappa_y_clt_1_m": {
+      "p_obs": null,
+      "p_used": null,
+      "f_fine": -2.15906425,
+      "f_ext": null,
+      "gci_fine": null
+     }
+    }
+   },
+   "expected": {}
+  },
+  "closed_forms": {
+   "beam_timoshenko_1_m": -2.156230366,
+   "plate_Q_abs_1_m": 2.159134962
+  }
+ }
+}

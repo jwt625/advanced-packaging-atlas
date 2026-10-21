@@ -1,0 +1,46 @@
+schema: ap-sim-val/0
+id: H/H09-filler-dies
+tier: H
+title: 'Replacing EMC volume by Si filler dies reduces molded-interposer warpage at 260 C [weak: 1 paper]'
+status: unvalidated
+physics:
+- thermo_elastic
+strength: weak
+scope_package_classes:
+- si_interposer_2p5d (JOINT2 2023, one paper, viscoelastic FEM)
+applies_to:
+- si_interposer_peers/50mm_quarter
+rule:
+  type: direction
+  expr: '|w(filler)| < |w(original)|, same sign; ratio about 0.25'
+  strength: weak
+fails_if: '|w(filler)| >= |w(original)|, a sign change, or |w(filler)| / |w(original)| outside [0.12, 0.5] (paper 0.25)'
+n_papers: 1
+support:
+- metric_id: ectc51909.2023.00155-d-m1
+  value: -189
+  unit: um
+  parameter: interposer with molded dies warpage at 260 C (FEM)
+  variant: original design (no filler dies)
+  condition: 260 C; stress-free 150 C
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.5 Fig. 9; p.5 Sec. III.C
+- metric_id: ectc51909.2023.00155-a-m7
+  value: -47
+  unit: um
+  parameter: interposer with molded dies warpage at 260 C (FEM)
+  variant: modified design with filler dies
+  condition: 260 C; stress-free 150 C
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.5 Fig. 9; p.5 Sec. III.C
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+notes:
+- -189 -> -47 um (FEM, viscoelastic EMC). Single paper; mirrors the C-tier case relations.
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

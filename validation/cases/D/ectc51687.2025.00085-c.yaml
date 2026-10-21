@@ -1,0 +1,27 @@
+schema: ap-sim-val/0
+id: D/ectc51687.2025.00085-c
+tier: D
+title: TSMC CoWoS-R thermal test vehicle with indium TIM1 - measured Tj, Tc, Rjc at 1866 W SoC power
+status: unvalidated
+physics: [thermal_stationary]
+gate: "E1 thermal 1 (DevLog-010)"
+source: {paper_id: ectc51687.2025.00085, tv_id: ectc51687.2025.00085-c}
+inputs:
+  sim_case: cowos_r/thermal_rjc
+  variants:
+    indium_200um: {tim1: indium, tim1_blt_um: 200, soc_power_W: 1866, hbm_power_W: 0, coolant_inlet_C: 20}
+  studies: [{id: s1, type: thermal_stationary}]
+targets:
+  - {metric_id: ectc51687.2025.00085-c-m5, quantity: Tj_max_C, value: 104.9, unit: C, basis: measured, locator: "p.3 Table 4", condition: "1866 W uniform SoC power; inlet 20 C",
+     tolerance: {rel_rise: 0.10, reference_C: 20}}
+  - {metric_id: ectc51687.2025.00085-c-m6, quantity: Tc_C, value: 84.6, unit: C, basis: measured, locator: "p.3 Table 4", tolerance: {rel_rise: 0.10, reference_C: 20}}
+  - {metric_id: ectc51687.2025.00085-c-m7, quantity: Rjc_C_W, value: 0.0109, unit: C/W, basis: measured, locator: "p.3 Table 4", definition: "(Tj - Tc) / P_SoC", tolerance: {rel: 0.10}}
+  - {metric_id: ectc51687.2025.00085-c-m1, quantity: Rjc_C_W, value: 0.0108, unit: C/W, basis: measured, locator: "p.3 Table 2", note: "Table 2 summary value of the same TV", tolerance: {rel: 0.10}}
+internal_checks:
+  - {rule: "(Tj - Tc) / P = Rjc", value: "(104.9 - 84.6) / 1866 = 0.01088 C/W, consistent with c-m7 0.0109", status: pass}
+missing:
+  - "die / interposer / substrate thicknesses and the model geometry Table 3 (image-only in text.md; areas captured in components rows: SoC 332.8 mm2 x 4, HBM 121 mm2 x 8, interposer 2685 mm2, substrate 5616 mm2, lid 5556 mm2)"
+  - "cold-plate heat-transfer coefficient or curve (S-type liquid cold plate); Tc sensor location detail"
+  - "TIM1 contact resistance value (normalized only; it is the calibration parameter of the paper model)"
+assumptions:
+  - "Cold plate as an HTC on the lid top with T_inf = inlet 20 C; h calibrated once on this case and then frozen for C/ectc51687.2025.00085-d sweeps (a calibrated case validates the sweep trends, not the absolute value)."

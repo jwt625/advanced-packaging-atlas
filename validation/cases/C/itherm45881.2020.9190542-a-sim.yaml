@@ -1,0 +1,41 @@
+schema: ap-sim-val/0
+id: C/itherm45881.2020.9190542-a-sim
+tier: C
+title: MediaTek InFO_oS lidded TTV - simulated JEDEC ThetaJC vs TIM BLT, TIM type and power ratio; vapor-chamber model superposition
+status: unvalidated
+physics: [thermal_stationary]
+gate: "E1 thermal 2 (DevLog-010 E1 gates)"
+source: {paper_id: itherm45881.2020.9190542, tv_ids: [itherm45881.2020.9190542-a, itherm45881.2020.9190542-b], measured_peer: D/itherm45881.2020.9190542-a-test}
+inputs:
+  sim_case: info_os/theta_jc_tim     # lane L3 case config (sims/info_os/theta_jc_tim.yaml)
+  geometry_facts:
+    - "substrate 62.5 x 62.5 mm; InFO die (fan-out) 22.78 x 34.0 mm; 2 thermal dies 21.78 x 16.25 mm (text 16.26: conflict noted in components row); lidded; TIM1 BLT 60 um baseline, 140 um variant (TV / components rows)"
+  variants: "as D/itherm45881.2020.9190542-a-test, plus power ratio condition B (PH1 200 W, PH2 0 W) vs A (100 / 100 W), and the 14 vapor-chamber cases of TV -b"
+  bc: "JEDEC ThetaJC cold plate on the lid (TV -a); vapor-chamber heat sink, Tamb 55 C (TV -b, model only)"
+targets:
+  - {metric_id: itherm45881.2020.9190542-a-m1, variant: gel6_blt140, quantity: ThetaJC_C_W, value: 0.063, basis: simulated, locator: "p.4 Table 3", tolerance: {rel: 0.05}}
+  - {metric_id: itherm45881.2020.9190542-a-m2, variant: gel6_blt60,  quantity: ThetaJC_C_W, value: 0.033, basis: simulated, locator: "p.4 Table 3", tolerance: {rel: 0.05}}
+  - {metric_id: itherm45881.2020.9190542-a-m5, variant: timA, quantity: ThetaJC_C_W, value: 0.036, basis: simulated, locator: "p.4 Table 5", tolerance: {rel: 0.05}}
+  - {metric_id: itherm45881.2020.9190542-a-m6, variant: timB, quantity: ThetaJC_C_W, value: 0.033, basis: simulated, locator: "p.4 Table 5", tolerance: {rel: 0.05}}
+  - {metric_id: itherm45881.2020.9190542-a-m7, variant: timC, quantity: ThetaJC_C_W, value: 0.025, basis: simulated, locator: "p.4 Table 5", tolerance: {rel: 0.05}}
+  - {metric_id: itherm45881.2020.9190542-a-m8, variant: timD, quantity: ThetaJC_C_W, value: 0.025, basis: simulated, locator: "p.4 Table 5", tolerance: {rel: 0.05}}
+  - {metric_id: itherm45881.2020.9190542-a-m21, quantity: ThetaJC_ratio, value: 2.05, basis: simulated, locator: "p.5 Table 6 (approx)",
+     definition: "ThetaJC(PH1 200, PH2 0) / ThetaJC(100 / 100)", tolerance: {rel: 0.05}}
+  - {metric_id: itherm45881.2020.9190542-b-m1,  quantity: Tj_die1_C, value: 114.0, basis: simulated, locator: "p.5 Table 7", condition: "250 / 250 W, Tamb 55 C", tolerance: {rel_rise: 0.05, reference_C: 55}}
+  - {metric_id: itherm45881.2020.9190542-b-m31, quantity: Tj_die1_C, value: 96.9, basis: simulated, locator: "p.5 Table 7", condition: "250 / 0 W", tolerance: {rel_rise: 0.05, reference_C: 55}}
+  - {metric_id: itherm45881.2020.9190542-b-m32, quantity: Tj_die2_C, value: 72.0, basis: simulated, locator: "p.5 Table 7", condition: "250 / 0 W (unpowered die)", tolerance: {rel_rise: 0.05, reference_C: 55}}
+derived:   # validation/expected/derived_checks.py
+  - {quantity: superposition, rule: "Tj_i = Tamb + sum_j R_ij P_j with R11 = R22 = 0.1676, R12 = R21 = 0.0681 K/W fits all 14 cases of TV -b within 0.06 C",
+     metric_ids: "itherm45881.2020.9190542-b-m1 .. -b-m42", status: pass,
+     use: "engine gate: the influence matrix from two single-die runs must predict the multi-die cases to the same precision (linear conduction)"}
+  - {quantity: ThetaJC_BLT_slope_C_W_per_m, value: 375, rule: ">= 235 (1D bound 1 / (k A_dies), k 6 W/mK, A_dies 707.85 mm2)", status: pass,
+     reading: "Tj is a maximum, so the BLT term weighs the hot region: A_eff 444 mm2 < die area"}
+observations:
+  - "TIM-type sweep vs BLT sweep: a 1D TIM term predicts dTheta(3.2 -> 6.0 W/mK, 60 um) = 0.0124 C/W, but Table 5 shows 0.003 (sim) / 0.002 (test), while the BLT sweep is 1.6x above the 1D term. The TIM rows likely include interface / coverage effects (coverage 90-98 %, rows a-m13..m15) that the paper does not quantify. Use the TIM-type rows as rank-order targets (A > B > C ~ D), not absolute, until resolved (L4 inference, 2026-10-20)."
+missing:
+  - "lid, die, molding, RDL, substrate thicknesses and conductivities; lid material; adhesive"
+  - "JEDEC cold-plate BC detail (h or fixed T, Tc thermocouple location: lid centre per Eq. 1)"
+  - "power for the Table 3 / Table 5 tests (not stated)"
+  - "vapor-chamber heat-sink model (TV -b): dimensions and ThetaCA not given"
+assumptions:
+  - "Cold plate as fixed temperature or high HTC on the lid top; ThetaJC independent of power (linear model)."

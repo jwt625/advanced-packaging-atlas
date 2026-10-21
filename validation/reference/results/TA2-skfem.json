@@ -1,0 +1,59 @@
+{
+ "solver": "scikit-fem (apref)",
+ "versions": {
+  "python": "3.12.11",
+  "scikit-fem": "12.0.2",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pyamg": "5.3.0",
+  "gmsh": "4.15.2",
+  "scikit-rf": "2.2.0"
+ },
+ "case": "TA2",
+ "tier": "A",
+ "expected_source": "validation/expected/tier_a_values.json",
+ "results": {
+  "runs": [
+   {
+    "elem": "q1",
+    "refine": 1,
+    "dof": 135,
+    "mesh": {
+     "nx": 2,
+     "ny": 2,
+     "nz": 14,
+     "elements": 56
+    },
+    "balance_rel": 2.842170943e-14,
+    "q": {
+     "T_bottom_C": 155.3646916,
+     "T_top_C": 125.0,
+     "heat_out_W_full": 100.0
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 1,
+    "dof": 725,
+    "mesh": {
+     "nx": 2,
+     "ny": 2,
+     "nz": 14,
+     "elements": 56
+    },
+    "balance_rel": -6.377831596e-13,
+    "q": {
+     "T_bottom_C": 155.3646916,
+     "T_top_C": 125.0,
+     "heat_out_W_full": 100.0
+    }
+   }
+  ],
+  "convergence": {},
+  "expected": {
+   "T_bottom_C": 155.3646916,
+   "T_top_C": 125.0,
+   "heat_out_W_full": 100.0
+  }
+ }
+}

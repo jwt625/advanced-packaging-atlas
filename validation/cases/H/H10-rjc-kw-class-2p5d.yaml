@@ -1,0 +1,120 @@
+schema: ap-sim-val/0
+id: H/H10-rjc-kw-class-2p5d
+tier: H
+title: 'Package Rjc of kW-class 2.5D (4 SoC + 8 HBM, 3.3x reticle RDL interposer) with liquid cold plate: 0.008-0.015 C/W [weak: 1 paper]'
+status: unvalidated
+physics:
+- thermal_stationary
+strength: weak
+scope_package_classes:
+- organic_rdl_interposer (TSMC CoWoS-R thermal TV, one paper)
+applies_to:
+- cowos_r/thermal_rjc
+rule:
+  type: range
+  expr: Rjc in [0.0075, 0.015] C/W; TIM order indium < liquid-metal gel < graphite film
+  strength: weak
+fails_if: Rjc outside [0.0075, 0.015] C/W for the indium / LM-gel / graphite variants, or the TIM order inverted in a model that includes TIM
+  interface resistance
+n_papers: 1
+support:
+- metric_id: ectc51687.2025.00085-a-m1
+  value: 0.014
+  unit: C/W
+  parameter: package Rjc
+  condition: max SoC Tj 105 C; SoC heaters only; S-type liquid cold plate
+  basis: measured
+  package_class: organic_rdl_interposer
+  locator: p.3 Table 2; p.3 Sec. IV.B
+- metric_id: ectc51687.2025.00085-b-m1
+  value: 0.012
+  unit: C/W
+  parameter: package Rjc
+  condition: max SoC Tj 105 C; SoC heaters only; S-type liquid cold plate
+  basis: measured
+  package_class: organic_rdl_interposer
+  locator: p.3 Table 2; p.3 Sec. IV.B
+- metric_id: ectc51687.2025.00085-c-m1
+  value: 0.0108
+  unit: C/W
+  parameter: package Rjc
+  condition: max SoC Tj 105 C; SoC heaters only; S-type liquid cold plate
+  basis: measured
+  package_class: organic_rdl_interposer
+  locator: p.3 Table 2; p.3 Sec. IV.B
+- metric_id: ectc51687.2025.00085-d-m3
+  value: 0.0108
+  unit: C/W
+  parameter: package Rjc
+  variant: calibration; S-type cold plate
+  condition: 1866 W; inlet 20 C
+  basis: simulated
+  package_class: organic_rdl_interposer
+  locator: p.3 Table 4
+- metric_id: ectc51687.2025.00085-d-m4
+  value: 0.00982
+  unit: C/W
+  parameter: package Rjc
+  variant: TIM1 BLT 25 um
+  condition: Tj max 105 C
+  basis: simulated
+  package_class: organic_rdl_interposer
+  locator: p.4 Fig. 8
+- metric_id: ectc51687.2025.00085-d-m10
+  value: 0.01082
+  unit: C/W
+  parameter: package Rjc
+  variant: TIM1 BLT 200 um
+  condition: Tj max 105 C
+  basis: simulated
+  package_class: organic_rdl_interposer
+  locator: p.4 Fig. 8
+- metric_id: ectc51687.2025.00085-d-m12
+  value: 0.00759
+  unit: C/W
+  parameter: package Rjc
+  variant: normalized TIM1 contact resistance 0
+  condition: Tj max 105 C
+  basis: simulated
+  package_class: organic_rdl_interposer
+  locator: p.4 Fig. 9
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+related:
+- metric_id: ectc51846.2026.00156-a-m38
+  value: 0.0164
+  unit: C/W
+  parameter: Rth junction-to-inlet, GPU (MF)
+  variant: flow 1.0 LPM
+  condition: Test 1 (GPU Burn DP)
+  basis: measured
+  package_class: unspecified
+  locator: p.3 Fig. 7
+- metric_id: ectc51846.2026.00156-a-m42
+  value: 0.0115
+  unit: C/W
+  parameter: Rth junction-to-inlet, GPU (MF)
+  variant: flow 2.0 LPM
+  condition: Test 1 (GPU Burn DP)
+  basis: measured
+  package_class: unspecified
+  locator: p.3 Fig. 7
+- metric_id: ectc51846.2026.00156-a-m34
+  value: 0.0337
+  unit: C/W
+  parameter: Rth junction-to-inlet, GPU (MF)
+  variant: flow 0.3 LPM
+  condition: Test 1 (GPU Burn DP)
+  basis: measured
+  package_class: unspecified
+  locator: p.3 Fig. 7
+notes:
+- 'Measured TIM types: graphite film 0.014, liquid-metal gel 0.012, indium 0.0108 C/W; model sweeps 0.00759 (no contact R) to 0.01082 C/W.'
+- 'Related, different definition: GH200 direct-to-Si microfluidic junction-to-inlet Rth 0.0115-0.0337 C/W over 2.0-0.3 LPM (includes the coolant
+  side); listed for order of magnitude only.'
+- Single TV family for Rjc; the range is wide enough to admit unknown cold-plate h.
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

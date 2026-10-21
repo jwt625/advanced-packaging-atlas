@@ -1,0 +1,37 @@
+schema: ap-sim-val/0
+id: A/MA8-orthotropic-expansion
+tier: A
+title: Orthotropic free expansion, CTE (11, 11, 16) ppm/K, aligned and with the material frame rotated 30 deg about x
+status: unvalidated
+physics: [thermo_elastic]
+box_compatible: true
+tests: [anisotropic CTE tensor, material frame rotation, no spurious stress]
+inputs:
+  materials: {set: _materials_tier_a.yaml}
+  geometry:
+    symmetry: none
+    boxes:
+      - {id: cube, kind: substrate, material: "tierA:ortho_core", x_mm: 0, y_mm: 0, w_mm: 10, d_mm: 10, z_um: 0, h_um: 10000}
+  mesh: {max_xy_mm: 2.5, min_cells_per_layer: 4}
+  physics:
+    mechanics: {element: q2s, stress_free_C: {default: 25}, supports: rigid_motion}
+  studies: [{id: s1, type: thermo_elastic, temperature: {uniform_C: [125]}}]
+variants:
+  aligned: {}
+  rot30x: {material_frame: "material axes rotated +30 deg about x (active R, SPEC section 12) (a rotation about z is trivial since alpha_x = alpha_y)", needs: "material orientation for ortho entries (SPEC v0 has orientation only for cubic)"}
+expected:
+  - {variant: aligned, quantity: eps_diag, value: [1.1e-3, 1.1e-3, 1.6e-3], unit: "1", tolerance: {rel: 1.0e-10}, script_key: MA8.eps}
+  - {variant: rot30x, quantity: eps_xx, value: 1.1e-3, unit: "1", tolerance: {rel: 1.0e-10}, script_key: MA8.rot30x_eps_xx}
+  - {variant: rot30x, quantity: eps_yy, value: 1.225e-3, unit: "1", tolerance: {rel: 1.0e-10}, script_key: MA8.rot30x_eps_yy}
+  - {variant: rot30x, quantity: eps_zz, value: 1.475e-3, unit: "1", tolerance: {rel: 1.0e-10}, script_key: MA8.rot30x_eps_zz}
+  - {variant: rot30x, quantity: eps_yz, definition: "tensor shear strain (engineering gamma_yz = 2 eps_yz)", value: -2.16506e-4, unit: "1",
+     tolerance: {rel: 1.0e-10}, script_key: MA8.rot30x_eps_yz_tensor}
+  - {quantity: max_abs_sigma_over_scale, definition: "max |sigma| / (E alpha_z dT)", value: 0.0, tolerance: {abs: 1.0e-10}}
+formula: "eps = R diag(alpha) R^T dT, sigma = 0"
+provenance:
+  formula: "R6 section 1.1 MA8"
+  cte_values: "substrate core CTE xy 11 / z 16 ppm/K, ectc.2011.5898527 Table 2 (p.2); stiffness synthetic (does not enter)"
+  values: "validation/expected/tier_a.py ma8()"
+missing: []
+assumptions:
+  - "Isotropic E 25 GPa, nu 0.30 with orthotropic CTE: stress is zero for any stiffness, so the stiffness choice does not enter the expected values."

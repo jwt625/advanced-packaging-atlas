@@ -1,0 +1,186 @@
+schema: ap-sim-val/0
+id: H/H03-stiffener-vs-none
+tier: H
+title: A lid or stiffener reduces RT package warpage to 0.4-0.75 of the unstiffened value
+status: unvalidated
+physics:
+- thermo_elastic
+strength: moderate
+scope_package_classes:
+- organic_substrate FCBGA (ectc51529.2024.00265)
+- si_interposer_2p5d (estc60143.2024.10712129, ectc.2011.5898527 sim, ectc51906.2022.00108)
+applies_to:
+- fcbga_organic/substrate_warpage vs fcbga_organic/substrate_warpage_bare
+- si_interposer_peers/xilinx_tsv_lid (lid vs no lid)
+- cowos_s/warpage_corner_stress (stiffener vs none)
+rule:
+  type: ratio_range
+  expr: w_RT(with lid or stiffener) / w_RT(none) in [0.40, 0.75]
+  observed: 'ectc51529.2024.00265: 525-612 / 1035 = 0.51-0.59; estc60143.2024.10712129: 345-565 / 850 = 0.41-0.66; ectc.2011.5898527 (sim): 162.56
+    / 335.28 = 0.485; ectc51906.2022.00108: 203-294 / 400 = 0.51-0.74 (no-stiffener basis unspecified)'
+  strength: moderate
+fails_if: w_RT(with) / w_RT(none) < 0.40 or > 0.75 for a matched pair of variants
+n_papers: 4
+support:
+- metric_id: ectc51529.2024.00265-a-m4
+  value: 1035
+  unit: um
+  parameter: package warpage without stiffener (after CUF cure)
+  variant: Cu ratio 100% and 75% (overlapping)
+  condition: '30 C (inferred: plotted with 30 C series)'
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Fig. 6
+- metric_id: ectc51529.2024.00265-a-m5
+  value: 612
+  unit: um
+  parameter: package warpage vs stiffener width
+  variant: Cu stiffener 2.5 mm thick, 12 mm wide; Cu ratio 100%
+  condition: 30 C
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Fig. 6; p.4 Sec. IV.B
+- metric_id: ectc51529.2024.00265-a-m6
+  value: 602
+  unit: um
+  parameter: package warpage vs stiffener width
+  variant: Cu stiffener 2.5 mm thick, 16 mm wide; Cu ratio 100%
+  condition: 30 C
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Fig. 6; p.4 Sec. IV.B
+- metric_id: ectc51529.2024.00265-a-m7
+  value: 525
+  unit: um
+  parameter: package warpage vs stiffener width
+  variant: Cu stiffener 2.5 mm thick, 20 mm wide; Cu ratio 100%
+  condition: 30 C
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Fig. 6; p.4 Sec. IV.B
+- metric_id: estc60143.2024.10712129-i-m1
+  value: 850
+  unit: um
+  parameter: package warpage at 25 C
+  variant: no stiffener (ref.)
+  condition: 25 C (temperature sequence 25, 260, 40 C as in legend)
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 15
+- metric_id: estc60143.2024.10712129-i-m4
+  value: 565
+  unit: um
+  parameter: package warpage at 25 C
+  variant: stiffener t=1.0 mm, w=18.5 mm
+  condition: 25 C (temperature sequence 25, 260, 40 C as in legend)
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 15
+- metric_id: estc60143.2024.10712129-i-m7
+  value: 370
+  unit: um
+  parameter: package warpage at 25 C
+  variant: stiffener t=2.0 mm, w=16.5 mm
+  condition: 25 C (temperature sequence 25, 260, 40 C as in legend)
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 15
+- metric_id: estc60143.2024.10712129-i-m10
+  value: 355
+  unit: um
+  parameter: package warpage at 25 C
+  variant: stiffener t=2.0 mm, w=18.5 mm
+  condition: 25 C (temperature sequence 25, 260, 40 C as in legend)
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 15
+- metric_id: estc60143.2024.10712129-i-m13
+  value: 345
+  unit: um
+  parameter: package warpage at 25 C
+  variant: stiffener t=2.0 mm, w=20.5 mm
+  condition: 25 C (temperature sequence 25, 260, 40 C as in legend)
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 15
+- metric_id: ectc.2011.5898527-b-m2
+  value: 335.28
+  unit: um
+  parameter: max package warpage at 25 C
+  variant: COC on pkg after C4 UF process; pkg 42.5x42.5 mm
+  condition: stress-free at 150 C UF cure, cooled to 25 C
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.3 Table 3; p.3 Fig. 3
+- metric_id: ectc.2011.5898527-b-m3
+  value: 162.56
+  unit: um
+  parameter: max package warpage at 25 C
+  variant: COC on pkg after lid attach; pkg 42.5x42.5 mm; lid 1.0 mm on top of die
+  condition: stress-free at 150 C UF cure, cooled to 25 C
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.3 Table 3; p.3 Fig. 3
+- metric_id: ectc51906.2022.00108-a-m30
+  value: 400
+  unit: um
+  parameter: package warpage without stiffener (RT)
+  variant: no stiffener
+  condition: room temperature
+  basis: unspecified
+  package_class: si_interposer_2p5d
+  locator: p.2 Sec. II.B
+- metric_id: ectc51906.2022.00108-a-m1
+  value: 273
+  unit: um
+  parameter: package warpage (RT)
+  variant: Stiff A 0.7 mm
+  condition: room temperature
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 5
+- metric_id: ectc51906.2022.00108-a-m3
+  value: 272
+  unit: um
+  parameter: package warpage (RT)
+  variant: Stiff A 1 mm
+  condition: room temperature
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.3 Fig. 4; p.4 Fig. 5
+- metric_id: ectc51906.2022.00108-a-m5
+  value: 206
+  unit: um
+  parameter: package warpage (RT)
+  variant: Stiff A 3 mm
+  condition: room temperature
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 5
+- metric_id: ectc51906.2022.00108-a-m9
+  value: 203
+  unit: um
+  parameter: package warpage (RT)
+  variant: Stiff B 1 mm; press cure 150 C
+  condition: room temperature
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.3 Fig. 4; p.4 Fig. 5; p.4 Fig. 6
+- metric_id: ectc51906.2022.00108-a-m11
+  value: 294
+  unit: um
+  parameter: package warpage (RT)
+  variant: Stiff C 1 mm
+  condition: room temperature
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.3 Fig. 4; p.4 Fig. 5
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+notes:
+- Ratios use magnitudes; 00108 values are absolute (unsigned) and its no-stiffener rows are basis `unspecified` (text, p.2).
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

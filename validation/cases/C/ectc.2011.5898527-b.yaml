@@ -1,0 +1,57 @@
+schema: ap-sim-val/0
+id: C/ectc.2011.5898527-b
+tier: C
+title: Xilinx 28 nm FPGA on 100 um Cu-TSV Si interposer, lidded FCBGA - ABAQUS quarter-model warpage at 25 C
+status: unvalidated
+physics: [thermo_elastic]
+gate: "E2 bring-up 1 (DevLog-010 first canonical sims)"
+source: {paper_id: ectc.2011.5898527, tv_id: ectc.2011.5898527-b, physical_tv: ectc.2011.5898527-a}
+inputs:
+  sim_case: si_interposer_peers/xilinx_tsv_lid     # L3 case config (sims/); geometry and materials live there, not here
+  variants:   # overrides applied on top of the sim case for each target; keys as the L3 family params (names to be aligned)
+    coc_no_pkg:    {note: "chip-on-chip after ubump UF: dies + interposer + uF UF only, no substrate, no lid"}
+    pkg42_no_lid:  {package_mm: 42.5, lid: none, note: "after C4 UF"}
+    pkg42_lid1p0:  {package_mm: 42.5, lid: forged, lid_thickness_on_die_mm: 1.0}
+    pkg45_lid1p0:  {package_mm: 45.0, lid: forged, lid_thickness_on_die_mm: 1.0}
+    pkg45_lid1p5:  {package_mm: 45.0, lid: forged, lid_thickness_on_die_mm: 1.5}
+  studies: [{id: s1, type: thermo_elastic, stress_free_C: 150, temperature: {uniform_C: [25]}}]
+  model_facts:   # from the paper, for cross-checking the L3 case (not to be re-entered here)
+    - "quarter model, ABAQUS, stress-free at UF cure 150 C, cooled to 25 C (p.2 Sec. 3D Thermo-Mechanical; p.3 Sec. a)"
+    - "RT moduli / CTE (Table 2, p.2): core 18.9 GPa, CTE xy 11 / z 16; Si 150 / 3; ubump UF 6 / 38; C4 UF 8.5 / 32; Cu 130 / 17; solder mask 2.9 / 68; SnAg 51 / 22.4; TIM1 E 5.8e-3 GPa; eutectic 31.5 / 25.3"
+    - "interposer 100 um (p.3 Sec. a text; stack row ectc.2011.5898527-a), interposer 25 x 31 mm (TV row), core 800 um, forged Cu lid 1 mm on die"
+targets:
+  - {metric_id: ectc.2011.5898527-b-m1, variant: coc_no_pkg,   quantity: warpage_um, value: -60.706, unit: um, T_C: 25, basis: simulated,
+     locator: "p.3 Table 3 (-2.39 mil)", definition: "max out-of-plane warpage, paper sign: negative = smiley face (p.2 text)", tolerance: {abs_um: 10, rel: 0.10, rule: max}}
+  - {metric_id: ectc.2011.5898527-b-m2, variant: pkg42_no_lid, quantity: warpage_um, value: 335.28, unit: um, T_C: 25, basis: simulated,
+     locator: "p.3 Table 3 (13.2 mil)", definition: "as m1", tolerance: {abs_um: 10, rel: 0.10, rule: max}}
+  - {metric_id: ectc.2011.5898527-b-m3, variant: pkg42_lid1p0, quantity: warpage_um, value: 162.56, unit: um, T_C: 25, basis: simulated,
+     locator: "p.3 Table 3 (6.4 mil)", definition: "as m1", tolerance: {abs_um: 10, rel: 0.10, rule: max}}
+  - {metric_id: ectc.2011.5898527-b-m5, variant: pkg45_lid1p0, quantity: warpage_um, value: 205.74, unit: um, T_C: 25, basis: simulated,
+     locator: "p.3 Table 3 (8.1 mil)", definition: "as m1", tolerance: {abs_um: 10, rel: 0.10, rule: max}}
+  - {metric_id: ectc.2011.5898527-b-m7, variant: pkg45_lid1p5, quantity: warpage_um, value: 113.03, unit: um, T_C: 25, basis: simulated,
+     locator: "p.3 Table 3 (4.45 mil)", definition: "as m1", tolerance: {abs_um: 10, rel: 0.10, rule: max}}
+  - {metric_id: ectc.2011.5898527-b-m4, variant: pkg42_lid1p0, quantity: die_max_von_mises_MPa, value: 115, unit: MPa, T_C: 25, basis: simulated,
+     locator: "p.3 Table 3", tolerance: {rule: order_of_magnitude, range_MPa: [50, 250]}, note: "corner-singular max: order-of-magnitude only (R6 3.4)"}
+  - {metric_id: ectc.2011.5898527-b-m6, variant: pkg45_lid1p0, quantity: die_max_von_mises_MPa, value: 127, unit: MPa, T_C: 25, basis: simulated,
+     locator: "p.3 Table 3", tolerance: {rule: order_of_magnitude, range_MPa: [50, 250]}}
+  - {metric_id: ectc.2011.5898527-b-m8, variant: pkg45_lid1p5, quantity: die_max_von_mises_MPa, value: 147, unit: MPa, T_C: 25, basis: simulated,
+     locator: "p.3 Table 3", tolerance: {rule: order_of_magnitude, range_MPa: [50, 250]}}
+relations:   # ordering checks that survive input uncertainty
+  - {rule: "w(pkg42_no_lid) > w(pkg42_lid1p0) > 0", metric_ids: [ectc.2011.5898527-b-m2, ectc.2011.5898527-b-m3], note: "Cu lid reduces warpage (p.3 text)"}
+  - {rule: "w(pkg45_lid1p0) > w(pkg45_lid1p5)", metric_ids: [ectc.2011.5898527-b-m5, ectc.2011.5898527-b-m7]}
+  - {rule: "vm(pkg45_lid1p5) > vm(pkg45_lid1p0)", metric_ids: [ectc.2011.5898527-b-m8, ectc.2011.5898527-b-m6], note: "thicker lid raises die stress (p.3 text)"}
+  - {rule: "sign(w(coc_no_pkg)) != sign(w(pkg42_no_lid))", metric_ids: [ectc.2011.5898527-b-m1, ectc.2011.5898527-b-m2], requires_shape_class: [dome, bowl]}
+shape_note: >-
+  Lane L9: with template lid-foot and adhesive inputs the lidded result is W-shaped (central dome, rim bent up by the
+  lid foot), while the paper's Fig. 3(b) is a monotonic dome. The lidded targets (m3, m5, m7) are gated on sign and
+  shape_class (dome) and on magnitude only once the lid inputs (foot geometry, adhesive) are sourced. Until then the
+  magnitude is reported, not gated.
+missing:
+  - "Poisson ratios of every material"
+  - "die thickness, ubump / C4 UF thickness and fillet, build-up stack (only core 800 um given), solder mask thickness"
+  - "lid footprint, cavity, adhesive / seal material and thickness; TIM1 thickness"
+  - "Tg / alpha2 and temperature dependence (paper: properties are temperature dependent; only RT values given)"
+  - "warpage definition: 'max package warpage' surface and reference (coplanarity vs centre-to-corner) not stated"
+assumptions:
+  - "Elastic RT properties used over 25-150 C (paper used T-dependent properties): expected bias, sign unknown; record as model-form difference."
+  - "Sign mapping: paper negative = smiley face (centre lower than edges, viewed from the die side). Map to JEITA ED-7306 in the engine output; this case compares magnitude and sign as printed."

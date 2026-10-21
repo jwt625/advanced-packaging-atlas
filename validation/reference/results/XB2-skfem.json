@@ -1,0 +1,269 @@
+{
+ "solver": "scikit-fem (apref)",
+ "versions": {
+  "python": "3.12.11",
+  "scikit-fem": "12.0.2",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pyamg": "5.3.0",
+  "gmsh": "4.15.2",
+  "scikit-rf": "2.2.0"
+ },
+ "case": "XB2",
+ "tier": "B",
+ "results": {
+  "L50mm": {
+   "runs": [
+    {
+     "elem": "q2s",
+     "refine": 1,
+     "dof": 1476,
+     "mesh": {
+      "nx": 5,
+      "ny": 5,
+      "nz": 3,
+      "elements": 75
+     },
+     "q": {
+      "kappa_centre_clt_1_m": 1.192770156,
+      "coplanarity_top_m": 0.0007441463255,
+      "centre_minus_corner_top_m": 0.0007441463255,
+      "dev_parabola_at_edge_minus_0mm_m": 5.350456234e-07,
+      "dev_parabola_at_edge_minus_1mm_m": 3.571585973e-07,
+      "dev_parabola_at_edge_minus_2mm_m": 1.792715712e-07,
+      "dev_parabola_at_edge_minus_5mm_m": 9.97488487e-09
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 2,
+     "dof": 9339,
+     "mesh": {
+      "nx": 10,
+      "ny": 10,
+      "nz": 6,
+      "elements": 600
+     },
+     "q": {
+      "kappa_centre_clt_1_m": 1.192725061,
+      "coplanarity_top_m": 0.000744593138,
+      "centre_minus_corner_top_m": 0.000744593138,
+      "dev_parabola_at_edge_minus_0mm_m": 2.863999802e-07,
+      "dev_parabola_at_edge_minus_1mm_m": 7.48262472e-08,
+      "dev_parabola_at_edge_minus_2mm_m": 1.923516512e-08,
+      "dev_parabola_at_edge_minus_5mm_m": 8.707114595e-11
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 3,
+     "dof": 28992,
+     "mesh": {
+      "nx": 15,
+      "ny": 15,
+      "nz": 9,
+      "elements": 2025
+     },
+     "q": {
+      "kappa_centre_clt_1_m": 1.192715636,
+      "coplanarity_top_m": 0.0007446433364,
+      "centre_minus_corner_top_m": 0.0007446433364,
+      "dev_parabola_at_edge_minus_0mm_m": 2.398718844e-07,
+      "dev_parabola_at_edge_minus_1mm_m": 3.433774764e-08,
+      "dev_parabola_at_edge_minus_2mm_m": 1.796037472e-08,
+      "dev_parabola_at_edge_minus_5mm_m": -2.936194304e-09
+     }
+    }
+   ],
+   "convergence": {
+    "q2s": {
+     "kappa_centre_clt_1_m": {
+      "p_obs": 1.79745111,
+      "p_used": 1.79745111,
+      "f_fine": 1.192715636,
+      "f_ext": 1.192706849,
+      "gci_fine": 9.209103478e-06,
+      "rel_change_last": 7.902145238e-06
+     },
+     "coplanarity_top_m": {
+      "p_obs": 2.820617277,
+      "p_used": 2.820617277,
+      "f_fine": 0.0007446433364,
+      "f_ext": 0.0007446668129,
+      "gci_fine": 3.940900523e-05,
+      "rel_change_last": 6.741270491e-05
+     },
+     "centre_minus_corner_top_m": {
+      "p_obs": 2.820617277,
+      "p_used": 2.820617277,
+      "f_fine": 0.0007446433364,
+      "f_ext": 0.0007446668129,
+      "gci_fine": 3.940900523e-05,
+      "rel_change_last": 6.741270491e-05
+     },
+     "dev_parabola_at_edge_minus_0mm_m": {
+      "p_obs": 1.982611501,
+      "p_used": 1.982611501,
+      "f_fine": 2.398718844e-07,
+      "f_ext": 2.02172658e-07,
+      "gci_fine": 0.1964550079,
+      "rel_change_last": 0.1939706103
+     },
+     "dev_parabola_at_edge_minus_1mm_m": {
+      "p_obs": 2.422842623,
+      "p_used": 2.422842623,
+      "f_fine": 3.433774764e-08,
+      "f_ext": 1.010474936e-08,
+      "gci_fine": 0.8821559343,
+      "rel_change_last": 1.179125084
+     },
+     "dev_parabola_at_edge_minus_2mm_m": {
+      "p_obs": 6.893200783,
+      "p_used": 6.893200783,
+      "f_fine": 1.796037472e-08,
+      "f_ext": 1.787739055e-08,
+      "gci_fine": 0.005775503936,
+      "rel_change_last": 0.07097793977
+     },
+     "dev_parabola_at_edge_minus_5mm_m": {
+      "p_obs": 1.149590167,
+      "p_used": 1.149590167,
+      "f_fine": -2.936194304e-09,
+      "f_ext": -8.027613858e-09,
+      "gci_fine": 2.167524961,
+      "rel_change_last": 1.029654422
+     }
+    }
+   },
+   "expected": {}
+  },
+  "L120mm": {
+   "runs": [
+    {
+     "elem": "q2s",
+     "refine": 1,
+     "dof": 1476,
+     "mesh": {
+      "nx": 5,
+      "ny": 5,
+      "nz": 3,
+      "elements": 75
+     },
+     "q": {
+      "kappa_centre_clt_1_m": 1.192767484,
+      "coplanarity_top_m": 0.004291372419,
+      "centre_minus_corner_top_m": 0.004291372419,
+      "dev_parabola_at_edge_minus_0mm_m": 1.092391133e-06,
+      "dev_parabola_at_edge_minus_1mm_m": 9.716592245e-07,
+      "dev_parabola_at_edge_minus_2mm_m": 8.50927316e-07,
+      "dev_parabola_at_edge_minus_5mm_m": 4.887315904e-07
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 2,
+     "dof": 9339,
+     "mesh": {
+      "nx": 10,
+      "ny": 10,
+      "nz": 6,
+      "elements": 600
+     },
+     "q": {
+      "kappa_centre_clt_1_m": 1.192768768,
+      "coplanarity_top_m": 0.004292273847,
+      "centre_minus_corner_top_m": 0.004292273847,
+      "dev_parabola_at_edge_minus_0mm_m": 6.79034458e-07,
+      "dev_parabola_at_edge_minus_1mm_m": 5.045537428e-07,
+      "dev_parabola_at_edge_minus_2mm_m": 3.300730275e-07,
+      "dev_parabola_at_edge_minus_5mm_m": 8.079612825e-08
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 3,
+     "dof": 28992,
+     "mesh": {
+      "nx": 15,
+      "ny": 15,
+      "nz": 9,
+      "elements": 2025
+     },
+     "q": {
+      "kappa_centre_clt_1_m": 1.192763018,
+      "coplanarity_top_m": 0.004292796165,
+      "centre_minus_corner_top_m": 0.004292796165,
+      "dev_parabola_at_edge_minus_0mm_m": 4.215056998e-07,
+      "dev_parabola_at_edge_minus_1mm_m": 2.329351306e-07,
+      "dev_parabola_at_edge_minus_2mm_m": 4.436456151e-08,
+      "dev_parabola_at_edge_minus_5mm_m": 5.242759774e-10
+     }
+    }
+   ],
+   "convergence": {
+    "q2s": {
+     "kappa_centre_clt_1_m": {
+      "p_obs": null,
+      "p_used": null,
+      "f_fine": 1.192763018,
+      "f_ext": null,
+      "gci_fine": null
+     },
+     "coplanarity_top_m": {
+      "p_obs": 0.01727949321,
+      "p_used": 0.01727949321,
+      "f_fine": 0.004292796165,
+      "f_ext": 0.004367085819,
+      "gci_fine": 0.02163207002,
+      "rel_change_last": 0.0001216731712
+     },
+     "centre_minus_corner_top_m": {
+      "p_obs": 0.01727949321,
+      "p_used": 0.01727949321,
+      "f_fine": 0.004292796165,
+      "f_ext": 0.004367085819,
+      "gci_fine": 0.02163207002,
+      "rel_change_last": 0.0001216731712
+     },
+     "dev_parabola_at_edge_minus_0mm_m": {
+      "p_obs": 0.2439043293,
+      "p_used": 0.2439043293,
+      "f_fine": 4.215056998e-07,
+      "f_ext": -2.055922425e-06,
+      "gci_fine": 7.346959146,
+      "rel_change_last": 0.6109733709
+     },
+     "dev_parabola_at_edge_minus_1mm_m": {
+      "p_obs": 0.01082657359,
+      "p_used": 0.01082657359,
+      "f_fine": 2.329351306e-07,
+      "f_ext": -6.15063256e-05,
+      "gci_fine": 331.3114501,
+      "rel_change_last": 1.166069761
+     },
+     "dev_parabola_at_edge_minus_2mm_m": {
+      "p_obs": 0.1167135621,
+      "p_used": 0.1167135621,
+      "f_fine": 4.436456151e-08,
+      "f_ext": -5.851284915e-06,
+      "gci_fine": 166.1137087,
+      "rel_change_last": 6.44001555
+     },
+     "dev_parabola_at_edge_minus_5mm_m": {
+      "p_obs": 1.898588919,
+      "p_used": 1.898588919,
+      "f_fine": 5.242759774e-10,
+      "f_ext": -6.871383826e-08,
+      "gci_fine": 165.0803136,
+      "rel_change_last": 153.1099187
+     }
+    }
+   },
+   "expected": {}
+  },
+  "assumptions": [
+   "linear elastic, small strain (geometric nonlinearity, R6 MA4c, not modelled)"
+  ],
+  "clt_kappa_1_m": 1.192782204
+ }
+}

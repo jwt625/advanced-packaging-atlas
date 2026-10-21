@@ -1,0 +1,36 @@
+schema: ap-sim-val/0
+id: A/MA5-stoney
+tier: A
+title: Stoney thin-film curvature, 1 um film at +100 MPa on a 775 um Si substrate
+status: unvalidated
+physics: [thermo_elastic]
+box_compatible: true
+tests: [initial stress / eigenstrain input (cure shrinkage, BEOL and PI film stress), extreme aspect ratio 300 mm / 1 um]
+inputs:
+  materials: {set: _materials_tier_a.yaml}
+  geometry:
+    symmetry: quarter
+    boxes:   # square surrogate of a 300 mm wafer; interior curvature is shape independent
+      - {id: wafer, kind: interposer, material: "tierA:si_iso",   x_mm: 0, y_mm: 0, w_mm: 300, d_mm: 300, z_um: 0,   h_um: 775}
+      - {id: film,  kind: rdl,        material: "tierA:film_mis", x_mm: 0, y_mm: 0, w_mm: 300, d_mm: 300, z_um: 775, h_um: 1}
+  mesh: {max_xy_mm: 5.0, min_cells_per_layer: 1, grading: 1.3}
+  physics:
+    mechanics: {element: [q2s, q1im], stress_free_C: {default: 125}, supports: symmetry}
+  studies: [{id: s1, type: thermo_elastic, temperature: {uniform_C: [25]}}]
+  preferred_form: "film initial stress +100 MPa equibiaxial (or eigenstrain -sigma_f / Q_f) at uniform temperature, once the engine supports it; the CTE-offset form above is the runnable equivalent"
+expected:
+  - {quantity: kappa_1_m, form: runnable, definition: "signed (z up); film in tension on top -> top concave -> kappa < 0", value: -5.51134e-3,
+     unit: 1/m, tolerance: {rel: 1.0e-3}, script_key: MA5.kappa_clt_runnable_1_m}
+  - {quantity: bow_r150mm_m, form: runnable, definition: "kappa r^2 / 2 at r = 150 mm (edge midpoint of the square)", value: -6.20025e-5,
+     unit: m, tolerance: {rel: 1.0e-2}, script_key: MA5.bow_r150mm_clt_runnable_m}
+  - {quantity: kappa_stoney_1_m, form: reference, definition: "Stoney with Q_s = 180.5 GPa (Brantley 1973, Si(001)); neglects film stiffness",
+     value: 5.5344e-3, unit: 1/m, script_key: MA5.kappa_stoney_brantley_1_m}
+  - {quantity: bow_stoney_r150mm_m, form: reference, value: 6.2262e-5, unit: m, script_key: MA5.bow_r150mm_stoney_brantley_m}
+formula: "Stoney: kappa = 6 sigma_f h_f / (Q_s h_s^2). Runnable form: CLT of the 2-layer stack with film CTE 8.13846 ppm/K (si_iso stiffness), dT = -100 K, which gives Q_f (alpha_s - alpha_f) dT = +100 MPa"
+provenance:
+  formula: "G. G. Stoney, Proc. R. Soc. Lond. A 82, 172 (1909); W. A. Brantley, J. Appl. Phys. 44, 534 (1973) (biaxial 180.5 GPa, as commonly cited, not re-fetched); R6 section 1.1 MA5"
+  values: "validation/expected/tier_a.py ma5()"
+tolerance_note: "The runnable CLT value includes the film stiffness and sits 0.39 % below Stoney (si_iso Q 180.56 GPa) and 0.42 % below Stoney (Brantley Q). The gate is on the CLT value."
+missing: []
+assumptions:
+  - "Film initial stress / eigenstrain is not in SPEC v0; the CTE-offset film material `tierA:film_mis` is the runnable equivalent (contract-change request L4-6 for an `initial_stress_MPa` or `eigenstrain` material/part property)."

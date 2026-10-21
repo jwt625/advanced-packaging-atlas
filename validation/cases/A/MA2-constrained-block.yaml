@@ -1,0 +1,44 @@
+schema: ap-sim-val/0
+id: A/MA2-constrained-block
+tier: A
+title: Constrained Cu block - uniaxial, biaxial and triaxial restraint; nu = 0.49 locking variant
+status: unvalidated
+physics: [thermo_elastic]
+box_compatible: true
+tests: [sign convention, constitutive matrix with thermal strain, Poisson coupling, near-incompressible (volumetric) locking]
+inputs:
+  materials: {set: _materials_tier_a.yaml}
+  geometry:
+    symmetry: none
+    boxes:
+      - {id: blk, kind: lid, material: "tierA:cu", x_mm: 0, y_mm: 0, w_mm: 1, d_mm: 1, z_um: 0, h_um: 1000}
+  mesh: {max_xy_mm: 0.25, min_cells_per_layer: 4}
+  physics:
+    mechanics: {element: q2s, stress_free_C: {default: 25}}
+  studies: [{id: s1, type: thermo_elastic, temperature: {uniform_C: [125]}}]
+variants:
+  uniaxial:  {bcs: [{selection: "side:blk:x-", type: roller}, {selection: "side:blk:x+", type: roller},
+                    {selection: "point:blk:min", type: pin_yz}, {selection: "point:blk:min_y+", type: pin_z}]}
+  biaxial:   {bcs: [{selection: "side:blk:x-", type: roller}, {selection: "side:blk:x+", type: roller},
+                    {selection: "side:blk:y-", type: roller}, {selection: "side:blk:y+", type: roller},
+                    {selection: "point:blk:min", type: pin_z}]}
+  triaxial:  {bcs: [{selection: default, type: roller}]}
+  triaxial_nu049: {material_override: {cu: {nu: 0.49}}, bcs: [{selection: default, type: roller}]}
+  biaxial_nu049:  {material_override: {cu: {nu: 0.49}}, bcs: "as biaxial"}
+expected:
+  - {variant: uniaxial, quantity: sigma_xx_Pa, value: -1.87e8, unit: Pa, tolerance: {rel: 1.0e-10}, script_key: MA2.uniaxial_Pa}
+  - {variant: uniaxial, quantity: eps_yy, definition: "free lateral strain alpha dT (1 + nu)", value: 2.278e-3, unit: "1",
+     tolerance: {rel: 1.0e-10}, script_key: MA2.uniaxial_eps_lateral}
+  - {variant: biaxial, quantity: sigma_xx_Pa, value: -2.83333e8, unit: Pa, tolerance: {rel: 1.0e-10}, script_key: MA2.biaxial_Pa}
+  - {variant: biaxial, quantity: eps_zz, value: 3.45152e-3, unit: "1", tolerance: {rel: 1.0e-10}, script_key: MA2.biaxial_eps_zz}
+  - {variant: triaxial, quantity: sigma_mean_Pa, value: -5.84375e8, unit: Pa, tolerance: {rel: 1.0e-10}, script_key: MA2.triaxial_Pa}
+  - {variant: triaxial_nu049, quantity: sigma_mean_Pa, value: -9.35e9, unit: Pa, tolerance: {rel: 1.0e-6}, script_key: MA2.triaxial_nu049_Pa}
+  - {variant: biaxial_nu049, quantity: sigma_xx_Pa, value: -3.66667e8, unit: Pa, tolerance: {rel: 1.0e-6}, script_key: MA2.biaxial_nu049_Pa}
+formula: "uniaxial -E alpha dT; biaxial -E alpha dT / (1 - nu); triaxial -E alpha dT / (1 - 2 nu); E 110 GPa, nu 0.34, alpha 17 ppm/K, dT +100 K"
+provenance:
+  formula: "R6 section 1.1 MA2"
+  values: "validation/expected/tier_a.py ma2()"
+tolerance_note: "Homogeneous states: any conforming element is exact. The nu = 0.49 variants are exact for a homogeneous state too; locking only shows in a non-homogeneous field (e.g. MA4b with an nu = 0.49 underfill), so treat them as conditioning checks."
+missing: []
+assumptions:
+  - "Per-face selections `side:<part>:<x-|x+|y-|y+>`, point selections and roller / pin BC types are not in SPEC v0 (only rigid_motion | symmetry supports). Contract-change request L4-5."

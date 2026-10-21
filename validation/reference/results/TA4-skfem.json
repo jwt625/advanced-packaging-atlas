@@ -1,0 +1,188 @@
+{
+ "solver": "scikit-fem (apref)",
+ "versions": {
+  "python": "3.12.11",
+  "scikit-fem": "12.0.2",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pyamg": "5.3.0",
+  "gmsh": "4.15.2",
+  "scikit-rf": "2.2.0"
+ },
+ "case": "TA4",
+ "tier": "A",
+ "expected_source": "validation/expected/tier_a_values.json",
+ "results": {
+  "runs": [
+   {
+    "elem": "q1",
+    "refine": 1,
+    "dof": 462,
+    "mesh": {
+     "nx": 1,
+     "ny": 10,
+     "nz": 20,
+     "elements": 200
+    },
+    "balance_rel": null,
+    "q": {
+     "q_per_theta_W_K": 0.02091915781,
+     "q_base_reaction_W_K": 0.02091915781,
+     "T_tip_center_C": 69.76492624
+    }
+   },
+   {
+    "elem": "q1",
+    "refine": 2,
+    "dof": 2583,
+    "mesh": {
+     "nx": 2,
+     "ny": 20,
+     "nz": 40,
+     "elements": 1600
+    },
+    "balance_rel": null,
+    "q": {
+     "q_per_theta_W_K": 0.02091836134,
+     "q_base_reaction_W_K": 0.02091836134,
+     "T_tip_center_C": 69.76473177
+    }
+   },
+   {
+    "elem": "q1",
+    "refine": 4,
+    "dof": 16605,
+    "mesh": {
+     "nx": 4,
+     "ny": 40,
+     "nz": 80,
+     "elements": 12800
+    },
+    "balance_rel": null,
+    "q": {
+     "q_per_theta_W_K": 0.020918161,
+     "q_base_reaction_W_K": 0.020918161,
+     "T_tip_center_C": 69.76468315
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 1,
+    "dof": 2583,
+    "mesh": {
+     "nx": 1,
+     "ny": 10,
+     "nz": 20,
+     "elements": 200
+    },
+    "balance_rel": null,
+    "q": {
+     "q_per_theta_W_K": 0.0209180961,
+     "q_base_reaction_W_K": 0.0209180961,
+     "T_tip_center_C": 69.76466694
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 2,
+    "dof": 16605,
+    "mesh": {
+     "nx": 2,
+     "ny": 20,
+     "nz": 40,
+     "elements": 1600
+    },
+    "balance_rel": null,
+    "q": {
+     "q_per_theta_W_K": 0.02091809438,
+     "q_base_reaction_W_K": 0.02091809437,
+     "T_tip_center_C": 69.76466694
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 4,
+    "dof": 117369,
+    "mesh": {
+     "nx": 4,
+     "ny": 40,
+     "nz": 80,
+     "elements": 12800
+    },
+    "balance_rel": null,
+    "q": {
+     "q_per_theta_W_K": 0.02091809387,
+     "q_base_reaction_W_K": 0.02091809386,
+     "T_tip_center_C": 69.76466694
+    }
+   }
+  ],
+  "convergence": {
+   "q1": {
+    "q_per_theta_W_K": {
+     "p_obs": 1.991179902,
+     "p_used": 1.991179902,
+     "f_fine": 0.020918161,
+     "f_ext": 0.02091809368,
+     "gci_fine": 4.023201957e-06,
+     "rel_change_last": 9.577216474e-06,
+     "expected": 0.02091948566,
+     "rel_err_fine": -6.332144076e-05,
+     "rel_err_ext": -6.653979852e-05,
+     "orders_vs_exact": [
+      -1.7779489,
+      -0.2365680812
+     ]
+    },
+    "q_base_reaction_W_K": {
+     "p_obs": 1.991179461,
+     "p_used": 1.991179461,
+     "f_fine": 0.020918161,
+     "f_ext": 0.02091809368,
+     "gci_fine": 4.023204428e-06,
+     "rel_change_last": 9.577218451e-06
+    },
+    "T_tip_center_C": {
+     "p_obs": 1.999915205,
+     "p_used": 1.999915205,
+     "f_fine": 69.76468315,
+     "f_ext": 69.76466694,
+     "gci_fine": 2.904059743e-07,
+     "rel_change_last": 6.969197199e-07
+    }
+   },
+   "q2": {
+    "q_per_theta_W_K": {
+     "p_obs": 1.773372151,
+     "p_used": 1.773372151,
+     "f_fine": 0.02091809387,
+     "f_ext": 0.02091809366,
+     "gci_fine": 1.248215709e-08,
+     "rel_change_last": 2.415068399e-08,
+     "expected": 0.02091948566,
+     "rel_err_fine": -6.653055683e-05,
+     "rel_err_ext": -6.654054189e-05,
+     "orders_vs_exact": [
+      -0.001791923574,
+      -0.0005237605121
+     ]
+    },
+    "q_base_reaction_W_K": {
+     "p_obs": 1.747409497,
+     "p_used": 1.747409497,
+     "f_fine": 0.02091809386,
+     "f_ext": 0.02091809364,
+     "gci_fine": 1.305406766e-08,
+     "rel_change_last": 2.462050867e-08
+    },
+    "T_tip_center_C": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 69.76466694,
+     "f_ext": null,
+     "gci_fine": null
+    }
+   }
+  }
+ }
+}

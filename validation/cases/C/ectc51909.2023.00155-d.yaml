@@ -1,0 +1,30 @@
+schema: ap-sim-val/0
+id: C/ectc51909.2023.00155-d
+tier: C
+title: JOINT2 50 x 50 mm Si interposer with molded dies - MARC quarter-model warpage at 260 C, original vs filler-die design
+status: unvalidated
+physics: [thermo_elastic]
+gate: "E2 bring-up 3; elastic-bias check until viscoelastic EMC (E8): the paper models EMC, CUF and DAF as viscoelastic"
+source: {paper_id: ectc51909.2023.00155, tv_ids: [ectc51909.2023.00155-d, ectc51909.2023.00155-a]}
+inputs:
+  sim_case: si_interposer_peers/50mm_quarter
+  variants:
+    original: {filler_dies: none}
+    filler:   {filler_dies: "11 x 50 mm and 4 x 23 mm dummy dies on 20 um DAF (p.5 Sec. III.C)"}
+  studies: [{id: s1, type: thermo_elastic, stress_free_C: 150, temperature: {uniform_C: [25, 260]}}]
+  model_facts:
+    - "MARC 2021.2, 20-node hexahedra, quarter model, stress-free 150 C (EMC cure), warpage computed at 25 and 260 C (p.3 Sec. II.E)"
+    - "Table 8 materials are image-only in text.md; captured in stack_layers.properties of ectc51909.2023.00155-d (e.g. CUF E1 8,900 MPa, a1 26 / a2 104, Tg 160; insulator E1 32,000 MPa, a1 65, Tg 233, cure shrinkage 21 %; Cu 100,000 MPa / 17)"
+targets:
+  - {metric_id: ectc51909.2023.00155-d-m1, variant: original, quantity: warpage_um, value: -189, unit: um, T_C: 260, basis: simulated,
+     locator: "p.5 Fig. 9; p.5 Sec. III.C", definition: "sign per Fig. 9 pictograms", tolerance: {abs_um: 10, rel: 0.10, rule: max, elastic_bias_allowed: true}}
+  - {metric_id: ectc51909.2023.00155-a-m7, variant: filler, quantity: warpage_um, value: -47, unit: um, T_C: 260, basis: simulated,
+     locator: "p.5 Fig. 9; p.5 Sec. III.C", definition: "as d-m1", tolerance: {abs_um: 10, rel: 0.10, rule: max, elastic_bias_allowed: true}}
+relations:
+  - {rule: "|w(filler)| < |w(original)|; |w(filler)| < 55 um (bump height)", metric_ids: [ectc51909.2023.00155-a-m7, ectc51909.2023.00155-d-m1]}
+  - {rule: "sign(w(filler)) == sign(w(original))", metric_ids: [ectc51909.2023.00155-a-m7, ectc51909.2023.00155-d-m1]}
+missing:
+  - "Poisson ratios; viscoelastic (Prony) data for EMC, CUF, DAF; exact filler-die positions; quarter-model BCs; warpage definition (peak-to-valley vs signed)"
+  - "25 C FEM result (computed in the paper, not reported in the DB)"
+assumptions:
+  - "Elastic run with glassy (E1, alpha1) below Tg and rubbery (E2, alpha2) above Tg is a bias check against the viscoelastic paper model; the size and direction of the bias are unknown and are to be measured, not assumed."

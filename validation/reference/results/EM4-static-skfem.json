@@ -1,0 +1,125 @@
+{
+ "solver": "scikit-fem (apref)",
+ "versions": {
+  "python": "3.12.11",
+  "scikit-fem": "12.0.2",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pyamg": "5.3.0",
+  "gmsh": "4.15.2",
+  "scikit-rf": "2.2.0"
+ },
+ "case": "EM-4 quasi-static block L, C",
+ "rows": [
+  {
+   "case": "o3_h5",
+   "ext_um": 100.0,
+   "h_far_um": 20.0,
+   "h_cond_um": 5.0,
+   "order": 3,
+   "ndof_C_dut": 39713,
+   "ndof_C_line": 22640,
+   "C_block_fF": 18.82873731,
+   "C1_eq_C2_fF": 9.414368654,
+   "C_block_cx_fF": [
+    18.82877813,
+    -0.09785508717
+   ],
+   "L_block_pH": 8.948208693,
+   "line_C_err_rel": 0.01176939031,
+   "line_L_err_rel": 0.01041287778,
+   "C_block_2d_deembed_fF": 19.47474179,
+   "L_block_2d_deembed_pH": 10.02256046,
+   "post_current_per_post_rel": -0.2369339835,
+   "L_block_noposts_pH": 10.82808089
+  },
+  {
+   "case": "o4_h5",
+   "ext_um": 100.0,
+   "h_far_um": 20.0,
+   "h_cond_um": 5.0,
+   "order": 4,
+   "ndof_C_dut": 90292,
+   "ndof_C_line": 51071,
+   "C_block_fF": 18.75872701,
+   "C1_eq_C2_fF": 9.379363505,
+   "C_block_cx_fF": [
+    18.75877015,
+    -0.0978818385
+   ],
+   "L_block_pH": 9.023510411,
+   "line_C_err_rel": 0.004762577275,
+   "line_L_err_rel": 0.004019569427,
+   "C_block_2d_deembed_fF": 19.02013785,
+   "L_block_2d_deembed_pH": 9.438230683,
+   "post_current_per_post_rel": -0.2371204187,
+   "L_block_noposts_pH": 10.90474418
+  },
+  {
+   "case": "o3_h3",
+   "ext_um": 100.0,
+   "h_far_um": 15.0,
+   "h_cond_um": 3.0,
+   "order": 3,
+   "ndof_C_dut": 97283,
+   "ndof_C_line": 54433,
+   "C_block_fF": 18.76047819,
+   "C1_eq_C2_fF": 9.380239094,
+   "C_block_cx_fF": [
+    18.7605233,
+    -0.09839686845
+   ],
+   "L_block_pH": 9.037660553,
+   "line_C_err_rel": 0.006927547454,
+   "line_L_err_rel": 0.00484000127,
+   "C_block_2d_deembed_fF": 19.14072105,
+   "L_block_2d_deembed_pH": 9.537029125,
+   "post_current_per_post_rel": -0.2374658059,
+   "L_block_noposts_pH": 10.92000199
+  },
+  {
+   "case": "o4_h3",
+   "ext_um": 100.0,
+   "h_far_um": 15.0,
+   "h_cond_um": 3.0,
+   "order": 4,
+   "ndof_C_dut": 223246,
+   "ndof_C_line": 124369,
+   "C_block_fF": 18.73445694,
+   "C1_eq_C2_fF": 9.367228468,
+   "C_block_cx_fF": [
+    18.73450258,
+    -0.0982704765
+   ],
+   "L_block_pH": 9.031972588,
+   "line_C_err_rel": 0.003009886823,
+   "line_L_err_rel": 0.002103147842,
+   "C_block_2d_deembed_fF": 18.89966519,
+   "L_block_2d_deembed_pH": 9.248965493,
+   "post_current_per_post_rel": -0.2375361282,
+   "L_block_noposts_pH": 10.91470452
+  },
+  {
+   "case": "o4_h3_ext50",
+   "ext_um": 50.0,
+   "h_far_um": 15.0,
+   "h_cond_um": 3.0,
+   "order": 4,
+   "ndof_C_dut": 175576,
+   "ndof_C_line": 91941,
+   "C_block_fF": 18.75884546,
+   "C1_eq_C2_fF": 9.379422732,
+   "C_block_cx_fF": [
+    18.75888911,
+    -0.09802353789
+   ],
+   "L_block_pH": 9.007974743,
+   "line_C_err_rel": 0.00303105918,
+   "line_L_err_rel": 0.002484450621,
+   "C_block_2d_deembed_fF": 18.87900184,
+   "L_block_2d_deembed_pH": 9.193104806,
+   "post_current_per_post_rel": -0.2363275308,
+   "L_block_noposts_pH": 10.86522374
+  }
+ ]
+}

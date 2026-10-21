@@ -1,0 +1,40 @@
+schema: ap-sim-val/0
+id: A/TA1-multilayer-R
+tier: A
+title: 1D multilayer conduction resistance with a convective top face
+status: unvalidated
+physics: [thermal_stationary]
+box_compatible: true
+tests: [piecewise k across box layers, Robin (HTC) BC, prescribed flux BC, energy balance]
+inputs:
+  materials: {set: _materials_tier_a.yaml}
+  geometry:
+    symmetry: none
+    boxes:   # SPEC section 2 part fields; package centred at (0, 0); z_um = bottom of the box
+      - {id: si,  kind: die, material: "tierA:si_iso", x_mm: 0, y_mm: 0, w_mm: 10, d_mm: 10, z_um: 0,   h_um: 775}
+      - {id: tim, kind: tim, material: "tierA:tim",    x_mm: 0, y_mm: 0, w_mm: 10, d_mm: 10, z_um: 775, h_um: 50}
+      - {id: cu,  kind: lid, material: "tierA:cu",     x_mm: 0, y_mm: 0, w_mm: 10, d_mm: 10, z_um: 825, h_um: 2000}
+  mesh: {max_xy_mm: 2.5, min_cells_per_layer: 2}
+  physics:
+    thermal:
+      bcs:
+        - {selection: "bottom:si", type: heat_flux, total_W: 100}     # q'' = 1e6 W/m2
+        - {selection: "top:cu", type: htc, h_W_m2K: 10000, T_inf_C: 25}
+        - {selection: default, type: adiabatic}
+  studies: [{id: s1, type: thermal_stationary}]
+expected:
+  - {quantity: T_bottom_C, probe: "bottom:si (any point; field is 1D)", value: 145.365, unit: C, tolerance: {rel_rise: 1.0e-3},
+     script_key: TA1.T_bottom_C}
+  - {quantity: R_tot_K_W, definition: "(T_bottom - T_inf) / 100 W", value: 1.20365, unit: K/W, tolerance: {rel: 1.0e-3},
+     script_key: TA1.R_tot_K_W}
+  - {quantity: T_si_tim_C, probe: "interface si|tim", value: 140.128, unit: C, tolerance: {rel_rise: 1.0e-3}, script_key: TA1.T_si_tim_C}
+  - {quantity: T_top_C, probe: "top:cu", value: 125.000, unit: C, tolerance: {rel_rise: 1.0e-3}, script_key: TA1.T_top_C}
+  - {quantity: heat_out_W, definition: "integral of h (T - T_inf) over top:cu", value: 100, unit: W, tolerance: {rel: 1.0e-9},
+     script_key: TA1.heat_out_W}
+formula: "R = sum t_i / (k_i A) + 1 / (h A); R_Si 0.05236, R_TIM 0.1000, R_Cu 0.05128, R_conv 1.000 K/W"
+provenance:
+  formula: "1D series conduction (textbook); R6 section 1.2 TA1"
+  values: "validation/expected/tier_a.py ta1()"
+tolerance_note: "rel_rise = relative error on (T - T_inf). Tier-A gate per R6 4.3 (< 1e-3 global). The field is exactly piecewise linear, so Q1 is exact up to solver tolerance."
+missing: []
+assumptions: []

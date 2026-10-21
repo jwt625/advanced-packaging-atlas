@@ -1,0 +1,38 @@
+schema: ap-sim-val/0
+id: A/TA4-fin
+tier: A
+title: Straight rectangular fin with a convective tip
+status: unvalidated
+physics: [thermal_stationary]
+box_compatible: true
+tests: [convection on many faces, heat-sink building block, 1D fin theory vs 3D conduction]
+inputs:
+  materials: {set: _materials_tier_a.yaml}
+  geometry:
+    symmetry: none
+    boxes:   # fin along +z from the base at z = 0: thickness 1 mm (x), width 10 mm (y), length 20 mm (z)
+      - {id: fin, kind: heatsink, material: "tierA:al", x_mm: 0, y_mm: 0, w_mm: 1, d_mm: 10, z_um: 0, h_um: 20000}
+  mesh: {max_xy_mm: 0.5, min_cells_per_layer: 40}
+  physics:
+    thermal:
+      bcs:
+        - {selection: "bottom:fin", type: temperature, T_C: 75}           # theta_b = 50 K
+        - {selection: default, type: htc, h_W_m2K: 50, T_inf_C: 25}       # 4 sides + tip
+  studies: [{id: s1, type: thermal_stationary}]
+expected:
+  - {quantity: q_base_W, definition: "heat through bottom:fin (Dirichlet reaction flux)", value: 1.04598, unit: W,
+     tolerance: {rel: 5.0e-3}, script_key: "TA4.q_per_theta_W_K x 50 K"}
+  - {quantity: q_per_theta_W_K, value: 0.0209195, unit: W/K, tolerance: {rel: 5.0e-3}, script_key: TA4.q_per_theta_W_K}
+  - {quantity: efficiency, definition: "q / (h A_fin theta_b), A_fin = P L + A_c", value: 0.92976, unit: "1",
+     tolerance: {rel: 5.0e-3}, script_key: TA4.efficiency}
+  - {form: reference_fe, quantity: q_per_theta_W_K, value: 0.02091809366, unit: W/K, tolerance: {rel: 1.0e-4},
+     ref: {file: TA4-skfem.json, path: results.convergence.q2.q_per_theta_W_K, field: f_ext}, diff_vs_closed_form: -6.7e-5,
+     reason: "3D conduction vs 1D fin theory (lane L5, scikit-fem Q2)"}
+  - {quantity: q_per_theta_adiabatic_tip_W_K, note: "reference only (tip BC sensitivity)", value: 0.020517, unit: W/K, script_key: TA4.q_per_theta_adiabatic_tip_W_K}
+formula: "q = sqrt(h P k A_c) theta_b [sinh mL + (h/mk) cosh mL] / [cosh mL + (h/mk) sinh mL], m = sqrt(h P/(k A_c)); P = 2 (w + t), A_c = w t; m = 23.45 1/m, mL = 0.469"
+provenance:
+  formula: "Incropera et al., Fundamentals of Heat and Mass Transfer, fin table (Table 3.4, case A); R6 section 1.2 TA4"
+  values: "validation/expected/tier_a.py ta4()"
+tolerance_note: "1D fin theory neglects the transverse gradient (Bi = h t / k = 2.5e-4), so the 3D result differs at the 1e-4 level; 5e-3 leaves room for the corner/edge treatment of the HTC faces (assumption)."
+missing: []
+assumptions: []

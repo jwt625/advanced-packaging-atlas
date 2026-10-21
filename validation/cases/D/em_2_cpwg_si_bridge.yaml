@@ -1,0 +1,33 @@
+schema: ap-sim-val/0
+id: D/em_2_cpwg_si_bridge
+tier: D
+title: EM-2 differential CPWG on 4-layer polyimide RDL over Si bridge - measured IL per mm at 56 GHz (7 designs) and HFSS cheesing study
+status: unvalidated
+physics: [em]
+source: {paper_id: eptc67330.2025.11392620, tv_id: eptc67330.2025.11392620-a}
+db_note: "Measured Table I values are in data/electrical_interfaces.csv (e1..e7), not in metrics.csv (audit S1, 2026-10-20)."
+inputs:
+  sim_case: em/em2_cpwg_si_bridge     # lane L7 case config (sims/em/em2_cpwg_si_bridge.yaml)
+  geometry: {metal_t_um: 2, via_um: 4, m1_to_si_um: 0.868, designs: "M4M1 W2/10/25, M4M3 W2/5, M2M3 W2/5 with per-design signal-ground gap and signal-signal spacing (stack rows; e1..e7 notes)",
+             mesh_holes: "4 x 4 um squares at 4 um spacing in M1 / M4 GND / M4 signal (-a-m6, -a-m7)", si_below_m2_um: 6}
+  materials: {pi: "Dk 3.3, Df 0.034 (reference frequency N/A)", cu: "sigma template", si: "resistivity N/A (parameter)"}
+targets:
+  - {ei_id: eptc67330.2025.11392620-a-e1, design: M4M1W2,  quantity: IL_dB_per_mm, value: 1.353, f_GHz: 56, basis: measured, locator: "p.3 Table I"}
+  - {ei_id: eptc67330.2025.11392620-a-e2, design: M4M1W10, quantity: IL_dB_per_mm, value: 0.634, f_GHz: 56, basis: measured, locator: "p.3 Table I"}
+  - {ei_id: eptc67330.2025.11392620-a-e3, design: M4M1W25, quantity: IL_dB_per_mm, value: 0.441, f_GHz: 56, basis: measured, locator: "p.3 Table I"}
+  - {ei_id: eptc67330.2025.11392620-a-e4, design: M4M3W2,  quantity: IL_dB_per_mm, value: 1.351, f_GHz: 56, basis: measured, locator: "p.3 Table I"}
+  - {ei_id: eptc67330.2025.11392620-a-e5, design: M4M3W5,  quantity: IL_dB_per_mm, value: 0.937, f_GHz: 56, basis: measured, locator: "p.3 Table I"}
+  - {ei_id: eptc67330.2025.11392620-a-e6, design: M2M3W2,  quantity: IL_dB_per_mm, value: 1.402, f_GHz: 56, basis: measured, locator: "p.3 Table I"}
+  - {ei_id: eptc67330.2025.11392620-a-e7, design: M2M3W5,  quantity: IL_dB_per_mm, value: 1.04,  f_GHz: 56, basis: measured, locator: "p.3 Table I"}
+  - {metric_id: eptc67330.2025.11392620-a-m2, quantity: diff_RL_dB, value: 15, rule: "RL > 15 dB DC-65 GHz (all but M2M3W2: 14 dB, -a-m3)", basis: measured, locator: "p.2 Sec. II.B"}
+  - {metric_id: eptc67330.2025.11392620-a-m8,  design: "M4M1W25 2 mm", quantity: Sdd21_dB, f_GHz: 0,  value: 0.08, basis: simulated, locator: "p.3 Sec. II.C"}
+  - {metric_id: eptc67330.2025.11392620-a-m9,  design: "M4M1W25 2 mm, no mesh", quantity: Sdd21_dB, f_GHz: 56, value: 0.89, basis: simulated, locator: "p.3 Sec. II.C"}
+  - {metric_id: eptc67330.2025.11392620-a-m11, design: "mesh on M1 GND", quantity: Sdd21_dB, f_GHz: 56, value: 0.96, basis: simulated, locator: "p.3 Sec. II.C"}
+  - {metric_id: eptc67330.2025.11392620-a-m13, design: "mesh on M4 side GND", quantity: Sdd21_dB, f_GHz: 56, value: 0.91, basis: simulated, locator: "p.3 Sec. II.C"}
+  - {metric_id: eptc67330.2025.11392620-a-m15, design: "mesh on M4 signal", quantity: Sdd21_dB, f_GHz: 56, value: 0.95, basis: simulated, locator: "p.3 Sec. II.C"}
+derived:
+  - {quantity: hfss_vs_measured_W25, value: "0.89 dB / 2 mm = 0.445 dB/mm (HFSS, -a-m9) vs 0.441 dB/mm measured (-a-e3): 1 % apart (L4 arithmetic)",
+     use: "the paper's own sim-to-measurement agreement bounds what an engine can be expected to reach on W25"}
+tolerance: {measured: {IL_rel: 0.20}, simulated: {IL_abs_dB: 0.05}, relations: "rank order W2 > W5 > W10 > W25 within each layer pair; cheesing increases IL (m11, m13, m15 > m9)"}
+missing: ["via-wall pitch", "cut-outs in intermediate layers", "top PI thickness", "Si resistivity", "Cu sigma", "PI Dk / Df reference frequency"]
+assumptions: ["IL/mm values are the de-embedded measured per-length loss of 1 and 2 mm lines (paper Table I)"]

@@ -1,0 +1,284 @@
+{
+ "solver": "scikit-fem (apref)",
+ "versions": {
+  "python": "3.12.11",
+  "scikit-fem": "12.0.2",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pyamg": "5.3.0",
+  "gmsh": "4.15.2",
+  "scikit-rf": "2.2.0"
+ },
+ "case": "EM-5a paper geometry bracket (quasi-TEM cascade)",
+ "ranges": {
+  "P": [
+   60.0,
+   150.0,
+   "G-S-G row pitch: Fig. 2 depth axis uncalibrated (estimates 60-145 um); common probe pitches"
+  ],
+  "W": [
+   40.0,
+   80.0,
+   "stadium width: Fig. 2, segment length 155 um minus TSV pitch 94-98 um -> ~60 um"
+  ],
+  "Lh": [
+   85.0,
+   110.0,
+   "TSV-to-TSV pitch along the chain: Fig. 2 94-98 um, TSV1-TSV4 ~306 um"
+  ],
+  "Lend": [
+   50.0,
+   200.0,
+   "pad (probe-tip reference) to first TSV: Fig. 2 stub ~156 um, tip position unknown"
+  ],
+  "t_front": [
+   1.0,
+   5.0,
+   "front oxide under the top RDL: BOX 2 um + BEOL (thickness not reported) + passivation"
+  ],
+  "t_back": [
+   1.0,
+   2.0,
+   "back-side oxide 1 um (DB a-L13) plus margin"
+  ],
+  "t_liner": [
+   0.2,
+   1.0,
+   "TSV liner: not reported (deck sweep 0.2 / 0.5 / 1)"
+  ],
+  "d": [
+   10.0,
+   20.0,
+   "TSV diameter 10 um (text) vs ~14-20 um rendered in Fig. 2"
+  ],
+  "sigma": [
+   0.1,
+   10.0,
+   "Si conductivity (S/m): not reported (deck sweep 0.1 / 1 / 10), log-uniform"
+  ]
+ },
+ "nominal": {
+  "P": 100.0,
+  "W": 60.0,
+  "Lh": 96.0,
+  "Lend": 120.0,
+  "t_front": 3.0,
+  "t_back": 1.0,
+  "t_liner": 0.5,
+  "d": 10.0,
+  "sigma": 1.0
+ },
+ "rows": [
+  {
+   "param": "nominal",
+   "value": null,
+   "dips": [
+    [
+     60.0,
+     -38.29502115
+    ]
+   ],
+   "S11_max_dB": -10.98813038,
+   "S21_67_dB": -0.4634788768
+  },
+  {
+   "param": "P",
+   "value": 150.0,
+   "dips": [
+    [
+     58.0,
+     -33.22152518
+    ]
+   ],
+   "S11_max_dB": -7.128277971,
+   "S21_67_dB": -0.6544904856
+  },
+  {
+   "param": "W",
+   "value": 40.0,
+   "dips": [
+    [
+     56.5,
+     -34.24506157
+    ]
+   ],
+   "S11_max_dB": -8.609047929,
+   "S21_67_dB": -0.6313060486
+  },
+  {
+   "param": "W",
+   "value": 80.0,
+   "dips": [],
+   "S11_max_dB": -14.70252475,
+   "S21_67_dB": -0.4183868155
+  },
+  {
+   "param": "Lh",
+   "value": 85.0,
+   "dips": [
+    [
+     62.5,
+     -38.29011887
+    ]
+   ],
+   "S11_max_dB": -10.80452111,
+   "S21_67_dB": -0.4287416432
+  },
+  {
+   "param": "Lh",
+   "value": 110.0,
+   "dips": [
+    [
+     57.5,
+     -37.90136669
+    ]
+   ],
+   "S11_max_dB": -11.20686981,
+   "S21_67_dB": -0.516562186
+  },
+  {
+   "param": "Lend",
+   "value": 50.0,
+   "dips": [
+    [
+     65.0,
+     -38.08671519
+    ]
+   ],
+   "S11_max_dB": -10.9129666,
+   "S21_67_dB": -0.3867542674
+  },
+  {
+   "param": "Lend",
+   "value": 200.0,
+   "dips": [
+    [
+     55.0,
+     -38.77921813
+    ]
+   ],
+   "S11_max_dB": -11.13657375,
+   "S21_67_dB": -0.5745894188
+  },
+  {
+   "param": "t_front",
+   "value": 1.0,
+   "dips": [
+    [
+     61.0,
+     -38.97224873
+    ]
+   ],
+   "S11_max_dB": -11.36969389,
+   "S21_67_dB": -0.4647058135
+  },
+  {
+   "param": "t_front",
+   "value": 5.0,
+   "dips": [
+    [
+     59.0,
+     -37.55961628
+    ]
+   ],
+   "S11_max_dB": -10.72343149,
+   "S21_67_dB": -0.4715150455
+  },
+  {
+   "param": "t_back",
+   "value": 1.0,
+   "dips": [
+    [
+     60.0,
+     -38.29502115
+    ]
+   ],
+   "S11_max_dB": -10.98813038,
+   "S21_67_dB": -0.4634788768
+  },
+  {
+   "param": "t_back",
+   "value": 2.0,
+   "dips": [
+    [
+     60.5,
+     -37.93330434
+    ]
+   ],
+   "S11_max_dB": -10.75036134,
+   "S21_67_dB": -0.4583280359
+  },
+  {
+   "param": "t_liner",
+   "value": 0.2,
+   "dips": [
+    [
+     59.0,
+     -37.89156046
+    ]
+   ],
+   "S11_max_dB": -11.3026575,
+   "S21_67_dB": -0.4843051767
+  },
+  {
+   "param": "t_liner",
+   "value": 1.0,
+   "dips": [
+    [
+     61.0,
+     -38.25170785
+    ]
+   ],
+   "S11_max_dB": -10.55464833,
+   "S21_67_dB": -0.4345546565
+  },
+  {
+   "param": "d",
+   "value": 10.0,
+   "dips": [
+    [
+     60.0,
+     -38.29502115
+    ]
+   ],
+   "S11_max_dB": -10.98813038,
+   "S21_67_dB": -0.4634788768
+  },
+  {
+   "param": "d",
+   "value": 20.0,
+   "dips": [
+    [
+     53.5,
+     -41.67506375
+    ]
+   ],
+   "S11_max_dB": -18.66910112,
+   "S21_67_dB": -0.4170197344
+  },
+  {
+   "param": "sigma",
+   "value": 0.1,
+   "dips": [
+    [
+     60.0,
+     -46.78652497
+    ]
+   ],
+   "S11_max_dB": -10.73949589,
+   "S21_67_dB": -0.2029253443
+  },
+  {
+   "param": "sigma",
+   "value": 10.0,
+   "dips": [
+    [
+     59.5,
+     -23.43729227
+    ]
+   ],
+   "S11_max_dB": -12.4938011,
+   "S21_67_dB": -3.045936721
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+schema: ap-sim-val/0
+id: B/nafems-T3
+tier: B
+title: NAFEMS T3 1D transient conduction with a sinusoidal end temperature
+status: unvalidated
+physics: [thermal_transient]
+box_compatible: true
+needs_engine_feature: "transient thermal (E7) and a time-dependent Dirichlet BC"
+tests: [transient gate with time-varying Dirichlet (reflow-profile surrogate), time-step order]
+inputs:
+  geometry:
+    symmetry: none
+    boxes:   # bar along z from A (z = 0) to B (z = 0.1 m); 10 x 10 mm section (CalculiX deck)
+      - {id: bar, kind: die, material: "inline:nafems_t3", x_mm: 0, y_mm: 0, w_mm: 10, d_mm: 10, z_um: 0, h_um: 100000}
+  materials: {inline: {nafems_t3: {k_W_mK: 35.0, rho_kg_m3: 7200, cp_J_kgK: 440.5}}}
+  mesh: {max_xy_mm: 10, min_cells_per_layer: [5, 10, 20, 40]}
+  physics:
+    thermal:
+      initial_C: 0
+      bcs:
+        - {selection: "bottom:bar", type: temperature, T_C: 0, note: "point A"}
+        - {selection: "top:bar", type: temperature, T_C: "100 sin(pi t / 40)", note: "point B"}
+        - {selection: default, type: adiabatic}
+  studies: [{id: s1, type: thermal_transient, t_end_s: 32, dt_s: [0.4, 0.2, 0.1, 0.05], output_s: [32]}]
+expected:
+  - {quantity: T_C, probe: "C: 0.08 m from A, t = 32 s", value: 36.60, unit: C, tolerance: {rel: 1.0e-2, after: "dt and dz refinement"}}
+independent_check:
+  formula: "exact eigenfunction series: u = (x/L) g(t) + sum b_n(t) sin(n pi x / L), g = 100 sin(w t), w = pi/40"
+  script: "validation/expected/tier_b.py t3()"
+  value_C: 36.6031
+  reading: "matches the 36.60 target only with the sinusoid at B (x = L) and T = 0 at A; confirms the RecurDyn statement of which end is heated"
+reference_results:
+  - {solver: "OptiStruct", CBEAM_coarse: 33.6, CBEAM_fine: 34.58, Quad4_coarse: 33.6, Quad8_coarse: 35.1, Quad4_fine: 34.58, Quad8_fine: 35.19, unit: C}
+  - {solver: "CalculiX C3D20", value_C: 36.6}
+  - {solver: "RecurDyn", Shell4_coarse: 54.24, Shell4_fine: 37.74, Solid8_coarse: 38.35, Solid8_fine: 37.74, unit: C}
+provenance:
+  target: "NAFEMS TNSB Rev. 3 (1990), via Altair OS-V 0110 and the CalculiX forum thread"
+  geometry: "bar length 0.1 m and section 0.01 x 0.01 m from the CalculiX deck (node coordinates, *BEAM SECTION RECT 0.01,0.01); not stated in the Altair text"
+  urls:
+    - {url: "https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/nafems_test_problem_t3_r.htm", retrieved: 2026-10-20}
+    - {url: "https://calculix.discourse.group/t/t2-and-t3-one-dimensional-with-radiation-and-heat-transfer-b32-discrepancy/2534", retrieved: 2026-10-20}
+    - {url: "https://functionbay.com/documentation/onlinehelp/Documents/Validation/Validation_NAFEMS.pdf", retrieved: 2026-10-20}
+missing: []
+assumptions:
+  - "R6 notes that a revised T3 exists; the target used here is the TNSB Rev. 3 value as quoted by Altair (36.60 C), which the exact series reproduces (36.603 C)."
+  - "Section size does not enter (1D, adiabatic sides)."

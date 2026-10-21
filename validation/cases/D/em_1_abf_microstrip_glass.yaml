@@ -1,0 +1,97 @@
+schema: ap-sim-val/0
+id: D/em_1_abf_microstrip_glass
+tier: D
+title: EM-1 70 ohm microstrip on ABF over Cu ground on a glass core - measured TRL IL per mm, 33-200 GHz, 25 / 80 / 115 C
+status: unvalidated
+physics: [em]
+source: {paper_ids: [ectc51846.2026.00389], tv_ids: [ectc51846.2026.00389-a, ectc51846.2026.00389-b]}
+revision:
+  - "2026-10-20 wave 2 (audit A1 S8): variant-specific targets with tolerances from the measurement uncertainty; causal-fit target; engine regression baselines"
+  - "2026-10-20 wave 4: L7 made the causal fit the base dielectric and the frequency table the variant `table`; causal rule re-pointed, baselines and outcomes refreshed from one engine run"
+inputs:
+  sim_case: em/em1_abf_microstrip_glass     # lane L7 config; base = causal DS + Debye + Lorentz ABF fit; variants smooth, rough_signal_only, cannonball, table, box_20h, T80C, T115C
+  geometry: {w_um: 34, t_um: 4, Rq_um: 0.19, abf_um: 30, ground: "Cu 3-6 um (stack row -b-L03; 4.5 um in the L7 case)", lengths_mm: [2, 4, 8], above: air,
+             source: "ectc51846.2026.00389-b stack rows; p.3 Sec. II.B / III"}
+  materials:
+    abf_type_a: "Dk / Df at 16.5, 60, 77, 138, 162, 216 GHz x 25 / 80 / 115 C: ectc51846.2026.00389-a-m1 .. -a-m36 (p.5 Table I)"
+    cu: "sigma N/A (plated Cu not reported); L7 uses IACS 5.8e7 S/m at 20 C with TCR 0.00393 1/K (template)"
+measured:   # targets keyed to the DB; the comparisons below reference them
+  - {metric_id: ectc51846.2026.00389-b-m2,  f_GHz: 33,  T_C: 25,  quantity: IL_dB_per_mm, value: 0.08,  basis: measured, locator: "p.5 Table II"}
+  - {metric_id: ectc51846.2026.00389-b-m5,  f_GHz: 77,  T_C: 25,  quantity: IL_dB_per_mm, value: 0.155, basis: measured, locator: "p.5 Table II"}
+  - {metric_id: ectc51846.2026.00389-b-m8,  f_GHz: 140, T_C: 25,  quantity: IL_dB_per_mm, value: 0.265, basis: measured, locator: "p.5 Table II"}
+  - {metric_id: ectc51846.2026.00389-b-m11, f_GHz: 200, T_C: 25,  quantity: IL_dB_per_mm, value: 0.45,  basis: measured, locator: "p.5 Table II"}
+  - {metric_id: ectc51846.2026.00389-b-m3,  f_GHz: 33,  T_C: 80,  quantity: IL_dB_per_mm, value: 0.096, basis: measured, locator: "p.5 Table II"}
+  - {metric_id: ectc51846.2026.00389-b-m6,  f_GHz: 77,  T_C: 80,  quantity: IL_dB_per_mm, value: 0.2,   basis: measured, locator: "p.5 Table II"}
+  - {metric_id: ectc51846.2026.00389-b-m9,  f_GHz: 140, T_C: 80,  quantity: IL_dB_per_mm, value: 0.32,  basis: measured, locator: "p.5 Table II"}
+  - {metric_id: ectc51846.2026.00389-b-m12, f_GHz: 200, T_C: 80,  quantity: IL_dB_per_mm, value: 0.519, basis: measured, locator: "p.5 Table II"}
+  - {metric_id: ectc51846.2026.00389-b-m4,  f_GHz: 33,  T_C: 115, quantity: IL_dB_per_mm, value: 0.11,  basis: measured, locator: "p.5 Table II"}
+  - {metric_id: ectc51846.2026.00389-b-m7,  f_GHz: 77,  T_C: 115, quantity: IL_dB_per_mm, value: 0.21,  basis: measured, locator: "p.5 Table II"}
+  - {metric_id: ectc51846.2026.00389-b-m10, f_GHz: 140, T_C: 115, quantity: IL_dB_per_mm, value: 0.43,  basis: measured, locator: "p.5 Table II"}
+  - {metric_id: ectc51846.2026.00389-b-m13, f_GHz: 200, T_C: 115, quantity: IL_dB_per_mm, value: 0.596, basis: measured, locator: "p.5 Table II"}
+  - {metric_id: ectc51846.2026.00389-b-m14, quantity: S11_dB, value: -20, rule: "S11 < -20 dB, 10-220 GHz", basis: measured, locator: "p.5 Sec. IV.B; p.5 Fig. 8"}
+uncertainty:
+  measurement:
+    thru: "+-0.1 dB over the full band (text p.4 Sec. IV, DB row -b-m15)"
+    per_mm: >-
+      U_thru = 0.029 dB/mm: mean of 0.1 dB / L over the 2, 4, 8 mm lines (0.050, 0.025, 0.0125), fully correlated.
+      The paper says only "average S21 (dB/mm) extracted from microstrip lines of varying lengths" (Fig. 9 caption);
+      if it is a slope fit, a common thru offset cancels and U is smaller. 0.029 is the bounding choice (assumption).
+  model_inputs:
+    width: "max width deviation +1.54 um on 34 um (-b-m1) = 4.5 %; loss scales at most as 1/w, so U_w = 0.05 x measured (one-sided in reality, used two-sided)"
+    not_in_tolerance: "plated-Cu conductivity (N/A, template IACS biases loss low), roughness per surface (one Rq, surface not stated), trace profile: these are what the variants bracket, so they must not be absorbed into the tolerance"
+  tolerance_rule: "|alpha_sim - measured| <= 0.029 dB/mm + 0.05 x measured -> 0.0330 / 0.0368 / 0.0423 / 0.0515 dB/mm at 33 / 77 / 140 / 200 GHz"
+comparisons:
+  - id: bracket
+    rule: "at every f: alpha(smooth) < alpha(cannonball) < alpha(base); and for f >= 140 GHz: alpha(smooth) <= measured + tol and alpha(base) >= measured - tol"
+    fails_if: "a roughness-model regression (base loses its roughness factor: base = smooth gives 0.367 < 0.450 - 0.052 at 200 GHz) or a conductor-loss error that moves the bracket off the data"
+    variants: [smooth, cannonball, base]
+  - id: best_estimate
+    variant: cannonball
+    rule: "|alpha - measured| <= tol at 33, 77, 140, 200 GHz (25 C)"
+    fails_if: "any of the four 25 C points outside the tolerance"
+    note: "cannonball-Huray with the reported h_rms on all Cu is the physically motivated single variant; it is not tuned"
+  - id: hammerstad_all_surfaces
+    variant: base
+    rule: "same tolerance; expected outcome at definition: fails at 140 GHz (+0.068 vs 0.042)"
+    use: "documents the over-prediction of Hammerstad on every surface; not a pass requirement"
+  - id: smooth_lower_bound
+    variant: smooth
+    rule: "same tolerance; expected outcome at definition: fails at 200 GHz (-0.087 vs 0.052)"
+  - id: temperature
+    variants: [T80C, T115C]
+    rule: "tolerance as above at each T; plus direction: alpha(115 C) > alpha(80 C) > alpha(25 C) at every f in the model"
+    fails_if: "a point outside the band, or a non-increasing alpha(T) at any f"
+    note: "at definition: 80 C passes all four points; 115 C fails at 140 GHz (-0.051 vs 0.039). The measured 25 -> 80 C rise at 33 GHz (+20 %) exceeds the model's (about +8 %): the 25 C row may be low (L7 reading)"
+  - id: causal_vs_table
+    variants: [base, table]
+    rule: "|alpha(table) / alpha(base) - 1| <= 0.045 at every f (base = causal fit since wave 4); the base Touchstone passes the passivity and causality checks of A/em_0_analytic structural_checks"
+    tolerance_basis: "the causal DS + Debye + Lorentz fit misses the Table I Df points by up to 8.8 % (L7) and the dielectric term is <= 50 % of alpha (L7 loss split at 200 GHz: 0.190 of 0.497 dB/mm), so <= 4.4 %"
+    fails_if: "causal and table models differ by more than the fit misfit allows, or a non-causal / non-passive base Touchstone"
+    note: "the measured gates (best_estimate, bracket, temperature) run on the causal base; `table` stays as the frequency-domain reference only"
+engine_regression:   # one engine run by L4, 2026-10-20 (node src/em2d/cli.mjs ../sims/em/em1_abf_microstrip_glass.yaml --json, nice 10, 144 s); base and cannonball equal L7's wave-3 values
+  tolerance: {rel: 5.0e-3, basis: "L7 sensitivities: box clearance 10 h -> 20 h changes alpha 0.2-0.4 %; skin_cells 1 -> 3 changes R' 0.13 % at 200 GHz"}
+  f_GHz: [33, 77, 140, 200]
+  alpha_dB_per_mm:
+    base: [0.0980, 0.1911, 0.3329, 0.4929]
+    smooth: [0.0818, 0.1415, 0.2385, 0.3633]
+    rough_signal_only: [0.0948, 0.1812, 0.3140, 0.4669]
+    cannonball: [0.0914, 0.1724, 0.3067, 0.4711]
+    table: [0.0969, 0.1916, 0.3279, 0.4968]
+    box_20h: [0.0977, 0.1906, 0.3318, 0.4912]
+    T80C: [0.1054, 0.2031, 0.3560, 0.5318]
+    T115C: [0.1104, 0.2126, 0.3788, 0.5714]
+outcome_at_definition:   # L4 arithmetic on the values above with the tolerance rule (wave 4)
+  bracket: "pass: smooth < cannonball < base at all four f; at 140 / 200 GHz smooth <= measured + tol and base >= measured - tol"
+  base: "pass 33, 77 (+0.036 vs 0.037), 200; fail 140 (+0.068 vs 0.042)"
+  smooth: "pass 33, 77, 140; fail 200 (-0.087 vs 0.052)"
+  rough_signal_only: "fail 140 (+0.049 vs 0.042)"
+  cannonball: "pass all four; margin at 140 GHz is small (+0.0417 vs 0.0423)"
+  table: "fail 140 (+0.063); vs base within 1.5 % (causal_vs_table pass: -1.1, +0.3, -1.5, +0.8 %)"
+  box_20h: "within 0.4 % of base"
+  T80C: "pass all four"
+  T115C: "fail 140 (-0.051 vs 0.039)"
+analytic_reference: {Z0_ohm: 70.58, eps_eff: 2.470, source: "A/em_0_analytic microstrip_em1 (Hammerstad-Jensen)", design: "70 ohm (TV name)"}
+missing: ["plated Cu conductivity", "roughness per surface", "trace cross-section profile", "ground Cu exact thickness", "extraction method of the average IL/mm (slope fit vs mean)"]
+assumptions:
+  - "U_thru bounding choice 0.029 dB/mm (see uncertainty.measurement.per_mm)."
+  - "Width deviation treated as +-4.5 % on total alpha (upper bound of its effect)."

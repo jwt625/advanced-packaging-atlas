@@ -1,0 +1,42 @@
+schema: ap-sim-val/0
+id: A/MA6-linear-gradient-plate
+tier: A
+title: Free Si plate with a linear through-thickness temperature (stress-free bending)
+status: unvalidated
+physics: [thermal_stationary, thermo_elastic]
+box_compatible: true
+tests: [exactness for linear thermal strain, T -> u coupling on the same grid, no spurious stress, A3 bake-off gate for q1im]
+inputs:
+  materials: {set: _materials_tier_a.yaml}
+  geometry:
+    symmetry: [quarter, none]
+    boxes:
+      - {id: si, kind: die, material: "tierA:si_iso", x_mm: 0, y_mm: 0, w_mm: 50, d_mm: 50, z_um: 0, h_um: 775}
+  mesh: {max_xy_mm: 2.0, min_cells_per_layer: [1, 2, 4]}
+  physics:
+    thermal:
+      bcs:
+        - {selection: "bottom:si", type: temperature, T_C: 25}
+        - {selection: "top:si", type: temperature, T_C: 35}
+        - {selection: default, type: adiabatic}
+    mechanics: {element: [q2s, q1im], stress_free_C: {default: 25}, supports: "rigid_motion | symmetry"}
+  studies:
+    - {id: s1, type: thermal_stationary}
+    - {id: s2, type: thermo_elastic, temperature: {from: s1}}
+expected:
+  - {quantity: kappa_1_m, definition: "signed (z up); top hotter -> top convex -> dome (kappa > 0)", value: 3.35484e-2, unit: 1/m,
+     tolerance: {rel: 1.0e-6}, script_key: MA6.kappa_1_m}
+  - {quantity: sag_L50mm_m, definition: "w(centre) - w(edge midpoint), kappa L^2 / 8", value: 1.04839e-5, unit: m, tolerance: {rel: 1.0e-6},
+     script_key: MA6.sag_L50mm_m}
+  - {quantity: max_abs_sigma_over_scale, definition: "max |sigma_ij| / (E alpha dT_z), E alpha dT_z = 3.38 MPa", value: 0.0,
+     tolerance: {abs: 1.0e-7}, note: "f64 round-off floor of the 3D solve is 2.4e-10 to 5.4e-8 (engine L8) and 1.4e-9 to 5.4e-9 (scikit-fem L5); 1e-10 was below it (2026-10-20)"}
+formula: "T(z) linear -> thermal strain compatible -> sigma = 0 in 3D elasticity; kappa = alpha dT_z / h"
+provenance:
+  formula: "R6 section 1.1 MA6"
+  values: "validation/expected/tier_a.py ma6()"
+tolerance_note: >-
+  Exact (no edge zone: the exact solution is stress-free everywhere). q2s is exact. Plain Q1 cannot represent the
+  quadratic u_z and fails; q1im is exact on rectangular cells. A thermal strain evaluated as an element mean (not at
+  Gauss points) also fails: this is the audit's MA6/LE11 check.
+missing: []
+assumptions: []

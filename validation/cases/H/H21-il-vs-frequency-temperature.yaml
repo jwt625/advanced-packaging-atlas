@@ -1,0 +1,170 @@
+schema: ap-sim-val/0
+id: H/H21-il-vs-frequency-temperature
+tier: H
+title: 'ABF microstrip on glass core: IL per mm rises with frequency and with temperature [weak: 3 papers]'
+status: unvalidated
+physics:
+- em
+strength: weak
+scope_package_classes:
+- glass_core_substrate ABF microstrip (one paper for the monotonic part)
+applies_to:
+- em/em1_abf_microstrip_glass
+rule:
+  type: monotonic
+  expr: IL/mm increasing in f (33 -> 200 GHz) at each T and increasing in T (25 -> 115 C) at each f; band [0.05, 0.65] dB/mm
+  strength: weak
+fails_if: alpha not increasing in f at any T, or not increasing in T at any f, or outside [0.05, 0.65] dB/mm
+n_papers: 3
+support:
+- metric_id: ectc51846.2026.00389-b-m2
+  value: 0.08
+  unit: dB/mm
+  parameter: average insertion loss
+  variant: 33 GHz; 25 C
+  condition: 25 C; 33 GHz; TRL de-embedded
+  basis: measured
+  package_class: glass_core_substrate
+  locator: p.5 Table II
+- metric_id: ectc51846.2026.00389-b-m3
+  value: 0.096
+  unit: dB/mm
+  parameter: average insertion loss
+  variant: 33 GHz; 80 C
+  condition: 80 C; 33 GHz; TRL de-embedded
+  basis: measured
+  package_class: glass_core_substrate
+  locator: p.5 Table II
+- metric_id: ectc51846.2026.00389-b-m4
+  value: 0.11
+  unit: dB/mm
+  parameter: average insertion loss
+  variant: 33 GHz; 115 C
+  condition: 115 C; 33 GHz; TRL de-embedded
+  basis: measured
+  package_class: glass_core_substrate
+  locator: p.5 Table II
+- metric_id: ectc51846.2026.00389-b-m5
+  value: 0.155
+  unit: dB/mm
+  parameter: average insertion loss
+  variant: 77 GHz; 25 C
+  condition: 25 C; 77 GHz; TRL de-embedded
+  basis: measured
+  package_class: glass_core_substrate
+  locator: p.5 Table II
+- metric_id: ectc51846.2026.00389-b-m6
+  value: 0.2
+  unit: dB/mm
+  parameter: average insertion loss
+  variant: 77 GHz; 80 C
+  condition: 80 C; 77 GHz; TRL de-embedded
+  basis: measured
+  package_class: glass_core_substrate
+  locator: p.5 Table II
+- metric_id: ectc51846.2026.00389-b-m7
+  value: 0.21
+  unit: dB/mm
+  parameter: average insertion loss
+  variant: 77 GHz; 115 C
+  condition: 115 C; 77 GHz; TRL de-embedded
+  basis: measured
+  package_class: glass_core_substrate
+  locator: p.5 Table II
+- metric_id: ectc51846.2026.00389-b-m8
+  value: 0.265
+  unit: dB/mm
+  parameter: average insertion loss
+  variant: 140 GHz; 25 C
+  condition: 25 C; 140 GHz; TRL de-embedded
+  basis: measured
+  package_class: glass_core_substrate
+  locator: p.5 Table II
+- metric_id: ectc51846.2026.00389-b-m9
+  value: 0.32
+  unit: dB/mm
+  parameter: average insertion loss
+  variant: 140 GHz; 80 C
+  condition: 80 C; 140 GHz; TRL de-embedded
+  basis: measured
+  package_class: glass_core_substrate
+  locator: p.5 Table II
+- metric_id: ectc51846.2026.00389-b-m10
+  value: 0.43
+  unit: dB/mm
+  parameter: average insertion loss
+  variant: 140 GHz; 115 C
+  condition: 115 C; 140 GHz; TRL de-embedded
+  basis: measured
+  package_class: glass_core_substrate
+  locator: p.5 Table II
+- metric_id: ectc51846.2026.00389-b-m11
+  value: 0.45
+  unit: dB/mm
+  parameter: average insertion loss
+  variant: 200 GHz; 25 C
+  condition: 25 C; 200 GHz; TRL de-embedded
+  basis: measured
+  package_class: glass_core_substrate
+  locator: p.5 Table II
+- metric_id: ectc51846.2026.00389-b-m12
+  value: 0.519
+  unit: dB/mm
+  parameter: average insertion loss
+  variant: 200 GHz; 80 C
+  condition: 80 C; 200 GHz; TRL de-embedded
+  basis: measured
+  package_class: glass_core_substrate
+  locator: p.5 Table II
+- metric_id: ectc51846.2026.00389-b-m13
+  value: 0.596
+  unit: dB/mm
+  parameter: average insertion loss
+  variant: 200 GHz; 115 C
+  condition: 115 C; 200 GHz; TRL de-embedded
+  basis: measured
+  package_class: glass_core_substrate
+  locator: p.5 Table II
+- metric_id: 3dic63395.2024.10830178-a-m25
+  value: 0.3
+  unit: dB/mm
+  parameter: transmission loss, RDL1 microstrip
+  variant: RDL1, 1 mm line
+  condition: 110 GHz (abstract); on-wafer, probes/pads de-embedded
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.5 Sec. IV; p.5 Fig. 10; p.1 Abstract
+- ei_id: tcpmt.2025.3533388-b-e1
+  insertion_loss_db: 0.55
+  il_freq_ghz: 20
+  reach_mm: 3
+  line_um: 100
+  space_um: 18
+  channel_type: glass
+  basis: measured
+  il_db_per_mm: 0.1833
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: glass_interposer
+  locator: p.7 Sec. IV.B; p.8 Fig. 12(c)
+- ei_id: tcpmt.2025.3533388-b-e7
+  insertion_loss_db: 0.632
+  il_freq_ghz: 20
+  reach_mm: 6
+  line_um: 100
+  space_um: 18
+  channel_type: glass
+  basis: measured
+  il_db_per_mm: 0.1053
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: glass_interposer
+  locator: p.7 Sec. IV.B; p.8 Fig. 12(c)
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+notes:
+- '0.08 / 0.155 / 0.265 / 0.45 dB/mm at 33 / 77 / 140 / 200 GHz (25 C, TRL, measured). Related low-loss lines: Si-interposer RDL microstrip 0.3
+  dB/mm at 110 GHz; glass 100 um CPW 0.105-0.183 dB/mm at 20 GHz (measured).'
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

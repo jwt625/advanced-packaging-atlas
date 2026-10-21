@@ -1,0 +1,289 @@
+{
+ "solver": "scikit-fem (apref)",
+ "versions": {
+  "python": "3.12.11",
+  "scikit-fem": "12.0.2",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pyamg": "5.3.0",
+  "gmsh": "4.15.2",
+  "scikit-rf": "2.2.0"
+ },
+ "case": "XB5",
+ "tier": "B",
+ "results": {
+  "runs": [
+   {
+    "elem": "q1",
+    "refine": 1,
+    "dof": 385,
+    "mesh": {
+     "nx": 12,
+     "ny": 4,
+     "nz": 6,
+     "elements": 192
+    },
+    "balance_rel": 9.44799794e-13,
+    "q": {
+     "Tj_a_C": 75.52016633,
+     "Tj_b_C": 56.72011884,
+     "Tmax_C": 75.52016633,
+     "psi_aa_K_W": 0.4621347588,
+     "psi_ba_K_W": 0.08613380899,
+     "psi_ab_K_W": 0.08613380899,
+     "psi_bb_K_W": 0.4621347588,
+     "superposition_err_a_K": -1.833200258e-11
+    }
+   },
+   {
+    "elem": "q1",
+    "refine": 2,
+    "dof": 2250,
+    "mesh": {
+     "nx": 24,
+     "ny": 8,
+     "nz": 12,
+     "elements": 1536
+    },
+    "balance_rel": -3.636535517e-12,
+    "q": {
+     "Tj_a_C": 75.58745581,
+     "Tj_b_C": 56.77572999,
+     "Tmax_C": 75.73913446,
+     "psi_aa_K_W": 0.4626612108,
+     "psi_ba_K_W": 0.08642669445,
+     "psi_ab_K_W": 0.08642669445,
+     "psi_bb_K_W": 0.4626612108,
+     "superposition_err_a_K": 1.291340368e-10
+    }
+   },
+   {
+    "elem": "q1",
+    "refine": 4,
+    "dof": 15028,
+    "mesh": {
+     "nx": 48,
+     "ny": 16,
+     "nz": 24,
+     "elements": 12288
+    },
+    "balance_rel": -3.36952688e-12,
+    "q": {
+     "Tj_a_C": 75.62832774,
+     "Tj_b_C": 56.79885841,
+     "Tmax_C": 75.78413189,
+     "psi_aa_K_W": 0.4630519805,
+     "psi_ba_K_W": 0.08646259387,
+     "psi_ab_K_W": 0.08646259387,
+     "psi_bb_K_W": 0.4630519805,
+     "superposition_err_a_K": 5.272227099e-11
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 1,
+    "dof": 2250,
+    "mesh": {
+     "nx": 12,
+     "ny": 4,
+     "nz": 6,
+     "elements": 192
+    },
+    "balance_rel": 7.696510096e-12,
+    "q": {
+     "Tj_a_C": 75.63430879,
+     "Tj_b_C": 56.80414823,
+     "Tmax_C": 75.78960795,
+     "psi_aa_K_W": 0.4630964623,
+     "psi_ba_K_W": 0.08649325111,
+     "psi_ab_K_W": 0.08649325111,
+     "psi_bb_K_W": 0.4630964623,
+     "superposition_err_a_K": -2.296758339e-10
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 2,
+    "dof": 15028,
+    "mesh": {
+     "nx": 24,
+     "ny": 8,
+     "nz": 12,
+     "elements": 1536
+    },
+    "balance_rel": 3.043321151e-11,
+    "q": {
+     "Tj_a_C": 75.64190304,
+     "Tj_b_C": 56.80651881,
+     "Tmax_C": 75.79910602,
+     "psi_aa_K_W": 0.4631819152,
+     "psi_ba_K_W": 0.08647423049,
+     "psi_ab_K_W": 0.08647423049,
+     "psi_bb_K_W": 0.4631819152,
+     "superposition_err_a_K": -9.091536413e-10
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 3,
+    "dof": 47550,
+    "mesh": {
+     "nx": 36,
+     "ny": 12,
+     "nz": 18,
+     "elements": 5184
+    },
+    "balance_rel": -3.328670672e-12,
+    "q": {
+     "Tj_a_C": 75.64434676,
+     "Tj_b_C": 56.80738824,
+     "Tmax_C": 75.80166522,
+     "psi_aa_K_W": 0.4632087019,
+     "psi_ba_K_W": 0.08646953143,
+     "psi_ab_K_W": 0.08646953143,
+     "psi_bb_K_W": 0.4632087019,
+     "superposition_err_a_K": 7.684519687e-10
+    }
+   }
+  ],
+  "convergence": {
+   "q1": {
+    "Tj_a_C": {
+     "p_obs": 0.7192703707,
+     "p_used": 0.7192703707,
+     "f_fine": 75.62832774,
+     "f_ext": 75.69156281,
+     "gci_fine": 0.001045161746,
+     "rel_change_last": 0.0005404315657
+    },
+    "Tj_b_C": {
+     "p_obs": 1.265707191,
+     "p_used": 1.265707191,
+     "f_fine": 56.79885841,
+     "f_ext": 56.81532636,
+     "gci_fine": 0.0003624182225,
+     "rel_change_last": 0.0004071987461
+    },
+    "Tmax_C": {
+     "p_obs": 2.282806478,
+     "p_used": 2.282806478,
+     "f_fine": 75.78413189,
+     "f_ext": 75.79577045,
+     "gci_fine": 0.0001919689537,
+     "rel_change_last": 0.0005937579217
+    },
+    "psi_aa_K_W": {
+     "p_obs": 0.4299837169,
+     "p_used": 0.4299837169,
+     "f_fine": 0.4630519805,
+     "f_ext": 0.4641774096,
+     "gci_fine": 0.003038074336,
+     "rel_change_last": 0.0008439001783
+    },
+    "psi_ba_K_W": {
+     "p_obs": 3.028304343,
+     "p_used": 3.028304343,
+     "f_fine": 0.08646259387,
+     "f_ext": 0.0864676088,
+     "gci_fine": 7.250149415e-05,
+     "rel_change_last": 0.0004152016932
+    },
+    "psi_ab_K_W": {
+     "p_obs": 3.028304347,
+     "p_used": 3.028304347,
+     "f_fine": 0.08646259387,
+     "f_ext": 0.0864676088,
+     "gci_fine": 7.250149367e-05,
+     "rel_change_last": 0.0004152016919
+    },
+    "psi_bb_K_W": {
+     "p_obs": 0.4299837209,
+     "p_used": 0.4299837209,
+     "f_fine": 0.4630519805,
+     "f_ext": 0.4641774095,
+     "gci_fine": 0.003038074296,
+     "rel_change_last": 0.000843900176
+    },
+    "superposition_err_a_K": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 5.272227099e-11,
+     "f_ext": null,
+     "gci_fine": null
+    }
+   },
+   "q2": {
+    "Tj_a_C": {
+     "p_obs": 1.061197215,
+     "p_used": 1.061197215,
+     "f_fine": 75.64434676,
+     "f_ext": 75.64889164,
+     "gci_fine": 7.510283561e-05,
+     "rel_change_last": 3.230537194e-05
+    },
+    "Tj_b_C": {
+     "p_obs": 0.8332943303,
+     "p_used": 0.8332943303,
+     "f_fine": 56.80738824,
+     "f_ext": 56.80955121,
+     "gci_fine": 4.759445689e-05,
+     "rel_change_last": 1.530488198e-05
+    },
+    "Tmax_C": {
+     "p_obs": 1.366859371,
+     "p_used": 1.366859371,
+     "f_fine": 75.80166522,
+     "f_ext": 75.80512094,
+     "gci_fine": 5.698610152e-05,
+     "rel_change_last": 3.376184796e-05
+    },
+    "psi_aa_K_W": {
+     "p_obs": 1.106545122,
+     "p_used": 1.106545122,
+     "f_fine": 0.4632087019,
+     "f_ext": 0.4632560098,
+     "gci_fine": 0.0001276635511,
+     "rel_change_last": 5.782858303e-05
+    },
+    "psi_ba_K_W": {
+     "p_obs": 1.514820757,
+     "p_used": 1.514820757,
+     "f_fine": 0.08646953143,
+     "f_ext": 0.08646399133,
+     "gci_fine": 8.008751425e-05,
+     "rel_change_last": 5.434356433e-05
+    },
+    "psi_ab_K_W": {
+     "p_obs": 1.514820156,
+     "p_used": 1.514820156,
+     "f_fine": 0.08646953143,
+     "f_ext": 0.08646399132,
+     "gci_fine": 8.008758435e-05,
+     "rel_change_last": 5.434358302e-05
+    },
+    "psi_bb_K_W": {
+     "p_obs": 1.106544882,
+     "p_used": 1.106544882,
+     "f_fine": 0.4632087019,
+     "f_ext": 0.4632560098,
+     "gci_fine": 0.0001276636037,
+     "rel_change_last": 5.782859131e-05
+    },
+    "superposition_err_a_K": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 7.684519687e-10,
+     "f_ext": null,
+     "gci_fine": null
+    }
+   }
+  },
+  "expected": {},
+  "assumptions": [
+   "interposer Si 30 x 20 x 0.1 mm; dies si_iso 10 x 10 x 0.775 mm at x = -7.5 / +7.5 mm (5 mm gap)",
+   "die-to-interposer bond layer 30 um, homogenised k 2 W/mK (template, no source); TIM 50 um k 5; Cu lid 30 x 20 x 2 mm on the dies",
+   "powers uniform in the die volumes: A 100 W, B 50 W; cold plate h 10000 W/m2K, 25 C on the lid top; other faces adiabatic",
+   "Tj probe = centre of each die's bottom (active) face; psi_ij = (T_i - 25 C) per W in die j"
+  ]
+ }
+}

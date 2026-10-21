@@ -1,0 +1,139 @@
+schema: ap-sim-val/0
+id: H/H19-il-per-mm-vs-width
+tier: H
+title: Insertion loss per mm decreases with line width at fixed frequency
+status: unvalidated
+physics:
+- em
+strength: moderate
+scope_package_classes:
+- si_bridge_fanout (Si-bridge CPWG, PSB bridge)
+- organic_rdl_interposer (RDL lines)
+applies_to:
+- em/em2_cpwg_si_bridge (width variants)
+- EM-3 fine-pitch lines (C/em_3_fine_pitch_crosstalk)
+rule:
+  type: monotonic
+  expr: IL/mm strictly decreasing in line width within each paper's series
+  strength: moderate
+fails_if: IL/mm at fixed f does not decrease from a narrower to a wider line in a series
+n_papers: 4
+support:
+- ei_id: eptc67330.2025.11392620-a-e1
+  insertion_loss_db: 1.353
+  il_freq_ghz: 56
+  reach_mm: 1
+  line_um: 2
+  space_um: 3
+  channel_type: si_bridge
+  basis: measured
+  il_db_per_mm: 1.353
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: si_bridge_fanout
+  locator: p.3 Table I; p.2 Fig. 3(a); p.3 Sec. II.B
+- ei_id: eptc67330.2025.11392620-a-e2
+  insertion_loss_db: 0.634
+  il_freq_ghz: 56
+  reach_mm: 1
+  line_um: 10
+  space_um: 5.5
+  channel_type: si_bridge
+  basis: measured
+  il_db_per_mm: 0.634
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: si_bridge_fanout
+  locator: p.3 Table I; p.2 Fig. 3(b); p.3 Sec. II.B
+- ei_id: eptc67330.2025.11392620-a-e3
+  insertion_loss_db: 0.441
+  il_freq_ghz: 56
+  reach_mm: 1
+  line_um: 25
+  space_um: 16
+  channel_type: si_bridge
+  basis: measured
+  il_db_per_mm: 0.441
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: si_bridge_fanout
+  locator: p.3 Table I; p.2 Fig. 3(c); p.3 Sec. II.B
+- ei_id: 001c.129747-d-e1
+  insertion_loss_db: 6.6
+  il_freq_ghz: 40
+  reach_mm: 5
+  line_um: 1.5
+  space_um: 1.5
+  channel_type: unspecified
+  basis: measured
+  il_db_per_mm: 1.32
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: organic_rdl_interposer
+  locator: p.3 Fig. 8
+- ei_id: 001c.129747-d-e2
+  insertion_loss_db: 3.8
+  il_freq_ghz: 40
+  reach_mm: 5
+  line_um: 3
+  space_um: 3
+  channel_type: unspecified
+  basis: measured
+  il_db_per_mm: 0.76
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: organic_rdl_interposer
+  locator: p.3 Fig. 8
+- ei_id: ectc51846.2026.00035-a-e3
+  insertion_loss_db: 11.1
+  il_freq_ghz: 50
+  reach_mm: 2.0
+  line_um: 0.75
+  space_um: 0.75
+  channel_type: si_bridge
+  basis: simulated
+  il_db_per_mm: 5.55
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: si_bridge_fanout
+  locator: p.4 Fig. 5; p.3 Sec. III.A
+- ei_id: ectc51846.2026.00035-c-e2
+  insertion_loss_db: 4.1
+  il_freq_ghz: 50
+  reach_mm: 2.0
+  line_um: 1.4
+  space_um: 1.4
+  channel_type: si_bridge
+  basis: simulated
+  il_db_per_mm: 2.05
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: si_bridge_fanout
+  locator: p.4 Fig. 5; p.3 Sec. III.A
+- ei_id: ectc51846.2026.00016-b-e1
+  insertion_loss_db: 1.63
+  il_freq_ghz: 65
+  reach_mm: 2
+  line_um: 5
+  channel_type: organic_rdl
+  basis: measured
+  il_db_per_mm: 0.815
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: organic_rdl_interposer
+  locator: p.3 Sec. IV; p.3 Fig. 4(a)
+- ei_id: ectc51846.2026.00016-b-e2
+  insertion_loss_db: 1.37
+  il_freq_ghz: 65
+  reach_mm: 2
+  line_um: 8
+  channel_type: organic_rdl
+  basis: measured
+  il_db_per_mm: 0.685
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: organic_rdl_interposer
+  locator: p.3 Sec. IV; p.3 Fig. 4(b)
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+notes:
+- 'Si-bridge CPWG M4M1 W2 / W10 / W25 at 56 GHz: 1.353 / 0.634 / 0.441 dB/mm (measured); organic RDL L/S 1.5 / 3 um at 40 GHz: 1.32 / 0.76 dB/mm
+  (measured, plot read); PSB L/S 0.75 vs 1.4 um, 2 mm, 50 GHz: 5.55 vs 2.05 dB/mm (simulated, incl. transitions); organic RDL 5 vs 8 um at 65
+  GHz: 0.815 vs 0.685 dB/mm (measured).'
+- Per-mm values from electrical_interfaces are |IL| / reach (L4), so short channels include pad / transition loss.
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

@@ -1,0 +1,203 @@
+{
+ "solver": "scikit-fem (apref)",
+ "versions": {
+  "python": "3.12.11",
+  "scikit-fem": "12.0.2",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pyamg": "5.3.0",
+  "gmsh": "4.15.2",
+  "scikit-rf": "2.2.0"
+ },
+ "case": "MA3",
+ "tier": "A",
+ "expected_source": "validation/expected/tier_a_values.json",
+ "results": {
+  "runs": [
+   {
+    "elem": "q2s",
+    "refine": 1,
+    "dof": 1059,
+    "mesh": {
+     "nx": 10,
+     "ny": 1,
+     "nz": 4,
+     "elements": 40
+    },
+    "reaction_rel": 0.0006834354654,
+    "q": {
+     "kappa_clt_1_m": -2.157922035,
+     "kappa_clt_y_1_m": -2.180475113,
+     "sag_L10mm_m": 2.689254154e-05
+    }
+   },
+   {
+    "elem": "q2s",
+    "refine": 2,
+    "dof": 5967,
+    "mesh": {
+     "nx": 20,
+     "ny": 2,
+     "nz": 8,
+     "elements": 320
+    },
+    "reaction_rel": 0.000187926425,
+    "q": {
+     "kappa_clt_1_m": -2.157744721,
+     "kappa_clt_y_1_m": -1.954240709,
+     "sag_L10mm_m": 2.687786383e-05
+    }
+   },
+   {
+    "elem": "q2s",
+    "refine": 4,
+    "dof": 38859,
+    "mesh": {
+     "nx": 40,
+     "ny": 4,
+     "nz": 16,
+     "elements": 2560
+    },
+    "reaction_rel": 5.48093106e-05,
+    "q": {
+     "kappa_clt_1_m": -2.157681748,
+     "kappa_clt_y_1_m": -1.926963092,
+     "sag_L10mm_m": 2.68768144e-05
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 1,
+    "dof": 1701,
+    "mesh": {
+     "nx": 10,
+     "ny": 1,
+     "nz": 4,
+     "elements": 40
+    },
+    "reaction_rel": 0.0006233816233,
+    "q": {
+     "kappa_clt_1_m": -2.157824583,
+     "kappa_clt_y_1_m": -2.000443737,
+     "sag_L10mm_m": 2.689156223e-05
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 2,
+    "dof": 10455,
+    "mesh": {
+     "nx": 20,
+     "ny": 2,
+     "nz": 8,
+     "elements": 320
+    },
+    "reaction_rel": 0.0002167649295,
+    "q": {
+     "kappa_clt_1_m": -2.157715356,
+     "kappa_clt_y_1_m": -1.948328587,
+     "sag_L10mm_m": 2.687798831e-05
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 4,
+    "dof": 72171,
+    "mesh": {
+     "nx": 40,
+     "ny": 4,
+     "nz": 16,
+     "elements": 2560
+    },
+    "reaction_rel": 6.102021628e-05,
+    "q": {
+     "kappa_clt_1_m": -2.157673936,
+     "kappa_clt_y_1_m": -1.932809454,
+     "sag_L10mm_m": 2.687668349e-05
+    }
+   }
+  ],
+  "convergence": {
+   "q2s": {
+    "kappa_clt_1_m": {
+     "p_obs": 1.493483579,
+     "p_used": 1.493483579,
+     "f_fine": -2.157681748,
+     "f_ext": -2.157647065,
+     "gci_fine": 2.00928891e-05,
+     "rel_change_last": 2.918581168e-05,
+     "expected": -2.156230366,
+     "rel_err_fine": -0.0006731104908,
+     "rel_err_ext": -0.0006570253598,
+     "orders_vs_exact": [
+      0.159743691,
+      0.06127685332
+     ]
+    },
+    "kappa_clt_y_1_m": {
+     "p_obs": 3.052028774,
+     "p_used": 3.052028774,
+     "f_fine": -1.926963092,
+     "f_ext": -1.923223242,
+     "gci_fine": 0.002425999688,
+     "rel_change_last": 0.01415575519
+    },
+    "sag_L10mm_m": {
+     "p_obs": 3.805946846,
+     "p_used": 3.805946846,
+     "f_fine": 2.68768144e-05,
+     "f_ext": 2.687673359e-05,
+     "gci_fine": 3.758370982e-06,
+     "rel_change_last": 3.904599459e-05,
+     "expected": 2.695287958e-05,
+     "rel_err_fine": -0.002822154322,
+     "rel_err_ext": -0.002825152534,
+     "orders_vs_exact": [
+      -0.3141257941,
+      -0.02004269536
+     ]
+    }
+   },
+   "q2": {
+    "kappa_clt_1_m": {
+     "p_obs": 1.398951723,
+     "p_used": 1.398951723,
+     "f_fine": -2.157673936,
+     "f_ext": -2.157648636,
+     "gci_fine": 1.465731054e-05,
+     "rel_change_last": 1.919637455e-05,
+     "expected": -2.156230366,
+     "rel_err_fine": -0.000669487721,
+     "rel_err_ext": -0.0006577540222,
+     "orders_vs_exact": [
+      0.1023951821,
+      0.04081168668
+     ]
+    },
+    "kappa_clt_y_1_m": {
+     "p_obs": 1.74765486,
+     "p_used": 1.74765486,
+     "f_fine": -1.932809454,
+     "f_ext": -1.926228315,
+     "gci_fine": 0.004256200361,
+     "rel_change_last": 0.008029313475
+    },
+    "sag_L10mm_m": {
+     "p_obs": 3.378917438,
+     "p_used": 3.378917438,
+     "f_fine": 2.687668349e-05,
+     "f_ext": 2.687654473e-05,
+     "gci_fine": 6.453884329e-06,
+     "rel_change_last": 4.854831647e-05,
+     "expected": 2.695287958e-05,
+     "rel_err_fine": -0.002827010977,
+     "rel_err_ext": -0.002832159488,
+     "orders_vs_exact": [
+      -0.288502262,
+      -0.02491937036
+     ]
+    }
+   }
+  }
+ }
+}

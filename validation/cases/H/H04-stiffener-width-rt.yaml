@@ -1,0 +1,221 @@
+schema: ap-sim-val/0
+id: H/H04-stiffener-width-rt
+tier: H
+title: RT warpage decreases monotonically with stiffener width; no consistent width trend at reflow
+status: unvalidated
+physics:
+- thermo_elastic
+strength: moderate
+scope_package_classes:
+- organic_substrate FCBGA (ectc51529.2024.00265)
+- si_interposer_2p5d (estc60143.2024.10712129; JOINT2 2024 FEM at 260 C)
+applies_to:
+- fcbga_organic/substrate_warpage (stiffener width sweep)
+- si_interposer_peers/120mm_warpage (stiffener footprint sweep)
+rule:
+  type: monotonic
+  expr: 'w_RT strictly decreasing in stiffener width per series; at HT: no gate (direction not consistent across papers)'
+  strength: moderate
+fails_if: w_RT does not decrease between two adjacent widths of a series (any increase fails); HT width trends are not gated
+n_papers: 3
+support:
+- metric_id: ectc51529.2024.00265-a-m5
+  value: 612
+  unit: um
+  parameter: package warpage vs stiffener width
+  variant: Cu stiffener 2.5 mm thick, 12 mm wide; Cu ratio 100%
+  condition: 30 C
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Fig. 6; p.4 Sec. IV.B
+- metric_id: ectc51529.2024.00265-a-m6
+  value: 602
+  unit: um
+  parameter: package warpage vs stiffener width
+  variant: Cu stiffener 2.5 mm thick, 16 mm wide; Cu ratio 100%
+  condition: 30 C
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Fig. 6; p.4 Sec. IV.B
+- metric_id: ectc51529.2024.00265-a-m7
+  value: 525
+  unit: um
+  parameter: package warpage vs stiffener width
+  variant: Cu stiffener 2.5 mm thick, 20 mm wide; Cu ratio 100%
+  condition: 30 C
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Fig. 6; p.4 Sec. IV.B
+- metric_id: ectc51529.2024.00265-a-m8
+  value: 373
+  unit: um
+  parameter: package warpage vs stiffener width
+  variant: Cu stiffener 2.5 mm thick, 12 mm wide; Cu ratio 75%
+  condition: 30 C
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Fig. 6; p.4 Sec. IV.B
+- metric_id: ectc51529.2024.00265-a-m9
+  value: 308
+  unit: um
+  parameter: package warpage vs stiffener width
+  variant: Cu stiffener 2.5 mm thick, 16 mm wide; Cu ratio 75%
+  condition: 30 C
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Fig. 6; p.4 Sec. IV.B
+- metric_id: ectc51529.2024.00265-a-m10
+  value: 260
+  unit: um
+  parameter: package warpage vs stiffener width
+  variant: Cu stiffener 2.5 mm thick, 20 mm wide; Cu ratio 75%
+  condition: 30 C
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Fig. 6; p.4 Sec. IV.B
+- metric_id: estc60143.2024.10712129-i-m7
+  value: 370
+  unit: um
+  parameter: package warpage at 25 C
+  variant: stiffener t=2.0 mm, w=16.5 mm
+  condition: 25 C (temperature sequence 25, 260, 40 C as in legend)
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 15
+- metric_id: estc60143.2024.10712129-i-m10
+  value: 355
+  unit: um
+  parameter: package warpage at 25 C
+  variant: stiffener t=2.0 mm, w=18.5 mm
+  condition: 25 C (temperature sequence 25, 260, 40 C as in legend)
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 15
+- metric_id: estc60143.2024.10712129-i-m13
+  value: 345
+  unit: um
+  parameter: package warpage at 25 C
+  variant: stiffener t=2.0 mm, w=20.5 mm
+  condition: 25 C (temperature sequence 25, 260, 40 C as in legend)
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 15
+- metric_id: ectc51529.2024.00155-g-m1
+  value: 263
+  unit: um
+  parameter: package substrate warpage at 260 C (FEM)
+  condition: FEM, 260 C
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.5 Fig. 12
+- metric_id: ectc51529.2024.00155-a-m23
+  value: 247
+  unit: um
+  parameter: package substrate warpage at 260 C (FEM)
+  condition: FEM, 260 C
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.5 Fig. 12
+- metric_id: ectc51529.2024.00155-b-m4
+  value: 216
+  unit: um
+  parameter: package substrate warpage at 260 C (FEM)
+  condition: FEM, 260 C
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.5 Fig. 12
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+counter_examples:
+- metric_id: ectc51529.2024.00265-a-m11
+  value: 188
+  unit: um
+  parameter: package warpage vs stiffener width
+  variant: Cu stiffener 2.5 mm thick, 12 mm wide; Cu ratio 100%
+  condition: 245 C
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Fig. 6; p.4 Sec. IV.B
+- metric_id: ectc51529.2024.00265-a-m12
+  value: 130
+  unit: um
+  parameter: package warpage vs stiffener width
+  variant: Cu stiffener 2.5 mm thick, 16 mm wide; Cu ratio 100%
+  condition: 245 C
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Fig. 6; p.4 Sec. IV.B
+- metric_id: ectc51529.2024.00265-a-m13
+  value: 225
+  unit: um
+  parameter: package warpage vs stiffener width
+  variant: Cu stiffener 2.5 mm thick, 20 mm wide; Cu ratio 100%
+  condition: 245 C
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Fig. 6; p.4 Sec. IV.B
+- metric_id: ectc51529.2024.00265-a-m14
+  value: 152
+  unit: um
+  parameter: package warpage vs stiffener width
+  variant: Cu stiffener 2.5 mm thick, 12 mm wide; Cu ratio 75%
+  condition: 245 C
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Fig. 6; p.4 Sec. IV.B
+- metric_id: ectc51529.2024.00265-a-m15
+  value: 199
+  unit: um
+  parameter: package warpage vs stiffener width
+  variant: Cu stiffener 2.5 mm thick, 16 mm wide; Cu ratio 75%
+  condition: 245 C
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Fig. 6; p.4 Sec. IV.B
+- metric_id: ectc51529.2024.00265-a-m16
+  value: 268
+  unit: um
+  parameter: package warpage vs stiffener width
+  variant: Cu stiffener 2.5 mm thick, 20 mm wide; Cu ratio 75%
+  condition: 245 C
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Fig. 6; p.4 Sec. IV.B
+- metric_id: estc60143.2024.10712129-i-m8
+  value: 440
+  unit: um
+  parameter: package warpage at 260 C
+  variant: stiffener t=2.0 mm, w=16.5 mm
+  condition: 260 C (temperature sequence 25, 260, 40 C as in legend)
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 15
+- metric_id: estc60143.2024.10712129-i-m11
+  value: 395
+  unit: um
+  parameter: package warpage at 260 C
+  variant: stiffener t=2.0 mm, w=18.5 mm
+  condition: 260 C (temperature sequence 25, 260, 40 C as in legend)
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 15
+- metric_id: estc60143.2024.10712129-i-m14
+  value: 405
+  unit: um
+  parameter: package warpage at 260 C
+  variant: stiffener t=2.0 mm, w=20.5 mm
+  condition: 260 C (temperature sequence 25, 260, 40 C as in legend)
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 15
+notes:
+- 'Series: 00265 Cu stiffener 12 / 16 / 20 mm at Cu ratio 100 % (612 / 602 / 525 um) and 75 % (373 / 308 / 260 um), 30 C, measured; estc60143
+  t = 2 mm, w = 16.5 / 18.5 / 20.5 mm (370 / 355 / 345 um), 25 C, measured; JOINT2 FEM 260 C 23x25 / 28x30 / 34x36 mm (263 / 247 / 216 um) is
+  a simulated HT series that is monotonic.'
+- 'At 245-260 C the measured series are not monotonic (00265: 188 / 130 / 225 and 152 / 199 / 268 um; estc60143: 440 / 395 / 405 um), so HT width
+  trends are not gated.'
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

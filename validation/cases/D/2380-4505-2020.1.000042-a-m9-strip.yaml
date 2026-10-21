@@ -1,0 +1,22 @@
+schema: ap-sim-val/0
+id: D/2380-4505-2020.1.000042-a-m9-strip
+tier: D
+title: Chip-last FOPLP - EMC-molded strip warpage after transfer to a second glass carrier (0.7 mm)
+status: untestable
+untestable_reason: >-
+  The measured object is the strip bonded to a second glass carrier: the strip was transferred to that carrier and
+  the first one removed (p.6 Sec. III.E). The sim case models a free strip, and carrier thickness and bond layer are
+  not stated. The free-strip linear result is 12.6 mm (sag / thickness 28.5, far beyond the about 0.5 limit of
+  small-deflection theory), so a free large thin strip also needs geometric nonlinearity (lane L9).
+activation:
+  - "sims/fan_out_panel/panel_warpage.yaml gains a carrier variant: glass plate plus bond layer, thickness as a template knob with bounds (L3)"
+  - "geometric nonlinearity (total Lagrangian) in the engine (L8), needed whenever sag / thickness > 0.5"
+future_target:   # applies once both activation items exist
+  - {metric_id: 2380-4505-2020.1.000042-a-m9, quantity: strip_on_carrier_warpage_magnitude_um, value: 0.7, unit: mm, basis: measured,
+     locator: "p.6 Sec. III.E, Fig. 12", tolerance: {rel: 0.5, magnitude_only: true},
+     note: "sign convention not stated (DB scope); the carrier-thickness knob range is reported as a band, never tuned"}
+physics: [thermo_elastic]
+source: {paper_id: 2380-4505-2020.1.000042, tv_id: 2380-4505-2020.1.000042-a}
+inputs: {sim_case: fan_out_panel/panel_warpage}
+missing: ["second glass carrier thickness and material", "bond layer", "EMC cure / stress-free temperature (case uses 120 C lamination)", "underfill (dropped in the sim for the mesh budget)"]
+assumptions: []

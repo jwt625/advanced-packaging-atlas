@@ -1,0 +1,256 @@
+{
+ "solver": "scikit-fem (apref)",
+ "versions": {
+  "python": "3.12.11",
+  "scikit-fem": "12.0.2",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pyamg": "5.3.0",
+  "gmsh": "4.15.2",
+  "scikit-rf": "2.2.0"
+ },
+ "case": "NAFEMS-LE11",
+ "tier": "B",
+ "expected_source": "R6 section 2.1 / L4 B/nafems-LE11 (-105 MPa)",
+ "results": {
+  "runs": [
+   {
+    "elem": "q1",
+    "refine": 2,
+    "dof": 1197,
+    "mesh": {
+     "elements": 216
+    },
+    "q": {
+     "sigma_zz_A_Pa": -92421589.9,
+     "sigma_rr_A_Pa": 4030343.576
+    }
+   },
+   {
+    "elem": "q1",
+    "refine": 4,
+    "dof": 3885,
+    "mesh": {
+     "elements": 864
+    },
+    "q": {
+     "sigma_zz_A_Pa": -99838785.21,
+     "sigma_rr_A_Pa": -345641.8727
+    }
+   },
+   {
+    "elem": "q1",
+    "refine": 8,
+    "dof": 13797,
+    "mesh": {
+     "elements": 3456
+    },
+    "q": {
+     "sigma_zz_A_Pa": -102887815.2,
+     "sigma_rr_A_Pa": -1485081.715
+    }
+   },
+   {
+    "elem": "q2s",
+    "refine": 2,
+    "dof": 4155,
+    "mesh": {
+     "elements": 216
+    },
+    "q": {
+     "sigma_zz_A_Pa": -103441419.1,
+     "sigma_rr_A_Pa": -763193.6289
+    }
+   },
+   {
+    "elem": "q2s",
+    "refine": 3,
+    "dof": 8400,
+    "mesh": {
+     "elements": 486
+    },
+    "q": {
+     "sigma_zz_A_Pa": -104382201.3,
+     "sigma_rr_A_Pa": -785560.6745
+    }
+   },
+   {
+    "elem": "q2s",
+    "refine": 4,
+    "dof": 14103,
+    "mesh": {
+     "elements": 864
+    },
+    "q": {
+     "sigma_zz_A_Pa": -104903422.8,
+     "sigma_rr_A_Pa": -661086.1662
+    }
+   },
+   {
+    "elem": "q2s",
+    "refine": 6,
+    "dof": 29883,
+    "mesh": {
+     "elements": 1944
+    },
+    "q": {
+     "sigma_zz_A_Pa": -105341892.9,
+     "sigma_rr_A_Pa": -455283.0527
+    }
+   },
+   {
+    "elem": "q2s",
+    "refine": 8,
+    "dof": 51495,
+    "mesh": {
+     "elements": 3456
+    },
+    "q": {
+     "sigma_zz_A_Pa": -105540851.8,
+     "sigma_rr_A_Pa": -335696.7301
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 2,
+    "dof": 7215,
+    "mesh": {
+     "elements": 216
+    },
+    "q": {
+     "sigma_zz_A_Pa": -104918365.9,
+     "sigma_rr_A_Pa": -2238749.229
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 3,
+    "dof": 15015,
+    "mesh": {
+     "elements": 486
+    },
+    "q": {
+     "sigma_zz_A_Pa": -105453083.0,
+     "sigma_rr_A_Pa": -1652538.332
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 4,
+    "dof": 25623,
+    "mesh": {
+     "elements": 864
+    },
+    "q": {
+     "sigma_zz_A_Pa": -105671133.0,
+     "sigma_rr_A_Pa": -1265022.808
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 6,
+    "dof": 55263,
+    "mesh": {
+     "elements": 1944
+    },
+    "q": {
+     "sigma_zz_A_Pa": -105844161.5,
+     "sigma_rr_A_Pa": -833884.4119
+    }
+   }
+  ],
+  "convergence": {
+   "q1": {
+    "sigma_zz_A_Pa": {
+     "p_obs": 1.282523398,
+     "p_used": 1.282523398,
+     "f_fine": -102887815.2,
+     "f_ext": -105016073.6,
+     "gci_fine": 0.02585654004,
+     "rel_change_last": 0.02963451043,
+     "expected": -105000000.0,
+     "rel_err_fine": 0.0201160453,
+     "rel_err_ext": -0.0001530816604,
+     "orders_vs_exact": [
+      1.285167002,
+      1.288974636
+     ]
+    },
+    "sigma_rr_A_Pa": {
+     "p_obs": 1.941283183,
+     "p_used": 1.941283183,
+     "f_fine": -1485081.715,
+     "f_ext": -1886226.427,
+     "gci_fine": 0.3376453192,
+     "rel_change_last": 0.7672573373
+    }
+   },
+   "q2s": {
+    "sigma_zz_A_Pa": {
+     "p_obs": 1.273935221,
+     "p_used": 1.273935221,
+     "f_fine": -105540851.8,
+     "f_ext": -105990314.4,
+     "gci_fine": 0.005323324449,
+     "rel_change_last": 0.001885136353,
+     "expected": -105000000.0,
+     "rel_err_fine": -0.005150969678,
+     "rel_err_ext": -0.009431565463,
+     "orders_vs_exact": [
+      2.282238926,
+      6.450939891,
+      -3.117788907,
+      -1.594286854
+     ]
+    },
+    "sigma_rr_A_Pa": {
+     "p_obs": 0.5729994798,
+     "p_used": 0.5729994798,
+     "f_fine": -335696.7301,
+     "f_ext": 331613.7913,
+     "gci_fine": 2.484796773,
+     "rel_change_last": 0.3562332063
+    }
+   },
+   "q2": {
+    "sigma_zz_A_Pa": {
+     "p_obs": 1.685216702,
+     "p_used": 1.685216702,
+     "f_fine": -105844161.5,
+     "f_ext": -106020649.9,
+     "gci_fine": 0.002084296113,
+     "rel_change_last": 0.001634747624,
+     "expected": -105000000.0,
+     "rel_err_fine": -0.008039633145,
+     "rel_err_ext": -0.009720475617,
+     "orders_vs_exact": [
+      -4.226821538,
+      -1.365715886,
+      -0.565712035
+     ]
+    },
+    "sigma_rr_A_Pa": {
+     "p_obs": 0.6870395507,
+     "p_used": 0.6870395507,
+     "f_fine": -833884.4119,
+     "f_ext": 508223.0942,
+     "gci_fine": 2.011830847,
+     "rel_change_last": 0.5170241696
+    }
+   }
+  },
+  "expected": {
+   "sigma_zz_A_Pa": -105000000.0
+  },
+  "sources": {
+   "retrieved": "2026-10-20",
+   "urls": [
+    "https://raw.githubusercontent.com/seamplex/feenox/main/examples/nafems-le11.geo",
+    "https://raw.githubusercontent.com/seamplex/feenox/main/examples/nafems-le11.fee"
+   ]
+  },
+  "assumptions": [
+   "stress-free temperature 0 C (not stated in the FeenoX input; field taken as the temperature change)"
+  ]
+ }
+}

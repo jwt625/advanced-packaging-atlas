@@ -1,0 +1,65 @@
+schema: ap-sim-val/0
+id: B/nafems-LE11
+tier: B
+title: NAFEMS LE11 solid cylinder / taper / sphere under a spatially varying temperature
+status: unvalidated
+physics: [thermo_elastic]
+box_compatible: false
+geometry_note: "Axisymmetric shell of revolution (spherical, conical, cylindrical segments). Desktop reference only (2D axisymmetric or 3D quarter). A staircase version of a thick curved shell is not meaningful for a point stress."
+tests: [canonical 3D thermal-stress gate with a non-uniform T field, Gauss-point vs element-mean thermal strain (audit M2)]
+inputs:
+  geometry:
+    analytic:
+      quarter_model: true
+      units: m
+      profile_points_xz_m:   # y = 0 meridian, from FeenoX nafems-le11.geo; revolve 90 deg about z
+        P1_centre: [0, 0]
+        A: [1.0, 0]
+        B: [1.4, 0]
+        P4: [0.70711, 0.70711]       # inner sphere r = 1.0 at 45 deg
+        P5: [1.20830, 0.70711]       # outer sphere r = 1.4 at z = 0.70711
+        P6: [0.70711, 1.39711]       # taper top, inner
+        P7: [1.0, 1.39711]           # taper top, outer
+        H: [0.70711, 1.79711]        # cylinder top, inner
+        I: [1.0, 1.79711]            # cylinder top, outer
+      segments: "sphere arcs A-P4 (r 1.0) and B-P5 (r 1.4); taper P4-P6 / P5-P7; cylinder P6-H / P7-I; top face HIH'I'"
+  materials: {inline: {steel_nafems_te: {E_GPa: 210, nu: 0.3, cte_per_C: 2.3e-4}}}
+  physics:
+    temperature_field_C: "T(x, y, z) = sqrt(x^2 + y^2) + z (x, y, z in m); stress-free at T = 0 C"
+    mechanics:
+      bcs:
+        - {selection: "plane y = 0", type: fixed, components: [uy]}
+        - {selection: "plane x = 0", type: fixed, components: [ux]}
+        - {selection: "plane z = 0", type: fixed, components: [uz]}
+        - {selection: "face HIH'I' (top, z = 1.79711)", type: fixed, components: [uz]}
+expected:
+  - {quantity: sigma_zz_MPa, probe: "A = (1.0, 0, 0) m", value: -105, unit: MPa, tolerance: {rel: 1.0e-2, after: "refinement / Richardson"}}
+  - {form: reference_fe, gated: false, quantity: sigma_zz_Pa, probe: A, value: -105540851.8, unit: Pa,
+     ref: {file: LE11-skfem.json, path: results.convergence.q2s.sigma_zz_A_Pa, field: f_fine},
+     note: "lane L5 Q2s mapped hex, finest (51,495 DOF); Richardson -105.99 MPa (Q2: -106.02). +0.5 % (finest) / +0.95 % (Richardson) vs -105 and FeenoX -105.04, within the 1 % benchmark band. Not a tight gate until the 0.9 % offset vs FeenoX is explained; reference temperature 0 C assumed in both L4 and L5"}
+reference_results:
+  - {solver: FeenoX, value_MPa: -105.04}
+  - {solver: "Abaqus C3D20", coarse_MPa: -96.71, fine_MPa: -103.26}
+  - {solver: "Abaqus C3D20R", coarse_MPa: -93.04, fine_MPa: -99.60}
+  - {solver: "OptiStruct Hex20", coarse_MPa: -93.21, fine_MPa: -99.12}
+  - {solver: "OptiStruct Penta15", coarse_MPa: -100.3, fine_MPa: -103.7}
+  - {solver: "OptiStruct Tetra10", coarse_MPa: -91.97, fine_MPa: -98.68}
+temperature_field_ambiguity: >-
+  The Abaqus Benchmarks page (2017) renders the field as (x^2 + y^2) + z, while calling it a linear radial and axial
+  gradient. FeenoX (input .fee), Altair OS-V 0070 (2023 page: (x^2 + y^2)^(1/2) + z) and the CAST3M elas11 sheet
+  (T(r, z) = r + z) all give sqrt(x^2 + y^2) + z. Adopted: sqrt form (3 of 4 sources, and the only one that is linear
+  in r). The Abaqus rendering is most likely a lost superscript. Reference temperature 0 C is not stated on the
+  fetched pages; it is implied by "temperature loading" with the field as the temperature change (assumption).
+provenance:
+  target: "NAFEMS TNSB Rev. 3 (1990), via Abaqus LE11, Altair OS-V 0070, CAST3M elas11, FeenoX"
+  geometry: "FeenoX repo examples/nafems-le11.geo (points, radii 1.0 / 1.4, heights 0.345 + 0.345 + 0.400 above z = 0.70711); CAST3M lists A(1, 0), B(1.4, 0), H(0.7071, 1.79), I(1, 1.79)"
+  urls:
+    - {url: "https://abaqus-docs.mit.edu/2017/English/SIMACAEBMKRefMap/simabmk-c-le11.htm", retrieved: 2026-10-20}
+    - {url: "https://help.altair.com/2023/hwsolvers/os/topics/solvers/os/nafems_test_problem_le11_r.htm", retrieved: 2026-10-20}
+    - {url: "https://www-cast3m.cea.fr/html/CasTestsCastem/node9.html", retrieved: 2026-10-20}
+    - {url: "https://www.seamplex.com/feenox/examples/mechanical.html", retrieved: 2026-10-20}
+    - {url: "https://raw.githubusercontent.com/seamplex/feenox/main/examples/nafems-le11.geo", retrieved: 2026-10-20}
+missing: []
+assumptions:
+  - "Temperature field sqrt(x^2 + y^2) + z (see temperature_field_ambiguity)."
+  - "Altair's introduction names sigma_yy but its table is sigma_zz; the target is sigma_zz at A (Abaqus, FeenoX, CAST3M agree)."

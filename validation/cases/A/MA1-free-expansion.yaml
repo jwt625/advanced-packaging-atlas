@@ -1,0 +1,32 @@
+schema: ap-sim-val/0
+id: A/MA1-free-expansion
+tier: A
+title: Uniform-temperature free expansion of a Si cube (3-2-1 support)
+status: unvalidated
+physics: [thermo_elastic]
+box_compatible: true
+tests: [thermal load assembly, stress-free temperature handling, rigid-body suppression induces no stress]
+inputs:
+  materials: {set: _materials_tier_a.yaml}
+  geometry:
+    symmetry: none
+    boxes:
+      - {id: cube, kind: die, material: "tierA:si_iso", x_mm: 0, y_mm: 0, w_mm: 10, d_mm: 10, z_um: 0, h_um: 10000}
+  mesh: {max_xy_mm: 2.5, min_cells_per_layer: 4}
+  physics:
+    mechanics: {element: q2s, stress_free_C: {default: 25}, supports: rigid_motion}
+  studies: [{id: s1, type: thermo_elastic, temperature: {uniform_C: [125]}}]
+  variants: {element: [q2s, q1im], supports: [rigid_motion, symmetry]}
+expected:
+  - {quantity: eps_normal, value: 2.6e-4, unit: "1", tolerance: {rel: 1.0e-10}, script_key: MA1.eps}
+  - {quantity: du_10mm_m, definition: "u_x(x = +5 mm) - u_x(x = -5 mm), any y, z (frame-invariant)", value: 2.6e-6, unit: m,
+     tolerance: {rel: 1.0e-10}, script_key: MA1.u_at_10mm_m}
+  - {quantity: max_abs_sigma_over_scale, definition: "max |sigma_ij| / (E alpha dT), E alpha dT = 33.8 MPa", value: 0.0,
+     tolerance: {abs: 1.0e-10}}
+  - {quantity: reaction_over_scale, definition: "max support reaction / (E alpha dT A)", value: 0.0, tolerance: {abs: 1.0e-10}}
+formula: "eps_ij = alpha dT delta_ij, sigma = 0"
+provenance:
+  formula: "R6 section 1.1 MA1"
+  values: "validation/expected/tier_a.py ma1()"
+missing: []
+assumptions: []

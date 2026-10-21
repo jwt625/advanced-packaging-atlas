@@ -1,0 +1,210 @@
+schema: ap-sim-val/0
+id: H/H08-bridge-thickness-and-temperature
+tier: H
+title: 'Molded Si-bridge die warpage decreases with bridge thickness and increases with temperature (FOCoS-Bridge FEM) [weak: 1 paper]'
+status: unvalidated
+physics:
+- thermo_elastic
+strength: weak
+scope_package_classes:
+- si_bridge_fanout (ASE FOCoS-Bridge bare bridge die, one paper)
+applies_to:
+- bridge-die sub-model (a bare Si bridge die with TSV, 47-65 um); cowos_l LSI dies are the closest canonical analogue; not emib_t (bridge embedded
+  in the substrate)
+rule:
+  type: monotonic
+  expr: w decreasing in bridge thickness at each T; w increasing in T at each thickness
+  strength: weak
+fails_if: w increases with bridge thickness at any T, or w decreases with T at any thickness
+n_papers: 1
+support:
+- metric_id: ectc51687.2025.00158-a-m1
+  value: 48
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 47 um
+  condition: 25 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+- metric_id: ectc51687.2025.00158-a-m2
+  value: 56
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 47 um
+  condition: 90 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+- metric_id: ectc51687.2025.00158-a-m3
+  value: 65
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 47 um
+  condition: 150 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+- metric_id: ectc51687.2025.00158-a-m4
+  value: 74
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 47 um
+  condition: 260 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+- metric_id: ectc51687.2025.00158-a-m5
+  value: 43
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 50 um
+  condition: 25 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+- metric_id: ectc51687.2025.00158-a-m6
+  value: 51
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 50 um
+  condition: 90 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+- metric_id: ectc51687.2025.00158-a-m7
+  value: 59
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 50 um
+  condition: 150 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+- metric_id: ectc51687.2025.00158-a-m8
+  value: 69
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 50 um
+  condition: 260 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+- metric_id: ectc51687.2025.00158-a-m9
+  value: 37
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 55 um
+  condition: 25 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+- metric_id: ectc51687.2025.00158-a-m10
+  value: 44
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 55 um
+  condition: 90 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+- metric_id: ectc51687.2025.00158-a-m11
+  value: 51
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 55 um
+  condition: 150 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+- metric_id: ectc51687.2025.00158-a-m12
+  value: 59
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 55 um
+  condition: 260 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+- metric_id: ectc51687.2025.00158-a-m13
+  value: 32
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 60 um
+  condition: 25 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+- metric_id: ectc51687.2025.00158-a-m14
+  value: 38
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 60 um
+  condition: 90 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+- metric_id: ectc51687.2025.00158-a-m15
+  value: 44
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 60 um
+  condition: 150 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+- metric_id: ectc51687.2025.00158-a-m16
+  value: 51
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 60 um
+  condition: 260 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+- metric_id: ectc51687.2025.00158-a-m17
+  value: 28
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 65 um
+  condition: 25 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+- metric_id: ectc51687.2025.00158-a-m18
+  value: 33
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 65 um
+  condition: 90 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+- metric_id: ectc51687.2025.00158-a-m19
+  value: 39
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 65 um
+  condition: 150 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+- metric_id: ectc51687.2025.00158-a-m20
+  value: 45
+  unit: um
+  parameter: bare Si bridge die warpage
+  variant: Si bridge die thickness 65 um
+  condition: 260 C (temperature read from plot)
+  basis: simulated
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 5; p.3 Sec. III.B
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+notes:
+- Bare Si bridge die with TSV, 47-65 um thick, 25 / 90 / 150 / 260 C (temperatures read from the plot). Single paper (ASE FOCoS-Bridge); sign
+  convention not stated.
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

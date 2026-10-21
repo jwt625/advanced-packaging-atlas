@@ -1,0 +1,36 @@
+schema: ap-sim-val/0
+id: A/TA6-linear-patch
+tier: A
+title: Linear temperature patch test on a graded grid with anisotropic conductivity
+status: unvalidated
+physics: [thermal_stationary]
+box_compatible: true
+tests: [assembly correctness, graded (non-uniform) cells, anisotropic k, Dirichlet on all faces]
+inputs:
+  geometry:
+    symmetry: none
+    boxes:
+      - {id: cube, kind: die, material: "inline:aniso", x_mm: 0, y_mm: 0, w_mm: 1, d_mm: 1, z_um: 0, h_um: 1000}
+  materials:
+    inline:
+      aniso: {k_W_mK: [10, 50, 148], note: "synthetic; diagonal in the grid frame"}
+      aniso_rot: {k_tensor_W_mK: "R_z(30 deg) diag(10, 50, 148) R_z(30 deg)^T", note: "needs a full k tensor (not in SPEC v0 materials: k is [kx, ky, kz])"}
+  mesh: {max_xy_mm: 0.25, min_cells_per_layer: 5, grading: 1.5, note: "use a deliberately non-uniform grid (structured grids cannot be distorted)"}
+  physics:
+    thermal:
+      bcs:
+        - {selection: default, type: temperature_field, T_C: "25 + 1.0e4 x + 2.0e4 y + 3.0e4 z (x, y, z in m, origin at the min corner)"}
+  studies: [{id: s1, type: thermal_stationary}]
+expected:
+  - {quantity: T_centre_C, probe: "(0.5, 0.5, 0.5) mm from the min corner", value: 55.0, unit: C, tolerance: {rel: 1.0e-10},
+     script_key: TA6.T_at.centre}
+  - {quantity: max_nodal_error_K, value: 0.0, unit: K, tolerance: {abs: 1.0e-8}, note: "every node equals the linear field to round-off"}
+  - {quantity: heat_balance_rel, value: 0.0, tolerance: {abs: 1.0e-9}}
+formula: "T = a + b x + c y + d z satisfies div(k grad T) = 0 for any constant k tensor; Q1 reproduces it exactly"
+provenance:
+  formula: "standard patch test; R6 section 1.2 TA6 and 4.1"
+  values: "validation/expected/tier_a.py ta6()"
+missing: []
+assumptions:
+  - "BC type temperature_field (Dirichlet from an expression) is not in SPEC v0 (contract-change request L4-4)."
+  - "Rotated-tensor variant aniso_rot requires full-tensor k in the materials contract; until then only the diagonal variant runs."

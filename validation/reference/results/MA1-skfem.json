@@ -1,0 +1,210 @@
+{
+ "solver": "scikit-fem (apref)",
+ "versions": {
+  "python": "3.12.11",
+  "scikit-fem": "12.0.2",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pyamg": "5.3.0",
+  "gmsh": "4.15.2",
+  "scikit-rf": "2.2.0"
+ },
+ "case": "MA1",
+ "tier": "A",
+ "expected_source": "validation/expected/tier_a_values.json",
+ "results": {
+  "runs": [
+   {
+    "elem": "q1",
+    "refine": 1,
+    "dof": 81,
+    "mesh": {
+     "nx": 2,
+     "ny": 2,
+     "nz": 2,
+     "elements": 8
+    },
+    "reaction_rel": 6.043116916e-17,
+    "q": {
+     "u_at_5mm_m": 1.3e-06,
+     "max_abs_sigma_over_scale": 1.965057205e-14,
+     "max_u_m": 4.5033321e-06
+    }
+   },
+   {
+    "elem": "q1",
+    "refine": 2,
+    "dof": 375,
+    "mesh": {
+     "nx": 4,
+     "ny": 4,
+     "nz": 4,
+     "elements": 64
+    },
+    "reaction_rel": 1.754353839e-16,
+    "q": {
+     "u_at_5mm_m": 1.3e-06,
+     "max_abs_sigma_over_scale": 2.385315859e-13,
+     "max_u_m": 4.5033321e-06
+    }
+   },
+   {
+    "elem": "q2s",
+    "refine": 1,
+    "dof": 243,
+    "mesh": {
+     "nx": 2,
+     "ny": 2,
+     "nz": 2,
+     "elements": 8
+    },
+    "reaction_rel": 3.599971077e-16,
+    "q": {
+     "u_at_5mm_m": 1.3e-06,
+     "max_abs_sigma_over_scale": 5.668308943e-13,
+     "max_u_m": 4.5033321e-06
+    }
+   },
+   {
+    "elem": "q2s",
+    "refine": 2,
+    "dof": 1275,
+    "mesh": {
+     "nx": 4,
+     "ny": 4,
+     "nz": 4,
+     "elements": 64
+    },
+    "reaction_rel": 1.328992406e-15,
+    "q": {
+     "u_at_5mm_m": 1.3e-06,
+     "max_abs_sigma_over_scale": 8.14590993e-12,
+     "max_u_m": 4.5033321e-06
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 1,
+    "dof": 375,
+    "mesh": {
+     "nx": 2,
+     "ny": 2,
+     "nz": 2,
+     "elements": 8
+    },
+    "reaction_rel": 4.372010096e-16,
+    "q": {
+     "u_at_5mm_m": 1.3e-06,
+     "max_abs_sigma_over_scale": 1.148218316e-12,
+     "max_u_m": 4.5033321e-06
+    }
+   },
+   {
+    "elem": "q2",
+    "refine": 2,
+    "dof": 2187,
+    "mesh": {
+     "nx": 4,
+     "ny": 4,
+     "nz": 4,
+     "elements": 64
+    },
+    "reaction_rel": 1.020431165e-15,
+    "q": {
+     "u_at_5mm_m": 1.3e-06,
+     "max_abs_sigma_over_scale": 1.084902604e-11,
+     "max_u_m": 4.5033321e-06
+    }
+   }
+  ],
+  "convergence": {
+   "q1": {
+    "u_at_5mm_m": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 1.3e-06,
+     "f_ext": null,
+     "gci_fine": null,
+     "expected": 1.3e-06,
+     "rel_err_fine": 3.762780977e-14,
+     "orders_vs_exact": [
+      -1.68182404
+     ]
+    },
+    "max_abs_sigma_over_scale": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 2.385315859e-13,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "max_u_m": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 4.5033321e-06,
+     "f_ext": null,
+     "gci_fine": null
+    }
+   },
+   "q2s": {
+    "u_at_5mm_m": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 1.3e-06,
+     "f_ext": null,
+     "gci_fine": null,
+     "expected": 1.3e-06,
+     "rel_err_fine": 1.67614789e-12,
+     "orders_vs_exact": [
+      -2.838104485
+     ]
+    },
+    "max_abs_sigma_over_scale": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 8.14590993e-12,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "max_u_m": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 4.5033321e-06,
+     "f_ext": null,
+     "gci_fine": null
+    }
+   },
+   "q2": {
+    "u_at_5mm_m": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 1.3e-06,
+     "f_ext": null,
+     "gci_fine": null,
+     "expected": 1.3e-06,
+     "rel_err_fine": 1.422200897e-12,
+     "orders_vs_exact": [
+      -2.300768298
+     ]
+    },
+    "max_abs_sigma_over_scale": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 1.084902604e-11,
+     "f_ext": null,
+     "gci_fine": null
+    },
+    "max_u_m": {
+     "p_obs": null,
+     "p_used": null,
+     "f_fine": 4.5033321e-06,
+     "f_ext": null,
+     "gci_fine": null
+    }
+   }
+  },
+  "expected": {
+   "u_at_5mm_m": 1.3e-06
+  }
+ }
+}

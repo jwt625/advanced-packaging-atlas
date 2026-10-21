@@ -1,0 +1,261 @@
+schema: ap-sim-val/0
+id: H/H01-warpage-sign-flip-rt-ht
+tier: H
+title: Warpage sign flips between RT and reflow temperature for lidded / ring-stiffened 2.5D packages
+status: unvalidated
+physics:
+- thermo_elastic
+strength: moderate
+scope_package_classes:
+- si_bridge_fanout (CoWoS-L_6x MTVs, lid and ring)
+- si_interposer_2p5d (Amkor TSV 2.5D, lid / stiffener legs; estc60143 unstiffened)
+applies_to:
+- cowos_l/warpage_rt_ht (lid and ring variants)
+- cowos_s/warpage_corner_stress (lid / stiffener variants)
+rule:
+  type: sign_flip
+  expr: sign(w(25-30 C)) != sign(w(240-260 C)) for each support pair
+  strength: moderate
+  requires_shape_class:
+  - dome
+  - bowl
+  shape_class_note: warpage result field shape_class (L8, being added; L9 proposal dome | bowl | W | saddle); for W or saddle shapes the rule
+    is reported, not gated
+fails_if: a sim variant mapped to a support pair returns the same sign at RT (25-30 C) and HT (240-260 C), compared in that paper's own sign convention
+n_papers: 3
+support:
+- metric_id: ectc51909.2023.00091-a-m1
+  value: 64
+  unit: um
+  parameter: package warpage
+  variant: RT (25 C)
+  condition: 25 C
+  basis: measured
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 6(c); p.3 Sec. II.A
+- metric_id: ectc51909.2023.00091-a-m2
+  value: -148
+  unit: um
+  parameter: package warpage
+  variant: HT (240 C)
+  condition: 240 C
+  basis: measured
+  package_class: si_bridge_fanout
+  locator: p.3 Fig. 6(c); p.3 Sec. II.A
+- metric_id: ectc51909.2023.00091-b-m1
+  value: 186
+  unit: um
+  parameter: package warpage
+  variant: RT (25 C)
+  condition: 25 C
+  basis: measured
+  package_class: si_bridge_fanout
+  locator: p.4 Fig. 7(c); p.4 Sec. II.B
+- metric_id: ectc51909.2023.00091-b-m2
+  value: -107
+  unit: um
+  parameter: package warpage
+  variant: HT (240 C)
+  condition: 240 C
+  basis: measured
+  package_class: si_bridge_fanout
+  locator: p.4 Fig. 7(c); p.4 Sec. II.B
+- metric_id: 001c.147115-c-m17
+  value: 78
+  unit: um
+  parameter: simulated package warpage
+  variant: 'leg 1: low Tg UF, low CTE core 1.2 mm, lid, high E; RT'
+  condition: room temperature
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 9; p.4 Table II
+- metric_id: 001c.147115-c-m18
+  value: -73
+  unit: um
+  parameter: simulated package warpage
+  variant: 'leg 1: low Tg UF, low CTE core 1.2 mm, lid, high E; HT'
+  condition: high temperature (value not stated)
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 9; p.4 Table II
+- metric_id: 001c.147115-c-m19
+  value: 131
+  unit: um
+  parameter: simulated package warpage
+  variant: 'leg 2: high Tg UF, low CTE core 1.2 mm, lid, low E; RT'
+  condition: room temperature
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 9; p.4 Table II
+- metric_id: 001c.147115-c-m20
+  value: -110
+  unit: um
+  parameter: simulated package warpage
+  variant: 'leg 2: high Tg UF, low CTE core 1.2 mm, lid, low E; HT'
+  condition: high temperature (value not stated)
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 9; p.4 Table II
+- metric_id: 001c.147115-c-m21
+  value: 110
+  unit: um
+  parameter: simulated package warpage
+  variant: 'leg 3: high Tg UF, low CTE core 1.2 mm, stiffener, high E; RT'
+  condition: room temperature
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 9; p.4 Table II
+- metric_id: 001c.147115-c-m22
+  value: -101
+  unit: um
+  parameter: simulated package warpage
+  variant: 'leg 3: high Tg UF, low CTE core 1.2 mm, stiffener, high E; HT'
+  condition: high temperature (value not stated)
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 9; p.4 Table II
+- metric_id: 001c.147115-c-m23
+  value: 96
+  unit: um
+  parameter: simulated package warpage
+  variant: 'leg 4: high Tg UF, low CTE core 1.4 mm, stiffener, high E; RT'
+  condition: room temperature
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 9; p.4 Table II
+- metric_id: 001c.147115-c-m24
+  value: -90
+  unit: um
+  parameter: simulated package warpage
+  variant: 'leg 4: high Tg UF, low CTE core 1.4 mm, stiffener, high E; HT'
+  condition: high temperature (value not stated)
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 9; p.4 Table II
+- metric_id: 001c.147115-c-m25
+  value: 94
+  unit: um
+  parameter: simulated package warpage
+  variant: 'leg 5: high Tg UF, ultra low CTE core 1.2 mm, stiffener, high E; RT'
+  condition: room temperature
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 9; p.4 Table II
+- metric_id: 001c.147115-c-m26
+  value: -77
+  unit: um
+  parameter: simulated package warpage
+  variant: 'leg 5: high Tg UF, ultra low CTE core 1.2 mm, stiffener, high E; HT'
+  condition: high temperature (value not stated)
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 9; p.4 Table II
+- metric_id: 001c.147115-c-m27
+  value: 80
+  unit: um
+  parameter: simulated package warpage
+  variant: 'leg 6: high Tg UF, ultra low CTE core 1.4 mm, stiffener, high E; RT'
+  condition: room temperature
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 9; p.4 Table II
+- metric_id: 001c.147115-c-m28
+  value: -66
+  unit: um
+  parameter: simulated package warpage
+  variant: 'leg 6: high Tg UF, ultra low CTE core 1.4 mm, stiffener, high E; HT'
+  condition: high temperature (value not stated)
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 9; p.4 Table II
+- metric_id: 001c.147115-c-m29
+  value: 172
+  unit: um
+  parameter: simulated package warpage
+  variant: 'leg 7: high Tg UF, low CTE core 1.2 mm, stiffener SUS 430, high E; RT'
+  condition: room temperature
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 9; p.4 Table II
+- metric_id: 001c.147115-c-m30
+  value: -159
+  unit: um
+  parameter: simulated package warpage
+  variant: 'leg 7: high Tg UF, low CTE core 1.2 mm, stiffener SUS 430, high E; HT'
+  condition: high temperature (value not stated)
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 9; p.4 Table II
+- metric_id: estc60143.2024.10712129-i-m1
+  value: 850
+  unit: um
+  parameter: package warpage at 25 C
+  variant: no stiffener (ref.)
+  condition: 25 C (temperature sequence 25, 260, 40 C as in legend)
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 15
+- metric_id: estc60143.2024.10712129-i-m2
+  value: -960
+  unit: um
+  parameter: package warpage at 260 C
+  variant: no stiffener (ref.)
+  condition: 260 C (temperature sequence 25, 260, 40 C as in legend)
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 15
+revision:
+- date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+- date: '2026-10-20'
+  source: lane L9
+  change: requires_shape_class dome | bowl
+counter_examples:
+- metric_id: estc60143.2024.10712129-i-m4
+  value: 565
+  unit: um
+  parameter: package warpage at 25 C
+  variant: stiffener t=1.0 mm, w=18.5 mm
+  condition: 25 C (temperature sequence 25, 260, 40 C as in legend)
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 15
+- metric_id: estc60143.2024.10712129-i-m5
+  value: 490
+  unit: um
+  parameter: package warpage at 260 C
+  variant: stiffener t=1.0 mm, w=18.5 mm
+  condition: 260 C (temperature sequence 25, 260, 40 C as in legend)
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.4 Fig. 15
+- metric_id: ectc51846.2026.00073-a-m10
+  value: -164
+  unit: um
+  parameter: warpage at room temp.
+  variant: 2nd cycle start
+  condition: 30 C
+  basis: measured
+  package_class: si_bridge_fanout
+  locator: p.5 Fig. 10; p.5 Fig. 9(b)
+- metric_id: ectc51846.2026.00073-a-m11
+  value: -86
+  unit: um
+  parameter: warpage at reflow temp.
+  variant: 2nd cycle
+  condition: 245 C
+  basis: measured
+  package_class: si_bridge_fanout
+  locator: p.5 Fig. 10; p.5 Fig. 9(b)
+notes:
+- 'Pairs: 00091-a (TV_1.6x with lid) 64 / -148 um and 00091-b (TV_4.8x with stiffener ring 18-12-2 mm) 186 / -107 um (CoWoS-L_6x mechanical TVs,
+  measured; -b confirmed on p.4 Fig. 7(c)); Amkor TSV 2.5D legs 1-7 (simulated, HT temperature not stated); estc60143 no-stiffener reference 850
+  / -960 um.'
+- 'Not universal: the same estc60143 package with a 1-2 mm stiffener keeps its sign (565 / 490 um), and the Si-bridge fan-out 00073-a stays negative
+  (-164 / -86 um). A sim of a stiffened variant that flips is not an error per se; the rule gates only the variants that map to the support pairs.'
+- 'Sign conventions differ per paper (00091: ''as labeled'', convention not stated; Amkor: cry +, smile -; estc60143: + convex icon). The rule
+  compares signs within one paper, so the convention cancels.'
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

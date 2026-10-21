@@ -1,0 +1,29 @@
+schema: ap-sim-val/0
+id: D/itherm45881.2020.9190542-a-test
+tier: D
+title: MediaTek InFO_oS lidded TTV - measured JEDEC ThetaJC vs TIM BLT and TIM type
+status: unvalidated
+physics: [thermal_stationary]
+gate: "E1 thermal 2 (DevLog-010 E1 gates: InFO_oS theta-JC)"
+source: {paper_id: itherm45881.2020.9190542, tv_id: itherm45881.2020.9190542-a}
+inputs:
+  sim_case: info_os/theta_jc_tim     # lane L3 case config (sims/info_os/theta_jc_tim.yaml)
+  variants:
+    gel6_blt140: {tim1_k_W_mK: 6.0, tim1_blt_um: 140}
+    gel6_blt60:  {tim1_k_W_mK: 6.0, tim1_blt_um: 60}
+    timA: {tim1_k_W_mK: 3.2, tim1_blt_um: 60}
+    timB: {tim1_k_W_mK: 6.0, tim1_blt_um: 60}
+    timC: {tim1_k_W_mK: 25.0, tim1_blt_um: 60}
+    timD: {tim1_k_W_mK: 30.0, tim1_blt_um: 60}
+  bc: "JEDEC ThetaJC: cold plate on the lid; ThetaJC = (Tj - Tc) / (PH1 + PH2), Tc at lid centre (p.3 Eq. 1)"
+targets:
+  - {metric_id: itherm45881.2020.9190542-a-m3, variant: gel6_blt140, quantity: ThetaJC_C_W, value: 0.065, basis: measured, locator: "p.4 Table 3", tolerance: {rel: 0.10}}
+  - {metric_id: itherm45881.2020.9190542-a-m4, variant: gel6_blt60,  quantity: ThetaJC_C_W, value: 0.031, basis: measured, locator: "p.4 Table 3", tolerance: {rel: 0.10}}
+  - {metric_id: itherm45881.2020.9190542-a-m9,  variant: timA, quantity: ThetaJC_C_W, value: 0.036, basis: measured, locator: "p.4 Table 5", tolerance: {rel: 0.10}}
+  - {metric_id: itherm45881.2020.9190542-a-m10, variant: timB, quantity: ThetaJC_C_W, value: 0.034, basis: measured, locator: "p.4 Table 5", tolerance: {rel: 0.10}}
+  - {metric_id: itherm45881.2020.9190542-a-m11, variant: timC, quantity: ThetaJC_C_W, value: 0.021, basis: measured, locator: "p.4 Table 5", tolerance: {rel: 0.10}}
+  - {metric_id: itherm45881.2020.9190542-a-m12, variant: timD, quantity: ThetaJC_C_W, value: 0.021, basis: measured, locator: "p.4 Table 5", tolerance: {rel: 0.10}}
+  - {metric_id: itherm45881.2020.9190542-a-m22, quantity: ThetaJC_ratio, value: 2.1, basis: measured, locator: "p.5 Table 6",
+     definition: "ThetaJC(PH1 200 W, PH2 0 W) / ThetaJC(100 W / 100 W)", tolerance: {rel: 0.15}}
+missing: ["see C/itherm45881.2020.9190542-a-sim"]
+assumptions: ["see C/itherm45881.2020.9190542-a-sim"]

@@ -1,0 +1,42 @@
+schema: ap-sim-val/0
+id: C/ectc51529.2024.00155-fem
+tier: C
+title: JOINT2 120 x 120 mm substrate with SUS430 stiffener - MARC FEM warpage at 260 C vs stiffener footprint and substrate
+status: unvalidated
+physics: [thermo_elastic]
+gate: "E2 bring-up 2 (DevLog-010)"
+source: {paper_id: ectc51529.2024.00155, tv_ids: [ectc51529.2024.00155-g, -a, -b, -h, -c, -d]}
+inputs:
+  sim_case: si_interposer_peers/120mm_warpage
+  variants:
+    subA_23x25: {substrate: A, stiffener: SUS430, stiffener_xy_mm: [23, 25]}
+    subA_28x30: {substrate: A, stiffener: SUS430, stiffener_xy_mm: [28, 30]}
+    subA_34x36: {substrate: A, stiffener: SUS430, stiffener_xy_mm: [34, 36]}
+    subB_23x25: {substrate: B, stiffener: SUS430, stiffener_xy_mm: [23, 25]}
+    subB_28x30: {substrate: B, stiffener: SUS430, stiffener_xy_mm: [28, 30]}
+    subB_34x36: {substrate: B, stiffener: SUS430, stiffener_xy_mm: [34, 36]}
+  studies: [{id: s1, type: thermo_elastic, temperature: {uniform_C: [260]}}]
+  model_facts:
+    - "MARC 2023.2 non-linear FEM, top temperature 260 C (p.3 Sec. II.H)"
+    - "Table IV (p.3): Si 167 GPa / 3.2; Cu 100 / 17; solder 37.4 / 21.7; SR 4.3 / 43.1 / 91.2, Tg 151; dielectric 3.2 / 65; DAF 2.9 / 110 / 150, Tg 40; top CUF 6.6 / 22 / 100, Tg 166; bottom CUF 6.9 / 20 / 93, Tg 160; EMC 13 / 7 / 25, Tg 160; core A 33.5 / 5.9 / 2.5, Tg 314; core B 33 / 6.9 / 0.1, Tg 293"
+    - "stiffener 2.0 mm thick, silicone glue cured 130 C 0.5 h (p.3 Sec. II.E); stiffener sizes are the X x Y 'width' of Fig. 1 / TV rows"
+    - "substrate CTE: A 11.97 ppm/C, B 12.81 ppm/C (TV rows)"
+targets:
+  - {metric_id: ectc51529.2024.00155-g-m1, variant: subA_23x25, quantity: warpage_um, value: 263, unit: um, T_C: 260, basis: simulated, locator: "p.5 Fig. 12 (bar, +-5 um)", tolerance: {abs_um: 10, rel: 0.10, rule: max}}
+  - {metric_id: ectc51529.2024.00155-a-m23, variant: subA_28x30, quantity: warpage_um, value: 247, unit: um, T_C: 260, basis: simulated, locator: "p.5 Fig. 12", tolerance: {abs_um: 10, rel: 0.10, rule: max}}
+  - {metric_id: ectc51529.2024.00155-b-m4, variant: subA_34x36, quantity: warpage_um, value: 216, unit: um, T_C: 260, basis: simulated, locator: "p.5 Fig. 12", tolerance: {abs_um: 10, rel: 0.10, rule: max}}
+  - {metric_id: ectc51529.2024.00155-h-m1, variant: subB_23x25, quantity: warpage_um, value: 317, unit: um, T_C: 260, basis: simulated, locator: "p.5 Fig. 12", tolerance: {abs_um: 10, rel: 0.10, rule: max}}
+  - {metric_id: ectc51529.2024.00155-c-m6, variant: subB_28x30, quantity: warpage_um, value: 282, unit: um, T_C: 260, basis: simulated, locator: "p.5 Fig. 12", tolerance: {abs_um: 10, rel: 0.10, rule: max}}
+  - {metric_id: ectc51529.2024.00155-d-m4, variant: subB_34x36, quantity: warpage_um, value: 249, unit: um, T_C: 260, basis: simulated, locator: "p.5 Fig. 12", tolerance: {abs_um: 10, rel: 0.10, rule: max}}
+relations:
+  - {rule: "monotonic decreasing in stiffener width, per substrate", metric_ids: [ectc51529.2024.00155-g-m1, ectc51529.2024.00155-a-m23, ectc51529.2024.00155-b-m4]}
+  - {rule: "monotonic decreasing in stiffener width, per substrate", metric_ids: [ectc51529.2024.00155-h-m1, ectc51529.2024.00155-c-m6, ectc51529.2024.00155-d-m4]}
+  - {rule: "w(sub B) > w(sub A) at equal stiffener", metric_ids: [[ectc51529.2024.00155-h-m1, ectc51529.2024.00155-g-m1], [ectc51529.2024.00155-c-m6, ectc51529.2024.00155-a-m23], [ectc51529.2024.00155-d-m4, ectc51529.2024.00155-b-m4]]}
+missing:
+  - "Poisson ratios; core and build-up layer thicknesses; solder resist thickness; stiffener ring inner/outer geometry beyond the X x Y width; glue modulus and thickness"
+  - "stress-free temperature and load path of the FEM (only 'top temperature 260 C')"
+  - "warpage definition and sign of the Fig. 12 bars (magnitudes only)"
+  - "whether the FEM includes the interposer module or the bare substrate + stiffener only (TV g/h names say package substrate with stiffener)"
+assumptions:
+  - "Bars compared as magnitudes; stress-free temperature taken from the L3 case (template, flagged there)."
+  - "Bar values read from the figure at +-5 um (DB notes); the 10 um floor of the tolerance covers it."

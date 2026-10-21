@@ -1,0 +1,64 @@
+schema: ap-sim-val/0
+id: A/TA3-spreading-R
+tier: A
+title: Spreading resistance of a centred square source on a plate with a convective back face (Lee 1995 closed form)
+status: unvalidated
+physics: [thermal_stationary]
+box_compatible: true
+tests: [3D spreading, source-edge flux concentration, Robin back face, partial-face flux selection]
+variants:
+  a:
+    note: "Electronics Cooling 1998-01 worked example: Al k 200, 100 x 100 x 1.3 mm, 25 x 25 mm source, R0 = 1.0 K/W -> h = 1 / (R0 A_p) = 100 W/m2K"
+    boxes:
+      - {id: plate, kind: lid, material: "tierA:al", x_mm: 0, y_mm: 0, w_mm: 100, d_mm: 100, z_um: 0, h_um: 1300}
+    source_patch: {selection: "bottom:plate", x_mm: 0, y_mm: 0, w_mm: 25, d_mm: 25, total_W: 10}
+    bcs:
+      - {selection: "top:plate", type: htc, h_W_m2K: 100, T_inf_C: 25}
+      - {selection: default, type: adiabatic}
+  b:
+    note: "die-on-lid: 25 x 25 mm source on Cu 50 x 50 x 2 mm, h = 5000 W/m2K"
+    boxes:
+      - {id: plate, kind: lid, material: "tierA:cu", x_mm: 0, y_mm: 0, w_mm: 50, d_mm: 50, z_um: 0, h_um: 2000}
+    source_patch: {selection: "bottom:plate", x_mm: 0, y_mm: 0, w_mm: 25, d_mm: 25, total_W: 100}
+    bcs:
+      - {selection: "top:plate", type: htc, h_W_m2K: 5000, T_inf_C: 25}
+      - {selection: default, type: adiabatic}
+inputs:
+  materials: {set: _materials_tier_a.yaml}
+  geometry: {symmetry: quarter, boxes: "per variant"}
+  mesh: {max_xy_mm: 1.0, min_cells_per_layer: 4, grading: 1.3}
+  studies: [{id: s1, type: thermal_stationary}]
+expected:
+  - {variant: a, quantity: R_sp_max_K_W, definition: "(T_max on source - T_inf) / Q - R_1D - R_conv; R_1D = t/(k A_p) = 6.5e-4, R_conv = 1/(h A_p) = 1.0 K/W",
+     value: 0.65723, unit: K/W, tolerance: {rel: 0.05}, script_key: TA3.a.R_sp_max_K_W}
+  - {variant: a, quantity: R_sp_avg_K_W, definition: "source-area-averaged rise / Q - R_1D - R_conv", value: 0.50392, unit: K/W,
+     tolerance: {rel: 0.05}, script_key: TA3.a.R_sp_avg_K_W}
+  - {variant: b, quantity: R_sp_max_K_W, value: 0.080392, unit: K/W, tolerance: {rel: 0.05}, script_key: TA3.b.R_sp_max_K_W}
+  - {variant: b, quantity: R_sp_avg_K_W, value: 0.049093, unit: K/W, tolerance: {rel: 0.05}, script_key: TA3.b.R_sp_avg_K_W}
+  - {variant: b, quantity: R_total_max_K_W, value: 0.162443, unit: K/W, tolerance: {rel: 0.03}, script_key: TA3.b.R_total_max_K_W}
+  # reference_fe (lane L5, scikit-fem Q2, extrapolated): the exact square-source-on-square-plate answer of the modelled
+  # geometry. The Lee closed form is a circular-equivalent approximation and differs physically by 0.6-1.5 %; tight
+  # engine gates use these values (rel 1e-3), the closed form keeps its 5 % band.
+  - {variant: a, form: reference_fe, quantity: R_total_max_K_W, value: 1.667724256, unit: K/W, tolerance: {rel: 1.0e-3},
+     ref: {file: TA3a-skfem.json, path: results.convergence.q2.R_total_max_K_W, field: f_ext}, diff_vs_closed_form: 5.9e-3}
+  - {variant: a, form: reference_fe, quantity: R_total_avg_K_W, value: 1.526976147, unit: K/W, tolerance: {rel: 1.0e-3},
+     ref: {file: TA3a-skfem.json, path: results.convergence.q2.R_total_avg_K_W, field: f_ext}, diff_vs_closed_form: 1.49e-2}
+  - {variant: b, form: reference_fe, quantity: R_total_max_K_W, value: 0.1605778127, unit: K/W, tolerance: {rel: 1.0e-3},
+     ref: {file: TA3b-skfem.json, path: results.convergence.q2.R_total_max_K_W, field: f_ext}, diff_vs_closed_form: -1.15e-2}
+  - {variant: b, form: reference_fe, quantity: R_total_avg_K_W, value: 0.1321365786, unit: K/W, tolerance: {rel: 1.0e-3},
+     ref: {file: TA3b-skfem.json, path: results.convergence.q2.R_total_avg_K_W, field: f_ext}, diff_vs_closed_form: 7.6e-3}
+formula: >-
+  a = sqrt(A_s/pi), b = sqrt(A_p/pi), eps = a/b, tau = t/b, Bi = h b / k, lambda_c = pi + 1/(sqrt(pi) eps),
+  phi_c = (tanh(lambda_c tau) + lambda_c/Bi) / (1 + (lambda_c/Bi) tanh(lambda_c tau)),
+  psi_max = eps tau/sqrt(pi) + (1 - eps) phi_c/sqrt(pi), psi_avg = (1 - eps)^1.5 phi_c / 2, R_sp = psi / (sqrt(pi) k a)
+provenance:
+  formula: "Song, Lee, Au, IEPS 1994; Lee, Song, Au, Moran, ASME/JSME 1995; worked example S. Lee, Electronics Cooling 1998-01 (article states 0.66 K/W for the central source; formula gives 0.657)"
+  values: "validation/expected/tier_a.py ta3()"
+tolerance_note: >-
+  The closed form maps square source and plate to circular equivalents and is itself an approximation of the exact
+  series, so the FE square-on-square result is not expected to match to 1e-3. Gate 5 % on R_sp (assumption, to be
+  tightened with the Yovanovich exact series or a cross-solver run in validation/reference/). R_total in (a) is
+  dominated by R_conv (1 K/W) and is not a useful gate there.
+missing: []
+assumptions:
+  - "Source as a uniform heat flux on a 25 x 25 mm patch of the bottom face (Lee model: uniform flux source). The patch needs a grid line at +-12.5 mm; `source_patch` is a contract-change request (L4-2); fallback: a 1 um thick heater box of the patch size with uniform_volume power."

@@ -1,0 +1,48 @@
+schema: ap-sim-val/0
+id: C/ectc51687.2025.00085-d
+tier: C
+title: TSMC CoWoS-R thermal TV - calibrated FloTHERM model (Tj, Tc, Rjc at 1866 W) and TIM1 BLT / contact-resistance sweeps
+status: unvalidated
+physics: [thermal_stationary]
+gate: "E1 thermal 1 (DevLog-010)"
+source: {paper_id: ectc51687.2025.00085, tv_id: ectc51687.2025.00085-d, measured_peer: D/ectc51687.2025.00085-c}
+inputs:
+  sim_case: cowos_r/thermal_rjc
+  variants:
+    calib:   {tim1: indium, tim1_k_W_mK: 86, tim1_blt_um: 200, soc_power_W: 1866, hbm_power_W: 0, coolant_inlet_C: 20}
+    blt25:   {tim1_blt_um: 25}
+    blt50:   {tim1_blt_um: 50}
+    blt100:  {tim1_blt_um: 100}
+    blt200:  {tim1_blt_um: 200}
+    rc0:     {tim1_contact_R_normalized: 0}
+    rc033:   {tim1_contact_R_normalized: 0.33}
+    rc067:   {tim1_contact_R_normalized: 0.67}
+    rc1:     {tim1_contact_R_normalized: 1.0}
+  studies: [{id: s1, type: thermal_stationary}]
+  model_facts:
+    - "TIM1 indium k 86 W/mK, model area 2685 mm2 (p.3 Table 3; components row d-c3); lid k 390 W/mK; Si k = 117.5 - 0.42 (T - 100) W/mK; orthotropic RDL / substrate k from Cu density (stack rows)"
+    - "TIM1 contact resistance is the calibration parameter (components row d; value normalized only)"
+targets:
+  - {metric_id: ectc51687.2025.00085-d-m1, variant: calib, quantity: Tj_max_C, value: 104.7, unit: C, basis: simulated, locator: "p.3 Table 4", tolerance: {rel_rise: 0.05, reference_C: 20}}
+  - {metric_id: ectc51687.2025.00085-d-m2, variant: calib, quantity: Tc_C, value: 84.5, unit: C, basis: simulated, locator: "p.3 Table 4", tolerance: {rel_rise: 0.05, reference_C: 20}}
+  - {metric_id: ectc51687.2025.00085-d-m3, variant: calib, quantity: Rjc_C_W, value: 0.0108, unit: C/W, basis: simulated, locator: "p.3 Table 4", tolerance: {rel: 0.05}}
+  - {metric_id: ectc51687.2025.00085-d-m4,  variant: blt25,  quantity: Rjc_C_W, value: 0.00982, basis: simulated, locator: "p.4 Fig. 8 (approx)", tolerance: {rel: 0.05}}
+  - {metric_id: ectc51687.2025.00085-d-m6,  variant: blt50,  quantity: Rjc_C_W, value: 0.00996, basis: simulated, locator: "p.4 Fig. 8 (approx)", tolerance: {rel: 0.05}}
+  - {metric_id: ectc51687.2025.00085-d-m8,  variant: blt100, quantity: Rjc_C_W, value: 0.01026, basis: simulated, locator: "p.4 Fig. 8 (approx)", tolerance: {rel: 0.05}}
+  - {metric_id: ectc51687.2025.00085-d-m10, variant: blt200, quantity: Rjc_C_W, value: 0.01082, basis: simulated, locator: "p.4 Fig. 8 (approx)", tolerance: {rel: 0.05}}
+  - {metric_id: ectc51687.2025.00085-d-m12, variant: rc0,   quantity: Rjc_C_W, value: 0.00759, basis: simulated, locator: "p.4 Fig. 9 (approx)", tolerance: {rel: 0.05}}
+  - {metric_id: ectc51687.2025.00085-d-m14, variant: rc033, quantity: Rjc_C_W, value: 0.00864, basis: simulated, locator: "p.4 Fig. 9 (approx)", tolerance: {rel: 0.05}}
+  - {metric_id: ectc51687.2025.00085-d-m16, variant: rc067, quantity: Rjc_C_W, value: 0.00972, basis: simulated, locator: "p.4 Fig. 9 (approx)", tolerance: {rel: 0.05}}
+  - {metric_id: ectc51687.2025.00085-d-m18, variant: rc1,   quantity: Rjc_C_W, value: 0.01082, basis: simulated, locator: "p.4 Fig. 9 (approx)", tolerance: {rel: 0.05}}
+derived:   # validation/expected/derived_checks.py cowos_r()
+  - {quantity: dRjc_dBLT_C_W_per_m, value: 5.725, method: "least squares over d-m4, -m6, -m8, -m10"}
+  - {quantity: A_eff_mm2, value: 2031, rule: "range [1331, 2685]", method: "1 / (k_In 86 W/mK x slope)",
+     reading: "between the 4 SoC die areas (1331 mm2) and the TIM1 model area (2685 mm2): the BLT term spreads beyond the dies. An engine run must land in the same window; outside it means a wrong TIM area or lateral spreading in the lid / TIM."}
+  - {quantity: Rjc_linear_in_contact_R, rule: "d-m12..m18 linear in normalized R_c within 5 %", value: "slopes 0.00318 / 0.00318 / 0.00333 C/W per unit normalized R_c over the 0-0.33 / 0.33-0.67 / 0.67-1 steps", status: pass}
+missing:
+  - "die, interposer, substrate, lid thicknesses (Table 3 image-only); HBM / SoC placement"
+  - "cold-plate HTC or curve; TIM2 properties; PCB and socket model detail"
+  - "absolute TIM1 contact resistance (normalized only)"
+assumptions:
+  - "Contact resistance normalized 1.0 = the calibrated value of the paper model; 0 = none. Engine: calibrate R_c'' once on `calib`, scale for rc0..rc067."
+  - "Rows tagged value:approx were read from Fig. 8/9; the 5 % tolerance is wider than the reading error."

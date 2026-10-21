@@ -1,0 +1,473 @@
+{
+ "solver": "scikit-fem (apref)",
+ "versions": {
+  "python": "3.12.11",
+  "scikit-fem": "12.0.2",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pyamg": "5.3.0",
+  "gmsh": "4.15.2",
+  "scikit-rf": "2.2.0"
+ },
+ "case": "MA5b",
+ "tier": "A",
+ "expected_source": "validation/expected/tier_a_values.json",
+ "results": {
+  "h_study": {
+   "runs": [
+    {
+     "elem": "q1",
+     "refine": 1,
+     "dof": 324,
+     "mesh": {
+      "nx": 5,
+      "ny": 5,
+      "nz": 2,
+      "elements": 50
+     },
+     "reaction_rel": 1.530023878e-05,
+     "q": {
+      "kappa_clt_1_m": -0.03759221488,
+      "film_sxx_mid_Pa": 236150172.6
+     }
+    },
+    {
+     "elem": "q1",
+     "refine": 2,
+     "dof": 1815,
+     "mesh": {
+      "nx": 10,
+      "ny": 10,
+      "nz": 4,
+      "elements": 400
+     },
+     "reaction_rel": 9.658185263e-06,
+     "q": {
+      "kappa_clt_1_m": -0.05511285121,
+      "film_sxx_mid_Pa": 235024269.4
+     }
+    },
+    {
+     "elem": "q1",
+     "refine": 3,
+     "dof": 5376,
+     "mesh": {
+      "nx": 15,
+      "ny": 15,
+      "nz": 6,
+      "elements": 1350
+     },
+     "reaction_rel": 8.318352398e-06,
+     "q": {
+      "kappa_clt_1_m": -0.06032067563,
+      "film_sxx_mid_Pa": 234681629.0
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 1,
+     "dof": 1080,
+     "mesh": {
+      "nx": 5,
+      "ny": 5,
+      "nz": 2,
+      "elements": 50
+     },
+     "reaction_rel": 1.542694837e-05,
+     "q": {
+      "kappa_clt_1_m": -0.06526068082,
+      "film_sxx_mid_Pa": 234361452.8
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 2,
+     "dof": 6567,
+     "mesh": {
+      "nx": 10,
+      "ny": 10,
+      "nz": 4,
+      "elements": 400
+     },
+     "reaction_rel": 9.688427049e-06,
+     "q": {
+      "kappa_clt_1_m": -0.06524474239,
+      "film_sxx_mid_Pa": 234363493.7
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 3,
+     "dof": 20064,
+     "mesh": {
+      "nx": 15,
+      "ny": 15,
+      "nz": 6,
+      "elements": 1350
+     },
+     "reaction_rel": 5.296676202e-06,
+     "q": {
+      "kappa_clt_1_m": -0.06524212151,
+      "film_sxx_mid_Pa": 234363696.7
+     }
+    },
+    {
+     "elem": "q2",
+     "refine": 1,
+     "dof": 1815,
+     "mesh": {
+      "nx": 5,
+      "ny": 5,
+      "nz": 2,
+      "elements": 50
+     },
+     "reaction_rel": 1.70934493e-05,
+     "q": {
+      "kappa_clt_1_m": -0.06524662997,
+      "film_sxx_mid_Pa": 234362794.7
+     }
+    },
+    {
+     "elem": "q2",
+     "refine": 2,
+     "dof": 11907,
+     "mesh": {
+      "nx": 10,
+      "ny": 10,
+      "nz": 4,
+      "elements": 400
+     },
+     "reaction_rel": 1.077539201e-05,
+     "q": {
+      "kappa_clt_1_m": -0.06524354382,
+      "film_sxx_mid_Pa": 234363578.7
+     }
+    },
+    {
+     "elem": "q2",
+     "refine": 3,
+     "dof": 37479,
+     "mesh": {
+      "nx": 15,
+      "ny": 15,
+      "nz": 6,
+      "elements": 1350
+     },
+     "reaction_rel": 5.878395162e-06,
+     "q": {
+      "kappa_clt_1_m": -0.06524108544,
+      "film_sxx_mid_Pa": 234363778.8
+     }
+    }
+   ],
+   "convergence": {
+    "q1": {
+     "kappa_clt_1_m": {
+      "p_obs": 1.198318869,
+      "p_used": 1.198318869,
+      "f_fine": -0.06032067563,
+      "f_ext": -0.06864521372,
+      "gci_fine": 0.172505903,
+      "rel_change_last": 0.08633564465,
+      "expected": -0.06525123863,
+      "rel_err_fine": 0.0755627495,
+      "rel_err_ext": -0.0520139566,
+      "orders_vs_exact": [
+       1.447922037,
+       1.777898416
+      ]
+     },
+     "film_sxx_mid_Pa": {
+      "p_obs": 1.157693002,
+      "p_used": 1.157693002,
+      "f_fine": 234681629.0,
+      "f_ext": 234109647.4,
+      "gci_fine": 0.00304658245,
+      "rel_change_last": 0.001460022407
+     }
+    },
+    "q2s": {
+     "kappa_clt_1_m": {
+      "p_obs": 2.197348881,
+      "p_used": 2.197348881,
+      "f_fine": -0.06524212151,
+      "f_ext": -0.06524029821,
+      "gci_fine": 3.493333666e-05,
+      "rel_change_last": 4.01716599e-05,
+      "expected": -0.06525123863,
+      "rel_err_fine": 0.0001397233168,
+      "rel_err_ext": 0.0001676660813,
+      "orders_vs_exact": [
+       0.5395191048,
+       -0.8359069554
+      ]
+     },
+     "film_sxx_mid_Pa": {
+      "p_obs": 3.017473614,
+      "p_used": 3.017473614,
+      "f_fine": 234363696.7,
+      "f_ext": 234363781.3,
+      "gci_fine": 4.512301879e-07,
+      "rel_change_last": 8.659997425e-07
+     }
+    },
+    "q2": {
+     "kappa_clt_1_m": {
+      "p_obs": 1.259452067,
+      "p_used": 1.259452067,
+      "f_fine": -0.06524108544,
+      "f_ext": -0.06523739637,
+      "gci_fine": 7.068147677e-05,
+      "rel_change_last": 3.76815447e-05,
+      "expected": -0.06525123863,
+      "rel_err_fine": 0.0001556014417,
+      "rel_err_ext": 0.0002121378246,
+      "orders_vs_exact": [
+       -0.7395370901,
+       -0.6837643861
+      ]
+     },
+     "film_sxx_mid_Pa": {
+      "p_obs": 1.459878637,
+      "p_used": 1.459878637,
+      "f_fine": 234363778.8,
+      "f_ext": 234364026.5,
+      "gci_fine": 1.321394393e-06,
+      "rel_change_last": 8.535924504e-07
+     }
+    }
+   }
+  },
+  "film_cells_study": {
+   "runs": [
+    {
+     "elem": "q1",
+     "refine": 1,
+     "dof": 1452,
+     "mesh": {
+      "nx": 10,
+      "ny": 10,
+      "nz": 3,
+      "elements": 300
+     },
+     "reaction_rel": 9.6581715e-06,
+     "film_cells": 1,
+     "q": {
+      "kappa_clt_1_m": -0.05511286666,
+      "film_sxx_mid_Pa": 235018080.9
+     }
+    },
+    {
+     "elem": "q1",
+     "refine": 2,
+     "dof": 1815,
+     "mesh": {
+      "nx": 10,
+      "ny": 10,
+      "nz": 4,
+      "elements": 400
+     },
+     "reaction_rel": 9.658185263e-06,
+     "film_cells": 2,
+     "q": {
+      "kappa_clt_1_m": -0.05511285121,
+      "film_sxx_mid_Pa": 235024269.4
+     }
+    },
+    {
+     "elem": "q1",
+     "refine": 4,
+     "dof": 3267,
+     "mesh": {
+      "nx": 10,
+      "ny": 10,
+      "nz": 8,
+      "elements": 800
+     },
+     "reaction_rel": 1.128234282e-05,
+     "film_cells": 4,
+     "q": {
+      "kappa_clt_1_m": -0.05763004293,
+      "film_sxx_mid_Pa": 234858852.8
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 1,
+     "dof": 5181,
+     "mesh": {
+      "nx": 10,
+      "ny": 10,
+      "nz": 3,
+      "elements": 300
+     },
+     "reaction_rel": 9.688459392e-06,
+     "film_cells": 1,
+     "q": {
+      "kappa_clt_1_m": -0.06524477177,
+      "film_sxx_mid_Pa": 234363492.1
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 2,
+     "dof": 6567,
+     "mesh": {
+      "nx": 10,
+      "ny": 10,
+      "nz": 4,
+      "elements": 400
+     },
+     "reaction_rel": 9.688427049e-06,
+     "film_cells": 2,
+     "q": {
+      "kappa_clt_1_m": -0.06524474239,
+      "film_sxx_mid_Pa": 234363493.7
+     }
+    },
+    {
+     "elem": "q2s",
+     "refine": 4,
+     "dof": 12111,
+     "mesh": {
+      "nx": 10,
+      "ny": 10,
+      "nz": 8,
+      "elements": 800
+     },
+     "reaction_rel": 6.516496241e-06,
+     "film_cells": 4,
+     "q": {
+      "kappa_clt_1_m": -0.06524317205,
+      "film_sxx_mid_Pa": 234363609.4
+     }
+    },
+    {
+     "elem": "q2",
+     "refine": 1,
+     "dof": 9261,
+     "mesh": {
+      "nx": 10,
+      "ny": 10,
+      "nz": 3,
+      "elements": 300
+     },
+     "reaction_rel": 1.077539202e-05,
+     "film_cells": 1,
+     "q": {
+      "kappa_clt_1_m": -0.06524354401,
+      "film_sxx_mid_Pa": 234363578.8
+     }
+    },
+    {
+     "elem": "q2",
+     "refine": 2,
+     "dof": 11907,
+     "mesh": {
+      "nx": 10,
+      "ny": 10,
+      "nz": 4,
+      "elements": 400
+     },
+     "reaction_rel": 1.077539201e-05,
+     "film_cells": 2,
+     "q": {
+      "kappa_clt_1_m": -0.06524354382,
+      "film_sxx_mid_Pa": 234363578.7
+     }
+    },
+    {
+     "elem": "q2",
+     "refine": 4,
+     "dof": 22491,
+     "mesh": {
+      "nx": 10,
+      "ny": 10,
+      "nz": 8,
+      "elements": 800
+     },
+     "reaction_rel": 7.58270747e-06,
+     "film_cells": 4,
+     "q": {
+      "kappa_clt_1_m": -0.06524202441,
+      "film_sxx_mid_Pa": 234363699.3
+     }
+    }
+   ],
+   "convergence": {
+    "q1": {
+     "kappa_clt_1_m": {
+      "p_obs": null,
+      "p_used": null,
+      "f_fine": -0.05763004293,
+      "f_ext": null,
+      "gci_fine": null,
+      "expected": -0.06525123863,
+      "rel_err_fine": 0.1167977169,
+      "orders_vs_exact": [
+       -2.198839162e-06,
+       0.4117389334
+      ]
+     },
+     "film_sxx_mid_Pa": {
+      "p_obs": null,
+      "p_used": null,
+      "f_fine": 234858852.8,
+      "f_ext": null,
+      "gci_fine": null
+     }
+    },
+    "q2s": {
+     "kappa_clt_1_m": {
+      "p_obs": 5.739937886,
+      "p_used": 5.739937886,
+      "f_fine": -0.06524317205,
+      "f_ext": -0.06524314211,
+      "gci_fine": 5.736919901e-07,
+      "rel_change_last": 2.406905278e-05,
+      "expected": -0.06525123863,
+      "rel_err_fine": 0.0001236233471,
+      "rel_err_ext": 0.0001240822439,
+      "orders_vs_exact": [
+       -0.006540296414,
+       -0.3123526591
+      ]
+     },
+     "film_sxx_mid_Pa": {
+      "p_obs": 6.170802698,
+      "p_used": 6.170802698,
+      "f_fine": 234363609.4,
+      "f_ext": 234363611.1,
+      "gci_fine": 8.685914057e-09,
+      "rel_change_last": 4.936643851e-07
+     }
+    },
+    "q2": {
+     "kappa_clt_1_m": {
+      "p_obs": 12.98916414,
+      "p_used": 12.98916414,
+      "f_fine": -0.06524202441,
+      "f_ext": -0.06524202423,
+      "gci_fine": 3.580820631e-09,
+      "rel_change_last": 2.328880276e-05,
+      "expected": -0.06525123863,
+      "rel_err_fine": 0.0001412112744,
+      "rel_err_ext": 0.0001412141386,
+      "orders_vs_exact": [
+       -3.503716294e-05,
+       -0.2599763769
+      ]
+     },
+     "film_sxx_mid_Pa": {
+      "p_obs": null,
+      "p_used": null,
+      "f_fine": 234363699.3,
+      "f_ext": null,
+      "gci_fine": null
+     }
+    }
+   }
+  },
+  "note": "film_cells_study 'refine' = film cells (1, 2, 4); Richardson there is across film cells, not h"
+ }
+}

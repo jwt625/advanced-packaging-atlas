@@ -1,0 +1,99 @@
+schema: ap-sim-val/0
+id: D/ectc51529.2024.00155-moire
+tier: D
+title: JOINT2 120 x 120 mm 2.5D package - shadow-moire warpage vs temperature, SUS430 vs Cu stiffener (28 x 30 mm, Substrate A)
+status: unvalidated
+physics: [thermo_elastic]
+gate: "E2 bring-up 2, measured peer of C/ectc51529.2024.00155-fem"
+source: {paper_id: ectc51529.2024.00155, tv_ids: [ectc51529.2024.00155-a, ectc51529.2024.00155-e]}
+inputs:
+  sim_case: si_interposer_peers/120mm_warpage
+  variants:
+    sus430: {substrate: A, stiffener: SUS430, stiffener_xy_mm: [28, 30], tv: ectc51529.2024.00155-a}
+    cu:     {substrate: A, stiffener: Cu,     stiffener_xy_mm: [28, 30], tv: ectc51529.2024.00155-e, stiffener_cte_ppmK: 17}
+    module: {part: "interposer module only (CUF + EMC, single piece)", tv: ectc51529.2024.00155-a}
+  studies:
+    - {id: s1, type: thermo_elastic, temperature: {uniform_C: [23, 30, 148, 222, 243]}, note: "single-step; superseded for the stiffener variants (see superseded)"}
+    - id: stiffener_attach_sequence     # L3 wave 6 (sims/si_interposer_peers/120mm_warpage.yaml; Cu ring: 120mm_warpage_cu.yaml)
+      type: process_sequence
+      steps:   # paper p.3 Sec. II.E: CUF cured 170 C for 2 h, then stiffener glued with silicone and cured 130 C for 0.5 h (L9 wave 2)
+        - {step: package_cure, activate: "all parts except stiffener ring and glue", stress_free_C: 170, to_C: 130}
+        - {step: ring_attach, activate: "stiffener ring + silicone glue (template 100 um, bounds 50-300 um)", stress_free_C: 130}
+        - {step: ramp_30, T_C: 30}
+        - {step: ramp_148, T_C: 148}
+        - {step: ramp_222, T_C: 222}
+        - {step: ramp_243, T_C: 243}
+        - {step: ramp_260, T_C: 260, note: "a-m23 (FEM) only"}
+trend_targets:   # tier D trend checks on the process_sequence model (wave 6); not values to fit
+  - id: sus430_zero_crossing
+    variant: sus430
+    sim_case: si_interposer_peers/120mm_warpage
+    study: stiffener_attach_sequence
+    steps: [ramp_222, ramp_243]
+    rule: "sign(w(222 C)) != sign(w(243 C)): the warpage changes sign between 222 and 243 C (measured +65 -> -85 um; linear interpolation 231 C)"
+    first_result: "L3 wave 6 (coarse mesh, ROM): +209.7 (W) / +230.3 (W): no sign change; W shapes, so the sign gate is reported, not evaluated"
+    metric_ids: [ectc51529.2024.00155-a-m18, ectc51529.2024.00155-a-m19]
+    requires_shape_class: [dome, bowl]
+    fails_if: "no sign change in (222, 243) C. Report the model zero crossing and its distance from 231 C (tier-D transition band +-20 C, informative)"
+  - id: sus430_monotone
+    variant: sus430
+    sim_case: si_interposer_peers/120mm_warpage
+    study: stiffener_attach_sequence
+    steps: [ramp_30, ramp_148, ramp_222, ramp_243]
+    rule: "w strictly decreasing over 30 -> 148 -> 222 -> 243 C (measured 485 / 135 / 65 / -85 um, + = convex, centre up)"
+    metric_ids: [ectc51529.2024.00155-a-m16, ectc51529.2024.00155-a-m17, ectc51529.2024.00155-a-m18, ectc51529.2024.00155-a-m19]
+    fails_if: "any increase between consecutive temperatures"
+    first_result: "L3 wave 6: +184.0 / +165.4 / +209.7 / +230.3 um: increases after 148 C -> miss"
+  - id: cu_monotone_secondary
+    variant: cu
+    sim_case: si_interposer_peers/120mm_warpage_cu
+    study: stiffener_attach_sequence
+    steps: [ramp_30, ramp_148, ramp_222, ramp_243]
+    rule: "w strictly increasing over 30 -> 243 C with one sign change between 30 and 148 C (measured -330 / 260 / 645 / 770 um)"
+    metric_ids: [ectc51529.2024.00155-e-m1, ectc51529.2024.00155-e-m2, ectc51529.2024.00155-e-m3, ectc51529.2024.00155-e-m4]
+    requires_shape_class: [dome, bowl]
+    fails_if: "any decrease, or no sign change in (30, 148) C"
+    first_result: "L3 wave 6: -638.1 (W) / +281.4 / +804.1 / +958.4 um: monotone pass; sign change present (linear crossing about 112 C vs measured about 96 C), but 30 C is a W shape, so the sign part is reported, not gated"
+    note: "secondary; Cu-ring case built by L3 wave 6"
+superseded:
+  - targets: "single-step study s1 comparisons for the sus430 and cu variants (a-m16..a-m19, e-m1..e-m4); the sims/ single-step targets of si_interposer_peers/120mm_warpage (L3) likewise"
+    date: 2026-10-20
+    reason: >-
+      Lane L9 wave 2: in a single-step total-strain model, a per-part stress-free 130 C on the ring is a constant
+      eigenstrain (+440 ue on SUS430). It makes w(T) nearly flat (+458 / +459 / +509 um at 30 / 148 / 222 C, L3 wave 5).
+      Its common-Tsf alternative is exactly linear in (T - Tsf). Neither form can follow the measured trend. The
+      physical history is a sequence: ring attached stress-free to the package as deformed at 130 C. The measured
+      values stay as the data of the trend targets above. Magnitudes are reported, not gated, until the sequence
+      model and the glue layer exist.
+targets:
+  # sign convention of all rows: + convex (centre up), - concave, per plot icons (DB scope field)
+  - {metric_id: ectc51529.2024.00155-a-m16, variant: sus430, quantity: warpage_um, value: 485, T_C: 30,  basis: measured, locator: "p.5 Fig. 11 (+-15 um)"}
+  - {metric_id: ectc51529.2024.00155-a-m17, variant: sus430, quantity: warpage_um, value: 135, T_C: 148, basis: measured, locator: "p.5 Fig. 11"}
+  - {metric_id: ectc51529.2024.00155-a-m18, variant: sus430, quantity: warpage_um, value: 65,  T_C: 222, basis: measured, locator: "p.5 Fig. 11"}
+  - {metric_id: ectc51529.2024.00155-a-m19, variant: sus430, quantity: warpage_um, value: -85, T_C: 243, basis: measured, locator: "p.5 Fig. 11"}
+  - {metric_id: ectc51529.2024.00155-e-m1,  variant: cu, quantity: warpage_um, value: -330, T_C: 30,  basis: measured, locator: "p.5 Fig. 11 (+-15 um)"}
+  - {metric_id: ectc51529.2024.00155-e-m2,  variant: cu, quantity: warpage_um, value: 260,  T_C: 148, basis: measured, locator: "p.5 Fig. 11"}
+  - {metric_id: ectc51529.2024.00155-e-m3,  variant: cu, quantity: warpage_um, value: 645,  T_C: 222, basis: measured, locator: "p.5 Fig. 11"}
+  - {metric_id: ectc51529.2024.00155-e-m4,  variant: cu, quantity: warpage_um, value: 770,  T_C: 243, basis: measured, locator: "p.5 Fig. 11"}
+  - {metric_id: ectc51529.2024.00155-a-m8,  variant: module, quantity: warpage_um, value: -67, T_C: 23,  basis: measured, locator: "p.5 Fig. 8 (+-3 um)"}
+  - {metric_id: ectc51529.2024.00155-a-m9,  variant: module, quantity: warpage_um, value: 71,  T_C: 243, basis: measured, locator: "p.5 Fig. 8 (+-3 um)"}
+tolerance:   # R6 4.3 tier D (proposed)
+  sign: "match at every listed T, only where the result shape_class (L8) is dome or bowl; W / saddle results are reported, not gated (lane L9)"
+  magnitude: {abs_um: 20, rel: 0.25, rule: max}
+  transition_C: 20
+derived:
+  - {quantity: zero_crossing_C, variant: sus430, value: 231, range_C: [222, 243], method: "linear interpolation between a-m18 and a-m19 (L4, derived)"}
+  - {quantity: zero_crossing_C, variant: cu, value: 96, range_C: [30, 148], method: "linear interpolation between e-m1 and e-m2 (L4, derived; sparse points, wide range)"}
+  - {quantity: hot_warpage_ratio, rule: "|w_cu(243)| / |w_sus430(243)| > 1", value: 9.1, metric_ids: [ectc51529.2024.00155-e-m4, ectc51529.2024.00155-a-m19],
+     note: "paper: SUS430 (CTE 11 ppm/C) closer to the substrate CTE than Cu (17), less warpage at solder melting (p.5 Sec. III.C)"}
+diagnostics:
+  implied_tsf: >-
+    validation/expected/implied_tsf.py: the SUS430 series crosses zero at 231 C (linear-fit Tsf 222 C), and the Cu series
+    at 96 C (fit 95 C). The case input is 170 C (stiffener 130 C), so a linear model will not reproduce the 222 C sign.
+    The input stays as sourced, and the measured crossing is a labelled sensitivity bound (L3). a-m23 (FEM, 260 C) has no
+    sign convention in the DB row; confirm it from Fig. 12 before it is gated (L9).
+missing:
+  - "as C/ectc51529.2024.00155-fem; silicone glue thickness and modulus (template in the sequence model)"
+  - "full moire curves (only the listed points are in the DB; digitizing Fig. 11 is a D3-full item)"
+assumptions:
+  - "Module rows (a-m8, a-m9, no stiffener) stay single-step comparisons; stiffener rows move to the process_sequence trend targets (wave 6)."

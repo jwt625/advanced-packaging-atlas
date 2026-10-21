@@ -1,0 +1,39 @@
+schema: ap-sim-val/0
+id: A/MA5b-thin-film-locking
+tier: A
+title: Thin-film locking test, 5 um Cu on 775 um Si, Stoney vs CLT
+status: unvalidated
+physics: [thermo_elastic]
+box_compatible: true
+tests: [thin-layer shear / membrane locking with 1 cell through a 5 um film in a 10 mm plate (aspect 2000), A3 element bake-off]
+inputs:
+  materials: {set: _materials_tier_a.yaml}
+  geometry:
+    symmetry: [quarter, none]
+    boxes:
+      - {id: si, kind: die, material: "tierA:si_iso", x_mm: 0, y_mm: 0, w_mm: 10, d_mm: 10, z_um: 0,   h_um: 775}
+      - {id: cu, kind: rdl, material: "tierA:cu",     x_mm: 0, y_mm: 0, w_mm: 10, d_mm: 10, z_um: 775, h_um: 5}
+  mesh: {max_xy_mm: [1.0, 0.5, 0.25], min_cells_per_layer: [1, 2, 4], note: "report kappa per (element, cells through film, xy size)"}
+  physics:
+    mechanics: {element: [q2s, q1im], stress_free_C: {default: 125}, supports: "rigid_motion | symmetry"}
+  studies: [{id: s1, type: thermo_elastic, temperature: {uniform_C: [25]}}]
+expected:
+  - {quantity: kappa_1_m, definition: "signed (z up); Cu side concave after cooling -> kappa < 0; central 50 % fit", value: -6.52512e-2,
+     unit: 1/m, tolerance: {rel: 1.0e-3}, script_key: MA5b.kappa_clt_1_m}
+  - {form: reference_fe, quantity: kappa_1_m, value: -0.06524029821, unit: 1/m, tolerance: {rel: 2.0e-4},
+     ref: {file: MA5b-skfem.json, path: results.h_study.convergence.q2s.kappa_clt_1_m, field: f_ext}, diff_vs_closed_form: 1.7e-4,
+     reason: "finite 10 mm plate vs the CLT interior (lane L5, scikit-fem Q2s)"}
+  - {quantity: kappa_stoney_1_m, form: reference, value: 6.63924e-2, unit: 1/m, note: "Stoney 1.75 % high (neglects film stiffness)",
+     script_key: MA5b.kappa_stoney_1_m}
+  - {quantity: film_stress_Pa, definition: "Q_f (alpha_s - alpha_f) dT, misfit stress before bending relief", value: 2.4e8, unit: Pa,
+     script_key: MA5b.film_stress_Pa}
+  - {quantity: sag_L10mm_m, value: -8.1564e-7, unit: m, tolerance: {rel: 2.0e-2}, script_key: MA5b.sag_L10mm_clt_m}
+  - {quantity: locking_report, definition: "kappa(1 cell through film) / kappa(4 cells) per element type", value: 1.0, tolerance: {rel: 1.0e-2},
+     note: "pass for q2s and q1im expected; a P1 tet / plain Q1 reference would fail (to be measured, not assumed)"}
+formula: "CLT (see MA4) for the 2-layer stack; Stoney kappa = 6 sigma_f h_f / (Q_s h_s^2)"
+provenance:
+  formula: "R6 section 1.1 MA5b"
+  values: "validation/expected/tier_a.py ma5b()"
+tolerance_note: "R6 lists the sag as 0.83 um, which is the Stoney value; the CLT sag is 0.816 um. The gate uses CLT."
+missing: []
+assumptions: []

@@ -1,0 +1,47 @@
+schema: ap-sim-val/0
+id: B/nafems-T4
+tier: B
+title: NAFEMS T4 2D steady conduction with convection on two edges
+status: unvalidated
+physics: [thermal_stationary]
+box_compatible: true
+tests: [convective BC accuracy, refinement study (vendor coarse results 3-8 % low)]
+inputs:
+  geometry:
+    symmetry: none
+    boxes:   # 2D plate as a thin 3D slab: x = 0..0.6 m, y = 0..1.0 m (box centred at (0.3, 0.5) m in plate coordinates)
+      - {id: plate, kind: lid, material: "inline:nafems_t4", x_mm: 300, y_mm: 500, w_mm: 600, d_mm: 1000, z_um: 0, h_um: 10000}
+  materials: {inline: {nafems_t4: {k_W_mK: 52.0}}}
+  mesh: {max_xy_mm: [100, 50, 25, 12.5], min_cells_per_layer: 1}
+  physics:
+    thermal:
+      bcs:
+        - {selection: "side:plate:y-", type: temperature, T_C: 100}
+        - {selection: "side:plate:x-", type: adiabatic}
+        - {selection: "side:plate:x+", type: htc, h_W_m2K: 750, T_inf_C: 0}
+        - {selection: "side:plate:y+", type: htc, h_W_m2K: 750, T_inf_C: 0}
+        - {selection: default, type: adiabatic, note: "top and bottom faces of the slab (2D)"}
+  studies: [{id: s1, type: thermal_stationary}]
+expected:
+  - {quantity: T_C, probe: "E = (0.6, 0.2) m (on the right convective edge)", value: 18.3, unit: C, tolerance: {rel: 1.0e-2, after: "refinement"}}
+  - {quantity: T_C_exact, probe: "E", value: 18.2538, unit: C, tolerance: {rel: 1.0e-3, after: "refinement / Richardson"},
+     note: "exact series (L4); the 18.3 target is this value rounded to 3 significant figures"}
+  - {form: reference_fe, quantity: T_C, probe: E, value: 18.25375654, unit: C, tolerance: {rel: 1.0e-4},
+     ref: {file: T4-skfem.json, path: results.convergence.q2.T_E_C, field: f_ext}, note: "lane L5 scikit-fem Q2; agrees with the exact series 18.2538 to 3e-7"}
+independent_check:
+  formula: "T = sum c_n cos(mu_n x) Y_n(y), mu_n tan(mu_n W) = h/k, Y_n from the top Robin BC, c_n by Sturm-Liouville projection of T = 100 at y = 0"
+  script: "validation/expected/tier_b.py t4()"
+  value_C: 18.2538
+  cross_check: "own 5-point finite differences (scratch, not kept): 18.2676 / 18.2572 / 18.2546 C at h = 20 / 10 / 5 mm, converging to the series value"
+reference_results:
+  - {solver: "OptiStruct", Quad4: 17.77, Quad8: 17.10, Tria3: 17.29, Tria6: 16.83, unit: C, note: "10 x 6 mesh"}
+provenance:
+  target: "NAFEMS T4 (Cameron, Casey, Simpson, Benchmark Tests for Thermal Analysis, NAFEMS 1986), via Altair OS-V 0120 and FEATool heattransfer4"
+  geometry: "FEATool ex_heattransfer4: 0.6 x 1.0 m plate, E (0.6, 0.2), bottom 100 C, left insulated, right and top h 750 W/m2K to 0 C (edge assignment from the geometry call and diagram)"
+  urls:
+    - {url: "https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/nafems_test_problem_t4_r.htm", retrieved: 2026-10-20}
+    - {url: "https://www.featool.com/doc/ex__heattransfer4_8m", retrieved: 2026-10-20}
+missing: []
+assumptions:
+  - "Altair's results table header says point C at t = 32 s (copied from T3); its introduction says point E steady state. FEATool and the exact series confirm E steady state."
+  - "Per-face selections side:<part>:<dir> requested (contract-change request L4-5)."

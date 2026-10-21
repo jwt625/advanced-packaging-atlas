@@ -1,0 +1,42 @@
+schema: ap-sim-val/0
+id: C/em_3_fine_pitch_crosstalk
+tier: C
+title: EM-3 fine-pitch multi-line channels - PSB bridge (L/S 0.75 / 1.4 um) and UCIe-S 3.0 x8 10 mm on glass-core ABF
+status: unvalidated
+physics: [em]
+source: {paper_ids: [ectc51846.2026.00035, ectc51846.2026.00199], tv_ids: [ectc51846.2026.00035-a, -b, -c, ectc51846.2026.00199-b]}
+inputs:
+  sim_case: null     # no EM-3 config under sims/em/ yet (2026-10-20); inputs below are the case definition
+  em3a_psb: {model_A: "checkerboard dual-damascene, L/S 0.75/0.75 um, t 1.0 um, ILD 1.0 um, GND mesh", model_B: "11 parallel lines, one layer, L/S 0.75", model_C: "SAP 4-3-4, L/S 1.4/1.4, t 2.5 um, solid GND",
+             dielectrics: {oxide: "Dk 4.0, Df 0.002", m_PPE: "Dk 2.8, Df 0.0045"}, reach_mm: [0.4, 2.0], source: "R3 4.2 EM-3a; TV rows"}
+  em3b_ucie_s: {lines: 24, w_s_um: [10, 15], t_cu_um: 10, abf_above_um: 15, reach_mm: 10, bump_pitch_um: 130, z0_window_ohm: [47.5, 52.5], source: "R3 4.2 EM-3b; -b-m5; b-e1"}
+targets:
+  - {metric_id: ectc51846.2026.00035-a-m13, quantity: XT_dB, value: -20, rule: "crosstalk <= -20 dB, 0-50 GHz, 0.4 mm, all dielectrics", basis: simulated, locator: "p.5 Sec. III.B.4"}
+  - {metric_id: ectc51846.2026.00035-a-m9,  quantity: DCR_ohm, value: 18.3, reach_mm: 0.4, basis: simulated, locator: "p.5 Table II", tolerance: {rel: 0.05}}
+  - {metric_id: ectc51846.2026.00035-a-m11, quantity: DCR_ohm, value: 54.7, reach_mm: 2.0, basis: simulated, locator: "p.5 Table II", tolerance: {rel: 0.05}}
+  - {metric_id: ectc51846.2026.00035-c-m5,  quantity: DCR_ohm, value: 3.87, reach_mm: 0.4, basis: simulated, locator: "p.5 Table II", tolerance: {rel: 0.05}}
+  - {metric_id: ectc51846.2026.00035-c-m7,  quantity: DCR_ohm, value: 11.8, reach_mm: 2.0, basis: simulated, locator: "p.5 Table II", tolerance: {rel: 0.05}}
+  - {metric_id: ectc51846.2026.00035-a-m10, quantity: L_nH_at_5GHz, value: 1.15, reach_mm: 0.4, basis: simulated, locator: "p.5 Table II", tolerance: {rel: 0.10}}
+  - {metric_id: ectc51846.2026.00035-a-m12, quantity: L_nH_at_5GHz, value: 3.98, reach_mm: 2.0, basis: simulated, locator: "p.5 Table II", tolerance: {rel: 0.10}}
+  - {ei_id: ectc51846.2026.00035-a-e1, quantity: IL_dB, value: 4.3,  reach_mm: 0.4, f_GHz: 50, basis: simulated, locator: "p.4 Fig. 5 (+-0.2 dB)"}
+  - {ei_id: ectc51846.2026.00035-a-e3, quantity: IL_dB, value: 11.1, reach_mm: 2.0, f_GHz: 50, basis: simulated, locator: "p.4 Fig. 5 (+-0.2 dB)"}
+  - {ei_id: ectc51846.2026.00035-c-e1, quantity: IL_dB, value: 2.45, reach_mm: 0.4, f_GHz: 50, basis: simulated, locator: "p.4 Fig. 5 (+-0.2 dB)"}
+  - {ei_id: ectc51846.2026.00035-c-e2, quantity: IL_dB, value: 4.1,  reach_mm: 2.0, f_GHz: 50, basis: simulated, locator: "p.4 Fig. 5 (+-0.2 dB)"}
+  - {metric_id: ectc51846.2026.00199-b-m1, quantity: VTF_XT_worst_dB, value: -27.6, f_GHz: 12.7, basis: simulated, locator: "p.7 Sec. IV.B.3",
+     pass_criterion: "XT <= min(-26 dB, 2.5 x L(fN) - 10 dB) (from the DB row's pass_criterion)", derived_limit_dB: -26,
+     derived_note: "with L(fN) = 6.2 dB (b-e1) the second term is +5.5 dB if L is a positive loss, or -25.5 dB if L is the signed S21 (-6.2 dB); either way the limit is -26 dB and the design passes with 1.6 dB margin (L4 arithmetic)"}
+  - {metric_id: ectc51846.2026.00199-b-m2, quantity: VTF_XT_dB, value: -36.3, f_GHz: 16, basis: simulated, locator: "p.7 Sec. IV.B.3"}
+  - {metric_id: ectc51846.2026.00199-b-m3, quantity: VTF_IL_0Hz_dB, value: -4.35, basis: simulated, locator: "p.7 Sec. IV.B.3"}
+  - {ei_id: ectc51846.2026.00199-b-e1, quantity: IL_Nyquist_dB, value: 6.2, f_GHz: 16, reach_mm: 10, basis: simulated, locator: "p.7 Sec. IV.B.3; p.7 Fig. 14(a)"}
+derived:   # L4 arithmetic from the rows above
+  - {quantity: DCR_slope_ohm_per_mm, model: A, value: 22.75, from: "(54.7 - 18.3) / 1.6", analytic: "rho_Cu / (w t) = 1.72e-8 / (0.75e-6 x 1.0e-6) = 22.9 ohm/mm (bulk Cu, rectangular section)", status: "agrees within 1 %"}
+  - {quantity: DCR_fixed_ohm, model: A, value: 9.2, from: "18.3 - 0.4 x 22.75", note: "vias / pillars / pads in the 2-port, length independent"}
+  - {quantity: DCR_slope_ohm_per_mm, model: C, value: 4.96, from: "(11.8 - 3.87) / 1.6", analytic: "1.72e-8 / (1.4e-6 x 2.5e-6) = 4.91 ohm/mm", status: "agrees within 1 %"}
+  - {quantity: IL_slope_dB_per_mm_50GHz, model: A, value: 4.25, from: "(11.1 - 4.3) / 1.6 (a-e3 vs a-e1)", fixed_dB: 2.6}
+  - {quantity: IL_slope_dB_per_mm_50GHz, model: C, value: 1.03, from: "(4.1 - 2.45) / 1.6 (c-e2 vs c-e1)", fixed_dB: 2.04}
+  - {quantity: L_slope_nH_per_mm_5GHz, model: A, value: 1.77, from: "(3.98 - 1.15) / 1.6"}
+tolerance: {DCR: {rel: 0.05}, IL: {abs_dB: 0.5, rel: 0.15, rule: max}, XT: {abs_dB: 3}}
+missing: ["layer count and GND-mesh pattern (3a)", "port / termination details", "ABF grade, Dk / Df and lower ABF thickness (3b)", "Tx / Rx model detail (3b)"]
+assumptions:
+  - "Pairing a-e1 / a-e3 (and a-e2 / a-e4) as the same dielectric at 0.4 / 2.0 mm follows the row order; the DB notes do not name the dielectric per row: verify against p.4 Fig. 5 before gating on the slope."
+  - "Bulk Cu resistivity 1.72e-8 ohm m at 20 C for the analytic DCR check (textbook value)."

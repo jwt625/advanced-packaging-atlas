@@ -1,0 +1,113 @@
+schema: ap-sim-val/0
+id: H/H07-substrate-cte
+tier: H
+title: 'Higher substrate CTE (Substrate B 12.81 vs A 11.97 ppm/C) gives larger reflow warpage [weak: 1 paper]'
+status: unvalidated
+physics:
+- thermo_elastic
+strength: weak
+scope_package_classes:
+- si_interposer_2p5d (JOINT2 2024, one paper)
+applies_to:
+- si_interposer_peers/120mm_warpage
+rule:
+  type: direction
+  expr: w_HT(sub B) > w_HT(sub A) at equal stiffener, FEM and moire
+  strength: weak
+fails_if: w_HT(sub B) <= w_HT(sub A) for any matched stiffener footprint in the 120 mm model
+n_papers: 1
+support:
+- metric_id: ectc51529.2024.00155-g-m1
+  value: 263
+  unit: um
+  parameter: package substrate warpage at 260 C (FEM)
+  condition: FEM, 260 C
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.5 Fig. 12
+- metric_id: ectc51529.2024.00155-h-m1
+  value: 317
+  unit: um
+  parameter: package substrate warpage at 260 C (FEM)
+  condition: FEM, 260 C
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.5 Fig. 12
+- metric_id: ectc51529.2024.00155-a-m23
+  value: 247
+  unit: um
+  parameter: package substrate warpage at 260 C (FEM)
+  condition: FEM, 260 C
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.5 Fig. 12
+- metric_id: ectc51529.2024.00155-c-m6
+  value: 282
+  unit: um
+  parameter: package substrate warpage at 260 C (FEM)
+  condition: FEM, 260 C
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.5 Fig. 12
+- metric_id: ectc51529.2024.00155-b-m4
+  value: 216
+  unit: um
+  parameter: package substrate warpage at 260 C (FEM)
+  condition: FEM, 260 C
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.5 Fig. 12
+- metric_id: ectc51529.2024.00155-d-m4
+  value: 249
+  unit: um
+  parameter: package substrate warpage at 260 C (FEM)
+  condition: FEM, 260 C
+  basis: simulated
+  package_class: si_interposer_2p5d
+  locator: p.5 Fig. 12
+- metric_id: ectc51529.2024.00155-a-m20
+  value: 91.3
+  unit: um
+  parameter: package substrate coplanarity at 245 C
+  variant: package substrate with stiffener, before PCB bonding
+  condition: shadow moire; 245 C
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.6 Fig. 13(a)
+- metric_id: ectc51529.2024.00155-c-m3
+  value: 164.6
+  unit: um
+  parameter: package substrate coplanarity at 245 C
+  variant: package substrate with stiffener, before PCB bonding
+  condition: shadow moire; 245 C
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.6 Fig. 13(c)
+- metric_id: ectc51529.2024.00155-b-m1
+  value: 88.2
+  unit: um
+  parameter: package substrate coplanarity at 245 C
+  variant: package substrate with stiffener, before PCB bonding
+  condition: shadow moire; 245 C
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.6 Fig. 13(b)
+- metric_id: ectc51529.2024.00155-d-m1
+  value: 160.1
+  unit: um
+  parameter: package substrate coplanarity at 245 C
+  variant: package substrate with stiffener, before PCB bonding
+  condition: shadow moire; 245 C
+  basis: measured
+  package_class: si_interposer_2p5d
+  locator: p.6 Fig. 13(d)
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+notes:
+- 'FEM 260 C: 263 vs 317, 247 vs 282, 216 vs 249 um; moire coplanarity 245 C: 91.3 vs 164.6 (28 x 30 mm), 88.2 vs 160.1 um (34 x 36 mm). Single
+  paper, sim and measurement agree in direction.'
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20

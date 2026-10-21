@@ -1,0 +1,261 @@
+{
+ "generator": "validation/expected/implied_tsf.py",
+ "rows": [
+  {
+   "label": "cowos_l lid TV_1.6x (measured)",
+   "sim_case": "cowos_l/warpage_rt_ht",
+   "metric_ids": [
+    "ectc51909.2023.00091-a-m1",
+    "ectc51909.2023.00091-a-m2"
+   ],
+   "points_T_C_w_um": [
+    [
+     25,
+     64.0
+    ],
+    [
+     240,
+     -148.0
+    ]
+   ],
+   "note": "view side not stated; RT shape saddle-like",
+   "ratio_HT_over_RT": -2.3125,
+   "implied_tsf_C": 89.90566037735849,
+   "case_stress_free_C": 150.0,
+   "delta_C": -60.09433962264151
+  },
+  {
+   "label": "cowos_l ring TV_4.8x (measured)",
+   "sim_case": "cowos_l/warpage_rt_ht",
+   "metric_ids": [
+    "ectc51909.2023.00091-b-m1",
+    "ectc51909.2023.00091-b-m2"
+   ],
+   "points_T_C_w_um": [
+    [
+     25,
+     186.0
+    ],
+    [
+     240,
+     -107.0
+    ]
+   ],
+   "note": "ring variant; case input taken from the lid case",
+   "ratio_HT_over_RT": -0.5752688172043011,
+   "implied_tsf_C": 161.48464163822527,
+   "case_stress_free_C": 150.0,
+   "delta_C": 11.48464163822527
+  },
+  {
+   "label": "120 mm SUS430 stiffener (measured)",
+   "sim_case": "si_interposer_peers/120mm_warpage",
+   "metric_ids": [
+    "ectc51529.2024.00155-a-m16",
+    "ectc51529.2024.00155-a-m17",
+    "ectc51529.2024.00155-a-m18",
+    "ectc51529.2024.00155-a-m19"
+   ],
+   "points_T_C_w_um": [
+    [
+     30,
+     485.0
+    ],
+    [
+     148,
+     135.0
+    ],
+    [
+     222,
+     65.0
+    ],
+    [
+     243,
+     -85.0
+    ]
+   ],
+   "note": "stiffener parts use 130 C in the case",
+   "lsq_slope_um_per_C": -2.453487430129884,
+   "implied_tsf_C": 221.88746423068457,
+   "measured_zero_crossings_C": [
+    231.1
+   ],
+   "case_stress_free_C": 170.0,
+   "delta_C": 51.88746423068457
+  },
+  {
+   "label": "120 mm Cu stiffener (measured)",
+   "sim_case": "si_interposer_peers/120mm_warpage",
+   "metric_ids": [
+    "ectc51529.2024.00155-e-m1",
+    "ectc51529.2024.00155-e-m2",
+    "ectc51529.2024.00155-e-m3",
+    "ectc51529.2024.00155-e-m4"
+   ],
+   "points_T_C_w_um": [
+    [
+     30,
+     -330.0
+    ],
+    [
+     148,
+     260.0
+    ],
+    [
+     222,
+     645.0
+    ],
+    [
+     243,
+     770.0
+    ]
+   ],
+   "note": "Cu-stiffener variant of the same package",
+   "lsq_slope_um_per_C": 5.136724903014429,
+   "implied_tsf_C": 95.2900023655782,
+   "measured_zero_crossings_C": [
+    96.0
+   ],
+   "case_stress_free_C": 170.0,
+   "delta_C": -74.7099976344218
+  },
+  {
+   "label": "FCBGA bare substrate (paper FEM, stated 180 C)",
+   "sim_case": "fcbga_organic/substrate_warpage_bare",
+   "metric_ids": [
+    "ectc51687.2025.00178-c-m1",
+    "ectc51687.2025.00178-c-m2"
+   ],
+   "points_T_C_w_um": [
+    [
+     25,
+     122.0
+    ],
+    [
+     265,
+     -47.0
+    ]
+   ],
+   "note": "paper FEM; tests the diagnostic itself",
+   "ratio_HT_over_RT": -0.38524590163934425,
+   "implied_tsf_C": 198.25443786982245,
+   "case_stress_free_C": 180.0,
+   "delta_C": 18.254437869822453
+  },
+  {
+   "label": "FCBGA bare substrate (measured DIC)",
+   "sim_case": "fcbga_organic/substrate_warpage_bare",
+   "metric_ids": [
+    "ectc51687.2025.00178-b-m4",
+    "ectc51687.2025.00178-b-m5"
+   ],
+   "points_T_C_w_um": [
+    [
+     30,
+     166.0
+    ],
+    [
+     260,
+     -68.0
+    ]
+   ],
+   "note": "",
+   "ratio_HT_over_RT": -0.40963855421686746,
+   "implied_tsf_C": 193.1623931623932,
+   "case_stress_free_C": 180.0,
+   "delta_C": 13.162393162393187
+  },
+  {
+   "label": "FCBGA after 2-chip assembly (paper FEM, stated 150 C)",
+   "sim_case": "fcbga_organic/substrate_warpage",
+   "metric_ids": [
+    "ectc51687.2025.00178-c-m3",
+    "ectc51687.2025.00178-c-m4"
+   ],
+   "points_T_C_w_um": [
+    [
+     25,
+     439.0
+    ],
+    [
+     265,
+     -292.0
+    ]
+   ],
+   "note": "paper FEM",
+   "ratio_HT_over_RT": -0.6651480637813212,
+   "implied_tsf_C": 169.1313269493844,
+   "case_stress_free_C": 150.0,
+   "delta_C": 19.131326949384402
+  },
+  {
+   "label": "glass core bare substrate (paper FEM, stated 180 C)",
+   "sim_case": "glass_core_substrate/warpage_vs_organic",
+   "metric_ids": [
+    "ectc51687.2025.00178-d-m1",
+    "ectc51687.2025.00178-d-m2"
+   ],
+   "points_T_C_w_um": [
+    [
+     25,
+     97.0
+    ],
+    [
+     265,
+     -31.0
+    ]
+   ],
+   "note": "case s3 uses 180 C",
+   "ratio_HT_over_RT": -0.31958762886597936,
+   "implied_tsf_C": 206.875,
+   "case_stress_free_C": 180.0,
+   "delta_C": 26.875
+  },
+  {
+   "label": "glass core after 2-chip assembly (paper FEM, stated 150 C)",
+   "sim_case": "glass_core_substrate/warpage_vs_organic",
+   "metric_ids": [
+    "ectc51687.2025.00178-d-m3",
+    "ectc51687.2025.00178-d-m4"
+   ],
+   "points_T_C_w_um": [
+    [
+     25,
+     160.0
+    ],
+    [
+     265,
+     -75.0
+    ]
+   ],
+   "note": "paper FEM",
+   "ratio_HT_over_RT": -0.46875,
+   "implied_tsf_C": 188.40425531914894,
+   "case_stress_free_C": 150.0,
+   "delta_C": 38.404255319148945
+  },
+  {
+   "label": "CoWoS-S package (basis unspecified)",
+   "sim_case": "cowos_s/warpage_corner_stress",
+   "metric_ids": [
+    "ectc51909.2023.00135-a-m1",
+    "ectc51909.2023.00135-a-m2"
+   ],
+   "points_T_C_w_um": [
+    [
+     25,
+     -198.0
+    ],
+    [
+     250,
+     153.0
+    ]
+   ],
+   "note": "",
+   "ratio_HT_over_RT": -0.7727272727272727,
+   "implied_tsf_C": 151.92307692307693,
+   "case_stress_free_C": 150.0,
+   "delta_C": 1.923076923076934
+  }
+ ]
+}

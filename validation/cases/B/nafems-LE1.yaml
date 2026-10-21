@@ -1,0 +1,38 @@
+schema: ap-sim-val/0
+id: B/nafems-LE1
+tier: B
+title: NAFEMS LE1 elliptic membrane, plane stress, outer-edge tension
+status: unvalidated
+physics: [elastic]
+box_compatible: false
+geometry_note: "Curved (elliptic) inner and outer edges. Not representable on the structured box grid; runs on the desktop reference (validation/reference/, L5) or a future curved-mesh engine path. A staircase approximation is not meaningful for a boundary stress target."
+tests: [stress recovery at a curved boundary, element distortion, plane stress]
+inputs:
+  geometry:
+    analytic:
+      quarter_model: true
+      inner_ellipse_mm: {semi_x: 2000, semi_y: 1000}
+      outer_ellipse_mm: {semi_x: 3250, semi_y: 2750}
+      points_mm: {A: [0, 1000], B: [0, 2750], C: [3250, 0], D: [2000, 0]}
+      thickness_mm: 0.1
+      thickness_note: "thickness does not enter a plane-stress stress target; 0.1 mm as in the NAFEMS statement (commonly quoted; not in the fetched text: unverified)"
+  materials: {inline: {steel_nafems: {E_GPa: 210, nu: 0.3}}}
+  physics:
+    mechanics:
+      bcs:
+        - {selection: "edge AB (x = 0)", type: fixed, components: [ux]}
+        - {selection: "edge CD (y = 0)", type: fixed, components: [uy]}
+        - {selection: "edge BC (outer ellipse)", type: normal_traction, value_MPa: -10, note: "uniform outward normal tension 10 MPa"}
+expected:
+  - {quantity: sigma_yy_MPa, probe: "D = (2000, 0) mm", value: 92.7, unit: MPa, tolerance: {rel: 1.0e-2, after: "refinement / Richardson"}}
+reference_results:
+  - {solver: FeenoX, value_MPa: 92.7011, note: "second-order mesh from nafems-le1.geo"}
+provenance:
+  target: "NAFEMS TNSB Rev. 3 (1990), via FeenoX mechanical examples (target 92.7, computed 92.7011)"
+  geometry: "FeenoX repo examples/nafems-le1.geo (a = 1000, b = 2750, c = 3250, d = 2000; points A, B, C, D)"
+  urls:
+    - {url: "https://www.seamplex.com/feenox/examples/mechanical.html", retrieved: 2026-10-20}
+    - {url: "https://raw.githubusercontent.com/seamplex/feenox/main/examples/nafems-le1.geo", retrieved: 2026-10-20}
+missing: []
+assumptions:
+  - "Traction sign: FeenoX `tension=10` = outward normal traction of 10 MPa."

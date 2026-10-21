@@ -1,0 +1,222 @@
+schema: ap-sim-val/0
+id: H/H20-il-per-mm-bands
+tier: H
+title: IL per mm bands by line width class at 40-65 GHz
+status: unvalidated
+physics:
+- em
+strength: moderate
+scope_package_classes:
+- si_bridge_fanout
+- organic_rdl_interposer
+- organic_substrate stripline
+applies_to:
+- em/em2_cpwg_si_bridge
+- em/em1_abf_microstrip_glass (18-26 um class is the nearest; EM-1 is 34 um)
+rule:
+  type: range_by_class
+  expr: 'L/S <= 2 um: [1.0, 2.5] dB/mm; 3-10 um: [0.6, 1.1] dB/mm; 18-26 um: [0.2, 0.55] dB/mm (40-65 GHz)'
+  strength: moderate
+fails_if: IL/mm at 40-65 GHz outside the band of its width class
+n_papers: 5
+support:
+- ei_id: eptc67330.2025.11392620-a-e1
+  insertion_loss_db: 1.353
+  il_freq_ghz: 56
+  reach_mm: 1
+  line_um: 2
+  space_um: 3
+  channel_type: si_bridge
+  basis: measured
+  il_db_per_mm: 1.353
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: si_bridge_fanout
+  locator: p.3 Table I; p.2 Fig. 3(a); p.3 Sec. II.B
+- ei_id: eptc67330.2025.11392620-a-e4
+  insertion_loss_db: 1.351
+  il_freq_ghz: 56
+  reach_mm: 1
+  line_um: 2
+  space_um: 3
+  channel_type: si_bridge
+  basis: measured
+  il_db_per_mm: 1.351
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: si_bridge_fanout
+  locator: p.3 Table I; p.2 Fig. 3(d); p.3 Sec. II.B
+- ei_id: eptc67330.2025.11392620-a-e6
+  insertion_loss_db: 1.402
+  il_freq_ghz: 56
+  reach_mm: 1
+  line_um: 2
+  space_um: 3
+  channel_type: si_bridge
+  basis: measured
+  il_db_per_mm: 1.402
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: si_bridge_fanout
+  locator: p.3 Table I; p.2 Fig. 3(f); p.3 Sec. II.B
+- ei_id: 001c.129747-d-e1
+  insertion_loss_db: 6.6
+  il_freq_ghz: 40
+  reach_mm: 5
+  line_um: 1.5
+  space_um: 1.5
+  channel_type: unspecified
+  basis: measured
+  il_db_per_mm: 1.32
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: organic_rdl_interposer
+  locator: p.3 Fig. 8
+- ei_id: ectc51846.2026.00035-c-e2
+  insertion_loss_db: 4.1
+  il_freq_ghz: 50
+  reach_mm: 2.0
+  line_um: 1.4
+  space_um: 1.4
+  channel_type: si_bridge
+  basis: simulated
+  il_db_per_mm: 2.05
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: si_bridge_fanout
+  locator: p.4 Fig. 5; p.3 Sec. III.A
+- ei_id: eptc67330.2025.11392620-a-e2
+  insertion_loss_db: 0.634
+  il_freq_ghz: 56
+  reach_mm: 1
+  line_um: 10
+  space_um: 5.5
+  channel_type: si_bridge
+  basis: measured
+  il_db_per_mm: 0.634
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: si_bridge_fanout
+  locator: p.3 Table I; p.2 Fig. 3(b); p.3 Sec. II.B
+- ei_id: eptc67330.2025.11392620-a-e5
+  insertion_loss_db: 0.937
+  il_freq_ghz: 56
+  reach_mm: 1
+  line_um: 5
+  space_um: 4
+  channel_type: si_bridge
+  basis: measured
+  il_db_per_mm: 0.937
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: si_bridge_fanout
+  locator: p.3 Table I; p.2 Fig. 3(e); p.3 Sec. II.B
+- ei_id: eptc67330.2025.11392620-a-e7
+  insertion_loss_db: 1.04
+  il_freq_ghz: 56
+  reach_mm: 1
+  line_um: 5
+  space_um: 6
+  channel_type: si_bridge
+  basis: measured
+  il_db_per_mm: 1.04
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: si_bridge_fanout
+  locator: p.3 Table I; p.2 Fig. 3(g); p.3 Sec. II.B
+- ei_id: 001c.129747-d-e2
+  insertion_loss_db: 3.8
+  il_freq_ghz: 40
+  reach_mm: 5
+  line_um: 3
+  space_um: 3
+  channel_type: unspecified
+  basis: measured
+  il_db_per_mm: 0.76
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: organic_rdl_interposer
+  locator: p.3 Fig. 8
+- ei_id: ectc51846.2026.00016-b-e1
+  insertion_loss_db: 1.63
+  il_freq_ghz: 65
+  reach_mm: 2
+  line_um: 5
+  channel_type: organic_rdl
+  basis: measured
+  il_db_per_mm: 0.815
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: organic_rdl_interposer
+  locator: p.3 Sec. IV; p.3 Fig. 4(a)
+- ei_id: ectc51846.2026.00016-b-e2
+  insertion_loss_db: 1.37
+  il_freq_ghz: 65
+  reach_mm: 2
+  line_um: 8
+  channel_type: organic_rdl
+  basis: measured
+  il_db_per_mm: 0.685
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: organic_rdl_interposer
+  locator: p.3 Sec. IV; p.3 Fig. 4(b)
+- ei_id: eptc67330.2025.11392620-a-e3
+  insertion_loss_db: 0.441
+  il_freq_ghz: 56
+  reach_mm: 1
+  line_um: 25
+  space_um: 16
+  channel_type: si_bridge
+  basis: measured
+  il_db_per_mm: 0.441
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: si_bridge_fanout
+  locator: p.3 Table I; p.2 Fig. 3(c); p.3 Sec. II.B
+- ei_id: ectc51846.2026.00016-c-e1
+  insertion_loss_db: 1.0
+  il_freq_ghz: 65
+  reach_mm: 2
+  line_um: 25
+  channel_type: si_bridge
+  basis: measured
+  il_db_per_mm: 0.5
+  il_db_per_mm_note: 'derived: |IL| / reach (L4)'
+  package_class: si_bridge_fanout
+  locator: p.3 Sec. IV; p.3 Fig. 4(c)
+- metric_id: ectc51909.2023.00021-a-m1
+  value: -0.34
+  unit: dB/mm
+  parameter: insertion loss per unit length, single-ended
+  variant: shiny-side press
+  condition: 50 GHz; VNA Keysight N5290/91A, FormFactor Z-probe 200 um pitch, 10 MHz-50 GHz; lines 10/24/34/50 mm
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Table II; p.5 Fig. 15
+- metric_id: ectc51909.2023.00021-b-m1
+  value: -0.23
+  unit: dB/mm
+  parameter: insertion loss per unit length, single-ended
+  variant: shiny-side press
+  condition: 50 GHz; VNA Keysight N5290/91A, FormFactor Z-probe 200 um pitch, 10 MHz-50 GHz; lines 10/24/34/50 mm
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Table II; p.5 Fig. 15
+- metric_id: ectc51909.2023.00021-b-m3
+  value: -0.21
+  unit: dB/mm
+  parameter: insertion loss per unit length, differential
+  variant: shiny-side press
+  condition: 50 GHz; VNA Keysight N5290/91A, FormFactor Z-probe 200 um pitch, 10 MHz-50 GHz; lines 10/24/34/50 mm
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Table II
+- metric_id: ectc51909.2023.00021-c-m1
+  value: -0.34
+  unit: dB/mm
+  parameter: insertion loss per unit length, single-ended
+  condition: 50 GHz; VNA Keysight N5290/91A, FormFactor Z-probe 200 um pitch, 10 MHz-50 GHz; lines 10/24/34/50 mm
+  basis: measured
+  package_class: organic_substrate
+  locator: p.5 Table II; p.5 Fig. 15
+revision:
+  date: '2026-10-20'
+  audit: A1 S7
+  change: scope, strength and fails_if added
+notes:
+- '<= 2 um: 1.32-1.40 dB/mm (3 TVs, 2 papers, measured) and 2.05 dB/mm (L/S 1.4, simulated 50 GHz). 3-10 um: 0.63-1.04 (Si bridge), 0.69-0.82
+  (organic RDL), 0.76 (L/S 3). 18-26 um: 0.441 (W25 CPWG, 56 GHz), 0.50 (25 um, 65 GHz), 0.21-0.34 dB/mm (50 ohm stripline in prepreg, final widths
+  18-26 um per stack rows, 50 GHz; TV -c width not stated).'
+- L/S 0.75 um lines (5.2-10.8 dB/mm at 50 GHz, simulated) are outside all bands and are covered by EM-3a.
+provenance:
+  db: data/metrics.csv, data/electrical_interfaces.csv (values copied by id; re-checked by validation/expected/check_db_targets.py)
+  curated: L4, 2026-10-20
