@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "plotly.js-dist-min": "^4.1.1",
-    "three": "^0.186.1"
+    "three": "^0.186.1",
+    "yaml": "^2.9.1"
   }
 }

@@ -17,6 +17,7 @@
 		{ href: '/table', label: 'Table' },
 		{ href: '/explore', label: 'Explore' },
 		{ href: '/3d', label: '3D' },
+		{ href: '/sim', label: 'Sim' },
 		{ href: '/about', label: 'About' }
 	];
 

@@ -9,5 +9,10 @@ export default defineConfig({
 			paths: { base: (process.env.BASE_PATH ?? '') as '' | `/${string}`, relative: false },
 			prerender: { handleHttpError: 'fail' }
 		})
-	]
+	],
+	// /sim bundles ../sims/*.yaml and ../engine/data/materials/*.yaml via ?raw imports (DevLog-012 L6)
+	server: { fs: { allow: ['..'] } },
+	// the /sim solver worker (the app's only worker) as an ES module worker, so its dynamic imports stay separate
+	// chunks (engine modules per study type, the RVE table) instead of one inlined file (lane L12, audit A3 M11)
+	worker: { format: 'es' }
 });
