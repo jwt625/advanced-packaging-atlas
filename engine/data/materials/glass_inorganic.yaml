@@ -1,0 +1,141 @@
+# Glasses and inorganic films (lane L2, DevLog-012).
+schema: ap-sim.materials/1
+group: glass_inorganic
+verified_on: 2026-10-20
+materials:
+  glass_en_a1:
+    description: alkali-free aluminoborosilicate glass core (AGC EN-A1); as modelled by two glass-core papers
+    class: glass
+    tier: mvp
+    status: partial
+    valid_T_C: [-55, 260]
+    properties:
+      elastic: {model: iso, E: 77, nu: 0.22, unit: GPa, basis: paper_model_input, source: ectc51846.2026.00103, locator: "p.4 Table II row Glass (AGC EN-A1): E 77 GPa, nu 0.22; same values in tcpmt.2025.3614186 p.6 Table II row 8 (G 31.55 GPa)", verified_on: 2026-10-20}
+      cte: {kind: instantaneous, value: 3.8, unit: ppm/K, basis: paper_model_input, source: ectc51846.2026.00103, locator: "p.4 Table II row Glass (AGC EN-A1): instantaneous CTE 3.8 ppm/C; tcpmt.2025.3614186 p.6 Table II row 8: 3.80E-06 all temperatures", verified_on: 2026-10-20}
+      k: {value: 1.2, unit: W/mK, basis: template, analog_of: "glass_bf33 (SCHOTT BOROFLOAT 33, borosilicate glass, 90 C)", source: schott_b33, locator: "p.1 Thermal properties: thermal conductivity (90 C) 1.2 W/(m K)", sensitivity: {property: k, delta: {factor: [0.5, 2]}}, note: "AGC EN-A1 data sheet gated (R4); no EN-A1 k read", verified_on: 2026-10-20}
+      eps_r: {value: N/A, missing: "no EN-A1 Dk read"}
+    alternatives:
+      alkali_free_lide_E: {property: elastic, use: sensitivity (generic alkali-free category), model: iso, E: 74, nu: {value: N/A, missing: "not given"}, unit: GPa, basis: paper_model_input, source: 001c.74577, locator: "p.3 Table I column Alkali-free Glass: CTE 3.2-8.7 ppm/K, E 74 GPa, Dk 7.3", verified_on: 2026-10-20}
+    missing: ["k, cp, density, Dk / Df of EN-A1"]
+
+  glass_bf33:
+    description: borosilicate float glass SCHOTT BOROFLOAT 33
+    class: glass
+    tier: "1"
+    status: ok
+    valid_T_C: [20, 300]
+    properties:
+      density: {value: 2.23, unit: g/cm3, basis: datasheet, source: schott_b33, locator: "p.1 Mechanical properties: density (25 C) 2.23 g/cm3", verified_on: 2026-10-20}
+      cp: {value: 0.83, range_C: [20, 100], unit: kJ/kgK, basis: datasheet, source: schott_b33, locator: "p.1 Thermal properties: specific heat capacity cp (20-100 C) 0.83 kJ/(kg K)", verified_on: 2026-10-20}
+      k: {value: 1.2, unit: W/mK, basis: datasheet, source: schott_b33, locator: "p.1 Thermal properties: thermal conductivity (90 C) 1.2 W/(m K)", condition: "90 C; T dependence not applied", verified_on: 2026-10-20}
+      elastic: {model: iso, E: 64, nu: 0.2, unit: GPa, basis: datasheet, source: schott_b33, locator: "p.1 Mechanical properties: Young's modulus 64 kN/mm2, Poisson's ratio 0.2 (DIN 13316)", verified_on: 2026-10-20}
+      cte: {kind: secant, Tref_C: 20, value: 3.25, range_C: [20, 300], unit: ppm/K, basis: datasheet, source: schott_b33, locator: "p.1 Thermal properties: CTE alpha(20-300 C) 3.25e-6 /K (ISO 7991)", verified_on: 2026-10-20}
+      eps_r: {value: 4.6, f_GHz: 0.001, unit: "1", basis: datasheet, source: schott_b33, locator: "p.1 Electrical properties: dielectric constant (1 MHz and 25 C) 4.6", verified_on: 2026-10-20}
+      tan_delta: {value: 0.0037, f_GHz: 0.001, unit: "1", basis: datasheet, source: schott_b33, locator: "p.1 Electrical properties: loss tangent (1 MHz and 25 C) 37e-4", verified_on: 2026-10-20}
+    missing: ["GHz Dk / Df", "CTE below 20 C"]
+
+  sio2_fused:
+    description: fused silica / vitreous SiO2 bulk (Heraeus Infrasil / Suprasil class)
+    class: glass
+    tier: "1"
+    status: partial
+    valid_T_C: [0, 100]   # CTE mean range of the source
+    properties:
+      density: {value: 2.203, unit: g/cm3, basis: datasheet, source: korth_silica, locator: "silica glass page: density 2.203 g/cm3", verified_on: 2026-10-20}
+      cp: {value: 722, unit: J/kgK, basis: datasheet, source: korth_silica, locator: "silica glass page: specific heat capacity Suprasil 722 J/(kg K) (Infrasil 772), temperature not stated", verified_on: 2026-10-20}
+      k: {value: 1.38, unit: W/mK, basis: datasheet, source: korth_silica, locator: "silica glass page: thermal conductivity 1.38 W/(m K) at 293 K", verified_on: 2026-10-20}
+      elastic: {model: iso, E: 74, nu: 0.17, unit: GPa, basis: datasheet, source: korth_silica, locator: "silica glass page: Young's modulus 74 GPa, Poisson ratio 0.17 (shear 31.2, bulk 36 GPa)", verified_on: 2026-10-20}
+      cte: {kind: secant, Tref_C: 0, value: 0.51, range_C: [0, 100], unit: ppm/K, basis: datasheet, source: korth_silica, locator: "silica glass page: thermal expansion 0.51e-6 /C, 273-373 K", verified_on: 2026-10-20}
+      eps_r: {value: 3.75, f_GHz: 0.1, unit: "1", basis: datasheet, source: korth_silica, locator: "silica glass page: dielectric constant 3.75 at 100 MHz, 293 K", verified_on: 2026-10-20}
+    alternatives:
+      lide_fused_silica_E: {property: elastic, use: sensitivity, model: iso, E: 72, nu: {value: N/A, missing: "not given"}, unit: GPa, basis: paper_model_input, source: 001c.74577, locator: "p.3 Table I column Fused Silica: CTE 0.5, E 72 GPa, Dk 3.8, Df < 0.0004", verified_on: 2026-10-20}
+      nist_vitreous_E: {property: elastic, use: sensitivity (handbook), model: iso, E: 69, nu: {value: N/A, missing: "not given"}, unit: GPa, basis: handbook, source: nist_solder_db_v4, locator: "Table 2.2.7 row Silica (SiO2) (vitreous): density 2.19, CTE 0.54, E 69 GPa (ASM Handbook Vol. 6 as cited)", verified_on: 2026-10-20}
+    missing: ["CTE outside 0-100 C", "GHz Dk / Df"]
+
+  sio2_film:
+    inherits: sio2_fused
+    description: SiO2 film (BEOL / bonding / gap-fill oxide); mechanics from an interposer model table, thermal and EM inherited from bulk fused silica
+    class: dielectric_inorganic
+    tier: mvp
+    status: partial
+    valid_T_C: [-55, 260]
+    properties:
+      elastic: {model: iso, E: 73.0, nu: 0.16, unit: GPa, basis: paper_model_input, source: tcpmt.2025.3538554, locator: "p.7 Table IV row SiO2 (E 73.0 GPa, nu 0.16, CTE 0.5 ppm/C)", verified_on: 2026-10-20}
+      cte: {kind: instantaneous, value: 0.5, unit: ppm/K, basis: paper_model_input, source: tcpmt.2025.3538554, locator: "p.7 Table IV row SiO2", verified_on: 2026-10-20}
+      cp: {value: N/A, missing: "film cp not read (bulk value at unstated temperature not inherited for the wider range)"}
+    alternatives:
+      passivation_tcpmt_E: {property: elastic, use: sensitivity (unnamed passivation layer), model: iso, E: 75, nu: 0.3, unit: GPa, basis: paper_model_input, source: tcpmt.2025.3614186, locator: "p.6 Table II row 11 Passivation (E 75, G 28.84 GPa, nu 0.3, CTE 5.50E-07)", verified_on: 2026-10-20}
+    missing: ["film k and Dk differ from bulk (inherited bulk values at 20 C / 100 MHz); film residual stress is a process input"]
+
+  inorganic_liner_pecvd:
+    description: PECVD inorganic TGV liner (composition not stated by the source)
+    class: dielectric_inorganic
+    tier: "1"
+    status: partial
+    valid_T_C: [-25, 150]   # thermal-cycle range of the source model
+    properties:
+      elastic: {model: iso, E: 81.1, nu: {value: N/A, missing: "not given"}, unit: GPa, basis: measured, source: ectc51846.2026.00074, locator: "p.3 Table II row IL (peel 8 N/cm, CTE 2.7 ppm/K, modulus 81.1 GPa)", verified_on: 2026-10-20}
+      cte: {kind: instantaneous, value: 2.7, unit: ppm/K, basis: measured, source: ectc51846.2026.00074, locator: "p.3 Table II row IL", verified_on: 2026-10-20}
+    missing: ["composition, Poisson ratio, k"]
+
+  polymer_liner_cvd:
+    description: CVD polymer TGV liner (composition not stated by the source)
+    class: dielectric_polymer
+    tier: "1"
+    status: partial
+    valid_T_C: [-25, 150]
+    properties:
+      elastic: {model: iso, E: 2.62, nu: {value: N/A, missing: "not given"}, unit: GPa, basis: measured, source: ectc51846.2026.00074, locator: "p.3 Table II row PL (peel 4 N/cm, CTE 36 ppm/K, modulus 2.62 GPa)", verified_on: 2026-10-20}
+      cte: {kind: instantaneous, value: 36, unit: ppm/K, basis: measured, source: ectc51846.2026.00074, locator: "p.3 Table II row PL", verified_on: 2026-10-20}
+    missing: ["composition, Poisson ratio, k"]
+
+  low_k_beol:
+    description: BEOL low-k dielectric stack (placeholder; foundry-proprietary)
+    class: dielectric_inorganic
+    tier: "1"
+    status: placeholder
+    valid_T_C: [-55, 260]
+    properties:
+      elastic: {value: N/A, missing: "no public E / CTE / eps for foundry low-k stacks found (R4, 2026-10-20)"}
+      cte: {value: N/A, missing: "no public source"}
+      k: {value: N/A, missing: "no public source"}
+      eps_r: {value: N/A, missing: "no public source"}
+    missing: ["all properties; use a derived BEOL effective entry once metal fractions and a source exist"]
+
+  aln_film:
+    description: sputtered AlN film (thermal only; anisotropic k as modelled)
+    class: ceramic
+    tier: "1"
+    status: partial
+    valid_T_C: [20, 110]
+    properties:
+      k: {value: [60, 60, 150], unit: W/mK, basis: paper_model_input, source: ectc51846.2026.00065, locator: "p.4 Table I: thermal conductivity of sputtered AlN cross-plane 150 W/m-K, in-plane 60 W/m-K (2-10 um films)", note: "[x, y, z] = [in-plane, in-plane, cross-plane]", verified_on: 2026-10-20}
+    alternatives:
+      k_drop_cast: {property: k, use: sensitivity (drop-cast AlN), value: 10, unit: W/mK, basis: paper_model_input, source: ectc51846.2026.00065, locator: "p.4 Table I: drop-cast AlN 10 W/m-K", verified_on: 2026-10-20}
+    missing: ["mechanical properties; valid_T_C is this lane's choice for a thermal model input (source gives no range)"]
+
+  sin_film:
+    description: PECVD silicon nitride film (passivation, hybrid-bond / TSV liner); properties strongly deposition-dependent
+    class: dielectric_inorganic
+    tier: "1"
+    status: partial
+    valid_T_C: [-55, 260]
+    properties:
+      density: {value: 2500, unit: kg/m3, basis: handbook, source: mit_6777_pecvd_sin, locator: "PECVD nitride page: mass density 2500 kg/m3 (IEEE Ultrasonics Symp. 1990, pp. 445-8, as cited)", verified_on: 2026-10-20}
+      elastic: {model: iso, E: 160, nu: 0.253, unit: GPa, basis: handbook, source: mit_6777_pecvd_sin, locator: "PECVD nitride page: Young's modulus 160 GPa (IEEE MEMS 2003, pp. 678-81), Poisson ratio 0.253 (Thin Films: Stresses and Mechanical Properties VII, 1998, pp. 27-32), as cited", condition: "'properties for PECVD nitride depend heavily on method of deposition'", verified_on: 2026-10-20}
+      cte: {value: N/A, missing: "no SiN film CTE in the sources read (MIT page lists none; cached corpus has none)"}
+      k: {value: 24.5, unit: W/mK, basis: template, range_from: "16-33 W/m-K (MIT 6.777 PECVD nitride page, citing an ai.mit.edu silicon-nitride page)", source: mit_6777_pecvd_sin, locator: "PECVD nitride page: thermal conductivity 16-33 W/m-K", sensitivity: {property: k, delta: {factor: [0.5, 2]}}, note: "midpoint of the printed range", verified_on: 2026-10-20}
+      eps_r: {value: 7, unit: "1", basis: handbook, source: mit_6777_pecvd_sin, locator: "PECVD nitride page: dielectric constant 7 (J. Electrochem. Soc. 137, 3910, 1990, as cited); frequency not stated", verified_on: 2026-10-20}
+    missing: ["CTE (mechanics refuses until a case override or source)", "residual stress (600 MPa compressive on Si per the same page) is a process input, not stored"]
+
+  sicn_film:
+    description: SiCN hybrid-bonding dielectric film (placeholder; no property values found)
+    class: dielectric_inorganic
+    tier: "1"
+    status: placeholder
+    valid_T_C: [-55, 260]
+    properties:
+      elastic: {value: N/A, missing: "SiCN papers in the cache (ectc51909.2023.00190, ectc51906.2022.00113, iedm45741.2023.10413829, ectc51687.2025.00060) give no E / CTE / k values"}
+      cte: {value: N/A, missing: "no source"}
+      k: {value: N/A, missing: "no source"}
+    missing: ["all properties"]

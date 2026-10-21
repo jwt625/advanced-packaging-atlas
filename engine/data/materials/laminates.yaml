@@ -1,0 +1,106 @@
+# Organic core laminates, PCB, prepregs (lane L2, DevLog-012).
+schema: ap-sim.materials/1
+group: laminates
+verified_on: 2026-10-20
+materials:
+  core_lowcte:
+    description: low-CTE glass-fabric package core laminate (BT / GFRP class); default = 'Substrate B (core material)' of ectc51529.2024.00155 (same row in ectc51687.2025.00027)
+    class: organic_laminate
+    tier: mvp
+    status: partial
+    valid_T_C: [-55, 260]
+    assumptions:
+      - {id: z_cte_from_xy, text: "in-plane (x-y) CTE applied to z; z CTE not reported by the source (coordinator-accepted default 2026-10-20)"}
+      - {id: single_paper_set, text: "default E / CTE / Tg set taken from one paper (ectc51529.2024.00155); other papers are alternatives (DevLog-010 Decision 2; coordinator-accepted 2026-10-20)"}
+    properties:
+      tg: {value: 293, unit: C, method: not_stated, basis: paper_model_input, source: ectc51529.2024.00155, locator: "p.3 Table IV row Substrate B (Core material): Tg 293 C", verified_on: 2026-10-20}
+      elastic:
+        model: iso
+        E: {value: 33, unit: GPa, basis: paper_model_input, source: ectc51529.2024.00155, locator: "p.3 Table IV row Substrate B (Core material): modulus 33 GPa", condition: "single modulus, temperature not stated", verified_on: 2026-10-20}
+        nu: {value: 0.11, basis: template, analog_of: "pcb_board in-plane nu (glass-fabric laminate)", source: tcpmt.2025.3614186, locator: "p.6 Table II row 1 PCB: Poisson ratio in-plane 0.11 (out-of-plane 0.28)", sensitivity: {property: nu, delta: {abs: 0.05}}, note: "board laminate as analog of the package core", verified_on: 2026-10-20}
+      cte:
+        kind: instantaneous
+        model: bilinear_tg
+        below: 6.9
+        above: 0.1
+        unit: ppm/K
+        basis: paper_model_input
+        source: ectc51529.2024.00155
+        locator: "p.3 Table IV row Substrate B (Core material): CTE a1 6.9, a2 0.1 ppm/C, Tg 293 C; identical row in ectc51687.2025.00027 p.3 Table IV"
+        assumption: z_cte_from_xy
+        note: "direction not stated (in-plane by context); applied to all axes (assumption); Tg above valid_T_C so a1 governs"
+        verified_on: 2026-10-20
+      k: {value: 1.7, unit: W/mK, basis: template, analog_of: "FR-4 epoxy / glass laminate (handbook)", source: nist_solder_db_v4, locator: "Table 2.2.6 row Epoxy / Glass (FR4): thermal conductivity 1.7 W/(m K) (Winterbottom, JOM 1993 as cited)", sensitivity: {property: k, delta: {factor: [0.5, 2]}}, note: "direction not stated by the source; applied isotropically", verified_on: 2026-10-20}
+    alternatives:
+      substrate_a_cte: {property: cte, use: sensitivity (Substrate A core), kind: instantaneous, model: bilinear_tg, below: 5.9, above: 2.5, Tg_C: 314, unit: ppm/K, basis: paper_model_input, source: ectc51529.2024.00155, locator: "p.3 Table IV row Substrate A (Core material): 33.5 GPa, 5.9 / 2.5 ppm/C, Tg 314 C", verified_on: 2026-10-20}
+      gfrp_a_E: {property: elastic, use: sensitivity (GFRP core A, E 25 / 220 C), model: iso, E: {model: table_T, T_C: [25, 220], value: [28, 18]}, nu: {value: N/A, missing: "not given"}, unit: GPa, basis: paper_model_input, source: ectc51529.2024.00265, locator: "p.3 Table II core A: Tg 260 C (DMA), CTE 10.6 ppm/K (TMA compression, mean 20-220 C), E 28 / 18 GPa at 25 / 220 C (DMA, footnotes e, f)", verified_on: 2026-10-20}
+      gfrp_a_cte: {property: cte, use: sensitivity (GFRP core A), kind: secant, Tref_C: 20, value: 10.6, range_C: [20, 220], unit: ppm/K, basis: paper_model_input, source: ectc51529.2024.00265, locator: "p.3 Table II core A: CTE 10.6 ppm/K, footnotes a, b (TMA compression mode, average 20-220 C)", verified_on: 2026-10-20}
+      gfrp_b_E: {property: elastic, use: sensitivity (GFRP core B), model: iso, E: {model: table_T, T_C: [25, 220], value: [33, 24]}, nu: {value: N/A, missing: "not given"}, unit: GPa, basis: paper_model_input, source: ectc51529.2024.00265, locator: "p.3 Table II core B: Tg 260 C, CTE 7.4 ppm/K, E 33 / 24 GPa", verified_on: 2026-10-20}
+      gfrp_b_cte: {property: cte, use: sensitivity (GFRP core B), kind: secant, Tref_C: 20, value: 7.4, range_C: [20, 220], unit: ppm/K, basis: paper_model_input, source: ectc51529.2024.00265, locator: "p.3 Table II core B", verified_on: 2026-10-20}
+      gfrp_c_E: {property: elastic, use: sensitivity (GFRP core C), model: iso, E: {model: table_T, T_C: [25, 220], value: [33, 29]}, nu: {value: N/A, missing: "not given"}, unit: GPa, basis: paper_model_input, source: ectc51529.2024.00265, locator: "p.3 Table II core C: Tg 280 C, CTE 6.6 ppm/K, E 33 / 29 GPa", verified_on: 2026-10-20}
+      gfrp_c_cte: {property: cte, use: sensitivity (GFRP core C), kind: secant, Tref_C: 20, value: 6.6, range_C: [20, 220], unit: ppm/K, basis: paper_model_input, source: ectc51529.2024.00265, locator: "p.3 Table II core C", verified_on: 2026-10-20}
+      gfrp_d_E: {property: elastic, use: sensitivity (GFRP core D), model: iso, E: {model: table_T, T_C: [25, 220], value: [31, 23]}, nu: {value: N/A, missing: "not given"}, unit: GPa, basis: paper_model_input, source: ectc51529.2024.00265, locator: "p.3 Table II core D: Tg 280 C, CTE 5.5 ppm/K, E 31 / 23 GPa", verified_on: 2026-10-20}
+      gfrp_d_cte: {property: cte, use: sensitivity (GFRP core D), kind: secant, Tref_C: 20, value: 5.5, range_C: [20, 220], unit: ppm/K, basis: paper_model_input, source: ectc51529.2024.00265, locator: "p.3 Table II core D", verified_on: 2026-10-20}
+      ectc2011_core_cte: {property: cte, use: sensitivity (orthotropic core CTE, room temperature), kind: instantaneous, axes: {xy: {value: 11}, z: {value: 16}}, unit: ppm/K, basis: paper_model_input, source: ectc.2011.5898527, locator: "p.2 Table 2 row Substrate core (E 18.9 GPa, CTE x,y = 11, z = 16)", verified_on: 2026-10-20}
+    missing: ["Poisson ratio (mechanics needs a case override or an explicit alternative)", "k, Dk / Df", "orthotropic E (z)"]
+
+  pcb_board:
+    description: PCB / motherboard laminate as modelled by tcpmt.2025.3614186 (orthotropic, E and CTE step near 155-165 C)
+    class: organic_laminate
+    tier: "1"
+    status: partial
+    valid_T_C: [-55, 250]
+    properties:
+      elastic:
+        model: ortho
+        Ex: {model: table_T, T_C: [-55, 155, 165, 250], value: [22, 22, 2.2, 2.2]}
+        Ey: {model: table_T, T_C: [-55, 155, 165, 250], value: [22, 22, 2.2, 2.2]}
+        Ez: {model: table_T, T_C: [-55, 155, 165, 250], value: [9.8, 9.8, 0.98, 0.98]}
+        nuxy: 0.11
+        nuxz: 0.28
+        nuyz: 0.28
+        Gxy: {model: table_T, T_C: [-55, 155, 165, 250], value: [2.5, 2.5, 0.25, 0.25]}
+        Gxz: {model: table_T, T_C: [-55, 155, 165, 250], value: [3.5, 3.5, 0.35, 0.35]}
+        Gyz: {model: table_T, T_C: [-55, 155, 165, 250], value: [3.5, 3.5, 0.35, 0.35]}
+        unit: GPa
+        basis: paper_model_input
+        source: tcpmt.2025.3614186
+        locator: "p.6 Table II row 1 PCB: E in-plane 22 / out-of-plane 9.8 GPa (-55, 155 C), 2.2 / 0.98 (165, 250 C); G 2.5 / 3.5 and 0.25 / 0.35 GPa; nu in-plane 0.11, out-of-plane 0.28"
+        note: "mapping by this lane: in-plane = x, y; 'out-of-plane' Poisson ratio taken as nu_xz = nu_yz and out-of-plane G as Gxz = Gyz (the table does not define the index order)"
+        verified_on: 2026-10-20
+      cte:
+        kind: instantaneous
+        axes:
+          xy: {value: 13.5}
+          z: {model: table_T, T_C: [-55, 155, 165, 250], value: [42.5, 42.5, 210, 210]}
+        unit: ppm/K
+        basis: paper_model_input
+        source: tcpmt.2025.3614186
+        locator: "p.6 Table II row 1 PCB: instantaneous CTE in-plane 1.35E-05 (all T), out-of-plane 4.25E-05 (-55, 155 C), 2.10E-04 (165, 250 C)"
+        verified_on: 2026-10-20
+      k: {value: N/A, missing: "not given"}
+    alternatives:
+      fr4_nist_cte: {property: cte, use: sensitivity (handbook FR-4 below Tg), kind: instantaneous, axes: {xy: {value: 15.8}, z: {value: 80}}, unit: ppm/K, basis: handbook, source: nist_solder_db_v4, locator: "Table 2.2.6 row Epoxy / Glass (FR4; T < Tg): x,y 15.8, z 80-90 (Korhonen et al. 1994 as cited); z stored at the lower bound 80", verified_on: 2026-10-20}
+    missing: ["k", "laminate grade not named"]
+
+  prepreg_a:
+    description: substrate prepreg A (standard loss); EM only
+    class: organic_laminate
+    tier: "1"
+    status: partial
+    valid_T_C: [20, 30]
+    properties:
+      eps_r: {model: table_f, f_GHz: [1, 10, 50], value: [4.0, 4.0, 3.7], unit: "1", basis: paper_model_input, source: ectc51909.2023.00021, locator: "p.2 Table I Prepreg A: Dk 4.0 / 4.0 / 3.7 at 1 / 10 / 50 GHz", condition: "temperature not stated", verified_on: 2026-10-20}
+      tan_delta: {model: table_f, f_GHz: [1, 10, 50], value: [0.012, 0.012, 0.013], unit: "1", basis: paper_model_input, source: ectc51909.2023.00021, locator: "p.2 Table I Prepreg A: Df 0.012 / 0.012 / 0.013", verified_on: 2026-10-20}
+    missing: ["mechanical and thermal properties"]
+
+  prepreg_b:
+    description: substrate prepreg B (low loss); EM only
+    class: organic_laminate
+    tier: "1"
+    status: partial
+    valid_T_C: [20, 30]
+    properties:
+      eps_r: {model: table_f, f_GHz: [1, 10, 50], value: [3.2, 3.2, 3.2], unit: "1", basis: paper_model_input, source: ectc51909.2023.00021, locator: "p.2 Table I Prepreg B: Dk 3.2 at 1 / 10 / 50 GHz", condition: "temperature not stated", verified_on: 2026-10-20}
+      tan_delta: {model: table_f, f_GHz: [1, 10, 50], value: [0.002, 0.003, 0.0046], unit: "1", basis: paper_model_input, source: ectc51909.2023.00021, locator: "p.2 Table I Prepreg B: Df 0.002 / 0.003 / 0.0046", verified_on: 2026-10-20}
+    missing: ["mechanical and thermal properties"]

@@ -1,0 +1,115 @@
+# Alias map (lane L2, DevLog-012). template_keys: 3D-template `material` key -> default library key (cases override
+# per part id or kind via `materials.map`). db_aliases: lower-case DB `stack_layers.material` strings -> library key
+# (exact match only; a starter set of unambiguous strings from the 2026-10-20 DB, not the full ~720-string table).
+schema: ap-sim.materials-aliases/1
+verified_on: 2026-10-20
+template_keys:
+  silicon: {key: si_crystal, rationale: "cubic Cij (Hopcroft/Hall); isotropic shortcut only on request"}
+  organic_laminate: {key: core_lowcte, rationale: "package core; low-CTE glass-fabric core is the large-package default in the DB papers (ectc51529.2024.00155, ectc51687.2025.00027); map PCB parts to pcb_board"}
+  organic_build_up: {key: abf_gl, rationale: "ABF-GL is the build-up film with E, nu and CTE(T) in two cached papers"}
+  polymer_dielectric: {key: polyimide_rdl, rationale: "RDL dielectric; JSR5100 set is the only complete E, nu, CTE polyimide-class set read"}
+  copper: {key: cu_electroplated, rationale: "most template copper parts are RDL, TSV, pillar and plane features (plated); map lid / stiffener parts (kind lid, stiffener) to cu_lid"}
+  solder: {key: sac305, rationale: "C4 and BGA default; map microbump arrays to snag by array kind"}
+  underfill: {key: underfill_cuf, rationale: "CUF set of the D3 bring-up warpage paper ectc51909.2023.00155"}
+  stainless_steel: {key: ss304, rationale: "304 is the stiffener steel with primary elastic data; map SUS430 parts to sus430"}
+  mold_compound: {key: emc, rationale: "EMC set of ectc51909.2023.00155; Poisson ratio N/A (case override required for mechanics)"}
+  tim: {key: tim_polymer, rationale: "polymer gel TIM default; indium TIM parts map to tim_indium"}
+  glass: {key: glass_en_a1, rationale: "alkali-free glass core used by the two glass-core papers with E, nu, CTE"}
+  oxide: {key: sio2_film, rationale: "template `oxide` = bond or gap-fill dielectric (TEMPLATE_FORMAT.md)"}
+  other: {key: null, rationale: "no default: `other` parts must be mapped per part in the case config"}
+db_aliases:
+  si: si_crystal
+  silicon: si_crystal
+  cu: cu_electroplated
+  copper: cu_electroplated
+  electroplated cu: cu_electroplated
+  cu (electroplated): cu_electroplated
+  cu (electroplated, sap): cu_electroplated
+  cu (sputtered): cu_electroplated
+  cu (damascene): cu_electroplated
+  sio2: sio2_film
+  oxide: sio2_film
+  sio2 (thermal): sio2_film
+  isolation oxide: sio2_film
+  polyimide: polyimide_rdl
+  emc: emc
+  mold compound: emc
+  cuf: underfill_cuf
+  capillary underfill: underfill_cuf
+  underfill: underfill_cuf
+  solder resist: solder_resist
+  solder mask: solder_resist
+  abf: abf_gl
+  ajinomoto build-up film (abf): abf_gl
+  abf gx-92 (dry film): abf_gx92p
+  abf gx92: abf_gx92p
+  snag: snag
+  ni: ni
+  au: au
+  al: al
+  ti: ti
+  ti (sputtered): ti
+  ti (pvd): ti
+  in: tim_indium
+  daf: daf
+  alkali-free glass: glass_en_a1
+  borosilicate glass: glass_bf33
+# Rule-based mapping for the remaining DB strings (lane L2 wave 2, 2026-10-20). Order matters: first match wins.
+# Match on the lower-case string: `tokens` = whole tokens (split on non [a-z0-9.+]), `contains` = substrings, `none` =
+# substrings that veto the rule, `exclusive` = no other metal token (metal_tokens) may appear (multi-metal stacks such as
+# ni/pd/au or ti/cu stay unmapped for review), `class` = DB material_class filter. Unmatched strings fall back to
+# class_defaults; anything else returns null and is listed for review in DevLog/lanes/L2-materials.md.
+metal_tokens: [cu, copper, ni, nickel, au, gold, al, aluminum, aluminium, ti, titanium, tiw, tin, sn, ag, silver, pd, w, cr, co, ta, tan, in, indium, nb, ru, mo, pt, zn, bi, sus, ss]
+db_rules:
+  - {key: si_hr, class: [silicon], contains: [high-resistivity, high resistivity, hr-si, hrsi, float-zone, float zone]}
+  - {key: si_crystal, class: [silicon], tokens: [si, silicon], contains: [silicon, " si "], none: [sio2, sin, sic, poly, oxide, nitride, glass]}
+  - {key: ss304, class: [metal, other, unspecified], contains: [stainless, sus304, sus 304, sus-304, "304"], none: [sus430, "430"]}
+  - {key: sus430, class: [metal, other, unspecified], contains: [sus430, "430"]}
+  - {key: cu_lid, class: [metal], contains: [lid, heat spreader, stiffener], tokens: [], none: [stainless, sus]}
+  - {key: cu_electroplated, class: [metal], tokens: [cu, copper], exclusive: true, none: ["; ", " / ", " + ", sio2, oxide, polymer, dielectric]}
+  - {key: ni, class: [metal], tokens: [ni, nickel], exclusive: true}
+  - {key: au, class: [metal], tokens: [au, gold], exclusive: true}
+  - {key: al, class: [metal], tokens: [al, aluminum, aluminium], exclusive: true, none: [aln, al2o3, alumina, nitride, oxide, "; "]}
+  - {key: ti, class: [metal], tokens: [ti, titanium], exclusive: true}
+  - {key: tim_indium, class: [metal, tim], tokens: [indium], contains: ["in ("], exclusive: true}
+  - {key: sac305, class: [solder], tokens: [sac, sac305, sac405, sac387], contains: [sac305, sac 305, sn-ag-cu, snagcu, sn3.0ag0.5cu, sn-3.0ag-0.5cu, sn-3ag-0.5cu]}
+  - {key: snbi, class: [solder], contains: [snbi, sn-bi, sn58bi, sn-58bi, sn57bi, sn-57bi, sn/bi, bi52, sn-52bi]}
+  - {key: snag, class: [solder], contains: [snag, sn-ag, sn/ag, sn-3.5ag, sn3.5ag, sn-1.8ag, sn-2.5ag], none: [cu]}
+  - {key: ncp, class: [underfill, adhesive, dielectric_polymer], tokens: [ncp], contains: [non-conductive paste, nonconductive paste], none: ["; "]}
+  - {key: ncf, class: [underfill, adhesive, dielectric_polymer], tokens: [ncf], contains: [non-conductive film, nonconductive film]}
+  - {key: emc, class: [underfill], contains: [muf, molded underfill, mold underfill, mold compound]}
+  - {key: underfill_c4, class: [underfill], contains: [c4 uf, c4 underfill, c4-uf, bottom cuf, flip-chip underfill], none: ["; "]}
+  - {key: underfill_cuf, class: [underfill], tokens: [uf, cuf], contains: [cuf, capillary, underfill, sidefill, uf-], none: [ncf, ncp, non-conductive]}
+  - {key: lmc, class: [mold_compound], contains: [lmc, liquid mold, liquid compound]}
+  - {key: emc, class: [mold_compound], contains: [emc, mold, epoxy molding, molding compound, encapsul], none: [si die, die with]}
+  - {key: abf_type_a, class: [dielectric_polymer], contains: [type-a]}
+  - {key: abf_gx92p, class: [dielectric_polymer], contains: [gx92, gx-92]}
+  - {key: abf_gcp, class: [dielectric_polymer], contains: [gcp]}
+  - {key: abf_gx, class: [dielectric_polymer], contains: [abf-gx, abf gx, gx-t31, gx-13, gx13]}
+  - {key: abf_gl, class: [dielectric_polymer], contains: [abf, ajinomoto, gl102, gl-102, build-up, buildup, build up]}
+  - {key: solder_resist, class: [dielectric_polymer], contains: [solder resist, solder mask, soldermask, solder-resist]}
+  - {key: bcb, class: [dielectric_polymer], contains: [bcb, cyclotene, benzocyclobutene]}
+  - {key: parylene_n, class: [dielectric_polymer], contains: [parylene-n, parylene n]}
+  - {key: pid_gtn01, class: [dielectric_polymer], contains: [gt-n01, gtn01]}
+  - {key: polyimide_rdl, class: [dielectric_polymer], tokens: [pi, pspi, psp], contains: [polyimide, hd-4100, hd4100, hd-4104, pimel]}
+  - {key: pid_eptc, class: [dielectric_polymer], tokens: [pid], contains: [photo-imageable, photoimageable, photosensitive dielectric, photo-sensitive dielectric]}
+  - {key: pcb_board, class: [organic_laminate], contains: [fr4, fr-4, pcb, motherboard, board, mother board]}
+  - {key: core_lowcte, class: [organic_laminate], tokens: [bt], contains: [core, gfrp, ccl, laminate, hl832, glass-epoxy, glass epoxy, e-705g, mcl-e]}
+  - {key: sio2_fused, class: [glass, dielectric_inorganic], contains: [fused silica, quartz, fused-silica]}
+  - {key: glass_en_a1, class: [glass], contains: [en-a1, ena1, alkali-free, alkali free, eagle, af32, af 32, aluminoborosilicate, boroaluminosilicate, alumina-borosilicate, low-cte glass]}
+  - {key: glass_bf33, class: [glass], contains: [borofloat, b33, borosilicate]}
+  - {key: low_k_beol, class: [dielectric_inorganic], contains: [low-k, low k, lowk, sicoh, ulk, ultra-low-k, elk], none: [replaces, "no porous", "; "]}
+  - {key: sicn_film, class: [dielectric_inorganic], tokens: [sicn], contains: [sicn, silicon carbonitride, silicon carbon nitride], none: ["; ", " / ", " + ", " in "]}
+  - {key: sin_film, class: [dielectric_inorganic], tokens: [sin, sinx, si3n4, sin_x], contains: [silicon nitride, si3n4, sinx, pecvd sin], none: [sion, sicn, oxynitride, "; ", " / ", " + ", " in "]}
+  - {key: sio2_film, class: [dielectric_inorganic], tokens: [sio2, oxide, teos, usg, sio, pteos], contains: [sio2, oxide, teos, silicon dioxide], none: [nitride, sin, sicn, sion, "; "]}
+  - {key: aln_film, class: [dielectric_inorganic, ceramic], tokens: [aln], contains: [aluminum nitride, aluminium nitride]}
+  - {key: silicone_adhesive, class: [adhesive, other, unspecified], contains: [silicone adhesive, silicone glue, silicone-based structural adhesive, silicone lid, silicone-based adhesive]}
+  - {key: daf, class: [adhesive], tokens: [daf], contains: [die attach film, die-attach film]}
+  - {key: die_attach_tcpmt, class: [adhesive], contains: [die attach, die-attach]}
+  - {key: epoxy_generic, class: [adhesive], contains: [epoxy], none: [conductive epoxy, conductive]}
+  - {key: tim_graphite, class: [tim], contains: [graphite, pgs, cnt]}
+  - {key: tim_indium, class: [tim], contains: [indium, " in ", metal tim], none: [liquid metal, gallium, " ga"]}
+  - {key: tim_polymer, class: [tim], contains: [gel, grease, pcm, phase change, polymer, paste, pad], none: [liquid-metal, liquid metal]}
+class_defaults:
+  silicon: si_crystal
+  mold_compound: emc

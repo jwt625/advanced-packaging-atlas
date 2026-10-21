@@ -1,0 +1,112 @@
+# Thermal interface materials, die-attach films, adhesives (lane L2, DevLog-012).
+schema: ap-sim.materials/1
+group: tims_adhesives
+verified_on: 2026-10-20
+materials:
+  tim_indium:
+    description: indium metal TIM1 (soldered sheet / paste)
+    class: tim
+    tier: mvp
+    status: partial
+    valid_T_C: [-73.15, 126.85]   # k table 200-400 K; melting 429.784 K
+    properties:
+      k:
+        model: table_T
+        T_K: [200, 223.2, 250, 273.2, 298.2, 300, 323.2, 350, 373.2, 400]
+        value: [0.897, 0.878, 0.856, 0.837, 0.818, 0.816, 0.798, 0.778, 0.762, 0.745]
+        unit: W/cmK
+        basis: measured
+        source: hpl1972
+        locator: "journal p.351, Thermal conductivity of indium, recommended values (solid, polycrystalline)"
+        verified_on: 2026-10-20
+      cte: {kind: instantaneous, value: 32.1, unit: ppm/K, basis: handbook, source: nist_solder_db_v4, locator: "Table 2.2.4 row Indium (CTE 32.1, marked * = Hwang, Proc. SMI as cited)", verified_on: 2026-10-20}
+      elastic: {value: N/A, missing: "no indium elastic source read (Indium Corp. constants document unreachable 2026-10-20)"}
+    alternatives:
+      k_ectc51687_2025_00085: {property: k, use: sensitivity (paper TIM1 k), value: 86, unit: W/mK, basis: paper_model_input, source: ectc51687.2025.00085, locator: "p.3 Table 3 row TIM1 (86 W/mK); p.2 Table 1: indium metal TIM > 80 W/m-K", verified_on: 2026-10-20}
+      k_nist_t224: {property: k, use: sensitivity (handbook), value: 82.0, unit: W/mK, basis: handbook, source: nist_solder_db_v4, locator: "Table 2.2.4 row Indium (thermal conductivity 82.0, marked *)", verified_on: 2026-10-20}
+    missing: ["E, nu, density", "TIM contact resistance is an interface property (BLT dependent), not a bulk property"]
+
+  tim_polymer:
+    description: polymer gel TIM; default = TIM B (gel) of itherm45881.2020.9190542
+    class: tim
+    tier: mvp
+    status: partial
+    valid_T_C: [-55, 150]
+    properties:
+      k: {value: 6.0, unit: W/mK, basis: paper_model_input, source: itherm45881.2020.9190542, locator: "p.2 Table 2 TIM B (gel), thermal conductivity 6.0 W/(m K)", verified_on: 2026-10-20}
+      elastic:
+        model: iso
+        E: {value: 5.8e-3, unit: GPa, basis: paper_model_input, source: ectc.2011.5898527, locator: "p.2 Table 2 row TIM1 (5.8e-3 GPa, CTE '-')", verified_on: 2026-10-20}
+        nu: {value: 0.3, basis: template, placeholder: true, note: "no source; placeholder; sensitivity required", sensitivity: {property: nu, delta: {abs: 0.05}}, verified_on: 2026-10-20}
+      cte: {kind: instantaneous, value: 149, unit: ppm/K, basis: template, range_from: "above-Tg CTE of filled silicone thermal / lid-attach adhesives read: LOCTITE ECCOBOND 3005 136 ppm/C, ECCOBOND 3003 162 ppm/C (midpoint 149)", source: [henkel_eccobond3005, henkel_eccobond3003], locator: "ECCOBOND 3005 TDS p.1 (CTE above Tg 136 ppm/C, Tg -15 C); ECCOBOND 3003 TDS p.1 (CTE above Tg 162 ppm/C, Tg 49 C)", sensitivity: {property: cte, delta: {factor: [0.3333333333, 3]}}, rationale: "CD5: compliant layer (TIM1 E 5.8 MPa, ectc.2011.5898527 Table 2), so its CTE barely loads the stack; no gel-TIM CTE source read (ectc.2011.5898527 prints '-'; Parker / Momentive / Dow pages unreadable or without CTE); silicone gels are above Tg in service, so the above-Tg values of filled silicone adhesives are the closest sourced class range", note: "not a measured value for this TIM", verified_on: 2026-10-20}
+    alternatives:
+      k_gel_a: {property: k, use: sensitivity (gel TIM A), value: 3.2, unit: W/mK, basis: paper_model_input, source: itherm45881.2020.9190542, locator: "p.2 Table 2 TIM A (gel), 3.2 W/(m K)", verified_on: 2026-10-20}
+      k_film_c: {property: k, use: sensitivity (film TIM C), value: 30.0, unit: W/mK, basis: paper_model_input, source: itherm45881.2020.9190542, locator: "p.2 Table 2 TIM C (film), 30.0 W/(m K)", verified_on: 2026-10-20}
+    missing: ["valid_T_C is this lane's choice (source gives none)", "Poisson ratio (placeholder)", "CTE (CD5 template from silicone adhesives)"]
+
+  tim_graphite:
+    description: graphite-film TIM (vertical graphite plate fillers); anisotropic k
+    class: tim
+    tier: "1"
+    status: partial
+    valid_T_C: [20, 110]
+    properties:
+      k: {value: N/A, missing: "only a bound read: '> 20 W/m-K in thickness direction' (ectc51687.2025.00085 p.2 Table 1); in-plane value not found"}
+    missing: ["k_z value, k_xy, mechanics"]
+
+  daf:
+    description: die attach film (DAF); default = ectc51529.2024.00155 Table IV row (same values in ectc51909.2023.00155 Table 8)
+    class: adhesive
+    tier: "1"
+    status: partial
+    valid_T_C: [-55, 260]
+    properties:
+      tg: {value: 40, unit: C, method: not_stated, basis: paper_model_input, source: ectc51529.2024.00155, locator: "p.3 Table IV row Die attach film (Tg 40 C)", verified_on: 2026-10-20}
+      elastic:
+        model: iso
+        E: {value: 2.9, unit: GPa, basis: paper_model_input, source: ectc51529.2024.00155, locator: "p.3 Table IV row Die attach film (2.9 GPa); ectc51909.2023.00155 p.3 Table 8 row DAF: 2,900 MPa", condition: "single modulus, temperature not stated", verified_on: 2026-10-20}
+        nu: {value: 0.3, basis: template, analog_of: "die_attach_tcpmt (die attach material)", source: tcpmt.2025.3614186, locator: "p.6 Table II row 10 Die Attach Material: nu 0.3", sensitivity: {property: nu, delta: {abs: 0.05}}, verified_on: 2026-10-20}
+      cte: {kind: instantaneous, model: bilinear_tg, below: 110, above: 150, unit: ppm/K, basis: paper_model_input, source: ectc51529.2024.00155, locator: "p.3 Table IV row Die attach film (110 / 150 ppm/C)", verified_on: 2026-10-20}
+    missing: ["Poisson ratio, k, E above Tg"]
+
+  die_attach_tcpmt:
+    description: die attach material as modelled by tcpmt.2025.3614186 (grade not named)
+    class: adhesive
+    tier: "1"
+    status: partial
+    valid_T_C: [-50, 250]
+    properties:
+      elastic: {model: iso, E: 1.8, nu: 0.3, unit: GPa, basis: paper_model_input, source: tcpmt.2025.3614186, locator: "p.6 Table II row 10 Die Attach Material (E 1.8, G 0.69 GPa, nu 0.3)", verified_on: 2026-10-20}
+      cte: {kind: instantaneous, model: table_T, T_C: [-50, -20, 20, 250], value: [60, 60, 129, 129], unit: ppm/K, basis: paper_model_input, source: tcpmt.2025.3614186, locator: "p.6 Table II row 10, instantaneous CTE 6.00E-05 (-50, -20 C), 1.29E-04 (20, 250 C)", verified_on: 2026-10-20}
+    missing: ["k"]
+
+  epoxy_generic:
+    description: generic unfilled epoxy (thermal only), as modelled by an AlN-encapsulation paper
+    class: adhesive
+    tier: "1"
+    status: partial
+    valid_T_C: [20, 110]
+    properties:
+      k: {value: 0.5, unit: W/mK, basis: paper_model_input, source: ectc51846.2026.00065, locator: "p.4 Table I: thermal conductivity of epoxy 0.5 W/m-K", verified_on: 2026-10-20}
+    missing: ["mechanics; valid_T_C is this lane's choice"]
+
+  silicone_adhesive:
+    description: silicone lid / stiffener attach adhesive (silica-filled, non-conductive); default LOCTITE ECCOBOND 3005
+    class: adhesive
+    tier: "1"
+    status: partial
+    valid_T_C: [-65, 250]   # default E table spans -65 to 150 C (gates the default); ECCOBOND 3003 alternative reaches 250 C
+    assumptions:
+      - {id: single_vendor_grade, text: "default set = one vendor grade (Henkel ECCOBOND 3005, TDS August 2012); ECCOBOND 3003 is the alternative"}
+    properties:
+      tg: {value: -15, unit: C, method: TMA, basis: datasheet, source: henkel_eccobond3005, locator: "p.1 Typical properties of cured material: Tg by TMA -15 C", verified_on: 2026-10-20}
+      elastic:
+        model: iso
+        E: {model: table_T, T_C: [-65, 25, 150], value: [7918, 358, 52], unit: MPa, basis: datasheet, source: henkel_eccobond3005, locator: "p.1 Tensile modulus, DMTA: -65 C 7,918, 25 C 358, 150 C 52 N/mm2", verified_on: 2026-10-20}
+        nu: {value: 0.3, basis: template, placeholder: true, note: "no source; placeholder; sensitivity required. Silicone elastomers are near-incompressible: sensitivity widened to -0.05 / +0.19 (up to 0.49). Candidate source not read: Mueller et al., Soft Matter 2019 (RSC c8sm02105h; HTTP 403 and HAL anti-bot block 2026-10-20), reported per search snippet as nu 0.495 for Sylgard 184", sensitivity: {property: nu, delta: {minus: 0.05, plus: 0.19}}, verified_on: 2026-10-20}
+      cte: {kind: instantaneous, model: bilinear_tg, below: 32, above: 136, Tg_C: -15, unit: ppm/K, basis: datasheet, source: henkel_eccobond3005, locator: "p.1 Coefficient of linear thermal expansion: below Tg 32, above Tg 136 ppm/C (Tg by TMA -15 C)", note: "below / above Tg values treated as instantaneous slopes", verified_on: 2026-10-20}
+      k: {value: 1, unit: W/mK, basis: template, analog_of: "LOCTITE ECCOBOND 3003 (thermally conductive silicone lid-attach grade of the same family)", source: henkel_eccobond3003, locator: "p.1 Typical properties of cured material: thermal conductivity 1 W/(m-K)", sensitivity: {property: k, delta: {factor: [0.5, 2]}}, note: "ECCOBOND 3005 is the non-conductive grade; its TDS gives no k", verified_on: 2026-10-20}
+    alternatives:
+      eccobond3003_E: {property: elastic, use: sensitivity (thermally conductive grade, flexural modulus to 250 C), model: iso, E: {model: table_T, T_C: [-65, 25, 150, 250], value: [9655, 4000, 69, 103]}, nu: {value: 0.3, basis: template, placeholder: true, note: "no source; placeholder; sensitivity required. Silicone elastomers are near-incompressible: sensitivity widened to -0.05 / +0.19 (up to 0.49). Candidate source not read: Mueller et al., Soft Matter 2019 (RSC c8sm02105h; HTTP 403 and HAL anti-bot block 2026-10-20), reported per search snippet as nu 0.495 for Sylgard 184", sensitivity: {property: nu, delta: {minus: 0.05, plus: 0.19}}, verified_on: 2026-10-20}, unit: MPa, basis: datasheet, source: henkel_eccobond3003, locator: "p.1 Flexural modulus: -65 C 9,655, 25 C 4,000, 150 C 69, 250 C 103 N/mm2", verified_on: 2026-10-20}
+      eccobond3003_cte: {property: cte, use: sensitivity (thermally conductive grade), kind: instantaneous, model: bilinear_tg, below: 39, above: 162, Tg_C: 49, unit: ppm/K, basis: datasheet, source: henkel_eccobond3003, locator: "p.1 CTE below Tg 39, above Tg 162 ppm/C; Tg by TMA 49 C", verified_on: 2026-10-20}
+    missing: ["Poisson ratio (placeholder)", "k of the default grade (analog)", "data above 150 C for the default grade (ECCOBOND 3003 alternative reaches 250 C)"]

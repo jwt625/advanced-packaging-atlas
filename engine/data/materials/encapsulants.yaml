@@ -1,0 +1,371 @@
+# Underfills and molding compounds (lane L2, DevLog-012). Proprietary classes: default basis paper_model_input
+# (DevLog-010 Decision 2), cross-paper spread as alternatives. Bilinear models use a sharp step at Tg unless width_K is
+# given (no DMA curve read). Elastic only; Prony / WLF are tier 2.
+schema: ap-sim.materials/1
+group: encapsulants
+verified_on: 2026-10-20
+materials:
+  underfill_cuf:
+    description: capillary underfill (CUF), generic; default set = ectc51909.2023.00155 (E2 gate warpage case D3 bring-up 3)
+    class: underfill
+    tier: mvp
+    status: partial
+    valid_T_C: [-55, 260]
+    assumptions:
+      - {id: single_paper_set, text: "default E / CTE / Tg set taken from one paper (ectc51909.2023.00155); other papers are alternatives (DevLog-010 Decision 2; coordinator-accepted 2026-10-20)"}
+    properties:
+      tg: {value: 160, unit: C, method: not_stated, basis: paper_model_input, source: ectc51909.2023.00155, locator: "p.3 Table 8 row CUF (Tg 160 C)", verified_on: 2026-10-20}
+      elastic:
+        model: iso
+        E: {model: bilinear_tg, below: 8900, above: 100, unit: MPa, basis: paper_model_input, source: ectc51909.2023.00155, locator: "p.3 Table 8 row CUF (E1 8,900 MPa, E2 100 MPa)", verified_on: 2026-10-20}
+        nu: {value: 0.29, basis: paper_model_input, source: tcpmt.2025.3614186, locator: "p.6 Table II rows 5-6 BGA Underfill and Bump Underfill (nu 0.29 at all temperatures)", note: "Poisson ratio from a different paper's underfill (ectc51909.2023.00155 gives none)", verified_on: 2026-10-20}
+        note: "the source modelled CUF as viscoelastic (p.3 Sec. E); elastic E1/E2 here"
+      cte:
+        kind: instantaneous
+        model: bilinear_tg
+        below: 26
+        above: 104
+        unit: ppm/K
+        basis: paper_model_input
+        source: ectc51909.2023.00155
+        locator: "p.3 Table 8 row CUF (alpha1 26, alpha2 104 ppm/C)"
+        note: "alpha1 / alpha2 treated as instantaneous slopes below / above Tg"
+        verified_on: 2026-10-20
+      k: {value: 0.95, unit: W/mK, basis: template, analog_of: "silica-filled epoxy molding compound Panasonic CV8710U (filled-epoxy analog of a CUF)", source: panasonic_cv8710, locator: "p.2 table, CV8710U thermal conductivity 0.95 W/mK, hot wire, 25 C", sensitivity: {property: k, delta: {factor: [0.5, 2]}}, note: "different class (mold compound); no underfill k read", verified_on: 2026-10-20}
+      cure_shrinkage: {value: N/A, missing: "no underfill cure shrinkage in the sources read"}
+      viscoelastic: {status: tier2_pending}
+    alternatives:
+      tcpmt2025_bump_uf_E:
+        property: elastic
+        use: sensitivity (bump underfill, E step 83-93 C)
+        model: iso
+        E: {model: table_T, T_C: [-50, 83, 93, 250], value: [9.4, 9.4, 0.08, 0.08]}
+        nu: 0.29
+        unit: GPa
+        basis: paper_model_input
+        source: tcpmt.2025.3614186
+        locator: "p.6 Table II row 6 Bump Underfill (E 9.4 GPa at -50 and 83 C, 0.08 GPa at 93 and 250 C; shear 3.64 / 0.03 GPa; nu 0.29)"
+        verified_on: 2026-10-20
+      tcpmt2025_bump_uf_cte:
+        property: cte
+        use: sensitivity (bump underfill)
+        kind: instantaneous
+        model: table_T
+        T_C: [-50, 83, 93, 250]
+        value: [31, 31, 119, 119]
+        unit: ppm/K
+        basis: paper_model_input
+        source: tcpmt.2025.3614186
+        locator: "p.6 Table II row 6 Bump Underfill, instantaneous CTE 3.10E-05 (-50, 83 C), 1.19E-04 (93, 250 C)"
+        verified_on: 2026-10-20
+      tcpmt2025_bga_uf_E:
+        property: elastic
+        use: sensitivity (board-level underfill)
+        model: iso
+        E: {model: table_T, T_C: [-50, 155, 165, 250], value: [6, 6, 0.06, 0.06]}
+        nu: 0.29
+        unit: GPa
+        basis: paper_model_input
+        source: tcpmt.2025.3614186
+        locator: "p.6 Table II row 5 BGA Underfill (E 6 / 0.06 GPa, nu 0.29)"
+        verified_on: 2026-10-20
+      tcpmt2025_bga_uf_cte:
+        property: cte
+        use: sensitivity (board-level underfill)
+        kind: instantaneous
+        model: table_T
+        T_C: [-50, 155, 165, 250]
+        value: [26, 26, 103, 103]
+        unit: ppm/K
+        basis: paper_model_input
+        source: tcpmt.2025.3614186
+        locator: "p.6 Table II row 5 BGA Underfill, instantaneous CTE 2.60E-05 / 1.03E-04"
+        verified_on: 2026-10-20
+      ectc51529_2024_00155_top_cte:
+        property: cte
+        use: sensitivity (top CUF, 120 mm package)
+        kind: instantaneous
+        model: bilinear_tg
+        below: 22
+        above: 100
+        Tg_C: 166
+        unit: ppm/K
+        basis: paper_model_input
+        source: ectc51529.2024.00155
+        locator: "p.3 Table IV row Top CUF (6.6 GPa, 22 / 100 ppm/C, Tg 166 C)"
+        verified_on: 2026-10-20
+      ectc51529_2024_00155_bottom_cte:
+        property: cte
+        use: sensitivity (bottom CUF, 120 mm package)
+        kind: instantaneous
+        model: bilinear_tg
+        below: 20
+        above: 93
+        Tg_C: 160
+        unit: ppm/K
+        basis: paper_model_input
+        source: ectc51529.2024.00155
+        locator: "p.3 Table IV row Bottom CUF (6.9 GPa, 20 / 93 ppm/C, Tg 160 C)"
+        verified_on: 2026-10-20
+      ectc51687_2025_00027_top_cte:
+        property: cte
+        use: sensitivity (top CUF)
+        kind: instantaneous
+        model: bilinear_tg
+        below: 16
+        above: 82
+        Tg_C: 166
+        unit: ppm/K
+        basis: paper_model_input
+        source: ectc51687.2025.00027
+        locator: "p.3 Table IV row Top CUF (8.5 GPa, 16 / 82 ppm/C, Tg 166 C)"
+        verified_on: 2026-10-20
+      henkel_uf8830s_E:
+        property: elastic
+        use: sensitivity (vendor TDS, storage modulus at 25 C only)
+        model: iso
+        E: 11500
+        nu: {value: N/A, missing: "not on the TDS"}
+        unit: MPa
+        basis: datasheet
+        source: henkel_uf8830s
+        locator: "p.1 Typical properties of cured material: storage modulus, DMA, @25 C 11,500 N/mm2"
+        verified_on: 2026-10-20
+      henkel_uf8830s_cte:
+        property: cte
+        use: sensitivity (vendor TDS)
+        kind: instantaneous
+        model: bilinear_tg
+        below: 25
+        above: 100
+        Tg_C: 118
+        unit: ppm/K
+        basis: datasheet
+        source: henkel_uf8830s
+        locator: "p.1 CTE, TMA: below Tg 25, above Tg 100 ppm/C; Tg by TMA 118 C (by DMA 126.5 C)"
+        verified_on: 2026-10-20
+      ectc2011_ubump_uf_cte:
+        property: cte
+        use: sensitivity (room-temperature constant)
+        kind: instantaneous
+        value: 38
+        unit: ppm/K
+        basis: paper_model_input
+        source: ectc.2011.5898527
+        locator: "p.2 Table 2 row ubump UF (E 6 GPa, CTE 38, room temperature)"
+        verified_on: 2026-10-20
+      nist_fp4526_E:
+        property: elastic
+        use: sensitivity (handbook underfill E(T), Hysol FP4526)
+        model: iso
+        E: {model: table_T, T_C: [-73, 25, 52, 77, 102, 127], value: [9.78, 9.51, 9.23, 8.82, 7.72, 5.37]}
+        nu: 0.3
+        unit: GPa
+        basis: handbook
+        source: nist_solder_db_v4
+        locator: "Table 1.12 row Hysol FP4526 Underfill (Wong and Matsunaga, NEPCON West 1995 as cited); CTE 33.0 at all listed T"
+        verified_on: 2026-10-20
+    missing:
+      - "k, cp, density of underfill (no source read)"
+      - "Tg method of the default set not stated by the source"
+      - "viscoelastic (Prony + shift) data: tier 2"
+
+  emc:
+    description: epoxy molding compound (granular / compression), generic; default E, CTE, Tg set = ectc51909.2023.00155 granular EMC
+    class: mold_compound
+    tier: mvp
+    status: partial
+    valid_T_C: [-55, 260]
+    assumptions:
+      - {id: single_paper_set, text: "default E / CTE / Tg set taken from one paper (ectc51909.2023.00155); other papers are alternatives (DevLog-010 Decision 2; coordinator-accepted 2026-10-20)"}
+    properties:
+      tg: {value: 140, unit: C, method: not_stated, basis: paper_model_input, source: ectc51909.2023.00155, locator: "p.3 Table 8 row EMC (Tg 140 C)", verified_on: 2026-10-20}
+      elastic:
+        model: iso
+        E: {model: bilinear_tg, below: 18000, above: 400, unit: MPa, basis: paper_model_input, source: ectc51909.2023.00155, locator: "p.3 Table 8 row EMC (E1 18,000 MPa, E2 400 MPa)", verified_on: 2026-10-20}
+        nu: {value: 0.3, basis: template, placeholder: true, note: "no source; placeholder; sensitivity required", sensitivity: {property: nu, delta: {abs: 0.05}}, verified_on: 2026-10-20}
+      cte:
+        kind: instantaneous
+        model: bilinear_tg
+        below: 7
+        above: 25
+        unit: ppm/K
+        basis: paper_model_input
+        source: ectc51909.2023.00155
+        locator: "p.3 Table 8 row EMC (alpha1 7, alpha2 25 ppm/C)"
+        verified_on: 2026-10-20
+      k: {value: 0.95, unit: W/mK, basis: template, analog_of: "Panasonic CV8710U (another EMC grade; datasheet value)", source: panasonic_cv8710, locator: "p.2 table, CV8710U thermal conductivity 0.95 W/mK, hot wire, 25 C", sensitivity: {property: k, delta: {factor: [0.5, 2]}}, note: "k of a different grade than the default E / CTE set", verified_on: 2026-10-20}
+      density: {value: 1.98, unit: g/cm3, basis: datasheet, source: panasonic_cv8710, locator: "p.2 table, CV8710U specific gravity 1.98 (JIS K6911, 25 C)", note: "different grade than the default E / CTE set", verified_on: 2026-10-20}
+      eps_r: {value: 4.0, f_GHz: 0.001, unit: "1", basis: datasheet, source: panasonic_cv8710, locator: "p.2 table, CV8710U dielectric constant 4.0 at 1 MHz", verified_on: 2026-10-20}
+      tan_delta: {value: 0.010, f_GHz: 0.001, unit: "1", basis: datasheet, source: panasonic_cv8710, locator: "p.2 table, CV8710U dissipation factor 0.010 at 1 MHz", verified_on: 2026-10-20}
+      cure_shrinkage:
+        value: 0.16
+        unit: "%"
+        kind: not_stated
+        basis: paper_model_input
+        source: ectc51909.2023.00155
+        locator: "p.3 Table 8 row EMC, column 'Cure Shrinkage (%)': 0.16 (volumetric or linear not stated)"
+        note: "same table prints 21 % for the 'Insulation layer' row; not used"
+        verified_on: 2026-10-20
+      viscoelastic: {status: tier2_pending, pending: [j.ijadhadh.2011.10.007]}
+    alternatives:
+      ectc51529_2024_00155_E:
+        property: elastic
+        use: sensitivity (single modulus)
+        model: iso
+        E: 13
+        nu: {value: N/A, missing: "not given"}
+        unit: GPa
+        basis: paper_model_input
+        source: ectc51529.2024.00155
+        locator: "p.3 Table IV row EMC (13 GPa, 7 / 25 ppm/C, Tg 160 C)"
+        verified_on: 2026-10-20
+      ectc51529_2024_00155_cte:
+        property: cte
+        use: sensitivity
+        kind: instantaneous
+        model: bilinear_tg
+        below: 7
+        above: 25
+        Tg_C: 160
+        unit: ppm/K
+        basis: paper_model_input
+        source: ectc51529.2024.00155
+        locator: "p.3 Table IV row EMC"
+        verified_on: 2026-10-20
+      ectc51687_2025_00027_cte:
+        property: cte
+        use: sensitivity
+        kind: instantaneous
+        model: bilinear_tg
+        below: 10
+        above: 46
+        Tg_C: 174
+        unit: ppm/K
+        basis: paper_model_input
+        source: ectc51687.2025.00027
+        locator: "p.3 Table IV row EMC (13 GPa, 10 / 46 ppm/C, Tg 174 C)"
+        verified_on: 2026-10-20
+      cv8710u_E:
+        property: elastic
+        use: sensitivity (vendor TDS flexural modulus at 25 and 260 C, applied as a step at Tg 160 C)
+        model: iso
+        E: {model: bilinear_tg, below: 24, above: 0.7, Tg_C: 160}
+        nu: {value: N/A, missing: "not on the TDS"}
+        unit: GPa
+        basis: datasheet
+        source: panasonic_cv8710
+        locator: "p.2 table, CV8710U flexural modulus 24 GPa @25 C, 0.7 GPa @260 C (JIS K6911); Tg 160 C (TMA)"
+        verified_on: 2026-10-20
+      cv8710u_mold_shrinkage:
+        property: cure_shrinkage
+        use: sensitivity (vendor TDS mold shrinkage of another grade)
+        value: 0.21
+        unit: "%"
+        kind: linear
+        basis: datasheet
+        source: panasonic_cv8710
+        locator: "p.2 table, CV8710U mold shrinkage 0.21 % (JIS K6911, 25 C)"
+        note: "mold shrinkage is a dimensional (linear) change of the molded part versus the mold; JIS K6911 definition not read; may include thermal contraction from the molding temperature, so not a pure cure shrinkage"
+        verified_on: 2026-10-20
+      cv8710u_cte:
+        property: cte
+        use: sensitivity (vendor TDS)
+        kind: instantaneous
+        model: bilinear_tg
+        below: 9
+        above: 36
+        Tg_C: 160
+        unit: ppm/K
+        basis: datasheet
+        source: panasonic_cv8710
+        locator: "p.2 table, CV8710U CTE-1 9 (<Tg), CTE-2 36 (>Tg) ppm/C, TMA; Tg 160 C (TMA)"
+        verified_on: 2026-10-20
+    missing:
+      - "Poisson ratio (no source): mechanics with emc needs a case override with provenance"
+      - "ectc51909.2023.00175 Sec. III text: EMC E 19 / 1.6 GPa below / above Tg, DOE Tg 145-175 C, CTE 7-12 / 22-46 ppm/C (ranges, no single set; not stored)"
+      - "viscoelastic Prony + WLF (Sadeghinia 2012, j.ijadhadh.2011.10.007) pending download"
+
+  lmc:
+    description: liquid molding compound for MR-MUF HBM stacks; default LMC A of ectc51909.2023.00151
+    class: mold_compound
+    tier: "1"
+    status: partial
+    valid_T_C: [-55, 260]
+    assumptions:
+      - {id: single_paper_set, text: "default E / CTE / Tg set taken from one paper (ectc51909.2023.00151); other papers are alternatives (DevLog-010 Decision 2; coordinator-accepted 2026-10-20)"}
+    properties:
+      tg: {value: 186, unit: C, method: not_stated, basis: paper_model_input, source: ectc51909.2023.00151, locator: "p.2 Table I column LMC A", verified_on: 2026-10-20}
+      elastic:
+        model: iso
+        E: {value: 15, unit: GPa, condition: "room temperature only", basis: paper_model_input, source: ectc51909.2023.00151, locator: "p.2 Table I column LMC A, Modulus@R.T 15 GPa", verified_on: 2026-10-20}
+        nu: {value: 0.3, basis: template, placeholder: true, note: "no source; placeholder; sensitivity required", sensitivity: {property: nu, delta: {abs: 0.05}}, verified_on: 2026-10-20}
+      cte:
+        kind: instantaneous
+        model: bilinear_tg
+        below: 5
+        above: 18
+        unit: ppm/K
+        basis: paper_model_input
+        source: ectc51909.2023.00151
+        locator: "p.2 Table I column LMC A (CTE a1 5, a2 18 ppm/C)"
+        verified_on: 2026-10-20
+      k: {value: N/A, missing: "not given"}
+    alternatives:
+      lmc_b_cte: {property: cte, use: sensitivity (LMC B), kind: instantaneous, model: bilinear_tg, below: 5, above: 16, Tg_C: 182, unit: ppm/K, basis: paper_model_input, source: ectc51909.2023.00151, locator: "p.2 Table I column LMC B (Tg 182, 5 / 16, 25 GPa)", verified_on: 2026-10-20}
+      lmc_c_cte: {property: cte, use: sensitivity (LMC C), kind: instantaneous, model: bilinear_tg, below: 8, above: 21, Tg_C: 152, unit: ppm/K, basis: paper_model_input, source: ectc51909.2023.00151, locator: "p.2 Table I column LMC C (Tg 152, 8 / 21, 12.5 GPa)", verified_on: 2026-10-20}
+    missing: ["E above Tg, Poisson ratio, k"]
+
+  ncp:
+    description: non-conductive paste (NCP, pre-applied for thermo-compression bonding); default NCP-C (epoxy) of ectc51906.2022.00106 Table I
+    class: underfill
+    tier: "1"
+    status: partial
+    valid_T_C: [-55, 170]   # source gives Tg (DMA) > 170 C; constants are not applied above it
+    assumptions:
+      - {id: single_paper_set, text: "default set = one paper table (ectc51906.2022.00106 Table I, citing its ref [3]); NCP-A / NCP-B are alternatives"}
+    properties:
+      elastic:
+        model: iso
+        E: {value: 10, unit: GPa, basis: paper_model_input, source: ectc51906.2022.00106, locator: "p.2 Table I column NCP-C (epoxy, filler 60 wt %, Tg (DMA) > 170 C, CTE 30 ppm, modulus 10 GPa), citing its ref [3]", condition: "temperature not stated; T dependence not applied", verified_on: 2026-10-20}
+        nu: {value: 0.29, basis: template, analog_of: "underfill (tcpmt.2025.3614186 bump underfill nu 0.29)", source: tcpmt.2025.3614186, locator: "p.6 Table II row 6 Bump Underfill: nu 0.29", sensitivity: {property: nu, delta: {abs: 0.05}}, verified_on: 2026-10-20}
+      cte: {kind: instantaneous, value: 30, unit: ppm/K, basis: paper_model_input, source: ectc51906.2022.00106, locator: "p.2 Table I column NCP-C: CTE 30 ppm", verified_on: 2026-10-20}
+      k: {value: 0.95, unit: W/mK, basis: template, analog_of: "Panasonic CV8710U (silica-filled epoxy molding compound)", source: panasonic_cv8710, locator: "p.2 table, CV8710U thermal conductivity 0.95 W/mK, hot wire, 25 C", sensitivity: {property: k, delta: {factor: [0.5, 2]}}, verified_on: 2026-10-20}
+    alternatives:
+      ncp_a_E: {property: elastic, use: sensitivity (NCP-A, acryl base), model: iso, E: 7, nu: {value: 0.29, basis: template, analog_of: "underfill nu 0.29", source: tcpmt.2025.3614186, locator: "p.6 Table II row 6", sensitivity: {property: nu, delta: {abs: 0.05}}, verified_on: 2026-10-20}, unit: GPa, basis: paper_model_input, source: ectc51906.2022.00106, locator: "p.2 Table I column NCP-A (acryl, filler 55 wt %, CTE 30, modulus 7 GPa)", verified_on: 2026-10-20}
+      ncp_b_cte: {property: cte, use: sensitivity (NCP-B, acryl base), kind: instantaneous, value: 40, unit: ppm/K, basis: paper_model_input, source: ectc51906.2022.00106, locator: "p.2 Table I column NCP-B (acryl, filler 60 wt %, CTE 40, modulus 7 GPa)", verified_on: 2026-10-20}
+    missing: ["Tg value (only '> 170 C' printed)", "E above Tg"]
+
+  ncf:
+    description: non-conductive film (NCF) for HBM TC bonding (placeholder; no property values found)
+    class: underfill
+    tier: "1"
+    status: placeholder
+    valid_T_C: [-55, 260]
+    properties:
+      elastic: {value: N/A, missing: "NCF papers in the cache (ectc51529.2024.00064, ectc51529.2024.00153) give no E / CTE / k values"}
+      cte: {value: N/A, missing: "no source"}
+      k: {value: N/A, missing: "no source"}
+    missing: ["all properties"]
+
+  underfill_c4:
+    inherits: underfill_cuf
+    description: C4 / flip-chip (interposer-to-substrate) capillary underfill; default = 'Bottom CUF' of ectc51529.2024.00155 (same row in ectc51687.2025.00027); properties without a C4-specific source are inherited from underfill_cuf and marked `inherited_from`
+    class: underfill
+    tier: "1"
+    status: partial
+    valid_T_C: [-55, 260]
+    assumptions:
+      - {id: single_paper_set, text: "default E (below Tg), CTE and Tg = one paper row (ectc51529.2024.00155 Bottom CUF); Xilinx C4 UF (ectc.2011.5898527) is the alternative"}
+      - {id: above_tg_modulus_inherited, text: "the source gives one modulus; the above-Tg modulus is inherited from underfill_cuf (ectc51909.2023.00155 E2 100 MPa)"}
+    properties:
+      tg: {value: 160, unit: C, method: not_stated, basis: paper_model_input, source: ectc51529.2024.00155, locator: "p.3 Table IV row Bottom CUF: Tg 160 C (same in ectc51687.2025.00027 p.3 Table IV)", verified_on: 2026-10-20}
+      elastic:
+        model: iso
+        E: {model: bilinear_tg, below: 6.9, above: 0.1, unit: GPa, basis: paper_model_input, source: [ectc51529.2024.00155, ectc51909.2023.00155], locator: "below Tg: ectc51529.2024.00155 p.3 Table IV row Bottom CUF, modulus 6.9 GPa; above Tg: inherited from underfill_cuf, ectc51909.2023.00155 p.3 Table 8 CUF E2 100 MPa", inherited_from: "underfill_cuf (above-Tg value only)", verified_on: 2026-10-20}
+        nu: {value: 0.29, basis: paper_model_input, source: tcpmt.2025.3614186, locator: "p.6 Table II rows 5-6 underfills: nu 0.29", inherited_from: underfill_cuf, verified_on: 2026-10-20}
+      cte: {kind: instantaneous, model: bilinear_tg, below: 20, above: 93, unit: ppm/K, basis: paper_model_input, source: ectc51529.2024.00155, locator: "p.3 Table IV row Bottom CUF: CTE a1 20, a2 93 ppm/C; same in ectc51687.2025.00027 p.3 Table IV", verified_on: 2026-10-20}
+    alternatives:
+      xilinx_c4uf_E: {property: elastic, use: sensitivity (Xilinx C4 UF, room temperature), model: iso, E: 8.5, nu: {value: 0.29, basis: paper_model_input, source: tcpmt.2025.3614186, locator: "p.6 Table II underfills nu 0.29", inherited_from: underfill_cuf, verified_on: 2026-10-20}, unit: GPa, basis: paper_model_input, source: ectc.2011.5898527, locator: "p.2 Table 2 row C4 UF (Young's modulus 8.5 GPa, CTE 32 ppm; room-temperature properties)", condition: "room temperature; T dependence not applied", verified_on: 2026-10-20}
+      xilinx_c4uf_cte: {property: cte, use: sensitivity (Xilinx C4 UF, room temperature), kind: instantaneous, value: 32, unit: ppm/K, basis: paper_model_input, source: ectc.2011.5898527, locator: "p.2 Table 2 row C4 UF (CTE 32 ppm)", verified_on: 2026-10-20}
+    missing: ["k, cure shrinkage inherited from underfill_cuf (k is a template analog there)", "Tg method not stated"]

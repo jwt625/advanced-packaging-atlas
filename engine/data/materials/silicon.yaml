@@ -1,0 +1,199 @@
+# Single-crystal silicon (lane L2, DevLog-012). Stored units are the source units; the loader converts to SI.
+schema: ap-sim.materials/1
+group: silicon
+verified_on: 2026-10-20
+materials:
+  si_crystal:
+    description: single-crystal Si, undoped or lightly doped (bulk die, interposer, bridge, HBM core dies)
+    class: semiconductor
+    tier: mvp
+    status: partial
+    template_keys: [silicon]
+    valid_T_C: [-73.15, 326.85]   # 200-600 K: span of the CTE (Swenson) and k (Ho-Powell-Liley) tables used here
+    properties:
+      density:
+        value: 2330
+        unit: kg/m3
+        basis: measured
+        source: hopcroft2010
+        locator: "p.7 (journal p.235) Sec. XI, density used in Eq. 17, citing [12] Hall"
+        primary_cited: "[12] J. J. Hall, Phys. Rev. 161, 756 (1967) (not read)"
+        condition: room temperature
+        verified_on: 2026-10-20
+      cp:
+        value: N/A
+        missing: "no primary Si specific-heat source read 2026-10-20"
+      k:
+        model: table_T
+        T_K: [200, 223.2, 250, 273.2, 298.2, 300, 323.2, 350, 373.2, 400, 473.2, 500, 573.2, 600]
+        value: [2.64, 2.25, 1.91, 1.68, 1.49, 1.48, 1.33, 1.19, 1.08, 0.989, 0.814, 0.762, 0.651, 0.619]
+        unit: W/cmK
+        basis: measured
+        source: hpl1972
+        locator: "journal p.394, Thermal conductivity of silicon, recommended values (solid)"
+        condition: "high-purity Si; >= 300 K recommended, +-5 % 300-1000 K; < 300 K 'merely typical values' (Remarks)"
+        verified_on: 2026-10-20
+      elastic:
+        model: cubic
+        C11: 165.6
+        C12: 63.9
+        C44: 79.5
+        unit: GPa
+        basis: measured
+        source: hopcroft2010
+        locator: "p.4 (journal p.232) Table III, values for 298 K from Hall [12]; s11 7.68, s12 -2.14, s44 12.6 (1e-12/Pa) in the same table"
+        primary_cited: "[12] J. J. Hall, Phys. Rev. 161, 756 (1967) (pending physrev.161.756)"
+        condition: "298 K; T dependence not applied (TCE about -64 ppm/C at 25 C and -75 ppm/C at 125 C, p.7 Sec. X; Table IV p.6)"
+        note: "Eq. 7 (p.5) prints the same matrix with 165.7 / 63.9 / 79.6; the Table III row is used. Isotropic shortcuts are derived on request (opts.elastic); DB papers model Si with E = 120-170 GPa (R4 sec. 3.1)"
+        verified_on: 2026-10-20
+      cte:
+        kind: instantaneous
+        Tref_K: 293.15
+        model: table_T
+        T_K: [200, 220, 240, 260, 280, 293.15, 300, 325, 350, 375, 400, 450, 500, 550, 600]
+        value: [1.406, 1.715, 1.986, 2.223, 2.432, 2.555, 2.618, 2.816, 2.984, 3.128, 3.251, 3.453, 3.610, 3.737, 3.844]
+        unit: ppm/K
+        basis: measured
+        source: swenson1983
+        locator: "journal p.181 Table 2, alpha' = (L20)^-1 (dL/dT); > 300 K from Eq. (1) with Table 1, <= 300 K from Lyon et al."
+        condition: "evaluated recommended values; Tref = 293.15 K (dL/L20 = 0 row)"
+        check:
+          T_K: [200, 220, 240, 260, 280, 293.15, 300, 325, 350, 375, 400, 450, 500, 550, 600]
+          dL_L_1e6: [-189.7, -158.5, -121.4, -79.3, -32.8, 0, 17.7, 85.7, 158.3, 234.7, 315, 482, 659, 843, 1033]
+          locator: "journal p.181 Table 2, column dL/L20 (1e-6)"
+        verified_on: 2026-10-20
+      eps_r:
+        model: table_T
+        T_K: [150, 200, 250, 300, 350, 370]
+        value: [11.50, 11.54, 11.60, 11.665, 11.73, 11.75]
+        unit: "1"
+        basis: measured
+        source: krupka2006
+        locator: "p.3 (journal p.3997) Fig. 2, dashed curve, digitized 2026-10-20 (reading uncertainty about +-0.005)"
+        condition: "float-zone high-resistivity p-type Si, 6.62-11.5 GHz; 'the relative permittivity [is] independent of frequency' (p.3 text)"
+        verified_on: 2026-10-20
+      tan_delta:
+        model: conductivity
+        basis: measured
+        source: krupka2006
+        locator: "p.1 Eqs. (1)-(2): tan_d = tan_d_d + sigma / (omega eps0 eps_r); losses of HR-Si conductivity-dominated (abstract)"
+        note: "lattice term tan_d_d not included (not given as a number for > 25 K); sigma must be set per wafer variant"
+        verified_on: 2026-10-20
+      sigma:
+        value: N/A
+        missing: "wafer resistivity is a per-part spec (standard vs HR-Si); set sigma in the case overrides"
+    alternatives:
+      iso_tcpmt2025_3614186:
+        property: elastic
+        use: sensitivity (paper isotropic Si)
+        model: iso
+        E: 131
+        nu: 0.3
+        unit: GPa
+        basis: paper_model_input
+        source: tcpmt.2025.3614186
+        locator: "p.6 Table II row 9 Silicon Die (shear 50.38 GPa), all temperatures"
+        verified_on: 2026-10-20
+      iso_tcpmt2025_3538554:
+        property: elastic
+        use: sensitivity (paper isotropic Si)
+        model: iso
+        E: 170.0
+        nu: 0.28
+        unit: GPa
+        basis: paper_model_input
+        source: tcpmt.2025.3538554
+        locator: "p.7 Table IV row Si"
+        verified_on: 2026-10-20
+      iso_nist_solder_db_t1_12:
+        property: elastic
+        use: sensitivity (handbook isotropic Si chip)
+        model: iso
+        E: 162
+        nu: 0.22
+        unit: GPa
+        basis: handbook
+        source: nist_solder_db_v4
+        locator: "Table 1.12 row Silicon chip (-73, 27, 127 C all 162 GPa, nu 0.22), from Wong and Matsunaga, NEPCON West 1995"
+        verified_on: 2026-10-20
+      cte_ectc51529_2024_00155:
+        property: cte
+        use: sensitivity (paper constant Si CTE)
+        kind: instantaneous
+        value: 3.2
+        unit: ppm/K
+        basis: paper_model_input
+        source: ectc51529.2024.00155
+        locator: "p.3 Table IV row Silicon (CTE a1 = a2 = 3.2)"
+        verified_on: 2026-10-20
+      cte_ectc2011_5898527:
+        property: cte
+        use: sensitivity (paper constant Si CTE)
+        kind: instantaneous
+        value: 3
+        unit: ppm/K
+        basis: paper_model_input
+        source: ectc.2011.5898527
+        locator: "p.2 Table 2 row Si (room-temperature properties)"
+        verified_on: 2026-10-20
+      cte_tcpmt2025_3614186:
+        property: cte
+        use: sensitivity (paper constant Si CTE)
+        kind: instantaneous
+        value: 2.80
+        unit: ppm/K
+        basis: paper_model_input
+        source: tcpmt.2025.3614186
+        locator: "p.6 Table II row 9 Silicon Die, instantaneous CTE 2.80E-06, all temperatures"
+        verified_on: 2026-10-20
+      k_ectc51687_2025_00085:
+        property: k
+        use: sensitivity (paper linear k(T) model for SoC / HBM dies)
+        model: linear_T
+        a: 117.5
+        b: -0.42
+        T0_C: 100
+        range_C: [20, 105]
+        unit: W/mK
+        basis: paper_model_input
+        source: ectc51687.2025.00085
+        locator: "p.3 Table 3 rows SoC die and HBM die: k = 117.5 - 0.42 x (T[C] - 100)"
+        note: "range_C = span of that paper's thermal model (inlet 20 C, max Tj 104.7 C, Table 4); the paper states no validity range"
+        verified_on: 2026-10-20
+    missing:
+      - "cp: no source read"
+      - "Cij(T): Bourgeois coefficients (Hopcroft Table IV, p.6) not applied; reference temperature of the polynomial not printed in Hopcroft"
+      - "Glassbrenner-Slack 1964 k(T) (physrev.134.a1058) and Okada-Tokumaru 1984 alpha(T) (1.333965) pending download; evaluated compilations used instead"
+
+  si_hr:
+    inherits: si_crystal
+    description: high-resistivity float-zone Si (EM variant of si_crystal; mechanical and thermal data inherited)
+    class: semiconductor
+    tier: "1"
+    status: partial
+    valid_T_C: [-73.15, 326.85]
+    properties:
+      tan_delta:
+        value: 0.001866
+        f_GHz: 6.685
+        range_C: [20, 30]
+        unit: "1"
+        basis: measured
+        source: krupka2006
+        locator: "p.3 (journal p.3997) Table I row TE011, 6.685 GHz, sample #1 (d = 15.455 mm)"
+        condition: "room-temperature measurement (temperature not stated more precisely; range_C 20-30 C is this lane's reading of 'room temperature'); sample resistivity not stated in the text; losses rise above 310 K (p.4)"
+        verified_on: 2026-10-20
+    alternatives:
+      tan_delta_he111:
+        property: tan_delta
+        use: sensitivity (second mode, same sample)
+        value: 0.001901
+        f_GHz: 6.797
+        range_C: [20, 30]
+        unit: "1"
+        basis: measured
+        source: krupka2006
+        locator: "p.3 Table I row HE111, 6.797 GHz"
+        verified_on: 2026-10-20
+    missing:
+      - "resistivity of the Krupka samples not stated in the text; HR-Si vendor resistivity spec (Okmetic) not read"

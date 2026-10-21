@@ -1,0 +1,71 @@
+# RDL polymer dielectrics: polyimide, PBO-class, BCB, parylene, photo-imageable dielectrics (lane L2, DevLog-012).
+schema: ap-sim.materials/1
+group: dielectrics
+verified_on: 2026-10-20
+materials:
+  polyimide_rdl:
+    description: RDL polymer dielectric (polyimide class); default = JSR5100 set of tcpmt.2025.3538554 (only complete E, nu, CTE set read)
+    class: dielectric_polymer
+    tier: mvp
+    status: partial
+    valid_T_C: [-55, 260]
+    assumptions:
+      - {id: single_paper_set, text: "default E / CTE / Tg set taken from one paper (tcpmt.2025.3538554); other papers are alternatives (DevLog-010 Decision 2; coordinator-accepted 2026-10-20)"}
+    properties:
+      elastic: {model: iso, E: 2.5, nu: 0.35, unit: GPa, basis: paper_model_input, source: tcpmt.2025.3538554, locator: "p.7 Table IV row JSR5100 (E 2.5 GPa, nu 0.35, CTE 54 ppm/C)", condition: "temperature not stated; T dependence not applied", verified_on: 2026-10-20}
+      cte: {kind: instantaneous, value: 54.0, unit: ppm/K, basis: paper_model_input, source: tcpmt.2025.3538554, locator: "p.7 Table IV row JSR5100", verified_on: 2026-10-20}
+      k: {value: 0.15, unit: W/mK, basis: template, analog_of: "effective cross-plane k of an RDL (Cu + polymer, series path dominated by the polymer)", source: ectc51846.2026.00065, locator: "p.4 Table I: effective thermal conductivity of RDL, cross-plane 0.15 W/m-K (in-plane 56.15)", sensitivity: {property: k, delta: {factor: [0.5, 2]}}, note: "composite value used as a polymer analog; the polymer itself is not named", verified_on: 2026-10-20}
+      eps_r: {value: N/A, missing: "no polyimide Dk read"}
+    alternatives:
+      hd4100_E: {property: elastic, use: sensitivity (HD-4100 polyimide, vendor value cited by the paper), model: iso, E: 3.4, nu: {value: N/A, missing: "not given"}, unit: GPa, basis: paper_model_input, source: ectc51529.2024.00392, locator: "p.3 Table II column Polyimide HD-4100 (E 3.4 GPa, CTE 35 ppm/K, elongation 45 %; its ref [14])", verified_on: 2026-10-20}
+      hd4100_cte: {property: cte, use: sensitivity (HD-4100), kind: instantaneous, value: 35, unit: ppm/K, basis: paper_model_input, source: ectc51529.2024.00392, locator: "p.3 Table II column Polyimide HD-4100", verified_on: 2026-10-20}
+      ectc51529_2024_00155_E: {property: elastic, use: sensitivity (interposer RDL 'Dielectric'), model: iso, E: 3.2, nu: {value: N/A, missing: "not given"}, unit: GPa, basis: paper_model_input, source: ectc51529.2024.00155, locator: "p.3 Table IV row Dielectric (3.2 GPa, 65 / 65 ppm/C)", verified_on: 2026-10-20}
+      ectc51529_2024_00155_cte: {property: cte, use: sensitivity, kind: instantaneous, value: 65, unit: ppm/K, basis: paper_model_input, source: ectc51529.2024.00155, locator: "p.3 Table IV row Dielectric", verified_on: 2026-10-20}
+    missing: ["k, Dk / Df, Tg of the default set", "HD MicroSystems bulletins not found publicly (R4)"]
+
+  bcb:
+    description: benzocyclobutene (Cyclotene 4000 series)
+    class: dielectric_polymer
+    tier: "1"
+    status: partial
+    valid_T_C: [-55, 250]   # thermal budget 250 C in the source
+    properties:
+      elastic: {model: iso, E: 2.9, nu: {value: 0.35, basis: template, analog_of: "polyimide_rdl (JSR5100, spin-on RDL polymer)", source: tcpmt.2025.3538554, locator: "p.7 Table IV row JSR5100: nu 0.35", sensitivity: {property: nu, delta: {abs: 0.05}}, verified_on: 2026-10-20}, unit: GPa, basis: paper_model_input, source: ectc51529.2024.00392, locator: "p.3 Table II column BCB Cyclotene 4000 (CTE 42 ppm/K, E 2.9 GPa, thermal budget 250 C; its ref [14])", verified_on: 2026-10-20}
+      cte: {kind: instantaneous, value: 42, unit: ppm/K, basis: paper_model_input, source: ectc51529.2024.00392, locator: "p.3 Table II column BCB Cyclotene 4000", verified_on: 2026-10-20}
+    missing: ["Poisson ratio, k, Dk / Df (DuPont data sheet located by R4, not read)"]
+
+  parylene_n:
+    description: parylene-N (vapor-deposited)
+    class: dielectric_polymer
+    tier: "1"
+    status: partial
+    valid_T_C: [-55, 110]   # thermal budget 110 C in the source
+    properties:
+      elastic: {model: iso, E: 2.4, nu: {value: 0.35, basis: template, analog_of: "polyimide_rdl (JSR5100, polymer dielectric)", source: tcpmt.2025.3538554, locator: "p.7 Table IV row JSR5100: nu 0.35", sensitivity: {property: nu, delta: {abs: 0.05}}, verified_on: 2026-10-20}, unit: GPa, basis: paper_model_input, source: ectc51529.2024.00392, locator: "p.3 Table II column Parylene-N (CTE 69 ppm/K, E 2.4 GPa, thermal budget 110 C)", verified_on: 2026-10-20}
+      cte: {kind: instantaneous, value: 69, unit: ppm/K, basis: paper_model_input, source: ectc51529.2024.00392, locator: "p.3 Table II column Parylene-N", verified_on: 2026-10-20}
+    missing: ["Poisson ratio, k, Dk / Df"]
+
+  pid_eptc:
+    description: photo-imageable dielectric (PID) of an RDL-FPC hybrid substrate
+    class: dielectric_polymer
+    tier: "1"
+    status: partial
+    valid_T_C: [-55, 260]
+    properties:
+      tg: {value: 200, unit: C, method: not_stated, basis: paper_model_input, source: eptc67330.2025.11392176, locator: "p.3 Table II column PID (Tg 200 C)", verified_on: 2026-10-20}
+      elastic: {model: iso, E: 3.5, nu: {value: 0.35, basis: template, analog_of: "polyimide_rdl (JSR5100, RDL polymer dielectric)", source: tcpmt.2025.3538554, locator: "p.7 Table IV row JSR5100: nu 0.35", sensitivity: {property: nu, delta: {abs: 0.05}}, verified_on: 2026-10-20}, unit: GPa, basis: paper_model_input, source: eptc67330.2025.11392176, locator: "p.3 Table II column PID (Young's modulus 3.5 GPa)", verified_on: 2026-10-20}
+      cte: {kind: instantaneous, value: 65, unit: ppm/K, basis: derived, source: eptc67330.2025.11392176, locator: "p.3 Table II column PID: CTE '60-70' ppm/C", note: "midpoint of the printed range (this lane)", verified_on: 2026-10-20}
+      eps_r: {value: 2.9, f_GHz: 25, unit: "1", basis: paper_model_input, source: eptc67330.2025.11392176, locator: "p.3 Table II column PID: Dk 2.9 @ 25 GHz", verified_on: 2026-10-20}
+      tan_delta: {value: 0.002, f_GHz: 25, unit: "1", basis: paper_model_input, source: eptc67330.2025.11392176, locator: "p.3 Table II column PID: Df 0.002 @ 25 GHz", verified_on: 2026-10-20}
+    missing: ["Poisson ratio, k"]
+
+  pid_gtn01:
+    description: JSR GT-N01 filler-free spin-on low-loss dielectric (EM properties only)
+    class: dielectric_polymer
+    tier: "1"
+    status: partial
+    valid_T_C: [20, 30]
+    properties:
+      eps_r: {value: 2.8, f_GHz: 10, unit: "1", basis: paper_model_input, source: tcpmt.2025.3610036, locator: "p.4 Table II column JSR GT-N01: Dk 2.8 (10 GHz)", condition: "temperature not stated", verified_on: 2026-10-20}
+      tan_delta: {value: 0.005, f_GHz: 10, unit: "1", basis: paper_model_input, source: tcpmt.2025.3610036, locator: "p.4 Table II column JSR GT-N01: Df '< 0.005' (10 GHz)", note: "printed as an upper bound; stored at the bound", verified_on: 2026-10-20}
+    missing: ["mechanical and thermal properties"]

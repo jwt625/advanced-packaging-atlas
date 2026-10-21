@@ -1,0 +1,183 @@
+# Substrate build-up films, solder resist, substrate dielectrics (lane L2, DevLog-012).
+schema: ap-sim.materials/1
+group: buildup
+verified_on: 2026-10-20
+materials:
+  abf_gl:
+    description: Ajinomoto build-up film ABF-GL (GL102 class), substrate build-up dielectric
+    class: dielectric_polymer
+    tier: mvp
+    status: partial
+    valid_T_C: [-55, 240]   # CTE ranges in the source end at 240 C
+    assumptions:
+      - {id: z_cte_from_xy, text: "in-plane (x-y) CTE applied to z; z CTE not reported by the source (coordinator-accepted default 2026-10-20)"}
+      - {id: single_paper_set, text: "default E / CTE / Tg set taken from one paper (ectc51687.2025.00148); other papers are alternatives (DevLog-010 Decision 2; coordinator-accepted 2026-10-20)"}
+    properties:
+      tg: {value: 171, unit: C, method: DMA, basis: paper_model_input, source: ectc51687.2025.00148, locator: "p.2 Table I column ABF-GL, Tg (DMA) 171 C", verified_on: 2026-10-20}
+      elastic:
+        model: iso
+        E: {value: 13, unit: GPa, basis: paper_model_input, source: ectc51687.2025.00148, locator: "p.2 Table I column ABF-GL, Young's modulus 13 GPa", condition: "temperature not stated; T dependence not applied", verified_on: 2026-10-20}
+        nu: {value: 0.29, basis: paper_model_input, source: ectc51846.2026.00103, locator: "p.4 Table II row Dielectric (ABF GL-102): E 13 GPa, nu 0.29", verified_on: 2026-10-20}
+      cte:
+        kind: instantaneous
+        model: bilinear_tg
+        below: 20
+        above: 49
+        Tg_C: 150
+        unit: ppm/K
+        basis: paper_model_input
+        source: ectc51687.2025.00148
+        locator: "p.2 Table I column ABF-GL: CTE x-y (25-150 C) 20, (150-240 C) 49 ppm/C, tensile TMA; same values in ectc51846.2026.00103 p.4 Table II (20 for T < 150 C, 49 for T > 150 C, instantaneous)"
+        assumption: z_cte_from_xy
+        note: "breakpoint 150 C as printed (not the DMA Tg). In-plane (x-y) values applied to all three axes: z CTE not reported (assumption)"
+        verified_on: 2026-10-20
+      k: {value: 0.2, unit: W/mK, basis: template, analog_of: "conventional package solder resist, k approx. 0.2 W/(m K)", source: ectc51846.2026.00119, locator: "p.1 abstract and p.2 Sec. II: conventional package-use SRs with k approx. 0.2 W/(m K) (stated as approximate)", sensitivity: {property: k, delta: {factor: [0.5, 2]}}, note: "dry-film package dielectric analog; no ABF k read", verified_on: 2026-10-20}
+      eps_r: {value: N/A, missing: "no ABF-GL Dk read (Ajinomoto brochure URL dead 2026-10-20, R4)"}
+    alternatives:
+      cte_ectc51529_2024_00392:
+        property: cte
+        use: sensitivity (constant, vendor value cited by the paper)
+        kind: instantaneous
+        value: 20
+        unit: ppm/K
+        basis: paper_model_input
+        source: ectc51529.2024.00392
+        locator: "p.3 Table II column ABF GL-102 (CTE 20 ppm/K, E 13 GPa; its ref [15])"
+        verified_on: 2026-10-20
+    missing: ["out-of-plane CTE", "k", "Dk / Df", "E above Tg"]
+
+  abf_gx:
+    description: Ajinomoto build-up film ABF-GX (higher CTE grade)
+    class: dielectric_polymer
+    tier: "1"
+    status: partial
+    valid_T_C: [-55, 240]
+    assumptions:
+      - {id: z_cte_from_xy, text: "in-plane (x-y) CTE applied to z; z CTE not reported by the source (coordinator-accepted default 2026-10-20)"}
+    properties:
+      tg: {value: 168, unit: C, method: DMA, basis: paper_model_input, source: ectc51687.2025.00148, locator: "p.2 Table I column ABF-GX, Tg (DMA) 168 C", verified_on: 2026-10-20}
+      elastic:
+        model: iso
+        E: {value: 5.0, unit: GPa, basis: paper_model_input, source: ectc51687.2025.00148, locator: "p.2 Table I column ABF-GX, Young's modulus 5.0 GPa", verified_on: 2026-10-20}
+        nu: {value: 0.29, basis: template, analog_of: "abf_gl (ABF GL-102, another ABF grade)", source: ectc51846.2026.00103, locator: "p.4 Table II row Dielectric (ABF GL-102): nu 0.29", sensitivity: {property: nu, delta: {abs: 0.05}}, verified_on: 2026-10-20}
+      cte: {kind: instantaneous, model: bilinear_tg, below: 39, above: 117, Tg_C: 150, unit: ppm/K, basis: paper_model_input, source: ectc51687.2025.00148, locator: "p.2 Table I column ABF-GX: CTE x-y 39 (25-150 C), 117 (150-240 C), tensile TMA", note: "x-y values applied to z (assumption)", verified_on: 2026-10-20, assumption: z_cte_from_xy}
+      k: {value: 0.2, unit: W/mK, basis: template, analog_of: "conventional package solder resist, k approx. 0.2 W/(m K)", source: ectc51846.2026.00119, locator: "p.1 abstract and p.2 Sec. II: conventional package-use SRs with k approx. 0.2 W/(m K) (stated as approximate)", sensitivity: {property: k, delta: {factor: [0.5, 2]}}, note: "dry-film package dielectric analog; no ABF k read", verified_on: 2026-10-20}
+    missing: ["Poisson ratio, k, Dk / Df, z CTE"]
+
+  abf_gcp:
+    description: Ajinomoto build-up film ABF-GCP (low-CTE outer-layer grade)
+    class: dielectric_polymer
+    tier: "1"
+    status: partial
+    valid_T_C: [-55, 240]
+    assumptions:
+      - {id: z_cte_from_xy, text: "in-plane (x-y) CTE applied to z; z CTE not reported by the source (coordinator-accepted default 2026-10-20)"}
+    properties:
+      tg: {value: 176, unit: C, method: DMA, basis: paper_model_input, source: ectc51687.2025.00148, locator: "p.2 Table I column ABF-GCP, Tg (DMA) 176 C", verified_on: 2026-10-20}
+      elastic:
+        model: iso
+        E: {value: 17, unit: GPa, basis: paper_model_input, source: ectc51687.2025.00148, locator: "p.2 Table I column ABF-GCP, Young's modulus 17 GPa", verified_on: 2026-10-20}
+        nu: {value: 0.29, basis: template, analog_of: "abf_gl (ABF GL-102, another ABF grade)", source: ectc51846.2026.00103, locator: "p.4 Table II row Dielectric (ABF GL-102): nu 0.29", sensitivity: {property: nu, delta: {abs: 0.05}}, verified_on: 2026-10-20}
+      cte: {kind: instantaneous, model: bilinear_tg, below: 15, above: 12, Tg_C: 150, unit: ppm/K, basis: paper_model_input, source: ectc51687.2025.00148, locator: "p.2 Table I column ABF-GCP: CTE x-y 15 (25-150 C), 12 (150-240 C), tensile TMA", note: "x-y values applied to z (assumption)", verified_on: 2026-10-20, assumption: z_cte_from_xy}
+      k: {value: 0.2, unit: W/mK, basis: template, analog_of: "conventional package solder resist, k approx. 0.2 W/(m K)", source: ectc51846.2026.00119, locator: "p.1 abstract and p.2 Sec. II: conventional package-use SRs with k approx. 0.2 W/(m K) (stated as approximate)", sensitivity: {property: k, delta: {factor: [0.5, 2]}}, note: "dry-film package dielectric analog; no ABF k read", verified_on: 2026-10-20}
+    missing: ["Poisson ratio, k, Dk / Df, z CTE"]
+
+  abf_gx92p:
+    description: ABF GX92P dry film with SiO2 filler (EM properties only)
+    class: dielectric_polymer
+    tier: "1"
+    status: partial
+    valid_T_C: [20, 30]
+    properties:
+      eps_r: {value: 3.2, f_GHz: 5.8, unit: "1", basis: paper_model_input, source: tcpmt.2025.3610036, locator: "p.4 Table II column ABF GX92P: Dk 3.2 (5.8 GHz)", condition: "temperature not stated (room temperature assumed by this lane)", verified_on: 2026-10-20}
+      tan_delta: {value: 0.017, f_GHz: 5.8, unit: "1", basis: paper_model_input, source: tcpmt.2025.3610036, locator: "p.4 Table II column ABF GX92P: Df 0.017 (5.8 GHz)", verified_on: 2026-10-20}
+    missing: ["mechanical and thermal properties"]
+
+  abf_type_a:
+    description: ABF Type-A low-loss build-up film; Dk / Df vs frequency (16.5-216 GHz) and temperature (25-115 C)
+    class: dielectric_polymer
+    tier: "1"
+    status: partial
+    valid_T_C: [25, 115]
+    properties:
+      eps_r:
+        model: table_f_T
+        f_GHz: [16.5, 60, 77, 138, 162, 216]
+        T_C: [25, 80, 115]
+        value:
+          - [3.406, 3.412, 3.419]
+          - [3.416, 3.424, 3.43]
+          - [3.412, 3.426, 3.43]
+          - [3.46, 3.465, 3.469]
+          - [3.463, 3.471, 3.474]
+          - [3.479, 3.491, 3.532]
+        unit: "1"
+        basis: measured
+        source: ectc51846.2026.00389
+        locator: "p.5 Table I (Dk), rows 16.5-216 GHz x 25 / 80 / 115 C; read from the page image (text layer prints the degree sign as 0, e.g. '250C')"
+        condition: "extracted from microstrip lines, TRL calibration 10-220 GHz"
+        verified_on: 2026-10-20
+      tan_delta:
+        model: table_f_T
+        f_GHz: [16.5, 60, 77, 138, 162, 216]
+        T_C: [25, 80, 115]
+        value:
+          - [0.00203, 0.0025, 0.0028]
+          - [0.0031, 0.0034, 0.0039]
+          - [0.0036, 0.0039, 0.0041]
+          - [0.0049, 0.0053, 0.0065]
+          - [0.0067, 0.0073, 0.0078]
+          - [0.0083, 0.0091, 0.0101]
+        unit: "1"
+        basis: measured
+        source: ectc51846.2026.00389
+        locator: "p.5 Table I (Df), rows 16.5-216 GHz x 25 / 80 / 115 C"
+        verified_on: 2026-10-20
+    missing: ["mechanical and thermal properties"]
+
+  solder_resist:
+    description: package-substrate solder resist / solder mask; default = tcpmt.2025.3614186 Solder Mask (complete E, nu, CTE(T))
+    class: dielectric_polymer
+    tier: mvp
+    status: partial
+    valid_T_C: [-55, 225]
+    assumptions:
+      - {id: single_paper_set, text: "default E / CTE / Tg set taken from one paper (tcpmt.2025.3614186); other papers are alternatives (DevLog-010 Decision 2; coordinator-accepted 2026-10-20)"}
+    properties:
+      elastic:
+        model: iso
+        E: 2.4
+        nu: 0.29
+        unit: GPa
+        basis: paper_model_input
+        source: tcpmt.2025.3614186
+        locator: "p.6 Table II row 2 Solder Mask (E 2.4 GPa, G 0.93 GPa, nu 0.29 at all listed temperatures)"
+        verified_on: 2026-10-20
+      cte:
+        kind: instantaneous
+        model: table_T
+        T_C: [-55, 81, 121, 225]
+        value: [60, 60, 130, 130]
+        unit: ppm/K
+        basis: paper_model_input
+        source: tcpmt.2025.3614186
+        locator: "p.6 Table II row 2 Solder Mask, instantaneous CTE 6.00E-05 (-55, 81 C), 1.30E-04 (121, 225 C)"
+        verified_on: 2026-10-20
+      k: {value: 0.2, unit: W/mK, basis: template, analog_of: "conventional package solder resist, k approx. 0.2 W/(m K)", source: ectc51846.2026.00119, locator: "p.1 abstract and p.2 Sec. II: conventional package-use SRs with k approx. 0.2 W/(m K) (stated as approximate)", sensitivity: {property: k, delta: {factor: [0.5, 2]}}, note: "typical value stated by a paper whose subject is a 1.0-1.2 W/(m K) high-k SR", verified_on: 2026-10-20}
+    alternatives:
+      ectc51529_2024_00155_cte: {property: cte, use: sensitivity, kind: instantaneous, model: bilinear_tg, below: 43.1, above: 91.2, Tg_C: 151, unit: ppm/K, basis: paper_model_input, source: ectc51529.2024.00155, locator: "p.3 Table IV row Solder Resist (4.3 GPa, 43.1 / 91.2 ppm/C, Tg 151 C)", verified_on: 2026-10-20}
+      ectc51529_2024_00155_E: {property: elastic, use: sensitivity, model: iso, E: 4.3, nu: {value: N/A, missing: "not given"}, unit: GPa, basis: paper_model_input, source: ectc51529.2024.00155, locator: "p.3 Table IV row Solder Resist", verified_on: 2026-10-20}
+      ectc2011_cte: {property: cte, use: sensitivity (room-temperature constant), kind: instantaneous, value: 68, unit: ppm/K, basis: paper_model_input, source: ectc.2011.5898527, locator: "p.2 Table 2 row Solder mask (2.9 GPa, 68)", verified_on: 2026-10-20}
+    missing: ["k, Dk / Df"]
+
+  substrate_dielectric_tcpmt:
+    description: glass-core substrate build-up dielectric layer as modelled by tcpmt.2025.3614186 (grade not named)
+    class: dielectric_polymer
+    tier: "1"
+    status: partial
+    valid_T_C: [-55, 225]
+    properties:
+      elastic: {model: iso, E: 2.4, nu: 0.29, unit: GPa, basis: paper_model_input, source: tcpmt.2025.3614186, locator: "p.6 Table II row 7 Substrate Dielectric Layer (E 2.4, G 0.93 GPa, nu 0.29)", verified_on: 2026-10-20}
+      cte: {kind: instantaneous, model: table_T, T_C: [-55, 81, 121, 225], value: [60, 60, 130, 130], unit: ppm/K, basis: paper_model_input, source: tcpmt.2025.3614186, locator: "p.6 Table II row 7, instantaneous CTE 6.00E-05 / 1.30E-04", verified_on: 2026-10-20}
+      k: {value: N/A, missing: "not given"}
+    missing: ["grade not named by the source", "k"]

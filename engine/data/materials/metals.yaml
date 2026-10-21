@@ -1,0 +1,472 @@
+# Metals (lane L2, DevLog-012). Stored units are the source units; the loader converts to SI.
+schema: ap-sim.materials/1
+group: metals
+verified_on: 2026-10-20
+materials:
+  cu_bulk:
+    description: annealed high-purity bulk copper (lids, stiffeners, thick planes)
+    class: metal
+    tier: mvp
+    status: ok
+    valid_T_C: [-73.15, 326.85]   # 200-600 K: span of the k and resistivity tables
+    assumptions:
+      - {id: cu_cte_handbook_constant, text: "Cu CTE = handbook constant 17.0 ppm/K over valid_T_C (no evaluated CTE(T) above 300 K read; coordinator-accepted 2026-10-20)"}
+    properties:
+      density:
+        value: 8.96
+        unit: g/cm3
+        basis: handbook
+        source: nist_solder_db_v4
+        locator: "Table 2.2.7 row Cu, from ASM Handbook Vol. 6 (1993) as cited there"
+        verified_on: 2026-10-20
+      cp:
+        model: table_T
+        T_K: [200, 250, 293.15, 300]
+        value: [359.0, 380.6, 389.1, 389.4]
+        unit: J/kgK
+        basis: derived
+        source: nist_cryo_ofhc_cu
+        locator: "specific-heat fit, log10 y = sum a_i (log10 T)^i, a..h = -1.91844, -0.15973, 8.61013, -18.996, 21.9661, -12.7328, 3.54322, -0.3797; range 4-300 K; fit error 5 % (T >= 15 K)"
+        note: "values evaluated from the fit by this lane; above 300 K no source read"
+        verified_on: 2026-10-20
+      k:
+        model: table_T
+        T_K: [200, 223.2, 250, 273.2, 298.2, 300, 323.2, 350, 373.2, 400, 473.2, 500, 573.2, 600]
+        value: [4.13, 4.09, 4.06, 4.03, 4.01, 4.01, 3.99, 3.96, 3.95, 3.93, 3.88, 3.86, 3.81, 3.79]
+        unit: W/cmK
+        basis: measured
+        source: hpl1972
+        locator: "journal p.332, Thermal conductivity of copper, recommended values (solid)"
+        condition: "well-annealed high-purity Cu; +-2 % near room temperature (Remarks)"
+        verified_on: 2026-10-20
+      elastic:
+        model: iso
+        E: 123.5
+        nu: 0.350
+        unit: GPa
+        basis: measured
+        source: ledbetter_naimon1974
+        locator: "journal p.923 Table 10, polycrystal average values (E 1.235 +- 0.007, nu 0.350 +- 0.009; 1e11 N/m2)"
+        condition: "room temperature, annealed polycrystal; T dependence not applied ((1/E) dE/dT = -4.8e-4 /K at RT, Table 12 p.925)"
+        verified_on: 2026-10-20
+      cte:
+        kind: instantaneous
+        value: 17.0
+        unit: ppm/K
+        basis: handbook
+        source: nist_solder_db_v4
+        locator: "Table 2.2.7 row Cu (CTE 17.0 1e-6/C), from ASM Handbook Vol. 6 (1993) as cited there"
+        condition: "temperature range not stated; constant over valid_T_C (T dependence neglected)"
+        verified_on: 2026-10-20
+      sigma:
+        model: table_T
+        quantity: resistivity
+        interp: loglog
+        T_K: [200, 225, 250, 273.15, 293, 300, 350, 400, 500, 600]
+        value: [1.046, 1.217, 1.387, 1.543, 1.678, 1.725, 2.063, 2.402, 3.090, 3.792]
+        unit: 1e-8 ohm m
+        basis: measured
+        source: matula1979
+        locator: "journal p.1161 Table 2, total resistivity rho (solid), annealed 99.999 % pure bulk Cu; log-log interpolation per p.1160 text"
+        verified_on: 2026-10-20
+    alternatives:
+      single_crystal_avg:
+        property: elastic
+        use: sensitivity (polycrystal derived from single-crystal data)
+        model: iso
+        E: 122.2
+        nu: 0.352
+        unit: GPa
+        basis: measured
+        source: ledbetter_naimon1974
+        locator: "journal p.923 Table 10, polycrystal derived from single-crystal data (Ledbetter-Naimon): E 1.222 +- 0.003, nu 0.352 +- 0.004"
+        verified_on: 2026-10-20
+      cubic_single_crystal:
+        property: elastic
+        use: reference (single-crystal Cu)
+        model: cubic
+        C11: 169.1
+        C12: 122.2
+        C44: 75.42
+        unit: GPa
+        basis: measured
+        source: ledbetter_naimon1974
+        locator: "journal p.923 Table 10, single crystal C11 1.691, C12 1.222, C44 0.7542 (1e11 N/m2)"
+        verified_on: 2026-10-20
+      cte_nist_cryo:
+        property: cte
+        use: sensitivity (evaluated fit, 200-300 K only)
+        kind: instantaneous
+        model: table_T
+        T_K: [200, 220, 240, 260, 280, 293.15, 300]
+        value: [15.209, 15.672, 16.046, 16.328, 16.509, 16.571, 16.583]
+        unit: ppm/K
+        basis: derived
+        source: nist_cryo_ofhc_cu
+        locator: "expansion-coefficient fit, log10 y = sum a_i (log10 T)^i, a..g = -17.9081289, 67.131914, -118.809316, 109.9845997, -53.8696089, 13.30247491, -1.30843441; 4-300 K; fit error 5 % (T >= 50 K)"
+        note: "evaluated from the fit by this lane"
+        verified_on: 2026-10-20
+      cte_winterbottom:
+        property: cte
+        use: sensitivity (handbook)
+        kind: instantaneous
+        value: 16.5
+        unit: ppm/K
+        basis: handbook
+        source: nist_solder_db_v4
+        locator: "Table 2.2.6 row Copper (CTE 16.5), from Winterbottom, JOM 1993 as cited there"
+        verified_on: 2026-10-20
+    missing:
+      - "CTE(T) above 300 K: no evaluated source read (Touloukian TPRC not available)"
+      - "cp above 300 K"
+
+  cu_electroplated:
+    inherits: cu_bulk
+    description: electroplated Cu (RDL, TSV, pillars, build-up traces); film properties are process-dependent
+    class: metal
+    tier: mvp
+    status: partial
+    valid_T_C: [-73.15, 326.85]
+    properties:
+      elastic:
+        model: iso
+        E: 121.3
+        nu: 0.3
+        unit: GPa
+        basis: paper_model_input
+        source: ectc51846.2026.00103
+        locator: "p.4 Table II row Copper (E 121.3 GPa, nu 0.3; source refs [12-13] of that paper)"
+        verified_on: 2026-10-20
+      cte:
+        kind: instantaneous
+        value: 17.1
+        unit: ppm/K
+        basis: paper_model_input
+        source: ectc51846.2026.00103
+        locator: "p.4 Table II row Copper, instantaneous CTE 17.1 ppm/C"
+        verified_on: 2026-10-20
+      plasticity:
+        status: tier2_data
+        model: bilinear_isotropic
+        yield_MPa: 172.38
+        tangent_MPa: 1034.2
+        basis: paper_model_input
+        source: ectc51846.2026.00103
+        locator: "p.4 Table II row Copper (yield 172.38 MPa, tangent modulus 1034.2 MPa); same values in tcpmt.2025.3614186 p.6 Table II row 3"
+        verified_on: 2026-10-20
+    alternatives:
+      e100_paper:
+        property: elastic
+        use: sensitivity (E = 100 GPa used by ectc51529.2024.00155, ectc51687.2025.00027, ectc51909.2023.00155; no Poisson ratio given)
+        model: iso
+        E: 100
+        nu: {value: N/A, missing: "not given in these tables"}
+        unit: GPa
+        basis: paper_model_input
+        source: ectc51529.2024.00155
+        locator: "p.3 Table IV row Copper (100 GPa, CTE 17)"
+        verified_on: 2026-10-20
+      e130_ectc2011:
+        property: elastic
+        use: sensitivity (E = 130 GPa)
+        model: iso
+        E: 130
+        nu: {value: N/A, missing: "not given"}
+        unit: GPa
+        basis: paper_model_input
+        source: ectc.2011.5898527
+        locator: "p.2 Table 2 row Copper (130 GPa, CTE 17)"
+        verified_on: 2026-10-20
+      iso_tcpmt2025_3538554:
+        property: elastic
+        use: sensitivity (E = 110 GPa, nu 0.34)
+        model: iso
+        E: 110.0
+        nu: 0.34
+        unit: GPa
+        basis: paper_model_input
+        source: tcpmt.2025.3538554
+        locator: "p.7 Table IV row Cu (CTE 18.5)"
+        verified_on: 2026-10-20
+      plated_korhonen:
+        property: elastic
+        use: sensitivity (plated thin-foil Cu, handbook)
+        model: iso
+        E: 117
+        nu: {value: N/A, missing: "not given for the plated row"}
+        unit: GPa
+        basis: handbook
+        source: nist_solder_db_v4
+        locator: "Table 2.2.6 row Copper, entries marked * (Korhonen, Brown, Li, MRS Symp. Proc. 323, p.104, 1994, 'plated [thin foil] copper'): E 117 GPa, CTE 17.3"
+        verified_on: 2026-10-20
+      cte_plated_korhonen:
+        property: cte
+        use: sensitivity (plated thin-foil Cu, handbook)
+        kind: instantaneous
+        value: 17.3
+        unit: ppm/K
+        basis: handbook
+        source: nist_solder_db_v4
+        locator: "Table 2.2.6 row Copper, entry marked * (Korhonen et al. 1994)"
+        verified_on: 2026-10-20
+      cte_tcpmt2025_3538554:
+        property: cte
+        use: sensitivity
+        kind: instantaneous
+        value: 18.5
+        unit: ppm/K
+        basis: paper_model_input
+        source: tcpmt.2025.3538554
+        locator: "p.7 Table IV row Cu"
+        verified_on: 2026-10-20
+    missing:
+      - "electroplated-Cu primary data (Read et al. 2004, j.mee.2003.09.012) pending download"
+      - "k and resistivity of electroplated films inherited from bulk (film values not read)"
+
+  cu_lid:
+    inherits: cu_bulk
+    description: Cu lid / heat spreader / stiffener (bulk Cu; Ni plating not modelled)
+    class: metal
+    tier: mvp
+    status: ok
+    valid_T_C: [-73.15, 326.85]
+    properties: {}
+    alternatives:
+      k_ectc51687_2025_00085:
+        property: k
+        use: sensitivity (paper lid k)
+        value: 390
+        unit: W/mK
+        basis: paper_model_input
+        source: ectc51687.2025.00085
+        locator: "p.3 Table 3 row Lid (390 W/mK)"
+        verified_on: 2026-10-20
+
+  ss304:
+    description: austenitic stainless steel 304 (UNS S30400), stiffener / lid
+    class: metal
+    tier: mvp
+    status: partial
+    valid_T_C: [-73.15, 500]
+    assumptions:
+      - {id: ss304_cte_20_100_default, text: "default CTE is the 20-100 C datasheet mean (refuses outside it); the 20-870 C mean is the alternative cte_mean_20_870 (coordinator-accepted 2026-10-20)"}
+    properties:
+      density:
+        value: 8.03
+        unit: g/cm3
+        basis: datasheet
+        source: upmet_304
+        locator: "p.1 Physical properties: density 0.29 lb/in3 (8.03 g/cm3)"
+        verified_on: 2026-10-20
+      cp:
+        value: 500
+        range_C: [0, 100]
+        unit: J/kgK
+        basis: datasheet
+        source: upmet_304
+        locator: "p.2 Specific heat, 0-100 C: 500 J/kg K"
+        verified_on: 2026-10-20
+      k:
+        model: table_T
+        T_K: [200, 250, 293.15, 373.15, 773.15]
+        value: [12.63, 13.98, 15.13, 16.3, 21.4]
+        unit: W/mK
+        basis: derived
+        source: [nist_cryo_ss304, upmet_304]
+        locator: "200, 250, 293.15 K: NIST 304 k fit (log10 polynomial, a..i = -1.4087, 1.3982, 0.2543, -0.6260, 0.2334, 0.4256, -0.4658, 0.1650, -0.0199; 1-300 K; fit error 2 %), evaluated by this lane; 100 and 500 C: UPMET p.2 Thermal conductivity table"
+        note: "two sources joined; linear interpolation bridges 20-100 C"
+        verified_on: 2026-10-20
+      elastic:
+        model: iso
+        E: 199.6
+        nu: 0.290
+        unit: GPa
+        basis: measured
+        source: ledbetter1980_ss
+        locator: "NBSIR 80-1627 report p.131 Table 1, Stainless 304, T = 295 K: E 199.6, G 77.4, B 158.2 GPa, nu 0.290"
+        condition: "295 K ultrasonic; T dependence above 295 K not applied (no source read); E(T) below 295 K in the same table"
+        verified_on: 2026-10-20
+      cte:
+        kind: secant
+        Tref_C: 20
+        value: 16.6
+        range_C: [20, 100]
+        unit: ppm/K
+        basis: datasheet
+        source: upmet_304
+        locator: "p.1 Linear coefficient of thermal expansion, mean 20-100 C: 16.6e-6 /C"
+        verified_on: 2026-10-20
+      sigma:
+        model: table_T
+        quantity: resistivity
+        T_C: [20, 100, 200, 400, 600]
+        value: [72, 78, 86, 100, 111]
+        unit: uohm cm
+        basis: datasheet
+        source: upmet_304
+        locator: "p.2 Electrical resistivity table (20-900 C)"
+        verified_on: 2026-10-20
+    alternatives:
+      cte_mean_20_870:
+        property: cte
+        use: sensitivity (wide-range mean)
+        kind: secant
+        Tref_C: 20
+        value: 19.8
+        range_C: [20, 870]
+        unit: ppm/K
+        basis: datasheet
+        source: upmet_304
+        locator: "p.1 mean CTE 20-870 C: 19.8e-6 /C"
+        verified_on: 2026-10-20
+      e_upmet:
+        property: elastic
+        use: sensitivity (datasheet E)
+        model: iso
+        E: 200
+        nu: {value: N/A, missing: "not on the datasheet"}
+        unit: GPa
+        basis: datasheet
+        source: upmet_304
+        locator: "p.1 Modulus of elasticity in tension 29e6 psi (200 GPa)"
+        verified_on: 2026-10-20
+    missing:
+      - "CTE outside 20-100 C (secant range) except the 20-870 C mean; E(T) above 295 K"
+      - "DB row eptc67330.2025.11392176 'stainless steel' (Tg 65-75 C, E 1.9 GPa) is a polymer FPC stiffener column, not steel: not used"
+
+  sus430:
+    description: ferritic stainless steel SUS430 / AISI 430 (UNS S43000) stiffener
+    class: metal
+    tier: "1"
+    status: partial
+    valid_T_C: [-55, 300]
+    properties:
+      density: {value: 7.74, unit: g/cm3, basis: datasheet, source: combmet_430, locator: "p.1 Physical properties at 20 C: density 7.74 g/cm3", verified_on: 2026-10-20}
+      k: {value: 26.1, unit: W/mK, basis: datasheet, source: combmet_430, locator: "p.1 Physical properties at 20 C: thermal conductivity 26.1 W/m-K", condition: "20 C; T dependence not applied", verified_on: 2026-10-20}
+      elastic:
+        model: iso
+        E: {value: 200, unit: GPa, basis: datasheet, source: combmet_430, locator: "p.1 Physical properties at 20 C: modulus of elasticity 200 x 10^3 MPa (29 x 10^3 ksi)", condition: "20 C; T dependence not applied", verified_on: 2026-10-20}
+        nu: {value: 0.290, basis: template, analog_of: "ss304 (another stainless grade; Ledbetter 1980, 295 K)", source: ledbetter1980_ss, locator: "NBSIR 80-1627 report p.131 Table 1, Stainless 304, 295 K: nu 0.290", sensitivity: {property: nu, delta: {abs: 0.05}}, note: "no 430 Poisson ratio in a readable source (TotalMateria entry paywalled)", verified_on: 2026-10-20}
+      cte:
+        kind: instantaneous
+        value: 11
+        unit: ppm/K
+        basis: paper_model_input
+        source: ectc51687.2025.00027
+        locator: "p.3 Sec. III.A text: 'SUS430 (CTE: 11 ppm/C)'"
+        verified_on: 2026-10-20
+      sigma: {value: 60, quantity: resistivity, unit: uohm cm, basis: datasheet, source: combmet_430, locator: "p.1 Physical properties at 20 C: electrical resistivity 60 uOhm cm", verified_on: 2026-10-20}
+    alternatives:
+      cte_combmet_20_300: {property: cte, use: sensitivity (datasheet mean 20-300 C), kind: secant, Tref_C: 20, value: 10.4, range_C: [20, 300], unit: ppm/K, basis: datasheet, source: combmet_430, locator: "p.1 coefficient of expansion 10.4 um/m-C (20-300 C)", verified_on: 2026-10-20}
+    assumptions:
+      - {id: paper_cte_default, text: "default CTE = the 11 ppm/C used by the 120 mm package papers (ectc51687.2025.00027); datasheet 20-300 C mean 10.4 is the alternative"}
+    missing: ["Poisson ratio (template analog of 304)", "E(T)", "the datasheet states its values are 'for reference only', 'not intended for engineering or design'"]
+
+  ni:
+    description: nickel (UBM, lid plating)
+    class: metal
+    tier: "1"
+    status: partial
+    valid_T_C: [-73.15, 326.85]
+    properties:
+      density: {value: 8.9, unit: g/cm3, basis: handbook, source: nist_solder_db_v4, locator: "Table 2.2.7 row Ni (ASM Handbook Vol. 6 as cited)", verified_on: 2026-10-20}
+      k:
+        model: table_T
+        T_K: [200, 223.2, 250, 273.2, 298.2, 300, 323.2, 350, 373.2, 400, 473.2, 500, 573.2, 600]
+        value: [1.07, 1.02, 0.975, 0.941, 0.909, 0.907, 0.880, 0.850, 0.827, 0.802, 0.741, 0.722, 0.673, 0.656]
+        unit: W/cmK
+        basis: measured
+        source: hpl1972
+        locator: "journal p.370, Thermal conductivity of nickel, recommended values (solid)"
+        verified_on: 2026-10-20
+      elastic:
+        model: iso
+        E: 199
+        nu: {value: 0.296, basis: measured, source: ledbetter_reed1973, locator: "journal p.583 Table 18, Poisson ratio of nickel: best value 0.296, uncertainty 0.029", verified_on: 2026-10-20}
+        unit: GPa
+        basis: handbook
+        source: nist_solder_db_v4
+        locator: "Table 2.2.7 row Ni (E 199 GPa; ASM Handbook Vol. 6 as cited)"
+        verified_on: 2026-10-20
+      cte: {kind: instantaneous, value: 13.3, unit: ppm/K, basis: handbook, source: nist_solder_db_v4, locator: "Table 2.2.7 row Ni (CTE 13.3)", verified_on: 2026-10-20}
+    missing: ["Ni E and nu come from different compilations (NIST DB Table 2.2.7, Ledbetter-Reed 1973)", "Ni resistivity"]
+
+  au:
+    description: gold (surface finish, wire)
+    class: metal
+    tier: "1"
+    status: partial
+    valid_T_C: [-73.15, 326.85]
+    properties:
+      k:
+        model: table_T
+        T_K: [200, 223.2, 250, 273.2, 298.2, 300, 323.2, 350, 373.2, 400, 473.2, 500, 573.2, 600]
+        value: [3.23, 3.22, 3.21, 3.19, 3.18, 3.17, 3.16, 3.14, 3.13, 3.11, 3.06, 3.04, 2.99, 2.98]
+        unit: W/cmK
+        basis: measured
+        source: hpl1972
+        locator: "journal p.340, Thermal conductivity of gold, recommended values (solid)"
+        verified_on: 2026-10-20
+      sigma:
+        model: table_T
+        quantity: resistivity
+        interp: loglog
+        T_K: [200, 225, 250, 273.15, 293, 300, 350, 400, 500, 600]
+        value: [1.462, 1.662, 1.864, 2.051, 2.214, 2.271, 2.685, 3.107, 3.974, 4.875]
+        unit: 1e-8 ohm m
+        basis: measured
+        source: matula1979
+        locator: "journal p.1209 Table 5, total resistivity rho (solid)"
+        verified_on: 2026-10-20
+      cte: {kind: instantaneous, value: 14.2, unit: ppm/K, basis: handbook, source: nist_solder_db_v4, locator: "Table 2.2.4 row Gold (CTE 14.2; Tummala and Rymaszewski 1989 as cited)", verified_on: 2026-10-20}
+      elastic: {value: N/A, missing: "no Au elastic source read"}
+    missing: ["Au E, nu, density"]
+
+  al:
+    description: aluminum (pads)
+    class: metal
+    tier: "1"
+    status: partial
+    valid_T_C: [-73.15, 326.85]
+    properties:
+      density: {value: 2.70, unit: g/cm3, basis: handbook, source: nist_solder_db_v4, locator: "Table 2.2.7 row Al (ASM Handbook Vol. 6 as cited)", verified_on: 2026-10-20}
+      k:
+        model: table_T
+        T_K: [200, 223.2, 250, 273.2, 298.2, 300, 323.2, 350, 373.2, 400, 473.2, 500, 573.2, 600]
+        value: [2.37, 2.35, 2.35, 2.36, 2.37, 2.37, 2.39, 2.40, 2.40, 2.40, 2.37, 2.36, 2.33, 2.31]
+        unit: W/cmK
+        basis: measured
+        source: hpl1972
+        locator: "journal p.305, Thermal conductivity of aluminum, recommended values (solid)"
+        verified_on: 2026-10-20
+      elastic:
+        model: iso
+        E: 68.9
+        nu: {value: 0.300, basis: derived, source: nist_solder_db_v4, locator: "Table 1.10 row Aluminum 99.996 annealed: E 68.9 GPa, G 26.5 GPa; nu = E / (2 G) - 1 = 0.300 (computed by this lane)", verified_on: 2026-10-20}
+        unit: GPa
+        basis: handbook
+        source: nist_solder_db_v4
+        locator: "Table 1.10 row Aluminum 99.996, annealed (E 68.9 GPa; Gray, AIP Handbook 1957 as cited); Table 2.2.7 gives 69"
+        verified_on: 2026-10-20
+      cte: {kind: instantaneous, value: 23.5, unit: ppm/K, basis: handbook, source: nist_solder_db_v4, locator: "Table 2.2.7 row Al (CTE 23.5)", verified_on: 2026-10-20}
+    missing: ["Al resistivity (not read from an evaluated source)"]
+
+  ti:
+    description: titanium (seed / adhesion layer; thermal only)
+    class: metal
+    tier: "1"
+    status: partial
+    valid_T_C: [-73.15, 326.85]
+    properties:
+      k:
+        model: table_T
+        T_K: [200, 223.2, 250, 273.2, 298.2, 300, 323.2, 350, 373.2, 400, 473.2, 500, 573.2, 600]
+        value: [0.245, 0.237, 0.229, 0.224, 0.219, 0.219, 0.215, 0.210, 0.207, 0.204, 0.198, 0.197, 0.194, 0.194]
+        unit: W/cmK
+        basis: measured
+        source: hpl1972
+        locator: "journal p.407, Thermal conductivity of titanium, recommended values (solid, polycrystalline)"
+        verified_on: 2026-10-20
+      elastic: {value: N/A, missing: "no source read"}
+      cte: {value: N/A, missing: "no source read"}
+    missing: ["Ti E, nu, CTE, density, resistivity"]

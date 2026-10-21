@@ -1,0 +1,234 @@
+# Solders and intermetallics (lane L2, DevLog-012). Elastic only in tier 1; Anand sets stored as tier-2 data.
+schema: ap-sim.materials/1
+group: solders
+verified_on: 2026-10-20
+materials:
+  sac305:
+    description: Sn-3.0Ag-0.5Cu solder (C4 bumps, BGA balls); elastic model only (viscoplastic Anand in tier 2)
+    class: solder
+    tier: mvp
+    status: partial
+    valid_T_C: [-50, 217]   # elastic/CTE table span -50 to 220 C, capped at the solidus 217 C (Indium PDS)
+    properties:
+      density: {value: 7.35, unit: g/cm3, basis: datasheet, source: indium_pds_100346, locator: "p.1 Indalloy 256 properties table: density 7.35 g/cc", verified_on: 2026-10-20}
+      k: {value: 61, unit: W/mK, basis: datasheet, source: indium_pds_100346, locator: "p.1 properties table: thermal conductivity 61 W/mK", condition: "temperature not stated", verified_on: 2026-10-20}
+      sigma: {value: 13.2, quantity: resistivity, unit: uohm cm, basis: datasheet, source: indium_pds_100346, locator: "p.1 properties table: electrical resistivity 13.2 uOhm-cm", verified_on: 2026-10-20}
+      elastic:
+        model: iso
+        E: {model: table_T, T_C: [-50, 220], value: [52.5, 33.6]}
+        nu: 0.29
+        unit: GPa
+        basis: paper_model_input
+        source: tcpmt.2025.3614186
+        locator: "p.7 Table III row 13 SAC 305 Solder, elasticity: -50 C 52.5 GPa, 220 C 33.6 GPa, nu 0.29 (from its ref [24])"
+        primary_cited: "[24] Zhang et al., Microelectron. Rel. 54, 281 (2014) (pending j.microrel.2013.07.100)"
+        note: "linear between the two printed points (interpolation by this lane)"
+        verified_on: 2026-10-20
+      cte:
+        kind: instantaneous
+        model: table_T
+        T_C: [-50, 220]
+        value: [20.5, 25.0]
+        unit: ppm/K
+        basis: paper_model_input
+        source: tcpmt.2025.3614186
+        locator: "p.7 Table III row 13 SAC 305 Solder, CTE -50 C 2.05E-05, 220 C 2.50E-05 /C"
+        note: "CTE kind not labelled in Table III (Table II of the same paper is labelled instantaneous); treated as instantaneous"
+        verified_on: 2026-10-20
+      viscoplastic:
+        status: tier2_data
+        model: anand
+        params: {s0_MPa: 45.9, Q_R_K: 7460, A_per_s: 5870000, xi: 2, m: 0.0942, h0_MPa: 9350, s_hat_MPa: 58.3, n: 0.015, a: 1.5}
+        basis: paper_model_input
+        source: tcpmt.2025.3614186
+        locator: "p.7 Table III row 13 SAC 305 Solder, Anand viscoplasticity (reference units MPa, K, 1/s)"
+        alternatives:
+          motalab2012_stress_strain: {s0_MPa: 21.00, Q_R_K: 9320, A_per_s: 3501, xi: 4.0, m: 0.25, h0_MPa: 180000, s_hat_MPa: 30.2, n: 0.01, a: 1.78, source: motalab2012, locator: "p.9 Fig. 12 column SAC305 (Stress-Strain)"}
+          motalab2012_creep: {s0_MPa: 18.07, Q_R_K: 9096, A_per_s: 3484, xi: 4.0, m: 0.20, h0_MPa: 144000, s_hat_MPa: 26.4, n: 0.01, a: 1.90, source: motalab2012, locator: "p.9 Fig. 12 column SAC305 (Creep)"}
+        verified_on: 2026-10-20
+    alternatives:
+      e_motalab2012:
+        property: elastic
+        use: sensitivity (measured effective initial modulus, strain rate 0.001 /s, reflowed, no aging; 25-125 C)
+        model: iso
+        E: {model: table_T, T_C: [25, 50, 75, 100, 125], value: [45, 41.5, 38.5, 34, 30.5]}
+        nu: {value: N/A, missing: "Motalab 2012 gives no Poisson ratio"}
+        unit: GPa
+        basis: measured
+        source: motalab2012
+        locator: "p.9 Fig. 11(a), strain rate 0.001 /s points, digitized 2026-10-20 (reading uncertainty about +-1 GPa); rate dependent ('effective' modulus, p.5)"
+        verified_on: 2026-10-20
+      e_ectc51529_2024_00155:
+        property: elastic
+        use: sensitivity (paper constant 'solder', alloy not named)
+        model: iso
+        E: 37.4
+        nu: {value: N/A, missing: "not given"}
+        unit: GPa
+        basis: paper_model_input
+        source: ectc51529.2024.00155
+        locator: "p.3 Table IV row Solder (37.4 GPa, CTE 21.7)"
+        verified_on: 2026-10-20
+      e_indium_pds:
+        property: elastic
+        use: reference only (quasi-static tensile value, far below the dynamic modulus)
+        model: iso
+        E: 6.9
+        nu: 0.35
+        unit: GPa
+        basis: datasheet
+        source: indium_pds_100346
+        locator: "p.1 properties table: Young's modulus 6.9 GPa (1,000 ksi), Poisson's ratio 0.35"
+        verified_on: 2026-10-20
+      cte_indium_pds:
+        property: cte
+        use: sensitivity (datasheet constant)
+        kind: instantaneous
+        value: 21
+        unit: ppm/K
+        basis: datasheet
+        source: indium_pds_100346
+        locator: "p.1 properties table: CTE 21 ppm/C (range not stated)"
+        verified_on: 2026-10-20
+      cte_nist_vianco:
+        property: cte
+        use: sensitivity (SnAgCu as-cast #1 interval CTE, Sandia)
+        kind: instantaneous
+        model: table_T
+        T_C: [-37.5, -12.5, 12.5, 37.5, 62.5, 87.5, 112.5, 137.5, 162.5, 187.5]
+        value: [12.7, 19.4, 21.2, 21.5, 21.7, 22.2, 23.0, 23.1, 23.7, 23.5]
+        unit: ppm/K
+        basis: measured
+        source: nist_solder_db_v4
+        locator: "Table 1.23 (Vianco, Sandia 2001), row 'CTE = dL/Lo x dT', 25 C intervals from -50 to 200 C, placed at interval midpoints by this lane; alloy composition not stated beyond 'SnAgCu'"
+        verified_on: 2026-10-20
+    missing:
+      - "nu(T): only the constant 0.29 of tcpmt.2025.3614186 Table III"
+      - "cp: no source read"
+      - "primary of the default elastic/CTE set (Zhang et al. 2014, j.microrel.2013.07.100) pending download"
+
+  snag:
+    description: Sn-Ag eutectic / Sn-3.5Ag solder (microbump caps)
+    class: solder
+    tier: mvp
+    status: partial
+    valid_T_C: [-50, 220]
+    properties:
+      density: {value: 7.5, unit: g/cm3, basis: handbook, source: nist_solder_db_v4, locator: "Table 1.18 column Sn-3.5Ag: density 7.5 g/cm3 (Biocca 1998 as cited)", verified_on: 2026-10-20}
+      sigma: {value: 12.3, quantity: resistivity, unit: uohm cm, basis: handbook, source: nist_solder_db_v4, locator: "Table 1.18 column Sn-3.5Ag: electrical resistivity 12.3 uOhm cm", verified_on: 2026-10-20}
+      k: {value: 61, unit: W/mK, basis: template, analog_of: "sac305 (Indalloy 256, Sn-based solder)", source: indium_pds_100346, locator: "p.1 properties table: thermal conductivity 61 W/mK", sensitivity: {property: k, delta: {factor: [0.5, 2]}}, note: "another Sn-rich solder as analog", verified_on: 2026-10-20}
+      elastic:
+        model: iso
+        E: {model: table_T, T_C: [-50, 220], value: [52.5, 33.6]}
+        nu: 0.29
+        unit: GPa
+        basis: paper_model_input
+        source: tcpmt.2025.3614186
+        locator: "p.7 Table III row 12 Sn-Ag Eutectic Solder, elasticity: -50 C 52.5 GPa, 220 C 33.6 GPa, nu 0.29 (from its ref [24])"
+        verified_on: 2026-10-20
+      cte:
+        kind: instantaneous
+        model: table_T
+        T_C: [-50, 220]
+        value: [20.5, 25.0]
+        unit: ppm/K
+        basis: paper_model_input
+        source: tcpmt.2025.3614186
+        locator: "p.7 Table III row 12, CTE -50 C 2.05E-05, 220 C 2.50E-05 /C"
+        verified_on: 2026-10-20
+      viscoplastic:
+        status: tier2_data
+        model: anand
+        params: {s0_MPa: 30.36, Q_R_K: 8765, A_per_s: 52690, xi: 6, m: 0.182, h0_MPa: 7205.18, s_hat_MPa: 76.944, n: 0.018, a: 1.2321}
+        basis: paper_model_input
+        source: tcpmt.2025.3614186
+        locator: "p.7 Table III row 12 Sn-Ag Eutectic Solder, Anand viscoplasticity"
+        verified_on: 2026-10-20
+    alternatives:
+      e_ectc51909_2023_00155:
+        property: elastic
+        use: sensitivity (paper SnAg)
+        model: iso
+        E: 45100
+        nu: {value: N/A, missing: "not given"}
+        unit: MPa
+        basis: paper_model_input
+        source: ectc51909.2023.00155
+        locator: "p.3 Table 8 row SnAg (45,100 MPa, CTE 21)"
+        verified_on: 2026-10-20
+      e_ectc2011_5898527:
+        property: elastic
+        use: sensitivity (paper Sn-Ag solder)
+        model: iso
+        E: 51
+        nu: {value: N/A, missing: "not given"}
+        unit: GPa
+        basis: paper_model_input
+        source: ectc.2011.5898527
+        locator: "p.2 Table 2 row Sn Ag solder (51 GPa, CTE 22.4)"
+        verified_on: 2026-10-20
+      e_nist_mccabe:
+        property: elastic
+        use: sensitivity (handbook Sn-3.5Ag)
+        model: iso
+        E: 56
+        nu: {value: N/A, missing: "not given"}
+        unit: GPa
+        basis: handbook
+        source: nist_solder_db_v4
+        locator: "Table 1.3 column Sn-3.5Ag: Young's modulus 56 GPa (McCabe and Fine, Scripta Mater. 39, 189, 1998 as cited)"
+        verified_on: 2026-10-20
+      cte_ectc2011_5898527:
+        property: cte
+        use: sensitivity
+        kind: instantaneous
+        value: 22.4
+        unit: ppm/K
+        basis: paper_model_input
+        source: ectc.2011.5898527
+        locator: "p.2 Table 2 row Sn Ag solder"
+        verified_on: 2026-10-20
+    missing: ["k of Sn-Ag", "cp"]
+
+  imc_cu_sn:
+    description: Cu-Sn intermetallic layer (as modelled in a BGA joint; phase not named)
+    class: solder
+    tier: "1"
+    status: partial
+    valid_T_C: [-55, 220]
+    properties:
+      elastic:
+        model: iso
+        E: 51.72
+        nu: 0.3
+        unit: GPa
+        basis: paper_model_input
+        source: tcpmt.2025.3614186
+        locator: "p.6 Table II row 4 Intermetallic (E 51.72, G 19.89 GPa, nu 0.3, all temperatures)"
+        verified_on: 2026-10-20
+      cte: {kind: instantaneous, value: 17.1, unit: ppm/K, basis: paper_model_input, source: tcpmt.2025.3614186, locator: "p.6 Table II row 4 Intermetallic, instantaneous CTE 1.71E-05", verified_on: 2026-10-20}
+      plasticity:
+        status: tier2_data
+        model: bilinear_isotropic
+        yield_MPa: 33.33
+        tangent_MPa: 1034.2
+        basis: paper_model_input
+        source: tcpmt.2025.3614186
+        locator: "p.6 Table II row 4 Intermetallic"
+        verified_on: 2026-10-20
+      k: {value: N/A, missing: "no source read"}
+    missing: ["IMC phase (Cu6Sn5 / Cu3Sn) not named by the source", "k"]
+
+  snbi:
+    description: Sn-Bi solder (Bi 52-58 %, low-temperature)
+    class: solder
+    tier: "1"
+    status: partial
+    valid_T_C: [-55, 138]   # solidus of Sn-58Bi 138 C (NIST DB Table 2.2.19)
+    properties:
+      elastic: {model: iso, E: 11.9, nu: 0.35, unit: GPa, basis: paper_model_input, source: tcpmt.2025.3538554, locator: "p.7 Table V row SnBi (Bi: 52 %): E 11.9 GPa, nu 0.35, alpha 14.0 ppm/C", verified_on: 2026-10-20}
+      cte: {kind: instantaneous, value: 14.0, unit: ppm/K, basis: paper_model_input, source: tcpmt.2025.3538554, locator: "p.7 Table V row SnBi (Bi: 52 %)", verified_on: 2026-10-20}
+      k: {value: 61, unit: W/mK, basis: template, analog_of: "sac305 (Indalloy 256, Sn-based solder)", source: indium_pds_100346, locator: "p.1 properties table: thermal conductivity 61 W/mK", sensitivity: {property: k, delta: {factor: [0.5, 2]}}, note: "no Sn-Bi k read", verified_on: 2026-10-20}
+    alternatives:
+      cte_nist_sn58bi: {property: cte, use: sensitivity (handbook Sn-58Bi at 20 C), kind: instantaneous, value: 15, unit: ppm/K, basis: handbook, source: nist_solder_db_v4, locator: "Table 2.2.19 row Sn-58Bi: Tsol 138 C, CTE (20 C) 1.5 (x 1e-5 /C); resistivity 30-35 uOhm cm (Glazer 1994 as cited)", verified_on: 2026-10-20}
+    missing: ["k (analog)", "density", "resistivity value (range 30-35 uOhm cm only)", "Anand / creep (tier 2)"]
