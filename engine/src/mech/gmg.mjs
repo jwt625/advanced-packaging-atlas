@@ -17,7 +17,7 @@
 import { stencilOffsets, gridNDOrder } from '../la/stencil.mjs';
 import { SparseCholesky } from '../la/sparse.mjs';
 import { inv3 } from './solve.mjs';
-import { nodeCounts } from './numbering.mjs';
+import { nodeCounts, nodeXYZ } from './numbering.mjs';
 
 const SDI = Int8Array.from({ length: 27 }, (_, s) => (s % 3) - 1);
 const SDJ = Int8Array.from({ length: 27 }, (_, s) => (Math.floor(s / 3) % 3) - 1);
@@ -536,10 +536,90 @@ function q2sCoarseStencil(grid, num, sys, PW) {
  * Preconditioner factory for the q2s CSR system: z = M^-1 r with one p-multigrid cycle
  * (nuF damped block-Jacobi sweeps, Q1 Galerkin coarse correction by one V-cycle, nuF sweeps).
  */
-export function buildQ2sPMG(grid, num, sys, { omega = null, nuF = 2, ...mgOpt } = {}) {
+/**
+ * Column (z-line) block smoother data for a q2s CSR system (lane L20 task 4): the DOFs of all nodes that share (x, y)
+ * form one block (nodes sorted by z, 3 DOF each), factored as a banded Cholesky of the column's own couplings. On thin
+ * plates with one or few q2s cells per layer the through-thickness coupling is far stiffer than the in-plane one at
+ * large cell aspect; 3 x 3 point blocks do not smooth it (measured: two-grid iterations 437 -> 48 at aspect 20).
+ * Returns {solve(r, z): z = B^-1 r (all DOFs), stats}.
+ */
+// column grouping of a numbering (depends on the mesh only): cached per numbering object, so Newton iterations that
+// rebuild the smoother for a new tangent reuse it (audit A7 M4, L27)
+const COLUMN_STRUCT = new WeakMap();
+function q2sColumnStructure(grid, num) {
+  const hit = COLUMN_STRUCT.get(num);
+  if (hit && hit.grid === grid) return hit;
+  const nn = num.nn, groups = new Map();
+  for (let r = 0; r < nn; r++) {
+    const [x, y, z] = nodeXYZ(grid, num.ext[r]);
+    const k = `${Math.round(x * 1e9)},${Math.round(y * 1e9)}`;
+    if (!groups.has(k)) groups.set(k, []);
+    groups.get(k).push([z, r]);
+  }
+  const loc = new Int32Array(3 * nn), blk = new Int32Array(3 * nn), dofsList = [];
+  for (const g of groups.values()) {
+    g.sort((a, b) => a[0] - b[0]);
+    const dofs = new Int32Array(3 * g.length);
+    g.forEach(([, r], q) => { for (let a = 0; a < 3; a++) { dofs[3 * q + a] = 3 * r + a; loc[3 * r + a] = 3 * q + a; blk[3 * r + a] = dofsList.length; } });
+    dofsList.push(dofs);
+  }
+  const st = { grid, loc, blk, dofsList };
+  COLUMN_STRUCT.set(num, st);
+  return st;
+}
+
+export function q2sColumnBlocks(grid, num, sys) {
+  const { pat, val } = sys, nn = num.nn;
+  const { loc, blk, dofsList } = q2sColumnStructure(grid, num);
+  const blocks = dofsList.map((dofs) => ({ dofs }));
+  let maxHb = 0, store = 0;
+  for (let id = 0; id < blocks.length; id++) {
+    const b = blocks[id], m = b.dofs.length;
+    let hb = 0;
+    for (const d of b.dofs) for (let p = pat.rowptr[d]; p < pat.rowptr[d + 1]; p++) { const c = pat.colidx[p]; if (blk[c] === id && val[p] !== 0) hb = Math.max(hb, Math.abs(loc[c] - loc[d])); }
+    // lower band L[i][i - t] at i (hb + 1) + t, t = 0 .. hb
+    const L = new Float64Array(m * (hb + 1));
+    for (const d of b.dofs) { const i = loc[d]; for (let p = pat.rowptr[d]; p < pat.rowptr[d + 1]; p++) { const c = pat.colidx[p]; if (blk[c] !== id) continue; const j = loc[c]; if (j <= i && i - j <= hb) L[i * (hb + 1) + (i - j)] += val[p]; } }
+    // banded Cholesky in place
+    for (let i = 0; i < m; i++) {
+      for (let t = Math.min(hb, i); t >= 0; t--) {
+        const j = i - t;
+        let sum = L[i * (hb + 1) + t];
+        for (let q = Math.max(0, i - hb, j - hb); q < j; q++) sum -= L[i * (hb + 1) + (i - q)] * L[j * (hb + 1) + (j - q)];
+        if (t === 0) {
+          if (!(sum > 0)) throw new Error('mech gmg: column block not positive definite (indefinite tangent?)');
+          L[i * (hb + 1)] = Math.sqrt(sum);
+        } else L[i * (hb + 1) + t] = sum / L[j * (hb + 1)];
+      }
+    }
+    b.L = L; b.hb = hb; b.m = m;
+    maxHb = Math.max(maxHb, hb); store += L.length;
+  }
+  const y = new Float64Array(3 * nn);
+  const solve = (r, z) => {
+    for (const { dofs, L, hb, m } of blocks) {
+      for (let i = 0; i < m; i++) {
+        let s = r[dofs[i]];
+        for (let q = Math.max(0, i - hb); q < i; q++) s -= L[i * (hb + 1) + (i - q)] * y[q];
+        y[i] = s / L[i * (hb + 1)];
+      }
+      for (let i = m - 1; i >= 0; i--) {
+        let s = y[i];
+        for (let q = i + 1; q <= Math.min(m - 1, i + hb); q++) s -= L[q * (hb + 1) + (q - i)] * y[q];
+        y[i] = s / L[i * (hb + 1)];
+        z[dofs[i]] = y[i];
+      }
+    }
+  };
+  return { solve, stats: { columns: blocks.length, max_half_band: maxHb, stored: store } };
+}
+
+export function buildQ2sPMG(grid, num, sys, { omega = null, nuF = 2, coarseOp = null, smoother = 'block', ...mgOpt } = {}) {
   const t0 = performance.now();
   const PW = q2sParents(grid, num);
-  const cop = q2sCoarseStencil(grid, num, sys, PW);
+  // coarseOp: a corner-node block stencil on the same tensor (e.g. the q1im operator, q1imCoarseOp) used instead of the
+  // Galerkin q1 image of the q2s matrix, which locks in bending at large cell aspect (lane L20 task 4)
+  const cop = coarseOp ?? q2sCoarseStencil(grid, num, sys, PW);
   const mg = buildBlockMG(cop, grid.xs, grid.ys, mgOpt);
   // block-Jacobi inverse diagonal of the q2s system
   const { pat, val } = sys, nn = num.nn;
@@ -565,8 +645,16 @@ export function buildQ2sPMG(grid, num, sys, { omega = null, nuF = 2, ...mgOpt } 
       y[i] = s;
     }
   };
+  const col = smoother === 'column' ? q2sColumnBlocks(grid, num, sys) : null;
+  const dz = col ? new Float64Array(n) : null, dr = col ? new Float64Array(n) : null;
   const jac = (r, z) => {
     matvec(z, Az);
+    if (col) {
+      for (let i = 0; i < n; i++) dr[i] = r[i] - Az[i];
+      col.solve(dr, dz);
+      for (let i = 0; i < n; i++) z[i] += omega * dz[i];
+      return;
+    }
     for (let q = 0; q < nn; q++) {
       const o = 9 * q, d0 = r[3 * q] - Az[3 * q], d1 = r[3 * q + 1] - Az[3 * q + 1], d2 = r[3 * q + 2] - Az[3 * q + 2];
       z[3 * q] += omega * (B[o] * d0 + B[o + 1] * d1 + B[o + 2] * d2);
@@ -581,12 +669,14 @@ export function buildQ2sPMG(grid, num, sys, { omega = null, nuF = 2, ...mgOpt } 
     for (let i = 0; i < n; i++) v[i] = Math.sin(1 + 12.9898 * i);
     for (let it = 0; it < 20; it++) {
       matvec(v, Az);
-      for (let q = 0; q < nn; q++) {
-        const o = 9 * q, d0 = Az[3 * q], d1 = Az[3 * q + 1], d2 = Az[3 * q + 2];
-        t[3 * q] = B[o] * d0 + B[o + 1] * d1 + B[o + 2] * d2;
-        t[3 * q + 1] = B[o + 3] * d0 + B[o + 4] * d1 + B[o + 5] * d2;
-        t[3 * q + 2] = B[o + 6] * d0 + B[o + 7] * d1 + B[o + 8] * d2;
-      }
+      if (col) col.solve(Az, t);
+      else
+        for (let q = 0; q < nn; q++) {
+          const o = 9 * q, d0 = Az[3 * q], d1 = Az[3 * q + 1], d2 = Az[3 * q + 2];
+          t[3 * q] = B[o] * d0 + B[o + 1] * d1 + B[o + 2] * d2;
+          t[3 * q + 1] = B[o + 3] * d0 + B[o + 4] * d1 + B[o + 5] * d2;
+          t[3 * q + 2] = B[o + 6] * d0 + B[o + 7] * d1 + B[o + 8] * d2;
+        }
       let nv = 0, nt = 0;
       for (let i = 0; i < n; i++) { nv += v[i] * v[i]; nt += t[i] * t[i]; }
       lam = Math.sqrt(nt / nv);
@@ -622,6 +712,6 @@ export function buildQ2sPMG(grid, num, sys, { omega = null, nuF = 2, ...mgOpt } 
     }
     for (let s = 0; s < nuF; s++) jac(r, z);
   };
-  return { precond, stats: { ...mg.stats, pmg: { omega, lambda_max: lam, nuF }, setup_ms: performance.now() - t0 } };
+  return { precond, stats: { ...mg.stats, pmg: { omega, lambda_max: lam, nuF, smoother, ...(col ? { column: col.stats } : {}), coarse: coarseOp ? 'given' : 'galerkin_q1' }, setup_ms: performance.now() - t0 } };
 }
 

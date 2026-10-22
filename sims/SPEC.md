@@ -1,6 +1,6 @@
 # Simulation config and data contracts (v0)
 
-Status: v0.19, 2026-10-20 (DevLog-012 T0; sections 7-15 additions). Binding for all lanes. Changes: additive only, recorded in DevLog-012
+Status: v0.25, 2026-10-22 (DevLog-012 T0; sections 7-25 additions; sections 21-25 and 14.6 from DevLog-013/014). Binding for all lanes. Changes: additive only, recorded in DevLog-012
 "Contract changes" with date and lane. Plan and decisions: DevLog-010 (A1-A11).
 
 Units: SI inside the engine (m, K, W, Pa, S/m). Config keys carry unit suffixes (`_mm`, `_um`, `_C`, `_K`, `_W`,
@@ -474,3 +474,68 @@ constituents therefore reach homogenized layers in both RVE and ROM modes.
 - Warnings: a port face crossing a PML slab; `factor: 'wasm'` without WebAssembly SIMD (also em2d).
 - Touchstone header states the de-embedding actually used.
 
+
+## 21. Nonlinear stability, canonical homog keys, q2s smoother (2026-10-21, lane L20; DevLog-013)
+
+- Nonlinear (section 18): case key `nonlinear.branch: stable | follow` (default `stable`). Each converged load step
+  reports `negative_pivots` (inertia from an indefinite LDL^T fallback after a failed Cholesky), `stable` and
+  `switched`. `stable` switches to the bifurcated branch (critical mode by inverse iteration, energy minimisation along
+  it, then energy-descent Newton); `follow` stays on the current (unstable) path and warns at each unstable step. Results carry
+  `extra.nonlinear.bifurcation[]` and bifurcation / unstable-step warnings.
+- The q2s PCG path has no stability check: it warns, and an indefinite tangent raises a named error pointing to
+  `linear: 'direct'`. Library opt-ins `predictor: 'secant'` and `lineSearch: 'slope'` exist (documented hazard: the
+  secant predictor can jump to another stable branch); defaults unchanged.
+- RVE table rows are indexed and matched by the canonical key `canonicalHomogKey(lib, key)` (constituents through the
+  alias map, numbers normalized, default axis dropped, kind kept); entries keep the requested key; fingerprints
+  (18.1) unchanged.
+- `gmg.smoother: block | column` for q2s PCG (default `block`; the nonlinear PCG path uses `column`).
+
+## 22. Tier-2 material data accessor and new units (2026-10-21, lane L21; DevLog-013)
+
+- `lib.tier2(key, property, alternative?)` returns tier-2 data blocks (not used by default solves): viscoelastic Prony
+  series with shift types `wlf`, `arrhenius` and `piecewise` (Arrhenius below Tc, WLF above); Anand 9-parameter sets;
+  bilinear and multi-point plasticity; nested alternatives, each with source and locator. Schemas validated in
+  `engine/src/materials/schema.mjs`.
+- An instantaneous CTE given as an expression is integrated on a 0.5 K grid to the secant value.
+- Units: modulus unit `1e12 dyn/cm2`.
+- Pending for the viscoelastic engine lane: the `piecewise` shift in the mech viscoelastic code (it handles `wlf` and
+  `arrhenius` only).
+
+## 23. Layer regions and the CD6 overlap ceiling (2026-10-21, lane L19; DevLog-013)
+
+- Generator layers with `route.regions` (package3d TEMPLATE_FORMAT "Per-region level properties") are transcribed by
+  `engine/src/families/tools/transcribe.mjs`, resolved to rectangles with their own use, L/S and fill
+  (`resolve.mjs`), and overlaid as homogenized boxes at the level's priority + 1 (`source: layer_region`).
+- CD6 overlap ceiling (Wentao 2026-10-21, DevLog-012): a study above room temperature runs at most at the lowest upper
+  data-range limit over the non-compliant materials of its stack (`engine/src/families/tools/ceiling.mjs` is the
+  reference; it also reports the ceiling including compliant layers). Compliant layers (E <= 100 MPa at the study
+  temperature) hold their last value beyond their range via `materials.allow_extrapolation` restricted to those
+  keys, with the `extrapolated` provenance flag. Targets measured above the ceiling are compared at the ceiling with a
+  note stating the measured temperature and the offset.
+
+## 24. Variant files and E sensitivity status (2026-10-22, lane L26; DevLog-013)
+
+- Labelled variant files live in `sims/<family>/variants/` (format of `engine/src/runner/variants.mjs`; read by
+  `src/runner/node.mjs --variants`); they are not package cases (outside the app case glob and the families test).
+- Material overrides of `E_GPa` accept status `sensitivity` (sections 11.1, 17), with the same admissibility checks.
+
+### 14.6 Order-2 elements, iterative solver, lumped ports, adaptive sweep (2026-10-22, lane L22; DevLog-014)
+
+- New `em3d` keys: `order` 1 | 2 (default 1); `solver` auto | direct | iterative; `iterative` {rtol, max_iter,
+  restart, smooth, aux_smooth} (GMRES with two-level p-multigrid, direct order-1 coarse solve); `direct_max_dof`
+  (default 3e4 at order 2); `coarse_max_dof` (default 6e4); `adaptive` {tol, max_samples, memory} (minimal-rational
+  adaptive frequency sweep); `mesh.h_scale`. Order-2 DOF guard default 4e5.
+- Lumped ports: `ports[]` entry {type: lumped, name, rect_um, direction, R_ohm}.
+- Results: `rows[].solver`; `mesh.order`, `mesh.solver`, `mesh.pmg`; `derived.adaptive`; `port_checks[]` adds
+  `z_em2d_cells`, `z_em2d_rel_change` (the em2d port-impedance reference now refines conductor cells 4..32 to 5e-4).
+- Touchstone extension uses the terminal count (`.s{N}p`).
+- Algorithms adapted from awslabs/palace (Apache-2.0) are listed in `engine/src/em3d/NOTICE`.
+
+## 25. Thermal-only RVE rows, nonlinear step records, tier-2 provenance (2026-10-22, lane L27; DevLog-013)
+
+- 18.1 addition: thermal-only (conduction) RVE requests are served only by thermal-only table rows (`fp_k`); a full
+  row never serves k. Conduction-only RVE entries carry rho and cp by the mixture rule (homogenized layers work in
+  `thermal_transient`).
+- 21 addition: each checked nonlinear step carries `perturbed_pivots` (warning when > 0); branch-switch attempts carry
+  `mode_residual` and `mode_iterations`; `switched` is present on every checked step; Newton counts sum all attempts.
+- 22 addition: `analog_of` is allowed on any material leaf; nested tier-2 alternatives require `verified_on`.

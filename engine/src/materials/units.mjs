@@ -3,7 +3,7 @@
 
 /** Multiplicative factors to SI for each quantity family. */
 const FACTORS = {
-  modulus: { Pa: 1, MPa: 1e6, GPa: 1e9 },
+  modulus: { Pa: 1, MPa: 1e6, GPa: 1e9, '1e12 dyn/cm2': 1e11 }, // 1 dyn/cm2 = 0.1 Pa (Hall 1967 tables; L21)
   cte: { '1/K': 1, 'ppm/K': 1e-6 },
   conductivity: { 'W/mK': 1, 'W/cmK': 100 },
   density: { 'kg/m3': 1, 'g/cm3': 1000 },

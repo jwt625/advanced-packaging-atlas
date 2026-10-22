@@ -9,8 +9,9 @@
 //         cte_ppmK: {value: {alpha1: 7, alpha2: 25, Tg_C: 140}, status: reported, ref: "..."}   # or value: 7
 //         k_W_mK:   {value: 0.95, status: public, ref: "..."}                                     # or [kx, ky, kz]
 //         rho_kg_m3, cp_J_kgK: {value, status, ref|note}
-// status `sensitivity` (wave 8): a bound run of a template value (nu, k_W_mK, cte_ppmK only); provenance shows
-// status sensitivity and `sensitivity_bound: true`.
+// status `sensitivity` (wave 8): a bound run of a template value (E_GPa, nu, k_W_mK, cte_ppmK; E_GPa added
+// 2026-10-21 by lane L26 for CD1 sensitivity bounds on moduli); provenance shows status sensitivity and
+// `sensitivity_bound: true`. Bounds pass the same admissibility checks as any other override.
 // Fields: E_GPa (isotropic E; replaces cubic / ortho elastic, which then needs nu too), nu, cte_ppmK (number = constant,
 // [ax, ay, az] = per-axis constants;
 // `kind` secant (default, Tref_C default 25 C, recorded as assumption override_cte_secant_Tref_25C) | instantaneous;
@@ -27,7 +28,7 @@ import { C_TO_K } from './units.mjs';
 
 export const OVERRIDE_FIELDS = ['E_GPa', 'nu', 'cte_ppmK', 'k_W_mK', 'rho_kg_m3', 'cp_J_kgK'];
 export const OVERRIDE_STATUSES = ['reported', 'derived', 'public', 'template', 'user', 'sensitivity'];
-const SENSITIVITY_FIELDS = ['nu', 'k_W_mK', 'cte_ppmK'];
+const SENSITIVITY_FIELDS = ['E_GPa', 'nu', 'k_W_mK', 'cte_ppmK'];
 const DEFAULT_SENS = { nu: { property: 'nu', delta: { abs: 0.05 } }, k_W_mK: { property: 'k', delta: { factor: [0.5, 2] } } };
 
 const clone = (o) => JSON.parse(JSON.stringify(o));
@@ -178,7 +179,9 @@ function admissible(lib, applied) {
       for (const T of [temps[0], temps[10], temps[20]]) {
         let el;
         try {
-          el = lib.resolve(key, T, { need: ['elastic'] }).elastic;
+          // allowExtrapolation (hold last value): entry ranges may extend past the default E table when an alternative
+          // reaches further (e.g. silicone_adhesive -65..250 C, default E to 150 C); the held values are what is checked
+          el = lib.resolve(key, T, { need: ['elastic'], allowExtrapolation: [key] }).elastic;
         } catch (err) {
           throw new Error(`materials: override ${requested}.${fields.includes('nu') ? 'nu' : 'E_GPa'}: elastic data do not resolve at ${(T - C_TO_K).toFixed(1)} C (${err.message})`);
         }

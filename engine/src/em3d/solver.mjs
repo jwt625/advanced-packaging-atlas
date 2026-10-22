@@ -20,11 +20,20 @@ import { restrictPattern } from '../em2d/fe.mjs';
 import { tetGeometry, tetMatrices, faceMass, FACE_EDGES } from './elements.mjs';
 import { preparePort, portModes, portMass } from './ports.mjs';
 import { nd3Order } from './order.mjs';
+import { buildSpace } from './space.mjs';
+import { tetMatricesP, triTraceMass } from './hcurl.mjs';
+import { preparePMG, buildPMG } from './pmg.mjs';
+import { gmres } from './krylov.mjs';
+import { prepareLumped } from './lumped.mjs';
 import { makeFactor } from '../em2d/ldlt-select.mjs';
 import { C0, MU0, EPS0, ETA0, skinDepth } from '../em2d/closed-forms.mjs';
 import { makeRoughness } from '../em2d/roughness.mjs';
 import { CMat, cmatInv, cmatMul } from '../em2d/dense.mjs';
 import { zToS } from '../em2d/mtl.mjs';
+
+// default DOF guard for order 2 (lane L22): GMRES + p-multigrid memory is about 2 kB per order-2 DOF plus the order-1
+// coarse factor; 4e5 keeps a run near 1 GB (measured values in DevLog-014)
+export const DEFAULT_MAX_DOF_P2 = 4e5;
 
 const fail = (m) => {
   throw new Error(`em3d: ${m}`);
@@ -66,6 +75,11 @@ const faceKey = (a, b, c) => `${a},${b},${c}`;
 export function prepare3d(mesh, p) {
   const t0 = now();
   const { nodes, tets, nTets, tetSolid, edges, nEdges, tetEdges, box } = mesh;
+  // function space (lane L22): order 1 = Whitney edges (L7 / L13 numbering), order 2 = hierarchical Nedelec (space.mjs)
+  const order = p.order ?? 1;
+  const space = buildSpace(mesh, order);
+  const nDof = space.nDof;
+  const faceT = (v) => (order === 1 ? faceMass(nodes, v).T : triTraceMass(2, nodes, v).T);
   const bc = Object.fromEntries(SIDES.map((s) => [s, p.bc?.[s] ?? 'pec']));
   const ports = p.ports ?? [];
   for (const pt of ports) {
@@ -129,23 +143,36 @@ export function prepare3d(mesh, p) {
   }
 
   // edges: domain membership and Dirichlet sets
-  const inDomain = new Uint8Array(nEdges),
-    dirichlet = new Uint8Array(nEdges);
+  const inDomain = new Uint8Array(nDof),
+    dirichlet = new Uint8Array(nDof),
+    edgeOnCond = new Uint8Array(nEdges);
+  const ndt = space.ndt;
   for (let e = 0; e < nTets; e++) {
     const pecTet = isCond(tetSolid[e]) && solidProps[tetSolid[e]].model === 'pec';
-    for (let l = 0; l < 6; l++) {
-      const id = tetEdges[6 * e + l];
+    for (let l = 0; l < ndt; l++) {
+      const id = space.tetDofs[ndt * e + l];
       if (domain[e]) inDomain[id] = 1;
       if (pecTet) dirichlet[id] = 1;
     }
+    if (!domain[e]) for (let l = 0; l < 6; l++) edgeOnCond[tetEdges[6 * e + l]] = 1;
   }
   let pecMaskBits = 0;
   for (const s of SIDES) if (bc[s] === 'pec') pecMaskBits |= sideBit(s);
   for (let id = 0; id < nEdges; id++) {
     const a = edges[2 * id],
       b = edges[2 * id + 1];
-    if (nodeSide[a] & nodeSide[b] & pecMaskBits) dirichlet[id] = 1;
+    if (nodeSide[a] & nodeSide[b] & pecMaskBits) {
+      dirichlet[id] = 1;
+      if (order === 2) dirichlet[nEdges + id] = 1;
+    }
   }
+  if (order === 2)
+    for (let fId = 0; fId < space.nFaces; fId++) {
+      const a = space.faces[3 * fId],
+        b = space.faces[3 * fId + 1],
+        c = space.faces[3 * fId + 2];
+      if (nodeSide[a] & nodeSide[b] & nodeSide[c] & pecMaskBits) dirichlet[2 * nEdges + 2 * fId] = dirichlet[2 * nEdges + 2 * fId + 1] = 1;
+    }
   // faces of conductor tets (solid id) and boundary faces of the domain
   const condFace = new Map();
   for (let e = 0; e < nTets; e++) {
@@ -201,10 +228,10 @@ export function prepare3d(mesh, p) {
   for (const f of condFaces) {
     const sp = solidProps[f.solid];
     if (sp.model === 'pec') continue;
-    const fm = faceMass(nodes, f.v);
-    const fe = FACE_EDGES.map(([i, j]) => edgeOf(f.v[i], f.v[j]));
+    const fmT = faceT(f.v);
+    const fe = order === 1 ? FACE_EDGES.map(([i, j]) => edgeOf(f.v[i], f.v[j])) : Array.from(space.faceDofs(f.v));
     if (sp.model === 'ibc') {
-      ibcFaces.push({ solid: f.solid, T: fm.T, e: fe });
+      ibcFaces.push({ solid: f.solid, T: fmT, e: fe });
       continue;
     }
     // thin: horizontal faces at the slab's z0 / z1 are paired with the opposite face of the same xy triangle
@@ -212,7 +239,7 @@ export function prepare3d(mesh, p) {
     const zf = f.v.map((n) => nodes[3 * n + mesh.axisIndex] * 1e6);
     const horiz = Math.abs(zf[0] - zf[1]) < 1e-9 && Math.abs(zf[0] - zf[2]) < 1e-9;
     if (!horiz) {
-      ibcFaces.push({ solid: f.solid, T: fm.T, e: fe, thinSide: true });
+      ibcFaces.push({ solid: f.solid, T: fmT, e: fe, thinSide: true });
       continue;
     }
     const atTop = Math.abs(zf[0] - s.z[1]) < 1e-6 * Math.max(1, Math.abs(s.z[1]));
@@ -224,14 +251,14 @@ export function prepare3d(mesh, p) {
     const oKey = faceKey(...[...ov].sort((x, y) => x - y));
     const partnerInDomain = faceCount.get(oKey) === 1;
     const thick = Math.abs(s.z[1] - s.z[0]) * 1e-6;
-    if (partnerInDomain) thinPairs.push({ solid: f.solid, T: fm.T, e: fe, eo: FACE_EDGES.map(([i, j]) => edgeOf(ov[i], ov[j])), t: thick, own: true });
+    if (partnerInDomain) thinPairs.push({ solid: f.solid, T: fmT, e: fe, eo: order === 1 ? FACE_EDGES.map(([i, j]) => edgeOf(ov[i], ov[j])) : Array.from(space.faceDofs(ov)), t: thick, own: true });
     else {
       // partner face not in the domain: on a box side (pmc / port: open behind, K2 = 0 -> K1 = E1 / (Zs coth kt);
       // pec: E2 = 0 -> K1 = (coth kt / Zs) E1) or against another conductor (treated as PEC behind)
       const common = nodeSide[ov[0]] & nodeSide[ov[1]] & nodeSide[ov[2]];
       let backing = 'pec';
       for (const sd of SIDES) if (common & sideBit(sd)) backing = bc[sd] === 'pec' ? 'pec' : 'open';
-      thinSingle.push({ solid: f.solid, T: fm.T, e: fe, t: thick, backing });
+      thinSingle.push({ solid: f.solid, T: fmT, e: fe, t: thick, backing });
     }
   }
   // elements for the pattern: domain tets + thin pair blocks (own 3 + opposite 3 edges)
@@ -241,17 +268,21 @@ export function prepare3d(mesh, p) {
     for (const f of faces) for (const [i, j] of FACE_EDGES) set.add(edgeOf(f[i], f[j]));
     return Int32Array.from([...set].sort((x, y) => x - y));
   });
-  const elem = new Int32Array(6 * (nDomTets + thinPairs.length));
+  const elem = new Int32Array(ndt * (nDomTets + thinPairs.length));
   const domList = new Int32Array(nDomTets);
   let w = 0;
   for (let e = 0; e < nTets; e++)
     if (domain[e]) {
       domList[w] = e;
-      elem.set(tetEdges.subarray(6 * e, 6 * e + 6), 6 * w++);
+      elem.set(space.tetDofs.subarray(ndt * e, ndt * e + ndt), ndt * w++);
     }
+  const nfl = space.nfl;
   thinPairs.forEach((tp, i) => {
-    elem.set(tp.e, 6 * (nDomTets + i));
-    elem.set(tp.eo, 6 * (nDomTets + i) + 3);
+    // own + opposite face DOFs (2 nfl), padded to ndt with repeats for the pattern (order 2: 16 -> 20)
+    const o = ndt * (nDomTets + i);
+    elem.set(tp.e, o);
+    elem.set(tp.eo, o + nfl);
+    for (let k = 2 * nfl; k < ndt; k++) elem[o + k] = tp.eo[nfl - 1];
   });
   const nElemFE = nDomTets; // element slots are used for the tets only
   const warnings = [];
@@ -262,29 +293,63 @@ export function prepare3d(mesh, p) {
     const nPair = thinPairs.filter((t) => t.solid === i).length + thinSingle.filter((t) => t.solid === i).length;
     if (!nPair) warnings.push(`thin conductor ${sp.name}: no faces normal to the extrusion axis ${mesh.axis}; all its faces use the thick IBC (use axis = thickness direction)`);
   });
-  const pat = buildElementPattern(nEdges, elem, 6);
-  const free = new Uint8Array(nEdges);
+  const pat = buildElementPattern(nDof, elem, ndt);
+  const free = new Uint8Array(nDof);
   let nFree = 0;
-  for (let id = 0; id < nEdges; id++) if (inDomain[id] && !dirichlet[id]) (free[id] = 1), nFree++;
-  const maxDof = p.max_dof ?? 6e4;
-  if (nFree > maxDof) fail(`DOF budget exceeded: ${nFree} free edges > max_dof ${maxDof} (raise max_dof explicitly to run larger blocks)`);
+  for (let id = 0; id < nDof; id++) if (inDomain[id] && !dirichlet[id]) (free[id] = 1), nFree++;
+  const maxDof = p.max_dof ?? (order === 1 ? 6e4 : DEFAULT_MAX_DOF_P2);
+  if (nFree > maxDof) fail(`DOF budget exceeded: ${nFree} free ${order === 1 ? 'edges' : 'DOFs (order 2)'} > max_dof ${maxDof} (raise max_dof explicitly to run larger blocks)`);
+  // solver (lane L22): direct LDL^T (default for order 1 and for order 2 up to direct_max_dof) or GMRES + p-multigrid
+  const solverKind = p.solver ?? 'auto';
+  if (!['auto', 'direct', 'iterative'].includes(solverKind)) fail(`solver ${solverKind} (auto | direct | iterative)`);
+  if (solverKind === 'iterative' && order !== 2) fail('solver iterative needs order 2 (the p-multigrid coarse level is the order-1 space)');
+  // order 2: the direct factor fills about 5x more per DOF than order 1 (TE10 18.7k DOF nnzL 2.9e6, microstrip 80.7k
+  // DOF nnzL 3.1e7), so 'auto' switches to GMRES + p-multigrid above 3e4 DOF
+  const directMax = p.direct_max_dof ?? 3e4;
+  const solver = solverKind === 'auto' ? (order === 2 && nFree > directMax ? 'iterative' : 'direct') : solverKind;
   const R = restrictPattern(pat, free);
+  // assembly goes straight into the restricted (free-DOF) matrix (lane L22, memory): element slot -> restricted entry
+  // (-1 for eliminated rows / columns); the full pattern is not kept
+  const rslots = (() => {
+    const inv = new Int32Array(pat.nnz).fill(-1);
+    for (let q = 0; q < R.src.length; q++) inv[R.src[q]] = q;
+    const sl = elementSlots(pat, elem.subarray(0, ndt * nDomTets), ndt);
+    const out = new Int32Array(sl.length);
+    for (let k = 0; k < sl.length; k++) out[k] = inv[sl[k]];
+    return out;
+  })();
+  const patNnz = pat.nnz;
+  R.src = null; // not needed after rslots
   const tA = now();
-  let sym;
+  let sym = null;
+  let pmg = null;
   const ordering = p.ordering ?? 'auto';
-  if (ordering === 'nd3' || ordering === 'auto') {
+  if (solver === 'iterative') {
+    pmg = preparePMG({ order, R, space, mesh, solidProps, inDomain, dirichlet }, { ordering });
+    pmg.fpat = R.pat;
+    const coarseMax = p.coarse_max_dof ?? 6e4;
+    if (pmg.nc > coarseMax) fail(`coarse (order-1) level has ${pmg.nc} DOFs > coarse_max_dof ${coarseMax}: the direct coarse solve exceeds the browser budget (coarsen the mesh or raise coarse_max_dof explicitly)`);
+  } else if (ordering === 'nd3' || ordering === 'auto') {
     // DOF coordinates = edge midpoints for the 3D nested dissection (wave 4: 10-20 % fewer factor flops than AMD)
     const cx = new Float64Array(R.nf),
       cy = new Float64Array(R.nf),
       cz = new Float64Array(R.nf);
-    for (let id = 0; id < nEdges; id++) {
+    const pt3 = new Float64Array(3);
+    for (let id = 0; id < nDof; id++) {
       const q = R.map[id];
       if (q < 0) continue;
-      const a = edges[2 * id],
-        b = edges[2 * id + 1];
-      cx[q] = 0.5 * (nodes[3 * a] + nodes[3 * b]);
-      cy[q] = 0.5 * (nodes[3 * a + 1] + nodes[3 * b + 1]);
-      cz[q] = 0.5 * (nodes[3 * a + 2] + nodes[3 * b + 2]);
+      if (order === 1) {
+        const a = edges[2 * id],
+          b = edges[2 * id + 1];
+        cx[q] = 0.5 * (nodes[3 * a] + nodes[3 * b]);
+        cy[q] = 0.5 * (nodes[3 * a + 1] + nodes[3 * b + 1]);
+        cz[q] = 0.5 * (nodes[3 * a + 2] + nodes[3 * b + 2]);
+        continue;
+      }
+      space.dofPoint(id, pt3);
+      cx[q] = pt3[0];
+      cy[q] = pt3[1];
+      cz[q] = pt3[2];
     }
     sym = analyze(R.pat, { perm: nd3Order(R.pat, cx, cy, cz, { leaf: p.nd_leaf ?? 8000 }) });
     if (ordering === 'auto') {
@@ -298,10 +363,17 @@ export function prepare3d(mesh, p) {
   // node -> conductor solid (for port electrostatics)
   const nodeCond = new Int32Array(mesh.nNodes).fill(-1);
   for (let e = 0; e < nTets; e++) if (!domain[e]) for (let i = 0; i < 4; i++) nodeCond[tets[4 * e + i]] = tetSolid[e];
-  const portData = ports.map((pt, i) => ({ ...preparePort(mesh, pt, portFaces[i], { nodeCond, nodeSide, sideBit, bc, solidProps, edgeOf, tetMat, matKeys, domain, free }), }));
+  const portData = ports.map((pt, i) => ({ ...preparePort(mesh, pt, portFaces[i], { nodeCond, nodeSide, sideBit, bc, solidProps, edgeOf, tetMat, matKeys, domain, free, space, faceT, edgeOnCond }), }));
+  // lumped ports (lane L22)
+  const lumped = (p.lumped ?? []).map((spec) => prepareLumped(mesh, space, spec, { edgeOf, faceT }));
+  if (!ports.length && !lumped.length) fail('no ports');
   return {
     mesh,
     p,
+    order,
+    space,
+    inDomain,
+    dirichlet,
     bc,
     solidProps,
     domList,
@@ -311,40 +383,52 @@ export function prepare3d(mesh, p) {
     tetMat,
     matKeys,
     pml,
-    pat,
-    elem,
-    elemFE: elem.subarray(0, 6 * nElemFE),
+    patNnz,
+    rslots,
     R,
     sym,
+    solver,
+    pmg,
     free,
     nFree,
     ibcFaces,
     thinPairs,
     thinSingle,
     ports: portData,
+    lumped,
     warnings,
     bmin,
     bmax,
-    stats: { dof: nFree, edges: nEdges, tets: nTets, domainTets: nDomTets, nnzL: sym.nnzL, ibcFaces: ibcFaces.length, thinPairs: thinPairs.length, portFaces: portFaces.map((f) => f.length), setup_ms: now() - t0, analyze_ms: analyzeMs },
+    stats: { order, dof: nFree, edges: nEdges, faces: space.nFaces, tets: nTets, domainTets: nDomTets, nnzL: sym ? sym.nnzL : pmg.csym.nnzL, solver, pmg: pmg ? pmg.stats : null, ibcFaces: ibcFaces.length, thinPairs: thinPairs.length, portFaces: portFaces.map((f) => f.length), setup_ms: now() - t0, analyze_ms: analyzeMs },
   };
 }
 
 /** Assemble and solve at frequency f (Hz). Returns {f, S: CMat (Re Z0 references), ports: [...], timing}. */
-export function solveAt(P, f, { onProgress = null } = {}) {
+/**
+ * Hooks (lane L22, adaptive sweep): makeSolver({re, im, Ucols, blocks, R}) -> solveFull(br, bi) replaces the factor /
+ * Krylov solve (reduced-order model); onSolution(col, x) receives every excitation's solution (free DOFs).
+ */
+export function solveAt(P, f, { onProgress = null, makeSolver = null, onSolution = null } = {}) {
   const t0 = now();
-  const { mesh, pat, R, geo, vol, cen, tetMat, matKeys, pml, domList } = P;
+  const { mesh, R, geo, vol, cen, tetMat, matKeys, pml, domList, rslots } = P;
   const w = 2 * Math.PI * f,
     k0 = w / C0,
     k02 = k0 * k0;
   const epsList = matKeys.map((k) => P.p.materials[k].epsAt(f));
-  const nnz = pat.nnz;
-  const Are = new Float64Array(nnz),
-    Aim = new Float64Array(nnz);
-  const slots = elementSlots(pat, P.elemFE, 6);
-  const Sre = new Float64Array(36),
-    Sim = new Float64Array(36),
-    Mre = new Float64Array(36),
-    Mim = new Float64Array(36);
+  const nnz = R.pat.nnz;
+  // value buffers and the factor object are reused across frequencies (lane L22: fewer large allocations)
+  const re = P._re ?? (P._re = new Float64Array(nnz)),
+    im = P._im ?? (P._im = new Float64Array(nnz));
+  re.fill(0);
+  im.fill(0);
+  const ndt = P.space.ndt,
+    nl2 = ndt * ndt,
+    nfl = P.space.nfl;
+  const Sre = new Float64Array(nl2),
+    Sim = new Float64Array(nl2),
+    Mre = new Float64Array(nl2),
+    Mim = new Float64Array(nl2);
+  const work = {};
   const g = new Float64Array(12);
   const nu = { re: [1, 1, 1], im: [0, 0, 0] },
     ep = { re: [0, 0, 0], im: [0, 0, 0] };
@@ -374,20 +458,27 @@ export function solveAt(P, f, { onProgress = null } = {}) {
         ep.im[d] = ee[1];
       }
     } else for (let d = 0; d < 3; d++) (ep.re[d] = er.re), (ep.im[d] = er.im), (nu.re[d] = 1), (nu.im[d] = 0);
-    tetMatrices(g, vol[e], nu, ep, Sre, Sim, Mre, Mim);
-    for (let k = 0; k < 36; k++) {
-      const sl = slots[36 * q + k];
-      Are[sl] += Sre[k] - k02 * Mre[k];
-      Aim[sl] += Sim[k] - k02 * Mim[k];
+    if (P.order === 1) tetMatrices(g, vol[e], nu, ep, Sre, Sim, Mre, Mim);
+    else tetMatricesP(P.order, g, vol[e], nu, ep, Sre, Sim, Mre, Mim, work);
+    for (let k = 0; k < nl2; k++) {
+      const sl = rslots[nl2 * q + k];
+      if (sl < 0) continue;
+      re[sl] += Sre[k] - k02 * Mre[k];
+      im[sl] += Sim[k] - k02 * Mim[k];
     }
   }
   const addFace = (ea, eb, T, alpha) => {
-    for (let x = 0; x < 3; x++)
-      for (let y = 0; y < 3; y++) {
-        const sl = entry(pat, ea[x], eb[y]);
-        Are[sl] += alpha[0] * T[3 * x + y];
-        Aim[sl] += alpha[1] * T[3 * x + y];
+    for (let x = 0; x < nfl; x++) {
+      const i = R.map[ea[x]];
+      if (i < 0) continue;
+      for (let y = 0; y < nfl; y++) {
+        const j = R.map[eb[y]];
+        if (j < 0) continue;
+        const sl = entry(R.pat, i, j);
+        re[sl] += alpha[0] * T[nfl * x + y];
+        im[sl] += alpha[1] * T[nfl * x + y];
       }
+    }
   };
   const jwmu = [0, w * MU0];
   for (const fc of P.ibcFaces) {
@@ -416,19 +507,16 @@ export function solveAt(P, f, { onProgress = null } = {}) {
     const jb = [-betaBar[i][1], betaBar[i][0]];
     for (const t of pt.tris) addFace(t.e, t.e, t.T, jb);
   });
+  // lumped ports: Robin term j w mu0 / Z_s on the port rectangle
+  for (const L of P.lumped) for (const t of L.tris) addFace(t.e, t.e, t.T, [0, (w * MU0) / L.Zs]);
   const tAs = now();
-  const re = new Float64Array(R.pat.nnz),
-    im = new Float64Array(R.pat.nnz);
-  for (let q = 0; q < re.length; q++) {
-    re[q] = Are[R.src[q]];
-    im[q] = Aim[R.src[q]];
-  }
-  const fac = makeFactor(P.p.factor, P.sym);
-  if (onProgress) {
+  const iterative = !makeSolver && P.solver === 'iterative';
+  const fac = iterative || makeSolver ? null : P._fac ?? (P._fac = makeFactor(P.p.factor, P.sym));
+  if (onProgress && fac) {
     onProgress({ stage: 'factor', fraction: 0, f_GHz: f / 1e9, ms: tAs - t0 });
     fac.onProgress = (fraction) => onProgress({ stage: 'factor', fraction, f_GHz: f / 1e9 });
   }
-  fac.factor(re, im);
+  if (fac) fac.factor(re, im);
   const tF = now();
   onProgress?.({ stage: 'factor', fraction: 1, f_GHz: f / 1e9, ms: tF - tAs });
   // Low-rank modal port corrections (Woodbury, sparse pattern unchanged). Per port with modes m = 1..K:
@@ -489,7 +577,26 @@ export function solveAt(P, f, { onProgress = null } = {}) {
     });
   });
   const nU = Ucols.length;
-  const Ycols = Ucols.map(([ur, ui]) => fac.solve(ur, ui));
+  const iterInfo = [];
+  let pmgStats = null;
+  let solveFull;
+  if (makeSolver) solveFull = makeSolver({ re, im, Ucols, blocks, R });
+  else if (iterative) {
+    // GMRES + p-multigrid (lane L22): the low-rank port terms stay in the operator (matrix-free) and are exact on
+    // the coarse level, so each excitation is one Krylov solve
+    const it = P.p.iterative ?? {};
+    const pmg = buildPMG(P.pmg, re, im, { cols: Ucols, blocks }, { factor: P.p.factor, smooth: it.smooth ?? 2, auxSmooth: it.aux_smooth ?? 1 });
+    pmgStats = pmg.stats;
+    onProgress?.({ stage: 'factor', fraction: 1, f_GHz: f / 1e9, ms: now() - tAs, coarse: true });
+    solveFull = (br, bi) => {
+      const ts = now();
+      const r = gmres(pmg.applyA, pmg.apply, br, bi, { rtol: it.rtol ?? 1e-10, maxIter: it.max_iter ?? 400, restart: it.restart ?? 30, work: P._gmresWork ?? (P._gmresWork = {}) });
+      iterInfo.push({ iterations: r.iterations, relres: r.relres, converged: r.converged, ms: now() - ts });
+      onProgress?.({ stage: 'solve', f_GHz: f / 1e9, iterations: r.iterations, relres: r.relres });
+      return { re: r.re, im: r.im };
+    };
+  }
+  const Ycols = iterative || makeSolver ? [] : Ucols.map(([ur, ui]) => fac.solve(ur, ui));
   const dotU = (u, x) => {
     let sr = 0,
       si = 0;
@@ -503,7 +610,7 @@ export function solveAt(P, f, { onProgress = null } = {}) {
     return [sr, si];
   };
   const Kc = new CMat(nU);
-  for (let a = 0; a < nU; a++)
+  for (let a = 0; a < nU && fac; a++)
     for (let b = 0; b < nU; b++) {
       const d = dotU(Ucols[a], Ycols[b]);
       Kc.re[a * nU + b] = d[0];
@@ -515,8 +622,8 @@ export function solveAt(P, f, { onProgress = null } = {}) {
         Kc.re[(bl.off + a) * nU + bl.off + b] += bl.Cinv.re[a * bl.Cinv.r + b];
         Kc.im[(bl.off + a) * nU + bl.off + b] += bl.Cinv.im[a * bl.Cinv.r + b];
       }
-  const KcInv = cmatInv(Kc);
-  const solveFull = (br, bi) => {
+  const KcInv = !fac || nU === 0 ? null : cmatInv(Kc);
+  if (fac) solveFull = (br, bi) => {
     const y = fac.solve(br, bi);
     const t = [];
     for (let a = 0; a < nU; a++) t.push(dotU(Ucols[a], y));
@@ -539,7 +646,21 @@ export function solveAt(P, f, { onProgress = null } = {}) {
   // excitations: every (port, mode); modal amplitudes a, b -> terminal V, I (de-embedded per mode)
   const exc = [];
   P.ports.forEach((pt, i) => pm[i].modes.forEach((m, k) => exc.push({ p: i, k })));
+  const nTw = exc.length;
+  P.lumped.forEach((L, i) => exc.push({ p: -1, k: 0, lumped: i }));
   const nT = exc.length;
+  // lumped-port voltage V = (1/w) sum_d a_d x_d and drive b = (2 j w mu0 / Z_s) (V_inc / l) a, V_inc = 1
+  const lumpedV = (L, x) => {
+    let sr = 0,
+      si = 0;
+    L.dofs.forEach((d, k) => {
+      const q = R.map[d];
+      if (q < 0) return;
+      sr += L.a[k] * x.re[q];
+      si += L.a[k] * x.im[q];
+    });
+    return [sr / L.w, si / L.w];
+  };
   const Vm = new CMat(nT),
     Im = new CMat(nT);
   const termOff = [];
@@ -550,18 +671,36 @@ export function solveAt(P, f, { onProgress = null } = {}) {
       o += d.K;
     }
   }
-  exc.forEach(({ p, k }, col) => {
-    const m = pm[p].modes[k];
-    const jb2 = [-2 * m.beta[1], 2 * m.beta[0]];
-    const [gr, gi] = toGlobal(P.ports[p], portQ[p][k].Mq);
+  exc.forEach(({ p, k, lumped }, col) => {
     const br = new Float64Array(R.nf),
       bi = new Float64Array(R.nf);
-    for (let q = 0; q < R.nf; q++) {
-      const v = cmul(jb2, [gr[q], gi[q]]);
-      br[q] = v[0];
-      bi[q] = v[1];
+    if (lumped == null) {
+      const m = pm[p].modes[k];
+      const jb2 = [-2 * m.beta[1], 2 * m.beta[0]];
+      const [gr, gi] = toGlobal(P.ports[p], portQ[p][k].Mq);
+      for (let q = 0; q < R.nf; q++) {
+        const v = cmul(jb2, [gr[q], gi[q]]);
+        br[q] = v[0];
+        bi[q] = v[1];
+      }
+    } else {
+      const L = P.lumped[lumped];
+      const c = (2 * w * MU0) / (L.Zs * L.l);
+      L.dofs.forEach((d, kk) => {
+        const q = R.map[d];
+        if (q >= 0) bi[q] += c * L.a[kk];
+      });
     }
     const x = solveFull(br, bi);
+    onSolution?.(col, x);
+    P.lumped.forEach((L, j) => {
+      const V = lumpedV(L, x);
+      const I = [((lumped === j ? 2 : 0) - V[0]) / L.R, -V[1] / L.R];
+      Vm.re[(nTw + j) * nT + col] = V[0];
+      Vm.im[(nTw + j) * nT + col] = V[1];
+      Im.re[(nTw + j) * nT + col] = I[0];
+      Im.im[(nTw + j) * nT + col] = I[1];
+    });
     P.ports.forEach((pt, r) => {
       const d = pm[r];
       const K = d.K;
@@ -625,14 +764,14 @@ export function solveAt(P, f, { onProgress = null } = {}) {
     });
   });
   const Zt = cmatMul(Vm, cmatInv(Im));
-  const zNative = pm.flatMap((d) => d.zNative);
+  const zNative = [...pm.flatMap((d) => d.zNative), ...P.lumped.map((L) => L.R)];
   const S = zToS(Zt, zNative);
   return {
     f,
     S,
     Z: Zt,
     zref: zNative,
-    terminals: P.ports.flatMap((pt, i) => pm[i].modes.map((_, k) => `${pt.name}:${pt.mode.signal ? (Array.isArray(pt.mode.signal) ? pt.mode.signal[k] : pt.mode.signal) : 'te10'}`)),
+    terminals: [...P.ports.flatMap((pt, i) => pm[i].modes.map((_, k) => `${pt.name}:${pt.mode.signal ? (Array.isArray(pt.mode.signal) ? pt.mode.signal[k] : pt.mode.signal) : 'te10'}`)), ...P.lumped.map((L) => `${L.name}:lumped`)],
     ports: P.ports.map((pt, i) => ({
       name: pt.name,
       K: pm[i].K,
@@ -644,8 +783,9 @@ export function solveAt(P, f, { onProgress = null } = {}) {
       Cmat: pm[i].C ? pm[i].C.toArray() : null,
       C0mat: pm[i].C0 ? pm[i].C0.toArray() : null,
       fullwave: pm[i].fullwave ?? null,
-    })),
-    timing: { assemble_ms: tAs - t0, factor_ms: tF - tAs, solve_ms: now() - tF, total_ms: now() - t0, nPerturbed: fac.nPerturbed },
+    })).concat(P.lumped.map((L) => ({ name: L.name, K: 1, lumped: true, beta: null, betas: [], Z0: [L.R, 0], R_ohm: L.R, l_um: L.l * 1e6, w_um: L.w * 1e6 }))),
+    timing: { assemble_ms: tAs - t0, factor_ms: tF - tAs, solve_ms: now() - tF, total_ms: now() - t0, nPerturbed: fac ? fac.nPerturbed : 0 },
+    solver: makeSolver ? { kind: 'reduced' } : iterative ? { kind: 'iterative', solves: iterInfo, pmg: pmgStats } : { kind: 'direct' },
   };
 }
 

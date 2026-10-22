@@ -6,7 +6,7 @@
 export { createLibrary, DEFAULT_NEED, SI_ORIENTATIONS, MaterialError } from './library.mjs';
 export { cubicDirectionalE, cubicIsotropicAverages, cubicStiffnessRotZ, engineeringConstants, cubicCompliance } from './cubic.mjs';
 export { parseHomogKey, COLUMN_KINDS, LAYER_KINDS } from './homogenize.mjs';
-export { validateFile, SCHEMA_ID } from './schema.mjs';
+export { validateFile, SCHEMA_ID, ANAND_PARAMS, SHIFT_TYPES } from './schema.mjs';
 export { applyOverrides, unusedOverrideKeys, OVERRIDE_FIELDS, OVERRIDE_STATUSES } from './overrides.mjs';
 
 /**

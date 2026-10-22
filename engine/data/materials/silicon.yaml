@@ -1,7 +1,7 @@
 # Single-crystal silicon (lane L2, DevLog-012). Stored units are the source units; the loader converts to SI.
 schema: ap-sim.materials/1
 group: silicon
-verified_on: 2026-10-20
+verified_on: 2026-10-21
 materials:
   si_crystal:
     description: single-crystal Si, undoped or lightly doped (bulk die, interposer, bridge, HBM core dies)
@@ -12,17 +12,25 @@ materials:
     valid_T_C: [-73.15, 326.85]   # 200-600 K: span of the CTE (Swenson) and k (Ho-Powell-Liley) tables used here
     properties:
       density:
-        value: 2330
-        unit: kg/m3
+        value: 2.3290
+        unit: g/cm3
         basis: measured
-        source: hopcroft2010
-        locator: "p.7 (journal p.235) Sec. XI, density used in Eq. 17, citing [12] Hall"
-        primary_cited: "[12] J. J. Hall, Phys. Rev. 161, 756 (1967) (not read)"
-        condition: room temperature
-        verified_on: 2026-10-20
+        source: physrev.161.756
+        locator: "journal p.757 Sec. II: pure (undoped, 150 Ohm cm n-type) sample 2.3290 +- 0.0002 g/cm3 at 25 C, hydrometric (P-doped sample 2.3297)"
+        condition: "25 C; T dependence not applied"
+        note: "was 2330 kg/m3 via Hopcroft 2010 p.7 Sec. XI (citing Hall); L21 2026-10-21 reads the primary"
+        verified_on: 2026-10-21
       cp:
-        value: N/A
-        missing: "no primary Si specific-heat source read 2026-10-20"
+        model: table_T
+        T_K: [100, 200, 298.15, 300, 400, 500, 600, 700]
+        value: [258.8, 556.7, 712.1, 713.9, 788.4, 830.7, 860.0, 883.1]
+        unit: J/kgK
+        basis: derived
+        source: janaf_si_1998
+        locator: "J. Phys. Chem. Ref. Data Monograph 9 p.1881, Silicon (Si) reference-state table (crystal 0-1685 K), column Cp (J/K mol): 100 K 7.268, 200 K 15.636, 298.15 K 20.000, 300 K 20.050, 400 K 22.142, 500 K 23.330, 600 K 24.154, 700 K 24.803; A_r = 28.0855 (page header)"
+        condition: "isobaric heat capacity at p = 0.1 MPa, crystal; converted per unit mass c_p = Cp / (A_r x 1e-3 kg/mol) (lane L27); linear interpolation between the tabulated nodes (Cp is concave: at 250 K the chord 200-298.15 K lies below the curve; no intermediate JANAF node)"
+        note: "was N/A ('no primary Si specific-heat source read 2026-10-20'); added by L27 2026-10-21 for thermal_transient (L24 finding: every Si case failed)"
+        verified_on: 2026-10-21
       k:
         model: table_T
         T_K: [200, 223.2, 250, 273.2, 298.2, 300, 323.2, 350, 373.2, 400, 473.2, 500, 573.2, 600]
@@ -35,17 +43,16 @@ materials:
         verified_on: 2026-10-20
       elastic:
         model: cubic
-        C11: 165.6
-        C12: 63.9
-        C44: 79.5
-        unit: GPa
+        C11: 1.6564
+        C12: 0.6394
+        C44: 0.7951
+        unit: 1e12 dyn/cm2
         basis: measured
-        source: hopcroft2010
-        locator: "p.4 (journal p.232) Table III, values for 298 K from Hall [12]; s11 7.68, s12 -2.14, s44 12.6 (1e-12/Pa) in the same table"
-        primary_cited: "[12] J. J. Hall, Phys. Rev. 161, 756 (1967) (pending physrev.161.756)"
-        condition: "298 K; T dependence not applied (TCE about -64 ppm/C at 25 C and -75 ppm/C at 125 C, p.7 Sec. X; Table IV p.6)"
-        note: "Eq. 7 (p.5) prints the same matrix with 165.7 / 63.9 / 79.6; the Table III row is used. Isotropic shortcuts are derived on request (opts.elastic); DB papers model Si with E = 120-170 GPa (R4 sec. 3.1)"
-        verified_on: 2026-10-20
+        source: physrev.161.756
+        locator: "journal p.758 Table III column 'Present study' (pure Si, 25 C, +-0.02 %); same values in Table IV column Pure"
+        condition: "25 C, adiabatic moduli (ultrasonic pulse echo, p.758 'true adiabatic elastic moduli'); T dependence not applied (Hall gives Cij(T) only 4.2-310 K: alternative cubic_T_hall1967)"
+        note: "was 165.6 / 63.9 / 79.5 GPa via Hopcroft 2010 Table III (same data, rounded); L21 2026-10-21 reads the primary. Adiabatic-isothermal difference not applied. McSkimin-Andreatch (Hall Table III, ref. 17): 1.6563 / 0.6387 / 0.7955. Isotropic shortcuts are derived on request (opts.elastic)"
+        verified_on: 2026-10-21
       cte:
         kind: instantaneous
         Tref_K: 293.15
@@ -146,6 +153,56 @@ materials:
         source: tcpmt.2025.3614186
         locator: "p.6 Table II row 9 Silicon Die, instantaneous CTE 2.80E-06, all temperatures"
         verified_on: 2026-10-20
+      cubic_T_hall1967:
+        property: elastic
+        use: sensitivity (Cij(T) of pure Si, 4.2-310 K; cryogenic / -55 C studies)
+        model: cubic
+        C11:
+          model: table_T
+          T_K: [4.2, 50, 100, 150, 200, 250, 298.15, 310]
+          value: [1.6754, 1.67527, 1.67417, 1.67099, 1.66654, 1.66134, 1.6564, 1.65522]
+          locator: "journal p.758 Table V (4.2 K) and Table III (25 C) printed; 50-250 K and 310 K digitized 2026-10-21 from Fig. 1 (p.757, pure curve; tick-fit residual <= 8e-5, reading uncertainty about +-0.0003 x 1e12 dyn/cm2; the digitized 4.2 K and 298 K points reproduce the tables to 1e-4)"
+        C12:
+          model: table_T
+          T_K: [4.2, 50, 100, 150, 200, 250, 298.15, 310]
+          value: [0.6492, 0.64901, 0.64839, 0.64641, 0.64418, 0.64172, 0.6394, 0.63898]
+          basis: derived
+          locator: "4.2 K and 25 C printed (Tables V, III); other points C12 = C11 - 2 C' from Fig. 1 and Fig. 2 (p.759, C' = (C11 - C12)/2, pure curve) digitized 2026-10-21; uncertainty about +-0.0007 x 1e12 dyn/cm2"
+        C44:
+          model: table_T
+          T_K: [4.2, 50, 100, 150, 200, 250, 298.15, 310]
+          value: [0.8024, 0.80232, 0.80188, 0.80081, 0.79923, 0.79715, 0.7951, 0.79454]
+          locator: "journal p.758 Table V (4.2 K) and Table III (25 C) printed; other points digitized 2026-10-21 from Fig. 3 (p.759, pure curve; reading uncertainty about +-0.0001 x 1e12 dyn/cm2)"
+        unit: 1e12 dyn/cm2
+        basis: measured
+        source: physrev.161.756
+        condition: "pure Si (150 Ohm cm n-type), adiabatic, corrected for thermal expansion (p.759); data range 4.2-310 K (refuses above 36.85 C without allowExtrapolation)"
+        verified_on: 2026-10-21
+      k_glassbrenner1964:
+        property: k
+        use: sensitivity (primary measurement; 3-6 % above the HPL 1972 recommended values at 300-600 K)
+        model: table_T
+        T_K: [200, 250, 300, 400, 500, 600, 700, 800]
+        value: [2.66, 1.95, 1.56, 1.05, 0.80, 0.64, 0.52, 0.43]
+        unit: W/cmK
+        basis: measured
+        source: physrev.134.a1058
+        locator: "journal p.A1062 Table I, Si column ('representative values', high-purity single crystals, +-5 %); the last digit of 2.66 (200 K) is barred 'rather uncertain'"
+        condition: "smoothed values; table continues to 1681 K (0.216)"
+        verified_on: 2026-10-21
+      cte_okada1984:
+        property: cte
+        use: "sensitivity (primary fit; within 0.06 ppm/K of the Swenson default at 200-600 K; secant max 0.0495, instantaneous max 0.053 at the Swenson nodes, audit A8 M5)"
+        kind: instantaneous
+        model: expr_T
+        expr: "3.725*(1 - 2.718281828459045^(-5.88e-3*(T_K - 124))) + 5.548e-4*T_K"
+        range_C: [-153.15, 1226.85]
+        unit: ppm/K
+        basis: measured
+        source: "1.333965"
+        locator: "journal p.318 Eq. (5): alpha(t) = (3.725{1 - exp[-5.88e-3 (t - 124)]} + 5.548e-4 t) x 1e-6 /K, t in K; p.320: applicable 120-1500 K; p.319 Table IV calculated column (2.55 at 298.2 K, 3.59 at 500 K) reproduced"
+        condition: "X-ray lattice parameter of FZ and CZ Si, measured 300-1500 K; fit agrees with Lyon et al. within +-1e-7 /K above about 120 K (p.320); exp written as 2.718281828459045^x (expression grammar has no exp)"
+        verified_on: 2026-10-21
       k_ectc51687_2025_00085:
         property: k
         use: sensitivity (paper linear k(T) model for SoC / HBM dies)
@@ -162,8 +219,8 @@ materials:
         verified_on: 2026-10-20
     missing:
       - "cp: no source read"
-      - "Cij(T): Bourgeois coefficients (Hopcroft Table IV, p.6) not applied; reference temperature of the polynomial not printed in Hopcroft"
-      - "Glassbrenner-Slack 1964 k(T) (physrev.134.a1058) and Okada-Tokumaru 1984 alpha(T) (1.333965) pending download; evaluated compilations used instead"
+      - "Cij(T) above 310 K: Hall 1967 measures 4.2-310 K only (alternative cubic_T_hall1967); Bourgeois coefficients (Hopcroft Table IV, p.6) not applied, reference temperature of the polynomial not printed in Hopcroft"
+      - "k and alpha defaults stay on the evaluated compilations (HPL 1972, Swenson 1983); Glassbrenner-Slack 1964 k(T) and Okada-Tokumaru 1984 alpha(T) are alternatives (L21 2026-10-21)"
 
   si_hr:
     inherits: si_crystal

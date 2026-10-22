@@ -43,6 +43,7 @@ export const ext = {
     lid_type: lidTypeParam('lid', 'lid (template draws the lid-type TV option of ectc51909.2023.00174-a; ring type also offered, -b/-c TVs; 00091-a lid, 00091-b ring)'),
     ring_w_mm: { value: 7, status: 'template', note: 'stiffener ring width not reported for CoWoS-L (ectc51909.2023.00091-b label "Ring: 18mm-12mm-2mm" undefined); 7 mm as the CoWoS-S template (illustrative)' },
     ring_h_um: { value: 2000, status: 'template', refs: ['ectc51909.2023.00155-a-c11.thickness_um'], note: 'ring thickness not reported for CoWoS-L; analog = 2 mm Cu stiffener of a 2.5D Si-interposer TV' },
+    ring_wy_mm: { alias: 'ring_w_mm', note: 'ring width of the north / south bars (along y); equals ring_w_mm unless set (L19 2026-10-21, for the ectc51909.2023.00091-b label "Ring: 18mm-12mm-2mm")' },
     // ---- 6x SC-RDL TV knobs (ectc51909.2023.00091-a): dummy Si in the top-die layer, substrate-sized SC-RDL + side mold
     dummy_n: { value: 0, status: 'template', note: 'dummy Si dies in the top-die layer; the backbone TV has none (the 1.6x 6x TV has 8, ectc51909.2023.00091-a-c3.count)' },
     dummy_rule: { value: 'rows_y', status: 'template', options: ['rows_y'],
@@ -126,7 +127,9 @@ export function build(P) {
     delete E.part('lid').gap;
   } else if (lidType !== 'lid') {
     E.removeParts('lid_foot', 'lid');
-    E.replacePart('tim', lidRingParts(P, { lidType, ringLabel: 'ring (material not reported)' }));
+    // SC-RDL TV with a ring (ectc51909.2023.00091-b, Fig. 7(a) cross-section): the SC-RDL and side mold cover the
+    // substrate, so the ring sits on the side-mold top beside the top dies (L19 2026-10-21); otherwise on the substrate
+    E.replacePart('tim', lidRingParts(P, { lidType, base: sc && lidType === 'ring' ? 'mold' : 'substrate', ringLabel: 'ring (material not reported)' }));
   }
   // dummy Si in the top-die layer (6x TV)
   const nD = P.v('dummy_n');

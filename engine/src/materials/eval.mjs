@@ -89,6 +89,8 @@ export function compileScalar(leaf, family, ctx = {}) {
     const positive = family === 'conductivity' || family === 'density' || family === 'cp' || family === 'modulus';
     return {
       ...base,
+      // smooth: an instantaneous CTE given as an expression is integrated on the 0.5 K grid of buildStrain (L21)
+      smooth: true,
       eval: (TK) => {
         const v = evaluateAst(ast, { T_K: TK, T_C: TK - C_TO_K }, src);
         if (typeof v !== 'number' || !Number.isFinite(v) || (positive && !(v > 0))) throw new Error(`materials: expression '${src}' gives ${v} at ${(TK - C_TO_K).toFixed(2)} C${positive ? ' (must be > 0)' : ''}`);

@@ -64,10 +64,12 @@ export function unwrapValues(x) {
 
 function checkNonlinear(n, where) {
   if (n == null || n === true || n === false) return;
-  if (typeof n !== 'object' || Array.isArray(n)) throw new CaseError(`${where}: true, false or {max_dof, steps, tol}`);
-  keys(n, ['max_dof', 'steps', 'tol'], where);
+  if (typeof n !== 'object' || Array.isArray(n)) throw new CaseError(`${where}: true, false or {max_dof, steps, tol, branch}`);
+  keys(n, ['max_dof', 'steps', 'tol', 'branch'], where);
   for (const k of ['max_dof', 'steps']) if (n[k] != null && !(Number.isInteger(n[k]) && n[k] > 0)) throw new CaseError(`${where}.${k}: positive integer required`);
   if (n.tol != null && !(n.tol > 0 && n.tol < 1)) throw new CaseError(`${where}.tol: number in (0, 1) required`);
+  // SPEC 21 (audit A7 S2): branch selection after a bifurcation
+  if (n.branch != null && !['stable', 'follow'].includes(n.branch)) throw new CaseError(`${where}.branch: stable | follow required`);
 }
 
 /** Effective nonlinear option of a thermo_elastic study (study key over physics.mechanics.nonlinear); null = linear. */

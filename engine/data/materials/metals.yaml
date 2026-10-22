@@ -1,7 +1,7 @@
 # Metals (lane L2, DevLog-012). Stored units are the source units; the loader converts to SI.
 schema: ap-sim.materials/1
 group: metals
-verified_on: 2026-10-20
+verified_on: 2026-10-21
 materials:
   cu_bulk:
     description: annealed high-purity bulk copper (lids, stiffeners, thick planes)
@@ -21,14 +21,15 @@ materials:
         verified_on: 2026-10-20
       cp:
         model: table_T
-        T_K: [200, 250, 293.15, 300]
-        value: [359.0, 380.6, 389.1, 389.4]
+        T_K: [200, 250, 293.15, 300, 400, 500, 600, 700]
+        value: [359.0, 380.6, 389.1, 389.4, 398.4, 407.8, 416.7, 424.8]
         unit: J/kgK
         basis: derived
-        source: nist_cryo_ofhc_cu
-        locator: "specific-heat fit, log10 y = sum a_i (log10 T)^i, a..h = -1.91844, -0.15973, 8.61013, -18.996, 21.9661, -12.7328, 3.54322, -0.3797; range 4-300 K; fit error 5 % (T >= 15 K)"
-        note: "values evaluated from the fit by this lane; above 300 K no source read"
-        verified_on: 2026-10-20
+        source: [nist_cryo_ofhc_cu, janaf_cu_1998]
+        locator: "200-300 K: nist_cryo_ofhc_cu specific-heat fit, log10 y = sum a_i (log10 T)^i, a..h = -1.91844, -0.15973, 8.61013, -18.996, 21.9661, -12.7328, 3.54322, -0.3797; range 4-300 K; fit error 5 % (T >= 15 K). 400-700 K: janaf_cu_1998 J. Phys. Chem. Ref. Data Monograph 9 p.1005, Copper (Cu) reference-state table, Cp 25.318 / 25.912 / 26.481 / 26.996 J/K mol at 400 / 500 / 600 / 700 K, A_r = 63.546 (page header)"
+        condition: "c_p = Cp / (A_r x 1e-3 kg/mol) for the JANAF nodes (lane L27); linear interpolation between nodes. Source step at the join: JANAF gives 384.9 J/kg K at 300 K (24.462 J/K mol) vs the NIST fit 389.4 (-1.2 %, inside the fit's 5 %), so the 300-400 K chord is up to about 1.2 % above JANAF"
+        note: "200-300 K values evaluated from the NIST fit by lane L2 (2026-10-20); 400-700 K added by L27 2026-10-21 (thermal_transient with Cu above 27 C failed: cp out of range)"
+        verified_on: 2026-10-21
       k:
         model: table_T
         T_K: [200, 223.2, 250, 273.2, 298.2, 300, 323.2, 350, 373.2, 400, 473.2, 500, 573.2, 600]
@@ -154,7 +155,34 @@ materials:
         source: ectc51846.2026.00103
         locator: "p.4 Table II row Copper (yield 172.38 MPa, tangent modulus 1034.2 MPa); same values in tcpmt.2025.3614186 p.6 Table II row 3"
         verified_on: 2026-10-20
+        alternatives:
+          read2004_film_curve:
+            model: multilinear_engineering
+            strain: [0, 0.00036, 0.00072, 0.00115, 0.00146, 0.00162, 0.00194, 0.00221, 0.00277, 0.00401, 0.00475, 0.00521, 0.00706, 0.00771, 0.00901, 0.01053, 0.01191, 0.01326, 0.01527, 0.01759, 0.02029, 0.02247]
+            stress_MPa: [11, 25, 50, 75, 100, 125, 150, 175, 200, 225, 233.2, 238.3, 245.7, 249.7, 252.2, 254.7, 254.7, 256.0, 256.3, 255.7, 251.2, 248.7]
+            yield_MPa: 233
+            uts_MPa: 252
+            elongation_pct: 2
+            E_GPa: 73
+            basis: measured
+            source: j.mee.2003.09.012
+            locator: "p.67 Table 1 row Average (text p.67 Sec. 3.1 says 16 tensile tests 'reported in Table 1'; the Table 1 per-rate rows list 6 + 3 + 2 + 3 = 14 (source inconsistency, audit A8 M6); 25 C, strain rates 3.19e-6 to 6.79e-5 /s): yield 233 +- 15 MPa, ultimate 252 +- 15 MPa, elongation 2 +- 0.7 %, E 73 +- 24 GPa (standard deviations); curve = p.68 Fig. 4 (one test, 6.79e-5 /s, room temperature) digitized 2026-10-21 from the embedded image: isolated markers from strain 0.00475 (centroids, +-0.00005 strain, +-1.5 MPa), below that the centre of the overlapping-marker band at fixed stress (+-0.0002 strain)"
+            condition: "2.59 um electrodeposit on Si (laboratory bath), engineering stress-strain, room temperature; yield definition (offset) not stated; the curve starts at about 11 MPa (preload)"
+            note: "thin-film values: modulus below bulk ('modulus deficit', p.67); not representative of thick plated Cu without a thickness / anneal match"
+            verified_on: 2026-10-21
     alternatives:
+      e_read2004_film:
+        property: elastic
+        use: sensitivity (2.6 um electrodeposited film, microtensile)
+        model: iso
+        E: 73
+        nu: {value: N/A, missing: "not given by Read et al. 2004"}
+        unit: GPa
+        basis: measured
+        source: j.mee.2003.09.012
+        locator: "p.67 Table 1 row Average: Young's modulus 73 +- 24 GPa (per strain rate 52-85 GPa)"
+        condition: "2.59 um film, 25 C, strain rate 3.19e-6 to 6.79e-5 /s"
+        verified_on: 2026-10-21
       e100_paper:
         property: elastic
         use: sensitivity (E = 100 GPa used by ectc51529.2024.00155, ectc51687.2025.00027, ectc51909.2023.00155; no Poisson ratio given)
@@ -220,7 +248,7 @@ materials:
         locator: "p.7 Table IV row Cu"
         verified_on: 2026-10-20
     missing:
-      - "electroplated-Cu primary data (Read et al. 2004, j.mee.2003.09.012) pending download"
+      - "Read et al. 2004 (j.mee.2003.09.012) read 2026-10-21: 2.6 um film data only (E 73 +- 24 GPa, yield 233 MPa); stored as alternatives, defaults unchanged (thick plated Cu)"
       - "k and resistivity of electroplated films inherited from bulk (film values not read)"
 
   cu_lid:

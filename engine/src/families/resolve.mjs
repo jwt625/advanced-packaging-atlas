@@ -100,6 +100,17 @@ export function resolveStructure(spec, P) {
   const topLevel = (tid) => levels(tid).at(-1);
   const levelInst = (tid, zk, xk) => insts.get(tid).find((i) => i.zk === zk && i.xk === xk);
   const base0 = (tid) => (insts.get(tid) || []).filter((i) => i.zk === 0); // one footprint per xy position
+  // region spec -> package-frame rectangles (route.regions; same forms as array regions without per-level sources)
+  const regionRects = (reg, where) => {
+    let rects;
+    if (reg.box) rects = [reg.box];
+    else if (reg.xywd) rects = [rectOf(...['x', 'y', 'w', 'd'].map((kk) => dim(reg.xywd[kk], `${where}.region.${kk}`).value))];
+    else if (reg.part) rects = base0(reg.part).map((i) => i.rect);
+    else throw new GeneratorError(`${where}: region needs part, box or xywd`, [{ code: 'bad_region' }]);
+    for (const t of reg.intersect || []) { const nxt = []; for (const r of rects) for (const i of base0(t)) { const x = intersect(r, i.rect); if (x) nxt.push(x); } rects = nxt; }
+    for (const t of reg.subtract || []) for (const i of base0(t)) rects = rects.flatMap((r) => subtract(r, i.rect));
+    return rects;
+  };
   function below(tid, inst) {
     if (inst.zk > 0) return levelInst(tid, inst.zk - 1, inst.xk);
     const host = pdecl.get(tid).on;
@@ -404,6 +415,32 @@ export function resolveStructure(spec, P) {
             }
             if (!(ro.fill > 0 && ro.fill <= 1)) throw new GeneratorError(`layers.${id}: route fill ${ro.fill} not in (0, 1]`, [{ code: 'bad_fill', layer: id }]);
             ro.dims = rd;
+            // per-region level properties (L18 route.regions; sim L19 2026-10-21): package-frame rectangles with their own
+            // use / L/S / fill; the boxes module overlays them on the level (homogenized with the region fill)
+            if (rt.regions) {
+              ro.regions = rt.regions.map((rg, ri) => {
+                const w = `layers.${el.id}.route.regions[${ri}]`;
+                const use = rg.use ?? rt.use;
+                const r = { use, rects: regionRects(rg.region || {}, w), dims: {} };
+                if (rg.note) r.note = rg.note;
+                const dir = rg.dir ?? rt.dir;
+                if (dir) r.dir = dir === 'alt' ? (k % 2 ? 'x' : 'y') : dir;
+                for (const kk of ['line', 'space']) {
+                  if (rg[kk] !== undefined) { const q = dim(rg[kk], `${w}.${kk}`); r[`${kk}_um`] = q.value; r.dims[`${kk}_um`] = q.dim; }
+                  else if (ro[`${kk}_um`] !== undefined && (use === 'signal' || use === 'mixed')) { r[`${kk}_um`] = ro[`${kk}_um`]; r.dims[`${kk}_um`] = rd[`${kk}_um`]; }
+                }
+                if (rg.fill !== undefined) { const q = dim(rg.fill, `${w}.fill`); r.fill = q.value; r.dims.fill = q.dim; }
+                else if ((use === 'signal' || use === 'mixed') && r.line_um !== undefined && r.space_um !== undefined) {
+                  r.fill = r.line_um / (r.line_um + r.space_um);
+                  r.dims.fill = { status: combineStatus('derived', [r.dims.line_um?.status, r.dims.space_um?.status].filter(Boolean)), value: rnd(r.fill), formula: 'line_um / (line_um + space_um)' };
+                } else {
+                  r.fill = use === 'plane' ? 0.85 : 0.5;
+                  r.dims.fill = { status: 'template', value: r.fill, note: `default Cu area fraction of a ${use} level (generator default, not reported)` };
+                }
+                if (!(r.fill > 0 && r.fill <= 1)) throw new GeneratorError(`${w}: region fill ${r.fill} not in (0, 1]`, [{ code: 'bad_fill', layer: id }]);
+                return r;
+              });
+            }
             lo.route = ro;
           }
           lo.dims = dims;

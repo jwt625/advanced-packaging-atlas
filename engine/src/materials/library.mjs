@@ -1,9 +1,9 @@
 // Materials library core (pure; no file I/O; runs in Node and in a Web Worker). Lane L2, DevLog-012; contract
 // sims/SPEC.md section 4. `createLibrary({files, sources, aliases})` validates and compiles the data once and returns
-// the API {resolve, rebaseSecantCte, homogenize, aliasTemplateKey, keys, entry, alternativesOf}.
+// the API {resolve, rebaseSecantCte, homogenize, aliasTemplateKey, keys, entry, alternativesOf, tier2, ...}.
 // License: GPL-3.0-or-later.
 
-import { validateFile, inheritProv, elasticSubLeaf, isNA, PROPERTIES } from './schema.mjs';
+import { validateFile, inheritProv, elasticSubLeaf, isNA, PROPERTIES, ANAND_PARAMS } from './schema.mjs';
 import { compileScalar, buildStrain, secantAlpha, rebasedAlpha } from './eval.mjs';
 import { cubicDirectionalE, cubicIsotropicAverages } from './cubic.mjs';
 import { C_TO_K, EPS0 } from './units.mjs';
@@ -116,6 +116,8 @@ function provOf(leaf, sources, extra = {}) {
     inherited_from: leaf.inherited_from ?? null,
     ...(leaf.sensitivity_bound ? { sensitivity_bound: true } : {}),
     ...(leaf.status_A11 ? { override_status: leaf.status_A11 } : {}),
+    // audit A8 M9 (L27): measured / derived data of a stand-in material carry `analog_of` without being template values
+    ...(leaf.analog_of && leaf.basis !== 'template' ? { analog_of: leaf.analog_of } : {}),
     ...(leaf.basis === 'template'
       ? { template: true, sensitivity: leaf.sensitivity ?? null, analog_of: leaf.analog_of ?? null, range_from: leaf.range_from ?? null, placeholder: !!leaf.placeholder }
       : {}),
@@ -535,6 +537,28 @@ export function createLibrary({ files, sources = {}, aliases = {} }) {
     return homogenizeWith(lib, spec);
   }
 
+  /**
+   * Tier-2 data block (viscoelastic | viscoplastic | plasticity) of a library or template key, as stored (L21): the
+   * default block, or with `alternative` that named set in the block's form (Anand alternatives -> {params}). Returns
+   * null when the entry has no tier2_data block. Consumers (mech lanes) convert units; nothing is applied here.
+   */
+  function tier2Data(key, property, alternative) {
+    if (!['viscoelastic', 'viscoplastic', 'plasticity'].includes(property)) fail(`tier2: property must be viscoelastic | viscoplastic | plasticity, got '${property}'`);
+    const k = canonicalKey(key).key;
+    const b = getEntry(k).raw.properties?.[property];
+    if (!b || b.status !== 'tier2_data') return null;
+    const { alternatives = {}, ...base } = b;
+    if (!alternative) return { key: k, property, alternative: null, ...base, alternatives: Object.keys(alternatives) };
+    const a = alternatives[alternative];
+    if (!a) fail(`${k}.${property}: unknown tier-2 alternative '${alternative}' (${Object.keys(alternatives).join(', ') || 'none'})`);
+    if (base.model === 'anand') {
+      // audit A8 M11 (L27): whitelist the nine Anand parameters (other fields such as basis / verified_on never leak)
+      const params = Object.fromEntries(ANAND_PARAMS.map((f) => [f, a[f]]));
+      return { key: k, property, alternative, model: 'anand', params, basis: a.basis ?? base.basis, source: a.source, locator: a.locator, note: a.note ?? null, verified_on: a.verified_on ?? null };
+    }
+    return { key: k, property, alternative, ...a, source: a.source, locator: a.locator };
+  }
+
   /** Default library key for a 3D-template material key; `other` has no default and throws. */
   function aliasTemplateKey(templateKey) {
     const a = aliases.template_keys?.[templateKey];
@@ -636,6 +660,7 @@ export function createLibrary({ files, sources = {}, aliases = {} }) {
     listTemplateValues,
     keys: () => Object.keys(entries),
     entry: (key) => getEntry(key).raw,
+    tier2: (key, property, alternative = null) => tier2Data(key, property, alternative),
     alternativesOf: (key) => Object.fromEntries(Object.entries(getEntry(key).alts).map(([n, a]) => [n, { property: a.property, use: a.use }])),
     sources,
     aliases,

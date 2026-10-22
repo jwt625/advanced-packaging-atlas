@@ -71,8 +71,24 @@ export function buildBoxes(S) {
     }
     for (const inst of l._hostInsts) {
       const part = S.parts.find((p) => p.id === inst.id);
-      boxes.push({ id: l._hostInsts.length > 1 ? `${l.id}@${inst.id}` : l.id, source: 'layer', kind: 'layer', role: l.role, layer: l.id,
+      const bid = l._hostInsts.length > 1 ? `${l.id}@${inst.id}` : l.id;
+      boxes.push({ id: bid, source: 'layer', kind: 'layer', role: l.role, layer: l.id,
         host: inst.id, material, x_mm: part.x_mm, y_mm: part.y_mm, w_mm: part.w_mm, d_mm: part.d_mm, z_um: l.z_um, h_um: l.h_um, priority: pri });
+      // per-region level properties (route.regions, L19 2026-10-21): the region part of the level as its own homogenized
+      // box one priority step above the level (below every nested part, e.g. a cavity, and below arrays)
+      (l.route?.regions || []).forEach((rg, ri) => {
+        const metal = l.material_sim || l.material, matrix = l.route.matrix_sim || l.route.matrix;
+        const axis = (rg.use === 'signal' || rg.use === 'mixed') && (rg.dir === 'x' || rg.dir === 'y') ? rg.dir : 'plane';
+        const key = `homog:rdl_layer:${metal}+${matrix}:${fmtFrac(rg.fill)}:${axis}`;
+        const host = [part.x_mm - part.w_mm / 2, part.y_mm - part.d_mm / 2, part.x_mm + part.w_mm / 2, part.y_mm + part.d_mm / 2];
+        rg.rects.forEach((r, k) => {
+          const a = [Math.max(r[0], host[0]), Math.max(r[1], host[1]), Math.min(r[2], host[2]), Math.min(r[3], host[3])];
+          if (!(a[2] - a[0] > 1e-9 && a[3] - a[1] > 1e-9)) return;
+          boxes.push({ id: `${bid}~r${ri + 1}${rg.rects.length > 1 ? `_${k + 1}` : ''}`, source: 'layer_region', kind: 'layer', role: l.role, layer: l.id, host: inst.id,
+            material: key, homog: { kind: 'rdl_layer', use: rg.use, constituents: [metal, matrix], fraction: rnd(rg.fill), axis, fraction_dim: rg.dims.fill },
+            x_mm: rnd((a[0] + a[2]) / 2), y_mm: rnd((a[1] + a[3]) / 2), w_mm: rnd(a[2] - a[0]), d_mm: rnd(a[3] - a[1]), z_um: l.z_um, h_um: l.h_um, priority: pri + 1 });
+        });
+      });
     }
   }
   const solid = boxes.slice();

@@ -231,6 +231,48 @@ test('shape_class: dome, bowl, saddle, flat (criterion stated)', () => {
   assert.equal(run(plate('si_iso'), 25, 25).shape_class, 'flat');
 });
 
+test('shape_class W (lane L20): prescribed multi-modal surfaces and a substrate with a centre die and a perimeter ring', async () => {
+  const { buildNumbering } = await import('../src/mech/numbering.mjs');
+  const { warpage } = await import('../src/mech/post.mjs');
+  // (a) prescribed u_z(r) on the bottom face of a 20 mm plate, full model and quarter crop; Rc = half diagonal
+  for (const symmetry of ['none', 'quarter']) {
+    const g = buildGrid([{ ...MA4B[0], w_mm: 20, d_mm: 20 }], { max_xy_mm: 0.5, min_cells_per_layer: 1, ...(symmetry === 'none' ? {} : { symmetry }) });
+    const num = buildNumbering(g, 'q1im'), NX = g.nx + 1, NY = g.ny + 1, Rc = Math.SQRT2 * 10e-3;
+    const surf = (f) => {
+      const u = new Float64Array(num.ndof);
+      for (let k = 0; k <= g.nz; k++) for (let j = 0; j < NY; j++) for (let i = 0; i < NX; i++) {
+        const cn = num.compact[i + NX * (j + NY * k)];
+        if (cn >= 0) u[3 * cn + 2] = f(Math.hypot(g.xs[i], g.ys[j]));
+      }
+      return warpage(g, num, u, 'bottom:sub');
+    };
+    // W along each diagonal: corners and centre up, a trough at r = Rc / 2 (deviation from the chord single-signed,
+    // two interior minima); M is its mirror image; the parabola is the dome control on the same path
+    const w = surf((r) => 10e-6 * Math.cos((2 * Math.PI * r) / Rc));
+    assert.equal(w.shape_class, 'W', `${symmetry}: ${JSON.stringify(w.shape_detail)}`);
+    assert.ok(w.shape_detail.diagonal_turns.every((t) => t >= 2), `${symmetry}: turns ${w.shape_detail.diagonal_turns}`);
+    assert.equal(surf((r) => -10e-6 * Math.cos((2 * Math.PI * r) / Rc)).shape_class, 'W', `${symmetry}: M profile`);
+    assert.equal(surf((r) => -10e-6 * (r / Rc) ** 2).shape_class, 'dome', `${symmetry}: parabola control`);
+  }
+  // (b) solved: 20 x 20 x 0.5 mm substrate (sub), centre Si die 8 x 8 x 0.7 mm, 3 mm wide 0.5 mm Cu perimeter ring,
+  // cooled 150 -> 25 C. The die domes the centre, the ring bends the rim the other way: the deviation from the
+  // diagonal chord stays below zero with a central bump (3 turns per diagonal), quadratic fit not a saddle.
+  // Same class at max_xy 1 and 0.5 mm (L20 notes: coplanarity 29.01 / 29.11 um).
+  const S = 3, a = 10 - S / 2;
+  const parts = [
+    { ...MA4B[0], w_mm: 20, d_mm: 20, h_um: 500 },
+    { id: 'die', kind: 'die', material: 'si_iso', x_mm: 0, y_mm: 0, w_mm: 8, d_mm: 8, z_um: 500, h_um: 700 },
+    { id: 'r1', kind: 'stiffener', material: 'cu', x_mm: a, y_mm: 0, w_mm: S, d_mm: 20, z_um: 500, h_um: 500 },
+    { id: 'r2', kind: 'stiffener', material: 'cu', x_mm: -a, y_mm: 0, w_mm: S, d_mm: 20, z_um: 500, h_um: 500 },
+    { id: 'r3', kind: 'stiffener', material: 'cu', x_mm: 0, y_mm: a, w_mm: 20 - 2 * S, d_mm: S, z_um: 500, h_um: 500 },
+    { id: 'r4', kind: 'stiffener', material: 'cu', x_mm: 0, y_mm: -a, w_mm: 20 - 2 * S, d_mm: S, z_um: 500, h_um: 500 },
+  ];
+  const r = solveMech(buildGrid(parts, { max_xy_mm: 1, min_cells_per_layer: 1, symmetry: 'quarter' }), { ...base, supports: 'symmetry', warpage: ['bottom:sub'], stress: false }).derived.warpage[0];
+  assert.equal(r.shape_class, 'W', JSON.stringify(r.shape_detail));
+  assert.deepEqual(r.shape_detail.diagonal_turns, [3, 3]);
+  assert.ok(r.diagonals_um.AB_min < -20 && Math.abs(r.diagonals_um.AB_max) < 1e-9, JSON.stringify(r.diagonals_um));
+});
+
 test('eigenstrain: linear shrinkage of a free block is stress-free with the exact strain; volumetric = 3 x linear', () => {
   const parts = [{ id: 'emc', kind: 'mold', material: 'uf', x_mm: 0, y_mm: 0, w_mm: 2, d_mm: 2, z_um: 0, h_um: 1000 }];
   const g = buildGrid(parts, { max_xy_mm: 0.5, min_cells_per_layer: 2 });

@@ -3,6 +3,7 @@
 
 import { buildLayeredMesh, subMesh } from './mesh.mjs';
 import { prepare3d, solveAt } from './solver.mjs';
+import { buildProm } from './prom.mjs';
 import { makeMaterials } from '../em2d/dielectric.mjs';
 import { applyPatch, sweepFrequencies } from '../em2d/run.mjs';
 import { renormalize, zToS, passivityMaxSv, reciprocityError, mixedMode, modalAnalysis, zyFromRlgc } from '../em2d/mtl.mjs';
@@ -25,10 +26,13 @@ const now = () => performance.now();
 const LF_CANCELLATION_LIMIT = 1e-8;
 
 const CASE_KEYS = ['schema', 'id', 'title', 'status', 'family', 'em3d', 'targets', 'assumptions', 'missing', 'notes', 'reference_deck'];
-const EM_KEYS = ['box_um', 'axis', 'bc', 'background', 'materials', 'conductor_materials', 'temperature_C', 'solids', 'ports', 'pml', 'mesh', 'max_dof', 'sweep', 'zref_ohm', 'lumped', 'mixed_mode_pairs', 'deembed_method', 'port_z_check', 'touchstone', 'variants'];
+const EM_KEYS = ['box_um', 'axis', 'bc', 'background', 'materials', 'conductor_materials', 'temperature_C', 'solids', 'ports', 'pml', 'mesh', 'max_dof', 'sweep', 'zref_ohm', 'lumped', 'mixed_mode_pairs', 'deembed_method', 'port_z_check', 'touchstone', 'variants', 'order', 'solver', 'iterative', 'direct_max_dof', 'coarse_max_dof', 'adaptive'];
+const ADAPTIVE_KEYS = ['tol', 'max_samples', 'memory'];
+const ITER_KEYS = ['rtol', 'max_iter', 'restart', 'smooth', 'aux_smooth'];
 const SOLID_KEYS = ['name', 'kind', 'material', 'conductor', 'model', 'sigma_S_m', 'roughness', 'box_um', 'cylinder_um', 'poly_um', 'h_um', 'dz_um', 'allow_needle_ibc', 'ref', 'note', 'status'];
-const PORT_KEYS = ['name', 'side', 'signal', 'mode_type', 'mode', 'deembed_um', 'allow_short_lead', 'ref', 'note'];
-const MESH_KEYS = ['max_edge_um', 'max_dz_um', 'dz_min_um', 'dz_growth', 'grade', 'max_vertices', 'min_edge_um'];
+const PORT_KEYS = ['name', 'side', 'signal', 'mode_type', 'mode', 'deembed_um', 'allow_short_lead', 'ref', 'note', 'type', 'rect_um', 'direction', 'R_ohm'];
+const isLumped = (p) => p.type === 'lumped';
+const MESH_KEYS = ['max_edge_um', 'max_dz_um', 'dz_min_um', 'dz_growth', 'grade', 'max_vertices', 'min_edge_um', 'h_scale'];
 const TARGET_KEYS = ['metric_id', 'quantity', 'f_GHz', 'value', 'unit', 'tolerance', 'tier', 'variant', 'to', 'from', 'note', 'locator'];
 
 function keys(obj, allowed, where) {
@@ -44,8 +48,18 @@ export function parseEm3dCase(c) {
   const e = c.em3d ?? fail('em3d block required');
   keys(e, EM_KEYS, 'em3d');
   (e.solids ?? []).forEach((s, i) => keys(s, SOLID_KEYS, `em3d.solids[${i}]`));
-  (e.ports ?? []).forEach((s, i) => keys(s, PORT_KEYS, `em3d.ports[${i}]`));
+  (e.ports ?? []).forEach((s, i) => {
+    keys(s, PORT_KEYS, `em3d.ports[${i}]`);
+    if (s.type != null && s.type !== 'wave' && s.type !== 'lumped') fail(`em3d.ports[${i}].type ${s.type}: wave | lumped`);
+    if (isLumped(s)) {
+      if (s.side != null || s.signal != null || s.mode != null || s.mode_type != null) fail(`em3d.ports[${i}] (lumped): side / signal / mode are wave-port keys; a lumped port takes rect_um, direction, R_ohm`);
+      if ((s.deembed_um ?? 0) !== 0) fail(`em3d.ports[${i}] (lumped): deembed_um is not supported for lumped ports`);
+    }
+  });
   keys(e.mesh, MESH_KEYS, 'em3d.mesh');
+  keys(e.iterative, ITER_KEYS, 'em3d.iterative');
+  if (e.adaptive != null && e.adaptive !== false && e.adaptive !== true) keys(e.adaptive, ADAPTIVE_KEYS, 'em3d.adaptive');
+  if (e.order != null && e.order !== 1 && e.order !== 2) fail(`em3d.order ${e.order}: 1 | 2`);
   (c.targets ?? []).forEach((t, i) => keys(t, TARGET_KEYS, `targets[${i}]`));
   return c;
 }
@@ -126,6 +140,7 @@ export function checkPortLeads(e, warnings) {
   const solids = (e.solids ?? []).map((s) => ({ s, b: solidBounds(s, axis) })).filter((x) => x.b);
   const out = [];
   for (const pt of e.ports ?? []) {
+    if (isLumped(pt)) continue;
     const ax = pt.side[0];
     const max = pt.side.endsWith('max');
     const face = box[ax][max ? 1 : 0];
@@ -176,6 +191,7 @@ export function deembedPlan(e, warnings) {
   const method = e.deembed_method;
   if (method != null && !DEEMBED_METHODS.includes(method)) fail(`deembed_method ${JSON.stringify(method)}: must be ${DEEMBED_METHODS.join(' | ')}`);
   for (const pt of ports) {
+    if (isLumped(pt)) continue;
     const d = pt.deembed_um ?? 0;
     if (!(typeof d === 'number' && Number.isFinite(d) && d >= 0)) fail(`port ${pt.name}: deembed_um must be a number >= 0 (got ${JSON.stringify(pt.deembed_um)})`);
     const lead = portLeadUm(e, pt);
@@ -184,11 +200,13 @@ export function deembedPlan(e, warnings) {
   const hasLead = ports.some((p) => (p.deembed_um ?? 0) > 0);
   const why = [];
   if (ports.length !== 2) why.push(`${ports.length} ports (line run needs 2)`);
+  else if (isLumped(ports[0]) || isLumped(ports[1])) why.push('lumped ports (no lead to cut)');
   else if (ports[0].side[0] !== ports[1].side[0] || ports[0].side === ports[1].side) why.push(`ports ${ports[0].name} / ${ports[1].name} are not on opposite box sides (a lead region would touch the other port's side)`);
   else if ((ports[0].deembed_um ?? 0) + (ports[1].deembed_um ?? 0) > e.box_um[ports[0].side[0]][1] - e.box_um[ports[0].side[0]][0] + 1e-9)
     fail(`ports ${ports[0].name} / ${ports[1].name}: deembed_um ${ports[0].deembed_um} + ${ports[1].deembed_um} um exceeds the box length along ${ports[0].side[0]} (the reference planes cross)`);
   for (const p of ports) {
-    if (p.mode) why.push(`port ${p.name} is a ${p.mode.type ?? 'analytic'} port`);
+    if (isLumped(p)) why.push(`port ${p.name} is a lumped port`);
+    else if (p.mode) why.push(`port ${p.name} is a ${p.mode.type ?? 'analytic'} port`);
     else if (Array.isArray(p.signal) && p.signal.length !== 1) why.push(`port ${p.name} has ${p.signal.length} signals (multi-terminal)`);
     else if ((p.mode_type ?? 'tem') !== 'tem') why.push(`port ${p.name} is a ${p.mode_type} port`);
   }
@@ -229,7 +247,9 @@ function prepareCompanion(e, mesh, pt, common) {
 
 /**
  * Port-impedance check input (L7 wave 6): converged 2D (em2d, P2) quasi-TEM impedance of a single-signal port
- * cross-section. Returns {z} or {reason} (A3 S4: never skipped silently).
+ * cross-section. Returns {z, cells, rel_change, levels} or {reason} (A3 S4: never skipped silently).
+ * Refinement (lane L22, L13 hand-off / A3 M9): conductor_cells 4, 8, 16, 32 until two successive values agree within
+ * 5e-4 (EM-4 43.319 / 43.346 / 43.355 / 43.358 ohm; EM-5a hr_si 68.885 / 68.891 / 68.895 / 68.896 ohm at 10 GHz).
  */
 export function portZ2d(e, pt, fHz) {
   if (pt.mode) return { reason: `${pt.mode.type ?? 'analytic'} port (no quasi-TEM cross-section)` };
@@ -255,17 +275,30 @@ export function portZ2d(e, pt, fHz) {
   }
   if (!cond.some((x) => x.role === 'signal')) return { reason: `signal ${signal} does not cross the port face` };
   try {
-    const sec = buildSection({
-      box: { x: e.box_um[u], y: e.box_um[v], bc: { left: sideBc(`${u}min`), right: sideBc(`${u}max`), bottom: sideBc(`${v}min`), top: sideBc(`${v}max`) } },
-      background: e.background ?? 'air',
-      dielectrics: diel,
-      conductors: cond,
-      mesh: { order: 2, conductor_cells: 4 },
-    });
-    const P2 = prepareRlgc(sec, makeMaterials(e.materials ?? {}), { conductor_model: 'pec' });
-    const r = rlgcAt(P2, fHz);
-    const { Z, Y } = zyFromRlgc(r);
-    return { z: modalAnalysis(Z, Y, 2 * Math.PI * fHz).Zc.re[0] };
+    const zAt = (cells) => {
+      const sec = buildSection({
+        box: { x: e.box_um[u], y: e.box_um[v], bc: { left: sideBc(`${u}min`), right: sideBc(`${u}max`), bottom: sideBc(`${v}min`), top: sideBc(`${v}max`) } },
+        background: e.background ?? 'air',
+        dielectrics: diel,
+        conductors: cond,
+        mesh: { order: 2, conductor_cells: cells },
+      });
+      const P2 = prepareRlgc(sec, makeMaterials(e.materials ?? {}), { conductor_model: 'pec' });
+      const r = rlgcAt(P2, fHz);
+      const { Z, Y } = zyFromRlgc(r);
+      return modalAnalysis(Z, Y, 2 * Math.PI * fHz).Zc.re[0];
+    };
+    const levels = [];
+    let rel = null;
+    for (const cells of [4, 8, 16, 32]) {
+      levels.push({ cells, z: zAt(cells) });
+      if (levels.length > 1) {
+        rel = levels[levels.length - 1].z / levels[levels.length - 2].z - 1;
+        if (Math.abs(rel) < 5e-4) break;
+      }
+    }
+    const last = levels[levels.length - 1];
+    return { z: last.z, cells: last.cells, rel_change: rel, levels };
   } catch (err) {
     return { reason: `em2d error: ${String(err?.message ?? err)}` };
   }
@@ -326,7 +359,7 @@ function runVariant(c, e, vid, title, log, onProgress, factor) {
   if (fw) warnings.push(fw);
   // a port face that crosses a PML slab: the port modes (ports.mjs) use the unstretched materials (lane L13 test
   // microstrip, PML on zmax across both port faces: zero-length de-embedded core |S11| 2e-2 at 10 GHz instead of 1e-6)
-  for (const pt of e.ports ?? [])
+  for (const pt of (e.ports ?? []).filter((q) => !isLumped(q)))
     for (const side of Object.keys(e.pml ?? {}))
       if (side[0] !== pt.side[0]) warnings.push(`port ${pt.name}: the port face crosses the PML slab on ${side}; port modes ignore the PML stretch, so port reflections and line-run de-embedding carry errors of order 1e-2`);
   // line run: the device mesh conforms to each reference plane, and each companion is cut out of it (A3 S3)
@@ -335,7 +368,8 @@ function runVariant(c, e, vid, title, log, onProgress, factor) {
     const k = portCut(e, p);
     return { axis: k.ax, at_um: k.at };
   });
-  const meshSpec = { box: e.box_um, axis, solids: solids.map((s, i) => solidSpec(s, i, axis)), mesh: e.mesh ?? {}, cuts };
+  const lumpedSpecs = (e.ports ?? []).filter(isLumped);
+  const meshSpec = { box: e.box_um, axis, solids: solids.map((s, i) => solidSpec(s, i, axis)), mesh: e.mesh ?? {}, cuts, surfaces: lumpedSpecs.map((p) => p.rect_um) };
   emit({ stage: 'mesh' });
   const tm = now();
   const mesh = buildLayeredMesh(meshSpec);
@@ -343,16 +377,17 @@ function runVariant(c, e, vid, title, log, onProgress, factor) {
   emit({ stage: 'setup', ms: meshMs, tets: mesh.stats.tets });
   const materials = makeMaterials(e.materials ?? {});
   const solidProps = solids.map((s, i) => (s.kind === 'conductor' ? conductorProps(e, s, i) : { kind: 'dielectric', material: s.material }));
-  const ports = (e.ports ?? []).map((p) => ({ name: p.name, side: p.side, mode: p.mode ?? { type: p.mode_type ?? 'tem', signal: p.signal }, deembed_um: plan.lineRun ? 0 : p.deembed_um ?? 0 }));
-  const common = { materials, background: e.background ?? 'air', solidProps, bc: e.bc ?? {}, max_dof: e.max_dof, factor };
-  const P = prepare3d(mesh, { ...common, ports, pml: e.pml ?? {} });
-  log?.(`[em3d] ${c.id}/${vid}: ${mesh.stats.tets} tets, ${P.nFree} DOF, nnzL ${P.sym.nnzL}`);
+  const ports = (e.ports ?? []).filter((p) => !isLumped(p)).map((p) => ({ name: p.name, side: p.side, mode: p.mode ?? { type: p.mode_type ?? 'tem', signal: p.signal }, deembed_um: plan.lineRun ? 0 : p.deembed_um ?? 0 }));
+  const common = { materials, background: e.background ?? 'air', solidProps, bc: e.bc ?? {}, max_dof: e.max_dof, factor, order: e.order ?? 1, solver: e.solver, iterative: e.iterative, direct_max_dof: e.direct_max_dof, coarse_max_dof: e.coarse_max_dof };
+  const lumped = lumpedSpecs.map((p) => ({ name: p.name, rect_um: p.rect_um, direction: p.direction, R_ohm: p.R_ohm ?? e.zref_ohm ?? 50 }));
+  const P = prepare3d(mesh, { ...common, ports, lumped, pml: e.pml ?? {} });
+  log?.(`[em3d] ${c.id}/${vid}: ${mesh.stats.tets} tets, order ${P.order}, ${P.nFree} DOF, solver ${P.solver}${P.pmg ? ` (coarse ${P.pmg.nc} DOF, nnzL ${P.pmg.csym.nnzL})` : `, nnzL ${P.sym.nnzL}`}`);
   const targets = (c.targets ?? []).filter((t) => !t.variant || (Array.isArray(t.variant) ? t.variant.includes(vid) : t.variant === vid));
   const freqs = sweepFrequencies(e.sweep, targets.map((t) => t.f_GHz)).filter((f) => f > 0);
   const zref = e.zref_ohm ?? 50;
   const rows = [];
   const Sref = [];
-  emit({ stage: 'ready', dof: P.nFree, nnzL: P.sym.nnzL, n: freqs.length });
+  emit({ stage: 'ready', dof: P.nFree, nnzL: P.stats.nnzL, order: P.order, solver: P.solver, n: freqs.length });
   // companions: mesh cut and symbolic analysis once per variant; numeric factor and solve at every frequency
   const companions = plan.lineRun
     ? lrPorts.map((pt) => {
@@ -367,15 +402,40 @@ function runVariant(c, e, vid, title, log, onProgress, factor) {
         return cp;
       })
     : null;
+  // adaptive sweep (lane L22): one PROM per operator (device and each line-run companion) over the sweep band, then
+  // every sweep frequency from the reduced models
+  const ad = e.adaptive === true ? {} : e.adaptive || null;
+  let adaptive = null;
+  const solveFn = (PP) => (f, o) => solveAt(PP, f, o);
+  let dutSolve = solveFn(P);
+  if (ad && freqs.length > 2) {
+    const fmin = Math.min(...freqs) * 1e9,
+      fmax = Math.max(...freqs) * 1e9;
+    const mk = (PP, who) => {
+      const pr = buildProm(PP, fmin, fmax, { tol: ad.tol ?? 1e-3, maxSamples: ad.max_samples ?? 20, memory: ad.memory ?? 2, onSample: (s) => emit({ stage: 'sample', operator: who, ...s }) });
+      if (!pr.converged) warnings.push(`adaptive sweep (${who}): not converged to tol ${ad.tol ?? 1e-3} within ${ad.max_samples ?? 20} samples (last error ${pr.samples[pr.samples.length - 1].error?.toExponential(2)})`);
+      return pr;
+    };
+    const dp = mk(P, 'device');
+    dutSolve = dp.solveAt;
+    adaptive = { tol: ad.tol ?? 1e-3, device: { samples: dp.samples, dim: dp.dim(), converged: dp.converged, offline_ms: dp.offline_ms }, companions: [] };
+    if (companions)
+      for (const cp of companions) {
+        if (!cp) continue;
+        const pr = mk(cp.P, `companion ${cp.port}`);
+        cp.prom = pr;
+        adaptive.companions.push({ port: cp.port, samples: pr.samples, dim: pr.dim(), converged: pr.converged, offline_ms: pr.offline_ms });
+      }
+  }
   const lfBad = [];
   let zCheckDone = false;
   for (const [fi, fG] of freqs.entries()) {
     emit({ stage: 'frequency', i: fi, n: freqs.length, f_GHz: fG });
-    const r = solveAt(P, fG * 1e9, { onProgress: onProgress ? (ev) => emit({ ...ev, i: fi, n: freqs.length }) : null });
+    const r = dutSolve(fG * 1e9, { onProgress: onProgress ? (ev) => emit({ ...ev, i: fi, n: freqs.length }) : null });
     const cr = companions
       ? companions.map((cp) => {
           if (!cp) return null;
-          const q = solveAt(cp.P, fG * 1e9, { onProgress: onProgress ? (ev) => emit({ ...ev, i: fi, n: freqs.length, companion: cp.port }) : null });
+          const q = (cp.prom ? cp.prom.solveAt : solveFn(cp.P))(fG * 1e9, { onProgress: onProgress ? (ev) => emit({ ...ev, i: fi, n: freqs.length, companion: cp.port }) : null });
           cp.solve_ms += q.timing.total_ms;
           if (cp.z_face_ohm == null) (cp.z_face_ohm = q.zref[0]), (cp.z_ref_ohm = q.zref[1]);
           if (passivityMaxSv(q.S) > 1 + 1e-6) warnings.push(`line-run companion ${cp.port}, f ${fG} GHz: not passive (max singular value ${passivityMaxSv(q.S)})`);
@@ -386,12 +446,12 @@ function runVariant(c, e, vid, title, log, onProgress, factor) {
     emit({ stage: 'frequency_done', i: fi, n: freqs.length, f_GHz: fG, ms: r.timing.total_ms + compMs });
     if (!zCheckDone && (e.port_z_check ?? true)) {
       zCheckDone = true;
-      let off = 0;
-      for (const [pi, pt] of (e.ports ?? []).entries()) {
-        const t0 = off; // terminal index of this port's first mode (zref is per terminal; A3 S4)
-        off += r.ports[pi].K;
+      for (const pt of e.ports ?? []) {
+        // terminal index of this port's first mode (zref is per terminal; A3 S4); r.ports lists wave ports, then lumped
+        const pi = r.ports.findIndex((q) => q.name === pt.name);
+        const t0 = r.ports.slice(0, pi).reduce((a, q) => a + q.K, 0);
         const pc = portChecks.find((q) => q.port === pt.name) ?? (portChecks.push({ port: pt.name }), portChecks[portChecks.length - 1]);
-        const z2 = portZ2d(e, pt, fG * 1e9);
+        const z2 = isLumped(pt) ? { reason: 'lumped port (no wave-port cross-section)' } : portZ2d(e, pt, fG * 1e9);
         if (z2.reason) {
           Object.assign(pc, { z_check: 'not_checked', z_check_reason: z2.reason });
           warnings.push(`port ${pt.name}: port-impedance check not checked: ${z2.reason}`);
@@ -399,7 +459,7 @@ function runVariant(c, e, vid, title, log, onProgress, factor) {
         }
         const zp = r.zref[t0];
         const rel = zp / z2.z - 1;
-        Object.assign(pc, { z_check: Math.abs(rel) > 0.03 ? 'warn' : 'ok', z_port_ohm: zp, z_em2d_ohm: z2.z, z_rel: rel, f_GHz: fG });
+        Object.assign(pc, { z_check: Math.abs(rel) > 0.03 ? 'warn' : 'ok', z_port_ohm: zp, z_em2d_ohm: z2.z, z_rel: rel, f_GHz: fG, z_em2d_cells: z2.cells, z_em2d_rel_change: z2.rel_change });
         if (Math.abs(rel) > 0.03)
           warnings.push(`port ${pt.name}: 3D port-face impedance ${zp.toFixed(2)} ohm differs from the converged 2D cross-section (em2d) ${z2.z.toFixed(2)} ohm by ${(100 * rel).toFixed(1)} %: the 3D mesh under-resolves the line cross-section (refine near the conductors: h_um, mesh.dz_min_um); S at a fixed reference and line-dominated results carry this error`);
       }
@@ -426,7 +486,7 @@ function runVariant(c, e, vid, title, log, onProgress, factor) {
       if (lfc < LF_CANCELLATION_LIMIT) lfBad.push([fG, lfc]);
     }
     Sref.push(S);
-    const row = { f_GHz: fG, terminals: r.terminals, zref_native_ohm: r.zref, S_port_ref: cm(r.S), S: cm(S), ports: r.ports.map((p) => ({ name: p.name, modes: p.K, Z0_ohm: p.Z0, beta_rad_m: p.betas, fullwave: p.fullwave })), checks: { max_singular_value: passivityMaxSv(S), reciprocity_error: reciprocityError(S), det_cancellation: lfc }, timing: { ...r.timing, companions_ms: compMs } };
+    const row = { f_GHz: fG, terminals: r.terminals, zref_native_ohm: r.zref, S_port_ref: cm(r.S), S: cm(S), ports: r.ports.map((p) => ({ name: p.name, modes: p.K, Z0_ohm: p.Z0, beta_rad_m: p.betas, fullwave: p.fullwave })), checks: { max_singular_value: passivityMaxSv(S), reciprocity_error: reciprocityError(S), det_cancellation: lfc }, timing: { ...r.timing, companions_ms: compMs }, solver: r.solver };
     if (e.lumped === 'pi' && S.r === 2) row.pi = piModel(cmatInv(Zb), 2 * Math.PI * fG * 1e9);
     if (e.mixed_mode_pairs?.length) {
       const mm = mixedMode(S, e.mixed_mode_pairs);
@@ -458,7 +518,7 @@ function runVariant(c, e, vid, title, log, onProgress, factor) {
       ? `de-embedded by port extension (${(e.ports ?? []).map((p) => `${p.name} ${p.deembed_um ?? 0} um`).join(', ')})`
       : 'not de-embedded (reference planes at the port faces)';
   const touchstone = e.touchstone && freqs.length
-    ? [{ name: `${c.id.replaceAll('/', '_')}${vid === 'base' ? '' : '_' + vid}.s${ports.length}p`, text: writeTouchstone({ freqsHz: freqs.map((f) => f * 1e9), S: Sref, zref, comments: [`ap-sim em3d case ${c.id} variant ${vid}`, `ports ${ports.map((p) => p.name).join(', ')}; ${deembedText}`] }) }]
+    ? [{ name: `${c.id.replaceAll('/', '_')}${vid === 'base' ? '' : '_' + vid}.s${Sref[0].r}p`, text: writeTouchstone({ freqsHz: freqs.map((f) => f * 1e9), S: Sref, zref, comments: [`ap-sim em3d case ${c.id} variant ${vid}`, `ports ${rows[0].terminals.join(', ')}; ${deembedText}`] }) }]
     : [];
   const fsum = rows.reduce((a, r) => a + r.timing.total_ms + r.timing.companions_ms, 0);
   return {
@@ -474,6 +534,7 @@ function runVariant(c, e, vid, title, log, onProgress, factor) {
       rows,
       port_checks: portChecks,
       deembed_method: plan.method,
+      adaptive,
       companions: companions ? companions.map((cp) => (cp ? { port: cp.port, dof: cp.P.nFree, tets: cp.tets, reference_plane: { axis: cp.cut.ax, at_um: cp.cut.at }, layers: cp.layers, tris2d: cp.tris2d, pml_sides: Object.keys(cp.P.p.pml ?? {}), z_face_ohm: cp.z_face_ohm ?? null, z_ref_ohm: cp.z_ref_ohm ?? null, setup_ms: cp.setup_ms, ms: cp.solve_ms } : null)) : null,
     },
     targets: targetOut,

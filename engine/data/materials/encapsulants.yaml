@@ -3,7 +3,7 @@
 # given (no DMA curve read). Elastic only; Prony / WLF are tier 2.
 schema: ap-sim.materials/1
 group: encapsulants
-verified_on: 2026-10-20
+verified_on: 2026-10-21
 materials:
   underfill_cuf:
     description: capillary underfill (CUF), generic; default set = ectc51909.2023.00155 (E2 gate warpage case D3 bring-up 3)
@@ -207,7 +207,55 @@ materials:
         locator: "p.3 Table 8 row EMC, column 'Cure Shrinkage (%)': 0.16 (volumetric or linear not stated)"
         note: "same table prints 21 % for the 'Insulation layer' row; not used"
         verified_on: 2026-10-20
-      viscoelastic: {status: tier2_pending, pending: [j.ijadhadh.2011.10.007]}
+      viscoelastic:
+        status: tier2_data
+        model: prony_proportional
+        analog_of: "model EMC of Sadeghinia 2012 (j.ijadhadh.2011.10.007: EPN 1180 + BPA + 50 vol% fused silica; Prony E0 6.431 GPa, 1 Hz glassy storage modulus 7239 MPa, Tg(E'') 112.5 C), not the default emc grade (ectc51909.2023.00155: E 18000 / 400 MPa below / above Tg 140 C); any scaling to the default grade is a consumer assumption (audit A8 M9)"
+        modulus: "tensile (elongation) relaxation modulus E(t) = E0 (g_inf + sum g_i exp(-t / tau_i)), proportional relaxation (constant nu): the form of engine/src/mech/viscoelastic.mjs"
+        material: "model EMC of the source: epoxy Novolac EPN 1180 + Bisphenol-A + 64.5 wt% (50 vol%) fused silica FB-940, fully cured (p.83 Sec. 2.1); analog for the generic emc entry, not the grade of its E / CTE default"
+        Tref_C: 120
+        E0_GPa: 6.431
+        E_inf_GPa: 0.097481
+        g_inf: 0.0151579
+        prony:
+          - {g: 0.011974, tau_s: 1e-13, E_GPa: 0.077005}
+          - {g: 0.00492684, tau_s: 1e-12, E_GPa: 0.031685}
+          - {g: 0.033703, tau_s: 1e-11, E_GPa: 0.21675}
+          - {g: 0.00446061, tau_s: 1e-10, E_GPa: 0.028686}
+          - {g: 0.0181409, tau_s: 1e-09, E_GPa: 0.11667}
+          - {g: 0.0341616, tau_s: 1e-08, E_GPa: 0.21969}
+          - {g: 0.0233519, tau_s: 1e-07, E_GPa: 0.15018}
+          - {g: 0.0515774, tau_s: 1e-06, E_GPa: 0.3317}
+          - {g: 0.0684322, tau_s: 1e-05, E_GPa: 0.44009}
+          - {g: 0.148799, tau_s: 0.0001, E_GPa: 0.95694}
+          - {g: 0.245753, tau_s: 0.001, E_GPa: 1.5804}
+          - {g: 0.217995, tau_s: 0.01, E_GPa: 1.4019}
+          - {g: 0.0921681, tau_s: 0.1, E_GPa: 0.59274}
+          - {g: 0.0236602, tau_s: 1, E_GPa: 0.15216}
+          - {g: 0.00461497, tau_s: 10, E_GPa: 0.029679}
+          - {g: 0.000776202, tau_s: 100, E_GPa: 0.0049918}
+          - {g: 0.000346961, tau_s: 1000, E_GPa: 0.0022313}
+        shift:
+          type: piecewise
+          Tc_C: 90
+          below: {type: arrhenius, Ea_J_mol: 401450.7, Tref_C: 200.5}
+          above: {type: wlf, C1: 11.1, C2_K: 56.6, Tref_C: 120}
+          convention: "engine form (mech/viscoelastic.mjs shiftFactor): log10 a_T = -C1 (T - Tref) / (C2 + T - Tref), ln a_T = Ea / R (1/T - 1/Tref), reduced time dxi = dt / a_T. The source prints the reciprocal factor (p.88 Eqs. 9-10: log a_T = +C1 (T - Tref) / (C2 + T - Tref) above Tc and log a_T = -H / (2.30 R) (1/T - 1/T0) below Tc; Fig. 12 rises with T). Ea = H ln(10) / 2.30 = 401000 x 1.0011240 = 401450.7 J/mol (was stored rounded as 401448, relative 6.7e-6; audit A8 M2 quoted 401449.8, recomputed by L27 2026-10-21 as 401450.7)"
+          source_values: {C1: 11.1, C2: 56.6, Tref_C: 120, Tg_DMA_C: 126.4, H_kJ_mol: 401, T0: 200.5, T0_unit_printed: K, Tc_C: 90}
+          note: "T0 is printed under the header 'T0 (K)' but Fig. 12(b) is reproduced only with T0 in C (473.65 K): at 60 / 80 C the model gives log a_T (source form) -18.67 / -15.11 vs -18.63 / -14.91 read from the Fig. 12 vector curve (+5 display offset removed); with 200.5 K the 60 C value would be +41.6 (+45.2 at 80 C; Eq. 9 with H 401 kJ/mol, R 8.314 J/mol K; corrected from 'about +71' per audit A8 M1). The branches are not continuous at Tc (Arrhenius -13.47, WLF -12.52 decades at 90 C, source form). Source defect 4 (found by audit A8 M3 from the Fig. 12 vector data, not re-checked by L27): the Fig. 12 line styles are swapped against the legend; the dotted line labelled WLF fit is the Arrhenius curve (low-T branch, equals Eq. 9 at 24.9 C) and the dash-dot line labelled Arrhenius fit is the WLF curve (high-T branch, equals Eq. 10 at 85 C, diverging toward its 63.4 C singularity); no data impact (the red shift-factor curve and Table 6 were used). Engine shiftFactor supports wlf | arrhenius only: piecewise is pending (viscoelastic engine lane, L27 Part C not started this round)"
+        fit:
+          method: "Prony series fitted by lane L21 to the storage-modulus master curve: E'(w) = E_inf + sum E_i (w tau_i)^2 / (1 + (w tau_i)^2), tau_i = 1e-13 .. 1e3 s one per decade, non-negative least squares on relative residuals; zero terms dropped; g_i = E_i / E0, E0 = E_inf + sum E_i"
+          residual: "max 7.8 %, rms 2.2 % over the 90 master-curve points (largest in the transition, where the shifted isotherms scatter)"
+          range_log10_omega_rad_s: [-3.256, 13.034]
+        master_curve:
+          note: "Fig. 11(b) markers of the shifted isotherms (vector data; the unshifted isotherm points at the six measured frequencies 10^0.31-10^2.57 rad/s excluded), axis calibration from the plot ticks, placement uncertainty < 0.01 decade"
+          log10_omega_rad_s: [-3.256, -3.056, -2.773, -2.733, -2.570, -2.308, -2.268, -2.228, -2.067, -1.806, -1.806, -1.763, -1.723, -1.563, -1.320, -1.301, -1.261, -1.240, -1.240, -1.058, -0.978, -0.817, -0.817, -0.775, -0.735, -0.735, -0.594, -0.454, -0.313, -0.313, -0.233, -0.091, -0.030, 0.112, 0.192, 0.272, 0.414, 0.475, 0.614, 0.777, 0.876, 0.918, 1.039, 1.119, 1.381, 1.421, 1.603, 1.683, 1.725, 1.885, 2.107, 2.227, 2.369, 2.390, 2.671, 2.732, 2.893, 3.157, 3.176, 3.216, 3.680, 3.720, 3.820, 4.001, 4.164, 4.324, 4.668, 4.829, 4.949, 5.312, 5.393, 5.817, 5.876, 6.100, 6.381, 6.886, 7.390, 7.652, 7.751, 8.256, 8.761, 9.265, 9.768, 10.032, 10.756, 11.261, 11.765, 12.249, 12.752, 13.034]
+          log10_E_GPa: [-1.0075, -1.0075, -1.0032, -1.0032, -1.0032, -0.9993, -0.9950, -0.9950, -0.9869, -0.9830, -0.9830, -0.9830, -0.9788, -0.9706, -0.9500, -0.9500, -0.9582, -0.9419, -0.9419, -0.9299, -0.9462, -0.8888, -0.8845, -0.9051, -0.8763, -0.8725, -0.8313, -0.8275, -0.7743, -0.7743, -0.7495, -0.7006, -0.6925, -0.6145, -0.5982, -0.5776, -0.5163, -0.4837, -0.4224, -0.3445, -0.2832, -0.2913, -0.2133, -0.1931, -0.0701, -0.0418, 0.0318, 0.0811, 0.0936, 0.1424, 0.2449, 0.2654, 0.3224, 0.3387, 0.4086, 0.4210, 0.4699, 0.5230, 0.5191, 0.5354, 0.6010, 0.6130, 0.6091, 0.6379, 0.6542, 0.6662, 0.6867, 0.6949, 0.6992, 0.7154, 0.7116, 0.7317, 0.7360, 0.7317, 0.7441, 0.7523, 0.7604, 0.7604, 0.7604, 0.7729, 0.7767, 0.7810, 0.7849, 0.7849, 0.7892, 0.7973, 0.8016, 0.8016, 0.8054, 0.8054]
+        basis: derived
+        source: j.ijadhadh.2011.10.007
+        locator: "p.87 Fig. 11(b) storage-modulus master curve of the filled EMC (Tref 120 C; DMA tension 0.32-32 Hz, 20-200 C, p.87 Sec. 2.4); p.88 Table 6 row Filled (C1 11.1, C2 56.6, Tg^DMA 126.4 C, H 401 kJ/mol, T0 200.5, Tc 90 C) and Eqs. (9)-(10); p.87 Table 5 row Filled (glassy 7239 MPa, rubbery 108.3 MPa, 1 Hz)"
+        condition: "fully cured; the source prints no Prony terms (only the master-curve figure and the shift-factor fits)"
+        verified_on: 2026-10-21
     alternatives:
       ectc51529_2024_00155_E:
         property: elastic
@@ -268,6 +316,38 @@ materials:
         locator: "p.2 table, CV8710U mold shrinkage 0.21 % (JIS K6911, 25 C)"
         note: "mold shrinkage is a dimensional (linear) change of the molded part versus the mold; JIS K6911 definition not read; may include thermal contraction from the molding temperature, so not a pure cure shrinkage"
         verified_on: 2026-10-20
+      sadeghinia2012_filled_E:
+        property: elastic
+        use: sensitivity (model filled EMC; E from the DMA storage modulus, nu derived from E and the PVT bulk modulus)
+        model: iso
+        E: {model: bilinear_tg, below: 7239, above: 108.3, Tg_C: 112.5, unit: MPa, basis: measured, source: j.ijadhadh.2011.10.007, locator: "p.87 Table 5 row Filled: glassy 7239 MPa, rubbery 108.3 MPa (storage modulus, DMA tension, 1 Hz); Tg (E'' peak, 1 Hz) 112.5 C, Tg (tan delta) 121 C", condition: "storage modulus at 1 Hz (dynamic), not a relaxed modulus", verified_on: 2026-10-21}
+        nu: {model: bilinear_tg, below: 0.421, above: 0.496, Tg_C: 112.5, unit: "1", basis: derived, source: j.ijadhadh.2011.10.007, locator: "nu = (3K - E) / (6K): glassy K 15255 MPa at 50 C and rubbery K 4679 MPa at 200 C (p.87 Fig. 9 filled markers, vector data, +-40 MPa) with E of Table 5 (7239 / 108.3 MPa)", note: "derived by lane L21 from two different tests (dynamic DMA E' at 1 Hz; quasi-static PVT K at zero pressure, p.86 Eqs. 7-8); glassy K taken at 50 C (lowest PVT point) while Table 5 gives no temperature for the glassy plateau; outside the CD1 placeholder band 0.30 +- 0.05", verified_on: 2026-10-21}
+      sadeghinia2012_filled_cte:
+        property: cte
+        use: sensitivity (model filled EMC, PVT dilatometry)
+        kind: instantaneous
+        model: expr_T
+        expr: "(79 + 94*(2 - 2/(1 + 2.718281828459045^(0.066*(T_C - 98)))))/3"
+        range_C: [40, 200]
+        unit: ppm/K
+        basis: measured
+        source: j.ijadhadh.2011.10.007
+        locator: "p.86 Eq. (6) CTE_v(T, 0) = k1 + 0.5 k2 (1 + tanh[A1 (T - Tg_pvt)]) with Table 4 row Filled: k1 7.9e-5 /C, k2 1.88e-4 /C, A1 0.033 /C, Tg_pvt 98 C; linear CTE = CTE_v / 3 (p.86); Fig. 8 filled markers about 28 ppm/K at 40 C and 89 ppm/K at 150-200 C"
+        condition: "fully cured, zero pressure, 40-200 C (PVT in steps of 10 C, p.85); glassy linear 26.3 ppm/K (k1 / 3), rubbery 89.0 ppm/K ((k1 + k2) / 3)"
+        note: "p.86 text calls k1 the rubbery and k1 + k2 the glassy value; Eq. (6) (tanh -> -1 below Tg) gives the reverse, which matches Fig. 8 and is used here; tanh written with 2.718281828459045^x (the expression grammar has no exp / tanh)"
+        verified_on: 2026-10-21
+      sadeghinia2012_filled_shrinkage:
+        property: cure_shrinkage
+        use: sensitivity (model filled EMC, measured volumetric cure shrinkage)
+        value: 2.1
+        unit: "%"
+        kind: volumetric
+        basis: measured
+        source: j.ijadhadh.2011.10.007
+        locator: "p.85 Sec. 2.3.1 and Fig. 5(b): filled 2.1 vol% (unfilled 3.4 vol%; inert-filler estimate 1.7 vol%); Eq. (3) eps_cure = alpha gamma_c (linear in conversion, Fig. 6)"
+        condition: "isothermal cure at 120 C in the PVT dilatometer (5 C/min heating), total from the start to the end of the isothermal cure"
+        note: "includes shrinkage before gelation (liquid, stress-free); the stress-generating post-gel part is smaller and is not given; linear equivalent 0.7 %"
+        verified_on: 2026-10-21
       cv8710u_cte:
         property: cte
         use: sensitivity (vendor TDS)
@@ -284,7 +364,7 @@ materials:
     missing:
       - "Poisson ratio (no source): mechanics with emc needs a case override with provenance"
       - "ectc51909.2023.00175 Sec. III text: EMC E 19 / 1.6 GPa below / above Tg, DOE Tg 145-175 C, CTE 7-12 / 22-46 ppm/C (ranges, no single set; not stored)"
-      - "viscoelastic Prony + WLF (Sadeghinia 2012, j.ijadhadh.2011.10.007) pending download"
+      - "viscoelastic data of the default grade: none; the tier-2 Prony / shift set is from the Sadeghinia 2012 model EMC (analog; Prony fitted by L21 to its Fig. 11(b) master curve)"
 
   lmc:
     description: liquid molding compound for MR-MUF HBM stacks; default LMC A of ectc51909.2023.00151

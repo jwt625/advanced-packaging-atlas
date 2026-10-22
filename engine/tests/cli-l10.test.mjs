@@ -451,6 +451,9 @@ test('nonlinear: physics.mechanics.nonlinear / study key -> total-Lagrangian q2s
   assert.match(big.errors[0].error, /nonlinear \(total Lagrangian, q2s\) model has \d+ DOF, above the limit 10/);
   assert.throws(() => parseCase(bCase([{ ...st[1], nonlinear: { max_dof: -1 } }])), /nonlinear\.max_dof: positive integer/);
   assert.throws(() => parseCase(bCase([{ ...st[1], nonlinear: { newton: 3 } }])), /unknown key newton/);
+  // SPEC 21 branch key (audit A7 S2)
+  for (const branch of ['stable', 'follow']) parseCase(bCase([{ ...st[1], nonlinear: { branch } }]));
+  assert.throws(() => parseCase(bCase([{ ...st[1], nonlinear: { branch: 'other' } }])), /nonlinear\.branch: stable \| follow/);
 });
 
 test('thermo_elastic_sweep: rate form along path_C (E across Tg), equal to solveMechSweep, different from the total form', async () => {

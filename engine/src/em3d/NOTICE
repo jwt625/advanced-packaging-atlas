@@ -1,0 +1,20 @@
+engine/src/em3d - third-party attribution
+
+Parts of this directory are adapted from AWS Palace (https://github.com/awslabs/palace), commit
+29ad351f916e47e005a43730513f155eeb634e3e (2026-10-21), licensed under the Apache License, Version 2.0. A copy of that
+licence is in LICENSE-APACHE-2.0 in this directory. Palace NOTICE text:
+
+  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+The adapted files re-implement Palace algorithms and structure in JavaScript; no Palace source text is copied. Each
+adapted file states in its header the Palace files it follows and what was changed. These files are distributed as
+part of the engine under GPL-3.0-or-later (engine/LICENSE); the Apache-2.0 terms continue to apply to the portions
+derived from Palace.
+
+Adapted files:
+- krylov.mjs  <- palace/linalg/iterative.cpp (GMRES)
+- pmg.mjs     <- palace/linalg/gmg.cpp, palace/linalg/distrelaxation.cpp, palace/models/spaceoperator.cpp
+                 (p-multigrid V-cycle, Hiptmair distributive relaxation, preconditioner from the complex system)
+- lumped.mjs  <- palace/models/lumpedportoperator.cpp, palace/fem/lumpedelement.hpp (lumped ports)
+- prom.mjs    <- palace/drivers/drivensolver.cpp, palace/models/romoperator.cpp (adaptive sweep, PROM, MRI)
+- ams.mjs     <- palace/linalg/ams.cpp (AMS structure; not wired into the solver yet)

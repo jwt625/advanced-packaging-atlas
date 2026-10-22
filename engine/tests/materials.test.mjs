@@ -90,8 +90,8 @@ test('SI conversion', () => {
   near(cu.elastic.E_Pa, 123.5e9, 1, 'Cu E');
   near(cu.rho_kg_m3, 8960, 1e-9);
   const si = lib.resolve('si_crystal', 298.15);
-  near(si.elastic.C11, 165.6e9, 1);
-  near(si.rho_kg_m3, 2330, 0);
+  near(si.elastic.C11, 165.64e9, 1); // Hall 1967 Table III, 1.6564e12 dyn/cm2 (L21)
+  near(si.rho_kg_m3, 2329.0, 1e-9); // Hall 1967 p.757, 2.3290 g/cm3 (L21)
   const ss = lib.resolve('ss304', 293.15, { need: ['sigma'] });
   rel(ss.sigma_S_m, 1 / 72e-8, 1e-12, 'SS304 resistivity 72 uohm cm');
   const ind = lib.resolve('tim_indium', 298.15, { need: ['k'] });
@@ -277,7 +277,11 @@ test('template policy: every template value has a sensitivity block; only nu or 
       assert.ok(r.rationale, `${r.key} cte rationale`);
       continue;
     }
-    if (field.startsWith('nu')) assert.ok(r.key === 'silicone_adhesive' ? r.sensitivity.delta.plus === 0.19 && r.sensitivity.delta.minus === 0.05 : r.sensitivity.delta.abs === 0.05, `${r.key} nu delta`);
+    // silicone_adhesive (L27 2026-10-21, A8 S1): default placeholder -0.05 / +0.195 (0.25-0.495, upper = PDMS analog);
+    // PDMS analog alternative -0.045 / +0.004; ECCOBOND 3003 alternative placeholder -0.05 / +0.19 (unchanged)
+    const silNu = (d) =>
+      r.analog_of ? d.plus === 0.004 && d.minus === 0.045 : r.where.startsWith('properties.') ? d.plus === 0.195 && d.minus === 0.05 : d.plus === 0.19 && d.minus === 0.05;
+    if (field.startsWith('nu')) assert.ok(r.key === 'silicone_adhesive' ? silNu(r.sensitivity.delta) : r.sensitivity.delta.abs === 0.05, `${r.key} nu delta`);
     else assert.deepEqual(r.sensitivity.delta, { factor: [0.5, 2] });
     if (r.placeholder) assert.equal(r.value, 0.3);
   }
@@ -468,8 +472,10 @@ test('cubic rotation follows SPEC 12 (active R): 30 deg C16 vs an independent 4t
   };
   const M = cubicStiffnessRotZ(C, deg);
   near(M[5] / 1e9, rot(0, 0, 0, 1) / 1e9, 1e-9, 'C16'); // Voigt (1,6) = C_1112
-  near(M[5] / 1e9, -12.406, 0.001, 'C16 audit value');
-  near(M[0] / 1e9, 187.088, 0.001, 'C11 audit value');
+  // audit A1 values (-12.406 / 187.088 GPa) were for the Hopcroft-rounded constants 165.6 / 63.9 / 79.5; L21 (2026-10-21)
+  // moved the default to the Hall 1967 Table III values 165.64 / 63.94 / 79.51, which give -12.4101 / 187.1350
+  near(M[5] / 1e9, -12.4101, 0.001, 'C16 audit value (Hall constants)');
+  near(M[0] / 1e9, 187.135, 0.001, 'C11 audit value (Hall constants)');
   near(M[0], rot(0, 0, 0, 0), 1e-3);
   near(M[35], rot(0, 1, 0, 1), 1e-3);
 });
@@ -521,7 +527,11 @@ test('wave-3 entries resolve within their sourced ranges; placeholders refuse', 
   const T = C0 + 25;
   const sa = lib.resolve('silicone_adhesive', T);
   near(sa.elastic.E_Pa, 358e6, 1);
-  assert.ok(sa.provenance.template.some((t) => t.property === 'elastic.nu' && t.placeholder));
+  // nu history: before L21 0.30 placeholder; L21 (2026-10-21) 0.495 PDMS analog (c8sm02105h); after L27 (2026-10-21,
+  // audit A8 S1, approved by Wentao) 0.30 placeholder again, bounds 0.25-0.495; 0.495 is the alternative pdms_rubbery_analog_nu
+  near(sa.elastic.nu, 0.3, 0);
+  assert.ok(sa.provenance.template.some((t) => t.property === 'elastic.nu' && t.placeholder && !t.analog_of));
+  near(lib.resolve('silicone_adhesive', T, { use: { elastic: 'pdms_rubbery_analog_nu' } }).elastic.nu, 0.495, 0);
   assert.throws(() => lib.resolve('silicone_adhesive', C0 + 240), /outside data range/);
   assert.ok(lib.resolve('silicone_adhesive', C0 + 240, { use: { elastic: 'eccobond3003_E', cte: 'eccobond3003_cte' } }).elastic);
   near(lib.resolve('snbi', T).elastic.E_Pa, 11.9e9, 1);
@@ -673,7 +683,8 @@ test('wave 8: override status sensitivity; underfill_c4 with inherited markers',
   assert.equal(p.k.override_status, 'sensitivity');
   assert.equal(p.k.sensitivity_bound, true);
   assert.equal(p.elastic.fields.nu.override_status, 'sensitivity');
-  assert.throws(() => applyOverrides(lib, { emc: { E_GPa: { value: 10, status: 'sensitivity', note: 'x' } } }), /status sensitivity only for/);
+  // E_GPa joined the sensitivity fields (L26, 2026-10-21); rho / cp still refuse the status
+  assert.throws(() => applyOverrides(lib, { emc: { rho_kg_m3: { value: 2000, status: 'sensitivity', note: 'x' } } }), /status sensitivity only for/);
   const c4 = lib.resolve('underfill_c4', T);
   near(c4.elastic.E_Pa, 6.9e9, 1);
   near(lib.resolve('underfill_c4', C0 + 200).elastic.E_Pa, 0.1e9, 1);

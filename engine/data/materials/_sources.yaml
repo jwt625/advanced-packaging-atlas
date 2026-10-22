@@ -3,7 +3,7 @@
 # data sheet), paywalled (config/sim/manual_downloads.md; not read yet).
 # read: what this lane actually read (text layer, page render, web page).
 schema: ap-sim.materials-sources/1
-verified_on: 2026-10-20
+verified_on: 2026-10-21
 sources:
   # --- primary / evaluated (open or cached) ---
   hopcroft2010:
@@ -59,6 +59,16 @@ sources:
     url: https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nbsir80-1627.pdf
     access: open
     read: text layer, report p.131 (Table 1)
+  janaf_si_1998:
+    citation: "M. W. Chase Jr., NIST-JANAF Thermochemical Tables, 4th ed., J. Phys. Chem. Ref. Data Monograph 9 (1998), p.1881, Silicon (Si) reference-state table; web edition janaf.nist.gov"
+    url: https://janaf.nist.gov/tables/Si-001.html
+    access: open
+    read: "web table (Si-001.html and Si-001.txt) and the scanned monograph page (https://janaf.nist.gov/pdf/JANAF-FourthEd-1998-Silicon.pdf p.1, rendered: A_r 28.0855, Cp column), retrieved 2026-10-21"
+  janaf_cu_1998:
+    citation: "M. W. Chase Jr., NIST-JANAF Thermochemical Tables, 4th ed., J. Phys. Chem. Ref. Data Monograph 9 (1998), p.1005, Copper (Cu) reference-state table; web edition janaf.nist.gov"
+    url: https://janaf.nist.gov/tables/Cu-001.html
+    access: open
+    read: "web table (Cu-001.txt) and the scanned monograph page (https://janaf.nist.gov/pdf/JANAF-FourthEd-1998-Copper.pdf p.1, rendered: A_r 63.546, Cp column, page 1005), retrieved 2026-10-21"
   nist_cryo_ofhc_cu:
     citation: "NIST Cryogenic Technologies Group, Material properties: OFHC copper (UNS C10100/C10200), trc.nist.gov"
     url: https://trc.nist.gov/cryogenics/materials/OFHC%20Copper/OFHC_Copper_rev1.htm
@@ -149,11 +159,12 @@ sources:
   ectc51906.2022.00106: {citation: "Super fine jet underfill dispense technique for robust micro joint in direct bonded heterogeneous integration (DBHi) silicon bridge packages, ECTC 2022", paper_id: ectc51906.2022.00106, access: local_cache, read: "text layer p.2 Table I"}
   itherm45881.2020.9190542: {citation: "Thermal characteristics of integrated fan-out on substrate (InFO_oS) packaging technology, ITherm 2020", paper_id: itherm45881.2020.9190542, access: local_cache, read: "text layer p.2 Table 2 and p.4 text"}
   ectc51846.2026.00065: {citation: "AlN-based chiplet encapsulation: enhancing thermal performance for high-density heterogeneous integration, ECTC 2026, pp. 364-371", paper_id: ectc51846.2026.00065, access: local_cache, read: "text layer p.4 Table I"}
-  # --- paywalled (config/sim/manual_downloads.md); not read ---
-  physrev.161.756: {citation: "J. J. Hall, Electronic effects in the elastic constants of n-type silicon, Phys. Rev. 161, 756 (1967)", doi: 10.1103/PhysRev.161.756, paper_id: physrev.161.756, access: paywalled, read: "not read (values via Hopcroft 2010 Table III)"}
-  physrev.134.a1058: {citation: "C. J. Glassbrenner, G. A. Slack, Thermal conductivity of silicon and germanium from 3 K to the melting point, Phys. Rev. 134, A1058 (1964)", doi: 10.1103/PhysRev.134.A1058, paper_id: physrev.134.a1058, access: paywalled, read: "not read"}
-  1.333965: {citation: "Y. Okada, Y. Tokumaru, J. Appl. Phys. 56, 314 (1984)", doi: 10.1063/1.333965, paper_id: 1.333965, access: paywalled, read: "not read"}
-  j.ijadhadh.2011.10.007: {citation: "M. Sadeghinia, K. M. B. Jansen, L. J. Ernst, Int. J. Adhes. Adhes. 32, 82 (2012)", doi: 10.1016/j.ijadhadh.2011.10.007, paper_id: j.ijadhadh.2011.10.007, access: paywalled, read: "not read"}
-  j.mee.2003.09.012: {citation: "D. T. Read, Y. W. Cheng, R. Geiss, Microelectron. Eng. 75 (2004)", doi: 10.1016/j.mee.2003.09.012, paper_id: j.mee.2003.09.012, access: paywalled, read: "not read"}
-  09540910010331428: {citation: "Z. N. Cheng et al., Viscoplastic Anand model for solder alloys and its application, Soldering & Surface Mount Technology (2000)", doi: 10.1108/09540910010331428, paper_id: 09540910010331428, access: paywalled, read: "not read"}
-  j.microrel.2013.07.100: {citation: "Zhang, Han, Guo, He, Anand model and FEM analysis of SnAgCuZn lead-free solder joints in WLCSP, Microelectron. Rel. 54, 281 (2014)", doi: 10.1016/j.microrel.2013.07.100, paper_id: j.microrel.2013.07.100, access: paywalled, read: "not read"}
+  # --- manual downloads (config/sim/manual_downloads.md), ingested 2026-10-21, read by lane L21 ---
+  physrev.161.756: {citation: "J. J. Hall, Electronic effects in the elastic constants of n-type silicon, Phys. Rev. 161, 756-761 (1967)", doi: 10.1103/PhysRev.161.756, paper_id: physrev.161.756, access: local_cache, read: "scan with OCR layer; page renders 200-400 dpi: p.757 text and Fig. 1, p.758 Tables III-V, p.759 Figs. 2-3 (pure-Si curves digitized from the renders)"}
+  physrev.134.a1058: {citation: "C. J. Glassbrenner, G. A. Slack, Thermal conductivity of silicon and germanium from 3 K to the melting point, Phys. Rev. 134, A1058-A1069 (1964)", doi: 10.1103/PhysRev.134.A1058, paper_id: physrev.134.a1058, access: local_cache, read: "scan with OCR layer; page render 400 dpi of p.A1062 Table I"}
+  "1.333965": {citation: "Y. Okada, Y. Tokumaru, Precise determination of lattice parameter and thermal expansion coefficient of silicon between 300 and 1500 K, J. Appl. Phys. 56, 314-320 (1984)", doi: 10.1063/1.333965, paper_id: "1.333965", access: local_cache, read: "text layer and page renders: p.318 Eq. (5), p.319 Table IV and Fig. 5, p.320 Sec. IV-V"}
+  j.ijadhadh.2011.10.007: {citation: "M. Sadeghinia, K. M. B. Jansen, L. J. Ernst, Characterization and modeling the thermo-mechanical cure-dependent properties of epoxy molding compound, Int. J. Adhes. Adhes. 32, 82-88 (2012)", doi: 10.1016/j.ijadhadh.2011.10.007, paper_id: j.ijadhadh.2011.10.007, access: local_cache, read: "text layer and page renders p.83-88; vector plot data of Fig. 9, Fig. 11(b) and Fig. 12 extracted from the PDF drawing commands"}
+  j.mee.2003.09.012: {citation: "D. T. Read, Y. W. Cheng, R. Geiss, Morphology, microstructure, and mechanical properties of a copper electrodeposit, Microelectron. Eng. 75, 63-70 (2004)", doi: 10.1016/j.mee.2003.09.012, paper_id: j.mee.2003.09.012, access: local_cache, read: "text layer p.67 Table 1; embedded image of Fig. 4 (p.68) digitized"}
+  "09540910010331428": {citation: "Z. N. Cheng, G. Z. Wang, L. Chen, J. Wilde, K. Becker, Viscoplastic Anand model for solder alloys and its application, Soldering & Surface Mount Technology 12(2), 31-36 (2000)", doi: 10.1108/09540910010331428, paper_id: "09540910010331428", access: local_cache, read: "text layer p.31-33 (Eqs. 1-4, Table I, Table II) and page render p.33"}
+  j.microrel.2013.07.100: {citation: "L. Zhang, J.-G. Han, Y. Guo, C.-W. He, Anand model and FEM analysis of SnAgCuZn lead-free solder joints in wafer level chip scale packaging devices, Microelectron. Reliab. 54, 281-286 (2014)", doi: 10.1016/j.microrel.2013.07.100, paper_id: j.microrel.2013.07.100, access: local_cache, read: "text layer and page render p.283 Table 1; reference list p.285-286"}
+  c8sm02105h: {citation: "A. Mueller, M. C. Wapler, U. Wallrabe, A quick and accurate method to determine the Poisson's ratio and the coefficient of thermal expansion of PDMS, Soft Matter 15, 779-784 (2019)", doi: 10.1039/c8sm02105h, paper_id: c8sm02105h, access: local_cache, read: "text layer and page renders p.780-783 (Sec. 2-6, Figs. 7-8, Table 1)"}

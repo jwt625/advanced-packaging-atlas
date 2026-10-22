@@ -117,3 +117,9 @@ Retrieval uses a dedicated, git-ignored browser profile (`cache/browser_profile`
 session is not reused elsewhere. Cached subscription PDFs carry a licensed-download stamp and stay
 local-only; only `source.json` metadata is tracked. Non-IEEE paywalled sources are listed in
 `data/manual_downloads.md`.
+
+## Licence
+
+Code is GPL-3.0-or-later (`LICENSE`). Parts of the browser 3D EM solver in `engine/src/em3d/` follow algorithms of
+awslabs/palace (Apache-2.0); see `engine/src/em3d/NOTICE` and `engine/src/em3d/LICENSE-APACHE-2.0`. Cached sources keep
+their own rights (see above).

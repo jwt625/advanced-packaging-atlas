@@ -131,3 +131,34 @@ test('thermal-only (k) requests: rho / cp overrides are fingerprinted too (k-onl
   assert.notEqual(e.provenance.rve_table?.status, 'hit_exact', 'a rho override must not reuse the default k row');
   assert.ok(e.rho_kg_m3 == null || Math.abs(e.rho_kg_m3 - d.rho_kg_m3) > 1, `rho ${e.rho_kg_m3} vs default ${d.rho_kg_m3}`);
 });
+
+test('canonical homog keys (lane L20): alias and number spellings of tabulated constituents hit the same rows; overrides still miss', async () => {
+  const { canonicalHomogKey } = await import('../src/homog/resolver.mjs');
+  assert.equal(canonicalHomogKey(lib, 'homog:c4:copper+underfill:0.21010'), 'homog:c4:cu_electroplated+underfill_cuf:0.2101');
+  assert.equal(canonicalHomogKey(lib, 'homog:rdl_layer:copper+oxide:0.5:plane'), canonicalHomogKey(lib, 'homog:rdl_layer:copper+sio2_film:0.5'));
+  assert.equal(canonicalHomogKey(lib, 'homog:tsv:copper+silicon:0.0079:z'), 'homog:tsv:cu_electroplated+si_crystal:0.0079');
+  assert.equal(canonicalHomogKey(lib, 'homog:rdl_layer:copper+oxide:0.5:x'), 'homog:rdl_layer:cu_electroplated+sio2_film:0.5:x');
+  assert.equal(canonicalHomogKey(lib, 'homog:stack:copper+oxide:1/2.0'), 'homog:stack:cu_electroplated+sio2_film:1/2');
+  assert.equal(canonicalHomogKey(lib, 'homog:stack:mystack'), 'homog:stack:mystack');
+  // the shipped table has full rows only under 'homog:c4:copper+underfill_cuf:0.2101' (25 C, Tsf 150 C)
+  const tab = 'homog:c4:copper+underfill_cuf:0.2101';
+  const ref = lib.resolve(tab, T25, { Tsf_K: TSF150 });
+  assert.equal(ref.provenance.rve_table.status, 'hit_exact');
+  for (const k of ['homog:c4:copper+underfill:0.2101', 'homog:c4:cu_electroplated+underfill_cuf:0.21010']) {
+    const e = lib.resolve(k, T25, { Tsf_K: TSF150 });
+    assert.equal(e.provenance.rve_table.status, 'hit_exact', k);
+    assert.equal(e.key, k, 'entry keeps the requested key');
+    assert.deepEqual(C6(e), C6(ref));
+    assert.deepEqual(e.cte.alpha, ref.cte.alpha);
+    assert.deepEqual(e.k_W_mK, ref.k_W_mK);
+  }
+  // conduction rows exist only as 'homog:c4:copper+underfill:0.1963': served to the canonical spelling too
+  const kAlias = lib.resolve('homog:c4:cu_electroplated+underfill_cuf:0.1963', T25, { need: ['k'] });
+  assert.equal(kAlias.provenance.rve_table.status, 'hit_exact');
+  assert.deepEqual(kAlias.k_W_mK, lib.resolve('homog:c4:copper+underfill:0.1963', T25, { need: ['k'] }).k_W_mK);
+  // an overridden constituent under either spelling misses on the fingerprint and computes live
+  const L = applyOverrides(lib, { underfill_cuf: { k_W_mK: { value: 0.9, status: 'user', note: 'canonical-key fingerprint check (test)' } } });
+  const o = L.resolve('homog:c4:copper+underfill:0.1963', T25, { need: ['k'] });
+  assert.equal(o.provenance.rve_table.status, 'miss_fingerprint');
+  assert.notDeepEqual(o.k_W_mK, kAlias.k_W_mK);
+});

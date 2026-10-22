@@ -63,3 +63,20 @@ test('RVE -> ROM fallbacks are counted in homogStats (per library and per attach
   assert.equal(L.homogStats({ family: true }).rom_fallback, 2);
   assert.equal(lib.homogStats().rom_fallback, 0, 'the default library has no fallback');
 });
+
+test('status sensitivity on E_GPa (L26, CD1 sensitivity bounds): accepted, flagged, admissibility kept', () => {
+  const T = 298.15;
+  const base = lib.resolve('emc', T).elastic.E_Pa;
+  const L = applyOverrides(lib, { emc: { E_GPa: { value: 10, status: 'sensitivity', note: 'E bound (test)' } } });
+  const r = L.resolve('emc', T);
+  assert.equal(r.elastic.E_Pa, 10e9);
+  assert.notEqual(base, 10e9);
+  const f = r.provenance.properties.elastic.fields.E;
+  assert.equal(f.override_status, 'sensitivity');
+  assert.equal(f.sensitivity_bound, true);
+  // the same admissibility checks as any override (E > 0) and the isotropy rule (cubic Si needs nu too)
+  for (const E of [0, -1, NaN]) assert.throws(() => applyOverrides(lib, { emc: { E_GPa: { value: E, status: 'sensitivity', note: 'x' } } }), /override emc\.E_GPa .*E must be/);
+  assert.throws(() => applyOverrides(lib, { si_crystal: { E_GPa: { value: 130, status: 'sensitivity', note: 'x' } } }), /needs both E_GPa and nu/);
+  // fields outside the sensitivity set still refuse the status
+  assert.throws(() => applyOverrides(lib, { emc: { cp_J_kgK: { value: 900, status: 'sensitivity', note: 'x' } } }), /status sensitivity only for E_GPa, nu, k_W_mK, cte_ppmK/);
+});

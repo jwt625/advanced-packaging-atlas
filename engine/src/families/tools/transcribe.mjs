@@ -149,6 +149,18 @@ export function transcribe(id, { templatePath = null } = {}) {
         if (rt.line_um !== undefined) e.route.line = conv(rt.line_um, jl?.route?.dims?.line_um, `layers.${el.id}.route.line_um`);
         if (rt.space_um !== undefined) e.route.space = conv(rt.space_um, jl?.route?.dims?.space_um, `layers.${el.id}.route.space_um`);
         if (rt.fill !== undefined) e.route.fill = conv(rt.fill, jl?.route?.dims?.fill, `layers.${el.id}.route.fill`);
+        // per-region level properties (L18 2026-10-21, route.regions): region spec kept as written; L/S / fill like the level
+        if (rt.regions) e.route.regions = rt.regions.map((rg, ri) => {
+          const jr = jl?.route?.regions?.[ri];
+          const r = { region: rg.region };
+          if (rg.use !== undefined) r.use = rg.use;
+          if (rg.dir !== undefined) r.dir = rg.dir;
+          if (rg.line_um !== undefined) r.line = conv(rg.line_um, jr?.dims?.line_um, `layers.${el.id}.route.regions[${ri}].line_um`);
+          if (rg.space_um !== undefined) r.space = conv(rg.space_um, jr?.dims?.space_um, `layers.${el.id}.route.regions[${ri}].space_um`);
+          if (rg.fill !== undefined) r.fill = conv(rg.fill, jr?.dims?.fill, `layers.${el.id}.route.regions[${ri}].fill`);
+          if (rg.note) r.note = rg.note;
+          return r;
+        });
       }
       o.pattern.push(e);
     }

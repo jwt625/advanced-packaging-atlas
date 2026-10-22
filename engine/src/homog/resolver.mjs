@@ -74,6 +74,32 @@ export function hash53(str, seed = 0) {
 const TABLE_CFG_FIELDS = ['n', 'element', 'h_over_p', 'richardson'];
 const CACHE_MAX = 20000;
 
+/**
+ * Canonical spelling of a homog key for the precomputed-table index and lookup (lane L20, L11 open item): constituent
+ * names through lib.canonicalKey (template aliases -> library keys, e.g. underfill -> underfill_cuf), the fraction and
+ * stack thicknesses as JavaScript number strings (0.21010 -> 0.2101), the default axis dropped (z for column kinds,
+ * plane for rdl_layer). The kind is kept. Safe because every table row is verified by the constituent fingerprint,
+ * which already resolves constituents through canonicalKey. Unparseable keys and unknown names are left as written.
+ */
+export function canonicalHomogKey(lib, key) {
+  if (typeof key !== 'string' || !key.startsWith('homog:')) return key;
+  const c = (m) => {
+    if (m === 'void' || m.startsWith('homog:')) return m;
+    try { return canon(lib, m); } catch { return m; }
+  };
+  const num = (v) => (v !== '' && Number.isFinite(Number(v)) ? String(Number(v)) : v);
+  const parts = key.split(':');
+  if (parts[1] === 'stack') {
+    if (parts.length !== 4) return key; // registered stack id (or malformed)
+    return `homog:stack:${parts[2].split('+').map(c).join('+')}:${parts[3].split('/').map(num).join('/')}`;
+  }
+  if (parts.length < 4 || parts.length > 5) return key;
+  const [, kind, mats, frac, axis] = parts, ab = mats.split('+');
+  if (ab.length !== 2 || !ab[0] || !ab[1]) return key;
+  const out = `homog:${kind}:${c(ab[0])}+${c(ab[1])}:${num(frac)}`;
+  return axis == null || axis === (kind === 'rdl_layer' ? 'plane' : 'z') ? out : `${out}:${axis}`;
+}
+
 const orthoPositive = (o) => ['Ex', 'Ey', 'Ez', 'Gyz', 'Gxz', 'Gxy'].every((q) => o[q] > 0);
 const canon = (lib, k) => (lib && typeof lib.canonicalKey === 'function' ? lib.canonicalKey(k).key : k);
 
@@ -105,7 +131,10 @@ export function createRveResolver(lib, cfg = {}) {
     table_exact: 0, table_interpolated: 0, table_miss_fingerprint: 0, table_miss_unverified: 0, table_miss_absent: 0, table_cfg_mismatch: 0,
     live_full: 0, live_k: 0, void_rom: 0, cache: 0,
   };
-  const table0 = cfg.table ? indexTable(cfg.table) : null;
+  // table rows are indexed and looked up by the canonical key (canonicalHomogKey): spellings of the same constituents
+  // share rows; the fingerprint check per row still guards the values
+  const ckey = (k) => canonicalHomogKey(lib, k);
+  const table0 = cfg.table ? indexTable(cfg.table, ckey) : null;
   // a table built with another discretization (n, element, h_over_p, richardson) is not used
   const cfgNow = { n, element, h_over_p, richardson };
   const tableCfgOk = !table0 || TABLE_CFG_FIELDS.every((q) => table0.meta.cfg?.[q] === cfgNow[q]);
@@ -170,7 +199,7 @@ export function createRveResolver(lib, cfg = {}) {
   /** Table lookup with fingerprint verification at every row used; returns {hit} or {miss: reason}. */
   function lookup(key, T_K, Tsf_K, ropt) {
     if (!table) return { miss: table0 ? 'cfg_mismatch' : 'no_table' };
-    const hit = tableLookup(table, key, T_K, Tsf_K, tableGapK);
+    const hit = tableLookup(table, ckey(key), T_K, Tsf_K, tableGapK);
     if (!hit) return { miss: 'absent' };
     const fps = [];
     for (const row of hit.rows) {
@@ -245,11 +274,15 @@ export function createRveResolver(lib, cfg = {}) {
     if (spec.registered) spec.layers = stacks.get(spec.registered);
     if (spec.matrix === 'void') return lib.resolve(key, T, { need: ['k'] });
     const t0 = performance.now();
-    let k, phases;
+    let k, phases, rc;
     if (spec.topology === 'stack') {
       const tot = spec.layers.reduce((a, l) => a + l.t, 0);
-      const ls = spec.layers.map((l) => ({ f: l.t / tot, k: String(l.material).startsWith('homog:') ? rve(l.material, T, { need: ['k'], ...ctx.ropt }).k_W_mK : resolveC(canon(lib, l.material), T, { need: ['k'] }).k_W_mK }));
+      const ls = spec.layers.map((l) => {
+        const r = String(l.material).startsWith('homog:') ? rve(l.material, T, { need: ['k'], ...ctx.ropt }) : resolveC(canon(lib, l.material), T, { need: ['k'] });
+        return { f: l.t / tot, k: r.k_W_mK, rho: r.rho_kg_m3, cp: r.cp_J_kgK };
+      });
       k = [ls.reduce((a, l) => a + l.f * l.k[0], 0), ls.reduce((a, l) => a + l.f * l.k[1], 0), 1 / ls.reduce((a, l) => a + l.f / l.k[2], 0)];
+      rc = ls;
     } else {
       const at = (nn) => {
         const cells = buildCellPair({ ...spec, n: nn, h_over_p });
@@ -266,9 +299,18 @@ export function createRveResolver(lib, cfg = {}) {
       if (stair && richardson) { const k2 = at(2 * n); const kx = k2.map((v, i) => 2 * v - kk[i]); kk = kx.every((v, i) => i % 4 !== 0 || v > 0) ? kx : k2; }
       k = [kk[0], kk[4], kk[8]];
       phases = [canon(lib, spec.inclusion), canon(lib, spec.matrix)];
+      rc = [[phases[0], spec.f], [phases[1], 1 - spec.f]].map(([m, f]) => {
+        const r = resolveC(m, T, { need: [] });
+        return { f, rho: r.rho_kg_m3, cp: r.cp_J_kgK };
+      });
     }
+    // L27 (2026-10-21): rho and volumetric heat capacity by the same mixture rule as the full entry (rho = sum f rho_i,
+    // rho cp = sum f rho_i cp_i, nominal fractions), so thermal transients can use homogenized keys; null if any
+    // constituent lacks the value
+    const rho = rc.every((p) => p.rho != null) ? rc.reduce((a, p) => a + p.f * p.rho, 0) : null;
+    const cp = rho && rc.every((p) => p.cp != null) ? rc.reduce((a, p) => a + p.f * p.rho * p.cp, 0) / rho : null;
     const out = {
-      key, T_K: T, homogenization: 'rve', topology: spec.topology, k_W_mK: k, rho_kg_m3: null, cp_J_kgK: null, elastic: null, cte: null,
+      key, T_K: T, homogenization: 'rve', topology: spec.topology, k_W_mK: k, rho_kg_m3: rho, cp_J_kgK: cp, elastic: null, cte: null,
       eps_r: null, tan_delta: null, f_ref_Hz: null, sigma_S_m: null,
       provenance: { basis: 'derived', homogenization: 'rve', version: RVE_VERSION, kOnly: true, constituents: phases ?? null, n, ms: performance.now() - t0, extrapolated: ctx.flags.slice() },
     };
@@ -494,13 +536,17 @@ export function buildRveTable(resolver, requests, { onProgress = null } = {}) {
   return { schema: RVE_TABLE_SCHEMA, version: RVE_VERSION, cfg: resolver.cfg, rule: RVE_TABLE_RULE, generated_ms: Math.round(performance.now() - t0), rows, skipped };
 }
 
-function indexTable(t) {
+function indexTable(t, keyOf = (k) => k) {
   if (t.schema !== RVE_TABLE_SCHEMA) throw new Error(`homog: RVE table schema ${t.schema} (expected ${RVE_TABLE_SCHEMA})`);
   const byKey = new Map();
   for (const r of t.rows) {
-    if (!byKey.has(r.key)) byKey.set(r.key, { full: new Map(), k: [] });
-    const e = byKey.get(r.key);
-    if (r.k) e.k.push(r);
+    const key = keyOf(r.key);
+    if (!byKey.has(key)) byKey.set(key, { full: new Map(), k: [] });
+    const e = byKey.get(key);
+    // audit A7 S1 (L27, 2026-10-21): k-only (thermal) lookups use k-only rows only. Full rows carry a k from the
+    // stiffness solve's discretization (up to 1.7 % off the conduction RVE) under the same fp_k; every tabulated key
+    // with full rows also has k-only rows, so no key loses its thermal table coverage.
+    if (r.k && r.Tsf_K == null) e.k.push(r);
     if (r.Tsf_K != null && r.C6) {
       const ts = r.Tsf_K.toFixed(6);
       if (!e.full.has(ts)) e.full.set(ts, []);
@@ -524,8 +570,7 @@ function tableLookup(t, key, T_K, Tsf_K, gap) {
   const e = t.byKey.get(key);
   if (!e) return null;
   if (Tsf_K == null) {
-    const all = e.k.length ? e.k : [];
-    const b = bracket(all, T_K, gap);
+    const b = bracket(e.k, T_K, gap);
     return b ? { ...b, kOnly: true } : null;
   }
   const list = e.full.get(Tsf_K.toFixed(6));

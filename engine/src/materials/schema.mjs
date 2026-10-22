@@ -72,6 +72,8 @@ function checkTemplate(errors, where, leaf, sources, field) {
 }
 
 function checkProv(errors, where, leaf, sources, field) {
+  // audit A8 M9 (L27): `analog_of` (text naming the stand-in material) is allowed on any leaf, not only on template values
+  if (leaf.analog_of !== undefined && !(typeof leaf.analog_of === 'string' && leaf.analog_of.trim())) err(errors, where, 'analog_of must be a non-empty text');
   const na = isNA(leaf.value) || leaf.status === 'pending_source';
   if (na) {
     if (!leaf.missing && !leaf.pending) err(errors, where, 'N/A value needs `missing` (text) or `pending` (paper ids)');
@@ -197,6 +199,54 @@ function checkProperty(errors, where, name, p, sources) {
   checkScalarLeaf(errors, where, p, PROPERTY_FAMILY[name], sources, { allowAxes: name === 'k', field: name });
 }
 
+export const ANAND_PARAMS = ['s0_MPa', 'Q_R_K', 'A_per_s', 'xi', 'm', 'h0_MPa', 's_hat_MPa', 'n', 'a'];
+export const SHIFT_TYPES = ['wlf', 'arrhenius', 'piecewise'];
+const finite = (v) => typeof v === 'number' && Number.isFinite(v);
+
+function checkShift(errors, where, sh) {
+  if (!sh || !SHIFT_TYPES.includes(sh.type)) return err(errors, where, `shift.type must be ${SHIFT_TYPES.join('|')}`);
+  if (sh.type === 'wlf' && !(finite(sh.C1) && finite(sh.C2_K) && finite(sh.Tref_C))) err(errors, where, 'wlf shift needs C1, C2_K, Tref_C');
+  if (sh.type === 'arrhenius' && !(finite(sh.Ea_J_mol) && finite(sh.Tref_C))) err(errors, where, 'arrhenius shift needs Ea_J_mol, Tref_C');
+  if (sh.type === 'piecewise') {
+    if (!finite(sh.Tc_C)) err(errors, where, 'piecewise shift needs Tc_C');
+    for (const b of ['below', 'above']) {
+      if (!sh[b] || sh[b].type === 'piecewise') err(errors, where, `piecewise shift needs ${b} (wlf | arrhenius)`);
+      else checkShift(errors, `${where}.${b}`, sh[b]);
+    }
+  }
+}
+
+/**
+ * Tier-2 data blocks (L21, 2026-10-21): viscoelastic Prony + shift (form of mech/viscoelastic.mjs), Anand parameter
+ * sets (viscoplastic), plasticity curves; nested `alternatives` each need a registered source and a locator.
+ */
+function checkTier2(errors, where, p, sources) {
+  const alts = p.alternatives ?? {};
+  if (typeof alts !== 'object' || Array.isArray(alts)) err(errors, where, 'alternatives must be a map');
+  for (const [an, a] of Object.entries(alts)) {
+    const aw = `${where}.alternatives.${an}`;
+    if (!a?.source) err(errors, aw, 'source required');
+    else for (const x of [].concat(a.source)) if (sources && !sources[x]) err(errors, aw, `source '${x}' not in _sources.yaml`);
+    if (!a?.locator) err(errors, aw, 'locator required');
+    if (!a?.verified_on || !ISO.test(String(a.verified_on))) err(errors, aw, 'verified_on (ISO date) required'); // audit A8 M11
+    if (p.model === 'anand' && !ANAND_PARAMS.every((k) => finite(a?.[k]))) err(errors, aw, `Anand set needs ${ANAND_PARAMS.join(', ')}`);
+    if (a?.model === 'multilinear_engineering') {
+      const e = a.strain, sg = a.stress_MPa;
+      if (!(Array.isArray(e) && Array.isArray(sg) && e.length === sg.length && e.length >= 2 && e.every(finite) && sg.every(finite))) err(errors, aw, 'multilinear curve needs strain and stress_MPa of equal length >= 2');
+      else for (let i = 1; i < e.length; i++) if (!(e[i] > e[i - 1])) { err(errors, aw, 'strain must be strictly increasing'); break; }
+    }
+  }
+  if (p.model === 'anand' && !ANAND_PARAMS.every((k) => finite(p.params?.[k]))) err(errors, where, `Anand params need ${ANAND_PARAMS.join(', ')}`);
+  if (p.model === 'bilinear_isotropic' && !(finite(p.yield_MPa) && finite(p.tangent_MPa))) err(errors, where, 'bilinear_isotropic needs yield_MPa and tangent_MPa');
+  if (p.model === 'prony_proportional') {
+    const pr = p.prony;
+    if (!Array.isArray(pr) || !pr.length || pr.some((t) => !(t?.g > 0 && t?.tau_s > 0))) err(errors, where, 'prony needs [{g > 0, tau_s > 0}]');
+    else if (!(pr.reduce((a, t) => a + t.g, 0) < 1)) err(errors, where, 'prony needs sum g_i < 1 (g_inf > 0)');
+    if (!finite(p.Tref_C)) err(errors, where, 'prony needs Tref_C (master-curve reference temperature)');
+    checkShift(errors, `${where}.shift`, p.shift);
+  }
+}
+
 /** Validate a parsed data file. Returns a list of error strings (empty = valid). */
 export function validateFile(doc, fileName, sources) {
   const errors = [];
@@ -218,7 +268,10 @@ export function validateFile(doc, fileName, sources) {
     for (const [name, p] of Object.entries(props)) {
       if (TIER2_PROPERTIES.includes(name)) {
         if (!p || !['tier2_pending', 'tier2_data'].includes(p.status)) err(errors, `${w}.${name}`, 'tier-2 block needs status tier2_pending | tier2_data');
-        if (p && p.status === 'tier2_data') checkProv(errors, `${w}.${name}`, p, sources);
+        if (p && p.status === 'tier2_data') {
+          checkProv(errors, `${w}.${name}`, p, sources);
+          checkTier2(errors, `${w}.${name}`, p, sources);
+        }
         continue;
       }
       if (!PROPERTIES.includes(name)) {

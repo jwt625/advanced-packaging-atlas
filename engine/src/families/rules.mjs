@@ -135,7 +135,10 @@ export function geometryChecks(S, P, layout) {
     const frames = S.parts.filter((p) => (p.kind === 'stiffener' || (p.kind === 'lid' && /_(n|s|e|w)$/.test(p.id)) || (p.kind === 'other' && /_(n|s|e|w)$/.test(p.id))));
     for (const f of frames) {
       const fr = [f.x_mm - f.w_mm / 2, f.y_mm - f.d_mm / 2, f.x_mm + f.w_mm / 2, f.y_mm + f.d_mm / 2];
-      for (const K of [...keep, ...ips, ...logic, ...hbm]) if (intersect(fr, K.rect)) issues.push({ code: 'stiffener_overlap', level: 'error', parts: [f.id, K.id], message: `${f.id} overlaps ${K.id}; reduce ring_w_mm / lid_foot_w_mm or enlarge the substrate` });
+      // a frame resting above a keep-out or interposer (e.g. a ring on the side mold of an SC-RDL TV) cannot collide
+      // with it; top dies are always checked (L19 2026-10-21)
+      const above = (K) => { const q = S.parts.find((p) => p.id === K.id); return !!q && f.z_um >= q.z_um + q.h_um - 1e-6; };
+      for (const K of [...keep.filter((K) => !above(K)), ...ips.filter((K) => !above(K)), ...logic, ...hbm]) if (intersect(fr, K.rect)) issues.push({ code: 'stiffener_overlap', level: 'error', parts: [f.id, K.id], message: `${f.id} overlaps ${K.id}; reduce ring_w_mm / lid_foot_w_mm or enlarge the substrate` });
     }
   }
   // bump diameter / pitch above the largest DB-observed ratio (0.8125, ectc51906.2022.00180-b-i7, BGA 650 / 800 um)

@@ -14,7 +14,7 @@
 //             box_um: {x, y, z} | rect | poly | circle (footprint in the (u, v) plane) with w: [w0, w1]
 //             (for axis z also z: [z0, z1])}]  painter order: later solids win
 //   mesh:   {max_edge_um, max_dz_um (cell size along the axis), dz_min_um, dz_growth (axial grading at every
-//           interval end), grade, max_vertices}
+//           interval end), grade, max_vertices, h_scale (lane L22: factor on every solid h_um)}
 //   cuts:   [{axis: physical x | y | z, at_um}] (lane L13): reference planes the mesh must conform to. An in-plane
 //           cut (axis is a cross-section direction) adds a box-spanning constraint line to the 2D triangulation; an
 //           axial cut adds a z-plane. subMesh() then cuts a region out of the mesh along such a plane (line-run
@@ -99,7 +99,10 @@ export function buildLayeredMesh(spec) {
   const span = Math.max(rect.x1 - rect.x0, rect.y1 - rect.y0);
   const maxEdge = m.max_edge_um ?? span / 10;
   const grade = m.grade ?? 0.4;
-  const sources = solids.filter((s) => s.h_um).map((s) => ({ poly: s.poly, filled: false, h0: s.h_um }));
+  // mesh.h_scale (lane L22): multiplies every solid's local size h_um (order-2 runs resolve the same field with larger cells)
+  const hScale = m.h_scale ?? 1;
+  if (!(hScale > 0)) fail('mesh.h_scale must be > 0');
+  const sources = solids.filter((s) => s.h_um).map((s) => ({ poly: s.poly, filled: false, h0: s.h_um * hScale }));
   // reference-plane cuts (lane L13): in-plane cuts become box-spanning constraint lines, axial cuts extra z-planes
   const cutLoops = [],
     cutZ = [];
@@ -111,6 +114,22 @@ export function buildLayeredMesh(spec) {
     if (k === 2) cutZ.push(ct.at_um);
     else if (k === 0) cutLoops.push([[rect.x0, rect.y0], [ct.at_um, rect.y0], [ct.at_um, rect.y1], [rect.x0, rect.y1]]);
     else cutLoops.push([[rect.x0, rect.y0], [rect.x1, rect.y0], [rect.x1, ct.at_um], [rect.x0, ct.at_um]]);
+  }
+  // conforming rectangles (lane L22, lumped ports): {x, y, z} physical ranges with exactly one zero extent. Normal along
+  // the extrusion axis: footprint rectangle + one z-plane; normal in-plane: footprint segment + two z-planes.
+  for (const [ri, r0] of (spec.surfaces ?? []).entries()) {
+    const ru = r0[fr[0]],
+      rv = r0[fr[1]],
+      rw = r0[fr[2]];
+    const flat = [ru, rv, rw].map((a) => Math.abs(a[1] - a[0]) <= 1e-12 * span);
+    if (flat.filter(Boolean).length !== 1) fail(`surfaces[${ri}]: exactly one zero extent required`);
+    if (flat[2]) {
+      cutZ.push(rw[0]);
+      cutLoops.push([[ru[0], rv[0]], [ru[1], rv[0]], [ru[1], rv[1]], [ru[0], rv[1]]]);
+    } else {
+      cutZ.push(rw[0], rw[1]);
+      cutLoops.push(flat[0] ? [[ru[0], rv[0]], [ru[0], rv[1]]] : [[ru[0], rv[0]], [ru[1], rv[0]]]);
+    }
   }
   const raw = meshDomain({
     rect,

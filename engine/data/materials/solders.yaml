@@ -1,7 +1,7 @@
 # Solders and intermetallics (lane L2, DevLog-012). Elastic only in tier 1; Anand sets stored as tier-2 data.
 schema: ap-sim.materials/1
 group: solders
-verified_on: 2026-10-20
+verified_on: 2026-10-21
 materials:
   sac305:
     description: Sn-3.0Ag-0.5Cu solder (C4 bumps, BGA balls); elastic model only (viscoplastic Anand in tier 2)
@@ -21,7 +21,7 @@ materials:
         basis: paper_model_input
         source: tcpmt.2025.3614186
         locator: "p.7 Table III row 13 SAC 305 Solder, elasticity: -50 C 52.5 GPa, 220 C 33.6 GPa, nu 0.29 (from its ref [24])"
-        primary_cited: "[24] Zhang et al., Microelectron. Rel. 54, 281 (2014) (pending j.microrel.2013.07.100)"
+        primary_cited: "[24] Zhang et al., Microelectron. Reliab. 54, 281 (2014), read 2026-10-21 (L21): it prints Anand parameters only (Table 1), no modulus, Poisson ratio or CTE; the primary of this elastic / CTE set is not identified"
         note: "linear between the two printed points (interpolation by this lane)"
         verified_on: 2026-10-20
       cte:
@@ -42,9 +42,13 @@ materials:
         basis: paper_model_input
         source: tcpmt.2025.3614186
         locator: "p.7 Table III row 13 SAC 305 Solder, Anand viscoplasticity (reference units MPa, K, 1/s)"
+        primary_cited: "j.microrel.2013.07.100 p.283 Table 1 row Sn3.0Ag0.5Cu (identical nine values), which cites its ref. [29] Chang et al., Weld. J. 85(3), 63-70 (2006) (not read)"
         alternatives:
-          motalab2012_stress_strain: {s0_MPa: 21.00, Q_R_K: 9320, A_per_s: 3501, xi: 4.0, m: 0.25, h0_MPa: 180000, s_hat_MPa: 30.2, n: 0.01, a: 1.78, source: motalab2012, locator: "p.9 Fig. 12 column SAC305 (Stress-Strain)"}
-          motalab2012_creep: {s0_MPa: 18.07, Q_R_K: 9096, A_per_s: 3484, xi: 4.0, m: 0.20, h0_MPa: 144000, s_hat_MPa: 26.4, n: 0.01, a: 1.90, source: motalab2012, locator: "p.9 Fig. 12 column SAC305 (Creep)"}
+          zhang2014_snagcuzn: {s0_MPa: 34.1, Q_R_K: 8500, A_per_s: 23500, xi: 5.6, m: 0.163, h0_MPa: 3642.5, s_hat_MPa: 65.9, n: 0.0186, a: 2.1, source: j.microrel.2013.07.100, locator: "p.283 Table 1 row Sn3.8Ag0.7Cu0.8Zn ('This work'): uniaxial tension, 1e-4 to 1e-2 /s, -55 to 125 C (p.282 Sec. 2.1); different alloy (Zn-doped SAC387)", verified_on: 2026-10-21}
+          zhang2014_sac387_ref27: {s0_MPa: 39.5, Q_R_K: 8710, A_per_s: 24300, xi: 5.8, m: 0.183, h0_MPa: 3541.2, s_hat_MPa: 65.3, n: 0.019, a: 1.9, source: j.microrel.2013.07.100, locator: "p.283 Table 1 row Sn3.8Ag0.7Cu citing its ref. [27] (Zhang et al., SnAgCuCe Anand parameters; not read); different alloy (SAC387)", verified_on: 2026-10-21}
+          zhang2014_sn38ag05cu_ref28: {s0_MPa: 20, Q_R_K: 10561, A_per_s: 325, xi: 10, m: 0.32, h0_MPa: 800000, s_hat_MPa: 42.1, n: 0.02, a: 2.57, source: j.microrel.2013.07.100, locator: "p.283 Table 1 row Sn3.8Ag0.5Cu citing its ref. [28] (Wang et al. 2007, titled for 95.5Sn4.0Ag0.5Cu; not read); different alloy", verified_on: 2026-10-21}
+          motalab2012_stress_strain: {s0_MPa: 21.00, Q_R_K: 9320, A_per_s: 3501, xi: 4.0, m: 0.25, h0_MPa: 180000, s_hat_MPa: 30.2, n: 0.01, a: 1.78, source: motalab2012, locator: "p.9 Fig. 12 column SAC305 (Stress-Strain)", verified_on: 2026-10-20}
+          motalab2012_creep: {s0_MPa: 18.07, Q_R_K: 9096, A_per_s: 3484, xi: 4.0, m: 0.20, h0_MPa: 144000, s_hat_MPa: 26.4, n: 0.01, a: 1.90, source: motalab2012, locator: "p.9 Fig. 12 column SAC305 (Creep)", verified_on: 2026-10-20}
         verified_on: 2026-10-20
     alternatives:
       e_motalab2012:
@@ -105,7 +109,7 @@ materials:
     missing:
       - "nu(T): only the constant 0.29 of tcpmt.2025.3614186 Table III"
       - "cp: no source read"
-      - "primary of the default elastic/CTE set (Zhang et al. 2014, j.microrel.2013.07.100) pending download"
+      - "primary of the default elastic / CTE set: not in Zhang et al. 2014 (Anand only; read 2026-10-21)"
 
   snag:
     description: Sn-Ag eutectic / Sn-3.5Ag solder (microbump caps)
@@ -143,6 +147,9 @@ materials:
         basis: paper_model_input
         source: tcpmt.2025.3614186
         locator: "p.7 Table III row 12 Sn-Ag Eutectic Solder, Anand viscoplasticity"
+        primary_cited: "j.microrel.2013.07.100 p.283 Table 1 row Sn3.5Ag (identical nine values), which cites its ref. [30] Zhou et al., J. Cent. South Univ. Technol. 16(3), 339-343 (2009) (not read)"
+        alternatives:
+          cheng2000_sn35ag: {s0_MPa: 39.09, Q_R_K: 8900, A_per_s: 22300, xi: 6, m: 0.182, h0_MPa: 3321.15, s_hat_MPa: 73.81, n: 0.018, a: 1.82, source: "09540910010331428", locator: "p.33 Table II column 96.5Sn3.5Ag (A 2.23 (10^4) /s, Q/R 8900 K, xi 6, m 0.182, s_hat 73.81 MPa, n 0.018, h0 3321.15 MPa, a 1.82, s0 39.09 MPa); fitted to the separated elasto-plasto-creep model of Darveaux and Banerji 1992 (p.33), not to own tests", verified_on: 2026-10-21}
         verified_on: 2026-10-20
     alternatives:
       e_ectc51909_2023_00155:
@@ -178,6 +185,17 @@ materials:
         source: nist_solder_db_v4
         locator: "Table 1.3 column Sn-3.5Ag: Young's modulus 56 GPa (McCabe and Fine, Scripta Mater. 39, 189, 1998 as cited)"
         verified_on: 2026-10-20
+      e_cheng2000:
+        property: elastic
+        use: sensitivity (E(T) of 96.5Sn3.5Ag used with the Cheng 2000 Anand set)
+        model: iso
+        E: {model: linear_T, a: 52400, b: -193.1, T0_C: 0, range_C: [-50, 220], unit: MPa}
+        nu: {value: N/A, missing: "not given by Cheng et al. 2000"}
+        basis: paper_model_input
+        source: "09540910010331428"
+        locator: "p.32 Eq. (4) E = E0 - E1 T (T in C, E0 = modulus at 0 C) with p.32 Table I row 96.5Sn3.5Ag: E0 5.24 (10^4) MPa, E1 193.1 MPa/C"
+        condition: "parameters taken by the source from Darveaux and Banerji 1992 (p.33); the source states no temperature range: range_C = the snag entry range (lane choice)"
+        verified_on: 2026-10-21
       cte_ectc2011_5898527:
         property: cte
         use: sensitivity

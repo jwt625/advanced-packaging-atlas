@@ -1,7 +1,7 @@
 # Thermal interface materials, die-attach films, adhesives (lane L2, DevLog-012).
 schema: ap-sim.materials/1
 group: tims_adhesives
-verified_on: 2026-10-20
+verified_on: 2026-10-21
 materials:
   tim_indium:
     description: indium metal TIM1 (soldered sheet / paste)
@@ -103,10 +103,30 @@ materials:
       elastic:
         model: iso
         E: {model: table_T, T_C: [-65, 25, 150], value: [7918, 358, 52], unit: MPa, basis: datasheet, source: henkel_eccobond3005, locator: "p.1 Tensile modulus, DMTA: -65 C 7,918, 25 C 358, 150 C 52 N/mm2", verified_on: 2026-10-20}
-        nu: {value: 0.3, basis: template, placeholder: true, note: "no source; placeholder; sensitivity required. Silicone elastomers are near-incompressible: sensitivity widened to -0.05 / +0.19 (up to 0.49). Candidate source not read: Mueller et al., Soft Matter 2019 (RSC c8sm02105h; HTTP 403 and HAL anti-bot block 2026-10-20), reported per search snippet as nu 0.495 for Sylgard 184", sensitivity: {property: nu, delta: {minus: 0.05, plus: 0.19}}, verified_on: 2026-10-20}
+        nu: {value: 0.3, basis: template, placeholder: true, rationale: "CD4 placeholder restored (coordinator decision approved by Wentao 2026-10-21, audit A8 S1). The PDMS analog nu 0.495 (c8sm02105h) describes unfilled rubbery PDMS (MPa-range modulus); this filled adhesive has E 358 MPa at 25 C (7x its 150 C value, 40 K above the TMA Tg of -15 C), so with nu 0.495 the implied bulk modulus K = E / (3 (1 - 2 nu)) would be about 11.9 GPa at 25 C (194 GPa at -40 C), not physical for a silicone; no sourced filled-silicone nu or bulk modulus is available (gap)", note: "placeholder; sensitivity required. Bounds 0.25 / 0.495 (delta -0.05 / +0.195): lower = CD1 placeholder band, upper = the rubbery-state PDMS analog (Mueller 2019, c8sm02105h p.782 Sec. 5: Sylgard 184 0.4950 +- 0.0010), the physical limit only where the adhesive is rubbery; the analog is kept as the elastic alternative pdms_rubbery_analog_nu. K at 25 C: 0.30 -> 0.30 GPa, 0.25 -> 0.24 GPa, 0.495 -> 11.9 GPa", sensitivity: {property: nu, delta: {minus: 0.05, plus: 0.195}}, verified_on: 2026-10-21}
       cte: {kind: instantaneous, model: bilinear_tg, below: 32, above: 136, Tg_C: -15, unit: ppm/K, basis: datasheet, source: henkel_eccobond3005, locator: "p.1 Coefficient of linear thermal expansion: below Tg 32, above Tg 136 ppm/C (Tg by TMA -15 C)", note: "below / above Tg values treated as instantaneous slopes", verified_on: 2026-10-20}
       k: {value: 1, unit: W/mK, basis: template, analog_of: "LOCTITE ECCOBOND 3003 (thermally conductive silicone lid-attach grade of the same family)", source: henkel_eccobond3003, locator: "p.1 Typical properties of cured material: thermal conductivity 1 W/(m-K)", sensitivity: {property: k, delta: {factor: [0.5, 2]}}, note: "ECCOBOND 3005 is the non-conductive grade; its TDS gives no k", verified_on: 2026-10-20}
     alternatives:
-      eccobond3003_E: {property: elastic, use: sensitivity (thermally conductive grade, flexural modulus to 250 C), model: iso, E: {model: table_T, T_C: [-65, 25, 150, 250], value: [9655, 4000, 69, 103]}, nu: {value: 0.3, basis: template, placeholder: true, note: "no source; placeholder; sensitivity required. Silicone elastomers are near-incompressible: sensitivity widened to -0.05 / +0.19 (up to 0.49). Candidate source not read: Mueller et al., Soft Matter 2019 (RSC c8sm02105h; HTTP 403 and HAL anti-bot block 2026-10-20), reported per search snippet as nu 0.495 for Sylgard 184", sensitivity: {property: nu, delta: {minus: 0.05, plus: 0.19}}, verified_on: 2026-10-20}, unit: MPa, basis: datasheet, source: henkel_eccobond3003, locator: "p.1 Flexural modulus: -65 C 9,655, 25 C 4,000, 150 C 69, 250 C 103 N/mm2", verified_on: 2026-10-20}
+      eccobond3003_E: {property: elastic, use: sensitivity (thermally conductive grade, flexural modulus to 250 C), model: iso, E: {model: table_T, T_C: [-65, 25, 150, 250], value: [9655, 4000, 69, 103]}, nu: {value: 0.3, basis: template, placeholder: true, note: "placeholder; sensitivity required. The PDMS analog of the default grade (c8sm02105h, nu 0.495) describes the rubbery state; this grade has Tg 49 C (TMA) and a flexural modulus of 4000 MPa at 25 C, so the analog is not applied to it (L21 2026-10-21); sensitivity -0.05 / +0.19 (up to 0.49)", sensitivity: {property: nu, delta: {minus: 0.05, plus: 0.19}}, verified_on: 2026-10-21}, unit: MPa, basis: datasheet, source: henkel_eccobond3003, locator: "p.1 Flexural modulus: -65 C 9,655, 25 C 4,000, 150 C 69, 250 C 103 N/mm2", verified_on: 2026-10-20}
+      pdms_rubbery_analog_nu:
+        property: elastic
+        use: "sensitivity: rubbery-state PDMS analog (Mueller 2019) for nu, upper sensitivity bound of the default placeholder; E is the default ECCOBOND 3005 table"
+        model: iso
+        E: {model: table_T, T_C: [-65, 25, 150], value: [7918, 358, 52], unit: MPa, basis: datasheet, source: henkel_eccobond3005, locator: "p.1 Tensile modulus, DMTA: -65 C 7,918, 25 C 358, 150 C 52 N/mm2", verified_on: 2026-10-20}
+        nu: {value: 0.495, basis: template, analog_of: "PDMS Sylgard 184 (cross-linked silicone elastomer, unfilled; same polymer class as the silicone adhesive matrix), rubbery state", source: c8sm02105h, locator: "p.782 Sec. 5 and p.783 Fig. 7 / Sec. 6: Sylgard 184 nu = 0.4950 +- 0.0010 (mean over curing temperatures 60-135 C, small strain 1-2.35 %), Sylgard 182 nu = 0.4974 +- 0.0006; literature values cited on p.782: 0.45 (Studer et al., Sasoglu et al.), 0.47 +- 0.028 (Roman), 0.49-0.5", sensitivity: {property: nu, delta: {minus: 0.045, plus: 0.004}}, note: "rubbery-state PDMS analog (Mueller 2019); was the default from L21 to audit A8 S1 (2026-10-21). Applies only where the adhesive is rubbery (MPa-range modulus): with the ECCOBOND 3005 E table the implied bulk modulus K = E / (3 (1 - 2 nu)) is 264 GPa at -65 C, 194 GPa at -40 C, 82 GPa at 0 C, 11.9 GPa at 25 C and 1.73 GPa at 150 C, i.e. not physical through the glass-transition range and at room temperature (E 358 MPa at 25 C). Bounds 0.45 (lowest PDMS value cited by the source, p.782) / 0.499 (engine clip). Near-incompressible thin layers need elements without volumetric locking", verified_on: 2026-10-21}
+        verified_on: 2026-10-21
+      cte_pdms_sylgard184:
+        property: cte
+        use: sensitivity (unfilled PDMS analog; the default is the filled adhesive TDS value)
+        analog_of: "PDMS Sylgard 184 (unfilled cross-linked silicone elastomer), measured on that material, not on the filled ECCOBOND 3005 adhesive (audit A8 M9)"
+        kind: secant
+        Tref_C: 25
+        value: 309.63
+        unit: ppm/K
+        basis: measured
+        source: c8sm02105h
+        locator: "p.783 Sec. 5 and Fig. 8: Sylgard 184 alpha = 309.63 +- 6.91 ppm/C extrapolated to 25 C, decreasing by 0.65 +- 0.07 ppm/C per C of curing temperature (measured 60-135 C cure: about 284-239 ppm/C); data sheet 340 ppm/C; Sylgard 182 289.55 +- 4.44 and 0.51 +- 0.05"
+        condition: "mean CTE over the cool-down from the curing temperature to room temperature (p.780 Eqs. 4-6 use one alpha over Delta T); the trend is with curing temperature, not a measured alpha(T); stored as a constant secant value referenced to 25 C (lane choice)"
+        verified_on: 2026-10-21
       eccobond3003_cte: {property: cte, use: sensitivity (thermally conductive grade), kind: instantaneous, model: bilinear_tg, below: 39, above: 162, Tg_C: 49, unit: ppm/K, basis: datasheet, source: henkel_eccobond3003, locator: "p.1 CTE below Tg 39, above Tg 162 ppm/C; Tg by TMA 49 C", verified_on: 2026-10-20}
-    missing: ["Poisson ratio (placeholder)", "k of the default grade (analog)", "data above 150 C for the default grade (ECCOBOND 3003 alternative reaches 250 C)"]
+    missing: ["Poisson ratio or bulk modulus of a filled silicone adhesive at any temperature (default nu = 0.30 placeholder; the unfilled rubbery PDMS analog c8sm02105h is an alternative only, not valid at room temperature or through the glass transition for this grade, E 358 MPa at 25 C)", "k of the default grade (analog)", "data above 150 C for the default grade (ECCOBOND 3003 alternative reaches 250 C)"]
