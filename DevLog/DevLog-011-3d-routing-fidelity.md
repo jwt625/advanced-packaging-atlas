@@ -509,5 +509,5 @@ clusters (foveros, foveros_direct, emib_t, w2w) and cap heights where DB cells e
 - [ ] Microvia taper rules differ across families (38/42 ratio vs 72 deg sidewall); harmonize.
 - [ ] I-Cube E upper RDL level count (figure shows 1, model 2 analog); Si-IF trapezoid pillar; CPO variant callouts.
 - [ ] Earlier DevLog-008 SOTA CoWoS/EMIB topology plan is still open and will touch the same templates.
-- [ ] Commit (owner decides): code, configs, refs, scorer/checklist, DevLog/audits; `scripts/ieee_fetch.py`,
+- [x] (committed 2026-10-20 in 80e3fab..f5e2da3; ticked 2026-10-21) Commit (owner decides): code, configs, refs, scorer/checklist, DevLog/audits; `scripts/ieee_fetch.py`,
       `scripts/ingest_inbox.py`, `config/sim/`, `LICENSE`, `references/<new>` changes are not from this work.

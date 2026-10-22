@@ -197,7 +197,7 @@ Effort in agent-days (1 agent-day ~ 8 agent-hours). R4, R6 and R7 numbers are fr
 - [x] Answers to open questions 1-5 (Decisions above)
 - [x] LICENSE (GPL-3.0); sim fetch queue + manual list; `--queue` flag; inbox reads the sim list
 - [x] IEEE sim queue fetched (3/3, 12:47-12:51 PDT; PDFs and text.md under `references/<id>/`, `source.json` purpose set)
-- [ ] 7 manual downloads (Wentao; `config/sim/manual_downloads.md`)
+- [x] 7 manual downloads (Wentao; `config/sim/manual_downloads.md`; all 8 incl. the silicone-nu paper downloaded and ingested 2026-10-21, DevLog-013)
 - [x] T0, then D1/D2/D3/R/U1/E5 in parallel (implementation record: DevLog-012; wrapped up 2026-10-20 for testing)
 
 ## Progress log

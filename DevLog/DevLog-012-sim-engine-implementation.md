@@ -672,6 +672,23 @@ Shared rules for every lane:
 | CD7 | `homog:*` keys resolve through L8's RVE resolver by default (`homogenization: rve`), with ROM as a selectable fallback (`materials.homogenization`). The RDL through-thickness topology follows the RVE (metal spans its level) | RVE is verified against exact and bounding solutions. ROM is 13-25 % low on bump-field transverse E/G/k and 25-30 % high on TSV fields, matching R1 lesson 9 | RVE cost becomes a problem in the browser |
 | CD2 | Accepted L2 defaults, each recorded as an assumption in its entry: in-plane CTE applied to z for ABF and core; Cu CTE handbook constant 17.0 ppm/K above RT; SS304 CTE 20-100 C default (20-870 C mean as alternative); one paper's set per proprietary default | Keeps one traceable set per material | Sensitivity runs show these dominate |
 
+Wentao's decisions (2026-10-21):
+- CD1, CD2, CD3, CD4, CD7: approved as written.
+- CD5: approved. Note from Wentao: "TIM CTE might be irrelevant during reflow because it has not been applied." Applied as:
+  reflow-stage studies (chip-attach reflow, before lid/TIM attach) must not contain the TIM (or the lid it bonds).
+  The template TIM CTE matters only for states after TIM application.
+- CD6: changed. "Use overlapped range, e.g., 250C for reflow." Applied as: a reflow-temperature study runs at the top
+  of the temperature range that all materials in the stack cover (e.g. 250 C), not beyond it with extrapolation. The
+  study states the offset to a target measured at a higher temperature (e.g. 260-265 C). `allow_extrapolation`
+  stays an explicit opt-in and is no longer used by default cases.
+- CD4 status (2026-10-22, coordinator, audit A8 M8): silicone_adhesive nu was briefly 0.495 (L21, PDMS rubbery
+  analog) and is back to the 0.30 placeholder (L27) because the adhesive is stiff at 25 C (E 358 MPa); sensitivity
+  bounds 0.25-0.495 (asymmetric, wider than the CD1 +-0.05 by design); 0.495 kept as a labelled alternative.
+- CD6 follow-up (Wentao, 2026-10-21, after L19 found ceilings of 225 C from solder_resist and 150 C from
+  tim_polymer / silicone glue): compliant layers (E <= 100 MPa at the study temperature) do not set the ceiling; past
+  their data range they hold their last value with the `extrapolated` provenance flag. Solder resist stays in the
+  ceiling (L9 showed its mapping flips warpage signs); sourced high-temperature solder-resist data to be researched.
+
 ## Contract changes
 
 Requested by L4, 2026-10-20 (additive; to be merged into SPEC when an engine lane implements them):

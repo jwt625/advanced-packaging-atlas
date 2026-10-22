@@ -123,10 +123,10 @@ roughly 60 per 2 hours instead.
 - [x] Batch 6 (30 attempts) complete (269 cached total)
 - [x] Batch 7 (remaining 10 p3) complete (279 IEEE cached)
 - [x] Reconcile `data/papers.csv` with cached PDFs (239 cached, 239 papers in DB)
-- [ ] Ingest the 40 PDFs cached by batches 6-7 (279 cached vs 239 in `data/papers.csv`)
+- [x] Ingest the 40 PDFs cached by batches 6-7 (279 cached vs 239 in `data/papers.csv`) (done in DevLog-005/009 rounds; ticked 2026-10-21)
 - [x] Fetch the 17 accessible manual IMAPS PDFs (2026-10-20)
 - [ ] 4 SMTA/IWLPC papers skipped: no access (`10.37665`)
-- [ ] Distill the 57 cached PDFs not yet in `data/papers.csv`
+- [x] Distill the 57 cached PDFs not yet in `data/papers.csv` (DevLog-009; 296 papers; ticked 2026-10-21)
 
 ## 2026-10-20 09:40 manual IMAPS
 

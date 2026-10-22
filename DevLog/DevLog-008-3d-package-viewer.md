@@ -125,13 +125,13 @@ Every rendered dimension has a status, and the viewer encodes it:
 
 ## TODO
 
-- [ ] Research: verified family list + topology notes
-- [ ] Generator + template format + validator; CoWoS-R and EMIB-T templates
-- [ ] 3D tab engine and UI on a fixture
-- [ ] Remaining family templates (agents, after the research list)
-- [ ] Wire the real package3d.json; compare view; gallery thumbnails
-- [ ] Performance pass (draw calls, triangles, memory; target 60 fps orbit on this machine) and clutter pass
-- [ ] Fresh-context review (data provenance + UI), fixes
+- [x] Research: verified family list + topology notes (done per progress log below; ticked 2026-10-21)
+- [x] Generator + template format + validator; CoWoS-R and EMIB-T templates (done per progress log below; ticked 2026-10-21)
+- [x] 3D tab engine and UI on a fixture (done per progress log below; ticked 2026-10-21)
+- [x] Remaining family templates (agents, after the research list) (done per progress log below; ticked 2026-10-21)
+- [x] Wire the real package3d.json; compare view; gallery thumbnails (done per progress log below; ticked 2026-10-21)
+- [x] Performance pass (draw calls, triangles, memory; target 60 fps orbit on this machine) and clutter pass (done per progress log below; ticked 2026-10-21)
+- [x] Fresh-context review (data provenance + UI), fixes (done per progress log below; ticked 2026-10-21)
 - [ ] Phase 3: process animation from DevLog-007 flows
 
 ## Progress log
