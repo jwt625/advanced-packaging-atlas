@@ -3,6 +3,7 @@ verified_on: 2026-10-18
 source_files:
   - references/ectc51909.2023.00091/text.md
   - references/ectc51909.2023.00091/source.json
+  - references/ectc51909.2023.00091/figures/page_01.png
   - references/ectc51909.2023.00091/figures/page_02.png
   - references/ectc51909.2023.00091/figures/page_03.png
   - references/ectc51909.2023.00091/figures/page_04.png
@@ -23,17 +24,22 @@ derived:
   - {table: interconnects, row_id: ectc51909.2023.00091-a-i4, field: pitch_um, value: 1000, formula: "1 mm x 1000", inputs: "p.3 Table 1"}
   - {table: stack_layers, row_id: ectc51909.2023.00091-a-L11, field: thickness_um, value: 1400, formula: "1.4 mm x 1000", inputs: "p.3 Table 1"}
   - {table: components, row_id: ectc51909.2023.00091-a-c8, field: thickness_um, value: 2000, formula: "2 mm x 1000", inputs: "p.3 Fig. 6(c)"}
+  - {table: electrical_interfaces, row_id: ectc51909.2023.00091-c-e1, field: aggregate_bw_tbps, value: 7.2, formula: "0.9 TB/s x 8 bit/byte", inputs: "p.1 Fig. 2 'Max. Memory BW, TB/s'"}
+  - {table: electrical_interfaces, row_id: ectc51909.2023.00091-d-e1, field: aggregate_bw_tbps, value: 20, formula: "2.5 TB/s x 8 bit/byte", inputs: "p.1 Fig. 2 'Max. Memory BW, TB/s'"}
+  - {table: electrical_interfaces, row_id: ectc51909.2023.00091-e-e1, field: aggregate_bw_tbps, value: 52, formula: "6.5 TB/s x 8 bit/byte", inputs: "p.1 Fig. 2 'Max. Memory BW, TB/s'"}
 conflicts:
   - {table: metrics, row_id: ectc51909.2023.00091-a-m1, field: value, values: ["64 um (Fig. 6(c) label)", "65 um (text)"], locators: ["p.3 Fig. 6(c)", "p.3 Sec. II.A"], chosen: 64, why: "measured plot label over text"}
   - {table: metrics, row_id: ectc51909.2023.00091-a-m2, field: value, values: ["-148 um (Fig. 6(c) label)", "~150 um (text)"], locators: ["p.3 Fig. 6(c)", "p.3 Sec. II.A"], chosen: -148, why: "measured plot label over text"}
   - {table: metrics, row_id: ectc51909.2023.00091-b-m1, field: value, values: ["186 um (Fig. 7(c) label)", "within 200 um (text)"], locators: ["p.4 Fig. 7(c)", "p.4 Sec. II.B"], chosen: 186, why: "measured plot label over text bound"}
   - {table: metrics, row_id: ectc51909.2023.00091-b-m2, field: value, values: ["-107 um (Fig. 7(c) label)", "within 120 um (text)"], locators: ["p.4 Fig. 7(c)", "p.4 Sec. II.B"], chosen: -107, why: "measured plot label over text bound"}
   - {table: interconnects, row_id: ectc51909.2023.00091-a-i3, field: pitch_um, values: ["500 (Table 1, 0.5 mm)", "400-500 um range (text)"], locators: ["p.3 Table 1", "p.3 Sec. II; p.4 Sec. III"], chosen: 500, why: "table gives the TV value; text gives the scheme range"}
+  - {table: test_vehicles, row_id: ectc51909.2023.00091-c, field: interposer_area_mm2, values: ["~1400 (Fig. 2 label)", "1.75 x 830 = 1452.5 (p.2 footnote 1 reticle definition)"], locators: ["p.1 Fig. 2", "p.2 footnote 1"], chosen: 1400, why: "printed label; the product is not the paper's arithmetic"}
+  - {table: test_vehicles, row_id: ectc51909.2023.00091-d, field: interposer_area_mm2, values: ["~1760 (Fig. 2 label)", "2.2 x 830 = 1826 (p.2 footnote 1 reticle definition)"], locators: ["p.1 Fig. 2", "p.2 footnote 1"], chosen: 1760, why: "printed label; the product is not the paper's arithmetic"}
+  - {table: test_vehicles, row_id: ectc51909.2023.00091-e, field: interposer_area_mm2, values: ["~2800 (Fig. 2 label)", "3.3 x 830 = 2739 (p.2 footnote 1 reticle definition)"], locators: ["p.1 Fig. 2", "p.2 footnote 1"], chosen: 2800, why: "printed label; the product is not the paper's arithmetic"}
 excluded:
   - "Fig. 5 measured differential insertion loss SC-RDL vs organic substrate (~25% lower at 28 GHz, ~30% at 50 GHz; 0.8x/0.75x/0.7x at 56/112/200 Gb/s, 90 ohm) - attributed to ref [6] (SoIS)"
   - "wafer-process Cu trace roughness <100 nm (stated in Fig. 5 / ref [6] context; kept as layer note only)"
   - "5th gen CoWoS-S 3x reticle ~2600 mm2 interposer, 58.9x44.1 mm, eDTC 320 nF/mm2, 2 SoC + 1 chiplet + 8 HBM (ref [5])"
-  - "CoWoS roadmap Fig. 2 (interposer area doubled 2016-2022, 16/12 nm to 5 nm, 4 to 8 HBM, 32 to 128 GB)"
   - "RI/Si interposer up to 4x (~3300 mm2), 65 mm longer dimension; 5-6x estimate 75-85 mm (ref [7] / estimate)"
   - "C4 pitch 100-130 um flux cleaning concern (general)"
 not_reported:
@@ -41,10 +47,13 @@ not_reported:
   - ubump pitch/size/metallurgy for the TVs; F/S RDL L/S; RDL dielectric product and thicknesses; Cu thickness
   - die sizes and thicknesses, LSI size, IPD x/y, mold and TIM materials, package thickness
   - warpage measurement method and sign convention; reliability test temperatures/humidity, preconditioning
-  - electrical_interfaces (Fig. 5 attributed to ref [6]); optical_interfaces (CPO mentioned as potential only)
+  - electrical_interfaces of TVs a, b (Fig. 5 attributed to ref [6]); optical_interfaces (CPO mentioned as potential only)
 revisions:
   - {date: 2026-10-19, source: audit_x1, row_id: ectc51909.2023.00091, change: "papers.notes trimmed 31 -> 28 words (dropped \"TSMC\", \"and\", \"name\")", reason: "x1 item 15: notes over 30 words"}
   - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00091", change: "process_flow_level none -> fragments (has_process_flow stays no)", reason: "reviews A and B grade FRAGMENTS: generic process statements, no sequence (p.2 Sec. II, p.3 Sec. II.A-B)"}
   - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00091-F1;ectc51909.2023.00091-F1-s01", change: "added fragment flow (generic_platform, tv a;b) with one generic_description row: 6 B/S RDL processed at 11 um L/S", reason: "rule 7: fragments get one row per statement; p.2 Sec. II 'processed with 11 um Cu line width and space'"}
   - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00091", change: "not_reported 'process_steps empty' entry reworded to fragments", reason: "flow now exists"}
   - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00091", change: "MR6x preconditioning and reliability tests left in metrics (no step rows)", reason: "post-build tests are metrics (rule 7)"}
+  - {date: 2026-10-21, source: L25, row_id: "ectc51909.2023.00091-c;ectc51909.2023.00091-d;ectc51909.2023.00091-e;ectc51909.2023.00091-f06", change: "added Fig. 2 generation rows (TVs c-e: tv_kind other, components, metrics) and key figure f06; Fig. 2 line removed from excluded", reason: "coordinator request (DevLog-013; L17 RESEARCH_SOTA_COWOS D1). Fig. 3 stays excluded: the paper attributes it to ref [5]"}
+  - {date: 2026-10-21, source: L31, row_id: "ectc51909.2023.00091-c-e1;ectc51909.2023.00091-d-e1;ectc51909.2023.00091-e-e1", change: "added electrical_interfaces rows: HBM2 (protocol other, no hbm2 enum) / HBM2E / HBM3 at 1.8 / 3.2 / 6.4 Gbps lane rate; aggregate 7.2 / 20 / 52 Tbps from 'Max. Memory BW' TB/s x 8; component names unchanged", reason: "audit A10 D2; skill rule 8: lane rate and aggregate BW belong in electrical_interfaces (p.1 Fig. 2 'HBM Type', 'Max. Memory BW' rows)"}
+  - {date: 2026-10-21, source: L31, row_id: "ectc51909.2023.00091-c-c1;ectc51909.2023.00091-d-c1;ectc51909.2023.00091-e-c1", change: "basis design_target -> stated; TVs c-e, components c2, metrics m1-m2 stay design_target", reason: "audit A10 D5; schema rule (b): stated = non-numeric fact (these rows hold only name and process node); the numeric Fig. 2 values are platform maxima ('Max.'), not measurements, so design_target"}

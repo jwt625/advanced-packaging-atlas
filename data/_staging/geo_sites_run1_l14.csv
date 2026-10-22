@@ -1,0 +1,46 @@
+site_id,org_name,locality,country,lat,lon,precision,source,source_ref,source_label,verified_on,notes
+agency-for-defense-development-daejeon,Agency for Defense Development,Daejeon,KR,36.3497,127.3849,city,nominatim,,city centre: Daejeon,2026-10-21,institution not resolved; printed city centre
+apic-yamada-nagano,Apic Yamada,Nagano,JP,36.11439,138.0319,region,nominatim,,region centre: Nagano,2026-10-21,printed region only
+applied-materials-singapore-technology-singapore,Applied Materials Singapore Technology,Singapore,SG,1.28992,103.85191,city,nominatim,,city centre: Singapore,2026-10-21,institution not resolved; printed city centre
+beijing-academy-of-quantum-information-sciences-beijing,Beijing Academy of Quantum Information Sciences,Beijing,CN,39.90571,116.3913,city,nominatim,,city centre: Beijing,2026-10-21,institution not resolved; printed city centre
+beijing-institute-of-technology-beijing,Beijing Institute of Technology,Beijing,CN,39.95778,116.30833,campus,wikidata,Q23101,Beijing Institute of Technology (university),2026-10-21,9.1 km from city centre
+bridgewater-state-university-bridgewater-ma,Bridgewater State University,"Bridgewater, MA",US,41.98862,-70.96601,campus,wikidata,Q3446076,"Bridgewater State University (public university in Bridgewater, Massachusetts)",2026-10-21,0.8 km from city centre
+central-south-university-changsha,Central South University,Changsha,CN,28.173,112.925,campus,wikidata,Q5061828,Central South University (national university of China),2026-10-21,5.5 km from city centre
+changsha-anmuquan-intelligent-technology-changsha,Changsha Anmuquan Intelligent Technology,Changsha,CN,28.20015,112.97172,city,nominatim,,city centre: Changsha,2026-10-21,institution not resolved; printed city centre
+corning,Corning,,KR,,,unresolved,none,,,2026-10-21,no locality printed
+corning,Corning,,US,,,unresolved,none,,,2026-10-21,no locality printed
+eindhoven-university-of-technology-eindhoven,Eindhoven University of Technology,Eindhoven,NL,51.44806,5.48972,campus,wikidata,Q280824,"Eindhoven University of Technology (public technical university in Eindhoven, Netherlands)",2026-10-21,1.2 km from city centre
+fukuoka-university-itoshima-fukuoka,Fukuoka University,"Itoshima, Fukuoka",JP,33.55028,130.36611,campus,wikidata,Q581046,"Fukuoka University (private university centered in Fukuoka, Japan)",2026-10-21,15.8 km from city centre
+georgia-tech-research-institute-smyrna-ga,Georgia Tech Research Institute,"Smyrna, GA",US,33.91001,-84.52663,building,nominatim,osm:relation/8667569,"Georgia Tech Research Institute Cobb County Research Facility North, 7220, Richardson Road, Smyrna, Cobb County, Georgia, 30080, United States",2026-10-21,3.1 km from city centre
+hytek-aalborg,Hytek,Aalborg,DK,57.04626,9.92153,city,nominatim,,city centre: Aalborg,2026-10-21,institution not resolved; printed city centre
+imt-rome,IMT,Rome,IT,41.89332,12.48293,city,nominatim,,city centre: Rome,2026-10-21,institution not resolved; printed city centre
+institute-of-science-tokyo,Institute of Science Tokyo,,JP,,,unresolved,none,,,2026-10-21,no locality printed
+instituto-de-telecomunica-es-aveiro,Instituto de Telecomunicações,Aveiro,PT,40.63405,-8.65998,building,nominatim,osm:way/1498247280,"Instituto de Telecomunicações (IT), Campus Universitário de Santiago, Bairro da Gulbenkian, Pêga, Glória e Vera Cruz, Aveiro, 3810-193, Portugal",2026-10-21,0.9 km from city centre
+kla-milpitas,KLA,Milpitas,US,37.41669,-121.92252,campus,nominatim,osm:node/13068157155,"KLA (Building 8), 60, SanDisk Drive, Milpitas, Santa Clara County, California, 95035, United States",2026-10-21,2.8 km from city centre
+korea-electronics-technology-institute,Korea Electronics Technology Institute,,KR,,,unresolved,none,,,2026-10-21,no locality printed
+lig-nex1-yongin,LIG Nex1,Yongin,KR,37.24057,127.17856,city,nominatim,,city centre: Yongin,2026-10-21,institution not resolved; printed city centre
+lpkf-laser-electronics-garbsen,LPKF Laser & Electronics,Garbsen,DE,52.4281,9.61455,campus,wikidata,Q1798289,"LPKF Laser & Electronics (company based in Garbsen near Hannover, Germany)",2026-10-21,1.0 km from city centre
+lule-university-of-technology-lule,Luleå University of Technology,Luleå,SE,65.61806,22.13889,campus,wikidata,Q1972721,Luleå University of Technology (Swedish university),2026-10-21,3.9 km from city centre
+mirise-technologies-tokyo,MIRISE Technologies,Tokyo,JP,35.67686,139.76389,city,nominatim,,city centre: Tokyo,2026-10-21,institution not resolved; printed city centre
+massachusetts-institute-of-technology-cambridge-ma,Massachusetts Institute of Technology,"Cambridge, MA",US,42.35972,-71.09194,campus,wikidata,Q49108,"Massachusetts Institute of Technology (private university in Cambridge, Massachusetts, USA, founded 1861)",2026-10-21,1.2 km from city centre
+nec-kawasaki-shi,NEC,Kawasaki-shi,JP,35.59825,139.61918,campus,nominatim,osm:node/1321837087,"NECグリーンスイミングクラブ, 二子坂戸緑道, 二子六丁目, 二子, 高津区, 川崎市, 神奈川県, 213-0002, 日本",2026-10-21,10.7 km from city centre
+national-institute-of-information-and-communications-technology,National Institute of Information and Communications Technology,,JP,,,unresolved,none,,,2026-10-21,no locality printed
+northrop-grumman-baltimore-md,Northrop Grumman,"Baltimore, MD",US,39.3274,-76.42235,campus,nominatim,osm:node/9685869796,"Northrop Grumman, 701, Wilson Point Road, Stansbury Forest, Middle River, Baltimore County, Maryland, 21220, United States",2026-10-21,16.7 km from city centre
+oume-electronics-tokyo,OUME Electronics,Tokyo,JP,35.67686,139.76389,city,nominatim,,city centre: Tokyo,2026-10-21,institution not resolved; printed city centre
+onto-innovation-massachusetts,Onto Innovation,Massachusetts,US,42.37888,-72.03237,region,nominatim,,region centre: Massachusetts,2026-10-21,printed region only
+panasonic-enns,Panasonic,Enns,AT,48.23097,14.49681,campus,nominatim,osm:way/534120189,"Panasonic, 30, Enghagen, Enns, Bezirk Linz-Land, Oberösterreich, 4470, Österreich",2026-10-21,2.3 km from city centre
+panasonic-industry,Panasonic Industry,,JP,,,unresolved,none,,,2026-10-21,no locality printed
+panasonic-system-networks-r-d-lab,Panasonic System Networks R&D Lab.,,JP,,,unresolved,none,,,2026-10-21,no locality printed
+renesas-electronics-tokyo,Renesas Electronics,Tokyo,JP,35.67686,139.76389,city,nominatim,,city centre: Tokyo,2026-10-21,institution not resolved; printed city centre
+socionext-yokohama-kanagawa,Socionext,"Yokohama, Kanagawa",JP,35.50745,139.61147,campus,nominatim,osm:node/5322980958,"株式会社ソシオネクスト 事業所一覧, 新横浜中央通り, 新横浜二丁目, 港北区, 横浜市, 神奈川県, 222-0033, 日本",2026-10-21,6.7 km from city centre
+somacis-castelfidardo-an,Somacis,Castelfidardo AN,IT,43.46998,13.57547,city,nominatim,,city centre: Castelfidardo AN,2026-10-21,institution not resolved; printed city centre
+sumitomo-bakelite-fukuoka,Sumitomo Bakelite,Fukuoka,JP,33.62512,130.618,region,nominatim,,region centre: Fukuoka,2026-10-21,"printed region only; printed list gives prefecture-level places (Kagawa, Okayama, Nagano); Fukuoka treated as prefecture"
+tazmo-okayama,TAZMO,Okayama,JP,34.85813,133.77593,region,nominatim,,region centre: Okayama,2026-10-21,printed region only
+thales-alenia-space-toulouse,Thales Alenia Space,Toulouse,FR,43.5469,1.39187,campus,nominatim,osm:way/23092855,"Thales Alenia Space, Tibaous, Saint-Simon / Lafourguette / Oncopole - Campus Santé du Futur, Toulouse, Haute-Garonne, Occitanie, France métropolitaine, France",2026-10-21,7.7 km from city centre
+tokyo-institute-of-technology-tokyo,Tokyo Institute of Technology,Tokyo,JP,35.605,139.68389,campus,wikidata,Q587326,"Tokyo Institute of Technology (national top-tier research university located in Greater Tokyo Area, Japan)",2026-10-21,10.8 km from city centre
+tyndall-national-institute,Tyndall National Institute,,IE,,,unresolved,none,,,2026-10-21,no locality printed
+tyndall-national-institute-cork,Tyndall National Institute,Cork,IE,51.8976,-8.48371,campus,wikidata,Q16902157,Tyndall National Institute (Irish research centre in integrated information and communications technology hardware and systems),2026-10-21,0.8 km from city centre
+university-of-aveiro-aveiro,University of Aveiro,Aveiro,PT,40.63028,-8.6575,campus,wikidata,Q29671,"University of Aveiro (Portuguese public university, founded in 1973)",2026-10-21,1.2 km from city centre
+university-of-oulu-oulu,University of Oulu,Oulu,FI,65.06667,25.45,campus,wikidata,Q1357517,"University of Oulu (university in Oulu, Finland)",2026-10-21,6.2 km from city centre
+vrije-universiteit-brussel,Vrije Universiteit Brussel,,BE,,,unresolved,none,,,2026-10-21,no locality printed
+yonsei-university-seoul,Yonsei University,Seoul,KR,37.56028,126.93694,campus,wikidata,Q39988,Yonsei University (private university with campuses in Seoul and Incheon in South Korea),2026-10-21,3.7 km from city centre

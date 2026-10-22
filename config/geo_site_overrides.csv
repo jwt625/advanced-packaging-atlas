@@ -83,3 +83,8 @@ Shanghai Aircraft Design and Research Institute,Shanghai,CN,,,,上海飞机设�
 Apple,"Cupertino, CA",US,,,,"Apple Park, Cupertino",,,
 JSR,Yokkaichi,JP,,,,JSR 四日市工場,,,
 KLA,Newport,GB,,,,"SPTS Technologies, Newport",,,
+Northrop Grumman,"Baltimore, MD",US,,,,"21240, Maryland",,,"L14 2026-10-21: printed street address; run 1 hit a different NG facility (Middle River, 16.7 km); L25 2026-10-21 (A5 F1): printed postcode 21240 used (street query did not resolve)"
+NEC,Kawasaki-shi,JP,,,,"下沼部, 中原区, 川崎市",,,"L14 2026-10-21: printed street address; run 1 hit an NEC-named swimming club; L25 2026-10-21 (A5 F1): printed Shimonumabe, Nakahara-ku (OSM label in Japanese)"
+Fukuoka University,"Itoshima, Fukuoka",JP,,,,"Itoshima, Fukuoka",city,,"L14 2026-10-21: printed city Itoshima; run 1 pinned the main campus in Fukuoka city (15.8 km)"
+Onto Innovation,Massachusetts,US,,,,"01887, Massachusetts",,,L25 2026-10-21 (A5 F1): printed postcode 01887
+Shinko Electric Industries,"Kita-Owaribe, Nagano",JP,Nagano,,,"大字北尾張部, 長野市",,,"L25 2026-10-21 (A5 F1): printed 36 Kita-Owaribe, Nagano 381-0014 (001c.147203)"

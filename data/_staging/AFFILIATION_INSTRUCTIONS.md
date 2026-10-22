@@ -24,6 +24,10 @@ scratch folder). Schema: `data/schema/packaging.schema.yaml` v2.3 tables `author
 - locality: city as printed ("Hsinchu", "Chandler, AZ"); empty if no city is printed (do not fill from memory).
 - country: ISO 3166 alpha-2 from the printed address (HK and TW have their own codes, not CN). If the paper prints no
   country, use the country the printed city unambiguously lies in and add note "country from printed city".
+  If the paper prints neither a country nor a city for that affiliation, country may be taken from the
+  organization's headquarters (its organizations.csv country); the row note must then say "country = org HQ, not
+  printed" and locality stays empty (decision 2026-10-21, DevLog-013 A5 F4; precedent ectc51909.2023.00108 TSMC,
+  001c.147203 authors 9-13).
 - source `paper`, locator e.g. "p.1 affiliations", "p.1 footnote", "p.8 biography". note: optional, <= 20 words.
 - Shared affiliation blocks without per-author markers: assign each author the block(s) the layout ties them to; if the
   mapping is ambiguous, say so in the note and the report.

@@ -1,0 +1,3 @@
+text layer partly damaged (flagged 2026-10-21, DevLog-013 L16): digit_ratio=0.033, common_word_ratio=0.177; text.md is the PDF's own text layer (not replaced by tesseract OCR); verify numbers and units against figures/page_NN.png
+- Every page (p.1-p.7) holds a font-shifted copy (each character offset by 29 code points, spaces as control characters) (p.1 title "'HVLJQ DQG $QDO\VLV" = 'Design and Analysis') plus a readable OCR-like copy with errors.
+- OCR-copy errors: um reads 'urn' (p.1 '1 175 urn x 525 urn'; p.2 '350 urn bump pitch'; p.3 '5 urn'; p.6 '1000 urn CPW'); 'l' for '1' (p.2 'Fig. l .', p.3 'lmm x 1 .4mm', p.4 '1.4xl.4 mm2', p.5 '1 .4xl mm2'); 'SSW' for '8SW' (p.1 process name); 'RF;n' (p.2); 'SOl' for 'SOI' (p.3); '!=ull' (p.4); merged words ('ofthe').

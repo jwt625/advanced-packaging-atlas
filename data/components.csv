@@ -91,21 +91,6 @@ ectc51906.2022.00232-b-c6,ectc51906.2022.00232-b,underfill,,,underfill at C4 (mo
 ectc51906.2022.00232-c-c1,ectc51906.2022.00232-c,asic,,,SoC (7 nm ASIC),1,31.5,23.8,,,,,,7 nm,Si,,design_target,table,process_node:text;material:schematic,p.1 Abstract; p.2 Table I; p.2 Table II; p.2 Fig. 2,,Thickness not given.
 ectc51906.2022.00232-c-c2,ectc51906.2022.00232-c,io_die,,,I/O die (chiplet),8,15.5,4,,,,,60,,,,design_target,table,,p.1 Abstract; p.2 Table I; p.2 Table II; p.2 Fig. 3(b),,"gap_um = D2D gap (SoC to I/O die), Table II. 8 identical I/O dies."
 ectc51906.2022.00232-c-c3,ectc51906.2022.00232-c,mold,,no,epoxy mold compound (reconstituted wafer),,,,,,,,,,epoxy mold compound,,stated,text,,p.1 Sec. II; p.2 Fig. 2; p.5 Fig. 13,,Product and thickness not given.
-ectc51909.2023.00091-a-c1,ectc51909.2023.00091-a,logic_soc,yes,,SoC (top die),2,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.3 Sec. II.A,,"Mechanical TV; non-functional die inferred from 'mechanical TV'. Size, thickness, node not given."
-ectc51909.2023.00091-a-c2,ectc51909.2023.00091-a,hbm,yes,,HBM2E,4,,,,,,,,,,,design_target,table,,p.3 Table 1; p.3 Sec. II.A,,Mechanical TV. Stack height and size not given.
-ectc51909.2023.00091-a-c3,ectc51909.2023.00091-a,dummy_die,yes,,dummy Si (top die layer),8,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.3 Sec. II.A; p.3 Fig. 6(b),,Equivalent 3.8x reticle dummy Si added to mimic a 5.4x reticle (4500 mm2) interposer.
-ectc51909.2023.00091-a-c4,ectc51909.2023.00091-a,bridge,,yes,LSI (local Si interconnect),6,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.3 Sec. II.A; p.2 Sec. II,,Embedded in SC-RDL module; features same as ref [7] incl. eDTC. Size not given.
-ectc51909.2023.00091-a-c5,ectc51909.2023.00091-a,ipd,,yes,IPD,45,,,,,,,,,,,design_target,text,,p.3 Table 1; p.3 Sec. II.A,,2.9 mm2 each; embedded between B/S SC-RDL and organic substrate (in uBGA layer).
-ectc51909.2023.00091-a-c6,ectc51909.2023.00091-a,substrate,,,"organic substrate 3-2-3, 1.4 mm core",1,91,91,,,,,,,organic,,design_target,table,,p.3 Table 1; p.3 Sec. II.A,,Simplified substrate; size equal to SC-RDL/package size.
-ectc51909.2023.00091-a-c7,ectc51909.2023.00091-a,mold,,,side mold extended to package substrate edge,,,,,,,,,,,,stated,text,,p.2 Sec. II,,Mold material and thickness not given.
-ectc51909.2023.00091-a-c8,ectc51909.2023.00091-a,lid,,,lid,1,91,91,2000,,,,,,,,design_target,figure_image,,p.3 Table 1; p.3 Fig. 6(c),,Fig. 6(c) label 'Lid: 91mmx91mmx2mm'. Material not given.
-ectc51909.2023.00091-b-c1,ectc51909.2023.00091-b,logic_soc,yes,,SoC (top die),6,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.4 Sec. II.B,,"Mechanical TV; non-functional die inferred from 'mechanical TV'. Size, thickness, node not given."
-ectc51909.2023.00091-b-c2,ectc51909.2023.00091-b,hbm,yes,,HBM2E,12,,,,,,,,,,,design_target,table,,p.3 Table 1; p.4 Sec. II.B,,Mechanical TV. Stack height and size not given.
-ectc51909.2023.00091-b-c3,ectc51909.2023.00091-b,bridge,,yes,LSI (local Si interconnect),18,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.4 Sec. II.B; p.2 Sec. II,,Embedded in SC-RDL module; features same as ref [7] incl. eDTC. Size not given.
-ectc51909.2023.00091-b-c4,ectc51909.2023.00091-b,ipd,,yes,IPD,45,,,,,,,,,,,design_target,text,,p.3 Table 1; p.4 Sec. II.B,,2.9 mm2 each; embedded between B/S SC-RDL and organic substrate (in uBGA layer).
-ectc51909.2023.00091-b-c5,ectc51909.2023.00091-b,substrate,,,"organic substrate 3-2-3, 1.4 mm core",1,91,91,,,,,,,organic,,design_target,table,,p.3 Table 1; p.4 Sec. II.B,,Simplified substrate; size equal to SC-RDL/package size.
-ectc51909.2023.00091-b-c6,ectc51909.2023.00091-b,mold,,,side mold extended to package substrate edge,,,,,,,,,,,,stated,text,,p.2 Sec. II,,Mold material and thickness not given.
-ectc51909.2023.00091-b-c7,ectc51909.2023.00091-b,stiffener,,,stiffener ring,1,,,,,,,,,,,design_target,figure_image,,p.3 Table 1; p.4 Fig. 7(c); p.4 Fig. 7(d),,Fig. 7(c) label 'Ring: 18mm-12mm-2mm'; meaning of the three values not defined. No TIM1 needed.
 ectc51906.2022.00008-a-c1,ectc51906.2022.00008-a,logic_soc,,,split SOC dies,2,,,,,,,,,,,design_target,text,,p.4 Sec. III.A,,
 ectc51906.2022.00008-a-c2,ectc51906.2022.00008-a,hbm,,,HBM,2,,,,,,,,,,,design_target,text,,p.4 Sec. III.A,,HBM3 eye diagram reported in Fig. 4(a); generation of the built TV not stated.
 ectc51906.2022.00008-a-c3,ectc51906.2022.00008-a,interposer,,,"organic interposer (RDL, TSV-less)",1,32,35,,,,,,,,,design_target,text,,p.4 Sec. III.A; p.2 Table I,,
@@ -918,14 +903,6 @@ ectc51687.2025.00095-a-c5,ectc51687.2025.00095-a,substrate,,,package substrate (
 ectc51687.2025.00095-b-c1,ectc51687.2025.00095-b,logic_soc,,,SoC-1 and SoC-2 dies,2,,,,,,,,,,,stated,table,,p.3 Table IV; p.2 Sec. II.C,,
 ectc51687.2025.00095-b-c2,ectc51687.2025.00095-b,underfill,,,CoP underfill,,,,,,,,,,,,stated,text,,p.2 Sec. II.C,,
 ectc51687.2025.00095-b-c3,ectc51687.2025.00095-b,mold,,,mold over SoC dies (ground to reveal die tops),,,,,,,,,,,,stated,text,,p.2 Sec. II.C,,
-ectc51687.2025.00051-a-c1,ectc51687.2025.00051-a,bridge,,yes,EMIB-T TSV bridge die,3,,,,,,,,,silicon,,design_target,text,,p.4 Sec. IV; p.4 Fig. 5,,Thin TSV bridge with solder joints and underfill to cavity pads (Sec. III.C). Size and thickness not given.
-ectc51687.2025.00051-a-c2,ectc51687.2025.00051-a,substrate,,,HDI package substrate with bridge cavities,,77,56,,,,,,,,,design_target,text,,p.4 Sec. IV; p.3 Fig. 4,,Package form factor 77x56 mm; substrate stack and core not given.
-ectc51687.2025.00051-a-c3,ectc51687.2025.00051-a,underfill,,,Underfill between TSV bridge die back side and substrate cavity,,,,,,,,,,,,stated,text,,p.4 Sec. III.C,,Material not given.
-ectc51687.2025.00051-a-c4,ectc51687.2025.00051-a,logic_soc,,,"Top dies (Die 1, Die 2 in cross-section)",,,,,,,,,,,,stated,figure_image,,p.4 Fig. 5,,"Die type, count and size not given; total Si ~2x reticle."
-ectc51687.2025.00051-b-c1,ectc51687.2025.00051-b,bridge,,yes,EMIB (Embedded Multi-die Interconnect Bridge) Si bridge,,,,,,,,,,silicon,,stated,schematic,,p.2 Fig. 3; p.4 Fig. 5,,Placed into cavity of HDI build-up substrate; no TSV.
-ectc51687.2025.00051-b-c2,ectc51687.2025.00051-b,substrate,,,HDI build-up substrate with cavity,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
-ectc51687.2025.00051-b-c3,ectc51687.2025.00051-b,logic_soc,,,"Top dies (Die 1, Die 2 in cross-section)",,,,,,,,,,,,stated,figure_image,,p.4 Fig. 5,,Die type and size not given.
-ectc51687.2025.00051-c-c1,ectc51687.2025.00051-c,bridge,,yes,EMIB-T TSV bridge die,14,,,,,,,,,silicon,,stated,schematic,,p.3 Fig. 4,,
 ectc51687.2025.00076-a-c1,ectc51687.2025.00076-a,dtc,,yes,"multi-terminal deep-trench Si chip capacitor (4 capacitors, common ground, 55 pads)",1,1.6,1.8,210,1.61,1.81,200,5,,"Si (deep trench, multi-layer MIM, high-k)",ELSPES Inc.,design_target,caption,cavity_x_mm:derived;cavity_y_mm:derived;gap_um:derived;cavity_depth_um:text,p.2 Fig. 1(b); p.2 Sec. I; p.6 Sec. IV,,2.8 uF; supplier per refs [18]-[19] and co-authors. Through-cavity 10 um larger per side dimension; gap = nominal per side; max 5 um die shift.
 ectc51687.2025.00076-a-c2,ectc51687.2025.00076-a,substrate,,,glass substrate (through-cavity),1,,,200,,,,,,glass,AGC Inc.,design_target,text,,p.2 Sec. I; p.4 Fig. 3(a); p.4 Fig. 4(a),,Supplier from acknowledgment (ack). Glass type and CTE not stated.
 ectc51687.2025.00076-a-c3,ectc51687.2025.00076-a,other,,,temporary carrier substrate with thermal tape,1,,,,,,,,,glass carrier (Fig. 10 legend); thermal tape,,stated,mixed,,p.6 Sec. IV; p.7 Fig. 10(b),,Needed because DTC (210 um) is thicker than glass (200 um).
@@ -1546,19 +1523,6 @@ ectc51909.2023.00178-c-c1,ectc51909.2023.00178-c,dummy_die,yes,,small top die (H
 ectc51909.2023.00178-c-c2,ectc51909.2023.00178-c,base_die,yes,,bottom wafer die (labelled buffer wafer),1,,,,,,,,,,,stated,mixed,,p.2 Sec. II; p.2 Fig. 1(b),,Wafer size and thickness not reported.
 ectc51909.2023.00178-b-c3,ectc51909.2023.00178-b,substrate,,,PCB substrate,1,,,,,,,,,,,stated,text,,p.4 Sec. IV.A,,
 ectc51909.2023.00178-c-c3,ectc51909.2023.00178-c,substrate,,,PCB substrate,1,,,,,,,,,,,stated,text,,p.4 Sec. IV.A,,
-ectc51909.2023.00174-a-c1,ectc51909.2023.00174-a,logic_soc,,,SoC/chiplet top dies,3,,,,,,,,,,,design_target,text,,p.2 Sec. II.A; p.2 Fig. 2,,
-ectc51909.2023.00174-a-c2,ectc51909.2023.00174-a,hbm,,,HBM,8,,,,,,,,,,,design_target,text,,p.2 Sec. II.A; p.1 Abstract,,HBM generation not given.
-ectc51909.2023.00174-a-c3,ectc51909.2023.00174-a,interposer,,,"reconstituted interposer (RI): LSI dies + TIV in molding compound, front/back RDL",1,43,58,,,,,,,molding compound with embedded LSI chiplets,,design_target,text,,p.2 Sec. II.A; p.2 Sec. II.B,,
-ectc51909.2023.00174-a-c4,ectc51909.2023.00174-a,bridge,,yes,"local Si interconnect (LSI) chiplets with TSV, Cu interconnect, eDTC",10,,,,,,,,,Si,,design_target,text,,p.2 Sec. II.A; p.3 Sec. II.C,count:gt,'More than 10 LSI dies'. LSI-1 / LSI-2 mix in TV not stated; known-good dies placed on carrier.
-ectc51909.2023.00174-a-c5,ectc51909.2023.00174-a,dtc,,yes,new generation embedded deep trench capacitor (eDTC) in LSI,,,,,,,,,,,,stated,text,,p.3 Sec. II.D; p.3 Sec. III.A,,Max eDTC area per single Si chip ~300 mm2 due to yield (stated).
-ectc51909.2023.00174-a-c6,ectc51909.2023.00174-a,underfill,,,top die underfill,,,,,,,,,,,,stated,text,,p.2 Sec. II.B,,
-ectc51909.2023.00174-a-c7,ectc51909.2023.00174-a,mold,,,top die encapsulation molding compound,,,,,,,,,,,,stated,text,,p.2 Sec. II.B,,
-ectc51909.2023.00174-a-c8,ectc51909.2023.00174-a,substrate,,,package substrate,1,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 2,,Substrate size/layers not given beyond package 70x76 (78) mm.
-ectc51909.2023.00174-b-c1,ectc51909.2023.00174-b,stiffener,,,ring,1,,,,,,,,,,,stated,figure_image,,p.2 Fig. 3(a); p.2 Sec. II.B,,
-ectc51909.2023.00174-c-c1,ectc51909.2023.00174-c,lid,,,lid,1,,,,,,,,,,,stated,figure_image,,p.2 Fig. 3(b); p.2 Sec. II.B,,
-ectc51909.2023.00174-c-c2,ectc51909.2023.00174-c,tim,,,film type thermal interface material between lid and CoW die,,,,,,,,,,,,stated,text,,p.2 Sec. II.B,,Replaces gel-type TIM; product not given.
-ectc51909.2023.00174-d-c1,ectc51909.2023.00174-d,bridge,,,LSI-1 die,,,,,,,,,,Si,,stated,text,,p.3 Sec. II.C,,
-ectc51909.2023.00174-e-c1,ectc51909.2023.00174-e,bridge,,,LSI-2 die,,,,,,,,,,Si,,stated,text,,p.3 Sec. II.C,,
 ectc51909.2023.00179-a-c1,ectc51909.2023.00179-a,dram,,,HBM DRAM core chips (8Hi),8,,,58,,,,,,Si,,design_target,caption,material:stated,p.2 Fig. 1; p.1 Abstract,,58 um is the Fig. 1 equal-thickness comparison case; actual device chip thickness not otherwise stated. x/y not reported.
 ectc51909.2023.00179-a-c2,ectc51909.2023.00179-a,base_die,,,HBM base wafer (base die),,,,,,,,,,,,stated,text,,p.2 Sec. II.C,,Base wafer carries solder; anneal limited below 200 C to limit its IMC growth and DRAM refresh degradation.
 ectc51909.2023.00179-a-c3,ectc51909.2023.00179-a,mold,,,low CTE EMC (proxy SiP package),,,,,,,,,,low CTE epoxy molding compound,,stated,text,,p.4 Sec. II.E; p.4 Fig. 11,,Used in proxy package for SiP; avoids delamination at EMC/chip triple point. Product and CTE not given.
@@ -2255,3 +2219,60 @@ tcpmt.2026.3672227-a-c3,tcpmt.2026.3672227-a,stiffener,,,Cu stiffener ring,,,,25
 tcpmt.2026.3672227-a-c4,tcpmt.2026.3672227-a,adhesive,,,stiffener ring adhesive,,,,,,,,,,,,stated,table,,p.2 Table I,,BLT 50-60 um (stack_layers).
 tcpmt.2026.3672227-a-c5,tcpmt.2026.3672227-a,underfill,,,capillary underfill,,,,,,,,,,,,stated,mixed,,p.2 Fig. 2; p.2 Sec. II.B,,
 tcpmt.2026.3672227-b-c1,tcpmt.2026.3672227-b,substrate,,,18-layer organic substrate with low-CTE core,,,,1964,,,,,,"organic substrate, 1.24 mm low-CTE core",,design_target,table,,p.2 Table I; p.3 Sec. II.C,,
+ectc51909.2023.00091-a-c1,ectc51909.2023.00091-a,logic_soc,yes,,SoC (top die),2,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.3 Sec. II.A,,"Mechanical TV; non-functional die inferred from 'mechanical TV'. Size, thickness, node not given."
+ectc51909.2023.00091-a-c2,ectc51909.2023.00091-a,hbm,yes,,HBM2E,4,,,,,,,,,,,design_target,table,,p.3 Table 1; p.3 Sec. II.A,,Mechanical TV. Stack height and size not given.
+ectc51909.2023.00091-a-c3,ectc51909.2023.00091-a,dummy_die,yes,,dummy Si (top die layer),8,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.3 Sec. II.A; p.3 Fig. 6(b),,Equivalent 3.8x reticle dummy Si added to mimic a 5.4x reticle (4500 mm2) interposer.
+ectc51909.2023.00091-a-c4,ectc51909.2023.00091-a,bridge,,yes,LSI (local Si interconnect),6,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.3 Sec. II.A; p.2 Sec. II,,Embedded in SC-RDL module; features same as ref [7] incl. eDTC. Size not given.
+ectc51909.2023.00091-a-c5,ectc51909.2023.00091-a,ipd,,yes,IPD,45,,,,,,,,,,,design_target,text,,p.3 Table 1; p.3 Sec. II.A,,2.9 mm2 each; embedded between B/S SC-RDL and organic substrate (in uBGA layer).
+ectc51909.2023.00091-a-c6,ectc51909.2023.00091-a,substrate,,,"organic substrate 3-2-3, 1.4 mm core",1,91,91,,,,,,,organic,,design_target,table,,p.3 Table 1; p.3 Sec. II.A,,Simplified substrate; size equal to SC-RDL/package size.
+ectc51909.2023.00091-a-c7,ectc51909.2023.00091-a,mold,,,side mold extended to package substrate edge,,,,,,,,,,,,stated,text,,p.2 Sec. II,,Mold material and thickness not given.
+ectc51909.2023.00091-a-c8,ectc51909.2023.00091-a,lid,,,lid,1,91,91,2000,,,,,,,,design_target,figure_image,,p.3 Table 1; p.3 Fig. 6(c),,Fig. 6(c) label 'Lid: 91mmx91mmx2mm'. Material not given.
+ectc51909.2023.00091-b-c1,ectc51909.2023.00091-b,logic_soc,yes,,SoC (top die),6,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.4 Sec. II.B,,"Mechanical TV; non-functional die inferred from 'mechanical TV'. Size, thickness, node not given."
+ectc51909.2023.00091-b-c2,ectc51909.2023.00091-b,hbm,yes,,HBM2E,12,,,,,,,,,,,design_target,table,,p.3 Table 1; p.4 Sec. II.B,,Mechanical TV. Stack height and size not given.
+ectc51909.2023.00091-b-c3,ectc51909.2023.00091-b,bridge,,yes,LSI (local Si interconnect),18,,,,,,,,,Si,,design_target,table,,p.3 Table 1; p.4 Sec. II.B; p.2 Sec. II,,Embedded in SC-RDL module; features same as ref [7] incl. eDTC. Size not given.
+ectc51909.2023.00091-b-c4,ectc51909.2023.00091-b,ipd,,yes,IPD,45,,,,,,,,,,,design_target,text,,p.3 Table 1; p.4 Sec. II.B,,2.9 mm2 each; embedded between B/S SC-RDL and organic substrate (in uBGA layer).
+ectc51909.2023.00091-b-c5,ectc51909.2023.00091-b,substrate,,,"organic substrate 3-2-3, 1.4 mm core",1,91,91,,,,,,,organic,,design_target,table,,p.3 Table 1; p.4 Sec. II.B,,Simplified substrate; size equal to SC-RDL/package size.
+ectc51909.2023.00091-b-c6,ectc51909.2023.00091-b,mold,,,side mold extended to package substrate edge,,,,,,,,,,,,stated,text,,p.2 Sec. II,,Mold material and thickness not given.
+ectc51909.2023.00091-b-c7,ectc51909.2023.00091-b,stiffener,,,stiffener ring,1,,,,,,,,,,,design_target,figure_image,,p.3 Table 1; p.4 Fig. 7(c); p.4 Fig. 7(d),,Fig. 7(c) label 'Ring: 18mm-12mm-2mm'; meaning of the three values not defined. No TIM1 needed.
+ectc51687.2025.00051-a-c1,ectc51687.2025.00051-a,bridge,,yes,EMIB-T TSV bridge die,3,,,,,,,,,silicon,,design_target,text,,p.4 Sec. IV; p.4 Fig. 5,,Thin TSV bridge with solder joints and underfill to cavity pads (Sec. III.C). Size and thickness not given.
+ectc51687.2025.00051-a-c2,ectc51687.2025.00051-a,substrate,,,HDI package substrate with bridge cavities,,77,56,,,,,,,,,design_target,text,,p.4 Sec. IV; p.3 Fig. 4,,Package form factor 77x56 mm; substrate stack and core not given.
+ectc51687.2025.00051-a-c3,ectc51687.2025.00051-a,underfill,,,Underfill between TSV bridge die back side and substrate cavity,,,,,,,,,,,,stated,text,,p.4 Sec. III.C,,Material not given.
+ectc51687.2025.00051-a-c4,ectc51687.2025.00051-a,logic_soc,,,"Top dies (Die 1, Die 2 in cross-section)",,,,,,,,,,,,stated,figure_image,,p.4 Fig. 5,,"Die type, count and size not given; total Si ~2x reticle."
+ectc51687.2025.00051-b-c1,ectc51687.2025.00051-b,bridge,,yes,EMIB (Embedded Multi-die Interconnect Bridge) Si bridge,,,,,,,,,,silicon,,stated,schematic,,p.2 Fig. 3; p.4 Fig. 5,,Placed into cavity of HDI build-up substrate; no TSV.
+ectc51687.2025.00051-b-c2,ectc51687.2025.00051-b,substrate,,,HDI build-up substrate with cavity,,,,,,,,,,,,stated,schematic,,p.2 Fig. 3,,
+ectc51687.2025.00051-b-c3,ectc51687.2025.00051-b,logic_soc,,,"Top dies (Die 1, Die 2 in cross-section)",,,,,,,,,,,,stated,figure_image,,p.4 Fig. 5,,Die type and size not given.
+ectc51687.2025.00051-c-c1,ectc51687.2025.00051-c,bridge,,yes,EMIB-T TSV bridge die,14,,,,,,,,,silicon,,stated,schematic,,p.3 Fig. 4,,
+ectc51909.2023.00174-a-c1,ectc51909.2023.00174-a,logic_soc,,,SoC/chiplet top dies,3,,,,,,,,,,,design_target,text,,p.2 Sec. II.A; p.2 Fig. 2,,
+ectc51909.2023.00174-a-c2,ectc51909.2023.00174-a,hbm,,,HBM,8,,,,,,,,,,,design_target,text,,p.2 Sec. II.A; p.1 Abstract,,HBM generation not given.
+ectc51909.2023.00174-a-c3,ectc51909.2023.00174-a,interposer,,,"reconstituted interposer (RI): LSI dies + TIV in molding compound, front/back RDL",1,43,58,,,,,,,molding compound with embedded LSI chiplets,,design_target,text,,p.2 Sec. II.A; p.2 Sec. II.B,,
+ectc51909.2023.00174-a-c4,ectc51909.2023.00174-a,bridge,,yes,"local Si interconnect (LSI) chiplets with TSV, Cu interconnect, eDTC",10,,,,,,,,,Si,,design_target,text,,p.2 Sec. II.A; p.3 Sec. II.C,count:gt,'More than 10 LSI dies'. LSI-1 / LSI-2 mix in TV not stated; known-good dies placed on carrier.
+ectc51909.2023.00174-a-c5,ectc51909.2023.00174-a,dtc,,yes,new generation embedded deep trench capacitor (eDTC) in LSI,,,,,,,,,,,,stated,text,,p.3 Sec. II.D; p.3 Sec. III.A,,Max eDTC area per single Si chip ~300 mm2 due to yield (stated).
+ectc51909.2023.00174-a-c6,ectc51909.2023.00174-a,underfill,,,top die underfill,,,,,,,,,,,,stated,text,,p.2 Sec. II.B,,
+ectc51909.2023.00174-a-c7,ectc51909.2023.00174-a,mold,,,top die encapsulation molding compound,,,,,,,,,,,,stated,text,,p.2 Sec. II.B,,
+ectc51909.2023.00174-a-c8,ectc51909.2023.00174-a,substrate,,,package substrate,1,,,,,,,,,,,stated,text,,p.2 Sec. II.A; p.2 Fig. 2,,Substrate size/layers not given beyond package 70x76 (78) mm.
+ectc51909.2023.00174-b-c1,ectc51909.2023.00174-b,stiffener,,,ring,1,,,,,,,,,,,stated,figure_image,,p.2 Fig. 3(a); p.2 Sec. II.B,,
+ectc51909.2023.00174-c-c1,ectc51909.2023.00174-c,lid,,,lid,1,,,,,,,,,,,stated,figure_image,,p.2 Fig. 3(b); p.2 Sec. II.B,,
+ectc51909.2023.00174-c-c2,ectc51909.2023.00174-c,tim,,,film type thermal interface material between lid and CoW die,,,,,,,,,,,,stated,text,,p.2 Sec. II.B,,Replaces gel-type TIM; product not given.
+ectc51909.2023.00174-d-c1,ectc51909.2023.00174-d,bridge,,,LSI-1 die,,,,,,,,,,Si,,stated,text,,p.3 Sec. II.C,,
+ectc51909.2023.00174-e-c1,ectc51909.2023.00174-e,bridge,,,LSI-2 die,,,,,,,,,,Si,,stated,text,,p.3 Sec. II.C,,
+ectc51909.2023.00091-c-c1,ectc51909.2023.00091-c,logic_soc,,,N16/N12 SoC (top die),,,,,,,,,N16/N12,,,stated,figure_image,,p.1 Fig. 2,,Top die row of Fig. 2; die count not given.
+ectc51909.2023.00091-c-c2,ectc51909.2023.00091-c,hbm,,,HBM2 @1.8 Gbps,4,,,,,,,,,,,design_target,figure_image,,p.1 Fig. 2,,Max. No. of HBMs/pkg. (Fig. 2).
+ectc51909.2023.00091-d-c1,ectc51909.2023.00091-d,logic_soc,,,N7 SoC (top die),,,,,,,,,N7,,,stated,figure_image,,p.1 Fig. 2,,Top die row of Fig. 2; die count not given.
+ectc51909.2023.00091-d-c2,ectc51909.2023.00091-d,hbm,,,HBM2E @3.2 Gbps,6,,,,,,,,,,,design_target,figure_image,,p.1 Fig. 2,,Max. No. of HBMs/pkg. (Fig. 2).
+ectc51909.2023.00091-e-c1,ectc51909.2023.00091-e,logic_soc,,,N5 SoIC (top die),,,,,,,,,N5,,,stated,figure_image,,p.1 Fig. 2,,Top die row of Fig. 2; die count not given.
+ectc51909.2023.00091-e-c2,ectc51909.2023.00091-e,hbm,,,HBM3 @6.4 Gbps,8,,,,,,,,,,,design_target,figure_image,,p.1 Fig. 2,,Max. No. of HBMs/pkg. (Fig. 2).
+ectc51909.2023.00174-f-c1,ectc51909.2023.00174-f,logic_soc,,,SoC,1,,,,,,,,,,,design_target,figure_image,,p.1 Fig. 1,,Label '1*SoC' in Fig. 1.
+ectc51909.2023.00174-f-c2,ectc51909.2023.00174-f,hbm,,,HBM,4,,,,,,,,,,,design_target,figure_image,,p.1 Fig. 1,,Label '4*HBM' in Fig. 1; generation not given.
+ectc51909.2023.00174-g-c1,ectc51909.2023.00174-g,logic_soc,,,SoC,1,,,,,,,,,,,design_target,figure_image,,p.1 Fig. 1,,Label '1*SoC' in Fig. 1.
+ectc51909.2023.00174-g-c2,ectc51909.2023.00174-g,hbm,,,HBM,6,,,,,,,,,,,design_target,figure_image,,p.1 Fig. 1,,Label '6*HBM' in Fig. 1; generation not given.
+ectc51909.2023.00174-h-c1,ectc51909.2023.00174-h,logic_soc,,,SoC,2,,,,,,,,,,,design_target,figure_image,,p.1 Fig. 1,,Label '2*SoC' in Fig. 1.
+ectc51909.2023.00174-h-c2,ectc51909.2023.00174-h,hbm,,,HBM,8,,,,,,,,,,,design_target,figure_image,,p.1 Fig. 1,,Label '8*HBM' in Fig. 1; generation not given.
+ectc51909.2023.00174-i-c1,ectc51909.2023.00174-i,logic_soc,,,SoC,2,,,,,,,,,,,author_estimate,figure_image,,p.1 Fig. 1,,Label '2*SoC' in Fig. 1.
+ectc51909.2023.00174-i-c2,ectc51909.2023.00174-i,hbm,,,HBM,12,,,,,,,,,,,author_estimate,figure_image,,p.1 Fig. 1,,Label '12*HBM' in Fig. 1; generation not given.
+ectc51687.2025.00051-d-c1,ectc51687.2025.00051-d,bridge,,yes,embedded Si bridge,6,,,,,,,,,,,design_target,figure_image,,p.4 Fig. 6,,Label '6 bridges' in Fig. 6.
+ectc51687.2025.00051-e-c1,ectc51687.2025.00051-e,bridge,,yes,embedded Si bridge,10,,,,,,,,,,,design_target,figure_image,,p.4 Fig. 6,,Label '10 bridges' in Fig. 6.
+ectc51687.2025.00051-f-c1,ectc51687.2025.00051-f,bridge,,yes,embedded Si bridge,14,,,,,,,,,,,design_target,figure_image,,p.4 Fig. 6,,Label '14 bridges' in Fig. 6.
+ectc51687.2025.00051-g-c1,ectc51687.2025.00051-g,bridge,,yes,embedded Si bridge,11,,,,,,,,,,,design_target,figure_image,,p.4 Fig. 6,,Label '11 bridges' in Fig. 6.
+ectc51687.2025.00051-h-c1,ectc51687.2025.00051-h,bridge,,yes,embedded Si bridge,11,,,,,,,,,,,design_target,figure_image,,p.4 Fig. 6,,Label '11 bridges' in Fig. 6.
+ectc51687.2025.00051-i-c1,ectc51687.2025.00051-i,bridge,,yes,embedded Si bridge,30,,,,,,,,,,,design_target,figure_image,,p.4 Fig. 6,count:ge,Label '30+ bridges' in Fig. 6.
+ectc51687.2025.00051-j-c1,ectc51687.2025.00051-j,bridge,,yes,embedded Si bridge,38,,,,,,,,,,,author_estimate,figure_image,,p.4 Fig. 6,count:gt,Label '>>38 bridges' in Fig. 6.

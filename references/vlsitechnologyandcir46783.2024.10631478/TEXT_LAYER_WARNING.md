@@ -1,0 +1,3 @@
+text layer partly damaged (flagged 2026-10-21, DevLog-013 L16): digit_ratio=0.0329, common_word_ratio=0.087; text.md is the PDF's own text layer (not replaced by tesseract OCR); verify numbers and units against figures/page_NN.png
+- p.1 holds a font-shifted copy (each character offset by 29 code points, spaces as control characters) plus a readable OCR-like copy with errors: um reads '!lm', '/lm' or 'urn' ('36!lm', '70!lm diameter', '376 fF/!lm2', 'l IOurn minimum pitch' = 110 um); some lines unreadable ('~DI~,. FIg. 1~').
+- p.2: the References column is font-shifted ('5HIHUHQFHV' = 'References'); Table 2 labels are Calibri glyph-ID garbled ('sĂůƵĞ' = 'Value', 'WĂƌĂŵĞƚĞƌ' = 'Parameter'); OCR-copy errors ('1080/lm', '0.5/lm Si02', '36/lm pitch').

@@ -14,6 +14,7 @@ v2.5: process_flows.build_seq (int >= 1); a delta step's tv_id is a ';' list, ea
 (flow_v25_issues, also used by scripts/fix_flows_v25.py): split names a temperature but temp_c/temp_c_max are empty;
 paper level full with no typed process condition on any step; identical delta step text on 2+ rows of a flow;
 target with no number; two flows of one TV with equal build_seq (unless both notes say "parallel").
+papers.venue (2026-10-21): value in enums.venue (acronym only); every config/venues.yaml key is in enums.venue.
 
 Usage: uv run python scripts/validate_db.py                 # data/
        uv run python scripts/validate_db.py --staging data/_staging/<batch>
@@ -37,6 +38,7 @@ SCHEMA = yaml.safe_load((ROOT / "data" / "schema" / "packaging.schema.yaml").rea
 ENUMS = SCHEMA["enums"]
 TABLES = SCHEMA["tables"]
 COMMON = list(SCHEMA.get("common", {}))
+VENUES_CFG = yaml.safe_load((ROOT / "config" / "venues.yaml").read_text())["venues"]
 for _t in TABLES.values():  # YAML merge keys land first; put the shared basis/source/... columns last
     cols = _t["columns"]
     _t["columns"] = {**{k: v for k, v in cols.items() if k not in COMMON},
@@ -185,6 +187,13 @@ def validate(d: Path, base: Path | None = None) -> tuple[list[str], list[str]]:
                 errs.append(f"{table}: {ts['key']}={r[ts['key']]} references missing {par['table']}.{par['column']}={v}")
             if v and not r[ts["key"]].startswith(v + "-"):
                 errs.append(f"{table}: id {r[ts['key']]} does not start with parent id {v}-")
+    # papers.venue: acronym from enums.venue (column stays str); the screening list config/venues.yaml must be a subset
+    venues = set(ENUMS.get("venue", []))
+    for v in sorted(set(VENUES_CFG) - venues):
+        errs.append(f"schema: config/venues.yaml venue {v} missing from enums.venue")
+    for r in data.get("papers", []):
+        if r.get("venue") and r["venue"] not in venues:
+            errs.append(f"papers: {r['paper_id']} venue '{r['venue']}' not in enums.venue (acronym only; year is its own column)")
     # papers: one evidence file each, source cached
     for r in data.get("papers", []):
         pid = r["paper_id"]

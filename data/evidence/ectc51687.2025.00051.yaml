@@ -11,17 +11,20 @@ source_files:
   - references/ectc51687.2025.00051/figures/cand/p03_fig4.png
   - references/ectc51687.2025.00051/figures/cand/p04_fig5.png
   - references/ectc51687.2025.00051/figures/cand/p04_tablei.png
+  - references/ectc51687.2025.00051/figures/cand/p04_fig6.png
 figure_reading_method: >-
   Page renders at 150 dpi; Fig. 3 re-cropped from p.3. Figures are schematics, renders and photos without dimension
   labels; all numbers come from text and Table I.
 entries:
   - {table: test_vehicles, row_id: ectc51687.2025.00051-c, field: name, value: "14-Bridge EMIB-T Package TV", unit: "", basis: stated, locator: "p.3 Fig. 4", note: "photo label in step 2 panel"}
+  - {table: test_vehicles, row_id: ectc51687.2025.00051-i, field: package_x_mm, value: 120, unit: mm, basis: design_target, locator: "p.4 Fig. 6", note: "label renders '~12mm0x120mm' (450 dpi render); read as ~120 x 120 mm, matching Sec. IV 'today's ~120mmX120mm'"}
+  - {table: interconnects, row_id: ectc51687.2025.00051-d-i1, field: pitch_um, value: 55, unit: um, basis: design_target, locator: "p.4 Fig. 6", note: "D2D pitch per point from the pitch band under the timeline (55um 2017/2018-2022, 45um 2024, 40um w/TSV 2025/6, 25um w/TSV 2027 & Future)"}
 derived: []
 conflicts: []
 excluded:
   - "Ref [9]: SI and bandwidth density analyses (20 Tb/s/mm) not entered"
   - "Capability claims without data: UCIe-A data rate scaling to 32 Gbps or higher, HBM4/4e integration (Sec. II); not entered as electrical_interfaces"
-  - "Roadmap values (Fig. 6, Sec. IV): package sizes ~50x50 to ~120x120 mm, ~250x250 mm, >12x reticle, 30+ bridges, 55/45/40/25 um pitch; product examples, no TV data"
+  - "Sec. IV outlook statements without a Fig. 6 point: package form factor ~50x50 mm to ~120x120 mm; HLFF ~250x250 mm and beyond"
   - "In-flight TVs (HLFF, 30+ bridges, >8X reticle top Si): data expected H2'25, not reported"
 not_reported:
   - electrical_interfaces, optical_interfaces, stack_layers
@@ -42,3 +45,4 @@ revisions:
   - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00051-F2-s01", change: "category: 'other' -> 'carrier_prep'", reason: "v008 category_other: substrate provision shown as Fig. 3 step (1) (convention: carrier_prep); build-up method not stated"}
   - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00051-F1-s06", change: "target: '' -> '45 um D2D interconnect pitch (TV a; TV c not stated)'", reason: "v008 target_missing a-i1: EMIB-T TV D2D interconnect pitch @ 45 um (p.4 Sec. IV)"}
   - {date: 2026-10-20, source: repass, row_id: "ectc51687.2025.00051-F2-s04", change: "target: '' -> '45 um bump pitch'", reason: "v008 target_missing b-i1: 45 um bump pitch EMIB example (p.2 Sec. III.A; Fig. 3 caption)"}
+  - {date: 2026-10-21, source: L25, row_id: "ectc51687.2025.00051-d;ectc51687.2025.00051-e;ectc51687.2025.00051-f;ectc51687.2025.00051-g;ectc51687.2025.00051-h;ectc51687.2025.00051-i;ectc51687.2025.00051-j;ectc51687.2025.00051-f06", change: "added Fig. 6 evolution points as TVs d-j (tv_kind other; j = projection, author_estimate) with bridge counts, D2D pitch, key figure f06; roadmap line in excluded narrowed", reason: "coordinator request (DevLog-013; L17 RESEARCH_SOTA_EMIB E7). Product names stay in notes (image captions, attribution ambiguous for 2024)"}

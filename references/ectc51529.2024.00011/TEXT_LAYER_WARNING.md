@@ -1,0 +1,2 @@
+text layer partly damaged (flagged 2026-10-21, DevLog-013 L16 follow-up L25): digit_ratio=0.0281, common_word_ratio=0.195; text.md is the PDF's own text layer (not replaced by tesseract OCR); verify numbers and units against figures/page_NN.png
+- Lost symbol glyph: the micro sign prints as 'P' on p.3 ('(roughly 20Pm) and extend at least 42Pm (35Pm of Cu and 7Pm') and p.6 ('at least 42Pm above the molded surface'); numbers are intact. No real 'μm' in the text layer.

@@ -1,0 +1,45 @@
+org_name,org_type,country,region,parent_org,notes
+A*STAR,government_lab,SG,southeast_asia,,"printed: A*STAR (Agency for Science, Technology and Research); parent of IME; merged names: Agency for Science, Technology and Research"
+A*STAR Institute of Microelectronics,research_institute,SG,southeast_asia,A*STAR,"printed: Institute of Microelectronics, A*STAR (Agency for Science, Technology and Research); merged names: Institute of Microelectronics, A*STAR"
+Amkor Technology,company,US,north_america,,"OSAT; printed: Amkor Technology; Amkor Technology,Inc.; Amkor Technology Korea is its own org (parent_org = this org)"
+AOI Electronics,company,JP,east_asia,,printed: AOI Electronics
+Apic Yamada,company,JP,east_asia,,printed: Apic Yamada; country from printed site
+Applied Materials,company,US,north_america,,"printed: Applied Materials, Inc.; merged names: Applied Materials, Inc."
+Applied Materials Singapore Technology,company,SG,southeast_asia,Applied Materials,printed: Applied Materials Singapore Technology Pte. Ltd
+Corning,company,US,north_america,,"printed: Corning Incorporated; Corning Technology Center Korea kept as unit (facility name, no legal entity printed)"
+Dai Nippon Printing,company,JP,east_asia,,"printed: DNP Co., Ltd.; merged names: Dai Nippon Printing Co., Ltd."
+Fraunhofer IZM,research_institute,DE,europe,Fraunhofer-Gesellschaft,printed: Fraunhofer-Institut fur Zuverlassigkeit und Mikrointegration (IZM); merged names: Fraunhofer Institute for Reliability and Microintegration IZM
+Fraunhofer-Gesellschaft,research_institute,DE,europe,,parent row only
+Georgia Institute of Technology,university,US,north_america,,printed: Georgia Institute of Technology; Georgia Intitute of Technology (sic)
+imec,research_institute,BE,europe,,"printed: imec; Imec, vzw"
+Institute of Science Tokyo,university,JP,east_asia,,printed: Institute of Science Tokyo
+Instituto de Telecomunicações,research_institute,PT,europe,,"printed: Instituto de Telecomunicações, University of Aveiro; no parent recorded"
+Korea Electronics Technology Institute,research_institute,KR,east_asia,,"printed: Korea Electronic Technology Institute, KETI"
+LPKF Laser & Electronics,company,DE,europe,,printed: LPKF Laser & Electronics AG
+Luleå University of Technology,university,SE,europe,,printed: Luleå Technical University (email domain ltu.se)
+MIRISE Technologies,company,JP,east_asia,,printed: MIRISE Technologies Corp.
+National Institute of Advanced Industrial Science and Technology,government_lab,JP,east_asia,,printed: National Institute of Advanced Industrial Science and Technology (AIST)
+National Institute of Information and Communications Technology,government_lab,JP,east_asia,,printed: National Institute of Information and Communications Technology; country not printed
+NEC,company,JP,east_asia,,printed: NEC Corporation
+Northrop Grumman,company,US,north_america,,printed: Northrop Grumman Corporation
+Onto Innovation,company,US,north_america,,printed: Onto Innovation Inc.
+OUME Electronics,company,JP,east_asia,,printed: OUME Electronics; country from printed site
+Panasonic,company,JP,east_asia,,"printed: Panasonic (Enns, Austria site); parent brand of Panasonic Industry and Panasonic System Networks R&D Lab.; country = HQ, not printed"
+Panasonic Industry,company,JP,east_asia,Panasonic,"printed: Panasonic Industry Co., Ltd.; no address printed"
+Panasonic System Networks R&D Lab.,company,JP,east_asia,Panasonic,"printed: Panasonic System Networks R&D Lab. Co., Ltd.; no address printed"
+Renesas Electronics,company,JP,east_asia,,printed: Renesas Electronics Corporation
+Samsung Electronics,company,KR,east_asia,,"printed: Samsung Electronics Co. Ltd; merged names: Samsung Electronics Co., Ltd."
+Shinko Electric Industries,company,JP,east_asia,,"printed: Shinko Electric Industries Co. Ltd.; Shinko Electric Industries Co., Ltd"
+Socionext,company,JP,east_asia,,printed: Socionext Inc.
+Sumitomo Bakelite,company,JP,east_asia,,printed: Sumitomo Bakelite; country from printed site
+TAZMO,company,JP,east_asia,,printed: TAZMO; country from printed site
+Technische Universität Berlin,university,DE,europe,,printed: Technische Universität Berlin
+Tokyo Institute of Technology,university,JP,east_asia,,printed: Tokyo Institute of Technology (2024 ECTC paper; predecessor of Institute of Science Tokyo)
+TSMC,foundry,TW,east_asia,,"printed: Taiwan Semiconductor Manufacturing Company Ltd.; Taiwan Semiconductor Manufacturing Company, Ltd.; Taiwan Semiconductor Manufacturing Company; TSMC; merged names: Taiwan Semiconductor Manufacturing Company"
+Tyndall National Institute,research_institute,IE,europe,University College Cork,"printed: Tyndall National Institute, University College Cork"
+Unimicron,company,TW,east_asia,,substrate maker; printed: Unimicron; Unimicron Technology Co.
+University College Cork,university,IE,europe,,parent of Tyndall National Institute as printed
+University of Aveiro,university,PT,europe,,printed: University of Aveiro
+"University of California, Los Angeles",university,US,north_america,,printed: UCLA
+"University of California, San Diego",university,US,north_america,,"printed: University of California, San Diego"
+Vrije Universiteit Brussel,university,BE,europe,,printed: Vrij Universiteit Brussels (VUB)

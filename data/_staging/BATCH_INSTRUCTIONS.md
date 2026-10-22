@@ -41,8 +41,10 @@ If your batch file has `mode` = `figures_only`, the paper is already in `data/`:
 `data/_staging/<batch>/figures.csv`. Do not write papers.csv, other tables or evidence.
 
 ## Source quality
-If `references/<paper_id>/TEXT_LAYER_WARNING.md` exists, the PDF text layer was garbled and `text.md` holds tesseract
-OCR of `figures/page_NN_220dpi.png`: verify every number against those images and note "OCR text" in papers.notes.
+If `references/<paper_id>/TEXT_LAYER_WARNING.md` exists, the PDF text layer was garbled. Its first line says which
+kind: either `text.md` holds tesseract OCR of `figures/page_NN_220dpi.png` (note "OCR text" in papers.notes), or
+`text.md` is the PDF's own partly damaged layer (lost unit glyphs, shifted duplicates; the warning lists pages). In
+both cases verify every number against the page images.
 Temporary files (crops, re-renders, helper scripts) go only in your own subfolder `<session scratchpad>/<batch>/`
 (the scratchpad is shared by parallel agents).
 

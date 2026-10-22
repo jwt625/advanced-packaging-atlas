@@ -1,0 +1,49 @@
+org_name,org_type,country,region,parent_org,notes
+A*STAR,government_lab,SG,southeast_asia,,"printed: A*STAR (Agency for Science, Technology and Research); parent of IME; merged names: Agency for Science, Technology and Research"
+A*STAR Institute of Microelectronics,research_institute,SG,southeast_asia,A*STAR,"printed: Institute of Microelectronics, A*STAR (Agency for Science, Technology and Research); merged names: Institute of Microelectronics, A*STAR"
+Aalto University,university,FI,europe,,printed: Aalto University
+Agency for Defense Development,government_lab,KR,east_asia,,printed: Agency for Defense Development; Daejeon
+Beijing Academy of Quantum Information Sciences,research_institute,CN,east_asia,,printed: Beijing Academy of Quantum Information Sciences
+Beijing Institute of Technology,university,CN,east_asia,,printed: Beijing Institute of Technology
+Beijing National Research Center for Information Science and Technology,research_institute,CN,east_asia,,printed: Beijing National Research Center for Information Science and Technology; host relation not printed
+Brewer Science,company,US,north_america,,"printed: Brewer Science, Inc."
+Bridgewater State University,university,US,north_america,,"printed: Bridgewater State University, Bridgewater, MA"
+Central South University,university,CN,east_asia,,"printed: Central South University, Changsha"
+Changsha Anmuquan Intelligent Technology,company,CN,east_asia,,"printed: Changsha Anmuquan intelligent Technology Co., LTD"
+Chinese Academy of Sciences,government_lab,CN,east_asia,,parent of IMECAS; not printed as a separate affiliation
+Eindhoven University of Technology,university,NL,europe,,"printed: Eindhoven Hendrik Casimir Institute, Eindhoven University of Technology"
+ELSPES,company,KR,east_asia,,printed: ELSPES Inc.
+EV Group,company,AT,europe,,printed: EV Group
+Fraunhofer IZM,research_institute,DE,europe,Fraunhofer-Gesellschaft,printed: Fraunhofer-Institut fur Zuverlassigkeit und Mikrointegration (IZM); merged names: Fraunhofer Institute for Reliability and Microintegration IZM
+Fraunhofer-Gesellschaft,research_institute,DE,europe,,parent row only
+Fukuoka University,university,JP,east_asia,,"printed: Fukuoka University, IMAP (Institute of Microelectronics Assembling and Packaging)"
+Georgia Institute of Technology,university,US,north_america,,printed: Georgia Institute of Technology; Georgia Intitute of Technology (sic)
+Georgia Tech Research Institute,research_institute,US,north_america,Georgia Institute of Technology,printed: Georgia Tech Research Institute (GTRI); parent from the printed name
+Hytek,company,DK,europe,,printed: Hytek; country from printed site
+imec,research_institute,BE,europe,,"printed: imec; Imec, vzw"
+IMT,other,IT,europe,,printed: IMT only (Rome); full name and type not printed
+"Institute of Microelectronics, Chinese Academy of Sciences",research_institute,CN,east_asia,Chinese Academy of Sciences,printed: The Institute of Microelectronics of the Chinese Academy of Sciences
+Intel,company,US,north_america,,printed: Intel Corporation; Intel Corp.; Intel Coporation (sic); merged names: Intel Corporation
+JSR,company,JP,east_asia,,printed: JSR Corporation
+KLA,company,US,north_america,,printed: KLA Corp
+Korea Electronics Technology Institute,research_institute,KR,east_asia,,"printed: Korea Electronic Technology Institute, KETI"
+LIG Nex1,company,KR,east_asia,,printed: LIG Nex1 Corporation
+Luleå University of Technology,university,SE,europe,,printed: Luleå Technical University (email domain ltu.se)
+Massachusetts Institute of Technology,university,US,north_america,,printed: Massachusetts Institute of Technology
+Panasonic,company,JP,east_asia,,"printed: Panasonic (Enns, Austria site); parent brand of Panasonic Industry and Panasonic System Networks R&D Lab.; country = HQ, not printed"
+Peking University,university,CN,east_asia,,printed: Peking University
+Pennsylvania State University,university,US,north_america,,printed: Pennsylvania State University
+Resonac,company,JP,east_asia,,printed: Resonac Corporation
+Somacis,company,IT,europe,,printed: Somacis; country from printed site
+SPIL,company,TW,east_asia,,"printed: Siliconware Precision Industries Co. Ltd.; SPIL; merged names: Siliconware Precision Industries Co., Ltd."
+Sumitomo Electric Industries,company,JP,east_asia,,"printed: Sumitomo Electric Industries, Ltd."
+Technische Universität Berlin,university,DE,europe,,printed: Technische Universität Berlin
+Thales Alenia Space,company,FR,europe,,printed: Thales Alenia Space; country from printed site (Toulouse)
+Tokyo Institute of Technology,university,JP,east_asia,,printed: Tokyo Institute of Technology (2024 ECTC paper; predecessor of Institute of Science Tokyo)
+Tsinghua University,university,CN,east_asia,,printed: Tsinghua University
+Tyndall National Institute,research_institute,IE,europe,University College Cork,"printed: Tyndall National Institute, University College Cork"
+Unimicron,company,TW,east_asia,,substrate maker; printed: Unimicron; Unimicron Technology Co.
+University College Cork,university,IE,europe,,parent of Tyndall National Institute as printed
+University of Oulu,university,FI,europe,,printed: University of Oulu
+USHIO,company,JP,east_asia,,printed: USHIO.Inc
+Yonsei University,university,KR,east_asia,,printed: Yonsei University

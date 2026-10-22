@@ -1,0 +1,4 @@
+text layer partly damaged (flagged 2026-10-21, DevLog-013 L16 follow-up L25): digit_ratio=0.0285, common_word_ratio=0.214; text.md is the PDF's own text layer (not replaced by tesseract OCR); verify numbers and units against figures/page_NN.png
+- Lost symbol glyph: the micro sign prints as 'P'; numbers are intact. 'P' = um on p.2, p.3, p.4 (e.g. p.2 '800 Pm' core, '30 Pm' prepreg, 'Ra of 0.2 Pm'; p.3 '20-30<U+0003>Pm', '200 Pm pitch GSG probe'); p.1, p.3 and p.6 also carry a real 'μm' in other lines.
+- Diameter sign as 'I' on p.4 ('a I30 Pm via' = phi 30 um via).
+- Headings and figure labels shifted +29 (U+0003 for space): p.1 '7HVW<U+0003>YHKLFOH' = 'Test vehicle', p.5 ',QVHUWLRQ<U+0003>ORVV' = 'Insertion loss', p.6 heading 'CONCLUSION AND FUTURE WORK'; stray U+0003 between words on p.1-p.6.

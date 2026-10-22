@@ -48,7 +48,7 @@ TOKENS = {
     "sap": "SAP", "msap": "mSAP", "abf": "ABF", "pid": "PID", "dfr": "DFR", "bcb": "BCB", "emc": "EMC",
     "tim": "TIM", "cuf": "CUF", "ncf": "NCF", "ncp": "NCP", "muf": "MUF", "uv": "UV", "ir": "IR",
     "c4": "C4", "bga": "BGA", "csp": "CSP", "pcb": "PCB", "coc": "CoC", "fop": "FOP", "wlp": "WLP",
-    "hbm": "HBM", "hbm2e": "HBM2E", "hbm3": "HBM3", "hbm3e": "HBM3E", "hbm4": "HBM4",
+    "hbm": "HBM", "hbm2": "HBM2", "hbm2e": "HBM2E", "hbm3": "HBM3", "hbm3e": "HBM3E", "hbm4": "HBM4",
     "soc": "SoC", "asic": "ASIC", "gpu": "GPU", "cpu": "CPU", "fpga": "FPGA", "dram": "DRAM",
     "sram": "SRAM", "io": "IO", "ipd": "IPD", "dtc": "DTC", "ivr": "IVR", "pic": "PIC", "eic": "EIC",
     "ucie": "UCIe", "bow": "BoW", "aib": "AIB", "aib2": "AIB2", "openhbi": "OpenHBI", "lipincon": "LiPiCon",

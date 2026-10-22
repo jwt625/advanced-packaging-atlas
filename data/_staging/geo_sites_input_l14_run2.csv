@@ -1,0 +1,4 @@
+org_name,locality,country,locality_query,locality_level,wikidata_search,nominatim_query,precision_override,label_override,override_note
+Northrop Grumman,"Baltimore, MD",US,,,,"7323 Aviation Blvd, Baltimore, MD",,,"L14 2026-10-21: printed street address; run 1 hit a different NG facility (Middle River, 16.7 km)"
+NEC,Kawasaki-shi,JP,,,,"1753 Shimonumabe, Nakahara-ku, Kawasaki",,,"L14 2026-10-21: printed street address; run 1 hit an NEC-named swimming club"
+Fukuoka University,"Itoshima, Fukuoka",JP,,,,"Itoshima, Fukuoka",city,,"L14 2026-10-21: printed city Itoshima; run 1 pinned the main campus in Fukuoka city (15.8 km)"

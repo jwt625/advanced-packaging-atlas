@@ -1,0 +1,4 @@
+site_id,org_name,locality,country,lat,lon,precision,source,source_ref,source_label,verified_on,notes
+northrop-grumman-baltimore-md,Northrop Grumman,"Baltimore, MD",US,39.3274,-76.42235,campus,nominatim,osm:node/9685869796,"Northrop Grumman, 701, Wilson Point Road, Stansbury Forest, Middle River, Baltimore County, Maryland, 21220, United States",2026-10-21,16.7 km from city centre
+onto-innovation-massachusetts,Onto Innovation,Massachusetts,US,42.37888,-72.03237,region,nominatim,,region centre: Massachusetts,2026-10-21,printed region only
+tyndall-national-institute-cork,Tyndall National Institute,Cork,IE,51.8976,-8.48371,campus,wikidata,Q16902157,Tyndall National Institute (Irish research centre in integrated information and communications technology hardware and systems),2026-10-21,0.8 km from city centre

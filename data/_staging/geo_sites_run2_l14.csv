@@ -1,0 +1,4 @@
+site_id,org_name,locality,country,lat,lon,precision,source,source_ref,source_label,verified_on,notes
+northrop-grumman-baltimore-md,Northrop Grumman,"Baltimore, MD",US,39.29088,-76.61076,city,nominatim,,"city centre: Baltimore, MD",2026-10-21,"institution not resolved; printed city centre; L14 2026-10-21: printed street address; run 1 hit a different NG facility (Middle River, 16.7 km)"
+nec-kawasaki-shi,NEC,Kawasaki-shi,JP,35.53066,139.70377,city,nominatim,,city centre: Kawasaki-shi,2026-10-21,institution not resolved; printed city centre; L14 2026-10-21: printed street address; run 1 hit an NEC-named swimming club
+fukuoka-university-itoshima-fukuoka,Fukuoka University,"Itoshima, Fukuoka",JP,33.55718,130.19623,city,nominatim,,"city centre: Itoshima, Fukuoka",2026-10-21,institution not resolved; printed city centre; L14 2026-10-21: printed city Itoshima; run 1 pinned the main campus in Fukuoka city (15.8 km)

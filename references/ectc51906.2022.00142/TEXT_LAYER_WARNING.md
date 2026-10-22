@@ -1,0 +1,3 @@
+text layer partly damaged (flagged 2026-10-21, DevLog-013 L16 follow-up L25): digit_ratio=0.0431, common_word_ratio=0.198; text.md is the PDF's own text layer (not replaced by tesseract OCR); verify numbers and units against figures/page_NN.png
+- Lost symbol glyph: the micro sign prints as 'P' on p.2, p.4, p.5; numbers are intact (e.g. p.2 '0.2 Pm was obtained', '30-Pm-thick prepreg', 'Line/Space = 10 Pm/10 Pm and 8 Pm/8 Pm'; p.4 'less than 0.5 Pm'; p.5 '10/10 Pm'); p.1 and p.6 carry a real 'μm'.
+- Figure labels shifted +29 on p.4 (U+0003 for space): '6KLQ\<U+0003>VLGH<U+0003>SUHVV' = 'Shiny side press', 'of VLP foil', 'Matt side press of', 'ETS foil', 'Insulation film'; stray U+0003 at sentence ends on p.2-p.5.

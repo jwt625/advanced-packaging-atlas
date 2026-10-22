@@ -19,6 +19,7 @@ entries:
   - {table: electrical_interfaces, row_id: ectc51909.2023.00174-d-e1, field: insertion_loss_db, value: 0.82, unit: dB, basis: measured, locator: "p.4 Fig. 9", note: "S21 ~-0.82 dB at 50 GHz, -0.25 dB at DC"}
   - {table: electrical_interfaces, row_id: ectc51909.2023.00174-e-e1, field: insertion_loss_db, value: 1.2, unit: dB, basis: measured, locator: "p.4 Fig. 9", note: "S21 ~-1.2 dB at 50 GHz, -0.34 dB at DC"}
   - {table: metrics, row_id: ectc51909.2023.00174-a-m10, field: value, value: 600, unit: uF, basis: author_estimate, locator: "p.3 Fig. 6", note: "label '600uF' at 3X reticle, '800uF' at 4X"}
+  - {table: test_vehicles, row_id: ectc51909.2023.00174-i, field: reticle_multiple, value: 4, unit: x, basis: author_estimate, locator: "p.1 Fig. 1", note: "dotted marker and dotted line = projection; under the CoWoS-L arrow only"}
 derived: []
 conflicts:
   - {table: test_vehicles, row_id: ectc51909.2023.00174-a, field: package_y_mm, values: [76, 78], locators: ["p.2 Sec. II.A text '70mm x 76mm'", "p.2 Fig. 3(a),(b) photo labels 70mm / 78mm"], chosen: 78, why: "photo (both panels) > text per rule k"}
@@ -30,7 +31,7 @@ excluded:
   - "CoWoS-S 2500 mm2 four-mask stitching and 3 SoC + 8 HBM qualification (refs [1,5])"
   - "typical CoWoS u-bump pitch around 30 to 60 um (generic CoWoS process description, not this TV)"
   - "MiM capacitor comparison '>50 times' (ref [9])"
-  - "Fig. 1 roadmap transistor counts; 1x reticle ~830 mm2 (25.52 x 32.52 mm) definition kept only implicitly via reticle_multiple"
+  - "Fig. 1 transistor counts of the 1.5X, 2X and 4X points (log-axis readings, unlabelled); only the 3X label '>1T transistor' entered"
 not_reported:
   - u-bump, TSV, TIV, C4 pitch/diameter/height/metallurgy and bonding conditions
   - RDL line/space and dielectric of RI front/back RDL; RI and LSI thicknesses; LSI sizes
@@ -65,3 +66,4 @@ revisions:
   - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00174-F4-s06", change: "step: 'Cu via on LSI top metal' -> 'Cu via fabricated on LSI top metal (connection to RI frontside RDL)'", reason: "audit_B 'structure-like' check: p.3 Sec. II.C states 'Finally, Cu Via is fabricated on the top metal of LSI', a fabrication step; kept, category other (formation method not stated)"}
   - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00174-F2", change: "build_seq 2 confirmed (no change)", reason: "TV b: Fig. 4(e)-(f) on-substrate then ring package; F1 (Fig. 4(a)-(e)) precedes F2 (p.2 Sec. II.B, Fig. 4)"}
   - {date: 2026-10-20, source: repass, row_id: "ectc51909.2023.00174-F3", change: "build_seq 3 confirmed (no change)", reason: "TV c: lid with film TIM attached to the CoW-on-substrate built by F1 (p.2 Sec. II.B); F1 precedes F3"}
+  - {date: 2026-10-21, source: L25, row_id: "ectc51909.2023.00174-f;ectc51909.2023.00174-g;ectc51909.2023.00174-h;ectc51909.2023.00174-i;ectc51909.2023.00174-f11", change: "added Fig. 1 roadmap points as TVs f-i (tv_kind other; i = projection, author_estimate), components, metric h-m1, key figure f11", reason: "coordinator request (DevLog-013; L17 RESEARCH_SOTA_COWOS D4)"}

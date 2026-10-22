@@ -1,0 +1,3 @@
+text layer partly damaged (flagged 2026-10-21, DevLog-013 L16): digit_ratio=0.0438, common_word_ratio=0.122; text.md is the PDF's own text layer (not replaced by tesseract OCR); verify numbers and units against figures/page_NN.png
+- Every page (p.1-p.8) holds a font-shifted copy (each character offset by 29 code points, spaces as control characters) (p.1 '6WXG\ RI )DEULFDWLRQ' = 'Study of Fabrication') plus a readable OCR-like copy with errors. source.json is not flagged garbled.
+- OCR-copy errors: um reads 'urn', '!-Lm' or '/lm' (p.1 '<1>75 /lm in 150 /lm pitch', '40 urn-bump pitch'; p.2 '8/8 urnin', '27 x 27 !-Lm2', table headers '[urn ]'); mm2 reads 'mm?' (p.1); the diameter sign reads '<1>' or '<jl' (p.1-p.2); merged words ('ofthe'); p.6 'f.\lotherboard'.

@@ -111,7 +111,7 @@ enums:
                   underfill, dicing, singulation, reflow, assembly, fiber_prep, laser_marking, preconditioning,
                   inspection, test, cleaning, bumping, rdl_layer, degas, descum, carrier_prep, device_fab,
                   ion_exchange, laser_modification, other]
-  protocol: [ucie_s, ucie_a, ucie_3d, bow, aib, aib2, openhbi, lipincon, hbm2e, hbm3, hbm3e, hbm4, xsr, usr, mr, lr,
+  protocol: [ucie_s, ucie_a, ucie_3d, bow, aib, aib2, openhbi, lipincon, hbm2, hbm2e, hbm3, hbm3e, hbm4, xsr, usr, mr, lr,
              pcie, cxl, ethernet_serdes, nvlink, custom, other, unspecified]
   channel_type: [si_interposer_rdl, organic_rdl, si_bridge, substrate, hybrid_bond_3d, microbump_3d, glass,
                  optical_fiber, optical_waveguide, pcb, other, unspecified]
@@ -139,6 +139,10 @@ enums:
   region: [north_america, south_america, europe, east_asia, south_asia, southeast_asia, middle_east, oceania, africa]
   site_precision: [building, campus, postcode, city, region, unresolved]
   site_source: [wikidata, nominatim, manual, none]
+  # papers.venue (2026-10-21, DevLog-013 L16): venue acronym only (year is its own column; no edition, pages, vol/no).
+  # Keys of config/venues.yaml + Crossref venues (IMAPS, IWLPC) + ICEPT (Intl. Conf. on Electronic Packaging
+  # Technology, distinct from ICEP). Checked by scripts/validate_db.py; the column itself stays type str.
+  venue: [ECTC, TCPMT, EPTC, 3DIC, IEDM, VLSI, EDAPS, EPEPS, IRPS, ITherm, ICEP, ESTC, EMPC, IWLPC, IMAPS, ICEPT]
 
 common: &common
   basis: {type: enum, enum: basis, required: true}

@@ -1,0 +1,3 @@
+text layer partly damaged (flagged 2026-10-21, DevLog-013 L16): digit_ratio=0.0386, common_word_ratio=0.13; text.md is the PDF's own text layer (not replaced by tesseract OCR); verify numbers and units against figures/page_NN.png
+- p.1 holds a font-shifted copy (each character offset by 29 code points, spaces as control characters) (title '%DFNVLGH 3RZHU 'HOLYHU\' = 'Backside Power Delivery') plus a readable OCR-like copy with digit errors (OCR copy reads 'Inuohm-cm' where the render shows 'Mo 10 uohm-cm').
+- p.2 is OCR-like only, with errors: 'TSY' for 'TSV' throughout ('nTSY', 'Kelvin resistance as a function of TSY'); 'F i ~.8' for 'Fig. 8'; '36n tl1' for '36 nm' (caption 'BPR/top nTSV CD'); broken words ('pattemed', 'lillin').
