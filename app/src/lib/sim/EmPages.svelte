@@ -14,11 +14,11 @@
 	const em = $derived(wb.run?.result.em as Record<string, any> | undefined);
 	const fam = $derived((wb.run?.result.type === 'em3d_sparams' ? 'em3d' : 'em2d') as 'em2d' | 'em3d');
 	const variants = $derived(((em?.variants ?? (em ? [em] : [])) as Record<string, any>[]));
-	let vi = $state(0);
 	let bi = $state(0);
 	let pairs = $state<string[]>(['0,0', '1,0']);
 	let logX = $state(false);
-	const v = $derived(variants[Math.min(vi, variants.length - 1)] ?? null);
+	// the variant is workbench state: the em2d section canvas draws the same variant (L24 O7)
+	const v = $derived(variants.find((x) => (x.variant ?? 'base') === wb.emVariant) ?? variants[0] ?? null);
 	const blocks = $derived(v ? sBlocks(v, fam) : []);
 	const b = $derived(blocks[Math.min(bi, blocks.length - 1)] ?? null);
 	const n = $derived(b?.ports.length ?? 0);
@@ -32,9 +32,10 @@
 	});
 	const allPairs = $derived(Array.from({ length: n * n }, (_, k) => `${Math.floor(k / n)},${k % n}`));
 	const sel = $derived(pairs.filter((p) => allPairs.includes(p)));
-	const lab = (p: string) => { const [i, j] = p.split(',').map(Number); return `S${i + 1}${j + 1}`; };
+	// entry label with the matrix name (S11, or Sdd11 / Scc21 / Sdc21 / Scd12 for mixed-mode blocks; L24 O7)
+	const lab = (p: string) => { const [i, j] = p.split(',').map(Number); return `${b?.name ?? 'S'}${i + 1}${j + 1}`; };
 	const series = $derived(b ? sel.map((p) => { const [i, j] = p.split(',').map(Number); return { p, ...sSeries(b, i, j) }; }) : []);
-	const smith = $derived(b ? Array.from({ length: n }, (_, i) => ({ name: `S${i + 1}${i + 1}`, f: b.f_GHz, g: sSeries(b, i, i).z })) : []);
+	const smith = $derived(b ? Array.from({ length: n }, (_, i) => ({ name: `${b.name}${i + 1}${i + 1}`, f: b.f_GHz, g: sSeries(b, i, i).z })) : []);
 	let rk = $state<'R_ohm_per_m' | 'L_H_per_m' | 'G_S_per_m' | 'C_F_per_m'>('R_ohm_per_m');
 	const RL: Record<string, [string, number, string]> = { R_ohm_per_m: ['R', 1, 'Ω/m'], L_H_per_m: ['L', 1e9, 'nH/m'], G_S_per_m: ['G', 1, 'S/m'], C_F_per_m: ['C', 1e12, 'pF/m'] };
 	const nSig = $derived(Math.round(Math.sqrt((v?.derived?.rlgc?.[0]?.R_ohm_per_m ?? [0]).length)));
@@ -50,7 +51,7 @@
 	<p class="muted">No EM result. Compute the case.</p>
 {:else}
 	<div class="row">
-		<label class="f" data-tip="Case variant (variants block; base = the case as written)">variant <select bind:value={vi} aria-label="Variant">{#each variants as x, i}<option value={i}>{x.variant ?? 'base'}{x.title && x.title !== x.variant ? ` · ${x.title}` : ''}</option>{/each}</select></label>
+		<label class="f" data-tip="Case variant (variants block; base = the case as written)">variant <select bind:value={wb.emVariant} aria-label="Variant">{#each variants as x}<option value={x.variant ?? 'base'}>{x.variant ?? 'base'}{x.title && x.title !== x.variant ? ` · ${x.title}` : ''}</option>{/each}</select></label>
 		{#if node === 'res.em.s' || node === 'res.em.smith'}
 			<label class="f" data-tip="Network: per line (single-ended), mixed-mode blocks (Sdd / Scc / Sdc / Scd), or the 3D block: S at zref (de-embedded per the run's method) or the solver S referenced to Re Z0 of each terminal before renormalization (SPEC 14.1, 14.5)">network <select bind:value={bi} aria-label="Network">{#each blocks as x, i}<option value={i}>{x.label}</option>{/each}</select></label>
 		{/if}

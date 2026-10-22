@@ -92,6 +92,9 @@ export class Workbench {
 	selectedParts = $state<string[]>([]);
 	hoverPart = $state<string | null>(null);
 	zoomRequest = $state(0);
+	/** Incremented on every case load: geometry and presets reload even when the new case has the same family,
+	 * params and geometry block as the previous one (equal derived keys do not re-trigger the effects; L24 G1). */
+	loadSeq = $state(0);
 	// runs
 	run = $state.raw<RunRecord | null>(null);
 	studyId = $state('');
@@ -141,9 +144,15 @@ export class Workbench {
 	cutExpr = $state<FieldExpr>('T');
 	cutLine = $state.raw<{ axis: 'x' | 'y' | 'z'; at: [number, number, number]; s: Float64Array; v: Float64Array } | null>(null);
 	/** First field paint after the result arrived (ms), and the last surface / slice worker times. */
-	paint = $state<{ firstMs: number | null; surfaceMs: number | null; sliceMs: number | null; faces: number }>({ firstMs: null, surfaceMs: null, sliceMs: null, faces: 0 });
+	paint = $state<{ firstMs: number | null; surfaceMs: number | null; sliceMs: number | null; faces: number; isoFaces?: number | null }>({ firstMs: null, surfaceMs: null, sliceMs: null, faces: 0 });
+	/** Mesh edges switched on by the Mesh plot group, not by the user: the field plot groups switch them off again
+	 * (L24 G14; workbench state so a ModelTree remount keeps it, audit A10 M5). */
+	meshWire = $state(false);
+	/** EM variant shown on the result pages and on the em2d section canvas ('base' = the case as written; L24 O7). */
+	emVariant = $state('base');
 	private jobId = 0;
 	private genSeq = 0;
+	private presetSeq = 0;
 
 	parsed: { raw: Raw | null; error: string } = $derived.by(() => {
 		if (!this.text) return { raw: null, error: '' };
@@ -251,6 +260,7 @@ export class Workbench {
 		this.gview = 'geometry';
 		this.probes = [];
 		this.cutLine = null;
+		this.emVariant = 'base';
 	}
 
 	/** Load a case text and apply URL overrides. */
@@ -270,6 +280,7 @@ export class Workbench {
 		this.fromFile = fromFile;
 		this.text = t;
 		this.baseText = text;
+		this.loadSeq++;
 		this.zoomRequest++;
 	}
 
@@ -367,6 +378,8 @@ export class Workbench {
 		// detach so the next Compute does not terminate it
 		this.worker = null;
 		this.post = null;
+		// the main view holds no field until B arrives (A is drawn next to B then; L24 G10)
+		if (this.gview === 'field') this.gview = 'geometry';
 		this.compareMode = 'side';
 		this.addLog(`Pinned run ${this.run.study} (${new Date(this.run.at).toISOString()}) as A; Compute again for B`);
 	}
@@ -376,6 +389,32 @@ export class Workbench {
 		this.compareA?.worker.terminate();
 		this.compareA = null;
 		this.compareMode = 'off';
+	}
+
+	/** Why difference B - A is not available (null = available): both runs thermal (nodal T, the worker's dT op)
+	 * on identical grids (audit A10 M3: A was not checked). */
+	get diffBlock(): string | null {
+		const a = this.compareA?.run.result, b = this.run?.result;
+		if (!a || !b) return 'needs a pinned run A and a run B with fields';
+		if (a.mech || b.mech || !a.fields?.T_K || !b.fields?.T_K) return `difference of temperature fields only (A ${a.mech ? 'mechanics' : 'thermal'}, B ${b.mech ? 'mechanics' : 'thermal'})`;
+		if (!this.gridsMatch) return 'grids differ';
+		return null;
+	}
+
+	/** A pinned probe lies on a drawn copy: the solved domain of a symmetry crop (x >= 0 and / or y >= 0) is always
+	 * drawn, mirrored copies only while the mirror is on (L24 O1). */
+	probeDrawn(q: { x: number; y: number }): boolean {
+		if (this.pg.mirror) return true;
+		const sym = this.run?.symmetry ?? 'none';
+		const mx = sym === 'half_x' || sym === 'quarter', my = sym === 'half_y' || sym === 'quarter';
+		return !(mx && q.x < -1e-9) && !(my && q.y < -1e-9);
+	}
+
+	/** Switch off mesh edges that the Mesh plot group switched on (a user's own setting is kept; L24 G14). */
+	dropMeshWire() {
+		if (!this.meshWire) return;
+		this.pg.wire = false;
+		this.meshWire = false;
 	}
 
 	/** A and B solved on identical grids (difference plot possible). */
@@ -422,6 +461,9 @@ export class Workbench {
 			this.genError = '';
 			return;
 		}
+		// generator families need package3d.json (data); the key includes !!p3d, so this runs again once it loaded
+		// (a run before it threw an empty issue list: a "Geometry not regenerated" flash on first load; L24)
+		if (!this.p3d) return;
 		const seq = ++this.genSeq;
 		try {
 			const g = await generate(fam, params, this.family, this.p3d);
@@ -441,7 +483,7 @@ export class Workbench {
 				this.generated = prev ? { ...prev, warnings: e.issues } : { params: {}, parts: [], warnings: e.issues, source: 'engine', ms: 0 };
 				this.genError = '';
 				this.genFailed = true;
-				this.addLog(`Geometry not regenerated: ${e.issues.map((i) => i.message).join('; ')}`, 'warn');
+				this.addLog(`Geometry not regenerated: ${e.issues.map((i) => i.message).join('; ') || e.message}`, 'warn');
 				return;
 			}
 			this.genError = e instanceof Error ? e.message : String(e);
@@ -451,12 +493,17 @@ export class Workbench {
 
 	async refreshPresets() {
 		const fam = this.familyId;
-		this.presetList = fam ? await loadPresets(fam).catch(() => []) : [];
+		// a reply for an earlier case must not overwrite the presets of the current one (audit A10 M4)
+		const seq = ++this.presetSeq;
+		const list = fam ? await loadPresets(fam).catch(() => []) : [];
+		if (seq === this.presetSeq) this.presetList = list;
 	}
 
 	private stopWorker() {
 		this.post?.dispose();
 		this.post = null;
+		// no field is held any more: the graphics toggle must not stay on a disabled "result" (L24 G10)
+		if (this.gview === 'field') this.gview = 'geometry';
 		if (this.worker) {
 			this.worker.onmessage = null;
 			this.worker.onerror = null;
@@ -548,7 +595,14 @@ export class Workbench {
 					}
 					this.post = new PostClient(w);
 					this.gview = 'field';
+					const why = this.compareMode === 'diff' ? this.diffBlock : null;
+					if (why) {
+						// B - A needs thermal A and B on identical grids: fall back to side by side and say why (L24 G6, A10 M3)
+						this.compareMode = 'side';
+						this.addLog(`Compare: difference B - A off (${why}); side by side shown`, 'warn');
+					}
 					if (d.result.mech) {
+						this.dropMeshWire();
 						this.pg.expr = 'uz';
 						this.pg.scale = 'linear';
 						this.pg.point = Math.max(0, d.result.mech.points.findIndex((p) => p.fields !== false));
@@ -558,14 +612,16 @@ export class Workbench {
 					} else {
 						if (this.pg.expr !== 'T' && this.pg.expr !== 'cellsize') this.pg.expr = 'T';
 						this.pg.deform = false;
-						if (!this.node.startsWith('res')) this.node = 'res.T';
+						// a mechanics page left open from an earlier run would show its placeholder (L24 G18)
+						if (!this.node.startsWith('res') || ['res.disp', 'res.vm', 'res.warp'].includes(this.node)) this.node = 'res.T';
 					}
 					return;
 				} else if (d.type === 'error') {
-					this.error = d.message;
+					// draft studies (template loads) can heat a model past the material data range: say what to change
+					this.error = /outside valid_T_C/.test(d.message) && this.raw?.status === 'draft' ? `${d.message}. Draft study with template loads: lower physics.thermal.sources[0].power_W or raise the HTC in the YAML tab.` : d.message;
 					this.progress = 'Stopped';
 					this.progressRows = [...this.progressRows, { t: Date.now(), level: 'error', msg: d.message }];
-					this.addLog(`Compute failed: ${d.message}`, 'error');
+					this.addLog(`Compute failed: ${this.error}`, 'error');
 				}
 				this.stopWorker();
 				this.busy = null;

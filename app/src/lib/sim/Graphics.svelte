@@ -19,6 +19,7 @@
 	import { colormapLut } from './colormap';
 	import { drawLegend, legendTip, LEGEND_W, type LegendSpec } from './colorbar';
 	import { StaleReply } from './postClient';
+	import { loadModule } from './engine';
 	import type { SurfaceOut } from './post';
 	import { fieldDisplay } from './results';
 	import type { PostClient } from './postClient';
@@ -79,6 +80,59 @@
 		return Number.isFinite(x0) ? { x0, x1, y0, y1 } : { x0: -1, x1: 1, y0: -1, y1: 1 };
 	});
 	const clipRange = $derived(wb.clipAxis === 'x' ? [extent.x0, extent.x1] : [extent.y0, extent.y1]);
+	// a section position from another case or the other axis can lie outside this model, which trims every box away
+	// (blank view, degenerate camera fit): re-centre it once the parts exist (L24 G7)
+	$effect(() => {
+		const [lo, hi] = clipRange;
+		if (!wb.parts.length) return;
+		const p = untrack(() => wb.clipPos);
+		if (!(p >= lo && p <= hi)) wb.clipPos = Number(((lo + hi) / 2).toPrecision(6));
+	});
+	// slice position inside the result grid along the slice normal (was only enforced while a Results page was open)
+	$effect(() => {
+		const g = wb.run?.result.grid;
+		const a = !g ? null : wb.pg.sliceAxis === 'x' ? g.xs : wb.pg.sliceAxis === 'y' ? g.ys : g.zs;
+		if (!a?.length) return;
+		const lo = a[0] * 1e3, hi = a[a.length - 1] * 1e3;
+		const p = untrack(() => wb.pg.slicePos);
+		if (!(p >= lo && p <= hi)) wb.pg.slicePos = Number(((lo + hi) / 2).toPrecision(6));
+	});
+
+	// em2d section of the selected variant: the runner's own patch (engine em2d applyPatch) on the case em2d block (L24 O7)
+	let emSec = $state.raw<{ id: string; section: Record<string, unknown> | null; err: string } | null>(null);
+	$effect(() => {
+		const e = wb.isEm && wb.emFamily === 'em2d' ? (wb.raw?.em2d as Record<string, unknown> | undefined) : undefined;
+		const id = wb.emVariant;
+		const v = id === 'base' ? null : ((e?.variants ?? []) as Record<string, unknown>[]).find((x) => x?.id === id);
+		if (!e || !v?.patch) {
+			emSec = null;
+			return;
+		}
+		let live = true;
+		const mod = loadModule('em2d');
+		if (!mod) {
+			emSec = { id, section: null, err: 'engine/src/em2d is not in this build' };
+			return;
+		}
+		mod.then((m) => {
+			if (!live) return;
+			try {
+				const out = (m.applyPatch as (b: unknown, p: unknown) => Record<string, unknown>)(e, v.patch);
+				emSec = { id, section: (out.section as Record<string, unknown>) ?? null, err: '' };
+			} catch (err) {
+				emSec = { id, section: null, err: err instanceof Error ? err.message : String(err) };
+			}
+		});
+		return () => {
+			live = false;
+		};
+	});
+	const emVariants = $derived(((wb.raw?.em2d?.variants ?? []) as unknown[]).length);
+
+	// edges switched on by the Mesh plot group go off with any other expression (L24 G14, A10 M5)
+	$effect(() => {
+		if (wb.pg.expr !== 'cellsize') untrack(() => wb.dropMeshWire());
+	});
 
 	// ---- result field (U2) ------------------------------------------------------------------------------------
 	const fieldOn = $derived(wb.gview === 'field' && !!wb.post);
@@ -96,6 +150,7 @@
 			v.setFieldMode(true);
 			v.setBackground(getComputedStyle(hostA).getPropertyValue('--bg'));
 			viewerA = v;
+			if (debug) (window as unknown as Record<string, unknown>).__simViewerA = v;
 		} else if (!sideOn && viewerA) {
 			viewerA.dispose();
 			viewerA = null;
@@ -122,12 +177,17 @@
 	$effect(() => {
 		if (!viewerA) return;
 		viewerA.setKz(wb.kz);
-		viewerA.field.setLayers(layersA.map((l) => ({ data: l.data, opacity: l.kind === 'iso' ? 0.85 : 1, wire: false, scale: l.scale })));
-		if (range) viewerA.field.setStyle({ table: wb.pg.table, reverse: wb.pg.reverse, min: range.min, max: range.max, log: wb.pg.scale === 'log', affA: disp.a, affB: disp.b, dscale: 0 }, ui.theme === 'dark');
+		viewerA.field.setLayers(layersA.map((l) => ({ data: l.data, opacity: l.kind === 'iso' ? 0.85 : 1, wire: false, scale: l.scale, clip: l.kind !== 'surface' })));
+		// one colour range only when A and B show the same quantity; else A keeps its own automatic range (L24 G17)
+		const rA = sameQtyA ? range : rangeA;
+		const dA = sameQtyA ? disp : dispA;
+		if (rA) viewerA.field.setStyle({ table: wb.pg.table, reverse: wb.pg.reverse, min: rA.min, max: rA.max, log: sameQtyA && wb.pg.scale === 'log', affA: dA.a, affB: dA.b, dscale: 0 }, ui.theme === 'dark');
 		syncA();
 	});
 	let fieldErr = $state('');
-	const disp = $derived(fieldDisplay(wb.compareMode === 'diff' && wb.compareA && wb.gridsMatch && !wb.run?.result.mech ? 'dT' : wb.pg.expr, wb.pg.unit));
+	// difference only when A and B are both thermal on the same grid (wb.diffBlock; audit A10 M3)
+	const diffOn = $derived(wb.compareMode === 'diff' && !wb.diffBlock);
+	const disp = $derived(fieldDisplay(diffOn ? 'dT' : wb.pg.expr, wb.pg.unit));
 	const debug = typeof location !== 'undefined' && new URLSearchParams(location.search).get('debug') === '1';
 	/** Display transforms: identity plus the mirrored copies of a symmetry crop (x = 0 and / or y = 0 planes). */
 	function transformsOf(sym: string): [number, number][] {
@@ -138,15 +198,7 @@
 		if (mx && my) out.push([-1, -1]);
 		return out;
 	}
-	const transforms = $derived.by((): [number, number][] => {
-		const sym = wb.run?.symmetry ?? 'none';
-		const mx = wb.pg.mirror && (sym === 'half_x' || sym === 'quarter'), my = wb.pg.mirror && (sym === 'half_y' || sym === 'quarter');
-		const out: [number, number][] = [[1, 1]];
-		if (mx) out.push([-1, 1]);
-		if (my) out.push([1, -1]);
-		if (mx && my) out.push([-1, -1]);
-		return out;
-	});
+	const transforms = $derived(transformsOf(wb.run?.symmetry ?? 'none'));
 	// requests per display transform: the clip / slice plane is mapped into the data frame of each copy, so a
 	// section through a mirrored model is cut where it is drawn (a newer request on a channel drops the older reply)
 	type LayerReq = { expr: FieldExpr; surface: boolean; slice: boolean; ax: 'x' | 'y' | 'z'; pos: number; clip: { axis: 'x' | 'y' | 'z'; pos_m: number; keep: '+' | '-' } | null; synthetic: boolean; point: number; iso: number[] | null };
@@ -178,10 +230,19 @@
 	});
 	// range (SI) of the surface / slice layers, for automatic iso levels (iso layers excluded)
 	let layerRange = $state.raw<[number, number] | null>(null);
-	const diffOn = $derived(wb.compareMode === 'diff' && !!wb.compareA && wb.gridsMatch && !wb.run?.result.mech);
-	let refSent: unknown = null;
+	/** Display copies of the last fitted field layers (camera refit when they change). */
+	let copiesFit = '';
+	/** A's reference field as last sent, per B client: a new B worker (recompute) needs it again (L24 G5). */
+	let refSent: { post: PostClient; ref: unknown } | null = null;
+	let layersOf: PostClient | null = null;
 	$effect(() => {
 		const post = wb.post;
+		if (post !== layersOf) {
+			// layers of another solution (previous run, case) must not be drawn or ranged while the new ones load
+			layersOf = post;
+			layers = [];
+			layerRange = null;
+		}
 		if (!fieldOn || !post) return;
 		const pg = wb.pg;
 		const req: LayerReq = {
@@ -192,7 +253,7 @@
 		const tr = transforms;
 		// difference A - B: A's nodal T is sent once to B's worker
 		const refT = diffOn ? (wb.compareA!.run.result.fields.T_K ?? null) : null;
-		const pre = diffOn && refSent !== refT ? post.request({ op: 'setRef', field: refT ? Float64Array.from(refT) : null }, 'setRef').then(() => (refSent = refT)) : Promise.resolve();
+		const pre = diffOn && (refSent?.post !== post || refSent.ref !== refT) ? post.request({ op: 'setRef', field: refT ? Float64Array.from(refT) : null }, 'setRef').then(() => (refSent = { post, ref: refT })) : Promise.resolve();
 		pre
 			.then(() => requestLayers(post, req, tr, ''))
 			.then((ls) => {
@@ -204,6 +265,8 @@
 				wb.paint.surfaceMs = surf.length ? Math.max(...surf.map((l) => l.data.ms)) : null;
 				wb.paint.sliceMs = sl.length ? Math.max(...sl.map((l) => l.data.ms)) : null;
 				wb.paint.faces = ls.reduce((a, l) => a + l.data.faces, 0);
+				// iso requested but no level crosses the field: the page says so instead of drawing nothing silently
+				wb.paint.isoFaces = req.iso?.length ? ls.filter((l) => l.kind === 'iso').reduce((a, l) => a + l.data.faces, 0) : null;
 			})
 			.catch((e) => {
 				if (!(e instanceof StaleReply)) fieldErr = e instanceof Error ? e.message : String(e);
@@ -211,8 +274,9 @@
 		// side-by-side A: same requests on A's worker (A keeps its own expression set: T or uz)
 		if (wb.compareMode === 'side' && wb.compareA && viewerA) {
 			const a = wb.compareA;
-			const exprA: FieldExpr = a.run.result.mech ? (req.expr === 'T' ? 'uz' : req.expr) : req.expr === 'uz' || req.expr === 'umag' || req.expr === 'vm' ? 'T' : req.expr;
-			requestLayers(a.post, { ...req, expr: exprA, synthetic: false }, transformsOf(a.run.symmetry), 'A:')
+			const exprA = exprAOf(a.run.result.mech, req.expr);
+			const nA = a.run.result.mech?.points.length ?? 1;
+			requestLayers(a.post, { ...req, expr: exprA, synthetic: false, point: Math.max(0, Math.min(req.point, nA - 1)) }, transformsOf(a.run.symmetry), 'A:')
 				.then((ls) => (layersA = ls))
 				.catch(() => {});
 		}
@@ -231,13 +295,27 @@
 	$effect(() => {
 		if (!viewer) return;
 		const L = Math.max(extent.x1 - extent.x0, extent.y1 - extent.y0);
-		viewer.field.arrows.set(arrowData, { maxLen: 0.06 * L, normalized: wb.pg.arrowNorm, table: wb.pg.table, reverse: wb.pg.reverse, log: false, kz: wb.kz, transforms });
+		viewer.field.arrows.set(arrowData, { maxLen: 0.06 * L, normalized: wb.pg.arrowNorm, table: wb.pg.table, reverse: wb.pg.reverse, log: false, kz: wb.kz, transforms, clip: wb.clipOn ? { axis: wb.clipAxis, pos_mm: wb.clipPos } : null });
 		viewer.requestRender();
+	});
+	/** Expression drawn for run A (A keeps its own expression set: T, or uz / |u| / vM for mechanics). */
+	function exprAOf(mech: unknown, e: FieldExpr): FieldExpr {
+		return mech ? (e === 'T' ? 'uz' : e) : e === 'uz' || e === 'umag' || e === 'vm' ? 'T' : e;
+	}
+	const exprA = $derived(wb.compareA ? exprAOf(wb.compareA.run.result.mech, wb.pg.expr) : null);
+	const sameQtyA = $derived(exprA === wb.pg.expr);
+	const dispA = $derived(fieldDisplay(exprA ?? wb.pg.expr, wb.pg.unit));
+	const rangeA = $derived.by(() => {
+		let lo = Infinity, hi = -Infinity;
+		for (const l of layersA) { if (l.kind === 'iso') continue; lo = Math.min(lo, l.data.range[0]); hi = Math.max(hi, l.data.range[1]); }
+		if (!Number.isFinite(lo)) return null;
+		const a = lo * dispA.a + dispA.b, b = hi * dispA.a + dispA.b;
+		return a === b ? { min: a - 0.5, max: b + 0.5 } : { min: a, max: b };
 	});
 	// automatic range over the shown layers (display units)
 	const autoRange = $derived.by(() => {
 		let lo = Infinity, hi = -Infinity;
-		const shared = wb.compareMode === 'side' && wb.compareA ? layersA : [];
+		const shared = wb.compareMode === 'side' && wb.compareA && sameQtyA ? layersA : [];
 		for (const l of [...layers, ...shared]) { if (l.kind === 'iso') continue; lo = Math.min(lo, l.data.range[0]); hi = Math.max(hi, l.data.range[1]); }
 		if (!Number.isFinite(lo)) return null;
 		const a = lo * disp.a + disp.b, b = hi * disp.a + disp.b;
@@ -261,7 +339,11 @@
 		viewer.setFieldMode(fieldOn);
 		const both = wb.pg.slice && wb.pg.surface;
 		const isoOn = layers.some((l) => l.kind === 'iso');
-		viewer.field.setLayers(layers.map((l) => ({ data: l.data, opacity: (both || isoOn) && l.kind === 'surface' ? 0.25 : l.kind === 'iso' ? 0.85 : 1, wire: wb.pg.wire && l.kind !== 'iso', scale: l.scale })));
+		viewer.field.setLayers(layers.map((l) => ({ data: l.data, opacity: (both || isoOn) && l.kind === 'surface' ? 0.25 : l.kind === 'iso' ? 0.85 : 1, wire: wb.pg.wire && l.kind !== 'iso', scale: l.scale, clip: l.kind !== 'surface' })));
+		// the drawn copies changed (mirror toggled): refit the camera to the new extent (L24 O1)
+		const copies = [...new Set(layers.map((l) => l.scale.join(',')))].sort().join(' ');
+		if (fieldOn && layers.length && copiesFit && copies !== copiesFit) viewer.preset(wb.view);
+		if (fieldOn && layers.length) copiesFit = copies;
 		const surf = layers.find((l) => l.kind === 'surface')?.data;
 		if (fieldOn && surf)
 			untrack(() => {
@@ -328,10 +410,19 @@
 	});
 	$effect(() => {
 		if (!viewer) return;
-		viewer.setClip(wb.clipOn ? { axis: wb.clipAxis, pos_mm: wb.clipPos } : null);
+		const c = wb.clipOn ? { axis: wb.clipAxis, pos_mm: wb.clipPos } : null;
+		viewer.setClip(c);
+		viewer.field.setClip(c);
+		viewerA?.field.setClip(c);
 	});
 	$effect(() => {
 		viewer?.setKz(wb.kz);
+	});
+	// pins are drawn on the overlay: repaint when they change (Clear, programmatic edits) or the mirror toggles (L24 O1)
+	$effect(() => {
+		void wb.probes;
+		void wb.pg.mirror;
+		viewer?.requestRender();
 	});
 	$effect(() => {
 		viewer?.setSelected(wb.hoverPart ? [...wb.selectedParts, wb.hoverPart] : wb.selectedParts);
@@ -374,6 +465,7 @@
 			ctx.fillStyle = cs.getPropertyValue('--accent');
 			ctx.strokeStyle = ui.theme === 'dark' ? '#000' : '#fff';
 			wb.probes.forEach((q, i) => {
+				if (!wb.probeDrawn(q)) return; // pin on a mirrored copy that is not drawn (L24 O1)
 				const s = viewer!.project(q.x, q.y, q.z * 1000);
 				ctx.beginPath(); ctx.arc(s.x, s.y, 4, 0, 2 * Math.PI); ctx.fill(); ctx.stroke();
 				ctx.fillText(String(i + 1), s.x + 6, s.y - 4);
@@ -486,12 +578,13 @@
 			{#if wb.stale.any && (fieldOn || wb.stale.geometry)}<span class="b warn" data-tip="Inputs changed since the last Compute; the result shown belongs to the previous run">stale</span>{/if}
 			{#if fieldOn && wb.raw?.status === 'draft'}<span class="b warn" data-tip="Draft case: template loads and labelled material substitutions (Model node, assumptions); a UI exercise, not a prediction">draft inputs</span>{/if}
 			{#if fieldOn && wb.pg.mirror && wb.run?.symmetry && wb.run.symmetry !== 'none'}<span class="b muted" data-tip="The model is a symmetry crop ({wb.run.symmetry}); mirrored copies are display only (COMSOL Mirror 3D)">mirrored ({wb.run.symmetry})</span>{/if}
+			{#if sideOn}<span class="b muted" data-tip="Current run B (Compute); pinned run A in the right pane">B · {wb.caseId} · {wb.run?.study ?? '-'}</span>{/if}
 			{#if fieldOn}<span class="b muted" data-tip="Triangles drawn (surface + slice, including mirrored copies)">{(wb.paint.faces * 2).toLocaleString()} tris</span>{:else}<span class="b muted" data-tip="Boxes in the grid input (parts, layer boxes, homogenized arrays)">{wb.parts.length} boxes</span>{/if}
 		</div>
 		<span class="legend" class:hide={fieldOn} data-tip="Edges: solid = w, d, h all non-template; dashed = some or all template (fill desaturated when all template); accent = user-edited"><i class="e solid"></i>R/D<i class="e dashed"></i>T<i class="e user"></i>U</span>
 		{#if fieldOn ? fieldLegend : legend}<div class="legtip" style:width="{LEGEND_W}px" data-tip={legendTip((fieldOn ? fieldLegend : legend)!)}></div>{/if}
 		
-		{#if wb.isEm && wb.emFamily === 'em2d' && wb.raw?.em2d?.section}<div class="emsec"><EmSection section={wb.raw.em2d.section} /></div>{/if}
+		{#if wb.isEm && wb.emFamily === 'em2d' && wb.raw?.em2d?.section}<div class="emsec"><EmSection section={emSec?.section ?? wb.raw.em2d.section} variant={emSec?.section ? emSec.id : emSec?.err ? `base (variant ${emSec.id} not drawn: ${emSec.err})` : emVariants ? 'base' : ''} /></div>{/if}
 		{#if !webgl}<p class="nogl">WebGL is not available in this browser.</p>{/if}
 		{#if fprobe}
 			<div class="tip" style:left="{Math.min(fprobe.x + 14, host.clientWidth - 260)}px" style:top="{Math.min(fprobe.y + 14, host.clientHeight - 90)}px">{#each fprobe.lines as l}<div>{l}</div>{/each}</div>
@@ -504,7 +597,7 @@
 	{#if sideOn}
 		<div class="view viewA" bind:this={hostA} aria-label="Run A">
 			<canvas bind:this={canvasA}></canvas>
-			<div class="banner"><span class="b muted" data-tip="Pinned run A (camera follows the main view; shared color range)">A · {wb.compareA?.caseId} · {wb.compareA?.run.study}</span></div>
+			<div class="banner"><span class="b muted" data-tip={sameQtyA ? 'Pinned run A (camera follows the main view; shared color range)' : 'Pinned run A shows another quantity than B: own automatic range, same color table'}>A · {wb.compareA?.caseId} · {wb.compareA?.run.study}{!sameQtyA && rangeA ? ` · ${dispA.label} ${fmt(rangeA.min, 4)} to ${fmt(rangeA.max, 4)} ${dispA.unit}` : ''}</span></div>
 		</div>
 	{/if}
 	</div>

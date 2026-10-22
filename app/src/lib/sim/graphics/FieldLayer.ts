@@ -14,12 +14,14 @@ attribute vec3 disp;
 uniform float dscale;
 varying float vVal;
 varying vec3 vView;
+#include <clipping_planes_pars_vertex>
 void main() {
 	vec3 p = position + dscale * disp * 1000.0;
 	vVal = value;
-	vec4 mv = modelViewMatrix * vec4(p, 1.0);
-	vView = mv.xyz;
-	gl_Position = projectionMatrix * mv;
+	vec4 mvPosition = modelViewMatrix * vec4(p, 1.0);
+	vView = mvPosition.xyz;
+	gl_Position = projectionMatrix * mvPosition;
+	#include <clipping_planes_vertex>
 }`;
 
 const FRAG = /* glsl */ `
@@ -32,7 +34,9 @@ uniform int logScale;
 uniform float opacity;
 varying float vVal;
 varying vec3 vView;
+#include <clipping_planes_pars_fragment>
 void main() {
+	#include <clipping_planes_fragment>
 	float v = vVal * affA + affB;
 	float t = logScale == 1 ? (log(max(v, 1e-30)) - log(vmin)) / (log(vmax) - log(vmin)) : (v - vmin) / (vmax - vmin);
 	t = clamp(t, 0.0, 1.0);
@@ -83,6 +87,8 @@ export class FieldLayer {
 	private lineMat: THREE.ShaderMaterial;
 	layers: FieldMesh[] = [];
 	readonly arrows: ArrowLayer;
+	/** World clipping plane of the section (slice and iso layers; the surface is trimmed exactly by the worker). */
+	private clipPlanes: THREE.Plane[] = [];
 	/** Untransformed group of the arrows (they map package to world themselves). */
 	readonly arrowGroup = new THREE.Group();
 
@@ -104,16 +110,28 @@ export class FieldLayer {
 		this.group.matrixWorldNeedsUpdate = true;
 	}
 
-	private material(opacity: number): THREE.ShaderMaterial {
+	private material(opacity: number, clip = false): THREE.ShaderMaterial {
 		const m = new THREE.ShaderMaterial({
+			clipping: clip, clippingPlanes: clip ? this.clipPlanes : [],
 			vertexShader: VERT, fragmentShader: FRAG, side: THREE.DoubleSide, transparent: opacity < 1, depthWrite: opacity >= 1,
 			uniforms: {
 				lut: { value: this.lutTex }, vmin: { value: 0 }, vmax: { value: 1 }, affA: { value: 1 }, affB: { value: 0 },
 				logScale: { value: 0 }, opacity: { value: opacity }, dscale: { value: 0 }
 			}
 		});
+		m.userData.clip = clip;
 		this.mats.push(m);
 		return m;
+	}
+
+	/**
+	 * Section plane in package mm (same convention as BoxViewer: y keeps y >= pos, x keeps x <= pos), as a world
+	 * clipping plane on the slice and iso layers so they do not float in the removed region (L24 G4). World: X = x,
+	 * Z = -y (no translation).
+	 */
+	setClip(c: { axis: 'x' | 'y'; pos_mm: number } | null) {
+		this.clipPlanes = c ? [c.axis === 'y' ? new THREE.Plane(new THREE.Vector3(0, 0, -1), -c.pos_mm) : new THREE.Plane(new THREE.Vector3(-1, 0, 0), c.pos_mm)] : [];
+		for (const m of this.mats) if (m.userData.clip) m.clippingPlanes = this.clipPlanes;
 	}
 
 	clear() {
@@ -132,9 +150,9 @@ export class FieldLayer {
 	}
 
 	/** Replace the layers (surface, slice ...); `opacity` per layer; `wire` adds face outlines. */
-	setLayers(list: { data: SurfaceOut; opacity: number; wire: boolean; scale?: [number, number] }[]) {
+	setLayers(list: { data: SurfaceOut; opacity: number; wire: boolean; scale?: [number, number]; clip?: boolean }[]) {
 		this.clear();
-		for (const { data, opacity, wire, scale } of list) {
+		for (const { data, opacity, wire, scale, clip } of list) {
 			if (!data.faces) continue;
 			const geo = new THREE.BufferGeometry();
 			geo.setAttribute('position', new THREE.BufferAttribute(data.pos, 3));
@@ -143,7 +161,7 @@ export class FieldLayer {
 			geo.setIndex(new THREE.BufferAttribute(data.index, 1));
 			geo.computeBoundingBox();
 			geo.computeBoundingSphere();
-			const mesh = new THREE.Mesh(geo, this.material(opacity));
+			const mesh = new THREE.Mesh(geo, this.material(opacity, !!clip));
 			mesh.renderOrder = opacity < 1 ? 2 : 1;
 			this.group.add(mesh);
 			let w: THREE.LineSegments | null = null;

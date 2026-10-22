@@ -47,10 +47,13 @@ export function materialOf(map: Record<string, string> | undefined, lib: Record<
 		return typeof a === 'string' ? a : a.key;
 	};
 	return (p) => {
-		const direct = m[p.id] ?? m[p.kind];
+		// SPEC 1 order: part id, part kind, template key (also a whole homogenized key such as a fixture `homog:c4`)
+		const direct = m[p.id] ?? m[p.kind] ?? (p.material.startsWith('homog:') ? m[p.material] : undefined);
 		if (direct) return direct;
 		if (p.material.startsWith('homog:')) {
 			const s = p.material.split(':');
+			// fixture keys carry no constituents (`homog:bga`): nothing to alias; the library reports the key (L24 G3)
+			if (s.length < 3) return p.material;
 			if (kinds.size && !kinds.has(s[1])) {
 				const to = s[1].startsWith('layer_') ? 'rdl_layer' : 'via_field';
 				notes.add(`homogenized kind ${s[1]} -> ${to} (library kinds: ${[...kinds].join(', ')})`);

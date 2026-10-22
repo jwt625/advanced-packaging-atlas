@@ -82,9 +82,12 @@
 	const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
 	onDestroy(() => wb.stopAll());
 
+	/** Re-load request for the URL's own session (the picker chose it while an in-memory draft was shown; L24 G9). */
+	let reloadTick = $state(0);
 	// load the chosen case (family-only sessions wait for package3d.json for the family title)
 	$effect(() => {
 		const sel = chosen;
+		void reloadTick;
 		const st = untrack(() => urlState);
 		if (sel === 'text:' && st.text) {
 			// in-memory case carried in the link (packed text)
@@ -156,18 +159,26 @@
 	}
 
 	// geometry follows family + params (generator or fixture); presets follow the family
+	// loadSeq: a case load with the same family, params and geometry as the previous case must still regenerate
 	$effect(() => {
 		void wb.geometryKey;
 		void wb.family;
+		void wb.loadSeq;
 		untrack(() => void wb.regenerate());
 	});
 	$effect(() => {
 		void wb.familyId;
+		void wb.loadSeq;
 		untrack(() => void wb.refreshPresets());
 	});
 
 	function switchTo(sel: string) {
 		if (sel === 'mem:') return;
+		// the URL already names this session (an in-memory draft replaced it on screen): goto would be a no-op
+		if (sel === chosen) {
+			reloadTick++;
+			return;
+		}
 		const keep = new URLSearchParams();
 		if (sel.startsWith('case:')) keep.set('case', sel.slice(5));
 		else keep.set('fam', sel.slice(4));

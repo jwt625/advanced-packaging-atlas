@@ -55,11 +55,7 @@
 		const a = pg.sliceAxis === 'x' ? g.xs : pg.sliceAxis === 'y' ? g.ys : g.zs;
 		return [a[0] * 1e3, a[a.length - 1] * 1e3];
 	});
-	$effect(() => {
-		// keep the slice inside the model when the axis changes
-		const [lo, hi] = sRange;
-		if (pg.slicePos < lo || pg.slicePos > hi) wb.pg.slicePos = Number(((lo + hi) / 2).toPrecision(6));
-	});
+	// the slice position is kept inside the result grid by Graphics.svelte (always mounted; L24 G8)
 	const AX = ['x', 'y', 'z'] as const;
 	let vtuBusy = $state(false);
 	let vtuMsg = $state('');
@@ -103,6 +99,8 @@
 		<dt>wall</dt><dd class="num">{fmt(wb.run.ms / 1000, 3)} s</dd>
 	</dl>
 {:else if node === 'res.T' || node === 'res.mesh' || ((node === 'res.disp' || node === 'res.vm') && mechF)}
+	{#if node === 'res.T' && mech}<p class="muted small">Mechanics run: the study temperature is uniform per point (no temperature field); the plot shows the mechanics expression below.</p>{/if}
+	{#if !wb.post}<p class="warn small">The field of run {wb.run.study} is no longer held (a newer Compute started, failed or was cancelled): tables and derived values remain; Compute again for field plots.</p>{/if}
 	<h4>Expression</h4>
 	<label class="f" data-tip="Field shown on the surface and slice">expression
 		<select bind:value={wb.pg.expr} aria-label="Expression" onchange={() => { if (wb.pg.expr === 'uz') wb.pg.scale = 'linear'; }}>
@@ -134,6 +132,7 @@
 	{#if pg.iso}
 		<label class="f" data-tip="Number of levels evenly inside the color range (used when no explicit list)">levels <input type="number" min="1" max="20" step="1" bind:value={wb.pg.isoN} aria-label="Iso level count" /></label>
 		<label class="f" data-tip="Explicit levels in display units, comma separated (overrides the count)">list <input type="text" bind:value={wb.pg.isoLevels} placeholder="e.g. 90, 95" aria-label="Iso levels" /><span class="u">{disp.unit}</span></label>
+		{#if wb.paint.isoFaces === 0}<p class="warn small">No isosurface: no level lies inside the field range of the shown solution.</p>{/if}
 	{/if}
 	<label class="chk" data-tip={mech ? 'Displacement arrows (cell-centre mean of the corner u)' : 'Heat-flux arrows q = -k grad T at cell centres (k from the case resolver at the cell-mean T)'}><input type="checkbox" bind:checked={wb.pg.arrows} /> Arrows</label>
 	{#if pg.arrows}
@@ -142,7 +141,7 @@
 		<label class="chk" data-tip="All arrows the same length (direction only); color still |v|"><input type="checkbox" bind:checked={wb.pg.arrowNorm} /> normalized length</label>
 		<p class="muted small">With z-exaggeration the arrow direction follows the exaggerated geometry; length and shape are not scaled.</p>
 	{/if}
-	<label class="chk" data-tip="Face outlines of the surface cells"><input type="checkbox" bind:checked={wb.pg.wire} /> mesh edges</label>
+	<label class="chk" data-tip="Face outlines of the surface cells"><input type="checkbox" bind:checked={wb.pg.wire} onchange={() => (wb.meshWire = false)} /> mesh edges</label>
 	{@const dbg = new URLSearchParams(location.search).get('debug') === '1'}
 	<label class="chk" data-tip={mech ? 'Deformed shape p + s u (display only)' : dbg ? 'Synthetic test displacement (debug only; not a result): checks the deformation path' : 'Deformation needs a thermo-elastic study'}><input type="checkbox" bind:checked={wb.pg.deform} disabled={!mech && !dbg} /> deformation</label>
 	{#if pg.deform}
@@ -157,12 +156,12 @@
 			<select bind:value={wb.compareMode} aria-label="Compare mode">
 				<option value="off">off</option>
 				<option value="side">side by side (A | B)</option>
-				<option value="diff" disabled={!wb.gridsMatch || !!mech}>difference B - A{wb.gridsMatch ? '' : ' (grids differ)'}</option>
+				<option value="diff" disabled={!!wb.diffBlock} data-tip={wb.diffBlock ?? 'B - A of the temperature fields (same grid)'}>difference B - A{wb.diffBlock ? ` (off: ${wb.diffBlock})` : ''}</option>
 			</select>
 			<button onclick={() => wb.unpinA()}>Unpin A</button>
 		{/if}
 	</div>
-	{#if wb.compareA}<p class="muted small">A: {wb.compareA.caseId} · {wb.compareA.run.study} · {new Date(wb.compareA.run.at).toISOString()}; grids {wb.gridsMatch ? 'match (difference available)' : 'differ (side by side only)'}.</p>{/if}
+	{#if wb.compareA}<p class="muted small">A: {wb.compareA.caseId} · {wb.compareA.run.study} · {new Date(wb.compareA.run.at).toISOString()}; {wb.diffBlock ? `difference off: ${wb.diffBlock} (side by side only)` : 'same grid, both thermal (difference available)'}.</p>{/if}
 	<h4>Export</h4>
 	<div class="actions"><button disabled={!wb.post || vtuBusy} onclick={exportVtu} data-tip="VTK XML UnstructuredGrid (.vtu) of the active cells: nodal T and u, cell part id and von Mises; for ParaView cross-checks">VTU</button>{#if vtuMsg}<span class="muted small">{vtuMsg}</span>{/if}</div>
 	<p class="muted small num">surface {wb.paint.surfaceMs != null ? `${fmt(wb.paint.surfaceMs, 3)} ms` : '-'} · slice {wb.paint.sliceMs != null ? `${fmt(wb.paint.sliceMs, 3)} ms` : '-'} (worker) · {(wb.paint.faces * 2).toLocaleString()} triangles{wb.paint.firstMs != null ? ` · first paint ${fmt(wb.paint.firstMs, 3)} ms after the result` : ''}</p>
@@ -178,7 +177,7 @@
 {:else if node === 'res.probes'}
 	{#if wb.probes.length}
 		<table class="grid"><thead><tr><th>#</th><th>Value</th><th>Part</th><th>x, y (mm)</th><th>z (µm)</th><th>Cut line</th></tr></thead><tbody>
-			{#each wb.probes as q, i}<tr><td>{i + 1}</td><td class="num">{fmt(q.value, 5)} {q.unit}</td><td class="small" data-tip={q.material}>{q.part}</td><td class="num">{fmt(q.x, 4)}, {fmt(q.y, 4)}</td><td class="num">{fmt(q.z * 1000, 5)}</td>
+			{#each wb.probes as q, i}<tr class:hid={!wb.probeDrawn(q)} data-tip={wb.probeDrawn(q) ? undefined : 'On a mirrored copy: not drawn while the mirror is off'}><td>{i + 1}</td><td class="num">{fmt(q.value, 5)} {q.unit}</td><td class="small" data-tip={q.material}>{q.part}</td><td class="num">{fmt(q.x, 4)}, {fmt(q.y, 4)}</td><td class="num">{fmt(q.z * 1000, 5)}</td>
 				<td>{#each AX as a}<button class="mini" disabled={!wb.post} onclick={() => wb.lineThrough(i, a)} data-tip="Values along {a} through probe {i + 1}">{a}</button>{/each}</td></tr>{/each}
 		</tbody></table>
 		<div class="actions"><button onclick={() => (wb.probes = [])}>Clear</button><button onclick={() => downloadText(`${wb.caseId.replace(/[^\w.-]+/g, '_')}-probes-${stamp()}.csv`, `# case ${wb.caseId}, study ${wb.run?.study}${wb.stale.any ? ', stale' : ''}\n` + toCsv(['n', 'value', 'unit', 'part', 'material', 'x_mm', 'y_mm', 'z_um'], wb.probes.map((q, i) => [i + 1, q.value, q.unit, q.part, q.material, q.x, q.y, q.z * 1000])))}>CSV</button></div>
@@ -231,7 +230,7 @@
 		{/each}
 	{/if}
 {:else if node === 'res.disp' || node === 'res.vm' || node === 'res.warp'}
-	<p class="muted small">Binds when thermo-elastic results exist (E2, lane L8). Deformation: automatic scale, about 10 % of the geometry size (COMSOL rule), factor shown and editable.</p>
+	<p class="muted small">No mechanics result in run {wb.run.study}: compute a thermo-elastic or process_sequence study. Deformation: automatic scale, about 10 % of the geometry size (COMSOL rule), factor shown and editable.</p>
 	{#if node === 'res.warp'}<p class="small">Warpage sign convention: JEITA ED-7306; every output states the surface (default: substrate bottom) and the viewing side.</p>{/if}
 {/if}
 
@@ -249,6 +248,7 @@
 	.kv dt { color: var(--ink-3); } .kv dd { margin: 0; }
 	.grid { width: 100%; border-collapse: collapse; font-size: 11px; } .grid th, .grid td { padding: 2px 4px; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
 	.grid th { color: var(--ink-3); font-weight: 500; }
+	.hid td { color: var(--ink-3); }
 	.mini { height: 18px; padding: 0 5px; font-size: 10px; border-radius: 0; }
 	.actions { display: flex; gap: 6px; margin: 8px 0; }
 	.actions button, .actions select { border-radius: 0; height: 22px; }

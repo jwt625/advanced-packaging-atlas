@@ -105,12 +105,14 @@
 			const fTag: Node['tag'] = !wb.run ? { text: 'empty', kind: 'muted' } : !held ? { text: 'not held', kind: 'muted' } : wb.stale.any ? { text: 'stale', kind: 'warn' } : undefined;
 			out.push({ id: 'res.datasets', label: 'Datasets: Solution', depth: 1, tip: 'Solution of the last Compute (grid and nodal T held in the worker)', tag: fTag });
 			out.push({ id: 'res.derived', label: 'Derived Values', depth: 1, tip: 'T max per part, heat balance, timing', tag: resTag });
-			out.push({ id: 'res.T', label: 'Temperature', depth: 1, tip: '3D plot group: Surface (+ section cut = slice of T) and Slice; click to plot', tag: fTag });
+			// a mechanics run has a uniform temperature per point: no T field (L24 G16)
+			const noT = !!wb.run?.result.mech;
+			out.push({ id: 'res.T', label: 'Temperature', depth: 1, tip: noT ? 'No temperature field: the mechanics study uses a uniform temperature per point (Displacement / von Mises plot the result)' : '3D plot group: Surface (+ section cut = slice of T) and Slice; click to plot', tag: noT ? { text: 'n/a', kind: 'muted' } : fTag });
 			out.push({ id: 'res.mesh', label: 'Mesh (cell size)', depth: 1, tip: 'Surface cells colored by cell size, wireframe', tag: fTag });
 			out.push({ id: 'res.probes', label: `Probes (${wb.probes.length})`, depth: 1, tip: 'Pinned point values (click on the result field)', tag: wb.probes.length ? undefined : { text: 'none', kind: 'muted' } });
 			out.push({ id: 'res.cutline', label: 'Cut Line 3D', depth: 1, tip: 'Values along x, y or z through a pinned probe', tag: wb.cutLine ? undefined : { text: 'none', kind: 'muted' } });
 			if (wb.run?.result.probes?.length) out.push({ id: 'res.tt', label: 'T(t) probes', depth: 1, tip: 'Transient study: temperature vs time at the case probes', tag: resTag });
-			out.push({ id: 'res.tline', label: 'T along z (1D)', depth: 1, tip: 'Temperature along the vertical grid line through the Tmax node', tag: resTag });
+			out.push({ id: 'res.tline', label: 'T along z (1D)', depth: 1, tip: noT ? 'No temperature field in a mechanics run' : 'Temperature along the vertical grid line through the Tmax node', tag: noT ? { text: 'n/a', kind: 'muted' } : resTag });
 			const m = wb.run?.result.mech;
 			const mech = !!m;
 			const seq = m?.kind === 'process_sequence';
@@ -125,6 +127,8 @@
 
 	function select(n: Node) {
 		wb.node = n.id;
+		// mesh edges switched on by the Mesh plot group go off on the field plot groups (flag in wb; A10 M5)
+		if (n.id === 'res.T' || n.id === 'res.disp' || n.id === 'res.vm') wb.dropMeshWire();
 		wb.settingsTab = 'settings';
 		if (n.parts) wb.selectedParts = n.parts;
 		// COMSOL: selecting a plot group plots it; geometry nodes show the geometry
@@ -140,6 +144,7 @@
 		} else if (n.id === 'res.mesh') {
 			if (wb.post) wb.gview = 'field';
 			wb.pg.expr = 'cellsize';
+			if (!wb.pg.wire) wb.meshWire = true;
 			wb.pg.wire = true;
 		} else if (n.parts || n.id === 'geometry' || n.id === 'gmat' || n.id === 'cmat' || n.id === 'params') wb.gview = 'geometry';
 	}

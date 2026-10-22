@@ -24,6 +24,8 @@ export function unwrapDeg(p: number[]): number[] {
 export interface SBlock {
 	/** Label of the matrix (e.g. `S (line 1, 10 mm)`, `Sdd`). */
 	label: string;
+	/** Matrix name for entry labels: S, or the mixed-mode block Sdd / Scc / Sdc / Scd (entry Sdd21 etc.; L24 O7). */
+	name: string;
 	ports: string[];
 	f_GHz: number[];
 	/** S[f][i][j] */
@@ -46,11 +48,11 @@ export function sBlocks(variant: Rec, family: 'em2d' | 'em3d'): SBlock[] {
 			const ports = ((rows[0].ports ?? []) as Rec[]).map((p, i) => String(p.name ?? i + 1));
 			const terms = ((rows[0].terminals ?? []) as unknown[]).length ? (rows[0].terminals as unknown[]).map((t, i) => String((t as Rec)?.name ?? t ?? i + 1)) : ports;
 			const de = deembedText(variant);
-			out.push({ label: `S (zref ${d.zref_ohm ?? '?'} ohm; ${de})`, ports: terms.length === (rows[0].S?.length ?? 0) ? terms : ports, f_GHz: rows.map((r) => r.f_GHz), S: rows.map((r) => r.S), zref: `${d.zref_ohm ?? '?'} ohm (${de})` });
+			out.push({ label: `S (zref ${d.zref_ohm ?? '?'} ohm; ${de})`, name: 'S', ports: terms.length === (rows[0].S?.length ?? 0) ? terms : ports, f_GHz: rows.map((r) => r.f_GHz), S: rows.map((r) => r.S), zref: `${d.zref_ohm ?? '?'} ohm (${de})` });
 			if (rows[0].S_port_ref) {
 				const zn = zNativeText(rows);
 				const where = d.deembed_method === 'line_run' ? 'port faces, not de-embedded' : 'port extension included where deembed_um > 0';
-				out.push({ label: `S (Re Z0 per terminal, before renormalization; ${where})`, ports: terms.length === (rows[0].S_port_ref?.length ?? 0) ? terms : ports, f_GHz: rows.map((r) => r.f_GHz), S: rows.map((r) => r.S_port_ref), zref: `Re Z0 per terminal (power waves${zn ? `; ${zn}` : ''}); ${where}` });
+				out.push({ label: `S (Re Z0 per terminal, before renormalization; ${where})`, name: 'S', ports: terms.length === (rows[0].S_port_ref?.length ?? 0) ? terms : ports, f_GHz: rows.map((r) => r.f_GHz), S: rows.map((r) => r.S_port_ref), zref: `Re Z0 per terminal (power waves${zn ? `; ${zn}` : ''}); ${where}` });
 			}
 		}
 		return out;
@@ -62,12 +64,12 @@ export function sBlocks(variant: Rec, family: 'em2d' | 'em3d'): SBlock[] {
 		if (!sp.length) return;
 		const ports = [...Array.from({ length: n }, (_, i) => `${signals[i] ?? i + 1} near`), ...Array.from({ length: n }, (_, i) => `${signals[i] ?? i + 1} far`)];
 		const z = Array.isArray(L.zref_ohm) ? L.zref_ohm.join('/') : String(L.zref_ohm);
-		out.push({ label: `S, line ${li + 1} (${L.length_mm} mm, zref ${z} ohm)`, ports, f_GHz: sp.map((r) => r.f_GHz), S: sp.map((r) => r.S), zref: z });
+		out.push({ label: `S, line ${li + 1} (${L.length_mm} mm, zref ${z} ohm)`, name: 'S', ports, f_GHz: sp.map((r) => r.f_GHz), S: sp.map((r) => r.S), zref: z });
 		const mm = (L.mixed_mode ?? []) as Rec[];
 		if (mm.length) {
 			for (const key of ['Sdd', 'Scc', 'Sdc', 'Scd']) {
 				if (!mm[0][key]) continue;
-				out.push({ label: `${key}, line ${li + 1} (${L.length_mm} mm)`, ports: ['1', '2'], f_GHz: mm.map((r) => r.f_GHz), S: mm.map((r) => r[key]), zref: `${z} (mixed-mode)` });
+				out.push({ label: `${key}, line ${li + 1} (${L.length_mm} mm)`, name: key, ports: ['1', '2'], f_GHz: mm.map((r) => r.f_GHz), S: mm.map((r) => r[key]), zref: `${z} (mixed-mode)` });
 			}
 		}
 	});

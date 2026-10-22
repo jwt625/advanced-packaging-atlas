@@ -79,6 +79,8 @@ export class BoxViewer {
 	constructor(private el: HTMLElement, private canvas: HTMLCanvasElement) {
 		this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance', preserveDrawingBuffer: true });
 		this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+		// section clipping planes on the field slice / iso materials (FieldLayer.setClip); boxes are trimmed exactly
+		this.renderer.localClippingEnabled = true;
 		this.controls = new OrbitControls(this.camera, canvas);
 		this.controls.enableDamping = true;
 		this.controls.dampingFactor = 0.15;
@@ -357,6 +359,9 @@ export class BoxViewer {
 		for (const m of [this.matSolid, this.matXray, this.lineSolid, this.lineDashed, this.lineUser, this.lineSel]) m.dispose();
 		this.field.dispose();
 		this.renderer.dispose();
+		// release the WebGL context now: browsers keep about 16 per page and then drop the oldest, which is the main
+		// viewer once the side-by-side pane was opened and closed often enough (L24 G15)
+		this.renderer.forceContextLoss();
 	}
 }
 

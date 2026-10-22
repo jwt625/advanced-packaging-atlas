@@ -51,7 +51,7 @@ export class ArrowLayer {
 		}
 	}
 
-	set(d: ArrowData | null, o: { maxLen: number; normalized: boolean; table: ColormapName; reverse: boolean; log: boolean; kz: number; transforms: [number, number][] }) {
+	set(d: ArrowData | null, o: { maxLen: number; normalized: boolean; table: ColormapName; reverse: boolean; log: boolean; kz: number; transforms: [number, number][]; clip?: { axis: 'x' | 'y'; pos_mm: number } | null }) {
 		this.clear();
 		if (!d || !d.n) return;
 		let mmax = 0, mmin = Infinity;
@@ -66,6 +66,8 @@ export class ArrowLayer {
 			for (let i = 0; i < d.n; i++) {
 				const mg = d.mag[i];
 				if (!(mg > 0) || !Number.isFinite(mg)) continue;
+				// section (package mm, drawn copy): y keeps y >= pos, x keeps x <= pos, as the box trim (L24 G4)
+				if (o.clip && (o.clip.axis === 'y' ? sy * d.pos[3 * i + 1] < o.clip.pos_mm : sx * d.pos[3 * i] > o.clip.pos_mm)) continue;
 				dir.set(sx * d.vec[3 * i], o.kz * d.vec[3 * i + 2], -sy * d.vec[3 * i + 1]).normalize();
 				q.setFromUnitVectors(up, dir);
 				const len = o.normalized ? o.maxLen : (o.maxLen * mg) / mmax;

@@ -111,7 +111,7 @@
 		return () => ro.disconnect();
 	});
 	$effect(() => { void [section, fit]; if (W) fitView(); });
-	$effect(() => { void [view, W, H, ui.theme, shapes]; draw(); });
+	$effect(() => { void [view, W, H, ui.theme, shapes, variant]; draw(); });
 </script>
 
 <div class="es" bind:this={wrap}>
@@ -122,7 +122,7 @@
 		<span class="grow"></span>
 		<button onclick={() => downloadDataUrl('em2d-section.png', canvas.toDataURL('image/png'))} data-tip="Download PNG">PNG</button>
 	</div>
-	<canvas bind:this={canvas} style:width="{W}px" style:height="{H}px" onpointermove={onMove} onpointerdown={(e) => { const r = canvas.getBoundingClientRect(); drag = { x: e.clientX - r.left, y: e.clientY - r.top }; }} onpointerup={() => (drag = null)} onpointerleave={() => { drag = null; hover = null; }} onwheel={onWheel} aria-label="EM cross-section"></canvas>
+	<canvas bind:this={canvas} style:width="{W}px" style:height="{H}px" onpointermove={onMove} onpointerdown={(e) => { const r = canvas.getBoundingClientRect(); drag = { x: e.clientX - r.left, y: e.clientY - r.top }; }} onpointerup={() => (drag = null)} onpointerleave={() => { drag = null; hover = null; }} onwheel={onWheel} aria-label="EM cross-section{variant ? `, variant ${variant}` : ''}"></canvas>
 	{#if hover}<div class="tip" style:left="{Math.min(hover.x + 12, W - 240)}px" style:top="{hover.y + 34}px">{#each hover.lines as l}<div>{l}</div>{/each}</div>{/if}
 </div>
 
