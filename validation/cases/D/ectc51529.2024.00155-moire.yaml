@@ -22,14 +22,13 @@ inputs:
         - {step: ramp_30, T_C: 30}
         - {step: ramp_148, T_C: 148}
         - {step: ramp_222, T_C: 222}
-        - {step: ramp_243, T_C: 243}
-        - {step: ramp_260, T_C: 260, note: "a-m23 (FEM) only"}
+        - {step: ramp_225, T_C: 225, note: "CD6 overlap ceiling (Wentao 2026-10-21; solder_resist valid to 225 C): replaces ramp_243 (a-m19 / e-m4, offset 18 C) and ramp_260 (a-m23 FEM, offset 35 C); L19"}
 trend_targets:   # tier D trend checks on the process_sequence model (wave 6); not values to fit
   - id: sus430_zero_crossing
     variant: sus430
     sim_case: si_interposer_peers/120mm_warpage
     study: stiffener_attach_sequence
-    steps: [ramp_222, ramp_243]
+    steps: [ramp_222, ramp_225]   # ramp_243 -> ramp_225 (CD6 ceiling, 2026-10-21): the measured crossing (about 231 C) lies above the ceiling, so this gate is untestable at default (reported only)
     rule: "sign(w(222 C)) != sign(w(243 C)): the warpage changes sign between 222 and 243 C (measured +65 -> -85 um; linear interpolation 231 C)"
     first_result: "L3 wave 6 (coarse mesh, ROM): +209.7 (W) / +230.3 (W): no sign change; W shapes, so the sign gate is reported, not evaluated"
     metric_ids: [ectc51529.2024.00155-a-m18, ectc51529.2024.00155-a-m19]
@@ -39,7 +38,7 @@ trend_targets:   # tier D trend checks on the process_sequence model (wave 6); n
     variant: sus430
     sim_case: si_interposer_peers/120mm_warpage
     study: stiffener_attach_sequence
-    steps: [ramp_30, ramp_148, ramp_222, ramp_243]
+    steps: [ramp_30, ramp_148, ramp_222, ramp_225]   # last point at the CD6 ceiling 225 C (measured at 243 C), 2026-10-21
     rule: "w strictly decreasing over 30 -> 148 -> 222 -> 243 C (measured 485 / 135 / 65 / -85 um, + = convex, centre up)"
     metric_ids: [ectc51529.2024.00155-a-m16, ectc51529.2024.00155-a-m17, ectc51529.2024.00155-a-m18, ectc51529.2024.00155-a-m19]
     fails_if: "any increase between consecutive temperatures"
@@ -48,7 +47,7 @@ trend_targets:   # tier D trend checks on the process_sequence model (wave 6); n
     variant: cu
     sim_case: si_interposer_peers/120mm_warpage_cu
     study: stiffener_attach_sequence
-    steps: [ramp_30, ramp_148, ramp_222, ramp_243]
+    steps: [ramp_30, ramp_148, ramp_222, ramp_225]   # last point at the CD6 ceiling 225 C (measured at 243 C), 2026-10-21
     rule: "w strictly increasing over 30 -> 243 C with one sign change between 30 and 148 C (measured -330 / 260 / 645 / 770 um)"
     metric_ids: [ectc51529.2024.00155-e-m1, ectc51529.2024.00155-e-m2, ectc51529.2024.00155-e-m3, ectc51529.2024.00155-e-m4]
     requires_shape_class: [dome, bowl]

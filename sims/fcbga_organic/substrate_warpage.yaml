@@ -22,8 +22,10 @@ geometry:
   drop_kinds: [bga]
   resolve: []
 materials:
-  # CD6: hold the last data value beyond the range for these keys only; reason: targets c-m4 at 265 C; abf_gl data end at 240 C, underfill_cuf at 260 C, solder_resist (SR layers, mapped since 2026-10-20) at 225 C, its last instantaneous CTE 130 ppm/K (above 121 C) held, core_lowcte at 260 C (5 C short); last table values held.
-  allow_extrapolation: [abf_gl, underfill_cuf, solder_resist, core_lowcte]
+  # CD6 (Wentao 2026-10-21, overlap ceiling; L19): high-temperature studies run at the highest temperature that every
+  # non-compliant material of the stack covers without extrapolation: 225 C, limited by solder_resist (valid_T_C ends 225 C; next abf_gl 240 C).
+  # Targets measured above it are compared at the ceiling with the offset stated in the target note. Recompute with
+  # engine/src/families/tools/ceiling.mjs when library ranges change.
   map: {}
   overrides: {}
 mesh:
@@ -45,10 +47,10 @@ physics:
 studies:
   - {id: s1, type: thermal_stationary}
   - {id: s2, type: thermo_elastic, temperature: {uniform_C: [25]}}
-  - {id: s2h, type: thermo_elastic, temperature: {uniform_C: [265]}, note: "beyond the data range of abf_gl, underfill_cuf, solder_resist: runs with materials.allow_extrapolation (CD6); results carry the extrapolated flag"}
+  - {id: s2h, type: thermo_elastic, temperature: {uniform_C: [225]}, note: "CD6 overlap ceiling 225 C (solder_resist); target c-m4 (265 C) compared here (offset 40 C)"}
 targets:
   - {metric_id: ectc51687.2025.00178-c-m3, quantity: warpage_um, selection: "top:sr_top", definition: jeita_ed7306, study: s2, T_C: 25, tolerance: {sign_only: true}, tier: C}
-  - {metric_id: ectc51687.2025.00178-c-m4, quantity: warpage_um, selection: "top:sr_top", definition: jeita_ed7306, study: s2h, T_C: 265, tolerance: {sign_only: true}, tier: C}
+  - {metric_id: ectc51687.2025.00178-c-m4, quantity: warpage_um, selection: "top:sr_top", definition: jeita_ed7306, study: s2h, T_C: 225, tolerance: {sign_only: true}, tier: C, note: "paper value at 265 C; run at the CD6 ceiling 225 C (offset 40 C)"}
 assumptions:
   - "Trend case: sign flip convex at 25 C / concave at 265 C (paper text p.2-3) is the comparison (tolerance sign_only); magnitudes need a material table (none in this paper)."
   - "Paper sign: top side view, '+' = convex, '-' = concave (metric scope), which matches the JEITA ED-7306 top-surface convention (R1 sec. 2.4)."

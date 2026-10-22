@@ -12,8 +12,10 @@ geometry:
   drop_kinds: [bga]
   resolve: []
 materials:
-  # CD6: reason: s2 includes 240 C; solder_resist (SR layers, mapped since 2026-10-20) data end at 225 C, its last instantaneous CTE 130 ppm/K (above 121 C) held (15 C short).
-  allow_extrapolation: [solder_resist]
+  # CD6 (Wentao 2026-10-21, overlap ceiling; L19): high-temperature studies run at the highest temperature that every
+  # non-compliant material of the stack covers without extrapolation: 225 C, limited by solder_resist (valid_T_C ends 225 C; next abf_gl 240 C).
+  # Targets measured above it are compared at the ceiling with the offset stated in the target note. Recompute with
+  # engine/src/families/tools/ceiling.mjs when library ranges change.
   map: {}
   overrides: {}
 mesh:
@@ -34,11 +36,12 @@ physics:
     supports: symmetry
 studies:
   - {id: s1, type: thermal_stationary}
-  - {id: s2, type: thermo_elastic, temperature: {uniform_C: [25, 240]}, note: "high temperature 240 C (template; the 260 C reflow peak exceeds the abf_gl data range, valid to 240 C)"}
+  - {id: s2, type: thermo_elastic, temperature: {uniform_C: [25, 225]}, note: "high temperature = CD6 overlap ceiling 225 C (solder_resist; was 240 C with extrapolation until 2026-10-21); the 260 C reflow peak is not reachable without extrapolation"}
 targets: []
 assumptions:
   - "No validation source: EMIB-T has zero warpage / thermal / stress rows in the DB (R5 sec. 1.2 item 5); results are sensitivity and regression outputs only."
-  - "Stress-free temperature 150 C and evaluation temperatures 25 / 260 C are templates (R5 sec. 4.3: no EMIB-T warpage condition in the DB; 260 C delamination check of EMIB CHIPS ectc51687.2025.00061-a-m10)."
+  - "Stress-free temperature 150 C and evaluation temperatures 25 / 225 C are templates (R5 sec. 4.3: no EMIB-T warpage condition in the DB; 260 C delamination check of EMIB CHIPS ectc51687.2025.00061-a-m10); the high temperature is the CD6 overlap ceiling (solder_resist, 225 C)."
+  - "Run cost at the case mesh (L19 2026-10-21, rtol 1e-7 package default): 1.49e6 active DOF, PCG-GMG 498 / 532 iterations per temperature, 506 / 609 s per temperature, Node peak RSS 1.97 GB; the 1800 s timeout of 2026-10-20 was at the earlier rtol 1e-10 default. 2 cells per layer kept for the bridge-corner / FLI stress outputs; above the ~1.5 GB browser worker budget."
   - "No lid or stiffener (no EMIB-T row states one; R5 sec. 4.3)."
   - "MIM band (template key other) uses the generator key mim_mat = sio2_film (MIM stack composition not reported)."
   - "Thermal study s1 is an end-to-end run, not a validation: 500 W per die (analog ectc51687.2025.00055-g condition), die tops fixed at 40 C (cold-plate water of the same analog)."

@@ -1,0 +1,142 @@
+# 120mm_warpage (JOINT2 TV1, SUS430 stiffener, ectc51529.2024.00155-a) with the A6 substrate route and the companion
+# package-stage stress-free bound (lane L26, 2026-10-21; warpage-input change list item 5 of
+# DevLog/research/2026-10-21-warpage-input-research.md as corrected by audit DevLog/audits/round1_audit_A6_2026-10-21.md):
+# core 1040 um (Substrate A membrane CTE 11.95 ppm/K vs stated 11.97, see sims/si_interposer_peers/variants/substrate_a_cte.yaml)
+# and package stress-free 180 C (ectc51687.2025.00027 p.3 Sec. II.E, companion FEM) instead of the 170 C CUF cure.
+# Coarse common mesh (same as the variant runs) for the direct process-sequence solver. Everything else copied from
+# 120mm_warpage.yaml 2026-10-21; keep in sync.
+schema: ap-sim/0
+id: si_interposer_peers/120mm_warpage_tsf180
+title: JOINT2 120 x 120 mm TV1, SUS430 stiffener, Substrate A at the stated CTE (core 1040 um), package stress-free 180 C (bound); coarse mesh
+status: unvalidated
+family: cowos_s
+params:
+  ip_n: {value: 1, status: reported, ref: ectc51529.2024.00155-a-c3.count}
+  soc_n: {value: 2, status: reported, ref: ectc51529.2024.00155-a-c1.count, note: "Die A (logic mock)"}
+  soc_w_mm: {value: 20, status: reported, ref: ectc51529.2024.00155-a-c1.x_mm}
+  soc_d_mm: {value: 20, status: reported, ref: ectc51529.2024.00155-a-c1.y_mm}
+  soc_h_um: {value: 675, status: reported, ref: ectc51529.2024.00155-a-c1.thickness_um}
+  soc_cols_n: {value: 1, status: template, note: "Die A in one column along y (Fig. 1(a) top view, ectc51529.2024.00155-f02; not dimensioned)"}
+  hbm_n: {value: 8, status: reported, ref: ectc51529.2024.00155-a-c2.count, note: "Die B (HBM mock)"}
+  hbm_w_mm: {value: 10, status: reported, ref: ectc51529.2024.00155-a-c2.x_mm}
+  hbm_d_mm: {value: 8, status: reported, ref: ectc51529.2024.00155-a-c2.y_mm}
+  hbm_h_um: {value: 675, status: reported, ref: ectc51529.2024.00155-a-c2.thickness_um}
+  ip_size_rule: {value: given, status: reported, ref: ectc51529.2024.00155-a-c3.x_mm, note: "interposer size reported"}
+  ip_w_mm: {value: 42, status: reported, ref: ectc51529.2024.00155-a-c3.x_mm}
+  ip_d_mm: {value: 46, status: reported, ref: ectc51529.2024.00155-a-c3.y_mm}
+  reticle_x: {value: "=ip_w_mm * ip_d_mm / reticle_area_mm2", status: template, note: "reticle multiple not stated"}
+  ip_tot_um: {value: 200, status: reported, ref: ectc51529.2024.00155-a-c3.thickness_um}
+  si_h_um: {value: "=ip_tot_um - pass_h_um - al_h_um - v_al_h_um - cu_n * cu_h_um - (cu_n - 1) * imd_h_um - bs_pad_h_um - bs_pi_h_um", status: template, note: "Si = reported 200 um minus the template front / back levels"}
+  ubump_pitch_um: {value: 40, status: reported, ref: ectc51529.2024.00155-a-i1.pitch_um}
+  ubump_d_um: {value: 20, status: reported, ref: ectc51529.2024.00155-a-i1.diameter_um}
+  ubump_h_um: {value: 22, status: derived, refs: [ectc51529.2024.00155-a-i1.height_um, ectc51529.2024.00155-a-i1.cap_height_um], note: "Cu 13 + SnAg 9 um (Ni 2 um of the metallurgy text omitted)"}
+  c4_pitch_um: {value: 150, status: reported, ref: ectc51529.2024.00155-a-i2.pitch_um}
+  c4_d_um: {value: 75, status: reported, ref: ectc51529.2024.00155-a-i2.diameter_um}
+  c4_h_um: {value: 55, status: reported, ref: ectc51529.2024.00155-a-i2.total_length_um}
+  sbt_w_mm: {value: 120, status: reported, ref: ectc51529.2024.00155-a-c4.x_mm}
+  sbt_d_mm: {value: 120, status: reported, ref: ectc51529.2024.00155-a-c4.y_mm}
+  bu_n: {value: 8, status: reported, ref: ectc51529.2024.00155-a.substrate_layer_count, note: "8-2-8"}
+  sbt_h_um: {value: 1800, status: template, refs: [ectc51529.2024.00265-a-c2.thickness_um], note: "measured thickness not given (-a-c4 notes); analog = 1.8 mm 8-2-8 FCBGA substrate"}
+  core_h_um: {value: 1040, status: template, refs: [ectc51529.2024.00155-a-c4.notes], note: "L26 calibration (A6 route): core thickness that gives the stated Substrate A CTE 11.97 ppm/C as CLT membrane CTE (11.95 at 30 C, 12.11 at 225 C) with the 1.8 mm template total held; template analog was 1400 um"}
+  bu_cu_um: {value: 13, status: template, refs: [estc60143.2024.10712019-b-L03.thickness_um], note: "build-up Cu not given; analog = fcbga_organic build-up Cu"}
+  bu_diel_um: {value: "=(sbt_h_um - core_h_um - 2 * sr_h_um - (2 * bu_n + 2) * bu_cu_um) / (2 * bu_n)", status: template, note: "build-up dielectric closes the analog 1.8 mm total"}
+  c4_uf_mat: {value: underfill_c4, status: reported, ref: "ectc51529.2024.00155 p.3 Table IV (Bottom CUF row)", note: "Table IV lists a bottom (C4) CUF separately from the top CUF; library underfill_c4 = that row (Tg 160 C, E 6.9 GPa, CTE 20 / 93 ppm/K)"}
+  ring_part_mat: {value: stainless_steel, status: reported, ref: ectc51529.2024.00155-a-c5.material, note: "SUS430 stiffener"}
+  ring_h_um: {value: 2000, status: reported, ref: ectc51529.2024.00155-a-c5.thickness_um}
+  ring_w_mm: {value: 30, status: reported, ref: ectc51529.2024.00155-a-c5.name, note: "stiffener width X = 30 mm (Fig. 1 label 'X,Y=30, 28')"}
+  ring_wy_mm: {value: 28, status: reported, ref: ectc51529.2024.00155-a-c5.name, note: "stiffener width Y = 28 mm (Fig. 1 label)"}
+geometry:
+  symmetry: quarter
+  drop_kinds: [bga, tsv]
+  resolve: []
+materials:
+  # CD6 (Wentao 2026-10-21, overlap ceiling; L19): high-temperature studies run at the highest temperature that every
+  # non-compliant material of the stack covers without extrapolation: 225 C, limited by solder_resist (library valid_T_C ends 225 C; the Table IV override values do not
+  # extend the library range; next abf_gl 240 C).
+  # Targets measured above it are compared at the ceiling with the offset stated in the target note. Recompute with
+  # engine/src/families/tools/ceiling.mjs when library ranges change.
+  # Compliant layers (E <= 100 MPa at the study temperature) do not set the ceiling; they hold their last data value
+  # (results carry the extrapolated flag): silicone_adhesive (stiffener glue of stiffener_attach_sequence, E 52 MPa: E table ends at 150 C; the glue-thickness bounds 50-300 um bracket its influence).
+  allow_extrapolation: [silicone_adhesive]
+  map:
+    stiffener: sus430         # part kind: SUS430 stiffener (ectc51529.2024.00155-a-c5.material); covers the 30-260 C study range
+  overrides:
+    sus430:
+      k_W_mK: {value: 15.1, status: template, ref: "library ss304 (NIST 304 fit, 15.13 W/(m K) at 293 K)", note: "SUS430 k not read; austenitic 304 analog at 20 C, default sensitivity x0.5 / x2; only used by the thermal study s1"}
+    # Table IV (p.3) FEM inputs; Poisson ratios not given (library values). Si stays cubic (library): the paper's
+    # isotropic Si 167 GPa is not applied (an isotropic override would need a Poisson ratio).
+    si_crystal:
+      cte_ppmK: {value: 3.2, status: reported, ref: "ectc51529.2024.00155 p.3 Table IV"}
+    cu_electroplated:
+      E_GPa: {value: 100, status: reported, ref: "ectc51529.2024.00155 p.3 Table IV"}
+      cte_ppmK: {value: 17, status: reported, ref: "ectc51529.2024.00155 p.3 Table IV"}
+    emc:
+      E_GPa: {value: 13, status: reported, ref: "ectc51529.2024.00155-a-L02.properties (p.3 Table IV)"}
+      cte_ppmK: {value: {alpha1: 7, alpha2: 25, Tg_C: 160}, status: reported, ref: "ectc51529.2024.00155-a-L02.properties (p.3 Table IV)"}
+    underfill_cuf:
+      E_GPa: {value: 6.6, status: reported, ref: "ectc51529.2024.00155-a-L03.properties (p.3 Table IV, top CUF)"}
+      cte_ppmK: {value: {alpha1: 22, alpha2: 100, Tg_C: 166}, status: reported, ref: "ectc51529.2024.00155-a-L03.properties (p.3 Table IV, top CUF)"}
+    abf_gl:
+      E_GPa: {value: 3.2, status: reported, ref: "ectc51529.2024.00155-a-L09.properties (p.3 Table IV, dielectric)"}
+      cte_ppmK: {value: 65, status: reported, ref: "ectc51529.2024.00155-a-L09.properties (p.3 Table IV, dielectric)"}
+    solder_resist:
+      E_GPa: {value: 4.3, status: reported, ref: "ectc51529.2024.00155-a-L09.properties (p.3 Table IV, solder resist)"}
+      cte_ppmK: {value: {alpha1: 43.1, alpha2: 91.2, Tg_C: 151}, status: reported, ref: "ectc51529.2024.00155 p.3 Table IV (solder resist)"}
+    core_lowcte:
+      E_GPa: {value: 33.5, status: reported, ref: "ectc51529.2024.00155-a-L10.properties (p.3 Table IV, Substrate A core)"}
+      cte_ppmK: {value: {alpha1: 5.9, alpha2: 2.5, Tg_C: 314}, status: reported, ref: "ectc51529.2024.00155-a-L10.properties (p.3 Table IV, Substrate A core)"}
+mesh:
+  # coarse common mesh (L3 wave 6 / L19 / L26 variant spreads) for the direct process-sequence solver
+  max_xy_mm: 2.5
+  min_cells_per_layer: 1
+  grading: 2
+  max_nodes: 1000000
+physics:
+  thermal:
+    sources:
+      - {parts: "soc_*", power_W: 1000, distribution: uniform_volume}      # total over the matched parts (2 Die A)
+    bcs:
+      - {selection: "top:soc_*", type: temperature, T_C: 40}
+      - {selection: "top:hbm_*", type: temperature, T_C: 40}
+      - {selection: "top:mold*", type: temperature, T_C: 40}
+      - {selection: default, type: adiabatic}
+  mechanics:
+    element: q1im               # A3 bake-off winner (SPEC section 15); q2s as the reference variant
+    # the process steps set their own stress-free temperatures; the default only covers parts no step names
+    stress_free_C: {default: 180, per_part: {}}   # companion FEM Tsf (ectc51687.2025.00027 p.3 Sec. II.E), bound above the 170 C CUF cure
+    supports: symmetry
+studies:
+  - {id: s1, type: thermal_stationary, note: "end-to-end smoke run (same thermal set-up as 120mm_warpage s1), not a validation"}
+  - id: stiffener_attach_sequence
+    type: process_sequence
+    note: "package stress-free 180 C (bound) cooled to 130 C; stiffener + silicone glue attached stress-free at 130 C on the deformed package; then the measured temperatures"
+    params:
+      ring_attach: {value: adhesive, status: reported, ref: ectc51529.2024.00155-a-c5.notes, note: "stiffener fixed with silicone glue (thickness not stated: ring_adh_h_um template 100 um, bounds 50-300 um)"}
+    steps:
+      - {id: package_cure, activate: ["substrate", "interposer", "mold", "soc_*", "hbm_*", "uf*", "ip_*", "sbt_*", "bt_*", "bb_*", "ubump_*", "c4_*", "pth"], stress_free_C: 180, temperature: {uniform_C: 130}, note: "package stress-free 180 C (companion FEM bound; process CUF cure 170 C), cooled to the glue cure temperature"}
+      - {id: ring_attach, activate: ["ring_*"], stress_free_C: 130, temperature: {uniform_C: 130}, note: "stiffener + glue stress-free at 130 C (glue cure, p.3 Sec. II.E)"}
+      - {id: ramp_30, temperature: {uniform_C: 30}}
+      - {id: ramp_148, temperature: {uniform_C: 148}}
+      - {id: ramp_222, temperature: {uniform_C: 222}}
+      - {id: ramp_225, temperature: {uniform_C: 225}, note: "CD6 overlap ceiling 225 C (solder_resist); replaces ramp_243 / ramp_260 (offset 18 / 35 C)"}
+targets:
+  - {metric_id: ectc51529.2024.00155-a-m16, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: stiffener_attach_sequence, step: ramp_30, tolerance: {rel: 0.3}, tier: D}
+  - {metric_id: ectc51529.2024.00155-a-m17, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: stiffener_attach_sequence, step: ramp_148, tolerance: {rel: 0.3}, tier: D}
+  - {metric_id: ectc51529.2024.00155-a-m18, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: stiffener_attach_sequence, step: ramp_222, tolerance: {rel: 0.3}, tier: D}
+  - {metric_id: ectc51529.2024.00155-a-m19, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: stiffener_attach_sequence, step: ramp_225, tolerance: {rel: 0.3}, tier: D, note: "measured at 243 C; run at the CD6 ceiling 225 C (offset 18 C, beyond the measured zero crossing near 231 C)"}
+  - {metric_id: ectc51529.2024.00155-a-m23, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: stiffener_attach_sequence, step: ramp_225, tolerance: {rel: 0.3}, tier: C, note: "paper FEM at 260 C; run at the CD6 ceiling 225 C (offset 35 C)"}
+assumptions:
+  - "Paper sign: '+ convex (center up), - concave' per plot icons (metric scope); compared with the JEITA ED-7306 sign; measured surface not stated (substrate bottom assumed)."
+  - "Stress-free temperatures: package 180 C (companion FEM value, ectc51687.2025.00027 p.3 Sec. II.E, a bound above the 170 C CUF cure of p.3 Sec. II.E), stiffener 130 C (silicone glue cure), as the process_sequence study stiffener_attach_sequence (attach on the deformed package). Elastic, properties at each step end temperature; no viscoelastic relaxation."
+  - "Substrate A core thickness 1040 um is a calibration of a template input to the stated Substrate A CTE 11.97 ppm/C (A6 route; label calibration, not validation); the Table IV core properties are kept."
+  - "Die arrangement from Fig. 1(a): Die A column along y with four Die B per side (not dimensioned); Die B spread along the Die A column; D2D gap and edge margins are templates."
+  - "No TSV is described for this interposer (Table II): the template TSV field is dropped (drop_kinds tsv)."
+  - "Stiffener outer edge flush with the substrate (outer size not stated). stiffener_attach_sequence adds the silicone glue frame (library silicone_adhesive, thickness template 100 um, corpus bounds 50-300 um)."
+  - "Table IV gives E and alpha1 / alpha2 / Tg (bilinear CTE overrides); Poisson ratios from the library; Si keeps the library cubic Cij (the isotropic 167 GPa needs a Poisson ratio)."
+  - "Die attach film row of Table IV not mapped (not part of TV1); the SUS430 stiffener uses the library sus430 entry (part-kind map), covering the 30-260 C range."
+  - "Thermal study s1 is an end-to-end run, not a validation: 500 W per Die A (analog ectc51687.2025.00055-g condition), mold / die top fixed at 40 C (cold-plate water of the same analog)."
+missing:
+  - "SUS430 E from the library (200 GPa, Combined Metals data sheet; nu template 0.29); the paper gives only CTE 11 ppm/K (-a-c5)."
+  - "Substrate total and core thickness (measured, value not given), build-up Cu / dielectric thickness, BGA pitch."
+  - "FEM boundary conditions, mesh and whether the FEM model includes the interposer module (-g / -h models: 'package substrate with stiffener')."
+  - "Poisson ratios and T-dependence beyond alpha1 / alpha2 / Tg."

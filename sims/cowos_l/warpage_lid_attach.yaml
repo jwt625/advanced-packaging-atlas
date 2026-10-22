@@ -1,0 +1,107 @@
+# CoWoS-L lid-type TV (ectc51909.2023.00091-a): lid + TIM attach as a process sequence (lane L26, 2026-10-21; warpage-input
+# change list item 4 of DevLog/research/2026-10-21-warpage-input-research.md as corrected by audit A6). Geometry and
+# materials = cowos_l/warpage_rt_ht (params copied 2026-10-21; keep in sync); coarse common mesh. Targets stay
+# sign-agnostic in validation/cases/D/ectc51909.2023.00091-cowos_l.yaml (view side unstated: +64 bump-side view or
+# -64 lid-side view); the signed targets below only feed the runner's got values.
+schema: ap-sim/0
+id: cowos_l/warpage_lid_attach
+title: CoWoS-L lid-type TV (91 x 91 mm), lid / film-TIM attach sequence at 125-180 C, warpage 25 C / 225 C (coarse mesh)
+status: unvalidated
+family: cowos_l
+params:
+  sbt_w_mm: {value: 91, status: reported, ref: ectc51909.2023.00091-a-c6.x_mm}
+  sbt_d_mm: {value: 91, status: reported, ref: ectc51909.2023.00091-a-c6.y_mm}
+  soc_n: {value: 2, status: reported, ref: ectc51909.2023.00091-a-c1.count}
+  soc_cols_n: {value: 2, status: template, note: "two SoCs side by side with two HBM2E on each side (Fig. 6(b), ectc51909.2023.00091-f02; not dimensioned)"}
+  hbm_n: {value: 4, status: reported, ref: ectc51909.2023.00091-a-c2.count}
+  hbm_gen: {value: HBM2E, status: reported, ref: ectc51909.2023.00091-a-c2.name}
+  # interposer = top-die rectangle + 1 mm per side (1.6x); SC-RDL and side mold extend to the 91 x 91 mm substrate
+  ip_size_rule: {value: fit_dies, status: reported, ref: ectc51909.2023.00091-a.notes, note: "interposer = top-die enclosing rectangle + 1 mm per side"}
+  reticle_x: {value: 1.6, status: reported, ref: ectc51909.2023.00091-a.reticle_multiple}
+  sc_rdl: {value: substrate, status: reported, ref: ectc51909.2023.00091-a.notes, note: "SC-RDL equals the 91 x 91 mm substrate; side mold extended to the package substrate edge (-a-c7)"}
+  dummy_n: {value: 8, status: reported, ref: ectc51909.2023.00091-a-c3.count, note: "equivalent 3.8x reticle dummy Si; two rows of four (Fig. 6(b)); size from 3.8x / 8, square (template)"}
+  lsi_n: {value: 6, status: reported, ref: ectc51909.2023.00091-a-c4.count, note: "6 LSI in this TV (R5 fit n_hbm + n_soc = 6)"}
+  ri_back_n: {value: 6, status: reported, ref: ectc51909.2023.00091-a-L07.repeat, note: "6 B/S SC-RDL layers"}
+  # uBGA layer (with 45 embedded IPDs) between the SC-RDL and the substrate, modelled as the C4 field
+  c4_pitch_um: {value: 500, status: reported, ref: ectc51909.2023.00091-a-i3.pitch_um}
+  c4_h_um: {value: 200, status: reported, ref: ectc51909.2023.00091-a-i3.height_um, note: "uBGA layer height ~200 um (approx)"}
+  # uBGA field over the full SC-RDL (2026-10-20, coordinator / L9): the uBGA joins the substrate-sized SC-RDL to the substrate;
+  # the ball-field extent is not dimensioned, so the field spans the whole 91 x 91 mm (was: the RI footprint only)
+  c4_region_w_mm: {value: "=sbt_w_mm", status: template, refs: [ectc51909.2023.00091-a-i3.pitch_um, ectc51909.2023.00091-a-c6.x_mm], note: "uBGA field width = SC-RDL / substrate width (extent not dimensioned)"}
+  c4_region_d_mm: {value: "=sbt_d_mm", status: template, refs: [ectc51909.2023.00091-a-i3.pitch_um, ectc51909.2023.00091-a-c6.y_mm], note: "uBGA field length = SC-RDL / substrate length (extent not dimensioned)"}
+  lid_type: {value: lid, status: reported, ref: ectc51909.2023.00091-a-c8.name, note: "lid-type TV (Fig. 6(c) 'Lid: 91mmx91mmx2mm')"}
+  lid_h_um: {value: 2000, status: reported, ref: ectc51909.2023.00091-a-c8.thickness_um}
+geometry:
+  symmetry: quarter
+  drop_kinds: [bga]
+  resolve: []
+materials:
+  # CD6 overlap ceiling 225 C (solder_resist); compliant tim_polymer (E 5.8 MPa) holds its last value above 150 C
+  allow_extrapolation: [tim_polymer]
+  map: {}
+  overrides: {}
+mesh:
+  # coarse common mesh (L3 wave 6 / L19 variant spreads: max_xy 2.5 mm, grading 2, 1 cell per layer): process_sequence
+  # studies use the direct solver (engine/src/mech/process.mjs), so the case mesh (1.08e6 DOF) is out of reach; s2 / s3
+  # repeat the single-step studies of warpage_rt_ht on this mesh as the same-mesh reference
+  max_xy_mm: 2.5
+  min_cells_per_layer: 1
+  grading: 2
+  max_nodes: 1000000
+physics:
+  thermal:
+    sources:
+      - {parts: "soc_*", power_W: 1000, distribution: uniform_volume}      # total over the matched parts (2 SoC); end-to-end only
+    bcs:
+      - {selection: "top:lid", type: temperature, T_C: 40}
+      - {selection: default, type: adiabatic}
+  mechanics:
+    element: q1im
+    stress_free_C: {default: 150, per_part: {}}
+    supports: symmetry
+studies:
+  - {id: s1, type: thermal_stationary, note: "end-to-end smoke run (same thermal set-up as warpage_rt_ht s1), not a validation"}
+  - {id: s2, type: thermo_elastic, temperature: {uniform_C: [25]}, note: "single-step reference on this mesh (all parts stress-free 150 C) = the lid_attach sequence with module and attach at 150 C"}
+  - {id: s3, type: thermo_elastic, temperature: {uniform_C: [225]}, note: "single-step reference on this mesh at the CD6 ceiling 225 C (a-m2 measured at 240 C, offset 15 C)"}
+  - id: lid_attach_125
+    type: process_sequence
+    note: "lower attach bound 125 C (L23 item 4 bounds 125-180 C; A6: bounds OK); module stress-free 150 C (template)"
+    steps:
+      - {id: package_cure, activate: ["substrate", "sbt_*", "pth", "c4", "c4uf", "ri_*", "lsi_*", "tiv_*", "mold", "uf", "soc_*", "hbm_*", "ubump_*"], stress_free_C: 150, temperature: {uniform_C: 125}, note: "module + substrate stress-free at 150 C, taken to the lid attach temperature 125 C"}
+      - {id: lid_attach, activate: ["tim", "lid"], stress_free_C: 125, temperature: {uniform_C: 125}, note: "film TIM + lid plate (no feet in this geometry: the lid sits on the mold-sized TIM) stress-free at 125 C on the deformed module"}
+      - {id: ramp_25, temperature: {uniform_C: 25}}
+      - {id: ramp_225, temperature: {uniform_C: 225}, note: "CD6 overlap ceiling 225 C (solder_resist); a-m2 measured at 240 C (offset 15 C)"}
+  - id: lid_attach_180
+    type: process_sequence
+    note: "upper attach bound 180 C (L23 item 4); module stress-free 150 C (template)"
+    steps:
+      - {id: package_cure, activate: ["substrate", "sbt_*", "pth", "c4", "c4uf", "ri_*", "lsi_*", "tiv_*", "mold", "uf", "soc_*", "hbm_*", "ubump_*"], stress_free_C: 150, temperature: {uniform_C: 180}, note: "module + substrate stress-free at 150 C, taken to the lid attach temperature 180 C"}
+      - {id: lid_attach, activate: ["tim", "lid"], stress_free_C: 180, temperature: {uniform_C: 180}, note: "film TIM + lid plate (no feet in this geometry: the lid sits on the mold-sized TIM) stress-free at 180 C on the deformed module"}
+      - {id: ramp_25, temperature: {uniform_C: 25}}
+      - {id: ramp_225, temperature: {uniform_C: 225}, note: "CD6 overlap ceiling 225 C (solder_resist); a-m2 measured at 240 C (offset 15 C)"}
+  - id: module161_lid150
+    type: process_sequence
+    note: "module-stage bound 161 C (linear Tsf implied by the ring TV pair of the same paper, validation/expected/implied_tsf.py) with the lid attached at the 150 C template"
+    steps:
+      - {id: package_cure, activate: ["substrate", "sbt_*", "pth", "c4", "c4uf", "ri_*", "lsi_*", "tiv_*", "mold", "uf", "soc_*", "hbm_*", "ubump_*"], stress_free_C: 161, temperature: {uniform_C: 150}, note: "module + substrate stress-free at 161 C, taken to the lid attach temperature 150 C"}
+      - {id: lid_attach, activate: ["tim", "lid"], stress_free_C: 150, temperature: {uniform_C: 150}, note: "film TIM + lid plate (no feet in this geometry: the lid sits on the mold-sized TIM) stress-free at 150 C on the deformed module"}
+      - {id: ramp_25, temperature: {uniform_C: 25}}
+      - {id: ramp_225, temperature: {uniform_C: 225}, note: "CD6 overlap ceiling 225 C (solder_resist); a-m2 measured at 240 C (offset 15 C)"}
+targets:
+  - {metric_id: ectc51909.2023.00091-a-m1, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: s2, T_C: 25, tolerance: {rel: 0.5}, tier: D}
+  - {metric_id: ectc51909.2023.00091-a-m2, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: s3, T_C: 225, tolerance: {rel: 0.5}, tier: D, note: "measured at 240 C; run at the CD6 ceiling 225 C (offset 15 C)"}
+  - {metric_id: ectc51909.2023.00091-a-m1, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: lid_attach_125, step: ramp_25, tolerance: {rel: 0.5}, tier: D}
+  - {metric_id: ectc51909.2023.00091-a-m2, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: lid_attach_125, step: ramp_225, tolerance: {rel: 0.5}, tier: D, note: "measured at 240 C; compared at the CD6 ceiling 225 C"}
+  - {metric_id: ectc51909.2023.00091-a-m1, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: lid_attach_180, step: ramp_25, tolerance: {rel: 0.5}, tier: D}
+  - {metric_id: ectc51909.2023.00091-a-m2, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: lid_attach_180, step: ramp_225, tolerance: {rel: 0.5}, tier: D, note: "measured at 240 C; compared at the CD6 ceiling 225 C"}
+  - {metric_id: ectc51909.2023.00091-a-m1, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: module161_lid150, step: ramp_25, tolerance: {rel: 0.5}, tier: D}
+  - {metric_id: ectc51909.2023.00091-a-m2, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: module161_lid150, step: ramp_225, tolerance: {rel: 0.5}, tier: D, note: "measured at 240 C; compared at the CD6 ceiling 225 C"}
+assumptions:
+  - "Process: module (interposer, dies, mold, underfills, SC-RDL, uBGA field) and substrate stress-free at 150 C (template, as warpage_rt_ht), then the film TIM and the Cu lid plate activated stress-free at the attach temperature on the deformed module (ectc51909.2023.00091 states no attach step, temperature, adhesive or TIM product). Attach bounds 125-180 C and the module-stage bound 161 C after L23 item 4 (A6: bounds OK)."
+  - "Attach at 150 C with the module at 150 C equals the single-step studies s2 / s3 exactly (zero deformation at activation), so that sequence is not run separately."
+  - "Each step solves with properties at its end temperature (linear elastic, no relaxation); the TIM film is the library tim_polymer (E 5.8 MPa) with its CD5 template CTE."
+  - "Coarse mesh (max_xy 2.5 mm, grading 2, 1 cell per layer) for the direct process-sequence solver; compare sequences with s2 / s3 of this case, not with warpage_rt_ht at the case mesh."
+  - "Signed comparison is information only (view side unstated, A6 priority 2); the validation gates are coplanarity, RT / HT ratio and the shape-gated sign flip."
+missing:
+  - "Lid / TIM attach temperature, adhesive and TIM product (00091: keyword 'metal TIM' only); module-stage stress-free temperature."
+  - "As warpage_rt_ht: dummy-die size and positions, top-die and LSI sizes, IPDs, material tables."

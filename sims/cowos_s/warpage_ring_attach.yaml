@@ -1,0 +1,96 @@
+# CoWoS-S TV1 (ectc51909.2023.00135-a, MediaTek): Cu ring on an adhesive frame attached as a process sequence (lane L26,
+# 2026-10-21; warpage-input change list item 3 of DevLog/research/2026-10-21-warpage-input-research.md as corrected by
+# audit DevLog/audits/round1_audit_A6_2026-10-21.md). Ring = photo-estimate width 9 mm, same-author thickness 2.5 mm
+# (sims/cowos_s/variants/substrate_ring_inputs.yaml ring_w9_h2p5); adhesive attach at 150 C, bounds 130 / 180 C.
+# Geometry otherwise = cowos_s family defaults (as warpage_corner_stress); coarse common mesh for the direct
+# process-sequence solver; s2 / s2h = single-step references on this mesh (ring bonded directly, no adhesive).
+# Targets: JEITA values (paper sign inverted, see validation/cases/D/ectc51909.2023.00135-cowos_s.yaml).
+schema: ap-sim/0
+id: cowos_s/warpage_ring_attach
+title: CoWoS-S TV1 (85 x 85 mm), Cu ring 9 x 2.5 mm on an adhesive frame, ring attach sequence 130-180 C, warpage 25 C / 225 C (coarse mesh)
+status: unvalidated
+family: cowos_s
+params:
+  ring_w_mm: {value: 9, status: template, note: "photo estimate (ectc51909.2023.00135 p.2 Fig. 2: bands 48 / 48 / 43 / 44 px of 413 px = 8.8-9.9 mm; A6 spot check 1), nominal 9 mm; bounds 8.6-19 mm (A6 item 3)"}
+  ring_wy_mm: {value: 9, status: template, note: "photo estimate, nominal 9 mm (fit limit along y on this TV 9.98 mm)"}
+  ring_h_um: {value: 2500, status: template, ref: "ectc51906.2022.00232 p.2 Table I (ring thickness 2.5 mm, same-author Cu rings on 74 / 91 mm packages)", note: "analog"}
+  ring_attach: {value: adhesive, status: template, refs: [ectc51906.2022.00108-a-L05.thickness_um], note: "ring on an adhesive frame (Samsung MIoS analog: adhesive < 100 um, stiffener press cure 150 -> 180 C, ectc51906.2022.00108 p.4); MediaTek states no attach method"}
+geometry:
+  symmetry: quarter
+  drop_kinds: [bga]
+  resolve: []
+materials:
+  # CD6 (Wentao 2026-10-21, overlap ceiling; L19): high-temperature studies run at the highest temperature that every
+  # non-compliant material of the stack covers without extrapolation: 225 C, limited by solder_resist (valid_T_C ends 225 C; next abf_gl 240 C).
+  # Targets measured above it are compared at the ceiling with the offset stated in the target note. Recompute with
+  # engine/src/families/tools/ceiling.mjs when library ranges change.
+  # Compliant layers (E <= 100 MPa at the study temperature) do not set the ceiling; they hold their last data value
+  # (results carry the extrapolated flag): silicone_adhesive (ring adhesive frame; E table ends at 150 C), as in
+  # si_interposer_peers/120mm_warpage (CD6 follow-up, Wentao 2026-10-21).
+  allow_extrapolation: [silicone_adhesive]
+  map:
+    stiffener: cu_lid         # part kind: Cu ring (ectc51909.2023.00135-a-c5.material); L2 maps lid / stiffener Cu to cu_lid
+  overrides: {}
+mesh:
+  # coarse common mesh (L3 wave 6 / L19 / L26 spreads) for the direct process-sequence solver
+  max_xy_mm: 2.5
+  min_cells_per_layer: 1
+  grading: 2
+  max_nodes: 300000
+physics:
+  thermal:
+    sources:
+      - {parts: "soc_*", power_W: 1000, distribution: uniform_volume}      # total over the matched parts (2 SoC)
+    bcs:
+      - {selection: "top:soc_*", type: temperature, T_C: 40}
+      - {selection: "top:hbm_*", type: temperature, T_C: 40}
+      - {selection: "top:mold*", type: temperature, T_C: 40}
+      - {selection: default, type: adiabatic}
+  mechanics:
+    element: q1im               # A3 bake-off winner (SPEC section 15); q2s as the reference variant
+    stress_free_C: {default: 150, per_part: {}}
+    supports: symmetry
+studies:
+  - {id: s1, type: thermal_stationary, note: "end-to-end smoke run (same thermal set-up as warpage_corner_stress s1), not a validation"}
+  - {id: s2, type: thermo_elastic, temperature: {uniform_C: [25]}, params: {ring_attach: {value: none, status: template, note: "single-step reference: ring bonded directly (as warpage_corner_stress)"}}, note: "single-step reference on this mesh, ring 9 x 2.5 mm bonded directly, all parts stress-free 150 C"}
+  - {id: s2h, type: thermo_elastic, temperature: {uniform_C: [225]}, params: {ring_attach: {value: none, status: template, note: "single-step reference: ring bonded directly"}}, note: "single-step reference at the CD6 ceiling 225 C (a-m2 measured at 250 C, offset 25 C)"}
+  - id: ring_attach_150
+    type: process_sequence
+    note: "adhesive attach at 150 C (L23 item 3 nominal; Samsung MIoS stiffener press cure 150 C analog)"
+    steps:
+      - {id: package_cure, activate: ["substrate", "interposer_*", "mold_*", "soc_*", "hbm_*", "uf1_*", "uf2", "ip_*", "sbt_*", "bt_*", "bb_*", "ubump_*", "c4_*", "tsv_*", "pth"], stress_free_C: 150, temperature: {uniform_C: 150}, note: "module + substrate stress-free at 150 C (template), taken to the ring attach temperature 150 C"}
+      - {id: ring_attach, activate: ["ring_*"], stress_free_C: 150, temperature: {uniform_C: 150}, note: "Cu ring + adhesive frame (ring_adh_*, ring_n/s/e/w) stress-free at 150 C on the deformed module"}
+      - {id: ramp_25, temperature: {uniform_C: 25}}
+      - {id: ramp_225, temperature: {uniform_C: 225}, note: "CD6 overlap ceiling 225 C (solder_resist); a-m2 measured at 250 C (offset 25 C)"}
+  - id: ring_attach_130
+    type: process_sequence
+    note: "lower attach bound 130 C (L23 / A6 bounds 130-180 C; JOINT2 silicone glue cure 130 C analog)"
+    steps:
+      - {id: package_cure, activate: ["substrate", "interposer_*", "mold_*", "soc_*", "hbm_*", "uf1_*", "uf2", "ip_*", "sbt_*", "bt_*", "bb_*", "ubump_*", "c4_*", "tsv_*", "pth"], stress_free_C: 150, temperature: {uniform_C: 130}, note: "module + substrate stress-free at 150 C (template), taken to the ring attach temperature 130 C"}
+      - {id: ring_attach, activate: ["ring_*"], stress_free_C: 130, temperature: {uniform_C: 130}, note: "Cu ring + adhesive frame (ring_adh_*, ring_n/s/e/w) stress-free at 130 C on the deformed module"}
+      - {id: ramp_25, temperature: {uniform_C: 25}}
+      - {id: ramp_225, temperature: {uniform_C: 225}, note: "CD6 overlap ceiling 225 C (solder_resist); a-m2 measured at 250 C (offset 25 C)"}
+  - id: ring_attach_180
+    type: process_sequence
+    note: "upper attach bound 180 C (L23 / A6 bounds; Samsung MIoS 180 C press cure analog)"
+    steps:
+      - {id: package_cure, activate: ["substrate", "interposer_*", "mold_*", "soc_*", "hbm_*", "uf1_*", "uf2", "ip_*", "sbt_*", "bt_*", "bb_*", "ubump_*", "c4_*", "tsv_*", "pth"], stress_free_C: 150, temperature: {uniform_C: 180}, note: "module + substrate stress-free at 150 C (template), taken to the ring attach temperature 180 C"}
+      - {id: ring_attach, activate: ["ring_*"], stress_free_C: 180, temperature: {uniform_C: 180}, note: "Cu ring + adhesive frame (ring_adh_*, ring_n/s/e/w) stress-free at 180 C on the deformed module"}
+      - {id: ramp_25, temperature: {uniform_C: 25}}
+      - {id: ramp_225, temperature: {uniform_C: 225}, note: "CD6 overlap ceiling 225 C (solder_resist); a-m2 measured at 250 C (offset 25 C)"}
+targets:
+  - {metric_id: ectc51909.2023.00135-a-m1, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: s2, T_C: 25, value: {value: 198, status: derived, ref: ectc51909.2023.00135-a-m1, note: "JEITA = -1 x printed -198 (Fig. 4 legend (-) Convex = dome; audit A6)"}, unit: um, tolerance: {rel: 0.5}, tier: D}
+  - {metric_id: ectc51909.2023.00135-a-m2, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: s2h, T_C: 225, value: {value: -153, status: derived, ref: ectc51909.2023.00135-a-m2, note: "JEITA = -1 x printed 153 (audit A6)"}, unit: um, tolerance: {rel: 0.5}, tier: D, note: "measured at 250 C; run at the CD6 ceiling 225 C (offset 25 C)"}
+  - {metric_id: ectc51909.2023.00135-a-m1, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: ring_attach_150, step: ramp_25, value: {value: 198, status: derived, ref: ectc51909.2023.00135-a-m1, note: "JEITA = -1 x printed -198 (Fig. 4 legend (-) Convex = dome; audit A6)"}, unit: um, tolerance: {rel: 0.5}, tier: D}
+  - {metric_id: ectc51909.2023.00135-a-m2, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: ring_attach_150, step: ramp_225, value: {value: -153, status: derived, ref: ectc51909.2023.00135-a-m2, note: "JEITA = -1 x printed 153 (audit A6)"}, unit: um, tolerance: {rel: 0.5}, tier: D, note: "measured at 250 C; compared at the CD6 ceiling 225 C (offset 25 C)"}
+  - {metric_id: ectc51909.2023.00135-a-m1, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: ring_attach_130, step: ramp_25, value: {value: 198, status: derived, ref: ectc51909.2023.00135-a-m1, note: "JEITA = -1 x printed -198 (Fig. 4 legend (-) Convex = dome; audit A6)"}, unit: um, tolerance: {rel: 0.5}, tier: D}
+  - {metric_id: ectc51909.2023.00135-a-m2, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: ring_attach_130, step: ramp_225, value: {value: -153, status: derived, ref: ectc51909.2023.00135-a-m2, note: "JEITA = -1 x printed 153 (audit A6)"}, unit: um, tolerance: {rel: 0.5}, tier: D, note: "measured at 250 C; compared at the CD6 ceiling 225 C (offset 25 C)"}
+  - {metric_id: ectc51909.2023.00135-a-m1, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: ring_attach_180, step: ramp_25, value: {value: 198, status: derived, ref: ectc51909.2023.00135-a-m1, note: "JEITA = -1 x printed -198 (Fig. 4 legend (-) Convex = dome; audit A6)"}, unit: um, tolerance: {rel: 0.5}, tier: D}
+  - {metric_id: ectc51909.2023.00135-a-m2, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: ring_attach_180, step: ramp_225, value: {value: -153, status: derived, ref: ectc51909.2023.00135-a-m2, note: "JEITA = -1 x printed 153 (audit A6)"}, unit: um, tolerance: {rel: 0.5}, tier: D, note: "measured at 250 C; compared at the CD6 ceiling 225 C (offset 25 C)"}
+assumptions:
+  - "Paper sign: BGA side up, '(-) Convex' = dome per the Fig. 4 legend pictogram (balls down), so JEITA ED-7306 (+ = top, non-interconnect surface convex) = -1 x printed: +198 um at 25 C, -153 um at 250 C (audit A6, about 95 % confidence; validation/cases/D/ectc51909.2023.00135-cowos_s.yaml)."
+  - "Process: module and substrate stress-free at 150 C (template, as warpage_corner_stress), Cu ring with its adhesive frame (library silicone_adhesive, 100 um template) activated stress-free at the attach temperature on the deformed module; MediaTek states no attach method, adhesive or temperature (bounds from the Samsung MIoS and JOINT2 analogs)."
+  - "Ring 9 mm wide (photo estimate) and 2.5 mm thick (same-author analog); the 7 x 2.0 mm template ring is the warpage_corner_stress default."
+  - "Coarse mesh (max_xy 2.5 mm, grading 2, 1 cell per layer); compare the sequences with s2 / s2h of this case."
+missing:
+  - "Ring attach method, adhesive, attach temperature, ring width (photo estimate only) and thickness; substrate stack and CTE (~15 ppm/K stated, template stack 9.58); stress-free temperature."

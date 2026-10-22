@@ -1,0 +1,101 @@
+# CoWoS-L lid-type TV (ectc51909.2023.00091-a): indium (metal) TIM variant of the lid attach sequence (lane L26,
+# 2026-10-21; warpage-input change list item 4 of DevLog/research/2026-10-21-warpage-input-research.md as corrected by
+# audit A6). Label: diagnostic (keyword reading 'metal TIM', ectc51909.2023.00091 p.1; the TIM of this TV is not
+# stated; ectc51909.2023.00174 p.2 Sec. II.B describes a 'film type' TIM for CoWoS-L lid packages). Same geometry as
+# cowos_l/warpage_lid_attach (params copied 2026-10-21) except the 200 um BLT; coarse common mesh. Room temperature
+# only: indium melts at 156.63 C, so the 225 C state (liquid TIM) is not modelled.
+schema: ap-sim/0
+id: cowos_l/warpage_lid_attach_indium
+title: CoWoS-L lid-type TV (91 x 91 mm), indium TIM (200 um) soldered lid attach sequence, warpage 25 C (diagnostic, coarse mesh)
+status: unvalidated
+family: cowos_l
+params:
+  sbt_w_mm: {value: 91, status: reported, ref: ectc51909.2023.00091-a-c6.x_mm}
+  sbt_d_mm: {value: 91, status: reported, ref: ectc51909.2023.00091-a-c6.y_mm}
+  soc_n: {value: 2, status: reported, ref: ectc51909.2023.00091-a-c1.count}
+  soc_cols_n: {value: 2, status: template, note: "two SoCs side by side with two HBM2E on each side (Fig. 6(b), ectc51909.2023.00091-f02; not dimensioned)"}
+  hbm_n: {value: 4, status: reported, ref: ectc51909.2023.00091-a-c2.count}
+  hbm_gen: {value: HBM2E, status: reported, ref: ectc51909.2023.00091-a-c2.name}
+  # interposer = top-die rectangle + 1 mm per side (1.6x); SC-RDL and side mold extend to the 91 x 91 mm substrate
+  ip_size_rule: {value: fit_dies, status: reported, ref: ectc51909.2023.00091-a.notes, note: "interposer = top-die enclosing rectangle + 1 mm per side"}
+  reticle_x: {value: 1.6, status: reported, ref: ectc51909.2023.00091-a.reticle_multiple}
+  sc_rdl: {value: substrate, status: reported, ref: ectc51909.2023.00091-a.notes, note: "SC-RDL equals the 91 x 91 mm substrate; side mold extended to the package substrate edge (-a-c7)"}
+  dummy_n: {value: 8, status: reported, ref: ectc51909.2023.00091-a-c3.count, note: "equivalent 3.8x reticle dummy Si; two rows of four (Fig. 6(b)); size from 3.8x / 8, square (template)"}
+  lsi_n: {value: 6, status: reported, ref: ectc51909.2023.00091-a-c4.count, note: "6 LSI in this TV (R5 fit n_hbm + n_soc = 6)"}
+  ri_back_n: {value: 6, status: reported, ref: ectc51909.2023.00091-a-L07.repeat, note: "6 B/S SC-RDL layers"}
+  # uBGA layer (with 45 embedded IPDs) between the SC-RDL and the substrate, modelled as the C4 field
+  c4_pitch_um: {value: 500, status: reported, ref: ectc51909.2023.00091-a-i3.pitch_um}
+  c4_h_um: {value: 200, status: reported, ref: ectc51909.2023.00091-a-i3.height_um, note: "uBGA layer height ~200 um (approx)"}
+  # uBGA field over the full SC-RDL (2026-10-20, coordinator / L9): the uBGA joins the substrate-sized SC-RDL to the substrate;
+  # the ball-field extent is not dimensioned, so the field spans the whole 91 x 91 mm (was: the RI footprint only)
+  c4_region_w_mm: {value: "=sbt_w_mm", status: template, refs: [ectc51909.2023.00091-a-i3.pitch_um, ectc51909.2023.00091-a-c6.x_mm], note: "uBGA field width = SC-RDL / substrate width (extent not dimensioned)"}
+  c4_region_d_mm: {value: "=sbt_d_mm", status: template, refs: [ectc51909.2023.00091-a-i3.pitch_um, ectc51909.2023.00091-a-c6.y_mm], note: "uBGA field length = SC-RDL / substrate length (extent not dimensioned)"}
+  lid_type: {value: lid, status: reported, ref: ectc51909.2023.00091-a-c8.name, note: "lid-type TV (Fig. 6(c) 'Lid: 91mmx91mmx2mm')"}
+  lid_h_um: {value: 2000, status: reported, ref: ectc51909.2023.00091-a-c8.thickness_um}
+  tim_h_um: {value: 200, status: template, refs: [ectc51687.2025.00085-c], note: "metal TIM BLT 200 um of a TSMC CoWoS-R lid TV (ectc51687.2025.00085 p.3: 'The metal TIM used in this study has a bond line thickness (BLT) of 200um'); related, not this TV"}
+geometry:
+  symmetry: quarter
+  drop_kinds: [bga]
+  resolve: []
+materials:
+  # tim_indium elastic data are missing in the library (no indium elastic source read): E / nu are case overrides
+  # (A6 M7: the L23 pair E 11 GPa (WebElements, secondary) + nu 0.45 (Kim and Ledbetter 1998 abstract, a
+  # low-temperature study) is not from one source; bracketed with nu 0.35 in indium_lid_seq_nu035). The tim_indium
+  # valid_T_C [-73.15, 126.85] C is the span of its k table; the 156.63 C stress-free reference lies above it, so the
+  # sequence studies allow tim_indium extrapolation (constant E / nu / CTE 32.1 ppm/K up to the melting point).
+  map:
+    tim: tim_indium
+  overrides:
+    tim_indium:
+      E_GPa: {value: 11, status: sensitivity, ref: "WebElements indium page (secondary; search result retrieved 2026-10-21 by lane L23, DevLog/research/2026-10-21-warpage-input-research.md Case 1)", note: "diagnostic value, not a primary source (A6 M7)"}
+      nu: {value: 0.45, status: sensitivity, ref: "Kim S.A., Ledbetter H.M., Mater. Sci. Eng. A 252(1) 1998, abstract (NIST page retrieved 2026-10-21 by lane L23): 'The Poisson ratio is unusually high: 0.45'", note: "low-temperature study; abstract gives no room-temperature E (A6 M7)"}
+mesh:
+  # coarse common mesh (L3 wave 6 / L19 variant spreads: max_xy 2.5 mm, grading 2, 1 cell per layer): process_sequence
+  # studies use the direct solver (engine/src/mech/process.mjs), so the case mesh (1.08e6 DOF) is out of reach; s2 / s3
+  # repeat the single-step studies of warpage_rt_ht on this mesh as the same-mesh reference
+  max_xy_mm: 2.5
+  min_cells_per_layer: 1
+  grading: 2
+  max_nodes: 1000000
+physics:
+  thermal:
+    sources:
+      - {parts: "soc_*", power_W: 1000, distribution: uniform_volume}      # total over the matched parts (2 SoC); end-to-end only
+    bcs:
+      - {selection: "top:lid", type: temperature, T_C: 40}
+      - {selection: default, type: adiabatic}
+  mechanics:
+    element: q1im
+    stress_free_C: {default: 150, per_part: {}}
+    supports: symmetry
+studies:
+  - {id: s1, type: thermal_stationary, note: "end-to-end smoke run, not a validation"}
+  - id: indium_lid_seq
+    type: process_sequence
+    note: "indium TIM, E 11 GPa / nu 0.45 (case overrides; pair not from one source, A6 M7); RT only (indium liquid above 156.63 C)"
+    materials:
+      allow_extrapolation: [tim_indium]
+    steps:
+      - {id: package_cure, activate: ["substrate", "sbt_*", "pth", "c4", "c4uf", "ri_*", "lsi_*", "tiv_*", "mold", "uf", "soc_*", "hbm_*", "ubump_*"], stress_free_C: 150, temperature: {uniform_C: 156.63}, note: "module + substrate stress-free at 150 C (template), heated to the indium solidification temperature"}
+      - {id: lid_attach, activate: ["tim", "lid"], stress_free_C: 156.63, temperature: {uniform_C: 125}, note: "indium TIM + lid stress-free at the indium melting point 156.63 C (429.784 K, library tim_indium note), cooled to 125 C (inside the tim_indium data range)"}
+      - {id: ramp_25, temperature: {uniform_C: 25}}
+  - id: indium_lid_seq_nu035
+    type: process_sequence
+    note: "indium TIM, E 11 GPa / nu 0.35 (template bound on nu)"
+    materials:
+      allow_extrapolation: [tim_indium]
+      overrides:
+        tim_indium:
+          nu: {value: 0.35, status: sensitivity, note: "L26 template bound (nu 0.45 - 0.10), no source: tests the sensitivity to the unsourced E / nu pairing (A6 M7)"}
+    steps:
+      - {id: package_cure, activate: ["substrate", "sbt_*", "pth", "c4", "c4uf", "ri_*", "lsi_*", "tiv_*", "mold", "uf", "soc_*", "hbm_*", "ubump_*"], stress_free_C: 150, temperature: {uniform_C: 156.63}, note: "module + substrate stress-free at 150 C (template), heated to the indium solidification temperature"}
+      - {id: lid_attach, activate: ["tim", "lid"], stress_free_C: 156.63, temperature: {uniform_C: 125}, note: "indium TIM + lid stress-free at the indium melting point 156.63 C (429.784 K, library tim_indium note), cooled to 125 C (inside the tim_indium data range)"}
+      - {id: ramp_25, temperature: {uniform_C: 25}}
+targets:
+  - {metric_id: ectc51909.2023.00091-a-m1, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: indium_lid_seq, step: ramp_25, tolerance: {rel: 0.5}, tier: D, note: "information only: view side unstated (A6 priority 2); validation gates are sign-agnostic"}
+assumptions:
+  - "Diagnostic of the 'metal TIM' keyword (00091 p.1): indium TIM soldered between dies and lid; stress-free at the indium melting point 156.63 C (solidification; library tim_indium note 429.784 K), module and substrate stress-free at 150 C (template)."
+  - "Indium E 11 GPa / nu 0.45 (secondary + abstract; not one source) and a nu 0.35 template bound; CTE 32.1 ppm/K (library tim_indium, NIST solder database Table 2.2.4). No plasticity or creep of indium (elastic only), so the RT coupling is an upper bound of the stiff-TIM limit."
+  - "BLT 200 um (TSMC CoWoS-R metal TIM, ectc51687.2025.00085 p.3; related)."
+missing:
+  - "A primary room-temperature indium E / nu pair (Kim and Ledbetter full text is on the L23 manual-download list); indium inelasticity; the TIM actually used in the 00091 lid TV."

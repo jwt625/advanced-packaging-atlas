@@ -35,8 +35,13 @@ geometry:
   drop_kinds: [bga]
   resolve: []
 materials:
-  # CD6: hold the last data value beyond the range for these keys only; reason: target a-m2 is at 240 C; tim_polymer data end at 150 C. The TIM is a compliant layer (CD5 template CTE, E <= 100 MPa): L8 found x3 on its CTE changes lidded warpage by about 1 %, so holding the last value is judged acceptable. solder_resist (SR layers, mapped since 2026-10-20) at 225 C, its last instantaneous CTE 130 ppm/K (above 121 C) held (15 C short).
-  allow_extrapolation: [tim_polymer, solder_resist]
+  # CD6 (Wentao 2026-10-21, overlap ceiling; L19): high-temperature studies run at the highest temperature that every
+  # non-compliant material of the stack covers without extrapolation: 225 C, limited by solder_resist (valid_T_C ends 225 C; next abf_gl 240 C).
+  # Targets measured above it are compared at the ceiling with the offset stated in the target note. Recompute with
+  # engine/src/families/tools/ceiling.mjs when library ranges change.
+  # Compliant layers (E <= 100 MPa at the study temperature) do not set the ceiling; they hold their last data value
+  # (results carry the extrapolated flag): tim_polymer (film TIM, E 5.8 MPa; data end at 150 C; CD5 template CTE; L8: x3 on its CTE changes lidded warpage by about 1 %).
+  allow_extrapolation: [tim_polymer]
   map: {}
   overrides: {}
 mesh:
@@ -59,10 +64,10 @@ physics:
 studies:
   - {id: s1, type: thermal_stationary}
   - {id: s2, type: thermo_elastic, temperature: {uniform_C: [25]}}
-  - {id: s3, type: thermo_elastic, temperature: {uniform_C: [240]}}
+  - {id: s3, type: thermo_elastic, temperature: {uniform_C: [225]}, note: "CD6 overlap ceiling 225 C (solder_resist); target a-m2 (240 C) compared here (offset 15 C). CD5: the TIM and lid stay in this study: the paper measured the lidded package at 240 C (Fig. 6(c), lid-type TV), not a pre-lid reflow stage"}
 targets:
   - {metric_id: ectc51909.2023.00091-a-m1, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: s2, T_C: 25, tolerance: {rel: 0.5}, tier: D}
-  - {metric_id: ectc51909.2023.00091-a-m2, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: s3, T_C: 240, tolerance: {rel: 0.5}, tier: D}
+  - {metric_id: ectc51909.2023.00091-a-m2, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: s3, T_C: 225, tolerance: {rel: 0.5}, tier: D, note: "measured at 240 C; run at the CD6 ceiling 225 C (offset 15 C)"}
 assumptions:
   - "Thermal study s1 is an end-to-end run, not a validation: 500 W per SoC = analog 'GPU 500 W each' (ectc51687.2025.00055-g condition, p.4 Fig. 6(a)); lid top fixed at 40 C = cold-plate water temperature of the same analog (zero cold-plate resistance); HBM power neglected."
   - "Stress-free temperature 150 C for all parts (template; analog post-assembly stress-free 150 C of ectc51687.2025.00178-c-m3, R5 sec. 4.1)."

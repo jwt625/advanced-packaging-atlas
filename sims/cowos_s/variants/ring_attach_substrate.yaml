@@ -1,0 +1,9 @@
+# Substrate variant for cowos_s/warpage_ring_attach (lane L26, 2026-10-21): the calibration sub_cte15_core of
+# sims/cowos_s/variants/substrate_ring_inputs.yaml (core_lowcte 13.91 ppm/K -> CLT membrane CTE 15.00 ppm/K, MediaTek
+# ~15, ectc51909.2023.00135 p.3 Sec. III.E). The runner adds the base (case as configured). Run (engine/):
+#   node src/runner/node.mjs ../sims/cowos_s/warpage_ring_attach.yaml --variants ../sims/cowos_s/variants/ring_attach_substrate.yaml
+variants:
+  - id: sub_cte15_core
+    label: "calibration: substrate membrane CTE 15.0 ppm/K (MediaTek ~15) via the template core CTE: core_lowcte 13.91 ppm/K constant"
+    basis: "ectc51909.2023.00135 p.3 Sec. III.E 'substrate CTE (~15 ppm/K)'; see substrate_ring_inputs.yaml"
+    overrides: {core_lowcte: {cte_ppmK: {value: 13.91, status: sensitivity, note: "L26 calibration to the stated substrate CTE ~15 ppm/K (ectc51909.2023.00135 p.3 Sec. III.E): CLT membrane CTE of the template stack 9.58 -> 15.00 ppm/K (150 -> 25 C)"}}}

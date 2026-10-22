@@ -1,0 +1,27 @@
+# Labelled substrate-route variants of si_interposer_peers/120mm_warpage and 120mm_warpage_cu (study
+# stiffener_attach_sequence), A6 item 2 / item 5 (audit DevLog/audits/round1_audit_A6_2026-10-21.md). Lane L26,
+# 2026-10-21. Run (engine/):
+#   node src/runner/node.mjs ../sims/si_interposer_peers/120mm_warpage.yaml --variants ../sims/si_interposer_peers/variants/substrate_a_cte.yaml --study stiffener_attach_sequence
+# Stated: Substrate A CTE 11.97 ppm/C (ectc51529.2024.00155 p.3 Sec. II.C; same value ectc51687.2025.00027 p.2 Sec.
+# II.B; method not stated). The core material is reported (Table IV: 33.5 GPa, 5.9 / 2.5 ppm/C, Tg 314 C), so the
+# stated CTE is reached through the template core thickness with the 1.8 mm template total held (the Table IV
+# dielectric, 3.2 GPa / 65 ppm/C, closes the total), not through a core property (A6). Membrane CTE = CLT in-plane
+# laminate CTE A^-1 N of the generated substrate layers (A6 method), secant from the case Tsf 170 C:
+#   core 1400 um (template) 9.48 (30 C) / 9.61 (225 C); 1000 um 12.29 (30 C); 1040 um 11.95 (30 C) / 12.11 (225 C);
+#   1100 um 11.46 (30 C). The build-up Cu route cannot reach 11.97 (20 um -> 10.12; 25 um closes to a negative
+#   dielectric thickness).
+# Labels: calibration = an input calibrated to a stated input value (never to a warpage target); sensitivity = bound.
+common: {id: coarse, label: "coarse common mesh (L3 wave 6 / L19 spread mesh)", basis: mesh, mesh: {max_xy_mm: 2.5, grading: 2, min_cells_per_layer: 1}}
+variants:
+  - id: sub1197_core1040
+    label: "calibration: Substrate A membrane CTE 11.95 ppm/K (30 C; stated 11.97) via core 1400 -> 1040 um, total 1.8 mm held"
+    basis: "ectc51529.2024.00155 p.3 Sec. II.C (Substrate A CTE 11.97 ppm/C); core thickness and total are templates (-a-c4 notes: not given); A6 route"
+    params: {core_h_um: {value: 1040, status: template, refs: [ectc51529.2024.00155-a-c4.notes], note: "L26 calibration: core thickness that gives the stated Substrate A CTE 11.97 ppm/C as CLT membrane CTE (11.95 at 30 C, 12.11 at 225 C) with the 1.8 mm template total held"}}
+  - id: core1000
+    label: "sensitivity: core 1000 um (A6 'about 1.0-1.1 mm' low end): membrane CTE 12.29 ppm/K (30 C)"
+    basis: "A6 item 2 range; bound of the calibration"
+    params: {core_h_um: {value: 1000, status: template, note: "L26 bound (A6: about 1.0-1.1 mm)"}}
+  - id: core1100
+    label: "sensitivity: core 1100 um (A6 'about 1.0-1.1 mm' high end): membrane CTE 11.46 ppm/K (30 C)"
+    basis: "A6 item 2 range; bound of the calibration"
+    params: {core_h_um: {value: 1100, status: template, note: "L26 bound (A6: about 1.0-1.1 mm)"}}

@@ -1,0 +1,18 @@
+# Labelled substrate-CTE bound variants of cowos_l/warpage_rt_ht (studies s2 25 C, s3 225 C), A6 item 2 (audit
+# DevLog/audits/round1_audit_A6_2026-10-21.md): ectc51909.2023.00091 states no substrate CTE, so the corpus range of
+# stated large-FCBGA substrate CTEs 11.97-15 ppm/K is applied as a labelled related bound, never as validation.
+# Lane L26, 2026-10-21. Run:
+#   node src/runner/node.mjs ../sims/cowos_l/warpage_rt_ht.yaml --variants ../sims/cowos_l/variants/substrate_cte_bounds.yaml --study s2
+# Route: the core thickness (1.4 mm) and build-up count (3-2-3) are reported for this TV (Table 1), the core
+# material is a template (core_lowcte = JOINT2 Substrate B analog), so the bound is reached through the template core
+# CTE. Membrane CTE = CLT in-plane laminate CTE A^-1 N of the generated substrate layers (A6 method), secant from the
+# case stress-free 150 C to 25 C; template stack 8.92 / 8.84 ppm/K (x / y).
+variants:
+  - id: sub_cte1197
+    label: "sensitivity (related bound, low): substrate membrane CTE 11.97 ppm/K via the template core CTE: core_lowcte 10.58 ppm/K constant"
+    basis: "related: ectc51529.2024.00155 p.3 Sec. II.C 'Substrate A (CTE: 11.97 ppm/C)' (JOINT2 120 mm, not this TV); core CTE solved so the CLT membrane CTE (150 -> 25 C) = 11.97 / 11.92 (13.68 at 225 C)"
+    overrides: {core_lowcte: {cte_ppmK: {value: 10.58, status: sensitivity, note: "L26 related bound: CLT membrane CTE of the template stack 8.92 -> 11.97 ppm/K (150 -> 25 C); 00091 states no substrate CTE"}}}
+  - id: sub_cte15
+    label: "sensitivity (related bound, high): substrate membrane CTE 15.0 ppm/K via the template core CTE: core_lowcte 14.24 ppm/K constant"
+    basis: "related: ectc51909.2023.00135 p.3 Sec. III.E 'substrate CTE (~15 ppm/K)' (MediaTek CoWoS-S, not this TV); core CTE solved so the CLT membrane CTE (150 -> 25 C) = 15.00 / 14.98 (16.71 at 225 C)"
+    overrides: {core_lowcte: {cte_ppmK: {value: 14.24, status: sensitivity, note: "L26 related bound: CLT membrane CTE of the template stack 8.92 -> 15.00 ppm/K (150 -> 25 C); 00091 states no substrate CTE"}}}

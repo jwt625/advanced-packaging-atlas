@@ -1,5 +1,5 @@
 {
- "case_files": 80,
+ "case_files": 98,
  "missing": [],
  "rows": {
   "001c.129747-d-e1": {
@@ -2152,6 +2152,30 @@
    "tv_id": "ectc51909.2023.00135-a",
    "unit": "um",
    "value": 153,
+   "variant": "high temperature"
+  },
+  "ectc51909.2023.00135-b-m1": {
+   "basis": "unspecified",
+   "condition": "25 C",
+   "locator": "p.2 Fig. 4",
+   "parameter": "package warpage",
+   "statistic": "single",
+   "table": "metrics",
+   "tv_id": "ectc51909.2023.00135-b",
+   "unit": "um",
+   "value": -250,
+   "variant": "room temperature"
+  },
+  "ectc51909.2023.00135-b-m2": {
+   "basis": "unspecified",
+   "condition": "250 C",
+   "locator": "p.2 Fig. 4",
+   "parameter": "package warpage",
+   "statistic": "single",
+   "table": "metrics",
+   "tv_id": "ectc51909.2023.00135-b",
+   "unit": "um",
+   "value": 173,
    "variant": "high temperature"
   },
   "ectc51909.2023.00151-b-m6": {

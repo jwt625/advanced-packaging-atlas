@@ -1,0 +1,12 @@
+# Labelled lid-foot variant of si_interposer_peers/xilinx_tsv_lid (study s2, lidded, 25 C), warpage-input change list
+# item 7 (DevLog/research/2026-10-21-warpage-input-research.md) as corrected by audit A6 (lane L26, 2026-10-21). Run
+# (engine/):
+#   node src/runner/node.mjs ../sims/si_interposer_peers/xilinx_tsv_lid.yaml --variants ../sims/si_interposer_peers/variants/xilinx_lid_foot.yaml --study s2
+# A6: the "substrate at Cu CTE" variant is not applied (the core is reported, Table 2; "close to" gives no number;
+# L9's lid-CTE diagnostic +44.3 um already covers that lever). Its template build-up keeps the modelled substrate
+# membrane CTE at 14.55 ppm/K (A6).
+variants:
+  - id: foot_2mm
+    label: "sensitivity (low-confidence estimate, L): lid foot width 2 mm (template 3 mm), measured on the paper's FEM figure"
+    basis: "ectc.2011.5898527 p.3 Fig. 3(b) quarter-model side faces: foot about 50-55 px of a 575-610 px half-side (21.25 mm), i.e. about 2 mm (range 1.5-2.5 mm); L23 estimate (inferred), A6: safe as a labelled low-confidence variant"
+    params: {lid_foot_w_mm: {value: 2, status: template, note: "L23 figure estimate (ectc.2011.5898527 p.3 Fig. 3(b)), about 2 mm, range 1.5-2.5 mm, confidence L"}}

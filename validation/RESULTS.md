@@ -47,7 +47,7 @@ All dates are 2026-10-20. Tier = validation tier of the target (C paper-simulate
 | glass_core_substrate/warpage_vs_organic s2 / s2h | ectc51687.2025.00178-d-m3, -d-m4 (C, sign only) | 25 / 265 | +160 / -75 | +64.6 / -48.5 | pass (sign) | rve | L3 wave 5 |
 | glass_core_substrate s3 / s3h (bare) | ectc51687.2025.00178-d-m1, -d-m2 | 25 / 265 | +97 / -31 | -4.97 / +2.10 | untestable | rve | same |
 | fan_out_panel/panel_warpage s2 | 2380-4505-2020.1.000042-a-m9 (D) | 25 | 700 (strip on carrier) | +12633 (free strip) | untestable (carrier, geometric nonlinearity) | rom | L1 wave 3 (15:04-15:48) |
-| cowos_s/warpage_corner_stress s2 | ectc51909.2023.00135-a-m1 (D) | 25 | -198 | -339.5 (batch 15:20-16:30); L9 diag -340.57 (3 mm) / -341.08 (6 mm) | miss (+71 %) | rom or rve (batch spans the 15:57 default change); diag rve | L3 wave 5; L9 wave 2 |
+| cowos_s/warpage_corner_stress s2 | ectc51909.2023.00135-a-m1 (D) | 25 | -198 as printed = JEITA +198 (dome; audit A6, see the 2026-10-21 section) | -339.5 (batch 15:20-16:30); L9 diag -340.57 (3 mm) / -341.08 (6 mm) | miss (sign: bowl vs measured dome; recorded 2026-10-20 as "+71 %" against the printed sign) | rom or rve (batch spans the 15:57 default change); diag rve | L3 wave 5; L9 wave 2 |
 | cowos_s s3-s7 stress_norm | ectc51909.2023.00135-a-m10, m13, m14, m16 (C) | 25 | ratios | not rerun after the selection fix | indeterminate (corner maxima, audit S4) | - | L3 wave 5; L9 wave 2 |
 | emib_t/bridge_stress s2 | none | 25 / 240 | - | timed out (1800 s); earlier run vm maxima flagged reentrant | no target | - | L3 wave 5; L1 wave 3 |
 | ucla_si_if/warpage s2 | none | 25 | - | if_m2 107.8 MPa | no target | - | L3 wave 5 |
@@ -56,6 +56,52 @@ M1 note: the browser = CLI equality (1.9e-7 um) and the 1.52 GB browser peak wer
 
 Solver tolerance (L10): package studies run at PCG rtol 1e-7 (gate cases 1e-10). Going from 1e-10 to 1e-7 changes
 warpage by +-1.5e-4 um (fcbga, cowos_l), well below every tolerance above.
+
+## Mechanics, 2026-10-21 runs (L19 run queue and lane L26)
+
+Rows below supersede the 2026-10-20 rows of the same case / study. Conventions as above (JEITA ED-7306 as coded, + =
+dome). High-temperature points run at the CD6 overlap ceiling (SPEC section 23; 225 C for organic-substrate stacks,
+limited by solder_resist) and are compared with targets measured at 240-265 C with the offset stated. Every run is
+stamped dirty (nothing committed): `engine` = engine_version src / data hash of the run. Source = the run log in the
+session scratchpad named in DevLog/lanes/L26-sim-cases-2.md (L19 queue `logs/<job>_<ts>.out`, L26 `L26/logs/`).
+Labels on variant rows: `calibration` (an input calibrated to a stated input value, never to the target),
+`sensitivity` (bound of a template / estimated input), `diagnostic` (model-form probe); none of them is validation.
+Homogenization: `rve` = library default (RVE table / live RVE). Mesh = case mesh unless stated; PCG rtol 1e-7.
+
+| Case / study | Target (metric_id) | T C | Target value | Engine result | Verdict | Homog | Engine | Source |
+|---|---|---|---|---|---|---|---|---|
+| cowos_l/warpage_rt_ht s2 (1.08e6 DOF, 83 it) | ectc51909.2023.00091-a-m1 (D) | 25 | 64 (sign-agnostic: coplanarity 64 +- 20) | -250.738, bowl, cop 250.74 | miss (coplanarity 251 vs 64) | rve | e317ed2477da / 25cec1aa8723 (L21 library) | L19 queue cowos_l_s2_v2 (2026-10-21 18:58) |
+| cowos_l/warpage_rt_ht s3 (167 it) | ectc51909.2023.00091-a-m2 (D) | 225 (measured 240, offset 15) | 148 (coplanarity 148 +- 37) | +156.339, dome, cop 156.34 | pass (coplanarity 156 within 148 +- 37; at 225 C) | rve | e317ed2477da / 25cec1aa8723 | L19 queue cowos_l_s3_v2 (19:00) |
+| cowos_l RT / HT ratio | D/ectc51909.2023.00091-cowos_l rt_ht_ratio (lid) | 25 / 225 | -2.31, band [-4.2, -1.3] | -0.624 | miss | rve | same | same |
+| cowos_l sign flip | H/H01 (lid) | 25 / 225 | sign change | bowl -> dome | pass (shape_class bowl / dome) | rve | same | same |
+| cowos_l/warpage_rt_ht_ring48x s2 (new case, TV0_4.8x ring; 1.15e6 DOF, 97 it) | ectc51909.2023.00091-b-m1 (D) | 25 | 186 (coplanarity 186 +- 46.5) | -370.105, bowl, cop 370.11 | miss (coplanarity 370 vs 186) | rve | a0fd97c8f922 / 25cec1aa8723 | L19 queue ring48x_all (19:04) |
+| same s3 (183 it) | ectc51909.2023.00091-b-m2 (D) | 225 (measured 240, offset 15) | 107 (coplanarity 107 +- 26.75) | +155.241, W, cop 155.24 | miss (coplanarity 155 vs 107) | rve | same | same |
+| ring48x RT / HT ratio | D/ectc51909.2023.00091-cowos_l rt_ht_ratio (ring) | 25 / 225 | -0.575, band [-0.96, -0.35] | -0.419 | pass | rve | same | same |
+| ring48x sign flip | H/H01 (ring) | 25 / 225 | sign change | bowl -> W | indeterminate (W at 225 C; reported: signed value changes sign) | rve | same | same |
+| fcbga_organic/substrate_warpage s2h | ectc51687.2025.00178-c-m4 (C, sign only) | 225 (paper 265, offset 40) | -292 | -127.905, bowl | pass (sign) | rve | 65cd2edd8122 / 565a11a04c7c | L19 queue fcbga_s2h (19:11) |
+| fcbga_organic/substrate_warpage_bare s2h | ectc51687.2025.00178-c-m2, -b-m5 | 225 (paper 265 / 260) | -47 / -68 | +0.612, flat | untestable (undisclosed stack asymmetry) | rve | d842cf1dac26 / 565a11a04c7c | L19 queue fcbga_bare_s2h (19:12) |
+| cowos_s/warpage_corner_stress s2 (6.1e5 DOF; PCG stopped at max_iter 3000, relres 6.73e-7 > rtol 1e-7, accepted with warning) | ectc51909.2023.00135-a-m1 (D) | 25 | JEITA +198 (printed -198; audit A6) | -339.774, W, cop 339.77 | indeterminate (W shape, sign gate not evaluated); the signed value is opposite to the measured dome (sign miss as information) | rve | 1586e8ba5849 / af15b3ef8274 | L26 run cowos_s_all (2026-10-21 22:10, wall 6259 s) |
+| same s2h (1146 it, converged) | ectc51909.2023.00135-a-m2 (D) | 225 (measured 250, offset 25) | JEITA -153 (printed 153) | +169.119, W | indeterminate (W shape); signed value opposite to the measured bowl (information) | rve | 1586e8ba5849 / af15b3ef8274 | same |
+| cowos_s s3-s7 stress_norm (all 3000 it, relres 5.2-8.9e-7, not converged to rtol) | ectc51909.2023.00135-a-m10, m13, m14, m16 (C) | 25 | 0.79 / 1.15 / 1.1 / 0.98 | 1.1992 / 1.0002 / 1.0001 / 0.9998 | indeterminate (corner maxima, audit S4; ratios near 1.000 for the C4 sweep at unconverged PCG) | rve | 1586e8ba5849 / af15b3ef8274 | same |
+| cowos_s s2 variant sub_cte15_core (calibration: substrate membrane CTE 15.0 via core CTE 13.91) | a-m1 | 25 | JEITA +198 | +340.741, W, cop 340.7 | calibration (sign now dome-side; magnitude 1.7x) | rve | 1586e8ba5849 / af15b3ef8274 | L26 run cs_var_s2 (variants file sims/cowos_s/variants/substrate_ring_inputs.yaml) |
+| same, s2h | a-m2 | 225 | JEITA -153 | -184.603, bowl | calibration (sign and band max(20 um, 25 %) met: 185 vs 153 +- 38) | rve | 1586e8ba5849 / af15b3ef8274 | L26 run cs_var_s2h_b |
+| cowos_s variant sub_core800 (calibration, geometry route, membrane 14.18) | a-m1 / a-m2 | 25 / 225 | +198 / -153 | +299.223 (W) / -217.505 (bowl) | calibration | rve | 1586e8ba5849 / af15b3ef8274 | cs_var_s2 / cs_var_s2h_b |
+| cowos_s variant ring_w9 (sensitivity) | a-m1 / a-m2 | 25 / 225 | +198 / -153 | -372.555 (W) / +185.092 (W) | sensitivity | rve | 1586e8ba5849 / af15b3ef8274 | same |
+| cowos_s variant ring_w9_h2p5 (sensitivity) | a-m1 / a-m2 | 25 / 225 | +198 / -153 | -351.755 (W) / +169.734 (W) | sensitivity | rve | 1586e8ba5849 / af15b3ef8274 | same |
+| cowos_s variant ring_w8p6_h2p5 (sensitivity) | a-m1 / a-m2 | 25 / 225 | +198 / -153 | -346.703 (W) / +167.353 (W) | sensitivity | rve | 1586e8ba5849 / af15b3ef8274 | same |
+| cowos_s variant ring_wmax_h2p5 (sensitivity; x 19 mm, y 9.9 mm) | a-m1 / a-m2 | 25 / 225 | +198 / -153 | -402.323 (bowl) / +186.716 (dome) | sensitivity | rve | 1586e8ba5849 / af15b3ef8274 | same |
+| cowos_s variant sub_cte15_ring_w9_h2p5 (calibration + sensitivity: A6 items 2-3 input set) | a-m1 / a-m2 | 25 / 225 | +198 / -153 | +251.571 (W) / -135.210 (bowl) | calibration (225 C within 153 +- 38; 25 C 252 vs 198 +- 49.5, W shape) | rve | 1586e8ba5849 / af15b3ef8274 | same |
+| cowos_l/warpage_rt_ht variant sub_cte1197 (sensitivity, related bound: membrane CTE 11.97) | a-m1 / a-m2 (sign-agnostic gates) | 25 / 225 | coplanarity 64 +- 20 / 148 +- 37 | -93.590 (W, cop 93.6) / +71.061 (dome, cop 71.1) | sensitivity (both outside the bands; ratio -0.76) | rve | 1586e8ba5849 / af15b3ef8274 | L26 runs cl_sub_s2_b / cl_sub_s3_b (variants file sims/cowos_l/variants/substrate_cte_bounds.yaml; base reproduced -250.738 / +156.339) |
+| cowos_l variant sub_cte15 (sensitivity, related bound: membrane CTE 15.0) | same | 25 / 225 | same | +97.866 (W, cop 97.9) / -15.873 (saddle, cop 15.9) | sensitivity (RT sign turns dome-side; HT collapses) | rve | 1586e8ba5849 / af15b3ef8274 | same |
+| pending (not run at wrap-up 2026-10-22) | - | - | - | cowos_l/warpage_lid_attach (running at wrap-up, log L26/logs/cl_lid_attach_*.out, not recorded); warpage_lid_attach_indium; cowos_s/warpage_ring_attach (+ ring_attach_substrate); 120 mm substrate_a_cte, sus430_suspects, 120mm_warpage_tsf180, 120mm_warpage_cu with substrate_a_cte; xilinx_lid_foot; 50mm_quarter_e2 (cure_shrinkage both); re-runs of the L19 queue jobs below | pending | - | - | DevLog/lanes/L26-sim-cases-2.md (Next steps) |
+| L19 queue jobs not recorded | - | - | - | The L19 queue ended at 19:13 PDT 2026-10-21: from 19:13:21 every remaining job (glass s2h / s3h, cowos_s_all, fanout_all, sus430_variants, sus430_rigid, cu_subcte, emib_t s1, emib_t s2, xilinx s2) exited rc=1 in 0.1 s on a YAML parse error in engine/data/materials/encapsulants.yaml (another lane's edit in progress). cowos_s_all was re-run by L26 (rows above); the rest are pending | pending | - | - | L19 queue log; DevLog/lanes/L26-sim-cases-2.md |
+
+M1 at the rtol 1e-7 default (L19 task 5, 2026-10-21; DevLog/lanes/L19-sim-cases.md): cowos_l/warpage_rt_ht Node s2
+-250.745118 um, 121.9 s, peak RSS 1.344 GiB; s3 (225 C) +156.338865 um, 232.8 s, 1.376 GiB (library d354393892f2).
+Browser (headless Chrome, own dev server): s2 -250.745118 um (|dw| vs Node 1.9e-7 um), 106 s, largest-process peak
+1.290 GiB; s3 +156.338509 um (L21 library 25cec1aa8723; |dw| 3.6e-4 um vs the older-library Node run = the library
+change), 226 s, 1.535 GiB, above the ~1.5 GB per-worker target. The L19 queue Node runs on the L21 library: s2 1.446
+GiB, s3 1.591 GiB peak RSS (`time -l`).
 
 ## Thermal
 
@@ -97,3 +143,4 @@ warpage by +-1.5e-4 um (fcbga, cowos_l), well below every tolerance above.
 | Thermal: TA1, TA2, TA3a/b, TA4, TA6, XB4, XB5 | engine Q1 = scikit-fem Q1 node by node to <= 1.1e-10 K on identical grids; 17 / 23 rows within 1e-3 of the converged references, 6 coarse-level rows outside (discretization) | pass (verification) | L5 engine_xcheck; validation/README.md |
 | Mechanics: MA1, MA3, MA4a, MA4b, MA5b, MA6, XB1, XB2 | engine q2s = reference Q2s on the same grid (u 1e-13 to 1.6e-8 relative after rigid-motion removal; probe stresses 8-9 digits) | pass (verification) | same |
 | CLT plates through the CLI path (L9) | sign and magnitude within 0.05 % of CLT, both faces, crop and full model | pass (verification) | L9 engine check |
+| PLATE-NL (tier B cross-solver, 2026-10-21): thin bilayer square plate under uniform cooling, engine total-Lagrangian q2s vs scikit-fem total-Lagrangian SVK reference (`validation/reference/results/PLATE-NL-skfem.json`; deck in `engine/tests/mech-nl.test.mjs`) | bifurcation at dT -32.00 +- 0.02 K (L20 -32.01 K, linear interpolation over the 5 K bracket; refined reference -31.998 K, audit A7); symmetric-path sags (133.566 / 144.541 / 154.109 / 181.104 um at -30 / -35 / -40 / -60 K) and the switched stable branch at -35 K equal the reference to 2.7e-8 relative on the same mesh; gates in `engine/tests/mech-nl.test.mjs` | pass (verification) | DevLog/lanes/L20-engine-open-items.md task 2; DevLog/audits/round1_audit_A7_2026-10-21.md (M2, M9); row added by L26 at the coordinator's request |

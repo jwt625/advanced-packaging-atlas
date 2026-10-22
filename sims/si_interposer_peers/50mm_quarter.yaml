@@ -53,7 +53,7 @@ materials:
     si_crystal:
       cte_ppmK: {value: 3, status: reported, ref: "ectc51909.2023.00155-a-L09.properties (p.3 Table 8)"}
     polyimide_rdl:
-      E_GPa: {value: 32, status: reported, ref: "ectc51909.2023.00155-d-L02.properties (p.3 Table 8, insulation layer)"}
+      E_GPa: {value: 32, status: reported, ref: "ectc51909.2023.00155-d-L02.properties (p.3 Table 8, insulation layer)", note: "as printed (32,000 MPa; Table 8 re-read at 400 dpi, audit A6 M9); atypically stiff for a 3 um liquid polyimide, plausibility unverified"}
       cte_ppmK: {value: 65, status: reported, ref: "ectc51909.2023.00155-d-L02.properties (p.3 Table 8, insulation layer)"}
     cu_electroplated:
       E_GPa: {value: 100, status: reported, ref: "ectc51909.2023.00155-d-L03.properties (p.3 Table 8)"}
@@ -91,4 +91,6 @@ assumptions:
   - "Thermal study s1 is an end-to-end run, not a validation: 500 W on Die A (analog ectc51687.2025.00055-g condition), mold top fixed at 40 C (the 698 um EMC covers the 697 um die tops by 1 um)."
 missing:
   - "Poisson ratios; EMC / CUF relaxation data (Prony, WLF) and cure shrinkage use (0.16 % EMC, 21 % insulator given in Table 8)."
+  - "Insulation layer above its Tg (L26 2026-10-21, after L23 / A6): Table 8 gives Tg 233 C, E 32 GPa and alpha1 65 ppm/C with no above-Tg modulus or alpha2, so at 260 C the 3 um layer runs on below-Tg constants (no source for its rubbery state; flagged, not corrected)."
+  - "Insulation-layer cure shrinkage 21 % (Table 8): kept out of every default run (the layer is cured at 230 C for 2 h on the carrier-bonded molded wafer, ectc51909.2023.00155 p.4 Sec. III (1), above the 150 C stress-free temperature; kind and post-debond residual unknown; 21 % as a linear eigenstrain would be implausible, L23 inference). Open item."
   - "FEM boundary conditions beyond the quarter symmetry; mesh (20-node hexahedra, MARC 2021.2)."

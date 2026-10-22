@@ -1,0 +1,38 @@
+# Labelled variants of cowos_s/warpage_corner_stress (studies s2 25 C, s2h 225 C) for the warpage-input change list
+# (lane L23 research DevLog/research/2026-10-21-warpage-input-research.md, as corrected by audit A6
+# DevLog/audits/round1_audit_A6_2026-10-21.md items 2 and 3). Lane L26, 2026-10-21. Run:
+#   node src/runner/node.mjs ../sims/cowos_s/warpage_corner_stress.yaml --variants ../sims/cowos_s/variants/substrate_ring_inputs.yaml --study s2
+# Labels: calibration = an input calibrated to a stated input value (never to a warpage target); sensitivity = a
+# bound run of a template / estimated input; diagnostic = a model-form probe. None is a validation.
+# Membrane CTE = CLT in-plane laminate CTE A^-1 N of the generated substrate layers (A6 method), secant from the
+# case stress-free 150 C to 25 C; template stack 9.58 ppm/K.
+variants:
+  - id: sub_cte15_core
+    label: "calibration: substrate membrane CTE 15.0 ppm/K (MediaTek ~15) via the template core CTE: core_lowcte 13.91 ppm/K constant (template core = JOINT2 Substrate B analog, 6.89 ppm/K secant 150 -> 25 C)"
+    basis: "ectc51909.2023.00135 p.3 Sec. III.E 'substrate CTE (~15 ppm/K)'; core CTE solved so the CLT membrane CTE (150 -> 25 C) = 15.00 (16.83 at 225 C); core material is a template here, so changing it changes template inputs only (A6 item 2)"
+    overrides: {core_lowcte: {cte_ppmK: {value: 13.91, status: sensitivity, note: "L26 calibration to the stated substrate CTE ~15 ppm/K (ectc51909.2023.00135 p.3 Sec. III.E): CLT membrane CTE of the template stack 9.58 -> 15.00 ppm/K (150 -> 25 C)"}}}
+  - id: sub_core800
+    label: "calibration (geometry route, A6 example): core 1300 -> 800 um with the template thickness closure (build-up Cu 14.4 -> 64.4 um per level): membrane CTE 14.18 ppm/K"
+    basis: "A6 item 2 example ('core 0.8 mm gives 14.2; template inputs only'); the closure makes the build-up Cu levels 64.4 um thick, unrealistic: read as a geometry-route bound, not a stack estimate"
+    params: {core_h_um: {value: 800, status: template, note: "L26 variant: core thickness route toward the stated ~15 ppm/K (A6 item 2); bu_cu_um closes the 1.6 mm template total"}}
+  - id: ring_w9
+    label: "sensitivity: ring width 9 mm all sides (photo nominal, A6 item 3; template 7 mm)"
+    basis: "ectc51909.2023.00135 p.2 Fig. 2 package photo: bands 48 / 48 / 43 / 44 px of 413 px = 8.8-9.9 mm on an 85 mm frame (A6 spot check 1; estimate, L-M)"
+    params: {ring_w_mm: {value: 9, status: template, note: "photo estimate (ectc51909.2023.00135 p.2 Fig. 2; A6 spot check 1), nominal 9 mm"}, ring_wy_mm: {value: 9, status: template, note: "photo estimate, nominal 9 mm"}}
+  - id: ring_w9_h2p5
+    label: "sensitivity: ring width 9 mm, thickness 2.5 mm (same-author Cu ring analog; template 2.0 mm)"
+    basis: "width as ring_w9; thickness ectc51906.2022.00232 p.2 Table I 'Ring Thickness (mm) 2.5 / 2.5' (MediaTek 74 / 91 mm packages, analog)"
+    params: {ring_w_mm: {value: 9, status: template, note: "photo estimate, nominal 9 mm"}, ring_wy_mm: {value: 9, status: template, note: "photo estimate, nominal 9 mm"}, ring_h_um: {value: 2500, status: template, ref: "ectc51906.2022.00232 p.2 Table I (ring thickness 2.5 mm)", note: "same-author analog"}}
+  - id: ring_w8p6_h2p5
+    label: "sensitivity: ring width lower bound 8.6 mm, thickness 2.5 mm"
+    basis: "A6 item 3 bounds 8.6-19 mm (photo low end 8.6); thickness as ring_w9_h2p5"
+    params: {ring_w_mm: {value: 8.6, status: template, note: "lower bound (A6 item 3)"}, ring_wy_mm: {value: 8.6, status: template, note: "lower bound (A6 item 3)"}, ring_h_um: {value: 2500, status: template, ref: "ectc51906.2022.00232 p.2 Table I", note: "same-author analog"}}
+  - id: ring_wmax_h2p5
+    label: "sensitivity: ring width upper bound: east / west bars 19 mm (A6 bound), north / south bars 9.9 mm (geometric limit: substrate 85 mm - UF2 fillet 65.03 mm leaves 9.98 mm per side); thickness 2.5 mm"
+    basis: "A6 item 3 upper bound 19 mm = same-author foot width 17 / 19 mm on a 91 mm package (ectc51906.2022.00232 p.2 Table I); it does not fit along y on this 85 mm TV (generator overlap rule), so y is capped at the fit limit"
+    params: {ring_w_mm: {value: 19, status: template, note: "upper bound (A6 item 3; ectc51906.2022.00232 Table I foot width 19 mm)"}, ring_wy_mm: {value: 9.9, status: template, note: "geometric limit along y (UF2 fillet 65.03 mm in an 85 mm substrate)"}, ring_h_um: {value: 2500, status: template, ref: "ectc51906.2022.00232 p.2 Table I", note: "same-author analog"}}
+  - id: sub_cte15_ring_w9_h2p5
+    label: "calibration + sensitivity: substrate membrane CTE 15.0 (sub_cte15_core) with the ring 9 mm x 2.5 mm (ring_w9_h2p5): the sourced-input set of A6 items 2-3 without the attach sequence"
+    basis: "combination of sub_cte15_core and ring_w9_h2p5"
+    overrides: {core_lowcte: {cte_ppmK: {value: 13.91, status: sensitivity, note: "L26 calibration to the stated substrate CTE ~15 ppm/K (see sub_cte15_core)"}}}
+    params: {ring_w_mm: {value: 9, status: template, note: "photo estimate, nominal 9 mm"}, ring_wy_mm: {value: 9, status: template, note: "photo estimate, nominal 9 mm"}, ring_h_um: {value: 2500, status: template, ref: "ectc51906.2022.00232 p.2 Table I", note: "same-author analog"}}

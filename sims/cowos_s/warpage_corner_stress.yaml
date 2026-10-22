@@ -13,8 +13,10 @@ geometry:
   drop_kinds: [bga]
   resolve: []
 materials:
-  # CD6: hold the last data value beyond the range for these keys only; reason: target a-m2 is at 250 C; abf_gl data end at 240 C (10 C short, no phase change in between), solder_resist (SR layers, mapped since 2026-10-20) at 225 C, its last instantaneous CTE 130 ppm/K (above 121 C) held; last table values held.
-  allow_extrapolation: [abf_gl, solder_resist]
+  # CD6 (Wentao 2026-10-21, overlap ceiling; L19): high-temperature studies run at the highest temperature that every
+  # non-compliant material of the stack covers without extrapolation: 225 C, limited by solder_resist (valid_T_C ends 225 C; next abf_gl 240 C).
+  # Targets measured above it are compared at the ceiling with the offset stated in the target note. Recompute with
+  # engine/src/families/tools/ceiling.mjs when library ranges change.
   map:
     stiffener: cu_lid         # part kind: Cu ring (ectc51909.2023.00135-a-c5.material); L2 maps lid / stiffener Cu to cu_lid
   overrides: {}
@@ -39,7 +41,7 @@ physics:
 studies:
   - {id: s1, type: thermal_stationary}
   - {id: s2, type: thermo_elastic, temperature: {uniform_C: [25]}}
-  - {id: s2h, type: thermo_elastic, temperature: {uniform_C: [250]}, note: "beyond the data range of abf_gl, solder_resist: runs with materials.allow_extrapolation (CD6); results carry the extrapolated flag"}
+  - {id: s2h, type: thermo_elastic, temperature: {uniform_C: [225]}, note: "CD6 overlap ceiling 225 C (solder_resist); target a-m2 (250 C) compared here (offset 25 C)"}
   - id: s3
     type: thermo_elastic
     temperature: {uniform_C: [25]}
@@ -61,8 +63,8 @@ studies:
     temperature: {uniform_C: [25]}
     params: {c4_h_um: {value: 90, status: reported, ref: ectc51909.2023.00135-a-i2.notes, note: "C4 standoff sweep"}}
 targets:
-  - {metric_id: ectc51909.2023.00135-a-m1, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: s2, T_C: 25, tolerance: {rel: 0.5}, tier: D}
-  - {metric_id: ectc51909.2023.00135-a-m2, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: s2h, T_C: 250, tolerance: {rel: 0.5}, tier: D}
+  - {metric_id: ectc51909.2023.00135-a-m1, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: s2, T_C: 25, value: {value: 198, status: derived, ref: ectc51909.2023.00135-a-m1, note: "JEITA = -1 x printed -198: Fig. 4 legend (-) Convex = dome with the balls down, maps BGA side up, p.2 text convex at RT (audit A6; validation/cases/D/ectc51909.2023.00135-cowos_s.yaml)"}, unit: um, tolerance: {rel: 0.5}, tier: D}
+  - {metric_id: ectc51909.2023.00135-a-m2, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: s2h, T_C: 225, value: {value: -153, status: derived, ref: ectc51909.2023.00135-a-m2, note: "JEITA = -1 x printed 153 (concave at 250 C = bowl; audit A6)"}, unit: um, tolerance: {rel: 0.5}, tier: D, note: "measured at 250 C; run at the CD6 ceiling 225 C (offset 25 C)"}
   # selection tsv_*: the interposer Si cells are owned by the TSV field box (homog:tsv copper+silicon, Cu fraction 0.0035) spanning the full interposer; ip_si@interposer_* owns no cells (checked on the grid 2026-10-20); tsv_b lies in the cropped half (quarter). Homogenized-field von Mises, not the bare-Si value
   # normalized corner stress: ratio to reference_study (s2: 100 um interposer, -a-m11 = 1.0; s6: C4 80 um, -a-m15 = 1.0)
   - {metric_id: ectc51909.2023.00135-a-m10, quantity: stress_norm, selection: "corner:tsv_*", definition: ratio_to_reference, study: s3, reference_study: s2, T_C: 25, tolerance: {rel: 0.1}, tier: C}
@@ -70,7 +72,7 @@ targets:
   - {metric_id: ectc51909.2023.00135-a-m14, quantity: stress_norm, selection: "corner:tsv_*", definition: ratio_to_reference, study: s5, reference_study: s6, T_C: 25, tolerance: {rel: 0.1}, tier: C}
   - {metric_id: ectc51909.2023.00135-a-m16, quantity: stress_norm, selection: "corner:tsv_*", definition: ratio_to_reference, study: s7, reference_study: s6, T_C: 25, tolerance: {rel: 0.1}, tier: C}
 assumptions:
-  - "Warpage basis not stated in the paper (DB basis 'unspecified', p.2 Fig. 4); treated as tier D regression. Paper sign: BGA side up, '-' = convex, '+' = concave (Fig. 4 legend); compared with the JEITA ED-7306 sign on the substrate bottom."
+  - "Warpage basis not stated in the paper (DB basis 'unspecified', p.2 Fig. 4); treated as tier D regression. Paper sign: BGA side up; the Fig. 4 legend draws '(-) Convex' as a dome with the balls hanging below, the RT maps (BGA side up) show a low centre and p.2 states convex at RT, concave at 250 C, so JEITA ED-7306 (+ = top, non-interconnect surface convex) = -1 x printed: targets +198 um at 25 C and -153 um at 250 C (TV1; TV2 +250 / -173), set as explicit values with provenance (audit A6, lane L26 2026-10-21). Before 2026-10-21 the printed values were compared directly (a sign error)."
   - "Stress-free temperature 150 C (template; not reported for CoWoS-S; R5 sec. 4.1 analog)."
   - "Corner-stress targets are ratios to the reference (100 um interposer, 80 um C4 = 1.0, -a-m11 / -a-m15); stress type and evaluation temperature not stated (25 C assumed); C4 standoff sweep values from the -a-i2 notes (60-90 um), the default template C4 is 55 um."
   - "The 50 um variant (s3) thins the Si core to the reported 50 um interposer thickness (ectc51909.2023.00135-c-c4) and keeps the template BEOL and backside levels."

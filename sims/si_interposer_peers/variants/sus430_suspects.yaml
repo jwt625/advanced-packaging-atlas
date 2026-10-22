@@ -1,0 +1,28 @@
+# Labelled sensitivity variants for the 120 mm SUS430 stiffener_attach_sequence trend miss (si_interposer_peers/
+# 120mm_warpage), first defined by lane L19 (session scratch file, 2026-10-21; DevLog/lanes/L19-sim-cases.md task 3) and
+# tracked here by lane L26 with two changes: the ring E bound uses status sensitivity (E_GPa accepts it since L26 Part C)
+# and the glue nu bounds follow the restored placeholder (silicone_adhesive nu 0.30, bounds 0.25 / 0.495; audit A8 S1).
+# Not fits. Run (engine/):
+#   node src/runner/node.mjs ../sims/si_interposer_peers/120mm_warpage.yaml --variants ../sims/si_interposer_peers/variants/sus430_suspects.yaml --study stiffener_attach_sequence
+common: {id: coarse, label: "coarse common mesh (L3 wave 6 / L19 spread mesh)", basis: mesh, mesh: {max_xy_mm: 2.5, grading: 2, min_cells_per_layer: 1}}
+variants:
+  - id: sub_cte_stated_corealpha
+    label: "diagnostic (L19): Substrate A CTE = stated 11.97 via the core alpha1 5.9 -> 10.58 ppm/K (replaces a reported Table IV value; A6: not the calibration route, kept as a diagnostic next to sub1197_core1040)"
+    basis: "derived from ectc51529.2024.00155 p.3 Sec. II.C (11.97 ppm/C) via the layup membrane CTE (L19); diagnostic only"
+    overrides: {core_lowcte: {cte_ppmK: {value: {alpha1: 10.58, alpha2: 2.5, Tg_C: 314}, status: sensitivity, note: "L19 diagnostic: core alpha1 that makes the modelled Substrate A membrane CTE equal the stated 11.97 ppm/C (replaces the reported 5.9)"}}}
+  - id: ring_cte_10p4
+    label: "sensitivity: SUS430 CTE 10.4 ppm/K (datasheet 20-300 C mean; library alternative cte_combmet_20_300)"
+    basis: "combmet_430 p.1 (library alternative)"
+    overrides: {sus430: {cte_ppmK: {value: 10.4, status: sensitivity, note: "library alternative cte_combmet_20_300 (Combined Metals 430 data sheet, 20-300 C mean)"}}}
+  - id: ring_E_half
+    label: "sensitivity: SUS430 E x0.5 (100 GPa): ring stiffness bound, not a source"
+    basis: "sensitivity bound (L19)"
+    overrides: {sus430: {E_GPa: {value: 100, status: sensitivity, note: "L19 sensitivity bound = 0.5 x the combmet_430 datasheet 200 GPa; not a material value"}}}
+  - id: glue_nu_025
+    label: "sensitivity: silicone_adhesive nu 0.25 (lower bound of the 0.30 placeholder, audit A8 S1)"
+    basis: "library silicone_adhesive nu sensitivity (minus 0.05)"
+    overrides: {silicone_adhesive: {nu: {value: 0.25, status: sensitivity, note: "lower bound of the CD4 placeholder 0.30 (library sensitivity minus 0.05)"}}}
+  - id: glue_nu_0495
+    label: "sensitivity: silicone_adhesive nu 0.495 (upper bound: rubbery-state PDMS analog, Mueller 2019; audit A8 S1)"
+    basis: "library alternative pdms_rubbery_analog_nu (c8sm02105h p.782 Sec. 5)"
+    overrides: {silicone_adhesive: {nu: {value: 0.495, status: sensitivity, note: "upper bound = rubbery PDMS analog (c8sm02105h p.782 Sec. 5), not physical at RT for this filled adhesive (A8 S1)"}}}

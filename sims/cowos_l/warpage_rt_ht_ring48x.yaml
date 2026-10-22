@@ -1,0 +1,84 @@
+# CoWoS-L_6x ring-type TV (ectc51909.2023.00091-b, TV0_4.8x): 6 SoC + 12 HBM2E, 18 LSI, SC-RDL and side mold over the
+# 91 x 91 mm substrate, stiffener ring, no TIM1; package warpage at 25 C and 240 C plus an end-to-end steady-thermal
+# study. Companion of cowos_l/warpage_rt_ht (TV0_1.6x, lid); validation case D/ectc51909.2023.00091-cowos_l variant
+# `ring`. Added 2026-10-21 (lane L19). Geometry: engine/src/families/cowos_l.mjs (ring on the side mold for sc_rdl).
+schema: ap-sim/0
+id: cowos_l/warpage_rt_ht_ring48x
+title: CoWoS-L_6x ring-type TV0_4.8x (6 SoC + 12 HBM2E, 91 x 91 mm), package warpage 25 C / 240 C
+status: unvalidated
+family: cowos_l
+params:
+  sbt_w_mm: {value: 91, status: reported, ref: ectc51909.2023.00091-b-c5.x_mm}
+  sbt_d_mm: {value: 91, status: reported, ref: ectc51909.2023.00091-b-c5.y_mm}
+  soc_n: {value: 6, status: reported, ref: ectc51909.2023.00091-b-c1.count}
+  soc_cols_n: {value: 2, status: template, note: "SoCs in 2 columns x 3 rows (Fig. 7(b) top view, p.4; not dimensioned)"}
+  hbm_n: {value: 12, status: reported, ref: ectc51909.2023.00091-b-c2.count, note: "six HBM2E per side of the SoC block (Fig. 7(b))"}
+  hbm_gen: {value: HBM2E, status: reported, ref: ectc51909.2023.00091-b-c2.name}
+  # interposer = top-die rectangle + 1 mm per side (definition p.2 Sec. II); fit_dies with template die sizes gives
+  # 61.85 x 62.75 mm = 3881 mm2 = 4.68x, vs the reported ~4000 mm2 / 4.8x (-b.interposer_area_mm2, approx): -3 %
+  ip_size_rule: {value: fit_dies, status: reported, ref: ectc51909.2023.00091-b.notes, note: "interposer = top-die enclosing rectangle + 1 mm per side (p.2 Sec. II)"}
+  reticle_x: {value: 4.8, status: reported, ref: ectc51909.2023.00091-b.reticle_multiple}
+  sc_rdl: {value: substrate, status: reported, ref: ectc51909.2023.00091-b-c6.name, note: "SC-RDL = 91 x 91 mm substrate (p.4 Sec. II.B); side mold extended to the package substrate edge (-b-c6)"}
+  dummy_n: {value: 0, status: reported, ref: "ectc51909.2023.00091 p.3 Table 1 (Dummy die Qty. 0 for TV0_4.8x)"}
+  lsi_n: {value: 18, status: reported, ref: ectc51909.2023.00091-b-c3.count, note: "18 LSI (R5 fit n_hbm + n_soc = 18); the layout draws 19 (one per die-to-die edge), reported as an info issue"}
+  ri_back_n: {value: 6, status: reported, ref: ectc51909.2023.00091-b-L06.repeat, note: "6 B/S SC-RDL layers"}
+  c4_pitch_um: {value: 500, status: reported, ref: ectc51909.2023.00091-b-i3.pitch_um}
+  c4_h_um: {value: 200, status: reported, ref: ectc51909.2023.00091-b-i3.height_um, note: "uBGA layer height ~200 um (approx)"}
+  c4_region_w_mm: {value: "=sbt_w_mm", status: template, refs: [ectc51909.2023.00091-b-i3.pitch_um, ectc51909.2023.00091-b-c5.x_mm], note: "uBGA field width = SC-RDL / substrate width (extent not dimensioned)"}
+  c4_region_d_mm: {value: "=sbt_d_mm", status: template, refs: [ectc51909.2023.00091-b-i3.pitch_um, ectc51909.2023.00091-b-c5.y_mm], note: "uBGA field length = SC-RDL / substrate length (extent not dimensioned)"}
+  lid_type: {value: ring, status: reported, ref: ectc51909.2023.00091-b-c7.name, note: "stiffener ring, no TIM1 (p.4 Sec. II.B)"}
+  # Fig. 7(c) label "Ring: 18mm-12mm-2mm" (-b-c7 notes: meaning of the three values not defined)
+  ring_h_um: {value: 2000, status: template, refs: [ectc51909.2023.00091-b-c7.notes], note: "ring thickness read as the label's last value (2 mm), by analogy with the lid label 'Lid: 91mmx91mmx2mm' of the same paper (Fig. 6(c)); not defined in the paper"}
+  ring_w_mm: {value: 12, status: template, refs: [ectc51909.2023.00091-b-c7.notes], note: "ring bar width read as the label's 12 mm on all four sides; an 18 mm bar on either axis leaves a 55 mm window, smaller than the template die block (59.85 x 60.75 mm incl. template die sizes) and is refused by the stiffener-overlap rule; sensitivity: ring_w_mm 10 / 14 mm (variants below)"}
+  ring_wy_mm: {value: "=ring_w_mm", status: template, note: "equal widths (label meaning not defined)"}
+geometry:
+  symmetry: quarter
+  drop_kinds: [bga]
+  resolve: []
+materials:
+  # CD6 (Wentao 2026-10-21, overlap ceiling; L19): high-temperature studies run at the highest temperature that every
+  # non-compliant material of the stack covers without extrapolation: 225 C, limited by solder_resist (valid_T_C ends 225 C; next abf_gl 240 C).
+  # Targets measured above it are compared at the ceiling with the offset stated in the target note. Recompute with
+  # engine/src/families/tools/ceiling.mjs when library ranges change.
+  map: {}
+  overrides: {}
+mesh:
+  max_xy_mm: 1.0
+  max_z_mm: 0.2               # as cowos_l/warpage_rt_ht (Q1 overshoot next to the thick dies)
+  min_cells_per_layer: 1      # warpage-only targets (as cowos_l/warpage_rt_ht; L8 q1im gate <= 5e-4 at 1 cell per layer)
+  grading: 1.3
+  max_nodes: 1000000
+physics:
+  thermal:
+    sources:
+      - {parts: "soc_*", power_W: 3000, distribution: uniform_volume}      # total over the matched parts (6 SoC, 500 W each)
+    bcs:
+      - {selection: "top:soc_*", type: temperature, T_C: 40}
+      - {selection: "top:hbm_*", type: temperature, T_C: 40}
+      - {selection: default, type: adiabatic}
+  mechanics:
+    element: q1im
+    stress_free_C: {default: 150, per_part: {}}
+    supports: symmetry
+studies:
+  - {id: s1, type: thermal_stationary}
+  - {id: s2, type: thermo_elastic, temperature: {uniform_C: [25]}}
+  - {id: s3, type: thermo_elastic, temperature: {uniform_C: [225]}, note: "CD6 overlap ceiling 225 C (solder_resist); target b-m2 (240 C) compared here (offset 15 C)"}
+targets:
+  - {metric_id: ectc51909.2023.00091-b-m1, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: s2, T_C: 25, tolerance: {rel: 0.5}, tier: D}
+  - {metric_id: ectc51909.2023.00091-b-m2, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: s3, T_C: 225, tolerance: {rel: 0.5}, tier: D, note: "measured at 240 C; run at the CD6 ceiling 225 C (offset 15 C)"}
+assumptions:
+  - "Thermal study s1 is an end-to-end run, not a validation: 500 W per SoC (analog ectc51687.2025.00055-g condition), die tops fixed at 40 C (the ring package has the heat sink directly on the die backs, p.4 Sec. II.B; zero sink resistance); HBM power neglected."
+  - "Stress-free temperature 150 C for all parts (template, as cowos_l/warpage_rt_ht; the ring pair implies a linear Tsf of 161 C, validation/expected/implied_tsf.py)."
+  - "Die sizes not reported: SoC 18.7 x 18.57 mm (backbone template) and HBM2E 11 x 10 mm (template); the fitted interposer (4.68x) is within 3 % of the reported ~4000 mm2."
+  - "Ring on the side-mold top beside the top dies (Fig. 7(a) cross-section: ring above the extended side mold), outer edge flush with the 91 mm package; bonded directly (attach adhesive not reported). Ring material Cu (generator lid_mat / ring default, not reported)."
+  - "uBGA layer as the C4 field (pitch 500 um, height 200 um) over the full 91 x 91 mm SC-RDL; template C4 diameter 75 um (uBGA ball size not reported); 45 IPDs dropped."
+  - "Measured surface and sign convention not stated (metric scope: 'sign as labeled in Fig. 7(c)'); compared on the substrate bottom with the JEITA ED-7306 sign; the validation case gates sign-agnostic quantities."
+  - "BGA dropped (package-level moire of the unmounted package; SAC305 above its solidus at 240 C)."
+  - "Quarter symmetry (sym:x, sym:y, one z point)."
+missing:
+  - "Meaning of the ring label '18mm-12mm-2mm', ring material and attach; top-die and LSI sizes and positions."
+  - "Material properties of mold, underfills, SC-RDL dielectric, substrate layers and ring; stress-free temperature, process sequence."
+  - "45 embedded IPDs (2.9 mm2 each, -b-c4): dropped."
+# Labelled sensitivity variants (runner --variants; not fits): ring_w_mm 10 / 14 mm (label reading), stress_free_C
+# 161 C (ratio-implied, validation/expected/implied_tsf.py).

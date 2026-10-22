@@ -7,7 +7,8 @@ physics: [thermo_elastic]
 source: {paper_id: ectc51909.2023.00091, tv_ids: [ectc51909.2023.00091-a, ectc51909.2023.00091-b]}
 inputs:
   sim_case: cowos_l/warpage_rt_ht
-  variants: {lid: "TV_1.6x with lid (-a; the case default)", ring: "TV_4.8x with stiffener ring 18-12-2 mm (-b; needs a ring variant in the sim case)"}
+  variants: {lid: "TV_1.6x with lid (-a; the case default)", ring: "TV_4.8x with stiffener ring 18-12-2 mm (-b; sim case cowos_l/warpage_rt_ht_ring48x, L19 2026-10-21)"}
+  high_T_note: "CD6 overlap ceiling (Wentao 2026-10-21): the 240 C points run at 225 C in both sim cases (solder_resist valid to 225 C; offset 15 C); the RT / HT ratio and the flip are evaluated on the 25 / 225 C pair"
 why_sign_agnostic: >-
   Measured surface, view side and method are not stated (DB scope: "sign as labeled in Fig. 6(c), convention not
   stated"). The RT map is saddle-like, and for a saddle a signed warpage is ill-defined. If the moire was read from

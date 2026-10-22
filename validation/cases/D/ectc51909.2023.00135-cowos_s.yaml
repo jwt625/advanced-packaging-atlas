@@ -1,0 +1,43 @@
+schema: ap-sim-val/0
+id: D/ectc51909.2023.00135-cowos_s
+tier: D
+title: MediaTek CoWoS-S MCM (85 x 85 mm, 2 x 1.5x interposers, Cu ring) - RT / 250 C package warpage with the JEITA sign mapping
+status: unvalidated
+physics: [thermo_elastic]
+source: {paper_id: ectc51909.2023.00135, tv_ids: [ectc51909.2023.00135-a, ectc51909.2023.00135-b]}
+inputs:
+  sim_case: cowos_s/warpage_corner_stress
+  variants:
+    tv1: "TV1: 2 SoC + 8 HBM2E (-a; the sim case default geometry)"
+    tv2: "TV2: 2 SoC + 4 HBM2E + 4 dummy filler dies (-b); no sim case (dummy filler dies not modelled); targets recorded, not run"
+  high_T_note: "CD6 overlap ceiling (Wentao 2026-10-21): the 250 C points run at 225 C (solder_resist valid to 225 C; offset 25 C); the sim case study is s2h"
+sign_mapping:
+  # lane L26 2026-10-21 after audit A6 (DevLog/audits/round1_audit_A6_2026-10-21.md, priority 1, confidence about 95 %)
+  printed_convention: "BGA side up; '(-) Convex', '(+) Concave' (p.2 Fig. 4 legend)"
+  physical_reading: >-
+    The Fig. 4 legend draws '(-) Convex' as the module arched centre-up over the substrate with the BGA balls hanging
+    below (live bug), i.e. a dome; the caption states the contour maps are 'BGA side is up' and the RT maps show a low
+    centre (die side convex); text p.2 Sec. III.A: 'convex warpage shape at room temperature but turned to a concave
+    shape at 250 C'. The same author's ectc51906.2022.00232 p.3 Fig. 6 draws the same RT dome as '(+)'.
+  jeita: "JEITA ED-7306 as coded in the engine (engine/src/mech/post.mjs, + = top, non-interconnect surface convex) = -1 x printed value"
+  db_note: "data/metrics.csv keeps the printed values; the -a-m1/-m2 and -b-m1/-m2 notes state the JEITA value (coordinator, after A6)"
+measured:
+  - {metric_id: ectc51909.2023.00135-a-m1, variant: tv1, T_C: 25, value: -198, jeita_um: 198, unit: um, basis: measured, locator: "p.2 Fig. 4", shape: dome}
+  - {metric_id: ectc51909.2023.00135-a-m2, variant: tv1, T_C: 250, value: 153, jeita_um: -153, unit: um, basis: measured, locator: "p.2 Fig. 4", shape: bowl, compared_at_C: 225}
+  - {metric_id: ectc51909.2023.00135-b-m1, variant: tv2, T_C: 25, value: -250, jeita_um: 250, unit: um, basis: measured, locator: "p.2 Fig. 4", shape: dome}
+  - {metric_id: ectc51909.2023.00135-b-m2, variant: tv2, T_C: 250, value: 173, jeita_um: -173, unit: um, basis: measured, locator: "p.2 Fig. 4", shape: bowl, compared_at_C: 225}
+gates:
+  - id: jeita_signed
+    rule: "engine JEITA warpage of bottom:sbt_sr_b vs jeita_um; tier-D band max(20 um, 25 %) and the sign at each T"
+    requires_shape_class: [dome, bowl]
+    fails_if: "sign differs, or magnitude outside the band; the 250 C point is compared at 225 C with the offset stated"
+  - id: rt_ht_ratio
+    rule: "w(250 C) / w(25 C) (sign-convention free)"
+    values: {tv1: -0.773, tv2: -0.692}
+    note: "measured pair at 25 / 250 C; the model pair is 25 / 225 C (CD6), so the ratio is reported, not gated"
+history:
+  - "2026-10-20 (L3 wave 5, L4 ledger): the sim case compared the printed -198 directly with the engine JEITA value; engine -339.5 (bowl) was recorded as 'miss (+71 %)'. Under the mapping above it is a sign miss."
+missing:
+  - "Measurement method (contour maps only), substrate stack, ring width (photo estimate 8.6-10.1 mm, same-author foot widths 10-19 mm), ring attach adhesive and temperature, stress-free temperature."
+assumptions:
+  - "Colormap direction (blue = low) assumed; no colour bar legible (A6 residual doubt about 5 %)."

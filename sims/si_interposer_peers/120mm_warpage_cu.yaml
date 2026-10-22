@@ -45,13 +45,14 @@ geometry:
   drop_kinds: [bga, tsv]
   resolve: []
 materials:
-  # CD6: reason: target e-m4 (243 C) and the 260 C ramp point; solder_resist and abf_gl carry the paper's Table IV FEM inputs
-  # (overrides below, used by the paper over its 30-260 C range) but keep the library validity ends 225 C / 240 C; the
-  # override values are held beyond them. Added 2026-10-20 when the SR layers started using solder_resist (before, the
-  # solder_resist override reached no part).
-  # silicone_adhesive (stiffener glue of the process_sequence study): E table ends at 150 C, valid_T_C at 250 C; the last
-  # table values are held at 222-260 C (assumption; the glue-thickness bounds 50-300 um bracket the glue's influence).
-  allow_extrapolation: [solder_resist, abf_gl, silicone_adhesive]
+  # CD6 (Wentao 2026-10-21, overlap ceiling; L19): high-temperature studies run at the highest temperature that every
+  # non-compliant material of the stack covers without extrapolation: 225 C, limited by solder_resist (library valid_T_C ends 225 C; the Table IV override values do not
+  # extend the library range; next abf_gl 240 C).
+  # Targets measured above it are compared at the ceiling with the offset stated in the target note. Recompute with
+  # engine/src/families/tools/ceiling.mjs when library ranges change.
+  # Compliant layers (E <= 100 MPa at the study temperature) do not set the ceiling; they hold their last data value
+  # (results carry the extrapolated flag): silicone_adhesive (stiffener glue of stiffener_attach_sequence, E 52 MPa: E table ends at 150 C; the glue-thickness bounds 50-300 um bracket its influence).
+  allow_extrapolation: [silicone_adhesive]
   map:
     stiffener: cu_lid         # part kind: Cu stiffener (ectc51529.2024.00155-e-c1, CTE 17 ppm/C); library cu_lid (L2 maps lid / stiffener copper to cu_lid)
   overrides:
@@ -99,7 +100,7 @@ physics:
     supports: symmetry
 studies:
   - {id: s1, type: thermal_stationary, note: "end-to-end smoke run (same thermal set-up as 120mm_warpage s1), not a validation"}
-  - {id: s2, type: thermo_elastic, temperature: {uniform_C: [30, 148, 222, 243, 260]}, note: "single-step reference, every part stress-free 170 C (no attach step); no targets"}
+  - {id: s2, type: thermo_elastic, temperature: {uniform_C: [30, 148, 222, 225]}, note: "CD6 overlap ceiling 225 C (solder_resist) replaces 243 / 260 C; single-step reference, every part stress-free 170 C (no attach step); no targets"}
   # process sequence (p.3 Sec. II.E: CUF cured 170 C 2 h, then the stiffener glued with silicone and cured 130 C 0.5 h)
   - id: stiffener_attach_sequence   # id aligned with L4 validation/cases/D/ectc51529.2024.00155-moire.yaml
     type: process_sequence
@@ -112,13 +113,12 @@ studies:
       - {id: ramp_30, temperature: {uniform_C: 30}, note: "ramp point (L4 step ramp)"}
       - {id: ramp_148, temperature: {uniform_C: 148}, note: "ramp point (L4 step ramp)"}
       - {id: ramp_222, temperature: {uniform_C: 222}, note: "ramp point (L4 step ramp)"}
-      - {id: ramp_243, temperature: {uniform_C: 243}, note: "ramp point (L4 step ramp)"}
-      - {id: ramp_260, temperature: {uniform_C: 260}, note: "ramp point (L4 step ramp)"}
+      - {id: ramp_225, temperature: {uniform_C: 225}, note: "CD6 overlap ceiling 225 C (solder_resist); replaces ramp_243 / ramp_260 (offset 18 / 35 C)"}
 targets:
   - {metric_id: ectc51529.2024.00155-e-m1, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: stiffener_attach_sequence, step: ramp_30, tolerance: {rel: 0.3}, tier: D}
   - {metric_id: ectc51529.2024.00155-e-m2, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: stiffener_attach_sequence, step: ramp_148, tolerance: {rel: 0.3}, tier: D}
   - {metric_id: ectc51529.2024.00155-e-m3, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: stiffener_attach_sequence, step: ramp_222, tolerance: {rel: 0.3}, tier: D}
-  - {metric_id: ectc51529.2024.00155-e-m4, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: stiffener_attach_sequence, step: ramp_243, tolerance: {rel: 0.3}, tier: D}
+  - {metric_id: ectc51529.2024.00155-e-m4, quantity: warpage_um, selection: "bottom:sbt_sr_b", definition: jeita_ed7306, study: stiffener_attach_sequence, step: ramp_225, tolerance: {rel: 0.3}, tier: D, note: "measured at 243 C; run at the CD6 ceiling 225 C (offset 18 C)"}
 assumptions:
   - "Paper sign: '+ convex (center up), - concave' per plot icons (metric scope); compared with the JEITA ED-7306 sign; measured surface not stated (substrate bottom assumed)."
   - "Stress-free temperatures from the process (p.3 Sec. II.E): package 170 C (CUF cure), stiffener 130 C (silicone glue cure), as the process_sequence study stiffener_attach_sequence (attach on the deformed package). Elastic, properties at each step end temperature; no viscoelastic relaxation. s2 is a single-step common-170 C reference."
