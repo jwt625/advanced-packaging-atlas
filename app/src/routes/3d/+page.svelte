@@ -43,14 +43,35 @@
 
 	const fams = $derived(loaded?.data.families ?? []);
 	const byId = $derived(new Map(fams.map((f) => [f.id, f])));
-	const fam = $derived(byId.get(famId) ?? fams[0] ?? null);
+	/** selected variant per family id (L28); absent = the family's default variant */
+	let varSel = $state<Record<string, string>>({});
+	/** variant entries of a family: the base first, then its variants */
+	function variantsOf(f: Family): Family[] {
+		return f.variants?.length ? [f, ...f.variants] : [f];
+	}
+	function chosenVariant(f: Family): string {
+		return varSel[f.id] ?? f.variant_default ?? f.variant ?? '';
+	}
+	function resolveVariant(f: Family): Family {
+		const want = chosenVariant(f);
+		return variantsOf(f).find((v) => (v.variant ?? '') === want) ?? f;
+	}
+	function setVariant(id: string, v: string) {
+		varSel = { ...varSel, [id]: v };
+	}
+	function variantTip(v: Family): string {
+		return [v.variant_name, v.variant_note, v.variant_source ? `Source: ${v.variant_source}` : ''].filter(Boolean).join('\n');
+	}
+	const baseFam = $derived(byId.get(famId) ?? fams[0] ?? null);
+	const fam = $derived(baseFam ? resolveVariant(baseFam) : null);
 	const shown = $derived.by<Family[]>(() => {
 		if (mode === 'compare') {
-			const l = cmp.map((id) => byId.get(id)).filter((f): f is Family => !!f);
-			return l.length ? l : fams.slice(0, 2);
+			const l = cmp.map((id) => byId.get(id)).filter((f): f is Family => !!f).map(resolveVariant);
+			return l.length ? l : fams.slice(0, 2).map(resolveVariant);
 		}
 		return fam ? [fam] : [];
 	});
+	const galleryFams = $derived(fams.map(resolveVariant));
 	const single = $derived(shown.length === 1);
 
 	const XRAY_FIRST = ['mold', 'underfill', 'lid', 'tim'];
@@ -90,7 +111,7 @@
 	// Reset per-family defaults when the families on screen change.
 	let lastShown = '';
 	$effect(() => {
-		const key = shown.map((f) => f.id).join(',');
+		const key = shown.map((f) => `${f.id}@${f.variant ?? ''}`).join(',');
 		if (key === lastShown) return;
 		lastShown = key;
 		// X-ray defaults come from the data (xray_default parts); compare: cut offset 0 from each family's default.
@@ -145,6 +166,10 @@
 			const f = h.get('f');
 			const hasF = !!f && l.data.families.some((x) => x.id === f);
 			famId = hasF ? f! : l.data.families[0]?.id ?? '';
+			// #f=<family>&v=<variant> (L28): a variant id of that family; otherwise its default variant
+			const v = h.get('v');
+			const fv = hasF ? l.data.families.find((x) => x.id === f) : undefined;
+			if (fv && v && variantsOf(fv).some((x) => x.variant === v)) varSel = { ...varSel, [fv.id]: v };
 			const def = COMPARE_DEFAULT.filter((id) => l.data.families.some((x) => x.id === id));
 			cmp = def.length >= 2 ? def : l.data.families.slice(0, Math.min(3, l.data.families.length)).map((x) => x.id);
 			// default landing: compare (two CoWoS, two EMIB); a #f=<family> link opens that family in single view
@@ -154,7 +179,8 @@
 
 	$effect(() => {
 		if (!famId || mode !== 'single') return;
-		const want = `#f=${encodeURIComponent(famId)}`;
+		const vv = baseFam?.variants?.length ? chosenVariant(baseFam) : '';
+		const want = `#f=${encodeURIComponent(famId)}${vv ? `&v=${encodeURIComponent(vv)}` : ''}`;
 		if (location.hash !== want) {
 			try {
 				void goto(location.pathname + location.search + want, { replace: true, shallow: true, reset: false });
@@ -168,12 +194,13 @@
 		if (mode !== 'gallery' || !fams.length || thumbBusy) return;
 		const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg');
 		const key = `${ui.theme}:`;
-		const missing = fams.filter((f) => !thumbs[key + f.id]);
+		const tk = (f: Family) => `${key}${f.id}@${f.variant ?? ''}`;
+		const missing = galleryFams.filter((f) => !thumbs[tk(f)]);
 		if (!missing.length) return;
 		thumbBusy = true;
 		renderThumbnails(missing, 480, 270, bg).then((m) => {
 			const next = { ...thumbs };
-			for (const [id, u] of m) next[key + id] = u;
+			for (const f of missing) { const u = m.get(f.id); if (u) next[tk(f)] = u; }
 			thumbs = next;
 			thumbBusy = false;
 		});
@@ -273,6 +300,11 @@
 			<select bind:value={famId} aria-label="Packaging family" data-tip="Packaging family (one illustration per family)">
 				{#each fams as f (f.id)}<option value={f.id}>{f.name} · {f.company}</option>{/each}
 			</select>
+			{#if baseFam?.variants?.length}
+				<select value={chosenVariant(baseFam)} onchange={(e) => setVariant(baseFam.id, (e.currentTarget as HTMLSelectElement).value)} aria-label="Variant" data-tip={fam ? variantTip(fam) : ''}>
+					{#each variantsOf(baseFam) as v (v.variant)}<option value={v.variant}>{v.variant_name ?? v.variant}{v.variant === baseFam.variant_default ? ' (default)' : ''}</option>{/each}
+				</select>
+			{/if}
 		{:else if mode === 'compare'}
 			<div class="chips" data-tip="Families to compare (2-4), same lateral scale, synchronized camera and section">
 				{#each fams as f (f.id)}
@@ -309,10 +341,11 @@
 
 	{#if mode === 'gallery'}
 		<div class="gallery">
-			{#each fams as f (f.id)}
+			{#each galleryFams as f (f.id)}
+				{@const tkey = `${ui.theme}:${f.id}@${f.variant ?? ''}`}
 				<div class="tile">
 					<button class="thumb" onclick={() => openFamily(f.id)} aria-label="Open {f.name}" data-tip="{f.name}: {f.summary ?? ''}\n{shareTip(f)}">
-						{#if thumbs[`${ui.theme}:${f.id}`]}<img src={thumbs[`${ui.theme}:${f.id}`]} alt="" />{:else}<span class="spinner"></span>{/if}
+						{#if thumbs[tkey]}<img src={thumbs[tkey]} alt="" />{:else}<span class="spinner"></span>{/if}
 					</button>
 					<div class="tmeta">
 						<div class="trow"><b>{f.name}</b><span class="muted">{f.company}</span></div>
@@ -337,6 +370,12 @@
 					<section class="fam">
 						<div class="trow"><b>{f.name}</b><span class="muted">{f.company}</span></div>
 						{#if f.package_class}<div class="muted small">{f.package_class}</div>{/if}
+						{#if !single && byId.get(f.id)?.variants?.length}
+							{@const b = byId.get(f.id)!}
+							<select class="var" value={chosenVariant(b)} onchange={(e) => setVariant(b.id, (e.currentTarget as HTMLSelectElement).value)} aria-label="Variant of {f.name}" data-tip={variantTip(f)}>
+								{#each variantsOf(b) as v (v.variant)}<option value={v.variant}>{v.variant_name ?? v.variant}{v.variant === b.variant_default ? ' (default)' : ''}</option>{/each}
+							</select>
+						{:else if single && f.variant_name}<div class="muted small" data-tip={variantTip(f)}>{f.variant_name}</div>{/if}
 						{#if single && f.summary}<p class="summary">{f.summary}</p>{/if}
 						{@render meter(f)}
 					</section>
@@ -395,7 +434,7 @@
 								{#each insets as ins (ins.id)}
 									<div class="ins">
 										<button class:on={pipInset === ins.id} onclick={() => showInset(ins)} data-tip="Show as in-scale inset (switches to in-scale)">{ins.label}</button>
-										<button class="ico" onclick={() => goInset(ins)} aria-label="Frame {ins.label}" data-tip="Move the main camera to this region">
+										<button class="ico" onclick={() => goInset(ins)} aria-label="Frame {ins.label}" data-tip="Move the main camera to this region (in-scale)">
 											<svg viewBox="0 0 12 12" width="11" height="11"><path d="M1 4V1h3M8 1h3v3M11 8v3H8M4 11H1V8" fill="none" stroke="currentColor" stroke-width="1.3" /></svg>
 										</button>
 									</div>
@@ -461,6 +500,7 @@
 	.ctl { display: flex; align-items: center; gap: 6px; }
 	.ctl input[type='range'] { flex: 1; min-width: 0; accent-color: var(--accent); }
 	.ctl select { flex: 1; min-width: 0; height: 22px; }
+	.insp select.var { width: 100%; height: 22px; font-size: 11px; }
 	.val { width: 64px; text-align: right; color: var(--ink-2); }
 	.chip, .insp button { height: 22px; font-size: 11px; padding: 0 6px; display: inline-flex; align-items: center; gap: 4px; }
 	.sw { display: inline-block; width: 9px; height: 9px; border: 1px solid var(--line); }

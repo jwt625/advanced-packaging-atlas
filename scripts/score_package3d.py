@@ -56,6 +56,9 @@ Metrics (per family)
   diameter (S1); physical-row ranges + counted M5b (S2); M3 xy check (S3); the former L/S-between-lands skips for
   beol_via / bridge_via / bond fields replaced by land_space, and the L/S rule relaxed to one escape level per stretch
   (S4, S6); no-land listing (S8); checklist pth_class gated on core thickness and plug (S9).
+  L18 (2026-10-21): per-region level properties (`route.regions`): M1 counts region dims, M5 checks the L/S a region
+  states, M6 land_space / escape_ls take the region's space / use for a via class whose `regions` lie inside the
+  region, and skip a landed level an embedded part cuts out at the via region (route_at, landed).
   N/A where a metric has nothing to evaluate (no routing, no vertical nets, no routed levels).
 
 Outputs: outputs/package3d_scores/<YYYY-MM-DD>_<HHMMSS>.json and .md (table + per-family details); the table is
@@ -229,6 +232,20 @@ def contains(a: Rect, p: tuple[float, float]) -> bool:
 
 def covers(a: Rect, b: Rect) -> bool:
     return a[0] <= b[0] + 1e-9 and a[1] <= b[1] + 1e-9 and a[2] >= b[2] - 1e-9 and a[3] >= b[3] - 1e-9
+
+
+def route_at(lyr: dict, rects: list[Rect] | None) -> dict | None:
+    """The level's route properties where `rects` lie: a `route.regions` entry (L18 2026-10-21, per-region level
+    properties) when every rect lies inside one of its footprints, else the level's own route."""
+    r = lyr.get("route")
+    if not isinstance(r, dict):
+        return None
+    if rects:
+        for rg in r.get("regions") or []:
+            fr = [rect(x) for x in rg.get("rects") or []]
+            if fr and all(any(covers(f, q) for f in fr) for q in rects):
+                return rg
+    return r
 
 
 def fmt(v: float | None) -> str:
@@ -520,6 +537,8 @@ def m1(fam: Fam) -> dict:
             add(base, dims)
             if sec == "layers" and routed(e):
                 add(rout, e["route"].get("dims") or {})
+                for rg in e["route"].get("regions") or []:
+                    add(rout, rg.get("dims") or {})
     seen = set()
     for v in fam.vias:
         t = v.get("template_id", v["id"])
@@ -1475,6 +1494,11 @@ def m5(fam: Fam, entries: list[dict], db: DB, db_all: DB | None = None) -> dict:
                 if num(r.get(k)) is not None:
                     checks.append((f"route.{k}", float(r[k]), sl_getter(structs, ["conductor"], [k]),
                                    f"stack_layers.{k} (conductor rows)"))
+            for ri, rg in enumerate(r.get("regions") or []):  # per-region L/S stated by the region (L18)
+                for k in ("line_um", "space_um"):
+                    if k in (rg.get("dims") or {}) and num(rg.get(k)) is not None:
+                        checks.append((f"route.regions[{ri}].{k}", float(rg[k]),
+                                       sl_getter(structs, ["conductor"], [k]), f"stack_layers.{k} (conductor rows)"))
             checks.append(("h_um (Cu)", float(lyr["h_um"]),
                            sl_getter(structs, ["conductor"], thick, mcl),
                            "stack_layers.thickness_um"))
@@ -1652,7 +1676,18 @@ def m6(fam: Fam, db: DB, seg: list[dict], entries: list[dict]) -> dict:
     nl_seen: set[str] = set()
 
     def landed(v: dict) -> list[dict]:
-        return [lids[str(v[k])] for k in ("upper", "lower") if v.get(k) and str(v[k]) in lids]
+        """Levels the via lands on, minus levels an embedded part cuts out at the via's region (cavity / bridge)."""
+        out = [lids[str(v[k])] for k in ("upper", "lower") if v.get(k) and str(v[k]) in lids]
+        regs = v.get("regions")
+        if not regs:
+            return out
+        rr = [rect(r) for r in regs]
+        cuts = cutouts(fam, ((rr[0][0] + rr[0][2]) / 2, (rr[0][1] + rr[0][3]) / 2))
+        return [lv for lv in out if not cut_out(cuts, fam.layer_host(lv), float(lv["z_um"]), top(lv))]
+
+    def lv_route(v: dict, lv: dict) -> dict | None:
+        regs = v.get("regions")
+        return route_at(lv, [rect(r) for r in regs] if regs else None)
 
     def eff_pitch(v: dict) -> tuple[float | None, str]:
         p = num(v.get("pitch_um"))
@@ -1681,7 +1716,8 @@ def m6(fam: Fam, db: DB, seg: list[dict], entries: list[dict]) -> dict:
             if (tid, lt) in sp_seen:
                 continue
             sp_seen.add((tid, lt))
-            sp = num(lv["route"].get("space_um")) if lv is not None and routed(lv) else None
+            lr = lv_route(v, lv) if lv is not None else None
+            sp = num(lr.get("space_um")) if lr is not None else None
             req, rsrc = (sp, f"space of {lt}") if sp is not None else (MIN_SPACE_UM, "1 um floor (level has no space)")
             gap = pe - land
             ok = gap >= req - 1e-9
@@ -1694,9 +1730,10 @@ def m6(fam: Fam, db: DB, seg: list[dict], entries: list[dict]) -> dict:
                 rules["land_space"] += 1
 
     def esc_pair(v: dict, lv: dict, pitch: float) -> tuple[float, str] | None:
-        if not routed(lv) or lv["route"].get("use") not in ("signal", "mixed"):
+        lr = lv_route(v, lv)
+        if lr is None or lr.get("use") not in ("signal", "mixed"):
             return None
-        ln, sp, land = num(lv["route"].get("line_um")), num(lv["route"].get("space_um")), num(v.get("land_um"))
+        ln, sp, land = num(lr.get("line_um")), num(lr.get("space_um")), num(v.get("land_um"))
         if ln is None or sp is None or land is None:
             return None
         need = ln + 2 * sp
@@ -1918,16 +1955,25 @@ def main() -> int:
     cfg = yaml.safe_load(args.checklist.read_text())
     db = DB(args.all_rows)
     db_all = None if args.all_rows else DB(True)
-    fams = [f for f in doc["families"] if not args.family or f["id"] in args.family]
+    # variants (L28, 2026-10-21) are scored as `<family>@<variant>` after their base family; `--family ID` selects a
+    # family with all its variants, `--family ID@VARIANT` one variant
+    allf: list[dict] = []
+    for f in doc["families"]:
+        allf.append(f)
+        for v in f.get("variants") or []:
+            allf.append({**v, "id": f"{f['id']}@{v['variant']}"})
+    fams = [f for f in allf if not args.family or f["id"] in args.family or f["id"].split("@")[0] in args.family]
     if args.family:
-        unknown = set(args.family) - {f["id"] for f in fams}
+        unknown = set(args.family) - {f["id"] for f in fams} - {f["id"].split("@")[0] for f in fams}
         if unknown:
             print(f"ERROR unknown family id(s): {', '.join(sorted(unknown))}", file=sys.stderr)
             return 1
     rows = []
     for f in fams:
         fam = Fam(f)
-        entries = cfg.get("families", {}).get(fam.id)
+        entries = cfg.get("families", {}).get(fam.id)  # a variant may have its own mapping (`<family>@<variant>`)
+        if entries is None:
+            entries = cfg.get("families", {}).get(fam.id.split("@")[0])
         if entries is None:
             print(f"WARN {fam.id}: no checklist mapping", file=sys.stderr)
             entries = []

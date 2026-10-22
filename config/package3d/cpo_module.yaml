@@ -142,10 +142,13 @@ params:
   mvia_d_um:
     analog: ectc51909.2023.00155-a-i6.diameter_um
     note: "build-up microvia not reported for CPO; analog = 40 um microvia of the same 4/2/4 substrate (top diameter)"
+  mv_wall_tan:
+    template: "2 * r0 / (r1 - r2)"
+    refs: [ectc51687.2025.00378-a-m5.value, ectc51687.2025.00378-a-m6.value, ectc51687.2025.00378-a-m7.value]
+    note: "harmonized microvia taper rule (TEMPLATE_FORMAT.md 'Template rules'): bottom = top - 2 x drawn dielectric depth / tan(sidewall angle); tan(angle) = 2 x 15 um dielectric over the pad / (41.66 um top - 38.01 um bottom) = 8.22 (83 deg), measured on a 40 um laser via in laminated dry-film dielectric (analog TV ectc51687.2025.00378-a, Fig. 7); this family's earlier 38 / 42 diameter ratio came from the same via"
   mvia_bot_um:
-    template: "mvia_d_um * 38 / 42"
-    refs: [ectc51687.2025.00378-a-L04.notes]
-    note: "microvia taper not reported; bottom/top ratio of a measured 42/38 um laser via in laminated dielectric (analog notes)"
+    template: "mvia_d_um - 2 * bu_diel_um / mv_wall_tan"
+    note: "microvia bottom not reported; harmonized taper rule over the drawn bu_diel_um depth (mv_wall_tan)"
   mvia_land_um:
     template: "mvia_d_um * r0 / r1"
     refs: [001c.147203-a-i1.pad_x_um, 001c.147203-a-i1.diameter_um]
@@ -168,9 +171,8 @@ params:
     analog: ectc51906.2022.00180-a-i1.diameter_um
     note: "fine via onto the bridge pads: dims not reported; analog = 16 um laser microvia through ABF onto the pads of an embedded Si die under 55 um-pitch bumps"
   fv_bot_um:
-    template: "fv_d_um * 38 / 42"
-    refs: [ectc51687.2025.00378-a-L04.notes]
-    note: "fine-via taper not reported; same bottom/top ratio as the build-up microvia"
+    template: "fv_d_um - 2 * bu_diel_um / mv_wall_tan"
+    note: "fine-via (laser via through the same build-up film) bottom not reported; harmonized taper rule over the drawn bu_diel_um depth (mv_wall_tan)"
   fv_land_um:
     template: 30
     refs: [ectc51906.2022.00180-a-i1.notes]
@@ -450,14 +452,8 @@ callouts:
   - {target: hs, text: "Heat spreader, FAU bonded", refs: [ectc51687.2025.00012-a-c7.notes]}
   - {target: bga, text: "BGA {bga_pitch_um} um (IBM module)"}
   - {target: fau, text: "Optics not modeled (electrical only)",
-     note: "Electrical package only: edge couplers, V-grooves, fibers and waveguides of the module schematic (fig ectc51687.2025.00012-f01) are not drawn; the FAU is a placeholder block and the OIO chiplet a plain die. IBM CPO variant (not drawn): PIC adiabatically coupled to a polymer waveguide at {ibm_pwg_pitch_um} um, fanned out to an MT ferrule, lid on substrate and ferrule",
-     refs: [ectc51687.2025.00052-b-c3.name]}
-  - {target: substrate, text: "IME: PIC-in-mold {ime_w_mm} x {ime_d_mm}",
-     note: "IME PIC-in-mold RDL-first interposer {ime_w_mm} x {ime_d_mm} mm: embedded PIC and TSV Si bridge, EIC flip-chip above, FAU at the PIC edge"}
-  - {target: substrate, text: "CHIPS: {chips_fau_n} FAUs, {chips_ch_n} couplers",
-     note: "Intel CHIPS prototype {chips_w_mm} x {chips_w_mm} mm: FPGA, 2 data converters, 3 EIC-PIC stacks in an open-cavity EMIB substrate; {chips_fau_n} FAUs butt-coupled ({chips_ch_n} couplers, {chips_pitch_um} um pitch)",
-     refs: [ectc51687.2025.00061-a.name]}
-  - {target: substrate, text: "OMIB: {omib_n} PICs in interposer", refs: [ectc51687.2025.00062-a-c3.name]}
+     note: "Electrical package only: edge couplers, V-grooves, fibers and waveguides of the module schematic (fig ectc51687.2025.00012-f01) are not drawn; the FAU is a placeholder block and the OIO chiplet a plain die. CPO variants in the family (not drawn): (1) IBM: PIC adiabatically coupled to a polymer waveguide at {ibm_pwg_pitch_um} um, fanned out to an MT ferrule, lid on substrate and ferrule; (2) IME PIC-in-mold RDL-first interposer {ime_w_mm} x {ime_d_mm} mm: embedded PIC and TSV Si bridge, EIC flip-chip above, FAU at the PIC edge; (3) Intel CHIPS prototype {chips_w_mm} x {chips_w_mm} mm: FPGA, 2 data converters, 3 EIC-PIC stacks in an open-cavity EMIB substrate, {chips_fau_n} FAUs butt-coupled ({chips_ch_n} couplers, {chips_pitch_um} um pitch); (4) OMIB: {omib_n} PICs in the interposer.",
+     refs: [ectc51687.2025.00052-b-c3.name, ectc51687.2025.00061-a.name, ectc51687.2025.00062-a-c3.name]}
 
 insets:
   - id: oio_edge

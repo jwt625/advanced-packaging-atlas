@@ -3,7 +3,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { FamilyScene, HATCH, itemColor, setDash, sharedMaterials, unitGeometries, type Lod, type ViewState } from './build';
-import { defaultCut, defaultXray, type ArrModel, type Item } from './model';
+import { defaultCut, defaultXray, ZMap, type ArrModel, type Item } from './model';
 import type { Family, Inset } from './types';
 
 export type Preset = 'iso' | 'front' | 'top' | 'bottom';
@@ -216,6 +216,8 @@ export class Viewer {
 	setState(p: Partial<ViewState>) {
 		const onlySel = Object.keys(p).length === 1 && 'selected' in p;
 		this.state = { ...this.state, ...p };
+		// an illustrative inset's z compression lasts until the next view change that does not set it
+		if (!onlySel && !('zsquash' in p)) this.state.zsquash = 1;
 		if (onlySel) {
 			for (const s of this.slots) s.fs.setSelected(this.state.selected);
 			this.requestRender();
@@ -248,7 +250,7 @@ export class Viewer {
 
 	private rebuild() {
 		// The z map depends on the scale mode; build once so bounds use the current mode, then size and build.
-		for (const s of this.slots) if (s.fs.zmap.illustrative !== this.state.illustrative) s.fs.build(this.state);
+		for (const s of this.slots) if (s.fs.zmap.illustrative !== this.state.illustrative || s.fs.zmap.squash !== (this.state.zsquash ?? 1)) s.fs.build(this.state);
 		this.applySlotFrames();
 		for (const s of this.slots) s.fs.build(this.state);
 		const sph = this.allBounds(false).getBoundingSphere(new THREE.Sphere());
@@ -528,6 +530,22 @@ export class Viewer {
 	frameInset(ins: Inset, slot = 0) {
 		const s = this.slots[slot];
 		if (!s) return;
+		if (this.state.illustrative) {
+			// Illustrative: compress the z map so the inset frames the same region as in-scale (the in-scale frame of the
+			// lateral box W and true height Ht at this aspect is max(Ht, W / aspect) tall); thin layers stay enlarged
+			// relative to thick ones inside it.
+			const m = s.fs.model;
+			const zr = Array.isArray(ins.z_um) && ins.z_um.length === 2 ? ins.z_um : [m.bounds.z0, m.bounds.z1];
+			const zm = new ZMap(m, true);
+			const Hm = zm.map(zr[1]) - zm.map(zr[0]);
+			const [x0, y0, x1, y1] = ins.box_mm;
+			const v = ins.camera?.view ?? 'front';
+			const span = typeof ins.camera?.span_mm === 'number' && ins.camera.span_mm > 0 ? ins.camera.span_mm : 0;
+			const W = Math.max(span, v === 'right' || v === 'left' ? y1 - y0 : v === 'front' || v === 'back' ? x1 - x0 : Math.max(x1 - x0, y1 - y0));
+			const Ht = (zr[1] - zr[0]) / 1000;
+			const k = Hm > 0 ? Math.min(1, Math.max(Ht, W / Math.max(this.pcam.aspect, 1e-3)) / Hm) : 1;
+			this.setState({ zsquash: k });
+		}
 		const { box, dir } = this.insetFrame(ins, s.fs);
 		this.setOrtho(this.state.section);
 		this.fit(box, dir, 1.2);

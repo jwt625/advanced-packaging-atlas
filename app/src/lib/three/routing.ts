@@ -6,7 +6,7 @@
 import * as THREE from 'three';
 import { CLASS_COLOR, materialClass, templateColor } from './materials';
 import { subtract, type ArrModel, type Box, type Item, type Model, type Piece } from './model';
-import type { Dim, Layer, Net, Route, ViaClass } from './types';
+import type { Dim, Layer, Net, Route, RouteRegion, ViaClass } from './types';
 
 export interface Rect { x0: number; x1: number; y0: number; y1: number }
 
@@ -46,6 +46,17 @@ export interface RLevel {
 	slabColor: THREE.Color;
 	land: number; // mm: largest land of the vias that end on this level
 	idx: number;
+	zones: RZone[]; // per-region level properties (route.regions, L18): inside these footprints the zone's use / L/S apply
+}
+
+/** A footprint of a routed level with its own properties (route.regions). Lengths in mm, model coordinates. */
+export interface RZone {
+	rects: Rect[];
+	use: string;
+	dir: 'x' | 'y';
+	line: number;
+	space: number;
+	fill: number;
 }
 
 export interface RVia {
@@ -84,6 +95,7 @@ export interface REp {
 	pad: number; // mm
 	open: number; // mm
 	fillCu: boolean[]; // per SR layer: the opening is filled by Cu (a via class spans that layer, or a Cu-Cu joint), else solder
+	fillVia: (RVia | null)[]; // per SR layer: the via class spanning it (the opening is drawn with that via's profile, L18)
 }
 
 export interface RNet {
@@ -242,9 +254,17 @@ export function attachRouting(m: Model): RoutingModel | null {
 		// same look as the neighbouring dielectric layers (template = desaturated), so the Cu reads apart from the matrix
 		if (it.prov === 'template') { slab = templateColor(slab); mc = templateColor(mc); }
 		it.routeNote = note;
+		const zones: RZone[] = [];
+		for (const z of (Array.isArray(r.regions) ? r.regions : []) as RouteRegion[]) {
+			const zu = String(z.use ?? use);
+			const zl = num(z.line_um) * MM, zs = num(z.space_um) * MM;
+			const rects = (z.rects ?? []).map((q) => ({ x0: q.x_mm - q.w_mm / 2 - m.cx, x1: q.x_mm + q.w_mm / 2 - m.cx, y0: q.y_mm - q.d_mm / 2 - m.cy, y1: q.y_mm + q.d_mm / 2 - m.cy }));
+			if (!rects.length) continue;
+			zones.push({ rects, use: zu, dir: z.dir === 'y' ? 'y' : 'x', line: zl, space: zs, fill: num(z.fill) > 0 ? Math.min(1, num(z.fill)) : fill });
+		}
 		levels.push({
 			item: it, host, lid: l.id, route: r, use, dir: r.dir === 'y' ? 'y' : 'x', line, space, fill,
-			z0: it.box.z0, z1: it.box.z1, box: host.box, matrixCls, matrixColor: mc, slabColor: slab, land: 0, idx: levels.length
+			z0: it.box.z0, z1: it.box.z1, box: host.box, matrixCls, matrixColor: mc, slabColor: slab, land: 0, idx: levels.length, zones
 		});
 	}
 	const parts = items.filter((it) => it.type === 'part');
@@ -347,8 +367,9 @@ export function attachRouting(m: Model): RoutingModel | null {
 			const d = num(a.arr.diameter_um) * MM || 0.5 * a.pitch;
 			const pad = num(a.arr.pad_um) * MM || (BALL.includes(a.arr.kind) ? 0.85 * d : d);
 			const cuJoint = !['c4', 'bga', 'microbump', 'cu_pillar', 'lga'].includes(a.arr.kind);
-			const fillCu = srs.map((sl) => cuJoint || vias.some((V) => V.host === h && !V.grid && Math.abs(V.z0 - sl.box.z0) < ZT && Math.abs(V.z1 - sl.box.z1) < ZT));
-			eps.push({ arr: a, host: h, side, level, srs, pad, open: num(a.arr.opening_um) * MM || 0.8 * pad, fillCu });
+			const fillVia = srs.map((sl) => vias.find((V) => V.host === h && !V.grid && Math.abs(V.z0 - sl.box.z0) < ZT && Math.abs(V.z1 - sl.box.z1) < ZT) ?? null);
+			const fillCu = srs.map((_, si) => cuJoint || !!fillVia[si]);
+			eps.push({ arr: a, host: h, side, level, srs, pad, open: num(a.arr.opening_um) * MM || 0.8 * pad, fillCu, fillVia });
 		}
 	}
 
@@ -415,7 +436,10 @@ export function attachRouting(m: Model): RoutingModel | null {
 	// Grid vias feeding an endpoint array of the same host at an integer pitch ratio (TSV under C4): same phase.
 	for (const V of vias) {
 		if (!V.grid) continue;
-		const src = eps.filter((e) => e.host === V.host && e.arr.pitch >= V.pitch - 1e-9 && Math.abs(e.arr.pitch / V.pitch - Math.round(e.arr.pitch / V.pitch)) < 1e-3).sort((a, b) => b.arr.pitch - a.arr.pitch)[0];
+		// a region-restricted class phases to an endpoint array inside its regions first (EMIB-T bridge vias follow the
+		// fine bumps over the bridge, not the BGA lattice of the same host)
+		const within = (e: REp) => !V.regions || V.regions.some((r) => { const q = e.arr.item.box; return q.x0 >= r.x0 - 1e-6 && q.x1 <= r.x1 + 1e-6 && q.y0 >= r.y0 - 1e-6 && q.y1 <= r.y1 + 1e-6; });
+		const src = eps.filter((e) => e.host === V.host && e.arr.pitch >= V.pitch - 1e-9 && Math.abs(e.arr.pitch / V.pitch - Math.round(e.arr.pitch / V.pitch)) < 1e-3).sort((a, b) => Number(within(b)) - Number(within(a)) || b.arr.pitch - a.arr.pitch)[0];
 		if (!src) continue;
 		V.gx0 = src.arr.gx0 + Math.round((V.gx0 - src.arr.gx0) / V.pitch) * V.pitch;
 		V.gy0 = src.arr.gy0 + Math.round((V.gy0 - src.arr.gy0) / V.pitch) * V.pitch;
@@ -611,7 +635,9 @@ class Synth {
 		if (!this.vis(w) || (Math.abs(x1 - x0) < 1e-9 && Math.abs(y1 - y0) < 1e-9)) return;
 		const h = this.dw(w) / 2;
 		const r = { x0: Math.min(x0, x1) - h, x1: Math.max(x0, x1) + h, y0: Math.min(y0, y1) - h, y1: Math.max(y0, y1) + h };
-		this.cuBox(L, r, item);
+		// pad-only zones of the level (route.regions use pad) carry no traces: segments stop at their edge
+		const pz = L.zones.filter((z) => z.use === 'pad').flatMap((z) => z.rects);
+		for (const q of pz.length ? sheet(r, pz) : [r]) this.cuBox(L, q, item);
 		const c = Math.max(L.space, this.ill ? ILL_PX * this.px : 0);
 		this.keepout(L, { x0: r.x0 - c, x1: r.x1 + c, y0: r.y0 - c, y1: r.y1 + c });
 		this.bump(L);
@@ -863,9 +889,12 @@ class Synth {
 					if (ov) E.srs.forEach((s, si) => {
 						let h = this.holes.get(s.id);
 						if (!h) this.holes.set(s.id, (h = []));
-						h.push({ x0: x - od / 2, x1: x + od / 2, y0: y - od / 2, y1: y + od / 2 });
+						// an opening filled by a via class takes that via's (tapered) profile, e.g. the Si-IF pillar in its oxide
+						const fv = E.fillVia[si];
+						const t0 = fv ? this.dw(fv.d0) : od, t1 = fv ? this.dw(fv.d1) : od, hw = Math.max(t0, t1) / 2;
+						h.push({ x0: x - hw, x1: x + hw, y0: y - hw, y1: y + hw });
 						const cu = E.fillCu[si];
-						this.cyl(x, y, s.box.z0, s.box.z1, od, od, cu ? COL.cu : COL.solder, cu ? 'copper' : 'solder', E.host, A.item);
+						this.cyl(x, y, s.box.z0, s.box.z1, t0, t1, cu ? COL.cu : COL.solder, cu ? 'copper' : 'solder', E.host, A.item);
 					});
 				}
 				if (this.full()) return;
@@ -1061,48 +1090,73 @@ class Synth {
 
 	planes() {
 		for (const L of this.rm.levels) {
-			if (L.use !== 'plane') continue;
-			const R = this.region(L.box);
-			if (!R) continue;
-			const clr = L.space > 0 ? L.space : 0.5 * (L.land || 0.05);
-			const holes: Rect[] = [];
-			for (const p of this.pads.get(L) ?? []) {
-				if (p.tied) continue;
-				const hr = p.r + Math.max(clr, this.ill ? ILL_PX * this.px : 0);
-				if (!this.vis(2 * hr)) continue;
-				holes.push({ x0: p.x - hr, x1: p.x + hr, y0: p.y - hr, y1: p.y + hr });
+			// the level's own plane outside its zones, and every plane zone with its own antipad clearance
+			const runs: { R: Rect; space: number; skip: Rect[] }[] = [];
+			const R0 = this.region(L.box);
+			if (!R0) continue;
+			if (L.use === 'plane') runs.push({ R: R0, space: L.space, skip: L.zones.flatMap((z) => z.rects) });
+			for (const z of L.zones) if (z.use === 'plane') for (const zr of z.rects) { const c = clipR(R0, zr); if (c) runs.push({ R: c, space: z.space, skip: [] }); }
+			let nh = 0;
+			for (const run of runs) {
+				const clr = run.space > 0 ? run.space : 0.5 * (L.land || 0.05);
+				const holes: Rect[] = [...run.skip];
+				for (const p of this.pads.get(L) ?? []) {
+					if (p.tied) continue;
+					const hr = p.r + Math.max(clr, this.ill ? ILL_PX * this.px : 0);
+					if (!this.vis(2 * hr)) continue;
+					holes.push({ x0: p.x - hr, x1: p.x + hr, y0: p.y - hr, y1: p.y + hr });
+					nh++;
+				}
+				for (const r of sheet(run.R, holes)) this.cuBox(L, r, L.item);
 			}
-			for (const r of sheet(R, holes)) this.cuBox(L, r, L.item);
+			if (!runs.length) continue;
 			this.bump(L);
-			L.item.lod = holes.length ? undefined : 'plane drawn without antipads (none in view or below 1.5 px)';
+			L.item.lod = nh ? undefined : 'plane drawn without antipads (none in view or below 1.5 px)';
 		}
 	}
 
 	traces() {
-		const o = this.o;
 		for (const L of this.rm.levels) {
-			if (L.use !== 'signal' && L.use !== 'mixed') continue;
-			if (!(L.line > 0)) continue;
-			if (!this.vis(L.line)) { L.item.lod = `L/S below ${MIN_PX} px: level drawn as a slab tinted by its Cu fill`; continue; }
-			const R = this.region(L.box);
-			if (!R) continue;
-			const P = L.line + L.space;
-			const w = this.dw(L.line);
+			const R0 = this.region(L.box);
+			if (!R0) continue;
+			// the level's own L/S outside its zones (zone footprints are keepouts), then each signal / mixed zone
+			const zr = L.zones.flatMap((z) => z.rects);
+			const runs: { p: { line: number; space: number; fill: number; dir: 'x' | 'y' }; R: Rect; keep: Rect[]; salt: number }[] = [];
+			if (L.use === 'signal' || L.use === 'mixed') runs.push({ p: L, R: R0, keep: zr, salt: 0 });
+			L.zones.forEach((z, zi) => {
+				if (z.use !== 'signal' && z.use !== 'mixed') return;
+				for (const q of z.rects) { const c = clipR(R0, q); if (c) runs.push({ p: z, R: c, keep: [], salt: zi + 1 }); }
+			});
+			for (const run of runs) {
+				if (this.traceRun(L, run.p, run.R, run.keep, run.salt)) return;
+			}
+		}
+	}
+
+	/** Lines of one L/S set on a level inside R (extra keepouts: other zones). True when the box budget is spent. */
+	traceRun(L: RLevel, Lp: { line: number; space: number; fill: number; dir: 'x' | 'y' }, R: Rect, extra: Rect[], salt: number): boolean {
+		const o = this.o;
+		{
+			if (!(Lp.line > 0)) return false;
+			if (!this.vis(Lp.line)) { L.item.lod = `L/S below ${MIN_PX} px: level drawn as a slab tinted by its Cu fill`; return false; }
+			const P = Lp.line + Lp.space;
+			const w = this.dw(Lp.line);
 			const k = this.kOf(P, w);
 			L.item.lod = k > 1 ? `illustrative: 1 of ${k} lines drawn (each drawn line stands for ${k}), widths >= ${ILL_PX} px` : undefined;
-			const runX = L.dir === 'x'; // runs along x; channels spaced along y
+			const idx = L.idx + 101 * salt;
+			const runX = Lp.dir === 'x'; // runs along x; channels spaced along y
 			const perpAxis: 'x' | 'y' = runX ? 'y' : 'x';
 			const c0 = o.section && o.axis === perpAxis ? o.cut : (runX ? L.box.y0 : L.box.x0) + P / 2;
 			const p0 = runX ? R.y0 : R.x0, p1 = runX ? R.y1 : R.x1;
 			const s0 = runX ? L.box.x0 : L.box.y0;
 			const r0 = runX ? R.x0 : R.y0, r1 = runX ? R.x1 : R.y1;
 			const Lc = Math.min(1.5, Math.max(0.05, 25 * P));
-			const occ = Math.min(1, (L.fill * P) / L.line);
+			const occ = Math.min(1, (Lp.fill * P) / Lp.line);
 			// lines crossing the section plane are never broken at the cut (every channel shows its cross-section)
 			const atCut = o.section && o.axis === (runX ? 'x' : 'y');
 			const cutRun = o.cut;
 			// Keepouts sorted by their perpendicular start for a strip query per channel.
-			const ks = (this.keep.get(L) ?? []).map((r) => (runX ? { a0: r.y0, a1: r.y1, b0: r.x0, b1: r.x1 } : { a0: r.x0, a1: r.x1, b0: r.y0, b1: r.y1 }));
+			const ks = [...(this.keep.get(L) ?? []), ...extra].map((r) => (runX ? { a0: r.y0, a1: r.y1, b0: r.x0, b1: r.x1 } : { a0: r.x0, a1: r.x1, b0: r.y0, b1: r.y1 }));
 			ks.sort((a, b) => a.a0 - b.a0);
 			const maxW = ks.reduce((mx, q) => Math.max(mx, q.a1 - q.a0), 0);
 			let m0 = Math.ceil((p0 - c0) / P - 1e-7);
@@ -1117,14 +1171,14 @@ class Synth {
 				const iv: number[][] = [];
 				for (let q = a; q < ks.length && ks[q].a0 < hi; q++) if (ks[q].a1 > lo) iv.push([ks[q].b0, ks[q].b1]);
 				iv.sort((x, y) => x[0] - y[0]);
-				const sm = s0 - Lc * rnd(this.rm.seed, L.idx * 31 + 5, m, 0); // per-channel cell phase: a cut never sits on a common cell edge
+				const sm = s0 - Lc * rnd(this.rm.seed, idx * 31 + 5, m, 0); // per-channel cell phase: a cut never sits on a common cell edge
 				const cc0 = Math.floor((r0 - sm) / Lc), cc1 = Math.floor((r1 - sm) / Lc);
 				const ccCut = atCut ? Math.floor((cutRun - sm) / Lc) : NaN;
 				for (let cc = cc0; cc <= cc1; cc++) {
 					const isCut = cc === ccCut;
-					if (!isCut && rnd(this.rm.seed, L.idx * 7919 + 1, m, cc) >= occ) continue;
-					let t0 = sm + cc * Lc + Lc * (0.04 + 0.3 * rnd(this.rm.seed, L.idx, m, cc * 2 + 1));
-					let t1 = sm + (cc + 1) * Lc - Lc * (0.04 + 0.3 * rnd(this.rm.seed, L.idx, m, cc * 2 + 2));
+					if (!isCut && rnd(this.rm.seed, idx * 7919 + 1, m, cc) >= occ) continue;
+					let t0 = sm + cc * Lc + Lc * (0.04 + 0.3 * rnd(this.rm.seed, idx, m, cc * 2 + 1));
+					let t1 = sm + (cc + 1) * Lc - Lc * (0.04 + 0.3 * rnd(this.rm.seed, idx, m, cc * 2 + 2));
 					if (isCut) { if (o.axis === 'y') t0 = Math.min(t0, cutRun); else t1 = Math.max(t1, cutRun); }
 					t0 = Math.max(t0, r0); t1 = Math.min(t1, r1);
 					if (t1 - t0 < w) continue;
@@ -1142,10 +1196,11 @@ class Synth {
 					}
 					if (x < t1) emit(x, t1);
 				}
-				if (this.boxes.length > BOX_BUDGET * (o.scale ?? 1) * 1.3) return;
+				if (this.boxes.length > BOX_BUDGET * (o.scale ?? 1) * 1.3) return true;
 			}
 			this.bump(L);
 		}
+		return false;
 	}
 
 	/** Managed layer pieces: inside the window the matrix (or SR with openings), outside a tinted slab. */

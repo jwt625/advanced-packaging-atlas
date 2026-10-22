@@ -193,10 +193,13 @@ params:
   mv_d_um:
     analog: ectc51909.2023.00155-a-i6.diameter_um
     note: "microvia top diameter; analog = build-up via of the same substrate"
+  mv_wall_tan:
+    template: "2 * r0 / (r1 - r2)"
+    refs: [ectc51687.2025.00378-a-m5.value, ectc51687.2025.00378-a-m6.value, ectc51687.2025.00378-a-m7.value]
+    note: "harmonized microvia taper rule (TEMPLATE_FORMAT.md 'Template rules'): bottom = top - 2 x drawn dielectric depth / tan(sidewall angle); tan(angle) = 2 x 15 um dielectric over the pad / (41.66 um top - 38.01 um bottom) = 8.22 (83 deg), measured on a 40 um laser via in laminated dry-film dielectric (analog TV ectc51687.2025.00378-a, Fig. 7); this family's earlier 38 / 42 diameter ratio came from the same via"
   mv_bot_um:
-    template: "mv_d_um * 38 / 42"
-    refs: [ectc51687.2025.00378-a-L04.notes]
-    note: "microvia bottom diameter not reported for cored FCBGA; bottom / top 38 / 42 um measured on a 40 um laser via in dry-film dielectric applied to the top diameter"
+    template: "mv_d_um - 2 * bu_diel_um / mv_wall_tan"
+    note: "microvia bottom not reported; harmonized taper rule over the drawn bu_diel_um depth (mv_wall_tan)"
   mv_land_um:
     template: "mv_d_um * r0 / r1"
     refs: [001c.147203-a-i1.pad_x_um, 001c.147203-a-i1.diameter_um]
@@ -444,11 +447,11 @@ routing:
     - {id: pth, name: "PTH (plugged)", kind: pth, through: sbt_core, diameter_um: pth_d_um, pitch_um: pth_pitch_um,
        land_um: pth_land_um, wall_um: pth_wall_um, fill: plugged, plug: resin,
        note: "Cu barrel with resin plug and Cu caps (ectc51909.2023.00155-f08, estc60143.2024.10712019-f09)"}
-    - {id: mv_ba, name: "Microvia (bottom)", kind: microvia, through: bb_da, diameter_um: mv_d_um,
-       land_um: mv_land_um, fill: filled,
-       note: "bottom-side laser vias open toward the BGA face (wide end down); drawn straight because the via contract tapers toward the bottom only"}
-    - {id: mv_bb, name: "Microvia (bottom)", kind: microvia, through: bb_db, diameter_um: mv_d_um,
-       land_um: mv_land_um, fill: filled}
+    - {id: mv_ba, name: "Microvia (bottom)", kind: microvia, through: bb_da, diameter_um: mv_bot_um,
+       bottom_diameter_um: mv_d_um, land_um: mv_land_um, fill: filled,
+       note: "bottom-side laser vias are drilled from the BGA face, so the wide end is down (harmonized taper rule)"}
+    - {id: mv_bb, name: "Microvia (bottom)", kind: microvia, through: bb_db, diameter_um: mv_bot_um,
+       bottom_diameter_um: mv_d_um, land_um: mv_land_um, fill: filled}
   nets:
     # interposer segment (micro-bump -> BEOL -> TSV -> C4)
     - {id: ip_io_soc, kind: vertical, from: ubump_soc, to: c4, style: staggered, jog: [ip_m1], share: 0.15,
@@ -528,3 +531,216 @@ insets:
     box_mm: [-1.5, "-ip_gap_mm / 2 - 2", 1.5, "ip_gap_mm / 2 + 2"]
     z: ["top:substrate", "top:mold"]
     view: right
+
+# ---- variants (L28, 2026-10-21; TEMPLATE_FORMAT.md "variants"). The base above stays the reported DB TV backbone
+# (engine/src/families and the sim cases transcribe it); the viewer opens `default`. Research basis and conflicts:
+# config/package3d/RESEARCH_SOTA_COWOS.md (D2, D3, D4, C1, C8).
+variants:
+  base:
+    id: tv_00135
+    name: "DB TV: 2 x 1.5x interposers, 2 SoC + 8 HBM2E"
+    note: >-
+      Backbone TV ectc51909.2023.00135-a (TV1, 85 x 85 mm CoWoS MCM): two 1.5x-reticle Si interposers, each with one
+      SoC and four HBM2E (reported cells).
+  default: sota_3x
+  list:
+    - id: sota_3x
+      name: "SOTA-class 3x: 2 SoC + chiplet + 8 HBM, one interposer"
+      note: >-
+        Fifth-generation CoWoS-S layout: one 4-mask-stitched 3x Si interposer (58.9 x 44.1 mm, ~2,600 mm2) with two
+        SoCs side by side in the middle, one chiplet and four HBM along each long edge. Layout and interposer size are
+        figure readings (template); stack, joints, substrate and ring are the backbone's. The die-size split and the
+        chiplet position are pixel reads of the X-ray panel of Fig. 3; which die is the chiplet is an assumption (the
+        narrow third die in the middle row).
+      source: >-
+        ectc51909.2023.00091 p.2 Fig. 3 and caption ("~2,600 mm2 (3x) Si interposer for two (2) SoCs, a (1) Chiplet and
+        eight (8) HBM"); ectc51909.2023.00174 p.2 Sec. I (CoWoS-S qualified for 3 SoC/chiplet dies and 8 HBMs);
+        RESEARCH_SOTA_COWOS.md D2, D3, C1, C8
+      summary: >-
+        TSMC 2.5D: SoC and HBM on {ubump_pitch_um} um micro-bumps over a {ip_h_um} um Si interposer with {tsv_d_um} um
+        TSVs, C4 at {c4_pitch_um} um. SOTA-class: one stitched interposer, two SoCs, a chiplet, HBM rows on both long
+        edges (layout template).
+      drop: [modules, d2h, ip_stack, ip_edge, sbt_stack]
+      callouts_drop: ["Si interposer {ip_h_um} um"]
+      params:
+        ip_n:
+          template: 1
+          source: "ectc51909.2023.00091 p.2 Fig. 3"
+          note: "one stitched Si interposer (fifth-generation CoWoS, 3x reticle, 4-mask stitched)"
+        reticle_x:
+          template: 3
+          source: "ectc51909.2023.00091 p.2 text and Fig. 3 caption"
+          note: "3 reticle size (3x) interposer, ~2,600 mm2 (caption); 3 x 830 = 2490 mm2 vs 58.9 x 44.1 = 2597 mm2 (conflict C1 of RESEARCH_SOTA_COWOS.md, not resolved; the drawn outline is the labelled 58.9 x 44.1 mm)"
+        ip_w_mm:
+          template: 58.9
+          source: "ectc51909.2023.00091 p.2 Fig. 3 (dimension label, X-ray panel)"
+          note: "interposer long side, labelled 58.9 mm in the figure (horizontal); no DB cell"
+        ip_d_mm:
+          template: 44.1
+          source: "ectc51909.2023.00091 p.2 Fig. 3 (dimension label, X-ray panel)"
+          note: "interposer short side, labelled 44.1 mm in the figure; no DB cell"
+        soc_n:
+          template: 2
+          source: "ectc51909.2023.00091 p.2 Fig. 3 caption"
+          note: "two SoCs (SoC1, SoC2 labels in the photo panel) plus one chiplet (drawn as its own part)"
+        hbm_n:
+          template: 8
+          source: "ectc51909.2023.00091 p.2 Fig. 3 caption"
+          note: "eight HBM, four along each long edge of the interposer (photo and X-ray panels)"
+        hbm_w_mm:
+          analog: ectc51909.2023.00135-a-c2.x_mm
+          note: "HBM footprint not given for this configuration (generation not stated); HBM2E 11 x 10 mm of the CoWoS-S backbone TV, drawn with the 11 mm side along x as in Fig. 3 (pixel read ~10.4 x 9.5 mm at the X-ray edges)"
+        hbm_d_mm:
+          analog: ectc51909.2023.00135-a-c2.y_mm
+          note: "HBM footprint not given for this configuration; HBM2E 11 x 10 mm of the CoWoS-S backbone TV, 10 mm side along y (Fig. 3)"
+        # pixel reads of the Fig. 3 X-ray panel (500 dpi render of p.2): interposer 563 px (58.9 mm) x 413 px (44.1 mm)
+        soc1_w_mm:
+          template: "ip_w_mm * 275 / 563"
+          source: "ectc51909.2023.00091 p.2 Fig. 3"
+          note: "SoC1 size not given; pixel read of the X-ray panel: 275 of the 563 px interposer width"
+        soc2_w_mm:
+          template: "ip_w_mm * 244 / 563"
+          source: "ectc51909.2023.00091 p.2 Fig. 3"
+          note: "SoC2 size not given; pixel read: 244 of 563 px"
+        chl_w_mm:
+          template: "ip_w_mm * 28 / 563"
+          source: "ectc51909.2023.00091 p.2 Fig. 3"
+          note: "chiplet size not given; the narrow third die at the right end of the middle row, 28 of 563 px (identification as the caption's chiplet is an assumption)"
+        soc1_d_mm:
+          template: "ip_d_mm * 211 / 413"
+          source: "ectc51909.2023.00091 p.2 Fig. 3"
+          note: "SoC1 height not given; pixel read: 211 of the 413 px interposer height"
+        soc2_d_mm:
+          template: "ip_d_mm * 209 / 413"
+          source: "ectc51909.2023.00091 p.2 Fig. 3"
+          note: "SoC2 and chiplet height not given; pixel read: 209 of 413 px"
+        soc1_x_mm:
+          template: "ip_w_mm * -139 / 563"
+          source: "ectc51909.2023.00091 p.2 Fig. 3"
+          note: "SoC1 center 139 px left of the interposer center (pixel read); rows centred within 1 px"
+        soc2_x_mm:
+          template: "ip_w_mm * 123.5 / 563"
+          source: "ectc51909.2023.00091 p.2 Fig. 3"
+          note: "SoC2 center 123.5 px right of the interposer center (pixel read)"
+        chl_x_mm:
+          template: "ip_w_mm * 262.5 / 563"
+          source: "ectc51909.2023.00091 p.2 Fig. 3"
+          note: "chiplet center 262.5 px right of the interposer center (pixel read)"
+        hbm_ax_mm:
+          template: "ip_w_mm * -149 / 563"
+          source: "ectc51909.2023.00091 p.2 Fig. 3"
+          note: "left HBM pair (columns 1-2) center, pixel read: column centers 878.5 / 1013.5 px vs interposer center 1095 px"
+        hbm_apx_mm:
+          template: "ip_w_mm * 135 / 563"
+          source: "ectc51909.2023.00091 p.2 Fig. 3"
+          note: "left HBM pair column pitch, pixel read 135 px"
+        hbm_bx_mm:
+          template: "ip_w_mm * 151.25 / 563"
+          source: "ectc51909.2023.00091 p.2 Fig. 3"
+          note: "right HBM pair (columns 3-4) center, pixel read: column centers 1179.5 / 1313 px"
+        hbm_bpx_mm:
+          template: "ip_w_mm * 133.5 / 563"
+          source: "ectc51909.2023.00091 p.2 Fig. 3"
+          note: "right HBM pair column pitch, pixel read 133.5 px"
+        hbm_ry_mm:
+          template: "ip_d_mm * 311 / 413"
+          source: "ectc51909.2023.00091 p.2 Fig. 3"
+          note: "HBM row pitch (top row to bottom row), pixel read: row centers 159 / 470 px; rows symmetric about the interposer center within 1.5 px"
+        hbm_pcols_n:
+          template: 2
+          source: "ectc51909.2023.00091 p.2 Fig. 3"
+          note: "HBM in two pairs of columns, a wider gap between the pairs (photo and X-ray panels)"
+        hbm_prows_n: {template: "hbm_n / (2 * hbm_pcols_n)", note: "one HBM row along each long edge per pair (Fig. 3)"}
+        ssg_x_mm: {template: "(soc1_x_mm + soc1_w_mm / 2 + soc2_x_mm - soc2_w_mm / 2) / 2", note: "SoC1-SoC2 gap center (inset framing)"}
+        d2h_y_mm: {template: "(soc1_d_mm / 2 + hbm_ry_mm / 2 - hbm_d_mm / 2) / 2", note: "SoC-HBM gap center along y (inset framing)"}
+      parts:
+        - id: soc
+          name: "SoC1"
+          kind: die
+          material: silicon
+          w_mm: soc1_w_mm
+          d_mm: soc1_d_mm
+          h_um: soc_h_um
+          x_mm: soc1_x_mm
+          in: mold
+          explode_group: 4
+        - {id: soc2, name: "SoC2", kind: die, material: silicon, w_mm: soc2_w_mm, d_mm: soc2_d_mm, h_um: soc_h_um,
+           x_mm: soc2_x_mm, in: mold, explode_group: 4}
+        - {id: chiplet, name: "Chiplet", kind: die, material: silicon, w_mm: chl_w_mm, d_mm: soc2_d_mm, h_um: soc_h_um,
+           x_mm: chl_x_mm, in: mold, explode_group: 4,
+           note: "narrow third die of the middle row in the Fig. 3 X-ray panel; identification as the caption's chiplet is an assumption"}
+        - id: hbm_a
+          name: "HBM (left pair columns)"
+          kind: hbm
+          material: silicon
+          w_mm: hbm_w_mm
+          d_mm: hbm_d_mm
+          h_um: hbm_h_um
+          in: mold
+          x_mm: hbm_ax_mm
+          repeat: {nx: hbm_pcols_n, ny: hbm_prows_n, pitch_x_mm: hbm_apx_mm, pitch_y_mm: hbm_ry_mm}
+          explode_group: 4
+        - id: hbm_b
+          name: "HBM (right pair columns)"
+          kind: hbm
+          material: silicon
+          w_mm: hbm_w_mm
+          d_mm: hbm_d_mm
+          h_um: hbm_h_um
+          in: mold
+          x_mm: hbm_bx_mm
+          repeat: {nx: hbm_pcols_n, ny: hbm_prows_n, pitch_x_mm: hbm_bpx_mm, pitch_y_mm: hbm_ry_mm}
+          explode_group: 4
+        - id: uf1
+          name: "UF1 (die to interposer)"
+          kind: underfill
+          material: underfill
+          fill: {above: interposer, parts: [soc, soc2, chiplet, hbm_a, hbm_b], margin_mm: uf1_margin_mm}
+          explode_group: 3
+          xray_default: true
+      arrays:
+        - {id: ubump_soc2, name: "SoC2 micro-bumps", kind: microbump, per: soc2, lower: interposer, pitch_um: ubump_pitch_um,
+           diameter_um: ubump_d_um, height_um: ubump_h_um, cap_h_um: ubump_cap_um, pad_um: ubump_pad_um,
+           note: "pitch rendered over the full die; the bump map is not reported"}
+        - {id: ubump_chl, name: "Chiplet micro-bumps", kind: microbump, per: chiplet, lower: interposer,
+           pitch_um: ubump_pitch_um, diameter_um: ubump_d_um, height_um: ubump_h_um, cap_h_um: ubump_cap_um,
+           pad_um: ubump_pad_um}
+      routing:
+        nets:
+          - {id: d2d_b, kind: lateral, from: ubump_soc2, to: ubump_hbm_b, levels: [ip_m3, ip_m1], share: 0.5}
+          - {id: ip_io_soc2, kind: vertical, from: ubump_soc2, to: c4, style: staggered, jog: [ip_m1], share: 0.15}
+          - {id: ip_gnd_soc2, kind: plane_tie, from: ubump_soc2, plane: ip_m2, share: 0.3}
+          - {id: d2d_ss, kind: lateral, from: ubump_soc, to: ubump_soc2, levels: [ip_m3, ip_m1], share: 0.5,
+             note: "SoC1-SoC2 wires in the interposer BEOL across the die gap (mock-up; lane density not reported)"}
+          - {id: d2d_cl, kind: lateral, from: ubump_soc2, to: ubump_chl, levels: [ip_m3], share: 0.5}
+      callouts:
+        - {target: interposer, text: "Si interposer {ip_h_um} um",
+           note: "Si interposer {ip_h_um} um ({ip_thin_um} um in the optimized TV2); one stitched interposer of the fifth-generation layout (outline and die positions are figure readings, template)"}
+        - {target: d2d_ss, text: "SoC1-SoC2 wires in BEOL",
+           note: "Mock-up die-to-die wires between the two SoC bump fields in the interposer BEOL (lane density, levels and die gap not reported)"}
+      insets:
+        - id: d2h
+          label: "SoC1-HBM edge"
+          box_mm: ["hbm_ax_mm + hbm_apx_mm / 2 - 1.5", "d2h_y_mm - 1.5", "hbm_ax_mm + hbm_apx_mm / 2 + 1.5", "d2h_y_mm + 1.5"]
+          z: ["bottom:interposer", "top:mold"]
+          view: front
+        - id: ss_gap
+          label: "SoC1-SoC2 gap"
+          box_mm: ["ssg_x_mm - 1.5", -1.5, "ssg_x_mm + 1.5", 1.5]
+          z: ["bottom:interposer", "top:mold"]
+          view: front
+        - id: ip_stack
+          label: "Interposer: BEOL, TSV, micro-bumps, C4"
+          box_mm: ["soc1_x_mm - 0.3", -0.3, "soc1_x_mm + 0.3", 0.3]
+          z: ["top:substrate", "bottom:soc"]
+          view: front
+        - id: ip_edge
+          label: "Interposer edge, C4 and UF2"
+          box_mm: ["ip_w_mm / 2 - 1.5", -1.5, "ip_w_mm / 2 + 2", 1.5]
+          z: ["top:substrate", "top:mold"]
+          view: front
+        - id: sbt_stack
+          label: "Substrate: C4, build-up, PTH, BGA"
+          box_mm: ["soc1_x_mm - 1.2", -1.2, "soc1_x_mm + 1.2", 1.2]
+          z: ["bottom:bga", "bottom:interposer"]
+          view: front

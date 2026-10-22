@@ -3,7 +3,7 @@
 	import { Viewer, type Overlay, type Stats } from './viewer';
 	import type { ViewState } from './build';
 	import type { Item, Picked } from './model';
-	import type { Callout, Dim, Family, Ref } from './types';
+	import type { Callout, Dim, Family, Ref, RouteRegion } from './types';
 	import { dimRefs, doiUrl, fieldLabel, fieldUnit, fmtNum, STATUS_TIP } from './data';
 	import { ui } from '../state.svelte';
 
@@ -67,7 +67,7 @@
 		if (!v) return;
 		const fams = families;
 		v.setFamilies(fams);
-		const ids = fams.map((f) => f.id).join(',');
+		const ids = fams.map((f) => `${f.id}@${f.variant ?? ''}`).join(',');
 		if (ids !== lastIds) {
 			lastIds = ids;
 			picked = null;
@@ -115,6 +115,12 @@
 		const out = rowsFrom(src, FIELDS[it.type], it.dims);
 		const route = src.route as { dims?: Record<string, Dim> } | undefined;
 		if (it.type === 'layer' && route) for (const r of rowsFrom(route as Record<string, unknown>, ROUTE_FIELDS, route.dims ?? {})) out.push({ ...r, field: `route ${r.field}` });
+		// per-region level properties: inherited values carry the level's dims, stated ones their own
+		const regs = (route as { regions?: RouteRegion[] } | undefined)?.regions ?? [];
+		regs.forEach((rg, k) => {
+			for (const r of rowsFrom(rg as unknown as Record<string, unknown>, ROUTE_FIELDS, { ...(route?.dims ?? {}), ...(rg.dims ?? {}) }))
+				out.push({ ...r, field: `region ${k + 1} ${r.field}`, tip: [r.tip, rg.note ?? ''].filter(Boolean).join('\n') });
+		});
 		return out;
 	}
 	/** Routing summary line of a routed level / via / net (use, direction, endpoints). */
@@ -122,7 +128,8 @@
 		const src = it.src as unknown as Record<string, unknown>;
 		if (it.type === 'layer' && src.route) {
 			const r = src.route as Record<string, unknown>;
-			return [`routed ${r.use ?? ''}`, r.dir ? `dir ${r.dir}` : '', r.matrix ? `in ${r.matrix}` : ''].filter(Boolean).join(' · ');
+			const zs = ((r.regions as RouteRegion[] | undefined) ?? []).map((z, k) => `region ${k + 1}: ${z.use}${z.dir ? ` dir ${z.dir}` : ''} (${z.rects.map((q) => `${fmtNum(q.w_mm)} x ${fmtNum(q.d_mm)} mm`).join(', ')})`);
+			return [`routed ${r.use ?? ''}`, r.dir ? `dir ${r.dir}` : '', r.matrix ? `in ${r.matrix}` : '', ...zs].filter(Boolean).join(' · ');
 		}
 		if (it.type === 'via') return [String(src.kind ?? ''), String(src.fill ?? 'filled'), src.through ? `through ${src.through}` : '', `${src.upper ?? 'face'} -> ${src.lower ?? 'face'}`].filter(Boolean).join(' · ');
 		if (it.type === 'net') return [String(src.kind ?? ''), src.style ? String(src.style) : '', `${src.from ?? ''}${src.to ? ` -> ${src.to}` : ''}`, src.plane ? `plane ${src.plane}` : '', Array.isArray(src.jog) && src.jog.length ? `jog ${src.jog.join(', ')}` : '', Array.isArray(src.levels) && src.levels.length ? `levels ${src.levels.join(', ')}` : ''].filter(Boolean).join(' · ');

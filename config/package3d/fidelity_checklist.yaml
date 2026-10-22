@@ -80,9 +80,9 @@ archetypes:
         group: routing
         check: {type: opening, face: top, role: [passivation]}
       - id: fli_array
-        name: First-level interconnect field on the top face (C4 / pillar / bump)
+        name: First-level interconnect field on the top face (C4 / pillar / bump / uBGA)
         group: structure
-        check: {type: array, kind: [c4, cu_pillar, microbump], face: top}
+        check: {type: array, kind: [c4, cu_pillar, microbump, bga], face: top}   # bga: uBGA of CoWoS-L_6x (L28)
       - id: top_pads
         name: Top pad level (outermost Cu, routed)
         group: routing
@@ -721,6 +721,26 @@ families:
     - {archetype: bridge_in_mold, parts: [lsi, lsi_ss], variants: [tsv]}
     - {archetype: die, parts: [soc, hbm]}
     - {archetype: lid_thermal, parts: [lid, lid_foot, tim], variants: [lid]}
+  # variants (L28, 2026-10-21): `<family>@<variant>` entries; a variant without its own entry uses its family's
+  cowos_s@sota_3x:
+    - {archetype: organic_substrate, parts: [substrate]}
+    - {archetype: si_tsv_interposer, parts: [interposer]}
+    - {archetype: die, parts: [soc, soc2, chiplet, hbm_a, hbm_b]}
+    - {archetype: lid_thermal, parts: [ring], variants: [ring]}
+  cowos_l@tv_4p8x:
+    - {archetype: organic_substrate, parts: [substrate]}
+    - {archetype: organic_rdl_interposer, parts: [ri_front, ri_core, ri_back], variants: [cored]}
+    - {archetype: bridge_in_mold, parts: [lsi, lsi_c], variants: [tsv]}
+    - {archetype: die, parts: [soc, hbm]}
+    - {archetype: lid_thermal, parts: [ring], variants: [ring]}
+  emib@emib_5x_12hbm:
+    - {archetype: organic_substrate, parts: [substrate]}
+    - {archetype: si_bridge_substrate, parts: [bridge]}
+    - {archetype: die, parts: [die1, die2, die3]}
+  emib_t@class_2026:
+    - {archetype: organic_substrate, parts: [substrate]}
+    - {archetype: si_bridge_substrate, parts: [bridge], variants: [tsv]}
+    - {archetype: die, parts: [die, hbm]}
   info_os:
     - {archetype: organic_substrate, parts: [substrate]}
     - {archetype: organic_rdl_interposer, parts: [rdl], variants: [chip_first]}

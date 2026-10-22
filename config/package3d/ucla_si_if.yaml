@@ -59,6 +59,10 @@ params:
     refs: [iedm45741.2023.10413759-a-i1.dielectric]
     source: "iedm45741.2023.10413759 Fig. 8(d) (key figure iedm45741.2023.10413759-f01 (d)): 500 nm GaN/Si-IF pillar SiO2 recess"
     note: "pillar protrusion above the Si-IF SiO2 not stated for the UDSP Si-IF; 500 nm recess of the GaN/Si-IF TV (drawn as the dielet standoff)"
+  pil_bot_d_um:
+    template: "pil_d_um * 80 / 98"
+    refs: [ectc51846.2026.00062-a-i1.pitch_um]
+    note: "Si-IF pillar drawn as a trapezoid, narrower at its M2 pad than at the bonding tip, as both in-family sections show it: fig ectc51846.2026.00062-f02 (b, right; 3D Si-IF TV, 5 um scale bar) ~98 px (~4.0 um) at the bonding interface to ~80 px (~3.25 um) at the Si-IF wiring; fig iedm45741.2023.10413759-f01 (c) ~51 to ~47 px; the 80 / 98 ratio of the scaled image is drawn (pixel reads, template; L18 2026-10-21)"
   pass_um:
     template: "pil_h_um - recess_um"
     note: "Si-IF top SiO2 around the pillar base = pillar height - recess (GaN/Si-IF section proportions)"
@@ -135,8 +139,9 @@ routing:
     mock-up routing: link placement, shares and the assignment of pads / links to M2 and M1 are illustrative (two
     Cu wiring levels and 350 um links are reported); dims carry their own status
   vias:
-    - {id: pil_base, name: "Cu pillar base (in SiO2)", kind: beol_via, through: if_pass, diameter_um: pil_d_um, fill: filled,
-       note: "lower part of the {pil_h_um} um Si-IF Cu pillar, embedded in the recessed SiO2, standing on the M2 pad"}
+    - {id: pil_base, name: "Cu pillar base (in SiO2)", kind: beol_via, through: if_pass, diameter_um: pil_d_um,
+       bottom_diameter_um: pil_bot_d_um, fill: filled,
+       note: "lower part of the {pil_h_um} um Si-IF Cu pillar, embedded in the recessed SiO2, standing on the M2 pad; trapezoid, narrower at the pad (figs ectc51846.2026.00062-f02 (b), iedm45741.2023.10413759-f01 (c))"}
     - {id: ivia, name: "Inter-level via M2-M1", kind: beol_via, through: if_ild, diameter_um: ivia_um, fill: filled}
   nets:
     # SuperCHIPS links: pillar field -> M2 pad -> (via) -> M1 / M2 wire across the 59 um gap -> pillar field

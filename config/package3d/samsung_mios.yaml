@@ -185,10 +185,13 @@ params:
   mv_d_um:
     analog: ectc51909.2023.00155-a-i6.diameter_um
     note: "microvia diameter not reported for MIoS; analog = build-up via of a large 2.5D Si-interposer substrate"
+  mv_wall_tan:
+    template: "2 * r0 / (r1 - r2)"
+    refs: [ectc51687.2025.00378-a-m5.value, ectc51687.2025.00378-a-m6.value, ectc51687.2025.00378-a-m7.value]
+    note: "harmonized microvia taper rule (TEMPLATE_FORMAT.md 'Template rules'): bottom = top - 2 x drawn dielectric depth / tan(sidewall angle); tan(angle) = 2 x 15 um dielectric over the pad / (41.66 um top - 38.01 um bottom) = 8.22 (83 deg), measured on a 40 um laser via in laminated dry-film dielectric (analog TV ectc51687.2025.00378-a, Fig. 7); this family's earlier 38 / 42 diameter ratio came from the same via"
   mv_bot_um:
-    template: "mv_d_um * 38 / 42"
-    refs: [ectc51687.2025.00378-a-L04.notes]
-    note: "microvia bottom diameter not reported for cored FCBGA; bottom / top 38 / 42 um measured on a 40 um laser via in dry-film dielectric applied to the top diameter"
+    template: "mv_d_um - 2 * bu_diel_um / mv_wall_tan"
+    note: "microvia bottom not reported; harmonized taper rule over the drawn bu_diel_um depth (mv_wall_tan)"
   mv_land_um:
     template: "mv_d_um * r0 / r1"
     refs: [001c.147203-a-i1.pad_x_um, 001c.147203-a-i1.diameter_um]
@@ -417,11 +420,11 @@ routing:
     - {id: pth, name: "PTH (plugged)", kind: pth, through: sbt_core, diameter_um: pth_d_um, pitch_um: pth_pitch_um,
        land_um: pth_land_um, wall_um: pth_wall_um, fill: plugged, plug: resin,
        note: "Cu barrel with resin plug and Cu caps (ectc51909.2023.00155-f08, estc60143.2024.10712019-f09)"}
-    - {id: mv_ba, name: "Microvia (bottom)", kind: microvia, through: bb_da, diameter_um: mv_d_um,
-       land_um: mv_land_um, fill: filled,
-       note: "bottom-side laser vias open toward the BGA face (wide end down); drawn straight because the via contract tapers toward the bottom only"}
-    - {id: mv_bb, name: "Microvia (bottom)", kind: microvia, through: bb_db, diameter_um: mv_d_um,
-       land_um: mv_land_um, fill: filled}
+    - {id: mv_ba, name: "Microvia (bottom)", kind: microvia, through: bb_da, diameter_um: mv_bot_um,
+       bottom_diameter_um: mv_d_um, land_um: mv_land_um, fill: filled,
+       note: "bottom-side laser vias are drilled from the BGA face, so the wide end is down (harmonized taper rule)"}
+    - {id: mv_bb, name: "Microvia (bottom)", kind: microvia, through: bb_db, diameter_um: mv_bot_um,
+       bottom_diameter_um: mv_d_um, land_um: mv_land_um, fill: filled}
   nets:
     # interposer segment (micro-bump -> BEOL -> TSV -> backside RDL -> Cu pillar)
     - {id: ip_io_asic, kind: vertical, from: ub_asic, to: c4, style: staggered, jog: [ip_m2, ip_bs1], share: 0.15,

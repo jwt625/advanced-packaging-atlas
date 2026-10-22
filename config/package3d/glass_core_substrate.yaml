@@ -85,10 +85,13 @@ params:
     template: "mvia_d_um + r0 - r1"
     refs: [tcpmt.2026.3736233-a-i1.pad_x_um, tcpmt.2026.3736233-a-i1.diameter_um]
     note: "microvia land not reported for a glass-core TV; harmonized rule for glass-core build-up (TEMPLATE_FORMAT.md 'Template rules'): 'pad 12 um larger than via top' (136 / 124 um via pad of a glass-embedded package)"
-  mvia_bot_d_um:
-    template: "mvia_d_um - 2 * abf_um / 3.078"
+  mv_wall_tan:
+    template: 3.078
     refs: [ectc51687.2025.00076-b-i1.notes]
-    note: "via bottom not reported; 72 deg laser-via sidewall (analog row notes) over the 15 um ABF; 3.078 = tan(72 deg)"
+    note: "harmonized microvia taper rule (TEMPLATE_FORMAT.md 'Template rules'): bottom = top - 2 x drawn dielectric depth / tan(sidewall angle); sidewall 72 deg, stated for a 30 um-deep laser via in ABF (analog row notes ectc51687.2025.00076-b-i1: top radius 67 um, bottom ~58 um after 72 deg taper); tan(72 deg) = 3.078"
+  mvia_bot_d_um:
+    template: "mvia_d_um - 2 * abf_um / mv_wall_tan"
+    note: "via bottom not reported; harmonized taper rule over the drawn abf_um depth (mv_wall_tan)"
   tgv_bot_d_um:
     template: "tgv_d_um * 0.5"
     refs: [ectc51529.2024.00093-a-i1.notes]

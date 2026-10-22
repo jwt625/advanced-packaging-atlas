@@ -176,10 +176,13 @@ modules:
         template: "mv_d_um * r0 / r1"
         refs: [001c.147203-a-i1.pad_x_um, 001c.147203-a-i1.diameter_um]
         note: "microvia land not reported for a cored organic substrate; harmonized rule, TEMPLATE_FORMAT.md 'Template rules': land / via = 110 / 70 (pad >= 110 um for a 70 um Cu-filled stacked via: minimum design rule of a coreless 150 GHz AiP antenna substrate, R-G640)"
-      mv_bot_d_um:
-        template: "mv_d_um - 2 * bu_d_um / 3.078"
+      mv_wall_tan:
+        template: 3.078
         refs: [ectc51687.2025.00076-b-i1.notes]
-        note: "microvia bottom not reported; 72 deg laser-via sidewall (analog row notes) over the drawn dielectric depth; 3.078 = tan(72 deg); same rule as fcbga_organic"
+        note: "harmonized microvia taper rule (TEMPLATE_FORMAT.md 'Template rules'): bottom = top - 2 x drawn dielectric depth / tan(sidewall angle); sidewall 72 deg, stated for a 30 um-deep laser via in ABF (analog row notes ectc51687.2025.00076-b-i1: top radius 67 um, bottom ~58 um after 72 deg taper); tan(72 deg) = 3.078"
+      mv_bot_d_um:
+        template: "mv_d_um - 2 * bu_d_um / mv_wall_tan"
+        note: "microvia bottom not reported; harmonized taper rule over the drawn bu_d_um depth (mv_wall_tan)"
       pth_d_um:
         analog: ectc51909.2023.00155-a-i5.diameter_um
         note: "PTH size not reported; analog = 200 um through hole in the 1.3 mm core of the same 2.5D-TV substrate"
@@ -627,3 +630,207 @@ insets:
     box_mm: ["ri_w_mm / 2 - 1.5", -1.5, "sbt_w_mm / 2", 1.5]
     z: ["top:substrate", "top:lid"]
     view: front
+
+# ---- variants (L28, 2026-10-21; TEMPLATE_FORMAT.md "variants"). The base above stays the reported DB TV backbone
+# (engine/src/families and the sim cases transcribe it); the viewer opens `default`. Research basis:
+# config/package3d/RESEARCH_SOTA_COWOS.md (D6, D8, section 7 `tv_4p8x`). No product preset (MI455X die placement,
+# interposer size and LSI count are not public; B300 / Rubin stack counts conflict or are not stated).
+variants:
+  base:
+    id: tv_00174
+    name: "DB TV: 3 SoC + 8 HBM, 43 x 58 mm RI, lid"
+    note: >-
+      Backbone TV ectc51909.2023.00174-a: 3 SoC/chiplet + 8 HBM on a 43 x 58 mm reconstituted interposer (3x), more
+      than 10 LSI, 70 x 78 mm package, lid type (reported cells; gaps from the 6x TV ectc51909.2023.00091-a).
+  default: tv_4p8x
+  list:
+    - id: tv_4p8x
+      name: "SOTA-class DB TV 4.8x: 6 SoC + 12 HBM2E, 18 LSI, 91 x 91 mm"
+      note: >-
+        CoWoS-L_6x supercarrier TV_4.8x (TSMC, ECTC 2023): 6 SoC + 12 HBM2E, 18 LSI in the SC-RDL (1 front + 6 back
+        RDL at 11/11 um), SC-RDL and side mold to the 91 x 91 mm package edge, uBGA 0.5 mm with ~200 um layer and 45
+        IPDs, 3-2-3 substrate with 1.4 mm core, stiffener ring (no lid, no TIM1). Counts, pitches and sizes are DB
+        cells (reported); die and LSI placement follow the Fig. 7(b) top view; die sizes come from the reported ~4000
+        mm2 interposer area (top-die rectangle + 1 mm per side) with the aspect of the Fig. 7(b) die block (template).
+        IPDs not drawn (placement not reported).
+      source: >-
+        ectc51909.2023.00091 p.2 Sec. II (interposer and SC-RDL size definitions), p.3 Table 1, p.4 Sec. II.B, p.4
+        Fig. 7(a)/(b); DB rows ectc51909.2023.00091-b and its components / layers / interconnects
+      backbone_tv: ectc51909.2023.00091-b
+      summary: >-
+        TSMC CoWoS-L_6x: SoC and HBM on TSV-bearing LSI bridges and {tiv_d_um} um TIVs in mold; {ri_front_n} front +
+        {ri_back_n} back RDL span the {ri_w_mm} x {ri_d_mm} mm package; uBGA at {ubga_pitch_um} um. TV_4.8x: {soc_n} SoC
+        + {hbm_n} HBM2E, {lsi_n} LSI.
+      drop: [tim, lid_foot, lid, c4uf, lid_h_um, tim_h_um, lid_gap_um, lid_foot_w_mm, lsi_ss, edge]
+      callouts_drop: ["More than {lsi_n} LSI chiplets", "RI {ri_w_mm} x {ri_d_mm} mm", "6x TV: {sc_back_n} back-side RDLs"]
+      params:
+        # ---- reported (TV_4.8x, ectc51909.2023.00091-b)
+        sbt_w_mm: {ref: ectc51909.2023.00091-b.package_x_mm, note: "SC-RDL and package size 91 x 91 mm (Table 1)"}
+        sbt_d_mm: {ref: ectc51909.2023.00091-b.package_y_mm, note: "SC-RDL and package size 91 x 91 mm (Table 1)"}
+        ri_w_mm:
+          ref: ectc51909.2023.00091-b.package_x_mm
+          note: "the SC-RDL (with the LSI / TIV layer) extends to the package substrate boundary (p.2 Sec. II; p.4: 'The SC-RDL has the same size as the substrate at 91 mm x 91 mm')"
+        ri_d_mm:
+          ref: ectc51909.2023.00091-b.package_y_mm
+          note: "the SC-RDL (with the LSI / TIV layer) extends to the package substrate boundary (p.2 Sec. II, p.4 Sec. II.B)"
+        reticle_x: {ref: ectc51909.2023.00091-b.reticle_multiple}
+        ri_area_mm2:
+          ref: ectc51909.2023.00091-b.interposer_area_mm2
+          note: "interposer size (~4000 mm2, 4.8x) = rectangle enclosing the top dies with 1 mm extension per side (p.2 Sec. II); not the SC-RDL size"
+        soc_n: {ref: ectc51909.2023.00091-b-c1.count}
+        hbm_n: {ref: ectc51909.2023.00091-b-c2.count}
+        lsi_n: {ref: ectc51909.2023.00091-b-c3.count}
+        sc_ipd_n: {ref: ectc51909.2023.00091-b-c4.count}
+        ri_front_n: {ref: ectc51909.2023.00091-b-L04.repeat}
+        ri_back_n: {ref: ectc51909.2023.00091-b-L06.repeat}
+        ri_b_line_um: {ref: ectc51909.2023.00091-b-L06.line_um}
+        ri_b_space_um: {ref: ectc51909.2023.00091-b-L06.space_um}
+        tiv_pitch_um: {ref: ectc51909.2023.00091-b-i2.pitch_um}
+        tiv_d_um: {ref: ectc51909.2023.00091-b-i2.diameter_um}
+        bu_n: {ref: ectc51909.2023.00091-b-L09.repeat, note: "3 build-up layers per side (3-2-3)"}
+        core_h_um: {ref: ectc51909.2023.00091-b-L10.thickness_um, note: "1.4 mm core"}
+        sbt_layers: {ref: ectc51909.2023.00091-b.substrate_layer_count}
+        bga_pitch_um: {ref: ectc51909.2023.00091-b-i4.pitch_um}
+        ubga_pitch_um: {ref: ectc51909.2023.00091-b-i3.pitch_um}
+        ubga_h_um: {ref: ectc51909.2023.00091-b-i3.height_um, note: "total uBGA layer height controlled ~200 um (approx.)"}
+        # ---- template: layout (Fig. 7(b) top view; die sizes not reported)
+        hbm_w_mm:
+          analog: ectc51909.2023.00135-a-c2.y_mm
+          note: "HBM2E footprint not given for the TV; HBM2E 11 x 10 mm of a TSMC CoWoS-S TV, drawn with the 10 mm side along x as in Fig. 7(b)"
+        hbm_d_mm:
+          analog: ectc51909.2023.00135-a-c2.x_mm
+          note: "HBM2E footprint not given for the TV; HBM2E 11 x 10 mm of a TSMC CoWoS-S TV, 11 mm side along y (Fig. 7(b))"
+        soc_cols_n:
+          template: 2
+          source: "ectc51909.2023.00091 p.4 Fig. 7(b)"
+          note: "SoCs in 2 columns x 3 rows in the middle of the top view"
+        soc_rows_n: {template: "soc_n / soc_cols_n", note: "SoC rows = SoC count / columns (Fig. 7(b))"}
+        hbm_cols_n:
+          template: 2
+          source: "ectc51909.2023.00091 p.4 Fig. 7(b)"
+          note: "one column of six HBM2E on each side of the SoC block"
+        ip_aspect:
+          template: "(563 * sbt_w_mm / 943 + 2 * ip_edge_mm) / (777 * sbt_d_mm / 894 + 2 * ip_edge_mm)"
+          source: "ectc51909.2023.00091 p.4 Fig. 7(b)"
+          note: "x / y aspect of the interposer-size rectangle from the schematic top view (900 dpi render): top-die block 563 px (HBM outer edges) x 777 px (SoC rows), package 943 x 894 px = 91 x 91 mm; + 1 mm per side; the schematic is not used for absolute size (its die block is ~14 % larger than the reported area)"
+        ip_w_mm: {template: "(ri_area_mm2 * ip_aspect) ** 0.5", note: "interposer-size rectangle x from the reported ~4000 mm2 and the Fig. 7(b) aspect"}
+        ip_d_mm:
+          template: "ri_area_mm2 / ip_w_mm"
+          refs: [ectc51909.2023.00091-a.notes]
+          note: "interposer-size rectangle y (~76 mm, inside the 75-85 mm estimate for 5x-6x interposers, p.2)"
+        soc_w_mm:
+          template: "(ip_w_mm - 2 * ip_edge_mm - hbm_cols_n * hbm_w_mm - (soc_cols_n + 1) * die_gap_um / 1000) / soc_cols_n"
+          note: "SoC size not reported; the 2 SoC columns fill the die block between the HBM columns"
+        soc_d_mm:
+          template: "(ip_d_mm - 2 * ip_edge_mm - (soc_rows_n - 1) * die_gap_um / 1000) / soc_rows_n"
+          note: "SoC size not reported; the 3 SoC rows share the die-block length"
+        soc_px_mm: {template: "soc_w_mm + die_gap_um / 1000", note: "SoC column pitch = SoC width + D2D gap"}
+        hbm_px_mm:
+          template: "soc_cols_n * soc_w_mm + (soc_cols_n + 1) * die_gap_um / 1000 + hbm_w_mm"
+          note: "HBM columns flank the SoC block at the D2D gap"
+        hbm_py_mm:
+          template: "(ip_d_mm - 2 * ip_edge_mm - hbm_d_mm) / (hbm_rows_n - 1)"
+          note: "HBM spread evenly along the die block, end HBM flush with its edges (Fig. 7(b)); not dimensioned"
+        lsi_px_mm:
+          template: "soc_cols_n * (soc_w_mm + die_gap_um / 1000)"
+          note: "LSI centered on each HBM-SoC gap (red outlines in Fig. 7(b)); LSI placement not dimensioned"
+        lsi_ss_n:
+          template: "lsi_n - lsi_cols_n * lsi_rows_n"
+          note: "LSI on the central SoC-SoC edge = reported 18 - 12 under the HBM-SoC edges; Fig. 7(b) draws two per SoC row on that edge"
+        lsi_ss_py_mm: {template: "soc_py_mm / 2", note: "two LSI per SoC row, symmetric about the row center (Fig. 7(b)); not dimensioned"}
+        ubga_d_um:
+          analog: tcpmt.2025.3533388-a-i5.diameter_um
+          note: "uBGA ball diameter not reported; analog = 250 um solder ball of a 500 um-pitch interposer-to-substrate BGA"
+        ring_w_mm:
+          template: 6
+          refs: [ectc51909.2023.00091-b-c7.notes]
+          note: "ring width not reported (the Fig. 7(c) label 'Ring: 18mm-12mm-2mm' is not defined in the paper); 6 mm keeps the ring about 3 mm clear of the top-die block along y; illustrative"
+        ring_h_um:
+          analog: ectc51909.2023.00155-a-c11.thickness_um
+          note: "ring thickness not reported; analog = Cu stiffener of a 2.5D Si-interposer TV"
+      parts:
+        - id: soc
+          name: SoC
+          kind: die
+          material: silicon
+          w_mm: soc_w_mm
+          d_mm: soc_d_mm
+          h_um: soc_h_um
+          in: mold
+          repeat: {nx: soc_cols_n, ny: soc_rows_n, pitch_x_mm: soc_px_mm, pitch_y_mm: soc_py_mm}
+          explode_group: 4
+        - {id: mold, name: "Side mold (top dies)", kind: mold, material: mold_compound, material_label: "molding compound",
+           w_mm: ri_w_mm, d_mm: ri_d_mm, h_um: mold_h_um, on: ri_front, explode_group: 4, xray_default: true,
+           note: "side mold extended to the edge of the package substrate (p.2 Sec. II); co-planar with the top dies"}
+        - id: lsi_c
+          name: "LSI bridge, SoC-SoC (Si, TSV)"
+          kind: bridge
+          material: silicon
+          w_mm: lsi_w_mm
+          d_mm: lsi_d_mm
+          h_um: lsi_part_h_um
+          in: ri_core
+          repeat: {ny: lsi_ss_n, pitch_y_mm: lsi_ss_py_mm}
+          explode_group: 2
+          note: "LSI under the central SoC-SoC edge, two per SoC row (Fig. 7(b))"
+        - {id: ring, name: "Stiffener ring", kind: stiffener, material: other,
+           material_label: "stiffener ring (material not reported)", w_mm: sbt_w_mm, d_mm: sbt_d_mm, h_um: ring_h_um,
+           shape: frame, frame_w_mm: ring_w_mm, on: mold, explode_group: 6,
+           note: "ring on the side mold at the package edge (Fig. 7(a)); outer edge flush with the package"}
+      layers:
+        - part: lsi_c
+          pattern:
+            - {id: lsi_c_stud, name: "LSI top Cu via level", material: mold_compound,
+               material_label: "molding compound between the top Cu vias", role: dielectric, h_um: lsi_via_h_um}
+        - part: lsi_c
+          repeat: lsi_sig_n
+          pattern:
+            - {id: lsi_c_m, name: "LSI Cu/USG level", material: copper, material_label: "Cu in USG (dual damascene)",
+               role: conductor, h_um: lsi_m_um,
+               route: {use: signal, dir: x, line_um: lsi_line_um, space_um: lsi_space_um, matrix: oxide}}
+            - {id: lsi_c_imd, name: "LSI IMD", material: oxide, material_label: "USG", role: dielectric, h_um: lsi_imd_um}
+        - part: lsi_c
+          pattern:
+            - {id: lsi_c_m1, name: "LSI M1 (GND plane, TSV landing)", material: copper,
+               material_label: "Cu (single damascene)", role: conductor, h_um: lsi_m_um, route: {use: plane, matrix: oxide}}
+            - {id: lsi_c_si, name: "LSI Si (TSV)", material: silicon, role: core, h_um: lsi_si_um}
+      arrays:
+        - {id: c4, name: "uBGA (SC-RDL to substrate)", kind: bga, upper: ri_back, lower: substrate, region: {part: ri_back},
+           pitch_um: ubga_pitch_um, diameter_um: ubga_d_um, height_um: ubga_h_um,
+           note: "uBGA layer ~200 um with 45 embedded IPDs (2.9 mm2 each; not drawn, placement not reported)"}
+      routing:
+        vias:
+          - {id: tiv, name: "TIV (Cu in mold)", kind: tmv, through: ri_core, diameter_um: tiv_d_um, pitch_um: tiv_pitch_um,
+             land_um: tiv_land_um, fill: filled, region: {part: ri_core, subtract: [lsi, lsi_c]},
+             note: "TIV placement not reported; grid over the LSI / TIV layer outside both LSI groups"}
+          - {id: lsi_c_via, name: "LSI top Cu via", kind: bridge_via, through: lsi_c_stud, diameter_um: lsi_via_d_um,
+             pitch_um: lsi_via_pitch_um, land_um: lsi_via_land_um, fill: filled}
+          - {id: lsi_c_bv, name: "LSI BEOL via", kind: beol_via, through: lsi_c_imd, diameter_um: lsi_bv_d_um, fill: filled}
+          - {id: lsi_c_tsv, name: "LSI TSV", kind: tsv, through: lsi_c_si, diameter_um: lsi_tsv_d_um,
+             pitch_um: lsi_tsv_pitch_um, land_um: lsi_tsv_land_um, liner_um: lsi_tsv_liner_um, fill: filled}
+        nets:
+          - {id: d2d_ss, kind: lateral, from: ubump_soc, to: ubump_soc, levels: [lsi_c_m], share: 0.5,
+             note: "SoC-SoC wires inside the LSI under the central SoC-SoC edge"}
+      callouts:
+        - {target: lsi, text: "{lsi_n} LSI chiplets",
+           note: "{lsi_n} LSI chiplets in the SC-RDL (TV_4.8x); drawn one per HBM-SoC edge and two per SoC row on the central SoC-SoC edge (Fig. 7(b)); LSI size is an analog"}
+        - {target: ri_core, text: "SC-RDL {ri_w_mm} x {ri_d_mm} mm",
+           note: "SC-RDL spans the package ({ri_w_mm} x {ri_d_mm} mm): {ri_front_n} front + {ri_back_n} back RDL; interposer size {reticle_x}x reticle (~{ri_area_mm2} mm2) = top-die rectangle + 1 mm per side"}
+        - {target: ri_back, text: "{ri_back_n} B/S RDL, {ri_b_line_um}/{ri_b_space_um} um",
+           note: "{ri_back_n} back-side RDL layers at {ri_b_line_um}/{ri_b_space_um} um Cu (low-loss dielectric); uBGA at {ubga_pitch_um} um pitch, ~{ubga_h_um} um layer with {sc_ipd_n} embedded IPDs (not drawn)"}
+        - {target: c4, text: "uBGA {ubga_pitch_um} um pitch",
+           note: "SC-RDL to substrate by uBGA at {ubga_pitch_um} um (layer ~{ubga_h_um} um); the SC-RDL converts the micro-bump pitch to the uBGA pitch"}
+        - {target: ring, text: "Stiffener ring, no lid / TIM1",
+           note: "TV_4.8x uses a stiffener ring: heat sink directly on the die backs, no TIM1 (p.4 Sec. II.B); ring width and thickness not reported",
+           refs: [ectc51909.2023.00091-b-c7.notes]}
+      insets:
+        - id: lsi_ss
+          label: "LSI under the SoC-SoC edge"
+          box_mm: [-0.2, "lsi_ss_py_mm / 2 - 0.2", 0.2, "lsi_ss_py_mm / 2 + 0.2"]
+          z: ["bottom:ri_back", "bottom:soc"]
+          view: front
+        - id: pkg_edge
+          label: "Package edge: SC-RDL, side mold, ring, uBGA"
+          box_mm: ["sbt_w_mm / 2 - 3", -1.5, "sbt_w_mm / 2", 1.5]
+          z: ["top:substrate", "top:ring"]
+          view: front

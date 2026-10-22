@@ -170,10 +170,13 @@ params:
     template: "mv_d_um * r0 / r1"
     refs: [001c.147203-a-i1.pad_x_um, 001c.147203-a-i1.diameter_um]
     note: "microvia land not reported for a cored organic substrate; harmonized rule, TEMPLATE_FORMAT.md 'Template rules': land / via = 110 / 70 (pad >= 110 um for a 70 um Cu-filled stacked via: minimum design rule of a coreless 150 GHz AiP antenna substrate, R-G640)"
-  mv_bot_um:
-    template: "mv_d_um - 2 * bu_d_h_um / 3.078"
+  mv_wall_tan:
+    template: 3.078
     refs: [ectc51687.2025.00076-b-i1.notes]
-    note: "via bottom not reported; 72 deg laser-via sidewall (analog row notes) over the 15 um dielectric; 3.078 = tan(72 deg)"
+    note: "harmonized microvia taper rule (TEMPLATE_FORMAT.md 'Template rules'): bottom = top - 2 x drawn dielectric depth / tan(sidewall angle); sidewall 72 deg, stated for a 30 um-deep laser via in ABF (analog row notes ectc51687.2025.00076-b-i1: top radius 67 um, bottom ~58 um after 72 deg taper); tan(72 deg) = 3.078"
+  mv_bot_um:
+    template: "mv_d_um - 2 * bu_d_h_um / mv_wall_tan"
+    note: "via bottom not reported; harmonized taper rule over the drawn bu_d_h_um depth (mv_wall_tan)"
   core_h_um:
     template: "sbt_h_um - 2 * sr_h_um - 4 * bu_cu_h_um - 2 * core_cu_h_um - 4 * bu_d_h_um"
     note: "thin core = template substrate thickness - SR - 2-2-2 Cu levels - build-up dielectrics (layer count 2-2-2 is a template; inside the 60-200 um thin-core range of the DB analogs tcpmt.2025.3610036-a-L04 / eptc62800.2024.10909809-a-L04)"

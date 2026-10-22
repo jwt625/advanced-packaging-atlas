@@ -328,8 +328,10 @@ export class ZMap {
 	readonly mapped: number[];
 	readonly illustrative: boolean;
 	readonly height: number;
-	constructor(m: Model, illustrative: boolean) {
+	readonly squash: number; // illustrative only: every mapped height times this factor (inset framing, L18)
+	constructor(m: Model, illustrative: boolean, squash = 1) {
 		this.illustrative = illustrative;
+		this.squash = illustrative && squash > 0 && squash < 1 ? squash : 1;
 		const b = m.zbreaks.length >= 2 ? m.zbreaks : [m.bounds.z0, m.bounds.z1];
 		this.breaks = b;
 		const z0 = b[0];
@@ -357,7 +359,7 @@ export class ZMap {
 				for (const v of ws) out.push(out[out.length - 1] + (v / ts) * Hk);
 			}
 			while (out.length < b.length) out.push(out[out.length - 1]);
-			this.mapped = out;
+			this.mapped = out.map((v) => v * this.squash);
 		}
 		this.height = this.mapped[this.mapped.length - 1];
 	}

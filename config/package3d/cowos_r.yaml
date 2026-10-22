@@ -69,6 +69,13 @@ modules:
         template: "mv_d_um * r0 / r1"
         refs: [001c.147203-a-i1.pad_x_um, 001c.147203-a-i1.diameter_um]
         note: "microvia land not reported for a cored organic substrate; harmonized rule, TEMPLATE_FORMAT.md 'Template rules': land / via = 110 / 70 (pad >= 110 um for a 70 um Cu-filled stacked via: minimum design rule of a coreless 150 GHz AiP antenna substrate, R-G640)"
+      mv_wall_tan:
+        template: 3.078
+        refs: [ectc51687.2025.00076-b-i1.notes]
+        note: "harmonized microvia taper rule (TEMPLATE_FORMAT.md 'Template rules'): bottom = top - 2 x drawn dielectric depth / tan(sidewall angle); sidewall 72 deg, stated for a 30 um-deep laser via in ABF (analog row notes ectc51687.2025.00076-b-i1: top radius 67 um, bottom ~58 um after 72 deg taper); tan(72 deg) = 3.078"
+      mv_bot_um:
+        template: "mv_d_um - 2 * bu_d_um / mv_wall_tan"
+        note: "microvia bottom not reported; harmonized taper rule over the drawn bu_d_um depth (mv_wall_tan)"
       pth_d_um:
         analog: ectc51909.2023.00155-a-i5.diameter_um
         note: "PTH diameter not reported; analog = 200 um through hole in the 1.3 mm core of the same 2.5D-TV substrate"
@@ -151,25 +158,25 @@ modules:
     routing:
       layout_note: "mock-up routing: net layout, shares, jogs and level assignment are illustrative; dims carry their own status"
       vias:
-        - {id: mv_t1, name: "Microvia L1-L2", kind: microvia, through: bu_d1, diameter_um: mv_d_um, land_um: mv_land_um,
+        - {id: mv_t1, name: "Microvia L1-L2", kind: microvia, through: bu_d1, diameter_um: mv_d_um, bottom_diameter_um: mv_bot_um, land_um: mv_land_um,
            fill: filled}
         - {id: mv_ts, name: "Microvia (signal to plane)", kind: microvia, through: bu_ds, diameter_um: mv_d_um,
-           land_um: mv_land_um, fill: filled}
+           bottom_diameter_um: mv_bot_um, land_um: mv_land_um, fill: filled}
         - {id: mv_tp, name: "Microvia (plane to signal)", kind: microvia, through: bu_dp, diameter_um: mv_d_um,
-           land_um: mv_land_um, fill: filled}
+           bottom_diameter_um: mv_bot_um, land_um: mv_land_um, fill: filled}
         - {id: mv_t8, name: "Microvia L8 to core Cu", kind: microvia, through: bu_d8, diameter_um: mv_d_um,
-           land_um: mv_land_um, fill: filled}
+           bottom_diameter_um: mv_bot_um, land_um: mv_land_um, fill: filled}
         - {id: pth, name: "Plated through hole (resin plugged)", kind: pth, through: sbt_core, diameter_um: pth_d_um,
            land_um: pth_land_um, pitch_um: pth_pitch_um, fill: plugged, plug: resin, wall_um: pth_wall_um,
            note: "mechanically drilled, Cu wall, resin plug, Cu caps (cores >= 400 um; ROUTING_REF_substrate.md sec. 2); hole / core AR up to 7 (200 um hole, 1.4 mm core) is above the 3.7-6.5 of the three cored TVs that give both numbers (n = 3); a drilled 200 um hole through 1.4 mm is plausible, the hole size is a 1.2-1.3 mm-core analog"}
-        - {id: mv_b8, name: "Microvia core Cu to L11", kind: microvia, through: bb_d8, diameter_um: mv_d_um,
-           land_um: mv_land_um, fill: filled}
-        - {id: mv_bp, name: "Microvia (signal to plane)", kind: microvia, through: bb_dp, diameter_um: mv_d_um,
-           land_um: mv_land_um, fill: filled}
-        - {id: mv_bs, name: "Microvia (plane to signal)", kind: microvia, through: bb_ds, diameter_um: mv_d_um,
-           land_um: mv_land_um, fill: filled}
-        - {id: mv_b1, name: "Microvia L17-L18", kind: microvia, through: bb_d1, diameter_um: mv_d_um,
-           land_um: mv_land_um, fill: filled}
+        - {id: mv_b8, name: "Microvia core Cu to L11", kind: microvia, through: bb_d8, diameter_um: mv_bot_um,
+           bottom_diameter_um: mv_d_um, land_um: mv_land_um, fill: filled}
+        - {id: mv_bp, name: "Microvia (signal to plane)", kind: microvia, through: bb_dp, diameter_um: mv_bot_um,
+           bottom_diameter_um: mv_d_um, land_um: mv_land_um, fill: filled}
+        - {id: mv_bs, name: "Microvia (plane to signal)", kind: microvia, through: bb_ds, diameter_um: mv_bot_um,
+           bottom_diameter_um: mv_d_um, land_um: mv_land_um, fill: filled}
+        - {id: mv_b1, name: "Microvia L17-L18", kind: microvia, through: bb_d1, diameter_um: mv_bot_um,
+           bottom_diameter_um: mv_d_um, land_um: mv_land_um, fill: filled}
       nets:
         - {id: sbt_io, kind: vertical, from: c4, to: bga, style: stacked, jog: [bu_cs_1, bu_c8, bb_c8, bb_cs_3],
            share: 0.3, note: "C4 -> BGA fan-out (C4 -> PTH -> BGA pitch): stacked microvias with jogs near the surface and above the PTH caps"}

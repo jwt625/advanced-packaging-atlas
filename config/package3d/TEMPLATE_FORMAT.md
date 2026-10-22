@@ -95,6 +95,14 @@ level; `top:`/`bottom:` anchors of a stacked part are its top / bottom level, an
 cannot be `in:` a vertically repeated host.
 `shape: frame` + `frame_w_mm` emits a ring as 4 boxes (`<id>_n/_s/_e/_w`).
 
+Multi-grid repeat (L28, 2026-10-21): `repeat` may be a list of grids `[{nx, ny, pitch_x_mm, pitch_y_mm, x_mm, y_mm},
+...]` (all keys optional, counts default 1, offsets default 0): one centered grid per entry, offset by (`x_mm`, `y_mm`)
+from the part center; instances are numbered grid by grid, row-major from +y within a grid; all instances share the
+part's `w_mm` / `d_mm` / `h_um`. Grid dims are counted as `repeat<k>_<key>`. No vertical repeat in the list form. Use
+it for parts at several edge kinds (e.g. bridges under HBM-die and die-die edges); a YAML anchor shares one grid list
+between parts (bridge and adhesive / cavity fill). Array region pieces beyond 26 per placement get the suffixes
+`_r27, _r28, ...` (`_a` .. `_z` below that, as before).
+
 ## layers
 
 Groups stacked downward from the host part's top surface, in file order (optional group `id`, used by `in_layer`
@@ -132,6 +140,34 @@ the viewer's routing window (a full-sheet slab without it). Any other role with 
 JSON: the layer gets `route: {use, dir?, line_um?, space_um?, matrix, fill, dims}` (resolved numbers; `dims` holds
 `line_um`, `space_um`, `fill` entries like every other dim). Route dims count once per layer element in
 `dim_counts` / `completeness`, like the layer's own dims.
+
+#### Per-region level properties (`route.regions`, L18 2026-10-21)
+
+A routed level may change its properties inside footprints (e.g. EMIB-T L2: signal at the build-up L/S outside the
+bridge, pads only over it):
+
+```yaml
+         route: {use: signal, dir: alt, line_um: bu_line_um, space_um: bu_space_um, matrix: organic_build_up,
+                 regions: [{region: {part: bridge}, use: pad, fill: ob_pad_fill, note: "pads only over the bridge"}]}
+```
+
+| key | rule |
+|---|---|
+| `region` | required; same forms as a via `region` (`{part}`, `{intersect}`, `{subtract}`, combinable with `part`, or explicit `{x_mm, y_mm, w_mm, d_mm}`); base without `part` = the host level's instances |
+| `use`, `dir` | default: the level's; `dir` `alt` resolves per repeat like the level's |
+| `line_um`, `space_um` | dimension specs; not given = inherited from the level only where the region's use needs them (signal / mixed: line and space; plane: space as antipad clearance; pad: none) |
+| `fill` | spec; default: line / (line + space) when the region states L/S or changes the use to signal / mixed; the use default (plane 0.85, pad 0.5, template) when it changes the use to plane / pad; else the level's fill |
+| `note` | text (tooltip) |
+
+Unknown keys, a bad region, a signal / mixed region without (stated or inherited) L/S and direction, and fill outside
+(0, 1] are errors; a region rectangle outside the host is a warning. JSON: `route.regions: [{rects: [{x_mm, y_mm,
+w_mm, d_mm}], use, dir?, line_um?, space_um?, fill, note?, dims}]` (values merged with the level's; `dims` holds only
+what the region states, plus a recomputed fill), absent without regions (output byte-identical). Region dims count
+once per layer element. Viewer: the level's own L/S is drawn outside the region rectangles; signal / mixed regions
+get their own lines, plane regions their own sheet with antipads, pad regions only the via pads; the tinted slab
+outside the routing window keeps the level's fill. Scorer: M5 checks region L/S the region states; M6 land rules
+use the region's space / use for a via class whose `regions` lie inside the region, and skip a landed level that an
+embedded part cuts out at the via region.
 
 ## arrays (interconnect fields)
 
@@ -296,6 +332,42 @@ use:
 - Vertically repeated parts: each instance has its own `z_um`, the levels add `z_index` (1 = lowest) and
   `explode_group` + (level - 1) x `explode_step`. Arrays between levels name both instances in `between`.
 
+## variants (L28, 2026-10-21)
+
+A template may carry named configurations of the same family (e.g. a reported DB TV and a SOTA-class layout):
+
+```yaml
+variants:
+  base: {id: tv_00135, name: "DB TV: ...", note: "..."}   # the template itself (what engine/src/families transcribes)
+  default: sota_3x                                         # variant the viewer opens (base id or a list id)
+  list:
+    - id: sota_3x                      # lowercase letters, digits, _
+      name: "SOTA-class 3x: ..."       # select label
+      note: "..."                      # required: what the variant is and which values are template
+      source: "..."                    # optional public / DB citation for the configuration
+      summary: "..."                   # optional, replaces the summary (same placeholder rules)
+      backbone_tv: <tv_id>             # optional, replaces backbone_tv
+      drop: [ids]                      # like module `drop`, plus inset ids
+      callouts_drop: ["<exact base callout text>"]
+      params: {...}                    # merge by name (variant wins)
+      parts: [...]                     # merge by id: replace in place, else append
+      arrays: [...]                    # merge by id
+      layers: [...]                    # groups: replace every base group on the same host part, else append
+      callouts: [...]                  # appended
+      insets: [...]                    # merge by id
+      routing: {layout_note?, vias?, nets?}   # via / net classes merge by id
+```
+
+- A variant is an overlay on the module-expanded template and resolves through the same rules and checks (provenance,
+  family match, text placeholders only reported / derived).
+- Every base family is built first, then the variants, so adding variants never moves the R-ids of other families.
+- JSON: the base family object is unchanged apart from `variant`, `variant_name`, `variant_note`, `variant_default`
+  and `variants: [<full family object per variant>]`; each variant object has the family `id` plus `variant`,
+  `variant_name`, `variant_note`, `variant_source?`.
+- Viewer: variant select next to the family select (single view) and per family in the inspector (compare); URL
+  `#f=<family>&v=<variant>`; without `v` the family's `variant_default`. Scorer / renderer: `<family>@<variant>`
+  (checklist mapping `families.<family>@<variant>` when present, else the family's).
+
 ## callouts and insets
 
 ```yaml
@@ -319,6 +391,7 @@ A family deviates only when its own source shows something else, and the param n
 | structure | rule | basis |
 |---|---|---|
 | organic build-up microvia land | land = via x 110 / 70 | 001c.147203-a-i1 (pad >= 110 um for a 70 um Cu-filled stacked via; coreless 150 GHz AiP substrate, minimum design rule) |
+| organic / glass build-up laser microvia taper (L18 2026-10-21) | one representation: bottom = top - 2 x drawn dielectric depth / `mv_wall_tan` (tan of the sidewall angle); a back-side (BGA-side) via stores the narrow end as `diameter_um` and the wide end as `bottom_diameter_um` (drilled from the BGA face); bridge fine vias through the same film use the family's `mv_wall_tan` | angle per family source: 72 deg (tan 3.078), stated in ectc51687.2025.00076-b-i1 notes (30 um ABF via): fcbga_organic, glass_core_substrate, cowos_l module (+ ase_focos_bridge, amkor_s_connect, samsung_i_cube_e), samsung_x_cube, and the default for families with no taper source (sbt_828 module: cowos_r, info_os, foveros, foveros_direct, ibm_dbhi); tan = 2 x 15 / (41.66 - 38.01) = 8.22 (83 deg) from the measured via ectc51687.2025.00378-a-m5 / -m6 / -m7: cowos_s, samsung_mios, emib, emib_t, cpo_module (their former 38 / 42 diameter ratio came from that via). Replaces the depth-independent 38 / 42 ratio and the straight back-side vias |
 | glass-core build-up microvia land | land = via + 12 um | tcpmt.2026.3736233-a-i1 (136 / 124 um, "pad 12 um larger than via top", glass-embedded package) |
 | PTH land (drilled core, also thin-core through hole) | 1.5 x hole | fig ectc51687.2025.00148-f01 (4-2-4 schematic, scaled by the 500 um TH pitch) |
 | PTH wall (plating) | mean of eptc62800.2024.10909809-a-m17..m20 = 14.875 um | minimum barrel Cu of legs 1-4 of a thin-core through hole (11-18.5 um) |

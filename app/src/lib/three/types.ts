@@ -76,7 +76,21 @@ export interface Route {
 	matrix: string; // material key of the dielectric around the Cu
 	fill: number; // Cu area fraction
 	dims?: Record<string, Dim>;
+	regions?: RouteRegion[]; // per-region level properties (L18, 2026-10-21)
 	[k: string]: unknown;
+}
+
+/** Level properties inside footprints (package frame, centers like array regions); values merged with the level's,
+ * `dims` only for the values the region states. Lengths in um. */
+export interface RouteRegion {
+	rects: Region[];
+	use: 'signal' | 'plane' | 'pad' | 'mixed' | string;
+	dir?: 'x' | 'y' | string;
+	line_um?: number;
+	space_um?: number;
+	fill: number;
+	note?: string;
+	dims?: Record<string, Dim>;
 }
 
 /** One via entry (per spanned dielectric / part level). Lengths in um. */
@@ -197,6 +211,15 @@ export interface Family {
 	fixture?: boolean;
 	note?: string;
 	routing?: Routing;
+	backbone_tv?: string;
+	/** variants (L28, 2026-10-21): the base object carries its own variant id / name, the default variant id and the
+	 * other variants as full family objects (same family id; `variant` tells them apart). */
+	variant?: string;
+	variant_name?: string;
+	variant_note?: string;
+	variant_source?: string;
+	variant_default?: string;
+	variants?: Family[];
 }
 
 export interface Package3D {

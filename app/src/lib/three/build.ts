@@ -20,6 +20,9 @@ export interface ViewState {
 	/** x-ray tokens whose cut caps stay translucent (user choices); parts translucent only by the data default get an
 	 * opaque cut face. Absent: every x-ray token. */
 	xrayCap?: string[];
+	/** Illustrative z compression while an inset is framed (L18): the inset's mapped z range shrinks so it frames the same
+	 * lateral region as in-scale; thin layers keep their relative enlargement. 1 or absent: none. */
+	zsquash?: number;
 }
 
 /** View inputs of the routing window: orbit target (family mm), half extent of the visible region, mm per pixel. */
@@ -376,7 +379,7 @@ export class FamilyScene {
 
 	build(st: ViewState) {
 		const m = materials();
-		if (!this.state || this.state.illustrative !== st.illustrative) this.zmap = new ZMap(this.model, st.illustrative);
+		if (!this.state || this.state.illustrative !== st.illustrative || this.zmap.squash !== (st.zsquash ?? 1)) this.zmap = new ZMap(this.model, st.illustrative, st.zsquash ?? 1);
 		this.state = { ...st, xray: [...st.xray] };
 		this.lodKey = '';
 		this.clear(this.meshes);

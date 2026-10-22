@@ -13,8 +13,13 @@ Orbit frame rate is not measured here (SwiftShader software GL); `ms` is the CPU
 Chromium: `--chromium PATH`, else env APA_CHROMIUM, else the newest chromium_headless_shell-* under the user's
 Playwright cache (~/Library/Caches/ms-playwright), else Playwright's default browser. No local path is stored here.
 
+Variants (L28, 2026-10-21): a family with `variants` is rendered once per variant as `<family>@<variant>` (opened
+with `#f=<family>&v=<variant>`, insets of that variant); `--family ID` takes all variants of ID, `ID@VARIANT` one.
+`--compare` also renders the default compare view (no hash: the page's compare default with each family's default
+variant), saved as `compare_<view>.png`.
+
 Usage: uv run --with playwright python scripts/render_package3d.py [--family ID ...] [--base-url URL]
-       [--chromium PATH] [--settle-ms N] [--json PATH]
+       [--chromium PATH] [--settle-ms N] [--json PATH] [--compare] [--top] [--no-insets]
 """
 
 from __future__ import annotations
@@ -141,15 +146,25 @@ def shown_family(page: Page) -> str:
     return str(sel.first.input_value()) if sel.count() else ""
 
 
+def shown_variant(page: Page) -> str:
+    sel = page.locator('select[aria-label="Variant"]')
+    return str(sel.first.input_value()) if sel.count() else ""
+
+
 def verify_family(page: Page, fid: str) -> None:
+    """`fid` = family id or `<family>@<variant>`."""
+    fam, _, var = fid.partition("@")
     got = shown_family(page)
-    if got != fid:
-        raise FamilyMismatch(f"family mismatch: page shows {got or '(no family select)'!r}, expected {fid!r}")
+    if got != fam:
+        raise FamilyMismatch(f"family mismatch: page shows {got or '(no family select)'!r}, expected {fam!r}")
+    if var and shown_variant(page) != var:
+        raise FamilyMismatch(f"variant mismatch: page shows {shown_variant(page)!r}, expected {var!r}")
 
 
 def open_family(sess: Session, base: str, fid: str, settle_ms: int) -> Page:
     page = sess.new_page()
-    page.goto(f"{base}/3d#f={fid}", wait_until="networkidle")
+    fam, _, var = fid.partition("@")
+    page.goto(f"{base}/3d#f={fam}" + (f"&v={var}" if var else ""), wait_until="networkidle")
     try:
         page.wait_for_selector("canvas", timeout=30_000)
     except PlaywrightError:
@@ -204,14 +219,24 @@ def main() -> int:
     ap.add_argument("--json", type=Path, default=DEFAULT_JSON, help="package3d.json (family list and insets)")
     ap.add_argument("--settle-ms", type=int, default=1500, help="wait after each state change before capture")
     ap.add_argument("--no-insets", action="store_true")
+    ap.add_argument("--compare", action="store_true", help="also render the default compare view (no hash)")
+    ap.add_argument("--top", action="store_true", help="also capture the Top preset (layout / topology check)")
     args = ap.parse_args()
     ts = dt.datetime.now().strftime("%Y-%m-%d_%H%M%S")
     out = ROOT / "cache" / "package3d_renders" / ts
     out.mkdir(parents=True, exist_ok=True)
     log = Log(ROOT / "logs" / f"render_package3d_{ts}.log")
     doc = json.loads(args.json.read_text())
-    fams = [f for f in doc["families"] if not args.family or f["id"] in args.family]
-    if args.family and len(fams) != len(set(args.family)):
+    allf: list[dict] = []  # variants as `<family>@<variant>` entries (the base too, when the family has variants)
+    for f in doc["families"]:
+        if f.get("variants"):
+            allf.append({**f, "id": f"{f['id']}@{f['variant']}"})
+            allf += [{**v, "id": f"{f['id']}@{v['variant']}"} for v in f["variants"]]
+        else:
+            allf.append(f)
+    fams = [f for f in allf if not args.family or f["id"] in args.family or f["id"].split("@")[0] in args.family]
+    known = {f["id"] for f in allf} | {f["id"].split("@")[0] for f in allf}
+    if args.family and set(args.family) - known:
         log(f"ERROR unknown family in {args.family}")
         return 1
     base = args.base_url.rstrip("/")
@@ -225,6 +250,28 @@ def main() -> int:
         ctx = browser.new_context(viewport=VIEWPORT)  # type: ignore[arg-type]
         sess = Session(ctx)
         errors = sess.errors
+        if args.compare:
+            views_c: list[dict] = []
+            errors.clear()
+            page = sess.new_page()
+            page.goto(f"{base}/3d", wait_until="networkidle")
+            page.wait_for_selector("canvas", timeout=30_000)
+            settle(page, args.settle_ms)
+            report["families"]["compare"] = {"load_errors": list(errors)}
+            for ill, tag in ((True, "illustrative"), (False, "inscale")):
+                set_scale(page, ill)
+                for cam in ("default", "front", *(("top",) if args.top else ())):
+                    preset(page, "iso" if cam == "default" else cam)
+                    settle(page, args.settle_ms)
+                    n_err = len(errors)
+                    png = out / f"compare_{cam}_{tag}.png"
+                    page.screenshot(path=str(png))
+                    st = stats(page)
+                    views_c.append({"view": f"{cam}_{tag}", "png": str(png.relative_to(ROOT)), "stats": st,
+                                    "budget": check_budget(st), "errors": errors[n_err:]})
+                    log(f"  compare_{cam}_{tag}: {st.get('calls') if st else '?'} calls, "
+                        f"{st.get('triangles') if st else '?'} tris")
+            report["families"]["compare"]["views"] = views_c
         for f in fams:
             fid = f["id"]
             insets = f.get("insets", [])
@@ -261,6 +308,10 @@ def main() -> int:
                     preset(page, "front")
                     settle(page, args.settle_ms)
                     capture(f"front_{tag}")
+                    if args.top:
+                        preset(page, "top")
+                        settle(page, args.settle_ms)
+                        capture(f"top_{tag}")
                 if not args.no_insets:
                     n_btn = page.locator("button.ico").count()
                     for k, ins in enumerate(insets):

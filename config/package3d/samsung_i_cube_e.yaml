@@ -15,9 +15,9 @@
 # one at the logic-logic edge. No top-die underfill or mold is reported.
 #
 # Mock-up routing (DevLog-011, 2026-10-20): every routing dimension is an analog (the paper reports none): chip bump ->
-# upper RDL (2 levels, stacked vias; tapered via onto a Cu post in ectc51687.2025.00048-f02) -> bridge Cu bump (HBM-logic
+# upper RDL (1 level as in fig ectc51687.2025.00048-f02, tapered via onto a Cu post) -> bridge Cu bump (HBM-logic
 # and logic-logic wires in the bridge BEOL) or Cu post -> lower RDL -> C4 -> substrate (module stack, analog 2.5D-TV 4/2/4 substrate)
-# -> BGA. Analog sources: nepes embedded-bridge interposer eptc67330.2025.11392593 (2-level 7/7 um RDL, 70 um Cu posts
+# -> BGA. Analog sources: nepes embedded-bridge interposer eptc67330.2025.11392593 (7/7 um RDL, 70 um Cu posts
 # at 150 um, bridges on DAF; fig -f01), ASE FOCoS Bridge (10 um RDL via), S-Connect (bridge, stud).
 #
 # Uses the bridge_in_mold module of cowos_l.yaml: `drop` removes the module's bridge TSV class and its params (no
@@ -155,12 +155,13 @@ params:
     analog: eptc67330.2025.11392593-a-i3.diameter_um
     note: "Cu post diameter not reported; analog = Cu posts of the same nepes interposer"
   ri_front_n:
-    analog: eptc67330.2025.11392593-a-L04.repeat
-    note: "upper RDL layer count not reported; analog = 2 top-side RDL metal layers of the nepes embedded-bridge interposer"
+    template: 1
+    refs: [ectc51687.2025.00048-a-L02.layer_name]
+    note: "upper RDL layer count not reported; one Cu level drawn as the I-Cube E SEM fig ectc51687.2025.00048-f02 shows it: the chip-bump pad level on one dielectric, with the via from that level straight onto the Cu post (L18 2026-10-21; was 2 levels, analog eptc67330.2025.11392593-a-L04 of a nepes interposer)"
   ri_back_n: {template: 1, note: "lower RDL layer count not reported; one level drawn"}
   ri_f_line_um:
     analog: eptc67330.2025.11392593-a-L04.line_um
-    note: "upper RDL L/S not reported; analog = 7/7 um top-side RDL of the nepes embedded-bridge interposer (same row as the level count)"
+    note: "upper RDL L/S not reported; analog = 7/7 um top-side RDL of the nepes embedded-bridge interposer"
   ri_f_space_um:
     analog: eptc67330.2025.11392593-a-L04.space_um
     note: "upper RDL L/S not reported; analog = 7/7 um top-side RDL of the nepes embedded-bridge interposer"
@@ -198,17 +199,6 @@ params:
     template: "rv_d_um * 48 / 29"
     refs: [ectc51687.2025.00095-a-i3.ic_type]
     note: "RDL via land not reported; T-profile of the FOCoS-Bridge analog via (fig ectc51687.2025.00095-f04, pixel widths): pad on the lower RDL metal ~48 px over the ~29 px stem that lands on the post / stud (R2 2026-10-20; was land / via 11 / 8 of TSMC CoWoS-R)"
-  rv_m_d_um:
-    template: "rv_d_um"
-    note: "via between the two upper RDL metals not reported; drawn like the analog 10 um via"
-  rv_m_land_um:
-    template: "rv_m_d_um * 92 / 30"
-    refs: [ectc51687.2025.00095-a-i3.ic_type]
-    note: "via land not reported; T-profile of the FOCoS-Bridge analog via (fig ectc51687.2025.00095-f04): pad on the top RDL metal ~92 px over a ~30 px stem"
-  rv_m_bot_d_um:
-    template: "rv_m_d_um * 26 / 31"
-    refs: [ectc51687.2025.00095-a-i3.ic_type]
-    note: "via bottom not reported; filled stems narrow downward in fig ectc51687.2025.00095-f04 (pixel widths ~31 px under the pad to ~26 px at the base)"
   rv_bot_d_um:
     template: "rv_d_um * 9.5 / 18"
     refs: [ectc51687.2025.00048-a-i3.notes]
@@ -346,13 +336,10 @@ arrays:
 
 routing:
   vias:
-    # the module's rv_f spans every upper-RDL dielectric; split per level (R2 2026-10-20): via onto the post per fig f02
-    - {id: rv_f, name: "Upper RDL via (onto post / bridge bump)", kind: rdl_via, through: ri_f_diel_2, diameter_um: rv_d_um,
+    # one upper RDL level (fig f02, L18 2026-10-21): the via goes from the bump-pad level straight onto the post
+    - {id: rv_f, name: "Upper RDL via (onto post / bridge bump)", kind: rdl_via, through: ri_f_diel, diameter_um: rv_d_um,
        bottom_diameter_um: rv_bot_d_um, land_um: rv_land_um, fill: filled,
-       note: "tapered via narrowing downward onto the Cu post (fig ectc51687.2025.00048-f02)"}
-    - {id: rv_m, name: "Upper RDL via (metal to metal)", kind: rdl_via, through: ri_f_diel_1, diameter_um: rv_m_d_um,
-       bottom_diameter_um: rv_m_bot_d_um, land_um: rv_m_land_um, fill: filled,
-       note: "T-profile tapered filled via (FOCoS analog fig ectc51687.2025.00095-f04)"}
+       note: "tapered via narrowing downward from the bump-pad level onto the Cu post (fig ectc51687.2025.00048-f02)"}
     - {id: tiv, name: "Cu posts (through mold)", kind: tmv, through: ri_core, diameter_um: tiv_d_um, pitch_um: tiv_pitch_um,
        land_um: tiv_land_um, fill: filled, region: {part: ri_core, subtract: [lsi, lsi_ll]},
        note: "post placement not reported; grid over the interposer outside both bridge kinds"}

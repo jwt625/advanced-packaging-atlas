@@ -98,10 +98,13 @@ params:
   mvia_d_um:
     analog: ectc51909.2023.00155-a-i6.diameter_um
     note: "build-up microvia not reported for EMIB; analog = 40 um microvia of the same 4/2/4 substrate (top diameter)"
+  mv_wall_tan:
+    template: "2 * r0 / (r1 - r2)"
+    refs: [ectc51687.2025.00378-a-m5.value, ectc51687.2025.00378-a-m6.value, ectc51687.2025.00378-a-m7.value]
+    note: "harmonized microvia taper rule (TEMPLATE_FORMAT.md 'Template rules'): bottom = top - 2 x drawn dielectric depth / tan(sidewall angle); tan(angle) = 2 x 15 um dielectric over the pad / (41.66 um top - 38.01 um bottom) = 8.22 (83 deg), measured on a 40 um laser via in laminated dry-film dielectric (analog TV ectc51687.2025.00378-a, Fig. 7); this family's earlier 38 / 42 diameter ratio came from the same via"
   mvia_bot_um:
-    template: "mvia_d_um * 38 / 42"
-    refs: [ectc51687.2025.00378-a-L04.notes]
-    note: "microvia taper not reported; bottom/top ratio of a measured 42/38 um laser via in laminated dielectric (analog notes)"
+    template: "mvia_d_um - 2 * bu_diel_um / mv_wall_tan"
+    note: "microvia bottom not reported; harmonized taper rule over the drawn bu_diel_um depth (mv_wall_tan)"
   mvia_land_um:
     template: "mvia_d_um * r0 / r1"
     refs: [001c.147203-a-i1.pad_x_um, 001c.147203-a-i1.diameter_um]
@@ -124,9 +127,8 @@ params:
     analog: ectc51906.2022.00180-a-i1.diameter_um
     note: "fine via onto the bridge pads: dims not reported; analog = 16 um laser microvia through ABF onto the pads of an embedded Si die under 55 um-pitch bumps"
   fv_bot_um:
-    template: "fv_d_um * 38 / 42"
-    refs: [ectc51687.2025.00378-a-L04.notes]
-    note: "fine-via taper not reported; same bottom/top ratio as the build-up microvia"
+    template: "fv_d_um - 2 * bu_diel_um / mv_wall_tan"
+    note: "fine-via (laser via through the same build-up film) bottom not reported; harmonized taper rule over the drawn bu_diel_um depth (mv_wall_tan)"
   fv_land_um:
     template: 30
     refs: [ectc51906.2022.00180-a-i1.notes]
@@ -416,9 +418,231 @@ insets:
     box_mm: ["bridge_px_mm / 2 - bridge_w_mm / 2 - 0.6", "bridge_d_mm / 2 - 0.6", "bridge_px_mm / 2 + 0.2",
              "bridge_d_mm / 2 + 0.6"]
     z: ["top:bridge", "top:die1"]
-    view: iso
+    view: front   # A9 D4 (2026-10-21): section view instead of the oblique camera
   - id: buildup_xs
     label: "Coarse bump to BGA: build-up, PTH"
     box_mm: [-1.5, -0.5, 1.5, 0.5]
     z: ["bottom:bga", "bottom:die1"]
     view: front
+
+# ---- variants (L28, 2026-10-21; TEMPLATE_FORMAT.md "variants"). The base above stays the reported DB backbone
+# (Fig. 4(a) 3-die schematic of ectc.2016.201); the viewer opens `default`. Research basis:
+# config/package3d/RESEARCH_SOTA_EMIB.md (E14, section 7 `emib_5x_12hbm`, A5 G3 basis labels).
+variants:
+  base:
+    id: fig4a_3die
+    name: "DB backbone: 3 dies, 2 bridges (Fig. 4(a))"
+    note: >-
+      Backbone ectc.2016.201-a: Intel EMIB architecture, 3 dies in a row with one bridge under each die-die edge (2
+      bridges = figure reading of Fig. 4(a)), bridge 2 x 2 mm (lower bound of the reported range); 65 x 65 mm outline
+      of the EMIB CHIPS MCP.
+  default: emib_5x_12hbm
+  list:
+    - id: emib_5x_12hbm
+      name: "SOTA-class DB TV: >5X reticle, 6 dies + 12 HBM, 85 x 110 mm"
+      note: >-
+        Intel EMIB package with more than 5X reticle die area: about 85 x 110 mm, 18 dies including 12 HBM (DB cells,
+        reported). Floor plan from the top-down photo (Fig. 7(a)): six HBM in a column along each long side, a 2 x 2
+        block of large dies in the middle plus one die above and one below (pixel reads scaled by the 85 x 110 mm
+        outline, template). Bridge count, size and placement are not reported: one bridge per die-die edge (20) is a
+        modelling assumption; 8 x 8 mm is the upper end of the backbone's 2 x 2 to 8 x 8 mm range.
+      source: >-
+        ectc51846.2026.00365 p.4 Sec. V and p.5 Fig. 7(a) (DB rows ectc51846.2026.00365-h, -h-c1, -h-c2);
+        ectc.2016.201-a-c1 notes (bridge size range); RESEARCH_SOTA_EMIB.md E14
+      backbone_tv: ectc51846.2026.00365-h
+      summary: >-
+        Intel 2.5D without an interposer: thin Si bridges ({m_n} metal levels at {m_line_um}/{m_space_um} um, no TSV)
+        in substrate cavities under die edges; {fine_pitch_um} um bumps over them. TV: {die_n} dies incl. {hbm_n} HBM,
+        {sbt_w_mm} x {sbt_d_mm} mm.
+      drop: [bridge_d2d, bridge_gap, bridge_xs, fine_coarse, buildup_xs]
+      callouts_drop: ["Si bridge, no TSV"]
+      params:
+        # ---- reported (ectc51846.2026.00365-h)
+        sbt_w_mm: {ref: ectc51846.2026.00365-h.package_x_mm, note: "package approximately 85 mm x 110 mm (p.4 Sec. V)"}
+        sbt_d_mm: {ref: ectc51846.2026.00365-h.package_y_mm, note: "package approximately 85 mm x 110 mm (p.4 Sec. V)"}
+        die_n: {ref: ectc51846.2026.00365-h.n_dies}
+        hbm_n: {ref: ectc51846.2026.00365-h-c1.count}
+        nonhbm_n: {ref: ectc51846.2026.00365-h-c2.count}
+        reticle_x: {ref: ectc51846.2026.00365-h.reticle_multiple, note: "die area larger than 5X reticle (lower bound)"}
+        # ---- template: floor plan, pixel reads of the Fig. 7(a) photo (600 dpi render of p.5); package outline 754 x
+        # 1040 px = 85 x 110 mm (x along the short side)
+        t4_cols_n:
+          template: 2
+          source: "ectc51846.2026.00365 p.5 Fig. 7(a)"
+          note: "2 x 2 block of large non-HBM dies in the middle (photo)"
+        t4_rows_n: {template: "t4_cols_n", note: "2 x 2 block (photo)"}
+        t2_n: {template: "nonhbm_n - t4_cols_n * t4_rows_n", note: "remaining non-HBM dies: one above and one below the 2 x 2 block (photo)"}
+        hbm_cols_n:
+          template: 2
+          source: "ectc51846.2026.00365 p.5 Fig. 7(a)"
+          note: "one HBM column along each long (110 mm) side (photo)"
+        hbm_rows_n: {template: "hbm_n / hbm_cols_n", note: "six HBM per column (photo)"}
+        t4_w_mm:
+          template: "sbt_w_mm * 189.5 / 754"
+          source: "ectc51846.2026.00365 p.5 Fig. 7(a)"
+          note: "2 x 2 block die width not reported; pixel read 189.5 of the 754 px package width"
+        t4_d_mm:
+          template: "sbt_d_mm * 292.5 / 1040"
+          source: "ectc51846.2026.00365 p.5 Fig. 7(a)"
+          note: "2 x 2 block die length not reported; pixel read 292.5 of the 1040 px package length"
+        t4_px_mm: {template: "sbt_w_mm * 193.5 / 754", source: "ectc51846.2026.00365 p.5 Fig. 7(a)", note: "2 x 2 block column pitch, pixel read 193.5 px"}
+        t4_py_mm: {template: "sbt_d_mm * 300.5 / 1040", source: "ectc51846.2026.00365 p.5 Fig. 7(a)", note: "2 x 2 block row pitch, pixel read 300.5 px"}
+        t2_w_mm:
+          template: "sbt_w_mm * 290 / 754"
+          source: "ectc51846.2026.00365 p.5 Fig. 7(a)"
+          note: "top / bottom die width not reported; pixel read 290 px"
+        t2_d_mm:
+          template: "sbt_d_mm * 113.5 / 1040"
+          source: "ectc51846.2026.00365 p.5 Fig. 7(a)"
+          note: "top / bottom die length not reported; pixel read 113.5 px"
+        t2_py_mm:
+          template: "sbt_d_mm * 2 * 360.25 / 1040"
+          source: "ectc51846.2026.00365 p.5 Fig. 7(a)"
+          note: "top / bottom die center distance, pixel read: centers 359.5 / 361 px from the package center"
+        d2_w_mm:
+          template: "sbt_w_mm * 89 / 754"
+          source: "ectc51846.2026.00365 p.5 Fig. 7(a)"
+          note: "HBM footprint not reported; pixel read 89 px (mean of 91 / 87 px of the two columns)"
+        d2_d_mm:
+          template: "sbt_d_mm * 93 / 1040"
+          source: "ectc51846.2026.00365 p.5 Fig. 7(a)"
+          note: "HBM footprint not reported; pixel read 93 px (mean of the six cells of the right column)"
+        hbm_px_mm: {template: "sbt_w_mm * 2 * 242.5 / 754", source: "ectc51846.2026.00365 p.5 Fig. 7(a)", note: "HBM column center distance, pixel read: column centers 244.5 / 240.5 px from the package center"}
+        hbm_py_mm: {template: "sbt_d_mm * 104 / 1040", source: "ectc51846.2026.00365 p.5 Fig. 7(a)", note: "HBM pitch along the column, pixel read 104 px"}
+        # ---- template: bridges (count, size and placement not reported)
+        bridge_w_mm:
+          template: 8
+          refs: [ectc.2016.201-a-c1.notes]
+          note: "bridge size not reported for this package; 8 x 8 mm = upper end of the 2 x 2 to 8 x 8 mm EMIB bridge range (backbone row notes)"
+        bridge_d_mm: {template: "bridge_w_mm", note: "square bridge, upper end of the reported range"}
+        bridge_n:
+          template: "hbm_cols_n * hbm_rows_n + t4_rows_n + t4_cols_n + t4_cols_n * t2_n"
+          refs: [ectc51846.2026.00365-h-c3.notes]
+          note: "bridge count not reported (row notes); assumption, topology rule: one bridge per die-die edge = 12 HBM-die + 2 vertical and 2 horizontal edges inside the 2 x 2 block + 4 to the top / bottom dies"
+        br_hpx_mm:
+          template: "sbt_w_mm * 2 * 194.75 / 754"
+          source: "ectc51846.2026.00365 p.5 Fig. 7(a)"
+          note: "HBM-die bridges centered on the HBM-die gaps (pixel read: gap centers 195.5 / 194 px from the package center); placement assumed"
+        br_ty_mm:
+          template: "sbt_d_mm * 2 * 300 / 1040"
+          source: "ectc51846.2026.00365 p.5 Fig. 7(a)"
+          note: "top / bottom die bridges centered on the edge between those dies and the 2 x 2 block (pixel read 300 px from the center); placement assumed"
+        br_ix_mm: {template: "br_hpx_mm / 2", note: "inset framing: x of the left HBM-die bridges"}
+        br_iy_mm: {template: "hbm_py_mm / 2", note: "inset framing: y of the HBM row just above the package center"}
+      parts:
+        - id: bridge
+          name: "EMIB bridge (Si, no TSV)"
+          kind: bridge
+          material: silicon
+          w_mm: bridge_w_mm
+          d_mm: bridge_d_mm
+          h_um: bridge_h_um
+          in: substrate
+          depth_um: bridge_depth_um
+          repeat: &emib_grids
+            - {nx: hbm_cols_n, ny: hbm_rows_n, pitch_x_mm: br_hpx_mm, pitch_y_mm: hbm_py_mm}
+            - {ny: t4_rows_n, pitch_y_mm: t4_py_mm}
+            - {nx: t4_cols_n, pitch_x_mm: t4_px_mm}
+            - {nx: t4_cols_n, ny: t2_n, pitch_x_mm: t4_px_mm, pitch_y_mm: br_ty_mm}
+          explode_group: 1
+          note: "placement assumed: one bridge per die-die edge (HBM-die edges, the two inner edges of the 2 x 2 block in each direction, top / bottom die to the block)"
+        - id: adhesive
+          name: "Bridge adhesive"
+          kind: other
+          material: other
+          material_label: "adhesive (not named)"
+          w_mm: bridge_w_mm
+          d_mm: bridge_d_mm
+          h_um: adh_h_um
+          in: substrate
+          depth_um: "bridge_depth_um + bridge_h_um"
+          repeat: *emib_grids
+          explode_group: 1
+        - id: die1
+          name: "Non-HBM die (2 x 2 block)"
+          kind: die
+          material: silicon
+          w_mm: t4_w_mm
+          d_mm: t4_d_mm
+          h_um: d1_h_um
+          on: substrate
+          standoff: fli_coarse
+          repeat: {nx: t4_cols_n, ny: t4_rows_n, pitch_x_mm: t4_px_mm, pitch_y_mm: t4_py_mm}
+          explode_group: 3
+          note: "die type not stated (row -h-c2: non-HBM dies)"
+        - id: die2
+          name: "HBM"
+          kind: hbm
+          material: silicon
+          w_mm: d2_w_mm
+          d_mm: d2_d_mm
+          h_um: d2_h_um
+          on: substrate
+          standoff: fli_coarse
+          repeat: {nx: hbm_cols_n, ny: hbm_rows_n, pitch_x_mm: hbm_px_mm, pitch_y_mm: hbm_py_mm}
+          explode_group: 3
+        - id: die3
+          name: "Non-HBM die (above / below the block)"
+          kind: die
+          material: silicon
+          w_mm: t2_w_mm
+          d_mm: t2_d_mm
+          h_um: d1_h_um
+          on: substrate
+          standoff: fli_coarse
+          repeat: {ny: t2_n, pitch_y_mm: t2_py_mm}
+          explode_group: 3
+        - id: uf
+          name: "Capillary underfill"
+          kind: underfill
+          material: underfill
+          material_label: "epoxy underfill"
+          fill: {above: substrate, parts: [die1, die2, die3], margin_mm: uf_margin_mm}
+          explode_group: 2
+          xray_default: true
+      arrays:
+        - {id: fine_d3, name: "Fine bumps over the bridge", kind: microbump, per: die3, lower: substrate,
+           region: {intersect: [bridge]}, pitch_um: fine_pitch_um, diameter_um: fine_d_um, height_um: bump_h_um, cap_h_um: bump_cap_um}
+        - {id: coarse_d3, name: "Coarse bumps", kind: microbump, per: die3, lower: substrate, region: {subtract: [bridge]},
+           pitch_um: coarse_pitch_um, diameter_um: coarse_d_um, height_um: bump_h_um, cap_h_um: bump_cap_um}
+      routing:
+        nets:
+          - {id: d2d_ll, kind: lateral, from: fine_d1, to: fine_d1, levels: [br_ms], share: 0.6,
+             note: "die-die wires on the bridge signal levels inside the 2 x 2 block (mock-up)"}
+          - {id: d2d_t, kind: lateral, from: fine_d3, to: fine_d1, levels: [br_ms], share: 0.6}
+          - {id: io3, kind: vertical, from: coarse_d3, to: bga, style: stacked, jog: [bu_sig_1, bu_sig_2, bb_sig_2],
+             share: 0.4}
+      callouts:
+        - {target: bridge, text: "Si bridges, no TSV",
+           note: "Si bridges (no TSV) in substrate cavities; drawn 8 x 8 mm, the upper end of the reported {bridge_h_um} um-thin 2 x 2 to 8 x 8 mm range; count (one per die-die edge) and placement are assumptions, not reported for this package",
+           refs: [ectc.2016.201-a-c1.notes, ectc51846.2026.00365-h-c3.notes]}
+        - {target: die2, text: "{hbm_n} HBM, {die_n} dies in total",
+           note: "{die_n} dies including {hbm_n} HBM on an about {sbt_w_mm} x {sbt_d_mm} mm EMIB package; die area larger than {reticle_x}X reticle; floor plan read from the top-down photo",
+           refs: [ectc51846.2026.00365-h-c2.count]}
+      insets:
+        - id: bridge_d2d
+          label: "Bridge levels under the HBM-die gap"
+          box_mm: ["-br_ix_mm - 0.25", "br_iy_mm - 0.25", "-br_ix_mm + 0.25", "br_iy_mm + 0.25"]
+          z: ["bottom:bridge", "bottom:die1"]
+          view: front
+        - id: bridge_gap
+          label: "HBM-die gap over the bridge"
+          box_mm: ["-br_ix_mm - bridge_w_mm / 2 - 0.5", "br_iy_mm - 1", "-br_ix_mm + bridge_w_mm / 2 + 0.5", "br_iy_mm + 1"]
+          z: ["bottom:adhesive", "top:die1"]
+          view: front
+        - id: bridge_xs
+          label: "Bridge in cavity: adhesive, metal levels, fine vias"
+          box_mm: ["-br_ix_mm + bridge_w_mm / 2 - 0.5", "br_iy_mm - 0.4", "-br_ix_mm + bridge_w_mm / 2 + 0.3", "br_iy_mm + 0.4"]
+          z: ["bottom:adhesive", "bottom:die1"]
+          view: front
+        - id: fine_coarse
+          label: "Fine / coarse bump transition"
+          box_mm: ["-br_ix_mm + bridge_w_mm / 2 - 0.6", "br_iy_mm + bridge_d_mm / 2 - 0.6", "-br_ix_mm + bridge_w_mm / 2 + 0.2",
+                   "br_iy_mm + bridge_d_mm / 2 + 0.6"]
+          z: ["top:bridge", "top:die1"]
+          view: front
+        - id: buildup_xs
+          label: "Coarse bump to BGA: build-up, PTH"
+          box_mm: ["-t4_px_mm / 2 - 1.5", "t4_py_mm / 2 - 0.5", "-t4_px_mm / 2 + 1.5", "t4_py_mm / 2 + 0.5"]
+          z: ["bottom:bga", "bottom:die1"]
+          view: front
