@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>c8 wafer map</title>
+<script src="../lib/apa.js"></script>
+</head>
+<body>
+<script>
+// Pass C, modality 8: wafer-level map of a 300 mm W2W hybrid-bonded wafer, top view, metrology-UI rendering.
+// v=1: via-chain pass / fail per reticle (138 reticles, 660k-link chain, 79 % yield: ectc51529.2024.00334-f05).
+// v=2: IR bonding-overlay map, one site per reticle, cells colored by overlay magnitude (jet LUT, 0-150 nm) with
+//      overlay vectors (95 % of sites < 50 nm, max 62 nm: ectc51846.2026.00187-f08, p.1, p.4).
+// Grid generated from wafer diameter, reticle field and edge exclusion; the lowest staircase row's bottom edge is
+// y = 600. Sources, chosen values and deviations: c8_wafermap.notes.md
+const { W, H, LINE_Y } = APA;
+const V = APA.params.v === '2' ? 2 : 1;
+let ctx;
+
+// DATA-BEGIN (pure: also run by a node check of the statistics)
+const WAFER_MM = 300;            // ectc51529.2024.00334-a-i1 (300 mm W2W)
+const EE_MM = 3;                 // edge exclusion: not found; chosen (notes)
+const FIELD_MM = 20;             // reticle field: not found; 20 x 20 mm gives exactly 138 full fields (notes)
+const N_RETICLES = 138;          // ectc51529.2024.00334 p.2
+const YIELD_660K = 0.79;         // ectc51529.2024.00334-f05 table
+const OVL_MAX_NM = 62, OVL_P95_NM = 50; // ectc51846.2026.00187-f08(b), p.1, p.4
+const NOTCH_DEPTH_MM = 3;        // SEMI notch is 1.0 mm deep, 90 deg; drawn 3x (notes)
+const K = 2.1;                   // px per mm
+const R_PX = WAFER_MM / 2 * K;
+
+// full fields of a grid with a vertical street on the wafer axis and a row centered on it (mm, screen-down y)
+function buildCells() {
+  const ru = WAFER_MM / 2 - EE_MM, cells = [];
+  for (let j = -9; j <= 9; j++) {
+    for (let i = -9; i <= 9; i++) {
+      const x0 = i * FIELD_MM, y0 = (j - 0.5) * FIELD_MM;
+      const ok = [[x0, y0], [x0 + FIELD_MM, y0], [x0, y0 + FIELD_MM], [x0 + FIELD_MM, y0 + FIELD_MM]]
+        .every(([x, y]) => Math.hypot(x, y) <= ru);
+      if (ok) cells.push({ i, j, x0, y0, cx: x0 + FIELD_MM / 2, cy: y0 + FIELD_MM / 2 });
+    }
+  }
+  return cells;
+}
+
+// pass / fail: exactly round(N (1 - yield)) fails, drawn without replacement from a weight that rises toward the
+// rim, leans to one side and grows next to earlier fails (clusters, as in the reference map); `locked` cells stay pass
+function assignFails(cells, rng, locked) {
+  const nFail = Math.round(cells.length * (1 - YIELD_660K));
+  const key = (i, j) => i + ',' + j;
+  const failed = new Set();
+  const ru = WAFER_MM / 2 - EE_MM, a0 = -Math.PI / 4; // lean toward the upper right (screen)
+  for (let k = 0; k < nFail; k++) {
+    let sum = 0;
+    const w = cells.map((c, n) => {
+      if (locked[n] || failed.has(key(c.i, c.j))) return 0;
+      const r = Math.hypot(c.cx, c.cy) / ru, a = Math.atan2(c.cy, c.cx);
+      let nb = 0;
+      for (let di = -1; di <= 1; di++) for (let dj = -1; dj <= 1; dj++) if ((di || dj) && failed.has(key(c.i + di, c.j + dj))) nb++;
+      const v = (0.12 + 2.4 * r ** 4) * (1 + 0.8 * Math.cos(a - a0)) * (1 + 2.2 * nb);
+      sum += v; return v;
+    });
+    let u = rng() * sum, n = 0;
+    while (n < w.length - 1 && (u -= w[n]) > 0) n++;
+    while (w[n] === 0) n--; // guard against float run-off
+    failed.add(key(cells[n].i, cells[n].j));
+  }
+  return cells.map((c) => failed.has(key(c.i, c.j)));
+}
+
+// overlay vectors: translation + rotation + magnification with its null point at the bottom of the grid, plus a
+// seeded random part; magnitudes then remapped monotonically (directions kept) so that max = 62 nm and the 133rd of
+// 138 sorted sites sits just above 50 nm (at most 132 / 138 = 95.7 % of sites < 50 nm; checked count in the notes)
+function buildOverlay(cells, rng) {
+  const gauss = () => Math.sqrt(-2 * Math.log(1 - rng())) * Math.cos(2 * Math.PI * rng());
+  const raw = cells.map((c) => {
+    const u = c.cx, v = -(c.cy - 118);               // mm from the null point, y up
+    const m = 1.0, th = 0.55, s = 55;                // arbitrary units; random sigma in the same units
+    const dx = m * u - th * v + s * gauss(), dy = m * v + th * u + s * gauss();
+    return { dx, dy, mag: Math.hypot(dx, dy) };
+  });
+  const mmax = Math.max(...raw.map((r) => r.mag));
+  const sorted = raw.map((r) => r.mag / mmax).sort((a, b) => a - b);
+  const q = sorted[Math.ceil(0.95 * cells.length)];               // index 132 of 138
+  const gamma = Math.log((OVL_P95_NM + 0.5) / OVL_MAX_NM) / Math.log(q);
+  return raw.map((r) => {
+    const nm = OVL_MAX_NM * (r.mag / mmax) ** gamma;
+    return { nm, ux: r.dx / r.mag, uy: r.dy / r.mag };
+  });
+}
+// DATA-END
+
+const CX = W / 2;
+const CY = LINE_Y - (13 / 2) * FIELD_MM * K;   // 13 rows of 20 mm: lowest row's bottom edge on y = 600
+const BAND = { x0: 560, x1: 1360, y0: 500, y1: 592 };
+const cellPx = (c) => ({ x: CX + c.x0 * K, y: CY + c.y0 * K, s: FIELD_MM * K });
+const inBand = (c) => { const p = cellPx(c); return p.x < BAND.x1 && p.x + p.s > BAND.x0 && p.y < BAND.y1 && p.y + p.s > BAND.y0; };
+
+function jet(x) { // classic jet LUT, x in [0, 1]
+  const f = (d) => Math.round(255 * Math.min(1, Math.max(0, 1.5 - Math.abs(4 * x - d))));
+  return `rgb(${f(3)},${f(2)},${f(1)})`;
+}
+
+let cells, fails, ovl, serp;
+const BG = '#0c0e10', WAFER = '#15181b', EDGE = '#6b7178', GRID = '#20252a';
+const PASS = '#3e7a37', FAIL = '#8b2525', GAP = 1;
+
+function waferPath() {
+  const d = (NOTCH_DEPTH_MM / (WAFER_MM / 2)); // half-angle of a 90 deg notch of this depth (small-angle)
+  const b = Math.PI / 2;                      // notch at the bottom (6 o'clock)
+  ctx.beginPath();
+  ctx.arc(CX, CY, R_PX, b + d, b - d + 2 * Math.PI);
+  ctx.lineTo(CX, CY + R_PX - NOTCH_DEPTH_MM * K);
+  ctx.closePath();
+}
+
+// ---- overlay word: wafer-map software UI label ----
+// The word as a UI badge of the map viewer: translucent panel in the UI background colour, 1 px panel border, a
+// 4 px accent stripe on the left, clean UI sans (semibold) in info.color; sharp corners. For a dark text_color the
+// panel turns light. Same vocabulary for both words; size and padding follow info.size (v=2 grows cut to cut).
+// Display coordinates (overlay never flipped): centred on x = 960, baseline info.baseline.
+const LUM = document.createElement('canvas').getContext('2d');
+function relLum(css) {
+  LUM.fillStyle = '#000'; LUM.fillStyle = css;
+  const h = LUM.fillStyle, m = /^#([0-9a-f]{6})$/i.exec(h);
+  const v = m ? [0, 2, 4].map((k) => parseInt(m[1].slice(k, k + 2), 16) / 255)
+    : (h.match(/[\d.]+/g) || [0, 0, 0]).slice(0, 3).map((x) => Number(x) / 255);
+  const lin = v.map((c) => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * lin[0] + 0.7152 * lin[1] + 0.0722 * lin[2];
+}
+function mapLabel(g, word, info) {
+  const s = info.size, ink = info.color, lightInk = relLum(ink) > 0.18;
+  g.font = `600 ${s}px ${info.fonts.grotesk}`;
+  const tw = g.measureText(word).width, cap = g.measureText('H').actualBoundingBoxAscent;
+  const px = Math.round(0.34 * s), py = Math.round(0.18 * s), acc = Math.max(4, Math.round(0.06 * s));
+  const bw = Math.ceil(tw) + 2 * px + acc, bh = Math.ceil(cap) + 2 * py;
+  const x0 = Math.round(info.x - bw / 2), y0 = Math.round(info.baseline - cap - py);
+  g.fillStyle = lightInk ? 'rgba(12,14,16,0.84)' : 'rgba(236,238,240,0.88)';
+  g.fillRect(x0, y0, bw, bh);
+  g.strokeStyle = lightInk ? 'rgba(170,180,190,0.35)' : 'rgba(40,46,52,0.35)'; g.lineWidth = 1;
+  g.strokeRect(x0 + 0.5, y0 + 0.5, bw - 1, bh - 1);
+  g.fillStyle = '#4c9aff'; g.fillRect(x0, y0, acc, bh);
+  g.fillStyle = ink; g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+  g.fillText(word, info.x + acc / 2, info.baseline);
+}
+
+APA.scene({
+  meta: { text: 'light' },
+  text(g, word, t, p, info) { mapLabel(g, word, info); },
+  init() {
+    ({ ctx } = APA.canvas('2d', { alpha: false }));
+    cells = buildCells();
+    if (cells.length !== N_RETICLES) console.error(`c8: ${cells.length} full fields, expected ${N_RETICLES}`);
+    fails = assignFails(cells, APA.rng(660), cells.map(inBand));
+    ovl = buildOverlay(cells, APA.rng(187));
+    // prober order (v=1): serpentine from the top row
+    serp = cells.map((c, n) => n).sort((a, b) => {
+      const ca = cells[a], cb = cells[b];
+      if (ca.j !== cb.j) return ca.j - cb.j;
+      return (ca.j % 2 === 0 ? 1 : -1) * (ca.i - cb.i);
+    });
+  },
+  render(t) {
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.fillStyle = BG;
+    ctx.fillRect(0, 0, W, H);
+    const pan = 10 * t;                        // slow horizontal drift, 30 px over 3 s
+    ctx.translate(pan - 15, 0);
+
+    waferPath();
+    ctx.fillStyle = WAFER; ctx.fill();
+    // faint full-wafer field grid (partial fields included), clipped to the wafer
+    ctx.save(); ctx.clip();
+    ctx.strokeStyle = GRID; ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (let i = -8; i <= 8; i++) { const x = Math.round(CX + i * FIELD_MM * K) + 0.5; ctx.moveTo(x, 0); ctx.lineTo(x, H); }
+    for (let j = -8; j <= 8; j++) { const y = Math.round(CY + (j - 0.5) * FIELD_MM * K) + 0.5; ctx.moveTo(0, y); ctx.lineTo(W, y); }
+    ctx.stroke();
+    ctx.restore();
+    waferPath();
+    ctx.strokeStyle = EDGE; ctx.lineWidth = 1.5; ctx.stroke();
+
+    for (let n = 0; n < cells.length; n++) {
+      const p = cellPx(cells[n]);
+      ctx.fillStyle = V === 1 ? (fails[n] ? FAIL : PASS) : jet(ovl[n].nm / 150);
+      ctx.fillRect(p.x + GAP, p.y + GAP, p.s - 2 * GAP, p.s - 2 * GAP);
+    }
+
+    if (V === 2) {
+      // overlay vectors from each site center; 0.5 px per nm (62 nm -> 31 px, cell 42 px)
+      ctx.strokeStyle = '#06070c'; ctx.fillStyle = '#06070c'; ctx.lineWidth = 1.6; ctx.lineCap = 'round';
+      for (let n = 0; n < cells.length; n++) {
+        const p = cellPx(cells[n]), o = ovl[n];
+        const x0 = p.x + p.s / 2, y0 = p.y + p.s / 2, L = 0.5 * o.nm;
+        const ux = o.ux, uy = -o.uy;           // math y-up -> screen
+        const x1 = x0 + ux * L, y1 = y0 + uy * L, hl = Math.min(6, 0.45 * L), hw = 0.5 * hl;
+        ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1 - ux * hl * 0.6, y1 - uy * hl * 0.6); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x1 - ux * hl - uy * hw, y1 - uy * hl + ux * hw);
+        ctx.lineTo(x1 - ux * hl + uy * hw, y1 - uy * hl - ux * hw);
+        ctx.closePath(); ctx.fill();
+        ctx.fillRect(x0 - 1.5, y0 - 1.5, 3, 3);  // site marker
+      }
+    } else {
+      // prober cursor: one site per frame along the serpentine (top rows only within t <= 3 s)
+      const k = Math.floor(t * 25 + 1e-6) % cells.length;
+      const p = cellPx(cells[serp[k]]);
+      ctx.strokeStyle = 'rgba(236,238,240,0.9)'; ctx.lineWidth = 2;
+      ctx.strokeRect(p.x + 2, p.y + 2, p.s - 4, p.s - 4);
+    }
+  },
+});
+</script>
+</body>
+</html>

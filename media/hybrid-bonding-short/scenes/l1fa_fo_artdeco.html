@@ -1,0 +1,475 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>l1fa fo artdeco</title>
+<script src="../lib/apa.js"></script>
+<script src="../lib/textfx.js"></script>
+</head>
+<body>
+<script>
+// L1F (pass-B slot, overlay "0.4 mm"): fan-out package (mold-first FO-PLP, 1-layer RDL) to board solder balls at
+// 0.4 mm pitch, cross-section at the die edge, rendered as an Art Deco poster. Geometry: l1fa_fo_artdeco.notes.md
+// (ectc32862.2020.00185-a etc.). Joint plane = top surface of the board Cu pads = y 600. Static plate built once
+// (seeded); render(t) pans it and draws the RDL rays out from the die pads, each ball's sunburst opening when its
+// trace arrives (settled by 0.39 s). Balls use a dark bronze sunburst so the light overlay text reads in the band.
+const { W, H, LINE_Y } = APA;
+const K = 0.75;                       // px per um (pitch 400 um -> 300 px)
+const PAN = 20;                       // px/s (40 px at 2 s, 60 px at 3 s)
+const MARGIN = 90;
+const PW = W + MARGIN;
+const y = (z) => LINE_Y - z * K;      // z: um above the board pad top
+const XE = 760;                       // die edge, plate px at t = 0
+const X = (u) => XE + u * K;          // u: um from the die edge (+ = fan-out side, under the mold)
+
+// ---- vertical stack (um above board pad top) ----
+const Z = {
+  lamTop: -25,          // board pad Cu 25 um (assumed); laminate top
+  srTop: -5,            // board SR 20 um (assumed)
+  jTop: 120,            // joint height (derived: 200 um ball volume between two 180 um wetting circles)
+  ubmF: 129,            // UBM flange top = PI2 face under the pad (UBM 9 um)
+  pi2Face: 134,         // PI2 face away from Cu (conformal 9 um over Cu bottom 143)
+  cuBot: 138, cuTop: 143,  // Cu RDL 5 um
+  dieFace: 150,         // PI1 7 um; die face and mold face coplanar (mold-first)
+};
+const SPH_ZC = 60, SPH_R = 108.2;     // truncated sphere through the two 90 um radius wetting circles
+const BALLS = [-1300, -900, -500, 300, 700, 1100];   // um from die edge; -100 column depopulated (pad ring above)
+const PADS = [-50, -110, -170, -230];                // die Al pads, 60 um pitch peripheral rows
+const PKG_EDGE = 1500;                               // 10 mm package, 7 mm die, centered
+
+const C = {
+  black: '#0d0c0b', mold: '#121110', air: '#08191b', airLine: '#10302f',
+  gold: '#d6a84c', goldL: '#f3d88f', goldD: '#80601f', goldDD: '#4a3612',
+  cream: '#efe3c5', ivory: '#f8f0dc', creamD: '#cbbd98',
+  jade: '#3e8a73', jadeL: '#62a990', jadeD: '#245f50',
+  teal: '#0f3b3b', tealL: '#1b5452', bronze: '#5c3a1f', bronzeL: '#7a5130',
+};
+
+let ctx, plate, cuAnim, cuGlow, litBalls, burst;
+const mk = (w = PW, h = H) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
+
+// ---- shapes ----
+function ballPath(cx) {
+  // solder: truncated sphere z 0..120 with a recess up into the UBM dimple (132 um wide, to z 129)
+  const p = new Path2D();
+  const r = (z) => Math.sqrt(Math.max(0, SPH_R * SPH_R - (z - SPH_ZC) ** 2));
+  p.moveTo(cx - 66 * K, y(Z.ubmF));
+  p.lineTo(cx - 66 * K, y(Z.jTop));
+  p.lineTo(cx - 90 * K, y(Z.jTop));
+  for (let z = Z.jTop; z >= 0; z -= 2) p.lineTo(cx - r(z) * K, y(z));
+  for (let z = 0; z <= Z.jTop; z += 2) p.lineTo(cx + r(z) * K, y(z));
+  p.lineTo(cx + 66 * K, y(Z.jTop));
+  p.lineTo(cx + 66 * K, y(Z.ubmF));
+  p.closePath();
+  return p;
+}
+// NSMD: solder wets the board pad sidewall down to the laminate (fillet in the 32.5 um SR clearance)
+function filletPath(cx, side) {
+  const p = new Path2D();
+  p.moveTo(cx + side * 90 * K, y(0));
+  p.quadraticCurveTo(cx + side * 98 * K, y(-8), cx + side * 96 * K, y(Z.lamTop));
+  p.lineTo(cx + side * 90 * K, y(Z.lamTop));
+  p.closePath();
+  return p;
+}
+function ubmPath(cx) {
+  const p = new Path2D();
+  const pts = [[-90, 120], [-90, 129], [-75, 129], [-75, 138], [75, 138], [75, 129], [90, 129], [90, 120],
+    [66, 120], [66, 129], [-66, 129], [-66, 120]];
+  pts.forEach(([u, z], i) => (i ? p.lineTo(cx + u * K, y(z)) : p.moveTo(cx + u * K, y(z))));
+  p.closePath();
+  return p;
+}
+function rectP(x0, y0, x1, y1) { const p = new Path2D(); p.rect(x0, y0, x1 - x0, y1 - y0); return p; }
+function key(g, path, w = 1.6, col = C.black) { g.lineWidth = w; g.strokeStyle = col; g.lineJoin = 'miter'; g.stroke(path); }
+
+// Cu RDL segments (um from die edge, along the section): [u0, u1, kind]
+const CU = [];
+for (const b of BALLS) CU.push([b - 100, b + 100, 'pad']);                 // 200 um ball pads
+for (const a of PADS) CU.push([a - 15, a + 15, 'land']);                   // 30 um via lands
+// in-plane rays (animated): die pad -50 -> fan-out ball +300; die pad -230 -> fan-in ball -500
+const RAYS = [
+  { u0: -50, u1: 200, t0: 0.02, t1: 0.18, ball: 300 },
+  { u0: -230, u1: -400, t0: 0.02, t1: 0.15, ball: -500 },
+];
+// stubs of traces that arrive out of plane, drawn toward their pads
+const STUBS = [
+  { u0: 470, u1: 600, t0: 0.13, t1: 0.21, ball: 700 },
+  { u0: 870, u1: 1000, t0: 0.18, t1: 0.26, ball: 1100 },
+  { u0: -690, u1: -800, t0: 0.15, t1: 0.22, ball: -900 },
+  { u0: -1090, u1: -1200, t0: 0.18, t1: 0.25, ball: -1300 },
+];
+const SUN = 0.13;                      // sunburst opening time per ball (s)
+const ease = (s) => (s <= 0 ? 0 : s >= 1 ? 1 : 1 - Math.pow(1 - s, 3));
+const easeIO = (s) => (s <= 0 ? 0 : s >= 1 ? 1 : s < 0.5 ? 4 * s * s * s : 1 - Math.pow(-2 * s + 2, 3) / 2);
+function arrival(ball) {
+  for (const r of RAYS.concat(STUBS)) if (r.ball === ball) return r.t1;
+  return 0;
+}
+
+// ---- static plate ----
+function drawAir(g) {
+  g.fillStyle = C.air;
+  g.fillRect(0, 0, PW, H);
+  // Deco speed lines: fine horizontal rules, spacing widening downward
+  g.strokeStyle = C.airLine; g.lineWidth = 1;
+  for (let yy = y(Z.pi2Face) + 4; yy < y(Z.srTop); yy += 5) { g.beginPath(); g.moveTo(0, yy + 0.5); g.lineTo(PW, yy + 0.5); g.stroke(); }
+  // above the board, right of the package edge
+  for (let yy = 4; yy < y(Z.pi2Face); yy += 7) { g.beginPath(); g.moveTo(X(PKG_EDGE), yy + 0.5); g.lineTo(PW, yy + 0.5); g.stroke(); }
+}
+
+function drawBoard(g, rnd) {
+  const yLam = y(Z.lamTop);
+  // laminate: 8 layers in 0.992 mm (illustrative even split: Cu 20 um, dielectric 118 um)
+  g.fillStyle = C.teal; g.fillRect(0, yLam, PW, H - yLam);
+  let z = Z.lamTop;
+  let i = 0;
+  while (y(z) < H + 10) {
+    const zDb = z - 118;                                  // dielectric z..zDb
+    const ya = y(z), yb = y(zDb);
+    // glass cloth: a row of fill-yarn lenses (Deco scale band) and fine rules
+    g.save(); g.beginPath(); g.rect(0, ya, PW, yb - ya); g.clip();
+    g.strokeStyle = 'rgba(214,168,76,0.18)'; g.lineWidth = 1;
+    for (let yy = ya + 3; yy < yb; yy += 4) { g.beginPath(); g.moveTo(0, yy + 0.5); g.lineTo(PW, yy + 0.5); g.stroke(); }
+    // glass cloth (one ply per dielectric): fill-yarn lenses with parallel-line shading, warp yarn as a wave
+    const yc = (ya + yb) / 2, L = 92, lw = 74, lh = 22, off = (i % 2) * L / 2 + 17 * i;
+    for (let cx = -L + off; cx < PW + L; cx += L) {
+      const lens = new Path2D();
+      lens.moveTo(cx - lw / 2, yc);
+      lens.bezierCurveTo(cx - lw * 0.28, yc - lh * 0.68, cx + lw * 0.28, yc - lh * 0.68, cx + lw / 2, yc);
+      lens.bezierCurveTo(cx + lw * 0.28, yc + lh * 0.68, cx - lw * 0.28, yc + lh * 0.68, cx - lw / 2, yc);
+      lens.closePath();
+      g.fillStyle = C.tealL; g.fill(lens);
+      g.save(); g.clip(lens);
+      g.strokeStyle = 'rgba(243,216,143,0.55)'; g.lineWidth = 1;
+      for (let k = -2; k <= 2; k++) { g.beginPath(); g.moveTo(cx - lw / 2, yc + k * 4 + 0.5); g.lineTo(cx + lw / 2, yc + k * 4 + 0.5); g.stroke(); }
+      g.restore();
+      g.strokeStyle = C.gold; g.lineWidth = 1.3; g.stroke(lens);
+    }
+    g.beginPath();
+    for (let xx = -10; xx <= PW + 10; xx += 4) {
+      const yy = yc - (lh * 0.5 + 2) * Math.cos(Math.PI * (xx - off) / L);
+      if (xx === -10) g.moveTo(xx, yy); else g.lineTo(xx, yy);
+    }
+    g.strokeStyle = 'rgba(214,168,76,0.7)'; g.lineWidth = 1.2; g.stroke();
+    g.restore();
+    // Cu plane
+    const yc0 = yb, yc1 = y(zDb - 20);
+    if (yc0 < H) {
+      g.fillStyle = C.gold; g.fillRect(0, yc0, PW, yc1 - yc0);
+      g.fillStyle = C.goldL; g.fillRect(0, yc0 + 3, PW, 2);
+      g.strokeStyle = C.black; g.lineWidth = 1.4;
+      g.beginPath(); g.moveTo(0, yc0); g.lineTo(PW, yc0); g.moveTo(0, yc1); g.lineTo(PW, yc1); g.stroke();
+    }
+    z = zDb - 20; i++;
+  }
+  const dg = g.createLinearGradient(0, yLam + 40, 0, H);
+  dg.addColorStop(0, 'rgba(4,14,14,0)'); dg.addColorStop(1, 'rgba(4,14,14,0.55)');
+  g.fillStyle = dg; g.fillRect(0, yLam, PW, H - yLam);
+  // solder resist (jade) with NSMD openings 245 um around 180 um pads
+  const ySR = y(Z.srTop);
+  g.fillStyle = C.jade; g.fillRect(0, ySR, PW, yLam - ySR);
+  g.strokeStyle = 'rgba(248,240,220,0.18)'; g.lineWidth = 1;
+  for (let yy = ySR + 3; yy < yLam; yy += 3) { g.beginPath(); g.moveTo(0, yy + 0.5); g.lineTo(PW, yy + 0.5); g.stroke(); }
+  for (const b of BALLS) {
+    const cx = X(b);
+    g.fillStyle = C.teal; g.fillRect(cx - 122.5 * K, ySR, 245 * K, yLam - ySR);
+    // Cu pad 180 um, 25 um
+    const pp = rectP(cx - 90 * K, LINE_Y, cx + 90 * K, yLam);
+    g.fillStyle = C.gold; g.fill(pp);
+    g.fillStyle = C.goldL; g.fillRect(cx - 90 * K, LINE_Y + 2, 180 * K, 3);
+    for (let yy = LINE_Y + 8; yy < yLam - 1; yy += 3) { g.fillStyle = C.goldD; g.fillRect(cx - 90 * K, yy, 180 * K, 1); }
+    key(g, pp, 1.4);
+  }
+  g.strokeStyle = C.black; g.lineWidth = 1.6;
+  g.beginPath(); g.moveTo(0, ySR); g.lineTo(PW, ySR); g.moveTo(0, yLam); g.lineTo(PW, yLam); g.stroke();
+}
+
+function drawPackage(g, rnd) {
+  const yF = y(Z.dieFace), xE = X(0), xP = X(PKG_EDGE);
+  // mold compound: black lacquer, gold filler spheres (20 um cut point -> <= 15 px), vertical pinstripes
+  g.save(); g.beginPath(); g.rect(xE, -5, xP - xE, yF + 5); g.clip();
+  g.fillStyle = C.mold; g.fillRect(xE, -5, xP - xE, yF + 5);
+  g.strokeStyle = 'rgba(214,168,76,0.10)'; g.lineWidth = 1;
+  for (let xx = xE + 6; xx < xP; xx += 9) { g.beginPath(); g.moveTo(xx + 0.5, -5); g.lineTo(xx + 0.5, yF); g.stroke(); }
+  for (let n = 0; n < 5200; n++) {
+    const px = xE + rnd() * (xP - xE), py = rnd() * yF;
+    const d = 1.2 + 9 * Math.pow(rnd(), 3);            // filler spheres, <= 20 um cut point (15 px)
+    g.beginPath(); g.arc(px, py, d / 2, 0, Math.PI * 2);
+    const q = rnd();
+    g.fillStyle = q < 0.12 ? 'rgba(243,216,143,0.55)' : q < 0.5 ? 'rgba(214,168,76,0.30)' : 'rgba(128,96,31,0.35)';
+    g.fill();
+  }
+  g.restore();
+  // Si die: cream, fine vertical pinstripes (Deco skyscraper rhythm), heavier toward the die edge
+  g.save(); g.beginPath(); g.rect(-5, -5, xE + 5, yF + 5); g.clip();
+  g.fillStyle = C.cream; g.fillRect(-5, -5, xE + 5, yF + 5);
+  for (let xx = xE - 4, k = 0; xx > -10; xx -= 6, k++) {
+    const w = 0.6 + 1.5 * Math.exp(-(xE - xx) / 160) + (k % 6 === 0 ? 0.7 : 0);
+    g.fillStyle = 'rgba(70,52,26,0.55)'; g.fillRect(xx - w / 2, -5, w, yF + 5);
+  }
+  // stepped setback bands near the die face (BEOL rhythm, ornamental tone only)
+  g.fillStyle = 'rgba(70,52,26,0.22)'; g.fillRect(-5, yF - 10, xE + 5, 10);
+  g.fillStyle = 'rgba(70,52,26,0.18)'; g.fillRect(-5, yF - 20, xE + 5, 5);
+  g.restore();
+  // Al pads (40 um) at the die face
+  for (const a of PADS) { g.fillStyle = C.goldL; g.fillRect(X(a) - 20 * K, yF - 2.5, 40 * K, 2.5); }
+  // die edge and face rules
+  g.strokeStyle = C.gold; g.lineWidth = 3;
+  g.beginPath(); g.moveTo(xE, -5); g.lineTo(xE, yF); g.stroke();
+  g.strokeStyle = C.black; g.lineWidth = 1.2;
+  g.beginPath(); g.moveTo(xE - 2, -5); g.lineTo(xE - 2, yF); g.moveTo(xE + 2, -5); g.lineTo(xE + 2, yF); g.stroke();
+  // package saw edge
+  g.strokeStyle = C.gold; g.lineWidth = 2.5;
+  g.beginPath(); g.moveTo(xP, -5); g.lineTo(xP, y(Z.pi2Face)); g.stroke();
+
+  // polyimide: PI1 (z 143-150) everywhere, PI2 conformal 9 um under the Cu
+  const xL = -10;
+  const pi = new Path2D();
+  pi.moveTo(xL, yF); pi.lineTo(xP, yF); pi.lineTo(xP, y(Z.pi2Face));
+  // bottom profile right to left: steps down to z 129 under each ball pad (pad +- 109 um)
+  const segs = CU.filter((s) => s[2] === 'pad').map((s) => [s[0] - 9, s[1] + 9]).sort((a, b) => b[0] - a[0]);
+  for (const [u0, u1] of segs) {
+    if (X(u1) > xP) continue;
+    pi.lineTo(X(u1), y(Z.pi2Face)); pi.lineTo(X(u1), y(Z.ubmF)); pi.lineTo(X(u0), y(Z.ubmF)); pi.lineTo(X(u0), y(Z.pi2Face));
+  }
+  pi.lineTo(xL, y(Z.pi2Face)); pi.closePath();
+  g.fillStyle = C.bronze; g.fill(pi);
+  g.fillStyle = C.bronzeL; g.fillRect(xL, yF, xP - xL, y(Z.cuTop) - yF);         // PI1 a shade lighter
+  key(g, pi, 1.3);
+  // PI1 vias over the Al pads (20 um at the pad, 28 um at the Cu)
+  for (const a of PADS) {
+    const p = new Path2D();
+    p.moveTo(X(a) - 10 * K, yF); p.lineTo(X(a) + 10 * K, yF); p.lineTo(X(a) + 14 * K, y(Z.cuTop)); p.lineTo(X(a) - 14 * K, y(Z.cuTop)); p.closePath();
+    g.fillStyle = C.gold; g.fill(p);
+  }
+  // static Cu: ball pads and via lands
+  for (const [u0, u1] of CU) {
+    const p = rectP(X(u0), y(Z.cuTop), X(u1), y(Z.cuBot));
+    g.fillStyle = C.gold; g.fill(p);
+    g.fillStyle = C.goldL; g.fillRect(X(u0), y(Z.cuTop) + 0.8, X(u1) - X(u0), 1.2);
+    key(g, p, 1);
+  }
+  // UBM
+  for (const b of BALLS) { const p = ubmPath(X(b)); g.fillStyle = C.goldL; g.fill(p); key(g, p, 1.1); }
+}
+
+// sunburst ball: rays from the joint-line point (cx, LINE_Y), alternating wedges
+function drawBall(g, cx, lit) {
+  const p = ballPath(cx);
+  g.save(); g.clip(p);
+  g.fillStyle = lit ? '#46331a' : '#2a3a36';
+  g.fillRect(cx - 120, y(140), 240, 140 * K + 30);
+  const N = 26;
+  for (let i = 0; i < N; i++) {
+    if (i % 2) continue;
+    const a0 = Math.PI + Math.PI * i / N, a1 = Math.PI + Math.PI * (i + 1) / N;
+    g.beginPath(); g.moveTo(cx, LINE_Y);
+    g.arc(cx, LINE_Y, 200, a0, a1); g.closePath();
+    g.fillStyle = lit ? '#765723' : '#34463f'; g.fill();
+  }
+  // concentric Deco arcs (sun rings)
+  for (const [r, w] of [[22, 2.2], [40, 1.2], [58, 1.0]]) {
+    g.beginPath(); g.arc(cx, LINE_Y, r, Math.PI, 2 * Math.PI);
+    g.strokeStyle = lit ? '#2b200f' : '#1d2a27'; g.lineWidth = w; g.stroke();
+  }
+  // half-disc sun core
+  g.beginPath(); g.arc(cx, LINE_Y, 14, Math.PI, 2 * Math.PI); g.closePath();
+  g.fillStyle = lit ? C.goldL : '#3c4f48'; g.fill();
+  g.restore();
+  for (const side of [-1, 1]) { const f = filletPath(cx, side); g.fillStyle = lit ? C.gold : '#34463f'; g.fill(f); key(g, f, 1); }
+  key(g, p, 2.2);
+  g.save(); g.clip(p);
+  g.strokeStyle = lit ? C.gold : '#4a5d55'; g.lineWidth = 3; g.lineJoin = 'miter';
+  g.stroke(p);
+  g.restore();
+}
+
+// Deco sunburst behind the package section: alternating tone wedges from the die-pad cluster (ornamental light only;
+// texture within the die and mold regions, no structure)
+const BO = { x: X(-140), y: y(Z.dieFace) };
+function buildBurst() {
+  const c = mk(); const g = c.getContext('2d');
+  const yF = y(Z.dieFace), xE = X(0), xP = X(PKG_EDGE);
+  const N = 44;
+  const wedges = (fill) => {
+    for (let i = 0; i < N; i += 2) {
+      const a0 = Math.PI + Math.PI * i / N, a1 = Math.PI + Math.PI * (i + 1) / N;
+      g.beginPath(); g.moveTo(BO.x, BO.y); g.arc(BO.x, BO.y, 2600, a0, a1); g.closePath(); g.fillStyle = fill; g.fill();
+    }
+  };
+  g.save(); g.beginPath(); g.rect(-5, -5, xE + 5, yF + 5); g.clip(); wedges('rgba(150,104,36,0.20)'); g.restore();
+  g.save(); g.beginPath(); g.rect(xE + 3, -5, xP - xE - 3, yF + 5); g.clip(); wedges('rgba(214,168,76,0.16)'); g.restore();
+  return c;
+}
+
+// ---- overlay word as Art Deco gold lettering (STYLE.md "Styled text") ----
+// Poiret One (APA Deco), widely tracked, built up to a monoline gold body (the hairline glyph dilated), metallic
+// gold banding, a fine dark inline along each stroke (the glyph eroded to ~1.5 px), a black keyline around the body
+// (separates it from the bronze sunburst balls), and a fine gold ray fan rising from behind the word (an echo of the
+// ball sunbursts) that opens over 0.3 s. The word itself is complete from frame 0.
+const decoCache = new Map();
+function decoPlate(word, fs, fam, dark) {
+  const key = [word, fs, fam, dark].join('|');
+  if (decoCache.has(key)) return decoCache.get(key);
+  const rw = Math.max(2, Math.round(fs * 0.05)), rk = rw + Math.max(2, Math.round(fs * 0.035));
+  const m = TFX.mask(word, { family: fam, size: fs, letterSpacing: Math.round(fs * 0.1), pad: rk + 6 });
+  const disc = (r, col) => {                       // glyph dilated by a disc of radius r, filled with col
+    const c = mk(m.w, m.h), cg = c.getContext('2d');
+    for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) if (dx * dx + dy * dy <= r * r + 0.5) cg.drawImage(m.canvas, dx, dy);
+    cg.globalCompositeOperation = 'source-in';
+    cg.fillStyle = col; cg.fillRect(0, 0, m.w, m.h);
+    return c;
+  };
+  const top = m.oy - m.ascent - rw, bot = m.oy + rw;
+  const gold = (() => { const c = mk(m.w, m.h).getContext('2d'); const gr = c.createLinearGradient(0, top, 0, bot);
+    gr.addColorStop(0, C.goldL); gr.addColorStop(0.42, '#e7c26a'); gr.addColorStop(0.5, C.gold); gr.addColorStop(0.58, '#c0913a');
+    gr.addColorStop(1, '#e2bb63'); return gr; })();
+  const out = mk(m.w, m.h), og = out.getContext('2d');
+  og.drawImage(disc(rk, dark ? C.goldL : C.black), 0, 0);
+  const body = disc(rw, '#fff'), bg = body.getContext('2d');
+  bg.globalCompositeOperation = 'source-in'; bg.fillStyle = dark ? C.black : gold; bg.fillRect(0, 0, m.w, m.h);
+  og.drawImage(body, 0, 0);
+  // inline: the hairline glyph eroded by 1 px (keeps only the stroke centre)
+  const core = mk(m.w, m.h), kg = core.getContext('2d');
+  kg.drawImage(m.canvas, 0, 0);
+  kg.globalCompositeOperation = 'destination-in';
+  for (let i = 0; i < 8; i++) kg.drawImage(m.canvas, Math.round(Math.cos(i * Math.PI / 4)), Math.round(Math.sin(i * Math.PI / 4)));
+  kg.globalCompositeOperation = 'source-in'; kg.fillStyle = dark ? C.goldL : C.goldDD; kg.fillRect(0, 0, m.w, m.h);
+  og.globalAlpha = 0.9; og.drawImage(core, 0, 0); og.globalAlpha = 1;
+  const plate = { m, canvas: out, rk };
+  decoCache.set(key, plate);
+  return plate;
+}
+function textHook(g, word, t, p, info) {
+  const fs = Math.round(info.size * 1.12);
+  const dark = info.tone === 'dark' || /^#(0|1|2|3)/i.test(info.color);
+  const P = decoPlate(word, fs, info.fonts.deco, dark);
+  const m = P.m, cx = info.x, yb = info.baseline;
+  const halfW = m.width / 2 + P.rk;
+  // ray fan behind the word: 15 fine rays on a flattened half-ellipse from just under the baseline centre, kept
+  // inside the text band (top at y 500)
+  const open = ease(Math.max(0, t) / 0.3), y0 = yb + 6;
+  const Rx = halfW * (0.7 + 0.6 * open), Ry = Math.max(20, y0 - info.band.y0) * (0.75 + 0.25 * open);
+  g.save();
+  g.lineCap = 'butt';
+  for (let i = 0; i < 15; i++) {
+    const a = Math.PI + Math.PI * (i + 0.5) / 15, ca = Math.cos(a), sa = Math.sin(a);
+    const xa = cx + ca * Rx * 0.36, ya = y0 + sa * Ry * 0.36, xe = cx + ca * Rx, ye = y0 + sa * Ry;
+    const gr = g.createLinearGradient(xa, ya, xe, ye);
+    gr.addColorStop(0, 'rgba(214,168,76,0.0)'); gr.addColorStop(0.3, 'rgba(214,168,76,0.6)'); gr.addColorStop(1, 'rgba(214,168,76,0)');
+    g.strokeStyle = gr; g.lineWidth = i % 2 ? 1.2 : 2.2;
+    g.beginPath(); g.moveTo(xa, ya); g.lineTo(xe, ye); g.stroke();
+  }
+  g.restore();
+  TFX.blit(g, P.canvas, m, cx, yb);
+}
+
+APA.scene({
+  meta: { text: 'light' },
+  init() {
+    ({ ctx } = APA.canvas('2d'));
+    const rnd = APA.rng(1925);
+    plate = mk();
+    const g = plate.getContext('2d');
+    drawAir(g);
+    drawBoard(g, rnd);
+    drawPackage(g, rnd);
+    for (const b of BALLS) drawBall(g, X(b), false);
+    // lit ball layer (clipped open per ball per frame)
+    litBalls = mk();
+    const lb = litBalls.getContext('2d');
+    for (const b of BALLS) drawBall(lb, X(b), true);
+    // animated Cu: rays and stubs, full length (clipped per frame)
+    cuAnim = mk();
+    const ca = cuAnim.getContext('2d');
+    for (const r of RAYS.concat(STUBS)) {
+      const u0 = Math.min(r.u0, r.u1), u1 = Math.max(r.u0, r.u1);
+      const p = rectP(X(u0), y(Z.cuTop), X(u1), y(Z.cuBot));
+      ca.fillStyle = C.gold; ca.fill(p);
+      ca.fillStyle = C.goldL; ca.fillRect(X(u0), y(Z.cuTop) + 0.8, X(u1) - X(u0), 1.2);
+      key(ca, p, 1);
+    }
+    const tmp = mk(); const tg = tmp.getContext('2d');
+    for (const r of RAYS.concat(STUBS)) {
+      const u0 = Math.min(r.u0, r.u1), u1 = Math.max(r.u0, r.u1);
+      tg.fillStyle = C.goldL; tg.fillRect(X(u0), y(Z.cuTop) - 2, X(u1) - X(u0), y(Z.cuBot) - y(Z.cuTop) + 4);
+    }
+    cuGlow = mk();
+    const cg = cuGlow.getContext('2d');
+    cg.filter = 'blur(7px)'; cg.drawImage(tmp, 0, 0); cg.drawImage(tmp, 0, 0); cg.filter = 'none';
+    burst = buildBurst();
+    // warm-up: upload every offscreen layer once so the first animated frames stay fast
+    for (const c of [burst, cuAnim, cuGlow, litBalls, plate]) { ctx.drawImage(c, 0, 0); ctx.getImageData(0, 0, 1, 1); }
+    for (const t of [0.05, 0.1, 0.2, 0.3, 0.5]) { this.render(t); ctx.getImageData(0, 0, 1, 1); }
+    this.render(0);
+    ctx.getImageData(0, 0, 1, 1);
+  },
+  render(t) {
+    const off = Math.min(PAN * Math.max(0, t), MARGIN - 10);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.drawImage(plate, -off, 0);
+    ctx.setTransform(1, 0, 0, 1, -off, 0);
+    const yT = y(Z.cuTop), yB = y(Z.cuBot);
+    // sunburst wavefront from the die pads
+    const sb = ease((t - 0.02) / 0.34);
+    if (sb > 0) {
+      const Rb = 30 + 1500 * sb;
+      ctx.save(); ctx.beginPath(); ctx.arc(BO.x, BO.y, Rb, Math.PI, 2 * Math.PI); ctx.closePath(); ctx.clip();
+      ctx.drawImage(burst, 0, 0);
+      ctx.restore();
+      const fa = 0.55 * (1 - sb);
+      if (fa > 0.01) {
+        ctx.save(); ctx.beginPath(); ctx.rect(-10, -10, X(PKG_EDGE) + 10, BO.y + 10); ctx.clip();
+        ctx.beginPath(); ctx.arc(BO.x, BO.y, Rb, Math.PI, 2 * Math.PI);
+        ctx.strokeStyle = `rgba(243,216,143,${fa})`; ctx.lineWidth = 3; ctx.stroke();
+        ctx.beginPath(); ctx.arc(BO.x, BO.y, Rb - 10, Math.PI, 2 * Math.PI);
+        ctx.lineWidth = 1; ctx.stroke();
+        ctx.restore();
+      }
+    }
+    // traces drawing out
+    for (const r of RAYS.concat(STUBS)) {
+      const s = easeIO((t - r.t0) / (r.t1 - r.t0));
+      if (s <= 0) continue;
+      const xa = X(r.u0), xb = X(r.u0 + (r.u1 - r.u0) * s);
+      const x0 = Math.min(xa, xb), x1 = Math.max(xa, xb);
+      ctx.save(); ctx.beginPath(); ctx.rect(x0 - 1, yT - 3, x1 - x0 + 2, yB - yT + 6); ctx.clip();
+      ctx.drawImage(cuAnim, 0, 0);
+      ctx.restore();
+      ctx.save(); ctx.beginPath(); ctx.rect(x0 - 14, yT - 30, x1 - x0 + 28, yB - yT + 60); ctx.clip();
+      ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = 0.6 + 0.4 * (1 - s);
+      ctx.drawImage(cuGlow, 0, 0);
+      ctx.restore();
+      if (s < 1) { // bright head
+        const gr = ctx.createRadialGradient(xb, (yT + yB) / 2, 0, xb, (yT + yB) / 2, 26);
+        gr.addColorStop(0, 'rgba(255,240,190,0.95)'); gr.addColorStop(0.25, 'rgba(243,216,143,0.5)'); gr.addColorStop(1, 'rgba(243,216,143,0)');
+        ctx.fillStyle = gr; ctx.fillRect(xb - 26, (yT + yB) / 2 - 26, 52, 52);
+      }
+    }
+    // sunbursts open from the joint line as each trace arrives
+    for (const b of BALLS) {
+      const ta = arrival(b);
+      const s = ease((t - ta) / SUN);
+      if (s <= 0) continue;
+      const cx = X(b);
+      const R = 4 + 150 * s;
+      ctx.save(); ctx.beginPath(); ctx.arc(cx, LINE_Y, R, Math.PI, 2 * Math.PI); ctx.closePath(); ctx.clip();
+      ctx.drawImage(litBalls, cx - 130, LINE_Y - 140, 260, 150, cx - 130, LINE_Y - 140, 260, 150);
+      ctx.restore();
+      // arrival flash at the pad / UBM
+      const f = Math.max(0, 1 - (t - ta) / 0.12);
+      if (f > 0 && t >= ta) {
+        const yy = y(Z.cuBot);
+        const gr = ctx.createRadialGradient(cx, yy, 0, cx, yy, 90);
+        gr.addColorStop(0, `rgba(255,236,180,${0.75 * f})`); gr.addColorStop(1, 'rgba(255,236,180,0)');
+        ctx.fillStyle = gr; ctx.fillRect(cx - 90, yy - 90, 180, 180);
+      }
+    }
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+  },
+  text: textHook,
+});
+</script>
+</body>
+</html>

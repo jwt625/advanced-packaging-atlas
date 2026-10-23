@@ -1,0 +1,377 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>l7a hb04 tem</title>
+<script src="../lib/apa.js"></script>
+<script src="../lib/textfx.js"></script>
+</head>
+<body>
+<script>
+// L7 pass-B slot (file name kept): Cu-Cu hybrid bond, wafer-to-wafer, 0.4 um pitch, as a false-color STEM-EDS composite over a
+// bright-field grain-contrast image. Bond interface on y = 600. Motion: post-bond anneal (dishing gap closes,
+// grains grow across the Cu-Cu interface) plus a slow horizontal stage drift. Sources: l7a_hb04_tem.notes.md.
+const { W, H, LINE_Y } = APA;
+
+// ---- geometry (world px; 700 px/um, so 1 nm = 0.7 px) ----
+// Section cut along the daisy-chain links: top M1 joins columns (0,1), (2,3), ...; bottom M1 joins (1,2), (3,4), ...
+const S = 700;                 // px per um
+const P = 0.4 * S;             // pitch 280
+const X0 = 150;                // bottom-pad column centres X0 + k P
+const OV = 17.5;               // top-wafer overlay offset (25 nm)
+const B = 4;                   // TaN/Ta barrier drawn ~6 nm
+const IF = LINE_Y;             // interface: rows < IF are top wafer, rows >= IF bottom wafer
+// in "yy" = distance-from-surface coords mirrored for the bottom wafer (yy = y for top, 2 IF - 1 - y for bottom)
+const PAD0 = IF - 0.4 * S;     // 320: pad far end (pad height 0.4 um)
+const VIA0 = PAD0 - 0.3 * S;   // 110: via far end (via height 0.3 um)
+const M10 = VIA0 - 0.13 * S;   // 19: M1 far end (M1 thickness 0.13 um)
+const CAP = 10.5;              // SiCN cap on M1, ~15 nm
+const PADW_S = 0.2 * S / 2, PADW_F = 0.188 * S / 2;   // pad half width at bond surface / far end
+const VIAW_S = 0.16 * S / 2, VIAW_F = 0.14 * S / 2;   // via half width pad side / M1 side
+const M1W_S = 0.3 * S / 2, M1W_F = 0.285 * S / 2;     // M1 half width
+const DRIFT = 14;              // px/s stage drift
+const WW = W + 64;             // world width (covers drift over 3 s + margin)
+const BAND = 150;              // rows either side of IF recomputed per frame
+const HGAP = 1.75;             // recess per side before anneal, px (2.5 nm)
+
+const lerp = (a, b, u) => a + (b - a) * u;
+let ctx, CXW, CYW, world, band, bandCtx, bandImg, scan, noise, bandG0, bandG, bandT, bandB;
+
+// material at world pixel: 0 SiO2, 1 SiCN, 2 Cu, 3 barrier, 4 SiOx bond line
+// also returns side (0 top, 1 bottom), column k, region (0 pad+via, 1 M1)
+const M = { mat: 0, side: 0, k: 0, reg: 0 };
+function material(x, y) {
+  const side = y < IF ? 0 : 1;
+  const yy = side ? 2 * IF - 1 - y : y;
+  const xx = side ? x : x - OV;
+  const k = Math.round((xx - X0) / P);
+  const dx = Math.abs(xx - (X0 + k * P));
+  M.side = side; M.k = k; M.reg = 0;
+  // pad + via (one dual-damascene Cu body with a shared liner)
+  if (yy >= PAD0 - B) {
+    const hw = lerp(PADW_F, PADW_S, (yy - PAD0) / (IF - PAD0));
+    if (yy >= PAD0 && dx <= hw) { M.mat = 2; return M; }
+    if (yy < PAD0 && dx <= VIAW_S) { M.mat = 2; return M; }   // via Cu runs straight into the pad: one body
+    if (dx <= hw + B) { M.mat = 3; return M; }                 // liner under the pad ledge only
+  }
+  if (yy >= VIA0 && yy < PAD0) {
+    const hw = lerp(VIAW_F, VIAW_S, (yy - VIA0) / (PAD0 - VIA0));
+    if (yy >= VIA0 + B && dx <= hw) { M.mat = 2; return M; }
+    if (dx <= hw + B) { M.mat = 3; return M; }
+  }
+  if (yy >= M10 && yy < VIA0) {
+    // M1 link j spans two columns: top (2j, 2j+1), bottom (2j+1, 2j+2)
+    const o = side ? 1.5 : 0.5;
+    const j = Math.round((xx - X0 - o * P) / (2 * P));
+    const dl = Math.abs(xx - (X0 + (2 * j + o) * P));
+    const hw = P / 2 + lerp(M1W_F, M1W_S, (yy - M10) / (VIA0 - M10));
+    if (yy >= M10 + B && dl <= hw - B) { M.mat = 2; M.reg = 1; M.k = j; return M; }
+    if (dl <= hw) { M.mat = 3; return M; }
+  }
+  // dielectrics
+  if (y >= IF - 2 && y <= IF) { M.mat = 4; return M; }       // 3 px SiOx
+  if (yy >= PAD0) { M.mat = 1; return M; }
+  if (yy >= VIA0 && yy < VIA0 + CAP) { M.mat = 1; return M; }
+  M.mat = 0; return M;
+}
+
+// ---- grains ----
+const seedCache = new Map();
+function seeds(side, k, reg) {
+  const key = side + ':' + k + ':' + reg;
+  let s = seedCache.get(key);
+  if (s) return s;
+  const r = APA.rng(9001 + (k + 50) * 7919 + side * 104729 + reg * 15485863);
+  const cx = reg === 0 ? X0 + k * P + (side ? 0 : OV) : X0 + (2 * k + (side ? 1.5 : 0.5)) * P + (side ? 0 : OV);
+  const toY = (yy) => side ? 2 * IF - 1 - yy : yy;
+  s = [];
+  const add = (xx, yy, grower) => {
+    const a = r() * Math.PI, b = r() * Math.PI;
+    s.push({
+      x: cx + xx, y: toY(yy), r: r() * 26, g: 0.22 + r() * 0.7,
+      grower, G: grower ? 110 + r() * 70 : 0,
+      tw: r() < 0.45, twg: 0.25 + r() * 0.7, nx: Math.cos(a), ny: Math.sin(a), tww: 8 + r() * 16, two: r() * 40,
+      ca: 0.25 + r() * 0.45, cnx: Math.cos(b), cny: Math.sin(b), ck: (r() - 0.5) * 0.012,
+      cp: 90 + r() * 140, cs: 7 + r() * 12, co: r() * 200, cw: 0.02 + r() * 0.03,
+    });
+  };
+  if (reg === 0) {
+    // one side per column hosts the grain that grows across the interface on anneal
+    const growSide = APA.rng(777 + (k + 50) * 31)() < 0.5 ? 0 : 1;
+    const nPad = 2 + Math.floor(r() * 2.6);
+    for (let i = 0; i < nPad; i++) {
+      const yy = lerp(PAD0 + 20, IF - 18, (i + 0.25 + r() * 0.5) / nPad);
+      add((r() - 0.5) * 90, yy, i === nPad - 1 && side === growSide);
+    }
+    const nVia = 1 + Math.floor(r() * 2.4);
+    for (let i = 0; i < nVia; i++) add((r() - 0.5) * 60, lerp(VIA0 + 20, PAD0 - 10, (i + r()) / nVia), false);
+  } else {
+    for (let i = 0; i < 6; i++) add(((i + 0.2 + 0.6 * r()) / 6 - 0.5) * (P + 2 * M1W_S), lerp(M10 + 15, VIA0 - 10, r()), false);
+  }
+  seedCache.set(key, s);
+  return s;
+}
+
+const gfall = (d) => d < 60 ? 1 : d > 135 ? 0 : 1 - (d - 60) / 75 * ((d - 60) / 75) * (3 - 2 * (d - 60) / 75);
+// anneal progress: exponential (tau 0.13 s) normalized to reach exactly 1 at T_ANNEAL, then held (2026-10-22: pass-B
+// slot of 0.5 s, settled by 0.38 s at speed 1; earlier 0.85 s / tau 0.28 s for a 1.0 s slot, before that 1 - exp(-t / 0.7))
+const T_ANNEAL = 0.38, TAU_ANNEAL = 0.13;
+const uOf = (t) => (t >= T_ANNEAL ? 1 : (1 - Math.exp(-Math.max(0, t) / TAU_ANNEAL)) / (1 - Math.exp(-T_ANNEAL / TAU_ANNEAL)));
+
+// intensity of Cu pixel (0..1), u = anneal progress
+function cuShade(x, y, side, k, reg, u) {
+  const own = seeds(side, k, reg);
+  const dI = Math.abs(y - (IF - 0.5));
+  const gf = u > 0 ? gfall(dI) : 0;
+  let s1 = 1e9, s2 = 1e9, best = null;
+  for (let i = 0; i < own.length; i++) {
+    const q = own[i];
+    const dx = x - q.x, dy = y - q.y;
+    let sc = Math.sqrt(dx * dx + dy * dy) - q.r;
+    if (q.grower) sc -= 0.25 * q.G * u * gf;
+    if (sc < s1) { s2 = s1; s1 = sc; best = q; } else if (sc < s2) s2 = sc;
+  }
+  if (reg === 0 && gf > 0) {
+    const other = seeds(1 - side, k, 0);
+    const pen = 120 * (1 - u) * (1 - u);
+    for (let i = 0; i < other.length; i++) {
+      const q = other[i];
+      if (!q.grower) continue;
+      const dx = x - q.x, dy = y - q.y;
+      const sc = Math.sqrt(dx * dx + dy * dy) - q.r - q.G * u * gf + pen;
+      if (sc < s1) { s2 = s1; s1 = sc; best = q; } else if (sc < s2) s2 = sc;
+    }
+  }
+  const q = best;
+  let I = q.g;
+  const rx = x - q.x, ry = y - q.y;
+  if (q.tw) {
+    // a few annealing-twin lamellae of irregular width: hashed slab index
+    const sl = Math.floor((rx * q.nx + ry * q.ny + q.two) / q.tww);
+    const hsh = Math.sin(sl * 127.1 + q.two * 3.7) * 43758.5453;
+    if (hsh - Math.floor(hsh) < 0.3) I = q.twg;
+  }
+  // bend contours: broad dark curved bands
+  const v = rx * q.cnx + ry * q.cny + q.ck * (rx * q.cny - ry * q.cnx) ** 2 + 14 * Math.sin((rx * q.cny - ry * q.cnx) * q.cw) + q.co;
+  let m = v % q.cp; if (m < 0) m += q.cp; m -= q.cp * 0.5;
+  I *= 1 - q.ca * Math.exp(-(m * m) / (2 * q.cs * q.cs));
+  // thickness fringes along inclined grain boundaries, dark core at the boundary
+  const dlt = s2 - s1;
+  if (dlt < 26) I *= 1 - 0.16 * Math.cos(dlt * 0.62) * Math.exp(-dlt / 9);
+  if (dlt < 1.4) I *= 0.5;
+  return I;
+}
+
+// recess gap coverage (0..1) at a Cu pixel next to the interface
+function gapCov(x, y, side, u) {
+  const h0 = HGAP * Math.max(0, 1 - u / 0.45);
+  if (h0 <= 0) return 0;
+  const xx = side ? x : x - OV;
+  const k = Math.round((xx - X0) / P);
+  const e = (xx - (X0 + k * P)) / PADW_S;
+  const h = h0 * Math.max(0, 1 - e * e);
+  const d = side ? y - IF : IF - 1 - y;
+  return Math.min(1, Math.max(0, h - d));
+}
+
+// element tints (EDS overlay colours) per material: SiO2, SiCN, Cu, Ta, SiOx
+const TINT = [[0.42, 0.30, 1.0], [0.10, 0.80, 0.95], [1.0, 0.52, 0.16], [1.0, 0.25, 0.85], [0.55, 0.72, 1.0]];
+// HAADF-like base intensity per material (Cu from grain contrast)
+const BASE = [0.085, 0.11, 0, 1.0, 0.5];
+
+let mat, sideA, kA, gray, tintA, cntA, cuIdx, cuSide, cuK, lowf;
+
+function haadfCu(I) { return 0.2 + 0.8 * I; }
+
+function boxBlur(src, w, h, r, passes) {
+  let a = Float32Array.from(src);
+  const b = new Float32Array(w * h), k = 1 / (2 * r + 1);
+  for (let p = 0; p < passes; p++) {
+    for (let y = 0; y < h; y++) {           // horizontal a -> b
+      const row = y * w; let acc = 0;
+      for (let x = -r; x <= r; x++) acc += a[row + Math.min(w - 1, Math.max(0, x))];
+      for (let x = 0; x < w; x++) {
+        b[row + x] = acc * k;
+        acc += a[row + Math.min(w - 1, x + r + 1)] - a[row + Math.max(0, x - r)];
+      }
+    }
+    for (let x = 0; x < w; x++) {           // vertical b -> a
+      let acc = 0;
+      for (let y = -r; y <= r; y++) acc += b[Math.min(h - 1, Math.max(0, y)) * w + x];
+      for (let y = 0; y < h; y++) {
+        a[y * w + x] = acc * k;
+        acc += b[Math.min(h - 1, y + r + 1) * w + x] - b[Math.max(0, y - r) * w + x];
+      }
+    }
+  }
+  return a;
+}
+
+APA.scene({
+  meta: { text: 'light' },
+  async init() {
+    ({ ctx } = APA.canvas('2d'));
+    // calm text band (x 560-1360, y 500-592): feathered screen-space weights; inside, grain contrast, noise and
+    // EDS counts flatten toward a dark mean (computed per pixel in the per-frame band)
+    const sm = (a, b, v) => { const u = Math.min(1, Math.max(0, (v - a) / (b - a))); return u * u * (3 - 2 * u); };
+    CXW = new Float32Array(W + 2);
+    for (let x = 0; x < W + 2; x++) CXW[x] = sm(300, 560, x) * (1 - sm(1360, 1620, x));
+    CYW = new Float32Array(H);
+    for (let y = 0; y < H; y++) CYW[y] = sm(IF - BAND + 2, 500, y) * (1 - sm(593, 598, y));   // stays inside the per-frame band
+    const r = APA.rng(424242);
+    const N = WW * H;
+    noise = new Float32Array(N);
+    for (let i = 0; i < N; i++) noise[i] = r();
+    // materials
+    mat = new Uint8Array(N); sideA = new Uint8Array(N); kA = new Int8Array(N);
+    const reg1 = new Uint8Array(N);
+    for (let y = 0; y < H; y++) for (let x = 0; x < WW; x++) {
+      const m = material(x, y), i = y * WW + x;
+      mat[i] = m.mat; sideA[i] = m.side; kA[i] = m.k; reg1[i] = m.reg;
+    }
+    // low-frequency lamella thickness / illumination variation
+    lowf = new Float32Array(N);
+    const ph = [r() * 6, r() * 6, r() * 6];
+    // FIB curtaining: faint vertical thickness streaks along the milling direction
+    const curt = new Float32Array(WW).fill(1);
+    for (let j = 0; j < 70; j++) {
+      const c = r() * WW, w = 1 + r() * 7, a = (r() - 0.45) * 0.09;
+      for (let x = Math.max(0, Math.floor(c - 3 * w)); x < Math.min(WW, c + 3 * w); x++) curt[x] += a * Math.exp(-((x - c) ** 2) / (2 * w * w));
+    }
+    for (let y = 0; y < H; y++) for (let x = 0; x < WW; x++)
+      lowf[y * WW + x] = (0.9 + 0.07 * Math.sin(x * 0.0021 + y * 0.0013 + ph[0]) + 0.05 * Math.sin(y * 0.0047 - x * 0.0009 + ph[1]) + 0.04 * (y / H)) * curt[x];
+    // HAADF-like gray at anneal progress 0
+    gray = new Float32Array(N);
+    for (let y = 0; y < H; y++) for (let x = 0; x < WW; x++) {
+      const i = y * WW + x, m = mat[i];
+      if (m === 2) gray[i] = haadfCu(cuShade(x, y, sideA[i], kA[i], reg1[i], 0));
+      else gray[i] = BASE[m] * (0.75 + 0.5 * noise[i]);
+    }
+    // EDS: clean tint maps (blurred: probe + drift) and count maps (sparse Poisson-like speckle, lightly blurred)
+    tintA = [new Float32Array(N), new Float32Array(N), new Float32Array(N)];
+    cntA = [new Float32Array(N), new Float32Array(N), new Float32Array(N)];
+    const cnt = new Float32Array(N);
+    for (let c = 0; c < 3; c++) {
+      const t = new Float32Array(N);
+      for (let i = 0; i < N; i++) t[i] = TINT[mat[i]][c];
+      tintA[c] = boxBlur(t, WW, H, 2, 2);
+    }
+    for (let i = 0; i < N; i++) {
+      const v = r();
+      cnt[i] = v < 0.62 ? 0 : v < 0.88 ? 0.5 : v < 0.97 ? 1 : 1.8;   // shot-noise counts
+    }
+    const cb = boxBlur(cnt, WW, H, 1, 1);
+    for (let c = 0; c < 3; c++) for (let i = 0; i < N; i++) cntA[c][i] = cb[i] * tintA[c][i];
+    // composite the static world
+    world = document.createElement('canvas'); world.width = WW; world.height = H;
+    const wctx = world.getContext('2d');
+    const img = wctx.createImageData(WW, H);
+    const d = img.data;
+    const grayB = new Float32Array(N), tmpB = new Float32Array(N);
+    blur121(gray, WW, H, tmpB, grayB);    // probe blur
+    for (let i = 0; i < N; i++) compose(i, grayB[i], d, i * 4, 0);
+    wctx.putImageData(img, 0, 0);
+    // band: list of pad/via Cu pixels within BAND rows of the interface
+    band = document.createElement('canvas'); band.width = WW; band.height = 2 * BAND;
+    bandCtx = band.getContext('2d');
+    bandImg = bandCtx.createImageData(WW, 2 * BAND);
+    bandG0 = gray.slice((IF - BAND) * WW, (IF + BAND) * WW);
+    bandG = new Float32Array(bandG0.length); bandT = new Float32Array(bandG0.length); bandB = new Float32Array(bandG0.length);
+    const list = [];
+    for (let y = IF - BAND; y < IF + BAND; y++) for (let x = 0; x < WW; x++) {
+      const i = y * WW + x;
+      if (mat[i] === 2 && reg1[i] === 0) list.push(i);
+    }
+    cuIdx = Int32Array.from(list);
+    // scan-line texture, fixed to the screen (raster rows)
+    scan = document.createElement('canvas'); scan.width = W; scan.height = H;
+    const sctx = scan.getContext('2d');
+    for (let y = 0; y < H; y++) {
+      const v = r();
+      if (v < 0.03) { sctx.fillStyle = `rgba(255,255,255,${0.02 + 0.035 * r()})`; sctx.fillRect(0, y, W, 1); }
+      else { sctx.fillStyle = `rgba(0,0,0,${0.09 * r() * r()})`; sctx.fillRect(0, y, W, 1); }
+    }
+  },
+  render(t) {
+    const u = uOf(t);
+    const pan = DRIFT * t;
+    const out = bandImg.data;
+    const off = (IF - BAND) * WW;
+    bandG.set(bandG0);
+    for (let j = 0; j < cuIdx.length; j++) {
+      const i = cuIdx[j];
+      const y = (i / WW) | 0, x = i - y * WW;
+      const s = sideA[i];
+      let g = haadfCu(cuShade(x, y, s, kA[i], 0, u));
+      const c = gapCov(x, y, s, u);
+      if (c > 0) g *= 1 - 0.95 * c;
+      bandG[i - off] = g;
+    }
+    blur121(bandG, WW, 2 * BAND, bandT, bandB);
+    for (let row = 0; row < 2 * BAND; row++) {
+      const cy = CYW[IF - BAND + row], r0 = row * WW;
+      if (cy === 0) { for (let x = 0; x < WW; x++) compose(r0 + x + off, bandB[r0 + x], out, (r0 + x) * 4, 0); continue; }
+      for (let x = 0; x < WW; x++) {
+        const sx = Math.round(x - pan);
+        const c = sx >= 0 && sx <= W ? cy * CXW[sx] : 0;
+        compose(r0 + x + off, bandB[r0 + x], out, (r0 + x) * 4, c);
+      }
+    }
+    bandCtx.putImageData(bandImg, 0, 0);
+    ctx.drawImage(world, -pan, 0);
+    // skip the band's first/last row (blur edge) by drawing rows 1 .. 2 BAND - 2
+    ctx.drawImage(band, 0, 1, WW, 2 * BAND - 2, -pan, IF - BAND + 1, WW, 2 * BAND - 2);
+    ctx.drawImage(scan, 0, 0);
+  },
+  // Styled text (pass B "0.4 µm"): a STEM / EDS software annotation burned into the image, as in microscope
+  // acquisition software: APA Grotesk 600, pure white fill with a thin near-black outline (2 px outside the glyph,
+  // round joins) and a 1 px hard drop shadow, no plate, no other instrument text. Sits in the darkened calm band.
+  // Static (annotations do not move with the stage drift); legible at t = 0.
+  text(g, word, t, p, info) {
+    const size = Math.round(info.size);
+    g.font = TFX.font(info.fonts.grotesk, size, 600);
+    g.textAlign = 'center'; g.textBaseline = 'alphabetic'; g.lineJoin = 'round';
+    g.fillStyle = 'rgba(0, 0, 0, 0.85)';
+    g.fillText(word, info.x + 1.5, info.baseline + 1.5);
+    g.strokeStyle = 'rgba(4, 4, 8, 0.92)'; g.lineWidth = 4;
+    g.strokeText(word, info.x, info.baseline);
+    g.fillStyle = '#ffffff';
+    g.fillText(word, info.x, info.baseline);
+  },
+});
+
+// separable [1 2 1]/4 blur, src -> dst via tmp
+function blur121(src, w, h, tmp, dst) {
+  for (let y = 0; y < h; y++) {
+    const r = y * w;
+    tmp[r] = src[r]; tmp[r + w - 1] = src[r + w - 1];
+    for (let x = 1; x < w - 1; x++) tmp[r + x] = 0.25 * (src[r + x - 1] + src[r + x + 1]) + 0.5 * src[r + x];
+  }
+  for (let x = 0; x < w; x++) { dst[x] = tmp[x]; dst[(h - 1) * w + x] = tmp[(h - 1) * w + x]; }
+  for (let y = 1; y < h - 1; y++) {
+    const r = y * w;
+    for (let x = 0; x < w; x++) dst[r + x] = 0.25 * (tmp[r + x - w] + tmp[r + x + w]) + 0.5 * tmp[r + x];
+  }
+}
+
+// c in [0, 1]: calm weight (text band); flattens grain contrast / noise / counts toward a dark mean
+function compose(i, g, out, o, c) {
+  let n = 0.8 + 0.4 * noise[i];
+  const L = lowf[i];
+  let k = 0.4;
+  if (c > 0) {
+    const m = mat[i] === 2 ? 0.6 : mat[i] === 3 ? 0.35 : g;
+    g = (g + (m - g) * 0.85 * c) * (1 - 0.6 * c);
+    n = 1 + (n - 1) * (1 - 0.85 * c);
+    k = 0.4 * (1 - 0.8 * c);
+  }
+  const gg = g * n * L;
+  const hi = gg > 0.85 ? (gg - 0.85) * 0.9 : 0;    // detector saturation toward white
+  out[o] = 255 * Math.min(1, gg * tintA[0][i] + k * cntA[0][i] + hi);
+  out[o + 1] = 255 * Math.min(1, gg * tintA[1][i] + k * cntA[1][i] + hi);
+  out[o + 2] = 255 * Math.min(1, gg * tintA[2][i] + k * cntA[2][i] + hi);
+  out[o + 3] = 255;
+}
+</script>
+</body>
+</html>

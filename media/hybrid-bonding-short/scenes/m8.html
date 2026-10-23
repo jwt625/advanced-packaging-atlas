@@ -1,0 +1,227 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>m8 rdl 2um lines</title>
+<script src="../lib/apa.js"></script>
+<script src="../lib/textfx.js"></script>
+</head>
+<body>
+<script>
+// "more to" ladder, m8: reflected-light optical top view of 2 um line / 2 um space Cu RDL (outermost layer M4 of an
+// 8-metal-layer glass-panel RDL, after seed etch). 30 px/um: 4 um pitch = 120 px, measured 1.8 um optical line width
+// = 54 px. Lines come down from the top and end in one row at y = 500 (rounded ends); y 500-600 is bare dielectric
+// (the text band); y = 600 is the edge of a wide Cu plane below (constructed, declared in m8.notes.md).
+// Motion: stage drift 10 px/s. Valid for t in [0, 3]. Sources and choices: m8.notes.md.
+const { W, H, LINE_Y } = APA;
+const S = 30;                                 // px per um (chosen)
+const PITCH = 4, LW = 1.8;                    // um: 2/2 um L/S target; 1.8 um measured, optical (ectc51909.2023.00298 p.3)
+const END_Y = 500;                            // line ends (chosen: 100 px = 3.3 um above the plane edge)
+const MX = 48, SW = W + 2 * MX;               // margin for the drift
+const DRIFT = 10;                             // px/s
+
+const DIEL = [33, 30, 28];                    // ABF build-up dielectric under brightfield: near-black brown-grey
+const CU = [236, 158, 118];                   // Cu, reflected light: orange-salmon
+const CU_HI = [250, 196, 166];                // lighter line centre
+const CU_EDGE = [196, 108, 70];               // darker, diffraction-rounded edges
+
+let ctx, sample, vignC;
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rgb = (c, a = 1) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
+function mk(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+function makeNoise(r, n = 64) {
+  const g = new Float32Array(n * n);
+  for (let i = 0; i < g.length; i++) g[i] = r();
+  return (x, y) => {
+    const xi = Math.floor(x), yi = Math.floor(y), fx = x - xi, fy = y - yi;
+    const sx = fx * fx * (3 - 2 * fx), sy = fy * fy * (3 - 2 * fy);
+    const at = (i, j) => g[((j % n + n) % n) * n + ((i % n + n) % n)];
+    const a = at(xi, yi) + (at(xi + 1, yi) - at(xi, yi)) * sx;
+    const b = at(xi, yi + 1) + (at(xi + 1, yi + 1) - at(xi, yi + 1)) * sx;
+    return a + (b - a) * sy;
+  };
+}
+
+function lineShape(c, xc, w, wob) {
+  // vertical line from above the frame to a rounded end at END_Y; slight low-frequency edge wobble
+  const r = w / 2, yEnd = END_Y - r;
+  c.beginPath();
+  c.moveTo(xc - r + wob(-20, 0), -20);
+  for (let y = 0; y <= yEnd; y += 20) c.lineTo(xc - r + wob(y, 0), y);
+  c.arc(xc, yEnd, r, Math.PI, 0, true);
+  for (let y = Math.floor(yEnd / 20) * 20; y >= -20; y -= 20) c.lineTo(xc + r + wob(y, 1), y);
+  c.closePath();
+}
+
+function buildSample() {
+  const r = APA.rng(8801);
+  const out = mk(SW, H), c = out.getContext('2d');
+  const mask = mk(SW, H), m = mask.getContext('2d');
+  c.fillStyle = rgb(DIEL); c.fillRect(0, 0, SW, H);
+  c.translate(MX, 0); m.translate(MX, 0);
+  m.fillStyle = '#fff';
+  const wn = makeNoise(APA.rng(8802), 64);
+  const p = PITCH * S;
+  for (let k = -9; k <= 9; k++) {
+    const xc = 960 + k * p;
+    const w = LW * S * (0.95 + 0.1 * r());                 // +/- 5 % width, line to line
+    const seed = r() * 40;
+    const wob = (y, side) => 1.4 * (wn(seed + y / 140, side * 7 + k) - 0.5);
+    // cross profile: dark edges, light centre
+    const g = c.createLinearGradient(xc - w / 2, 0, xc + w / 2, 0);
+    g.addColorStop(0, rgb(CU_EDGE)); g.addColorStop(0.22, rgb(CU));
+    g.addColorStop(0.5, rgb(CU_HI)); g.addColorStop(0.78, rgb(CU)); g.addColorStop(1, rgb(CU_EDGE));
+    lineShape(c, xc, w, wob);
+    c.fillStyle = g; c.fill();
+    lineShape(m, xc, w, wob); m.fill();
+    // darker, browner tips (last ~1.3 um)
+    c.save();
+    lineShape(c, xc, w, wob); c.clip();
+    const tg = c.createLinearGradient(0, END_Y - 46, 0, END_Y);
+    tg.addColorStop(0, 'rgba(120,52,24,0)'); tg.addColorStop(1, 'rgba(120,52,24,0.5)');
+    c.fillStyle = tg; c.fillRect(xc - w, END_Y - 46, 2 * w, 50);
+    c.restore();
+  }
+  // wide Cu plane below y = 600 (constructed): same Cu, slightly brighter, darker rim at its edge
+  const pg = c.createLinearGradient(0, LINE_Y, 0, LINE_Y + 40);
+  pg.addColorStop(0, rgb(CU_EDGE)); pg.addColorStop(0.35, rgb([244, 172, 134])); pg.addColorStop(1, rgb([246, 178, 140]));
+  c.fillStyle = pg; c.fillRect(-MX, LINE_Y, SW, H - LINE_Y);
+  m.fillRect(-MX, LINE_Y, SW, H - LINE_Y);
+  c.setTransform(1, 0, 0, 1, 0, 0);
+
+  // Cu grain mottling and sparse dark specks (static, seeded); faint noise on the dielectric
+  const img = c.getImageData(0, 0, SW, H), a = img.data;
+  const md = m.getImageData(0, 0, SW, H).data;
+  const g1 = makeNoise(APA.rng(8803), 128), g2 = makeNoise(APA.rng(8804), 128);
+  const rs = APA.rng(8805);
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < SW; x++) {
+      const i = 4 * (y * SW + x);
+      if (md[i + 3] > 128) {
+        const f = g1(x / 2.6, y / 2.6), q = g2(x / 9, y / 9), lo = g1(x / 260 + 17, y / 260 + 5);
+        let d = (f - 0.5) * 16 + (q - 0.5) * 12 + (lo - 0.5) * 14 + (rs() - 0.5) * 8;
+        if (f < 0.12) d -= (0.12 - f) * 600;                  // sparse dark speck
+        a[i] += d; a[i + 1] += d * 1.05; a[i + 2] += d * 0.95;
+      } else {
+        const n = (rs() - 0.5) * 5 + (g2(x / 60, y / 60) - 0.5) * 4;
+        a[i] += n; a[i + 1] += n; a[i + 2] += n;
+      }
+    }
+  }
+  c.putImageData(img, 0, 0);
+  // 2 um lines sit near the optical resolution limit: soft edges
+  const soft = mk(SW, H), sc = soft.getContext('2d');
+  sc.filter = 'blur(1.8px)';
+  sc.drawImage(out, 0, 0);
+  return soft;
+}
+
+function buildVignette() {
+  vignC = mk(W, H);
+  const v = vignC.getContext('2d');
+  const R = Math.hypot(W, H) / 2;
+  const g = v.createRadialGradient(960, 560, 0.3 * R, 960, 560, 1.05 * R);
+  g.addColorStop(0, 'rgb(255,255,255)'); g.addColorStop(0.6, 'rgb(246,244,240)');
+  g.addColorStop(1, 'rgb(206,200,192)');
+  v.fillStyle = g; v.fillRect(0, 0, W, H);
+}
+
+// ---- overlay word ("more to"): lettering patterned in the same Cu layer as the RDL.
+// Light tone (unflipped, band over the dark dielectric): Cu glyphs rendered like the lines (orange-salmon, lighter
+// centre on the eroded core, darker diffraction-rounded edges, grain mottling with sparse dark specks).
+// Dark tone (flip, as m14: band over the wide Cu plane): glyphs cut out of the plane down to the dark dielectric, with
+// the plane's darker rim around each opening. Both get the scene's 1.8 px optical blur (2 um features near the
+// resolution limit). Grain is a screen-fixed static tile. Size = info.size.
+function relLum(css) {
+  const mm = /^#([0-9a-f]{6})$/i.exec(css || '');
+  if (!mm) return null;
+  const v = parseInt(mm[1], 16), lin = (c) => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+  return 0.2126 * lin(v >> 16) + 0.7152 * lin((v >> 8) & 255) + 0.0722 * lin(v & 255);
+}
+function erode(m, wd) {                                 // glyph core: mask kept only where all 8 offsets cover it
+  const c = mk(m.w, m.h), k = c.getContext('2d');
+  k.drawImage(m.canvas, 0, 0);
+  k.globalCompositeOperation = 'destination-in';
+  for (let i = 0; i < 8; i++) {
+    const a = (i * Math.PI) / 4;
+    k.drawImage(m.canvas, Math.round(wd * Math.cos(a)), Math.round(wd * Math.sin(a)));
+  }
+  return c;
+}
+let cuGrain = null;
+function grainTile() {                                  // 256 x 256 static Cu grain tile: signed shading, seeded
+  if (cuGrain) return cuGrain;
+  const n = 256, g1 = makeNoise(APA.rng(8811), 64), rs = APA.rng(8812);
+  const img = new ImageData(n, n), d = img.data;
+  for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
+    const f = g1(x / 2.6, y / 2.6), q = g1(x / 9 + 31, y / 9 + 7);
+    let v = (f - 0.5) * 0.9 + (q - 0.5) * 0.7 + (rs() - 0.5) * 0.4;
+    if (f < 0.12) v -= (0.12 - f) * 30;                // sparse dark speck
+    const i = 4 * (y * n + x);
+    d[i] = d[i + 1] = d[i + 2] = v > 0 ? 255 : 0; d[i + 3] = Math.round(255 * Math.min(1, Math.abs(v) * 0.12));
+  }
+  cuGrain = mk(n, n); cuGrain.getContext('2d').putImageData(img, 0, 0);
+  return cuGrain;
+}
+function rdlWord(g, word, info) {
+  const size = info.size;
+  const m = TFX.mask(word, { family: info.fonts.grotesk, size, weight: 600, pad: Math.ceil(size * 0.3) });
+  const L = info.color ? relLum(info.color) : null;
+  const dark = L == null ? info.tone === 'dark' : L < 0.18;
+  const left = Math.round(info.x - m.width / 2 - m.ox), top = Math.round(info.baseline - m.oy);
+  const layer = mk(m.w, m.h), c = layer.getContext('2d');
+  if (!dark) {
+    c.drawImage(TFX.fill(m, rgb(CU_EDGE)), 0, 0);                                  // diffraction-darkened edges
+    const body = mk(m.w, m.h), bk = body.getContext('2d');
+    bk.filter = 'blur(1.5px)'; bk.drawImage(erode(m, Math.max(2, Math.round(size * 0.03))), 0, 0);
+    bk.filter = 'none'; bk.globalCompositeOperation = 'source-in';
+    bk.fillStyle = rgb(CU); bk.fillRect(0, 0, m.w, m.h);
+    c.drawImage(body, 0, 0);
+    const hi = mk(m.w, m.h), hk = hi.getContext('2d');                             // lighter centre
+    hk.filter = 'blur(2px)'; hk.drawImage(erode(m, Math.max(3, Math.round(size * 0.055))), 0, 0);
+    hk.filter = 'none'; hk.globalCompositeOperation = 'source-in';
+    hk.fillStyle = rgb(CU_HI); hk.fillRect(0, 0, m.w, m.h);
+    c.drawImage(hi, 0, 0);
+    c.globalCompositeOperation = 'source-atop';                                     // Cu grain, screen-fixed
+    c.translate(-left, -top); c.fillStyle = c.createPattern(grainTile(), 'repeat'); c.fillRect(left, top, m.w, m.h);
+    c.setTransform(1, 0, 0, 1, 0, 0);
+  } else {
+    const rim = TFX.fill(m, rgb(CU_EDGE)), rw = Math.max(3, Math.round(size * 0.04)); // plane's darker rim
+    for (let i = 0; i < 8; i++) {
+      const a = (i * Math.PI) / 4;
+      c.drawImage(rim, Math.round(rw * Math.cos(a)), Math.round(rw * Math.sin(a)));
+    }
+    c.drawImage(TFX.fill(m, rgb(DIEL)), 0, 0);                                     // opening to the dielectric
+  }
+  const soft = mk(m.w, m.h), sk = soft.getContext('2d');
+  sk.filter = 'blur(1.8px)'; sk.drawImage(layer, 0, 0);
+  g.drawImage(soft, left, top);
+}
+
+APA.scene({
+  meta: { text: 'light' },
+  text(g, word, t, p, info) { rdlWord(g, word, info); },
+  async init(p) {
+    ({ ctx } = APA.canvas('2d'));
+    sample = buildSample();
+    buildVignette();
+    this.render(0, p);
+    ctx.getImageData(0, 0, 1, 1);
+    const wc = mk(W, H).getContext('2d');            // warm-up of the word path (fonts, patterns, filters)
+    rdlWord(wc, 'more to', { fonts: APA.FONTS, size: 64, color: '#141414', tone: 'dark', x: 960, baseline: 565 });
+    rdlWord(wc, 'more to', { fonts: APA.FONTS, size: 64, color: '#f4f1ea', tone: 'light', x: 960, baseline: 565 });
+    wc.getImageData(0, 0, 1, 1);
+  },
+  render(t, p) {
+    const tt = clamp(t, 0, 3);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.drawImage(sample, -MX - DRIFT * tt, 0);
+    ctx.globalCompositeOperation = 'multiply';
+    ctx.drawImage(vignC, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+  },
+});
+</script>
+</body>
+</html>

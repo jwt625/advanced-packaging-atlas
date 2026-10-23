@@ -1,0 +1,266 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>m5 tgv optical</title>
+<script src="../lib/apa.js"></script>
+<script src="../lib/textfx.js"></script>
+</head>
+<body>
+<script>
+// "more to" m07: reflected-light optical top view of an etched, unmetallized through-glass via (TGV) array in 200 um
+// laser-modified borosilicate glass. 75 um pitch, 49.49 um holes (ectc51529.2024.00092-a-i1).
+// 3 px/um: pitch 225 px, hole 148.5 px. Lowest row centred at y = 426 (hole bottoms at 500).
+// y = 600: the diced coupon edge (thin bright line), dark stage below. Motion: stage drift 20 px/s left.
+// Sources and choices: m5.notes.md.
+const { W, H, LINE_Y } = APA;
+const S = 3;                         // px per um (chosen)
+const PITCH = 75 * S;                // 225 px
+const R = 49.49 * S / 2;             // 74.2 px hole radius at the top surface
+const X0 = 960;                      // one column centred on x = 960
+const Y0 = 500 - R;                  // lowest row centre (hole bottoms at y = 500)
+const DRIFT = 20;                    // px/s, content moves left
+const MARGIN = 72;                   // world wider than the frame (covers 3.4 s of drift)
+const WW = W + MARGIN;
+
+const FIELD = [158, 160, 178];       // glass on the stage, blue-grey / lavender cast
+const HOLE = [50, 52, 64];           // through-hole: dark slate
+const RIM = [104, 106, 124];         // tapered wall just inside the top edge
+const STAGE = [14, 15, 19];
+
+let ctx, world, noiseC;
+
+const sat = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+function gauss(r) { return (r() + r() + r() + r() - 2) * 1.732; }
+// low-frequency field from a coarse grid, smoothstep-interpolated; normalized to zero mean, unit std
+function lowField(w, h, seed, cell) {
+  const r = APA.rng(seed), gw = Math.ceil(w / cell) + 2, gh = Math.ceil(h / cell) + 2;
+  const g = new Float32Array(gw * gh);
+  for (let i = 0; i < g.length; i++) g[i] = gauss(r);
+  const a = new Float32Array(w * h);
+  for (let y = 0; y < h; y++) {
+    const fy = y / cell, iy = Math.floor(fy), ty = fy - iy, sy = ty * ty * (3 - 2 * ty);
+    for (let x = 0; x < w; x++) {
+      const fx = x / cell, ix = Math.floor(fx), tx = fx - ix, sx = tx * tx * (3 - 2 * tx);
+      const a0 = g[iy * gw + ix] * (1 - sx) + g[iy * gw + ix + 1] * sx;
+      const a1 = g[(iy + 1) * gw + ix] * (1 - sx) + g[(iy + 1) * gw + ix + 1] * sx;
+      a[y * w + x] = a0 * (1 - sy) + a1 * sy;
+    }
+  }
+  let m = 0, v = 0;
+  for (let i = 0; i < a.length; i++) m += a[i];
+  m /= a.length;
+  for (let i = 0; i < a.length; i++) v += (a[i] - m) ** 2;
+  const s = Math.sqrt(v / a.length) || 1;
+  for (let i = 0; i < a.length; i++) a[i] = (a[i] - m) / s;
+  return a;
+}
+
+function buildWorld() {
+  const w = WW, h = H;
+  const r = APA.rng(5101);
+  // per-hole size scatter (+/- 1 %) and sub-pixel position scatter, keyed by (column, row)
+  const ncol = Math.ceil((w - X0) / PITCH) + 3, kmin = -Math.ceil(X0 / PITCH) - 1;
+  const nrow = 4;
+  const holes = new Map();
+  for (let k = kmin; k <= ncol; k++) {
+    for (let j = 0; j < nrow; j++) {
+      holes.set(`${k},${j}`, { dr: (r() - 0.5) * 2 * 0.01 * R, dx: (r() - 0.5) * 0.8, dy: (r() - 0.5) * 0.8 });
+    }
+  }
+  const illum = lowField(w, h, 5111, 380);    // slow illumination nonuniformity
+  const haze = lowField(w, h, 5113, 26);      // faint surface haze / residue
+  const edgeV = lowField(w, 1, 5117, 70);     // edge-line brightness along x
+  // a few surface particles, kept out of the text band and away from the edge
+  const parts = [];
+  for (let n = 0; n < 9; n++) {
+    let px = r() * w, py = 30 + r() * 440;
+    if (px > 520 && px < 1400 && py > 470) py -= 120;
+    parts.push({ x: px, y: py, rad: 1.2 + r() * 2.2, a: 0.35 + r() * 0.35 });
+  }
+  const img = new ImageData(w, h);
+  const d = img.data;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const i = y * w + x, o = 4 * i;
+      let c;
+      if (y >= LINE_Y) {
+        // dark stage below the diced edge; short scattered glow just under the edge
+        const dy = y - LINE_Y + 0.5;
+        const g = 0.9 * Math.exp(-dy / 1.2) + 0.10 * Math.exp(-dy / 10);
+        const e = 1 + 0.12 * edgeV[x];
+        c = STAGE.map((v, q) => v + g * e * [210, 214, 228][q] + 3 * illum[i]);
+      } else {
+        // vignette (screen-ish; the world is only 72 px wider than the frame) and illumination
+        const vx = (x - w / 2) / (w / 2), vy = (y - 380) / 640;
+        const vig = 1 - 0.10 * (vx * vx + vy * vy);
+        const fl = vig * (1 + 0.025 * illum[i] + 0.008 * haze[i]);
+        let col = FIELD.map((v) => v * fl);
+        // nearest hole
+        const k = Math.round((x - X0) / PITCH);
+        const j = Math.max(0, Math.round((Y0 - y) / PITCH));
+        const hp = holes.get(`${k},${j}`);
+        if (hp) {
+          const cx = X0 + k * PITCH + hp.dx, cy = Y0 - j * PITCH + hp.dy;
+          const rr = R + hp.dr;
+          const dist = Math.hypot(x - cx, y - cy);
+          const cov = sat(rr + 0.6 - dist);                 // ~1.2 px anti-aliased top edge
+          if (cov > 0) {
+            const din = rr - dist;                           // depth inside the top edge, px
+            // tapered wall ring just inside the edge, fading into the dark through-hole
+            const ring = Math.exp(-((din - 4.5) ** 2) / 10) * 0.85 + 0.25 * Math.exp(-din / 9);
+            // faint out-of-focus waist ring (hourglass via), very low contrast
+            const waist = 0.06 * Math.exp(-((din - 14) ** 2) / 30);
+            const angle = Math.atan2(y - cy, x - cx);
+            const lit = 1 + 0.10 * Math.cos(angle + 2.3);     // oblique component of the illumination
+            const hole = HOLE.map((v, q) => (v + (RIM[q] - v) * sat(ring * lit) + waist * 60) * (0.97 + 0.03 * fl));
+            // thin dark contact line exactly at the top edge
+            const lineDark = Math.exp(-((din - 0.6) ** 2) / 1.2) * 0.35;
+            col = col.map((v, q) => v * (1 - cov) + hole[q] * cov - lineDark * 40 * cov);
+          } else {
+            // slight bright halo of the flat glass just outside each hole edge
+            col = col.map((v) => v + 7 * Math.exp(-(dist - rr) / 3));
+          }
+        }
+        // the coupon edge from above: a 1-2 px bright chamfer highlight and a faint darkening just inside it
+        const de = LINE_Y - y - 0.5;
+        const e = 1 + 0.15 * edgeV[x];
+        col = col.map((v, q) => v - 28 * Math.exp(-((de - 4) ** 2) / 6) + e * 95 * Math.exp(-de / 1.1));
+        c = col;
+      }
+      d[o] = c[0]; d[o + 1] = c[1]; d[o + 2] = c[2]; d[o + 3] = 255;
+    }
+  }
+  const cvs = document.createElement('canvas');
+  cvs.width = w; cvs.height = h;
+  const cx = cvs.getContext('2d');
+  cx.putImageData(img, 0, 0);
+  // particles: small dark specks with a soft halo
+  for (const p of parts) {
+    const gr = cx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.rad * 2.2);
+    gr.addColorStop(0, `rgba(40,40,52,${p.a})`);
+    gr.addColorStop(0.45, `rgba(40,40,52,${p.a * 0.6})`);
+    gr.addColorStop(1, 'rgba(40,40,52,0)');
+    cx.fillStyle = gr;
+    cx.beginPath(); cx.arc(p.x, p.y, p.rad * 2.2, 0, 2 * Math.PI); cx.fill();
+  }
+  return cvs;
+}
+
+// screen-fixed, static sensor noise (overlay, 0.5 = neutral)
+function buildNoise() {
+  const r = APA.rng(5131);
+  const img = new ImageData(W, H);
+  const d32 = new Uint32Array(img.data.buffer);
+  for (let i = 0; i < W * H; i++) {
+    const g = Math.round(255 * sat(0.5 + 0.014 * gauss(r)));
+    d32[i] = 0xff000000 | (g << 16) | (g << 8) | g;
+  }
+  const c = document.createElement('canvas');
+  c.width = W; c.height = H;
+  c.getContext('2d').putImageData(img, 0, 0);
+  return c;
+}
+
+// ---- overlay word ("more to"): lettering etched / laser-written into the glass, with the optical image's softness.
+// Dark tone (unflipped, band over the glass field): an etched recess like the via holes (dark slate floor, lighter
+// tapered-wall rim just inside the edge, thin dark contact line, faint bright halo of the flat glass outside).
+// Light tone (flip, band over the dark stage): laser-modified frosted glass scattering light (bright, with a soft
+// scatter glow). Both carry a hex raster of laser spots and a 0.9 px optical blur. Size = info.size.
+function relLum(css) {
+  const mm = /^#([0-9a-f]{6})$/i.exec(css || '');
+  if (!mm) return null;
+  const v = parseInt(mm[1], 16), lin = (c) => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+  return 0.2126 * lin(v >> 16) + 0.7152 * lin((v >> 8) & 255) + 0.0722 * lin(v & 255);
+}
+function hexRgb(css, fb) {
+  const mm = /^#([0-9a-f]{6})$/i.exec(css || '');
+  if (!mm) return fb;
+  const v = parseInt(mm[1], 16);
+  return [v >> 16, (v >> 8) & 255, v & 255];
+}
+function mkC(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+const mix = (a, b, k) => a.map((v, i) => v + (b[i] - v) * k);
+const css = (c, a = 1) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
+// hex raster of laser spots (pitch px), anchored at the pen origin so a growing word keeps its phase near the baseline
+function spotRaster(m, pitch, rad, color) {
+  const c = mkC(m.w, m.h), k = c.getContext('2d');
+  k.fillStyle = color;
+  const dy = pitch * 0.866;
+  const j0 = Math.floor(-m.oy / dy) - 1, j1 = Math.ceil((m.h - m.oy) / dy) + 1;
+  for (let j = j0; j <= j1; j++) {
+    const y = m.oy + j * dy, sh = (j & 1) * pitch / 2;
+    for (let x = ((m.ox + sh) % pitch) - pitch; x < m.w + pitch; x += pitch) {
+      k.beginPath(); k.arc(x, y, rad, 0, 2 * Math.PI); k.fill();
+    }
+  }
+  return TFX.fill(m, c);
+}
+function glassWord(g, word, info) {
+  const m = TFX.mask(word, { family: info.fonts.grotesk, size: info.size, weight: 600 });
+  const L = info.color ? relLum(info.color) : null;
+  const dark = L == null ? info.tone === 'dark' : L < 0.18;
+  const ink = hexRgb(info.color, dark ? [20, 20, 20] : [244, 241, 234]);
+  const pitch = Math.max(4, info.size / 16);
+  const layer = mkC(m.w, m.h), c = layer.getContext('2d');
+  if (dark) {
+    // halo of the flat glass just outside the recess edge (as around each via hole)
+    c.save(); c.filter = 'blur(3px)'; c.globalAlpha = 0.35;
+    c.drawImage(TFX.fill(m, css(mix(FIELD, [255, 255, 255], 0.35))), 0, 0); c.restore();
+    c.drawImage(TFX.fill(m, css(mix(HOLE, ink, 0.75))), 0, 0);                       // recess floor
+    c.globalAlpha = 0.16;
+    c.drawImage(spotRaster(m, pitch, pitch * 0.30, css(RIM)), 0, 0);                    // laser spots
+    c.globalAlpha = 0.8;
+    c.drawImage(TFX.outline(m, { width: Math.max(2, info.size * 0.036), color: css(RIM) }), 0, 0); // tapered wall
+    c.globalAlpha = 0.85;
+    c.drawImage(TFX.outline(m, { width: 1, color: 'rgb(26,27,36)' }), 0, 0);            // contact line at the edge
+  } else {
+    const frost = mix(FIELD, ink, 0.6);
+    c.save(); c.filter = 'blur(7px)'; c.globalAlpha = 0.45;                              // scatter glow
+    c.drawImage(TFX.fill(m, css(frost)), 0, 0); c.restore();
+    c.drawImage(TFX.fill(m, css(mix(frost, [0, 0, 0], 0.12))), 0, 0);                    // modified glass
+    c.drawImage(spotRaster(m, pitch, pitch * 0.36, css(ink)), 0, 0);                     // laser spots, brightest
+    c.globalAlpha = 0.9;
+    c.drawImage(TFX.outline(m, { width: 1.2, color: css(mix(ink, [255, 255, 255], 0.5)) }), 0, 0); // bright edge
+  }
+  // optical softness, applied on the small word canvas (a filter on the 1920x1080 overlay costs ~50 ms)
+  const soft = mkC(m.w, m.h), sk = soft.getContext('2d');
+  sk.filter = 'blur(0.9px)';
+  sk.drawImage(layer, 0, 0);
+  TFX.blit(g, soft, m, info.x, info.baseline);
+}
+
+APA.scene({
+  meta: { text: 'dark' },
+  text(g, word, t, p, info) { glassWord(g, word, info); },
+  async init() {
+    ({ ctx } = APA.canvas('2d'));
+    world = buildWorld();
+    noiseC = buildNoise();
+    // warm-up: first upload of the two large canvases happens here, not in the first rendered frame
+    ctx.drawImage(world, 0, 0);
+    ctx.globalCompositeOperation = 'overlay';
+    ctx.drawImage(noiseC, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.getImageData(0, 0, 1, 1);
+    // warm-up of the word path (font raster, canvas paths) so the first rendered frame stays in budget
+    const wc = mkC(W, H).getContext('2d');
+    glassWord(wc, 'more to', { fonts: APA.FONTS, size: 64, color: '#141414', tone: 'dark', x: 960, baseline: 565 });
+    glassWord(wc, 'more to', { fonts: APA.FONTS, size: 64, color: '#f4f1ea', tone: 'light', x: 960, baseline: 565 });
+    wc.getImageData(0, 0, 1, 1);
+  },
+  render(t) {
+    const tt = Math.max(0, Math.min(t, 3.4));
+    const off = DRIFT * tt;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.imageSmoothingEnabled = true;
+    ctx.drawImage(world, -off, 0);
+    ctx.globalCompositeOperation = 'overlay';
+    ctx.drawImage(noiseC, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+  },
+});
+</script>
+</body>
+</html>

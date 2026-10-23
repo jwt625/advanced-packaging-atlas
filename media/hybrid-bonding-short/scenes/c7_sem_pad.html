@@ -1,0 +1,301 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>c7 sem pad</title>
+<script src="../lib/apa.js"></script>
+</head>
+<body>
+<script>
+// Pass C, modality 7: high-magnification top view of one 0.32 um Cu bond pad of the 0.64 um lattice
+// (substitute for plan-view TEM, see refs_passC.md section 7). Pad edge (outer barrier boundary) on y = 600, pad above.
+// v=1: ion-induced SE image (FIB, Ga+), channeling contrast: Cu grains as flat grey tiles, twins as straight bands,
+//      TaN/Ta barrier ring, dielectric dark (charged insulator). Motion: slow zoom about (960, 600).
+// v=2: backscattered-electron image at higher magnification: Z contrast (Ta ring brightest, Cu bright, dielectric
+//      dark) with weak electron-channeling grain contrast. Motion: slow stage drift.
+// Sources: c7_sem_pad.notes.md.
+const { W, H, LINE_Y } = APA;
+const V = APA.params.v === '2' ? 2 : 1;
+
+// ---- geometry (screen px) ----
+const S = V === 1 ? 2400 : 3600;          // px per um
+const HP = 0.16 * S;                      // pad half side (0.32 um pad, derived from 25 % density at 0.64 um pitch)
+const RC = 0.045 * S;                     // corner radius (estimate from the rounded-square openings in the refs)
+const BAR = 0.006 * S;                    // TaN/Ta barrier, 6 nm (assumed; not found in the atlas)
+const GD = 0.045 * S;                     // mean grain diameter 45 nm (FG Cu, different TV)
+const CX = V === 1 ? 960 : 300 + HP;      // pad centre x
+const CY = LINE_Y - HP;                   // pad bottom edge on y = 600
+const MARGIN = V === 1 ? 0 : 72;
+const WW = W + MARGIN;
+const DRIFT = 20;                         // v2 px/s
+const ZOOM = 0.012;                       // v1 relative zoom per s, about (960, 600)
+
+let ctx, world, noiseC;
+
+function sdRoundBox(px, py, hx, hy, r) {
+  const qx = Math.abs(px) - hx + r, qy = Math.abs(py) - hy + r;
+  const ox = Math.max(qx, 0), oy = Math.max(qy, 0);
+  return Math.hypot(ox, oy) + Math.min(Math.max(qx, qy), 0) - r;
+}
+function gauss(r) { return (r() + r() + r() + r() - 2) * 1.732; }
+function blur(a, w, h, rad, passes) {
+  const tmp = new Float32Array(a.length);
+  for (let p = 0; p < passes; p++) {
+    for (let y = 0; y < h; y++) {
+      let s = 0; const o = y * w;
+      for (let x = -rad; x <= rad; x++) s += a[o + Math.min(w - 1, Math.max(0, x))];
+      for (let x = 0; x < w; x++) {
+        tmp[o + x] = s / (2 * rad + 1);
+        s += a[o + Math.min(w - 1, x + rad + 1)] - a[o + Math.max(0, x - rad)];
+      }
+    }
+    for (let x = 0; x < w; x++) {
+      let s = 0;
+      for (let y = -rad; y <= rad; y++) s += tmp[Math.min(h - 1, Math.max(0, y)) * w + x];
+      for (let y = 0; y < h; y++) {
+        a[y * w + x] = s / (2 * rad + 1);
+        s += tmp[Math.min(h - 1, y + rad + 1) * w + x] - tmp[Math.max(0, y - rad) * w + x];
+      }
+    }
+  }
+  return a;
+}
+function normalize(a) {
+  let m = 0, v = 0;
+  for (let i = 0; i < a.length; i++) m += a[i];
+  m /= a.length;
+  for (let i = 0; i < a.length; i++) v += (a[i] - m) ** 2;
+  const s = Math.sqrt(v / a.length) || 1;
+  for (let i = 0; i < a.length; i++) a[i] = (a[i] - m) / s;
+  return a;
+}
+function field(w, h, seed, rad, passes) {
+  const r = APA.rng(seed), a = new Float32Array(w * h);
+  for (let i = 0; i < a.length; i++) a[i] = gauss(r);
+  return normalize(blur(a, w, h, rad, passes));
+}
+function lowField(w, h, seed, cell) {
+  const r = APA.rng(seed), gw = Math.ceil(w / cell) + 2, gh = Math.ceil(h / cell) + 2;
+  const g = new Float32Array(gw * gh);
+  for (let i = 0; i < g.length; i++) g[i] = gauss(r);
+  const a = new Float32Array(w * h);
+  for (let y = 0; y < h; y++) {
+    const fy = y / cell, iy = Math.floor(fy), ty = fy - iy, sy = ty * ty * (3 - 2 * ty);
+    for (let x = 0; x < w; x++) {
+      const fx = x / cell, ix = Math.floor(fx), tx = fx - ix, sx = tx * tx * (3 - 2 * tx);
+      const a0 = g[iy * gw + ix] * (1 - sx) + g[iy * gw + ix + 1] * sx;
+      const a1 = g[(iy + 1) * gw + ix] * (1 - sx) + g[(iy + 1) * gw + ix + 1] * sx;
+      a[y * w + x] = a0 * (1 - sy) + a1 * sy;
+    }
+  }
+  return normalize(a);
+}
+const sat = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+
+// ---- grains: power diagram on a jittered grid (cell area = mean grain area), log-normal-like size spread ----
+function buildGrains() {
+  const r = APA.rng(V === 1 ? 7001 : 7013);
+  const a = 0.886 * GD;                               // a^2 = pi/4 GD^2
+  const x0 = CX - HP - 2 * a, y0 = CY - HP - 2 * a;
+  const nx = Math.ceil((2 * HP + 4 * a) / a), ny = Math.ceil((2 * HP + 4 * a) / a);
+  const g = [];
+  for (let j = 0; j < ny; j++) {
+    for (let i = 0; i < nx; i++) {
+      const sx = x0 + (i + r()) * a, sy = y0 + (j + r()) * a;
+      const wt = (0.42 * a) ** 2 * Math.max(-2, Math.min(2, gauss(r)));
+      // channeling tone: orientation-dependent, uniform spread
+      const tone = r();
+      // annealing twins: 1-4 straight parallel lamellae across the grain, one second tone
+      let twin = null;
+      if (r() < 0.45) {
+        const n = 1 + Math.floor(r() * r() * 4), iv = [];
+        let p = -0.7 * a + r() * 0.5 * a;
+        for (let k = 0; k < n && p < 0.8 * a; k++) {
+          const wl = (0.08 + 0.2 * r()) * a;
+          iv.push([p, p + wl]);
+          p += wl + (0.08 + 0.3 * r()) * a;
+        }
+        let t2 = r();
+        if (Math.abs(t2 - tone) < 0.25) t2 = (t2 + 0.5) % 1;
+        twin = { th: r() * Math.PI, iv, tone: t2 };
+      }
+      const gdir = r() * 2 * Math.PI;
+      g.push({ x: sx, y: sy, wt, tone, twin, gx: Math.cos(gdir), gy: Math.sin(gdir) });
+    }
+  }
+  return { g, a, x0, y0, nx, ny };
+}
+
+function buildWorld() {
+  const w = WW, h = H;
+  const G = buildGrains();
+  const val = new Float32Array(w * h);
+  const lab = new Int32Array(w * h).fill(-1);
+  const lf = lowField(w, h, V === 1 ? 7101 : 7109, 260);
+  const sp = field(w, h, V === 1 ? 7201 : 7207, 1, 1);
+  // domain warp of the grain tessellation: curved, irregular boundaries instead of straight Voronoi edges
+  const wx = lowField(w, h, V === 1 ? 7401 : 7403, Math.round(1.3 * G.a));
+  const wy = lowField(w, h, V === 1 ? 7405 : 7407, Math.round(1.3 * G.a));
+  const WA = 0.07 * G.a;
+  // pass 1: labels and base tones
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const i = y * w + x;
+      const d = sdRoundBox(x - CX, y - CY, HP, HP, RC);      // < 0 inside the pad opening
+      if (d >= 1) {                                          // dielectric
+        val[i] = V === 1
+          ? 0.065 + 0.012 * lf[i] + 0.012 * sp[i] + 0.10 * Math.exp(-(d - 1) / 3)
+          : 0.13 + 0.01 * lf[i] + 0.02 * sp[i] + 0.05 * Math.exp(-(d - 1) / 6);
+        continue;
+      }
+      const barT = V === 1 ? 0.50 + 0.02 * sp[i] : 0.84 + 0.015 * sp[i];
+      if (d > -BAR) {                                        // barrier ring (AA on the outer boundary)
+        const dielV = V === 1 ? 0.10 : 0.16;
+        const cov = sat(0.5 - d);
+        val[i] = barT * cov + dielV * (1 - cov) + (V === 1 ? 0.12 * Math.exp(-(-d) / 2) : 0);
+        continue;
+      }
+      // Cu: nearest power-diagram site
+      const qx = x + WA * wx[i], qy = y + WA * wy[i];
+      const ci = Math.floor((qx - G.x0) / G.a), cj = Math.floor((qy - G.y0) / G.a);
+      let best = 1e30, bk = -1;
+      for (let dj = -2; dj <= 2; dj++) {
+        const jj = cj + dj; if (jj < 0 || jj >= G.ny) continue;
+        for (let di = -2; di <= 2; di++) {
+          const ii = ci + di; if (ii < 0 || ii >= G.nx) continue;
+          const k = jj * G.nx + ii, s = G.g[k];
+          const e = (qx - s.x) ** 2 + (qy - s.y) ** 2 - s.wt;
+          if (e < best) { best = e; bk = k; }
+        }
+      }
+      const s = G.g[bk];
+      let tone = s.tone, sub = 0;
+      if (s.twin) {
+        const n = (x - s.x) * Math.cos(s.twin.th) + (y - s.y) * Math.sin(s.twin.th);
+        for (const [p0, p1] of s.twin.iv) if (n >= p0 && n < p1) { tone = s.twin.tone; sub = 1; break; }
+      }
+      lab[i] = bk * 2 + sub;
+      const grad = ((x - s.x) * s.gx + (y - s.y) * s.gy) / G.a;
+      if (V === 1) {
+        // ion channeling: wide tone range, flat tiles; bounded for overlay legibility
+        val[i] = 0.09 + 0.39 * tone + 0.02 * grad + 0.012 * sp[i];
+      } else {
+        // BSE: Z contrast dominates, weak channeling contrast
+        val[i] = 0.60 + 0.11 * (tone - 0.5) + 0.012 * grad + 0.01 * sp[i];
+      }
+    }
+  }
+  // pass 2: grain-boundary grooves (and the Cu/barrier boundary)
+  const gb = V === 1 ? 0.07 : 0.035;
+  for (let y = 1; y < h - 1; y++) {
+    for (let x = 1; x < w - 1; x++) {
+      const i = y * w + x, L0 = lab[i];
+      if (L0 < 0) continue;
+      const a = lab[i + 1], b = lab[i + w];
+      if ((a >= 0 && a !== L0) || (b >= 0 && b !== L0)) {
+        // twin boundaries (same grain, sub differs) are sharper and fainter than grain boundaries
+        const twinB = (a >= 0 && (a >> 1) === (L0 >> 1)) || (b >= 0 && (b >> 1) === (L0 >> 1));
+        val[i] -= twinB ? gb * 0.4 : gb;
+        if (!twinB) val[i + 1] -= gb * 0.5;
+      }
+    }
+  }
+  // probe blur: ion SE ~1 px; BSE softer (box r 4 x 2 passes, sigma ~3.7 px = ~1 nm at 3600 px/um)
+  if (V === 1) blur(val, w, h, 1, 1); else blur(val, w, h, 4, 2);
+  const c = document.createElement('canvas');
+  c.width = w; c.height = h;
+  const cx = c.getContext('2d');
+  const img = cx.createImageData(w, h);
+  const d32 = new Uint32Array(img.data.buffer);
+  for (let i = 0; i < val.length; i++) {
+    const g = Math.round(255 * sat(val[i]));
+    d32[i] = 0xff000000 | (g << 16) | (g << 8) | g;
+  }
+  cx.putImageData(img, 0, 0);
+  return c;
+}
+
+// screen-fixed detector noise and a few scan-line gain rows ('overlay' blend, 0.5 = neutral)
+function buildNoise() {
+  const r = APA.rng(V === 1 ? 7301 : 7307);
+  const n = field(W, H, V === 1 ? 7311 : 7313, 1, 1);
+  const rowGain = new Float32Array(H);
+  for (let k = 0; k < 10; k++) {
+    let y = Math.floor(r() * H);
+    if (y >= 492 && y <= 600) y = (y + 170) % H;
+    rowGain[y] = (r() - 0.5) * (V === 1 ? 0.06 : 0.05);
+  }
+  const amp = V === 1 ? [0.022, 0.02] : [0.04, 0.012];
+  const c = document.createElement('canvas');
+  c.width = W; c.height = H;
+  const cx = c.getContext('2d');
+  const img = cx.createImageData(W, H);
+  const d32 = new Uint32Array(img.data.buffer);
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      const i = y * W + x;
+      const g = Math.round(255 * sat(0.5 + amp[0] * n[i] + amp[1] * gauss(r) + rowGain[y]));
+      d32[i] = 0xff000000 | (g << 16) | (g << 8) | g;
+    }
+  }
+  cx.putImageData(img, 0, 0);
+  return c;
+}
+
+// ---- overlay word: in-image annotation (FIB / BSE micrograph) ----
+// The word written onto the micrograph with the microscope's annotation tool: UI sans in info.color with a
+// thin contrasting rim and drop shadow (black on light ink, light on dark ink), no box or bar, so it reads as an
+// annotation inside the image, not c2's data bar. Same vocabulary for both words; rim width follows info.size
+// (v=2 grows cut to cut). Display coordinates (overlay never flipped): centred on x = 960, baseline info.baseline.
+const LUM = document.createElement('canvas').getContext('2d');
+function relLum(css) {
+  LUM.fillStyle = '#000'; LUM.fillStyle = css;
+  const h = LUM.fillStyle, m = /^#([0-9a-f]{6})$/i.exec(h);
+  const v = m ? [0, 2, 4].map((k) => parseInt(m[1].slice(k, k + 2), 16) / 255)
+    : (h.match(/[\d.]+/g) || [0, 0, 0]).slice(0, 3).map((x) => Number(x) / 255);
+  const lin = v.map((c) => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * lin[0] + 0.7152 * lin[1] + 0.0722 * lin[2];
+}
+function semAnnotation(g, word, info) {
+  const s = info.size, ink = info.color, rim = relLum(ink) > 0.18 ? '#000000' : '#f4f1ea';
+  g.font = `500 ${s}px ${info.fonts.grotesk}`;
+  g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+  g.lineJoin = 'round'; g.miterLimit = 2;
+  g.lineWidth = Math.max(3, 0.06 * s);
+  g.strokeStyle = rim;
+  g.shadowColor = rim; g.shadowBlur = 0.05 * s; g.shadowOffsetX = g.shadowOffsetY = Math.max(1, 0.025 * s);
+  g.strokeText(word, info.x, info.baseline);
+  g.shadowColor = 'transparent';
+  g.fillStyle = ink;
+  g.fillText(word, info.x, info.baseline);
+}
+
+APA.scene({
+  meta: { text: V === 2 ? 'dark' : 'light' },
+  text(g, word, t, p, info) { semAnnotation(g, word, info); },
+  async init() {
+    ({ ctx } = APA.canvas('2d'));
+    world = buildWorld();
+    noiseC = buildNoise();
+  },
+  render(t) {
+    const tt = Math.max(0, Math.min(t, 3.4));
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.imageSmoothingEnabled = true;
+    if (V === 1) {
+      const s = 1 + ZOOM * tt;
+      ctx.setTransform(s, 0, 0, s, 960 * (1 - s), LINE_Y * (1 - s));
+      ctx.drawImage(world, 0, 0);
+    } else {
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.drawImage(world, -DRIFT * tt, 0);
+    }
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.globalCompositeOperation = 'overlay';
+    ctx.drawImage(noiseC, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+  },
+});
+</script>
+</body>
+</html>

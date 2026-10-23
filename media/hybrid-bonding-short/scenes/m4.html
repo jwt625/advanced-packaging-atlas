@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>m4 c4 xray</title>
+<script src="../lib/apa.js"></script>
+<script src="../lib/textfx.js"></script>
+</head>
+<body>
+<script>
+// "more to" ladder, m4: 2D transmission X-ray of C4 joints under a chip-on-wafer (CoW) corner, top view, greyscale.
+// CoWoS-R+ class, C4 at 150 um nominal pitch (ectc51906.2022.00008-a-i3) at 1 px/um: pitch 150 px; joint diameter
+// 75 um from a different TV (ectc51909.2023.00155-a-i3, declared). X-ray polarity: high-Z solder absorbs (dark), polymer
+// is light. Joints: dark ring with a lighter core, soft edges. Interposer (CoW) edge on y = 600: grey step, lighter
+// below (less material in the beam), thin bright edge line. Faint routing shadows; large soft shadows below the edge.
+// Text band x 560-1360, y 500-592: plain light grey, one very faint routing shadow.
+// The image is built once at init (seeded); render() only pans it 10 px/s leftward, held after t = 3 s.
+// Sources, chosen values and deviations: m4.notes.md
+const { W, H, LINE_Y } = APA;
+let ctx, tex;
+
+const PITCH = 150, RJ = 75 / 2, RCORE = 35 / 2; // 1 px/um
+const ROW0 = LINE_Y - 138;                      // lowest joint row centre y = 462 (bottom 499.5); edge distance 138 um
+const PAN_PX_S = 10, PAN_T_MAX = 3;
+const TEX_W = W + 40;
+const G_TOP = 176, G_BOT = 214;                 // grey above (under the CoW) / below (substrate only)
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const grey = (v, a = 1) => `rgba(${v},${v},${v},${a})`;
+
+function jointSprite(rnd) {
+  const rj = RJ * (1 + (rnd() - 0.5) * 0.03), rc = RCORE * (1 + (rnd() - 0.5) * 0.10);
+  const ox = (rnd() - 0.5) * 2.0, oy = (rnd() - 0.5) * 2.0;   // core slightly off-centre
+  const S = Math.ceil(2 * (RJ + 10)), c = document.createElement('canvas');
+  c.width = S; c.height = S;
+  const g = c.getContext('2d');
+  const img = g.createImageData(S, S), px = img.data;
+  for (let y = 0; y < S; y++) {
+    for (let x = 0; x < S; x++) {
+      const dx = x + 0.5 - S / 2, dy = y + 0.5 - S / 2;
+      const r = Math.hypot(dx, dy);
+      const rcr = Math.hypot(dx - ox, dy - oy);
+      // ring part from r, core part from the shifted centre
+      const sOut = 1 / (1 + Math.exp((r - rj) / 1.4));
+      const sIn = 1 / (1 + Math.exp((rcr - rc) / 2.2));
+      let v = sOut * (-130 + 72 * sIn);
+      const hz = (r - (rj + 3.2)) / 2.2;
+      v += 16 * Math.exp(-hz * hz);
+      const k = (y * S + x) * 4;
+      // encode as black (darken) or white (lighten) with alpha
+      if (v < 0) { px[k] = px[k + 1] = px[k + 2] = 0; px[k + 3] = clamp(-v / 176 * 255, 0, 255); }
+      else { px[k] = px[k + 1] = px[k + 2] = 255; px[k + 3] = clamp(v / (255 - 176) * 255, 0, 255); }
+    }
+  }
+  g.putImageData(img, 0, 0);
+  return c;
+}
+
+function build(g, rnd) {
+  // fields: under the CoW (above the line) and substrate only (below)
+  g.fillStyle = grey(G_TOP); g.fillRect(0, 0, TEX_W, LINE_Y);
+  g.fillStyle = grey(G_BOT); g.fillRect(0, LINE_Y, TEX_W, H - LINE_Y);
+  // low-frequency brightness variation (static)
+  for (let n = 0; n < 22; n++) {
+    const x = rnd() * TEX_W, y = rnd() * H, rr = 180 + rnd() * 320, s = rnd() < 0.5 ? 1 : -1;
+    const gr = g.createRadialGradient(x, y, 0, x, y, rr);
+    gr.addColorStop(0, s > 0 ? grey(255, 0.035) : grey(0, 0.035));
+    gr.addColorStop(1, grey(0, 0));
+    g.fillStyle = gr; g.fillRect(x - rr, y - rr, 2 * rr, 2 * rr);
+  }
+  // routing shadows in the interposer / substrate: orthogonal and 45 deg bands, low contrast
+  g.save();
+  g.beginPath(); g.rect(0, 0, TEX_W, 488); g.clip();
+  const routes = [
+    // [x0, y0, x1, y1, width, dark?, alpha]
+    [0, 390, 2000, 390, 14, 1, 0.045], [0, 240, 2000, 240, 9, 1, 0.04], [0, 100, 2000, 100, 18, 0, 0.05],
+    [1035, 0, 1035, 520, 10, 1, 0.045], [430, 0, 430, 520, 16, 0, 0.05], [1590, 0, 1590, 520, 8, 1, 0.04],
+    [180, 520, 700, 0, 12, 1, 0.04], [820, 520, 1340, 0, 22, 0, 0.05], [1380, 520, 1900, 0, 10, 1, 0.04],
+    [1200, 0, 1720, 520, 14, 0, 0.04], [-100, 0, 420, 520, 9, 1, 0.035],
+  ];
+  for (const [x0, y0, x1, y1, w, dk, a] of routes) {
+    g.strokeStyle = dk ? grey(0, a) : grey(255, a * 1.4); g.lineWidth = w;
+    g.beginPath(); g.moveTo(x0, y0); g.lineTo(x1, y1); g.stroke();
+  }
+  // fine trace bundles: groups of thin parallel lines
+  for (const [x0, y0, dx, dy, n] of [[0, 320, 1, 0, 5], [600, 0, 0, 1, 4], [1450, 0, 0, 1, 5], [0, 170, 1, 0, 4]]) {
+    g.strokeStyle = grey(0, 0.035); g.lineWidth = 2.5;
+    for (let i = 0; i < n; i++) {
+      const o = i * 7;
+      g.beginPath();
+      if (dx) { g.moveTo(0, y0 + o); g.lineTo(TEX_W, y0 + o); } else { g.moveTo(x0 + o, 0); g.lineTo(x0 + o, 520); }
+      g.stroke();
+    }
+  }
+  g.restore();
+  // the one very faint routing shadow through the text band
+  g.strokeStyle = grey(0, 0.022); g.lineWidth = 12;
+  g.beginPath(); g.moveTo(0, 548); g.lineTo(TEX_W, 548); g.stroke();
+  // below the edge: large soft shadows of out-of-focus substrate features, low contrast
+  for (const [x, y, rr] of [[230, 820, 95], [700, 1010, 120], [1180, 760, 80], [1650, 930, 110], [1990, 700, 90],
+    [430, 660, 55], [1460, 680, 60]]) {
+    const gr = g.createRadialGradient(x, y, 0, x, y, rr);
+    gr.addColorStop(0, grey(0, 0.10)); gr.addColorStop(0.6, grey(0, 0.06)); gr.addColorStop(1, grey(0, 0));
+    g.fillStyle = gr; g.fillRect(x - rr, y - rr, 2 * rr, 2 * rr);
+  }
+  // CoW edge: slight dark undershoot above, thin bright line on the edge (edge enhancement)
+  const ed = g.createLinearGradient(0, LINE_Y - 6, 0, LINE_Y);
+  ed.addColorStop(0, grey(0, 0)); ed.addColorStop(1, grey(0, 0.08));
+  g.fillStyle = ed; g.fillRect(0, LINE_Y - 6, TEX_W, 6);
+  g.fillStyle = grey(244); g.fillRect(0, LINE_Y, TEX_W, 2);
+  const eb = g.createLinearGradient(0, LINE_Y + 2, 0, LINE_Y + 9);
+  eb.addColorStop(0, grey(255, 0.35)); eb.addColorStop(1, grey(255, 0));
+  g.fillStyle = eb; g.fillRect(0, LINE_Y + 2, TEX_W, 7);
+  // C4 joints
+  for (let j = 0; j < 4; j++) {
+    for (let i = -7; i <= 7; i++) {
+      const x = 960 + i * PITCH, y = ROW0 - j * PITCH;
+      const sp = jointSprite(rnd);
+      g.drawImage(sp, x - sp.width / 2, y - sp.height / 2);
+    }
+  }
+}
+
+// static detector grain, applied once
+function grain(g, w, h, rnd) {
+  const img = g.getImageData(0, 0, w, h), px = img.data;
+  for (let i = 0; i < px.length; i += 4) {
+    const n = (rnd() + rnd() - 1) * 7;
+    const v = clamp(px[i] + n, 0, 255);
+    px[i] = px[i + 1] = px[i + 2] = v;
+  }
+  g.putImageData(img, 0, 0);
+}
+
+APA.scene({
+  meta: { text: 'dark' },
+  init() {
+    ({ ctx } = APA.canvas('2d', { alpha: false }));
+    const rnd = APA.rng(4150);
+    const raw = document.createElement('canvas'); raw.width = TEX_W; raw.height = H;
+    build(raw.getContext('2d'), rnd);
+    // focal-spot blur, then grain on top (grain is sharper than the image)
+    tex = document.createElement('canvas'); tex.width = TEX_W; tex.height = H;
+    const tg = tex.getContext('2d', { willReadFrequently: true });
+    tg.drawImage(raw, 0, 0);
+    tg.filter = 'blur(1.6px)';
+    tg.drawImage(raw, 0, 0);
+    tg.filter = 'none';
+    grain(tg, TEX_W, H, rnd);
+  },
+  render(t) {
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    const dx = -PAN_PX_S * clamp(t, 0, PAN_T_MAX);
+    ctx.drawImage(tex, Math.round(dx * 4) / 4, 0);
+  },
+  // overlay word as X-ray inspection overlay text burnt into the radiograph: instrument mono, grey, with the image's
+  // own processing: the same edge-enhancement halo as the joints (opposite polarity rim just outside the strokes),
+  // 1.6 px focal-spot blur, then sharper static detector grain (+-7 levels, keyed to display pixels).
+  // Size = info.size, centred on x 960, baseline 565.
+  text(g, word, t, p, info) {
+    const s = info.size;
+    const ink = inkRGB(info, [232, 232, 232], [54, 54, 54]);
+    const L = (ink[0] + ink[1] + ink[2]) / 3;
+    const halo = L < 128 ? 255 : 0;                       // rim polarity opposite to the ink
+    const m = TFX.mask(word, { family: info.fonts.mono, size: s, weight: 400, letterSpacing: s * 0.02 });
+    const w = m.w, h = m.h;
+    const left = Math.round(info.x - m.width / 2 - m.ox), top = Math.round(info.baseline - m.oy);
+    const lay = document.createElement('canvas'); lay.width = w; lay.height = h;
+    const lg = lay.getContext('2d', { willReadFrequently: true });
+    // halo: glyphs dilated by ~4 px, soft, drawn first; ink on top (halo peak ~3 px outside the edge, as the joints)
+    lg.filter = 'blur(2.2px)';
+    lg.globalAlpha = 0.16;
+    const rim = TFX.fill(m, `rgb(${halo},${halo},${halo})`);
+    for (let i = 0; i < 12; i++) {
+      const a = (i * Math.PI) / 6;
+      lg.drawImage(rim, 3.4 * Math.cos(a), 3.4 * Math.sin(a));
+    }
+    lg.globalAlpha = 1;
+    lg.globalCompositeOperation = 'destination-out';      // the rim lives outside the strokes only
+    lg.filter = 'blur(0.8px)'; lg.drawImage(m.canvas, 0, 0);
+    lg.globalCompositeOperation = 'source-over';
+    lg.filter = 'blur(1.6px)';
+    lg.drawImage(TFX.fill(m, `rgb(${ink.join(',')})`), 0, 0);
+    lg.filter = 'none';
+    inkGrain(lg, w, h, left, top, 7, 4151);
+    g.drawImage(lay, left, top);
+  },
+});
+
+// overlay ink colour: 'light' / 'dark' tone -> the style's own grey, any other text_color -> that colour
+function inkRGB(info, light, dark) {
+  if (info.tone === 'light') return light;
+  if (info.tone === 'dark') return dark;
+  const c = document.createElement('canvas'); c.width = c.height = 1;
+  const k = c.getContext('2d', { willReadFrequently: true });
+  k.fillStyle = info.color; k.fillRect(0, 0, 1, 1);
+  return [...k.getImageData(0, 0, 1, 1).data.slice(0, 3)];
+}
+
+// static detector grain on the overlay's inked pixels, keyed to display coordinates (as the image's grain)
+function inkGrain(c2, w, h, left, top, amp, seed) {
+  const img = c2.getImageData(0, 0, w, h), px = img.data;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const k = (y * w + x) * 4;
+      if (!px[k + 3]) continue;
+      const n = (TFX.hash(seed, left + x, top + y) + TFX.hash(seed + 1, left + x, top + y) - 1) * amp;
+      px[k] += n; px[k + 1] += n; px[k + 2] += n;
+    }
+  }
+  c2.putImageData(img, 0, 0);
+}
+</script>
+</body>
+</html>

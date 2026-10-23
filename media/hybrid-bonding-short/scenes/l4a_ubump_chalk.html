@@ -1,0 +1,606 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>l4a ubump chalk</title>
+<script src="../lib/apa.js"></script>
+</head>
+<body>
+<script>
+// L4 hero (pass A): thermocompression bonding (TCB) of a thinned TSV die onto the TSV die below it, 10 um pitch
+// Ni/Sn microbumps, drawn as a Leonardo notebook study (red chalk hatching, iron-gall ink, toned laid paper).
+// Sequence (imec B2F stack, ectc51906.2022.00179): flux-dipped Sn caps descend (no pre-applied film) -> contact at
+// 0.8 s -> heat, melt, wet and collapse under force with Sn volume kept (1.6 s) -> settled and held (the capillary
+// underfill of the source is a later process step, not shown). Only the upper die moves; the lower pad top stays on
+// y = 600. Camera trucks right: content moves left at 28 px/s of shot time (28 / speed per scene second), constant, from
+// t = 0 (pass-A group pan, 2026-10-22). Cu (TSV, M1, pads) carries a stumped sanguine wash so it reads apart from Si. Structure, sources, time compression: l4a_ubump_chalk.notes.md.
+const { W, H, LINE_Y } = APA;
+
+// ---- geometry (um -> px), sheet coordinates (sheet is wider than the frame to allow the pan) ----
+const S = 26;                 // px per um
+const P = 10 * S;             // 10 um pitch = 260 px
+const XC0 = 220;              // a column centre (sheet x); columns at XC0 + k P
+const SW = 2040;              // sheet width
+const SHOT_SPEED = Number(APA.params.speed) > 0 ? Number(APA.params.speed) : 1;
+const PAN = 28, OFF0 = 20;    // pan: px per second of shot time; sheet offset at t = 0 (clamps at SW - W - 4 = 116)
+const yz = (z) => LINE_Y - S * z;   // z = height above the joint plane, um
+const H_TSV = 2.5 * S;        // TSV hole radius (5 um dia)
+const H_CU = H_TSV - 0.25 * S; // Cu core radius (liner 0.15 + barrier 0.1 um)
+const H_BUMP = 3.5 * S;       // UBM and solder top radius (7 um dia)
+const H_BASE = 4.3 * S;       // solder wetting spread at the pad
+const H_PAD = 4.5 * S;        // landing pad radius (9 um)
+const H_M1 = 4.0 * S;         // M1 plate radius (8 um, not stated in source)
+const VIA_X = [-2.6, -1.3, 0, 1.3, 2.6].map((u) => u * S);
+const H_VIA = 0.27 * S;
+const ss = (a, b, x) => { const u = Math.min(1, Math.max(0, (x - a) / (b - a))); return u * u * (3 - 2 * u); };
+
+// solder: plated Sn cylinder 7 um x 3.5 um before bonding; molten, it wets the pad and collapses with its volume kept.
+// s = 0 cylinder, s = 1 bonded (slight barrel, wetted out to H_BASE at the pad); v = 0 at the IMC, 1 at the pad.
+const SN0 = 3.5;
+const rS = (v, s) => H_BUMP + s * (0.25 * S * Math.sin(Math.PI * v) + (H_BASE - H_BUMP) * Math.pow(ss(0.55, 1, v), 1.4));
+const hOf = (s) => {          // solder height (um) at state s from Sn volume conservation
+  let m = 0; const n = 64;
+  for (let i = 0; i < n; i++) { const r = rS((i + 0.5) / n, s) / S; m += r * r; }
+  return SN0 * 3.5 * 3.5 / (m / n);
+};
+const SN_H = hOf(1);          // bonded standoff, 2.93 um
+// upper die (backside facing down), at its final bonded position
+const Y_SN = yz(SN_H), Y_IMC = yz(SN_H + 0.7), Y_UBM = yz(SN_H + 2.7), Y_V1B = yz(SN_H + 3.22), Y_M1B = yz(SN_H + 4.28),
+  Y_OX = yz(SN_H + 7.28);
+// lower die (front side facing up)
+const Y_PCU = yz(-0.5), Y_PNI = yz(-1.0), Y_V1F = yz(-1.52), Y_M1F = yz(-2.58);
+
+// ---- TCB timeline (s): approach, contact, melt + collapse, settled ----
+const G0 = 5 * S;             // solder-to-pad gap at t = 0 (5 um)
+const T_C = 0.8, T_M = 0.95, T_S = 1.6;
+function tcb(t) {
+  const u = Math.min(1, Math.max(0, t / T_C));
+  const g = G0 * (1 - u) * (1 - u);                 // decelerating approach, touches at T_C
+  const s = ss(T_M, T_S, t);                         // melt, wet, collapse
+  const h = hOf(s) * S;
+  const top = LINE_Y - g - h;                        // IMC / Sn interface
+  return { g, s, h, top, dy: top - Y_SN };
+}
+
+const colDx = (x) => ((((x - XC0) % P) + P) % P + P / 2) % P - P / 2;  // offset to nearest column centre
+const solderH = (y) => rS((y - Y_SN) / (LINE_Y - Y_SN), 1);
+const inVia = (dx) => VIA_X.some((v) => Math.abs(dx - v) < H_VIA);
+
+// region classifier on the final (bonded) geometry: returns material key
+function region(x, y) {
+  const dx = colDx(x), a = Math.abs(dx);
+  if (y < Y_M1B && a < H_TSV) return a < H_CU ? 'tsv' : 'liner';
+  if (y < Y_OX) return 'si';
+  if (y < Y_M1B) return 'ox';
+  if (y < Y_V1B) return a < H_M1 ? 'm1' : 'ox';
+  if (y < Y_UBM) return inVia(dx) ? 'via' : 'ox';
+  if (y < Y_IMC) return a < H_BUMP ? 'ni' : 'gap';
+  if (y < Y_SN) return a < H_BUMP ? 'imc' : 'gap';
+  if (y < LINE_Y) return a < solderH(y) ? 'sn' : 'gap';
+  if (y < Y_PCU) return a < H_PAD ? 'padcu' : 'ox';
+  if (y < Y_PNI) return a < H_PAD ? 'padni' : 'ox';
+  if (y < Y_V1F) return inVia(dx) ? 'via' : 'ox';
+  if (y < Y_M1F) return a < H_M1 ? 'm1' : 'ox';
+  if (a < H_TSV) return a < H_CU ? 'tsv' : 'liner';
+  return 'si';
+}
+
+// chalk tone (0 = bare paper, 1 = dense); light from the upper left
+function tone(key, x, y) {
+  const dx = colDx(x);
+  if (key === 'si') return 0.2 + 0.24 * ss(40, 120, dx);                         // cast shade right of each TSV
+  if (key === 'tsv') { const u = dx / H_CU; return 0.3 + 0.62 * Math.pow((u + 1) / 2, 1.6); }
+  if (key === 'ni') { const u = dx / H_BUMP; return 0.3 + 0.65 * Math.pow((u + 1) / 2, 1.3); }
+  if (key === 'sn') { const u = dx / solderH(y); return 0.05 + 0.72 * Math.pow((u + 1) / 2, 2.4); }
+  if (key === 'm1') return 0.68;
+  if (key === 'padcu') return 0.7;
+  if (key === 'padni') return 0.8;
+  if (key === 'imc') return 0.9;
+  return 0;
+}
+// tonal focus on the joint: the dies fade toward the top and bottom of the sheet
+const fadeY = (y) => { const d = (y - 560) / 340; return 0.1 + 0.9 * Math.exp(-d * d); };
+
+// ---- canvases ----
+let ctx, base, upperC, scratch, sctx, tooth;
+const UH = 600;               // height of the moving upper-die layer
+const B0 = 330, BH = 300;     // scratch band (y) for the solder and underfill chalk
+let snStrokes = [];           // solder strokes in (u, v) form, per column
+let snInk = [];               // per-column pen wobble for the solder outline
+
+const CPU = { willReadFrequently: true };
+function mkCanvas(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; c.getContext('2d', CPU); return c; }
+
+// value noise for paper mottling
+function valueNoise(rand, gw, gh) {
+  const g = new Float32Array((gw + 1) * (gh + 1));
+  for (let i = 0; i < g.length; i++) g[i] = rand();
+  return (u, v) => {
+    const x = u * gw, y = v * gh, i = Math.floor(x), j = Math.floor(y), fx = x - i, fy = y - j;
+    const sx = fx * fx * (3 - 2 * fx), sy = fy * fy * (3 - 2 * fy);
+    const k = j * (gw + 1) + i;
+    const a = g[k], b = g[k + 1], c = g[k + gw + 1], d = g[k + gw + 2];
+    return a + (b - a) * sx + (c - a) * sy + (a - b - c + d) * sx * sy;
+  };
+}
+
+function makePaper(rand) {
+  const pc = mkCanvas(SW, H), p = pc.getContext('2d');
+  // low-res mottling
+  const lw = SW / 4, lh = H / 4, low = mkCanvas(lw, lh), l = low.getContext('2d');
+  const n1 = valueNoise(rand, 6, 4), n2 = valueNoise(rand, 17, 10), n3 = valueNoise(rand, 45, 24), st = valueNoise(rand, 9, 6);
+  const img = l.createImageData(lw, lh);
+  for (let j = 0; j < lh; j++) for (let i = 0; i < lw; i++) {
+    const u = i / lw, v = j / lh;
+    let m = 0.55 * n1(u, v) + 0.3 * n2(u, v) + 0.15 * n3(u, v) - 0.5;
+    const stain = Math.max(0, st(u, v) - 0.68) * 2.2;
+    const k = (j * lw + i) * 4;
+    img.data[k] = 219 + 22 * m - 18 * stain;
+    img.data[k + 1] = 197 + 20 * m - 26 * stain;
+    img.data[k + 2] = 158 + 16 * m - 34 * stain;
+    img.data[k + 3] = 255;
+  }
+  l.putImageData(img, 0, 0);
+  p.imageSmoothingEnabled = true;
+  p.imageSmoothingQuality = 'high';
+  p.drawImage(low, 0, 0, SW, H);
+  // fine grain, laid lines, chain lines
+  const im = p.getImageData(0, 0, SW, H), d = im.data;
+  for (let y = 0; y < H; y++) {
+    const laid = 2.4 * Math.sin(y * 2 * Math.PI / 5.2) + 0.8 * Math.sin(y * 0.37);
+    for (let x = 0; x < SW; x++) {
+      const k = (y * SW + x) * 4;
+      const cx = ((x + 47) % 186) - 3;
+      const chain = cx >= 0 && cx < 3 ? -5 : 0;
+      const g = laid + chain;
+      d[k] += g; d[k + 1] += g; d[k + 2] += g * 0.9;
+    }
+  }
+  p.putImageData(im, 0, 0);
+  // foxing spots
+  for (let i = 0; i < 70; i++) {
+    const x = rand() * SW, y = rand() * H, r = 1 + Math.pow(rand(), 3) * 9;
+    const g = p.createRadialGradient(x, y, 0, x, y, r);
+    g.addColorStop(0, `rgba(120,72,30,${0.12 + 0.25 * rand()})`);
+    g.addColorStop(1, 'rgba(120,72,30,0)');
+    p.fillStyle = g; p.fillRect(x - r, y - r, 2 * r, 2 * r);
+  }
+  // old vertical fold
+  const fx = 1515;
+  const fg = p.createLinearGradient(fx - 14, 0, fx + 14, 0);
+  fg.addColorStop(0, 'rgba(90,60,30,0)'); fg.addColorStop(0.45, 'rgba(90,60,30,0.10)');
+  fg.addColorStop(0.55, 'rgba(255,245,225,0.16)'); fg.addColorStop(1, 'rgba(255,245,225,0)');
+  p.fillStyle = fg; p.fillRect(fx - 14, 0, 28, H);
+  // edge darkening (sheet-fixed, wide)
+  const vg = p.createRadialGradient(SW / 2, H / 2, H * 0.35, SW / 2, H / 2, SW * 0.68);
+  vg.addColorStop(0, 'rgba(70,40,15,0)'); vg.addColorStop(1, 'rgba(70,40,15,0.30)');
+  p.fillStyle = vg; p.fillRect(0, 0, SW, H);
+  return pc;
+}
+
+// chalk tooth: fraction of chalk that skips the paper (alpha = removed)
+function makeTooth(rand) {
+  const c = mkCanvas(SW, H), t = c.getContext('2d');
+  const im = t.createImageData(SW, H), d = im.data, row = new Float32Array(SW / 2);
+  for (let y = 0; y < H; y++) {
+    const valley = 0.5 + 0.5 * Math.sin(y * 2 * Math.PI / 5.2);
+    for (let x = 0; x < SW; x += 2) {
+      const r = (y & 1) ? row[x >> 1] : (row[x >> 1] = rand());
+      const a = 255 * Math.min(1, Math.max(0, 0.28 * valley + 0.62 * r * r - 0.12));
+      d[(y * SW + x) * 4 + 3] = a; d[(y * SW + x + 1) * 4 + 3] = a;
+    }
+  }
+  t.putImageData(im, 0, 0);
+  return c;
+}
+
+// ---- red chalk hatching (generated once, on the bonded geometry) ----
+// stroke: [x0, y0, cx, cy, x1, y1, width, alpha, color, t0, key]
+const CHALK = ['#a8492c', '#8a3620'];
+
+function pushStroke(out, rand, key, cx, cy, th, L, bow, t0) {
+  const dxv = Math.cos(th), dyv = Math.sin(th);
+  const half = L / 2;
+  let s0 = 0, s1 = 0;
+  while (s0 > -half && region(cx + dxv * (s0 - 2), cy + dyv * (s0 - 2)) === key) s0 -= 2;
+  while (s1 < half && region(cx + dxv * (s1 + 2), cy + dyv * (s1 + 2)) === key) s1 += 2;
+  if (s1 - s0 < 5) return;
+  s0 += 0.5 + rand(); s1 -= 0.5 + rand();
+  const x0 = cx + dxv * s0, y0 = cy + dyv * s0, x1 = cx + dxv * s1, y1 = cy + dyv * s1;
+  const ccx = (x0 + x1) / 2 - dyv * bow, ccy = (y0 + y1) / 2 + dxv * bow;
+  const tl = tone(key, cx, cy) * fadeY(cy);
+  const w = 2.0 + 2.2 * tl + 0.8 * rand();
+  const al = Math.min(0.8, 0.2 + 0.62 * tl) * (0.72 + 0.28 * rand());
+  out.push([x0, y0, ccx, ccy, x1, y1, w, al, tl > 0.55 ? 1 : 0, t0, key]);
+}
+
+function hatchAll(rand) {
+  const out = [];
+  const nz = valueNoise(rand, 30, 16);                 // low-frequency patchiness of the hatching
+  const NZ = (x, y) => nz(Math.min(0.999, Math.max(0, x / SW)), Math.min(0.999, Math.max(0, y / H)));
+  // 1) flat regions (Si, underfill): evenly spaced parallel strokes, upper left to lower right (left-handed),
+  //    broken into pen-length strokes; a second family between them for the darker passages
+  const th = 56 * Math.PI / 180, dv = [Math.cos(th), Math.sin(th)], nv = [-Math.sin(th), Math.cos(th)];
+  const SP = 5.2;
+  const span = SW * Math.abs(nv[0]) + H * Math.abs(nv[1]);
+  for (let lvl = 0; lvl < 2; lvl++) {
+    for (let o = -SW; o < span; o += SP) {
+      const oo = o + lvl * SP / 2;
+      let sPos = -2400 + rand() * 30;
+      while (sPos < 2400) {
+        const L = 34 + 38 * rand();
+        const mx = oo * nv[0] + (sPos + L / 2) * dv[0], my = oo * nv[1] + (sPos + L / 2) * dv[1];
+        sPos += L + 3 + rand() * 7;
+        if (mx < -20 || mx > SW + 20 || my < -20 || my > H + 20) continue;
+        const key = region(mx, my);
+        if (key !== 'si') continue;
+        const tn = tone(key, mx, my) * fadeY(my);
+        const thr = lvl === 0 ? 0.07 + 0.55 * NZ(mx, my) : 0.32 + 0.5 * NZ(mx + 400, my);
+        if (tn < thr) continue;
+        pushStroke(out, rand, key, mx, my, th + (rand() - 0.5) * 0.04, L, 0, 0);
+      }
+    }
+  }
+  // 2) cylinders (TSV Cu, Ni UBM, Sn solder): the same diagonal, kept only where the form has turned from the
+  //    light, so the shade builds toward the right flank; slight bow with the form
+  for (let xc = XC0 - P; xc < SW + P; xc += P) {
+    const parts = [['tsv', -60, Y_M1B, H_CU], ['tsv', Y_M1F, H + 60, H_CU], ['ni', Y_UBM, Y_IMC, H_BUMP], ['sn', Y_SN, LINE_Y, H_BASE]];
+    for (const [key, ya, yb, R] of parts) {
+      const x0 = xc - R - 2, x1 = xc + R + 2;
+      for (let lvl = 0; lvl < 3; lvl++) {
+        const sp = 4.4;
+        for (let c0 = ya - (x1 - x0) * Math.tan(th) - 4 + lvl * sp / 3; c0 < yb + 4; c0 += sp) {
+          const thr = [0.1, 0.38, 0.62][lvl] + (rand() - 0.5) * 0.16;
+          let run = [];
+          const flush = () => {
+            if (run.length >= 4) {
+              const a = run[0], z = run[run.length - 1], m = run[run.length >> 1];
+              const tl = tone(key, m[0], m[1]) * fadeY(m[1]);
+              const bow = 2 + 2 * rand();
+              const cx = (a[0] + z[0]) / 2 - dv[1] * bow, cy = (a[1] + z[1]) / 2 + dv[0] * bow;
+              out.push([a[0], a[1], cx, cy, z[0], z[1], 1.8 + 2.0 * tl + 0.6 * rand(),
+                Math.min(0.8, 0.2 + 0.6 * tl) * (0.72 + 0.28 * rand()), tl > 0.55 ? 1 : 0, 0, key, xc]);
+            }
+            run = [];
+          };
+          for (let x = x0; x <= x1; x += 2) {
+            const y = c0 + (x - x0) * Math.tan(th);
+            if (y < -4 || y > H + 4) { flush(); continue; }
+            const ok = region(x, y) === key && tone(key, x, y) * fadeY(y) > thr;
+            if (ok && run.length < 28) run.push([x, y]);
+            else { flush(); if (ok) run.push([x, y]); }
+          }
+          flush();
+        }
+      }
+    }
+  }
+  // 3) thin layers (IMC, pads, M1 plates): full-coverage hatching across each band
+  for (let xc = XC0 - P; xc < SW + P; xc += P) {
+    const bands = [
+      ['imc', Y_IMC, Y_SN, H_BUMP],
+      ['m1', Y_M1B, Y_V1B, H_M1], ['padcu', LINE_Y, Y_PCU, H_PAD], ['padni', Y_PCU, Y_PNI, H_PAD], ['m1', Y_V1F, Y_M1F, H_M1],
+    ];
+    for (const [key, ya, yb, hw] of bands) {
+      const ym = (ya + yb) / 2, hgt = yb - ya;
+      for (let x = xc - hw - hgt; x < xc + hw + hgt;) {
+        const tn = tone(key, Math.min(xc + hw - 1, Math.max(xc - hw + 1, x)), ym) * fadeY(ym);
+        if (rand() < 0.25 + tn) pushStroke(out, rand, key, x, ym + (rand() - 0.5) * hgt * 0.3, th, hgt * 1.6, 0, 0);
+        x += 2.6 + 4.5 * (1 - tn) + rand() * 1.2;
+      }
+    }
+  }
+  return out;
+}
+
+// stumped sanguine wash under the Cu (TSV cores, M1 plates, pad Cu): the Cu reads apart from the bare-paper Si
+function cuWash(c, upper) {
+  c.fillStyle = '#9c3f24';
+  for (let xc = XC0 - P; xc < SW + P; xc += P) {
+    const rects = upper
+      ? [[xc - H_CU, 0, xc + H_CU, Y_M1B], [xc - H_M1, Y_M1B, xc + H_M1, Y_V1B]]
+      : [[xc - H_CU, Y_M1F, xc + H_CU, H], [xc - H_M1, Y_V1F, xc + H_M1, Y_M1F], [xc - H_PAD, LINE_Y, xc + H_PAD, Y_PCU]];
+    for (const [x0, y0, x1, y1] of rects) {
+      // fade with the drawing toward the frame top and bottom, in bands
+      for (let y = y0; y < y1; y += 12) {
+        const yb = Math.min(y1, y + 12);
+        c.globalAlpha = 0.26 * fadeY((y + yb) / 2);
+        c.fillRect(x0, y, x1 - x0, yb - y);
+      }
+    }
+  }
+  c.globalAlpha = 1;
+}
+
+function drawStroke(c, s, f) {
+  const [x0, y0, cx, cy, x1, y1, w, al, col] = s;
+  c.globalAlpha = al;
+  c.strokeStyle = CHALK[col];
+  c.lineWidth = w;
+  c.beginPath();
+  c.moveTo(x0, y0);
+  if (f >= 1) c.quadraticCurveTo(cx, cy, x1, y1);
+  else {
+    const qx = x0 + (cx - x0) * f, qy = y0 + (cy - y0) * f;
+    const rx = cx + (x1 - cx) * f, ry = cy + (y1 - cy) * f;
+    c.quadraticCurveTo(qx, qy, qx + (rx - qx) * f, qy + (ry - qy) * f);
+  }
+  c.stroke();
+}
+
+// ---- iron-gall ink contours: nervous pen line, swelling and thinning, slight overshoot ----
+const INK = '#4b2d19';
+function inkLine(c, rand, pts, opts = {}) {
+  // long straight lines are laid down as several overlapping pen pieces, as a hand would
+  if (pts.length === 2 && !opts.piece) {
+    const [[ax, ay], [bx, by]] = pts, len = Math.hypot(bx - ax, by - ay);
+    if (len > 240 && !opts.whole) {
+      let u = 0;
+      while (u < 1) {
+        const step = (150 + 140 * rand()) / len, u1 = Math.min(1, u + step), j = (rand() - 0.5) * 1.6;
+        const e = 4 / len;
+        inkPiece(c, rand, [[ax + (bx - ax) * Math.max(0, u - e) + (by - ay) / len * j, ay + (by - ay) * Math.max(0, u - e) - (bx - ax) / len * j],
+          [ax + (bx - ax) * u1, ay + (by - ay) * u1]], opts);
+        u = u1;
+      }
+      return;
+    }
+  }
+  inkPiece(c, rand, pts, opts);
+}
+function inkPiece(c, rand, pts, opts = {}) {
+  const w0 = opts.w || 2.0, a0 = opts.a == null ? 0.88 : opts.a, wob = opts.wob == null ? 1.0 : opts.wob;
+  const res = [];
+  for (let i = 0; i < pts.length - 1; i++) {
+    const [ax, ay] = pts[i], [bx, by] = pts[i + 1];
+    const len = Math.hypot(bx - ax, by - ay), n = Math.max(1, Math.round(len / 18));
+    const nx = -(by - ay) / (len || 1), ny = (bx - ax) / (len || 1);
+    for (let j = 0; j < n; j++) {
+      const u = j / n, o = (rand() - 0.5) * wob;
+      res.push([ax + (bx - ax) * u + nx * o, ay + (by - ay) * u + ny * o]);
+    }
+  }
+  res.push(pts[pts.length - 1].slice());
+  if (opts.over) {   // overshoot the ends a little, as a quick pen does
+    const [a, b] = [res[0], res[1]], [y, z] = [res[res.length - 2], res[res.length - 1]];
+    const l0 = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1, l1 = Math.hypot(z[0] - y[0], z[1] - y[1]) || 1;
+    res.unshift([a[0] - (b[0] - a[0]) / l0 * opts.over, a[1] - (b[1] - a[1]) / l0 * opts.over]);
+    res.push([z[0] + (z[0] - y[0]) / l1 * opts.over, z[1] + (z[1] - y[1]) / l1 * opts.over]);
+  }
+  c.lineCap = 'round'; c.lineJoin = 'round';
+  c.strokeStyle = INK;
+  // ink bleed
+  c.globalAlpha = 0.09 * a0;
+  c.lineWidth = w0 + 3;
+  c.beginPath(); c.moveTo(res[0][0], res[0][1]);
+  for (let i = 1; i < res.length; i++) c.lineTo(res[i][0], res[i][1]);
+  c.stroke();
+  // core: runs of varying pressure
+  let wPrev = w0;
+  for (let i = 0; i < res.length - 1; i += 2) {
+    const fade = opts.fade ? opts.fade(res[i][0], res[i][1]) : 1;
+    if (fade <= 0.03) continue;
+    const wNew = Math.max(0.6, w0 * (0.55 + 0.9 * rand()));
+    c.globalAlpha = a0 * fade * (0.78 + 0.22 * rand());
+    c.lineWidth = (wPrev + wNew) / 2; wPrev = wNew;
+    c.beginPath(); c.moveTo(res[i][0], res[i][1]);
+    for (let j = i + 1; j <= Math.min(i + 2, res.length - 1); j++) c.lineTo(res[j][0], res[j][1]);
+    c.stroke();
+  }
+}
+
+const fadeV = (x, y) => { const d = (y - 570) / 330; return 0.12 + 0.88 * Math.exp(-d * d); };
+
+function contoursLower(c, rand) {
+  const L = (pts, o = {}) => inkLine(c, rand, pts, o);
+  // joint plane = lower die top surface: drawn edge to edge, twice (a searching pass)
+  L([[-10, LINE_Y], [SW + 10, LINE_Y]], { w: 2.6, a: 0.95, wob: 0.6, whole: true });
+  L([[-10, LINE_Y + 2.2], [SW + 10, LINE_Y + 1.4]], { w: 1.1, a: 0.3, wob: 1.2 });
+  for (let xc = XC0 - P; xc < SW + P; xc += P) {
+    const sx = rand() * 4 - 2;
+    L([[xc + H_TSV, Y_M1F], [xc + P - H_TSV, Y_M1F]], { w: 1.7, a: 0.8, over: 4 });
+    L([[xc - H_PAD, LINE_Y], [xc - H_PAD, Y_PNI], [xc + H_PAD, Y_PNI], [xc + H_PAD, LINE_Y]], { w: 1.8, wob: 0.6 });
+    L([[xc - H_PAD + 2, Y_PCU], [xc + H_PAD - 2, Y_PCU]], { w: 0.9, a: 0.5 });
+    L([[xc - H_M1, Y_V1F], [xc + H_M1, Y_V1F], [xc + H_M1, Y_M1F]], { w: 1.4, a: 0.8, over: 3 });
+    L([[xc - H_M1, Y_M1F], [xc - H_M1, Y_V1F]], { w: 1.2, a: 0.8 });
+    L([[xc - H_TSV, Y_M1F], [xc - H_TSV + sx * 0.3, 1080]], { w: 1.8, fade: fadeV, over: 3 });
+    L([[xc + H_TSV, Y_M1F], [xc + H_TSV, 1080]], { w: 2.6, fade: fadeV, over: 3 });
+    L([[xc - H_CU, Y_M1F + 2], [xc - H_CU, 1040]], { w: 0.8, a: 0.45, fade: fadeV });
+    L([[xc + H_CU, Y_M1F + 2], [xc + H_CU, 1040]], { w: 0.8, a: 0.45, fade: fadeV });
+    vias(c, rand, xc, Y_PNI, Y_V1F);
+    // pen hatching in the pad Ni layer
+    penBand(c, Y_PCU + 1, Y_PNI - 1, xc - H_PAD + 2, xc + H_PAD - 2, 5);
+  }
+}
+
+function contoursUpper(c, rand) {
+  const L = (pts, o = {}) => inkLine(c, rand, pts, o);
+  for (let xc = XC0 - P; xc < SW + P; xc += P) {
+    const sx = rand() * 4 - 2;
+    L([[xc - H_TSV + sx * 0.3, 0], [xc - H_TSV, Y_M1B]], { w: 1.8, fade: fadeV, over: 3 });
+    L([[xc + H_TSV, 0], [xc + H_TSV, Y_M1B]], { w: 2.6, fade: fadeV, over: 3 });
+    L([[xc - H_CU, 40], [xc - H_CU, Y_M1B - 2]], { w: 0.8, a: 0.45, fade: fadeV });
+    L([[xc + H_CU, 40], [xc + H_CU, Y_M1B - 2]], { w: 0.8, a: 0.45, fade: fadeV });
+    L([[xc + H_TSV, Y_OX], [xc + P - H_TSV, Y_OX]], { w: 1.7, a: 0.8, over: 4 });
+    L([[xc - H_M1, Y_M1B], [xc - H_M1, Y_V1B], [xc + H_M1, Y_V1B], [xc + H_M1, Y_M1B], [xc - H_M1, Y_M1B]], { w: 1.4, a: 0.8 });
+    L([[xc + H_BUMP, Y_UBM], [xc + P - H_BUMP, Y_UBM]], { w: 1.9, a: 0.9, over: 3 });   // upper die bottom surface
+    L([[xc - H_BUMP, Y_UBM], [xc - H_BUMP, Y_SN]], { w: 1.7 });
+    L([[xc + H_BUMP, Y_UBM], [xc + H_BUMP, Y_SN]], { w: 2.5 });
+    L([[xc - H_BUMP, Y_IMC], [xc + H_BUMP, Y_IMC]], { w: 1.0, a: 0.55 });
+    L([[xc - H_BUMP, Y_SN], [xc + H_BUMP, Y_SN]], { w: 1.2, a: 0.65 });
+    vias(c, rand, xc, Y_V1B, Y_UBM);
+    penBand(c, Y_IMC + 1, Y_SN - 1, xc - H_BUMP + 2, xc + H_BUMP - 2, 4.5);
+  }
+}
+
+function vias(c, rand, xc, ya, yb) {
+  for (const v of VIA_X) {
+    c.globalAlpha = 0.5; c.fillStyle = '#6a3a1e';
+    c.fillRect(xc + v - H_VIA, ya, 2 * H_VIA, yb - ya);
+    inkLine(c, rand, [[xc + v - H_VIA, ya], [xc + v - H_VIA, yb], [xc + v + H_VIA, yb], [xc + v + H_VIA, ya]], { w: 1.0, a: 0.75, wob: 0.4 });
+  }
+}
+
+function penBand(c, ya, yb, x0, x1, sp) {
+  c.strokeStyle = INK; c.lineCap = 'round'; c.lineWidth = 0.9;
+  for (let x = x0; x < x1; x += sp) {
+    const k = (x - x0) / (x1 - x0);
+    c.globalAlpha = 0.25 + 0.5 * k;
+    const xb = Math.min(x1, x + (yb - ya) * 0.7);
+    c.beginPath(); c.moveTo(x, ya); c.lineTo(xb, ya + (xb - x) / 0.7); c.stroke();
+  }
+}
+
+function underdrawing(c, rand, upper) {
+  // loose red-chalk lay-in of the TSV walls, a hair off the final ink (pentimenti)
+  c.lineCap = 'round'; c.strokeStyle = '#a3462c';
+  for (let xc = XC0 - P; xc < SW + P; xc += P) {
+    for (const side of [-1, 1]) {
+      const [ya, yb] = upper ? [150, Y_M1B] : [Y_M1F, 960];
+      c.globalAlpha = 0.2; c.lineWidth = 1.3;
+      c.beginPath(); c.moveTo(xc + side * (H_TSV + 2.5) + (rand() - 0.5) * 2, ya); c.lineTo(xc + side * (H_TSV + 2) + (rand() - 0.5) * 2, yb); c.stroke();
+    }
+  }
+  c.globalAlpha = 1;
+}
+
+function penShade(c, rand, zonesOf) {
+  // iron-gall pen hatching in the deepest shade: right flank of the UBM and of each TSV near the joint
+  c.strokeStyle = INK; c.lineCap = 'round';
+  const tn = Math.tan(56 * Math.PI / 180);
+  for (let xc = XC0 - P; xc < SW + P; xc += P) {
+    for (const [ya, yb, R, u0] of zonesOf()) {
+      for (let y = ya; y < yb; y += 6.5 + rand() * 2) {
+        const r = R(y), xa = xc + r * (u0 + rand() * 0.08), xb = xc + r - 2;
+        if (xb - xa < 4) continue;
+        const len = Math.min(xb - xa, 26);
+        const fade = Math.exp(-Math.pow((y - 570) / 300, 2));
+        c.globalAlpha = (0.35 + 0.3 * rand()) * fade; c.lineWidth = 0.8 + 0.5 * rand();
+        const x0 = xb - len, y1 = y + len * tn;
+        if (y1 > yb) continue;
+        const xe = Math.min(xb, xc + R(y1) - 2);
+        c.beginPath(); c.moveTo(x0, y); c.lineTo(xe, y + (xe - x0) * tn); c.stroke();
+      }
+    }
+  }
+  c.globalAlpha = 1;
+}
+
+function guides(c, ys) {
+  // faint red-chalk guide rules along the drawn interfaces, overshooting across the sheet
+  c.globalAlpha = 0.13; c.strokeStyle = '#a3462c'; c.lineWidth = 1;
+  for (const y of ys) { c.beginPath(); c.moveTo(0, y + 0.5); c.lineTo(SW, y - 0.5); c.stroke(); }
+  c.globalAlpha = 1;
+}
+
+function maskTooth(c, w, h, dy) {   // c covers sheet rows [dy, dy + h)
+  c.globalAlpha = 1;
+  c.globalCompositeOperation = 'destination-out';
+  c.drawImage(tooth, 0, dy, w, h, 0, 0, w, h);
+  c.globalCompositeOperation = 'source-over';
+}
+
+// solder outline in pen for the current state (deterministic wobble per column)
+function solderInk(c, xc, k, st) {
+  const wob = snInk[k];
+  c.lineCap = 'round'; c.lineJoin = 'round'; c.strokeStyle = INK;
+  for (const side of [-1, 1]) {
+    const pts = [];
+    for (let i = 0; i <= 14; i++) {
+      const v = i / 14;
+      pts.push([xc + side * rS(v, st.s) + wob[(side > 0 ? 15 : 0) + i], st.top + v * st.h]);
+    }
+    c.globalAlpha = 0.09; c.lineWidth = side > 0 ? 5.6 : 4.8;
+    c.beginPath(); pts.forEach(([x, y], i) => (i ? c.lineTo(x, y) : c.moveTo(x, y))); c.stroke();
+    c.globalAlpha = 0.88; c.lineWidth = side > 0 ? 2.6 : 1.8;
+    c.beginPath(); pts.forEach(([x, y], i) => (i ? c.lineTo(x, y) : c.moveTo(x, y))); c.stroke();
+  }
+  if (st.g > 0.5) {         // flat underside of the plated cap, until it touches the pad
+    const yb = st.top + st.h;
+    c.globalAlpha = 0.85; c.lineWidth = 1.9;
+    c.beginPath(); c.moveTo(xc - H_BUMP, yb + wob[30]); c.lineTo(xc + H_BUMP, yb + wob[31]); c.stroke();
+  }
+  c.globalAlpha = 1;
+}
+
+APA.scene({
+  meta: { text: 'dark' },
+  async init() {
+    ({ ctx } = APA.canvas('2d', { willReadFrequently: true }));   // CPU raster: large blits are much faster than SwiftShader GL
+    const paper = makePaper(APA.rng(40404));
+    tooth = makeTooth(APA.rng(777));
+    const all = hatchAll(APA.rng(1452));
+    const lowerS = [], upperS = [];
+    for (const st of all) {
+      const key = st[10];
+      if (key === 'sn') snStrokes.push(st);
+      else ((st[1] + st[5]) / 2 < LINE_Y ? upperS : lowerS).push(st);
+    }
+    // solder strokes -> (u, v) relative to their column on the bonded shape, remapped every frame
+    snStrokes = snStrokes.map((st) => {
+      const xc = st[11], uv = (x, y) => { const v = (y - Y_SN) / (LINE_Y - Y_SN); return [(x - xc) / rS(v, 1), v]; };
+      return { xc, a: uv(st[0], st[1]), c: uv(st[2], st[3]), b: uv(st[4], st[5]), w: st[6], al: st[7], col: st[8] };
+    });
+    const wr = APA.rng(5150);
+    for (let k = 0; k < 12; k++) snInk.push(Array.from({ length: 32 }, () => (wr() - 0.5) * 1.2));
+    // static lower die on the paper
+    base = mkCanvas(SW, H);
+    const b = base.getContext('2d');
+    b.drawImage(paper, 0, 0);
+    guides(b, [Y_M1F]);
+    underdrawing(b, APA.rng(99), false);
+    const chalkL = mkCanvas(SW, H), cl = chalkL.getContext('2d');
+    cl.lineCap = 'round';
+    cuWash(cl, false);
+    for (const st of lowerS) drawStroke(cl, st, 1);
+    maskTooth(cl, SW, H, 0);
+    b.drawImage(chalkL, 0, 0);
+    penShade(b, APA.rng(31), () => [[Y_M1F + 4, 820, () => H_CU, 0.72]]);
+    contoursLower(b, APA.rng(2718));
+    b.globalAlpha = 1;
+    // rigid upper die (Si, TSVs, backside layers, Ni UBM, IMC), drawn at its bonded position, moved as one
+    upperC = mkCanvas(SW, UH);
+    const u = upperC.getContext('2d');
+    u.lineCap = 'round';
+    cuWash(u, true);
+    for (const st of upperS) drawStroke(u, st, 1);
+    maskTooth(u, SW, UH, 0);
+    guides(u, [Y_OX, Y_UBM]);
+    underdrawing(u, APA.rng(98), true);
+    penShade(u, APA.rng(32), () => [[Y_UBM + 2, Y_SN - 2, () => H_BUMP, 0.62], [200, Y_M1B - 4, () => H_CU, 0.72]]);
+    contoursUpper(u, APA.rng(2719));
+    u.globalAlpha = 1;
+    scratch = mkCanvas(SW, BH);
+    sctx = scratch.getContext('2d');
+    sctx.lineCap = 'round';
+  },
+  render(t) {
+    const off = Math.min(OFF0 + PAN * Math.max(0, t) / SHOT_SPEED, SW - W - 4);
+    const st = tcb(t);
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.drawImage(base, -off, 0);
+    ctx.drawImage(upperC, -off, st.dy);
+    // chalk on the solder, remapped to its current shape
+    sctx.globalCompositeOperation = 'source-over';
+    sctx.clearRect(0, 0, SW, BH);
+    sctx.setTransform(1, 0, 0, 1, 0, -B0);
+    const map = (xc, [uu, v]) => [xc + uu * rS(v, st.s), st.top + v * st.h];
+    for (const q of snStrokes) {
+      const a = map(q.xc, q.a), c = map(q.xc, q.c), b = map(q.xc, q.b);
+      drawStroke(sctx, [a[0], a[1], c[0], c[1], b[0], b[1], q.w, q.al, q.col], 1);
+    }
+    sctx.setTransform(1, 0, 0, 1, 0, 0);
+    maskTooth(sctx, SW, BH, B0);
+    ctx.drawImage(scratch, -off, B0);
+    // pen outline of each solder cap
+    ctx.save();
+    ctx.translate(-off, 0);
+    let k = 0;
+    for (let xc = XC0 - P; xc < SW + P; xc += P, k++) solderInk(ctx, xc, k, st);
+    ctx.restore();
+  },
+});
+</script>
+</body>
+</html>

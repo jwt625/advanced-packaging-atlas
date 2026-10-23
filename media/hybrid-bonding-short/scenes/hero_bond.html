@@ -1,0 +1,707 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>hero bond</title>
+<script src="../lib/apa.js"></script>
+<script src="../lib/textfx.js"></script>
+</head>
+<body>
+<script>
+// Hero: a 0.4 um pitch Cu/SiCN wafer-to-wafer hybrid bond forming. Cutaway block, camera on the bond plane, so the
+// plane is the horizon at y = 600. Sequence: bond wave closes the gap (room-temperature dielectric fusion bond),
+// anneal: Cu expands and closes the dishing recess, Cu-Cu contact, grains grow across, the interface line fades.
+// Raw WebGL2, one analytic ray-traced fragment pass. Sources and deviations: hero_bond.notes.md.
+const { W, H, LINE_Y } = APA;
+
+// ---- world (um) ----
+const D = 2.2;                         // camera distance to the cut face
+const YAW = 7 * Math.PI / 180;         // camera yaw: pitch on screen 295 px (left) to 222 px (right)
+const SCALE = 650;                     // px per um on the cut face at screen centre (pitch 0.4 um = 260 px)
+const F = SCALE * D / Math.cos(YAW);   // focal length, px
+const CAMX0 = 0.13, TRUCK = 0.04;      // camera x (um) and truck speed (um/s, ~26 px/s on the cut face)
+
+const sst = (a, b, x) => { const u = Math.min(1, Math.max(0, (x - a) / (b - a))); return u * u * (3 - 2 * u); };
+const clamp01 = (x) => Math.min(1, Math.max(0, x));
+
+const VS = `#version 300 es
+in vec2 aP; void main(){ gl_Position = vec4(aP, 0., 1.); }`;
+
+const FS = `#version 300 es
+precision highp float;
+out vec4 frag;
+uniform vec3 uCam, uR, uFw;
+uniform float uF, uXf, uGA, uHeat, uExp, uGrow, uDiel, uLine, uExpo;
+
+// geometry, um (sources in notes)
+const float P = 0.4;          // pitch
+const float RZ = 0.3464102;   // hex row spacing P*sqrt(3)/2
+const float RP = 0.1;         // pad radius (CD 0.2)
+const float RV = 0.08;        // via radius (CD 0.16)
+const float HP = 0.4, HV = 0.3, HM = 0.13;   // pad, via, M1 heights
+const float MW = 0.15, MHL = 0.36;           // M1 half width, half length (link + landing overhang)
+const float OV = 0.025;       // top-wafer overlay shift
+const float XG = 15.0;        // vertical exaggeration of the nm-scale recess / expansion only
+const float BAR = 0.006;      // TaN/Ta liner drawn thickness
+const vec3 CU = vec3(0.95, 0.56, 0.36);   // display copper tint
+const vec3 GLOW = vec3(1.0, 0.42, 0.13);
+const vec3 HOT = vec3(1.0, 0.80, 0.62);
+const vec3 COOL = vec3(0.75, 0.88, 1.0);
+const vec2 LU = vec2(0.5, -0.8660254);      // link direction in xz (row j -> row j+1)
+const vec2 LN = vec2(0.8660254, 0.5);
+
+float h21(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+vec2 h22(vec2 p){ return fract(sin(vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)))) * 43758.5453); }
+
+float gapAt(float x){ float u = max(x - uXf, 0.); return uGA * u * sqrt(u); }
+float rowOff(float j, float side){ return (mod(j, 2.) > 0.5 ? 0.5 * P : 0.) + side * OV; }
+// per-pad dishing recess at the pad centre, nm (true scale)
+float recOf(float k, float j, float side){ return 0.6 + 0.5 * h21(vec2(k * 1.71 + side * 13.1, j * 3.37 + 0.5)); }
+// drawn recess depth (um, >= 0) at normalized radius e; uExp = Cu expansion, nm per side
+float cavDepth(float e, float rec){
+  float q = max(1. - e * e, 0.);
+  float s = -rec * (0.4 + 0.6 * q) + uExp * (0.35 + 0.65 * q);
+  return max(-s, 0.) * 0.001 * XG;
+}
+float sdBox(vec2 p, vec2 b){ vec2 d = abs(p) - b; return length(max(d, 0.)) + min(max(d.x, d.y), 0.); }
+
+vec3 env(vec3 r, float soft){
+  vec3 c = mix(vec3(0.003, 0.004, 0.007), vec3(0.016, 0.024, 0.040), smoothstep(-0.4, 0.7, r.y));
+  float k1 = dot(r, normalize(vec3(-0.45, 0.62, 0.64)));
+  c += vec3(1.0, 0.96, 0.90) * 1.5 * smoothstep(0.84 - soft, 0.985, k1);
+  float k2 = dot(r, normalize(vec3(0.9, 0.12, -0.42)));
+  c += vec3(0.55, 0.72, 1.0) * 0.7 * smoothstep(0.88 - soft, 0.99, k2);
+  float k3 = dot(r, normalize(vec3(0.15, -0.05, 1.0)));
+  c += vec3(0.6, 0.75, 1.0) * 0.10 * smoothstep(0.5 - soft, 1.0, k3);
+  c += GLOW * (0.15 + 0.85 * uHeat) * uLine * 0.5 * exp(-abs(r.y) * 9.);
+  return c;
+}
+
+// glow strength along the bond plane at x: bond-wave flash behind the front, then the anneal glow
+float waveAt(float x){ float b = uXf - x; return b < 0. ? 0. : exp(-b / 0.28); }
+float bondedAt(float x){ return smoothstep(0.0, 0.03, uXf - x); }
+
+// ---------- glass volume: transmittance and in-scatter, analytic along a ray leaving the plane ----------
+vec3 volume(float side, float Y0, float dY, float S, float x0, out float T){
+  float sig = side > 0.5 ? 2.8 : 3.2;
+  T = exp(-sig * S);
+  vec3 amb = side > 0.5 ? vec3(0.008, 0.014, 0.026) : vec3(0.003, 0.004, 0.006);
+  vec3 c = amb * (1. - T);
+  // two-scale glow from the bond plane: tight copper rim + wide slate haze
+  float g = (0.35 * uDiel + 0.02) * uLine * bondedAt(x0) + 0.9 * waveAt(x0);
+  float gh = uHeat * uLine * bondedAt(x0);
+  vec3 gc = mix(GLOW, COOL, clamp(waveAt(x0) - uHeat, 0., 1.) * 0.7);
+  float a1 = sig + dY / 0.035, a2 = sig + dY / 0.35;
+  c += gc * g * 1.6 * sig * exp(-Y0 / (side > 0.5 ? 0.02 : 0.035)) * (1. - exp(-a1 * S)) / a1;
+  vec3 haze = side > 0.5 ? vec3(0.20, 0.30, 0.40) : vec3(0.30, 0.13, 0.05);
+  c += haze * (0.25 + 0.75 * max(g, gh)) * 0.35 * sig * exp(-Y0 / 0.35) * (1. - exp(-a2 * S)) / a2;
+  return c;
+}
+
+// ---------- copper shading for surfaces seen through the glass ----------
+vec3 shadeCu3(vec3 n, vec3 d, float Y, float x, float side){
+  vec3 r = reflect(d, n);
+  float fr = pow(1. - max(dot(n, -d), 0.), 5.);
+  vec3 F0 = mix(CU, vec3(1.), fr);
+  vec3 c = F0 * env(r, 0.32) * 0.42;
+  c += CU * 0.03 * (0.6 + 0.4 * n.y);                                      // frosted-glass diffuse fill
+  float g = (uHeat * 1.1 + 0.05) * uLine * bondedAt(x);
+  float sg = side > 0.5 ? 0.06 : 0.12;
+  c += CU * GLOW * (0.6 * g * exp(-Y * Y / (sg * sg)) + 1.0 * waveAt(x) * exp(-Y / 0.05)) * (0.55 + 0.45 * abs(n.x));    // light from the bond plane
+  return c;
+}
+
+// ---------- trace inside one wafer's glass ----------
+// side 1 = top (y above the underside), 0 = bottom. Local depth Y: distance from the bond face into the wafer.
+vec3 traceGlass(float side, vec3 p0, vec3 d, float s0){
+  float dY = abs(d.y);
+  vec2 dd = d.xz;
+  float a = dot(dd, dd);
+  float best = 1.7;           // max path considered, um
+  vec3 hc = vec3(0.); float cov = 0.; float hitY = 0.;
+  for (int jj = -1; jj < 6; jj++){
+    float j = float(jj);
+    float zj = -j * RZ;
+    float sA = (zj + 0.32 - p0.z) / d.z;
+    if (sA > best) break;
+    float off = rowOff(j, side);
+    // pad / via candidates: columns the ray crosses within the pad band of this row
+    float xP0 = p0.x + d.x * max((zj + 0.11 - p0.z) / d.z, 0.), xP1 = p0.x + d.x * max((zj - 0.11 - p0.z) / d.z, 0.);
+    float kp0 = floor((min(xP0, xP1) - off) / P + 0.5), kp1 = floor((max(xP0, xP1) - off) / P + 0.5);
+    if (jj < 0){ kp0 = 1e4; kp1 = -1e4; }
+    // M1 link bars that start on this row (top: even rows, bottom: odd rows); bar bounding box in xz
+    bool linkRow = (mod(j, 2.) > 0.5) != (side > 0.5);
+    float kb0 = 1e4, kb1 = -1e4;
+    if (linkRow){
+      float zc = zj - 0.5 * RZ;
+      float xb0 = p0.x + d.x * max((zc + 0.39 - p0.z) / d.z, 0.), xb1 = p0.x + d.x * max((zc - 0.39 - p0.z) / d.z, 0.);
+      kb0 = ceil((min(xb0, xb1) - 0.31 - off - 0.25 * P) / P);
+      kb1 = floor((max(xb0, xb1) + 0.31 - off - 0.25 * P) / P);
+    }
+    float k0 = min(kp0, kb0), k1 = max(kp1, kb1);
+    for (float k = k0; k <= k1 + 0.5; k += 1.){
+      bool doPad = k >= kp0 - 0.5 && k <= kp1 + 0.5;
+      bool doBar = k >= kb0 - 0.5 && k <= kb1 + 0.5;
+      float xc = k * P + off;
+      float gObj = side > 0.5 ? gapAt(xc) : 0.;
+      float Y0 = (side > 0.5 ? p0.y - gObj : -p0.y);
+      vec2 o = vec2(p0.x - xc, p0.z - zj);
+      if (doPad){
+        float b = dot(o, dd);
+        float dmin = sqrt(max(dot(o, o) - b * b / a, 0.));
+        float fp = (s0 + max(-b / a, 0.)) / uF * 1.2;
+        // pad (radius RP) then via (RV)
+        for (int pv = 0; pv < 2; pv++){
+          float r = pv == 0 ? RP : RV;
+          float re = r + 0.5 * fp;
+          float c = dot(o, o) - re * re;
+          float disc = b * b - a * c;
+          if (disc <= 0.) continue;
+          float s = (-b - sqrt(disc)) / a;
+          if (s <= 0. || s >= best) continue;
+          float Y = Y0 + dY * s;
+          float y0r = pv == 0 ? 0. : HP, y1r = pv == 0 ? HP : HP + HV;
+          if (Y < y0r || Y > y1r) continue;
+          vec3 hp = p0 + d * s;
+          vec3 n = normalize(vec3(hp.x - xc, 0., hp.z - zj));
+          vec3 col = shadeCu3(n, d, Y, xc, side);
+          if (pv == 0){
+            float rec = recOf(k, j, side);
+            float cavE = cavDepth(1., rec);
+            if (Y < cavE) col = vec3(0.004, 0.003, 0.003) + GLOW * 0.05 * uHeat;
+            // Cu-Cu seam at the bond face: dark line until grains grow across
+            col *= 1. - 0.6 * exp(-pow(Y / (fp * 1.3 + 0.002), 2.)) * (1. - uGrow) * bondedAt(xc);
+          }
+          best = s; hc = col; hitY = Y; cov = clamp((r - dmin) / fp + 0.5, 0., 1.);
+        }
+      }
+      if (doBar){
+        // bar centred between pad (k, j) and its neighbour on row j+1
+        vec2 bc = vec2(xc + 0.25 * P, zj - 0.5 * RZ);
+        vec2 ob = vec2(p0.x, p0.z) - bc;
+        vec3 ro = vec3(dot(ob, LU), dot(ob, LN), Y0 - (HP + HV + 0.5 * HM));
+        vec3 rd = vec3(dot(dd, LU), dot(dd, LN), dY);
+        vec3 hb = vec3(MHL, MW, 0.5 * HM);
+        vec3 inv = 1. / rd;
+        vec3 t1 = (-hb - ro) * inv, t2 = (hb - ro) * inv;
+        vec3 tn = min(t1, t2), tf = max(t1, t2);
+        float tN = max(max(tn.x, tn.y), tn.z), tF = min(min(tf.x, tf.y), tf.z);
+        if (tN < tF && tN > 0. && tN < best){
+          vec3 hp = p0 + d * tN;
+          if (hp.z < 0.){
+            vec3 n;
+            if (tN == tn.z) n = vec3(0., side > 0.5 ? -1. : 1., 0.);
+            else if (tN == tn.x) { vec2 m = -sign(rd.x) * LU; n = vec3(m.x, 0., m.y); }
+            else { vec2 m = -sign(rd.y) * LN; n = vec3(m.x, 0., m.y); }
+            best = tN; hc = shadeCu3(n, d, Y0 + dY * tN, xc, side) * 0.85; hitY = Y0 + dY * tN; cov = 1.;
+          }
+        }
+      }
+    }
+  }
+  float T;
+  float Y0e = side > 0.5 ? p0.y - gapAt(p0.x) : -p0.y;
+  vec3 vol = volume(side, max(Y0e, 0.), dY, best, p0.x, T);
+  vec3 farT; float Tf;
+  vec3 farV = volume(side, max(Y0e, 0.), dY, 1.7, p0.x, Tf);
+  vec3 withHit = vol + T * hc;
+  return mix(farV, withHit, cov);
+}
+
+// ---------- cut face (z = 0): copper cross-section of row 0 ----------
+// returns signed distance to copper (um, < 0 inside); kOut = pillar index; cav = recess depth at x (drawn)
+float cutSd(float side, float x, float Y, out float kOut, out float cav, out float dxOut){
+  float off = rowOff(0., side);
+  float k = floor((x - off) / P + 0.5);
+  float xc = k * P + off;
+  float dx = x - xc;
+  kOut = k; dxOut = dx;
+  float e = abs(dx) / RP;
+  cav = e < 1. ? cavDepth(e, recOf(k, 0., side)) : 0.;
+  float sd = sdBox(vec2(dx, Y - 0.5 * (cav + HP)), vec2(RP, 0.5 * (HP - cav)));
+  sd = min(sd, sdBox(vec2(dx, Y - (HP + 0.5 * HV) + 0.005), vec2(RV, 0.5 * HV + 0.005)));
+  // M1 link bars crossing z = 0: top links start on row 0, bottom links start on row -1
+  float jb = side > 0.5 ? 0. : -1.;
+  float offb = rowOff(jb, side);
+  float kb = floor((x - offb - 0.25 * P) / P + 0.5);
+  for (float i = -1.; i <= 1.; i += 1.){
+    vec2 bc = vec2((kb + i) * P + offb + 0.25 * P, -jb * RZ - 0.5 * RZ);
+    vec2 ob = vec2(x, 0.) - bc;
+    float sxz = sdBox(vec2(dot(ob, LU), dot(ob, LN)), vec2(MHL, MW));
+    sd = min(sd, max(sxz, abs(Y - (HP + HV + 0.5 * HM)) - 0.5 * HM));
+  }
+  return sd;
+}
+
+// Cu microstructure on the cut face: fine grains on each side (no crossing), growers that cross the interface
+vec3 grains(vec2 q, float k, float pxw){
+  float side = q.y >= 0. ? 1. : 0.;
+  const float C = 0.046;
+  vec2 cq = q / C, ci = floor(cq);
+  float d1 = 1e9, d2 = 1e9; vec2 id = vec2(0.);
+  for (int yy = -1; yy <= 1; yy++) for (int xx = -1; xx <= 1; xx++){
+    vec2 c = ci + vec2(float(xx), float(yy));
+    if ((c.y >= 0. ? 1. : 0.) != side) continue;
+    vec2 sp = c + 0.12 + 0.76 * h22(c + vec2(k * 17.3, 0.));
+    float dd = length(cq - sp);
+    if (dd < d1){ d2 = d1; d1 = dd; id = c; } else if (dd < d2) d2 = dd;
+  }
+  float shade = 0.84 + 0.26 * h21(id + 3.1);
+  float bnd = 1. - smoothstep(0., pxw * 0.9, (d2 - d1) * C * 0.5);
+  // growers: two per pillar, centred near the interface
+  float xc = k * P;
+  float m1 = 1e9, m2 = 1e9; float gi = -1.;
+  for (int i = 0; i < 2; i++){
+    float fi = float(i);
+    vec2 hh = h22(vec2(k * 3.7 + fi * 11.3, 7.1));
+    vec2 cg = vec2(xc + (fi - 0.5) * 0.11 + (hh.x - 0.5) * 0.03, (hh.y - 0.5) * 0.05);
+    vec2 v = q - cg;
+    float ang = atan(v.y, v.x);
+    float R = uGrow * (0.13 + 0.05 * hh.y) * (1. + 0.10 * sin(3. * ang + hh.x * 6.) + 0.06 * sin(5. * ang + hh.y * 9.));
+    float m = length(v) - R;
+    if (m < m1){ m2 = m1; m1 = m; gi = fi; } else if (m < m2) m2 = m;
+  }
+  float inG = 1. - smoothstep(-pxw, pxw, m1);
+  if (inG > 0.){
+    float gshade = 0.80 + 0.30 * h21(vec2(k, gi) + 9.7);
+    float gb = (1. - smoothstep(0., pxw * 1.3, abs(m2 - m1) * 0.5)) * step(m2, 0.);   // grower-grower boundary
+    float eb = 1. - smoothstep(0., pxw * 1.3, abs(m1));                            // grower edge
+    shade = mix(shade, gshade, inG);
+    bnd = max(mix(bnd, gb, inG), eb * step(0.0001, uGrow));
+  }
+  // straight Cu-Cu interface, removed where a grower has crossed it
+  float seam = exp(-pow(q.y / (pxw * 1.1), 2.)) * (1. - inG);
+  return vec3(shade, bnd, seam);
+}
+
+vec3 shadeCutCu(vec3 p, vec3 d, float k, float side, float Yrel, float pxw){
+  vec3 r = reflect(d, vec3(0., 0., 1.));
+  vec3 gr = grains(vec2(p.x - side * OV, p.y), k, pxw);
+  float lobe = smoothstep(0.55, 1.0, dot(r, normalize(vec3(-0.45, 0.55, 0.70))));
+  float sd = r.x * 0.78 + r.y * 0.62;
+  float streak = exp(-pow((sd + 0.02) / 0.07, 2.));
+  float near = exp(-abs(p.y) / 0.16);                 // microstructure shown mainly near the interface
+  float gs = 1. + (0.12 + 0.35 * near) * (gr.x - 0.97);
+  vec3 c = CU * (0.022 + 0.09 * lobe + 0.20 * streak) * gs;
+  float g = (uHeat * 1.2 + 0.06) * uLine * bondedAt(p.x);
+  float gw = 0.9 * waveAt(p.x);
+  float sg = p.y > 0. ? 0.06 : 0.10;                   // shorter above the line (text band), wider below
+  c += CU * GLOW * (0.55 * g * exp(-p.y * p.y / (sg * sg)) + 1.3 * gw * exp(-abs(p.y) / 0.03)) * gs;
+  c += CU * GLOW * g * 0.10 * exp(-p.y * p.y / 0.09);
+  c *= 1. - (0.05 + 0.22 * near) * gr.y;
+  c *= 1. - 0.85 * gr.z * bondedAt(p.x);
+  return c;
+}
+
+// ---------- the open gap ahead of the bond front (pre-bond) ----------
+vec3 traceGap(vec3 p0, vec3 d){
+  float lo = 0., hi = 7.;
+  vec3 ph = p0 + d * hi;
+  if (ph.y < gapAt(ph.x)){
+    float sB = 0.;
+    for (int i = 0; i < 12; i++){
+      float m = 0.5 * (lo + hi);
+      vec3 q = p0 + d * m;
+      if (q.y < gapAt(q.x)) lo = m; else hi = m;
+    }
+    float s = hi;
+    vec3 h = p0 + d * s;
+    // underside of the top wafer: SiCN with recessed Cu discs
+    float j = floor(-h.z / RZ + 0.5);
+    float best = 1e9; float kb = 0., jb = 0.; vec2 rel = vec2(0.);
+    for (float dj = -1.; dj <= 1.; dj += 1.){
+      float jj = j + dj;
+      float off = rowOff(jj, 1.);
+      float k = floor((h.x - off) / P + 0.5);
+      vec2 v = vec2(h.x - (k * P + off), h.z + jj * RZ);
+      float l = length(v);
+      if (l < best){ best = l; kb = k; jb = jj; rel = v; }
+    }
+    float fog = 1. - exp(-s * 0.55);
+    vec3 r = reflect(d, vec3(0., -1., 0.));
+    vec3 c;
+    float st = length(p0 - uCam) + s;
+    float fp = st / uF;                                  // footprint across the ray
+    float fpL = st / (uF * max(d.y, 1e-3));              // footprint along the grazing ray
+    float inside = 1. - smoothstep(RP - fp, RP + fp, best);
+    inside = mix(inside, 0.227, smoothstep(0.004, 0.02, fpL));   // filter to the mean Cu area fraction
+    vec3 diel = vec3(0.010, 0.016, 0.026) + env(r, 0.5) * 0.06;
+    vec3 cu = CU * (env(r, 0.5) * 0.6 + vec3(0.05, 0.045, 0.04)) * (0.75 + 0.25 * smoothstep(0., RP, best));
+    c = mix(diel, cu, inside);
+    vec3 far = vec3(0.020, 0.030, 0.048);
+    return mix(c, far, fog);
+  }
+  return vec3(0.020, 0.030, 0.048);
+}
+
+vec3 tonemap(vec3 c){
+  c = max(c, 0.);
+  vec3 a = c * (2.51 * c + 0.03), b = c * (2.43 * c + 0.59) + 0.14;
+  return pow(clamp(a / b, 0., 1.), vec3(1. / 2.2));
+}
+
+void main(){
+  vec2 px = vec2(gl_FragCoord.x, ${H}.0 - gl_FragCoord.y);
+  vec3 d = normalize(uR * (px.x - 960.) / uF + vec3(0., 1., 0.) * (${LINE_Y}.0 - px.y) / uF + uFw);
+  float s0 = -uCam.z / d.z;
+  vec3 p = uCam + d * s0;
+  float pxw = s0 / uF;              // world size of one pixel on the cut face
+  float g = gapAt(p.x);
+  vec3 col;
+  float yTop = p.y - g;
+  // top wafer / gap / bottom wafer, with an anti-aliased top-wafer edge
+  vec3 cTop = vec3(0.), cGap = vec3(0.), cBot = vec3(0.);
+  float cuAny = 0., cavAny = 0.;
+  float wTop = smoothstep(-pxw, pxw, yTop);
+  float wBot = 1. - smoothstep(-pxw, pxw, p.y);
+  float wGap = max(1. - wTop - wBot, 0.);
+  for (int sideI = 0; sideI < 2; sideI++){
+    float side = float(sideI);
+    float w = side > 0.5 ? wTop : wBot;
+    if (w <= 0.) continue;
+    float Y = side > 0.5 ? max(yTop, 0.) : max(-p.y, 0.);
+    float k, cav, dx;
+    float sd = cutSd(side, p.x, Y, k, cav, dx);
+    vec3 cg = vec3(0.);
+    float cuW = 1. - smoothstep(-pxw, pxw, sd);
+    if (cuW < 1.){
+      cg = traceGlass(side, p, d, s0);
+      // glass cut face: faint reflection, SiCN band slightly denser than the oxide above it
+      vec3 r = reflect(d, vec3(0., 0., 1.));
+      cg += env(r, 0.6) * 0.03;
+      // frosted surface of the cut: a faint scattering skin over what lies behind
+      vec3 frost = side > 0.5 ? vec3(0.020, 0.030, 0.050) : vec3(0.008, 0.008, 0.011);
+      float gS = (uHeat + 0.05) * uLine * bondedAt(p.x) + waveAt(p.x);
+      cg = mix(cg, frost, 0.32) + GLOW * gS * 0.25 * exp(-Y * Y / 0.0036);
+      cg *= Y < HP ? 1.0 : 0.85;
+      // TaN/Ta liner as a thin dark rim (not on the bonding face)
+      float liner = (1. - smoothstep(0., pxw, abs(sd - 0.5 * BAR) - 0.5 * BAR)) * step(cav + 0.004, Y);
+      cg = mix(cg, vec3(0.012, 0.012, 0.014) + env(r, 0.4) * 0.03, liner * 0.9);
+      // recess cavity between the dished Cu and the bond plane
+      if (abs(dx) < RP && Y < cav){
+        float e = smoothstep(0., pxw * 1.5, cav - Y);
+        cg = mix(cg, vec3(0.002) + GLOW * 0.03 * uHeat, e);
+        cavAny = max(cavAny, smoothstep(0., pxw * 2.5, cav));
+      }
+    }
+    vec3 cc = vec3(0.);
+    if (cuW > 0.) cc = shadeCutCu(vec3(p.x, side > 0.5 ? yTop : p.y, 0.), d, k, side, Y, pxw);
+    vec3 c = mix(cg, cc, cuW);
+    cuAny = max(cuAny, cuW);
+    if (side > 0.5) cTop = c; else cBot = c;
+  }
+  if (wGap > 0.) cGap = traceGap(p, d);
+  col = cTop * wTop + cBot * wBot + cGap * wGap;
+  // calm band for the overlay text (x 560-1360, y 500-592): lower contrast and level above the line
+  float bx = smoothstep(380., 640., px.x) * (1. - smoothstep(1280., 1540., px.x));
+  // continuous through the line (no brightness step at y = 600), falling off below it
+  float by = px.y < ${LINE_Y}.0 ? smoothstep(430., 505., px.y) : 1. - smoothstep(${LINE_Y}.0, 690., px.y);
+  float cm = by * (0.35 + 0.65 * bx);
+  col = mix(col, vec3(0.008, 0.012, 0.020) + 0.35 * col, 0.72 * cm);
+
+  // the bond plane on the cut face: wave flash (cool) then the anneal glow; dielectric line fades after anneal
+  float bpx = p.y / pxw;                     // px from the plane
+  float bonded = bondedAt(p.x);
+  float wv = waveAt(p.x);
+  float core = exp(-bpx * bpx / 2.2);
+  float halo = exp(-abs(bpx) / 16.);
+  // sharp interface core: over Cu it goes once grains cross the interface; over the dielectric it fades to faint
+  float coreW = mix(uDiel, 1. - uGrow, max(cuAny, cavAny)) * (1. - cavAny);
+  float soft = bpx > 0. ? exp(-bpx * bpx / 700.) : exp(-bpx * bpx / 4500.);   // anneal glow, smooth peak: short above (text band), longer below
+  vec3 haloC = COOL * wv * 0.35 * halo
+             + mix(HOT, GLOW, 0.35) * bonded * (coreW * 0.10 * halo + uLine * uHeat * 0.16 * soft);
+  vec3 coreC = (COOL * wv * 1.6 + mix(HOT, GLOW, 0.35) * bonded * coreW * 0.75) * core;
+  col += haloC;
+  // pre-bond: thin cool rim on the two open faces at the gap
+  col += COOL * 0.05 * exp(-abs(yTop) / pxw / 2.) * (1. - bonded);
+  // overlay legibility: soft-knee highlight compressor around the text band (x 560-1360, y 500-592). It only
+  // lowers bright pixels, is feathered in x and continuous through y = 600, so it adds no box and no line.
+  // The 1-3 px interface core and the contact flashes are added after it (they lie below the band).
+  float tx = smoothstep(400., 560., px.x) * (1. - smoothstep(1360., 1520., px.x));
+  float ty = px.y < ${LINE_Y}.0 ? smoothstep(440., 495., px.y) : 1. - smoothstep(${LINE_Y}.0, 690., px.y);
+  float Lh = dot(col * 1.15 * uExpo, vec3(0.2126, 0.7152, 0.0722));
+  const float KNEE = 0.08, CAP = 0.15;
+  float Lc = Lh < KNEE ? Lh : KNEE + (CAP - KNEE) * (1. - exp(-(Lh - KNEE) / (CAP - KNEE)));
+  col *= mix(1., Lc / max(Lh, 1e-6), tx * ty);
+  col += coreC;
+  // Cu-Cu contact: a short flash on each pad as Cu expansion closes its own recess (both sides)
+  float kc = floor(p.x / P + 0.5);
+  float ex = (p.x - kc * P) / RP;
+  if (abs(ex) < 1. && bonded > 0.){
+    float recC = max(recOf(kc, 0., 0.), recOf(kc, 0., 1.));
+    float fl = exp(-pow((uExp - recC) / 0.13, 2.)) * (1. - ex * ex);
+    col += HOT * 1.4 * fl * exp(-bpx * bpx / 12.);
+  }
+
+  vec3 o = tonemap(col * 1.15 * uExpo);
+  // gentle vignette
+  vec2 uv = px / vec2(${W}.0, ${H}.0) - vec2(0.5, ${LINE_Y / H});
+  o *= 1. - 0.22 * dot(uv * vec2(0.9, 1.2), uv * vec2(0.9, 1.2));
+  frag = vec4(o, 1.);
+}`;
+
+let gl, prog, U = {};
+
+function camera(t) {
+  const cx = CAMX0 + TRUCK * t;
+  const cam = [cx, 0, D];
+  const fw = [Math.sin(YAW), 0, -Math.cos(YAW)];
+  const r = [Math.cos(YAW), 0, Math.sin(YAW)];
+  return { cam, fw, r };
+}
+
+// x on the cut face (z = 0) seen at screen column px, on the horizon
+function cutX(c, px) {
+  const a = (px - 960) / F;
+  const d = [c.r[0] * a + c.fw[0], 0, c.r[2] * a + c.fw[2]];
+  const s = -c.cam[2] / d[2];
+  return c.cam[0] + d[0] * s;
+}
+
+function state(t) {
+  const c = camera(0);
+  const xL = cutX(c, 0), xR = cutX(c, W);
+  // bond wave: front enters at the left edge at t = 0, leaves the right edge at t ~ 0.6 s
+  const w = clamp01(t / 0.85);
+  const xf = xL - 0.06 + (xR - xL + 1.4) * (w * (0.8 + 0.2 * w));
+  const gA = 0.015 / Math.pow(xR - xL + 0.06, 1.5);  // opening 15 nm at the right edge at t = 0 (exaggerated, see notes)
+  const heat = sst(0.55, 0.95, t) * (1 - 0.8 * sst(1.6, 3.0, t));
+  const exp = 1.5 * sst(0.62, 1.08, t);              // Cu expansion, nm per side
+  const grow = sst(0.9, 1.45, t);
+  const diel = 1 - 0.88 * sst(0.85, 1.45, t);
+  const line = 1 - 0.45 * sst(1.5, 2.8, t);
+  const expo = 1 - 0.22 * sst(2.2, 4.0, t);           // settles darker in the hold (cooled)
+  return { c: camera(t), xf, gA, heat, exp, grow, diel, line, expo };
+}
+
+// screen x of the bond-wave front on the cut face at scene time t (same projection as the shader, on the horizon)
+function frontSX(t) {
+  const s = state(t), c = s.c;
+  const vx = s.xf - c.cam[0], vz = -c.cam[2];
+  const zc = vx * c.fw[0] + vz * c.fw[2], xc = vx * c.r[0] + vz * c.r[2];
+  return 960 + F * xc / zc;
+}
+
+// hairline cracks / voids along the split of each letter (seeded per letter, mask px). Each segment carries d = path
+// distance from the letter's centre on the split; healing removes the largest d first (tips inward).
+let crackKey = '', crackLetters = null;
+function buildCracks(word, m, info, sy) {
+  const lay = TFX.layout(word, { family: info.fonts.serif, size: info.size });
+  const out = [];
+  lay.glyphs.forEach((gl, i) => {
+    const x0 = m.ox + gl.x, x1 = x0 + gl.w;
+    let a = -1, b = -1;
+    for (let x = Math.floor(x0); x < Math.ceil(x1); x++)
+      if (m.cov(x, sy) > 0.5 || m.cov(x, sy - 1) > 0.5) { if (a < 0) a = x; b = x; }
+    if (a < 0) return;
+    const rnd = (k) => TFX.hash(i + 1, gl.ch.charCodeAt(0), k);
+    const cx = (a + b) / 2, segs = [], pts = [];
+    let k = 0;
+    for (let x = a - 1; x <= b + 1.5; x += 3) pts.push([x, sy + (rnd(k++) - 0.5) * 2.4]);
+    for (let j = 1; j < pts.length; j++)
+      segs.push([pts[j - 1][0], pts[j - 1][1], pts[j][0], pts[j][1], Math.abs((pts[j - 1][0] + pts[j][0]) / 2 - cx)]);
+    const nb = 2 + Math.floor(rnd(100) * 3);
+    for (let n = 0; n < nb; n++) {
+      let [x, y] = pts[Math.floor(rnd(200 + n) * pts.length)];
+      let d = Math.abs(x - cx);
+      let ang = (rnd(300 + n) < 0.5 ? -1 : 1) * Math.PI / 2 + (rnd(400 + n) - 0.5) * 1.7;
+      const ns = 2 + Math.floor(rnd(500 + n) * 2);
+      for (let q = 0; q < ns; q++) {
+        const L = 2 + rnd(600 + n * 7 + q) * 3;
+        const nx = x + Math.cos(ang) * L, ny = y + Math.sin(ang) * L;
+        segs.push([x, y, nx, ny, d + L / 2]);
+        d += L; x = nx; y = ny;
+        if (q === 0 && rnd(800 + n) < 0.45) {
+          const a2 = ang + (rnd(900 + n) < 0.5 ? -0.9 : 0.9), L2 = 2 + rnd(950 + n) * 2.5;
+          segs.push([x, y, x + Math.cos(a2) * L2, y + Math.sin(a2) * L2, d + L2 / 2]);
+        }
+        ang += (rnd(700 + n * 7 + q) - 0.5) * 1.2;
+      }
+    }
+    const voids = [];
+    const nv = 1 + Math.floor(rnd(1000) * 2);
+    for (let v = 0; v < nv; v++) {
+      const pv = pts[1 + Math.floor(rnd(1100 + v) * Math.max(1, pts.length - 2))] || pts[0];
+      voids.push([pv[0], pv[1], 0.8 + rnd(1200 + v) * 0.7, Math.abs(pv[0] - cx)]);
+    }
+    let dmax = 1;
+    for (const sg of segs) dmax = Math.max(dmax, sg[4]);
+    out.push({ cx, segs, voids, dmax });
+  });
+  return out;
+}
+
+// overlay word: split along its visual midline (middle of the x-height); the halves close column by column as the bond-wave front passes,
+// hairline cracks form on the split as it closes, glow pale peach during the anneal and heal tips-first by 1.45 s
+const fillCache = new Map();
+function fillOf(m, word, info) {
+  const key = word + '|' + info.size + '|' + info.color;
+  if (!fillCache.has(key)) fillCache.set(key, TFX.fill(m, info.color));
+  return fillCache.get(key);
+}
+
+// The whole phrase ("shrink & bond") runs one sequence: split at mid x-height from t = 0 (small gap, legible), then
+// scales 1.0 -> 0.85 about (x = 960, baseline) over 0-0.22 s, finishing as its first columns start to close with the
+// bond front (the front crosses the phrase at ~0.24-0.38 s), then cracks, anneal glow and tips-first healing.
+const SHRINK_TO = 0.85, SHRINK_T = 0.22;
+function heroText(g, word, t, p, info) {
+  const m = TFX.mask(word, { family: info.fonts.serif, size: info.size });
+  const sc = 1 - (1 - SHRINK_TO) * sst(0, SHRINK_T, t);
+  g.translate(info.x, info.baseline); g.scale(sc, sc); g.translate(-info.x, -info.baseline);
+  bondWord(g, word, t, info, info.x - m.width / 2, sc);
+}
+
+// word with its pen origin at penX on the default baseline: split at mid x-height, halves close with the bond front,
+// hairline cracks, pale peach glow on anneal, heal tips-first
+function bondWord(g, word, t, info, penX, sc = 1) {
+  const m = TFX.mask(word, { family: info.fonts.serif, size: info.size });
+  const wordFill = fillOf(m, word, info);
+  const sy = Math.round(m.oy - m.xHeight / 2);                    // split row in mask px: middle of the x-height
+  const left = Math.round(penX - m.ox), top = Math.round(info.baseline - m.oy);
+  const ySplit = top + sy;
+  const fx = info.x + (frontSX(t) - info.x) / sc;                // front in the word's (unscaled) frame
+  const G0 = Math.max(5, Math.round(info.size * 0.11));           // full gap ahead of the front (7 px at 64 px)
+  const RAMP = info.size * 1.6;                                   // gap opens over this distance ahead of the front
+  const gapAt = (sx) => G0 * sst(0, RAMP, sx - fx);
+  if (gapAt(left + m.w) <= 0.01) {
+    g.drawImage(wordFill, left, top);                             // fully bonded: one solid word
+  } else {
+    // 2 px columns composed offscreen at integer x, then drawn once (no seams under the scale transform)
+    const SW = 2, PY = G0;
+    const oc = document.createElement('canvas'); oc.width = m.w; oc.height = m.h + 2 * PY;
+    const ox = oc.getContext('2d');
+    for (let i = 0; i < m.w; i += SW) {
+      const w = Math.min(SW, m.w - i), gp = gapAt(left + i + w / 2);
+      ox.drawImage(wordFill, i, 0, w, sy, i, PY - gp / 2, w, sy);
+      ox.drawImage(wordFill, i, sy, w, m.h - sy, i, PY + sy + gp / 2, w, m.h - sy);
+    }
+    g.drawImage(oc, left, top - PY);
+  }
+  // cracks: appear as each letter closes, dark (voids) until the anneal, then glow pale peach and heal tips-first
+  const ck = word + '|' + info.size;
+  if (ck !== crackKey) { crackLetters = buildCracks(word, m, info, sy); crackKey = ck; }
+  const glow = sst(0.55, 0.85, t), vis = 1 - sst(0.85, 1.45, t);
+  if (vis > 0.002) {
+    const cv = document.createElement('canvas'); cv.width = m.w; cv.height = m.h;
+    const cc = cv.getContext('2d');
+    const mixc = (u, v) => Math.round(u + (v - u) * glow);
+    const col = `rgb(${mixc(30, 255)},${mixc(22, 218)},${mixc(20, 192)})`;   // dark void -> warm off-white peach
+    cc.strokeStyle = col; cc.fillStyle = col;
+    cc.lineWidth = 1 + 0.3 * glow; cc.lineCap = 'round';
+    for (const L of crackLetters) {
+      const aL = 1 - gapAt(left + L.cx) / G0;                     // letter closed -> cracks visible
+      if (aL <= 0.01) continue;
+      cc.globalAlpha = Math.min(1, aL) * (0.9 - 0.15 * glow);
+      const lim = vis * L.dmax + 1e-3;
+      cc.beginPath();
+      for (const sg of L.segs) if (sg[4] <= lim) { cc.moveTo(sg[0], sg[1]); cc.lineTo(sg[2], sg[3]); }
+      cc.stroke();
+      for (const v of L.voids) if (v[3] <= lim) { cc.beginPath(); cc.ellipse(v[0], v[1], v[2] * 1.6 * vis, v[2] * vis, 0, 0, 2 * Math.PI); cc.fill(); }
+    }
+    cc.globalAlpha = 1;
+    cc.globalCompositeOperation = 'destination-in';
+    cc.drawImage(m.canvas, 0, 0);
+    g.save();
+    if (glow > 0) { g.shadowColor = `rgba(255, 206, 172, ${0.9 * glow})`; g.shadowBlur = 7; }
+    g.drawImage(cv, left, top);
+    g.restore();
+  }
+  // seam band: the glyph cross-section at the split row
+  const seam = (color, glow, alpha, sx0, sx1) => {
+    if (alpha <= 0.003) return;
+    const b = document.createElement('canvas'); b.width = m.w; b.height = 3;
+    const bc = b.getContext('2d');
+    bc.drawImage(m.canvas, 0, sy - 1, m.w, 2, 0, 0, m.w, 3);
+    bc.globalCompositeOperation = 'source-in';
+    bc.fillStyle = color; bc.fillRect(0, 0, m.w, 3);
+    const a = Math.max(0, Math.floor(sx0 - left)), z = Math.min(m.w, Math.ceil(sx1 - left));
+    if (z <= a) return;
+    g.save();
+    g.globalAlpha = Math.min(1, alpha);
+    g.shadowColor = glow; g.shadowBlur = 14;
+    g.drawImage(b, a, 0, z - a, 3, left + a, ySplit - 1.5, z - a, 3);
+    g.shadowBlur = 5;
+    g.drawImage(b, a, 0, z - a, 3, left + a, ySplit - 1.5, z - a, 3);
+    g.restore();
+  };
+  // bond-wave glint where the halves are closing (cool white, like the scene's front flash)
+  if (fx > left - 40 && fx < left + m.w + 40) seam('#eef6ff', '#bcd8ff', 0.9, fx - 34, fx + 4);
+  // anneal seam (copper) along the bonded split, gone once grains have crossed the interface
+  const a = sst(0.55, 0.85, t) * (1 - sst(1.0, 1.45, t));
+  seam('#fff2e6', '#ffcfae', a, left, Math.min(left + m.w, fx));
+  // strike-through anneal line across the whole phrase at the split height, echoing the scene's bond-plane glow:
+  // appears behind the front as the halves bond, brightens with the anneal, fades with the interface (gone by 1.45 s)
+  const sk = (0.45 + 0.55 * sst(0.55, 0.85, t)) * (1 - sst(0.9, 1.45, t));
+  const EXT = 14, TAPER = 22, LEAD = 26;
+  const lx0 = left + m.ox + m.left - EXT, lx1 = left + m.ox + m.right + EXT;
+  const lxe = Math.min(lx1, fx);                                    // bonded extent
+  if (sk > 0.003 && lxe > lx0 + 2) {
+    const span = lx1 - lx0, fr = (x) => Math.min(1, Math.max(0, (x - lx0) / span));
+    const stops = [[0, 0], [fr(lx0 + TAPER), 1], [fr(Math.min(lx1 - TAPER, lxe - LEAD)), 1], [fr(lxe), 0], [1, 0]];
+    const grad = (rgb, a) => {
+      const gr = g.createLinearGradient(lx0, 0, lx1, 0);
+      let last = 0;
+      for (const [o, k] of stops) { last = Math.max(last, o); gr.addColorStop(last, `rgba(${rgb}, ${a * k})`); }
+      return gr;
+    };
+    g.save();
+    g.fillStyle = grad('255, 214, 186', 0.30 * sk);                  // soft halo
+    g.shadowColor = `rgba(255, 206, 172, ${0.8 * sk})`; g.shadowBlur = 16;
+    g.fillRect(lx0, ySplit - 3, span, 6);
+    g.shadowBlur = 6;
+    g.fillStyle = grad('255, 246, 236', 0.9 * sk);                   // core
+    g.fillRect(lx0, ySplit - 1, span, 2);
+    g.restore();
+  }
+}
+
+function compile(type, src) {
+  const s = gl.createShader(type);
+  gl.shaderSource(s, src);
+  gl.compileShader(s);
+  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+  return s;
+}
+
+APA.scene({
+  meta: { text: 'light' },
+  init() {
+    ({ ctx: gl } = APA.canvas('webgl2', { antialias: false }));
+    prog = gl.createProgram();
+    gl.attachShader(prog, compile(gl.VERTEX_SHADER, VS));
+    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FS));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+    gl.useProgram(prog);
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, 'aP');
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    for (const n of ['uCam', 'uR', 'uFw', 'uF', 'uXf', 'uGA', 'uHeat', 'uExp', 'uGrow', 'uDiel', 'uLine', 'uExpo'])
+      U[n] = gl.getUniformLocation(prog, n);
+    gl.viewport(0, 0, W, H);
+  },
+  text: heroText,
+  render(t) {
+    const s = state(t);
+    gl.uniform3fv(U.uCam, s.c.cam);
+    gl.uniform3fv(U.uR, s.c.r);
+    gl.uniform3fv(U.uFw, s.c.fw);
+    gl.uniform1f(U.uF, F);
+    gl.uniform1f(U.uXf, s.xf);
+    gl.uniform1f(U.uGA, s.gA);
+    gl.uniform1f(U.uHeat, s.heat);
+    gl.uniform1f(U.uExp, s.exp);
+    gl.uniform1f(U.uGrow, s.grow);
+    gl.uniform1f(U.uDiel, s.diel);
+    gl.uniform1f(U.uLine, s.line);
+    gl.uniform1f(U.uExpo, s.expo);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    gl.finish();
+  },
+});
+</script>
+</body>
+</html>

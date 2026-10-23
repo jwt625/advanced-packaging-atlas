@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>l4b ubump bauhaus</title>
+<script src="../lib/apa.js"></script>
+<script src="../lib/textfx.js"></script>
+</head>
+<body>
+<script>
+// L4 pass B: the same 10 um pitch Ni/Sn microbump + TSV B2F stack as l4a, as a Bauhaus colour-plane composition.
+// One colour per material (Cu black, Sn yellow, Ni red, Ni3Sn4 orange, dielectric blue, Si off-white / red inside the disc,
+// underfill pale grey). Geometry to scale; structure and sources: l4b_ubump_bauhaus.notes.md.
+// Motion: the red disc rises like a sun from low in the frame to its composed position (ease-out, tau 0.06 s: within
+// 1 px by 0.40 s, held through 3 s); the structure pans right-to-left at 30 px/s.
+const { W, H, LINE_Y } = APA;
+
+const S = 26;                       // px per um
+const P = 10 * S;                   // 10 um pitch
+const yz = (z) => LINE_Y - S * z;
+// bonded Sn standoff 2.93 um: pre-bond Sn 3.5 um x 7 um dia, volume kept while it wets out to 8.6 um on the pad
+const SN_H = (() => {          // Sn volume kept: 7 um x 3.5 um cylinder -> bonded profile below (2.93 um, as l4a)
+  let m = 0; const n = 64;
+  for (let i = 0; i < n; i++) {
+    const u = (i + 0.5) / n, k = Math.min(1, Math.max(0, (u - 0.55) / 0.45)), sm = k * k * (3 - 2 * k);
+    const r = 3.5 + 0.25 * Math.sin(Math.PI * u) + 0.8 * Math.pow(sm, 1.4); m += r * r;
+  }
+  return 3.5 * 3.5 * 3.5 / (m / n);
+})();
+const Y_SN = yz(SN_H), Y_IMC = yz(SN_H + 0.7), Y_UBM = yz(SN_H + 2.7), Y_V1B = yz(SN_H + 3.22), Y_M1B = yz(SN_H + 4.28),
+  Y_OX = yz(SN_H + 7.28);
+const Y_PCU = yz(-0.5), Y_PNI = yz(-1.0), Y_V1F = yz(-1.52), Y_M1F = yz(-2.58);
+const R_TSV = 2.5 * S, R_CU = R_TSV - 0.25 * S;
+const R_BUMP = 3.5 * S, R_BASE = 4.3 * S, R_PAD = 4.5 * S, R_M1 = 4.0 * S;
+const VIA_X = [-2.6, -1.3, 0, 1.3, 2.6].map((u) => u * S);
+const R_VIA = 0.27 * S;
+const ss = (a, b, x) => { const u = Math.min(1, Math.max(0, (x - a) / (b - a))); return u * u * (3 - 2 * u); };
+// solder profile (same as l4a): slight barrel, wetting out to R_BASE on the pad
+const solderH = (y) => { const u = (y - Y_SN) / (LINE_Y - Y_SN); return R_BUMP + 0.25 * S * Math.sin(Math.PI * u) + (R_BASE - R_BUMP) * Math.pow(ss(0.55, 1, u), 1.4); };
+
+const PAL = { red: '#d33a26', yellow: '#f3c22f', orange: '#e6862b', blue: '#1f4c9e', black: '#151515', paper: '#efe8d8', pale: '#d9d1bf' };
+// Ni3Sn4 IMC = orange (the Ni red / Sn yellow mix); keeps the text band (y 500-592) free of black
+const C = { cu: PAL.black, sn: PAL.yellow, ni: PAL.red, imc: PAL.orange, diel: PAL.blue, si: PAL.paper, disc: PAL.red, cuf: PAL.pale };
+// disc: screen-anchored, painted only into the silicon planes (behind the bond strip); rises from y0 to y
+const DISC = { x: 1250, y: 610, r: 480, y0: 1250, tau: 0.06 }; // tau was 0.18 s (2026-10-22: 1-beat shot)
+const discY = (t) => DISC.y + (DISC.y0 - DISC.y) * Math.exp(-Math.max(0, t) / DISC.tau);
+
+let ctx;
+
+function siPlanes(dy) {
+  for (const [y0, y1] of [[0, Y_OX], [Y_M1F, H]]) {
+    ctx.fillStyle = C.si;
+    ctx.fillRect(0, y0, W, y1 - y0);
+    ctx.save();
+    ctx.beginPath(); ctx.rect(0, y0, W, y1 - y0); ctx.clip();
+    ctx.fillStyle = C.disc;
+    ctx.beginPath(); ctx.arc(DISC.x, dy, DISC.r, 0, 2 * Math.PI); ctx.fill();
+    ctx.restore();
+  }
+}
+
+function column(xc) {
+  const r = (x0, y0, x1, y1, col) => { ctx.fillStyle = col; ctx.fillRect(x0, y0, x1 - x0, y1 - y0); };
+  // TSVs: oxide liner + barrier (dielectric blue edge), Cu core (black bar)
+  r(xc - R_TSV, 0, xc + R_TSV, Y_M1B, C.diel);
+  r(xc - R_CU, 0, xc + R_CU, Y_M1B, C.cu);
+  r(xc - R_TSV, Y_M1F, xc + R_TSV, H, C.diel);
+  r(xc - R_CU, Y_M1F, xc + R_CU, H, C.cu);
+  // upper die backside: M1B plate, VIA1B squares
+  r(xc - R_M1, Y_M1B, xc + R_M1, Y_V1B, C.cu);
+  for (const v of VIA_X) r(xc + v - R_VIA, Y_V1B, xc + v + R_VIA, Y_UBM, C.cu);
+  // Ni raised UBM, Ni3Sn4 IMC
+  r(xc - R_BUMP, Y_UBM, xc + R_BUMP, Y_IMC, C.ni);
+  r(xc - R_BUMP, Y_IMC, xc + R_BUMP, Y_SN, C.imc);
+  // Sn solder: slight barrel, wetting out onto the pad
+  ctx.fillStyle = C.sn;
+  ctx.beginPath();
+  for (let i = 0; i <= 24; i++) { const y = Y_SN + (LINE_Y - Y_SN) * i / 24; ctx.lineTo(xc + solderH(y), y); }
+  for (let i = 24; i >= 0; i--) { const y = Y_SN + (LINE_Y - Y_SN) * i / 24; ctx.lineTo(xc - solderH(y), y); }
+  ctx.closePath();
+  ctx.fill();
+  // lower die front side: Cu / Ni pad, VIA1F squares, M1F plate
+  r(xc - R_PAD, LINE_Y, xc + R_PAD, Y_PCU, C.cu);
+  r(xc - R_PAD, Y_PCU, xc + R_PAD, Y_PNI, C.ni);
+  for (const v of VIA_X) r(xc + v - R_VIA, Y_PNI, xc + v + R_VIA, Y_V1F, C.cu);
+  r(xc - R_M1, Y_V1F, xc + R_M1, Y_M1F, C.cu);
+}
+
+// Styled text (pass B "10 µm"): Herbert Bayer universal-alphabet construction, every glyph built from circles and bars
+// only; Kandinsky's Bauhaus form-colour pairing gives the circle parts (the 0 ring, the bowl of µ, the arches of m)
+// blue and the bars black (red / yellow already fill the IMC and solder planes behind). Proportions are taken from
+// APA Bauhaus (Josefin Sans 700): cap height, x-height and stem weight from its metrics at the same size. The blue
+// circle parts settle 3 px upward with the sun's time constant (legible at t = 0). Characters outside the
+// constructed set fall back to APA Bauhaus 700 in black.
+const BH = (() => {
+  const BLUE = '#1a4291';   // PAL.blue deepened ~10 %: >= 3.5:1 where the 0 ring crosses the orange IMC strip
+  let met = null;
+  const metrics = (info, size) => {
+    if (met && met.size === size) return met;
+    const m = TFX.mask('Hx', { family: info.fonts.bauhaus, size, weight: 700 });
+    const ch = m.capHeight, xh = m.xHeight;
+    met = { size, ch, xh: Math.max(xh, 0.66 * ch), w: 0.2 * ch, desc: 0.36 * ch, gap: 0.2 * ch, space: 0.42 * ch };
+    return met;
+  };
+  // each glyph: width, and draw(g, x, yb, M, lift) with lift (px) applied to the circle parts only
+  const glyphs = {
+    '1': (M) => ({ w: 0.32 * M.ch + M.w, draw(g, x, yb) {
+      const fl = 0.32 * M.ch;
+      g.fillStyle = PAL.black;
+      g.fillRect(x + fl, yb - M.ch, M.w, M.ch);
+      g.beginPath();                                   // 45 deg flag: a bar of the same weight
+      g.moveTo(x + fl + M.w, yb - M.ch); g.lineTo(x + fl + M.w, yb - M.ch + M.w * 1.414);
+      g.lineTo(x, yb - M.ch + fl + M.w * 1.414); g.lineTo(x, yb - M.ch + fl);
+      g.lineTo(x + fl, yb - M.ch); g.closePath(); g.fill();
+    } }),
+    '0': (M) => ({ w: M.ch, draw(g, x, yb, lift) {
+      const R = M.ch / 2, cx = x + R, cy = yb - R + lift;
+      g.fillStyle = BLUE;
+      g.beginPath(); g.arc(cx, cy, R, 0, 2 * Math.PI); g.arc(cx, cy, R - M.w, 0, 2 * Math.PI, true); g.fill();
+    } }),
+    'µ': (M) => ({ w: 1.12 * M.xh, draw(g, x, yb, lift) {
+      const U = 1.12 * M.xh, R = U / 2, cx = x + R, cy = yb - R;
+      g.fillStyle = BLUE;                          // lower half ring
+      g.beginPath(); g.arc(cx, cy + lift, R, 0, Math.PI); g.arc(cx, cy + lift, R - M.w, Math.PI, 0, true); g.closePath(); g.fill();
+      g.fillStyle = PAL.black;
+      g.fillRect(x, yb - M.xh, M.w, M.xh + M.desc);   // left bar runs into the descender
+      g.fillRect(x + U - M.w, yb - M.xh, M.w, M.xh);
+    } }),
+    'm': (M) => {
+      const A = 0.76 * M.xh, Ra = (A + M.w) / 2;
+      return { w: 2 * A + M.w, draw(g, x, yb, lift) {
+        const cy = yb - M.xh + Ra;
+        g.fillStyle = BLUE;                        // two upper half rings
+        for (const cx of [x + Ra, x + A + Ra]) {
+          g.beginPath(); g.arc(cx, cy + lift, Ra, Math.PI, 2 * Math.PI); g.arc(cx, cy + lift, Ra - M.w, 2 * Math.PI, Math.PI, true);
+          g.closePath(); g.fill();
+        }
+        g.fillStyle = PAL.black;
+        g.fillRect(x, yb - M.xh, M.w, M.xh);
+        g.fillRect(x + A, cy, M.w, yb - cy);
+        g.fillRect(x + 2 * A, cy, M.w, yb - cy);
+      } };
+    },
+  };
+  glyphs['μ'] = glyphs['µ'];
+  return function draw(g, word, t, info) {
+    const size = 1.15 * info.size;                   // constructed glyphs read lighter than the serif: 15 % larger
+    const chars = [...word];
+    if (!chars.every((c) => c === ' ' || glyphs[c])) {   // fallback: APA Bauhaus 700, black
+      const m = TFX.mask(word, { family: info.fonts.bauhaus, size, weight: 700 });
+      TFX.blit(g, TFX.fill(m, PAL.black), m, info.x, info.baseline);
+      return;
+    }
+    const M = metrics(info, size);
+    const parts = chars.map((c) => (c === ' ' ? null : glyphs[c](M)));
+    let width = 0;
+    parts.forEach((q, i) => { width += q ? q.w : M.space; if (i < parts.length - 1 && q && parts[i + 1]) width += M.gap; });
+    const lift = 0.04 * size * Math.exp(-Math.max(0, t) / DISC.tau);
+    let x = info.x - width / 2;
+    parts.forEach((q, i) => {
+      if (!q) { x += M.space; return; }
+      q.draw(g, x, info.baseline, lift);
+      x += q.w + (i < parts.length - 1 && parts[i + 1] ? M.gap : 0);
+    });
+  };
+})();
+
+APA.scene({
+  meta: { text: 'dark' },
+  init() { ({ ctx } = APA.canvas('2d')); },
+  render(t) {
+    const off = 30 * t;
+    // underfill field, silicon planes with the disc, dielectric bands
+    ctx.fillStyle = C.cuf;
+    ctx.fillRect(0, 0, W, H);
+    siPlanes(discY(t));
+    ctx.fillStyle = C.diel;
+    ctx.fillRect(0, Y_OX, W, Y_UBM - Y_OX);
+    ctx.fillRect(0, LINE_Y, W, Y_M1F - LINE_Y);
+    // columns: a CUF gap centred on x = 960 at t = 0, moving left
+    const x0 = 960 + P / 2 - off;
+    const k0 = Math.floor((-R_BASE - P - x0) / P);
+    for (let k = k0; x0 + k * P < W + P; k++) column(x0 + k * P);
+  },
+  text(g, word, t, p, info) { BH(g, word, t, info); },
+});
+</script>
+</body>
+</html>

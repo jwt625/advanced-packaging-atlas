@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>m3 bga underside</title>
+<script src="../lib/apa.js"></script>
+<script src="../lib/textfx.js"></script>
+</head>
+<body>
+<script>
+// "more to" ladder, m3: BGA (ball grid array) on the package underside, macro photo, top view.
+// 1.0 mm pitch, 600 um SAC305 balls (ectc51909.2023.00155-a-i4) at 140 px/mm: pitch 140 px, ball 84 px.
+// Reflowed balls under coaxial / ring light: broad bright specular core, mottled (dimpled) surface, grey body, dark
+// limb, on dark teal solder resist (SR). Substrate edge on y = 600 (outer row 1 pitch from the edge), laminate side
+// band below, black backdrop. Text band x 560-1360, y 500-592: plain SR.
+// The image is built once at init (seeded); render() only pans it 10 px/s leftward, held after t = 3 s.
+// Sources, chosen values and deviations: m3.notes.md
+const { W, H, LINE_Y } = APA;
+let ctx, tex;
+
+const K = 140;                          // px per mm
+const PITCH = 1.0 * K, R = 0.6 * K / 2; // 140 px pitch, 42 px ball radius
+const ROW0 = LINE_Y - 142;              // lowest row center y = 458 (ball bottoms at 500); edge distance ~1 pitch
+const PAN_PX_S = 10, PAN_T_MAX = 3;
+const TEX_W = W + 40;
+
+const SR = [26, 82, 84];                // dark teal solder resist
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+// one ball sprite, pixel-shaded; returns a canvas of size 2*(R+2)
+function ballSprite(rnd) {
+  const S = 2 * (R + 2), c = document.createElement('canvas');
+  c.width = S; c.height = S;
+  const g = c.getContext('2d');
+  const img = g.createImageData(S, S), px = img.data;
+  const cx = S / 2, cy = S / 2;
+  // highlight centre (light slightly up-left), size jitter +/- 2 %
+  const hx = cx - 0.10 * R + (rnd() - 0.5) * 0.04 * R, hy = cy - 0.13 * R + (rnd() - 0.5) * 0.04 * R;
+  const hr = 0.52 * R * (1 + (rnd() - 0.5) * 0.04);
+  // mottling: soft darker blobs (dimpled reflowed surface) and, on some balls, distinct dark spots
+  const blobs = [];
+  const nb = 7 + Math.floor(rnd() * 6);
+  for (let i = 0; i < nb; i++) {
+    const a = rnd() * 2 * Math.PI, r = Math.sqrt(rnd()) * 0.62 * R;
+    blobs.push([hx + r * Math.cos(a), hy + r * Math.sin(a), 2.5 + rnd() * 5, 0.10 + rnd() * 0.22]);
+  }
+  if (rnd() < 0.22) {
+    const ns = 2 + Math.floor(rnd() * 4);
+    for (let i = 0; i < ns; i++) {
+      const a = rnd() * 2 * Math.PI, r = Math.sqrt(rnd()) * 0.55 * R;
+      blobs.push([hx + r * Math.cos(a), hy + r * Math.sin(a), 1.8 + rnd() * 2.2, 0.55 + rnd() * 0.25]);
+    }
+  }
+  for (let y = 0; y < S; y++) {
+    for (let x = 0; x < S; x++) {
+      const dx = x + 0.5 - cx, dy = y + 0.5 - cy, r = Math.hypot(dx, dy);
+      const alpha = clamp(R - r + 0.5, 0, 1);
+      if (alpha <= 0) continue;
+      const s = Math.min(r / R, 1);                      // sin of the surface tilt
+      // body: grey, darker toward the limb, limb picks up the teal surroundings
+      const nz = Math.sqrt(Math.max(0, 1 - s * s)), nx = dx / R, ny = dy / R;
+      const lam = Math.max(0, -0.42 * nx - 0.52 * ny + 0.74 * nz);   // light up-left, above
+      let v = 62 + 118 * lam;
+      let cr = v, cg = v, cb = v;
+      const tint = clamp((s - 0.72) / 0.28, 0, 1);
+      cr = cr * (1 - 0.55 * tint) + SR[0] * 0.55 * tint;
+      cg = cg * (1 - 0.55 * tint) + SR[1] * 0.55 * tint;
+      cb = cb * (1 - 0.55 * tint) + SR[2] * 0.55 * tint;
+      // dark outline where the sphere turns away
+      const rim = clamp((s - 0.92) / 0.08, 0, 1);
+      const dk = 1 - 0.40 * rim * rim;
+      cr *= dk; cg *= dk; cb *= dk;
+      // specular core: flat-topped, soft edge
+      const hd = Math.hypot(x + 0.5 - hx, y + 0.5 - hy) / hr;
+      let sp = Math.exp(-Math.pow(hd, 4));
+      let m = 1;
+      for (const [bx, by, br, ba] of blobs) {
+        const d2 = ((x + 0.5 - bx) ** 2 + (y + 0.5 - by) ** 2) / (br * br);
+        if (d2 < 9) m -= ba * Math.exp(-d2);
+      }
+      m = clamp(m, 0.25, 1) + (rnd() - 0.5) * 0.05;     // fine static dimple grain
+      sp *= m;
+      // small sharp glint of the light source
+      const gd = Math.hypot(x + 0.5 - (hx - 0.16 * R), y + 0.5 - (hy - 0.16 * R)) / (0.11 * R);
+      sp = Math.min(1, sp + 0.9 * Math.exp(-gd * gd * gd * gd));
+      const hi = 250 * sp;
+      cr = cr * (1 - sp) + hi; cg = cg * (1 - sp) + hi; cb = cb * (1 - sp) + hi * 0.99;
+      const k = (y * S + x) * 4;
+      px[k] = clamp(cr, 0, 255); px[k + 1] = clamp(cg, 0, 255); px[k + 2] = clamp(cb, 0, 255);
+      px[k + 3] = 255 * alpha;
+    }
+  }
+  g.putImageData(img, 0, 0);
+  return c;
+}
+
+function build(g, rnd) {
+  // backdrop
+  g.fillStyle = 'rgb(9,10,11)'; g.fillRect(0, 0, TEX_W, H);
+  // laminate side band under the edge (slight tilt shows a sliver of the substrate side)
+  const lam = g.createLinearGradient(0, LINE_Y, 0, LINE_Y + 9);
+  lam.addColorStop(0, 'rgb(96,92,66)'); lam.addColorStop(1, 'rgb(30,30,24)');
+  g.fillStyle = lam; g.fillRect(0, LINE_Y, TEX_W, 9);
+  // SR surface with a broad overhead sheen (brighter upper left)
+  g.fillStyle = `rgb(${SR[0]},${SR[1]},${SR[2]})`; g.fillRect(0, 0, TEX_W, LINE_Y);
+  const sheen = g.createRadialGradient(560, -120, 80, 560, -120, 1500);
+  sheen.addColorStop(0, 'rgba(150,215,210,0.20)'); sheen.addColorStop(0.55, 'rgba(120,190,190,0.06)');
+  sheen.addColorStop(1, 'rgba(0,0,0,0.10)');
+  g.fillStyle = sheen; g.fillRect(0, 0, TEX_W, LINE_Y);
+  // faint glossy reflections between balls (interstitial sites above the text band only)
+  for (let j = 0; j < 5; j++) {
+    for (let i = -8; i <= 8; i++) {
+      const x = 960 + (i + 0.5) * PITCH, y = ROW0 - (j + 0.5) * PITCH;
+      if (y > 470) continue;
+      const gr = g.createRadialGradient(x, y, 0, x, y, 34);
+      gr.addColorStop(0, 'rgba(170,225,220,0.035)'); gr.addColorStop(1, 'rgba(170,225,220,0)');
+      g.fillStyle = gr; g.fillRect(x - 34, y - 34, 68, 68);
+    }
+  }
+  // edge catch light on the SR edge, just above the line (below the text band)
+  const edge = g.createLinearGradient(0, LINE_Y - 7, 0, LINE_Y);
+  edge.addColorStop(0, 'rgba(160,215,210,0)'); edge.addColorStop(1, 'rgba(160,215,210,0.35)');
+  g.fillStyle = edge; g.fillRect(0, LINE_Y - 7, TEX_W, 7);
+  // balls: contact shadow on the SR, then the sprite
+  for (let j = 0; j < 5; j++) {
+    for (let i = -7; i <= 8; i++) {
+      const x = 960 + i * PITCH, y = ROW0 - j * PITCH;
+      const sh = g.createRadialGradient(x + 2, y + 3, R - 2, x + 2, y + 3, R + 5);
+      sh.addColorStop(0, 'rgba(0,10,12,0.32)'); sh.addColorStop(1, 'rgba(0,10,12,0)');
+      g.fillStyle = sh; g.fillRect(x - R - 7, y - R - 7, 2 * R + 14, 2 * R + 14);
+      const sp = ballSprite(rnd);
+      g.drawImage(sp, Math.round(x - sp.width / 2), Math.round(y - sp.height / 2));
+    }
+  }
+  // mild vignette
+  const vg = g.createRadialGradient(960, 420, 500, 960, 420, 1250);
+  vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,0.30)');
+  g.fillStyle = vg; g.fillRect(0, 0, TEX_W, H);
+}
+
+APA.scene({
+  meta: { text: 'light' },
+  init() {
+    ({ ctx } = APA.canvas('2d', { alpha: false }));
+    const rnd = APA.rng(3053);
+    const raw = document.createElement('canvas'); raw.width = TEX_W; raw.height = H;
+    build(raw.getContext('2d'), rnd);
+    // photo softness: slight lens blur, applied once
+    tex = document.createElement('canvas'); tex.width = TEX_W; tex.height = H;
+    const tg = tex.getContext('2d');
+    tg.drawImage(raw, 0, 0);               // unblurred underlay keeps the texture borders opaque
+    tg.filter = 'blur(0.7px)';
+    tg.drawImage(raw, 0, 0);
+    tg.filter = 'none';
+    tg.getImageData(0, 0, 1, 1);           // force the blurred texture to rasterize in init, not on frame 0
+  },
+  render(t) {
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    const dx = -PAN_PX_S * clamp(t, 0, PAN_T_MAX);
+    ctx.drawImage(tex, Math.round(dx * 4) / 4, 0);
+  },
+  // overlay word as screen-printed legend ink on solder resist (PCB / substrate silkscreen): monoline strokes with
+  // round ends (thin sans filled + stroked), ink edge ragged by the screen mesh (blurred glyph thresholded against a
+  // static seeded noise), faint mesh weave in the ink, matte off-white; then the macro photo's 0.7 px lens blur.
+  // Size = info.size, centred on x 960, baseline 565.
+  text(g, word, t, p, info) {
+    const s = info.size;
+    const ink = inkRGB(info, [240, 238, 226], [18, 22, 22]);
+    const m = TFX.mask(word, { family: info.fonts.grotesk, size: s, weight: 300, letterSpacing: s * 0.06 });
+    const w = m.w, h = m.h;
+    const left = Math.round(info.x - m.width / 2 - m.ox), top = Math.round(info.baseline - m.oy);
+    // monoline: the thin glyphs plus a round-joined stroke of them
+    const mono = document.createElement('canvas'); mono.width = w; mono.height = h;
+    const mg = mono.getContext('2d', { willReadFrequently: true });
+    mg.font = TFX.font(info.fonts.grotesk, s, 300);
+    mg.letterSpacing = `${s * 0.06}px`;
+    mg.textBaseline = 'alphabetic'; mg.textAlign = 'left';
+    mg.lineJoin = 'round'; mg.lineCap = 'round'; mg.lineWidth = s * 0.05;
+    mg.filter = 'blur(1.3px)';
+    mg.fillStyle = mg.strokeStyle = '#fff';
+    mg.fillText(word, m.ox, m.oy); mg.strokeText(word, m.ox, m.oy);
+    mg.filter = 'none';
+    // ragged edge: alpha threshold 0.5 +- mesh noise (fixed in screen space); weave modulates the ink by +-5 %
+    const img = mg.getImageData(0, 0, w, h), px = img.data;
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < w; x++) {
+        const k = (y * w + x) * 4, a = px[k + 3] / 255;
+        if (a < 0.2) { px[k + 3] = 0; continue; }
+        const X = left + x, Y = top + y;
+        const th = 0.5 + 0.22 * (TFX.hash(3054, X >> 1, Y >> 1) - 0.5) + 0.12 * (TFX.hash(3055, X >> 3, Y >> 3) - 0.5);
+        const cov = Math.max(0, Math.min(1, (a - th) * 6 + 0.5));
+        const wv = 1 + 0.05 * Math.sin((X + Y) * 1.1) * Math.sin((X - Y) * 1.1) - 0.04 * TFX.hash(3056, X, Y);
+        px[k] = ink[0] * wv; px[k + 1] = ink[1] * wv; px[k + 2] = ink[2] * wv; px[k + 3] = 255 * cov;
+      }
+    }
+    mg.putImageData(img, 0, 0);
+    g.filter = 'blur(0.7px)';
+    g.drawImage(mono, left, top);
+    g.filter = 'none';
+  },
+});
+
+// overlay ink colour: 'light' / 'dark' tone -> the style's own ink, any other text_color -> that colour
+function inkRGB(info, light, dark) {
+  if (info.tone === 'light') return light;
+  if (info.tone === 'dark') return dark;
+  const c = document.createElement('canvas'); c.width = c.height = 1;
+  const k = c.getContext('2d', { willReadFrequently: true });
+  k.fillStyle = info.color; k.fillRect(0, 0, 1, 1);
+  return [...k.getImageData(0, 0, 1, 1).data.slice(0, 3)];
+}
+</script>
+</body>
+</html>

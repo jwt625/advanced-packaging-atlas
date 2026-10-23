@@ -1,0 +1,285 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>c1 optical</title>
+<script src="../lib/apa.js"></script>
+</head>
+<body>
+<script>
+// Pass C, modality 1: optical brightfield micrograph of a D2W hybrid-bond die after Cu CMP, dies on tape after saw
+// dicing (the state right before bonding). 3.5 um octagonal Cu pads on 7 um pitch in the SiO2 bond-layer field.
+// v=1: 2 px/um, bottom die edge: 7-row edge daisy chain (first row 50 um from the edge, rows every 21 um) and the dense
+//      array above it. v=2: 5 px/um, the same edge region: 4 chain rows, pad tint / oxidation readable per pad.
+// y = 600: bottom die edge (saw cut); below it the dark kerf over the tape, then the neighbour die's plain field.
+// Motion: focus snap (defocused copy fades, tau 50 ms), zoom settle 1.5 % about (960, 600) (tau 80 ms), stage drift
+// 10 px/s. Valid for t in [0, 3]. Sources and choices: c1_optical.notes.md.
+const { W, H, LINE_Y } = APA;
+const V = APA.params.v === '2' ? 2 : 1;
+const S = V === 1 ? 2 : 5;                 // px per um
+const PITCH = 7, PAD = 3.5;                // um (ectc51909.2023.00023-a-i1)
+const KEEP = 50, ROW_DY = 21, NROW = 7;    // um: edge chain 50 um from the die edge, rows every 21 um (p.5)
+const ARRAY_GAP = 21;                      // um, chain row 7 to the dense array (not found; = row spacing)
+const KERF = 40;                           // um, saw kerf (not found; assumption)
+const STRAP_W = 2;                         // um, buried RDL daisy-chain strap width (not found; assumption)
+const MX = 72, MY = 24, SW = W + 2 * MX, SH = H + 2 * MY;
+const DRIFT = 10;                          // px/s
+
+const FIELD = [150, 146, 104];             // SiO2 bond-layer field on Si: olive-tan interference tint
+const CU = [228, 178, 140];                // clean Cu after CMP: pale salmon
+const OX = [194, 104, 58];                 // oxidized Cu: orange-red
+const KERF_C = [24, 23, 27];
+
+let ctx, tctx, sample, blurS, maskC, vignC;
+
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const mix = (a, b, f) => a.map((v, i) => v + (b[i] - v) * f);
+const rgb = (c, a = 1) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
+function makeNoise(r, n = 64) {
+  const g = new Float32Array(n * n);
+  for (let i = 0; i < g.length; i++) g[i] = r();
+  return (x, y) => {
+    const xi = Math.floor(x), yi = Math.floor(y), fx = x - xi, fy = y - yi;
+    const sx = fx * fx * (3 - 2 * fx), sy = fy * fy * (3 - 2 * fy);
+    const at = (i, j) => g[((j % n + n) % n) * n + ((i % n + n) % n)];
+    const a = at(xi, yi) + (at(xi + 1, yi) - at(xi, yi)) * sx;
+    const b = at(xi, yi + 1) + (at(xi + 1, yi + 1) - at(xi, yi + 1)) * sx;
+    return a + (b - a) * sy;
+  };
+}
+function octagon(c, x, y, d) {            // flat-to-flat d
+  const R = d / 2 / Math.cos(Math.PI / 8);
+  c.beginPath();
+  for (let k = 0; k < 8; k++) {
+    const a = Math.PI / 8 + k * Math.PI / 4;
+    const px = x + R * Math.cos(a), py = y + R * Math.sin(a);
+    k ? c.lineTo(px, py) : c.moveTo(px, py);
+  }
+  c.closePath();
+}
+function mk(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+
+function buildSample() {
+  const r = APA.rng(V === 1 ? 7101 : 7102);
+  const ox = makeNoise(APA.rng(711), 64);
+  const sharp = mk(SW, SH);
+  const c = sharp.getContext('2d');
+  c.translate(MX, MY);                       // world coords: x in [-MX, W+MX], y in [-MY, H+MY]
+  const y0 = -MY, y1 = H + MY, x0 = -MX, x1 = W + MX;
+  const kerf1 = LINE_Y + KERF * S;
+
+  // die field (above the edge) and neighbour die field (below the kerf)
+  c.fillStyle = rgb(FIELD);
+  c.fillRect(x0, y0, x1 - x0, LINE_Y - y0);
+  c.fillRect(x0, kerf1, x1 - x0, y1 - kerf1);
+
+  // rows: centers (world px)
+  const p = PITCH * S, d = PAD * S;
+  const rows = [];
+  for (let j = 0; j < NROW; j++) rows.push(LINE_Y - (KEEP + PAD / 2 + j * ROW_DY) * S);
+  const yTop = rows[NROW - 1] - ARRAY_GAP * S;
+  for (let yc = yTop; yc > y0 - d; yc -= p) rows.push(yc);
+  const X0 = 960 + p / 2;
+  const kmin = Math.floor((x0 - X0) / p) - 1, kmax = Math.ceil((x1 - X0) / p) + 1;
+
+  // buried RDL straps (daisy chain pairs), seen through the oxide: faint, slightly pinker than the field
+  c.fillStyle = rgb([200, 160, 124], V === 1 ? 0.22 : 0.3);
+  for (const yc of rows) {
+    for (let k = kmin; k <= kmax; k++) {
+      if ((k & 1) !== 0) continue;
+      const xa = X0 + k * p;
+      c.fillRect(xa, yc - STRAP_W * S / 2, p, STRAP_W * S);
+    }
+  }
+
+  // CMP micro-scratches: long faint arcs, die regions only
+  c.save();
+  c.beginPath(); c.rect(x0, y0, x1 - x0, LINE_Y - y0); c.rect(x0, kerf1, x1 - x0, y1 - kerf1); c.clip();
+  for (let i = 0; i < 70; i++) {
+    const cx = (r() - 0.5) * 6000 + 960, cy = (r() - 0.5) * 6000 + 540;
+    const tx = r() * W, ty = r() * H;
+    const R = Math.hypot(tx - cx, ty - cy), a0 = Math.atan2(ty - cy, tx - cx);
+    const span = (100 + r() * 700) / R;
+    c.beginPath(); c.arc(cx, cy, R, a0, a0 + span);
+    c.lineWidth = 0.6 + r() * 0.5;
+    c.strokeStyle = r() < 0.5 ? 'rgba(255,250,230,0.05)' : 'rgba(40,36,20,0.05)';
+    c.stroke();
+  }
+  c.restore();
+
+  // pads
+  for (const yc of rows) {
+    for (let k = kmin; k <= kmax; k++) {
+      const xc = X0 + k * p;
+      const lf = ox(xc / 260 + 3.1, yc / 260 + 1.7);
+      let o = clamp(0.16 * lf + 0.07 * r());
+      if (r() < 0.025) o = clamp(o + 0.25 + 0.3 * r());       // a few clearly oxidized pads
+      const col = mix(CU, OX, o).map((v) => v * (1 - 0.12 * o) * (0.97 + 0.04 * r()));
+      octagon(c, xc, yc, d);
+      c.fillStyle = rgb(col);
+      c.fill();
+      if (V === 2) {
+        // mottled oxide blotches inside the pad, slightly brighter rim (edge scatter)
+        c.save(); octagon(c, xc, yc, d); c.clip();
+        const nb = 2 + Math.floor(r() * 3);
+        for (let b = 0; b < nb; b++) {
+          c.beginPath();
+          c.arc(xc + (r() - 0.5) * d * 0.7, yc + (r() - 0.5) * d * 0.7, d * (0.12 + 0.18 * r()), 0, 2 * Math.PI);
+          c.fillStyle = rgb(OX, 0.08 + 0.25 * o * r());
+          c.fill();
+        }
+        c.restore();
+      }
+      octagon(c, xc, yc, d * 0.93);
+      c.lineWidth = Math.max(0.7, 0.07 * d);
+      c.strokeStyle = rgb(mix(col, [255, 236, 214], 0.22), 0.7);
+      c.stroke();
+    }
+  }
+
+  // kerf: dicing tape far below the die surface, fully out of focus
+  const g = c.createLinearGradient(0, LINE_Y, 0, kerf1);
+  g.addColorStop(0, rgb([44, 41, 44])); g.addColorStop(0.18, rgb(KERF_C));
+  g.addColorStop(0.82, rgb(KERF_C)); g.addColorStop(1, rgb([44, 41, 44]));
+  c.fillStyle = g;
+  c.fillRect(x0, LINE_Y, x1 - x0, kerf1 - LINE_Y);
+  c.save(); c.beginPath(); c.rect(x0, LINE_Y, x1 - x0, kerf1 - LINE_Y); c.clip();
+  c.filter = `blur(${6 * S}px)`;
+  for (let i = 0; i < 60; i++) {
+    c.beginPath();
+    c.arc(x0 + r() * (x1 - x0), LINE_Y + r() * (kerf1 - LINE_Y), (4 + r() * 10) * S, 0, 2 * Math.PI);
+    c.fillStyle = r() < 0.5 ? 'rgba(62,58,62,0.16)' : 'rgba(8,8,12,0.2)';
+    c.fill();
+  }
+  c.filter = 'none';
+  c.restore();
+
+  // saw chipping: small notches into both cut edges (chip depth <= 1.6 um); kept outside x 560-1360 on the die edge
+  c.fillStyle = rgb([58, 54, 50]);
+  const chips = (edgeY, dir, n) => {
+    for (let i = 0; i < n; i++) {
+      let x = x0 + r() * (x1 - x0);
+      if (dir < 0 && x > 540 && x < 1380) x = x < 960 ? 540 - r() * 300 : 1380 + r() * 300;
+      const w = (1 + r() * 3) * S, dpt = (0.4 + r() * 1.2) * S;
+      c.beginPath();
+      c.moveTo(x - w / 2, edgeY);
+      c.lineTo(x - w * 0.15, edgeY + dir * dpt);
+      c.lineTo(x + w * 0.25, edgeY + dir * dpt * 0.7);
+      c.lineTo(x + w / 2, edgeY);
+      c.closePath(); c.fill();
+    }
+  };
+  chips(LINE_Y, -1, V === 1 ? 14 : 7);
+  chips(kerf1, 1, V === 1 ? 14 : 7);
+  // cut edge: thin darker line where the edge rounds off
+  c.fillStyle = 'rgba(30,28,24,0.35)';
+  c.fillRect(x0, LINE_Y - 1, x1 - x0, 1);
+  c.fillRect(x0, kerf1, x1 - x0, 1);
+
+  // film-thickness tint drift (low-frequency hue shift) + fine static speckle on the die fields
+  const img = c.getImageData(0, 0, SW, SH);
+  const a = img.data;
+  const tn = makeNoise(APA.rng(713), 64);
+  const rs = APA.rng(714);
+  for (let y = 0; y < SH; y++) {
+    const wy = y - MY;
+    const onDie = wy < LINE_Y || wy >= kerf1;
+    for (let x = 0; x < SW; x++) {
+      const i = 4 * (y * SW + x);
+      const n = (rs() - 0.5) * (onDie ? 7 : 3);
+      if (onDie) {
+        const f = tn(x / 900, y / 900) - 0.5;
+        a[i] += n + 10 * f; a[i + 1] += n + 4 * f; a[i + 2] += n - 6 * f;
+      } else {
+        a[i] += n; a[i + 1] += n; a[i + 2] += n;
+      }
+    }
+  }
+  c.putImageData(img, 0, 0);
+
+  // optics: slight softness on the in-focus image, a defocused copy for focus effects
+  const s = mk(SW, SH), sc = s.getContext('2d');
+  sc.filter = `blur(${V === 1 ? 0.55 : 0.8}px)`; sc.drawImage(sharp, 0, 0);
+  const b = mk(SW, SH), bc = b.getContext('2d');
+  bc.filter = `blur(${V === 1 ? 4 : 7}px)`; bc.drawImage(sharp, 0, 0);
+  return [s, b];
+}
+
+function buildCamera() {
+  // field curvature: periphery drifts out of focus (alpha of the defocused copy)
+  maskC = mk(W, H);
+  const m = maskC.getContext('2d');
+  const R = Math.hypot(W, H) / 2;
+  let g = m.createRadialGradient(960, 540, 0.42 * R, 960, 540, R);
+  g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,0.72)');
+  m.fillStyle = g; m.fillRect(0, 0, W, H);
+  // vignette with a faint warm cast toward the corners (halogen Koehler illumination), multiplied
+  vignC = mk(W, H);
+  const v = vignC.getContext('2d');
+  g = v.createRadialGradient(960, 540, 0.25 * R, 960, 540, 1.02 * R);
+  g.addColorStop(0, 'rgb(255,255,255)'); g.addColorStop(0.55, 'rgb(250,248,242)');
+  g.addColorStop(1, 'rgb(226,216,196)');
+  v.fillStyle = g; v.fillRect(0, 0, W, H);
+}
+
+APA.scene({
+  meta: { text: 'dark' },
+  async init(p) {
+    ({ ctx } = APA.canvas('2d'));
+    tctx = mk(W, H).getContext('2d');
+    [sample, blurS] = buildSample();
+    buildCamera();
+    this.render(0, p);                         // warm-up: first composite of the static layers, flushed
+    ctx.getImageData(0, 0, 1, 1);
+  },
+  render(t, p) {
+    const tt = Math.max(0, t);
+    const s = 1 + 0.015 * Math.exp(-tt / 0.08);        // zoom settle about (960, 600): y = 600 stays fixed
+    const drift = DRIFT * tt;
+    const a = 0.6 * Math.exp(-tt / 0.05);              // focus snap
+    const tx = 960 - s * (960 + drift), ty = LINE_Y - s * LINE_Y;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.globalAlpha = 1;
+    ctx.setTransform(s, 0, 0, s, tx, ty);
+    ctx.drawImage(sample, -MX, -MY);
+    if (a > 0.004) { ctx.globalAlpha = a; ctx.drawImage(blurS, -MX, -MY); ctx.globalAlpha = 1; }
+    // field curvature
+    tctx.setTransform(s, 0, 0, s, tx, ty);
+    tctx.globalCompositeOperation = 'copy';
+    tctx.drawImage(blurS, -MX, -MY);
+    tctx.setTransform(1, 0, 0, 1, 0, 0);
+    tctx.globalCompositeOperation = 'destination-in';
+    tctx.drawImage(maskC, 0, 0);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.drawImage(tctx.canvas, 0, 0);
+    ctx.globalCompositeOperation = 'multiply';
+    ctx.drawImage(vignC, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+  },
+  // Overlay word as a microscope-software text annotation: clean sans (APA Grotesk, Inter 500) in the shot's tone
+  // with the thin 1-px offset shadow of an image annotation, drawn crisp over the soft optical image. Same treatment
+  // for v=1 "There's" and v=2 "more to"; size = info.size (grows cut to cut through text_size / text_grow).
+  // Centred on x = 960, baseline info.baseline (565). The overlay canvas is never flipped: placement is display-fixed.
+  text(g, word, t, p, info) {
+    const s = info.size;
+    g.fillStyle = info.color;
+    const light = lumOf(g.fillStyle) > 0.5;
+    g.font = `500 ${s}px ${info.fonts.grotesk}`;
+    g.textAlign = 'center';
+    g.textBaseline = 'alphabetic';
+    g.shadowColor = light ? 'rgba(0,0,0,0.85)' : 'rgba(255,250,236,0.6)';
+    g.shadowOffsetX = g.shadowOffsetY = Math.max(1, Math.round(s / 40));
+    g.shadowBlur = s / 48;
+    g.fillText(word, info.x, info.baseline);
+  },
+});
+// relative luminance of a normalized ctx.fillStyle ('#rrggbb' or 'rgba(r, g, b, a)')
+function lumOf(css) {
+  const v = css[0] === '#' ? [1, 3, 5].map((i) => parseInt(css.slice(i, i + 2), 16)) : css.match(/[\d.]+/g).slice(0, 3).map(Number);
+  const l = v.map((c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; });
+  return 0.2126 * l[0] + 0.7152 * l[1] + 0.0722 * l[2];
+}
+</script>
+</body>
+</html>

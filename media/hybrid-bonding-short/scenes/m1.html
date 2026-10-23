@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>m1 glass panel</title>
+<script src="../lib/apa.js"></script>
+<script src="../lib/textfx.js"></script>
+</head>
+<body>
+<script>
+// "more to" ladder, rung 1: 510 x 515 mm glass-core substrate panel (24-layer, 10-2-10), photographed top-down on a
+// blue-grey chuck (ectc51846.2026.00134 Fig. 5a). 6 x 6 units, each a light-gold pad field in a dark solder-resist
+// frame, saw streets between, a wider centre street in both axes, a pale edge band (rim) around the panel.
+// Orthographic top view at 2.4 px/mm: panel x 348-1572, bottom edge on y = 600, top off-frame.
+// Built once at init (sharp layer -> 1.2 px blur -> vignette); render() only zooms 1.00 -> 1.02 about (960, 600).
+// Sources, chosen values and deviations: m1.notes.md
+const { W, H, LINE_Y } = APA;
+let ctx, tex;
+
+const K = 2.4;                               // px per mm
+const PW = 510, PH = 515;                    // panel, mm
+const X0 = 960 - PW * K / 2;                 // 348
+const X1 = 960 + PW * K / 2;                 // 1572
+const YB = LINE_Y, YT = LINE_Y - PH * K;     // 600, -636
+const P = 72;                                // unit pitch, mm (crop)
+const ST = 12;                               // extra width of the centre street, mm (crop)
+const FW = 33, FH = 47;                      // pad field, mm (crop)
+const FMX = 7, FMY = 6;                      // dark SR frame margin around the pad field, mm (crop, chosen)
+const RIM = 3.3;                             // pale edge band, mm (drawn, see notes)
+const OFF = [-186, -114, -42, 42, 114, 186]; // unit centres from the panel centre, mm: +-(P/2 + ST/2) + k P
+
+const mmx = (x) => 960 + x * K;                    // x mm from the panel centre -> px
+const mmy = (y) => YB - (PH / 2 + y) * K;          // y mm up from the panel centre -> px
+
+function drawSharp(g, rnd) {
+  // chuck / table: blue-grey, darker to the frame corners
+  const tb = g.createLinearGradient(0, 0, W, H);
+  tb.addColorStop(0, '#4d6390'); tb.addColorStop(0.55, '#41567f'); tb.addColorStop(1, '#33445f');
+  g.fillStyle = tb; g.fillRect(0, 0, W, H);
+  // contact shadow of the panel on the table (soft, below and right)
+  g.save();
+  g.filter = 'blur(14px)';
+  g.fillStyle = 'rgba(10,14,24,0.55)';
+  g.fillRect(X0 + 6, YT, X1 - X0 + 6, YB - YT + 14);
+  g.restore();
+
+  // panel side / outline (dark brown, the exposed laminate edge)
+  g.fillStyle = '#3a2a1e';
+  g.fillRect(X0 - 3, YT, X1 - X0 + 6, YB - YT + 0);
+  // pale edge band
+  g.fillStyle = '#e6dcc2';
+  g.fillRect(X0, YT, X1 - X0, YB - YT - 2);
+  // dielectric (solder resist over build-up): dark green
+  const r = RIM * K;
+  const ix0 = X0 + r, ix1 = X1 - r, iy1 = YB - 2 - r;
+  g.fillStyle = '#21493c';
+  g.fillRect(ix0, YT, ix1 - ix0, iy1 - YT);
+  // thin darker line on the inside of the rim
+  g.fillStyle = 'rgba(20,30,20,0.55)';
+  g.fillRect(ix0, iy1 - 1.5, ix1 - ix0, 1.5);
+  g.fillRect(ix0, YT, 1.5, iy1 - YT); g.fillRect(ix1 - 1.5, YT, 1.5, iy1 - YT);
+
+  // saw streets: thin lighter lines on the cell boundaries, only inside the populated area
+  const fx0 = OFF[0] - FW / 2 - FMX, fx1 = OFF[5] + FW / 2 + FMX;     // populated area, mm from centre
+  const fy0 = OFF[0] - FH / 2 - FMY, fy1 = OFF[5] + FH / 2 + FMY;
+  g.strokeStyle = 'rgba(120,175,140,0.28)'; g.lineWidth = 1.4;
+  g.beginPath();
+  const bounds = [];                                                   // cell edges: +-(ST/2 + k P), k = 0..2
+  for (let k = 0; k < 3; k++) bounds.push(ST / 2 + k * P, -(ST / 2 + k * P));
+  for (const b of bounds) {
+    g.moveTo(mmx(b), mmy(fy1)); g.lineTo(mmx(b), mmy(fy0));
+    g.moveTo(mmx(fx0), mmy(b)); g.lineTo(mmx(fx1), mmy(b));
+  }
+  g.stroke();
+  // centre street: two lines and a slightly lighter strip
+  g.fillStyle = 'rgba(70,120,95,0.16)';
+  g.fillRect(mmx(-ST / 2), mmy(fy1), ST * K, (fy1 - fy0) * K);
+  g.fillRect(mmx(fx0), mmy(ST / 2), (fx1 - fx0) * K, ST * K);
+
+  // units
+  for (const cy of OFF) {
+    for (const cx of OFF) {
+      const x = mmx(cx), y = mmy(cy);
+      // dark SR frame around the field
+      g.fillStyle = '#18372d';
+      g.fillRect(x - (FW / 2 + FMX) * K, y - (FH / 2 + FMY) * K, (FW + 2 * FMX) * K, (FH + 2 * FMY) * K);
+      // pad field: light gold, slight per-unit tone shift
+      const fw = FW * K, fh = FH * K, fx = x - fw / 2, fy = y - fh / 2;
+      const s = (rnd() - 0.5) * 10;
+      const gr = g.createLinearGradient(fx, fy, fx + fw, fy + fh);
+      gr.addColorStop(0, `rgb(${236 + s},${208 + s},${174 + s})`);
+      gr.addColorStop(1, `rgb(${222 + s},${190 + s},${156 + s})`);
+      g.fillStyle = gr; g.fillRect(fx, fy, fw, fh);
+      // fine horizontal striations (pad rows)
+      g.fillStyle = 'rgba(110,70,45,0.30)';
+      for (let yy = fy + 4; yy < fy + fh - 3; yy += 4.6) g.fillRect(fx + 3, yy, fw - 6, 1.8);
+      // darker inner outline of the field
+      g.strokeStyle = 'rgba(70,50,35,0.45)'; g.lineWidth = 1.5;
+      g.strokeRect(fx + 0.75, fy + 0.75, fw - 1.5, fh - 1.5);
+    }
+  }
+  // small bright marks on the vertical centre street (kept above y 460, out of the text band)
+  g.fillStyle = '#e8d27a';
+  for (const ym of [-150, -78, 78, 150, 222]) {
+    const y = mmy(ym);
+    if (y > 460) continue;
+    g.fillRect(958, y - 4, 4, 8);
+  }
+  // a few marks on the right rim (crop)
+  g.fillStyle = 'rgba(232,210,110,0.85)';
+  for (const ym of [-40, 30, 120]) g.fillRect(ix1 - 7, mmy(ym) - 6, 3.5, 12);
+
+  // overhead light: broad soft specular sheen over the panel (upper left), slight warm/cool shift across it
+  g.save();
+  g.beginPath(); g.rect(X0, YT, X1 - X0, YB - YT); g.clip();
+  const sp = g.createRadialGradient(760, 120, 0, 760, 120, 900);
+  sp.addColorStop(0, 'rgba(235,245,255,0.11)'); sp.addColorStop(0.6, 'rgba(235,245,255,0.04)');
+  sp.addColorStop(1, 'rgba(235,245,255,0)');
+  g.fillStyle = sp; g.fillRect(X0, YT, X1 - X0, YB - YT);
+  const sh = g.createLinearGradient(X0, 0, X1, 0);
+  sh.addColorStop(0, 'rgba(40,90,140,0.05)'); sh.addColorStop(1, 'rgba(160,120,40,0.05)');
+  g.fillStyle = sh; g.fillRect(X0, YT, X1 - X0, YB - YT);
+  // static low-frequency mottling (seeded once)
+  for (let n = 0; n < 40; n++) {
+    const x = X0 + rnd() * (X1 - X0), y = rnd() * YB, rr = 60 + rnd() * 160;
+    const m = g.createRadialGradient(x, y, 0, x, y, rr);
+    m.addColorStop(0, rnd() < 0.5 ? 'rgba(255,255,255,0.025)' : 'rgba(0,0,0,0.04)');
+    m.addColorStop(1, 'rgba(0,0,0,0)');
+    g.fillStyle = m; g.fillRect(x - rr, y - rr, 2 * rr, 2 * rr);
+  }
+  g.restore();
+  // rim glint: brighter top of the edge band at the bottom (the light catches the near edge)
+  g.fillStyle = 'rgba(255,250,235,0.35)';
+  g.fillRect(X0 + 2, YB - 2 - r, X1 - X0 - 4, 2.5);
+}
+
+APA.scene({
+  meta: { text: 'light' },
+  init() {
+    ({ ctx } = APA.canvas('2d', { alpha: false }));
+    const rnd = APA.rng(1510);
+    const sharp = document.createElement('canvas'); sharp.width = W; sharp.height = H;
+    drawSharp(sharp.getContext('2d'), rnd);
+    tex = document.createElement('canvas'); tex.width = W; tex.height = H;
+    const tg = tex.getContext('2d', { alpha: false });
+    // photo softness: 1.2 px blur, everywhere except the hard panel edge on y = 600 (kept crisp)
+    tg.filter = 'blur(1.2px)';
+    tg.drawImage(sharp, 0, 0);
+    tg.filter = 'none';
+    tg.drawImage(sharp, 0, YB - 3, W, 6, 0, YB - 3, W, 6);
+    // table out of focus: extra blur below the panel and at the sides
+    tg.save();
+    tg.beginPath(); tg.rect(0, YB + 3, W, H - YB - 3); tg.rect(0, 0, X0 - 4, YB + 3); tg.rect(X1 + 4, 0, W - X1 - 4, YB + 3);
+    tg.clip(); tg.filter = 'blur(4px)'; tg.drawImage(sharp, 0, 0); tg.restore();
+    // mild vignette
+    const v = tg.createRadialGradient(960, 420, 300, 960, 420, 1250);
+    v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.38)');
+    tg.fillStyle = v; tg.fillRect(0, 0, W, H);
+    // static fine grain (seeded once)
+    const img = tg.getImageData(0, 0, W, H), px = img.data;
+    for (let i = 0; i < px.length; i += 4) {
+      const n = (rnd() + rnd() - 1) * 5;
+      px[i] += n; px[i + 1] += n; px[i + 2] += n;
+    }
+    tg.putImageData(img, 0, 0);
+  },
+  render(t) {
+    // slow zoom 1.00 -> 1.02 about (960, 600), ease-out, held after 3 s; the panel edge stays on y = 600
+    const e = Math.min(Math.max(t, 0), 3) / 3, s = 1 + 0.02 * (1 - (1 - e) * (1 - e));
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.imageSmoothingEnabled = true;
+    ctx.translate(960, LINE_Y); ctx.scale(s, s); ctx.translate(-960, -LINE_Y);
+    ctx.drawImage(tex, 0, 0);
+  },
+  // overlay word as a panel-level laser mark: dot-matrix of overlapping ablation spots (frosted, pale) on a grid
+  // anchored at the pen origin, then the photo's look: 1.2 px blur, upper-left sheen, static grain (+-5 levels,
+  // keyed to display pixels). Size = info.size (text_size + text_grow * t_shot), centred on x 960, baseline 565.
+  text(g, word, t, p, info) {
+    const s = info.size;
+    const ink = inkRGB(info, [234, 228, 212], [26, 34, 30]);
+    const m = TFX.mask(word, { family: info.fonts.grotesk, size: s, weight: 600, letterSpacing: s * 0.05 });
+    const dots = document.createElement('canvas'); dots.width = m.w; dots.height = m.h;
+    const dg = dots.getContext('2d');
+    const cell = s / 12, r = 0.58 * cell;
+    const x0 = (m.ox % cell) - cell, y0 = (m.oy % cell) - cell;
+    for (let y = y0, j = 0; y < m.h; y += cell, j++) {
+      for (let x = x0, i = 0; x < m.w; x += cell, i++) {
+        const cx = x + cell / 2, cy = y + cell / 2;
+        let a = 0;
+        for (let v = -1; v <= 1; v++) for (let u = -1; u <= 1; u++) a += m.cov(cx + u * cell / 3, cy + v * cell / 3);
+        if (a / 9 < 0.42) continue;
+        const k = 0.93 + 0.07 * TFX.hash(1510, i, j);
+        dg.fillStyle = `rgb(${ink.map((c) => Math.round(c * k)).join(',')})`;
+        dg.beginPath(); dg.arc(cx, cy, r, 0, 2 * Math.PI); dg.fill();
+      }
+    }
+    const out = document.createElement('canvas'); out.width = m.w; out.height = m.h;
+    const og = out.getContext('2d', { willReadFrequently: true });
+    og.filter = 'blur(1.2px)'; og.drawImage(dots, 0, 0); og.filter = 'none';
+    const left = Math.round(info.x - m.width / 2 - m.ox), top = Math.round(info.baseline - m.oy);
+    // same overhead sheen as the panel (radial from (760, 120)), on the ink only
+    og.globalCompositeOperation = 'source-atop';
+    const sp = og.createRadialGradient(760 - left, 120 - top, 0, 760 - left, 120 - top, 900);
+    sp.addColorStop(0, 'rgba(255,255,255,0.10)'); sp.addColorStop(1, 'rgba(0,0,0,0.06)');
+    og.fillStyle = sp; og.fillRect(0, 0, m.w, m.h);
+    og.globalCompositeOperation = 'source-over';
+    inkGrain(og, m.w, m.h, left, top, 5, 1511);
+    g.drawImage(out, left, top);
+  },
+});
+
+// overlay ink colour: 'light' / 'dark' tone -> the style's own ink, any other text_color -> that colour
+function inkRGB(info, light, dark) {
+  if (info.tone === 'light') return light;
+  if (info.tone === 'dark') return dark;
+  const c = document.createElement('canvas'); c.width = c.height = 1;
+  const k = c.getContext('2d', { willReadFrequently: true });
+  k.fillStyle = info.color; k.fillRect(0, 0, 1, 1);
+  return [...k.getImageData(0, 0, 1, 1).data.slice(0, 3)];
+}
+
+// static grain on the overlay's inked pixels, keyed to display coordinates (same amplitude as the photo's grain)
+function inkGrain(c2, w, h, left, top, amp, seed) {
+  const img = c2.getImageData(0, 0, w, h), px = img.data;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const k = (y * w + x) * 4;
+      if (!px[k + 3]) continue;
+      const n = (TFX.hash(seed, left + x, top + y) + TFX.hash(seed + 1, left + x, top + y) - 1) * amp;
+      px[k] += n; px[k + 1] += n; px[k + 2] += n;
+    }
+  }
+  c2.putImageData(img, 0, 0);
+}
+</script>
+</body>
+</html>

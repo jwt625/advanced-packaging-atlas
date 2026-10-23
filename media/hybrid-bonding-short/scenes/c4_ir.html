@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>c4 ir</title>
+<script src="../lib/apa.js"></script>
+</head>
+<body>
+<script>
+// Pass C, modality 4: IR transmission image through a D2W hybrid-bonded pair (Si is transparent beyond ~1.1 um).
+// Metal alignment marks of both parts read dark on the grey IR field: substrate-site marks mid-grey, top-die marks
+// near black, superimposed with the die offset (0.8, -0.5) um true to scale.
+// v=1: 4 px/um, bottom-left die corner: concentric-annulus fiducial with crosshair, 0.25 um corner verniers (L),
+//      one 0.1 um horizontal and one 0.1 um vertical vernier. v=2: 16 px/um, the 0.1 um horizontal vernier alone:
+//      the coincident tick pair sits 8 ticks right of the index (0.8 um).
+// y = 600: bottom edge of the top die (edge-scatter line, darker substrate-only field below).
+// Mark geometry (sizes, tick pitch) is not in the atlas: chosen, see c4_ir.notes.md.
+// Motion: autofocus snap (defocused copy fades, tau 50 ms) and stage drift 8 px/s. Valid for t in [0, 3].
+const { W, H, LINE_Y } = APA;
+const V = APA.params.v === '2' ? 2 : 1;
+const S = V === 1 ? 4 : 16;                // px per um
+const DX = 0.8, DY = -0.5;                 // um, top-die marks relative to substrate marks
+const P = 4.0, TW = 2.0, TL = 8.0, TIDX = 3.0, NT = 10;   // vernier: main pitch, tick width, length, index extra, +/-ticks
+const PSF = 0.47;                          // um, IR blur sigma: Airy FWHM 0.51 lambda / NA, 1.2 um, NA 0.55 (notes)
+const MX = 40, SW = W + 2 * MX;
+const DRIFT = 8;                           // px/s
+const T_SUB = 0.60, T_DIE = 0.25, T_OUT = 0.86, T_EDGE = 0.55;
+
+let ctx, sample, blurS, camC, vignC;
+
+function mk(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+function makeNoise(r, n = 64) {
+  const g = new Float32Array(n * n);
+  for (let i = 0; i < g.length; i++) g[i] = r();
+  return (x, y) => {
+    const xi = Math.floor(x), yi = Math.floor(y), fx = x - xi, fy = y - yi;
+    const sx = fx * fx * (3 - 2 * fx), sy = fy * fy * (3 - 2 * fy);
+    const at = (i, j) => g[((j % n + n) % n) * n + ((i % n + n) % n)];
+    const a = at(xi, yi) + (at(xi + 1, yi) - at(xi, yi)) * sx;
+    const b = at(xi, yi + 1) + (at(xi + 1, yi + 1) - at(xi, yi + 1)) * sx;
+    return a + (b - a) * sy;
+  };
+}
+const grey = (T) => { const v = Math.round(255 * T); return `rgb(${v},${v},${v})`; };
+
+// Vernier: substrate (main) ticks on one side of the baseline at pitch P, die ticks on the other at P - res,
+// displaced by the die offset. dir 'h' = measures x (vertical ticks), 'v' = measures y (horizontal ticks).
+function vernier(c, dir, cx, cy, res) {
+  const s = S;
+  for (let k = -NT; k <= NT; k++) {
+    const ext = k === 0 ? TIDX : 0;
+    if (dir === 'h') {
+      const xs = cx + k * P * s, xd = cx + DX * s + k * (P - res) * s;
+      c.fillStyle = grey(T_SUB); c.fillRect(xs - TW * s / 2, cy - (TL + ext) * s, TW * s, (TL + ext) * s);
+      c.fillStyle = grey(T_DIE); c.fillRect(xd - TW * s / 2, cy + DY * s, TW * s, (TL + ext) * s);
+    } else {
+      const ys = cy + k * P * s, yd = cy + DY * s + k * (P - res) * s;
+      c.fillStyle = grey(T_SUB); c.fillRect(cx - (TL + ext) * s, ys - TW * s / 2, (TL + ext) * s, TW * s);
+      c.fillStyle = grey(T_DIE); c.fillRect(cx + DX * s, yd - TW * s / 2, (TL + ext) * s, TW * s);
+    }
+  }
+}
+
+function fiducial(c, fx, fy) {
+  const s = S, ring = (x, y, ro, ri) => {
+    c.beginPath(); c.arc(x, y, ro * s, 0, 2 * Math.PI); c.arc(x, y, ri * s, 0, 2 * Math.PI, true); c.fill();
+  };
+  // substrate site: thin outer annulus OD 80 / ID 72 um, small centre cross
+  c.fillStyle = grey(T_SUB);
+  ring(fx, fy, 40, 36);
+  c.fillRect(fx - 6 * s, fy - 0.5 * s, 12 * s, 1 * s);
+  c.fillRect(fx - 0.5 * s, fy - 6 * s, 1 * s, 12 * s);
+  // top die: thick annulus OD 60 / ID 36 um with a 1 um crosshair across the bore
+  c.fillStyle = grey(T_DIE);
+  const x = fx + DX * s, y = fy + DY * s;
+  ring(x, y, 30, 18);
+  c.fillRect(x - 18 * s, y - 0.5 * s, 36 * s, 1 * s);
+  c.fillRect(x - 0.5 * s, y - 18 * s, 1 * s, 36 * s);
+}
+
+function buildSample() {
+  const tc = mk(SW, H), c = tc.getContext('2d');
+  c.translate(MX, 0);                        // world x in [-MX, W + MX]
+  c.fillStyle = grey(1); c.fillRect(-MX, 0, SW, H);
+  c.globalCompositeOperation = 'multiply';
+  // outside the top-die footprint: substrate only (darker in the atlas IR crops); edge-scatter line just outside
+  const xL = V === 1 ? 120 : -1e4;           // v1: die left edge (bottom-left corner in frame)
+  c.fillStyle = grey(T_OUT);
+  c.fillRect(-MX, LINE_Y, SW, H - LINE_Y);
+  if (V === 1) c.fillRect(-MX, 0, xL + MX, LINE_Y);
+  c.fillStyle = grey(T_EDGE);
+  const ew = 1.5 * S;
+  c.fillRect(Math.max(-MX, xL - ew), LINE_Y, (V === 1 ? W + MX - xL : SW) + ew, ew);
+  if (V === 1) c.fillRect(xL - ew, 0, ew, LINE_Y);
+  // marks
+  if (V === 1) {
+    const fx = 410, fy = 320;
+    fiducial(c, fx, fy);
+    vernier(c, 'h', fx, 104, 0.25);          // corner vernier, x
+    vernier(c, 'v', 200, fy, 0.25);          // corner vernier, y
+    vernier(c, 'h', 1010, 230, 0.1);         // horizontal 0.1 um vernier
+    vernier(c, 'v', 1560, 300, 0.1);         // vertical 0.1 um vernier
+  } else {
+    vernier(c, 'h', 960, 300, 0.1);
+  }
+  c.globalCompositeOperation = 'source-over';
+
+  // IR optics: diffraction-limited softness
+  const bc0 = mk(SW, H), b0 = bc0.getContext('2d');
+  b0.filter = `blur(${PSF * S}px)`; b0.drawImage(tc, 0, 0);
+
+  // transmission -> camera counts: haze offset, gain, faint fringes (wafer-pair thickness wedge), slow nonuniformity
+  const img = b0.getImageData(0, 0, SW, H), a = img.data;
+  const lf = makeNoise(APA.rng(4401), 64);
+  const fr = 70;                             // um fringe spacing (world), same physical fringes at both mags
+  for (let y = 0; y < H; y++) {
+    const yu = (y - LINE_Y) / S;
+    for (let x = 0; x < SW; x++) {
+      const xu = (x - MX - 960) / S;
+      const i = 4 * (y * SW + x);
+      const T = a[i] / 255;
+      const ph = Math.hypot(xu + 420, yu - 900) / fr;
+      const f = 0.035 * Math.cos(2 * Math.PI * ph) + 0.025 * (lf(x / 700, y / 700) - 0.5);
+      const v = 34 + 150 * T * (1 + f);
+      a[i] = a[i + 1] = a[i + 2] = v;
+    }
+  }
+  b0.putImageData(img, 0, 0);
+  const bl = mk(SW, H), blc = bl.getContext('2d');
+  blc.filter = `blur(${V === 1 ? 6 : 14}px)`; blc.drawImage(bc0, 0, 0);
+  return [bc0, bl];
+}
+
+function buildCamera() {
+  // static sensor noise (InGaAs-like: per-pixel noise + column fixed pattern), applied as an overlay
+  camC = mk(W, H);
+  const c = camC.getContext('2d');
+  const img = c.createImageData(W, H), a = img.data;
+  const r = APA.rng(4402);
+  const col = new Float32Array(W);
+  for (let x = 0; x < W; x++) col[x] = (r() - 0.5) * 3;
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      const i = 4 * (y * W + x);
+      const g = (r() + r() + r() - 1.5) * 9;
+      const v = 128 + g + col[x];
+      a[i] = a[i + 1] = a[i + 2] = v; a[i + 3] = 255;
+    }
+  }
+  c.putImageData(img, 0, 0);
+  // vignette, off-centre illumination
+  vignC = mk(W, H);
+  const v = vignC.getContext('2d');
+  const R = Math.hypot(W, H) / 2;
+  const g = v.createRadialGradient(900, 500, 0.2 * R, 960, 540, 1.05 * R);
+  g.addColorStop(0, 'rgb(255,255,255)'); g.addColorStop(0.6, 'rgb(240,240,240)'); g.addColorStop(1, 'rgb(178,178,178)');
+  v.fillStyle = g; v.fillRect(0, 0, W, H);
+}
+
+APA.scene({
+  meta: { text: 'dark' },
+  async init(p) {
+    ({ ctx } = APA.canvas('2d'));
+    [sample, blurS] = buildSample();
+    buildCamera();
+    this.render(0, p);                         // warm-up: first composite of the static layers, flushed
+    ctx.getImageData(0, 0, 1, 1);
+  },
+  render(t, p) {
+    const tt = Math.max(0, t);
+    const a = 0.6 * Math.exp(-tt / 0.05);              // autofocus snap
+    const ox = -MX - DRIFT * tt;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.globalAlpha = 1;
+    ctx.drawImage(sample, ox, 0);
+    if (a > 0.004) { ctx.globalAlpha = a; ctx.drawImage(blurS, ox, 0); ctx.globalAlpha = 1; }
+    ctx.globalCompositeOperation = 'multiply';
+    ctx.drawImage(vignC, 0, 0);
+    ctx.globalCompositeOperation = 'overlay';
+    ctx.globalAlpha = 0.5;
+    ctx.drawImage(camC, 0, 0);
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'source-over';
+  },
+  // Overlay word as a monochrome camera OSD (on-screen display) character string: bitmap font (APA Pixel 8, Press
+  // Start 2P, 8 x 8 dot cells; its outlines are square dots, so it is drawn directly) with glyph dots in the shot's
+  // tone and a one-dot border in the opposite grey (OSD edge mode: the glyph stamped at the 8 one-dot offsets first).
+  // The font fills its em (cap height = 1 em), so it is set at 0.72 * info.size to match the cap height of the other
+  // words; it still scales with info.size (grows cut to cut). Same treatment for v=1 "There's" and v=2 "more to".
+  // Centred on x = 960, baseline info.baseline (565). Display-fixed (the overlay is never flipped).
+  text(g, word, t, p, info) {
+    const fs = 0.72 * info.size, dot = fs / 8;
+    g.fillStyle = info.color;
+    const fg = g.fillStyle, light = lumOf(fg) > 0.5;
+    g.font = `400 ${fs}px ${info.fonts.pixel8}`;
+    g.textAlign = 'center';
+    g.textBaseline = 'alphabetic';
+    const x = Math.round(info.x), y = Math.round(info.baseline);
+    g.fillStyle = light ? '#0a0a0a' : '#ececec';
+    for (let j = -1; j <= 1; j++) for (let i = -1; i <= 1; i++) if (i || j) g.fillText(word, x + i * dot, y + j * dot);
+    g.fillStyle = fg;
+    g.fillText(word, x, y);
+  },
+});
+// relative luminance of a normalized ctx.fillStyle ('#rrggbb' or 'rgba(r, g, b, a)')
+function lumOf(css) {
+  const v = css[0] === '#' ? [1, 3, 5].map((i) => parseInt(css.slice(i, i + 2), 16)) : css.match(/[\d.]+/g).slice(0, 3).map(Number);
+  const l = v.map((c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; });
+  return 0.2126 * l[0] + 0.7152 * l[1] + 0.0722 * l[2];
+}
+</script>
+</body>
+</html>

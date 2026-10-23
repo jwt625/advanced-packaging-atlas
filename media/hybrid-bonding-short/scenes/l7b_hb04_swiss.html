@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>l7b hb04 swiss</title>
+<script src="../lib/apa.js"></script>
+</head>
+<body>
+<script>
+// L7 pass-A slot (file name kept): Cu-Cu hybrid bond, wafer-to-wafer, 0.4 um pitch, as a Swiss International Style poster that
+// assembles on its module grid (0.1 um = 65 px). The top wafer is one dominant red field, the bottom bond layer is paper
+// with black pads, the chain ends at an array edge on the left (negative space). Bond interface on y = 600.
+// Motion (all a function of t): a red field opens sideways from a central column (0-0.4 s), pads slide into
+// their pitch positions in a left-to-right stagger, then vias and the chain links follow; settled by 0.86 s, then pan only.
+// Sources: l7b_hb04_swiss.notes.md.
+const { W, H, LINE_Y } = APA;
+const S = 650;                 // px per um; module 0.1 um = 65 px
+const P = 0.4 * S;             // pitch 260
+const IF = LINE_Y;
+const PAD_H = 0.4 * S, VIA_H = 0.3 * S, M1_H = 0.13 * S;
+const PAD_W = 0.2 * S, VIA_W = 0.16 * S, M1_W = 0.3 * S;
+const X_FIRST = 520;           // centre of the first (array-edge) column at t = 0 (8 modules)
+const NCOL = 7;                // columns 0..6 cover the frame through the pan
+const DRIFT = 28;              // px/s
+const RED0 = [780, 1170];      // red field at t = 0: a column on modules 12-18
+
+const C = {
+  red_ox: '#d52b1e',    // top-wafer oxide (via / M1 levels): dominant red field
+  red_sicn: '#cd281c',  // top-wafer SiCN bond layer: same field, one tonal step
+  cu_t: '#ac1d14',      // top Cu (pad, via, M1): tonal dark red, keeps the type band calm
+  paper: '#ece8df',     // ground before the field opens; bottom SiCN bond layer
+  ox_b: '#dcd7cc',      // bottom-wafer oxide
+  cu_b: '#141414',      // bottom pads: black, the featured element
+  cu_b_ox: '#c3bdb1',   // bottom via + M1 (tonal)
+  rule: '#141414',      // interfacial SiOx
+};
+
+const clamp01 = (u) => u < 0 ? 0 : u > 1 ? 1 : u;
+const outExpo = (u) => u >= 1 ? 1 : 1 - Math.pow(2, -10 * u);
+const outCubic = (u) => 1 - (1 - u) ** 3;
+const prog = (t, t0, dur, ease) => ease(clamp01((t - t0) / dur));
+
+let ctx;
+function rect(x, y, w, h, c) {
+  if (w <= 0 || h <= 0) return;
+  ctx.fillStyle = c; ctx.fillRect(Math.round(x), Math.round(y), Math.round(x + w) - Math.round(x), Math.round(y + h) - Math.round(y));
+}
+// draw inside a horizontal slot [y0, y1): the layer band a body slides through
+function inSlot(y0, y1, fn) { ctx.save(); ctx.beginPath(); ctx.rect(0, y0, W, y1 - y0); ctx.clip(); fn(); ctx.restore(); }
+
+APA.scene({
+  meta: { text: 'light' },            // pass-A slot: no overlay is set; tone kept in case of a cue
+  init() { ({ ctx } = APA.canvas('2d')); },
+  render(t) {
+    const x0 = X_FIRST - DRIFT * t;
+    const yPadT = IF - PAD_H, yViaT = yPadT - VIA_H, yM1T = yViaT - M1_H;
+    const yPadB = IF + PAD_H, yViaB = yPadB + VIA_H;
+
+    // ground
+    rect(0, 0, W, IF, C.paper);
+    rect(0, IF, W, PAD_H, C.paper);
+    rect(0, yPadB, W, H - yPadB, C.ox_b);
+    // red field opens sideways from the type column (0 - 0.3 s)
+    const w = prog(t, 0, 0.4, outCubic);
+    const rl = RED0[0] * (1 - w), rr = RED0[1] + (W - RED0[1]) * w;
+    rect(rl, 0, rr - rl, yPadT, C.red_ox);
+    rect(rl, yPadT, rr - rl, PAD_H, C.red_sicn);
+    // interfacial SiOx rule draws left to right with the field (pads cover it where Cu meets Cu)
+    const rx = W * prog(t, 0.04, 0.45, outCubic);
+    rect(0, IF - 1.5, rx, 3, C.rule);
+
+    for (let k = 0; k < NCOL; k++) {
+      const xc = x0 + k * P;
+      const st = 0.10 + 0.06 * k;                       // stagger, array edge first
+      // pads: bottom rises through its SiCN slot, top drops through its slot
+      const pb = prog(t, st, 0.3, outExpo), pt = prog(t, st + 0.03, 0.3, outExpo);
+      inSlot(IF, yPadB, () => rect(xc - PAD_W / 2, IF + PAD_H * (1 - pb), PAD_W, PAD_H, C.cu_b));
+      inSlot(yPadT, IF, () => rect(xc - PAD_W / 2, yPadT - PAD_H * (1 - pt), PAD_W, PAD_H, C.cu_t));
+      // vias follow
+      const vb = prog(t, st + 0.10, 0.25, outExpo), vt = prog(t, st + 0.13, 0.25, outExpo);
+      inSlot(yPadB, yViaB, () => rect(xc - VIA_W / 2, yPadB + VIA_H * (1 - vb), VIA_W, VIA_H, C.cu_b_ox));
+      inSlot(yViaT, yPadT, () => rect(xc - VIA_W / 2, yViaT - VIA_H * (1 - vt), VIA_W, VIA_H, C.cu_t));
+    }
+    // daisy-chain links wipe in from their left ends: top M1 joins (0,1), (2,3), ...; bottom M1 joins (1,2), (3,4), ...;
+    // column 0 bottom M1 is the chain lead running out to the left edge
+    const L = P + M1_W;
+    for (let k = 0; k < NCOL; k += 2) {
+      const xa = x0 + k * P - M1_W / 2;
+      rect(xa, yM1T, L * prog(t, 0.36 + 0.05 * k, 0.2, outExpo), M1_H, C.cu_t);
+    }
+    const lead = prog(t, 0.34, 0.3, outExpo);
+    const xe = x0 + M1_W / 2;
+    rect(xe - (xe + 10) * lead, yViaB, (xe + 10) * lead, M1_H, C.cu_b_ox);
+    for (let k = 1; k < NCOL; k += 2) {
+      const xa = x0 + k * P - M1_W / 2;
+      rect(xa, yViaB, L * prog(t, 0.36 + 0.05 * k, 0.2, outExpo), M1_H, C.cu_b_ox);
+    }
+  },
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>s00 horizon</title>
+<script src="../lib/apa.js"></script>
+<style>#stage > iframe { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; border: 0; }</style>
+</head>
+<body>
+<script>
+// Open, name card and close (DevLog-015). The bond plane glows like the Opus 5.5 horizon; the two halves
+// are the two wafers of a W2W (wafer-to-wafer) hybrid bond seen edge-on, Cu pads facing each other across y = 600.
+// mode=open  : bonded horizon (t = 0 is the loop seam frame), hold, then the halves pull apart (upper up, lower
+//              down) and reveal the scene named by `reveal` (iframe, same origin, rendered at its own t = 0, i.e.
+//              exactly its first frame). The last frame shows only that scene, so the cut into it is invisible.
+// mode=name  : dark card, glow parked below the frame, name centred
+// mode=close : the name card, then the halves slide in from top and bottom, meet at y = 600 (dim, unbonded) and the
+//              glow ignites along the line as a bond front; at t = _dur (last frame) the frame equals open t = 0.
+// Geometry (the 0.4 um W2W structure of hero_bond, at 60 px/um): pitch 0.4, pad CD 0.2, pad height 0.4, via
+// 0.16 x 0.30, equal pads on both wafers, aligned, drawn as mirror images (wiring links above the vias omitted).
+const { W, H, LINE_Y, FPS } = APA;
+let ctx, on, dim, tmp, reveal = null;
+
+const SC = 60;                                    // px per um
+const PITCH = 0.4 * SC, CD = 0.2 * SC, PAD_H = 0.4 * SC;
+const VIA_W = 0.16 * SC, VIA_H = 0.3 * SC;
+const PARK = 1200;                                // glow line position while parked below the frame on the cards
+const NAME = 'Hybrid bonding';
+
+const clamp01 = (u) => Math.min(1, Math.max(0, u));
+const ease = (u) => u * u * (3 - 2 * u);
+const easeOut3 = (u) => 1 - (1 - u) ** 3;
+
+// sky/haze over the plane and the dark lower wafer; glow in [0, 1] scales every emissive term
+function horizon(g, y, glow) {
+  g.fillStyle = '#0a0d12';
+  g.fillRect(0, 0, W, H);
+  const top = y - 560;
+  const a = (v) => (v * glow).toFixed(3);
+  const s = g.createLinearGradient(0, top, 0, y);
+  s.addColorStop(0.00, 'rgba(12,18,28,0)');
+  s.addColorStop(0.45, `rgba(30,52,78,${a(0.55)})`);
+  s.addColorStop(0.72, `rgba(92,128,150,${a(0.75)})`);
+  s.addColorStop(0.86, `rgba(206,190,170,${a(0.85)})`);
+  s.addColorStop(0.95, `rgba(226,128,62,${a(0.95)})`);
+  s.addColorStop(1.00, `rgba(255,178,110,${a(1)})`);
+  g.fillStyle = s;
+  g.fillRect(0, top, W, y - top);
+  g.fillStyle = '#050608';
+  g.fillRect(0, y, W, H - y);
+  const b = g.createLinearGradient(0, y, 0, y + 110);
+  b.addColorStop(0, `rgba(120,48,20,${a(0.9)})`);
+  b.addColorStop(0.25, `rgba(40,16,8,${a(0.9)})`);
+  b.addColorStop(1, 'rgba(5,6,8,0)');
+  g.fillStyle = b;
+  g.fillRect(0, y, W, 110);
+}
+
+function core(g, y, glow) {
+  if (glow <= 0) return;
+  g.save();
+  g.globalAlpha = glow;
+  g.shadowColor = 'rgba(255,190,130,0.9)';
+  g.shadowBlur = 18;
+  g.fillStyle = '#fff1df';
+  g.fillRect(0, y - 1.5, W, 3);
+  g.restore();
+}
+
+// Cu pads and vias of both wafers, mirror images about the line: the same opaque copper on both sides, brightest
+// at the bond faces where they catch the plane glow, darker toward the vias. Each upper pad meets its lower pad.
+function pads(g, glow) {
+  const n0 = -1, n1 = Math.ceil(W / PITCH) + 1;
+  const xc = (i) => i * PITCH;                    // a pad centred on x = 960 (960 / 24 = 40)
+  const k = 0.3 + 0.7 * glow;
+  const rgb = (r, gg, b) => `rgb(${Math.round(r * k)},${Math.round(gg * k)},${Math.round(b * k)})`;
+  const reach = PAD_H + VIA_H;
+  // bonding dielectric around pads and vias, same tone on both wafers and dimmer than the Cu; the upper band
+  // feathers into the haze above it
+  const FEATHER = 48;
+  for (const side of [-1, 1]) {
+    const d = g.createLinearGradient(0, LINE_Y, 0, LINE_Y + side * reach);
+    d.addColorStop(0, rgb(150, 74, 40));
+    d.addColorStop(0.45, rgb(78, 38, 20));
+    d.addColorStop(1, rgb(40, 20, 12));
+    g.fillStyle = d;
+    g.fillRect(0, side < 0 ? LINE_Y - reach : LINE_Y, W, reach);
+  }
+  const fe = g.createLinearGradient(0, LINE_Y - reach, 0, LINE_Y - reach - FEATHER);
+  fe.addColorStop(0, rgb(40, 20, 12));
+  fe.addColorStop(1, 'rgba(40,20,12,0)');
+  g.fillStyle = fe;
+  g.fillRect(0, LINE_Y - reach - FEATHER, W, FEATHER);
+  for (const side of [-1, 1]) {                   // -1: upper wafer (face down), +1: lower wafer (face up)
+    const cu = g.createLinearGradient(0, LINE_Y, 0, LINE_Y + side * reach);
+    cu.addColorStop(0, rgb(255, 206, 156));
+    cu.addColorStop(0.12, rgb(228, 136, 80));
+    cu.addColorStop(0.55, rgb(124, 58, 28));
+    cu.addColorStop(1, rgb(52, 24, 12));
+    g.fillStyle = cu;
+    for (let i = n0; i <= n1; i++) {
+      const c = xc(i);
+      if (side < 0) {
+        g.fillRect(c - CD / 2, LINE_Y - PAD_H, CD, PAD_H);
+        g.fillRect(c - VIA_W / 2, LINE_Y - reach, VIA_W, VIA_H);
+      } else {
+        g.fillRect(c - CD / 2, LINE_Y, CD, PAD_H);
+        g.fillRect(c - VIA_W / 2, LINE_Y + PAD_H, VIA_W, VIA_H);
+      }
+    }
+  }
+}
+
+function bondPlane(g, glow) {
+  horizon(g, LINE_Y, glow);
+  pads(g, glow);
+  core(g, LINE_Y, glow);
+}
+
+// the two halves of a pre-rendered bond plane: rows above LINE_Y moved up by dTop, rows below moved down by dBot
+function halves(src, dTop, dBot) {
+  if (dTop < LINE_Y) ctx.drawImage(src, 0, 0, W, LINE_Y, 0, -dTop, W, LINE_Y);
+  if (LINE_Y + dBot < H) ctx.drawImage(src, 0, LINE_Y, W, H - LINE_Y, 0, LINE_Y + dBot, W, H - LINE_Y);
+}
+
+function words(text, y, size, color = '#f4f1ea') {
+  ctx.fillStyle = color;
+  ctx.font = `400 ${size}px 'APA Serif'`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(text, W / 2, y);
+}
+
+// name card: the name only
+function card() {
+  horizon(ctx, PARK, 1);
+  words(NAME, H / 2, 60);
+}
+
+async function loadReveal(src) {
+  const f = document.createElement('iframe');
+  APA.stage.insertBefore(f, APA.stage.firstChild);   // under the canvas
+  await new Promise((r) => { f.addEventListener('load', r, { once: true }); f.src = src; });
+  await new Promise((r) => {
+    const k = () => (f.contentWindow.APA_READY ? r() : setTimeout(k, 20));
+    k();
+  });
+  return f;
+}
+
+APA.scene({
+  async init(p) {
+    ({ ctx } = APA.canvas('2d'));
+    const mk = () => { const c = document.createElement('canvas'); c.width = W; c.height = H; return c; };
+    on = mk(); dim = mk(); tmp = mk();
+    bondPlane(on.getContext('2d'), 1);
+    bondPlane(dim.getContext('2d'), 0.3);
+    if ((p.mode || 'open') === 'open' && p.reveal) reveal = await loadReveal(p.reveal);
+  },
+  async render(t, p) {
+    const mode = p.mode || 'open';
+    const end = Number(p._dur || 1.2);
+    ctx.clearRect(0, 0, W, H);
+    if (mode === 'open') {
+      // hold, then split over the last 0.72 s (or 60 % of a short shot); halves gone exactly at t = end
+      const span = Math.min(0.72, 0.6 * end);
+      const u = clamp01((t - (end - span)) / span);
+      if (u <= 0 || !reveal) { halves(on, 0, 0); return; }
+      await reveal.contentWindow.APA.frame(0);
+      if (u >= 1) return;                                 // canvas clear: only the revealed scene
+      const d = LINE_Y * (u * u * (2.2 - 1.2 * u));       // accelerating apart, both wafers by the same distance
+      const gap = 2 * d;
+      ctx.fillStyle = `rgba(5,6,8,${(0.7 * (1 - u) ** 1.6).toFixed(3)})`;
+      ctx.fillRect(0, LINE_Y - d, W, gap);
+      halves(dim, d, d);
+      ctx.save();
+      ctx.globalAlpha = (1 - ease(clamp01(u / 0.7)));     // the glow goes out as the wafers part
+      halves(on, d, d);
+      ctx.restore();
+    } else if (mode === 'name') {
+      card();
+    } else if (mode === 'close') {
+      // 0 .. tc: approach (dim, decelerating to contact); tc .. tw: bond front ignites the line left to right;
+      // tw .. end: hold on the opening frame
+      const tw = end - 2 / FPS, tc = Math.max(0, tw - Math.min(0.42, 0.4 * end));
+      if (t >= tw) { halves(on, 0, 0); return; }
+      if (t < tc) {
+        card();
+        const d = LINE_Y * (1 - easeOut3(t / tc));
+        halves(dim, d, d);
+        return;
+      }
+      halves(dim, 0, 0);
+      const R = 420;
+      const xf = -R + (W + 2 * R) * ease((t - tc) / (tw - tc));
+      const g = tmp.getContext('2d');
+      g.globalCompositeOperation = 'source-over';
+      g.clearRect(0, 0, W, H);
+      g.drawImage(on, 0, 0);
+      g.globalCompositeOperation = 'destination-in';
+      const m = g.createLinearGradient(xf - R, 0, xf + R, 0);
+      m.addColorStop(0, 'rgba(0,0,0,1)');
+      m.addColorStop(1, 'rgba(0,0,0,0)');
+      g.fillStyle = m;
+      g.fillRect(0, 0, W, H);
+      g.globalCompositeOperation = 'source-over';
+      ctx.drawImage(tmp, 0, 0);
+      // the front itself: a brighter stretch of the line where contact is being made
+      const fl = ctx.createLinearGradient(xf - 260, 0, xf + 260, 0);
+      fl.addColorStop(0, 'rgba(255,236,214,0)');
+      fl.addColorStop(0.5, 'rgba(255,236,214,0.7)');
+      fl.addColorStop(1, 'rgba(255,236,214,0)');
+      ctx.save();
+      ctx.shadowColor = 'rgba(255,190,130,0.9)';
+      ctx.shadowBlur = 14;
+      ctx.fillStyle = fl;
+      ctx.fillRect(xf - 260, LINE_Y - 1.5, 520, 3);
+      ctx.restore();
+    }
+  },
+});
+</script>
+</body>
+</html>

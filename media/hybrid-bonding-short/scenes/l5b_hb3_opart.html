@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>l5b hb3 op art</title>
+<script src="../lib/apa.js"></script>
+<script src="../lib/textfx.js"></script>
+</head>
+<body>
+<script>
+// L5 pass B: Cu-Cu hybrid bond, die-to-wafer, 3 um pitch; top view as Bridget Riley op-art.
+// Both pad arrays seen through the die (as in an IR overlay view): the top-die array (square 1.5 um pads at 3 um pitch,
+// atlas ic ectc51846.2026.00218-a-i2) is fixed to the frame, its die edge on y = 600 and the array above it; the
+// bottom-wafer landing array (same pads) is rotated and offset during alignment. Their union (Cu is opaque) is the
+// moire: where the arrays coincide the field is 25 % dark, half a pitch off it becomes stripes or a checkerboard.
+// The residual rotation closes as the bond head aligns, so the fringes swell outward. Below the die edge: the wafer
+// surface outside the die. Sources and the exaggerated rotation: l5b_hb3_opart.notes.md
+const { W, H, LINE_Y } = APA;
+let ctx;
+
+const P = 24;                 // px per 3 um pitch (8 px/um)
+const PAD = P / 2;            // pad CD = pitch / 2
+const ROW0 = LINE_Y - P;      // centre of the die's first pad row (keep-out not stated; see notes)
+const PIV = { x: 960, y: LINE_Y }; // rotation pivot on the die edge
+const INK = '#111111', PAPER = '#f3f1eb';
+const D2R = Math.PI / 180;
+
+function theta(t) { return (1.6 + 3.6 / (1 + 0.55 * t)) * D2R; } // 5.2 deg at t = 0 -> 3.0 deg at t = 3 s (exaggerated)
+function shift(t) { return { x: 0.35 * P + 1.6 * t, y: -0.2 * P + 0.9 * t }; }       // residual offset, px
+
+function dieArray() {
+  ctx.beginPath();
+  const x0 = PIV.x - Math.ceil(PIV.x / P) * P;
+  for (let y = ROW0; y > -P; y -= P) {
+    for (let x = x0; x < W + P; x += P) ctx.rect(x - PAD / 2, y - PAD / 2, PAD, PAD);
+  }
+  ctx.fill();
+}
+
+function waferArray(t) {
+  const th = theta(t), s = shift(t);
+  ctx.save();
+  ctx.translate(PIV.x + s.x, PIV.y + s.y);
+  ctx.rotate(th);
+  // cover the die region (y < LINE_Y) in rotated coordinates
+  const R = Math.hypot(W, LINE_Y) + 2 * P;
+  const n = Math.ceil(R / P);
+  ctx.beginPath();
+  for (let j = -n; j <= 2; j++) {
+    for (let i = -n; i <= n; i++) {
+      const u = i * P, v = (j - 1) * P; // same row phase as the die array when aligned
+      // skip pads that land far outside the frame (cheap bound in frame coordinates)
+      const xf = u * Math.cos(th) - v * Math.sin(th) + PIV.x + s.x;
+      const yf = u * Math.sin(th) + v * Math.cos(th) + PIV.y + s.y;
+      if (xf < -P || xf > W + P || yf < -P || yf > LINE_Y + P) continue;
+      ctx.rect(u - PAD / 2, v - PAD / 2, PAD, PAD);
+    }
+  }
+  ctx.fill();
+  ctx.restore();
+}
+
+// Styled text (pass B "3 µm"): Bridget Riley line lettering. One field of horizontal wavy lines (period OPT.T = 8 px,
+// a slow sine undulation in the spirit of "Current", 1964) forms the word: inside the glyph mask (APA Grotesk 800) the
+// lines are thick black with 1.3 px paper hairlines; around the glyphs the same field is phase-shifted by half a period and
+// inverted to black hairlines on paper, thinning outward in three hard-edged rings (1.6 / 1.1 / 0.6 px, Riley's
+// line-weight progression instead of a blur), so every line jogs at the glyph edge. Pure black / paper, no grey.
+// The undulation drifts at 24 px/s (< 0.1 px vertical change per frame: no strobing); legible at t = 0.
+const OPT = { T: 8, A: 2.2, L: 230, V: 24, rings: [[4, 1.6], [8, 1.1], [12, 0.6]], hairIn: 1.3, scale: 1.25 };
+const opCache = { key: '', m: null, dil: null, paper: null };
+function opBuild(word, info, size) {
+  const key = word + '|' + size;
+  if (opCache.key === key) return opCache;
+  const rMax = OPT.rings[OPT.rings.length - 1][0];
+  const m = TFX.mask(word, { family: info.fonts.grotesk, size, weight: 800, pad: Math.ceil(size * 0.25) + rMax + 4 });
+  const canvasOf = (fn) => { const c = document.createElement('canvas'); c.width = m.w; c.height = m.h; fn(c.getContext('2d')); return c; };
+  // the word dilated by r px (round joins), hard edged
+  const dil = OPT.rings.map(([r]) => canvasOf((c) => {
+    c.font = TFX.font(info.fonts.grotesk, size, 800); c.textBaseline = 'alphabetic'; c.textAlign = 'left';
+    c.lineJoin = 'round'; c.lineWidth = 2 * r; c.strokeStyle = '#fff'; c.fillStyle = '#fff';
+    c.strokeText(word, m.ox, m.oy); c.fillText(word, m.ox, m.oy);
+  }));
+  // paper under the rings, edge softened by 2 px so the scene's faint squares are not cut hard
+  const paper = canvasOf((c) => {
+    c.fillStyle = PAPER; c.fillRect(0, 0, m.w, m.h);
+    c.globalCompositeOperation = 'destination-in'; c.filter = 'blur(2px)'; c.drawImage(dil[dil.length - 1], 0, 0);
+  });
+  Object.assign(opCache, { key, m, dil, paper });
+  return opCache;
+}
+// lines of the field into ctx (mask coordinates): centre rows at oy + phase + n T, undulating with x and t
+function opLines(c, m, x0, t, phase, width) {
+  c.lineWidth = width; c.lineCap = 'butt'; c.strokeStyle = INK;
+  c.beginPath();
+  const n0 = Math.floor(-m.oy / OPT.T) - 1, n1 = Math.ceil((m.h - m.oy) / OPT.T) + 1;
+  for (let n = n0; n <= n1; n++) {
+    const yc = m.oy + phase + n * OPT.T;
+    for (let x = -8; x <= m.w + 8; x += 6) {
+      const y = yc + OPT.A * Math.sin((2 * Math.PI * (x0 + x - OPT.V * t)) / OPT.L);
+      if (x === -8) c.moveTo(x, y); else c.lineTo(x, y);
+    }
+  }
+  c.stroke();
+}
+function opText(g, word, t, info) {
+  const size = Math.round(OPT.scale * info.size);
+  const { m, dil, paper } = opBuild(word, info, size);
+  const left = Math.round(info.x - m.width / 2 - m.ox), top = Math.round(info.baseline - m.oy);
+  const lay = (fn) => { const c = document.createElement('canvas'); c.width = m.w; c.height = m.h; fn(c.getContext('2d')); return c; };
+  g.drawImage(paper, left, top);
+  // rings: black hairlines at half-period phase, thinner outward
+  OPT.rings.forEach(([, wd], k) => {
+    g.drawImage(lay((c) => {
+      opLines(c, m, left, t, OPT.T / 2, wd);
+      c.globalCompositeOperation = 'destination-in'; c.drawImage(dil[k], 0, 0);
+      c.globalCompositeOperation = 'destination-out'; c.drawImage(k ? dil[k - 1] : m.canvas, 0, 0);
+    }), left, top);
+  });
+  // glyphs: paper ground, thick black lines (T - hairIn px) on the opposite phase, clipped to the glyph alpha
+  g.drawImage(lay((c) => {
+    c.fillStyle = PAPER; c.fillRect(0, 0, m.w, m.h);
+    opLines(c, m, left, t, 0, OPT.T - OPT.hairIn);
+    c.globalCompositeOperation = 'destination-in'; c.drawImage(m.canvas, 0, 0);
+  }), left, top);
+}
+
+APA.scene({
+  meta: { text: 'dark' },
+  init() { ({ ctx } = APA.canvas('2d', { alpha: false })); },
+  render(t) {
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.fillStyle = PAPER;
+    ctx.fillRect(0, 0, W, LINE_Y);
+    // die region: union of both arrays, clipped at the die edge
+    ctx.save();
+    ctx.beginPath(); ctx.rect(0, 0, W, LINE_Y); ctx.clip();
+    ctx.fillStyle = INK;
+    waferArray(t);
+    dieArray();
+    // tonal ramp toward the die edge (Riley's grey progressions): calm band under the overlay text
+    const g = ctx.createLinearGradient(0, 360, 0, LINE_Y);
+    g.addColorStop(0, 'rgba(243,241,235,0)');
+    g.addColorStop(0.5, 'rgba(243,241,235,0.62)');
+    g.addColorStop(0.75, 'rgba(243,241,235,0.84)');
+    g.addColorStop(1, 'rgba(243,241,235,0.9)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 360, W, LINE_Y - 360);
+    ctx.restore();
+    // wafer surface outside the die
+    ctx.fillStyle = INK;
+    ctx.fillRect(0, LINE_Y, W, H - LINE_Y);
+  },
+  text(g, word, t, p, info) { opText(g, word, t, info); },
+});
+</script>
+</body>
+</html>

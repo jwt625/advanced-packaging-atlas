@@ -1,0 +1,297 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>l3b pillar tiling</title>
+<script src="../lib/apa.js"></script>
+</head>
+<body>
+<script>
+// L3 pass B: top view of the 40 um-pitch Cu-pillar microbump array as an Islamic geometric mosaic (girih strapwork).
+// Square bump grid; each bump is the centre of an 8-point khatam rosette. The pattern is Hankin's polygons-in-contact
+// construction on the 4.8.8 tiling whose octagons are centred on the bumps, with interlaced strapwork.
+// Die edge on y = 600 (array above it); the bump-free periphery forms the border band that carries the overlay text.
+// Motion: the girih is constructed on the fixed bump grid (straps grow out of the bumps, then lapis, turquoise and
+// white glazes flood in), complete at 0.85 s, then holds. Camera trucks right throughout: content moves left at 28 px/s
+// of shot time, constant, from t = 0 (pass-A group pan, 2026-10-22). Pure function of t. Pass-A L3 shot (no text).
+// Geometry and sources: l3b_pillar_tiling.notes.md.
+const { W, H, LINE_Y } = APA;
+const S = 5.5;                 // px per um
+const P = 40 * S;              // pitch 220 px
+const RB = 10 * S;             // bump radius (20 um dia) 55 px
+const SHOT_SPEED = Number(APA.params.speed) > 0 ? Number(APA.params.speed) : 1;
+const PAN = 28;                // px per second of shot time (scene time / speed), content moving left
+const WP = W + 100;            // pre-rendered panel width
+const X0 = 960;                // a bump column
+const YR = 360;                // last bump row centre; die edge to bump centre = 240 px (43.6 um)
+const Y_FIELD = YR + P / 2;    // pattern field ends on the cell boundary (470)
+const THETA = 67.5 * Math.PI / 180; // Hankin contact angle: classic 8-point star and 4-point cross
+const SW = 15;                 // strap width
+const GW = 2.6;                // grout outline width
+
+const C = {
+  grout: '#2a2230', white: '#efe8d6', lapis: '#1f3b8c', turq: '#1f9fa3', gold: '#d6a331', clay: '#3a2a2e',
+};
+let ctx;
+
+function hexToRgb(h) { const n = parseInt(h.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255]; }
+function jitter(hex, r, amt) {
+  const [a, b, c] = hexToRgb(hex), k = (r() - 0.5) * amt, h = (r() - 0.5) * amt * 0.5;
+  return `rgb(${Math.round(a * (1 + k) + h * 40)},${Math.round(b * (1 + k))},${Math.round(c * (1 + k) - h * 30)})`;
+}
+
+// regular n-gon in contact: centre (cx, cy), inradius r, first edge normal angle a0
+function hankin(cx, cy, n, r, a0) {
+  const step = 2 * Math.PI / n, half = Math.PI / n, tn = Math.tan(half);
+  const s = r * tn / (Math.cos(THETA) + tn * Math.sin(THETA));
+  const rho = (r - s * Math.sin(THETA)) / Math.cos(half);
+  const R = r / Math.cos(half);
+  const mids = [], meets = [], verts = [];
+  for (let k = 0; k < n; k++) {
+    const am = a0 + k * step, av = am + half;
+    mids.push([cx + r * Math.cos(am), cy + r * Math.sin(am)]);
+    meets.push([cx + rho * Math.cos(av), cy + rho * Math.sin(av)]);
+    verts.push([cx + R * Math.cos(av), cy + R * Math.sin(av)]);
+  }
+  return { cx, cy, n, mids, meets, verts };
+}
+
+function polyPath(pts) { const p = new Path2D(); p.moveTo(...pts[0]); for (const q of pts.slice(1)) p.lineTo(...q); p.closePath(); return p; }
+function starPts(pg) { const o = []; for (let k = 0; k < pg.n; k++) { o.push(pg.mids[k], pg.meets[k]); } return o; }
+
+function glazePiece(g, path, base, r, opts = {}) {
+  g.fillStyle = base; g.fill(path);
+  g.save(); g.clip(path);
+  // glaze pooling: darker toward the piece edge, a soft lighter side
+  g.lineWidth = opts.edge || 10; g.strokeStyle = 'rgba(10,10,30,0.16)'; g.stroke(path);
+  const a = r() * Math.PI * 2, bb = opts.bbox;
+  const gr = g.createLinearGradient(bb[0] + Math.cos(a) * bb[2], bb[1] + Math.sin(a) * bb[2], bb[0] - Math.cos(a) * bb[2], bb[1] - Math.sin(a) * bb[2]);
+  gr.addColorStop(0, 'rgba(255,255,240,0.13)'); gr.addColorStop(0.6, 'rgba(255,255,240,0)');
+  g.fillStyle = gr; g.fill(path);
+  // pinholes and iron specks
+  const nd = opts.specks || 3;
+  for (let i = 0; i < nd; i++) {
+    const x = bb[0] + (r() - 0.5) * bb[2] * 1.4, y = bb[1] + (r() - 0.5) * bb[2] * 1.4;
+    g.fillStyle = r() < 0.6 ? 'rgba(20,15,25,0.35)' : 'rgba(255,250,235,0.5)';
+    g.beginPath(); g.arc(x, y, 0.8 + r() * 1.4, 0, Math.PI * 2); g.fill();
+  }
+  g.restore();
+}
+
+function layer() { const c = document.createElement('canvas'); c.width = WP; c.height = H; return [c, c.getContext('2d')]; }
+
+// Pre-rendered layers (panel coordinates). The construction animation only reveals them as a function of t.
+function buildLayers() {
+  const r = APA.rng(808);
+  // polygons: octagons on bumps, squares on cell corners
+  const octs = [], sqs = [];
+  const rIn = P / 2, rSq = P / Math.SQRT2 - P / 2;
+  for (let j = -1; j <= 3; j++) {
+    for (let i = -6; i <= 6; i++) {
+      const cx = X0 + i * P, cy = YR - j * P;
+      if (cx < -P || cx > WP + P) continue;
+      octs.push(hankin(cx, cy, 8, rIn, 0));
+      sqs.push(hankin(cx + P / 2, cy + P / 2, 4, rSq, Math.PI / 4));
+    }
+  }
+  const all = octs.concat(sqs);
+  // petal faces: one hexagon around every octagon vertex (2 octagon meets + 1 square meet + 3 edge midpoints)
+  const vmap = new Map();
+  const key = (p) => `${Math.round(p[0] * 4)},${Math.round(p[1] * 4)}`;
+  for (const pg of all) {
+    for (let k = 0; k < pg.n; k++) {
+      const v = pg.verts[k], kk = key(v);
+      if (!vmap.has(kk)) vmap.set(kk, { v, pts: new Map() });
+      const e = vmap.get(kk);
+      e.pts.set(key(pg.meets[k]), pg.meets[k]);
+      e.pts.set(key(pg.mids[k]), pg.mids[k]);
+      e.pts.set(key(pg.mids[(k + 1) % pg.n]), pg.mids[(k + 1) % pg.n]);
+    }
+  }
+  const fieldClip = (g) => { g.beginPath(); g.rect(0, 0, WP, Y_FIELD); g.clip(); };
+  const L = {};
+
+  // base: grout field, border bands, gold edge, outside-die field (static from t = 0)
+  {
+    const [c, g] = layer(); L.base = c;
+    g.fillStyle = C.grout; g.fillRect(0, 0, WP, LINE_Y);
+    // band pieces; `cuts` are the joints, chosen so none falls behind the overlay text (x 560-1360 for any pan)
+    const band = (y0, y1, col, edge, specks, cuts) => {
+      const rr = APA.rng(Math.round(y0 * 7));
+      for (let i = 0; i + 1 < cuts.length; i++) {
+        const x = cuts[i], w = cuts[i + 1] - cuts[i], p = new Path2D(); p.rect(x + 1.2, y0, w - 2.4, y1 - y0);
+        glazePiece(g, p, jitter(col, rr, 0.05), rr, { bbox: [x + w / 2, (y0 + y1) / 2, Math.min(w / 2, 300)], edge, specks });
+      }
+    };
+    band(Y_FIELD + 4, Y_FIELD + 20, C.white, 4, 3, [-20, 170, 360, 560, 760, 960, 1160, 1360, 1560, 1760, WP + 20]);
+    band(Y_FIELD + 24, LINE_Y - 9, C.lapis, 8, 2, [-20, 230, 500, 1460, 1720, WP + 20]);
+    g.fillStyle = C.gold; g.fillRect(0, LINE_Y - 7, WP, 7);
+    // outside the die: underfill fillet over the interposer, plain dark glaze, no structure drawn
+    const gr = g.createLinearGradient(0, LINE_Y, 0, H);
+    gr.addColorStop(0, '#47333a'); gr.addColorStop(0.25, C.clay); gr.addColorStop(1, '#1f171c');
+    g.fillStyle = gr; g.fillRect(0, LINE_Y, WP, H - LINE_Y);
+    g.fillStyle = 'rgba(0,0,0,0.35)'; g.fillRect(0, LINE_Y, WP, 3);
+  }
+  // construction guides: the 4.8.8 polygons in contact (thin gold lines), shown before the glaze arrives
+  {
+    const [c, g] = layer(); L.guide = c;
+    g.save(); fieldClip(g);
+    g.strokeStyle = 'rgba(214,163,49,0.8)'; g.lineWidth = 2;
+    for (const pg of all) g.stroke(polyPath(pg.verts));
+    g.restore();
+  }
+  // glaze layers
+  {
+    const [c, g] = layer(); L.turq = c;
+    g.save(); fieldClip(g);
+    for (const { v, pts } of vmap.values()) {
+      const arr = [...pts.values()];
+      if (arr.length !== 6) continue;
+      arr.sort((a, b) => Math.atan2(a[1] - v[1], a[0] - v[0]) - Math.atan2(b[1] - v[1], b[0] - v[0]));
+      glazePiece(g, polyPath(arr), jitter(C.turq, r, 0.16), r, { bbox: [v[0], v[1], P * 0.2], edge: 8, specks: 2 });
+    }
+    g.restore();
+  }
+  {
+    const [c, g] = layer(); L.white = c;
+    g.save(); fieldClip(g);
+    for (const pg of sqs) glazePiece(g, polyPath(starPts(pg)), jitter(C.white, r, 0.05), r, { bbox: [pg.cx, pg.cy, P * 0.2], edge: 8, specks: 2 });
+    g.restore();
+  }
+  {
+    const [c, g] = layer(); L.lapis = c;
+    g.save(); fieldClip(g);
+    for (const pg of octs) glazePiece(g, polyPath(starPts(pg)), jitter(C.lapis, r, 0.2), r, { bbox: [pg.cx, pg.cy, P * 0.45], edge: 14, specks: 5 });
+    g.restore();
+  }
+  // strapwork: outlines, bands, then the over-crossings (ccw segment over at every midpoint: consistent alternation)
+  {
+    const [c, g] = layer(); L.straps = c;
+    g.save(); fieldClip(g);
+    g.lineJoin = 'miter'; g.miterLimit = 10; g.lineCap = 'butt';
+    const stars = all.map((pg) => polyPath(starPts(pg)));
+    g.strokeStyle = C.grout; g.lineWidth = SW + 2 * GW; for (const p of stars) g.stroke(p);
+    g.strokeStyle = C.white; g.lineWidth = SW; for (const p of stars) g.stroke(p);
+    const Lx = SW * 1.05;
+    for (const pg of all) {
+      for (let k = 0; k < pg.n; k++) {
+        const m = pg.mids[k], q = pg.meets[k];
+        let dx = q[0] - m[0], dy = q[1] - m[1]; const dl = Math.hypot(dx, dy); dx /= dl; dy /= dl;
+        g.beginPath(); g.moveTo(m[0] - dx * Lx, m[1] - dy * Lx); g.lineTo(m[0] + dx * Lx, m[1] + dy * Lx);
+        g.strokeStyle = C.grout; g.lineWidth = SW + 2 * GW; g.stroke();
+        g.strokeStyle = C.white; g.lineWidth = SW; g.stroke();
+      }
+    }
+    g.restore();
+  }
+  // glaze finish over the field: crazing and mottling (arrives with the last glaze)
+  {
+    const [c, g] = layer(); L.finish = c;
+    g.save(); fieldClip(g);
+    const rc = APA.rng(31);
+    g.lineWidth = 0.7;
+    for (let i = 0; i < 420; i++) {
+      let x = rc() * WP, y = rc() * (Y_FIELD + 20);
+      g.strokeStyle = `rgba(255,255,245,${0.05 + rc() * 0.08})`;
+      g.beginPath(); g.moveTo(x, y);
+      for (let s2 = 0; s2 < 4; s2++) { x += (rc() - 0.5) * 40; y += (rc() - 0.5) * 40; g.lineTo(x, y); }
+      g.stroke();
+    }
+    const rm = APA.rng(6);
+    for (let i = 0; i < 200; i++) {
+      const x = rm() * WP, y = rm() * Y_FIELD, rad = 30 + rm() * 90;
+      const gm = g.createRadialGradient(x, y, 0, x, y, rad);
+      const lum = rm() < 0.5 ? '255,250,230' : '20,20,40';
+      gm.addColorStop(0, `rgba(${lum},0.06)`); gm.addColorStop(1, `rgba(${lum},0)`);
+      g.fillStyle = gm; g.fillRect(x - rad, y - rad, 2 * rad, 2 * rad);
+    }
+    g.restore();
+  }
+  // bumps: Cu pillar / SnAg cap seen from above, 20 um dia, gold lustre disc on a white ring (static from t = 0)
+  {
+    const [c, g] = layer(); L.bumps = c;
+    g.save(); fieldClip(g);
+    for (const pg of octs) {
+      const { cx, cy } = pg;
+      g.beginPath(); g.arc(cx, cy, RB + 7, 0, Math.PI * 2); g.fillStyle = C.grout; g.fill();
+      g.beginPath(); g.arc(cx, cy, RB + 5, 0, Math.PI * 2); g.fillStyle = jitter(C.white, r, 0.04); g.fill();
+      g.beginPath(); g.arc(cx, cy, RB, 0, Math.PI * 2); g.fillStyle = C.grout; g.fill();
+      const disc = new Path2D(); disc.arc(cx, cy, RB - 2, 0, Math.PI * 2);
+      glazePiece(g, disc, jitter(C.gold, r, 0.1), r, { bbox: [cx, cy, RB], edge: 9, specks: 4 });
+    }
+    g.restore();
+  }
+  // finished panel, used once the construction is complete
+  {
+    const [c, g] = layer(); L.full = c;
+    for (const k of ['base', 'turq', 'white', 'lapis', 'straps', 'finish', 'bumps']) g.drawImage(L[k], 0, 0);
+  }
+  L.centres = octs.map((pg) => [pg.cx, pg.cy]);
+  return L;
+}
+
+// construction schedule (s): straps grow radially out of every bump, then the glazes flood outward
+const ease = (u) => (u <= 0 ? 0 : u >= 1 ? 1 : u * u * (3 - 2 * u));
+const R0 = RB + 6, RMAX = 0.71 * P + SW + 4;     // reveal radius: bump ring -> farthest point from any bump
+const STAGES = {
+  straps: [0.0, 0.42],
+  lapis: [0.18, 0.5],
+  turq: [0.3, 0.64],
+  white: [0.44, 0.8],
+};
+const T_END = 0.8;             // in build time tb
+// Pass-A slot (2 beats, 1.0 s): build time tb = t * 0.8 / 0.85, so the build settles at t = 0.85 s at runtime speed 1
+// (the runtime passes t * speed to render).
+const BUILD = 0.8 / 0.85;
+const radius = (t, [t0, t1]) => R0 + (RMAX - R0) * ease((t - t0) / (t1 - t0));
+
+function discs(rad) {
+  const p = new Path2D();
+  for (const [x, y] of layers.centres) {
+    if (y - rad > Y_FIELD || x + rad < 0 || x - rad > WP) continue;
+    p.moveTo(x + rad, y); p.arc(x, y, rad, 0, Math.PI * 2);
+  }
+  return p;
+}
+
+let layers;
+function drawField(L, sx) {   // field rows only (y < Y_FIELD), visible window only
+  ctx.drawImage(L, sx, 0, W, Y_FIELD, 0, 0, W, Y_FIELD);
+}
+
+APA.scene({
+  meta: { text: 'light' },
+  async init() {
+    ({ ctx } = APA.canvas('2d'));
+    layers = buildLayers();
+    // flush the deferred layer rasters now so the first timed frame is not an outlier
+    for (const k of ['base', 'guide', 'turq', 'white', 'lapis', 'straps', 'finish', 'bumps', 'full']) {
+      layers[k].getContext('2d').getImageData(0, 0, 1, 1);
+    }
+    this.render(0.3); this.render(1); ctx.getImageData(0, 0, 1, 1);
+  },
+  render(t) {
+    const pan = Math.min(PAN * Math.max(0, t) / SHOT_SPEED, WP - W - 6), tb = t * BUILD;   // clamps at 94 px (3.4 s)
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.globalAlpha = 1;
+    if (tb >= T_END) { ctx.drawImage(layers.full, -pan, 0); return; }
+    ctx.drawImage(layers.base, -pan, 0);
+    // guides fade as the glazes cover them
+    const ga = 1 - ease((tb - 0.2) / 0.45);
+    if (ga > 0) { ctx.globalAlpha = ga; drawField(layers.guide, pan); ctx.globalAlpha = 1; }
+    for (const k of ['turq', 'white', 'lapis', 'straps']) {
+      const rad = radius(tb, STAGES[k]);
+      if (rad <= R0 + 0.5) continue;
+      ctx.save();
+      ctx.translate(-pan, 0); ctx.clip(discs(rad)); ctx.translate(pan, 0);
+      drawField(layers[k], pan);
+      ctx.restore();
+    }
+    const fa = ease((tb - 0.5) / 0.3);
+    if (fa > 0) { ctx.globalAlpha = fa; drawField(layers.finish, pan); ctx.globalAlpha = 1; }
+    drawField(layers.bumps, pan);
+  },
+});
+</script>
+</body>
+</html>

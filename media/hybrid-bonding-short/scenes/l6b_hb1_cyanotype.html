@@ -1,0 +1,292 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>l6b hb1 cyanotype</title>
+<script src="../lib/apa.js"></script>
+</head>
+<body>
+<script>
+// L6 pass A (l6a slot, no overlay text): W2W F2F Cu-Cu hybrid bond, 1 um pitch, Anna Atkins cyanotype photogram.
+// Structure and dimensions: l6b_hb1_cyanotype.notes.md. Bond interface on LINE_Y.
+// Cu of the lower wafer prints as crisp contact silhouettes; the upper wafer prints as soft, lifted ghosts.
+// Paper, fibres, brush-coated border: seeded once.
+// Motion: ink-drop diffusion (owner request 2026-10-22). The Prussian blue spreads outward from the bond line like ink
+// in wet paper: t = 0 a thin dark line on y = 600; a feathered, noise-modulated front with capillary fingers along
+// the paper fibres and a darker tide-line rim expands up and down (ease-out), revealing the developed print (white Cu
+// silhouettes) behind it; it reaches the top and bottom coat edges by ~0.6 s (last fingers 0.8 s), the wet sheen
+// dries by 0.85 s, then holds. Camera trucks right throughout: content moves left at 28 px/s of shot time, constant, from t = 0
+// (pass-A group pan, 2026-10-22; 84 px at 3 s). Geometry never moves.
+const { W, H, LINE_Y } = APA;
+const Y = LINE_Y;
+const S = 280;              // px per um; pitch 1 um = 280 px
+const PITCH = 1.0 * S;
+const X0 = 260;             // pad centres at 260 + 280 k
+const SHOT_SPEED = Number(APA.params.speed) > 0 ? Number(APA.params.speed) : 1;
+const PAN_V = 28;            // px per second of shot time (scene time / speed)
+const MARGIN = 110;          // sheet wider than the frame; the pan clamps at MARGIN - 20 = 90 px (3.2 s), clear of the blurred mask edge
+const WW = W + MARGIN;
+const WW0 = W + 72;          // sheet width before 2026-10-22: in-frame fibres keep their seeded positions
+
+const PAD_D = 0.35, VIA_D = 0.62, WIRE_D = 1.02, SI_D = 1.55;
+const padHalfW = (d) => 0.5 * S * (0.42 + 0.08 * (1 - (d / PAD_D) ** 2));
+const viaHalfW = (d) => 0.5 * S * (0.21 - 0.02 * (d - PAD_D) / (VIA_D - PAD_D));
+const LINK_EXT = 0.25 * S;
+
+let ctx, bg, bc, img, LUT, devP = -1;
+let DE, K8, AH, FIN, R_END = 700;    // per pixel: front arrival distance (px), coat coverage, colour ahead of / behind the front
+const SENS = [214, 216, 138];        // unwashed sensitizer tone (pale yellow-green)
+const PAPER = [242, 239, 229];
+const DEEP = [12, 38, 86];           // darkest Prussian blue: tide-line rim and wet sheen
+// diffusion front (scene seconds): radius R(t) from the line, ease-out (ink slows as it spreads)
+const R0 = 5;                        // at t = 0: a thin wet line on y = 600
+const T_FRONT = 0.8;                 // front clears the coated area (R = R_END, set in init from the slowest pixel)
+const T_SET = 0.85;                  // wet sheen dried: settled, cached final frame from here on
+const frontR = (t) => R0 + (R_END - R0) * (1 - (1 - Math.min(Math.max(t, 0) / T_FRONT, 1)) ** 1.15);
+// front profile in s = R - DE (px behind the front): feathered edge, tide-line rim just inside it, then a wet sheen
+const FEATHER = [-9, 12], RIM_C = 7, RIM_W = 6, RIM_A = 0.55, WET_A = 0.16, WET_L = 90;
+
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const sstep = (a, b, v) => { const q = clamp((v - a) / (b - a)); return q * q * (3 - 2 * q); };
+function makeNoise(r, n = 128) {
+  const g = new Float32Array(n * n);
+  for (let i = 0; i < g.length; i++) g[i] = r();
+  return (x, y) => {
+    const xi = Math.floor(x), yi = Math.floor(y), fx = x - xi, fy = y - yi;
+    const sx = fx * fx * (3 - 2 * fx), sy = fy * fy * (3 - 2 * fy);
+    const at = (i, j) => g[((j % n + n) % n) * n + ((i % n + n) % n)];
+    const a = at(xi, yi) + (at(xi + 1, yi) - at(xi, yi)) * sx;
+    const b = at(xi, yi + 1) + (at(xi + 1, yi + 1) - at(xi, yi + 1)) * sx;
+    return a + (b - a) * sy;
+  };
+}
+
+// Cu of one wafer (side -1 top, +1 bottom), each shape filled on its own: pads, vias, daisy-chain links
+function cuPath(c, side, kmin, kmax) {
+  const yy = (d) => Y + side * d * S;
+  for (let k = kmin; k <= kmax; k++) {
+    const xc = X0 + k * PITCH;
+    c.beginPath();
+    // pad: curved sidewall, widest (0.50 um) at the bond face
+    const n = 16;
+    c.moveTo(xc - padHalfW(0), yy(0));
+    for (let i = 1; i <= n; i++) { const d = PAD_D * i / n; c.lineTo(xc - padHalfW(d), yy(d)); }
+    for (let i = n; i >= 0; i--) { const d = PAD_D * i / n; c.lineTo(xc + padHalfW(d), yy(d)); }
+    c.closePath(); c.fill();
+    // via (overlaps pad and wire slightly so the union is closed)
+    c.beginPath(); c.moveTo(xc - viaHalfW(PAD_D), yy(PAD_D - 0.01));
+    c.lineTo(xc - viaHalfW(VIA_D), yy(VIA_D + 0.01));
+    c.lineTo(xc + viaHalfW(VIA_D), yy(VIA_D + 0.01));
+    c.lineTo(xc + viaHalfW(PAD_D), yy(PAD_D - 0.01));
+    c.closePath(); c.fill();
+  }
+  const off = side < 0 ? 0 : 1;
+  for (let m = Math.floor(kmin / 2) - 1; m <= Math.ceil(kmax / 2) + 1; m++) {
+    const a = X0 + (2 * m + off) * PITCH - LINK_EXT, b = a + PITCH + 2 * LINK_EXT;
+    const y0 = yy(VIA_D), y1 = yy(WIRE_D);
+    c.fillRect(a, Math.min(y0, y1), b - a, Math.abs(y1 - y0));
+  }
+}
+
+function maskOf(draw, blur) {
+  // draw the sharp union first, then blur the whole mask (no seams where shapes overlap)
+  const mk = () => { const cv = document.createElement('canvas'); cv.width = WW; cv.height = H; return cv; };
+  const a = mk(), ac = a.getContext('2d');
+  ac.fillStyle = '#000'; ac.fillRect(0, 0, WW, H);
+  ac.fillStyle = '#fff'; ac.strokeStyle = '#fff';
+  draw(ac);
+  const b = mk(), c = b.getContext('2d', { willReadFrequently: true });
+  c.fillStyle = '#000'; c.fillRect(0, 0, WW, H);
+  c.filter = blur > 0 ? `blur(${blur}px)` : 'none';
+  c.drawImage(a, 0, 0);
+  const d = c.getImageData(0, 0, WW, H).data;
+  const m = new Float32Array(WW * H);
+  for (let i = 0; i < m.length; i++) m[i] = d[4 * i] / 255;
+  return m;
+}
+
+// tone table of the earlier global development at stage dp (0 = latent sheet, 1 = finished print)
+function toneTable(dp) {
+  const g = 0.25 + 0.75 * dp ** 0.2, a = 0.9 * (1 - dp) ** 0.8;
+  const T = new Float32Array(256 * 3);
+  for (let v = 0; v < 256; v++) {
+    const L = Math.min(255, Math.round(v * g));
+    for (let c = 0; c < 3; c++) T[3 * v + c] = LUT[3 * L + c] * (1 - a) + SENS[c] * a;
+  }
+  return T;
+}
+// lookup tables of the front profile, indexed by s (px), 0.25 px steps over the band where they are non-zero
+const S_MIN = -8, S_MAX = 1200, S_STEP = 4;
+const PROF_W = new Float32Array((S_MAX - S_MIN) * S_STEP + 1), PROF_RIM = new Float32Array(PROF_W.length),
+  PROF_WET = new Float32Array(PROF_W.length);
+for (let j = 0; j < PROF_W.length; j++) {
+  const s = S_MIN + j / S_STEP;
+  PROF_W[j] = sstep(FEATHER[0], FEATHER[1], s);
+  PROF_RIM[j] = RIM_A * Math.exp(-(((s - RIM_C) / RIM_W) ** 2));
+  PROF_WET[j] = s > 0 ? WET_A * Math.exp(-s / WET_L) : 0;
+}
+
+// the print at scene time tt (stateless: depends on tt only): ink front at R(tt), coated pixels only
+function paint(tt) {
+  devP = tt;
+  const R = frontR(tt), dry = 1 - sstep(0.6, T_SET, tt);
+  const D = img.data, n = WW * H, jMax = PROF_W.length - 1;
+  for (let i = 0; i < n; i++) {
+    const kc = K8[i];
+    if (kc === 0) continue;                       // bare paper: written once in init
+    const s = R - DE[i], o = 4 * i, c3 = 3 * i;
+    let w, m;
+    if (s <= S_MIN) { w = 0; m = 0; }
+    else {
+      const j = Math.min(jMax, Math.round((s - S_MIN) * S_STEP));
+      w = PROF_W[j];
+      m = (PROF_RIM[j] + dry * PROF_WET[j]) * kc / 255;
+    }
+    for (let c = 0; c < 3; c++) {
+      const v = AH[c3 + c] + (FIN[c3 + c] - AH[c3 + c]) * w;
+      D[o + c] = v + (DEEP[c] - v) * m;
+    }
+  }
+  bc.putImageData(img, 0, 0);
+}
+
+APA.scene({
+  meta: { text: 'light' },   // pass-A slot carries no overlay; kept for a possible re-use as a text shot
+  async init(p) {
+    ({ ctx } = APA.canvas('2d', { willReadFrequently: true }));
+    const r = APA.rng(61606);
+    const nA = makeNoise(APA.rng(11)), nB = makeNoise(APA.rng(12)), nC = makeNoise(APA.rng(13));
+    const kmin = Math.floor(-X0 / PITCH) - 1, kmax = Math.ceil((WW - X0) / PITCH) + 1;
+
+    // object masks: lower wafer in contact (crisp), upper wafer lifted (soft)
+    const cuB = maskOf((c) => cuPath(c, 1, kmin, kmax), 1.8);
+    const cuT = maskOf((c) => cuPath(c, -1, kmin, kmax), 9);
+    const siB = maskOf((c) => c.fillRect(-20, Y + SI_D * S, WW + 40, H), 2.5);
+    const siT = maskOf((c) => c.fillRect(-20, -20, WW + 40, Y - SI_D * S + 20), 6);
+    // bond plane: a fine straight thread in contact with the paper
+    const bond = maskOf((c) => c.fillRect(-20, Y - 1.2, WW + 40, 2.4), 0.8);
+
+    // grain veins in the lower (crisp) Cu: annealed grains, some continuing up to the bond face
+    const seeds = [];
+    for (let k = kmin; k <= kmax; k++) {
+      const xc = X0 + k * PITCH;
+      for (let i = 0; i < 4; i++) seeds.push([xc + (r() * 2 - 1) * 60, Y + 6 + r() * PAD_D * S, k]);
+      for (let i = 0; i < 2; i++) seeds.push([xc + (r() * 2 - 1) * 20, Y + (PAD_D + r() * 0.27) * S, k]);
+      for (let i = 0; i < 6; i++) seeds.push([xc + (r() * 2 - 1) * 200, Y + (VIA_D + r() * 0.4) * S, k]);
+    }
+    for (const s of seeds) s.push(r());
+    const vein = new Float32Array(WW * H);   // per-grain translucency (soft tonal patches, no boundary lines)
+    for (let y = Y; y < Y + WIRE_D * S + 4; y++) for (let x = 0; x < WW; x++) {
+      const i = y * WW + x;
+      if (cuB[i] < 0.02) continue;
+      let d1 = 1e9, d2 = 1e9, g1 = 0, g2 = 0;
+      const kk = Math.round((x - X0) / PITCH);
+      for (const s of seeds) {
+        if (Math.abs(s[2] - kk) > 1) continue;
+        const d = Math.hypot(x - s[0], y - s[1]);
+        if (d < d1) { d2 = d1; g2 = g1; d1 = d; g1 = s[3]; } else if (d < d2) { d2 = d; g2 = s[3]; }
+      }
+      const q = sstep(0, 14, d2 - d1);           // soft blend across a grain boundary
+      vein[i] = g1 * (0.5 + 0.5 * q) + g2 * (0.5 - 0.5 * q);
+    }
+
+    // fibres of the paper (seeded strokes), drawn into a mask
+    const fib = maskOf((c) => {
+      c.lineCap = 'round';
+      const rX = APA.rng(61607);
+      for (let i = 0; i < 4320; i++) {   // the last 120 fibres fill the added margin (WW0 - 20 .. WW), from their own seed
+        const q = i < 4200 ? r : rX;
+        let x = i < 4200 ? q() * WW0 : WW0 - 20 + q() * (WW - WW0 + 20), y = q() * H, a = q() * Math.PI * 2;
+        const len = 8 + q() * 34, steps = 6;
+        c.globalAlpha = 0.25 + 0.6 * q();
+        c.lineWidth = 0.5 + q() * 0.9;
+        c.beginPath(); c.moveTo(x, y);
+        for (let s = 0; s < steps; s++) { a += (q() - 0.5) * 0.8; x += Math.cos(a) * len / steps; y += Math.sin(a) * len / steps; c.lineTo(x, y); }
+        c.strokeStyle = '#fff'; c.stroke();
+      }
+    }, 0.3);
+
+    // coated area: brushed sensitizer, ragged at the top and bottom of the sheet
+    const topEdge = new Float32Array(WW), botEdge = new Float32Array(WW);
+    for (let x = 0; x < WW; x++) {
+      const fT = nC(x / 3.2, 1.3), fB = nC(x / 3.2, 5.9);   // bristle fingers of vertical brush strokes
+      topEdge[x] = 56 + 22 * (nA(x / 260, 3.1) - 0.5) + 10 * (nB(x / 37, 7.7) - 0.5) - 30 * Math.max(0, fT - 0.66) * sstep(0.55, 0.8, nB(x / 70, 4.4));
+      botEdge[x] = 1042 + 20 * (nA(x / 240, 9.4) - 0.5) + 9 * (nB(x / 41, 2.2) - 0.5) + 30 * Math.max(0, fB - 0.66) * sstep(0.55, 0.8, nB(x / 70, 8.8));
+    }
+
+    // cyanotype tone ramp: unexposed paper -> pale blue -> Prussian blue
+    const stops = [[0, [240, 238, 228]], [0.16, [214, 226, 232]], [0.38, [134, 172, 208]], [0.62, [52, 98, 156]],
+      [0.84, [22, 58, 112]], [1, [12, 38, 86]]];
+    const lut = LUT = new Float32Array(256 * 3);
+    for (let i = 0; i < 256; i++) {
+      const v = i / 255;
+      let j = 0; while (j < stops.length - 2 && v > stops[j + 1][0]) j++;
+      const [a, ca] = stops[j], [b, cb] = stops[j + 1], q = (v - a) / (b - a);
+      for (let c = 0; c < 3; c++) lut[3 * i + c] = ca[c] + (cb[c] - ca[c]) * q;
+    }
+
+    bg = document.createElement('canvas');
+    bg.width = WW; bg.height = H;
+    bc = bg.getContext('2d', { willReadFrequently: true });
+    img = bc.createImageData(WW, H);
+    const E8 = new Uint8Array(WW * H), C8 = new Uint8Array(WW * H), F8 = new Uint8Array(WW * H);
+    DE = new Float32Array(WW * H);
+    for (let y = 0; y < H; y++) {
+      for (let x = 0; x < WW; x++) {
+        const i = y * WW + x;
+        // sensitizer coverage: ragged edge, bristle drag streaks, darker pooled rim just inside the edge
+        const dt = y - topEdge[x], db = botEdge[x] - y;
+        const de = Math.min(dt, db);
+        const streak = nB(x / 5 + (dt < db ? 0 : 40), y / 60);
+        let cov = sstep(-2, 2.5, de + 8 * (streak - 0.5));
+        const gaps = de < 40 ? sstep(0.68, 0.76, nC(x / 4.5 + 17, y / 22)) * sstep(0.5, 0.75, nA(x / 110 + 5, 2.5)) * (1 - de / 40) ** 2.2 : 0;
+        cov *= 1 - 0.85 * gaps;
+        const rim = de > 0 && de < 22 ? 0.1 * (1 - de / 22) : 0;
+        // exposure of the coated paper: mottle, brush streaks along x
+        let E = 0.9 + 0.12 * (nA(x / 260, y / 200) - 0.5) + 0.05 * (nC(x / 70, y / 60) - 0.5) + 0.04 * (nB(x / 55 + 9, y / 500) - 0.5) + rim;
+        // objects shading the paper
+        const shade = Math.max(cuB[i] * (0.96 - 0.07 * vein[i]), 0.3 * cuT[i], 0.36 * siT[i], 0.42 * siB[i], 0.42 * bond[i]);
+        E *= 1 - shade;
+        E += 0.1 * cuB[i] * nA(x / 80 + 50, y / 80) ** 2;   // uneven clearing: faint blue stain inside the whites
+        // translucent texture inside silicon (soft mottling)
+        E += 0.05 * (siT[i] + siB[i]) * (nC(x / 23, y / 23) - 0.5);
+        E += 0.05 * fib[i] * (E > 0.5 ? -1 : 1) * 0.8;
+        E8[i] = Math.round(clamp(clamp(E) * cov) * 255);   // final exposure
+        C8[i] = Math.round(cov * 255);                      // sensitizer coverage
+        F8[i] = Math.round(10 * fib[i]);                    // fibre shading on bare paper
+        // ink front arrival distance: |y - 600| roughened by fractal noise (more ragged as the front travels),
+        // capillary fingers that run ahead, and fibres that wick the ink ahead of the front
+        const side = y < Y ? 0 : 1, d = Math.abs(y - Y), gr = d / (d + 60);
+        const fb = (nA(x / 150 + 13 * side, d / 300) - 0.5) + 0.5 * (nB(x / 48 + 7 * side, d / 110) - 0.5)
+          + 0.25 * (nC(x / 15 + 3 * side, d / 40) - 0.5);
+        const fing = Math.max(0, nC(x / 11 + 50 + 21 * side, d / 90) - 0.6) / 0.4;
+        DE[i] = Math.max(0, d + gr * (70 * fb - 34 * fing ** 1.5 - 24 * fib[i]));
+      }
+    }
+    // colours ahead of the front (latent sheet) and behind it (finished print), as the earlier stages dp = 0 and 1
+    const T0 = toneTable(0), T1 = toneTable(1);
+    K8 = C8; AH = new Uint8Array(3 * WW * H); FIN = new Uint8Array(3 * WW * H);
+    const D = img.data;
+    let dMax = 0;
+    for (let i = 0; i < WW * H; i++) {
+      const e = 3 * E8[i], cv = C8[i], k = cv / 255, q = 1 - k, fd = F8[i];
+      const paper = [PAPER[0] - fd, PAPER[1] - fd, PAPER[2] - 1.3 * fd];
+      for (let c = 0; c < 3; c++) {
+        AH[3 * i + c] = Math.round(T0[e + c] * k + paper[c] * q);
+        FIN[3 * i + c] = Math.round(T1[e + c] * k + paper[c] * q);
+        D[4 * i + c] = FIN[3 * i + c];
+      }
+      D[4 * i + 3] = 255;
+      if (cv > 0 && DE[i] > dMax) dMax = DE[i];
+    }
+    R_END = dMax + 40;                                   // rim and feather fully past the last coated pixel at T_FRONT
+  },
+  render(t, p) {
+    const tt = Math.min(Math.max(t, 0), T_SET);
+    if (tt !== devP) paint(tt);
+    ctx.drawImage(bg, -Math.min(PAN_V * Math.max(0, t) / SHOT_SPEED, MARGIN - 20), 0);
+  },
+});
+</script>
+</body>
+</html>

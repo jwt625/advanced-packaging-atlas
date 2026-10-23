@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>c3 afm</title>
+<script src="../lib/apa.js"></script>
+</head>
+<body>
+<script>
+// Pass C, modality 3: AFM height map of the hybrid-bond surface after Cu CMP, top view, copper-gold height LUT.
+// v=1: 0.45 um pitch W2W pads (ectc51846.2026.00130), Cu recessed 0.5-1.0 nm, 4.17 nm AFM samples (2 px).
+// v=2: 3 um pad / 6 um pitch (ectc51846.2026.00024, the c6_ebsd pads), ~1 nm recess with an edge-dishing ring, 50 nm
+//      samples (2 px).
+// A height field z(x, y) in nm is built once (seeded): pads + recess profile + roughness, then the measurement chain:
+// parabolic-tip dilation (tip broadening), line-by-line mean levelling (the flattening artifact: lines that cross the
+// recessed pads are lifted, visible as horizontal bands), residual scan-line offsets, one tip-pickup streak, a few
+// particle spikes. The scanned field ends on y = 600 (array above, last pad row ends at y = 500); below: no data.
+// Motion: slow horizontal drift 20 px/s (60 px at t = 3 s). Sources and estimates: c3_afm.notes.md
+const { W, H, LINE_Y } = APA;
+const V = APA.params.v === '2' ? '2' : '1';
+const DRIFT = 20;                 // px/s
+const MARGIN = 64;                // extra map width for the drift
+const A = 2;                      // screen px per AFM sample
+const CFG = {
+  '1': { S: 480, P: 216, R: 54, X0: 960, Y0: 446, rec: -0.75, recSd: 0.09, ring: -0.12, ringW: 5,
+         ero: 0.0, eroL: 1, cuRms: 0.11, cuCorr: 5, diRms: 0.07, tipR: 15, lo: -1.25, hi: 0.75, seed: 3101 },
+  '2': { S: 40, P: 240, R: 60, X0: 960, Y0: 440, rec: -0.6, recSd: 0.12, ring: -1.0, ringW: 7,
+         ero: 0.35, eroL: 40, cuRms: 0.2, cuCorr: 1.2, diRms: 0.13, tipR: 15, lo: -2.3, hi: 1.0, seed: 3202 },
+}[V];
+
+// copper-gold height LUT (dark brown -> copper -> gold -> cream), the common "AFM gold" palette
+const STOPS = [[0, 18, 7, 2], [0.22, 82, 36, 10], [0.45, 150, 86, 30], [0.68, 205, 145, 62],
+               [0.86, 236, 198, 120], [1, 252, 241, 214]];
+const LUT = new Uint8Array(256 * 3);
+for (let i = 0; i < 256; i++) {
+  const u = i / 255;
+  let k = 0; while (k < STOPS.length - 2 && u > STOPS[k + 1][0]) k++;
+  const a = STOPS[k], b = STOPS[k + 1], f = (u - a[0]) / (b[0] - a[0]);
+  for (let c = 0; c < 3; c++) LUT[i * 3 + c] = Math.round(a[c + 1] + (b[c + 1] - a[c + 1]) * f);
+}
+
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const sstep = (a, b, v) => { const q = clamp((v - a) / (b - a)); return q * q * (3 - 2 * q); };
+function gauss(r) { let u = 0; for (let i = 0; i < 4; i++) u += r(); return (u - 2) * Math.sqrt(3); }
+function makeNoise(r, n = 256) {
+  const g = new Float32Array(n * n);
+  for (let i = 0; i < g.length; i++) g[i] = gauss(r);
+  return (x, y) => {
+    const xi = Math.floor(x), yi = Math.floor(y), fx = x - xi, fy = y - yi;
+    const sx = fx * fx * (3 - 2 * fx), sy = fy * fy * (3 - 2 * fy);
+    const at = (i, j) => g[(((j % n) + n) % n) * n + (((i % n) + n) % n)];
+    const p = at(xi, yi) + (at(xi + 1, yi) - at(xi, yi)) * sx;
+    const q = at(xi, yi + 1) + (at(xi + 1, yi + 1) - at(xi, yi + 1)) * sx;
+    return p + (q - p) * sy;
+  };
+}
+
+let ctx, map;
+const NX = Math.ceil((W + MARGIN) / A), NY = LINE_Y / A;
+
+function build() {
+  const c = CFG, r = APA.rng(c.seed);
+  const nCu = makeNoise(r), nDi = makeNoise(r), nWhite = makeNoise(r, 512);
+  const nmPerSample = A / c.S * 1000;
+  // per-pad recess (median-centred spread, like the per-die box plots)
+  const padRec = new Map();
+  const recOf = (kx, ky) => {
+    const key = kx * 1000 + ky;
+    if (!padRec.has(key)) padRec.set(key, clamp(c.rec + c.recSd * gauss(r), c.rec - 2.5 * c.recSd, -0.3));
+    return padRec.get(key);
+  };
+  const z = new Float32Array(NX * NY);
+  for (let j = 0; j < NY; j++) {
+    const y = (j + 0.5) * A;
+    for (let i = 0; i < NX; i++) {
+      const x = (i + 0.5) * A;
+      const kx = Math.round((x - c.X0) / c.P), ky = Math.min(0, Math.round((y - c.Y0) / c.P));
+      const dx = x - (c.X0 + kx * c.P), dy = y - (c.Y0 + ky * c.P);
+      const rr = Math.hypot(dx, dy);
+      const dEdge = rr - c.R;                         // distance to the nearest pad edge (equal pads)
+      // dielectric: roughness + (v2) erosion next to the pads, higher far from Cu
+      let zd = c.diRms * (0.75 * nDi(x / 9, y / 9) + 0.66 * nWhite(x / 1.6, y / 1.6));
+      if (c.ero > 0) zd += c.ero * (sstep(0, c.eroL, Math.max(dEdge, 0)) - 0.5);
+      // Cu: recess, edge ring, grain relief
+      const rec = recOf(kx, ky);
+      let zc = rec + c.ring * Math.exp(-(((c.R - rr) / c.ringW) ** 2))
+             + c.cuRms * (0.8 * nCu(x / (c.cuCorr * A), y / (c.cuCorr * A)) + 0.5 * nWhite(x / 1.3 + 77, y / 1.3));
+      const inCu = 1 - sstep(-1.2, 1.2, rr - c.R);   // edge over ~1 sample (the drawn geometry, before the tip)
+      z[j * NX + i] = zd + (zc - zd) * inCu;
+    }
+  }
+  // particles: a few bright spikes, outside the overlay band
+  for (let s = 0; s < 5; s++) {
+    const px = (0.05 + 0.9 * r()) * (W + MARGIN), py = (0.04 + 0.6 * r()) * 480;
+    const h = 1.2 + 1.2 * r(), rad = 1.4 + 1.2 * r();
+    for (let j = Math.max(0, Math.floor(py / A - 9)); j <= Math.min(NY - 1, py / A + 9); j++)
+      for (let i = Math.max(0, Math.floor(px / A - 9)); i <= Math.min(NX - 1, px / A + 9); i++) {
+        const d = Math.hypot(i - px / A, j - py / A);
+        z[j * NX + i] += h * Math.exp(-((d / rad) ** 2));
+      }
+  }
+  // tip broadening: grey-scale dilation by a parabolic tip of radius tipR (nm), 5 x 5 samples
+  const zt = new Float32Array(NX * NY);
+  const pen = [];
+  for (let dj = -2; dj <= 2; dj++) for (let di = -2; di <= 2; di++) {
+    const d2 = (di * di + dj * dj) * nmPerSample * nmPerSample;
+    pen.push([di, dj, d2 / (2 * c.tipR)]);
+  }
+  for (let j = 0; j < NY; j++) for (let i = 0; i < NX; i++) {
+    let m = -1e9;
+    for (const [di, dj, p] of pen) {
+      const ii = i + di, jj = j + dj;
+      if (ii < 0 || jj < 0 || ii >= NX || jj >= NY) continue;
+      const v = z[jj * NX + ii] - p;
+      if (v > m) m = v;
+    }
+    zt[j * NX + i] = m;
+  }
+  // tip-pickup streak: one scan line (upper half) stays high after leaving a pad, decaying along the fast axis
+  const sRow = Math.round((c.Y0 - c.P - 0.15 * c.R) / A), sCol = Math.round((c.X0 - 3 * c.P + c.R) / A);
+  for (let i = sCol; i < NX; i++) {
+    const e = 0.55 * Math.exp(-(i - sCol) / (0.9 * c.P / A));
+    for (const [dj, w] of [[0, 1], [1, 0.55]]) if (sRow + dj >= 0) zt[(sRow + dj) * NX + i] += e * w;
+  }
+  // line-by-line levelling (0th order, pads included) + residual scan-line offsets (weak in the overlay band)
+  for (let j = 0; j < NY; j++) {
+    let s = 0;
+    for (let i = 0; i < NX; i++) s += zt[j * NX + i];
+    const off = -s / NX + (j * A >= 500 ? 0.25 : 1) * 0.045 * gauss(r);
+    for (let i = 0; i < NX; i++) zt[j * NX + i] += off;
+  }
+  // colour
+  const img = new ImageData(NX, NY);
+  const d = img.data;
+  for (let k = 0; k < NX * NY; k++) {
+    const q = Math.round(255 * clamp((zt[k] - c.lo) / (c.hi - c.lo))) * 3;
+    d[k * 4] = LUT[q]; d[k * 4 + 1] = LUT[q + 1]; d[k * 4 + 2] = LUT[q + 2]; d[k * 4 + 3] = 255;
+  }
+  const raw = document.createElement('canvas');
+  raw.width = NX; raw.height = NY;
+  raw.getContext('2d').putImageData(img, 0, 0);
+  // upsample once to screen resolution (smooth, like the instrument's display interpolation)
+  map = document.createElement('canvas');
+  map.width = NX * A; map.height = NY * A;
+  const mc = map.getContext('2d');
+  mc.imageSmoothingEnabled = true;
+  mc.imageSmoothingQuality = 'high';
+  mc.drawImage(raw, 0, 0, NX * A, NY * A);
+}
+
+APA.scene({
+  meta: { text: 'dark' },
+  init() {
+    ({ ctx } = APA.canvas('2d', { alpha: false }));
+    build();
+  },
+  render(t) {
+    const dx = DRIFT * Math.min(Math.max(t, 0), 3);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.fillStyle = '#0c0b0a';                 // no data below the scanned field
+    ctx.fillRect(0, 0, W, H);
+    ctx.save();
+    ctx.beginPath(); ctx.rect(0, 0, W, LINE_Y); ctx.clip();
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'low';
+    ctx.drawImage(map, -dx, 0);
+    ctx.restore();
+  },
+  // Overlay word as an AFM analysis-software label: a sharp label plate (thin frame, filled with the opposite end of
+  // the copper-gold height LUT) holding the word in APA Grotesk (Inter 500) in the LUT end matching the shot's tone
+  // (dark tone -> LUT bottom, dark brown, on a cream plate; light tone -> LUT top, cream, on a dark-brown plate).
+  // Same treatment for v=1 "There's" and v=2 "more to"; plate and word scale with info.size (grows cut to cut).
+  // Centred on x = 960, baseline info.baseline (565), plate bottom >= 4 px above y = 600. Display-fixed (never flipped).
+  text(g, word, t, p, info) {
+    const s = info.size;
+    g.fillStyle = info.color;
+    const light = lumOf(g.fillStyle) > 0.5;
+    const lo = `rgb(${STOPS[0].slice(1)})`, hi = `rgb(${STOPS[STOPS.length - 1].slice(1)})`;
+    const fg = light ? hi : lo, plate = light ? 'rgba(18,7,2,0.86)' : 'rgba(252,241,214,0.86)';
+    g.font = `500 ${s}px ${info.fonts.grotesk}`;
+    const wd = g.measureText(word).width;
+    const cap = 0.727 * s, padY = 0.2 * s, padX = 0.3 * s;   // Inter cap height 1490 / 2048 em
+    const x0 = Math.round(info.x - wd / 2 - padX), x1 = Math.round(info.x + wd / 2 + padX);
+    const y0 = Math.round(info.baseline - cap - padY), y1 = Math.round(Math.min(info.LINE_Y - 4, info.baseline + padY));
+    g.fillStyle = plate;
+    g.fillRect(x0, y0, x1 - x0, y1 - y0);
+    const lw = Math.max(1, Math.round(s / 48));
+    g.strokeStyle = fg;
+    g.lineWidth = lw;
+    g.strokeRect(x0 + lw / 2, y0 + lw / 2, x1 - x0 - lw, y1 - y0 - lw);
+    g.fillStyle = fg;
+    g.textAlign = 'center';
+    g.textBaseline = 'alphabetic';
+    g.fillText(word, info.x, info.baseline);
+  },
+});
+// relative luminance of a normalized ctx.fillStyle ('#rrggbb' or 'rgba(r, g, b, a)')
+function lumOf(css) {
+  const v = css[0] === '#' ? [1, 3, 5].map((i) => parseInt(css.slice(i, i + 2), 16)) : css.match(/[\d.]+/g).slice(0, 3).map(Number);
+  const l = v.map((c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; });
+  return 0.2126 * l[0] + 0.7152 * l[1] + 0.0722 * l[2];
+}
+</script>
+</body>
+</html>

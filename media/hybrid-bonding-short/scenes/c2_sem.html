@@ -1,0 +1,274 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>c2 sem</title>
+<script src="../lib/apa.js"></script>
+</head>
+<body>
+<script>
+// Pass C, modality 2: plan-view SEM (secondary electrons) of a sub-micron hybrid-bonding pad lattice.
+// v=1: post-CMP Cu-filled 0.64 um square lattice, normal incidence (Cu bright on dielectric).
+// v=2: post-etch pad openings of the 0.33 x 0.4 um rectangular lattice, 20 deg tilt (dark holes, bright rims).
+// y = 600: cleaved sample edge running through the inter-row gap (array above). Motion: slow stage drift.
+// Sources: c2_sem.notes.md.
+const { W, H, LINE_Y } = APA;
+const V = APA.params.v === '2' ? 2 : 1;
+const MARGIN = 96;            // world wider than the frame by this, covers the drift over 3 s
+const WW = W + MARGIN;
+const DRIFT = 24;             // px/s, content moves left
+
+// ---- lattice (screen px) ----
+// v1: 375 px/um; pitch 0.64 um = 240 px; pad side 0.32 um = 120 px (25 % Cu density, derived)
+// v2: 636.4 px/um in x (x pitch 0.33 um = 210 px); y foreshortened by cos(20 deg): y pitch 0.4 um = 239.2 px;
+//     opening 0.165 x 0.2 um (25 % density, aspect = lattice aspect, assumption) = 105 x 119.6 px
+const TILT = 20 * Math.PI / 180;
+const L = V === 1
+  ? { px: 240, py: 240, hx: 60, hy: 60, r: 18, x0: 960 }
+  : (() => {
+      const s = 210 / 0.33, sy = s * Math.cos(TILT);
+      return { px: 210, py: 0.4 * sy, hx: 0.165 * s / 2, hy: 0.2 * sy / 2, r: 40, x0: 960 + 105,
+               wall: 0.15 * Math.sin(TILT) * s };     // visible far sidewall height, assumed 0.15 um depth
+    })();
+const CY0 = 500 - L.hy;       // lowest row: pad bottoms at y = 500
+
+let ctx, world, noiseC, jit;
+
+function sdRoundBox(px, py, hx, hy, r) {
+  const qx = Math.abs(px) - hx + r, qy = Math.abs(py) - hy + r;
+  const ox = Math.max(qx, 0), oy = Math.max(qy, 0);
+  return Math.hypot(ox, oy) + Math.min(Math.max(qx, qy), 0) - r;
+}
+// signed distance to the nearest pad of the lattice (rows only at or above the lowest row)
+function padD(x, y, dy = 0) {
+  const k = Math.round((x - L.x0) / L.px);
+  const j = Math.max(0, Math.round((CY0 - (y - dy)) / L.py));
+  return sdRoundBox(x - (L.x0 + k * L.px), (y - dy) - (CY0 - j * L.py), L.hx, L.hy, L.r);
+}
+function gauss(r) { return (r() + r() + r() + r() - 2) * 1.732; }
+function blur(a, w, h, rad, passes) {
+  const tmp = new Float32Array(a.length);
+  for (let p = 0; p < passes; p++) {
+    for (let y = 0; y < h; y++) {
+      let s = 0; const o = y * w;
+      for (let x = -rad; x <= rad; x++) s += a[o + Math.min(w - 1, Math.max(0, x))];
+      for (let x = 0; x < w; x++) {
+        tmp[o + x] = s / (2 * rad + 1);
+        s += a[o + Math.min(w - 1, x + rad + 1)] - a[o + Math.max(0, x - rad)];
+      }
+    }
+    for (let x = 0; x < w; x++) {
+      let s = 0;
+      for (let y = -rad; y <= rad; y++) s += tmp[Math.min(h - 1, Math.max(0, y)) * w + x];
+      for (let y = 0; y < h; y++) {
+        a[y * w + x] = s / (2 * rad + 1);
+        s += tmp[Math.min(h - 1, y + rad + 1) * w + x] - tmp[Math.max(0, y - rad) * w + x];
+      }
+    }
+  }
+  return a;
+}
+function normalize(a) {
+  let m = 0, v = 0;
+  for (let i = 0; i < a.length; i++) m += a[i];
+  m /= a.length;
+  for (let i = 0; i < a.length; i++) v += (a[i] - m) ** 2;
+  const s = Math.sqrt(v / a.length) || 1;
+  for (let i = 0; i < a.length; i++) a[i] = (a[i] - m) / s;
+  return a;
+}
+function field(w, h, seed, rad, passes) {
+  const r = APA.rng(seed), a = new Float32Array(w * h);
+  for (let i = 0; i < a.length; i++) a[i] = gauss(r);
+  return normalize(blur(a, w, h, rad, passes));
+}
+// low-frequency field from a coarse grid, bilinear-upsampled (cheap)
+function lowField(w, h, seed, cell) {
+  const r = APA.rng(seed), gw = Math.ceil(w / cell) + 2, gh = Math.ceil(h / cell) + 2;
+  const g = new Float32Array(gw * gh);
+  for (let i = 0; i < g.length; i++) g[i] = gauss(r);
+  const a = new Float32Array(w * h);
+  for (let y = 0; y < h; y++) {
+    const fy = y / cell, iy = Math.floor(fy), ty = fy - iy, sy = ty * ty * (3 - 2 * ty);
+    for (let x = 0; x < w; x++) {
+      const fx = x / cell, ix = Math.floor(fx), tx = fx - ix, sx = tx * tx * (3 - 2 * tx);
+      const a0 = g[iy * gw + ix] * (1 - sx) + g[iy * gw + ix + 1] * sx;
+      const a1 = g[(iy + 1) * gw + ix] * (1 - sx) + g[(iy + 1) * gw + ix + 1] * sx;
+      a[y * w + x] = a0 * (1 - sy) + a1 * sy;
+    }
+  }
+  return normalize(a);
+}
+const sat = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+
+function buildWorld() {
+  const w = WW, h = H;
+  const val = new Float32Array(w * h);
+  const speck = field(w, h, V === 1 ? 211 : 223, V === 1 ? 1 : 2, 1);   // granular dielectric texture
+  const cuMot = field(w, h, 307, 3, 2);                                  // faint Cu grain mottle (v1)
+  const chg = lowField(w, h, V === 1 ? 401 : 409, 420);                  // charging / brightness drift
+  const edgeVar = lowField(w, 1, 503, 90);                               // cleave edge brightness along x
+  const hack = lowField(w, h, 601, 6);                                   // v2 cleave-face hackle (stretched below)
+  // detector toward upper left: edges whose outward normal points there are brighter
+  const dx0 = -0.55, dy0 = -0.83;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const i = y * w + x;
+      let v;
+      if (y >= LINE_Y) {
+        // below the cleaved edge
+        const dy = y - LINE_Y + 0.5;
+        if (V === 1) {
+          v = 0.018 + 0.16 * Math.exp(-dy / 3.5) + 0.03 * Math.exp(-dy / 40);
+        } else {
+          // cleaved face seen at 20 deg tilt, facing away from the detector: dim, faint vertical hackle
+          const hk = hack[Math.min(h - 1, LINE_Y + Math.floor(dy * 0.08)) * w + x];
+          v = 0.085 + 0.09 * Math.exp(-dy / 60) + 0.007 * hk + 0.22 * Math.exp(-dy / 2.5);
+        }
+        v *= 1 + 0.12 * edgeVar[x];
+        val[i] = v;
+        continue;
+      }
+      const d = padD(x, y);
+      const gx = padD(x + 0.5, y) - padD(x - 0.5, y), gy = padD(x, y + 0.5) - padD(x, y - 0.5);
+      const gl = Math.hypot(gx, gy) || 1;
+      const toward = (gx * dx0 + gy * dy0) / gl;       // +1: outward normal points at the detector
+      const asym = 0.6 + 0.4 * toward;                  // edges facing the detector are brighter
+      const cov = sat(0.5 - d / 1.1);                   // probe-blurred inside fraction
+      const base = (V === 1 ? 0.30 : 0.40) + 0.028 * chg[i] - 0.03 * (y / LINE_Y) + (V === 1 ? 0.03 : 0.032) * speck[i];
+      if (V === 1) {
+        // dielectric: charging halo (dark) around pads, a thin glow just outside the rim
+        const dd = Math.max(d, 0);
+        const out = base - 0.09 * Math.exp(-dd / 22) + 0.05 * Math.exp(-dd / 7) + 0.18 * asym * Math.exp(-dd / 2.5);
+        // Cu: material contrast (brighter), faint grain mottle, edge rim
+        const din = Math.max(-d, 0);
+        const cu = 0.68 + 0.025 * chg[i] + 0.022 * cuMot[i] + 0.04 * Math.exp(-((din - 30) ** 2) / 900)
+          + 0.45 * asym * Math.exp(-din / 2.5);
+        v = out * (1 - cov) + cu * cov;
+      } else {
+        // pad opening after hard-mask etch: dark floor, visible far sidewall at the top, bright rim
+        const out = base - 0.05 * Math.exp(-Math.max(d, 0) / 10) + 0.30 * asym * Math.exp(-Math.max(d, 0) / 2.2);
+        const dFloor = padD(x, y, L.wall);              // floor outline = rim outline shifted down by the wall
+        const din = Math.max(-d, 0);
+        let hole;
+        if (dFloor < 0) {
+          const nearLip = Math.max(-dFloor, 0);
+          hole = 0.10 + 0.02 * speck[i] - 0.05 * Math.exp(-nearLip / 9) + 0.03 * Math.exp(-((nearLip - 40) ** 2) / 800);
+        } else {
+          const u = sat(dFloor / (L.wall + 1e-3));      // 0 at the floor edge, 1 at the rim
+          hole = 0.30 + 0.26 * u + 0.02 * speck[i];
+        }
+        hole += 0.42 * asym * Math.exp(-din / 2.6);
+        v = out * (1 - cov) + hole * cov;
+      }
+      // cleave-edge effect just above the line
+      const de = LINE_Y - y - 0.5;
+      v += (0.75 * Math.exp(-de / 2.6) + 0.07 * Math.exp(-de / 12)) * (1 + 0.15 * edgeVar[x]);
+      val[i] = v;
+    }
+  }
+  blur(val, w, h, 1, 1);                                // probe size
+  const c = document.createElement('canvas');
+  c.width = w; c.height = h;
+  const cx = c.getContext('2d');
+  const img = cx.createImageData(w, h);
+  const d32 = new Uint32Array(img.data.buffer);
+  for (let i = 0; i < val.length; i++) {
+    const g = Math.round(255 * sat(val[i]));
+    d32[i] = 0xff000000 | (g << 16) | (g << 8) | g;
+  }
+  cx.putImageData(img, 0, 0);
+  return c;
+}
+
+// screen-fixed detector noise and scan-line gain rows, applied with 'overlay' (0.5 = neutral)
+function buildNoise() {
+  const r = APA.rng(V === 1 ? 911 : 919);
+  const n = field(W, H, V === 1 ? 913 : 917, 1, 1);
+  const rowGain = new Float32Array(H);
+  for (let k = 0; k < 14; k++) {
+    let y = Math.floor(r() * H);
+    if (y >= 492 && y <= 600) y = (y + 160) % H;        // keep the text band calm
+    const g = (r() - 0.5) * 0.08, len = 1 + Math.floor(r() * 3);
+    for (let j = 0; j < len && y + j < H; j++) rowGain[y + j] = g;
+  }
+  const c = document.createElement('canvas');
+  c.width = W; c.height = H;
+  const cx = c.getContext('2d');
+  const img = cx.createImageData(W, H);
+  const d32 = new Uint32Array(img.data.buffer);
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      const i = y * W + x;
+      const raw = gauss(r);
+      const g = Math.round(255 * sat(0.5 + 0.03 * n[i] + 0.022 * raw + rowGain[y]));
+      d32[i] = 0xff000000 | (g << 16) | (g << 8) | g;
+    }
+  }
+  cx.putImageData(img, 0, 0);
+  // a few rows with horizontal scan jitter (screen-fixed)
+  jit = [];
+  for (let k = 0; k < 5; k++) {
+    const y = 40 + Math.floor(r() * 440);
+    jit.push({ y, h: 1, dx: (r() < 0.5 ? -1 : 1) * (1 + r()) });
+  }
+  return c;
+}
+
+APA.scene({
+  meta: { text: 'light' },
+  async init() {
+    ({ ctx } = APA.canvas('2d'));
+    world = buildWorld();
+    noiseC = buildNoise();
+  },
+  render(t) {
+    const tt = Math.max(0, Math.min(t, 3.4));
+    const off = DRIFT * tt;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.imageSmoothingEnabled = true;
+    ctx.drawImage(world, -off, 0);
+    for (const j of jit) ctx.drawImage(world, off - j.dx, j.y, W, j.h, 0, j.y, W, j.h);
+    ctx.globalCompositeOperation = 'overlay';
+    ctx.drawImage(noiseC, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+  },
+  // Overlay word as the SEM data-bar label: an opaque full-width data-bar strip across the text band (thin grey
+  // rules top and bottom, one cell framed by thin dividers) with the word centred in APA Mono (IBM Plex Mono).
+  // Same treatment for v=1 "There's" and v=2 "more to"; the strip height follows info.size, so it thickens cut to
+  // cut. Baseline fixed at info.baseline (565); strip bottom kept >= 6 px above y = 600 so the edge stays visible.
+  // Light tone (default): white-ish text on a near-black bar; dark tone: dark text on a light-grey bar.
+  // The overlay canvas is never flipped: placement is display-fixed.
+  text(g, word, t, p, info) {
+    const s = info.size;
+    g.fillStyle = info.color;
+    const fg = g.fillStyle, light = lumOf(fg) > 0.5;
+    const pad = 0.3 * s, cap = 0.698 * s;              // Plex Mono cap height 698 / 1000 em
+    const y0 = Math.round(info.baseline - cap - pad), y1 = Math.round(Math.min(info.LINE_Y - 6, info.baseline + pad));
+    g.font = `400 ${s}px ${info.fonts.mono}`;
+    const wd = g.measureText(word).width;
+    g.fillStyle = light ? '#030303' : '#d6d6d6';
+    g.fillRect(0, y0, W, y1 - y0);
+    g.fillStyle = light ? 'rgba(190,190,190,0.7)' : 'rgba(30,30,30,0.7)';
+    const lw = Math.max(1, Math.round(s / 64));
+    g.fillRect(0, y0, W, lw);
+    g.fillRect(0, y1 - lw, W, lw);
+    for (const x of [info.x - wd / 2 - 1.2 * pad, info.x + wd / 2 + 1.2 * pad]) {
+      g.fillRect(Math.round(x), y0 + 2 * lw + 3, lw, y1 - y0 - 4 * lw - 6);
+    }
+    g.fillStyle = fg;
+    g.textAlign = 'center';
+    g.textBaseline = 'alphabetic';
+    g.fillText(word, info.x, info.baseline);
+  },
+});
+// relative luminance of a normalized ctx.fillStyle ('#rrggbb' or 'rgba(r, g, b, a)')
+function lumOf(css) {
+  const v = css[0] === '#' ? [1, 3, 5].map((i) => parseInt(css.slice(i, i + 2), 16)) : css.match(/[\d.]+/g).slice(0, 3).map(Number);
+  const l = v.map((c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; });
+  return 0.2126 * l[0] + 0.7152 * l[1] + 0.0722 * l[2];
+}
+</script>
+</body>
+</html>

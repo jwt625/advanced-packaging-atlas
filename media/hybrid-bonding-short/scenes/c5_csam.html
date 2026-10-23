@@ -1,0 +1,250 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>c5 csam</title>
+<script src="../lib/apa.js"></script>
+</head>
+<body>
+<script>
+// Pass C, modality 5: C-mode scanning acoustic microscopy (CSAM) of hybrid-bonded parts, top view, greyscale.
+// Polarity as in every atlas HB reference: dark = bonded, bright = non-bond / void (ectc51846.2026.00218 p.3).
+// v=1: whole 300 mm W2W bonded pair: dark disc, bright bevel ring with the notch at the top, faint street grid,
+//      a ragged edge non-bond band, edge voids where the bond wave ends, one particle void; the wafer's lowest point
+//      is tangent to y = 600.
+// v=2: die-level zoom of a D2W (die-to-wafer) wafer: one row of 8 x 12 mm bonded dies (ectc51909.2023.00023) with
+//      their bottom edges on y = 600, brighter streets and unpopulated partial sites below, round voids, one
+//      half-moon edge void, gate outlines.
+// The image is built once at init on a half-resolution canvas (2 px blocks = coarse SAM scan step), with static
+// seeded noise and raster bands; render() only zooms (v=1, 2 % over 3 s about (960, 600)) or pans (v=2, 15 px/s).
+// Sources, chosen values and deviations: c5_csam.notes.md
+const { W, H, LINE_Y } = APA;
+const V = APA.params.v === '2' ? 2 : 1;
+let ctx, tex;
+
+const PAN_PX_S = 15, PAN_T_MAX = 3;      // v=2 drift
+const TEX_X0 = -10;                       // v=2 texture covers world x in [TEX_X0, TEX_X0 + TEX_W)
+const TEX_W = V === 2 ? 2000 : W;
+
+function grey(v) { return `rgb(${v},${v},${v})`; }
+
+// ---------- v=1: 300 mm W2W pair ----------
+const K1 = 290 / 150;                     // px per mm: wafer radius 290 px, 1.93 px/mm
+const C1 = { x: 960, y: LINE_Y - 290 };   // lowest wafer point on y = 600
+const R1 = 290;
+const NOTCH1_MM = 3;                      // SEMI notch 1.0 mm deep, 90 deg; drawn 3x (notes)
+
+function wafer1Path(g, r) {
+  const d = NOTCH1_MM / 150, top = -Math.PI / 2;
+  g.beginPath();
+  g.arc(C1.x, C1.y, r, top + d, top - d + 2 * Math.PI);
+  g.lineTo(C1.x, C1.y - r + NOTCH1_MM * K1 * (r / R1));
+  g.closePath();
+}
+
+function drawV1(g, rnd) {
+  g.fillStyle = grey(16); g.fillRect(0, 0, W, H);
+  // bonded disc
+  wafer1Path(g, R1);
+  g.fillStyle = grey(40); g.fill();
+  g.save(); wafer1Path(g, R1 - 2); g.clip();
+  // low-frequency bond-strength mottling (static)
+  for (let n = 0; n < 26; n++) {
+    const a = rnd() * 2 * Math.PI, r = Math.sqrt(rnd()) * 250, rr = 60 + rnd() * 120, s = rnd() < 0.5 ? -1 : 1;
+    const x = C1.x + r * Math.cos(a), y = C1.y + r * Math.sin(a);
+    const gr = g.createRadialGradient(x, y, 0, x, y, rr);
+    gr.addColorStop(0, s > 0 ? 'rgba(255,255,255,0.025)' : 'rgba(0,0,0,0.05)');
+    gr.addColorStop(1, 'rgba(0,0,0,0)');
+    g.fillStyle = gr; g.fillRect(x - rr, y - rr, 2 * rr, 2 * rr);
+  }
+  // pad-free streets of the 20 mm reticle grid read slightly lighter (systematic street non-bond)
+  g.strokeStyle = 'rgba(255,255,255,0.075)'; g.lineWidth = 1.2;
+  g.beginPath();
+  for (let i = -8; i <= 8; i++) { const x = C1.x + i * 20 * K1; g.moveTo(x, 0); g.lineTo(x, H); }
+  for (let j = -8; j <= 8; j++) { const y = C1.y + (j - 0.5) * 20 * K1; g.moveTo(0, y); g.lineTo(W, y); }
+  g.stroke();
+  // ragged edge non-bond band, upper left (bond wave end), inner boundary stepped like the scan grid
+  g.fillStyle = grey(150);
+  g.beginPath();
+  const a0 = Math.PI * 1.02, a1 = Math.PI * 1.46, steps = 70;
+  let w = 6, py = 0;
+  for (let k = 0; k <= steps; k++) {
+    const a = a0 + (a1 - a0) * k / steps;
+    const env = Math.sin(Math.PI * k / steps);
+    w = Math.max(2, Math.min(18, w + (rnd() - 0.48) * 7));
+    const ri = R1 - 2 - Math.round(w * env / 3) * 3;
+    const x = C1.x + ri * Math.cos(a), y = C1.y + ri * Math.sin(a);
+    if (k === 0) g.moveTo(x, y); else { g.lineTo(x, py); g.lineTo(x, y); } // staircase steps
+    py = y;
+  }
+  g.arc(C1.x, C1.y, R1, a1, a0, true);
+  g.closePath(); g.fill();
+  g.restore();
+  // voids: bright, round, crisp. Edge voids cluster on the right rim, interior voids sparse, one particle void.
+  const voids = [
+    // [angle deg (screen, 0 = right, + clockwise), r / R, diameter mm, aspect along the rim]
+    [-40, 0.92, 7.0, 1.0], [-27, 0.95, 4.5, 1.6], [-16, 0.90, 9.5, 1.0], [-7, 0.955, 5.0, 1.8], [2, 0.92, 6.0, 1.0],
+    [12, 0.94, 4.2, 1.5], [24, 0.88, 5.5, 1.0], [-58, 0.95, 4.0, 1.4], [-150, 0.52, 4.2, 1.0], [-75, 0.38, 3.6, 1.0],
+    [200, 0.60, 4.0, 1.0],
+  ];
+  g.fillStyle = grey(222);
+  for (const [ad, rf, dmm, asp] of voids) {
+    const a = ad * Math.PI / 180, x = C1.x + rf * R1 * Math.cos(a), y = C1.y + rf * R1 * Math.sin(a);
+    const r = dmm * K1 / 2;
+    g.beginPath(); g.ellipse(x, y, r, r * asp, a, 0, 2 * Math.PI); g.fill();
+  }
+  // particle void: larger disc with the particle as a dark core
+  { const x = C1.x - 0.30 * R1, y = C1.y - 0.42 * R1, r = 14 * K1 / 2;
+    g.fillStyle = grey(212); g.beginPath(); g.arc(x, y, r, 0, 2 * Math.PI); g.fill();
+    g.fillStyle = grey(70); g.beginPath(); g.arc(x, y, 2.2, 0, 2 * Math.PI); g.fill(); }
+  // bevel ring (edge non-bond) with notch
+  wafer1Path(g, R1 - 1.5);
+  g.strokeStyle = grey(200); g.lineWidth = 3; g.stroke();
+}
+
+// ---------- v=2: D2W, die row at 40 px/mm ----------
+const K2 = 40;
+const DIE = { w: 8 * K2, h: 12 * K2 }, STREET = 1.0 * K2;     // 8 x 12 mm dies; 1.0 mm gap chosen (notes)
+const P2 = { x: DIE.w + STREET, y: DIE.h + STREET };
+const COL0 = 960 - DIE.w / 2;                                   // a die centered on x = 960
+const ROW0 = LINE_Y - DIE.h;                                    // bottom die row: y 120..600
+const C2 = { x: 1300, y: -3150 }, R2 = 100 * K2, EE2 = 3 * K2;  // 200 mm target wafer; rim crosses the lower frame
+
+function drawV2(g, rnd) {
+  g.fillStyle = grey(14); g.fillRect(TEX_X0, 0, TEX_W, H);
+  g.save();
+  g.beginPath(); g.arc(C2.x, C2.y, R2, 0, 2 * Math.PI); g.clip();
+  g.fillStyle = grey(96); g.fillRect(TEX_X0, 0, TEX_W, H);       // target wafer surface between placed dies
+  const inside = (x, y) => Math.hypot(x - C2.x, y - C2.y) <= R2 - EE2;
+  const placed = [];
+  for (let j = -2; j <= 1; j++) {
+    for (let i = -5; i <= 4; i++) {
+      const x = COL0 + i * P2.x, y = ROW0 + j * P2.y;
+      if (x + DIE.w < TEX_X0 || x > TEX_X0 + TEX_W || y > H || y + DIE.h < 0) continue;
+      const full = inside(x, y) && inside(x + DIE.w, y) && inside(x, y + DIE.h) && inside(x + DIE.w, y + DIE.h);
+      if (full && j <= 0) {
+        placed.push({ x, y });
+      } else {
+        g.fillStyle = grey(164);                                    // unpopulated partial site: strong echo
+        g.fillRect(x, y, DIE.w, DIE.h);
+      }
+    }
+  }
+  for (const d of placed) {
+    g.fillStyle = grey(38); g.fillRect(d.x, d.y, DIE.w, DIE.h);
+    // die-internal mottling (static, low contrast)
+    g.save(); g.beginPath(); g.rect(d.x, d.y, DIE.w, DIE.h); g.clip();
+    for (let n = 0; n < 6; n++) {
+      const x = d.x + rnd() * DIE.w, y = d.y + rnd() * DIE.h, rr = 60 + rnd() * 140;
+      const gr = g.createRadialGradient(x, y, 0, x, y, rr);
+      gr.addColorStop(0, rnd() < 0.5 ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.06)');
+      gr.addColorStop(1, 'rgba(0,0,0,0)');
+      g.fillStyle = gr; g.fillRect(x - rr, y - rr, 2 * rr, 2 * rr);
+    }
+    g.restore();
+    // gate artifact: thin bright outline where the gate catches the die edge
+    g.strokeStyle = grey(78); g.lineWidth = 2; g.strokeRect(d.x + 1, d.y + 1, DIE.w - 2, DIE.h - 2);
+  }
+  // voids (world px). Kept out of the text band x 560-1360, y 500-592 (with pan margin).
+  g.fillStyle = grey(224);
+  const voids = [
+    [1236, 214, 26], [1392, 316, 13], [1318, 402, 8], [1418, 250, 6],   // die right of center
+    [534, 296, 40], [604, 360, 9],                                       // die left of center
+    [1028, 168, 10],                                                     // center die, upper part
+    [990, 46, 18], [1600, 30, 11],                                       // dies of the row above
+    [1720, 470, 14], [1960, 420, 22],                                    // far-right die
+  ];
+  for (const [x, y, dpx] of voids) { g.beginPath(); g.arc(x, y, dpx / 2, 0, 2 * Math.PI); g.fill(); }
+  // half-moon edge void on the right edge of the die at x 1520..1840
+  { const d = placed.find((p) => p.x === COL0 + 2 * P2.x && p.y === ROW0);
+    if (d) { g.save(); g.beginPath(); g.rect(d.x, d.y, DIE.w, DIE.h); g.clip();
+      g.beginPath(); g.arc(d.x + DIE.w, d.y + 236, 34, 0, 2 * Math.PI); g.fill(); g.restore(); } }
+  g.restore();
+  // bevel: bright ring, then dark beyond the wafer
+  g.beginPath(); g.arc(C2.x, C2.y, R2 - 9, 0, 2 * Math.PI);
+  g.strokeStyle = grey(196); g.lineWidth = 18; g.stroke();
+}
+
+// static scan-line bands and fine noise on the half-res image
+function finish(g, cw, ch, rnd) {
+  let y = 0;
+  while (y < ch) {
+    const hgt = 14 + Math.floor(rnd() * 30), a = (rnd() - 0.5) * 0.035;
+    g.fillStyle = a > 0 ? `rgba(255,255,255,${a})` : `rgba(0,0,0,${-a})`;
+    g.fillRect(0, y, cw, hgt); y += hgt;
+  }
+  const img = g.getImageData(0, 0, cw, ch), px = img.data;
+  for (let i = 0; i < px.length; i += 4) {
+    const n = Math.round((rnd() + rnd() - 1) * 7);
+    const v = Math.max(0, Math.min(255, px[i] + n));
+    px[i] = px[i + 1] = px[i + 2] = v;
+  }
+  g.putImageData(img, 0, 0);
+}
+
+// ---------- overlay word: SAM software image annotation ----------
+// The word as a boxed annotation burned into the exported scan: mono, drawn on a half-resolution canvas and
+// upscaled nearest-neighbour, so its edges carry the same 2 x 2 px blocks as the image. Black box, 1-block frame.
+// Same vocabulary for both words; everything scales with info.size (v=2 grows cut to cut). Default ink is the
+// annotation yellow; an explicit text_color param overrides it.
+const LBL = document.createElement('canvas');
+const LG = LBL.getContext('2d');
+function csamLabel(g, word, p, info) {
+  const hs = info.size / 2;                                  // half-res font size
+  const ink = p.text_color ? info.color : '#ffd84a';
+  LG.font = `400 ${hs}px ${info.fonts.mono}`;
+  const tw = LG.measureText(word).width, cap = LG.measureText('H').actualBoundingBoxAscent;
+  const px = Math.round(0.30 * hs), py = Math.round(0.24 * hs);
+  const bw = Math.ceil(tw) + 2 * px, bh = Math.ceil(cap) + 2 * py;
+  if (LBL.width !== bw || LBL.height !== bh) { LBL.width = bw; LBL.height = bh; }
+  LG.setTransform(1, 0, 0, 1, 0, 0);
+  LG.clearRect(0, 0, bw, bh);
+  LG.fillStyle = 'rgba(0,0,0,0.82)'; LG.fillRect(0, 0, bw, bh);
+  LG.fillStyle = ink; LG.globalAlpha = 0.55;                 // 1-block frame in the ink colour
+  LG.fillRect(0, 0, bw, 1); LG.fillRect(0, bh - 1, bw, 1); LG.fillRect(0, 0, 1, bh); LG.fillRect(bw - 1, 0, 1, bh);
+  LG.globalAlpha = 1;
+  LG.font = `400 ${hs}px ${info.fonts.mono}`;
+  LG.textBaseline = 'alphabetic'; LG.textAlign = 'left';
+  LG.fillText(word, px, py + cap);
+  // display: box centred on x = 960, text baseline on info.baseline, even offsets keep the block grid crisp
+  const x0 = 2 * Math.round((info.x - bw) / 2), y0 = 2 * Math.round((info.baseline - 2 * (py + cap)) / 2);
+  g.imageSmoothingEnabled = false;
+  g.drawImage(LBL, x0, y0, 2 * bw, 2 * bh);
+}
+
+APA.scene({
+  meta: { text: 'light' },
+  text(g, word, t, p, info) { csamLabel(g, word, p, info); },
+  init() {
+    ({ ctx } = APA.canvas('2d', { alpha: false }));
+    const rnd = APA.rng(V === 2 ? 523 : 51);
+    const hw = TEX_W / 2, hh = H / 2;
+    const half = document.createElement('canvas'); half.width = hw; half.height = hh;
+    const g = half.getContext('2d', { willReadFrequently: true });
+    g.scale(0.5, 0.5);
+    if (V === 2) { g.translate(-TEX_X0, 0); drawV2(g, rnd); } else drawV1(g, rnd);
+    g.setTransform(1, 0, 0, 1, 0, 0);
+    finish(g, hw, hh, rnd);
+    // nearest-neighbour upscale: 2 x 2 px blocks (scan step)
+    tex = document.createElement('canvas'); tex.width = TEX_W; tex.height = H;
+    const tg = tex.getContext('2d');
+    tg.imageSmoothingEnabled = false;
+    tg.drawImage(half, 0, 0, TEX_W, H);
+  },
+  render(t) {
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.fillStyle = grey(16); ctx.fillRect(0, 0, W, H);
+    if (V === 1) {
+      const e = Math.min(t, 3) / 3, s = 1 + 0.02 * (1 - (1 - e) * (1 - e));
+      ctx.imageSmoothingEnabled = true;
+      ctx.translate(960, LINE_Y); ctx.scale(s, s); ctx.translate(-960, -LINE_Y);
+      ctx.drawImage(tex, 0, 0);
+    } else {
+      const dx = TEX_X0 - PAN_PX_S * Math.min(t, PAN_T_MAX);
+      ctx.drawImage(tex, Math.round(dx * 4) / 4, 0);
+    }
+  },
+});
+</script>
+</body>
+</html>

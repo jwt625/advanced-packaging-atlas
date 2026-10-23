@@ -1,0 +1,764 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>l1a bga engraving</title>
+<script src="../lib/apa.js"></script>
+</head>
+<body>
+<script>
+// L1A: BGA (ball grid array) 1.0 mm pitch, package substrate to board, cross-section as a copper engraving.
+// Geometry from ectc51909.2023.00155-a (see l1a_bga_engraving.notes.md). Joint plane = board pad top = y 600.
+// The whole plate is engraved once in init (seeded); render(t) only pans it horizontally.
+const { W, H, LINE_Y } = APA;
+let ctx, plate, carve, full, ufl;
+
+const K = 0.28;                  // px per um (pitch 1000 um -> 280 px)
+const P = 1000 * K;
+const MARGIN = 100;              // extra plate width for the pan
+const PAN_RATE = 28;             // px/s (56 px over 2 s)
+const PW = W + MARGIN;
+const y = (z) => LINE_Y - z * K; // z: um above the board pad top surface
+
+// ---- geometry (um, z up from board pad top) ----
+const G = {
+  bPadBot: -35,                  // board pad Cu 35 um (assumed, 1 oz)
+  bSRTop: -5,                    // board SR 30 um on laminate (Table 4)
+  pSRBot: -5 + 444,              // package-to-board standoff 444 um (measured)
+  pPad: 439 + 18,                // package pad surface, SR 18 um over Cu (Table 3)
+  pDiel: 457 + 15,               // package pad Cu 15 um (assumed, thickness closure)
+  ballZ0: 245.1, ballR: 316.4,   // truncated sphere through the two wetting circles
+};
+// bottom build-up (outward from core): L6 core Cu, BU1, L7, BU2, L8, BU3, L9, BU4, L10 pads
+const BU = 15, CU = 15, CORE = 1300;
+const zCoreBot = G.pDiel + 4 * BU + 4 * CU;   // 592 (L6 included)
+const zCoreTop = zCoreBot + CORE;             // 1892
+const balls = [];
+for (let n = -1; n <= 7; n++) balls.push(110 + n * P);
+
+const INK = '#22160c';
+
+// ---------- burin primitives ----------
+// Draw one engraved line: pts = [[x,y],...], w = widths (px). Runs thinner than 0.12 px are left as paper.
+function burin(g, pts, w) {
+  const n = pts.length;
+  let i = 0;
+  while (i < n) {
+    while (i < n && !(w[i] >= 0.12)) i++;
+    let j = i;
+    while (j < n && w[j] >= 0.12) j++;
+    if (j === i) break;
+    if (j - i >= 2) {
+      const L = [], R = [];
+      for (let q = i; q < j; q++) {
+        const a = pts[Math.max(q - 1, i)], b = pts[Math.min(q + 1, j - 1)];
+        let dx = b[0] - a[0], dy = b[1] - a[1];
+        const d = Math.hypot(dx, dy) || 1;
+        dx /= d; dy /= d;
+        // taper the first and last samples of a run: the burin enters and leaves the plate
+        const tap = Math.min(1, (q - i + 0.5) / 2.5, (j - 1 - q + 0.5) / 2.5);
+        const h = 0.5 * w[q] * tap;
+        L.push([pts[q][0] - dy * h, pts[q][1] + dx * h]);
+        R.push([pts[q][0] + dy * h, pts[q][1] - dx * h]);
+      }
+      g.beginPath();
+      g.moveTo(L[0][0], L[0][1]);
+      for (let q = 1; q < L.length; q++) g.lineTo(L[q][0], L[q][1]);
+      for (let q = R.length - 1; q >= 0; q--) g.lineTo(R[q][0], R[q][1]);
+      g.closePath();
+      g.fill();
+    }
+    i = j;
+  }
+}
+
+// width from tone for a line family of spacing s: coverage w/s follows tone, with a little swell
+const wOf = (tone, s, gain = 1) => Math.max(0, Math.min(s * 0.92, s * Math.pow(Math.max(0, tone), 1.15) * gain));
+
+// smooth value noise, seeded
+function noise2(seed) {
+  const r = APA.rng(seed);
+  const N = 64, tab = new Float32Array(N * N);
+  for (let i = 0; i < N * N; i++) tab[i] = r();
+  const s = (u) => u * u * (3 - 2 * u);
+  return (x, yy) => {
+    const xi = Math.floor(x), yi = Math.floor(yy), fx = s(x - xi), fy = s(yy - yi);
+    const a = tab[((yi & 63) * N) + (xi & 63)], b = tab[((yi & 63) * N) + ((xi + 1) & 63)];
+    const c = tab[(((yi + 1) & 63) * N) + (xi & 63)], d = tab[(((yi + 1) & 63) * N) + ((xi + 1) & 63)];
+    return (a + (b - a) * fx) * (1 - fy) + (c + (d - c) * fx) * fy;
+  };
+}
+const nz = noise2(11);
+
+// straight hatch over a rect (clip applied by caller): angle in rad, spacing s, tone(x,y)
+function hatch(g, x0, y0, x1, y1, ang, s, tone, opt = {}) {
+  const ca = Math.cos(ang), sa = Math.sin(ang);
+  const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+  const half = Math.hypot(x1 - x0, y1 - y0) / 2 + 4;
+  const step = opt.step || 2.5;
+  const wob = opt.wob ?? 0.25;
+  const gain = opt.gain ?? 1;
+  const ph = opt.phase ?? 0;
+  let li = 0;
+  for (let o = -half + ph; o <= half; o += s, li++) {
+    const pts = [], w = [];
+    const lph = li * 1.7;
+    for (let u = -half; u <= half; u += step) {
+      const px = cx + ca * u - sa * o, py = cy + sa * u + ca * o;
+      const wy = wob * Math.sin(u * 0.021 + lph) ;
+      const X = px - sa * wy, Y = py + ca * wy;
+      if (X < x0 - 6 || X > x1 + 6 || Y < y0 - 6 || Y > y1 + 6) { if (pts.length) { pts.push([X, Y]); w.push(0); } continue; }
+      pts.push([X, Y]);
+      const swell = 1 + 0.14 * Math.sin(u * 0.009 + lph * 2.3);
+      w.push(wOf(tone(X, Y), s, gain) * swell);
+    }
+    burin(g, pts, w);
+  }
+}
+
+// stipple: dots whose density follows tone (seeded)
+function stipple(g, x0, y0, x1, y1, tone, density, seed, rmax = 0.75) {
+  const r = APA.rng(seed);
+  const n = Math.round((x1 - x0) * (y1 - y0) * density);
+  for (let i = 0; i < n; i++) {
+    const X = x0 + r() * (x1 - x0), Y = y0 + r() * (y1 - y0);
+    const tt = tone(X, Y);
+    if (r() > tt) continue;
+    const rr = 0.35 + rmax * r();
+    g.beginPath();
+    g.ellipse(X, Y, rr * 1.25, rr * 0.8, 0.3, 0, Math.PI * 2);
+    g.fill();
+  }
+}
+
+function clipRect(g, x0, y0, x1, y1) { g.beginPath(); g.rect(x0, y0, x1 - x0, y1 - y0); g.clip(); }
+
+// ---------- materials ----------
+// Cu: dense horizontal cuts with a narrow gleam left white near the top edge
+function copper(g, x0, y0, x1, y1, opt = {}) {
+  g.save(); clipRect(g, x0, y0, x1, y1);
+  const hgt = y1 - y0;
+  const s = hgt < 6 ? 2.1 : 2.3;
+  hatch(g, x0 - 4, y0 - 2, x1 + 4, y1 + 2, 0, s, (X, Y) => {
+    const v = (Y - y0) / hgt;
+    const gleam = hgt > 7 ? Math.exp(-Math.pow((v - 0.28) / 0.1, 2)) * 0.75 : 0;
+    return 0.95 - gleam + 0.05 * (nz(X * 0.05, Y * 0.05) - 0.5);
+  }, { wob: 0.06, gain: 1.15, phase: (y0 % s) + 0.5 });
+  g.restore();
+}
+function copperV(g, x0, y0, x1, y1) { // vertical Cu (via walls, plated barrels)
+  g.save(); clipRect(g, x0, y0, x1, y1);
+  hatch(g, x0 - 2, y0 - 4, x1 + 2, y1 + 4, Math.PI / 2, 2.0, () => 0.95, { wob: 0.05, gain: 1.1 });
+  g.restore();
+}
+function dielectric(g, x0, y0, x1, y1, tone = 0.3, s = 2.1) {
+  g.save(); clipRect(g, x0, y0, x1, y1);
+  hatch(g, x0, y0, x1, y1, 0, s, (X, Y) => tone + 0.08 * (nz(X * 0.012, Y * 0.03) - 0.5), { wob: 0.1, phase: 0.6 });
+  g.restore();
+}
+function solderMask(g, x0, y0, x1, y1, seed) {
+  g.save(); clipRect(g, x0, y0, x1, y1);
+  hatch(g, x0, y0, x1, y1, 0, 3.0, () => 0.2, { wob: 0.1, phase: 1.1 });
+  stipple(g, x0, y0, x1, y1, () => 0.85, 0.16, seed, 0.55);
+  g.restore();
+}
+
+// woven glass cloth inside a laminate slab: lens-shaped fill yarns (cut across) and a warp yarn weaving over and under
+function glassPly(g, x0, x1, yc, L, lensW, lensH, amp, band, off, lt = 1) {
+  const lensPath = (cx, sc = 1) => {
+    const p = new Path2D();
+    const hw = lensW / 2 * sc, hh = lensH / 2 * sc;
+    p.moveTo(cx - hw, yc);
+    p.bezierCurveTo(cx - hw * 0.55, yc - hh * 1.33, cx + hw * 0.55, yc - hh * 1.33, cx + hw, yc);
+    p.bezierCurveTo(cx + hw * 0.55, yc + hh * 1.33, cx - hw * 0.55, yc + hh * 1.33, cx - hw, yc);
+    p.closePath();
+    return p;
+  };
+  for (let cx = x0 + off - L; cx < x1 + L; cx += L) {
+    g.save();
+    g.clip(lensPath(cx));
+    // contour-following cuts: curves that share the lens shape, lit from the upper left
+    for (let s = -0.9; s <= 0.91; s += 0.3) {
+      const pts = [], w = [];
+      for (let u = -1; u <= 1.0001; u += 0.04) {
+        const X = cx + u * lensW / 2;
+        const prof = (1 - u * u) * lensH / 2 * 1.0;
+        const Y = yc + s * prof;
+        pts.push([X, Y]);
+        const tone = 0.3 + 0.5 * (s + 1) / 2 + 0.12 * u;
+        w.push(wOf(tone * lt, 2.9, 0.9) * (0.3 + 0.7 * Math.sqrt(1 - u * u)));
+      }
+      burin(g, pts, w);
+    }
+    g.restore();
+    // outline: heavier on the lower (shadow) side
+    const pts = [], w = [];
+    for (let a = 0; a <= Math.PI * 2 + 0.01; a += 0.06) {
+      const u = Math.cos(a);
+      const X = cx + u * lensW / 2, Y = yc - Math.sin(a) * (1 - u * u) * lensH / 2 * 1.0;
+      pts.push([X, Y]);
+      w.push((0.5 + 1.1 * Math.max(0, -Math.sin(a))) * lt);
+    }
+    burin(g, pts, w);
+  }
+  // warp yarn: a band following yc + amp*cos, passing over one lens and under the next
+  for (let s = -1; s <= 1.001; s += 0.5) {
+    const pts = [], w = [];
+    for (let X = x0 - 4; X <= x1 + 4; X += 2.5) {
+      const ph = Math.PI * (X - (x0 + off)) / L;
+      const Y = yc - amp * Math.cos(ph) + s * band / 2;
+      pts.push([X, Y]);
+      const slope = Math.abs(Math.sin(ph));
+      w.push(s === -1 || s === 1 ? 0.45 + 0.4 * slope : (s === 0 ? wOf(0.22 + 0.15 * slope, 2.4) : 0));
+    }
+    burin(g, pts, w);
+  }
+}
+
+function laminate(g, x0, y0, x1, y1, plies, seed, glass) {
+  g.save(); clipRect(g, x0, y0, x1, y1);
+  hatch(g, x0, y0, x1, y1, 0, 4.6, (X, Y) => 0.17 + 0.1 * (nz(X * 0.006 + seed, Y * 0.02) - 0.5), { wob: 0.35, phase: seed % 3 });
+  const r = APA.rng(seed);
+  const ph = (y1 - y0) / plies;
+  for (let i = 0; i < plies; i++) {
+    const yc = y0 + ph * (i + 0.5);
+    glassPly(g, x0, x1, yc, glass.L, glass.w, glass.h, glass.amp, glass.band, (i % 2) * glass.L / 2 + r() * 20, glass.light || 1);
+  }
+  g.restore();
+}
+
+// solder ball: truncated sphere, contour-hatched along latitude circles of a tilted axis, cross-hatched in shadow
+function ballPath(cx) {
+  const cy = y(G.ballZ0), R = G.ballR * K;
+  const yT = y(G.pSRBot), yB = LINE_Y, yN = y(G.pPad);
+  const hT = Math.sqrt(R * R - (yT - cy) ** 2), hB = Math.sqrt(R * R - (yB - cy) ** 2);
+  const aT = Math.atan2(yT - cy, -hT), aB = Math.atan2(yB - cy, -hB);
+  const p = new Path2D();
+  p.moveTo(cx - hT, yN);
+  p.lineTo(cx - hT, yT);
+  p.arc(cx, cy, R, aT, aB, true);            // left flank, top to bottom
+  p.lineTo(cx + hB, yB);
+  p.arc(cx, cy, R, Math.PI - aB, Math.PI - aT, true);
+  p.lineTo(cx + hT, yN);
+  p.closePath();
+  return p;
+}
+// NSMD: solder wets the board pad sidewall; a short fillet down to the laminate on each side
+function filletPath(cx, side) {
+  const pw = 200 * K, yB = LINE_Y, yL = y(G.bPadBot);
+  const p = new Path2D();
+  p.moveTo(cx + side * pw, yB - 0.6);
+  p.lineTo(cx + side * (pw + 3.4), yB + 1.2);
+  p.quadraticCurveTo(cx + side * (pw + 1.4), yB + 5, cx + side * (pw + 0.8), yL);
+  p.lineTo(cx + side * pw, yL);
+  p.closePath();
+  return p;
+}
+
+const norm3 = (v) => { const d = Math.hypot(v[0], v[1], v[2]); return [v[0] / d, v[1] / d, v[2] / d]; };
+const LIGHT = norm3([-0.62, -0.7, 0.5]);
+function sphereTone(nx, ny, nzv) {
+  const lam = nx * LIGHT[0] + ny * LIGHT[1] + nzv * LIGHT[2];
+  let t = 1 - Math.max(0, lam);
+  t = 0.08 + 0.86 * Math.pow(t, 1.25);
+  const rim = Math.max(0, ny * 0.9 + nx * 0.25) * Math.pow(1 - nzv, 1.2) * 0.75; // reflected light from the board, lower rim
+  return Math.max(0, t - rim);
+}
+
+// Ball interiors are engraved during the shot: strokes are binned by polar angle about the hatch axis (a cap that grows
+// from the highlight outward), each bin pre-rendered into a small canvas; the bin being cut is drawn stroke by stroke.
+const NG = 18;
+const BALLS = [];              // {cx, ox, oy, groups: [{cv, strokes: [{pts, w}]}], t0, t1}
+function drawBall(g, cx) {
+  const cy = y(G.ballZ0), R = G.ballR * K;
+  g.save();
+  g.globalCompositeOperation = 'destination-out';
+  g.fill(ballPath(cx));
+  g.restore();
+  const axis = norm3([-0.5, -0.62, 0.6]);
+  const u0 = norm3([axis[1], -axis[0], 0]);
+  const v0 = [axis[1] * u0[2] - axis[2] * u0[1], axis[2] * u0[0] - axis[0] * u0[2], axis[0] * u0[1] - axis[1] * u0[0]];
+  const groups = Array.from({ length: NG }, () => ({ strokes: [] }));
+  const bin = (th) => Math.min(NG - 1, Math.floor(th / Math.PI * NG));
+  // family 1: latitude circles about the tilted axis
+  const nLat = 54;
+  for (let i = 1; i < nLat; i++) {
+    const th = Math.PI * i / nLat;
+    const pts = [], w = [];
+    for (let f = 0; f <= Math.PI * 2 + 1e-6; f += 0.035) {
+      const p = [0, 1, 2].map((k) => Math.cos(th) * axis[k] + Math.sin(th) * (Math.cos(f) * u0[k] + Math.sin(f) * v0[k]));
+      if (p[2] < -0.02) { pts.push([cx + R * p[0], cy + R * p[1]]); w.push(0); continue; }
+      pts.push([cx + R * p[0], cy + R * p[1]]);
+      w.push(wOf(sphereTone(p[0], p[1], Math.max(0, p[2])), 4.6, 1.0) * (0.55 + 0.45 * Math.sqrt(Math.max(0, p[2]))));
+    }
+    // keep only the visible run(s) so the burin head travels over ink, not over the hidden back
+    if (w.some((v) => v >= 0.12)) groups[bin(th)].strokes.push({ pts, w, th });
+  }
+  // family 2: meridians, only where the tone is deep (cross-hatching); split into theta bins
+  const nMer = 72;
+  for (let i = 0; i < nMer; i++) {
+    const f = Math.PI * 2 * i / nMer;
+    let cur = null, cb = -1;
+    for (let th = 0.02; th < Math.PI; th += 0.03) {
+      const p = [0, 1, 2].map((k) => Math.cos(th) * axis[k] + Math.sin(th) * (Math.cos(f) * u0[k] + Math.sin(f) * v0[k]));
+      const pt = [cx + R * p[0], cy + R * p[1]];
+      const ww = p[2] < 0 ? 0 : wOf((sphereTone(p[0], p[1], p[2]) - 0.48) * 1.6, 4.4, 0.8);
+      const bb = bin(th);
+      if (bb !== cb) {
+        if (cur && cur.w.some((v) => v >= 0.12)) groups[cb].strokes.push(cur);
+        const prev = cur ? [cur.pts[cur.pts.length - 1], cur.w[cur.w.length - 1]] : null;
+        cur = { pts: prev ? [prev[0]] : [], w: prev ? [prev[1]] : [], th };
+        cb = bb;
+      }
+      cur.pts.push(pt); cur.w.push(ww);
+    }
+    if (cur && cur.w.some((v) => v >= 0.12)) groups[cb].strokes.push(cur);
+  }
+  for (const gr of groups) gr.strokes.sort((a, b2) => a.th - b2.th);
+  BALLS.push({ cx, groups, ox: Math.floor(cx - R - 4), oy: Math.floor(y(G.pPad) - 4) });
+  // base plate keeps: neck inside the package SR opening, sidewall fillets, and the contour
+  g.save();
+  g.clip(ballPath(cx));
+  hatch(g, cx - R, y(G.pPad) - 1, cx + R, y(G.pSRBot) + 0.5, Math.PI / 2, 2.4, (X) => 0.35 + 0.35 * (X - cx) / R, { wob: 0 });
+  g.restore();
+  for (const side of [-1, 1]) { g.save(); g.clip(filletPath(cx, side)); hatch(g, cx - R, LINE_Y - 2, cx + R, y(G.bPadBot) + 1, Math.PI / 2, 1.6, () => 0.9, { wob: 0 }); g.restore(); }
+  // contour: swells on the shadow side
+  const yT = y(G.pSRBot), yB = LINE_Y;
+  for (const side of [-1, 1]) {
+    const pts = [], w = [];
+    for (let Y = yT; Y <= yB + 0.01; Y += 1.5) {
+      const X = cx + side * Math.sqrt(Math.max(0, R * R - (Y - cy) ** 2));
+      pts.push([X, Y]);
+      const dark = side > 0 ? 0.9 : 0.25;
+      w.push(0.55 + 1.5 * dark * (0.4 + 0.6 * Math.max(0, (Y - cy) / R + 0.4)));
+    }
+    burin(g, pts, w);
+  }
+}
+function bakeBallGroups() {
+  const bw = Math.ceil(2 * G.ballR * K + 8), bh = Math.ceil(LINE_Y - y(G.pPad) + 8);
+  for (const b of BALLS) for (const gr of b.groups) {
+    gr.cv = document.createElement('canvas');
+    gr.cv.width = bw; gr.cv.height = bh;
+    const c = gr.cv.getContext('2d', { willReadFrequently: true });
+    c.translate(-b.ox, -b.oy);
+    c.clip(ballPath(b.cx));
+    c.fillStyle = INK;
+    for (const st of gr.strokes) burin(c, st.pts, st.w);
+    c.getImageData(0, 0, 1, 1);
+  }
+}
+
+// ---------- cavity between package and board ----------
+function cavity(g) {
+  const yT = y(G.pSRBot), yB = y(G.bSRTop);
+  g.save();
+  clipRect(g, -10, yT, PW + 10, yB);
+  const R = G.ballR * K, cy = y(G.ballZ0);
+  const tone = (X, Y) => {
+    const v = (Y - yT) / (yB - yT);
+    let t = 0.8 - 0.22 * v;             // deep under the package, lighter toward the board
+    let dmin = 1e9, side = 0;
+    for (const bx of balls) { const d = Math.hypot(X - bx, Y - cy) - R; if (d < dmin) { dmin = d; side = X - bx; } }
+    if (dmin < 70) t += (side > 0 ? 0.12 : -0.1) * Math.exp(-dmin / 26); // shadow right of each ball, halo left
+    return Math.min(0.97, t + 0.03 * (nz(X * 0.02, Y * 0.05) - 0.5));
+  };
+  hatch(g, -10, yT, PW + 10, yB, 0, 3.6, (X, Y) => Math.min(0.72, tone(X, Y)), { wob: 0.12, phase: 0.4 });
+  hatch(g, -10, yT, PW + 10, yB, 0.42, 4.2, (X, Y) => (tone(X, Y) - 0.5) * 1.5, { wob: 0.25 });
+  hatch(g, -10, yT, PW + 10, yB, -0.36, 4.4, (X, Y) => (tone(X, Y) - 0.72) * 2.2, { wob: 0.25 });
+  g.restore();
+}
+
+// ---------- carve registry: build-up Cu and via plating are cut into a separate ink layer, revealed over time ----------
+let GC = null;                 // carve ink context (set in init)
+let UFC = null;                // underfill ink context (set in init)
+const UFBAND = { y0: 0, y1: 0 };
+const FEAT = [];               // {x0, y0, x1, y1, dir: 'h' | 'v', grp, key}
+function cuC(x0, y0, x1, y1, grp, key) {          // Cu feature carved horizontally (left to right)
+  copper(GC, x0, y0, x1, y1);
+  FEAT.push({ x0, y0, x1, y1, dir: 'h', grp, key });
+}
+function cuV(x0, y0, x1, y1, grp, key, clip) {    // vertical plating carved top to bottom
+  GC.save();
+  if (clip) { GC.beginPath(); clip(GC); GC.clip(); }
+  copperV(GC, x0, y0, x1, y1);
+  GC.restore();
+  FEAT.push({ x0, y0, x1, y1, dir: 'v', grp, key });
+}
+
+// ---------- package substrate ----------
+function packageSubstrate(g) {
+  const x0 = -10, x1 = PW + 10;
+  const r = APA.rng(5);
+  // core
+  const yCB = y(zCoreBot), yCT = y(zCoreTop);
+  laminate(g, x0, yCT, x1, yCB, 8, 3, { L: 140, w: 116, h: 19, amp: 12, band: 7 });
+  // plated through holes: 200 um drill, 20 um Cu wall (assumed), resin plug, at every second ball midpoint
+  const pths = balls.filter((_, i) => i % 2 === 0).map((bx) => bx + P / 2);
+  const dr = 100 * K, wall = 20 * K;
+  for (const hx of pths) {
+    g.save();
+    clipRect(g, hx - dr - 1, yCT, hx + dr + 1, yCB);
+    g.globalCompositeOperation = 'destination-out';
+    g.fillRect(hx - dr - 1, yCT, 2 * dr + 2, yCB - yCT);
+    g.restore();
+    // plug resin: stipple + sparse vertical cuts
+    g.save(); clipRect(g, hx - dr + wall, yCT, hx + dr - wall, yCB);
+    hatch(g, hx - dr, yCT, hx + dr, yCB, Math.PI / 2, 3.2, (X) => 0.28 + 0.25 * (X - hx) / dr, { wob: 0.2 });
+    stipple(g, hx - dr, yCT, hx + dr, yCB, () => 0.6, 0.12, 31 + hx | 0, 0.5);
+    g.restore();
+    cuV(hx - dr, yCT, hx - dr + wall, yCB, 'pth', hx - dr);
+    cuV(hx + dr - wall, yCT, hx + dr, yCB, 'pth', hx + dr);
+  }
+  // bottom build-up stack: Cu level (z0..z0+15) then dielectric, from the core outward
+  const levels = [];
+  let z = zCoreBot;
+  // L6 core Cu (planes, with lids over the PTHs and clearances)
+  levels.push({ z1: z, z0: z - CU, kind: 'cu', name: 'L6' }); z -= CU;
+  for (let i = 0; i < 4; i++) {
+    levels.push({ z1: z, z0: z - BU, kind: 'die' }); z -= BU;
+    if (i < 3) { levels.push({ z1: z, z0: z - CU, kind: 'cu', name: 'L' + (7 + i) }); z -= CU; }
+  }
+  // dielectric background for the whole bottom stack
+  dielectric(g, x0, y(zCoreBot), x1, y(G.pDiel), 0.26, 2.1);
+  for (const lv of levels) {
+    const ya = y(lv.z1), yb = y(lv.z0);
+    if (lv.kind !== 'cu') continue;
+    if (lv.name === 'L6' || lv.name === 'L9') {
+      // planes with clearances around the via stacks that pass through
+      let xs = x0;
+      const holes = balls.map((bx) => bx).concat(lv.name === 'L6' ? pths : []).sort((a, b) => a - b);
+      for (const hx of holes) {
+        const cl = lv.name === 'L6' && pths.includes(hx) ? -1 : 26;
+        if (cl < 0) continue;
+        cuC(xs, ya, hx - cl, yb, lv.name); xs = hx + cl;
+      }
+      cuC(xs, ya, x1, yb, lv.name);
+      // lids over the PTHs (L6) and pads around the stacks (L9)
+      for (const bx of balls) cuC(bx - 15, ya, bx + 15, yb, lv.name);
+      if (lv.name === 'L6') for (const hx of pths) cuC(hx - dr - 6, ya, hx + dr + 6, yb, lv.name);
+    } else {
+      // signal levels: traces of varied length, plus via lands
+      let xx = x0 + r() * 40;
+      while (xx < x1) {
+        const len = 18 + r() * 70;
+        cuC(xx, ya, xx + len, yb, lv.name);
+        xx += len + 14 + r() * 50;
+      }
+    }
+  }
+  // via stacks: pad -> BU4 -> L9 -> BU3 -> L8 -> BU2 -> L7; L7 trace to the PTH lid; BU1 via onto the lid
+  const vw = 40 * K;
+  balls.forEach((bx, i) => {
+    for (let k2 = 0; k2 < 3; k2++) {
+      const zb = G.pDiel + k2 * (BU + CU);
+      // laser vias on the bottom side open toward the outer (bottom) surface
+      const ya = y(zb + BU), yb2 = y(zb);
+      cuV(bx - vw / 2, ya, bx + vw / 2, yb2, 'mvia', bx, (c) => {
+        c.moveTo(bx - vw * 0.35, ya); c.lineTo(bx + vw * 0.35, ya); c.lineTo(bx + vw / 2, yb2); c.lineTo(bx - vw / 2, yb2); c.closePath();
+      });
+      cuC(bx - 15, y(zb + BU + CU), bx + 15, ya, 'land');
+    }
+    if (i % 2 === 0) {
+      const hx = bx + P / 2;
+      const yL7a = y(zCoreBot - CU - BU), yL7b = y(zCoreBot - CU - BU - CU);
+      cuC(bx - 15, yL7a, hx + 15, yL7b, 'L7');
+      const ya = y(zCoreBot - CU), yb2 = yL7a;
+      cuV(hx - vw / 2, ya, hx + vw / 2, yb2, 'mvia', hx, (c) => {
+        c.moveTo(hx - vw * 0.35, ya); c.lineTo(hx + vw * 0.35, ya); c.lineTo(hx + vw / 2, yb2); c.lineTo(hx - vw / 2, yb2); c.closePath();
+      });
+    }
+  });
+  // package SR and pads (SMD: SR overlaps the pad edge)
+  const ySRb = y(G.pSRBot), yPad = y(G.pPad), yDi = y(G.pDiel);
+  solderMask(g, x0, yDi, x1, ySRb, 71);
+  const padHW = 350 * K, opHW = 250 * K;
+  for (const bx of balls) {
+    g.save(); g.globalCompositeOperation = 'destination-out';
+    g.fillRect(bx - padHW, yDi - 0.2, 2 * padHW, yPad - yDi + 0.2);
+    g.fillRect(bx - opHW, yPad - 0.5, 2 * opHW, ySRb - yPad + 0.5);
+    g.restore();
+    copper(g, bx - padHW, yDi, bx + padHW, yPad);
+  }
+  // top build-up (mirror, simpler): L5 core Cu, BU, L4, BU, L3, BU, L2, BU, L1 pads, SR
+  dielectric(g, x0, y(zCoreTop + 4 * BU + 4 * CU), x1, yCT, 0.26, 2.1);
+  for (let i = 0; i < 4; i++) {
+    const zc = zCoreTop + i * (BU + CU);
+    const ya = y(zc + CU), yb = y(zc);
+    if (i === 0 || i === 2) {
+      let xs = x0;
+      for (const hx of pths) { cuC(xs, ya, hx - dr - 20, yb, 'T' + i); cuC(hx - dr - 6, ya, hx + dr + 6, yb, 'T' + i); xs = hx + dr + 20; }
+      cuC(xs, ya, x1, yb, 'T' + i);
+    } else {
+      let xx = x0 + r() * 30;
+      while (xx < x1) { const len = 12 + r() * 50; cuC(xx, ya, xx + len, yb, 'T' + i); xx += len + 12 + r() * 40; }
+    }
+  }
+  // L1: C4 pads at 150 um pitch under the interposer, SR 18 um over Cu, opening 50 um
+  const zL1 = zCoreTop + 4 * BU + 4 * CU;
+  const yL1a = y(zL1 + CU), yL1b = y(zL1);
+  const ySRt = y(zL1 + CU + 18);
+  solderMask(g, x0, ySRt, x1, yL1b, 73);
+  const cp = 150 * K;
+  for (let xx = x0 + 8; xx < x1; xx += cp) copper(g, xx - 45 * K, yL1a, xx + 45 * K, yL1b); // 90 um pad (assumed)
+  // above: capillary underfill with Cu/SnAg bumps, interposer back side (gap 81 um)
+  const yInt = y(zL1 + CU + 18 + 81 - 18);
+  // capillary underfill: its own layer (UFC), filled in during the shot; the base keeps only its boundaries
+  UFBAND.y0 = yInt; UFBAND.y1 = ySRt;
+  UFC.save(); clipRect(UFC, x0, yInt, x1, ySRt);
+  hatch(UFC, x0, yInt, x1, ySRt, 0, 2.2, () => 0.36, { wob: 0.2 });
+  stipple(UFC, x0, yInt, x1, ySRt, () => 0.9, 0.35, 91, 0.6);
+  UFC.restore();
+  g.save(); clipRect(g, x0, -2, x1, ySRt);
+  for (let xx = x0 + 8; xx < x1; xx += cp) {
+    const pw = 75 * K / 2;
+    UFC.save(); UFC.globalCompositeOperation = 'destination-out';
+    UFC.fillRect(xx - pw - 1, yInt, 2 * pw + 2, ySRt - yInt + 0.5); UFC.restore();
+    copperV(g, xx - pw, yInt, xx + pw, yInt + 30 * K);              // Cu post 30 um
+    g.save(); clipRect(g, xx - pw - 2, yInt + 30 * K, xx + pw + 2, ySRt + 1);
+    hatch(g, xx - pw - 2, yInt + 30 * K, xx + pw + 2, ySRt + 1, Math.PI / 2, 2.0, (X) => 0.2 + 0.4 * (X - xx + pw) / (2 * pw), { wob: 0 });
+    g.restore();
+  }
+  // interposer: Si, dark close cuts
+  hatch(g, x0, -4, x1, yInt, 0, 1.6, () => 0.82, { wob: 0.05 });
+  g.restore();
+  // engraved interface rules
+  const rule = (yy, w) => { const pts = [], ww = []; for (let X = x0; X <= x1; X += 4) { pts.push([X, yy + 0.2 * Math.sin(X * 0.01)]); ww.push(w * (0.85 + 0.3 * nz(X * 0.01, yy))); } burin(g, pts, ww); };
+  rule(yCB, 0.9); rule(yCT, 0.9); rule(ySRb, 0.8);
+  rule(yInt, 0.7); rule(ySRt, 0.7);                 // underfill boundaries (interposer face, top SR surface)
+}
+
+// ---------- board ----------
+function board(g) {
+  const x0 = -10, x1 = PW + 10;
+  const yLam = y(G.bPadBot), ySR = y(G.bSRTop);
+  // laminate with inner Cu planes: prepreg 110 um / plane 35 / core 200 / plane 35 ... (illustrative stack)
+  let z = G.bPadBot;
+  const seq = [];
+  while (y(z) < H + 20) {
+    seq.push({ kind: 'die', t: 360 }); seq.push({ kind: 'cu', t: 35 });
+    z -= 395;
+  }
+  z = G.bPadBot;
+  let i = 0;
+  for (const s of seq) {
+    const ya = y(z), yb = y(z - s.t);
+    if (ya > H + 10) break;
+    if (s.kind === 'cu') copper(g, x0, ya, x1, yb);
+    else laminate(g, x0, ya, x1, yb, 2, 40 + i, { L: 112, w: 92, h: 15, amp: 10, band: 6, light: 0.75 });
+    z -= s.t; i++;
+  }
+  // board solder resist, NSMD: opening 500 um around a 400 um pad
+  solderMask(g, x0, ySR, x1, yLam, 77);
+  const opHW = 250 * K, padHW = 200 * K;
+  for (const bx of balls) {
+    g.save(); g.globalCompositeOperation = 'destination-out';
+    g.fillRect(bx - opHW, ySR - 0.5, 2 * opHW, yLam - ySR + 0.4); g.restore();
+    // dark clearance ring: the shadowed gap between pad and SR wall
+    g.save(); clipRect(g, bx - opHW, ySR, bx + opHW, yLam);
+    hatch(g, bx - opHW, ySR - 2, bx + opHW, yLam + 2, 0.5, 1.8, () => 0.72, { wob: 0 });
+    g.restore();
+    copper(g, bx - padHW, LINE_Y, bx + padHW, yLam);
+  }
+  // the plate darkens toward its lower edge: open diagonal cuts over the board
+  g.save(); clipRect(g, x0, yLam + 1, x1, H + 4);
+  hatch(g, x0, yLam, x1, H + 4, 0.48, 4.4, (X, Y) => (Y - yLam - 60) / (H - yLam) * 0.55, { wob: 0.3 });
+  g.restore();
+  const pts = [], ww = [];
+  for (let X = x0; X <= x1; X += 4) { pts.push([X, yLam + 0.15 * Math.sin(X * 0.013)]); ww.push(1.0); }
+  burin(g, pts, ww);
+}
+
+// ---------- paper ----------
+function paper(g) {
+  g.fillStyle = '#ece0c2';
+  g.fillRect(0, 0, PW, H);
+  const r = APA.rng(2024);
+  // fibres and mottling (static)
+  for (let i = 0; i < 9000; i++) {
+    const X = r() * PW, Y = r() * H, L = 3 + r() * 14, a = r() * Math.PI;
+    g.strokeStyle = r() < 0.5 ? 'rgba(120,92,52,0.06)' : 'rgba(255,250,235,0.18)';
+    g.lineWidth = 0.6;
+    g.beginPath(); g.moveTo(X, Y); g.lineTo(X + Math.cos(a) * L, Y + Math.sin(a) * L); g.stroke();
+  }
+  const id = g.getImageData(0, 0, PW, H), d = id.data;
+  for (let Y = 0; Y < H; Y++) for (let X = 0; X < PW; X++) {
+    const m = (nz(X * 0.004, Y * 0.004) - 0.5) * 18 + (nz(X * 0.03 + 7, Y * 0.03) - 0.5) * 6;
+    const vx = (X - PW / 2) / (PW / 2), vy = (Y - H / 2) / (H / 2);
+    const vig = -14 * Math.pow(vx * vx * 0.6 + vy * vy * 0.8, 1.5);
+    const o = (Y * PW + X) * 4;
+    d[o] += m + vig; d[o + 1] += m * 0.95 + vig; d[o + 2] += m * 0.8 + vig * 1.1;
+  }
+  g.putImageData(id, 0, 0);
+}
+
+
+// ---------- carving schedule (seconds) ----------
+// 1. PTH wall plating, top to bottom, left to right; 2. microvia Cu and via lands; 3. build-up Cu levels from the
+// core outward (L6 -> L9 bottom, L5 -> L2 top), each level swept left to right toward the ball pads.
+const T_END = 0.85;
+function schedule() {
+  const lvOrder = { L6: 0, L7: 1, L8: 2, L9: 3, T0: 0, T1: 1, T2: 2, T3: 3 };
+  const pthX = [...new Set(FEAT.filter((f) => f.grp === 'pth').map((f) => f.key))].sort((a, b) => a - b);
+  for (const f of FEAT) {
+    const w = f.x1 - f.x0, h = f.y1 - f.y0;
+    const xr = Math.max(0, Math.min(1, (f.x0 + MARGIN / 2) / PW));
+    if (f.grp === 'pth') { f.t0 = 0.0 + 0.045 * pthX.indexOf(f.key); f.t1 = f.t0 + 0.24; }
+    else if (f.grp === 'mvia') { f.t0 = 0.14 + 0.2 * xr + 0.03 * ((f.y0 - 434) / 30); f.t1 = f.t0 + 0.07; }
+    else if (f.grp === 'land') { f.t0 = 0.17 + 0.2 * xr + 0.03 * ((f.y0 - 434) / 30); f.t1 = f.t0 + 0.05; }
+    else { f.t0 = 0.34 + 0.07 * lvOrder[f.grp] + 0.22 * xr; f.t1 = f.t0 + Math.max(0.04, Math.min(0.16, w / 2600)); }
+    void h;
+  }
+  const last = Math.max(...FEAT.map((f) => f.t1));
+  const k = T_END / last;
+  for (const f of FEAT) { f.t0 *= k; f.t1 *= k; }
+}
+
+// burin at the head of a cut: a tapered lozenge pointing along the cut, and a copper curl (burr) lifting behind it
+function burinHead(c, x, yy, dir, ph) { burinHeadA(c, x, yy, dir === 'h' ? 0 : Math.PI / 2, ph); }
+function burinHeadA(c, x, yy, ang, ph) {
+  const dx = Math.cos(ang), dy = Math.sin(ang), nx = dy, ny = -dx;
+  const pts = [], w = [];
+  for (let i = 0; i <= 8; i++) {
+    const u = i / 8;
+    pts.push([x - 30 * (1 - u) * dx, yy - 30 * (1 - u) * dy]);
+    w.push(5.2 * Math.pow(Math.sin(Math.PI * Math.min(1, u * 1.1)), 0.8) + 0.2);
+  }
+  burin(c, pts, w);
+  // curl: a short spiral of shaving rising off the plate behind the tip
+  const cp = [], cw = [];
+  const turns = 1.3 + 0.7 * ph;
+  const bx = x - 14 * dx + 12 * nx, by = yy - 14 * dy + 12 * ny;
+  for (let i = 0; i <= 36; i++) {
+    const u = i / 36, a = u * turns * Math.PI * 2, rr = 1.2 + 8 * u;
+    cp.push([bx + rr * Math.cos(a), by - rr * Math.sin(a)]);
+    cw.push(0.4 + 1.3 * Math.sin(Math.PI * u));
+  }
+  burin(c, cp, cw);
+}
+
+// ball and underfill schedule, tied to the carving: each ball fills once the via stack reaching its pad is cut
+const UF_T0 = 0.2;
+function scheduleBalls() {
+  for (const b of BALLS) {
+    const st = FEAT.filter((f) => (f.grp === 'mvia' || f.grp === 'land') && Math.abs((f.x0 + f.x1) / 2 - b.cx) < 20);
+    const ready = st.length ? Math.max(...st.map((f) => f.t1)) : 0.3;
+    b.t1 = Math.min(T_END, ready + 0.4);
+    b.t0 = Math.min(ready, b.t1 - 0.3);
+  }
+}
+const ufFront = (t) => -10 + (PW + 20) * Math.min(1, Math.max(0, (t - UF_T0) / (T_END - UF_T0)));
+
+APA.scene({
+  meta: { text: 'dark' },
+  init() {
+    ({ ctx } = APA.canvas('2d'));
+    plate = document.createElement('canvas');
+    plate.width = PW; plate.height = H;
+    const g = plate.getContext('2d', { willReadFrequently: true });
+    paper(g);
+    // ink layer drawn separately so destination-out cuts never reach the paper
+    const ink = document.createElement('canvas');
+    ink.width = PW; ink.height = H;
+    const k = ink.getContext('2d', { willReadFrequently: true });
+    k.fillStyle = INK;
+    carve = document.createElement('canvas');
+    carve.width = PW; carve.height = H;
+    GC = carve.getContext('2d', { willReadFrequently: true });
+    GC.fillStyle = INK;
+    ufl = document.createElement('canvas');
+    ufl.width = PW; ufl.height = H;
+    UFC = ufl.getContext('2d', { willReadFrequently: true });
+    UFC.fillStyle = INK;
+    board(k);
+    cavity(k);
+    packageSubstrate(k);
+    for (const bx of balls) drawBall(k, bx);
+    g.globalAlpha = 0.93;
+    g.drawImage(ink, 0, 0);
+    g.globalAlpha = 1;
+    // finished plate (base + all carved Cu) for the hold after T_END
+    full = document.createElement('canvas');
+    full.width = PW; full.height = H;
+    const fg = full.getContext('2d', { willReadFrequently: true });
+    fg.drawImage(plate, 0, 0);
+    fg.globalAlpha = 0.93;
+    fg.drawImage(carve, 0, 0);
+    fg.drawImage(ufl, 0, 0);
+    bakeBallGroups();
+    for (const b of BALLS) for (const gr of b.groups) fg.drawImage(gr.cv, b.ox, b.oy);
+    schedule();
+    scheduleBalls();
+    g.getImageData(0, 0, 1, 1); fg.getImageData(0, 0, 1, 1); GC.getImageData(0, 0, 1, 1); // rasterise now
+  },
+  render(t) {
+    t = Math.max(0, t);
+    const off = Math.min(PAN_RATE * t, MARGIN - 6);
+    if (t >= T_END) { ctx.drawImage(full, -off, 0); return; }
+    ctx.drawImage(plate, -off, 0);
+    // reveal every cut made so far: union of the cut extents, one draw of the carve layer through that clip
+    ctx.save();
+    ctx.beginPath();
+    const heads = [];
+    for (const f of FEAT) {
+      if (t <= f.t0) continue;
+      const u = Math.min(1, (t - f.t0) / (f.t1 - f.t0));
+      if (f.dir === 'h') {
+        const xe = f.x0 + (f.x1 - f.x0) * u;
+        ctx.rect(f.x0 - 1 - off, f.y0 - 1, xe - f.x0 + 1, f.y1 - f.y0 + 2);
+        if (u < 1) heads.push([xe - off, (f.y0 + f.y1) / 2, 'h', u]);
+      } else {
+        const ye = f.y0 + (f.y1 - f.y0) * u;
+        ctx.rect(f.x0 - 1 - off, f.y0 - 1, f.x1 - f.x0 + 2, ye - f.y0 + 1);
+        if (u < 1) heads.push([(f.x0 + f.x1) / 2 - off, ye, 'v', u]);
+      }
+    }
+    ctx.clip();
+    ctx.globalAlpha = 0.93;
+    ctx.drawImage(carve, -off, 0);
+    ctx.restore();
+    // underfill: filled behind a front sweeping left to right
+    const xf = ufFront(t);
+    ctx.save();
+    ctx.globalAlpha = 0.93;
+    if (xf > -10) {
+      ctx.save(); ctx.beginPath(); ctx.rect(-off - 12, 0, xf + 12, H); ctx.clip();
+      ctx.drawImage(ufl, -off, 0); ctx.restore();
+      if (xf < PW + 10) heads.push([xf - off, (UFBAND.y0 + UFBAND.y1) / 2, 'h', (xf + 10) / (PW + 20)]);
+    }
+    // balls: finished theta bins from their canvases, the current bin stroke by stroke with the burin on it
+    ctx.fillStyle = INK;
+    const ballHeads = [];
+    for (const b of BALLS) {
+      if (t <= b.t0) continue;
+      const u = Math.min(1, (t - b.t0) / (b.t1 - b.t0));
+      const pos = u * NG, gf = Math.floor(pos), fr = pos - gf;
+      for (let gi = 0; gi < Math.min(gf, NG); gi++) ctx.drawImage(b.groups[gi].cv, b.ox - off, b.oy);
+      if (gf >= NG) continue;
+      const strokes = b.groups[gf].strokes;
+      if (!strokes.length) continue;
+      const m = fr * strokes.length, mi = Math.floor(m);
+      ctx.save(); ctx.translate(-off, 0); ctx.clip(ballPath(b.cx));
+      for (let si = 0; si < mi; si++) burin(ctx, strokes[si].pts, strokes[si].w);
+      const st = strokes[mi];
+      if (st) {
+        // partial stroke: advance along its inked run
+        const idx = st.w.map((v, k) => (v >= 0.12 ? k : -1)).filter((k) => k >= 0);
+        const i0 = idx[0], i1 = idx[idx.length - 1];
+        const ie = Math.max(i0 + 1, Math.round(i0 + (i1 - i0) * (m - mi)));
+        burin(ctx, st.pts.slice(0, ie + 1), st.w.slice(0, ie + 1));
+        let ih = ie;
+        while (ih > i0 && !(st.w[ih] >= 0.12)) ih--;          // the head sits on ink, never on the hidden back
+        const pa = st.pts[Math.max(0, ih - 1)], pb = st.pts[ih];
+        ballHeads.push([pb[0] - off, pb[1], Math.atan2(pb[1] - pa[1], pb[0] - pa[0]), u]);
+      }
+      ctx.restore();
+    }
+    for (const [x, yy, d, uu] of heads) burinHead(ctx, x, yy, d, uu);
+    for (const [x, yy, a, uu] of ballHeads) burinHeadA(ctx, x, yy, a, uu);
+    ctx.restore();
+  },
+});
+</script>
+</body>
+</html>

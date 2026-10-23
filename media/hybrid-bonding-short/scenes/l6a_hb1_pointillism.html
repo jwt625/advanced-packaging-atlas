@@ -1,0 +1,318 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>l6a hb1 pointillism</title>
+<script src="../lib/apa.js"></script>
+<script src="../lib/textfx.js"></script>
+</head>
+<body>
+<script>
+// L6 pass B (l6b slot, overlay "1 µm", dark text): W2W F2F Cu-Cu hybrid bond, 1 um pitch, Seurat divisionism.
+// Structure and dimensions: l6a_hb1_pointillism.notes.md. Bond interface on LINE_Y.
+// Motion: post-bond anneal; Cu grains coarsen and grow across the bond interface and the Cu-Cu seam dissolves
+// (t ~ 0.01-0.40 s, then settled), plus a slow horizontal pan (16 px/s, 48 px at t = 3 s).
+// Every dot is seeded once in init; per frame only the pad/via dots choose their pre- or post-anneal colour.
+const { W, H, LINE_Y } = APA;
+const Y = LINE_Y;
+const S = 280;              // px per um; pitch 1 um = 280 px
+const PITCH = 1.0 * S;
+const X0 = 120;             // first pad centre (world px)
+const PAN_V = 16;           // px/s, leftward drift
+const MARGIN = 64;          // world extends beyond the frame for the pan
+const WW = W + MARGIN;
+
+// vertical stack per wafer, depth d (um) from the bond interface
+const PAD_D = 0.35, VIA_D = 0.62, WIRE_D = 1.02, SI_D = 1.55;
+const padHalfW = (d) => 0.5 * S * (0.42 + 0.08 * (1 - (d / PAD_D) ** 2));   // 0.50 um at the bond face
+const viaHalfW = (d) => 0.5 * S * (0.21 - 0.02 * (d - PAD_D) / (VIA_D - PAD_D));
+const LINK_EXT = 0.25 * S;  // link end beyond the outer pad centre
+
+let ctx, stat, fin, dyn;
+
+// pad/via dots at time t, batched by colour (world coordinates)
+function drawDyn(c, t) {
+  const by = new Map();
+  for (const d of dyn) {
+    const col = t >= d.tsw ? d.colPost : d.colPre;
+    let a = by.get(col); if (!a) { a = []; by.set(col, a); }
+    a.push(d);
+  }
+  for (const [col, arr] of by) {
+    c.fillStyle = col; c.beginPath();
+    for (const d of arr) { c.moveTo(d.x + d.rad, d.y); c.arc(d.x, d.y, d.rad, 0, 6.2832); }
+    c.fill();
+  }
+}
+
+// region: 0 Si, 1 oxide, 2 pad, 3 via, 4 wire. side: -1 top wafer (y < Y), +1 bottom wafer
+function region(x, y) {
+  const side = y < Y ? -1 : 1;
+  const d = Math.abs(y - Y) / S;
+  if (d >= SI_D) return { c: 0, side, k: -1 };
+  const k = Math.round((x - X0) / PITCH);
+  const dx = x - (X0 + k * PITCH);
+  if (d < PAD_D) return Math.abs(dx) <= padHalfW(d) ? { c: 2, side, k, u: dx / padHalfW(d) } : { c: 1, side, k: -1 };
+  if (d < VIA_D) return Math.abs(dx) <= viaHalfW(d) ? { c: 3, side, k, u: dx / viaHalfW(d) } : { c: 1, side, k: -1 };
+  if (d < WIRE_D) {
+    // daisy chain: top links join pads (2m, 2m+1); bottom links join (2m+1, 2m+2)
+    const off = side < 0 ? 0 : 1;
+    const m = Math.floor((x - X0 + LINK_EXT - off * PITCH) / (2 * PITCH));
+    const a = X0 + (2 * m + off) * PITCH - LINK_EXT;
+    const b = a + PITCH + 2 * LINK_EXT;
+    if (x >= a && x <= b) return { c: 4, side, k: 2 * m + off, u: (2 * (x - a) / (b - a) - 1) };
+    return { c: 1, side, k: -1 };
+  }
+  return { c: 1, side, k: -1 };
+}
+
+// Seurat-like pigments (pure hues, mixed only optically)
+const C = {
+  white: '#f8f3e3', pyel: '#f3e5a2', lemon: '#f2df4f', chrome: '#f0ac2a', orange: '#ea7425', verm: '#d93f27',
+  crim: '#a92a50', rose: '#eaa2b4', violet: '#5a3c99', ultra: '#27369a', cobalt: '#3c64c6', ceru: '#5aa4db',
+  pblue: '#a6c5ea', lilac: '#c3ade0', emer: '#2e9a60', viri: '#1c6a61', pgreen: '#a5d7a2', navy: '#1c2353',
+};
+const pick = (list, u) => {
+  let s = 0; for (const e of list) s += e[1];
+  let v = u * s;
+  for (const e of list) { v -= e[1]; if (v <= 0) return e[0]; }
+  return list[list.length - 1][0];
+};
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+
+// oxide: light = warm whites near the glowing interface, cool lilac / blue toward the silicon
+function oxPal(L, w = 0) {
+  return [[C.white, 3.2 * L], [C.pyel, 2.2 * L], [C.rose, 0.6 * L * (1 - 0.8 * w)], [C.pgreen, 0.35 * (1 - 0.8 * w)],
+    [C.pblue, 2.6 * (1 - L) + 0.6], [C.lilac, 2.0 * (1 - L) + 0.4], [C.ceru, (1.1 * (1 - L) + 0.1) * (1 - w)], [C.cobalt, 0.5 * (1 - L) ** 2 * (1 - w)]];
+}
+// overlay band (pass B): a full-width luminous strip just above the bond plane, y ~ 472-595, where dark pigments
+// are withheld so the dark overlay text reads; the Cu-Cu seam (|y - 600| < 5) and the bond line stay untouched
+const calmW = (y) => (y < 472 || y > 595) ? 0 : y < 496 ? (y - 472) / 24 : y > 591 ? (595 - y) / 4 : 1;
+const PAL = {
+  oxHalo: [[C.white, 5], [C.pyel, 3], [C.lemon, 1.2], [C.rose, 0.5]],
+  oxBond: [[C.lilac, 2], [C.pblue, 1.5], [C.cobalt, 1.3], [C.violet, 0.4]],
+  oxCap: [[C.pgreen, 2.4], [C.ceru, 1.2], [C.pblue, 1]],
+  siHalo: [[C.navy, 3], [C.ultra, 2], [C.violet, 2]],
+  cuHalo: [[C.ultra, 2], [C.violet, 2.2], [C.crim, 1.4], [C.navy, 0.6]],
+  cuHaloCalm: [[C.verm, 2.4], [C.orange, 1.6], [C.crim, 0.5]],
+  seam: [[C.ultra, 3], [C.violet, 2], [C.cobalt, 1.2], [C.navy, 1.2]],
+};
+function siPal(L, spark) {
+  return [[C.navy, 2.2 * (1 - L) + 0.4], [C.ultra, 2.6], [C.violet, 1.6], [C.viri, 1.6], [C.cobalt, 1.4 * L + 0.3],
+    [C.emer, 1.1 * L], [C.orange, 0.25 + spark], [C.chrome, 0.4 * spark]];
+}
+function cuPal(b, w = 0) { // b: local brightness 0..1 (grain tone + modelling); grains read as distinct dot families
+  b = b + w * (0.45 + 0.4 * b - b);   // in the overlay band: compress grain tones toward the light half
+  const ss = (a, c, v) => { const q = clamp((v - a) / (c - a)); return q * q * (3 - 2 * q); };
+  const lt = ss(0.5, 0.92, b), dk = ss(0.5, 0.08, b), md = 1 - Math.max(lt, dk), kd = 1 - w;
+  return [[C.white, 1.3 * lt], [C.lemon, 3.2 * lt], [C.chrome, 2.6 * lt + 1.2 * md], [C.orange, 0.6 + 2.6 * md + 0.8 * lt],
+    [C.verm, 0.4 + 1.6 * md + 2.2 * dk], [C.crim, 3.0 * dk * kd], [C.violet, 1.3 * dk * kd], [C.ultra, (0.15 + 0.5 * dk) * kd]];
+}
+
+// smooth seeded value noise for painterly modulation
+function makeNoise(r, n = 64) {
+  const g = new Float32Array(n * n);
+  for (let i = 0; i < g.length; i++) g[i] = r();
+  return (x, y) => {
+    const xi = Math.floor(x), yi = Math.floor(y), fx = x - xi, fy = y - yi;
+    const sx = fx * fx * (3 - 2 * fx), sy = fy * fy * (3 - 2 * fy);
+    const at = (i, j) => g[((j % n + n) % n) * n + ((i % n + n) % n)];
+    const a = at(xi, yi) + (at(xi + 1, yi) - at(xi, yi)) * sx;
+    const b = at(xi, yi + 1) + (at(xi + 1, yi + 1) - at(xi, yi + 1)) * sx;
+    return a + (b - a) * sy;
+  };
+}
+
+// grains: seeds per (column, side). pre = as-bonded fine grains; post = annealed coarse grains
+function buildGrains(r, kmin, kmax) {
+  const pre = new Map(), post = new Map(), wire = new Map();
+  for (let k = kmin; k <= kmax; k++) {
+    const xc = X0 + k * PITCH;
+    for (const side of [-1, 1]) {
+      const seeds = [];
+      const n = 6 + Math.floor(r() * 4);
+      for (let i = 0; i < n; i++) {
+        const d = r() * PAD_D * S, hw = padHalfW(d / S);
+        seeds.push({ x: xc + (r() * 2 - 1) * hw, y: Y + side * d, w: r() * 10, g: r() });
+      }
+      for (let i = 0; i < 2; i++) {
+        const d = (PAD_D + (0.15 + 0.7 * r()) * (VIA_D - PAD_D)) * S;
+        seeds.push({ x: xc + (r() * 2 - 1) * 18, y: Y + side * d, w: r() * 8, g: r() });
+      }
+      pre.set(`${k},${side}`, seeds);
+      const ws = [];
+      for (let i = 0; i < 11; i++) {
+        ws.push({ x: xc - LINK_EXT + r() * (PITCH + 2 * LINK_EXT), y: Y + side * (VIA_D + r() * (WIRE_D - VIA_D)) * S, w: r() * 14, g: r() });
+      }
+      wire.set(`${k},${side}`, ws);
+    }
+    // annealed: 1-3 grains straddling the interface, plus 2-3 one-sided grains
+    const ps = [], ns = 1 + Math.floor(r() * 2.6), delay = r() * 0.04;
+    for (let i = 0; i < ns; i++) {
+      ps.push({ x: xc + (r() * 2 - 1) * 45, y: Y + (r() * 2 - 1) * 14, span: true, w: r() * 12,
+        g: i === 0 ? (k % 2 ? 0.85 : 0.2) + 0.1 * r() : r(), t0: delay + r() * 0.02 });
+    }
+    const no = 2 + Math.floor(r() * 2);
+    for (let i = 0; i < no; i++) {
+      const side = r() < 0.5 ? -1 : 1;
+      ps.push({ x: xc + (r() * 2 - 1) * 55, y: Y + side * (35 + r() * 60), span: false, side, w: r() * 10, g: r(), t0: delay + 0.02 + r() * 0.05 });
+    }
+    post.set(k, ps);
+  }
+  return { pre, post, wire };
+}
+function nearest(seeds, x, y, side) {
+  let best = null, bd = 1e9;
+  for (const s of seeds) {
+    let d = Math.hypot(x - s.x, y - s.y) - s.w;
+    if (side !== undefined && !s.span && s.side !== side) d += 60;
+    if (d < bd) { bd = d; best = s; }
+  }
+  return best;
+}
+
+const GROW_V = 420; // px/s grain-front speed (stylized; real anneal takes minutes to hours)
+const T_DONE = 0.40; // every dot has switched by this time (s)
+
+// Styled text (pass B "1 µm"): the word painted in Seurat's dots. APA Grotesk 800 mask at 1.4x, 7 % tracking; a navy underpainting inside the
+// glyphs (eroded 2 px so the dots, not the fill, make the edge), then dense dots of the scene's dark pure pigments
+// (navy / ultramarine / violet, a few crimson and cobalt accents) at the scene's accent-layer dot size (r 3.0 px, +/-14 %); around the
+// glyphs Seurat's irradiation: a 9 px halo of the complementary light pigments (warm white, pale yellow, lemon, a
+// little chrome; r 3.3 px). All dots seeded once (TFX.stipple, fixed seeds) and cached per word / size: static, legible at t = 0.
+const PT = { scale: 1.4, halo: 9, erode: 2, track: 0.07 };
+const ptCache = new Map();
+function ptBuild(word, info, size) {
+  const key = word + '|' + size;
+  if (ptCache.has(key)) return ptCache.get(key);
+  const ls = Math.round(PT.track * size);   // tracking keeps the glyphs apart once dots and halo spread them
+  const m = TFX.mask(word, { family: info.fonts.grotesk, size, weight: 800, letterSpacing: ls, pad: Math.ceil(size * 0.25) + PT.halo + 4 });
+  const canvasOf = (fn) => { const c = document.createElement('canvas'); c.width = m.w; c.height = m.h; fn(c.getContext('2d')); return c; };
+  const word2d = (c) => { c.font = TFX.font(info.fonts.grotesk, size, 800); c.textBaseline = 'alphabetic'; c.textAlign = 'left'; c.lineJoin = 'round'; c.letterSpacing = `${ls}px`; };
+  const haloC = canvasOf((c) => {
+    word2d(c); c.lineWidth = 2 * PT.halo; c.strokeStyle = '#fff'; c.fillStyle = '#fff';
+    c.strokeText(word, m.ox, m.oy); c.fillText(word, m.ox, m.oy);
+  });
+  const ha = haloC.getContext('2d', { willReadFrequently: true }).getImageData(0, 0, m.w, m.h).data;
+  const haloM = { w: m.w, h: m.h, cov(x, y) { const xi = x | 0, yi = y | 0; return xi < 0 || yi < 0 || xi >= m.w || yi >= m.h ? 0 : ha[4 * (yi * m.w + xi) + 3] / 255; } };
+  const under = canvasOf((c) => {
+    word2d(c); c.fillStyle = '#262c66'; c.fillText(word, m.ox, m.oy);
+    c.globalCompositeOperation = 'destination-out'; c.lineWidth = 2 * PT.erode; c.strokeStyle = '#000'; c.strokeText(word, m.ox, m.oy);
+  });
+  const haloDots = TFX.stipple(haloM, { density: 0.075, r: 3.3, rJitter: 0.15, seed: 6101,
+    palette: [C.white, C.white, C.white, C.pyel, C.pyel, C.lemon, C.lemon, C.chrome] });
+  const inkDots = TFX.stipple(m, { density: 0.09, r: 3.0, rJitter: 0.14, seed: 6102,
+    palette: [C.navy, C.navy, C.navy, C.ultra, C.ultra, C.ultra, C.violet, C.violet, C.crim, C.cobalt] });
+  const out = canvasOf((c) => { c.drawImage(haloDots, 0, 0); c.drawImage(under, 0, 0); c.drawImage(inkDots, 0, 0); });
+  const r = { m, out };
+  if (ptCache.size > 8) ptCache.clear();
+  ptCache.set(key, r);
+  return r;
+}
+
+APA.scene({
+  meta: { text: 'dark' },
+  async init(p) {
+    ({ ctx } = APA.canvas('2d', { willReadFrequently: true }));
+    const r = APA.rng(60601);
+    const nz = makeNoise(APA.rng(77));
+    stat = document.createElement('canvas');
+    stat.width = WW; stat.height = H;
+    const sc = stat.getContext('2d', { willReadFrequently: true });
+
+    // primed canvas ground and a broad underpainting per material (gaps between dots show it)
+    const UR = { 0: [52, 58, 112], 1: [236, 228, 206], 2: [214, 126, 66], 3: [214, 126, 66], 4: [214, 126, 66] };
+    const img = sc.createImageData(WW, H);
+    for (let y = 0; y < H; y++) for (let x = 0; x < WW; x++) {
+      const c = UR[region(x, y).c], i = 4 * (y * WW + x);
+      img.data[i] = c[0]; img.data[i + 1] = c[1]; img.data[i + 2] = c[2]; img.data[i + 3] = 255;
+    }
+    sc.putImageData(img, 0, 0);
+
+    const kmin = Math.floor(-X0 / PITCH) - 1, kmax = Math.ceil((WW - X0) / PITCH) + 1;
+    const G = buildGrains(r, kmin, kmax);
+
+    // dot layers: jittered grids seeded once. Big base touches, a second interleaved pass, sparse accents
+    const layers = [{ sp: 8.6, r0: 3.9, jr: 0.7 }, { sp: 8.6, r0: 3.5, jr: 0.6, off: 4.3 }, { sp: 12.5, r0: 3.0, jr: 0.5, acc: true }];
+    const statDots = [], dynDots = [];
+    const ring = [[1, 0], [-1, 0], [0, 1], [0, -1], [0.7, 0.7], [-0.7, 0.7], [0.7, -0.7], [-0.7, -0.7]];
+    for (const L of layers) {
+      const o = L.off || 0;
+      for (let gy = -L.sp + o; gy < H + L.sp; gy += L.sp) for (let gx = -L.sp + o; gx < WW + L.sp; gx += L.sp) {
+        const x = gx + (r() - 0.5) * L.sp * 0.85, y = gy + (r() - 0.5) * L.sp * 0.85;
+        const rad = L.r0 + (r() - 0.5) * 2 * L.jr;
+        const u = r(), u2 = r();
+        const R = region(x, y);
+        let nb = -1;   // differing material within 11 px -> irradiation halo
+        for (const [ax, ay] of ring) { const c2 = region(x + ax * 11, y + ay * 11).c; if (c2 !== R.c && !(R.c >= 2 && c2 >= 2)) { nb = c2; break; } }
+        const dy = Math.abs(y - Y), dS = dy / S;
+        const n1 = nz(x / 150, y / 150), n2 = nz(x / 47 + 31, y / 47 + 17);
+        if (R.c === 0) {
+          const Ls = clamp(0.25 + 0.5 * n1 + 0.25 * n2 - 0.25 * (dS - SI_D) * 4);
+          const spark = clamp(1 - (dS - SI_D) * 7) * 1.2;
+          statDots.push({ x, y, rad, col: pick(nb === 1 ? PAL.siHalo : siPal(Ls, spark), u) });
+        } else if (R.c === 1) {
+          // light gathers at the bond plane, cools toward the silicon
+          const L0 = clamp(1 - dS / SI_D * 0.95 + 0.35 * (n1 - 0.5) + 0.2 * (n2 - 0.5));
+          const w = calmW(y);
+          let pal = oxPal(L0, w);
+          if (dy < 4) pal = PAL.oxBond;
+          else if (Math.abs(dS - VIA_D) < 0.014 || Math.abs(dS - WIRE_D) < 0.014) pal = PAL.oxCap;
+          if (nb >= 2) pal = PAL.oxHalo;
+          else if (nb === 0 && u2 < 0.6) pal = PAL.oxHalo;
+          statDots.push({ x, y, rad: L.acc ? rad * 0.9 : rad, col: pick(pal, u) });
+        } else {
+          // modelling: light from upper left of each body
+          const m = clamp(0.5 - 0.32 * R.u + 0.2 * (n2 - 0.5));
+          if (R.c === 4) {
+            const s = nearest(G.wire.get(`${R.k},${R.side}`), x, y);
+            const yy = (Math.abs(y - Y) / S - VIA_D) / (WIRE_D - VIA_D); // 0 at via side .. 1 at far side
+            const b = clamp(0.5 * s.g + 0.5 * m - 0.15 * (y < Y ? 1 - yy : yy) + 0.1);
+            statDots.push({ x, y, rad, col: nb === 1 ? pick(PAL.cuHalo, u) : pick(cuPal(b), u) });
+          } else {
+            const preS = nearest(G.pre.get(`${R.k},${R.side}`), x, y);
+            const halo = nb === 1, w = calmW(y);
+            const haloPal = w > 0.5 ? PAL.cuHaloCalm : PAL.cuHalo;
+            const dd = { x, y, rad, seam: R.c === 2 && dy < 5 };
+            dd.colPre = halo ? pick(haloPal, u) : dd.seam ? pick(PAL.seam, u) : pick(cuPal(clamp(0.8 * preS.g + 0.2 * m + 0.05), w), u);
+            if (R.c === 2) {
+              const s = nearest(G.post.get(R.k), x, y, R.side);
+              dd.tsw = Math.min(T_DONE, s.t0 + 0.01 + Math.hypot(x - s.x, y - s.y) / GROW_V + u2 * 0.04);
+              const keepSeam = dd.seam && !s.span;
+              dd.colPost = halo || keepSeam ? dd.colPre : pick(cuPal(clamp(0.85 * s.g + 0.15 * m + 0.03), w), u);
+            } else { dd.tsw = 1e9; dd.colPost = dd.colPre; }
+            dynDots.push(dd);
+          }
+        }
+      }
+    }
+    const by = new Map();
+    for (const d of statDots) { if (!by.has(d.col)) by.set(d.col, []); by.get(d.col).push(d); }
+    for (const [col, arr] of by) {
+      sc.fillStyle = col; sc.beginPath();
+      for (const d of arr) { sc.moveTo(d.x + d.rad, d.y); sc.arc(d.x, d.y, d.rad, 0, 6.2832); }
+      sc.fill();
+    }
+    dyn = dynDots;
+    fin = document.createElement('canvas');
+    fin.width = WW; fin.height = H;
+    const fc = fin.getContext('2d', { willReadFrequently: true });
+    fc.drawImage(stat, 0, 0);
+    drawDyn(fc, T_DONE);
+  },
+  render(t, p) {
+    const pan = PAN_V * t;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    if (t >= T_DONE) { ctx.drawImage(fin, -pan, 0); return; }   // settled: one cached image
+    ctx.drawImage(stat, -pan, 0);
+    ctx.setTransform(1, 0, 0, 1, -pan, 0);
+    drawDyn(ctx, t);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+  },
+  text(g, word, t, p, info) {
+    const { m, out } = ptBuild(word, info, Math.round(PT.scale * info.size));
+    TFX.blit(g, out, m, info.x, info.baseline);
+  },
+});
+</script>
+</body>
+</html>

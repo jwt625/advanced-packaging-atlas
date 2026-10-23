@@ -1,0 +1,259 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>m2 package top</title>
+<script src="../lib/apa.js"></script>
+<script src="../lib/textfx.js"></script>
+</head>
+<body>
+<script>
+// "more to" ladder, rung 3: top-down photo of the 50 x 50 mm embedded-glass-interposer package
+// (ectc51906.2022.00180-b): 2 SoC emulators (19 x 20 mm) stacked in the centre column, 8 HBM emulators
+// (5.5 x 7.7 mm, portrait) in pairs left and right of each SoC, amber capillary-underfill fillets, brown routing over
+// the embedded dies between SoC and HBM, lighter die field with pad dots, teal solder resist, columns of small pads
+// near the left and right edges. 27 px/mm; package x 285-1635, bottom edge on y = 600, SoC-2 bottom 4.45 mm above it.
+// Built once at init (sharp layer -> 1 px blur -> vignette, static grain); render() only pans 10 px/s leftward.
+// Sources, chosen values and deviations: m2.notes.md
+const { W, H, LINE_Y } = APA;
+let ctx, tex;
+
+const K = 27;                                  // px per mm (chosen; notes)
+const PKG = 50;                                // package, mm
+const PX0 = 960 - PKG * K / 2;                 // 285
+const PAN = 10, PAN_T = 3, TEX_X0 = -6, TEX_W = W + 46;
+const X = (mm) => PX0 + mm * K;                // mm from the package left edge -> px
+const Y = (mm) => LINE_Y - mm * K;             // mm above the package bottom edge -> px
+
+const SOC = { w: 19, h: 20 }, HBM = { w: 5.5, h: 7.7 };
+const SOC_GAP = 1.1;                                       // between SoC-1 and SoC-2, mm (crop)
+const SOC_Y0 = (PKG - 2 * SOC.h - SOC_GAP) / 2;            // 4.45 mm: column centred (derived)
+const SOC_X0 = (PKG - SOC.w) / 2;                          // 15.5 mm
+const HBM_SOC = 3.5;                                       // HBM inner edge to SoC, mm (crop)
+const HBM_GAP = 1.5;                                       // between the two HBMs of a pair, mm (crop)
+const FIL = 0.5;                                           // CUF fillet width, mm (chosen)
+const EMB = 7.2;                                           // embedded die, mm
+
+function dies() {
+  const out = [];
+  for (let k = 0; k < 2; k++) {
+    const sy = SOC_Y0 + k * (SOC.h + SOC_GAP);
+    out.push({ kind: 'soc', x: SOC_X0, y: sy, w: SOC.w, h: SOC.h });
+    const py = sy + (SOC.h - (2 * HBM.h + HBM_GAP)) / 2;    // HBM pair centred on its SoC
+    for (const side of [-1, 1]) {
+      const hx = side < 0 ? SOC_X0 - HBM_SOC - HBM.w : SOC_X0 + SOC.w + HBM_SOC;
+      out.push({ kind: 'hbm', x: hx, y: py, w: HBM.w, h: HBM.h });
+      out.push({ kind: 'hbm', x: hx, y: py + HBM.h + HBM_GAP, w: HBM.w, h: HBM.h });
+      out.push({ kind: 'emb', side, x: side < 0 ? hx + HBM.w : SOC_X0 + SOC.w, y: py + HBM.h + HBM_GAP / 2 - EMB / 2,
+        w: HBM_SOC, h: EMB });
+    }
+  }
+  return out;
+}
+
+// rectangle in mm (x, y = lower-left corner above the bottom edge) -> px rect
+function R(d) { return [X(d.x), Y(d.y + d.h), d.w * K, d.h * K]; }
+
+function drawSharp(g, rnd) {
+  // backdrop: dark neutral, slightly lighter behind the package
+  const bg = g.createRadialGradient(960, 300, 100, 960, 300, 1300);
+  bg.addColorStop(0, '#24262a'); bg.addColorStop(1, '#0f1012');
+  g.fillStyle = bg; g.fillRect(TEX_X0, 0, TEX_W, H);
+  // soft shadow of the package on the backdrop
+  g.save(); g.filter = 'blur(16px)'; g.fillStyle = 'rgba(0,0,0,0.6)';
+  g.fillRect(X(0) + 8, Y(PKG), PKG * K + 6, PKG * K + 18); g.restore();
+
+  // substrate: teal solder resist
+  g.fillStyle = '#1e6870';
+  g.fillRect(X(0), Y(PKG), PKG * K, PKG * K);
+  // orange-peel: static blurred mottling, low amplitude
+  g.save();
+  g.beginPath(); g.rect(X(0), Y(PKG), PKG * K, PKG * K); g.clip();
+  {
+    const op = document.createElement('canvas'); op.width = PKG * K; op.height = LINE_Y;
+    const og = op.getContext('2d');
+    for (let n = 0; n < 2600; n++) {
+      const x = rnd() * PKG * K, y = rnd() * LINE_Y, r = 3 + rnd() * 7;
+      og.fillStyle = rnd() < 0.5 ? 'rgba(255,255,255,0.03)' : 'rgba(0,20,25,0.05)';
+      og.beginPath(); og.arc(x, y, r, 0, 2 * Math.PI); og.fill();
+    }
+    g.filter = 'blur(3px)'; g.drawImage(op, X(0), 0); g.filter = 'none';
+  }
+
+  // die field: lighter grey-green opening around the dies (crop), with a dot grid of pads
+  const fieldTop = PKG - 6, fieldX0 = 6.0, fieldX1 = PKG - 6.0;
+  const fSide = SOC_Y0 + (SOC.h - (2 * HBM.h + HBM_GAP)) / 2 - 1.0;   // 1 mm below the lowest HBM
+  g.fillStyle = '#4f7f74';
+  g.beginPath();
+  g.moveTo(X(fieldX0), Y(fieldTop)); g.lineTo(X(fieldX1), Y(fieldTop)); g.lineTo(X(fieldX1), Y(fSide));
+  g.lineTo(X(SOC_X0 + SOC.w + FIL), Y(fSide)); g.lineTo(X(SOC_X0 + SOC.w + FIL), Y(SOC_Y0 - FIL));
+  g.lineTo(X(SOC_X0 - FIL), Y(SOC_Y0 - FIL)); g.lineTo(X(SOC_X0 - FIL), Y(fSide));
+  g.lineTo(X(fieldX0), Y(fSide)); g.closePath(); g.fill();
+  g.save(); g.clip();
+  g.fillStyle = 'rgba(200,215,190,0.45)';
+  const dp = 0.5 * K;
+  for (let y = Y(fSide) - dp / 2; y > 0; y -= dp) {
+    for (let x = X(fieldX0) + dp / 2; x < X(fieldX1); x += dp) g.fillRect(x - 1.5, y - 1.5, 3, 3);
+  }
+  g.restore();
+  // thin darker outline of the opening
+  g.strokeStyle = 'rgba(10,50,50,0.5)'; g.lineWidth = 2; g.stroke();
+  g.restore();
+
+  // edge pad columns: small bright Cu pads, 5 columns per side, 1.5-4.7 mm from the edges (crop, compressed)
+  g.fillStyle = '#d9d0b4';
+  for (const side of [0, 1]) {
+    for (let c = 0; c < 5; c++) {
+      const xm = 1.5 + c * 0.8, x = side ? X(PKG - xm) : X(xm);
+      for (let ym = 1.4; ym <= 23.0; ym += 0.55) g.fillRect(x - 3.5, Y(ym) - 3.5, 7, 7);
+    }
+  }
+
+  const ds = dies();
+  // brown routing / embedded-die region between SoC and HBM (seen through the build-up)
+  for (const d of ds.filter((e) => e.kind === 'emb')) {
+    const [x, y, w, h] = R(d);
+    g.fillStyle = '#6b4a33'; g.fillRect(x, y, w, h);
+    g.strokeStyle = 'rgba(190,140,95,0.55)'; g.lineWidth = 2;
+    g.beginPath();
+    for (let i = 1; i < 10; i++) { const yy = y + (i / 10) * h; g.moveTo(x + 4, yy); g.lineTo(x + w - 4, yy + (d.side < 0 ? 1 : -1) * (i - 5) * 3); }
+    g.stroke();
+    g.fillStyle = 'rgba(40,110,115,0.9)';                       // teal bars at the ends (f09 crop)
+    g.fillRect(x, y - 6, w, 6); g.fillRect(x, y + h, w, 6);
+  }
+  // CUF fillets: amber, translucent, fading outward from each die edge
+  const fpx = FIL * K;
+  for (const d of ds.filter((e) => e.kind !== 'emb')) {
+    const [x, y, w, h] = R(d);
+    g.save();
+    g.filter = 'blur(2px)';
+    g.fillStyle = 'rgba(150,100,40,0.38)'; g.fillRect(x - fpx, y - fpx, w + 2 * fpx, h + 2 * fpx);
+    g.fillStyle = 'rgba(165,110,45,0.5)'; g.fillRect(x - fpx * 0.5, y - fpx * 0.5, w + fpx, h + fpx);
+    g.restore();
+  }
+  // dies: near-mirror Si backside, diagonal specular gradient, faint grinding arcs, bevel highlights
+  for (const d of ds.filter((e) => e.kind !== 'emb')) {
+    const [x, y, w, h] = R(d);
+    const s = (rnd() - 0.5) * 6 + (d.kind === 'hbm' ? 4 : 0);
+    const gr = g.createLinearGradient(x, y, x + w * 0.9, y + h);
+    gr.addColorStop(0, `rgb(${84 + s},${88 + s},${96 + s})`);
+    gr.addColorStop(0.45, `rgb(${52 + s},${55 + s},${61 + s})`);
+    gr.addColorStop(1, `rgb(${34 + s},${36 + s},${40 + s})`);
+    g.fillStyle = gr; g.fillRect(x, y, w, h);
+    g.save(); g.beginPath(); g.rect(x, y, w, h); g.clip();
+    const cx = x + w * (0.2 + rnd() * 0.6), cy = y - h * (1.5 + rnd());
+    g.lineWidth = 1;
+    for (let i = 0; i < 70; i++) {
+      const r = Math.hypot(w, h) * 0.6 + i * (h * 2.6 / 70) + rnd() * 4;
+      g.strokeStyle = `rgba(255,255,255,${0.012 + rnd() * 0.02})`;
+      g.beginPath(); g.arc(cx, cy, r, 0, Math.PI); g.stroke();
+    }
+    g.restore();
+    g.fillStyle = 'rgba(190,198,210,0.55)';
+    g.fillRect(x, y, w, 2); g.fillRect(x, y, 2, h);
+    g.fillStyle = 'rgba(0,0,0,0.45)';
+    g.fillRect(x, y + h - 2, w, 2); g.fillRect(x + w - 2, y, 2, h);
+  }
+  // package edge: thin lighter laminate band on the four sides, crisp outer edge (bottom edge on y = 600)
+  g.fillStyle = 'rgba(150,205,205,0.55)';
+  g.fillRect(X(0), Y(PKG), 2, PKG * K); g.fillRect(X(PKG) - 2, Y(PKG), 2, PKG * K);
+  g.fillRect(X(0), LINE_Y - 3, PKG * K, 3);
+  // overhead light: broad soft sheen (upper left) across the package
+  g.save(); g.beginPath(); g.rect(X(0), Y(PKG), PKG * K, PKG * K); g.clip();
+  const sp = g.createRadialGradient(640, 40, 0, 640, 40, 1100);
+  sp.addColorStop(0, 'rgba(230,245,255,0.10)'); sp.addColorStop(1, 'rgba(230,245,255,0)');
+  g.fillStyle = sp; g.fillRect(X(0), Y(PKG), PKG * K, PKG * K);
+  g.restore();
+}
+
+APA.scene({
+  meta: { text: 'light' },
+  init() {
+    ({ ctx } = APA.canvas('2d', { alpha: false }));
+    const rnd = APA.rng(2050);
+    const sharp = document.createElement('canvas'); sharp.width = TEX_W; sharp.height = H;
+    const sg = sharp.getContext('2d');
+    sg.translate(-TEX_X0, 0);
+    drawSharp(sg, rnd);
+    tex = document.createElement('canvas'); tex.width = TEX_W; tex.height = H;
+    const tg = tex.getContext('2d', { alpha: false });
+    tg.filter = 'blur(1px)'; tg.drawImage(sharp, 0, 0); tg.filter = 'none';
+    tg.drawImage(sharp, 0, LINE_Y - 3, TEX_W, 6, 0, LINE_Y - 3, TEX_W, 6);   // keep the bottom edge crisp
+    const v = tg.createRadialGradient(TEX_W / 2, 420, 350, TEX_W / 2, 420, 1250);
+    v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.35)');
+    tg.fillStyle = v; tg.fillRect(0, 0, TEX_W, H);
+    const img = tg.getImageData(0, 0, TEX_W, H), px = img.data;
+    for (let i = 0; i < px.length; i += 4) {
+      const n = (rnd() + rnd() - 1) * 5;
+      px[i] += n; px[i + 1] += n; px[i + 2] += n;
+    }
+    tg.putImageData(img, 0, 0);
+  },
+  render(t) {
+    // horizontal pan, 10 px/s leftward, held after 3 s
+    const dx = TEX_X0 - PAN * Math.min(Math.max(t, 0), PAN_T);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.drawImage(tex, Math.round(dx * 4) / 4, 0);
+  },
+  // overlay word as package top-mark ink (pad-printed epoxy marking ink): plain marking sans, slightly uneven ink
+  // density (static low-frequency mottle) and a thin ink-thickness shadow down-right, then the photo's look: 1 px
+  // blur, upper-left sheen, static grain (+-5 levels, keyed to display pixels). Size = info.size, centred on x 960,
+  // baseline 565.
+  text(g, word, t, p, info) {
+    const s = info.size;
+    const ink = inkRGB(info, [236, 235, 229], [22, 24, 26]);
+    const m = TFX.mask(word, { family: info.fonts.grotesk, size: s, weight: 500, letterSpacing: s * 0.02 });
+    const left = Math.round(info.x - m.width / 2 - m.ox), top = Math.round(info.baseline - m.oy);
+    // ink film: colour clipped to the glyphs, density 0.86-1.0 from a fixed screen-space mottle
+    const film = TFX.fill(m, (c, w, h) => {
+      c.fillStyle = `rgb(${ink.join(',')})`; c.fillRect(0, 0, w, h);
+      for (let n = 0; n < 60; n++) {
+        const x = TFX.hash(2051, n, 0) * 1920 - left, y = 480 + TFX.hash(2051, n, 1) * 120 - top;
+        const rr = 6 + TFX.hash(2051, n, 2) * 14;
+        const gr = c.createRadialGradient(x, y, 0, x, y, rr);
+        gr.addColorStop(0, 'rgba(120,124,128,0.24)'); gr.addColorStop(1, 'rgba(120,124,128,0)');
+        c.fillStyle = gr; c.fillRect(x - rr, y - rr, 2 * rr, 2 * rr);
+      }
+    });
+    const out = document.createElement('canvas'); out.width = m.w; out.height = m.h;
+    const og = out.getContext('2d', { willReadFrequently: true });
+    og.filter = 'blur(1px)';
+    og.globalAlpha = 0.45; og.drawImage(TFX.fill(m, '#000'), 1.2, 1.4);     // ink thickness: thin shadow
+    og.globalAlpha = 1; og.drawImage(film, 0, 0);
+    og.filter = 'none';
+    og.globalCompositeOperation = 'source-atop';                            // package sheen from (640, 40)
+    const sp = og.createRadialGradient(640 - left, 40 - top, 0, 640 - left, 40 - top, 1100);
+    sp.addColorStop(0, 'rgba(255,255,255,0.10)'); sp.addColorStop(1, 'rgba(0,0,0,0.05)');
+    og.fillStyle = sp; og.fillRect(0, 0, m.w, m.h);
+    og.globalCompositeOperation = 'source-over';
+    inkGrain(og, m.w, m.h, left, top, 5, 2052);
+    g.drawImage(out, left, top);
+  },
+});
+
+// overlay ink colour: 'light' / 'dark' tone -> the style's own ink, any other text_color -> that colour
+function inkRGB(info, light, dark) {
+  if (info.tone === 'light') return light;
+  if (info.tone === 'dark') return dark;
+  const c = document.createElement('canvas'); c.width = c.height = 1;
+  const k = c.getContext('2d', { willReadFrequently: true });
+  k.fillStyle = info.color; k.fillRect(0, 0, 1, 1);
+  return [...k.getImageData(0, 0, 1, 1).data.slice(0, 3)];
+}
+
+// static grain on the overlay's inked pixels, keyed to display coordinates (same amplitude as the photo's grain)
+function inkGrain(c2, w, h, left, top, amp, seed) {
+  const img = c2.getImageData(0, 0, w, h), px = img.data;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const k = (y * w + x) * 4;
+      if (!px[k + 3]) continue;
+      const n = (TFX.hash(seed, left + x, top + y) + TFX.hash(seed + 1, left + x, top + y) - 1) * amp;
+      px[k] += n; px[k + 1] += n; px[k + 2] += n;
+    }
+  }
+  c2.putImageData(img, 0, 0);
+}
+</script>
+</body>
+</html>

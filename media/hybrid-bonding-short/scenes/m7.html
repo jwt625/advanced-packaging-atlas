@@ -1,0 +1,229 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>m7 si-if dielets</title>
+<script src="../lib/apa.js"></script>
+<script src="../lib/textfx.js"></script>
+</head>
+<body>
+<script>
+// "more to" ladder, m7: optical brightfield top view of two dielets assembled on a Si-IF (silicon interconnect
+// fabric), looking at the gap between them. 4 px/um. Upper dielet backside fills y < 600 (its edge on y = 600), the
+// 59 um gap (y 600-836) shows the Si-IF floor with one SuperCHIPS interface bundle: 64 Cu wires at 4 um pitch crossing
+// the gap; the lower dielet starts at y = 836. Pillars (9.8 um pitch) sit under the dielets, hidden.
+// Direct Cu-Cu thermocompression bonds, not hybrid bonds. Motion: stage drift 10 px/s. Valid for t in [0, 3].
+// Sources and choices: m7.notes.md.
+const { W, H, LINE_Y } = APA;
+const S = 4;                                  // px per um (chosen)
+const GAP = 59;                               // um, inter-dielet gap (ectc51906.2022.00332 Fig. 3(c) label)
+const WIRE_P = 4, WIRE_W = 2, NWIRE = 64;     // um pitch (p.2), width (chosen, not found), links per interface (p.3)
+const Y_LOW = LINE_Y + GAP * S;               // 836: lower dielet edge
+const MX = 48, SW = W + 2 * MX;               // margin for the drift
+const DRIFT = 10;                             // px/s
+
+const DIE = [196, 182, 170];                  // dielet Si backside under warm brightfield: beige-grey
+const FLOOR = [44, 42, 37];                   // Si-IF surface deep in the gap: dark, defocused
+const WIRE = [228, 182, 114];                 // Cu wire on Si-IF: gold-tan
+
+let ctx, sample, vignC;
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rgb = (c, a = 1) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
+function mk(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+function makeNoise(r, n = 64) {
+  const g = new Float32Array(n * n);
+  for (let i = 0; i < g.length; i++) g[i] = r();
+  return (x, y) => {
+    const xi = Math.floor(x), yi = Math.floor(y), fx = x - xi, fy = y - yi;
+    const sx = fx * fx * (3 - 2 * fx), sy = fy * fy * (3 - 2 * fy);
+    const at = (i, j) => g[((j % n + n) % n) * n + ((i % n + n) % n)];
+    const a = at(xi, yi) + (at(xi + 1, yi) - at(xi, yi)) * sx;
+    const b = at(xi, yi + 1) + (at(xi + 1, yi + 1) - at(xi, yi + 1)) * sx;
+    return a + (b - a) * sy;
+  };
+}
+
+function buildSample() {
+  const r = APA.rng(7701);
+  // --- gap layer (Si-IF floor + wires), drawn on its own canvas and defocused slightly
+  const gapC = mk(SW, H), g = gapC.getContext('2d');
+  g.translate(MX, 0);
+  g.fillStyle = rgb(FLOOR);
+  g.fillRect(-MX, LINE_Y - 40, SW, Y_LOW - LINE_Y + 80);
+  const x0 = 960 - (NWIRE / 2) * WIRE_P * S;               // bundle centred on x = 960
+  for (let k = 0; k < NWIRE; k++) {
+    const xc = x0 + (k + 0.5) * WIRE_P * S;
+    const f = 0.9 + 0.12 * r();
+    g.fillStyle = rgb(WIRE.map((v) => v * f));
+    g.fillRect(xc - WIRE_W * S / 2, LINE_Y - 40, WIRE_W * S, Y_LOW - LINE_Y + 80);
+    // lighter crown along the wire centre (rounded plated top catches the light)
+    g.fillStyle = 'rgba(255,236,196,0.22)';
+    g.fillRect(xc - 1, LINE_Y - 40, 2, Y_LOW - LINE_Y + 80);
+  }
+  // shadowing by the dielet sidewalls: the floor is lit through a 59 um slot, darker toward both edges
+  const sh = g.createLinearGradient(0, LINE_Y, 0, Y_LOW);
+  sh.addColorStop(0, 'rgba(8,7,6,0.78)'); sh.addColorStop(0.2, 'rgba(8,7,6,0.30)');
+  sh.addColorStop(0.5, 'rgba(8,7,6,0.06)');
+  sh.addColorStop(0.8, 'rgba(8,7,6,0.30)'); sh.addColorStop(1, 'rgba(8,7,6,0.78)');
+  g.fillStyle = sh;
+  g.fillRect(-MX, LINE_Y, SW, Y_LOW - LINE_Y);
+
+  // --- composite: defocused gap, then the dielet backsides (in focus) on top
+  const out = mk(SW, H), c = out.getContext('2d');
+  c.filter = 'blur(1.6px)';
+  c.drawImage(gapC, 0, 0);
+  c.filter = 'none';
+  c.translate(MX, 0);
+  c.fillStyle = rgb(DIE);
+  c.fillRect(-MX, 0, SW, LINE_Y);
+  c.fillRect(-MX, Y_LOW, SW, H - Y_LOW);
+
+  // backside residue stain (low contrast, upper-left, away from the text band) and one particle on the lower dielet
+  c.save();
+  c.filter = 'blur(14px)';
+  c.beginPath();
+  for (let k = 0; k <= 24; k++) {
+    const a = (k / 24) * 2 * Math.PI, rr = 150 * (0.75 + 0.35 * Math.sin(3 * a + 1.1) * 0.6 + 0.15 * Math.cos(5 * a));
+    const px = 330 + rr * 1.4 * Math.cos(a), py = 230 + rr * Math.sin(a);
+    k ? c.lineTo(px, py) : c.moveTo(px, py);
+  }
+  c.closePath();
+  c.fillStyle = 'rgba(150,140,140,0.16)';
+  c.fill();
+  c.restore();
+  c.save();
+  c.filter = 'blur(2px)';
+  c.beginPath(); c.arc(1590, 958, 11, 0, 2 * Math.PI); c.fillStyle = 'rgba(70,58,50,0.85)'; c.fill();
+  c.beginPath(); c.arc(1590, 958, 20, 0, 2 * Math.PI); c.fillStyle = 'rgba(120,104,92,0.18)'; c.fill();
+  c.restore();
+
+  // dielet edges: thin dark outline where the backside chamfer turns away from the objective
+  c.fillStyle = 'rgba(40,34,28,0.85)';
+  c.fillRect(-MX, LINE_Y - 2, SW, 2);
+  c.fillRect(-MX, Y_LOW, SW, 2);
+  c.setTransform(1, 0, 0, 1, 0, 0);
+
+  // mottling + warm sheen + fine static speckle on the dielets; faint speckle on the floor
+  const img = c.getImageData(0, 0, SW, H), a = img.data;
+  const mo = makeNoise(APA.rng(7702), 64), mo2 = makeNoise(APA.rng(7703), 64);
+  const rs = APA.rng(7704);
+  for (let y = 0; y < H; y++) {
+    const onDie = y < LINE_Y - 2 || y >= Y_LOW + 2;
+    const inBand = y >= 480 && y < LINE_Y;
+    for (let x = 0; x < SW; x++) {
+      const i = 4 * (y * SW + x);
+      if (onDie) {
+        const amp = inBand ? 0.5 : 1;
+        const m = (mo(x / 420, y / 420) - 0.5) * 14 + (mo2(x / 90, y / 90) - 0.5) * 5 * amp;
+        const sheen = 10 * (1 - Math.abs((x - MX) / W + y / H - 0.9));      // soft diagonal sheen
+        const n = (rs() - 0.5) * 6;
+        a[i] += m + sheen + n; a[i + 1] += m + sheen * 0.9 + n; a[i + 2] += m * 0.9 + sheen * 0.7 + n;
+      } else {
+        const n = (rs() - 0.5) * 3;
+        a[i] += n; a[i + 1] += n; a[i + 2] += n;
+      }
+    }
+  }
+  c.putImageData(img, 0, 0);
+  const soft = mk(SW, H), sc = soft.getContext('2d');
+  sc.filter = 'blur(0.6px)';
+  sc.drawImage(out, 0, 0);
+  return soft;
+}
+
+function buildVignette() {
+  vignC = mk(W, H);
+  const v = vignC.getContext('2d');
+  const R = Math.hypot(W, H) / 2;
+  const g = v.createRadialGradient(960, 560, 0.3 * R, 960, 560, 1.05 * R);
+  g.addColorStop(0, 'rgb(255,255,255)'); g.addColorStop(0.6, 'rgb(248,244,236)');
+  g.addColorStop(1, 'rgb(214,202,184)');
+  v.fillStyle = g; v.fillRect(0, 0, W, H);
+}
+
+// ---- overlay word ("more to"): lettering as a fine Cu metal-layer pattern, like reticle text in the optical image.
+// Dark tone (unflipped, band over the beige dielet backside): each glyph is a window onto the dark, defocused Si-IF
+// floor carrying a fine vertical Cu line grating (the gap's wire bundle in miniature; 8 px pitch, 2 px lines), outlined
+// by the same thin dark chamfer line as the dielet edges. Light tone (flip, band over the dark gap): solid gold-tan Cu
+// glyphs with a lighter plated crown (eroded core), like the wires, ringed by a dark rim to separate them from the wires. In-focus edge blur 0.6 px as the scene; the grating
+// inside the windows is defocused (1.2 px). Size = info.size.
+function relLum(css) {
+  const mm = /^#([0-9a-f]{6})$/i.exec(css || '');
+  if (!mm) return null;
+  const v = parseInt(mm[1], 16), lin = (c) => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+  return 0.2126 * lin(v >> 16) + 0.7152 * lin((v >> 8) & 255) + 0.0722 * lin(v & 255);
+}
+function erode(m, wd) {                                 // glyph core: mask kept only where all 8 offsets cover it
+  const c = mk(m.w, m.h), k = c.getContext('2d');
+  k.drawImage(m.canvas, 0, 0);
+  k.globalCompositeOperation = 'destination-in';
+  for (let i = 0; i < 8; i++) {
+    const a = (i * Math.PI) / 4;
+    k.drawImage(m.canvas, Math.round(wd * Math.cos(a)), Math.round(wd * Math.sin(a)));
+  }
+  return c;
+}
+function reticleWord(g, word, info) {
+  const size = info.size;
+  const m = TFX.mask(word, { family: info.fonts.grotesk, size, weight: 700 });
+  const L = info.color ? relLum(info.color) : null;
+  const dark = L == null ? info.tone === 'dark' : L < 0.18;
+  const layer = mk(m.w, m.h), c = layer.getContext('2d');
+  if (dark) {
+    const grat = mk(m.w, m.h), gk = grat.getContext('2d');
+    gk.filter = 'blur(1.2px)';                                                    // defocused floor + lines
+    const inner = mk(m.w, m.h), ik = inner.getContext('2d');
+    ik.fillStyle = 'rgb(24,22,19)'; ik.fillRect(0, 0, m.w, m.h);
+    const pitch = 8, lw = 2;
+    ik.fillStyle = 'rgb(150,116,70)';
+    const left = Math.round(info.x - m.width / 2 - m.ox);                           // grating fixed on screen
+    for (let x = (((-left) % pitch) + pitch) % pitch - pitch; x < m.w; x += pitch) ik.fillRect(x, 0, lw, m.h);
+    gk.drawImage(inner, 0, 0);
+    c.drawImage(TFX.fill(m, grat), 0, 0);
+    c.drawImage(TFX.outline(m, { width: 2, color: 'rgba(40,34,28,0.95)' }), 0, 0); // chamfer line, as the dielet edges
+  } else {
+    const edge = TFX.fill(m, 'rgb(28,24,20)'), rw = Math.max(3, Math.round(size * 0.04)); // dark rim vs the wires
+    for (let i = 0; i < 8; i++) {
+      const a = (i * Math.PI) / 4;
+      c.drawImage(edge, Math.round(rw * Math.cos(a)), Math.round(rw * Math.sin(a)));
+    }
+    c.drawImage(TFX.fill(m, rgb(WIRE)), 0, 0);
+    const core = erode(m, Math.max(2, Math.round(size * 0.035)));
+    const cr = mk(m.w, m.h), ck = cr.getContext('2d');
+    ck.filter = 'blur(1.5px)'; ck.drawImage(core, 0, 0);
+    ck.filter = 'none'; ck.globalCompositeOperation = 'source-in';
+    ck.fillStyle = 'rgba(255,236,196,0.55)'; ck.fillRect(0, 0, m.w, m.h);
+    c.drawImage(cr, 0, 0);                                                         // plated crown
+  }
+  const soft = mk(m.w, m.h), sk = soft.getContext('2d');
+  sk.filter = 'blur(0.6px)'; sk.drawImage(layer, 0, 0);
+  TFX.blit(g, soft, m, info.x, info.baseline);
+}
+
+APA.scene({
+  meta: { text: 'dark' },
+  text(g, word, t, p, info) { reticleWord(g, word, info); },
+  async init(p) {
+    ({ ctx } = APA.canvas('2d'));
+    sample = buildSample();
+    buildVignette();
+    this.render(0, p);
+    ctx.getImageData(0, 0, 1, 1);
+    const wc = mk(W, H).getContext('2d');            // warm-up of the word path (fonts, filters)
+    reticleWord(wc, 'more to', { fonts: APA.FONTS, size: 64, color: '#141414', tone: 'dark', x: 960, baseline: 565 });
+    reticleWord(wc, 'more to', { fonts: APA.FONTS, size: 64, color: '#f4f1ea', tone: 'light', x: 960, baseline: 565 });
+    wc.getImageData(0, 0, 1, 1);
+  },
+  render(t, p) {
+    const tt = clamp(t, 0, 3);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.drawImage(sample, -MX - DRIFT * tt, 0);
+    ctx.globalCompositeOperation = 'multiply';
+    ctx.drawImage(vignC, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+  },
+});
+</script>
+</body>
+</html>

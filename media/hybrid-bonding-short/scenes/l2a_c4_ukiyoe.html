@@ -1,0 +1,584 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>l2a c4 ukiyoe</title>
+<script src="../lib/apa.js"></script>
+</head>
+<body>
+<script>
+// L2 pass A: C4 flip-chip solder bumps, die to organic build-up substrate, 150 um pitch, as an Edo woodblock print.
+// Cross-section at the die edge during capillary underfill: the dispensed bead at the die edge feeds a flow front
+// that advances between the bumps. Joint plane (substrate Cu pad top) on LINE_Y. Sources: l2a_c4_ukiyoe.notes.md
+// Camera trucks right: the whole print moves left at PAN px per second of SHOT time (scene time / speed; 28 / 2.6 =
+// 10.8 px per scene second at speed 2.6), constant, from t = 0 (pass-A group pan, 2026-10-22).
+const { W, H, LINE_Y } = APA;
+const SHOT_SPEED = Number(APA.params.speed) > 0 ? Number(APA.params.speed) : 1;
+const PAN = 28, MX = 120, WX = W + MX, PAN_MAX = MX - 10;   // print painted MX px wider than the frame; pan clamps at 110 px
+const S = 2.0;                       // px per um
+const um = (v) => v * S;
+
+// vertical stack (px); y grows downward
+const Y_PAD = LINE_Y;                // Cu pad top = joint plane
+const Y_PAD_B = Y_PAD + um(15);      // pad bottom = ABF1 top
+const Y_SR = Y_PAD - um(5);          // solder resist top: 20 um dry film over the dielectric, 5 um over the 15 um pad
+const Y_UBM_B = Y_PAD - um(70);      // solder top = UBM bottom (joint height 70 um)
+const Y_PASS_B = Y_UBM_B - um(5);    // die face (passivation bottom); UBM disc 5 um below it
+const Y_PASS_T = Y_PASS_B - um(7);   // passivation 7 um
+const Y_BEOL_T = Y_PASS_T - um(10);  // BEOL 10 um (not featured)
+const T_ABF = um(30), T_CU = um(15);
+
+// lateral (px)
+const PITCH = um(150);
+const R_MAX = um(45);                // 90 um bump diameter
+const R_UBM = um(37.5);              // 75 um UBM
+const R_SRO_B = um(37.5);            // 75 um SR opening at the pad
+const R_SRO_T = um(39);              // opening flares slightly at the SR top
+const R_PAD = um(52.5);              // 105 um SMD pad
+const R_PO = um(25);                 // passivation opening
+const R_AL = um(40);                 // Al pad
+const V_RT = um(18), V_RB = um(13);  // microvia top / bottom radius
+const X_EDGE = 240;                  // die edge (dispense side)
+const BX = [0, 1, 2, 3, 4].map((i) => X_EDGE + um(200) + i * PITCH);
+
+// dispensed bead at the die edge: concave free surface, height HF on the die wall, width WF on the SR
+const HF = um(225), WF = um(250);
+const yFil = (x) => { const d = X_EDGE - x; return d >= WF ? Y_SR : Y_SR - HF * (1 - d / WF) ** 2; };
+
+// flow front: x of the contact lines; the concave meniscus lags by DELTA at mid-gap.
+// Timing: leaves the die edge at t = 0, contact lines reach x = W + 60 at T_CROSS. Local speed v0 * m(x).
+const T_CROSS = 2.2;
+const X_START = X_EDGE + 40, X_END = W + 60;
+const DELTA = 34;
+const FRONT = (() => {
+  const step = 2, xs = [], ts = [];
+  // pins (slows to ~45 %) where the meniscus meets the bump flank, then wraps round out of plane and closes
+  // behind it quickly (the stretch hidden behind the bump in this section)
+  const m = (x) => { let g1 = 0, g2 = 0;
+    for (const bx of BX) { g1 += Math.exp(-(((x - bx + 100) / 45) ** 2)); g2 += Math.exp(-(((x - bx) / 60) ** 4)); }
+    return 1 - 0.55 * Math.min(1, g1) + 0.9 * Math.min(1, g2); };
+  let tau = 0;
+  for (let x = X_START; x <= X_END + 4000; x += step) { xs.push(x); ts.push(tau); tau += step / m(x + step / 2); }
+  let iEnd = 0; while (xs[iEnd] < X_END) iEnd++;
+  const v0 = ts[iEnd] / T_CROSS;     // px/s at m = 1
+  for (let i = 0; i < ts.length; i++) ts[i] /= v0;
+  return { xs, ts, v0 };
+})();
+function frontX(t) {
+  const { xs, ts } = FRONT;
+  if (t <= 0) return xs[0];
+  let lo = 0, hi = ts.length - 1;
+  while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (ts[mid] <= t) lo = mid; else hi = mid; }
+  return xs[lo] + (xs[hi] - xs[lo]) * Math.min(1, (t - ts[lo]) / (ts[hi] - ts[lo]));
+}
+const GAP_T = Y_PASS_B, GAP_B = Y_SR, GAP_C = (GAP_T + GAP_B) / 2, GAP_H = GAP_B - GAP_T;
+
+const C = {
+  paper: '#efe5cf', air: '#f2e9d5', sumi: '#25242a',
+  pb0: '#172d5c', pb1: '#244a84', pb2: '#3f6ca6', pb3: '#86a8c8', pb4: '#c3d5e0', foam: '#f6f0e1',
+  si: '#b3b5ad', beol: '#5a5e68', pass: '#383a46', al: '#cfccc0', ubm: '#b98a3a',
+  sol: '#e4e1d6', solSh: '#9c9e9c', sr: '#6c9474', srDk: '#4c735a', cu: '#ad5a3a',
+  abf: '#d9c497', ni: '#d2a94e',
+};
+
+let ctx, base, overC, grain;
+
+function mk() { const c = document.createElement('canvas'); c.width = WX; c.height = H; return c; }
+
+// barrel profile of a collapsed C4 joint above the SR: radius at u (0 = SR top, 1 = UBM)
+const BUL = (() => { // bulge so that the max radius is R_MAX
+  let lo = 0, hi = 40;
+  for (let k = 0; k < 40; k++) {
+    const b = (lo + hi) / 2;
+    let m = 0;
+    for (let i = 0; i <= 100; i++) { const u = i / 100; m = Math.max(m, R_SRO_T + (R_UBM - R_SRO_T) * u + b * 4 * u * (1 - u)); }
+    if (m > R_MAX) hi = b; else lo = b;
+  }
+  return lo;
+})();
+const rBar = (u) => R_SRO_T + (R_UBM - R_SRO_T) * u + BUL * 4 * u * (1 - u);
+
+function bumpPath(cx) {
+  const p = new Path2D();
+  p.moveTo(cx - R_SRO_B, Y_PAD);
+  p.lineTo(cx - R_SRO_T, Y_SR);
+  const N = 24;
+  for (let i = 1; i <= N; i++) { const u = i / N; p.lineTo(cx - rBar(u), Y_SR - u * (Y_SR - Y_UBM_B)); }
+  for (let i = N; i >= 0; i--) { const u = i / N; p.lineTo(cx + rBar(u), Y_SR - u * (Y_SR - Y_UBM_B)); }
+  p.lineTo(cx + R_SRO_B, Y_PAD);
+  p.closePath();
+  return p;
+}
+
+function rect(x, y, w, h) { const p = new Path2D(); p.rect(x, y, w, h); return p; }
+
+// woodblock habit: the colour block prints slightly off register from the key block
+function block(g, path, fill, dx = 1.8, dy = 1.3) {
+  g.save(); g.translate(dx, dy); g.fillStyle = fill; g.fill(path); g.restore();
+}
+function key(g, path, w = 3, col = C.sumi) {
+  g.lineWidth = w; g.strokeStyle = col; g.lineJoin = 'round'; g.lineCap = 'round'; g.stroke(path);
+}
+
+// mokume: the wood grain of the block showing through a flat area
+function woodgrain(g, clip, y0, y1, x0, x1, rnd, alpha, col, step = 8) {
+  g.save(); g.clip(clip);
+  g.strokeStyle = col; g.lineWidth = 1.3;
+  for (let y = y0; y < y1; y += step + rnd() * step) {
+    g.globalAlpha = alpha * (0.4 + rnd());
+    g.beginPath();
+    const a = 2 + rnd() * 6, f = 0.002 + rnd() * 0.003, ph = rnd() * 6.28, f2 = 0.011 + rnd() * 0.01;
+    for (let x = x0; x <= x1; x += 12) {
+      const yy = y + a * Math.sin(x * f + ph) + 1.2 * Math.sin(x * f2 + ph * 2);
+      if (x === x0) g.moveTo(x, yy); else g.lineTo(x, yy);
+    }
+    g.stroke();
+  }
+  g.restore(); g.globalAlpha = 1;
+}
+
+// ---------- substrate: build-up Cu layers, microvia chains and traces (seeded) ----------
+function buildSubstrate(rnd, rndX) {
+  const layers = [];           // Cu layer L1..L6: { y0, y1, segs }
+  const abf = [];              // dielectric between L(k+1) and L(k+2)
+  let y = Y_PAD;
+  for (let k = 0; k < 6; k++) {
+    layers.push({ y0: y, y1: y + T_CU, segs: [] });
+    y += T_CU;
+    if (k < 5) { abf.push({ y0: y, y1: y + T_ABF }); y += T_ABF; }
+  }
+  const vias = [];
+  for (const bx of BX) layers[0].segs.push([bx - R_PAD, bx + R_PAD]);
+  const ends = [];
+  const depths = [5, 2, 4, 5, 3];
+  BX.forEach((bx, i) => {
+    let x = bx;
+    const depth = depths[i % depths.length];
+    for (let k = 0; k < depth; k++) {
+      vias.push({ k, x });
+      let nx = x;
+      if (k + 1 < depth && k > 0) {
+        const o = [0, 0, um(26), -um(26)][Math.floor(rnd() * 4)];
+        nx = Math.max(bx - um(30), Math.min(bx + um(30), x + o));
+      }
+      layers[k + 1].segs.push([Math.min(x, nx) - V_RB - um(8), Math.max(x, nx) + V_RB + um(8)]);
+      x = nx;
+    }
+    ends.push({ k: depth, seg: layers[depth].segs[layers[depth].segs.length - 1], dir: i % 2 ? 1 : -1 });
+  });
+  // fan-out from the last landing pad, clipped to keep clearance to other Cu in that layer
+  for (const e of ends) {
+    const L = layers[e.k], clr = um(15);
+    let len = um(70);
+    for (const s of L.segs) {
+      if (s === e.seg) continue;
+      if (e.dir > 0 && s[0] > e.seg[1]) len = Math.min(len, s[0] - clr - e.seg[1]);
+      if (e.dir < 0 && s[1] < e.seg[0]) len = Math.min(len, e.seg[0] - clr - s[1]);
+    }
+    if (len > um(10)) L.segs.push(e.dir > 0 ? [e.seg[1] - 2, e.seg[1] + len] : [e.seg[0] - len, e.seg[0] + 2]);
+  }
+  // traces and plane pieces in the free space of each layer
+  for (let k = 0; k < 6; k++) {
+    const L = layers[k];
+    const occ = L.segs.slice().sort((a, b) => a[0] - b[0]);
+    const space = um(15);
+    let x = -60;
+    const free = [];
+    for (const s of occ) { if (s[0] - space > x) free.push([x, s[0] - space]); x = Math.max(x, s[1] + space); }
+    free.push([x, W + 60]);
+    free.push([W + 60, WX + 60, true]);   // pan margin: filled from rndX, so the traces inside the frame are unchanged
+    for (const [a, b, ext] of free) {
+      const rnd0 = rnd; if (ext) rnd = rndX;
+      if (k === 0) { // L1: a single 15 um trace, centred, only where 15 um clearance remains (not between 150 um pitch pads)
+        const w = um(15), mid = (a + b) / 2;
+        if (b - a > w + 10 && rnd() < 0.6) L.segs.push([mid - w / 2, mid + w / 2]);
+        rnd = rnd0;
+        continue;
+      }
+      let xx = a + rnd() * um(20);
+      while (xx < b) {
+        const wide = k >= 3 && rnd() < 0.2;
+        const w = wide ? um(70 + rnd() * 90) : um(12 + rnd() * 18);
+        if (xx + w > b) break;
+        if (rnd() < 0.42) L.segs.push([xx, xx + w]);
+        xx += w + um(18 + rnd() * 30);
+      }
+      rnd = rnd0;
+    }
+  }
+  return { layers, abf, vias };
+}
+
+function viaPath(v, abf) {
+  const y0 = abf[v.k].y0, y1 = abf[v.k].y1;
+  const p = new Path2D();
+  p.moveTo(v.x - V_RT, y0); p.lineTo(v.x + V_RT, y0); p.lineTo(v.x + V_RB, y1); p.lineTo(v.x - V_RB, y1); p.closePath();
+  return p;
+}
+
+function paintBase(g) {
+  const rnd = APA.rng(20261022), rndX = APA.rng(20261023);   // rndX: pan-margin detail only
+  g.fillStyle = C.paper; g.fillRect(0, 0, WX, H);
+
+  // sky beside the die: ichimonji bokashi (Prussian blue wiped down from the top edge) and a low beni glow
+  const sky = g.createLinearGradient(0, 0, 0, 260);
+  sky.addColorStop(0, 'rgba(22,44,92,0.95)');
+  sky.addColorStop(0.3, 'rgba(36,74,132,0.7)');
+  sky.addColorStop(1, 'rgba(60,100,160,0)');
+  g.fillStyle = sky; g.fillRect(0, 0, X_EDGE, 280);
+  const beni = g.createLinearGradient(0, 250, 0, 600);
+  beni.addColorStop(0, 'rgba(206,108,88,0)');
+  beni.addColorStop(0.65, 'rgba(206,108,88,0.32)');
+  beni.addColorStop(1, 'rgba(206,108,88,0.05)');
+  g.fillStyle = beni; g.fillRect(0, 250, X_EDGE, 350);
+
+  // ----- die: Si bulk with ichimonji bokashi, BEOL, Al pads, passivation -----
+  const si = rect(X_EDGE, -10, WX - X_EDGE + 20, Y_BEOL_T + 10);
+  block(g, si, C.si);
+  const ich = g.createLinearGradient(0, 0, 0, 230);
+  ich.addColorStop(0, 'rgba(24,38,70,0.9)');
+  ich.addColorStop(0.35, 'rgba(46,62,92,0.55)');
+  ich.addColorStop(1, 'rgba(70,84,104,0)');
+  g.save(); g.clip(si); g.fillStyle = ich; g.fillRect(X_EDGE, 0, WX, 240);
+  const low = g.createLinearGradient(0, Y_BEOL_T - 120, 0, Y_BEOL_T);
+  low.addColorStop(0, 'rgba(90,96,104,0)'); low.addColorStop(1, 'rgba(90,96,104,0.28)');
+  g.fillStyle = low; g.fillRect(X_EDGE, Y_BEOL_T - 120, WX, 120);
+  g.restore();
+  woodgrain(g, si, 8, Y_BEOL_T, X_EDGE, WX + 20, rnd, 0.10, '#262c38', 10);
+  const beol = rect(X_EDGE, Y_BEOL_T, WX - X_EDGE + 20, Y_PASS_T - Y_BEOL_T);
+  block(g, beol, C.beol, 0, 0);
+  g.save(); g.clip(beol);
+  g.fillStyle = 'rgba(212,186,140,0.5)';
+  for (let row = 0; row < 3; row++) {
+    const yy = Y_BEOL_T + 3 + row * 5;
+    let x = X_EDGE + 4;
+    for (; x < W; x += 5 + rnd() * 16) { const w = 4 + rnd() * 14; g.fillRect(x, yy, w, 2); x += w; }
+    for (; x < WX; x += 5 + rndX() * 16) { const w = 4 + rndX() * 14; g.fillRect(x, yy, w, 2); x += w; }
+  }
+  g.restore();
+  for (const bx of BX) g.fillStyle = C.al, g.fillRect(bx - R_AL, Y_PASS_T - um(2), 2 * R_AL, um(2));
+  g.fillStyle = C.pass; g.fillRect(X_EDGE, Y_PASS_T, WX, Y_PASS_B - Y_PASS_T);
+  key(g, si, 3.4);
+  g.beginPath(); g.moveTo(X_EDGE, Y_PASS_T); g.lineTo(WX + 10, Y_PASS_T); g.lineWidth = 1.6; g.strokeStyle = C.sumi; g.stroke();
+
+  // ----- gap air ahead of the flow front -----
+  const air = g.createLinearGradient(0, Y_PASS_B, 0, Y_SR);
+  air.addColorStop(0, '#e5dac2'); air.addColorStop(0.45, C.air); air.addColorStop(1, '#ece2cc');
+  g.fillStyle = air; g.fillRect(X_EDGE, Y_PASS_B, WX, Y_SR - Y_PASS_B);
+
+  // ----- substrate: ABF dielectric field, then Cu -----
+  const sub = buildSubstrate(rnd, rndX);
+  const field = rect(-10, Y_PAD_B, WX + 20, H - Y_PAD_B + 10);
+  block(g, field, C.abf, 0, 0);
+  const gb = g.createLinearGradient(0, Y_PAD_B, 0, H);
+  gb.addColorStop(0, 'rgba(120,92,52,0)'); gb.addColorStop(0.55, 'rgba(120,92,52,0.18)'); gb.addColorStop(1, 'rgba(70,56,40,0.55)');
+  g.fillStyle = gb; g.fill(field);
+  woodgrain(g, field, Y_PAD_B + 4, H, -10, WX + 10, rnd, 0.13, '#80602f', 7);
+  for (const a of sub.abf) { // laminate interfaces, faint
+    g.beginPath(); g.moveTo(-10, a.y0); g.lineTo(WX + 10, a.y0);
+    g.lineWidth = 1.2; g.strokeStyle = 'rgba(110,84,44,0.35)'; g.stroke();
+  }
+  for (let k = 1; k < sub.layers.length; k++) {
+    const L = sub.layers[k];
+    for (const s of L.segs) { const p = rect(s[0], L.y0, s[1] - s[0], L.y1 - L.y0); block(g, p, C.cu); key(g, p, 2); }
+  }
+  for (const v of sub.vias) { const p = viaPath(v, sub.abf); block(g, p, C.cu); key(g, p, 2); }
+
+  // solder resist with SMD openings, then L1 Cu (C4 pads; a 15 um trace only where it clears both neighbours)
+  const sr = new Path2D();
+  sr.moveTo(-10, Y_SR);
+  for (const bx of BX) {
+    sr.lineTo(bx - R_SRO_T, Y_SR); sr.lineTo(bx - R_SRO_B, Y_PAD); sr.lineTo(bx + R_SRO_B, Y_PAD); sr.lineTo(bx + R_SRO_T, Y_SR);
+  }
+  sr.lineTo(WX + 10, Y_SR); sr.lineTo(WX + 10, Y_PAD_B); sr.lineTo(-10, Y_PAD_B); sr.closePath();
+  const srg = g.createLinearGradient(0, Y_SR, 0, Y_PAD_B);
+  srg.addColorStop(0, C.srDk); srg.addColorStop(0.5, C.sr); srg.addColorStop(1, '#88aa8c');
+  block(g, sr, srg, 0, 0);
+  for (const s of sub.layers[0].segs) { const p = rect(s[0], Y_PAD, s[1] - s[0], T_CU); block(g, p, C.cu, 0, 0); key(g, p, 2); }
+  for (const bx of BX) { g.fillStyle = C.ni; g.fillRect(bx - R_SRO_B, Y_PAD - 3, 2 * R_SRO_B, 3); }
+  key(g, sr, 2.6);
+}
+
+function paintTop(g) {
+  // bumps, UBM and the key lines that bound the underfill; drawn above the flowing underfill
+  for (const bx of BX) {
+    const ubm = new Path2D();
+    ubm.moveTo(bx - R_PO, Y_PASS_T); ubm.lineTo(bx + R_PO, Y_PASS_T); ubm.lineTo(bx + R_PO, Y_PASS_B);
+    ubm.lineTo(bx + R_UBM, Y_PASS_B); ubm.lineTo(bx + R_UBM, Y_UBM_B); ubm.lineTo(bx - R_UBM, Y_UBM_B);
+    ubm.lineTo(bx - R_UBM, Y_PASS_B); ubm.lineTo(bx - R_PO, Y_PASS_B); ubm.closePath();
+    const b = bumpPath(bx);
+    // solder: gofun white with a grey bokashi wiped in from the right
+    const sg = g.createLinearGradient(bx - R_MAX, 0, bx + R_MAX, 0);
+    sg.addColorStop(0, '#b9bab6'); sg.addColorStop(0.16, '#e9e7de'); sg.addColorStop(0.4, '#f3f1e9');
+    sg.addColorStop(0.75, C.sol); sg.addColorStop(1, C.solSh);
+    block(g, b, sg, 0, 0);
+    const tg = g.createLinearGradient(0, Y_UBM_B, 0, Y_UBM_B + 34);
+    tg.addColorStop(0, 'rgba(110,112,116,0.45)'); tg.addColorStop(1, 'rgba(110,112,116,0)');
+    g.save(); g.clip(b); g.fillStyle = tg; g.fillRect(bx - R_MAX, Y_UBM_B, 2 * R_MAX, 34); g.restore();
+    key(g, b, 3.4);
+    block(g, ubm, C.ubm, 0, 0);
+    key(g, ubm, 2);
+  }
+  g.beginPath();
+  g.moveTo(X_EDGE, -10); g.lineTo(X_EDGE, Y_PASS_B); g.lineTo(WX + 10, Y_PASS_B);
+  g.lineWidth = 3.6; g.strokeStyle = C.sumi; g.lineJoin = 'round'; g.stroke();
+}
+
+function makeGrain() {
+  const c = mk(), g = c.getContext('2d');
+  const rnd = APA.rng(77);
+  // washi: near-white with blotchy value noise and speckle, plus fibres; applied with multiply
+  const id = g.createImageData(WX, H), d = id.data;
+  const cw = 40, ch = 40, gx0 = Math.ceil(W / cw) + 2, gx = Math.ceil(WX / cw) + 2, gy = Math.ceil(H / ch) + 2;
+  // lattice of the frame-width grain as before; columns added for the pan margin come from their own seed
+  const lat0 = new Float32Array(gx0 * gy).map(() => rnd()), rX = APA.rng(7701);
+  const lat = new Float32Array(gx * gy);
+  for (let j = 0; j < gy; j++) for (let i = 0; i < gx; i++) lat[j * gx + i] = i < gx0 ? lat0[j * gx0 + i] : rX();
+  const sm = (u) => u * u * (3 - 2 * u);
+  for (let y = 0; y < H; y++) {
+    const fy = y / ch, iy = Math.floor(fy), ty = sm(fy - iy);
+    for (let x = 0; x < WX; x++) {
+      const fx = x / cw, ix = Math.floor(fx), tx = sm(fx - ix);
+      const a = lat[iy * gx + ix], b = lat[iy * gx + ix + 1], c2 = lat[(iy + 1) * gx + ix], e = lat[(iy + 1) * gx + ix + 1];
+      const n = (a + (b - a) * tx) * (1 - ty) + (c2 + (e - c2) * tx) * ty;
+      const v = 246 - 18 * n;
+      const i = (y * WX + x) * 4;
+      d[i] = v + 2; d[i + 1] = v; d[i + 2] = v - 7; d[i + 3] = 255;
+    }
+  }
+  g.putImageData(id, 0, 0);
+  g.lineCap = 'round';
+  for (let k = 0; k < 3200; k++) {     // the last 200 fibres lie in the pan margin, from their own seed
+    const q = k < 3000 ? rnd : rX;
+    const x = k < 3000 ? q() * W : W - 30 + q() * (MX + 30), y = q() * H, a = q() * Math.PI, l = 6 + q() * 28;
+    g.strokeStyle = q() < 0.55 ? 'rgba(140,118,86,0.11)' : 'rgba(255,255,255,0.35)';
+    g.lineWidth = 0.6 + q() * 0.9;
+    g.beginPath(); g.moveTo(x, y);
+    g.quadraticCurveTo(x + Math.cos(a) * l * 0.5 + (q() - 0.5) * 6, y + Math.sin(a) * l * 0.5 + (q() - 0.5) * 6,
+      x + Math.cos(a) * l, y + Math.sin(a) * l);
+    g.stroke();
+  }
+  return c;
+}
+
+// ---------- flowing underfill ----------
+const meniscusX = (xf, y) => { const v = (y - GAP_C) / (GAP_H / 2); return xf - DELTA * (1 - v * v); };
+
+function underfillPath(xf) {
+  const p = new Path2D();
+  const x0 = -20;
+  p.moveTo(x0, Y_SR + 2);
+  for (let x = x0; x <= X_EDGE; x += 5) p.lineTo(x, yFil(x));
+  p.lineTo(X_EDGE, yFil(X_EDGE));
+  p.lineTo(X_EDGE, GAP_T);
+  const N = 26;
+  for (let i = 0; i <= N; i++) { const y = GAP_T + (GAP_H * i) / N; p.lineTo(meniscusX(xf, y), y); }
+  p.lineTo(x0, Y_SR + 2);
+  p.closePath();
+  return p;
+}
+
+// Hokusai claw: a tapering foam finger rooted at (x, y), heading along angle a, curling by `curl` radians
+function claw(g, x, y, a, len, w0, curl, wob) {
+  const N = 14, L = [], R = [];
+  let px = x, py = y, th = a;
+  const ds = len / N;
+  for (let i = 0; i <= N; i++) {
+    const s = i / N;
+    const w = w0 * Math.pow(1 - s, 0.75) + 0.8;
+    const nx = -Math.sin(th), ny = Math.cos(th);
+    L.push([px + nx * w, py + ny * w]); R.push([px - nx * w, py - ny * w]);
+    th = a + (curl + wob) * Math.pow(s, 1.6);
+    px += Math.cos(th) * ds; py += Math.sin(th) * ds;
+  }
+  const p = new Path2D();
+  p.moveTo(L[0][0], L[0][1]);
+  for (let i = 1; i <= N; i++) p.lineTo(L[i][0], L[i][1]);
+  for (let i = N; i >= 0; i--) p.lineTo(R[i][0], R[i][1]);
+  p.closePath();
+  g.fillStyle = C.foam; g.fill(p);
+  g.lineWidth = 1.8; g.strokeStyle = C.pb0; g.stroke(p);
+}
+
+// the bead's flow turns into the gap along this diagonal: bead striations above-left, gap striations below-right
+const DIAG = [[X_EDGE - 170, Y_SR + 4], [X_EDGE + 6, GAP_T - 6]];
+const DIAG_GAP = (() => { const p = new Path2D(); p.moveTo(DIAG[0][0], DIAG[0][1]); p.lineTo(DIAG[1][0], DIAG[1][1]);
+  p.lineTo(WX + 50, DIAG[1][1]); p.lineTo(WX + 50, Y_SR + 4); p.closePath(); return p; })();
+const DIAG_BEAD = (() => { const p = new Path2D(); p.moveTo(DIAG[0][0], DIAG[0][1]); p.lineTo(DIAG[1][0], DIAG[1][1]);
+  p.lineTo(DIAG[1][0], -50); p.lineTo(-50, -50); p.lineTo(-50, Y_SR + 4); p.closePath(); return p; })();
+
+function drawUnderfill(g, t) {
+  const xf = frontX(t);
+  const path = underfillPath(xf);
+  g.save(); g.translate(1.8, 1.3); g.fillStyle = C.pb1; g.fill(path); g.restore();
+  g.save();
+  g.clip(path);
+  // bokashi: the bead deepens toward its free surface; the gap darkens toward the die face
+  const bb = g.createLinearGradient(0, 120, 0, Y_SR);
+  bb.addColorStop(0, 'rgba(14,30,66,0.85)'); bb.addColorStop(0.55, 'rgba(14,30,66,0.25)'); bb.addColorStop(1, 'rgba(14,30,66,0)');
+  g.fillStyle = bb; g.fillRect(-20, 100, X_EDGE + 20, Y_SR - 100);
+  const vg = g.createLinearGradient(0, GAP_T, 0, GAP_B);
+  vg.addColorStop(0, 'rgba(12,28,64,0.55)'); vg.addColorStop(0.7, 'rgba(12,28,64,0)');
+  g.save(); g.clip(DIAG_GAP); g.fillStyle = vg; g.fillRect(X_EDGE - 200, GAP_T, xf + 220 - X_EDGE, GAP_H); g.restore();
+  const hg = g.createLinearGradient(xf - 260, 0, xf, 0);
+  hg.addColorStop(0, 'rgba(63,108,166,0)'); hg.addColorStop(1, 'rgba(90,136,190,0.7)');
+  g.fillStyle = hg; g.fillRect(xf - 260, GAP_T, 280, GAP_H);
+
+  // gap striations: meniscus-shaped flow lines in the filled gap, drifting downstream at a calm 110 px/s
+  // (slower than the front so they never strobe at 25 fps); each line keeps its identity as it drifts
+  const SP = 64, D = 110 * t, k0 = Math.floor(D / SP), ph = D - k0 * SP;
+  g.lineCap = 'round';
+  g.save();
+  g.clip(DIAG_GAP);
+  for (let k = -1; k < 40; k++) {
+    const id = k - k0;                 // stable index of this line
+    const xl = X_EDGE - 170 + k * SP + ph;
+    if (xl > xf) break;
+    const near = Math.max(0, Math.min(1, (xf - DELTA - xl - 24) / 90));
+    if (near <= 0) continue;
+    g.beginPath();
+    for (let i = 0; i <= 20; i++) {
+      const y = GAP_T + 3 + ((GAP_H - 6) * i) / 20;
+      const x = meniscusX(xl, y) + 4 * Math.sin(y * 0.08 + id * 1.7);
+      if (i === 0) g.moveTo(x, y); else g.lineTo(x, y);
+    }
+    if (id & 1) { g.lineWidth = 8; g.strokeStyle = `rgba(134,168,200,${0.42 * near})`; }
+    else { g.lineWidth = 2.2; g.strokeStyle = `rgba(246,240,225,${0.62 * near})`; }
+    g.stroke();
+  }
+  g.restore();
+  g.save();
+  g.clip(DIAG_BEAD);
+
+  // bead striations: lines parallel to the free surface, sliding down-slope with the flow toward the gap
+  const drift = (t * 22) % 36;
+  for (let k = 0; k < 12; k++) {
+    const dd = 18 + k * 36 + drift;
+    g.beginPath();
+    let first = true;
+    for (let x = -20; x <= X_EDGE; x += 5) {
+      const y = yFil(x) + dd * (0.45 + 0.55 * Math.max(0, 1 - (X_EDGE - x) / WF));
+      if (y > Y_SR + 2) continue;
+      if (first) { g.moveTo(x, y); first = false; } else g.lineTo(x, y);
+    }
+    const f = Math.max(0, 1 - dd / 460);
+    if (k % 2) { g.lineWidth = 8; g.strokeStyle = `rgba(70,116,174,${0.8 * f})`; }
+    else { g.lineWidth = 2.4; g.strokeStyle = `rgba(214,228,236,${0.85 * f})`; }
+    g.stroke();
+  }
+  g.restore();
+  g.restore();
+
+  // free surface of the bead: white foam rim, Prussian key line, and claws reaching up toward the die wall
+  const surf = new Path2D();
+  surf.moveTo(-20, yFil(-20));
+  for (let x = -20; x <= X_EDGE; x += 5) surf.lineTo(x, yFil(x));
+  g.lineWidth = 12; g.strokeStyle = C.foam; g.stroke(surf);
+  // lace of foam beads just inside the surface, sliding down-slope
+  {
+    let acc = (t * 30) % 15, px = X_EDGE, py = yFil(X_EDGE);
+    for (let x = X_EDGE - 1; x > -20; x -= 1) {
+      const y = yFil(x), d = Math.hypot(px - x, py - y);
+      acc += d; px = x; py = y;
+      if (acc < 15) continue;
+      acc -= 15;
+      const sl = Math.atan2(yFil(x + 1) - yFil(x - 1), 2), nx = -Math.sin(sl), ny = Math.cos(sl);
+      g.beginPath(); g.arc(x + nx * 9, y + ny * 9, 5.2, 0, 6.2832);
+      g.fillStyle = C.foam; g.fill(); g.lineWidth = 1.4; g.strokeStyle = C.pb0; g.stroke();
+    }
+  }
+  g.lineWidth = 3.2; g.strokeStyle = C.pb0; g.stroke(surf);
+  for (let k = 0; k < 6; k++) {
+    const s = ((k / 6 + t * 0.05) % 1);
+    const x = X_EDGE - 20 - s * (WF * 0.95);
+    const sz = 0.45 + 0.55 * (1 - s);
+    for (let f = 0; f < 3; f++) { // a cluster of three fingers, like the crest of the great wave
+      const xf = x - f * 13 * sz, y = yFil(xf);
+      const sl = Math.atan2(yFil(xf + 2) - yFil(xf - 2), 4); // surface tangent, pointing up-right
+      claw(g, xf, y - 1, sl - 0.9 + f * 0.12, (40 - f * 9) * sz, (8 - f) * sz, 2.6,
+        0.3 * Math.sin(t * 2.2 + k * 1.9 + f));
+    }
+  }
+
+  // flow front, clipped to the gap (never above the die face or below the SR top)
+  g.save();
+  g.clip(rect(X_EDGE, GAP_T, WX + 200, GAP_H));
+  const fr = new Path2D();
+  for (let i = 0; i <= 26; i++) { const y = GAP_T + (GAP_H * i) / 26; const x = meniscusX(xf, y); if (i) fr.lineTo(x, y); else fr.moveTo(x, y); }
+  g.lineWidth = 13; g.strokeStyle = C.foam; g.stroke(fr);
+  g.lineWidth = 3.2; g.strokeStyle = C.pb0; g.stroke(fr);
+  crest(g, xf, t);
+  g.restore();
+}
+
+// the crest: the die-side contact line drawn as a curling Hokusai lip with claw spray; it curls, breathes and
+// flicks on its own clock while it rides the front
+function crest(g, xf, t) {
+  const N = 40, len = 84 + 9 * Math.sin(t * 5.3), curl = 3.7 + 0.45 * Math.sin(t * 3.9 + 1.1);
+  const a0 = 0.28 + 0.1 * Math.sin(t * 4.6);
+  const C0 = [], L = [], Rr = [];
+  let x = xf - 6, y = GAP_T + 5, th = a0;
+  for (let i = 0; i <= N; i++) {
+    const s = i / N;
+    C0.push([x, y, th]);
+    const w = 19 * Math.pow(1 - s, 0.8) + 1.5;
+    const nx = -Math.sin(th), ny = Math.cos(th);
+    L.push([x + nx * w, y + ny * w]); Rr.push([x - nx * w, y - ny * w]);
+    th = a0 + curl * Math.pow(s, 1.35);
+    x += Math.cos(th) * len / N; y += Math.sin(th) * len / N;
+  }
+  const lip = new Path2D();
+  lip.moveTo(L[0][0], L[0][1]);
+  for (const q of L.slice(1)) lip.lineTo(q[0], q[1]);
+  for (const q of Rr.slice().reverse()) lip.lineTo(q[0], q[1]);
+  lip.closePath();
+  const lg = g.createLinearGradient(xf - 10, 0, xf + 60, 0);
+  lg.addColorStop(0, C.pb1); lg.addColorStop(1, C.pb2);
+  g.fillStyle = lg; g.fill(lip);
+  // foam on the outer (upper / leading) edge of the lip
+  const outer = new Path2D();
+  outer.moveTo(Rr[0][0], Rr[0][1]);
+  for (const q of Rr.slice(1)) outer.lineTo(q[0], q[1]);
+  g.lineWidth = 6; g.strokeStyle = C.foam; g.lineCap = 'round'; g.stroke(outer);
+  g.lineWidth = 2.2; g.strokeStyle = C.pb0; g.stroke(lip);
+  // claw spray from the outer edge of the curl, each finger on its own phase
+  for (let i = 0; i < 5; i++) {
+    const s = 0.34 + i * 0.12;
+    const j = Math.min(N, Math.round(s * N)), [cx, cy, cth] = C0[j];
+    const w = 19 * Math.pow(1 - s, 0.8) + 1.5;
+    const ox = cx + Math.sin(cth) * w, oy = cy - Math.cos(cth) * w;
+    const flick = Math.sin(t * 6.2 + i * 1.9);
+    claw(g, ox, oy, cth - 1.05 + 0.15 * flick, (24 - i * 2.5) * (0.85 + 0.2 * Math.sin(t * 4.4 + i * 2.3)),
+      4.8 - i * 0.5, 2.5, 0.35 * flick);
+  }
+  // smaller fingers at the SR-side contact line, curling up
+  for (let i = 0; i < 2; i++) {
+    const yy = GAP_B - 7 - i * 13, xx = meniscusX(xf, yy) - 4;
+    claw(g, xx, yy, -0.15 - i * 0.3, 18 - i * 4, 4, -2.3, 0.3 * Math.sin(t * 5.1 + i * 2));
+  }
+}
+
+APA.scene({
+  init() {
+    ({ ctx } = APA.canvas('2d'));
+    base = mk(); paintBase(base.getContext('2d'));
+    overC = mk(); paintTop(overC.getContext('2d'));
+    grain = makeGrain();
+    for (const c of [base, overC, grain]) c.getContext('2d').getImageData(0, 0, 1, 1); // rasterise now, not on frame 1
+  },
+  render(t) {
+    const pan = Math.min(PAN * Math.max(0, t) / SHOT_SPEED, PAN_MAX);
+    ctx.setTransform(1, 0, 0, 1, -pan, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.drawImage(base, 0, 0);
+    drawUnderfill(ctx, t);
+    ctx.drawImage(overC, 0, 0);
+    ctx.globalCompositeOperation = 'multiply';
+    ctx.drawImage(grain, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+  },
+});
+</script>
+</body>
+</html>

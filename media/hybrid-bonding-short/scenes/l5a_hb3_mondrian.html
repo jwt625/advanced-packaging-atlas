@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>l5a hb3 mondrian</title>
+<script src="../lib/apa.js"></script>
+</head>
+<body>
+<script>
+// L5 pass A: Cu-Cu hybrid bond, die-to-wafer, 3 um pitch; cross-section as Mondrian / De Stijl.
+// Geometry: CEA-Leti TV1 (atlas tv ectc51846.2026.00218-a), daisy chain cut along the chain. Sources: l5a_hb3_mondrian.notes.md
+// Thick black bars = the Cu interconnect itself at true size (MZ lines 0.5 um, HBV vias 0.5 x 0.5 um).
+// Thin black lines = thin films (SiCN cap / etch stop, pad barrier liner), the Si / oxide boundary, and the bond plane
+// in the dielectric. Planes: red = bonded Cu pads (HBM); bonding-layer SiO2 (HBM level) yellow on the top die, blue on
+// the bottom wafer; white = ILD SiO2 (HBV and MZ levels); grey-white = Si. No line across the Cu-Cu joint: the pads meet
+// metal to metal on y = 600.
+const { W, H, LINE_Y } = APA;
+let ctx, tex;
+
+const S = 320 / 3;            // px per um -> 3 um pitch = 320 px
+const PITCH = 3 * S;
+const PAD = 1.5 * S;          // HBM pad CD = pitch / 2
+const VIA = 0.5 * S;          // HBV CD
+const T_HBM = 0.5 * S, T_HBV = 0.5 * S, T_MZ = 0.5 * S, T_OX = 0.25 * S;
+const THIN = 12;              // thin-film line width (stylized; films are thinner)
+const COL = {
+  red: '#c42a2c', yellow: '#efc31c', blue: '#22448f', white: '#f1eee5', si: '#dedbd1', black: '#141414',
+};
+const PAN = 28;               // px/s horizontal drift
+const X0 = 190;               // x of pad 0 centre at t = 0
+const XL = -400, XR = W + 400;
+
+const zV = T_HBM, zM = T_HBM + T_HBV, zO = zM + T_MZ, zSi = zO + T_OX;
+function yOf(tier, z) { return LINE_Y - tier * z; } // tier +1: top die (above), -1: bottom wafer
+function band(tier, z0, z1) { const a = yOf(tier, z0), b = yOf(tier, z1); return [Math.min(a, b), Math.abs(a - b)]; }
+
+let planes = [], solids = [], lines = [];
+// fill-in wave sweeps left to right over the visible frame: left quarter already painted at t = 0, all done by ~0.7 s
+function sweep(x) { return -0.22 + 0.85 * (x / W); }
+
+function build() {
+  const r = APA.rng(5303);
+  planes = []; solids = []; lines = [];
+  const I0 = -3, I1 = 10;
+  for (const tier of [1, -1]) {
+    // Si field, cropped by the frame
+    const ySi = yOf(tier, zSi);
+    planes.push(tier > 0 ? { x: XL, y: -10, w: XR - XL, h: ySi + 10, c: COL.si, t0: -1 }
+                         : { x: XL, y: ySi, w: XR - XL, h: H + 10 - ySi, c: COL.si, t0: -1 });
+    for (let i = I0; i < I1; i++) {
+      const xc = X0 + i * PITCH;
+      const [y, h] = band(tier, 0, zV);
+      // bonding-layer SiO2 between pads (fills in), and the Cu pad (fills in)
+      planes.push({ x: xc + PAD / 2, y, w: PITCH - PAD, h, c: tier > 0 ? COL.yellow : COL.blue, dir: tier,
+        t0: sweep(xc + PITCH / 2) + 0.10 * r() + (tier < 0 ? 0.05 : 0) });
+      planes.push({ x: xc - PAD / 2, y, w: PAD, h, c: COL.red, dir: tier,
+        t0: sweep(xc) - 0.08 + 0.08 * r() });
+      // HBV via: solid Cu bar
+      const [yv, hv] = band(tier, zV, zM);
+      solids.push([xc - VIA / 2, yv, VIA, hv]);
+      // pad barrier: sidewalls (both tiers in one stroke, pads aligned) and pad base outside the via
+      if (tier > 0) lines.push([xc - PAD / 2, yOf(1, zV), xc - PAD / 2, yOf(-1, zV)],
+                               [xc + PAD / 2, yOf(1, zV), xc + PAD / 2, yOf(-1, zV)]);
+      // SiCN etch stop at the HBM base in the field + pad base barrier: one continuous film line
+      lines.push([xc - PITCH / 2, yOf(tier, zV), xc + PITCH / 2, yOf(tier, zV)]);
+      // bond plane in the dielectric only
+      if (tier > 0) lines.push([xc + PAD / 2, LINE_Y, xc + PITCH - PAD / 2, LINE_Y]);
+    }
+    // MZ lines (daisy chain): top die links pads (2k, 2k+1), bottom wafer links (2k+1, 2k+2)
+    for (let k = I0 - 1; k < I1; k += 2) {
+      const i = tier > 0 ? k : k + 1;
+      const xa = X0 + i * PITCH - PAD / 2, xb = X0 + (i + 1) * PITCH + PAD / 2;
+      const [y, h] = band(tier, zM, zO);
+      solids.push([xa, y, xb - xa, h]);
+    }
+    // SiCN cap on the MZ level, and the Si / oxide boundary: full-width lines
+    lines.push([XL, yOf(tier, zM), XR, yOf(tier, zM)], [XL, yOf(tier, zSi), XR, yOf(tier, zSi)]);
+  }
+}
+
+function buildTexture() {
+  // static horizontal brush drag (low frequency, cheap to encode), seeded once; baked as a translucent layer and panned with the painting
+  const c = document.createElement('canvas');
+  c.width = W + 160; c.height = H;
+  const g = c.getContext('2d');
+  const r = APA.rng(77);
+  for (let n = 0; n < 1400; n++) {
+    const x = r() * c.width, y = r() * c.height, len = 30 + r() * 260;
+    g.fillStyle = r() < 0.6 ? 'rgba(255,255,255,0.028)' : 'rgba(0,0,0,0.02)';
+    g.fillRect(x, y, len, 1 + r() * 2);
+  }
+  return c;
+}
+
+const ease = (u) => (u <= 0 ? 0 : u >= 1 ? 1 : 1 - Math.pow(1 - u, 3));
+const FILL = 0.16; // s per plane
+
+APA.scene({
+  meta: { text: 'dark' },
+  init(p) {
+    ({ ctx } = APA.canvas('2d', { alpha: false }));
+    build();
+    tex = buildTexture();
+  },
+  render(t) {
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.fillStyle = COL.white;
+    ctx.fillRect(0, 0, W, H);
+    ctx.translate(Math.round(-PAN * t * 4) / 4, 0);
+    // planes fill in, each wiping away from the bond plane
+    for (const pl of planes) {
+      const u = ease((t - pl.t0) / FILL);
+      if (u <= 0) continue;
+      ctx.fillStyle = pl.c;
+      const h = pl.h * u;
+      if (!pl.dir || pl.dir > 0) ctx.fillRect(pl.x, pl.y + pl.h - h, pl.w, h);
+      else ctx.fillRect(pl.x, pl.y, pl.w, h);
+    }
+    ctx.fillStyle = COL.black;
+    for (const [x, y, w, h] of solids) ctx.fillRect(x, y, w, h);
+    ctx.strokeStyle = COL.black;
+    ctx.lineWidth = THIN;
+    ctx.lineCap = 'square';
+    ctx.beginPath();
+    for (const [x1, y1, x2, y2] of lines) { ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); }
+    ctx.stroke();
+    ctx.drawImage(tex, -40, 0);
+  },
+});
+</script>
+</body>
+</html>

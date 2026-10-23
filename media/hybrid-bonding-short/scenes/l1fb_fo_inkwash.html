@@ -1,0 +1,421 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>l1fb fo inkwash</title>
+<script src="../lib/apa.js"></script>
+</head>
+<body>
+<script>
+// L1F (pass-A slot): fan-out package (mold-first FO-PLP, 1-layer RDL) to board solder balls at 0.4 mm pitch, sumi-e ink wash.
+// Same section as l1fa (die edge, fan-out zone, package saw edge), framed on the fan-out side. Joint plane = board Cu
+// pad top = y 600. Pass-A slot (no overlay). Strokes are built once (seeded); render(t) lays them down (brush fronts,
+// ink bloom) by 0.80 s while the camera trucks right: content moves left at 28 px/s of shot time, constant, from t = 0
+// (pass-A group pan, 2026-10-22). Sources: l1fb_fo_inkwash.notes.md
+const { W, H, LINE_Y } = APA;
+const K = 0.8;                        // px per um (pitch 400 um -> 320 px)
+const y = (z) => LINE_Y - z * K;      // z: um above the board pad top
+const XE = 420;                       // die edge (px)
+const X = (u) => XE + u * K;          // u: um from the die edge (+ = fan-out side)
+const Z = { lamTop: -25, srTop: -5, jTop: 120, ubmF: 129, pi2Face: 134, cuBot: 138, cuTop: 143, dieFace: 150 };
+const SPH_ZC = 60, SPH_R = 108.2;
+const BALLS = [-500, 300, 700, 1100];                // -100 column depopulated (die pad ring above)
+const PADS = [-50, -110, -170, -230];
+const PKG_EDGE = 1500;
+const TS = 1.9;                       // pass-A slot (1.0 s): stroke plan (laid by 0.42 in plan time) runs 1.9x slower
+const T_END = 0.42 * TS;              // 0.80 s scene time: everything laid and bloomed
+// camera: content moves left at PAN px per second of SHOT time (scene time / speed), constant, no ease; the layers
+// are painted MX px wider than the frame so the right edge stays covered (pan clamps at PAN_MAX = 110 px, t = 3.9 s)
+const SHOT_SPEED = Number(APA.params.speed) > 0 ? Number(APA.params.speed) : 1;
+const PAN = 28, MX = 120, WW = W + MX, PAN_MAX = MX - 10;
+
+const INK = [24, 22, 20];
+const ink = (a) => `rgba(${INK[0]},${INK[1]},${INK[2]},${a})`;
+const RED = '#b23a2b';
+
+let ctx, paper, finalC;
+const L = {};                          // stroke layers {canvas, halo}
+const mk = () => { const c = document.createElement('canvas'); c.width = WW; c.height = H; return c; };
+
+function noise2(seed) {
+  const r = APA.rng(seed);
+  const N = 64, tab = new Float32Array(N * N);
+  for (let i = 0; i < N * N; i++) tab[i] = r();
+  const s = (u) => u * u * (3 - 2 * u);
+  return (x, yy) => {
+    const xi = Math.floor(x), yi = Math.floor(yy), fx = s(x - xi), fy = s(yy - yi);
+    const a = tab[((yi & 63) * N) + (xi & 63)], b = tab[((yi & 63) * N) + ((xi + 1) & 63)];
+    const c = tab[(((yi + 1) & 63) * N) + (xi & 63)], d = tab[(((yi + 1) & 63) * N) + ((xi + 1) & 63)];
+    return (a + (b - a) * fx) * (1 - fy) + (c + (d - c) * fx) * fy;
+  };
+}
+const nA = noise2(7), nB = noise2(19), nC = noise2(41);
+
+// ---- brush primitives ----
+// One loaded brush dragged along x from x0 to x1 (dir -1: from x1 to x0), band centre yc, width h. Each bristle is a
+// continuous line of near-constant ink; bristles run dry at their own point and break into kasure (dry-brush streaks)
+// toward the end of the stroke. Edge bristles carry less ink and dry first. Caller clips to the material region.
+function brush(g, x0, x1, yc, h, o) {
+  const r = APA.rng(o.seed);
+  const Ls = Math.max(1, x1 - x0), dir = o.dir || 1, du = 6 / Ls;
+  const nb = Math.max(3, Math.round(h / (o.bw || 1.6)));
+  const side = o.side ?? (r() - 0.5) * 1.2;          // side-brush: one edge carries more ink than the other
+  const decay = o.decay ?? 0.35;                       // bristles run out one by one along the stroke
+  const head = (o.head ?? 0.5) * h / Ls, tail = (o.tail ?? 1.2) * h / Ls;
+  g.lineCap = 'round'; g.lineJoin = 'round'; g.strokeStyle = ink(1);
+  for (let i = 0; i < nb; i++) {
+    const v = (i + r() * 0.9) / nb - 0.5, e = Math.abs(v) * 2;
+    g.globalAlpha = Math.max(0, Math.min(1, o.a * (0.55 + 0.45 * r()) * (1 - 0.65 * Math.pow(e, 2.2)) * Math.max(0.15, 1 + side * v * 2)));
+    g.lineWidth = (o.lw || 2.4) * (0.6 + 0.8 * r());
+    const uS = head * e * e * (0.6 + 0.8 * r());                          // rounded press at the head
+    const uE = Math.max(uS + 0.05, 1 - tail * Math.pow(e, 1.4) * (0.5 + r()) - decay * Math.pow(r(), 1.6) * (0.4 + 0.6 * e));
+    const dryAt = uS + (uE - uS) * (1 - (o.dry || 0) * (0.15 + 0.85 * r()));
+    const ph = r() * 100;
+    g.beginPath();
+    let pen = false;
+    for (let q = uS; q <= uE; q += du) {
+      const xx = dir > 0 ? x0 + q * Ls : x1 - q * Ls;
+      const yy = yc + v * h * (1 - 0.25 * Math.pow(Math.max(0, q - 0.6) / 0.4, 2)) + (o.wob ?? 2) * (nA(q * 2.5 + ph, i * 0.13) - 0.5) * 2;
+      let wet = true;
+      if (q > dryAt) wet = nB(q * Ls * 0.035 + ph, i * 0.9) > 0.2 + 0.8 * (q - dryAt) / Math.max(0.03, uE - dryAt);
+      if (wet && pen) g.lineTo(xx, yy); else g.moveTo(xx, yy);
+      pen = wet;
+    }
+    g.stroke();
+  }
+  if (o.pool) {                                        // ink pools where the brush is pressed down
+    const xs = dir > 0 ? x0 + h * 0.35 : x1 - h * 0.35;
+    const gr = g.createRadialGradient(xs, yc, 0, xs, yc, h * 0.7);
+    gr.addColorStop(0, ink(o.pool)); gr.addColorStop(1, ink(0));
+    g.globalAlpha = 1; g.fillStyle = gr; g.fillRect(xs - h, yc - h, 2 * h, 2 * h);
+  }
+  g.globalAlpha = 1;
+}
+// a run of overlapping strokes along a band (each with its own press, belly and dry tail)
+function chain(g, x0, x1, yc, h, o) {
+  const r = APA.rng(o.seed * 7 + 1);
+  const dir = o.dir || 1;
+  let pos = dir > 0 ? x0 - 20 * r() : x1 + 20 * r();
+  let k = 0;
+  while (dir > 0 ? pos < x1 : pos > x0) {
+    const len = o.segMin + r() * (o.segMax - o.segMin);
+    const a = dir > 0 ? pos : pos - len, b = dir > 0 ? pos + len : pos;
+    brush(g, a, b, yc + (r() - 0.5) * (o.jit ?? 3), h * (0.92 + 0.16 * r()), { ...o, seed: o.seed + 101 * k });
+    pos += dir * (len - (o.ovl || 40) * (0.6 + 0.8 * r()));
+    k++;
+  }
+}
+// a chain over [x0, x1] continued to xExt (the pan margin) without changing the strokes inside [x0, x1]: a rightward
+// chain simply runs on; a leftward one keeps its strokes and gets a short rightward chain of its own beyond x1
+function chainX(g, x0, x1, xExt, yc, h, o) {
+  if ((o.dir || 1) > 0) { chain(g, x0, xExt, yc, h, o); return; }
+  chain(g, x0, x1, yc, h, o);
+  chain(g, x1 - 10, xExt, yc, h, { ...o, dir: 1, seed: o.seed + 5003 });
+}
+// fill a rectangle with stacked chains of strokes (o.xExt: continue each chain to that x)
+function brushFill(g, x0, y0, x1, y1, bandH, o) {
+  const n = Math.max(1, Math.round((y1 - y0) / bandH)), bh = (y1 - y0) / n;
+  for (let k = 0; k < n; k++) {
+    chainX(g, x0, x1, o.xExt ?? x1, y0 + bh * (k + 0.5), bh * 1.25, { ...o, seed: o.seed + 13 * k, dir: o.alt && k % 2 ? -(o.dir || 1) : (o.dir || 1) });
+  }
+}
+// pigment collects at the edge of a drying wash: darker rim just inside the shape
+function wetEdge(g, path, a, w = 7, blur = 3) {
+  g.save(); g.clip(path);
+  g.filter = `blur(${blur}px)`;
+  g.lineWidth = w; g.strokeStyle = ink(a); g.stroke(path);
+  g.filter = 'none';
+  g.restore();
+}
+// soft mottling blooms inside a wash
+function blooms(g, x0, y0, x1, y1, n, a, rmin, rmax, seed) {
+  const r = APA.rng(seed);
+  for (let i = 0; i < n; i++) {
+    const cx = x0 + r() * (x1 - x0), cy = y0 + r() * (y1 - y0), rr = rmin + r() * (rmax - rmin);
+    const gr = g.createRadialGradient(cx, cy, 0, cx, cy, rr);
+    const aa = a * (0.3 + 0.7 * r());
+    gr.addColorStop(0, ink(aa)); gr.addColorStop(0.7, ink(aa * 0.6)); gr.addColorStop(1, ink(0));
+    g.fillStyle = gr; g.fillRect(cx - rr, cy - rr, 2 * rr, 2 * rr);
+  }
+}
+function rectP(x0, y0, x1, y1) { const p = new Path2D(); p.rect(x0, y0, x1 - x0, y1 - y0); return p; }
+function halo(src, blur, alpha) {
+  const c = mk(); const g = c.getContext('2d');
+  g.filter = `blur(${blur}px)`; g.globalAlpha = alpha; g.drawImage(src, 0, 0); g.filter = 'none';
+  return c;
+}
+
+// ---- geometry (same section as l1fa) ----
+function ballPath(cx) {
+  const p = new Path2D();
+  const r = (z) => Math.sqrt(Math.max(0, SPH_R * SPH_R - (z - SPH_ZC) ** 2));
+  p.moveTo(cx - 66 * K, y(Z.ubmF)); p.lineTo(cx - 66 * K, y(Z.jTop)); p.lineTo(cx - 90 * K, y(Z.jTop));
+  for (let z = Z.jTop; z >= 0; z -= 2) p.lineTo(cx - r(z) * K, y(z));
+  p.quadraticCurveTo(cx - 98 * K, y(-8), cx - 96 * K, y(Z.lamTop));
+  p.lineTo(cx - 90 * K, y(Z.lamTop)); p.lineTo(cx - 90 * K, y(0)); p.lineTo(cx + 90 * K, y(0)); p.lineTo(cx + 90 * K, y(Z.lamTop));
+  p.lineTo(cx + 96 * K, y(Z.lamTop)); p.quadraticCurveTo(cx + 98 * K, y(-8), cx + 90 * K, y(0));
+  for (let z = 0; z <= Z.jTop; z += 2) p.lineTo(cx + r(z) * K, y(z));
+  p.lineTo(cx + 66 * K, y(Z.jTop)); p.lineTo(cx + 66 * K, y(Z.ubmF));
+  p.closePath();
+  return p;
+}
+function ubmPath(cx) {
+  const p = new Path2D();
+  [[-90, 120], [-90, 129], [-75, 129], [-75, 138], [75, 138], [75, 129], [90, 129], [90, 120], [66, 120], [66, 129],
+    [-66, 129], [-66, 120]].forEach(([u, z], i) => (i ? p.lineTo(cx + u * K, y(z)) : p.moveTo(cx + u * K, y(z))));
+  p.closePath();
+  return p;
+}
+
+// ---- layers ----
+function buildPaper() {
+  const c = mk(); const g = c.getContext('2d');
+  g.fillStyle = '#ece5d6'; g.fillRect(0, 0, WW, H);
+  const r = APA.rng(88), rX = APA.rng(8801);
+  // long xuan fibres (the last 500 lie in the pan margin, from their own seed, so the in-frame fibres are unchanged)
+  for (let i = 0; i < 7500; i++) {
+    const q = i < 7000 ? r : rX;
+    const x0 = i < 7000 ? q() * W : W - 30 + q() * (MX + 30), y0 = q() * H, len = 6 + q() * 26, a = q() * Math.PI;
+    g.strokeStyle = q() < 0.55 ? 'rgba(150,132,100,0.07)' : 'rgba(255,252,240,0.25)';
+    g.lineWidth = 0.5 + q() * 0.6;
+    g.beginPath(); g.moveTo(x0, y0);
+    g.quadraticCurveTo(x0 + Math.cos(a) * len * 0.5 + (q() - 0.5) * 6, y0 + Math.sin(a) * len * 0.5 + (q() - 0.5) * 6, x0 + Math.cos(a) * len, y0 + Math.sin(a) * len);
+    g.stroke();
+  }
+  const id = g.getImageData(0, 0, WW, H), d = id.data;
+  for (let yy = 0; yy < H; yy++) for (let xx = 0; xx < WW; xx++) {
+    const m = (nC(xx * 0.005, yy * 0.005) - 0.5) * 12 + (nA(xx * 0.05 + 3, yy * 0.05) - 0.5) * 7;
+    const o = (yy * WW + xx) * 4;
+    d[o] += m; d[o + 1] += m * 0.97; d[o + 2] += m * 0.88;
+  }
+  g.putImageData(id, 0, 0);
+  return c;
+}
+
+function layer(name, draw, haloBlur = 7, haloA = 0.35) {
+  const c = mk(); const g = c.getContext('2d');
+  draw(g);
+  L[name] = { c, h: halo(c, haloBlur, haloA) };
+}
+
+function buildLayers() {
+  const yLam = y(Z.lamTop), ySR = y(Z.srTop), yF = y(Z.dieFace), xE = X(0), xP = X(PKG_EDGE);
+  // board laminate: dielectric bands as wide washes, ink thinning with depth (bokashi), wet edges between strokes
+  layer('lam', (g) => {
+    let z = Z.lamTop, k = 0;
+    const tone = [0.26, 0.15, 0.095, 0.065, 0.05, 0.04];
+    const tmp = mk(); const tg = tmp.getContext('2d');
+    while (y(z) < H + 5) {
+      const ya = y(z), yb = Math.min(H + 20, y(z - 118));
+      const reg = rectP(-10, ya, WW + 10, yb);
+      tg.save(); tg.clip(reg);
+      brushFill(tg, -30, ya, W + 30, yb, 58, { a: tone[Math.min(k, 5)], dry: 0.5, seed: 3 + 31 * k, dir: k % 2 ? -1 : 1, lw: 3.2, bw: 2.0, wob: 4, alt: true, segMin: 380, segMax: 760, ovl: 70, xExt: WW + 30 });
+      blooms(tg, 0, ya, W, yb, 12, tone[Math.min(k, 5)] * 0.5, 40, 120, 5 + k);
+      blooms(tg, W, ya, WW, yb, 1, tone[Math.min(k, 5)] * 0.5, 40, 120, 905 + k);
+      tg.restore();
+      wetEdge(tg, reg, tone[Math.min(k, 5)] * 1.4, 7, 3);
+      z -= 138; k++;
+    }
+    g.filter = 'blur(1.6px)'; g.drawImage(tmp, 0, 0); g.filter = 'none';
+  }, 6, 0.3);
+  // inner Cu planes: one confident horizontal stroke each, the ink running lower layer by layer
+  layer('planes', (g) => {
+    let z = Z.lamTop - 118, k = 0;
+    while (y(z) < H) {
+      const ya = y(z), yb = y(z - 20);
+      g.save(); g.clip(rectP(-10, ya, WW + 10, yb));
+      chainX(g, -20, W + 20, WW + 20, (ya + yb) / 2, (yb - ya) * 1.3, { a: 0.9 - 0.17 * k, dry: 0.45 + 0.08 * k, seed: 11 + 7 * k, dir: k % 2 ? -1 : 1, lw: 2.0, bw: 1.3, wob: 1.0, jit: 1.5, pool: 0.35, segMin: 620, segMax: 980, ovl: 150, decay: 0.3, side: 0 });
+      g.restore();
+      z -= 138; k++;
+    }
+  }, 3, 0.25);
+  // solder resist with NSMD openings, and the Cu pads (flat tops on the joint plane)
+  layer('pads', (g) => {
+    const sr = new Path2D();
+    let x0 = -10;
+    for (const b of BALLS) { const cx = X(b); sr.rect(x0, ySR, cx - 122.5 * K - x0, yLam - ySR); x0 = cx + 122.5 * K; }
+    sr.rect(x0, ySR, WW + 10 - x0, yLam - ySR);
+    g.save(); g.clip(sr); chain(g, -40, WW + 40, (ySR + yLam) / 2, (yLam - ySR) * 1.3, { a: 0.6, dry: 0.12, seed: 21, lw: 1.6, wob: 0.6, jit: 1, segMin: 700, segMax: 1100, ovl: 220, decay: 0.15, tail: 0.6 }); g.restore();
+    for (const b of BALLS) {
+      const cx = X(b), p = rectP(cx - 90 * K, LINE_Y, cx + 90 * K, yLam);
+      g.save(); g.clip(p);
+      brush(g, cx - 90 * K - 6, cx + 90 * K + 6, (LINE_Y + yLam) / 2, (yLam - LINE_Y) * 1.3, { a: 1, dry: 0.06, seed: 30 + b, lw: 1.8, wob: 0.5, pool: 0.5, decay: 0.05, tail: 0.3 });
+      g.restore();
+      // the pad top is the joint plane: a crisp, fully loaded edge
+      g.fillStyle = ink(0.88); g.fillRect(cx - 90 * K, LINE_Y, 180 * K, 2.5);
+    }
+  }, 3, 0.3);
+  // Si die: broad dark strokes pulled from the die edge outward, drying to kasure at the frame edge
+  layer('die', (g) => {
+    const p = rectP(-10, -10, xE, yF);
+    g.save(); g.clip(p);
+    brushFill(g, -40, -10, xE + 4, yF, 80, { a: 0.9, dry: 0.6, seed: 41, dir: -1, lw: 2.6, bw: 1.2, wob: 3, pool: 0.3, segMin: 600, segMax: 640, ovl: 0, decay: 0.3 });
+    blooms(g, 0, 0, xE, yF, 8, 0.12, 30, 100, 43);
+    g.restore();
+    wetEdge(g, p, 0.55, 8, 2.5);
+  }, 7, 0.32);
+  // mold compound: a pale wash, filler as sparse ink dots (tenten); saw edge with a wet edge
+  layer('mold', (g) => {
+    const p = rectP(xE, -10, xP, yF);
+    g.save(); g.clip(p);
+    const tmp = mk(); const tg = tmp.getContext('2d');
+    brushFill(tg, xE - 4, -10, xP + 40, yF, 96, { a: 0.13, dry: 0.55, seed: 51, dir: 1, lw: 3.4, bw: 2.0, wob: 4, segMin: 420, segMax: 820, ovl: 80 });
+    blooms(tg, xE, 0, xP, yF, 18, 0.06, 50, 160, 53);
+    g.filter = 'blur(1.2px)'; g.drawImage(tmp, 0, 0); g.filter = 'none';
+    const r = APA.rng(57);
+    for (let i = 0; i < 520; i++) {
+      const px = xE + 8 + r() * (xP - xE - 16), py = 6 + r() * (yF - 12), d = 0.8 + 2.6 * Math.pow(r(), 2.5);
+      g.fillStyle = ink(0.25 + 0.4 * r()); g.beginPath(); g.ellipse(px, py, d * 1.2, d, r() * 3, 0, Math.PI * 2); g.fill();
+    }
+    g.restore();
+    wetEdge(g, p, 0.22, 7, 2.5);
+  }, 6, 0.3);
+  // RDL: the polyimide band as a fine grey line along the package face, Cu rays and pads in dense ink,
+  // PI1 vias over the die pads, UBM steps under each ball pad
+  layer('rdl', (g) => {
+    const pi = rectP(-10, yF, xP, y(Z.pi2Face));
+    g.save(); g.clip(pi);
+    chain(g, -40, xP + 40, (yF + y(Z.pi2Face)) / 2, (y(Z.pi2Face) - yF) * 1.3, { a: 0.5, dry: 0.08, seed: 61, lw: 1.5, bw: 0.9, wob: 0.5, jit: 0.6, segMin: 700, segMax: 1000, ovl: 220, decay: 0.12, tail: 0.6 }); g.restore();
+    const cu = new Path2D();
+    const seg = (u0, u1) => cu.rect(X(Math.min(u0, u1)), y(Z.cuTop), Math.abs(u1 - u0) * K, (Z.cuTop - Z.cuBot) * K);
+    for (const b of BALLS) seg(b - 100, b + 100);
+    for (const a of PADS) {
+      seg(a - 15, a + 15);
+      cu.moveTo(X(a) - 10 * K, yF); cu.lineTo(X(a) + 10 * K, yF); cu.lineTo(X(a) + 14 * K, y(Z.cuTop)); cu.lineTo(X(a) - 14 * K, y(Z.cuTop)); cu.closePath();
+    }
+    seg(-50, 200); seg(-230, -400); seg(470, 600); seg(870, 1000);
+    g.fillStyle = ink(0.92); g.fill(cu);
+    for (const b of BALLS) {
+      const cx = X(b);
+      // PI2 under the pad (conformal step) and UBM
+      g.fillStyle = ink(0.5); g.fillRect(cx - 109 * K, y(Z.pi2Face) - 0.5, 218 * K, (Z.pi2Face - Z.ubmF) * K + 0.5);
+      g.fillStyle = ink(0.85); g.fill(ubmPath(cx));
+    }
+  }, 3, 0.4);
+  // solder balls: pale washes with wet edges and a light contour on the shadow side
+  layer('balls', (g) => {
+    for (const b of BALLS) {
+      const cx = X(b), p = ballPath(cx);
+      g.save(); g.clip(p);
+      g.fillStyle = ink(0.13); g.fillRect(cx - 120, y(140), 240, 140 * K + 40);
+      blooms(g, cx - 70, y(110), cx + 70, y(5), 5, 0.07, 18, 46, 70 + b);
+      g.restore();
+      wetEdge(g, p, 0.34, 8, 2.5);
+      g.save(); g.clip(p);
+      g.filter = 'blur(1px)';
+      g.lineWidth = 3.2; g.strokeStyle = ink(0.32);
+      g.beginPath(); g.arc(cx, y(SPH_ZC), SPH_R * K, -0.62, 0.7); g.stroke();
+      g.filter = 'none';
+      g.restore();
+    }
+  }, 5, 0.28);
+  // seal: vermilion square, carved ball-array motif in negative space (no characters)
+  layer('seal', (g) => {
+    const sx = 1716, sy = 128, s = 86;
+    const r = APA.rng(97);
+    const sp = new Path2D();
+    sp.moveTo(sx + r() * 2, sy + r() * 2);
+    for (let i = 1; i <= 8; i++) sp.lineTo(sx + s * i / 8 + (r() - 0.5) * 2, sy + (r() - 0.5) * 2);
+    for (let i = 1; i <= 8; i++) sp.lineTo(sx + s + (r() - 0.5) * 2, sy + s * i / 8 + (r() - 0.5) * 2);
+    for (let i = 7; i >= 0; i--) sp.lineTo(sx + s * i / 8 + (r() - 0.5) * 2, sy + s + (r() - 0.5) * 2);
+    for (let i = 7; i >= 1; i--) sp.lineTo(sx + (r() - 0.5) * 2, sy + s * i / 8 + (r() - 0.5) * 2);
+    sp.closePath();
+    g.fillStyle = RED; g.globalAlpha = 0.88; g.fill(sp); g.globalAlpha = 1;
+    g.globalCompositeOperation = 'destination-out';
+    // inner border cut and a 3 x 3 dot array
+    g.lineWidth = 3; g.strokeStyle = '#000'; g.strokeRect(sx + 9, sy + 9, s - 18, s - 18);
+    for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) {
+      g.beginPath(); g.arc(sx + 25 + 18 * i, sy + 25 + 18 * j, 5.5, 0, Math.PI * 2); g.fill();
+    }
+    // uneven stamp pressure: paper shows through in specks
+    for (let i = 0; i < 260; i++) {
+      g.globalAlpha = 0.25 + 0.6 * r();
+      g.beginPath(); g.arc(sx + r() * s, sy + r() * s, 0.4 + 1.4 * r() * r(), 0, Math.PI * 2); g.fill();
+    }
+    g.globalAlpha = 1; g.globalCompositeOperation = 'source-over';
+  }, 2, 0.25);
+}
+
+// ---- timing: each stroke's brush front, s in [0,1] ----
+const ease = (s) => (s <= 0 ? 0 : s >= 1 ? 1 : 1 - Math.pow(1 - s, 2.4));
+const BALL_X = BALLS.map(X);
+const PAD_C = X(-140);
+const PLAN = [
+  { n: 'lam', t0: 0.00, t1: 0.15, kind: 'x', x0: -10, x1: W + 10 },
+  { n: 'planes', t0: 0.03, t1: 0.17, kind: 'x', x0: -10, x1: W + 10 },
+  { n: 'pads', t0: -0.14, t1: 0.0, kind: 'x', x0: -10, x1: W + 10 },
+  { n: 'die', t0: 0.08, t1: 0.19, kind: 'y', y0: -10, y1: y(Z.dieFace) + 4 },
+  { n: 'mold', t0: 0.12, t1: 0.27, kind: 'x', x0: X(0) - 4, x1: X(PKG_EDGE) + 6 },
+  { n: 'rdl', t0: 0.17, t1: 0.31, kind: 'c', c: PAD_C, d: X(PKG_EDGE) - PAD_C + 10 },
+];
+BALLS.forEach((b, i) => {
+  const rank = Math.abs(X(b) - PAD_C) / 320;
+  PLAN.push({ n: 'balls', t0: 0.19 + 0.03 * rank, t1: 0.19 + 0.03 * rank + 0.09, kind: 'a', cx: X(b), cy: y(SPH_ZC) });
+});
+PLAN.push({ n: 'seal', t0: 0.32, t1: 0.37, kind: 's' });
+const LAG = 0.035;                     // ink bloom follows the brush
+
+function clipFront(g, st, s) {
+  g.beginPath();
+  if (st.kind === 'x') {                 // the front keeps its sweep (x1 = W + 10); once complete it uncovers the pan margin
+    const xf = s >= 1 ? WW + 40 : st.x0 + (st.x1 - st.x0) * s; g.rect(st.x0 - 20, -20, xf - st.x0 + 20, H + 40);
+  }
+  else if (st.kind === 'y') { const yf = st.y0 + (st.y1 - st.y0) * s; g.rect(-20, -20, WW + 40, yf + 20); }
+  else if (st.kind === 'c') { const d = st.d * s; g.rect(st.c - d, -20, 2 * d, H + 40); }
+  else if (st.kind === 'a') {
+    // a brush circling the ball from its top, clockwise
+    const a0 = -Math.PI / 2, a1 = a0 + 2 * Math.PI * s;
+    g.moveTo(st.cx, st.cy); g.arc(st.cx, st.cy, 180, a0, a1); g.closePath();
+  }
+  else g.rect(-20, -20, WW + 40, H + 40);
+}
+
+function compose(g, t) {
+  g.drawImage(paper, 0, 0);
+  for (const st of PLAN) {
+    const lay = L[st.n];
+    const s = ease((t - st.t0) / (st.t1 - st.t0));
+    const sh = ease((t - st.t0 - LAG) / (st.t1 - st.t0));
+    if (sh > 0) {                      // bloom: wet halo spreading behind the front
+      g.save(); clipFront(g, st, sh); g.clip();
+      if (st.kind === 'a') { g.beginPath(); g.rect(st.cx - 130, 0, 260, H); g.clip(); }
+      g.globalAlpha = st.kind === 's' ? sh : 1; g.drawImage(lay.h, 0, 0); g.restore();
+    }
+    if (s <= 0) continue;
+    g.save();
+    clipFront(g, st, s); g.clip();
+    if (st.kind === 'a') { g.beginPath(); g.rect(st.cx - 130, 0, 260, H); g.clip(); }
+    if (st.kind === 's') {             // seal pressed: settles from 4 % larger, ink density rises
+      const k = 1 + 0.04 * (1 - s), cx = 1759, cy = 171;
+      g.translate(cx, cy); g.scale(k, k); g.translate(-cx, -cy); g.globalAlpha = s;
+    } else g.globalAlpha = 0.82 + 0.18 * s;    // wet ink darkens a little as it soaks in
+    g.drawImage(lay.c, 0, 0);
+    g.restore();
+  }
+}
+
+APA.scene({
+  meta: { text: 'dark' },              // pass-A slot: no overlay; 'dark' if text is ever added
+  init() {
+    ({ ctx } = APA.canvas('2d'));
+    paper = buildPaper();
+    buildLayers();
+    finalC = mk();
+    compose(finalC.getContext('2d'), 0.62);
+    // warm-up: upload every layer once so the first animated frames stay fast
+    for (const t of [0.1, 0.25, 0.36]) { compose(ctx, t); ctx.getImageData(0, 0, 1, 1); }
+    ctx.drawImage(finalC, 0, 0);
+    ctx.getImageData(0, 0, 1, 1);
+  },
+  render(t) {
+    const tt = Math.max(0, t);
+    const pan = Math.min(PAN * tt / SHOT_SPEED, PAN_MAX);
+    ctx.setTransform(1, 0, 0, 1, -pan, 0);
+    if (tt >= T_END) ctx.drawImage(finalC, 0, 0);
+    else compose(ctx, tt / TS);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+  },
+});
+</script>
+</body>
+</html>

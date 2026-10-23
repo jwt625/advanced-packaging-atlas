@@ -1,0 +1,298 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>m6 cu stud sem</title>
+<script src="../lib/apa.js"></script>
+<script src="../lib/textfx.js"></script>
+</head>
+<body>
+<script>
+// "more to" m08: tilted SEM (secondary electrons) of the 12 um Cu stud array on a 20 x 30 um pitch at the interface
+// edge of a processor chiplet (M-Series Gen 2 chips-first fan-out TV, ectc51909.2023.00053-a-i1).
+// 8 px/um, 30 deg tilt: x pitch 160 px, y pitch 30 um x cos 30 = 207.8 px; stud top ellipse 96 x 83.1 px; stud
+// height 10 um (crop estimate) -> 40 px of visible sidewall. Lowest row: stud bases end at y = 500.
+// y = 600: the die edge (strongest SE edge); below it the die sidewall face, dim. Motion: stage drift 20 px/s left.
+// Sources and choices: m6.notes.md.
+const { W, H, LINE_Y } = APA;
+const S = 8;                                   // px per um (chosen)
+const TILT = 30 * Math.PI / 180;               // chosen
+const PX = 20 * S;                             // 160 px (20 um pitch along x, chosen axis)
+const PY = 30 * S * Math.cos(TILT);            // 207.8 px (30 um pitch along y, foreshortened)
+const A = 6 * S;                               // 48 px: top ellipse semi-axis x (12 um diameter)
+const B = A * Math.cos(TILT);                  // 41.6 px: semi-axis y
+const HS = 10 * S * Math.sin(TILT);            // 40 px: projected stud height (10 um, crop estimate)
+const X0 = 960;                                // one column centred on x = 960
+const YB0 = 500 - B;                           // lowest row base-ellipse centre (base front point at y = 500)
+const YT0 = YB0 - HS;                          // lowest row top-ellipse centre
+const DRIFT = 20;                              // px/s, content moves left
+const MARGIN = 72;
+const WW = W + MARGIN;
+
+let ctx, world, noiseC;
+
+const sat = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+function gauss(r) { return (r() + r() + r() + r() - 2) * 1.732; }
+function blur(a, w, h, rad, passes) {
+  const tmp = new Float32Array(a.length);
+  for (let p = 0; p < passes; p++) {
+    for (let y = 0; y < h; y++) {
+      let s = 0; const o = y * w;
+      for (let x = -rad; x <= rad; x++) s += a[o + Math.min(w - 1, Math.max(0, x))];
+      for (let x = 0; x < w; x++) {
+        tmp[o + x] = s / (2 * rad + 1);
+        s += a[o + Math.min(w - 1, x + rad + 1)] - a[o + Math.max(0, x - rad)];
+      }
+    }
+    for (let x = 0; x < w; x++) {
+      let s = 0;
+      for (let y = -rad; y <= rad; y++) s += tmp[Math.min(h - 1, Math.max(0, y)) * w + x];
+      for (let y = 0; y < h; y++) {
+        a[y * w + x] = s / (2 * rad + 1);
+        s += tmp[Math.min(h - 1, y + rad + 1) * w + x] - tmp[Math.max(0, y - rad) * w + x];
+      }
+    }
+  }
+  return a;
+}
+function normalize(a) {
+  let m = 0, v = 0;
+  for (let i = 0; i < a.length; i++) m += a[i];
+  m /= a.length;
+  for (let i = 0; i < a.length; i++) v += (a[i] - m) ** 2;
+  const s = Math.sqrt(v / a.length) || 1;
+  for (let i = 0; i < a.length; i++) a[i] = (a[i] - m) / s;
+  return a;
+}
+function field(w, h, seed, rad, passes) {
+  const r = APA.rng(seed), a = new Float32Array(w * h);
+  for (let i = 0; i < a.length; i++) a[i] = gauss(r);
+  return normalize(blur(a, w, h, rad, passes));
+}
+function lowField(w, h, seed, cell) {
+  const r = APA.rng(seed), gw = Math.ceil(w / cell) + 2, gh = Math.ceil(h / cell) + 2;
+  const g = new Float32Array(gw * gh);
+  for (let i = 0; i < g.length; i++) g[i] = gauss(r);
+  const a = new Float32Array(w * h);
+  for (let y = 0; y < h; y++) {
+    const fy = y / cell, iy = Math.floor(fy), ty = fy - iy, sy = ty * ty * (3 - 2 * ty);
+    for (let x = 0; x < w; x++) {
+      const fx = x / cell, ix = Math.floor(fx), tx = fx - ix, sx = tx * tx * (3 - 2 * tx);
+      const a0 = g[iy * gw + ix] * (1 - sx) + g[iy * gw + ix + 1] * sx;
+      const a1 = g[(iy + 1) * gw + ix] * (1 - sx) + g[(iy + 1) * gw + ix + 1] * sx;
+      a[y * w + x] = a0 * (1 - sy) + a1 * sy;
+    }
+  }
+  return normalize(a);
+}
+// approximate signed distance (px) to an axis-aligned ellipse with semi-axes a, b
+function sdEll(dx, dy, a, b) {
+  const qx = dx / a, qy = dy / b;
+  const k = Math.hypot(qx, qy);
+  if (k < 1e-6) return -Math.min(a, b);
+  const g = Math.hypot(qx / a, qy / b) / k;         // |grad| of k
+  return (k - 1) / g;
+}
+
+function buildWorld() {
+  const w = WW, h = H;
+  const val = new Float32Array(w * h);
+  const speck = field(w, h, 6101, 1, 1);           // fine static field speckle (passivation)
+  const grain = field(w, h, 6103, 2, 2);           // rough plated Cu top / sidewall texture
+  const chg = lowField(w, h, 6107, 460);           // slow brightness drift (charging / detector gain)
+  const edgeV = lowField(w, 1, 6109, 80);          // edge brightness along x
+  const saw = lowField(w, 1, 6113, 7);             // faint vertical texture on the die sidewall face
+  const r = APA.rng(6127);
+  const jitter = new Map();                          // per-stud sub-pixel placement and size scatter
+  for (let k = -8; k <= 9; k++) for (let j = 0; j < 4; j++) {
+    jitter.set(`${k},${j}`, { dx: (r() - 0.5) * 1.2, ds: 1 + (r() - 0.5) * 0.02, dh: (r() - 0.5) * 1.5 });
+  }
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const i = y * w + x;
+      let v;
+      if (y >= LINE_Y) {
+        // die sidewall face seen at 30 deg tilt, shadowed from the detector: dim, faint vertical texture
+        const dy = y - LINE_Y + 0.5;
+        v = 0.15 + 0.06 * Math.exp(-dy / 70) + 0.006 * saw[x] + 0.01 * chg[i] + 0.012 * speck[i]
+          + 0.42 * Math.exp(-dy / 1.8) * (1 + 0.12 * edgeV[x]);
+        val[i] = v;
+        continue;
+      }
+      // field: passivation on the die, mid-dark grey, fine speckle, slow drift, slightly darker toward the top
+      let fieldV = 0.30 + 0.022 * chg[i] + 0.018 * speck[i] - 0.03 * (1 - y / LINE_Y);
+      // nearest stud
+      const k = Math.round((x - X0) / PX);
+      const j = Math.max(0, Math.round((YT0 + HS / 2 - y) / PY));
+      const jp = jitter.get(`${k},${j}`) || { dx: 0, ds: 1, dh: 0 };
+      const a = A * jp.ds, b = B * jp.ds, hs = HS + jp.dh;
+      const xc = X0 + k * PX + jp.dx;
+      const yt = YT0 - j * PY, yb = yt + hs;
+      const dx = x - xc;
+      // contact shadow around the base footprint, offset away from the detector (detector upper left)
+      const dBase = sdEll(dx - 4, y - yb - 2, a, b);
+      fieldV *= 1 - 0.38 * Math.exp(-Math.max(dBase, 0) / 6);
+      // silhouette of the stud: the top ellipse swept down to the base ellipse
+      const yy = y < yt ? y - yt : y > yb ? y - yb : 0;
+      const dSil = sdEll(dx, yy, a, b);
+      const dTop = sdEll(dx, y - yt, a, b);
+      const cov = sat(0.5 - dSil);
+      if (cov <= 0) { val[i] = fieldV; continue; }
+      const u = Math.max(-1, Math.min(1, dx / a));
+      const cphi = Math.sqrt(1 - u * u);
+      const det = 1 - 0.13 * u;                      // surfaces facing the detector (left) brighter
+      // flat top: mid-light, rough plated texture, bright edge effect at the rim
+      const din = Math.max(-dTop, 0);
+      const backRim = 0.75 + 0.25 * sat(0.5 - (y - yt) / B); // rim toward vacuum (far side) brightest, smooth
+      const top = (0.50 + 0.04 * grain[i] + 0.02 * chg[i]) * det + 0.42 * backRim * det * Math.exp(-din / 2.4)
+        + 0.05 * Math.exp(-din / 12);
+      // sidewall: SE yield rises toward the silhouettes (grazing), dark corner at the base
+      const yFront = yb + b * cphi;                  // base front edge at this x
+      const side = (0.40 + 0.36 * Math.pow(1 - cphi, 0.8) + 0.02 * grain[i]) * det
+        + 0.30 * Math.exp(-(a - Math.abs(dx)) / 2.2)
+        - 0.16 * Math.exp(-(yFront - y) / 4);
+      const fTop = sat(0.5 - dTop);
+      const studV = top * fTop + side * (1 - fTop);
+      val[i] = fieldV * (1 - cov) + studV * cov;
+    }
+    // die edge: strongest SE edge in the frame, just above the line
+  }
+  for (let y = LINE_Y - 40; y < LINE_Y; y++) {
+    const de = LINE_Y - y - 0.5;
+    for (let x = 0; x < w; x++) {
+      val[y * w + x] += (0.66 * Math.exp(-de / 2.8) + 0.06 * Math.exp(-de / 14)) * (1 + 0.12 * edgeV[x]);
+    }
+  }
+  blur(val, w, h, 1, 1);                              // probe size
+  const c = document.createElement('canvas');
+  c.width = w; c.height = h;
+  const img = new ImageData(w, h);
+  const d32 = new Uint32Array(img.data.buffer);
+  for (let i = 0; i < val.length; i++) {
+    const g = Math.round(255 * sat(val[i]));
+    d32[i] = 0xff000000 | (g << 16) | (g << 8) | g;
+  }
+  c.getContext('2d').putImageData(img, 0, 0);
+  return c;
+}
+
+// screen-fixed static detector noise and a few scan-line gain rows (kept out of y 490-600), overlay blend
+function buildNoise() {
+  const r = APA.rng(6131);
+  const n = field(W, H, 6137, 1, 1);
+  const rowGain = new Float32Array(H);
+  for (let k = 0; k < 12; k++) {
+    let y = Math.floor(r() * H);
+    if (y >= 490 && y <= 604) y = (y + 170) % H;
+    const g = (r() - 0.5) * 0.07, len = 1 + Math.floor(r() * 3);
+    for (let q = 0; q < len && y + q < H; q++) rowGain[y + q] = g;
+  }
+  const img = new ImageData(W, H);
+  const d32 = new Uint32Array(img.data.buffer);
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      const i = y * W + x;
+      const g = Math.round(255 * sat(0.5 + 0.028 * n[i] + 0.02 * gauss(r) + rowGain[y]));
+      d32[i] = 0xff000000 | (g << 16) | (g << 8) | g;
+    }
+  }
+  const c = document.createElement('canvas');
+  c.width = W; c.height = H;
+  c.getContext('2d').putImageData(img, 0, 0);
+  return c;
+}
+
+function draw(t) {
+  const tt = Math.max(0, Math.min(t, 3.4));
+  const off = DRIFT * tt;
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.imageSmoothingEnabled = true;
+  ctx.drawImage(world, -off, 0);
+  ctx.globalCompositeOperation = 'overlay';
+  ctx.drawImage(noiseC, 0, 0);
+  ctx.globalCompositeOperation = 'source-over';
+}
+
+// ---- overlay word ("more to"): lettered as if it were a raised Cu feature on the die imaged in the same SE view.
+// The glyphs stay upright and legible (top faces in screen space); the 30 deg tilt shows as a short sidewall below each
+// glyph (extrusion straight down, like the stud sidewalls), a bright SE edge effect along the rims, surfaces facing the
+// detector (upper left) brighter, a contact shadow offset away from the detector, the scene's probe blur and a
+// screen-fixed static grain. Dark tone (not used by m08): a recessed trench instead (dark floor, far wall visible at
+// the top inside, bright rim). Size = info.size.
+function relLum(css) {
+  const mm = /^#([0-9a-f]{6})$/i.exec(css || '');
+  if (!mm) return null;
+  const v = parseInt(mm[1], 16), lin = (c) => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+  return 0.2126 * lin(v >> 16) + 0.7152 * lin((v >> 8) & 255) + 0.0722 * lin(v & 255);
+}
+function mkC(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+const grey = (v, a = 1) => { const q = Math.round(255 * sat(v)); return `rgba(${q},${q},${q},${a})`; };
+let grainPat = null;
+function grainCanvas() {                                 // 256 x 256 static SE grain tile (seeded)
+  if (grainPat) return grainPat;
+  const r = APA.rng(6151), n = 256, img = new ImageData(n, n), d = img.data;
+  for (let i = 0; i < n * n; i++) {
+    const v = gauss(r);
+    const q = v > 0 ? 255 : 0;
+    d[4 * i] = d[4 * i + 1] = d[4 * i + 2] = q; d[4 * i + 3] = Math.round(255 * Math.min(1, Math.abs(v) * 0.09));
+  }
+  grainPat = mkC(n, n); grainPat.getContext('2d').putImageData(img, 0, 0);
+  return grainPat;
+}
+function semWord(g, word, info) {
+  const size = info.size;
+  const m = TFX.mask(word, { family: info.fonts.grotesk, size, weight: 600, pad: Math.ceil(size * 0.35) });
+  const L = info.color ? relLum(info.color) : null;
+  const dark = L == null ? info.tone === 'dark' : L < 0.18;
+  const d = Math.max(3, Math.round(size * 0.075));        // projected glyph height at 30 deg tilt (chosen)
+  const layer = mkC(m.w, m.h), c = layer.getContext('2d');
+  // left-to-right detector falloff across the word (det = 1 - 0.13 u in the stud model)
+  const det = (lo, hi) => { const gr = c.createLinearGradient(m.ox, 0, m.ox + m.width, 0);
+    gr.addColorStop(0, grey(hi)); gr.addColorStop(1, grey(lo)); return gr; };
+  if (!dark) {
+    const sh = mkC(m.w, m.h), shc = sh.getContext('2d');  // contact shadow, offset down-right
+    shc.filter = 'blur(5px)'; shc.drawImage(TFX.fill(m, 'rgba(0,0,0,0.55)'), 4, d + 3);
+    c.drawImage(sh, 0, 0);
+    const side = TFX.fill(m, det(0.46, 0.54));
+    for (let k = d; k >= 1; k--) c.drawImage(side, 0, k);                           // sidewall
+    c.drawImage(TFX.outline(m, { width: 2, color: grey(0.86) }), 0, d);            // grazing silhouette at the base
+    c.drawImage(TFX.fill(m, det(0.74, 0.84)), 0, 0);                                // flat top
+    c.drawImage(TFX.outline(m, { width: 2.5, color: grey(0.98) }), 0, 0);           // SE edge effect at the rim
+  } else {
+    c.drawImage(TFX.fill(m, grey(0.10)), 0, 0);                                     // trench floor
+    const wall = mkC(m.w, m.h), wc = wall.getContext('2d');                         // far wall: glyph minus itself shifted down
+    wc.drawImage(TFX.fill(m, grey(0.40)), 0, 0);
+    wc.globalCompositeOperation = 'destination-out'; wc.drawImage(m.canvas, 0, d);
+    c.drawImage(wall, 0, 0);
+    c.drawImage(TFX.outline(m, { width: 2, color: grey(0.92) }), 0, 0);
+  }
+  // screen-fixed grain, only on the glyph layer
+  const left = Math.round(info.x - m.width / 2 - m.ox), top = Math.round(info.baseline - m.oy);
+  c.globalCompositeOperation = 'source-atop';
+  const pat = c.createPattern(grainCanvas(), 'repeat');
+  c.translate(-left, -top); c.fillStyle = pat; c.fillRect(left, top, m.w, m.h);
+  c.setTransform(1, 0, 0, 1, 0, 0);
+  const soft = mkC(m.w, m.h), sk = soft.getContext('2d');                          // probe size, as the scene
+  sk.filter = 'blur(0.8px)'; sk.drawImage(layer, 0, 0);
+  g.drawImage(soft, left, top);
+}
+
+APA.scene({
+  meta: { text: 'light' },
+  text(g, word, t, p, info) { semWord(g, word, info); },
+  async init() {
+    ({ ctx } = APA.canvas('2d'));
+    world = buildWorld();
+    noiseC = buildNoise();
+    draw(0);                                         // warm-up: first canvas uploads happen in init
+    ctx.getImageData(0, 0, 1, 1);
+    const wc = mkC(W, H).getContext('2d');           // warm-up of the word path (fonts, patterns, filters)
+    semWord(wc, 'more to', { fonts: APA.FONTS, size: 64, color: '#f4f1ea', tone: 'light', x: 960, baseline: 565 });
+    wc.getImageData(0, 0, 1, 1);
+  },
+  render(t) { draw(t); },
+});
+</script>
+</body>
+</html>

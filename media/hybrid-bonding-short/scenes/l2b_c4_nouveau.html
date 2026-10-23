@@ -1,0 +1,601 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>l2b c4 nouveau</title>
+<script src="../lib/apa.js"></script>
+<script src="../lib/textfx.js"></script>
+</head>
+<body>
+<script>
+// L2 pass B: C4 flip-chip solder bumps, die to organic build-up substrate, 150 um pitch, as an Art Nouveau
+// stained-glass panel (Mucha halo, whiplash cames, muted gold / sage / cream). Cross-section during reflow: the
+// molten SnAg joints collapse and the die settles onto its final stand-off (volume-conserving joint shape).
+// Joint plane (substrate Cu pad top) on LINE_Y. Overlay text band kept calm. Sources: l2b_c4_nouveau.notes.md
+const { W, H, LINE_Y } = APA;
+const S = 2.0;                       // px per um
+const um = (v) => v * S;
+
+const Y_PAD = LINE_Y;                // Cu pad top = joint plane
+const Y_PAD_B = Y_PAD + um(15);
+const Y_SR = Y_PAD - um(5);          // 20 um SR over the dielectric = 5 um over the 15 um pad
+const Y_UBM_B = Y_PAD - um(70);      // final joint height 70 um (after collapse)
+const Y_PASS_B = Y_UBM_B - um(5);
+const Y_PASS_T = Y_PASS_B - um(7);
+const Y_BEOL_T = Y_PASS_T - um(10);
+const T_ABF = um(30), T_CU = um(15);
+
+const PITCH = um(150);
+const R_MAX = um(45), R_UBM = um(37.5), R_SRO_B = um(37.5), R_SRO_T = um(39), R_PAD = um(52.5);
+const R_PO = um(25), R_AL = um(40), V_RT = um(18), V_RB = um(13);
+const BX = [-3, -2, -1, 0, 1, 2, 3, 4].map((i) => W / 2 - PITCH / 2 + i * PITCH);
+
+// motion
+const PAN = 24;                      // px/s camera drift (content moves left)
+const D0 = um(10), TAU = 0.32;       // die starts 10 um high and settles with time constant TAU
+const lift = (t) => D0 * Math.exp(-t / TAU);
+
+// world canvases are wider than the frame so the pan never runs out of drawing
+const XW0 = -40, WW = W + 200;
+
+const C = {
+  cream: '#efe4c6', ivory: '#f5eedb', lead: '#3a3125', leadSoft: '#8d7c5b',
+  gold: '#c3a057', goldDk: '#9c7c3c', goldLt: '#e3cd92', sage: '#9eae88', sage2: '#91a37c', sageDk: '#6f8462',
+  olive: '#7b8556', rose: '#c49a88', roseDk: '#a87b6c', teal: '#7f9c90',
+  pew: '#ddd5bd', pewDk: '#bdb397', beol: '#5e5a48', pass: '#4a4536', al: '#d8d0b8',
+  sr: '#7d9a86', srDk: '#6d8360', abf: '#8e9b76', abf2: '#84926e', cu: '#bf9a52',
+};
+
+let ctx, dieC, subC, grain, border, borderScroll, ornC, ornG;
+function mk(w = WW, h = H) { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+function rect(x, y, w, h) { const p = new Path2D(); p.rect(x, y, w, h); return p; }
+function lead(g, path, w = 5, col = C.lead) { g.lineWidth = w; g.strokeStyle = col; g.lineJoin = 'round'; g.lineCap = 'round'; g.stroke(path); }
+
+// glass mottle: soft blotches of lighter and darker tint inside a clip
+function mottle(g, clip, x0, y0, x1, y1, rnd, n, a) {
+  g.save(); g.clip(clip);
+  for (let k = 0; k < n; k++) {
+    const x = x0 + rnd() * (x1 - x0), y = y0 + rnd() * (y1 - y0), r = 30 + rnd() * 110;
+    const gr = g.createRadialGradient(x, y, 0, x, y, r);
+    const c = rnd() < 0.5 ? '255,250,230' : '60,52,30';
+    gr.addColorStop(0, `rgba(${c},${a * (0.4 + rnd() * 0.6)})`); gr.addColorStop(1, `rgba(${c},0)`);
+    g.fillStyle = gr; g.fillRect(x - r, y - r, 2 * r, 2 * r);
+  }
+  g.restore();
+}
+
+// ---------- the die: Si as a stained-glass panel, then BEOL, passivation, Al pads, UBM ----------
+function whiplash(sx, x0, y0, sc, f = 1, sway = 0) {
+  // centre line of a whiplash stem, integrated from its turning rate: rises from the die face, leans out,
+  // swings back in a long S and rolls into a tightening spiral (continuous tangent throughout).
+  // Growth: only the first fraction f of the path exists, and its tip is curled tighter while young
+  // (a fiddlehead), relaxing to the final spiral as f -> 1.
+  const L = 640 * sc, N = 160, pts = [];
+  const rate = (u) => -4.2 * Math.exp(-(((u - 0.24) / 0.13) ** 2)) + 9.5 * Math.exp(-(((u - 0.56) / 0.1) ** 2))
+    + 130 * Math.max(0, u - 0.7) ** 1.2;
+  const tip = (u) => 22 * (1 - f) * Math.exp(-(((u - f) / 0.07) ** 2));
+  let x = W / 2 + sx * x0, y = y0, th = -Math.PI / 2 + sx * (0.12 + sway);
+  pts.push([x, y]);
+  const n = Math.max(2, Math.round(N * f));
+  for (let i = 1; i <= n; i++) {
+    const u = (i / n) * f;
+    th += sx * (rate(u) + tip(u)) * (f / n);
+    x += Math.cos(th) * L * f / n; y += Math.sin(th) * L * f / n;
+    pts.push([x, y]);
+  }
+  return pts;
+}
+
+function ribbon(pts, w0, w1) {
+  const L = [], R = [];
+  for (let i = 0; i < pts.length; i++) {
+    const a = pts[Math.max(0, i - 1)], b = pts[Math.min(pts.length - 1, i + 1)];
+    let tx = b[0] - a[0], ty = b[1] - a[1];
+    const n = Math.hypot(tx, ty) || 1; tx /= n; ty /= n;
+    const w = w0 + (w1 - w0) * (i / (pts.length - 1));
+    L.push([pts[i][0] - ty * w, pts[i][1] + tx * w]); R.push([pts[i][0] + ty * w, pts[i][1] - tx * w]);
+  }
+  const p = new Path2D();
+  p.moveTo(L[0][0], L[0][1]);
+  for (const q of L.slice(1)) p.lineTo(q[0], q[1]);
+  for (const q of R.reverse()) p.lineTo(q[0], q[1]);
+  p.closePath();
+  return p;
+}
+function polyline(pts) { const p = new Path2D(); p.moveTo(pts[0][0], pts[0][1]); for (const q of pts.slice(1)) p.lineTo(q[0], q[1]); return p; }
+
+function paintDie(g) {
+  const rnd = APA.rng(150150);
+  g.translate(-XW0, 0);
+  const x0 = XW0, x1 = XW0 + WW;
+  const si = rect(x0 - 10, -10, WW + 20, Y_BEOL_T + 10);
+  g.save(); g.clip(si);
+  // radiating cames from the halo centre divide the background into alternating sage panes
+  const hx = W / 2, hy = 165;
+  const nR = 22;
+  for (let i = 0; i < 2 * nR; i++) {
+    const a0 = Math.PI * (i / nR), a1 = Math.PI * ((i + 1) / nR);
+    const p = new Path2D();
+    p.moveTo(hx, hy);
+    p.lineTo(hx + Math.cos(a0) * 2400, hy + Math.sin(a0) * 2400);
+    p.lineTo(hx + Math.cos(a1) * 2400, hy + Math.sin(a1) * 2400);
+    p.closePath();
+    g.fillStyle = [C.sage, C.sage2, '#a7b593'][i % 3]; g.fill(p);
+  }
+  mottle(g, si, x0, 0, x1, Y_BEOL_T, rnd, 140, 0.16);
+  g.lineWidth = 2.6; g.strokeStyle = 'rgba(58,49,37,0.75)';
+  for (let i = 0; i < 2 * nR; i++) {
+    const a = Math.PI * (i / nR);
+    g.beginPath(); g.moveTo(hx + Math.cos(a) * 262, hy + Math.sin(a) * 262);
+    g.lineTo(hx + Math.cos(a) * 2400, hy + Math.sin(a) * 2400); g.stroke();
+  }
+  // a horizontal came under the rays: the panel's lower rail
+  // halo (Mucha nimbus): outer ring with beads, inner disc
+  const RO = 248, RI = 204, RP = 160;
+  const ring = new Path2D(); ring.arc(hx, hy, RO, 0, Math.PI * 2); ring.moveTo(hx + RI, hy); ring.arc(hx, hy, RI, 0, Math.PI * 2, true);
+  g.fillStyle = C.gold; g.fill(ring, 'evenodd');
+  mottle(g, ring, hx - RO, hy - RO, hx + RO, hy + RO, rnd, 24, 0.2);
+  const disc = new Path2D(); disc.arc(hx, hy, RI, 0, Math.PI * 2);
+  const dg = g.createRadialGradient(hx, hy, 20, hx, hy, RI);
+  dg.addColorStop(0, '#f3e7c2'); dg.addColorStop(1, '#e4cc90');
+  g.fillStyle = dg; g.fill(disc);
+  // inner ornament: a ring of petals between two cames, then a plain inner disc
+  for (let i = 0; i < 20; i++) {
+    const a = (i / 20) * Math.PI * 2, b = ((i + 1) / 20) * Math.PI * 2, m = (a + b) / 2;
+    const p = new Path2D();
+    p.moveTo(hx + Math.cos(a) * RI, hy + Math.sin(a) * RI);
+    p.quadraticCurveTo(hx + Math.cos(m) * (RP - 18), hy + Math.sin(m) * (RP - 18), hx + Math.cos(b) * RI, hy + Math.sin(b) * RI);
+    p.closePath();
+    g.fillStyle = i % 2 ? '#d6b874' : '#c9a862'; g.fill(p); lead(g, p, 2.2);
+  }
+  lead(g, ring, 5);
+  for (let i = 0; i < 40; i++) { // beads in the ring
+    const a = (i / 40) * Math.PI * 2;
+    const p = new Path2D(); p.arc(hx + Math.cos(a) * (RO + RI) / 2, hy + Math.sin(a) * (RO + RI) / 2, 8, 0, Math.PI * 2);
+    g.fillStyle = C.goldLt; g.fill(p); lead(g, p, 2);
+  }
+  g.restore();
+  // panel edge: the Si bottom (BEOL top) as a heavy came
+  lead(g, si, 5);
+  // BEOL: dark band with gold tesserae
+  const beol = rect(x0 - 10, Y_BEOL_T, WW + 20, Y_PASS_T - Y_BEOL_T);
+  g.fillStyle = C.beol; g.fill(beol);
+  g.save(); g.clip(beol);
+  g.fillStyle = 'rgba(226,200,140,0.55)';
+  for (let row = 0; row < 3; row++) {
+    const yy = Y_BEOL_T + 3 + row * 5;
+    for (let x = x0; x < x1; x += 6 + rnd() * 14) { const w = 4 + rnd() * 12; g.fillRect(x, yy, w, 2); x += w; }
+  }
+  g.restore();
+  for (const bx of BX) { g.fillStyle = C.al; g.fillRect(bx - R_AL, Y_PASS_T - um(2), 2 * R_AL, um(2)); }
+  g.fillStyle = C.pass; g.fillRect(x0 - 10, Y_PASS_T, WW + 20, Y_PASS_B - Y_PASS_T);
+  for (const bx of BX) {
+    const ubm = new Path2D();
+    ubm.moveTo(bx - R_PO, Y_PASS_T); ubm.lineTo(bx + R_PO, Y_PASS_T); ubm.lineTo(bx + R_PO, Y_PASS_B);
+    ubm.lineTo(bx + R_UBM, Y_PASS_B); ubm.lineTo(bx + R_UBM, Y_UBM_B); ubm.lineTo(bx - R_UBM, Y_UBM_B);
+    ubm.lineTo(bx - R_UBM, Y_PASS_B); ubm.lineTo(bx - R_PO, Y_PASS_B); ubm.closePath();
+    g.fillStyle = C.gold; g.fill(ubm); lead(g, ubm, 2.4);
+  }
+  g.beginPath(); g.moveTo(x0 - 10, Y_PASS_T); g.lineTo(x1 + 10, Y_PASS_T); g.lineWidth = 2; g.strokeStyle = C.lead; g.stroke();
+  g.beginPath(); g.moveTo(x0 - 10, Y_PASS_B); g.lineTo(x1 + 10, Y_PASS_B); g.lineWidth = 3.4; g.strokeStyle = C.lead; g.stroke();
+}
+
+// ---------- substrate ----------
+function buildSubstrate(rnd) {
+  const layers = [], abf = [];
+  let y = Y_PAD;
+  for (let k = 0; k < 6; k++) {
+    layers.push({ y0: y, y1: y + T_CU, segs: [] });
+    y += T_CU;
+    if (k < 5) { abf.push({ y0: y, y1: y + T_ABF }); y += T_ABF; }
+  }
+  const vias = [];
+  for (const bx of BX) layers[0].segs.push([bx - R_PAD, bx + R_PAD]);
+  const ends = [];
+  const depths = [3, 5, 2, 5, 4, 5, 3, 4];
+  BX.forEach((bx, i) => {
+    let x = bx;
+    const depth = depths[i % depths.length];
+    for (let k = 0; k < depth; k++) {
+      vias.push({ k, x });
+      let nx = x;
+      if (k + 1 < depth && k > 0) {
+        const o = [0, 0, um(26), -um(26)][Math.floor(rnd() * 4)];
+        nx = Math.max(bx - um(30), Math.min(bx + um(30), x + o));
+      }
+      layers[k + 1].segs.push([Math.min(x, nx) - V_RB - um(8), Math.max(x, nx) + V_RB + um(8)]);
+      x = nx;
+    }
+    ends.push({ k: depth, seg: layers[depth].segs[layers[depth].segs.length - 1], dir: i % 2 ? 1 : -1 });
+  });
+  for (const e of ends) {
+    const L = layers[e.k], clr = um(15);
+    let len = um(70);
+    for (const s of L.segs) {
+      if (s === e.seg) continue;
+      if (e.dir > 0 && s[0] > e.seg[1]) len = Math.min(len, s[0] - clr - e.seg[1]);
+      if (e.dir < 0 && s[1] < e.seg[0]) len = Math.min(len, e.seg[0] - clr - s[1]);
+    }
+    if (len > um(10)) L.segs.push(e.dir > 0 ? [e.seg[1] - 2, e.seg[1] + len] : [e.seg[0] - len, e.seg[0] + 2]);
+  }
+  for (let k = 0; k < 6; k++) {
+    const L = layers[k];
+    const occ = L.segs.slice().sort((a, b) => a[0] - b[0]);
+    const space = um(15);
+    let x = XW0 - 60;
+    const free = [];
+    for (const s of occ) { if (s[0] - space > x) free.push([x, s[0] - space]); x = Math.max(x, s[1] + space); }
+    free.push([x, XW0 + WW + 60]);
+    for (const [a, b] of free) {
+      if (k === 0) { // L1: a single 15 um trace, centred, only where 15 um clearance remains (not between 150 um pitch pads)
+        const w = um(15), mid = (a + b) / 2;
+        if (b - a > w + 10 && rnd() < 0.6) L.segs.push([mid - w / 2, mid + w / 2]);
+        continue;
+      }
+      let xx = a + rnd() * um(20);
+      while (xx < b) {
+        const wide = k >= 3 && rnd() < 0.2;
+        const w = wide ? um(70 + rnd() * 90) : um(12 + rnd() * 18);
+        if (xx + w > b) break;
+        if (rnd() < 0.42) L.segs.push([xx, xx + w]);
+        xx += w + um(18 + rnd() * 30);
+      }
+    }
+  }
+  return { layers, abf, vias };
+}
+
+function paintSub(g) {
+  const rnd = APA.rng(2026);
+  g.translate(-XW0, 0);
+  const x0 = XW0 - 10, ww = WW + 20;
+  const sub = buildSubstrate(rnd);
+  // dielectric layers as alternating cream / pale sage glass
+  const field = rect(x0, Y_PAD_B, ww, H - Y_PAD_B + 10);
+  g.fillStyle = C.abf; g.fill(field);
+  sub.abf.forEach((a, i) => {
+    const p = rect(x0, a.y0 - (i === 0 ? 0 : T_CU / 2), ww, a.y1 - a.y0 + T_CU);
+    g.fillStyle = i % 2 ? C.abf : C.abf2; g.fill(p);
+  });
+  mottle(g, field, x0, Y_PAD_B, x0 + ww, H, rnd, 110, 0.13);
+  const fade = g.createLinearGradient(0, Y_PAD_B, 0, H);
+  fade.addColorStop(0, 'rgba(40,44,30,0)'); fade.addColorStop(1, 'rgba(40,44,30,0.45)');
+  g.fillStyle = fade; g.fill(field);
+  for (const a of sub.abf) { g.beginPath(); g.moveTo(x0, a.y1 + T_CU / 2); g.lineTo(x0 + ww, a.y1 + T_CU / 2); g.lineWidth = 1.6; g.strokeStyle = 'rgba(58,49,37,0.35)'; g.stroke(); }
+  const cuG = g.createLinearGradient(0, Y_PAD, 0, H);
+  cuG.addColorStop(0, '#d2ad62'); cuG.addColorStop(1, '#b8954a');
+  for (let k = 1; k < sub.layers.length; k++) {
+    const L = sub.layers[k];
+    for (const s of L.segs) { const p = rect(s[0], L.y0, s[1] - s[0], L.y1 - L.y0); g.fillStyle = cuG; g.fill(p); lead(g, p, 2.6); }
+  }
+  for (const v of sub.vias) {
+    const a = sub.abf[v.k], p = new Path2D();
+    p.moveTo(v.x - V_RT, a.y0); p.lineTo(v.x + V_RT, a.y0); p.lineTo(v.x + V_RB, a.y1); p.lineTo(v.x - V_RB, a.y1); p.closePath();
+    g.fillStyle = cuG; g.fill(p); lead(g, p, 2.6);
+  }
+  // solder resist with SMD openings, then L1 pads
+  const sr = new Path2D();
+  sr.moveTo(x0, Y_SR);
+  for (const bx of BX) { sr.lineTo(bx - R_SRO_T, Y_SR); sr.lineTo(bx - R_SRO_B, Y_PAD); sr.lineTo(bx + R_SRO_B, Y_PAD); sr.lineTo(bx + R_SRO_T, Y_SR); }
+  sr.lineTo(x0 + ww, Y_SR); sr.lineTo(x0 + ww, Y_PAD_B); sr.lineTo(x0, Y_PAD_B); sr.closePath();
+  g.fillStyle = C.sr; g.fill(sr);
+  mottle(g, sr, x0, Y_SR, x0 + ww, Y_PAD_B, rnd, 40, 0.14);
+  for (const s of sub.layers[0].segs) { const p = rect(s[0], Y_PAD, s[1] - s[0], T_CU); g.fillStyle = cuG; g.fill(p); lead(g, p, 2.6); }
+  for (const bx of BX) { g.fillStyle = '#d8bd78'; g.fillRect(bx - R_SRO_B, Y_PAD - 3, 2 * R_SRO_B, 3); }
+  // SR top: a single soft rail (it sits inside the calm text band)
+  g.beginPath(); g.moveTo(x0, Y_SR); g.lineTo(x0 + ww, Y_SR); g.lineWidth = 2.4; g.strokeStyle = C.leadSoft; g.stroke();
+  lead(g, rect(x0, Y_PAD_B, ww, 0.01), 3);
+  // SR opening walls and SR bottom edge as cames (below the text band)
+  for (const bx of BX) {
+    const p = new Path2D(); p.moveTo(bx - R_SRO_T, Y_SR); p.lineTo(bx - R_SRO_B, Y_PAD);
+    p.moveTo(bx + R_SRO_T, Y_SR); p.lineTo(bx + R_SRO_B, Y_PAD);
+    lead(g, p, 2.2, C.leadSoft);
+  }
+}
+
+// ---------- molten joints: volume-conserving barrel between the SR top (r = R_SRO_T) and the UBM (r = R_UBM) ----------
+const IL = [];
+(() => { // integrals over u of L^2, L*P, P^2 with L(u) linear between end radii and P(u) = 4u(1-u)
+  let a = 0, b = 0, c = 0; const N = 200;
+  for (let i = 0; i <= N; i++) {
+    const u = i / N, w = (i === 0 || i === N) ? 0.5 : 1;
+    const L = R_SRO_T + (R_UBM - R_SRO_T) * u, P = 4 * u * (1 - u);
+    a += w * L * L; b += w * L * P; c += w * P * P;
+  }
+  IL.push(a / N, b / N, c / N);
+})();
+const H_FIN = Y_SR - Y_UBM_B;
+const BUL_FIN = (() => { let lo = 0, hi = 40; for (let k = 0; k < 40; k++) { const b = (lo + hi) / 2; let m = 0;
+  for (let i = 0; i <= 100; i++) { const u = i / 100; m = Math.max(m, R_SRO_T + (R_UBM - R_SRO_T) * u + b * 4 * u * (1 - u)); }
+  if (m > R_MAX) hi = b; else lo = b; } return lo; })();
+const VOL = H_FIN * (IL[0] + 2 * BUL_FIN * IL[1] + BUL_FIN * BUL_FIN * IL[2]);
+function bulgeFor(h) { // solve IL0 + 2 b IL1 + b^2 IL2 = VOL / h for b
+  const A = IL[2], B = 2 * IL[1], Cc = IL[0] - VOL / h;
+  return (-B + Math.sqrt(B * B - 4 * A * Cc)) / (2 * A);
+}
+
+function bumpPath(cx, h, bul) {
+  const p = new Path2D(), N = 26;
+  const r = (u) => R_SRO_T + (R_UBM - R_SRO_T) * u + bul * 4 * u * (1 - u);
+  p.moveTo(cx - R_SRO_B, Y_PAD); p.lineTo(cx - R_SRO_T, Y_SR);
+  for (let i = 1; i <= N; i++) { const u = i / N; p.lineTo(cx - r(u), Y_SR - u * h); }
+  for (let i = N; i >= 0; i--) { const u = i / N; p.lineTo(cx + r(u), Y_SR - u * h); }
+  p.lineTo(cx + R_SRO_B, Y_PAD); p.closePath();
+  return p;
+}
+
+// ---------- growing ornament (drawn per frame in die coordinates; all of it stays above the BEOL top) ----------
+const grow = (t, d, tau = 0.15) => (t <= d ? 0 : 1 - Math.exp(-(t - d) / tau));
+const STEMS = [
+  { x: 430, sc: 0.92, c: C.olive, w: [20, 3.5], leaf: 0.34, d: 0.0 },
+  { x: 610, sc: 0.7, c: C.rose, w: [15, 3], leaf: 0.3, d: 0.05 },
+  { x: 770, sc: 0.5, c: C.teal, w: [11, 2.5], d: 0.1 },
+];
+
+function drawOrnament(g, t) {
+  g.save(); // no clip: an anti-aliased clip under the fractional pan transform costs ~100 ms/frame
+  for (const sx of [-1, 1]) {
+    STEMS.forEach((st, k) => {
+      const f = grow(t, st.d + (sx > 0 ? 0.02 : 0));
+      if (f < 0.02) return;
+      const sway = 0.018 * Math.sin(t * 1.6 + k * 1.3 + (sx > 0 ? 0.7 : 0)) * Math.min(1, t / 0.6);
+      const pts = whiplash(sx, st.x, Y_BEOL_T - 3, st.sc, f, sway);
+      if (st.leaf && f > st.leaf + 0.02) { // an almond leaf springing from the stem, opening as it grows
+        const o = Math.min(1, (f - st.leaf) / 0.3);
+        const i = Math.min(pts.length - 2, Math.floor((st.leaf / f) * (pts.length - 1)));
+        const [px, py] = pts[i], [qx, qy] = pts[i + 1];
+        const a = Math.atan2(qy - py, qx - px) + sx * (0.9 * o + 0.05 * Math.sin(t * 1.9 + k)), len = 150 * st.sc * o, wd = 34 * st.sc * o;
+        const ex = px + Math.cos(a) * len, ey = py + Math.sin(a) * len, mx = (px + ex) / 2, my = (py + ey) / 2;
+        const nx = -Math.sin(a) * wd, ny = Math.cos(a) * wd;
+        const lf = new Path2D();
+        lf.moveTo(px, py); lf.quadraticCurveTo(mx + nx, my + ny, ex, ey); lf.quadraticCurveTo(mx - nx, my - ny, px, py);
+        g.fillStyle = C.sageDk; g.fill(lf); lead(g, lf, 3.5);
+        const vein = new Path2D(); vein.moveTo(px, py); vein.quadraticCurveTo(mx + nx * 0.2, my + ny * 0.2, ex, ey); lead(g, vein, 1.6);
+      }
+      const w1 = st.w[1] + (st.w[0] - st.w[1]) * (1 - f) * 0.5;
+      const rb = ribbon(pts, st.w[0] * (0.6 + 0.4 * f), w1);
+      g.fillStyle = st.c; g.fill(rb);
+      lead(g, rb, 4.5);
+      g.lineWidth = 1.6; g.strokeStyle = 'rgba(240,222,170,0.75)'; g.stroke(polyline(pts));
+    });
+  }
+  // a running vine along the foot of the panel, creeping outward from the halo with tendrils that unfurl
+  const reach = (W / 2 + 160) * grow(t, 0.06, 0.2);
+  const yv = (x) => Y_BEOL_T - 16 + 5 * Math.sin((x - W / 2) * 0.021);
+  for (const sx of [-1, 1]) {
+    const xs = W / 2 + sx * 230, xe = W / 2 + sx * Math.max(231, reach);
+    if (Math.abs(xe - W / 2) <= 232) continue;
+    const vp = [];
+    for (let x = xs; sx > 0 ? x <= xe : x >= xe; x += sx * 6) vp.push([x, yv(x)]);
+    if (vp.length < 2) continue;
+    const rb = ribbon(vp, 4.5, 2.5);
+    g.fillStyle = C.olive; g.fill(rb); lead(g, rb, 2.6);
+    for (let j = 0; j < 7; j++) { // tendrils every 115 px, each unfurling once the vine has passed it
+      const xr = W / 2 + sx * (290 + j * 115);
+      const dd = Math.abs(xr - W / 2);
+      if (dd > Math.abs(xe - W / 2) - 10) break;
+      const ft = grow(t, 0.06 + 0.2 * -Math.log(Math.max(1e-3, 1 - dd / (W / 2 + 160))), 0.12);
+      const tp = [];
+      let x = xr, y = yv(xr), th = -Math.PI / 2 + sx * (j % 2 ? 0.25 : 0.7);
+      const len = 46 * ft, curl = 5.2 * (1.5 - 0.5 * ft) + 0.12 * Math.sin(t * 2.1 + j);
+      tp.push([x, y]);
+      for (let i = 1; i <= 24; i++) {
+        const u = i / 24;
+        th += sx * curl * Math.pow(u, 1.3) / 24 * 1.6;
+        x += Math.cos(th) * len / 24; y += Math.sin(th) * len / 24;
+        tp.push([x, y]);
+      }
+      if (ft > 0.05) { const tr = ribbon(tp, 2.6, 1); g.fillStyle = C.goldLt; g.fill(tr); lead(g, tr, 1.8); }
+    }
+  }
+  g.restore();
+}
+
+// poster frame along the bottom edge: an olive band with a gold rule and a running whiplash scroll
+// (it crops only the deepest build-up layers; fixed to the frame, it does not pan)
+const Y_BORDER = H - 46;
+function makeBorder() {
+  const c = mk(W, H), g = c.getContext('2d');
+  const band = rect(-10, Y_BORDER, W + 20, H - Y_BORDER + 10);
+  const bg = g.createLinearGradient(0, Y_BORDER, 0, H);
+  bg.addColorStop(0, '#4f5a3c'); bg.addColorStop(1, '#3d4630');
+  g.fillStyle = bg; g.fill(band);
+  lead(g, rect(-10, Y_BORDER - 9, W + 20, 9), 3);
+  g.fillStyle = C.gold; g.fillRect(-10, Y_BORDER - 9, W + 20, 9);
+  lead(g, rect(-10, Y_BORDER - 9, W + 20, 9), 3);
+  const c2 = mk(W, H), g2 = c2.getContext('2d');
+  scrollLayer(g2);
+  borderScroll = c2;
+  return c;
+}
+function scrollLayer(g) {
+  const yc = Y_BORDER + 23, P = 120;
+  for (let x = -P; x < W + P; x += P) {
+    // one wave of the scroll: an S-curve whose ends roll into small spirals
+    const p = new Path2D();
+    p.moveTo(x, yc);
+    p.bezierCurveTo(x + 30, yc - 22, x + 60, yc - 22, x + 60, yc);
+    p.bezierCurveTo(x + 60, yc + 22, x + 90, yc + 22, x + P, yc);
+    g.lineWidth = 6; g.strokeStyle = C.lead; g.lineCap = 'round'; g.stroke(p);
+    g.lineWidth = 3; g.strokeStyle = C.goldLt; g.stroke(p);
+    for (const [cx, cy, sgn] of [[x + 30, yc - 6, 1], [x + 90, yc + 6, -1]]) {
+      const sp = new Path2D();
+      for (let i = 0; i <= 30; i++) { const u = i / 30, th = u * 5.2, r = 9 * (1 - 0.75 * u);
+        const px = cx + r * Math.cos(th) * sgn, py = cy + sgn * r * Math.sin(th);
+        if (i) sp.lineTo(px, py); else sp.moveTo(px, py); }
+      g.lineWidth = 4.5; g.strokeStyle = C.lead; g.stroke(sp);
+      g.lineWidth = 2; g.strokeStyle = C.gold; g.stroke(sp);
+    }
+    const d = new Path2D(); d.arc(x + 60, yc, 5, 0, Math.PI * 2);
+    g.fillStyle = C.rose; g.fill(d); lead(g, d, 2);
+  }
+}
+
+function makeGrain() {
+  // lithographic paper: smooth value-noise tone, applied with multiply (static, screen space)
+  const c = mk(W, H), g = c.getContext('2d');
+  const rnd = APA.rng(99);
+  const id = g.createImageData(W, H), d = id.data;
+  const cw = 56, gx = Math.ceil(W / cw) + 2;
+  const lat = new Float32Array(gx * (Math.ceil(H / cw) + 2)).map(() => rnd());
+  const sm = (u) => u * u * (3 - 2 * u);
+  for (let y = 0; y < H; y++) {
+    const fy = y / cw, iy = Math.floor(fy), ty = sm(fy - iy);
+    for (let x = 0; x < W; x++) {
+      const fx = x / cw, ix = Math.floor(fx), tx = sm(fx - ix);
+      const a = lat[iy * gx + ix], b = lat[iy * gx + ix + 1], c2 = lat[(iy + 1) * gx + ix], e = lat[(iy + 1) * gx + ix + 1];
+      const n = (a + (b - a) * tx) * (1 - ty) + (c2 + (e - c2) * tx) * ty;
+      const v = 250 - 14 * n, i = (y * W + x) * 4;
+      d[i] = v; d[i + 1] = v - 2; d[i + 2] = v - 9; d[i + 3] = 255;
+    }
+  }
+  g.putImageData(id, 0, 0);
+  return c;
+}
+
+// ---- overlay word as Art Nouveau lettering (STYLE.md "Styled text") ----
+// APA Nouveau (Cinzel Decorative) with 'APA Serif' fallback glyphs (see nvMask) in lead brown, edged like a pane: a pale-gold glass rim and an outer lead hairline. Under the word one restrained whiplash
+// came: a sagging S that rolls into a small spiral at each end, drawn on from the centre outward over 0.25 s
+// (the frieze and vines grow the same way). The word itself is complete from frame 0.
+const nvCache = new Map();
+// Cinzel is a caps face: its '1' is a bare I, its lowercase are small caps and its U+03BC is a capital-mu form, so
+// "150 µm" would read "I50 MM". Those glyphs (1, lowercase, micro sign) come from 'APA Serif' (Newsreader, display
+// optical size, weight matched to Cinzel's stems) scaled so its figures match Cinzel's figure height.
+const NV_FALLBACK = /[1a-z\u00b5\u03bc]/;
+function nvMask(word, fs, famN, famS) {
+  const probe = mk(1, 1).getContext('2d');
+  const fN = `400 ${fs}px ${famN}`;
+  probe.font = fN; const hN = probe.measureText('0').actualBoundingBoxAscent;
+  probe.font = `500 ${fs}px ${famS}`; const hS = probe.measureText('0').actualBoundingBoxAscent;
+  const fS = `500 ${Math.round(fs * hN / hS)}px ${famS}`;
+  const ls = Math.round(fs * 0.04);
+  const runs = [...word].map((ch) => ({ ch, font: NV_FALLBACK.test(ch) ? fS : fN }));
+  let x = 0, asc = 0, desc = 0;
+  for (const r of runs) {
+    probe.font = r.font; const mt = probe.measureText(r.ch);
+    r.x = x; x += mt.width + ls;
+    asc = Math.max(asc, mt.actualBoundingBoxAscent); desc = Math.max(desc, mt.actualBoundingBoxDescent);
+  }
+  const width = x - ls, pad = Math.ceil(fs * 0.3);
+  const c = mk(Math.ceil(width + 2 * pad), Math.ceil(asc + desc + 2 * pad)), cg = c.getContext('2d');
+  cg.fillStyle = '#fff'; cg.textBaseline = 'alphabetic';
+  for (const r of runs) { cg.font = r.font; cg.fillText(r.ch, pad + r.x, pad + asc); }
+  return { canvas: c, w: c.width, h: c.height, ox: pad, oy: pad + asc, width, ascent: asc, descent: desc };
+}
+function nvPlate(word, fs, fonts, light) {
+  const key = [word, fs, light].join('|');
+  if (nvCache.has(key)) return nvCache.get(key);
+  const r1 = Math.max(2, Math.round(fs * 0.04)), r2 = r1 + 2;
+  const m = nvMask(word, fs, fonts.nouveau, fonts.serif);
+  const disc = (r, col) => {
+    const c = mk(m.w, m.h), cg = c.getContext('2d');
+    for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) if (dx * dx + dy * dy <= r * r + 0.5) cg.drawImage(m.canvas, dx, dy);
+    cg.globalCompositeOperation = 'source-in'; cg.fillStyle = col; cg.fillRect(0, 0, m.w, m.h);
+    return c;
+  };
+  const out = mk(m.w, m.h), og = out.getContext('2d');
+  og.drawImage(disc(r2, light ? C.ivory : C.lead), 0, 0);
+  og.drawImage(disc(r1, light ? C.lead : C.goldLt), 0, 0);
+  og.drawImage(TFX.fill(m, light ? C.ivory : '#2b2318'), 0, 0);
+  const plate = { m, canvas: out, r2 };
+  nvCache.set(key, plate);
+  return plate;
+}
+function whiplashCame(xL, xR, y0, r0) {
+  // centre line, left curl -> sagging S -> right curl, as [x, y, w] with w the half width
+  const pts = [];
+  const spiral = (cx, cy, sgn, rev) => {
+    const q = [];
+    for (let i = 0; i <= 28; i++) {
+      const u = i / 28, th = Math.PI / 2 + sgn * u * 1.7 * Math.PI, r = r0 * (1 - 0.72 * u);
+      q.push([cx + r * Math.cos(th), cy + r * Math.sin(th), 1.6 - 0.9 * u]);
+    }
+    return rev ? q.reverse() : q;
+  };
+  pts.push(...spiral(xL, y0 - r0, 1, true));
+  for (let i = 1; i < 60; i++) {
+    const u = i / 60;
+    pts.push([xL + (xR - xL) * u, y0 + 5 * Math.sin(Math.PI * u) - 2.5 * Math.sin(2 * Math.PI * u), 1.6 + 0.9 * Math.sin(Math.PI * u)]);
+  }
+  pts.push(...spiral(xR, y0 - r0 * 0.8, -1, false).map(([x, y, w]) => [x, y, w]));
+  return pts;
+}
+function textHook(g, word, t, p, info) {
+  const fs = Math.round(info.size);
+  const light = info.tone === 'light' || /^#(f|e|d|c)/i.test(info.color);
+  const P = nvPlate(word, fs, info.fonts, light);
+  const m = P.m, cx = info.x, yb = info.baseline;
+  // whiplash came under the word, grown from the centre outward
+  const half = m.width / 2 + 0.5 * fs;
+  const pts = whiplashCame(cx - half, cx + half, yb + Math.round(fs * 0.22), Math.round(fs * 0.15));
+  const reach = half * 1.25 * grow(Math.max(0, t), 0, 0.09);
+  const vis = pts.filter(([x]) => Math.abs(x - cx) <= reach);
+  if (vis.length > 1) {
+    const ink = light ? C.ivory : C.lead, core = light ? C.lead : C.goldLt;
+    g.lineCap = 'round'; g.lineJoin = 'round';
+    for (const [col, k] of [[ink, 1], [core, 0.38]]) {
+      g.strokeStyle = col;
+      for (let i = 1; i < vis.length; i++) {
+        const a = vis[i - 1], b = vis[i];
+        if (Math.hypot(b[0] - a[0], b[1] - a[1]) > 20) continue;      // the gap where the centre filter cuts a curl
+        g.lineWidth = 2 * k * (a[2] + b[2]) / 2 * (fs / 64) * 1.5;
+        g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.stroke();
+      }
+    }
+  }
+  TFX.blit(g, P.canvas, m, cx, yb);
+}
+
+APA.scene({
+  meta: { text: 'dark' },
+  init() {
+    ({ ctx } = APA.canvas('2d'));
+    dieC = mk(WW, Math.ceil(Y_UBM_B + 4)); paintDie(dieC.getContext('2d'));
+    subC = mk(WW, H); paintSub(subC.getContext('2d'));
+    grain = makeGrain();
+    border = makeBorder();
+    // ornament is redrawn every frame on a software canvas (path fills there are ~25x cheaper than on the
+    // accelerated SwiftShader canvas), then composited once
+    ornC = mk(W, Math.ceil(Y_BEOL_T + 4)); ornG = ornC.getContext('2d', { willReadFrequently: true });
+    for (const c of [dieC, subC, grain, border, borderScroll]) c.getContext('2d').getImageData(0, 0, 1, 1);
+  },
+  render(t) {
+    const pan = PAN * t, dy = lift(t);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.save();
+    ctx.translate(-pan, 0);
+    // air in the gap: ivory, shading softly toward the die face
+    const ag = ctx.createLinearGradient(0, Y_PASS_B - dy, 0, Y_SR);
+    ag.addColorStop(0, '#e6d9b8'); ag.addColorStop(0.35, C.ivory); ag.addColorStop(1, C.cream);
+    ctx.fillStyle = ag; ctx.fillRect(XW0, Y_PASS_B - dy - 2, WW, Y_SR - Y_PASS_B + dy + 4);
+    ctx.drawImage(subC, XW0, 0);
+    // molten joints
+    const h = H_FIN + dy, bul = bulgeFor(h);
+    for (const bx of BX) {
+      const p = bumpPath(bx, h, bul);
+      const sg = ctx.createLinearGradient(bx - R_MAX, 0, bx + R_MAX, 0);
+      sg.addColorStop(0, C.pewDk); sg.addColorStop(0.3, C.pew); sg.addColorStop(0.62, '#e6dfca'); sg.addColorStop(1, C.pewDk);
+      ctx.fillStyle = sg; ctx.fill(p);
+      ctx.lineWidth = 3; ctx.strokeStyle = C.leadSoft; ctx.lineJoin = 'round'; ctx.stroke(p);
+    }
+    ctx.drawImage(dieC, XW0, -dy);
+    ctx.restore();
+    ornG.setTransform(1, 0, 0, 1, 0, 0); ornG.clearRect(0, 0, ornC.width, ornC.height);
+    ornG.setTransform(1, 0, 0, 1, -pan, 0);
+    drawOrnament(ornG, t);
+    ctx.drawImage(ornC, 0, -dy);
+    // frieze: the scroll is drawn on from the centre outward with the vines; its band is there from t = 0
+    const fr = (W / 2 + 40) * grow(t, 0.0, 0.18);
+    ctx.drawImage(border, 0, Y_BORDER - 10, W, H - Y_BORDER + 10, 0, Y_BORDER - 10, W, H - Y_BORDER + 10);
+    ctx.save(); ctx.beginPath(); ctx.rect(W / 2 - fr, Y_BORDER + 1, 2 * fr, H - Y_BORDER); ctx.clip();
+    ctx.drawImage(borderScroll, 0, Y_BORDER, W, H - Y_BORDER, 0, Y_BORDER, W, H - Y_BORDER);
+    ctx.restore();
+    ctx.globalCompositeOperation = 'multiply';
+    ctx.drawImage(grain, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+  },
+  text: textHook,
+});
+</script>
+</body>
+</html>

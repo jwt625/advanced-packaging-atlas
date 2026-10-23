@@ -1,0 +1,272 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>c6 ebsd</title>
+<script src="../lib/apa.js"></script>
+</head>
+<body>
+<script>
+// Pass C, modality 6: EBSD orientation map (IPF-Z colours) of Cu hybrid-bond pads in plan view, 3 um pads at 6 um
+// pitch (ectc51846.2026.00024), 40 px/um. CONSTRUCTED: the atlas has only cross-section PED / EBSD maps of HB pads.
+// v=1: as plated, fine grains (number mean ~80 nm, source 79 +/- 74 nm; coarser grains along the pad sidewall), 25 nm
+//      step (1 px). v=2: after the < 220 C bond anneal, ~400 nm grains with annealing twins, 50 nm step (2 px).
+// Each grain carries a full crystal orientation (rotation matrix, partial <111> texture); its colour is the standard
+// cubic IPF key of the crystal direction along the sample normal. Twins are Sigma3 variants (60 deg about a {111}
+// normal) drawn as straight lamellae along the trace of that {111} plane on the surface. v=2: high-angle boundaries
+// 1 px black, twin boundaries 1 px dark grey; v=1 is a raw map without boundary lines. Dielectric non-indexed (black);
+// unindexed steps denser at boundaries and the rim.
+// The mapped field ends on y = 600 (last pad row ends at y = 500); below: unmapped. Motion: drift 20 px/s.
+// Sources, estimates and the constructed-view declaration: c6_ebsd.notes.md
+const { W, H, LINE_Y } = APA;
+const V = APA.params.v === '2' ? '2' : '1';
+const S = 40;                       // px per um
+const P = 240, R = 60;              // 6 um pitch, 3 um pad (radius 1.5 um)
+const X0 = 960, Y0 = 440;           // a pad column on the frame centre; last pad row ends at y = 500
+const DRIFT = 20, MARGIN = 64;
+const MW = W + MARGIN, MH = LINE_Y;
+const CFG = {
+  '1': { step: 1, dMean: 40, dSd: 120, rimW: 0.30, rimMean: 300, rimSd: 240, p111: 0.25, twinP: 0.0,
+         nonIdx: 0.04, nonIdxGb: 0.08, gb: false, pw: 0.0, seed: 6101 },
+  '2': { step: 2, dMean: 400, dSd: 190, rimW: 0, rimMean: 0, rimSd: 0, p111: 0.45, twinP: 0.55,
+         nonIdx: 0.008, nonIdxGb: 0.06, gb: true, pw: 0.35, seed: 6202 },
+}[V];
+
+// ---- crystallography -----------------------------------------------------------------------------------------
+const norm = (v) => { const l = Math.hypot(v[0], v[1], v[2]); return [v[0] / l, v[1] / l, v[2] / l]; };
+const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+function gauss(r) { let u = 0; for (let i = 0; i < 4; i++) u += r(); return (u - 2) * Math.sqrt(3); }
+// orientation as rows [a, b, c] = sample x, y, z axes in crystal coordinates
+function randOri(r, p111) {
+  let c;
+  if (r() < p111) c = norm([1 + 0.16 * gauss(r), 1 + 0.16 * gauss(r), 1 + 0.16 * gauss(r)]); // ~ <111> fibre, ~8 deg
+  else { // uniform direction on the sphere
+    const z = 2 * r() - 1, ph = 2 * Math.PI * r(), s = Math.sqrt(1 - z * z);
+    c = [s * Math.cos(ph), s * Math.sin(ph), z];
+  }
+  const e = Math.abs(c[0]) < 0.9 ? [1, 0, 0] : [0, 1, 0];
+  const a0 = norm(cross(c, e)), b0 = cross(c, a0), ph = 2 * Math.PI * r();
+  const a = [0, 1, 2].map((i) => a0[i] * Math.cos(ph) + b0[i] * Math.sin(ph));
+  return [a, cross(c, a), c];
+}
+// rotate v by angle th about unit axis n (Rodrigues)
+function rot(v, n, th) {
+  const cs = Math.cos(th), sn = Math.sin(th), k = cross(n, v), d = dot(n, v);
+  return [0, 1, 2].map((i) => v[i] * cs + k[i] * sn + n[i] * d * (1 - cs));
+}
+// standard cubic IPF key: <001> red, <101> green, <111> blue
+function ipf(c) {
+  const s = [Math.abs(c[0]), Math.abs(c[1]), Math.abs(c[2])].sort((p, q) => p - q);
+  let rr = s[2] - s[1], gg = s[1] - s[0], bb = s[0] * 1.0;
+  const m = Math.max(rr, gg, bb);
+  return [rr / m, gg / m, bb / m].map((u) => Math.round(255 * Math.pow(u, 0.62)));
+}
+const N111 = [[1, 1, 1], [-1, 1, 1], [1, -1, 1], [1, 1, -1]].map(norm);
+
+// ---- grain structure (power diagram of seeded grains, per pad) -------------------------------------------------
+let ctx, map;
+
+function lognormal(r, mean, sd) {
+  const s2 = Math.log(1 + (sd / mean) ** 2), mu = Math.log(mean) - s2 / 2;
+  return Math.exp(mu + Math.sqrt(s2) * gauss(r));
+}
+
+// returns per-step grain id (-1 = outside the pad) for one pad, plus the grain list
+function padGrains(r) {
+  const c = CFG, st = c.step, n = Math.ceil(2 * R / st) + 2, half = n / 2;
+  const Rs = R / st;                                   // pad radius in steps
+  const nmPerStep = st / S * 1000;
+  const area = Math.PI * Rs * Rs;
+  // grain seeds: equivalent diameters in steps, rim (sidewall) seeds first, then interior; random sequential
+  // placement with a soft exclusion so the cells keep roughly their drawn size
+  const seeds = [];
+  const want = (zoneArea, mean, sd, rMin, rMax) => {
+    const ds = [];
+    let acc = 0;
+    while (acc < zoneArea * 1.05) {
+      const d = Math.min(lognormal(r, mean, sd), 1500) / nmPerStep;
+      ds.push(d); acc += Math.PI * d * d / 4;
+    }
+    ds.sort((p, q) => q - p);
+    for (const d of ds) {
+      for (let tries = 0; tries < 30; tries++) {
+        const rad = Math.sqrt(rMin * rMin + (rMax * rMax - rMin * rMin) * r()), th = 2 * Math.PI * r();
+        const x = rad * Math.cos(th), y = rad * Math.sin(th);
+        let ok = true;
+        for (const s of seeds) {
+          const lim = 0.42 * (s.d + d);
+          if (Math.abs(s.x - x) < lim && Math.abs(s.y - y) < lim && (s.x - x) ** 2 + (s.y - y) ** 2 < lim * lim) { ok = false; break; }
+        }
+        if (ok || tries === 29) { seeds.push({ x, y, d }); break; }
+      }
+    }
+  };
+  const rimW = c.rimW * 1000 / nmPerStep;
+  if (rimW > 0) {
+    want(Math.PI * (Rs * Rs - (Rs - rimW) ** 2), c.rimMean, c.rimSd, Rs - rimW, Rs + 1);
+    want(Math.PI * (Rs - rimW) ** 2, c.dMean, c.dSd, 0, Rs - rimW);
+  } else want(area, c.dMean, c.dSd, 0, Rs + 1);
+  // power-diagram assignment by splatting each seed over its neighbourhood
+  const best = new Float32Array(n * n).fill(1e9), id = new Int32Array(n * n).fill(-1);
+  seeds.forEach((s, k) => {
+    const w = CFG.pw * (s.d / 2) ** 2, L = Math.ceil(1.6 * s.d + 4);
+    const cx = s.x + half, cy = s.y + half;
+    for (let j = Math.max(0, Math.floor(cy - L)); j <= Math.min(n - 1, cy + L); j++)
+      for (let i = Math.max(0, Math.floor(cx - L)); i <= Math.min(n - 1, cx + L); i++) {
+        const v = (i + 0.5 - cx) ** 2 + (j + 0.5 - cy) ** 2 - w;
+        if (v < best[j * n + i]) { best[j * n + i] = v; id[j * n + i] = k; }
+      }
+  });
+  // mask to the pad disc (staircase at step resolution)
+  for (let j = 0; j < n; j++) for (let i = 0; i < n; i++)
+    if ((i + 0.5 - half) ** 2 + (j + 0.5 - half) ** 2 > Rs * Rs) id[j * n + i] = -1;
+  return { n, half, seeds, id };
+}
+
+function build() {
+  const c = CFG, r = APA.rng(c.seed), st = c.step;
+  const img = new ImageData(MW, MH), d = img.data;
+  for (let k = 0; k < MW * MH; k++) d[k * 4 + 3] = 255;          // black = non-indexed
+  // screen-px label maps for boundary drawing: grain label (global) and twin variant
+  const lab = new Int32Array(MW * MH).fill(-1), tw = new Uint8Array(MW * MH);
+  const cols = [];                                                // per global grain: [parentRGB, twinRGB]
+  const nWhite = APA.rng(c.seed + 7);
+  let gBase = 0;
+  for (let ky = -2; ky <= 0; ky++) for (let kx = -5; kx <= 5; kx++) {
+    const pcx = X0 + kx * P, pcy = Y0 + ky * P;
+    if (pcx + R < 0 || pcx - R > MW || pcy + R < 0) continue;
+    const g = padGrains(r);
+    // orientations, twins
+    const info = g.seeds.map(() => {
+      const O = randOri(r, c.p111);
+      const parent = ipf(O[2]);
+      let twin = null;
+      if (r() < c.twinP) {
+        // pick a {111} plane inclined to the surface; trace direction = plane normal (sample frame) x z
+        const cand = N111.map((nc) => ({ nc, ns: [dot(O[0], nc), dot(O[1], nc), dot(O[2], nc)] }))
+          .filter((q) => Math.abs(q.ns[2]) < 0.88);
+        if (cand.length) {
+          const q = cand[Math.floor(r() * cand.length)];
+          const tz = rot(O[2], q.nc, -Math.PI / 3);              // sample normal in the twin crystal frame
+          const nl = Math.hypot(q.ns[0], q.ns[1]);
+          const lam = [];
+          const nLam = 1 + Math.floor(r() * 1.7);
+          for (let m = 0; m < nLam; m++) lam.push([(r() - 0.5) * 1.1, 0.14 + 0.26 * r()]); // offset, width (x grain d)
+          twin = { rgb: ipf(tz), nx: q.ns[0] / nl, ny: q.ns[1] / nl, lam };
+        }
+      }
+      return { parent, twin };
+    });
+    // paint steps
+    for (let j = 0; j < g.n; j++) for (let i = 0; i < g.n; i++) {
+      const k = g.id[j * g.n + i];
+      if (k < 0) continue;
+      const s = g.seeds[k], inf = info[k];
+      let rgb = inf.parent, isTw = 0;
+      if (inf.twin) {
+        const u = ((i + 0.5 - g.half - s.x) * inf.twin.nx + (j + 0.5 - g.half - s.y) * inf.twin.ny) / s.d;
+        for (const [o, w] of inf.twin.lam) if (u > o && u < o + w) { rgb = inf.twin.rgb; isTw = 1; }
+      }
+      // within-grain orientation spread: slight, smooth brightness drift
+      const shade = 1 + 0.05 * Math.sin(0.35 * i + 7 * k) * Math.cos(0.29 * j + 3 * k);
+      for (let yy = 0; yy < st; yy++) for (let xx = 0; xx < st; xx++) {
+        const X = Math.round(pcx - g.half * st + i * st + xx), Y = Math.round(pcy - g.half * st + j * st + yy);
+        if (X < 0 || Y < 0 || X >= MW || Y >= MH) continue;
+        const q = Y * MW + X;
+        lab[q] = gBase + k; tw[q] = isTw;
+        d[q * 4] = Math.min(255, rgb[0] * shade); d[q * 4 + 1] = Math.min(255, rgb[1] * shade);
+        d[q * 4 + 2] = Math.min(255, rgb[2] * shade);
+      }
+    }
+    gBase += g.seeds.length;
+  }
+  // boundaries (1 px, on the screen grid): high-angle black, twin dark grey
+  if (c.gb) for (let Y = 0; Y < MH - 1; Y++) for (let X = 0; X < MW - 1; X++) {
+    const q = Y * MW + X, a = lab[q];
+    if (a < 0) continue;
+    const b1 = lab[q + 1], b2 = lab[q + MW];
+    if ((b1 >= 0 && b1 !== a) || (b2 >= 0 && b2 !== a)) { d[q * 4] = d[q * 4 + 1] = d[q * 4 + 2] = 0; continue; }
+    if ((b1 === a && tw[q + 1] !== tw[q]) || (b2 === a && tw[q + MW] !== tw[q])) {
+      d[q * 4] = 70; d[q * 4 + 1] = 70; d[q * 4 + 2] = 70;
+    }
+  }
+  // non-indexed steps: sparse, denser next to boundaries and at the pad rim (step-sized black squares)
+  for (let Y = 0; Y < MH; Y += st) for (let X = 0; X < MW; X += st) {
+    const q = Y * MW + X, a = lab[q];
+    if (a < 0) continue;
+    let edge = false;
+    for (const [ox, oy] of [[st, 0], [-st, 0], [0, st], [0, -st]]) {
+      const XX = X + ox, YY = Y + oy;
+      if (XX < 0 || YY < 0 || XX >= MW || YY >= MH) continue;
+      if (lab[YY * MW + XX] !== a) { edge = true; break; }
+    }
+    if (nWhite() < (edge ? c.nonIdxGb : c.nonIdx)) {
+      for (let yy = 0; yy < st; yy++) for (let xx = 0; xx < st; xx++) {
+        const qq = (Y + yy) * MW + X + xx;
+        if (Y + yy < MH && X + xx < MW) { d[qq * 4] = d[qq * 4 + 1] = d[qq * 4 + 2] = 0; }
+      }
+    }
+  }
+  // dielectric: almost entirely non-indexed; very sparse mis-indexed single steps, dim, none in the overlay band
+  const rr = APA.rng(c.seed + 13);
+  for (let k = 0; k < 260; k++) {
+    const X = Math.floor(rr() * MW / st) * st, Y = Math.floor(rr() * 480 / st) * st;
+    const col = ipf([rr() - 0.5, rr() - 0.5, rr() - 0.5]);
+    if (lab[Y * MW + X] >= 0) continue;
+    for (let yy = 0; yy < st; yy++) for (let xx = 0; xx < st; xx++) {
+      const qq = (Y + yy) * MW + X + xx;
+      d[qq * 4] = col[0] * 0.4; d[qq * 4 + 1] = col[1] * 0.4; d[qq * 4 + 2] = col[2] * 0.4;
+    }
+  }
+  map = document.createElement('canvas');
+  map.width = MW; map.height = MH;
+  map.getContext('2d').putImageData(img, 0, 0);
+}
+
+// ---- overlay word: EBSD map software annotation box ---------------------------------------------------------------
+// The word as the opaque label box an orientation-map viewer lays over the map: info.color is the box (paper), the
+// word is in the contrasting ink, plain UI sans, 1 px black frame, sharp corners. Same vocabulary for both words;
+// size, padding and frame follow info.size (v=2 grows cut to cut). Placement is in display coordinates (overlay is
+// never flipped), centred on x = 960 with the baseline on info.baseline.
+const LUM = document.createElement('canvas').getContext('2d');
+function relLum(css) {
+  LUM.fillStyle = '#000'; LUM.fillStyle = css;
+  const h = LUM.fillStyle, m = /^#([0-9a-f]{6})$/i.exec(h);
+  const v = m ? [0, 2, 4].map((k) => parseInt(m[1].slice(k, k + 2), 16) / 255)
+    : (h.match(/[\d.]+/g) || [0, 0, 0]).slice(0, 3).map((x) => Number(x) / 255);
+  const lin = v.map((c) => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * lin[0] + 0.7152 * lin[1] + 0.0722 * lin[2];
+}
+function ebsdLabel(g, word, info) {
+  const s = info.size, paper = info.color, ink = relLum(paper) > 0.18 ? '#101010' : '#f4f1ea';
+  g.font = `500 ${s}px ${info.fonts.grotesk}`;
+  const tw = g.measureText(word).width, cap = g.measureText('H').actualBoundingBoxAscent;
+  const px = Math.round(0.30 * s), py = Math.round(0.17 * s);
+  const bw = Math.ceil(tw) + 2 * px, bh = Math.ceil(cap) + 2 * py;
+  const x0 = Math.round(info.x - bw / 2), y0 = Math.round(info.baseline - cap - py);
+  g.fillStyle = '#000'; g.fillRect(x0 - 1, y0 - 1, bw + 2, bh + 2);
+  g.fillStyle = paper; g.fillRect(x0, y0, bw, bh);
+  g.fillStyle = ink; g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+  g.fillText(word, info.x, info.baseline);
+}
+
+APA.scene({
+  meta: { text: 'light' },
+  text(g, word, t, p, info) { ebsdLabel(g, word, info); },
+  init() {
+    ({ ctx } = APA.canvas('2d', { alpha: false }));
+    build();
+  },
+  render(t) {
+    const dx = Math.round(DRIFT * Math.min(Math.max(t, 0), 3));   // whole px: keeps the step pixels crisp
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.fillStyle = '#5c5d60';                 // unmapped: flat grey viewer background
+    ctx.fillRect(0, 0, W, H);
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(map, -dx, 0);
+  },
+});
+</script>
+</body>
+</html>

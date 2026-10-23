@@ -1,0 +1,339 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>l3a pillar riso</title>
+<script src="../lib/apa.js"></script>
+<script src="../lib/textfx.js"></script>
+</head>
+<body>
+<script>
+// L3 pass A: Cu-pillar microbump, chip-on-interposer, 40 um pitch, as a two-colour risograph print
+// (fluorescent pink + teal, halftone screens at 15 / 75 deg, grain, static plate misregistration, multiply overprint).
+// Joint plane y = 600 = top of the interposer pad (ENi/Au). Motion: capillary underfill front sweeping left to right
+// (complete by 0.40 s), then a slow pan. Used as the pass-B L3 shot (overlay text on the line, dark tone).
+// Geometry and sources: l3a_pillar_riso.notes.md.
+const { W, H, LINE_Y } = APA;
+const S = 7;                 // px per um
+const PAN = 30;              // px/s camera drift to the left (plates are pre-printed wider)
+const WP = W + 100;          // plate width
+const PITCH = 40 * S;        // 280 px
+const X0 = 820;              // one pillar centre; others at X0 + k * PITCH
+// vertical stack (px), from the line up and down
+const Y = {
+  pad: LINE_Y,               // ENi/Au top = joint plane
+  imcPad: LINE_Y - 1 * S,    // Ni3Sn4 scallops on the pad, ~1 um
+  ni: LINE_Y - 7 * S,        // solder 7 um after joining -> pillar Ni bottom (551)
+  cu: LINE_Y - 9 * S,        // Ni 2 um -> Cu pillar bottom (537)
+  dieFace: LINE_Y - 22 * S,  // Cu 13 um -> die passivation surface (446)
+  diePass: LINE_Y - 22 * S - 10, // die passivation ~1.5 um (436)
+  dieBeol: LINE_Y - 22 * S - 10 - 8 * S, // die BEOL ~8 um (380)
+  ipPass: LINE_Y,            // interposer passivation top, flush with the ENi top: the line is the full-width surface
+  alTop: LINE_Y + 2 * S,     // ENi 2 um -> Al-Cu pad top (614)
+  alBot: LINE_Y + 2 * S + 10,// Al-Cu ~1.4 um (624)
+  ipBeolTop: LINE_Y + 3 * S, // passivation 3 um (621), covers the Al-Cu pad edges
+  ipSi: LINE_Y + 3 * S + 5 * S, // interposer BEOL ~5 um (656)
+};
+const R_PIL = 10 * S;        // pillar radius (20 um dia)
+const R_PAD = 10 * S;        // pad radius (20 um dia, ENi/Au top)
+const R_OPEN = 10 * S;       // passivation opening = 20 um landing (ENi fills it flush)
+const R_AL = 12 * S;         // Al-Cu pad (24 um)
+const R_TSV = 5 * S;         // TSV 10 um dia
+const TSV_X = [X0 - 1.5 * PITCH, X0 + 2.5 * PITCH];
+const PILLARS = [];
+for (let k = -4; k <= 5; k++) { const x = X0 + k * PITCH; if (x > -R_PIL - 20 && x < WP + R_PIL + 20) PILLARS.push(x); }
+
+// plates: ink colour, screen angle, opacity, static misregistration offset (px)
+const PLATES = [
+  { name: 'pink', rgb: [255, 72, 176], ang: 15, alpha: 0.92, off: [0, 0] },
+  { name: 'teal', rgb: [0, 131, 138], ang: 75, alpha: 0.9, off: [5, 1] },
+];
+const CELL = 9; // halftone cell, px
+
+let ctx, paper, plateCv = {};
+
+// Pass-B tones: the joint sits under the overlay text, so metals print as light tints (low contrast, dark text).
+const CU = 0.5;              // Cu everywhere (pillar, wiring, TSV), one tint so same material reads the same
+const NI = [0.3, 0.42];      // Ni / ENi overprint
+const dens = (p, t) => `rgb(${Math.round(p * 255)},${Math.round(t * 255)},0)`;
+
+function rect(g, x0, y0, x1, y1, p, t) { g.fillStyle = dens(p, t); g.fillRect(x0, y0, x1 - x0, y1 - y0); }
+
+function drawDensity(g, withUF, R) {
+  // background: paper
+  rect(g, 0, 0, WP, H, 0, 0);
+  // die Si: halftone ramp (print idiom), denser toward the BEOL
+  let gr = g.createLinearGradient(0, 0, 0, Y.dieBeol);
+  gr.addColorStop(0, dens(0, 0.12)); gr.addColorStop(1, dens(0, 0.62));
+  g.fillStyle = gr; g.fillRect(0, 0, WP, Y.dieBeol);
+  // die BEOL: dielectric band with Cu wiring rows (pattern illustrative), thicker top metals
+  rect(g, 0, Y.dieBeol, WP, Y.diePass, 0, 0.26);
+  const beolRows = (y0, y1, rows, thickBase, rnd, seedGap) => {
+    for (let r = 0; r < rows; r++) {
+      const yy = y0 + (r + 0.5) * (y1 - y0) / rows;
+      const th = thickBase[r];
+      let x = -40 * rnd();
+      while (x < WP) {
+        const len = 30 + rnd() * seedGap;
+        rect(g, x, yy - th / 2, x + len, yy + th / 2, CU, 0.08);
+        x += len + 10 + rnd() * 40;
+      }
+    }
+  };
+  beolRows(Y.dieBeol + 4, Y.diePass - 16, 5, [4, 4, 5, 7, 9], R, 120);
+  // die top-metal pads above each pillar, passivation, pillar neck in the opening
+  rect(g, 0, Y.diePass, WP, Y.dieFace, 0, 0.88);
+  for (const x of PILLARS) {
+    rect(g, x - 9 * S, Y.diePass - 9, x + 9 * S, Y.diePass + 1, 0.1, 0.72);  // die Al pad (top metal)
+    rect(g, x - 7 * S, Y.diePass, x + 7 * S, Y.dieFace, CU, 0.0);         // Cu in passivation opening (UBM + pillar)
+  }
+  // gap: air (paper) or underfill with silica filler
+  if (withUF) {
+    rect(g, 0, Y.dieFace, WP, Y.ipPass, 0.24, 0.1);
+    const rf = APA.rng(77);
+    for (let i = 0; i < 260; i++) {
+      const x = rf() * WP, y = Y.dieFace + rf() * (Y.ipPass - Y.dieFace);
+      const r = 2.5 + Math.pow(rf(), 2.5) * 9;  // 0.35-1.7 um radius
+      g.fillStyle = dens(0.0, 0.0);
+      g.beginPath(); g.arc(x, y, r, 0, 2 * Math.PI); g.fill();
+    }
+  }
+  // interposer: passivation, BEOL, Si
+  rect(g, 0, Y.ipPass, WP, Y.ipBeolTop, 0, 0.88);
+  rect(g, 0, Y.ipBeolTop, WP, Y.ipSi, 0, 0.26);
+  // interposer BEOL: Al RDL (top, 5 um pitch) + 3 Cu damascene levels (pattern illustrative)
+  beolRows(Y.ipBeolTop + 2, Y.ipSi - 2, 4, [8, 4, 4, 4], R, 160);
+  gr = g.createLinearGradient(0, Y.ipSi, 0, H);
+  gr.addColorStop(0, dens(0, 0.62)); gr.addColorStop(1, dens(0, 0.12));
+  g.fillStyle = gr; g.fillRect(0, Y.ipSi, WP, H - Y.ipSi);
+  // TSVs: oxide liner + Cu, from M1 down through the Si
+  for (const x of TSV_X) {
+    rect(g, x - R_TSV - 5, Y.ipSi - 6, x + R_TSV + 5, H, 0, 0.9);
+    rect(g, x - R_TSV, Y.ipSi - 6, x + R_TSV, H, CU, 0.0);
+    rect(g, x - R_TSV - 18, Y.ipSi - 12, x + R_TSV + 18, Y.ipSi - 4, CU, 0.08); // M1 landing
+  }
+  for (const x of PILLARS) {
+    // Al-Cu pad under passivation edge, via down into the RDL
+    rect(g, x - R_AL, Y.alTop, x + R_AL, Y.alBot, 0.1, 0.72);
+    rect(g, x - R_AL, Y.ipPass, x - R_OPEN, Y.alTop, 0, 0.88);
+    rect(g, x + R_OPEN, Y.ipPass, x + R_AL, Y.alTop, 0, 0.88);
+    // ENi (2 um) filling the 20 um opening, top flush with the passivation surface on y = 600
+    rect(g, x - R_PAD, Y.pad, x + R_PAD, Y.alTop, ...NI);
+    // SnAg joint: barrel between pillar Ni and pad, slight bulge, wetting the full 20 um pad
+    const bul = 7;
+    g.fillStyle = dens(0.04, 0.1);
+    g.beginPath();
+    g.moveTo(x - R_PIL, Y.ni);
+    g.bezierCurveTo(x - R_PIL - bul * 1.4, Y.ni + 16, x - R_PAD - bul * 1.4, Y.pad - 16, x - R_PAD, Y.pad);
+    g.lineTo(x + R_PAD, Y.pad);
+    g.bezierCurveTo(x + R_PAD + bul * 1.4, Y.pad - 16, x + R_PIL + bul * 1.4, Y.ni + 16, x + R_PIL, Y.ni);
+    g.closePath(); g.fill();
+    // redraw ENi top so the landing surface stays exactly on the line
+    rect(g, x - R_PAD + 3, Y.pad, x + R_PAD - 3, Y.pad + 4, ...NI);
+    // Ni-Sn IMC scallops on both Ni interfaces (~1 um)
+    const scallop = (y0, dir, rs) => {
+      g.fillStyle = dens(0.24, 0.36);
+      g.beginPath(); g.moveTo(x - R_PAD + 2, y0);
+      let xx = x - R_PAD + 2;
+      while (xx < x + R_PAD - 2) {
+        const w = 9 + rs() * 12, h = 4 + rs() * 5;
+        const xe = Math.min(xx + w, x + R_PAD - 2);
+        g.quadraticCurveTo((xx + xe) / 2, y0 + dir * h * 1.6, xe, y0);
+        xx = xe;
+      }
+      g.closePath(); g.fill();
+    };
+    const rs = APA.rng(Math.round(x) * 13 + 5);
+    scallop(Y.pad, -1, rs);
+    scallop(Y.ni, 1, rs);
+    // pillar: Ni barrier and Cu
+    rect(g, x - R_PIL, Y.cu, x + R_PIL, Y.ni, ...NI);
+    rect(g, x - R_PIL, Y.dieFace, x + R_PIL, Y.cu, CU, 0.0);
+    // Ag3Sn specks in the solder
+    for (let i = 0; i < 4; i++) {
+      const ax = x - 50 + rs() * 100, ay = Y.ni + 14 + rs() * 22;
+      rect(g, ax, ay, ax + 3 + rs() * 7, ay + 2 + rs() * 2, 0.2, 0.32);
+    }
+  }
+}
+
+// value noise for low-frequency ink density variation
+function lowNoise(seed, cell) {
+  const r = APA.rng(seed);
+  const gw = Math.ceil(WP / cell) + 2, gh = Math.ceil(H / cell) + 2;
+  const grid = new Float32Array(gw * gh).map(() => r());
+  return (x, y) => {
+    const fx = x / cell, fy = y / cell, ix = fx | 0, iy = fy | 0;
+    let u = fx - ix, v = fy - iy; u = u * u * (3 - 2 * u); v = v * v * (3 - 2 * v);
+    const a = grid[iy * gw + ix], b = grid[iy * gw + ix + 1], c = grid[(iy + 1) * gw + ix], d = grid[(iy + 1) * gw + ix + 1];
+    return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
+  };
+}
+
+function screenPlates(dens, out, seed) {
+  // out: [pinkAlpha, tealAlpha] Uint8ClampedArray RGBA buffers
+  const r = APA.rng(seed);
+  const grainP = new Float32Array(WP * H), grainT = new Float32Array(WP * H);
+  for (let i = 0; i < WP * H; i++) { grainP[i] = r(); grainT[i] = r(); }
+  const lnP = lowNoise(seed + 1, 140), lnT = lowNoise(seed + 2, 170);
+  const lnP2 = lowNoise(seed + 3, 9), lnT2 = lowNoise(seed + 4, 11);
+  const k = 2 * Math.PI / CELL;
+  const cfg = PLATES.map((pl) => ({ c: Math.cos(pl.ang * Math.PI / 180), s: Math.sin(pl.ang * Math.PI / 180) }));
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < WP; x++) {
+      const i = y * WP + x, j = i * 4;
+      for (let pi = 0; pi < 2; pi++) {
+        let d = dens[j + pi] / 255;
+        const o = out[pi];
+        if (d <= 0.002) { o[j + 3] = 0; continue; }
+        const { c, s } = cfg[pi];
+        const u = x * c + y * s, v = -x * s + y * c;
+        // spot function, 0 at dot centre, 1 at the cell corner
+        const f = 0.5 - 0.25 * (Math.cos(k * u) + Math.cos(k * v));
+        const g = pi === 0 ? grainP[i] : grainT[i];
+        const ln = pi === 0 ? lnP(x, y) : lnT(x, y);
+        const ln2 = pi === 0 ? lnP2(x, y) : lnT2(x, y);
+        // drum unevenness + fine grain jitter + ragged edges
+        // jitter scales with density so light tints stay clean dots (calm under the overlay text)
+        d = d * (0.9 + 0.2 * ln) + ((ln2 - 0.5) * 0.05 + (g - 0.5) * 0.06) * Math.min(1, 0.15 + d);
+        let a = (d - f) / 0.07 + 0.5;
+        a = a < 0 ? 0 : a > 1 ? 1 : a;
+        // ink starvation speckle in solids
+        if (g > 0.985) a *= 0.35;
+        o[j + 3] = Math.round(a * PLATES[pi].alpha * 255);
+      }
+    }
+  }
+}
+
+function buildPlates(withUF) {
+  const dc = document.createElement('canvas'); dc.width = WP; dc.height = H;
+  const g = dc.getContext('2d');
+  drawDensity(g, withUF, APA.rng(1234));
+  const dens = g.getImageData(0, 0, WP, H).data;
+  const outs = PLATES.map((pl) => {
+    const a = new Uint8ClampedArray(WP * H * 4);
+    for (let i = 0; i < WP * H; i++) { a[i * 4] = pl.rgb[0]; a[i * 4 + 1] = pl.rgb[1]; a[i * 4 + 2] = pl.rgb[2]; }
+    return a;
+  });
+  screenPlates(dens, outs, 99);
+  return outs.map((a) => {
+    const c = document.createElement('canvas'); c.width = WP; c.height = H;
+    c.getContext('2d').putImageData(new ImageData(a, WP, H), 0, 0);
+    return c;
+  });
+}
+
+function buildPaper() {
+  const c = document.createElement('canvas'); c.width = WP; c.height = H;
+  const g = c.getContext('2d');
+  g.fillStyle = '#f5f0e5'; g.fillRect(0, 0, WP, H);
+  const r = APA.rng(4242);
+  for (let i = 0; i < 9000; i++) {     // paper fibres
+    const x = r() * W, y = r() * H, a = r() * Math.PI, l = 4 + r() * 16;
+    g.strokeStyle = r() < 0.5 ? 'rgba(120,100,70,0.06)' : 'rgba(255,255,255,0.35)';
+    g.lineWidth = 0.6 + r() * 0.8;
+    g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(a) * l, y + Math.sin(a) * l); g.stroke();
+  }
+  return c;
+}
+
+// underfill front: concave meniscus (walls lead, mid-gap lags), moving left -> right in plate coordinates.
+// Pass-B slot (1 beat, 0.5 s): the front sweeps from x = 800 past the right frame edge with an ease-out and is
+// complete at te = 0.40 s; afterwards the gap is fully underfilled and only the pan continues.
+// Tuned for runtime speed = 1 (the runtime passes t * speed to render).
+const T_FILL = 0.4;
+const frontX = (t) => { const u = Math.min(Math.max(t / T_FILL, 0), 1); return 800 + 1450 * (1 - (1 - u) * (1 - u)); };
+function frontPath(F, y0, y1, side) {
+  const amp = 34, p = new Path2D();
+  const xe = side === 'left' ? -200 : W + 200;
+  p.moveTo(xe, -50); p.lineTo(F, -50); p.lineTo(F, y0);
+  for (let i = 0; i <= 24; i++) p.lineTo(F - amp * Math.sin(Math.PI * i / 24), y0 + (y1 - y0) * i / 24);
+  p.lineTo(F, H + 50); p.lineTo(xe, H + 50); p.closePath();
+  return p;
+}
+
+// ---- overlay word as a two-plate riso print (STYLE.md "Styled text") ----
+// Heavy grotesk (APA Grotesk 800) printed on the same two drums as the scene, with the scene's own screening
+// (screenPlates spot function, cell 9 px): pink plate at 100 % on its 15 deg screen, teal at 90 % on its 75 deg
+// screen, both clipped to the glyph coverage, with static seeded drum unevenness, grain and starvation speckle.
+// Overprinted with multiply, on the plates (navy where both inks lie) and onto the scene (the overlay canvas blends
+// in multiply mode, so paper fibres and the scene's dots show through the ink). The teal plate carries the scene's
+// static misregistration (+5, +1) px; it starts 3 px further out and settles onto it by ~0.25 s in whole-pixel
+// steps (registration settling). Legible from frame 0.
+const risoCache = new Map();
+function risoPlates(word, fs, fam) {
+  const key = [word, fs, fam].join('|');
+  if (risoCache.has(key)) return risoCache.get(key);
+  const m = TFX.mask(word, { family: fam, size: fs, weight: 800, pad: Math.ceil(fs * 0.3) });
+  const k = 2 * Math.PI / CELL, dens = [1.0, 0.9];
+  const out = PLATES.map((pl, pi) => {
+    const c = mk2(m.w, m.h), cg = c.getContext('2d');
+    const id = cg.createImageData(m.w, m.h), d = id.data;
+    const ca = Math.cos(pl.ang * Math.PI / 180), sa = Math.sin(pl.ang * Math.PI / 180);
+    const ln = lowNoise(311 + pi, 70), ln2 = lowNoise(733 + pi, 9);
+    for (let y = 0, i = 0; y < m.h; y++) for (let x = 0; x < m.w; x++, i++) {
+      const cov = m.alpha[i] / 255;
+      if (cov <= 0) continue;
+      const u = x * ca + y * sa, v = -x * sa + y * ca;
+      const f = 0.5 - 0.25 * (Math.cos(k * u) + Math.cos(k * v));
+      const gr = TFX.hash(97 + pi, x, y);
+      const dd = dens[pi] * (0.92 + 0.12 * ln(x, y)) + (ln2(x, y) - 0.5) * 0.05 + (gr - 0.5) * 0.06;
+      let a = (dd - f) / 0.07 + 0.5;
+      a = a < 0 ? 0 : a > 1 ? 1 : a;
+      if (gr > 0.985) a *= 0.35;
+      d[4 * i] = pl.rgb[0]; d[4 * i + 1] = pl.rgb[1]; d[4 * i + 2] = pl.rgb[2];
+      d[4 * i + 3] = Math.round(255 * cov * a);
+    }
+    cg.putImageData(id, 0, 0);
+    return c;
+  });
+  const r = { m, pink: out[0], teal: out[1] };
+  risoCache.set(key, r);
+  return r;
+}
+function mk2(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+function textHook(g, word, t, p, info) {
+  g.canvas.style.mixBlendMode = 'multiply';
+  const R = risoPlates(word, Math.round(info.size * 1.05), info.fonts.grotesk);
+  const settle = Math.round(3 * Math.exp(-Math.max(0, t) / 0.08));
+  const [dx, dy] = PLATES[1].off;
+  g.globalAlpha = PLATES[0].alpha;
+  TFX.blit(g, R.pink, R.m, info.x, info.baseline);
+  g.globalCompositeOperation = 'multiply';
+  g.globalAlpha = PLATES[1].alpha;
+  TFX.blit(g, R.teal, R.m, info.x + dx + settle, info.baseline + dy + Math.round(settle / 3));
+}
+
+APA.scene({
+  meta: { text: 'dark' },
+  async init() {
+    ({ ctx } = APA.canvas('2d'));
+    paper = buildPaper();
+    const empty = buildPlates(false), full = buildPlates(true);
+    plateCv = { empty, full };
+    // warm up (texture upload, clip and blend paths) so the first timed frame is not an outlier
+    this.render(0); this.render(3); ctx.getImageData(0, 0, 1, 1);
+  },
+  render(t) {
+    const pan = Math.round(PAN * t); // whole pixels: plain copies, no resampling of the halftone
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.drawImage(paper, 0, 0);
+    ctx.globalCompositeOperation = 'multiply';
+    PLATES.forEach((pl, i) => {
+      const ox = pl.off[0] - pan, oy = pl.off[1];
+      const F = frontX(t) + ox;
+      ctx.save(); ctx.clip(frontPath(F, Y.dieFace + oy, Y.ipPass + oy, 'right'));
+      ctx.drawImage(plateCv.empty[i], ox, oy);
+      ctx.restore();
+      ctx.save(); ctx.clip(frontPath(F, Y.dieFace + oy, Y.ipPass + oy, 'left'));
+      ctx.drawImage(plateCv.full[i], ox, oy);
+      ctx.restore();
+    });
+    ctx.globalCompositeOperation = 'source-over';
+  },
+  text: textHook,
+});
+</script>
+</body>
+</html>
