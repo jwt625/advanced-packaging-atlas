@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>hybrid bonding short: scene preview</title>
+<style>
+  html, body { margin: 0; background: #0b0d10; color: #d8d4cc; font: 13px/1.4 ui-monospace, Menlo, monospace; }
+  #bar { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px; border-bottom: 1px solid #222; }
+  #bar button { background: #15181d; color: #d8d4cc; border: 1px solid #2a2f37; border-radius: 0; padding: 4px 8px;
+                font: inherit; cursor: pointer; }
+  #bar button.on { background: #c8642c; color: #000; border-color: #c8642c; }
+  #bar button.missing { color: #5a5f68; text-decoration: line-through; }
+  #info { padding: 4px 8px; color: #8a8f98; }
+  #wrap { position: relative; width: 100vw; aspect-ratio: 16 / 9; max-height: calc(100vh - 90px); overflow: hidden; }
+  iframe { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; border: 0; transform-origin: 0 0;
+           background: #000; }
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div id="info"></div>
+<div id="wrap"><iframe id="f"></iframe></div>
+<script>
+// Loops each shot of edit.json in realtime (?play=1) at its edit length; dur = 3 s for scenes longer in the cut.
+// ?edit=edit_exempt.json loads another cut list from this folder; a shot's params.speed is passed through (lib/apa.js).
+// Shots whose scene file does not exist yet are struck through and show a black frame.
+const bar = document.getElementById('bar'), f = document.getElementById('f'), info = document.getElementById('info');
+const wrap = document.getElementById('wrap');
+function fit() { f.style.transform = `scale(${wrap.clientWidth / 1920})`; }
+addEventListener('resize', fit);
+const editFile = new URLSearchParams(location.search).get('edit') || 'edit.json';
+fetch(editFile).then((r) => r.json()).then((edit) => {
+  const fps = edit.fps, bpm = edit.bpm || 120;
+  edit.shots.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.textContent = s.id;
+    const exists = fetch(`scenes/${s.scene}`, { method: 'HEAD' }).then((r) => r.ok).catch(() => false);
+    exists.then((ok) => { if (!ok) b.classList.add('missing'); });
+    b.onclick = async () => {
+      [...bar.children].forEach((c) => c.classList.remove('on'));
+      b.classList.add('on');
+      const dur = (s.frames / fps).toFixed(2);
+      if (!(await exists)) {
+        f.src = 'about:blank';
+        info.textContent = `${editFile}  ${s.id}  ${s.scene}  MISSING (black placeholder in drafts)  ${s.frames} frames = ${dur} s`;
+        fit();
+        return;
+      }
+      const p = new URLSearchParams({ ...(s.params || {}), play: '1', dur, _dur: ((s.frames - 1) / fps).toFixed(4) });
+      if (s.cues) p.set('text_cues', JSON.stringify(s.cues.map(([bt, tx]) => [bt * 60 / bpm, tx])));
+      f.src = `scenes/${s.scene}?${p}`;
+      info.textContent = `${editFile}  ${s.id}  ${s.scene}  ${s.frames} frames = ${dur} s (loops)  speed ${(s.params && s.params.speed) || 1}  ${s.params && s.params.text ? 'text: ' + s.params.text : ''}`;
+      fit();
+    };
+    bar.appendChild(b);
+  });
+  bar.children[0].click();
+});
+</script>
+</body>
+</html>
