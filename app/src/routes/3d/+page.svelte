@@ -11,7 +11,7 @@
 	import { goto } from '$app/navigation';
 	import type { Inset } from '../../lib/three/types';
 
-	type Mode = 'single' | 'compare' | 'gallery';
+	type Mode = 'single' | 'compare' | 'gallery' | 'process';
 	const COMPARE_DEFAULT = ['cowos_s', 'cowos_l', 'emib', 'emib_t'];
 
 	let loaded = $state<Loaded | null>(null);
@@ -172,8 +172,10 @@
 			if (fv && v && variantsOf(fv).some((x) => x.variant === v)) varSel = { ...varSel, [fv.id]: v };
 			const def = COMPARE_DEFAULT.filter((id) => l.data.families.some((x) => x.id === id));
 			cmp = def.length >= 2 ? def : l.data.families.slice(0, Math.min(3, l.data.families.length)).map((x) => x.id);
-			// default landing: compare (two CoWoS, two EMIB); a #f=<family> link opens that family in single view
-			if (!hasF) mode = 'compare';
+			// default landing: compare (two CoWoS, two EMIB); a #f=<family> link opens that family in single view;
+			// #mode=process opens the process mode (DevLog-016)
+			if (h.get('mode') === 'process') mode = 'process';
+			else if (!hasF) mode = 'compare';
 		});
 	});
 
@@ -268,6 +270,17 @@
 		// The state change reaches the viewer in an effect; frame after it has been applied.
 		setTimeout(() => viewer?.frameInset(ins), 0);
 	}
+	/** Mode switch; leaving process mode drops its hash (single mode writes its own). */
+	function setMode(m: Mode) {
+		mode = m;
+		if (m !== 'process' && location.hash.includes('mode=process')) {
+			try {
+				void goto(location.pathname + location.search, { replace: true, shallow: true, reset: false });
+			} catch {
+				/* router not ready */
+			}
+		}
+	}
 	function openFamily(id: string) {
 		famId = id;
 		mode = 'single';
@@ -292,8 +305,8 @@
 <div class="page">
 	<div class="bar">
 		<div class="seg">
-			{#each [['single', 'Single'], ['compare', 'Compare'], ['gallery', 'Gallery']] as [m, l] (m)}
-				<button class:on={mode === m} onclick={() => (mode = m as Mode)}>{l}</button>
+			{#each [['single', 'Single'], ['compare', 'Compare'], ['gallery', 'Gallery'], ['process', 'Process']] as [m, l] (m)}
+				<button class:on={mode === m} onclick={() => setMode(m as Mode)} data-tip={m === 'process' ? 'Process flows: animated steps with wafer, block and unit-cell scales' : undefined}>{l}</button>
 			{/each}
 		</div>
 		{#if mode === 'single'}
@@ -313,7 +326,7 @@
 			</div>
 			<button class:on={fitEach} onclick={() => (fitEach = !fitEach)} data-tip={fitEach ? 'Each family fitted to its pane (own scale bar per pane). Click for one common lateral scale.' : 'One common lateral scale for all panes. Click to fit each family to its pane.'}>Fit each</button>
 		{/if}
-		{#if mode !== 'gallery'}
+		{#if mode !== 'gallery' && mode !== 'process'}
 			<span class="sep"></span>
 			<div class="seg">
 				<button class:on={!illustrative} onclick={() => (illustrative = false)} data-tip="In-scale: true dimensions on all axes; use insets and zoom presets for the core regions">In-scale</button>
@@ -339,7 +352,13 @@
 		{#if loaded?.error}<span class="err" data-tip={loaded.error}>package3d.json error</span>{/if}
 	</div>
 
-	{#if mode === 'gallery'}
+	{#if mode === 'process'}
+		{#await import('../../lib/process/ProcessView.svelte') then M}
+			<M.default />
+		{:catch e}
+			<div class="err">Process view failed to load: {e instanceof Error ? e.message : String(e)}</div>
+		{/await}
+	{:else if mode === 'gallery'}
 		<div class="gallery">
 			{#each galleryFams as f (f.id)}
 				{@const tkey = `${ui.theme}:${f.id}@${f.variant ?? ''}`}
