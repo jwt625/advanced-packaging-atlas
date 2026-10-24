@@ -132,7 +132,7 @@ Every rendered dimension has a status, and the viewer encodes it:
 - [x] Wire the real package3d.json; compare view; gallery thumbnails (done per progress log below; ticked 2026-10-21)
 - [x] Performance pass (draw calls, triangles, memory; target 60 fps orbit on this machine) and clutter pass (done per progress log below; ticked 2026-10-21)
 - [x] Fresh-context review (data provenance + UI), fixes (done per progress log below; ticked 2026-10-21)
-- [ ] Phase 3: process animation from DevLog-007 flows
+- [x] Phase 3: process animation from DevLog-007 flows (done in DevLog-016, Process mode; ticked 2026-10-24)
 
 ## Progress log
 
