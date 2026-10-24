@@ -1,0 +1,469 @@
+# Geometry companion of config/process3d/flows/2p5d_120mm.yaml (contract v1, config/process3d/CONTRACT.md).
+# Format: config/process3d/COMPOSITION.md section 5. Build: uv run python scripts/build_process3d.py --flow 2p5d_120mm
+# Frames: x, y um from the unit center; z um up from the piece bottom, front side up. A bare string or number in a
+# dimension field is a derived expression over geometry names (status follows its inputs); numbers in `block`,
+# `view`, `rot_deg` and `w` are view parameters.
+# Drawn: the Si interposer has no BEOL and no TSV (the paper describes neither); front pads and Ni/Au finish under all
+# 10 dies (pad sites pad_1..pad_10: 1-2 = Die A1 / A2, 3-10 = Die B1..B8). Repeated bodies / calls: `repeat_over`.
+note: >-
+  Interposer drawn without wiring or TSVs (not described in the paper). Die floor plan is a template reading of the
+  undimensioned Fig. 1(a). Joints drawn as plated stacks; collapse is computed by the engine.
+
+geometry:
+  wafer_d_mm:
+    template: 300
+    refs: [ectc51687.2025.00027-a.carrier_format]
+    note: "'12-inch Si interposer wafer' (p.2 Sec. II.B); 300 mm wafer format of the TV row"
+  die_gap_um:
+    analog: ectc51529.2024.00049-a-c1.gap_um
+    note: "die-to-die gap not reported; analog = SoC D2D gap of a TSMC 2.5D TV (also the package3d cowos_s gap)"
+  dA_y_um:
+    template: "die_a_d_mm * 500 + die_gap_um / 2"
+    note: "Fig. 1(a) top view (not dimensioned): two Die A stacked along y in the middle, four Die B (long side along y) in a column on each side; positions from the stated die sizes and the template gap"
+  dB_x_um:
+    template: "die_a_w_mm * 500 + die_gap_um + die_b_d_mm * 500"
+    note: "Die B columns beside Die A (Fig. 1(a) reading); Die B rotated 90 deg so its 10 mm side runs along y"
+  dB_y1_um:
+    template: "die_b_w_mm * 500 + die_gap_um / 2"
+    note: "inner Die B rows (Fig. 1(a) reading)"
+  dB_y2_um:
+    template: "die_b_w_mm * 1500 + die_gap_um * 1.5"
+    note: "outer Die B rows (Fig. 1(a) reading)"
+  fpad_al_h_um:
+    analog: ectc51909.2023.00230-a-L03.thickness_um
+    note: "Al-Cu front pad thickness not reported; analog = 1 um Al front RDL of a Si interposer"
+  bpad_h_um:
+    analog: ectc51909.2023.00155-a-L13.thickness_um
+    note: "E-Cu backside pad thickness not reported; analog = backside Cu pad of a 2.5D Si-interposer TV of the same tool set"
+  paste_d_um: {template: 400, source: "RESEARCH_PENDING.md X6 (P52: aperture : land 1:1)", note: "proposal: PCB land for 0.5 mm balls not reported; land and aperture drawn at 0.8 x the ball (assumption); area ratio 400 / (4 x 100) = 1.00 with the drawn 100 um stencil (0.98 for a 101.6 um, 4 mil, stencil); paste drawn at the full stencil height (the 84 % transfer of P51 is not applied)"}
+  ip_pad_top_um: "ip_h0_um + fpad_al_h_um + fpad_ni_um + fpad_au_um"
+  # paste metal volume fraction (audit A2 n10): v = (w / rho_m) / (w / rho_m + (100 - w) / rho_f) with w = 88.5 wt%
+  # metal (Type 4 pastes, e.g. Multicore GC18 SAC305 T4 and Indium8.9HF SAC305 T4 listings), rho_m from alloy data
+  # sheets (Kester SAC305 7.37 g/cm3; AIM Sn42/Bi58 8.72 g/cm3), flux vehicle rho_f = 1.0 g/cm3 (assumption, not
+  # sourced): SAC 0.511, Sn-58Bi 0.469
+  paste_vf_sac_pct:
+    template: "100 * (88.5 / 7.37) / (88.5 / 7.37 + 11.5 / 1.0)"
+    source: "88.5 wt% metal: Multicore GC18 SAC305 T4 paste listing (tequipment.net, product 2472691); 7.37 g/cm3: Kester SAC305 data sheet (2023-06-23)"
+    note: "metal share of the printed SAC paste volume; flux vehicle density 1.0 g/cm3 is an assumption; the paper gives no paste data"
+  paste_vf_lts_pct:
+    template: "100 * (88.5 / 8.72) / (88.5 / 8.72 + 11.5 / 1.0)"
+    source: "88.5 wt% metal as for SAC (Type 4 listings); 8.72 g/cm3: AIM Sn42/Bi58 alloy data sheet"
+    note: "metal share of the printed Sn-58Bi paste volume; metal wt% of the LTS paste not reported (SAC Type 4 value used); flux vehicle density 1.0 g/cm3 assumed"
+  sbt_top_um: "bga_d_um + sbt_h_um"
+  sub_pad_h_um: {analog: ectc51687.2025.00148-a-L06.thickness_um, note: "substrate surface pad (C4 / bump land, BGA land) thickness not reported; analog = 15 um build-up Cu of a 4-2-4 FCBGA TV (the outer Cu level carries the pads; audit A2 n4)"}
+  pad_top_um: "sbt_top_um + sub_pad_h_um"
+  # 28-layer PCB section (visual audit V2 m12): 28 Cu layers (stated) evenly spaced through the analog 3.2 mm board,
+  # dielectric (CCL / prepreg) between them
+  pcb_cu_um:
+    template: "28.35 / (929.03 * 8.96) * 10000"
+    source: "RESEARCH_TOOLS_FAB.md F69 (Cu 8.96 g/cm3)"
+    note: "PCB Cu foil per layer not reported; 1 oz/ft2 per layer assumed (assumption: a common PCB foil weight), converted 28.35 g over 929.03 cm2 at 8.96 g/cm3 = 34.1 um; every layer drawn as a full plane (signal / plane split not reported)"
+  pcb_diel_um: "(pcb_h_um - pcb_layers * pcb_cu_um) / (pcb_layers - 1)"
+  pcb_lvl_um: "pcb_cu_um + pcb_diel_um"
+  # backside-bump joint after s15 (audit A2 n3): plated SnAg cap d 75, h 25 between equal pads (bump and substrate pad
+  # drawn at the bump diameter): H^3 + p H - p h = 0, p = 1.5 d^2 = 8,437.5 -> H = 23.47 um, collapse 1.53 um
+  bb_p: "1.5 * bbump_d_um ** 2"
+  bb_u: "(bb_p * bbump_snag_um / 2 + ((bb_p * bbump_snag_um) ** 2 / 4 + bb_p ** 3 / 27) ** 0.5) ** (1 / 3)"
+  bb_jh_um: "bb_u - bb_p / (3 * bb_u)"
+  cuf_gap_um: "bpad_h_um + bbump_cu_um + bb_jh_um"
+  rough_stop_um: {template: 30, source: "RESEARCH_TOOLS_FAB.md F125 (US8025553)", note: "rough grind stops 20-40 um above the final thickness; middle drawn"}
+  feed_rough_um_s: {template: 5, source: "RESEARCH_TOOLS_FAB.md F126 (US7758402)", note: "rough infeed 4-6 um/s (med)"}
+  feed_fine_um_s: {template: 0.25, source: "RESEARCH_TOOLS_FAB.md F124 (DAG810 user guide)", note: "#2000 wheel P1 infeed (P2 0.12, P3 0.05 um/s)"}
+  # ---- microbump joint after TCB (audit A1 m3): plated SnAg cap (a = bump radius) between the Ni barrier (a) and the
+  # Ni/Au pad (b): H^3 + p H - q = 0, p = 3 (a^2 + b^2), q = 6 a^2 h, H = u - p / (3 u), u = (q / 2 + (q^2 / 4 +
+  # p^3 / 27)^(1/2))^(1/3) (Cardano). d 20, pad 20, cap 9: H = 8.11 um, collapse 0.89 um.
+  ub_p: "0.75 * (ubump_d_um ** 2 + fpad_d_um ** 2)"
+  ub_q: "1.5 * ubump_d_um ** 2 * ubump_snag_um"
+  ub_u: "(ub_q / 2 + (ub_q ** 2 / 4 + ub_p ** 3 / 27) ** 0.5) ** (1 / 3)"
+  ub_jh_um: "ub_u - ub_p / (3 * ub_u)"
+  ub_coll_um: "ubump_snag_um - ub_jh_um"
+  # ---- BGA (audit A1 m2): wetted diameter and the attached ball height (free cap: h^3 + 3 a^2 h - d^3 = 0, a = wet / 2)
+  bga_wet_d_um:
+    template: "bga_d_um * 2 * ((r0 ** 3 - 478 ** 3) / (3 * 478)) ** 0.5 / r0"
+    refs: [ectc51909.2023.00155-a-i4.diameter_um, ectc51909.2023.00155-a-i4.notes]
+    note: "package-side wetted diameter not reported; scaled from the analog row (600 um SAC305 ball, measured ball height 478 um in its notes): the wetted diameter that gives that height for a volume-conserving cap is 546 um = 0.91 d; 0.91 x 500 um drawn"
+  bga_p: "0.75 * bga_wet_d_um ** 2"
+  bga_u: "(bga_d_um ** 3 / 2 + (bga_d_um ** 6 / 4 + bga_p ** 3 / 27) ** 0.5) ** (1 / 3)"
+  bga_cap_um: "bga_u - bga_p / (3 * bga_u)"
+  # Placements: at.z = the target contact plane (pad top, paste top; contract 14); the engine joins by the current
+  # extent (CONTRACT 16.1: ground interposer, reflowed bumps, attached ball caps).
+
+pieces:
+  interposer_wafer:
+    carrier: {shape: disk, diameter_mm: {geom: wafer_d_mm}}
+    unit: {w_um: "ip_w_mm * 1000", d_um: "ip_d_mm * 1000"}
+    repeat: {pitch_x_um: "ip_w_mm * 1000 + kerf_um", pitch_y_um: "ip_d_mm * 1000 + kerf_um"}
+    block: {x0_um: 9400, x1_um: 10800, y0_um: 9200, y1_um: 10400}
+    initial: true
+    cell_site: pad_1
+  die_a:
+    carrier: {shape: rect, w_mm: {geom: die_a_w_mm}, d_mm: {geom: die_a_d_mm}}
+    unit: {w_um: "die_a_w_mm * 1000", d_um: "die_a_d_mm * 1000"}
+    block: {x0_um: -300, x1_um: 300, y0_um: -300, y1_um: 300}
+    initial: true
+    cell_site: bump_a
+  die_b:
+    carrier: {shape: rect, w_mm: {geom: die_b_w_mm}, d_mm: {geom: die_b_d_mm}}
+    unit: {w_um: "die_b_w_mm * 1000", d_um: "die_b_d_mm * 1000"}
+    block: {x0_um: -300, x1_um: 300, y0_um: -300, y1_um: 300}
+    initial: true
+    cell_site: bump_b
+  carrier:
+    carrier: {shape: disk, diameter_mm: {geom: wafer_d_mm}}
+    unit: {w_um: "ip_w_mm * 1000", d_um: "ip_d_mm * 1000"}
+    block: {x0_um: 9400, x1_um: 10800, y0_um: 9200, y1_um: 10400}
+    initial: false
+  substrate:
+    carrier: {shape: rect, w_mm: {geom: sbt_w_mm}, d_mm: {geom: sbt_d_mm}}
+    unit: {w_um: "sbt_w_mm * 1000", d_um: "sbt_d_mm * 1000"}
+    block: {x0_um: 20000, x1_um: 22500, y0_um: -800, y1_um: 800}
+    initial: true
+    cell_site: sbt_pad
+  stiffener:
+    carrier: {shape: rect, w_mm: {geom: sbt_w_mm}, d_mm: {geom: sbt_d_mm}}
+    unit: {w_um: "sbt_w_mm * 1000", d_um: "sbt_d_mm * 1000"}
+    block: {x0_um: 29500, x1_um: 33000, y0_um: -800, y1_um: 800}
+    initial: false
+  pcb:
+    carrier: {shape: rect, w_mm: {geom: pcb_w_mm}, d_mm: {geom: pcb_d_mm}}
+    unit: {w_um: "pcb_w_mm * 1000", d_um: "pcb_d_mm * 1000"}
+    block: {x0_um: 58500, x1_um: 61500, y0_um: -800, y1_um: 800}
+    initial: true
+    cell_site: pcb_pad
+
+sites:
+  # die bump fields (die frames)
+  - id: bump_a
+    piece: die_a
+    name: "Die A micro-bumps"
+    rect: {x_um: "0", y_um: "0", w_um: "die_a_w_mm * 1000", d_um: "die_a_d_mm * 1000"}
+    pitch_x_um: {geom: ubump_pitch_um}
+    pattern: grid
+  - id: bump_b
+    piece: die_b
+    name: "Die B micro-bumps"
+    rect: {x_um: "0", y_um: "0", w_um: "die_b_w_mm * 1000", d_um: "die_b_d_mm * 1000"}
+    pitch_x_um: {geom: ubump_pitch_um}
+    pattern: grid
+  # interposer front pad fields under each die (Fig. 1(a) layout)
+  - {id: pad_1, piece: interposer_wafer, name: "pads under Die A1", rect: {x_um: "0", y_um: "dA_y_um", w_um: "die_a_w_mm * 1000", d_um: "die_a_d_mm * 1000"}, pitch_x_um: {geom: ubump_pitch_um}, pattern: grid}
+  - {id: pad_2, piece: interposer_wafer, name: "pads under Die A2", rect: {x_um: "0", y_um: "0 - dA_y_um", w_um: "die_a_w_mm * 1000", d_um: "die_a_d_mm * 1000"}, pitch_x_um: {geom: ubump_pitch_um}, pattern: grid}
+  - {id: pad_3, piece: interposer_wafer, name: "pads under Die B1", rect: {x_um: "dB_x_um", y_um: "dB_y1_um", w_um: "die_b_d_mm * 1000", d_um: "die_b_w_mm * 1000"}, pitch_x_um: {geom: ubump_pitch_um}, pattern: grid}
+  - {id: pad_4, piece: interposer_wafer, name: "pads under Die B2", rect: {x_um: "dB_x_um", y_um: "dB_y2_um", w_um: "die_b_d_mm * 1000", d_um: "die_b_w_mm * 1000"}, pitch_x_um: {geom: ubump_pitch_um}, pattern: grid}
+  - {id: pad_5, piece: interposer_wafer, name: "pads under Die B3", rect: {x_um: "dB_x_um", y_um: "0 - dB_y1_um", w_um: "die_b_d_mm * 1000", d_um: "die_b_w_mm * 1000"}, pitch_x_um: {geom: ubump_pitch_um}, pattern: grid}
+  - {id: pad_6, piece: interposer_wafer, name: "pads under Die B4", rect: {x_um: "dB_x_um", y_um: "0 - dB_y2_um", w_um: "die_b_d_mm * 1000", d_um: "die_b_w_mm * 1000"}, pitch_x_um: {geom: ubump_pitch_um}, pattern: grid}
+  - {id: pad_7, piece: interposer_wafer, name: "pads under Die B5", rect: {x_um: "0 - dB_x_um", y_um: "dB_y1_um", w_um: "die_b_d_mm * 1000", d_um: "die_b_w_mm * 1000"}, pitch_x_um: {geom: ubump_pitch_um}, pattern: grid}
+  - {id: pad_8, piece: interposer_wafer, name: "pads under Die B6", rect: {x_um: "0 - dB_x_um", y_um: "dB_y2_um", w_um: "die_b_d_mm * 1000", d_um: "die_b_w_mm * 1000"}, pitch_x_um: {geom: ubump_pitch_um}, pattern: grid}
+  - {id: pad_9, piece: interposer_wafer, name: "pads under Die B7", rect: {x_um: "0 - dB_x_um", y_um: "0 - dB_y1_um", w_um: "die_b_d_mm * 1000", d_um: "die_b_w_mm * 1000"}, pitch_x_um: {geom: ubump_pitch_um}, pattern: grid}
+  - {id: pad_10, piece: interposer_wafer, name: "pads under Die B8", rect: {x_um: "0 - dB_x_um", y_um: "0 - dB_y2_um", w_um: "die_b_d_mm * 1000", d_um: "die_b_w_mm * 1000"}, pitch_x_um: {geom: ubump_pitch_um}, pattern: grid}
+  - id: bpad
+    piece: interposer_wafer
+    name: "backside Cu / SnAg bumps"
+    rect:
+      x_um: "0"
+      y_um: "0"
+      w_um: {template: "ip_w_mm * 1000", note: "backside bump field extent not reported; drawn over the whole interposer"}
+      d_um: {template: "ip_d_mm * 1000", note: "backside bump field extent not reported; drawn over the whole interposer"}
+    pitch_x_um: {geom: bpad_pitch_um}
+    pattern: grid
+  - id: sbt_pad
+    piece: substrate
+    name: "substrate pads under the interposer"
+    rect:
+      x_um: "0"
+      y_um: "0"
+      w_um: {template: "ip_w_mm * 1000", note: "substrate pad field = the interposer bump field (one pad per bump)"}
+      d_um: {template: "ip_d_mm * 1000", note: "substrate pad field = the interposer bump field (one pad per bump)"}
+    pitch_x_um: {geom: bpad_pitch_um}
+    pattern: grid
+  - id: bga
+    piece: substrate
+    name: "BGA balls"
+    rect:
+      x_um: "0"
+      y_um: "0"
+      w_um: {template: "sbt_w_mm * 1000 - bga_pitch_um", note: "BGA array extent not reported; full array one pitch inside the substrate edge"}
+      d_um: {template: "sbt_d_mm * 1000 - bga_pitch_um", note: "BGA array extent not reported; full array one pitch inside the substrate edge"}
+    pitch_x_um: {geom: bga_pitch_um}
+    pattern: grid
+  - id: pcb_pad
+    piece: pcb
+    name: "PCB pads under the BGA"
+    rect:
+      x_um: "0"
+      y_um: "0"
+      w_um: {template: "sbt_w_mm * 1000 - bga_pitch_um", note: "PCB pad field = the BGA array"}
+      d_um: {template: "sbt_d_mm * 1000 - bga_pitch_um", note: "PCB pad field = the BGA array"}
+    pitch_x_um: {geom: bga_pitch_um}
+    pattern: grid
+
+bodies:
+  # ---- interposer wafer
+  - {id: ip_si, name: "Si interposer", piece: interposer_wafer, kind: slab, material: si, initial: true, z_um: "0", h_um: {geom: ip_h0_um}}
+  - {id: "al_{k}", repeat_over: {n: "die_a_n + die_b_n", var: k}, name: "Al-Cu pads (die {k})", piece: interposer_wafer, kind: post, material: al, label: "Al-Cu (0.5)", initial: true, site: "pad_{k}", role: pad, z_um: {geom: ip_h0_um}, h_um: {geom: fpad_al_h_um}, d_um: {geom: fpad_d_um}}
+  - {id: "ni_{k}", repeat_over: {n: "die_a_n + die_b_n", var: k}, name: "electroless Ni (die {k} pads)", piece: interposer_wafer, kind: film, material: ni, z_um: "ip_h0_um + fpad_al_h_um", h_um: {geom: fpad_ni_um}, selective: {site: "pad_{k}", d_um: {geom: fpad_d_um}}}
+  - {id: "au_{k}", repeat_over: {n: "die_a_n + die_b_n", var: k}, name: "immersion Au (die {k} pads)", piece: interposer_wafer, kind: film, material: au, z_um: "ip_h0_um + fpad_al_h_um + fpad_ni_um", h_um: {geom: fpad_au_um}, selective: {site: "pad_{k}", d_um: {geom: fpad_d_um}}}
+  - id: cuf_top
+    name: "top CUF"
+    piece: interposer_wafer
+    kind: fill
+    material: underfill
+    rect:
+      x_um: "0"
+      y_um: "0"
+      w_um: {template: "2 * (dB_x_um + die_b_d_mm * 500)", note: "die block extent from the template floor plan"}
+      d_um: {template: "2 * (dA_y_um + die_a_d_mm * 500)", note: "die block extent from the template floor plan"}
+    z_um: "ip_h0_um + fpad_al_h_um"
+    h_um: "fpad_ni_um + fpad_au_um + ubump_stack_um - ub_coll_um"
+    flow: {from: x-}
+  - id: emc
+    name: "EMC (compression mold)"
+    piece: interposer_wafer
+    kind: fill
+    material: emc
+    rect: {x_um: "0", y_um: "0", w_um: "ip_w_mm * 1000", d_um: "ip_d_mm * 1000"}
+    z_um: {geom: ip_h0_um}
+    h_um: "fpad_al_h_um + mold_h0_um"
+    flow: {from: center}
+  - {id: bs_diel, name: "backside dielectric", piece: interposer_wafer, kind: slab, material: polyimide, label: "dielectric (not specified)", z_um: "ip_h0_um - ip_h_um - bs_diel_h_um", h_um: {geom: bs_diel_h_um}}
+  - {id: bpad, name: "E-Cu backside pad", piece: interposer_wafer, kind: post, material: cu, site: bpad, role: pad, z_um: "ip_h0_um - ip_h_um - bs_diel_h_um - bpad_h_um", h_um: {geom: bpad_h_um}, d_um: {geom: bpad_d_um}}
+  - {id: bbump_cu, name: "backside Cu bump", piece: interposer_wafer, kind: post, material: cu, site: bpad, role: pillar, z_um: "ip_h0_um - ip_h_um - bs_diel_h_um - bpad_h_um - bbump_cu_um", h_um: {geom: bbump_cu_um}, d_um: {geom: bbump_d_um}}
+  - {id: bbump_snag, name: "backside SnAg cap", piece: interposer_wafer, kind: solder, material: solder, label: SnAg, site: bpad, form: plated, dir: down, z_um: "ip_h0_um - ip_h_um - bs_diel_h_um - bpad_h_um - bbump_cu_um", d_um: {geom: bbump_d_um}, h_um: {geom: bbump_snag_um}, liquidus_c: {geom: liq_snag_c}, joint_top_d_um: {template: "bbump_d_um", note: "substrate pad not reported; drawn at the 75 um bump diameter"}}
+  # ---- dies
+  - {id: die_a_si, name: "Die A (Si, mock logic)", piece: die_a, kind: slab, material: si, initial: true, z_um: "0", h_um: {geom: die_h_um}}
+  - {id: pil_a, name: "Cu pillar (Die A)", piece: die_a, kind: post, material: cu, site: bump_a, role: pillar, z_um: {geom: die_h_um}, h_um: {geom: ubump_cu_um}, d_um: {geom: ubump_d_um}}
+  - {id: nib_a, name: "Ni barrier (Die A)", piece: die_a, kind: post, material: ni, site: bump_a, role: barrier, z_um: "die_h_um + ubump_cu_um", h_um: {geom: ubump_ni_um}, d_um: {geom: ubump_d_um}}
+  - {id: cap_a, name: "SnAg cap (Die A)", piece: die_a, kind: solder, material: solder, label: SnAg, site: bump_a, form: plated, z_um: "die_h_um + ubump_cu_um + ubump_ni_um", d_um: {geom: ubump_d_um}, h_um: {geom: ubump_snag_um}, joint_top_d_um: {geom: fpad_d_um}, liquidus_c: {geom: liq_snag_c}}
+  - {id: die_b_si, name: "Die B (Si, mock HBM)", piece: die_b, kind: slab, material: si, initial: true, z_um: "0", h_um: {geom: die_h_um}}
+  - {id: pil_b, name: "Cu pillar (Die B)", piece: die_b, kind: post, material: cu, site: bump_b, role: pillar, z_um: {geom: die_h_um}, h_um: {geom: ubump_cu_um}, d_um: {geom: ubump_d_um}}
+  - {id: nib_b, name: "Ni barrier (Die B)", piece: die_b, kind: post, material: ni, site: bump_b, role: barrier, z_um: "die_h_um + ubump_cu_um", h_um: {geom: ubump_ni_um}, d_um: {geom: ubump_d_um}}
+  - {id: cap_b, name: "SnAg cap (Die B)", piece: die_b, kind: solder, material: solder, label: SnAg, site: bump_b, form: plated, z_um: "die_h_um + ubump_cu_um + ubump_ni_um", d_um: {geom: ubump_d_um}, h_um: {geom: ubump_snag_um}, joint_top_d_um: {geom: fpad_d_um}, liquidus_c: {geom: liq_snag_c}}
+  # ---- glass carrier
+  - {id: glass, name: "glass carrier", piece: carrier, kind: slab, material: glass, initial: true, z_um: "0", h_um: {geom: carrier_h_um}}
+  - {id: release, name: "release layer", piece: carrier, kind: slab, material: release, initial: true, z_um: {geom: carrier_h_um}, h_um: {geom: tba_rel_um}}
+  - {id: tba, name: "temporary bonding adhesive", piece: carrier, kind: slab, material: tba, initial: true, z_um: "carrier_h_um + tba_rel_um", h_um: {geom: tba_adh_um}}
+  # ---- substrate, stiffener, BGA
+  - {id: sbt, name: "8-2-8 build-up substrate", piece: substrate, kind: slab, material: core, label: "8-2-8 build-up (materials not reported)", initial: true, z_um: {geom: bga_d_um}, h_um: {geom: sbt_h_um}}
+  - {id: sbt_pad, name: "substrate pads (under the backside bumps)", piece: substrate, kind: post, material: cu, initial: true, site: sbt_pad, role: pad, z_um: {geom: sbt_top_um}, h_um: {geom: sub_pad_h_um}, d_um: {geom: bbump_d_um}}
+  - {id: bga_land, name: "BGA lands", piece: substrate, kind: post, material: cu, initial: true, site: bga, role: pad, z_um: {geom: bga_d_um}, h_um: {geom: sub_pad_h_um}, d_um: {geom: bga_wet_d_um}}
+  - id: cuf_bot
+    name: "bottom CUF"
+    piece: substrate
+    kind: fill
+    material: underfill
+    rect: {x_um: "0", y_um: "0", w_um: "ip_w_mm * 1000", d_um: "ip_d_mm * 1000"}
+    z_um: {geom: sbt_top_um}
+    h_um: "sub_pad_h_um + cuf_gap_um"
+    flow: {from: x-}
+  - {id: bga_lts, name: "BGA ball (Sn-58Bi)", piece: substrate, kind: solder, material: solder, label: "Sn-58Bi", site: bga, form: sphere, dir: down, routes: [lts_lts, lts_sac], z_um: {geom: bga_d_um}, d_um: {geom: bga_d_um}, h_um: {geom: bga_d_um}, wet_d_um: {geom: bga_wet_d_um}, liquidus_c: {geom: liq_lts_c}, joint_top_d_um: {geom: paste_d_um}}
+  - {id: bga_sac, name: "BGA ball (Sn-3.0Ag-0.5Cu)", piece: substrate, kind: solder, material: solder, label: "Sn-3.0Ag-0.5Cu", site: bga, form: sphere, dir: down, routes: [sac_lts], z_um: {geom: bga_d_um}, d_um: {geom: bga_d_um}, h_um: {geom: bga_d_um}, wet_d_um: {geom: bga_wet_d_um}, liquidus_c: {geom: liq_sac_c}, joint_top_d_um: {geom: paste_d_um}}
+  - id: stiff_ring
+    name: "stiffener (SUS430, size L)"
+    piece: stiffener
+    kind: slab
+    material: steel
+    label: "SUS430"
+    initial: true
+    z_um: "0"
+    h_um: {geom: stiff_h_um}
+    rect: {x_um: "0", y_um: "0", w_um: "sbt_w_mm * 1000", d_um: "sbt_d_mm * 1000"}
+    frame_inner:
+      w_um: {template: "(sbt_w_mm - 2 * stiff_w_mm) * 1000", note: "Table III width read as the ring band from the substrate edge (Fig. 1(a) X / Y arrows)"}
+      d_um: {template: "(sbt_d_mm - 2 * stiff_w_mm) * 1000", note: "Table III width read as the ring band from the substrate edge (Fig. 1(a) X / Y arrows)"}
+  # ---- PCB
+  - {id: "pcb_cu_{i}", repeat_over: {n: {geom: pcb_layers}, var: i}, name: "PCB Cu layer {i}", group: "PCB", piece: pcb, kind: slab, material: cu, label: "Cu plane (1 oz assumed)", z_um: "(i - 1) * pcb_lvl_um", h_um: {geom: pcb_cu_um}}
+  - {id: "pcb_d_{i}", repeat_over: {n: "pcb_layers - 1", var: i}, name: "PCB dielectric {i}", group: "PCB", piece: pcb, kind: slab, material: core, label: "CCL / prepreg", z_um: "(i - 1) * pcb_lvl_um + pcb_cu_um", h_um: {geom: pcb_diel_um}}
+  - {id: paste_lts, name: "solder paste (Sn-58Bi)", piece: pcb, kind: solder, material: solder, label: "Sn-58Bi paste", site: pcb_pad, form: paste, routes: [lts_lts, sac_lts], z_um: {geom: pcb_h_um}, d_um: {geom: paste_d_um}, h_um: {geom: stencil_um}, liquidus_c: {geom: liq_lts_c}, metal_vol_frac: "paste_vf_lts_pct / 100"}
+  - {id: paste_sac, name: "solder paste (Sn-3.0Ag-0.5Cu)", piece: pcb, kind: solder, material: solder, label: "SAC paste", site: pcb_pad, form: paste, routes: [lts_sac], z_um: {geom: pcb_h_um}, d_um: {geom: paste_d_um}, h_um: {geom: stencil_um}, liquidus_c: {geom: liq_sac_c}, metal_vol_frac: "paste_vf_sac_pct / 100"}
+
+profiles:
+  - id: tcb_T
+    q: T
+    unit: C
+    trace: actual
+    label: "joint (actual)"
+    note: "analog TCB of 40 um-pitch dies on a 12-inch Si interposer wafer (ectc51909.2023.00155-F1-s08): stage 100 C, actual max 250 C over the 7 s bond; ramp shape linear (template)"
+    points:
+      - ["0", {analog: ectc51909.2023.00155-F1-s08.conditions, value: 100, note: "stage temperature of the analog TCB row"}]
+      - [{analog: ectc51909.2023.00155-F1-s08.time_s, note: "bond time of the analog row"}, {analog: ectc51909.2023.00155-F1-s08.conditions, value: 250, note: "actual max temperature of the analog row"}]
+      - [{template: "r0 + (250 - 100) / 50", refs: [ectc51909.2023.00155-F1-s08.time_s], source: "RESEARCH_PENDING.md P17 (Intel TCB: cooling > 50 C/s)", note: "head release after the analog bond time; joint cools from the 250 C max to the 100 C stage at 50 C/s (3 s; cooling not reported for the analog row), so the joint freezes after the bond (audit A1 C1)"}, {analog: ectc51909.2023.00155-F1-s08.conditions, value: 100, note: "back to the stage temperature of the analog row"}]
+  - id: tcb_Tset
+    q: T
+    unit: C
+    trace: set
+    label: "bond head set"
+    note: "analog head set temperature 440 C held for the 7 s bond (ectc51909.2023.00155-F1-s08)"
+    points:
+      - ["0", {analog: ectc51909.2023.00155-F1-s08.temp_c, note: "head set temperature of the analog row"}]
+      - [{analog: ectc51909.2023.00155-F1-s08.time_s, note: "bond time of the analog row"}, {analog: ectc51909.2023.00155-F1-s08.temp_c, note: "head set temperature of the analog row"}]
+  - id: tcb_F
+    q: F
+    unit: N
+    label: "bond force"
+    note: "analog 1 N bond force over the 7 s bond (ectc51909.2023.00155-F1-s08)"
+    points:
+      - ["0", {analog: ectc51909.2023.00155-F1-s08.force_n, note: "bond force of the analog row"}]
+      - [{analog: ectc51909.2023.00155-F1-s08.time_s, note: "bond time of the analog row"}, {analog: ectc51909.2023.00155-F1-s08.force_n, note: "bond force of the analog row"}]
+
+steps:
+  s29:
+    calls:
+      - {op: deposit, film: "ni_{k}", method: electroless, repeat_over: {n: "die_a_n + die_b_n", var: k}, label: "electroless Ni (die {k} pads)"}
+      - {op: deposit, film: "au_{k}", method: immersion, repeat_over: {n: "die_a_n + die_b_n", var: k}, label: "Au (die {k} pads)"}
+  s01:
+    calls:
+      - {op: plate, bodies: [pil_a, nib_a, cap_a], mode: through_mask, label: "Die A Cu / Ni / SnAg"}
+      - {op: plate, bodies: [pil_b, nib_b, cap_b], mode: through_mask, label: "Die B Cu / Ni / SnAg"}
+  s02:
+    view: {primary: block, pip: cell, cell_site: pad_1}
+    calls:
+      - op: bond_tcb
+        label: "2 x Die A"
+        piece: die_a
+        onto: interposer_wafer
+        flip: true
+        solder: [cap_a]
+        profiles: {T: tcb_T, T_set: tcb_Tset, F: tcb_F}
+        at:
+          - {x_um: "0", y_um: {geom: dA_y_um}, z_um: {geom: ip_pad_top_um}}
+          - {x_um: "0", y_um: "0 - dA_y_um", z_um: {geom: ip_pad_top_um}}
+      - op: bond_tcb
+        label: "8 x Die B"
+        piece: die_b
+        onto: interposer_wafer
+        flip: true
+        solder: [cap_b]
+        profiles: {T: tcb_T, T_set: tcb_Tset, F: tcb_F}
+        at:
+          - {x_um: {geom: dB_x_um}, y_um: {geom: dB_y1_um}, z_um: {geom: ip_pad_top_um}, rot_deg: 90}
+          - {x_um: {geom: dB_x_um}, y_um: {geom: dB_y2_um}, z_um: {geom: ip_pad_top_um}, rot_deg: 90}
+          - {x_um: {geom: dB_x_um}, y_um: "0 - dB_y1_um", z_um: {geom: ip_pad_top_um}, rot_deg: 90}
+          - {x_um: {geom: dB_x_um}, y_um: "0 - dB_y2_um", z_um: {geom: ip_pad_top_um}, rot_deg: 90}
+          - {x_um: "0 - dB_x_um", y_um: {geom: dB_y1_um}, z_um: {geom: ip_pad_top_um}, rot_deg: 90}
+          - {x_um: "0 - dB_x_um", y_um: {geom: dB_y2_um}, z_um: {geom: ip_pad_top_um}, rot_deg: 90}
+          - {x_um: "0 - dB_x_um", y_um: "0 - dB_y1_um", z_um: {geom: ip_pad_top_um}, rot_deg: 90}
+          - {x_um: "0 - dB_x_um", y_um: "0 - dB_y2_um", z_um: {geom: ip_pad_top_um}, rot_deg: 90}
+  s03:
+    calls:
+      - {op: underfill, fill: cuf_top, gap_um: "fpad_ni_um + fpad_au_um + ubump_stack_um - ub_coll_um", length_mm: {geom: die_a_w_mm}, dispense: L}
+  s04:
+    view: {primary: work, pip: block}
+    calls:
+      - {op: mold, fill: emc, method: compression, mold_top_z_um: "ip_h0_um + fpad_al_h_um + mold_h0_um"}
+  s05:
+    calls:
+      - op: grind
+        face: top
+        to_z_um: "ip_h0_um + fpad_al_h_um + mold_h_um"
+        stages: [{name: "mold top grind", removal_um: {geom: grind_depth_um}}]
+  s06:
+    calls:
+      - {op: bond_temp, carrier: carrier, onto: interposer_wafer, adhesive: [tba]}
+  s07:
+    orient: down
+    calls:
+      - op: grind
+        face: bottom
+        to_z_um: "ip_h0_um - ip_h_um"
+        stages:
+          - {name: rough, removal_um: "ip_h0_um - ip_h_um - rough_stop_um", feed_um_s: {geom: feed_rough_um_s}}
+          - {name: fine, removal_um: {geom: rough_stop_um}, feed_um_s: {geom: feed_fine_um_s}}
+  s08:
+    orient: down
+    view: {primary: block, pip: work}
+    calls:
+      - {op: coat, body: bs_diel, method: spin, duration_s: {template: "5 + 30 + 10 + 15 + 90 + 90", source: "RESEARCH_TOOLS_FAB.md F76 (HD MicroSystems PI-2600 TDS spin sequence)", note: "coat time not reported; polyimide track sequence of the assumed liquid polyimide: spread 5 s, spin 30 s, EBR 10 s, dry 15 s, soft bakes 90 + 90 s"}}
+  s09:
+    orient: down
+    view: {primary: cell, pip: block, cell_site: bpad}
+    calls:
+      - op: plate
+        bodies: [bpad, bbump_cu, bbump_snag]
+        mode: through_mask
+        current_density_ma_cm2:
+          - {template: 50, source: "RESEARCH_TOOLS_FAB.md F62 (DB ectc51846.2026.00194-F3-s04)", note: "Cu pad: through-mask Cu at 5 A/dm2 (not reported)"}
+          - {template: 50, source: "RESEARCH_TOOLS_FAB.md F62 (DB ectc51846.2026.00194-F3-s04)", note: "Cu bump: through-mask Cu pillar plating at 5 A/dm2 (not reported)"}
+          - {template: 10, source: "RESEARCH_TOOLS_FAB.md F65 (DB ectc51687.2025.00226-F1-s06)", note: "SnAg cap at 1 A/dm2 (not reported; audit A2 n6)"}
+  s10:
+    orient: up  # laser debond irradiates through the glass carrier: carrier side (top) faces the tool (L37 / V2)
+    calls:
+      - {op: debond, carrier: carrier, method: laser, release: release}
+  s11:
+    calls:
+      - {op: dice, piece: interposer_wafer, method: blade}
+  s13:
+    calls:
+      - {op: build_stack, bodies: [pcb_cu_1, pcb_cu_2, pcb_cu_3, pcb_cu_4, pcb_cu_5, pcb_cu_6, pcb_cu_7, pcb_cu_8, pcb_cu_9, pcb_cu_10, pcb_cu_11, pcb_cu_12, pcb_cu_13, pcb_cu_14, pcb_cu_15, pcb_cu_16, pcb_cu_17, pcb_cu_18, pcb_cu_19, pcb_cu_20, pcb_cu_21, pcb_cu_22, pcb_cu_23, pcb_cu_24, pcb_cu_25, pcb_cu_26, pcb_cu_27, pcb_cu_28, pcb_d_1, pcb_d_2, pcb_d_3, pcb_d_4, pcb_d_5, pcb_d_6, pcb_d_7, pcb_d_8, pcb_d_9, pcb_d_10, pcb_d_11, pcb_d_12, pcb_d_13, pcb_d_14, pcb_d_15, pcb_d_16, pcb_d_17, pcb_d_18, pcb_d_19, pcb_d_20, pcb_d_21, pcb_d_22, pcb_d_23, pcb_d_24, pcb_d_25, pcb_d_26, pcb_d_27], method: "batch lamination (CCL + prepreg)"}
+  s14:
+    calls:
+      - op: place
+        piece: interposer_wafer
+        onto: substrate
+        flip: false
+        medium: flux
+        solder: [bbump_snag]
+        at: [{x_um: "0", y_um: "0", z_um: {geom: pad_top_um}}]
+  s15:
+    calls:
+      - {op: reflow, solder: [bbump_snag]}
+  s16:
+    calls:
+      - {op: clean, method: flux_clean}
+  s17:
+    calls:
+      - {op: inspect, method: xray_ct}
+  s18:
+    calls:
+      - {op: underfill, fill: cuf_bot, gap_um: {geom: cuf_gap_um}, length_mm: {geom: ip_w_mm}, dispense: one_side}
+  s19:
+    calls:
+      - {op: cure, bodies: [cuf_bot]}
+  s20:
+    calls:
+      - op: place
+        piece: stiffener
+        onto: substrate
+        flip: false
+        medium: glue
+        at: [{x_um: "0", y_um: "0", z_um: {geom: sbt_top_um}}]
+  s21:
+    calls:
+      - {op: cure, bodies: []}
+  s22_lts:
+    orient: down
+    calls:
+      - {op: ball_attach, solder: [bga_lts], method: ball_drop}
+  s22_sac:
+    orient: down
+    calls:
+      - {op: ball_attach, solder: [bga_sac], method: ball_drop}
+  s23_lts:
+    calls:
+      - {op: print, solder: [paste_lts], method: stencil}
+  s23_sac:
+    calls:
+      - {op: print, solder: [paste_sac], method: stencil}
+  s24:
+    calls:
+      - op: place
+        piece: substrate
+        onto: pcb
+        flip: false
+        medium: flux
+        solder: [bga_lts, bga_sac]
+        at: [{x_um: "0", y_um: "0", z_um: "pcb_h_um + stencil_um"}]
+  s25_lts_lts:
+    calls:
+      - {op: reflow, solder: [bga_lts, paste_lts]}
+  s25_lts_sac:
+    calls:
+      - {op: reflow, solder: [bga_lts, paste_sac]}
+  s25_sac_lts:
+    calls:
+      - {op: reflow, solder: [bga_sac, paste_lts]}
+  s26:
+    calls:
+      - {op: clean, method: flux_clean}
+  s27:
+    calls:
+      - {op: inspect, method: xray_ct}

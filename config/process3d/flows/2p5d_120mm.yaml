@@ -1,0 +1,493 @@
+# Process-animation flow (content + provenance). Format: config/process3d/COMPOSITION.md. Check:
+# uv run python scripts/check_process_flows.py --flow 2p5d_120mm
+# Paper flow: ectc51687.2025.00027-F1 exactly as the paper reports it (27 DB steps, DB (route, seq) order), with the
+# paper's conditions and named tools. Geometry from the paper's TV rows (ectc51687.2025.00027-a). Anything the paper
+# does not give is a template (analog cell of another build, said so in the note) or pending.
+# The paper never mentions TSVs, an interposer wafer thickness before grinding, the PCB or substrate thickness, or die
+# positions; those are template / pending here, and the paper's interposer has no TSV row in the DB.
+id: 2p5d_120mm
+json_id: ectc51687.2025.00027-F1
+family: null
+family_label: "Si interposer 2.5D"
+name: "120 mm 2.5D Si-interposer package (ectc51687.2025.00027)"
+format: process3d-flow/1
+kind: paper
+summary: >-
+  JOINT2 120 x 120 mm 2.5D test vehicle: 2 Die A + 8 Die B TCB-bonded on a 12-inch Si interposer wafer, CUF, compression
+  mold, mold grind, glass carrier, interposer grind to 100 um, backside dielectric and Cu/SnAg bumps, laser debond,
+  dicing, mount on an 8-2-8 substrate, CUF, stiffener, BGA, then board mount on a 28-layer PCB.
+family_papers: [ectc51687.2025.00027]
+package3d: null
+variants_note: >-
+  Routes = the three board-joint combinations the paper investigates (ball / paste: LTS / LTS, LTS / SAC, SAC / LTS;
+  p.3 Sec. II.C); they differ only in values, so s22, s23 and s25 are separate steps per route. Splits kept as
+  defaults, not routes: Substrate A / B (TV a / b, CTE only, no geometry change); stiffener size LL / L' / L / M / S and
+  SUS430 / Cu (s20 split; size L SUS430 2 mm is the paper's preferred configuration, p.3 Sec. III.A). SAC / SAC (about
+  250-260 C, s25 split) is discussed but not among the three combinations investigated.
+
+pieces:
+  interposer_wafer: {kind: wafer, name: "12-inch Si interposer wafer (CoW, then the molded CoW wafer on a glass carrier)"}
+  die_a: {kind: die, name: "Die A (mock logic die, 20 x 20 mm), bumped at wafer level"}
+  die_b: {kind: die, name: "Die B (mock HBM die, 10 x 8 mm), bumped at wafer level"}
+  carrier: {kind: carrier, name: "glass carrier with TBA (release 1 um + adhesive 70 um)"}
+  substrate: {kind: substrate, name: "120 x 120 mm 8-2-8 package substrate (supplier-built); root of the package after s14"}
+  stiffener: {kind: stiffener, name: "2.0 mm stiffener (SUS430 or Cu)"}
+  pcb: {kind: board, name: "160 x 160 mm 28-layer PCB; root of the board assembly after s24"}
+
+start:
+  interposer_wafer:
+    note: "Si interposer wafer with front Al-Cu pads; front-side wiring and any through-Si vias are not described in the paper."
+    evidence: [ectc51687.2025.00027-a-c3, ectc51687.2025.00027-a-L06]
+    values:
+      diameter_mm:
+        template: 300
+        refs: [ectc51687.2025.00027-a.carrier_format]
+        note: "'12-inch Si interposer wafer' (p.2 Sec. II.B); drawn as the 300 mm wafer format of the TV row (wafer_300mm)"
+      thickness_um: {geom: ip_h0_um}
+  die_a:
+    note: "Die A / Die B wafers before microbumping; wafer size not reported (drawn as one die)."
+    evidence: [ectc51687.2025.00027-a-c1, ectc51687.2025.00027-a-c2]
+    values:
+      thickness_um: {geom: die_h_um}
+  substrate:
+    note: "Fabricated by the supplier (8-2-8 build-up); not part of the reported flow."
+    evidence: [ectc51687.2025.00027-a-c4]
+    values:
+      w_mm: {geom: sbt_w_mm}
+      d_mm: {geom: sbt_d_mm}
+      thickness_um: {geom: sbt_h_um}
+
+geometry:
+  # ---- dies (Table II)
+  die_a_n: {ref: ectc51687.2025.00027-a-c1.count}
+  die_a_w_mm: {ref: ectc51687.2025.00027-a-c1.x_mm}
+  die_a_d_mm: {ref: ectc51687.2025.00027-a-c1.y_mm}
+  die_b_n: {ref: ectc51687.2025.00027-a-c2.count}
+  die_b_w_mm: {ref: ectc51687.2025.00027-a-c2.x_mm}
+  die_b_d_mm: {ref: ectc51687.2025.00027-a-c2.y_mm}
+  die_h_um: {ref: ectc51687.2025.00027-a-c1.thickness_um}
+  # ---- microbumps (die side, Table II) and interposer front pads (Table I)
+  ubump_pitch_um: {ref: ectc51687.2025.00027-a-i1.pitch_um}
+  ubump_d_um: {ref: ectc51687.2025.00027-a-i1.diameter_um}
+  ubump_cu_um: {ref: ectc51687.2025.00027-a-i1.height_um}
+  ubump_ni_um: {ref: ectc51687.2025.00027-F1-s01.conditions, value: 2}
+  ubump_snag_um: {ref: ectc51687.2025.00027-a-i1.cap_height_um}
+  ubump_stack_um: {derived: "ubump_cu_um + ubump_ni_um + ubump_snag_um"}
+  fpad_ni_um: {ref: ectc51687.2025.00027-a-L05.thickness_um}
+  fpad_au_um: {ref: ectc51687.2025.00027-a-L04.thickness_um}
+  fpad_d_um: {ref: ectc51687.2025.00027-a-L06.feature, value: 20}
+  joint_h_um:
+    template: "ubump_stack_um + fpad_ni_um + fpad_au_um - ub_coll_um"
+    note: "die-to-interposer standoff after TCB not reported; as-plated bump stack on the Ni/Au pad minus the zero-load collapse of the 9 um SnAg cap (0.89 um, geometry companion ub_coll_um)"
+  # ---- interposer
+  ip_w_mm: {ref: ectc51687.2025.00027-a-c3.x_mm}
+  ip_d_mm: {ref: ectc51687.2025.00027-a-c3.y_mm}
+  ip_h_um: {ref: ectc51687.2025.00027-a-c3.thickness_um}
+  ip_h0_um:
+    analog: ectc51529.2024.00322-F4-s06.thickness_in_um
+    note: "interposer wafer thickness before backside grinding not reported; analog = 12-inch Si interposer wafer ground from 775 um to 100 um in another 2.5D Si-interposer TV (ectc51529.2024.00322)"
+  bs_diel_h_um:
+    analog: ectc51909.2023.00155-F2-s03.thickness_um
+    note: "backside dielectric material and thickness not reported (L08); analog = 3 um liquid polyimide on a ground Si interposer backside (same tool set, DAG810 / SNR-1065GT)"
+  bpad_pitch_um: {ref: ectc51687.2025.00027-a-i2.pitch_um}
+  bpad_d_um: {ref: ectc51687.2025.00027-a-i2.pad_x_um}
+  bbump_d_um: {ref: ectc51687.2025.00027-a-i2.diameter_um}
+  bbump_cu_um: {ref: ectc51687.2025.00027-a-i2.height_um}
+  bbump_snag_um: {ref: ectc51687.2025.00027-a-i2.cap_height_um}
+  bbump_total_um: {ref: ectc51687.2025.00027-F1-s09.target, value: 55}
+  # ---- mold, carrier
+  grind_depth_um: {ref: ectc51687.2025.00027-F1-s05.conditions, value: 200}
+  mold_h_um:
+    template: "joint_h_um + die_h_um"
+    note: "mold over the interposer after the 200 um top grind not reported; drawn flush with the die backs ('ground to expose molded dies'), assuming the 675 um dies are not thinned by the grind"
+  mold_h0_um:
+    template: "mold_h_um + grind_depth_um"
+    note: "as-molded thickness = ground thickness + the reported 200 um grinding depth (inherits the template above)"
+  tba_adh_um: {ref: ectc51687.2025.00027-F1-s06.conditions, value: 70}
+  tba_rel_um: {ref: ectc51687.2025.00027-F1-s06.conditions, value: 1}
+  carrier_h_um: {analog: ectc51529.2024.00227-F1-s21.thickness_in_um, note: "glass carrier not dimensioned; analog = 700 um glass carrier with TBM of a 300 mm wafer flow (RESEARCH_TOOLS_FAB.md F154)"}
+  # ---- substrate, stiffener, BGA, PCB
+  sbt_w_mm: {ref: ectc51687.2025.00027-a.substrate_x_mm}
+  sbt_d_mm: {ref: ectc51687.2025.00027-a.substrate_y_mm}
+  sbt_layers: {ref: ectc51687.2025.00027-a.substrate_layer_count}
+  sbt_h_um: {analog: ectc51909.2023.00155-a-c10.thickness_um, note: "8-2-8 substrate thickness not reported; analog = 1.6 mm 4/2/4 build-up substrate of a 2.5D Si-interposer TV of the same tool set (an 8-2-8 stack is likely thicker)"}
+  stiff_h_um: {ref: ectc51687.2025.00027-a-c6.thickness_um}
+  stiff_w_mm: {ref: ectc51687.2025.00027-a-c6.notes, value: 29}
+  stiff_mat: {ref: ectc51687.2025.00027-a-c6.material}
+  bga_d_um: {ref: ectc51687.2025.00027-a-i3.diameter_um}
+  bga_pitch_um: {analog: ectc51909.2023.00155-a-i4.pitch_um, note: "BGA pitch not reported; analog = 1.0 mm BGA pitch of a large 2.5D Si-interposer substrate (600 um balls there, 500 um here)"}
+  pcb_w_mm: {ref: ectc51687.2025.00027-a-c5.x_mm}
+  pcb_d_mm: {ref: ectc51687.2025.00027-a-c5.y_mm}
+  pcb_layers: {ref: ectc51687.2025.00027-a-c5.name, value: 28}
+  pcb_h_um: {analog: ectc51529.2024.00265-a-c6.thickness_um, note: "PCB thickness not reported; analog = 160 x 160 mm 28-layer motherboard of another 2024 TV (3.2 mm)"}
+  kerf_um: {template: 50, source: "RESEARCH_TOOLS_FAB.md F164 (ectc51846.2026.00176 p.2)", note: "kerf not reported; 50 um kerf blade, single pass, used to dice a 2.5D interposer wafer"}
+  stencil_um: {analog: tcpmt.2025.3614186-F1-s21.conditions, value: 100, note: "stencil not reported; 4-mil (~100 um) stencil printing SAC305 paste onto 1 mm-pitch PCB pads of a large BGA package; Intel LTS work also 4 mil (RESEARCH_PENDING.md P51, P52)"}
+  # ---- solder alloys (reflow / TCB models need a liquidus)
+  liq_sac_c: {ref: ectc51687.2025.00027-F1-s25.conditions, value: 220, note: "'SAC melts 220 C' (p.5 Sec. III.B)"}
+  liq_lts_c:
+    template: 138
+    source: "RESEARCH_TOOLS_ASSEMBLY.md A52 (NIST Database for Solder Properties v4, p.49 Table 2.2.19: Sn-58Bi 138)"
+    note: "Sn-58Bi eutectic melting point; the paper gives only the 160 C reflow top"
+  liq_snag_c:
+    template: 221
+    source: "RESEARCH_TOOLS_ASSEMBLY.md A60 (NIST Database for Solder Properties v4, p.49 Table 2.2.19: Sn-3.5Ag 221)"
+    note: "Sn-3.5Ag value; the paper writes SnAg without the Ag content (microbump caps and 150 um backside bumps)"
+
+routes:
+  lts_lts:
+    name: "LTS ball / LTS paste"
+    default: true
+    backbones: [ectc51687.2025.00027-F1]
+    note: "Sn-58Bi balls and Sn-58Bi paste (interconnect row ectc51687.2025.00027-a-i3)"
+  lts_sac:
+    name: "LTS ball / SAC paste"
+    backbones: [ectc51687.2025.00027-F1]
+    note: "Sn-58Bi balls and Sn-3.0Ag-0.5Cu paste (ectc51687.2025.00027-a-i4)"
+  sac_lts:
+    name: "SAC ball / LTS paste"
+    backbones: [ectc51687.2025.00027-F1]
+    note: "Sn-3.0Ag-0.5Cu balls and Sn-58Bi paste (ectc51687.2025.00027-a-i5)"
+
+steps:
+  - id: s29
+    name: "Electroless Ni/Au finish on interposer front Al-Cu pads"
+    category: surface_finish
+    piece: interposer_wafer
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s29}
+    equipment: {template: "electroless plating line", note: "tool not named; Table I footnote states electroless plating"}
+    hud:
+      thickness_um: {ref: ectc51687.2025.00027-a-L05.thickness_um}
+    targets:
+      au_um: {ref: ectc51687.2025.00027-a-L04.thickness_um}
+      pad_pitch_um: {ref: ectc51687.2025.00027-F1-s29.target, value: 40}
+      pad_d_um: {ref: ectc51687.2025.00027-F1-s29.target, value: 20}
+    note: "DB seq 1; order before die bonding is inferred in the DB row (step_basis inferred_order)."
+  - id: s01
+    name: "Electroplate Cu / Ni / SnAg microbumps on Die A and Die B"
+    category: bumping
+    piece: die_a
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s01}
+    equipment: {template: "wafer electroplating tool", note: "tool not named; the paper states electroplating"}
+    hud:
+      thickness_um: {geom: ubump_stack_um}
+    targets:
+      pitch_um: {geom: ubump_pitch_um}
+      diameter_um: {geom: ubump_d_um}
+      cu_um: {geom: ubump_cu_um}
+      ni_um: {geom: ubump_ni_um}
+      snag_um: {geom: ubump_snag_um}
+  - id: s02
+    name: "TCB of 2 Die A + 8 Die B per unit onto the 12-inch interposer wafer"
+    category: bonding
+    piece: interposer_wafer
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s02}
+    equipment: {ref: ectc51687.2025.00027-F1-s02.equipment}
+    hud:
+      temp_c:
+        analog: ectc51909.2023.00155-F1-s08.temp_c
+        note: "TCB conditions not reported (i1 notes); analog = bond-tool setting for 40 um-pitch dies on a 12-inch Si interposer wafer (Panasonic FCB3, actual peak 250 C per that row)"
+      time_s:
+        analog: ectc51909.2023.00155-F1-s08.time_s
+        note: "not reported; analog bond time of the same 40 um-pitch TCB row"
+      force_n:
+        analog: ectc51909.2023.00155-F1-s08.force_n
+        note: "not reported; analog bond force of the same 40 um-pitch TCB row"
+    targets:
+      joint_h_um: {geom: joint_h_um}
+    physics:
+      liquidus_c: {geom: liq_snag_c}
+    note: "Die B placed rotated 90 deg (rot_deg 90 in the companion): a template reading of the undimensioned Fig. 1(a) top view, where the Die B long side runs along y (see dB_x_um)."
+  - id: s03
+    name: "Jet-dispense capillary underfill into the die-interposer gaps"
+    category: underfill
+    piece: interposer_wafer
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s03}
+    equipment: {ref: ectc51687.2025.00027-F1-s03.equipment}
+    hud:
+      temp_c: {ref: ectc51687.2025.00027-F1-s03.temp_c}
+      time_s:
+        analog: ectc51529.2024.00155-F1-s04.time_s
+        note: "dispense time not reported; analog = 'within 60 min' per wafer with the same FAD2500 dispenser and 100 C stage on the same 2 + 8 die layout (earlier TV of this group)"
+    physics:
+      gamma_n_m: {template: 0.025, source: "RESEARCH_TOOLS_ASSEMBLY.md A111 (Stencel et al., Micromachines 2023, PMC10609424, Table 2)", note: "25 mN/m at 60 C of a board-level capillary underfill (67 % quartz); CoW-class fine-filler CUF at dispense temperature not found (L33 gap 4)"}
+      mu_pa_s: {template: 1.4, source: "RESEARCH_TOOLS_ASSEMBLY.md A114 (derived)", note: "effective CUF viscosity implied by the reported within-60-min dispense of this 2 + 8 die layout at a 100 C stage (L33 A114: mu <= ~1.4 Pa.s for L = 20 mm, gap 22 um, gamma 25 mN/m, theta 30 deg); low confidence calibration value; fill times from it are upper bounds (A114 is an upper bound; no dispense pressure in the Washburn model)"}
+      theta_deg: {template: 30, source: "RESEARCH_TOOLS_ASSEMBLY.md A111 (PMC10609424 Table 2)", note: "contact angle not found for these surfaces; middle of the 25-35 deg measured on FR4, Al2O3, Cu, SnSb5, Ag for a board-level underfill (med)"}
+  - id: s04
+    name: "Compression mold the CoW wafer with EMC"
+    category: molding
+    piece: interposer_wafer
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s04}
+    equipment: {ref: ectc51687.2025.00027-F1-s04.equipment}
+    hud:
+      temp_c:
+        analog: ectc51529.2024.00322-F1-s04.temp_c
+        note: "mold conditions not reported; analog = solid-EMC compression mold over dies on a 12-inch Si interposer wafer (APIC YAMADA WCM330MS)"
+      time_s:
+        analog: ectc51529.2024.00322-F1-s04.time_s
+        note: "not reported; analog mold time of the same row"
+      force_n:
+        analog: ectc51529.2024.00322-F1-s04.force_n
+        note: "not reported; analog mold force (300 kN) of the same row"
+    targets:
+      mold_h0_um: {geom: mold_h0_um}
+    note: "No post-mold cure is listed in this paper (the earlier TV of the group, ectc51529.2024.00155, shows a PMC stage); the flow keeps the paper's steps."
+  - id: s05
+    name: "Grind the mold top surface to expose the dies"
+    category: grinding_thinning
+    piece: interposer_wafer
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s05}
+    equipment: {ref: ectc51687.2025.00027-F1-s05.equipment}
+    hud:
+      thickness_in_um: {geom: mold_h0_um}
+      thickness_um: {geom: mold_h_um}
+    targets:
+      grind_depth_um: {geom: grind_depth_um}
+  - id: s06
+    name: "Bond a glass carrier with temporary bonding adhesive to the ground surface"
+    category: temporary_bonding
+    piece: interposer_wafer
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s06}
+    equipment: {ref: ectc51687.2025.00027-F1-s06.equipment}
+    hud:
+      temp_c: {ref: ectc51687.2025.00027-F1-s06.temp_c}
+      time_s: {ref: ectc51687.2025.00027-F1-s06.time_s}
+      thickness_um: {geom: tba_adh_um}
+    targets:
+      release_um: {geom: tba_rel_um}
+      carrier_h_um: {geom: carrier_h_um}
+  - id: s07
+    name: "Grind the Si interposer backside to 100 um"
+    category: grinding_thinning
+    piece: interposer_wafer
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s07}
+    equipment: {ref: ectc51687.2025.00027-F1-s07.equipment}
+    hud:
+      thickness_in_um: {geom: ip_h0_um}
+      thickness_um: {ref: ectc51687.2025.00027-F1-s07.thickness_um}
+    note: "The paper names no TSV reveal; the grind ends at 100 um."
+  - id: s08
+    name: "Form the backside dielectric layer"
+    category: deposition_other
+    piece: interposer_wafer
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s08}
+    equipment: {template: "spin coater (liquid polyimide assumed, see bs_diel_h_um)", source: "RESEARCH_TOOLS_FAB.md F76", note: "tool and material not named; drawn as the liquid polyimide coat of the analog row (ectc51909.2023.00155-F2-s03)"}
+    hud:
+      thickness_um: {geom: bs_diel_h_um}
+      cure_temp_c: {analog: ectc51909.2023.00155-F2-s04.temp_c, note: "cure of the backside dielectric not reported; analog = 230 C polyimide cure (2 h) of the same analog dielectric; shown as a follow-on cure, not as the coat temperature (audit A1 m18)"}
+  - id: s09
+    name: "Form Cu / SnAg backside bumps by SAP and electroplating"
+    category: bumping
+    piece: interposer_wafer
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s09}
+    equipment: {template: "wafer electroplating tool", note: "tool not named; the paper states a semi-additive process including electroplating"}
+    hud:
+      thickness_um: {geom: bbump_total_um}
+      current_density_ma_cm2: {template: 50, source: "RESEARCH_TOOLS_FAB.md F62 (DB ectc51846.2026.00194-F3-s04)", note: "not reported; Cu pad and bump at 5 A/dm2 (F62); the SnAg cap is plated at 1 A/dm2 (F65, op per-body current density)"}
+    targets:
+      pitch_um: {geom: bpad_pitch_um}
+      diameter_um: {geom: bbump_d_um}
+      cu_um: {geom: bbump_cu_um}
+      snag_um: {geom: bbump_snag_um}
+  - id: s10
+    name: "Laser debond the glass carrier"
+    category: debonding
+    piece: interposer_wafer
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s10}
+    equipment: {ref: ectc51687.2025.00027-F1-s10.equipment}
+  - id: s11
+    name: "Dice the interposer wafer into single pieces"
+    category: dicing
+    piece: interposer_wafer
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s11}
+    equipment: {ref: ectc51687.2025.00027-F1-s11.equipment}
+    targets:
+      kerf_um: {geom: kerf_um}
+  - id: s13
+    name: "Fabricate the 160 x 160 mm 28-layer PCB by batch lamination"
+    category: lamination
+    piece: pcb
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s13}
+    equipment: {ref: ectc51687.2025.00027-F1-s13.equipment}
+    hud:
+      temp_c: {analog: estc60143.2024.10712019-F1-s05.temp_c, note: "195 C vacuum press of a laminate / prepreg stack; FR406 cures at 177-185 C (RESEARCH_PENDING.md P53, P54)"}
+      time_s: {analog: estc60143.2024.10712019-F1-s05.time_s, note: "total press cycle 180 min; FR406 >= 50 min at cure temperature (P54)"}
+      pressure_mpa: {analog: estc60143.2024.10712019-F1-s05.pressure_mpa, note: "260 N/cm2; FR406 200-350 psi = 1.38-2.41 MPa (P54, P55)"}
+      thickness_um: {geom: pcb_h_um}
+  - id: s14
+    name: "Mount the 42 x 46 mm interposer on the 120 x 120 mm substrate with flux"
+    category: assembly
+    piece: substrate
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s14}
+    equipment: {ref: ectc51687.2025.00027-F1-s14.equipment}
+  - id: s15
+    name: "Reflow the interposer bumps to the substrate"
+    category: reflow
+    piece: substrate
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s15}
+    equipment: {ref: ectc51687.2025.00027-F1-s15.equipment}
+    hud:
+      temp_c_max:
+        analog: ectc51909.2023.00155-F3-s03.temp_c_max
+        note: "reflow profile not reported; analog = measured peak package-substrate temperature when an interposer with 150 um-pitch Cu/SnAg bumps was mounted (NPM-WX) and reflowed in a 2.5D TV of the same tool set. Solder hierarchy: 233 C exceeds the 221 C SnAg liquidus, so the die microbumps (already joined, under CUF and mold) remelt with the backside bumps"
+    physics:
+      liquidus_c: {geom: liq_snag_c}
+  - id: s16
+    name: "Wash out flux"
+    category: cleaning
+    piece: substrate
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s16}
+    equipment: {ref: ectc51687.2025.00027-F1-s16.equipment}
+  - id: s17
+    name: "X-ray CT check of mounted position accuracy"
+    category: inspection
+    piece: substrate
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s17}
+    equipment: {ref: ectc51687.2025.00027-F1-s17.equipment}
+  - id: s18
+    name: "Jet-dispense CUF into the interposer-substrate gap"
+    category: underfill
+    piece: substrate
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s18}
+    equipment: {ref: ectc51687.2025.00027-F1-s18.equipment}
+    hud:
+      temp_c:
+        analog: ectc51687.2025.00027-F1-s03.temp_c
+        note: "stage temperature for the bottom CUF not reported; the paper's top-CUF stage temperature (s03) is shown"
+    physics:
+      gamma_n_m: {template: 0.025, source: "RESEARCH_TOOLS_ASSEMBLY.md A111 (Stencel et al., Micromachines 2023, PMC10609424, Table 2)", note: "25 mN/m at 60 C of a board-level capillary underfill (67 % quartz); CoW-class fine-filler CUF at dispense temperature not found (L33 gap 4)"}
+      mu_pa_s: {template: 1.4, source: "RESEARCH_TOOLS_ASSEMBLY.md A114 (derived)", note: "effective CUF viscosity at the dispense temperature (low confidence calibration): the value implied by the within-60-min top-CUF dispense of this group at a 100 C stage (A114), as for s03; no viscosity-temperature relation found (L33 gap 4); the 25 C TDS value (22.12 Pa.s, A104) is not a dispense-temperature value and would give a 25 h fill. Fill times from it are upper bounds: A114 is an upper bound and the Washburn model has no dispense pressure"}
+      theta_deg: {template: 30, source: "RESEARCH_TOOLS_ASSEMBLY.md A111 (PMC10609424 Table 2)", note: "contact angle not found for these surfaces; middle of the 25-35 deg measured on FR4, Al2O3, Cu, SnSb5, Ag for a board-level underfill (med)"}
+  - id: s19
+    name: "Cure the bottom CUF"
+    category: cure
+    piece: substrate
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s19}
+    equipment: {template: "curing oven", note: "tool not named"}
+    hud:
+      temp_c: {ref: ectc51687.2025.00027-F1-s19.temp_c}
+      time_s: {ref: ectc51687.2025.00027-F1-s19.time_s}
+  - id: s20
+    name: "Fix the 2.0 mm stiffener on the substrate with silicone glue"
+    category: assembly
+    piece: substrate
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s20}
+    equipment: {template: "manual or automated stiffener placement", note: "tool not named"}
+    hud:
+      thickness_um: {ref: ectc51687.2025.00027-F1-s20.thickness_um}
+    targets:
+      stiff_w_mm: {geom: stiff_w_mm}
+      stiff_mat: {geom: stiff_mat}
+  - id: s21
+    name: "Cure the stiffener glue"
+    category: cure
+    piece: substrate
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s21}
+    equipment: {template: "curing oven", note: "tool not named"}
+    hud:
+      temp_c: {ref: ectc51687.2025.00027-F1-s21.temp_c}
+      time_s: {ref: ectc51687.2025.00027-F1-s21.time_s}
+  - id: s22_lts
+    name: "Attach 0.5 mm LTS (Sn-58Bi) solder balls to the substrate bottom"
+    category: ball_attach
+    piece: substrate
+    routes: [lts_lts, lts_sac]
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s22}
+    equipment: {template: "ball mounter", note: "tool not named"}
+    hud:
+      temp_c_max: {analog: ectc51687.2025.00027-a-i3.bonding_temp_c, note: "ball-attach reflow not reported; the paper's 160 C reflow top for its LTS (Sn-58Bi) joints is shown"}
+    targets:
+      ball_d_um: {geom: bga_d_um}
+      ball_pitch_um: {geom: bga_pitch_um}
+      ball_alloy: {ref: ectc51687.2025.00027-a-i3.metallurgy}
+    physics:
+      liquidus_c: {geom: liq_lts_c}
+  - id: s22_sac
+    name: "Attach 0.5 mm SAC (Sn-3.0Ag-0.5Cu) solder balls to the substrate bottom"
+    category: ball_attach
+    piece: substrate
+    routes: [sac_lts]
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s22}
+    equipment: {template: "ball mounter", note: "tool not named"}
+    hud:
+      temp_c_max: {analog: tcpmt.2025.3614186-F1-s20.temp_c_max, note: "ball-attach reflow not reported; analog = 255 C peak forming SAC305 BGA balls in a single-zone oven (RESEARCH_TOOLS_ASSEMBLY.md A148); 255 C also exceeds the 221 C SnAg liquidus, so the interposer-substrate bumps and die microbumps remelt inside their underfill"}
+    targets:
+      ball_d_um: {geom: bga_d_um}
+      ball_pitch_um: {geom: bga_pitch_um}
+      ball_alloy: {ref: ectc51687.2025.00027-a-i5.metallurgy}
+    physics:
+      liquidus_c: {geom: liq_sac_c}
+  - id: s23_lts
+    name: "Print LTS (Sn-58Bi) solder paste on the PCB"
+    category: deposition_other
+    piece: pcb
+    routes: [lts_lts, sac_lts]
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s23}
+    equipment: {template: "stencil printer", note: "tool not named; the paper states paste printing"}
+    hud:
+      thickness_um: {geom: stencil_um}
+    targets:
+      paste_alloy: {ref: ectc51687.2025.00027-a-i3.metallurgy}
+  - id: s23_sac
+    name: "Print SAC (Sn-3.0Ag-0.5Cu) solder paste on the PCB"
+    category: deposition_other
+    piece: pcb
+    routes: [lts_sac]
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s23}
+    equipment: {template: "stencil printer", note: "tool not named; the paper states paste printing"}
+    hud:
+      thickness_um: {geom: stencil_um}
+    targets:
+      paste_alloy: {ref: ectc51687.2025.00027-a-i4.metallurgy}
+  - id: s24
+    name: "Mount the package on the PCB"
+    category: assembly
+    piece: pcb
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s24}
+    equipment: {ref: ectc51687.2025.00027-F1-s14.equipment, note: "the paper: board mounting 'conducted as the same way described above' (s24 row: 'as for interposer mounting')"}
+  - id: s25_lts_lts
+    name: "Reflow the package to the PCB (LTS ball / LTS paste)"
+    category: reflow
+    piece: pcb
+    routes: [lts_lts]
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s25}
+    equipment: {ref: ectc51687.2025.00027-F1-s15.equipment, note: "same reflow oven as interposer mounting (s25 row)"}
+    hud:
+      temp_c_max: {ref: ectc51687.2025.00027-a-i3.bonding_temp_c, note: "reflow top 160 C for LTS balls (s25 split)"}
+    physics:
+      liquidus_c: {geom: liq_lts_c}
+  - id: s25_lts_sac
+    name: "Reflow the package to the PCB (LTS ball / SAC paste)"
+    category: reflow
+    piece: pcb
+    routes: [lts_sac]
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s25}
+    equipment: {ref: ectc51687.2025.00027-F1-s15.equipment, note: "same reflow oven as interposer mounting (s25 row)"}
+    hud:
+      temp_c_max: {ref: ectc51687.2025.00027-a-i4.bonding_temp_c, note: "160 C stated for LTS balls; the abstract groups LTS/LTS and LTS/SAC as the lowest top reflow temperature. 160 C is above the 138 C Sn-58Bi ball liquidus and below the 220 C SAC paste liquidus: the LTS ball melts onto a SAC paste deposit that stays solid"}
+    physics:
+      liquidus_c: {geom: liq_lts_c}
+      liquidus_paste_c: {geom: liq_sac_c}
+  - id: s25_sac_lts
+    name: "Reflow the package to the PCB (SAC ball / LTS paste)"
+    category: reflow
+    piece: pcb
+    routes: [sac_lts]
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s25}
+    equipment: {ref: ectc51687.2025.00027-F1-s15.equipment, note: "same reflow oven as interposer mounting (s25 row)"}
+    hud:
+      temp_c_max: {ref: ectc51687.2025.00027-a-i5.bonding_temp_c, note: "reflow top 'around 210 C' (qualifier approx): below the 220 C SAC ball liquidus ('SAC melts 220 C', p.5) and above the 138 C Sn-58Bi paste liquidus, so the LTS paste melts and wets a SAC ball that stays solid"}
+    physics:
+      liquidus_c: {geom: liq_sac_c}
+      liquidus_paste_c: {geom: liq_lts_c}
+  - id: s26
+    name: "Flux cleaning after board mount"
+    category: cleaning
+    piece: pcb
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s26}
+    equipment: {ref: ectc51687.2025.00027-F1-s16.equipment, note: "same flux cleaner as after interposer mounting (p.3 Sec. II.C 'the same way')"}
+  - id: s27
+    name: "X-ray CT for solder bridges and positional accuracy after board reflow"
+    category: inspection
+    piece: pcb
+    order: {kind: paper, db: ectc51687.2025.00027-F1-s27}
+    equipment: {ref: ectc51687.2025.00027-F1-s17.equipment, note: "same X-ray CT as s17 (p.3 Sec. II.C 'the same way')"}

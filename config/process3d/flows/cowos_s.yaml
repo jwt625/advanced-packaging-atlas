@@ -1,0 +1,798 @@
+# Process-animation flow (content + provenance). Format: config/process3d/COMPOSITION.md. Check:
+# uv run python scripts/check_process_flows.py --flow cowos_s
+# Composite CoWoS-S flow (contract v1 shape: one step per DB step; composite DB steps carry ops). Backbone ectc.2013.6575597-F1 (TSMC 2013 modules a-d: TSV, front-side interconnect, uBump,
+# CoW) continued by the same paper's F2 (backside TSV reveal to 100 um, SnPb C4 plating at 200 um pitch directly on the
+# TSV, singulation, assembly to an FCBGA substrate) and F4 (C4 underfill). Steps the TSMC paper does not list (uBump
+# underfill dispense and cure, mold, mold grind, carrier bond / debond, C4 underfill cure, ring, BGA) are inserted from
+# DB flows of the same step type; composite steps (3 Cu damascene levels + Al RDL, uBump formation, TSV reveal, C4
+# bumping, substrate assembly) are expanded only where a DB flow of the same module gives the sub-step order.
+# Geometry reuses the package3d cowos_s params (base variant tv_00135) except the C4, which follows the 2013 backbone.
+id: cowos_s
+json_id: cowos_s_composite
+family: cowos_s
+name: "CoWoS-S (composite: TSMC 2013 backbone + DB modules)"
+format: process3d-flow/1
+kind: composite
+summary: >-
+  TSMC CoWoS-S: 10 x 100 um TSVs etched, lined, seeded, Cu-filled and polished in a full-thickness Si interposer wafer;
+  3 Cu damascene levels + Al RDL; 40 um micro-bumps; thinned logic dies joined chip-on-wafer; underfill, mold, carrier,
+  backside reveal to 100 um, SnPb C4; debond, singulation, flip-chip onto an organic substrate; ring and BGA.
+backbone:
+  flow: ectc.2013.6575597-F1
+  note: "TSMC 2013 CoWoS fabrication modules (a)-(d) (p.1 'Test Vehicle and Fabrication'); ends at CoW bonding."
+family_papers: [ectc.2013.6575597, ectc51909.2023.00174]  # TSMC CoWoS papers only (audit A2 n8: 00135 is MediaTek, 00055 is TSMC SoIC)
+package3d: cowos_s
+
+pieces:
+  interposer_wafer: {kind: wafer, name: "Si interposer wafer (full thickness until the backside reveal)"}
+  die_c: {kind: wafer, name: "28 nm logic wafer (chip C, 24 x 14 mm dies): bumped, thinned and sawn at wafer level; dies picked for CoW"}
+  die_d: {kind: wafer, name: "40 nm wafer (chip D, 12 x 7 mm dies mimicking HBM DRAM, 2 per unit): bumped and sawn at wafer level; dies picked for CoW"}
+  carrier: {kind: carrier, name: "temporary glass carrier with TBA"}
+  substrate: {kind: substrate, name: "organic flip-chip BGA substrate; root of the package after on-substrate assembly"}
+  ring: {kind: stiffener, name: "Cu stiffener ring"}
+
+start:
+  interposer_wafer:
+    note: "Bare full-thickness Si wafer (the interposer has no FEOL in this flow)."
+    evidence: [ectc.2013.6575597-F1-s01, ectc.2013.6575597-d]
+    values:
+      diameter_mm: {template: 300, refs: [ectc51909.2023.00174-F4-s01.conditions], note: "interposer wafer size not reported for CoWoS-S; TSMC states 300 mm Si wafers for its CoWoS-L LSI dies (ref); 300 mm drawn"}
+      thickness_um: {geom: ip_h0_um}
+  die_c:
+    note: "Logic wafers after their own fab (28 nm and 40 nm, Cu/ELK BEOL); drawn as one die each."
+    evidence: [ectc.2013.6575597-a-c1, ectc.2013.6575597-a-c2]
+    values:
+      thickness_um: {analog: ectc51529.2024.00322-a-c1.thickness_um, note: "logic wafer thickness before thinning not reported; analog = 775 um full-thickness logic-mimic die of a 2.5D TV"}
+  substrate:
+    note: "Incoming organic FCBGA substrate (2013 TV: 40 x 40 mm; package3d base: 85 x 85 mm, 00135)."
+    evidence: [ectc.2013.6575597-a-c4, ectc51909.2023.00135-a-c4]
+    values:
+      w_mm: {geom: sbt_w_mm}
+      d_mm: {geom: sbt_d_mm}
+      thickness_um: {geom: sbt_h_um}
+
+geometry:
+  # ---- TSV (2013 TV) and interposer
+  tsv_d_um: {package3d: tsv_d_um}
+  tsv_depth_um: {package3d: tsv_depth_um}
+  tsv_liner_um: {package3d: tsv_liner_um}
+  tsv_land_um: {package3d: tsv_land_um}
+  tsv_pitch_um:
+    template: "c4_pitch_um"
+    refs: [ectc.2013.6575597-a-i3.notes]
+    note: "TSV pitch not reported; one TSV column under each C4 (C4 directly on the TSV, 2013 TV), at the 2013 C4 pitch (harmonized rule of TEMPLATE_FORMAT.md; package3d uses the 00135 150 um C4)"
+  ip_h0_um:
+    analog: ectc51909.2023.00153-a-c3.thickness_um
+    note: "full-thickness interposer wafer thickness not reported for CoWoS-S; analog = 775 um Si interposer bonded at full thickness in a 2.5D chip-on-wafer TV"
+  ip_h_um: {package3d: si_h_um}
+  ip2013_w_mm: {package3d: ip2013_w_mm}
+  ip2013_d_mm: {package3d: ip2013_d_mm}
+  # ---- front-side interconnect
+  cu_n: {package3d: cu_n}
+  cu_h_um: {package3d: cu_h_um}
+  cu_line_um: {package3d: cu_line_um}
+  cu_space_um: {package3d: cu_space_um}
+  imd_h_um: {package3d: imd_h_um}
+  bv_d_um: {package3d: bv_d_um}
+  al_h_um: {package3d: al_h_um}
+  al_line_um: {package3d: al_line_um}
+  v_al_h_um: {package3d: v_al_h_um}
+  pass_h_um: {package3d: pass_h_um}
+  # ---- micro-bumps and dies
+  ubump_pitch_um: {ref: ectc.2013.6575597-a-i1.pitch_um}
+  ubump_d_um: {package3d: ubump_d_um}
+  ubump_h_um: {package3d: ubump_h_um}
+  ubump_cap_um: {package3d: ubump_cap_um}
+  ubump_cu_um:
+    template: "ubump_h_um - ubump_cap_um"
+    note: "Cu column of the analog 40 um-pitch micro-bump = joint standoff - solder cap (package3d cowos_s analogs)"
+  ubump_pad_um: {package3d: ubump_pad_um}
+  ubump_count: {package3d: ubump_count_2013}
+  soc_h_um: {package3d: soc_h_um}
+  mold_h_um: {package3d: mold_h_um}
+  mold_h0_um:
+    template: "mold_h_um + r0 - r1"
+    refs: [ectc51529.2024.00322-F1-s06.thickness_in_um, ectc51529.2024.00322-F1-s06.thickness_um]
+    note: "as-molded thickness not reported; ground thickness + the 120 um mold grind-off of a 12-inch Si-interposer CoW wafer (895 -> 775 um)"
+  # ---- backside, C4
+  reveal_grind_um:
+    analog: eptc67330.2025.11392196-F2-s11.thickness_um
+    note: "grind stop above the TSV bottoms not reported for CoWoS; analog = 110 um back-grind before a dry-etch TSV reveal of a 100 um superconducting Si interposer with Ta-lined TSVs (TSV diameter not given; 110 um read from a figure label, DB source mixed), i.e. 10 um of Si over the 100 um TSVs (RESEARCH_TOOLS_FAB.md F140: grind to within 5-10 um of the TSV ends, med)"
+  reveal_removal_um: {derived: "ip_h0_um - reveal_grind_um"}
+  protr_um:
+    template: 5
+    source: "RESEARCH_TOOLS_FAB.md F140 (SPTS via-reveal brief, search excerpt, med); F142 (Klumpp, DATE 2010: ~2 um recess); F143 (3-6 um nails, DB ectc51909.2023.00009-F5-s05)"
+    note: "TSV tip protrusion after the Si recess not reported for CoWoS; typical reveal step ~5 um (2-5 um range)"
+  si_final_um:
+    template: "tsv_depth_um - protr_um"
+    note: "final Si thickness = TSV depth (2013, 100 um) - tip protrusion; 2013 states 'thinned down to 100 um', which here is the TSV depth reached by the reveal"
+  recess_um: {derived: "reveal_grind_um - si_final_um"}
+  liner_loss_um:
+    template: "recess_um / 200"
+    source: "RESEARCH_TOOLS_FAB.md F141 (200:1 Si:oxide selectivity, med), F142"
+    note: "liner oxide lost on the tips during the recess (15 um x 1/200 = 0.075 um); remaining tip oxide = 0.4 x 0.43 - 0.075 = 0.097 um: the tips stay covered, but below the > 200 nm F142 asks (with these template inputs the recess margin is thin; audit A1 m5)"
+  bs_pass_h_um:
+    analog: ectc51909.2023.00230-F2-s10.thickness_um
+    note: "backside passivation after the reveal not reported; analog = 1 um CVD oxide on the revealed backside of a 10 x 100 um TSV interposer"
+  c4_pitch_um: {package3d: c4_2013_pitch_um}
+  c4_d_um: {template: 100, source: "RESEARCH_PENDING.md P1, X1 (J-STD-028 Table 4: electroplated bumps 100 um at 200 um pitch; table title seen only in a search excerpt)", note: "low confidence; SnPb C4 size not reported (2013 TV); UBM / plating opening drawn at 0.5 x the 200 um pitch (P2 gives 150 / 250 um, upper end ~120 um at 200 um pitch)"}
+  c4_h_um: {template: 75, source: "RESEARCH_PENDING.md X2 (P3, P4, P9)", note: "proposal: plated SnPb column 75 um inside an 80 um dry-film resist (5 um margin; P4: resist at least as thick as the plating); reflowed cap 80.5 um high / 111.5 um dia on the 100 um UBM (volume conserving, P9); IBM plates ~100 um (P3, upper bound)"}
+  ubm_h_um:
+    analog: ectc51909.2023.00155-F2-s05.thickness_um
+    note: "C4 UBM / seed not reported ('plated solder on UBM'); analog = sputtered Ti 0.1 / Cu 0.5 um seed on the polyimide-coated backside of a ground Si interposer (Cu thickness shown)"
+  carrier_h_um: {analog: ectc51529.2024.00227-F1-s21.thickness_in_um, note: "carrier not reported for CoWoS; analog = 700 um glass carrier of a 300 mm wafer flow (RESEARCH_TOOLS_FAB.md F154)"}
+  tba_adh_um:
+    analog: ectc51687.2025.00027-F1-s06.conditions
+    value: 70
+    note: "temporary bonding adhesive thickness not reported for CoWoS; analog = 70 um TBA of the inserted carrier-bond row (glass carrier on a molded CoW interposer wafer)"
+  # ---- Bosch / liner / seed model inputs (RESEARCH_TOOLS_FAB.md)
+  bosch_cycle_um: {template: 0.79, source: "RESEARCH_TOOLS_FAB.md F2", note: "etch per Bosch loop for 10 um patterns (search excerpt, med)"}
+  bosch_cycle_s: {template: 13, source: "RESEARCH_TOOLS_FAB.md F2", note: "5 s deposition + 3 s polymer etch + 5 s Si etch per loop (med)"}
+  scallop_amp_um: {template: 0.265, source: "RESEARCH_TOOLS_FAB.md F3", note: "scallop depth for 10 um patterns (search excerpt, med); scallop period = etch per cycle"}
+  liner_cov_bot: {template: 0.43, source: "RESEARCH_TOOLS_FAB.md F20 (Klumpp, DATE 2010)", note: "bottom / field conformality of SACVD O3/TEOS in a TSV with AR > 16 (sidewall ramps from 1 at the mouth to this value)"}
+  seed_cov_bot: {template: 0.1, source: "RESEARCH_TOOLS_FAB.md F34, F35 (Weichart, SVC 2009)", note: "Cu / Ta bottom coverage ~0.5 x the 20 % Ti bottom coverage at AR 10 (HIPIMS); sidewall minimum ~0.01-0.03 of the field (F36)"}
+  seed_cov_side: {template: 0.03, source: "RESEARCH_TOOLS_FAB.md F36 (Weichart, SVC 2009)", note: "sidewall minimum of a PVD seed in a 10 x 100 um via: >= 40 nm against 1.5-4 um on the field (~0.01-0.03); upper value drawn"}
+  # ---- substrate (2013 TV, 40 x 40 mm), ring (00135), BGA (package3d base: 00135 TV)
+  sbt_w_mm: {ref: ectc.2013.6575597-a-c4.x_mm}
+  sbt_d_mm: {ref: ectc.2013.6575597-a-c4.y_mm}
+  sbt_h_um: {package3d: sbt_h_um}
+  ring_h_um: {package3d: ring_h_um}
+  ring_w_mm:
+    template: "(sbt_w_mm - ip2013_w_mm) / 2 - 3"
+    note: "ring width not reported (00135 states a Cu ring only); inner edge 3 mm outside the 26 mm interposer on the 40 x 40 mm 2013 substrate, leaving room for the C4 underfill fillet (package3d uf2_margin_mm 1 mm); illustrative"
+  ring_mat: {package3d: ring_mat}
+  bga_pitch_um: {package3d: bga_pitch_um}
+  bga_d_um: {package3d: bga_d_um}
+  bga_h_um: {package3d: bga_h_um}
+
+  # ---- solder alloys and underfill (reflow / TCB / underfill models)
+  liq_snpb_c: {template: 183, source: "itherm.2012.6231522 p.2 (cached reference text): 'Eutectic or near eutectic tin-lead (Sn-Pb) solder (melting temperature TM = 183 C)'", note: "SnPb eutectic melting temperature; 2013 states SnPb eutectic C4"}
+  imc_melt_c: {template: 415, source: "NIST Metallurgy, Cu-Sn system, calculated invariant equilibria (https://www.metallurgy.nist.gov/phase/solder/cusn.html): 'L + Cu3Sn -> Cu6Sn5' 415.0 C (peritectic); Cu3Sn: 'gamma -> L + Cu3Sn' 638.4 C, 'gamma -> Cu3Sn' 677.0 C congruent; 'Cu6Sn5 -> Cu6Sn5'' 187.5 C allotropic (no liquid)", note: "first liquid of a full-IMC Cu6Sn5 / Cu3Sn joint: Cu6Sn5 decomposes peritectically to Cu3Sn + liquid at 415 C (the 187.5 C allotropic change forms no liquid); gates remelt of the converted uBump joints (to_imc) instead of the 221 C SnAg liquidus"}
+  liq_ubump_c: {template: 221, source: "RESEARCH_TOOLS_ASSEMBLY.md A60 (NIST v4 Table 2.2.19: Sn-3.5Ag 221)", note: "micro-bump alloy not named in 2013; SnAg cap of the 40 um-pitch analog bump (package3d ubump_cap_um)"}
+  liq_bga_c: {template: 220, source: "RESEARCH_TOOLS_ASSEMBLY.md A49 (NIST v4 Table 2.1.1: Sn-3.0Ag-0.5Cu 220)", note: "BGA alloy not reported for CoWoS-S; SAC305 ball of the package3d BGA analog (ectc51909.2023.00155-a-i4)"}
+  uf_gamma_n_m: {template: 0.025, source: "RESEARCH_TOOLS_ASSEMBLY.md A111 (Stencel et al., Micromachines 2023, PMC10609424, Table 2)", note: "25 mN/m at 60 C of a board-level capillary underfill (67 % quartz); CoW-class fine-filler CUF at dispense temperature not found (L33 gap 4)"}
+  uf_mu_pa_s: {template: 1.4, source: "RESEARCH_TOOLS_ASSEMBLY.md A114 (derived)", note: "effective underfill viscosity at the dispense temperature (low confidence calibration): implied by a within-60-min CoW CUF dispense at a 100 C stage (L33 A114: <= ~1.4 Pa.s for L = 20 mm, gap 22 um); used for UF1 and UF2 (no viscosity-temperature relation found, L33 gap 4; the 25 C TDS value 22.12 Pa.s, A104, is not a dispense-temperature value and would give a 7.7 h UF2 fill). Fill times from it are upper bounds: A114 is an upper bound and the Washburn model has no dispense pressure"}
+  uf_theta_deg: {template: 30, source: "RESEARCH_TOOLS_ASSEMBLY.md A111 (PMC10609424 Table 2)", note: "contact angle not found for Si / passivation; middle of the 25-35 deg measured on FR4, Al2O3, Cu, SnSb5, Ag (board-level underfill, med)"}
+  kerf_um: {template: 50, source: "RESEARCH_TOOLS_FAB.md F164 (ectc51846.2026.00176 p.2)", note: "kerf not reported; 50 um kerf blade used to dice a 2.5D interposer wafer"}
+
+groups:
+  cu_damascene:
+    name: "Cu damascene level"
+    repeat: {ref: ectc.2013.6575597-a-L04.repeat}
+    order_source: ectc51687.2025.00060-F1
+    note: "2013 states 3 Cu damascene levels at < 1 um pitch; op order from the damascene RDL module of ectc51687.2025.00060-F1 (s01-s08); shown once, repeated per level."
+
+routes:
+  main:
+    name: "CoWoS-S with mold, ring and BGA"
+    default: true
+    backbones: [ectc.2013.6575597-F1, ectc.2013.6575597-F2]
+    note: "Lid / TIM finish (ectc51909.2023.00174-F3) and a no-mold build (2013 TV) are not animated."
+
+steps:
+  # ================================================================ (a) TSV formation
+  - id: tsv_etch
+    name: "TSV etch from the front side of the full-thickness wafer"
+    category: tsv_tgv_formation
+    piece: interposer_wafer
+    order: {kind: backbone, db: ectc.2013.6575597-F1-s01}
+    ops:
+      - id: pattern
+        name: "TSV resist pattern (i-line)"
+        category: lithography
+        order:
+          kind: expansion
+          db: eptc59621.2023.10457670-F1-s01
+          note: "2013 starts at the etch; the resist pattern before it is the first step of the same 10 x 100 um TSV module in eptc59621.2023.10457670-F1 (i-line, 300 mm, via-first)"
+        equipment: {template: "i-line lithography tool", refs: [eptc59621.2023.10457670-F1-s01.step], note: "i-line named in the source row; tool not named"}
+        hud:
+          dose_mj_cm2: {na: "i-line exposure dose (mJ/cm2) for the TSV resist pattern; the only found value (RESEARCH_PENDING.md P27, 1550 mJ/cm2) is for a gh-line broadband stepper, a different exposure wavelength than the i-line TSV litho, so it is not used"}
+          thickness_um: {geom: tsv_res_h_um}
+        targets:
+          tsv_d_um: {geom: tsv_d_um}
+      - id: etch
+        name: "Bosch DRIE of the 10 x 100 um TSV"
+        category: tsv_tgv_formation
+        order: {kind: self}
+        equipment: {template: "DRIE (Bosch) etcher", refs: [eptc59621.2023.10457670-F1-s02.step], note: "etch tool not named in 2013; Bosch dry etch named for the same 10 x 100 um module (eptc59621.2023.10457670-F1-s02)"}
+        hud:
+          time_s: {template: "ceil(tsv_depth_um / bosch_cycle_um) * bosch_cycle_s", source: "RESEARCH_TOOLS_FAB.md F2, F17", note: "not reported; whole Bosch loops: ceil(100 / 0.79) = 127 loops x 13 s (5 s deposition / 3 s polymer etch / 5 s Si etch) for 10 um patterns (F2, search excerpt, med; F17, low)"}
+        targets:
+          tsv_d_um: {geom: tsv_d_um}
+          tsv_depth_um: {geom: tsv_depth_um}
+        physics:
+          etch_per_cycle_um: {geom: bosch_cycle_um}
+          cycle_s: {geom: bosch_cycle_s}
+          scallop_amp_um: {geom: scallop_amp_um}
+  - id: tsv_liner
+    name: "Conformal liner oxide on the via sidewall"
+    category: deposition_other
+    piece: interposer_wafer
+    order: {kind: backbone, db: ectc.2013.6575597-F1-s02}
+    equipment: {template: "SACVD + PECVD oxide (CVD chamber)", source: "RESEARCH_TOOLS_FAB.md F19", note: "liner method not stated in 2013; 300 nm SACVD + 100 nm PECVD SiO2 liner of a 12 x 100 um TSV-middle"}
+    hud:
+      thickness_um: {geom: tsv_liner_um}
+    physics:
+      step_coverage: {geom: liner_cov_bot}
+  - id: tsv_barrier_seed
+    name: "Barrier and seed layer deposition"
+    category: deposition_other
+    piece: interposer_wafer
+    order: {kind: backbone, db: ectc.2013.6575597-F1-s03}
+    equipment: {template: "PVD (sputter) tool", refs: [eptc59621.2023.10457670-F1-s03.step], note: "PVD Ta/Cu barrier / seed named for the same TSV module (eptc59621.2023.10457670-F1-s03); 2013 names no method"}
+    hud:
+      thickness_um:
+        analog: ectc51687.2025.00071-a-L04.thickness_um
+        note: "TSV Cu seed thickness not reported; analog = 0.3 um PVD Cu seed on a TSV sidewall liner (3 um TSV coupon)"
+    targets:
+      barrier_um:
+        analog: ectc51687.2025.00071-a-L03.thickness_um
+        note: "barrier not reported; analog = 0.1 um PVD Ta barrier of the same TSV coupon"
+    physics:
+      step_coverage: {geom: seed_cov_bot}
+  - id: tsv_ecp
+    name: "Cu via fill by electrochemical plating (ECP)"
+    category: electroplating
+    piece: interposer_wafer
+    order: {kind: backbone, db: ectc.2013.6575597-F1-s04}
+    equipment:
+      analog: ectc51909.2023.00307-F1-s19.equipment
+      note: "plating tool not named; analog = face-up electroplating system used to fill 10 um TSVs"
+    hud:
+      current_density_ma_cm2:
+        analog: ectc51909.2023.00307-F1-s28.current_density_ma_cm2
+        note: "ECP recipe not given (2013: Process-1 / Process-2 split, details not given); analog = 6 mA/cm2 final step of a 3-step fill of 10 x 39 um TSVs (0.5 mA/cm2 10 min, PPR 180 min, 6 mA/cm2 120 min)"
+      time_s:
+        template: "tsv_depth_um / 0.5 * 60 + tsv_ovb_um / (0.02205 * 6) * 60"
+        source: "RESEARCH_TOOLS_FAB.md F73 (bottom-up front >= 0.5 um/min), F70 (Cu Faraday 0.02205 um/min per mA/cm2)"
+        note: "ECP time not reported; the drawn fill model (audit A1 m6): 100 um bottom-up at 0.5 um/min (12,000 s) + 3 um overburden at the 6 mA/cm2 analog density (1,361 s); the analog 3-step fill of 10 x 39 um TSVs totals 18,600 s and is not used"
+      thickness_um:
+        analog: ectc51909.2023.00009-F2-s07.result
+        value: 3
+        note: "field Cu overburden not reported; drawn at the '< 3 um' remaining surface Cu after bottom-up ECD of a 12 x 100 um TSV-middle (upper bound)"
+    physics:
+      bottom_up_um_min: {template: 0.5, source: "RESEARCH_TOOLS_FAB.md F73 (derived)", note: "bottom-up fill front speed >= ~0.5 um/min (mean of a 300 um deep via filled in 10 h, ~4.5 x the field Faraday rate); low confidence"}
+  - id: tsv_cmp
+    name: "Cu overburden removal by CMP"
+    category: cmp
+    piece: interposer_wafer
+    order: {kind: backbone, db: ectc.2013.6575597-F1-s05}
+    equipment: {template: "CMP tool (platen, pad, carrier head, slurry)", note: "tool not named"}
+    hud:
+      pressure_mpa: {template: "3.0 * 0.006894757", source: "RESEARCH_TOOLS_FAB.md F102, F105 (US9956664B2)", note: "pressure not reported; 3.0 psi bulk Cu CMP on a 300 mm Reflexion tool (psi -> MPa exact factor)"}
+      time_s: {template: "(tsv_ovb_um + seed_um + barrier_um) / 1.0268 * 60", source: "RESEARCH_TOOLS_FAB.md F60, F105", note: "drawn removal 3 um overburden (F60 upper bound) + 0.3 um seed + 0.1 um barrier = 3.4 um at the 1.0268 um/min Cu rate (3.0 psi, F105; barrier rate not found, Cu rate used); over-polish not included"}
+    physics:
+      rr_nm_min: {template: 1026.8, source: "RESEARCH_TOOLS_FAB.md F105 (US9956664B2 Table 4)", note: "Cu removal rate at 3.0 psi, 300 mm Reflexion, IC1010 pad; CMP is driven by this rate (Preston constant not computable, F109)"}
+  # ================================================================ (b) front-side interconnect
+  - id: fs_interconnect
+    name: "Front-side interconnect: 3 Cu damascene levels + Al RDL"
+    category: rdl_layer
+    piece: interposer_wafer
+    order: {kind: backbone, db: ectc.2013.6575597-F1-s06}
+    note: "Optional MIM decap between Cu1 and Cu2 (2.0 fF/um2) is not animated. The via level between the top Cu and the Al (package3d v_al_h_um) has no DB op order and is not animated separately."
+    targets:
+      al_pitch_um: {ref: ectc.2013.6575597-F1-s06.target, value: 5}
+    ops:
+      - id: diel
+        name: "Deposit damascene dielectric (CVD SiN etch stop + TEOS oxide)"
+        category: deposition_cvd
+        group: cu_damascene
+        order: {kind: expansion, db: ectc51687.2025.00060-F1-s01, note: "first op of the damascene module ectc51687.2025.00060-F1 (s01-s08)"}
+        equipment: {template: "PECVD tool", note: "CVD named in the source row; tool not named"}
+        hud:
+          temp_c: {template: 350, source: "RESEARCH_PENDING.md P31 (ectc51909.2023.00048 Table I High T TEOS 350 C; ectc51529.2024.00392 CCP PECVD 200-350 C)", note: "BEOL dielectric on the full-thickness wafer (no carrier)"}
+          thickness_um:
+            template: "imd_h_um + cu_h_um"
+            note: "via + line dielectric of one level (package3d cowos_s analog thicknesses)"
+      - id: litho
+        name: "Resist coat and pattern the damascene level"
+        category: lithography
+        group: cu_damascene
+        order: {kind: expansion, db: ectc51687.2025.00060-F1-s03, evidence: [ectc51687.2025.00060-F1-s02], note: "resist coating (s02) and RDL patterning (s03) of the source module, one op"}
+        equipment: {template: "KrF (248 nm) scanner", refs: [ectc51909.2023.00230-F1-s02.step], source: "RESEARCH_PENDING.md P28, P30", note: "0.4 / 0.4 um lines need DUV; 248 nm litho in a 300 mm Si interposer-class fab"}
+        hud:
+          dose_mj_cm2: {template: 25, source: "RESEARCH_PENDING.md P28 (US7303852B2 Table 2: 15-42 mJ/cm2 at 0.18 um L/S, KrF, NA 0.68)", note: "damascene dose not reported (med)"}
+          thickness_um: {geom: dam_res_h_um}
+        targets:
+          line_um: {geom: cu_line_um}
+          space_um: {geom: cu_space_um}
+      - id: etch
+        name: "Etch the dielectric (via + line)"
+        category: etch_other
+        group: cu_damascene
+        order: {kind: expansion, db: ectc51687.2025.00060-F1-s04, note: "RDL pad etching of the source module (method not stated there)"}
+        equipment: {analog: ectc51529.2024.00392-F1-s12.equipment, note: "fluorine RIE (CHF3 / C4F8 / Ar) of nitride + oxide (RESEARCH_PENDING.md P32)"}
+        hud:
+          time_s: {template: "(imd_h_um + cu_h_um) / 0.51 * 60", source: "RESEARCH_PENDING.md P32, P33", note: "via + line etch of one level (0.54 um via dielectric + 1.0 um line) at 0.51 um/min fluorine RIE (ectc51529.2024.00392-F1-s12), no over-etch (low). Drawn: the 1.0 um line trenches only (line part 118 s); inter-level vias are not drawn except the level-1 TSV landing (audit A2 n5)"}
+      - id: barrier_seed
+        name: "Cu barrier / seed deposition"
+        category: deposition_other
+        group: cu_damascene
+        order: {kind: expansion, db: ectc51687.2025.00060-F1-s06, note: "Cu barrier seed (CuBS) of the source module"}
+        equipment: {template: "PVD (sputter) tool", refs: [tcpmt.2021.3104326-F2-s05.step], note: "method not stated in the source row; PVD Cu named in the damascene module tcpmt.2021.3104326-F2-s05"}
+        hud:
+          thickness_um:
+            analog: tcpmt.2021.3104326-F2-s04.target
+            value: 10
+            scale: 0.001
+            note: "barrier not reported; analog = Ti 10 nm / TiN 10 nm of a damascene level (Ti shown, nm -> um)"
+      - id: ecp
+        name: "Cu damascene electroplating"
+        category: electroplating
+        group: cu_damascene
+        order: {kind: expansion, db: ectc51687.2025.00060-F1-s07, note: "RDL Cu damascene electroplating of the source module"}
+        equipment: {template: "wafer electroplating tool", note: "tool not named"}
+        hud:
+          current_density_ma_cm2: {template: 20, source: "RESEARCH_PENDING.md P36 (US6140241A, TSMC: 9.5-25 mA/cm2 bulk step after 1.6-7.0)", note: "bulk step of a two-step damascene Cu ECP"}
+          time_s: {template: "(cu_h_um + dam_ovb_um) / (0.02205 * 20) * 60", source: "RESEARCH_TOOLS_FAB.md F70; RESEARCH_PENDING.md P37", note: "Faraday time of the drawn plated thickness (1 um line fill + 1 um overburden) at 20 mA/cm2, 100 % efficiency, bulk step only (audit A2 n5)"}
+          thickness_um: {template: "cu_h_um + dam_ovb_um", note: "plated thickness drawn: line fill + overburden"}
+      - id: cmp
+        name: "Damascene CMP"
+        category: cmp
+        group: cu_damascene
+        order: {kind: expansion, db: ectc51687.2025.00060-F1-s08, note: "RDL damascene CMP of the source module"}
+        equipment: {template: "CMP tool (platen, pad, carrier head, slurry)", note: "tool not named"}
+        hud:
+          pressure_mpa: {template: "3.0 * 0.006894757", source: "RESEARCH_TOOLS_FAB.md F102, F105 (US9956664B2)", note: "pressure not reported; 3.0 psi bulk Cu CMP on a 300 mm Reflexion tool (psi -> MPa exact factor)"}
+          time_s: {template: "dam_ovb_um / 1.0268 * 60", source: "RESEARCH_TOOLS_FAB.md F105; RESEARCH_PENDING.md P38", note: "overburden at the 3 psi Cu rate; barrier clear not included"}
+        targets:
+          cu_h_um: {geom: cu_h_um}
+      - id: al_pvd
+        name: "PVD Al for the RDL"
+        category: deposition_pvd
+        order: {kind: expansion, db: eptc67330.2025.11392196-F2-s07, note: "Al RDL at 5 um pitch (2013); PVD / pattern / dry-etch order from eptc67330.2025.11392196-F2 s07-s09"}
+        equipment: {template: "PVD (sputter) tool", note: "PVD named in the source row; tool not named"}
+        hud:
+          thickness_um: {geom: al_h_um}
+      - id: al_litho
+        name: "Pattern the Al RDL"
+        category: lithography
+        order: {kind: expansion, db: eptc67330.2025.11392196-F2-s08, note: "pattern Al (source s08)"}
+        equipment: {template: "i-line stepper", source: "RESEARCH_TOOLS_FAB.md F83-F85", note: "tool not named; packaging i-line steppers resolve 0.8-1 um, enough for a 5 um pitch"}
+        hud:
+          dose_mj_cm2: {template: 245, source: "RESEARCH_PENDING.md P29 (SPR955-CM: 245 mJ/cm2 at 0.40 um L/S in 1.40 um, i-line)", note: "Al RDL dose not reported"}
+          thickness_um: {geom: al_res_h_um}
+        targets:
+          line_um: {geom: al_line_um}
+      - id: al_etch
+        name: "Dry etch the Al RDL"
+        category: etch_dry
+        order: {kind: expansion, db: eptc67330.2025.11392196-F2-s09, note: "dry etch Al (source s09)"}
+        equipment: {template: "plasma etcher (metal etch)", note: "tool and chemistry not named in the source row"}
+        hud:
+          time_s: {na: "Al RDL dry-etch time (s); the only found rate (RESEARCH_PENDING.md P34, 1984 Al(Si) RIE with CCl4) is an obsolete chemistry for a 2013 TSMC flow, so it is not used"}
+  - id: fs_passivation
+    name: "Deposit and pattern the front-side passivation"
+    category: deposition_other
+    piece: interposer_wafer
+    order:
+      kind: inserted
+      db: eptc59621.2023.10457670-F1-s11
+      note: "2013 lists no passivation; in the 10 x 100 um TSV interposer flow eptc59621.2023.10457670-F1 a front-side passivation follows the last BEOL level and precedes the UBM (s11 -> s12)."
+    equipment: {analog: ectc51846.2026.00065-F1-s01.equipment, note: "PECVD passivation on a Si interposer; opening by litho + fluorine RIE (RESEARCH_PENDING.md P40, P41)"}
+    hud:
+      thickness_um: {geom: pass_h_um}
+  # ================================================================ (c) uBump formation on the interposer
+  - id: ubump_interposer
+    name: "uBump formation on the interposer (40 um pitch)"
+    category: bumping
+    piece: interposer_wafer
+    order: {kind: backbone, db: ectc.2013.6575597-F1-s07}
+    note: "op order: seed sputter, dry-film resist, i-line exposure, Cu plating, strip, seed etch on a 12-inch Si interposer wafer (ectc51909.2023.00155-F1 s01-s06)."
+    targets:
+      pitch_um: {ref: ectc.2013.6575597-F1-s07.target, value: 40}
+    ops:
+      - id: seed
+        name: "Sputter Ti / Cu seed"
+        category: deposition_pvd
+        order: {kind: expansion, db: ectc51909.2023.00155-F1-s01, note: "seed sputter of the source module (s01)"}
+        equipment: {analog: ectc51909.2023.00155-F1-s01.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+        hud:
+          thickness_um: {analog: ectc51909.2023.00155-F1-s01.thickness_um, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+        targets:
+          ti_um: {analog: ectc51909.2023.00155-F1-s01.target, value: 0.025, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+      - id: litho
+        name: "Laminate dry-film resist, expose (i-line) and develop"
+        category: lithography
+        order: {kind: expansion, db: ectc51909.2023.00155-F1-s03, evidence: [ectc51909.2023.00155-F1-s02], note: "dry-film lamination (s02) and exposure / development (s03), one op"}
+        equipment: {analog: ectc51909.2023.00155-F1-s03.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+        hud:
+          dose_mj_cm2: {template: 100, source: "RESEARCH_TOOLS_FAB.md F80 (Ordyl Alpha 900 datasheet)", note: "dose not reported; upper end of the 35-100 mJ/cm2 window of a dry-film resist (PCB-grade film, low confidence)"}
+          thickness_um: {analog: ectc51906.2022.00180-F3-s11.thickness_um, note: "resist thickness not reported; must exceed the 5 um plated pad; analog = 7 um dry-film positive resist (thinnest DB dry film above 5 um, RESEARCH_TOOLS_FAB.md F78)"}
+      - id: plate
+        name: "Electroplate the Cu micro-bump pads"
+        category: electroplating
+        order: {kind: expansion, db: ectc51909.2023.00155-F1-s04, note: "Cu pad electroplating of the source module (s04)"}
+        equipment: {template: "wafer electroplating tool", note: "tool not named"}
+        hud:
+          current_density_ma_cm2: {analog: ectc51846.2026.00199-F1-s08.current_density_ma_cm2, note: "not reported; analog = 1 A/dm2 Cu plating of 5 um traces and pads (RESEARCH_TOOLS_FAB.md F63)"}
+          time_s: {analog: ectc51846.2026.00199-F1-s08.time_s, note: "not reported; analog = 28 min for a 5 um Cu target at 1 A/dm2 (F63)"}
+          thickness_um: {analog: ectc51909.2023.00155-F1-s04.thickness_um, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+        targets:
+          pad_um: {geom: ubump_pad_um}
+      - id: strip
+        name: "Strip the resist"
+        category: resist_strip
+        order: {kind: expansion, db: ectc51909.2023.00155-F1-s05, note: "resist stripping (s05)"}
+        equipment: {template: "wet bench", note: "tool not named"}
+      - id: seed_etch
+        name: "Etch the seed layer"
+        category: etch_other
+        order: {kind: expansion, db: ectc51909.2023.00155-F1-s06, note: "seed layer etching (s06)"}
+        equipment: {template: "wet bench", note: "tool not named"}
+  # ================================================================ top dies (parallel piece) and (d) CoW
+  - id: ubump_logic
+    name: "uBump formation on the 28 nm and 40 nm logic wafers"
+    category: bumping
+    piece: die_c
+    order: {kind: backbone, db: ectc.2013.6575597-F1-s08}
+    equipment: {template: "wafer bumping (plating) line", note: "method not stated in 2013"}
+    hud:
+      thickness_um: {geom: ubump_cu_um}
+    targets:
+      pitch_um: {geom: ubump_pitch_um}
+      diameter_um: {geom: ubump_d_um}
+      cap_um: {geom: ubump_cap_um}
+  - id: logic_thin
+    name: "Thin the 28 nm logic wafer (chip C)"
+    category: grinding_thinning
+    piece: die_c
+    order: {kind: backbone, db: ectc.2013.6575597-F1-s09}
+    equipment: {template: "wafer grinder", note: "tool not named"}
+    hud:
+      thickness_in_um: {analog: ectc51529.2024.00322-a-c1.thickness_um, note: "logic wafer thickness before thinning not reported; analog = 775 um full-thickness logic-mimic die"}
+      thickness_um: {geom: soc_h_um}
+    physics:
+      feed_um_s: {template: 5, source: "RESEARCH_TOOLS_FAB.md F126 (US7758402)", note: "rough infeed 4-6 um/s (med, recess-grinding patent); fine phases 0.25 / 0.12 / 0.05 um/s (F124, DAG810 #2000)"}
+  - id: logic_thin_d
+    name: "Thin the 40 nm wafer (chip D)"
+    category: grinding_thinning
+    piece: die_d
+    order:
+      kind: inserted
+      db: ectc.2013.6575597-F1-s09
+      note: "second wafer of the same 2013 step ('logic wafers' thinned, F1-s09): a grind acts on one wafer piece, so the 40 nm chip D wafer gets its own grind (audit A2 N2)"
+    equipment: {template: "wafer grinder", note: "tool not named"}
+    hud:
+      thickness_in_um: {analog: ectc51529.2024.00322-a-c1.thickness_um, note: "40 nm wafer thickness before thinning not reported; analog = 775 um full-thickness logic-mimic die"}
+      thickness_um: {geom: soc_h_um, note: "chip D thickness not reported; thinned to the chip C thickness (one die-back plane for the mold grind)"}
+    physics:
+      feed_um_s: {template: 5, source: "RESEARCH_TOOLS_FAB.md F126 (US7758402)", note: "rough infeed 4-6 um/s (med, recess-grinding patent); fine phases 0.25 / 0.12 / 0.05 um/s (F124, DAG810 #2000)"}
+  - id: logic_saw
+    name: "Die-saw the 28 nm logic wafer (chip C)"
+    category: dicing
+    piece: die_c
+    order: {kind: backbone, db: ectc.2013.6575597-F1-s10}
+    equipment: {template: "dicing saw (blade)", note: "tool not named"}
+    physics:
+      kerf_um: {geom: kerf_um}
+  - id: logic_saw_d
+    name: "Die-saw the 40 nm wafer (chip D)"
+    category: dicing
+    piece: die_d
+    order:
+      kind: inserted
+      db: ectc.2013.6575597-F1-s10
+      note: "second wafer of the same 2013 step ('logic wafers' sawn, F1-s10): a saw step draws one wafer piece, so the 40 nm chip D wafer gets its own (visual audit V2 N3)"
+    equipment: {template: "dicing saw (blade)", note: "tool not named"}
+    physics:
+      kerf_um: {geom: kerf_um}
+  - id: cow_bond
+    name: "Pick-and-place chip-on-wafer uBump joining on the full-thickness interposer wafer"
+    category: bonding
+    piece: interposer_wafer
+    order: {kind: backbone, db: ectc.2013.6575597-F1-s11}
+    equipment: {template: "flip-chip bonder (pick-and-place, bond head)", note: "joining method not stated (ectc.2013.6575597-a-i1 bonding_method unspecified)"}
+    hud:
+      temp_c:
+        analog: ectc51909.2023.00155-F1-s08.temp_c
+        note: "bond temperature / force not reported (s11 notes); analog = TCB tool setting for 40 um-pitch dies on a 12-inch Si interposer wafer (actual peak 250 C in that row); 2013 does not say TCB"
+      time_s:
+        analog: ectc51909.2023.00155-F1-s08.time_s
+        note: "not reported; analog bond time of the same 40 um-pitch row"
+      force_n:
+        analog: ectc51909.2023.00155-F1-s08.force_n
+        note: "not reported; analog bond force of the same 40 um-pitch row"
+    note: "2013 states a full-IMC uBump joint on an Al pad (ectc.2013.6575597-a-i1 metallurgy); drawn: the SnAg cap of the 40 um-pitch analog bump on a plated Cu pad, shown as IMC once the joint has formed (to_imc)."
+    targets:
+      joint_h_um: {geom: ubump_h_um}
+      ubump_count: {geom: ubump_count}
+      joint_material: {ref: ectc.2013.6575597-a-i1.metallurgy}
+    physics:
+      liquidus_c: {geom: liq_ubump_c}
+      imc_melt_c: {geom: imc_melt_c}
+  # ================================================================ continuation to a finished package (inserted)
+  - id: uf1_dispense
+    name: "Dispense capillary underfill under the dies (UF1)"
+    category: underfill
+    piece: interposer_wafer
+    order:
+      kind: inserted
+      db: ectc51909.2023.00155-F1-s11
+      evidence: [ectc.2013.6575597-a-c5, ectc51909.2023.00135-a-c7]
+      note: "2013 names a uBump underfill (a-c5) and 00135 a UF1 (a-c7) without a step position; dispensed right after CoW bonding as in ectc51909.2023.00155-F1 (s08 -> s11) and ectc51687.2025.00027-F1 (s02 -> s03)."
+    equipment: {analog: ectc51909.2023.00155-F1-s11.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+    hud:
+      temp_c: {analog: ectc51909.2023.00155-F1-s11.temp_c, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+    physics:
+      gamma_n_m: {geom: uf_gamma_n_m}
+      mu_pa_s: {geom: uf_mu_pa_s}
+      theta_deg: {geom: uf_theta_deg}
+  - id: uf1_cure
+    name: "Cure the uBump underfill"
+    category: cure
+    piece: interposer_wafer
+    order:
+      kind: inserted
+      db: ectc51529.2024.00322-F1-s03
+      note: "UF1 cure not stated in 2013 / 00135; pressure-oven cure of CUF under dies on a 12-inch Si interposer wafer, before over-mold (ectc51529.2024.00322-F1 s02 -> s03 -> s04)."
+    equipment: {analog: ectc51529.2024.00322-F1-s03.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D CoW molding study, not a TSMC CoWoS paper)"}
+    hud:
+      temp_c: {analog: ectc51529.2024.00322-F1-s03.temp_c, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D CoW molding study, not a TSMC CoWoS paper)"}
+      time_s: {analog: ectc51529.2024.00322-F1-s03.time_s, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D CoW molding study, not a TSMC CoWoS paper)"}
+  - id: mold
+    name: "Compression mold the CoW wafer"
+    category: molding
+    piece: interposer_wafer
+    order:
+      kind: inserted
+      db: ectc51909.2023.00155-F1-s12
+      evidence: [ectc51909.2023.00135-a-c6]
+      note: "CoWoS-S TV 00135 has mold between the SoC and memory dies (a-c6); the 2013 TV reports none. Compression mold after CUF as in ectc51909.2023.00155-F1 (s11 -> s12)."
+    equipment: {analog: ectc51909.2023.00155-F1-s12.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+    hud:
+      temp_c: {analog: ectc51909.2023.00155-F1-s12.temp_c, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+      time_s: {analog: ectc51909.2023.00155-F1-s12.time_s, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+      force_n: {analog: ectc51909.2023.00155-F1-s12.force_n, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+    targets:
+      mold_h0_um: {geom: mold_h0_um}
+  - id: pmc
+    name: "Post-mold cure"
+    category: cure
+    piece: interposer_wafer
+    order: {kind: inserted, db: ectc51909.2023.00155-F1-s13, note: "post-mold cure of the same molding row (ectc51909.2023.00155-F1 s12 -> s13)"}
+    equipment: {template: "curing oven", note: "tool not named"}
+    hud:
+      temp_c: {analog: ectc51909.2023.00155-F1-s13.temp_c, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+      time_s: {analog: ectc51909.2023.00155-F1-s13.time_s, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+  - id: mold_grind
+    name: "Grind the mold to expose the die backs"
+    category: grinding_thinning
+    piece: interposer_wafer
+    order: {kind: inserted, db: ectc51909.2023.00155-F1-s15, note: "mold grind before the carrier bond (ectc51909.2023.00155-F1 s15 -> F2 s01; ectc51687.2025.00027-F1 s05 -> s06)"}
+    equipment: {analog: ectc51909.2023.00155-F1-s15.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+    hud:
+      thickness_in_um: {geom: mold_h0_um}
+      thickness_um: {geom: mold_h_um}
+  - id: carrier_bond
+    name: "Bond a glass carrier with temporary bonding adhesive"
+    category: temporary_bonding
+    piece: interposer_wafer
+    order:
+      kind: inserted
+      db: ectc51687.2025.00027-F1-s06
+      note: "2013 thins the CoW wafer to 100 um but names no carrier; a carrier bond on the ground mold side precedes the interposer backside grind in ectc51687.2025.00027-F1 (s06 -> s07) and ectc51909.2023.00155-F2 (s01 -> s02)."
+    equipment: {analog: ectc51687.2025.00027-F1-s06.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 120 mm 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+    hud:
+      temp_c: {analog: ectc51687.2025.00027-F1-s06.temp_c, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 120 mm 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+      time_s: {analog: ectc51687.2025.00027-F1-s06.time_s, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 120 mm 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+      thickness_um: {analog: ectc51687.2025.00027-F1-s06.conditions, value: 70, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 120 mm 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+    targets:
+      carrier_h_um: {geom: carrier_h_um}
+  # ================================================================ (e) backside TSV reveal and C4
+  - id: tsv_reveal
+    name: "CoW wafer backside thinning to reveal the TSVs"
+    category: via_reveal
+    piece: interposer_wafer
+    order: {kind: backbone, db: ectc.2013.6575597-F2-s01}
+    note: "op order: grind, Si recess dry etch, backside passivation, backside CMP of a 300 mm, 10 x 100 um TSV interposer (eptc59621.2023.10457670-F1 s14-s17). Grind stops above the TSV bottoms, the recess exposes liner-covered tips, passivation covers them, CMP opens the tips (nails polished flush with the passivation)."
+    hud:
+      thickness_in_um: {geom: ip_h0_um}
+      thickness_um: {geom: si_final_um}
+    targets:
+      thinning_2013_um: {ref: ectc.2013.6575597-F2-s01.thickness_um}
+      protrusion_um: {geom: protr_um}
+    ops:
+      - id: grind
+        name: "Back-grind to just above the TSV tips"
+        category: grinding_thinning
+        order: {kind: expansion, db: eptc59621.2023.10457670-F1-s14, note: "wafer thinning by grinding of the source module (s14)"}
+        equipment:
+          analog: ectc51687.2025.00027-F1-s07.equipment
+          note: "grinder not named for CoWoS; analog = surface grinder used for the interposer backside of a CoW wafer on a glass carrier"
+        hud:
+          thickness_in_um: {geom: ip_h0_um}
+          thickness_um: {geom: reveal_grind_um}
+        targets:
+          removal_um: {geom: reveal_removal_um}
+        physics:
+          feed_um_s: {template: 5, source: "RESEARCH_TOOLS_FAB.md F126 (US7758402)", note: "rough infeed 4-6 um/s (med, recess-grinding patent); fine phases 0.25 / 0.12 / 0.05 um/s (F124, DAG810 #2000)"}
+      - id: recess
+        name: "Si recess dry etch to reveal the TSV tips"
+        category: via_reveal
+        order: {kind: expansion, db: eptc59621.2023.10457670-F1-s15, note: "TSV reveal dry etching of the source module (s15)"}
+        equipment: {template: "plasma etcher (Si recess)", note: "tool not named"}
+        hud:
+          thickness_in_um: {geom: reveal_grind_um}
+          thickness_um: {geom: si_final_um}
+          time_s: {template: "recess_um / 9 * 60", source: "RESEARCH_TOOLS_FAB.md F141", note: "Si recess from the grind stop to the final thickness at > 9 um/min (SPTS Rapier XE, search excerpt, med)"}
+        targets:
+          protrusion_um: {geom: protr_um}
+          liner_loss_um: {geom: liner_loss_um}
+      - id: passivate
+        name: "Backside passivation"
+        category: deposition_other
+        order: {kind: expansion, db: eptc59621.2023.10457670-F1-s16, note: "backside passivation of the source module (s16)"}
+        equipment: {template: "low-temperature PECVD (< 200 C)", source: "RESEARCH_TOOLS_FAB.md F144, F25", note: "tool not named; backside passivation of a carrier-bonded wafer uses low-temperature (< 200 C) CVD films"}
+        hud:
+          thickness_um: {geom: bs_pass_h_um}
+      - id: cmp
+        name: "Backside CMP to open the TSV tips"
+        category: cmp
+        order: {kind: expansion, db: eptc59621.2023.10457670-F1-s17, note: "backside CMP of the source module (s17)"}
+        equipment: {template: "CMP tool (platen, pad, carrier head, slurry)", note: "tool not named"}
+        hud:
+          pressure_mpa: {template: "3.0 * 0.006894757", source: "RESEARCH_TOOLS_FAB.md F102, F105 (US9956664B2)", note: "pressure not reported; 3.0 psi bulk Cu CMP on a 300 mm Reflexion tool (psi -> MPa exact factor)"}
+          time_s: {template: "protr_um / 1.0268 * 60", source: "RESEARCH_TOOLS_FAB.md F105 (removal rate); F145 (reveal-CMP removal not found)", note: "tip-opening CMP: from the passivated tip bottom (TSV bottom - passivation) to the stop plane (Si plane - passivation) = the protrusion (5 um), at the 3 psi Cu rate (1.0268 um/min); rate for mixed Cu / oxide not found (audit A1 m7)"}
+  - id: c4_bumping
+    name: "C4 bumping: SnPb eutectic plated solder on the TSV backside (200 um pitch)"
+    category: bumping
+    piece: interposer_wafer
+    order: {kind: backbone, db: ectc.2013.6575597-F2-s02}
+    note: "op order: seed sputter, resist lithography, plating, strip, seed etch, reflow (ectc51909.2023.00155-F2 s05-s12, bottom-side bumping on a ground Si interposer on a glass carrier); the plated metal is the 2013 SnPb eutectic solder."
+    targets:
+      pitch_um: {geom: c4_pitch_um}
+      diameter_um: {geom: c4_d_um}
+      material: {ref: ectc.2013.6575597-F2-s02.material}
+    ops:
+      - id: seed
+        name: "Sputter the C4 UBM / seed"
+        category: deposition_pvd
+        order: {kind: expansion, db: ectc51909.2023.00155-F2-s05, note: "seed sputter of the source module (s05); 2013: C4 'plated solder on UBM' (a-i3)"}
+        equipment: {analog: ectc51909.2023.00155-F2-s05.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+        hud:
+          thickness_um: {geom: ubm_h_um}
+      - id: litho
+        name: "Laminate resist, expose and develop the C4 openings"
+        category: lithography
+        order: {kind: expansion, db: ectc51909.2023.00155-F2-s07, evidence: [ectc51909.2023.00155-F2-s06], note: "dry-film lamination (s06) and i-line exposure / development (s07), one op"}
+        equipment: {analog: ectc51909.2023.00155-F2-s07.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+        hud:
+          dose_mj_cm2: {template: 100, source: "RESEARCH_TOOLS_FAB.md F80 (Ordyl Alpha 900 datasheet)", note: "dose not reported; upper end of the 35-100 mJ/cm2 window of a dry-film resist (PCB-grade film, low confidence)"}
+          thickness_um: {geom: c4_res_h_um}
+      - id: plate
+        name: "Plate SnPb eutectic solder"
+        category: electroplating
+        order: {kind: self}
+        equipment: {template: "wafer electroplating tool", note: "tool not named; 2013 states plated SnPb eutectic solder"}
+        hud:
+          current_density_ma_cm2: {template: 20, source: "RESEARCH_PENDING.md P3 (US6622907B2, IBM: eutectic PbSn from MSA, 20-100 mA/cm2)", note: "lower end of the range"}
+          time_s: {template: "c4_h_um / (0.05219 * 20) * 60", source: "RESEARCH_PENDING.md P7, P8", note: "Faraday time for 63Sn37Pb (rho 8.4, NIST), 100 % efficiency"}
+          thickness_um: {geom: c4_h_um}
+      - id: strip
+        name: "Strip the resist"
+        category: resist_strip
+        order: {kind: expansion, db: ectc51909.2023.00155-F2-s09, note: "resist stripping (s09)"}
+        equipment: {template: "wet bench", note: "tool not named"}
+      - id: seed_etch
+        name: "Etch the seed outside the C4"
+        category: etch_other
+        order: {kind: expansion, db: ectc51909.2023.00155-F2-s10, note: "seed layer etching (s10)"}
+        equipment: {template: "wet bench", note: "tool not named"}
+      - id: reflow
+        name: "Reflow the plated C4 into spheres"
+        category: reflow
+        order: {kind: expansion, db: ectc51909.2023.00155-F2-s12, note: "flux + bump reflow of the source module (s12); the source row's 260 C is a Cu/SnAg value and is not used for SnPb"}
+        equipment: {analog: ectc51909.2023.00155-F2-s12.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+        hud:
+          temp_c_max: {template: "(210 + 225) / 2", source: "Kester EP256 data sheet Rev 21Sep09 (2009-09-21), Sn63Pb37 recommended reflow profile: 'Peak Temp. 210 - 225 C', reflow zone 45-75 s typical; https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/876/EP256_Global_(21Sep09)[1].pdf", note: "SnPb bump reflow peak not reported for CoWoS; middle of a solder vendor's Sn63Pb37 process window (audit A1 M12; the J-STD-020 Tc 235 C used before is a classification limit, not a process peak). Solder hierarchy: the window straddles the 221 C liquidus of the SnAg uBumps already joined under UF1 / mold; at the drawn 217.5 C they stay solid, at the 225 C upper end (or the 235 C Tc) they would remelt inside the underfill"}
+        physics:
+          liquidus_c: {geom: liq_snpb_c}
+  - id: debond
+    name: "Laser debond the glass carrier"
+    category: debonding
+    piece: interposer_wafer
+    order: {kind: inserted, db: ectc51687.2025.00027-F1-s10, note: "debond after backside bumping and before dicing, pairing the carrier of carrier_bond (ectc51687.2025.00027-F1 s09 -> s10 -> s11)"}
+    equipment: {analog: ectc51687.2025.00027-F1-s10.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 120 mm 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+  - id: singulate
+    name: "Singulate the CoW wafer into units"
+    category: singulation
+    piece: interposer_wafer
+    order: {kind: backbone, db: ectc.2013.6575597-F2-s03}
+    equipment:
+      analog: ectc51687.2025.00027-F1-s11.equipment
+      note: "saw not named in 2013; analog = dicing saw used for a molded CoW interposer wafer"
+    targets:
+      unit_w_mm: {geom: ip2013_w_mm}
+      unit_d_mm: {geom: ip2013_d_mm}
+    physics:
+      kerf_um: {geom: kerf_um}
+  # ================================================================ (f) on substrate
+  - id: on_substrate
+    name: "Assemble the CoW unit to the organic FCBGA substrate"
+    category: assembly
+    piece: substrate
+    order: {kind: backbone, db: ectc.2013.6575597-F2-s04}
+    note: "op order: mount with flux, reflow, flux clean (ectc51687.2025.00027-F1 s14-s16)."
+    ops:
+      - id: mount
+        name: "Mount with flux"
+        category: assembly
+        order: {kind: expansion, db: ectc51687.2025.00027-F1-s14, note: "mount with flux (source s14)"}
+        equipment: {analog: ectc51687.2025.00027-F1-s14.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 120 mm 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+      - id: reflow
+        name: "Reflow the C4 joints"
+        category: reflow
+        order: {kind: expansion, db: ectc51687.2025.00027-F1-s15, note: "reflow (source s15)"}
+        equipment: {analog: ectc51687.2025.00027-F1-s15.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 120 mm 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+        hud:
+          temp_c_max: {template: "(210 + 225) / 2", source: "Kester EP256 data sheet Rev 21Sep09 (2009-09-21), Sn63Pb37 recommended reflow profile: 'Peak Temp. 210 - 225 C', reflow zone 45-75 s typical; https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/876/EP256_Global_(21Sep09)[1].pdf", note: "C4 assembly reflow peak not reported; middle of a solder vendor's Sn63Pb37 process window (audit A1 M12; J-STD-020 Tc values are classification limits). Below the 221 C SnAg uBump liquidus at the drawn value: the encapsulated uBumps stay solid; at the 225 C upper end they would remelt"}
+        physics:
+          liquidus_c: {geom: liq_snpb_c}
+      - id: clean
+        name: "Flux clean"
+        category: cleaning
+        order: {kind: expansion, db: ectc51687.2025.00027-F1-s16, note: "flux cleaning (source s16)"}
+        equipment: {analog: ectc51687.2025.00027-F1-s16.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 120 mm 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+  - id: uf2_dispense
+    name: "C4 underfill (UF2)"
+    category: underfill
+    piece: substrate
+    order:
+      kind: inserted
+      db: ectc.2013.6575597-F4-s01
+      evidence: [ectc51909.2023.00135-a-c8]
+      note: "2013 F4 (TV c) names the C4 underfill (UF-1 / UF-2 split); placed after substrate assembly as in ectc51909.2023.00155-F3 (s03 -> s04)"
+    equipment: {template: "dispenser (capillary underfill)", note: "tool not named"}
+    hud:
+      temp_c: {template: 70, source: "RESEARCH_TOOLS_ASSEMBLY.md A99 (Miquel, Semiconductor Digest)", note: "not reported; lower end of the 70-80 C substrate preheat for needle capillary underfill"}
+    physics:
+      gamma_n_m: {geom: uf_gamma_n_m}
+      mu_pa_s: {geom: uf_mu_pa_s}
+      theta_deg: {geom: uf_theta_deg}
+  - id: uf2_cure
+    name: "Cure the C4 underfill"
+    category: cure
+    piece: substrate
+    order: {kind: inserted, db: ectc51909.2023.00155-F3-s05, note: "interposer-substrate CUF cure after dispense (ectc51909.2023.00155-F3 s04 -> s05)"}
+    equipment: {template: "curing oven", note: "tool not named"}
+    hud:
+      temp_c: {analog: ectc51909.2023.00155-F3-s05.temp_c, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+      time_s: {analog: ectc51909.2023.00155-F3-s05.time_s, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+  - id: ring_attach
+    name: "Attach the Cu stiffener ring"
+    category: assembly
+    piece: substrate
+    order:
+      kind: inserted
+      db: ectc51909.2023.00174-F2-s01
+      evidence: [ectc51909.2023.00135-a-c5]
+      note: "CoWoS-S TV 00135 carries a copper stiffener ring (a-c5); TSMC ring-type finish order: ring attach, then BGA (ectc51909.2023.00174-F2). A lid / TIM finish (ectc51909.2023.00174-F3) is the alternative and is not animated."
+    equipment: {template: "ring attach (adhesive dispense and placement)", note: "tool not named"}
+    targets:
+      ring_h_um: {geom: ring_h_um}
+      ring_w_mm: {geom: ring_w_mm}
+      ring_mat: {geom: ring_mat}
+  - id: ring_cure
+    name: "Cure the ring adhesive"
+    category: cure
+    piece: substrate
+    order: {kind: inserted, db: ectc51909.2023.00155-F3-s08, note: "stiffener glue cure after attach (ectc51909.2023.00155-F3 s07 -> s08); the TSMC rows name no adhesive"}
+    equipment: {template: "curing oven", note: "tool not named"}
+    hud:
+      temp_c: {analog: ectc51909.2023.00155-F3-s08.temp_c, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+      time_s: {analog: ectc51909.2023.00155-F3-s08.time_s, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: JOINT2 / Resonac 2.5D Si-interposer flow, not a TSMC CoWoS paper)"}
+  - id: bga
+    name: "BGA ball attach"
+    category: ball_attach
+    piece: substrate
+    order: {kind: inserted, db: ectc51909.2023.00174-F2-s02, note: "BGA after the ring in the TSMC ring-type finish (ectc51909.2023.00174-F2 s01 -> s02, inferred order there)"}
+    equipment: {template: "ball mounter + reflow oven", note: "tools not named"}
+    hud:
+      temp_c_max: {analog: tcpmt.2025.3614186-F1-s20.temp_c_max, note: "BGA reflow not reported; analog = 255 C SAC305 ball reflow peak (RESEARCH_TOOLS_ASSEMBLY.md A148). Solder hierarchy: 255 C exceeds the 183 C SnPb C4 (under UF2) and the 221 C SnAg uBumps (under UF1 / mold): both remelt inside their underfill during the BGA reflow"}
+    targets:
+      ball_d_um: {geom: bga_d_um}
+      ball_pitch_um: {geom: bga_pitch_um}
+      ball_h_um: {geom: bga_h_um}
+    physics:
+      liquidus_c: {geom: liq_bga_c}

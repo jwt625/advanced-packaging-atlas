@@ -1,0 +1,470 @@
+# Geometry companion of config/process3d/flows/emib.yaml (contract v1.1, config/process3d/CONTRACT.md).
+# Format: config/process3d/COMPOSITION.md section 5. Build: uv run python scripts/build_process3d.py --flow emib
+# Frames: x, y um from the unit centre; z um up from the piece bottom (substrate: BGA ball bottom), front side up.
+# Substrate stack (package3d emib analogs): base slab (back build-up + core + core Cu, drawn as one start-state slab),
+# then front build-up levels 1..bu_n (ABF film, microvias, Cu level), solder resist. EMIB: two bridges (package3d
+# bridge_n, one under each die-die edge of Fig. 4(a)) at x = +-bx; each cavity goes through levels 2..4 down to the
+# level-1 Cu; bridge on adhesive; level 5 over it. EMIB-T: cavities through levels 1..4 down to the core-top Cu (cavity
+# pads); bridges soldered to the pads, underfilled, encapsulated. The EMIB-T route is drawn on the EMIB substrate and
+# dies (package3d emib); only bridge, cavity, joints and FLI pitch change. Build-up Cu levels are drawn as slabs with
+# lines in an ABF matrix (the spaces fill at the next lamination). Coarse bumps and the build-up via columns under
+# them are drawn in three coarse fields (one per die) that keep out of the bridge band (audit A1 M3, M7).
+# Repeated bodies / sites / calls: `repeat_over` {n, var}; k = bridge (1: x = +bx, 2: x = -bx), i = build-up level.
+note: >-
+  EMIB-T route drawn on the EMIB substrate and dies (package3d emib); bridge, cavity, joints and FLI pitch follow
+  package3d emib_t. Two bridges, one under each die-die edge. Build-up Cu levels drawn as line slabs in an ABF matrix;
+  build-up vias drawn only as columns under the coarse bumps. Bump height control: all bumps plated to one height,
+  solder caps sized so every field collapses by the same amount (one die standoff).
+
+geometry:
+  die_gap_um: {package3d: die_gap_um}
+  d2_w_mm: {package3d: d2_w_mm}
+  d2_d_mm: {package3d: d2_d_mm}
+  d2_h_um: {package3d: d2_h_um}
+  d2_px_mm: {package3d: d2_px_mm}
+  bridge_px_mm: {package3d: bridge_px_mm}
+  br_m_h_um: {package3d: m_h_um}
+  br_imd_um: {package3d: m_imd_um}
+  br_pad_h_um: {package3d: pad_h_um}
+  br_si_um: {package3d: bridge_si_um}
+  t_br_si_um: {package3d: emib_t.bridge_si_um}
+  t_m_h_um: {package3d: emib_t.m_h_um}
+  t_imd_um: {package3d: emib_t.m_imd_um}
+  t_pad_h_um: {package3d: emib_t.pad_h_um}
+  t_bpad_h_um: {package3d: emib_t.bpad_h_um}
+  t_tsv_land_um: {package3d: emib_t.tsv_land_um}
+  t_fli_core_pitch_um: {package3d: emib_t.fli_core_pitch_um}
+  t_fli_core_d_um: {package3d: emib_t.fli_core_d_um}
+  bx_um: {template: "bridge_px_mm * 500", note: "bridge centres at x = +-bx, under the DIE 1 / DIE 2 and DIE 1 / DIE 3 gaps (package3d emib layout, bridge_n 2; Fig. 4(a) schematic)"}
+  d2c_um: {template: "d2_px_mm * 500", note: "DIE 2 / DIE 3 centres beside DIE 1 at the D2D gap (package3d emib layout)"}
+  lvl_um: "cu_h_um + bu_diel_um"
+  base_h_um: "sbt_h_um - sr_h_um - bu_n * lvl_um"
+  base_top_um: "bga_d_um + base_h_um"
+  bu4_top_um: "base_top_um + (bu_n - 1) * lvl_um"
+  bu5_top_um: "base_top_um + bu_n * lvl_um"
+  sr_top_um: "bu5_top_um + sr_h_um"
+  cav_z_um: "base_top_um + lvl_um"
+  cav_h_um: "(bu_n - 2) * lvl_um"
+  cav_t_h_um: "(bu_n - 1) * lvl_um"
+  br_beol_um: "m_n * (br_m_h_um + br_imd_um)"
+  t_beol_um: "t_m_n * (t_m_h_um + t_imd_um)"
+  # ---- EMIB-T cavity joint: zero-load joint height of the plated bridge bump between equal pads (contract 10, reflow
+  # model): column V = pi a^2 h; joint (pi H / 6)(6 a^2 + H^2) = pi a^2 h, i.e. H^3 + p H - p h = 0 with p = 6 a^2 =
+  # 1.5 d^2, real root H = u - p / (3 u), u = (p h / 2 + ((p h)^2 / 4 + p^3 / 27)^(1/2))^(1/3) (Cardano).
+  # d 70, h 40: p = 7350, H = 34.44 um, collapse 5.56 um (audit A1 M6: 34.47 / 5.53 there, rounding).
+  bt_p: "1.5 * t_cav_d_um ** 2"
+  bt_u: "(bt_p * t_cav_h_um / 2 + ((bt_p * t_cav_h_um) ** 2 / 4 + bt_p ** 3 / 27) ** 0.5) ** (1 / 3)"
+  bt_jh_um: "bt_u - bt_p / (3 * bt_u)"
+  bt_coll_um: "t_cav_h_um - bt_jh_um"
+  t_via_depth_um:
+    template: "bu_n * lvl_um - cu_h_um - (t_cav_h_um + t_bridge_h_um) - cav_fin_um + bt_coll_um"
+    note: "one direct via from the level-5 dielectric top to the bridge pads after the cavity joint has collapsed (as-placed pad top lowered by the 5.56 um joint collapse, audit A1 M6); package3d emib_t draws two stacked vias"
+  eseed_um:
+    analog: ectc51906.2022.00360-F1-s03.thickness_um
+    note: "electroless Cu seed on ABF not reported for EMIB; analog = 0.15 um electroless seed of a glass-interposer SAP flow"
+  dfr_um:
+    analog: ectc51909.2023.00298-F1-s07.split
+    value: 15
+    note: "dry-film resist of the SAP module order source (15 um for M1 / M2)"
+  bump_top_um: "sr_top_um + bump_h_um"
+  sub_pad_h_um: {analog: ectc51687.2025.00148-a-L06.thickness_um, note: "substrate surface pad (BGA land) thickness not reported; analog = 15 um build-up Cu of a 4-2-4 FCBGA TV (the outer Cu level carries the pads; audit A2 n4)"}
+  cav_fin_um: {template: 2.05, source: "RESEARCH_PENDING.md X8 (F175, F176)", note: "proposal: EMIB-T cavity-pad finish not reported (P45); ENi 2 um / Au 0.05 um drawn as ENIG on the core-top Cu pads"}
+  # ---- bump height control (ectc.2016.201 p.6 Sec. III(e): 'precise bump height control for mixed CD bumps'): every
+  # bump is plated to the same height bump_h_um above the solder resist (coplanar tops for TCB); the caps are sized so
+  # every field collapses by the same amount, so one rigid die reaches one standoff (audit A1 M4). Collapse of a plated
+  # cap between equal pads (same Cardano root as above): coarse d 70, cap 20: p = 7350, H = 19.06, collapse c = 0.94 um.
+  # Fine and FLI caps from c = H^3 / p: H = (c p)^(1/3), cap = H + c: fine d 20: p = 600, H = 8.27, cap 9.21, Cu 20.79;
+  # FLI d 16.36: p = 401.5, H = 7.23, cap 8.17, Cu 21.83. Standoff above the solder resist after TCB = 30 - 0.94 =
+  # 29.06 um for every field.
+  c_p: "1.5 * coarse_d_um ** 2"
+  c_u: "(c_p * bump_cap_um / 2 + ((c_p * bump_cap_um) ** 2 / 4 + c_p ** 3 / 27) ** 0.5) ** (1 / 3)"
+  coarse_jh_um: "c_u - c_p / (3 * c_u)"
+  bump_coll_um: "bump_cap_um - coarse_jh_um"
+  fine_cap_um:
+    template: "(bump_coll_um * 1.5 * fine_d_um ** 2) ** (1 / 3) + bump_coll_um"
+    note: "bump height control (2016 Sec. III(e), mixed-CD bumps at one height): fine cap sized for the same collapse as the 70 um coarse bump (20 um cap of the package3d analog), so fine and coarse joints reach one standoff; fine cap height not reported"
+  fine_cu_um: "bump_h_um - fine_cap_um"
+  t_fli_cap_um:
+    template: "(bump_coll_um * 1.5 * t_fli_d_um ** 2) ** (1 / 3) + bump_coll_um"
+    note: "EMIB-T FLI cap sized like the EMIB fine cap (same collapse as the coarse bump, one die standoff); FLI cap not reported"
+  t_fli_cu_um: "bump_h_um - t_fli_cap_um"
+  fli_gap_um: "bump_h_um - bump_coll_um"
+  die_top_um: "sr_top_um + fli_gap_um + d1_h_um"
+  # ---- fine / FLI fields over each bridge, split at the D2D gap so no bump sits under the gap (audit A2 n2); the
+  # split fields keep the columns of the full-bridge grid (same phase as the bridge pads): first column x0, n columns
+  # fully under DIE 1 (side a) and the columns fully under the outer die (side b)
+  fine_n: "floor(bridge_w_mm * 1000 / fine_pitch_um)"
+  f_x0_um: "bx_um - (fine_n - 1) / 2 * fine_pitch_um"
+  fa_n: "floor((d1_w_mm * 500 - fine_d_um / 2 - f_x0_um) / fine_pitch_um) + 1"
+  fb_i0: "ceil((d1_w_mm * 500 + die_gap_um + fine_d_um / 2 - f_x0_um) / fine_pitch_um)"
+  fa_c_um: "f_x0_um + (fa_n - 1) / 2 * fine_pitch_um"
+  fa_w_um: "fa_n * fine_pitch_um"
+  fb_c_um: "f_x0_um + (fb_i0 + (fine_n - fb_i0 - 1) / 2) * fine_pitch_um"
+  fb_w_um: "(fine_n - fb_i0) * fine_pitch_um"
+  t_n: "floor(t_bridge_w_mm * 1000 / t_fli_pitch_um)"
+  t_x0_um: "bx_um - (t_n - 1) / 2 * t_fli_pitch_um"
+  ta_n: "floor((d1_w_mm * 500 - t_fli_d_um / 2 - t_x0_um) / t_fli_pitch_um) + 1"
+  tb_i0: "ceil((d1_w_mm * 500 + die_gap_um + t_fli_d_um / 2 - t_x0_um) / t_fli_pitch_um)"
+  ta_c_um: "t_x0_um + (ta_n - 1) / 2 * t_fli_pitch_um"
+  ta_w_um: "ta_n * t_fli_pitch_um"
+  tb_c_um: "t_x0_um + (tb_i0 + (t_n - tb_i0 - 1) / 2) * t_fli_pitch_um"
+  tb_w_um: "(t_n - tb_i0) * t_fli_pitch_um"
+  # ---- coarse fields (one per die) and the bridge keep-out band
+  keep_um:
+    template: "t_bridge_w_mm * 500 + cav_margin_mm * 1000"
+    note: "half width of the band around each bridge centre kept free of coarse bumps and build-up via columns: the larger (EMIB-T, 3 mm) bridge plus the cavity clearance, used in both routes; field extents not reported"
+  cf1_w_um:
+    template: "2 * (bx_um - keep_um)"
+    note: "DIE 1 coarse-bump field between the two bridge bands (field extent not reported)"
+  cf2_x_um:
+    template: "(bx_um + keep_um + d2c_um + d2_w_mm * 500) / 2"
+    note: "DIE 2 / DIE 3 coarse-bump field centre: from the bridge band to the die outer edge (field extent not reported)"
+  cf2_w_um:
+    template: "d2c_um + d2_w_mm * 500 - (bx_um + keep_um)"
+    note: "DIE 2 / DIE 3 coarse-bump field width (field extent not reported)"
+  # ---- lid: polymer TIM on the die backs, foot ring on a sealant bead (audit A1 M5)
+  seal_h_um:
+    template: "tim_h_um"
+    note: "lid sealant bond line not reported (ectc51687.2025.00187 rows: 'lid foot to substrate' adhesive, no thickness); drawn at the polymer TIM bond line so foot and TIM close together (illustrative)"
+  lid_in_um:
+    template: "2 * (d2c_um + d2_w_mm * 500) + 6000"
+    note: "lid cavity (inside the foot ring) not reported; inner edge 3 mm outside the 41.2 mm die block (underfill fillet room), the rule of the CoWoS-S ring template; illustrative"
+  foot_h_um: "fli_gap_um + d1_h_um + tim_h_um - seal_h_um"
+  lid_ni_um:
+    template: 3
+    source: "RESEARCH_TOOLS_FAB.md F176 (IPC-4552: electroless Ni 3-6 um)"
+    note: "IHS Ni plating not reported (lid material not reported); a Ni-plated Cu IHS assumed (visual audit V2 m13), plating drawn at the lower end of the IPC-4552 electroless-Ni range, the nearest documented Ni-finish thickness (different application, low)"
+  # ---- BGA wetted diameter (audit A1 m2)
+  bga_wet_d_um:
+    template: "2 * ((bga_d_um ** 3 - bga_h_um ** 3) / (3 * bga_h_um)) ** 0.5"
+    note: "package-side wetted diameter not reported; the diameter at which a 600 um sphere (V = pi d^3 / 6) forms the 478 um ball height measured on the BGA analog row (ectc51909.2023.00155-a-i4 notes), from (pi h / 6)(3 a^2 + h^2) = V: 546 um (0.91 d)"
+
+pieces:
+  substrate:
+    carrier: {shape: rect, w_mm: {geom: sbt_w_mm}, d_mm: {geom: sbt_d_mm}}
+    unit: {w_um: "sbt_w_mm * 1000", d_um: "sbt_d_mm * 1000"}
+    block: {x0_um: 7300, x1_um: 11800, y0_um: 100, y1_um: 900}
+    initial: true
+    cell_site: fv_1a
+  bridge:
+    carrier: {shape: rect, w_mm: {geom: bridge_w_mm}, d_mm: {geom: bridge_d_mm}}
+    unit: {w_um: "bridge_w_mm * 1000", d_um: "bridge_d_mm * 1000"}
+    block: {x0_um: -400, x1_um: 400, y0_um: -300, y1_um: 300}
+    initial: true
+    cell_site: brp
+  bridge_t:
+    carrier: {shape: rect, w_mm: {geom: t_bridge_w_mm}, d_mm: {geom: t_bridge_d_mm}}
+    unit: {w_um: "t_bridge_w_mm * 1000", d_um: "t_bridge_d_mm * 1000"}
+    block: {x0_um: -600, x1_um: 600, y0_um: -300, y1_um: 300}
+    initial: true
+    cell_site: btsv
+  top_dies:
+    carrier: {shape: rect, w_mm: {geom: d1_w_mm}, d_mm: {geom: d1_d_mm}}
+    unit: {w_um: "d1_w_mm * 1000", d_um: "d1_d_mm * 1000"}
+    block: {x0_um: 7300, x1_um: 9500, y0_um: -400, y1_um: 400}
+    initial: true
+  die2:
+    carrier: {shape: rect, w_mm: {geom: d2_w_mm}, d_mm: {geom: d2_d_mm}}
+    unit: {w_um: "d2_w_mm * 1000", d_um: "d2_d_mm * 1000"}
+    block: {x0_um: -5500, x1_um: -3300, y0_um: -400, y1_um: 400}
+    initial: true
+  lid:
+    carrier: {shape: rect, w_mm: {geom: sbt_w_mm}, d_mm: {geom: sbt_d_mm}}
+    unit: {w_um: "sbt_w_mm * 1000", d_um: "sbt_d_mm * 1000"}
+    block: {x0_um: 7300, x1_um: 11800, y0_um: 100, y1_um: 900}
+    initial: false
+
+sites:
+  - {id: "fv_{k}a", repeat_over: {n: {geom: bridge_n}, var: k}, piece: substrate, name: "fine vias / bumps over EMIB bridge {k} (DIE 1 side)", rect: {x_um: "(3 - 2 * k) * fa_c_um", y_um: "0", w_um: {geom: fa_w_um}, d_um: "bridge_d_mm * 1000"}, pitch_x_um: {geom: fine_pitch_um}, pattern: grid}
+  - {id: "fv_{k}b", repeat_over: {n: {geom: bridge_n}, var: k}, piece: substrate, name: "fine vias / bumps over EMIB bridge {k} (outer-die side)", rect: {x_um: "(3 - 2 * k) * fb_c_um", y_um: "0", w_um: {geom: fb_w_um}, d_um: "bridge_d_mm * 1000"}, pitch_x_um: {geom: fine_pitch_um}, pattern: grid}
+  - {id: "cpad_{k}", repeat_over: {n: {geom: bridge_n}, var: k}, piece: substrate, name: "EMIB-T cavity pads (bridge {k})", rect: {x_um: "bx_um * (3 - 2 * k)", y_um: "0", w_um: "t_bridge_w_mm * 1000", d_um: "t_bridge_d_mm * 1000"}, pitch_x_um: {geom: t_cav_pitch_um}, pattern: grid}
+  - {id: "fvt_{k}a", repeat_over: {n: {geom: bridge_n}, var: k}, piece: substrate, name: "direct vias / FLI over EMIB-T bridge {k} (DIE 1 side)", rect: {x_um: "(3 - 2 * k) * ta_c_um", y_um: "0", w_um: {geom: ta_w_um}, d_um: "t_bridge_d_mm * 1000"}, pitch_x_um: {geom: t_fli_pitch_um}, pattern: grid}
+  - {id: "fvt_{k}b", repeat_over: {n: {geom: bridge_n}, var: k}, piece: substrate, name: "direct vias / FLI over EMIB-T bridge {k} (outer-die side)", rect: {x_um: "(3 - 2 * k) * tb_c_um", y_um: "0", w_um: {geom: tb_w_um}, d_um: {template: "min(t_bridge_d_mm, d2_d_mm) * 1000", note: "FLI field over the 18 mm bridge drawn within the 10 mm depth of the smaller die it connects (no FLI without a die above); FLI field extent not reported"}}, pitch_x_um: {geom: t_fli_pitch_um}, pattern: grid}
+  - {id: cb_1, piece: substrate, name: "coarse bumps / via columns (DIE 1)", rect: {x_um: "0", y_um: "0", w_um: {geom: cf1_w_um}, d_um: "d1_d_mm * 1000"}, pitch_x_um: {geom: coarse_pitch_um}, pattern: grid}
+  - {id: cb_2, piece: substrate, name: "coarse bumps / via columns (DIE 2)", rect: {x_um: "0 - cf2_x_um", y_um: "0", w_um: {geom: cf2_w_um}, d_um: "d2_d_mm * 1000"}, pitch_x_um: {geom: coarse_pitch_um}, pattern: grid}
+  - {id: cb_3, piece: substrate, name: "coarse bumps / via columns (DIE 3)", rect: {x_um: {geom: cf2_x_um}, y_um: "0", w_um: {geom: cf2_w_um}, d_um: "d2_d_mm * 1000"}, pitch_x_um: {geom: coarse_pitch_um}, pattern: grid}
+  - {id: brp, piece: bridge, name: "EMIB bridge pads", rect: {x_um: "0", y_um: "0", w_um: "bridge_w_mm * 1000", d_um: "bridge_d_mm * 1000"}, pitch_x_um: {geom: fine_pitch_um}, pattern: grid}
+  - {id: btsv, piece: bridge_t, name: "EMIB-T TSV groups / cavity-side bumps", rect: {x_um: "0", y_um: "0", w_um: "t_bridge_w_mm * 1000", d_um: "t_bridge_d_mm * 1000"}, pitch_x_um: {geom: t_cav_pitch_um}, pattern: grid}
+  - {id: brpt, piece: bridge_t, name: "EMIB-T bridge pads", rect: {x_um: "0", y_um: "0", w_um: "t_bridge_w_mm * 1000", d_um: "t_bridge_d_mm * 1000"}, pitch_x_um: {geom: t_fli_pitch_um}, pattern: grid}
+  - id: bga
+    piece: substrate
+    name: "BGA balls"
+    rect: {x_um: "0", y_um: "0", w_um: {template: "sbt_w_mm * 1000 - bga_pitch_um", note: "BGA array extent not reported; full array"}, d_um: {template: "sbt_d_mm * 1000 - bga_pitch_um", note: "BGA array extent not reported; full array"}}
+    pitch_x_um: {geom: bga_pitch_um}
+    pattern: grid
+
+bodies:
+  # ---- start state and front build-up levels 1..bu_n-1 (module repeat); via columns only under the coarse fields
+  - {id: sbt_base, name: "core + back build-up (start state)", piece: substrate, kind: slab, material: core, label: "core with PTH, back-side build-up (drawn as one)", initial: true, z_um: {geom: bga_d_um}, h_um: {geom: base_h_um}}
+  - {id: "abf_{i}", repeat_over: {n: "bu_n - 1", var: i}, name: "ABF level {i}", group: "build-up", piece: substrate, kind: slab, material: abf, z_um: "base_top_um + (i - 1) * lvl_um", h_um: {geom: bu_diel_um}}
+  - {id: "mv_{i}_c1", repeat_over: {n: "bu_n - 1", var: i}, name: "microvia level {i} (DIE 1 field)", group: "build-up", piece: substrate, kind: hole, material: void, site: cb_1, hosts: ["abf_{i}"], z_top_um: "base_top_um + (i - 1) * lvl_um + bu_diel_um", depth_um: {geom: bu_diel_um}, d_top_um: {geom: mvia_d_um}, d_bot_um: {geom: mvia_bot_um}}
+  - {id: "mv_{i}_c2", repeat_over: {n: "bu_n - 1", var: i}, name: "microvia level {i} (DIE 2 field)", group: "build-up", piece: substrate, kind: hole, material: void, site: cb_2, hosts: ["abf_{i}"], z_top_um: "base_top_um + (i - 1) * lvl_um + bu_diel_um", depth_um: {geom: bu_diel_um}, d_top_um: {geom: mvia_d_um}, d_bot_um: {geom: mvia_bot_um}}
+  - {id: "mv_{i}_c3", repeat_over: {n: "bu_n - 1", var: i}, name: "microvia level {i} (DIE 3 field)", group: "build-up", piece: substrate, kind: hole, material: void, site: cb_3, hosts: ["abf_{i}"], z_top_um: "base_top_um + (i - 1) * lvl_um + bu_diel_um", depth_um: {geom: bu_diel_um}, d_top_um: {geom: mvia_d_um}, d_bot_um: {geom: mvia_bot_um}}
+  - {id: "seed_{i}", repeat_over: {n: "bu_n - 1", var: i}, name: "electroless seed level {i}", group: "build-up", piece: substrate, kind: film, material: cu, z_um: "base_top_um + (i - 1) * lvl_um + bu_diel_um", h_um: {geom: eseed_um}, lines: ["mv_{i}_c1", "mv_{i}_c2", "mv_{i}_c3"]}
+  - {id: "dfr_{i}", repeat_over: {n: "bu_n - 1", var: i}, name: "dry film level {i}", group: "build-up", piece: substrate, kind: slab, material: dry_film, z_um: "base_top_um + (i - 1) * lvl_um + bu_diel_um + eseed_um", h_um: {geom: dfr_um}}
+  - {id: "vf_{i}_c1", repeat_over: {n: "bu_n - 1", var: i}, name: "via fill level {i} (DIE 1 field)", group: "build-up", piece: substrate, kind: via_fill, material: cu, hole: "mv_{i}_c1", mode: full}
+  - {id: "vf_{i}_c2", repeat_over: {n: "bu_n - 1", var: i}, name: "via fill level {i} (DIE 2 field)", group: "build-up", piece: substrate, kind: via_fill, material: cu, hole: "mv_{i}_c2", mode: full}
+  - {id: "vf_{i}_c3", repeat_over: {n: "bu_n - 1", var: i}, name: "via fill level {i} (DIE 3 field)", group: "build-up", piece: substrate, kind: via_fill, material: cu, hole: "mv_{i}_c3", mode: full}
+  - {id: "cu_{i}", repeat_over: {n: "bu_n - 1", var: i}, name: "Cu level {i}", group: "build-up", piece: substrate, kind: slab, material: abf, z_um: "base_top_um + (i - 1) * lvl_um + bu_diel_um", h_um: {geom: cu_h_um}, lines: {line_um: {geom: bu_line_um}, space_um: {geom: bu_space_um}, dir: x, material: cu}}
+  # ---- EMIB cavities, adhesive, bridge (placed twice)
+  - {id: "cav_{k}", repeat_over: {n: {geom: bridge_n}, var: k}, name: "bridge cavity {k} (EMIB)", piece: substrate, kind: cut, material: void, routes: [emib], hosts: [abf_2, abf_3, abf_4, cu_2, cu_3, cu_4], rect: {x_um: "bx_um * (3 - 2 * k)", y_um: "0", w_um: "cav_w_mm * 1000", d_um: "(bridge_d_mm + 2 * cav_margin_mm) * 1000"}, z_um: {geom: cav_z_um}, h_um: {geom: cav_h_um}}
+  - {id: "adh_{k}", repeat_over: {n: {geom: bridge_n}, var: k}, name: "bridge adhesive {k}", piece: substrate, kind: slab, material: adhesive, routes: [emib], rect: {x_um: "bx_um * (3 - 2 * k)", y_um: "0", w_um: "bridge_w_mm * 1000", d_um: "bridge_d_mm * 1000"}, z_um: {geom: cav_z_um}, h_um: {geom: adh_h_um}}
+  - {id: br_si, name: "bridge Si", piece: bridge, kind: slab, material: si, initial: true, z_um: "0", h_um: {geom: br_si_um}}
+  - {id: br_beol, name: "bridge BEOL (M1-M4, 2/2 um)", piece: bridge, kind: slab, material: oxide, initial: true, z_um: {geom: br_si_um}, h_um: {geom: br_beol_um}, lines: {line_um: {geom: m_line_um}, space_um: {geom: m_space_um}, dir: x, material: cu}}
+  - {id: br_pad, name: "bridge pads", piece: bridge, kind: post, material: cu, initial: true, site: brp, role: pad, z_um: "br_si_um + br_beol_um", h_um: {geom: br_pad_h_um}, d_um: {geom: fv_land_um}}
+  # ---- EMIB-T cavities, bridge (placed twice) with backside pads and bumps, underfill
+  - {id: "cav_t_{k}", repeat_over: {n: {geom: bridge_n}, var: k}, name: "bridge cavity {k} (EMIB-T)", piece: substrate, kind: cut, material: void, routes: [emib_t], hosts: [abf_1, abf_2, abf_3, abf_4, cu_1, cu_2, cu_3, cu_4], rect: {x_um: "bx_um * (3 - 2 * k)", y_um: "0", w_um: "(t_bridge_w_mm + 2 * cav_margin_mm) * 1000", d_um: "(t_bridge_d_mm + 2 * cav_margin_mm) * 1000"}, z_um: {geom: base_top_um}, h_um: {geom: cav_t_h_um}}
+  - {id: bt_sol, name: "cavity-side bump", piece: bridge_t, kind: solder, material: solder, label: "SnAg (assumed, X5)", initial: true, site: btsv, form: plated, dir: down, z_um: {geom: t_cav_h_um}, d_um: {geom: t_cav_d_um}, h_um: {geom: t_cav_h_um}, liquidus_c: {geom: liq_cav_c}, joint_top_d_um: {template: "t_cav_d_um", note: "cavity pad not reported; drawn at the 70 um bump diameter (equal pads: joint 34.44 um, collapse 5.56 um)"}, note: "arrives bumped"}
+  - id: bt_bpad
+    name: "bridge backside pad / UBM"
+    piece: bridge_t
+    kind: post
+    material: cu
+    initial: true
+    site: btsv
+    role: pad
+    z_um: {geom: t_cav_h_um}
+    h_um: {geom: t_bpad_h_um}
+    d_um: {template: "t_cav_d_um", note: "backside pad under the cavity-side bump drawn at the bump diameter (a bump wider than its pad is not formable, audit A1 M6); the package3d TSV-group land (28.5 um) is the TSV landing inside it; pad size not reported"}
+  - {id: bt_si, name: "EMIB-T bridge Si", piece: bridge_t, kind: slab, material: si, initial: true, z_um: "t_cav_h_um + t_bpad_h_um", h_um: {geom: t_br_si_um}}
+  - {id: bt_tsv, name: "bridge TSV", piece: bridge_t, kind: hole, material: void, initial: true, site: btsv, hosts: [bt_si], z_top_um: "t_cav_h_um + t_bpad_h_um + t_br_si_um", depth_um: {geom: t_br_si_um}, d_top_um: {geom: t_tsv_d_um}}
+  - {id: bt_tsv_cu, name: "bridge TSV Cu", piece: bridge_t, kind: via_fill, material: cu, initial: true, hole: bt_tsv, mode: full}
+  - {id: bt_beol, name: "EMIB-T bridge BEOL (10 levels)", piece: bridge_t, kind: slab, material: oxide, initial: true, z_um: "t_cav_h_um + t_bpad_h_um + t_br_si_um", h_um: {geom: t_beol_um}, lines: {line_um: {geom: m_line_um}, space_um: {geom: m_space_um}, dir: x, material: cu}}
+  - {id: bt_pad, name: "EMIB-T bridge pads", piece: bridge_t, kind: post, material: cu, initial: true, site: brpt, role: pad, z_um: "t_cav_h_um + t_bpad_h_um + t_br_si_um + t_beol_um", h_um: {geom: t_pad_h_um}, d_um: {geom: t_fv_land_um}}
+  - {id: "cpfin_{k}", repeat_over: {n: {geom: bridge_n}, var: k}, name: "cavity pad finish (bridge {k})", piece: substrate, kind: post, material: ni, label: "ENi / Au (assumed, X8)", routes: [emib_t], site: "cpad_{k}", role: finish, z_um: {geom: base_top_um}, h_um: {geom: cav_fin_um}, d_um: {geom: t_cav_d_um}}
+  - {id: bga_land, name: "BGA lands", piece: substrate, kind: post, material: cu, initial: true, site: bga, role: pad, z_um: {geom: bga_d_um}, h_um: {geom: sub_pad_h_um}, d_um: {geom: bga_wet_d_um}}
+  - {id: "uf_br_{k}", repeat_over: {n: {geom: bridge_n}, var: k}, name: "underfill under bridge {k}", piece: substrate, kind: fill, material: underfill, routes: [emib_t], rect: {x_um: "bx_um * (3 - 2 * k)", y_um: "0", w_um: "t_bridge_w_mm * 1000", d_um: "t_bridge_d_mm * 1000"}, z_um: {geom: base_top_um}, h_um: "cav_fin_um + bt_jh_um", flow: {from: y-}}
+  # ---- level 5 (final build-up / encapsulation) and its vias
+  - {id: "cav_fill_{k}", repeat_over: {n: {geom: bridge_n}, var: k}, name: "cavity {k} gap fill (final build-up dielectric)", piece: substrate, kind: fill, material: abf, routes: [emib], rect: {x_um: "bx_um * (3 - 2 * k)", y_um: "0", w_um: "cav_w_mm * 1000", d_um: "(bridge_d_mm + 2 * cav_margin_mm) * 1000"}, z_um: {geom: cav_z_um}, h_um: {geom: cav_h_um}, flow: {from: perimeter}}
+  - {id: "cav_fill_t_{k}", repeat_over: {n: {geom: bridge_n}, var: k}, name: "cavity {k} encapsulation (EMIB-T)", piece: substrate, kind: fill, material: abf, routes: [emib_t], rect: {x_um: "bx_um * (3 - 2 * k)", y_um: "0", w_um: "(t_bridge_w_mm + 2 * cav_margin_mm) * 1000", d_um: "(t_bridge_d_mm + 2 * cav_margin_mm) * 1000"}, z_um: {geom: base_top_um}, h_um: {geom: cav_t_h_um}, flow: {from: perimeter}}
+  - {id: abf_5, name: "ABF level 5 (final)", group: "build-up", piece: substrate, kind: slab, material: abf, z_um: {geom: bu4_top_um}, h_um: {geom: bu_diel_um}}
+  - {id: "mv5f_{k}a", repeat_over: {n: {geom: bridge_n}, var: k}, name: "fine via onto bridge {k}, DIE 1 side pads", piece: substrate, kind: hole, material: void, routes: [emib], site: "fv_{k}a", hosts: [abf_5], z_top_um: "bu4_top_um + bu_diel_um", depth_um: {geom: bu_diel_um}, d_top_um: {geom: fv_d_um}, d_bot_um: {geom: fv_bot_um}}
+  - {id: "mv5f_{k}b", repeat_over: {n: {geom: bridge_n}, var: k}, name: "fine via onto bridge {k}, outer side pads", piece: substrate, kind: hole, material: void, routes: [emib], site: "fv_{k}b", hosts: [abf_5], z_top_um: "bu4_top_um + bu_diel_um", depth_um: {geom: bu_diel_um}, d_top_um: {geom: fv_d_um}, d_bot_um: {geom: fv_bot_um}}
+  - {id: "mv5t_{k}a", repeat_over: {n: {geom: bridge_n}, var: k}, name: "direct via onto EMIB-T bridge {k}, DIE 1 side pads", piece: substrate, kind: hole, material: void, routes: [emib_t], site: "fvt_{k}a", hosts: [abf_5, "cav_fill_t_{k}"], z_top_um: "bu4_top_um + bu_diel_um", depth_um: {geom: t_via_depth_um}, d_top_um: {geom: t_fv_d_um}}
+  - {id: "mv5t_{k}b", repeat_over: {n: {geom: bridge_n}, var: k}, name: "direct via onto EMIB-T bridge {k}, outer side pads", piece: substrate, kind: hole, material: void, routes: [emib_t], site: "fvt_{k}b", hosts: [abf_5, "cav_fill_t_{k}"], z_top_um: "bu4_top_um + bu_diel_um", depth_um: {geom: t_via_depth_um}, d_top_um: {geom: t_fv_d_um}}
+  - {id: mv5c_c1, name: "coarse via level 5 (DIE 1 field)", piece: substrate, kind: hole, material: void, site: cb_1, hosts: [abf_5], z_top_um: "bu4_top_um + bu_diel_um", depth_um: {geom: bu_diel_um}, d_top_um: {geom: mvia_d_um}, d_bot_um: {geom: mvia_bot_um}}
+  - {id: mv5c_c2, name: "coarse via level 5 (DIE 2 field)", piece: substrate, kind: hole, material: void, site: cb_2, hosts: [abf_5], z_top_um: "bu4_top_um + bu_diel_um", depth_um: {geom: bu_diel_um}, d_top_um: {geom: mvia_d_um}, d_bot_um: {geom: mvia_bot_um}}
+  - {id: mv5c_c3, name: "coarse via level 5 (DIE 3 field)", piece: substrate, kind: hole, material: void, site: cb_3, hosts: [abf_5], z_top_um: "bu4_top_um + bu_diel_um", depth_um: {geom: bu_diel_um}, d_top_um: {geom: mvia_d_um}, d_bot_um: {geom: mvia_bot_um}}
+  - {id: seed_5, name: "electroless seed level 5", piece: substrate, kind: film, material: cu, z_um: "bu4_top_um + bu_diel_um", h_um: {geom: eseed_um}, lines: [mv5c_c1, mv5c_c2, mv5c_c3]}
+  - {id: dfr_5, name: "dry film level 5", piece: substrate, kind: slab, material: dry_film, z_um: "bu4_top_um + bu_diel_um + eseed_um", h_um: {geom: dfr_um}}
+  - {id: "vf5f_{k}a", repeat_over: {n: {geom: bridge_n}, var: k}, name: "fine via fill (bridge {k}, DIE 1 side)", piece: substrate, kind: via_fill, material: cu, routes: [emib], hole: "mv5f_{k}a", mode: full}
+  - {id: "vf5f_{k}b", repeat_over: {n: {geom: bridge_n}, var: k}, name: "fine via fill (bridge {k}, outer side)", piece: substrate, kind: via_fill, material: cu, routes: [emib], hole: "mv5f_{k}b", mode: full}
+  - {id: "vf5t_{k}a", repeat_over: {n: {geom: bridge_n}, var: k}, name: "direct via fill (bridge {k}, DIE 1 side)", piece: substrate, kind: via_fill, material: cu, routes: [emib_t], hole: "mv5t_{k}a", mode: full}
+  - {id: "vf5t_{k}b", repeat_over: {n: {geom: bridge_n}, var: k}, name: "direct via fill (bridge {k}, outer side)", piece: substrate, kind: via_fill, material: cu, routes: [emib_t], hole: "mv5t_{k}b", mode: full}
+  - {id: vf5c_c1, name: "coarse via fill level 5 (DIE 1 field)", piece: substrate, kind: via_fill, material: cu, hole: mv5c_c1, mode: full}
+  - {id: vf5c_c2, name: "coarse via fill level 5 (DIE 2 field)", piece: substrate, kind: via_fill, material: cu, hole: mv5c_c2, mode: full}
+  - {id: vf5c_c3, name: "coarse via fill level 5 (DIE 3 field)", piece: substrate, kind: via_fill, material: cu, hole: mv5c_c3, mode: full}
+  - {id: cu_5, name: "Cu level 5 (pads)", group: "build-up", piece: substrate, kind: slab, material: abf, z_um: "bu4_top_um + bu_diel_um", h_um: {geom: cu_h_um}, lines: {line_um: {geom: bu_line_um}, space_um: {geom: bu_space_um}, dir: x, material: cu}}
+  # ---- surface layer and FLI bumps (substrate side, 00051-F2-s04); bump height control (one plated height bump_h_um)
+  - {id: sr, name: "solder resist", piece: substrate, kind: slab, material: solder_resist, routes: [emib], z_um: {geom: bu5_top_um}, h_um: {geom: sr_h_um}, openings: [{site: fv_1a, d_um: {geom: fine_d_um}}, {site: fv_1b, d_um: {geom: fine_d_um}}, {site: fv_2a, d_um: {geom: fine_d_um}}, {site: fv_2b, d_um: {geom: fine_d_um}}, {site: cb_1, d_um: {geom: coarse_d_um}}, {site: cb_2, d_um: {geom: coarse_d_um}}, {site: cb_3, d_um: {geom: coarse_d_um}}]}
+  - {id: sr_t, name: "solder resist (EMIB-T)", piece: substrate, kind: slab, material: solder_resist, routes: [emib_t], z_um: {geom: bu5_top_um}, h_um: {geom: sr_h_um}, openings: [{site: fvt_1a, d_um: {geom: t_fli_d_um}}, {site: fvt_1b, d_um: {geom: t_fli_d_um}}, {site: fvt_2a, d_um: {geom: t_fli_d_um}}, {site: fvt_2b, d_um: {geom: t_fli_d_um}}, {site: cb_1, d_um: {geom: coarse_d_um}}, {site: cb_2, d_um: {geom: coarse_d_um}}, {site: cb_3, d_um: {geom: coarse_d_um}}]}
+  - {id: "fb_cu_{k}a", repeat_over: {n: {geom: bridge_n}, var: k}, name: "fine bump Cu (55 um pitch, bridge {k}, DIE 1 side)", piece: substrate, kind: post, material: cu, routes: [emib], site: "fv_{k}a", role: pillar, z_um: {geom: bu5_top_um}, h_um: "sr_h_um + fine_cu_um", d_um: {geom: fine_d_um}}
+  - {id: "fb_cu_{k}b", repeat_over: {n: {geom: bridge_n}, var: k}, name: "fine bump Cu (55 um pitch, bridge {k}, outer side)", piece: substrate, kind: post, material: cu, routes: [emib], site: "fv_{k}b", role: pillar, z_um: {geom: bu5_top_um}, h_um: "sr_h_um + fine_cu_um", d_um: {geom: fine_d_um}}
+  - {id: "fb_cap_{k}a", repeat_over: {n: {geom: bridge_n}, var: k}, name: "fine bump solder (bridge {k}, DIE 1 side)", piece: substrate, kind: solder, material: solder, label: "SnAg (analog bump)", routes: [emib], site: "fv_{k}a", form: plated, z_um: "sr_top_um + fine_cu_um", d_um: {geom: fine_d_um}, h_um: {geom: fine_cap_um}, liquidus_c: {geom: liq_fli_c}, joint_top_d_um: {template: "fine_d_um", note: "die pad not reported; drawn equal to the bump diameter (v1.1: the cap belongs to the substrate, the die pad is the top pad)"}}
+  - {id: "fb_cap_{k}b", repeat_over: {n: {geom: bridge_n}, var: k}, name: "fine bump solder (bridge {k}, outer side)", piece: substrate, kind: solder, material: solder, label: "SnAg (analog bump)", routes: [emib], site: "fv_{k}b", form: plated, z_um: "sr_top_um + fine_cu_um", d_um: {geom: fine_d_um}, h_um: {geom: fine_cap_um}, liquidus_c: {geom: liq_fli_c}, joint_top_d_um: {template: "fine_d_um", note: "die pad not reported; drawn equal to the bump diameter (v1.1: the cap belongs to the substrate, the die pad is the top pad)"}}
+  - {id: "ft_cu_{k}a", repeat_over: {n: {geom: bridge_n}, var: k}, name: "FLI bump Cu (45 um pitch, bridge {k}, DIE 1 side)", piece: substrate, kind: post, material: cu, routes: [emib_t], site: "fvt_{k}a", role: pillar, z_um: {geom: bu5_top_um}, h_um: "sr_h_um + t_fli_cu_um", d_um: {geom: t_fli_d_um}}
+  - {id: "ft_cu_{k}b", repeat_over: {n: {geom: bridge_n}, var: k}, name: "FLI bump Cu (45 um pitch, bridge {k}, outer side)", piece: substrate, kind: post, material: cu, routes: [emib_t], site: "fvt_{k}b", role: pillar, z_um: {geom: bu5_top_um}, h_um: "sr_h_um + t_fli_cu_um", d_um: {geom: t_fli_d_um}}
+  - {id: "ft_cap_{k}a", repeat_over: {n: {geom: bridge_n}, var: k}, name: "FLI bump solder (bridge {k}, DIE 1 side)", piece: substrate, kind: solder, material: solder, label: "SnAg (assumed)", routes: [emib_t], site: "fvt_{k}a", form: plated, z_um: "sr_top_um + t_fli_cu_um", d_um: {geom: t_fli_d_um}, h_um: {geom: t_fli_cap_um}, liquidus_c: {geom: liq_fli_c}, joint_top_d_um: {template: "t_fli_d_um", note: "die pad not reported; drawn equal to the bump diameter (v1.1: the cap belongs to the substrate, the die pad is the top pad)"}}
+  - {id: "ft_cap_{k}b", repeat_over: {n: {geom: bridge_n}, var: k}, name: "FLI bump solder (bridge {k}, outer side)", piece: substrate, kind: solder, material: solder, label: "SnAg (assumed)", routes: [emib_t], site: "fvt_{k}b", form: plated, z_um: "sr_top_um + t_fli_cu_um", d_um: {geom: t_fli_d_um}, h_um: {geom: t_fli_cap_um}, liquidus_c: {geom: liq_fli_c}, joint_top_d_um: {template: "t_fli_d_um", note: "die pad not reported; drawn equal to the bump diameter (v1.1: the cap belongs to the substrate, the die pad is the top pad)"}}
+  - {id: "cb_cu_{j}", repeat_over: {n: "3", var: j}, name: "coarse bump Cu (130 um pitch, field {j})", piece: substrate, kind: post, material: cu, site: "cb_{j}", role: pillar, z_um: {geom: bu5_top_um}, h_um: "sr_h_um + bump_cu_um", d_um: {geom: coarse_d_um}}
+  - {id: "cb_cap_{j}", repeat_over: {n: "3", var: j}, name: "coarse bump solder (field {j})", piece: substrate, kind: solder, material: solder, label: "SnAg (analog bump)", site: "cb_{j}", form: plated, z_um: "sr_top_um + bump_cu_um", d_um: {geom: coarse_d_um}, h_um: {geom: bump_cap_um}, liquidus_c: {geom: liq_fli_c}, joint_top_d_um: {template: "coarse_d_um", note: "die pad not reported; drawn equal to the bump diameter (v1.1: the cap belongs to the substrate, the die pad is the top pad)"}}
+  # ---- dies, underfill (one region per die), TIM, sealant, lid, BGA
+  - {id: d1_si, name: "DIE 1", piece: top_dies, kind: slab, material: si, initial: true, z_um: "0", h_um: {geom: d1_h_um}}
+  - {id: d2_si, name: "DIE 2 / DIE 3", piece: die2, kind: slab, material: si, initial: true, z_um: "0", h_um: {geom: d2_h_um}}
+  - {id: cuf, name: "capillary underfill (DIE 1 and the D2D gaps)", piece: substrate, kind: fill, material: underfill, rect: {x_um: "0", y_um: "0", w_um: "d1_w_mm * 1000 + 2 * die_gap_um", d_um: "d1_d_mm * 1000"}, z_um: {geom: sr_top_um}, h_um: {geom: fli_gap_um}, flow: {from: y-}}
+  - {id: cuf_2, name: "capillary underfill (DIE 2)", piece: substrate, kind: fill, material: underfill, rect: {x_um: "0 - d2c_um", y_um: "0", w_um: "d2_w_mm * 1000", d_um: "d2_d_mm * 1000"}, z_um: {geom: sr_top_um}, h_um: {geom: fli_gap_um}, flow: {from: y-}}
+  - {id: cuf_3, name: "capillary underfill (DIE 3)", piece: substrate, kind: fill, material: underfill, rect: {x_um: {geom: d2c_um}, y_um: "0", w_um: "d2_w_mm * 1000", d_um: "d2_d_mm * 1000"}, z_um: {geom: sr_top_um}, h_um: {geom: fli_gap_um}, flow: {from: y-}}
+  - {id: tim_1, name: "polymer TIM (DIE 1)", piece: substrate, kind: slab, material: silicone, label: "polymer TIM (composition not reported)", rect: {x_um: "0", y_um: "0", w_um: "d1_w_mm * 1000", d_um: "d1_d_mm * 1000"}, z_um: {geom: die_top_um}, h_um: {geom: tim_h_um}}
+  - {id: tim_2, name: "polymer TIM (DIE 2)", piece: substrate, kind: slab, material: silicone, label: "polymer TIM (composition not reported)", rect: {x_um: "0 - d2c_um", y_um: "0", w_um: "d2_w_mm * 1000", d_um: "d2_d_mm * 1000"}, z_um: {geom: die_top_um}, h_um: {geom: tim_h_um}}
+  - {id: tim_3, name: "polymer TIM (DIE 3)", piece: substrate, kind: slab, material: silicone, label: "polymer TIM (composition not reported)", rect: {x_um: {geom: d2c_um}, y_um: "0", w_um: "d2_w_mm * 1000", d_um: "d2_d_mm * 1000"}, z_um: {geom: die_top_um}, h_um: {geom: tim_h_um}}
+  - {id: seal, name: "lid sealant bead", piece: substrate, kind: slab, material: adhesive, label: "sealant (not reported)", rect: {x_um: "0", y_um: "0", w_um: "sbt_w_mm * 1000", d_um: "sbt_d_mm * 1000"}, frame_inner: {w_um: {geom: lid_in_um}, d_um: {geom: lid_in_um}}, z_um: {geom: sr_top_um}, h_um: {geom: seal_h_um}}
+  - {id: lid_foot, name: "IHS foot ring", piece: lid, kind: slab, material: cu, label: "IHS (material not reported)", initial: true, rect: {x_um: "0", y_um: "0", w_um: "sbt_w_mm * 1000", d_um: "sbt_d_mm * 1000"}, frame_inner: {w_um: {geom: lid_in_um}, d_um: {geom: lid_in_um}}, z_um: "0", h_um: {geom: foot_h_um}}
+  - {id: lid_ni_bot, name: "IHS Ni plating (underside)", piece: lid, kind: slab, material: ni, label: "Ni plating (assumed)", initial: true, z_um: {geom: foot_h_um}, h_um: {geom: lid_ni_um}}
+  - {id: lid_body, name: "IHS lid plate (Cu core)", piece: lid, kind: slab, material: cu, label: "Cu core (IHS material not reported)", initial: true, z_um: "foot_h_um + lid_ni_um", h_um: "lid_h_um - 2 * lid_ni_um"}
+  - {id: lid_ni_top, name: "IHS Ni plating (top)", piece: lid, kind: slab, material: ni, label: "Ni plating (assumed)", initial: true, z_um: "foot_h_um + lid_h_um - lid_ni_um", h_um: {geom: lid_ni_um}}
+  - {id: bga_ball, name: "BGA ball (low-temperature solder)", piece: substrate, kind: solder, material: solder, label: "Bi-Sn(-Ag) LTS (alloy not named)", site: bga, form: sphere, dir: down, z_um: {geom: bga_d_um}, d_um: {geom: bga_d_um}, h_um: {geom: bga_d_um}, wet_d_um: {geom: bga_wet_d_um}, liquidus_c: {geom: liq_bga_c}}
+
+profiles:
+  - id: tcb_T
+    q: T
+    unit: C
+    trace: actual
+    label: "joint (actual)"
+    note: "proposal X3 (low confidence): EMIB top-die TCB joint temperature, s from contact; built from an Intel 2015 TCB process description (P17), a K&S head paper (P18) and non-EMIB DB rows (A10, A13, A55); no EMIB number. Time above the 221 C liquidus: 0.81 -> 4.68 s = 3.87 s"
+    points:
+      - ["0", {template: 140, source: "RESEARCH_PENDING.md P17 (Intel TCB: substrate e.g. 140 C)", note: "proposal: contact / preheat"}]
+      - [{template: 1.1, source: "RESEARCH_PENDING.md X3 (P17 ramp > 100 C/s)", note: "proposal: 140 -> 250 C at > 100 C/s"}, {template: 250, source: "RESEARCH_PENDING.md X3 (A55 / A10 SnAg joint peak 250 C)", note: "proposal: joint peak"}]
+      - [{template: 4.1, source: "RESEARCH_PENDING.md X3 (A13 6 s, A10 7 s)", note: "proposal: 3.0 s hold at the 250 C peak (time above the 221 C liquidus 3.87 s with the ramps)"}, {template: 250, source: "RESEARCH_PENDING.md X3", note: "proposal: joint peak hold"}]
+      - [{template: 6.3, source: "RESEARCH_PENDING.md X3 (P17 cooling > 50 C/s)", note: "proposal: release"}, {template: 140, source: "RESEARCH_PENDING.md X3 (P17)", note: "proposal: back to the contact temperature"}]
+  - id: tcb_F
+    q: F
+    unit: N
+    label: "bond force"
+    note: "proposal X3 (low confidence): constant 39.2 N (A13) until the joint crosses the 221 C liquidus at 0.81 s, then position control (solder chase, P17 / A17; force not drawn after)"
+    points:
+      - ["0", {analog: ectc51529.2024.00311-F1-s08.force_n, note: "4 kgf fluxless D2W TCB force (A13)"}]
+      - [{template: 0.81, source: "RESEARCH_PENDING.md X3", note: "proposal: joint reaches 221 C on the 140 -> 250 C ramp"}, {analog: ectc51529.2024.00311-F1-s08.force_n, note: "constant force until melt"}]
+  - id: btcb_T
+    q: T
+    unit: C
+    trace: actual
+    label: "bridge joint (actual)"
+    note: "proposal X4 (low confidence): EMIB-T bridge panel-level TCB, same shape as X3 with the SnAg joint (X5); no condition found (P26). Time above the 221 C liquidus 3.87 s"
+    points:
+      - ["0", {template: 140, source: "RESEARCH_PENDING.md P17 (Intel TCB: substrate e.g. 140 C)", note: "proposal: contact / preheat"}]
+      - [{template: 1.1, source: "RESEARCH_PENDING.md X4 (P17 ramp > 100 C/s)", note: "proposal: 140 -> 250 C at > 100 C/s"}, {template: 250, source: "RESEARCH_PENDING.md X4 (A55 / A10 SnAg joint peak 250 C)", note: "proposal: joint peak"}]
+      - [{template: 4.1, source: "RESEARCH_PENDING.md X4 (A13 6 s, A10 7 s)", note: "proposal: 3.0 s hold at the 250 C peak (time above the 221 C liquidus 3.87 s with the ramps)"}, {template: 250, source: "RESEARCH_PENDING.md X4", note: "proposal: joint peak hold"}]
+      - [{template: 6.3, source: "RESEARCH_PENDING.md X4 (P17 cooling > 50 C/s)", note: "proposal: release"}, {template: 140, source: "RESEARCH_PENDING.md X4 (P17)", note: "proposal: back to the contact temperature"}]
+
+steps:
+  buildup.laminate:
+    - {op: coat, body: "abf_{i}", method: vacuum_laminate, label: "ABF level {i}"}
+  buildup.cure:
+    - {op: cure, bodies: ["abf_{i}"], label: "cure level {i}"}
+  buildup.laser_via:
+    - {op: etch_via, hole: "mv_{i}_c1", method: laser, label: "laser vias level {i} (DIE 1 field)"}
+    - {op: etch_via, hole: "mv_{i}_c2", method: laser, label: "laser vias level {i} (DIE 2 field)"}
+    - {op: etch_via, hole: "mv_{i}_c3", method: laser, label: "laser vias level {i} (DIE 3 field)"}
+  buildup.desmear:
+    - {op: clean, method: desmear, label: "desmear level {i}"}
+  buildup.seed:
+    - {op: deposit, film: "seed_{i}", method: electroless, label: "seed level {i}"}
+  buildup.litho:
+    - {op: coat, body: "dfr_{i}", method: dry_film, label: "dry film level {i}"}
+    - {op: pattern, body: "dfr_{i}", method: aligner, tone: negative, label: "expose / develop level {i}"}
+  buildup.plate:
+    - {op: plate, bodies: ["vf_{i}_c1", "vf_{i}_c2", "vf_{i}_c3", "cu_{i}"], mode: through_mask, label: "Cu plating level {i}"}
+  buildup.strip:
+    - {op: strip, bodies: ["dfr_{i}"], method: resist_strip, label: "strip level {i}"}
+  buildup.seed_etch:
+    - {op: strip, bodies: ["seed_{i}"], method: seed_etch, label: "seed etch level {i}"}
+  cavity:
+    view: {primary: block, pip: cell, cell_site: fv_1a}  # block shows the cavity wall, floor and build-up (final audit F5)
+    calls:
+      - {op: etch_recess, cut: "cav_{k}", method: laser, repeat_over: {n: {geom: bridge_n}, var: k}, label: "cavity {k}"}
+  cavity_t:
+    view: {primary: block, pip: work}
+    calls:
+      - {op: etch_recess, cut: "cav_t_{k}", method: laser, repeat_over: {n: {geom: bridge_n}, var: k}, label: "cavity {k}"}
+      - {op: plate, bodies: [cpfin_1, cpfin_2], mode: panel, tool: {id: wet_bench}, label: "cavity pad finish (ENi / Au, assumed)"}
+  bridge_place:
+    view: {primary: block, pip: cell, cell_site: fv_1a}
+    calls:
+      - {op: coat, body: "adh_{k}", method: print, repeat_over: {n: {geom: bridge_n}, var: k}, label: "adhesive {k} (form not reported)"}
+      - op: place
+        piece: bridge
+        onto: substrate
+        flip: false
+        medium: adhesive
+        at:
+          - {x_um: {geom: bx_um}, y_um: "0", z_um: "cav_z_um + adh_h_um"}
+          - {x_um: "0 - bx_um", y_um: "0", z_um: "cav_z_um + adh_h_um"}
+  bridge_place_t:
+    view: {primary: block, pip: cell, cell_site: cpad_1}
+    calls:
+      - op: bond_tcb
+        piece: bridge_t
+        onto: substrate
+        flip: false
+        solder: [bt_sol]
+        profiles: {T: btcb_T}
+        at:
+          - {x_um: {geom: bx_um}, y_um: "0", z_um: "base_top_um + cav_fin_um"}
+          - {x_um: "0 - bx_um", y_um: "0", z_um: "base_top_um + cav_fin_um"}
+  bridge_uf_t:
+    calls:
+      - {op: underfill, fill: "uf_br_{k}", gap_um: {geom: bt_jh_um}, length_mm: {geom: t_bridge_w_mm}, dispense: one_side, repeat_over: {n: {geom: bridge_n}, var: k}, label: "bridge {k}"}
+  final_lam.laminate:
+    - {op: coat, body: "cav_fill_{k}", method: vacuum_laminate, repeat_over: {n: {geom: bridge_n}, var: k}, label: "cavity {k} fill"}
+    - {op: coat, body: abf_5, method: vacuum_laminate, time: true, label: "ABF level 5"}
+  final_lam.cure:
+    - {op: cure, bodies: [cav_fill_1, cav_fill_2, abf_5]}
+  encap_t.laminate:
+    - {op: coat, body: "cav_fill_t_{k}", method: vacuum_laminate, repeat_over: {n: {geom: bridge_n}, var: k}, label: "encapsulate bridge {k}"}
+    - {op: coat, body: abf_5, method: vacuum_laminate, time: true, label: "ABF level 5"}
+  encap_t.cure:
+    - {op: cure, bodies: [cav_fill_t_1, cav_fill_t_2, abf_5]}
+  via_drill.drill:
+    - {op: etch_via, hole: "mv5f_{k}a", method: laser, repeat_over: {n: {geom: bridge_n}, var: k}, label: "fine vias, bridge {k}, DIE 1 side"}
+    - {op: etch_via, hole: "mv5f_{k}b", method: laser, repeat_over: {n: {geom: bridge_n}, var: k}, label: "fine vias, bridge {k}, outer side"}
+    - {op: etch_via, hole: mv5c_c1, method: laser, label: "coarse vias (DIE 1 field)"}
+    - {op: etch_via, hole: mv5c_c2, method: laser, label: "coarse vias (DIE 2 field)"}
+    - {op: etch_via, hole: mv5c_c3, method: laser, label: "coarse vias (DIE 3 field)"}
+  via_t.drill:
+    - {op: etch_via, hole: "mv5t_{k}a", method: laser, repeat_over: {n: {geom: bridge_n}, var: k}, label: "direct vias, bridge {k}, DIE 1 side"}
+    - {op: etch_via, hole: "mv5t_{k}b", method: laser, repeat_over: {n: {geom: bridge_n}, var: k}, label: "direct vias, bridge {k}, outer side"}
+    - {op: etch_via, hole: mv5c_c1, method: laser, label: "coarse vias (DIE 1 field)"}
+    - {op: etch_via, hole: mv5c_c2, method: laser, label: "coarse vias (DIE 2 field)"}
+    - {op: etch_via, hole: mv5c_c3, method: laser, label: "coarse vias (DIE 3 field)"}
+  via_plating.desmear:
+    - {op: clean, method: desmear, label: "desmear"}
+  via_plating.seed:
+    - {op: deposit, film: seed_5, method: electroless}
+  via_plating.litho:
+    - {op: coat, body: dfr_5, method: dry_film}
+    - {op: pattern, body: dfr_5, method: aligner, tone: negative}
+  via_plating.plate:
+    - {op: plate, bodies: [vf5f_1a, vf5f_1b, vf5f_2a, vf5f_2b, vf5t_1a, vf5t_1b, vf5t_2a, vf5t_2b, vf5c_c1, vf5c_c2, vf5c_c3, cu_5], mode: through_mask}
+  via_plating.strip:
+    - {op: strip, bodies: [dfr_5], method: resist_strip}
+  via_plating.seed_etch:
+    - {op: strip, bodies: [seed_5], method: seed_etch}
+  bumps:
+    view: {primary: cell, pip: block, cell_site: fv_1a}
+    calls:
+      - {op: coat, body: sr, method: dry_film, label: "solder resist"}
+      - {op: pattern, body: sr, method: aligner, tone: negative, label: "SR openings"}
+      - {op: plate, bodies: [fb_cu_1a, fb_cu_1b, fb_cu_2a, fb_cu_2b, cb_cu_1, cb_cu_2, cb_cu_3, fb_cap_1a, fb_cap_1b, fb_cap_2a, fb_cap_2b, cb_cap_1, cb_cap_2, cb_cap_3], mode: through_mask, label: "Cu, then SnAg caps"}
+  fli_t:
+    view: {primary: cell, pip: block, cell_site: fvt_1a}
+    calls:
+      - {op: coat, body: sr_t, method: dry_film, label: "solder resist"}
+      - {op: pattern, body: sr_t, method: aligner, tone: negative, label: "SR openings"}
+      - {op: plate, bodies: [ft_cu_1a, ft_cu_1b, ft_cu_2a, ft_cu_2b, cb_cu_1, cb_cu_2, cb_cu_3, ft_cap_1a, ft_cap_1b, ft_cap_2a, ft_cap_2b, cb_cap_1, cb_cap_2, cb_cap_3], mode: through_mask, label: "Cu, then SnAg caps"}
+  tcb:
+    view: {primary: block, pip: cell, cell_site: fv_1a}
+    calls:
+      - op: bond_tcb
+        label: "DIE 1"
+        piece: top_dies
+        onto: substrate
+        flip: true
+        solder: [fb_cap_1a, fb_cap_2a, ft_cap_1a, ft_cap_2a, cb_cap_1]
+        profiles: {T: tcb_T, F: tcb_F}
+        at: [{x_um: "0", y_um: "0", z_um: {geom: bump_top_um}}]
+      - op: bond_tcb
+        label: "DIE 2 / DIE 3"
+        piece: die2
+        onto: substrate
+        flip: true
+        solder: [fb_cap_1b, fb_cap_2b, ft_cap_1b, ft_cap_2b, cb_cap_2, cb_cap_3]
+        profiles: {T: tcb_T, F: tcb_F}
+        at:
+          - {x_um: {geom: d2c_um}, y_um: "0", z_um: {geom: bump_top_um}}
+          - {x_um: "0 - d2c_um", y_um: "0", z_um: {geom: bump_top_um}}
+  cuf:
+    calls:
+      - {op: underfill, fill: cuf, gap_um: {geom: fli_gap_um}, length_mm: {geom: d1_d_mm}, dispense: one_side, label: "DIE 1"}
+      - {op: underfill, fill: cuf_2, gap_um: {geom: fli_gap_um}, length_mm: {geom: d2_d_mm}, dispense: one_side, label: "DIE 2"}
+      - {op: underfill, fill: cuf_3, gap_um: {geom: fli_gap_um}, length_mm: {geom: d2_d_mm}, dispense: one_side, label: "DIE 3"}
+  cuf_cure:
+    calls:
+      - {op: cure, bodies: [cuf, cuf_2, cuf_3]}
+  lid:
+    view: {primary: block, pip: work}
+    calls:
+      - {op: coat, body: tim_1, method: print, label: "TIM, DIE 1"}
+      - {op: coat, body: tim_2, method: print, label: "TIM, DIE 2"}
+      - {op: coat, body: tim_3, method: print, label: "TIM, DIE 3"}
+      - {op: coat, body: seal, method: print, label: "sealant"}
+      - op: place
+        piece: lid
+        onto: substrate
+        flip: false
+        medium: adhesive
+        medium_body: seal
+        at: [{x_um: "0", y_um: "0", z_um: "sr_top_um + seal_h_um"}]
+  bga:
+    orient: down
+    calls:
+      - {op: ball_attach, solder: [bga_ball], method: ball_drop}

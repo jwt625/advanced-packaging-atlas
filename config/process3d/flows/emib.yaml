@@ -1,0 +1,618 @@
+# Process-animation flow (content + provenance). Format: config/process3d/COMPOSITION.md. Check:
+# uv run python scripts/check_process_flows.py --flow emib
+# Composite EMIB flow, contract v1 shape (one step per DB step; composite DB steps carry ops; routes filter the order).
+# Route emib: backbone ectc.2016.201-F2 (Intel 2016 EMIB substrate and assembly, Fig. 5): build-up to the final layer,
+# cavity, bridge placement on adhesive, final build-up lamination, fine + coarse via drilling, via plating, mixed-pitch
+# bumps, TCB, capillary underfill. Route emib_t: backbone ectc51687.2025.00051-F1 (Intel 2025 EMIB-T key differences,
+# Fig. 4): cavity pad finish and cavity, TSV bridge soldered to cavity pads, underfill under the bridge, dielectric
+# encapsulation, direct vias, surface layer + FLI; "no significant process difference" before and after these steps
+# (00051 Sec. III.B), so the build-up, via plating and final assembly steps are shared with route emib.
+# Finish after the 2016 backbone (underfill cure, IHS lid + TIM, BGA) is inserted from Intel EMIB-family flows.
+# Start state: the bridge dies arrive pre-fabricated (see pieces.bridge / pieces.bridge_t and COMPOSITION.md).
+id: emib
+json_id: emib_composite
+family: emib
+name: "EMIB / EMIB-T (composite: Intel 2016 and 2025 backbones + DB modules)"
+format: process3d-flow/1
+kind: composite
+summary: >-
+  Intel EMIB: organic build-up (ABF lamination, laser via, desmear, electroless seed, SAP) to the bridge layer, cavity,
+  thin Si bridge on adhesive, final build-up, fine vias onto bridge pads and coarse vias elsewhere, via plating,
+  55 / 130 um bumps, TCB, underfill, lid, BGA. EMIB-T: TSV bridge soldered to cavity pads, underfilled, encapsulated.
+backbone:
+  flow: ectc.2016.201-F2
+  note: "EMIB substrate and assembly (ectc.2016.201 p.6 Sec. III, Fig. 5)."
+family_papers: [ectc.2016.201, ectc51687.2025.00012, ectc51687.2025.00051, ectc51687.2025.00061, ectc51846.2026.00134,
+                ectc51846.2026.00365, ectc51846.2026.00051]
+package3d: emib
+
+pieces:
+  substrate: {kind: substrate, name: "organic FCBGA substrate (panel processing; root of the package)"}
+  bridge:
+    kind: die
+    routes: [emib]
+    name: "EMIB Si bridge (no TSV), pre-fabricated"
+    note: "Arrives thinned and singulated: its BEOL, thinning (< 75 um) and singulation are a separate wafer-fab flow (ectc.2016.201-F1, generic_platform, no conditions); both backbones start at the substrate with the bridge as an input."
+  bridge_t:
+    kind: die
+    routes: [emib_t]
+    name: "EMIB-T Si bridge with TSVs, pre-fabricated"
+    note: "Arrives thinned with backside solder bumps; its fab is not described in ectc51687.2025.00051 (Sec. III.C lists 'thin TSV bridge die preparation' only as a consideration)."
+  top_dies: {kind: die, name: "DIE 1 (known-good die, pads on the bump side)"}
+  die2: {kind: die, name: "DIE 2 / DIE 3 (known-good dies, 2 per package)"}
+  lid: {kind: other, name: "IHS lid"}
+
+start:
+  substrate:
+    note: "Core with plated through holes and core Cu (FCBGA); not part of either backbone."
+    evidence: [ectc.2016.201-F2-s01, ectc.2016.201-a-c2]
+    values:
+      core_h_um: {geom: core_h_um}
+      pth_d_um: {geom: pth_d_um}
+      w_mm: {geom: sbt_w_mm}
+      d_mm: {geom: sbt_d_mm}
+  bridge:
+    note: "Thin Si bridge, 4 Cu levels at 2/2 um, pad layer, no TSV."
+    evidence: [ectc.2016.201-F1-s01, ectc.2016.201-F1-s02, ectc.2016.201-F1-s03, ectc.2016.201-a-c1]
+    values:
+      w_mm: {geom: bridge_w_mm}
+      d_mm: {geom: bridge_d_mm}
+      h_um: {geom: bridge_h_um}
+      m_n: {geom: m_n}
+      m_line_um: {geom: m_line_um}
+      m_space_um: {geom: m_space_um}
+  bridge_t:
+    note: "EMIB-T bridge (EMIB25T TV geometry of the package3d emib_t base)."
+    evidence: [ectc51846.2026.00051-b-c1, ectc51687.2025.00051-a-c1]
+    values:
+      w_mm: {geom: t_bridge_w_mm}
+      d_mm: {geom: t_bridge_d_mm}
+      h_um: {geom: t_bridge_h_um}
+      tsv_d_um: {geom: t_tsv_d_um}
+      m_n: {geom: t_m_n}
+  top_dies:
+    note: "EMIB: DIE 1-3 of Fig. 4(a) (package3d emib analog sizes); EMIB-T: top dies of the 00051 TV (size not given)."
+    evidence: [ectc.2016.201-a-c5, ectc51687.2025.00051-a-c4]
+    values:
+      d1_w_mm: {geom: d1_w_mm}
+      d1_d_mm: {geom: d1_d_mm}
+      d1_h_um: {geom: d1_h_um}
+
+geometry:
+  # ---- EMIB (package3d emib, base variant fig4a_3die)
+  sbt_w_mm: {package3d: sbt_w_mm}
+  sbt_d_mm: {package3d: sbt_d_mm}
+  sbt_h_um: {package3d: sbt_h_um}
+  core_h_um: {package3d: core_h_um}
+  pth_d_um: {package3d: pth_d_um}
+  bu_n: {package3d: bu_n}
+  bu_diel_um: {package3d: bu_diel_um}
+  cu_h_um: {package3d: cu_h_um}
+  sr_h_um: {package3d: sr_h_um}
+  bu_line_um: {package3d: bu_line_um}
+  bu_space_um: {package3d: bu_space_um}
+  mvia_d_um: {package3d: mvia_d_um}
+  mvia_bot_um: {package3d: mvia_bot_um}
+  fv_d_um: {package3d: fv_d_um}
+  fv_bot_um: {package3d: fv_bot_um}
+  fv_land_um: {package3d: fv_land_um}
+  bridge_w_mm: {package3d: bridge_w_mm}
+  bridge_d_mm: {package3d: bridge_d_mm}
+  bridge_n: {package3d: bridge_n}
+  bridge_h_um: {package3d: bridge_h_um}
+  m_n: {package3d: m_n}
+  m_line_um: {package3d: m_line_um}
+  m_space_um: {package3d: m_space_um}
+  adh_h_um: {package3d: adh_h_um}
+  bridge_depth_um: {package3d: bridge_depth_um}
+  cav_floor_um: {package3d: cav_floor_um}
+  fine_pitch_um: {package3d: fine_pitch_um}
+  coarse_pitch_um: {package3d: coarse_pitch_um}
+  fine_d_um: {package3d: fine_d_um}
+  coarse_d_um: {package3d: coarse_d_um}
+  bump_h_um: {package3d: bump_h_um}
+  bump_cap_um: {package3d: bump_cap_um}
+  bump_cu_um:
+    template: "bump_h_um - bump_cap_um"
+    note: "Cu column of the analog 55 um-pitch bump = standoff - solder cap (package3d emib analogs)"
+  d1_w_mm: {package3d: d1_w_mm}
+  d1_d_mm: {package3d: d1_d_mm}
+  d1_h_um: {package3d: d1_h_um}
+  bga_pitch_um: {package3d: bga_pitch_um}
+  bga_d_um: {package3d: bga_d_um}
+  bga_h_um: {package3d: bga_h_um}
+  cav_w_mm: {template: "bridge_w_mm + 2 * cav_margin_mm", note: "cavity footprint not reported; bridge plus the package3d clearance on each side (illustrative)"}
+  cav_margin_mm: {package3d: emib_t.cav_margin_mm}
+  # ---- EMIB-T (package3d emib_t, base variant emib25t; the flow backbone TV is the 45 um-pitch ectc51687.2025.00051-a)
+  t_bridge_w_mm: {package3d: emib_t.bridge_w_mm}
+  t_bridge_d_mm: {package3d: emib_t.bridge_d_mm}
+  t_bridge_h_um: {package3d: emib_t.bridge_h_um}
+  t_m_n: {package3d: emib_t.m_n}
+  t_tsv_d_um: {package3d: emib_t.tsv_d_um}
+  t_cav_floor_um: {package3d: emib_t.cav_floor_um}
+  t_cav_h_um: {package3d: emib_t.cav_h_um}
+  t_cav_pitch_um: {package3d: emib_t.cav_pitch_um}
+  t_cav_d_um: {package3d: emib_t.cav_d_um}
+  t_fv_d_um: {package3d: emib_t.fv_d_um}
+  t_fv_land_um: {package3d: emib_t.fv_land_um}
+  t_overlay_um: {package3d: emib_t.overlay_um}
+  t_fli_pitch_um: {package3d: emib_t.d2d45_pitch_um}
+  t_fli_d_um: {template: "t_fli_pitch_um * fine_d_um / fine_pitch_um", note: "FLI bump diameter at 45 um pitch not reported; scaled from the 20 um / 55 um diameter-to-pitch ratio of the EMIB fine-bump analog (geometric similarity)"}
+  t_fli_h_um: {package3d: emib_t.fli_h_um}
+  # ---- solders, underfill, lid
+  liq_fli_c: {template: 221, source: "RESEARCH_TOOLS_ASSEMBLY.md A60 (NIST v4 Table 2.2.19: Sn-3.5Ag 221)", note: "FLI alloy not named (EMIB papers: solder-based); SnAg cap of the 55 um-pitch analog bump (package3d emib fine_d_um / bump_cap_um)"}
+  liq_cav_c: {template: 221, source: "RESEARCH_TOOLS_ASSEMBLY.md A60 (NIST v4: Sn-3.5Ag 221); RESEARCH_PENDING.md X5", note: "proposal: cavity-side joint alloy not reported (P12); SnAg assumed so the joint stays solid through the 100-120 C encapsulation lamination and the <= 180 C ABF cure (a Sn-Bi joint would remelt). Open: the later top-die TCB heats the FLI above the bridge to a 250 C joint peak (X3) through about 45 um of dielectric and the bridge; the cavity-joint temperature during that TCB is not reported, so whether it stays below 221 C is not known (the engine heats only the TCB's listed solder)"}
+  liq_bga_c: {template: 138, source: "RESEARCH_PENDING.md P14, P16 (Intel LTS paper, Aspandiar et al.: Bi-Sn eutectic 138 C; NIST Sn-58Bi 138, A52)", note: "EMIB CHIPS BGA low-temperature solder alloy not named (00061); Intel LTS family Bi-Sn(-Ag), melting 138-141 C"}
+  uf_gamma_n_m: {template: 0.025, source: "RESEARCH_TOOLS_ASSEMBLY.md A111 (Stencel et al., Micromachines 2023, PMC10609424, Table 2)", note: "25 mN/m at 60 C of a board-level capillary underfill (67 % quartz); CoW-class fine-filler CUF at dispense temperature not found (L33 gap 4)"}
+  uf_mu_pa_s: {template: 1.4, source: "RESEARCH_TOOLS_ASSEMBLY.md A114 (derived)", note: "effective underfill viscosity at the dispense temperature (low confidence calibration): the A114 value implied by a within-60-min CoW CUF dispense at a 100 C stage (mu <= ~1.4 Pa.s for L = 20 mm, gap 22 um); no viscosity-temperature relation found (L33 gap 4); the 25 C TDS value (22.12 Pa.s, A104) is not a dispense-temperature value and would give a 10 h fill. Fill times from it are upper bounds: A114 is an upper bound and the Washburn model has no dispense pressure"}
+  uf_theta_deg: {template: 30, source: "RESEARCH_TOOLS_ASSEMBLY.md A111 (PMC10609424 Table 2)", note: "contact angle not found for solder resist / die passivation; middle of the 25-35 deg measured on FR4, Al2O3, Cu, SnSb5, Ag (board-level underfill, med)"}
+  lid_h_um: {template: 2000, source: "RESEARCH_TOOLS_ASSEMBLY.md A153 (RESEARCH_SOTA_COWOS.md D7)", note: "EMIB IHS lid thickness not found; 2 mm lid of CoWoS-class sim models (different family; footprint drawn as the substrate)"}
+  tim_h_um: {analog: ectc51687.2025.00187-c-c6.notes, value: 85, note: "EMIB polymer TIM bond line not reported; POR polymer TIM1 BLT of a lidded FCBGA-class FEA case (RESEARCH_PENDING.md P49); InFO_oS TIM1 60 um, 30-120 um window (P50)"}
+
+groups:
+  buildup:
+    name: "build-up layer (ABF + SAP)"
+    order_source: ectc51909.2023.00298-F1
+    repeat:
+      template: "bu_n - 1"
+      note: "layers built before the bridge layer: per-side build-up count (package3d emib analog 5) minus the final layer laminated over the bridge (Fig. 5)"
+    note: "Op order of one SAP build-up layer from ectc51909.2023.00298-F1 (ABF apply and cure, laser via, desmear, electroless seed, dry film, expose, develop, Cu plating, strip, seed etch); each op's values come from the DB row it names."
+
+routes:
+  emib:
+    name: "EMIB (2016 backbone)"
+    default: true
+    family: emib
+    backbones: [ectc.2016.201-F2]
+  emib_t:
+    name: "EMIB-T (2025 TSV bridge)"
+    family: emib_t
+    backbones: [ectc51687.2025.00051-F1]
+    note: "FLI pitch of the 00051 TV (45 um); bridge geometry of the package3d emib_t base (EMIB25T)."
+
+steps:
+  # ================================================================ build-up to the bridge (cavity) layer
+  - id: buildup
+    name: "Traditional organic build-up until the final build-up layer"
+    category: other
+    piece: substrate
+    order: {kind: backbone, db: ectc.2016.201-F2-s01, represents: [ectc51687.2025.00051-F1-s01]}
+    note: "EMIB-T: 'HDI substrate build-up to cavity layer' (ectc51687.2025.00051-F1-s01), same module."
+    ops:
+      - id: laminate
+        name: "Vacuum-laminate the ABF dry-film dielectric"
+        category: lamination
+        group: buildup
+        order: {kind: expansion, db: ectc51846.2026.00103-F1-s03, note: "ABF apply (ectc51909.2023.00298-F1-s02, no conditions); conditions row = ABF GL-102 vacuum lamination (two-step pressure, first step shown)"}
+        equipment: {analog: ectc51846.2026.00103-F1-s03.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-core RDL flow, not an Intel EMIB paper)"}
+        hud:
+          temp_c: {analog: ectc51846.2026.00103-F1-s03.temp_c, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-core RDL flow, not an Intel EMIB paper)"}
+          time_s: {analog: ectc51846.2026.00103-F1-s03.time_s, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-core RDL flow, not an Intel EMIB paper)"}
+          pressure_mpa: {analog: ectc51846.2026.00103-F1-s03.pressure_mpa, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-core RDL flow, not an Intel EMIB paper)"}
+          thickness_um: {geom: bu_diel_um}
+      - id: cure
+        name: "Cure the ABF (two-stage)"
+        category: cure
+        group: buildup
+        order: {kind: expansion, db: ectc51846.2026.00103-F1-s06, evidence: [ectc51846.2026.00103-F1-s05], note: "ABF cure (ectc51909.2023.00298-F1-s03); conditions 130 C 30 min then 180 C 30 min (ectc51846.2026.00103-F1 s05, s06)"}
+        equipment: {template: "curing oven", note: "tool not named"}
+        hud:
+          temp_c: {analog: ectc51846.2026.00103-F1-s06.temp_c, note: "second cure stage (180 C, after 130 C); analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-core RDL flow, not an Intel EMIB paper)"}
+          time_s:
+            derived: "r0 + r1"
+            refs: [ectc51846.2026.00103-F1-s05.time_s, ectc51846.2026.00103-F1-s06.time_s]
+            note: "both stages (30 min at 130 C, then 30 min at 180 C)"
+          temp_stage1_c: {analog: ectc51846.2026.00103-F1-s05.temp_c, note: "first cure stage (audit A1 m14); analog, same glass-core RDL flow"}
+          time_stage1_s: {analog: ectc51846.2026.00103-F1-s05.time_s, note: "first cure stage; analog, same glass-core RDL flow"}
+      - id: laser_via
+        name: "Laser-drill the microvias"
+        category: laser_drill
+        group: buildup
+        order: {kind: expansion, db: ectc51909.2023.00021-F1-s16, note: "microvia drilling (ectc51909.2023.00298-F1-s04, fs laser on glass core); organic-substrate row: CO2 laser via through the build-up dielectric to the land"}
+        equipment: {analog: ectc51909.2023.00021-F1-s16.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Resonac fine-line build-up dielectric study, not an Intel EMIB paper)"}
+        targets:
+          via_d_um: {geom: mvia_d_um}
+          via_bot_um: {geom: mvia_bot_um}
+      - id: desmear
+        name: "Desmear the via bottoms"
+        category: desmear
+        group: buildup
+        order: {kind: expansion, db: ectc51687.2025.00359-F1-s10, note: "desmear (ectc51909.2023.00298-F1-s05, no conditions); conditions row = plasma desmear on ABF"}
+        equipment: {template: "plasma desmear chamber", note: "tool not named; mixed O2 + fluorinated gas in the source row"}
+        hud:
+          time_s: {analog: ectc51687.2025.00359-F1-s10.time_s, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Gigaphoton / Ajinomoto KrF microvia-in-ABF study, not an Intel EMIB paper)"}
+      - id: seed
+        name: "Electroless Cu seed"
+        category: electroless
+        group: buildup
+        order: {kind: expansion, db: ectc51906.2022.00360-F1-s03, note: "electroless Cu seed (ectc51909.2023.00298-F1-s06, no thickness); thickness row = electroless seed on ABF"}
+        equipment: {template: "electroless plating line", note: "tool not named"}
+        hud:
+          temp_c: {template: 40, source: "RESEARCH_PENDING.md P42 (US9702046B2: 30-60 C preferred, examples 35-55 C)", note: "48 C glass-interposer analog (tcpmt.2025.3557232-F1-s08)"}
+          thickness_um: {analog: ectc51906.2022.00360-F1-s03.thickness_um, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech laminated glass-panel flow, not an Intel EMIB paper)"}
+      - id: litho
+        name: "Laminate dry-film resist, expose, develop"
+        category: lithography
+        group: buildup
+        order: {kind: expansion, db: ectc51909.2023.00298-F1-s08, evidence: [ectc51909.2023.00298-F1-s07, ectc51909.2023.00298-F1-s09], note: "DFR apply (s07), exposure (s08), spray development 30 C (s09) of the order source, one op"}
+        equipment: {analog: ectc51909.2023.00298-F1-s08.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-substrate RDL / microvia flow, not an Intel EMIB paper)"}
+        hud:
+          dose_mj_cm2: {template: 100, source: "RESEARCH_TOOLS_FAB.md F80 (Ordyl Alpha 900 datasheet)", note: "dose not reported; upper end of the 35-100 mJ/cm2 window of a dry-film resist (PCB-grade film, low confidence)"}
+          thickness_um: {analog: ectc51909.2023.00298-F1-s07.split, value: 15, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-substrate RDL / microvia flow, not an Intel EMIB paper)"}
+        targets:
+          line_um: {geom: bu_line_um}
+          space_um: {geom: bu_space_um}
+      - id: plate
+        name: "Cu electroplating (SAP lines and via fill)"
+        category: electroplating
+        group: buildup
+        order: {kind: expansion, db: ectc51846.2026.00103-F1-s10, note: "Cu electroplating (ectc51909.2023.00298-F1-s10, no conditions); conditions row = SAP Cu plating on ABF at 1.1 A/dm2"}
+        equipment: {analog: ectc51846.2026.00103-F1-s10.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-core RDL flow, not an Intel EMIB paper)"}
+        hud:
+          current_density_ma_cm2: {analog: ectc51846.2026.00103-F1-s10.current_density_ma_cm2, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-core RDL flow, not an Intel EMIB paper)"}
+          time_s: {template: "cu_h_um / (0.02205 * 11 * 0.81) * 60", source: "RESEARCH_TOOLS_FAB.md F70, F71", note: "plating time not reported; Cu Faraday rate 0.02205 um/min per mA/cm2 (F70) at the 11 mA/cm2 of the conditions row, efficiency 0.81 (F71, low) for the drawn Cu level"}
+          thickness_um: {geom: cu_h_um}
+      - id: strip
+        name: "Strip the dry film"
+        category: resist_strip
+        group: buildup
+        order: {kind: expansion, db: ectc51909.2023.00298-F1-s11, note: "resist strip of the order source (s11)"}
+        equipment: {template: "wet bench (beaker scale in the source row)", note: "tool not named"}
+        hud:
+          temp_c: {analog: ectc51909.2023.00298-F1-s11.temp_c, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-substrate RDL / microvia flow, not an Intel EMIB paper)"}
+          time_s: {analog: ectc51909.2023.00298-F1-s11.time_s, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-substrate RDL / microvia flow, not an Intel EMIB paper)"}
+      - id: seed_etch
+        name: "Etch the seed between lines"
+        category: etch_wet
+        group: buildup
+        order: {kind: expansion, db: ectc51909.2023.00298-F1-s12, note: "seed layer etch of the order source (s12)"}
+        equipment: {analog: ectc51909.2023.00298-F1-s12.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-substrate RDL / microvia flow, not an Intel EMIB paper)"}
+        hud:
+          temp_c: {analog: ectc51909.2023.00298-F1-s12.temp_c, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-substrate RDL / microvia flow, not an Intel EMIB paper)"}
+          time_s: {analog: ectc51909.2023.00298-F1-s12.time_s, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-substrate RDL / microvia flow, not an Intel EMIB paper)"}
+  # ================================================================ cavity and bridge
+  - id: cavity
+    name: "Bridge cavity formation"
+    category: other
+    piece: substrate
+    routes: [emib]
+    order: {kind: backbone, db: ectc.2016.201-F2-s02}
+    equipment: {analog: ectc51687.2025.00378-F2-s06.equipment, note: "cavity method not stated for EMIB; analog = femtosecond laser half-cavity in build-up dielectric for an embedded chiplet (RESEARCH_TOOLS_ASSEMBLY.md A200, academic, not Intel)"}
+    targets:
+      cav_floor_um: {geom: cav_floor_um}
+      cav_w_mm: {geom: cav_w_mm}
+  - id: cavity_t
+    name: "Cavity pad preparation (surface finish) and cavity formation"
+    category: surface_finish
+    piece: substrate
+    routes: [emib_t]
+    order: {kind: backbone, db: ectc51687.2025.00051-F1-s02}
+    note: "One DB step for two actions (cavity opening and cavity-pad finish); their order and methods are not stated (Fig. 4 step 1)."
+    equipment: {analog: ectc51687.2025.00378-F2-s06.equipment, note: "cavity method not stated for EMIB-T; analog = femtosecond laser half-cavity in build-up dielectric (A200, academic); cavity-pad finish line not named"}
+    hud:
+      thickness_um: {geom: cav_fin_um}
+    targets:
+      cav_floor_um: {geom: t_cav_floor_um}
+      cav_pitch_um: {geom: t_cav_pitch_um}
+  - id: bridge_place
+    name: "Place the bridge in the cavity, held with adhesive"
+    category: die_attach
+    piece: substrate
+    routes: [emib]
+    order: {kind: backbone, db: ectc.2016.201-F2-s03}
+    equipment: {template: "die placement tool (pick-and-place)", note: "tool not named"}
+    hud:
+      temp_c: {analog: ectc51846.2026.00416-F1-s06.temp_c, note: "die into a blind cavity on DAF: > 95 C for >= 30 s; DAF cure 130 C 4 h (RESEARCH_PENDING.md P21) or 1 h (P22)"}
+      force_n: {template: 1, source: "RESEARCH_PENDING.md X7 (A2 VCM head minimum; P24)", note: "proposal: DAF cure pressure on a 2 x 2 mm bridge is only 0.14-0.41 N (P24); 1 N = lowest load of a production VCM head"}
+    targets:
+      adh_h_um: {geom: adh_h_um}
+      bridge_h_um: {geom: bridge_h_um}
+  - id: bridge_place_t
+    name: "Place the thin TSV bridge with solder joints to the cavity pads"
+    category: die_attach
+    piece: substrate
+    routes: [emib_t]
+    order: {kind: backbone, db: ectc51687.2025.00051-F1-s03, evidence: [ectc51846.2026.00051-b-i3]}
+    equipment: {template: "TCB bonder (panel level)", refs: [ectc51846.2026.00051-F1-s01.step], note: "panel-level TCB attach of the EMIB-T bridge named in ectc51846.2026.00051 (F1-s01, b-i3); 00051 2025 gives no tool"}
+    hud:
+      temp_c: {template: 280, source: "RESEARCH_PENDING.md P18 (K&S IMAPS 2014: head ~280 C)", note: "bond-head set; joint profile btcb_T (low)"}
+      force_n: {template: 10, source: "RESEARCH_PENDING.md X4 (A15)", note: "proposal: small-force TC placement load; a 3 x 18 mm bridge is lighter than a 19 x 19 mm top die (low)"}
+      time_s: {template: 6, source: "RESEARCH_PENDING.md X4 (A13)", note: "proposal: 6 s fluxless D2W TCB (low)"}
+    targets:
+      joint_h_um: {geom: t_cav_h_um}
+      joint_d_um: {geom: t_cav_d_um}
+    physics:
+      liquidus_c: {geom: liq_cav_c}
+  - id: bridge_uf_t
+    name: "Underfill between the TSV bridge back side and the cavity"
+    category: underfill
+    piece: substrate
+    routes: [emib_t]
+    order: {kind: backbone, db: ectc51687.2025.00051-F1-s04}
+    equipment: {analog: ectc51687.2025.00061-F3-s03.equipment, note: "jet valve underfill of the EMIB-family CHIPS package (RESEARCH_PENDING.md P46)"}
+    hud:
+      temp_c: {template: 100, source: "RESEARCH_TOOLS_ASSEMBLY.md A93 (stage 100 C); RESEARCH_PENDING.md P46", note: "cure 150 C 2 h (A106)"}
+    physics:
+      gamma_n_m: {geom: uf_gamma_n_m}
+      mu_pa_s: {geom: uf_mu_pa_s}
+      theta_deg: {geom: uf_theta_deg}
+  # ================================================================ final build-up / encapsulation and vias
+  - id: final_lam
+    name: "Final build-up dielectric lamination over the bridge"
+    category: lamination
+    piece: substrate
+    routes: [emib]
+    order: {kind: backbone, db: ectc.2016.201-F2-s04}
+    ops:
+      - id: laminate
+        name: "Laminate the final build-up film over the bridge"
+        category: lamination
+        order: {kind: self}
+        equipment:
+          analog: ectc51687.2025.00076-F1-s04.equipment
+          note: "tool not named; analog = lamination of ABF over an embedded die (isolation and cavity fill)"
+        hud:
+          temp_c:
+            analog: ectc51687.2025.00076-F1-s04.temp_c
+            note: "lamination conditions not reported; analog = ABF lamination over an embedded die with cavity fill (two-stage 0.7 then 0.55 MPa, 30 s each)"
+          time_s:
+            analog: ectc51687.2025.00076-F1-s04.time_s
+            note: "analog, first pressure stage of the same row"
+          pressure_mpa:
+            analog: ectc51687.2025.00076-F1-s04.pressure_mpa
+            note: "analog, first pressure stage of the same row"
+          thickness_um: {geom: bu_diel_um}
+      - id: cure
+        name: "Cure the final build-up film"
+        category: cure
+        order: {kind: expansion, db: ectc51846.2026.00103-F1-s06, evidence: [ectc51846.2026.00103-F1-s05], note: "the build-up module cures each laminated film (ectc51909.2023.00298-F1 s02 -> s03); conditions row ectc51846.2026.00103-F1 s05, s06"}
+        equipment: {template: "curing oven", note: "tool not named"}
+        hud:
+          temp_c: {analog: ectc51846.2026.00103-F1-s06.temp_c, note: "second cure stage (180 C, after 130 C); analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-core RDL flow, not an Intel EMIB paper)"}
+          time_s:
+            derived: "r0 + r1"
+            refs: [ectc51846.2026.00103-F1-s05.time_s, ectc51846.2026.00103-F1-s06.time_s]
+            note: "both stages (30 min at 130 C, then 30 min at 180 C)"
+          temp_stage1_c: {analog: ectc51846.2026.00103-F1-s05.temp_c, note: "first cure stage (audit A1 m14); analog, same glass-core RDL flow"}
+          time_stage1_s: {analog: ectc51846.2026.00103-F1-s05.time_s, note: "first cure stage; analog, same glass-core RDL flow"}
+  - id: encap_t
+    name: "Dielectric layer encapsulation of the TSV bridge"
+    category: lamination
+    piece: substrate
+    routes: [emib_t]
+    order: {kind: backbone, db: ectc51687.2025.00051-F1-s05}
+    ops:
+      - id: laminate
+        name: "Laminate the encapsulation dielectric"
+        category: lamination
+        order: {kind: self}
+        equipment:
+          analog: ectc51687.2025.00076-F1-s04.equipment
+          note: "tool not named; analog = lamination of ABF over an embedded die (isolation and cavity fill)"
+        hud:
+          temp_c:
+            analog: ectc51687.2025.00076-F1-s04.temp_c
+            note: "encapsulation conditions not reported (00051 Sec. III.C: 'dielectric material encapsulation process optimizations'); analog = ABF over an embedded die with cavity fill"
+          time_s:
+            analog: ectc51687.2025.00076-F1-s04.time_s
+            note: "analog, first pressure stage of the same row"
+          pressure_mpa:
+            analog: ectc51687.2025.00076-F1-s04.pressure_mpa
+            note: "analog, first pressure stage of the same row"
+          thickness_um: {geom: bu_diel_um}
+      - id: cure
+        name: "Cure the encapsulation dielectric"
+        category: cure
+        order: {kind: expansion, db: ectc51846.2026.00103-F1-s06, evidence: [ectc51846.2026.00103-F1-s05], note: "each laminated build-up film is cured (ectc51909.2023.00298-F1 s02 -> s03); conditions row ectc51846.2026.00103-F1 s05, s06"}
+        equipment: {template: "curing oven", note: "tool not named"}
+        hud:
+          temp_c: {analog: ectc51846.2026.00103-F1-s06.temp_c, note: "second cure stage (180 C, after 130 C); analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-core RDL flow, not an Intel EMIB paper)"}
+          time_s:
+            derived: "r0 + r1"
+            refs: [ectc51846.2026.00103-F1-s05.time_s, ectc51846.2026.00103-F1-s06.time_s]
+            note: "both stages (30 min at 130 C, then 30 min at 180 C)"
+          temp_stage1_c: {analog: ectc51846.2026.00103-F1-s05.temp_c, note: "first cure stage (audit A1 m14); analog, same glass-core RDL flow"}
+          time_stage1_s: {analog: ectc51846.2026.00103-F1-s05.time_s, note: "first cure stage; analog, same glass-core RDL flow"}
+  - id: via_drill
+    name: "Fine + coarse via drilling: fine vias onto the bridge pads, coarse elsewhere"
+    category: other
+    piece: substrate
+    routes: [emib]
+    order: {kind: backbone, db: ectc.2016.201-F2-s05}
+    ops:
+      - id: drill
+        name: "Laser-drill fine vias (bridge) and coarse vias"
+        category: laser_drill
+        order: {kind: self}
+        note: "the DB row keeps category other ('laser not stated'); the op is drawn as laser drilling, the method of the fine-via analog (laser microvias through ABF onto embedded-die pads, package3d emib fv_d_um)"
+        equipment: {template: "CO2 laser (coarse vias) + UV 355 nm laser (fine vias)", source: "RESEARCH_TOOLS_ASSEMBLY.md A167, A168, A169", note: "laser not stated; CO2 vias reach ~40 um minimum, UV-YAG / ps UV lasers form 5-15 um vias in ABF"}
+        targets:
+          fine_d_um: {geom: fv_d_um}
+          fine_bot_um: {geom: fv_bot_um}
+          fine_land_um: {geom: fv_land_um}
+          coarse_d_um: {geom: mvia_d_um}
+  - id: via_t
+    name: "Via formation to the TSV bridge pads (direct vias)"
+    category: other
+    piece: substrate
+    routes: [emib_t]
+    order: {kind: backbone, db: ectc51687.2025.00051-F1-s08}
+    ops:
+      - id: drill
+        name: "Form direct vias onto the bridge pads"
+        category: laser_drill
+        order: {kind: self}
+        note: "method not stated (DB category other); drawn as laser drilling like the EMIB route"
+        equipment: {template: "UV 355 nm laser", source: "RESEARCH_TOOLS_ASSEMBLY.md A168, A169", note: "method not stated; UV lasers form the fine vias that land on bridge pads"}
+        targets:
+          via_d_um: {geom: t_fv_d_um}
+          land_um: {geom: t_fv_land_um}
+          overlay_um: {geom: t_overlay_um}
+  - id: via_plating
+    name: "Via plating"
+    category: deposition_other
+    piece: substrate
+    order:
+      kind: backbone
+      db: ectc.2016.201-F2-s06
+      evidence: [ectc51687.2025.00051-F1-s01]
+    note: "Route emib_t borrows this 2016 step (not in ectc51687.2025.00051-F1): 00051 states no significant process difference vs EMIB outside its Fig. 4 steps (Sec. III.B; s01 notes). Op order from the SAP module ectc51909.2023.00298-F1 (s05-s12)."
+    ops:
+      - id: desmear
+        name: "Desmear"
+        category: desmear
+        order: {kind: expansion, db: ectc51687.2025.00359-F1-s10, note: "desmear before seed (ectc51909.2023.00298-F1-s05); conditions row = plasma desmear on ABF"}
+        equipment: {template: "plasma desmear chamber", note: "tool not named"}
+        hud:
+          time_s: {analog: ectc51687.2025.00359-F1-s10.time_s, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Gigaphoton / Ajinomoto KrF microvia-in-ABF study, not an Intel EMIB paper)"}
+      - id: seed
+        name: "Electroless Cu seed"
+        category: electroless
+        order: {kind: expansion, db: ectc51906.2022.00360-F1-s03, note: "electroless seed (ectc51909.2023.00298-F1-s06); thickness row on ABF"}
+        equipment: {template: "electroless plating line", note: "tool not named"}
+        hud:
+          temp_c: {template: 40, source: "RESEARCH_PENDING.md P42 (US9702046B2: 30-60 C preferred, examples 35-55 C)", note: "48 C glass-interposer analog (tcpmt.2025.3557232-F1-s08)"}
+          thickness_um: {analog: ectc51906.2022.00360-F1-s03.thickness_um, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech laminated glass-panel flow, not an Intel EMIB paper)"}
+      - id: litho
+        name: "Laminate dry-film resist, expose, develop"
+        category: lithography
+        order: {kind: expansion, db: ectc51909.2023.00298-F1-s08, evidence: [ectc51909.2023.00298-F1-s07, ectc51909.2023.00298-F1-s09], note: "DFR apply, exposure, development (order source s07-s09)"}
+        equipment: {analog: ectc51909.2023.00298-F1-s08.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-substrate RDL / microvia flow, not an Intel EMIB paper)"}
+        hud:
+          dose_mj_cm2: {template: 100, source: "RESEARCH_TOOLS_FAB.md F80 (Ordyl Alpha 900 datasheet)", note: "dose not reported; upper end of the 35-100 mJ/cm2 window of a dry-film resist (PCB-grade film, low confidence)"}
+          thickness_um: {analog: ectc51909.2023.00298-F1-s07.split, value: 15, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-substrate RDL / microvia flow, not an Intel EMIB paper)"}
+      - id: plate
+        name: "Electroplate Cu (fill vias, form pads)"
+        category: electroplating
+        order: {kind: self}
+        note: "the backbone row: 'Via Plating' (Fig. 5), method not stated (DB category deposition_other); drawn as SAP Cu electroplating"
+        equipment:
+          analog: ectc51846.2026.00103-F1-s10.equipment
+          note: "tool not named; analog = SAP Cu plating line on ABF"
+        hud:
+          current_density_ma_cm2:
+            analog: ectc51846.2026.00103-F1-s10.current_density_ma_cm2
+            note: "plating not described; analog = 1.1 A/dm2 SAP Cu on ABF"
+          time_s: {template: "cu_h_um / (0.02205 * 11 * 0.81) * 60", source: "RESEARCH_TOOLS_FAB.md F70, F71", note: "plating time not reported; Cu Faraday rate 0.02205 um/min per mA/cm2 (F70) at the 11 mA/cm2 of the conditions row, efficiency 0.81 (F71, low) for the drawn Cu level"}
+          thickness_um: {geom: cu_h_um}
+      - id: strip
+        name: "Strip the dry film"
+        category: resist_strip
+        order: {kind: expansion, db: ectc51909.2023.00298-F1-s11, note: "resist strip (s11)"}
+        equipment: {template: "wet bench", note: "tool not named"}
+        hud:
+          temp_c: {analog: ectc51909.2023.00298-F1-s11.temp_c, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-substrate RDL / microvia flow, not an Intel EMIB paper)"}
+          time_s: {analog: ectc51909.2023.00298-F1-s11.time_s, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-substrate RDL / microvia flow, not an Intel EMIB paper)"}
+      - id: seed_etch
+        name: "Etch the seed"
+        category: etch_wet
+        order: {kind: expansion, db: ectc51909.2023.00298-F1-s12, note: "seed layer etch (s12)"}
+        equipment: {analog: ectc51909.2023.00298-F1-s12.equipment, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-substrate RDL / microvia flow, not an Intel EMIB paper)"}
+        hud:
+          temp_c: {analog: ectc51909.2023.00298-F1-s12.temp_c, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-substrate RDL / microvia flow, not an Intel EMIB paper)"}
+          time_s: {analog: ectc51909.2023.00298-F1-s12.time_s, note: "analog (audit A1 M11): value of the DB flow that orders this step or op (another build: Georgia Tech glass-substrate RDL / microvia flow, not an Intel EMIB paper)"}
+  # ================================================================ first-level interconnect
+  - id: bumps
+    name: "Mixed-CD / mixed-pitch bump formation with bump height control"
+    category: bumping
+    piece: substrate
+    routes: [emib]
+    order: {kind: backbone, db: ectc.2016.201-F2-s07, evidence: [ectc51687.2025.00051-F2-s04]}
+    note: "Bump side not stated in 2016; drawn on the substrate, where the EMIB baseline flow of ectc51687.2025.00051 forms the surface layer and FLI (F2-s04). Solder resist (surface layer) is part of this step."
+    equipment: {template: "panel electroplating line (through-resist Cu and solder plating)", refs: [ectc51909.2023.00298-F1-s10.step], source: "RESEARCH_PENDING.md X9", note: "proposal: process not stated (2016); FLI by plating (P47), panel Cu plating tank (P48)"}
+    hud:
+      thickness_um: {geom: bump_h_um, note: "bump height above the solder resist, one height for both CDs (bump height control)"}
+    targets:
+      fine_pitch_um: {geom: fine_pitch_um}
+      coarse_pitch_um: {geom: coarse_pitch_um}
+      fine_d_um: {geom: fine_d_um}
+      coarse_d_um: {geom: coarse_d_um}
+      fine_cap_um: {geom: fine_cap_um}
+      coarse_cap_um: {geom: bump_cap_um}
+      fine_cu_um: {geom: fine_cu_um}
+      coarse_cu_um: {geom: bump_cu_um}
+      sr_h_um: {geom: sr_h_um}
+  - id: fli_t
+    name: "Surface layer and first-level interconnect formation (45 um pitch)"
+    category: bumping
+    piece: substrate
+    routes: [emib_t]
+    order: {kind: backbone, db: ectc51687.2025.00051-F1-s06}
+    equipment: {template: "panel electroplating line (through-resist Cu and solder plating)", refs: [ectc51846.2026.00051-F1-s04.step], source: "RESEARCH_PENDING.md X9", note: "proposal: FLI bump plating named, tool not named"}
+    hud:
+      thickness_um: {geom: bump_h_um, note: "FLI height not reported; same plated height as the EMIB mixed-pitch analog bump (bump height control)"}
+    targets:
+      pitch_um: {ref: ectc51687.2025.00051-a-i1.pitch_um}
+      diameter_um: {geom: t_fli_d_um}
+      cap_um: {geom: t_fli_cap_um}
+      cu_um: {geom: t_fli_cu_um}
+      sr_h_um: {geom: sr_h_um}
+  # ================================================================ assembly (shared)
+  - id: tcb
+    name: "Chip attach by thermocompression bonding (TCB)"
+    category: bonding
+    piece: substrate
+    order: {kind: backbone, db: ectc.2016.201-F2-s08, represents: [ectc51687.2025.00051-F1-s07]}
+    note: "EMIB-T final package assembly (00051-F1-s07) is 'same as EMIB' (Sec. III.B)."
+    equipment: {template: "TCB bonder (bond head)", note: "TCB named in 2016; tool not named"}
+    hud:
+      temp_c: {template: 280, source: "RESEARCH_PENDING.md P18 (K&S); A13 325 C alternative", note: "bond-head set; joint profile tcb_T peaks at 250 C (low)"}
+      time_s: {analog: ectc51529.2024.00311-F1-s08.time_s, note: "6 s fluxless D2W TCB (RESEARCH_TOOLS_ASSEMBLY.md A13)"}
+      force_n: {analog: ectc51529.2024.00311-F1-s08.force_n, note: "4 kgf fluxless D2W TCB (A13); large dies up to 300 N (A21)"}
+      stage_temp_c: {template: 140, source: "RESEARCH_PENDING.md P17 (Intel TCB: substrate e.g. 140 C)", note: "substrate stage temperature during TCB (= the first point of the joint profile tcb_T). The head profile (250 C joint peak) applies to the top-die FLI joints only; joints buried below the die stack, e.g. the EMIB-T bridge joint (SnAg 221 C, assumed X5) under about 45 um of dielectric, see about the stage temperature and stay solid (final audit F7; their actual temperature is not reported)"}
+    targets:
+      die_w_mm: {geom: d1_w_mm}
+      die_d_mm: {geom: d1_d_mm}
+      standoff_um: {geom: fli_gap_um, note: "die face above the solder resist after TCB: one plated bump height minus the common joint collapse (bump height control, geometry companion)"}
+    physics:
+      liquidus_c: {geom: liq_fli_c}
+  - id: cuf
+    name: "Capillary epoxy underfill"
+    category: underfill
+    piece: substrate
+    order: {kind: backbone, db: ectc.2016.201-F2-s09, evidence: [ectc51687.2025.00051-F1-s07]}
+    note: "Route emib_t borrows this 2016 step: ectc51687.2025.00051-F1 s07 'final package assembly (top dies)' is 'same as EMIB' (Sec. III.B) and lists no underfill step of its own."
+    targets:
+      gap_um: {geom: fli_gap_um}
+    equipment: {ref: ectc51687.2025.00061-F3-s03.equipment, note: "jet valve underfill in the EMIB CHIPS prototype package flow (EMIB family paper)"}
+    hud:
+      temp_c: {template: 70, source: "RESEARCH_TOOLS_ASSEMBLY.md A99", note: "not reported; lower end of the 70-80 C substrate preheat for capillary underfill"}
+    physics:
+      gamma_n_m: {geom: uf_gamma_n_m}
+      mu_pa_s: {geom: uf_mu_pa_s}
+      theta_deg: {geom: uf_theta_deg}
+  - id: cuf_cure
+    name: "Cure the underfill"
+    category: cure
+    piece: substrate
+    order: {kind: inserted, db: ectc51846.2026.00365-F6-s02, note: "Intel EMIB-family encapsulation flow: capillary underfill then cure (ectc51846.2026.00365-F6 s01 -> s02); cure values not disclosed there"}
+    equipment: {template: "curing oven", note: "tool not named"}
+    hud:
+      temp_c: {template: 150, source: "RESEARCH_TOOLS_ASSEMBLY.md A106 (Henkel UF 8830S TDS)", note: "EMIB cure values not disclosed (00365); FCBGA CUF cure 150 C (after a 30 min ramp)"}
+      time_s: {template: 7200, source: "RESEARCH_TOOLS_ASSEMBLY.md A106", note: "hold 2 h at 150 C (FCBGA CUF TDS)"}
+  - id: lid
+    name: "IHS lid attach with polymer TIM"
+    category: assembly
+    piece: substrate
+    order: {kind: inserted, db: ectc51687.2025.00061-F3-s04, evidence: [ectc51687.2025.00012-F1-s03], note: "after underfill, before BGA in the EMIB CHIPS prototype flow (ectc51687.2025.00061-F3 s03 -> s04 -> s05) and the standard EMIB MCP flow (ectc51687.2025.00012-F1 s02 -> s03 -> s04)"}
+    equipment: {template: "lid attach (TIM dispense, sealant, placement)", note: "tool not named"}
+    targets:
+      lid_h_um: {geom: lid_h_um}
+      tim_h_um: {geom: tim_h_um}
+      tim: {ref: ectc51687.2025.00061-F3-s04.material}
+      seal_h_um: {geom: seal_h_um}
+      foot_h_um: {geom: foot_h_um}
+  - id: bga
+    name: "BGA ball attach with low-temperature solder"
+    category: ball_attach
+    piece: substrate
+    order: {kind: inserted, db: ectc51687.2025.00061-F3-s05, note: "last assembly step in ectc51687.2025.00061-F3 (s05) and ectc51687.2025.00012-F1 (s04)"}
+    equipment: {template: "ball mounter + reflow oven", note: "tools not named"}
+    hud:
+      temp_c_max: {template: 175, source: "RESEARCH_PENDING.md P15 (Intel: Bi-Sn-Ag peak 170-180 C)", note: "00027 LTS top 160 C (A51); below the 221 C SnAg FLI and cavity joints, which stay solid"}
+    targets:
+      ball_d_um: {geom: bga_d_um}
+      ball_pitch_um: {geom: bga_pitch_um}
+      ball_h_um: {geom: bga_h_um}
+    physics:
+      liquidus_c: {geom: liq_bga_c}
