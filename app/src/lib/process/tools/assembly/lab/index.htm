@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Assembly Tool Lab</title>
+<style>
+	:root { --bg: #0e0f11; --panel: #16181b; --line: #2a2d32; --fg: #d6d8dc; --dim: #8a8f98; --acc: #c27c45; --tpl: #7d8088; }
+	* { box-sizing: border-box; border-radius: 0; }
+	html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); font: 12px/1.35 ui-monospace, Menlo, monospace; }
+	#app { display: grid; grid-template-columns: 300px 1fr; height: 100%; }
+	#side { border-right: 1px solid var(--line); background: var(--panel); overflow-y: auto; padding: 8px; }
+	#side h1 { font-size: 12px; margin: 0 0 6px; color: var(--dim); font-weight: normal; }
+	#tools { display: grid; grid-template-columns: 1fr; gap: 1px; margin-bottom: 8px; }
+	#tools button { text-align: left; background: transparent; color: var(--fg); border: 1px solid transparent; padding: 2px 4px; font: inherit; cursor: pointer; }
+	#tools button:hover { border-color: var(--line); }
+	#tools button.on { border-color: var(--acc); color: #fff; }
+	#tools button .c { color: var(--dim); float: right; }
+	.row { display: grid; grid-template-columns: 40px 1fr 52px; align-items: center; gap: 4px; margin: 4px 0; }
+	.row input[type=range] { width: 100%; }
+	.tog { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0; }
+	label { color: var(--fg); }
+	table { border-collapse: collapse; width: 100%; margin-top: 6px; }
+	td { padding: 1px 3px; border-bottom: 1px solid var(--line); vertical-align: top; }
+	td.v { text-align: right; white-space: nowrap; }
+	tr.template td { color: var(--tpl); }
+	#view { position: relative; }
+	canvas#cv { display: block; width: 100%; height: 100%; }
+	#hud { position: absolute; left: 8px; top: 6px; color: var(--dim); pointer-events: none; white-space: pre; }
+	#plot { position: absolute; right: 8px; bottom: 8px; background: rgba(14, 15, 17, 0.85); border: 1px solid var(--line); }
+	#tip { position: absolute; pointer-events: none; background: #000c; border: 1px solid var(--line); padding: 3px 5px; display: none; max-width: 420px; }
+</style>
+</head>
+<body>
+<div id="app">
+	<div id="side">
+		<h1>assembly tool lab (dev only, L38)</h1>
+		<div id="tools"></div>
+		<div class="tog">
+			<label><input type="radio" name="scale" value="work" checked /> work</label>
+			<label><input type="radio" name="scale" value="block" /> block</label>
+			<label><input id="ill" type="checkbox" checked /> illustrative</label>
+			<label><input id="play" type="checkbox" /> play</label>
+		</div>
+		<div class="row"><b>t</b><input id="t" type="range" min="0" max="1" step="0.001" value="0.5" /><span id="tv"></span></div>
+		<div id="info"></div>
+	</div>
+	<div id="view"><canvas id="cv"></canvas><div id="hud"></div><svg id="plot" width="300" height="130"></svg><div id="tip"></div></div>
+</div>
+<script type="module" src="./lab.ts"></script>
+</body>
+</html>
