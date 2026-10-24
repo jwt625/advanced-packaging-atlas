@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fab Tool Lab</title>
+<style>
+	:root { --bg: #0e0f11; --panel: #16181b; --line: #2a2d32; --fg: #d6d8dc; --dim: #8a8f98; --acc: #c27c45; --tpl: #7d8088; }
+	* { box-sizing: border-box; border-radius: 0; }
+	html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); font: 11px/1.35 ui-monospace, Menlo, monospace; }
+	#app { display: grid; grid-template-columns: 300px 1fr; height: 100%; }
+	#side { border-right: 1px solid var(--line); background: var(--panel); overflow-y: auto; padding: 8px; }
+	h1 { font-size: 11px; margin: 0 0 6px; color: var(--dim); font-weight: normal; }
+	.row { display: grid; grid-template-columns: 54px 1fr 44px; align-items: center; gap: 4px; margin: 3px 0; }
+	.row input[type=range] { width: 100%; }
+	.row span { text-align: right; color: var(--dim); }
+	.tog { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0; }
+	select, label, button { font: inherit; color: var(--fg); }
+	select, button { background: var(--bg); border: 1px solid var(--line); padding: 1px 4px; }
+	table { border-collapse: collapse; width: 100%; margin-top: 6px; }
+	td { padding: 1px 3px; border-bottom: 1px solid #1f2125; vertical-align: top; }
+	td.v { text-align: right; white-space: nowrap; }
+	tr.template td { color: var(--tpl); font-style: italic; }
+	tr.derived td.v { color: #b7c6d8; }
+	#view { position: relative; overflow: hidden; }
+	canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+	#hud { position: absolute; left: 8px; top: 6px; color: var(--dim); pointer-events: none; white-space: pre; }
+	#tip { position: absolute; right: 8px; bottom: 6px; color: var(--dim); max-width: 60%; text-align: right; }
+</style>
+</head>
+<body>
+<div id="app">
+	<div id="side">
+		<h1>fab tool lab (dev only, L37)</h1>
+		<div class="row"><b>tool</b><select id="tool"></select><span></span></div>
+		<div class="row"><b>method</b><select id="method"></select><span></span></div>
+		<div class="row"><b>t</b><input id="t" type="range" min="0" max="1" step="0.001" value="0.5" /><span id="tv"></span></div>
+		<div class="tog">
+			<label><input type="radio" name="scale" value="work" checked /> work</label>
+			<label><input type="radio" name="scale" value="block" /> block</label>
+			<label><input id="ill" type="checkbox" checked /> illustrative</label>
+			<label><input id="flip" type="checkbox" checked /> face-down flip</label>
+			<label><input id="rot" type="checkbox" /> work rot</label>
+			<label><input id="play" type="checkbox" /> play</label>
+		</div>
+		<div class="row"><b>view</b><select id="vsel"><option>iso</option><option>low</option><option>front</option><option>top</option><option>side</option></select><span></span></div>
+		<div id="stats"></div>
+		<table id="ro"></table>
+		<table id="spec"></table>
+	</div>
+	<div id="view"><canvas id="cv"></canvas><div id="hud"></div><div id="tip"></div></div>
+</div>
+<script type="module" src="./lab.ts"></script>
+</body>
+</html>
