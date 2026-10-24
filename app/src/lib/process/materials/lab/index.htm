@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Process Material Lab</title>
+<style>
+	:root { --bg: #0e0f11; --panel: #16181b; --line: #2a2d32; --fg: #d6d8dc; --dim: #8a8f98; --acc: #c27c45; }
+	* { box-sizing: border-box; border-radius: 0; }
+	html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); font: 12px/1.35 ui-monospace, Menlo, monospace; }
+	#app { display: grid; grid-template-columns: 250px 1fr; height: 100%; }
+	#side { border-right: 1px solid var(--line); background: var(--panel); overflow-y: auto; padding: 8px; }
+	#side h1 { font-size: 12px; margin: 0 0 6px; color: var(--dim); font-weight: normal; }
+	#keys { display: grid; grid-template-columns: 1fr; gap: 1px; margin-bottom: 8px; }
+	#keys button { text-align: left; background: transparent; color: var(--fg); border: 1px solid transparent; padding: 2px 4px; font: inherit; cursor: pointer; }
+	#keys button:hover { border-color: var(--line); }
+	#keys button.on { border-color: var(--acc); color: #fff; }
+	#keys button .c { color: var(--dim); float: right; }
+	.row { display: grid; grid-template-columns: 62px 1fr 44px; align-items: center; gap: 4px; margin: 2px 0; }
+	.row.off { opacity: 0.35; }
+	.row input[type=range] { width: 100%; }
+	.row span { text-align: right; color: var(--dim); }
+	.tog { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0; }
+	select, label { font: inherit; color: var(--fg); }
+	select, input[type=number] { background: var(--bg); color: var(--fg); border: 1px solid var(--line); font: inherit; }
+	#view { position: relative; }
+	canvas { display: block; width: 100%; height: 100%; }
+	#hud { position: absolute; left: 8px; bottom: 6px; color: var(--dim); pointer-events: none; white-space: pre; }
+	#basis { color: var(--dim); margin-top: 6px; white-space: normal; }
+</style>
+</head>
+<body>
+<div id="app">
+	<div id="side">
+		<h1>process material lab (dev only, L36)</h1>
+		<div class="tog">
+			<label><input type="radio" name="mode" value="single" checked /> single</label>
+			<label><input type="radio" name="mode" value="grid" /> all keys</label>
+		</div>
+		<div id="sliders"></div>
+		<div class="row"><b>um/unit</b><input id="um" type="range" min="-1" max="5.3" step="0.01" value="1" /><span id="umv"></span></div>
+		<div class="tog" data-tip="grind marks (si): wheel radius and wheel-centre offset from the wafer centre, mm">
+			<label>wheel R mm <input id="wheel" type="number" min="1" step="1" style="width:56px" /></label>
+			<label>offset mm <input id="offset" type="number" min="0" step="1" style="width:56px" /></label>
+		</div>
+		<div class="tog">
+			<select id="shape"><option value="block">block</option><option value="wafer">wafer</option><option value="ball">ball</option></select>
+			<label><input id="cut" type="checkbox" /> section</label>
+			<label><input id="inst" type="checkbox" /> instanced</label>
+			<label><input id="wfront" type="checkbox" /> world front x</label>
+			<label><input id="spin" type="checkbox" /> spin</label>
+		</div>
+		<div id="keys"></div>
+		<div id="basis"></div>
+	</div>
+	<div id="view"><canvas id="cv"></canvas><div id="hud"></div></div>
+</div>
+<script type="module" src="./lab.ts"></script>
+</body>
+</html>
